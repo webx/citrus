@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.alibaba.com/schema/springext/base"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:attributeGroup name="identifiedTypeAttributeSubset">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    用于顶层bean的定义，仅支持<beans:bean/>标签的一个attribute子集：id, name, lazy-init, primary。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+        <xsd:attribute name="id" type="xsd:ID" />
+        <xsd:attribute name="name" type="xsd:string" />
+        <xsd:attribute name="lazy-init" default="default" type="beans:defaultable-boolean" />
+        <xsd:attribute name="primary" type="xsd:boolean" />
+    </xsd:attributeGroup>
+
+    <xsd:complexType name="beanType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    用于顶层bean的定义，支持<beans:bean/>标签完全相同的配置。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="beans:identifiedType">
+                <xsd:group ref="beans:beanElements" />
+                <xsd:attributeGroup ref="beans:beanAttributes" />
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="referenceableBeanType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    用于顶层bean的定义，除了支持<beans:bean/>标签完全相同的配置以外，还支持ref attribute，用来引用另一个bean。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="beanType">
+                <xsd:attribute name="ref" type="xsd:string" />
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:simpleType name="booleanOrPlaceholder">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    定义一个boolean类型，并支持${xyz} placeholder。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+            <xsd:pattern value="true" />
+            <xsd:pattern value="false" />
+            <xsd:pattern value="\$\{.+\}" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="integerOrPlaceholder">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    定义一个boolean类型，并支持${xyz} placeholder。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+            <xsd:pattern value="\d+" />
+            <xsd:pattern value="\$\{.+\}" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="humanReadableBytesOrPlaceholder">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    定义一个易于阅读的bytes大小，例如：10K, 100MB等，并支持${xyz} placeholder。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+            <xsd:pattern value="-?\s*(\d+(\.\d+)?)\s*(K|M|G|T)?" />
+            <xsd:pattern value="\$\{.+\}" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>

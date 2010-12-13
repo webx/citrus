@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns:request-contexts="http://www.alibaba.com/schema/services/request-contexts"
+    xmlns:loaders="http://www.alibaba.com/schema/services/resource-loading/loaders"
+    xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="
+               http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+               http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
+               http://www.alibaba.com/schema/services/resource-loading/loaders http://localhost:8080/schema/services-resource-loading-loaders.xsd
+               http://www.alibaba.com/schema/services/template/engines http://localhost:8080/schema/services-template-engines.xsd
+               http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+             ">
+
+    <services:template>
+        <engines:jsp-engine />
+    </services:template>
+
+    <services:request-contexts />
+
+    <services:resource-loading>
+        <services:resource pattern="/">
+            <loaders:webapp-loader />
+        </services:resource>
+    </services:resource-loading>
+
+</beans:beans>

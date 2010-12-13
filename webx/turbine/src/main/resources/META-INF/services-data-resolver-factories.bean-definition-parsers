@@ -1,0 +1,3 @@
+turbine-rundata-resolver=com.alibaba.citrus.turbine.dataresolver.impl.TurbineRunDataResolverFactory$DefinitionParser
+parameter-resolver=com.alibaba.citrus.turbine.dataresolver.impl.ParameterResolverFactory$DefinitionParser
+form-resolver=com.alibaba.citrus.turbine.dataresolver.impl.FormResolverFactory$DefinitionParser

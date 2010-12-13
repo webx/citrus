@@ -1,0 +1,5 @@
+#macro (object)
+${count}. $object
+#end
+
+#object

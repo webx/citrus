@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="fallback-module-rule" type="FallbackModuleRuleType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    向上搜索的模块映射规则。
+
+    将"/"替换成"."。
+    除去文件名后缀。
+    将最后一个单词首字母改成大写，以符合模块命名的规则。
+    调用module loader service检查模块是否存在，如果不存在，则查找上一级模块名，一直找到根目录。
+    如果全找不到，则查找默认名称，并确保该名称所代表的模块存在。
+    如果存在，则返回之，否则返回第一个不匹配的normalized模块名（即精确匹配）
+    例如：将模板名："about/directions/driving.vm"映射到screen module，将顺次搜索以下module：
+
+    "about.directions.Driving"
+    "about.directions.Default"
+    "about.Default"
+    "Default"
+    "DefaultScreen"（即配置文件中指定的默认module名）
+    
+    注意，如果上例中DefaultScreen不存在或未指定默认值，则返回最初的结果： about.directions.Driving。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="FallbackModuleRuleType">
+        <xsd:attribute name="id" type="xsd:string" use="required" />
+        <xsd:attribute name="moduleType" type="xsd:string" use="required" />
+        <xsd:attribute name="defaultName" type="xsd:string" />
+        <xsd:attribute name="matchLastName" type="springext:booleanOrPlaceholder" />
+        <xsd:attribute name="moduleLoaderServiceRef" type="xsd:string" />
+        <xsd:attribute name="cacheEnabled" type="springext:booleanOrPlaceholder" />
+    </xsd:complexType>
+
+</xsd:schema>

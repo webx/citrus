@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="file-loader" type="FileResourceLoaderType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    从文件系统中装载资源。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="FileResourceLoaderType">
+        <xsd:complexContent>
+            <xsd:extension base="beans:identifiedType">
+                <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                    <xsd:element name="path" type="FileResourceLoaderPathType" />
+                </xsd:choice>
+                <xsd:attribute name="basedir" type="xsd:string" />
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="FileResourceLoaderPathType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="type" default="relative">
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:NMTOKEN">
+                            <xsd:enumeration value="absolute" />
+                            <xsd:enumeration value="relative" />
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+</xsd:schema>

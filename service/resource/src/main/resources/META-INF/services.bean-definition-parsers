@@ -1,0 +1,1 @@
+resource-loading=com.alibaba.citrus.service.resource.impl.ResourceLoadingServiceDefinitionParser

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="exportControl" type="ExportControlValveType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    直接渲染control。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="ExportControlValveType">
+        <xsd:attribute name="controlExporterTarget" type="xsd:string" use="required" />
+        <xsd:attribute name="controlTool" type="xsd:string" default="control" />
+        <xsd:attribute name="subst" type="xsd:string" default="subst" />
+        <xsd:attribute name="template" type="xsd:string" />
+        <xsd:attribute name="module" type="xsd:string" />
+    </xsd:complexType>
+
+</xsd:schema>

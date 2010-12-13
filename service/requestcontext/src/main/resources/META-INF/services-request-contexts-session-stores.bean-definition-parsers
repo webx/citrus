@@ -1,0 +1,3 @@
+cookie-store=com.alibaba.citrus.service.requestcontext.session.store.cookie.impl.CookieStoreDefinitionParser
+simple-memory-store=com.alibaba.citrus.service.requestcontext.session.store.simple.impl.SimpleMemoryStoreDefinitionParser
+single-valued-cookie-store=com.alibaba.citrus.service.requestcontext.session.store.cookie.impl.SingleValuedCookieStoreDefinitionParser

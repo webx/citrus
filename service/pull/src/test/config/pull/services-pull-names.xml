@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns="http://www.alibaba.com/schema/services/pull/factories"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="
+        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+    ">
+
+    <services:pull id="toolNames">
+
+        <!-- 根据element生成id：constants -->
+        <constants constantClass="javax.servlet.http.HttpServletResponse" exposed="false" />
+
+        <!-- 根据element生成id：myInner -->
+        <my-inner-tool />
+
+        <!-- 根据inner className生成id：inner -->
+        <factory class="com.alibaba.citrus.service.pull.AbstractPullServiceConfigTests$InnerTool" />
+
+        <!-- 根据className生成id：simple -->
+        <factory class="com.alibaba.citrus.service.pull.tool.SimpleTool" />
+
+        <!-- 指定id -->
+        <constants id="myconst" constantClass="javax.servlet.http.HttpServletResponse"
+            exposed="false" />
+
+        <my-inner-tool id="inner3" />
+
+        <factory id="simple2" class="com.alibaba.citrus.service.pull.tool.SimpleTool" />
+
+        <!-- 根据ref生成id -->
+        <factory ref="outterSimple" />
+
+        <!-- 根据class attribute生成id -->
+        <bean-tool class="com.alibaba.citrus.service.pull.AbstractPullServiceConfigTests$InnerBean"
+            scope="global" />
+
+    </services:pull>
+
+    <services:pull id="toolNames2">
+
+        <!-- 根据className生成id：simple -->
+        <factory class="com.alibaba.citrus.service.pull.tool.SimpleToolSet" />
+
+    </services:pull>
+
+    <beans:bean id="outterSimple" class="com.alibaba.citrus.service.pull.tool.SimpleTool" />
+
+</beans:beans>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://java.sun.com/xml/ns/j2ee  http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd
+    ">
+
+    <!-- 装载/WEB-INF/webx.xml -->
+    <listener>
+        <listener-class>com.alibaba.citrus.webx.context.WebxContextLoaderListener</listener-class>
+    </listener>
+
+    <filter>
+        <filter-name>webx</filter-name>
+        <filter-class>com.alibaba.citrus.webx.servlet.WebxFrameworkFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>webx</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>dummy</servlet-name>
+        <servlet-class>com.alibaba.citrus.webx.AbstractWebxTests$ResourceServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>dummy</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+
+</web-app>

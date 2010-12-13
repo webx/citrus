@@ -1,0 +1,8 @@
+#macro(esc_noesc $content)#escape("noescape")${content}#end#end
+#macro(esc_java $content)#escape("java")${content}#end#end
+#macro(esc_javascript $content)#escape("javascript")${content}#end#end
+#macro(esc_js $content)#escape("javascript")${content}#end#end
+#macro(esc_html $content)#escape("html")${content}#end#end
+#macro(esc_xml $content)#escape("xml")${content}#end#end
+#macro(esc_url $content)#escape("url")${content}#end#end
+#macro(esc_sql $content)#escape("sql")${content}#end#end

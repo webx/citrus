@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns="http://www.alibaba.com/schema/services/request-contexts"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
+    ">
+
+    <!-- 测试rewrite request context: 缺少parser request context -->
+    <services:request-contexts id="rewrite_missing_parser" sort="false" lazy-init="true">
+        <rewrite />
+    </services:request-contexts>
+
+    <!-- 测试rewrite request context: 空rewrite规则 -->
+    <services:request-contexts id="rewrite_empty" sort="false" lazy-init="true">
+        <parser />
+        <rewrite />
+    </services:request-contexts>
+
+    <!-- 测试rewrite request context -->
+    <services:request-contexts id="rewrite" sort="false">
+        <parser />
+        <rewrite>
+            <!-- 永久重定向，301 -->
+            <rule pattern="/test1/hello.htm">
+                <substitution uri="/test1/new_hello.htm" flags="L,R=301" />
+            </rule>
+            <!-- 临时重定向，302，不保留参数 -->
+            <rule pattern="/test2/hello.htm">
+                <substitution uri="/test2/new_hello.htm" flags="L,R" />
+            </rule>
+            <!-- 临时重定向，302，保留参数 -->
+            <rule pattern="/test2.4/hello.htm">
+                <substitution uri="/test2.4/new_hello.htm" flags="L,R,QSA" />
+            </rule>
+            <!-- 绝对URL重定向，302 -->
+            <rule pattern="/test2.5/hello.htm">
+                <substitution uri="http://www.microsoft.com/test2.5/new_hello.htm" flags="L,R" />
+            </rule>
+            <!-- 内部重定向。分前缀及后缀映射。 -->
+            <rule pattern="/test3/hello\.(\w+)">
+                <substitution uri="/test3/new_hello.$1" flags="L" />
+            </rule>
+            <!-- 内部重定向。前缀映射，改变servletPath。 -->
+            <rule pattern="/servlet/test3.5/hello.htm">
+                <substitution uri="/new_servlet/test3.5/new_hello.htm" flags="L" />
+            </rule>
+            <!-- 不改变path。 -->
+            <rule pattern="/test4/hello.htm">
+                <substitution flags="L" />
+            </rule>
+            <!-- 改变参数，不保留原参数。 -->
+            <rule pattern="/test5/hello.(\w+)">
+                <condition test="%{SERVER_NAME}" pattern="www.(\w+).com" />
+                <substitution flags="L">
+                    <parameter key="ext" value="$1" />
+                    <parameter key="host" value="%1" />
+                    <parameter key="count">
+                        <value>1</value>
+                        <value>2</value>
+                        <value>3</value>
+                    </parameter>
+                </substitution>
+            </rule>
+            <!-- 改变参数，保留原参数。 -->
+            <rule pattern="/test6/hello.(\w+)">
+                <condition test="%{SERVER_NAME}" pattern="www.(\w+).com" />
+                <substitution flags="L,QSA">
+                    <parameter key="x" />
+                    <!-- remove x -->
+                    <parameter key="ext" value="$1" />
+                    <parameter key="host" value="%1" />
+                    <parameter key="count">
+                        <value>1</value>
+                        <value>2</value>
+                        <value>3</value>
+                    </parameter>
+                </substitution>
+            </rule>
+            <!-- Custom handlers：规格化URL -->
+            <rule pattern="/test8">
+                <handlers>
+                    <beans:bean
+                        class="com.alibaba.citrus.service.requestcontext.rewrite.support.UrlNormalizer"
+                     />
+                </handlers>
+            </rule>
+            <rule pattern="/test_8/hello_world/index.htm">
+                <substitution uri="/test_8/hello_world/new_index.htm" flags="L" />
+            </rule>
+            <!-- Negative patterns -->
+            <rule pattern="!/test9/skip">
+                <substitution flags="C,QSA" />
+            </rule>
+            <rule pattern="/test9/hello.htm">
+                <condition test="%{QUERY:x}" pattern="!1" />
+                <condition test="%{QUERY:y}" pattern="2" />
+                <substitution uri="/test9/new_hello.htm" flags="L" />
+            </rule>
+            <rule pattern="/test9/skip.htm">
+                <substitution uri="/test9/new_skip.htm" flags="L" />
+            </rule>
+            <!-- conditions connected with ornext flags -->
+            <rule pattern="/test10/hello.htm">
+                <condition test="%{QUERY:x}" pattern="1" flags="OR" />
+                <condition test="%{QUERY:x}" pattern="2" flags="OR" />
+                <substitution uri="/test10/new_hello.htm" flags="L" />
+            </rule>
+            <!-- Rule Chaining: 放在最后，以免其它rule被中止。 -->
+            <rule pattern="\.htm$">
+                <substitution flags="C,QSA" />
+            </rule>
+            <rule pattern="/test7/hello.htm">
+                <substitution uri="/test7/new_hello.htm" flags="L,QSA" />
+            </rule>
+            <!-- 由于前面Chaining rule的存在，本条rule不被执行。 -->
+            <rule pattern="/test7/hello.do">
+                <substitution uri="/test7/new_hello.do" flags="L,QSA" />
+            </rule>
+        </rewrite>
+    </services:request-contexts>
+
+</beans:beans>

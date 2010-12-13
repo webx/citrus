@@ -1,0 +1,37 @@
+<div class="webx-menu">
+  <ul>
+    ## --------------------------
+    ## 首页链接
+    ## --------------------------
+    #entry[]
+    <li>
+      <a href="${internalHomePage}"><img src="${componentUrl:images/home1.gif}" alt="Home" /> Home</a>
+    </li>
+    <li>
+      <a href="${originalHomePage}"><img src="${componentUrl:images/home2.gif}" alt="Application Home" /> Application Home</a>
+    </li>
+  
+    ## --------------------------
+    ## 递归生成生成category结点
+    ## --------------------------
+    #entry[]
+    #subEntries[]
+    <li>${catName}</li>
+    #subEntries[]
+    <li class="webx-subMenu">
+      ${catName}
+      <ul>${subEntriesRecursive}</ul>
+    </li>
+    #end ## of subEntries
+
+    ## --------------------------
+    ## 生成item结点
+    ## --------------------------
+    #entry[]
+    <li>
+      <a href="${itemUrl}">${itemName}</a>
+    </li>
+    #end ## of entry
+  </ul>
+  <br />
+</div>

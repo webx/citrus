@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <title>${title}</title>
+  </head>
+  <body>
+    <ul>
+      ## comment: foreach item
+      #items
+        <li>${content:yyyy-MM-dd,HH:mm}</li>
+      #end
+    </ul>
+  </body>
+</html>

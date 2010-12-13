@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="resource-loading" type="ResourceLoadingServiceType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    一个资源装载器。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="ResourceLoadingServiceType">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="resource" type="ResourceLoadingServiceResourceType">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    定义一个资源，包括一个资源名称，以及一组resource loaders。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="resource-alias" type="ResourceLoadingServiceResourceAliasType">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    定义一个资源的别名，即将一个资源名称，映射到另一个名称。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="resource-filters" type="ResourceLoadingServiceResourceFiltersType">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    定义一个资源过滤器，可以更改资源的内容。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:choice>
+        <xsd:attribute name="parentRef" type="xsd:string" />
+        <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
+    </xsd:complexType>
+
+    <xsd:complexType name="ResourceLoadingServiceResourceType">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:any namespace="http://www.alibaba.com/schema/services/resource-loading/loaders" />
+        </xsd:choice>
+        <xsd:attribute name="pattern" type="xsd:string" use="required" />
+        <xsd:attribute name="internal" type="springext:booleanOrPlaceholder" default="false" />
+    </xsd:complexType>
+
+    <xsd:complexType name="ResourceLoadingServiceResourceAliasType">
+        <xsd:attribute name="pattern" type="xsd:string" use="required" />
+        <xsd:attribute name="name" type="xsd:string" use="required" />
+        <xsd:attribute name="internal" type="springext:booleanOrPlaceholder" default="false" />
+    </xsd:complexType>
+
+    <xsd:complexType name="ResourceLoadingServiceResourceFiltersType">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:any namespace="http://www.alibaba.com/schema/services/resource-loading/filters" />
+        </xsd:choice>
+        <xsd:attribute name="pattern" type="xsd:string" use="required" />
+    </xsd:complexType>
+
+</xsd:schema>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns:request-contexts="http://www.alibaba.com/schema/services/request-contexts"
+    xmlns:stores="http://www.alibaba.com/schema/services/request-contexts/session/stores"
+    xmlns:valves="http://www.alibaba.com/schema/services/pipeline/valves"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/stores http://localhost:8080/schema/services-request-contexts-session-stores.xsd
+        http://www.alibaba.com/schema/services/pipeline/valves http://localhost:8080/schema/services-pipeline-valves.xsd
+    ">
+
+    <services:property-placeholder />
+
+    <services:webx-configuration xmlns="http://www.alibaba.com/schema/services">
+        <productionMode>${productionModeFromSystemProperties:false}</productionMode>
+        <exceptionPipelineRef>${exceptionPipelineNameFromSystemProperties:}</exceptionPipelineRef>
+        <components defaultComponent="app4">
+            <!-- component name="app1" -->
+            <component name="app2" />
+            <!-- component name="app3" -->
+            <component name="app4">
+                <controller
+                    class="com.alibaba.citrus.webx.servlet.WebxFrameworkFilterTests$MyController" />
+            </component>
+            <component name="app5" path=" //my/app5/ ">
+                <controller
+                    class="com.alibaba.citrus.webx.servlet.WebxFrameworkFilterTests$MyController" />
+            </component>
+        </components>
+    </services:webx-configuration>
+
+    <services:request-contexts xmlns="http://www.alibaba.com/schema/services/request-contexts">
+        <rundata />
+    </services:request-contexts>
+
+    <beans:bean id="componentsAware"
+        class="com.alibaba.citrus.webx.servlet.WebxFrameworkFilterTests$ComponentsAware" />
+
+    <services:pipeline id="myExceptionPipeline"
+        xmlns="http://www.alibaba.com/schema/services/pipeline/valves">
+        <valve class="com.alibaba.citrus.webx.pipeline.TestExceptionValve" />
+    </services:pipeline>
+
+</beans:beans>

@@ -1,0 +1,2 @@
+random-id-generator=com.alibaba.citrus.service.requestcontext.session.idgen.random.impl.RandomIDGeneratorDefinitionParser
+uuid-generator=com.alibaba.citrus.service.requestcontext.session.idgen.uuid.impl.UUIDGeneratorDefinitionParser

@@ -1,0 +1,10 @@
+#escape ("html")
+${count}. #esc_noesc ($object)
+${count}. #esc_java ($object)
+${count}. #esc_javascript ($object)
+${count}. #esc_js ($object)
+${count}. #esc_html ($object)
+${count}. #esc_xml ($object)
+${count}. #esc_url ($object)
+${count}. #esc_sql ($object)
+#end

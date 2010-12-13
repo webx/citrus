@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="lifecycle-logger" type="SessionLifecycleLoggerType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    用来记录session日志生命期事件的listener。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="SessionLifecycleLoggerType">
+        <xsd:attribute name="logName" type="xsd:string" />
+        <xsd:attribute name="logLevel" type="SessionLifecycleLogLevelType" default="debug" />
+        <xsd:attribute name="visitLogLevel" type="SessionLifecycleLogLevelType" default="trace" />
+    </xsd:complexType>
+
+    <xsd:simpleType name="SessionLifecycleLogLevelType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="trace" />
+            <xsd:enumeration value="debug" />
+            <xsd:enumeration value="info" />
+            <xsd:enumeration value="warn" />
+            <xsd:enumeration value="error" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>

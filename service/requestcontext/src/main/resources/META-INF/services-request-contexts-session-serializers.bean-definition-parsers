@@ -1,0 +1,2 @@
+java-serializer=com.alibaba.citrus.service.requestcontext.session.serializer.impl.JavaSerializer$DefinitionParser
+hessian-serializer=com.alibaba.citrus.service.requestcontext.session.serializer.impl.HessianSerializer$DefinitionParser

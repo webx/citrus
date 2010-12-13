@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:element name="lazy-commit" type="LazyCommitRequestContextType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    通过对headers信息的缓存，延缓response的提交。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="LazyCommitRequestContextType">
+        <xsd:complexContent>
+            <xsd:extension base="beans:identifiedType" />
+        </xsd:complexContent>
+    </xsd:complexType>
+
+</xsd:schema>

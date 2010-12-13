@@ -1,0 +1,3 @@
+#set ($value = "$object")
+
+$count. $value

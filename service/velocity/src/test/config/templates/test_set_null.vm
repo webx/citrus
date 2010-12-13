@@ -1,0 +1,3 @@
+#set ($a="hello")
+#set ($a=$b)
+$a

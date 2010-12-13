@@ -1,0 +1,1 @@
+services/template/engines/freemarker/plugins=http://www.alibaba.com/schema/services/template/engines/freemarker/plugins; defaultElement=plugin; nsPrefix=ftl-plugins

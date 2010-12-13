@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns:tools="http://www.alibaba.com/schema/services/tools"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/tools http://localhost:8080/schema/services-tools.xsd
+    ">
+
+    <services:container>
+
+        <!-- 经contribution定义的bean。 -->
+        <tools:dateformat id="dateFormat" pattern="yyyy-MM-dd" lenient="true" />
+
+        <!-- 任意bean。 -->
+        <tools:tool id="anyBean" class="java.lang.String">
+            <beans:constructor-arg value="testString" />
+        </tools:tool>
+
+        <!-- 不指定ID，自动生成。 -->
+        <tools:tool class="java.util.Date">
+            <beans:constructor-arg type="long" value="0" />
+        </tools:tool>
+
+        <tools:tool class="java.util.Date">
+            <beans:constructor-arg type="long" value="1" />
+        </tools:tool>
+
+    </services:container>
+
+    <beans:bean id="myClass" class="com.alibaba.citrus.springext.support.context.MyClass" />
+
+    <beans:bean id="testName" abstract="true" />
+
+    <beans:bean name="testName#0" abstract="true" />
+
+    <!-- 单独创建defaultElement，等同于beans:bean -->
+    <tools:tool id="anyBean2" class="java.util.Date">
+        <beans:constructor-arg type="long" value="0" />
+    </tools:tool>
+
+    <!-- 单独创建defaultElement，引用其它bean -->
+    <tools:tool id="anyBean3" ref="anyBean2" />
+
+</beans:beans>

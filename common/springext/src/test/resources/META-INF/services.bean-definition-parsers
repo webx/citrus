@@ -1,0 +1,3 @@
+container=com.alibaba.citrus.springext.contrib.ContainerServiceBeanDefinitionParser
+my-bean=com.alibaba.citrus.springext.support.parser.MyBeanDefinitionParser
+my-bean-no-default-name=com.alibaba.citrus.springext.support.parser.MyBeanDefinitionParserNoDefaultName

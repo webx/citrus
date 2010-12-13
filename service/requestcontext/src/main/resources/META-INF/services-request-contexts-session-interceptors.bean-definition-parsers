@@ -1,0 +1,2 @@
+lifecycle-logger=com.alibaba.citrus.service.requestcontext.session.interceptor.SessionLifecycleLogger$DefinitionParser
+attribute-whitelist=com.alibaba.citrus.service.requestcontext.session.interceptor.SessionAttributeWhitelist$DefinitionParser

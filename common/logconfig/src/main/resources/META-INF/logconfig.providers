@@ -1,0 +1,2 @@
+logback=com.alibaba.citrus.logconfig.logback.LogbackConfigurator
+log4j=com.alibaba.citrus.logconfig.log4j.Log4jConfigurator

@@ -1,0 +1,3 @@
+# See http://java.sun.com/products/javamail/javadocs/javax/mail/Session.html
+protocol=smtp; type=transport; class=com.alibaba.citrus.service.mail.mock.MyMockTransport; vendor=alibaba.com mail service project;
+protocol=pop3; type=store; class=com.alibaba.citrus.service.mail.mock.MyMockStore; vendor=alibaba.com mail service project;

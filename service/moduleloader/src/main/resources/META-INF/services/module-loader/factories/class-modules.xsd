@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base"
+    xmlns:beans="http://www.springframework.org/schema/beans" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:include
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/services/module-loader/factories/factories-base.xsd" />
+
+    <xsd:element name="class-modules" type="ClassModuleFactoryType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    查找classes，并用它来生成modules。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="ClassModuleFactoryType">
+        <xsd:complexContent>
+            <xsd:extension base="beans:identifiedType">
+                <xsd:choice minOccurs="1" maxOccurs="unbounded">
+                    <xsd:element name="search-packages" type="ClassModuleFactorySearchPackagesType">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    搜索packages。
+    例如：搜索com.alibaba.module.*，type="$1"。
+    这样，将找到com.alibaba.module.action.my.Action类，其type="action"，name="my.Action"。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="search-classes" type="ClassModuleFactorySearchClassesType">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    搜索classes。
+    例如：搜索com.alibaba.*.module.*.**，type="$2"，name="$1.$3"。
+    这样，将找到com.alibaba.app1.module.action.my.Action类，其type="action"，name="app1.my/Action"。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element ref="beans:bean" />
+                </xsd:choice>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="ClassModuleFactorySearchPackagesType">
+        <xsd:group ref="ClassModuleFactoryClassFiltersGroup" />
+        <xsd:attribute name="type" type="xsd:string" use="required" />
+        <xsd:attribute name="packages" type="xsd:string" use="required" />
+        <xsd:attribute name="includeAbstractClasses" type="springext:booleanOrPlaceholder" />
+        <xsd:attributeGroup ref="moduleBeanDefaults" />
+    </xsd:complexType>
+
+    <xsd:complexType name="ClassModuleFactorySearchClassesType">
+        <xsd:group ref="ClassModuleFactoryClassFiltersGroup" />
+        <xsd:attribute name="type" type="xsd:string" use="required" />
+        <xsd:attribute name="name" type="xsd:string" use="required" />
+        <xsd:attribute name="classes" type="xsd:string" use="required" />
+        <xsd:attribute name="includeAbstractClasses" type="springext:booleanOrPlaceholder" />
+        <xsd:attributeGroup ref="moduleBeanDefaults" />
+    </xsd:complexType>
+
+    <xsd:group name="ClassModuleFactoryClassFiltersGroup">
+        <xsd:sequence>
+            <xsd:element name="include-filter" type="ClassModuleFactoryFilterType" minOccurs="0"
+                maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    仅包含符合条件的类。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="exclude-filter" type="ClassModuleFactoryFilterType" minOccurs="0"
+                maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    排除符合条件的类。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+
+    <xsd:complexType name="ClassModuleFactoryFilterType">
+        <xsd:attribute name="type" default="wildcard">
+            <xsd:annotation>
+                <xsd:documentation><![CDATA[
+    指定module classes过滤器的类型。
+    
+    "wildcard"   - 指定类名的通配符，匹配的将被包含或排除。（默认为wildcard）
+    "assignable" - 指定基类或接口，其子类或实现类将被包含或排除。
+    "aspectj"    - 指定AspectJ type expression，匹配的类型将被包含或排除。
+    "custom"     - 指定任意TypeFilter的实现类，实现任意过滤逻辑。
+                ]]></xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="wildcard" />
+                    <xsd:enumeration value="assignable" />
+                    <xsd:enumeration value="aspectj" />
+                    <xsd:enumeration value="custom" />
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="expression" type="xsd:string" use="required">
+            <xsd:annotation>
+                <xsd:documentation><![CDATA[
+    表达式，解释权归type所代表的filter。
+                ]]></xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+</xsd:schema>

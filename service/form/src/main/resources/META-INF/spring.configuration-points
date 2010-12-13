@@ -1,0 +1,2 @@
+services/form/validators=http://www.alibaba.com/schema/services/form/validators; defaultElement=validator; nsPrefix=fm-validators
+services/form/conditions=http://www.alibaba.com/schema/services/form/conditions; defaultElement=condition; nsPrefix=fm-conditions

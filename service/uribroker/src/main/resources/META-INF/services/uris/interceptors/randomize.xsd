@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="randomize" type="RandomizeInterceptorType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    随机生成URL参数。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="RandomizeInterceptorType">
+        <xsd:attribute name="path" type="xsd:string" />
+        <xsd:attribute name="chars" type="xsd:string" />
+        <xsd:attribute name="range" type="springext:integerOrPlaceholder" />
+        <xsd:attribute name="key" type="xsd:string" />
+    </xsd:complexType>
+
+</xsd:schema>

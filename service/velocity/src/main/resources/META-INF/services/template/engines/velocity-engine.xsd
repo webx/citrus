@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="velocity-engine" type="VelocityTemplateEngineType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    将Velocity作为模板引擎。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="VelocityTemplateEngineType">
+        <xsd:complexContent>
+            <xsd:extension base="beans:identifiedType">
+                <xsd:all>
+                    <xsd:element name="global-macros" type="VelocityGlobalMacrosType" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    装载全局宏（相对于path路径），可使用通配符。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="plugins" type="VelocityPluginsType" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    Velocity插件和事件处理器。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="advanced-properties" type="VelocityPropertiesType"
+                        minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    Velocity高级设置，参见velocity文档：
+      （http://velocity.apache.org/engine/releases/velocity-1.6.2/developer-guide.html#Velocity_Configuration_Keys_and_Values）
+    和默认配置文件：org/apache/velocity/runtime/defaults/velocity.properties。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:all>
+                <xsd:attribute name="path" type="xsd:string" default="/templates" />
+                <xsd:attribute name="templateEncoding" type="xsd:string" default="UTF-8" />
+                <xsd:attribute name="cacheEnabled" type="springext:booleanOrPlaceholder"
+                    default="true" />
+                <xsd:attribute name="modificationCheckInterval"
+                    type="springext:integerOrPlaceholder" default="2" />
+                <xsd:attribute name="strictReference" type="springext:booleanOrPlaceholder"
+                    default="true" />
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="VelocityGlobalMacrosType">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="VelocityPluginsType">
+        <xsd:sequence>
+            <xsd:any
+                namespace="http://www.alibaba.com/schema/services/template/engines/velocity/plugins"
+                minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="VelocityPropertiesType">
+        <xsd:sequence>
+            <xsd:element name="property" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:attribute name="name" type="xsd:string" use="required" />
+                    <xsd:attribute name="value" type="xsd:string" use="required" />
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>

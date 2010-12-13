@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:base="http://www.alibaba.com/schema/services/form/validators/base"
+    elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:element name="number-validator" type="NumberValidatorType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    验证数字格式，并确保数字在限定的范围内。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="NumberValidatorType">
+        <xsd:sequence>
+            <xsd:element name="message" type="xsd:string" minOccurs="0" />
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:string" />
+        <xsd:attribute name="message" type="xsd:string" />
+        <xsd:attribute name="numberType">
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="int" />
+                    <xsd:enumeration value="long" />
+                    <xsd:enumeration value="float" />
+                    <xsd:enumeration value="double" />
+                    <xsd:enumeration value="bigDecimal" />
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="equalTo" type="xsd:decimal" />
+        <xsd:attribute name="notEqualTo" type="xsd:decimal" />
+        <xsd:attribute name="lessThan" type="xsd:decimal" />
+        <xsd:attribute name="greaterThan" type="xsd:decimal" />
+        <xsd:attribute name="lessThanOrEqualTo" type="xsd:decimal" />
+        <xsd:attribute name="greaterThanOrEqualTo" type="xsd:decimal" />
+    </xsd:complexType>
+
+</xsd:schema>

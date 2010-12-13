@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:base="http://www.alibaba.com/schema/services/form/validators/base"
+    elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:element name="regexp-validator" type="RegexpValidatorType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    用正则表达式验证。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="RegexpValidatorType">
+        <xsd:sequence>
+            <xsd:element name="message" type="xsd:string" minOccurs="0" />
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:string" />
+        <xsd:attribute name="message" type="xsd:string" />
+        <xsd:attribute name="pattern" type="xsd:string" use="required" />
+    </xsd:complexType>
+
+</xsd:schema>

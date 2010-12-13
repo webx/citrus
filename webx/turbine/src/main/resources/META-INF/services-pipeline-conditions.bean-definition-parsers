@@ -1,0 +1,3 @@
+target-condition=com.alibaba.citrus.turbine.pipeline.condition.TargetCondition$DefinitionParser
+target-extension-condition=com.alibaba.citrus.turbine.pipeline.condition.TargetExtensionCondition$DefinitionParser
+path-condition=com.alibaba.citrus.turbine.pipeline.condition.PathCondition$DefinitionParser

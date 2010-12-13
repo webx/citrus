@@ -1,0 +1,52 @@
+body {
+    margin: 0;
+    font-family: Calibri, 'Lucida Grande', Verdana, Arial, Sans-Serif;
+    font-size: medium;
+}
+
+table {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+pre {
+    font-family: Consolas, "Courier New", Courier, monospace;
+    font-size: small;
+    white-space: pre-wrap;
+    margin: 0;
+}
+
+em {
+    color: red;
+    background-color: inherit;
+}
+
+img {
+    border: none;
+    vertical-align: middle;
+}
+
+a {
+    color: #000099;
+    background-color: inherit;
+    text-decoration: none;
+}
+
+a:link,a:visited {
+}
+
+a:hover,a:active {
+    font-weight: bold
+}
+
+h1 {
+    margin:0.8em 0 0.7em 0;
+    padding:0;
+    color:#4792E6;
+}
+
+#webx-body {
+    margin: 0;
+    padding:0 1em;
+}

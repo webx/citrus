@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="mapped-values-encoder" type="MappedValuesEncoderType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+对Map<String, ?>进行编码和解码。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="MappedValuesEncoderType">
+        <xsd:sequence>
+            <xsd:element name="property-editor-registrar" type="springext:referenceableBeanType"
+                minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+代表一个property editor registrar，可用来自定义property类型转换的方法。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:any
+                namespace="http://www.alibaba.com/schema/services/request-contexts/session/encrypters"
+                minOccurs="0" />
+        </xsd:sequence>
+        <xsd:attribute name="valueType" type="xsd:string" />
+        <xsd:attribute name="charset" type="xsd:string" />
+    </xsd:complexType>
+
+</xsd:schema>

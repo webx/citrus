@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="uris" type="URIBrokersServiceType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    用来装载URI Broker块。一个URI Broker块是指在web框架中，可供开发者访问的URL片断。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="URIBrokersServiceType">
+        <xsd:sequence>
+            <xsd:any minOccurs="0" maxOccurs="unbounded"
+                namespace="http://www.alibaba.com/schema/services/uris" />
+        </xsd:sequence>
+        <xsd:attribute name="requestAware" type="springext:booleanOrPlaceholder" default="true" />
+        <xsd:attribute name="defaultCharset" type="xsd:string" />
+        <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
+    </xsd:complexType>
+
+</xsd:schema>

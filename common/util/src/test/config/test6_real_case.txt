@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>${title}</title>
+  </head>
+  <body>
+    <ul>
+      ## comment: foreach item ## ignore the rest of line
+      #items[]
+        <li>${content:yyyy-MM-dd}</li>
+      #items[]
+        <li>${content:yyyy-MM-dd,HH:mm}</li>
+      #end
+    </ul>
+  </body>
+</html>

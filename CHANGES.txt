@@ -1,0 +1,28 @@
+-- Since 3.0.1
+
+* 改进FormResolver：将空白表单看作invalid，等同于验证失败，当skipIfInvalid=true时，避免执行action。
+* 改进WebxFrameworkFilter：添加excludes参数，使它可以快速排除不需要处理的requestURI
+
+    <filter>
+        <filter-name>webx</filter-name>
+        <filter-class>com.alibaba.citrus.webx.servlet.WebxFrameworkFilter</filter-class>
+        <init-param>
+            <param-name>excludes</param-name>
+            <param-value>/otherservlet, *.jpg</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>webx</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>other</servlet-name>
+        <url-pattern>/otherservlet/*</url-pattern>
+    </servlet-mapping>
+
+* 改进CsrfToken，使它的生成算法可以被别的模块所覆盖。
+* 改变CsrfToken.getHiddenField()的默认行为 ── 默认生成longLiveToken而不是原来的uniqueToken。
+* Bugfix：当fileItem为空时，uploaded-file-validator抛NPE的问题
+* Bugfix：当redirect时，不要执行action

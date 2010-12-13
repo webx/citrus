@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="my-configuration" type="MyConfigurationType" />
+
+    <xsd:complexType name="MyConfigurationType">
+        <xsd:all>
+            <xsd:element name="productionMode" type="springext:booleanOrPlaceholder" minOccurs="0" />
+            <xsd:element name="stringValue" type="xsd:string" minOccurs="0" />
+            <xsd:element name="myBean1Ref" type="xsd:string" minOccurs="0" />
+            <xsd:element name="myBean2Ref" type="xsd:string" minOccurs="0" />
+            <xsd:element name="myBean3Ref" type="xsd:string" minOccurs="0" />
+        </xsd:all>
+        <xsd:attribute name="parentRef" type="xsd:string" use="optional" />
+        <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
+    </xsd:complexType>
+
+</xsd:schema>

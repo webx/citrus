@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns="http://www.alibaba.com/schema/services"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+    ">
+
+    <upload sizeThreshold="100" />
+
+    <upload id="upload2" repository="/tmp/upload" sizeMax="100" fileSizeMax="200"
+        sizeThreshold="300" keepFormFieldInMemory="true" fileNameKey="filename, fname" />
+
+</beans:beans>

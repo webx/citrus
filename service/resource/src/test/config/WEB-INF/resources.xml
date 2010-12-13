@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns:filters="http://www.alibaba.com/schema/services/resource-loading/filters"
+    xmlns:loaders="http://www.alibaba.com/schema/services/resource-loading/loaders"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="
+               http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+               http://www.alibaba.com/schema/services/resource-loading/filters http://localhost:8080/schema/services-resource-loading-filters.xsd
+               http://www.alibaba.com/schema/services/resource-loading/loaders http://localhost:8080/schema/services-resource-loading-loaders.xsd
+               http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+             ">
+
+    <services:resource-loading id="resourceLoadingService_1" />
+    <services:resource-loading id="myResourceLoadingService"
+        parentRef="myParentResourceLoadingService" />
+    <services:resource-loading id="resourceLoadingService_2" />
+
+    <services:resource-loading>
+        <services:resource-alias pattern="/my/alias1" name="/my/alias2" />
+        <services:resource-alias pattern="/my/alias2" name="/not/found" />
+        <services:resource-alias pattern="/my/alias3" name="/myfolder" />
+        <services:resource-alias pattern="/my/alias4" name="/my/internal/resource" />
+        <services:resource pattern="/my/alias5">
+            <loaders:super-loader name="/my/internal/resource" />
+        </services:resource>
+        <services:resource-alias pattern="/my/alias6" name="/webroot/myfolder" />
+        <services:resource pattern="/my/alias7">
+            <loaders:super-loader name="/webroot/myfolder" />
+        </services:resource>
+        <services:resource pattern="/my/resource" />
+        <services:resource pattern="/my/internal/resource" internal="true">
+            <loaders:file-loader basedir="../myfolder" />
+        </services:resource>
+        <services:resource pattern="relative/resource">
+            <loaders:file-loader>
+                <loaders:path>/aaa/bbb</loaders:path>
+            </loaders:file-loader>
+        </services:resource>
+        <services:resource pattern="/absolute/resource">
+            <loaders:file-loader basedir="aaa/bbb" />
+        </services:resource>
+    </services:resource-loading>
+
+    <services:resource-loading id="relevancy">
+        <services:resource pattern="/">
+            <loaders:file-loader basedir="../dir1" />
+        </services:resource>
+        <services:resource pattern="/aaa/**">
+            <loaders:file-loader basedir="../dir2" />
+        </services:resource>
+        <services:resource pattern="/aaa/bbb/ccc">
+            <loaders:file-loader basedir="../dir3" />
+        </services:resource>
+        <services:resource pattern="/**">
+            <loaders:file-loader basedir="../dir4" />
+        </services:resource>
+    </services:resource-loading>
+
+    <services:resource-loading id="getResourceAs">
+
+        <services:resource pattern="/basedir">
+            <loaders:file-loader basedir=".." />
+        </services:resource>
+
+        <services:resource-alias pattern="/asURL" name="/classpath" />
+        <services:resource-filters pattern="/asURL">
+            <filters:filter
+                class="com.alibaba.citrus.service.resource.ResourceLoadingServiceTests$NoURLFilter"
+             />
+        </services:resource-filters>
+
+        <services:resource-alias pattern="/asStream" name="/classpath" />
+        <services:resource-filters pattern="/asStream">
+            <filters:filter
+                class="com.alibaba.citrus.service.resource.ResourceLoadingServiceTests$NoStreamFilter"
+             />
+        </services:resource-filters>
+
+    </services:resource-loading>
+
+    <services:resource-loading id="resourcePriority">
+
+        <services:resource pattern="/resourcePriority">
+            <loaders:file-loader basedir=".." />
+            <loaders:file-loader basedir="../myfolder" />
+            <loaders:file-loader />
+        </services:resource>
+
+    </services:resource-loading>
+
+</beans:beans>

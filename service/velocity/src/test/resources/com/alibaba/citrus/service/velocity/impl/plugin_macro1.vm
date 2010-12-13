@@ -1,0 +1,3 @@
+#macro (macro1)
+macro1
+#end

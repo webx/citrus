@@ -1,0 +1,2 @@
+services/uris=http://www.alibaba.com/schema/services/uris
+services/uris/interceptors=http://www.alibaba.com/schema/services/uris/interceptors; defaultElement=interceptor; nsPrefix=uri-interceptors

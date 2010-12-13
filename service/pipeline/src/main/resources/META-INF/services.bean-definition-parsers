@@ -1,0 +1,1 @@
+pipeline=com.alibaba.citrus.service.pipeline.impl.PipelineDefinitionParser

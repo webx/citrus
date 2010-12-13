@@ -1,0 +1,2 @@
+test1=com.alibaba.citrus.springext.contrib.simple.Test1$DefinitionParser
+test2=com.alibaba.citrus.springext.contrib.simple.Test2$DefinitionParser

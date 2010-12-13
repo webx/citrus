@@ -1,0 +1,2 @@
+turbine-uri=com.alibaba.citrus.turbine.uribroker.uri.impl.TurbineURIBrokerDefinitionParser
+turbine-content-uri=com.alibaba.citrus.turbine.uribroker.uri.impl.TurbineContentURIBrokerDefinitionParser

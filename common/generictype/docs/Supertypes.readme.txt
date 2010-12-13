@@ -1,0 +1,31 @@
+类型关系图：
+---------------
+
+class ClassInteger extends ClassA<Integer> {
+}
+
+class ClassA<A> extends ClassB<A> {
+}
+
+class ClassB<B> extends ClassC<String, B> {
+}
+
+class ClassC<C1, C2> {
+    public C1       c1;
+    public List<C2> c2;
+}
+
+
+(RawTypeInfo) ClassInteger --> (ParameterizedTypeInfo) ClassA<A=Ingteger>
+                                   ↓
+                               (RawTypeInfo) ClassA                       --> (ParameterizedTypeInfo) ClassB<B=A>
+                                                                                  ↓
+                                                                              (RawTypeInfo) ClassB                 --> (ParameterizedType) ClassC<C1=String, C2=B>
+                                                                                                                             ↓
+                                                                                                                       (RawTypeInfo) ClassC
+
+说明：
+-----
+
+* 每一行代表一个TypeInfo及其父类、接口所形成的链。
+* RawTypeInfo被缓存，而ParameterizedTypeInfo是随机创建的。

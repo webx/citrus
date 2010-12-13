@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.alibaba.com/schema/services"
+    xmlns:pull-tools="http://www.alibaba.com/schema/services/pull/factories"
+    xmlns:validators="http://www.alibaba.com/schema/services/form/validators"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
+        http://www.alibaba.com/schema/services/form/validators http://localhost:8080/schema/services-form-validators.xsd
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd ">
+
+    <property-editor-registrars id="myRegistrar">
+        <property-editor-registrar
+            class="com.alibaba.citrus.service.configuration.support.CustomDateRegistrar"
+            p:timeZone="GMT" />
+        <property-editor-registrar
+            class="com.alibaba.citrus.service.form.impl.MyPropertyEditorRegistrar" />
+    </property-editor-registrars>
+
+    <form id="form1" postOnlyByDefault="false" primary="true">
+        <property-editor-registrar ref="myRegistrar" />
+        <group name="group1">
+            <field name="field1" defaultValue="default1" displayName="我的字段1"
+                propertyName="property1">
+                <validators:required-validator message="required ${displayName}" />
+            </field>
+            <field name="field2">
+                <validators:required-validator message="required ${displayName}" />
+            </field>
+        </group>
+        <group name="group2" extends="group1" postOnly="true" />
+        <group name="group3" trimmingByDefault="false">
+            <field name="field1" defaultValue="default1,default2, default3" displayName="我的字段1"
+                propertyName="property1">
+                <validators:required-validator message="required ${displayName}" />
+            </field>
+            <field name="field2">
+                <validators:custom-error id="err1" message="hello, world" />
+                <validators:custom-error id="err2" message="hello, world2" />
+                <validators:custom-error id="err3" message="hello, ${world}" />
+                <validators:validator p:id="err4"
+                    class="com.alibaba.citrus.service.form.impl.validation.NoMessageValidator" />
+            </field>
+        </group>
+    </form>
+
+    <form id="form2">
+        <group name="group1">
+            <field name="field1" defaultValue="default1" displayName="我的字段1"
+                propertyName="property1">
+                <validators:required-validator message="required ${displayName}" />
+                <validators:validator
+                    class="com.alibaba.citrus.service.form.impl.validation.MultiFieldsValidator"
+                    p:message="invalid">
+                    <beans:property name="fieldValues">
+                        <beans:map>
+                            <beans:entry key="field1" value="value1" />
+                            <beans:entry key="field2" value="value2" />
+                        </beans:map>
+                    </beans:property>
+                </validators:validator>
+            </field>
+            <field name="field2">
+                <validators:required-validator message="required ${displayName}" />
+            </field>
+        </group>
+    </form>
+
+    <form id="form3">
+        <group name="group1">
+            <field name="field1" propertyName="property1" />
+        </group>
+    </form>
+
+    <form id="form4" converterQuiet="false">
+        <group name="group1">
+            <field name="field1" propertyName="property1" />
+        </group>
+    </form>
+
+    <pull>
+        <pull-tools:form-tool />
+    </pull>
+
+</beans:beans>

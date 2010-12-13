@@ -1,0 +1,4 @@
+control-tool=com.alibaba.citrus.turbine.util.ControlTool$DefinitionParser
+rundata-tool=com.alibaba.citrus.turbine.util.TurbineRunDataTool$DefinitionParser
+csrfToken=com.alibaba.citrus.turbine.util.CsrfToken$DefinitionParser
+page-tool=com.alibaba.citrus.turbine.util.HtmlPageAttributeTool$DefinitionParser

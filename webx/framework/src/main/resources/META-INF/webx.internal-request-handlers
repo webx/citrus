@@ -1,0 +1,6 @@
+Webx/Schema=com.alibaba.citrus.webx.handler.impl.SchemaExporterHandler
+
+Webx/Info/Request+Info          = com.alibaba.citrus.webx.handler.impl.info.RequestInfoHandler
+Webx/Info/Environment+Variables = com.alibaba.citrus.webx.handler.impl.info.EnvironmentVariablesHandler
+Webx/Info/System+Properties     = com.alibaba.citrus.webx.handler.impl.info.SystemPropertiesHandler
+Webx/Info/System+Info           = com.alibaba.citrus.webx.handler.impl.info.SystemInfoHandler

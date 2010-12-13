@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns="http://www.alibaba.com/schema/services/request-contexts"
+    xmlns:encoders="http://www.alibaba.com/schema/services/request-contexts/session/encoders"
+    xmlns:idgens="http://www.alibaba.com/schema/services/request-contexts/session/idgens"
+    xmlns:model-encoders="http://www.alibaba.com/schema/services/request-contexts/session/model-encoders"
+    xmlns:stores="http://www.alibaba.com/schema/services/request-contexts/session/stores"
+    xmlns:interceptors="http://www.alibaba.com/schema/services/request-contexts/session/interceptors"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="
+        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/encoders http://localhost:8080/schema/services-request-contexts-session-encoders.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/idgens http://localhost:8080/schema/services-request-contexts-session-idgens.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/model-encoders http://localhost:8080/schema/services-request-contexts-session-model-encoders.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/stores http://localhost:8080/schema/services-request-contexts-session-stores.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/interceptors http://www.alibaba.com/schema/services-request-contexts-session-interceptors.xsd
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+    ">
+
+    <services:request-contexts id="session">
+        <buffered />
+        <lazy-commit />
+        <session forceExpirationPeriod="1">
+            <stores>
+                <stores:simple-memory-store id="simple" />
+            </stores>
+            <store-mappings>
+                <match name="*" store="simple" />
+            </store-mappings>
+            <interceptors>
+                <interceptors:interceptor
+                    class="com.alibaba.citrus.service.requestcontext.session.SessionInterceptorTests$MySessionLifecycleListener" />
+                <interceptors:interceptor
+                    class="com.alibaba.citrus.service.requestcontext.session.SessionInterceptorTests$MySessionAttributeInterceptor"
+                 />
+            </interceptors>
+        </session>
+    </services:request-contexts>
+
+    <services:request-contexts id="logger">
+        <buffered />
+        <lazy-commit />
+        <session>
+            <stores>
+                <stores:simple-memory-store id="simple1" />
+            </stores>
+            <store-mappings>
+                <match name="*" store="simple1" />
+            </store-mappings>
+            <interceptors>
+                <interceptors:lifecycle-logger />
+                <interceptors:lifecycle-logger logName="hello.world" logLevel="info"
+                    visitLogLevel="debug" />
+            </interceptors>
+        </session>
+    </services:request-contexts>
+
+    <services:request-contexts id="whitelist">
+        <buffered />
+        <lazy-commit />
+        <session>
+            <stores>
+                <stores:simple-memory-store id="simple2" />
+            </stores>
+            <store-mappings>
+                <match name="*" store="simple2" />
+            </store-mappings>
+            <interceptors>
+                <interceptors:attribute-whitelist logName="hello.world">
+                    <interceptors:attribute name="aaa" />
+                    <interceptors:attribute name="bbb" type="java.lang.String" />
+                    <interceptors:attribute name="ccc" type="int" />
+                </interceptors:attribute-whitelist>
+            </interceptors>
+        </session>
+    </services:request-contexts>
+
+</beans:beans>

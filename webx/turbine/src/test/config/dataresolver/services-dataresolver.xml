@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="GB18030"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns:dr-factories="http://www.alibaba.com/schema/services/data-resolver/factories"
+    xmlns:fm-conditions="http://www.alibaba.com/schema/services/form/conditions"
+    xmlns:fm-validators="http://www.alibaba.com/schema/services/form/validators"
+    xmlns:ml-adapters="http://www.alibaba.com/schema/services/module-loader/adapters"
+    xmlns:ml-factories="http://www.alibaba.com/schema/services/module-loader/factories"
+    xmlns:request-contexts="http://www.alibaba.com/schema/services/request-contexts"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="
+        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/data-resolver/factories http://localhost:8080/schema/services-data-resolver-factories.xsd
+        http://www.alibaba.com/schema/services/form/conditions http://localhost:8080/schema/services-form-conditions.xsd
+        http://www.alibaba.com/schema/services/form/validators http://localhost:8080/schema/services-form-validators.xsd
+        http://www.alibaba.com/schema/services/module-loader/adapters http://localhost:8080/schema/services-module-loader-adapters.xsd
+        http://www.alibaba.com/schema/services/module-loader/factories http://localhost:8080/schema/services-module-loader-factories.xsd
+        http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+    ">
+
+    <services:property-placeholder />
+
+    <services:request-contexts>
+        <request-contexts:rundata />
+        <request-contexts:parser useServletEngineParser="true" converterQuiet="false">
+            <request-contexts:property-editor-registrar
+                class="com.alibaba.citrus.turbine.dataresolver.ParameterResolverTests$MyRegistrar"
+             />
+        </request-contexts:parser>
+    </services:request-contexts>
+
+    <services:upload />
+
+    <services:simple-configuration xmlns="http://www.alibaba.com/schema/services" />
+
+    <services:module-loader xmlns="http://www.alibaba.com/schema/services/module-loader/factories">
+        <class-modules>
+            <search-packages type="$1" packages="com.alibaba.test2.module.*" />
+        </class-modules>
+    </services:module-loader>
+
+    <services:data-resolver xmlns="http://www.alibaba.com/schema/services/data-resolver/factories">
+        <turbine-rundata-resolver />
+        <parameter-resolver />
+        <form-resolver />
+    </services:data-resolver>
+
+    <services:form postOnlyByDefault="false" converterQuiet="${convertQuiet:true}">
+        <services:group name="myGroup1">
+            <services:field name="custom">
+                <fm-validators:custom-error id="error1" message="error1" />
+            </services:field>
+            <services:field name="field1">
+                <fm-validators:required-validator message="required ${displayName}" />
+            </services:field>
+            <services:field name="field2">
+                <fm-validators:required-validator message="required ${displayName}" />
+            </services:field>
+        </services:group>
+        <services:group name="myGroup2">
+            <services:field name="field1">
+                <fm-validators:required-validator message="required ${displayName}" />
+            </services:field>
+        </services:group>
+    </services:form>
+
+</beans:beans>

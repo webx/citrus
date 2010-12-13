@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:element name="rewrite" type="RewriteRequestContextType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    重写URL及参数的request context，类似于apache的mod_rewrite模块。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="RewriteRequestContextType">
+        <xsd:complexContent>
+            <xsd:extension base="beans:identifiedType">
+                <xsd:sequence>
+                    <xsd:element name="rule" type="RewriteRequestContextRuleType" minOccurs="0"
+                        maxOccurs="unbounded">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    匹配规则。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="RewriteRequestContextRuleType">
+        <xsd:sequence>
+            <xsd:element name="condition" type="RewriteRequestContextConditionType" minOccurs="0"
+                maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    匹配规则以后，继续匹配条件。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="substitution" type="RewriteRequestContextSubstitutionType"
+                minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    规则和条件均匹配以后，执行此替换。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="handlers" type="beans:listOrSetType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    事件处理器。当某些事件发生时，可以得到通知。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="pattern" type="xsd:string" use="required" />
+    </xsd:complexType>
+
+    <xsd:complexType name="RewriteRequestContextConditionType">
+        <xsd:attribute name="test" type="xsd:string" use="required" />
+        <xsd:attribute name="pattern" type="xsd:string" use="required" />
+        <xsd:attribute name="flags" type="xsd:string" />
+    </xsd:complexType>
+
+    <xsd:complexType name="RewriteRequestContextSubstitutionType">
+        <xsd:sequence>
+            <xsd:element name="parameter" type="RewriteRequestContextSubstitutionParameterType"
+                minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    替换参数。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="uri" type="xsd:string" />
+        <xsd:attribute name="flags" type="xsd:string" />
+    </xsd:complexType>
+
+    <xsd:complexType name="RewriteRequestContextSubstitutionParameterType">
+        <xsd:sequence>
+            <xsd:element name="value" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    将参数替换成指定值，或值的数组。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="key" type="xsd:string" use="required" />
+        <xsd:attribute name="value" type="xsd:string" />
+    </xsd:complexType>
+
+</xsd:schema>

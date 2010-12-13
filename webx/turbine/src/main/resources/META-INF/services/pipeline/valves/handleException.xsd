@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="handleException" type="HandleExceptionValveType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    处理异常。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="HandleExceptionValveType">
+        <xsd:sequence>
+            <xsd:element name="on-exception" type="HandleExceptionValveOnExceptionType"
+                minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+        <xsd:attribute name="defaultPage" type="xsd:string" use="required" />
+        <xsd:attribute name="helperName" type="xsd:string" default="error" />
+    </xsd:complexType>
+
+    <xsd:complexType name="HandleExceptionValveOnExceptionType">
+        <xsd:attribute name="type" type="xsd:string" use="required" />
+        <xsd:attribute name="page" type="xsd:string" />
+        <xsd:attribute name="statusCode" type="springext:integerOrPlaceholder" />
+    </xsd:complexType>
+
+</xsd:schema>

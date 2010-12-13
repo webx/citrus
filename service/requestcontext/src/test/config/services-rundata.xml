@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns="http://www.alibaba.com/schema/services/request-contexts"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
+    ">
+
+    <!-- 测试rundata，缺少其它request context的支持。 -->
+    <services:request-contexts id="rundata_missing_other_request_contexts" lazy-init="true">
+        <rundata />
+    </services:request-contexts>
+
+    <!-- 测试rundata -->
+    <services:request-contexts id="rundata">
+        <parser />
+        <set-locale />
+        <buffered />
+        <lazy-commit />
+        <rundata />
+    </services:request-contexts>
+
+    <services:upload id="uploadService" />
+
+</beans:beans>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xsd:element name="test2">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:any namespace="http://www.alibaba.com/schema/my/cp1" minOccurs="0"
+                    maxOccurs="unbounded" />
+                <xsd:any namespace="http://www.alibaba.com/schema/my/cp2" minOccurs="0"
+                    maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

@@ -1,0 +1,5 @@
+services=http://www.alibaba.com/schema/services
+services/tools=http://www.alibaba.com/schema/services/tools; defaultElement=tool
+
+my/cp1 = http://www.alibaba.com/schema/my/cp1; nsPrefix=cp1; defaultElement=object1
+my/cp2 = http://www.alibaba.com/schema/my/cp2; nsPrefix=cp2ns

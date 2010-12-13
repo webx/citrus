@@ -1,0 +1,6 @@
+a\\\#abc#123 ## comment
+  #abc#end
+  ## comment
+  #def
+  #end  
+a #ghi#end b

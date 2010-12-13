@@ -1,0 +1,2 @@
+services/resource-loading/loaders=http://www.alibaba.com/schema/services/resource-loading/loaders; defaultElement=loader; nsPrefix=res-loaders
+services/resource-loading/filters=http://www.alibaba.com/schema/services/resource-loading/filters; defaultElement=filter; nsPrefix=res-filters

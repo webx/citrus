@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="mapping-rules" type="MappingRuleServiceType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    用来装载名称映射服务，通过mapping形式提供可扩展的名称映射服务
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="MappingRuleServiceType">
+        <xsd:sequence>
+            <xsd:any maxOccurs="unbounded" minOccurs="0"
+                namespace="http://www.alibaba.com/schema/services/mapping-rules" />
+        </xsd:sequence>
+        <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
+        <xsd:attribute name="parentRef" type="xsd:string" />
+    </xsd:complexType>
+
+    <xsd:complexType name="AbstractRuleType">
+        <xsd:attribute name="cacheEnabled" type="xsd:boolean" default="false" />
+        <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
+    </xsd:complexType>
+
+    <xsd:complexType name="AbstractModuleRuleType">
+        <xsd:complexContent>
+            <xsd:extension base="AbstractRuleType">
+                <xsd:choice minOccurs="0" maxOccurs="1">
+                    <xsd:element name="moduleLoaderService" type="springext:referenceableBeanType"
+                        minOccurs="0" maxOccurs="1" />
+                </xsd:choice>
+                <xsd:attribute name="moduleType" type="xsd:string" use="required" />
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="AbstractTemplateRuleType">
+        <xsd:complexContent>
+            <xsd:extension base="AbstractRuleType">
+                <xsd:choice minOccurs="0" maxOccurs="1">
+                    <xsd:element name="templateService" type="springext:referenceableBeanType"
+                        minOccurs="0" maxOccurs="1" />
+                </xsd:choice>
+                <xsd:attribute name="templatePrefix" type="xsd:string" />
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+</xsd:schema>

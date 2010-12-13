@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="extension-rule" type="ExtensionRuleType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    转换文件名后缀的映射规则。
+    该rule默认不cache结果。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="ExtensionRuleType">
+        <xsd:sequence>
+            <xsd:element name="mapping" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:attribute name="extension" type="xsd:string" use="required" />
+                    <xsd:attribute name="to" type="xsd:string" use="required" />
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:string" use="required" />
+        <xsd:attribute name="cacheEnabled" type="springext:booleanOrPlaceholder" />
+    </xsd:complexType>
+
+</xsd:schema>

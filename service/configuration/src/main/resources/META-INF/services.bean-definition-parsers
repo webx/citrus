@@ -1,0 +1,3 @@
+simple-configuration=com.alibaba.citrus.service.configuration.impl.SimpleConfigurationDefinitionParser
+property-placeholder=com.alibaba.citrus.service.configuration.impl.PropertyPlaceholderConfigurerDefinitionParser
+property-editor-registrars=com.alibaba.citrus.service.configuration.impl.PropertyEditorRegistrarsDefinitionParser

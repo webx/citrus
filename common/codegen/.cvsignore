@@ -1,0 +1,13 @@
+.project
+.classpath
+target
+classes
+tmp
+temp
+*.log
+*.jpx
+*.jpx.local
+*.library
+*.cache
+.properties*
+*~

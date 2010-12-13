@@ -1,0 +1,11 @@
+services/request-contexts=http://www.alibaba.com/schema/services/request-contexts; defaultElement=request-context
+services/request-contexts/session/stores=http://www.alibaba.com/schema/services/request-contexts/session/stores; defaultElement=store; nsPrefix=session-stores
+services/request-contexts/session/encoders=http://www.alibaba.com/schema/services/request-contexts/session/encoders; defaultElement=encoder; nsPrefix=session-encoders
+services/request-contexts/session/value-encoders=http://www.alibaba.com/schema/services/request-contexts/session/value-encoders; defaultElement=value-encoder; nsPrefix=session-value-encoders
+services/request-contexts/session/serializers=http://www.alibaba.com/schema/services/request-contexts/session/serializers; defaultElement=serializer; nsPrefix=session-serializers
+services/request-contexts/session/encrypters=http://www.alibaba.com/schema/services/request-contexts/session/encrypters; defaultElement=encrypter; nsPrefix=session-encrypters
+services/request-contexts/session/idgens=http://www.alibaba.com/schema/services/request-contexts/session/idgens; defaultElement=generator; nsPrefix=session-idgens
+services/request-contexts/session/model-encoders=http://www.alibaba.com/schema/services/request-contexts/session/model-encoders; defaultElement=model-encoder; nsPrefix=session-model-encoders
+services/request-contexts/session/interceptors=http://www.alibaba.com/schema/services/request-contexts/session/interceptors; defaultElement=interceptor; nsPrefix=session-interceptors
+services/request-contexts/basic/interceptors=http://www.alibaba.com/schema/services/request-contexts/basic/interceptors; defaultElement=interceptor; nsPrefix=basic-interceptors
+services/request-contexts/parser/filters=http://www.alibaba.com/schema/services/request-contexts/parser/filters; defaultElement=filter; nsPrefix=parser-filters

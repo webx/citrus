@@ -1,0 +1,1 @@
+services/data-resolver/factories=http://www.alibaba.com/schema/services/data-resolver/factories; defaultElement=factory; nsPrefix=dr-factories

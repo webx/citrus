@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:element name="escape-support" type="EscapeSupportType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    支持escape和noescape标签。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="EscapeSupportType">
+        <xsd:sequence>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element name="escape" type="EscapeSupportEscapeRuleType">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    匹配任一pattern时，强制escape。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="noescape" type="EscapeSupportNoescapeRuleType">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    匹配任一pattern时，强制不escape。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+        </xsd:sequence>
+        <xsd:attribute name="defaultEscape" type="EscapeType" />
+    </xsd:complexType>
+
+    <xsd:complexType name="EscapeSupportEscapeRuleType">
+        <xsd:complexContent>
+            <xsd:extension base="AbstractEscapeSupportRuleType">
+                <xsd:attribute name="type" type="EscapeType" use="required" />
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="EscapeSupportNoescapeRuleType">
+        <xsd:complexContent>
+            <xsd:extension base="AbstractEscapeSupportRuleType" />
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="AbstractEscapeSupportRuleType" abstract="true">
+        <xsd:sequence>
+            <xsd:element name="if-matches" minOccurs="1" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:attribute name="pattern" type="xsd:string" use="required" />
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="EscapeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="java" />
+            <xsd:enumeration value="javascript" />
+            <xsd:enumeration value="html" />
+            <xsd:enumeration value="xml" />
+            <xsd:enumeration value="url" />
+            <xsd:enumeration value="sql" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>

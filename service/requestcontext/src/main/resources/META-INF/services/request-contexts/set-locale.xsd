@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:element name="set-locale" type="SetLocaleRequestContextType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    设置区域和编码字符集。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="SetLocaleRequestContextType">
+        <xsd:complexContent>
+            <xsd:extension base="beans:identifiedType">
+                <xsd:attribute name="inputCharsetParam" type="xsd:string" default="_input_charset">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    用来指定输入字符集的参数名。默认值为“_input_charset”。
+    如果query中指定了这个参数，那么使用指定的charset值来解码当前请求所提交的参数。该参数用于输入字符集和默认字符集不同的情况。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+
+                <xsd:attribute name="outputCharsetParam" type="xsd:string" default="_output_charset">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    用来指定输出字符集的参数名。默认值为“_output_charset”。
+    如果query中指定了这个参数，那么使用指定的charset值来编码码当前的response内容。该参数用于输入字符集和默认字符集不同的情况。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+
+                <xsd:attribute name="defaultLocale" type="xsd:string" default="en_US">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    默认的locale。默认值为“en_US”。此参数会影响到resource bundle的输出结果。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+
+                <xsd:attribute name="defaultCharset" type="xsd:string" default="UTF-8">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    默认的charset字符集。默认值为“UTF-8”。
+    如果不在请求的URL中特别指定inputCharset和outputCharset，那么系统将使用此charset来解码request、以及输出content。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+
+                <xsd:attribute name="sessionKey" type="xsd:string" default="_lang">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    在session中标识当前locale和charset的key名称。默认值为“_lang”。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+
+                <xsd:attribute name="paramKey" type="xsd:string" default="_lang">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    在parameter参数中标识当前locale和charset的key名称。默认值为“_lang”。
+    此功能用于切换网站的语言，例如：_lang=zh_HK:Big5。切换以后，新的locale和charset值将被保存在session中（以sessionKey保存）。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+
+    </xsd:complexType>
+
+</xsd:schema>

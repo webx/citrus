@@ -1,0 +1,47 @@
+h1.webx-exception {
+    color: red;
+    font-weight: bold;
+}
+
+.webx-exception-caused-by {
+    color: red;
+    font-weight: bold;
+    font-size: smaller;
+}
+
+.webx-exception-type {
+    background-color: #E0E0E0;
+    color: navy;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.webx-exception-message {
+    border: thin solid silver;
+    font-style: italic;
+    margin: 5px 0;
+    padding: 8px;
+    white-space: pre-wrap;
+}
+
+.webx-exception-stacktrace table {
+    font-family: Consolas, "Courier New", Courier, monospace;
+    font-size: small;
+    margin-left: 10px;
+}
+
+.webx-exception-stacktrace-class {
+    color: blue;
+}
+
+.webx-exception-stacktrace-method {
+    font-style: italic;
+}
+
+.webx-exception-stacktrace-line {
+    color: red;
+}
+
+.webx-exception-stacktrace-location {
+    color: blue;
+}

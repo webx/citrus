@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:base="http://www.alibaba.com/schema/services/form/validators/base"
+    elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:element name="if" type="IfValidatorType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    用于条件判断的validator。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="IfValidatorType">
+        <xsd:sequence>
+            <xsd:any namespace="http://www.alibaba.com/schema/services/form/conditions"
+                minOccurs="0" />
+            <xsd:any namespace="http://www.alibaba.com/schema/services/form/validators"
+                minOccurs="1" maxOccurs="unbounded" />
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:string" />
+        <xsd:attribute name="test" type="xsd:string" />
+    </xsd:complexType>
+
+</xsd:schema>

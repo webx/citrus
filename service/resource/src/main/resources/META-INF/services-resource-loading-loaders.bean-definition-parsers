@@ -1,0 +1,4 @@
+classpath-loader=com.alibaba.citrus.service.resource.loader.impl.ClasspathResourceLoaderDefinitionParser
+webapp-loader=com.alibaba.citrus.service.resource.loader.impl.WebappResourceLoaderDefinitionParser
+file-loader=com.alibaba.citrus.service.resource.loader.impl.FileResourceLoaderDefinitionParser
+super-loader=com.alibaba.citrus.service.resource.loader.impl.SuperResourceLoaderDefinitionParser

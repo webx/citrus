@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="direct-module-rule" type="DirectModuleRuleType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    最简单模块映射规则。
+    将"/"替换成"."。
+    除去文件名后缀。
+    将最后一个单词首字母改成大写，以符合模块命名的规则。
+    该rule默认不cache结果。
+    例如：将模板名："about/directions/driving.vm"映射到screen module： "about.directions.Driving"。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="DirectModuleRuleType">
+        <xsd:attribute name="id" type="xsd:string" use="required" />
+        <xsd:attribute name="cacheEnabled" type="springext:booleanOrPlaceholder" />
+    </xsd:complexType>
+
+</xsd:schema>

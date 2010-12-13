@@ -1,0 +1,1 @@
+default-session-model-encoder=com.alibaba.citrus.service.requestcontext.session.impl.SessionModelEncoderImpl$DefinitionParser

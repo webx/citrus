@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="session" type="SessionRequestContextType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    设置HttpSession及相关组件。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="SessionRequestContextType">
+        <xsd:complexContent>
+            <xsd:extension base="beans:identifiedType">
+                <xsd:all>
+                    <xsd:element name="id" type="SessionRequestContextSessionIdType" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    Session ID的设置。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="stores" type="SessionRequestContextSessionStoresType"
+                        minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    Session Store的设置。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="store-mappings"
+                        type="SessionRequestContextSessionStoreMappingsType" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    将session attributes映射到session store的设置。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="session-model-encoders"
+                        type="SessionRequestContextSessionModelEncodersType" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    将session model转换为store中可存储的对象，或者将store中取得的对象转换回session model。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="interceptors"
+                        type="SessionRequestContextSessionInterceptorsType" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    用来监听session行为的interceptors。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:all>
+                <xsd:attribute name="maxInactiveInterval" type="springext:integerOrPlaceholder">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    Session的最长不活动时间（秒）。假如用户不活动，超过这个时限，session将被作废。默认为0，表示永不过期。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="forceExpirationPeriod" type="springext:integerOrPlaceholder">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    Session强制作废期限（秒）。无论用户活动与否，从session创建之时算起，超过这个期限，session将被强制作废。默认为<code>0</code>表示永不作废。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="modelKey" type="xsd:string" default="SESSION_MODEL">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    代表session model在session中被保存的键值。Session model保存着当前session的状态，它也被保存在session中。默认值为SESSION_MODEL。
+    在store-mappings设置中，你可以把session model分配到一个session store中。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="keepInTouch" type="springext:booleanOrPlaceholder"
+                    default="false">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    是否每次请求都touch session。如果设为false，只在session值有改变时touch。
+    当将session model保存在cookie store中时，这样做可以减少流量。默认为false。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="SessionRequestContextSessionIdType">
+        <xsd:sequence>
+            <xsd:element name="cookie" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    Session ID cookie的设置。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:attribute name="name" type="xsd:string" default="JSESSIONID">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    Session ID cookie的名称。默认为JSESSIONID。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+                    <xsd:attribute name="domain" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    Session ID cookie的domain。默认为空，表示根据当前请求自动设置domain。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+                    <xsd:attribute name="path" type="xsd:string" default="/">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    Session ID cookie的path。默认为/，表示根路径。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+                    <xsd:attribute name="maxAge" type="springext:integerOrPlaceholder" default="0">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    Session ID cookie的最长存活时间（秒）。默认为0，表示临时cookie，随浏览器的关闭而消失。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+                    <xsd:attribute name="httpOnly" type="springext:booleanOrPlaceholder"
+                        default="true">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    在session ID cookie上设置httpOnly标记。在IE6及更新版本中，可以缓解XSS攻击的危险。默认为true。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+                    <xsd:attribute name="secure" type="springext:booleanOrPlaceholder"
+                        default="false">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    在session ID cookie上设置secure标记。这样，只有在https请求中才可访问该cookie。默认为false。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="url-encode" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    将session ID编码到URL中设置。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:attribute name="name" type="xsd:string" default="JSESSIONID">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    Session ID cookie的名称。默认为JSESSIONID。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:attribute>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:any
+                namespace="http://www.alibaba.com/schema/services/request-contexts/session/idgens"
+                minOccurs="0" />
+        </xsd:sequence>
+        <xsd:attribute name="cookieEnabled" type="springext:booleanOrPlaceholder" default="true">
+            <xsd:annotation>
+                <xsd:documentation><![CDATA[
+    是否把session ID保存在cookie中，如若不是，则只能保存的URL中。默认为开启：true。
+                ]]></xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="urlEncodeEnabled" type="springext:booleanOrPlaceholder" default="false">
+            <xsd:annotation>
+                <xsd:documentation><![CDATA[
+    是否支持把session ID保存在URL中。默认为关闭：false。
+                ]]></xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="SessionRequestContextSessionStoresType">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:any
+                namespace="http://www.alibaba.com/schema/services/request-contexts/session/stores"
+             />
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:complexType name="SessionRequestContextSessionStoreMappingsType">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="match">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    创建一个attributes name到session store的映射，支持通配符：*，?。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:attribute name="name" type="xsd:string" use="required" />
+                    <xsd:attribute name="store" type="xsd:string" use="required" />
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="matchRegex">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    创建一个attributes name到session store的映射，支持正则表达式。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:attribute name="pattern" type="xsd:string" use="required" />
+                    <xsd:attribute name="store" type="xsd:string" use="required" />
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:complexType name="SessionRequestContextSessionModelEncodersType">
+        <xsd:sequence>
+            <xsd:any
+                namespace="http://www.alibaba.com/schema/services/request-contexts/session/model-encoders"
+                minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="SessionRequestContextSessionInterceptorsType">
+        <xsd:sequence>
+            <xsd:any
+                namespace="http://www.alibaba.com/schema/services/request-contexts/session/interceptors"
+                minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>

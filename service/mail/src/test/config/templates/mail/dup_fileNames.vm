@@ -1,0 +1,4 @@
+$image1.getURI("java.gif")
+$image2.getURI("java.gif")
+$image1.getURI("emptyfile")
+$image2.getURI("emptyfile")

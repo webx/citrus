@@ -1,0 +1,1 @@
+services/template/engines/velocity/plugins=http://www.alibaba.com/schema/services/template/engines/velocity/plugins; defaultElement=plugin; nsPrefix=vm-plugins

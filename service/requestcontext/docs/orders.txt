@@ -1,0 +1,70 @@
+Request Contexts 的顺序的说明
+============================
+
+* 假设request contexts：rc1, rc2, rc3，它们的顺序是指它们在配置文件中的顺序：
+
+  <request-contexts>
+      <rc1/>
+      <rc2/>
+      <rc3/>
+  </request-contexts>
+
+* 假设request contexts的顺序为rc1, rc2, rc3，那么，
+  1. prepare的顺序为rc1, rc2, rc3
+  2. commit的顺序为rc3, rc2, rc1
+  3. rc3 包含(wrap) rc2，rc2 包含(wrap) rc1，rc1 包含(wrap) 原始的request/response/servletContext
+  
+* 假设rc2必须在rc1之后，意思是：rc1、rc2不必同时存在，但假如同时存在时，rc1和rc2必须有的先后关系。
+
+* 假设rc2依赖rc1，意思不仅包含了“rc2必须在rc1之后”，还包含了这个意思：rc2没有rc1将不能正常运行。
+  
+
+Request Contexts 的顺序
+=======================
+
+* buffered request context负责缓冲HTTP content，lazyCommit request context负责缓冲headers，
+  因为headers必须比content先提交，所以lazyCommit应在buffered之后（比buffered先commit）。
+
+* 如果没有buffered，应用程序所输出的content会导致response提前被提交，从而导致lazyCommit中的headers无法提交。
+  所以lazyCommit依赖buffered。
+
+* 假如网站支持resource bundle和多语言环境，那么setlocale会把locale信息保存在session里。
+  假设我们要使用基于cookie的session request context，那么setlocale必须在session request context之后，
+  使setlocale包含session，从而可以使用新的session机制。
+  
+* 基于cookie的session机制，会在commit时修改cookie和headers，因而依赖于lazyCommit（同时排在lazyCommit之后，使之可在lazyCommit之前提交）。
+
+* Session框架由于要读写cookie，因此在parser之后。
+
+* rewrite机制会在prepare阶段，修改parameters和cookie，因此依赖于parser。
+
+* 第一次访问parser的parameters之前，必须设置locale。设置locale是由setlocale prepare完成的。
+  由于rewrite prepare会访问parser parameters，因此rewrite必须在setlocale之后。
+
+
+总结
+=======================
+
+* 依赖关系：
+
+  lazyCommit => buffered
+  session    => lazyCommit
+
+* 先后关系：
+
+  buffered   <- lazyCommit
+  session    <- setLocale
+  parser     <- session
+  lazyCommit <- session
+  parser     <- rewrite
+  setLocale  <- rewrite
+  
+* 符合上述约束的合理顺序为：
+
+  buffered          -           - commit
+  lazyCommit        -           - commit
+  parser                                    - 按需初始化，但初始化之前，必须执行setLocale
+  session           -           - commit    - 按需初始化
+  setLocale         - prepare
+  rewrite           - prepare
+

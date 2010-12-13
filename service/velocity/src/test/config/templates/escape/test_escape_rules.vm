@@ -1,0 +1,7 @@
+1. ${value}
+2. $!{jsValue}
+3. $control.setValue("<hello />")
+4. $!Screen_Placeholder
+5. $stringescapeutil.escapeURL("<hello />")
+6. #escape("html")${Screen_Placeholder}#end
+7. #noescape()${jsValue}#end

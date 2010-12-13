@@ -1,0 +1,2 @@
+class-modules=com.alibaba.citrus.service.moduleloader.impl.factory.ClassModuleFactoryDefinitionParser
+script-modules=com.alibaba.citrus.service.moduleloader.impl.factory.ScriptModuleFactoryDefinitionParser

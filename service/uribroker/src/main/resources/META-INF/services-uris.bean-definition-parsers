@@ -1,0 +1,7 @@
+uri=com.alibaba.citrus.service.uribroker.impl.uri.GenericURIBrokerDefinitionParser
+content-uri=com.alibaba.citrus.service.uribroker.impl.uri.ContentURIBrokerDefinitionParser
+servlet-uri=com.alibaba.citrus.service.uribroker.impl.uri.GenericServletURIBrokerDefinitionParser
+servlet-content-uri=com.alibaba.citrus.service.uribroker.impl.uri.ServletContentURIBrokerDefinitionParser
+turbine-classic-uri=com.alibaba.citrus.service.uribroker.impl.uri.TurbineClassicURIBrokerDefinitionParser
+
+uri-bean=com.alibaba.citrus.springext.support.parser.DefaultElementDefinitionParser

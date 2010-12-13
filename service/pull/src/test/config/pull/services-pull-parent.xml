@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns="http://www.alibaba.com/schema/services/pull/factories"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="
+        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+    ">
+
+    <services:pull id="parentPull">
+
+        <factory id="parentSingleton1" class="com.alibaba.citrus.service.pull.tool.ObjectTool"
+            p:singleton="true" />
+
+        <factory id="parentSingleton2" class="com.alibaba.citrus.service.pull.tool.ObjectToolSet"
+            p:singleton="true" p:id="parentSingleton3" />
+
+        <factory id="parentPrototype1" class="com.alibaba.citrus.service.pull.tool.ObjectTool"
+            p:singleton="false" />
+
+        <factory id="parentPrototype2" class="com.alibaba.citrus.service.pull.tool.ObjectToolSet"
+            p:singleton="false" p:id="parentPrototype3" />
+
+        <factory id="parentRuntime1"
+            class="com.alibaba.citrus.service.pull.tool.ObjectRuntimeToolSet" p:idParam="parent" />
+
+    </services:pull>
+
+    <services:request-contexts />
+
+</beans:beans>

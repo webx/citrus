@@ -1,0 +1,3 @@
+#macro (defaultMacro)
+haha
+#end

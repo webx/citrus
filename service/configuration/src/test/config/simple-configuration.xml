@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+    ">
+
+    <simple-configuration xmlns="http://www.alibaba.com/schema/services">
+        <productionMode>true</productionMode>
+    </simple-configuration>
+
+    <beans:bean id="myBean" class="com.alibaba.citrus.service.configuration.MyBean" />
+
+</beans:beans>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="mails" type="MailServiceType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    创建、接收、发送邮件的服务。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="MailServiceType">
+        <xsd:sequence>
+            <xsd:element name="default-settings" type="DefaultSettingsType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    定义一组默认值。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element name="mail-store" type="MailStoreType">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    定义一个用来接收邮件的store。
+                    ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="mail-transport" type="MailTransportType">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    定义一个用来发送邮件的transport。
+                    ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="mail" type="MailType">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    定义一个邮件。
+                    ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+            </xsd:choice>
+        </xsd:sequence>
+        <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
+    </xsd:complexType>
+
+    <xsd:complexType name="DefaultSettingsType">
+        <xsd:sequence>
+            <xsd:element name="import" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    引入一个默认服务，所有content都可使用这个服务。例如：template service。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+                <xsd:complexType>
+                    <xsd:attribute name="serviceRef" type="xsd:string" use="required" />
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="AbstractMailSessionType" abstract="true">
+        <xsd:complexContent>
+            <xsd:extension base="beans:identifiedType">
+                <xsd:sequence>
+                    <xsd:element name="property" type="MailSessionPropertyType" minOccurs="0"
+                        maxOccurs="unbounded" />
+                </xsd:sequence>
+                <xsd:attribute name="default" type="springext:booleanOrPlaceholder" />
+                <xsd:attribute name="host" type="xsd:string" />
+                <xsd:attribute name="port" type="springext:integerOrPlaceholder" />
+                <xsd:attribute name="user" type="xsd:string" />
+                <xsd:attribute name="password" type="xsd:string" />
+                <xsd:attribute name="debug" type="springext:booleanOrPlaceholder" />
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="MailSessionPropertyType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="name" type="xsd:string" use="required" />
+                <xsd:attribute name="value" type="xsd:string" />
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="MailStoreType">
+        <xsd:complexContent>
+            <xsd:extension base="AbstractMailSessionType">
+                <xsd:attribute name="protocol" type="xsd:string" />
+                <xsd:attribute name="folder" type="xsd:string" />
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="MailTransportType">
+        <xsd:complexContent>
+            <xsd:extension base="AbstractMailSessionType">
+                <xsd:attribute name="protocol" type="xsd:string" />
+                <xsd:attribute name="popBeforeSmtp" type="xsd:string" />
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="MailType">
+        <xsd:complexContent>
+            <xsd:extension base="beans:identifiedType">
+                <xsd:sequence>
+                    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                        <xsd:element name="from" type="xsd:string" />
+                        <xsd:element name="to" type="xsd:string" />
+                        <xsd:element name="cc" type="xsd:string" />
+                        <xsd:element name="bcc" type="xsd:string" />
+                        <xsd:element name="reply-to" type="xsd:string" />
+                    </xsd:choice>
+                    <xsd:element name="subject" type="xsd:string" minOccurs="0" />
+                    <xsd:any namespace="http://www.alibaba.com/schema/services/mails/contents"
+                        minOccurs="0" />
+                </xsd:sequence>
+                <xsd:attribute name="charset" type="xsd:string" />
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+</xsd:schema>

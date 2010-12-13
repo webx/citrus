@@ -1,0 +1,81 @@
+body {
+    margin: 0px;
+    font-family: Calibri, 'Lucida Grande', Verdana, Arial, Sans-Serif;
+    font-size: medium;
+    color: black;
+    background-color: #ECF5FF;
+}
+
+em {
+    color: red;
+    background-color: inherit;
+}
+
+img {
+    border: none;
+    vertical-align: middle;
+}
+
+input {
+    text-align: left;
+    vertical-align: bottom;
+}
+
+a {
+    color: #000099;
+    background-color: inherit;
+    text-decoration: none;
+}
+
+a:link,a:visited {
+    
+}
+
+a:hover,a:active {
+    font-weight: bold
+}
+
+.file a {
+    color: #0000CC;
+    background-color: inherit;
+}
+
+li.file,li.directory {
+    list-style: none;
+    white-space: nowrap;
+}
+
+li.file img,li.directory img {
+    margin: 2px;
+}
+
+div.control-bar {
+    background-color: #E0E0E0;
+    color: navy;
+    font-weight: bold;
+    margin: 0 30px;
+}
+
+div.control-bar span {
+    padding: 10px;
+}
+
+.code,.xml-template {
+    font-family: Consolas, "Courier New", Courier, monospace;
+    font-size: small;
+}
+
+pre.xml-template {
+    border: thin solid silver;
+    margin: 5px 30px;
+    padding: 8px;
+    white-space: pre-wrap;
+}
+
+li.no-target-namespace {
+    opacity: 0.5;
+}
+
+li.no-target-namespace li.no-target-namespace {
+    opacity: 1;
+}

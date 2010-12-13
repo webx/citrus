@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns="http://www.alibaba.com/schema/services/request-contexts"
+    xmlns:encoders="http://www.alibaba.com/schema/services/request-contexts/session/encoders"
+    xmlns:idgens="http://www.alibaba.com/schema/services/request-contexts/session/idgens"
+    xmlns:model-encoders="http://www.alibaba.com/schema/services/request-contexts/session/model-encoders"
+    xmlns:stores="http://www.alibaba.com/schema/services/request-contexts/session/stores"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="
+               http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+               http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
+               http://www.alibaba.com/schema/services/request-contexts/session/encoders http://localhost:8080/schema/services-request-contexts-session-encoders.xsd
+               http://www.alibaba.com/schema/services/request-contexts/session/idgens http://localhost:8080/schema/services-request-contexts-session-idgens.xsd
+               http://www.alibaba.com/schema/services/request-contexts/session/model-encoders http://localhost:8080/schema/services-request-contexts-session-model-encoders.xsd
+               http://www.alibaba.com/schema/services/request-contexts/session/stores http://localhost:8080/schema/services-request-contexts-session-stores.xsd
+               http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+             ">
+
+    <!-- 没有store。 -->
+    <services:request-contexts id="session-nostores" lazy-init="true">
+        <buffered />
+        <lazy-commit />
+        <session />
+    </services:request-contexts>
+
+    <!-- 仅配置保存session model的store。 -->
+    <services:request-contexts id="session-model-only">
+        <buffered />
+        <lazy-commit />
+        <!-- 只配置session model，确保没有其它key被写入session。 -->
+        <session>
+            <stores>
+                <stores:simple-memory-store id="s1" />
+            </stores>
+            <store-mappings>
+                <match name="SESSION_MODEL" store="s1" />
+            </store-mappings>
+        </session>
+    </services:request-contexts>
+
+    <!-- 常见配置 -->
+    <services:request-contexts id="session">
+        <buffered />
+        <lazy-commit />
+        <session>
+            <stores>
+                <stores:simple-memory-store id="simple" />
+            </stores>
+            <store-mappings>
+                <match name="*" store="simple" />
+            </store-mappings>
+        </session>
+    </services:request-contexts>
+
+    <services:request-contexts id="session_exact_match_only_wrong1" lazy-init="true">
+        <buffered />
+        <lazy-commit />
+        <session>
+            <stores>
+                <stores:store id="exact1"
+                    class="com.alibaba.citrus.service.requestcontext.session.SessionTests$MyExactMatchesOnlySessionStore"
+                 />
+            </stores>
+            <store-mappings>
+                <match name="*" store="exact1" />
+            </store-mappings>
+        </session>
+    </services:request-contexts>
+
+    <services:request-contexts id="session_exact_match_only_wrong2" lazy-init="true">
+        <buffered />
+        <lazy-commit />
+        <session>
+            <stores>
+                <stores:store id="exact2"
+                    class="com.alibaba.citrus.service.requestcontext.session.SessionTests$MyExactMatchesOnlySessionStore"
+                 />
+            </stores>
+            <store-mappings>
+                <matchRegex pattern="a.*" store="exact2" />
+                <match name="b" store="exact2" />
+            </store-mappings>
+        </session>
+    </services:request-contexts>
+
+    <services:request-contexts id="session_exact_match_only" lazy-init="true">
+        <buffered />
+        <lazy-commit />
+        <session>
+            <stores>
+                <stores:store id="exact3"
+                    class="com.alibaba.citrus.service.requestcontext.session.SessionTests$MyExactMatchesOnlySessionStore"
+                 />
+            </stores>
+            <store-mappings>
+                <match name="a" store="exact3" />
+                <match name="b" store="exact3" />
+                <match name="SESSION_MODEL" store="exact3" />
+            </store-mappings>
+        </session>
+    </services:request-contexts>
+
+    <services:request-contexts id="session-force-expire">
+        <buffered />
+        <lazy-commit />
+        <session forceExpirationPeriod="2">
+            <stores>
+                <stores:simple-memory-store id="simple1" />
+            </stores>
+            <store-mappings>
+                <match name="*" store="simple1" />
+            </store-mappings>
+        </session>
+    </services:request-contexts>
+
+    <!-- 使用url encode的配置 -->
+    <services:request-contexts id="session_urlencode">
+        <buffered />
+        <lazy-commit />
+        <session>
+            <id urlEncodeEnabled="true" cookieEnabled="false" />
+            <stores>
+                <stores:simple-memory-store id="s3" />
+            </stores>
+            <store-mappings>
+                <match name="*" store="s3" />
+            </store-mappings>
+        </session>
+    </services:request-contexts>
+
+    <services:request-contexts id="session_models">
+        <buffered />
+        <lazy-commit />
+        <session>
+            <stores>
+                <stores:simple-memory-store id="s10" />
+            </stores>
+            <store-mappings>
+                <match name="*" store="s10" />
+            </store-mappings>
+            <session-model-encoders>
+                <model-encoders:default-session-model-encoder />
+            </session-model-encoders>
+        </session>
+    </services:request-contexts>
+
+    <services:request-contexts id="session_cookie">
+        <buffered />
+        <lazy-commit />
+        <session>
+            <stores>
+                <stores:cookie-store id="cookie1">
+                    <stores:cookie name="myCookieStore" />
+                </stores:cookie-store>
+            </stores>
+            <store-mappings>
+                <match name="*" store="cookie1" />
+            </store-mappings>
+        </session>
+    </services:request-contexts>
+
+    <!-- 完全配置 -->
+    <services:request-contexts id="session_all">
+        <buffered />
+        <lazy-commit />
+        <session maxInactiveInterval="1" modelKey="SESSION_MODEL" keepInTouch="true">
+            <id cookieEnabled="true" urlEncodeEnabled="false">
+                <cookie name="JSESSIONID" domain="taobao.com" path="/" maxAge="10" httpOnly="false"
+                    secure="true" />
+                <url-encode name="JSESSIONID" />
+                <idgens:random-id-generator length="20" />
+            </id>
+            <stores>
+                <stores:simple-memory-store id="s4" />
+                <stores:simple-memory-store id="s5" />
+            </stores>
+            <store-mappings>
+                <match name="*" store="s4" />
+                <matchRegex pattern="a.*" store="s5" />
+            </store-mappings>
+        </session>
+    </services:request-contexts>
+
+</beans:beans>

@@ -1,0 +1,1 @@
+csrf-validator=com.alibaba.citrus.turbine.form.impl.validation.CsrfFormValidator$DefinitionParser

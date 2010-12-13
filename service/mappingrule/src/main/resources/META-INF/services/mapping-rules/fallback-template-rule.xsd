@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="fallback-template-rule" type="FallbackTemplateRuleType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    向上搜索的模板映射规则。
+
+    在模板名前加上template prefix（如果有的话）。
+    如果模板名未指定后缀，则不加上后缀。
+    调用template service检查模板是否存在，如果不存在，则查找上一级模块名，一直找到根目录。
+    如果全找不到，则返回第一个不匹配的normalized模块名（即精确匹配），否则返回匹配的模板名。
+    例如：将模板名："about/directions/driving.vm"映射到layout template，将顺次搜索以下模板：
+
+    "layout/about/directions/driving.vm"
+    "layout/about/directions/default.vm"
+    "layout/about/default.vm"
+    "layout/default.vm"
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="FallbackTemplateRuleType">
+        <xsd:attribute name="id" type="xsd:string" use="required" />
+        <xsd:attribute name="templatePrefix" type="xsd:string" use="required" />
+        <xsd:attribute name="matchLastName" type="springext:booleanOrPlaceholder" />
+        <xsd:attribute name="templateServiceRef" type="xsd:string" />
+        <xsd:attribute name="cacheEnabled" type="springext:booleanOrPlaceholder" />
+    </xsd:complexType>
+
+</xsd:schema>

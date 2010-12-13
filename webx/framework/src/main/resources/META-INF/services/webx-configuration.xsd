@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="webx-configuration" type="WebxConfigurationType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    Webx的配置信息。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="WebxConfigurationType">
+        <xsd:all>
+            <xsd:element name="productionMode" type="springext:booleanOrPlaceholder" default="false"
+                minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    生产模式。默认为false，即开发者模式。
+    在生产模式中，将显示由开发者定制的简略错误页面。而在开发者模式中，将显示由系统提供的详细错误页面。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="internalPathPrefix" type="xsd:string" default="internal"
+                minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    内部链接URL的前缀。内部链接用来显示错误信息、开发者信息。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="requestContextsRef" type="xsd:string" default="requestContexts"
+                minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    RequestContexts服务的引用。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="pipelineRef" type="xsd:string" default="pipeline" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    Pipeline服务的引用。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="exceptionPipelineRef" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    用于处理exception异常的pipeline服务的引用。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="components" type="WebxComponentsType" minOccurs="0" />
+        </xsd:all>
+        <xsd:attribute name="parentRef" type="xsd:string" />
+        <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
+    </xsd:complexType>
+
+    <xsd:complexType name="WebxComponentsType">
+        <xsd:sequence>
+            <xsd:element name="component" minOccurs="0" maxOccurs="unbounded"
+                type="WebxComponentType" />
+            <xsd:element name="rootController" type="springext:referenceableBeanType" minOccurs="0"
+             />
+        </xsd:sequence>
+        <xsd:attribute name="autoDiscoverComponents" type="springext:booleanOrPlaceholder" />
+        <xsd:attribute name="componentConfigurationLocationPattern" type="xsd:string"
+            default="/WEB-INF/webx-*.xml" />
+        <xsd:attribute name="defaultControllerClass" type="xsd:string" />
+        <xsd:attribute name="defaultComponent" type="xsd:string" />
+    </xsd:complexType>
+
+    <xsd:complexType name="WebxComponentType">
+        <xsd:sequence>
+            <xsd:element name="controller" type="springext:referenceableBeanType" minOccurs="0" />
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string" use="required" />
+        <xsd:attribute name="path" type="xsd:string" />
+    </xsd:complexType>
+
+</xsd:schema>

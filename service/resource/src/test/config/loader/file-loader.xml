@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns:filters="http://www.alibaba.com/schema/services/resource-loading/filters"
+    xmlns:loaders="http://www.alibaba.com/schema/services/resource-loading/loaders"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="
+               http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+               http://www.alibaba.com/schema/services/resource-loading/filters http://localhost:8080/schema/services-resource-loading-filters.xsd
+               http://www.alibaba.com/schema/services/resource-loading/loaders http://localhost:8080/schema/services-resource-loading-loaders.xsd
+               http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+             ">
+
+    <beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" />
+
+    <services:resource-loading>
+        <services:resource pattern="/defaultPath">
+            <loaders:file-loader basedir=".." />
+        </services:resource>
+
+        <services:resource pattern="/defaultBasedir">
+            <loaders:file-loader />
+        </services:resource>
+
+        <services:resource pattern="/absBasedir">
+            <loaders:file-loader basedir="${srcdir}" />
+        </services:resource>
+
+        <services:resource pattern="/approot">
+            <loaders:file-loader basedir="${srcdir}">
+                <loaders:path>WEB-INF/aaa</loaders:path>
+                <loaders:path type="absolute">${srcdir}/WEB-INF</loaders:path>
+            </loaders:file-loader>
+        </services:resource>
+
+        <services:resource pattern="/file/resource">
+            <loaders:file-loader>
+                <loaders:path>../WEB-INF/aaa/bbb</loaders:path>
+                <loaders:path>../WEB-INF/aaa/ccc</loaders:path>
+                <loaders:path>../WEB-INF/aaa/ddd</loaders:path>
+            </loaders:file-loader>
+            <loaders:file-loader basedir="${srcdir}">
+                <loaders:path>/myfolder</loaders:path>
+            </loaders:file-loader>
+            <loaders:file-loader>
+                <loaders:path type="absolute">${srcdir}</loaders:path>
+            </loaders:file-loader>
+        </services:resource>
+
+        <services:resource pattern="/file/resource2">
+            <loaders:file-loader basedir="${srcdir}" />
+        </services:resource>
+
+        <services:resource pattern="/my/substitution/**/*.jhtml">
+            <loaders:file-loader basedir="${srcdir}">
+                <loaders:path>/myfolder/$1/$2.jsp</loaders:path>
+            </loaders:file-loader>
+        </services:resource>
+
+    </services:resource-loading>
+
+</beans:beans>

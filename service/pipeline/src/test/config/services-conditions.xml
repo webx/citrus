@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns="http://www.alibaba.com/schema/services/pipeline/conditions"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/pipeline/conditions http://localhost:8080/schema/services-pipeline-conditions.xsd
+    ">
+
+    <all-of id="allOf1" />
+
+    <all-of id="allOf2">
+        <condition p:satisfied="true"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+        <condition p:satisfied="true"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+        <condition p:satisfied="true"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+    </all-of>
+
+    <all-of id="allOf3">
+        <condition p:satisfied="true"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+        <condition p:satisfied="false"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+        <condition p:satisfied="true"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+    </all-of>
+
+    <all-of id="allOf4">
+        <condition p:satisfied="false"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+        <condition p:satisfied="false"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+        <condition p:satisfied="false"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+    </all-of>
+
+    <any-of id="anyOf1" />
+
+    <any-of id="anyOf2">
+        <condition p:satisfied="true"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+        <condition p:satisfied="true"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+        <condition p:satisfied="true"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+    </any-of>
+
+    <any-of id="anyOf3">
+        <condition p:satisfied="false"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+        <condition p:satisfied="false"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+        <condition p:satisfied="true"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+    </any-of>
+
+    <any-of id="anyOf4">
+        <condition p:satisfied="false"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+        <condition p:satisfied="false"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+        <condition p:satisfied="false"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+    </any-of>
+
+    <none-of id="noneOf1" />
+
+    <none-of id="noneOf2">
+        <condition p:satisfied="true"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+        <condition p:satisfied="true"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+        <condition p:satisfied="true"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+    </none-of>
+
+    <none-of id="noneOf3">
+        <condition p:satisfied="false"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+        <condition p:satisfied="false"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+        <condition p:satisfied="true"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+    </none-of>
+
+    <none-of id="noneOf4">
+        <condition p:satisfied="false"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+        <condition p:satisfied="false"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+        <condition p:satisfied="false"
+            class="com.alibaba.citrus.service.pipeline.condition.MyCondition" />
+    </none-of>
+
+    <jexl-condition id="jexl-true" expr="'tru'+'e'" />
+    <jexl-condition id="jexl-false" expr="1==2" />
+
+</beans:beans>

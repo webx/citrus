@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="form" type="FormServiceType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    提供表单验证的服务。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="FormServiceType">
+        <xsd:sequence>
+            <xsd:element name="property-editor-registrar" type="springext:referenceableBeanType"
+                minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    代表一个property editor registrar，可用来自定义property类型转换的方法。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="group" type="FormGroupType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    定义一个group，每个group包含一组fields。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="converterQuiet" type="springext:booleanOrPlaceholder" default="true" />
+        <xsd:attribute name="postOnlyByDefault" type="springext:booleanOrPlaceholder" default="true" />
+        <xsd:attribute name="messageCodePrefix" type="xsd:string" default="form." />
+        <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
+    </xsd:complexType>
+
+    <xsd:complexType name="FormGroupType">
+        <xsd:sequence>
+            <xsd:element name="import" type="FormGroupImportType" minOccurs="0"
+                maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    导入另一个group中一个或全部fields。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="field" type="FormGroupFieldType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    定义一个field，每个field包含一组validators。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string" use="required" />
+        <xsd:attribute name="extends" type="xsd:string" />
+        <xsd:attribute name="trimmingByDefault" type="springext:booleanOrPlaceholder" default="true" />
+        <xsd:attribute name="postOnly" type="springext:booleanOrPlaceholder" />
+    </xsd:complexType>
+
+    <xsd:complexType name="FormGroupImportType">
+        <xsd:attribute name="group" type="xsd:string" use="required" />
+        <xsd:attribute name="field" type="xsd:string" />
+    </xsd:complexType>
+
+    <xsd:complexType name="FormGroupFieldType">
+        <xsd:sequence>
+            <xsd:any namespace="http://www.alibaba.com/schema/services/form/validators"
+                minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string" use="required" />
+        <xsd:attribute name="propertyName" type="xsd:string" />
+        <xsd:attribute name="displayName" type="xsd:string" />
+        <xsd:attribute name="defaultValue" type="xsd:string" />
+        <xsd:attribute name="trimming" type="springext:booleanOrPlaceholder" />
+    </xsd:complexType>
+
+</xsd:schema>

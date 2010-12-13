@@ -1,0 +1,30 @@
+## --------------------------
+## 用来显示key/values的组件。
+## --------------------------
+<table>
+  #row[]
+  <tr>
+    <td>&lt;no values&gt;</td>
+  </tr>
+  #row[]
+  <tr>
+    #values[]
+    <td class="item-key">${key}</td>
+    <td class="item-value">
+      <pre>${value}</pre>
+    </td>
+    #values[]
+    <td class="item-key">${key} <span class="item-count">[${valueCount}]</span></td>
+    <td class="item-value">
+      <ul>
+        #valueItem[]
+        <li><pre>${value}</pre></li>
+        #valueItem[]
+        <li><span class="item-entry-key">${entryKey} :</span> <pre class="item-entry-value">${entryValue}</pre></li>
+        #end
+      </ul>
+    </td>
+    #end ## of values
+  </tr>
+  #end ## of row
+</table>

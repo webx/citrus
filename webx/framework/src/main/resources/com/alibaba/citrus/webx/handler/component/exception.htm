@@ -1,0 +1,43 @@
+## --------------------------
+## “Ï≥£–≈œ¢
+## --------------------------
+<h1 class="webx-exception">Exception Occurred</h1>
+<div class="webx-exception">
+  #exception
+
+  <div class="webx-exception-type">
+    <img id="webx-exception-handle-${exceptionId}"
+         src="${showHideHandleImage: images/open.gif, images/close.gif}"
+         alt="Click to Show/Hide details." title="Click to Show/Hide details." />
+
+    #causedBy
+    <span class="webx-exception-caused-by">caused by</span>
+    #end
+
+    ${exceptionType}
+  </div>
+  
+  <div id="webx-exception-${exceptionId}">
+    <div class="webx-exception-message">${exceptionMessage}</div>
+    <div class="webx-exception-stacktrace">
+    <table>
+    #stackTraceElement
+    <tr>
+      <td>
+        at <span class="webx-exception-stacktrace-package">${stackTraceElement_PackageName}</span
+        >.<span class="webx-exception-stacktrace-class">${stackTraceElement_SimpleClassName}</span
+        >.<span class="webx-exception-stacktrace-method">${stackTraceElement_Method}</span>()</td>
+      <td>
+        (<span class="webx-exception-stacktrace-file">${stackTraceElement_File}</span
+        >:<span class="webx-exception-stacktrace-line">${stackTraceElement_Line}</span
+        >:<span class="webx-exception-stacktrace-location"
+                title="${stackTraceElement_ClassLocation}">${stackTraceElement_ClassLocationShort}</span>)
+      </td>
+    </tr>
+    #end
+    </table>
+    </div>
+  </div>
+
+  #end ## of exception
+</div>

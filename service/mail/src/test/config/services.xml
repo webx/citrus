@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.alibaba.com/schema/services"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns:pull-tools="http://www.alibaba.com/schema/services/pull/factories"
+    xmlns:contents="http://www.alibaba.com/schema/services/mails/contents"
+    xmlns:loaders="http://www.alibaba.com/schema/services/resource-loading/loaders"
+    xmlns:filters="http://www.alibaba.com/schema/services/resource-loading/filters"
+    xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="
+               http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+               http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
+               http://www.alibaba.com/schema/services/mails/contents http://localhost:8080/schema/services-mails-contents.xsd
+               http://www.alibaba.com/schema/services/resource-loading/loaders http://localhost:8080/schema/services-resource-loading-loaders.xsd
+               http://www.alibaba.com/schema/services/resource-loading/filters http://localhost:8080/schema/services-resource-loading-filters.xsd
+               http://www.alibaba.com/schema/services/template/engines http://localhost:8080/schema/services-template-engines.xsd
+               http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+             ">
+
+    <mails id="importServices">
+        <default-settings>
+            <import serviceRef="myLong1" />
+            <import serviceRef="myBoolean1" />
+        </default-settings>
+    </mails>
+
+    <beans:bean id="myLong" class="java.lang.Long">
+        <beans:constructor-arg value="123" />
+    </beans:bean>
+
+    <beans:bean id="myLong1" class="java.lang.Long">
+        <beans:constructor-arg value="1234" />
+    </beans:bean>
+
+    <beans:bean id="myBoolean1" class="java.lang.Boolean">
+        <beans:constructor-arg value="false" />
+    </beans:bean>
+
+    <beans:bean id="myDouble" class="java.lang.Double">
+        <beans:constructor-arg value="123.456" />
+    </beans:bean>
+
+    <mails>
+        <mail-store id="mystore_default" debug="true" default="true" user="aliren"
+            host="alibaba.com" />
+
+        <mail-store id="mystore" host="myhost" user="myname" password="mypass" folder="INBOX2"
+            port="110" protocol="pop3">
+            <property name="mail.pop3.connectiontimeout">30000</property>
+        </mail-store>
+
+        <mail-transport id="mytransport_default" debug="true" default="true" host="alibaba.com"
+            popBeforeSmtp="mystore" />
+
+        <mail-transport id="mytransport" host="myhost" user="myname" password="mypass" port="25"
+            protocol="smtp">
+            <property name="mail.smtp.connectiontimeout" value="30000" />
+        </mail-transport>
+
+        <!-- simple -->
+        <mail id="empty" />
+        <mail id="simple_cn" charset="EUC_CN">
+            <from><![CDATA[ " 我的地址 " < from@alibaba.com > ]]></from>
+            <to><![CDATA["我的地址" <to@alibaba.com> ,
+                         "我的地址" <to2@alibaba.com>]]></to>
+            <cc><![CDATA["我的地址" <cc@alibaba.com>]]></cc>
+            <cc><![CDATA["我的地址" <cc2@alibaba.com>]]></cc>
+            <bcc><![CDATA["我的地址" <bcc@alibaba.com>]]></bcc>
+            <reply-to><![CDATA["我的地址" <reply-to@alibaba.com>]]></reply-to>
+            <subject> 我的标题 My Subject </subject>
+            <contents:content class="com.alibaba.citrus.service.mail.MailServiceTests$MyContent">
+                <beans:property name="object" value="test" />
+            </contents:content>
+        </mail>
+
+        <!-- TextContent -->
+        <mail id="textContent_empty" charset="GBK">
+            <contents:text-content>
+                <contents:text />
+            </contents:text-content>
+        </mail>
+        <mail id="textContent_withText" charset="GBK">
+            <contents:text-content contentType="text/html">
+                <contents:text>hello, 中国</contents:text>
+            </contents:text-content>
+        </mail>
+
+        <!-- AttachmentContent -->
+        <mail id="attachmentContent_empty" charset="GBK">
+            <contents:attachment-content />
+        </mail>
+        <mail id="attachmentContent" charset="GBK">
+            <contents:attachment-content resource="testfile.txt" />
+        </mail>
+        <mail id="attachmentContent_withFileName" charset="GBK">
+            <contents:attachment-content resource="testfile.txt" fileName="我的文件.txt" />
+        </mail>
+
+        <!-- TextTemplateContent -->
+        <mail id="textTemplateContent_empty" charset="GBK">
+            <contents:text-template-content />
+        </mail>
+        <mail id="textTemplateContent_vm" charset="GBK">
+            <contents:text-template-content template="mail/mytemplate.vm" />
+        </mail>
+        <mail id="textTemplateContent_ftl" charset="GBK">
+            <contents:text-template-content template="mail/mytemplate.ftl" contentType="text/html"
+             />
+        </mail>
+
+        <!-- HTMLTemplateContent -->
+        <mail id="htmlTemplateContent_empty" charset="GBK">
+            <contents:html-template-content />
+        </mail>
+        <mail id="htmlTemplateContent_vm" charset="GBK">
+            <contents:html-template-content template="mail/complexhtml.vm" />
+        </mail>
+        <mail id="htmlTemplateContent_ftl" charset="GBK">
+            <contents:html-template-content template="mail/mytemplate.ftl" contentType="text/plain">
+                <contents:inline-resource id="image" prefix="mailres" />
+            </contents:html-template-content>
+        </mail>
+        <mail id="htmlTemplateContent_vm_withResource" charset="GBK">
+            <contents:html-template-content template="mail/complexhtml.vm">
+                <contents:inline-resource id="image" prefix="mailres" />
+            </contents:html-template-content>
+        </mail>
+
+        <!-- MixedMultipartContent -->
+        <mail id="mixedContent_empty" charset="GBK">
+            <contents:mixed-content />
+        </mail>
+        <mail id="mixedContent" charset="GBK">
+            <contents:mixed-content>
+                <contents:text-template-content template="mail/mytemplate.vm" />
+                <contents:attachment-content resource="testfile.txt" fileName="我的文件.txt" />
+                <contents:attachment-content resource="java.gif" />
+            </contents:mixed-content>
+        </mail>
+
+        <!-- AlternativeMultipartContent -->
+        <mail id="alternativeContent_empty" charset="GBK">
+            <contents:alternative-content />
+        </mail>
+        <mail id="alternativeContent" charset="GBK">
+            <contents:alternative-content>
+                <contents:text-template-content template="mail/mytemplate.vm" />
+                <contents:html-template-content template="mail/complexhtml.vm">
+                    <contents:inline-resource id="image" prefix="mailres" />
+                </contents:html-template-content>
+            </contents:alternative-content>
+        </mail>
+
+        <!-- Outlook style with attachments -->
+        <mail id="outlookStyle_withAttachments" charset="GBK">
+            <contents:mixed-content>
+                <contents:alternative-content>
+                    <contents:text-template-content template="mail/mytemplate.vm" />
+                    <contents:html-template-content template="mail/complexhtml.vm">
+                        <contents:inline-resource id="image" prefix="mailres" />
+                    </contents:html-template-content>
+                </contents:alternative-content>
+                <contents:attachment-content resource="testfile.txt" fileName="我的文件.txt" />
+                <contents:attachment-content resource="java.gif" />
+            </contents:mixed-content>
+        </mail>
+
+    </mails>
+
+    <pull>
+        <pull-tools:constants id="myconst"
+            constantClass="com.alibaba.citrus.service.mail.MailConstant" />
+        <pull-tools:utils />
+    </pull>
+
+    <template>
+        <engines:velocity-engine templateEncoding="GBK" strictReference="false" />
+        <engines:freemarker-engine templateEncoding="GBK" />
+    </template>
+
+    <resource-loading>
+        <resource pattern="/">
+            <loaders:file-loader />
+        </resource>
+
+        <resource-alias pattern="/mailres" name="/" />
+        <resource-alias pattern="/asStream" name="/" />
+        <resource-filters pattern="/asStream">
+            <filters:filter
+                class="com.alibaba.citrus.service.mail.AbstractMailBuilderTests$NoURLFilter" />
+        </resource-filters>
+
+    </resource-loading>
+
+</beans:beans>

@@ -1,0 +1,2 @@
+services/module-loader/factories=http://www.alibaba.com/schema/services/module-loader/factories; defaultElement=factory; nsPrefix=ml-factories
+services/module-loader/adapters=http://www.alibaba.com/schema/services/module-loader/adapters; defaultElement=adapter; nsPrefix=ml-adapters

@@ -1,0 +1,2 @@
+my/services = http://www.alibaba.com/my/services, nsPrefix=svc
+my/plugins = http://www.alibaba.com/my/plugins

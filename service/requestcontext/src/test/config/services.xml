@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns="http://www.alibaba.com/schema/services/request-contexts"
+    xmlns:stores="http://www.alibaba.com/schema/services/request-contexts/session/stores"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/stores http://localhost:8080/schema/services-request-contexts-session-stores.xsd
+    ">
+
+    <!-- 测试prepare和commit的顺序 -->
+    <beans:bean id="baseFactory"
+        class="com.alibaba.citrus.service.requestcontext.RequestContextChainingServiceTests$MyRequestContextFactory"
+        abstract="true" />
+
+    <services:request-contexts />
+
+    <services:request-contexts id="empty" />
+
+    <services:request-contexts id="order" sort="false">
+        <request-context parent="baseFactory" p:index="0" />
+        <request-context parent="baseFactory" p:index="1" />
+        <request-context parent="baseFactory" p:index="2" />
+        <request-context parent="baseFactory" p:index="3" />
+        <request-context parent="baseFactory" p:index="4" />
+    </services:request-contexts>
+
+    <!-- 测试prepare和commit的顺序 -->
+    <services:request-contexts id="sort">
+        <request-context parent="baseFactory" p:index="-3" />
+        <request-context parent="baseFactory" p:index="-2" />
+        <request-context parent="baseFactory" p:index="-1" />
+        <request-context parent="baseFactory" p:index="-4" />
+        <request-context parent="baseFactory" p:index="0" />
+        <request-context parent="baseFactory" p:index="1" />
+        <request-context parent="baseFactory" p:index="2" />
+        <request-context parent="baseFactory" p:index="3" />
+        <request-context parent="baseFactory" p:index="4" />
+        <request-context parent="baseFactory" p:index="5" />
+    </services:request-contexts>
+
+    <services:request-contexts id="sort1">
+        <request-context parent="baseFactory" p:index="5" />
+        <request-context parent="baseFactory" p:index="4" />
+        <request-context parent="baseFactory" p:index="3" />
+        <request-context parent="baseFactory" p:index="2" />
+        <request-context parent="baseFactory" p:index="1" />
+        <request-context parent="baseFactory" p:index="0" />
+        <request-context parent="baseFactory" p:index="-4" />
+        <request-context parent="baseFactory" p:index="-1" />
+        <request-context parent="baseFactory" p:index="-2" />
+        <request-context parent="baseFactory" p:index="-3" />
+    </services:request-contexts>
+
+    <!-- 测试required features，延迟加载 -->
+    <services:request-contexts id="missingRequired" lazy-init="true">
+        <request-context parent="baseFactory">
+            <beans:property name="index" value="1" />
+        </request-context>
+    </services:request-contexts>
+
+    <!-- 测试全部request context，打乱顺序，然后排序 -->
+    <services:request-contexts id="all" threadContextInheritable="false">
+        <rundata />
+        <rewrite />
+        <parser />
+        <lazy-commit />
+        <set-locale />
+        <buffered />
+        <!-- 只配置session model，确保没有其它key被写入session。 -->
+        <session>
+            <stores>
+                <stores:store id="simple" ref="simple-session-store" />
+            </stores>
+            <store-mappings>
+                <match name="SESSION_MODEL" store="simple" />
+            </store-mappings>
+        </session>
+        <basic />
+    </services:request-contexts>
+
+    <stores:simple-memory-store id="simple-session-store" />
+
+</beans:beans>

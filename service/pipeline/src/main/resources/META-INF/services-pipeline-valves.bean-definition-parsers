@@ -1,0 +1,10 @@
+loop=com.alibaba.citrus.service.pipeline.impl.valve.LoopValve$DefinitionParser
+while=com.alibaba.citrus.service.pipeline.impl.valve.WhileLoopValve$DefinitionParser
+break=com.alibaba.citrus.service.pipeline.impl.valve.BreakValve$DefinitionParser
+break-if=com.alibaba.citrus.service.pipeline.impl.valve.BreakIfValve$DefinitionParser
+break-unless=com.alibaba.citrus.service.pipeline.impl.valve.BreakUnlessValve$DefinitionParser
+try-catch-finally=com.alibaba.citrus.service.pipeline.impl.valve.TryCatchFinallyValve$DefinitionParser
+if=com.alibaba.citrus.service.pipeline.impl.valve.IfValve$DefinitionParser
+choose=com.alibaba.citrus.service.pipeline.impl.valve.ChooseValve$DefinitionParser
+sub-pipeline=com.alibaba.citrus.service.pipeline.impl.valve.SubPipelineValve$DefinitionParser
+exit=com.alibaba.citrus.service.pipeline.impl.valve.ExitValve$DefinitionParser

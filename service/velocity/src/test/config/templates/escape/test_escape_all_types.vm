@@ -1,0 +1,11 @@
+#macro (object)
+${count}. $object
+#end
+
+#escape ("noescape") #object #end
+#escape ("java") #object #end
+#escape ("javascript") #object #end
+#escape ("html") #object #end
+#escape ("xml") #object #end
+#escape ("url") #object #end
+#escape ("sql") #object #end

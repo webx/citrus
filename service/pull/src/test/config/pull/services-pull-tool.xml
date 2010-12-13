@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns="http://www.alibaba.com/schema/services/pull/factories"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="
+        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+    ">
+
+    <services:pull>
+
+        <!-- singleton, no autowire -->
+        <bean-tool id="inner1"
+            class="com.alibaba.citrus.service.pull.AbstractPullServiceConfigTests$InnerBean"
+            scope="global" />
+
+        <!-- singleton, autowire -->
+        <bean-tool id="inner2"
+            class="com.alibaba.citrus.service.pull.AbstractPullServiceConfigTests$InnerBean"
+            scope="global" autowire="true" />
+
+        <!-- non-singleton, no autowire -->
+        <bean-tool id="inner3"
+            class="com.alibaba.citrus.service.pull.AbstractPullServiceConfigTests$InnerBean"
+            scope="request" />
+
+        <!-- non-singleton, autowire -->
+        <bean-tool id="inner4"
+            class="com.alibaba.citrus.service.pull.AbstractPullServiceConfigTests$InnerBean"
+            scope="request" autowire="true" />
+
+    </services:pull>
+
+    <services:request-contexts />
+
+</beans:beans>

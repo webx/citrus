@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title>${entryUrl}</title>
+    <meta http-equiv="Content-type" content="${contentTypeAndCharset}" />
+    <link href="${url:styles.css}" rel="stylesheet" type="text/css" />
+    <!--[if IE]>
+    <link href="${url:styles-ie.css}" rel="stylesheet" type="text/css" />
+    <![endif]--> 
+    <script src="${url:prototype.js}" type="text/javascript">
+    </script>
+    <script src="${url:schema-exporter.js}" type="text/javascript">
+    </script>
+    ${menuHead}
+  </head>
+  <body>
+    ${menu}
+    <div class="control-bar">
+    <span>
+      <input id="toggleXmlTemplate" type="checkbox"/>
+      <label for="toggleXmlTemplate">Show XML Template</label>
+    </span>
+    <span>
+      <input id="toggleTargetNamespace" type="checkbox"/>
+      <label for="toggleTargetNamespace">Show Schemas without Target Namespace</label>
+    </span>
+    
+    </div><div id="xml-template">
+    </div>
+    
+    <div class="entries">
+    <ul>
+      ## --------------------------
+      ## 递归生成生成目录结点
+      ## --------------------------
+      #entry[]
+      <li class="${entryClass}">
+        <img id="handle-${entryId}" src="${url:open.gif}" alt="Click to open/close branch." title="Click to open/close branch." />
+        <img src="${url:dir.gif}" alt="Directory Type" />
+
+        #link
+        <a href="${entryUrl}">${entryName}</a> /
+        #end
+
+        ## --------------------------
+        ## 子结点
+        ## --------------------------
+        #subEntries
+        <ul id="subdirs-${entryId}">
+          ${subEntryRecursive}
+        </ul>
+        #end ## of subEntries
+      </li>
+
+      ## --------------------------
+      ## 生成文件结点
+      ## --------------------------
+      #entry[]
+      <li class="${entryClass}">
+        <img src="${url:na.gif}" alt="${entryName}" />
+        
+        #checkbox
+        <input type="checkbox" name="${ns};${nsPrefix};${entryUrl}" />
+        #end
+
+        <img src="${url:file.gif}" alt="File Type"/>
+        <a href="${entryUrl}">${entryName}</a>
+      
+        #namespace[]
+        - <span class="code"><em>xmlns:${nsPrefix}=&quot;${ns}&quot;</em></span>
+        #namespace[]
+        - <span class="code"><em>no namespace</em></span>
+        #end ## of namespace
+
+        #description
+        - <span class="code">${desc}</span>
+        #end ## of description
+      </li>
+      #end ## of entry
+    </ul>
+    </div>
+
+    <p>
+      <a href="http://validator.w3.org/check?uri=referer">
+        <img src="http://www.w3.org/Icons/valid-xhtml11" alt="Valid XHTML 1.1" height="31"
+          width="88" />
+      </a>
+    </p>
+
+  </body>
+</html>

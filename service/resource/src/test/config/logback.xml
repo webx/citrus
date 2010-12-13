@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="GB18030"?>
+<configuration debug="false">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.out</target>
+        <encoding>GB18030</encoding>
+        <filter class="com.alibaba.citrus.logconfig.logback.LevelRangeFilter">
+            <levelMax>INFO</levelMax>
+        </filter>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{0} - %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.err</target>
+        <encoding>GB18030</encoding>
+        <filter class="com.alibaba.citrus.logconfig.logback.LevelRangeFilter">
+            <levelMin>WARN</levelMin>
+        </filter>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{0} - %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${destdir}/test.log</file>
+        <encoding>GB18030</encoding>
+        <append>false</append>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <appender name="FILE-INFO" class="ch.qos.logback.core.FileAppender">
+        <file>${destdir}/test-info.log</file>
+        <encoding>GB18030</encoding>
+        <append>false</append>
+        <filter class="com.alibaba.citrus.logconfig.logback.LevelRangeFilter">
+            <levelMin>INFO</levelMin>
+        </filter>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <appender name="FILE-ALIBABA" class="ch.qos.logback.core.FileAppender">
+        <file>${destdir}/test-alibaba.log</file>
+        <encoding>GB18030</encoding>
+        <append>false</append>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <logger name="org.apache">
+        <level value="WARN" />
+    </logger>
+
+    <logger name="org.springframework">
+        <level value="WARN" />
+    </logger>
+
+    <logger name="com.alibaba.citrus.springext.support.context">
+        <level value="WARN" />
+    </logger>
+
+    <logger name="com.alibaba">
+        <appender-ref ref="FILE-ALIBABA" />
+    </logger>
+
+    <root>
+        <level value="DEBUG" />
+        <appender-ref ref="STDERR" />
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+        <appender-ref ref="FILE-INFO" />
+    </root>
+</configuration>

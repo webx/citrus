@@ -1,0 +1,29 @@
+# noop validator
+custom-error                    = com.alibaba.citrus.service.form.impl.validation.NoopValidator$DefinitionParser
+
+# simple validators
+required-validator              = com.alibaba.citrus.service.form.impl.validation.RequiredValidator$DefinitionParser
+string-length-validator         = com.alibaba.citrus.service.form.impl.validation.StringLengthValidator$DefinitionParser
+string-byte-length-validator    = com.alibaba.citrus.service.form.impl.validation.StringByteLengthValidator$DefinitionParser
+number-validator                = com.alibaba.citrus.service.form.impl.validation.NumberValidator$DefinitionParser
+number-compare-validator        = com.alibaba.citrus.service.form.impl.validation.NumberCompareValidator$DefinitionParser
+string-compare-validator        = com.alibaba.citrus.service.form.impl.validation.StringCompareValidator$DefinitionParser
+uploaded-file-validator         = com.alibaba.citrus.service.form.impl.validation.UploadedFileValidator$DefinitionParser
+date-validator                  = com.alibaba.citrus.service.form.impl.validation.DateValidator$DefinitionParser
+regexp-validator                = com.alibaba.citrus.service.form.impl.validation.RegexpValidator$DefinitionParser
+mail-address-validator          = com.alibaba.citrus.service.form.impl.validation.MailAddressValidator$DefinitionParser
+multi-values-count-validator    = com.alibaba.citrus.service.form.impl.validation.MultiValuesCountValidator$DefinitionParser
+
+# composite validators
+all-of                          = com.alibaba.citrus.service.form.impl.validation.composite.AllOfValidator$DefinitionParser
+any-of                          = com.alibaba.citrus.service.form.impl.validation.composite.AnyOfValidator$DefinitionParser
+none-of                         = com.alibaba.citrus.service.form.impl.validation.composite.NoneOfValidator$DefinitionParser
+
+# multi-values validators
+all-of-values                   = com.alibaba.citrus.service.form.impl.validation.composite.AllOfValuesValidator$DefinitionParser
+any-of-values                   = com.alibaba.citrus.service.form.impl.validation.composite.AnyOfValuesValidator$DefinitionParser
+none-of-values                  = com.alibaba.citrus.service.form.impl.validation.composite.NoneOfValuesValidator$DefinitionParser
+
+# conditional validators
+if                              = com.alibaba.citrus.service.form.impl.validation.composite.IfValidator$DefinitionParser
+choose                          = com.alibaba.citrus.service.form.impl.validation.composite.ChooseValidator$DefinitionParser

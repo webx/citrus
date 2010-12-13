@@ -1,0 +1,7 @@
+li.no-target-namespace {
+    filter: alpha(opacity=50);
+}
+
+li.no-target-namespace li.no-target-namespace {
+    filter: alpha(opacity=100);
+}

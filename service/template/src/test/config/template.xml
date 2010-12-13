@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="
+               http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+               http://www.alibaba.com/schema/services/template/engines http://localhost:8080/schema/services-template-engines.xsd
+               http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+             ">
+
+    <services:template id="empty" />
+
+    <services:template id="engineNotDefined" lazy-init="true">
+        <engines:template-engine id="myEngine"
+            class="com.alibaba.citrus.service.template.impl.SimpleEngine" />
+
+        <services:template-mapping extension="test" engine="notDefinied" />
+    </services:template>
+
+    <services:template id="exts">
+        <engines:template-engine id="myEngine1"
+            class="com.alibaba.citrus.service.template.impl.SimpleEngine" p:extensions=" vm " />
+
+        <engines:template-engine id="myEngine2"
+            class="com.alibaba.citrus.service.template.impl.SimpleEngine"
+            p:extensions=" .jsp, jhtml " />
+
+        <services:template-mapping extension="vm1" engine="myEngine1" />
+    </services:template>
+
+    <services:template id="defaultExt" defaultExtension=".vm">
+        <engines:template-engine class="com.alibaba.citrus.service.template.impl.SimpleEngine"
+            p:extensions=" vm " p:basedir="dir1" />
+
+        <engines:template-engine class="com.alibaba.citrus.service.template.impl.SimpleEngine"
+            p:extensions=" .jsp, jhtml " p:basedir="dir2" />
+    </services:template>
+
+    <services:template id="searchExts" searchExtensions="true">
+        <engines:template-engine class="com.alibaba.citrus.service.template.impl.SimpleEngine"
+            p:extensions=" vm " p:basedir="dir1" />
+
+        <engines:template-engine class="com.alibaba.citrus.service.template.impl.SimpleEngine"
+            p:extensions=" .jsp, jhtml " p:basedir="dir2" />
+    </services:template>
+
+    <services:template id="searchLocales" searchLocalizedTemplates="true">
+        <engines:template-engine class="com.alibaba.citrus.service.template.impl.SimpleEngine"
+            p:extensions=" vm " p:basedir="dir1" />
+
+        <engines:template-engine class="com.alibaba.citrus.service.template.impl.SimpleEngine"
+            p:extensions=" .jsp, jhtml " p:basedir="dir2" />
+    </services:template>
+
+    <services:template defaultExtension="vm" searchExtensions="true" searchLocalizedTemplates="true">
+        <engines:template-engine class="com.alibaba.citrus.service.template.impl.SimpleEngine"
+            p:extensions=" vm " p:basedir="dir1" />
+
+        <engines:template-engine class="com.alibaba.citrus.service.template.impl.SimpleEngine"
+            p:extensions=" .jsp, jhtml " p:basedir="dir2" />
+    </services:template>
+
+    <services:property-placeholder />
+
+    <services:simple-configuration>
+        <services:productionMode>${productionMode:false}</services:productionMode>
+    </services:simple-configuration>
+
+</beans:beans>

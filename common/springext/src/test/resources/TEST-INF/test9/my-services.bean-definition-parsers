@@ -1,0 +1,3 @@
+service1=com.alibaba.citrus.springext.contrib.MyBeanDefinitionParser
+service2=com.alibaba.citrus.springext.contrib.MyBeanDefinitionParser
+service3=com.alibaba.citrus.springext.contrib.MyBeanDefinitionParser

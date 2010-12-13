@@ -1,0 +1,1 @@
+xslt-filter=com.alibaba.citrus.service.resource.filter.impl.XsltResourceFilterDefinitionParser

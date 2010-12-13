@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:include
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/services/module-loader/factories/factories-base.xsd" />
+
+    <xsd:element name="script-modules" type="ScriptModuleFactoryType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    查找scripts，并用它来生成modules。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="ScriptModuleFactoryType">
+        <xsd:complexContent>
+            <xsd:extension base="beans:identifiedType">
+                <xsd:choice minOccurs="1" maxOccurs="unbounded">
+                    <xsd:element name="search-folders" type="ScriptModuleFactorySearchFoldersType">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    搜索script文件夹。
+    例如：搜索com/alibaba/app1/module/*，type="$1"。
+    这样，将找到com/alibaba/app1/module/action/my/Action.groovy脚本，其type="action"，name="my.Action"。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="search-files" type="ScriptModuleFactorySearchFilesType">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    搜索script文件。
+    例如：搜索com/alibaba/*/module/*/**/*.groovy，type="$2"，name="$1.$3"。
+    这样，将找到com/alibaba/app1/module/action/my/Action.groovy脚本，其type="action"，name="app1.my.Action"。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:any namespace="http://www.springframework.org/schema/lang" />
+                </xsd:choice>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="ScriptModuleFactorySearchFoldersType">
+        <xsd:attribute name="type" type="xsd:string" use="required" />
+        <xsd:attribute name="language" type="xsd:string" />
+        <xsd:attribute name="folders" type="xsd:string" use="required" />
+        <xsd:attributeGroup ref="moduleBeanDefaults" />
+    </xsd:complexType>
+
+    <xsd:complexType name="ScriptModuleFactorySearchFilesType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="type" type="xsd:string" use="required" />
+                <xsd:attribute name="name" type="xsd:string" use="required" />
+                <xsd:attribute name="language" type="xsd:string" />
+                <xsd:attribute name="files" type="xsd:string" use="required" />
+                <xsd:attributeGroup ref="moduleBeanDefaults" />
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+</xsd:schema>

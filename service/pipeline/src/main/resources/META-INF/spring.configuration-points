@@ -1,0 +1,2 @@
+services/pipeline/valves=http://www.alibaba.com/schema/services/pipeline/valves; defaultElement=valve; nsPrefix=pl-valves
+services/pipeline/conditions=http://www.alibaba.com/schema/services/pipeline/conditions; defaultElement=condition; nsPrefix=pl-conditions

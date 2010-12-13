@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.alibaba.com/schema/test" elementFormDefault="qualified">
+
+    <xsd:include schemaLocation="schema/x.xsd" />
+    <xsd:include schemaLocation="schema/y.xsd" />
+    <xsd:include schemaLocation="schema/z.xsd" />
+
+    <xsd:element name="test" type="xsd:string" />
+
+</xsd:schema>

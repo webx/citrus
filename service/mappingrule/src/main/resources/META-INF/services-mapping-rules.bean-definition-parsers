@@ -1,0 +1,5 @@
+direct-module-rule=com.alibaba.citrus.service.mappingrule.impl.rule.DirectModuleMappingRule$DefinitionParser
+direct-template-rule=com.alibaba.citrus.service.mappingrule.impl.rule.DirectTemplateMappingRule$DefinitionParser
+extension-rule=com.alibaba.citrus.service.mappingrule.impl.rule.ExtensionMappingRule$DefinitionParser
+fallback-module-rule=com.alibaba.citrus.service.mappingrule.impl.rule.FallbackModuleMappingRule$DefinitionParser
+fallback-template-rule=com.alibaba.citrus.service.mappingrule.impl.rule.FallbackTemplateMappingRule$DefinitionParser

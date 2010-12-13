@@ -1,0 +1,78 @@
+/* 一级以上菜单 */
+.webx-menu ul {
+    margin:0 0 5px 0;
+    padding:0;
+    background: #ffffff;
+    border:solid 1px #AAAAAA;
+    width:100%;
+    list-style:none;
+    float:left;
+    clear:both; /* 防止menu之下的内容侵占menu所在行 */    
+}
+
+.webx-menu li {
+    position:relative;
+    list-style:none;
+    padding:0 20px 0 10px;
+    float:left;
+    white-space:nowrap;
+}
+
+.webx-menu li:hover {
+    background:#4792E6;
+    border-color:#665500;
+    color:white;
+}
+
+.webx-menu li.webx-subMenu {
+    background:#ffffff url(images/arrow_v.gif) no-repeat right center;
+}
+
+.webx-menu li.webx-subMenu:hover {
+    background:#4792E6 url(images/arrow_v_active.gif) no-repeat right center;
+}
+
+.webx-menu a:link, .webx-menu a:visited, .webx-menu a:hover, .webx-menu a:active {
+    font-weight:normal;
+    color:inherit;
+    border:none;
+}
+
+.webx-menu img {
+    float:left; /* 使图片不会使li上下不齐 */
+    padding:0 5px 0 0;
+}
+
+/* 二级以上菜单 */
+.webx-menu ul ul {
+    display:none;
+    position: absolute;
+    left:-1px;
+    top:98%;
+    width:auto;
+}
+
+.webx-menu ul ul li {
+    float:none;
+    color:black;
+}
+
+.webx-menu ul ul li.webx-subMenu {
+    background:#ffffff url(images/arrow_h.gif) no-repeat right center;
+}
+
+.webx-menu ul ul li.webx-subMenu:hover {
+    background:#4792E6 url(images/arrow_h_active.gif) no-repeat right center;
+}
+
+/* 自动弹出二级以上菜单 */
+.webx-menu li:hover>ul {
+    display:block
+}
+
+/* 三级以上菜单 */
+.webx-menu ul ul ul {
+    position: absolute;
+    left:98%;
+    top:-2px;
+}

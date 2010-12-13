@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="direct-template-rule" type="DirectTemplateRuleType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    最简单模板映射规则,不查询templateService，只拼装路径。
+    在模板名前加上template prefix（如果有的话）。
+    如果模板名未指定后缀，则也不加上后缀。
+    该rule默认不cache结果。
+    例如：将模板名："about/directions/driving.vm"映射到layout(template prefix)： "layout/about/directions/driving.vm"。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="DirectTemplateRuleType">
+        <xsd:attribute name="id" type="xsd:string" use="required" />
+        <xsd:attribute name="templatePrefix" type="xsd:string" use="required" />
+        <xsd:attribute name="cacheEnabled" type="springext:booleanOrPlaceholder" />
+    </xsd:complexType>
+
+</xsd:schema>

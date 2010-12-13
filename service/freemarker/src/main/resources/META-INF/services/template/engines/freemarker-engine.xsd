@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:element name="freemarker-engine" type="FreeMarkerTemplateEngineType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    将FreeMarker作为模板引擎。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="FreeMarkerTemplateEngineType">
+        <xsd:complexContent>
+            <xsd:extension base="beans:identifiedType">
+                <xsd:all>
+                    <xsd:element name="plugins" type="FreeMarkerPluginsType" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    FreeMarker扩展。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="advanced-properties" type="FreeMarkerPropertiesType"
+                        minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    FreeMarker高级设置，参见freemarker文档：
+      （http://freemarker.sourceforge.net/docs/pgui_config.html）
+    和API文档：freemarker.template.Configuration。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:all>
+                <xsd:attribute name="path" type="xsd:string" default="/templates" />
+                <xsd:attribute name="templateEncoding" type="xsd:string" default="UTF-8" />
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="FreeMarkerPluginsType">
+        <xsd:sequence>
+            <xsd:any
+                namespace="http://www.alibaba.com/schema/services/template/engines/freemarker/plugins"
+                minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="FreeMarkerPropertiesType">
+        <xsd:sequence>
+            <xsd:element name="property" minOccurs="0" maxOccurs="unbounded">
+                <xsd:complexType>
+                    <xsd:attribute name="name" type="xsd:string" use="required" />
+                    <xsd:attribute name="value" type="xsd:string" use="required" />
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>

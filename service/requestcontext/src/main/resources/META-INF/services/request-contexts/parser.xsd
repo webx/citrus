@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="parser" type="ParserRequestContextType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    自动解析request parameters和cookie parameters，并透明地处理upload请求。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="ParserRequestContextType">
+        <xsd:complexContent>
+            <xsd:extension base="beans:identifiedType">
+                <xsd:sequence>
+                    <xsd:element name="property-editor-registrar"
+                        type="springext:referenceableBeanType" minOccurs="0" maxOccurs="unbounded">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    代表一个property editor registrar，可用来自定义property或parameter类型转换的方法。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="filters" type="ParserRequestContextFiltersType" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    代表一组过滤器，可以改变或拒绝用户提交的数据。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="converterQuiet" type="springext:booleanOrPlaceholder"
+                    default="true">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    类型转换出错时，是否不报错，而是返回默认值。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="caseFolding" default="lower_with_underscores">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    对parameters和cookies的名称进行大小写转换方式。默认为lower_with_underscores。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                            <xsd:enumeration value="none" />
+                            <xsd:enumeration value="lower" />
+                            <xsd:enumeration value="lower_with_underscores" />
+                            <xsd:enumeration value="upper" />
+                            <xsd:enumeration value="upper_with_underscores" />
+                        </xsd:restriction>
+                    </xsd:simpleType>
+                </xsd:attribute>
+
+                <xsd:attribute name="autoUpload" type="springext:booleanOrPlaceholder"
+                    default="true">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    是否自动解析Upload请求（enctype="multipart/form-data"）。默认为true。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+
+                <xsd:attribute name="unescapeParameters" type="springext:booleanOrPlaceholder"
+                    default="true">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    是否对参数进行HTML entities解码。默认为true。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+
+                <xsd:attribute name="htmlFieldSuffix" type="xsd:string" default=".~html">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    设置代表HTML字段的后缀。默认为“.~html”。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+
+                <xsd:attribute name="useServletEngineParser" type="springext:booleanOrPlaceholder"
+                    default="false">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    是否使用servlet引擎的parser，默认为false。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+
+                <xsd:attribute name="useBodyEncodingForURI" type="springext:booleanOrPlaceholder"
+                    default="true">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    以request.setCharacterEncoding(charset)所设置的编码来解码query。
+    此参数只有当useServletEngineParser=false时才有效。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+
+                <xsd:attribute name="URIEncoding" type="xsd:string" default="UTF-8">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    当useServletEngineParser==false并且useBodyEncodingForURI=false时，
+    用该编码来解释GET请求的参数。默认为utf-8。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+
+                <xsd:attribute name="trimming" type="springext:booleanOrPlaceholder" default="true">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    是否对输入参数进行trimming，除去两端空白。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+
+                <xsd:attribute name="uploadServiceRef" type="xsd:string">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[
+    用来解析upload请求的UploadService的引用。
+                        ]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+
+    </xsd:complexType>
+
+    <xsd:complexType name="ParserRequestContextFiltersType">
+        <xsd:sequence>
+            <xsd:any
+                namespace="http://www.alibaba.com/schema/services/request-contexts/parser/filters"
+                minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>

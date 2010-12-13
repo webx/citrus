@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="upload" type="UploadServiceType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    用来处理 enctype="multipart/form-data" 格式的HTTP POST请求，并将它们转换成form字段或文件。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="UploadServiceType">
+        <xsd:attribute name="repository" type="xsd:string">
+            <xsd:annotation>
+                <xsd:documentation><![CDATA[
+    暂存上传文件的目录。
+                ]]></xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+
+        <xsd:attribute name="sizeMax" type="springext:humanReadableBytesOrPlaceholder" default="-1">
+            <xsd:annotation>
+                <xsd:documentation><![CDATA[
+    HTTP请求的最大尺寸（字节，支持K/M/G），超过此尺寸的请求将被抛弃。值-1表示没有限制。
+                ]]></xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+
+        <xsd:attribute name="fileSizeMax" type="springext:humanReadableBytesOrPlaceholder"
+            default="-1">
+            <xsd:annotation>
+                <xsd:documentation><![CDATA[
+    单个文件允许的最大尺寸（字节，支持K/M/G），超过此尺寸的请求将被抛弃。值-1表示没有限制。
+                ]]></xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+
+        <xsd:attribute name="sizeThreshold" type="springext:humanReadableBytesOrPlaceholder"
+            default="10K">
+            <xsd:annotation>
+                <xsd:documentation><![CDATA[
+    将文件放在内存中的阈值（字节，支持K/M/G），小于此值的文件被保存在内存中。
+                ]]></xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+
+        <xsd:attribute name="keepFormFieldInMemory" type="springext:booleanOrPlaceholder">
+            <xsd:annotation>
+                <xsd:documentation><![CDATA[
+    是否将普通的form field保持在内存里？默认为false，但当sizeThreshold为0时，默认为true。
+                ]]></xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+
+        <xsd:attribute name="fileNameKey" type="xsd:string" default="filename">
+            <xsd:annotation>
+                <xsd:documentation><![CDATA[
+   标识文件名称的关键字，多个之间以逗号隔开，缺省为filename，但为了兼容Flash上传，设置为filename,fname。
+                ]]></xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+
+        <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
+    </xsd:complexType>
+
+</xsd:schema>

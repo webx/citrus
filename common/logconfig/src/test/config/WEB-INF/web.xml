@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://java.sun.com/xml/ns/j2ee  http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd
+    ">
+
+    <context-param>
+        <param-name>loggingLevel</param-name>
+        <param-value>ERROR</param-value>
+    </context-param>
+    <context-param>
+        <param-name>loggingCharset</param-name>
+        <param-value>UTF-8</param-value>
+    </context-param>
+    <context-param>
+        <param-name>logXXX</param-name>
+        <param-value>111</param-value>
+    </context-param>
+    <context-param>
+        <param-name>logYYY</param-name>
+        <param-value>222</param-value>
+    </context-param>
+    <context-param>
+        <param-name>other</param-name>
+        <param-value>333</param-value>
+    </context-param>
+
+    <servlet>
+        <servlet-name>servlet</servlet-name>
+        <servlet-class>com.alibaba.citrus.logconfig.AbstractLogConfiguratorListenerTests$MyServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>servlet</servlet-name>
+        <url-pattern>/servlet</url-pattern>
+    </servlet-mapping>
+
+</web-app>

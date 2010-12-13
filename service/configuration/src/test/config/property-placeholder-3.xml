@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:p="http://www.springframework.org/schema/p" xmlns="http://www.alibaba.com/schema/services"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util http://localhost:8080/schema/www.springframework.org/schema/util/spring-util.xsd 
+        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+    ">
+
+    <property-placeholder properties-ref="properties" />
+
+    <util:properties id="properties">
+        <beans:prop key="x">aaa</beans:prop>
+        <beans:prop key="y">bbb</beans:prop>
+    </util:properties>
+
+    <util:list id="list">
+        <beans:value>${x}</beans:value>
+        <beans:value>${y}</beans:value>
+        <beans:value>${z:defaultValue}</beans:value>
+    </util:list>
+
+</beans:beans>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="GB18030"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>citrus-parent</artifactId>
+        <groupId>com.alibaba.citrus</groupId>
+        <version>3.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>citrus-common-codegen</artifactId>
+    <name>Bytecode Generation Tools</name>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>citrus-common-util</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>citrus-common-asm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>citrus-test-util</artifactId>
+        </dependency>
+    </dependencies>
+</project>

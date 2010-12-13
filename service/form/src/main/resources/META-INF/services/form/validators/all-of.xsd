@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:base="http://www.alibaba.com/schema/services/form/validators/base"
+    elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:element name="all-of" type="AllOfValidatorType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    只有当下属的所有validator均通过验证时，此validator才通过验证。
+    当验证不通过时，message为第一个未通过验证的子validator的message。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="AllOfValidatorType">
+        <xsd:sequence>
+            <xsd:any namespace="http://www.alibaba.com/schema/services/form/validators"
+                minOccurs="1" maxOccurs="unbounded" />
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:string" />
+    </xsd:complexType>
+
+</xsd:schema>

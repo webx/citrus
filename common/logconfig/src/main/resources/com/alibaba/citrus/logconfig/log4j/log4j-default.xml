@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+        <param name="target" value="System.out" />
+        <param name="encoding" value="${loggingCharset}" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%5p %c{2} - %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMax" value="INFO" />
+        </filter>
+    </appender>
+
+    <appender name="STDERR" class="org.apache.log4j.ConsoleAppender">
+        <param name="target" value="System.err" />
+        <param name="encoding" value="${loggingCharset}" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%5p %c{2} - %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="WARN" />
+        </filter>
+    </appender>
+
+    <root>
+        <level value="${loggingLevel}" />
+        <appender-ref ref="STDERR" />
+        <appender-ref ref="STDOUT" />
+    </root>
+</log4j:configuration>

@@ -1,0 +1,17 @@
+setLoggingContext=com.alibaba.citrus.turbine.pipeline.valve.SetLoggingContextValve$DefinitionParser
+prepareForTurbine=com.alibaba.citrus.turbine.pipeline.valve.PrepareForTurbineValve$DefinitionParser
+
+handleException=com.alibaba.citrus.turbine.pipeline.valve.HandleExceptionValve$DefinitionParser
+requestHandler=com.alibaba.citrus.turbine.pipeline.valve.RequestHandlerValve$DefinitonParser
+
+analyzeURL=com.alibaba.citrus.turbine.pipeline.valve.AnalyzeURLValve$DefinitionParser
+checkCsrfToken=com.alibaba.citrus.turbine.pipeline.valve.CheckCsrfTokenValve$DefinitionParser
+getResource=com.alibaba.citrus.turbine.pipeline.valve.GetResourceValve$DefinitionParser
+
+performAction=com.alibaba.citrus.turbine.pipeline.valve.PerformActionValve$DefinitionParser
+performTemplateScreen=com.alibaba.citrus.turbine.pipeline.valve.PerformTemplateScreenValve$DefinitionParser
+performScreen=com.alibaba.citrus.turbine.pipeline.valve.PerformScreenValve$DefinitionParser
+renderTemplate=com.alibaba.citrus.turbine.pipeline.valve.RenderTemplateValve$DefinitionParser
+exportControl=com.alibaba.citrus.turbine.pipeline.valve.ExportControlValve$DefinitionParser
+
+breakUnlessTargetRedirected=com.alibaba.citrus.turbine.pipeline.valve.BreakUnlessTargetRedirectedValve$DefinitionParser

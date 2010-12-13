@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xsd:include
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/services/uris/uris-base.xsd" />
+
+    <xsd:element name="servlet-uri" type="ServletURIBrokerType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    创建一个ServletURIBroker对象。
+    一个Servlet风格的URI包括如下几个部分：
+
+ URI         = SERVER_INFO + PATH + "?" + QUERY_DATA + "#" + REFERENCE
+ SERVER_INFO = scheme://loginUser:loginPassword@serverName:serverPort
+ PATH        = /contextPath/servletPath/PATH_INFO
+ PATH_INFO   = /pathInfo
+ QUERY_DATA  = queryKey1=value1&queryKey2=value2
+ REFERENCE   = reference
+ 
+    例如：
+
+ http://user:pass@myserver.com:8080/mycontext/myservlet/view?id=1#top
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="ServletURIBrokerType">
+        <xsd:sequence>
+            <xsd:group ref="URIBrokerServerInfo" />
+            <xsd:element name="contextPath" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    Web应用程序context路径。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="servletPath" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    Servlet路径。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="pathInfo" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    URL的pathInfo部分。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:group ref="URIBrokerQueryInfo" />
+        </xsd:sequence>
+        <xsd:attributeGroup ref="URIBrokerAttributes" />
+    </xsd:complexType>
+
+</xsd:schema>

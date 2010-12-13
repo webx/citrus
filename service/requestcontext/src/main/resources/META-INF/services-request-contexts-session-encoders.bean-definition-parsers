@@ -1,0 +1,1 @@
+serialization-encoder=com.alibaba.citrus.service.requestcontext.session.encoder.impl.SerializationEncoder$DefinitionParser

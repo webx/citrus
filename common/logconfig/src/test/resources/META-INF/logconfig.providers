@@ -1,0 +1,5 @@
+abstract=com.alibaba.citrus.logconfig.spi.AbstractLogConfigurator
+cnf=NotExistClass
+string=java.lang.String
+nodefault=com.alibaba.citrus.logconfig.spi.MyLogConfigurator
+ok=com.alibaba.citrus.logconfig.spi.MyLogConfigurator

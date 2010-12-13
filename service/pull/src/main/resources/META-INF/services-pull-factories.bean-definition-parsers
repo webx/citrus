@@ -1,0 +1,4 @@
+bean-tool=com.alibaba.citrus.service.pull.support.BeanTool$DefinitionParser
+constants=com.alibaba.citrus.service.pull.support.ConstantToolSet$DefinitionParser
+utils=com.alibaba.citrus.service.pull.support.UtilToolSet$DefinitionParser
+mixin=com.alibaba.citrus.service.pull.support.MixinTool$DefinitionParser

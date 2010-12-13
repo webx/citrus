@@ -1,0 +1,6 @@
+text-content=com.alibaba.citrus.service.mail.impl.content.TextContentDefinitionParser
+text-template-content=com.alibaba.citrus.service.mail.impl.content.TextTemplateContentDefinitionParser
+html-template-content=com.alibaba.citrus.service.mail.impl.content.HTMLTemplateContentDefinitionParser
+attachment-content=com.alibaba.citrus.service.mail.impl.content.AttachmentContentDefinitionParser
+mixed-content=com.alibaba.citrus.service.mail.impl.content.MixedContentDefinitionParser
+alternative-content=com.alibaba.citrus.service.mail.impl.content.AlternativeContentDefinitionParser

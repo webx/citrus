@@ -1,0 +1,3 @@
+not-exist-class=com.alibaba.NotExistClass
+wrong-class=java.lang.String
+no-class=

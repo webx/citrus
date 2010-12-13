@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:include
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/services/uris/uris-base.xsd" />
+
+    <xsd:element name="turbine-uri" type="TurbineURIBrokerType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    创建一个Turbine风格的URI。
+    一个Turbine风格的URI包括如下几个部分：
+
+ URI         = SERVER_INFO + PATH_INFO + "?" + QUERY_DATA + "#" + REFERENCE
+ SERVER_INFO = scheme://loginUser:loginPassword@serverName:serverPort
+ PATH_INFO   = /contextPath/servletPath/target/path/path
+ QUERY_DATA  = action=actionName&queryKey1=value1&queryKey2=value2
+ REFERENCE   = reference
+ 
+    例如：
+
+ http://user:pass@myserver.com:8080/mycontext/myservlet/myTarget.vm?action=myAction
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="TurbineURIBrokerType">
+        <xsd:sequence>
+            <xsd:group ref="URIBrokerServerInfo" />
+            <xsd:element name="contextPath" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    Web应用程序context路径。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="servletPath" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    Servlet路径。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="componentPath" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    Component路径。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="target" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    target路径。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="action" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    action名称。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:group ref="URIBrokerQueryInfo" />
+        </xsd:sequence>
+        <xsd:attribute name="mappingRuleServiceRef" type="xsd:string" />
+        <xsd:attribute name="targetMappingRule" type="xsd:string" />
+        <xsd:attribute name="actionParam" type="xsd:string" />
+        <xsd:attribute name="convertTargetCase" type="springext:booleanOrPlaceholder" />
+        <xsd:attributeGroup ref="URIBrokerAttributes" />
+    </xsd:complexType>
+
+</xsd:schema>

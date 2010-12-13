@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.alibaba.com/schema/services"
+    xmlns:validators="http://www.alibaba.com/schema/services/form/validators"
+    xmlns:rc="http://www.alibaba.com/schema/services/request-contexts"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/form/validators http://localhost:8080/schema/services-form-validators.xsd
+        http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd ">
+
+    <form id="emptyFormConfig" />
+
+    <form id="nonEmptyFormConfig" converterQuiet="false" postOnlyByDefault="false">
+        <property-editor-registrar
+            class="com.alibaba.citrus.service.form.impl.MyPropertyEditorRegistrar" />
+        <property-editor-registrar
+            class="com.alibaba.citrus.service.form.impl.MyPropertyEditorRegistrar" />
+
+        <group name="g1" />
+        <group name="g2" />
+    </form>
+
+    <form id="form1">
+        <group name="emptyGroupConfig" />
+
+        <group name="nonEmptyGroupConfig" postOnly="true" trimmingByDefault="false">
+            <field name="f1" />
+            <field name="f2" />
+        </group>
+    </form>
+
+    <form id="form2">
+        <group name="group1">
+            <field name="emptyFieldConfig" />
+
+            <field name="nonEmptyFieldConfig" trimming="false" displayName="非空域"
+                defaultValue=" a , b , c " propertyName="propertyName">
+                <validators:validator
+                    class="com.alibaba.citrus.service.form.impl.validation.MyValidator"
+                    p:success="true" p:message="message" />
+                <validators:validator
+                    class="com.alibaba.citrus.service.form.impl.validation.MyValidator"
+                    p:success="false" p:message="message" />
+            </field>
+        </group>
+    </form>
+
+    <form id="form3">
+        <group name="group1">
+            <field name="field1" />
+            <field name="field2">
+                <validators:validator
+                    class="com.alibaba.citrus.service.form.impl.validation.MyValidator"
+                    p:success="true" p:message="message" />
+            </field>
+        </group>
+        <group name="group2" extends="group1">
+            <field name="field2">
+                <validators:validator
+                    class="com.alibaba.citrus.service.form.impl.validation.MyValidator"
+                    p:success="false" p:message="message" />
+            </field>
+        </group>
+        <group name="group3">
+            <import group="group1" />
+        </group>
+    </form>
+
+    <request-contexts>
+        <rc:parser />
+    </request-contexts>
+
+</beans:beans>

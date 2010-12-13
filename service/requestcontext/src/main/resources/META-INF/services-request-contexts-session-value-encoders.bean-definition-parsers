@@ -1,0 +1,2 @@
+simple-value-encoder=com.alibaba.citrus.service.requestcontext.session.valueencoder.impl.SimpleValueEncoder$DefinitionParser
+mapped-values-encoder=com.alibaba.citrus.service.requestcontext.session.valueencoder.impl.MappedValuesEncoder$DefinitionParser

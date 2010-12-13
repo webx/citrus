@@ -1,0 +1,7 @@
+/aa/cc/ = com.alibaba.citrus.webx.handler.Handler1
+/aa/bb//cc = com.alibaba.citrus.webx.handler.Handler1
+/cc=
+=com.alibaba.citrus.webx.handler.Handler1
+error=com.alibaba.citrus.webx.handler.Handler1
+abstract= com.alibaba.citrus.webx.handler.Handler2
+wrongtype=com.alibaba.citrus.webx.handler.Handler3

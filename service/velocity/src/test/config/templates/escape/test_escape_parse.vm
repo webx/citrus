@@ -1,0 +1,8 @@
+#macro (object)
+${count}. $object
+#end
+
+#escape ("html")
+#object
+#parse ("escape/test_escape_parse_sub.vm")
+#end

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns:pull-tools="http://www.alibaba.com/schema/services/pull/factories"
+    xmlns:mapping-rules="http://www.alibaba.com/schema/services/mapping-rules"
+    xmlns:adapters="http://www.alibaba.com/schema/services/module-loader/adapters"
+    xmlns:factories="http://www.alibaba.com/schema/services/module-loader/factories"
+    xmlns:conditions="http://www.alibaba.com/schema/services/pipeline/conditions"
+    xmlns:valves="http://www.alibaba.com/schema/services/pipeline/valves"
+    xmlns:request-contexts="http://www.alibaba.com/schema/services/request-contexts"
+    xmlns:encoders="http://www.alibaba.com/schema/services/request-contexts/session/encoders"
+    xmlns:idgens="http://www.alibaba.com/schema/services/request-contexts/session/idgens"
+    xmlns:stores="http://www.alibaba.com/schema/services/request-contexts/session/stores"
+    xmlns:filters="http://www.alibaba.com/schema/services/resource-loading/filters"
+    xmlns:loaders="http://www.alibaba.com/schema/services/resource-loading/loaders"
+    xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
+    xmlns:uris="http://www.alibaba.com/schema/services/uris"
+    xmlns:handlers="http://www.alibaba.com/schema/services/uris/handlers"
+    xmlns:base="http://www.alibaba.com/schema/springext/base"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="
+       http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+       http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
+       http://www.alibaba.com/schema/services/mapping-rules http://localhost:8080/schema/services-mapping-rules.xsd
+       http://www.alibaba.com/schema/services/module-loader/adapters http://localhost:8080/schema/services-module-loader-adapters.xsd
+       http://www.alibaba.com/schema/services/module-loader/factories http://localhost:8080/schema/services-module-loader-factories.xsd
+       http://www.alibaba.com/schema/services/pipeline/conditions http://localhost:8080/schema/services-pipeline-conditions.xsd
+       http://www.alibaba.com/schema/services/pipeline/valves http://localhost:8080/schema/services-pipeline-valves.xsd
+       http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
+       http://www.alibaba.com/schema/services/request-contexts/session/encoders http://localhost:8080/schema/services-request-contexts-session-encoders.xsd
+       http://www.alibaba.com/schema/services/request-contexts/session/idgens http://localhost:8080/schema/services-request-contexts-session-idgens.xsd
+       http://www.alibaba.com/schema/services/request-contexts/session/stores http://localhost:8080/schema/services-request-contexts-session-stores.xsd
+       http://www.alibaba.com/schema/services/resource-loading/filters http://localhost:8080/schema/services-resource-loading-filters.xsd
+       http://www.alibaba.com/schema/services/resource-loading/loaders http://localhost:8080/schema/services-resource-loading-loaders.xsd
+       http://www.alibaba.com/schema/services/template/engines http://localhost:8080/schema/services-template-engines.xsd
+       http://www.alibaba.com/schema/services/uris http://localhost:8080/schema/services-uris.xsd
+       http://www.alibaba.com/schema/services/uris/handlers http://localhost:8080/schema/services-uris-handlers.xsd
+       http://www.alibaba.com/schema/springext/base http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd
+       http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+    ">
+
+    <services:property-placeholder />
+
+    <services:webx-configuration>
+        <services:productionMode>${productionMode:false}</services:productionMode>
+    </services:webx-configuration>
+
+    <services:request-contexts id="requestContexts">
+        <request-contexts:rewrite />
+        <request-contexts:parser useServletEngineParser="true" />
+        <request-contexts:lazy-commit />
+        <request-contexts:set-locale />
+        <request-contexts:buffered />
+        <request-contexts:session>
+            <request-contexts:stores>
+                <stores:simple-memory-store id="simple" />
+            </request-contexts:stores>
+            <request-contexts:store-mappings>
+                <request-contexts:match name="*" store="simple" />
+            </request-contexts:store-mappings>
+        </request-contexts:session>
+    </services:request-contexts>
+
+    <services:uris xmlns="http://www.alibaba.com/schema/services/uris">
+        <uri id="link1" exposed="true">
+            <serverURI>http://www.taobao.com/</serverURI>
+        </uri>
+        <turbine-uri id="link2" exposed="true" extends="link1" />
+    </services:uris>
+
+</beans:beans>

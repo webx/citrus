@@ -1,0 +1,2 @@
+action-event-adapter=com.alibaba.citrus.service.moduleloader.impl.adapter.ActionEventAdapterFactoryDefinitionParser
+data-binding-adapter=com.alibaba.citrus.service.moduleloader.impl.adapter.DataBindingAdapterFactoryDefinitionParser

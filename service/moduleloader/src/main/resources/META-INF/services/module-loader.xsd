@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="module-loader" type="ModuleLoaderServiceType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    用来装载module。一个module是指在web框架中，可供开发者扩展的controller部分。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="ModuleLoaderServiceType">
+        <xsd:sequence>
+            <xsd:any namespace="http://www.alibaba.com/schema/services/module-loader/factories"
+                minOccurs="0" maxOccurs="unbounded" />
+            <xsd:any namespace="http://www.alibaba.com/schema/services/module-loader/adapters"
+                minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+        <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
+        <xsd:attribute name="cacheEnabled" type="springext:booleanOrPlaceholder" />
+        <xsd:attribute name="includeDefaultAdapters" type="springext:booleanOrPlaceholder"
+            default="true" />
+    </xsd:complexType>
+
+</xsd:schema>

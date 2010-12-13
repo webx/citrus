@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:group name="URIBrokerServerInfo">
+        <xsd:sequence>
+            <xsd:any namespace="http://www.alibaba.com/schema/services/uris/interceptors"
+                minOccurs="0" maxOccurs="unbounded" />
+            <xsd:element name="serverURI" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    设置uri，但不包含query。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="serverScheme" type="URIBrokerServerSchemeType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    URL的协议方式，可选：http或https。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="loginUser" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    URL的登陆用户ID。
+                     ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="loginPassword" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    URL的登陆用户密码。
+                     ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="serverName" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    URL的服务器名称，如：www.taobao.com。
+                     ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="serverPort" type="springext:integerOrPlaceholder" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    URL的服务器端口号。
+                     ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="reference" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    URL的参数参考说明。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+
+    <xsd:group name="URIBrokerQueryInfo">
+        <xsd:sequence>
+            <xsd:element name="query" type="URIBrokerQueryType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    URL的参数部分。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:group>
+
+    <xsd:attributeGroup name="URIBrokerAttributes">
+        <xsd:attribute name="charset" type="xsd:string" />
+        <xsd:attribute name="exposed" type="springext:booleanOrPlaceholder" default="false" />
+        <xsd:attribute name="extends" type="xsd:string" />
+        <xsd:attribute name="type" type="URIBrokerURITypeType" />
+        <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
+    </xsd:attributeGroup>
+
+    <xsd:simpleType name="URIBrokerServerSchemeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="http" />
+            <xsd:enumeration value="https" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="URIBrokerURITypeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="auto" />
+            <xsd:enumeration value="full" />
+            <xsd:enumeration value="absolute" />
+            <xsd:enumeration value="relative" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="URIBrokerQueryType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="key" type="xsd:string" use="required" />
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+</xsd:schema>

@@ -1,0 +1,2 @@
+renderable-support=com.alibaba.citrus.service.velocity.impl.RenderableHandlerDefinitionParser
+escape-support=com.alibaba.citrus.service.velocity.impl.EscapeSupportDefinitionParser

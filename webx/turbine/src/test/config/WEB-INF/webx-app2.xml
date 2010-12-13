@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns:pull-tools="http://www.alibaba.com/schema/services/pull/factories"
+    xmlns:mapping-rules="http://www.alibaba.com/schema/services/mapping-rules"
+    xmlns:adapters="http://www.alibaba.com/schema/services/module-loader/adapters"
+    xmlns:factories="http://www.alibaba.com/schema/services/module-loader/factories"
+    xmlns:conditions="http://www.alibaba.com/schema/services/pipeline/conditions"
+    xmlns:valves="http://www.alibaba.com/schema/services/pipeline/valves"
+    xmlns:request-contexts="http://www.alibaba.com/schema/services/request-contexts"
+    xmlns:encoders="http://www.alibaba.com/schema/services/request-contexts/session/encoders"
+    xmlns:idgens="http://www.alibaba.com/schema/services/request-contexts/session/idgens"
+    xmlns:stores="http://www.alibaba.com/schema/services/request-contexts/session/stores"
+    xmlns:filters="http://www.alibaba.com/schema/services/resource-loading/filters"
+    xmlns:loaders="http://www.alibaba.com/schema/services/resource-loading/loaders"
+    xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
+    xmlns:uris="http://www.alibaba.com/schema/services/uris"
+    xmlns:handlers="http://www.alibaba.com/schema/services/uris/handlers"
+    xmlns:base="http://www.alibaba.com/schema/springext/base"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="
+        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
+        http://www.alibaba.com/schema/services/mapping-rules http://localhost:8080/schema/services-mapping-rules.xsd
+        http://www.alibaba.com/schema/services/module-loader/adapters http://localhost:8080/schema/services-module-loader-adapters.xsd
+        http://www.alibaba.com/schema/services/module-loader/factories http://localhost:8080/schema/services-module-loader-factories.xsd
+        http://www.alibaba.com/schema/services/pipeline/conditions http://localhost:8080/schema/services-pipeline-conditions.xsd
+        http://www.alibaba.com/schema/services/pipeline/valves http://localhost:8080/schema/services-pipeline-valves.xsd
+        http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/encoders http://localhost:8080/schema/services-request-contexts-session-encoders.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/idgens http://localhost:8080/schema/services-request-contexts-session-idgens.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/stores http://localhost:8080/schema/services-request-contexts-session-stores.xsd
+        http://www.alibaba.com/schema/services/resource-loading/filters http://localhost:8080/schema/services-resource-loading-filters.xsd
+        http://www.alibaba.com/schema/services/resource-loading/loaders http://localhost:8080/schema/services-resource-loading-loaders.xsd
+        http://www.alibaba.com/schema/services/template/engines http://localhost:8080/schema/services-template-engines.xsd
+        http://www.alibaba.com/schema/services/uris http://localhost:8080/schema/services-uris.xsd
+        http://www.alibaba.com/schema/services/uris/handlers http://localhost:8080/schema/services-uris-handlers.xsd
+        http://www.alibaba.com/schema/springext/base http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+    ">
+
+    <services:webx-configuration />
+
+    <services:module-loader id="moduleLoaderService">
+        <factories:class-modules>
+            <factories:search-packages type="$1" packages="com.alibaba.test.app2.module.*" />
+        </factories:class-modules>
+    </services:module-loader>
+
+    <!-- 装载template,用于searchExtensions和local测试 -->
+    <services:template searchExtensions="true">
+        <engines:velocity-engine path="/templates/app2" />
+    </services:template>
+
+    <!-- 配置mapping -->
+    <services:mapping-rules>
+        <mapping-rules:fallback-module-rule id="control" moduleType="control" />
+        <mapping-rules:fallback-module-rule id="control.notemplate" moduleType="control" />
+        <mapping-rules:fallback-template-rule id="control.template" templatePrefix="control" />
+    </services:mapping-rules>
+
+</beans:beans>

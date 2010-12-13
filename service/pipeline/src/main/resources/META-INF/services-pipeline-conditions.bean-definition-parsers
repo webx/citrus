@@ -1,0 +1,4 @@
+all-of=com.alibaba.citrus.service.pipeline.impl.condition.AllOf$DefinitionParser
+any-of=com.alibaba.citrus.service.pipeline.impl.condition.AnyOf$DefinitionParser
+none-of=com.alibaba.citrus.service.pipeline.impl.condition.NoneOf$DefinitionParser
+jexl-condition=com.alibaba.citrus.service.pipeline.impl.condition.JexlCondition$DefinitionParser

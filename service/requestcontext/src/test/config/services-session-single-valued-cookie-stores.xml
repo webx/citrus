@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns="http://www.alibaba.com/schema/services/request-contexts"
+    xmlns:encoders="http://www.alibaba.com/schema/services/request-contexts/session/encoders"
+    xmlns:value-encoders="http://www.alibaba.com/schema/services/request-contexts/session/value-encoders"
+    xmlns:stores="http://www.alibaba.com/schema/services/request-contexts/session/stores"
+    xmlns:idgens="http://www.alibaba.com/schema/services/request-contexts/session/idgens"
+    xmlns:session-encrypters="http://www.alibaba.com/schema/services/request-contexts/session/encrypters"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/encoders http://localhost:8080/schema/services-request-contexts-session-encoders.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/value-encoders http://localhost:8080/schema/services-request-contexts-session-value-encoders.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/idgens http://localhost:8080/schema/services-request-contexts-session-idgens.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/stores http://localhost:8080/schema/services-request-contexts-session-stores.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/encrypters http://localhost:8080/schema/services-request-contexts-session-encrypters.xsd
+    ">
+
+    <session-encrypters:aes-encrypter id="myencrypter" key="0123456789abcdef" keySize="128" />
+
+    <services:property-editor-registrars id="dateRegistrar">
+        <services:property-editor-registrar
+            class="com.alibaba.citrus.service.configuration.support.CustomDateRegistrar" />
+    </services:property-editor-registrars>
+
+    <services:request-contexts id="simple_default">
+        <buffered />
+        <lazy-commit />
+        <session>
+            <stores>
+                <stores:simple-memory-store id="s1" />
+                <!-- 默认的simple encoder -->
+                <stores:single-valued-cookie-store id="simple-default-value-store">
+                    <stores:cookie name="simple-default-cookie" />
+                </stores:single-valued-cookie-store>
+            </stores>
+            <store-mappings>
+                <match name="*" store="s1" />
+                <match name="simple-default" store="simple-default-value-store" />
+            </store-mappings>
+        </session>
+    </services:request-contexts>
+
+    <services:request-contexts id="simple_specified">
+        <buffered />
+        <lazy-commit />
+        <session>
+            <stores>
+                <stores:simple-memory-store id="s2" />
+                <!-- simple encoder：指定charset -->
+                <stores:single-valued-cookie-store id="simple-specified-value-store">
+                    <stores:cookie name="simple-specified-cookie" />
+                    <stores:encoders>
+                        <value-encoders:simple-value-encoder charset="GBK" />
+                    </stores:encoders>
+                </stores:single-valued-cookie-store>
+            </stores>
+            <store-mappings>
+                <match name="*" store="s2" />
+                <match name="simple-specified" store="simple-specified-value-store" />
+            </store-mappings>
+        </session>
+    </services:request-contexts>
+
+    <services:request-contexts id="simple_encrypted">
+        <buffered />
+        <lazy-commit />
+        <session>
+            <stores>
+                <stores:simple-memory-store id="s3" />
+                <!-- simple encoder：加密 -->
+                <stores:single-valued-cookie-store id="simple-encrypted-value-store">
+                    <stores:cookie name="simple-encrypted-cookie" />
+                    <stores:encoders>
+                        <value-encoders:simple-value-encoder>
+                            <session-encrypters:encrypter ref="myencrypter" />
+                        </value-encoders:simple-value-encoder>
+                    </stores:encoders>
+                </stores:single-valued-cookie-store>
+            </stores>
+            <store-mappings>
+                <match name="*" store="s3" />
+                <match name="simple-encrypted" store="simple-encrypted-value-store" />
+            </store-mappings>
+        </session>
+    </services:request-contexts>
+
+    <services:request-contexts id="simple_int">
+        <buffered />
+        <lazy-commit />
+        <session>
+            <stores>
+                <stores:simple-memory-store id="s4" />
+                <!-- simple encoder：整数 -->
+                <stores:single-valued-cookie-store id="simple-int-value-store">
+                    <stores:cookie name="simple-int-cookie" />
+                    <stores:encoders>
+                        <value-encoders:simple-value-encoder type="java.lang.Integer" />
+                    </stores:encoders>
+                </stores:single-valued-cookie-store>
+            </stores>
+            <store-mappings>
+                <match name="*" store="s4" />
+                <match name="simple-int" store="simple-int-value-store" />
+            </store-mappings>
+        </session>
+    </services:request-contexts>
+
+    <services:request-contexts id="simple_date">
+        <buffered />
+        <lazy-commit />
+        <session>
+            <stores>
+                <stores:simple-memory-store id="s5" />
+                <!-- simple encoder：日期 -->
+                <stores:single-valued-cookie-store id="simple-date-value-store">
+                    <stores:cookie name="simple-date-cookie" />
+                    <stores:encoders>
+                        <value-encoders:simple-value-encoder type="java.util.Date">
+                            <value-encoders:property-editor-registrar ref="dateRegistrar" />
+                        </value-encoders:simple-value-encoder>
+                    </stores:encoders>
+                </stores:single-valued-cookie-store>
+            </stores>
+            <store-mappings>
+                <match name="*" store="s5" />
+                <match name="simple-date" store="simple-date-value-store" />
+            </store-mappings>
+        </session>
+    </services:request-contexts>
+
+    <services:request-contexts id="mapped_default">
+        <buffered />
+        <lazy-commit />
+        <session>
+            <stores>
+                <stores:simple-memory-store id="s55" />
+                <!-- mapped encoder：指定charset -->
+                <stores:single-valued-cookie-store id="mapped-default-value-store">
+                    <stores:cookie name="mapped-default-cookie" />
+                    <stores:encoders>
+                        <value-encoders:mapped-values-encoder />
+                    </stores:encoders>
+                </stores:single-valued-cookie-store>
+            </stores>
+            <store-mappings>
+                <match name="*" store="s55" />
+                <match name="mapped-default" store="mapped-default-value-store" />
+            </store-mappings>
+        </session>
+    </services:request-contexts>
+
+    <services:request-contexts id="mapped_specified">
+        <buffered />
+        <lazy-commit />
+        <session>
+            <stores>
+                <stores:simple-memory-store id="s6" />
+                <!-- mapped encoder：指定charset -->
+                <stores:single-valued-cookie-store id="mapped-specified-value-store">
+                    <stores:cookie name="mapped-specified-cookie" />
+                    <stores:encoders>
+                        <value-encoders:mapped-values-encoder charset="GBK" />
+                    </stores:encoders>
+                </stores:single-valued-cookie-store>
+            </stores>
+            <store-mappings>
+                <match name="*" store="s6" />
+                <match name="mapped-specified" store="mapped-specified-value-store" />
+            </store-mappings>
+        </session>
+    </services:request-contexts>
+
+    <services:request-contexts id="mapped_encrypted">
+        <buffered />
+        <lazy-commit />
+        <session>
+            <stores>
+                <stores:simple-memory-store id="s7" />
+                <!-- mapped encoder：加密 -->
+                <stores:single-valued-cookie-store id="mapped-encrypted-value-store">
+                    <stores:cookie name="mapped-encrypted-cookie" />
+                    <stores:encoders>
+                        <value-encoders:mapped-values-encoder>
+                            <session-encrypters:encrypter ref="myencrypter" />
+                        </value-encoders:mapped-values-encoder>
+                    </stores:encoders>
+                </stores:single-valued-cookie-store>
+            </stores>
+            <store-mappings>
+                <match name="*" store="s7" />
+                <match name="mapped-encrypted" store="mapped-encrypted-value-store" />
+            </store-mappings>
+        </session>
+    </services:request-contexts>
+
+    <services:request-contexts id="mapped_int">
+        <buffered />
+        <lazy-commit />
+        <session>
+            <stores>
+                <stores:simple-memory-store id="s8" />
+                <!-- mapped encoder：整数 -->
+                <stores:single-valued-cookie-store id="mapped-int-value-store">
+                    <stores:cookie name="mapped-int-cookie" />
+                    <stores:encoders>
+                        <value-encoders:mapped-values-encoder valueType="java.lang.Integer" />
+                    </stores:encoders>
+                </stores:single-valued-cookie-store>
+            </stores>
+            <store-mappings>
+                <match name="*" store="s8" />
+                <match name="mapped-int" store="mapped-int-value-store" />
+            </store-mappings>
+        </session>
+    </services:request-contexts>
+
+    <services:request-contexts id="mapped_date">
+        <buffered />
+        <lazy-commit />
+        <session>
+            <stores>
+                <stores:simple-memory-store id="s9" />
+                <!-- mapped encoder：日期 -->
+                <stores:single-valued-cookie-store id="mapped-date-value-store">
+                    <stores:cookie name="mapped-date-cookie" />
+                    <stores:encoders>
+                        <value-encoders:mapped-values-encoder valueType="java.util.Date">
+                            <value-encoders:property-editor-registrar ref="dateRegistrar" />
+                        </value-encoders:mapped-values-encoder>
+                    </stores:encoders>
+                </stores:single-valued-cookie-store>
+            </stores>
+            <store-mappings>
+                <match name="*" store="s9" />
+                <match name="mapped-date" store="mapped-date-value-store" />
+            </store-mappings>
+        </session>
+    </services:request-contexts>
+
+</beans:beans>

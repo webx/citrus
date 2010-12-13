@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="single-valued-cookie-store" type="SingleValuedCookieStoreType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    将session内容保存在cookie中，仅支持一个attribute。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="SingleValuedCookieStoreType">
+        <xsd:complexContent>
+            <xsd:extension base="beans:identifiedType">
+                <xsd:all>
+                    <xsd:element name="cookie" minOccurs="1">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    指定cookie的属性。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:complexType>
+                            <xsd:attribute name="name" type="xsd:string" use="required">
+                                <xsd:annotation>
+                                    <xsd:documentation><![CDATA[
+    用来保存数据的cookie的名称。
+                                    ]]></xsd:documentation>
+                                </xsd:annotation>
+                            </xsd:attribute>
+                            <xsd:attribute name="domain" type="xsd:string">
+                                <xsd:annotation>
+                                    <xsd:documentation><![CDATA[
+    用来保存数据的cookie的domain。默认和session ID cookie的domain相同。
+                                    ]]></xsd:documentation>
+                                </xsd:annotation>
+                            </xsd:attribute>
+                            <xsd:attribute name="path" type="xsd:string" default="/">
+                                <xsd:annotation>
+                                    <xsd:documentation><![CDATA[
+    用来保存数据的cookie的path。默认和session ID cookie的path相同。
+                                    ]]></xsd:documentation>
+                                </xsd:annotation>
+                            </xsd:attribute>
+                            <xsd:attribute name="maxAge" type="springext:integerOrPlaceholder"
+                                default="0">
+                                <xsd:annotation>
+                                    <xsd:documentation><![CDATA[
+    用来保存数据的cookie的最长存活时间（秒）。默认和session ID cookie的最长存活时间相同。
+                                    ]]></xsd:documentation>
+                                </xsd:annotation>
+                            </xsd:attribute>
+                            <xsd:attribute name="httpOnly" type="springext:booleanOrPlaceholder"
+                                default="true">
+                                <xsd:annotation>
+                                    <xsd:documentation><![CDATA[
+    用来保存数据的cookie上设置httpOnly标记。在IE6及更新版本中，可以缓解XSS攻击的危险。默认和session ID cookie的设置相同。
+                                    ]]></xsd:documentation>
+                                </xsd:annotation>
+                            </xsd:attribute>
+                            <xsd:attribute name="secure" type="springext:booleanOrPlaceholder"
+                                default="false">
+                                <xsd:annotation>
+                                    <xsd:documentation><![CDATA[
+    用来保存数据的cookie上设置secure标记。这样，只有在https请求中才可访问该cookie。默认和session ID cookie的设置相同。
+                            ]]></xsd:documentation>
+                                </xsd:annotation>
+                            </xsd:attribute>
+                            <xsd:attribute name="survivesInInvalidating"
+                                type="springext:booleanOrPlaceholder" default="false">
+                                <xsd:annotation>
+                                    <xsd:documentation><![CDATA[
+    用来指出数据是否能够在session失效时，继续存在。这不是很常用的选项，但少量数据需要它。例如，记录上一次登录的用户名。
+    需要注意的是，即使该参数被设成true，数据存活的时间也不会超过maxAge所指定的时间。
+                                    ]]></xsd:documentation>
+                                </xsd:annotation>
+                            </xsd:attribute>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="encoders" type="ValueEncodersType" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation><![CDATA[
+    用来将cookie转换成对象，或者对象转换成cookie的编码器。
+    可以指定多个，以便解析不同版本的cookie格式。其中第一个编码器是默认的，将用来编码输出值。
+                            ]]></xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:all>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="ValueEncodersType">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:any
+                namespace="http://www.alibaba.com/schema/services/request-contexts/session/value-encoders"
+             />
+        </xsd:choice>
+    </xsd:complexType>
+
+</xsd:schema>

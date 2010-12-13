@@ -1,0 +1,3 @@
+#set ($varInContext="hello")
+
+$varInContext

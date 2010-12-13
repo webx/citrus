@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns:filters="http://www.alibaba.com/schema/services/resource-loading/filters"
+    xmlns:loaders="http://www.alibaba.com/schema/services/resource-loading/loaders"
+    xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
+    xmlns:plugins="http://www.alibaba.com/schema/services/template/engines/velocity/plugins"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="
+               http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+               http://www.alibaba.com/schema/services/resource-loading/filters http://localhost:8080/schema/services-resource-loading-filters.xsd
+               http://www.alibaba.com/schema/services/resource-loading/loaders http://localhost:8080/schema/services-resource-loading-loaders.xsd
+               http://www.alibaba.com/schema/services/template/engines http://localhost:8080/schema/services-template-engines.xsd
+               http://www.alibaba.com/schema/services/template/engines/velocity/plugins http://localhost:8080/schema/services-template-engines-velocity-plugins.xsd
+               http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+             ">
+
+    <services:template lazy-init="true">
+        <engines:velocity-engine templateEncoding="GBK">
+            <engines:global-macros>
+                <engines:name>macros/**/*.vm</engines:name>
+            </engines:global-macros>
+        </engines:velocity-engine>
+    </services:template>
+
+    <services:template id="nostrict" lazy-init="true">
+        <engines:velocity-engine templateEncoding="GBK" strictReference="false">
+            <engines:global-macros>
+                <engines:name>macros/**/*.vm</engines:name>
+            </engines:global-macros>
+        </engines:velocity-engine>
+    </services:template>
+
+    <services:template id="default" lazy-init="true">
+        <engines:velocity-engine />
+    </services:template>
+
+    <services:template id="default_productionMode" lazy-init="true">
+        <engines:velocity-engine cacheEnabled="false" />
+    </services:template>
+
+    <services:template id="with_args" lazy-init="true">
+        <engines:velocity-engine modificationCheckInterval="10" strictReference="false"
+            templateEncoding="ISO-8859-1" />
+    </services:template>
+
+    <services:template id="default_macros" lazy-init="true">
+        <engines:velocity-engine path="/templates_with_macros" />
+    </services:template>
+
+    <services:template id="with_macros" lazy-init="true">
+        <engines:velocity-engine>
+            <engines:global-macros>
+                <engines:name>macros/inner/*.vm</engines:name>
+                <engines:name>macros/*.vm</engines:name>
+                <engines:name>macros/hello.vm</engines:name>
+                <engines:name>test2.vm</engines:name>
+            </engines:global-macros>
+        </engines:velocity-engine>
+    </services:template>
+
+    <services:template id="with_props" lazy-init="true">
+        <engines:velocity-engine>
+            <engines:advanced-properties>
+
+                <!-- removed props -->
+                <engines:property name="input.encoding" value="ISO-8859-1" />
+                <engines:property name="resource.loader" value="file" />
+                <engines:property name="file.resource.loader.class" value="clazz" />
+                <engines:property name="runtime.log" value="log" />
+                <engines:property name="runtime.log.logsystem" value="log" />
+                <engines:property name="runtime.log.logsystem.class" value="clazz" />
+                <engines:property name="velocimacro.library" value="vms" />
+                <engines:property name="eventhandler.referenceinsertion.class" value="clazz" />
+                <engines:property name="velocimacro.library.autoreload" value="true" />
+                <engines:property name="runtime.references.strict" value="false" />
+
+                <!-- overrided props -->
+                <engines:property name="resource.manager.logwhenfound" value="true" />
+                <engines:property name="output.encoding" value="ISO-8859-1" />
+                <engines:property name="parser.pool.size" value="100" />
+                <engines:property name="velocimacro.arguments.strict" value="false" />
+                <engines:property name="velocimacro.permissions.allow.inline.local.scope"
+                    value="false" />
+                <engines:property name="runtime.introspector.uberspect"
+                    value="org.apache.velocity.util.introspection.UberspectImpl" />
+
+                <!-- other props -->
+                <engines:property name="eventhandler.escape.html.match" value="/hello.*/" />
+                <engines:property name="empty.value" value="" />
+                <engines:property name="nonempty.value" value="hello" />
+
+            </engines:advanced-properties>
+        </engines:velocity-engine>
+    </services:template>
+
+    <services:template id="with_handlers" lazy-init="true">
+        <engines:velocity-engine>
+            <engines:plugins>
+                <plugins:plugin class="org.apache.velocity.app.event.implement.EscapeHtmlReference"
+                 />
+            </engines:plugins>
+            <engines:advanced-properties>
+                <engines:property name="eventhandler.escape.html.match" value="/world\./" />
+            </engines:advanced-properties>
+        </engines:velocity-engine>
+    </services:template>
+
+    <services:template id="with_local_handlers" lazy-init="true">
+        <engines:velocity-engine>
+            <engines:plugins>
+                <plugins:plugin
+                    class="com.alibaba.citrus.service.velocity.impl.ConditionalEscapeHandler" />
+            </engines:plugins>
+        </engines:velocity-engine>
+    </services:template>
+
+    <services:template id="with_plugins" lazy-init="true">
+        <engines:velocity-engine>
+            <engines:plugins>
+                <plugins:plugin class="com.alibaba.citrus.service.velocity.impl.PluginDelegator" />
+            </engines:plugins>
+        </engines:velocity-engine>
+    </services:template>
+
+    <services:template id="with_renderable_support" lazy-init="true">
+        <engines:velocity-engine>
+            <engines:plugins>
+                <plugins:plugin
+                    class="com.alibaba.citrus.service.velocity.VelocityEngineTests$MakeEverythingRenderable" />
+                <plugins:renderable-support />
+            </engines:plugins>
+        </engines:velocity-engine>
+    </services:template>
+
+    <services:resource-loading>
+        <services:resource pattern="/">
+            <loaders:file-loader />
+        </services:resource>
+        <services:resource-filters pattern="/templates/test2.vm">
+            <filters:filter
+                class="com.alibaba.citrus.service.velocity.AbstractResourceLoaderTests$NoURLFilter"
+             />
+        </services:resource-filters>
+    </services:resource-loading>
+
+</beans:beans>

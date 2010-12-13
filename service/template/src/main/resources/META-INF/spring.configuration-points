@@ -1,0 +1,1 @@
+services/template/engines=http://www.alibaba.com/schema/services/template/engines; defaultElement=template-engine; nsPrefix=tpl-engines

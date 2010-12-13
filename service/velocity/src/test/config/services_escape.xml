@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns:filters="http://www.alibaba.com/schema/services/resource-loading/filters"
+    xmlns:loaders="http://www.alibaba.com/schema/services/resource-loading/loaders"
+    xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
+    xmlns:plugins="http://www.alibaba.com/schema/services/template/engines/velocity/plugins"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="
+               http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+               http://www.alibaba.com/schema/services/resource-loading/filters http://localhost:8080/schema/services-resource-loading-filters.xsd
+               http://www.alibaba.com/schema/services/resource-loading/loaders http://localhost:8080/schema/services-resource-loading-loaders.xsd
+               http://www.alibaba.com/schema/services/template/engines http://localhost:8080/schema/services-template-engines.xsd
+               http://www.alibaba.com/schema/services/template/engines/velocity/plugins http://localhost:8080/schema/services-template-engines-velocity-plugins.xsd
+               http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+    ">
+
+    <services:property-placeholder />
+
+    <services:simple-configuration>
+        <services:productionMode>${productionMode:false}</services:productionMode>
+    </services:simple-configuration>
+
+    <services:template id="with_escape" lazy-init="true">
+        <engines:velocity-engine templateEncoding="GBK">
+            <engines:plugins>
+                <plugins:escape-support />
+            </engines:plugins>
+        </engines:velocity-engine>
+    </services:template>
+
+    <services:template id="with_defaultEscape" lazy-init="true">
+        <engines:velocity-engine templateEncoding="GBK">
+            <engines:plugins>
+                <plugins:escape-support defaultEscape="html" />
+            </engines:plugins>
+        </engines:velocity-engine>
+    </services:template>
+
+    <services:template id="with_rules" lazy-init="true">
+        <engines:velocity-engine templateEncoding="GBK">
+            <engines:plugins
+                xmlns="http://www.alibaba.com/schema/services/template/engines/velocity/plugins">
+                <escape-support defaultEscape="html">
+                    <noescape>
+                        <if-matches pattern="^control\." />
+                        <if-matches pattern="^screen_placeholder" />
+                        <if-matches pattern="^stringEscapeUtil\.escape" />
+                    </noescape>
+                    <escape type="javascript">
+                        <if-matches pattern="^js" />
+                    </escape>
+                </escape-support>
+            </engines:plugins>
+        </engines:velocity-engine>
+    </services:template>
+
+    <services:resource-loading>
+        <services:resource pattern="/">
+            <loaders:file-loader />
+        </services:resource>
+    </services:resource-loading>
+
+</beans:beans>

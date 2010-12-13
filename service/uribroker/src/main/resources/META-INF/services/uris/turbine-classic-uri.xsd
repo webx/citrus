@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xsd:include
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/services/uris/uris-base.xsd" />
+
+    <xsd:element name="turbine-classic-uri" type="TurbineClassicURIBrokerType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    创建一个TurbineClassicURIBroker对象。
+    一个Turbine传统风格的URI包括如下几个部分：
+
+ URI              = SERVER_INFO + PATH + "?" + QUERY_DATA + "#" + REFERENCE
+ SERVER_INFO      = scheme://loginUser:loginPassword@serverName:serverPort
+ PATH             = /contextPath/servletPath/PATH_INFO
+ PATH_INFO        = /template/templateName/screen/screenName/action/actionName/paramName/paramValue
+ QUERY_DATA       = queryKey1=value1&queryKey2=value2
+ REFERENCE        = reference
+ 
+    例如：
+
+ http://user:pass@myserver.com:8080/mycontext/turbine/template/product,ViewItem?id=1#top
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="TurbineClassicURIBrokerType">
+        <xsd:sequence>
+            <xsd:group ref="URIBrokerServerInfo" />
+            <xsd:element name="contextPath" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    Web应用程序context路径。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="servletPath" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    Servlet路径。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="page" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    Turbine模板名。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="screen" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    Turbine screen名。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="action" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    Turbine action名。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="pathInfo" type="PathInfoType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    Turbine pathInfo参数对。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:group ref="URIBrokerQueryInfo" />
+        </xsd:sequence>
+        <xsd:attributeGroup ref="URIBrokerAttributes" />
+    </xsd:complexType>
+
+    <xsd:complexType name="PathInfoType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="key" type="xsd:string" use="required" />
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+</xsd:schema>

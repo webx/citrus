@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.alibaba.com/schema/services"
+    xmlns:validators="http://www.alibaba.com/schema/services/form/validators"
+    xmlns:conditions="http://www.alibaba.com/schema/services/form/conditions"
+    xmlns:rc="http://www.alibaba.com/schema/services/request-contexts"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/form/validators http://localhost:8080/schema/services-form-validators.xsd
+        http://www.alibaba.com/schema/services/form/conditions http://localhost:8080/schema/services-form-conditions.xsd
+        http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd ">
+
+    <form id="form1">
+        <group name="a">
+            <field name="field1">
+                <validators:required-validator message="${displayName} is required" />
+            </field>
+            <field name="field2" trimming="false">
+                <validators:required-validator message="${displayName} is required" />
+            </field>
+        </group>
+        <group name="b">
+            <field name="field1">
+                <validators:string-length-validator minLength="3"
+                    message="${displayName} length must be at least ${minLength}" />
+                <validators:string-length-validator maxLength="10"
+                    message="${displayName} length must be less than ${maxLength}" />
+            </field>
+            <field name="field2">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:string-length-validator minLength="3" maxLength="10"
+                    message="${displayName} length must be at least ${minLength} and be less than ${maxLength}"
+                 />
+            </field>
+        </group>
+        <group name="c">
+            <field name="field1">
+                <validators:string-byte-length-validator charset="GBK" minLength="3"
+                    message="${displayName} length must be at least ${minLength}" />
+                <validators:string-byte-length-validator charset="GBK" maxLength="10"
+                    message="${displayName} length must be less than ${maxLength}" />
+            </field>
+            <field name="field2">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:string-byte-length-validator charset="GBK" minLength="3" maxLength="10"
+                    message="${displayName} length must be at least ${minLength} and be less than ${maxLength}"
+                 />
+            </field>
+        </group>
+        <group name="d">
+            <field name="field1">
+                <validators:number-validator numberType="int" equalTo="123"
+                    message="${displayName} must equal to ${equalTo}" />
+            </field>
+            <field name="field2">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:number-validator numberType="long" notEqualTo="123"
+                    message="${displayName} must not equal to ${notEqualTo}" />
+            </field>
+            <field name="field3">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:number-validator numberType="float" lessThan="123"
+                    message="${displayName} must be less than ${lessThan}" />
+            </field>
+            <field name="field4">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:number-validator numberType="double" greaterThan="123"
+                    message="${displayName} must be greater than ${greaterThan}" />
+            </field>
+            <field name="field5">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:number-validator numberType="int" lessThanOrEqualTo="123"
+                    message="${displayName} must be less than or equal to ${lessThanOrEqualTo}" />
+            </field>
+            <field name="field6">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:number-validator numberType="bigDecimal" greaterThanOrEqualTo="123"
+                    message="${displayName} must be greater than or equal to ${greaterThanOrEqualTo}"
+                 />
+            </field>
+            <field name="field7">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:number-validator message="${displayName} must be of type ${numberType}"
+                 />
+            </field>
+            <field name="field8">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:number-validator greaterThan="100" lessThanOrEqualTo="200"
+                    message="${displayName} must between ${greaterThan} and ${lessThanOrEqualTo}" />
+            </field>
+        </group>
+        <group name="e">
+            <field name="otherField" />
+            <field name="field1">
+                <validators:number-compare-validator numberType="int" equalTo="otherField"
+                    message="${displayName} must equal to ${fieldName}" />
+            </field>
+            <field name="field2">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:number-compare-validator numberType="long" notEqualTo="otherField"
+                    message="${displayName} must not equal to ${fieldName}" />
+            </field>
+            <field name="field3">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:number-compare-validator numberType="float" lessThan="otherField"
+                    message="${displayName} must be less than ${fieldName}" />
+            </field>
+            <field name="field4">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:number-compare-validator numberType="double" greaterThan="otherField"
+                    message="${displayName} must be greater than ${fieldName}" />
+            </field>
+            <field name="field5">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:number-compare-validator numberType="int" lessThanOrEqualTo="otherField"
+                    message="${displayName} must be less than or equal to ${fieldName}" />
+            </field>
+            <field name="field6">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:number-compare-validator numberType="bigDecimal"
+                    greaterThanOrEqualTo="otherField"
+                    message="${displayName} must be greater than or equal to ${fieldName}" />
+            </field>
+        </group>
+        <group name="f">
+            <field name="otherField" />
+            <field name="field1">
+                <validators:string-compare-validator equalTo="otherField"
+                    message="${displayName} must equal to ${fieldName}" />
+            </field>
+            <field name="field2">
+                <validators:string-compare-validator equalTo="otherField" ignoreCase="true"
+                    message="${displayName} must equal to ${fieldName} in case insensitive mode" />
+            </field>
+            <field name="field3">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:string-compare-validator notEqualTo="otherField" ignoreCase="false"
+                    message="${displayName} must not equal to ${fieldName}" />
+            </field>
+            <field name="field4">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:string-compare-validator notEqualTo="otherField" ignoreCase="true"
+                    message="${displayName} must not equal to ${fieldName} in case insensitive mode"
+                 />
+            </field>
+            <field name="field5" trimming="false">
+                <validators:string-compare-validator equalTo="otherField"
+                    message="${displayName} must equal to ${fieldName}" />
+            </field>
+        </group>
+        <group name="g">
+            <field name="field1">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:uploaded-file-validator message="${displayName}" />
+                <validators:uploaded-file-validator minSize="-1" maxSize="0" contentType=""
+                    message="${displayName}" />
+            </field>
+            <field name="field2">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:uploaded-file-validator minSize="4"
+                    message="${displayName} must be larger than ${minSize}" />
+            </field>
+            <field name="field3">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:uploaded-file-validator maxSize="4"
+                    message="${displayName} must be smaller than ${maxSize}" />
+            </field>
+            <field name="field4">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:uploaded-file-validator minSize="4" maxSize="9"
+                    message="${displayName} should be in size between ${minSize} and ${maxSize}" />
+            </field>
+            <field name="field5">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:uploaded-file-validator contentType="image/gif"
+                    message="${displayName} should be of content type ${contentType}" />
+            </field>
+            <field name="field6">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:uploaded-file-validator contentType="image/gif, text/plain"
+                    message="${displayName} should be of content type ${contentType}" />
+            </field>
+            <field name="field7">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:uploaded-file-validator minSize="4" maxSize="9" contentType="image/"
+                    message="${displayName} should be of content type ${contentType} and be in size between ${minSize} and ${maxSize}"
+                 />
+            </field>
+            <field name="field8">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:uploaded-file-validator minSize="0" maxSize="0"
+                    message="${displayName} should be in size between ${minSize} and ${maxSize}" />
+            </field>
+            <field name="field9">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:uploaded-file-validator extension=" .jpg , null "
+                    message="${displayName} should be of ${extension}" />
+            </field>
+            <field name="field10">
+                <validators:uploaded-file-validator extension=" .jpg , null "
+                    message="${displayName} should be of ${extension}" />
+            </field>
+        </group>
+        <group name="h" trimmingByDefault="false">
+            <field name="field1">
+                <validators:date-validator message="${displayName} should be of format ${format}" />
+            </field>
+            <field name="field2">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:date-validator format="yyyy-MM-dd HH:mm:ss"
+                    message="${displayName} should be of format ${format}" />
+            </field>
+            <field name="field3">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:date-validator minDate="1911-10-10 10:10:10"
+                    message="${displayName} should be after ${minDate}" />
+            </field>
+            <field name="field4">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:date-validator maxDate="1911-10-10 10:10:10"
+                    message="${displayName} should be earlier than ${maxDate}" />
+            </field>
+            <field name="field5">
+                <validators:required-validator message="${displayName} is required" />
+                <validators:date-validator format="yyyy-MM-dd HH:mm:ss" minDate="1911-10-10 0:10:10"
+                    maxDate="1911-10-10 10:10:10"
+                    message="${displayName} should be date between ${minDate} and ${maxDate} in format ${format}"
+                 />
+            </field>
+        </group>
+        <group name="i">
+            <field name="field1">
+                <validators:regexp-validator pattern="abc"
+                    message="${displayName} should match ${pattern}" />
+            </field>
+            <field name="field2">
+                <validators:regexp-validator pattern="^abc$"
+                    message="${displayName} should match ${pattern}" />
+            </field>
+            <field name="field3">
+                <validators:regexp-validator pattern="!abc"
+                    message="${displayName} should match ${pattern}" />
+            </field>
+        </group>
+        <group name="j">
+            <field name="field1">
+                <validators:mail-address-validator
+                    message="${displayName} is not a valid mail address" />
+            </field>
+        </group>
+        <group name="k">
+            <field name="field1">
+                <validators:all-of>
+                    <validators:validator
+                        class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                        p:index="0" p:message="${displayName} validator 1" />
+                    <validators:validator
+                        class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                        p:index="1" p:message="${displayName} validator 2" />
+                    <validators:validator
+                        class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                        p:index="2" p:message="${displayName} validator 3" />
+                </validators:all-of>
+            </field>
+        </group>
+        <group name="l">
+            <field name="field1">
+                <validators:any-of message="${displayName}: ${allMessages}">
+                    <validators:validator
+                        class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                        p:index="0" p:message="${displayName} validator 1" />
+                    <validators:validator
+                        class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                        p:index="1" p:message="${displayName} validator 2" />
+                    <validators:validator
+                        class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                        p:index="2" p:message="${displayName} validator 3" />
+                </validators:any-of>
+            </field>
+        </group>
+        <group name="m">
+            <field name="field1">
+                <validators:none-of message="${displayName}">
+                    <validators:validator
+                        class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                        p:index="0" p:message="${displayName} validator 1" />
+                    <validators:validator
+                        class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                        p:index="1" p:message="${displayName} validator 2" />
+                    <validators:validator
+                        class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                        p:index="2" p:message="${displayName} validator 3" />
+                </validators:none-of>
+            </field>
+        </group>
+        <group name="n">
+            <field name="field1">
+                <validators:all-of-values message="${displayName}: ${allMessages}">
+                    <validators:validator
+                        class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                        p:message="${displayName}[${valueIndex}] validator" />
+                </validators:all-of-values>
+            </field>
+            <field name="field2">
+                <!-- hidden all-of -->
+                <validators:all-of-values message="${displayName}: ${allMessages}">
+                    <validators:validator
+                        class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                        p:message="${displayName}[${valueIndex}] validator" />
+                    <validators:validator
+                        class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                        p:message="${displayName}[${valueIndex}] validator" />
+                </validators:all-of-values>
+            </field>
+        </group>
+        <group name="o">
+            <field name="field1">
+                <validators:any-of-values message="${displayName}: ${allMessages}">
+                    <validators:validator
+                        class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                        p:message="${displayName}[${valueIndex}] validator" />
+                </validators:any-of-values>
+            </field>
+        </group>
+        <group name="p">
+            <field name="field1">
+                <validators:none-of-values message="${displayName}">
+                    <validators:validator
+                        class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                        p:message="${displayName}[${valueIndex}] validator" />
+                </validators:none-of-values>
+            </field>
+        </group>
+        <group name="q">
+            <field name="field1">
+                <validators:multi-values-count-validator
+                    message="${displayName} should have values count between ${minCount} and ${maxCount}"
+                 />
+            </field>
+            <field name="field2">
+                <validators:multi-values-count-validator minCount="2"
+                    message="${displayName} should have values count between ${minCount} and ${maxCount}"
+                 />
+            </field>
+            <field name="field3">
+                <validators:multi-values-count-validator maxCount="3"
+                    message="${displayName} should have values count between ${minCount} and ${maxCount}"
+                 />
+            </field>
+            <field name="field4">
+                <validators:multi-values-count-validator minCount="2" maxCount="3"
+                    message="${displayName} should have values count between ${minCount} and ${maxCount}"
+                 />
+            </field>
+            <field name="field5">
+                <validators:multi-values-count-validator minCount="0" maxCount="0"
+                    message="${displayName} should have values count between ${minCount} and ${maxCount}"
+                 />
+            </field>
+        </group>
+        <group name="r">
+            <field name="otherField" />
+            <field name="field1">
+                <validators:if test="otherField.stringValue == 'true'">
+                    <validators:validator
+                        class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                        p:index="0" p:message="${displayName} validator 1" />
+                </validators:if>
+                <validators:validator
+                    class="com.alibaba.citrus.service.form.impl.validation.MyValidator2" p:index="1"
+                    p:message="${displayName} validator 2" />
+            </field>
+            <field name="field2">
+                <validators:if>
+                    <conditions:jexl-condition><![CDATA[
+                        otherField.stringValue == "hello"
+                    ]]></conditions:jexl-condition>
+                    <validators:validator
+                        class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                        p:index="0" p:message="${displayName} validator 1" />
+                </validators:if>
+                <validators:validator
+                    class="com.alibaba.citrus.service.form.impl.validation.MyValidator2" p:index="1"
+                    p:message="${displayName} validator 2" />
+            </field>
+        </group>
+        <group name="s">
+            <field name="otherField1" />
+            <field name="otherField2" />
+            <field name="field1">
+                <validators:choose>
+                    <validators:when test="otherField1.stringValue == 'true'">
+                        <validators:validator
+                            class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                            p:index="0" p:message="${displayName} validator 1" />
+                    </validators:when>
+                    <validators:when>
+                        <conditions:jexl-condition><![CDATA[
+                            otherField2.stringValue == "true"
+                        ]]></conditions:jexl-condition>
+                        <validators:validator
+                            class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                            p:index="1" p:message="${displayName} validator 2" />
+                    </validators:when>
+                    <validators:otherwise>
+                        <validators:validator
+                            class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                            p:index="2" p:message="${displayName} validator 3" />
+                    </validators:otherwise>
+                </validators:choose>
+            </field>
+            <field name="field2">
+                <validators:choose>
+                    <validators:when test="otherField1.stringValue == 'true'">
+                        <validators:validator
+                            class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                            p:index="0" p:message="${displayName} validator 1" />
+                    </validators:when>
+                    <validators:when>
+                        <conditions:jexl-condition><![CDATA[
+                            otherField2.stringValue == "true"
+                        ]]></conditions:jexl-condition>
+                        <validators:validator
+                            class="com.alibaba.citrus.service.form.impl.validation.MyValidator2"
+                            p:index="1" p:message="${displayName} validator 2" />
+                    </validators:when>
+                </validators:choose>
+            </field>
+        </group>
+    </form>
+
+    <request-contexts>
+        <rc:parser trimming="false" />
+    </request-contexts>
+
+    <upload />
+
+</beans:beans>

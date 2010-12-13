@@ -1,0 +1,8 @@
+basic       = com.alibaba.citrus.service.requestcontext.basic.impl.BasicRequestContextFactoryDefinitionParser
+buffered    = com.alibaba.citrus.service.requestcontext.buffered.impl.BufferedRequestContextFactoryDefinitionParser
+lazy-commit = com.alibaba.citrus.service.requestcontext.lazycommit.impl.LazyCommitRequestContextFactoryDefinitionParser
+parser      = com.alibaba.citrus.service.requestcontext.parser.impl.ParserRequestContextFactoryDefinitionParser
+set-locale  = com.alibaba.citrus.service.requestcontext.locale.impl.SetLocaleRequestContextFactoryDefinitionParser
+rewrite     = com.alibaba.citrus.service.requestcontext.rewrite.impl.RewriteRequestContextFactoryDefinitionParser
+session     = com.alibaba.citrus.service.requestcontext.session.impl.SessionRequestContextFactoryDefinitionParser
+rundata     = com.alibaba.citrus.service.requestcontext.rundata.impl.RunDataFactoryDefinitionParser

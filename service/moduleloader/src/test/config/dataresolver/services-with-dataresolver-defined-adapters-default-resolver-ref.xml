@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="GB18030"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns:dr-factories="http://www.alibaba.com/schema/services/data-resolver/factories"
+    xmlns:ml-adapters="http://www.alibaba.com/schema/services/module-loader/adapters"
+    xmlns:ml-factories="http://www.alibaba.com/schema/services/module-loader/factories"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="
+        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/data-resolver/factories http://localhost:8080/schema/services-data-resolver-factories.xsd
+        http://www.alibaba.com/schema/services/module-loader/adapters http://localhost:8080/schema/services-module-loader-adapters.xsd
+        http://www.alibaba.com/schema/services/module-loader/factories http://localhost:8080/schema/services-module-loader-factories.xsd
+        http://www.springframework.org/schema/util http://localhost:8080/schema/www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+    ">
+
+    <services:simple-configuration xmlns="http://www.alibaba.com/schema/services" />
+
+    <services:module-loader xmlns="http://www.alibaba.com/schema/services/module-loader/factories">
+        <class-modules>
+            <search-packages type="$1" packages="com.alibaba.test2.module.*" />
+        </class-modules>
+        <ml-adapters:action-event-adapter />
+        <ml-adapters:data-binding-adapter />
+    </services:module-loader>
+
+    <services:data-resolver xmlns="http://www.alibaba.com/schema/services/data-resolver/factories">
+        <factory class="com.alibaba.test2.dataresolver.MapResolverFactory">
+            <beans:constructor-arg>
+                <util:map>
+                    <beans:entry key="aaa" value="111" />
+                    <beans:entry key="bbb" value="222" />
+                    <beans:entry key="ccc" value="333" />
+                </util:map>
+            </beans:constructor-arg>
+        </factory>
+        <factory class="com.alibaba.test2.dataresolver.RequestResolverFactory" />
+        <factory class="com.alibaba.test2.dataresolver.SkipModuleResolverFactory" />
+    </services:data-resolver>
+
+</beans:beans>
