@@ -17,10 +17,17 @@
  */
 package com.alibaba.citrus.service.requestcontext.parser.impl;
 
-import static com.alibaba.citrus.service.configuration.support.PropertyEditorRegistrarsSupport.*;
-import static com.alibaba.citrus.springext.util.DomUtil.*;
-import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
-import static com.alibaba.citrus.util.StringUtil.*;
+import static com.alibaba.citrus.service.configuration.support.PropertyEditorRegistrarsSupport.parseRegistrars;
+import static com.alibaba.citrus.springext.util.DomUtil.and;
+import static com.alibaba.citrus.springext.util.DomUtil.name;
+import static com.alibaba.citrus.springext.util.DomUtil.sameNs;
+import static com.alibaba.citrus.springext.util.DomUtil.subElements;
+import static com.alibaba.citrus.springext.util.DomUtil.theOnlySubElement;
+import static com.alibaba.citrus.springext.util.SpringExtUtil.attributesToProperties;
+import static com.alibaba.citrus.springext.util.SpringExtUtil.createManagedList;
+import static com.alibaba.citrus.springext.util.SpringExtUtil.getSiblingConfigurationPoint;
+import static com.alibaba.citrus.springext.util.SpringExtUtil.parseConfigurationPointBean;
+import static com.alibaba.citrus.util.StringUtil.trimToNull;
 
 import java.util.List;
 
@@ -28,10 +35,12 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
+import com.alibaba.citrus.service.upload.UploadService;
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
+import com.alibaba.citrus.springext.util.SpringExtUtil;
 
 public class ParserRequestContextFactoryDefinitionParser extends
         AbstractSingleBeanDefinitionParser<ParserRequestContextFactoryImpl> implements ContributionAware {
@@ -63,6 +72,8 @@ public class ParserRequestContextFactoryDefinitionParser extends
 
         if (uploadServiceName != null) {
             builder.addPropertyReference("uploadService", uploadServiceName);
+        } else {
+            SpringExtUtil.addPropertyRef(builder, "uploadService", "uploadService", UploadService.class, false);
         }
     }
 

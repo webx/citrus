@@ -26,3 +26,9 @@
 * 改变CsrfToken.getHiddenField()的默认行为 ── 默认生成longLiveToken而不是原来的uniqueToken。
 * Bugfix：当fileItem为空时，uploaded-file-validator抛NPE的问题
 * Bugfix：当redirect时，不要执行action
+* 改变<parser/> request context中利用getBeanByType取得upload service的方式：
+  由于<request-contexts>和<parser>会在BeanFactoryPostProcessor中初始化，而此时aop post processor还未被创建。
+  而getBeanByType可能导致某些FactoryBean抢在aop post processor之前被初始化，导致这部分的bean无法被aop拦截。
+* 改进<data-resolver>服务获取parameter annotations的方式：
+  由于aop可能会运行时派生一个新的类，而这个类并没有包含parameter annotations，导致data resolver无法解析该参数。
+  改进以后，data-resolver会从super class的被覆盖方法中取得annotation。

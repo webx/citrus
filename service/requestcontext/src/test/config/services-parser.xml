@@ -8,7 +8,8 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
         http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
         http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
-        http://www.alibaba.com/schema/services/request-contexts/parser/filters http://localhost:8080/services-request-contexts-parser-filters.xsd ">
+        http://www.alibaba.com/schema/services/request-contexts/parser/filters http://localhost:8080/services-request-contexts-parser-filters.xsd
+    ">
 
     <!-- 测试parser request context -->
     <services:request-contexts id="parser">
@@ -71,6 +72,6 @@
         </parser>
     </services:request-contexts>
 
-    <services:upload id="uploadService" />
+    <services:upload />
 
 </beans:beans>

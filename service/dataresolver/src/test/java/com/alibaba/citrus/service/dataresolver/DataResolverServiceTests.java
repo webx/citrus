@@ -17,11 +17,17 @@
  */
 package com.alibaba.citrus.service.dataresolver;
 
-import static com.alibaba.citrus.test.TestUtil.*;
-import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static com.alibaba.citrus.test.TestUtil.exception;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.classextension.EasyMock.createMock;
+import static org.easymock.classextension.EasyMock.replay;
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -35,6 +41,7 @@ import org.springframework.core.MethodParameter;
 
 import com.alibaba.citrus.service.dataresolver.data.Action;
 import com.alibaba.citrus.service.dataresolver.data.ContextAwareResolver;
+import com.alibaba.citrus.service.dataresolver.data.DerivedAction;
 import com.alibaba.citrus.service.dataresolver.data.Param;
 
 public class DataResolverServiceTests extends AbstractDataResolverTests {
@@ -103,7 +110,12 @@ public class DataResolverServiceTests extends AbstractDataResolverTests {
 
     @Test
     public void getParameterResolvers() throws Exception {
-        Method method = Action.class.getMethod("execute", HttpServletRequest.class, String.class);
+        assertParameterResolvers(Action.class);
+        assertParameterResolvers(DerivedAction.class);
+    }
+
+    private void assertParameterResolvers(Class<?> actionClass) throws Exception {
+        Method method = actionClass.getMethod("execute", HttpServletRequest.class, String.class);
         DataResolver[] resolvers = resolverServices.getParameterResolvers(method, request);
 
         assertEquals(2, resolvers.length);
@@ -122,7 +134,8 @@ public class DataResolverServiceTests extends AbstractDataResolverTests {
 
         String str = "";
         str += "MethodParameter {\n";
-        str += "  method     = public void com.alibaba.citrus.service.dataresolver.data.Action.execute(javax.servlet.http.HttpServletRequest,java.lang.String)\n";
+        str += "  method     = public void " + actionClass.getName()
+                + ".execute(javax.servlet.http.HttpServletRequest,java.lang.String)\n";
         str += "  paramIndex = 0\n";
         str += "}";
 
@@ -134,7 +147,8 @@ public class DataResolverServiceTests extends AbstractDataResolverTests {
 
         str = "";
         str += "MethodParameter {\n";
-        str += "  method     = public void com.alibaba.citrus.service.dataresolver.data.Action.execute(javax.servlet.http.HttpServletRequest,java.lang.String)\n";
+        str += "  method     = public void " + actionClass.getName()
+                + ".execute(javax.servlet.http.HttpServletRequest,java.lang.String)\n";
         str += "  paramIndex = 1\n";
         str += "}";
 

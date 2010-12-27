@@ -17,15 +17,12 @@
  */
 package com.alibaba.citrus.service.requestcontext.parser.impl;
 
-import static com.alibaba.citrus.service.requestcontext.parser.ParserRequestContext.*;
-import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
-import static com.alibaba.citrus.util.ArrayUtil.*;
-import static com.alibaba.citrus.util.ObjectUtil.*;
-import static com.alibaba.citrus.util.StringUtil.*;
+import static com.alibaba.citrus.service.requestcontext.parser.ParserRequestContext.URL_CASE_FOLDING_LOWER_WITH_UNDERSCORES;
+import static com.alibaba.citrus.util.ArrayUtil.isEmptyArray;
+import static com.alibaba.citrus.util.ObjectUtil.defaultIfNull;
+import static com.alibaba.citrus.util.StringUtil.defaultIfEmpty;
 
 import org.springframework.beans.PropertyEditorRegistrar;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
 
 import com.alibaba.citrus.service.configuration.support.PropertyEditorRegistrarsSupport;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
@@ -40,8 +37,7 @@ import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
  * 
  * @author Michael Zhou
  */
-public class ParserRequestContextFactoryImpl extends AbstractRequestContextFactory<ParserRequestContext> implements
-        BeanFactoryAware {
+public class ParserRequestContextFactoryImpl extends AbstractRequestContextFactory<ParserRequestContext> {
     private final static boolean CONVERTER_QUIET_DEFAULT = true;
     private final static String URL_CASE_FOLDING_DEFAULT = URL_CASE_FOLDING_LOWER_WITH_UNDERSCORES;
     private final static boolean AUTO_UPLOAD_DEFAULT = true;
@@ -52,7 +48,6 @@ public class ParserRequestContextFactoryImpl extends AbstractRequestContextFacto
     private final static boolean TRIMMING_DEFAULT = true;
     private final static String HTML_FIELD_SUFFIX_DEFAULT = ".~html";
 
-    private BeanFactory beanFactory;
     private PropertyEditorRegistrarsSupport propertyEditorRegistrars = new PropertyEditorRegistrarsSupport();
     private Boolean converterQuiet;
     private String caseFolding;
@@ -65,10 +60,6 @@ public class ParserRequestContextFactoryImpl extends AbstractRequestContextFacto
     private ParameterParserFilter[] filters;
     private String htmlFieldSuffix;
     private UploadService uploadService;
-
-    public void setBeanFactory(BeanFactory beanFactory) {
-        this.beanFactory = beanFactory;
-    }
 
     public void setPropertyEditorRegistrars(PropertyEditorRegistrar[] registrars) {
         propertyEditorRegistrars.setPropertyEditorRegistrars(registrars);
@@ -146,11 +137,6 @@ public class ParserRequestContextFactoryImpl extends AbstractRequestContextFacto
 
         // HTML类型的字段名后缀
         htmlFieldSuffix = defaultIfEmpty(htmlFieldSuffix, HTML_FIELD_SUFFIX_DEFAULT);
-
-        // Autowire upload service
-        if (uploadService == null) {
-            uploadService = getBeanOfType(beanFactory, UploadService.class);
-        }
     }
 
     /**

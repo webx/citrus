@@ -17,8 +17,9 @@
  */
 package com.alibaba.citrus.service.dataresolver.impl;
 
-import static com.alibaba.citrus.util.ArrayUtil.*;
-import static com.alibaba.citrus.util.Assert.*;
+import static com.alibaba.citrus.util.ArrayUtil.isEmptyArray;
+import static com.alibaba.citrus.util.Assert.assertNotNull;
+import static com.alibaba.citrus.util.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -74,8 +75,9 @@ public class DataResolverServiceImpl extends AbstractService<DataResolverService
             throws DataResolverNotFoundException {
         assertNotNull(method, "method");
 
-        Type[] paramTypes = method.getGenericParameterTypes();
-        Annotation[][] paramAnnotations = method.getParameterAnnotations();
+        Method annotatedMethod = getAnnotatedMethod(method);
+        Type[] paramTypes = annotatedMethod.getGenericParameterTypes();
+        Annotation[][] paramAnnotations = annotatedMethod.getParameterAnnotations();
 
         assertTrue(paramTypes.length == paramAnnotations.length, "invalid params");
 
@@ -89,6 +91,47 @@ public class DataResolverServiceImpl extends AbstractService<DataResolverService
         }
 
         return resolvers;
+    }
+
+    /**
+     * 从当前method开始，依次遍历被覆盖的父类方法，返回第一个带有annotation参数的method。如果没有，则返回method本身。
+     * <p>
+     * 这样做的原因是，aop在运行时会生成派生类型，但是annotation参数却没有被派生，导致从新的类型中取不到annotation参数的问题。
+     * </p>
+     */
+    private Method getAnnotatedMethod(Method method) {
+        Method annotatedMethod = method;
+
+        while (annotatedMethod != null && !hasAnnotations(annotatedMethod.getParameterAnnotations())) {
+            annotatedMethod = getOverridenMethod(annotatedMethod);
+        }
+
+        return annotatedMethod == null ? method : annotatedMethod;
+    }
+
+    private boolean hasAnnotations(Annotation[][] paramAnnotations) {
+        if (!isEmptyArray(paramAnnotations)) {
+            for (Annotation[] annotations : paramAnnotations) {
+                if (!isEmptyArray(annotations)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private Method getOverridenMethod(Method method) {
+        Class<?> superClass = method.getDeclaringClass().getSuperclass();
+
+        if (superClass != null) {
+            try {
+                return superClass.getDeclaredMethod(method.getName(), method.getParameterTypes());
+            } catch (NoSuchMethodException e) {
+            }
+        }
+
+        return null;
     }
 
     /**

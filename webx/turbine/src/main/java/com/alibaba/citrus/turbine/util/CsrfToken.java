@@ -41,6 +41,7 @@ import org.w3c.dom.Element;
 import com.alibaba.citrus.service.pull.ToolFactory;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import com.alibaba.citrus.util.ClassLoaderUtil;
+import com.alibaba.citrus.util.ServiceNotFoundException;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
@@ -261,6 +262,8 @@ public class CsrfToken {
         try {
             return Generator.class.cast(ClassLoaderUtil.newServiceInstance("csrfTokenGeneratorOverride",
                     CsrfToken.class));
+        } catch (ServiceNotFoundException e) {
+            // ignore
         } catch (Exception e) {
             log.warn("Failure in CsrfToken.getGeneratorOverride()", e);
         }
