@@ -26,6 +26,7 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -223,8 +224,8 @@ public abstract class URIBrokerFeatures implements Renderable {
         clearInterceptors();
 
         if (parent.hasInterceptors()) {
-            for (URIBrokerInterceptor interceptor : parent.getInterceptors()) {
-                addInterceptor(interceptor);
+            for (Entry<URIBrokerInterceptor, Integer> entry : parent.getInterceptorStates().entrySet()) {
+                getInterceptorStates().put(entry.getKey(), entry.getValue());
             }
         }
 

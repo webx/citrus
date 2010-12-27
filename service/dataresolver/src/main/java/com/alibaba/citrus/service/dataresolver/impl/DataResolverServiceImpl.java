@@ -17,9 +17,8 @@
  */
 package com.alibaba.citrus.service.dataresolver.impl;
 
-import static com.alibaba.citrus.util.ArrayUtil.isEmptyArray;
-import static com.alibaba.citrus.util.Assert.assertNotNull;
-import static com.alibaba.citrus.util.Assert.assertTrue;
+import static com.alibaba.citrus.util.ArrayUtil.*;
+import static com.alibaba.citrus.util.Assert.*;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

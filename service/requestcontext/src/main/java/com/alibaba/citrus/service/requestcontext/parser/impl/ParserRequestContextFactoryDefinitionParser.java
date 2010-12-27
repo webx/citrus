@@ -17,17 +17,10 @@
  */
 package com.alibaba.citrus.service.requestcontext.parser.impl;
 
-import static com.alibaba.citrus.service.configuration.support.PropertyEditorRegistrarsSupport.parseRegistrars;
-import static com.alibaba.citrus.springext.util.DomUtil.and;
-import static com.alibaba.citrus.springext.util.DomUtil.name;
-import static com.alibaba.citrus.springext.util.DomUtil.sameNs;
-import static com.alibaba.citrus.springext.util.DomUtil.subElements;
-import static com.alibaba.citrus.springext.util.DomUtil.theOnlySubElement;
-import static com.alibaba.citrus.springext.util.SpringExtUtil.attributesToProperties;
-import static com.alibaba.citrus.springext.util.SpringExtUtil.createManagedList;
-import static com.alibaba.citrus.springext.util.SpringExtUtil.getSiblingConfigurationPoint;
-import static com.alibaba.citrus.springext.util.SpringExtUtil.parseConfigurationPointBean;
-import static com.alibaba.citrus.util.StringUtil.trimToNull;
+import static com.alibaba.citrus.service.configuration.support.PropertyEditorRegistrarsSupport.*;
+import static com.alibaba.citrus.springext.util.DomUtil.*;
+import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
+import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
 

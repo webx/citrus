@@ -17,10 +17,10 @@
  */
 package com.alibaba.citrus.service.requestcontext.parser.impl;
 
-import static com.alibaba.citrus.service.requestcontext.parser.ParserRequestContext.URL_CASE_FOLDING_LOWER_WITH_UNDERSCORES;
-import static com.alibaba.citrus.util.ArrayUtil.isEmptyArray;
-import static com.alibaba.citrus.util.ObjectUtil.defaultIfNull;
-import static com.alibaba.citrus.util.StringUtil.defaultIfEmpty;
+import static com.alibaba.citrus.service.requestcontext.parser.ParserRequestContext.*;
+import static com.alibaba.citrus.util.ArrayUtil.*;
+import static com.alibaba.citrus.util.ObjectUtil.*;
+import static com.alibaba.citrus.util.StringUtil.*;
 
 import org.springframework.beans.PropertyEditorRegistrar;
 
