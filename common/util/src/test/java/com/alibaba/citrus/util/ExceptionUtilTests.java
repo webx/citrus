@@ -154,6 +154,58 @@ public class ExceptionUtilTests {
     }
 
     @Test
+    public void throwExceptionOrError() {
+        try {
+            ExceptionUtil.throwExceptionOrError(new Exception("test"));
+            fail();
+        } catch (Exception e) {
+            assertEquals("test", e.getMessage());
+        }
+
+        try {
+            ExceptionUtil.throwExceptionOrError(new RuntimeException("test"));
+            fail();
+        } catch (RuntimeException e) {
+            assertEquals("test", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
+
+        try {
+            ExceptionUtil.throwExceptionOrError(new Error("test"));
+            fail();
+        } catch (Error e) {
+            assertEquals("test", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void throwRuntimeExceptionOrError() {
+        try {
+            ExceptionUtil.throwRuntimeExceptionOrError(new Exception("test"));
+            fail();
+        } catch (RuntimeException e) {
+            assertEquals("test", e.getCause().getMessage());
+        }
+
+        try {
+            ExceptionUtil.throwRuntimeExceptionOrError(new RuntimeException("test"));
+            fail();
+        } catch (RuntimeException e) {
+            assertEquals("test", e.getMessage());
+        }
+
+        try {
+            ExceptionUtil.throwRuntimeExceptionOrError(new Error("test"));
+            fail();
+        } catch (Error e) {
+            assertEquals("test", e.getMessage());
+        }
+    }
+
+    @Test
     public void getStackTrace() {
         Throwable e = new Throwable();
         String stacktrace = ExceptionUtil.getStackTrace(e);

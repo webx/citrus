@@ -19,6 +19,7 @@ package com.alibaba.citrus.service.moduleloader.impl.adapter;
 
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.ClassUtil.*;
+import static com.alibaba.citrus.util.ExceptionUtil.*;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -70,7 +71,8 @@ class MethodInvoker {
         try {
             fastMethod.invoke(moduleObject, args);
         } catch (InvocationTargetException e) {
-            throw (Exception) e.getCause();
+            throwExceptionOrError(e.getCause());
+            return;
         }
     }
 

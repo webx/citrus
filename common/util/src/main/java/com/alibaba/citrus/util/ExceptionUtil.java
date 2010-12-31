@@ -106,6 +106,32 @@ public class ExceptionUtil {
     }
 
     /**
+     * 抛出Throwable，但不需要声明<code>throws Throwable</code>。
+     */
+    public static void throwExceptionOrError(Throwable t) throws Exception {
+        if (t instanceof Exception) {
+            throw (Exception) t;
+        } else if (t instanceof Error) {
+            throw (Error) t;
+        } else {
+            throw new RuntimeException(t); // unreachable code
+        }
+    }
+
+    /**
+     * 抛出Throwable，但不需要声明<code>throws Throwable</code>。
+     */
+    public static void throwRuntimeExceptionOrError(Throwable t) {
+        if (t instanceof Error) {
+            throw (Error) t;
+        } else if (t instanceof RuntimeException) {
+            throw (RuntimeException) t;
+        } else {
+            throw new RuntimeException(t);
+        }
+    }
+
+    /**
      * 取得异常的stacktrace字符串。
      * 
      * @param throwable 异常

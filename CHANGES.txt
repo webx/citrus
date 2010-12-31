@@ -32,4 +32,6 @@
 * 改进<data-resolver>服务获取parameter annotations的方式：
   由于aop可能会运行时派生一个新的类，而这个类并没有包含parameter annotations，导致data resolver无法解析该参数。
   改进以后，data-resolver会从super class的被覆盖方法中取得annotation。
-* Bugfix: 解决URIBroker.toString()然后再fork()，intercepters会被重复执行的问题。
+* Bugfix：解决URIBroker.toString()然后再fork()，intercepters会被重复执行的问题。
+* Bugfix：ModuleLoaderService中产生ClassCastException的问题。
+* 改进：在ExceptionUtil中增加throwExceptionOrError()和throwRuntimeExceptionOrError()方法（用来解决上一个bug）。
