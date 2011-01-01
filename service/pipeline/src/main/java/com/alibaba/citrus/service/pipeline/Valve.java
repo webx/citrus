@@ -27,17 +27,5 @@ package com.alibaba.citrus.service.pipeline;
  * @author Michael Zhou
  */
 public interface Valve {
-    /**
-     * 执行valve。
-     * <ul>
-     * <li>Valve通过调用<code>PipelineContext.invokeNext()</code>方法来调用其后的valves；</li>
-     * <li>Valve可以调用<code>PipelineContext.breakPipeline()</code>
-     * 来立即跳出当前或其上n层的pipeline。</li>
-     * <li>Valve可以调用<code>Pipeline.invokeSub(pipelineContext)</code>来启动一个子流程。</li>
-     * <li>Valve可以调用<code>PipelineHandle.reinvoke()</code>来重复执行子流程。</li>
-     * <li>假如valve直接返回而不调用<code>PipelineContext.invokeNext()</code>
-     * 方法，则立即结束当前pipeline的执行。</li>
-     * </ul>
-     */
     void invoke(PipelineContext pipelineContext) throws Exception;
 }
