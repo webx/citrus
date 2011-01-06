@@ -85,7 +85,7 @@ public class LocaleUtil {
      * @param charset Òª¼ì²éµÄcharset
      */
     public static boolean isCharsetSupported(String charset) {
-        return Charset.isSupported(charset);
+        return charset != null && Charset.isSupported(charset);
     }
 
     /**

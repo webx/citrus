@@ -140,7 +140,11 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
                 Matcher matcher = inputCharsetPattern.matcher(queryString);
 
                 if (matcher.find()) {
-                    String charset = matcher.group(1);
+                    String charset = null;
+
+                    if (matcher.groupCount() >= 2) {
+                        charset = matcher.group(2);
+                    }
 
                     if (LocaleUtil.isCharsetSupported(charset)) {
                         inputCharset = charset;
@@ -183,7 +187,11 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
                 Matcher matcher = outputCharsetPattern.matcher(queryString);
 
                 if (matcher.find()) {
-                    String charset = matcher.group(1);
+                    String charset = null;
+
+                    if (matcher.groupCount() >= 2) {
+                        charset = matcher.group(2);
+                    }
 
                     if (LocaleUtil.isCharsetSupported(charset)) {
                         outputCharset = charset;

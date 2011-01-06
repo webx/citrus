@@ -72,6 +72,7 @@ public class LocaleUtilTests {
         assertTrue(LocaleUtil.isCharsetSupported("iso8859_1"));
         assertTrue(LocaleUtil.isCharsetSupported("iso-8859-1"));
 
+        assertFalse(LocaleUtil.isCharsetSupported(null));
         assertFalse(LocaleUtil.isCharsetSupported("hello"));
     }
 

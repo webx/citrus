@@ -74,10 +74,10 @@ public class SetLocaleRequestContextFactoryImpl extends AbstractRequestContextFa
     @Override
     protected void init() {
         inputCharsetParam = defaultIfNull(inputCharsetParam, INPUT_CHARSET_PARAM_DEFAULT);
-        inputCharsetPattern = Pattern.compile(inputCharsetParam + "=([\\w-]+)");
+        inputCharsetPattern = Pattern.compile("(" + inputCharsetParam + ")=([\\w-]+)");
 
         outputCharsetParam = defaultIfNull(outputCharsetParam, OUTPUT_CHARSET_PARAM_DEFAULT);
-        outputCharsetPattern = Pattern.compile(outputCharsetParam + "=([\\w-]+)");
+        outputCharsetPattern = Pattern.compile("(" + outputCharsetParam + ")=([\\w-]+)");
 
         sessionKey = defaultIfNull(sessionKey, SESSION_KEY_DEFAULT);
         paramKey = defaultIfNull(paramKey, PARAMETER_KEY_DEFAULT);

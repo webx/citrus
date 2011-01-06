@@ -37,3 +37,5 @@
 * 改进：在ExceptionUtil中增加throwExceptionOrError()和throwRuntimeExceptionOrError()方法（用来解决上一个bug）。
 * Bugfix: escape-support对于#define block会多重escape。
 * 改进：对于noescape，返回value object，避免调用value.toString()，合后续的handler可以被正确执行。
+* 改进：<set-local inputCharsetParam="" outputCharsetParam="" >支持多个参数，用|分隔，例如："_input_charset|ie"
+* 改进：LocaleUtil.isCharsetSupported(null)返回false，而不是异常
