@@ -38,6 +38,7 @@ import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.exception.TemplateInitException;
+import org.apache.velocity.runtime.Renderable;
 import org.apache.velocity.runtime.RuntimeServices;
 import org.apache.velocity.runtime.directive.Directive;
 import org.apache.velocity.runtime.parser.node.Node;
@@ -117,7 +118,8 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
         }
 
         // 如果当前引用是在#set($v = "$ref")中的，则不进行escape，推迟到最终输出时再escape。
-        if (InterpolationUtil.isInInterpolation(context)) {
+        // 同时避免对#define block进行escape。
+        if (InterpolationUtil.isInInterpolation(context) || value instanceof Renderable) {
             return value;
         }
 
@@ -127,7 +129,7 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
             return value;
         }
 
-        return escapeType.escape(value.toString());
+        return escapeType.escape(value);
     }
 
     private EscapeType getEscapeType(String reference) {
@@ -238,8 +240,14 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
     public static enum EscapeType {
         NO_ESCAPE("noescape") {
             @Override
-            public String escape(String str) {
-                return str;
+            public Object escape(Object value) {
+                return value;
+            }
+
+            @Override
+            protected String escape(String strValue) {
+                unreachableCode();
+                return strValue;
             }
 
             @Override
@@ -250,43 +258,43 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
 
         JAVA("java") {
             @Override
-            public String escape(String str) {
-                return StringEscapeUtil.escapeJava(str);
+            protected String escape(String strValue) {
+                return StringEscapeUtil.escapeJava(strValue);
             }
         },
 
         JAVA_SCRIPT("javascript") {
             @Override
-            public String escape(String str) {
-                return StringEscapeUtil.escapeJavaScript(str);
+            protected String escape(String strValue) {
+                return StringEscapeUtil.escapeJavaScript(strValue);
             }
         },
 
         HTML("html") {
             @Override
-            public String escape(String str) {
-                return StringEscapeUtil.escapeHtml(str);
+            protected String escape(String strValue) {
+                return StringEscapeUtil.escapeHtml(strValue);
             }
         },
 
         XML("xml") {
             @Override
-            public String escape(String str) {
-                return StringEscapeUtil.escapeXml(str);
+            protected String escape(String strValue) {
+                return StringEscapeUtil.escapeXml(strValue);
             }
         },
 
         URL("url") {
             @Override
-            public String escape(String str) {
-                return StringEscapeUtil.escapeURL(str);
+            protected String escape(String strValue) {
+                return StringEscapeUtil.escapeURL(strValue);
             }
         },
 
         SQL("sql") {
             @Override
-            public String escape(String str) {
-                return StringEscapeUtil.escapeSql(str);
+            protected String escape(String strValue) {
+                return StringEscapeUtil.escapeSql(strValue);
             }
         };
 
@@ -311,7 +319,11 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
             return name;
         }
 
-        public abstract String escape(String str);
+        public Object escape(Object value) {
+            return escape(value.toString());
+        }
+
+        protected abstract String escape(String strValue);
 
         public static EscapeType getEscapeType(String name) {
             name = trimToNull(name);

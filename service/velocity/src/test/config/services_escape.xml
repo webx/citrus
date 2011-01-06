@@ -56,6 +56,22 @@
         </engines:velocity-engine>
     </services:template>
 
+    <services:template id="with_rules_for_object" lazy-init="true">
+        <engines:velocity-engine templateEncoding="GBK">
+            <engines:plugins
+                xmlns="http://www.alibaba.com/schema/services/template/engines/velocity/plugins">
+                <escape-support defaultEscape="html">
+                    <noescape>
+                        <if-matches pattern="^myref" />
+                    </noescape>
+                </escape-support>
+                <plugin
+                    class="com.alibaba.citrus.service.velocity.support.EscapeTests$Renderable2Handler"
+                 />
+            </engines:plugins>
+        </engines:velocity-engine>
+    </services:template>
+
     <services:resource-loading>
         <services:resource pattern="/">
             <loaders:file-loader />

@@ -1,0 +1,7 @@
+#define( $block )Hello $who#end
+
+#set( $who = 'World!' )
+1. $block
+
+#set( $who = '<World />' )
+2. $block

@@ -24,6 +24,7 @@ import static org.junit.Assert.*;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+import org.apache.velocity.app.event.ReferenceInsertionEventHandler;
 import org.apache.velocity.exception.ParseErrorException;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -376,6 +377,59 @@ public class EscapeTests extends AbstractVelocityEngineTests {
 
         // 指定noescape
         assertThat(content, containsString("7. <world name=\"'中国'\" />"));
+    }
+
+    @Test
+    public void escape_define() throws Exception {
+        getEngine("with_defaultEscape", factory);
+
+        TemplateContext ctx = new MappedTemplateContext();
+
+        String content = templateService.getText("escape/test_escape_define.vm", ctx);
+
+        assertThat(content, containsString("1. Hello World!"));
+        assertThat(content, containsString("2. Hello &lt;World /&gt;"));
+    }
+
+    /**
+     * 测试noescape时，直接返回value object，而不是对其执行toString方法。
+     */
+    @Test
+    public void escape_object_noescape() throws Exception {
+        getEngine("with_rules_for_object", factory);
+
+        TemplateContext ctx = new MappedTemplateContext();
+
+        // EscapeSupport先执行，由于是noescape，所以直接返回value object，而不是value.toString()
+        // 后续的Renderable2Handler得以执行，并调用render方法。
+        ctx.put("myref", new Renderable2() {
+            public String render2() {
+                return "render";
+            }
+
+            @Override
+            public String toString() {
+                return "toString";
+            }
+        });
+
+        String content = templateService.getText("escape/test_escape_object_noescape.vm", ctx);
+
+        assertEquals("render", content);
+    }
+
+    public static interface Renderable2 {
+        String render2();
+    }
+
+    public static class Renderable2Handler implements ReferenceInsertionEventHandler {
+        public Object referenceInsert(String reference, Object value) {
+            if (value instanceof Renderable2) {
+                return ((Renderable2) value).render2();
+            }
+
+            return value;
+        }
     }
 
     public static class MyControl {

@@ -35,3 +35,5 @@
 * Bugfix：解决URIBroker.toString()然后再fork()，intercepters会被重复执行的问题。
 * Bugfix：ModuleLoaderService中产生ClassCastException的问题。
 * 改进：在ExceptionUtil中增加throwExceptionOrError()和throwRuntimeExceptionOrError()方法（用来解决上一个bug）。
+* Bugfix: escape-support对于#define block会多重escape。
+* 改进：对于noescape，返回value object，避免调用value.toString()，合后续的handler可以被正确执行。
