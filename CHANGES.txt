@@ -39,3 +39,9 @@
 * 改进：对于noescape，返回value object，避免调用value.toString()，合后续的handler可以被正确执行。
 * 改进：<set-local inputCharsetParam="" outputCharsetParam="" >支持多个参数，用|分隔，例如："_input_charset|ie"
 * 改进：LocaleUtil.isCharsetSupported(null)返回false，而不是异常
+* 改进：添加configuration point: rewrite/handlers，将beans:bean的引用改成handlers:handler。
+  注意：这会引起xml格式的不兼容，但是这个问题可以在应用启动时立刻发现，并且很容易修改。
+  step1: 引入namespace: xmlns:rewrite-handlers="http://www.alibaba.com/schema/services/request-contexts/rewrite/handlers"
+  step2: 指定schema location: http://www.alibaba.com/schema/services/request-contexts/rewrite/handlers http://localhost:8080/schema/services-request-contexts-rewrite-handlers.xsd
+  step3: 将<handlers><beans:bean>改成：<handlers><rewrite-handlers:handler>
+  

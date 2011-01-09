@@ -28,11 +28,21 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
+import com.alibaba.citrus.springext.ConfigurationPoint;
+import com.alibaba.citrus.springext.Contribution;
+import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 
 public class RewriteRequestContextFactoryDefinitionParser extends
-        AbstractSingleBeanDefinitionParser<RewriteRequestContextFactoryImpl> {
+        AbstractSingleBeanDefinitionParser<RewriteRequestContextFactoryImpl> implements ContributionAware {
+    private ConfigurationPoint rewriteHandlersConfigurationPoint;
+
+    public void setContribution(Contribution contrib) {
+        rewriteHandlersConfigurationPoint = getSiblingConfigurationPoint("services/request-contexts/rewrite/handlers",
+                contrib);
+    }
+
     @Override
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         List<Object> rules = createManagedList(element, parserContext);
@@ -68,7 +78,7 @@ public class RewriteRequestContextFactoryDefinitionParser extends
             } else if (substitutionSelector.accept(subElement)) {
                 substitution = parseSubstitution(subElement, parserContext);
             } else if (handlersSelector.accept(subElement)) {
-                handlers = parseHandlers(subElement, parserContext, ruleBuilder.getRawBeanDefinition());
+                handlers = parseHandlers(subElement, parserContext, ruleBuilder);
             }
         }
 
@@ -145,9 +155,15 @@ public class RewriteRequestContextFactoryDefinitionParser extends
     /**
      * ½âÎörule/handlers¡£
      */
-    @SuppressWarnings("unchecked")
     private List<Object> parseHandlers(Element handlersElement, ParserContext parserContext,
-                                       BeanDefinition containingBeanDefinition) {
-        return parserContext.getDelegate().parseListElement(handlersElement, containingBeanDefinition);
+                                       BeanDefinitionBuilder ruleBuilder) {
+        List<Object> handlers = createManagedList(handlersElement, parserContext);
+
+        for (Element subElement : subElements(handlersElement)) {
+            handlers.add(parseConfigurationPointBean(subElement, rewriteHandlersConfigurationPoint, parserContext,
+                    ruleBuilder));
+        }
+
+        return handlers;
     }
 }

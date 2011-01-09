@@ -3,11 +3,13 @@
     xmlns:beans="http://www.springframework.org/schema/beans"
     xmlns:p="http://www.springframework.org/schema/p"
     xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns:rewrite-handlers="http://www.alibaba.com/schema/services/request-contexts/rewrite/handlers"
     xmlns="http://www.alibaba.com/schema/services/request-contexts"
     xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
         http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
         http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
+        http://www.alibaba.com/schema/services/request-contexts/rewrite/handlers http://localhost:8080/schema/services-request-contexts-rewrite-handlers.xsd
     ">
 
     <!-- 测试rewrite request context: 缺少parser request context -->
@@ -84,7 +86,7 @@
             <!-- Custom handlers：规格化URL -->
             <rule pattern="/test8">
                 <handlers>
-                    <beans:bean
+                    <rewrite-handlers:handler
                         class="com.alibaba.citrus.service.requestcontext.rewrite.support.UrlNormalizer"
                      />
                 </handlers>

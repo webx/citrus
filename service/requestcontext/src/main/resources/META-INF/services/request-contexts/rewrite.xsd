@@ -48,7 +48,7 @@
                     ]]></xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
-            <xsd:element name="handlers" type="beans:listOrSetType" minOccurs="0">
+            <xsd:element name="handlers" type="RewriteRequestContextHandlerType" minOccurs="0">
                 <xsd:annotation>
                     <xsd:documentation><![CDATA[
     事件处理器。当某些事件发生时，可以得到通知。
@@ -92,6 +92,14 @@
         </xsd:sequence>
         <xsd:attribute name="key" type="xsd:string" use="required" />
         <xsd:attribute name="value" type="xsd:string" />
+    </xsd:complexType>
+
+    <xsd:complexType name="RewriteRequestContextHandlerType">
+        <xsd:sequence>
+            <xsd:any
+                namespace="http://www.alibaba.com/schema/services/request-contexts/rewrite/handlers"
+                minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
     </xsd:complexType>
 
 </xsd:schema>

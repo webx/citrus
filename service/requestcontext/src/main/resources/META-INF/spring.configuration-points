@@ -9,3 +9,4 @@ services/request-contexts/session/model-encoders=http://www.alibaba.com/schema/s
 services/request-contexts/session/interceptors=http://www.alibaba.com/schema/services/request-contexts/session/interceptors; defaultElement=interceptor; nsPrefix=session-interceptors
 services/request-contexts/basic/interceptors=http://www.alibaba.com/schema/services/request-contexts/basic/interceptors; defaultElement=interceptor; nsPrefix=basic-interceptors
 services/request-contexts/parser/filters=http://www.alibaba.com/schema/services/request-contexts/parser/filters; defaultElement=filter; nsPrefix=parser-filters
+services/request-contexts/rewrite/handlers=http://www.alibaba.com/schema/services/request-contexts/rewrite/handlers; defaultElement=handler; nsPrefix=rewrite-handlers
