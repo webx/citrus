@@ -24,7 +24,6 @@ import static org.easymock.classextension.EasyMock.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -41,6 +40,7 @@ import org.springframework.beans.factory.BeanFactory;
 
 import com.alibaba.citrus.service.mail.builder.MailAddressType;
 import com.alibaba.citrus.service.mail.builder.MailBuilder;
+import com.alibaba.citrus.service.mail.builder.MailBuilderException;
 import com.alibaba.citrus.service.mail.builder.content.AbstractContent;
 import com.alibaba.citrus.service.mail.builder.content.AlternativeMultipartContent;
 import com.alibaba.citrus.service.mail.builder.content.AttachmentContent;
@@ -51,7 +51,6 @@ import com.alibaba.citrus.service.mail.builder.content.TextTemplateContent;
 import com.alibaba.citrus.service.mail.impl.MailServiceImpl;
 import com.alibaba.citrus.service.mail.session.MailStore;
 import com.alibaba.citrus.service.mail.session.MailTransport;
-import com.alibaba.citrus.util.UnexpectedFailureException;
 
 /**
  * ≤‚ ‘mail serviceº∞∆‰≈‰÷√°£
@@ -728,8 +727,8 @@ public class MailServiceTests extends AbstractMailBuilderTests {
         try {
             getMessageAsText();
             fail();
-        } catch (UnexpectedFailureException e) {
-            assertThat(e, exception(IOException.class, "Empty multipart"));
+        } catch (MailBuilderException e) {
+            assertThat(e, exception(MessagingException.class, "Empty multipart"));
         }
 
         // with attachment
@@ -768,8 +767,8 @@ public class MailServiceTests extends AbstractMailBuilderTests {
         try {
             getMessageAsText();
             fail();
-        } catch (UnexpectedFailureException e) {
-            assertThat(e, exception(IOException.class, "Empty multipart"));
+        } catch (MailBuilderException e) {
+            assertThat(e, exception(MessagingException.class, "Empty multipart"));
         }
 
         // with attachment

@@ -154,6 +154,11 @@ public class MailUtil {
             String mimeCharset = MimeUtility.mimeCharset(getJavaCharset(javaCharset));
 
             for (InternetAddress addr : addrs) {
+                // JavaMail 1.4.2以上，在parse时就会报empty address错误。在此处判断，使较低版的javamail行为一致。
+                if (isEmpty(addr.getAddress())) {
+                    throw new AddressException("Empty address");
+                }
+
                 addr.setPersonal(trimToNull(addr.getPersonal()), mimeCharset);
             }
         }
