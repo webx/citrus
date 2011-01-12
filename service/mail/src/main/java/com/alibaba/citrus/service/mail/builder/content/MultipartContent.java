@@ -74,6 +74,10 @@ public abstract class MultipartContent extends AbstractContent implements
     public void render(Part mailPart) throws MessagingException {
         Multipart multipart = getMultipart();
 
+        if (contents.isEmpty()) {
+            throw new MessagingException("Empty multipart");
+        }
+
         for (MailContent content : contents) {
             MimeBodyPart bodyPart = new MimeBodyPart();
             content.render(bodyPart);

@@ -44,4 +44,5 @@
   step1: 引入namespace: xmlns:rewrite-handlers="http://www.alibaba.com/schema/services/request-contexts/rewrite/handlers"
   step2: 指定schema location: http://www.alibaba.com/schema/services/request-contexts/rewrite/handlers http://localhost:8080/schema/services-request-contexts-rewrite-handlers.xsd
   step3: 将<handlers><beans:bean>改成：<handlers><rewrite-handlers:handler>
-  
+* 改进pom使项目可在默认的maven repository下build
+* 改进mail service，使之在javamail 1.4.1和1.4.2下有一致的表现。
