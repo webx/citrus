@@ -1,4 +1,4 @@
--- Since 3.0.1
+-- Changes in 3.0.1
 
 * 改进FormResolver：将空白表单看作invalid，等同于验证失败，当skipIfInvalid=true时，避免执行action。
 * 改进WebxFrameworkFilter：添加excludes参数，使它可以快速排除不需要处理的requestURI
@@ -46,3 +46,6 @@
   step3: 将<handlers><beans:bean>改成：<handlers><rewrite-handlers:handler>
 * 改进pom使项目可在默认的maven repository下build
 * 改进mail service，使之在javamail 1.4.1和1.4.2下有一致的表现。
+
+-- Changes in 3.0.2
+
