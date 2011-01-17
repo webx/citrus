@@ -165,9 +165,7 @@ public abstract class AbstractSingleValueEncoderTests extends AbstractRequestCon
 
         Arrays.sort(newCookies);
 
-        assertEquals(1, newCookies.length);
-
-        assertThat(newCookies[0], containsAll(cookieName + "=" + value3Encoded + ";", " Path=/; HttpOnly")); // XXX! 未修改也会设cookie，需要改进
+        assertEquals(0, newCookies.length); // 由于值未改变，所以不提交cookie
 
         // request 6 - invalidate
         invokeNoopServlet("/servlet");

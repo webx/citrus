@@ -463,14 +463,16 @@ public class SessionImpl implements HttpSession {
             store.commit(storeAttrs, getId(), new StoreContextImpl(storeName));
         }
 
-        // 检查遗漏的store，并提交之
-        if (storeNames.length > stores.size()) {
-            for (String storeName : storeNames) {
-                if (!stores.containsKey(storeName)) {
-                    SessionStore store = requestContext.getSessionConfig().getStores().getStore(storeName);
-                    Map<String, Object> storeAttrs = emptyMap();
+        // 假如invalidate和clear被调用，则检查剩余的store，通知它们清除当前的数据。
+        if (cleared) {
+            if (storeNames.length > stores.size()) {
+                for (String storeName : storeNames) {
+                    if (!stores.containsKey(storeName)) {
+                        SessionStore store = requestContext.getSessionConfig().getStores().getStore(storeName);
+                        Map<String, Object> storeAttrs = emptyMap();
 
-                    store.commit(storeAttrs, sessionID, new StoreContextImpl(storeName));
+                        store.commit(storeAttrs, sessionID, new StoreContextImpl(storeName));
+                    }
                 }
             }
         }

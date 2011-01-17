@@ -200,7 +200,7 @@
             <xsd:element name="match">
                 <xsd:annotation>
                     <xsd:documentation><![CDATA[
-    创建一个attributes name到session store的映射，支持通配符：*，?。
+    创建一个attributes name到session store的映射。Attribute name如果是*，代表默认映射。
                     ]]></xsd:documentation>
                 </xsd:annotation>
                 <xsd:complexType>

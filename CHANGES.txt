@@ -49,3 +49,4 @@
 
 -- Changes in 3.0.2
 
+* 改进SessionRequestContext，当attributes未改变，并且invalidate未调用时，不提交store，以免产生不必要之cookies。

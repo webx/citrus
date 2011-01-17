@@ -88,7 +88,7 @@ public class SingleValuedCookieStoreImpl extends AbstractCookieStore implements 
         }
     }
 
-    public void commit(Map<String, Object> attrs, String sessionID, StoreContext storeContext) {
+    public void commit(Map<String, Object> modifiedAttrs, String sessionID, StoreContext storeContext) {
         State state = getState(storeContext);
 
         if (state.cookieCommitted) {
@@ -99,8 +99,8 @@ public class SingleValuedCookieStoreImpl extends AbstractCookieStore implements 
 
         String attrName = attrNames[0];
 
-        if (attrs.containsKey(attrName)) {
-            Object attrValue = attrs.get(attrName);
+        if (modifiedAttrs.containsKey(attrName)) {
+            Object attrValue = modifiedAttrs.get(attrName);
 
             if (attrValue == null) {
                 if (log.isDebugEnabled()) {

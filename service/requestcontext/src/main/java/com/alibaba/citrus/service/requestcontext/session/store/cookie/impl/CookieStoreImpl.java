@@ -130,7 +130,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
         }
     }
 
-    public void commit(Map<String, Object> attrs, String sessionID, StoreContext storeContext) {
+    public void commit(Map<String, Object> modifiedAttrs, String sessionID, StoreContext storeContext) {
         State state = getState(storeContext);
 
         if (state.cookieCommitted) {
@@ -139,7 +139,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
 
         state.cookieCommitted = true;
 
-        for (Map.Entry<String, Object> entry : attrs.entrySet()) {
+        for (Map.Entry<String, Object> entry : modifiedAttrs.entrySet()) {
             String attrName = entry.getKey();
             Object attrValue = entry.getValue();
 
@@ -160,7 +160,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
 
         if (log.isDebugEnabled()) {
             for (String attrName : state.attributes.keySet()) {
-                if (!attrs.containsKey(attrName)) {
+                if (!modifiedAttrs.containsKey(attrName)) {
                     Object attrValue = state.attributes.get(attrName);
                     log.debug("Left unchanged attribute: {} = {}", attrName, attrValue);
                 }

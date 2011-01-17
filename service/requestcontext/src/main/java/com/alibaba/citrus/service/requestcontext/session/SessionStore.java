@@ -62,11 +62,11 @@ public interface SessionStore {
     /**
      * 保存指定session的attributes。
      * 
-     * @param attrs 要保存的attrs，如果值为<code>null</code>表示删除
+     * @param modifiedAttrs 要保存的attrs，如果值为<code>null</code>表示删除
      * @param sessionID 要保存的sessionID
      * @param storeContext 用来取得request信息，并存放store当前的状态
      */
-    void commit(Map<String, Object> attrs, String sessionID, StoreContext storeContext);
+    void commit(Map<String, Object> modifiedAttrs, String sessionID, StoreContext storeContext);
 
     /**
      * 帮助store取得当前request的信息，并存放它们自己的当前状态。

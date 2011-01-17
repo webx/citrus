@@ -84,7 +84,7 @@ public class SimpleMemoryStoreImpl implements SessionStore {
     /**
      * 保存指定session的attributes。attrs为<code>null</code>表示删除。
      */
-    public void commit(Map<String, Object> attrs, String sessionID, StoreContext storeContext) {
+    public void commit(Map<String, Object> modifiedAttrs, String sessionID, StoreContext storeContext) {
         Map<String, Object> sessionData = null;
 
         if (!sessions.containsKey(sessionID)) {
@@ -96,7 +96,7 @@ public class SimpleMemoryStoreImpl implements SessionStore {
 
         assertNotNull(sessionData, "sessionData for ID: %s", sessionID);
 
-        for (Map.Entry<String, Object> entry : attrs.entrySet()) {
+        for (Map.Entry<String, Object> entry : modifiedAttrs.entrySet()) {
             String attrName = entry.getKey();
             Object attrValue = entry.getValue();
 
