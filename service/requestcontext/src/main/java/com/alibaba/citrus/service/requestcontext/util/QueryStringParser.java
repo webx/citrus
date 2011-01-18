@@ -164,34 +164,10 @@ public class QueryStringParser {
     }
 
     private String decode(String str) {
-        if (str != null) {
-            try {
-                // 对str进行URL decode，此时str中可能包含unicode字符，也可能包含bytes。
-                str = StringEscapeUtil.unescapeURL(str, charset);
-
-                StringBuilder buf = new StringBuilder();
-                byte[] bytes = new byte[str.length()];
-
-                int p = 0;
-                for (int i = 0; i < str.length(); i++) {
-                    int ch = str.charAt(i);
-
-                    if ((ch & 0xFF) == ch) {
-                        bytes[p++] = (byte) ch;
-                    } else {
-                        buf.append(new String(bytes, 0, p, charset));
-                        buf.append((char) ch);
-                        p = 0;
-                    }
-                }
-
-                buf.append(new String(bytes, 0, p, charset));
-                str = buf.toString();
-            } catch (UnsupportedEncodingException e) {
-                // ignore
-            }
+        try {
+            return StringEscapeUtil.unescapeURL(str, charset);
+        } catch (UnsupportedEncodingException e) {
+            return str;
         }
-
-        return str;
     }
 }

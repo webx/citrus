@@ -17,6 +17,7 @@
  */
 package com.alibaba.citrus.util;
 
+import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
@@ -619,6 +620,18 @@ public class StringEscapeUtilTests {
     }
 
     @Test
+    public void unescapeURL() throws Exception {
+        assertEquals(null, StringEscapeUtil.unescapeURL(null));
+
+        try {
+            StringEscapeUtil.unescapeURL("test", null, null);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertThat(e, exception("The Appendable must not be null"));
+        }
+    }
+
+    @Test
     public void unescapeURLStrict() throws Exception {
         String unreserved = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_.!~*'()";
         String escaped = StringEscapeUtil.escapeURL(unreserved);
@@ -662,9 +675,6 @@ public class StringEscapeUtilTests {
         writer = new StringWriter();
         StringEscapeUtil.unescapeURL(escaped, "GBK", writer);
         assertEquals("中华人民共和国", writer.toString());
-
-        // 混合中/英文、编码/未编码
-        assertEquals("中华abc 人民共和国abc 人", StringEscapeUtil.unescapeURL("中华abc+\310%CB民共和国abc+\310%CB", "GBK"));
 
         // 错误的编码
         str = "abc%xx%20%1";
@@ -736,5 +746,29 @@ public class StringEscapeUtilTests {
                 StringEscapeUtil.unescapeURL("%D6%D0%BB%AA%C8%CB%C3%F1%B9%B2%BA%CD%B9%FA"));
 
         LocaleUtil.resetContext();
+    }
+
+    @Test
+    public void unescapeURL_rawBytes() throws Exception {
+        LocaleUtil.setContext(Locale.CHINA, "GBK");
+        String escaped = StringEscapeUtil.escapeURL("Justin\u00b7Bieber");
+
+        assertEquals("Justin\u00b7Bieber", StringEscapeUtil.unescapeURL(escaped));
+        assertEquals("中华民国100年", StringEscapeUtil.unescapeURL(reencode("中华民国100年", "GBK"), "GBK"));
+
+        // 混合中/英文、编码/未编码
+        assertEquals("中华abc 人民共和国abc 人", StringEscapeUtil.unescapeURL("中华abc+\310%CB民共和国abc+\310%CB", "GBK"));
+        assertSame("abc中华", StringEscapeUtil.unescapeURL("abc中华", "GBK"));
+        assertSame("ab中华c", StringEscapeUtil.unescapeURL("ab中华c", "GBK"));
+        assertSame("中华abc", StringEscapeUtil.unescapeURL("中华abc", "GBK"));
+        assertSame("中abc华", StringEscapeUtil.unescapeURL("中abc华", "GBK"));
+        assertEquals("abc中华", StringEscapeUtil.unescapeURL(reencode("abc中", "GBK") + "华", "GBK"));
+        assertEquals("中华abc", StringEscapeUtil.unescapeURL(reencode("中", "GBK") + "华abc", "GBK"));
+
+        LocaleUtil.resetContext();
+    }
+
+    private String reencode(String str, String charset) throws Exception {
+        return new String(str.getBytes(charset), "8859_1");
     }
 }

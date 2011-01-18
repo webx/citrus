@@ -160,6 +160,7 @@ public class QueryStringParserTests {
     public void parseRawBytes() throws Exception {
         assertParse(reencode("中=国", "UTF-8"), "UTF-8", "中", "国");
         assertParse(reencode("&中=国&", "GBK"), "GBK", "中", "国");
+        assertParse(reencode("name=中华民国", "UTF-8"), "UTF-8", "name", "中华民国");
     }
 
     /**
@@ -169,6 +170,7 @@ public class QueryStringParserTests {
     public void parseURLEncoded() throws Exception {
         assertParse(urlencode("中=国", "UTF-8"), "UTF-8", "中", "国");
         assertParse(urlencode("&中=国&", "GBK"), "GBK", "中", "国");
+        assertParse(urlencode("name=Justin\u00b7Bieber", "GBK"), "GBK", "name", "Justin\u00b7Bieber");
     }
 
     /**

@@ -1510,6 +1510,7 @@ public class StringEscapeUtil {
 
         byte[] buffer = null;
         int pos = 0;
+        int startIndex = 0;
 
         char[] charArray = str.toCharArray();
         int length = charArray.length;
@@ -1521,6 +1522,10 @@ public class StringEscapeUtil {
                 // 读取连续的字节，并将它按指定编码转换成字符。
                 if (buffer == null) {
                     buffer = new byte[length - i]; // 最长只需要length - i
+                }
+
+                if (pos == 0) {
+                    startIndex = i;
                 }
 
                 switch (ch) {
@@ -1537,8 +1542,9 @@ public class StringEscapeUtil {
 
                         if (i + 2 < length) {
                             try {
-                                buffer[pos] = (byte) Integer.parseInt(str.substring(i + 1, i + 3), 16);
-                                pos++;
+                                byte b = (byte) Integer.parseInt(str.substring(i + 1, i + 3), 16);
+
+                                buffer[pos++] = b;
                                 i += 2;
 
                                 // 设置改变标志
@@ -1562,7 +1568,14 @@ public class StringEscapeUtil {
             } else {
                 // 先将buffer中的字节串转换成字符串。
                 if (pos > 0) {
-                    out.append(new String(buffer, 0, pos, encoding));
+                    String s = new String(buffer, 0, pos, encoding);
+
+                    out.append(s);
+
+                    if (!needToChange && !s.equals(new String(charArray, startIndex, pos))) {
+                        needToChange = true;
+                    }
+
                     pos = 0;
                 }
 
@@ -1573,7 +1586,14 @@ public class StringEscapeUtil {
 
         // 先将buffer中的字节串转换成字符串。
         if (pos > 0) {
-            out.append(new String(buffer, 0, pos, encoding));
+            String s = new String(buffer, 0, pos, encoding);
+
+            out.append(s);
+
+            if (!needToChange && !s.equals(new String(charArray, startIndex, pos))) {
+                needToChange = true;
+            }
+
             pos = 0;
         }
 
