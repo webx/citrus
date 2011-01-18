@@ -51,3 +51,4 @@
 
 * 改进SessionRequestContext，当attributes未改变，并且invalidate未调用时，不提交store，以免产生不必要之cookies。
 * Bugfix: 在解析query参数时，对“Justin%A1%A4Bieber”进行URL unescape时（GBK），得到乱码。
+* 改进WebxComponentsContext接口，使开发者有机会继承并设置额外的参数。例如：允许bean definition重复定义。

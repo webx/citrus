@@ -40,8 +40,9 @@ public class WebxContextLoaderListener extends ContextLoaderListener {
         return new WebxComponentsLoader() {
 
             @Override
-            protected Class<?> getDefaultContextClass() {
-                Class<?> defaultContextClass = WebxContextLoaderListener.this.getDefaultContextClass();
+            protected Class<? extends WebxComponentsContext> getDefaultContextClass() {
+                Class<? extends WebxComponentsContext> defaultContextClass = WebxContextLoaderListener.this
+                        .getDefaultContextClass();
 
                 if (defaultContextClass == null) {
                     defaultContextClass = super.getDefaultContextClass();
@@ -52,7 +53,7 @@ public class WebxContextLoaderListener extends ContextLoaderListener {
         };
     }
 
-    protected Class<?> getDefaultContextClass() {
+    protected Class<? extends WebxComponentsContext> getDefaultContextClass() {
         return null;
     }
 }

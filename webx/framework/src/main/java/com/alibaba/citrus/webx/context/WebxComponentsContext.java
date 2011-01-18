@@ -58,4 +58,10 @@ public class WebxComponentsContext extends WebxApplicationContext {
         super.finishRefresh();
         getLoader().finishRefresh();
     }
+
+    /**
+     * 在创建子容器时，给parent一个设置子context的机会。
+     */
+    protected void setupComponentContext(WebxComponentContext componentContext) {
+    }
 }

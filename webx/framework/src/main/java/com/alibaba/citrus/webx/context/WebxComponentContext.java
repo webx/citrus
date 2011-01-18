@@ -20,6 +20,7 @@ package com.alibaba.citrus.webx.context;
 import static com.alibaba.citrus.util.Assert.*;
 
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.alibaba.citrus.webx.WebxComponent;
 
@@ -33,7 +34,14 @@ public class WebxComponentContext extends WebxApplicationContext {
 
     public WebxComponentContext(WebxComponent component) {
         this.component = assertNotNull(component, "component");
-        setParent(component.getWebxComponents().getParentApplicationContext());
+
+        WebApplicationContext parentContext = component.getWebxComponents().getParentApplicationContext();
+
+        setParent(parentContext);
+
+        if (parentContext instanceof WebxComponentsContext) {
+            ((WebxComponentsContext) parentContext).setupComponentContext(this);
+        }
     }
 
     public WebxComponent getWebxComponent() {

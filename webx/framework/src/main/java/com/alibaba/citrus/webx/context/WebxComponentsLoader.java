@@ -153,7 +153,7 @@ public class WebxComponentsLoader extends ContextLoader {
      * 子类可以覆盖并修改此方法。
      * </p>
      */
-    protected Class<?> getDefaultContextClass() {
+    protected Class<? extends WebxComponentsContext> getDefaultContextClass() {
         return WebxComponentsContext.class;
     }
 
