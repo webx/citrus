@@ -43,7 +43,7 @@
             <uris:reference />
         </uris:uri>
         <uris:uri id="link4">
-            <uris:serverURI>http://user:pass@server:1234/a/b/c#ref</uris:serverURI>
+            <uris:serverURI>http://user:pass@server:1234/a/b/c?a=1&amp;b=+&amp;c#ref</uris:serverURI>
         </uris:uri>
 
         <uris:uri id="linkCharset" charset="GBK" exposed="true" />

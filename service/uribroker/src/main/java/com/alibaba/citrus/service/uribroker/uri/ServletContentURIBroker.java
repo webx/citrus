@@ -90,8 +90,8 @@ public class ServletContentURIBroker extends WebAppURIBroker {
     /**
      * …Ë÷√content path°£
      */
-    public ServletContentURIBroker getURI(String contentPath) {
-        return setContentPath(contentPath);
+    public ServletContentURIBroker getURI(String uri) {
+        return setContentPath(setUriAndGetPath(uri));
     }
 
     @Override

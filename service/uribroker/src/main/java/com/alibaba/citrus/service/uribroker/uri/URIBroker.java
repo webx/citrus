@@ -37,6 +37,7 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.alibaba.citrus.service.requestcontext.util.QueryStringParser;
 import com.alibaba.citrus.service.uribroker.interceptor.URIBrokerInterceptor;
 import com.alibaba.citrus.service.uribroker.interceptor.URIBrokerPathInterceptor;
 import com.alibaba.citrus.util.StringUtil;
@@ -179,7 +180,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * 设置现成的uri，不包含query和reference。
+     * 设置现成的uri。
      */
     public final URIBroker setServerURI(String uriString) {
         URL uri;
@@ -218,6 +219,10 @@ public abstract class URIBroker extends URIBrokerFeatures {
         }
 
         setServerURI(uri);
+
+        new URIBrokerQueryStringParser().parse(uri.getQuery());
+
+        setReference(uri.getRef());
 
         return this;
     }
@@ -636,6 +641,30 @@ public abstract class URIBroker extends URIBrokerFeatures {
         renderer.clearQueryBuffer();
 
         return this;
+    }
+
+    /**
+     * 返回不带参数的uri路径，并将参数部分添加到query中、设置ref（如果有的话）。
+     */
+    protected final String setUriAndGetPath(String uri) {
+        if (uri != null) {
+            int i = uri.indexOf("?");
+            int j = uri.indexOf("#", i + 1);
+
+            if (j >= 0) {
+                setReference(uri.substring(j + 1));
+                uri = uri.substring(0, j);
+            }
+
+            if (i >= 0) {
+                String query = uri.substring(i + 1);
+                uri = uri.substring(0, i);
+
+                new URIBrokerQueryStringParser().parse(query);
+            }
+        }
+
+        return uri;
     }
 
     /**
@@ -1061,5 +1090,16 @@ public abstract class URIBroker extends URIBrokerFeatures {
         String serverName;
         int serverPort;
         String path;
+    }
+
+    private final class URIBrokerQueryStringParser extends QueryStringParser {
+        public URIBrokerQueryStringParser() {
+            super(getCharset());
+        }
+
+        @Override
+        protected void add(String key, String value) {
+            addQueryData(key, value);
+        }
     }
 }

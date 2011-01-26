@@ -299,12 +299,12 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
         assertEquals("/aaa/bbb/ccc", broker.getPath());
         assertArrayEquals(new String[] { "aaa", "bbb", "ccc" }, broker.getPathElements().toArray(new String[0]));
 
-        assertEquals(null, broker.getReference()); // serverURI不设置ref
-        assertArrayEquals(new String[] { "x" }, broker.getQuery().keySet().toArray(EMPTY_STRING_ARRAY)); // serverURI不设置query
+        assertEquals("ref", broker.getReference());
+        assertArrayEquals(new String[] { "x", "a" }, broker.getQuery().keySet().toArray(EMPTY_STRING_ARRAY));
 
         broker.setReference("ref2");
         assertEquals("https://user:pass@taobao.com:8888/aaa/bbb/ccc", broker.getServerURI());
-        assertEquals("https://user:pass@taobao.com:8888/aaa/bbb/ccc?x=1#ref2", broker.toString());
+        assertEquals("https://user:pass@taobao.com:8888/aaa/bbb/ccc?x=1&a=1#ref2", broker.toString());
 
         // without password
         broker.reset();
@@ -319,12 +319,12 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
         assertEquals("/aaa/bbb/ccc", broker.getPath());
         assertArrayEquals(new String[] { "aaa", "bbb", "ccc" }, broker.getPathElements().toArray(new String[0]));
 
-        assertEquals(null, broker.getReference()); // serverURI不设置ref
-        assertArrayEquals(new String[] { "x" }, broker.getQuery().keySet().toArray(EMPTY_STRING_ARRAY)); // serverURI不设置query
+        assertEquals("ref", broker.getReference());
+        assertArrayEquals(new String[] { "x", "a" }, broker.getQuery().keySet().toArray(EMPTY_STRING_ARRAY));
 
         broker.setReference("ref2");
         assertEquals("https://user@taobao.com:8888/aaa/bbb/ccc", broker.getServerURI());
-        assertEquals("https://user@taobao.com:8888/aaa/bbb/ccc?x=1#ref2", broker.toString());
+        assertEquals("https://user@taobao.com:8888/aaa/bbb/ccc?x=1&a=1#ref2", broker.toString());
 
         // without user
         broker.reset();
@@ -339,12 +339,12 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
         assertEquals("/aaa/bbb/ccc", broker.getPath());
         assertArrayEquals(new String[] { "aaa", "bbb", "ccc" }, broker.getPathElements().toArray(new String[0]));
 
-        assertEquals(null, broker.getReference()); // serverURI不设置ref
-        assertArrayEquals(new String[] { "x" }, broker.getQuery().keySet().toArray(EMPTY_STRING_ARRAY)); // serverURI不设置query
+        assertEquals("ref", broker.getReference());
+        assertArrayEquals(new String[] { "x", "a" }, broker.getQuery().keySet().toArray(EMPTY_STRING_ARRAY));
 
         broker.setReference("ref2");
         assertEquals("https://taobao.com:8888/aaa/bbb/ccc", broker.getServerURI());
-        assertEquals("https://taobao.com:8888/aaa/bbb/ccc?x=1#ref2", broker.toString());
+        assertEquals("https://taobao.com:8888/aaa/bbb/ccc?x=1&a=1#ref2", broker.toString());
 
         // without port
         broker.reset();
@@ -359,12 +359,12 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
         assertEquals("/aaa/bbb/ccc", broker.getPath());
         assertArrayEquals(new String[] { "aaa", "bbb", "ccc" }, broker.getPathElements().toArray(new String[0]));
 
-        assertEquals(null, broker.getReference()); // serverURI不设置ref
-        assertArrayEquals(new String[] { "x" }, broker.getQuery().keySet().toArray(EMPTY_STRING_ARRAY)); // serverURI不设置query
+        assertEquals("ref", broker.getReference());
+        assertArrayEquals(new String[] { "x", "a" }, broker.getQuery().keySet().toArray(EMPTY_STRING_ARRAY));
 
         broker.setReference("ref2");
         assertEquals("https://taobao.com/aaa/bbb/ccc", broker.getServerURI());
-        assertEquals("https://taobao.com/aaa/bbb/ccc?x=1#ref2", broker.toString());
+        assertEquals("https://taobao.com/aaa/bbb/ccc?x=1&a=1#ref2", broker.toString());
 
         // set twice
         broker.reset();
@@ -377,7 +377,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
 
         broker.setReference("ref2");
         assertEquals("http://taobao.com/aaa/bbb/ccc", broker.getServerURI());
-        assertEquals("http://taobao.com/aaa/bbb/ccc?x=1#ref2", broker.toString());
+        assertEquals("http://taobao.com/aaa/bbb/ccc?x=1&a=1#ref2", broker.toString());
 
         // with interceptor, URIType=relative
         broker.reset();

@@ -109,8 +109,27 @@ public class ServletContentURIBrokerTests extends AbstractURIBrokerFeaturesTests
 
         broker.setContextPath("app");
         assertEquals("http:///app/myprefix/aaa/bbb", broker.toString());
+    }
 
-        broker.getURI("ccc/ddd/");
-        assertEquals("http:///app/myprefix/ccc/ddd", broker.toString());
+    @Test
+    public void getURI() {
+        broker.setPrefixPath("myprefix");
+
+        broker.getURI(null);
+        assertEquals("http:///myprefix", broker.toString());
+
+        broker.getURI("ccc/ddd");
+        assertEquals("http:///myprefix/ccc/ddd", broker.toString());
+
+        broker.getURI("ccc/ddd?a=1&b=+");
+        assertEquals("http:///myprefix/ccc/ddd?a=1&b=+", broker.toString());
+
+        broker.reset();
+
+        broker.getURI("ccc/ddd#ref");
+        assertEquals("http:///ccc/ddd#ref", broker.toString());
+
+        broker.getURI("ccc/ddd?a=1&b=+#ref2");
+        assertEquals("http:///ccc/ddd?a=1&b=+#ref2", broker.render());
     }
 }

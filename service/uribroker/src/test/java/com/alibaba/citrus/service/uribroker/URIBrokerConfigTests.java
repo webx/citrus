@@ -111,7 +111,7 @@ public class URIBrokerConfigTests extends AbstractURIBrokerServiceTests {
     @Test
     public void link4_serverURI() {
         uri = (GenericURIBroker) service.getURIBroker("link4");
-        assertEquals("http://user:pass@server:1234/a/b/c", uri.toString());
+        assertEquals("http://user:pass@server:1234/a/b/c?a=1&b=+&c=#ref", uri.toString());
         assertEquals("http://user:pass@server:1234/a/b/c", uri.getServerURI());
     }
 

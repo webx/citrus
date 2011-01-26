@@ -93,8 +93,8 @@ public class TurbineContentURIBroker extends WebxURIBroker {
     /**
      * …Ë÷√content path°£
      */
-    public TurbineContentURIBroker getURI(String contentPath) {
-        return setContentPath(contentPath);
+    public TurbineContentURIBroker getURI(String uri) {
+        return setContentPath(setUriAndGetPath(uri));
     }
 
     @Override

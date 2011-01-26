@@ -90,8 +90,8 @@ public class ContentURIBroker extends URIBroker {
     /**
      * …Ë÷√content path°£
      */
-    public ContentURIBroker getURI(String contentPath) {
-        return setContentPath(contentPath);
+    public ContentURIBroker getURI(String uri) {
+        return setContentPath(setUriAndGetPath(uri));
     }
 
     @Override
