@@ -449,13 +449,13 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
 
                 case stackTrace:
                     fmt.format("<div class=\"%s\">", getErrorTagClass());
-                    pw.append(escapeHtml(ExceptionUtil.getStackTrace(e))); // !!重要：escapeHtml
+                    pw.append(ExceptionUtil.getStackTraceForHtmlComment(e)); // !!重要：escapeHtml
                     pw.append("</div>");
                     break;
 
                 case comment:
                     pw.append("<!-- stacktrace: \n");
-                    pw.append(escapeHtml(ExceptionUtil.getStackTrace(e))); // !!重要：escapeHtml
+                    pw.append(ExceptionUtil.getStackTraceForHtmlComment(e)); // !!重要：escapeHtml
                     pw.append("-->");
                     break;
 

@@ -210,7 +210,17 @@ public class ExceptionUtilTests {
         Throwable e = new Throwable();
         String stacktrace = ExceptionUtil.getStackTrace(e);
 
-        assertTrue(stacktrace.indexOf(Throwable.class.getName()) >= 0);
-        assertTrue(stacktrace.indexOf(ExceptionUtilTests.class.getName() + ".getStackTrace") > 0);
+        assertTrue(stacktrace.contains(Throwable.class.getName()));
+        assertTrue(stacktrace.contains(ExceptionUtilTests.class.getName() + ".getStackTrace"));
+    }
+
+    @Test
+    public void getStackTraceForHtmlComment() {
+        Throwable e = new Throwable("-->");
+        String stacktrace = ExceptionUtil.getStackTraceForHtmlComment(e);
+
+        assertTrue(stacktrace.contains(Throwable.class.getName()));
+        assertTrue(stacktrace.contains(ExceptionUtilTests.class.getName() + ".getStackTrace"));
+        assertTrue(stacktrace.contains("&#45;&#45;&gt;")); // -->转换成&#...以避免html comment出错
     }
 }

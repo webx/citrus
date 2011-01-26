@@ -19,12 +19,16 @@ package com.alibaba.citrus.util;
 
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
+import static com.alibaba.citrus.util.StringEscapeUtil.*;
+import static com.alibaba.citrus.util.internal.Entities.*;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+
+import com.alibaba.citrus.util.internal.Entities;
 
 /**
  * 处理异常的工具类。
@@ -145,5 +149,26 @@ public class ExceptionUtil {
         out.flush();
 
         return buffer.toString();
+    }
+
+    public static final Entities HTML40_COMMENT;
+
+    static {
+        HTML40_COMMENT = new Entities(HTML40_MODIFIED);
+        HTML40_COMMENT.addEntity("#45", 45);
+    }
+
+    /**
+     * 取得异常的stacktrace字符串，可用于填写在HTML comment中。
+     * <ul>
+     * <li>先对stacktrace进行HTML escape。</li>
+     * <li>然后除去double dash（--）。</li>
+     * </ul>
+     * 
+     * @param throwable 异常
+     * @return stacktrace字符串
+     */
+    public static String getStackTraceForHtmlComment(Throwable throwable) {
+        return escapeEntities(HTML40_COMMENT, getStackTrace(throwable));
     }
 }

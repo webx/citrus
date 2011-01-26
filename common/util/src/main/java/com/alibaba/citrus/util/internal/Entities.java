@@ -336,11 +336,8 @@ public class Entities {
         HTML40.addEntities(ISO_8859_1_SET);
         HTML40.addEntities(HTML40_SET);
 
-        HTML40_MODIFIED = new Entities();
-        HTML40_MODIFIED.addEntities(BASIC_SET);
-        HTML40_MODIFIED.addEntities(ISO_8859_1_SET);
-        HTML40_MODIFIED.addEntities(HTML40_SET);
-        HTML40_MODIFIED.addEntities(new String[][] { { "#39", "39" } });
+        HTML40_MODIFIED = new Entities(HTML40);
+        HTML40_MODIFIED.addEntity("#39", 39);
     }
 
     /** 快速查找表的大小。 */
@@ -349,6 +346,18 @@ public class Entities {
     private Map<String, Integer> entityNameToValue = createHashMap();
     private IntHashMap<String> entityValueToName = new IntHashMap<String>();
     private String[] lookupTable;
+
+    public Entities() {
+    }
+
+    /**
+     * 复制entities。
+     */
+    public Entities(Entities entities) {
+        for (Map.Entry<String, Integer> entry : entities.entityNameToValue.entrySet()) {
+            addEntity(entry.getKey(), entry.getValue());
+        }
+    }
 
     /**
      * 添加一组entities。
