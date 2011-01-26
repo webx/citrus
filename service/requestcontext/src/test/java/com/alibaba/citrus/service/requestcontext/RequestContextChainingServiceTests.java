@@ -153,7 +153,7 @@ public class RequestContextChainingServiceTests extends AbstractRequestContextsT
 
         RequestContextInfo<?>[] infos = requestContexts.getRequestContextInfos();
 
-        assertEquals(8, infos.length);
+        assertEquals(9, infos.length);
         int i = 0;
 
         assertEquals(BasicRequestContext.class, infos[i++].getRequestContextInterface());
@@ -163,6 +163,7 @@ public class RequestContextChainingServiceTests extends AbstractRequestContextsT
         assertEquals(SessionRequestContext.class, infos[i++].getRequestContextInterface());
         assertEquals(SetLocaleRequestContext.class, infos[i++].getRequestContextInterface());
         assertEquals(RewriteRequestContext.class, infos[i++].getRequestContextInterface());
+        assertEquals(RequestContext.class, infos[i++].getRequestContextInterface());
         assertEquals(RunData.class, infos[i++].getRequestContextInterface());
     }
 

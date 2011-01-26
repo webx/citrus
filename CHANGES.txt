@@ -52,3 +52,6 @@
 * 改进SessionRequestContext，当attributes未改变，并且invalidate未调用时，不提交store，以免产生不必要之cookies。
 * Bugfix: 在解析query参数时，对“Justin%A1%A4Bieber”进行URL unescape时（GBK），得到乱码。
 * 改进WebxComponentsContext接口，使开发者有机会继承并设置额外的参数。例如：允许bean definition重复定义。
+* Bugfix: 当RequestContext未扩展子接口时，将对RequestContext创建singleton proxy，从而导致注入RequestContext接口时出错。
+  解决步骤：1. 避免对创建RequestContext接口本身创建singleton proxy
+          2. 不使用spring本身的ObjectFactory作为proxy的接口，而是创建一个新的接口：ProxyTargetFactory

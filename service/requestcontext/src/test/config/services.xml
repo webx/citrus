@@ -81,6 +81,9 @@
             </store-mappings>
         </session>
         <basic />
+        <request-context
+            class="com.alibaba.citrus.service.requestcontext.dummy.DummyRequestContextFactoryImpl"
+         />
     </services:request-contexts>
 
     <stores:simple-memory-store id="simple-session-store" />

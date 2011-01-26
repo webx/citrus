@@ -36,7 +36,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -50,6 +49,7 @@ import com.alibaba.citrus.service.requestcontext.rewrite.RewriteRequestContext;
 import com.alibaba.citrus.service.requestcontext.rundata.RunData;
 import com.alibaba.citrus.service.requestcontext.session.SessionRequestContext;
 import com.alibaba.citrus.springext.support.context.XmlWebApplicationContext;
+import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 import com.meterware.servletunit.ServletRunner;
 
 /**
@@ -147,14 +147,14 @@ public class GlobalRequestObjectsTests extends AbstractRequestContextsTests<Requ
         int i = 0;
         for (Object obj : globals.getObjects()) {
             assertNotNull(obj);
-            assertThat(obj, instanceOf(ObjectFactory.class));
+            assertThat(obj, instanceOf(ProxyTargetFactory.class));
             assertThat(
                     obj.toString(),
                     containsAll(globals.getInterfaces()[i++].getSimpleName() + "[", "No thread-bound request found",
                             "]"));
 
             try {
-                ((ObjectFactory) obj).getObject();
+                ((ProxyTargetFactory) obj).getObject();
             } catch (IllegalStateException e) {
                 assertThat(e, exception("No thread-bound request found"));
             }
@@ -170,10 +170,10 @@ public class GlobalRequestObjectsTests extends AbstractRequestContextsTests<Requ
         int i = 0;
         for (Object obj : globals.getObjects()) {
             assertNotNull(obj);
-            assertThat(obj, instanceOf(ObjectFactory.class));
+            assertThat(obj, instanceOf(ProxyTargetFactory.class));
             assertThat(obj.toString(), not(containsString("RequestContextProxy[")));
 
-            assertThat(((ObjectFactory) obj).getObject(), instanceOf(globals.getInterfaces()[i++]));
+            assertThat(((ProxyTargetFactory) obj).getObject(), instanceOf(globals.getInterfaces()[i++]));
         }
     }
 
@@ -183,7 +183,7 @@ public class GlobalRequestObjectsTests extends AbstractRequestContextsTests<Requ
         assertNull(assertProxy(null));
         assertNull(getProxyTarget(null));
 
-        // not an ObjectFactory
+        // not an ProxyTargetFactory
         try {
             assertProxy("not a proxy");
             fail();
@@ -283,7 +283,7 @@ public class GlobalRequestObjectsTests extends AbstractRequestContextsTests<Requ
 
     @Test
     public void performance_raw() {
-        RunData rundata = (RunData) ((ObjectFactory) globals.rundataRC).getObject();
+        RunData rundata = (RunData) ((ProxyTargetFactory) globals.rundataRC).getObject();
 
         long start = System.currentTimeMillis();
         int loop = 100000;

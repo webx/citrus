@@ -32,9 +32,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.ObjectFactory;
 
 import com.alibaba.citrus.service.uribroker.interceptor.URIBrokerInterceptor;
+import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 import com.alibaba.citrus.util.i18n.LocaleUtil;
 
 public abstract class AbstractURIBrokerFeaturesTests<B extends URIBroker> {
@@ -464,7 +464,7 @@ public abstract class AbstractURIBrokerFeaturesTests<B extends URIBroker> {
         }
     }
 
-    public static interface RequestProxy extends HttpServletRequest, ObjectFactory {
+    public static interface RequestProxy extends HttpServletRequest, ProxyTargetFactory {
     }
 
     public static class URIBroker1 extends GenericURIBroker {

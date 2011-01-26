@@ -27,13 +27,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Test;
-import org.springframework.beans.factory.ObjectFactory;
 
 import com.alibaba.citrus.service.uribroker.AbstractURIBrokerServiceTests;
 import com.alibaba.citrus.service.uribroker.impl.URIBrokerServiceImpl.URIBrokerInfo;
 import com.alibaba.citrus.service.uribroker.uri.ContentURIBroker;
 import com.alibaba.citrus.service.uribroker.uri.GenericURIBroker;
 import com.alibaba.citrus.service.uribroker.uri.URIBroker;
+import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 
 public class URIBrokerServiceTests extends AbstractURIBrokerServiceTests {
     @Test
@@ -53,7 +53,7 @@ public class URIBrokerServiceTests extends AbstractURIBrokerServiceTests {
         }
 
         // Õý³£request proxy
-        assertTrue(getFieldValue(service, "request", HttpServletRequest.class) instanceof ObjectFactory);
+        assertTrue(getFieldValue(service, "request", HttpServletRequest.class) instanceof ProxyTargetFactory);
     }
 
     @Test
@@ -248,8 +248,8 @@ public class URIBrokerServiceTests extends AbstractURIBrokerServiceTests {
             HttpServletRequest requestProxy = getFieldValue(broker, "request", HttpServletRequest.class);
 
             assertNotNull(requestProxy);
-            assertTrue(requestProxy instanceof ObjectFactory);
-            assertSame(request, ((ObjectFactory) requestProxy).getObject());
+            assertTrue(requestProxy instanceof ProxyTargetFactory);
+            assertSame(request, ((ProxyTargetFactory) requestProxy).getObject());
         }
     }
 

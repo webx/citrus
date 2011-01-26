@@ -25,18 +25,16 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.ObjectFactory;
 
 public class SpringExtUtil_ProxyTests {
-    private MyObjectFactory factory;
+    private MyProxyTargetFactory factory;
     private MyInterfaceImpl actualObject;
     private MyInterface proxy;
 
     @Before
     public void init() {
         actualObject = new MyInterfaceImpl("hello");
-        factory = new MyObjectFactory(actualObject);
+        factory = new MyProxyTargetFactory(actualObject);
         proxy = createProxy(MyInterface.class, factory);
     }
 
@@ -51,12 +49,12 @@ public class SpringExtUtil_ProxyTests {
     }
 
     @Test
-    public void noObjectFactory() {
+    public void noProxyTargetFactory() {
         try {
             createProxy(MyInterface.class, null);
             fail();
         } catch (IllegalArgumentException e) {
-            assertThat(e, exception("no ObjectFactory"));
+            assertThat(e, exception("no ProxyTargetFactory"));
         }
     }
 
@@ -76,8 +74,8 @@ public class SpringExtUtil_ProxyTests {
 
         // 对于同一个interface，总是返回完全相同的class
         assertSame(createProxy(MyInterface.class, factory).getClass(), proxyClass);
-        assertSame(createProxy(MyInterface.class, new MyObjectFactory(actualObject)).getClass(), proxyClass);
-        assertSame(createProxy(MyInterface.class, new MyObjectFactory(new MyInterfaceImpl("world"))).getClass(),
+        assertSame(createProxy(MyInterface.class, new MyProxyTargetFactory(actualObject)).getClass(), proxyClass);
+        assertSame(createProxy(MyInterface.class, new MyProxyTargetFactory(new MyInterfaceImpl("world"))).getClass(),
                 proxyClass);
 
         // 对于不同的interface，则返回不同的class
@@ -104,7 +102,7 @@ public class SpringExtUtil_ProxyTests {
         MyInterfaceImpl.toStringException.remove();
 
         // getObject
-        assertSame(actualObject, ((ObjectFactory) proxy).getObject());
+        assertSame(actualObject, ((ProxyTargetFactory) proxy).getObject());
     }
 
     @Test
@@ -118,10 +116,10 @@ public class SpringExtUtil_ProxyTests {
         assertHashCodeAndEquals(createProxy(MyInterface.class, factory), true);
 
         // not same but equivalent factory
-        assertHashCodeAndEquals(createProxy(MyInterface.class, new MyObjectFactory(actualObject)), true);
+        assertHashCodeAndEquals(createProxy(MyInterface.class, new MyProxyTargetFactory(actualObject)), true);
 
         // not equivalent factory
-        assertHashCodeAndEquals(createProxy(MyInterface.class, new MyObjectFactory(new MyInterfaceImpl("world"))),
+        assertHashCodeAndEquals(createProxy(MyInterface.class, new MyProxyTargetFactory(new MyInterfaceImpl("world"))),
                 false);
     }
 
@@ -150,7 +148,7 @@ public class SpringExtUtil_ProxyTests {
         }
 
         // proxy
-        assertSame(factory, assertProxy(factory)); // 只要实现了ObjectFactory接口，就认可
+        assertSame(factory, assertProxy(factory)); // 只要实现了ProxyTargetFactory接口，就认可
         assertSame(proxy, assertProxy(proxy));
 
     }
@@ -164,24 +162,24 @@ public class SpringExtUtil_ProxyTests {
         assertSame(actualObject, getProxyTarget(actualObject));
 
         // proxy
-        assertSame(actualObject, getProxyTarget(factory)); // 只要实现了ObjectFactory接口，就认可
+        assertSame(actualObject, getProxyTarget(factory)); // 只要实现了ProxyTargetFactory接口，就认可
         assertSame(actualObject, getProxyTarget(proxy));
 
         // getObject error
-        MyObjectFactory.objectException.set(new IllegalArgumentException("wrong!"));
+        MyProxyTargetFactory.objectException.set(new IllegalArgumentException("wrong!"));
         assertNull(getProxyTarget(proxy));
-        MyObjectFactory.objectException.remove();
+        MyProxyTargetFactory.objectException.remove();
     }
 
-    public static class MyObjectFactory implements ObjectFactory {
+    public static class MyProxyTargetFactory implements ProxyTargetFactory {
         private final static ThreadLocal<RuntimeException> objectException = new ThreadLocal<RuntimeException>();
         private final Object object;
 
-        public MyObjectFactory(Object object) {
+        public MyProxyTargetFactory(Object object) {
             this.object = object;
         }
 
-        public Object getObject() throws BeansException {
+        public Object getObject() {
             if (objectException.get() != null) {
                 throw objectException.get();
             }
@@ -208,7 +206,7 @@ public class SpringExtUtil_ProxyTests {
                 return false;
             }
 
-            MyObjectFactory other = (MyObjectFactory) obj;
+            MyProxyTargetFactory other = (MyProxyTargetFactory) obj;
 
             if (object == null) {
                 if (other.object != null) {

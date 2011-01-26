@@ -28,7 +28,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.web.context.request.RequestAttributes;
@@ -39,6 +38,7 @@ import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.RequestContextChainingService;
 import com.alibaba.citrus.service.requestcontext.RequestContextInfo;
 import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
+import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 
 /**
  * 创建全局的request context对象，以及request、response对象。
@@ -60,16 +60,21 @@ public class RequestContextBeanFactoryPostProcessor implements BeanFactoryPostPr
         // 先注册request/response/session，再从beanFactory中取得requestContexts。
 
         // 创建全局的request实例。
-        register(beanFactory, ServletRequest.class,
-                createProxy(HttpServletRequest.class, beanFactory.getBeanClassLoader(), new RequestObjectFactory()));
+        register(
+                beanFactory,
+                ServletRequest.class,
+                createProxy(HttpServletRequest.class, beanFactory.getBeanClassLoader(), new RequestProxyTargetFactory()));
 
         // 创建全局的session实例。
         register(beanFactory, HttpSession.class,
-                createProxy(HttpSession.class, beanFactory.getBeanClassLoader(), new SessionObjectFactory()));
+                createProxy(HttpSession.class, beanFactory.getBeanClassLoader(), new SessionProxyTargetFactory()));
 
         // 创建全局的response实例。
-        register(beanFactory, ServletResponse.class,
-                createProxy(HttpServletResponse.class, beanFactory.getBeanClassLoader(), new ResponseObjectFactory()));
+        register(
+                beanFactory,
+                ServletResponse.class,
+                createProxy(HttpServletResponse.class, beanFactory.getBeanClassLoader(),
+                        new ResponseProxyTargetFactory()));
 
         // 取得requestContexts时会激活requestContexts的初始化。
         // 由于request/response/session已经被注册，因此已经可被注入到requestContexts的子对象中。
@@ -81,11 +86,14 @@ public class RequestContextBeanFactoryPostProcessor implements BeanFactoryPostPr
             Class<? extends RequestContext> requestContextInterface = info.getRequestContextInterface();
             Class<? extends RequestContext> requestContextProxyInterface = info.getRequestContextProxyInterface();
 
-            register(
-                    beanFactory,
-                    requestContextInterface,
-                    createProxy(requestContextProxyInterface, beanFactory.getBeanClassLoader(),
-                            new RequestContextObjectFactory(requestContextProxyInterface)));
+            // 避免对没有子接口的request context对象创建proxy，否则没有意义。
+            if (!RequestContext.class.equals(requestContextProxyInterface)) {
+                register(
+                        beanFactory,
+                        requestContextInterface,
+                        createProxy(requestContextProxyInterface, beanFactory.getBeanClassLoader(),
+                                new RequestContextProxyTargetFactory(requestContextProxyInterface)));
+            }
         }
     }
 
@@ -95,7 +103,7 @@ public class RequestContextBeanFactoryPostProcessor implements BeanFactoryPostPr
         log.debug("Registered Global Proxy for interface {}", intfs.getName());
     }
 
-    private static class RequestObjectFactory implements ObjectFactory {
+    private static class RequestProxyTargetFactory implements ProxyTargetFactory {
         public Object getObject() {
             RequestAttributes requestAttrs = RequestContextHolder.currentRequestAttributes();
 
@@ -113,7 +121,7 @@ public class RequestContextBeanFactoryPostProcessor implements BeanFactoryPostPr
         }
     }
 
-    private final class ResponseObjectFactory extends RequestObjectFactory {
+    private final class ResponseProxyTargetFactory extends RequestProxyTargetFactory {
         @Override
         public Object getObject() {
             HttpServletRequest request = (HttpServletRequest) super.getObject();
@@ -127,7 +135,7 @@ public class RequestContextBeanFactoryPostProcessor implements BeanFactoryPostPr
         }
     }
 
-    private final class SessionObjectFactory extends RequestObjectFactory {
+    private final class SessionProxyTargetFactory extends RequestProxyTargetFactory {
         @Override
         public Object getObject() {
             HttpServletRequest request = (HttpServletRequest) super.getObject();
@@ -141,10 +149,10 @@ public class RequestContextBeanFactoryPostProcessor implements BeanFactoryPostPr
         }
     }
 
-    private final class RequestContextObjectFactory extends RequestObjectFactory {
+    private final class RequestContextProxyTargetFactory extends RequestProxyTargetFactory {
         private final Class<? extends RequestContext> requestContextInterface;
 
-        private RequestContextObjectFactory(Class<? extends RequestContext> requestContextInterface) {
+        private RequestContextProxyTargetFactory(Class<? extends RequestContext> requestContextInterface) {
             this.requestContextInterface = requestContextInterface;
         }
 

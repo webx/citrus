@@ -25,7 +25,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -37,6 +36,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.w3c.dom.Element;
 
 import com.alibaba.citrus.springext.support.parser.NamedBeanDefinitionParserMixin.DefaultNameBDParser;
+import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 
 /**
  * 用来创建proxy的parser。
@@ -151,20 +151,20 @@ public abstract class AbstractNamedProxyBeanDefinitionParser extends AbstractBea
         }
 
         public Object getObject() throws Exception {
-            return createProxy(targetBeanType, loader, new ProxyTargetObjectFactory(targetBeanName, factory));
+            return createProxy(targetBeanType, loader, new ProxyTargetFactoryImpl(targetBeanName, factory));
         }
     }
 
-    private static class ProxyTargetObjectFactory implements ObjectFactory {
+    private static class ProxyTargetFactoryImpl implements ProxyTargetFactory {
         private final String targetBeanName;
         private final BeanFactory factory;
 
-        public ProxyTargetObjectFactory(String targetBeanName, BeanFactory factory) {
+        public ProxyTargetFactoryImpl(String targetBeanName, BeanFactory factory) {
             this.targetBeanName = targetBeanName;
             this.factory = factory;
         }
 
-        public Object getObject() throws BeansException {
+        public Object getObject() {
             return factory.getBean(targetBeanName);
         }
     }

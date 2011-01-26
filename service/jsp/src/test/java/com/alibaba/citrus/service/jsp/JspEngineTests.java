@@ -43,7 +43,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.junit.Test;
 import org.springframework.beans.FatalBeanException;
-import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.core.io.ResourceLoader;
 
 import com.alibaba.citrus.service.jsp.impl.JspEngineImpl;
@@ -55,6 +54,7 @@ import com.alibaba.citrus.service.template.TemplateNotFoundException;
 import com.alibaba.citrus.service.template.TemplateService;
 import com.alibaba.citrus.service.template.support.MappedTemplateContext;
 import com.alibaba.citrus.springext.support.context.XmlWebApplicationContext;
+import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 import com.meterware.httpunit.WebResponse;
 import com.meterware.servletunit.InvocationContext;
 import com.meterware.servletunit.ServletRunner;
@@ -293,10 +293,10 @@ public class JspEngineTests {
         assertEquals("hello, ÖÐ¹ú!", webResponse.getText().trim());
     }
 
-    public static interface MockRequestProxy extends HttpServletRequest, ObjectFactory {
+    public static interface MockRequestProxy extends HttpServletRequest, ProxyTargetFactory {
     }
 
-    public static interface MockResponseProxy extends HttpServletResponse, ObjectFactory {
+    public static interface MockResponseProxy extends HttpServletResponse, ProxyTargetFactory {
     }
 
     public static class MyServlet extends HttpServlet {

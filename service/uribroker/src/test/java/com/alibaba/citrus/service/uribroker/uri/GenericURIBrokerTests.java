@@ -32,10 +32,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Test;
-import org.springframework.beans.factory.ObjectFactory;
 
 import com.alibaba.citrus.service.uribroker.interceptor.URIBrokerPathInterceptor;
 import com.alibaba.citrus.service.uribroker.uri.URIBroker.URIType;
+import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 import com.alibaba.citrus.util.i18n.LocaleUtil;
 
 public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<GenericURIBroker> {
@@ -177,7 +177,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
         assertTrue(broker.isRequestAware());
 
         try {
-            ((ObjectFactory) request).getObject();
+            ((ProxyTargetFactory) request).getObject();
             fail();
         } catch (IllegalStateException e) {
         }

@@ -48,7 +48,6 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
-import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.config.BeanReference;
@@ -484,7 +483,7 @@ public class SpringExtUtil {
      * 创建指定interface的proxy，当proxy的方法被调用时，proxy将会从factory中取得实际对象，
      * 然后将调用delegate给实际对象来执行。
      */
-    public static <T> T createProxy(final Class<T> intfs, final ObjectFactory factory) {
+    public static <T> T createProxy(final Class<T> intfs, final ProxyTargetFactory factory) {
         return createProxy(intfs, null, factory);
     }
 
@@ -492,9 +491,9 @@ public class SpringExtUtil {
      * 创建指定interface的proxy，当proxy的方法被调用时，proxy将会从factory中取得实际对象，
      * 然后将调用delegate给实际对象来执行。
      */
-    public static <T> T createProxy(Class<T> intfs, ClassLoader classLoader, final ObjectFactory factory) {
+    public static <T> T createProxy(Class<T> intfs, ClassLoader classLoader, final ProxyTargetFactory factory) {
         assertNotNull(intfs, "no interface");
-        assertNotNull(factory, "no ObjectFactory");
+        assertNotNull(factory, "no ProxyTargetFactory");
 
         try {
             intfs.getMethod("getObject");
@@ -512,8 +511,8 @@ public class SpringExtUtil {
         generator.setCallbackFilter(proxiedFilter);
         generator.setNamingPolicy(new ProxiedNamingPolicy(intfs));
 
-        return intfs.cast(generator.create(new Class<?>[] { Class.class, ObjectFactory.class }, new Object[] { intfs,
-                factory }));
+        return intfs.cast(generator.create(new Class<?>[] { Class.class, ProxyTargetFactory.class }, new Object[] {
+                intfs, factory }));
     }
 
     /**
@@ -525,7 +524,7 @@ public class SpringExtUtil {
      */
     public static <T> T assertProxy(T object) {
         if (object != null) {
-            assertTrue(object instanceof ObjectFactory,
+            assertTrue(object instanceof ProxyTargetFactory,
                     "expects a proxy delegating to a real object, but got an object of type %s", object.getClass()
                             .getName());
         }
@@ -538,11 +537,11 @@ public class SpringExtUtil {
      */
     @SuppressWarnings("unchecked")
     public static <T> T getProxyTarget(T object) {
-        if (object instanceof ObjectFactory) {
+        if (object instanceof ProxyTargetFactory) {
             try {
-                return (T) ((ObjectFactory) object).getObject();
+                return (T) ((ProxyTargetFactory) object).getObject();
             } catch (Exception e) {
-                log.warn("Could not get proxied object from ObjectFactory: {} {}", e.getClass().getSimpleName(),
+                log.warn("Could not get proxied object from ProxyTargetFactory: {} {}", e.getClass().getSimpleName(),
                         e.getMessage());
                 return null;
             }
@@ -669,16 +668,16 @@ public class SpringExtUtil {
     /**
      * 服务于createProxy()方法，Proxy的基类。
      */
-    public static class AbstractProxy implements ObjectFactory {
+    public static class AbstractProxy implements ProxyTargetFactory {
         private final Class<?> intfs;
-        private final ObjectFactory factory;
+        private final ProxyTargetFactory factory;
 
-        public AbstractProxy(Class<?> intfs, ObjectFactory factory) {
+        public AbstractProxy(Class<?> intfs, ProxyTargetFactory factory) {
             this.intfs = assertNotNull(intfs);
-            this.factory = assertNotNull(factory, "objectFactory");
+            this.factory = assertNotNull(factory, "ProxyTargetFactory");
         }
 
-        public Object getObject() throws BeansException {
+        public Object getObject() {
             return factory.getObject();
         }
 
@@ -739,12 +738,12 @@ public class SpringExtUtil {
     }
 
     /**
-     * 服务于createProxy()方法，将调用委托给ObjectFactory所返回的对象。
+     * 服务于createProxy()方法，将调用委托给ProxyTargetFactory所返回的对象。
      */
     private static final class ProxiedInterceptor implements MethodInterceptor {
-        private final ObjectFactory factory;
+        private final ProxyTargetFactory factory;
 
-        private ProxiedInterceptor(ObjectFactory factory) {
+        private ProxiedInterceptor(ProxyTargetFactory factory) {
             this.factory = factory;
         }
 
@@ -754,20 +753,20 @@ public class SpringExtUtil {
     }
 
     /**
-     * 服务于createProxy()方法，对于equals、hashCode、toString和ObjectFactory.getObject方法，
-     * 执行defaultInterceptor，否则执行proxiedInterceptor。
+     * 服务于createProxy()方法，对于equals、hashCode、toString和ProxyTargetFactory.
+     * getObject方法， 执行defaultInterceptor，否则执行proxiedInterceptor。
      */
     private static final class ProxiedFilter implements CallbackFilter {
         public int accept(Method method) {
             if (isEqualsMethod(method) || isHashCodeMethod(method) || isToStringMethod(method)
-                    || isObjectFactoryMethod(method)) {
+                    || isProxyTargetFactoryMethod(method)) {
                 return 0; // invoke super
             } else {
                 return 1; // invoke proxied object
             }
         }
 
-        private boolean isObjectFactoryMethod(Method method) {
+        private boolean isProxyTargetFactoryMethod(Method method) {
             return method != null && method.getName().equals("getObject") && method.getParameterTypes().length == 0;
         }
     }
