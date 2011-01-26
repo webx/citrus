@@ -109,14 +109,14 @@ public class CookieSupport extends Cookie {
             m = Cookie.class.getMethod("isHttpOnly"); // servlet 3.0 spec draft
         } catch (Exception e) {
             try {
-                m = Cookie.class.getMethod("getHttpOnlyMethod"); // 另一种可能
+                m = Cookie.class.getMethod("getHttpOnly"); // 另一种可能
             } catch (Exception ee) {
             }
         }
 
         if (m != null) {
             log.debug("Method Cookie.isHttpOnly() defined in current version of servlet api.  CookieSupport will make use of it.");
-            return FastClass.create(Cookie.class).getMethod(m);
+            return FastClass.create(CookieSupport.class.getClassLoader(), Cookie.class).getMethod(m);
         }
 
         log.debug("No method Cookie.isHttpOnly() defined in current version of servlet api.");

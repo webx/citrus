@@ -55,3 +55,4 @@
 * Bugfix: 当RequestContext未扩展子接口时，将对RequestContext创建singleton proxy，从而导致注入RequestContext接口时出错。
   解决步骤：1. 避免对创建RequestContext接口本身创建singleton proxy
           2. 不使用spring本身的ObjectFactory作为proxy的接口，而是创建一个新的接口：ProxyTargetFactory
+* Bugfix: 在Servlet 3.0/Tomcat 7.0中，对Cookie.isHttpOnly创建FastClass时出ClassNotFoundException。解决步骤，指定正确的classLoader。
