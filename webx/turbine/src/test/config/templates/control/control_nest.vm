@@ -1,0 +1,4 @@
+#set ($var1="app1")
+$control.setTemplate("app2:control_set").export("var1", "var2")
+1. $var1
+2. $var2

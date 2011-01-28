@@ -50,7 +50,7 @@
 
     <!-- 装载template,用于searchExtensions和local测试 -->
     <services:template searchExtensions="true">
-        <engines:velocity-engine path="/templates/app2" />
+        <engines:velocity-engine path="/templates/app2" strictReference="false" />
     </services:template>
 
     <!-- 配置mapping -->

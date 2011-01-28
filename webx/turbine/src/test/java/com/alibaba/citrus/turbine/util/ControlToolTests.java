@@ -18,12 +18,17 @@
 package com.alibaba.citrus.turbine.util;
 
 import static com.alibaba.citrus.test.TestUtil.*;
+import static com.alibaba.citrus.util.CollectionUtil.*;
 import static org.easymock.classextension.EasyMock.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
+import java.lang.reflect.Method;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,6 +36,9 @@ import com.alibaba.citrus.service.mappingrule.MappingRuleService;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import com.alibaba.citrus.service.requestcontext.buffered.BufferedRequestContext;
 import com.alibaba.citrus.service.template.TemplateService;
+import com.alibaba.citrus.turbine.Context;
+import com.alibaba.citrus.turbine.support.AbstractContext;
+import com.alibaba.citrus.turbine.util.ControlTool.ControlParameters;
 import com.alibaba.citrus.webx.WebxComponents;
 
 public class ControlToolTests extends AbstractPullToolTests<ControlTool> {
@@ -42,6 +50,13 @@ public class ControlToolTests extends AbstractPullToolTests<ControlTool> {
     @Before
     public void init() throws Exception {
         rundata.getResponse().getWriter();
+    }
+
+    @After
+    public void destroy() {
+        while (rundata.getCurrentContext() != null) {
+            rundata.popContext();
+        }
     }
 
     @Test
@@ -154,5 +169,200 @@ public class ControlToolTests extends AbstractPullToolTests<ControlTool> {
 
         content = tool.setModule("app2:myControlNoTemplate").render();
         assertEquals("hi, baobao app2 without template", content);
+    }
+
+    @Test
+    public void controlContexts() throws Exception {
+        Context context1 = rundata.getContext();
+        Context context2 = rundata.getContext("app2");
+        assertFalse(tool.exportAll);
+
+        context1.put("var1", "init");
+        context1.put("var2", "init");
+
+        // no current context
+        AbstractContext controlContext1 = (AbstractContext) createContextForControl(null, null);
+        assertSame(context1, controlContext1.getParentContext());
+
+        controlContext1.put("var1", "value1");
+        assertEquals("value1", controlContext1.get("var1"));
+        assertEquals("init", context1.get("var1"));
+
+        controlContext1.remove("var2");
+        assertEquals(null, controlContext1.get("var2"));
+        assertEquals("init", context1.get("var2"));
+
+        // context1 -> controlContext1, without exports
+        rundata.pushContext(context1);
+
+        controlContext1 = (AbstractContext) createContextForControl(null, null);
+        assertSame(context1, controlContext1.getParentContext());
+
+        controlContext1.put("var1", "value1");
+        assertEquals("value1", controlContext1.get("var1"));
+        assertEquals("init", context1.get("var1"));
+
+        controlContext1.remove("var2");
+        assertEquals(null, controlContext1.get("var2"));
+        assertEquals("init", context1.get("var2"));
+
+        // context1 -> controlContext.export(var1, var2)
+        controlContext1 = (AbstractContext) createContextForControl(null, null, "var1", "var2");
+        assertSame(context1, controlContext1.getParentContext());
+
+        controlContext1.put("var1", "value1");
+        assertEquals("value1", controlContext1.get("var1"));
+        assertEquals("value1", context1.get("var1"));
+
+        controlContext1.remove("var2");
+        assertEquals(null, controlContext1.get("var2"));
+        assertEquals(null, context1.get("var2"));
+
+        // context1 -> controlContext1 -> app2:controlContext2.export(var1, var2)
+        context1.put("var1", "init");
+        context1.put("var2", "init");
+
+        controlContext1 = (AbstractContext) createContextForControl(null, null);
+        assertSame(context1, controlContext1.getParentContext());
+
+        controlContext1.put("var1", "init");
+        controlContext1.put("var2", "init");
+
+        rundata.pushContext(controlContext1);
+
+        AbstractContext controlContext2 = (AbstractContext) createContextForControl(null, "app2", "var1", "var2");
+        assertSame(context2, controlContext2.getParentContext());
+
+        controlContext2.put("var1", "value1");
+        assertEquals("value1", controlContext2.get("var1"));
+        assertEquals("value1", controlContext1.get("var1"));
+        assertEquals("init", context1.get("var1"));
+
+        controlContext2.remove("var2");
+        assertEquals(null, controlContext2.get("var2"));
+        assertEquals(null, controlContext1.get("var2"));
+        assertEquals("init", context1.get("var2"));
+
+        rundata.popContext();
+
+        // context1 -> controlContext1.export(var1, var2) -> app2:controlContext2.export(var1, var2)
+        context1.put("var1", "init");
+        context1.put("var2", "init");
+
+        controlContext1 = (AbstractContext) createContextForControl(null, null, "var1", "var2");
+        assertSame(context1, controlContext1.getParentContext());
+
+        controlContext1.put("var1", "init");
+        controlContext1.put("var2", "init");
+
+        rundata.pushContext(controlContext1);
+
+        controlContext2 = (AbstractContext) createContextForControl(null, "app2", "var1", "var2");
+        assertSame(context2, controlContext2.getParentContext());
+
+        controlContext2.put("var1", "value1");
+        assertEquals("value1", controlContext2.get("var1"));
+        assertEquals("value1", controlContext1.get("var1"));
+        assertEquals("value1", context1.get("var1"));
+
+        controlContext2.remove("var2");
+        assertEquals(null, controlContext2.get("var2"));
+        assertEquals(null, controlContext1.get("var2"));
+        assertEquals(null, context1.get("var2"));
+
+        rundata.popContext();
+    }
+
+    private Context createContextForControl(Map<String, Object> params, String component, String... exports)
+            throws Exception {
+        Method method = getAccessibleMethod(tool.getClass(), "createContextForControl", new Class<?>[] {
+                ControlParameters.class, String.class });
+
+        ControlParameters controlParameters = new ControlParameters();
+
+        if (params != null) {
+            controlParameters.putAll(params);
+        }
+
+        if (exports != null) {
+            getAccessibleField(controlParameters.getClass(), "exportVars").set(controlParameters,
+                    createHashSet(exports));
+        }
+
+        return (Context) method.invoke(tool, controlParameters, component);
+    }
+
+    @Test
+    public void render_exportVars() throws Exception {
+        Context context1 = rundata.getContext();
+        Context context2 = rundata.getContext("app2");
+        assertFalse(tool.exportAll);
+
+        context1.put("var1", "init");
+        context1.put("var2", "init");
+
+        // no current context
+        tool.setTemplate("control_set").render();
+        assertEquals("init", context1.get("var1"));
+        assertEquals("init", context1.get("var2"));
+
+        // app1:context -> app1:control, without exports
+        rundata.pushContext(context1);
+
+        tool.setTemplate("control_set").render();
+        assertEquals("init", context1.get("var1"));
+        assertEquals("init", context1.get("var2"));
+
+        // app1:context -> app1:control.export(var1, var2)
+        context1.put("var1", "init");
+        context1.put("var2", "init");
+
+        tool.setTemplate("control_set").export("var1").render();
+        assertEquals("app1", context1.get("var1"));
+        assertEquals("init", context1.get("var2"));
+
+        context1.put("var1", "init");
+        context1.put("var2", "init");
+
+        tool.setTemplate("control_set").export("var2").render();
+        assertEquals("init", context1.get("var1"));
+        assertEquals(null, context1.get("var2"));
+
+        context1.put("var1", "init");
+        context1.put("var2", "init");
+
+        tool.setTemplate("control_set").export("var1", "var2").render();
+        assertEquals("app1", context1.get("var1"));
+        assertEquals(null, context1.get("var2"));
+
+        // app1:context -> app1:control -> app2:control.export(var1, var2)
+        context1.put("var1", "init");
+        context1.put("var2", "init");
+        context2.put("var1", "init");
+        context2.put("var2", "init");
+
+        String content = tool.setTemplate("control_nest").render();
+
+        assertEquals("init", context1.get("var1"));
+        assertEquals("init", context1.get("var2"));
+        assertEquals("init", context2.get("var1"));
+        assertEquals("init", context2.get("var2"));
+
+        assertThat(content, containsAll("1. app2", "2. $var2"));
+
+        // app1:context -> app1:control.export(var1, var2) -> app2:control.export(var1, var2)
+        context1.put("var1", "init");
+        context1.put("var2", "init");
+        context2.put("var1", "init");
+        context2.put("var2", "init");
+
+        content = tool.setTemplate("control_nest").export("var1", "var2").render();
+
+        assertEquals("app2", context1.get("var1"));
+        assertEquals(null, context1.get("var2"));
+        assertEquals("init", context2.get("var1"));
+        assertEquals("init", context2.get("var2"));
+
+        assertThat(content, containsAll("1. app2", "2. $var2"));
     }
 }

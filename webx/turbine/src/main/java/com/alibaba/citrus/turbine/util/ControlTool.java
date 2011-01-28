@@ -30,9 +30,11 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Collections;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -148,6 +150,17 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
     }
 
     /**
+     * 当screen结束时，导出指定名称的变量，使调用者可以访问。
+     */
+    public ControlTool export(String... vars) {
+        ControlParameters params = getControlParameters();
+
+        params.exportVars = createHashSet(vars);
+
+        return this;
+    }
+
+    /**
      * 渲染对象。
      * 
      * @return 渲染的结果
@@ -229,8 +242,15 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
                 }
 
                 if (templateName != null) {
-                    templateService.writeTo(templateName, new ContextAdapter(rundata.getContextForControl()), rundata
-                            .getResponse().getWriter());
+                    Context contextForControl = rundata.getContextForControl();
+                    rundata.pushContext(contextForControl);
+
+                    try {
+                        templateService.writeTo(templateName, new ContextAdapter(contextForControl), rundata
+                                .getResponse().getWriter());
+                    } finally {
+                        rundata.popContext();
+                    }
                 }
             } finally {
                 controlParameterStack.removeFirst();
@@ -254,6 +274,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
             // 清除环境，以便重用
             params.template = null;
             params.module = null;
+            params.exportVars = null;
             params.clear();
         }
 
@@ -305,10 +326,34 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
     private Context createContextForControl(ControlParameters params, String componentName) {
         // get parent context
         TurbineRunDataInternal rundata = (TurbineRunDataInternal) TurbineUtil.getTurbineRunData(this.request);
-        Context parentContext = rundata.getContext(componentName);
+        Context screenContext = rundata.getContext(componentName);
+        final Context callerContext = rundata.getCurrentContext();
+        final Set<String> exportVars = params.exportVars == null ? Collections.<String> emptySet() : params.exportVars;
 
         // create control context
-        MappedContext context = new MappedContext(parentContext);
+        MappedContext context = new MappedContext(screenContext) {
+            @Override
+            protected void internalPut(String key, Object value) {
+                if (isExport(key)) {
+                    callerContext.put(key, value);
+                }
+
+                super.internalPut(key, value);
+            }
+
+            @Override
+            protected void internalRemove(String key) {
+                if (isExport(key)) {
+                    callerContext.remove(key);
+                }
+
+                super.internalRemove(key);
+            }
+
+            private boolean isExport(String key) {
+                return callerContext != null && (exportAll || exportVars.contains(key));
+            }
+        };
 
         // add all params
         context.getMap().putAll(params);
@@ -334,6 +379,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
         private static final long serialVersionUID = 3256721796996084529L;
         private String module;
         private String template;
+        private Set<String> exportVars;
 
         public ControlParameters() {
             super(4);
@@ -483,6 +529,12 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
                             parseBean(errorHandlerElement, parserContext, builder.getRawBeanDefinition()));
                 }
             }
+
+            String exportAll = trimToNull(element.getAttribute("exportAll"));
+
+            if (exportAll != null) {
+                builder.addPropertyValue("exportAll", exportAll);
+            }
         }
     }
 
@@ -493,6 +545,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
         private ErrorDetailLevel errorDetailLevel;
         private ErrorHandler errorHandler;
         private boolean productionMode = true;
+        private boolean exportAll;
 
         public void setProductionMode(boolean productionMode) {
             this.productionMode = productionMode;
@@ -504,6 +557,10 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
 
         public void setErrorHandler(ErrorHandler errorHandler) {
             this.errorHandler = errorHandler;
+        }
+
+        public void setExportAll(boolean exportAll) {
+            this.exportAll = exportAll;
         }
 
         public boolean isSingleton() {
@@ -524,6 +581,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
             tool.init(components, moduleLoaderService, mappingRuleService, templateService, request,
                     bufferedRequestContext);
 
+            tool.exportAll = exportAll;
             tool.afterPropertiesSet();
 
             return tool;
@@ -538,6 +596,7 @@ class ControlToolConfiguration extends BeanSupport {
     protected TemplateService templateService;
     protected HttpServletRequest request;
     protected BufferedRequestContext bufferedRequestContext;
+    protected boolean exportAll;
 
     @Autowired
     protected void init(WebxComponents components, ModuleLoaderService moduleLoaderService,

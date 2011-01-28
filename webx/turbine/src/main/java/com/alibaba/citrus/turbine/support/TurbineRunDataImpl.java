@@ -26,6 +26,7 @@ import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,6 +47,7 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunDataInternal;
 import com.alibaba.citrus.turbine.uribroker.uri.TurbineURIBroker;
+import com.alibaba.citrus.util.Assert;
 import com.alibaba.citrus.webx.WebxComponent;
 import com.alibaba.citrus.webx.WebxException;
 import com.alibaba.citrus.webx.util.WebxUtil;
@@ -210,7 +212,7 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
     }
 
     public Context getContext() {
-        return getContext(null);
+        return getContext(getCurrentComponent().getName());
     }
 
     public Context getContext(String componentName) {
@@ -238,6 +240,44 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
 
     public void setContextForControl(Context parentContext) {
         this.contextForControl = parentContext;
+    }
+
+    private final ThreadLocal<LinkedList<Context>> threadContexts = new ThreadLocal<LinkedList<Context>>();
+
+    public Context getCurrentContext() {
+        LinkedList<Context> stack = threadContexts.get();
+
+        if (stack == null || stack.isEmpty()) {
+            return null;
+        } else {
+            return stack.getLast();
+        }
+    }
+
+    public void pushContext(Context context) {
+        LinkedList<Context> stack = threadContexts.get();
+
+        if (stack == null) {
+            stack = createLinkedList();
+            threadContexts.set(stack);
+        }
+
+        stack.addLast(assertNotNull(context, "context"));
+    }
+
+    public Context popContext() throws IllegalStateException {
+        LinkedList<Context> stack = threadContexts.get();
+
+        assertTrue(stack != null && !stack.isEmpty(), Assert.ExceptionType.ILLEGAL_STATE,
+                "can't popContext without pushContext");
+
+        Context context = stack.removeLast();
+
+        if (stack.isEmpty()) {
+            threadContexts.remove();
+        }
+
+        return context;
     }
 
     public boolean isLayoutEnabled() {

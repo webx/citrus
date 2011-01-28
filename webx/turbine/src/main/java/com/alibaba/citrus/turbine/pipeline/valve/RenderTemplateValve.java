@@ -37,7 +37,6 @@ import com.alibaba.citrus.service.requestcontext.buffered.BufferedRequestContext
 import com.alibaba.citrus.service.template.TemplateException;
 import com.alibaba.citrus.service.template.TemplateService;
 import com.alibaba.citrus.turbine.Context;
-import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.turbine.TurbineRunDataInternal;
 import com.alibaba.citrus.turbine.support.ContextAdapter;
 
@@ -94,9 +93,15 @@ public class RenderTemplateValve extends AbstractValve {
         return mappingRuleService.getMappedName(LAYOUT_TEMPLATE, target);
     }
 
-    protected void renderTemplate(String templateName, Context context, TurbineRunData rundata)
+    protected void renderTemplate(String templateName, Context context, TurbineRunDataInternal rundata)
             throws TemplateException, IOException {
-        templateService.writeTo(templateName, new ContextAdapter(context), rundata.getResponse().getWriter());
+        rundata.pushContext(context);
+
+        try {
+            templateService.writeTo(templateName, new ContextAdapter(context), rundata.getResponse().getWriter());
+        } finally {
+            rundata.popContext();
+        }
     }
 
     public static class DefinitionParser extends AbstractValveDefinitionParser<RenderTemplateValve> {

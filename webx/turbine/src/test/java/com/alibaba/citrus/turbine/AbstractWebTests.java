@@ -160,7 +160,8 @@ public abstract class AbstractWebTests {
         WebxComponent component = createMock(WebxComponent.class);
         GenericWebApplicationContext webAppContext = new GenericWebApplicationContext();
         webAppContext.setParent(factory);
-        expect(component.getApplicationContext()).andReturn(webAppContext);
+        expect(component.getApplicationContext()).andReturn(webAppContext).anyTimes();
+        expect(component.getName()).andReturn("app1").anyTimes();
         replay(component);
         WebxUtil.setCurrentComponent(newRequest, component);
     }

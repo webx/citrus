@@ -1,0 +1,2 @@
+#set ($var1="app1")
+#set ($var2=$null)

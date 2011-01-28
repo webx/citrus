@@ -59,3 +59,6 @@
 * 改进：添加ExceptionUtil.getStackTraceForHtmlComment()方法，使包含“--”的异常信息可被正确输出HTML comment中。
 * 改进：(Servlet|Turbine|)ContentURIBroker.getURI("xxx?a=1&b=2#ref")支持query和ref
 * 改进：URIBroker.setServerURI("xxx?a=1&b=2#ref")支持query和ref
+* 改进：支持导出control context中的值到调用者。
+  * 临时导出：$controlTool.export("var1", "var2", ...)
+  * 导出全部（不推荐，默认为false）：<control-tool exportAll="true" />

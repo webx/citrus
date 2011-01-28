@@ -33,6 +33,7 @@
                 </xsd:restriction>
             </xsd:simpleType>
         </xsd:attribute>
+        <xsd:attribute name="exportAll" type="springext:booleanOrPlaceholder" />
     </xsd:complexType>
 
 </xsd:schema>

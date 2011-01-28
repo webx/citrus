@@ -47,11 +47,13 @@
     </services:pipeline>
 
     <services:pipeline id="checkCsrfToken">
-        <valves:checkCsrfToken expiredPage="error.vm" tokenKey="token" maxTokens="1" logName="mySecurity" />
+        <valves:checkCsrfToken expiredPage="error.vm" tokenKey="token" maxTokens="1"
+            logName="mySecurity" />
     </services:pipeline>
 
     <services:pipeline id="checkCsrfToken_manually">
-        <valves:checkCsrfToken expiredPage="error.vm" tokenKey="token" maxTokens="1" logName="mySecurity" />
+        <valves:checkCsrfToken expiredPage="error.vm" tokenKey="token" maxTokens="1"
+            logName="mySecurity" />
         <valves:valve
             class="com.alibaba.citrus.turbine.pipeline.valve.CheckCsrfTokenValveTests$CheckCsrfManually"
          />
@@ -118,7 +120,7 @@
 
     <!-- 装载template,用于searchExtensions和local测试 -->
     <services:template searchExtensions="true">
-        <engines:velocity-engine />
+        <engines:velocity-engine strictReference="false" />
     </services:template>
 
     <services:pull>
@@ -126,6 +128,7 @@
         <pull-tools:utils />
         <pull-tools:csrfToken />
         <pull-tools:control-tool />
+        <pull-tools:control-tool id="controlExportAll" exportAll="true" />
         <pull-tools:page-tool />
         <pull-tools:rundata-tool />
     </services:pull>

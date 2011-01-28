@@ -32,4 +32,21 @@ public interface TurbineRunDataInternal extends TurbineRunData, Navigator {
     Context getContextForControl();
 
     void setContextForControl(Context parentContext);
+
+    /**
+     * 取得当前线程的context。
+     */
+    Context getCurrentContext();
+
+    /**
+     * 修改当前线程的context。
+     */
+    void pushContext(Context context);
+
+    /**
+     * 弹出当前的context，恢复上一个context。
+     * 
+     * @throws IllegalStateException 如果pop和push不配对，则抛错
+     */
+    Context popContext() throws IllegalStateException;
 }
