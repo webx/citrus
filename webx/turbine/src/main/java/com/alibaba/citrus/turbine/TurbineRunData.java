@@ -55,4 +55,10 @@ public interface TurbineRunData {
     boolean isLayoutEnabled();
 
     void setLayoutEnabled(boolean enabled);
+
+    /**
+     * 明确指定layout模板，覆盖默认的layout规则。 注意如果指定了layout，则<code>layoutEnabled</code>
+     * 将被设置成<code>true</code>。
+     */
+    void setLayout(String layoutTemplate);
 }

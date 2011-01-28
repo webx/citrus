@@ -76,4 +76,31 @@ public class TurbineRunDataTests extends AbstractWebxTests {
 
         assertNull(getFieldValue(rundata, "threadContexts", ThreadLocal.class).get());
     }
+
+    @Test
+    public void setLayout() {
+        assertFalse(rundata.isLayoutEnabled());
+        assertNull(rundata.getLayoutTemplateOverride());
+
+        rundata.setLayoutEnabled(true);
+        assertTrue(rundata.isLayoutEnabled());
+
+        rundata.setLayoutEnabled(false);
+        assertFalse(rundata.isLayoutEnabled());
+
+        rundata.setLayout(" test ");
+        assertTrue(rundata.isLayoutEnabled());
+        assertEquals("test", rundata.getLayoutTemplateOverride());
+
+        rundata.setLayout("  ");
+        assertTrue(rundata.isLayoutEnabled());
+        assertEquals(null, rundata.getLayoutTemplateOverride());
+
+        rundata.setLayoutEnabled(false);
+        assertFalse(rundata.isLayoutEnabled());
+
+        rundata.setLayout(null);
+        assertFalse(rundata.isLayoutEnabled());
+        assertEquals(null, rundata.getLayoutTemplateOverride());
+    }
 }

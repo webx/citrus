@@ -49,4 +49,9 @@ public interface TurbineRunDataInternal extends TurbineRunData, Navigator {
      * @throws IllegalStateException 如果pop和push不配对，则抛错
      */
     Context popContext() throws IllegalStateException;
+
+    /**
+     * 取得明确指定的layout模板。
+     */
+    String getLayoutTemplateOverride();
 }

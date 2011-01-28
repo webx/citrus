@@ -139,7 +139,7 @@
         <mapping-rules:direct-module-rule id="direct.module" />
 
         <!-- 直接从name映射成template name -->
-        <mapping-rules:direct-template-rule id="direct.template" templatePrefix="myprefix" />
+        <mapping-rules:direct-template-rule id="direct.template" templatePrefix="myscreen" />
 
         <!-- 回归搜索模块名  -->
         <mapping-rules:fallback-module-rule id="action" moduleType="action"
@@ -155,13 +155,13 @@
 
         <mapping-rules:fallback-module-rule id="control.notemplate" moduleType="control" />
 
-        <mapping-rules:fallback-template-rule id="layout.template" templatePrefix="myprefix" />
+        <mapping-rules:fallback-template-rule id="layout.template" templatePrefix="mylayout" />
 
-        <mapping-rules:fallback-template-rule id="screen.template" templatePrefix="myprefix" />
+        <mapping-rules:fallback-template-rule id="screen.template" templatePrefix="myscreen" />
 
         <mapping-rules:fallback-template-rule id="control.template" templatePrefix="control" />
 
-        <mapping-rules:fallback-template-rule id="error.template" templatePrefix="myprefix/error" />
+        <mapping-rules:fallback-template-rule id="error.template" templatePrefix="myscreen/error" />
 
         <!-- 后缀扩展映射 -->
         <mapping-rules:extension-rule id="extension.input">

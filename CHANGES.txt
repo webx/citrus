@@ -62,3 +62,5 @@
 * 改进：支持导出control context中的值到调用者。
   * 临时导出：$controlTool.export("var1", "var2", ...)
   * 导出全部（不推荐，默认为false）：<control-tool exportAll="true" />
+* 改进：支持在模板中指定layout：$rundata.setLayout(xxx)
+

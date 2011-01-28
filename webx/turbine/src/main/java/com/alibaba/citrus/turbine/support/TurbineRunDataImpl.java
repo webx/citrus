@@ -67,6 +67,7 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
     private final Map<String, Context> contexts;
     private Context contextForControl;
     private boolean layoutEnabled;
+    private String layoutTemplateOverride;
     private final Parameters forwardParameters = new ForwardParametersImpl();
 
     public TurbineRunDataImpl(HttpServletRequest request) {
@@ -286,6 +287,25 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
 
     public void setLayoutEnabled(boolean enabled) {
         this.layoutEnabled = enabled;
+    }
+
+    /**
+     * 明确指定layout模板，覆盖默认的layout规则。 注意如果指定了layout，则<code>layoutEnabled</code>
+     * 将被设置成<code>true</code>。
+     */
+    public void setLayout(String layoutTemplate) {
+        layoutTemplateOverride = trimToNull(layoutTemplate);
+
+        if (layoutTemplateOverride != null) {
+            setLayoutEnabled(true);
+        }
+    }
+
+    /**
+     * 取得明确指定的layout模板。
+     */
+    public String getLayoutTemplateOverride() {
+        return layoutTemplateOverride;
     }
 
     public Parameters forwardTo(String target) {

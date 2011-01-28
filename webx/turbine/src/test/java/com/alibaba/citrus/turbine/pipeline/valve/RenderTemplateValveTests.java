@@ -36,21 +36,37 @@ public class RenderTemplateValveTests extends AbstractValveTests {
         assertNotNull(pipeline);
         assertNotNull(rundata);
 
-        getInvocationContext("http://localhost/app1/aaa/bbb/myOtherModule.vm");
+        // screen and layout
+        getInvocationContext("http://localhost/app1/aaa/bbb/myModule.vm");
         initRequestContext();
+
         rundata.setLayoutEnabled(true);
         pipeline.newInvocation().invoke();
         String text = (String) rundata.getContext().get(TurbineConstant.SCREEN_PLACEHOLDER_KEY);
         assertEquals("hello", text);
+
         text = findRequestContext(newRequest, BufferedRequestContext.class).popCharBuffer();
+        assertEquals("hello and layout", text);
+
+        // overridden layout
+        getInvocationContext("http://localhost/app1/aaa/bbb/myModule.vm");
+        initRequestContext();
+
+        rundata.setLayout("aaa/bbb/myOtherModule");
+        pipeline.newInvocation().invoke();
+        text = (String) rundata.getContext().get(TurbineConstant.SCREEN_PLACEHOLDER_KEY);
         assertEquals("hello", text);
 
+        text = findRequestContext(newRequest, BufferedRequestContext.class).popCharBuffer();
+        assertEquals("hello and layout2", text);
+
+        // template not found
         try {
-            getInvocationContext("http://localhost/app1/myOtherModule.vm");
+            getInvocationContext("http://localhost/app1/myModule.vm");
             initRequestContext();
             pipeline.newInvocation().invoke();
         } catch (PipelineException e) {
-            assertThat(e, exception(TemplateNotFoundException.class, "/myprefix/myOtherModule.vm"));
+            assertThat(e, exception(TemplateNotFoundException.class, "/myscreen/myModule.vm"));
         }
     }
 }

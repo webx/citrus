@@ -71,6 +71,12 @@ public class RenderTemplateValve extends AbstractValve {
 
             // layout¿É±»½ûÓÃ¡£
             if (rundata.isLayoutEnabled()) {
+                String layoutTemplateOverride = rundata.getLayoutTemplateOverride();
+
+                if (layoutTemplateOverride != null) {
+                    target = layoutTemplateOverride;
+                }
+
                 String layoutTemplate = getLayoutTemplate(target);
 
                 if (templateService.exists(layoutTemplate)) {
