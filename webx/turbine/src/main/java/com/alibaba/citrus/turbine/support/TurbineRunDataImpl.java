@@ -71,12 +71,23 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
     private final Parameters forwardParameters = new ForwardParametersImpl();
 
     public TurbineRunDataImpl(HttpServletRequest request) {
+        this(request, null);
+    }
+
+    /**
+     * 创建一个turbine rundata，使用指定的context。 这种形式用于创建error pipeline的rundata对象。
+     */
+    public TurbineRunDataImpl(HttpServletRequest request, Context context) {
         this.topRequestContext = assertNotNull(RequestContextUtil.getRequestContext(request),
                 "no request context defined in request attributes");
         this.lazyCommitRequestContext = findRequestContext(topRequestContext, LazyCommitRequestContext.class);
         this.parserRequestContext = findRequestContext(topRequestContext, ParserRequestContext.class);
         this.pullServices = createHashMap();
         this.contexts = createHashMap();
+
+        if (context != null) {
+            contexts.put(null, context);
+        }
     }
 
     private String normalizeComponentName(String componentName) {
@@ -213,7 +224,7 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
     }
 
     public Context getContext() {
-        return getContext(getCurrentComponent().getName());
+        return getContext(null);
     }
 
     public Context getContext(String componentName) {

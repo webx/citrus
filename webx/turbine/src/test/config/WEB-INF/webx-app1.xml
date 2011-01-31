@@ -78,6 +78,20 @@
         <valves:renderTemplate />
     </services:pipeline>
 
+    <services:pipeline id="prepareForTurbine1">
+        <valves:prepareForTurbine />
+        <valves:valve
+            class="com.alibaba.citrus.turbine.pipeline.valve.PrepareForTurbineValveTests$MyErrorValve"
+         />
+    </services:pipeline>
+
+    <services:pipeline id="prepareForTurbine2">
+        <valves:prepareForTurbine />
+        <valves:valve
+            class="com.alibaba.citrus.turbine.pipeline.valve.PrepareForTurbineValveTests$MyValve"
+         />
+    </services:pipeline>
+
     <services:pipeline id="requestHandler">
         <valves:requestHandler class="com.alibaba.citrus.turbine.pipeline.valve.MySpringHandler" />
     </services:pipeline>

@@ -42,6 +42,7 @@ public class PrepareForTurbineValve extends AbstractValve {
 
     public void invoke(PipelineContext pipelineContext) throws Exception {
         TurbineRunData rundata = getTurbineRunData(request, true);
+        boolean contextSaved = false;
 
         try {
             pipelineContext.setAttribute("rundata", rundata);
@@ -51,8 +52,17 @@ public class PrepareForTurbineValve extends AbstractValve {
             }
 
             pipelineContext.invokeNext();
+        } catch (Throwable e) {
+            saveTurbineRunDataContext(rundata);
+            contextSaved = true;
+
+            if (e instanceof Exception) {
+                throw (Exception) e;
+            } else if (e instanceof Error) {
+                throw (Error) e;
+            }
         } finally {
-            cleanupTurbineRunData(request);
+            cleanupTurbineRunData(request, !contextSaved);
         }
     }
 
