@@ -93,12 +93,18 @@ public class PullableMappedContextTests {
 
     @Test
     public void keySet() {
-        assertKeySet(parent, "parent", "pull1", "pull2");
-        assertKeySet(context, "child", "parent", "pull1", "pull2");
+        assertKeySet(parent, false, "parent", "pull1", "pull2");
+        assertKeySet(context, false, "child", "parent", "pull1", "pull2");
     }
 
-    private void assertKeySet(Context ctx, String... keys) {
-        List<String> keyList = createArrayList(ctx.keySet());
+    @Test
+    public void keySetWithoutPulling() {
+        assertKeySet(parent, true, "parent");
+    }
+
+    private void assertKeySet(Context ctx, boolean withoutPulling, String... keys) {
+        List<String> keyList = createArrayList(withoutPulling && ctx instanceof PullableMappedContext ? ((PullableMappedContext) ctx)
+                .keySetWithoutPulling() : ctx.keySet());
         Collections.sort(keyList);
 
         assertArrayEquals(keys, keyList.toArray(new String[keyList.size()]));

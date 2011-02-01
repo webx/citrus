@@ -72,6 +72,10 @@ public class PullableMappedContext extends MappedContext {
         }
     }
 
+    public Set<String> keySetWithoutPulling() {
+        return super.internalKeySet();
+    }
+
     private Object pull(String key) {
         if (pullContext != null) {
             return pullContext.pull(key);

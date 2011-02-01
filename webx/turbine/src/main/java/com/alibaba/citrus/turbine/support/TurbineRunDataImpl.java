@@ -28,6 +28,7 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -86,7 +87,19 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
         this.contexts = createHashMap();
 
         if (context != null) {
-            contexts.put(null, context);
+            // 将context中的内容复制到新的context中，但是不要包含pull tools。
+            Context newContext = getContext();
+            Set<String> keys;
+
+            if (context instanceof PullableMappedContext) {
+                keys = ((PullableMappedContext) context).keySetWithoutPulling();
+            } else {
+                keys = context.keySet();
+            }
+
+            for (String key : keys) {
+                newContext.put(key, context.get(key));
+            }
         }
     }
 

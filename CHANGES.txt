@@ -63,5 +63,5 @@
   * 临时导出：$controlTool.export("var1", "var2", ...)
   * 导出全部（不推荐，默认为false）：<control-tool exportAll="true" />
 * 改进：支持在模板中指定layout：$rundata.setLayout(xxx)
-* 改进：使error pipeline中可以取得应用的context。
+* 改进：使error pipeline中可以取得应用context中的对象（但是不包括pull tools）。
 * 删除过期的ExceptionRecoveryValve

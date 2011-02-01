@@ -12,9 +12,11 @@ import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.PipelineException;
 import com.alibaba.citrus.service.pipeline.Valve;
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
+import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.turbine.TurbineRunDataInternal;
 import com.alibaba.citrus.turbine.util.TurbineUtil;
+import com.alibaba.citrus.webx.util.WebxUtil;
 
 public class PrepareForTurbineValveTests extends AbstractValveTests {
     @Test
@@ -32,7 +34,12 @@ public class PrepareForTurbineValveTests extends AbstractValveTests {
         }
 
         assertNull(request.getAttribute("_webx3_turbine_rundata"));
-        assertNotNull(request.getAttribute("_webx3_turbine_rundata_context")); // 保留context
+
+        Context savedContext = (Context) request.getAttribute("_webx3_turbine_rundata_context");
+        assertNotNull(savedContext); // 保留context
+
+        // 切换到root component，以模拟error处理的情形
+        WebxUtil.setCurrentComponent(request, component.getWebxComponents().getComponent(null));
 
         pipeline = (PipelineImpl) factory.getBean("prepareForTurbine2");
         pipeline.newInvocation().invoke();
@@ -71,6 +78,9 @@ public class PrepareForTurbineValveTests extends AbstractValveTests {
             // 第一个pipeline出错以后，第二个pipeline可以取得上个pipeline的context。
             // 这样，用于错误处理的exception pipleine就可以获得应用的context状态。
             assertEquals("world", rundata.getContext().get("hello"));
+
+            // root context中不包含pull service，因此不存在control tool。
+            assertNull(rundata.getContext().get("control"));
         }
     }
 }
