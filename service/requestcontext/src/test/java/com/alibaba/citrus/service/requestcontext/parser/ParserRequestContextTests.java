@@ -120,13 +120,11 @@ public class ParserRequestContextTests extends AbstractRequestContextsTests<Pars
         FileItem[] fileItems = requestContext.getParameters().getFileItems("myfile");
         String[] fileNames = requestContext.getParameters().getStrings("myfile");
 
-        assertEquals(fileItems.length, fileNames.length);
+        assertEquals(2, fileItems.length);
         assertEquals(4, fileNames.length);
 
-        assertNull(fileItems[0]);
-        assertEquals(new File(srcdir, "smallfile_.JPG"), new File(fileItems[1].getName())); // case insensitive
-        assertEquals(new File(srcdir, "smallfile.gif"), new File(fileItems[2].getName()));
-        assertNull(fileItems[3]);
+        assertEquals(new File(srcdir, "smallfile_.JPG"), new File(fileItems[0].getName())); // case insensitive
+        assertEquals(new File(srcdir, "smallfile.gif"), new File(fileItems[1].getName()));
 
         assertEquals("", fileNames[0]);
         assertEquals(new File(srcdir, "smallfile_.JPG"), new File(fileNames[1])); // case insensitive
@@ -143,13 +141,11 @@ public class ParserRequestContextTests extends AbstractRequestContextsTests<Pars
         FileItem[] fileItems = requestContext.getParameters().getFileItems("myfile");
         String[] fileNames = requestContext.getParameters().getStrings("myfile");
 
-        assertEquals(fileItems.length, fileNames.length);
+        assertEquals(2, fileItems.length);
         assertEquals(4, fileNames.length);
 
         assertEquals(new File(srcdir, "smallfile.txt"), new File(fileItems[0].getName()));
-        assertNull(fileItems[1]);
-        assertNull(fileItems[2]);
-        assertEquals(new File(srcdir, "smallfile"), new File(fileItems[3].getName()));
+        assertEquals(new File(srcdir, "smallfile"), new File(fileItems[1].getName()));
 
         assertEquals(new File(srcdir, "smallfile.txt"), new File(fileNames[0]));
         assertEquals("", fileNames[1]);
