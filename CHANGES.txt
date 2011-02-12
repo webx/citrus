@@ -50,6 +50,15 @@
 -- Changes in 3.0.2
 
 * 改进SessionRequestContext，当attributes未改变，并且invalidate未调用时，不提交store，以免产生不必要之cookies。
+  
+  注意：session store不保证对象的内部属性的改变会被保存到store中，例如，下面的代码不一定可行：
+  
+  MyObject myObject = session.getAttribute("myObject");
+  myObject.setValue(value);
+  
+  // next request of the same session
+  assertEquals(value, ((MyObject) session.getAttribute("myObject")).getValue()); // 可能不等
+  
 * Bugfix: 在解析query参数时，对“Justin%A1%A4Bieber”进行URL unescape时（GBK），得到乱码。
 * 改进WebxComponentsContext接口，使开发者有机会继承并设置额外的参数。例如：允许bean definition重复定义。
 * Bugfix: 当RequestContext未扩展子接口时，将对RequestContext创建singleton proxy，从而导致注入RequestContext接口时出错。
@@ -65,3 +74,4 @@
 * 改进：支持在模板中指定layout：$rundata.setLayout(xxx)
 * 改进：使error pipeline中可以取得应用context中的对象（但是不包括pull tools）。
 * 删除过期的ExceptionRecoveryValve
+* Bugfix: 当<input type=file>字段存在，但未上传文件时，ValueListSupport.getFileItems()不能取得正确的结果。

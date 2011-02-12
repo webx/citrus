@@ -369,11 +369,15 @@ public class ValueListSupport implements ValueList {
      * @return <code>FileItem</code>对象的数组
      */
     public FileItem[] getFileItems() {
-        try {
-            return values.toArray(new FileItem[values.size()]);
-        } catch (ArrayStoreException e) {
-            return new FileItem[0];
+        List<FileItem> items = createLinkedList();
+
+        for (Object value : values) {
+            if (value instanceof FileItem) {
+                items.add((FileItem) value);
+            }
         }
+
+        return items.toArray(new FileItem[items.size()]);
     }
 
     /**
