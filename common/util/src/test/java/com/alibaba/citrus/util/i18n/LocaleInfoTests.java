@@ -83,6 +83,21 @@ public class LocaleInfoTests {
     }
 
     @Test
+    public void create_withLocale_unknwonCharset() {
+        try {
+            LocaleUtil.setDefault(Locale.CHINA, "GB18030");
+
+            localeInfo = new LocaleInfo(Locale.US, "unknown");
+
+            assertEquals(Locale.US, localeInfo.getLocale());
+            assertEquals("unknown", localeInfo.getCharset().name());
+            assertTrue(localeInfo.getCharset() instanceof UnknownCharset);
+        } finally {
+            LocaleUtil.resetDefault();
+        }
+    }
+
+    @Test
     public void create_noFallback() {
         try {
             new LocaleInfo(null, null, null);
@@ -142,6 +157,12 @@ public class LocaleInfoTests {
         assertEquals("en_US:UTF-8", LocaleInfo.parse(" en_US ").toString());
         assertEquals("en_US:UTF-8", LocaleInfo.parse(" en_US : ").toString());
         assertEquals("en_US:ISO-8859-1", LocaleInfo.parse(" en_US : 8859_1").toString());
+    }
+
+    @Test
+    public void parse_unknown() {
+        assertEquals("en_US:unknown", LocaleInfo.parse(" en_US : unknown").toString());
+        assertTrue(LocaleInfo.parse(" en_US : unknown").getCharset() instanceof UnknownCharset);
     }
 
     @Test

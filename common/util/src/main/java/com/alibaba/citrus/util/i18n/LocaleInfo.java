@@ -25,12 +25,17 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.nio.charset.Charset;
+import java.nio.charset.UnsupportedCharsetException;
 import java.util.Locale;
 
 import com.alibaba.citrus.util.StringUtil;
 
 /**
  * 代表一个locale信息。
+ * <p>
+ * 即使charset不合法，本类也不会报错。请使用<code>LocaleUtil.isCharsetSupported()</code>
+ * 方法来判断charset的合法性。
+ * </p>
  * 
  * @author Michael Zhou
  */
@@ -114,7 +119,12 @@ public final class LocaleInfo implements Cloneable, Externalizable {
         }
 
         this.locale = locale;
-        this.charset = Charset.forName(charset);
+
+        try {
+            this.charset = Charset.forName(charset);
+        } catch (UnsupportedCharsetException e) {
+            this.charset = new UnknownCharset(charset);
+        }
     }
 
     /**
