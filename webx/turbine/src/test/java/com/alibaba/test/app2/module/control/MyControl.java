@@ -30,6 +30,6 @@ public class MyControl {
     private HttpServletRequest request;
 
     public void execute() {
-        ((TurbineRunDataInternal) getTurbineRunData(request)).getContextForControl().put("greeting", "baobao app2");
+        ((TurbineRunDataInternal) getTurbineRunData(request)).getCurrentContext().put("greeting", "baobao app2");
     }
 }

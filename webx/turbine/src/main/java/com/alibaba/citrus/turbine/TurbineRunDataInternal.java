@@ -22,26 +22,27 @@ package com.alibaba.citrus.turbine;
  * 
  * @author Michael Zhou
  */
-public interface TurbineRunDataInternal extends TurbineRunData, Navigator {
+public interface TurbineRunDataInternal extends TurbineRunData, Navigator, ControlParameters {
     void setTarget(String target);
 
     Context getContext(String componentName);
 
     Context getContext();
 
-    Context getContextForControl();
-
-    void setContextForControl(Context parentContext);
-
     /**
-     * 取得当前线程的context。
+     * 取得当前的context。
      */
     Context getCurrentContext();
 
     /**
-     * 修改当前线程的context。
+     * 修改当前的context。
      */
     void pushContext(Context context);
+
+    /**
+     * 修改当前的context。
+     */
+    void pushContext(Context context, String template);
 
     /**
      * 弹出当前的context，恢复上一个context。

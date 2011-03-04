@@ -202,7 +202,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
             String moduleName = null;
 
             if (isTemplate) {
-                templateName = mappingRuleService.getMappedName(CONTROL_TEMPLATE, target);
+                templateName = target;
                 moduleName = mappingRuleService.getMappedName(CONTROL_MODULE, target);
             } else {
                 moduleName = mappingRuleService.getMappedName(CONTROL_MODULE_NO_TEMPLATE, target);
@@ -235,22 +235,35 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
                 controlParameterStack.addFirst(new ControlParameters()); // 支持control的嵌套
 
                 TurbineRunDataInternal rundata = (TurbineRunDataInternal) TurbineUtil.getTurbineRunData(this.request);
-                rundata.setContextForControl(createContextForControl(params, componentName));
+                Context contextForControl = createContextForControl(params, componentName);
 
-                if (controlModule != null) {
-                    controlModule.execute();
-                }
+                rundata.pushContext(contextForControl, templateName);
 
-                if (templateName != null) {
-                    Context contextForControl = rundata.getContextForControl();
-                    rundata.pushContext(contextForControl);
+                try {
+                    if (controlModule != null) {
+                        controlModule.execute();
+                    }
 
-                    try {
+                    // Control module可以通过注入ControlParameters接口来修改template。
+                    String templateOverriden = rundata.getControlTemplate();
+
+                    if (!isEquals(templateOverriden, templateName)) {
+                        log.debug("Control template has been changed by module: " + templateName + " -> "
+                                + templateOverriden);
+
+                        templateName = templateOverriden;
+                    }
+
+                    if (templateName != null) {
+                        templateName = mappingRuleService.getMappedName(CONTROL_TEMPLATE, templateName);
+                    }
+
+                    if (templateName != null) {
                         templateService.writeTo(templateName, new ContextAdapter(contextForControl), rundata
                                 .getResponse().getWriter());
-                    } finally {
-                        rundata.popContext();
                     }
+                } finally {
+                    rundata.popContext();
                 }
             } finally {
                 controlParameterStack.removeFirst();

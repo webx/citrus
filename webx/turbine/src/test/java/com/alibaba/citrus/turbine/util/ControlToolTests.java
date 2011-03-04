@@ -40,6 +40,7 @@ import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.support.AbstractContext;
 import com.alibaba.citrus.turbine.util.ControlTool.ControlParameters;
 import com.alibaba.citrus.webx.WebxComponents;
+import com.alibaba.test.app1.module.control.MyControlChangingTemplate;
 
 public class ControlToolTests extends AbstractPullToolTests<ControlTool> {
     @Override
@@ -112,6 +113,20 @@ public class ControlToolTests extends AbstractPullToolTests<ControlTool> {
     }
 
     @Test
+    public void setTemplateModule() {
+        tool.setTemplate("mytemplate").setModule("mymodule");
+        assertEquals("mytemplate", getFieldValue(tool.getControlParameters(), "template", String.class));
+        assertEquals(null, getFieldValue(tool.getControlParameters(), "module", String.class));
+    }
+
+    @Test
+    public void setModuleTemplate() {
+        tool.setModule("mymodule").setTemplate("mytemplate");
+        assertEquals("mymodule", getFieldValue(tool.getControlParameters(), "module", String.class));
+        assertEquals(null, getFieldValue(tool.getControlParameters(), "template", String.class));
+    }
+
+    @Test
     public void render() throws Exception {
         String content = tool.setTemplate("myControl").render();
         assertEquals("hello, baobao", content);
@@ -134,6 +149,27 @@ public class ControlToolTests extends AbstractPullToolTests<ControlTool> {
     public void render_noTemplate() throws Exception {
         String content = tool.setModule("myControlNoTemplate").render();
         assertEquals("hello, baobao without template", content);
+    }
+
+    @Test
+    public void render_changingTemplate() throws Exception {
+        // setTemplate
+        MyControlChangingTemplate.expectedTemplateName = "myControlChangingTemplate";
+        MyControlChangingTemplate.changedTemplateName = "myOtherControl";
+        String content = tool.setTemplate("myControlChangingTemplate").render();
+        assertEquals("other control", content);
+
+        // setModule
+        MyControlChangingTemplate.expectedTemplateName = null;
+        MyControlChangingTemplate.changedTemplateName = "myOtherControl";
+        content = tool.setModule("myControlChangingTemplate").render();
+        assertEquals("other control", content);
+
+        // setTemplate - remove template
+        MyControlChangingTemplate.expectedTemplateName = "myControlChangingTemplate";
+        MyControlChangingTemplate.changedTemplateName = " ";
+        content = tool.setTemplate("myControlChangingTemplate").render();
+        assertEquals("", content);
     }
 
     @Test

@@ -21,6 +21,7 @@ import static com.alibaba.citrus.service.requestcontext.util.RequestContextUtil.
 import static com.alibaba.citrus.service.uribroker.uri.URIBroker.URIType.*;
 import static com.alibaba.citrus.util.ArrayUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
+import static com.alibaba.citrus.util.Assert.ExceptionType.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
@@ -48,7 +49,6 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunDataInternal;
 import com.alibaba.citrus.turbine.uribroker.uri.TurbineURIBroker;
-import com.alibaba.citrus.util.Assert;
 import com.alibaba.citrus.webx.WebxComponent;
 import com.alibaba.citrus.webx.WebxException;
 import com.alibaba.citrus.webx.util.WebxUtil;
@@ -66,10 +66,10 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
     private URIBroker redirectURI;
     private final Map<String, PullService> pullServices;
     private final Map<String, Context> contexts;
-    private Context contextForControl;
     private boolean layoutEnabled;
     private String layoutTemplateOverride;
     private final Parameters forwardParameters = new ForwardParametersImpl();
+    private final ModuleTraces moduleTraces = new ModuleTraces();
 
     public TurbineRunDataImpl(HttpServletRequest request) {
         this(request, null);
@@ -259,50 +259,38 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
         return context;
     }
 
-    public Context getContextForControl() {
-        return contextForControl;
-    }
-
-    public void setContextForControl(Context parentContext) {
-        this.contextForControl = parentContext;
-    }
-
-    private final ThreadLocal<LinkedList<Context>> threadContexts = new ThreadLocal<LinkedList<Context>>();
-
     public Context getCurrentContext() {
-        LinkedList<Context> stack = threadContexts.get();
-
-        if (stack == null || stack.isEmpty()) {
+        if (moduleTraces.isEmpty()) {
             return null;
         } else {
-            return stack.getLast();
+            return moduleTraces.getLast().getContext();
         }
     }
 
     public void pushContext(Context context) {
-        LinkedList<Context> stack = threadContexts.get();
+        pushContext(context, null);
+    }
 
-        if (stack == null) {
-            stack = createLinkedList();
-            threadContexts.set(stack);
-        }
-
-        stack.addLast(assertNotNull(context, "context"));
+    public void pushContext(Context context, String template) {
+        moduleTraces.addLast(new ModuleTrace(context, template));
     }
 
     public Context popContext() throws IllegalStateException {
-        LinkedList<Context> stack = threadContexts.get();
+        assertTrue(!moduleTraces.isEmpty(), ILLEGAL_STATE, "can't popContext without pushContext");
+        return moduleTraces.removeLast().getContext();
+    }
 
-        assertTrue(stack != null && !stack.isEmpty(), Assert.ExceptionType.ILLEGAL_STATE,
-                "can't popContext without pushContext");
-
-        Context context = stack.removeLast();
-
-        if (stack.isEmpty()) {
-            threadContexts.remove();
+    public String getControlTemplate() {
+        if (moduleTraces.isEmpty()) {
+            return null;
+        } else {
+            return moduleTraces.getLast().getTemplate();
         }
+    }
 
-        return context;
+    public void setControlTemplate(String template) {
+        assertTrue(!moduleTraces.isEmpty(), ILLEGAL_STATE, "can't setControlTemplate without pushContext");
+        moduleTraces.getLast().setTemplate(template);
     }
 
     public boolean isLayoutEnabled() {
@@ -399,6 +387,38 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
         @Override
         public String toString() {
             return "redirectTo(" + uri + ")";
+        }
+    }
+
+    /**
+     * 代表module的调用栈。
+     */
+    private class ModuleTraces extends LinkedList<ModuleTrace> {
+        private static final long serialVersionUID = 8167955929944105578L;
+    }
+
+    /**
+     * 代表一个module调用的信息。
+     */
+    private class ModuleTrace {
+        private final Context context;
+        private String template;
+
+        public ModuleTrace(Context context, String template) {
+            this.context = assertNotNull(context, "context");
+            this.template = template;
+        }
+
+        public Context getContext() {
+            return context;
+        }
+
+        public String getTemplate() {
+            return template;
+        }
+
+        public void setTemplate(String template) {
+            this.template = template;
         }
     }
 }

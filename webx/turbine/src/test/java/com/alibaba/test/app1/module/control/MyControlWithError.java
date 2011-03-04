@@ -31,7 +31,7 @@ public class MyControlWithError {
     public void execute() throws Exception {
         TurbineRunDataInternal rundata = (TurbineRunDataInternal) TurbineUtil.getTurbineRunData(request);
 
-        if (rundata.getContextForControl().containsKey("with_XSS")) {
+        if (rundata.getCurrentContext().containsKey("with_XSS")) {
             throw new IllegalArgumentException("<script>alert(1)</script>");
         } else {
             throw new IllegalArgumentException();

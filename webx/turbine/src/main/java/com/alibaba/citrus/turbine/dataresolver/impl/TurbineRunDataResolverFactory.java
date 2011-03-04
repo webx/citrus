@@ -195,7 +195,7 @@ public class TurbineRunDataResolverFactory implements DataResolverFactory {
                     String moduleType = getModuleType(context);
 
                     if ("control".equalsIgnoreCase(moduleType)) {
-                        return getTurbineRunData().getContextForControl();
+                        return getTurbineRunData().getCurrentContext();
                     } else {
                         return getTurbineRunData().getContext();
                     }
