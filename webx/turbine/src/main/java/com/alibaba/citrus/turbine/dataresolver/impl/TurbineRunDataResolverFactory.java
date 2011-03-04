@@ -19,12 +19,16 @@ package com.alibaba.citrus.turbine.dataresolver.impl;
 
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
+import static com.alibaba.citrus.util.ClassUtil.*;
+import static com.alibaba.citrus.util.StringUtil.*;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
@@ -40,6 +44,7 @@ import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunDataInternal;
+import com.alibaba.citrus.turbine.dataresolver.ContextValue;
 import com.alibaba.citrus.turbine.util.TurbineUtil;
 
 /**
@@ -54,11 +59,13 @@ import com.alibaba.citrus.turbine.util.TurbineUtil;
  * <li>CookieParser</li>
  * <li>Context</li>
  * <li>RequestContext及其子类</li>
+ * <li>Context中的值，需要指定<code>@ContextValue("name")</code>注解。</li>
  * </ul>
  * 
  * @author Michael Zhou
  */
 public class TurbineRunDataResolverFactory implements DataResolverFactory {
+    private final static Logger log = LoggerFactory.getLogger(TurbineRunDataResolverFactory.class);
     private final static int index_TurbineRunData = 0;
     private final static int index_HttpServletRequest = 1;
     private final static int index_HttpServletResponse = 2;
@@ -131,6 +138,16 @@ public class TurbineRunDataResolverFactory implements DataResolverFactory {
         int resolvableTypeIndex = getResolvableTypeIndex(context);
 
         if (resolvableTypeIndex < 0) {
+            // ContextValue
+            ContextValue contextValueAnnotation = context.getAnnotation(ContextValue.class);
+
+            if (contextValueAnnotation != null) {
+                String name = assertNotNull(trimToNull(contextValueAnnotation.value()), "missing @%s's name: %s",
+                        ContextValue.class.getSimpleName(), context);
+
+                return new ContextValueResolver(context, name);
+            }
+
             return null;
         }
 
@@ -213,6 +230,45 @@ public class TurbineRunDataResolverFactory implements DataResolverFactory {
                     unreachableCode();
                     return null;
             }
+        }
+    }
+
+    private class ContextValueResolver extends AbstractDataResolver {
+        private final String name;
+
+        private ContextValueResolver(DataResolverContext context, String name) {
+            super("ContextValueResolver", context);
+            this.name = name;
+        }
+
+        public Object resolve() {
+            TurbineRunDataInternal rundata = (TurbineRunDataInternal) TurbineUtil.getTurbineRunData(request);
+            Context turbineContext = rundata.getCurrentContext();
+
+            if (turbineContext == null) {
+                turbineContext = rundata.getContext(); // 默认取得screen context
+            }
+
+            Class<?> paramType = context.getTypeInfo().getRawType();
+            Object value = turbineContext.get(name);
+
+            if (paramType.isPrimitive()) {
+                // 将null值转换成primitive默认值，避免出错。
+                if (value == null && paramType.isPrimitive()) {
+                    value = getPrimitiveDefaultValue(paramType);
+                }
+
+                paramType = getWrapperTypeIfPrimitive(paramType);
+            }
+
+            if (value != null && !paramType.isInstance(value)) {
+                log.warn("Failed to convert context value of type [" + value.getClass().getSimpleName()
+                        + "] to parameter type [" + paramType.getName() + "]");
+
+                value = null;
+            }
+
+            return value;
         }
     }
 

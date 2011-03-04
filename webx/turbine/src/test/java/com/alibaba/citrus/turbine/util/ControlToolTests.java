@@ -173,6 +173,12 @@ public class ControlToolTests extends AbstractPullToolTests<ControlTool> {
     }
 
     @Test
+    public void render_contextValue() throws Exception {
+        String content = tool.setTemplate("myControlContextValue").setParameter("template", "myOtherControl").render();
+        assertEquals("other control", content);
+    }
+
+    @Test
     public void render_withError() throws Exception {
         String content = tool.setModule("myControlWithError").setParameter("with_XSS", true).render();
 
