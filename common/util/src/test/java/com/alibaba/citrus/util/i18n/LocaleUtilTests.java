@@ -205,6 +205,7 @@ public class LocaleUtilTests {
             LocaleUtil.setDefault(Locale.CHINA, "invalid");
             fail();
         } catch (UnsupportedCharsetException e) {
+            assertEquals("invalid", e.getCharsetName());
         }
 
         // ¸´Î»
@@ -233,6 +234,13 @@ public class LocaleUtilTests {
 
         assertLocaleInfo(Locale.CHINA, "UTF-8", LocaleUtil.setContext(Locale.CHINA, "GB2312"));
         assertLocaleInfo(Locale.CHINA, "GB2312", LocaleUtil.getContext());
+
+        try {
+            LocaleUtil.setContext(Locale.CHINA, "invalid");
+            fail();
+        } catch (UnsupportedCharsetException e) {
+            assertEquals("invalid", e.getCharsetName());
+        }
 
         // ¸´Î»
         LocaleUtil.resetContext();

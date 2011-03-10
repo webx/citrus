@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CharsetEncoder;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.Locale;
 
@@ -146,6 +148,24 @@ public final class LocaleInfo implements Cloneable, Externalizable {
     }
 
     /**
+     * 判断charset是否被支持。
+     */
+    public boolean isCharsetSupported() {
+        return !(charset instanceof UnknownCharset);
+    }
+
+    /**
+     * 判断charset是否被支持。
+     */
+    public LocaleInfo assertCharsetSupported() throws UnsupportedCharsetException {
+        if (charset instanceof UnknownCharset) {
+            throw new UnsupportedCharsetException(charset.name());
+        }
+
+        return this;
+    }
+
+    /**
      * 比较对象。
      * 
      * @param o 被比较的对象
@@ -199,5 +219,31 @@ public final class LocaleInfo implements Cloneable, Externalizable {
     @Override
     public String toString() {
         return locale + ":" + charset;
+    }
+
+    /**
+     * 代表一个不能识别的charset。
+     */
+    static class UnknownCharset extends Charset {
+        public UnknownCharset(String name) {
+            super(assertNotNull(name, "charset name"), null);
+        }
+
+        @Override
+        public boolean contains(Charset cs) {
+            return false;
+        }
+
+        @Override
+        public CharsetDecoder newDecoder() {
+            unsupportedOperation("Could not create decoder for unknown charset: " + name());
+            return null;
+        }
+
+        @Override
+        public CharsetEncoder newEncoder() {
+            unsupportedOperation("Could not create encoder for unknown charset: " + name());
+            return null;
+        }
     }
 }

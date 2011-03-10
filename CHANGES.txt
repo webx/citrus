@@ -79,7 +79,10 @@
 -- Changes in 3.0.3
 
 * 改进: new LocaleInfo(locale, charset)时，即使charset为非法的，也不报错。把判断charset合法性的任务交给LocaleUtil.isCharsetSupported()方法。
+  （但在setDefault和setContext时会判断charset的合法性）
   这样改进避免了setLocaleRequestContext中出现UnsupportedCharsetException异常。
+
+* 相关改进：添加方法：LocaleInfo.isCharsetSupported(), assertCharsetSupported()。
   
 * 改进：修改TurbineRunDataInternal接口，将get/setContextForControl的功能和push/popContext合并，简化了control中创建context的逻辑。
   注意：应用不应该依赖于TurbineRunDataInternal接口，如果依赖了，并用到了修改的方法，有可能受影响。

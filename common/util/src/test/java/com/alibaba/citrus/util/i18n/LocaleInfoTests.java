@@ -25,6 +25,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.charset.UnsupportedCharsetException;
 import java.util.Locale;
 
 import org.junit.Test;
@@ -77,6 +78,9 @@ public class LocaleInfoTests {
 
             assertEquals(Locale.US, localeInfo.getLocale());
             assertEquals("ISO-8859-1", localeInfo.getCharset().name());
+
+            assertTrue(localeInfo.isCharsetSupported());
+            assertSame(localeInfo, localeInfo.assertCharsetSupported());
         } finally {
             LocaleUtil.resetDefault();
         }
@@ -91,7 +95,14 @@ public class LocaleInfoTests {
 
             assertEquals(Locale.US, localeInfo.getLocale());
             assertEquals("unknown", localeInfo.getCharset().name());
-            assertTrue(localeInfo.getCharset() instanceof UnknownCharset);
+            assertFalse(localeInfo.isCharsetSupported());
+
+            try {
+                localeInfo.assertCharsetSupported();
+                fail();
+            } catch (UnsupportedCharsetException e) {
+                assertEquals("unknown", e.getCharsetName());
+            }
         } finally {
             LocaleUtil.resetDefault();
         }
@@ -162,7 +173,14 @@ public class LocaleInfoTests {
     @Test
     public void parse_unknown() {
         assertEquals("en_US:unknown", LocaleInfo.parse(" en_US : unknown").toString());
-        assertTrue(LocaleInfo.parse(" en_US : unknown").getCharset() instanceof UnknownCharset);
+        assertFalse(LocaleInfo.parse(" en_US : unknown").isCharsetSupported());
+
+        try {
+            LocaleInfo.parse(" en_US : unknown").assertCharsetSupported();
+            fail();
+        } catch (UnsupportedCharsetException e) {
+            assertEquals("unknown", e.getCharsetName());
+        }
     }
 
     @Test
