@@ -280,7 +280,9 @@ public class TemplateVisitTests {
         @SuppressWarnings("unused")
         class Visitor extends TextWriter<StringBuilder> {
             public void visitTitle() throws IOException {
-                throw new IllegalArgumentException("haha");
+                IOException e = new IOException();
+                e.initCause(new IllegalArgumentException("haha"));
+                throw e;
             }
 
             public void visitItems(Template tpl) throws IOException {

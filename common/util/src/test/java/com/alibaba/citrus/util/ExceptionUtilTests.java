@@ -57,6 +57,19 @@ public class ExceptionUtilTests {
     }
 
     @Test
+    public void getRootCause() {
+        // null
+        assertNull(ExceptionUtil.getRootCause(null));
+
+        // 1 exception
+        Throwable t = new IOException();
+        assertSame(t, ExceptionUtil.getRootCause(t));
+
+        // 3 exceptions
+        assertThat(ExceptionUtil.getRootCause(getException()), instanceOf(IllegalStateException.class));
+    }
+
+    @Test
     public void getCauses() {
         // null
         assertTrue(ExceptionUtil.getCauses(null).isEmpty());

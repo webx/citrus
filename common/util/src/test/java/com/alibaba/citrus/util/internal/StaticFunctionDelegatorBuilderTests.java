@@ -181,8 +181,8 @@ public class StaticFunctionDelegatorBuilderTests {
                 util.toString(),
                 containsAll(
                         "$$StaticFunctionDelegatorBuilderByCGLIB", //
-                        "[1/2] func1 = public static void com.alibaba.citrus.util.internal.StaticFunctionDelegatorBuilderTests$Util1.func1(java.lang.String,int)",
-                        "[2/2] func2 = public static java.lang.String com.alibaba.citrus.util.internal.StaticFunctionDelegatorBuilderTests$Util2.func2(int)"));
+                        "[1/2] func1 = void StaticFunctionDelegatorBuilderTests.Util1.func1(String, int)",
+                        "[2/2] func2 = String StaticFunctionDelegatorBuilderTests.Util2.func2(int)"));
     }
 
     private Method[] getMethods(Object util, Class<?> intfs) {
