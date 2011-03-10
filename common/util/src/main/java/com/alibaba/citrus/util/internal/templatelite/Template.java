@@ -268,10 +268,17 @@ public final class Template {
             }
 
             if (method != null) {
-                FastClass.create(visitorClass).getMethod(method).invoke(visitor, params);
+                try {
+                    FastClass.create(visitorClass).getMethod(method).invoke(visitor, params);
+                } catch (InvocationTargetException e) {
+                    if (visitor instanceof VisitorInvocationErrorHandler) {
+                        ((VisitorInvocationErrorHandler) visitor).handleInvocationError(shortDescription(node),
+                                e.getCause());
+                    } else {
+                        throw new TemplateRuntimeException("Error rendering " + shortDescription(node), e.getCause());
+                    }
+                }
             }
-        } catch (InvocationTargetException e) {
-            throw new TemplateRuntimeException("Error rendering " + shortDescription(node), e.getCause());
         } catch (Exception e) {
             throw new TemplateRuntimeException("Error rendering " + shortDescription(node), e);
         }

@@ -88,3 +88,8 @@
   注意：应用不应该依赖于TurbineRunDataInternal接口，如果依赖了，并用到了修改的方法，有可能受影响。
 * 改进：添加了ControlParameters接口，它可以通过参数注入到control module类中。Control通过它可以修改或取消template。
 * 改进：添加了@ContextValue注解，可以通过参数直接注入Context中的值，或传递给control的参数。
+
+* 改进：添加VisitorInvocationErrorHandler接口，使templatelite可以选择抛出visitor的异常，或者由visitor来自己处理异常。
+* 改进并bugfix：让TextWriter实现VisitorInvocationError，默认显示异常并记录日志，但不抛出错误。
+  注解：由于request attributes中存在turbine rundata proxy的引用，而在detailed error环境中不存在rundata，因此导致显示detailed error页面时出错。
+  然而这种错误完全是无谓的，重要的是显示应用的异常。此改进使detailed error页面不会因为visitor的失败而失败。
