@@ -52,6 +52,19 @@ public class ExceptionUtil {
     }
 
     /**
+     * 取得最根本的异常。
+     */
+    public static Throwable getRootCause(Throwable t) {
+        List<Throwable> causes = getCauses(t, true);
+
+        if (causes.isEmpty()) {
+            return null;
+        } else {
+            return causes.get(0);
+        }
+    }
+
+    /**
      * 取得包括当前异常在内的所有的causes异常，按出现的顺序排列。
      */
     public static List<Throwable> getCauses(Throwable t) {

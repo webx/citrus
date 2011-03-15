@@ -121,37 +121,9 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
             // 除非你设置了useServletEngineParser=true。
             if (requestContext.isUseServletEngineParser() || "post".equalsIgnoreCase(method)
                     || "put".equalsIgnoreCase(method)) {
-                // 用servlet engine来解析参数
-                @SuppressWarnings("unchecked")
-                Map<String, String[]> parameters = wrappedRequest.getParameterMap();
-
-                if (parameters != null && parameters.size() > 0) {
-                    for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
-                        String key = entry.getKey();
-                        String[] values = entry.getValue();
-
-                        for (String value : values) {
-                            add(key, value);
-                        }
-                    }
-                }
+                parseByServletEngine(wrappedRequest);
             } else {
-                // 自己解析query string。
-                //
-                // 当useBodyEncodingForURI=true时，用request.setCharacterEncoding()所指定的值来解码，否则使用URIEncoding，默认为UTF-8。
-                // useBodyEncodingForURI默认值就是true。
-                // 该行为和tomcat的风格一致。（不过tomcat默认是8859_1，这个没关系）
-                String charset = requestContext.isUseBodyEncodingForURI() ? wrappedRequest.getCharacterEncoding()
-                        : requestContext.getURIEncoding();
-
-                QueryStringParser parser = new QueryStringParser(charset, DEFAULT_CHARSET_ENCODING) {
-                    @Override
-                    protected void add(String key, String value) {
-                        ParameterParserImpl.this.add(key, value);
-                    }
-                };
-
-                parser.parse(wrappedRequest.getQueryString());
+                parseQueryString(requestContext, wrappedRequest);
             }
 
             postProcessParams();
@@ -161,6 +133,45 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
     @Override
     protected Logger getLogger() {
         return log;
+    }
+
+    /**
+     * 用servlet engine来解析参数。
+     */
+    private void parseByServletEngine(HttpServletRequest wrappedRequest) {
+        @SuppressWarnings("unchecked")
+        Map<String, String[]> parameters = wrappedRequest.getParameterMap();
+
+        if (parameters != null && parameters.size() > 0) {
+            for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
+                String key = entry.getKey();
+                String[] values = entry.getValue();
+
+                for (String value : values) {
+                    add(key, value);
+                }
+            }
+        }
+    }
+
+    /**
+     * 自己解析query string。
+     */
+    private void parseQueryString(ParserRequestContext requestContext, HttpServletRequest wrappedRequest) {
+        // 当useBodyEncodingForURI=true时，用request.setCharacterEncoding()所指定的值来解码，否则使用URIEncoding，默认为UTF-8。
+        // useBodyEncodingForURI默认值就是true。
+        // 该行为和tomcat的风格一致。（不过tomcat默认是8859_1，这个没关系）
+        String charset = requestContext.isUseBodyEncodingForURI() ? wrappedRequest.getCharacterEncoding()
+                : requestContext.getURIEncoding();
+
+        QueryStringParser parser = new QueryStringParser(charset, DEFAULT_CHARSET_ENCODING) {
+            @Override
+            protected void add(String key, String value) {
+                ParameterParserImpl.this.add(key, value);
+            }
+        };
+
+        parser.parse(wrappedRequest.getQueryString());
     }
 
     /**

@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.alibaba.citrus.util.i18n.LocaleInfo.UnknownCharset;
+
 public class UnknownCharsetTests {
     private UnknownCharset charset;
 

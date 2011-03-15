@@ -79,5 +79,20 @@
 -- Changes in 3.0.3
 
 * 改进: new LocaleInfo(locale, charset)时，即使charset为非法的，也不报错。把判断charset合法性的任务交给LocaleUtil.isCharsetSupported()方法。
+  （但在setDefault和setContext时会判断charset的合法性）
   这样改进避免了setLocaleRequestContext中出现UnsupportedCharsetException异常。
+
+* 相关改进：添加方法：LocaleInfo.isCharsetSupported(), assertCharsetSupported()。
   
+* 改进：修改TurbineRunDataInternal接口，将get/setContextForControl的功能和push/popContext合并，简化了control中创建context的逻辑。
+  注意：应用不应该依赖于TurbineRunDataInternal接口，如果依赖了，并用到了修改的方法，有可能受影响。
+* 改进：添加了ControlParameters接口，它可以通过参数注入到control module类中。Control通过它可以修改或取消template。
+* 改进：添加了@ContextValue注解，可以通过参数直接注入Context中的值，或传递给control的参数。
+
+* 改进：添加VisitorInvocationErrorHandler接口，使templatelite可以选择抛出visitor的异常，或者由visitor来自己处理异常。
+* 改进并bugfix：让TextWriter实现VisitorInvocationError，默认显示root cause异常并记录日志，但不抛出错误。
+  注解：由于request attributes中存在turbine rundata proxy的引用，而在detailed error环境中不存在rundata，因此导致显示detailed error页面时出错。
+  然而这种错误完全是无谓的，重要的是显示应用的异常。此改进使detailed error页面不会因为visitor的失败而失败。
+
+* 改进：简化StaticFunctionDelegatorBuilder所生成对象的toString方法，使之更易读；
+* 改进：添加ExceptionUtil.getRootCause()方法。

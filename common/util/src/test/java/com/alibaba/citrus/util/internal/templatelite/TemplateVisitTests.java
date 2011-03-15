@@ -251,6 +251,63 @@ public class TemplateVisitTests {
     }
 
     @Test
+    public void render_visitorThrowsException_withInvocationHandler() throws Exception {
+        @SuppressWarnings("unused")
+        class Visitor implements VisitorInvocationErrorHandler {
+            public void visitText(String text) {
+            }
+
+            public void visitTitle() throws IOException {
+                throw new IllegalArgumentException("haha");
+            }
+
+            public void visitItems(Template tpl) throws IOException {
+            }
+
+            public void handleInvocationError(String desc, Throwable e) {
+                assertThat(desc, containsAll("${title} at ", "test6_real_case.txt: Line 3 Column 12"));
+                assertThat(e, exception(IllegalArgumentException.class, "haha"));
+            }
+        }
+
+        loadTemplate(null);
+
+        template.accept(new Visitor());
+    }
+
+    @Test
+    public void render_visitorThrowsException_textWriter() throws Exception {
+        @SuppressWarnings("unused")
+        class Visitor extends TextWriter<StringBuilder> {
+            public void visitTitle() throws IOException {
+                IOException e = new IOException();
+                e.initCause(new IllegalArgumentException("haha"));
+                throw e;
+            }
+
+            public void visitItems(Template tpl) throws IOException {
+            }
+        }
+
+        loadTemplate(null);
+
+        String result = template.toString(new Visitor());
+
+        String expected = "";
+        expected += "<html>\n";
+        expected += "  <head>\n";
+        expected += "    <title>IllegalArgumentException - haha</title>\n";
+        expected += "  </head>\n";
+        expected += "  <body>\n";
+        expected += "    <ul>\n";
+        expected += "    </ul>\n";
+        expected += "  </body>\n";
+        expected += "</html>\n";
+
+        assertEquals(expected, result);
+    }
+
+    @Test
     public void render_fallbackVisitor() throws Exception {
         loadTemplate("test6_real_case.txt");
 

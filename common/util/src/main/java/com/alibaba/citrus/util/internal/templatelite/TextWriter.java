@@ -19,15 +19,20 @@ package com.alibaba.citrus.util.internal.templatelite;
 
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.Assert.ExceptionType.*;
+import static com.alibaba.citrus.util.ExceptionUtil.*;
 
 import java.io.IOException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 一个将template的内容输出到<code>Appendable</code>的visitor。
  * 
  * @author Michael Zhou
  */
-public abstract class TextWriter<A extends Appendable> {
+public abstract class TextWriter<A extends Appendable> implements VisitorInvocationErrorHandler {
+    private final static Logger log = LoggerFactory.getLogger(Template.class);
     private A out;
 
     public TextWriter() {
@@ -56,5 +61,19 @@ public abstract class TextWriter<A extends Appendable> {
      */
     public final void setOut(A out) {
         this.out = out;
+    }
+
+    /**
+     * 默认打印异常信息。
+     */
+    public void handleInvocationError(String desc, Throwable e) {
+        log.debug("Error rendering " + desc, e);
+
+        try {
+            e = getRootCause(e);
+            out.append(e.getClass().getSimpleName() + " - " + e.getMessage());
+        } catch (Exception ee) {
+            // ignore quietly
+        }
     }
 }

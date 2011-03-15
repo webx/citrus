@@ -36,7 +36,6 @@ public class TurbineRunDataTests extends AbstractWebxTests {
 
     @Test
     public void getCurrentContext() {
-        assertNull(getFieldValue(rundata, "threadContexts", ThreadLocal.class).get());
         assertNull(rundata.getCurrentContext());
 
         try {
@@ -73,8 +72,18 @@ public class TurbineRunDataTests extends AbstractWebxTests {
         } catch (IllegalStateException e) {
             assertThat(e, exception("can't popContext without pushContext"));
         }
+    }
 
-        assertNull(getFieldValue(rundata, "threadContexts", ThreadLocal.class).get());
+    @Test
+    public void getControlTemplate() {
+        assertNull(rundata.getControlTemplate());
+
+        try {
+            rundata.setControlTemplate("test");
+            fail();
+        } catch (IllegalStateException e) {
+            assertThat(e, exception("can't setControlTemplate without pushContext"));
+        }
     }
 
     @Test

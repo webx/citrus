@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns:dr-factories="http://www.alibaba.com/schema/services/data-resolver/factories"
     xmlns:pull-tools="http://www.alibaba.com/schema/services/pull/factories"
     xmlns:mapping-rules="http://www.alibaba.com/schema/services/mapping-rules"
     xmlns:adapters="http://www.alibaba.com/schema/services/module-loader/adapters"
@@ -21,6 +22,7 @@
     xmlns:p="http://www.springframework.org/schema/p"
     xsi:schemaLocation="
         http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/data-resolver/factories http://localhost:8080/schema/services-data-resolver-factories.xsd
         http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
         http://www.alibaba.com/schema/services/mapping-rules http://localhost:8080/schema/services-mapping-rules.xsd
         http://www.alibaba.com/schema/services/module-loader/adapters http://localhost:8080/schema/services-module-loader-adapters.xsd
@@ -88,8 +90,7 @@
     <services:pipeline id="prepareForTurbine2">
         <valves:prepareForTurbine />
         <valves:valve
-            class="com.alibaba.citrus.turbine.pipeline.valve.PrepareForTurbineValveTests$MyValve"
-         />
+            class="com.alibaba.citrus.turbine.pipeline.valve.PrepareForTurbineValveTests$MyValve" />
     </services:pipeline>
 
     <services:pipeline id="requestHandler">
@@ -186,5 +187,10 @@
             <mapping-rules:mapping extension="do" to="do" />
         </mapping-rules:extension-rule>
     </services:mapping-rules>
+
+    <!-- 支持注入参数。 -->
+    <services:data-resolver xmlns="http://www.alibaba.com/schema/services/data-resolver/factories">
+        <turbine-rundata-resolver />
+    </services:data-resolver>
 
 </beans:beans>

@@ -186,7 +186,9 @@ public class StaticFunctionDelegatorBuilder {
                         MapBuilder mb = new MapBuilder().setPrintCount(true).setSortKeys(true);
 
                         for (Map.Entry<Method, FastMethod> entry : methodMappings.entrySet()) {
-                            mb.append(entry.getKey().getName(), entry.getValue().getJavaMethod());
+                            mb.append(
+                                    entry.getKey().getName(),
+                                    getSimpleMethodSignature(entry.getValue().getJavaMethod(), false, true, true, false));
                         }
 
                         return new ToStringBuilder().append(intfs.getName()).append(mb).toString();

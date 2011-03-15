@@ -112,7 +112,7 @@ public class TurbineRunDataResolverTests extends AbstractDataResolverTests {
         initRequestContext();
 
         Context controlContext = new MappedContext();
-        getRunData().setContextForControl(controlContext);
+        getRunData().pushContext(controlContext);
 
         moduleLoaderService.getModule("control", "rundata.myControl").execute();
 

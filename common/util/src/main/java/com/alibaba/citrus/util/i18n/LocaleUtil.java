@@ -320,7 +320,7 @@ public class LocaleUtil {
      * @param charset 编码字符集
      * @return 原来的默认区域
      */
-    public static LocaleInfo setDefault(Locale locale, String charset) {
+    public static LocaleInfo setDefault(Locale locale, String charset) throws UnsupportedCharsetException {
         LocaleInfo old = getDefault();
         setDefaultAndNotify(new LocaleInfo(locale, charset, systemLocaleInfo));
         return old;
@@ -332,7 +332,7 @@ public class LocaleUtil {
      * @param localeInfo 区域和编码字符集信息
      * @return 原来的默认区域
      */
-    public static LocaleInfo setDefault(LocaleInfo localeInfo) {
+    public static LocaleInfo setDefault(LocaleInfo localeInfo) throws UnsupportedCharsetException {
         if (localeInfo == null) {
             return setDefault(null, null);
         } else {
@@ -342,8 +342,8 @@ public class LocaleUtil {
         }
     }
 
-    private static void setDefaultAndNotify(LocaleInfo localeInfo) {
-        defaultLocalInfo = localeInfo;
+    private static void setDefaultAndNotify(LocaleInfo localeInfo) throws UnsupportedCharsetException {
+        defaultLocalInfo = localeInfo.assertCharsetSupported();
 
         for (Notifier notifier : notifiers) {
             notifier.defaultChanged(localeInfo);
@@ -390,7 +390,7 @@ public class LocaleUtil {
      * @param charset 编码字符集
      * @return 原来的thread默认的区域
      */
-    public static LocaleInfo setContext(Locale locale, String charset) {
+    public static LocaleInfo setContext(Locale locale, String charset) throws UnsupportedCharsetException {
         LocaleInfo old = getContext();
         setContextAndNotify(new LocaleInfo(locale, charset, defaultLocalInfo));
         return old;
@@ -402,7 +402,7 @@ public class LocaleUtil {
      * @param localeInfo 区域和编码字符集信息
      * @return 原来的thread默认的区域
      */
-    public static LocaleInfo setContext(LocaleInfo localeInfo) {
+    public static LocaleInfo setContext(LocaleInfo localeInfo) throws UnsupportedCharsetException {
         if (localeInfo == null) {
             return setContext(null, null);
         } else {
@@ -412,8 +412,8 @@ public class LocaleUtil {
         }
     }
 
-    private static void setContextAndNotify(LocaleInfo localeInfo) {
-        contextLocaleInfoHolder.set(localeInfo);
+    private static void setContextAndNotify(LocaleInfo localeInfo) throws UnsupportedCharsetException {
+        contextLocaleInfoHolder.set(localeInfo.assertCharsetSupported());
 
         for (Notifier notifier : notifiers) {
             notifier.contextChanged(localeInfo);
