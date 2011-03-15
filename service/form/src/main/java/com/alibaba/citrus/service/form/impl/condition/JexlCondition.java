@@ -91,7 +91,15 @@ public class JexlCondition extends AbstractCondition {
             }
         };
 
-        return (Boolean) converter.convertIfNecessary(condition.evaluate(expressionContext), Boolean.class);
+        Object value = condition.evaluate(expressionContext);
+
+        if (value == null) {
+            return false;
+        } else if (value instanceof Boolean) {
+            return (Boolean) value;
+        } else {
+            return (Boolean) converter.convertIfNecessary(value, Boolean.class);
+        }
     }
 
     public static class DefinitionParser extends AbstractConditionDefinitionParser<JexlCondition> {

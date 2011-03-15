@@ -18,13 +18,46 @@
 package com.alibaba.citrus.service.form.impl.condition;
 
 import static com.alibaba.citrus.test.TestUtil.*;
+import static org.easymock.EasyMock.*;
+import static org.easymock.classextension.EasyMock.*;
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.SimpleTypeConverter;
 
 import com.alibaba.citrus.expr.ExpressionParseException;
+import com.alibaba.citrus.service.form.Field;
+import com.alibaba.citrus.service.form.Form;
+import com.alibaba.citrus.service.form.Group;
+import com.alibaba.citrus.service.form.MessageContext;
+import com.alibaba.citrus.service.form.Validator.Context;
+import com.alibaba.citrus.service.form.impl.MessageContextFactory;
 
 public class JexlConditionTests {
+    private Context ctx;
+    private Field field;
+    private Group group;
+    private Form form;
+    private MessageContext mctx;
+
+    @Before
+    public void init() {
+        ctx = createMock(Context.class);
+        field = createMock(Field.class);
+        group = createMock(Group.class);
+        form = createMock(Form.class);
+        mctx = MessageContextFactory.newInstance(form);
+
+        expect(ctx.getField()).andReturn(field).anyTimes();
+        expect(ctx.getMessageContext()).andReturn(mctx).anyTimes();
+        expect(field.getGroup()).andReturn(group).anyTimes();
+        expect(group.getForm()).andReturn(form).anyTimes();
+        expect(form.getTypeConverter()).andReturn(new SimpleTypeConverter()).anyTimes();
+
+        replay(ctx, field, group, form);
+    }
+
     @Test
     public void init_expression() throws Exception {
         // empty expression
@@ -55,5 +88,27 @@ public class JexlConditionTests {
         } catch (IllegalArgumentException e) {
             assertThat(e, exception(ExpressionParseException.class, "Invalid if condition: \"${\""));
         }
+
+        // null expression
+        cond = new JexlCondition("key");
+        cond.afterPropertiesSet();
+
+        assertFalse(cond.isSatisfied(ctx));
+
+        // boolean expression
+        mctx.put("key", true);
+
+        cond = new JexlCondition("key");
+        cond.afterPropertiesSet();
+
+        assertTrue(cond.isSatisfied(ctx));
+
+        // str expression
+        mctx.put("key", "true");
+
+        cond = new JexlCondition("key");
+        cond.afterPropertiesSet();
+
+        assertTrue(cond.isSatisfied(ctx));
     }
 }
