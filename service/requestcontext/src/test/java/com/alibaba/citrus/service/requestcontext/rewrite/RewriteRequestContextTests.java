@@ -303,6 +303,14 @@ public class RewriteRequestContextTests extends AbstractRequestContextsTests<Rew
     }
 
     @Test
+    public void test11_bugfix() throws Exception {
+        initRequest("/servlet");
+
+        assertEquals("", newRequest.getServletPath());
+        assertEquals("/servlet.htm", newRequest.getPathInfo());
+    }
+
+    @Test
     public void _toString() throws Exception {
         initRequest("/servlet/test10/hello.htm");
 

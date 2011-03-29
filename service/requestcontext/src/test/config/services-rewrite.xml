@@ -112,6 +112,10 @@
                 <condition test="%{QUERY:x}" pattern="2" flags="OR" />
                 <substitution uri="/test10/new_hello.htm" flags="L" />
             </rule>
+            <!-- Bugfix: 避免出现/servlet/.htm结果 -->
+            <rule pattern="^/servlet$">
+                <substitution uri="/servlet.htm" flags="L,QSA" />
+            </rule>
             <!-- Rule Chaining: 放在最后，以免其它rule被中止。 -->
             <rule pattern="\.htm$">
                 <substitution flags="C,QSA" />

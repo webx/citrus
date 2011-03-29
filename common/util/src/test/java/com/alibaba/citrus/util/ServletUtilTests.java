@@ -220,4 +220,28 @@ public class ServletUtilTests implements Cloneable {
 
         assertEquals("http://localhost:8080/bbb/ccc/", normalizeURI("http://localhost:8080//aaa//../bbb/ccc/"));
     }
+
+    @Test
+    public void startsWithPath_() {
+        // null
+        assertFalse(startsWithPath(null, "aa"));
+        assertFalse(startsWithPath("aa", null));
+        assertFalse(startsWithPath(null, null));
+
+        // path/
+        assertTrue(startsWithPath("path/", "path/index"));
+        assertFalse(startsWithPath("path/", "path2/index"));
+
+        // path
+        assertTrue(startsWithPath("path", "path/index"));
+        assertFalse(startsWithPath("path", "path2/index"));
+
+        // equals
+        assertTrue(startsWithPath("path", "path"));
+        assertTrue(startsWithPath("path/", "path/"));
+
+        // fullpath is shorter
+        assertFalse(startsWithPath("path", "pat"));
+        assertFalse(startsWithPath("path/", "pat"));
+    }
 }

@@ -23,6 +23,7 @@ import static com.alibaba.citrus.util.ArrayUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.ObjectUtil.*;
+import static com.alibaba.citrus.util.ServletUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.io.IOException;
@@ -311,7 +312,7 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
                 return super.getServletPath();
             } else {
                 if (prefixMapping) {
-                    if (path.startsWith(originalServletPath)) {
+                    if (startsWithPath(originalServletPath, path)) {
                         return originalServletPath; // 保持原有的servletPath
                     } else {
                         return "";
@@ -328,7 +329,7 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
                 return super.getPathInfo();
             } else {
                 if (prefixMapping) {
-                    if (path.startsWith(originalServletPath)) {
+                    if (startsWithPath(originalServletPath, path)) {
                         return path.substring(originalServletPath.length()); // 除去servletPath后剩下的部分
                     } else {
                         return path;

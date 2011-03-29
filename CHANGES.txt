@@ -96,3 +96,7 @@
 
 * 改进：简化StaticFunctionDelegatorBuilder所生成对象的toString方法，使之更易读；
 * 改进：添加ExceptionUtil.getRootCause()方法。
+
+-- Changes in 3.0.4
+
+* bugfix: 把/index重写（rewrite）成/index.htm时，变成了/index/.htm。

@@ -194,4 +194,25 @@ public class ServletUtil {
     public static String normalizeURI(String uri) {
         return URI.create(trimToEmpty(uri)).normalize().toString();
     }
+
+    /**
+     * 判断path是否为fullpath的前缀，匹配到“/”边界。
+     * <ul>
+     * <li><code>startsWithPath("/index", "/index.htm") == false</code>。</li>
+     * <li><code>startsWithPath("/path", "/path/index") == true</code>。</li>
+     * </ul>
+     */
+    public static boolean startsWithPath(String path, String fullpath) {
+        if (fullpath != null && path != null) {
+            if (path.endsWith("/")) {
+                return fullpath.startsWith(path);
+            } else if (path.length() == fullpath.length()) {
+                return fullpath.equals(path);
+            } else if (path.length() < fullpath.length()) {
+                return fullpath.startsWith(path + "/");
+            }
+        }
+
+        return false;
+    }
 }
