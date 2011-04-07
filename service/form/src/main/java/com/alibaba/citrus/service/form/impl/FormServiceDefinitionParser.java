@@ -20,12 +20,14 @@ package com.alibaba.citrus.service.form.impl;
 import static com.alibaba.citrus.service.configuration.support.PropertyEditorRegistrarsSupport.*;
 import static com.alibaba.citrus.springext.util.DomUtil.*;
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
+import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
@@ -61,6 +63,17 @@ public class FormServiceDefinitionParser extends AbstractNamedBeanDefinitionPars
         BeanDefinitionBuilder formConfigBuilder = BeanDefinitionBuilder.genericBeanDefinition(FormConfigImpl.class);
 
         attributesToProperties(element, formConfigBuilder, "converterQuiet", "postOnlyByDefault", "messageCodePrefix");
+
+        // import forms
+        ElementSelector importSelector = and(sameNs(element), name("import"));
+        List<Object> imports = createManagedList(element, parserContext);
+
+        for (Element subElement : subElements(element, importSelector)) {
+            String formRef = assertNotNull(trimToNull(subElement.getAttribute("form")), "import form is empty");
+            imports.add(new RuntimeBeanReference(formRef));
+        }
+
+        formConfigBuilder.addPropertyValue("imports", imports);
 
         // registrars
         formConfigBuilder.addPropertyValue("propertyEditorRegistrars",
@@ -99,7 +112,7 @@ public class FormServiceDefinitionParser extends AbstractNamedBeanDefinitionPars
 
         for (Element subElement : subElements(element)) {
             if (importSelector.accept(subElement)) {
-                imports.add(parseImport(subElement, parserContext, groupConfigBuilder));
+                imports.add(parseImportGroup(subElement, parserContext, groupConfigBuilder));
             } else if (fieldSelector.accept(subElement)) {
                 fields.add(parseField(subElement, parserContext, groupConfigBuilder));
             }
@@ -111,7 +124,8 @@ public class FormServiceDefinitionParser extends AbstractNamedBeanDefinitionPars
         return groupConfigBuilder.getBeanDefinition();
     }
 
-    private Object parseImport(Element element, ParserContext parserContext, BeanDefinitionBuilder groupConfigBuilder) {
+    private Object parseImportGroup(Element element, ParserContext parserContext,
+                                    BeanDefinitionBuilder groupConfigBuilder) {
         BeanDefinitionBuilder importBuilder = BeanDefinitionBuilder.genericBeanDefinition(ImportImpl.class);
 
         importBuilder.addConstructorArgValue(element.getAttribute("group"));

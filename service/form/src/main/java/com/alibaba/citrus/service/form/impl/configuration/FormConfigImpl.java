@@ -18,6 +18,7 @@
 package com.alibaba.citrus.service.form.impl.configuration;
 
 import static com.alibaba.citrus.service.form.FormConstant.*;
+import static com.alibaba.citrus.util.ArrayUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.Assert.ExceptionType.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
@@ -45,6 +46,7 @@ import com.alibaba.citrus.service.form.configuration.GroupConfig.Import;
  */
 public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormConfig {
     private FormService formService;
+    private FormService[] importFormServices;
     private Map<String, GroupConfigImpl> groups; // group name to groupConfig
     private Map<String, GroupConfigImpl> groupsByKey; // group key to groupConfig
     private List<GroupConfig> groupList; // unmodifiable group list
@@ -65,6 +67,13 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
      */
     public void setFormService(FormService formService) {
         this.formService = assertNotNull(formService, "formService");
+    }
+
+    /**
+     * 设置要导入的form。
+     */
+    public void setImports(FormService[] importFromServices) {
+        this.importFormServices = importFromServices;
     }
 
     /**
@@ -160,13 +169,28 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
      * 设置group configs。
      */
     public void setGroupConfigImplList(List<GroupConfigImpl> groupConfigList) {
+        groups = null;
+        addGroupConfigImplList(groupConfigList, false);
+    }
+
+    private void addGroupConfigImplList(List<GroupConfigImpl> groupConfigList, boolean importing) {
         if (groupConfigList != null) {
-            groups = createLinkedHashMap();
+            if (groups == null) {
+                groups = createLinkedHashMap();
+            }
 
             for (GroupConfigImpl groupConfig : groupConfigList) {
                 String groupName = caseInsensitiveName(groupConfig.getName()); // 大小写不敏感！
-                assertTrue(!groups.containsKey(groupName), "Duplicated group name: %s", groupConfig.getName());
-                groups.put(groupName, groupConfig);
+
+                // 如果是importing form，允许重名，并忽略被import form中的group
+                // 对于当前form中的group，不允许重名。
+                if (!importing) {
+                    assertTrue(!groups.containsKey(groupName), "Duplicated group name: %s", groupConfig.getName());
+                }
+
+                if (!groups.containsKey(groupName)) {
+                    groups.put(groupName, groupConfig);
+                }
             }
         }
     }
@@ -196,6 +220,27 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
      */
     @Override
     protected void init() throws Exception {
+        // 处理form import。
+        if (!isEmptyArray(importFormServices)) {
+            List<GroupConfigImpl> importGroups = createLinkedList();
+
+            for (FormService importFormService : importFormServices) {
+                FormConfig importFormConfig = importFormService.getFormConfig();
+
+                for (GroupConfig importGroup : importFormConfig.getGroupConfigList()) {
+                    GroupConfigImpl srcGroupConfig = (GroupConfigImpl) importGroup; // expected same implementations
+                    GroupConfigImpl newGroupConfig = new GroupConfigImpl();
+                    String groupName = srcGroupConfig.getName();
+
+                    newGroupConfig.setName(groupName);
+                    newGroupConfig.extendsFrom(srcGroupConfig);
+                    importGroups.add(newGroupConfig);
+                }
+            }
+
+            addGroupConfigImplList(importGroups, true);
+        }
+
         // 初步初始化所有groups
         assertNotNull(groups, "no groups");
 

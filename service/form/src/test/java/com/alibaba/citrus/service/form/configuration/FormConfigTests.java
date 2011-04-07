@@ -130,8 +130,12 @@ public class FormConfigTests {
         assertArrayEquals(new Object[] { group1, group2, group3 }, formConfig.getGroupConfigList().toArray());
 
         // set null
-        initForm(null);
-        assertEquals(3, formConfig.getGroupConfigList().size());
+        try {
+            initForm(null);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertThat(e, exception("no groups"));
+        }
 
         // unmodifiable
         try {

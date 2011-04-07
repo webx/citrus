@@ -163,4 +163,6 @@
         <pull-tools:uris-tool />
     </services:pull>
 
+    <beans:import resource="services2.xml" />
+
 </beans:beans>

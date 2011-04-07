@@ -100,3 +100,17 @@
 -- Changes in 3.0.4
 
 * bugfix: 把/index重写（rewrite）成/index.htm时，变成了/index/.htm。
+* 改进：让form service和uris service支持import，这样，就可以把form.xml和uris.xml分割成多个文件，便于管理。
+  需要注意，由于有多个form和uris实例存在，所以需要指定primary参数，否则注入会出错。
+  
+  <form id="common" />
+  
+  <form primary="true">
+    <import form="common" />
+  </form>
+  
+  <uris id="common" />
+  
+  <uris primary="true">
+    <import uris="common" />
+  </uris>

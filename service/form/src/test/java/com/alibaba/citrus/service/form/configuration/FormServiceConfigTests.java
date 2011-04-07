@@ -153,6 +153,51 @@ public class FormServiceConfigTests extends AbstractFormServiceTests {
     }
 
     @Test
+    public void importForm() {
+        getFormConfig("form4");
+
+        getGroupConfig("group1");
+        assertEquals(2, groupConfig.getFieldConfigList().size());
+
+        getFieldConfig("field2");
+        assertEquals(1, fieldConfig.getValidators().size());
+
+        getGroupConfig("group2");
+        assertEquals(2, groupConfig.getFieldConfigList().size());
+
+        getFieldConfig("field2");
+        assertEquals(2, fieldConfig.getValidators().size());
+
+        getGroupConfig("group3");
+        assertEquals(2, groupConfig.getFieldConfigList().size());
+
+        getFieldConfig("field2");
+        assertEquals(1, fieldConfig.getValidators().size());
+    }
+
+    @Test
+    public void importForm_redefineGroup() {
+        getFormConfig("form5");
+
+        // group1 is redfined
+        getGroupConfig("group1");
+        assertEquals(0, groupConfig.getFieldConfigList().size());
+
+        // other groups are imported
+        getGroupConfig("group2");
+        assertEquals(2, groupConfig.getFieldConfigList().size());
+
+        getFieldConfig("field2");
+        assertEquals(2, fieldConfig.getValidators().size());
+
+        getGroupConfig("group3");
+        assertEquals(2, groupConfig.getFieldConfigList().size());
+
+        getFieldConfig("field2");
+        assertEquals(1, fieldConfig.getValidators().size());
+    }
+
+    @Test
     public void extendsGroup() {
         getFormConfig("form3");
         getGroupConfig("group2");

@@ -19,6 +19,7 @@
 
     <xsd:complexType name="FormServiceType">
         <xsd:sequence>
+            <xsd:element name="import" type="FormImportType" minOccurs="0" maxOccurs="unbounded" />
             <xsd:element name="property-editor-registrar" type="springext:referenceableBeanType"
                 minOccurs="0" maxOccurs="unbounded">
                 <xsd:annotation>
@@ -39,6 +40,10 @@
         <xsd:attribute name="postOnlyByDefault" type="springext:booleanOrPlaceholder" default="true" />
         <xsd:attribute name="messageCodePrefix" type="xsd:string" default="form." />
         <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
+    </xsd:complexType>
+
+    <xsd:complexType name="FormImportType">
+        <xsd:attribute name="form" type="xsd:string" use="required" />
     </xsd:complexType>
 
     <xsd:complexType name="FormGroupType">

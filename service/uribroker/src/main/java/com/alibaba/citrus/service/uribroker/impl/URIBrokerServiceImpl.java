@@ -18,6 +18,7 @@
 package com.alibaba.citrus.service.uribroker.impl;
 
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
+import static com.alibaba.citrus.util.ArrayUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
@@ -44,6 +45,7 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
  */
 public class URIBrokerServiceImpl extends AbstractService<URIBrokerService> implements URIBrokerService {
     private final HttpServletRequest request;
+    private URIBrokerService[] importUris;
     private Boolean requestAware;
     private String defaultCharset;
     private URIBrokerInfo[] brokerInfos; // 临时brokers信息，仅用于初始化
@@ -56,6 +58,13 @@ public class URIBrokerServiceImpl extends AbstractService<URIBrokerService> impl
      */
     public URIBrokerServiceImpl(HttpServletRequest request) {
         this.request = assertProxy(request); // request可以为空
+    }
+
+    /**
+     * 设置要导入的uris。
+     */
+    public void setImports(URIBrokerService[] importUris) {
+        this.importUris = importUris;
     }
 
     /**
@@ -169,6 +178,35 @@ public class URIBrokerServiceImpl extends AbstractService<URIBrokerService> impl
         }
 
         brokerInfos = null;
+
+        // import uris
+        if (!isEmptyArray(importUris)) {
+            for (URIBrokerService importUriBrokerService : importUris) {
+                Set<String> exposedImportNames = createHashSet(importUriBrokerService.getExposedNames());
+
+                for (String name : importUriBrokerService.getNames()) {
+                    // 允许当前文件中的uri覆盖parent中的同名uri。
+                    if (brokers.containsKey(name)) {
+                        continue;
+                    }
+
+                    URIBroker uri = importUriBrokerService.getURIBroker(name);
+
+                    if (uri.isAutoReset() && uri.getParent() != null && !uri.getParent().isAutoReset()) {
+                        uri = uri.getParent();
+                    } else {
+                        uri = uri.fork(false);
+                    }
+
+                    brokers.put(name, uri);
+                    names.add(name);
+
+                    if (exposedImportNames.contains(name)) {
+                        exposedNames.add(name);
+                    }
+                }
+            }
+        }
 
         // 设置parent brokers，确保parent broker在类层次上也是父类或同类，同时确保没有递归派生
         for (Map.Entry<String, URIBrokerInfo> entry : brokerInfoMap.entrySet()) {

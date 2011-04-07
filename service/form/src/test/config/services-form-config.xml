@@ -68,6 +68,17 @@
         </group>
     </form>
 
+    <form id="form4">
+        <import form="form3" />
+    </form>
+
+    <form id="form5">
+        <import form="form3" />
+        
+        <!-- redefined -->
+        <group name="group1" />
+    </form>
+
     <request-contexts>
         <rc:parser />
     </request-contexts>

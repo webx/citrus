@@ -19,12 +19,18 @@
 
     <xsd:complexType name="URIBrokersServiceType">
         <xsd:sequence>
+            <xsd:element name="import" type="URIBrokersServiceImportType" minOccurs="0"
+                maxOccurs="unbounded" />
             <xsd:any minOccurs="0" maxOccurs="unbounded"
                 namespace="http://www.alibaba.com/schema/services/uris" />
         </xsd:sequence>
         <xsd:attribute name="requestAware" type="springext:booleanOrPlaceholder" default="true" />
         <xsd:attribute name="defaultCharset" type="xsd:string" />
         <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
+    </xsd:complexType>
+
+    <xsd:complexType name="URIBrokersServiceImportType">
+        <xsd:attribute name="uris" type="xsd:string" use="required" />
     </xsd:complexType>
 
 </xsd:schema>

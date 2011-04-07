@@ -19,11 +19,14 @@ package com.alibaba.citrus.service.uribroker.impl;
 
 import static com.alibaba.citrus.springext.util.DomUtil.*;
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
+import static com.alibaba.citrus.util.Assert.*;
+import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
@@ -33,6 +36,7 @@ import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
+import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 
 public class URIBrokerServiceDefinitionParser extends AbstractNamedBeanDefinitionParser<URIBrokerServiceImpl> implements
         ContributionAware {
@@ -50,6 +54,17 @@ public class URIBrokerServiceDefinitionParser extends AbstractNamedBeanDefinitio
         addConstructorArg(builder, false, HttpServletRequest.class);
 
         attributesToProperties(element, builder, "requestAware", "defaultCharset");
+
+        // import uris
+        ElementSelector importSelector = and(sameNs(element), name("import"));
+        List<Object> imports = createManagedList(element, parserContext);
+
+        for (Element subElement : subElements(element, importSelector)) {
+            String urisRef = assertNotNull(trimToNull(subElement.getAttribute("uris")), "import uris is empty");
+            imports.add(new RuntimeBeanReference(urisRef));
+        }
+
+        builder.addPropertyValue("imports", imports);
 
         // Ω‚ŒˆURI BrokerºØ∫œ
         List<Object> brokers = createManagedList(element, parserContext);

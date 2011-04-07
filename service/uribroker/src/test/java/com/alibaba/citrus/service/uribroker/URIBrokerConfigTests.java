@@ -18,7 +18,11 @@
 package com.alibaba.citrus.service.uribroker;
 
 import static com.alibaba.citrus.test.TestUtil.*;
+import static com.alibaba.citrus.util.CollectionUtil.*;
+import static java.util.Collections.*;
 import static org.junit.Assert.*;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -220,5 +224,62 @@ public class URIBrokerConfigTests extends AbstractURIBrokerServiceTests {
 
         URIBroker bean = service.getURIBroker("mybean");
         assertEquals("https://myserver/aa/bb/cc", bean.render());
+    }
+
+    @Test
+    public void importAndOverride() {
+        service = (URIBrokerServiceImpl) factory.getBean("import");
+        URIBrokerServiceImpl imported = (URIBrokerServiceImpl) factory.getBean("uris");
+
+        // check exposed names
+        List<String> importedNames = createArrayList(imported.getExposedNames());
+        List<String> names = createArrayList(service.getExposedNames());
+
+        names.add("link2");
+
+        sort(importedNames);
+        sort(names);
+
+        assertEquals(importedNames, names);
+
+        // check all names
+        importedNames = createArrayList(imported.getNames());
+        names = createArrayList(service.getNames());
+
+        importedNames.add("newlink");
+
+        sort(importedNames);
+        sort(names);
+
+        assertEquals(importedNames, names);
+
+        // check uris
+        for (String name : names) {
+            URIBroker uri = service.getURIBroker(name);
+            URIBroker importedUri = imported.getURIBroker(name);
+
+            if (uri != null) {
+                uri = uri.getParent();
+                assertFalse(uri.isAutoReset());
+            }
+
+            if (importedUri != null) {
+                importedUri = importedUri.getParent();
+                assertFalse(importedUri.isAutoReset());
+            }
+
+            if ("link2".equals(name)) {
+                assertEquals("http:///", uri.toString());
+                assertEquals(
+                        "http://myuser2:mypass2@myservername2:1234/aaa/a1/bbb/ccc/ddd?aaa=1111&bbb=2222&ccc=3333#myreference2",
+                        importedUri.toString());
+            } else if ("newlink".equals(name)) {
+                assertEquals("http://www.taobao.com/newlink", uri.toString());
+                assertNull(importedUri);
+            } else {
+                assertNotNull(uri);
+                assertSame(importedUri, uri);
+            }
+        }
     }
 }
