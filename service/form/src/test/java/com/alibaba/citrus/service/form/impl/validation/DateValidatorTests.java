@@ -31,13 +31,6 @@ public class DateValidatorTests extends AbstractValidatorTests<DateValidator> {
     }
 
     @Test
-    public void normalizeDateString() {
-        assertEquals(null, DateValidator.normalizeDateString(null));
-        assertEquals(null, DateValidator.normalizeDateString("  "));
-        assertEquals("aa 1-2-3 4:58 bb", DateValidator.normalizeDateString(" aa  01-02-003   004:58 bb"));
-    }
-
-    @Test
     public void init_format() throws Exception {
         DateValidator v;
 
@@ -200,10 +193,9 @@ public class DateValidatorTests extends AbstractValidatorTests<DateValidator> {
         assertEquals(true, field1.isValid());
         assertEquals(null, field1.getMessage());
 
-        // redundent info
         request(" 1911-10-10 10:10 ");
-        assertEquals(false, field1.isValid());
-        assertEquals("field1 should be of format yyyy-MM-dd", field1.getMessage());
+        assertEquals(true, field1.isValid());
+        assertEquals(null, field1.getMessage());
 
         // overflow
         request(" 1911-2-30 ");
@@ -227,10 +219,9 @@ public class DateValidatorTests extends AbstractValidatorTests<DateValidator> {
         assertEquals(true, field2.isValid());
         assertEquals(null, field2.getMessage());
 
-        // redundent info
         request(null, " 1911-10-10 10:10:10.12 ");
-        assertEquals(false, field2.isValid());
-        assertEquals("field2 should be of format yyyy-MM-dd HH:mm:ss", field2.getMessage());
+        assertEquals(true, field2.isValid());
+        assertEquals(null, field2.getMessage());
 
         // overflow
         request(null, " 1911-2-28 12:70:10");

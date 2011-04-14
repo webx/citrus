@@ -17,15 +17,12 @@
  */
 package com.alibaba.citrus.service.form.impl.validation;
 
-import static com.alibaba.citrus.util.ObjectUtil.*;
-import static com.alibaba.citrus.util.StringUtil.*;
+import static com.alibaba.citrus.util.StringUtil.trimToNull;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.alibaba.citrus.service.form.support.AbstractOptionalValidator;
 import com.alibaba.citrus.service.form.support.AbstractValidatorDefinitionParser;
@@ -88,7 +85,9 @@ public class DateValidator extends AbstractOptionalValidator {
     }
 
     private DateFormat getDateFormat() {
-        return new SimpleDateFormat(dateFormatStr);
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormatStr);
+        sdf.setLenient(false);
+        return sdf;
     }
 
     @Override
@@ -128,59 +127,15 @@ public class DateValidator extends AbstractOptionalValidator {
             return false;
         }
 
-        // 更严格地检查，例如：2007-02-29是错误的，额外的信息也是错误的
-        String normInput = normalizeDateString(value);
-        String normParsed = normalizeDateString(format.format(inputDate));
-
-        if (!isEquals(normInput, normParsed)) {
+        if (minDate != null && inputDate.before(minDate)) {
             return false;
-        } else {
-            if (minDate != null && inputDate.before(minDate)) {
-                return false;
-            }
+        }
 
-            if (maxDate != null && inputDate.after(maxDate)) {
-                return false;
-            }
+        if (maxDate != null && inputDate.after(maxDate)) {
+            return false;
         }
 
         return true;
-    }
-
-    private static final Pattern spaceDigitsPattern = Pattern.compile("(\\s+)|0*(\\d+)");
-
-    /**
-     * 将数字前的0去掉，将多个的空格转成一个空格，trim。
-     */
-    static String normalizeDateString(String s) {
-        if (s == null) {
-            return null;
-        }
-
-        Matcher matcher = spaceDigitsPattern.matcher(s);
-        StringBuffer buf = new StringBuffer(s.length());
-        int index = 0;
-
-        while (matcher.find()) {
-            String spaces = matcher.group(1);
-            String numbers = matcher.group(2);
-
-            buf.append(s.substring(index, matcher.start()));
-
-            if (!isEmpty(spaces)) {
-                buf.append(" ");
-            }
-
-            if (!isEmpty(numbers)) {
-                buf.append(numbers);
-            }
-
-            index = matcher.end();
-        }
-
-        buf.append(s.substring(index, s.length()));
-
-        return trimToNull(buf.toString());
     }
 
     public static class DefinitionParser extends AbstractValidatorDefinitionParser<DateValidator> {
