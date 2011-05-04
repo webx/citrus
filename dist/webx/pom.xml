@@ -180,5 +180,9 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>citrus-webx-turbine</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>citrus-webx-dev</artifactId>
+        </dependency>
     </dependencies>
 </project>

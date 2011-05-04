@@ -49,6 +49,7 @@
         <module>service/mail</module>
         <module>webx/framework</module>
         <module>webx/turbine</module>
+        <module>webx/dev</module>
     </modules>
     <dependencies>
         <dependency>
@@ -215,6 +216,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>citrus-webx-turbine</artifactId>
+                <version>${webx-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>citrus-webx-dev</artifactId>
                 <version>${webx-version}</version>
             </dependency>
             <!-- ================================================= -->

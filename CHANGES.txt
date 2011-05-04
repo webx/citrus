@@ -114,3 +114,5 @@
   <uris primary="true">
     <import uris="common" />
   </uris>
+
+* 新增spring explorer，在开发模式下，可以列出所有context中的spring beans，以帮助开发者了解schema所生成的beans结构。
