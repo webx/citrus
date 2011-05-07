@@ -1,4 +1,6 @@
-/* Ò»¼¶ÒÔÉÏ²Ëµ¥ */
+@charset "UTF-8";
+/* ä¸€çº§ä»¥ä¸Šèœå• */
+
 .webx-menu ul {
     margin:0 0 5px 0;
     padding:0;
@@ -7,7 +9,8 @@
     width:100%;
     list-style:none;
     float:left;
-    clear:both; /* ·ÀÖ¹menuÖ®ÏÂµÄÄÚÈİÇÖÕ¼menuËùÔÚĞĞ */    
+/* é˜²æ­¢menuä¹‹ä¸‹çš„å†…å®¹ä¾µå menuæ‰€åœ¨è¡Œ */
+    clear:both;
 }
 
 .webx-menu li {
@@ -39,11 +42,12 @@
 }
 
 .webx-menu img {
-    float:left; /* Ê¹Í¼Æ¬²»»áÊ¹liÉÏÏÂ²»Æë */
+/* ä½¿å›¾ç‰‡ä¸ä¼šä½¿liä¸Šä¸‹ä¸é½ */
+    float:left;
     padding:0 5px 0 0;
 }
+/* äºŒçº§ä»¥ä¸Šèœå• */
 
-/* ¶ş¼¶ÒÔÉÏ²Ëµ¥ */
 .webx-menu ul ul {
     display:none;
     position: absolute;
@@ -64,13 +68,13 @@
 .webx-menu ul ul li.webx-subMenu:hover {
     background:#4792E6 url(images/arrow_h_active.gif) no-repeat right center;
 }
+/* è‡ªåŠ¨å¼¹å‡ºäºŒçº§ä»¥ä¸Šèœå• */
 
-/* ×Ô¶¯µ¯³ö¶ş¼¶ÒÔÉÏ²Ëµ¥ */
 .webx-menu li:hover>ul {
     display:block
 }
+/* ä¸‰çº§ä»¥ä¸Šèœå• */
 
-/* Èı¼¶ÒÔÉÏ²Ëµ¥ */
 .webx-menu ul ul ul {
     position: absolute;
     left:98%;
