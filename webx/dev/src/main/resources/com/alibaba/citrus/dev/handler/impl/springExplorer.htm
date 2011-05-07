@@ -1,26 +1,26 @@
-<ul id="webx.contexts">
-  <li><a href="?">Root Context</a></li>
-  #contexts
-  <li><a href="?context=${contextName}">Sub-context: ${contextName}</a></li>
-  #end
-</ul>
+${tabs}
 
-<h1>Resolvable Dependencies[count = ${resolvableDependencyCount}]</h1>
-<ul>
-#resolvableDependency
-  <li>${typePackage}.${typeName} -&gt; ${value}</li>
-#end
-</ul>
-
-<h1>Beans[count = ${beanCount}]</h1>
-<ul id="beans">
-#bean
-  #element[]
-    <li>&lt;${elementName}#attribute ${attributeKey}="${attributeValue}"#end><ul>${subElements}</ul>&lt;/${elementName}></li>
-  #element[]
-    <li>&lt;${elementName}#attribute ${attributeKey}="${attributeValue}"#end /></li>
-  #element[]
-    <li>&lt;${elementName}#attribute ${attributeKey}="${attributeValue}"#end><span>${elementText}</span>&lt;/${elementName}></li>
+#resolvableDependencies
+  <h1>${resolvableDependencyCount} resolvable dependencies in ${contextName}</h1>
+  <dl>
+  #resolvableDependency
+    <dt>${typePackage}.${typeName}</dt>
+    <dd><pre>${value}</pre></dd>
   #end
+  </dl>
 #end
-</ul>
+
+#beans
+  <h1>${beanCount} beans in ${contextName}</h1>
+  <ul id="beans">
+  #bean
+    #element[]
+      <li>&lt;${elementName}#attribute ${attributeKey}="${attributeValue}"#end><ul>${subElements}</ul>&lt;/${elementName}></li>
+    #element[]
+      <li>&lt;${elementName}#attribute ${attributeKey}="${attributeValue}"#end /></li>
+    #element[]
+      <li>&lt;${elementName}#attribute ${attributeKey}="${attributeValue}"#end><span>${elementText}</span>&lt;/${elementName}></li>
+    #end
+  #end
+  </ul>
+#end

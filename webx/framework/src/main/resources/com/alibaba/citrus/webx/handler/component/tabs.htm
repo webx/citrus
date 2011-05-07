@@ -1,8 +1,10 @@
-<ul class="webx-tabs">
+<div class="webx-tabs">
+<ul class="nav">
   #tab
   <li#selected class="selected"#end>
     <a#href href="${hrefLink}"#end#onclick onclick="${onclickScript}"#end>${desc}</a>
-    #subnav<ul>${subtabs}</ul>#end
+    #subnav<ul class="subnav">${subtabs}</ul>#end
   </li>
   #end
 </ul>
+</div>

@@ -7,6 +7,7 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,15 @@ import com.alibaba.citrus.util.internal.templatelite.Template;
 import com.alibaba.citrus.webx.WebxComponent;
 import com.alibaba.citrus.webx.WebxComponents;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
-import com.alibaba.citrus.webx.handler.component.KeyValuesComponent;
+import com.alibaba.citrus.webx.handler.component.TabsComponent;
+import com.alibaba.citrus.webx.handler.component.TabsComponent.TabItem;
 import com.alibaba.citrus.webx.handler.support.AbstractVisitor;
 import com.alibaba.citrus.webx.handler.support.LayoutRequestProcessor;
 
 public class SpringExplorerHandler extends LayoutRequestProcessor {
-    private final KeyValuesComponent keyValuesComponent = new KeyValuesComponent(this, "keyValues");
+    private static final String FN_BEANS = "Beans";
+    private static final String FN_RESOLVABLE_DEPENDENCIES = "ResolvableDependencies";
+    private final TabsComponent tabsComponent = new TabsComponent(this, "tabs");
 
     @Autowired
     private WebxComponents components;
@@ -41,9 +45,9 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
         String contextName = visitor.currentContextName;
 
         if (contextName == null) {
-            return "Spring Explorer - Root Context";
+            return visitor.currentFunctionName + " - Root Context";
         } else {
-            return "Spring Explorer - Sub-context: " + contextName;
+            return visitor.currentFunctionName + " - " + contextName;
         }
     }
 
@@ -82,10 +86,12 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
     private class SpringExplorerVisitor extends AbstractVisitor {
         private final String currentContextName;
         private final WebxComponent currentComponent;
+        private final String currentFunctionName;
         private final AbstractApplicationContext appcontext;
         private final DefaultListableBeanFactory factory;
         private final Map<Class<?>, Object> resolvableDependencies;
-        private String contextName;
+        private Class<?> type;
+        private Object value;
 
         public SpringExplorerVisitor(RequestHandlerContext context) {
             super(context);
@@ -101,6 +107,15 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
             }
 
             currentComponent = components.getComponent(currentContextName);
+
+            // 取得当前的功能
+            String functionName = trimToNull(context.getRequest().getParameter("fn"));
+
+            if (FN_RESOLVABLE_DEPENDENCIES.equals(functionName)) {
+                currentFunctionName = functionName;
+            } else {
+                currentFunctionName = FN_BEANS;
+            }
 
             // 取得context信息
             this.appcontext = (AbstractApplicationContext) currentComponent.getApplicationContext();
@@ -124,15 +139,78 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
             return deps;
         }
 
-        public void visitContexts(Template contextTemplate) {
-            for (String name : components.getComponentNames()) {
-                contextName = name;
-                contextTemplate.accept(this);
+        public void visitTabs() {
+            List<TabItem> tabs = createLinkedList();
+
+            // list beans
+            TabItem tab = new TabItem("Beans");
+
+            tab.setHref(link(currentContextName, FN_BEANS));
+            tab.setSelected(FN_BEANS.equals(currentFunctionName));
+            tabs.add(tab);
+
+            addSubTabs(tab, FN_BEANS);
+
+            // list resolvable dependencies
+            tab = new TabItem("Resolvable Dependencies");
+
+            tab.setHref(link(currentContextName, FN_RESOLVABLE_DEPENDENCIES));
+            tab.setSelected(FN_RESOLVABLE_DEPENDENCIES.equals(currentFunctionName));
+            tabs.add(tab);
+
+            addSubTabs(tab, FN_RESOLVABLE_DEPENDENCIES);
+
+            tabsComponent.visitTemplate(context, tabs);
+        }
+
+        private void addSubTabs(TabItem tab, String functionName) {
+            // root context
+            TabItem subtab = new TabItem("Root Context");
+
+            subtab.setHref(link(null, functionName));
+            subtab.setSelected(currentContextName == null);
+            tab.addSubTab(subtab);
+
+            // all sub-contexts
+            for (String contextName : components.getComponentNames()) {
+                subtab = new TabItem(contextName);
+
+                subtab.setHref(link(contextName, functionName));
+                subtab.setSelected(contextName.equals(currentContextName));
+                tab.addSubTab(subtab);
             }
         }
 
+        private String link(String contextName, String functionName) {
+            StringBuilder buf = new StringBuilder("?");
+
+            if (contextName != null) {
+                buf.append("context=").append(contextName);
+            }
+
+            if (!FN_RESOLVABLE_DEPENDENCIES.equals(functionName)) {
+                functionName = FN_BEANS; // default function         
+            }
+
+            if (!FN_BEANS.equals(functionName)) {
+                if (buf.length() > 1) {
+                    buf.append("&");
+                }
+
+                buf.append("fn=").append(functionName);
+            }
+
+            return buf.toString();
+        }
+
         public void visitContextName() {
-            out().print(escapeHtml(contextName));
+            out().print(currentContextName == null ? "Root Context" : currentContextName);
+        }
+
+        public void visitResolvableDependencies(Template resolvableDependenciesTemplate) {
+            if (FN_RESOLVABLE_DEPENDENCIES.equals(currentFunctionName)) {
+                resolvableDependenciesTemplate.accept(this);
+            }
         }
 
         public void visitResolvableDependencyCount() {
@@ -140,13 +218,30 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
         }
 
         public void visitResolvableDependency(Template resolvableDependencyTemplate) {
-            Map<String, Object> keyValues = createTreeMap();
-
             for (Map.Entry<Class<?>, Object> entry : resolvableDependencies.entrySet()) {
-                keyValues.put(entry.getKey().getName(), entry.getValue());
-            }
+                type = entry.getKey();
+                value = entry.getValue();
 
-            keyValuesComponent.visitTemplate(context, keyValues);
+                resolvableDependencyTemplate.accept(this);
+            }
+        }
+
+        public void visitTypePackage() {
+            out().print(type.getPackage().getName());
+        }
+
+        public void visitTypeName() {
+            out().print(type.getSimpleName());
+        }
+
+        public void visitValue() {
+            out().print(escapeHtml(String.valueOf(value)));
+        }
+
+        public void visitBeans(Template beansTemplate) {
+            if (FN_BEANS.equals(currentFunctionName)) {
+                beansTemplate.accept(this);
+            }
         }
 
         public void visitBeanCount() {

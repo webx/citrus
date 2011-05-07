@@ -1,91 +1,84 @@
 @charset "UTF-8";
 
-.webx-tabs {
+.webx-tabs ul.nav {
     position:relative;
     float:left;
     width:100%;
     padding:0 0 1.75em 1em;
-    margin:0;
+    margin:0.5em 0 0 0;
     list-style:none;
     line-height:1em;
 }
 
-.webx-tabs li {
+.webx-tabs ul.nav li {
     float:left;
-    margin:0;
+    margin:0 0.2em;
     padding:0;
 }
 
-.webx-tabs a {
+.webx-tabs ul.nav a {
     display:block;
-    color:#444;
+    color:grey;
     text-decoration:none;
     font-weight:bold;
     background:#ddd;
     margin:0;
     padding:0.25em 1em;
-    border-left:1px solid #fff;
-    border-top:1px solid #fff;
-    border-right:1px solid #aaa;
+    border-style: solid solid none solid;
+    border-color: white #aaa white white;
+    border-width: thin;
+    border-radius: 5px 5px 0 0;
 }
 
-.webx-tabs a:hover,
+.webx-tabs ul.nav a:hover,
 
-.webx-tabs a:active,
-
-.webx-tabs li.selected a:link,
-
-.webx-tabs li.selected a:visited {
+.webx-tabs ul.nav li.selected a {
     background:#bbb;
+    color:#444;
 }
 
-.webx-tabs li.selected a:link,
-
-.webx-tabs li.selected a:visited {
+.webx-tabs ul.nav li.selected a {
     position:relative;
     z-index:102;
 }
 /* subnav */
 
-.webx-tabs ul {
+.webx-tabs ul.nav ul.subnav {
     position:absolute;
     left:0;
     top:1.5em;
     float:left;
     background:#bbb;
-    width:100%;
+    width:97%;
     margin:0;
     padding:0.25em 0.25em 0.25em 1em;
     list-style:none;
-    border-top:1px solid #fff;
+    border-top:thin solid white;
+    border-radius: 5px 5px 0 0;
     display: none;
 }
 
-.webx-tabs li.selected ul {
+.webx-tabs ul.nav li.selected ul.subnav {
     display: block;
 }
 
-.webx-tabs ul li {
+.webx-tabs ul.nav ul.subnav li {
     float:left;
     display:block;
-    margin-top:1px;
+    margin:1px 0 0 0;
 }
 
-.webx-tabs ul a {
+.webx-tabs ul.nav ul.subnav a {
     background:#bbb;
-    color:#fff;
+    color:grey;
     display:inline;
     margin:0;
     padding:0 1em;
-    border:0
+    border:0;
 }
 
-.webx-tabs ul a:hover,
+.webx-tabs ul.nav ul.subnav a:hover,
 
-.webx-tabs ul a:active,
-
-.webx-tabs ul li.selected a:link,
-
-.webx-tabs ul li.selected a:visited {
+.webx-tabs ul.nav ul.subnav li.selected a {
     color:#444;
 }

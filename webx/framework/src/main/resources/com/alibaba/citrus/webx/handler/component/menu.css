@@ -11,6 +11,7 @@
     float:left;
 /* 防止menu之下的内容侵占menu所在行 */
     clear:both;
+    z-index:101;
 }
 
 .webx-menu li {
