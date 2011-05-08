@@ -2,7 +2,7 @@ ${tabs}
 
 #resolvableDependencies
   <h1>${resolvableDependencyCount} resolvable dependencies in ${contextName}</h1>
-  <dl class="webx-resovlable-deps">
+  <dl id="webx-resolvable-deps">
   #resolvableDependency
     <dt>
       <p><span class="hl-annotation">@Autowired</span></p>
@@ -15,15 +15,17 @@ ${tabs}
 
 #beans
   <h1>${beanCount} beans in ${contextName}</h1>
-  <ul id="beans">
-  #bean
-    #element[]
-      <li>&lt;${elementName}#attribute ${attributeKey}="${attributeValue}"#end><ul>${subElements}</ul>&lt;/${elementName}></li>
-    #element[]
-      <li>&lt;${elementName}#attribute ${attributeKey}="${attributeValue}"#end /></li>
-    #element[]
-      <li>&lt;${elementName}#attribute ${attributeKey}="${attributeValue}"#end><span>${elementText}</span>&lt;/${elementName}></li>
+  <div id="webx-beans">
+    <ul>
+    #bean
+      #element[]
+        <li>&lt;${elementName}#attribute ${attributeKey}="${attributeValue}"#end><ul>${subElements}</ul>&lt;/${elementName}></li>
+      #element[]
+        <li>&lt;${elementName}#attribute ${attributeKey}="${attributeValue}"#end /></li>
+      #element[]
+        <li>&lt;${elementName}#attribute ${attributeKey}="${attributeValue}"#end><span>${elementText}</span>&lt;/${elementName}></li>
+      #end
     #end
-  #end
-  </ul>
+    </ul>
+  </div>
 #end

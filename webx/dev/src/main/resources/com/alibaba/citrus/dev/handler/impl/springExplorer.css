@@ -1,15 +1,43 @@
 @charset "UTF-8";
 
-.webx-resovlable-deps dl {
+#webx-resolvable-deps {
     font-family: Consolas,"Courier New",Courier,monospace;
 }
 
-.webx-resovlable-deps dt {
+#webx-resolvable-deps dt {
     margin: 1em 0 0.2em 0;
 }
 
-.webx-resovlable-deps dt p {
+#webx-resolvable-deps dt p {
     margin: 0;
+}
+
+#webx-resolvable-deps dt .dep-package {
+}
+
+#webx-resolvable-deps dt .dep-class {
+    font-weight: bolder;
+}
+
+#webx-resolvable-deps dd {
+    border: solid thin grey;
+    margin: 0;
+    padding: 1em;
+}
+
+#webx-beans {
+    border: solid thin grey;
+    margin: 0;
+    padding: 1em;
+}
+
+#webx-beans ul {
+    list-style: none;
+}
+
+#webx-beans>ul {
+    margin: 0;
+    padding: 0;
 }
 
 .hl-annotation {
@@ -24,17 +52,4 @@
 
 .hl-variable {
     color:#0000c0;
-}
-
-.webx-resovlable-deps dt .dep-package {
-}
-
-.webx-resovlable-deps dt .dep-class {
-    font-weight: bolder;
-}
-
-.webx-resovlable-deps dd {
-    border: solid thin grey;
-    margin: 0;
-    padding: 1em;
 }
