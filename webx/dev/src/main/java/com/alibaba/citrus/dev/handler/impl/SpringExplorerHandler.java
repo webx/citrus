@@ -7,6 +7,7 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -49,6 +50,11 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
         } else {
             return visitor.currentFunctionName + " - " + contextName;
         }
+    }
+
+    @Override
+    protected String[] getStyleSheets() {
+        return new String[] { "springExplorer.css" };
     }
 
     private static Field getAccessibleField(Class<?> targetType, String fieldName) throws Exception {
@@ -218,7 +224,26 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
         }
 
         public void visitResolvableDependency(Template resolvableDependencyTemplate) {
-            for (Map.Entry<Class<?>, Object> entry : resolvableDependencies.entrySet()) {
+            Map<Class<?>, Object> sorted = createTreeMap(new Comparator<Class<?>>() {
+                public int compare(Class<?> o1, Class<?> o2) {
+                    int n1 = countMatches(o1.getName(), ".");
+                    int n2 = countMatches(o2.getName(), ".");
+
+                    if (n1 != n2) {
+                        return n1 - n2;
+                    }
+
+                    if (!o1.getPackage().getName().equals(o2.getPackage().getName())) {
+                        return o1.getPackage().getName().compareTo(o2.getPackage().getName());
+                    }
+
+                    return o1.getSimpleName().compareTo(o2.getSimpleName());
+                }
+            });
+
+            sorted.putAll(resolvableDependencies);
+
+            for (Map.Entry<Class<?>, Object> entry : sorted.entrySet()) {
                 type = entry.getKey();
                 value = entry.getValue();
 
@@ -232,6 +257,10 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
 
         public void visitTypeName() {
             out().print(type.getSimpleName());
+        }
+
+        public void visitVarName() {
+            out().print(toCamelCase(type.getSimpleName()));
         }
 
         public void visitValue() {

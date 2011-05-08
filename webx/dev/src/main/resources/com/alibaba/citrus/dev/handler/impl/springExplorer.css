@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+.webx-resovlable-deps dl {
+    font-family: Consolas,"Courier New",Courier,monospace;
+}
+
+.webx-resovlable-deps dt {
+    margin: 1em 0 0.2em 0;
+}
+
+.webx-resovlable-deps dt p {
+    margin: 0;
+}
+
+.hl-annotation {
+    color:grey;
+    font-style:italic;
+}
+
+.hl-keyword {
+    color:#973074;
+    font-weight: bolder;
+}
+
+.hl-variable {
+    color:#0000c0;
+}
+
+.webx-resovlable-deps dt .dep-package {
+}
+
+.webx-resovlable-deps dt .dep-class {
+    font-weight: bolder;
+}
+
+.webx-resovlable-deps dd {
+    border: solid thin grey;
+    margin: 0;
+    padding: 1em;
+}

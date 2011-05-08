@@ -2,10 +2,13 @@ ${tabs}
 
 #resolvableDependencies
   <h1>${resolvableDependencyCount} resolvable dependencies in ${contextName}</h1>
-  <dl>
+  <dl class="webx-resovlable-deps">
   #resolvableDependency
-    <dt>${typePackage}.${typeName}</dt>
-    <dd><pre>${value}</pre></dd>
+    <dt>
+      <p><span class="hl-annotation">@Autowired</span></p>
+      <p><span class="hl-keyword">private</span> <span class="dep-package">${typePackage}.</span><span class="dep-class">${typeName}</span> <span class="hl-variable">${varName}</span>;</p>
+    </dt>
+    <dd><pre class="dep-value">${value}</pre></dd>
   #end
   </dl>
 #end
