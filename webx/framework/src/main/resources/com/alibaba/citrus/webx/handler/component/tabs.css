@@ -39,7 +39,7 @@
 
 .webx-tabs ul.nav li.selected a {
     position:relative;
-    z-index:102;
+    z-index:1;
 }
 /* subnav */
 
@@ -81,4 +81,5 @@
 
 .webx-tabs ul.nav ul.subnav li.selected a {
     color:#444;
+    background: #bbb url(images/arrow_tab.gif) no-repeat left center;
 }

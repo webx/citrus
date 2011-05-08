@@ -17,6 +17,7 @@
  */
 package com.alibaba.citrus.webx.handler.support;
 
+import static com.alibaba.citrus.util.ArrayUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.io.IOException;
@@ -56,6 +57,14 @@ public abstract class LayoutRequestProcessor extends AutowiredRequestProcessor {
 
     protected abstract String getTitle(Object bodyVisitor);
 
+    protected String[] getStyleSheets() {
+        return null;
+    };
+
+    protected String[] getJavaScripts() {
+        return null;
+    };
+
     @SuppressWarnings("unused")
     private class LayoutVisitor extends AbstractVisitor {
         private final Object bodyVisitor;
@@ -76,17 +85,39 @@ public abstract class LayoutRequestProcessor extends AutowiredRequestProcessor {
             out().append(contentTypeAndCharset);
         }
 
-        public void visitComponentCss(Template cssTemplate) {
+        public void visitCss(Template cssTemplate) {
+            // components' css
             for (String css : getComponentResources("css")) {
                 this.componentResource = context.getResourceURL(css);
                 cssTemplate.accept(this);
             }
+
+            // page's css
+            String[] pageCss = getStyleSheets();
+
+            if (!isEmptyArray(pageCss)) {
+                for (String css : pageCss) {
+                    this.componentResource = context.getResourceURL(css);
+                    cssTemplate.accept(this);
+                }
+            }
         }
 
-        public void visitComponentJs(Template cssTemplate) {
+        public void visitJs(Template jsTemplate) {
+            // components' js
             for (String js : getComponentResources("js")) {
                 this.componentResource = context.getResourceURL(js);
-                cssTemplate.accept(this);
+                jsTemplate.accept(this);
+            }
+
+            // page's js
+            String[] pageJs = getJavaScripts();
+
+            if (!isEmptyArray(pageJs)) {
+                for (String js : pageJs) {
+                    this.componentResource = context.getResourceURL(js);
+                    jsTemplate.accept(this);
+                }
             }
         }
 
