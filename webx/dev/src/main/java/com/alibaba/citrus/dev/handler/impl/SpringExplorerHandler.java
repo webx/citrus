@@ -252,7 +252,9 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
         }
 
         public void visitTypePackage() {
-            out().print(type.getPackage().getName());
+            if (type.getPackage() != null) {
+                out().print(type.getPackage().getName() + ".");
+            }
         }
 
         public void visitTypeName() {
@@ -261,6 +263,18 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
 
         public void visitVarName() {
             out().print(toCamelCase(type.getSimpleName()));
+        }
+
+        public void visitValueTypePackage() {
+            if (value != null && value.getClass().getPackage() != null) {
+                out().print(value.getClass().getPackage().getName() + ".");
+            }
+        }
+
+        public void visitValueTypeName() {
+            if (value != null) {
+                out().print(value.getClass().getSimpleName());
+            }
         }
 
         public void visitValue() {
@@ -345,34 +359,45 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
     @SuppressWarnings("unused")
     private class BeanVisitor extends AbstractVisitor {
         private final Element beanElement;
+        private Template elementStartTemplate;
 
         public BeanVisitor(RequestHandlerContext context, RootBeanDefinition bd, String name, String[] aliases) {
             super(context);
             this.beanElement = new BeanDefinitionReverseEngine(bd, name, aliases).toXml();
         }
 
+        public void visitElementStart(Template elementStartTemplate) {
+            this.elementStartTemplate = elementStartTemplate;
+        }
+
         public void visitElement(Template elementTemplate, Template selfClosedElementTemplate,
                                  Template textElementTemplate) {
-            new ElementVisitor(context, beanElement, elementTemplate, selfClosedElementTemplate, textElementTemplate)
-                    .visitElement();
+            new ElementVisitor(context, beanElement, elementStartTemplate, elementTemplate, selfClosedElementTemplate,
+                    textElementTemplate).visitElement();
         }
     }
 
     @SuppressWarnings("unused")
     private class ElementVisitor extends AbstractVisitor {
         private final Element element;
+        private final Template elementStartTemplate;
         private final Template elementTemplate;
         private final Template selfClosedElementTemplate;
         private final Template textElementTemplate;
         private Attribute attr;
 
-        public ElementVisitor(RequestHandlerContext context, Element element, Template elementTemplate,
-                              Template selfClosedElementTemplate, Template textElementTemplate) {
+        public ElementVisitor(RequestHandlerContext context, Element element, Template elementStartTemplate,
+                              Template elementTemplate, Template selfClosedElementTemplate, Template textElementTemplate) {
             super(context);
             this.element = element;
+            this.elementStartTemplate = elementStartTemplate;
             this.elementTemplate = elementTemplate;
             this.selfClosedElementTemplate = selfClosedElementTemplate;
             this.textElementTemplate = textElementTemplate;
+        }
+
+        public void visitElementStart() {
+            elementStartTemplate.accept(this);
         }
 
         public void visitElementName() {
@@ -396,8 +421,8 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
 
         public void visitSubElements() {
             for (Element subElement : element.subElements()) {
-                new ElementVisitor(context, subElement, elementTemplate, selfClosedElementTemplate, textElementTemplate)
-                        .visitElement();
+                new ElementVisitor(context, subElement, elementStartTemplate, elementTemplate,
+                        selfClosedElementTemplate, textElementTemplate).visitElement();
             }
         }
 

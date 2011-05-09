@@ -2,15 +2,15 @@ ${tabs}
 
 #resolvableDependencies
   <h1>${resolvableDependencyCount} resolvable dependencies in ${contextName}</h1>
-  <dl id="webx-resolvable-deps">
+  <ol id="webx-resolvable-deps">
   #resolvableDependency
-    <dt>
-      <p><span class="hl-annotation">@Autowired</span></p>
-      <p><span class="hl-keyword">private</span> <span class="dep-package">${typePackage}.</span><span class="dep-class">${typeName}</span> <span class="hl-variable">${varName}</span>;</p>
-    </dt>
-    <dd><pre class="dep-value">${value}</pre></dd>
+  <li>
+    <p><span class="hl-annotation">@Autowired</span></p>
+    <p><span class="hl-keyword">private</span> <span class="hl-package">${typePackage}</span><span class="hl-class">${typeName}</span> <span class="hl-variable">${varName}</span>;</p>
+    <pre>(<span class="hl-package">${valueTypePackage}</span><span class="hl-class">${valueTypeName}</span>) ${value}</pre>
+  </li>
   #end
-  </dl>
+  </ol>
 #end
 
 #beans
@@ -18,12 +18,21 @@ ${tabs}
   <div id="webx-beans">
     <ul>
     #bean
+      #elementStart<span class="hl-tag">&lt;${elementName}</span>#attribute<span class="hl-attribute"> ${attributeKey}</span>=<span class="hl-value">"${attributeValue}"</span>#end#end
       #element[]
-        <li>&lt;${elementName}#attribute ${attributeKey}="${attributeValue}"#end><ul>${subElements}</ul>&lt;/${elementName}></li>
+        <li>
+          <p>${elementStart}></p>
+          <ul>${subElements}</ul>
+          <p><span class="hl-tag">&lt;/${elementName}&gt;</span></p>
+        </li>
       #element[]
-        <li>&lt;${elementName}#attribute ${attributeKey}="${attributeValue}"#end /></li>
+        <li>
+          <p>${elementStart}<span class="hl-tag"> /&gt;</span></p>
+        </li>
       #element[]
-        <li>&lt;${elementName}#attribute ${attributeKey}="${attributeValue}"#end><span>${elementText}</span>&lt;/${elementName}></li>
+        <li>
+          <p>${elementStart}><span>${elementText}</span><span class="hl-tag">&lt;/${elementName}&gt;</span></p>
+        </li>
       #end
     #end
     </ul>
