@@ -94,7 +94,7 @@ public class PageComponentTests extends AbstractRequestProcessorTests {
         processor.processRequest(new MyRequest("http://localhost", ""));
 
         assertEquals("text/plain", contentType);
-        assertEquals("simple template: http://localhost/simple/test.gif\n", sw.toString());
+        assertEquals("simple template: http://localhost/simple/test.gif", sw.toString());
     }
 
     @Test

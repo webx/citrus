@@ -1,0 +1,21 @@
+#aaa
+level0
+#end
+
+#level1
+  #level2
+    $#{aaa}$#{bbb}
+
+    #aaa
+    level2
+    #end
+  #end
+
+  #aaa
+  level1
+  #end
+#end
+
+#bbb
+level0
+#end

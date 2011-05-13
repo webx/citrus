@@ -23,7 +23,7 @@ import static com.alibaba.citrus.util.ServletUtil.*;
 
 import java.net.URL;
 
-import com.alibaba.citrus.util.internal.templatelite.Template;
+import com.alibaba.citrus.util.templatelite.Template;
 
 /**
  * 代表一个简单的页面组件。

@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.alibaba.citrus.util.internal.templatelite;
+package com.alibaba.citrus.util.templatelite;
 
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.Assert.ExceptionType.*;

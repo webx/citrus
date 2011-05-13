@@ -1,0 +1,10 @@
+a\\\#abc#123\$#{abc}\#@xxx ## comment
+  #abc
+    #def
+hello
+  #end
+  #end
+  ## comment
+
+#def ##comment
+#end  ##comment

@@ -1,0 +1,4 @@
+## This template is encoded by GBK
+#@charset GBK
+
+ÄãºÃ£¡

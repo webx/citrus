@@ -15,29 +15,29 @@
  * limitations under the License.
  *
  */
-package com.alibaba.citrus.util.internal.templatelite;
+package com.alibaba.citrus.util.templatelite;
 
 /**
- * 代表执行模板时发生的错误。
+ * 代表解析模板时发生的错误。
  * 
  * @author Michael Zhou
  */
-public class TemplateRuntimeException extends TemplateException {
-    private static final long serialVersionUID = -1675637580195040129L;
+public class TemplateParseException extends TemplateException {
+    private static final long serialVersionUID = -2092817090358032551L;
 
-    public TemplateRuntimeException() {
+    public TemplateParseException() {
         super();
     }
 
-    public TemplateRuntimeException(String message, Throwable cause) {
+    public TemplateParseException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public TemplateRuntimeException(String message) {
+    public TemplateParseException(String message) {
         super(message);
     }
 
-    public TemplateRuntimeException(Throwable cause) {
+    public TemplateParseException(Throwable cause) {
         super(cause);
     }
 }

@@ -1,9 +1,0 @@
-#aaa
-  #bbb[]
-  #bbb[]
-    #ccc[]
-      #ccc
-      #end ## of ccc
-    #end ## of ccc[]
-  #end ## of bbb[]
-#end ## of aaa

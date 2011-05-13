@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.alibaba.citrus.util.internal.templatelite;
+package com.alibaba.citrus.util.templatelite;
 
 import static com.alibaba.citrus.util.CollectionUtil.*;
 
@@ -43,7 +43,7 @@ public class FallbackTextWriter<A extends Appendable> extends TextWriter<A> impl
         return context;
     }
 
-    public void visitPlaceholder(String name, String[] params) throws IOException {
+    public void visitPlaceholder(String name, Object[] params) throws IOException {
         if (context.containsKey(name)) {
             Object value = context.get(name);
 
@@ -52,16 +52,6 @@ public class FallbackTextWriter<A extends Appendable> extends TextWriter<A> impl
             }
         } else {
             out().append("${").append(name).append("}");
-        }
-    }
-
-    public void visitTemplate(String name, Template template) throws IOException {
-        template.accept(this);
-    }
-
-    public void visitTemplateGroup(String name, Template[] templates) throws IOException {
-        for (Template template : templates) {
-            template.accept(this);
         }
     }
 }

@@ -20,10 +20,10 @@ package com.alibaba.citrus.util.internal.webpagelite.simple;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import com.alibaba.citrus.util.internal.templatelite.FallbackTextWriter;
 import com.alibaba.citrus.util.internal.webpagelite.PageComponent;
 import com.alibaba.citrus.util.internal.webpagelite.PageComponentRegistry;
 import com.alibaba.citrus.util.internal.webpagelite.RequestContext;
+import com.alibaba.citrus.util.templatelite.FallbackTextWriter;
 
 public class SimpleComponent extends PageComponent {
     public SimpleComponent(PageComponentRegistry registry, String componentPath) {

@@ -15,29 +15,21 @@
  * limitations under the License.
  *
  */
-package com.alibaba.citrus.util.internal.templatelite;
+package com.alibaba.citrus.util.templatelite;
 
 /**
- * 代表一个通用的模板异常。
+ * 当visit方法找不到时，调用此visitor。
  * 
  * @author Michael Zhou
  */
-public class TemplateException extends RuntimeException {
-    private static final long serialVersionUID = -2283261056076685158L;
+public interface FallbackVisitor {
+    /**
+     * 访问一段文本。
+     */
+    void visitText(String text) throws Exception;
 
-    public TemplateException() {
-        super();
-    }
-
-    public TemplateException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public TemplateException(String message) {
-        super(message);
-    }
-
-    public TemplateException(Throwable cause) {
-        super(cause);
-    }
+    /**
+     * 访问<code>${placeholder:param1, param2, ...}</code>。
+     */
+    void visitPlaceholder(String name, Object[] params) throws Exception;
 }

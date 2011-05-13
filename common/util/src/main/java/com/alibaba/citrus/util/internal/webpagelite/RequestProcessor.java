@@ -33,8 +33,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.alibaba.citrus.util.internal.templatelite.Template;
-import com.alibaba.citrus.util.internal.templatelite.TextWriter;
+import com.alibaba.citrus.util.templatelite.Template;
+import com.alibaba.citrus.util.templatelite.TextWriter;
 
 /**
  * 一个简单的、利用templatelite.<code>Template</code>模板生成WEB页面及相关资源的工具类。
@@ -278,7 +278,7 @@ public abstract class RequestProcessor<RC extends RequestContext> implements Pag
         if (!template) {
             io(resource.openStream(), request.getOutputStream(contentType), true, true);
         } else {
-            Template tpl = new Template(resource, "ISO-8859-1");
+            Template tpl = new Template(resource);
             PrintWriter out = request.getWriter(contentType);
 
             // 对于模板文件中，${url:relativeUrl}将被转换成完整的URL

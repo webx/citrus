@@ -1,0 +1,27 @@
+#@charset UTF-8
+#@trimming on
+#@whitespace collapse
+
+<html>
+  <head>
+    <title>${title: 我的标题}</title>
+  </head>
+  <body>
+    $#{itemlist}
+  </body>
+</html>
+
+#itemlist
+  <ul>
+    ## comment: foreach item
+    ${item: #dateItem, #datetimeItem} ## ignore the rest of line
+  </ul>
+
+  #dateItem
+    <li>${date: yyyy-MM-dd}</li>
+  #end
+
+  #datetimeItem
+    <li>${date: yyyy-MM-dd,HH:mm}</li>
+  #end
+#end
