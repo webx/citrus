@@ -1,4 +1,4 @@
 ## This template is encoded by UTF-8
-#@charset UTF-8
+#@ charset UTF-8
 
 你好！

@@ -1,4 +1,4 @@
 ## This template is encoded by GBK
-#@charset GBK
+#@ charset GBK
 
 ÄãºÃ£¡

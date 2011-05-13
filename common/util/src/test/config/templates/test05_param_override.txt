@@ -1,11 +1,11 @@
 #@xxx 111
-#@zzz
+#@  zzz
 
 #level1
-  #@xxx 222
+  #@  xxx 222
   #@yyy 444
   
   #level2
-    #@xxx 333
+    #@  xxx 333
   #end
 #end

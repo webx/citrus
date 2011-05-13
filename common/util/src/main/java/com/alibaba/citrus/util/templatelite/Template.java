@@ -698,7 +698,7 @@ public final class Template {
                 + "|\\$\\{\\s*([A-Za-z]\\w*)(\\s*:([^\\}]*))?\\s*\\}" // group 3, 4, 5
                 + "|\\$#\\{\\s*([A-Za-z]\\w*)\\s*\\}" // group 6
                 + "|(\\s*)#([A-Za-z]\\w*)(\\s*(##.*)?)" // group 7, 8, 9, 10
-                + "|(\\s*)#@([A-Za-z]\\w*)(\\s+(.*?))?(##.*)?$" // group 11, 12, 13, 14, 15
+                + "|(\\s*)#@\\s*([A-Za-z]\\w*)(\\s+(.*?))?(##.*)?$" // group 11, 12, 13, 14, 15
         );
 
         private final static Set<String> KEYWORDS = createTreeSet("text", "placeholder", "template", "end");
@@ -1386,7 +1386,7 @@ public final class Template {
      */
     static class InputSource {
         private final static Pattern CHARSET_DETECTIVE_PATTERN = Pattern.compile("^(\\s*##)" // comment
-                + "|^(\\s*)#@(\\w+)\\s+(.*?)\\s*(##.*)?$" // charset或其它参数
+                + "|^(\\s*)#@\\s*(\\w+)\\s+(.*?)\\s*(##.*)?$" // charset或其它参数
                 + "|^\\s*$" // empty line
         );
 
