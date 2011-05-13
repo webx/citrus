@@ -21,11 +21,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import com.alibaba.citrus.springext.Schema;
-import com.alibaba.citrus.util.internal.templatelite.FallbackTextWriter;
-import com.alibaba.citrus.util.internal.templatelite.Template;
-import com.alibaba.citrus.util.internal.templatelite.TextWriter;
 import com.alibaba.citrus.util.internal.webpagelite.RequestContext;
 import com.alibaba.citrus.util.internal.webpagelite.RequestProcessor;
+import com.alibaba.citrus.util.templatelite.FallbackTextWriter;
+import com.alibaba.citrus.util.templatelite.Template;
+import com.alibaba.citrus.util.templatelite.TextWriter;
 
 /**
  * 在WEB上调用<code>SchemaExporter</code>，可以把schema显示在WEB页面中。 *
@@ -159,7 +159,7 @@ public class SchemaExporterWEB extends SchemaExporter {
 
         public void visitEntry(Template dirTemplate, Template fileTemplate) {
             if (entry.isDirectory()) {
-                dirTemplate.accept(new DirEntryVisitor(out(), request, entry, null, dirTemplate, fileTemplate));
+                dirTemplate.accept(new DirEntryVisitor(out(), request, entry, null));
             } else {
                 fileTemplate.accept(new FileEntryVisitor(out(), request, entry, null));
             }
@@ -184,14 +184,8 @@ public class SchemaExporterWEB extends SchemaExporter {
 
     @SuppressWarnings("unused")
     private class DirEntryVisitor extends AbstractEntryVisitor {
-        private final Template dirTemplate;
-        private final Template fileTemplate;
-
-        public DirEntryVisitor(PrintWriter out, RequestContext request, Entry entry, String lastEntryPath,
-                               Template dirTemplate, Template fileTemplate) {
+        public DirEntryVisitor(PrintWriter out, RequestContext request, Entry entry, String lastEntryPath) {
             super(out, request, entry, lastEntryPath);
-            this.dirTemplate = dirTemplate;
-            this.fileTemplate = fileTemplate;
         }
 
         public void visitLink(Template link) {
@@ -225,7 +219,7 @@ public class SchemaExporterWEB extends SchemaExporter {
             }
         }
 
-        public void visitSubEntryRecursive() {
+        public void visitSubEntryRecursive(Template dirTemplate, Template fileTemplate) {
             for (Entry subEntry : entry.getSubEntries()) {
                 Entry activeEntry = subEntry;
 
@@ -240,8 +234,7 @@ public class SchemaExporterWEB extends SchemaExporter {
                 }
 
                 if (activeEntry.isDirectory()) {
-                    dirTemplate.accept(new DirEntryVisitor(out(), request, activeEntry, entry.getPath(), dirTemplate,
-                            fileTemplate));
+                    dirTemplate.accept(new DirEntryVisitor(out(), request, activeEntry, entry.getPath()));
                 } else {
                     fileTemplate.accept(new FileEntryVisitor(out(), request, activeEntry, entry.getPath()));
                 }

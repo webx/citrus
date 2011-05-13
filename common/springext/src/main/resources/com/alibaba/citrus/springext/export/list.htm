@@ -1,3 +1,11 @@
+## ----------------------------------------------------
+## 用来生成schema输出页面的模板。
+##
+#@ charset    UTF-8
+#@ trimming   on
+#@ whitespace collapse
+## ----------------------------------------------------
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
@@ -29,55 +37,7 @@
     </div>
     
     <div class="entries">
-    <ul>
-      ## --------------------------
-      ## 递归生成生成目录结点
-      ## --------------------------
-      #entry[]
-      <li class="${entryClass}">
-        <img id="handle-${entryId}" src="${url:open.gif}" alt="Click to open/close branch." title="Click to open/close branch." />
-        <img src="${url:dir.gif}" alt="Directory Type" />
-
-        #link
-        <a href="${entryUrl}">${entryName}</a> /
-        #end
-
-        ## --------------------------
-        ## 子结点
-        ## --------------------------
-        #subEntries
-        <ul id="subdirs-${entryId}">
-          ${subEntryRecursive}
-        </ul>
-        #end ## of subEntries
-      </li>
-
-      ## --------------------------
-      ## 生成文件结点
-      ## --------------------------
-      #entry[]
-      <li class="${entryClass}">
-        <img src="${url:na.gif}" alt="${entryName}" />
-        
-        #checkbox
-        <input type="checkbox" name="${ns};${nsPrefix};${entryUrl}" />
-        #end
-
-        <img src="${url:file.gif}" alt="File Type"/>
-        <a href="${entryUrl}">${entryName}</a>
-      
-        #namespace[]
-        - <span class="code"><em>xmlns:${nsPrefix}=&quot;${ns}&quot;</em></span>
-        #namespace[]
-        - <span class="code"><em>no namespace</em></span>
-        #end ## of namespace
-
-        #description
-        - <span class="code">${desc}</span>
-        #end ## of description
-      </li>
-      #end ## of entry
-    </ul>
+    <ul>${entry: #dirEntry, #fileEntry}</ul>
     </div>
 
     <p>
@@ -89,3 +49,63 @@
 
   </body>
 </html>
+
+## --------------------------
+## 递归生成生成目录结点
+## --------------------------
+#dirEntry
+  <li class="${entryClass}">
+    <img id="handle-${entryId}" src="${url:open.gif}" alt="Click to open/close branch." title="Click to open/close branch." />
+    <img src="${url:dir.gif}" alt="Directory Type" />
+
+    ${link: #entryLink}
+    ${subEntries: #subEntries}
+  </li>
+  
+  #entryLink
+    <a href="${entryUrl}">${entryName}</a> /
+  #end
+
+  ## --------------------------
+  ## 子结点
+  ## --------------------------
+  #subEntries
+    <ul id="subdirs-${entryId}">
+      ${subEntryRecursive: #dirEntry, #fileEntry}
+    </ul>
+  #end
+#end
+
+## --------------------------
+## 生成文件结点
+## --------------------------
+#fileEntry
+  <li class="${entryClass}">
+    <img src="${url:na.gif}" alt="${entryName}" />
+
+    ${checkbox: #checkbox}    
+
+    <img src="${url:file.gif}" alt="File Type"/>
+    <a href="${entryUrl}">${entryName}</a>
+    
+    ${namespace: #withNamespace, #noNamespace}
+
+    ${description: #description}    
+  </li>
+
+  #checkbox
+    <input type="checkbox" name="${ns};${nsPrefix};${entryUrl}" />
+  #end
+
+  #withNamespace
+    - <span class="code"><em>xmlns:${nsPrefix}=&quot;${ns}&quot;</em></span>
+  #end
+
+  #noNamespace
+    - <span class="code"><em>no namespace</em></span>
+  #end
+
+  #description
+    - <span class="code">${desc}</span>
+  #end
+#end
