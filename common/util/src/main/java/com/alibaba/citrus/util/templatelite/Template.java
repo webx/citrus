@@ -36,6 +36,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.Formatter;
 import java.util.LinkedList;
 import java.util.ListIterator;
@@ -136,12 +137,19 @@ import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
  */
 public final class Template {
     private final static Node[] EMPTY_NODES = new Node[0];
+    private final static Map<String, Template> predefinedTemplates = createHashMap();
     private final String name;
     final InputSource source;
     final Location location;
     Node[] nodes;
     Map<String, Template> subtemplates;
     Map<String, String> params;
+
+    static {
+        // 预定义模板，可供任何模板中直接使用，例如：$#{SPACE}可强制插入空格。
+        predefineTemplate("SPACE", " ");
+        predefineTemplate("BR", "\n");
+    }
 
     /**
      * 从File中创建template。
@@ -508,6 +516,14 @@ public final class Template {
         return new ToStringBuilder()
                 .format("#%s with %d nodes at %s", name == null ? "(template)" : name, nodes.length, location)
                 .append(mb).toString();
+    }
+
+    private static void predefineTemplate(String name, String text) {
+        Template template = new Template(name, new Node[] { new Text(text, new Location(null, 1, 1)) },
+                Collections.<String, String> emptyMap(), Collections.<String, Template> emptyMap(), new Location(null,
+                        1, 1));
+
+        predefinedTemplates.put(name, template);
     }
 
     /**
@@ -1013,6 +1029,13 @@ public final class Template {
                 if (template != null) {
                     return template;
                 }
+            }
+
+            // 在predefined templates中找
+            Template template = predefinedTemplates.get(templateName);
+
+            if (template != null) {
+                return template;
             }
 
             return null;

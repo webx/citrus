@@ -671,6 +671,18 @@ public class TemplateParserTests extends AbstractTemplateTests {
         assertText(" </li>", datetimeItem.nodes[i++]);
     }
 
+    @Test
+    public void test07_predefined_templates() {
+        loadTemplate("test07_predefined_templates.txt", 6, 2, 1);
+
+        String expected = "";
+
+        expected += "<a href=\"test\" onclick=\"alert('hi')\">hello\n";
+        expected += "</a>";
+
+        assertEquals(expected, template.renderToString(new FallbackTextWriter<StringBuilder>()));
+    }
+
     private void assertText(String text, Node node) {
         Text t = (Text) node;
 

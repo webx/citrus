@@ -1,0 +1,11 @@
+#@trimming on
+
+<a$#{href}$#{onclick}>hello$#{BR}</a>
+
+#href
+  $#{SPACE}href="test"
+#end
+
+#onclick
+  $#{SPACE}onclick="alert('hi')"
+#end
