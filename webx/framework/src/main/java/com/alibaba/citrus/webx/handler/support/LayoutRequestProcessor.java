@@ -22,7 +22,7 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.io.IOException;
 
-import com.alibaba.citrus.util.internal.templatelite.Template;
+import com.alibaba.citrus.util.templatelite.Template;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 import com.alibaba.citrus.webx.handler.component.FooterComponent;
 import com.alibaba.citrus.webx.handler.component.MenuComponent;

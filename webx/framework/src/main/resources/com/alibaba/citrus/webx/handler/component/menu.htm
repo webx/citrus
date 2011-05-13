@@ -1,37 +1,52 @@
+## --------------------------
+## 开发模式菜单
+##
+#@ charset    UTF-8
+#@ trimming   on
+#@ whitespace collapse
+## --------------------------
 <div class="webx-menu">
   <ul>
-    ## --------------------------
-    ## 首页链接
-    ## --------------------------
-    #entry[]
-    <li>
-      <a href="${internalHomePage}"><img src="${componentUrl:images/home1.gif}" alt="Home" /> Home</a>
-    </li>
-    <li>
-      <a href="${originalHomePage}"><img src="${componentUrl:images/home2.gif}" alt="Application Home" /> Application Home</a>
-    </li>
-  
-    ## --------------------------
-    ## 递归生成生成category结点
-    ## --------------------------
-    #entry[]
-    #subEntries[]
-    <li>${catName}</li>
-    #subEntries[]
-    <li class="webx-subMenu">
-      ${catName}
-      <ul>${subEntriesRecursive}</ul>
-    </li>
-    #end ## of subEntries
-
-    ## --------------------------
-    ## 生成item结点
-    ## --------------------------
-    #entry[]
-    <li>
-      <a href="${itemUrl}">${itemName}</a>
-    </li>
-    #end ## of entry
+    ${entry: #homeEntry, #catEntry, #itemEntry}
   </ul>
   <br />
 </div>
+
+## --------------------------
+## 首页链接
+## --------------------------
+#homeEntry
+  <li>
+    <a href="${internalHomePage}"><img src="${componentUrl:images/home1.gif}" alt="Home" /> Home</a>
+  </li>
+  <li>
+    <a href="${originalHomePage}"><img src="${componentUrl:images/home2.gif}" alt="Application Home" /> Application Home</a>
+  </li>
+#end
+
+## --------------------------
+## 递归生成生成category结点
+## --------------------------
+#catEntry
+  ${subEntries: #noSubEntries, #withSubEntries}
+
+  #noSubEntries
+    <li>${catName}</li>
+  #end
+
+  #withSubEntries
+    <li class="webx-subMenu">
+      ${catName}
+      <ul>${subEntriesRecursive: #catEntry, #itemEntry}</ul>
+    </li>
+  #end
+#end
+
+## --------------------------
+## 生成item结点
+## --------------------------
+#itemEntry
+  <li>
+    <a href="${itemUrl}">${itemName}</a>
+  </li>
+#end

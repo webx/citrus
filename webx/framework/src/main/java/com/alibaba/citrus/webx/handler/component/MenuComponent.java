@@ -27,9 +27,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.alibaba.citrus.util.internal.templatelite.Template;
 import com.alibaba.citrus.util.internal.webpagelite.PageComponent;
 import com.alibaba.citrus.util.internal.webpagelite.PageComponentRegistry;
+import com.alibaba.citrus.util.templatelite.Template;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 import com.alibaba.citrus.webx.handler.RequestHandlerMapping;
 import com.alibaba.citrus.webx.handler.support.AbstractVisitor;
@@ -85,9 +85,9 @@ public class MenuComponent extends PageComponent {
 
             for (Entry subEntry : rootEntry.getSubEntries()) {
                 if (subEntry.isCategory()) {
-                    catTemplate.accept(new CatEntryVisitor(context, subEntry, catTemplate, itemTemplate));
+                    catTemplate.accept(new CatEntryVisitor(context, subEntry));
                 } else {
-                    itemTemplate.accept(new ItemEntryVisitor(context, subEntry, catTemplate, itemTemplate));
+                    itemTemplate.accept(new ItemEntryVisitor(context, subEntry));
                 }
             }
         }
@@ -102,23 +102,18 @@ public class MenuComponent extends PageComponent {
     }
 
     private abstract class AbstractEntryVisitor extends AbstractVisitor {
-        protected final Template catTemplate;
-        protected final Template itemTemplate;
         protected final Entry entry;
 
-        public AbstractEntryVisitor(RequestHandlerContext context, Entry entry, Template catTemplate,
-                                    Template itemTemplate) {
+        public AbstractEntryVisitor(RequestHandlerContext context, Entry entry) {
             super(context, MenuComponent.this);
-            this.catTemplate = catTemplate;
-            this.itemTemplate = itemTemplate;
             this.entry = entry;
         }
     }
 
     @SuppressWarnings("unused")
     private class CatEntryVisitor extends AbstractEntryVisitor {
-        public CatEntryVisitor(RequestHandlerContext context, Entry entry, Template catTemplate, Template itemTemplate) {
-            super(context, entry, catTemplate, itemTemplate);
+        public CatEntryVisitor(RequestHandlerContext context, Entry entry) {
+            super(context, entry);
         }
 
         public void visitCatName() {
@@ -133,12 +128,12 @@ public class MenuComponent extends PageComponent {
             }
         }
 
-        public void visitSubEntriesRecursive() {
+        public void visitSubEntriesRecursive(Template catTemplate, Template itemTemplate) {
             for (Entry subEntry : entry.getSubEntries()) {
                 if (subEntry.isCategory()) {
-                    catTemplate.accept(new CatEntryVisitor(context, subEntry, catTemplate, itemTemplate));
+                    catTemplate.accept(new CatEntryVisitor(context, subEntry));
                 } else {
-                    itemTemplate.accept(new ItemEntryVisitor(context, subEntry, catTemplate, itemTemplate));
+                    itemTemplate.accept(new ItemEntryVisitor(context, subEntry));
                 }
             }
         }
@@ -146,8 +141,8 @@ public class MenuComponent extends PageComponent {
 
     @SuppressWarnings("unused")
     private class ItemEntryVisitor extends AbstractEntryVisitor {
-        public ItemEntryVisitor(RequestHandlerContext context, Entry entry, Template catTemplate, Template itemTemplate) {
-            super(context, entry, catTemplate, itemTemplate);
+        public ItemEntryVisitor(RequestHandlerContext context, Entry entry) {
+            super(context, entry);
         }
 
         public void visitItemUrl() {

@@ -22,8 +22,8 @@ import static com.alibaba.citrus.util.Assert.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import com.alibaba.citrus.util.internal.templatelite.TextWriter;
 import com.alibaba.citrus.util.internal.webpagelite.PageComponent;
+import com.alibaba.citrus.util.templatelite.TextWriter;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 
 /**

@@ -21,8 +21,8 @@ import java.io.IOException;
 
 import com.alibaba.citrus.springext.export.SchemaExporterWEB;
 import com.alibaba.citrus.springext.export.SchemaExporterWEB.MenuProvider;
-import com.alibaba.citrus.util.internal.templatelite.Template;
 import com.alibaba.citrus.util.internal.webpagelite.RequestContext;
+import com.alibaba.citrus.util.templatelite.Template;
 import com.alibaba.citrus.webx.ResourceNotFoundException;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 import com.alibaba.citrus.webx.handler.component.MenuComponent;
@@ -56,17 +56,15 @@ public class SchemaExporterHandler extends AutowiredRequestProcessor {
             super(context);
         }
 
-        public void visitComponentCss(Template cssTemplate) {
+        public void visitHeadComponents(Template cssTemplate, Template jsTemplate) {
             for (String css : getComponentResources("css")) {
                 this.componentResource = context.getResourceURL(css);
                 cssTemplate.accept(this);
             }
-        }
 
-        public void visitComponentJs(Template cssTemplate) {
             for (String js : getComponentResources("js")) {
                 this.componentResource = context.getResourceURL(js);
-                cssTemplate.accept(this);
+                jsTemplate.accept(this);
             }
         }
 

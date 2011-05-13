@@ -27,9 +27,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.alibaba.citrus.util.internal.templatelite.Template;
 import com.alibaba.citrus.util.internal.webpagelite.PageComponent;
 import com.alibaba.citrus.util.internal.webpagelite.PageComponentRegistry;
+import com.alibaba.citrus.util.templatelite.Template;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 import com.alibaba.citrus.webx.handler.support.AbstractVisitor;
 
@@ -98,7 +98,7 @@ public class ExceptionComponent extends PageComponent {
             }
         }
 
-        public void visitStackTraceElement(Template stackTraceElementTemplate) {
+        public void visitStackTrace(Template stackTraceElementTemplate) {
             for (StackTraceElement element : exception.getStackTrace()) {
                 this.stackTraceElement = element;
                 this.location = locateClass(stackTraceElement.getClassName());
