@@ -1360,7 +1360,7 @@ public final class Template {
         private final String name;
         private final LinkedList<Node> nodes = createLinkedList();
         private final Map<String, String> params = createTreeMap();
-        private final Map<String, Template> subtemplates = createTreeMap();
+        private final Map<String, Template> subtemplates = createArrayHashMap();
 
         public ParsingTemplate(String name, String systemId, int lineNumber, int columnNumber,
                                Map<String, String> parentParams) {

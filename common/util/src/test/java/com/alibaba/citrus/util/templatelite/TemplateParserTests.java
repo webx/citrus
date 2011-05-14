@@ -112,7 +112,8 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
         Placeholder placeholder = (Placeholder) template.nodes[0];
 
-        assertPlaceholder(placeholder, "for", "Line 3 Column 1", new String[] { "#aaa.b", "#aaa.c", "#aaa.d", "ccc" },
+        // 子模板的顺序和模板文件中的一致
+        assertPlaceholder(placeholder, "for", "Line 3 Column 1", new String[] { "#aaa.d", "#aaa.c", "#aaa.b", "ccc" },
                 "#aaa.*, ccc");
 
         PlaceholderParameter param;
@@ -120,8 +121,8 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
         param = placeholder.params[i++];
         assertTrue(param.isTemplateReference());
-        assertEquals("aaa.b", param.getTemplateName());
-        assertEquals("b", param.getTemplateReference().getName());
+        assertEquals("aaa.d", param.getTemplateName());
+        assertEquals("d", param.getTemplateReference().getName());
 
         param = placeholder.params[i++];
         assertTrue(param.isTemplateReference());
@@ -130,8 +131,8 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
         param = placeholder.params[i++];
         assertTrue(param.isTemplateReference());
-        assertEquals("aaa.d", param.getTemplateName());
-        assertEquals("d", param.getTemplateReference().getName());
+        assertEquals("aaa.b", param.getTemplateName());
+        assertEquals("b", param.getTemplateReference().getName());
 
         param = placeholder.params[i++];
         assertFalse(param.isTemplateReference());

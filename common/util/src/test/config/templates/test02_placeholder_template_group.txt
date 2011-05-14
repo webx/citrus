@@ -3,10 +3,10 @@
 ${for: #aaa.*, ccc}
 
 #aaa
-  #b
+  #d
   #end
   #c
   #end
-  #d
+  #b
   #end
 #end
