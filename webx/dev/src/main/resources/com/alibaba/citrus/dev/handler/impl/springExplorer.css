@@ -16,13 +16,6 @@
     margin: 0;
 }
 
-#webx-resolvable-deps li .hl-package {
-}
-
-#webx-resolvable-deps li .hl-class {
-    font-weight: bolder;
-}
-
 #webx-resolvable-deps li pre {
     border: solid thin grey;
     margin: 0.5em 0 0 0;
@@ -41,15 +34,19 @@
     padding: 0 0 0 2em;
 }
 
-#webx-beans ul li p {
+#webx-beans li p {
     margin: 0 0 0 2em;
     padding: 0;
     text-indent: -2em;
 }
 
-#webx-beans>ul {
+#webx-beans ol {
     margin: 0;
-    padding: 0;
+    padding: 0 0 0 2em;
+}
+
+#webx-beans ol>li {
+    margin: 0.5em 0;
 }
 
 .hl-annotation {
@@ -76,4 +73,21 @@
 
 .hl-value {
     color: #993300;
+}
+
+.hl-package {
+}
+
+.hl-class {
+    font-weight: bolder;
+}
+
+.hl-anchor {
+    font-weight: bolder;
+}
+
+a.hl-ref {
+    text-decoration: underline;
+    color: blue;
+    font-weight: bolder;
 }

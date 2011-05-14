@@ -11,9 +11,12 @@ ${explorer: #resolvableDependencies, #beans}
 
 #resolvableDependencies
   <h1>${resolvableDependencyCount} resolvable dependencies in ${contextName}</h1>
-  <ol id="webx-resolvable-deps">
-    ${resolvableDependency: #resolvableDependency}
-  </ol>
+  <div id="webx-resolvable-deps">
+    <ol>
+      ${resolvableDependency: #resolvableDependency}
+    </ol>
+  </div>
+
   #resolvableDependency
     <li>
       <p><span class="hl-annotation">@Autowired</span></p>
@@ -26,8 +29,8 @@ ${explorer: #resolvableDependencies, #beans}
 #beans
   <h1>${beanCount} beans in ${contextName}</h1>
   <div id="webx-beans">
-    <ul>
+    <ol>
       ${bean}
-    </ul>
+    </ol>
   </div>
 #end

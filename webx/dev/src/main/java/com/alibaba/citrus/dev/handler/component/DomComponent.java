@@ -4,6 +4,7 @@ import static com.alibaba.citrus.util.StringEscapeUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.io.PrintWriter;
+import java.util.BitSet;
 
 import com.alibaba.citrus.dev.handler.util.AnchorValue;
 import com.alibaba.citrus.dev.handler.util.Attribute;
@@ -57,7 +58,7 @@ public class DomComponent extends PageComponent {
                                  Template elementWithTextTemplate) {
             if (element.hasSubElements()) {
                 elementWithSubElementsTemplate.accept(this);
-            } else if (!isEmpty(element.getText().getText())) {
+            } else if (element.getText() != null) {
                 elementWithTextTemplate.accept(this);
             } else {
                 elementSelfClosedTemplate.accept(this);
@@ -120,7 +121,7 @@ public class DomComponent extends PageComponent {
             // raw data 
             else if (value instanceof RawValue) {
                 template = styledTextTemplates[1];
-                context().put("packageName", ((RawValue) value).getRawType().getPackage().getName() + ".");
+                context().put("packageName", ((RawValue) value).getRawType().getPackage().getName());
                 context().put("className", ((RawValue) value).getRawType().getSimpleName());
                 context().put("value", ((RawValue) value).getRawToString());
 
@@ -130,7 +131,7 @@ public class DomComponent extends PageComponent {
             // class name
             else if (value instanceof ClassValue) {
                 template = styledTextTemplates[2];
-                context().put("packageName", ((ClassValue) value).getPackageName() + ".");
+                context().put("packageName", ((ClassValue) value).getPackageName());
                 context().put("className", ((ClassValue) value).getSimpleName());
 
                 template.accept(this);
@@ -142,7 +143,7 @@ public class DomComponent extends PageComponent {
 
                 int i = 0;
                 for (String name : ((AnchorValue) value).getNames()) {
-                    context().put("anchorName", name);
+                    context().put("anchorName", toId(name));
                     this.withSep = i++ > 0;
 
                     template.accept(this);
@@ -155,7 +156,7 @@ public class DomComponent extends PageComponent {
 
                 int i = 0;
                 for (String name : ((RefValue) value).getNames()) {
-                    context().put("refName", name);
+                    context().put("refName", toId(name));
                     this.withSep = i++ > 0;
 
                     template.accept(this);
@@ -173,5 +174,66 @@ public class DomComponent extends PageComponent {
                 sepTemplate.accept(this);
             }
         }
+
+        public void visitPackageName() {
+            String packageName = (String) context().get("packageName");
+
+            if (!isEmpty(packageName)) {
+                if (!packageName.endsWith(".")) {
+                    packageName += ".";
+                }
+            }
+
+            out().print(packageName);
+        }
+
+        private String toId(String name) {
+            if (name != null) {
+                StringBuilder buf = new StringBuilder(name.length());
+
+                for (int i = 0; i < name.length(); i++) {
+                    char c = name.charAt(i);
+
+                    if (!bs.get(c)) {
+                        c = '_';
+                    }
+
+                    buf.append(c);
+                }
+
+                name = buf.toString();
+            }
+
+            return name;
+        }
+    }
+
+    private final static BitSet bs;
+
+    static {
+        bs = new BitSet();
+
+        // 根据<a href="http://www.w3.org/TR/REC-xml/#id">http://www.w3.org/TR/REC-xml/#id</a>所指示的标准，将非id字符转成_。
+        bs.set(':');
+        bs.set('-');
+        bs.set('.');
+        bs.set('_');
+        bs.set('0', '9');
+        bs.set('A', 'Z');
+        bs.set('a', 'z');
+        bs.set('\u00C0', '\u00D6');
+        bs.set('\u00D8', '\u00F6');
+        bs.set('\u00F8', '\u02FF');
+        bs.set('\u0370', '\u037D');
+        bs.set('\u037F', '\u1FFF');
+        bs.set('\u200C', '\u200D');
+        bs.set('\u2070', '\u218F');
+        bs.set('\u2C00', '\u2FEF');
+        bs.set('\u3001', '\uD7FF');
+        bs.set('\uF900', '\uFDCF');
+        bs.set('\uFDF0', '\uFFFD');
+        bs.set('\u00B7');
+        bs.set('\u0300', '\u036F');
+        bs.set('\u203F', '\u2040');
     }
 }
