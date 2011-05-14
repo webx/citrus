@@ -1,40 +1,33 @@
+## --------------------------
+## 显示Spring context的内容
+##
+#@ charset    UTF-8
+#@ trimming   on
+#@ whitespace collapse
+## --------------------------
+
 ${tabs}
+${explorer: #resolvableDependencies, #beans}
 
 #resolvableDependencies
   <h1>${resolvableDependencyCount} resolvable dependencies in ${contextName}</h1>
   <ol id="webx-resolvable-deps">
-  #resolvableDependency
-  <li>
-    <p><span class="hl-annotation">@Autowired</span></p>
-    <p><span class="hl-keyword">private</span> <span class="hl-package">${typePackage}</span><span class="hl-class">${typeName}</span> <span class="hl-variable">${varName}</span>;</p>
-    <pre>(<span class="hl-package">${valueTypePackage}</span><span class="hl-class">${valueTypeName}</span>) ${value}</pre>
-  </li>
-  #end
+    ${resolvableDependency: #resolvableDependency}
   </ol>
+  #resolvableDependency
+    <li>
+      <p><span class="hl-annotation">@Autowired</span></p>
+      <p><span class="hl-keyword">private</span> <span class="hl-package">${typePackage}</span><span class="hl-class">${typeName}</span> <span class="hl-variable">${varName}</span>;</p>
+      <pre>(<span class="hl-package">${valueTypePackage}</span><span class="hl-class">${valueTypeName}</span>) ${value}</pre>
+    </li>
+  #end
 #end
 
 #beans
   <h1>${beanCount} beans in ${contextName}</h1>
   <div id="webx-beans">
     <ul>
-    #bean
-      #elementStart<span class="hl-tag">&lt;${elementName}</span>#attribute<span class="hl-attribute"> ${attributeKey}</span>=<span class="hl-value">"${attributeValue}"</span>#end#end
-      #element[]
-        <li>
-          <p>${elementStart}></p>
-          <ul>${subElements}</ul>
-          <p><span class="hl-tag">&lt;/${elementName}&gt;</span></p>
-        </li>
-      #element[]
-        <li>
-          <p>${elementStart}<span class="hl-tag"> /&gt;</span></p>
-        </li>
-      #element[]
-        <li>
-          <p>${elementStart}><span>${elementText}</span><span class="hl-tag">&lt;/${elementName}&gt;</span></p>
-        </li>
-      #end
-    #end
+      ${bean}
     </ul>
   </div>
 #end

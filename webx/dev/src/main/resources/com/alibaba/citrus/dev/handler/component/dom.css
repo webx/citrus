@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+ul.webx-dom {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 2em;
+}
+
+ul.webx-dom li p {
+    margin: 0 0 0 2em;
+    padding: 0;
+    text-indent: -2em;
+}
+
+ul.webx-dom {
+    margin: 0;
+    padding: 0;
+}
+
+.hl-annotation {
+    color:grey;
+    font-style:italic;
+}
+
+.hl-keyword {
+    color:#973074;
+    font-weight: bolder;
+}
+
+.hl-variable {
+    color:#0000c0;
+}
+
+.hl-tag {
+    color:#000096;
+}
+
+.hl-attribute {
+    color: #F5844C;
+}
+
+.hl-value {
+    color: #993300;
+}

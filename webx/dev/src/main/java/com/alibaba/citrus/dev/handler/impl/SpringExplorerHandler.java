@@ -16,14 +16,15 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.support.AbstractApplicationContext;
 
-import com.alibaba.citrus.dev.handler.impl.BeanDefinitionReverseEngine.Attribute;
-import com.alibaba.citrus.dev.handler.impl.BeanDefinitionReverseEngine.Element;
-import com.alibaba.citrus.util.internal.templatelite.Template;
+import com.alibaba.citrus.dev.handler.component.DomComponent;
+import com.alibaba.citrus.dev.handler.component.TabsComponent;
+import com.alibaba.citrus.dev.handler.component.TabsComponent.TabItem;
+import com.alibaba.citrus.dev.handler.util.BeanDefinitionReverseEngine;
+import com.alibaba.citrus.dev.handler.util.Element;
+import com.alibaba.citrus.util.templatelite.Template;
 import com.alibaba.citrus.webx.WebxComponent;
 import com.alibaba.citrus.webx.WebxComponents;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
-import com.alibaba.citrus.webx.handler.component.TabsComponent;
-import com.alibaba.citrus.webx.handler.component.TabsComponent.TabItem;
 import com.alibaba.citrus.webx.handler.support.AbstractVisitor;
 import com.alibaba.citrus.webx.handler.support.LayoutRequestProcessor;
 
@@ -31,6 +32,7 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
     private static final String FN_BEANS = "Beans";
     private static final String FN_RESOLVABLE_DEPENDENCIES = "ResolvableDependencies";
     private final TabsComponent tabsComponent = new TabsComponent(this, "tabs");
+    private final DomComponent domComponent = new DomComponent(this, "dom");
 
     @Autowired
     private WebxComponents components;
@@ -213,9 +215,13 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
             out().print(currentContextName == null ? "Root Context" : currentContextName);
         }
 
-        public void visitResolvableDependencies(Template resolvableDependenciesTemplate) {
+        public void visitExplorer(Template resolvableDependenciesTemplate, Template beansTemplate) {
             if (FN_RESOLVABLE_DEPENDENCIES.equals(currentFunctionName)) {
                 resolvableDependenciesTemplate.accept(this);
+            }
+
+            if (FN_BEANS.equals(currentFunctionName)) {
+                beansTemplate.accept(this);
             }
         }
 
@@ -281,25 +287,23 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
             out().print(escapeHtml(String.valueOf(value)));
         }
 
-        public void visitBeans(Template beansTemplate) {
-            if (FN_BEANS.equals(currentFunctionName)) {
-                beansTemplate.accept(this);
-            }
-        }
-
         public void visitBeanCount() {
             out().print(factory.getBeanDefinitionCount());
         }
 
-        public void visitBean(Template beanTemplate) {
+        public void visitBean() {
             for (String name : getSortedBeanNames()) {
-                RootBeanDefinition bd;
+                Element beanElement = null;
 
                 try {
-                    bd = getBeanDefinition(name);
-                    beanTemplate.accept(new BeanVisitor(context, bd, name, factory.getAliases(name)));
+                    RootBeanDefinition bd = getBeanDefinition(name);
+                    beanElement = new BeanDefinitionReverseEngine(bd, name, factory.getAliases(name)).toDom();
                 } catch (Exception e) {
                     out().print(escapeHtml(e.toString()));
+                }
+
+                if (beanElement != null) {
+                    domComponent.visitTemplate(context, beanElement);
                 }
             }
         }
@@ -352,91 +356,6 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
                 }
 
                 return 0;
-            }
-        }
-    }
-
-    @SuppressWarnings("unused")
-    private class BeanVisitor extends AbstractVisitor {
-        private final Element beanElement;
-        private Template elementStartTemplate;
-
-        public BeanVisitor(RequestHandlerContext context, RootBeanDefinition bd, String name, String[] aliases) {
-            super(context);
-            this.beanElement = new BeanDefinitionReverseEngine(bd, name, aliases).toXml();
-        }
-
-        public void visitElementStart(Template elementStartTemplate) {
-            this.elementStartTemplate = elementStartTemplate;
-        }
-
-        public void visitElement(Template elementTemplate, Template selfClosedElementTemplate,
-                                 Template textElementTemplate) {
-            new ElementVisitor(context, beanElement, elementStartTemplate, elementTemplate, selfClosedElementTemplate,
-                    textElementTemplate).visitElement();
-        }
-    }
-
-    @SuppressWarnings("unused")
-    private class ElementVisitor extends AbstractVisitor {
-        private final Element element;
-        private final Template elementStartTemplate;
-        private final Template elementTemplate;
-        private final Template selfClosedElementTemplate;
-        private final Template textElementTemplate;
-        private Attribute attr;
-
-        public ElementVisitor(RequestHandlerContext context, Element element, Template elementStartTemplate,
-                              Template elementTemplate, Template selfClosedElementTemplate, Template textElementTemplate) {
-            super(context);
-            this.element = element;
-            this.elementStartTemplate = elementStartTemplate;
-            this.elementTemplate = elementTemplate;
-            this.selfClosedElementTemplate = selfClosedElementTemplate;
-            this.textElementTemplate = textElementTemplate;
-        }
-
-        public void visitElementStart() {
-            elementStartTemplate.accept(this);
-        }
-
-        public void visitElementName() {
-            out().print(escapeHtml(element.getName()));
-        }
-
-        public void visitAttribute(Template attributeTemplate) {
-            for (Attribute attr : element.attributes()) {
-                this.attr = attr;
-                attributeTemplate.accept(this);
-            }
-        }
-
-        public void visitAttributeKey() {
-            out().print(escapeHtml(attr.getKey()));
-        }
-
-        public void visitAttributeValue() {
-            out().print(escapeHtml(attr.getValue()));
-        }
-
-        public void visitSubElements() {
-            for (Element subElement : element.subElements()) {
-                new ElementVisitor(context, subElement, elementStartTemplate, elementTemplate,
-                        selfClosedElementTemplate, textElementTemplate).visitElement();
-            }
-        }
-
-        public void visitElementText() {
-            out().print(escapeHtml(element.getText()));
-        }
-
-        private void visitElement() {
-            if (element.hasSubElements()) {
-                elementTemplate.accept(this);
-            } else if (!isEmpty(element.getText())) {
-                textElementTemplate.accept(this);
-            } else {
-                selfClosedElementTemplate.accept(this);
             }
         }
     }

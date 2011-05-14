@@ -1,7 +1,6 @@
-package com.alibaba.citrus.dev.handler.impl;
+package com.alibaba.citrus.dev.handler.util;
 
 import static com.alibaba.citrus.util.ArrayUtil.*;
-import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.ClassUtil.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
@@ -72,11 +71,11 @@ public class BeanDefinitionReverseEngine {
 
     private void beanAttributes() {
         if (!innerBean && name != null) {
-            beanElement.addAttribute("id", name);
+            beanElement.addAttribute("id", new AnchorValue(name));
         }
 
         if (!innerBean && aliases.length > 0) {
-            beanElement.addAttribute("name", join(aliases, ", "));
+            beanElement.addAttribute("name", new AnchorValue(aliases));
         }
 
         if (bd.isAbstract()) {
@@ -84,11 +83,11 @@ public class BeanDefinitionReverseEngine {
         }
 
         if (bd.getParentName() != null) {
-            beanElement.addAttribute("parent", bd.getParentName());
+            beanElement.addAttribute("parent", new RefValue(bd.getParentName()));
         }
 
         if (bd.getBeanClassName() != null) {
-            beanElement.addAttribute("class", bd.getBeanClassName());
+            beanElement.addAttribute("class", new ClassValue(bd.getBeanClassName()));
         }
 
         if (bd.isPrimary()) {
@@ -144,7 +143,7 @@ public class BeanDefinitionReverseEngine {
         }
 
         if (!isEmptyArray(bd.getDependsOn())) {
-            beanElement.addAttribute("depends-on", join(bd.getDependsOn(), ", "));
+            beanElement.addAttribute("depends-on", new RefValue(bd.getDependsOn()));
         }
 
         if (bd.getScope() != null && !"singleton".equals(bd.getScope())) {
@@ -164,7 +163,7 @@ public class BeanDefinitionReverseEngine {
         }
 
         if (bd.getFactoryBeanName() != null) {
-            beanElement.addAttribute("factory-bean", bd.getFactoryBeanName());
+            beanElement.addAttribute("factory-bean", new RefValue(bd.getFactoryBeanName()));
         }
 
         if (bd.getFactoryMethodName() != null) {
@@ -201,7 +200,7 @@ public class BeanDefinitionReverseEngine {
 
     private void beanConstructorArg(Element constructorArgElement, ValueHolder valueHolder) {
         if (valueHolder.getType() != null) {
-            constructorArgElement.addAttribute("type", valueHolder.getType());
+            constructorArgElement.addAttribute("type", new ClassValue(valueHolder.getType()));
         }
 
         value(constructorArgElement, valueHolder.getValue(), true, true, null, null);
@@ -256,11 +255,11 @@ public class BeanDefinitionReverseEngine {
             String refto = ((RuntimeBeanReference) value).getBeanName();
 
             if (((RuntimeBeanReference) value).isToParent()) {
-                element.newSubElement("ref").addAttribute("parent", refto);
+                element.newSubElement("ref").addAttribute("parent", new RefValue(refto));
             } else if (supportRefAttribute) {
-                element.addAttribute("ref", refto);
+                element.addAttribute("ref", new RefValue(refto));
             } else {
-                element.newSubElement("ref").addAttribute("bean", refto);
+                element.newSubElement("ref").addAttribute("bean", new RefValue(refto));
             }
 
             return;
@@ -268,7 +267,8 @@ public class BeanDefinitionReverseEngine {
 
         // idref
         if (value instanceof RuntimeBeanNameReference) {
-            element.newSubElement("idref").addAttribute("bean", ((RuntimeBeanNameReference) value).getBeanName());
+            element.newSubElement("idref").addAttribute("bean",
+                    new RefValue(((RuntimeBeanNameReference) value).getBeanName()));
             return;
         }
 
@@ -289,7 +289,8 @@ public class BeanDefinitionReverseEngine {
             if (innerBd instanceof AbstractBeanDefinition) {
                 new BeanDefinitionReverseEngine((AbstractBeanDefinition) innerBd, innerName, innerAliases, element);
             } else {
-                element.newSubElement("bean").addAttribute("unknownBeanDefinitionType", innerBd.getClass().getName());
+                element.newSubElement("bean").addAttribute("unknownBeanDefinitionType",
+                        new ClassValue(innerBd.getClass().getName()));
             }
 
             return;
@@ -351,23 +352,22 @@ public class BeanDefinitionReverseEngine {
 
         // typed string
         if (value instanceof TypedStringValue) {
-            simpleValue(element, ((TypedStringValue) value).getValue(), ((TypedStringValue) value).getTargetTypeName(),
-                    supportValueAttribute, containerElement, typeAttrName);
+            simpleValue(element, new TextValue(((TypedStringValue) value).getValue()),
+                    ((TypedStringValue) value).getTargetTypeName(), supportValueAttribute, containerElement,
+                    typeAttrName);
             return;
         }
 
         // simple raw data
         if (value instanceof String || getPrimitiveType(value.getClass()) != null) {
-            simpleValue(element, value.toString(), null, supportValueAttribute, containerElement, typeAttrName);
+            simpleValue(element, new TextValue(value.toString()), null, supportValueAttribute, containerElement,
+                    typeAttrName);
             return;
         }
 
         // raw data
-        simpleValue(element, rawdata(value), null, supportValueAttribute, containerElement, typeAttrName);
-    }
-
-    private String rawdata(Object value) {
-        return "raw-data: (" + value.getClass().getName() + ") " + value;
+        simpleValue(element, new RawValue(value.getClass(), value.toString()), null, supportValueAttribute,
+                containerElement, typeAttrName);
     }
 
     private void mapEntryKeyValue(Element entryElement, Object keyOrValue, String refAttrName, String valueAttrName,
@@ -378,7 +378,7 @@ public class BeanDefinitionReverseEngine {
                 String refto = ((RuntimeBeanReference) keyOrValue).getBeanName();
 
                 if (!((RuntimeBeanReference) keyOrValue).isToParent()) {
-                    entryElement.addAttribute(refAttrName, refto);
+                    entryElement.addAttribute(refAttrName, new RefValue(refto));
                     return;
                 }
             }
@@ -392,7 +392,7 @@ public class BeanDefinitionReverseEngine {
                 if (type != null) {
                     // 如果<map>中没有type attribute，则把type设置到map中，作为默认的type。
                     if (mapElement != null && typeAttrName != null && !mapElement.hasAttribute(typeAttrName)) {
-                        mapElement.addAttribute(typeAttrName, type);
+                        mapElement.addAttribute(typeAttrName, new ClassValue(type));
                     }
 
                     // 如果type和<map>中的默认type相同，则不显示
@@ -437,12 +437,12 @@ public class BeanDefinitionReverseEngine {
         controlChars = buf.toString().toCharArray();
     }
 
-    private void simpleValue(Element element, String value, String type, boolean supportValueAttribute,
+    private void simpleValue(Element element, StyledValue value, String type, boolean supportValueAttribute,
                              Element containerElement, String typeAttrName) {
         if (type != null) {
             // 如果<list>中没有type attribute，则把type设置到map中，作为默认的type。
             if (containerElement != null && typeAttrName != null && !containerElement.hasAttribute(typeAttrName)) {
-                containerElement.addAttribute(typeAttrName, type);
+                containerElement.addAttribute(typeAttrName, new ClassValue(type));
             }
 
             // 如果type和<list>中的默认type相同，则不显示
@@ -451,7 +451,7 @@ public class BeanDefinitionReverseEngine {
             }
         }
 
-        if (type == null && supportValueAttribute && containsNone(value, controlChars)) {
+        if (type == null && supportValueAttribute && containsNone(value.getText(), controlChars)) {
             element.addAttribute("value", value);
             return;
         }
@@ -459,7 +459,7 @@ public class BeanDefinitionReverseEngine {
         Element valueElement = element.newSubElement("value").setText(value);
 
         if (type != null) {
-            valueElement.addAttribute("type", type);
+            valueElement.addAttribute("type", new ClassValue(type));
         }
     }
 
@@ -474,7 +474,7 @@ public class BeanDefinitionReverseEngine {
                 String name = override.getMethodName();
 
                 if (bean != null) {
-                    lookupMethodElement.addAttribute("bean", bean);
+                    lookupMethodElement.addAttribute("bean", new RefValue(bean));
                 }
 
                 if (name != null) {
@@ -490,7 +490,7 @@ public class BeanDefinitionReverseEngine {
                 String name = override.getMethodName();
 
                 if (bean != null) {
-                    replacedMethodElement.addAttribute("replacer", bean);
+                    replacedMethodElement.addAttribute("replacer", new RefValue(bean));
                 }
 
                 if (name != null) {
@@ -510,7 +510,7 @@ public class BeanDefinitionReverseEngine {
             Element qualifierElement = beanElement.newSubElement("qualifier");
 
             if (q.getTypeName() != null) {
-                qualifierElement.addAttribute("type", q.getTypeName());
+                qualifierElement.addAttribute("type", new ClassValue(q.getTypeName()));
             }
 
             if (q.getAttribute("value") != null) {
@@ -528,101 +528,7 @@ public class BeanDefinitionReverseEngine {
         }
     }
 
-    public final Element toXml() {
+    public final Element toDom() {
         return beanElement;
-    }
-
-    public static class Element {
-        private final String name;
-        private final List<Element> subElements = createLinkedList();
-        private final Map<String, Attribute> attrs = createArrayHashMap();
-        private String text;
-
-        public Element(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public Element addAttribute(String key, String value) {
-            return addAttribute(key, value, null);
-        }
-
-        public Element addAttribute(String key, String value, String cssClass) {
-            attrs.put(key, new Attribute(key, value, cssClass));
-            return this;
-        }
-
-        public Element setText(String text) {
-            assertTrue(subElements.isEmpty(), "subElements is not empty");
-            this.text = text;
-            return this;
-        }
-
-        public String getText() {
-            return text;
-        }
-
-        public Element newSubElement(String name) {
-            assertNull(text, "text is not null");
-            Element subElement = new Element(name);
-            subElements.add(subElement);
-            return subElement;
-        }
-
-        public boolean hasSubElements() {
-            return !subElements.isEmpty();
-        }
-
-        public Iterable<Element> subElements() {
-            return subElements;
-        }
-
-        public Iterable<Attribute> attributes() {
-            return attrs.values();
-        }
-
-        public boolean hasAttribute(String key) {
-            return attrs.get(key) != null;
-        }
-
-        public String getAttribute(String key) {
-            if (hasAttribute(key)) {
-                return attrs.get(key).getValue();
-            }
-
-            return null;
-        }
-    }
-
-    public static class Attribute {
-        private final String key;
-        private final String value;
-        private final String cssClass;
-
-        public Attribute(String key, String value, String cssClass) {
-            this.key = key;
-            this.value = value;
-            this.cssClass = cssClass;
-        }
-
-        public String getKey() {
-            return key;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        public String getCssClass() {
-            return cssClass;
-        }
-
-        @Override
-        public String toString() {
-            return value;
-        }
     }
 }
