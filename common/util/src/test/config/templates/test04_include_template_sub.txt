@@ -1,0 +1,11 @@
+#@trimming on
+
+$#{level1.level2.aaa}
+
+#level1
+  #level2
+    #aaa
+      level2
+    #end
+  #end
+#end

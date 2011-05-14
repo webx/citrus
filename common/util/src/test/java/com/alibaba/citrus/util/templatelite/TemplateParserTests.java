@@ -84,8 +84,8 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
         Placeholder placeholder = (Placeholder) template.nodes[0];
 
-        assertPlaceholder(placeholder, "for", "Line 1 Column 1", new String[] { "#aaa", "#bbb", "ccc" },
-                "#aaa, #bbb, ccc");
+        assertPlaceholder(placeholder, "for", "Line 1 Column 1", new String[] { "#aaa", "#bbb.ccc", "ccc" },
+                "#aaa, #bbb.ccc, ccc");
 
         PlaceholderParameter param;
         int i = 0;
@@ -97,8 +97,41 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
         param = placeholder.params[i++];
         assertTrue(param.isTemplateReference());
-        assertEquals("bbb", param.getTemplateName());
-        assertEquals("bbb", param.getTemplateReference().getName());
+        assertEquals("bbb.ccc", param.getTemplateName());
+        assertEquals("ccc", param.getTemplateReference().getName());
+
+        param = placeholder.params[i++];
+        assertFalse(param.isTemplateReference());
+        assertNull(param.getTemplateName());
+        assertNull(param.getTemplateReference());
+    }
+
+    @Test
+    public void test02_placeholder_template_group() throws Exception {
+        loadTemplate("test02_placeholder_template_group.txt", 1, 1, 1);
+
+        Placeholder placeholder = (Placeholder) template.nodes[0];
+
+        assertPlaceholder(placeholder, "for", "Line 3 Column 1", new String[] { "#aaa.b", "#aaa.c", "#aaa.d", "ccc" },
+                "#aaa.*, ccc");
+
+        PlaceholderParameter param;
+        int i = 0;
+
+        param = placeholder.params[i++];
+        assertTrue(param.isTemplateReference());
+        assertEquals("aaa.b", param.getTemplateName());
+        assertEquals("b", param.getTemplateReference().getName());
+
+        param = placeholder.params[i++];
+        assertTrue(param.isTemplateReference());
+        assertEquals("aaa.c", param.getTemplateName());
+        assertEquals("c", param.getTemplateReference().getName());
+
+        param = placeholder.params[i++];
+        assertTrue(param.isTemplateReference());
+        assertEquals("aaa.d", param.getTemplateName());
+        assertEquals("d", param.getTemplateReference().getName());
 
         param = placeholder.params[i++];
         assertFalse(param.isTemplateReference());
@@ -146,6 +179,42 @@ public class TemplateParserTests extends AbstractTemplateTests {
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError,
                 exception("Referenced template notexist is not found in the context around test.txt: Line 1 Column 3"));
+
+        // ${xxx: #a.b.c}模板未找到
+        s = "";
+        s += "  ${xxx: #a.b.c}";
+
+        loadTemplateFailure(s.getBytes(), "test.txt");
+        assertThat(parseError,
+                exception("Referenced template a.b.c is not found in the context around test.txt: Line 1 Column 3"));
+
+        s = "";
+        s += "  ${xxx: #a.b.c}\n";
+        s += "#a\n";
+        s += "#b\n";
+        s += "#end\n";
+        s += "#end\n";
+
+        loadTemplateFailure(s.getBytes(), "test.txt");
+        assertThat(parseError,
+                exception("Referenced template a.b.c is not found in the context around test.txt: Line 1 Column 3"));
+
+        // ${xxx: #a.b.*}模板未找到
+        s = "";
+        s += "  ${xxx: #a.b.*}";
+
+        loadTemplateFailure(s.getBytes(), "test.txt");
+        assertThat(parseError,
+                exception("Referenced template a.b is not found in the context around test.txt: Line 1 Column 3"));
+
+        s = "";
+        s += "  ${xxx: #a.b.*}\n";
+        s += "#a\n";
+        s += "#end\n";
+
+        loadTemplateFailure(s.getBytes(), "test.txt");
+        assertThat(parseError,
+                exception("Referenced template a.b is not found in the context around test.txt: Line 1 Column 3"));
     }
 
     @Test
@@ -271,6 +340,17 @@ public class TemplateParserTests extends AbstractTemplateTests {
     }
 
     @Test
+    public void test04_include_template_sub() {
+        loadTemplate("test04_include_template_sub.txt", 1, 1, 1);
+
+        IncludeTemplate include = (IncludeTemplate) template.nodes[0];
+
+        assertEquals("level1.level2.aaa", include.templateName);
+        assertSame(template.getSubTemplate("level1").getSubTemplate("level2").getSubTemplate("aaa"),
+                include.includedTemplate);
+    }
+
+    @Test
     public void test04_include_template_failure() throws Exception {
         String s;
 
@@ -303,6 +383,23 @@ public class TemplateParserTests extends AbstractTemplateTests {
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError,
                 exception("Included template abc is not found in the context around test.txt: Line 3 Column 12"));
+
+        // $#{a.b.c}模板未找到（子模板）
+        s = "$#{a.b.c}\n";
+
+        loadTemplateFailure(s.getBytes(), "test.txt");
+        assertThat(parseError,
+                exception("Included template a.b.c is not found in the context around test.txt: Line 1 Column 1"));
+
+        s = "$#{a.b.c}\n";
+        s += "#a\n";
+        s += "#b\n";
+        s += "#end\n";
+        s += "#end\n";
+
+        loadTemplateFailure(s.getBytes(), "test.txt");
+        assertThat(parseError,
+                exception("Included template a.b.c is not found in the context around test.txt: Line 1 Column 1"));
     }
 
     @Test

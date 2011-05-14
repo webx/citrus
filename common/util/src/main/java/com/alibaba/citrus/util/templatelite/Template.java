@@ -39,6 +39,7 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.Formatter;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
@@ -104,6 +105,22 @@ import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
  * ${placeholder: #subtpl, #subtpl}
  * </pre>
  * 
+ * <p>
+ * 也可引用多级子模板作为参数。
+ * </p>
+ * 
+ * <pre>
+ * ${placeholder: #tpl1.subtpl2.suptpl3}
+ * </pre>
+ * 
+ * <p>
+ * 使用.*可达到引用一组模板的作用。
+ * </p>
+ * 
+ * <pre>
+ * ${placeholder: #tpl1.*}
+ * </pre>
+ * 
  * </dd>
  * <dt>包含子模板</dt>
  * <dd>
@@ -113,6 +130,14 @@ import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
  * 
  * <pre>
  * $#{subtpl}
+ * </pre>
+ * 
+ * <p>
+ * 也可包含多级子模板。
+ * </p>
+ * 
+ * <pre>
+ * $#{tpl.subtpl1.subtpl2}
  * </pre>
  * 
  * </dd>
@@ -576,7 +601,7 @@ public final class Template {
         private final static PlaceholderParameter[] EMPTY_PARAMS = new PlaceholderParameter[0];
         final String name;
         final String paramsString;
-        final PlaceholderParameter[] params;
+        PlaceholderParameter[] params;
 
         public Placeholder(String name, String paramsString, Location location) {
             super(location);
@@ -712,7 +737,7 @@ public final class Template {
         private final static Pattern DIRECTIVE_PATTERN = Pattern.compile("\\\\(\\$|\\$#|#|#@|\\\\)" // group 1
                 + "|(\\s*##)" // group 2
                 + "|\\$\\{\\s*([A-Za-z]\\w*)(\\s*:([^\\}]*))?\\s*\\}" // group 3, 4, 5
-                + "|\\$#\\{\\s*([A-Za-z]\\w*)\\s*\\}" // group 6
+                + "|\\$#\\{\\s*([A-Za-z][\\.\\w]*)\\s*\\}" // group 6
                 + "|(\\s*)#([A-Za-z]\\w*)(\\s*(##.*)?)" // group 7, 8, 9, 10
                 + "|(\\s*)#@\\s*([A-Za-z]\\w*)(\\s+(.*?))?(##.*)?$" // group 11, 12, 13, 14, 15
         );
@@ -993,52 +1018,78 @@ public final class Template {
         private void postProcessNode(Node node, LinkedList<Map<String, Template>> templateStack) {
             // $#{includeTemplate}
             if (node instanceof IncludeTemplate) {
-                String templateName = ((IncludeTemplate) node).templateName;
-                Template template = findTemplate(templateName, templateStack);
-
-                if (template == null) {
-                    throw new TemplateParseException("Included template " + templateName
-                            + " is not found in the context around " + ((IncludeTemplate) node).location);
-                }
-
-                ((IncludeTemplate) node).includedTemplate = template;
+                ((IncludeTemplate) node).includedTemplate = findTemplate(((IncludeTemplate) node).templateName,
+                        templateStack, node.location, "Included");
             }
 
             // ${placeholder: #templateRef}
             if (node instanceof Placeholder && !isEmptyArray(((Placeholder) node).params)) {
+                List<PlaceholderParameter> expandedParameters = createLinkedList();
+
                 for (PlaceholderParameter param : ((Placeholder) node).params) {
                     if (param.isTemplateReference()) {
                         String templateName = param.getTemplateName();
-                        Template template = findTemplate(templateName, templateStack);
 
-                        if (template == null) {
-                            throw new TemplateParseException("Referenced template " + templateName
-                                    + " is not found in the context around " + ((Placeholder) node).location);
+                        if (templateName.endsWith(".*")) {
+                            String parentTemplateName = templateName
+                                    .substring(0, templateName.length() - ".*".length());
+
+                            Template parentTemplate = findTemplate(parentTemplateName, templateStack,
+                                    ((Placeholder) node).location, "Referenced");
+
+                            for (Template template : parentTemplate.subtemplates.values()) {
+                                PlaceholderParameter newParam = new PlaceholderParameter("#" + parentTemplateName + "."
+                                        + template.getName());
+                                newParam.templateReference = template;
+                                expandedParameters.add(newParam);
+                            }
+                        } else {
+                            param.templateReference = findTemplate(templateName, templateStack,
+                                    ((Placeholder) node).location, "Referenced");
+
+                            expandedParameters.add(param);
                         }
-
-                        param.templateReference = template;
+                    } else {
+                        expandedParameters.add(param);
                     }
                 }
+
+                ((Placeholder) node).params = expandedParameters.toArray(new PlaceholderParameter[expandedParameters
+                        .size()]);
             }
         }
 
-        private Template findTemplate(String templateName, LinkedList<Map<String, Template>> templateStack) {
-            for (Map<String, Template> templates : templateStack) {
-                Template template = templates.get(templateName);
+        private Template findTemplate(String templateName, LinkedList<Map<String, Template>> templateStack,
+                                      Location location, String messagePrefix) {
+            String[] parts = split(templateName, ".");
+            Template template = null;
 
-                if (template != null) {
-                    return template;
+            if (parts.length >= 1) {
+                for (Map<String, Template> templates : templateStack) {
+                    template = templates.get(parts[0]);
+
+                    if (template != null) {
+                        break;
+                    }
+                }
+
+                // 在predefined templates中找
+                if (template == null) {
+                    template = predefinedTemplates.get(parts[0]);
+                }
+
+                // 取子模板
+                for (int i = 1; i < parts.length && template != null; i++) {
+                    template = template.getSubTemplate(parts[i]);
                 }
             }
 
-            // 在predefined templates中找
-            Template template = predefinedTemplates.get(templateName);
-
-            if (template != null) {
-                return template;
+            if (template == null) {
+                throw new TemplateParseException(messagePrefix + " template " + templateName
+                        + " is not found in the context around " + location);
             }
 
-            return null;
+            return template;
         }
 
         /**

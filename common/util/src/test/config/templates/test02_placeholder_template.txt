@@ -1,7 +1,9 @@
-${for: #aaa, #bbb, ccc}
+${for: #aaa, #bbb.ccc, ccc}
 
 #aaa
 #end
 
 #bbb
+  #ccc
+  #end
 #end
