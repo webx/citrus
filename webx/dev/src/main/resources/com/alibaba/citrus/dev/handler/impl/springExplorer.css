@@ -6,6 +6,7 @@
 
 #webx-resolvable-deps ol {
     margin: 1em 0 0.2em 0;
+    padding: 0 0 0 2em;
 }
 
 #webx-resolvable-deps li {
@@ -17,77 +18,7 @@
 }
 
 #webx-resolvable-deps li pre {
-    border: solid thin grey;
+    border: solid 1px grey;
     margin: 0.5em 0 0 0;
     padding: 0.5em;
-}
-
-#webx-beans {
-    border: solid thin grey;
-    margin: 0;
-    padding: 0.5em;
-}
-
-#webx-beans ul {
-    list-style: none;
-    margin: 0;
-    padding: 0 0 0 2em;
-}
-
-#webx-beans li p {
-    margin: 0 0 0 2em;
-    padding: 0;
-    text-indent: -2em;
-}
-
-#webx-beans ol {
-    margin: 0;
-    padding: 0 0 0 2em;
-}
-
-#webx-beans ol>li {
-    margin: 0.5em 0;
-}
-
-.hl-annotation {
-    color:grey;
-    font-style:italic;
-}
-
-.hl-keyword {
-    color:#973074;
-    font-weight: bolder;
-}
-
-.hl-variable {
-    color:#0000c0;
-}
-
-.hl-tag {
-    color:#000096;
-}
-
-.hl-attribute {
-    color: #F5844C;
-}
-
-.hl-value {
-    color: #993300;
-}
-
-.hl-package {
-}
-
-.hl-class {
-    font-weight: bolder;
-}
-
-.hl-anchor {
-    font-weight: bolder;
-}
-
-a.hl-ref {
-    text-decoration: underline;
-    color: blue;
-    font-weight: bolder;
 }

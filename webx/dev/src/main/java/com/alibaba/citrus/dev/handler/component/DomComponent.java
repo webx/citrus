@@ -27,31 +27,17 @@ public class DomComponent extends PageComponent {
     }
 
     public void visitTemplate(RequestHandlerContext context, Element element) {
-        visitTemplate(context, element, false);
-    }
-
-    public void visitTemplate(RequestHandlerContext context, Element element, boolean withList) {
-        getTemplate().accept(new ElementVisitor(context, element, withList));
+        getTemplate().accept(new ElementVisitor(context, element));
     }
 
     @SuppressWarnings("unused")
     private class ElementVisitor extends AbstractVisitor {
         private final Element element;
-        private final boolean withList;
         private Attribute attr;
 
-        public ElementVisitor(RequestHandlerContext context, Element element, boolean withList) {
+        public ElementVisitor(RequestHandlerContext context, Element element) {
             super(context, DomComponent.this);
             this.element = element;
-            this.withList = withList;
-        }
-
-        public void visitDom(Template withListTemplate, Template noListTemplate) {
-            if (withList) {
-                withListTemplate.accept(this);
-            } else {
-                noListTemplate.accept(this);
-            }
         }
 
         public void visitElement(Template elementWithSubElementsTemplate, Template elementSelfClosedTemplate,
@@ -68,7 +54,7 @@ public class DomComponent extends PageComponent {
         public void visitSubElements(Template elementWithSubElementsTemplate, Template elementSelfClosedTemplate,
                                      Template elementWithTextTemplate) {
             for (Element subElement : element.subElements()) {
-                new ElementVisitor(context, subElement, false).visitElement(elementWithSubElementsTemplate,
+                new ElementVisitor(context, subElement).visitElement(elementWithSubElementsTemplate,
                         elementSelfClosedTemplate, elementWithTextTemplate);
             }
         }
@@ -144,6 +130,7 @@ public class DomComponent extends PageComponent {
                 int i = 0;
                 for (String name : ((AnchorValue) value).getNames()) {
                     context().put("anchorName", toId(name));
+                    context().put("anchorNameDisplay", name);
                     this.withSep = i++ > 0;
 
                     template.accept(this);
@@ -157,6 +144,7 @@ public class DomComponent extends PageComponent {
                 int i = 0;
                 for (String name : ((RefValue) value).getNames()) {
                     context().put("refName", toId(name));
+                    context().put("refNameDisplay", name);
                     this.withSep = i++ > 0;
 
                     template.accept(this);

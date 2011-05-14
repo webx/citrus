@@ -1,20 +1,25 @@
 @charset "UTF-8";
 
-ul.webx-dom {
+.webx-dom {
+    border: solid 1px grey;
+    margin: 0;
+    padding: 0 0 0 2em;
+}
+
+.webx-dom ul {
     list-style: none;
     margin: 0;
     padding: 0 0 0 2em;
 }
 
-ul.webx-dom li p {
+.webx-dom li p {
     margin: 0 0 0 2em;
     padding: 0;
     text-indent: -2em;
 }
 
-ul.webx-dom {
-    margin: 0;
-    padding: 0;
+.webx-dom>li {
+    margin: 0.5em 0;
 }
 
 .hl-annotation {
@@ -41,4 +46,21 @@ ul.webx-dom {
 
 .hl-value {
     color: #993300;
+}
+
+.hl-package {
+}
+
+.hl-class {
+    font-weight: bolder;
+}
+
+.hl-anchor {
+    font-weight: bolder;
+}
+
+a.hl-ref {
+    text-decoration: underline;
+    color: blue;
+    font-weight: bolder;
 }

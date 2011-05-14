@@ -6,17 +6,9 @@
 #@ whitespace collapse
 ## --------------------------
 
-${dom: #withList, #noList}
-
-#withList
-  <ul class="webx-dom">
-    ${element: #elements.*}
-  </ul>
-#end
-
-#noList
-  ${element: #elements.*}
-#end
+## <ol class="webx-dom">
+     ${element: #elements.*}
+## </ol>
 
 ## 模板组：三种形态的elements
 #elements
@@ -64,11 +56,11 @@ ${dom: #withList, #noList}
   #end
 
   #anchorValue
-    ${sep: #sep}<a id="${anchorName}"><!--${anchorName}--></a><span class="hl-anchor">${anchorName}</span>
+    ${sep: #sep}<a id="${anchorName}"><!--${anchorNameDisplay}--></a><span class="hl-anchor">${anchorNameDisplay}</span>
   #end
   
   #refValue
-    ${sep: #sep}<a href="#${refName}" class="hl-ref">${refName}</a>
+    ${sep: #sep}<a href="#${refName}" class="hl-ref">${refNameDisplay}</a>
   #end
 #end
 
