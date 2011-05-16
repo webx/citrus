@@ -8,14 +8,14 @@ function registerDomElementHandle() {
         var file = imgSrc.substring(index);
         var prefix = imgSrc.substring(0, index);
 
-        if (file == 'open.gif') {
+        if (file == 'open.png') {
             $(expanded).hide();
             $(collapsed).style.display = 'inline';
-            imgObj.src = prefix + 'close.gif';
+            imgObj.src = prefix + 'close.png';
         } else {
             $(expanded).show();
             $(collapsed).style.display = 'none';
-            imgObj.src = prefix + 'open.gif';
+            imgObj.src = prefix + 'open.png';
         }
     };
 
