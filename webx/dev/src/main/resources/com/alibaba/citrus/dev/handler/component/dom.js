@@ -9,11 +9,11 @@ function registerDomElementHandle() {
         var prefix = imgSrc.substring(0, index);
 
         if (file == 'open.png') {
-            $(expanded).hide();
+            Effect.SlideUp(expanded);
             $(collapsed).style.display = 'inline';
             imgObj.src = prefix + 'close.png';
         } else {
-            $(expanded).show();
+            Effect.SlideDown(expanded);
             $(collapsed).style.display = 'none';
             imgObj.src = prefix + 'open.png';
         }

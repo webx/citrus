@@ -12,9 +12,10 @@ function registerExceptionHandle() {
 
                     if (file == 'open.gif') {
                         $(details).hide();
+                        Effect.SlideUp(details);
                         imgObj.src = prefix + 'close.gif';
                     } else {
-                        $(details).show();
+                        Effect.SlideDown(details);
                         imgObj.src = prefix + 'open.gif';
                     }
                 });

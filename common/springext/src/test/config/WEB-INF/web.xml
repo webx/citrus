@@ -11,6 +11,16 @@
             com.alibaba.citrus.springext.support.context.XmlWebApplicationContextTests$NoopServlet</servlet-class>
     </servlet>
 
+    <filter>
+        <filter-name>jsfilter</filter-name>
+        <filter-class>com.alibaba.citrus.springext.export.SchemaExporterWEBTests$JavaScriptFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>jsfilter</filter-name>
+        <url-pattern>*.js</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>schema</servlet-name>
         <servlet-class>com.alibaba.citrus.springext.export.SchemaExporterServlet</servlet-class>

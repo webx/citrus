@@ -11,9 +11,19 @@
     </listener>
 
     <filter>
+        <filter-name>jsfilter</filter-name>
+        <filter-class>com.alibaba.citrus.webx.AbstractWebxTests$JavaScriptFilter</filter-class>
+    </filter>
+
+    <filter>
         <filter-name>webx</filter-name>
         <filter-class>com.alibaba.citrus.webx.servlet.WebxFrameworkFilter</filter-class>
     </filter>
+
+    <filter-mapping>
+        <filter-name>jsfilter</filter-name>
+        <url-pattern>*.js</url-pattern>
+    </filter-mapping>
 
     <filter-mapping>
         <filter-name>webx</filter-name>

@@ -23,7 +23,16 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -115,5 +124,20 @@ public class SchemaExporterWEBTests {
         byte[] fileContent = StreamUtil.readBytes(getClass().getResource("file.gif").openStream(), true).toByteArray();
 
         assertArrayEquals(fileContent, content);
+    }
+
+    public static class JavaScriptFilter implements Filter {
+        public void init(FilterConfig filterConfig) throws ServletException {
+        }
+
+        public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
+                ServletException {
+            if (!((HttpServletRequest) request).getRequestURI().endsWith("scriptaculous.js")) {
+                chain.doFilter(request, response);
+            }
+        }
+
+        public void destroy() {
+        }
     }
 }

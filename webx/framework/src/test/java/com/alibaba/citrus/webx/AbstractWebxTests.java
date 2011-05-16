@@ -28,7 +28,12 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -197,6 +202,21 @@ public abstract class AbstractWebxTests {
             } else {
                 return overrideQueryString;
             }
+        }
+    }
+
+    public static class JavaScriptFilter implements Filter {
+        public void init(FilterConfig filterConfig) throws ServletException {
+        }
+
+        public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
+                ServletException {
+            if (!((HttpServletRequest) request).getRequestURI().endsWith("scriptaculous.js")) {
+                chain.doFilter(request, response);
+            }
+        }
+
+        public void destroy() {
         }
     }
 }
