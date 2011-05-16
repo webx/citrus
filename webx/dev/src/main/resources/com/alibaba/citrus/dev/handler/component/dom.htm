@@ -14,9 +14,14 @@
 #elements
   #withSubElements
     <li>
-      <p>$#{elementStart}&gt;</p>
-      <ul>${subElements: #elements.*}</ul>
-      <p><span class="hl-tag">&lt;/${elementName}&gt;</span></p>
+      <p>$#{elementStart}<span class="hl-tag">&gt;</span>
+        <img id="handle-${elementId}" class="handle-element" src="${componentUrl:images/open.gif}" alt="" title="Click to open/close sub-elements" />
+        <span id="collapsed-${elementId}" class="collapsed-element">...<span class="hl-tag">&lt;/${elementName}&gt;</span></span>
+      </p>
+      <div id="expanded-${elementId}" class="expanded-element">
+        <ul>${subElements: #elements.*}</ul>
+        <p><span class="hl-tag">&lt;/${elementName}&gt;</span></p>
+      </div>
     </li>
   #end
   

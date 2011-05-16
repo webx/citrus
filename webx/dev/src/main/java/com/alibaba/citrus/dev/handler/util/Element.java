@@ -5,8 +5,11 @@ import static com.alibaba.citrus.util.CollectionUtil.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Element {
+    private final static AtomicLong counter = new AtomicLong();
+    private final String id;
     private final String name;
     final List<Element> subElements = createLinkedList();
     private final Map<String, Attribute> attrs = createArrayHashMap();
@@ -14,6 +17,11 @@ public class Element {
 
     public Element(String name) {
         this.name = name;
+        this.id = name + "-" + counter.addAndGet(1L);
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getName() {

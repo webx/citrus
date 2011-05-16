@@ -60,6 +60,10 @@ public class DomComponent extends PageComponent {
             }
         }
 
+        public void visitElementId() {
+            out().print(escapeHtml(element.getId()));
+        }
+
         public void visitElementName() {
             out().print(escapeHtml(element.getName()));
         }

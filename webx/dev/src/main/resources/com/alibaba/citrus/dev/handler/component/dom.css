@@ -22,6 +22,10 @@
     margin: 0.5em 0;
 }
 
+.webx-dom .collapsed-element {
+    display: none;
+}
+
 .hl-annotation {
     color:grey;
     font-style:italic;
