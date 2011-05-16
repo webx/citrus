@@ -1,5 +1,6 @@
 package com.alibaba.citrus.dev.handler.impl;
 
+import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringEscapeUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
@@ -22,6 +23,7 @@ import com.alibaba.citrus.dev.handler.component.TabsComponent.TabItem;
 import com.alibaba.citrus.dev.handler.util.BeanDefinitionReverseEngine;
 import com.alibaba.citrus.dev.handler.util.Element;
 import com.alibaba.citrus.util.ClassUtil;
+import com.alibaba.citrus.util.FileUtil;
 import com.alibaba.citrus.util.templatelite.Template;
 import com.alibaba.citrus.webx.WebxComponent;
 import com.alibaba.citrus.webx.WebxComponents;
@@ -49,9 +51,9 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
         String contextName = visitor.currentContextName;
 
         if (contextName == null) {
-            return visitor.currentFunctionName + " - Root Context";
+            return visitor.currentFunctionName + " - Root Context - " + visitor.getConfigLocationString();
         } else {
-            return visitor.currentFunctionName + " - " + contextName;
+            return visitor.currentFunctionName + " - " + contextName + " - " + visitor.getConfigLocationString();
         }
     }
 
@@ -97,6 +99,7 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
         private final WebxComponent currentComponent;
         private final String currentFunctionName;
         private final AbstractApplicationContext appcontext;
+        private final String[] configLocations;
         private final DefaultListableBeanFactory factory;
         private final Map<Class<?>, Object> resolvableDependencies;
         private Class<?> type;
@@ -130,6 +133,19 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
             this.appcontext = (AbstractApplicationContext) currentComponent.getApplicationContext();
             this.factory = (DefaultListableBeanFactory) appcontext.getBeanFactory();
 
+            // 取得config locations
+            String[] locations;
+
+            try {
+                locations = normalizeConfigLocations(String[].class.cast(getAccessibleMethod(
+                        this.appcontext.getClass(), "getConfigLocations", EMPTY_CLASS_ARRAY).invoke(this.appcontext,
+                        EMPTY_OBJECT_ARRAY)));
+            } catch (Exception e) {
+                locations = EMPTY_STRING_ARRAY;
+            }
+
+            this.configLocations = locations;
+
             // 取得resolvableDependencies
             this.resolvableDependencies = getResolvableDependencies();
         }
@@ -146,6 +162,18 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
             }
 
             return deps;
+        }
+
+        private String getConfigLocationString() {
+            return join(configLocations, ", ");
+        }
+
+        private String[] normalizeConfigLocations(String[] locations) {
+            for (int i = 0; i < locations.length; i++) {
+                locations[i] = FileUtil.normalizeAbsolutePath(locations[i]);
+            }
+
+            return locations;
         }
 
         public void visitTabs() {
@@ -214,6 +242,10 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
 
         public void visitContextName() {
             out().print(currentContextName == null ? "Root Context" : currentContextName);
+        }
+
+        public void visitConfigLocations() {
+            out().print(getConfigLocationString());
         }
 
         public void visitExplorer(Template resolvableDependenciesTemplate, Template beansTemplate) {

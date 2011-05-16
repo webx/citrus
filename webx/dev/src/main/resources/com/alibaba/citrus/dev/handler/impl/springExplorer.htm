@@ -10,7 +10,7 @@ ${tabs}
 ${explorer: #resolvableDependencies, #beans}
 
 #resolvableDependencies
-  <h1>${resolvableDependencyCount} resolvable dependencies in ${contextName}</h1>
+  <h1>${resolvableDependencyCount} resolvable dependencies in ${contextName} - ${configLocations}</h1>
   <div id="webx-resolvable-deps">
     <ol>
       ${resolvableDependency: #resolvableDependency}
@@ -27,7 +27,7 @@ ${explorer: #resolvableDependencies, #beans}
 #end
 
 #beans
-  <h1>${beanCount} beans in ${contextName}</h1>
+  <h1>${beanCount} beans in ${contextName} - ${configLocations}</h1>
   <ol id="webx-beans" class="webx-dom">
     ${bean}
   </ol>
