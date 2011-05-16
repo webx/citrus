@@ -28,8 +28,16 @@
   
   #withText
     <li>
-      <p>$#{elementStart}&gt;<span>${elementText: #styledTexts.*}</span><span class="hl-tag">&lt;/${elementName}&gt;</span></p>
+      ${elementTexts: #singleLineText, #multiLineText}
     </li>
+    
+    #singleLineText
+      <p>$#{elementStart}&gt;<span class="hl-text">${elementText: #styledTexts.*}</span><span class="hl-tag">&lt;/${elementName}&gt;</span></p>
+    #end
+    
+    #multiLineText
+      <p>$#{elementStart}&gt;</p><pre class="hl-cdata">&lt;![CDATA[${elementText: #styledTexts.*}]]&gt;</pre><p><span class="hl-tag">&lt;/${elementName}&gt;</span></p>
+    #end
   #end
 #end
 

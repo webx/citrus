@@ -14,6 +14,10 @@ public abstract class StyledValue {
         return text;
     }
 
+    public boolean hasControlChars() {
+        return BeanDefinitionReverseEngine.hasControlChars(getText());
+    }
+
     @Override
     public String toString() {
         return text;

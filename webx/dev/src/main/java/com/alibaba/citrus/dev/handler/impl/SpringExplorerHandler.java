@@ -21,6 +21,7 @@ import com.alibaba.citrus.dev.handler.component.TabsComponent;
 import com.alibaba.citrus.dev.handler.component.TabsComponent.TabItem;
 import com.alibaba.citrus.dev.handler.util.BeanDefinitionReverseEngine;
 import com.alibaba.citrus.dev.handler.util.Element;
+import com.alibaba.citrus.util.ClassUtil;
 import com.alibaba.citrus.util.templatelite.Template;
 import com.alibaba.citrus.webx.WebxComponent;
 import com.alibaba.citrus.webx.WebxComponents;
@@ -264,7 +265,7 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
         }
 
         public void visitTypeName() {
-            out().print(type.getSimpleName());
+            out().print(ClassUtil.getSimpleClassName(type));
         }
 
         public void visitVarName() {
@@ -279,7 +280,7 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
 
         public void visitValueTypeName() {
             if (value != null) {
-                out().print(value.getClass().getSimpleName());
+                out().print(ClassUtil.getSimpleClassName(value.getClass()));
             }
         }
 

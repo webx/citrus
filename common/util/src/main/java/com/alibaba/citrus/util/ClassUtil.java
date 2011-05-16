@@ -258,6 +258,31 @@ public class ClassUtil {
     }
 
     /**
+     * 取得指定对象所属的类的简单类名，不包括package名。
+     * <p>
+     * 此方法可以正确显示数组和内联类的名称。 例如：
+     * 
+     * <pre>
+     *  ClassUtil.getSimpleClassNameForObject(Boolean.TRUE) = "Boolean"
+     *  ClassUtil.getSimpleClassNameForObject(new Boolean[10]) = "Boolean[]"
+     *  ClassUtil.getSimpleClassNameForObject(new int[1][2]) = "int[][]"
+     * </pre>
+     * <p>
+     * 本方法和<code>Class.getSimpleName()</code>的区别在于，本方法会保留inner类的外层类名称。
+     * </p>
+     * 
+     * @param object 要查看的对象
+     * @return 简单类名，如果对象为 <code>null</code> ，则返回 <code>null</code>
+     */
+    public static String getSimpleClassNameForObject(Object object, boolean processInnerClass) {
+        if (object == null) {
+            return null;
+        }
+
+        return getSimpleClassName(object.getClass().getName(), processInnerClass);
+    }
+
+    /**
      * 取得简单类名，不包括package名。
      * <p>
      * 此方法可以正确显示数组和内联类的名称。 例如：
@@ -284,6 +309,32 @@ public class ClassUtil {
     }
 
     /**
+     * 取得简单类名，不包括package名。
+     * <p>
+     * 此方法可以正确显示数组和内联类的名称。 例如：
+     * 
+     * <pre>
+     *  ClassUtil.getSimpleClassName(Boolean.class) = "Boolean"
+     *  ClassUtil.getSimpleClassName(Boolean[].class) = "Boolean[]"
+     *  ClassUtil.getSimpleClassName(int[][].class) = "int[][]"
+     *  ClassUtil.getSimpleClassName(Map.Entry.class) = "Map.Entry"
+     * </pre>
+     * <p>
+     * 本方法和<code>Class.getSimpleName()</code>的区别在于，本方法会保留inner类的外层类名称。
+     * </p>
+     * 
+     * @param clazz 要查看的类
+     * @return 简单类名，如果类为 <code>null</code> ，则返回 <code>null</code>
+     */
+    public static String getSimpleClassName(Class<?> clazz, boolean proccessInnerClass) {
+        if (clazz == null) {
+            return null;
+        }
+
+        return getSimpleClassName(clazz.getName(), proccessInnerClass);
+    }
+
+    /**
      * 取得类名，不包括package名。
      * <p>
      * 此方法可以正确显示数组和内联类的名称。 例如：
@@ -302,25 +353,51 @@ public class ClassUtil {
      * @return 简单类名，如果类名为空，则返回 <code>null</code>
      */
     public static String getSimpleClassName(String javaClassName) {
+        return getSimpleClassName(javaClassName, true);
+    }
+
+    /**
+     * 取得类名，不包括package名。
+     * <p>
+     * 此方法可以正确显示数组和内联类的名称。 例如：
+     * 
+     * <pre>
+     *  ClassUtil.getSimpleClassName(Boolean.class.getName()) = "Boolean"
+     *  ClassUtil.getSimpleClassName(Boolean[].class.getName()) = "Boolean[]"
+     *  ClassUtil.getSimpleClassName(int[][].class.getName()) = "int[][]"
+     *  ClassUtil.getSimpleClassName(Map.Entry.class.getName()) = "Map.Entry"
+     * </pre>
+     * <p>
+     * 本方法和<code>Class.getSimpleName()</code>的区别在于，本方法会保留inner类的外层类名称。
+     * </p>
+     * 
+     * @param javaClassName 要查看的类名
+     * @return 简单类名，如果类名为空，则返回 <code>null</code>
+     */
+    public static String getSimpleClassName(String javaClassName, boolean proccesInnerClass) {
         String friendlyClassName = toFriendlyClassName(javaClassName, false, null);
 
         if (friendlyClassName == null) {
             return javaClassName;
         }
 
-        char[] chars = friendlyClassName.toCharArray();
-        int beginIndex = 0;
+        if (proccesInnerClass) {
+            char[] chars = friendlyClassName.toCharArray();
+            int beginIndex = 0;
 
-        for (int i = chars.length - 1; i >= 0; i--) {
-            if (chars[i] == '.') {
-                beginIndex = i + 1;
-                break;
-            } else if (chars[i] == '$') {
-                chars[i] = '.';
+            for (int i = chars.length - 1; i >= 0; i--) {
+                if (chars[i] == '.') {
+                    beginIndex = i + 1;
+                    break;
+                } else if (chars[i] == '$') {
+                    chars[i] = '.';
+                }
             }
-        }
 
-        return new String(chars, beginIndex, chars.length - beginIndex);
+            return new String(chars, beginIndex, chars.length - beginIndex);
+        } else {
+            return friendlyClassName.substring(friendlyClassName.lastIndexOf(".") + 1);
+        }
     }
 
     /**

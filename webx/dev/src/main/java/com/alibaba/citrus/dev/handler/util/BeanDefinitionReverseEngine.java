@@ -411,7 +411,7 @@ public class BeanDefinitionReverseEngine {
                 simpleValue = keyOrValue.toString();
             }
 
-            if (simpleValue != null && containsNone(simpleValue, controlChars)) {
+            if (simpleValue != null && !hasControlChars(simpleValue)) {
                 entryElement.addAttribute(valueAttrName, simpleValue);
                 return;
             }
@@ -423,18 +423,6 @@ public class BeanDefinitionReverseEngine {
         } else {
             value(entryElement, keyOrValue, false, false, null, null);
         }
-    }
-
-    private final static char[] controlChars;
-
-    static {
-        StringBuilder buf = new StringBuilder();
-
-        for (int i = 0; i < ' '; i++) {
-            buf.append((char) i);
-        }
-
-        controlChars = buf.toString().toCharArray();
     }
 
     private void simpleValue(Element element, StyledValue value, String type, boolean supportValueAttribute,
@@ -451,7 +439,7 @@ public class BeanDefinitionReverseEngine {
             }
         }
 
-        if (type == null && supportValueAttribute && containsNone(value.getText(), controlChars)) {
+        if (type == null && supportValueAttribute && !hasControlChars(value.getText())) {
             element.addAttribute("value", value);
             return;
         }
@@ -526,6 +514,22 @@ public class BeanDefinitionReverseEngine {
                 }
             }
         }
+    }
+
+    private final static char[] controlChars;
+
+    static {
+        StringBuilder buf = new StringBuilder();
+
+        for (int i = 0; i < ' '; i++) {
+            buf.append((char) i);
+        }
+
+        controlChars = buf.toString().toCharArray();
+    }
+
+    static boolean hasControlChars(String text) {
+        return !containsNone(text, controlChars);
     }
 
     public final Element toDom() {

@@ -48,6 +48,13 @@
     color: #993300;
 }
 
+.hl-text {
+}
+
+pre.hl-cdata {
+    color: green;
+}
+
 .hl-package {
 }
 

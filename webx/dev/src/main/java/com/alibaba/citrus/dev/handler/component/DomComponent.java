@@ -14,6 +14,7 @@ import com.alibaba.citrus.dev.handler.util.RawValue;
 import com.alibaba.citrus.dev.handler.util.RefValue;
 import com.alibaba.citrus.dev.handler.util.StyledValue;
 import com.alibaba.citrus.dev.handler.util.TextValue;
+import com.alibaba.citrus.util.ClassUtil;
 import com.alibaba.citrus.util.internal.webpagelite.PageComponent;
 import com.alibaba.citrus.util.internal.webpagelite.PageComponentRegistry;
 import com.alibaba.citrus.util.templatelite.FallbackTextWriter;
@@ -78,6 +79,14 @@ public class DomComponent extends PageComponent {
             new StyledValueVisitor(attr.getValue(), out()).visitStyledValue(styledTextTemplates);
         }
 
+        public void visitElementTexts(Template singleLineTemplate, Template multiLineTemplate) {
+            if (element.getText().hasControlChars()) {
+                multiLineTemplate.accept(this);
+            } else {
+                singleLineTemplate.accept(this);
+            }
+        }
+
         public void visitElementText(Template[] styledTextTemplates) {
             new StyledValueVisitor(element.getText(), out()).visitStyledValue(styledTextTemplates);
         }
@@ -108,7 +117,7 @@ public class DomComponent extends PageComponent {
             else if (value instanceof RawValue) {
                 template = styledTextTemplates[1];
                 context().put("packageName", ((RawValue) value).getRawType().getPackage().getName());
-                context().put("className", ((RawValue) value).getRawType().getSimpleName());
+                context().put("className", ClassUtil.getSimpleClassName(((RawValue) value).getRawType()));
                 context().put("value", ((RawValue) value).getRawToString());
 
                 template.accept(this);

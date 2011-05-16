@@ -124,47 +124,52 @@ public class ClassUtilTests {
         assertEquals("  ", ClassUtil.getSimpleClassName("  "));
 
         // 普通类
-        assertGetSimpleClassName("ClassUtil", new ClassUtil());
-        assertGetSimpleClassName("String", "hello");
+        assertGetSimpleClassName("ClassUtil", new ClassUtil(), true);
+        assertGetSimpleClassName("String", "hello", true);
 
         // 内联类
-        assertGetSimpleClassName("ClassUtilTests.Inner", new Inner());
+        assertGetSimpleClassName("ClassUtilTests.Inner", new Inner(), true);
+        assertGetSimpleClassName("ClassUtilTests$Inner", new Inner(), false);
 
         // 内联类/本地类/匿名类
-        assertGetSimpleClassName("ClassUtilTests.Inner", new Inner());
-        assertGetSimpleClassName("ClassUtilTests.Inner[]", new Inner[0]);
+        assertGetSimpleClassName("ClassUtilTests.Inner", new Inner(), true);
+        assertGetSimpleClassName("ClassUtilTests$Inner[]", new Inner[0], false);
 
         class Local {
         }
 
-        assertGetSimpleClassName("ClassUtilTests.2Local", new Local());
-        assertGetSimpleClassName("ClassUtilTests.2Local[]", new Local[0]);
+        assertGetSimpleClassName("ClassUtilTests.2Local", new Local(), true);
+        assertGetSimpleClassName("ClassUtilTests$2Local", new Local(), false);
+        assertGetSimpleClassName("ClassUtilTests.2Local[]", new Local[0], true);
+        assertGetSimpleClassName("ClassUtilTests$2Local[]", new Local[0], false);
 
         Object anonymous = new Serializable() {
             private static final long serialVersionUID = 4375828012902534105L;
         };
 
-        assertGetSimpleClassName("ClassUtilTests.2", anonymous);
+        assertGetSimpleClassName("ClassUtilTests.2", anonymous, true);
+        assertGetSimpleClassName("ClassUtilTests$2", anonymous, false);
 
         // 数组
-        assertGetSimpleClassName("int[]", new int[0]);
-        assertGetSimpleClassName("int[][]", new int[0][]);
-        assertGetSimpleClassName("long[]", new long[0]);
-        assertGetSimpleClassName("long[][]", new long[0][]);
-        assertGetSimpleClassName("short[]", new short[0]);
-        assertGetSimpleClassName("short[][]", new short[0][]);
-        assertGetSimpleClassName("byte[]", new byte[0]);
-        assertGetSimpleClassName("byte[][]", new byte[0][]);
-        assertGetSimpleClassName("char[]", new char[0]);
-        assertGetSimpleClassName("char[][]", new char[0][]);
-        assertGetSimpleClassName("boolean[]", new boolean[0]);
-        assertGetSimpleClassName("boolean[][]", new boolean[0][]);
-        assertGetSimpleClassName("float[]", new float[0]);
-        assertGetSimpleClassName("float[][]", new float[0][]);
-        assertGetSimpleClassName("double[]", new double[0]);
-        assertGetSimpleClassName("double[][]", new double[0][]);
-        assertGetSimpleClassName("String[]", new String[0]);
-        assertGetSimpleClassName("Map.Entry[]", new Map.Entry[0]);
+        assertGetSimpleClassName("int[]", new int[0], true);
+        assertGetSimpleClassName("int[][]", new int[0][], true);
+        assertGetSimpleClassName("long[]", new long[0], true);
+        assertGetSimpleClassName("long[][]", new long[0][], true);
+        assertGetSimpleClassName("short[]", new short[0], true);
+        assertGetSimpleClassName("short[][]", new short[0][], true);
+        assertGetSimpleClassName("byte[]", new byte[0], true);
+        assertGetSimpleClassName("byte[][]", new byte[0][], true);
+        assertGetSimpleClassName("char[]", new char[0], true);
+        assertGetSimpleClassName("char[][]", new char[0][], true);
+        assertGetSimpleClassName("boolean[]", new boolean[0], true);
+        assertGetSimpleClassName("boolean[][]", new boolean[0][], true);
+        assertGetSimpleClassName("float[]", new float[0], true);
+        assertGetSimpleClassName("float[][]", new float[0][], true);
+        assertGetSimpleClassName("double[]", new double[0], true);
+        assertGetSimpleClassName("double[][]", new double[0][], true);
+        assertGetSimpleClassName("String[]", new String[0], true);
+        assertGetSimpleClassName("Map.Entry[]", new Map.Entry[0], true);
+        assertGetSimpleClassName("Map$Entry[]", new Map.Entry[0], false);
 
         // 非法类名
         assertEquals("", ClassUtil.getSimpleClassName(""));
@@ -176,16 +181,33 @@ public class ClassUtilTests {
         assertEquals("[[Lx", ClassUtil.getSimpleClassName("[[Lx"));
     }
 
-    private void assertGetSimpleClassName(String result, Object object) {
-        // object
-        assertEquals(result, ClassUtil.getSimpleClassNameForObject(object));
+    private void assertGetSimpleClassName(String result, Object object, boolean proccessInnerClass) {
+        if (proccessInnerClass) {
+            // object
+            assertEquals(result, ClassUtil.getSimpleClassNameForObject(object));
+            assertEquals(result, ClassUtil.getSimpleClassNameForObject(object, true));
 
-        // class
-        assertEquals(result, ClassUtil.getSimpleClassName(object.getClass()));
+            // class
+            assertEquals(result, ClassUtil.getSimpleClassName(object.getClass()));
+            assertEquals(result, ClassUtil.getSimpleClassName(object.getClass(), true));
 
-        // class name
-        assertEquals(result, ClassUtil.getSimpleClassName(object.getClass().getName()));
-        assertEquals(result, ClassUtil.getSimpleClassName("  " + object.getClass().getName() + "  ")); // trim
+            // class name
+            assertEquals(result, ClassUtil.getSimpleClassName(object.getClass().getName()));
+            assertEquals(result, ClassUtil.getSimpleClassName(object.getClass().getName(), true));
+            assertEquals(result, ClassUtil.getSimpleClassName("  " + object.getClass().getName() + "  ")); // trim
+            assertEquals(result, ClassUtil.getSimpleClassName("  " + object.getClass().getName() + "  ", true)); // trim
+        } else {
+            // object
+            assertEquals(result, ClassUtil.getSimpleClassNameForObject(object, proccessInnerClass));
+
+            // class
+            assertEquals(result, ClassUtil.getSimpleClassName(object.getClass(), proccessInnerClass));
+
+            // class name
+            assertEquals(result, ClassUtil.getSimpleClassName(object.getClass().getName(), proccessInnerClass));
+            assertEquals(result,
+                    ClassUtil.getSimpleClassName("  " + object.getClass().getName() + "  ", proccessInnerClass)); // trim
+        }
     }
 
     @SuppressWarnings("unused")

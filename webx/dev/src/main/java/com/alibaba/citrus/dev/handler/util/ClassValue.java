@@ -15,7 +15,7 @@ public class ClassValue extends StyledValue {
     }
 
     public String getSimpleName() {
-        return ClassUtil.getSimpleClassName(className);
+        return ClassUtil.getSimpleClassName(className, false);
     }
 
     public String getClassName() {
