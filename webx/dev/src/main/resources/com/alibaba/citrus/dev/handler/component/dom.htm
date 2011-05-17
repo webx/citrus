@@ -6,9 +6,15 @@
 #@ whitespace collapse
 ## --------------------------
 
-## <ol class="webx-dom">
-     ${element: #elements.*}
-## </ol>
+<div class="webx-dom">
+  <div class="control-bar">
+    <span><a id="expand-all" href="#">Expand All</a></span>
+    <span><a id="collapse-all" href="#">Collapse All</a></span>
+  </div>
+  <ol>
+    ${elements: #elements.*}
+  </ol>
+</div>
 
 ## 模板组：三种形态的elements
 #elements

@@ -23,6 +23,7 @@ import com.alibaba.citrus.dev.handler.component.TabsComponent.TabItem;
 import com.alibaba.citrus.dev.handler.util.BeanDefinitionReverseEngine;
 import com.alibaba.citrus.dev.handler.util.Element;
 import com.alibaba.citrus.util.ClassUtil;
+import com.alibaba.citrus.util.ExceptionUtil;
 import com.alibaba.citrus.util.FileUtil;
 import com.alibaba.citrus.util.templatelite.Template;
 import com.alibaba.citrus.webx.WebxComponent;
@@ -324,7 +325,9 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
             out().print(factory.getBeanDefinitionCount());
         }
 
-        public void visitBean() {
+        public void visitBeans() {
+            List<Element> elements = createLinkedList();
+
             for (String name : getSortedBeanNames()) {
                 Element beanElement = null;
 
@@ -332,13 +335,15 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
                     RootBeanDefinition bd = getBeanDefinition(name);
                     beanElement = new BeanDefinitionReverseEngine(bd, name, factory.getAliases(name)).toDom();
                 } catch (Exception e) {
-                    out().print(escapeHtml(e.toString()));
+                    beanElement = new Element("bean").setText(ExceptionUtil.getStackTrace(e));
                 }
 
                 if (beanElement != null) {
-                    domComponent.visitTemplate(context, beanElement);
+                    elements.add(beanElement);
                 }
             }
+
+            domComponent.visitTemplate(context, elements);
         }
 
         private RootBeanDefinition getBeanDefinition(String name) throws Exception {

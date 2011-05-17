@@ -27,37 +27,40 @@ public class DomComponent extends PageComponent {
         super(registry, componentPath);
     }
 
-    public void visitTemplate(RequestHandlerContext context, Element element) {
-        getTemplate().accept(new ElementVisitor(context, element));
+    public void visitTemplate(RequestHandlerContext context, Iterable<Element> elements) {
+        getTemplate().accept(new ElementsVisitor(context, elements));
     }
 
     @SuppressWarnings("unused")
-    private class ElementVisitor extends AbstractVisitor {
-        private final Element element;
+    private class ElementsVisitor extends AbstractVisitor {
+        private final Iterable<Element> elements;
+        private Element element;
         private Attribute attr;
 
-        public ElementVisitor(RequestHandlerContext context, Element element) {
+        public ElementsVisitor(RequestHandlerContext context, Iterable<Element> elements) {
             super(context, DomComponent.this);
-            this.element = element;
+            this.elements = elements;
         }
 
-        public void visitElement(Template elementWithSubElementsTemplate, Template elementSelfClosedTemplate,
-                                 Template elementWithTextTemplate) {
-            if (element.hasSubElements()) {
-                elementWithSubElementsTemplate.accept(this);
-            } else if (element.getText() != null) {
-                elementWithTextTemplate.accept(this);
-            } else {
-                elementSelfClosedTemplate.accept(this);
+        public void visitElements(Template elementWithSubElementsTemplate, Template elementSelfClosedTemplate,
+                                  Template elementWithTextTemplate) {
+            for (Element element : elements) {
+                this.element = element;
+
+                if (element.hasSubElements()) {
+                    elementWithSubElementsTemplate.accept(this);
+                } else if (element.getText() != null) {
+                    elementWithTextTemplate.accept(this);
+                } else {
+                    elementSelfClosedTemplate.accept(this);
+                }
             }
         }
 
         public void visitSubElements(Template elementWithSubElementsTemplate, Template elementSelfClosedTemplate,
                                      Template elementWithTextTemplate) {
-            for (Element subElement : element.subElements()) {
-                new ElementVisitor(context, subElement).visitElement(elementWithSubElementsTemplate,
-                        elementSelfClosedTemplate, elementWithTextTemplate);
-            }
+            new ElementsVisitor(context, element.subElements()).visitElements(elementWithSubElementsTemplate,
+                    elementSelfClosedTemplate, elementWithTextTemplate);
         }
 
         public void visitElementId() {

@@ -3,6 +3,10 @@
 .webx-dom {
     border: solid 1px grey;
     margin: 0;
+}
+
+.webx-dom ol {
+    margin: 0;
     padding: 0 0 0 2em;
 }
 
@@ -18,8 +22,20 @@
     text-indent: -2em;
 }
 
-.webx-dom>li {
+.webx-dom ol>li {
     margin: 0.5em 0;
+}
+
+.webx-dom .control-bar {
+    background-color: #E0E0E0;
+    color: navy;
+    font-weight: bold;
+    margin: 0;
+    padding: 0 1em;
+}
+
+.webx-dom .control-bar span {
+    padding: 0 1em;
 }
 
 .webx-dom .collapsed-element {
