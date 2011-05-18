@@ -571,7 +571,8 @@ public class TemplateVisitTests extends AbstractTemplateTests {
         loadTemplate("${title}".getBytes(), "test.txt", 1, 0, 0);
 
         // ¥Ú”°root cause
-        assertEquals("IllegalArgumentException - haha", template.renderToString(new Visitor()));
+        assertThat(template.renderToString(new Visitor()),
+                containsAll("IllegalArgumentException - haha - ", Visitor.class.getName() + ".visitTitle("));
     }
 
     @Test

@@ -17,6 +17,7 @@
  */
 package com.alibaba.citrus.util.templatelite;
 
+import static com.alibaba.citrus.util.ArrayUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.Assert.ExceptionType.*;
 import static com.alibaba.citrus.util.ExceptionUtil.*;
@@ -71,7 +72,16 @@ public abstract class TextWriter<A extends Appendable> implements VisitorInvocat
 
         try {
             e = getRootCause(e);
-            out.append(e.getClass().getSimpleName() + " - " + e.getMessage());
+
+            String msg = e.getClass().getSimpleName() + " - " + e.getMessage();
+
+            StackTraceElement[] stackTrace = e.getStackTrace();
+
+            if (!isEmptyArray(stackTrace)) {
+                msg += " - " + stackTrace[0];
+            }
+
+            out.append(msg);
         } catch (Exception ee) {
             // ignore quietly
         }
