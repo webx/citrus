@@ -1029,16 +1029,27 @@ public final class Template {
                 for (PlaceholderParameter param : ((Placeholder) node).params) {
                     if (param.isTemplateReference()) {
                         String templateName = param.getTemplateName();
+                        String parentName;
 
-                        if (templateName.endsWith(".*")) {
-                            String parentTemplateName = templateName
-                                    .substring(0, templateName.length() - ".*".length());
+                        if (templateName.equals("*") || templateName.endsWith(".*")) {
+                            Map<String, Template> subtemplates;
 
-                            Template parentTemplate = findTemplate(parentTemplateName, templateStack,
-                                    ((Placeholder) node).location, "Referenced");
+                            if (templateName.equals("*")) {
+                                subtemplates = templateStack.getFirst();
+                                parentName = EMPTY_STRING;
+                            } else {
+                                String parentTemplateName = templateName.substring(0,
+                                        templateName.length() - ".*".length());
 
-                            for (Template template : parentTemplate.subtemplates.values()) {
-                                PlaceholderParameter newParam = new PlaceholderParameter("#" + parentTemplateName + "."
+                                Template parentTemplate = findTemplate(parentTemplateName, templateStack,
+                                        ((Placeholder) node).location, "Referenced");
+
+                                subtemplates = parentTemplate.subtemplates;
+                                parentName = parentTemplateName + ".";
+                            }
+
+                            for (Template template : subtemplates.values()) {
+                                PlaceholderParameter newParam = new PlaceholderParameter("#" + parentName
                                         + template.getName());
                                 newParam.templateReference = template;
                                 expandedParameters.add(newParam);

@@ -141,6 +141,39 @@ public class TemplateParserTests extends AbstractTemplateTests {
     }
 
     @Test
+    public void test02_placeholder_template_group_2() throws Exception {
+        loadTemplate("test02_placeholder_template_group_2.txt", 0, 1, 1);
+
+        Placeholder placeholder = (Placeholder) template.getSubTemplate("aaa").nodes[0];
+
+        // 子模板的顺序和模板文件中的一致
+        assertPlaceholder(placeholder, "for", "Line 4 Column 3", new String[] { "#d", "#c", "#b", "ccc" }, "#*, ccc");
+
+        PlaceholderParameter param;
+        int i = 0;
+
+        param = placeholder.params[i++];
+        assertTrue(param.isTemplateReference());
+        assertEquals("d", param.getTemplateName());
+        assertEquals("d", param.getTemplateReference().getName());
+
+        param = placeholder.params[i++];
+        assertTrue(param.isTemplateReference());
+        assertEquals("c", param.getTemplateName());
+        assertEquals("c", param.getTemplateReference().getName());
+
+        param = placeholder.params[i++];
+        assertTrue(param.isTemplateReference());
+        assertEquals("b", param.getTemplateName());
+        assertEquals("b", param.getTemplateReference().getName());
+
+        param = placeholder.params[i++];
+        assertFalse(param.isTemplateReference());
+        assertNull(param.getTemplateName());
+        assertNull(param.getTemplateReference());
+    }
+
+    @Test
     public void test02_placeholder_failure() throws Exception {
         String s;
 
