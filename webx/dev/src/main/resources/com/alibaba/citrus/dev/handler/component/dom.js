@@ -42,8 +42,16 @@ function registerExpandCollapseButtons() {
         });
     };
 
-    $('expand-all').observe('click', expandAll);
-    $('collapse-all').observe('click', collapseAll);
+    var expandAllLink = $('expand-all');
+    var collapseAllLink = $('collapse-all'); 
+    
+    if (expandAllLink != null) {
+        expandAllLink.observe('click', expandAll);
+    }
+
+    if (collapseAllLink != null) {
+        collapseAllLink.observe('click', collapseAll);
+    }
 }
 
 document.observe("dom:loaded", function() {
