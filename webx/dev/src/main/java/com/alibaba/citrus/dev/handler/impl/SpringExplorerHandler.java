@@ -1,16 +1,22 @@
 package com.alibaba.citrus.dev.handler.impl;
 
+import static com.alibaba.citrus.dev.handler.util.DomUtil.*;
+import static com.alibaba.citrus.util.ArrayUtil.*;
 import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
+import static com.alibaba.citrus.util.ExceptionUtil.*;
 import static com.alibaba.citrus.util.StringEscapeUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
+import static java.util.Collections.*;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -21,9 +27,10 @@ import com.alibaba.citrus.dev.handler.component.DomComponent;
 import com.alibaba.citrus.dev.handler.component.TabsComponent;
 import com.alibaba.citrus.dev.handler.component.TabsComponent.TabItem;
 import com.alibaba.citrus.dev.handler.util.BeanDefinitionReverseEngine;
+import com.alibaba.citrus.dev.handler.util.ConfigurationFile;
+import com.alibaba.citrus.dev.handler.util.ConfigurationFileReader;
 import com.alibaba.citrus.dev.handler.util.Element;
 import com.alibaba.citrus.util.ClassUtil;
-import com.alibaba.citrus.util.ExceptionUtil;
 import com.alibaba.citrus.util.FileUtil;
 import com.alibaba.citrus.util.templatelite.Template;
 import com.alibaba.citrus.webx.WebxComponent;
@@ -35,11 +42,26 @@ import com.alibaba.citrus.webx.handler.support.LayoutRequestProcessor;
 public class SpringExplorerHandler extends LayoutRequestProcessor {
     private static final String FN_BEANS = "Beans";
     private static final String FN_RESOLVABLE_DEPENDENCIES = "ResolvableDependencies";
+    private static final String FN_CONFIGURATIONS = "Configurations";
+    private static final String FN_DEFAULT = FN_BEANS;
+    private static final Set<String> AVAILABLE_FUNCTIONS = createHashSet(FN_BEANS, FN_RESOLVABLE_DEPENDENCIES,
+            FN_CONFIGURATIONS);
+
     private final TabsComponent tabsComponent = new TabsComponent(this, "tabs");
     private final DomComponent domComponent = new DomComponent(this, "dom");
 
     @Autowired
     private WebxComponents components;
+
+    private static String getFunctionName(String functionName) {
+        functionName = trimToNull(functionName);
+
+        if (!AVAILABLE_FUNCTIONS.contains(functionName)) {
+            functionName = FN_DEFAULT;
+        }
+
+        return functionName;
+    }
 
     @Override
     protected Object getBodyVisitor(RequestHandlerContext context) {
@@ -61,6 +83,11 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
     @Override
     protected String[] getStyleSheets() {
         return new String[] { "springExplorer.css" };
+    }
+
+    @Override
+    protected String[] getJavaScripts() {
+        return new String[] { "springExplorer.js" };
     }
 
     private static Field getAccessibleField(Class<?> targetType, String fieldName) throws Exception {
@@ -122,13 +149,7 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
             currentComponent = components.getComponent(currentContextName);
 
             // 取得当前的功能
-            String functionName = trimToNull(context.getRequest().getParameter("fn"));
-
-            if (FN_RESOLVABLE_DEPENDENCIES.equals(functionName)) {
-                currentFunctionName = functionName;
-            } else {
-                currentFunctionName = FN_BEANS;
-            }
+            this.currentFunctionName = getFunctionName(context.getRequest().getParameter("fn"));
 
             // 取得context信息
             this.appcontext = (AbstractApplicationContext) currentComponent.getApplicationContext();
@@ -189,6 +210,15 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
 
             addSubTabs(tab, FN_BEANS);
 
+            // list configurations
+            tab = new TabItem("Configurations");
+
+            tab.setHref(link(currentContextName, FN_CONFIGURATIONS));
+            tab.setSelected(FN_CONFIGURATIONS.equals(currentFunctionName));
+            tabs.add(tab);
+
+            addSubTabs(tab, FN_CONFIGURATIONS);
+
             // list resolvable dependencies
             tab = new TabItem("Resolvable Dependencies");
 
@@ -226,11 +256,9 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
                 buf.append("context=").append(contextName);
             }
 
-            if (!FN_RESOLVABLE_DEPENDENCIES.equals(functionName)) {
-                functionName = FN_BEANS; // default function         
-            }
+            functionName = getFunctionName(functionName);
 
-            if (!FN_BEANS.equals(functionName)) {
+            if (!FN_DEFAULT.equals(functionName)) {
                 if (buf.length() > 1) {
                     buf.append("&");
                 }
@@ -249,13 +277,18 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
             out().print(getConfigLocationString());
         }
 
-        public void visitExplorer(Template resolvableDependenciesTemplate, Template beansTemplate) {
+        public void visitExplorer(Template resolvableDependenciesTemplate, Template beansTemplate,
+                                  Template configurationsTemplate) {
             if (FN_RESOLVABLE_DEPENDENCIES.equals(currentFunctionName)) {
                 resolvableDependenciesTemplate.accept(this);
             }
 
             if (FN_BEANS.equals(currentFunctionName)) {
                 beansTemplate.accept(this);
+            }
+
+            if (FN_CONFIGURATIONS.equals(currentFunctionName)) {
+                configurationsTemplate.accept(this);
             }
         }
 
@@ -335,7 +368,7 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
                     RootBeanDefinition bd = getBeanDefinition(name);
                     beanElement = new BeanDefinitionReverseEngine(bd, name, factory.getAliases(name)).toDom();
                 } catch (Exception e) {
-                    beanElement = new Element("bean").setText(ExceptionUtil.getStackTrace(e));
+                    beanElement = new Element("bean").setText(getStackTrace(getRootCause(e)));
                 }
 
                 if (beanElement != null) {
@@ -344,6 +377,11 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
             }
 
             domComponent.visitTemplate(context, elements);
+        }
+
+        public void visitConfigurations(Template configurationsTemplate) throws IOException {
+            configurationsTemplate.accept(new ConfigurationFilesVisitor(context, new ConfigurationFileReader(
+                    appcontext, configLocations).toConfigurationFiles()));
         }
 
         private RootBeanDefinition getBeanDefinition(String name) throws Exception {
@@ -374,27 +412,66 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
 
             return names;
         }
+    }
 
-        private class BeanName implements Comparable<BeanName> {
-            private String beanName;
-            private String[] components;
+    @SuppressWarnings("unused")
+    private class ConfigurationFilesVisitor extends AbstractVisitor {
+        private final ConfigurationFile[] configurationFiles;
+        private ConfigurationFile configurationFile;
 
-            public int compareTo(BeanName o) {
-                if (components.length != o.components.length) {
-                    return components.length - o.components.length;
+        public ConfigurationFilesVisitor(RequestHandlerContext context, ConfigurationFile[] configurationFiles) {
+            super(context);
+            this.configurationFiles = configurationFiles;
+        }
+
+        public void visitConfigurations(Template withImportsTemplate, Template noImportsTemplate) throws IOException {
+            for (ConfigurationFile configurationFile : configurationFiles) {
+                this.configurationFile = configurationFile;
+
+                if (isEmptyArray(configurationFile.getImportedFiles())) {
+                    noImportsTemplate.accept(this);
+                } else {
+                    withImportsTemplate.accept(this);
                 }
-
-                for (int i = 0; i < components.length; i++) {
-                    String comp1 = components[i];
-                    String comp2 = o.components[i];
-
-                    if (!comp1.equals(comp2)) {
-                        return comp1.compareTo(comp2);
-                    }
-                }
-
-                return 0;
             }
+        }
+
+        public void visitConfigurationName() {
+            out().print(configurationFile.getName());
+        }
+
+        public void visitConfigurationNameForId() {
+            out().print(toId(configurationFile.getName()));
+        }
+
+        public void visitImports(Template configurationsTemplate) {
+            configurationsTemplate.accept(new ConfigurationFilesVisitor(context, configurationFile.getImportedFiles()));
+        }
+
+        public void visitConfigurationContent() {
+            domComponent.visitTemplate(context, singletonList(configurationFile.getRootElement()), false);
+        }
+    }
+
+    private static class BeanName implements Comparable<BeanName> {
+        private String beanName;
+        private String[] components;
+
+        public int compareTo(BeanName o) {
+            if (components.length != o.components.length) {
+                return components.length - o.components.length;
+            }
+
+            for (int i = 0; i < components.length; i++) {
+                String comp1 = components[i];
+                String comp2 = o.components[i];
+
+                if (!comp1.equals(comp2)) {
+                    return comp1.compareTo(comp2);
+                }
+            }
+
+            return 0;
         }
     }
 }

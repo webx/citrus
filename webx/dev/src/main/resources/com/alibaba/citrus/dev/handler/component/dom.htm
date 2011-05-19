@@ -7,14 +7,28 @@
 ## --------------------------
 
 <div class="webx-dom">
+  ${controlBar: #controlBar}
+  ${elementsList: #orderedElementsList, #unorderedElementsList}
+</div>
+
+#controlBar
   <div class="control-bar">
     <span><a id="expand-all" href="#">Expand All</a></span>
     <span><a id="collapse-all" href="#">Collapse All</a></span>
   </div>
+#end
+
+#orderedElementsList
   <ol>
     ${elements: #elements.*}
   </ol>
-</div>
+#end
+
+#unorderedElementsList
+  <ul>
+    ${elements: #elements.*}
+  </ul>
+#end
 
 ## 模板组：三种形态的elements
 #elements
@@ -22,11 +36,11 @@
     <li>
       <p>$#{elementStart}<span class="hl-tag">&gt;</span>
         <img id="handle-${elementId}" class="handle-element" src="${componentUrl:images/open.png}" alt="" title="Click to show/hide sub-elements" />
-        <span id="collapsed-${elementId}" class="collapsed-element">...<span class="hl-tag">&lt;/${elementName}&gt;</span></span>
+        <span id="collapsed-${elementId}" class="collapsed-element">...<span class="hl-tag">&lt;/$#{elementPrefixAndName}&gt;</span></span>
       </p>
       <div id="expanded-${elementId}" class="expanded-element">
         <ul>${subElements: #elements.*}</ul>
-        <p><span class="hl-tag">&lt;/${elementName}&gt;</span></p>
+        <p><span class="hl-tag">&lt;/$#{elementPrefixAndName}&gt;</span></p>
       </div>
     </li>
   #end
@@ -43,27 +57,39 @@
     </li>
     
     #singleLineText
-      <p>$#{elementStart}&gt;<span class="hl-text">${elementText: #styledTexts.*}</span><span class="hl-tag">&lt;/${elementName}&gt;</span></p>
+      <p>$#{elementStart}&gt;<span class="hl-text">${elementText: #styledTexts.*}</span><span class="hl-tag">&lt;/$#{elementPrefixAndName}&gt;</span></p>
     #end
     
     #multiLineText
       <p>$#{elementStart}<span class="hl-tag">&gt;</span>
         <img id="handle-${elementId}" class="handle-element" src="${componentUrl:images/open.png}" alt="" title="Click to show/hide sub-elements" />
-        <span id="collapsed-${elementId}" class="collapsed-element">...<span class="hl-tag">&lt;/${elementName}&gt;</span></span>
+        <span id="collapsed-${elementId}" class="collapsed-element">...<span class="hl-tag">&lt;/$#{elementPrefixAndName}&gt;</span></span>
       </p>
       <div id="expanded-${elementId}" class="expanded-element">
         <pre class="hl-cdata">&lt;![CDATA[${elementText: #styledTexts.*}]]&gt;</pre>
-        <p><span class="hl-tag">&lt;/${elementName}&gt;</span></p>
+        <p><span class="hl-tag">&lt;/$#{elementPrefixAndName}&gt;</span></p>
       </div>
     #end
   #end
 #end
 
 #elementStart
-  <span class="hl-tag">&lt;${elementName}</span>${attributes: #attribute}
+  <span class="hl-tag"${elementNs:#elementNs}>&lt;$#{elementPrefixAndName}</span>${attributes: #attribute}
   
   #attribute
     <span class="hl-attribute"> ${attributeKey}</span>=<span class="hl-value">"${attributeValue: #styledTexts.*}"</span>
+  #end
+  
+  #elementNs
+    $#{SPACE}title="Namespace: ${elementNs}"
+  #end
+#end
+
+#elementPrefixAndName
+  ${elementPrefix:#elementPrefix}${elementName}
+
+  #elementPrefix
+    <span class="hl-tag-prefix">${elementPrefix}:</span>
   #end
 #end
 
