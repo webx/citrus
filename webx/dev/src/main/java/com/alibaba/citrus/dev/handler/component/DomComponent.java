@@ -29,29 +29,37 @@ public class DomComponent extends PageComponent {
     }
 
     public void visitTemplate(RequestHandlerContext context, Iterable<Element> elements) {
-        visitTemplate(context, elements, true);
+        visitTemplate(context, elements, null);
     }
 
-    public void visitTemplate(RequestHandlerContext context, Iterable<Element> elements, boolean withControlBar) {
-        getTemplate().accept(new ElementsVisitor(context, elements, withControlBar));
+    public void visitTemplate(RequestHandlerContext context, Iterable<Element> elements,
+                              ControlBarCallback controlBarCallback) {
+        getTemplate().accept(new ElementsVisitor(context, elements, controlBarCallback));
+    }
+
+    public interface ControlBarCallback {
+        void renderControlBar();
     }
 
     @SuppressWarnings("unused")
     private class ElementsVisitor extends AbstractVisitor {
         private final Iterable<Element> elements;
-        private final boolean withControlBar;
+        private final ControlBarCallback controlBarCallback;
         private Element element;
         private Attribute attr;
 
-        public ElementsVisitor(RequestHandlerContext context, Iterable<Element> elements, boolean withControlBar) {
+        public ElementsVisitor(RequestHandlerContext context, Iterable<Element> elements,
+                               ControlBarCallback controlBarCallback) {
             super(context, DomComponent.this);
             this.elements = elements;
-            this.withControlBar = withControlBar;
+            this.controlBarCallback = controlBarCallback;
         }
 
         public void visitControlBar(Template controlBarTemplate) {
-            if (withControlBar) {
+            if (controlBarCallback == null) {
                 controlBarTemplate.accept(this);
+            } else {
+                controlBarCallback.renderControlBar();
             }
         }
 
@@ -82,7 +90,7 @@ public class DomComponent extends PageComponent {
 
         public void visitSubElements(Template elementWithSubElementsTemplate, Template elementSelfClosedTemplate,
                                      Template elementWithTextTemplate) {
-            new ElementsVisitor(context, element.subElements(), withControlBar).visitElements(
+            new ElementsVisitor(context, element.subElements(), controlBarCallback).visitElements(
                     elementWithSubElementsTemplate, elementSelfClosedTemplate, elementWithTextTemplate);
         }
 

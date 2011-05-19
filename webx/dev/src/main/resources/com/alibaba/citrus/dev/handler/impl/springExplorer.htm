@@ -71,7 +71,13 @@ ${explorer: #resolvableDependencies, #beans, #configurations}
 
   #configurationContent
     <div id="configuration-file-content-${configurationNameForId}" class="configuration-file-content">
-      ${configurationContent}
+      ${configurationContent: #controlBar}
     </div>
+    
+    #controlBar
+      <div class="control-bar">
+        <span>Location: ${configurationUrl}</span>
+      </div>
+    #end
   #end
 #end

@@ -24,6 +24,7 @@ import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.support.AbstractApplicationContext;
 
 import com.alibaba.citrus.dev.handler.component.DomComponent;
+import com.alibaba.citrus.dev.handler.component.DomComponent.ControlBarCallback;
 import com.alibaba.citrus.dev.handler.component.TabsComponent;
 import com.alibaba.citrus.dev.handler.component.TabsComponent.TabItem;
 import com.alibaba.citrus.dev.handler.util.BeanDefinitionReverseEngine;
@@ -444,12 +445,21 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
             out().print(toId(configurationFile.getName()));
         }
 
+        public void visitConfigurationUrl() {
+            out().print(configurationFile.getUrl().toExternalForm());
+        }
+
         public void visitImports(Template configurationsTemplate) {
             configurationsTemplate.accept(new ConfigurationFilesVisitor(context, configurationFile.getImportedFiles()));
         }
 
-        public void visitConfigurationContent() {
-            domComponent.visitTemplate(context, singletonList(configurationFile.getRootElement()), false);
+        public void visitConfigurationContent(final Template controlBarTemplate) {
+            domComponent.visitTemplate(context, singletonList(configurationFile.getRootElement()),
+                    new ControlBarCallback() {
+                        public void renderControlBar() {
+                            controlBarTemplate.accept(ConfigurationFilesVisitor.this);
+                        }
+                    });
         }
     }
 
