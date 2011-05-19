@@ -729,6 +729,78 @@ public class TemplateVisitTests extends AbstractTemplateTests {
         render(new Visitor(), " - 1970-01-01 00:00");
     }
 
+    @Test
+    public void render_placeholder_method_overrides() throws Exception {
+        assertRenderOverride("${title}", "title()");
+
+        assertRenderOverride("${title:a}", "title(String)");
+        assertRenderOverride("${title:a,b}", "title(String, String)");
+        assertRenderOverride("${title:a,b,c}", "title(String[])");
+        assertRenderOverride("${title:a,b,c,d}", "title(String[])");
+
+        assertRenderOverride("${title:#a}", "title(Template)");
+        assertRenderOverride("${title:#a,#b}", "title(Template, Template)");
+        assertRenderOverride("${title:#a,#b,#c}", "title(Template[])");
+        assertRenderOverride("${title:#a,#b,#c,#d}", "title(Template[])");
+
+        assertRenderOverride("${title:#a,b}", "title(Template, String)");
+        assertRenderOverride("${title:#a,b,c}", "title(Object[])");
+    }
+
+    private void assertRenderOverride(String placeholder, String result) {
+        @SuppressWarnings("unused")
+        class Visitor extends TextWriter<StringBuilder> {
+            public void visitTitle() {
+                out().append("title()");
+            }
+
+            public void visitTitle(String[] s) {
+                out().append("title(String[])");
+            }
+
+            public void visitTitle(Template[] s) {
+                out().append("title(Template[])");
+            }
+
+            public void visitTitle(Object[] s) {
+                out().append("title(Object[])");
+            }
+
+            public void visitTitle(String s) {
+                out().append("title(String)");
+            }
+
+            public void visitTitle(String s, String s1) {
+                out().append("title(String, String)");
+            }
+
+            public void visitTitle(Template s) {
+                out().append("title(Template)");
+            }
+
+            public void visitTitle(Template s, Template s1) {
+                out().append("title(Template, Template)");
+            }
+
+            public void visitTitle(Template s, String s1) {
+                out().append("title(Template, String)");
+            }
+        }
+
+        String s = "\n";
+        s += "#a\n";
+        s += "#end\n";
+        s += "#b\n";
+        s += "#end\n";
+        s += "#c\n";
+        s += "#end\n";
+        s += "#d\n";
+        s += "#end\n";
+
+        loadTemplate((placeholder + s).getBytes(), "test.txt", 1, 4, 0);
+        assertEquals(result, template.renderToString(new Visitor()));
+    }
+
     private String formatGMT(String format) {
         DateFormat fmt = new SimpleDateFormat(format, Locale.US);
         fmt.setTimeZone(TimeZone.getTimeZone("GMT"));

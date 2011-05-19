@@ -23,6 +23,7 @@ import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringEscapeUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
+import static java.lang.Math.*;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -388,7 +389,6 @@ public final class Template {
     private Method findVisitPlaceholderMethod(Class<?> visitorClass, String methodName,
                                               PlaceholderParameter[] placeholderParams) throws NoSuchMethodException {
         Method[] methods = visitorClass.getMethods();
-        Method method = null;
 
         // 统计placeholder参数的类型及数量。
         // Placeholder支持两种类型的参数：String和Template。
@@ -409,16 +409,21 @@ public final class Template {
             }
         }
 
+        Method method = null;
+        int minIndexWeight = Integer.MAX_VALUE;
+
         for (Method candidateMethod : methods) {
             if (methodName.equals(candidateMethod.getName())) {
                 Class<?>[] methodParamTypes = candidateMethod.getParameterTypes();
                 int methodParamCount = methodParamTypes.length;
                 boolean paramTypeMatches = false;
+                int indexWeight = Integer.MAX_VALUE;
 
                 switch (methodParamCount) {
                     case 0:
                         // visitXyz()
                         paramTypeMatches = true;
+                        indexWeight = 100000 * abs(methodParamCount - placeholderParamCount);
                         break;
 
                     case 1:
@@ -426,17 +431,20 @@ public final class Template {
                         if (placeholderParamStringCount == placeholderParamCount
                                 && methodParamTypes[0].equals(String[].class)) {
                             paramTypeMatches = true;
+                            indexWeight = 50;
                         }
 
                         // 如果placeholder参数全为Template，可调用visitXyz(Template[])
                         if (placeholderParamTemplateCount == placeholderParamCount
                                 && methodParamTypes[0].equals(Template[].class)) {
                             paramTypeMatches = true;
+                            indexWeight = 50;
                         }
 
                         // 任何placeholder参数，都可调用visitXyz(Object[])
                         if (methodParamTypes[0].equals(Object[].class)) {
                             paramTypeMatches = true;
+                            indexWeight = 90;
                         }
 
                         // no break;
@@ -462,14 +470,22 @@ public final class Template {
                                     }
                                 }
                             }
+
+                            if (paramTypeMatches) {
+                                indexWeight = 100 * abs(methodParamCount - placeholderParamCount);
+                            }
                         }
 
                         break;
                 }
 
-                if (paramTypeMatches) {
+                if (paramTypeMatches && indexWeight < minIndexWeight) {
+                    minIndexWeight = indexWeight;
                     method = candidateMethod;
-                    break;
+
+                    if (indexWeight == 0) {
+                        break;
+                    }
                 }
             }
         }
