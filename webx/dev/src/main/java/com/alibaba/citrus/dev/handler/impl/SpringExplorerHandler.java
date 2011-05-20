@@ -2,7 +2,6 @@ package com.alibaba.citrus.dev.handler.impl;
 
 import static com.alibaba.citrus.dev.handler.util.DomUtil.*;
 import static com.alibaba.citrus.util.ArrayUtil.*;
-import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.ExceptionUtil.*;
 import static com.alibaba.citrus.util.StringEscapeUtil.*;
@@ -10,75 +9,45 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import static java.util.Collections.*;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
-import org.springframework.context.support.AbstractApplicationContext;
 
-import com.alibaba.citrus.dev.handler.component.DomComponent;
 import com.alibaba.citrus.dev.handler.component.DomComponent.ControlBarCallback;
-import com.alibaba.citrus.dev.handler.component.TabsComponent;
-import com.alibaba.citrus.dev.handler.component.TabsComponent.TabItem;
 import com.alibaba.citrus.dev.handler.util.BeanDefinitionReverseEngine;
 import com.alibaba.citrus.dev.handler.util.ConfigurationFile;
 import com.alibaba.citrus.dev.handler.util.ConfigurationFileReader;
 import com.alibaba.citrus.dev.handler.util.Element;
 import com.alibaba.citrus.util.ClassUtil;
-import com.alibaba.citrus.util.FileUtil;
 import com.alibaba.citrus.util.templatelite.Template;
-import com.alibaba.citrus.webx.WebxComponent;
-import com.alibaba.citrus.webx.WebxComponents;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 import com.alibaba.citrus.webx.handler.support.AbstractVisitor;
-import com.alibaba.citrus.webx.handler.support.LayoutRequestProcessor;
 
-public class SpringExplorerHandler extends LayoutRequestProcessor {
+public class SpringExplorerHandler extends AbstractExplorerHandler {
     private static final String FN_BEANS = "Beans";
     private static final String FN_RESOLVABLE_DEPENDENCIES = "ResolvableDependencies";
     private static final String FN_CONFIGURATIONS = "Configurations";
-    private static final String FN_DEFAULT = FN_BEANS;
-    private static final Set<String> AVAILABLE_FUNCTIONS = createHashSet(FN_BEANS, FN_RESOLVABLE_DEPENDENCIES,
-            FN_CONFIGURATIONS);
+    private static final Set<String> AVAILABLE_FUNCTIONS = createLinkedHashSet(FN_BEANS, FN_CONFIGURATIONS,
+            FN_RESOLVABLE_DEPENDENCIES);
 
-    private final TabsComponent tabsComponent = new TabsComponent(this, "tabs");
-    private final DomComponent domComponent = new DomComponent(this, "dom");
+    @Override
+    protected Set<String> getAvailableFunctions() {
+        return AVAILABLE_FUNCTIONS;
+    }
 
-    @Autowired
-    private WebxComponents components;
-
-    private static String getFunctionName(String functionName) {
-        functionName = trimToNull(functionName);
-
-        if (!AVAILABLE_FUNCTIONS.contains(functionName)) {
-            functionName = FN_DEFAULT;
-        }
-
-        return functionName;
+    @Override
+    protected String getDefaultFunction() {
+        return FN_BEANS;
     }
 
     @Override
     protected Object getBodyVisitor(RequestHandlerContext context) {
         return new SpringExplorerVisitor(context);
-    }
-
-    @Override
-    protected String getTitle(Object bodyVisitor) {
-        SpringExplorerVisitor visitor = (SpringExplorerVisitor) bodyVisitor;
-        String contextName = visitor.currentContextName;
-
-        if (contextName == null) {
-            return visitor.currentFunctionName + " - Root Context - " + visitor.getConfigLocationString();
-        } else {
-            return visitor.currentFunctionName + " - " + contextName + " - " + visitor.getConfigLocationString();
-        }
     }
 
     @Override
@@ -91,44 +60,8 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
         return new String[] { "springExplorer.js" };
     }
 
-    private static Field getAccessibleField(Class<?> targetType, String fieldName) throws Exception {
-        Field field = null;
-
-        for (Class<?> c = targetType; c != null && field == null; c = c.getSuperclass()) {
-            try {
-                field = c.getDeclaredField(fieldName);
-            } catch (NoSuchFieldException e) {
-            }
-        }
-
-        field.setAccessible(true);
-
-        return field;
-    }
-
-    private static Method getAccessibleMethod(Class<?> targetType, String methodName, Class<?>[] argTypes)
-            throws Exception {
-        Method method = null;
-
-        for (Class<?> c = targetType; c != null && method == null; c = c.getSuperclass()) {
-            try {
-                method = c.getDeclaredMethod(methodName, argTypes);
-            } catch (NoSuchMethodException e) {
-            }
-        }
-
-        method.setAccessible(true);
-
-        return method;
-    }
-
     @SuppressWarnings("unused")
-    private class SpringExplorerVisitor extends AbstractVisitor {
-        private final String currentContextName;
-        private final WebxComponent currentComponent;
-        private final String currentFunctionName;
-        private final AbstractApplicationContext appcontext;
-        private final String[] configLocations;
+    private class SpringExplorerVisitor extends AbstractExplorerVisitor {
         private final DefaultListableBeanFactory factory;
         private final Map<Class<?>, Object> resolvableDependencies;
         private Class<?> type;
@@ -137,37 +70,8 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
         public SpringExplorerVisitor(RequestHandlerContext context) {
             super(context);
 
-            // 取得当前的component信息
-            String contextName = trimToNull(context.getRequest().getParameter("context"));
-            WebxComponent component = components.getComponent(contextName);
-
-            if (component == null) {
-                currentContextName = null;
-            } else {
-                currentContextName = component.getName();
-            }
-
-            currentComponent = components.getComponent(currentContextName);
-
-            // 取得当前的功能
-            this.currentFunctionName = getFunctionName(context.getRequest().getParameter("fn"));
-
             // 取得context信息
-            this.appcontext = (AbstractApplicationContext) currentComponent.getApplicationContext();
             this.factory = (DefaultListableBeanFactory) appcontext.getBeanFactory();
-
-            // 取得config locations
-            String[] locations;
-
-            try {
-                locations = normalizeConfigLocations(String[].class.cast(getAccessibleMethod(
-                        this.appcontext.getClass(), "getConfigLocations", EMPTY_CLASS_ARRAY).invoke(this.appcontext,
-                        EMPTY_OBJECT_ARRAY)));
-            } catch (Exception e) {
-                locations = EMPTY_STRING_ARRAY;
-            }
-
-            this.configLocations = locations;
 
             // 取得resolvableDependencies
             this.resolvableDependencies = getResolvableDependencies();
@@ -185,97 +89,6 @@ public class SpringExplorerHandler extends LayoutRequestProcessor {
             }
 
             return deps;
-        }
-
-        private String getConfigLocationString() {
-            return join(configLocations, ", ");
-        }
-
-        private String[] normalizeConfigLocations(String[] locations) {
-            for (int i = 0; i < locations.length; i++) {
-                locations[i] = FileUtil.normalizeAbsolutePath(locations[i]);
-            }
-
-            return locations;
-        }
-
-        public void visitTabs() {
-            List<TabItem> tabs = createLinkedList();
-
-            // list beans
-            TabItem tab = new TabItem("Beans");
-
-            tab.setHref(link(currentContextName, FN_BEANS));
-            tab.setSelected(FN_BEANS.equals(currentFunctionName));
-            tabs.add(tab);
-
-            addSubTabs(tab, FN_BEANS);
-
-            // list configurations
-            tab = new TabItem("Configurations");
-
-            tab.setHref(link(currentContextName, FN_CONFIGURATIONS));
-            tab.setSelected(FN_CONFIGURATIONS.equals(currentFunctionName));
-            tabs.add(tab);
-
-            addSubTabs(tab, FN_CONFIGURATIONS);
-
-            // list resolvable dependencies
-            tab = new TabItem("Resolvable Dependencies");
-
-            tab.setHref(link(currentContextName, FN_RESOLVABLE_DEPENDENCIES));
-            tab.setSelected(FN_RESOLVABLE_DEPENDENCIES.equals(currentFunctionName));
-            tabs.add(tab);
-
-            addSubTabs(tab, FN_RESOLVABLE_DEPENDENCIES);
-
-            tabsComponent.visitTemplate(context, tabs);
-        }
-
-        private void addSubTabs(TabItem tab, String functionName) {
-            // root context
-            TabItem subtab = new TabItem("Root Context");
-
-            subtab.setHref(link(null, functionName));
-            subtab.setSelected(currentContextName == null);
-            tab.addSubTab(subtab);
-
-            // all sub-contexts
-            for (String contextName : components.getComponentNames()) {
-                subtab = new TabItem(contextName);
-
-                subtab.setHref(link(contextName, functionName));
-                subtab.setSelected(contextName.equals(currentContextName));
-                tab.addSubTab(subtab);
-            }
-        }
-
-        private String link(String contextName, String functionName) {
-            StringBuilder buf = new StringBuilder("?");
-
-            if (contextName != null) {
-                buf.append("context=").append(contextName);
-            }
-
-            functionName = getFunctionName(functionName);
-
-            if (!FN_DEFAULT.equals(functionName)) {
-                if (buf.length() > 1) {
-                    buf.append("&");
-                }
-
-                buf.append("fn=").append(functionName);
-            }
-
-            return buf.toString();
-        }
-
-        public void visitContextName() {
-            out().print(currentContextName == null ? "Root Context" : currentContextName);
-        }
-
-        public void visitConfigLocations() {
-            out().print(getConfigLocationString());
         }
 
         public void visitExplorer(Template resolvableDependenciesTemplate, Template beansTemplate,
