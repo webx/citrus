@@ -19,6 +19,8 @@ package com.alibaba.citrus.service.resource;
 
 import static org.junit.Assert.*;
 
+import java.util.Set;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -51,6 +53,7 @@ public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTes
         // /myfolder/testres.txt 映射到<super-loader name="/webroot">
         // 和<resource-alias name="/webroot">等效
         assertTrace(
+                true,
                 "/myfolder/testres.txt", //
                 "\"/myfolder/testres.txt\" matched [resource pattern=\"/\"], at \"resources-root.xml\", beanName=\"resourceLoadingService_2\"", //
                 "\"/webroot/myfolder/testres.txt\" matched [resource pattern=\"/webroot\"], at \"resources-root.xml\", beanName=\"resourceLoadingService_2\"");
@@ -59,15 +62,26 @@ public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTes
     @Test
     public void getResource_notFound() throws Exception {
         assertTrace(
+                null,
                 "/not/found.txt", //
                 "\"/not/found.txt\" matched [resource-alias pattern=\"/\"], at \"resources-root.xml\", beanName=\"resourceLoadingService\"", //
                 "\"/webroot/not/found.txt\" matched [resource pattern=\"/webroot\"], at \"resources-root.xml\", beanName=\"resourceLoadingService\"");
     }
 
     @Test
+    public void getResource_notFound_forCreate() throws Exception {
+        assertTrace(
+                false,
+                ResourceLoadingService.FOR_CREATE,
+                "/absolute/resource/not/found.txt", //
+                "\"/absolute/resource/not/found.txt\" matched [resource pattern=\"/absolute/resource\"], at \"resources.xml\", beanName=\"resourceLoadingService\"");
+    }
+
+    @Test
     public void getResource_parent_defaultMapping() throws Exception {
         // 当前resource loader中没找到，到parent中找，匹配/
         assertTrace(
+                true,
                 "/myfolder/testres.txt", //
                 "\"/myfolder/testres.txt\" matched [resource-alias pattern=\"/\"], at \"resources-root.xml\", beanName=\"resourceLoadingService\"", //
                 "\"/webroot/myfolder/testres.txt\" matched [resource pattern=\"/webroot\"], at \"resources-root.xml\", beanName=\"resourceLoadingService\"");
@@ -77,6 +91,7 @@ public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTes
     public void getResource_alias_notFound() throws Exception {
         // Alias被匹配，但没找到resource mapping
         assertTrace(
+                null,
                 "/my/alias1/testres.txt", //
                 "\"/my/alias1/testres.txt\" matched [resource-alias pattern=\"/my/alias1\"], at \"resources.xml\", beanName=\"resourceLoadingService\"", //
                 "\"/my/alias2/testres.txt\" matched [resource-alias pattern=\"/my/alias2\"], at \"resources.xml\", beanName=\"resourceLoadingService\"", //
@@ -88,6 +103,7 @@ public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTes
     public void getResource_alias_foundInParent() throws Exception {
         // Alias被匹配，从default resource loader中找到资源
         assertTrace(
+                true,
                 "/my/alias3/testres.txt", //
                 "\"/my/alias3/testres.txt\" matched [resource-alias pattern=\"/my/alias3\"], at \"resources.xml\", beanName=\"resourceLoadingService\"", //
                 "\"/myfolder/testres.txt\" matched [resource-alias pattern=\"/\"], at \"resources-root.xml\", beanName=\"resourceLoadingService\"", //
@@ -98,12 +114,14 @@ public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTes
     public void getResource_internal_found() throws Exception {
         // Alias被匹配，internal mapping被找到
         assertTrace(
+                true,
                 "/my/alias4/testres.txt", //
                 "\"/my/alias4/testres.txt\" matched [resource-alias pattern=\"/my/alias4\"], at \"resources.xml\", beanName=\"resourceLoadingService\"", //
                 "\"/my/internal/resource/testres.txt\" matched [resource pattern=\"/my/internal/resource\"], at \"resources.xml\", beanName=\"resourceLoadingService\"");
 
         // super-loader被匹配，internal mapping被找到
         assertTrace(
+                true,
                 "/my/alias5/testres.txt", //
                 "\"/my/alias5/testres.txt\" matched [resource pattern=\"/my/alias5\"], at \"resources.xml\", beanName=\"resourceLoadingService\"", //
                 "\"/my/internal/resource/testres.txt\" matched [resource pattern=\"/my/internal/resource\"], at \"resources.xml\", beanName=\"resourceLoadingService\"");
@@ -112,6 +130,7 @@ public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTes
         resourceLoadingService = resourceLoadingService.getParent();
 
         assertTrace(
+                true,
                 "/myfolder/testres.txt", //
                 "\"/myfolder/testres.txt\" matched [resource-alias pattern=\"/\"], at \"resources-root.xml\", beanName=\"resourceLoadingService\"", //
                 "\"/webroot/myfolder/testres.txt\" matched [resource pattern=\"/webroot\"], at \"resources-root.xml\", beanName=\"resourceLoadingService\"");
@@ -121,12 +140,14 @@ public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTes
     public void getResource_internal_notFound() throws Exception {
         // 直接找internal mapping是不行的
         assertTrace(
+                null,
                 "/my/internal/resource/testres.txt", //
                 "\"/my/internal/resource/testres.txt\" matched [resource-alias pattern=\"/\"], at \"resources-root.xml\", beanName=\"resourceLoadingService\"", //
                 "\"/webroot/my/internal/resource/testres.txt\" matched [resource pattern=\"/webroot\"], at \"resources-root.xml\", beanName=\"resourceLoadingService\"");
 
         // alias映射到parent internal mapping，这样是不行的
         assertTrace(
+                null,
                 "/my/alias6/testres.txt", //
                 "\"/my/alias6/testres.txt\" matched [resource-alias pattern=\"/my/alias6\"], at \"resources.xml\", beanName=\"resourceLoadingService\"", //
                 "\"/webroot/myfolder/testres.txt\" matched [resource-alias pattern=\"/\"], at \"resources-root.xml\", beanName=\"resourceLoadingService\"", //
@@ -134,6 +155,7 @@ public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTes
 
         // super-loader映射到parent internal mapping，这样是不行的
         assertTrace(
+                null,
                 "/my/alias7/testres.txt", //
                 "\"/my/alias7/testres.txt\" matched [resource pattern=\"/my/alias7\"], at \"resources.xml\", beanName=\"resourceLoadingService\"", //
                 "\"/webroot/myfolder/testres.txt\" matched [resource-alias pattern=\"/\"], at \"resources-root.xml\", beanName=\"resourceLoadingService\"", //
@@ -143,6 +165,7 @@ public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTes
         resourceLoadingService = resourceLoadingService.getParent();
 
         assertTrace(
+                null,
                 "/webroot/myfolder/testres.txt", //
                 "\"/webroot/myfolder/testres.txt\" matched [resource-alias pattern=\"/\"], at \"resources-root.xml\", beanName=\"resourceLoadingService\"", //
                 "\"/webroot/webroot/myfolder/testres.txt\" matched [resource pattern=\"/webroot\"], at \"resources-root.xml\", beanName=\"resourceLoadingService\"");
@@ -151,19 +174,36 @@ public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTes
     @Test
     public void getResource_noLoaders() throws Exception {
         // 匹配，但没有loaders
-        assertTrace(
+        assertTrace(null,
                 "/my/resource/testres.txt", //
                 "\"/my/resource/testres.txt\" matched [resource pattern=\"/my/resource\"], at \"resources.xml\", beanName=\"resourceLoadingService\"");
     }
 
-    private void assertTrace(String resourceName, String... elements) {
-        ResourceTrace trace = resourceLoadingService.trace(resourceName);
+    private void assertTrace(Boolean result, String resourceName, String... elements) {
+        assertTrace(result, ResourceLoadingService.FOR_CREATE, resourceName, elements);
+    }
+
+    private void assertTrace(Boolean result, Set<ResourceLoadingOption> options, String resourceName,
+                             String... elements) {
+        ResourceTrace trace;
+
+        if (options == null) {
+            trace = resourceLoadingService.trace(resourceName, options);
+        } else {
+            trace = resourceLoadingService.trace(resourceName);
+        }
 
         assertEquals(elements.length, trace.length());
 
         int i = 0;
         for (ResourceTraceElement element : trace) {
             assertEquals(elements[i++], element.toString());
+        }
+
+        if (result == null) {
+            assertNull(trace.getResult());
+        } else {
+            assertEquals(result, trace.getResult().exists());
         }
     }
 }

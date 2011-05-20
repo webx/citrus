@@ -95,13 +95,15 @@ class ResourceLoaderContextImpl extends AbstractResourceLoadingContext<Resource>
     public ResourceTrace getTrace() throws ResourceNotFoundException {
         trace = createLinkedList();
 
+        Resource resource = null;
+
         try {
-            doLoad(resourceName, options); // 越过filters
+            resource = doLoad(resourceName, options); // 越过filters
         } catch (ResourceNotFoundException e) {
             // ignore
         }
 
-        return new ResourceTrace(trace);
+        return new ResourceTrace(trace, resource);
     }
 
     /**
