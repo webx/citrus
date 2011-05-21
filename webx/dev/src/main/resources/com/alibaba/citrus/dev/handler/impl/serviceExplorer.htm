@@ -31,8 +31,8 @@ ${explorer: #resourceLoadingService}
       <input type="submit" name="query" value="query" /> 
     </div>
 
-    ${traceResource: #traceResource}
     ${subResources: #subResources}
+    ${traceResource: #traceResource}
     ${patterns: #patterns}
   #end
 
@@ -40,7 +40,7 @@ ${explorer: #resourceLoadingService}
     <div class="webx-resources">
       <div class="webx-resources-title">Resource: ${resourceName}</div>
       <ol class="webx-resources-content">
-        ${trace: #traceElement, #result, #resultNotFound}
+        ${trace: #traceElement, #result, #resultNotExist, #resultNotFound}
       </ol>
     </div>
     
@@ -49,7 +49,7 @@ ${explorer: #resourceLoadingService}
         <p><a href="#" onclick="setQuery('${trace:resourceName}', false); return false;">${trace:resourceName}</a></p>
         <blockquote>
           <p>Matched <span class="hl-tag">&lt;${trace:patternType}</span> <span class="hl-attribute">pattern</span>=<span class="hl-value">"${trace:patternName}"</span><span class="hl-tag">&gt;</span>
-          <span class="webx-resource-trace-service-location" title="${trace:serviceLocation}">(${trace:serviceLocationShort}: ${trace:serviceName})</span></p>
+          <span class="webx-resource-trace-service-location" title="${trace:serviceLocation}">(defined in ${trace:serviceLocationShort}: ${trace:serviceName})</span></p>
         </blockquote>
       </li>
     #end
