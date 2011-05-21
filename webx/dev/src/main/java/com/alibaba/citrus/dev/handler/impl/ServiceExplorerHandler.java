@@ -127,24 +127,24 @@ public class ServiceExplorerHandler extends AbstractExplorerHandler {
 
         public void visitTrace(String param) {
             if ("resourceName".equals(param)) {
-                out().print(traceElement.getResourceName());
+                out().print(escapeHtml(traceElement.getResourceName()));
             } else if ("patternType".equals(param)) {
-                out().print(traceElement.getPatternType());
+                out().print(escapeHtml(traceElement.getPatternType()));
             } else if ("patternName".equals(param)) {
-                out().print(traceElement.getPatternName());
+                out().print(escapeHtml(traceElement.getPatternName()));
             } else if ("serviceName".equals(param)) {
-                out().print(traceElement.getBeanName());
+                out().print(escapeHtml(traceElement.getBeanName()));
             } else if ("serviceLocation".equals(param)) {
-                out().print(traceElement.getConfigLocation());
+                out().print(escapeHtml(traceElement.getConfigLocation()));
             } else if ("serviceLocationShort".equals(param)) {
-                out().print(traceElement.getShortLocation());
+                out().print(escapeHtml(traceElement.getShortLocation()));
             } else {
                 unreachableCode();
             }
         }
 
         public void visitResult() {
-            out().print(result);
+            out().print(escapeHtml(result.toString()));
         }
 
         private List<String> subResourceNames;
@@ -192,9 +192,9 @@ public class ServiceExplorerHandler extends AbstractExplorerHandler {
 
         public void visitSubResourceName(String type) {
             if ("relative".equals(type)) {
-                out().print(relativeSubResourceName);
+                out().print(escapeHtml(relativeSubResourceName));
             } else {
-                out().print(fullSubResourceName);
+                out().print(escapeHtml(fullSubResourceName));
             }
         }
 
