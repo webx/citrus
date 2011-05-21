@@ -46,7 +46,7 @@ public class SpringExplorerHandler extends AbstractExplorerHandler {
     }
 
     @Override
-    protected Object getBodyVisitor(RequestHandlerContext context) {
+    protected SpringExplorerVisitor getBodyVisitor(RequestHandlerContext context) {
         return new SpringExplorerVisitor(context);
     }
 
@@ -89,21 +89,6 @@ public class SpringExplorerHandler extends AbstractExplorerHandler {
             }
 
             return deps;
-        }
-
-        public void visitExplorer(Template resolvableDependenciesTemplate, Template beansTemplate,
-                                  Template configurationsTemplate) {
-            if (FN_RESOLVABLE_DEPENDENCIES.equals(currentFunctionName)) {
-                resolvableDependenciesTemplate.accept(this);
-            }
-
-            if (FN_BEANS.equals(currentFunctionName)) {
-                beansTemplate.accept(this);
-            }
-
-            if (FN_CONFIGURATIONS.equals(currentFunctionName)) {
-                configurationsTemplate.accept(this);
-            }
         }
 
         public void visitResolvableDependencyCount() {

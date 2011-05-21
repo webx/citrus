@@ -7,8 +7,9 @@
 ## --------------------------
 
 ${tabs}
-${explorer: #resolvableDependencies, #beans, #configurations}
+${explorer: #beans, #configurations, #resolvableDependencies}
 
+## 列出所有resolvable deps
 #resolvableDependencies
   <h1>${resolvableDependencyCount} resolvable dependencies in ${contextName} - ${configLocations}</h1>
   <div id="webx-resolvable-deps">
@@ -26,6 +27,7 @@ ${explorer: #resolvableDependencies, #beans, #configurations}
   #end
 #end
 
+## 列出所有beans
 #beans
   <h1>${beanCount} beans in ${contextName} - ${configLocations}</h1>
   <div id="webx-beans">
@@ -33,6 +35,7 @@ ${explorer: #resolvableDependencies, #beans, #configurations}
   </div>
 #end
 
+## 显示配置文件的内容，以及配置文件的import结构
 #configurations
   <h1>${contextName} - ${configLocations}</h1>
   <div id="webx-configurations">

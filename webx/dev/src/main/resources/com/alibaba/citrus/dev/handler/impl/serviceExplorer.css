@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+.webx-resources {
+    border: solid 1px grey;
+    margin: 1em 0;
+}
+
+.webx-resources .webx-resources-title {
+    background-color: #E0E0E0;
+    color: navy;
+    font-weight: bold;
+    margin: 0 0 0.5em 0;
+    padding: 0 0.7em;
+}
+
+.webx-resources ul.webx-resources-content {
+    padding: 0 0.7em;
+    list-style: none;
+}
+
+.webx-resource-trace-service-location {
+    color: grey;
+}
+
+.hl-tag {
+    color:#000096;
+}
+
+.hl-attribute {
+    color: #F5844C;
+}
+
+.hl-value {
+    color: #993300;
+}

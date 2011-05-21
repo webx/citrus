@@ -1,0 +1,95 @@
+## --------------------------
+## 显示Service的内容
+##
+#@ charset    UTF-8
+#@ trimming   on
+#@ whitespace collapse
+## --------------------------
+
+${tabs}
+${explorer: #resourceLoadingService}
+
+## 列出所有resource patterns
+#resourceLoadingService
+  <h1>${contextName} - ${configLocations}</h1>
+  <form id="webx-resource-query-form" action="" method="get">
+    <div id="webx-resources">
+      <input type="hidden" name="context" value="${contextName}" />
+      <input type="hidden" name="fn" value="${functionName}" />
+      ${resourceFunctions: #resourcesNotAvailable, #resourceFunctions}
+    </div>
+  </form>
+
+  #resourcesNotAvailable
+    <p>ResourceLoadingService not available.</p>
+  #end
+  
+  #resourceFunctions
+    <div>
+      <label for="webx-resource-query">Resource:</label>
+      <input id="webx-resource-query" type="text" name="resource" value="${resourceName}" size="50" />
+      <input type="submit" name="query" value="query" /> 
+    </div>
+
+    ${traceResource: #traceResource}
+    ${subResources: #subResources}
+    ${patterns: #patterns}
+  #end
+
+  #traceResource
+    <div class="webx-resources">
+      <div class="webx-resources-title">Resource: ${resourceName}</div>
+      <ol class="webx-resources-content">
+        ${trace: #traceElement, #result, #resultNotFound}
+      </ol>
+    </div>
+    
+    #traceElement
+      <li>
+        <p><a href="#" onclick="setQuery('${trace:resourceName}', false); return false;">${trace:resourceName}</a></p>
+        <blockquote>
+          <p>Matched <span class="hl-tag">&lt;${trace:patternType}</span> <span class="hl-attribute">pattern</span>=<span class="hl-value">"${trace:patternName}"</span><span class="hl-tag">&gt;</span>
+          <span class="webx-resource-trace-service-location" title="${trace:serviceLocation}">(${trace:serviceLocationShort}: ${trace:serviceName})</span></p>
+        </blockquote>
+      </li>
+    #end
+
+    #result
+      <li>Found Resource: <span class="hl-value">${result}</span></li>
+    #end
+
+    #resultNotExist
+      <li>Resource Not Exist: <span class="hl-value">${result}</span></li>
+    #end
+
+    #resultNotFound
+      <li>Resource Not Found</li>
+    #end
+  #end
+
+  #subResources
+    <div class="webx-resources">
+      <div class="webx-resources-title">Child Resources</div>
+      <ul class="webx-resources-content">
+        ${subResource: #subResource}
+      </ul>
+    </div>
+    
+    #subResource
+      <li><a href="#" onclick="setQuery('${subResourceName}', true); return false;">${subResourceName:relative}</a></li>
+    #end
+  #end
+    
+  #patterns
+    <div class="webx-resources">
+      <div class="webx-resources-title">Resource Patterns</div>
+      <ul class="webx-resources-content">
+        ${pattern: #pattern}
+      </ul>
+    </div>
+    
+    #pattern
+      <li><a href="#" onclick="setQuery('${pattern}', false); return false;">${pattern}</a></li>
+    #end
+  #end
+#end

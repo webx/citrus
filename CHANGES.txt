@@ -117,4 +117,5 @@
 
 * 改进TemplateLite工具，并将它从internal包开发到common-util中，可供外部使用。
 * 新增spring explorer，在开发模式下，可以列出所有context中的spring beans，以帮助开发者了解schema所生成的beans结构。
+* 新增service explorer，在开发模式下，可以查看resource loading服务中资源。
 * 改进：resourceLoadingService.trace()时，如果成功的话，能够取得resource对象。

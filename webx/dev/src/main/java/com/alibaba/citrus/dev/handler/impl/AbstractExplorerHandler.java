@@ -9,6 +9,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.AbstractApplicationContext;
 
@@ -16,6 +17,7 @@ import com.alibaba.citrus.dev.handler.component.DomComponent;
 import com.alibaba.citrus.dev.handler.component.TabsComponent;
 import com.alibaba.citrus.dev.handler.component.TabsComponent.TabItem;
 import com.alibaba.citrus.util.FileUtil;
+import com.alibaba.citrus.util.templatelite.Template;
 import com.alibaba.citrus.webx.WebxComponent;
 import com.alibaba.citrus.webx.WebxComponents;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
@@ -32,6 +34,9 @@ public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
     public WebxComponents getWebxComponents() {
         return components;
     }
+
+    @Override
+    protected abstract AbstractExplorerVisitor getBodyVisitor(RequestHandlerContext context);
 
     @Override
     protected String getTitle(Object bodyVisitor) {
@@ -159,8 +164,32 @@ public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
             out().print(currentContextName == null ? "Root Context" : currentContextName);
         }
 
+        public void visitFunctionName() {
+            out().print(currentFunctionName);
+        }
+
         public void visitConfigLocations() {
             out().print(getConfigLocationString());
+        }
+
+        public final void visitExplorer(Template[] functionTemplates) {
+            String[] functions = getAvailableFunctions().toArray(new String[getAvailableFunctions().size()]);
+
+            for (int i = 0; i < functions.length && i < functionTemplates.length; i++) {
+                String function = functions[i];
+
+                if (function.equals(currentFunctionName)) {
+                    functionTemplates[i].accept(this);
+                }
+            }
+        }
+
+        protected final <S> S getService(String name, Class<S> type) {
+            try {
+                return type.cast(appcontext.getBean(name));
+            } catch (NoSuchBeanDefinitionException e) {
+                return null;
+            }
         }
 
         private String[] normalizeConfigLocations(String[] locations) {
