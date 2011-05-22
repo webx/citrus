@@ -22,6 +22,9 @@ import static com.alibaba.citrus.util.ArrayUtil.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
+
 import org.junit.Test;
 
 import com.alibaba.citrus.util.templatelite.Template.IncludeTemplate;
@@ -307,6 +310,21 @@ public class TemplateParserTests extends AbstractTemplateTests {
         loadTemplateFailure(s.getBytes(), null);
         assertThat(parseError, exception("Unclosed tags: #def, #abc at [unknown source]: Line 5"));
 
+        // #end后跟()
+        s = "";
+        s += "#abc\n";
+        s += "#end ()";
+
+        loadTemplateFailure(s.getBytes(), "test.txt");
+        assertThat(parseError, exception("Invalid character '(' after #end tag at test.txt: Line 2 Column 6"));
+
+        s = "";
+        s += "#abc\n";
+        s += "#end( ... )";
+
+        loadTemplateFailure(s.getBytes(), "test.txt");
+        assertThat(parseError, exception("Invalid character '(' after #end tag at test.txt: Line 2 Column 5"));
+
         // #end太多
         s = "";
         s += "#abc\n";
@@ -319,6 +337,38 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError, exception("Unmatched #end tag at test.txt: Line 7 Column 1"));
+
+        // import name为空
+        s = "";
+        s += "#abc()\n";
+
+        loadTemplateFailure(s.getBytes(), "test.txt");
+        assertThat(parseError, exception("Import file name is not specified at test.txt: Line 1 Column 6"));
+
+        s = "";
+        s += "#abc ( )\n";
+
+        loadTemplateFailure(s.getBytes(), "test.txt");
+        assertThat(parseError, exception("Import file name is not specified at test.txt: Line 1 Column 8"));
+
+        s = "";
+        s += "#abc ( \" \" )\n";
+
+        loadTemplateFailure(s.getBytes(), "test.txt");
+        assertThat(parseError, exception("Import file name is not specified at test.txt: Line 1 Column 8"));
+
+        s = "";
+        s += "#abc(\"\")\n";
+
+        loadTemplateFailure(s.getBytes(), "test.txt");
+        assertThat(parseError, exception("Import file name is not specified at test.txt: Line 1 Column 6"));
+
+        // 无法import，因为input source不存在
+        s = "";
+        s += "#abc(\"any.txt\")\n";
+
+        loadTemplateFailure(s.getBytes(), "test.txt");
+        assertThat(parseError, exception("Could not import template file \"any.txt\" at test.txt: Line 1 Column 6"));
 
         // template name重复
         s = "";
@@ -336,6 +386,15 @@ public class TemplateParserTests extends AbstractTemplateTests {
         s += "This\n";
         s += "is a keyword: \n";
         s += "#text\n";
+        s += "#end";
+
+        loadTemplateFailure(s.getBytes(), "test.txt");
+        assertThat(parseError, exception("Reserved name: text at test.txt: Line 3 Column 1"));
+
+        s = "";
+        s += "This\n";
+        s += "is a keyword: \n";
+        s += "#text (any.txt)\n";
         s += "#end";
 
         loadTemplateFailure(s.getBytes(), "test.txt");
@@ -812,6 +871,59 @@ public class TemplateParserTests extends AbstractTemplateTests {
         expected += "</a>";
 
         assertEquals(expected, template.renderToString(new FallbackTextWriter<StringBuilder>()));
+    }
+
+    @Test
+    public void test08_import() {
+        loadTemplate("test08_import.txt", 1, 1, 1);
+
+        assertPlaceholder(template.nodes[0], "abc", "Line 3 Column 1", new String[] { "#abc" }, "#abc");
+
+        Template subTemplate = template.getSubTemplate("abc");
+
+        source = "def.txt";
+        assertTemplate(subTemplate, "abc", 1, 0, 1, null);
+
+        assertText("  hello,\n" //
+                + "world", subTemplate.nodes[0]); // no trimming
+
+        assertLocation(subTemplate.nodes[0].location, "Line 2 Column 3");
+    }
+
+    @Test
+    public void test08_import_notfound() {
+        try {
+            loadTemplate("test08_import_notfound.txt", 1, 1, 1);
+            fail();
+        } catch (TemplateParseException e) {
+            assertThat(
+                    e,
+                    exception(FileNotFoundException.class, "Could not import template file \"notfound.txt\" at ",
+                            "Line 5 Column 6"));
+        }
+    }
+
+    @Test
+    public void test08_import_invalid() {
+        try {
+            loadTemplate("test08_import_invalid.txt", 1, 1, 1);
+            fail();
+        } catch (TemplateParseException e) {
+            assertThat(
+                    e,
+                    exception(URISyntaxException.class, "Could not import template file \"http:\" at ",
+                            "Line 5 Column 6"));
+        }
+    }
+
+    @Test
+    public void test08_import_invalid2() {
+        try {
+            loadTemplate("test08_import_invalid2.txt", 1, 1, 1);
+            fail();
+        } catch (TemplateParseException e) {
+            assertThat(e, exception("Could not import template file \"http:()\" at ", "Line 5 Column 6"));
+        }
     }
 
     private void assertText(String text, Node node) {

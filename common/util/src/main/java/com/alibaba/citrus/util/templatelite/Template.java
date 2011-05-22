@@ -35,6 +35,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
@@ -157,6 +158,25 @@ import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
  * </pre>
  * 
  * </dd>
+ * <dt>导入子模板</dt>
+ * <dd>
+ * <p>
+ * 导入外部文件，作为子模板。这种方法所产生的子模板，和直接定义子模板的效果完全相同。但将子模板定义在外部文件中，有利于整理并缩短模板的长度。
+ * </p>
+ * 
+ * <pre>
+ * #subtpl(relative_file_name)
+ * </pre>
+ * 
+ * <p>
+ * 或者：
+ * </p>
+ * 
+ * <pre>
+ * #subtpl("relative_file_name")
+ * </pre>
+ * 
+ * </dd>
  * </dl>
  * 
  * @author Michael Zhou
@@ -181,35 +201,35 @@ public final class Template {
      * 从File中创建template。
      */
     public Template(File source) {
-        this(new InputSource(source, null));
+        this(new InputSource(source, null), null);
     }
 
     /**
      * 从URL中创建template。
      */
     public Template(URL source) {
-        this(new InputSource(source, null));
+        this(new InputSource(source, null), null);
     }
 
     /**
      * 从输入流中创建template。
      */
     public Template(InputStream stream, String systemId) {
-        this(new InputSource(stream, systemId));
+        this(new InputSource(stream, systemId), null);
     }
 
     /**
      * 从输入流中创建template。
      */
     public Template(Reader reader, String systemId) {
-        this(new InputSource(reader, systemId));
+        this(new InputSource(reader, systemId), null);
     }
 
     /**
      * 内部构造函数：创建主模板。
      */
-    private Template(InputSource source) {
-        this.name = null;
+    private Template(InputSource source, String name) {
+        this.name = trimToNull(name);
         this.source = assertNotNull(source, "source");
         this.location = new Location(source.systemId, 0, 0);
 
@@ -754,7 +774,7 @@ public final class Template {
                 + "|(\\s*##)" // group 2
                 + "|\\$\\{\\s*([A-Za-z]\\w*)(\\s*:([^\\}]*))?\\s*\\}" // group 3, 4, 5
                 + "|\\$#\\{\\s*([A-Za-z][\\.\\w]*)\\s*\\}" // group 6
-                + "|(\\s*)#([A-Za-z]\\w*)(\\s*(##.*)?)" // group 7, 8, 9, 10
+                + "|(\\s*)#([A-Za-z]\\w*)(\\s*\\(\\s*(.*)\\s*\\))?(\\s*(##.*)?)" // group 7, 8, 9, 10, 11, 12
                 + "|(\\s*)#@\\s*([A-Za-z]\\w*)(\\s+(.*?))?(##.*)?$" // group 11, 12, 13, 14, 15
         );
 
@@ -767,11 +787,14 @@ public final class Template {
         private final static int INDEX_OF_INCLUDE_TEMPLATE = 6;
         private final static int INDEX_OF_SUBTEMPLATE_PREFIX = 7;
         private final static int INDEX_OF_SUBTEMPLATE = 8;
-        private final static int INDEX_OF_SUBTEMPLATE_SUFFIX = 9;
-        private final static int INDEX_OF_PARAM_PREFIX = 11;
-        private final static int INDEX_OF_PARAM = 12;
-        private final static int INDEX_OF_PARAM_VALUE = 14;
+        private final static int INDEX_OF_IMPORT_FILE = 9;
+        private final static int INDEX_OF_IMPORT_FILE_NAME = 10;
+        private final static int INDEX_OF_SUBTEMPLATE_SUFFIX = 11;
+        private final static int INDEX_OF_PARAM_PREFIX = 13;
+        private final static int INDEX_OF_PARAM = 14;
+        private final static int INDEX_OF_PARAM_VALUE = 16;
 
+        private final InputSource source;
         private final BufferedReader reader;
         private final String systemId;
         private final ParsingTemplateStack stack = new ParsingTemplateStack();
@@ -779,7 +802,8 @@ public final class Template {
         private String currentLine;
         private int lineNumber = 1;
 
-        public Parser(Reader reader, String systemId) {
+        public Parser(Reader reader, String systemId, InputSource source) {
+            this.source = assertNotNull(source, "input source");
             this.systemId = trimToNull(systemId);
 
             if (reader instanceof BufferedReader) {
@@ -889,8 +913,15 @@ public final class Template {
 
                         // #end of sub-template
                         if ("end".equals(name)) {
+                            // #end后跟()
+                            if (matcher.group(INDEX_OF_IMPORT_FILE) != null) {
+                                throw new TemplateParseException("Invalid character '(' after #end tag at "
+                                        + Location.toString(systemId, lineNumber, matcher.start(INDEX_OF_IMPORT_FILE)
+                                                + matcher.group(INDEX_OF_IMPORT_FILE).indexOf("(") + 1));
+                            }
+
                             // #end没有对应的#template
-                            if (stack.size() <= 1) {
+                            else if (stack.size() <= 1) {
                                 throw new TemplateParseException("Unmatched #end tag at "
                                         + Location.toString(systemId, lineNumber,
                                                 matcher.end(INDEX_OF_SUBTEMPLATE_PREFIX) + 1));
@@ -909,8 +940,51 @@ public final class Template {
 
                             checkName(name, new Location(systemId, lineNumber, columnNumber));
 
-                            stack.push(new ParsingTemplate(name, systemId, lineNumber, columnNumber,
-                                    stack.peek().params));
+                            // 从另一个文件中读取子模板
+                            if (matcher.group(INDEX_OF_IMPORT_FILE) != null) {
+                                String importedFileName = trimToNull(trim(
+                                        trimToEmpty(matcher.group(INDEX_OF_IMPORT_FILE_NAME)), "\""));
+
+                                int importedFileColumnNumber = matcher.start(INDEX_OF_IMPORT_FILE_NAME) + 1;
+
+                                if (importedFileName == null) {
+                                    throw new TemplateParseException("Import file name is not specified at "
+                                            + Location.toString(systemId, lineNumber, importedFileColumnNumber));
+                                }
+
+                                InputSource importedSource = null;
+                                Exception e = null;
+
+                                try {
+                                    importedSource = source.getRelative(importedFileName);
+                                } catch (Exception ee) {
+                                    e = ee;
+                                }
+
+                                if (importedSource == null || e != null) {
+                                    throw new TemplateParseException("Could not import template file \""
+                                            + importedFileName + "\" at "
+                                            + Location.toString(systemId, lineNumber, importedFileColumnNumber), e);
+                                }
+
+                                Template importedTemplate;
+
+                                try {
+                                    importedTemplate = new Template(importedSource, name);
+                                } catch (Exception ee) {
+                                    throw new TemplateParseException("Could not import template file \""
+                                            + importedFileName + "\" at "
+                                            + Location.toString(systemId, lineNumber, importedFileColumnNumber), ee);
+                                }
+
+                                stack.peek().addSubTemplate(importedTemplate);
+                            }
+
+                            // 开始一个新模板
+                            else {
+                                stack.push(new ParsingTemplate(name, systemId, lineNumber, columnNumber,
+                                        stack.peek().params));
+                            }
                         }
 
                         // 忽略本行
@@ -1516,18 +1590,20 @@ public final class Template {
 
             if (source instanceof URL) {
                 try {
-                    this.source = new File(((URL) source).toURI()); // convert URL to File
+                    this.source = new File(((URL) source).toURI().normalize()); // convert URL to File
                 } catch (Exception e) {
                     this.source = source;
                 }
+            } else if (source instanceof File) {
+                this.source = new File(((File) source).toURI().normalize()); // remove ../
             } else {
                 this.source = source;
             }
 
-            if (source instanceof URL) {
-                this.systemId = ((URL) source).toExternalForm();
-            } else if (source instanceof File) {
-                this.systemId = ((File) source).toURI().toString();
+            if (this.source instanceof URL) {
+                this.systemId = ((URL) this.source).toExternalForm();
+            } else if (this.source instanceof File) {
+                this.systemId = ((File) this.source).toURI().toString();
             } else {
                 this.systemId = trimToNull(systemId);
             }
@@ -1554,12 +1630,35 @@ public final class Template {
                     throw new TemplateParseException(e);
                 }
 
-                new Parser(reader, systemId).parse().updateTemplate(template);
+                new Parser(reader, systemId, this).parse().updateTemplate(template);
 
                 if (source instanceof File) {
                     this.lastModified = ((File) source).lastModified();
                 }
             }
+        }
+
+        /**
+         * 根据指定的相对于当前source的路径，取得input source。
+         */
+        InputSource getRelative(String relativePath) throws Exception {
+            relativePath = trimToNull(relativePath);
+
+            if (relativePath != null) {
+                URI sourceURI = null;
+
+                if (source instanceof File) {
+                    sourceURI = ((File) source).toURI();
+                } else if (source instanceof URL) {
+                    sourceURI = ((URL) source).toURI();
+                }
+
+                if (sourceURI != null) {
+                    return new InputSource(sourceURI.resolve(relativePath).toURL());
+                }
+            }
+
+            return null;
         }
 
         Reader getReader() throws IOException {

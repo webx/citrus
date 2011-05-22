@@ -25,11 +25,13 @@ import static org.junit.Assert.*;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
@@ -90,6 +92,69 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
     }
 
     @Test
+    public void getRelative_File() throws Exception {
+        InputSource parentSource = new InputSource(new File("/aa/bb/cc.txt"));
+
+        assertNull(parentSource.getRelative(null));
+        assertNull(parentSource.getRelative("  "));
+
+        inputSource = parentSource.getRelative(" b.txt ");
+        assertEquals(new File("/aa/bb/b.txt").toURL().toExternalForm(), inputSource.systemId);
+
+        inputSource = parentSource.getRelative(" /b.txt ");
+        assertEquals(new File("/b.txt").toURL().toExternalForm(), inputSource.systemId);
+
+        inputSource = parentSource.getRelative(" ../b.txt ");
+        assertEquals(new File("/aa/b.txt").toURI().normalize().toURL().toExternalForm(), inputSource.systemId);
+
+        inputSource = parentSource.getRelative(" ../../b.txt ");
+        assertEquals(new File("/b.txt").toURI().normalize().toURL().toExternalForm(), inputSource.systemId);
+
+        inputSource = parentSource.getRelative(" ../../../b.txt ");
+        assertEquals(new File("/../b.txt").toURI().normalize().toURL().toExternalForm(), inputSource.systemId);
+    }
+
+    @Test
+    public void getRelative_URL() throws Exception {
+        InputSource parentSource = new InputSource(new URL("http://localhost:8080/aa/bb/cc.txt"));
+
+        assertNull(parentSource.getRelative(null));
+        assertNull(parentSource.getRelative("  "));
+
+        inputSource = parentSource.getRelative("b.txt ");
+        assertEquals("http://localhost:8080/aa/bb/b.txt", inputSource.systemId);
+
+        inputSource = parentSource.getRelative(" ../b.txt ");
+        assertEquals("http://localhost:8080/aa/b.txt", inputSource.systemId);
+
+        inputSource = parentSource.getRelative(" ../../b.txt ");
+        assertEquals("http://localhost:8080/b.txt", inputSource.systemId);
+
+        inputSource = parentSource.getRelative(" ../../../b.txt ");
+        assertEquals("http://localhost:8080/../b.txt", inputSource.systemId);
+
+        try {
+            inputSource = parentSource.getRelative("http:");
+            fail();
+        } catch (Exception e) {
+            assertThat(e, exception(URISyntaxException.class));
+        }
+    }
+
+    @Test
+    public void getRelative_Stream() throws Exception {
+        FileInputStream f = new FileInputStream(new File(srcdir, "test05_param_gbk.txt"));
+        InputSource parentSource = new InputSource(f, "test.txt");
+
+        assertNull(parentSource.getRelative(null));
+        assertNull(parentSource.getRelative("  "));
+
+        assertNull(parentSource.getRelative("b.txt "));
+
+        f.close();
+    }
+
+    @Test
     public void getReader() throws IOException {
         File f = new File(srcdir, "test05_param_gbk.txt");
 
@@ -97,14 +162,18 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
         inputSource = new InputSource(f);
         assertReader("GBK", f, f.toURI().toString());
 
+        inputSource = new InputSource(new File(srcdir, "../templates/test05_param_gbk.txt"));
+        assertReader("GBK", f, f.toURI().toString());
+
         // file: url as input source
         inputSource = new InputSource(f.toURL());
         assertReader("GBK", f, f.toURL().toExternalForm());
 
         // url as input source
-        URL jar = copyFileToJar("test05_param_gbk.txt", "gbk.txt", "test.jar");
-        inputSource = new InputSource(jar);
-        assertReader("GBK", null, jar.toExternalForm());
+        URL jarurl = copyFileToJar("test05_param_gbk.txt", "gbk.txt", "test.jar");
+        URL url = new URL("jar:" + jarurl.toExternalForm() + "!/gbk.txt");
+        inputSource = new InputSource(url);
+        assertReader("GBK", null, url.toExternalForm());
 
         // stream as input source
         inputSource = new InputSource(new ByteArrayInputStream("#@charset UTF-8\n\nhello".getBytes("UTF-8")),
@@ -153,12 +222,13 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
         source = "temp.txt";
 
         // template from test07_reload_1.txt
-        URL jarUrl = copyFileToJar("test07_reload_1.txt", source, "temp.jar");
+        URL jarurl = copyFileToJar("test07_reload_1.txt", source, "temp.jar");
+        URL url = new URL("jar:" + jarurl.toExternalForm() + "!/temp.txt");
         File destFile = new File(destdir, source);
 
         Template[] templates = new Template[] { new Template(destFile), //
                 new Template(destFile.toURI().toURL()), //
-                new Template(jarUrl), //
+                new Template(url), //
                 new Template(destFile.toURI().toURL().openStream(), "temp.txt"), //
                 new Template(new InputStreamReader(destFile.toURI().toURL().openStream()), "temp.txt"), //
         };
@@ -190,5 +260,25 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
                 assertTemplate(t, null, 2, 0, 0, null);
             }
         }
+    }
+
+    @Test
+    public void reloadImportedTemplate() throws Exception {
+        source = "temp.txt";
+
+        // template from test07_reload_1.txt
+        copyFileToJar("test07_reload_1.txt", "imported.txt", "temp.jar");
+        copyFileToJar("test07_reload_import.txt", source, "temp2.jar");
+
+        Template template = new Template(new File(destdir, source));
+        assertEquals("abc\n${abc}", template.renderToString(new FallbackTextWriter<StringBuilder>()));
+
+        // 由于文件系统的timestamp实际上是以秒计的，所以必须等待1s以上，文件的lastModified才会变化。
+        Thread.sleep(1001);
+
+        // template from test07_reload_2.txt
+        copyFileToJar("test07_reload_2.txt", "imported.txt", "temp.jar");
+
+        assertEquals("xyz\n${xyz}", template.renderToString(new FallbackTextWriter<StringBuilder>()));
     }
 }

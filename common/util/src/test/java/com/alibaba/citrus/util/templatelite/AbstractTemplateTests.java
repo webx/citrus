@@ -96,7 +96,7 @@ public abstract class AbstractTemplateTests {
         jos.closeEntry();
         jos.close();
 
-        return new URL("jar:" + destJarFile.toURL() + "!/" + dest);
+        return destJarFile.toURL();
     }
 
     protected void acceptFailure(Object visitor) {

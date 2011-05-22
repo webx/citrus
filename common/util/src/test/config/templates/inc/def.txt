@@ -1,0 +1,3 @@
+#@trimming off
+  hello,
+world
