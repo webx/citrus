@@ -558,6 +558,32 @@ public class TemplateVisitTests extends AbstractTemplateTests {
     }
 
     @Test
+    public void render_visitorThrowsException_withInvocationHandlerError() throws Exception {
+        @SuppressWarnings("unused")
+        class Visitor implements VisitorInvocationErrorHandler {
+            public void visitTitle() throws IOException {
+                throw new IllegalArgumentException("haha");
+            }
+
+            public void handleInvocationError(String desc, Throwable e) {
+                throw new IllegalArgumentException("handleInvocationError");
+            }
+        }
+
+        loadTemplate("${title}".getBytes(), "test.txt", 1, 0, 0);
+
+        try {
+            template.accept(new Visitor());
+            fail();
+        } catch (TemplateRuntimeException e) {
+            assertThat(
+                    e,
+                    exception(IllegalArgumentException.class, "handleInvocationError",
+                            "${title} at test.txt: Line 1 Column 1"));
+        }
+    }
+
+    @Test
     public void render_visitorThrowsException_textWriter() throws Exception {
         @SuppressWarnings("unused")
         class Visitor extends TextWriter<StringBuilder> {
@@ -799,6 +825,81 @@ public class TemplateVisitTests extends AbstractTemplateTests {
 
         loadTemplate((placeholder + s).getBytes(), "test.txt", 1, 4, 0);
         assertEquals(result, template.renderToString(new Visitor()));
+    }
+
+    @Test
+    public void render_forPlaceholder_redirect() {
+        @SuppressWarnings("unused")
+        class Visitor1 extends TextWriter<StringBuilder> {
+            public Visitor1(StringBuilder out) {
+                super(out);
+            }
+
+            public void visitItems(Template t, String s) {
+                out().append(s);
+                t.accept(this);
+            }
+        }
+        @SuppressWarnings("unused")
+        class Visitor2 extends TextWriter<StringBuilder> {
+            public Visitor1 visitItems() {
+                return new Visitor1(out()); // redirect to visitor1           
+            }
+        }
+
+        String s = "${items: #a, hello}\n";
+        s += "#a\n";
+        s += "world\n";
+        s += "#end\n";
+
+        loadTemplate(s.getBytes(), "test.txt", 1, 1, 0);
+        assertEquals("helloworld", template.renderToString(new Visitor2()));
+    }
+
+    @Test
+    public void render_forPlaceholder_redirectToSelf() {
+        @SuppressWarnings("unused")
+        class Visitor2 extends TextWriter<StringBuilder> {
+            public Visitor2 visitItems() {
+                return this; // redirect to self           
+            }
+        }
+
+        String s = "${items: #a, hello}\n";
+        s += "#a\n";
+        s += "world\n";
+        s += "#end\n";
+
+        loadTemplate(s.getBytes(), "test.txt", 1, 1, 0);
+        assertEquals("", template.renderToString(new Visitor2()));
+    }
+
+    @Test
+    public void render_forPlaceholder_redirect_infinite() {
+        @SuppressWarnings("unused")
+        class Visitor2 extends TextWriter<StringBuilder> {
+            public Visitor2(StringBuilder out) {
+                super(out);
+            }
+
+            public Visitor2 visitItems() {
+                return new Visitor2(out()); // redirect to another visitor2
+            }
+        }
+
+        String s = "${items: #a, hello}\n";
+        s += "#a\n";
+        s += "world\n";
+        s += "#end\n";
+
+        loadTemplate(s.getBytes(), "test.txt", 1, 1, 0);
+
+        try {
+            template.renderToString(new Visitor2(null));
+            fail();
+        } catch (TemplateRuntimeException e) {
+            assertThat(e, exception("Redirection out of control (depth>10) in ", "Visitor2 ", "Visitor2.visitItems()"));
+        }
     }
 
     private String formatGMT(String format) {

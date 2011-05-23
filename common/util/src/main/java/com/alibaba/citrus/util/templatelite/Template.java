@@ -182,6 +182,7 @@ import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public final class Template {
+    private final static int MAX_REDIRECT_DEPTH = 10;
     private final static Node[] EMPTY_NODES = new Node[0];
     private final static Map<String, Template> predefinedTemplates = createHashMap();
     private final String name;
@@ -295,6 +296,13 @@ public final class Template {
      * 根据node类型，访问visitor相应的方法。
      */
     private void invokeVisitor(Object visitor, Node node) throws TemplateRuntimeException {
+        invokeVisitor(visitor, node, 0);
+    }
+
+    /**
+     * 根据node类型，访问visitor相应的方法。
+     */
+    private void invokeVisitor(Object visitor, Node node, int redirectDepth) throws TemplateRuntimeException {
         // 对$#{includeTemplate}直接调用template
         if (node instanceof IncludeTemplate) {
             assertNotNull(((IncludeTemplate) node).includedTemplate).accept(visitor);
@@ -360,14 +368,26 @@ public final class Template {
             }
 
             if (method != null) {
+                Object newVisitor = null;
+
                 try {
-                    FastClass.create(visitorClass).getMethod(method).invoke(visitor, params);
+                    newVisitor = FastClass.create(visitorClass).getMethod(method).invoke(visitor, params);
                 } catch (InvocationTargetException e) {
                     if (visitor instanceof VisitorInvocationErrorHandler) {
                         ((VisitorInvocationErrorHandler) visitor).handleInvocationError(node.toString(), e.getCause());
                     } else {
                         throw new TemplateRuntimeException("Error rendering " + node, e.getCause());
                     }
+                }
+
+                // 如果当前visitor返回了一个新的visitor对象，则重定向到新的visitor。
+                if (newVisitor != null && visitor != newVisitor) {
+                    if (redirectDepth >= MAX_REDIRECT_DEPTH) {
+                        throw new TemplateRuntimeException("Redirection out of control (depth>" + MAX_REDIRECT_DEPTH
+                                + ") in " + method);
+                    }
+
+                    invokeVisitor(newVisitor, node, redirectDepth + 1);
                 }
             }
         } catch (TemplateRuntimeException e) {

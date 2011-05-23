@@ -67,23 +67,19 @@ public abstract class TextWriter<A extends Appendable> implements VisitorInvocat
     /**
      * 默认打印异常信息。
      */
-    public void handleInvocationError(String desc, Throwable e) {
+    public void handleInvocationError(String desc, Throwable e) throws Exception {
         log.debug("Error rendering " + desc, e);
 
-        try {
-            e = getRootCause(e);
+        e = getRootCause(e);
 
-            String msg = e.getClass().getSimpleName() + " - " + e.getMessage();
+        String msg = e.getClass().getSimpleName() + " - " + e.getMessage();
 
-            StackTraceElement[] stackTrace = e.getStackTrace();
+        StackTraceElement[] stackTrace = e.getStackTrace();
 
-            if (!isEmptyArray(stackTrace)) {
-                msg += " - " + stackTrace[0];
-            }
-
-            out.append(msg);
-        } catch (Exception ee) {
-            // ignore quietly
+        if (!isEmptyArray(stackTrace)) {
+            msg += " - " + stackTrace[0];
         }
+
+        out.append(msg);
     }
 }

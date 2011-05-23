@@ -7,5 +7,5 @@ package com.alibaba.citrus.util.templatelite;
  * @author Michael Zhou
  */
 public interface VisitorInvocationErrorHandler {
-    void handleInvocationError(String desc, Throwable e);
+    void handleInvocationError(String desc, Throwable e) throws Exception;
 }
