@@ -479,4 +479,47 @@ public class FileUtilTests {
         assertEquals(ext, result.getExtension());
         assertEquals(toString, result.toString());
     }
+
+    @Test
+    public void resolve() {
+        // form1: http://server/...
+        assertEquals("http://www.taobao.com:8080/aa/bb/xx/yy",
+                FileUtil.resolve("http://www.taobao.com:8080/aa/bb/cc", "xx/yy"));
+
+        assertEquals("http://www.taobao.com:8080/aa/xx/yy",
+                FileUtil.resolve("http://www.taobao.com:8080/aa/bb/cc", "../xx/yy"));
+
+        try {
+            FileUtil.resolve("http://www.taobao.com:8080/aa/bb/cc", "../../../xx/yy");
+            fail();
+        } catch (IllegalPathException e) {
+            assertThat(e, exception("/aa/bb/cc/../../../../xx/yy"));
+        }
+
+        // form2: jar:url!/...
+        assertEquals("jar:http://www.taobao.com:8080/my.jar!/aa/bb/xx/yy",
+                FileUtil.resolve("jar:http://www.taobao.com:8080/my.jar!/aa/bb/cc", "xx/yy"));
+
+        assertEquals("jar:http://www.taobao.com:8080/my.jar!/aa/xx/yy",
+                FileUtil.resolve("jar:http://www.taobao.com:8080/my.jar!/aa/bb/cc", "../xx/yy"));
+
+        try {
+            FileUtil.resolve("zip:http://www.taobao.com:8080/my.jar!/aa/bb/cc", "../../../xx/yy");
+            fail();
+        } catch (IllegalPathException e) {
+            assertThat(e, exception("/aa/bb/cc/../../../../xx/yy"));
+        }
+
+        // form3: file:/...
+        assertEquals("file:/aa/bb/xx/yy", FileUtil.resolve("file:aa/bb/cc", "xx/yy"));
+
+        assertEquals("file:/aa/xx/yy", FileUtil.resolve("file:aa/bb/cc", "../xx/yy"));
+
+        try {
+            FileUtil.resolve("file:aa/bb/cc", "../../../xx/yy");
+            fail();
+        } catch (IllegalPathException e) {
+            assertThat(e, exception("aa/bb/cc/../../../../xx/yy"));
+        }
+    }
 }

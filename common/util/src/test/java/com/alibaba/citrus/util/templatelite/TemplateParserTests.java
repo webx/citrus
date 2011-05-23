@@ -17,16 +17,22 @@
  */
 package com.alibaba.citrus.util.templatelite;
 
+import static com.alibaba.citrus.test.TestEnvStatic.*;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static com.alibaba.citrus.util.ArrayUtil.*;
+import static com.alibaba.citrus.util.StringUtil.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
+import java.io.FileOutputStream;
 
 import org.junit.Test;
 
+import com.alibaba.citrus.util.IllegalPathException;
+import com.alibaba.citrus.util.io.ByteArrayInputStream;
+import com.alibaba.citrus.util.io.StreamUtil;
 import com.alibaba.citrus.util.templatelite.Template.IncludeTemplate;
 import com.alibaba.citrus.util.templatelite.Template.Node;
 import com.alibaba.citrus.util.templatelite.Template.Placeholder;
@@ -896,6 +902,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
             loadTemplate("test08_import_notfound.txt", 1, 1, 1);
             fail();
         } catch (TemplateParseException e) {
+            // source.getRelative()计算成功，但是文件没找到
             assertThat(
                     e,
                     exception(FileNotFoundException.class, "Could not import template file \"notfound.txt\" at ",
@@ -904,25 +911,39 @@ public class TemplateParserTests extends AbstractTemplateTests {
     }
 
     @Test
-    public void test08_import_invalid() {
+    public void test08_import_invalid() throws Exception {
+        String importedFile = repeat("../", countMatches(srcdir.toURL().toExternalForm(), "/")) + "../def.htm";
+        String s = "#@trimming on\n";
+        s += "${abc: #abc}\n";
+        s += "#abc(" + importedFile + ") ## xxxx";
+
+        File f = new File(destdir, "testinvalid.htm");
+        StreamUtil.writeText(s, new FileOutputStream(f), "UTF-8", true);
+
         try {
-            loadTemplate("test08_import_invalid.txt", 1, 1, 1);
+            new Template(f);
             fail();
         } catch (TemplateParseException e) {
+            // source.getRelative()报错
             assertThat(
                     e,
-                    exception(URISyntaxException.class, "Could not import template file \"http:\" at ",
-                            "Line 5 Column 6"));
+                    exception(IllegalPathException.class,
+                            "Could not import template file \"" + importedFile + "\" at ", "Line 3 Column 6"));
         }
     }
 
     @Test
     public void test08_import_invalid2() {
+        String s = "#@trimming on\n";
+        s += "${abc: #abc}\n";
+        s += "#abc(def.htm) ## xxxx";
+
         try {
-            loadTemplate("test08_import_invalid2.txt", 1, 1, 1);
+            new Template(new ByteArrayInputStream(s.getBytes()), "test.txt");
             fail();
         } catch (TemplateParseException e) {
-            assertThat(e, exception("Could not import template file \"http:()\" at ", "Line 5 Column 6"));
+            // source.getRelative()返回null
+            assertThat(e, exception("Could not import template file \"def.htm\" at ", "Line 3 Column 6"));
         }
     }
 

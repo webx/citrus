@@ -20,6 +20,8 @@ package com.alibaba.citrus.util;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 用来处理文件路径和后缀的工具。
@@ -517,6 +519,29 @@ public class FileUtil {
         }
 
         return ext;
+    }
+
+    private static final Pattern schemePrefixPattern = Pattern.compile("(\\w+://.+?/)|((jar|zip):.+!/)|(\\w+:)");
+
+    /**
+     * 根据指定url和相对路径，计算出相对路径所对应的完整url。类似于<code>URI.resolve()</code>
+     * 方法，然后后者不能正确处理jar类型的URL。
+     */
+    public static String resolve(String url, String relativePath) {
+        url = trimToEmpty(url);
+
+        Matcher m = schemePrefixPattern.matcher(url);
+        int index = 0;
+
+        if (m.find()) {
+            index = m.end();
+
+            if (url.charAt(index - 1) == '/') {
+                index--;
+            }
+        }
+
+        return url.substring(0, index) + normalizeAbsolutePath(url.substring(index) + "/../" + relativePath);
     }
 
     public static class FileNameAndExtension {

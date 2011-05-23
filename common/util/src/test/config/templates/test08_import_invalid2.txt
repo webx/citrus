@@ -1,5 +1,0 @@
-#@trimming on
-
-${abc: #abc}
-
-#abc(http:()) ## xxxx

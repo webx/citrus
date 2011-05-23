@@ -31,12 +31,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
 import org.junit.Test;
 
+import com.alibaba.citrus.util.IllegalPathException;
 import com.alibaba.citrus.util.templatelite.Template.InputSource;
 
 public class TemplateInputSourceTests extends AbstractTemplateTests {
@@ -102,7 +102,7 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
         assertEquals(new File("/aa/bb/b.txt").toURL().toExternalForm(), inputSource.systemId);
 
         inputSource = parentSource.getRelative(" /b.txt ");
-        assertEquals(new File("/b.txt").toURL().toExternalForm(), inputSource.systemId);
+        assertEquals(new File("/aa/bb/b.txt").toURL().toExternalForm(), inputSource.systemId);
 
         inputSource = parentSource.getRelative(" ../b.txt ");
         assertEquals(new File("/aa/b.txt").toURI().normalize().toURL().toExternalForm(), inputSource.systemId);
@@ -110,8 +110,12 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
         inputSource = parentSource.getRelative(" ../../b.txt ");
         assertEquals(new File("/b.txt").toURI().normalize().toURL().toExternalForm(), inputSource.systemId);
 
-        inputSource = parentSource.getRelative(" ../../../b.txt ");
-        assertEquals(new File("/../b.txt").toURI().normalize().toURL().toExternalForm(), inputSource.systemId);
+        try {
+            inputSource = parentSource.getRelative(" ../../../b.txt ");
+            fail();
+        } catch (IllegalPathException e) {
+            assertThat(e, exception("../../../b.txt"));
+        }
     }
 
     @Test
@@ -124,20 +128,20 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
         inputSource = parentSource.getRelative("b.txt ");
         assertEquals("http://localhost:8080/aa/bb/b.txt", inputSource.systemId);
 
+        inputSource = parentSource.getRelative("/b.txt ");
+        assertEquals("http://localhost:8080/aa/bb/b.txt", inputSource.systemId);
+
         inputSource = parentSource.getRelative(" ../b.txt ");
         assertEquals("http://localhost:8080/aa/b.txt", inputSource.systemId);
 
         inputSource = parentSource.getRelative(" ../../b.txt ");
         assertEquals("http://localhost:8080/b.txt", inputSource.systemId);
 
-        inputSource = parentSource.getRelative(" ../../../b.txt ");
-        assertEquals("http://localhost:8080/../b.txt", inputSource.systemId);
-
         try {
-            inputSource = parentSource.getRelative("http:");
+            inputSource = parentSource.getRelative(" ../../../b.txt ");
             fail();
-        } catch (Exception e) {
-            assertThat(e, exception(URISyntaxException.class));
+        } catch (IllegalPathException e) {
+            assertThat(e, exception("../../../b.txt"));
         }
     }
 

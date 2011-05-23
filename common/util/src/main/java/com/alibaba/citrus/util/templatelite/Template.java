@@ -35,7 +35,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
@@ -50,6 +49,7 @@ import java.util.regex.Pattern;
 
 import net.sf.cglib.reflect.FastClass;
 
+import com.alibaba.citrus.util.FileUtil;
 import com.alibaba.citrus.util.internal.ToStringBuilder;
 import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
 
@@ -1665,16 +1665,16 @@ public final class Template {
             relativePath = trimToNull(relativePath);
 
             if (relativePath != null) {
-                URI sourceURI = null;
+                String sourceURI = null;
 
                 if (source instanceof File) {
-                    sourceURI = ((File) source).toURI();
+                    sourceURI = ((File) source).toURL().toExternalForm();
                 } else if (source instanceof URL) {
-                    sourceURI = ((URL) source).toURI();
+                    sourceURI = ((URL) source).toExternalForm();
                 }
 
                 if (sourceURI != null) {
-                    return new InputSource(sourceURI.resolve(relativePath).toURL());
+                    return new InputSource(new URL(FileUtil.resolve(sourceURI, relativePath)));
                 }
             }
 
