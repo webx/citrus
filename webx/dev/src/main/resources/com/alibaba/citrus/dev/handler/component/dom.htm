@@ -8,7 +8,7 @@
 
 <div class="webx-dom">
   ${controlBar: #controlBar}
-  ${elementsList: #orderedElementsList, #unorderedElementsList}
+  ${elementList: #orderedElementList, #unorderedElementList}
 </div>
 
 #controlBar
@@ -18,13 +18,13 @@
   </div>
 #end
 
-#orderedElementsList
+#orderedElementList
   <ol>
     ${elements: #elements.*}
   </ol>
 #end
 
-#unorderedElementsList
+#unorderedElementList
   <ul>
     ${elements: #elements.*}
   </ul>

@@ -1,0 +1,54 @@
+## --------------------------
+## 显示配置文件的内容，以及配置文件的import结构
+##
+#@ charset    UTF-8
+#@ trimming   on
+#@ whitespace collapse
+## --------------------------
+
+<h1>${contextName} - ${configLocations}</h1>
+<div id="webx-configurations">
+  <ul>
+    ${configurations: #configurations}
+  </ul>
+</div>
+
+#configurations
+  ${configurations: #*}
+
+  #withImports
+    <li>
+      $#{configurationItem}
+      <ul>
+        ${imports: #configurations}
+      </ul>
+    </li>
+  #end
+  
+  #noImports
+    <li>
+      $#{configurationItem}
+    </li>
+  #end
+#end
+
+#configurationItem
+  <p class="configuration-file-name"><a id="handle-${configurationNameForId}" href="#" class="handle-configuration-file-content" title="Click to show/hide content">${configurationName} $#{configurationContentHandle}</a></p>
+  $#{configurationContent}
+#end
+
+#configurationContentHandle
+  <img id="handle-${configurationNameForId}-img" src="${url:images/close.png}" alt="" />
+#end
+
+#configurationContent
+  <div id="configuration-file-content-${configurationNameForId}" class="configuration-file-content">
+    ${configurationContent: #controlBar}
+  </div>
+  
+  #controlBar
+    <div class="control-bar">
+      <span>Location: ${configurationUrl}</span>
+    </div>
+  #end
+#end

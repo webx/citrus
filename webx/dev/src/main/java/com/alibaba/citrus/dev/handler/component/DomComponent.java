@@ -63,7 +63,7 @@ public class DomComponent extends PageComponent {
             }
         }
 
-        public void visitElementsList(Template orderedTemplate, Template unorderedTemplate) {
+        public void visitElementList(Template orderedTemplate, Template unorderedTemplate) {
             Iterator<Element> i = elements.iterator();
 
             if (i.hasNext() && i.next() != null && i.hasNext()) {

@@ -1,0 +1,22 @@
+## --------------------------
+## 列出所有resolvable deps
+##
+#@ charset    UTF-8
+#@ trimming   on
+#@ whitespace collapse
+## --------------------------
+
+<h1>${resolvableDependencyCount} resolvable dependencies in ${contextName} - ${configLocations}</h1>
+<div id="webx-resolvable-deps">
+  <ol>
+    ${resolvableDependency: #resolvableDependency}
+  </ol>
+</div>
+
+#resolvableDependency
+  <li>
+    <p><span class="hl-annotation">@Autowired</span></p>
+    <p><span class="hl-keyword">private</span> <span class="hl-package">${typePackage}</span><span class="hl-class">${typeName}</span> <span class="hl-variable">${varName}</span>;</p>
+    <pre>(<span class="hl-package">${valueTypePackage}</span><span class="hl-class">${valueTypeName}</span>) ${value}</pre>
+  </li>
+#end
