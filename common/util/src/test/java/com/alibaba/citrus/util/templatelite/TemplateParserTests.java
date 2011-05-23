@@ -27,6 +27,8 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URL;
 
 import org.junit.Test;
 
@@ -880,7 +882,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
     }
 
     @Test
-    public void test08_import() {
+    public void test08_import_file() {
         loadTemplate("test08_import.txt", 1, 1, 1);
 
         assertPlaceholder(template.nodes[0], "abc", "Line 3 Column 1", new String[] { "#abc" }, "#abc");
@@ -888,6 +890,26 @@ public class TemplateParserTests extends AbstractTemplateTests {
         Template subTemplate = template.getSubTemplate("abc");
 
         source = "def.txt";
+        assertTemplate(subTemplate, "abc", 1, 0, 1, null);
+
+        assertText("  hello,\n" //
+                + "world", subTemplate.nodes[0]); // no trimming
+
+        assertLocation(subTemplate.nodes[0].location, "Line 2 Column 3");
+    }
+
+    @Test
+    public void test08_import_url() throws IOException {
+        URL jarurl = copyFilesToJar("dest.jar", "test08_import.txt", "import.txt", "inc/def.txt", "inc/def.txt");
+
+        template = new Template(new URL("jar:" + jarurl + "!/import.txt"));
+        source = "import.txt";
+
+        assertPlaceholder(template.nodes[0], "abc", "Line 3 Column 1", new String[] { "#abc" }, "#abc");
+
+        Template subTemplate = template.getSubTemplate("abc");
+
+        source = "inc/def.txt";
         assertTemplate(subTemplate, "abc", 1, 0, 1, null);
 
         assertText("  hello,\n" //

@@ -174,10 +174,10 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
         assertReader("GBK", f, f.toURL().toExternalForm());
 
         // url as input source
-        URL jarurl = copyFileToJar("test05_param_gbk.txt", "gbk.txt", "test.jar");
+        URL jarurl = copyFilesToJar("test.jar", "test05_param_gbk.txt", "gbk.txt");
         URL url = new URL("jar:" + jarurl.toExternalForm() + "!/gbk.txt");
         inputSource = new InputSource(url);
-        assertReader("GBK", null, url.toExternalForm());
+        assertReader("GBK", url, url.toExternalForm());
 
         // stream as input source
         inputSource = new InputSource(new ByteArrayInputStream("#@charset UTF-8\n\nhello".getBytes("UTF-8")),
@@ -189,7 +189,7 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
         assertReader(null, null, "utf8.txt");
     }
 
-    private void assertReader(String charset, File source, String systemId) throws IOException {
+    private void assertReader(String charset, Object source, String systemId) throws IOException {
         Reader reader = null;
 
         try {
@@ -226,7 +226,8 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
         source = "temp.txt";
 
         // template from test07_reload_1.txt
-        URL jarurl = copyFileToJar("test07_reload_1.txt", source, "temp.jar");
+        copyFile("test07_reload_1.txt", source);
+        URL jarurl = copyFilesToJar("temp.jar", "test07_reload_1.txt", source);
         URL url = new URL("jar:" + jarurl.toExternalForm() + "!/temp.txt");
         File destFile = new File(destdir, source);
 
@@ -238,10 +239,11 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
         };
 
         boolean[] reloadable = new boolean[] { true, true, false, false, false };
+        boolean[] clearsource = new boolean[] { false, false, false, true, true };
 
         for (int i = 0; i < templates.length; i++) {
             Template t = templates[i];
-            assertEquals(reloadable[i], t.source.source != null);
+            assertEquals(clearsource[i], t.source.source == null);
             assertTemplate(t, null, 2, 0, 0, null);
 
             assertEquals("abc\n${abc}", t.renderToString(new FallbackTextWriter<StringBuilder>()));
@@ -251,7 +253,8 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
         Thread.sleep(1001);
 
         // template from test07_reload_2.txt
-        copyFileToJar("test07_reload_2.txt", source, "temp.jar");
+        copyFile("test07_reload_2.txt", source);
+        copyFilesToJar("temp.jar", "test07_reload_2.txt", source);
 
         for (int i = 0; i < templates.length; i++) {
             Template t = templates[i];
@@ -271,8 +274,8 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
         source = "temp.txt";
 
         // template from test07_reload_1.txt
-        copyFileToJar("test07_reload_1.txt", "imported.txt", "temp.jar");
-        copyFileToJar("test07_reload_import.txt", source, "temp2.jar");
+        copyFile("test07_reload_1.txt", "imported.txt");
+        copyFile("test07_reload_import.txt", source);
 
         Template template = new Template(new File(destdir, source));
         assertEquals("abc\n${abc}", template.renderToString(new FallbackTextWriter<StringBuilder>()));
@@ -281,7 +284,7 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
         Thread.sleep(1001);
 
         // template from test07_reload_2.txt
-        copyFileToJar("test07_reload_2.txt", "imported.txt", "temp.jar");
+        copyFile("test07_reload_2.txt", "imported.txt");
 
         assertEquals("xyz\n${xyz}", template.renderToString(new FallbackTextWriter<StringBuilder>()));
     }

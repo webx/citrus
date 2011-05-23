@@ -82,18 +82,29 @@ public abstract class AbstractTemplateTests {
         }
     }
 
-    protected URL copyFileToJar(String src, String dest, String destJar) throws IOException {
+    protected URL copyFile(String src, String dest) throws IOException {
         File destfile = new File(destdir, dest);
-        File destJarFile = new File(destdir, destJar);
 
         io(new FileInputStream(new File(srcdir, src)), new FileOutputStream(destfile), true, true);
 
+        return destfile.toURL();
+    }
+
+    protected URL copyFilesToJar(String destJar, String... srcdest) throws IOException {
+        assertTrue(srcdest.length % 2 == 0);
+
+        File destJarFile = new File(destdir, destJar);
         JarOutputStream jos = new JarOutputStream(new FileOutputStream(destJarFile));
 
-        jos.putNextEntry(new ZipEntry(dest));
-        io(new FileInputStream(new File(srcdir, src)), jos, true, false);
+        for (int i = 0; i < srcdest.length; i += 2) {
+            String src = srcdest[i];
+            String dest = srcdest[i + 1];
 
-        jos.closeEntry();
+            jos.putNextEntry(new ZipEntry(dest));
+            io(new FileInputStream(new File(srcdir, src)), jos, true, false);
+            jos.closeEntry();
+        }
+
         jos.close();
 
         return destJarFile.toURL();

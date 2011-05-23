@@ -1702,7 +1702,6 @@ public final class Template {
 
                     if (istream == null) {
                         istream = new BufferedInputStream(((URL) source).openStream());
-                        source = null; // clear source
                     }
                 } else if (source instanceof InputStream) {
                     istream = new BufferedInputStream((InputStream) source);
