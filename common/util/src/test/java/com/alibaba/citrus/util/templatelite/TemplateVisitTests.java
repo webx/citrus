@@ -46,10 +46,8 @@ public class TemplateVisitTests extends AbstractTemplateTests {
         }
 
         acceptFailure(new Visitor());
-        assertThat(
-                runtimeError,
-                exception(NoSuchMethodException.class, "Error rendering Text with 4 characters",
-                        "Visitor.visitText(String)"));
+        assertThat(runtimeError, exception(NoSuchMethodException.class, "Error rendering Text with 4 characters"));
+        assertEquals("Visitor.visitText(String)", runtimeError.getCause().getMessage());
 
         // 有visitText()方法，但参数不匹配
         @SuppressWarnings("unused")
@@ -59,10 +57,8 @@ public class TemplateVisitTests extends AbstractTemplateTests {
         }
 
         acceptFailure(new Visitor2());
-        assertThat(
-                runtimeError,
-                exception(NoSuchMethodException.class, "Error rendering Text with 4 characters",
-                        "Visitor2.visitText(String)"));
+        assertThat(runtimeError, exception(NoSuchMethodException.class, "Error rendering Text with 4 characters"));
+        assertEquals("Visitor2.visitText(String)", runtimeError.getCause().getMessage());
 
         // 有visitText()方法，但参数不匹配
         @SuppressWarnings("unused")
@@ -72,10 +68,8 @@ public class TemplateVisitTests extends AbstractTemplateTests {
         }
 
         acceptFailure(new Visitor3());
-        assertThat(
-                runtimeError,
-                exception(NoSuchMethodException.class, "Error rendering Text with 4 characters",
-                        "Visitor3.visitText(String)"));
+        assertThat(runtimeError, exception(NoSuchMethodException.class, "Error rendering Text with 4 characters"));
+        assertEquals("Visitor3.visitText(String)", runtimeError.getCause().getMessage());
     }
 
     @Test
@@ -106,47 +100,61 @@ public class TemplateVisitTests extends AbstractTemplateTests {
         loadTemplate("${test1: a, b, c}".getBytes(), "test.txt", 1, 0, 0);
         acceptFailure(new Visitor());
         assertThat(runtimeError,
-                exception(NoSuchMethodException.class, "Error rendering ${test1:a, b, c} at test.txt: Line 1 Column 1",
-                        "One of the following method:\n" //
-                                + "  1. Visitor.visitTest1(String, String, String)\n" //
-                                + "  2. Visitor.visitTest1(String[])\n" //
-                                + "  3. Visitor.visitTest1()"));
+                exception(NoSuchMethodException.class, "Error rendering ${test1:a, b, c} at test.txt: Line 1 Column 1"));
+
+        assertEquals("One of the following method:\n" //
+                + "  1. Visitor.visitTest1(String, String, String)\n" //
+                + "  2. Visitor.visitTest1(String[])\n" //
+                + "  3. Visitor.visitTest1()", runtimeError.getCause().getMessage());
+
+        loadTemplate("${test1}".getBytes(), "test.txt", 1, 0, 0);
+        acceptFailure(new Visitor());
+        assertThat(runtimeError,
+                exception(NoSuchMethodException.class, "Error rendering ${test1} at test.txt: Line 1 Column 1"));
+
+        assertEquals("One of the following method:\n" //
+                + "  1. Visitor.visitTest1()\n" //
+                + "  2. Visitor.visitTest1(String[])", runtimeError.getCause().getMessage());
 
         loadTemplate("${test2: a, b, c}".getBytes(), "test.txt", 1, 0, 0);
         acceptFailure(new Visitor());
         assertThat(runtimeError,
-                exception(NoSuchMethodException.class, "Error rendering ${test2:a, b, c} at test.txt: Line 1 Column 1",
-                        "One of the following method:\n" //
-                                + "  1. Visitor.visitTest2(String, String, String)\n" //
-                                + "  2. Visitor.visitTest2(String[])\n" //
-                                + "  3. Visitor.visitTest2()"));
+                exception(NoSuchMethodException.class, "Error rendering ${test2:a, b, c} at test.txt: Line 1 Column 1"));
+
+        assertEquals("One of the following method:\n" //
+                + "  1. Visitor.visitTest2(String, String, String)\n" //
+                + "  2. Visitor.visitTest2(String[])\n" //
+                + "  3. Visitor.visitTest2()", runtimeError.getCause().getMessage());
 
         loadTemplate("${test3: a, b, c}".getBytes(), "test.txt", 1, 0, 0);
         acceptFailure(new Visitor());
         assertThat(runtimeError,
-                exception(NoSuchMethodException.class, "Error rendering ${test3:a, b, c} at test.txt: Line 1 Column 1",
-                        "One of the following method:\n" //
-                                + "  1. Visitor.visitTest3(String, String, String)\n" //
-                                + "  2. Visitor.visitTest3(String[])\n" //
-                                + "  3. Visitor.visitTest3()"));
+                exception(NoSuchMethodException.class, "Error rendering ${test3:a, b, c} at test.txt: Line 1 Column 1"));
+
+        assertEquals("One of the following method:\n" //
+                + "  1. Visitor.visitTest3(String, String, String)\n" //
+                + "  2. Visitor.visitTest3(String[])\n" //
+                + "  3. Visitor.visitTest3()", runtimeError.getCause().getMessage());
 
         loadTemplate("${test4: a, b, c}".getBytes(), "test.txt", 1, 0, 0);
         acceptFailure(new Visitor());
         assertThat(runtimeError,
-                exception(NoSuchMethodException.class, "Error rendering ${test4:a, b, c} at test.txt: Line 1 Column 1",
-                        "One of the following method:\n" //
-                                + "  1. Visitor.visitTest4(String, String, String)\n" //
-                                + "  2. Visitor.visitTest4(String[])\n" //
-                                + "  3. Visitor.visitTest4()"));
+                exception(NoSuchMethodException.class, "Error rendering ${test4:a, b, c} at test.txt: Line 1 Column 1"));
+
+        assertEquals("One of the following method:\n" //
+                + "  1. Visitor.visitTest4(String, String, String)\n" //
+                + "  2. Visitor.visitTest4(String[])\n" //
+                + "  3. Visitor.visitTest4()", runtimeError.getCause().getMessage());
 
         loadTemplate("${test5: a, b, c}".getBytes(), "test.txt", 1, 0, 0);
         acceptFailure(new Visitor());
         assertThat(runtimeError,
-                exception(NoSuchMethodException.class, "Error rendering ${test5:a, b, c} at test.txt: Line 1 Column 1",
-                        "One of the following method:\n" //
-                                + "  1. Visitor.visitTest5(String, String, String)\n" //
-                                + "  2. Visitor.visitTest5(String[])\n" //
-                                + "  3. Visitor.visitTest5()"));
+                exception(NoSuchMethodException.class, "Error rendering ${test5:a, b, c} at test.txt: Line 1 Column 1"));
+
+        assertEquals("One of the following method:\n" //
+                + "  1. Visitor.visitTest5(String, String, String)\n" //
+                + "  2. Visitor.visitTest5(String[])\n" //
+                + "  3. Visitor.visitTest5()", runtimeError.getCause().getMessage());
     }
 
     @Test
@@ -181,55 +189,60 @@ public class TemplateVisitTests extends AbstractTemplateTests {
         assertThat(
                 runtimeError,
                 exception(NoSuchMethodException.class,
-                        "Error rendering ${test1:#a, #b, #c} at test.txt: Line 1 Column 1",
-                        "One of the following method:\n" //
-                                + "  1. Visitor.visitTest1(Template, Template, Template)\n" //
-                                + "  2. Visitor.visitTest1(Template[])\n" //
-                                + "  3. Visitor.visitTest1()"));
+                        "Error rendering ${test1:#a, #b, #c} at test.txt: Line 1 Column 1"));
+
+        assertEquals("One of the following method:\n" //
+                + "  1. Visitor.visitTest1(Template, Template, Template)\n" //
+                + "  2. Visitor.visitTest1(Template[])\n" //
+                + "  3. Visitor.visitTest1()", runtimeError.getCause().getMessage());
 
         loadTemplate(("${test2: #a, #b, #c}" + s).getBytes(), "test.txt", 1, 3, 0);
         acceptFailure(new Visitor());
         assertThat(
                 runtimeError,
                 exception(NoSuchMethodException.class,
-                        "Error rendering ${test2:#a, #b, #c} at test.txt: Line 1 Column 1",
-                        "One of the following method:\n" //
-                                + "  1. Visitor.visitTest2(Template, Template, Template)\n" //
-                                + "  2. Visitor.visitTest2(Template[])\n" //
-                                + "  3. Visitor.visitTest2()"));
+                        "Error rendering ${test2:#a, #b, #c} at test.txt: Line 1 Column 1"));
+
+        assertEquals("One of the following method:\n" //
+                + "  1. Visitor.visitTest2(Template, Template, Template)\n" //
+                + "  2. Visitor.visitTest2(Template[])\n" //
+                + "  3. Visitor.visitTest2()", runtimeError.getCause().getMessage());
 
         loadTemplate(("${test3: #a, #b, #c}" + s).getBytes(), "test.txt", 1, 3, 0);
         acceptFailure(new Visitor());
         assertThat(
                 runtimeError,
                 exception(NoSuchMethodException.class,
-                        "Error rendering ${test3:#a, #b, #c} at test.txt: Line 1 Column 1",
-                        "One of the following method:\n" //
-                                + "  1. Visitor.visitTest3(Template, Template, Template)\n" //
-                                + "  2. Visitor.visitTest3(Template[])\n" //
-                                + "  3. Visitor.visitTest3()"));
+                        "Error rendering ${test3:#a, #b, #c} at test.txt: Line 1 Column 1"));
+
+        assertEquals("One of the following method:\n" //
+                + "  1. Visitor.visitTest3(Template, Template, Template)\n" //
+                + "  2. Visitor.visitTest3(Template[])\n" //
+                + "  3. Visitor.visitTest3()", runtimeError.getCause().getMessage());
 
         loadTemplate(("${test4: #a, #b, #c}" + s).getBytes(), "test.txt", 1, 3, 0);
         acceptFailure(new Visitor());
         assertThat(
                 runtimeError,
                 exception(NoSuchMethodException.class,
-                        "Error rendering ${test4:#a, #b, #c} at test.txt: Line 1 Column 1",
-                        "One of the following method:\n" //
-                                + "  1. Visitor.visitTest4(Template, Template, Template)\n" //
-                                + "  2. Visitor.visitTest4(Template[])\n" //
-                                + "  3. Visitor.visitTest4()"));
+                        "Error rendering ${test4:#a, #b, #c} at test.txt: Line 1 Column 1"));
+
+        assertEquals("One of the following method:\n" //
+                + "  1. Visitor.visitTest4(Template, Template, Template)\n" //
+                + "  2. Visitor.visitTest4(Template[])\n" //
+                + "  3. Visitor.visitTest4()", runtimeError.getCause().getMessage());
 
         loadTemplate(("${test5: #a, #b, #c}" + s).getBytes(), "test.txt", 1, 3, 0);
         acceptFailure(new Visitor());
         assertThat(
                 runtimeError,
                 exception(NoSuchMethodException.class,
-                        "Error rendering ${test5:#a, #b, #c} at test.txt: Line 1 Column 1",
-                        "One of the following method:\n" //
-                                + "  1. Visitor.visitTest5(Template, Template, Template)\n" //
-                                + "  2. Visitor.visitTest5(Template[])\n" //
-                                + "  3. Visitor.visitTest5()"));
+                        "Error rendering ${test5:#a, #b, #c} at test.txt: Line 1 Column 1"));
+
+        assertEquals("One of the following method:\n" //
+                + "  1. Visitor.visitTest5(Template, Template, Template)\n" //
+                + "  2. Visitor.visitTest5(Template[])\n" //
+                + "  3. Visitor.visitTest5()", runtimeError.getCause().getMessage());
     }
 
     @Test
@@ -268,66 +281,72 @@ public class TemplateVisitTests extends AbstractTemplateTests {
         assertThat(
                 runtimeError,
                 exception(NoSuchMethodException.class,
-                        "Error rendering ${test1:a, #b, #c} at test.txt: Line 1 Column 1",
-                        "One of the following method:\n" //
-                                + "  1. Visitor.visitTest1(String, Template, Template)\n" //
-                                + "  2. Visitor.visitTest1(Object[])\n" //
-                                + "  3. Visitor.visitTest1()"));
+                        "Error rendering ${test1:a, #b, #c} at test.txt: Line 1 Column 1"));
+
+        assertEquals("One of the following method:\n" //
+                + "  1. Visitor.visitTest1(String, Template, Template)\n" //
+                + "  2. Visitor.visitTest1(Object[])\n" //
+                + "  3. Visitor.visitTest1()", runtimeError.getCause().getMessage());
 
         loadTemplate(("${test2: a, #b, #c}" + s).getBytes(), "test.txt", 1, 2, 0);
         acceptFailure(new Visitor());
         assertThat(
                 runtimeError,
                 exception(NoSuchMethodException.class,
-                        "Error rendering ${test2:a, #b, #c} at test.txt: Line 1 Column 1",
-                        "One of the following method:\n" //
-                                + "  1. Visitor.visitTest2(String, Template, Template)\n" //
-                                + "  2. Visitor.visitTest2(Object[])\n" //
-                                + "  3. Visitor.visitTest2()"));
+                        "Error rendering ${test2:a, #b, #c} at test.txt: Line 1 Column 1"));
+
+        assertEquals("One of the following method:\n" //
+                + "  1. Visitor.visitTest2(String, Template, Template)\n" //
+                + "  2. Visitor.visitTest2(Object[])\n" //
+                + "  3. Visitor.visitTest2()", runtimeError.getCause().getMessage());
 
         loadTemplate(("${test3: a, #b, #c}" + s).getBytes(), "test.txt", 1, 2, 0);
         acceptFailure(new Visitor());
         assertThat(
                 runtimeError,
                 exception(NoSuchMethodException.class,
-                        "Error rendering ${test3:a, #b, #c} at test.txt: Line 1 Column 1",
-                        "One of the following method:\n" //
-                                + "  1. Visitor.visitTest3(String, Template, Template)\n" //
-                                + "  2. Visitor.visitTest3(Object[])\n" //
-                                + "  3. Visitor.visitTest3()"));
+                        "Error rendering ${test3:a, #b, #c} at test.txt: Line 1 Column 1"));
+
+        assertEquals("One of the following method:\n" //
+                + "  1. Visitor.visitTest3(String, Template, Template)\n" //
+                + "  2. Visitor.visitTest3(Object[])\n" //
+                + "  3. Visitor.visitTest3()", runtimeError.getCause().getMessage());
 
         loadTemplate(("${test4: a, #b, #c}" + s).getBytes(), "test.txt", 1, 2, 0);
         acceptFailure(new Visitor());
         assertThat(
                 runtimeError,
                 exception(NoSuchMethodException.class,
-                        "Error rendering ${test4:a, #b, #c} at test.txt: Line 1 Column 1",
-                        "One of the following method:\n" //
-                                + "  1. Visitor.visitTest4(String, Template, Template)\n" //
-                                + "  2. Visitor.visitTest4(Object[])\n" //
-                                + "  3. Visitor.visitTest4()"));
+                        "Error rendering ${test4:a, #b, #c} at test.txt: Line 1 Column 1"));
+
+        assertEquals("One of the following method:\n" //
+                + "  1. Visitor.visitTest4(String, Template, Template)\n" //
+                + "  2. Visitor.visitTest4(Object[])\n" //
+                + "  3. Visitor.visitTest4()", runtimeError.getCause().getMessage());
 
         loadTemplate(("${test5: a, #b, #c}" + s).getBytes(), "test.txt", 1, 2, 0);
         acceptFailure(new Visitor());
         assertThat(
                 runtimeError,
                 exception(NoSuchMethodException.class,
-                        "Error rendering ${test5:a, #b, #c} at test.txt: Line 1 Column 1",
-                        "One of the following method:\n" //
-                                + "  1. Visitor.visitTest5(String, Template, Template)\n" //
-                                + "  2. Visitor.visitTest5(Object[])\n" //
-                                + "  3. Visitor.visitTest5()"));
+                        "Error rendering ${test5:a, #b, #c} at test.txt: Line 1 Column 1"));
+
+        assertEquals("One of the following method:\n" //
+                + "  1. Visitor.visitTest5(String, Template, Template)\n" //
+                + "  2. Visitor.visitTest5(Object[])\n" //
+                + "  3. Visitor.visitTest5()", runtimeError.getCause().getMessage());
 
         loadTemplate(("${test6: a, #b, #c}" + s).getBytes(), "test.txt", 1, 2, 0);
         acceptFailure(new Visitor());
         assertThat(
                 runtimeError,
                 exception(NoSuchMethodException.class,
-                        "Error rendering ${test6:a, #b, #c} at test.txt: Line 1 Column 1",
-                        "One of the following method:\n" //
-                                + "  1. Visitor.visitTest6(String, Template, Template)\n" //
-                                + "  2. Visitor.visitTest6(Object[])\n" //
-                                + "  3. Visitor.visitTest6()"));
+                        "Error rendering ${test6:a, #b, #c} at test.txt: Line 1 Column 1"));
+
+        assertEquals("One of the following method:\n" //
+                + "  1. Visitor.visitTest6(String, Template, Template)\n" //
+                + "  2. Visitor.visitTest6(Object[])\n" //
+                + "  3. Visitor.visitTest6()", runtimeError.getCause().getMessage());
     }
 
     @Test
@@ -933,7 +952,7 @@ public class TemplateVisitTests extends AbstractTemplateTests {
         @SuppressWarnings("unused")
         class Visitor2 extends TextWriter<StringBuilder> {
             public Visitor1 visitItems() {
-                return new Visitor1(out()); // redirect to visitor1           
+                return new Visitor1(out()); // redirect to visitor1
             }
         }
 
@@ -951,7 +970,7 @@ public class TemplateVisitTests extends AbstractTemplateTests {
         @SuppressWarnings("unused")
         class Visitor2 extends TextWriter<StringBuilder> {
             public Visitor2 visitItems() {
-                return this; // redirect to self           
+                return this; // redirect to self
             }
         }
 

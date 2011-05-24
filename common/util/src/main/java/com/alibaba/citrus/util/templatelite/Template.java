@@ -65,91 +65,91 @@ import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
  * <p>
  * 参数必须定义在模板或子模板的开头，在所有的内容开始之前。
  * </p>
- * 
+ *
  * <pre>
  * #@charset UTF-8
  * </pre>
- * 
+ *
  * </dd>
  * <dt>注释</dt>
  * <dd>
  * <p>
  * 注释可以写在任何地方。如果一个注释从行首开始，或者注释之前没有任何可见字符，则整行将被忽略。
  * </p>
- * 
+ *
  * <pre>
  * ## comment
  * </pre>
- * 
+ *
  * </dd>
  * <dt>替换变量（placeholder）</dt>
  * <dd>
  * <p>
  * 最简单的写法：
  * </p>
- * 
+ *
  * <pre>
  * ${placeholder}
  * </pre>
- * 
+ *
  * <p>
  * 包含一个或多个参数：
  * </p>
- * 
+ *
  * <pre>
  * ${placeholder: param, param}
  * </pre>
- * 
+ *
  * <p>
  * 可引用一个或多个子模板作为参数。所引用的子模板将从当前子模板或者上级子模板中查找。
  * </p>
- * 
+ *
  * <pre>
  * ${placeholder: #subtpl, #subtpl}
  * </pre>
- * 
+ *
  * <p>
  * 也可引用多级子模板作为参数。
  * </p>
- * 
+ *
  * <pre>
  * ${placeholder: #tpl1.subtpl2.suptpl3}
  * </pre>
- * 
+ *
  * <p>
  * 使用.*可达到引用一组模板的作用。
  * </p>
- * 
+ *
  * <pre>
  * ${placeholder: #tpl1.*}
  * </pre>
- * 
+ *
  * </dd>
  * <dt>包含子模板</dt>
  * <dd>
  * <p>
  * 直接包含一个子模板，不调用visitor。
  * </p>
- * 
+ *
  * <pre>
  * $#{subtpl}
  * </pre>
- * 
+ *
  * <p>
  * 也可包含多级子模板。
  * </p>
- * 
+ *
  * <pre>
  * $#{tpl.subtpl1.subtpl2}
  * </pre>
- * 
+ *
  * </dd>
  * <dt>定义子模板</dt>
  * <dd>
  * <p>
  * 子模板必须位于模板或其它子模板的末尾。从最后一行内容到子模板之间的空行将被忽略。子模板可以包含其它子模板。
  * </p>
- * 
+ *
  * <pre>
  * #subtpl
  * #@trimming on
@@ -157,29 +157,29 @@ import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
  * content
  * #end
  * </pre>
- * 
+ *
  * </dd>
  * <dt>导入子模板</dt>
  * <dd>
  * <p>
  * 导入外部文件，作为子模板。这种方法所产生的子模板，和直接定义子模板的效果完全相同。但将子模板定义在外部文件中，有利于整理并缩短模板的长度。
  * </p>
- * 
+ *
  * <pre>
  * #subtpl(relative_file_name)
  * </pre>
- * 
+ *
  * <p>
  * 或者：
  * </p>
- * 
+ *
  * <pre>
  * #subtpl("relative_file_name")
  * </pre>
- * 
+ *
  * </dd>
  * </dl>
- * 
+ *
  * @author Michael Zhou
  */
 public final class Template {
@@ -648,7 +648,13 @@ public final class Template {
             buf.append("[])\n");
 
             // 方法3. 无参数
-            format.format("  %d. %s.%s()", count++, visitorClass.getSimpleName(), methodName);
+            if (placeholderParamCount > 0) {
+                format.format("  %d. %s.%s()", count++, visitorClass.getSimpleName(), methodName);
+            }
+
+            if (buf.charAt(buf.length() - 1) == '\n') {
+                buf.setLength(buf.length() - 1);
+            }
 
             throw new NoSuchMethodException(buf.toString());
         }
