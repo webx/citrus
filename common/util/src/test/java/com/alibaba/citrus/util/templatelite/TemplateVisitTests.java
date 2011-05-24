@@ -482,7 +482,16 @@ public class TemplateVisitTests extends AbstractTemplateTests {
             }
         }
 
-        String s = "\n#a\na\n#end\n#b\nb\n#end\n#c\nc\n#end\n";
+        String s = "\n";
+        s += "#a\n";
+        s += "a\n";
+        s += "#end\n";
+        s += "#b\n";
+        s += "b\n";
+        s += "#end\n";
+        s += "#c\n";
+        s += "c\n";
+        s += "#end\n";
 
         loadTemplate(("${test1: a, #b, #c}" + s).getBytes(), "test.txt", 1, 3, 0);
         assertEquals("no_params", template.renderToString(new Visitor()));
@@ -501,10 +510,91 @@ public class TemplateVisitTests extends AbstractTemplateTests {
     }
 
     @Test
+    public void render_forPlaceholder_TemplateRefs() throws Exception {
+        @SuppressWarnings("unused")
+        class Visitor extends TextWriter<StringBuilder> {
+            public void visitTest(Template[] params) {
+                for (Template template : params) {
+                    template.accept(this);
+                }
+            }
+
+            public void visitA(Template a) {
+            }
+
+            /*
+             * // ȱʧvisitB public void visitB(Template b) { b.accept(this); }
+             */
+
+            public void visitC(Template c) {
+                c.accept(this);
+                c.accept(this);
+                c.accept(this);
+            }
+        }
+
+        String s = "\n";
+        s += "#a\n";
+        s += "a\n";
+        s += "#end\n";
+        s += "#b\n";
+        s += "b\n";
+        s += "#end\n";
+        s += "#c\n";
+        s += "c\n";
+        s += "#end\n";
+
+        loadTemplate(("${test: #a, #b, #c}" + s).getBytes(), "test.txt", 1, 3, 0);
+        assertEquals("bccc", template.renderToString(new Visitor()));
+    }
+
+    @Test
     public void render_include_template() throws Exception {
         loadTemplate("$#{a}\n#a\naaa\n#end".getBytes(), "test.txt", 1, 1, 0);
 
         assertEquals("aaa", template.renderToString(new FallbackTextWriter<StringBuilder>()));
+    }
+
+    @Test
+    public void render_include_templateRef() throws Exception {
+        @SuppressWarnings("unused")
+        class Visitor extends TextWriter<StringBuilder> {
+            public void visitA(Template a) {
+                a.accept(this);
+                a.accept(this);
+                a.accept(this);
+            }
+        }
+
+        loadTemplate("$#{a}\n#a\na\n#end".getBytes(), "test.txt", 1, 1, 0);
+
+        assertEquals("aaa", template.renderToString(new Visitor()));
+    }
+
+    @Test
+    public void render_include_redirect_templateRef() throws Exception {
+        @SuppressWarnings("unused")
+        class Visitor1 extends TextWriter<StringBuilder> {
+            public Visitor1(StringBuilder out) {
+                super(out);
+            }
+
+            public void visitA(Template a) {
+                a.accept(this);
+                a.accept(this);
+                a.accept(this);
+            }
+        }
+        @SuppressWarnings("unused")
+        class Visitor2 extends TextWriter<StringBuilder> {
+            public Visitor1 visitA(Template a) {
+                return new Visitor1(out());
+            }
+        }
+
+        loadTemplate("$#{a}\n#a\na\n#end".getBytes(), "test.txt", 1, 1, 0);
+
+        assertEquals("aaa", template.renderToString(new Visitor2()));
     }
 
     @Test

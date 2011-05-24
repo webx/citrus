@@ -105,11 +105,13 @@ public class TemplateParserTests extends AbstractTemplateTests {
         assertTrue(param.isTemplateReference());
         assertEquals("aaa", param.getTemplateName());
         assertEquals("aaa", param.getTemplateReference().getName());
+        assertTemplateRef(template.getSubTemplate("aaa"), param.getTemplateReference());
 
         param = placeholder.params[i++];
         assertTrue(param.isTemplateReference());
         assertEquals("bbb.ccc", param.getTemplateName());
         assertEquals("ccc", param.getTemplateReference().getName());
+        assertTemplateRef(template.getSubTemplate("bbb").getSubTemplate("ccc"), param.getTemplateReference());
 
         param = placeholder.params[i++];
         assertFalse(param.isTemplateReference());
@@ -134,16 +136,19 @@ public class TemplateParserTests extends AbstractTemplateTests {
         assertTrue(param.isTemplateReference());
         assertEquals("aaa.d", param.getTemplateName());
         assertEquals("d", param.getTemplateReference().getName());
+        assertTemplateRef(template.getSubTemplate("aaa").getSubTemplate("d"), param.getTemplateReference());
 
         param = placeholder.params[i++];
         assertTrue(param.isTemplateReference());
         assertEquals("aaa.c", param.getTemplateName());
         assertEquals("c", param.getTemplateReference().getName());
+        assertTemplateRef(template.getSubTemplate("aaa").getSubTemplate("c"), param.getTemplateReference());
 
         param = placeholder.params[i++];
         assertTrue(param.isTemplateReference());
         assertEquals("aaa.b", param.getTemplateName());
         assertEquals("b", param.getTemplateReference().getName());
+        assertTemplateRef(template.getSubTemplate("aaa").getSubTemplate("b"), param.getTemplateReference());
 
         param = placeholder.params[i++];
         assertFalse(param.isTemplateReference());
@@ -436,8 +441,8 @@ public class TemplateParserTests extends AbstractTemplateTests {
         IncludeTemplate includeA = (IncludeTemplate) level2.nodes[1];
         IncludeTemplate includeB = (IncludeTemplate) level2.nodes[2];
 
-        assertSame(a_level2, includeA.includedTemplate);
-        assertSame(b_level0, includeB.includedTemplate);
+        assertTemplateRef(a_level2, includeA.includedTemplate);
+        assertTemplateRef(b_level0, includeB.includedTemplate);
     }
 
     @Test
@@ -447,7 +452,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         IncludeTemplate include = (IncludeTemplate) template.nodes[0];
 
         assertEquals("level1.level2.aaa", include.templateName);
-        assertSame(template.getSubTemplate("level1").getSubTemplate("level2").getSubTemplate("aaa"),
+        assertTemplateRef(template.getSubTemplate("level1").getSubTemplate("level2").getSubTemplate("aaa"),
                 include.includedTemplate);
     }
 
@@ -729,7 +734,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         s += "  \n";
         s += "#@param2\n";
         s += "\n";
-        s += "   hello,   ${name}   \n";
+        s += "   he  llo,   ${name}   \n";
         s += "     hi    \n";
         s += "     \n";
         s += "     \n";
@@ -739,8 +744,8 @@ public class TemplateParserTests extends AbstractTemplateTests {
         loadTemplate(s.getBytes(), "test.txt", 3, 0, 3);
 
         int i = 0;
-        assertText("\nhello, ", template.nodes[i++]);
-        assertPlaceholder(template.nodes[i++], "name", "Line 6 Column 13");
+        assertText("\nhe llo, ", template.nodes[i++]);
+        assertPlaceholder(template.nodes[i++], "name", "Line 6 Column 15");
         assertText("\nhi\nha\n", template.nodes[i++]);
 
         // with trimming & collapsing, drop first/last
@@ -1023,7 +1028,29 @@ public class TemplateParserTests extends AbstractTemplateTests {
         assertLocation(str, location);
 
         assertNotNull(includeTemplate.includedTemplate);
-        assertSame(template, includeTemplate.includedTemplate);
+        assertTemplateRef(template, includeTemplate.includedTemplate);
     }
 
+    private void assertTemplateRef(Template orig, Template ref) {
+        assertNull(orig.ref);
+        assertSame(orig, ref.ref);
+
+        assertNull(ref.source);
+        assertNull(ref.location);
+        assertNull(ref.nodes);
+        assertNull(ref.params);
+        assertNull(ref.subtemplates);
+
+        assertSame(orig.getName(), ref.getName());
+
+        for (String name : orig.params.keySet()) {
+            assertSame(orig.getParameter(name), ref.getParameter(name));
+        }
+
+        for (String name : orig.subtemplates.keySet()) {
+            assertSame(orig.getSubTemplate(name), ref.getSubTemplate(name));
+        }
+
+        assertEquals("ref to " + orig.toString(), ref.toString());
+    }
 }

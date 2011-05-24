@@ -23,6 +23,7 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import static org.junit.Assert.*;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -231,15 +232,18 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
         URL url = new URL("jar:" + jarurl.toExternalForm() + "!/temp.txt");
         File destFile = new File(destdir, source);
 
-        Template[] templates = new Template[] { new Template(destFile), //
+        Template[] templates = new Template[] {
+                new Template(destFile), //
                 new Template(destFile.toURI().toURL()), //
                 new Template(url), //
                 new Template(destFile.toURI().toURL().openStream(), "temp.txt"), //
                 new Template(new InputStreamReader(destFile.toURI().toURL().openStream()), "temp.txt"), //
+                new Template(new BufferedReader(new InputStreamReader(destFile.toURI().toURL().openStream())),
+                        "temp.txt"), //
         };
 
-        boolean[] reloadable = new boolean[] { true, true, false, false, false };
-        boolean[] clearsource = new boolean[] { false, false, false, true, true };
+        boolean[] reloadable = new boolean[] { true, true, false, false, false, false };
+        boolean[] clearsource = new boolean[] { false, false, false, true, true, true };
 
         for (int i = 0; i < templates.length; i++) {
             Template t = templates[i];

@@ -19,6 +19,7 @@ package com.alibaba.citrus.util.templatelite;
 
 import static com.alibaba.citrus.util.ArrayUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
+import static com.alibaba.citrus.util.Assert.ExceptionType.*;
 import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringEscapeUtil.*;
@@ -188,6 +189,7 @@ public final class Template {
     private final String name;
     final InputSource source;
     final Location location;
+    final Template ref;
     Node[] nodes;
     Map<String, Template> subtemplates;
     Map<String, String> params;
@@ -233,6 +235,7 @@ public final class Template {
         this.name = trimToNull(name);
         this.source = assertNotNull(source, "source");
         this.location = new Location(source.systemId, 0, 0);
+        this.ref = null;
 
         source.reloadIfNecessary(this);
     }
@@ -245,11 +248,31 @@ public final class Template {
         this.name = trimToNull(name);
         this.source = null;
         this.location = assertNotNull(location, "location");
+        this.ref = null;
 
         update(nodes, params, subtemplates);
     }
 
+    /**
+     * 内部构造函数：创建template ref。
+     */
+    private Template(Template ref) {
+        this.ref = assertNotNull(ref, "template ref");
+        this.name = null;
+        this.source = null;
+        this.location = null;
+        this.nodes = null;
+        this.subtemplates = null;
+        this.params = null;
+    }
+
+    private void assertNotRef() {
+        assertNull(ref, UNSUPPORTED_OPERATION, "template ref");
+    }
+
     private void update(Node[] nodes, Map<String, String> params, Map<String, Template> subtemplates) {
+        assertNotRef();
+
         this.nodes = defaultIfEmptyArray(nodes, EMPTY_NODES);
         this.params = createArrayHashMap(assertNotNull(params, "params").size());
         this.subtemplates = createArrayHashMap(assertNotNull(subtemplates, "subtemplates").size());
@@ -259,15 +282,27 @@ public final class Template {
     }
 
     public String getName() {
-        return name;
+        if (ref == null) {
+            return name;
+        } else {
+            return ref.name;
+        }
     }
 
     public String getParameter(String name) {
-        return params.get(name);
+        if (ref == null) {
+            return params.get(name);
+        } else {
+            return ref.params.get(name);
+        }
     }
 
     public Template getSubTemplate(String name) {
-        return subtemplates.get(name);
+        if (ref == null) {
+            return subtemplates.get(name);
+        } else {
+            return ref.subtemplates.get(name);
+        }
     }
 
     /**
@@ -283,26 +318,40 @@ public final class Template {
      * 渲染模板。
      */
     public void accept(Object visitor) throws TemplateRuntimeException {
-        if (source != null) {
-            source.reloadIfNecessary(this);
-        }
+        if (ref == null) {
+            if (source != null) {
+                source.reloadIfNecessary(this);
+            }
 
-        for (Node node : nodes) {
-            invokeVisitor(visitor, node);
+            for (Node node : nodes) {
+                invokeVisitor(visitor, node);
+            }
+        } else {
+            // 调用ref，也就是${placeholder: #template}或者$#{template}中，被注入的template对象。
+            // 首先调用：visitTemplateName(Template)方法，如果方法不存在，则直接调用被引用的template。
+            invokeVisitor(visitor, ref);
         }
+    }
+
+    /**
+     * 调用visitTemplateName(Template)方法，如果方法不存在，则直接调用被引用的template。
+     */
+    private void invokeVisitor(Object visitor, Template templateRef) throws TemplateRuntimeException {
+        invokeVisitor(visitor, templateRef, 0);
     }
 
     /**
      * 根据node类型，访问visitor相应的方法。
      */
     private void invokeVisitor(Object visitor, Node node) throws TemplateRuntimeException {
+        assertNotRef();
         invokeVisitor(visitor, node, 0);
     }
 
     /**
      * 根据node类型，访问visitor相应的方法。
      */
-    private void invokeVisitor(Object visitor, Node node, int redirectDepth) throws TemplateRuntimeException {
+    private void invokeVisitor(Object visitor, Object node, int redirectDepth) throws TemplateRuntimeException {
         // 对$#{includeTemplate}直接调用template
         if (node instanceof IncludeTemplate) {
             assertNotNull(((IncludeTemplate) node).includedTemplate).accept(visitor);
@@ -320,6 +369,19 @@ public final class Template {
                 Text text = (Text) node;
                 method = findVisitTextMethod(visitorClass, "visitText");
                 params = new Object[] { text.text };
+            }
+
+            // 对ref template调用visitTemplateName(Template)，如果不存在该方法，则直接调用template
+            else if (node instanceof Template) {
+                Template ref = (Template) node;
+                method = findVisitTemplateMethod(visitorClass, "visit" + trimToEmpty(capitalize(ref.getName())));
+
+                if (method == null) {
+                    ref.accept(visitor); // 方法不存在，直接调用ref template
+                    return;
+                }
+
+                params = new Object[] { ref };
             }
 
             // 对${placeholder}调用：
@@ -418,6 +480,28 @@ public final class Template {
 
         if (method == null) {
             throw new NoSuchMethodException(visitorClass.getSimpleName() + "." + methodName + "(String)");
+        }
+
+        return method;
+    }
+
+    /**
+     * 查找visitTemplate方法。
+     */
+    private Method findVisitTemplateMethod(Class<?> visitorClass, String methodName) throws NoSuchMethodException {
+        Method method = null;
+
+        for (Method candidateMethod : visitorClass.getMethods()) {
+            if (methodName.equals(candidateMethod.getName())) {
+                Class<?>[] paramTypes = candidateMethod.getParameterTypes();
+                int paramsCount = paramTypes.length;
+
+                // visitTemplateName(Template)
+                if (paramsCount == 1 && paramTypes[0].equals(Template.class)) {
+                    method = candidateMethod;
+                    break;
+                }
+            }
         }
 
         return method;
@@ -588,15 +672,19 @@ public final class Template {
 
     @Override
     public String toString() {
-        MapBuilder mb = new MapBuilder();
+        if (ref == null) {
+            MapBuilder mb = new MapBuilder();
 
-        mb.append("params", params.entrySet());
-        mb.append("nodes", nodes);
-        mb.append("sub-templates", subtemplates.values());
+            mb.append("params", params.entrySet());
+            mb.append("nodes", nodes);
+            mb.append("sub-templates", subtemplates.values());
 
-        return new ToStringBuilder()
-                .format("#%s with %d nodes at %s", name == null ? "(template)" : name, nodes.length, location)
-                .append(mb).toString();
+            return new ToStringBuilder()
+                    .format("#%s with %d nodes at %s", name == null ? "(template)" : name, nodes.length, location)
+                    .append(mb).toString();
+        } else {
+            return "ref to " + ref;
+        }
     }
 
     private static void predefineTemplate(String name, String text) {
@@ -1128,8 +1216,8 @@ public final class Template {
         private void postProcessNode(Node node, LinkedList<Map<String, Template>> templateStack) {
             // $#{includeTemplate}
             if (node instanceof IncludeTemplate) {
-                ((IncludeTemplate) node).includedTemplate = findTemplate(((IncludeTemplate) node).templateName,
-                        templateStack, node.location, "Included");
+                ((IncludeTemplate) node).includedTemplate = new Template(findTemplate(
+                        ((IncludeTemplate) node).templateName, templateStack, node.location, "Included")); // create template ref
             }
 
             // ${placeholder: #templateRef}
@@ -1161,12 +1249,12 @@ public final class Template {
                             for (Template template : subtemplates.values()) {
                                 PlaceholderParameter newParam = new PlaceholderParameter("#" + parentName
                                         + template.getName());
-                                newParam.templateReference = template;
+                                newParam.templateReference = new Template(template); // create template ref
                                 expandedParameters.add(newParam);
                             }
                         } else {
-                            param.templateReference = findTemplate(templateName, templateStack,
-                                    ((Placeholder) node).location, "Referenced");
+                            param.templateReference = new Template(findTemplate(templateName, templateStack,
+                                    ((Placeholder) node).location, "Referenced")); // create template ref
 
                             expandedParameters.add(param);
                         }
