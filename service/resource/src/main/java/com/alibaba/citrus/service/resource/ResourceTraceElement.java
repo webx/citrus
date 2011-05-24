@@ -27,14 +27,16 @@ public class ResourceTraceElement {
     private final String beanName;
     private final String patternName;
     private final String patternType;
+    private final boolean internalPattern;
     private final String resourceName;
 
     public ResourceTraceElement(String configLocation, String beanName, String patternType, String patternName,
-                                String resourceName) {
+                                boolean internalPattern, String resourceName) {
         this.configLocation = configLocation;
         this.beanName = beanName;
         this.patternType = patternType;
         this.patternName = patternName;
+        this.internalPattern = internalPattern;
         this.resourceName = resourceName;
     }
 
@@ -54,6 +56,10 @@ public class ResourceTraceElement {
         return patternName;
     }
 
+    public boolean isInternalPattern() {
+        return internalPattern;
+    }
+
     public String getResourceName() {
         return resourceName;
     }
@@ -68,7 +74,14 @@ public class ResourceTraceElement {
 
     @Override
     public String toString() {
-        return String.format("\"%s\" matched [%s pattern=\"%s\"], at \"%s\", beanName=\"%s\"", resourceName,
-                patternType, patternName, getShortLocation(), beanName);
+        String format;
+
+        if (internalPattern) {
+            format = "\"%s\" matched %s [pattern=\"%s\", internal=\"true\"], at \"%s\", beanName=\"%s\"";
+        } else {
+            format = "\"%s\" matched %s [pattern=\"%s\"], at \"%s\", beanName=\"%s\"";
+        }
+
+        return String.format(format, resourceName, patternType, patternName, getShortLocation(), beanName);
     }
 }

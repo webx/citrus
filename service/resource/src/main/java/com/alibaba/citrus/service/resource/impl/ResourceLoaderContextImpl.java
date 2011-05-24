@@ -120,8 +120,8 @@ class ResourceLoaderContextImpl extends AbstractResourceLoadingContext<Resource>
     @Override
     protected void visitMapping(ResourceMapping mapping) {
         if (trace != null) {
-            trace.add(new ResourceTraceElement(configLocation, beanName, lastMatchedPattern.getPatternType(),
-                    lastMatchedPattern.getPatternName(), resourceName));
+            trace.add(new ResourceTraceElement(configLocation, beanName, mapping.getPatternType(), mapping
+                    .getPatternName(), mapping.isInternal(), resourceName));
         }
     }
 
