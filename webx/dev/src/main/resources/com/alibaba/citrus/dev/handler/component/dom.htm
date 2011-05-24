@@ -7,7 +7,7 @@
 ## --------------------------
 
 <div class="webx-dom">
-  ${controlBar: #controlBar}
+  $#{controlBar}
   ${elementList: #orderedElementList, #unorderedElementList}
 </div>
 
@@ -44,22 +44,22 @@
       </div>
     </li>
   #end
-  
+
   #selfClosed
     <li>
       <p>$#{elementStart}<span class="hl-tag"> /&gt;</span></p>
     </li>
   #end
-  
+
   #withText
     <li>
       ${elementTexts: #singleLineText, #multiLineText}
     </li>
-    
+
     #singleLineText
       <p>$#{elementStart}&gt;<span class="hl-text">${elementText: #styledTexts.*}</span><span class="hl-tag">&lt;/$#{elementPrefixAndName}&gt;</span></p>
     #end
-    
+
     #multiLineText
       <p>$#{elementStart}<span class="hl-tag">&gt;</span>
         <img id="handle-${elementId}" class="handle-element" src="${componentUrl:images/open.png}" alt="" title="Click to show/hide sub-elements" />
@@ -74,19 +74,19 @@
 #end
 
 #elementStart
-  <span class="hl-tag"${elementNs:#elementNs}>&lt;$#{elementPrefixAndName}</span>${attributes: #attribute}
-  
+  <span class="hl-tag"$#{elementNs}>&lt;$#{elementPrefixAndName}</span>$#{attribute}
+
   #attribute
     <span class="hl-attribute"> ${attributeKey}</span>=<span class="hl-value">"${attributeValue: #styledTexts.*}"</span>
   #end
-  
+
   #elementNs
     $#{SPACE}title="Namespace: ${elementNs}"
   #end
 #end
 
 #elementPrefixAndName
-  ${elementPrefix:#elementPrefix}${elementName}
+  $#{elementPrefix}${elementName}
 
   #elementPrefix
     <span class="hl-tag-prefix">${elementPrefix}:</span>
@@ -98,21 +98,21 @@
   #textValue
     ${value}
   #end
-  
+
   #rawValue
     raw: (<span class="hl-package">${packageName}</span><span class="hl-class">${className}</span>) ${value}
   #end
-  
+
   #classValue
     <span class="hl-package">${packageName}</span><span class="hl-class">${className}</span>
   #end
 
   #anchorValue
-    ${sep: #sep}<a id="${anchorName}"><!--${anchorNameDisplay}--></a><span class="hl-anchor">${anchorNameDisplay}</span>
+    $#{sep}<a id="${anchorName}"><!--${anchorNameDisplay}--></a><span class="hl-anchor">${anchorNameDisplay}</span>
   #end
-  
+
   #refValue
-    ${sep: #sep}<a href="#${refName}" class="hl-ref">${refNameDisplay}</a>
+    $#{sep}<a href="#${refName}" class="hl-ref">${refNameDisplay}</a>
   #end
 #end
 

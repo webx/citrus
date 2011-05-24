@@ -122,7 +122,7 @@ public class DomComponent extends PageComponent {
             out().print(escapeHtml(element.getLocalName()));
         }
 
-        public void visitAttributes(Template attributeTemplate) {
+        public void visitAttribute(Template attributeTemplate) {
             for (Attribute attr : element.attributes()) {
                 this.attr = attr;
                 attributeTemplate.accept(this);
@@ -171,7 +171,7 @@ public class DomComponent extends PageComponent {
                 template.accept(this);
             }
 
-            // raw data 
+            // raw data
             else if (value instanceof RawValue) {
                 template = styledTextTemplates[1];
                 context().put("packageName", ((RawValue) value).getRawType().getPackage().getName());

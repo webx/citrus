@@ -8,14 +8,14 @@
 
 <div class="webx-tabs">
 <ul class="nav">
-  ${tab: #tabItem}
+  $#{tab}
 </ul>
 </div>
 
-#tabItem
-  <li${listItemAttrs: #selectedAttr}>
+#tab
+  <li$#{selectedAttr}>
     <a${linkAttrs: #hrefAttr, #onclickAttr}>${desc}</a>
-    ${subnav: #subnav}
+    $#{subnav}
   </li>
 
   #selectedAttr
@@ -31,7 +31,6 @@
   #end
 
   #subnav
-    <ul class="subnav">${subtabs: #tabItem}</ul>
+    <ul class="subnav">${subtabs: #tab}</ul>
   #end
-
 #end

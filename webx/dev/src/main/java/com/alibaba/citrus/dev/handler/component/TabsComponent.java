@@ -51,7 +51,7 @@ public class TabsComponent extends PageComponent {
             this.tab = assertNotNull(tab, "tab");
         }
 
-        public void visitListItemAttrs(Template selectedTemplate) {
+        public void visitSelectedAttr(Template selectedTemplate) {
             if (tab.isSelected()) {
                 selectedTemplate.accept(this);
             }

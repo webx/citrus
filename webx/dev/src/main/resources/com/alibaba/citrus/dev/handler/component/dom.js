@@ -43,8 +43,8 @@ function registerExpandCollapseButtons() {
     };
 
     var expandAllLink = $('expand-all');
-    var collapseAllLink = $('collapse-all'); 
-    
+    var collapseAllLink = $('collapse-all');
+
     if (expandAllLink != null) {
         expandAllLink.observe('click', expandAll);
     }

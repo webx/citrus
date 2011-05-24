@@ -26,7 +26,6 @@ import com.alibaba.citrus.dev.handler.util.Element;
 import com.alibaba.citrus.util.ClassUtil;
 import com.alibaba.citrus.util.templatelite.Template;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
-import com.alibaba.citrus.webx.handler.support.AbstractVisitor;
 
 public class SpringExplorerHandler extends AbstractExplorerHandler {
     private static final String FN_BEANS = "Beans";
@@ -62,23 +61,152 @@ public class SpringExplorerHandler extends AbstractExplorerHandler {
 
     @SuppressWarnings("unused")
     private class SpringExplorerVisitor extends AbstractExplorerVisitor {
+        public SpringExplorerVisitor(RequestHandlerContext context) {
+            super(context);
+        }
+
+        public Object visitBeans(Template beansTemplate) {
+            return new BeansVisitor(context, this);
+        }
+
+        public Object visitConfigurations(Template configurationsTemplate) throws IOException {
+            return new ConfigurationsVisitor(context, this,
+                    new ConfigurationFileReader(appcontext, configLocations).toConfigurationFiles());
+        }
+
+        public Object visitResolvableDependencies(Template resolvableDepsTemplate) {
+            return new ResolvableDepsVisitor(context, this);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    private class BeansVisitor extends AbstractFallbackVisitor {
         private final DefaultListableBeanFactory factory;
+
+        public BeansVisitor(RequestHandlerContext context, SpringExplorerVisitor v) {
+            super(context, v);
+            this.factory = (DefaultListableBeanFactory) v.appcontext.getBeanFactory();
+        }
+
+        public void visitBeanCount() {
+            out().print(factory.getBeanDefinitionCount());
+        }
+
+        public void visitBeans() {
+            List<Element> elements = createLinkedList();
+
+            for (String name : getSortedBeanNames()) {
+                Element beanElement = null;
+
+                try {
+                    RootBeanDefinition bd = getBeanDefinition(name);
+                    beanElement = new BeanDefinitionReverseEngine(bd, name, factory.getAliases(name)).toDom();
+                } catch (Exception e) {
+                    beanElement = new Element("bean").setText(getStackTrace(getRootCause(e)));
+                }
+
+                if (beanElement != null) {
+                    elements.add(beanElement);
+                }
+            }
+
+            domComponent.visitTemplate(context, elements);
+        }
+
+        private RootBeanDefinition getBeanDefinition(String name) throws Exception {
+            return (RootBeanDefinition) getAccessibleMethod(factory.getClass(), "getMergedLocalBeanDefinition",
+                    new Class<?>[] { String.class }).invoke(factory, name);
+        }
+
+        /**
+         * 将bean names排序。先按bean name的复杂度排序，再按字母顺序排序。
+         */
+        private String[] getSortedBeanNames() {
+            String[] names = factory.getBeanDefinitionNames();
+            BeanName[] beanNames = new BeanName[names.length];
+
+            for (int i = 0; i < names.length; i++) {
+                beanNames[i] = new BeanName();
+                beanNames[i].beanName = names[i];
+                beanNames[i].components = split(names[i], ".");
+            }
+
+            Arrays.sort(beanNames);
+
+            names = new String[beanNames.length];
+
+            for (int i = 0; i < beanNames.length; i++) {
+                names[i] = beanNames[i].beanName;
+            }
+
+            return names;
+        }
+    }
+
+    @SuppressWarnings("unused")
+    private class ConfigurationsVisitor extends AbstractFallbackVisitor {
+        private final ConfigurationFile[] configurationFiles;
+        private ConfigurationFile configurationFile;
+
+        public ConfigurationsVisitor(RequestHandlerContext context, SpringExplorerVisitor v,
+                                     ConfigurationFile[] configurationFiles) {
+            super(context, v);
+            this.configurationFiles = configurationFiles;
+        }
+
+        public void visitConfigurations(Template withImportsTemplate, Template noImportsTemplate) throws IOException {
+            for (ConfigurationFile configurationFile : configurationFiles) {
+                this.configurationFile = configurationFile;
+
+                if (isEmptyArray(configurationFile.getImportedFiles())) {
+                    noImportsTemplate.accept(this);
+                } else {
+                    withImportsTemplate.accept(this);
+                }
+            }
+        }
+
+        public void visitConfigurationName() {
+            out().print(configurationFile.getName());
+        }
+
+        public void visitConfigurationNameForId() {
+            out().print(toId(configurationFile.getName()));
+        }
+
+        public void visitConfigurationUrl() {
+            out().print(configurationFile.getUrl().toExternalForm());
+        }
+
+        public void visitImports(Template withImportsTemplate, Template noImportsTemplate) throws IOException {
+            new ConfigurationsVisitor(context, (SpringExplorerVisitor) ftv.getVisitor(),
+                    configurationFile.getImportedFiles()).visitConfigurations(withImportsTemplate, noImportsTemplate);
+        }
+
+        public void visitConfigurationContent(final Template controlBarTemplate) {
+            domComponent.visitTemplate(context, singletonList(configurationFile.getRootElement()),
+                    new ControlBarCallback() {
+                        public void renderControlBar() {
+                            controlBarTemplate.accept(ConfigurationsVisitor.this);
+                        }
+                    });
+        }
+    }
+
+    @SuppressWarnings("unused")
+    private class ResolvableDepsVisitor extends AbstractFallbackVisitor {
         private final Map<Class<?>, Object> resolvableDependencies;
         private Class<?> type;
         private Object value;
 
-        public SpringExplorerVisitor(RequestHandlerContext context) {
-            super(context);
-
-            // 取得context信息
-            this.factory = (DefaultListableBeanFactory) appcontext.getBeanFactory();
-
-            // 取得resolvableDependencies
-            this.resolvableDependencies = getResolvableDependencies();
+        public ResolvableDepsVisitor(RequestHandlerContext context, SpringExplorerVisitor v) {
+            super(context, v);
+            this.resolvableDependencies = getResolvableDependencies((DefaultListableBeanFactory) v.appcontext
+                    .getBeanFactory());
         }
 
         @SuppressWarnings("unchecked")
-        private Map<Class<?>, Object> getResolvableDependencies() {
+        private Map<Class<?>, Object> getResolvableDependencies(DefaultListableBeanFactory factory) {
             Map<Class<?>, Object> deps;
 
             try {
@@ -145,119 +273,12 @@ public class SpringExplorerHandler extends AbstractExplorerHandler {
 
         public void visitValueTypeName() {
             if (value != null) {
-                out().print(ClassUtil.getSimpleClassName(value.getClass()));
+                out().print(ClassUtil.getSimpleClassName(value.getClass(), false));
             }
         }
 
         public void visitValue() {
             out().print(escapeHtml(String.valueOf(value)));
-        }
-
-        public void visitBeanCount() {
-            out().print(factory.getBeanDefinitionCount());
-        }
-
-        public void visitBeans() {
-            List<Element> elements = createLinkedList();
-
-            for (String name : getSortedBeanNames()) {
-                Element beanElement = null;
-
-                try {
-                    RootBeanDefinition bd = getBeanDefinition(name);
-                    beanElement = new BeanDefinitionReverseEngine(bd, name, factory.getAliases(name)).toDom();
-                } catch (Exception e) {
-                    beanElement = new Element("bean").setText(getStackTrace(getRootCause(e)));
-                }
-
-                if (beanElement != null) {
-                    elements.add(beanElement);
-                }
-            }
-
-            domComponent.visitTemplate(context, elements);
-        }
-
-        public void visitConfigurations(Template configurationsTemplate) throws IOException {
-            configurationsTemplate.accept(new ConfigurationFilesVisitor(context, new ConfigurationFileReader(
-                    appcontext, configLocations).toConfigurationFiles()));
-        }
-
-        private RootBeanDefinition getBeanDefinition(String name) throws Exception {
-            return (RootBeanDefinition) getAccessibleMethod(factory.getClass(), "getMergedLocalBeanDefinition",
-                    new Class<?>[] { String.class }).invoke(factory, name);
-        }
-
-        /**
-         * 将bean names排序。先按bean name的复杂度排序，再按字母顺序排序。
-         */
-        private String[] getSortedBeanNames() {
-            String[] names = factory.getBeanDefinitionNames();
-            BeanName[] beanNames = new BeanName[names.length];
-
-            for (int i = 0; i < names.length; i++) {
-                beanNames[i] = new BeanName();
-                beanNames[i].beanName = names[i];
-                beanNames[i].components = split(names[i], ".");
-            }
-
-            Arrays.sort(beanNames);
-
-            names = new String[beanNames.length];
-
-            for (int i = 0; i < beanNames.length; i++) {
-                names[i] = beanNames[i].beanName;
-            }
-
-            return names;
-        }
-    }
-
-    @SuppressWarnings("unused")
-    private class ConfigurationFilesVisitor extends AbstractVisitor {
-        private final ConfigurationFile[] configurationFiles;
-        private ConfigurationFile configurationFile;
-
-        public ConfigurationFilesVisitor(RequestHandlerContext context, ConfigurationFile[] configurationFiles) {
-            super(context);
-            this.configurationFiles = configurationFiles;
-        }
-
-        public void visitConfigurations(Template withImportsTemplate, Template noImportsTemplate) throws IOException {
-            for (ConfigurationFile configurationFile : configurationFiles) {
-                this.configurationFile = configurationFile;
-
-                if (isEmptyArray(configurationFile.getImportedFiles())) {
-                    noImportsTemplate.accept(this);
-                } else {
-                    withImportsTemplate.accept(this);
-                }
-            }
-        }
-
-        public void visitConfigurationName() {
-            out().print(configurationFile.getName());
-        }
-
-        public void visitConfigurationNameForId() {
-            out().print(toId(configurationFile.getName()));
-        }
-
-        public void visitConfigurationUrl() {
-            out().print(configurationFile.getUrl().toExternalForm());
-        }
-
-        public void visitImports(Template configurationsTemplate) {
-            configurationsTemplate.accept(new ConfigurationFilesVisitor(context, configurationFile.getImportedFiles()));
-        }
-
-        public void visitConfigurationContent(final Template controlBarTemplate) {
-            domComponent.visitTemplate(context, singletonList(configurationFile.getRootElement()),
-                    new ControlBarCallback() {
-                        public void renderControlBar() {
-                            controlBarTemplate.accept(ConfigurationFilesVisitor.this);
-                        }
-                    });
         }
     }
 

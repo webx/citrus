@@ -17,6 +17,8 @@ import com.alibaba.citrus.dev.handler.component.DomComponent;
 import com.alibaba.citrus.dev.handler.component.TabsComponent;
 import com.alibaba.citrus.dev.handler.component.TabsComponent.TabItem;
 import com.alibaba.citrus.util.FileUtil;
+import com.alibaba.citrus.util.templatelite.FallbackToVisitor;
+import com.alibaba.citrus.util.templatelite.FallbackVisitor;
 import com.alibaba.citrus.util.templatelite.Template;
 import com.alibaba.citrus.webx.WebxComponent;
 import com.alibaba.citrus.webx.WebxComponents;
@@ -213,6 +215,19 @@ public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
             }
 
             return buf.toString();
+        }
+    }
+
+    protected class AbstractFallbackVisitor extends AbstractVisitor implements FallbackVisitor {
+        protected final FallbackToVisitor ftv;
+
+        public AbstractFallbackVisitor(RequestHandlerContext context, Object fallback) {
+            super(context);
+            this.ftv = new FallbackToVisitor(fallback);
+        }
+
+        public boolean visitPlaceholder(String name, Object[] params) throws Exception {
+            return ftv.visitPlaceholder(name, params);
         }
     }
 
