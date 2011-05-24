@@ -188,7 +188,7 @@ public class SchemaExporterWEB extends SchemaExporter {
             super(out, request, entry, lastEntryPath);
         }
 
-        public void visitLink(Template link) {
+        public void visitEntryLink(Template link) {
             FallbackTextWriter<PrintWriter> v = new FallbackTextWriter<PrintWriter>(out());
             int lastEntryPathLength = 0;
 

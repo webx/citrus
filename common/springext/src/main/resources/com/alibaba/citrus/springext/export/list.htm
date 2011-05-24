@@ -14,7 +14,7 @@
     <link href="${url:styles.css}" rel="stylesheet" type="text/css" />
     <!--[if IE]>
     <link href="${url:styles-ie.css}" rel="stylesheet" type="text/css" />
-    <![endif]--> 
+    <![endif]-->
     <script src="${url:prototype.js}" type="text/javascript">
     </script>
     <script src="${url:scriptaculous.js}" type="text/javascript">
@@ -34,10 +34,10 @@
       <input id="toggleTargetNamespace" type="checkbox"/>
       <label for="toggleTargetNamespace">Show Schemas without Target Namespace</label>
     </span>
-    
+
     </div><div id="xml-template">
     </div>
-    
+
     <div class="entries">
     <ul>${entry: #dirEntry, #fileEntry}</ul>
     </div>
@@ -60,10 +60,10 @@
     <img id="handle-${entryId}" src="${url:open.gif}" alt="Click to open/close branch." title="Click to open/close branch." />
     <img src="${url:dir.gif}" alt="Directory Type" />
 
-    ${link: #entryLink}
-    ${subEntries: #subEntries}
+    $#{entryLink}
+    $#{subEntries}
   </li>
-  
+
   #entryLink
     <a href="${entryUrl}">${entryName}</a><span> / </span>
   #end
@@ -85,14 +85,14 @@
   <li class="${entryClass}">
     <img src="${url:na.gif}" alt="${entryName}" />
 
-    ${checkbox: #checkbox}    
+    $#{checkbox}
 
     <img src="${url:file.gif}" alt="File Type"/>
     <a href="${entryUrl}">${entryName}</a>
-    
+
     ${namespace: #withNamespace, #noNamespace}
 
-    ${description: #description}    
+    $#{description}
   </li>
 
   #checkbox
