@@ -43,22 +43,41 @@
     <li>
       <p><a href="#" onclick="setQuery('${trace:resourceName}', false); return false;">${trace:resourceName}</a></p>
       <blockquote>
-        <p>Matched <span class="hl-tag">&lt;${trace:patternType}</span> <span class="hl-attribute">pattern</span>=<span class="hl-value">"${trace:patternName}"</span><span class="hl-tag">&gt;</span>
-        <span class="webx-resource-trace-service-location" title="${trace:serviceLocation}">(defined in ${trace:serviceLocationShort}: ${trace:serviceName})</span></p>
+        <p>Matched
+          <span class="hl-tag">&lt;${trace:patternType}</span>
+          <span class="hl-attribute">pattern</span>=<span class="hl-value">"${trace:patternName}"</span>$#{internal}<span class="hl-tag">&gt;</span>
+          <span class="webx-resource-trace-service-location" title="${trace:serviceLocation}"> - defined at ${trace:serviceLocationShort}, Service ID: ${trace:serviceName}</span>
+        </p>
+      </blockquote>
+    </li>
+
+    #internal
+      $#{SPACE}<span class="hl-attribute">internal</span>=<span class="hl-value">"true"</span>
+    #end
+  #end
+
+  #result
+    <li>
+      <p>Resource Found</p>
+      <blockquote>
+        <p>${result}</p>
       </blockquote>
     </li>
   #end
 
-  #result
-    <li>Found Resource: <span class="hl-value">${result}</span></li>
-  #end
-
   #resultNotExist
-    <li>Resource Not Exist: <span class="hl-value">${result}</span></li>
+    <li>
+      <p>Resource Not Exist</p>
+      <blockquote>
+        <p>${result}</p>
+      </blockquote>
+    </li>
   #end
 
   #resultNotFound
-    <li>Resource Not Found</li>
+    <li>
+      <p>Resource Not Found</p>
+    </li>
   #end
 #end
 

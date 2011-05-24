@@ -143,6 +143,12 @@ public class ServiceExplorerHandler extends AbstractExplorerHandler {
             }
         }
 
+        public void visitInternal(Template internalTemplate) {
+            if (traceElement.isInternalPattern()) {
+                internalTemplate.accept(this);
+            }
+        }
+
         public void visitResult() {
             out().print(escapeHtml(result.toString()));
         }

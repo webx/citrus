@@ -18,6 +18,20 @@
     list-style: none;
 }
 
+.webx-resources .webx-resources-content blockquote {
+    margin: 0.5em 0 1em 1em;
+    padding: 0;
+}
+
+.webx-resources .webx-resources-content {
+    color: navy;
+}
+
+.webx-resources .webx-resources-content p {
+    margin: 0;
+    padding: 0;
+}
+
 .webx-resource-trace-service-location {
     color: grey;
 }
