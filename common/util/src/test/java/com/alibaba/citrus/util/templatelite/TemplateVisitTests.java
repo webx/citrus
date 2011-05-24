@@ -729,6 +729,26 @@ public class TemplateVisitTests extends AbstractTemplateTests {
     }
 
     @Test
+    public void render_fallbackVisitor_failed() throws Exception {
+        loadTemplate(("${title:a,b}").getBytes(), "test.txt", 1, 0, 0);
+
+        class Visitor implements FallbackVisitor {
+            public boolean visitPlaceholder(String name, Object[] params) throws Exception {
+                return false;
+            }
+        }
+
+        acceptFailure(new Visitor());
+        assertThat(runtimeError,
+                exception(NoSuchMethodException.class, "Error rendering ${title:a,b} at test.txt: Line 1 Column 1"));
+
+        assertEquals("One of the following method:\n" //
+                + "  1. Visitor.visitTitle(String, String)\n" //
+                + "  2. Visitor.visitTitle(String[])\n" //
+                + "  3. Visitor.visitTitle()", runtimeError.getCause().getMessage());
+    }
+
+    @Test
     public void render_placeholder_string_noparam() throws Exception {
         @SuppressWarnings("unused")
         class Visitor extends TextWriter<StringBuilder> {
@@ -1009,6 +1029,111 @@ public class TemplateVisitTests extends AbstractTemplateTests {
         } catch (TemplateRuntimeException e) {
             assertThat(e, exception("Redirection out of control (depth>10) in ", "Visitor2 ", "Visitor2.visitItems()"));
         }
+    }
+
+    @Test
+    public void render_fallbackToVisitor() {
+        try {
+            new FallbackToVisitor(null);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertThat(e, exception("fallback to visitor"));
+        }
+
+        @SuppressWarnings("unused")
+        class Visitor1 extends TextWriter<StringBuilder> {
+            public Visitor1(StringBuilder out) {
+                super(out);
+            }
+
+            public void visitTitle() {
+                out().append("hello");
+            }
+        }
+
+        class Visitor2 extends TextWriter<StringBuilder> implements FallbackVisitor {
+            public boolean visitPlaceholder(String name, Object[] params) throws Exception {
+                FallbackToVisitor ftv = new FallbackToVisitor(new Visitor1(out()));
+                return ftv.visitPlaceholder(name, params);
+            }
+        }
+
+        String s = "${title}";
+
+        loadTemplate(s.getBytes(), "test.txt", 1, 0, 0);
+
+        assertEquals("hello", template.renderToString(new Visitor2()));
+    }
+
+    @Test
+    public void render_fallbackToFallbackVisitor() {
+        class Visitor1 extends FallbackTextWriter<StringBuilder> {
+            public Visitor1(StringBuilder out) {
+                super(out);
+                context().put("title", "hello");
+            }
+        }
+
+        class Visitor2 extends TextWriter<StringBuilder> implements FallbackVisitor {
+            public boolean visitPlaceholder(String name, Object[] params) throws Exception {
+                FallbackToVisitor ftv = new FallbackToVisitor(new Visitor1(out()));
+                return ftv.visitPlaceholder(name, params);
+            }
+        }
+
+        String s = "${title}";
+
+        loadTemplate(s.getBytes(), "test.txt", 1, 0, 0);
+
+        assertEquals("hello", template.renderToString(new Visitor2()));
+    }
+
+    @Test
+    public void render_fallbackToFallbackVisitor_failed() {
+        class Visitor1 implements FallbackVisitor {
+            public boolean visitPlaceholder(String name, Object[] params) throws Exception {
+                return false;
+            }
+        }
+
+        class Visitor2 extends TextWriter<StringBuilder> implements FallbackVisitor {
+            public boolean visitPlaceholder(String name, Object[] params) throws Exception {
+                FallbackToVisitor ftv = new FallbackToVisitor(new Visitor1());
+                return ftv.visitPlaceholder(name, params);
+            }
+        }
+
+        String s = "${title}";
+        loadTemplate(s.getBytes(), "test.txt", 1, 0, 0);
+
+        acceptFailure(new Visitor2());
+        assertThat(runtimeError,
+                exception(NoSuchMethodException.class, "Error rendering ${title} at test.txt: Line 1 Column 1"));
+
+        assertEquals("One of the following method:\n" //
+                + "  1. Visitor2.visitTitle()\n" //
+                + "  2. Visitor2.visitTitle(String[])", runtimeError.getCause().getMessage());
+    }
+
+    @Test
+    public void render_fallbackToVisitor_failed() {
+        class Visitor2 extends TextWriter<StringBuilder> implements FallbackVisitor {
+            public boolean visitPlaceholder(String name, Object[] params) throws Exception {
+                FallbackToVisitor ftv = new FallbackToVisitor(new Object());
+                return ftv.visitPlaceholder(name, params);
+            }
+        }
+
+        String s = "${title}";
+        loadTemplate(s.getBytes(), "test.txt", 1, 0, 0);
+
+        acceptFailure(new Visitor2());
+        assertThat(runtimeError,
+                exception(NoSuchMethodException.class, "Error rendering ${title} at test.txt: Line 1 Column 1"));
+
+        assertEquals("One of the following method:\n" //
+                + "  1. Visitor2.visitTitle()\n" //
+                + "  2. Visitor2.visitTitle(String[])", runtimeError.getCause().getMessage());
     }
 
     private String formatGMT(String format) {

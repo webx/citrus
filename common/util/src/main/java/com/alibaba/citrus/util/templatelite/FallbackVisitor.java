@@ -19,17 +19,13 @@ package com.alibaba.citrus.util.templatelite;
 
 /**
  * 当visit方法找不到时，调用此visitor。
- * 
+ *
  * @author Michael Zhou
  */
 public interface FallbackVisitor {
     /**
-     * 访问一段文本。
+     * 访问<code>${placeholder:param1, param2, ...}</code>。 返回<code>true</code>
+     * 表示访问成功，否则还是会抛出<code>NoSuchMethodException</code>。
      */
-    void visitText(String text) throws Exception;
-
-    /**
-     * 访问<code>${placeholder:param1, param2, ...}</code>。
-     */
-    void visitPlaceholder(String name, Object[] params) throws Exception;
+    boolean visitPlaceholder(String name, Object[] params) throws Exception;
 }

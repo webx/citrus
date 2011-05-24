@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * 一个将template的内容输出到<code>Appendable</code>
  * 的visitor，且当遇到未定义的placeholder时，不会报错，而是从内部的context中取值。
- * 
+ *
  * @author Michael Zhou
  */
 public class FallbackTextWriter<A extends Appendable> extends TextWriter<A> implements FallbackVisitor {
@@ -43,7 +43,7 @@ public class FallbackTextWriter<A extends Appendable> extends TextWriter<A> impl
         return context;
     }
 
-    public void visitPlaceholder(String name, Object[] params) throws IOException {
+    public boolean visitPlaceholder(String name, Object[] params) throws IOException {
         if (context.containsKey(name)) {
             Object value = context.get(name);
 
@@ -53,5 +53,7 @@ public class FallbackTextWriter<A extends Appendable> extends TextWriter<A> impl
         } else {
             out().append("${").append(name).append("}");
         }
+
+        return true;
     }
 }

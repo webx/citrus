@@ -418,10 +418,14 @@ public final class Template {
                         params = toPlaceholderParameterValues(placeholder, new Object[methodParamCount]);
                     }
                 } catch (NoSuchMethodException e) {
+                    boolean processed = false;
+
                     if (visitor instanceof FallbackVisitor) {
-                        ((FallbackVisitor) visitor).visitPlaceholder(placeholder.name,
+                        processed = ((FallbackVisitor) visitor).visitPlaceholder(placeholder.name,
                                 toPlaceholderParameterValues(placeholder, new Object[placeholderParamCount]));
-                    } else {
+                    }
+
+                    if (!processed) {
                         throw e;
                     }
                 }
