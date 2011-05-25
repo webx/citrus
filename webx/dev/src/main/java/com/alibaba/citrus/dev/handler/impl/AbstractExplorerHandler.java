@@ -7,7 +7,7 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +55,7 @@ public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
     protected String getFunctionName(String functionName) {
         functionName = trimToNull(functionName);
 
-        if (!getAvailableFunctions().contains(functionName)) {
+        if (!getAvailableFunctions().containsKey(functionName)) {
             functionName = getDefaultFunction();
         }
 
@@ -82,7 +82,7 @@ public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
         return buf.toString();
     }
 
-    protected abstract Set<String> getAvailableFunctions();
+    protected abstract Map<String, String> getAvailableFunctions();
 
     protected abstract String getDefaultFunction();
 
@@ -135,8 +135,8 @@ public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
         public void visitTabs() {
             List<TabItem> tabs = createLinkedList();
 
-            for (String fn : getAvailableFunctions()) {
-                TabItem tab = new TabItem(getTabDescription(fn));
+            for (String fn : getAvailableFunctions().keySet()) {
+                TabItem tab = new TabItem(getAvailableFunctions().get(fn));
 
                 tab.setHref(link(currentContextName, fn));
                 tab.setSelected(fn.equals(currentFunctionName));
@@ -166,6 +166,10 @@ public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
             out().print(currentContextName == null ? "Root Context" : currentContextName);
         }
 
+        public void visitContextNameForParam() {
+            out().print(currentContextName == null ? "" : currentContextName);
+        }
+
         public void visitFunctionName() {
             out().print(currentFunctionName);
         }
@@ -175,7 +179,7 @@ public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
         }
 
         public final void visitExplorer(Template[] functionTemplates) {
-            String[] functions = getAvailableFunctions().toArray(new String[getAvailableFunctions().size()]);
+            String[] functions = getAvailableFunctions().keySet().toArray(new String[getAvailableFunctions().size()]);
 
             for (int i = 0; i < functions.length && i < functionTemplates.length; i++) {
                 String function = functions[i];
@@ -200,21 +204,6 @@ public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
             }
 
             return locations;
-        }
-
-        private String getTabDescription(String fn) {
-            String[] ss = split(toLowerCaseWithUnderscores(fn), "_");
-            StringBuilder buf = new StringBuilder();
-
-            for (int i = 0; i < ss.length; i++) {
-                if (i > 0) {
-                    buf.append(' ');
-                }
-
-                buf.append(toPascalCase(ss[i]));
-            }
-
-            return buf.toString();
         }
     }
 

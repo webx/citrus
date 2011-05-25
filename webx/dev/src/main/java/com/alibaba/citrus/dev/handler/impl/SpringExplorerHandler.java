@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
@@ -29,13 +28,18 @@ import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 
 public class SpringExplorerHandler extends AbstractExplorerHandler {
     private static final String FN_BEANS = "Beans";
-    private static final String FN_RESOLVABLE_DEPENDENCIES = "ResolvableDependencies";
     private static final String FN_CONFIGURATIONS = "Configurations";
-    private static final Set<String> AVAILABLE_FUNCTIONS = createLinkedHashSet(FN_BEANS, FN_CONFIGURATIONS,
-            FN_RESOLVABLE_DEPENDENCIES);
+    private static final String FN_RESOLVABLE_DEPENDENCIES = "ResolvableDependencies";
+    private static final Map<String, String> AVAILABLE_FUNCTIONS = createLinkedHashMap();
+
+    static {
+        AVAILABLE_FUNCTIONS.put(FN_BEANS, "Beans");
+        AVAILABLE_FUNCTIONS.put(FN_CONFIGURATIONS, "Configurations");
+        AVAILABLE_FUNCTIONS.put(FN_RESOLVABLE_DEPENDENCIES, "Resolvable Dependencies");
+    }
 
     @Override
-    protected Set<String> getAvailableFunctions() {
+    protected Map<String, String> getAvailableFunctions() {
         return AVAILABLE_FUNCTIONS;
     }
 

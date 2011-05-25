@@ -9,7 +9,7 @@
 <h1>${contextName} - ${configLocations}</h1>
 <form id="webx-resource-query-form" action="" method="get">
   <div id="webx-resources">
-    <input type="hidden" name="context" value="${contextName}" />
+    <input type="hidden" name="context" value="${contextNameForParam}" />
     <input type="hidden" name="fn" value="${functionName}" />
     ${resourceFunctions: #resourcesNotAvailable, #resourceFunctions}
   </div>

@@ -9,7 +9,7 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import com.alibaba.citrus.service.resource.Resource;
 import com.alibaba.citrus.service.resource.ResourceLoadingService;
@@ -24,7 +24,13 @@ import com.alibaba.citrus.webx.handler.support.AbstractVisitor;
 
 public class ServiceExplorerHandler extends AbstractExplorerHandler {
     private static final String FN_RESOURCES = "ResourceLoading";
-    private static final Set<String> AVAILABLE_FUNCTIONS = createLinkedHashSet(FN_RESOURCES);
+    private static final String FN_URIS = "URIs";
+    private static final Map<String, String> AVAILABLE_FUNCTIONS = createLinkedHashMap();
+
+    static {
+        AVAILABLE_FUNCTIONS.put(FN_RESOURCES, "Resources");
+        AVAILABLE_FUNCTIONS.put(FN_URIS, "URIs");
+    }
 
     @Override
     protected String getDefaultFunction() {
@@ -32,7 +38,7 @@ public class ServiceExplorerHandler extends AbstractExplorerHandler {
     }
 
     @Override
-    protected Set<String> getAvailableFunctions() {
+    protected Map<String, String> getAvailableFunctions() {
         return AVAILABLE_FUNCTIONS;
     }
 
