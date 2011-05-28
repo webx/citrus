@@ -11,15 +11,15 @@
   <div id="webx-resources">
     <input type="hidden" name="context" value="${contextNameForParam}" />
     <input type="hidden" name="fn" value="${functionName}" />
-    ${resourceFunctions: #resourcesNotAvailable, #resourceFunctions}
+    ${service: #serviceNotAvailable, #service}
   </div>
 </form>
 
-#resourcesNotAvailable
+#serviceNotAvailable
   <p>ResourceLoadingService not available.</p>
 #end
 
-#resourceFunctions
+#service
   <div>
     <label for="webx-resource-query">Resource:</label>
     <input id="webx-resource-query" type="text" name="resource" value="${resourceName}" size="50" />

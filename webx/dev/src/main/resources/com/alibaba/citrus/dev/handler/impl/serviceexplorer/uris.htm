@@ -7,3 +7,33 @@
 ## --------------------------
 
 <h1>${contextName} - ${configLocations}</h1>
+<div id="webx-uris">
+  ${service: #serviceNotAvailable, #service}
+</div>
+
+#serviceNotAvailable
+  <p>URIBrokerService not available.</p>
+#end
+
+#service
+  <ul>
+    $#{uri}
+  </ul>
+
+  #uri
+    <li>
+      <p>${uriName: #exposed, #hidden}</p>
+      <p>(<span class="hl-package">${valueTypePackage}</span><span class="hl-class">${valueTypeName}</span>)
+         <a href="${value}">${value}</a>
+      </p>
+    </li>
+
+    #exposed
+      <span class="exposed-uri">\$${name}</span>
+    #end
+
+    #hidden
+      <span class="hidden-uri">\$${name} (hidden)</span>
+    #end
+  #end
+#end

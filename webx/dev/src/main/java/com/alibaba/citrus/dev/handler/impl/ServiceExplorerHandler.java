@@ -1,15 +1,18 @@
 package com.alibaba.citrus.dev.handler.impl;
 
 import static com.alibaba.citrus.util.Assert.*;
+import static com.alibaba.citrus.util.ClassUtil.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.FileUtil.*;
 import static com.alibaba.citrus.util.StringEscapeUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
+import static java.util.Collections.*;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.alibaba.citrus.service.resource.Resource;
 import com.alibaba.citrus.service.resource.ResourceLoadingService;
@@ -17,10 +20,10 @@ import com.alibaba.citrus.service.resource.ResourceNotFoundException;
 import com.alibaba.citrus.service.resource.ResourceTrace;
 import com.alibaba.citrus.service.resource.ResourceTraceElement;
 import com.alibaba.citrus.service.uribroker.URIBrokerService;
+import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 import com.alibaba.citrus.util.IllegalPathException;
 import com.alibaba.citrus.util.templatelite.Template;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
-import com.alibaba.citrus.webx.handler.support.AbstractVisitor;
 
 public class ServiceExplorerHandler extends AbstractExplorerHandler {
     private static final String FN_RESOURCES = "ResourceLoading";
@@ -59,34 +62,30 @@ public class ServiceExplorerHandler extends AbstractExplorerHandler {
 
     @SuppressWarnings("unused")
     private class ServiceExplorerVisitor extends AbstractExplorerVisitor {
-        private final ResourceLoadingService resourceLoadingService;
-        private final URIBrokerService uriBrokerService;
-
         public ServiceExplorerVisitor(RequestHandlerContext context) {
             super(context);
-
-            this.resourceLoadingService = getService("resourceLoadingService", ResourceLoadingService.class);
-            this.uriBrokerService = getService("uriBrokerService", URIBrokerService.class);
         }
 
-        public void visitResourceFunctions(Template resourceNotAvailableTemplate, Template resourceFunctionsTemplate) {
-            if (resourceLoadingService == null) {
-                resourceNotAvailableTemplate.accept(this);
-            } else {
-                resourceFunctionsTemplate.accept(new ResourcesExplorerVisitor(context, resourceLoadingService));
-            }
+        public Object visitResources(Template resourcesTemplate) {
+            return new ResourcesExplorerVisitor(context, this, getService("resourceLoadingService",
+                    ResourceLoadingService.class));
+        }
+
+        public Object visitUris(Template urisTemplate) {
+            return new UrisExplorerVisitor(context, this, getService("uriBrokerService", URIBrokerService.class));
         }
     }
 
     @SuppressWarnings("unused")
-    private class ResourcesExplorerVisitor extends AbstractVisitor {
+    private class ResourcesExplorerVisitor extends AbstractFallbackVisitor {
         private final ResourceLoadingService resourceLoadingService;
         private final String resourceName;
         private String title;
         private String content;
 
-        public ResourcesExplorerVisitor(RequestHandlerContext context, ResourceLoadingService resourceLoadingService) {
-            super(context);
+        public ResourcesExplorerVisitor(RequestHandlerContext context, ServiceExplorerVisitor v,
+                                        ResourceLoadingService resourceLoadingService) {
+            super(context, v);
             this.resourceLoadingService = assertNotNull(resourceLoadingService, "resourceLoadingService");
 
             String resourceName;
@@ -98,6 +97,14 @@ public class ServiceExplorerHandler extends AbstractExplorerHandler {
             }
 
             this.resourceName = resourceName;
+        }
+
+        public void visitService(Template serviceNotAvailableTemplate, Template serviceTemplate) {
+            if (resourceLoadingService == null) {
+                serviceNotAvailableTemplate.accept(this);
+            } else {
+                serviceTemplate.accept(this);
+            }
         }
 
         public void visitResourceName() {
@@ -233,6 +240,83 @@ public class ServiceExplorerHandler extends AbstractExplorerHandler {
 
         public void visitBoxContent() {
             out().print(escapeHtml(content));
+        }
+    }
+
+    @SuppressWarnings("unused")
+    private class UrisExplorerVisitor extends AbstractFallbackVisitor {
+        private final URIBrokerService uris;
+        private URIBroker uri;
+        private boolean exposed;
+        private String name;
+
+        public UrisExplorerVisitor(RequestHandlerContext context, ServiceExplorerVisitor v, URIBrokerService uris) {
+            super(context, v);
+            this.uris = uris;
+        }
+
+        public void visitService(Template serviceNotAvailableTemplate, Template serviceTemplate) {
+            if (uris == null) {
+                serviceNotAvailableTemplate.accept(this);
+            } else {
+                serviceTemplate.accept(this);
+            }
+        }
+
+        public void visitUri(Template uriTemplate) {
+            final Set<String> exposedNames = createHashSet(uris.getExposedNames());
+            List<String> names = createArrayList(uris.getNames());
+
+            sort(names, new Comparator<String>() {
+                public int compare(String o1, String o2) {
+                    int t1 = exposedNames.contains(o1) ? 0 : 1;
+                    int t2 = exposedNames.contains(o2) ? 0 : 1;
+
+                    if (t1 != t2) {
+                        return t1 - t2;
+                    } else {
+                        return o1.compareTo(o2);
+                    }
+                }
+            });
+
+            for (String name : names) {
+                this.uri = uris.getURIBroker(name);
+                this.exposed = exposedNames.contains(name);
+                this.name = name;
+
+                uriTemplate.accept(this);
+            }
+        }
+
+        public void visitUriName(Template exposedTemplate, Template hiddenTemplate) {
+            if (exposed) {
+                exposedTemplate.accept(this);
+            } else {
+                hiddenTemplate.accept(this);
+            }
+        }
+
+        public void visitName() {
+            out().print(name);
+        }
+
+        public void visitValueTypePackage() {
+            out().print(uri.getClass().getPackage().getName() + ".");
+        }
+
+        public void visitValueTypeName() {
+            out().print(getSimpleClassName(uri.getClass(), false));
+        }
+
+        public void visitValue() {
+            out().print(uri.toString());
+        }
+
+        public void visitHidden(Template hiddenTemplate) {
+            if (!exposed) {
+                hiddenTemplate.accept(this);
+            }
         }
     }
 }

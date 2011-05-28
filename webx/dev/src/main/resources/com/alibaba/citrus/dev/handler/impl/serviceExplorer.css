@@ -47,3 +47,11 @@
 .hl-value {
     color: #993300;
 }
+
+.hidden-uri {
+    color: #AAAA96;
+}
+
+.exposed-uri {
+    color: #000096;
+}
