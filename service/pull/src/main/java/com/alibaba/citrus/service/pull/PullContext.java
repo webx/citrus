@@ -31,6 +31,8 @@ import java.util.Set;
 public interface PullContext {
     Object pull(String name);
 
+    Set<String> getQualifiedToolNames();
+
     Set<String> getToolNames();
 
     Map<String, Object> getTools();

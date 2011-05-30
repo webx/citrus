@@ -25,6 +25,8 @@ import static org.easymock.EasyMock.*;
 import static org.easymock.classextension.EasyMock.*;
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -41,6 +43,7 @@ import com.alibaba.citrus.service.pull.RuntimeToolSetFactory;
 import com.alibaba.citrus.service.pull.ToolFactory;
 import com.alibaba.citrus.service.pull.ToolNameAware;
 import com.alibaba.citrus.service.pull.ToolSetFactory;
+import com.alibaba.citrus.service.pull.impl.PullServiceImpl.ToolName;
 import com.alibaba.citrus.service.pull.impl.PullServiceImpl.ToolSetInfo;
 
 public class PullServiceTests extends AbstractPullServiceTests {
@@ -56,13 +59,13 @@ public class PullServiceTests extends AbstractPullServiceTests {
     private Map<String, ToolSetInfo<ToolSetFactory>> toolsInSet;
     private Map<String, RuntimeToolSetFactory> toolsRuntime;
     private Map<String, Object> prePulledTools;
-    private Set<String> toolNames;
+    private Set<ToolName> toolNames;
 
     // context instance vars
     private Map<String, Object> context_pulledTools;
     private Map<String, RuntimeToolSetFactory> context_toolsRuntime;
     private Map<String, ToolSetInfo<RuntimeToolSetFactory>> context_toolsInRuntimeSet;
-    private Set<String> context_toolNames;
+    private Set<ToolName> context_toolNames;
 
     @Before
     public void init() {
@@ -144,7 +147,7 @@ public class PullServiceTests extends AbstractPullServiceTests {
         toolsInSet = sort(getFieldValue(service, "toolsInSet", Map.class));
         toolsRuntime = sort(getFieldValue(service, "toolsRuntime", Map.class));
         prePulledTools = sort(getFieldValue(service, "prePulledTools", Map.class));
-        toolNames = createTreeSet(getFieldValue(service, "toolNames", Set.class));
+        toolNames = createHashSet(getFieldValue(service, "toolNames", Set.class));
 
         assertNotNull(tools);
         assertNotNull(toolsInSet);
@@ -332,7 +335,7 @@ public class PullServiceTests extends AbstractPullServiceTests {
         List<Object> values;
 
         // toolNames - all tools and tools in set
-        assertArrayEquals(staticToolNames, toolNames.toArray());
+        assertArrayEquals(staticToolNames, toStringArray(toolNames));
 
         // prePulledTools - pre-pulled singletons
         assertArrayEquals(new Object[] { "a", "b", "c", "d", "e", "f", "g", "h", "singleton.1", "singleton.2",
@@ -458,32 +461,32 @@ public class PullServiceTests extends AbstractPullServiceTests {
         // inited with tools
         String str = "";
         str += "PullTools [\n";
-        str += "  [ 1/26] a\n";
-        str += "  [ 2/26] b\n";
-        str += "  [ 3/26] c\n";
-        str += "  [ 4/26] d\n";
-        str += "  [ 5/26] e\n";
-        str += "  [ 6/26] f\n";
-        str += "  [ 7/26] g\n";
-        str += "  [ 8/26] h\n";
-        str += "  [ 9/26] i\n";
-        str += "  [10/26] j\n";
-        str += "  [11/26] k\n";
-        str += "  [12/26] l\n";
-        str += "  [13/26] m\n";
-        str += "  [14/26] n\n";
-        str += "  [15/26] o\n";
-        str += "  [16/26] p\n";
-        str += "  [17/26] prototype.1\n";
-        str += "  [18/26] prototype.2\n";
-        str += "  [19/26] prototypes.3\n";
-        str += "  [20/26] prototypes.4\n";
-        str += "  [21/26] runtime.3\n";
-        str += "  [22/26] runtime.4\n";
-        str += "  [23/26] singleton.1\n";
-        str += "  [24/26] singleton.2\n";
-        str += "  [25/26] singletons.3\n";
-        str += "  [26/26] singletons.4\n";
+        str += "  [ 1/26] /prototype.1\n";
+        str += "  [ 2/26] /prototype.2\n";
+        str += "  [ 3/26] /prototypes.1/i\n";
+        str += "  [ 4/26] /prototypes.1/j\n";
+        str += "  [ 5/26] /prototypes.2/k\n";
+        str += "  [ 6/26] /prototypes.2/l\n";
+        str += "  [ 7/26] /prototypes.3\n";
+        str += "  [ 8/26] /prototypes.3/m\n";
+        str += "  [ 9/26] /prototypes.3/n\n";
+        str += "  [10/26] /prototypes.4\n";
+        str += "  [11/26] /prototypes.4/o\n";
+        str += "  [12/26] /prototypes.4/p\n";
+        str += "  [13/26] /runtime.3\n";
+        str += "  [14/26] /runtime.4\n";
+        str += "  [15/26] /singleton.1\n";
+        str += "  [16/26] /singleton.2\n";
+        str += "  [17/26] /singletons.1/a\n";
+        str += "  [18/26] /singletons.1/b\n";
+        str += "  [19/26] /singletons.2/c\n";
+        str += "  [20/26] /singletons.2/d\n";
+        str += "  [21/26] /singletons.3\n";
+        str += "  [22/26] /singletons.3/e\n";
+        str += "  [23/26] /singletons.3/f\n";
+        str += "  [24/26] /singletons.4\n";
+        str += "  [25/26] /singletons.4/g\n";
+        str += "  [26/26] /singletons.4/h\n";
         str += "]";
 
         assertEquals(str, service.toString());
@@ -503,41 +506,41 @@ public class PullServiceTests extends AbstractPullServiceTests {
 
         String str = "";
         str += "PullTools [\n";
-        str += "  [1/7] prototype.3\n";
-        str += "  [2/7] prototypes.5\n";
-        str += "  [3/7] runtime.5\n";
-        str += "  [4/7] singleton.3\n";
-        str += "  [5/7] singletons.5\n";
-        str += "  [6/7] z1\n";
-        str += "  [7/7] z2\n";
+        str += "  [1/7] /prototype.3\n";
+        str += "  [2/7] /prototypes.5\n";
+        str += "  [3/7] /prototypes.5/z2\n";
+        str += "  [4/7] /runtime.5\n";
+        str += "  [5/7] /singleton.3\n";
+        str += "  [6/7] /singletons.5\n";
+        str += "  [7/7] /singletons.5/z1\n";
         str += "]\n";
         str += "Parent PullTools [\n";
-        str += "  [ 1/26] a\n";
-        str += "  [ 2/26] b\n";
-        str += "  [ 3/26] c\n";
-        str += "  [ 4/26] d\n";
-        str += "  [ 5/26] e\n";
-        str += "  [ 6/26] f\n";
-        str += "  [ 7/26] g\n";
-        str += "  [ 8/26] h\n";
-        str += "  [ 9/26] i\n";
-        str += "  [10/26] j\n";
-        str += "  [11/26] k\n";
-        str += "  [12/26] l\n";
-        str += "  [13/26] m\n";
-        str += "  [14/26] n\n";
-        str += "  [15/26] o\n";
-        str += "  [16/26] p\n";
-        str += "  [17/26] prototype.1\n";
-        str += "  [18/26] prototype.2\n";
-        str += "  [19/26] prototypes.3\n";
-        str += "  [20/26] prototypes.4\n";
-        str += "  [21/26] runtime.3\n";
-        str += "  [22/26] runtime.4\n";
-        str += "  [23/26] singleton.1\n";
-        str += "  [24/26] singleton.2\n";
-        str += "  [25/26] singletons.3\n";
-        str += "  [26/26] singletons.4\n";
+        str += "  [ 1/26] /prototype.1\n";
+        str += "  [ 2/26] /prototype.2\n";
+        str += "  [ 3/26] /prototypes.1/i\n";
+        str += "  [ 4/26] /prototypes.1/j\n";
+        str += "  [ 5/26] /prototypes.2/k\n";
+        str += "  [ 6/26] /prototypes.2/l\n";
+        str += "  [ 7/26] /prototypes.3\n";
+        str += "  [ 8/26] /prototypes.3/m\n";
+        str += "  [ 9/26] /prototypes.3/n\n";
+        str += "  [10/26] /prototypes.4\n";
+        str += "  [11/26] /prototypes.4/o\n";
+        str += "  [12/26] /prototypes.4/p\n";
+        str += "  [13/26] /runtime.3\n";
+        str += "  [14/26] /runtime.4\n";
+        str += "  [15/26] /singleton.1\n";
+        str += "  [16/26] /singleton.2\n";
+        str += "  [17/26] /singletons.1/a\n";
+        str += "  [18/26] /singletons.1/b\n";
+        str += "  [19/26] /singletons.2/c\n";
+        str += "  [20/26] /singletons.2/d\n";
+        str += "  [21/26] /singletons.3\n";
+        str += "  [22/26] /singletons.3/e\n";
+        str += "  [23/26] /singletons.3/f\n";
+        str += "  [24/26] /singletons.4\n";
+        str += "  [25/26] /singletons.4/g\n";
+        str += "  [26/26] /singletons.4/h\n";
         str += "]";
 
         assertEquals(str, service.toString());
@@ -793,7 +796,7 @@ public class PullServiceTests extends AbstractPullServiceTests {
         Map<String, Object> parent_pulledTools;
         Map<String, RuntimeToolSetFactory> parent_toolsRuntime;
         Map<String, ToolSetInfo<RuntimeToolSetFactory>> parent_toolsInRuntimeSet;
-        Set<String> parent_toolNames;
+        Set<ToolName> parent_toolNames;
 
         populateService();
         initService();
@@ -806,7 +809,7 @@ public class PullServiceTests extends AbstractPullServiceTests {
         Map<String, Object> this_pulledTools;
         Map<String, RuntimeToolSetFactory> this_toolsRuntime;
         Map<String, ToolSetInfo<RuntimeToolSetFactory>> this_toolsInRuntimeSet;
-        Set<String> this_toolNames;
+        Set<ToolName> this_toolNames;
 
         initServiceWithParent();
         this_pulledTools = context_pulledTools;
@@ -1085,6 +1088,19 @@ public class PullServiceTests extends AbstractPullServiceTests {
         assertNotNull(o1);
         assertNotNull(o2);
         assertNotSame(o1, o2);
+    }
+
+    private String[] toStringArray(Collection<ToolName> c) {
+        String[] result = new String[c.size()];
+
+        int i = 0;
+        for (ToolName o : c) {
+            result[i++] = o == null ? null : o.getName();
+        }
+
+        Arrays.sort(result);
+
+        return result;
     }
 
     private static class MyToolFactory implements ToolFactory {

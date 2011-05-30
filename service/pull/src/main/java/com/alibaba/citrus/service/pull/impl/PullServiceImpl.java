@@ -83,7 +83,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
     // 所有非runtime tools的名称，包括：
     // 1. singleton or non-singleton tools
     // 1. singleton or non-singleton tools in set
-    private Set<String> toolNames;
+    private Set<ToolName> toolNames;
 
     public void setApplicationContext(ApplicationContext factory) {
         this.beanFactory = factory;
@@ -174,11 +174,13 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
                             throw new PullException("Could not create tool: \"" + name + "\"", ex);
                         }
 
-                        toolNames.add(name);
+                        ToolName toolName = new ToolName(null, name, false);
+
+                        toolNames.add(toolName);
                         prePulledTools.put(name, tool);
 
                         if (getLogger().isDebugEnabled()) {
-                            getLogger().debug("Pre-pulled tool: {} = {}", new Object[] { name, tool });
+                            getLogger().debug("Pre-pulled tool: {} = {}", toolName, tool);
                         }
                     }
 
@@ -200,12 +202,13 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
                                                 + "\"", ex);
                                     }
 
-                                    toolNames.add(nameInSet);
+                                    ToolName toolName = new ToolName(name, nameInSet, false);
+
+                                    toolNames.add(toolName);
                                     prePulledTools.put(nameInSet, tool);
 
                                     if (getLogger().isDebugEnabled()) {
-                                        getLogger().debug("Pre-pulled tool: {}.{} = {}",
-                                                new Object[] { name, nameInSet, tool });
+                                        getLogger().debug("Pre-pulled tool: {} = {}", toolName, tool);
                                     }
                                 }
                             }
@@ -214,10 +217,12 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
                 } else {
                     // 将non-singleton tool，预先取得其名称。
                     if (testBit(type, TOOL_FACTORY)) {
-                        toolNames.add(name);
+                        ToolName toolName = new ToolName(null, name, false);
+
+                        toolNames.add(toolName);
                         tools.put(name, (ToolFactory) factory);
 
-                        getLogger().debug("Pre-queued tool: {}", name);
+                        getLogger().debug("Pre-queued tool: {}", toolName);
                     }
 
                     // 将non-singleton tool set，预先取得每一个名称。
@@ -229,11 +234,13 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
                                 nameInSet = trimToNull(nameInSet);
 
                                 if (nameInSet != null) {
-                                    toolNames.add(nameInSet);
+                                    ToolName toolName = new ToolName(name, nameInSet, false);
+
+                                    toolNames.add(toolName);
                                     toolsInSet.put(nameInSet, new ToolSetInfo<ToolSetFactory>(name,
                                             (ToolSetFactory) factory, null));
 
-                                    getLogger().debug("Pre-queued tool: {}.{}", name, nameInSet);
+                                    getLogger().debug("Pre-queued tool: {}", toolName);
                                 }
                             }
                         }
@@ -373,7 +380,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
         private final Map<String, Object> pulledTools;
         private final Map<String, RuntimeToolSetFactory> toolsRuntime;
         private final Map<String, ToolSetInfo<RuntimeToolSetFactory>> toolsInRuntimeSet;
-        private final Set<String> toolNames;
+        private final Set<ToolName> toolNames;
         private Set<String> toolNamesIncludingParent;
         private Map<String, Object> toolsIncludingParent;
 
@@ -387,7 +394,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
             pulledTools = createHashMap();
             toolsRuntime = createTreeMap(); // 排序以保证单元测试的确定性
             toolsInRuntimeSet = createHashMap();
-            toolNames = createTreeSet(); // 排序，使getToolNames()方法返回的对象有序
+            toolNames = createHashSet();
 
             // copy runtime tools
             toolsRuntime.putAll(PullServiceImpl.this.toolsRuntime);
@@ -524,7 +531,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
                         if (nameInSet != null) {
                             toolsInRuntimeSet.put(nameInSet, new ToolSetInfo<RuntimeToolSetFactory>(toolSetName,
                                     factory, tool));
-                            toolNames.add(nameInSet);
+                            toolNames.add(new ToolName(toolSetName, nameInSet, false));
                             count++;
                         }
                     }
@@ -539,25 +546,44 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
             }
         }
 
+        public Set<String> getQualifiedToolNames() {
+            Set<String> names = createTreeSet();
+
+            for (ToolName toolName : populateToolNames()) {
+                names.add(toolName.getQualifiedName());
+            }
+
+            return names;
+        }
+
         public Set<String> getToolNames() {
             if (toolNamesIncludingParent == null) {
-                toolNamesIncludingParent = unmodifiableSet(populateToolNames());
+                Set<String> names = createTreeSet();
+
+                for (ToolName toolName : populateToolNames()) {
+                    names.add(toolName.getName());
+                }
+
+                toolNamesIncludingParent = unmodifiableSet(names);
             }
 
             return toolNamesIncludingParent;
         }
 
-        private Set<String> populateToolNames() {
-            Set<String> toolNamesIncludingParent;
+        private Set<ToolName> populateToolNames() {
+            Set<ToolName> toolNamesIncludingParent;
 
             pullToolsRuntime(null);
 
             if (parentContext == null) {
                 toolNamesIncludingParent = toolNames;
             } else {
-                toolNamesIncludingParent = createTreeSet();
+                toolNamesIncludingParent = createHashSet();
 
-                toolNamesIncludingParent.addAll(parentContext.getToolNames());
+                for (String parentToolName : parentContext.getQualifiedToolNames()) {
+                    toolNamesIncludingParent.add(new ToolName("parent", parentToolName, true));
+                }
+
                 toolNamesIncludingParent.addAll(toolNames);
             }
 
@@ -616,6 +642,73 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
             }
 
             return sb.toString();
+        }
+    }
+
+    static final class ToolName implements Comparable<ToolName> {
+        private final String qname;
+        private final String name;
+
+        public ToolName(String namespace, String name, boolean parse) {
+            namespace = trimToNull(namespace);
+            name = assertNotNull(trimToNull(name), "tool name");
+
+            if (parse) {
+                int index = name.lastIndexOf("/");
+
+                if (index >= 0) {
+                    if (namespace == null) {
+                        namespace = name.substring(0, index);
+                    } else {
+                        namespace = namespace + "/" + name.substring(0, index);
+                    }
+
+                    namespace = trim(namespace, "/");
+                    name = name.substring(index + 1);
+                }
+            }
+
+            this.qname = namespace == null ? "/" + name : "/" + namespace + "/" + name;
+            this.name = name;
+        }
+
+        public String getQualifiedName() {
+            return qname;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int compareTo(ToolName o) {
+            return qname.compareTo(o.qname);
+        }
+
+        @Override
+        public int hashCode() {
+            return 31 + qname.hashCode();
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+
+            if (obj == null) {
+                return false;
+            }
+
+            if (!(obj instanceof ToolName)) {
+                return false;
+            }
+
+            return qname.equals(((ToolName) obj).qname);
+        }
+
+        @Override
+        public String toString() {
+            return qname;
         }
     }
 }
