@@ -1,2 +1,1 @@
-Explorers/Spring+Explorer=com.alibaba.citrus.dev.handler.impl.SpringExplorerHandler
-Explorers/Service+Explorer=com.alibaba.citrus.dev.handler.impl.ServiceExplorerHandler
+Webx/Explorer=com.alibaba.citrus.dev.handler.impl.ExplorerHandler

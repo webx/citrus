@@ -1,11 +1,10 @@
 package com.alibaba.citrus.dev.handler.impl;
 
+import static com.alibaba.citrus.dev.handler.util.ReflectionUtil.*;
 import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
@@ -17,8 +16,6 @@ import com.alibaba.citrus.dev.handler.component.DomComponent;
 import com.alibaba.citrus.dev.handler.component.TabsComponent;
 import com.alibaba.citrus.dev.handler.component.TabsComponent.TabItem;
 import com.alibaba.citrus.util.FileUtil;
-import com.alibaba.citrus.util.templatelite.FallbackToVisitor;
-import com.alibaba.citrus.util.templatelite.FallbackVisitor;
 import com.alibaba.citrus.util.templatelite.Template;
 import com.alibaba.citrus.webx.WebxComponent;
 import com.alibaba.citrus.webx.WebxComponents;
@@ -27,7 +24,7 @@ import com.alibaba.citrus.webx.handler.support.AbstractVisitor;
 import com.alibaba.citrus.webx.handler.support.LayoutRequestProcessor;
 
 public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
-    private final TabsComponent tabsComponent = new TabsComponent(this, "tabs");
+    protected final TabsComponent tabsComponent = new TabsComponent(this, "tabs");
     protected final DomComponent domComponent = new DomComponent(this, "dom");
 
     @Autowired
@@ -128,6 +125,18 @@ public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
             this.configLocations = locations;
         }
 
+        public AbstractApplicationContext getApplicationContext() {
+            return appcontext;
+        }
+
+        public TabsComponent getTabsComponent() {
+            return tabsComponent;
+        }
+
+        public DomComponent getDomComponent() {
+            return domComponent;
+        }
+
         protected String getConfigLocationString() {
             return join(configLocations, ", ");
         }
@@ -205,49 +214,5 @@ public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
 
             return locations;
         }
-    }
-
-    protected class AbstractFallbackVisitor extends AbstractVisitor implements FallbackVisitor {
-        protected final FallbackToVisitor ftv;
-
-        public AbstractFallbackVisitor(RequestHandlerContext context, Object fallback) {
-            super(context);
-            this.ftv = new FallbackToVisitor(fallback);
-        }
-
-        public boolean visitPlaceholder(String name, Object[] params) throws Exception {
-            return ftv.visitPlaceholder(name, params);
-        }
-    }
-
-    protected static Field getAccessibleField(Class<?> targetType, String fieldName) throws Exception {
-        Field field = null;
-
-        for (Class<?> c = targetType; c != null && field == null; c = c.getSuperclass()) {
-            try {
-                field = c.getDeclaredField(fieldName);
-            } catch (NoSuchFieldException e) {
-            }
-        }
-
-        field.setAccessible(true);
-
-        return field;
-    }
-
-    protected static Method getAccessibleMethod(Class<?> targetType, String methodName, Class<?>[] argTypes)
-            throws Exception {
-        Method method = null;
-
-        for (Class<?> c = targetType; c != null && method == null; c = c.getSuperclass()) {
-            try {
-                method = c.getDeclaredMethod(methodName, argTypes);
-            } catch (NoSuchMethodException e) {
-            }
-        }
-
-        method.setAccessible(true);
-
-        return method;
     }
 }
