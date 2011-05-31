@@ -581,7 +581,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
                 toolNamesIncludingParent = createHashSet();
 
                 for (String parentToolName : parentContext.getQualifiedToolNames()) {
-                    toolNamesIncludingParent.add(new ToolName("parent", parentToolName, true));
+                    toolNamesIncludingParent.add(new ToolName("_parent", parentToolName, true));
                 }
 
                 toolNamesIncludingParent.addAll(toolNames);
@@ -654,6 +654,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
             name = assertNotNull(trimToNull(name), "tool name");
 
             if (parse) {
+                name = trim(name, "/");
                 int index = name.lastIndexOf("/");
 
                 if (index >= 0) {

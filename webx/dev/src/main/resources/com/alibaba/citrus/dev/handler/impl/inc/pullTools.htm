@@ -1,0 +1,56 @@
+## --------------------------
+## 查询pull tools的工具
+##
+#@ charset    UTF-8
+#@ trimming   on
+#@ whitespace collapse
+## --------------------------
+
+<h1>${contextName} - ${configLocations}</h1>
+<div id="webx-pull-tools">
+  ${service: #serviceNotAvailable, #service}
+</div>
+
+#serviceNotAvailable
+  <p>PullService not available.</p>
+#end
+
+#service
+  <ul>
+    $#{tool}
+  </ul>
+
+  #tool
+    <li>
+      <p$#{toolHidden}>
+        ${toolName: #toolWithValue, #toolWithoutValue}
+      </p>
+      $#{toolValue}
+      $#{subTools}
+    </li>
+
+    #toolHidden
+      $#{SPACE}class="hidden"
+    #end
+
+    #toolWithValue
+      <a id="handle-${toolId}" href="#" onclick="return false;" class="webx-pull-tool" title="Click to show/hide content">\$${name}
+        <img id="handle-${toolId}-img" src="${url:images/close.png}" alt="" />
+      </a>
+    #end
+
+    #toolWithoutValue
+      <span class="webx-pull-tool-set">${name}</span>
+    #end
+
+    #toolValue
+      <pre id="pull-tool-value-${toolId}" class="pull-tool-value">(<span class="hl-package">${valueTypePackage}</span><span class="hl-class">${valueTypeName}</span>) ${value}</pre>
+    #end
+
+    #subTools
+      <ul>
+        $#{tool}
+      </ul>
+    #end
+  #end
+#end

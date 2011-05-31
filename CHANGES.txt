@@ -16,7 +16,7 @@
         <filter-name>webx</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
+
     <servlet-mapping>
         <servlet-name>other</servlet-name>
         <url-pattern>/otherservlet/*</url-pattern>
@@ -50,15 +50,15 @@
 -- Changes in 3.0.2
 
 * 改进SessionRequestContext，当attributes未改变，并且invalidate未调用时，不提交store，以免产生不必要之cookies。
-  
+
   注意：session store不保证对象的内部属性的改变会被保存到store中，例如，下面的代码不一定可行：
-  
+
   MyObject myObject = session.getAttribute("myObject");
   myObject.setValue(value);
-  
+
   // next request of the same session
   assertEquals(value, ((MyObject) session.getAttribute("myObject")).getValue()); // 可能不等
-  
+
 * Bugfix: 在解析query参数时，对“Justin%A1%A4Bieber”进行URL unescape时（GBK），得到乱码。
 * 改进WebxComponentsContext接口，使开发者有机会继承并设置额外的参数。例如：允许bean definition重复定义。
 * Bugfix: 当RequestContext未扩展子接口时，将对RequestContext创建singleton proxy，从而导致注入RequestContext接口时出错。
@@ -83,7 +83,7 @@
   这样改进避免了setLocaleRequestContext中出现UnsupportedCharsetException异常。
 
 * 相关改进：添加方法：LocaleInfo.isCharsetSupported(), assertCharsetSupported()。
-  
+
 * 改进：修改TurbineRunDataInternal接口，将get/setContextForControl的功能和push/popContext合并，简化了control中创建context的逻辑。
   注意：应用不应该依赖于TurbineRunDataInternal接口，如果依赖了，并用到了修改的方法，有可能受影响。
 * 改进：添加了ControlParameters接口，它可以通过参数注入到control module类中。Control通过它可以修改或取消template。
@@ -102,20 +102,27 @@
 * bugfix: 把/index重写（rewrite）成/index.htm时，变成了/index/.htm。
 * 改进：让form service和uris service支持import，这样，就可以把form.xml和uris.xml分割成多个文件，便于管理。
   需要注意，由于有多个form和uris实例存在，所以需要指定primary参数，否则注入会出错。
-  
+
   <form id="common" />
-  
+
   <form primary="true">
     <import form="common" />
   </form>
-  
+
   <uris id="common" />
-  
+
   <uris primary="true">
     <import uris="common" />
   </uris>
 
 * 改进TemplateLite工具，并将它从internal包开发到common-util中，可供外部使用。
-* 新增spring explorer，在开发模式下，可以列出所有context中的spring beans，以帮助开发者了解schema所生成的beans结构。
-* 新增service explorer，在开发模式下，可以查看resource loading服务中资源。
+
+* 新增explorer开发工具，在开发模式下，可以：
+  × 列出所有context中的spring beans，以帮助开发者了解schema所生成的beans结构。
+  × 查看resource loading服务中资源。
+  × 查看uri brokers。
+  × 查看pull tools。
+
 * 改进：resourceLoadingService.trace()时，如果成功的话，能够取得resource对象。
+* 改进：pullService，可以取得tool-set的信息，以方便explorer查看。
+

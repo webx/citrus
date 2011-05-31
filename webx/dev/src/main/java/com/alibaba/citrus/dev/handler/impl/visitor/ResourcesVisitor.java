@@ -20,14 +20,14 @@ import com.alibaba.citrus.util.IllegalPathException;
 import com.alibaba.citrus.util.templatelite.Template;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 
-public class ResourcesExplorerVisitor extends AbstractFallbackVisitor<ExplorerVisitor> {
+public class ResourcesVisitor extends AbstractFallbackVisitor<ExplorerVisitor> {
     private final ResourceLoadingService resourceLoadingService;
     private final String resourceName;
     private String title;
     private String content;
 
-    public ResourcesExplorerVisitor(RequestHandlerContext context, ExplorerVisitor v,
-                                    ResourceLoadingService resourceLoadingService) {
+    public ResourcesVisitor(RequestHandlerContext context, ExplorerVisitor v,
+                            ResourceLoadingService resourceLoadingService) {
         super(context, v);
         this.resourceLoadingService = assertNotNull(resourceLoadingService, "resourceLoadingService");
 

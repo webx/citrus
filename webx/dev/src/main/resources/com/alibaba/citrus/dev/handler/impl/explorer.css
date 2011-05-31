@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+/**
+ * Resolvable Deps.
+ */
 #webx-resolvable-deps {
     font-family: Consolas,"Courier New",Courier,monospace;
 }
@@ -23,16 +26,22 @@
     padding: 0.5em;
 }
 
+/**
+ * Configurations.
+ */
 #webx-configurations .configuration-file-name {
     font-family: Consolas,"Courier New",Courier,monospace;
 }
 
-.webx-resources {
+/**
+ * Resources.
+ */
+#webx-resources .box {
     border: solid 1px grey;
     margin: 1em 0;
 }
 
-.webx-resources .webx-resources-title {
+#webx-resources .webx-resources-title {
     background-color: #E0E0E0;
     color: navy;
     font-weight: bold;
@@ -40,29 +49,72 @@
     padding: 0 0.7em;
 }
 
-.webx-resources ul.webx-resources-content {
+#webx-resources ul.webx-resources-content {
     padding: 0 0.7em;
     list-style: none;
 }
 
-.webx-resources .webx-resources-content blockquote {
+#webx-resources .webx-resources-content blockquote {
     margin: 0.5em 0 1em 1em;
     padding: 0;
 }
 
-.webx-resources .webx-resources-content {
+#webx-resources .webx-resources-content {
     color: navy;
 }
 
-.webx-resources .webx-resources-content p {
+#webx-resources .webx-resources-content p {
     margin: 0;
     padding: 0;
 }
 
-.webx-resource-trace-service-location {
+#webx-resources .webx-resource-trace-service-location {
     color: grey;
 }
 
+/**
+ * Pull Tools.
+ */
+#webx-pull-tools .webx-pull-tool {
+    color:#000096;
+    font-weight: bolder;
+}
+
+#webx-pull-tools .webx-pull-tool-set {
+    color:grey;
+    font-style: italic;
+    font-weight: bolder;
+}
+
+#webx-pull-tools li pre {
+    border: 1px solid grey;
+    margin: 0 0 0.5em 0 ;
+    padding: 0.5em;
+}
+
+#webx-pull-tools li p {
+    margin: 0;
+}
+
+#webx-pull-tools li p.hidden a {
+    color: grey;
+    text-decoration: line-through;
+}
+
+/**
+ * URIs.
+ */
+#webx-uris .hidden-uri {
+    color: #AAAA96;
+}
+
+#webx-uris .exposed-uri {
+    color: #000096;
+}
+
+/**
+ * Common.
+ */
 .hl-tag {
     color:#000096;
 }
@@ -73,12 +125,4 @@
 
 .hl-value {
     color: #993300;
-}
-
-.hidden-uri {
-    color: #AAAA96;
-}
-
-.exposed-uri {
-    color: #000096;
 }

@@ -7,10 +7,12 @@ import java.util.Map;
 
 import com.alibaba.citrus.dev.handler.impl.visitor.BeansVisitor;
 import com.alibaba.citrus.dev.handler.impl.visitor.ConfigurationsVisitor;
+import com.alibaba.citrus.dev.handler.impl.visitor.PullToolsVisitor;
 import com.alibaba.citrus.dev.handler.impl.visitor.ResolvableDepsVisitor;
-import com.alibaba.citrus.dev.handler.impl.visitor.ResourcesExplorerVisitor;
-import com.alibaba.citrus.dev.handler.impl.visitor.UrisExplorerVisitor;
+import com.alibaba.citrus.dev.handler.impl.visitor.ResourcesVisitor;
+import com.alibaba.citrus.dev.handler.impl.visitor.UrisVisitor;
 import com.alibaba.citrus.dev.handler.util.ConfigurationFileReader;
+import com.alibaba.citrus.service.pull.PullService;
 import com.alibaba.citrus.service.resource.ResourceLoadingService;
 import com.alibaba.citrus.service.uribroker.URIBrokerService;
 import com.alibaba.citrus.util.templatelite.Template;
@@ -25,6 +27,7 @@ public class ExplorerHandler extends AbstractExplorerHandler {
         AVAILABLE_FUNCTIONS.put("ResolvableDependencies", "Resolvable Dependencies");
         AVAILABLE_FUNCTIONS.put("Resources", "Resources");
         AVAILABLE_FUNCTIONS.put("URIs", "URIs");
+        AVAILABLE_FUNCTIONS.put("PullTools", "Pull Tools");
     }
 
     @Override
@@ -71,12 +74,16 @@ public class ExplorerHandler extends AbstractExplorerHandler {
         }
 
         public Object visitResources(Template resourcesTemplate) {
-            return new ResourcesExplorerVisitor(context, this, getService("resourceLoadingService",
+            return new ResourcesVisitor(context, this, getService("resourceLoadingService",
                     ResourceLoadingService.class));
         }
 
         public Object visitUris(Template urisTemplate) {
-            return new UrisExplorerVisitor(context, this, getService("uriBrokerService", URIBrokerService.class));
+            return new UrisVisitor(context, this, getService("uriBrokerService", URIBrokerService.class));
+        }
+
+        public Object visitPullTools(Template pullToolsTemplate) {
+            return new PullToolsVisitor(context, this, getService("pullService", PullService.class));
         }
     }
 }

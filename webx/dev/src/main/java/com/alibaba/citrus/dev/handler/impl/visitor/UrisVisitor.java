@@ -14,13 +14,13 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 import com.alibaba.citrus.util.templatelite.Template;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 
-public class UrisExplorerVisitor extends AbstractFallbackVisitor<ExplorerVisitor> {
+public class UrisVisitor extends AbstractFallbackVisitor<ExplorerVisitor> {
     private final URIBrokerService uris;
     private URIBroker uri;
     private boolean exposed;
     private String name;
 
-    public UrisExplorerVisitor(RequestHandlerContext context, ExplorerVisitor v, URIBrokerService uris) {
+    public UrisVisitor(RequestHandlerContext context, ExplorerVisitor v, URIBrokerService uris) {
         super(context, v);
         this.uris = uris;
     }

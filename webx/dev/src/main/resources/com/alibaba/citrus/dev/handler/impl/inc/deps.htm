@@ -16,7 +16,9 @@
 #resolvableDependency
   <li>
     <p><span class="hl-annotation">@Autowired</span></p>
-    <p><span class="hl-keyword">private</span> <span class="hl-package">${typePackage}</span><span class="hl-class">${typeName}</span> <span class="hl-variable">${varName}</span>;</p>
-    <pre>(<span class="hl-package">${valueTypePackage}</span><span class="hl-class">${valueTypeName}</span>) ${value}</pre>
+    <p><span class="hl-keyword">private</span> <span class="hl-package">${typePackage}</span><span class="hl-class">${typeName}</span> <span class="hl-variable">${varName}</span>;
+      <img id="handle-${valueId}" class="webx-resolvable-deps-value-handle" src="${url:images/close.png}" alt="" title="Click to show/hide content" />
+    </p>
+    <pre id="resolvable-deps-value-${valueId}" class="webx-resolvable-deps-value">(<span class="hl-package">${valueTypePackage}</span><span class="hl-class">${valueTypeName}</span>) ${value}</pre>
   </li>
 #end

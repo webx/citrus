@@ -19,6 +19,7 @@ public class ResolvableDepsVisitor extends AbstractFallbackVisitor<ExplorerVisit
     private final Map<Class<?>, Object> resolvableDependencies;
     private Class<?> type;
     private Object value;
+    private int id = 1000;
 
     public ResolvableDepsVisitor(RequestHandlerContext context, ExplorerVisitor v) {
         super(context, v);
@@ -67,6 +68,7 @@ public class ResolvableDepsVisitor extends AbstractFallbackVisitor<ExplorerVisit
         for (Map.Entry<Class<?>, Object> entry : sorted.entrySet()) {
             type = entry.getKey();
             value = entry.getValue();
+            id++;
 
             resolvableDependencyTemplate.accept(this);
         }
@@ -96,6 +98,10 @@ public class ResolvableDepsVisitor extends AbstractFallbackVisitor<ExplorerVisit
         if (value != null) {
             out().print(ClassUtil.getSimpleClassName(value.getClass(), false));
         }
+    }
+
+    public void visitValueId() {
+        out().print(id);
     }
 
     public void visitValue() {
