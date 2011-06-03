@@ -24,9 +24,10 @@ import com.alibaba.citrus.dev.handler.util.DomUtil.ElementFilter;
 public class ConfigurationFileReader {
     private final ConfigurationFile[] configurationFiles;
     private final String baseURL;
+    private final ResourceLoader loader;
 
     public ConfigurationFileReader(ResourceLoader loader, String[] configLocations) throws IOException {
-        assertNotNull(loader);
+        this.loader = assertNotNull(loader);
 
         // 取得所有顶层resources
         List<Resource> resources = createLinkedList();
@@ -117,7 +118,14 @@ public class ConfigurationFileReader {
                         String relativeResourceName = trimToNull(e.attributeValue("resource"));
 
                         if (relativeResourceName != null) {
-                            Resource importedResource = resource.createRelative(relativeResourceName);
+                            Resource importedResource;
+
+                            if (relativeResourceName.contains(":")) {
+                                importedResource = loader.getResource(relativeResourceName);
+                            } else {
+                                importedResource = resource.createRelative(relativeResourceName);
+                            }
+
                             ConfigurationFile importedConfigurationFile = parseConfigurationFile(importedResource,
                                     parsedNames);
 

@@ -209,7 +209,15 @@ public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
 
         private String[] normalizeConfigLocations(String[] locations) {
             for (int i = 0; i < locations.length; i++) {
-                locations[i] = FileUtil.normalizeAbsolutePath(locations[i]);
+                String location = locations[i];
+                int index = location.indexOf(":");
+
+                if (index >= 0) {
+                    location = location.substring(0, index + 1)
+                            + FileUtil.normalizeAbsolutePath(location.substring(index + 1));
+                }
+
+                locations[i] = location;
             }
 
             return locations;
