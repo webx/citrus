@@ -30,7 +30,7 @@ public class ConfigurationFileReader {
         this.loader = assertNotNull(loader);
 
         // 取得所有顶层resources
-        List<Resource> resources = createLinkedList();
+        List<NamedResource> resources = createLinkedList();
 
         for (String configLocation : configLocations) {
             if (loader instanceof ResourcePatternResolver) {
@@ -38,14 +38,14 @@ public class ConfigurationFileReader {
 
                 if (!isEmptyArray(results)) {
                     for (Resource res : results) {
-                        resources.add(res);
+                        resources.add(new NamedResource(configLocation, res));
                     }
                 }
             } else {
                 Resource res = loader.getResource(configLocation);
 
                 if (res != null) {
-                    resources.add(res);
+                    resources.add(new NamedResource(configLocation, res));
                 }
             }
         }
@@ -65,8 +65,8 @@ public class ConfigurationFileReader {
         List<ConfigurationFile> configurationFiles = createLinkedList();
         Set<String> parsedNames = createHashSet();
 
-        for (Resource resource : resources) {
-            ConfigurationFile configurationFile = parseConfigurationFile(resource, parsedNames);
+        for (NamedResource namedResource : resources) {
+            ConfigurationFile configurationFile = parseConfigurationFile(namedResource, parsedNames);
 
             if (configurationFile != null) {
                 configurationFiles.add(configurationFile);
@@ -76,11 +76,11 @@ public class ConfigurationFileReader {
         this.configurationFiles = configurationFiles.toArray(new ConfigurationFile[configurationFiles.size()]);
     }
 
-    private ConfigurationFile parseConfigurationFile(final Resource resource, final Set<String> parsedNames) {
+    private ConfigurationFile parseConfigurationFile(final NamedResource namedResource, final Set<String> parsedNames) {
         URL url;
 
         try {
-            url = resource.getURL();
+            url = namedResource.resource.getURL();
         } catch (IOException e) {
             unexpectedException(e);
             return null;
@@ -115,19 +115,19 @@ public class ConfigurationFileReader {
                     // 导入beans:import，并删除element
                     if ("http://www.springframework.org/schema/beans".equals(e.getNamespaceURI())
                             && "import".equals(e.getName())) {
-                        String relativeResourceName = trimToNull(e.attributeValue("resource"));
+                        String importedResourceName = trimToNull(e.attributeValue("resource"));
 
-                        if (relativeResourceName != null) {
+                        if (importedResourceName != null) {
                             Resource importedResource;
 
-                            if (relativeResourceName.contains(":")) {
-                                importedResource = loader.getResource(relativeResourceName);
+                            if (importedResourceName.contains(":")) {
+                                importedResource = loader.getResource(importedResourceName);
                             } else {
-                                importedResource = resource.createRelative(relativeResourceName);
+                                importedResource = namedResource.resource.createRelative(importedResourceName);
                             }
 
-                            ConfigurationFile importedConfigurationFile = parseConfigurationFile(importedResource,
-                                    parsedNames);
+                            ConfigurationFile importedConfigurationFile = parseConfigurationFile(new NamedResource(
+                                    importedResourceName, importedResource), parsedNames);
 
                             if (importedConfigurationFile != null) {
                                 importedConfigurationFiles.add(importedConfigurationFile);
@@ -144,12 +144,22 @@ public class ConfigurationFileReader {
             rootElement = new Element("read-error").setText(getStackTrace(getRootCause(e)));
         }
 
-        return new ConfigurationFile(name, url,
+        return new ConfigurationFile(namedResource.name, url,
                 importedConfigurationFiles.toArray(new ConfigurationFile[importedConfigurationFiles.size()]),
                 rootElement);
     }
 
     public ConfigurationFile[] toConfigurationFiles() {
         return configurationFiles;
+    }
+
+    private static class NamedResource {
+        private final String name;
+        private final Resource resource;
+
+        public NamedResource(String name, Resource resource) {
+            this.name = name;
+            this.resource = resource;
+        }
     }
 }
