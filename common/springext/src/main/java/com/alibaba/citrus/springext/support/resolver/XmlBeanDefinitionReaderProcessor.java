@@ -19,6 +19,8 @@ package com.alibaba.citrus.springext.support.resolver;
 
 import static com.alibaba.citrus.util.Assert.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.xml.DefaultNamespaceHandlerResolver;
 import org.springframework.beans.factory.xml.NamespaceHandlerResolver;
 import org.springframework.beans.factory.xml.ResourceEntityResolver;
@@ -31,17 +33,34 @@ import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
 
 /**
  * 用来处理<code>XmlBeanDefinitionReader</code>，添加configuration point的功能。
- * 
+ *
  * @author Michael Zhou
  */
 public class XmlBeanDefinitionReaderProcessor {
+    private final static String PROPERTY_SKIP_VALIDATION = "skipValidation";
+    private final static Logger log = LoggerFactory.getLogger(XmlBeanDefinitionReaderProcessor.class);
     private final XmlBeanDefinitionReader reader;
+    private final boolean skipValidation;
 
     public XmlBeanDefinitionReaderProcessor(XmlBeanDefinitionReader reader) {
+        this(reader, Boolean.getBoolean(PROPERTY_SKIP_VALIDATION));
+    }
+
+    public XmlBeanDefinitionReaderProcessor(XmlBeanDefinitionReader reader, boolean skipValidation) {
         this.reader = assertNotNull(reader, "XmlBeanDefinitionReader");
+        this.skipValidation = skipValidation;
     }
 
     public void addConfigurationPointsSupport() {
+        if (skipValidation) {
+            reader.setValidationMode(XmlBeanDefinitionReader.VALIDATION_NONE);
+            reader.setNamespaceAware(true); // 为了添加Configuration Point支持，namespace是必须打开的。
+
+            log.warn(
+                    "XSD validation has been disabled according to the system property: -D{}.  Please be warned: NEVER skipping validation in Production Environment.",
+                    PROPERTY_SKIP_VALIDATION);
+        }
+
         ResourceLoader resourceLoader = reader.getResourceLoader();
 
         if (resourceLoader == null) {
