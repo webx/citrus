@@ -246,7 +246,7 @@ public class WebxComponentsLoader extends ContextLoader {
                                                 ConfigurableListableBeanFactory beanFactory) {
         ComponentsConfig componentsConfig = getComponentsConfig(parentConfiguration);
 
-        // 假如isAutoDiscoverComponents==true，试图自动发现components 
+        // 假如isAutoDiscoverComponents==true，试图自动发现components
         Map<String, String> componentNamesAndLocations = findComponents(componentsConfig, getServletContext());
 
         // 取得特别指定的components
@@ -325,16 +325,18 @@ public class WebxComponentsLoader extends ContextLoader {
      * 查找component名称。
      */
     private Map<String, String> findComponents(ComponentsConfig componentsConfig, ServletContext servletContext) {
-        String componentConfigurationLocationPattern = checkComponentConfigurationLocationPattern(componentsConfig
-                .getComponentConfigurationLocationPattern());
+        String locationPattern = componentsConfig.getComponentConfigurationLocationPattern();
+        String[] prefixAndPattern = checkComponentConfigurationLocationPattern(locationPattern);
+        String prefix = prefixAndPattern[0];
+        String pathPattern = prefixAndPattern[1];
 
         Map<String, String> componentNamesAndLocations = createTreeMap();
 
         if (componentsConfig.isAutoDiscoverComponents()) {
             try {
                 ResourcePatternResolver resolver = new ServletContextResourcePatternResolver(servletContext);
-                Resource[] componentConfigurations = resolver.getResources(componentConfigurationLocationPattern);
-                Pattern pattern = compilePathName(componentConfigurationLocationPattern);
+                Resource[] componentConfigurations = resolver.getResources(locationPattern);
+                Pattern pattern = compilePathName(pathPattern);
 
                 if (componentConfigurations != null) {
                     for (Resource resource : componentConfigurations) {
@@ -346,7 +348,7 @@ public class WebxComponentsLoader extends ContextLoader {
 
                         if (componentName != null) {
                             componentNamesAndLocations.put(componentName,
-                                    componentConfigurationLocationPattern.replace("*", componentName));
+                                    prefix + pathPattern.replace("*", componentName));
                         }
                     }
                 }
@@ -363,21 +365,34 @@ public class WebxComponentsLoader extends ContextLoader {
      * <ol>
      * <li>非空。</li>
      * <li>包含且只包含一个<code>*</code>。</li>
+     * <li>支持<code>classpath*:</code>前缀。</li>
      * </ol>
+     * <p>
+     * 返回数组：[前缀, 不包含<code>classpath*:</code>的路径]。
+     * </p>
      */
-    private String checkComponentConfigurationLocationPattern(String componentConfigurationLocationPattern) {
+    private String[] checkComponentConfigurationLocationPattern(String componentConfigurationLocationPattern) {
         if (componentConfigurationLocationPattern != null) {
-            int index = componentConfigurationLocationPattern.indexOf("*");
+            // 允许并剔除classpath*:前缀。
+            boolean classpath = componentConfigurationLocationPattern.startsWith("classpath*:");
+            String pathPattern = componentConfigurationLocationPattern;
+
+            if (classpath) {
+                pathPattern = componentConfigurationLocationPattern.substring("classpath*:".length()).trim();
+            }
+
+            // 检查路径。
+            int index = pathPattern.indexOf("*");
 
             if (index >= 0) {
-                index = componentConfigurationLocationPattern.indexOf("*", index + 1);
+                index = pathPattern.indexOf("*", index + 1);
 
                 if (index < 0) {
-                    if (componentConfigurationLocationPattern.startsWith("/")) {
-                        componentConfigurationLocationPattern = componentConfigurationLocationPattern.substring(1);
+                    if (pathPattern.startsWith("/")) {
+                        pathPattern = pathPattern.substring(1);
                     }
 
-                    return componentConfigurationLocationPattern;
+                    return new String[] { (classpath ? "classpath:" : EMPTY_STRING), pathPattern };
                 }
             }
         }

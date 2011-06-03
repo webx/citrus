@@ -127,3 +127,7 @@
 * 改进：pullService，可以取得tool-set的信息，以方便explorer查看。
 
 * 改进：允许application context中出现重复定义的bean，合并重复定义的bean definition的内容。这样做的目的是为了可以覆盖bean的默认配置。
+* 改进：支持从classpath*:中查找webx子应用的配置文件。例如：
+    <webx-configuration>
+        <components componentConfigurationLocationPattern="classpath*:META-INF/mycomponent/*.xml" />
+    </webx-configuration>
