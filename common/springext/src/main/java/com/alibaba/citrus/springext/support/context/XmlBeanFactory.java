@@ -45,7 +45,6 @@ public class XmlBeanFactory extends DefaultListableBeanFactory {
         super(parentBeanFactory);
         initBeanDefinitionReader(reader);
         reader.loadBeanDefinitions(resource);
-        setAllowBeanDefinitionOverriding(false);
     }
 
     protected void initBeanDefinitionReader(XmlBeanDefinitionReader beanDefinitionReader) {

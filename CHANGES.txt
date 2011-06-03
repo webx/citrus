@@ -126,3 +126,4 @@
 * 改进：resourceLoadingService.trace()时，如果成功的话，能够取得resource对象。
 * 改进：pullService，可以取得tool-set的信息，以方便explorer查看。
 
+* 改进：允许application context中出现重复定义的bean，合并重复定义的bean definition的内容。这样做的目的是为了可以覆盖bean的默认配置。

@@ -44,7 +44,6 @@ import com.alibaba.citrus.springext.support.resolver.XmlBeanDefinitionReaderProc
  * </li>
  * <li>假如<code>parentResolvableDependenciesAccessible==true</code>，则支持从parent
  * context中取得预先置入<code>resolvableDependencies</code>中的对象。默认为<code>true</code>。</li>
- * <li>默认<code>allowBeanDefinitionOverriding==false</code>。</li>
  * </ul>
  * <p>
  * 建议所有非WEB应用的application context从该基类派生；对于简单的情形，如单元测试，直接从子类
@@ -60,12 +59,10 @@ public abstract class AbstractXmlApplicationContext extends
 
     public AbstractXmlApplicationContext() {
         super();
-        setAllowBeanDefinitionOverriding(false);
     }
 
     public AbstractXmlApplicationContext(ApplicationContext parent) {
         super(parent);
-        setAllowBeanDefinitionOverriding(false);
     }
 
     /**

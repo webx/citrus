@@ -22,11 +22,15 @@ import static java.util.Collections.*;
 import java.lang.reflect.Field;
 import java.util.Map;
 
+import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 
 /**
- * 这是一个hack类，解决如下问题：
+ * 这个类扩展了<code>DefaultListableBeanFactory</code>，改进了如下问题：
  * <ul>
  * <li>子context可继承parent
  * <code>DefaultListableBeanFactory.resolvableDependencies</code>。
@@ -36,6 +40,7 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
  * <li>子context不能覆盖父context中已有的resolvableDependencies对象。否则，
  * WebApplicationContext会自动注册非singleton的request对象
  * ，使得子context不能取得父context中注册的singleton proxy。</li>
+ * <li>自动合并同名的bean definitions，以实现功能：可覆盖bean的默认配置。</li>
  * </ul>
  * 
  * @author Michael Zhou
@@ -83,6 +88,26 @@ class InheritableListableBeanFactory extends DefaultListableBeanFactory {
     public void registerResolvableDependency(Class dependencyType, Object autowiredValue) {
         if (parentResolvableDependencies == null || !parentResolvableDependencies.containsKey(dependencyType)) {
             super.registerResolvableDependency(dependencyType, autowiredValue);
+        }
+    }
+
+    @Override
+    public void registerBeanDefinition(String beanName, BeanDefinition bd) throws BeanDefinitionStoreException {
+        BeanDefinition existingBd;
+
+        // 尝试查找当前的bean是否已经注册过
+        try {
+            existingBd = this.getBeanDefinition(beanName);
+        } catch (NoSuchBeanDefinitionException e) {
+            existingBd = null;
+        }
+
+        // 如果当前的bean已经被定义，使用当前的新配置来覆盖原始的定义
+        if (existingBd != null && existingBd instanceof AbstractBeanDefinition) {
+            ((AbstractBeanDefinition) existingBd).overrideFrom(bd);
+            super.registerBeanDefinition(beanName, existingBd);
+        } else {
+            super.registerBeanDefinition(beanName, bd);
         }
     }
 }

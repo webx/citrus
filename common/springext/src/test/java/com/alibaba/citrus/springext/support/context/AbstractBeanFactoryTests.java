@@ -17,7 +17,6 @@
  */
 package com.alibaba.citrus.springext.support.context;
 
-import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
 import java.text.SimpleDateFormat;
@@ -27,8 +26,8 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -48,7 +47,7 @@ public abstract class AbstractBeanFactoryTests {
     }
 
     @Test
-    public void allowBeanDefinitionOverriding() {
+    public void merge_BeanDefinitions_in_same_names() {
         BeanFactory factory = getFactory();
         DefaultListableBeanFactory listableFactory = null;
 
@@ -59,15 +58,23 @@ public abstract class AbstractBeanFactoryTests {
         }
 
         if (listableFactory != null) {
-            BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(String.class);
+            // register parent
+            BeanDefinitionBuilder parentBuilder = BeanDefinitionBuilder.genericBeanDefinition(String.class);
 
-            listableFactory.registerBeanDefinition("test", builder.getBeanDefinition());
+            listableFactory.registerBeanDefinition("test", parentBuilder.getBeanDefinition());
 
-            try {
-                listableFactory.registerBeanDefinition("test", builder.getBeanDefinition());
-            } catch (BeanDefinitionStoreException e) {
-                assertThat(e, exception("test"));
-            }
+            // register child
+            BeanDefinitionBuilder childBuilder = BeanDefinitionBuilder.genericBeanDefinition();
+            childBuilder.addConstructorArgValue("hello");
+
+            listableFactory.registerBeanDefinition("test", childBuilder.getBeanDefinition());
+
+            // get merged bean definition
+            BeanDefinition bd = listableFactory.getBeanDefinition("test");
+
+            assertEquals("java.lang.String", bd.getBeanClassName());
+            assertEquals(1, bd.getConstructorArgumentValues().getArgumentCount());
+            assertEquals("hello", bd.getConstructorArgumentValues().getArgumentValue(0, null).getValue());
         }
     }
 

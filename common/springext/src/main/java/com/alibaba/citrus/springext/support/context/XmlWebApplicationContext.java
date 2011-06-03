@@ -43,7 +43,6 @@ import com.alibaba.citrus.springext.support.resolver.XmlBeanDefinitionReaderProc
  * </li>
  * <li>假如<code>parentResolvableDependenciesAccessible==true</code>，则支持从parent
  * context中取得预先置入<code>resolvableDependencies</code>中的对象。默认为<code>true</code>。</li>
- * <li>默认<code>allowBeanDefinitionOverriding==false</code>。</li>
  * </ul>
  * <p>
  * 建议所有非WEB应用的application context从{@link AbstractXmlApplicationContext}
@@ -58,10 +57,6 @@ public class XmlWebApplicationContext extends org.springframework.web.context.su
         implements ResourceLoadingExtendable {
     private ResourceLoadingExtender resourceLoadingExtender;
     private boolean parentResolvableDependenciesAccessible = true;
-
-    public XmlWebApplicationContext() {
-        setAllowBeanDefinitionOverriding(false);
-    }
 
     /**
      * 是否可访问到parent context中的resolvableDependencies。 默认是可访问。
