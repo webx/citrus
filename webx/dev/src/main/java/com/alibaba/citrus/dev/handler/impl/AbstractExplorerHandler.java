@@ -215,6 +215,8 @@ public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
                 if (index >= 0) {
                     location = location.substring(0, index + 1)
                             + FileUtil.normalizeAbsolutePath(location.substring(index + 1));
+                } else {
+                    location = FileUtil.normalizeAbsolutePath(location);
                 }
 
                 locations[i] = location;
