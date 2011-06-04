@@ -90,9 +90,14 @@ public class GetResourceValve extends AbstractValve implements ResourceLoaderAwa
         this.resourceName = trimToNull(resourceName);
     }
 
+    @Override
+    protected void init() throws Exception {
+        substName = defaultIfNull(substName, DEFAULT_SUBSTITUTION_NAME);
+    }
+
     public void invoke(PipelineContext pipelineContext) throws Exception {
         TurbineRunData rundata = getTurbineRunData(request);
-        Substitution subst = getSubstitution(pipelineContext, DEFAULT_SUBSTITUTION_NAME);
+        Substitution subst = getSubstitution(pipelineContext);
 
         String resourceName;
 
@@ -155,8 +160,7 @@ public class GetResourceValve extends AbstractValve implements ResourceLoaderAwa
         pipelineContext.invokeNext();
     }
 
-    private Substitution getSubstitution(PipelineContext pipelineContext, String defaultName) {
-        String substName = defaultIfNull(this.substName, defaultName);
+    private Substitution getSubstitution(PipelineContext pipelineContext) {
         return (Substitution) pipelineContext.getAttribute(substName);
     }
 

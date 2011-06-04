@@ -86,6 +86,10 @@ public abstract class AbstractWebxTests {
     }
 
     protected static void prepareServlet() throws Exception {
+        prepareServlet("app1");
+    }
+
+    protected static void prepareServlet(String app) throws Exception {
         // Servlet container
         File webXml = new File(srcdir, "WEB-INF/web.xml");
         ServletRunner servletRunner = new PatchedServletRunner(webXml, "");
@@ -96,12 +100,12 @@ public abstract class AbstractWebxTests {
         client.getClientProperties().setAutoRedirect(false);
 
         // Filter
-        WebxFrameworkFilter filter = (WebxFrameworkFilter) client.newInvocation("http://www.taobao.com/app1")
+        WebxFrameworkFilter filter = (WebxFrameworkFilter) client.newInvocation("http://www.taobao.com/" + app)
                 .getFilter();
         context = filter.getWebxComponents().getParentApplicationContext().getServletContext();
 
         // Webx Controller
-        component = filter.getWebxComponents().getComponent("app1");
+        component = filter.getWebxComponents().getComponent(app);
 
         controller = component.getWebxController();
         assertNotNull(controller);

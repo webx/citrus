@@ -102,11 +102,13 @@ public class ExportControlValve extends AbstractValve {
     protected void init() throws Exception {
         assertNotNull(controlExporterTarget, "no controlExporterTemplate specified");
         assertTrue(templateName != null || moduleName != null, "neither template nor module name was specified");
+        controlToolName = defaultIfNull(controlToolName, DEFAULT_CONTROL_TOOL_NAME);
+        substName = defaultIfNull(substName, DEFAULT_SUBSTITUTION_NAME);
     }
 
     public void invoke(PipelineContext pipelineContext) throws Exception {
         TurbineRunDataInternal rundata = (TurbineRunDataInternal) getTurbineRunData(request);
-        Substitution subst = getSubstitution(pipelineContext, DEFAULT_SUBSTITUTION_NAME);
+        Substitution subst = getSubstitution(pipelineContext);
 
         String template = trimToNull(subst.substitute(templateName));
         String module = trimToNull(subst.substitute(moduleName));
@@ -128,15 +130,13 @@ public class ExportControlValve extends AbstractValve {
         pipelineContext.invokeNext();
     }
 
-    private Substitution getSubstitution(PipelineContext pipelineContext, String defaultName) {
-        String substName = defaultIfNull(this.substName, defaultName);
-
+    private Substitution getSubstitution(PipelineContext pipelineContext) {
         return assertNotNull((Substitution) pipelineContext.getAttribute(substName),
                 "no Substitution exists in pipelineContext: name=%s", substName);
     }
 
     private ControlTool getControlTool(Context context, String template, String module, TurbineRunData rundata) {
-        String toolName = defaultIfNull(controlToolName, DEFAULT_CONTROL_TOOL_NAME);
+        String toolName = controlToolName;
         Object tool = context.get(toolName);
 
         assertTrue(tool instanceof ControlTool, "no control tool: %s", toolName);
