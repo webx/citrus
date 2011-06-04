@@ -129,7 +129,7 @@ public abstract class AbstractCookieStore implements CookieStore {
         path = defaultIfEmpty(path, idCookieConfig.getPath());
         maxAge = defaultIfNull(maxAge, idCookieConfig.getMaxAge());
         httpOnly = defaultIfNull(httpOnly, idCookieConfig.isHttpOnly());
-        secure = defaultIfNull(secure, idCookieConfig.isHttpOnly());
+        secure = defaultIfNull(secure, idCookieConfig.isSecure());
         survivesInInvalidating = defaultIfNull(survivesInInvalidating, SURVIVES_IN_INVALIDATING_DEFAULT);
 
         if (survivesInInvalidating && maxAge <= 0) {

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:services="http://www.alibaba.com/schema/services"
+    xmlns="http://www.alibaba.com/schema/services/request-contexts"
+    xmlns:stores="http://www.alibaba.com/schema/services/request-contexts/session/stores"
+    xmlns:session-encoders="http://www.alibaba.com/schema/services/request-contexts/session/encoders"
+    xmlns:session-encrypters="http://www.alibaba.com/schema/services/request-contexts/session/encrypters"
+    xmlns:session-serializers="http://www.alibaba.com/schema/services/request-contexts/session/serializers"
+    xmlns:idgens="http://www.alibaba.com/schema/services/request-contexts/session/idgens"
+    xmlns:interceptors="http://www.alibaba.com/schema/services/request-contexts/session/interceptors"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/idgens http://localhost:8080/schema/services-request-contexts-session-idgens.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/stores http://localhost:8080/schema/services-request-contexts-session-stores.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/encoders http://localhost:8080/schema/services-request-contexts-session-encoders.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/encrypters http://localhost:8080/schema/services-request-contexts-session-encrypters.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/serializers http://localhost:8080/schema/services-request-contexts-session-serializers.xsd
+        http://www.alibaba.com/schema/services/request-contexts/session/interceptors http://www.alibaba.com/schema/services-request-contexts-session-interceptors.xsd
+    ">
+
+    <services:request-contexts id="rc1" />
+
+    <services:request-contexts id="rc2">
+        <buffered />
+        <lazy-commit />
+        <set-locale />
+        <parser />
+        <session>
+            <id>
+                <idgens:random-id-generator />
+            </id>
+            <stores>
+                <stores:cookie-store id="s1">
+                    <stores:cookie name="s" />
+                    <stores:encoders>
+                        <session-encoders:serialization-encoder>
+                            <session-encrypters:aes-encrypter key="0123456789abcdef" />
+                        </session-encoders:serialization-encoder>
+                    </stores:encoders>
+                </stores:cookie-store>
+                <stores:single-valued-cookie-store id="s2">
+                    <stores:cookie name="t" />
+                </stores:single-valued-cookie-store>
+            </stores>
+            <store-mappings>
+                <match name="*" store="s1" />
+            </store-mappings>
+            <interceptors>
+                <interceptors:lifecycle-logger />
+            </interceptors>
+        </session>
+    </services:request-contexts>
+
+</beans:beans>

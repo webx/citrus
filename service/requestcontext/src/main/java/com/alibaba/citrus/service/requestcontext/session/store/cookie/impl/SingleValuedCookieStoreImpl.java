@@ -50,7 +50,7 @@ public class SingleValuedCookieStoreImpl extends AbstractCookieStore implements 
 
     public void initAttributeNames(String[] attrNames) {
         this.attrNames = attrNames;
-        assertTrue(attrNames.length == 1, "Session store %s supports only 1 mapping to attribute name");
+        assertTrue(attrNames.length <= 1, "Session store %s supports only 1 mapping to attribute name", getName());
     }
 
     public void setValueEncoders(SessionValueEncoder[] encoders) {

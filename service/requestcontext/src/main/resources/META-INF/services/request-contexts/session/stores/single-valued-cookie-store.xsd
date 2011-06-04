@@ -42,31 +42,28 @@
                                     ]]></xsd:documentation>
                                 </xsd:annotation>
                             </xsd:attribute>
-                            <xsd:attribute name="path" type="xsd:string" default="/">
+                            <xsd:attribute name="path" type="xsd:string">
                                 <xsd:annotation>
                                     <xsd:documentation><![CDATA[
     用来保存数据的cookie的path。默认和session ID cookie的path相同。
                                     ]]></xsd:documentation>
                                 </xsd:annotation>
                             </xsd:attribute>
-                            <xsd:attribute name="maxAge" type="springext:integerOrPlaceholder"
-                                default="0">
+                            <xsd:attribute name="maxAge" type="springext:integerOrPlaceholder">
                                 <xsd:annotation>
                                     <xsd:documentation><![CDATA[
     用来保存数据的cookie的最长存活时间（秒）。默认和session ID cookie的最长存活时间相同。
                                     ]]></xsd:documentation>
                                 </xsd:annotation>
                             </xsd:attribute>
-                            <xsd:attribute name="httpOnly" type="springext:booleanOrPlaceholder"
-                                default="true">
+                            <xsd:attribute name="httpOnly" type="springext:booleanOrPlaceholder">
                                 <xsd:annotation>
                                     <xsd:documentation><![CDATA[
     用来保存数据的cookie上设置httpOnly标记。在IE6及更新版本中，可以缓解XSS攻击的危险。默认和session ID cookie的设置相同。
                                     ]]></xsd:documentation>
                                 </xsd:annotation>
                             </xsd:attribute>
-                            <xsd:attribute name="secure" type="springext:booleanOrPlaceholder"
-                                default="false">
+                            <xsd:attribute name="secure" type="springext:booleanOrPlaceholder">
                                 <xsd:annotation>
                                     <xsd:documentation><![CDATA[
     用来保存数据的cookie上设置secure标记。这样，只有在https请求中才可访问该cookie。默认和session ID cookie的设置相同。

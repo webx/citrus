@@ -20,6 +20,7 @@ package com.alibaba.citrus.service.requestcontext.impl;
 import static com.alibaba.citrus.springext.util.DomUtil.*;
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.ObjectUtil.*;
+import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class RequestContextChainingServiceDefinitionParser extends
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         parseBeanDefinitionAttributes(element, parserContext, builder);
 
-        builder.addPropertyValue("sort", defaultIfNull(element.getAttribute("sort"), "true"));
+        builder.addPropertyValue("sort", defaultIfNull(trimToNull(element.getAttribute("sort")), "true"));
 
         List<Object> factoryList = createManagedList(element, parserContext);
 
