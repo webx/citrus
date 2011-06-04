@@ -35,7 +35,7 @@ import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
 
 /**
  * 基于properties的configuration实现。
- * 
+ *
  * @author Michael Zhou
  */
 public abstract class PropertiesConfigurationSupport<C extends Configuration> extends AbstractService<C> implements
@@ -68,8 +68,10 @@ public abstract class PropertiesConfigurationSupport<C extends Configuration> ex
         if (hasParent()) {
             Boolean productionMode = (Boolean) getPropertyNoParent("productionMode");
 
-            assertTrue(productionMode == null || productionMode.booleanValue() == parent.isProductionMode(),
-                    "productionMode cannot be changed at App's Context");
+            if (parent.isProductionMode()) {
+                assertTrue(productionMode == null || productionMode.booleanValue(),
+                        "productionMode cannot be disabled at App's Context");
+            }
         }
 
         if (!isProductionMode()) {
