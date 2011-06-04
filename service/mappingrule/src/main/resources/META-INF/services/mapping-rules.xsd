@@ -27,7 +27,7 @@
     </xsd:complexType>
 
     <xsd:complexType name="AbstractRuleType">
-        <xsd:attribute name="cacheEnabled" type="xsd:boolean" default="false" />
+        <xsd:attribute name="cacheEnabled" type="xsd:boolean" />
         <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
     </xsd:complexType>
 
