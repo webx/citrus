@@ -47,7 +47,8 @@ public class WebappLoaderIntegratingTests extends AbstractResourceLoadingTests {
     @Test
     public void getResource() throws Exception {
         assertResourceServiceList("/webroot", "", true, true, "WEB-INF/", "appcontext/", "beans.xml", "filter/",
-                "loader/", "logback.xml", "myfolder/", "resources-root.xml", "test.txt");
+                "loader/", "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml",
+                "test.txt");
         assertResourceServiceList("/webroot/test.txt", "test.txt", true, false);
         assertResourceServiceList("/webroot/WEB-INF/", "WEB-INF", true, true, "aaa/", "resources.xml", "web.xml");
         assertResourceServiceList("/webroot/WEB-INF/web.xml", "WEB-INF/web.xml", true, false);

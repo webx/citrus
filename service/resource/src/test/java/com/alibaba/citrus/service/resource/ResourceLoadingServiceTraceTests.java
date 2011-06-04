@@ -27,7 +27,7 @@ import org.junit.Test;
 
 /**
  * ≤‚ ‘<code>ResourceLoadingService.trace()</code>π¶ƒ‹°£
- * 
+ *
  * @author Michael Zhou
  */
 public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTests {

@@ -48,7 +48,8 @@ public class SuperLoaderIntegratingTests extends AbstractResourceLoadingTests {
     public void noName() throws Exception {
         assertResourceServiceList("/no_name/webroot/test.txt", "test.txt", true, false);
         assertResourceServiceList("/no_name/webroot", "", true, true, "WEB-INF/", "appcontext/", "beans.xml",
-                "filter/", "loader/", "logback.xml", "myfolder/", "resources-root.xml", "test.txt");
+                "filter/", "loader/", "logback.xml", "myfolder/", "resources-root.xml",
+                "resources-skip-validation.xml", "test.txt");
         assertResourceServiceList("/no_name", "loader", true, true, "classpath-loader.xml", "file-loader.xml",
                 "super-loader-parent.xml", "super-loader.xml", "webapp-loader.xml");
     }
@@ -67,7 +68,8 @@ public class SuperLoaderIntegratingTests extends AbstractResourceLoadingTests {
         // resourceName == superLoader's resourceName
         assertResourceServiceList("/webroot/test.txt", "test.txt", true, false);
         assertResourceServiceList("/webroot/", "", true, true, "WEB-INF/", "appcontext/", "beans.xml", "filter/",
-                "loader/", "logback.xml", "myfolder/", "resources-root.xml", "test.txt");
+                "loader/", "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml",
+                "test.txt");
     }
 
     @Test
@@ -77,7 +79,7 @@ public class SuperLoaderIntegratingTests extends AbstractResourceLoadingTests {
         // ƒ¨»œ”≥…‰°∞/°±
         assertResourceServiceList("/test.txt", "test.txt", true, false);
         assertResourceServiceList("/", "", true, true, "WEB-INF/", "appcontext/", "beans.xml", "filter/", "loader/",
-                "logback.xml", "myfolder/", "resources-root.xml", "test.txt");
+                "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml", "test.txt");
 
         resourceLoadingService = (ResourceLoadingService) factory.getBean("defaultName1");
 

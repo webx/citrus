@@ -68,7 +68,7 @@ public class WebappLoaderTests extends AbstractResourceLoaderTests<WebappResourc
     @Test
     public void list() throws Exception {
         assertResourceLister("/webroot", "", true, "WEB-INF/", "appcontext/", "beans.xml", "filter/", "loader/",
-                "logback.xml", "myfolder/", "resources-root.xml", "test.txt");
+                "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml", "test.txt");
         assertResourceLister("/webroot/test.txt", null, false);
         assertResourceLister("/webroot/WEB-INF/", "WEB-INF", true, "aaa/", "resources.xml", "web.xml");
         assertResourceLister("/webroot/WEB-INF/web.xml", null, false);
