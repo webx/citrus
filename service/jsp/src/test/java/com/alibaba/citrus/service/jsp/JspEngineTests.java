@@ -17,7 +17,6 @@
  */
 package com.alibaba.citrus.service.jsp;
 
-import static com.alibaba.citrus.test.TestEnvStatic.*;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static org.easymock.classextension.EasyMock.*;
@@ -48,52 +47,13 @@ import org.springframework.core.io.ResourceLoader;
 import com.alibaba.citrus.service.jsp.impl.JspEngineImpl;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.RequestContextChainingService;
-import com.alibaba.citrus.service.resource.support.ResourceLoadingSupport;
 import com.alibaba.citrus.service.template.TemplateContext;
 import com.alibaba.citrus.service.template.TemplateNotFoundException;
-import com.alibaba.citrus.service.template.TemplateService;
 import com.alibaba.citrus.service.template.support.MappedTemplateContext;
-import com.alibaba.citrus.springext.support.context.XmlWebApplicationContext;
 import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 import com.meterware.httpunit.WebResponse;
-import com.meterware.servletunit.InvocationContext;
-import com.meterware.servletunit.ServletRunner;
-import com.meterware.servletunit.ServletUnitClient;
 
-public class JspEngineTests {
-    private ServletContext servletContext;
-    private HttpServletRequest request;
-    private HttpServletResponse response;
-    private ServletUnitClient client;
-    private InvocationContext ic;
-    private XmlWebApplicationContext factory;
-    private TemplateService templateService;
-    private JspEngineImpl engine;
-
-    private void initServlet(String webXml) throws Exception {
-        ServletRunner runner = new ServletRunner(new File(srcdir, webXml), "");
-        client = runner.newClient();
-        ic = client.newInvocation("http://localhost:8080/app1");
-
-        servletContext = new ServletContextWrapper(ic.getServlet().getServletConfig().getServletContext());
-        request = ic.getRequest();
-        response = ic.getResponse();
-    }
-
-    private void initFactory() {
-        factory = new XmlWebApplicationContext();
-
-        factory.setConfigLocation("services.xml");
-        factory.setServletContext(servletContext);
-        factory.setResourceLoadingExtender(new ResourceLoadingSupport(factory));
-        factory.refresh();
-
-        templateService = (TemplateService) factory.getBean("templateService");
-        engine = (JspEngineImpl) templateService.getTemplateEngine("jsp");
-
-        assertNotNull(engine);
-    }
-
+public class JspEngineTests extends AbstractJspEngineTests {
     @Test
     public void createEngineDirectly() throws Exception {
         initServlet("webapp/WEB-INF/web.xml");
