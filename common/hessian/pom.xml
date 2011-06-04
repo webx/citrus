@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>citrus-parent</artifactId>
 		<groupId>com.alibaba.citrus</groupId>
-		<version>3.0.4-SNAPSHOT</version>
+		<version>3.0.4</version>
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>

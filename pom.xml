@@ -6,11 +6,11 @@
     <artifactId>citrus-parent</artifactId>
     <packaging>pom</packaging>
     <name>Citrus Parent Project</name>
-    <version>3.0.4-SNAPSHOT</version>
+    <version>3.0.4</version>
     <properties>
         <java.version>1.5</java.version>
         <java.encoding>GBK</java.encoding>
-        <webx-version>3.0.4-SNAPSHOT</webx-version>
+        <webx-version>3.0.4</webx-version>
         <springext-plugin-version>1.0</springext-plugin-version>
         <maven-util-version>1.0</maven-util-version>
         <jetty-version>6.1.22</jetty-version>
