@@ -68,8 +68,8 @@ public abstract class PropertiesConfigurationSupport<C extends Configuration> ex
         if (hasParent()) {
             Boolean productionMode = (Boolean) getPropertyNoParent("productionMode");
 
-            assertTrue(productionMode == null || productionMode.booleanValue() == true,
-                    "productionMode cannot be disabled at App's Context");
+            assertTrue(productionMode == null || productionMode.booleanValue() == parent.isProductionMode(),
+                    "productionMode cannot be changed at App's Context");
         }
 
         if (!isProductionMode()) {
@@ -80,7 +80,7 @@ public abstract class PropertiesConfigurationSupport<C extends Configuration> ex
     }
 
     public boolean isProductionMode() {
-        return getProperty("productionMode", Boolean.FALSE);
+        return getProperty("productionMode", Boolean.TRUE);
     }
 
     public void setProductionMode(boolean productionMode) {

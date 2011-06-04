@@ -14,7 +14,7 @@
     <xsd:complexType name="SimpleConfigurationType">
         <xsd:all>
             <xsd:element name="productionMode" type="springext:booleanOrPlaceholder" minOccurs="0"
-             />
+                default="true" />
         </xsd:all>
         <xsd:attribute name="parentRef" type="xsd:string" use="optional" />
         <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />

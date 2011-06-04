@@ -19,11 +19,11 @@
 
     <xsd:complexType name="WebxConfigurationType">
         <xsd:all>
-            <xsd:element name="productionMode" type="springext:booleanOrPlaceholder" default="false"
+            <xsd:element name="productionMode" type="springext:booleanOrPlaceholder" default="true"
                 minOccurs="0">
                 <xsd:annotation>
                     <xsd:documentation><![CDATA[
-    生产模式。默认为false，即开发者模式。
+    生产模式。默认为true。
     在生产模式中，将显示由开发者定制的简略错误页面。而在开发者模式中，将显示由系统提供的详细错误页面。
                     ]]></xsd:documentation>
                 </xsd:annotation>

@@ -68,7 +68,7 @@ public class MyConfigurationTests {
             fail();
         } catch (BeanCreationException e) {
             assertThat(e,
-                    exception(IllegalArgumentException.class, "productionMode cannot be disabled at App's Context"));
+                    exception(IllegalArgumentException.class, "productionMode cannot be changed at App's Context"));
         }
     }
 
