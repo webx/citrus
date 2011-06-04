@@ -17,7 +17,7 @@
  */
 package com.alibaba.citrus.service.form.impl.validation;
 
-import static com.alibaba.citrus.util.StringUtil.trimToNull;
+import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.text.DateFormat;
 import java.text.ParseException;
