@@ -326,10 +326,10 @@ public class URIBrokerServiceImpl extends AbstractService<URIBrokerService> impl
         public boolean exposed;
         public URIBroker broker;
 
-        public URIBrokerInfo(String name, String parentName, boolean exposed, URIBroker broker) {
+        public URIBrokerInfo(String name, String parentName, Boolean exposed, URIBroker broker) {
             this.name = trimToNull(name);
             this.parentName = trimToNull(parentName);
-            this.exposed = exposed;
+            this.exposed = exposed == null ? false : exposed; // default is false
             this.broker = broker;
         }
     }

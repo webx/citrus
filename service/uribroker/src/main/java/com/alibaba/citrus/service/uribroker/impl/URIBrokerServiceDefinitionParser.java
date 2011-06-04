@@ -78,7 +78,7 @@ public class URIBrokerServiceDefinitionParser extends AbstractNamedBeanDefinitio
 
                 infoBuilder.addConstructorArgValue(subElement.getAttribute("id"));
                 infoBuilder.addConstructorArgValue(subElement.getAttribute("extends"));
-                infoBuilder.addConstructorArgValue(subElement.getAttribute("exposed"));
+                infoBuilder.addConstructorArgValue(trimToNull(subElement.getAttribute("exposed")));
                 infoBuilder.addConstructorArgValue(broker);
 
                 brokers.add(infoBuilder.getBeanDefinition());
