@@ -132,3 +132,5 @@
         <components componentConfigurationLocationPattern="classpath*:META-INF/mycomponent/*.xml" />
     </webx-configuration>
 * 改进：如果指定了-DskipValidation启动参数，则跳过schema验证，以加快启动速度。请勿在生产环境使用这个功能。
+
+-- Changes in 3.0.5
