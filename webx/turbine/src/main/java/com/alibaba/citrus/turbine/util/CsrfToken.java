@@ -24,6 +24,7 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -284,8 +285,8 @@ public class CsrfToken {
         String generateLongLiveToken(HttpSession session);
     }
 
-    private static class DefaultGenerator implements Generator {
-        private final long seed = System.currentTimeMillis();
+    static class DefaultGenerator implements Generator {
+        private final long seed = new Random().nextLong();
 
         public String generateUniqueToken() {
             return longToString(counter.getAndIncrement()) + longToString(seed + System.currentTimeMillis());
@@ -293,7 +294,7 @@ public class CsrfToken {
 
         public String generateLongLiveToken(HttpSession session) {
             String sessionId = assertNotNull(session, "session").getId();
-            byte[] digest = DigestUtils.md5(session.getCreationTime() + seed + sessionId);
+            byte[] digest = DigestUtils.md5(session.getCreationTime() + sessionId);
 
             return StringUtil.bytesToString(digest);
         }

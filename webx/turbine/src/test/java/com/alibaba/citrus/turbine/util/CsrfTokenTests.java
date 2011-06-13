@@ -30,6 +30,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
+import com.alibaba.citrus.turbine.util.CsrfToken.DefaultGenerator;
 import com.alibaba.citrus.util.StringUtil;
 import com.meterware.httpunit.WebRequest;
 
@@ -77,6 +78,20 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
         CsrfToken.resetContextTokenConfiguration();
         assertEquals(CsrfToken.DEFAULT_TOKEN_KEY, CsrfToken.getKey());
         assertEquals(CsrfToken.DEFAULT_MAX_TOKENS, CsrfToken.getMaxTokens());
+    }
+
+    @Test
+    public void generateLongLiveToken() throws InterruptedException {
+        replay(session);
+
+        DefaultGenerator g1 = new DefaultGenerator();
+        DefaultGenerator g2 = new DefaultGenerator();
+
+        String token1 = g1.generateLongLiveToken(session);
+        String token2 = g2.generateLongLiveToken(session);
+
+        assertEquals(token1, token2);
+        assertNotNull(token1);
     }
 
     @Test
