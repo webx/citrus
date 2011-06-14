@@ -136,3 +136,5 @@
 -- Changes in 3.0.5
 
 * Bugfix: CsrfToken.getLongLiveToken在集群机器上产生不一致的结果。
+* 改进：当指定-DskipValidation时，beans定义中的参数可取得正确的默认值，例如：default-autowire，default-dependency-check等。
+
