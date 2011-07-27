@@ -1,0 +1,18 @@
+## --------------------------
+## 显示拒绝访问的信息。
+##
+#@ charset    UTF-8
+#@ trimming   on
+#@ whitespace collapse
+## --------------------------
+
+<h1>Access Denied.</h1>
+
+<div class="webx-access-denied">
+  <p>To access this page, please restart your server with the following system property:</p>
+  <pre><span class="hl-tag">-D</span><span class="hl-attribute">${propertyName}</span>=<span class="hl-value">${propertyValue}</span></pre>
+  <p>Wildcards are permitted in property:</p>
+  <pre><span class="hl-tag">-D</span><span class="hl-attribute">${propertyName}</span>=<span class="hl-value">${propertyValueWildcard}</span></pre>
+  <p>You can also specify multiple addresses and separate them with commas and/or spaces:</p>
+  <pre><span class="hl-tag">-D</span><span class="hl-attribute">${propertyName}</span>=<span class="hl-value">192.168.1.1,${propertyValue}</span></pre>
+</div>

@@ -139,3 +139,8 @@
 * 改进：当指定-DskipValidation时，beans定义中的参数可取得正确的默认值，例如：default-autowire，default-dependency-check等。
 
 -- Changes in 3.0.6
+
+* 改进：为dev mode下的explorer添加安全控制。默认只能从本机访问。当从非授权的主机访问时，显示友好的提示信息。支持下面的property:
+  -DdevelopmentMode.allowedHosts=192.168.1.*
+
+

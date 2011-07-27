@@ -12,6 +12,7 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.AbstractApplicationContext;
 
+import com.alibaba.citrus.dev.handler.component.AccessControlComponent;
 import com.alibaba.citrus.dev.handler.component.DomComponent;
 import com.alibaba.citrus.dev.handler.component.TabsComponent;
 import com.alibaba.citrus.dev.handler.component.TabsComponent.TabItem;
@@ -26,6 +27,7 @@ import com.alibaba.citrus.webx.handler.support.LayoutRequestProcessor;
 public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
     protected final TabsComponent tabsComponent = new TabsComponent(this, "tabs");
     protected final DomComponent domComponent = new DomComponent(this, "dom");
+    protected final AccessControlComponent aclComponent = new AccessControlComponent(this, "acl");
 
     @Autowired
     private WebxComponents components;
@@ -188,6 +190,10 @@ public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
         }
 
         public final void visitExplorer(Template[] functionTemplates) {
+            if (!aclComponent.accessAllowed(context)) {
+                return;
+            }
+
             String[] functions = getAvailableFunctions().keySet().toArray(new String[getAvailableFunctions().size()]);
 
             for (int i = 0; i < functions.length && i < functionTemplates.length; i++) {

@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.webx-access-denied {
+    
+}
+
+.webx-access-denied pre {
+    border: solid 1px grey;
+    margin: 1em 0;
+    padding: 1em;
+}
