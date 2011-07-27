@@ -43,8 +43,6 @@ public class MessageContextFactory {
      */
     public static MessageContext newInstance(final Form form) {
         MessageContext formContext = new MessageContext() {
-            private static final long serialVersionUID = 3833185835016140853L;
-
             @Override
             protected Object internalGet(String key) {
                 return null;
@@ -84,8 +82,6 @@ public class MessageContextFactory {
      */
     public static MessageContext newInstance(final Group group) {
         MessageContext groupContext = new MessageContext() {
-            private static final long serialVersionUID = 3258407326913149238L;
-
             @Override
             protected Object internalGet(String key) {
                 Object value = null;
@@ -133,7 +129,6 @@ public class MessageContextFactory {
      */
     public static MessageContext newInstance(final Field field) {
         MessageContext fieldContext = new MessageContext() {
-            private static final long serialVersionUID = 3258130258607026229L;
             private BeanWrapper fieldWrapper;
 
             @Override
@@ -180,7 +175,6 @@ public class MessageContextFactory {
      */
     public static MessageContext newInstance(final Field field, final Validator validator) {
         MessageContext validatorContext = new MessageContext() {
-            private static final long serialVersionUID = 3616450081390475317L;
             private BeanWrapper validatorWrapper;
 
             @Override

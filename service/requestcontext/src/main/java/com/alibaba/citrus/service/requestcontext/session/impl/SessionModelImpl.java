@@ -35,7 +35,6 @@ import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public class SessionModelImpl implements SessionModel {
-    private static final long serialVersionUID = 9158363263146288193L;
     private transient SessionConfig sessionConfig;
     private String sessionID;
     private long creationTime;
