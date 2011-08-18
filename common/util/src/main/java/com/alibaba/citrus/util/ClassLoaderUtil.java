@@ -502,13 +502,13 @@ public class ClassLoaderUtil {
 
         // 如果没找到，试着从装入自己的ClassLoader中查找。
         if (!found) {
-            getResources(urls, resourceName, ClassLoaderUtil.class.getClassLoader(), false);
+            found = getResources(urls, resourceName, ClassLoaderUtil.class.getClassLoader(), false);
         }
 
         // 最后的尝试: 在系统ClassLoader中查找(JDK1.2以上)，
         // 或者在JDK的内部ClassLoader中查找(JDK1.2以下)。
         if (!found) {
-            getResources(urls, resourceName, null, true);
+            found = getResources(urls, resourceName, null, true);
         }
 
         // 返回不重复的列表。

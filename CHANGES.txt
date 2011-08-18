@@ -142,5 +142,6 @@
 
 * 改进：为dev mode下的explorer添加安全控制。默认只能从本机访问。当从非授权的主机访问时，显示友好的提示信息。支持下面的property:
   -DdevelopmentMode.allowedHosts=192.168.1.*
+* bugfix: ClassLoaderUtil.getResources(name)中的小问题。
 
 
