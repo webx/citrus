@@ -31,6 +31,13 @@ public class MyInterceptor implements URIBrokerInterceptor {
     }
 
     public void perform(URIBroker broker) {
+        String path = getPath();
+
+        if (broker.getQueryData("path") != null) {
+            // interceptor执行结果受到query data的影响，用来测试确保interceptor不在初始化时被执行。
+            path = broker.getQueryData("path");
+        }
+
         broker.setServerURI("http://www.mydomain.com/" + path);
     }
 }

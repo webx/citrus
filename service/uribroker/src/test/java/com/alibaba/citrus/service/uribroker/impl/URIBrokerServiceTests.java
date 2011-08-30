@@ -104,7 +104,7 @@ public class URIBrokerServiceTests extends AbstractURIBrokerServiceTests {
     @Test
     public void getExposedNames() {
         List<String> names = service.getExposedNames();
-        assertArrayEquals(new String[] { "link2", "linkCharset" }, names.toArray(new String[0]));
+        assertArrayEquals(new String[] { "link2", "linkCharset", "linkWithInterceptor" }, names.toArray(new String[0]));
 
         try {
             names.add(null); // unmodifiable

@@ -51,6 +51,7 @@ public abstract class AbstractURIBrokerServiceTests {
     @BeforeClass
     public static void initFactory() {
         System.setProperty("myserver", "www.taobao.com");
+        System.setProperty("loggingLevel", "debug");
         factory = createContext("services.xml", createContext("services-root.xml", null));
     }
 

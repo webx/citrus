@@ -48,7 +48,7 @@
 
         <uris:uri id="linkCharset" charset="GBK" exposed="true" />
 
-        <uris:uri id="linkWithInterceptor">
+        <uris:uri id="linkWithInterceptor" exposed="true">
             <interceptors:interceptor
                 class="com.alibaba.citrus.service.uribroker.interceptor.MyInterceptor" p:path="abc" />
             <interceptors:randomize />

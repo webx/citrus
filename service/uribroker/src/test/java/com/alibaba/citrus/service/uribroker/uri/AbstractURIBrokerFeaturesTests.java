@@ -356,10 +356,8 @@ public abstract class AbstractURIBrokerFeaturesTests<B extends URIBroker> {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     public void processInterceptors() {
-        i1.perform(broker);
-        i2.perform(broker);
-        i3.perform(broker);
         replay(i1, i2, i3);
 
         B parent = newInstance();
@@ -370,19 +368,25 @@ public abstract class AbstractURIBrokerFeaturesTests<B extends URIBroker> {
         broker.init();
 
         assertFalse(broker.isAutoReset());
-        assertEquals(broker.render(), broker.render()); // 第二次render将不会重新调用interceptors
+        assertEquals(broker.render(), broker.render()); // 当autoreset=false时，render不会调用interceptors
 
         verify(i1, i2, i3);
         reset(i1, i2, i3);
 
         // broker.reset以后，所有的interceptors将被重新调用
+        broker.reset();
+        setupBroker(broker);
+        broker = (B) broker.fork();
+
+        i1.perform(broker);
+        i2.perform(broker);
+        i3.perform(broker);
         i1.perform(broker);
         i2.perform(broker);
         i3.perform(broker);
         replay(i1, i2, i3);
 
-        broker.reset();
-        setupBroker(broker);
+        assertTrue(broker.isAutoReset());
         assertEquals(broker.render(), broker.render());
 
         verify(i1, i2, i3);

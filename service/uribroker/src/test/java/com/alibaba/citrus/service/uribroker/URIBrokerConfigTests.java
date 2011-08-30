@@ -31,6 +31,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 
+import com.alibaba.citrus.service.pull.PullService;
 import com.alibaba.citrus.service.uribroker.impl.URIBrokerServiceImpl;
 import com.alibaba.citrus.service.uribroker.interceptor.URIBrokerInterceptor;
 import com.alibaba.citrus.service.uribroker.interceptor.URIBrokerPathInterceptor;
@@ -138,8 +139,15 @@ public class URIBrokerConfigTests extends AbstractURIBrokerServiceTests {
 
     @Test
     public void linkWithInterceptor_URIBroker() {
-        uri = (GenericURIBroker) service.getURIBroker("linkWithInterceptor");
-        assertTrue(uri.toString().startsWith("http://www.mydomain.com/abc?r="));
+        PullService pull = (PullService) factory.getBean("pullService");
+
+        // 确保uri interceptor在render之前没有被执行过
+        // 曾经的bug：pull service在logging为debug时，会提前执行uri.interceptors。
+        uri = (GenericURIBroker) pull.getContext().pull("linkWithInterceptor");
+        assertTrue(uri.addQueryData("path", "hello").render().startsWith("http://www.mydomain.com/hello?path=hello&r="));
+
+        assertTrue(uri.toString().startsWith("http://localhost/"));
+        assertTrue(uri.render().startsWith("http://www.mydomain.com/abc?r="));
 
         // 添加另一个interceptor
         uri.addInterceptor(new URIBrokerInterceptor() {
@@ -148,8 +156,7 @@ public class URIBrokerConfigTests extends AbstractURIBrokerServiceTests {
             }
         });
 
-        assertTrue(uri.toString().startsWith("http://www.mydomain.com/abc?r="));
-        assertTrue(uri.toString().contains("id=1"));
+        assertTrue(uri.render().startsWith("http://www.mydomain.com/abc?id=1&r="));
     }
 
     @Test

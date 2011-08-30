@@ -729,7 +729,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
         }
 
         // Object value
-        broker.addQueryData(" id ", (Object) 123);
+        broker.addQueryData(" id ", 123);
         assertArrayEquals(new String[] { "", "123" }, (String[]) broker.getQuery().get("id"));
     }
 
@@ -809,6 +809,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
         };
 
         setupBroker(broker);
+        broker = (GenericURIBroker) broker.fork();
 
         assertEquals("http://user2:pass2@taobao.com:8888/hello/cc/dd?a=3&a=4&c=4#ref2", broker.render());
         assertEquals("http://user2:pass2@taobao.com:8888/hello/cc/dd?a=3&a=4&c=4#ref2", broker.render());
@@ -1195,7 +1196,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
                 return "aa/bb/cc";
             }
         });
-        assertEquals("aa/bb/cc?test=value", broker.toString());
+        assertEquals("aa/bb/cc?test=value", broker.fork().render());
         broker.clearInterceptors();
 
         // server not match

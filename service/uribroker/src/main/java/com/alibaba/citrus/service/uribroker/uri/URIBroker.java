@@ -776,8 +776,9 @@ public abstract class URIBroker extends URIBrokerFeatures {
             for (Map.Entry<URIBrokerInterceptor, Integer> entry : getInterceptorStates().entrySet()) {
                 if (entry.getKey() instanceof URIBrokerPathInterceptor) {
                     URIBrokerPathInterceptor interceptor = (URIBrokerPathInterceptor) entry.getKey();
+                    Integer value = entry.getValue();
 
-                    if (entry.getValue() == 1) {
+                    if (value != null && value.intValue() == 1) {
                         path = interceptor.perform(this, path);
                     }
                 }

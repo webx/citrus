@@ -143,5 +143,5 @@
 * 改进：为dev mode下的explorer添加安全控制。默认只能从本机访问。当从非授权的主机访问时，显示友好的提示信息。支持下面的property:
   -DdevelopmentMode.allowedHosts=192.168.1.*
 * bugfix: ClassLoaderUtil.getResources(name)中的小问题。
-
-
+* 改进：当uribroker.toString()时，不执行interceptors，确保intercepters总在render时被调用，而不会因为某些情况（如输出日志时）被调用。
+  解决了如下问题：原来pull service在初始化时会调用uribroker.toString()，从而调用interceptors。但此时调用interceptors可能会得到不正确的结果。

@@ -367,7 +367,10 @@ public abstract class URIBrokerFeatures implements Renderable {
     }
 
     private String render(boolean reset) {
-        processInterceptors();
+        // 仅当reset时才执行interceptors，toString不执行。
+        if (reset) {
+            processInterceptors();
+        }
 
         StringBuilder buf = new StringBuilder();
         render(buf);

@@ -41,6 +41,8 @@ public class RandomizeTests extends AbstractURIBrokerServiceTests {
 
         random = new Randomize();
         broker.addInterceptor(random);
+
+        broker = (GenericURIBroker) broker.fork();
     }
 
     @Test
@@ -48,7 +50,7 @@ public class RandomizeTests extends AbstractURIBrokerServiceTests {
         Set<String> results = createLinkedHashSet();
 
         for (int i = 0; i < 10; i++) {
-            results.add(getRandomResult(broker.toString(), "http://taobao.com/hello?r="));
+            results.add(getRandomResult(broker.render(), "http://taobao.com/hello?r="));
         }
 
         assertEquals(10, results.size());
@@ -57,7 +59,7 @@ public class RandomizeTests extends AbstractURIBrokerServiceTests {
     @Test
     public void setKey() {
         random.setKey("otherKey");
-        getRandomResult(broker.toString(), "http://taobao.com/hello?otherKey=");
+        getRandomResult(broker.render(), "http://taobao.com/hello?otherKey=");
     }
 
     @Test
@@ -65,7 +67,7 @@ public class RandomizeTests extends AbstractURIBrokerServiceTests {
         random.setChars("123");
 
         for (int i = 0; i < 10; i++) {
-            String result = getRandomResult(broker.toString(), "http://taobao.com/hello?r=");
+            String result = getRandomResult(broker.render(), "http://taobao.com/hello?r=");
             assertTrue(result.matches("[123]+"));
         }
     }
@@ -79,7 +81,7 @@ public class RandomizeTests extends AbstractURIBrokerServiceTests {
 
         broker.clearPath();
         broker.addPath("aaa/bbb/ccc");
-        getRandomResult(broker.toString(), "http://taobao.com/aaa/bbb/ccc?r=");
+        getRandomResult(broker.render(), "http://taobao.com/aaa/bbb/ccc?r=");
     }
 
     @Test
@@ -120,16 +122,14 @@ public class RandomizeTests extends AbstractURIBrokerServiceTests {
         broker = (GenericURIBroker) service.getURIBroker("randomized");
 
         // path not match
-        assertEquals("http://localhost/", broker.toString());
-        assertEquals("http://localhost/", broker.toString());
-
-        // path matched
-        broker.addPath("abc/def");
+        assertEquals("http://localhost/", broker.render());
+        assertEquals("http://localhost/", broker.render());
 
         Set<String> results = createLinkedHashSet();
 
         for (int i = 0; i < 10; i++) {
-            String result = getRandomResult(broker.toString(), "http://localhost/abc/def?rd=");
+            // path matched
+            String result = getRandomResult(broker.addPath("abc/def").render(), "http://localhost/abc/def?rd=");
             assertTrue(result.matches("\\d+"));
             results.add(result);
         }

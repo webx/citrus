@@ -65,7 +65,7 @@ public class URIBrokerToolTests extends AbstractURIBrokerServiceTests {
 
     private Map<String, Object> assertRequest() {
         Map<String, Object> tools = pull.getTools();
-        assertEquals(3, tools.size());
+        assertEquals(4, tools.size());
 
         // 从pull service中直接取得
         URIBroker u1 = (URIBroker) tools.get("link2");
