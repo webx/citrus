@@ -18,14 +18,10 @@
 package com.alibaba.citrus.webx.util;
 
 import static com.alibaba.citrus.util.Assert.*;
-
-import java.net.URL;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import static com.alibaba.citrus.util.StringUtil.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.alibaba.citrus.util.ClassLoaderUtil;
 import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.webx.WebxComponent;
 
@@ -47,33 +43,29 @@ public class WebxUtil {
         }
     }
 
-    private final static Pattern versionPattern = Pattern.compile("webx[^/\\\\]*-(\\d+[^!/]+)\\.\\w+",
-            Pattern.CASE_INSENSITIVE);
-
     /**
-     * 取得webx version。
+     * 取得webx version。 版本号是通过META-INF/MANIFEST.MF中的信息取得的。
      */
     public static String getWebxVersion() {
-        URL url = ClassLoaderUtil.whichClass(WebxUtil.class.getName(), WebxUtil.class);
-        return getVersion(url);
+        Package pkg = WebxUtil.class.getPackage();
+        String version = null;
+
+        if (pkg != null) {
+            version = trimToNull(pkg.getImplementationVersion());
+        }
+
+        String revision = getRevision();
+
+        if (version == null) {
+            version = revision;
+        } else {
+            version = version + " " + revision;
+        }
+
+        return version;
     }
 
     public static String getRevision() {
         return REVISION;
-    }
-
-    private static String getVersion(URL url) {
-        String version = REVISION;
-
-        if (url != null) {
-            String name = url.getFile();
-            Matcher m = versionPattern.matcher(name);
-
-            if (m.find()) {
-                version = m.group(1);
-            }
-        }
-
-        return version;
     }
 }

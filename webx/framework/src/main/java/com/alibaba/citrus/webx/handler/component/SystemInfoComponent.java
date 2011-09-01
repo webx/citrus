@@ -25,6 +25,8 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.core.SpringVersion;
+
 import com.alibaba.citrus.service.configuration.ProductionModeAware;
 import com.alibaba.citrus.util.ArrayUtil;
 import com.alibaba.citrus.util.HumanReadableSize;
@@ -69,6 +71,7 @@ public class SystemInfoComponent extends PageComponent implements ProductionMode
 
             // Webx info
             keyValues.put("Webx Version", WebxUtil.getWebxVersion());
+            keyValues.put("Spring Version", SpringVersion.getVersion());
             keyValues.put("Running Mode", productionMode ? "Production Mode" : "Development Mode");
 
             // Java info
