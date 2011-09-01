@@ -145,3 +145,11 @@
 * bugfix: ClassLoaderUtil.getResources(name)中的小问题。
 * 改进：当uribroker.toString()时，不执行interceptors，确保intercepters总在render时被调用，而不会因为某些情况（如输出日志时）被调用。
   解决了如下问题：原来pull service在初始化时会调用uribroker.toString()，从而调用interceptors。但此时调用interceptors可能会得到不正确的结果。
+
+* 改进：让webx同时支持spring2/3。
+ （修改了一处代码，使resource loading机制可在spring3下运行；修改了若干单元测试，使它们在spring3下可以通过测试。）
+  
+  虽然webx仍以spring 2.5.6.SEC02编译，但只需要将项目的pom.xml中的spring依赖改成3.0.6.RELEASE就可以工作。
+  如希望以spring3来编译webx，只需要指定参数：mvn ... -Pspring3 即可。这样编译所生成的webx-all-in-one包将依赖于webx3。
+
+  

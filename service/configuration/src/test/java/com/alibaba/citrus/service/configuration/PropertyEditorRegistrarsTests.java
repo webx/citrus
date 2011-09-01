@@ -61,7 +61,7 @@ public class PropertyEditorRegistrarsTests {
         } catch (TypeMismatchException e) {
         }
 
-        assertEquals(10L, converter.convertIfNecessary("ten", long.class));
+        assertEquals(new Long(10L), converter.convertIfNecessary("ten", long.class));
     }
 
     @Test
@@ -72,8 +72,8 @@ public class PropertyEditorRegistrarsTests {
         SimpleTypeConverter converter = new SimpleTypeConverter();
         registrars.registerCustomEditors(converter);
 
-        assertEquals(10L, converter.convertIfNecessary("ten", Long.class));
-        assertEquals(10L, converter.convertIfNecessary("ten", long.class));
+        assertEquals(new Long(10L), converter.convertIfNecessary("ten", Long.class));
+        assertEquals(new Long(10L), converter.convertIfNecessary("ten", long.class));
     }
 
     @Test

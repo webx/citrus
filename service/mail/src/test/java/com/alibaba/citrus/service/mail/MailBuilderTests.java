@@ -316,7 +316,7 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
 
     @Test
     public void clone_builder_empty() {
-        MailBuilder copy = (MailBuilder) builder.clone();
+        MailBuilder copy = builder.clone();
 
         assertEquals(null, copy.getMailService());
         assertEquals(null, copy.getId());
@@ -347,7 +347,7 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
         initBuilder(builder, obj, sentDate);
 
         // clone
-        MailBuilder copy = (MailBuilder) builder.clone();
+        MailBuilder copy = builder.clone();
 
         assertSame(mailService, copy.getMailService());
         assertEquals("myid", copy.getId());

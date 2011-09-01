@@ -21,10 +21,14 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static org.junit.Assert.*;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.Map;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.config.Scope;
 
@@ -81,9 +85,33 @@ public class PipelineServiceTests extends AbstractPipelineTests {
                 "1-3");
     }
 
-    public static class TestOnlyScope implements Scope {
-        public String getConversationId() {
-            return null;
+    // 由于spring2和spring3的scope接口是不兼容的（后者基于generic type），所以用proxy来测试，确保在两种环境下均可编译。
+    public static class TestOnlyScope implements FactoryBean {
+        public Class<?> getObjectType() {
+            return Scope.class;
+        }
+
+        public boolean isSingleton() {
+            return true;
+        }
+
+        public Object getObject() throws Exception {
+            return Proxy.newProxyInstance(getClass().getClassLoader(), new Class<?>[] { Scope.class },
+                    new InvocationHandler() {
+                        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                            String name = method.getName();
+                            TestOnlyScope scope = TestOnlyScope.this;
+
+                            if ("get".equals(name)) {
+                                return scope.getClass().getMethod(name, String.class, ObjectFactory.class)
+                                        .invoke(scope, args);
+                            } else if ("remove".equals(name)) {
+                                return scope.getClass().getMethod(name, String.class).invoke(scope, args);
+                            } else {
+                                return null;
+                            }
+                        }
+                    });
         }
 
         public Object get(String name, ObjectFactory objectFactory) {
@@ -109,9 +137,6 @@ public class PipelineServiceTests extends AbstractPipelineTests {
             } else {
                 return beans.remove(name);
             }
-        }
-
-        public void registerDestructionCallback(String name, Runnable callback) {
         }
     }
 }

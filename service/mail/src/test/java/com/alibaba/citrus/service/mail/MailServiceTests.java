@@ -106,7 +106,7 @@ public class MailServiceTests extends AbstractMailBuilderTests {
         // getService(type, null) with factory
         BeanFactory factory = createMock(BeanFactory.class);
         expect(factory.getBean("myLong", Long.class)).andReturn(123L).anyTimes();
-        expect(factory.getBean("myLong", Double.class)).andReturn(123L).anyTimes();
+        expect(Object.class.cast(factory.getBean("myLong", Double.class))).andReturn(123L).anyTimes(); // force wrong type
         expect(factory.getBean("notExist", Double.class)).andReturn(null).anyTimes();
         replay(factory);
 

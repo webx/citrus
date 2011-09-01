@@ -93,8 +93,7 @@ public class HTMLTemplateContentTests extends AbstractTemplateContentTests<HTMLT
         content.addInlineResource("id2", "prefix2");
 
         @SuppressWarnings("unchecked")
-        Map<String, String> inlineResourceMap = (Map<String, String>) getFieldValue(content, "inlineResourceMap",
-                Map.class);
+        Map<String, String> inlineResourceMap = getFieldValue(content, "inlineResourceMap", Map.class);
 
         assertEquals(2, inlineResourceMap.size());
         assertEquals("prefix/", inlineResourceMap.get("id"));

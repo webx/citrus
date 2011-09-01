@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.easymock.classextension.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -264,7 +263,7 @@ public class PullServiceTests extends AbstractPullServiceTests {
         }
 
         expect(parentContext.containsBean(beanName)).andReturn(true).anyTimes();
-        expect(parentContext.containsBean(EasyMock.<String> anyObject())).andReturn(false).anyTimes();
+        expect(parentContext.containsBean(org.easymock.EasyMock.<String> anyObject())).andReturn(false).anyTimes();
         expect(parentContext.getBean(beanName)).andReturn(parent).anyTimes();
 
         replay(parentContext, thisContext);

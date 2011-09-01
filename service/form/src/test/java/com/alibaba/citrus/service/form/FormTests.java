@@ -69,7 +69,7 @@ public class FormTests extends AbstractFormServiceTests {
         assertNotNull(tc);
         assertSame(tc, form.getTypeConverter()); // 两次返回相同的
 
-        assertEquals(123, tc.convertIfNecessary("any", Integer.class));
+        assertEquals(new Integer(123), tc.convertIfNecessary("any", Integer.class));
     }
 
     @Test

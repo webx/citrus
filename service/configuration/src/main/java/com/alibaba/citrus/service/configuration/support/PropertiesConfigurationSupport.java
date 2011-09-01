@@ -35,7 +35,7 @@ import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
 
 /**
  * 基于properties的configuration实现。
- *
+ * 
  * @author Michael Zhou
  */
 public abstract class PropertiesConfigurationSupport<C extends Configuration> extends AbstractService<C> implements

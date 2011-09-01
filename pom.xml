@@ -11,10 +11,19 @@
         <java.version>1.5</java.version>
         <java.encoding>GBK</java.encoding>
         <webx-version>3.0.6-SNAPSHOT</webx-version>
+        <spring-version>2.5.6.SEC02</spring-version>
         <springext-plugin-version>1.0</springext-plugin-version>
         <maven-util-version>1.0</maven-util-version>
         <jetty-version>6.1.22</jetty-version>
     </properties>
+    <profiles>
+        <profile>
+            <id>spring3</id>
+            <properties>
+                <spring-version>3.0.6.RELEASE</spring-version>
+            </properties>
+        </profile>
+    </profiles>
     <modules>
         <module>dist/webx</module>
         <module>dist/test</module>
@@ -387,76 +396,6 @@
                 <artifactId>commons-codec</artifactId>
                 <version>1.3</version>
             </dependency>
-            <!-- Spring full-jar (without aspect, webmvc, test) -->
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring</artifactId>
-                <version>2.5.6.SEC02</version>
-            </dependency>
-            <!-- Spring webmvc -->
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-webmvc</artifactId>
-                <version>2.5.6.SEC02</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>spring-beans</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>spring-context</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>spring-context-support</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>spring-core</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>spring-web</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>aopalliance</groupId>
-                        <artifactId>aopalliance</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <!-- Spring aspects -->
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-aspects</artifactId>
-                <version>2.5.6.SEC02</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>spring-beans</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>spring-context</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>spring-context-support</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>spring-core</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>spring-web</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>aopalliance</groupId>
-                        <artifactId>aopalliance</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
             <dependency>
                 <groupId>org.codehaus.groovy</groupId>
                 <artifactId>groovy-all</artifactId>
@@ -521,6 +460,59 @@
                 <groupId>xml-apis</groupId>
                 <artifactId>xml-apis</artifactId>
                 <version>1.3.04</version>
+            </dependency>
+            <!-- ======================================== -->
+            <!-- SpringÒÀÀµ -->
+            <!-- ======================================== -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -214,7 +214,7 @@ public class FormConfigTests {
         SimpleTypeConverter registry = new SimpleTypeConverter();
         formConfig.getPropertyEditorRegistrar().registerCustomEditors(registry);
 
-        assertEquals(123, registry.convertIfNecessary("anything", Integer.class));
+        assertEquals(new Integer(123), registry.convertIfNecessary("anything", Integer.class));
     }
 
     @Test

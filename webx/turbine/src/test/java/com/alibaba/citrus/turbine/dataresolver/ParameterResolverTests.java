@@ -74,9 +74,8 @@ public class ParameterResolverTests extends AbstractDataResolverTests {
         } catch (ActionEventException e) {
             assertThat(
                     e,
-                    exception(TypeMismatchException.class,
-                            "Failed to convert value of type [java.lang.String] to required type [java.lang.Integer]",
-                            "wrong"));
+                    exception(TypeMismatchException.class, "Failed to convert value of type ", "java.lang.String",
+                            " to required type ", "java.lang.Integer", "wrong"));
         }
     }
 

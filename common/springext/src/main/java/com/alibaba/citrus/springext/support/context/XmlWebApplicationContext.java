@@ -20,6 +20,7 @@ package com.alibaba.citrus.springext.support.context;
 import static org.springframework.context.annotation.AnnotationConfigUtils.*;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
@@ -70,14 +71,17 @@ public class XmlWebApplicationContext extends org.springframework.web.context.su
     }
 
     public void setResourceLoadingExtender(ResourceLoadingExtender resourceLoadingExtender) {
+        @SuppressWarnings("unchecked")
+        Collection<ApplicationListener> listeners = getApplicationListeners();
+
         if (this.resourceLoadingExtender != null) {
-            getApplicationListeners().remove(this.resourceLoadingExtender);
+            listeners.remove(this.resourceLoadingExtender);
         }
 
         this.resourceLoadingExtender = resourceLoadingExtender;
 
         if (resourceLoadingExtender instanceof ApplicationListener) {
-            addApplicationListener((ApplicationListener) resourceLoadingExtender);
+            listeners.add((ApplicationListener) resourceLoadingExtender);
         }
     }
 

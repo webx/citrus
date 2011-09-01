@@ -88,6 +88,12 @@ public abstract class AbstractPullServiceTests {
             public void removeAttribute(String name, int scope) {
                 throw new UnsupportedOperationException();
             }
+
+            // for spring 3.0 and later versions
+            @SuppressWarnings("unused")
+            public Object resolveReference(String key) {
+                return attrs.get(key);
+            }
         });
     }
 

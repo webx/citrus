@@ -24,6 +24,7 @@ import static org.easymock.classextension.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.lang.reflect.Proxy;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
@@ -31,7 +32,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Test;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -86,9 +86,17 @@ public class InheritableBeanFactoryTests {
     @Test
     public void request2() throws Exception {
         try {
+            // 对于spring2，这一步就会抛出IllegalStateException: no thread-bound request found.
             initContext(false);
+
+            // 对于spring3，会将request访问推迟到执行request方法时，才会抛出IllegalStateException: no thread-bound request found.
+            // 这一点和request context的手法相同，但是由于request context采用了cglib，所以性能上更好一点。
+            MyObject obj = (MyObject) thisContext.getBean("autowiredObject");
+            assertTrue(Proxy.isProxyClass(obj.request.getClass()));
+
+            obj.request.getRequestURI();
             fail();
-        } catch (BeanCreationException e) {
+        } catch (Exception e) {
             assertThat(e, exception(IllegalStateException.class, "No thread-bound request found"));
         }
     }
