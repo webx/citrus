@@ -150,7 +150,7 @@
  （修改了一处代码，使resource loading机制可在spring3下运行；修改了若干单元测试，使它们在spring3下可以通过测试。）
   
   虽然webx仍以spring 2.5.6.SEC02编译，但只需要将项目的pom.xml中的spring依赖改成3.0.6.RELEASE就可以工作。
-  如希望以spring3来编译webx，只需要指定参数：mvn ... -Pspring3 即可。这样编译所生成的webx-all-in-one包将依赖于webx3。
+  如希望以spring3来编译webx，只需要指定参数：mvn ... -Pspring3 即可。这样编译所生成的webx-all-in-one包将依赖于spring 3。
 
 * 在开发者首页中显示webx版本、revision、spring版本；改进取得webx版本的方法，使用META-INF/MANIFEST.MF中的信息。
 * 改进：增加MDC: %X{productionMode}，在日志中自动显示当前的生产模式或开发模式。
