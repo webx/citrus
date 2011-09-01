@@ -113,7 +113,7 @@ public class SetLoggingContextHelper {
     public static final String MDC_REFERRER = "referrer";
     public static final String MDC_COOKIES = "cookies";
     public static final String MDC_COOKIE_PREFIX = "cookie.";
-    private static final String FLAG_MDC_HAS_ALREADY_SET = "_flag_mdc_has_already_set";
+    private static final String FLAG_MDC_HAS_ALREADY_SET = "_mdc_request_info_has_already_been_set";
     private final HttpServletRequest request;
 
     public SetLoggingContextHelper(HttpServletRequest request) {
@@ -121,13 +121,30 @@ public class SetLoggingContextHelper {
     }
 
     /**
-     * 设置MDC。
+     * 设置request信息到mdc。
      */
     public void setLoggingContext() {
-        if (testAndSet()) {
+        setLoggingContext(null);
+    }
+
+    /**
+     * 设置request信息和其它信息（如果有的话）到mdc。
+     */
+    public void setLoggingContext(Map<String, String> extra) {
+        boolean setRequestInfo = testAndSetRequestInfo();
+        boolean setExtra = extra != null && !extra.isEmpty();
+
+        if (setRequestInfo || setExtra) {
             Map<String, String> mdc = getMDCCopy();
 
-            populateMDC(mdc);
+            if (setRequestInfo) {
+                setRequestInfo(mdc);
+            }
+
+            if (setExtra) {
+                mdc.putAll(extra);
+            }
+
             setMDC(mdc);
         }
     }
@@ -145,7 +162,7 @@ public class SetLoggingContextHelper {
         }
     }
 
-    protected void populateMDC(Map<String, String> mdc) {
+    protected void setRequestInfo(Map<String, String> mdc) {
         // GET or POST
         putMDC(mdc, MDC_METHOD, request.getMethod());
 
@@ -192,7 +209,7 @@ public class SetLoggingContextHelper {
         putMDC(mdc, MDC_COOKIES, names.toString());
     }
 
-    private boolean testAndSet() {
+    private boolean testAndSetRequestInfo() {
         if (request.getAttribute(FLAG_MDC_HAS_ALREADY_SET) == null) {
             request.setAttribute(FLAG_MDC_HAS_ALREADY_SET, this);
             return true;

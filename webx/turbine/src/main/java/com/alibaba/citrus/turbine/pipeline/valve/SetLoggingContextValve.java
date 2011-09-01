@@ -17,10 +17,16 @@
  */
 package com.alibaba.citrus.turbine.pipeline.valve;
 
+import static com.alibaba.citrus.util.BasicConstant.*;
+import static java.util.Collections.*;
+
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.alibaba.citrus.service.configuration.ProductionModeAware;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.support.AbstractValve;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
@@ -31,16 +37,34 @@ import com.alibaba.citrus.webx.util.SetLoggingContextHelper;
  * 
  * @author Michael Zhou
  */
-public class SetLoggingContextValve extends AbstractValve {
+public class SetLoggingContextValve extends AbstractValve implements ProductionModeAware {
+    public static final String MDC_PRODUCTION_MODE = "productionMode";
+
     @Autowired
     private HttpServletRequest request;
+    private Boolean productionMode;
+
+    public void setProductionMode(boolean productionMode) {
+        this.productionMode = productionMode;
+    }
+
+    public String getProductionModeDesc() {
+        if (productionMode == null) {
+            return EMPTY_STRING;
+        } else if (productionMode) {
+            return "Production Mode";
+        } else {
+            return "Development Mode";
+        }
+    }
 
     public void invoke(PipelineContext pipelineContext) throws Exception {
         SetLoggingContextHelper helper = new SetLoggingContextHelper(request);
 
-        try {
-            helper.setLoggingContext();
+        Map<String, String> extra = singletonMap(MDC_PRODUCTION_MODE, getProductionModeDesc());
 
+        try {
+            helper.setLoggingContext(extra);
             pipelineContext.invokeNext();
         } finally {
             helper.clearLoggingContext();

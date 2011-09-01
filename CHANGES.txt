@@ -153,4 +153,4 @@
   如希望以spring3来编译webx，只需要指定参数：mvn ... -Pspring3 即可。这样编译所生成的webx-all-in-one包将依赖于webx3。
 
 * 在开发者首页中显示webx版本、revision、spring版本；改进取得webx版本的方法，使用META-INF/MANIFEST.MF中的信息。
-
+* 改进：增加MDC: %X{productionMode}，在日志中自动显示当前的生产模式或开发模式。

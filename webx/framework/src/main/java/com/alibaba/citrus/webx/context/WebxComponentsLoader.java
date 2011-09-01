@@ -392,7 +392,7 @@ public class WebxComponentsLoader extends ContextLoader {
                         pathPattern = pathPattern.substring(1);
                     }
 
-                    return new String[] { (classpath ? "classpath:" : EMPTY_STRING), pathPattern };
+                    return new String[] { classpath ? "classpath:" : EMPTY_STRING, pathPattern };
                 }
             }
         }
