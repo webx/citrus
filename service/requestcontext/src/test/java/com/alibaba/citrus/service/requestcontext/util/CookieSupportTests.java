@@ -53,9 +53,9 @@ public class CookieSupportTests extends AbstractRequestContextsTests<RequestCont
     public void copyConstructors() {
         CookieSupport newCookie;
 
-        assertCookie("myname=myvalue", (newCookie = new CookieSupport(cookie)));
-        assertCookie("myname=myvalue", (newCookie = new CookieSupport(cookie, "  ")));
-        assertCookie("newName=myvalue", (newCookie = new CookieSupport(cookie, " newName ")));
+        assertCookie("myname=myvalue", newCookie = new CookieSupport(cookie));
+        assertCookie("myname=myvalue", newCookie = new CookieSupport(cookie, "  "));
+        assertCookie("newName=myvalue", newCookie = new CookieSupport(cookie, " newName "));
 
         assertEquals("newName", newCookie.getName());
         assertEquals("myvalue", newCookie.getValue());

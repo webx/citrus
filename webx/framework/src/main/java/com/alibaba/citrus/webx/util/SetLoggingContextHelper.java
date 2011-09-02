@@ -113,7 +113,9 @@ public class SetLoggingContextHelper {
     public static final String MDC_REFERRER = "referrer";
     public static final String MDC_COOKIES = "cookies";
     public static final String MDC_COOKIE_PREFIX = "cookie.";
-    private static final String FLAG_MDC_HAS_ALREADY_SET = "_mdc_request_info_has_already_been_set";
+
+    static final String FLAG_MDC_HAS_ALREADY_SET = "_mdc_request_info_has_already_been_set";
+
     private final HttpServletRequest request;
 
     public SetLoggingContextHelper(HttpServletRequest request) {

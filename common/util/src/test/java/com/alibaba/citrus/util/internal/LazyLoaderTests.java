@@ -59,8 +59,8 @@ public class LazyLoaderTests {
         for (int i = 0; i < sum.length - 1; i++) {
             for (int j = 1; j < sum.length; j++) {
                 if (i != j) {
-                    System.out.printf("  %s is %.2f times faster than %s\n", sum[i].name,
-                            (sum[j].totalTime / (double) sum[i].totalTime), sum[j].name);
+                    System.out.printf("  %s is %.2f times faster than %s\n", sum[i].name, sum[j].totalTime
+                            / (double) sum[i].totalTime, sum[j].name);
                 }
             }
         }

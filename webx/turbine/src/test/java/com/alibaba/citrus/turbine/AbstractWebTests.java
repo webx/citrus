@@ -21,7 +21,6 @@ import static com.alibaba.citrus.service.requestcontext.util.RequestContextUtil.
 import static com.alibaba.citrus.test.TestEnvStatic.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.io.File;

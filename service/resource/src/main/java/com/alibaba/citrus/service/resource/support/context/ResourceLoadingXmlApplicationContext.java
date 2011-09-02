@@ -45,10 +45,21 @@ public class ResourceLoadingXmlApplicationContext extends AbstractXmlApplication
      */
     public ResourceLoadingXmlApplicationContext(Resource resource, ApplicationContext parentContext)
             throws BeansException {
+        this(resource, parentContext, true);
+    }
+
+    /**
+     * 从一个现成的<code>Resource</code>中创建spring容器，并初始化。
+     */
+    public ResourceLoadingXmlApplicationContext(Resource resource, ApplicationContext parentContext, boolean refresh)
+            throws BeansException {
         super(parentContext);
         this.configResource = resource;
         setResourceLoadingExtender(new ResourceLoadingSupport(this));
-        refresh();
+
+        if (refresh) {
+            refresh();
+        }
     }
 
     /**
@@ -59,10 +70,25 @@ public class ResourceLoadingXmlApplicationContext extends AbstractXmlApplication
      * </p>
      */
     public ResourceLoadingXmlApplicationContext(String[] configLocations, ApplicationContext parentContext) {
+        this(configLocations, parentContext, true);
+    }
+
+    /**
+     * 从一组配置文件名中，创建spring容器，并初始化。
+     * <p>
+     * 假如<code>parentContext</code>中定义了<code>ResourceLoadingService</code>，那么
+     * <code>configLocations</code>以及所有的imports将从中装载。
+     * </p>
+     */
+    public ResourceLoadingXmlApplicationContext(String[] configLocations, ApplicationContext parentContext,
+                                                boolean refresh) {
         super(parentContext);
         setConfigLocations(configLocations);
         setResourceLoadingExtender(new ResourceLoadingSupport(this));
-        refresh();
+
+        if (refresh) {
+            refresh();
+        }
     }
 
     public void setConfigResource(Resource configResource) {

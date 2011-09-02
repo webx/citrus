@@ -20,7 +20,6 @@ package com.alibaba.citrus.service.requestcontext.parser;
 import static com.alibaba.citrus.test.TestEnvStatic.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.io.File;
@@ -34,7 +33,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
-import org.easymock.classextension.EasyMock;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -368,7 +366,7 @@ public class ParserRequestContextTests extends AbstractRequestContextsTests<Pars
         request = createMock(HttpServletRequest.class);
         response = createMock(HttpServletResponse.class);
 
-        request.setAttribute(EasyMock.<String> anyObject(), anyObject());
+        request.setAttribute(org.easymock.EasyMock.<String> anyObject(), anyObject());
         expectLastCall().anyTimes();
 
         expect(request.getLocale()).andReturn(Locale.CHINA).anyTimes();

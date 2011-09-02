@@ -19,7 +19,6 @@ package com.alibaba.citrus.turbine.uribroker.uri.impl;
 
 import static com.alibaba.citrus.test.TestEnvStatic.*;
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.io.File;

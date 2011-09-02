@@ -21,7 +21,6 @@ import static com.alibaba.citrus.test.TestEnvStatic.*;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static com.alibaba.citrus.util.io.StreamUtil.*;
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 

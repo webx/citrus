@@ -19,7 +19,6 @@ package com.alibaba.citrus.service.dataresolver;
 
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 

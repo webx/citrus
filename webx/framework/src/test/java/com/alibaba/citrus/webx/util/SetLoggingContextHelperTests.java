@@ -18,9 +18,10 @@
 package com.alibaba.citrus.webx.util;
 
 import static com.alibaba.citrus.test.TestUtil.*;
+import static com.alibaba.citrus.util.ArrayUtil.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
+import static com.alibaba.citrus.webx.util.SetLoggingContextHelper.*;
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.util.Map;
@@ -78,10 +79,10 @@ public class SetLoggingContextHelperTests {
     public void setLoggingContext() {
         populateRequestMock(true);
 
-        expect(request.getAttribute("_flag_mdc_has_already_set")).andReturn(null);
-        request.setAttribute("_flag_mdc_has_already_set", helper1);
-        expect(request.getAttribute("_flag_mdc_has_already_set")).andReturn(helper1);
-        request.removeAttribute("_flag_mdc_has_already_set");
+        expect(request.getAttribute(FLAG_MDC_HAS_ALREADY_SET)).andReturn(null);
+        request.setAttribute(FLAG_MDC_HAS_ALREADY_SET, helper1);
+        expect(request.getAttribute(FLAG_MDC_HAS_ALREADY_SET)).andReturn(helper1);
+        request.removeAttribute(FLAG_MDC_HAS_ALREADY_SET);
         replay(request);
 
         helper1.setLoggingContext();
@@ -103,10 +104,10 @@ public class SetLoggingContextHelperTests {
     public void setLoggingContext_noCookies() {
         populateRequestMock(false);
 
-        expect(request.getAttribute("_flag_mdc_has_already_set")).andReturn(null);
-        request.setAttribute("_flag_mdc_has_already_set", helper1);
-        expect(request.getAttribute("_flag_mdc_has_already_set")).andReturn(helper1);
-        request.removeAttribute("_flag_mdc_has_already_set");
+        expect(request.getAttribute(FLAG_MDC_HAS_ALREADY_SET)).andReturn(null);
+        request.setAttribute(FLAG_MDC_HAS_ALREADY_SET, helper1);
+        expect(request.getAttribute(FLAG_MDC_HAS_ALREADY_SET)).andReturn(helper1);
+        request.removeAttribute(FLAG_MDC_HAS_ALREADY_SET);
         replay(request);
 
         helper1.setLoggingContext();
@@ -143,10 +144,10 @@ public class SetLoggingContextHelperTests {
     public void nest() {
         populateRequestMock(true);
 
-        expect(request.getAttribute("_flag_mdc_has_already_set")).andReturn(null);
-        request.setAttribute("_flag_mdc_has_already_set", helper1);
-        expect(request.getAttribute("_flag_mdc_has_already_set")).andReturn(helper1).times(3);
-        request.removeAttribute("_flag_mdc_has_already_set");
+        expect(request.getAttribute(FLAG_MDC_HAS_ALREADY_SET)).andReturn(null);
+        request.setAttribute(FLAG_MDC_HAS_ALREADY_SET, helper1);
+        expect(request.getAttribute(FLAG_MDC_HAS_ALREADY_SET)).andReturn(helper1).times(4);
+        request.removeAttribute(FLAG_MDC_HAS_ALREADY_SET);
         replay(request);
 
         {
@@ -156,9 +157,16 @@ public class SetLoggingContextHelperTests {
             {
                 helper2.setLoggingContext(); // 不会set
                 assertFalse(mdc.isEmpty());
+                int size = mdc.size();
+
+                helper2.setLoggingContext(arrayToMap(new Object[][] { { "a", "1" } }, String.class, String.class));
+                assertFalse(mdc.isEmpty());
+                assertEquals(size + 1, mdc.size());
+                assertEquals("1", mdc.get("a"));
 
                 helper2.clearLoggingContext(); // 不会clear
                 assertFalse(mdc.isEmpty());
+                assertEquals(size + 1, mdc.size());
             }
 
             helper1.clearLoggingContext();

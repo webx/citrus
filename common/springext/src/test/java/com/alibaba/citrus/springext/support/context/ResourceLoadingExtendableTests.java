@@ -22,7 +22,6 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static com.alibaba.citrus.util.ArrayUtil.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.io.File;
@@ -162,7 +161,7 @@ public class ResourceLoadingExtendableTests implements Cloneable {
         context.setResourceLoadingExtender(loader2);
 
         // check listener
-        assertTrue(ac.getApplicationListeners().contains(loader2));
+        assertTrue(new GetApplicationListeners(ac).invoke().contains(loader2));
 
         // listener be notified
         ac.refresh();
@@ -177,20 +176,20 @@ public class ResourceLoadingExtendableTests implements Cloneable {
         MyResourceLoadingExtender loader = new MyResourceLoadingExtender();
         context.setResourceLoadingExtender(loader);
 
-        assertFalse(ac.getApplicationListeners().contains(loader));
+        assertFalse(new GetApplicationListeners(ac).invoke().contains(loader));
 
         // set loader2
         MyResourceLoadingExtender2 loader2 = new MyResourceLoadingExtender2();
         context.setResourceLoadingExtender(loader2);
 
-        assertTrue(ac.getApplicationListeners().contains(loader2));
+        assertTrue(new GetApplicationListeners(ac).invoke().contains(loader2));
 
         // set loader2
         MyResourceLoadingExtender2 loader3 = new MyResourceLoadingExtender2();
         context.setResourceLoadingExtender(loader3);
 
-        assertFalse(ac.getApplicationListeners().contains(loader2));
-        assertTrue(ac.getApplicationListeners().contains(loader3));
+        assertFalse(new GetApplicationListeners(ac).invoke().contains(loader2));
+        assertTrue(new GetApplicationListeners(ac).invoke().contains(loader3));
 
         // listener be notified
         ac.refresh();

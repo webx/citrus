@@ -19,7 +19,6 @@ package com.alibaba.citrus.service.form.impl.condition;
 
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
 import static org.junit.Assert.*;
 
 import org.junit.Before;

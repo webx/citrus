@@ -18,7 +18,6 @@
 package com.alibaba.citrus.service.requestcontext;
 
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
 import static org.junit.Assert.*;
 
 import javax.servlet.ServletContext;

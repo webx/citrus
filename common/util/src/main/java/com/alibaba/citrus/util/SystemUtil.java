@@ -178,6 +178,7 @@ public class SystemUtil {
          * 
          * @return JVM spec.的字符串表示
          */
+        @Override
         public final String toString() {
             StringBuilder buffer = new StringBuilder();
 
@@ -261,6 +262,7 @@ public class SystemUtil {
          * 
          * @return JVM impl.的字符串表示
          */
+        @Override
         public final String toString() {
             StringBuilder buffer = new StringBuilder();
 
@@ -331,6 +333,7 @@ public class SystemUtil {
          * 
          * @return JVM spec.的字符串表示
          */
+        @Override
         public final String toString() {
             StringBuilder buffer = new StringBuilder();
 
@@ -596,6 +599,7 @@ public class SystemUtil {
          * 
          * @return JVM impl.的字符串表示
          */
+        @Override
         public final String toString() {
             StringBuilder buffer = new StringBuilder();
 
@@ -775,6 +779,7 @@ public class SystemUtil {
          * 
          * @return JRE信息的字符串表示
          */
+        @Override
         public final String toString() {
             StringBuilder buffer = new StringBuilder();
 
@@ -1145,6 +1150,7 @@ public class SystemUtil {
          * 
          * @return OS的字符串表示
          */
+        @Override
         public final String toString() {
             StringBuilder buffer = new StringBuilder();
 
@@ -1262,6 +1268,7 @@ public class SystemUtil {
          * 
          * @return 用户信息的字符串表示
          */
+        @Override
         public final String toString() {
             StringBuilder buffer = new StringBuilder();
 
@@ -1333,6 +1340,7 @@ public class SystemUtil {
          * 
          * @return 主机信息的字符串表示
          */
+        @Override
         public final String toString() {
             StringBuilder buffer = new StringBuilder();
 

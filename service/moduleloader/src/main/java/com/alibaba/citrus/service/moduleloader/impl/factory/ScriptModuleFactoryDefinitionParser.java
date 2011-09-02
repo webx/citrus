@@ -87,7 +87,7 @@ public class ScriptModuleFactoryDefinitionParser extends AbstractModuleFactoryDe
                 scriptResourceName = folderName + "/**/*.*";
 
                 log.trace("Searching in folders: {}, moduleType={}, language={}", new Object[] { folderName, typeName,
-                        (language == null ? "auto" : language) });
+                        language == null ? "auto" : language });
             } else if (searchFiles.accept(subElement)) {
                 String fileName = assertNotNull(normalizePathName(subElement.getAttribute("files")),
                         "no script file name provided for search-files");
@@ -114,7 +114,7 @@ public class ScriptModuleFactoryDefinitionParser extends AbstractModuleFactoryDe
                 scriptResourceName = fileName;
 
                 log.trace("Searching for script files: {}, moduleType={}, moduleName={}, language={}", new Object[] {
-                        fileName, typeName, moduleName, (language == null ? "auto" : language) });
+                        fileName, typeName, moduleName, language == null ? "auto" : language });
             }
 
             if (scriptResourceName != null) {

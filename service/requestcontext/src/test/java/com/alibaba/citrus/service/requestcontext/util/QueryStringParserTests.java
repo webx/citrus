@@ -19,7 +19,7 @@ package com.alibaba.citrus.service.requestcontext.util;
 
 import static com.alibaba.citrus.test.TestUtil.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
-import static org.easymock.classextension.EasyMock.*;
+import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.net.URLEncoder;

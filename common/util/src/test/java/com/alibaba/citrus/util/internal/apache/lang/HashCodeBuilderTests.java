@@ -353,6 +353,6 @@ public class HashCodeBuilderTests extends TestCase {
         obj[0][0] = true;
         assertEquals(((17 * 37 + 0) * 37 + 1) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
         obj[1] = new boolean[1];
-        assertEquals((((17 * 37 + 0) * 37 + 1) * 37 + 1), new HashCodeBuilder(17, 37).append(obj).toHashCode());
+        assertEquals(((17 * 37 + 0) * 37 + 1) * 37 + 1, new HashCodeBuilder(17, 37).append(obj).toHashCode());
     }
 }

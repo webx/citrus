@@ -18,7 +18,6 @@
 package com.alibaba.citrus.service.requestcontext.session.impl;
 
 import static org.easymock.EasyMock.*;
-import static org.easymock.classextension.EasyMock.*;
 
 import org.junit.Before;
 

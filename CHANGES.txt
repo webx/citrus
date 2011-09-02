@@ -151,6 +151,11 @@
   
   虽然webx仍以spring 2.5.6.SEC02编译，但只需要将项目的pom.xml中的spring依赖改成3.0.6.RELEASE就可以工作。
   如希望以spring3来编译webx，只需要指定参数：mvn ... -Pspring3 即可。这样编译所生成的webx-all-in-one包将依赖于spring 3。
+  
+  注意：spring3和spring2的代码是不完全兼容的。在spring2上编译的代码，未必能直接在spring3上运行，反之亦然。
+  下面的命令确保webx同时兼容于spring的两个版本。
+  mvn clean install           -- 在spring2中编译并测试
+  mvn surefire:test -Pspring3 -- 在spring3中测试但不编译
 
 * 在开发者首页中显示webx版本、revision、spring版本；改进取得webx版本的方法，使用META-INF/MANIFEST.MF中的信息。
 * 改进：增加MDC: %X{productionMode}，在日志中自动显示当前的生产模式或开发模式。

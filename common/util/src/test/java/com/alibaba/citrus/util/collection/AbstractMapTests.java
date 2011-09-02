@@ -339,7 +339,7 @@ public abstract class AbstractMapTests extends AbstractTests {
         Map<Object, Object> copy;
 
         try {
-            copy = (Map<Object, Object>) cloneBySerialization(map1);
+            copy = cloneBySerialization(map1);
             assertNotSame(map1, copy); // 不同
             assertEquals(map1, copy); // 但相等
             assertEquals(map1.hashCode(), copy.hashCode());
@@ -349,7 +349,7 @@ public abstract class AbstractMapTests extends AbstractTests {
             assertEquals("222", copy.get("bbb"));
             assertEquals("333", copy.get("ccc"));
 
-            copy = (Map<Object, Object>) cloneBySerialization(map2);
+            copy = cloneBySerialization(map2);
             assertNotSame(map2, copy); // 不同
             assertEquals(map2, copy); // 但相等
             assertEquals(map2.hashCode(), copy.hashCode());
@@ -359,7 +359,7 @@ public abstract class AbstractMapTests extends AbstractTests {
             assertEquals(null, copy.get("aaa"));
             assertTrue(copy.containsKey("aaa"));
 
-            copy = (Map<Object, Object>) cloneBySerialization(map3);
+            copy = cloneBySerialization(map3);
             assertNotSame(map3, copy); // 不同
             assertEquals(map3, copy); // 但相等
             assertEquals(map3.hashCode(), copy.hashCode());

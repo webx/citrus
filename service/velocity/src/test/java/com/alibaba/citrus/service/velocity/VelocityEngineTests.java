@@ -552,7 +552,7 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
             Arrays.sort(array);
         }
 
-        assertArrayEquals((Object[]) value, array);
+        assertArrayEquals(value, array);
     }
 
     private void assertProperty(String key, Object value) {

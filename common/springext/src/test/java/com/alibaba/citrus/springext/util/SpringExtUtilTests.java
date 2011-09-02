@@ -20,7 +20,7 @@ package com.alibaba.citrus.springext.util;
 import static com.alibaba.citrus.test.TestEnvStatic.*;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
-import static org.easymock.classextension.EasyMock.*;
+import static org.easymock.EasyMock.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import static org.springframework.beans.factory.config.BeanDefinition.*;

@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.pipeline.condition;
 
 import static com.alibaba.citrus.generictype.TypeInfoUtil.*;
-import static org.easymock.classextension.EasyMock.*;
+import static org.easymock.EasyMock.*;
 
 import org.junit.Before;
 import org.junit.BeforeClass;

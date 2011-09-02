@@ -536,7 +536,7 @@ public class CookieStoreTests extends AbstractRequestContextsTests<SessionReques
     private boolean isChecksumValid(String storeName) throws Exception {
         // session.storeStates
         @SuppressWarnings("unchecked")
-        Map<String, Object> storeStates = (Map<String, Object>) getFieldValue(session, "storeStates", Map.class);
+        Map<String, Object> storeStates = getFieldValue(session, "storeStates", Map.class);
 
         // CookieStoreImpl.State.checksumValid
         Object storeState = storeStates.get(storeName);

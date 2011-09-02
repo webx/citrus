@@ -21,7 +21,7 @@ import static com.alibaba.citrus.generictype.TypeInfoUtil.*;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static com.alibaba.citrus.util.ArrayUtil.*;
 import static com.alibaba.citrus.util.BasicConstant.*;
-import static org.easymock.classextension.EasyMock.*;
+import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
 import org.hamcrest.Matcher;

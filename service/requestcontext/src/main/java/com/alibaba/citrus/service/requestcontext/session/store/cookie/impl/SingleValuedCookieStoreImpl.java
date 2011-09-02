@@ -229,7 +229,7 @@ public class SingleValuedCookieStoreImpl extends AbstractCookieStore implements 
 
                 int i = 0;
                 for (Exception e : encoderExceptions) {
-                    buf.format("\n  Encoder #%d - %s threw %s", (i + 1), encoders[i].getClass().getSimpleName(), e);
+                    buf.format("\n  Encoder #%d - %s threw %s", i + 1, encoders[i].getClass().getSimpleName(), e);
                 }
 
                 log.warn(buf.toString());

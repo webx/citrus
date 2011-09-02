@@ -195,7 +195,7 @@ public abstract class LazyLoader<T, C> {
      */
     @Override
     public String toString() {
-        return String.format("LazyLoader(%s%s)", getSimpleClassName(loader.getClass()), (testInstance() ? ", loaded"
-                : EMPTY_STRING));
+        return String.format("LazyLoader(%s%s)", getSimpleClassName(loader.getClass()), testInstance() ? ", loaded"
+                : EMPTY_STRING);
     }
 }

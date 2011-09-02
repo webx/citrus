@@ -71,8 +71,7 @@ public class XmlWebApplicationContext extends org.springframework.web.context.su
     }
 
     public void setResourceLoadingExtender(ResourceLoadingExtender resourceLoadingExtender) {
-        @SuppressWarnings("unchecked")
-        Collection<ApplicationListener> listeners = getApplicationListeners();
+        Collection<ApplicationListener> listeners = new GetApplicationListeners(this).invoke();
 
         if (this.resourceLoadingExtender != null) {
             listeners.remove(this.resourceLoadingExtender);

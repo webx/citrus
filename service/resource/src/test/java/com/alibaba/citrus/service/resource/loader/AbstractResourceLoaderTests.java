@@ -60,7 +60,7 @@ public abstract class AbstractResourceLoaderTests<L extends ResourceLoader> exte
 
         String[] names = ((ResourceLister) loader).list(new MyContext(resourceName), null);
 
-        assertNames(exists, (basedir == null ? null : new File(srcdir, basedir)), names, results);
+        assertNames(exists, basedir == null ? null : new File(srcdir, basedir), names, results);
     }
 
     protected abstract String getPrefix();

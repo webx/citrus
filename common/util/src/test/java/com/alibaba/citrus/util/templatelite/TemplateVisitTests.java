@@ -730,7 +730,7 @@ public class TemplateVisitTests extends AbstractTemplateTests {
 
     @Test
     public void render_fallbackVisitor_failed() throws Exception {
-        loadTemplate(("${title:a,b}").getBytes(), "test.txt", 1, 0, 0);
+        loadTemplate("${title:a,b}".getBytes(), "test.txt", 1, 0, 0);
 
         class Visitor implements FallbackVisitor {
             public boolean visitPlaceholder(String name, Object[] params) throws Exception {

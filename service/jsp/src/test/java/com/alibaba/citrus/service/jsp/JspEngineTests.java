@@ -19,7 +19,7 @@ package com.alibaba.citrus.service.jsp;
 
 import static com.alibaba.citrus.test.TestUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
-import static org.easymock.classextension.EasyMock.*;
+import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.io.File;
