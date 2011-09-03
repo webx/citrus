@@ -159,3 +159,5 @@
 
 * 在开发者首页中显示webx版本、revision、spring版本；改进取得webx版本的方法，使用META-INF/MANIFEST.MF中的信息。
 * 改进：增加MDC: %X{productionMode}，在日志中自动显示当前的生产模式或开发模式。
+* 增加对于spring-test的支持。
+
