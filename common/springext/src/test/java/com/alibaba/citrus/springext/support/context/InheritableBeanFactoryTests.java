@@ -34,7 +34,9 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.core.io.ResourceLoader;
 
+import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 import com.meterware.servletunit.ServletRunner;
 
 /**
@@ -77,6 +79,7 @@ public class InheritableBeanFactoryTests {
         initContext(true);
         MyObject obj = (MyObject) thisContext.getBean("autowiredObject");
         assertEquals("mock_uri", obj.request.getRequestURI());
+        assertSame(thisContext, obj.resourceLoader); // 确保非ProxyTargetFactory接口的对象不受影响
     }
 
     /**
@@ -92,6 +95,7 @@ public class InheritableBeanFactoryTests {
             // 这一点和request context的手法相同，但是由于request context采用了cglib，所以性能上更好一点。
             MyObject obj = (MyObject) thisContext.getBean("autowiredObject");
             assertTrue(Proxy.isProxyClass(obj.request.getClass()));
+            assertSame(thisContext, obj.resourceLoader); // 确保非ProxyTargetFactory接口的对象不受影响
 
             obj.request.getRequestURI();
             fail();
@@ -102,7 +106,7 @@ public class InheritableBeanFactoryTests {
 
     public static class RequestPostProcessor implements BeanFactoryPostProcessor {
         public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-            HttpServletRequest mockRequest = createMock(HttpServletRequest.class);
+            HttpServletRequest mockRequest = createMock(RequestProxy.class);
             expect(mockRequest.getRequestURI()).andReturn("mock_uri").anyTimes();
             replay(mockRequest);
 
@@ -110,8 +114,14 @@ public class InheritableBeanFactoryTests {
         }
     }
 
+    public static interface RequestProxy extends HttpServletRequest, ProxyTargetFactory {
+    }
+
     public static class MyObject {
         @Autowired(required = false)
         private HttpServletRequest request;
+
+        @Autowired
+        private ResourceLoader resourceLoader;
     }
 }

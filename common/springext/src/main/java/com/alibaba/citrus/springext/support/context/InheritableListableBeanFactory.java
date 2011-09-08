@@ -29,6 +29,8 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 
+import com.alibaba.citrus.springext.util.ProxyTargetFactory;
+
 /**
  * 这个类扩展了<code>DefaultListableBeanFactory</code>，改进了如下问题：
  * <ul>
@@ -37,7 +39,8 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
  * 例如：在父context中定义的<code>&lt;request-contexts /&gt;</code>
  * 将在resolvableDependencies中注册<code>HttpServletRequest</code>等singleton
  * proxy对象。如果没有这个类，那么在子context中定义的bean，将不能注入这些对象。</li>
- * <li>子context不能覆盖父context中已有的resolvableDependencies对象。否则，
+ * <li>子context不能覆盖父context中已有的实现了<code>ProxyTargetFactory</code>
+ * 接口的resolvableDependencies对象。否则，
  * WebApplicationContext会自动注册非singleton的request对象
  * ，使得子context不能取得父context中注册的singleton proxy。</li>
  * <li>自动合并同名的bean definitions，以实现功能：可覆盖bean的默认配置。</li>
@@ -86,7 +89,8 @@ class InheritableListableBeanFactory extends DefaultListableBeanFactory {
     @Override
     @SuppressWarnings("rawtypes")
     public void registerResolvableDependency(Class dependencyType, Object autowiredValue) {
-        if (parentResolvableDependencies == null || !parentResolvableDependencies.containsKey(dependencyType)) {
+        if (parentResolvableDependencies == null
+                || !(parentResolvableDependencies.get(dependencyType) instanceof ProxyTargetFactory)) {
             super.registerResolvableDependency(dependencyType, autowiredValue);
         }
     }
