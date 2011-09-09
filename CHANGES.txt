@@ -164,3 +164,5 @@
   使ResourceLoader和ApplicationContext等对象的注入方式仍然和spring原来相同。
 * 将util.internal.regex.*和util.internal.ToStringBuilder等内部类升级至非internal类，以方便其它应用使用。
 * 将原petstore示例中的页面验证组件PageAuthorizationService移植到turbine中。
+* 改进：将读取action参数的任务由performAction valve移到analyzeURL valve，从而使其它的valve也能通过rundata取得action参数。例如安全检验的valve。
+  * 注意：很少有应用程序会去修改action参数。但如果有人这样做了，在新的实现下，代码可能会失效。

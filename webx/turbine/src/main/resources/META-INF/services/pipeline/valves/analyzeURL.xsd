@@ -18,6 +18,7 @@
     </xsd:element>
 
     <xsd:complexType name="AnalyzeURLValveType">
+        <xsd:attribute name="actionParam" type="xsd:string" default="action" />
         <xsd:attribute name="homepage" type="xsd:string" default="/index" />
     </xsd:complexType>
 

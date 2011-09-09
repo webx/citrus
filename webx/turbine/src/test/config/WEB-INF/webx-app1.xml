@@ -62,7 +62,8 @@
     </services:pipeline>
 
     <services:pipeline id="performActionValveTests">
-        <valves:performAction actionParam="action" />
+        <valves:analyzeURL actionParam="action" />
+        <valves:performAction />
     </services:pipeline>
 
     <services:pipeline id="performTemplateScreenValveTests">

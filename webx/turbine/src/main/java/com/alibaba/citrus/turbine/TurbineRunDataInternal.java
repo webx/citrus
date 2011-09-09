@@ -25,6 +25,8 @@ package com.alibaba.citrus.turbine;
 public interface TurbineRunDataInternal extends TurbineRunData, Navigator, ControlParameters {
     void setTarget(String target);
 
+    void setAction(String action);
+
     Context getContext(String componentName);
 
     Context getContext();

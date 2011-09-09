@@ -63,6 +63,7 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
     private WebxComponent currentComponent;
     private String target;
     private String redirectTarget;
+    private String action;
     private URIBroker redirectURI;
     private final Map<String, PullService> pullServices;
     private final Map<String, Context> contexts;
@@ -200,6 +201,14 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
         if (!isEquals(target, redirectTarget)) {
             this.redirectTarget = redirectTarget;
         }
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = trimToNull(action);
     }
 
     public String getRedirectLocation() {

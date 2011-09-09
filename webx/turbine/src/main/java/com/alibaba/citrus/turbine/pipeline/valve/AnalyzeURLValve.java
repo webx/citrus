@@ -21,6 +21,7 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.turbine.TurbineConstant.*;
 import static com.alibaba.citrus.turbine.util.TurbineUtil.*;
 import static com.alibaba.citrus.util.FileUtil.*;
+import static com.alibaba.citrus.util.StringUtil.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -48,6 +49,8 @@ import com.alibaba.citrus.webx.WebxComponent;
  * @author Michael Zhou
  */
 public class AnalyzeURLValve extends AbstractValve {
+    private static final String DEFAULT_ACTION_PARAM_NAME = "action";
+
     @Autowired
     private HttpServletRequest request;
 
@@ -58,6 +61,14 @@ public class AnalyzeURLValve extends AbstractValve {
     private WebxComponent component;
 
     private String homepage;
+    private String actionParam;
+
+    /**
+     * 设置在URL query中代表action的参数名。
+     */
+    public void setActionParam(String actionParam) {
+        this.actionParam = trimToNull(actionParam);
+    }
 
     public String getHomepage() {
         return homepage;
@@ -69,6 +80,10 @@ public class AnalyzeURLValve extends AbstractValve {
 
     @Override
     protected void init() throws Exception {
+        if (actionParam == null) {
+            actionParam = DEFAULT_ACTION_PARAM_NAME;
+        }
+
         if (homepage == null) {
             setHomepage("/index");
         }
@@ -100,13 +115,19 @@ public class AnalyzeURLValve extends AbstractValve {
 
         rundata.setTarget(target);
 
+        // 取得action
+        String action = StringUtil.toCamelCase(trimToNull(rundata.getParameters().getString(actionParam)));
+
+        action = mappingRuleService.getMappedName(ACTION_MODULE, action);
+        rundata.setAction(action);
+
         pipelineContext.invokeNext();
     }
 
     public static class DefinitionParser extends AbstractValveDefinitionParser<AnalyzeURLValve> {
         @Override
         protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
-            attributesToProperties(element, builder, "homepage");
+            attributesToProperties(element, builder, "homepage", "actionParam");
         }
     }
 }

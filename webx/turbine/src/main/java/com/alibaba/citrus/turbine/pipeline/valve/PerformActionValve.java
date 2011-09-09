@@ -17,19 +17,13 @@
  */
 package com.alibaba.citrus.turbine.pipeline.valve;
 
-import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.turbine.TurbineConstant.*;
 import static com.alibaba.citrus.turbine.util.TurbineUtil.*;
-import static com.alibaba.citrus.util.StringUtil.*;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
 
-import com.alibaba.citrus.service.mappingrule.MappingRuleService;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
@@ -45,41 +39,18 @@ import com.alibaba.citrus.util.StringUtil;
  * @author Michael Zhou
  */
 public class PerformActionValve extends AbstractValve {
-    private static final String DEFAULT_ACTION_PARAM_NAME = "action";
-
     @Autowired
     private HttpServletRequest request;
 
     @Autowired
     private ModuleLoaderService moduleLoaderService;
 
-    @Autowired
-    private MappingRuleService mappingRuleService;
-
-    private String actionParam;
-
-    /**
-     * 设置在URL query中代表action的参数名。
-     */
-    public void setActionParam(String actionParam) {
-        this.actionParam = trimToNull(actionParam);
-    }
-
-    @Override
-    protected void init() throws Exception {
-        if (actionParam == null) {
-            actionParam = DEFAULT_ACTION_PARAM_NAME;
-        }
-    }
-
     public void invoke(PipelineContext pipelineContext) throws Exception {
         TurbineRunData rundata = getTurbineRunData(request);
 
         // 检查重定向标志，如果是重定向，则不需要将页面输出。
         if (!rundata.isRedirected()) {
-            String action = StringUtil.toCamelCase(trimToNull(rundata.getParameters().getString(actionParam)));
-
-            action = mappingRuleService.getMappedName(ACTION_MODULE, action);
+            String action = rundata.getAction();
 
             // 如果找到action，则执行之。
             if (!StringUtil.isEmpty(action)) {
@@ -104,9 +75,5 @@ public class PerformActionValve extends AbstractValve {
     }
 
     public static class DefinitionParser extends AbstractValveDefinitionParser<PerformActionValve> {
-        @Override
-        protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
-            attributesToProperties(element, builder, "actionParam");
-        }
     }
 }
