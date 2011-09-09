@@ -44,8 +44,8 @@ import javax.mail.internet.MimeUtility;
 import com.alibaba.citrus.service.mail.MailService;
 import com.alibaba.citrus.service.mail.util.MailUtil;
 import com.alibaba.citrus.util.Assert.ExceptionType;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 创建一个javamail对象的工具类。

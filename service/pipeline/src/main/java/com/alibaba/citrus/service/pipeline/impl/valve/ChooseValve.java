@@ -33,8 +33,8 @@ import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.support.AbstractValve;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
 import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 代表一个多重条件选择。

@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.alibaba.citrus.util.internal;
+package com.alibaba.citrus.util;
 
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static org.junit.Assert.*;
@@ -26,8 +26,8 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.alibaba.citrus.util.internal.ToStringBuilder.CollectionBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.CollectionBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * ≤‚ ‘<code>ToStringBuilder</code>°£

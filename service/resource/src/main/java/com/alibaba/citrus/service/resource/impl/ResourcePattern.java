@@ -19,7 +19,7 @@ package com.alibaba.citrus.service.resource.impl;
 
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.StringUtil.*;
-import static com.alibaba.citrus.util.internal.regex.PathNameWildcardCompiler.*;
+import static com.alibaba.citrus.util.regex.PathNameWildcardCompiler.*;
 
 import java.util.regex.Pattern;
 

@@ -22,7 +22,7 @@ import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
-import com.alibaba.citrus.util.internal.ToStringBuilder.CollectionBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.CollectionBuilder;
 
 public class Flags {
     private final String[] flags;

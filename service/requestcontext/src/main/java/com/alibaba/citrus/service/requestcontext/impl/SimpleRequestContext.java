@@ -24,8 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.citrus.service.requestcontext.RequestContext;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 实现了<code>RequestContext</code>接口，包含request、response和servletContext的信息。

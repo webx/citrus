@@ -22,7 +22,7 @@ import static com.alibaba.citrus.util.ArrayUtil.*;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.rewrite.RewriteRequestContext;
 import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextFactory;
-import com.alibaba.citrus.util.internal.ToStringBuilder.CollectionBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.CollectionBuilder;
 
 /**
  * 创建<code>RewriteRequestContext</code>的工厂。

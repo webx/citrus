@@ -38,8 +38,8 @@ import com.alibaba.citrus.service.resource.ResourceLoadingOption;
 import com.alibaba.citrus.service.resource.ResourceLoadingService;
 import com.alibaba.citrus.service.resource.ResourceNotFoundException;
 import com.alibaba.citrus.service.resource.ResourceTrace;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  *  µœ÷<code>ResourceLoadingService</code>°£

@@ -28,8 +28,8 @@ import java.util.regex.Pattern;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.locale.SetLocaleRequestContext;
 import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextFactory;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 import com.alibaba.citrus.util.i18n.LocaleUtil;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
 
 /**
  * 创建<code>SetLocaleRequestContext</code>的工厂。

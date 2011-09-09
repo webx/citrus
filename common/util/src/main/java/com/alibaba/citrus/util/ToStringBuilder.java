@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.alibaba.citrus.util.internal;
+package com.alibaba.citrus.util;
 
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.ObjectUtil.*;
@@ -28,6 +28,8 @@ import java.util.Formatter;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import com.alibaba.citrus.util.internal.IndentableStringBuilder;
 
 /**
  * 方便实现<code>toString()</code>方法。

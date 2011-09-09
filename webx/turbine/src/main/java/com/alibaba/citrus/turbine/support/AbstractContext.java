@@ -23,8 +23,8 @@ import static com.alibaba.citrus.util.CollectionUtil.*;
 import java.util.Set;
 
 import com.alibaba.citrus.turbine.Context;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 抽象的<code>Context</code>实现，提供了可嵌套的context机制。

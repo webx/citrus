@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.pipeline.support;
 
 import com.alibaba.citrus.service.pipeline.Condition;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
  * 组合式的condition基类。

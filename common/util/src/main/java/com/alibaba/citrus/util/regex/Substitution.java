@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  */
-package com.alibaba.citrus.util.internal.regex;
+package com.alibaba.citrus.util.regex;
 
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.StringUtil.*;

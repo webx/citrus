@@ -23,7 +23,7 @@ import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.FileUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
-import static com.alibaba.citrus.util.internal.regex.PathNameWildcardCompiler.*;
+import static com.alibaba.citrus.util.regex.PathNameWildcardCompiler.*;
 import static com.alibaba.citrus.webx.WebxConstant.*;
 
 import java.io.IOException;
@@ -62,8 +62,8 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.ServletContextResourcePatternResolver;
 
 import com.alibaba.citrus.springext.util.SpringExtUtil;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 import com.alibaba.citrus.webx.WebxComponent;
 import com.alibaba.citrus.webx.WebxComponents;
 import com.alibaba.citrus.webx.WebxController;

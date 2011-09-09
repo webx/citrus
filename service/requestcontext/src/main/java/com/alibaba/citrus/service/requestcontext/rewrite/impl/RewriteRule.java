@@ -33,9 +33,9 @@ import org.springframework.beans.factory.InitializingBean;
 import com.alibaba.citrus.service.requestcontext.rewrite.RewriteSubstitutionHandler;
 import com.alibaba.citrus.util.StringEscapeUtil;
 import com.alibaba.citrus.util.StringUtil;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
-import com.alibaba.citrus.util.internal.regex.MatchResultSubstitution;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.regex.MatchResultSubstitution;
 
 /**
  * 代表一个rewrite规则。

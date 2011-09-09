@@ -32,8 +32,8 @@ import com.alibaba.citrus.service.dataresolver.DataResolverContext;
 import com.alibaba.citrus.service.dataresolver.DataResolverFactory;
 import com.alibaba.citrus.service.dataresolver.DataResolverNotFoundException;
 import com.alibaba.citrus.service.dataresolver.DataResolverService;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 public class DataResolverServiceImpl extends AbstractService<DataResolverService> implements DataResolverService {
     private DataResolverFactory[] factories;

@@ -46,7 +46,7 @@ import com.alibaba.citrus.service.mail.builder.MailBuilderException;
 import com.alibaba.citrus.service.mail.support.ResourceDataSource;
 import com.alibaba.citrus.service.mail.util.MailUtil;
 import com.alibaba.citrus.util.StringUtil;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 代表一个邮件的附件。

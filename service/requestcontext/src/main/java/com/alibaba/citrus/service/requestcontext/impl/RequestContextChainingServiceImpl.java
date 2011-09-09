@@ -46,7 +46,7 @@ import com.alibaba.citrus.service.requestcontext.RequestContextInfo.BeforeFeatur
 import com.alibaba.citrus.service.requestcontext.RequestContextInfo.FeatureOrder;
 import com.alibaba.citrus.service.requestcontext.RequestContextInfo.RequiresFeature;
 import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
  * 将<code>RequestContext</code>对象串联起来的service。

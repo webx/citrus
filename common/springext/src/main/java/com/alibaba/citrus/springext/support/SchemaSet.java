@@ -39,7 +39,7 @@ import org.springframework.core.io.InputStreamSource;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.Schemas;
 import com.alibaba.citrus.springext.impl.SchemaImpl;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
  * 将一组<code>Schemas</code>整合在一起的集合。

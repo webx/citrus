@@ -39,8 +39,8 @@ import com.alibaba.citrus.springext.ConfigurationPointException;
 import com.alibaba.citrus.springext.ConfigurationPoints;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.Schema;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * ½âÎöconfiguration point namespace¡£

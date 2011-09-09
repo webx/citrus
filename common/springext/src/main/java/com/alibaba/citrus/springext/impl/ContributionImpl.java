@@ -45,7 +45,7 @@ import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionType;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.VersionableSchemas;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
  * 实现<code>Contribution</code>接口。

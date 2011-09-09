@@ -47,7 +47,7 @@ import com.alibaba.citrus.service.moduleloader.impl.ModuleKey;
 import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
 import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 import com.alibaba.citrus.springext.util.SpringExtUtil;
-import com.alibaba.citrus.util.internal.regex.MatchResultSubstitution;
+import com.alibaba.citrus.util.regex.MatchResultSubstitution;
 
 public abstract class AbstractModuleFactoryDefinitionParser<T> extends AbstractNamedBeanDefinitionParser<T> {
     protected final Logger log = LoggerFactory.getLogger(getBeanClass(null));

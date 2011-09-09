@@ -54,8 +54,8 @@ import com.alibaba.citrus.springext.ContributionType;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.VersionableSchemas;
 import com.alibaba.citrus.springext.support.parser.DefaultElementDefinitionParser;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 代表一个configuration point的实现，并处理configuration point

@@ -32,7 +32,7 @@ import com.alibaba.citrus.service.pipeline.PipelineInvocationHandle;
 import com.alibaba.citrus.service.pipeline.TooManyLoopsException;
 import com.alibaba.citrus.service.pipeline.support.AbstractValve;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
  * 用来反复执行同一个子pipeline。

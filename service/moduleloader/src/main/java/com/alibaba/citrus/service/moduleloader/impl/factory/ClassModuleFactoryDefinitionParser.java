@@ -22,7 +22,7 @@ import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
-import static com.alibaba.citrus.util.internal.regex.ClassNameWildcardCompiler.*;
+import static com.alibaba.citrus.util.regex.ClassNameWildcardCompiler.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -48,7 +48,7 @@ import org.springframework.core.type.filter.TypeFilter;
 import org.w3c.dom.Element;
 
 import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
-import com.alibaba.citrus.util.internal.regex.ClassNameWildcardCompiler;
+import com.alibaba.citrus.util.regex.ClassNameWildcardCompiler;
 
 /**
  * ½âÎöclass-modules¡£

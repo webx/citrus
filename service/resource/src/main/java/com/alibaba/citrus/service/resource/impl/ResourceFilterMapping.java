@@ -30,8 +30,8 @@ import com.alibaba.citrus.service.resource.ResourceFilterChain;
 import com.alibaba.citrus.service.resource.ResourceLoadingOption;
 import com.alibaba.citrus.service.resource.ResourceMatchResult;
 import com.alibaba.citrus.service.resource.ResourceNotFoundException;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 public class ResourceFilterMapping extends ResourcePattern {
     private final static Logger log = LoggerFactory.getLogger(ResourceFilterMapping.class);

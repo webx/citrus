@@ -51,8 +51,8 @@ import java.util.regex.Pattern;
 import net.sf.cglib.reflect.FastClass;
 
 import com.alibaba.citrus.util.FileUtil;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 一个简易的模板。

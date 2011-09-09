@@ -27,7 +27,7 @@ import javax.mail.Part;
 import javax.mail.internet.ContentType;
 
 import com.alibaba.citrus.service.mail.util.MailUtil;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 基于文本的邮件内容，例如纯文本和HTML。

@@ -46,7 +46,7 @@ import org.springframework.util.StringUtils;
 import com.alibaba.citrus.service.velocity.VelocityConfiguration;
 import com.alibaba.citrus.service.velocity.VelocityPlugin;
 import com.alibaba.citrus.service.velocity.support.RenderableHandler;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 代表一组velocity engine的配置。

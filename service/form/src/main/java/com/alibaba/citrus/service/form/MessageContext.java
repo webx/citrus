@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.alibaba.citrus.expr.ExpressionContext;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 用于生成validator出错信息的context。

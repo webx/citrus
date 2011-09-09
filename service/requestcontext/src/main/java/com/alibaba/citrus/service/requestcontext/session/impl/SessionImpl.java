@@ -44,8 +44,8 @@ import com.alibaba.citrus.service.requestcontext.session.SessionModelEncoder;
 import com.alibaba.citrus.service.requestcontext.session.SessionRequestContext;
 import com.alibaba.citrus.service.requestcontext.session.SessionStore;
 import com.alibaba.citrus.service.requestcontext.session.SessionStore.StoreContext;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 实现了<code>HttpSession</code>接口。

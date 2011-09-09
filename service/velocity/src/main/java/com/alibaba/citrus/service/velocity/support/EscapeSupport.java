@@ -54,8 +54,8 @@ import com.alibaba.citrus.service.velocity.FastCloneable;
 import com.alibaba.citrus.service.velocity.VelocityConfiguration;
 import com.alibaba.citrus.service.velocity.VelocityPlugin;
 import com.alibaba.citrus.util.StringEscapeUtil;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHandler, ContextAware, FastCloneable,
         ProductionModeAware {

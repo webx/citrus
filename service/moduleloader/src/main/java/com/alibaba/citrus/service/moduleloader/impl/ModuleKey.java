@@ -19,7 +19,7 @@ package com.alibaba.citrus.service.moduleloader.impl;
 
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.StringUtil.*;
-import static com.alibaba.citrus.util.internal.regex.ClassNameWildcardCompiler.*;
+import static com.alibaba.citrus.util.regex.ClassNameWildcardCompiler.*;
 
 import com.alibaba.citrus.util.StringUtil;
 

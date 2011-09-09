@@ -30,7 +30,7 @@ import com.alibaba.citrus.service.requestcontext.parser.ParameterParserFilter;
 import com.alibaba.citrus.service.requestcontext.parser.ParserRequestContext;
 import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextFactory;
 import com.alibaba.citrus.service.upload.UploadService;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 创建<code>ParserRequestContext</code>的工厂。

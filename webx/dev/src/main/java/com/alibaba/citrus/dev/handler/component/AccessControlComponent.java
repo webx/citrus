@@ -11,9 +11,9 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import com.alibaba.citrus.util.internal.regex.ClassNameWildcardCompiler;
 import com.alibaba.citrus.util.internal.webpagelite.PageComponent;
 import com.alibaba.citrus.util.internal.webpagelite.PageComponentRegistry;
+import com.alibaba.citrus.util.regex.ClassNameWildcardCompiler;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 import com.alibaba.citrus.webx.handler.support.AbstractVisitor;
 

@@ -23,8 +23,8 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
 import com.alibaba.citrus.generictype.TypeInfo;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 public class DataResolverContext {
     public final static Annotation[] EMPTY_ANNOTATIONS = new Annotation[0];

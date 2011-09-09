@@ -20,7 +20,7 @@ package com.alibaba.citrus.service.moduleloader.impl.factory;
 import static com.alibaba.citrus.springext.util.DomUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.StringUtil.*;
-import static com.alibaba.citrus.util.internal.regex.PathNameWildcardCompiler.*;
+import static com.alibaba.citrus.util.regex.PathNameWildcardCompiler.*;
 
 import java.io.IOException;
 import java.net.URI;

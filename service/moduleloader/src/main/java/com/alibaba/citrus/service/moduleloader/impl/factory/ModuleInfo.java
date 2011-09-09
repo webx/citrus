@@ -18,8 +18,8 @@
 package com.alibaba.citrus.service.moduleloader.impl.factory;
 
 import com.alibaba.citrus.service.moduleloader.impl.ModuleKey;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 代表一个module的信息。

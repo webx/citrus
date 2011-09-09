@@ -40,7 +40,7 @@ import com.alibaba.citrus.service.requestcontext.util.ValueList;
 import com.alibaba.citrus.util.ArrayUtil;
 import com.alibaba.citrus.util.ClassUtil;
 import com.alibaba.citrus.util.ObjectUtil;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
  * 代表一个值的列表。

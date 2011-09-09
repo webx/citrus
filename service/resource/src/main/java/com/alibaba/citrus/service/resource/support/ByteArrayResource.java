@@ -26,7 +26,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 import com.alibaba.citrus.service.resource.Resource;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
  * 代表一个<code>byte[]</code>的资源。

@@ -43,8 +43,8 @@ import com.alibaba.citrus.service.jsp.JspEngine;
 import com.alibaba.citrus.service.template.TemplateContext;
 import com.alibaba.citrus.service.template.TemplateException;
 import com.alibaba.citrus.service.template.TemplateNotFoundException;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * Jsp模板引擎的实现。

@@ -22,7 +22,7 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import com.alibaba.citrus.service.dataresolver.DataResolver;
 import com.alibaba.citrus.service.dataresolver.DataResolverContext;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
 
 abstract class AbstractDataResolver implements DataResolver {
     private final String desc;

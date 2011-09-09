@@ -48,7 +48,7 @@ import com.alibaba.citrus.service.mail.util.MailUtil;
 import com.alibaba.citrus.service.template.TemplateContext;
 import com.alibaba.citrus.util.FileUtil;
 import com.alibaba.citrus.util.SystemUtil;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 用模板生成的HTML的内容。

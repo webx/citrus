@@ -32,8 +32,8 @@ import com.alibaba.citrus.service.requestcontext.session.ExactMatchesOnlySession
 import com.alibaba.citrus.service.requestcontext.session.store.cookie.AbstractCookieStore;
 import com.alibaba.citrus.service.requestcontext.session.valueencoder.SessionValueEncoder;
 import com.alibaba.citrus.service.requestcontext.session.valueencoder.impl.SimpleValueEncoder;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 将Session状态保存在cookie中。

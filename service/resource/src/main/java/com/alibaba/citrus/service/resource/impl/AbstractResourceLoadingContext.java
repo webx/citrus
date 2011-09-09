@@ -36,7 +36,7 @@ import com.alibaba.citrus.service.resource.ResourceLoadingService;
 import com.alibaba.citrus.service.resource.ResourceMatchResult;
 import com.alibaba.citrus.service.resource.ResourceNotFoundException;
 import com.alibaba.citrus.util.Assert;
-import com.alibaba.citrus.util.internal.regex.MatchResultSubstitution;
+import com.alibaba.citrus.util.regex.MatchResultSubstitution;
 
 /**
  * 查找和装载resource的逻辑。

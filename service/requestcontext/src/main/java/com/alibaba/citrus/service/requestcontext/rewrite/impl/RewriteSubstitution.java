@@ -36,9 +36,9 @@ import com.alibaba.citrus.util.ArrayUtil;
 import com.alibaba.citrus.util.ObjectUtil;
 import com.alibaba.citrus.util.StringEscapeUtil;
 import com.alibaba.citrus.util.StringUtil;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
-import com.alibaba.citrus.util.internal.regex.MatchResultSubstitution;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.regex.MatchResultSubstitution;
 
 public class RewriteSubstitution implements InitializingBean {
     private static final Logger log = LoggerFactory.getLogger(RewriteSubstitution.class);

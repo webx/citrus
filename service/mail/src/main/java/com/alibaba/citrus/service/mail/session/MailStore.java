@@ -31,7 +31,7 @@ import javax.mail.NoSuchProviderException;
 import javax.mail.Store;
 
 import com.alibaba.citrus.service.mail.MailException;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * ·¢ËÍe-mailµÄÀà¡£

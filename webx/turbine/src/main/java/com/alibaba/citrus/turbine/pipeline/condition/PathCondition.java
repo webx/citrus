@@ -33,8 +33,8 @@ import com.alibaba.citrus.service.pipeline.support.AbstractConditionDefinitionPa
 import com.alibaba.citrus.util.FileUtil;
 import com.alibaba.citrus.util.ServletUtil;
 import com.alibaba.citrus.util.StringUtil;
-import com.alibaba.citrus.util.internal.regex.MatchResultSubstitution;
-import com.alibaba.citrus.util.internal.regex.Substitution;
+import com.alibaba.citrus.util.regex.MatchResultSubstitution;
+import com.alibaba.citrus.util.regex.Substitution;
 
 /**
  * ¸ù¾ÝservletPath + componentPath + pathInfoÀ´ÅÐ¶Ï¡£

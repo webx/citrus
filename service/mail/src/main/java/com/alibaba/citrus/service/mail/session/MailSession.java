@@ -29,8 +29,8 @@ import javax.mail.Session;
 
 import com.alibaba.citrus.service.mail.MailException;
 import com.alibaba.citrus.service.mail.MailService;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 这个类包装了<code>java.mail.Session</code>，以更友好的方式来支持mail transport和store。

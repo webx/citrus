@@ -33,7 +33,7 @@ import com.alibaba.citrus.service.pull.PullService;
 import com.alibaba.citrus.service.template.TemplateContext;
 import com.alibaba.citrus.service.template.TemplateException;
 import com.alibaba.citrus.service.template.TemplateService;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 从模板生成的内容。

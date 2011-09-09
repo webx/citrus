@@ -25,7 +25,7 @@ import java.util.TreeMap;
 
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.VersionableSchemas;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
 
 public class VersionableSchemasImpl implements VersionableSchemas {
     private final Schema mainSchema;

@@ -51,8 +51,8 @@ import com.alibaba.citrus.service.requestcontext.session.SessionRequestContext;
 import com.alibaba.citrus.service.requestcontext.session.SessionStore;
 import com.alibaba.citrus.service.requestcontext.session.idgen.uuid.impl.UUIDGenerator;
 import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextFactory;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 用来创建和初始化<code>SessionRequestContext</code>的工厂。

@@ -34,7 +34,7 @@ import com.alibaba.citrus.service.resource.ResourceMatchResult;
 import com.alibaba.citrus.service.resource.ResourceNotFoundException;
 import com.alibaba.citrus.service.resource.ResourceTrace;
 import com.alibaba.citrus.service.resource.ResourceTraceElement;
-import com.alibaba.citrus.util.internal.regex.MatchResultSubstitution;
+import com.alibaba.citrus.util.regex.MatchResultSubstitution;
 
 /**
  * 代表一次resource查找的过程。

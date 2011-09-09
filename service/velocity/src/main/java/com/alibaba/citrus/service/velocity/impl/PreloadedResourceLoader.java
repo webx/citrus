@@ -25,7 +25,7 @@ import java.util.Map;
 import org.apache.commons.collections.ExtendedProperties;
 import org.springframework.core.io.Resource;
 
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 让velocity读取预装载的资源。

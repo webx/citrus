@@ -27,7 +27,7 @@ import javax.mail.Part;
 import javax.mail.internet.MimeBodyPart;
 
 import com.alibaba.citrus.service.mail.builder.MailContent;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
  * 由多部分构成的邮件内容。

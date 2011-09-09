@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.citrus.service.requestcontext.parser.ParserRequestContext;
 import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
-import com.alibaba.citrus.util.internal.regex.MatchResultSubstitution;
+import com.alibaba.citrus.util.regex.MatchResultSubstitution;
 
 /**
  * 和rewrite相关的工具类。

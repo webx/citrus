@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.citrus.service.pull.ToolFactory;
 import com.alibaba.citrus.util.ObjectUtil;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
  * 在模板中使用constant的tool。

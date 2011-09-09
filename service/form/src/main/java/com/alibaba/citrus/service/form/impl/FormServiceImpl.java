@@ -30,7 +30,7 @@ import com.alibaba.citrus.service.form.Form;
 import com.alibaba.citrus.service.form.FormService;
 import com.alibaba.citrus.service.form.configuration.FormConfig;
 import com.alibaba.citrus.service.form.impl.configuration.FormConfigImpl;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
  * 用来处理用户提交表单的service。

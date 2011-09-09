@@ -19,8 +19,8 @@ package com.alibaba.citrus.service.requestcontext.session.impl;
 
 import com.alibaba.citrus.service.requestcontext.session.SessionStore;
 import com.alibaba.citrus.service.requestcontext.session.SessionStore.StoreContext;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 代表session中的一个属性。

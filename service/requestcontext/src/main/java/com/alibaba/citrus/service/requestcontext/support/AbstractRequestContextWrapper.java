@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.RequestContextException;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
  * <code>RequestContext</code>包装器的默认实现。

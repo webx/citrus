@@ -33,9 +33,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 
 import com.alibaba.citrus.util.StringEscapeUtil;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
-import com.alibaba.citrus.util.internal.regex.MatchResultSubstitution;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.regex.MatchResultSubstitution;
 
 public class RewriteCondition implements InitializingBean {
     private static final Logger log = LoggerFactory.getLogger(RewriteCondition.class);

@@ -46,7 +46,7 @@ import com.alibaba.citrus.service.requestcontext.support.AbstractRequestWrapper;
 import com.alibaba.citrus.util.FileUtil;
 import com.alibaba.citrus.util.ServletUtil;
 import com.alibaba.citrus.util.StringEscapeUtil;
-import com.alibaba.citrus.util.internal.regex.MatchResultSubstitution;
+import com.alibaba.citrus.util.regex.MatchResultSubstitution;
 
 /**
  * 重写URL及参数的request context，类似于apache的mod_rewrite模块。

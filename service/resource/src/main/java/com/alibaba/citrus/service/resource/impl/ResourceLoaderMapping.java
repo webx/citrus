@@ -25,8 +25,8 @@ import com.alibaba.citrus.service.resource.ResourceListerContext;
 import com.alibaba.citrus.service.resource.ResourceLoader;
 import com.alibaba.citrus.service.resource.ResourceLoaderContext;
 import com.alibaba.citrus.service.resource.ResourceLoadingOption;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 代表一个resource name pattern到一组resource loader的映射。

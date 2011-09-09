@@ -27,7 +27,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.alibaba.citrus.service.mail.builder.content.AbstractContent;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 测试<code>AbstractContent</code>的基本功能。

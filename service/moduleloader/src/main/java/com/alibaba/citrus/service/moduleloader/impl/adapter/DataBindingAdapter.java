@@ -17,8 +17,8 @@
  */
 package com.alibaba.citrus.service.moduleloader.impl.adapter;
 
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 调用<code>execute()</code>方法，不要求实现<code>Module</code>接口。

@@ -41,7 +41,7 @@ import com.alibaba.citrus.service.requestcontext.util.ValueList;
 import com.alibaba.citrus.service.upload.support.StringFileItemEditor;
 import com.alibaba.citrus.util.ObjectUtil;
 import com.alibaba.citrus.util.StringUtil;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 代表一个解析器的基类，用来取得HTTP请求中的参数和cookies。

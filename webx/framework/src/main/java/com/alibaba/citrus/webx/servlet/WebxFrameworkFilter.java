@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.context.WebApplicationContext;
 
-import com.alibaba.citrus.util.internal.regex.PathNameWildcardCompiler;
+import com.alibaba.citrus.util.regex.PathNameWildcardCompiler;
 import com.alibaba.citrus.webx.WebxComponents;
 import com.alibaba.citrus.webx.context.WebxComponentsContext;
 

@@ -55,7 +55,7 @@ import com.alibaba.citrus.service.requestcontext.buffered.BufferedRequestContext
 import com.alibaba.citrus.service.requestcontext.lazycommit.LazyCommitRequestContext;
 import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
 import com.alibaba.citrus.util.ClassLoaderUtil;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.webx.BadRequestException;
 import com.alibaba.citrus.webx.ResourceNotFoundException;
 import com.alibaba.citrus.webx.WebxComponents;

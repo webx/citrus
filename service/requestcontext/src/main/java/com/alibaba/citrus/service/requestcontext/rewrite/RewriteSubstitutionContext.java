@@ -19,7 +19,7 @@ package com.alibaba.citrus.service.requestcontext.rewrite;
 
 import com.alibaba.citrus.service.requestcontext.parser.ParameterParser;
 import com.alibaba.citrus.service.requestcontext.parser.ParserRequestContext;
-import com.alibaba.citrus.util.internal.regex.MatchResultSubstitution;
+import com.alibaba.citrus.util.regex.MatchResultSubstitution;
 
 /**
  * 代表一个替换过程的上下文信息。

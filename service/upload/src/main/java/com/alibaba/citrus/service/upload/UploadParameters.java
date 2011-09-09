@@ -25,7 +25,7 @@ import java.util.Arrays;
 
 import com.alibaba.citrus.util.HumanReadableSize;
 import com.alibaba.citrus.util.SystemUtil;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 public class UploadParameters implements UploadConfiguration {
     private File repository;

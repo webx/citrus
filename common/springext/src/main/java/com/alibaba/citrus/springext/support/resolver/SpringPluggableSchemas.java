@@ -44,7 +44,7 @@ import com.alibaba.citrus.springext.ConfigurationPointException;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.Schemas;
 import com.alibaba.citrus.springext.impl.SchemaImpl;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
  * 将Spring所支持的<code>META-INF/spring.schemas</code>中定义的schemas移到本地服务器。

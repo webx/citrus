@@ -34,7 +34,7 @@ import com.alibaba.citrus.service.freemarker.FreeMarkerConfiguration;
 import com.alibaba.citrus.service.freemarker.FreeMarkerPlugin;
 import com.alibaba.citrus.service.freemarker.support.DefaultBeansWrapper;
 import com.alibaba.citrus.service.template.TemplateException;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 import freemarker.cache.StrongCacheStorage;
 import freemarker.cache.TemplateLoader;

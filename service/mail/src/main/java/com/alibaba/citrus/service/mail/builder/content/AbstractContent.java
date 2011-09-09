@@ -22,8 +22,8 @@ import static com.alibaba.citrus.util.Assert.*;
 import com.alibaba.citrus.service.mail.MailService;
 import com.alibaba.citrus.service.mail.builder.MailBuilder;
 import com.alibaba.citrus.service.mail.builder.MailContent;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 一个<code>MailContent</code>的基类。

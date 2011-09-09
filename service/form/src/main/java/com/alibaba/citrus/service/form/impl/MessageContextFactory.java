@@ -29,9 +29,9 @@ import com.alibaba.citrus.service.form.Form;
 import com.alibaba.citrus.service.form.Group;
 import com.alibaba.citrus.service.form.MessageContext;
 import com.alibaba.citrus.service.form.Validator;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 import com.alibaba.citrus.util.Utils;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
 
 public class MessageContextFactory {
     /**

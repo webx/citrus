@@ -38,7 +38,7 @@ import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.turbine.TurbineRunDataInternal;
 import com.alibaba.citrus.turbine.util.ControlTool;
-import com.alibaba.citrus.util.internal.regex.Substitution;
+import com.alibaba.citrus.util.regex.Substitution;
 
 /**
  * ÷±Ω”‰÷»æcontrol°£

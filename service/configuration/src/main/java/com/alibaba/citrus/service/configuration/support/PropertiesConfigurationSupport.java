@@ -30,8 +30,8 @@ import org.springframework.context.ApplicationContextAware;
 
 import com.alibaba.citrus.service.AbstractService;
 import com.alibaba.citrus.service.configuration.Configuration;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 基于properties的configuration实现。

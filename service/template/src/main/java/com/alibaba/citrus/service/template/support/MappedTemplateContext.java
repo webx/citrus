@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.alibaba.citrus.service.template.TemplateContext;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
  * 基于<code>Map</code>的<code>TemplateContext</code>实现。

@@ -45,8 +45,8 @@ import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser
 import com.alibaba.citrus.service.requestcontext.buffered.BufferedRequestContext;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.util.ServletUtil;
-import com.alibaba.citrus.util.internal.regex.Substitution;
 import com.alibaba.citrus.util.io.StreamUtil;
+import com.alibaba.citrus.util.regex.Substitution;
 
 /**
  * 从resource loader中装载资源，并直接显示的valve。

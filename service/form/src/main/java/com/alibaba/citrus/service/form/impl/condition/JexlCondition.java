@@ -35,8 +35,8 @@ import com.alibaba.citrus.service.form.Validator.Context;
 import com.alibaba.citrus.service.form.support.AbstractCondition;
 import com.alibaba.citrus.service.form.support.AbstractConditionDefinitionParser;
 import com.alibaba.citrus.util.StringEscapeUtil;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 用jexl表达式来计算条件。

@@ -17,8 +17,8 @@
  */
 package com.alibaba.citrus.service.resource.impl;
 
-import com.alibaba.citrus.util.internal.ToStringBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 代表一个resource name pattern到另一个resource name的别名。

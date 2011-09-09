@@ -37,7 +37,7 @@ import com.alibaba.citrus.service.mail.MailNotFoundException;
 import com.alibaba.citrus.service.mail.MailService;
 import com.alibaba.citrus.service.mail.MailStoreNotFoundException;
 import com.alibaba.citrus.service.mail.builder.MailBuilder;
-import com.alibaba.citrus.util.internal.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 用来发送e-mail的类。

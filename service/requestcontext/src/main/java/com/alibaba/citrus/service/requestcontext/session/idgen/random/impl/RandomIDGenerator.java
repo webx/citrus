@@ -27,7 +27,7 @@ import org.apache.commons.codec.binary.Base64;
 
 import com.alibaba.citrus.service.requestcontext.session.SessionIDGenerator;
 import com.alibaba.citrus.springext.support.BeanSupport;
-import com.alibaba.citrus.util.internal.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
  * 用随机数生成session ID的机制。
