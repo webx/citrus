@@ -163,3 +163,4 @@
 * bugfix：InheritableListableBeanFactory.registerResolvableDependency()只阻止对parent context中已注册的ProxyTargetFactory对象的覆盖，
   使ResourceLoader和ApplicationContext等对象的注入方式仍然和spring原来相同。
 * 将util.internal.regex.*和util.internal.ToStringBuilder等内部类升级至非internal类，以方便其它应用使用。
+* 将原petstore示例中的页面验证组件PageAuthorizationService移植到turbine中。

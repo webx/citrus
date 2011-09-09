@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="page-authorization" type="PageAuthorizationType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    为页面访问授权。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="PageAuthorizationType">
+        <xsd:sequence>
+            <xsd:element name="match" minOccurs="0" maxOccurs="unbounded"
+                type="PageAuthorizationMatchType" />
+        </xsd:sequence>
+        <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
+    </xsd:complexType>
+
+    <xsd:complexType name="PageAuthorizationMatchType">
+        <xsd:sequence>
+            <xsd:element name="grant" minOccurs="0" maxOccurs="unbounded"
+                type="PageAuthorizationGrantType" />
+        </xsd:sequence>
+        <xsd:attribute name="target" type="xsd:string" use="required" />
+    </xsd:complexType>
+
+    <xsd:complexType name="PageAuthorizationGrantType">
+        <xsd:sequence>
+            <xsd:element name="allow" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+            <xsd:element name="deny" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+        <xsd:attribute name="user" type="xsd:string" />
+        <xsd:attribute name="role" type="xsd:string" />
+    </xsd:complexType>
+
+</xsd:schema>

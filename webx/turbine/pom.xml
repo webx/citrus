@@ -61,5 +61,9 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>citrus-service-resource</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>citrus-test-webx</artifactId>
+        </dependency>
     </dependencies>
 </project>
