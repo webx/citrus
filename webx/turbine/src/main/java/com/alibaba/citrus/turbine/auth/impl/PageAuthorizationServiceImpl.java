@@ -11,7 +11,7 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.regex.Matcher;
 
-import com.alibaba.citrus.service.AbstractService;
+import com.alibaba.citrus.logconfig.support.SecurityLogger;
 import com.alibaba.citrus.turbine.auth.PageAuthorizationService;
 import com.alibaba.citrus.util.ObjectUtil;
 
@@ -20,8 +20,8 @@ import com.alibaba.citrus.util.ObjectUtil;
  * 
  * @author Michael Zhou
  */
-public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizationService> implements
-        PageAuthorizationService {
+public class PageAuthorizationServiceImpl implements PageAuthorizationService {
+    private final SecurityLogger securityLogger = new SecurityLogger();
 
     /** MATCH_EVERYTHING代表所有用户和role，但不包含匿名用户 */
     public final static String MATCH_EVERYTHING = "*";
@@ -41,6 +41,14 @@ public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizat
         }
     }
 
+    public String getLogName() {
+        return this.securityLogger.getLogger().getName();
+    }
+
+    public void setLogName(String logName) {
+        this.securityLogger.setLogName(logName);
+    }
+
     public boolean isAllow(String target, String userName, String[] roleNames, String... actions) {
         userName = defaultIfNull(trimToNull(userName), ANONYMOUS_USER);
 
@@ -52,22 +60,14 @@ public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizat
             actions[i] = trimToEmpty(actions[i]);
         }
 
-        String roleNameStr = null;
-        String actionStr = null;
-
-        if (getLogger().isDebugEnabled()) {
-            roleNameStr = ObjectUtil.toString(roleNames);
-            actionStr = ObjectUtil.toString(actions);
-        }
+        String roleNameStr = ObjectUtil.toString(roleNames);
+        String actionStr = ObjectUtil.toString(actions);
 
         // 找出所有匹配的pattern，按匹配长度倒排序。
         MatchResult[] results = getMatchResults(target);
 
         if (isEmptyArray(results)) {
-            if (getLogger().isDebugEnabled()) {
-                logDebug("Access denied: no patterns matched", target, userName, roleNameStr, actionStr, null);
-            }
-
+            log(true, "Access Denied: no patterns matched", target, userName, roleNameStr, actionStr, null);
             return false;
         }
 
@@ -120,12 +120,10 @@ public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizat
 
                 boolean allowed = !actionDenied;
 
-                if (getLogger().isDebugEnabled()) {
-                    if (allowed) {
-                        logDebug("Access permitted: ", target, userName, roleNameStr, action, match);
-                    } else {
-                        logDebug("Access denied: ", target, userName, roleNameStr, action, match);
-                    }
+                if (allowed) {
+                    log(false, "Access Permitted: ", target, userName, roleNameStr, action, match);
+                } else {
+                    log(true, "Access Denied: ", target, userName, roleNameStr, action, match);
                 }
 
                 return allowed;
@@ -133,9 +131,7 @@ public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizat
         }
 
         // 默认为拒绝
-        if (getLogger().isDebugEnabled()) {
-            logDebug("Access denied: user or role has not be authorized", target, userName, roleNameStr, action, null);
-        }
+        log(true, "Access Denied: user or role has not be authorized", target, userName, roleNameStr, action, null);
 
         return false;
     }
@@ -174,16 +170,16 @@ public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizat
         return grantsSet.values().toArray(new MatchResult[grantsSet.size()]);
     }
 
-    /**
-     * 记录debug日志。
-     */
-    private void logDebug(String message, String target, String userName, String roleNameStr, String actionStr,
-                          AuthMatch match) {
-        if (match == null) {
-            getLogger().debug("{}: target=\"{}\", user=\"{}\", roles=\"{}\", action=\"{}\"",
-                    new Object[] { message, target, userName, roleNameStr, actionStr });
+    private void log(boolean warn, String message, String target, String userName, String roleNameStr,
+                     String actionStr, AuthMatch match) {
+        String format = match == null ? "{}: target=\"{}\", user=\"{}\", roles=\"{}\", action=\"{}\""
+                : "{}: target=\"{}\", user=\"{}\", roles=\"{}\", action=\"{}\"\n{}";
+
+        if (warn) {
+            securityLogger.getLogger().warn(format,
+                    new Object[] { message, target, userName, roleNameStr, actionStr, match });
         } else {
-            getLogger().debug("{}: target=\"{}\", user=\"{}\", roles=\"{}\", action=\"{}\"\n{}",
+            securityLogger.getLogger().debug(format,
                     new Object[] { message, target, userName, roleNameStr, actionStr, match });
         }
     }

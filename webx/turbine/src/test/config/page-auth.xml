@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
     ">
 
-    <page-authorization xmlns="http://www.alibaba.com/schema/services">
+    <page-authorization xmlns="http://www.alibaba.com/schema/services" logName="MY_SECURITY">
         <match target="/user">
             <grant role="*">
                 <deny>*</deny>

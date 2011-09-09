@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.alibaba.citrus.test.TestEnvStatic;
 import com.alibaba.citrus.turbine.auth.impl.AuthGrant;
 import com.alibaba.citrus.turbine.auth.impl.AuthMatch;
 import com.alibaba.citrus.turbine.auth.impl.PageAuthorizationServiceImpl;
@@ -13,8 +14,13 @@ import com.alibaba.citrus.turbine.auth.impl.PageAuthorizationServiceImpl;
 public class PageAuthorizationServiceTests {
     protected PageAuthorizationServiceImpl auth;
 
+    static {
+        System.setProperty("loggingLevel", "debug");
+        TestEnvStatic.init();
+    }
+
     @Before
-    public void init() {
+    public void init() throws Exception {
         auth = new PageAuthorizationServiceImpl();
 
         auth.setMatches(new AuthMatch[] {

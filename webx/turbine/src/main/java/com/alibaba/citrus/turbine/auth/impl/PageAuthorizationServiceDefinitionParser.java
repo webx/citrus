@@ -23,6 +23,7 @@ public class PageAuthorizationServiceDefinitionParser extends
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         // bean attributes
         parseBeanDefinitionAttributes(element, parserContext, builder);
+        attributesToProperties(element, builder, "logName");
 
         // <match>
         ElementSelector matchSelector = and(sameNs(element), name("match"));
