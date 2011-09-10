@@ -63,6 +63,21 @@ public class WebxRootControllerTests extends AbstractWebxTests {
     }
 
     @Test
+    public void passthru() throws Exception {
+        // passthru
+        invokeServlet("/app1/plaintext.txt");
+
+        assertEquals(200, clientResponseCode);
+        assertEquals("hello, app1", clientResponseContent); // text from plain text file
+
+        // ∆’Õ®request
+        invokeServlet("/app1/plaintext2.txt");
+
+        assertEquals(200, clientResponseCode);
+        assertEquals("hello!\n", clientResponseContent); // text from valve
+    }
+
+    @Test
     public void internalRequest_illegal() throws Exception {
         // internal
         invokeServlet("/internal/notexist");

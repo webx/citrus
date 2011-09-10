@@ -46,4 +46,12 @@
         </components>
     </webx-configuration>
 
+    <webx-configuration id="passthru" xmlns="http://www.alibaba.com/schema/services">
+        <passthru><![CDATA[
+            /myservlet,
+            *.jpg,
+            *.gif 
+        ]]></passthru>
+    </webx-configuration>
+
 </beans:beans>

@@ -24,6 +24,7 @@ import com.alibaba.citrus.service.pipeline.Pipeline;
 import com.alibaba.citrus.service.requestcontext.RequestContextChainingService;
 import com.alibaba.citrus.webx.WebxController;
 import com.alibaba.citrus.webx.WebxRootController;
+import com.alibaba.citrus.webx.util.ExcludeFilter;
 
 /**
  * 代表一组webx的配置信息。
@@ -58,6 +59,11 @@ public interface WebxConfiguration extends Configuration {
      * 取得一组关于components的配置。
      */
     ComponentsConfig getComponentsConfig();
+
+    /**
+     * 定义在passthru filter中的URI，将被直接返回，而不执行pipeline。
+     */
+    ExcludeFilter getPassthruFilter();
 
     /**
      * 代表一组关于components的配置。

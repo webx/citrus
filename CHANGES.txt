@@ -166,3 +166,8 @@
 * 将原petstore示例中的页面验证组件PageAuthorizationService移植到turbine中。
 * 改进：将读取action参数的任务由performAction valve移到analyzeURL valve，从而使其它的valve也能通过rundata取得action参数。例如安全检验的valve。
   * 注意：很少有应用程序会去修改action参数。但如果有人这样做了，在新的实现下，代码可能会失效。
+* 新增功能：将webx当作filter使用，filter chain的下游可以使用webx所提供的request contexts功能。配置方法如下：
+  <webx-configuration>
+      <passthru>/xxx, *.yyy</passthru>
+  </webx-configuration>
+  

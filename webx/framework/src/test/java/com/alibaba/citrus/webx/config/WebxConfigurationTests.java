@@ -40,6 +40,7 @@ import com.alibaba.citrus.webx.config.impl.WebxConfigurationImpl.ComponentsConfi
 import com.alibaba.citrus.webx.impl.WebxControllerImpl;
 import com.alibaba.citrus.webx.support.AbstractWebxController;
 import com.alibaba.citrus.webx.support.AbstractWebxRootController;
+import com.alibaba.citrus.webx.util.ExcludeFilter;
 
 public class WebxConfigurationTests {
     private static ApplicationContext factory;
@@ -67,6 +68,7 @@ public class WebxConfigurationTests {
         assertSameBean(factory.getBean("requestContexts"), conf.getRequestContexts());
         assertSameBean(factory.getBean("pipeline"), conf.getPipeline());
         assertNull(conf.getExceptionPipeline());
+        assertNull(conf.getPassthruFilter());
 
         String str = conf.toString();
 
@@ -75,6 +77,20 @@ public class WebxConfigurationTests {
         assertThat(str, not(containsRegex("requestContexts\\s+=")));
         assertThat(str, not(containsRegex("pipeline\\s+=")));
         assertThat(str, not(containsRegex("exceptionPipeline\\s+=")));
+    }
+
+    @Test
+    public void passthru() {
+        conf = (WebxConfiguration) factory.getBean("passthru");
+        assertNotNull(conf);
+
+        ExcludeFilter passthru = conf.getPassthruFilter();
+
+        assertEquals("Excludes [\n" + //
+                "  [1/3] /myservlet\n" + //
+                "  [2/3] *.jpg\n" + //
+                "  [3/3] *.gif\n" + //
+                "]", passthru.toString());
     }
 
     @Test

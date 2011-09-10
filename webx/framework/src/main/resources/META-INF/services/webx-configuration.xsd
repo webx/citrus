@@ -58,6 +58,14 @@
                     ]]></xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
+            <xsd:element name="passthru" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[
+    定义在passthru filter中的URI，将被直接返回，而不执行pipeline。多个URI以逗号分隔，例如：/myservlet, *.gif。
+    该功能可被用于将webx作为其它servlet的filter，这样，其它的servlet可以使用webx所提供的request context功能，例如：session等。
+                    ]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="components" type="WebxComponentsType" minOccurs="0" />
         </xsd:all>
         <xsd:attribute name="parentRef" type="xsd:string" />

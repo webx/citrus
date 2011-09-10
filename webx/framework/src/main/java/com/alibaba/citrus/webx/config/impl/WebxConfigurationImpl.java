@@ -30,6 +30,7 @@ import com.alibaba.citrus.webx.WebxRootController;
 import com.alibaba.citrus.webx.config.WebxConfiguration;
 import com.alibaba.citrus.webx.impl.WebxControllerImpl;
 import com.alibaba.citrus.webx.impl.WebxRootControllerImpl;
+import com.alibaba.citrus.webx.util.ExcludeFilter;
 
 /**
  *  µœ÷<code>WebxConfiguration</code>°£
@@ -98,6 +99,14 @@ public class WebxConfigurationImpl extends PropertiesConfigurationSupport<WebxCo
 
     public void setExceptionPipelineRef(String beanName) {
         setProperty("exceptionPipeline", beanName);
+    }
+
+    public ExcludeFilter getPassthruFilter() {
+        return getProperty("passthru", null);
+    }
+
+    public void setPassthru(String passthru) {
+        setProperty("passthru", new ExcludeFilter(passthru));
     }
 
     /**

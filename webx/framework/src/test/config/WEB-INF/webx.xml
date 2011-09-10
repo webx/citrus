@@ -19,6 +19,7 @@
     <services:webx-configuration xmlns="http://www.alibaba.com/schema/services">
         <productionMode>${productionModeFromSystemProperties:false}</productionMode>
         <exceptionPipelineRef>${exceptionPipelineNameFromSystemProperties:}</exceptionPipelineRef>
+        <passthru>/app1/plaintext.txt</passthru>
         <components defaultComponent="app4">
             <!-- component name="app1" -->
             <component name="app2" />
