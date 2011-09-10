@@ -18,13 +18,10 @@
 package com.alibaba.citrus.webx.servlet;
 
 import static com.alibaba.citrus.util.Assert.*;
-import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static org.springframework.web.context.support.WebApplicationContextUtils.*;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.regex.Pattern;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -33,9 +30,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.context.WebApplicationContext;
 
-import com.alibaba.citrus.util.regex.PathNameWildcardCompiler;
 import com.alibaba.citrus.webx.WebxComponents;
 import com.alibaba.citrus.webx.context.WebxComponentsContext;
+import com.alibaba.citrus.webx.util.ExcludeFilter;
 
 /**
  * 初始化spring容器的filter。
@@ -45,7 +42,7 @@ import com.alibaba.citrus.webx.context.WebxComponentsContext;
 public class WebxFrameworkFilter extends FilterBean {
     private String parentContextAttribute;
     private WebxComponents components;
-    private Pattern[] excludes;
+    private ExcludeFilter excludeFilter;
 
     /**
      * 用于在servletContext中保存parent context的attribute key。
@@ -65,21 +62,7 @@ public class WebxFrameworkFilter extends FilterBean {
      * 设置要排除掉的URL。
      */
     public void setExcludes(String excludes) {
-        List<Pattern> excludePatterns = createLinkedList();
-
-        for (String exclude : split(excludes, ", \r\n")) {
-            exclude = trimToNull(exclude);
-
-            if (exclude != null) {
-                excludePatterns.add(PathNameWildcardCompiler.compilePathName(exclude));
-            }
-        }
-
-        if (!excludePatterns.isEmpty()) {
-            this.excludes = excludePatterns.toArray(new Pattern[excludePatterns.size()]);
-        } else {
-            this.excludes = null;
-        }
+        excludeFilter = new ExcludeFilter(excludes);
     }
 
     /**
@@ -132,7 +115,7 @@ public class WebxFrameworkFilter extends FilterBean {
             throws IOException, ServletException {
         // 如果指定了excludes，并且当前requestURI匹配任何一个exclude pattern，
         // 则立即放弃控制，将控制还给servlet engine。
-        if (isExcluded(request)) {
+        if (excludeFilter != null && excludeFilter.isExcluded(request)) {
             chain.doFilter(request, response);
             return;
         }
@@ -146,22 +129,5 @@ public class WebxFrameworkFilter extends FilterBean {
         } catch (Exception e) {
             throw new ServletException(e);
         }
-    }
-
-    /**
-     * 判断当前requestURI是否匹配任何一个exclude pattern。
-     */
-    private boolean isExcluded(HttpServletRequest request) {
-        if (excludes != null) {
-            String requestURI = request.getRequestURI();
-
-            for (Pattern exclude : excludes) {
-                if (exclude.matcher(requestURI).find()) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 }

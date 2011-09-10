@@ -23,9 +23,7 @@ import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.io.File;
-import java.lang.reflect.Method;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +42,7 @@ import com.alibaba.citrus.webx.WebxComponent;
 import com.alibaba.citrus.webx.WebxComponents;
 import com.alibaba.citrus.webx.config.WebxConfiguration;
 import com.alibaba.citrus.webx.support.AbstractWebxController;
+import com.alibaba.citrus.webx.util.ExcludeFilter;
 import com.alibaba.citrus.webx.util.WebxUtil;
 import com.meterware.servletunit.PatchedServletRunner;
 
@@ -65,37 +64,6 @@ public class WebxFrameworkFilterTests extends AbstractWebxTests {
     }
 
     @Test
-    public void excludes() throws Exception {
-        Pattern[] excludes;
-
-        // no excludes - default value
-        excludes = getFieldValue(filter, "excludes", Pattern[].class);
-        assertNull(excludes);
-
-        // set empty excludes
-        filter.setExcludes(" ");
-        excludes = getFieldValue(filter, "excludes", Pattern[].class);
-        assertNull(excludes);
-
-        filter.setExcludes(" \r\n, ");
-        excludes = getFieldValue(filter, "excludes", Pattern[].class);
-        assertNull(excludes);
-
-        // with excludes
-        filter.setExcludes("/aa , *.jpg");
-        excludes = getFieldValue(filter, "excludes", Pattern[].class);
-        assertEquals(2, excludes.length);
-
-        filter.setExcludes("/aa  *.jpg");
-        excludes = getFieldValue(filter, "excludes", Pattern[].class);
-        assertEquals(2, excludes.length);
-
-        filter.setExcludes("/aa\r\n*.jpg");
-        excludes = getFieldValue(filter, "excludes", Pattern[].class);
-        assertEquals(2, excludes.length);
-    }
-
-    @Test
     public void isExcluded() throws Exception {
         filter.setExcludes("/aa , *.jpg");
 
@@ -109,8 +77,7 @@ public class WebxFrameworkFilterTests extends AbstractWebxTests {
     }
 
     private void assertExcluded(boolean excluded, String requestURI) throws Exception {
-        Method isExcluded = getAccessibleMethod(filter.getClass(), "isExcluded",
-                new Class<?>[] { HttpServletRequest.class });
+        ExcludeFilter excludes = getFieldValue(filter, "excludeFilter", ExcludeFilter.class);
 
         HttpServletRequest request = createMock(HttpServletRequest.class);
         HttpServletResponse response = createMock(HttpServletResponse.class);
@@ -124,7 +91,7 @@ public class WebxFrameworkFilterTests extends AbstractWebxTests {
 
         replay(request, response, filterChain);
 
-        assertEquals(excluded, isExcluded.invoke(filter, request));
+        assertEquals(excluded, excludes.isExcluded(request));
 
         if (excluded) {
             filter.doFilter(request, response, filterChain); // 对excluded request调用doFilter，应该立即返回
