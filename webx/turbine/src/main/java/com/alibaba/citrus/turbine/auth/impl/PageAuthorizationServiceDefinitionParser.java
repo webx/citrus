@@ -67,7 +67,11 @@ public class PageAuthorizationServiceDefinitionParser extends
         BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(AuthGrant.class);
 
         // role, user
-        attributesToProperties(element, builder, "role", "user");
+        String[] users = split(element.getAttribute("user"), ", ");
+        String[] roles = split(element.getAttribute("role"), ", ");
+
+        builder.addPropertyValue("users", users);
+        builder.addPropertyValue("roles", roles);
 
         // allow, deny
         ElementSelector allowSelector = and(sameNs(element), name("allow"));

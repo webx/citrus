@@ -122,6 +122,13 @@
         </valves:handleException>
     </services:pipeline>
 
+    <services:pipeline id="pageAuthValve" lazy-init="true">
+        <valves:analyzeURL />
+        <valves:pageAuthorization
+            callbackClass="com.alibaba.citrus.turbine.pipeline.valve.PageAuthorizationValveTests$MyCallback"
+         />
+    </services:pipeline>
+
     <services:module-loader id="moduleLoaderService">
         <factories:class-modules>
             <factories:search-classes type="$1" name="$2"
@@ -194,4 +201,31 @@
         <turbine-rundata-resolver />
     </services:data-resolver>
 
+    <!-- 页面验证 -->
+    <services:page-authorization xmlns="http://www.alibaba.com/schema/services">
+        <match target="*">
+            <grant user="*, anonymous">
+                <deny>*</deny>
+            </grant>
+        </match>
+        <match target="/aaa">
+            <grant user="baobao">
+                <allow>*</allow>
+            </grant>
+            <grant role="admin">
+                <allow>*</allow>
+            </grant>
+        </match>
+        <match target="/bbb">
+            <grant user="*, anonymous">
+                <allow>screen</allow>
+                <allow>action.bbb.*</allow>
+            </grant>
+        </match>
+        <match target="/ccc">
+            <grant user="*, anonymous">
+                <allow>action.ccc.*</allow>
+            </grant>
+        </match>
+    </services:page-authorization>
 </beans:beans>

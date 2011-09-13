@@ -15,3 +15,5 @@ renderTemplate=com.alibaba.citrus.turbine.pipeline.valve.RenderTemplateValve$Def
 exportControl=com.alibaba.citrus.turbine.pipeline.valve.ExportControlValve$DefinitionParser
 
 breakUnlessTargetRedirected=com.alibaba.citrus.turbine.pipeline.valve.BreakUnlessTargetRedirectedValve$DefinitionParser
+
+pageAuthorization=com.alibaba.citrus.turbine.pipeline.valve.PageAuthorizationValve$DefinitionParser

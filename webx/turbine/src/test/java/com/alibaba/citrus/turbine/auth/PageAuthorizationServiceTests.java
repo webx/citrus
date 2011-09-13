@@ -45,8 +45,8 @@ public class PageAuthorizationServiceTests {
     private AuthGrant grant(String user, String role, String allow, String deny) {
         AuthGrant grant = new AuthGrant();
 
-        grant.setUser(user);
-        grant.setRole(role);
+        grant.setUsers(new String[] { user });
+        grant.setRoles(new String[] { role });
         grant.setAllow(split(allow, ", "));
         grant.setDeny(split(deny, ", "));
 
@@ -55,7 +55,7 @@ public class PageAuthorizationServiceTests {
 
     @Test
     public void noAction() {
-        assertTrue(auth.isAllow("/test.vm", "baobao", null, (String[]) null));
+        assertTrue(auth.isAllow("/test.vm", "baobao", new String[] { "admin" }, (String[]) null));
         assertFalse(auth.isAllow("/user", "baobao", null, (String[]) null));
     }
 
@@ -114,8 +114,8 @@ public class PageAuthorizationServiceTests {
      */
     @Test
     public void relativeTarget() {
-        assertTrue(auth.isAllow("/user/hello.vm", "other", null, "read"));
-        assertTrue(auth.isAllow("/user/world.vm", "other", null, "write"));
+        assertTrue(auth.isAllow("/user/hello.vm", "other", new String[] { "admin" }, "read"));
+        assertFalse(auth.isAllow("/user/world.vm", "other", null, "write"));
     }
 
     /**
@@ -123,7 +123,7 @@ public class PageAuthorizationServiceTests {
      */
     @Test
     public void anonymous() {
-        // * 不包括anonymous
+        // user=* 不包括anonymous, role=*不包括空role
         assertFalse(auth.isAllow("/user/public/hello", null, null, "action"));
         assertFalse(auth.isAllow("/user/public/hello", null, null, "read"));
         assertTrue(auth.isAllow("/user/public/hello", null, null, "write"));

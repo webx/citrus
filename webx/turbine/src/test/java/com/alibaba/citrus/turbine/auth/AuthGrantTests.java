@@ -19,19 +19,25 @@ public class AuthGrantTests {
     }
 
     @Test
-    public void setUser() {
-        assertNull(grant.getUser());
+    public void setUsers() {
+        assertNull(grant.getUsers());
 
-        grant.setUser(" user ");
-        assertEquals("user", grant.getUser());
+        grant.setUsers(new String[] { " ", null });
+        assertNull(grant.getUsers());
+
+        grant.setUsers(new String[] { " user1 ", "user2", null });
+        assertArrayEquals(new String[] { "user1", "user2" }, grant.getUsers());
     }
 
     @Test
-    public void setRole() {
-        assertNull(grant.getRole());
+    public void setRoles() {
+        assertNull(grant.getRoles());
 
-        grant.setRole(" role ");
-        assertEquals("role", grant.getRole());
+        grant.setRoles(new String[] { " ", null });
+        assertNull(grant.getRoles());
+
+        grant.setRoles(new String[] { " role1 ", "role2", null });
+        assertArrayEquals(new String[] { "role1", "role2" }, grant.getRoles());
     }
 
     @Test
@@ -118,16 +124,56 @@ public class AuthGrantTests {
     }
 
     @Test
+    public void isUserMatched() {
+        // default
+        assertFalse(grant.isUserMatched(null));
+        assertFalse(grant.isUserMatched("baobao"));
+
+        // * except anonymous
+        grant.setUsers(new String[] { "*" });
+        assertFalse(grant.isUserMatched(null));
+        assertTrue(grant.isUserMatched("baobao"));
+
+        // * and anonymous
+        grant.setUsers(new String[] { "*", "anonymous" });
+        assertTrue(grant.isUserMatched(null));
+        assertTrue(grant.isUserMatched("baobao"));
+
+        // specific name
+        grant.setUsers(new String[] { "baobao" });
+        assertFalse(grant.isUserMatched(null));
+        assertTrue(grant.isUserMatched("baobao"));
+    }
+
+    @Test
+    public void areRolesMatched() {
+        // default
+        assertFalse(grant.areRolesMatched(null));
+        assertFalse(grant.areRolesMatched(new String[] { "admin" }));
+
+        // * except anonymous
+        grant.setRoles(new String[] { "*" });
+        assertFalse(grant.areRolesMatched(new String[0]));
+        assertFalse(grant.areRolesMatched(new String[] { null }));
+        assertTrue(grant.areRolesMatched(new String[] { "admin" }));
+
+        // specific name
+        grant.setRoles(new String[] { "admin" });
+        assertFalse(grant.areRolesMatched(new String[0]));
+        assertTrue(grant.areRolesMatched(new String[] { "admin" }));
+    }
+
+    @Test
     public void toString_() {
         grant.setAllow("a", "b", "c");
         grant.setDeny("e", "f", "g");
-        grant.setUser("user");
-        grant.setRole("role");
+        grant.setUsers(new String[] { "user" });
+        grant.setRoles(new String[] { "role" });
 
         String s = "";
         s += "Grant {\n";
-        s += "  user  = user\n";
-        s += "  role  = role\n";
+        s += "  users = [user]\n";
+        s += "  roles = [role]\n";
         s += "  allow = [a, b, c]\n";
         s += "  deny  = [e, f, g]\n";
         s += "}";

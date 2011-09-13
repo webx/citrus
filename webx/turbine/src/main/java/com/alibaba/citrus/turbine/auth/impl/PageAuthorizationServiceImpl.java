@@ -2,7 +2,6 @@ package com.alibaba.citrus.turbine.auth.impl;
 
 import static com.alibaba.citrus.util.ArrayUtil.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
-import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static java.util.Collections.*;
 
@@ -22,12 +21,6 @@ import com.alibaba.citrus.util.ObjectUtil;
  */
 public class PageAuthorizationServiceImpl implements PageAuthorizationService {
     private final SecurityLogger securityLogger = new SecurityLogger();
-
-    /** MATCH_EVERYTHING代表所有用户和role，但不包含匿名用户 */
-    public final static String MATCH_EVERYTHING = "*";
-
-    /** 特列用户名：匿名用户 */
-    public final static String ANONYMOUS_USER = "anonymous";
 
     private final List<AuthMatch> matches = createLinkedList();
 
@@ -50,7 +43,7 @@ public class PageAuthorizationServiceImpl implements PageAuthorizationService {
     }
 
     public boolean isAllow(String target, String userName, String[] roleNames, String... actions) {
-        userName = defaultIfNull(trimToNull(userName), ANONYMOUS_USER);
+        userName = trimToNull(userName);
 
         if (actions == null) {
             actions = new String[] { null };
@@ -87,24 +80,9 @@ public class PageAuthorizationServiceImpl implements PageAuthorizationService {
             AuthMatch match = result.match;
 
             for (AuthGrant grant : match.getGrants()) {
-                String grantUser = grant.getUser();
-                String grantRole = grant.getRole();
-
                 // 判断user或role是否匹配
-                boolean userMatch = false;
-                boolean roleMatch = false;
-
-                if (grantUser != null) {
-                    // 排除匿名用户
-                    userMatch = grantUser.equals(MATCH_EVERYTHING) && !ANONYMOUS_USER.equals(userName)
-                            || grantUser.equals(userName);
-                }
-
-                if (grantRole != null) {
-                    // 排除匿名用户
-                    roleMatch = grantRole.equals(MATCH_EVERYTHING) && !ANONYMOUS_USER.equals(userName)
-                            || arrayContains(roleNames, grantRole);
-                }
+                boolean userMatch = grant.isUserMatched(userName);
+                boolean roleMatch = grant.areRolesMatched(roleNames);
 
                 if (!userMatch && !roleMatch) {
                     continue;
