@@ -245,8 +245,10 @@ public class PullServiceConfigTests extends AbstractPullServiceConfigTests {
         assertNotNull(tools.get("object3"));
         assertNotNull(tools.get("inset1"));
         assertNotNull(tools.get("inset2"));
+        assertNotNull(tools.get("mymap"));
+        assertNotNull(tools.get("mylist2"));
 
-        assertEquals(constantCount + utilCount + 8, tools.size());
+        assertEquals(constantCount + utilCount + 10, tools.size());
     }
 
     private Object getTool(String name) {

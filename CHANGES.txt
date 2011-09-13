@@ -170,4 +170,4 @@
   <webx-configuration>
       <passthru>/xxx, *.yyy</passthru>
   </webx-configuration>
-  
+* 新增pull tool：<context-exposer>可将context中的bean直接暴露到pull tools中，供模板使用。
