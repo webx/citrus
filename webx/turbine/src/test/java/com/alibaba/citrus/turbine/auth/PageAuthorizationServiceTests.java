@@ -1,23 +1,21 @@
 package com.alibaba.citrus.turbine.auth;
 
+import static com.alibaba.citrus.turbine.auth.impl.PageAuthorizationServiceImpl.PageAuthorizationResult.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.alibaba.citrus.test.TestEnvStatic;
 import com.alibaba.citrus.turbine.auth.impl.AuthGrant;
 import com.alibaba.citrus.turbine.auth.impl.AuthMatch;
 import com.alibaba.citrus.turbine.auth.impl.PageAuthorizationServiceImpl;
+import com.alibaba.citrus.turbine.auth.impl.PageAuthorizationServiceImpl.PageAuthorizationResult;
 
 public class PageAuthorizationServiceTests {
-    protected PageAuthorizationServiceImpl auth;
+    protected static final String[] ADMIN_ROLE = new String[] { "admin" };
 
-    static {
-        System.setProperty("loggingLevel", "debug");
-        TestEnvStatic.init();
-    }
+    protected PageAuthorizationServiceImpl auth;
 
     @Before
     public void init() throws Exception {
@@ -28,7 +26,7 @@ public class PageAuthorizationServiceTests {
                 match("/user", grant(null, "*", null, "*")), //
                 match("/user", grant("baobao", null, "read,write", null)), //
                 match("/admin", grant("baobao", null, "read,write", null)), //
-                match("/user/profile", grant(null, "administrator", "*", null)), //
+                match("/user/profile", grant(null, "admin", "*", null)), //
                 match("/user/public", //
                         // grants
                         grant(null, "*", "action", null), // 
@@ -55,14 +53,20 @@ public class PageAuthorizationServiceTests {
 
     @Test
     public void noAction() {
-        assertTrue(auth.isAllow("/test.vm", "baobao", new String[] { "admin" }, (String[]) null));
-        assertFalse(auth.isAllow("/user", "baobao", null, (String[]) null));
+        // allow=*, actions=null
+        assertAuth(ALLOWED, "/test.vm", null, ADMIN_ROLE, (String[]) null);
+
+        // deny=*, actions=null
+        assertAuth(DENIED, "/user", null, ADMIN_ROLE, (String[]) null);
     }
 
     @Test
     public void multiActions() {
-        assertTrue(auth.isAllow("/user", "baobao", null, "read", "write"));
-        assertFalse(auth.isAllow("/user", "baobao", null, "read", "write", "other"));
+        // allow=read,write, actions=read,write
+        assertAuth(ALLOWED, "/user", "baobao", null, "read", "write");
+
+        // allow=read,write, action=read,write,other
+        assertAuth(GRANT_NOT_MATCH, "/user", "baobao", null, "read", "write", "other");
     }
 
     /**
@@ -70,8 +74,8 @@ public class PageAuthorizationServiceTests {
      */
     @Test
     public void targetNotMatch() {
-        assertFalse(auth.isAllow("/", "baobao", null, (String[]) null));
-        assertFalse(auth.isAllow("/notMatch", "baobao", null, (String[]) null));
+        assertAuth(TARGET_NOT_MATCH, "/", "baobao", null, (String[]) null);
+        assertAuth(TARGET_NOT_MATCH, "/notMatch", "baobao", null, (String[]) null);
     }
 
     /**
@@ -79,25 +83,32 @@ public class PageAuthorizationServiceTests {
      */
     @Test
     public void priority() {
-        assertTrue(auth.isAllow("/user", "baobao", null, "read"));
-        assertTrue(auth.isAllow("/user", "baobao", null, "write"));
+        // allow=read,write, actions=read
+        assertAuth(ALLOWED, "/user", "baobao", null, "read");
+
+        // allow=read,write, actions=write
+        assertAuth(ALLOWED, "/user", "baobao", null, "write");
+
+        // deny=*, actions=write
+        assertAuth(DENIED, "/user", null, ADMIN_ROLE, "write");
     }
 
     /**
      * target匹配，但用户未匹配。
      */
     @Test
-    public void nonMatchedUser() {
-        assertFalse(auth.isAllow("/user", "other", null, "read"));
-        assertFalse(auth.isAllow("/user", "other", null, "write"));
+    public void userNotMatch() {
+        assertAuth(GRANT_NOT_MATCH, "/user", "other", null, "read");
+        assertAuth(GRANT_NOT_MATCH, "/user", "other", null, "write");
     }
 
     /**
      * target匹配、用户匹配，但action不匹配。
      */
     @Test
-    public void nonMatchedAction() {
-        assertFalse(auth.isAllow("/user", "baobao", null, "otherAction"));
+    public void actionNotMatch() {
+        // allow=read,write, action=otherAction
+        assertAuth(GRANT_NOT_MATCH, "/user", "baobao", null, "otherAction");
     }
 
     /**
@@ -105,8 +116,14 @@ public class PageAuthorizationServiceTests {
      */
     @Test
     public void role() {
-        assertTrue(auth.isAllow("/user/profile", "other", new String[] { "administrator" }, "read"));
-        assertTrue(auth.isAllow("/user/profile/abc", "other", new String[] { "administrator" }, "write"));
+        // allow=*, action=read
+        assertAuth(ALLOWED, "/user/profile", "other", ADMIN_ROLE, "read");
+
+        // allow=*, action=write
+        assertAuth(ALLOWED, "/user/profile/abc", "other", ADMIN_ROLE, "write");
+
+        // role=admin不匹配null
+        assertAuth(GRANT_NOT_MATCH, "/user/profile/abc", "other", null, "write");
     }
 
     /**
@@ -114,8 +131,11 @@ public class PageAuthorizationServiceTests {
      */
     @Test
     public void relativeTarget() {
-        assertTrue(auth.isAllow("/user/hello.vm", "other", new String[] { "admin" }, "read"));
-        assertFalse(auth.isAllow("/user/world.vm", "other", null, "write"));
+        // allow=*
+        assertAuth(ALLOWED, "/user/hello.vm", "other", ADMIN_ROLE, "read");
+
+        // role=admin不匹配null
+        assertAuth(GRANT_NOT_MATCH, "/user/world.vm", "other", null, "write");
     }
 
     /**
@@ -123,9 +143,24 @@ public class PageAuthorizationServiceTests {
      */
     @Test
     public void anonymous() {
-        // user=* 不包括anonymous, role=*不包括空role
-        assertFalse(auth.isAllow("/user/public/hello", null, null, "action"));
-        assertFalse(auth.isAllow("/user/public/hello", null, null, "read"));
-        assertTrue(auth.isAllow("/user/public/hello", null, null, "write"));
+        // role=*不包括空role
+        assertAuth(GRANT_NOT_MATCH, "/user/public/hello", null, null, "action");
+
+        // user=* 不包括anonymous
+        assertAuth(GRANT_NOT_MATCH, "/user/public/hello", null, null, "read");
+
+        // user=anonymous
+        assertAuth(ALLOWED, "/user/public/hello", null, null, "write");
+    }
+
+    private void assertAuth(PageAuthorizationResult result, String target, String userName, String[] roleNames,
+                            String... actions) {
+        assertSame(result, auth.authorize(target, userName, roleNames, actions));
+
+        if (result == ALLOWED) {
+            assertTrue(auth.isAllow(target, userName, roleNames, actions));
+        } else {
+            assertFalse(auth.isAllow(target, userName, roleNames, actions));
+        }
     }
 }

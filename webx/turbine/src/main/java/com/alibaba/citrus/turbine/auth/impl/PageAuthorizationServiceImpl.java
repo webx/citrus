@@ -1,8 +1,12 @@
 package com.alibaba.citrus.turbine.auth.impl;
 
+import static com.alibaba.citrus.turbine.auth.impl.PageAuthorizationServiceImpl.PageAuthorizationResult.*;
 import static com.alibaba.citrus.util.ArrayUtil.*;
+import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
+import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
+import static java.lang.Boolean.*;
 import static java.util.Collections.*;
 
 import java.util.List;
@@ -10,7 +14,7 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.regex.Matcher;
 
-import com.alibaba.citrus.logconfig.support.SecurityLogger;
+import com.alibaba.citrus.service.AbstractService;
 import com.alibaba.citrus.turbine.auth.PageAuthorizationService;
 import com.alibaba.citrus.util.ObjectUtil;
 
@@ -19,10 +23,10 @@ import com.alibaba.citrus.util.ObjectUtil;
  * 
  * @author Michael Zhou
  */
-public class PageAuthorizationServiceImpl implements PageAuthorizationService {
-    private final SecurityLogger securityLogger = new SecurityLogger();
-
+public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizationService> implements
+        PageAuthorizationService {
     private final List<AuthMatch> matches = createLinkedList();
+    private boolean allowByDefault = false;
 
     public void setMatches(AuthMatch[] matches) {
         this.matches.clear();
@@ -34,47 +38,95 @@ public class PageAuthorizationServiceImpl implements PageAuthorizationService {
         }
     }
 
-    public String getLogName() {
-        return this.securityLogger.getLogger().getName();
+    public boolean isAllowByDefault() {
+        return allowByDefault;
     }
 
-    public void setLogName(String logName) {
-        this.securityLogger.setLogName(logName);
+    public void setAllowByDefault(boolean allowByDefault) {
+        this.allowByDefault = allowByDefault;
     }
 
     public boolean isAllow(String target, String userName, String[] roleNames, String... actions) {
-        userName = trimToNull(userName);
+        PageAuthorizationResult result = authorize(target, userName, roleNames, actions);
+
+        switch (result) {
+            case ALLOWED:
+                return true;
+
+            case DENIED:
+                return false;
+
+            default:
+                return allowByDefault;
+        }
+    }
+
+    public PageAuthorizationResult authorize(String target, String userName, String[] roleNames, String... actions) {
+        userName = defaultIfNull(trimToNull(userName), AuthGrant.ANONYMOUS_USER);
 
         if (actions == null) {
-            actions = new String[] { null };
+            actions = new String[] { EMPTY_STRING };
         }
 
-        for (int i = 0; i < actions.length; i++) {
-            actions[i] = trimToEmpty(actions[i]);
+        if (roleNames == null) {
+            roleNames = EMPTY_STRING_ARRAY;
         }
-
-        String roleNameStr = ObjectUtil.toString(roleNames);
-        String actionStr = ObjectUtil.toString(actions);
 
         // 找出所有匹配的pattern，按匹配长度倒排序。
         MatchResult[] results = getMatchResults(target);
+        PageAuthorizationResult result;
 
         if (isEmptyArray(results)) {
-            log(true, "Access Denied: no patterns matched", target, userName, roleNameStr, actionStr, null);
-            return false;
-        }
+            result = TARGET_NOT_MATCH;
+        } else {
+            boolean grantNotMatch = false;
 
-        for (String action : actions) {
-            if (!isActionAllowed(results, target, userName, roleNames, roleNameStr, action)) {
-                return false;
+            for (int i = 0; i < actions.length; i++) {
+                actions[i] = trimToEmpty(actions[i]);
+                Boolean actionAllowed = isActionAllowed(results, target, userName, roleNames, actions[i]);
+
+                if (actionAllowed == null) {
+                    grantNotMatch = true;
+                } else if (!actionAllowed) {
+                    return DENIED;
+                }
+            }
+
+            if (!grantNotMatch) {
+                if (getLogger().isDebugEnabled()) {
+                    getLogger().debug(
+                            "Access Permitted: target=\"{}\", user=\"{}\", roles={}, action={}",
+                            new Object[] { target, userName, ObjectUtil.toString(roleNames),
+                                    ObjectUtil.toString(actions) });
+                }
+
+                return ALLOWED;
+            } else {
+                result = GRANT_NOT_MATCH;
             }
         }
 
-        return true;
+        if (allowByDefault) {
+            if (getLogger().isDebugEnabled()) {
+                getLogger()
+                        .debug("Access Permitted.  No matches found for request: target=\"{}\", user=\"{}\", roles={}, action={}",
+                                new Object[] { target, userName, ObjectUtil.toString(roleNames),
+                                        ObjectUtil.toString(actions) });
+            }
+        } else {
+            if (getLogger().isWarnEnabled()) {
+                getLogger()
+                        .warn("Access Denied.  No matches found for request: target=\"{}\", user=\"{}\", roles={}, action={}",
+                                new Object[] { target, userName, ObjectUtil.toString(roleNames),
+                                        ObjectUtil.toString(actions) });
+            }
+        }
+
+        return result;
     }
 
-    private boolean isActionAllowed(MatchResult[] results, String target, String userName, String[] roleNames,
-                                    String roleNameStr, String action) {
+    private Boolean isActionAllowed(MatchResult[] results, String target, String userName, String[] roleNames,
+                                    String action) {
         // 按顺序检查授权，直到role或user被allow或deny
         for (MatchResult result : results) {
             AuthMatch match = result.match;
@@ -84,34 +136,39 @@ public class PageAuthorizationServiceImpl implements PageAuthorizationService {
                 boolean userMatch = grant.isUserMatched(userName);
                 boolean roleMatch = grant.areRolesMatched(roleNames);
 
-                if (!userMatch && !roleMatch) {
-                    continue;
+                if (userMatch || roleMatch) {
+                    // 判断action是否匹配
+                    boolean actionAllowed = grant.isActionAllowed(action);
+                    boolean actionDenied = grant.isActionDenied(action);
+
+                    if (actionAllowed || actionDenied) {
+                        boolean allowed = !actionDenied;
+
+                        if (allowed) {
+                            if (getLogger().isTraceEnabled()) {
+                                getLogger()
+                                        .trace("Access Partially Permitted: target=\"{}\", user=\"{}\", roles={}, action=\"{}\"\n{}",
+                                                new Object[] { target, userName, ObjectUtil.toString(roleNames),
+                                                        action, match });
+                            }
+
+                            return TRUE;
+                        } else {
+                            if (getLogger().isWarnEnabled()) {
+                                getLogger()
+                                        .warn("Access Denied: target=\"{}\", user=\"{}\", roles={}, action=\"{}\"\n{}",
+                                                new Object[] { target, userName, ObjectUtil.toString(roleNames),
+                                                        action, match });
+                            }
+
+                            return FALSE;
+                        }
+                    }
                 }
-
-                // 判断action是否匹配
-                boolean actionAllowed = grant.isActionAllowed(action);
-                boolean actionDenied = grant.isActionDenied(action);
-
-                if (!actionAllowed && !actionDenied) {
-                    continue;
-                }
-
-                boolean allowed = !actionDenied;
-
-                if (allowed) {
-                    log(false, "Access Permitted: ", target, userName, roleNameStr, action, match);
-                } else {
-                    log(true, "Access Denied: ", target, userName, roleNameStr, action, match);
-                }
-
-                return allowed;
             }
         }
 
-        // 默认为拒绝
-        log(true, "Access Denied: user or role has not be authorized", target, userName, roleNameStr, action, null);
-
-        return false;
+        return null;
     }
 
     private MatchResult[] getMatchResults(String target) {
@@ -126,6 +183,7 @@ public class PageAuthorizationServiceImpl implements PageAuthorizationService {
                 MatchResult result = new MatchResult();
                 result.matchLength = matcher.end() - matcher.start();
                 result.match = match;
+                result.target = target;
 
                 results.add(result);
             }
@@ -148,26 +206,41 @@ public class PageAuthorizationServiceImpl implements PageAuthorizationService {
         return grantsSet.values().toArray(new MatchResult[grantsSet.size()]);
     }
 
-    private void log(boolean warn, String message, String target, String userName, String roleNameStr,
-                     String actionStr, AuthMatch match) {
-        String format = match == null ? "{}: target=\"{}\", user=\"{}\", roles=\"{}\", action=\"{}\""
-                : "{}: target=\"{}\", user=\"{}\", roles=\"{}\", action=\"{}\"\n{}";
-
-        if (warn) {
-            securityLogger.getLogger().warn(format,
-                    new Object[] { message, target, userName, roleNameStr, actionStr, match });
-        } else {
-            securityLogger.getLogger().debug(format,
-                    new Object[] { message, target, userName, roleNameStr, actionStr, match });
-        }
-    }
-
     private static class MatchResult implements Comparable<MatchResult> {
         private int matchLength = -1;
         private AuthMatch match;
+        private String target;
 
         public int compareTo(MatchResult o) {
             return o.matchLength - matchLength;
         }
+
+        @Override
+        public String toString() {
+            return "Match length=" + matchLength + ", target=" + target + ", " + match;
+        }
     }
+
+    public static enum PageAuthorizationResult {
+        /**
+         * 代表页面被许可访问。
+         */
+        ALLOWED,
+
+        /**
+         * 代表页面被拒绝访问。
+         */
+        DENIED,
+
+        /**
+         * 代表当前的target未匹配。
+         */
+        TARGET_NOT_MATCH,
+
+        /**
+         * 代表当前的grant未匹配，也就是user/roles/actions未匹配。
+         */
+        GRANT_NOT_MATCH
+    }
+
 }

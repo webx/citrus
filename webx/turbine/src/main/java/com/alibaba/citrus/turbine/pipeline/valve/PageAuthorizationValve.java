@@ -79,10 +79,9 @@ public class PageAuthorizationValve extends AbstractValve {
         // 1. 当前的target
         // 2. 当前的user和roles
         // 3. 将要执行的actions，例如：screen、action.xxx.UserAction
-        boolean allowAccess = pageAuthorizationService.isAllow(target, userName, roleNames,
-                actions.toArray(new String[actions.size()]));
-
-        if (!allowAccess) {
+        if (pageAuthorizationService.isAllow(target, userName, roleNames, actions.toArray(new String[actions.size()]))) {
+            cb.onAllow(status);
+        } else {
             cb.onDeny(status);
         }
 
@@ -90,22 +89,20 @@ public class PageAuthorizationValve extends AbstractValve {
     }
 
     public interface Callback<T> {
-        T onStart(TurbineRunData rundata) throws Exception;
-
         String getUserName(T status);
 
         String[] getRoleNames(T status);
 
         String[] getActions(T status);
 
+        T onStart(TurbineRunData rundata) throws Exception;
+
+        void onAllow(T status) throws Exception;
+
         void onDeny(T status) throws Exception;
     }
 
     private class DefaultCallback implements Callback<TurbineRunData> {
-        public TurbineRunData onStart(TurbineRunData rundata) {
-            return rundata;
-        }
-
         public String getUserName(TurbineRunData status) {
             return null;
         }
@@ -116,6 +113,13 @@ public class PageAuthorizationValve extends AbstractValve {
 
         public String[] getActions(TurbineRunData status) {
             return null;
+        }
+
+        public TurbineRunData onStart(TurbineRunData rundata) {
+            return rundata;
+        }
+
+        public void onAllow(TurbineRunData status) throws Exception {
         }
 
         public void onDeny(TurbineRunData status) {

@@ -22,7 +22,14 @@
                 type="PageAuthorizationMatchType" />
         </xsd:sequence>
         <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
-        <xsd:attribute name="logName" type="xsd:string" />
+        <xsd:attribute name="default" default="deny">
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="allow" />
+                    <xsd:enumeration value="deny" />
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:attribute>
     </xsd:complexType>
 
     <xsd:complexType name="PageAuthorizationMatchType">

@@ -23,7 +23,14 @@ public class PageAuthorizationServiceDefinitionParser extends
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         // bean attributes
         parseBeanDefinitionAttributes(element, parserContext, builder);
-        attributesToProperties(element, builder, "logName");
+
+        // default value
+        String defaultValue = trimToNull(element.getAttribute("default"));
+
+        if (defaultValue != null) {
+            boolean allowByDefault = "allow".equals(defaultValue);
+            builder.addPropertyValue("allowByDefault", allowByDefault);
+        }
 
         // <match>
         ElementSelector matchSelector = and(sameNs(element), name("match"));

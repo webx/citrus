@@ -203,11 +203,6 @@
 
     <!-- 页面验证 -->
     <services:page-authorization xmlns="http://www.alibaba.com/schema/services">
-        <match target="*">
-            <grant user="*, anonymous">
-                <deny>*</deny>
-            </grant>
-        </match>
         <match target="/aaa">
             <grant user="baobao">
                 <allow>*</allow>

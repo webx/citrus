@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
     ">
 
-    <page-authorization xmlns="http://www.alibaba.com/schema/services" logName="MY_SECURITY">
+    <page-authorization xmlns="http://www.alibaba.com/schema/services">
         <match target="/user">
             <grant role="*">
                 <deny>*</deny>
@@ -21,7 +21,7 @@
             </grant>
         </match>
         <match target="/user/profile">
-            <grant role="administrator">
+            <grant role="admin">
                 <allow>*</allow>
             </grant>
         </match>
@@ -42,5 +42,8 @@
             </grant>
         </match>
     </page-authorization>
+
+    <page-authorization id="defaultAllow" xmlns="http://www.alibaba.com/schema/services"
+        default="allow" />
 
 </beans:beans>

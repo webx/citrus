@@ -22,11 +22,13 @@ public class PageAuthorizationValveTests extends AbstractValveTests {
 
         Status status = MyCallback.newStatus();
         pipeline.newInvocation().invoke();
+        assertFalse(status.allowed);
         assertTrue(status.denied);
 
         status = MyCallback.newStatus();
         status.user = "baobao";
         pipeline.newInvocation().invoke();
+        assertTrue(status.allowed);
         assertFalse(status.denied);
     }
 
@@ -38,12 +40,14 @@ public class PageAuthorizationValveTests extends AbstractValveTests {
         Status status = MyCallback.newStatus();
         status.user = "other";
         pipeline.newInvocation().invoke();
+        assertFalse(status.allowed);
         assertTrue(status.denied);
 
         status = MyCallback.newStatus();
         status.user = "other";
         status.roles = new String[] { "admin" };
         pipeline.newInvocation().invoke();
+        assertTrue(status.allowed);
         assertFalse(status.denied);
     }
 
@@ -54,6 +58,7 @@ public class PageAuthorizationValveTests extends AbstractValveTests {
 
         Status status = MyCallback.newStatus();
         pipeline.newInvocation().invoke();
+        assertFalse(status.allowed);
         assertTrue(status.denied);
 
         getInvocationContext("http://localhost/app1/bbb/myModule.jsp?action=bbb/MyAction");
@@ -61,11 +66,13 @@ public class PageAuthorizationValveTests extends AbstractValveTests {
 
         status = MyCallback.newStatus();
         pipeline.newInvocation().invoke();
+        assertTrue(status.allowed);
         assertFalse(status.denied);
 
         status = MyCallback.newStatus();
         status.actions = new String[] { "myaction" };
         pipeline.newInvocation().invoke();
+        assertFalse(status.allowed);
         assertTrue(status.denied);
     }
 
@@ -76,6 +83,7 @@ public class PageAuthorizationValveTests extends AbstractValveTests {
 
         Status status = MyCallback.newStatus();
         pipeline.newInvocation().invoke();
+        assertFalse(status.allowed);
         assertTrue(status.denied);
     }
 
@@ -94,10 +102,6 @@ public class PageAuthorizationValveTests extends AbstractValveTests {
             return status;
         }
 
-        public Status onStart(TurbineRunData rundata) throws Exception {
-            return getStatus();
-        }
-
         public String getUserName(Status status) {
             return getStatus().user;
         }
@@ -110,6 +114,14 @@ public class PageAuthorizationValveTests extends AbstractValveTests {
             return getStatus().actions;
         }
 
+        public Status onStart(TurbineRunData rundata) throws Exception {
+            return getStatus();
+        }
+
+        public void onAllow(Status status) throws Exception {
+            getStatus().allowed = true;
+        }
+
         public void onDeny(Status status) throws Exception {
             getStatus().denied = true;
         }
@@ -119,6 +131,7 @@ public class PageAuthorizationValveTests extends AbstractValveTests {
         String user;
         String[] roles;
         String[] actions;
+        boolean allowed;
         boolean denied;
     }
 }
