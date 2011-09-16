@@ -61,11 +61,11 @@ public class URIBrokerServiceTests extends AbstractURIBrokerServiceTests {
         service = new URIBrokerServiceImpl(null);
 
         // default
-        assertTrue(service.isRequestAware());
+        assertFalse(service.isRequestAware());
         assertNull(getFieldValue(service, "requestAware", Boolean.class));
 
-        // 用default值初始化uribroker，uribroker.isRequestAware == true
-        assertBrokerRequestAware(service, true);
+        // 用default值初始化uribroker，uribroker.isRequestAware == false
+        assertBrokerRequestAware(service, false);
 
         // set value
         service = new URIBrokerServiceImpl(null);

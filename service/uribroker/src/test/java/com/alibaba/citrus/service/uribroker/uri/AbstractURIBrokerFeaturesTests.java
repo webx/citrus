@@ -95,7 +95,10 @@ public abstract class AbstractURIBrokerFeaturesTests<B extends URIBroker> {
 
     @Test
     public void getRequestAware() {
-        assertEquals(true, broker.isRequestAware()); // request aware by default
+        assertEquals(false, broker.isRequestAware()); // not request aware by default
+
+        broker.setRequestAware(true);
+        assertEquals(true, broker.isRequestAware());
 
         broker.setRequestAware(false);
         assertEquals(false, broker.isRequestAware());

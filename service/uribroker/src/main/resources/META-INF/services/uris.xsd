@@ -24,7 +24,7 @@
             <xsd:any minOccurs="0" maxOccurs="unbounded"
                 namespace="http://www.alibaba.com/schema/services/uris" />
         </xsd:sequence>
-        <xsd:attribute name="requestAware" type="springext:booleanOrPlaceholder" default="true" />
+        <xsd:attribute name="requestAware" type="springext:booleanOrPlaceholder" default="false" />
         <xsd:attribute name="defaultCharset" type="xsd:string" />
         <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
     </xsd:complexType>

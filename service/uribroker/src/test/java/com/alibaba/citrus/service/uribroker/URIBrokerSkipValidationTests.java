@@ -53,7 +53,7 @@ public class URIBrokerSkipValidationTests {
 
     @Test
     public void service() {
-        assertEquals(true, uris.isRequestAware());
+        assertEquals(false, uris.isRequestAware());
 
         assertTrue(uris.getNames().contains("u1"));
         assertFalse(uris.getExposedNames().contains("u1"));

@@ -71,7 +71,7 @@ public class URIBrokerServiceImpl extends AbstractService<URIBrokerService> impl
      * 是否使用request的参量。
      */
     public boolean isRequestAware() {
-        return requestAware == null ? true : requestAware;
+        return requestAware == null ? false : requestAware;
     }
 
     /**

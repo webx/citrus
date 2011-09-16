@@ -171,3 +171,6 @@
       <passthru>/xxx, *.yyy</passthru>
   </webx-configuration>
 * 新增pull tool：<context-exposer>可将context中的bean直接暴露到pull tools中，供模板使用。
+* 修改URI broker service中requestAware的默认值，原来是true，现在改为false。
+  * 当requestAware为true时，所生成的URL会自动加上当前request的server信息。这个在绝大多数情况下是不需要的。故修改之。
+

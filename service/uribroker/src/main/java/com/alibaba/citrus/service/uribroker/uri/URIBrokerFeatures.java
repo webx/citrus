@@ -41,7 +41,7 @@ import com.alibaba.citrus.util.StringEscapeUtil;
  */
 public abstract class URIBrokerFeatures implements Renderable {
     protected final Renderer renderer = new Renderer();
-    private boolean requestAware = true;
+    private boolean requestAware = false;
     private HttpServletRequest request;
     private URIBroker parent;
     private boolean initialized;

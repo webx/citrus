@@ -16,7 +16,7 @@
 
     <services:property-placeholder />
 
-    <services:uris primary="true">
+    <services:uris primary="true" requestAware="true">
         <!-- URIBroker -->
         <uris:uri id="link" />
 
@@ -135,12 +135,12 @@
         <uris:turbine-classic-uri id="turbineClassicLink-norequest" />
     </services:uris>
 
-    <services:uris id="noDefaultCharset">
+    <services:uris id="noDefaultCharset" requestAware="true">
         <uris:uri id="a" />
         <uris:uri id="b" charset="GBK" />
     </services:uris>
 
-    <services:uris id="withDefaultCharset" defaultCharset="UTF-8">
+    <services:uris id="withDefaultCharset" defaultCharset="UTF-8" requestAware="true">
         <uris:uri id="x" />
         <uris:uri id="y" charset="GBK" />
     </services:uris>
