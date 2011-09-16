@@ -151,7 +151,7 @@
   mvn clean install           -- 在spring2中编译并测试
   mvn surefire:test -Pspring3 -- 在spring3中测试但不编译
 
-* 在开发者首页中显示webx版本、revision、spring版本；改进取得webx版本的方法，使用META-INF/MANIFEST.MF中的信息。
+* 在开发者首页中显示webx版本、spring版本；改进取得webx版本的方法，使用META-INF/MANIFEST.MF中的信息。
 
 * 安全改进：为dev mode下的explorer添加安全控制。默认只能从本机访问。当从非授权的主机访问时，显示友好的提示信息。支持下面的property:
   -DdevelopmentMode.allowedHosts=192.168.1.*

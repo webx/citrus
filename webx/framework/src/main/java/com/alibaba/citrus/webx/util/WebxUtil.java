@@ -22,12 +22,10 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.webx.WebxComponent;
 
 public class WebxUtil {
     private final static String CURRENT_WEBX_COMPONENT_KEY = "webx.component";
-    private final static String REVISION = StringUtil.trim("$Revision: 16258 $", " $");
 
     public static WebxComponent getCurrentComponent(HttpServletRequest request) {
         return assertNotNull((WebxComponent) request.getAttribute(CURRENT_WEBX_COMPONENT_KEY),
@@ -54,18 +52,10 @@ public class WebxUtil {
             version = trimToNull(pkg.getImplementationVersion());
         }
 
-        String revision = getRevision();
-
         if (version == null) {
-            version = revision;
-        } else {
-            version = version + " " + revision;
+            version = "Unknown Version";
         }
 
         return version;
-    }
-
-    public static String getRevision() {
-        return REVISION;
     }
 }

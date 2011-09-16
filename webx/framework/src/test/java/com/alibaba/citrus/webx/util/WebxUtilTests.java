@@ -23,15 +23,7 @@ import org.junit.Test;
 
 public class WebxUtilTests {
     @Test
-    public void getRevision() {
-        String revision = WebxUtil.getRevision();
-        assertNotNull(revision);
-        assertTrue("Please submit WebxUtil.java to subversion and set a property on the file: "
-                + "svn ps svn:keywords Revision WebxUtil.java", revision.matches("Revision: \\d+"));
-    }
-
-    @Test
     public void getVersion() throws Exception {
-        assertEquals(WebxUtil.getRevision(), WebxUtil.getWebxVersion());
+        assertEquals("Unknown Version", WebxUtil.getWebxVersion());
     }
 }
