@@ -18,8 +18,10 @@
 package com.alibaba.citrus.service.moduleloader.impl.dataresolver;
 
 import static com.alibaba.citrus.test.TestUtil.*;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
+import org.hamcrest.Matcher;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -70,9 +72,18 @@ public class ParamBindingTests extends AbstractModuleLoaderTests {
             moduleLoaderService.getModule("action", "myParameterizedAction");
             fail();
         } catch (UnadaptableModuleException e) {
-            assertThat(e, exception("Could not adapt object to module: type=action, name=MyParameterizedAction, class="
+            Matcher<Throwable> case1 = exception("Could not adapt object to module: type=action, name=MyParameterizedAction, class="
                     + MyParameterizedAction.class.getName()
-                    + ": method doMyEvent has 2 parameters, but no DataResolvers defined."));
+                    + ": method doMyEvent has 2 parameters, but no DataResolvers defined.");
+
+            Matcher<Throwable> case2 = exception("Could not adapt object to module: type=action, name=MyParameterizedAction, class="
+                    + MyParameterizedAction.class.getName()
+                    + ": method doMyEventPrimitive has 2 parameters, but no DataResolvers defined.");
+
+            @SuppressWarnings("unchecked")
+            Matcher<Throwable> any = anyOf(case1, case2);
+
+            assertThat(e, any);
         }
     }
 
