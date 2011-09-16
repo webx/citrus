@@ -229,16 +229,6 @@ public class URIBrokerServiceImpl extends AbstractService<URIBrokerService> impl
         // 递归复制parent中的信息
         for (URIBroker broker : brokers.values()) {
             broker.init();
-
-            // 除非设置了requestAware，否则保持broker中的默认值
-            if (requestAware != null) {
-                broker.setRequestAwareDefault(requestAware);
-            }
-
-            // 除非设置了defaultCharset，否则保持默认的broker charset。
-            if (defaultCharset != null && broker.getCharset() == null) {
-                broker.setCharset(defaultCharset);
-            }
         }
     }
 
