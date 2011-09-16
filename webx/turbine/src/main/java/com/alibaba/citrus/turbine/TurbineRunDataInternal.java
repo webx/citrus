@@ -27,6 +27,8 @@ public interface TurbineRunDataInternal extends TurbineRunData, Navigator, Contr
 
     void setAction(String action);
 
+    void setActionEvent(String actionEvent);
+
     Context getContext(String componentName);
 
     Context getContext();

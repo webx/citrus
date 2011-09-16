@@ -87,6 +87,25 @@ public class PageAuthorizationValveTests extends AbstractValveTests {
         assertTrue(status.denied);
     }
 
+    @Test
+    public void actionEvent() throws Exception {
+        getInvocationContext("http://localhost/app1/ddd/myModule.jsp?action=ddd.MyAction");
+        initRequestContext();
+
+        Status status = MyCallback.newStatus();
+        pipeline.newInvocation().invoke();
+        assertFalse(status.allowed);
+        assertTrue(status.denied);
+
+        getInvocationContext("http://localhost/app1/ddd/myModule.jsp?action=ddd/MyAction&event_submit_do_my_event=y");
+        initRequestContext();
+
+        status = MyCallback.newStatus();
+        pipeline.newInvocation().invoke();
+        assertTrue(status.allowed);
+        assertFalse(status.denied);
+    }
+
     public static class MyCallback implements Callback<Status> {
         private static ThreadLocal<Status> statusHolder = new ThreadLocal<Status>();
 

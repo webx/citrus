@@ -23,6 +23,22 @@ public class TurbineRunDataTests extends AbstractWebxTests {
     }
 
     @Test
+    public void getAction() {
+        assertNull(rundata.getAction());
+
+        rundata.setAction(" test ");
+        assertEquals("test", rundata.getAction());
+    }
+
+    @Test
+    public void getActionEvent() {
+        assertNull(rundata.getActionEvent());
+
+        rundata.setActionEvent(" test ");
+        assertEquals("test", rundata.getActionEvent());
+    }
+
+    @Test
     public void getContext() {
         Context context1 = rundata.getContext();
         Context context2 = rundata.getContext("app2");

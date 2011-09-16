@@ -222,5 +222,11 @@
                 <allow>action.ccc.*</allow>
             </grant>
         </match>
+        <match target="/ddd">
+            <grant user="*, anonymous">
+                <allow>screen</allow>
+                <allow>action.ddd.*.doMyEvent</allow>
+            </grant>
+        </match>
     </services:page-authorization>
 </beans:beans>

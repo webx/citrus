@@ -19,8 +19,8 @@ package com.alibaba.citrus.service.moduleloader.impl.adapter;
 
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
+import static com.alibaba.citrus.util.internal.ActionEventUtil.*;
 
-import java.util.Enumeration;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,17 +30,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.citrus.service.moduleloader.ActionEventException;
 import com.alibaba.citrus.service.moduleloader.ActionEventNotFoundException;
-import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 public class ActionEventAdapter extends AbstractDataBindingAdapter implements InitializingBean {
-    private static final String DEFAULT_EVENT_PATTERN = "event_submit_do_";
-    private static final String IMAGE_BUTTON_SUFFIX_1 = ".x";
-    private static final String IMAGE_BUTTON_SUFFIX_2 = ".y";
-    private static final String IMAGE_BUTTON_SUFFIX_3 = ".X";
-    private static final String IMAGE_BUTTON_SUFFIX_4 = ".Y";
-
     private final Map<String, MethodInvoker> handlers;
     private final MethodInvoker preHandler;
     private final MethodInvoker postHandler;
@@ -66,7 +59,7 @@ public class ActionEventAdapter extends AbstractDataBindingAdapter implements In
      * 执行一个module。
      */
     public void execute() throws ActionEventException, ActionEventNotFoundException {
-        String event = getEventName();
+        String event = getEventName(request);
         MethodInvoker handler = null;
 
         // 查找精确匹配的方法
@@ -125,45 +118,6 @@ public class ActionEventAdapter extends AbstractDataBindingAdapter implements In
         if (exception != null) {
             throw exception;
         }
-    }
-
-    /**
-     * 取得key=eventSubmit_doXyz, value不为空的参数。
-     */
-    private String getEventName() {
-        String event = null;
-
-        @SuppressWarnings("unchecked")
-        Enumeration<String> e = request.getParameterNames();
-
-        while (e.hasMoreElements()) {
-            String originalKey = e.nextElement();
-            String paramKey = StringUtil.toLowerCaseWithUnderscores(originalKey);
-
-            if (paramKey.startsWith(DEFAULT_EVENT_PATTERN) && !StringUtil.isBlank(request.getParameter(originalKey))) {
-                int startIndex = DEFAULT_EVENT_PATTERN.length();
-                int endIndex = paramKey.length();
-
-                // 支持<input type="image">
-                if (paramKey.endsWith(IMAGE_BUTTON_SUFFIX_1)) {
-                    endIndex -= IMAGE_BUTTON_SUFFIX_1.length();
-                } else if (paramKey.endsWith(IMAGE_BUTTON_SUFFIX_2)) {
-                    endIndex -= IMAGE_BUTTON_SUFFIX_2.length();
-                } else if (paramKey.endsWith(IMAGE_BUTTON_SUFFIX_3)) {
-                    endIndex -= IMAGE_BUTTON_SUFFIX_3.length();
-                } else if (paramKey.endsWith(IMAGE_BUTTON_SUFFIX_4)) {
-                    endIndex -= IMAGE_BUTTON_SUFFIX_4.length();
-                }
-
-                event = StringUtil.trimToNull(paramKey.substring(startIndex, endIndex));
-
-                if (event != null) {
-                    break;
-                }
-            }
-        }
-
-        return event;
     }
 
     @Override

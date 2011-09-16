@@ -19,6 +19,7 @@ package com.alibaba.citrus.service.moduleloader.impl.adapter;
 
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
+import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -34,7 +35,6 @@ import com.alibaba.citrus.service.dataresolver.DataResolverService;
 import com.alibaba.citrus.service.moduleloader.Module;
 import com.alibaba.citrus.service.moduleloader.ModuleInfo;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
-import com.alibaba.citrus.util.StringUtil;
 
 /**
  * 以事件的方式调用action的方法。
@@ -105,7 +105,7 @@ public class ActionEventAdapterFactory extends AbstractDataBindingAdapterFactory
                 // doXyz()
                 if (methodName.length() > 2 && methodName.startsWith("do")
                         && Character.isUpperCase(methodName.charAt(2))) {
-                    String eventName = StringUtil.toLowerCaseWithUnderscores(methodName.substring(2));
+                    String eventName = toCamelCase(methodName.substring(2));
 
                     // default handler: doPerform()
                     if (DEFAULT_EVENT.equals(eventName)) {

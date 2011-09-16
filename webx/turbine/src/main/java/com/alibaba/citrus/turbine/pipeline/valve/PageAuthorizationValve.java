@@ -4,6 +4,7 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.turbine.util.TurbineUtil.*;
 import static com.alibaba.citrus.util.ArrayUtil.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
+import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
 
@@ -53,10 +54,11 @@ public class PageAuthorizationValve extends AbstractValve {
 
         String target = rundata.getTarget();
         String action = rundata.getAction();
+        String event = capitalize(rundata.getActionEvent());
 
         // 取得当前请求的actions，包括三部分：
         // 1. screen
-        // 2. action.* - 假如请求包含action参数的话
+        // 2. action.*.event - 假如请求包含action参数的话
         // 3. callback返回的额外actions
         // 只有当所有action全部被授权时，请求才会继续处理下去。
         List<String> actions = createLinkedList();
@@ -64,7 +66,11 @@ public class PageAuthorizationValve extends AbstractValve {
         actions.add("screen");
 
         if (action != null) {
-            actions.add("action." + action);
+            if (event != null) {
+                actions.add("action." + action + ".do" + event);
+            } else {
+                actions.add("action." + action);
+            }
         }
 
         String[] extraActions = cb.getActions(status);

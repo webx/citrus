@@ -64,6 +64,7 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
     private String target;
     private String redirectTarget;
     private String action;
+    private String actionEvent;
     private URIBroker redirectURI;
     private final Map<String, PullService> pullServices;
     private final Map<String, Context> contexts;
@@ -209,6 +210,14 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
 
     public void setAction(String action) {
         this.action = trimToNull(action);
+    }
+
+    public String getActionEvent() {
+        return actionEvent;
+    }
+
+    public void setActionEvent(String actionEvent) {
+        this.actionEvent = trimToNull(actionEvent);
     }
 
     public String getRedirectLocation() {

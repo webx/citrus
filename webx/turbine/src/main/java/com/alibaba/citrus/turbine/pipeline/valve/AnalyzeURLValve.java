@@ -37,6 +37,7 @@ import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser
 import com.alibaba.citrus.turbine.TurbineRunDataInternal;
 import com.alibaba.citrus.util.ServletUtil;
 import com.alibaba.citrus.util.StringUtil;
+import com.alibaba.citrus.util.internal.ActionEventUtil;
 import com.alibaba.citrus.webx.WebxComponent;
 
 /**
@@ -120,6 +121,10 @@ public class AnalyzeURLValve extends AbstractValve {
 
         action = mappingRuleService.getMappedName(ACTION_MODULE, action);
         rundata.setAction(action);
+
+        // È¡µÃactionEvent
+        String actionEvent = ActionEventUtil.getEventName(rundata.getRequest());
+        rundata.setActionEvent(actionEvent);
 
         pipelineContext.invokeNext();
     }

@@ -48,6 +48,8 @@ public interface TurbineRunData {
 
     String getAction();
 
+    String getActionEvent();
+
     String getRedirectLocation();
 
     void setRedirectLocation(String redirectLocation);

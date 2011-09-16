@@ -165,7 +165,7 @@ public class ActionEventTests extends AbstractWebTests {
             actionEvent.execute();
             fail();
         } catch (ActionEventNotFoundException e) {
-            assertThat(e, exception("Could not find handler method for action event: xyz_abc"));
+            assertThat(e, exception("Could not find handler method for action event: xyzAbc"));
         }
     }
 
