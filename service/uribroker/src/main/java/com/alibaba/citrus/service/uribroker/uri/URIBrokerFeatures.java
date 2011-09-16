@@ -196,6 +196,11 @@ public abstract class URIBrokerFeatures implements Renderable {
                 charset = parent.getCharset();
             }
 
+            // request aware
+            if (requestAware == null) {
+                requestAware = parent.isRequestAware();
+            }
+
             // init interceptors，将parent interceptors加在前面
             if (parent.hasInterceptors()) {
                 mergeLinkedHashMap(parent.getInterceptorStates(), getInterceptorStates());
