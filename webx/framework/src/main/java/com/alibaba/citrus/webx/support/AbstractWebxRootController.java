@@ -71,12 +71,13 @@ import com.alibaba.citrus.webx.handler.impl.MainHandler;
 import com.alibaba.citrus.webx.handler.impl.error.DetailedErrorHandler;
 import com.alibaba.citrus.webx.handler.impl.error.PipelineErrorHandler;
 import com.alibaba.citrus.webx.handler.impl.error.SendErrorHandler;
+import com.alibaba.citrus.webx.servlet.PassThruSupportable;
 import com.alibaba.citrus.webx.util.ErrorHandlerHelper;
 import com.alibaba.citrus.webx.util.ErrorHandlerHelper.ExceptionCodeMapping;
-import com.alibaba.citrus.webx.util.ExcludeFilter;
+import com.alibaba.citrus.webx.util.RequestURIFilter;
 import com.alibaba.citrus.webx.util.WebxUtil;
 
-public abstract class AbstractWebxRootController implements WebxRootController {
+public abstract class AbstractWebxRootController implements WebxRootController, PassThruSupportable {
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
     /** 在request中保存request context owner的键名。 */
@@ -91,6 +92,7 @@ public abstract class AbstractWebxRootController implements WebxRootController {
     private WebxComponents components;
     private InternalRequestHandlerMapping internalHandlerMapping;
     private RequestContextChainingService requestContexts;
+    private RequestURIFilter passthruFilter;
 
     public WebxComponents getComponents() {
         return components;
@@ -102,6 +104,10 @@ public abstract class AbstractWebxRootController implements WebxRootController {
 
     public ServletContext getServletContext() {
         return getComponents().getParentApplicationContext().getServletContext();
+    }
+
+    public void setPassthruFilter(RequestURIFilter passthru) {
+        this.passthruFilter = passthru;
     }
 
     /**
@@ -157,10 +163,9 @@ public abstract class AbstractWebxRootController implements WebxRootController {
                     // 如果定义了passthru filter，则判断request是否被passthru，
                     // 对于需要被passthru的request不执行handleRequest，而直接返回。
                     // 该功能适用于仅将webx视作普通的filter，而filter chain的接下来的部分将可使用webx所提供的request contexts。
-                    ExcludeFilter passthruFilter = getWebxConfiguration().getPassthruFilter();
                     boolean requestProcessed = false;
 
-                    if (passthruFilter == null || !passthruFilter.isExcluded(request)) {
+                    if (passthruFilter == null || !passthruFilter.matches(request)) {
                         requestProcessed = handleRequest(requestContext);
                     }
 

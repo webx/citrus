@@ -175,10 +175,26 @@
 * 改进：将读取action参数的任务由performAction valve移到analyzeURL valve，从而使其它的valve也能通过rundata取得action参数。例如安全检验的valve。
   * 注意：很少有应用程序会去修改action参数。但如果有人这样做了，在新的实现下，代码可能会失效。
 
-* 新增功能：将webx当作filter使用，filter chain的下游可以使用webx所提供的request contexts功能。配置方法如下：
-  <webx-configuration>
-      <passthru>/xxx, *.yyy</passthru>
-  </webx-configuration>
+* 新增功能：将webx当作filter使用，filter chain的下游可以使用webx所提供的request contexts功能。配置方法如下（WEB-INF/web.xml）：
+
+    <filter>
+        <filter-name>webx</filter-name>
+        <filter-class>com.alibaba.citrus.webx.servlet.WebxFrameworkFilter</filter-class>
+        <init-param>
+            <param-name>excludes</param-name>
+            <param-value>*.html</param-value><!-- 让servlet引擎来处理静态页面 -->
+        </init-param>
+        <init-param>
+            <param-name>passthru</param-name>
+            <param-value>/myservlet/*, *.xxx</param-value><!-- 将以上url转给servlet处理，但在servlet中可用request contexts。 -->
+        </init-param>
+    </filter>
+
+    <servlet-mapping>
+        <servlet-name>...</servlet-name>
+        <url-pattern>/myservlet/*</url-pattern>
+        <url-pattern>*.xxx</url-pattern>
+    </servlet-mapping>
 
 * 新增pull tool：<context-exposer>可将context中的bean直接暴露到pull tools中，供模板使用。
 

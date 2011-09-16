@@ -57,7 +57,6 @@ public class WebxConfigurationSkipValidationTests {
         assertSame(factory.getBean("requestContexts"), config.getRequestContexts());
         assertSame(factory.getBean("pipeline"), config.getPipeline());
         assertEquals(null, config.getExceptionPipeline());
-        assertEquals(null, config.getPassthruFilter());
         assertEquals("/WEB-INF/webx-*.xml", config.getComponentsConfig().getComponentConfigurationLocationPattern());
     }
 }

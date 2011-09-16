@@ -42,7 +42,7 @@ import com.alibaba.citrus.webx.WebxComponent;
 import com.alibaba.citrus.webx.WebxComponents;
 import com.alibaba.citrus.webx.config.WebxConfiguration;
 import com.alibaba.citrus.webx.support.AbstractWebxController;
-import com.alibaba.citrus.webx.util.ExcludeFilter;
+import com.alibaba.citrus.webx.util.RequestURIFilter;
 import com.alibaba.citrus.webx.util.WebxUtil;
 import com.meterware.servletunit.PatchedServletRunner;
 
@@ -77,7 +77,7 @@ public class WebxFrameworkFilterTests extends AbstractWebxTests {
     }
 
     private void assertExcluded(boolean excluded, String requestURI) throws Exception {
-        ExcludeFilter excludes = getFieldValue(filter, "excludeFilter", ExcludeFilter.class);
+        RequestURIFilter excludes = getFieldValue(filter, "excludeFilter", RequestURIFilter.class);
 
         HttpServletRequest request = createMock(HttpServletRequest.class);
         HttpServletResponse response = createMock(HttpServletResponse.class);
@@ -91,7 +91,7 @@ public class WebxFrameworkFilterTests extends AbstractWebxTests {
 
         replay(request, response, filterChain);
 
-        assertEquals(excluded, excludes.isExcluded(request));
+        assertEquals(excluded, excludes.matches(request));
 
         if (excluded) {
             filter.doFilter(request, response, filterChain); // 对excluded request调用doFilter，应该立即返回

@@ -28,11 +28,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.alibaba.citrus.webx.WebxComponents;
+import com.alibaba.citrus.webx.WebxRootController;
 import com.alibaba.citrus.webx.context.WebxComponentsContext;
-import com.alibaba.citrus.webx.util.ExcludeFilter;
+import com.alibaba.citrus.webx.util.RequestURIFilter;
 
 /**
  * 初始化spring容器的filter。
@@ -40,9 +43,11 @@ import com.alibaba.citrus.webx.util.ExcludeFilter;
  * @author Michael Zhou
  */
 public class WebxFrameworkFilter extends FilterBean {
+    private final Logger log = LoggerFactory.getLogger(getClass());
     private String parentContextAttribute;
     private WebxComponents components;
-    private ExcludeFilter excludeFilter;
+    private RequestURIFilter excludeFilter;
+    private RequestURIFilter passthruFilter;
 
     /**
      * 用于在servletContext中保存parent context的attribute key。
@@ -62,7 +67,15 @@ public class WebxFrameworkFilter extends FilterBean {
      * 设置要排除掉的URL。
      */
     public void setExcludes(String excludes) {
-        excludeFilter = new ExcludeFilter(excludes);
+        excludeFilter = new RequestURIFilter(excludes);
+    }
+
+    /**
+     * 设置不需要执行pipeline的URL。该功能可被用于将webx作为其它servlet的filter，这样，
+     * 其它的servlet可以使用webx所提供的request context功能，例如：session等。
+     */
+    public void setPassthru(String passthru) {
+        passthruFilter = new RequestURIFilter(passthru);
     }
 
     /**
@@ -81,6 +94,19 @@ public class WebxFrameworkFilter extends FilterBean {
 
         if (parentContext instanceof WebxComponentsContext) {
             components = ((WebxComponentsContext) parentContext).getWebxComponents();
+        }
+
+        WebxRootController rootController = components.getWebxRootController();
+
+        if (passthruFilter != null) {
+            if (rootController instanceof PassThruSupportable) {
+                ((PassThruSupportable) rootController).setPassthruFilter(passthruFilter);
+            } else {
+                log.warn(
+                        "You have specified Passthru Filter in /WEB-INF/web.xml.  "
+                                + "It will not take effect because the implementation of WebxRootController ({}) does not support this feature.",
+                        rootController.getClass().getName());
+            }
         }
     }
 
@@ -115,7 +141,7 @@ public class WebxFrameworkFilter extends FilterBean {
             throws IOException, ServletException {
         // 如果指定了excludes，并且当前requestURI匹配任何一个exclude pattern，
         // 则立即放弃控制，将控制还给servlet engine。
-        if (excludeFilter != null && excludeFilter.isExcluded(request)) {
+        if (excludeFilter != null && excludeFilter.matches(request)) {
             chain.doFilter(request, response);
             return;
         }

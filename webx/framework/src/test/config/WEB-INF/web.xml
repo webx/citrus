@@ -18,6 +18,10 @@
     <filter>
         <filter-name>webx</filter-name>
         <filter-class>com.alibaba.citrus.webx.servlet.WebxFrameworkFilter</filter-class>
+        <init-param>
+            <param-name>passthru</param-name>
+            <param-value>/app1/plaintext.txt</param-value>
+        </init-param>
     </filter>
 
     <filter-mapping>
