@@ -140,14 +140,6 @@
 
 -- Changes in 3.0.6
 
-* 改进：为dev mode下的explorer添加安全控制。默认只能从本机访问。当从非授权的主机访问时，显示友好的提示信息。支持下面的property:
-  -DdevelopmentMode.allowedHosts=192.168.1.*
-  
-* bugfix: ClassLoaderUtil.getResources(name)中的小问题。
-
-* 改进：当uribroker.toString()时，不执行interceptors，确保intercepters总在render时被调用，而不会因为某些情况（如输出日志时）被调用。
-  解决了如下问题：原来pull service在初始化时会调用uribroker.toString()，从而调用interceptors。但此时调用interceptors可能会得到不正确的结果。
-
 * 改进：让webx同时支持spring2/3。
  （修改了一处代码，使resource loading机制可在spring3下运行；修改了若干单元测试，使它们在spring3下可以通过测试。）
   
@@ -161,20 +153,11 @@
 
 * 在开发者首页中显示webx版本、revision、spring版本；改进取得webx版本的方法，使用META-INF/MANIFEST.MF中的信息。
 
+* 安全改进：为dev mode下的explorer添加安全控制。默认只能从本机访问。当从非授权的主机访问时，显示友好的提示信息。支持下面的property:
+  -DdevelopmentMode.allowedHosts=192.168.1.*
+
 * 改进：增加MDC: %X{productionMode}，在日志中自动显示当前的生产模式或开发模式。
-
-* 增加对于spring-test的支持。
-
-* bugfix：InheritableListableBeanFactory.registerResolvableDependency()只阻止对parent context中已注册的ProxyTargetFactory对象的覆盖，
-  使ResourceLoader和ApplicationContext等对象的注入方式仍然和spring原来相同。
-
-* 将util.internal.regex.*和util.internal.ToStringBuilder等内部类升级至非internal类，以方便其它应用使用。
-
-* 将原petstore示例中的页面验证组件PageAuthorizationService和PageAuthorizationValve移植到turbine中。
-
-* 改进：将读取action参数的任务由performAction valve移到analyzeURL valve，从而使其它的valve也能通过rundata取得action参数。例如安全检验的valve。
-  * 注意：很少有应用程序会去修改action参数。但如果有人这样做了，在新的实现下，代码可能会失效。
-
+  
 * 新增功能：将webx当作filter使用，filter chain的下游可以使用webx所提供的request contexts功能。配置方法如下（WEB-INF/web.xml）：
 
     <filter>
@@ -196,8 +179,24 @@
         <url-pattern>*.xxx</url-pattern>
     </servlet-mapping>
 
-* 新增pull tool：<context-exposer>可将context中的bean直接暴露到pull tools中，供模板使用。
+* 改进：当uribroker.toString()时，不执行interceptors，确保intercepters总在render时被调用，而不会因为某些情况（如输出日志时）被调用。
+  解决了如下问题：原来pull service在初始化时会调用uribroker.toString()，从而调用interceptors。但此时调用interceptors可能会得到不正确的结果。
 
 * 修改URI broker service中requestAware的默认值，原来是true，现在改为false。
   * 当requestAware为true时，所生成的URL会自动加上当前request的server信息。这个在绝大多数情况下是不需要的。故修改之。
 
+* 将原petstore示例中的页面验证组件PageAuthorizationService和PageAuthorizationValve移植到turbine中。
+
+* 新增pull tool：<context-exposer>可将context中的bean直接暴露到pull tools中，供模板使用。
+
+* 增加对于spring-test的支持。
+
+* 改进：将读取action参数的任务由performAction valve移到analyzeURL valve，从而使其它的valve也能通过rundata取得action参数。例如安全检验的valve。
+  * 注意：很少有应用程序会去修改action参数。但如果有人这样做了，在新的实现下，代码可能会失效。
+
+* 将util.internal.regex.*和util.internal.ToStringBuilder等内部类升级至非internal类，以方便其它应用使用。
+
+* bugfix: ClassLoaderUtil.getResources(name)中的小问题。
+
+* bugfix：InheritableListableBeanFactory.registerResolvableDependency()只阻止对parent context中已注册的ProxyTargetFactory对象的覆盖，
+  使ResourceLoader和ApplicationContext等对象的注入方式仍然和spring原来相同。
