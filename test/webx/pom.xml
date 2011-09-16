@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>citrus-service-resource</artifactId>
+            <artifactId>citrus-webx-framework</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

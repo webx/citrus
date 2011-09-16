@@ -191,6 +191,8 @@
 
 * 增加对于spring-test的支持。
 
+* 增加测试工具：SpringextContextLoader和ServletTestContainer，使用方法参见citrus-test-webx单元测试。
+
 * 改进：将读取action参数的任务由performAction valve移到analyzeURL valve，从而使其它的valve也能通过rundata取得action参数。例如安全检验的valve。
   * 注意：很少有应用程序会去修改action参数。但如果有人这样做了，在新的实现下，代码可能会失效。
 
