@@ -61,7 +61,7 @@ public class AbstractURIBrokerDefinitionParser<U extends URIBroker> extends Abst
     }
 
     protected void doParseAttributes(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
-        attributesToProperties(element, builder, "charset");
+        attributesToProperties(element, builder, "charset", "requestAware");
         builder.addPropertyValue("URIType", trimToNull(element.getAttribute("type")));
     }
 

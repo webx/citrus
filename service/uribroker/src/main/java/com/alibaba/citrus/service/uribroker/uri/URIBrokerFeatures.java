@@ -41,7 +41,7 @@ import com.alibaba.citrus.util.StringEscapeUtil;
  */
 public abstract class URIBrokerFeatures implements Renderable {
     protected final Renderer renderer = new Renderer();
-    private boolean requestAware = false;
+    private Boolean requestAware;
     private HttpServletRequest request;
     private URIBroker parent;
     private boolean initialized;
@@ -60,7 +60,7 @@ public abstract class URIBrokerFeatures implements Renderable {
      * 是否自动从request中填充值。
      */
     public boolean isRequestAware() {
-        return requestAware;
+        return requestAware == null ? false : requestAware;
     }
 
     /**
@@ -68,6 +68,12 @@ public abstract class URIBrokerFeatures implements Renderable {
      */
     public void setRequestAware(boolean requestAware) {
         this.requestAware = requestAware;
+    }
+
+    public void setRequestAwareDefault(boolean requestAware) {
+        if (this.requestAware == null) {
+            this.requestAware = requestAware;
+        }
     }
 
     /**

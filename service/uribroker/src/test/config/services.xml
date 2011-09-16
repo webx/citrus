@@ -128,11 +128,12 @@
     </services:uris>
 
     <services:uris id="not-requestAware" requestAware="false">
-        <uris:uri id="link-norequest" />
-        <uris:content-uri id="contentLink-norequest" />
-        <uris:servlet-uri id="servletLink-norequest" />
-        <uris:servlet-content-uri id="servletContentLink-norequest" />
-        <uris:turbine-classic-uri id="turbineClassicLink-norequest" />
+        <uris:uri id="link-request" requestAware="true" />
+        <uris:uri id="link-norequest" requestAware="false" />
+        <uris:content-uri id="contentLink-norequest" requestAware="false" />
+        <uris:servlet-uri id="servletLink-norequest" requestAware="false" />
+        <uris:servlet-content-uri id="servletContentLink-norequest" requestAware="false" />
+        <uris:turbine-classic-uri id="turbineClassicLink-norequest" requestAware="false" />
     </services:uris>
 
     <services:uris id="noDefaultCharset" requestAware="true">

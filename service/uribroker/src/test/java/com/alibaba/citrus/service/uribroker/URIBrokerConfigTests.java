@@ -187,9 +187,13 @@ public class URIBrokerConfigTests extends AbstractURIBrokerServiceTests {
         for (String name : service.getNames()) {
             URIBroker uri = service.getURIBroker(name);
 
-            assertEquals("http:///", uri.render());
-            assertEquals("http://www.alibaba.com:9999/", uri.setServerName("www.alibaba.com").setServerPort(9999)
-                    .render());
+            if ("link-request".equals(name)) {
+                assertEquals("http://localhost/", uri.render());
+            } else {
+                assertEquals("http:///", uri.render());
+                assertEquals("http://www.alibaba.com:9999/", uri.setServerName("www.alibaba.com").setServerPort(9999)
+                        .render());
+            }
         }
     }
 

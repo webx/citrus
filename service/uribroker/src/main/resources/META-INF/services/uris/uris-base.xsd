@@ -78,6 +78,7 @@
     </xsd:group>
 
     <xsd:attributeGroup name="URIBrokerAttributes">
+        <xsd:attribute name="requestAware" type="springext:booleanOrPlaceholder" />
         <xsd:attribute name="charset" type="xsd:string" />
         <xsd:attribute name="exposed" type="springext:booleanOrPlaceholder" default="false" />
         <xsd:attribute name="extends" type="xsd:string" />

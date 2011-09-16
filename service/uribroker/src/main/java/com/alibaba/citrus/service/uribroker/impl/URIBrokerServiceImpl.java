@@ -166,7 +166,7 @@ public class URIBrokerServiceImpl extends AbstractService<URIBrokerService> impl
 
             // 除非设置了requestAware，否则保持broker中的默认值
             if (requestAware != null) {
-                broker.setRequestAware(requestAware);
+                broker.setRequestAwareDefault(requestAware);
             }
 
             // 除非设置了defaultCharset，否则保持默认的broker charset。
