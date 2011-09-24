@@ -521,7 +521,8 @@ public class FileUtil {
         return ext;
     }
 
-    private static final Pattern schemePrefixPattern = Pattern.compile("(\\w+://.+?/)|((jar|zip):.+!/)|(\\w+:)");
+    private static final Pattern schemePrefixPattern = Pattern.compile(
+            "(file:/*[a-z]:)|(\\w+://.+?/)|((jar|zip):.+!/)|(\\w+:)", Pattern.CASE_INSENSITIVE);
 
     /**
      * 根据指定url和相对路径，计算出相对路径所对应的完整url。类似于<code>URI.resolve()</code>

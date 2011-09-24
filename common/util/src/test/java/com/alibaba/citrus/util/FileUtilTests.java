@@ -482,7 +482,40 @@ public class FileUtilTests {
 
     @Test
     public void resolve() {
-        // form1: http://server/...
+        // form1: file:/c:...
+        assertEquals("file:c:/aa/bb/xx/yy", FileUtil.resolve("file:c:aa/bb/cc", "xx/yy"));
+        assertEquals("file:/z:/aa/xx/yy", FileUtil.resolve("file:/z:aa/bb/cc", "../xx/yy"));
+        assertEquals("file://z:/aa/xx/yy", FileUtil.resolve("file://z:aa/bb/cc", "../xx/yy"));
+
+        try {
+            FileUtil.resolve("file:h:aa/bb/cc", "../../../xx/yy");
+            fail();
+        } catch (IllegalPathException e) {
+            assertThat(e, exception("aa/bb/cc/../../../../xx/yy"));
+        }
+
+        try {
+            FileUtil.resolve("file:/z:aa/bb/cc", "../../../xx/yy");
+            fail();
+        } catch (IllegalPathException e) {
+            assertThat(e, exception("aa/bb/cc/../../../../xx/yy"));
+        }
+
+        try {
+            FileUtil.resolve("file://z:aa/bb/cc", "../../../xx/yy");
+            fail();
+        } catch (IllegalPathException e) {
+            assertThat(e, exception("aa/bb/cc/../../../../xx/yy"));
+        }
+
+        try {
+            FileUtil.resolve("file:///z:aa/bb/cc", "../../../xx/yy");
+            fail();
+        } catch (IllegalPathException e) {
+            assertThat(e, exception("aa/bb/cc/../../../../xx/yy"));
+        }
+
+        // form2: http://server/...
         assertEquals("http://www.taobao.com:8080/aa/bb/xx/yy",
                 FileUtil.resolve("http://www.taobao.com:8080/aa/bb/cc", "xx/yy"));
 
@@ -496,7 +529,7 @@ public class FileUtilTests {
             assertThat(e, exception("/aa/bb/cc/../../../../xx/yy"));
         }
 
-        // form2: jar:url!/...
+        // form3: jar:url!/...
         assertEquals("jar:http://www.taobao.com:8080/my.jar!/aa/bb/xx/yy",
                 FileUtil.resolve("jar:http://www.taobao.com:8080/my.jar!/aa/bb/cc", "xx/yy"));
 
@@ -510,13 +543,87 @@ public class FileUtilTests {
             assertThat(e, exception("/aa/bb/cc/../../../../xx/yy"));
         }
 
-        // form3: file:/...
+        // form4: file:/...
         assertEquals("file:/aa/bb/xx/yy", FileUtil.resolve("file:aa/bb/cc", "xx/yy"));
-
         assertEquals("file:/aa/xx/yy", FileUtil.resolve("file:aa/bb/cc", "../xx/yy"));
 
         try {
             FileUtil.resolve("file:aa/bb/cc", "../../../xx/yy");
+            fail();
+        } catch (IllegalPathException e) {
+            assertThat(e, exception("aa/bb/cc/../../../../xx/yy"));
+        }
+    }
+
+    @Test
+    public void resolve_uppercase() {
+        // form1: FILE:/C:...
+        assertEquals("FILE:C:/aa/bb/xx/yy", FileUtil.resolve("FILE:C:aa/bb/cc", "xx/yy"));
+        assertEquals("FILE:/Z:/aa/xx/yy", FileUtil.resolve("FILE:/Z:aa/bb/cc", "../xx/yy"));
+        assertEquals("FILE://Z:/aa/xx/yy", FileUtil.resolve("FILE://Z:aa/bb/cc", "../xx/yy"));
+
+        try {
+            FileUtil.resolve("FILE:H:aa/bb/cc", "../../../xx/yy");
+            fail();
+        } catch (IllegalPathException e) {
+            assertThat(e, exception("aa/bb/cc/../../../../xx/yy"));
+        }
+
+        try {
+            FileUtil.resolve("FILE:/Z:aa/bb/cc", "../../../xx/yy");
+            fail();
+        } catch (IllegalPathException e) {
+            assertThat(e, exception("aa/bb/cc/../../../../xx/yy"));
+        }
+
+        try {
+            FileUtil.resolve("FILE://Z:aa/bb/cc", "../../../xx/yy");
+            fail();
+        } catch (IllegalPathException e) {
+            assertThat(e, exception("aa/bb/cc/../../../../xx/yy"));
+        }
+
+        try {
+            FileUtil.resolve("FILE:///Z:aa/bb/cc", "../../../xx/yy");
+            fail();
+        } catch (IllegalPathException e) {
+            assertThat(e, exception("aa/bb/cc/../../../../xx/yy"));
+        }
+
+        // form2: HTTP://server/...
+        assertEquals("HTTP://www.taobao.com:8080/aa/bb/xx/yy",
+                FileUtil.resolve("HTTP://www.taobao.com:8080/aa/bb/cc", "xx/yy"));
+
+        assertEquals("HTTP://www.taobao.com:8080/aa/xx/yy",
+                FileUtil.resolve("HTTP://www.taobao.com:8080/aa/bb/cc", "../xx/yy"));
+
+        try {
+            FileUtil.resolve("HTTP://www.taobao.com:8080/aa/bb/cc", "../../../xx/yy");
+            fail();
+        } catch (IllegalPathException e) {
+            assertThat(e, exception("/aa/bb/cc/../../../../xx/yy"));
+        }
+
+        // form3: JAR:url!/...
+        assertEquals("JAR:HTTP://www.taobao.com:8080/my.jar!/aa/bb/xx/yy",
+                FileUtil.resolve("JAR:HTTP://www.taobao.com:8080/my.jar!/aa/bb/cc", "xx/yy"));
+
+        assertEquals("JAR:HTTP://www.taobao.com:8080/my.jar!/aa/xx/yy",
+                FileUtil.resolve("JAR:HTTP://www.taobao.com:8080/my.jar!/aa/bb/cc", "../xx/yy"));
+
+        try {
+            FileUtil.resolve("zip:HTTP://www.taobao.com:8080/my.jar!/aa/bb/cc", "../../../xx/yy");
+            fail();
+        } catch (IllegalPathException e) {
+            assertThat(e, exception("/aa/bb/cc/../../../../xx/yy"));
+        }
+
+        // form4: FILE:/...
+        assertEquals("FILE:/aa/bb/xx/yy", FileUtil.resolve("FILE:aa/bb/cc", "xx/yy"));
+        assertEquals("FILE:/aa/xx/yy", FileUtil.resolve("FILE:aa/bb/cc", "../xx/yy"));
+
+        try {
+            FileUtil.resolve("FILE:aa/bb/cc", "../../../xx/yy");
             fail();
         } catch (IllegalPathException e) {
             assertThat(e, exception("aa/bb/cc/../../../../xx/yy"));

@@ -74,7 +74,7 @@ public class WebxRootControllerTests extends AbstractWebxTests {
         invokeServlet("/app1/plaintext2.txt");
 
         assertEquals(200, clientResponseCode);
-        assertEquals("hello!\n", clientResponseContent); // text from valve
+        assertEquals("hello!", clientResponseContent.trim()); // text from valve
     }
 
     @Test
