@@ -30,10 +30,19 @@ public class AuthMatch {
 
     @Override
     public String toString() {
+        return toString(-1);
+    }
+
+    public String toString(int matchedGrantIndex) {
         MapBuilder mb = new MapBuilder();
 
         mb.append("pattern", pattern);
-        mb.append("grants", grants);
+
+        if (matchedGrantIndex < 0 || matchedGrantIndex >= grants.length) {
+            mb.append("grants", grants);
+        } else {
+            mb.append("grants[" + matchedGrantIndex + "]", grants[matchedGrantIndex]);
+        }
 
         return new ToStringBuilder().append("Match").append(mb).toString();
     }

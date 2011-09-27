@@ -33,6 +33,10 @@
                 <allow>read</allow>
             </grant>
             <grant user="anonymous">
+                <!-- 被后面的覆盖 -->
+                <deny>write</deny>
+            </grant>
+            <grant user="anonymous">
                 <allow>write</allow>
             </grant>
         </match>

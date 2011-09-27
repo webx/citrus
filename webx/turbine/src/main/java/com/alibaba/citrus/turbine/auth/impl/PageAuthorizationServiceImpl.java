@@ -130,7 +130,10 @@ public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizat
         for (MatchResult result : results) {
             AuthMatch match = result.match;
 
-            for (AuthGrant grant : match.getGrants()) {
+            // 倒序检查grant，后面的覆盖前面的。
+            for (int i = match.getGrants().length - 1; i >= 0; i--) {
+                AuthGrant grant = match.getGrants()[i];
+
                 // 判断user或role是否匹配
                 boolean userMatch = grant.isUserMatched(userName);
                 boolean roleMatch = grant.areRolesMatched(roleNames);
@@ -148,16 +151,16 @@ public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizat
                                 getLogger()
                                         .trace("Access Partially Permitted: target=\"{}\", user=\"{}\", roles={}, action=\"{}\"\n{}",
                                                 new Object[] { target, userName, ObjectUtil.toString(roleNames),
-                                                        action, match });
+                                                        action, match.toString(i) });
                             }
 
                             return TRUE;
                         } else {
                             if (getLogger().isWarnEnabled()) {
-                                getLogger()
-                                        .warn("Access Denied: target=\"{}\", user=\"{}\", roles={}, action=\"{}\"\n{}",
-                                                new Object[] { target, userName, ObjectUtil.toString(roleNames),
-                                                        action, match });
+                                getLogger().warn(
+                                        "Access Denied: target=\"{}\", user=\"{}\", roles={}, action=\"{}\"\n{}",
+                                        new Object[] { target, userName, ObjectUtil.toString(roleNames), action,
+                                                match.toString(i) });
                             }
 
                             return FALSE;

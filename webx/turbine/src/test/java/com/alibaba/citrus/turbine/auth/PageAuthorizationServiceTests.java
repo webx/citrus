@@ -30,7 +30,8 @@ public class PageAuthorizationServiceTests {
                 match("/user/public", //
                         // grants
                         grant(null, "*", "action", null), // 
-                        grant("*", null, "read", null), // 
+                        grant("*", null, "read", null), //
+                        grant("anonymous", null, null, "write"), // 这句将被下面一行覆盖
                         grant("anonymous", null, "write", null)), //
                 match("/**/*.vm", grant(null, "*", "*", null)) //
         });
