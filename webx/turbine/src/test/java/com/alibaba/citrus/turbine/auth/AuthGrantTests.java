@@ -130,19 +130,25 @@ public class AuthGrantTests {
         assertFalse(grant.isUserMatched("baobao"));
 
         // * except anonymous
-        grant.setUsers(new String[] { "*" });
+        grant.setUsers(new String[] { new String("*") /* new instance */});
         assertFalse(grant.isUserMatched(null));
         assertTrue(grant.isUserMatched("baobao"));
+        assertTrue(grant.isUserMatched("anonymous")); // 注意：用户名允许使用anonymous，但不代表真正的匿名用户
 
         // * and anonymous
-        grant.setUsers(new String[] { "*", "anonymous" });
+        grant.setUsers(new String[] { new String("*") /* new instance */, new String("anonymous") /*
+                                                                                                   * new
+                                                                                                   * instance
+                                                                                                   */});
         assertTrue(grant.isUserMatched(null));
         assertTrue(grant.isUserMatched("baobao"));
+        assertTrue(grant.isUserMatched("anonymous")); // 注意：用户名允许使用anonymous，但不代表真正的匿名用户
 
         // specific name
         grant.setUsers(new String[] { "baobao" });
         assertFalse(grant.isUserMatched(null));
         assertTrue(grant.isUserMatched("baobao"));
+        assertFalse(grant.isUserMatched("anonymous")); // 注意：用户名允许使用anonymous，但不代表真正的匿名用户
     }
 
     @Test
@@ -152,7 +158,7 @@ public class AuthGrantTests {
         assertFalse(grant.areRolesMatched(new String[] { "admin" }));
 
         // * except anonymous
-        grant.setRoles(new String[] { "*" });
+        grant.setRoles(new String[] { new String("*") /* new instance */});
         assertFalse(grant.areRolesMatched(new String[0]));
         assertFalse(grant.areRolesMatched(new String[] { null }));
         assertTrue(grant.areRolesMatched(new String[] { "admin" }));

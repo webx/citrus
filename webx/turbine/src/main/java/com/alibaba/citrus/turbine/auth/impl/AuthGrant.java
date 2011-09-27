@@ -22,7 +22,7 @@ public class AuthGrant {
     /** MATCH_EVERYTHING代表所有用户和role，但不包含匿名用户 */
     public final static String MATCH_EVERYTHING = "*";
 
-    /** 特列用户名：匿名用户 */
+    /** 特例用户名：匿名用户 */
     public final static String ANONYMOUS_USER = "anonymous";
 
     private String[] users;
@@ -35,7 +35,7 @@ public class AuthGrant {
     }
 
     public void setUsers(String[] users) {
-        this.users = trim(users);
+        this.users = trim(users, MATCH_EVERYTHING, ANONYMOUS_USER);
     }
 
     public String[] getRoles() {
@@ -43,10 +43,10 @@ public class AuthGrant {
     }
 
     public void setRoles(String[] roles) {
-        this.roles = trim(roles);
+        this.roles = trim(roles, MATCH_EVERYTHING);
     }
 
-    private String[] trim(String[] array) {
+    private String[] trim(String[] array, String... canonicals) {
         List<String> list = createLinkedList();
 
         if (!isEmptyArray(array)) {
@@ -54,6 +54,15 @@ public class AuthGrant {
                 item = trimToNull(item);
 
                 if (item != null) {
+                    // 优化性能，避免字符串的比较，只需要用==比较即可。
+                    if (canonicals != null) {
+                        int i = arrayIndexOf(canonicals, item);
+
+                        if (i >= 0) {
+                            item = canonicals[i];
+                        }
+                    }
+
                     list.add(item);
                 }
             }
@@ -68,12 +77,19 @@ public class AuthGrant {
 
     public boolean isUserMatched(String userName) {
         if (!isEmptyArray(users)) {
-            userName = defaultIfNull(userName, ANONYMOUS_USER);
-
             for (String grantUser : users) {
-                if (grantUser.equals(MATCH_EVERYTHING) && !ANONYMOUS_USER.equals(userName)
-                        || grantUser.equals(userName)) {
-                    return true;
+                if (grantUser == ANONYMOUS_USER) {
+                    if (userName == null) {
+                        return true;
+                    }
+                } else if (grantUser == MATCH_EVERYTHING) {
+                    if (userName != null) {
+                        return true;
+                    }
+                } else {
+                    if (grantUser.equals(userName)) {
+                        return true;
+                    }
                 }
             }
         }
@@ -83,20 +99,26 @@ public class AuthGrant {
 
     public boolean areRolesMatched(String[] roleNames) {
         if (!isEmptyArray(roles)) {
-            boolean emptyRoleNames = true;
-
-            if (!isEmptyArray(roleNames)) {
-                for (String roleName : roleNames) {
-                    if (roleName != null) {
-                        emptyRoleNames = false;
-                        break;
-                    }
-                }
-            }
-
             for (String grantRole : roles) {
-                if (grantRole.equals(MATCH_EVERYTHING) && !emptyRoleNames || arrayContains(roleNames, grantRole)) {
-                    return true;
+                if (grantRole == MATCH_EVERYTHING) {
+                    boolean emptyRoleNames = true;
+
+                    if (!isEmptyArray(roleNames)) {
+                        for (String roleName : roleNames) {
+                            if (roleName != null) {
+                                emptyRoleNames = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (!emptyRoleNames) {
+                        return true;
+                    }
+                } else {
+                    if (arrayContains(roleNames, grantRole)) {
+                        return true;
+                    }
                 }
             }
         }

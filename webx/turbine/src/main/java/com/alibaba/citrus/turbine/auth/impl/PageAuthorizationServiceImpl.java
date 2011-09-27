@@ -4,7 +4,6 @@ import static com.alibaba.citrus.turbine.auth.impl.PageAuthorizationServiceImpl.
 import static com.alibaba.citrus.util.ArrayUtil.*;
 import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
-import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static java.lang.Boolean.*;
 import static java.util.Collections.*;
@@ -62,7 +61,7 @@ public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizat
     }
 
     public PageAuthorizationResult authorize(String target, String userName, String[] roleNames, String... actions) {
-        userName = defaultIfNull(trimToNull(userName), AuthGrant.ANONYMOUS_USER);
+        userName = trimToNull(userName);
 
         if (actions == null) {
             actions = new String[] { EMPTY_STRING };
