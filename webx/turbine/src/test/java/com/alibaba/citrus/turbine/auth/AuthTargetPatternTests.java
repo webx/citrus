@@ -62,11 +62,21 @@ public class AuthTargetPatternTests {
         assertMatches(false, "/at/estb");
         assertMatches(false, "t/est");
         assertMatches(false, "t/est/");
+
+        // root path
+        pattern = new AuthTargetPattern("/");
+
+        assertMatches(true, null);
+        assertMatches(true, " ");
+        assertMatches(true, " /");
     }
 
     private void assertMatches(boolean matches, String s) {
         assertEquals(s, matches, pattern.matcher(s).find());
-        assertEquals(s, matches, pattern.getPattern().matcher(s).find());
+
+        if (s != null) {
+            assertEquals(s, matches, pattern.getPattern().matcher(s).find());
+        }
     }
 
     @Test

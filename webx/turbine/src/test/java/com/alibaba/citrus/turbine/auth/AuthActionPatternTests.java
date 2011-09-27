@@ -55,11 +55,21 @@ public class AuthActionPatternTests {
         assertMatches(false, "at.est");
         assertMatches(false, "t.estb");
         assertMatches(false, "at.estb");
+
+        // root path
+        pattern = new AuthActionPattern(".");
+
+        assertMatches(true, null);
+        assertMatches(true, " ");
+        assertMatches(true, " .");
     }
 
     private void assertMatches(boolean matches, String s) {
         assertEquals(s, matches, pattern.matcher(s).find());
-        assertEquals(s, matches, pattern.getPattern().matcher(s).find());
+
+        if (s != null) {
+            assertEquals(s, matches, pattern.getPattern().matcher(s).find());
+        }
     }
 
     @Test

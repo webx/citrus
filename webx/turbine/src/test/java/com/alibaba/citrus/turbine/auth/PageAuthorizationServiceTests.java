@@ -53,6 +53,11 @@ public class PageAuthorizationServiceTests {
     }
 
     @Test
+    public void noTarget() {
+        assertAuth(TARGET_NOT_MATCH, null, null, ADMIN_ROLE, (String[]) null);
+    }
+
+    @Test
     public void noAction() {
         // allow=*, actions=null
         assertAuth(ALLOWED, "/test.vm", null, ADMIN_ROLE, (String[]) null);

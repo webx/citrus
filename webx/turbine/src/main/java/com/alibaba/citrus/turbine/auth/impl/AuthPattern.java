@@ -1,5 +1,7 @@
 package com.alibaba.citrus.turbine.auth.impl;
 
+import static com.alibaba.citrus.util.BasicConstant.*;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,7 +32,7 @@ public abstract class AuthPattern {
     }
 
     public Matcher matcher(String s) {
-        return pattern.matcher(s);
+        return pattern.matcher(s == null ? EMPTY_STRING : s);
     }
 
     @Override
