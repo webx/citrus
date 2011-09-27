@@ -87,11 +87,11 @@ public class PageAuthorizationValve extends AbstractValve {
         // 3. 将要执行的actions，例如：screen、action.xxx.UserAction
         if (pageAuthorizationService.isAllow(target, userName, roleNames, actions.toArray(new String[actions.size()]))) {
             cb.onAllow(status);
+            pipelineContext.invokeNext();
         } else {
             cb.onDeny(status);
+            // end of pipeline
         }
-
-        pipelineContext.invokeNext();
     }
 
     public interface Callback<T> {

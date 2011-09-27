@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.alibaba.citrus.service.pipeline.PipelineContext;
+import com.alibaba.citrus.service.pipeline.Valve;
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.turbine.pipeline.valve.PageAuthorizationValve.Callback;
@@ -24,12 +26,14 @@ public class PageAuthorizationValveTests extends AbstractValveTests {
         pipeline.newInvocation().invoke();
         assertFalse(status.allowed);
         assertTrue(status.denied);
+        assertEquals(status.allowed, status.myValveInvoked);
 
         status = MyCallback.newStatus();
         status.user = "baobao";
         pipeline.newInvocation().invoke();
         assertTrue(status.allowed);
         assertFalse(status.denied);
+        assertEquals(status.allowed, status.myValveInvoked);
     }
 
     @Test
@@ -42,6 +46,7 @@ public class PageAuthorizationValveTests extends AbstractValveTests {
         pipeline.newInvocation().invoke();
         assertFalse(status.allowed);
         assertTrue(status.denied);
+        assertEquals(status.allowed, status.myValveInvoked);
 
         status = MyCallback.newStatus();
         status.user = "other";
@@ -49,6 +54,7 @@ public class PageAuthorizationValveTests extends AbstractValveTests {
         pipeline.newInvocation().invoke();
         assertTrue(status.allowed);
         assertFalse(status.denied);
+        assertEquals(status.allowed, status.myValveInvoked);
     }
 
     @Test
@@ -60,6 +66,7 @@ public class PageAuthorizationValveTests extends AbstractValveTests {
         pipeline.newInvocation().invoke();
         assertFalse(status.allowed);
         assertTrue(status.denied);
+        assertEquals(status.allowed, status.myValveInvoked);
 
         getInvocationContext("http://localhost/app1/bbb/myModule.jsp?action=bbb/MyAction");
         initRequestContext();
@@ -68,12 +75,14 @@ public class PageAuthorizationValveTests extends AbstractValveTests {
         pipeline.newInvocation().invoke();
         assertTrue(status.allowed);
         assertFalse(status.denied);
+        assertEquals(status.allowed, status.myValveInvoked);
 
         status = MyCallback.newStatus();
         status.actions = new String[] { "myaction" };
         pipeline.newInvocation().invoke();
         assertFalse(status.allowed);
         assertTrue(status.denied);
+        assertEquals(status.allowed, status.myValveInvoked);
     }
 
     @Test
@@ -85,6 +94,7 @@ public class PageAuthorizationValveTests extends AbstractValveTests {
         pipeline.newInvocation().invoke();
         assertFalse(status.allowed);
         assertTrue(status.denied);
+        assertEquals(status.allowed, status.myValveInvoked);
     }
 
     @Test
@@ -96,6 +106,7 @@ public class PageAuthorizationValveTests extends AbstractValveTests {
         pipeline.newInvocation().invoke();
         assertFalse(status.allowed);
         assertTrue(status.denied);
+        assertEquals(status.allowed, status.myValveInvoked);
 
         getInvocationContext("http://localhost/app1/ddd/myModule.jsp?action=ddd/MyAction&event_submit_do_my_event=y");
         initRequestContext();
@@ -104,6 +115,7 @@ public class PageAuthorizationValveTests extends AbstractValveTests {
         pipeline.newInvocation().invoke();
         assertTrue(status.allowed);
         assertFalse(status.denied);
+        assertEquals(status.allowed, status.myValveInvoked);
     }
 
     public static class MyCallback implements Callback<Status> {
@@ -147,10 +159,18 @@ public class PageAuthorizationValveTests extends AbstractValveTests {
     }
 
     private static class Status {
+        boolean myValveInvoked;
         String user;
         String[] roles;
         String[] actions;
         boolean allowed;
         boolean denied;
+    }
+
+    public static class MyValve implements Valve {
+        public void invoke(PipelineContext pipelineContext) throws Exception {
+            MyCallback.statusHolder.get().myValveInvoked = true;
+            pipelineContext.invokeNext();
+        }
     }
 }

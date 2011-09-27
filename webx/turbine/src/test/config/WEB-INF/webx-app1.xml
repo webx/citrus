@@ -125,8 +125,9 @@
     <services:pipeline id="pageAuthValve" lazy-init="true">
         <valves:analyzeURL />
         <valves:pageAuthorization
-            callbackClass="com.alibaba.citrus.turbine.pipeline.valve.PageAuthorizationValveTests$MyCallback"
-         />
+            callbackClass="com.alibaba.citrus.turbine.pipeline.valve.PageAuthorizationValveTests$MyCallback" />
+        <valves:valve
+            class="com.alibaba.citrus.turbine.pipeline.valve.PageAuthorizationValveTests$MyValve" />
     </services:pipeline>
 
     <services:module-loader id="moduleLoaderService">
