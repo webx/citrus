@@ -23,6 +23,7 @@ import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
@@ -183,28 +184,33 @@ public class JspEngineTests extends AbstractJspEngineTests {
         initFactory();
 
         assertEquals(true, engine.exists("/test.jsp"));
+        assertEquals(true, engine.exists("/test.jspx"));
         assertEquals(false, engine.exists("/not/exist.jsp"));
 
         assertEquals(true, templateService.exists("/test.jsp"));
+        assertEquals(true, templateService.exists("/test.jspx"));
         assertEquals(false, templateService.exists("/not/exist.jsp"));
     }
 
     @Test
     public void render_getText() throws Exception {
-        render(1);
+        render(1, false);
+        render(1, true);
     }
 
     @Test
     public void render_writeToStream() throws Exception {
-        render(2);
+        render(2, false);
+        render(2, true);
     }
 
     @Test
     public void render_writeToWriter() throws Exception {
-        render(3);
+        render(3, false);
+        render(3, true);
     }
 
-    private void render(int type) throws Exception {
+    private void render(int type, boolean jspx) throws Exception {
         initServlet("webapp/WEB-INF/web.xml");
         initFactory();
 
@@ -223,18 +229,20 @@ public class JspEngineTests extends AbstractJspEngineTests {
             TemplateContext context = new MappedTemplateContext();
             context.put("hello", "中国");
 
+            String jsp = jspx ? "/test.jspx" : "/test.jsp";
+
             // 渲染
             switch (type) {
                 case 1:
-                    assertEquals("", templateService.getText("/test.jsp", context));
+                    assertEquals("", templateService.getText(jsp, context));
                     break;
 
                 case 2:
-                    templateService.writeTo("/test.jsp", context, (OutputStream) null);
+                    templateService.writeTo(jsp, context, (OutputStream) null);
                     break;
 
                 case 3:
-                    templateService.writeTo("/test.jsp", context, (Writer) null);
+                    templateService.writeTo(jsp, context, (Writer) null);
                     break;
 
                 default:
@@ -403,6 +411,27 @@ public class JspEngineTests extends AbstractJspEngineTests {
 
         public void setAttribute(String name, Object object) {
             servletContext.setAttribute(name, object);
+        }
+    }
+
+    /**
+     * 由于jasper不支持jspx，故做一个假的servlet仅用于测试。在新版的tomcat中，将自动支持jspx。
+     */
+    public static class FakeJspxServlet extends HttpServlet {
+        private static final long serialVersionUID = 780039704847320821L;
+
+        @Override
+        protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+                IOException {
+            String jspx = (String) request.getAttribute("javax.servlet.include.servlet_path");
+
+            if (jspx.endsWith(".jspx")) {
+                jspx = jspx.substring(0, jspx.length() - ".jspx".length()) + ".jsp";
+            }
+
+            RequestDispatcher rd = getServletContext().getRequestDispatcher(jspx);
+
+            rd.include(request, response);
         }
     }
 }

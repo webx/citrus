@@ -196,6 +196,8 @@
 * 改进：将读取action参数的任务由performAction valve移到analyzeURL valve，从而使其它的valve也能通过rundata取得action参数。例如安全检验的valve。
   * 注意：很少有应用程序会去修改action参数。但如果有人这样做了，在新的实现下，代码可能会失效。
 
+* 改进：JspService支持jspx后缀。
+
 * 将util.internal.regex.*和util.internal.ToStringBuilder等内部类升级至非internal类，以方便其它应用使用。
 
 * bugfix: ClassLoaderUtil.getResources(name)中的小问题。

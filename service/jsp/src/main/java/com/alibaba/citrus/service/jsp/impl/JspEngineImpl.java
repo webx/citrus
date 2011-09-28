@@ -136,7 +136,7 @@ public class JspEngineImpl extends AbstractService<JspEngine> implements JspEngi
      * </p>
      */
     public String[] getDefaultExtensions() {
-        return new String[] { "jsp" };
+        return new String[] { "jsp", "jspx" };
     }
 
     /**

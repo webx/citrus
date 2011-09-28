@@ -15,4 +15,14 @@
         <url-pattern>/app1/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>jspx</servlet-name>
+        <servlet-class>com.alibaba.citrus.service.jsp.JspEngineTests$FakeJspxServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>jspx</servlet-name>
+        <url-pattern>*.jspx</url-pattern>
+    </servlet-mapping>
+
 </web-app>
