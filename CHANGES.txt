@@ -208,3 +208,5 @@
   使ResourceLoader和ApplicationContext等对象的注入方式仍然和spring原来相同。
 
 * 确保在java7下面可以编译并测试通过。
+
+-- Changes in 3.0.7
