@@ -24,6 +24,7 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+
 import org.junit.Test;
 
 import com.alibaba.citrus.service.form.Validator;
@@ -38,7 +39,7 @@ public abstract class AbstractCompositeValidatorTests<V extends AbstractComposit
     public void init_setValidators() {
         V v = newValidatorFor_AbstractCompositeValidatorTests();
 
-        v.setValidators(createArrayList((Validator) new MyValidator(), new MyValidator(), new MyValidator()));
+        v.setValidators(createValidatorList((Validator) new MyValidator(), new MyValidator(), new MyValidator()));
 
         assertEquals(3, v.getValidators().size());
 
@@ -55,7 +56,7 @@ public abstract class AbstractCompositeValidatorTests<V extends AbstractComposit
 
         // set null validator
         try {
-            v.setValidators(createArrayList((Validator) null));
+            v.setValidators(createValidatorList((Validator) null));
             fail();
         } catch (IllegalArgumentException e) {
             assertThat(e, exception("validator"));
@@ -76,7 +77,7 @@ public abstract class AbstractCompositeValidatorTests<V extends AbstractComposit
 
         replay(fieldConfig, v1, v2, v3);
 
-        v.setValidators(createArrayList(v1, v2, v3));
+        v.setValidators(createValidatorList(v1, v2, v3));
 
         v.init(fieldConfig);
 
@@ -96,7 +97,7 @@ public abstract class AbstractCompositeValidatorTests<V extends AbstractComposit
 
         replay(v1, v2, v1copy, v2copy);
 
-        v.setValidators(createArrayList(v1, v2));
+        v.setValidators(createValidatorList(v1, v2));
 
         @SuppressWarnings("unchecked")
         V vcopy = (V) v.clone();
@@ -124,6 +125,10 @@ public abstract class AbstractCompositeValidatorTests<V extends AbstractComposit
         Validator v2 = createMock(Validator.class);
         Validator v3 = createMock(Validator.class);
 
-        validator.setValidators(createArrayList(v1, v2, v3));
+        validator.setValidators(createValidatorList(v1, v2, v3));
+    }
+
+    protected final List<Validator> createValidatorList(Validator... validators) {
+        return createArrayList(validators);
     }
 }

@@ -572,7 +572,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
         assertEquals("http:///a11/a22/b11/b22/c11/c22", broker.toString());
 
         // set / clear and add
-        broker.setPathSegment(1, createArrayList("B11", "B22"));
+        broker.setPathSegment(1, createStringList("B11", "B22"));
         assertEquals("http:///a11/a22/B11/B22/c11/c22", broker.toString());
 
         broker.clearPathSegment(0);
@@ -614,7 +614,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
         assertEquals("/aaa/bbb/ccc", broker.getPath());
         assertArrayEquals(new String[] { "aaa", "bbb", "ccc" }, broker.getPathElements().toArray(new String[0]));
 
-        broker.setPathElements(createArrayList("ddd", " /eee/fff "));
+        broker.setPathElements(createStringList("ddd", " /eee/fff "));
         assertEquals("/ddd/eee/fff", broker.getPath());
         assertArrayEquals(new String[] { "ddd", "eee", "fff" }, broker.getPathElements().toArray(new String[0]));
     }
@@ -927,7 +927,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
         assertRenderer(broker, false, true, true, "https://user:pass1@localhost/aa/bb?a=1&b=2#ref");
 
         // setPath
-        broker.setPathElements(createArrayList("cc/dd"));
+        broker.setPathElements(createStringList("cc/dd"));
         assertRenderer(broker, true, false, true, "https://user:pass@localhost/cc/dd?a=1&b=2#ref");
 
         // addPath

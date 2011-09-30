@@ -74,6 +74,7 @@ import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 import com.alibaba.citrus.util.Assert;
+import com.alibaba.citrus.util.CollectionUtil;
 
 public class SpringExtUtil {
     private static final Logger log = LoggerFactory.getLogger(SpringExtUtil.class);
@@ -212,7 +213,13 @@ public class SpringExtUtil {
     public static void attributesToProperties(Element element, String propertyPrefix, BeanDefinitionBuilder builder,
                                               String... attrNames) {
         NamedNodeMap attrs = element.getAttributes();
-        Set<String> attrNameSet = isEmptyArray(attrNames) ? null : createHashSet(attrNames);
+        Set<String> attrNameSet;
+
+        if (isEmptyArray(attrNames)) {
+            attrNameSet = null;
+        } else {
+            attrNameSet = createHashSet(attrNames);
+        }
 
         for (int i = 0; i < attrs.getLength(); i++) {
             Attr attr = (Attr) attrs.item(i);

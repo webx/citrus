@@ -42,7 +42,7 @@ public class IfValidatorTests extends AbstractSimpleCompositeValidatorTests<IfVa
     @Test
     public void init_noCondition() throws Exception {
         IfValidator v = newValidator();
-        v.setValidators(createArrayList((Validator) new MyValidator()));
+        v.setValidators(createValidatorList((Validator) new MyValidator()));
 
         try {
             v.afterPropertiesSet();

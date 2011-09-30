@@ -24,6 +24,7 @@ import static org.easymock.EasyMock.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -210,7 +211,7 @@ public abstract class AbstractURIBrokerFeaturesTests<B extends URIBroker> {
         assertArrayEquals(new Object[] { i1, i2 }, broker.getInterceptors().toArray(new Object[2]));
 
         // set
-        broker.setInterceptors(createArrayList(i2, i1));
+        broker.setInterceptors(createInterceptorList(i2, i1));
         assertTrue(broker.hasInterceptors());
         assertEquals(2, broker.getInterceptors().size());
         assertArrayEquals(new Object[] { i2, i1 }, broker.getInterceptors().toArray(new Object[2]));
@@ -486,5 +487,13 @@ public abstract class AbstractURIBrokerFeaturesTests<B extends URIBroker> {
         protected URIBroker newInstance() {
             return instance;
         }
+    }
+
+    protected final List<String> createStringList(String... strs) {
+        return createArrayList(strs);
+    }
+
+    protected final List<URIBrokerInterceptor> createInterceptorList(URIBrokerInterceptor... interceptors) {
+        return createArrayList(interceptors);
     }
 }

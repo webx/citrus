@@ -18,7 +18,6 @@
 package com.alibaba.citrus.service.form.configuration;
 
 import static com.alibaba.citrus.test.TestUtil.*;
-import static com.alibaba.citrus.util.CollectionUtil.*;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
@@ -31,14 +30,13 @@ import org.springframework.beans.SimpleTypeConverter;
 
 import com.alibaba.citrus.service.configuration.support.PropertyEditorRegistrarsSupport;
 import com.alibaba.citrus.service.form.FormService;
-import com.alibaba.citrus.service.form.configuration.GroupConfig.Import;
 import com.alibaba.citrus.service.form.impl.MyPropertyEditorRegistrar;
 import com.alibaba.citrus.service.form.impl.configuration.FieldConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.FormConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.GroupConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.GroupConfigImpl.ImportImpl;
 
-public class FormConfigTests {
+public class FormConfigTests extends AbstractConfigTests {
     private FormConfigImpl formConfig;
     private GroupConfigImpl group1;
     private GroupConfigImpl group2;
@@ -51,19 +49,19 @@ public class FormConfigTests {
 
         group1 = new GroupConfigImpl();
         group1.setName("grOUp1");
-        group1.setFieldConfigImplList(createArrayList(createField("field1")));
+        group1.setFieldConfigImplList(createFieldList(createField("field1")));
 
         group2 = new GroupConfigImpl();
         group2.setName("group2");
-        group2.setFieldConfigImplList(createArrayList(createField("field2")));
+        group2.setFieldConfigImplList(createFieldList(createField("field2")));
 
         group3 = new GroupConfigImpl();
         group3.setName("GROUP3");
-        group3.setFieldConfigImplList(createArrayList(createField("field3")));
+        group3.setFieldConfigImplList(createFieldList(createField("field3")));
 
         group4 = new GroupConfigImpl();
         group4.setName("group4");
-        group4.setFieldConfigImplList(createArrayList(createField("field4"), createField("field4.2")));
+        group4.setFieldConfigImplList(createFieldList(createField("field4"), createField("field4.2")));
     }
 
     private FieldConfigImpl createField(String fieldName) {
@@ -117,14 +115,14 @@ public class FormConfigTests {
 
         // group name is null
         try {
-            initForm(createArrayList(new GroupConfigImpl()));
+            initForm(createGroupList(new GroupConfigImpl()));
             fail();
         } catch (IllegalArgumentException e) {
             assertThat(e, exception("name"));
         }
 
         // set groups
-        initForm(createArrayList(group1, group2, group3));
+        initForm(createGroupList(group1, group2, group3));
 
         assertEquals(3, formConfig.getGroupConfigList().size());
         assertArrayEquals(new Object[] { group1, group2, group3 }, formConfig.getGroupConfigList().toArray());
@@ -146,7 +144,7 @@ public class FormConfigTests {
 
         // set duplicated groups
         try {
-            initForm(createArrayList(group1, group2, group1));
+            initForm(createGroupList(group1, group2, group1));
             fail();
         } catch (IllegalArgumentException e) {
             assertThat(e, exception("Duplicated group name: grOUp1"));
@@ -159,7 +157,7 @@ public class FormConfigTests {
         assertNull(null, formConfig.getGroupConfig("test"));
 
         // init
-        initForm(createArrayList(group1, group2, group3));
+        initForm(createGroupList(group1, group2, group3));
 
         // case insensitive
         assertSame(group1, formConfig.getGroupConfig("GROUP1"));
@@ -178,7 +176,7 @@ public class FormConfigTests {
         }
 
         // init
-        initForm(createArrayList(group1, group2, group3));
+        initForm(createGroupList(group1, group2, group3));
 
         // case insensitive
         assertSame(group1, formConfig.getGroupConfigByKey("g"));
@@ -227,7 +225,7 @@ public class FormConfigTests {
             assertThat(e, exception("no groups"));
         }
 
-        initForm(createArrayList(group1, group2, group3));
+        initForm(createGroupList(group1, group2, group3));
 
         // group.getFormConfig()
         assertSame(formConfig, group1.getFormConfig());
@@ -246,7 +244,7 @@ public class FormConfigTests {
         group2.setParentGroup("group3");
 
         try {
-            initForm(createArrayList(group1, group2));
+            initForm(createGroupList(group1, group2));
             fail();
         } catch (IllegalArgumentException e) {
             assertThat(e, exception("Parent or imported group name \"group3\" not found"));
@@ -257,10 +255,10 @@ public class FormConfigTests {
     public void extendGroup_import_notFound() throws Exception {
         group1.setParentGroup("group2");
 
-        group2.setImports(createArrayList((Import) new ImportImpl("group3", null)));
+        group2.setImports(createImportList(new ImportImpl("group3", null)));
 
         try {
-            initForm(createArrayList(group1, group2));
+            initForm(createGroupList(group1, group2));
             fail();
         } catch (IllegalArgumentException e) {
             assertThat(e, exception("Parent or imported group name \"group3\" not found"));
@@ -274,7 +272,7 @@ public class FormConfigTests {
         group3.setParentGroup("group1");
 
         try {
-            initForm(createArrayList(group1, group2, group3));
+            initForm(createGroupList(group1, group2, group3));
             fail();
         } catch (IllegalArgumentException e) {
             assertThat(e, exception("Cycle detected: grOUp1 -> group2 -> GROUP3 -> grOUp1"));
@@ -286,10 +284,10 @@ public class FormConfigTests {
         group1.setParentGroup("group2");
         group2.setParentGroup("group3");
 
-        group3.setImports(createArrayList((Import) new ImportImpl("group1", null)));
+        group3.setImports(createImportList(new ImportImpl("group1", null)));
 
         try {
-            initForm(createArrayList(group1, group2, group3));
+            initForm(createGroupList(group1, group2, group3));
             fail();
         } catch (IllegalArgumentException e) {
             assertThat(e, exception("Cycle detected: grOUp1 -> group2 -> GROUP3 -> grOUp1"));
@@ -302,12 +300,12 @@ public class FormConfigTests {
         group1.setParentGroup("group2");
 
         // group2 imports group3.*
-        group2.setImports(createArrayList((Import) new ImportImpl("group3", null)));
+        group2.setImports(createImportList(new ImportImpl("group3", null)));
 
         // group3 imports group4.field4
-        group3.setImports(createArrayList((Import) new ImportImpl("group4", "field4")));
+        group3.setImports(createImportList(new ImportImpl("group4", "field4")));
 
-        initForm(createArrayList(group1, group2, group3, group4));
+        initForm(createGroupList(group1, group2, group3, group4));
 
         assertFields(group1, "field1", "field2", "field3", "field4");
         assertFields(group2, "field2", "field3", "field4");
@@ -331,7 +329,7 @@ public class FormConfigTests {
         assertEquals("FormConfig[groups: 0]", formConfig.toString());
 
         // with groups
-        initForm(createArrayList(group1, group2, group3));
+        initForm(createGroupList(group1, group2, group3));
         assertEquals("FormConfig[groups: 3]", formConfig.toString());
     }
 }

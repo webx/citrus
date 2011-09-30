@@ -17,7 +17,6 @@
  */
 package com.alibaba.citrus.service.uribroker.uri;
 
-import static com.alibaba.citrus.util.CollectionUtil.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -36,7 +35,7 @@ public class GenericServletURIBrokerTests extends AbstractURIBrokerFeaturesTests
         super.setupBroker(broker);
         broker.setContextPath("");
         broker.setServletPath("");
-        broker.setPathInfoElements(createArrayList("path1", "path2"));
+        broker.setPathInfoElements(createStringList("path1", "path2"));
     }
 
     @Override

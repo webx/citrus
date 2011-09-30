@@ -34,7 +34,7 @@ public abstract class AbstractSimpleCompositeValidatorTests<V extends AbstractSi
     public void init_hiddenAllOfValidator() throws Exception {
         // 2 validators
         V v = newValidatorFor_AbstractSimpleCompositeValidatorTests();
-        v.setValidators(createArrayList((Validator) new MyValidator(), new MyValidator()));
+        v.setValidators(createValidatorList((Validator) new MyValidator(), new MyValidator()));
         v.setMessage("message");
         v.afterPropertiesSet();
 
@@ -46,7 +46,7 @@ public abstract class AbstractSimpleCompositeValidatorTests<V extends AbstractSi
         MyValidator myValidator = new MyValidator();
 
         v = newValidatorFor_AbstractSimpleCompositeValidatorTests();
-        v.setValidators(createArrayList((Validator) myValidator));
+        v.setValidators(createValidatorList((Validator) myValidator));
         v.setMessage("message");
         v.afterPropertiesSet();
 

@@ -18,7 +18,6 @@
 package com.alibaba.citrus.service.form.configuration;
 
 import static com.alibaba.citrus.test.TestUtil.*;
-import static com.alibaba.citrus.util.CollectionUtil.*;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ import com.alibaba.citrus.service.form.impl.configuration.FormConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.GroupConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.GroupConfigImpl.ImportImpl;
 
-public class GroupConfigTests {
+public class GroupConfigTests extends AbstractConfigTests {
     private FormConfigImpl formConfig;
     private GroupConfigImpl group;
     private GroupConfigImpl group1;
@@ -66,26 +65,26 @@ public class GroupConfigTests {
 
         group1 = new GroupConfigImpl();
         group1.setName("group1");
-        group1.setFieldConfigImplList(createArrayList(field1));
+        group1.setFieldConfigImplList(createFieldList(field1));
 
         group2 = new GroupConfigImpl();
         group2.setName("group2");
-        group2.setFieldConfigImplList(createArrayList(field2));
+        group2.setFieldConfigImplList(createFieldList(field2));
 
         group3 = new GroupConfigImpl();
         group3.setName("group3");
-        group3.setFieldConfigImplList(createArrayList(field3));
+        group3.setFieldConfigImplList(createFieldList(field3));
 
         group4 = new GroupConfigImpl();
         group4.setName("group4");
-        group4.setFieldConfigImplList(createArrayList(field4));
+        group4.setFieldConfigImplList(createFieldList(field4));
     }
 
     private void initForm(List<FieldConfigImpl> fieldList) throws Exception {
         group.setFieldConfigImplList(fieldList);
         group.afterPropertiesSet();
 
-        formConfig.setGroupConfigImplList(createArrayList(group));
+        formConfig.setGroupConfigImplList(createGroupList(group));
         formConfig.afterPropertiesSet();
     }
 
@@ -95,7 +94,7 @@ public class GroupConfigTests {
         assertNull(group.getFormConfig());
 
         // with form
-        initForm(createArrayList(field1));
+        initForm(createFieldList(field1));
         assertSame(formConfig, group.getFormConfig());
     }
 
@@ -135,7 +134,7 @@ public class GroupConfigTests {
         assertEquals("hello", group.getKey());
 
         // via form.init
-        initForm(createArrayList(field1));
+        initForm(createFieldList(field1));
         assertEquals("g", group.getKey());
     }
 
@@ -172,7 +171,7 @@ public class GroupConfigTests {
         assertTrue(group.isPostOnly());
 
         // default, with form config
-        initForm(createArrayList(field1));
+        initForm(createFieldList(field1));
 
         formConfig.setPostOnlyByDefault(false);
         assertFalse(group.isPostOnly());
@@ -192,14 +191,14 @@ public class GroupConfigTests {
 
         // field name is null
         try {
-            initForm(createArrayList(new FieldConfigImpl()));
+            initForm(createFieldList(new FieldConfigImpl()));
             fail();
         } catch (IllegalArgumentException e) {
             assertThat(e, exception("name"));
         }
 
         // set fields
-        initForm(createArrayList(field1, field2, field3));
+        initForm(createFieldList(field1, field2, field3));
 
         assertEquals(3, group.getFieldConfigList().size());
         assertArrayEquals(new Object[] { field1, field2, field3 }, group.getFieldConfigList().toArray());
@@ -221,7 +220,7 @@ public class GroupConfigTests {
 
         // set duplicated fields
         try {
-            initForm(createArrayList(field1, field2, field1));
+            initForm(createFieldList(field1, field2, field1));
             fail();
         } catch (IllegalArgumentException e) {
             assertThat(e, exception("Duplicated field name: \"group1.fiELd1\""));
@@ -234,7 +233,7 @@ public class GroupConfigTests {
         assertNull(group.getFieldConfig("test"));
 
         // init
-        initForm(createArrayList(field1, field2, field3));
+        initForm(createFieldList(field1, field2, field3));
 
         // case insensitive
         assertSame(field1, group.getFieldConfig("FIELD1"));
@@ -253,7 +252,7 @@ public class GroupConfigTests {
         }
 
         // init
-        initForm(createArrayList(field1, field2, field3));
+        initForm(createFieldList(field1, field2, field3));
 
         // case insensitive
         assertSame(field1, group.getFieldConfigByKey("f"));
@@ -267,7 +266,7 @@ public class GroupConfigTests {
         assertTrue(group.getImports().isEmpty());
 
         // setImports
-        List<Import> imports = createArrayList((Import) new ImportImpl("groupName", "fieldName"));
+        List<Import> imports = createImportList(new ImportImpl("groupName", "fieldName"));
         group.setImports(imports);
 
         assertEquals(1, group.getImports().size());
@@ -291,7 +290,7 @@ public class GroupConfigTests {
             assertThat(e, exception("no fields"));
         }
 
-        initForm(createArrayList(field1, field2, field3));
+        initForm(createFieldList(field1, field2, field3));
 
         // field.getGroupConfig()
         assertSame(group, field1.getGroupConfig());
@@ -337,7 +336,7 @@ public class GroupConfigTests {
         group2.setParentGroup("group1");
         group2.afterPropertiesSet();
 
-        formConfig.setGroupConfigImplList(createArrayList(group1, group2));
+        formConfig.setGroupConfigImplList(createGroupList(group1, group2));
         formConfig.afterPropertiesSet();
 
         assertEquals(expectedValue, group2.isTrimmingByDefault());
@@ -375,7 +374,7 @@ public class GroupConfigTests {
         group2.setParentGroup("group1");
         group2.afterPropertiesSet();
 
-        formConfig.setGroupConfigImplList(createArrayList(group1, group2));
+        formConfig.setGroupConfigImplList(createGroupList(group1, group2));
         formConfig.afterPropertiesSet();
 
         assertEquals(expectedValue, group2.isPostOnly());
@@ -383,9 +382,9 @@ public class GroupConfigTests {
 
     @Test
     public void import_fieldNotFound() throws Exception {
-        group2.setImports(createArrayList((Import) new ImportImpl("group1", "notExistField")));
+        group2.setImports(createImportList(new ImportImpl("group1", "notExistField")));
 
-        formConfig.setGroupConfigImplList(createArrayList(group1, group2));
+        formConfig.setGroupConfigImplList(createGroupList(group1, group2));
 
         try {
             formConfig.afterPropertiesSet();
@@ -409,23 +408,23 @@ public class GroupConfigTests {
 
         group1 = new GroupConfigImpl();
         group1.setName("group1");
-        group1.setFieldConfigImplList(createArrayList(field1));
+        group1.setFieldConfigImplList(createFieldList(field1));
         group1.afterPropertiesSet();
 
         group2 = new GroupConfigImpl();
         group2.setName("group2");
-        group2.setFieldConfigImplList(createArrayList(field2, field3));
+        group2.setFieldConfigImplList(createFieldList(field2, field3));
 
         if (importAll) {
-            imports = createArrayList((Import) new ImportImpl("group1", null));
+            imports = createImportList(new ImportImpl("group1", null));
         } else {
-            imports = createArrayList((Import) new ImportImpl("group1", "field1"));
+            imports = createImportList(new ImportImpl("group1", "field1"));
         }
 
         group2.setImports(imports);
         group2.afterPropertiesSet();
 
-        formConfig.setGroupConfigImplList(createArrayList(group1, group2));
+        formConfig.setGroupConfigImplList(createGroupList(group1, group2));
 
         try {
             formConfig.afterPropertiesSet();
@@ -441,16 +440,16 @@ public class GroupConfigTests {
 
         group1 = new GroupConfigImpl();
         group1.setName("group1");
-        group1.setFieldConfigImplList(createArrayList(field1));
+        group1.setFieldConfigImplList(createFieldList(field1));
         group1.afterPropertiesSet();
 
         group2 = new GroupConfigImpl();
         group2.setName("group2");
-        group2.setFieldConfigImplList(createArrayList(field2, field3));
+        group2.setFieldConfigImplList(createFieldList(field2, field3));
         group2.setParentGroup("group1");
         group2.afterPropertiesSet();
 
-        formConfig.setGroupConfigImplList(createArrayList(group1, group2));
+        formConfig.setGroupConfigImplList(createGroupList(group1, group2));
         formConfig.afterPropertiesSet();
 
         assertEquals(1, group1.getFieldConfigList().size());
@@ -467,7 +466,7 @@ public class GroupConfigTests {
         assertEquals("GroupConfig[name: group1, fields: 0]", group.toString());
 
         // with fields
-        initForm(createArrayList(field1, field2, field3));
+        initForm(createFieldList(field1, field2, field3));
         assertEquals("GroupConfig[name: group1, fields: 3]", group.toString());
     }
 

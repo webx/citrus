@@ -46,7 +46,7 @@ public class ChooseValidatorTests extends AbstractCompositeValidatorTests<Choose
 
         // wrong validators
         v = newValidator();
-        v.setValidators(createArrayList((Validator) new MyValidator()));
+        v.setValidators(createValidatorList((Validator) new MyValidator()));
 
         try {
             v.afterPropertiesSet();
@@ -56,7 +56,7 @@ public class ChooseValidatorTests extends AbstractCompositeValidatorTests<Choose
         }
 
         v = newValidator();
-        v.setValidators(createArrayList((Validator) new ChooseValidator.When(), new ChooseValidator.Otherwise(),
+        v.setValidators(createValidatorList((Validator) new ChooseValidator.When(), new ChooseValidator.Otherwise(),
                 new ChooseValidator.When()));
 
         try {
@@ -67,7 +67,7 @@ public class ChooseValidatorTests extends AbstractCompositeValidatorTests<Choose
         }
 
         v = newValidator();
-        v.setValidators(createArrayList((Validator) new ChooseValidator.When(), new MyValidator()));
+        v.setValidators(createValidatorList((Validator) new ChooseValidator.When(), new MyValidator()));
 
         try {
             v.afterPropertiesSet();
@@ -78,12 +78,12 @@ public class ChooseValidatorTests extends AbstractCompositeValidatorTests<Choose
 
         // right validators
         v = newValidator();
-        v.setValidators(createArrayList((Validator) new ChooseValidator.When(), new ChooseValidator.When(),
+        v.setValidators(createValidatorList((Validator) new ChooseValidator.When(), new ChooseValidator.When(),
                 new ChooseValidator.When()));
         v.afterPropertiesSet();
 
         v = newValidator();
-        v.setValidators(createArrayList((Validator) new ChooseValidator.When(), new ChooseValidator.When(),
+        v.setValidators(createValidatorList((Validator) new ChooseValidator.When(), new ChooseValidator.When(),
                 new ChooseValidator.Otherwise()));
         v.afterPropertiesSet();
     }
@@ -100,7 +100,7 @@ public class ChooseValidatorTests extends AbstractCompositeValidatorTests<Choose
         }
 
         v = new ChooseValidator.When();
-        v.setValidators(createArrayList((Validator) new MyValidator()));
+        v.setValidators(createValidatorList((Validator) new MyValidator()));
 
         try {
             v.afterPropertiesSet();

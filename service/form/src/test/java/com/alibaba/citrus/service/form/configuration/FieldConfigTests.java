@@ -17,7 +17,6 @@
  */
 package com.alibaba.citrus.service.form.configuration;
 
-import static com.alibaba.citrus.util.CollectionUtil.*;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
@@ -31,7 +30,7 @@ import com.alibaba.citrus.service.form.impl.configuration.FieldConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.FormConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.GroupConfigImpl;
 
-public class FieldConfigTests {
+public class FieldConfigTests extends AbstractConfigTests {
     private FormConfigImpl form;
     private GroupConfigImpl group;
     private FieldConfigImpl field;
@@ -47,10 +46,10 @@ public class FieldConfigTests {
 
         group = new GroupConfigImpl();
         group.setName("group1");
-        group.setFieldConfigImplList(createArrayList(field));
+        group.setFieldConfigImplList(createFieldList(field));
 
         form = new FormConfigImpl();
-        form.setGroupConfigImplList(createArrayList(group));
+        form.setGroupConfigImplList(createGroupList(group));
 
         v1 = createMock(Validator.class);
         v2 = createMock(Validator.class);
@@ -204,7 +203,7 @@ public class FieldConfigTests {
         assertArrayEquals(new Object[0], field.getValidators().toArray());
 
         // set validators
-        field.setValidators(createArrayList(v1, v2, v3));
+        field.setValidators(createValidatorList(v1, v2, v3));
         assertArrayEquals(new Object[] { v1, v2, v3 }, field.getValidators().toArray());
 
         // unmodifiable
@@ -277,7 +276,7 @@ public class FieldConfigTests {
         expectLastCall().anyTimes();
         replay(v3);
 
-        src.setValidators(createArrayList(v1));
+        src.setValidators(createValidatorList(v1));
         assertArrayEquals(new Object[] { v3 }, mergeField(null, src).getValidators().toArray());
 
         copy = new FieldConfigImpl();
@@ -289,7 +288,7 @@ public class FieldConfigTests {
 
         replay(v4);
 
-        copy.setValidators(createArrayList(v2));
+        copy.setValidators(createValidatorList(v2));
         assertArrayEquals(new Object[] { v2, v3 }, mergeField(copy, src).getValidators().toArray());
 
         verify(v1, v2, v3, v4);
@@ -299,7 +298,7 @@ public class FieldConfigTests {
         GroupConfigImpl groupCopy = new GroupConfigImpl();
         groupCopy.setName("groupCopy");
 
-        List<FieldConfigImpl> fields = createArrayList();
+        List<FieldConfigImpl> fields = createFieldList();
 
         if (copy != null) {
             copy.setName(src.getName());
@@ -312,11 +311,11 @@ public class FieldConfigTests {
 
         GroupConfigImpl groupSrc = new GroupConfigImpl();
         groupSrc.setName("groupSrc");
-        groupSrc.setFieldConfigImplList(createArrayList(src));
+        groupSrc.setFieldConfigImplList(createFieldList(src));
         groupSrc.afterPropertiesSet();
 
         form = new FormConfigImpl();
-        form.setGroupConfigImplList(createArrayList(groupCopy, groupSrc));
+        form.setGroupConfigImplList(createGroupList(groupCopy, groupSrc));
         form.afterPropertiesSet();
 
         FieldConfigImpl copy2 = (FieldConfigImpl) groupCopy.getFieldConfig(src.getName());
@@ -338,7 +337,7 @@ public class FieldConfigTests {
         assertEquals("FieldConfig[group: group1, name: field1, validators: 0]", field.toString());
 
         // with validators
-        field.setValidators(createArrayList(v1, v2, v3));
+        field.setValidators(createValidatorList(v1, v2, v3));
         assertEquals("FieldConfig[group: group1, name: field1, validators: 3]", field.toString());
     }
 }
