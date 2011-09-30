@@ -201,6 +201,7 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
         // 如果target不相同，才需要重定向。
         if (!isEquals(target, redirectTarget)) {
             this.redirectTarget = redirectTarget;
+            this.action = null;
         }
     }
 
