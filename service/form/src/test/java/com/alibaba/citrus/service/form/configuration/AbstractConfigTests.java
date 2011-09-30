@@ -8,7 +8,6 @@ import com.alibaba.citrus.service.form.Validator;
 import com.alibaba.citrus.service.form.configuration.GroupConfig.Import;
 import com.alibaba.citrus.service.form.impl.configuration.FieldConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.GroupConfigImpl;
-import com.alibaba.citrus.service.form.impl.configuration.GroupConfigImpl.ImportImpl;
 
 public abstract class AbstractConfigTests {
     protected final List<FieldConfigImpl> createFieldList(FieldConfigImpl... fields) {
@@ -19,7 +18,7 @@ public abstract class AbstractConfigTests {
         return createArrayList(groups);
     }
 
-    protected final List<Import> createImportList(ImportImpl... imports) {
+    protected final List<Import> createImportList(Import... imports) {
         return createArrayList(imports);
     }
 
