@@ -13,8 +13,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
+
 package com.alibaba.citrus.springext.util;
 
 import static com.alibaba.citrus.springext.util.DomUtil.*;
@@ -74,7 +74,6 @@ import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 import com.alibaba.citrus.util.Assert;
-import com.alibaba.citrus.util.CollectionUtil;
 
 public class SpringExtUtil {
     private static final Logger log = LoggerFactory.getLogger(SpringExtUtil.class);

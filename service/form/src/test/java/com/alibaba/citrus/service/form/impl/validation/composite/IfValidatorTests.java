@@ -13,12 +13,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
+
 package com.alibaba.citrus.service.form.impl.validation.composite;
 
 import static com.alibaba.citrus.test.TestUtil.*;
-import static com.alibaba.citrus.util.CollectionUtil.*;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 

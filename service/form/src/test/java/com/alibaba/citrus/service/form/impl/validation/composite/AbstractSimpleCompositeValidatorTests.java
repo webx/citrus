@@ -13,12 +13,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
+
 package com.alibaba.citrus.service.form.impl.validation.composite;
 
 import static com.alibaba.citrus.test.TestUtil.*;
-import static com.alibaba.citrus.util.CollectionUtil.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -34,7 +33,7 @@ public abstract class AbstractSimpleCompositeValidatorTests<V extends AbstractSi
     public void init_hiddenAllOfValidator() throws Exception {
         // 2 validators
         V v = newValidatorFor_AbstractSimpleCompositeValidatorTests();
-        v.setValidators(createValidatorList((Validator) new MyValidator(), new MyValidator()));
+        v.setValidators(createValidatorList(new MyValidator(), new MyValidator()));
         v.setMessage("message");
         v.afterPropertiesSet();
 

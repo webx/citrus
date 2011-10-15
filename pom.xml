@@ -550,13 +550,13 @@
                     <execution>
                         <phase>compile</phase>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <echo message="project home:        ${basedir}" />
                                 <echo message="java home:           ${java.home}" />
                                 <echo message="java source version: ${java.version}" />
                                 <echo message="java target version: ${java.version}" />
                                 <echo message="java source charset: ${java.encoding}" />
-                            </tasks>
+                            </target>
                         </configuration>
                         <goals>
                             <goal>run</goal>

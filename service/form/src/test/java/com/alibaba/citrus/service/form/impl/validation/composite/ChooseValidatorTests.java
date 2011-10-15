@@ -13,12 +13,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
+
 package com.alibaba.citrus.service.form.impl.validation.composite;
 
 import static com.alibaba.citrus.test.TestUtil.*;
-import static com.alibaba.citrus.util.CollectionUtil.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -56,7 +55,7 @@ public class ChooseValidatorTests extends AbstractCompositeValidatorTests<Choose
         }
 
         v = newValidator();
-        v.setValidators(createValidatorList((Validator) new ChooseValidator.When(), new ChooseValidator.Otherwise(),
+        v.setValidators(createValidatorList(new ChooseValidator.When(), new ChooseValidator.Otherwise(),
                 new ChooseValidator.When()));
 
         try {
@@ -67,7 +66,7 @@ public class ChooseValidatorTests extends AbstractCompositeValidatorTests<Choose
         }
 
         v = newValidator();
-        v.setValidators(createValidatorList((Validator) new ChooseValidator.When(), new MyValidator()));
+        v.setValidators(createValidatorList(new ChooseValidator.When(), new MyValidator()));
 
         try {
             v.afterPropertiesSet();
@@ -78,12 +77,12 @@ public class ChooseValidatorTests extends AbstractCompositeValidatorTests<Choose
 
         // right validators
         v = newValidator();
-        v.setValidators(createValidatorList((Validator) new ChooseValidator.When(), new ChooseValidator.When(),
+        v.setValidators(createValidatorList(new ChooseValidator.When(), new ChooseValidator.When(),
                 new ChooseValidator.When()));
         v.afterPropertiesSet();
 
         v = newValidator();
-        v.setValidators(createValidatorList((Validator) new ChooseValidator.When(), new ChooseValidator.When(),
+        v.setValidators(createValidatorList(new ChooseValidator.When(), new ChooseValidator.When(),
                 new ChooseValidator.Otherwise()));
         v.afterPropertiesSet();
     }

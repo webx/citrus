@@ -13,8 +13,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
+
 /***
  * ASM: a very small and fast Java bytecode manipulation framework
  * Copyright (c) 2000-2007 INRIA, France Telecom

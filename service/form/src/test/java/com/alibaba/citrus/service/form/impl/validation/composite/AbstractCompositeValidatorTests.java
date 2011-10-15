@@ -13,8 +13,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
+
 package com.alibaba.citrus.service.form.impl.validation.composite;
 
 import static com.alibaba.citrus.test.TestUtil.*;
@@ -23,7 +23,6 @@ import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.util.List;
-
 
 import org.junit.Test;
 
@@ -39,7 +38,7 @@ public abstract class AbstractCompositeValidatorTests<V extends AbstractComposit
     public void init_setValidators() {
         V v = newValidatorFor_AbstractCompositeValidatorTests();
 
-        v.setValidators(createValidatorList((Validator) new MyValidator(), new MyValidator(), new MyValidator()));
+        v.setValidators(createValidatorList(new MyValidator(), new MyValidator(), new MyValidator()));
 
         assertEquals(3, v.getValidators().size());
 
