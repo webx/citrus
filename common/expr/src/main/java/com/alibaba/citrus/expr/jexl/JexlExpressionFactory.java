@@ -17,6 +17,8 @@
 
 package com.alibaba.citrus.expr.jexl;
 
+import org.apache.commons.jexl2.JexlEngine;
+
 import com.alibaba.citrus.expr.Expression;
 import com.alibaba.citrus.expr.ExpressionContext;
 import com.alibaba.citrus.expr.ExpressionFactory;
@@ -29,6 +31,8 @@ import com.alibaba.citrus.expr.support.ExpressionSupport;
  * @author Michael Zhou
  */
 public class JexlExpressionFactory implements ExpressionFactory {
+    private final JexlEngine engine = new JexlEngine();
+
     /** 是否支持context变量，就是用小数点分隔的变量名。 */
     private boolean supportContextVariables = true;
 
@@ -60,7 +64,7 @@ public class JexlExpressionFactory implements ExpressionFactory {
         final Expression jexlExpression;
 
         try {
-            jexlExpression = new JexlExpression(org.apache.commons.jexl.ExpressionFactory.createExpression(expr));
+            jexlExpression = new JexlExpression(engine.createExpression(expr));
         } catch (Exception e) {
             throw new ExpressionParseException(e);
         }

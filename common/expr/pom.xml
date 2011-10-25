@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="GB18030"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <artifactId>citrus-parent</artifactId>
@@ -20,7 +21,7 @@
             <artifactId>citrus-test-util</artifactId>
         </dependency>
         <dependency>
-            <groupId>commons-jexl</groupId>
+            <groupId>org.apache.commons</groupId>
             <artifactId>commons-jexl</artifactId>
         </dependency>
     </dependencies>

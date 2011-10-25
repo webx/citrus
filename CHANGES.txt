@@ -221,3 +221,6 @@
 * 改进pom.xml，以便发布到central maven repository中：
   * 添加javadocs
   * 修改pom参数
+
+* 升级jexl到2.0.1，使之支持可变参数，例如：$messageUtil.formatMessage(format, args...)
+

@@ -17,12 +17,10 @@
 
 package com.alibaba.citrus.expr.jexl;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
+import static com.alibaba.citrus.util.Assert.*;
 
-import org.apache.commons.jexl.Expression;
-import org.apache.commons.jexl.JexlContext;
+import org.apache.commons.jexl2.Expression;
+import org.apache.commons.jexl2.JexlContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -87,69 +85,22 @@ public class JexlExpression extends ExpressionSupport {
      * Ω´<code>ExpressionContext</code>  ≈‰µΩ<code>JexlContext</code>°£
      */
     private static class JexlContextAdapter implements JexlContext {
-        private Map<String, Object> vars;
+        private ExpressionContext expressionContext;
 
-        public JexlContextAdapter(final ExpressionContext context) {
-            this.vars = new Map<String, Object>() {
-                public Object get(Object key) {
-                    return context.get((String) key);
-                }
-
-                public void clear() {
-                }
-
-                public boolean containsKey(Object key) {
-                    return get(key) != null;
-                }
-
-                public boolean containsValue(Object value) {
-                    return false;
-                }
-
-                public Set<Map.Entry<String, Object>> entrySet() {
-                    return null;
-                }
-
-                public boolean isEmpty() {
-                    return false;
-                }
-
-                public Set<String> keySet() {
-                    return null;
-                }
-
-                public Object put(String key, Object value) {
-                    Object old = context.get(key);
-
-                    context.put(key, value);
-
-                    return old;
-                }
-
-                public void putAll(Map<? extends String, ? extends Object> t) {
-                }
-
-                public Object remove(Object key) {
-                    return null;
-                }
-
-                public int size() {
-                    return -1;
-                }
-
-                public Collection<Object> values() {
-                    return null;
-                }
-            };
+        public JexlContextAdapter(ExpressionContext expressionContext) {
+            this.expressionContext = assertNotNull(expressionContext, "expressionContext");
         }
 
-        @SuppressWarnings("rawtypes")
-        public void setVars(Map vars) {
+        public Object get(String key) {
+            return expressionContext.get(key);
         }
 
-        @SuppressWarnings("rawtypes")
-        public Map getVars() {
-            return this.vars;
+        public void set(String key, Object value) {
+            expressionContext.put(key, value);
+        }
+
+        public boolean has(String key) {
+            return expressionContext.get(key) != null;
         }
     }
 }
