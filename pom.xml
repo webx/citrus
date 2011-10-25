@@ -2,12 +2,43 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.alibaba.citrus</groupId>
     <artifactId>citrus-parent</artifactId>
     <packaging>pom</packaging>
     <name>Citrus Parent Project</name>
     <version>3.0.7-SNAPSHOT</version>
+    <description>Another Java-based WEB Framework</description>
+    <url>http://www.openwebx.org/</url>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <connection>scm:git:https://github.com/webx/citrus</connection>
+        <developerConnection>scm:git:git@github.com:webx/citrus.git</developerConnection>
+        <url>http://github.com/webx/citrus</url>
+    </scm>
+    <developers>
+        <developer>
+            <id>baobao</id>
+            <name>Michael Zhou</name>
+            <email>yizhi@taobao.com</email>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>-6</timezone>
+        </developer>
+    </developers>
     <properties>
         <java.version>1.5</java.version>
         <java.encoding>GBK</java.encoding>
@@ -693,6 +724,19 @@
                                         <versionRange>[1.0,)</versionRange>
                                         <goals>
                                             <goal>run</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore />
+                                    </action>
+                                </pluginExecution>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>maven-enforcer-plugin</artifactId>
+                                        <versionRange>[1.0,)</versionRange>
+                                        <goals>
+                                            <goal>enforce</goal>
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
