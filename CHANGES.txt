@@ -144,7 +144,7 @@
  （修改了一处代码，使resource loading机制可在spring3下运行；修改了若干单元测试，使它们在spring3下可以通过测试。）
   
   虽然webx仍以spring 2.5.6.SEC02编译，但只需要将项目的pom.xml中的spring依赖改成3.0.6.RELEASE就可以工作。
-  如希望以spring3来编译webx，只需要指定参数：mvn ... -Pspring3 即可。这样编译所生成的webx-all-in-one包将依赖于spring 3。
+  如希望以spring3来编译webx，只需要指定参数：mvn ... -Pspring3 即可。这样编译所生成的citrus-webx-all包将依赖于spring 3。
   
   注意：spring3和spring2的代码是不完全兼容的。在spring2上编译的代码，未必能直接在spring3上运行，反之亦然。
   下面的命令确保webx同时兼容于spring的两个版本。
@@ -210,3 +210,14 @@
 * 确保在java7下面可以编译并测试通过。
 
 -- Changes in 3.0.7
+
+* 删除citrus-springext-all-in-one项目。
+
+* 修改项目的名称：
+  citrus-webx-all-in-one -> citrus-webx-all
+  citrus-test-all-in-one -> citrus-test-all
+  所有依赖这两个包的应用需要修改一下pom.xml。
+
+* 改进pom.xml，以便发布到central maven repository中：
+  * 添加javadocs
+  * 修改pom参数

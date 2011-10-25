@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="GB18030"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <artifactId>citrus-parent</artifactId>
@@ -8,10 +9,16 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>citrus-webx-all-in-one</artifactId>
+    <artifactId>citrus-webx-all</artifactId>
     <name>Webx 3.x All-in-one Bundle</name>
     <build>
         <plugins>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>false</skip>
+                </configuration>
+            </plugin>
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
                 <executions>
@@ -19,6 +26,27 @@
                         <id>attach-sources</id>
                         <!-- disabled because shade takes responsibility for building sources jar -->
                         <phase>none</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <includeDependencySources>true</includeDependencySources>
+                            <dependencySourceIncludes>
+                                <dependencySourceInclude>${project.groupId}:*</dependencySourceInclude>
+                            </dependencySourceIncludes>
+                            <dependencySourceExcludes>
+                                <dependencySourceExclude>${project.groupId}:citrus-common-asm</dependencySourceExclude>
+                                <dependencySourceExclude>${project.groupId}:citrus-common-hessian</dependencySourceExclude>
+                            </dependencySourceExcludes>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -39,7 +67,8 @@
                                 </includes>
                             </artifactSet>
                             <transformers>
-                                <transformer implementation="com.alibaba.citrus.maven.util.AppendingTransformer">
+                                <transformer
+                                    implementation="com.alibaba.citrus.maven.util.AppendingTransformer">
                                     <patterns>
                                         <pattern>META-INF/*.bean-definition-parsers</pattern>
                                         <pattern>META-INF/*.bean-definition-decorators</pattern>

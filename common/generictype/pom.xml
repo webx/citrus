@@ -15,7 +15,6 @@
         <!-- 因尚未开发完成，故略过测试。 -->
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <skipTests>true</skipTests>

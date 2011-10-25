@@ -16,6 +16,7 @@
         <springext-plugin-version>1.0</springext-plugin-version>
         <maven-util-version>1.0</maven-util-version>
         <jetty-version>6.1.22</jetty-version>
+        <project.build.sourceEncoding>${java.encoding}</project.build.sourceEncoding>
     </properties>
     <profiles>
         <profile>
@@ -28,7 +29,6 @@
     <modules>
         <module>dist/webx</module>
         <module>dist/test</module>
-        <module>dist/springext</module>
         <module>common/expr</module>
         <module>common/logconfig</module>
         <module>common/util</module>
@@ -77,7 +77,12 @@
             <!-- ======================================== -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>citrus-webx-all-in-one</artifactId>
+                <artifactId>citrus-webx-all</artifactId>
+                <version>${webx-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>citrus-test-all</artifactId>
                 <version>${webx-version}</version>
             </dependency>
             <dependency>
@@ -526,11 +531,17 @@
     <build>
         <plugins>
             <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <inherited>false</inherited>
+                <configuration>
+                    <skip>false</skip>
+                </configuration>
+            </plugin>
+            <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <encoding>${java.encoding}</encoding>
                 </configuration>
             </plugin>
             <plugin>
@@ -615,45 +626,44 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-antrun-plugin</artifactId>
                     <version>1.6</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <!-- 较低版本有bug，导致hessian不能编译通过。 -->
                     <version>2.3.2</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>2.3.2</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.5</version>
+                    <version>2.7</version>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-eclipse-plugin</artifactId>
                     <version>2.8</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-shade-plugin</artifactId>
                     <version>1.4</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
                     <version>2.1.2</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.8</version>
+                </plugin>
+                <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.6</version>
+                    <version>2.10</version>
                 </plugin>
                 <plugin>
                     <groupId>org.mortbay.jetty</groupId>
