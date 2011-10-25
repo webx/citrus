@@ -36,6 +36,9 @@
                 <role>architect</role>
                 <role>developer</role>
             </roles>
+            <properties>
+                <picUrl>http://i54.tinypic.com/2jewmjr.jpg</picUrl>
+            </properties>
             <timezone>-6</timezone>
         </developer>
     </developers>
@@ -115,6 +118,7 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>citrus-test-all</artifactId>
                 <version>${webx-version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
@@ -706,10 +710,8 @@
                     <artifactId>maven-springext-plugin</artifactId>
                     <version>${springext-plugin-version}</version>
                 </plugin>
-                <!--
-                  - This plugin's configuration is used to store Eclipse m2e settings only.
-                  - It has no influence on the Maven build itself.
-                 -->
+                <!-- - This plugin's configuration is used to store Eclipse 
+                    m2e settings only. - It has no influence on the Maven build itself. -->
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
                     <artifactId>lifecycle-mapping</artifactId>
