@@ -38,15 +38,12 @@
                             <goal>jar</goal>
                         </goals>
                         <configuration>
-                            <includeDependencySources>true</includeDependencySources>
                             <detectOfflineLinks>false</detectOfflineLinks>
+                            <includeDependencySources>true</includeDependencySources>
                             <dependencySourceIncludes>
                                 <dependencySourceInclude>${project.groupId}:*</dependencySourceInclude>
                             </dependencySourceIncludes>
-                            <dependencySourceExcludes>
-                                <dependencySourceExclude>${project.groupId}:citrus-common-asm</dependencySourceExclude>
-                                <dependencySourceExclude>${project.groupId}:citrus-common-hessian</dependencySourceExclude>
-                            </dependencySourceExcludes>
+                            <excludePackageNames>com.alibaba.citrus.asm:com.alibaba.citrus.hessian:com.alibaba.citrus.burlap:freemarker</excludePackageNames>
                         </configuration>
                     </execution>
                 </executions>
