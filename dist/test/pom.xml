@@ -39,6 +39,7 @@
                         </goals>
                         <configuration>
                             <includeDependencySources>true</includeDependencySources>
+                            <detectOfflineLinks>false</detectOfflineLinks>
                             <dependencySourceIncludes>
                                 <dependencySourceInclude>${project.groupId}:citrus-test-*</dependencySourceInclude>
                             </dependencySourceIncludes>
