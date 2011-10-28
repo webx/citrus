@@ -373,6 +373,9 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
             return this;
         }
 
+        public void end() {
+        }
+
         @Override
         public String toString() {
             return "forwardTo(" + getRedirectTarget() + ") " + getParameters();

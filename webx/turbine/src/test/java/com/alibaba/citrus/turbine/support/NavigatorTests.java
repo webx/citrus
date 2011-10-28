@@ -24,6 +24,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.alibaba.citrus.service.requestcontext.lazycommit.LazyCommitRequestContext;
 import com.alibaba.citrus.service.uribroker.URIBrokerService;
 import com.alibaba.citrus.turbine.AbstractWebxTests;
 import com.alibaba.citrus.turbine.uribroker.uri.TurbineURIBroker;
@@ -116,7 +117,7 @@ public class NavigatorTests extends AbstractWebxTests {
 
         // isRedirected会触发commit redirect uri
         assertTrue(rundata.isRedirected());
-        assertEquals("http://www.taobao.com/hello", rundata.getRedirectLocation());
+        assertEquals("http://www.taobao.com/hello", getRedirectLocationRaw());
     }
 
     @Test
@@ -126,6 +127,19 @@ public class NavigatorTests extends AbstractWebxTests {
 
         // getRedirectLocation会触发commit redirect uri
         assertEquals("http://www.taobao.com/?aaa=111&bbb=222&bbb=333&ccc=&ddd=", rundata.getRedirectLocation());
+    }
+
+    @Test
+    public void redirect_end() {
+        rundata.redirectTo("link1").withParameter("aaa", "111").withParameter("bbb", "222", "333")
+                .withParameter("ccc", (String) null).withParameter("ddd", (String[]) null).end();
+
+        // getRedirectLocation会触发commit redirect uri
+        assertEquals("http://www.taobao.com/?aaa=111&bbb=222&bbb=333&ccc=&ddd=", getRedirectLocationRaw());
+    }
+
+    private String getRedirectLocationRaw() {
+        return getFieldValue(rundata, "lazyCommitRequestContext", LazyCommitRequestContext.class).getRedirectLocation();
     }
 
     @Test

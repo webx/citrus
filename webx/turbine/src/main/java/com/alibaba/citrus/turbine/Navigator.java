@@ -45,6 +45,11 @@ public interface Navigator {
      */
     interface Parameters {
         Parameters withParameter(String name, String... values);
+
+        /**
+         * 对于redirectTo()语句，结束并立即发出redirect。
+         */
+        void end();
     }
 
     /**
@@ -54,10 +59,5 @@ public interface Navigator {
         RedirectParameters withTarget(String target);
 
         URIBroker uri();
-
-        /**
-         * 结束redirectTo()语句并立即发出redirect。
-         */
-        void end();
     }
 }
