@@ -54,5 +54,10 @@ public interface Navigator {
         RedirectParameters withTarget(String target);
 
         URIBroker uri();
+
+        /**
+         * 结束redirectTo()语句并立即发出redirect。
+         */
+        void end();
     }
 }

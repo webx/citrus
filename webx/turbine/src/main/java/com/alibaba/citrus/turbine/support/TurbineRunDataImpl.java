@@ -403,6 +403,10 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
             return uri;
         }
 
+        public void end() {
+            commitRedirectLocation();
+        }
+
         @Override
         public String toString() {
             return "redirectTo(" + uri + ")";

@@ -225,3 +225,5 @@
 * 升级jexl到2.0.1，使之支持可变参数，例如：$messageUtil.formatMessage(format, args...)
 
 -- Changes in 3.0.8
+
+* 添加方法：navigator.redirectTo(name).withParameter(..).end(); 通过end()方法可以明确结束语句，并发出重定向请求。
