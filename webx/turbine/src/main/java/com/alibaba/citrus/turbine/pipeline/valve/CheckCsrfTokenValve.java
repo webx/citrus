@@ -42,7 +42,7 @@ import com.alibaba.citrus.turbine.util.CsrfTokenCheckException;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ÓÃÀ´¼ì²é<code>CsrfToken</code>µÄvalve£¬ÓÃÀ´·ÀÖ¹csrf¹¥»÷ºÍÖØ¸´Ìá½»Í¬Ò»±íµ¥¡£
+ * ç”¨æ¥æ£€æŸ¥<code>CsrfToken</code>çš„valveï¼Œç”¨æ¥é˜²æ­¢csrfæ”»å‡»å’Œé‡å¤æäº¤åŒä¸€è¡¨å•ã€‚
  * 
  * @author Michael Zhou
  */
@@ -94,26 +94,26 @@ public class CheckCsrfTokenValve extends AbstractValve {
     }
 
     /**
-     * Èç¹ûcsrf²»·û£¬ÔòÖØ¶¨Ïòµ½³ö´íÒ³Ãæ¡£
+     * å¦‚æœcsrfä¸ç¬¦ï¼Œåˆ™é‡å®šå‘åˆ°å‡ºé”™é¡µé¢ã€‚
      */
     public void invoke(PipelineContext pipelineContext) throws Exception {
         TurbineRunData rundata = getTurbineRunData(request);
 
-        // »ñÈ¡requestÖĞµÄcsrfÖµ
+        // è·å–requestä¸­çš„csrfå€¼
         String tokenFromRequest = StringUtil.trimToNull(rundata.getParameters().getString(tokenKey));
 
         if (tokenFromRequest != null) {
             HttpSession session = rundata.getRequest().getSession();
 
-            // ÏÈ¼ì²élongLiveToken£¬Èç¹ûÆ¥Åä£¬Ôò²»ÓÃ¼ì²éuniqueTokenÁË¡£ 
+            // å…ˆæ£€æŸ¥longLiveTokenï¼Œå¦‚æœåŒ¹é…ï¼Œåˆ™ä¸ç”¨æ£€æŸ¥uniqueTokenäº†ã€‚ 
             if (!tokenFromRequest.equals(CsrfToken.getLongLiveTokenInSession(session))) {
                 List<String> tokensInSession = CsrfToken.getTokensInSession(session, tokenKey);
 
                 if (!tokensInSession.contains(tokenFromRequest)) {
-                    // Èç¹û²»·ûÔòÖÕÖ¹ÇëÇó
+                    // å¦‚æœä¸ç¬¦åˆ™ç»ˆæ­¢è¯·æ±‚
                     requestExpired(rundata, tokenFromRequest, tokensInSession);
                 } else {
-                    // Èç¹û·ûºÏ£¬ÔòÇå³ısessionÖĞÏàÓ¦µÄtoken£¬ÒÔ·ÀÖ¹ÔÙ´ÎÊ¹ÓÃËü
+                    // å¦‚æœç¬¦åˆï¼Œåˆ™æ¸…é™¤sessionä¸­ç›¸åº”çš„tokenï¼Œä»¥é˜²æ­¢å†æ¬¡ä½¿ç”¨å®ƒ
                     tokensInSession.remove(tokenFromRequest);
 
                     CsrfToken.setTokensInSession(session, tokenKey, tokensInSession);
@@ -122,7 +122,7 @@ public class CheckCsrfTokenValve extends AbstractValve {
         }
 
         try {
-            // ÔÚthreadÉÏÏÂÎÄÖĞ±£´æµ±Ç°µÄtokenKey£¬ÒÔ±ãÊ¹ÆäËücsrfTokenµÄ¼ì²é¶¼ÄÜÊ¹ÓÃÍ³Ò»µÄkey¡£
+            // åœ¨threadä¸Šä¸‹æ–‡ä¸­ä¿å­˜å½“å‰çš„tokenKeyï¼Œä»¥ä¾¿ä½¿å…¶å®ƒcsrfTokençš„æ£€æŸ¥éƒ½èƒ½ä½¿ç”¨ç»Ÿä¸€çš„keyã€‚
             CsrfToken.setContextTokenConfiguration(tokenKey, maxTokens);
             pipelineContext.invokeNext();
         } finally {
@@ -134,7 +134,7 @@ public class CheckCsrfTokenValve extends AbstractValve {
         log.getLogger().warn("CsrfToken \"{}\" does not match: requested token is {}, but the session tokens are {}.",
                 new Object[] { tokenKey, tokenFromRequest, tokensInSession });
 
-        // ÓĞÁ½ÖÖ´¦Àí·½·¨£¬1. ÏÔÊ¾expiredPage£»2. Å×³öÒì³£¡£
+        // æœ‰ä¸¤ç§å¤„ç†æ–¹æ³•ï¼Œ1. æ˜¾ç¤ºexpiredPageï¼›2. æŠ›å‡ºå¼‚å¸¸ã€‚
         if (expiredPage != null) {
             rundata.setRedirectTarget(expiredPage);
         } else if (expiredPage == null) {

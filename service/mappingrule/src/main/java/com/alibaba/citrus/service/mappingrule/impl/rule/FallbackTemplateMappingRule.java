@@ -33,16 +33,16 @@ import com.alibaba.citrus.service.mappingrule.support.AbstractTemplateMappingRul
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ÏòÉÏËÑË÷µÄÄ£°åÓ³Éä¹æÔò¡£
+ * å‘ä¸Šæœç´¢çš„æ¨¡æ¿æ˜ å°„è§„åˆ™ã€‚
  * <ol>
- * <li>ÔÚÄ£°åÃûÇ°¼ÓÉÏtemplate prefix£¨Èç¹ûÓĞµÄ»°£©¡£</li>
- * <li>Èç¹ûÄ£°åÃûÎ´Ö¸¶¨ºó×º£¬Ôò²»¼ÓÉÏºó×º¡£</li>
- * <li>µ÷ÓÃtemplate service¼ì²éÄ£°åÊÇ·ñ´æÔÚ£¬Èç¹û²»´æÔÚ£¬Ôò²éÕÒÉÏÒ»¼¶Ä£¿éÃû£¬Ò»Ö±ÕÒµ½¸ùÄ¿Â¼¡£</li>
- * <li>Èç¹ûÈ«ÕÒ²»µ½£¬Ôò·µ»ØµÚÒ»¸ö²»Æ¥ÅäµÄnormalizedÄ£¿éÃû£¨¼´¾«È·Æ¥Åä£©£¬·ñÔò·µ»ØÆ¥ÅäµÄÄ£°åÃû¡£</li>
+ * <li>åœ¨æ¨¡æ¿åå‰åŠ ä¸Štemplate prefixï¼ˆå¦‚æœæœ‰çš„è¯ï¼‰ã€‚</li>
+ * <li>å¦‚æœæ¨¡æ¿åæœªæŒ‡å®šåç¼€ï¼Œåˆ™ä¸åŠ ä¸Šåç¼€ã€‚</li>
+ * <li>è°ƒç”¨template serviceæ£€æŸ¥æ¨¡æ¿æ˜¯å¦å­˜åœ¨ï¼Œå¦‚æœä¸å­˜åœ¨ï¼Œåˆ™æŸ¥æ‰¾ä¸Šä¸€çº§æ¨¡å—åï¼Œä¸€ç›´æ‰¾åˆ°æ ¹ç›®å½•ã€‚</li>
+ * <li>å¦‚æœå…¨æ‰¾ä¸åˆ°ï¼Œåˆ™è¿”å›ç¬¬ä¸€ä¸ªä¸åŒ¹é…çš„normalizedæ¨¡å—åï¼ˆå³ç²¾ç¡®åŒ¹é…ï¼‰ï¼Œå¦åˆ™è¿”å›åŒ¹é…çš„æ¨¡æ¿åã€‚</li>
  * </ol>
  * <p>
- * ÀıÈç£º½«Ä£°åÃû£º<code>"about/directions/driving.vm"</code>Ó³Éäµ½layout
- * template£¬½«Ë³´ÎËÑË÷ÒÔÏÂÄ£°å£º
+ * ä¾‹å¦‚ï¼šå°†æ¨¡æ¿åï¼š<code>"about/directions/driving.vm"</code>æ˜ å°„åˆ°layout
+ * templateï¼Œå°†é¡ºæ¬¡æœç´¢ä»¥ä¸‹æ¨¡æ¿ï¼š
  * </p>
  * <ol>
  * <li><code>&quot;layout/about/directions/driving.vm&quot;</code></li>
@@ -69,7 +69,7 @@ public class FallbackTemplateMappingRule extends AbstractTemplateMappingRule {
     public String doMapping(String name) {
         FallbackTemplateIterator iter = new FallbackTemplateIterator(name, getTemplatePrefix(), matchLastName);
 
-        // ±£´æµÚÒ»¸ö¾«È·µÄÆ¥Åä£¬ÍòÒ»ÕÒ²»µ½£¬¾Í·µ»ØÕâ¸öÖµ
+        // ä¿å­˜ç¬¬ä¸€ä¸ªç²¾ç¡®çš„åŒ¹é…ï¼Œä¸‡ä¸€æ‰¾ä¸åˆ°ï¼Œå°±è¿”å›è¿™ä¸ªå€¼
         String firstTemplateName = iter.getNext();
 
         while (iter.hasNext()) {

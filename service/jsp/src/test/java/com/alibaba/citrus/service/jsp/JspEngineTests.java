@@ -132,7 +132,7 @@ public class JspEngineTests extends AbstractJspEngineTests {
 
     @Test
     public void contextRoot_getResourceOfRoot() throws Exception {
-        // getResource("/")´æÔÚ
+        // getResource("/")å­˜åœ¨
         initServlet("webapp1/WEB-INF/web.xml");
         initFactory();
 
@@ -148,9 +148,9 @@ public class JspEngineTests extends AbstractJspEngineTests {
 
     @Test
     public void contextRoot_getResourceOfWebXml() throws Exception {
-        // getResource("/")²»´æÔÚ£¬"WEB-INF/web.xml"´æÔÚ
+        // getResource("/")ä¸å­˜åœ¨ï¼Œ"WEB-INF/web.xml"å­˜åœ¨
         initServlet("webapp1/WEB-INF/web.xml");
-        ((ServletContextWrapper) servletContext).setSupportGetResourceOfRoot(false); // Ê¹getResource("/")·µ»Ønull
+        ((ServletContextWrapper) servletContext).setSupportGetResourceOfRoot(false); // ä½¿getResource("/")è¿”å›null
         initFactory();
 
         assertEquals("/mytemplates/mytemplate.jsp", engine.getPathWithinServletContext("/mytemplate.jsp"));
@@ -165,9 +165,9 @@ public class JspEngineTests extends AbstractJspEngineTests {
 
     @Test
     public void contextRoot_failed() throws Exception {
-        // getResource("/")²»´æÔÚ£¬WEB-INF/web.xmlÒ²²»´æÔÚ
+        // getResource("/")ä¸å­˜åœ¨ï¼ŒWEB-INF/web.xmlä¹Ÿä¸å­˜åœ¨
         initServlet("webapp2/WEB-INF-2/web.xml");
-        ((ServletContextWrapper) servletContext).setSupportGetResourceOfRoot(false); // Ê¹getResource("/")·µ»Ønull
+        ((ServletContextWrapper) servletContext).setSupportGetResourceOfRoot(false); // ä½¿getResource("/")è¿”å›null
 
         try {
             initFactory();
@@ -219,19 +219,19 @@ public class JspEngineTests extends AbstractJspEngineTests {
         RequestContext rc = null;
 
         try {
-            // Ô¤±¸request, response
+            // é¢„å¤‡request, response
             rc = requestContexts.getRequestContext(servletContext, request, response);
 
-            // ÉèÖÃcontentTypeºÍcharset£¬ºÍjspÖĞµÄÉèÖÃ²»Í¬£¬ÒÔ´ËÎª×¼
+            // è®¾ç½®contentTypeå’Œcharsetï¼Œå’Œjspä¸­çš„è®¾ç½®ä¸åŒï¼Œä»¥æ­¤ä¸ºå‡†
             rc.getResponse().setContentType("text/plain; charset=GBK"); // JSP: text/html; charset=UTF-8
 
-            // Ô¤±¸template context
+            // é¢„å¤‡template context
             TemplateContext context = new MappedTemplateContext();
-            context.put("hello", "ÖĞ¹ú");
+            context.put("hello", "ä¸­å›½");
 
             String jsp = jspx ? "/test.jspx" : "/test.jsp";
 
-            // äÖÈ¾
+            // æ¸²æŸ“
             switch (type) {
                 case 1:
                     assertEquals("", templateService.getText(jsp, context));
@@ -250,7 +250,7 @@ public class JspEngineTests extends AbstractJspEngineTests {
                     break;
             }
         } finally {
-            // ½áÊø²¢Ìá½»response
+            // ç»“æŸå¹¶æäº¤response
             requestContexts.commitRequestContext(rc);
         }
 
@@ -258,7 +258,7 @@ public class JspEngineTests extends AbstractJspEngineTests {
 
         assertEquals("text/plain", webResponse.getContentType());
         assertEquals("GBK", webResponse.getCharacterSet());
-        assertEquals("hello, ÖĞ¹ú!", webResponse.getText().trim());
+        assertEquals("hello, ä¸­å›½!", webResponse.getText().trim());
     }
 
     public static interface MockRequestProxy extends HttpServletRequest, ProxyTargetFactory {
@@ -284,7 +284,7 @@ public class JspEngineTests extends AbstractJspEngineTests {
         }
 
         /**
-         * ÅĞ¶Ïµ±resource²»´æÔÚÊ±£¬·µ»Ønull¡£
+         * åˆ¤æ–­å½“resourceä¸å­˜åœ¨æ—¶ï¼Œè¿”å›nullã€‚
          */
         public URL getResource(String path) throws MalformedURLException {
             if (("/".equals(path) || isEmpty(path)) && !supportGetResourceOfRoot) {
@@ -303,7 +303,7 @@ public class JspEngineTests extends AbstractJspEngineTests {
                 }
             }
 
-            // ³ıÈ¥Ä©Î²µÄ/£¬ÅäºÏ²âÊÔ
+            // é™¤å»æœ«å°¾çš„/ï¼Œé…åˆæµ‹è¯•
             String urlstr = url.toExternalForm();
 
             if (urlstr.endsWith("/")) {
@@ -415,7 +415,7 @@ public class JspEngineTests extends AbstractJspEngineTests {
     }
 
     /**
-     * ÓÉÓÚjasper²»Ö§³Öjspx£¬¹Ê×öÒ»¸ö¼ÙµÄservlet½öÓÃÓÚ²âÊÔ¡£ÔÚĞÂ°æµÄtomcatÖĞ£¬½«×Ô¶¯Ö§³Öjspx¡£
+     * ç”±äºjasperä¸æ”¯æŒjspxï¼Œæ•…åšä¸€ä¸ªå‡çš„servletä»…ç”¨äºæµ‹è¯•ã€‚åœ¨æ–°ç‰ˆçš„tomcatä¸­ï¼Œå°†è‡ªåŠ¨æ”¯æŒjspxã€‚
      */
     public static class FakeJspxServlet extends HttpServlet {
         private static final long serialVersionUID = 780039704847320821L;

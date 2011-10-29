@@ -35,7 +35,7 @@ import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 import com.alibaba.citrus.webx.handler.support.AbstractVisitor;
 
 /**
- * ÓÃÀ´±ÜÃâ´Ó·ÇÊÚÈ¨µÄ»úÆ÷ÉÏ·ÃÎÊ¿ª·¢ÕßÒ³ÃæµÄ×é¼ş¡£
+ * ç”¨æ¥é¿å…ä»éæˆæƒçš„æœºå™¨ä¸Šè®¿é—®å¼€å‘è€…é¡µé¢çš„ç»„ä»¶ã€‚
  * 
  * @author Michael Zhou
  */
@@ -77,11 +77,11 @@ public class AccessControlComponent extends PageComponent {
                 }
             }
 
-            // ×ÜÊÇ½ÓÊÜlocalhost
+            // æ€»æ˜¯æ¥å—localhost
             if (addr.isLoopbackAddress()) {
                 return true;
             } else {
-                // ×ÜÊÇ½ÓÊÜµ±Ç°Ö÷»úÖĞÈÎÒâÒ»¿éÍø¿¨µÄÈÎÒâip
+                // æ€»æ˜¯æ¥å—å½“å‰ä¸»æœºä¸­ä»»æ„ä¸€å—ç½‘å¡çš„ä»»æ„ip
                 for (Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces(); e.hasMoreElements();) {
                     for (Enumeration<InetAddress> f = e.nextElement().getInetAddresses(); f.hasMoreElements();) {
                         if (addr.equals(f.nextElement())) {

@@ -22,7 +22,7 @@ import org.apache.velocity.app.event.ReferenceInsertionEventHandler;
 import com.alibaba.citrus.service.template.Renderable;
 
 /**
- * äÖÈ¾<code>Renderable</code>µÄevent handler¡£
+ * æ¸²æŸ“<code>Renderable</code>çš„event handlerã€‚
  * 
  * @author Michael Zhou
  */

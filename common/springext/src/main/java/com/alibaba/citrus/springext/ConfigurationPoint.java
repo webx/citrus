@@ -23,52 +23,52 @@ import org.springframework.beans.factory.xml.NamespaceHandler;
 
 public interface ConfigurationPoint {
     /**
-     * È¡µÃµ±Ç°configuration pointËùÔÚµÄËùÓĞconfiguration points×¢²á±í¡£
+     * å–å¾—å½“å‰configuration pointæ‰€åœ¨çš„æ‰€æœ‰configuration pointsæ³¨å†Œè¡¨ã€‚
      */
     ConfigurationPoints getConfigurationPoints();
 
     /**
-     * È¡µÃÔÚXMLÅäÖÃÎÄ¼şÖĞ£¬ÓÃÀ´´ú±íµ±Ç°configuration pointµÄÃû×Ö¿Õ¼ä¡£
+     * å–å¾—åœ¨XMLé…ç½®æ–‡ä»¶ä¸­ï¼Œç”¨æ¥ä»£è¡¨å½“å‰configuration pointçš„åå­—ç©ºé—´ã€‚
      */
     String getNamespaceUri();
 
     /**
-     * È¡µÃspring <code>NamespaceHandler</code>¶ÔÏó¡£
+     * å–å¾—spring <code>NamespaceHandler</code>å¯¹è±¡ã€‚
      */
     NamespaceHandler getNamespaceHandler();
 
     /**
-     * È¡µÃconfiguration pointµÄÃû³Æ¡£
+     * å–å¾—configuration pointçš„åç§°ã€‚
      */
     String getName();
 
     /**
-     * È¡µÃÄ¬ÈÏµÄelementÃû³Æ¡£
+     * å–å¾—é»˜è®¤çš„elementåç§°ã€‚
      */
     String getDefaultElementName();
 
     /**
-     * È¡µÃ½¨ÒéµÄnsÇ°×ºÃû¡£
+     * å–å¾—å»ºè®®çš„nså‰ç¼€åã€‚
      */
     String getPreferredNsPrefix();
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆºÍÀàĞÍµÄcontribution¡£
+     * å–å¾—æŒ‡å®šåç§°å’Œç±»å‹çš„contributionã€‚
      */
     Contribution getContribution(String name, ContributionType type);
 
     /**
-     * È¡µÃËùÓĞµÄcontributions¡£
+     * å–å¾—æ‰€æœ‰çš„contributionsã€‚
      */
     Collection<Contribution> getContributions();
 
     /**
-     * È¡µÃschemas¡£
+     * å–å¾—schemasã€‚
      */
     VersionableSchemas getSchemas();
 
     /**
-     * È¡µÃÃèÊö¡£
+     * å–å¾—æè¿°ã€‚
      */
     String getDescription();
 }

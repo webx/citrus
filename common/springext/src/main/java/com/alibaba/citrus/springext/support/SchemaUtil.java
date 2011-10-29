@@ -53,7 +53,7 @@ import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.Schema;
 
 /**
- * ´¦ÀíschemaºÍxmlµÄ¹¤¾ß¡£
+ * å¤„ç†schemaå’Œxmlçš„å·¥å…·ã€‚
  * 
  * @author Michael Zhou
  */
@@ -69,7 +69,7 @@ public class SchemaUtil {
     private final static QName XSD_INCLUDE = DocumentHelper.createQName("include", XSD);
 
     /**
-     * ¶ÁÈ¡dom¡£
+     * è¯»å–domã€‚
      */
     public static Document readDocument(InputStream istream, String systemId, boolean close) throws DocumentException {
         SAXReader reader = new SAXReader(false);
@@ -90,7 +90,7 @@ public class SchemaUtil {
     }
 
     /**
-     * Êä³öDOM¡£
+     * è¾“å‡ºDOMã€‚
      */
     public static String getDocumentText(Document doc, String charset) throws IOException {
         StringWriter writer = new StringWriter();
@@ -99,7 +99,7 @@ public class SchemaUtil {
     }
 
     /**
-     * Êä³öDOM¡£
+     * è¾“å‡ºDOMã€‚
      */
     public static byte[] getDocumentContent(Document doc, String charset) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -108,7 +108,7 @@ public class SchemaUtil {
     }
 
     /**
-     * Êä³öDOM¡£
+     * è¾“å‡ºDOMã€‚
      */
     public static void writeDocument(Document doc, OutputStream stream, String charset) throws IOException {
         charset = defaultIfEmpty(trimToNull(charset), "UTF-8");
@@ -116,7 +116,7 @@ public class SchemaUtil {
     }
 
     /**
-     * Êä³öDOM¡£
+     * è¾“å‡ºDOMã€‚
      */
     public static void writeDocument(Document doc, Writer writer, String charset) throws IOException {
         charset = defaultIfEmpty(trimToNull(charset), "UTF-8");
@@ -142,7 +142,7 @@ public class SchemaUtil {
     }
 
     /**
-     * ½«ËùÓĞcontributionsµÄschema»ã×Ü³ÉÒ»¸öschema¡£
+     * å°†æ‰€æœ‰contributionsçš„schemaæ±‡æ€»æˆä¸€ä¸ªschemaã€‚
      */
     private static Document createConfigurationPointSchema(ConfigurationPoint configurationPoint, String version) {
         Document doc = createDocument();
@@ -202,14 +202,14 @@ public class SchemaUtil {
     }
 
     /**
-     * È¡µÃcontribution schemaµÄÄÚÈİ£¬½«ÆäÖĞÒıÓÃÆäËüconfiguration
-     * pointµÄelementĞŞ¸Ä³É¾ßÌåµÄelementÃû³Æ¡£ÀıÈç£¬½«ÈçÏÂ¶¨Òå£º
+     * å–å¾—contribution schemaçš„å†…å®¹ï¼Œå°†å…¶ä¸­å¼•ç”¨å…¶å®ƒconfiguration
+     * pointçš„elementä¿®æ”¹æˆå…·ä½“çš„elementåç§°ã€‚ä¾‹å¦‚ï¼Œå°†å¦‚ä¸‹å®šä¹‰ï¼š
      * 
      * <pre>
      * &lt;xsd:any namespace="http://www.alibaba.com/schema/services/template/engines" /&gt;
      * </pre>
      * <p>
-     * ĞŞ¸Ä³É£º
+     * ä¿®æ”¹æˆï¼š
      * </p>
      * 
      * <pre>
@@ -253,7 +253,7 @@ public class SchemaUtil {
 
             visitElement(root);
 
-            // ±ÜÃâ¼ÓÈëÖØ¸´µÄimport
+            // é¿å…åŠ å…¥é‡å¤çš„import
             @SuppressWarnings("unchecked")
             List<Element> importElements = root.elements(XSD_IMPORT);
 
@@ -263,7 +263,7 @@ public class SchemaUtil {
                 }
             }
 
-            // ¼ÓÈëimports£¬µ«±ÜÃâ¼ÓÈëµ±Ç°schemaËùÔÚµÄconfigurtion point schema
+            // åŠ å…¥importsï¼Œä½†é¿å…åŠ å…¥å½“å‰schemaæ‰€åœ¨çš„configurtion point schema
             @SuppressWarnings("unchecked")
             List<Element> rootElements = root.elements();
             int importIndex = 0;
@@ -320,7 +320,7 @@ public class SchemaUtil {
                 String nsPrefix = getNamespacePrefix(cp.getPreferredNsPrefix(), ns);
 
                 // <xsd:schema xmlns:prefix="ns">
-                // ×¢Òâ£º±ØĞë½«ns¶¨Òå¼ÓÔÚ¶¥²ãelement£¬·ñÔòµÍ°æ±¾µÄxerces»á±¨´í¡£
+                // æ³¨æ„ï¼šå¿…é¡»å°†nså®šä¹‰åŠ åœ¨é¡¶å±‚elementï¼Œå¦åˆ™ä½ç‰ˆæœ¬çš„xercesä¼šæŠ¥é”™ã€‚
                 root.addNamespace(nsPrefix, ns);
 
                 // <xsd:choice minOccurs="?" maxOccurs="?" /> 
@@ -346,14 +346,14 @@ public class SchemaUtil {
                     choiceElement.add(elementElement);
                 }
 
-                // ÓÃchoiceÈ¡´úany
+                // ç”¨choiceå–ä»£any
                 elements.set(index, choiceElement);
             }
         }
     }
 
     /**
-     * ĞŞ¸Äschema£¬³ıÈ¥ËùÓĞµÄincludes¡£
+     * ä¿®æ”¹schemaï¼Œé™¤å»æ‰€æœ‰çš„includesã€‚
      */
     public static byte[] getSchemaContentWithoutIncludes(Schema schema) throws IOException {
         Document doc = schema.getDocument();
@@ -372,7 +372,7 @@ public class SchemaUtil {
     }
 
     /**
-     * ĞŞ¸Äschema£¬Ìí¼Ó¼ä½ÓÒÀÀµµÄincludes¡£
+     * ä¿®æ”¹schemaï¼Œæ·»åŠ é—´æ¥ä¾èµ–çš„includesã€‚
      */
     public static byte[] getSchemaContentWithIndirectIncludes(Schema schema, Map<String, Schema> includes)
             throws IOException {
@@ -392,7 +392,7 @@ public class SchemaUtil {
                 i.remove();
             }
 
-            // Ìí¼Óincludes 
+            // æ·»åŠ includes 
             @SuppressWarnings("unchecked")
             List<Node> nodes = root.elements();
             int i = 0;

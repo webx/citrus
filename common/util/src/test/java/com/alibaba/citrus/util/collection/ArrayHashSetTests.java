@@ -30,7 +30,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>ArrayHashSet</code>.
+ * æµ‹è¯•<code>ArrayHashSet</code>.
  * 
  * @author Michael Zhou
  */
@@ -41,13 +41,13 @@ public class ArrayHashSetTests extends AbstractTests {
 
     @Before
     public void init() {
-        // set1²âÊÔÒ»°ãÇé¿ö.
+        // set1æµ‹è¯•ä¸€èˆ¬æƒ…å†µ.
         set1 = createArrayHashSet("aaa", "bbb", "ccc");
 
-        // set2²âÊÔkeyºÍvalueÎªnullµÄÇé¿ö.
+        // set2æµ‹è¯•keyå’Œvalueä¸ºnullçš„æƒ…å†µ.
         set2 = createArrayHashSet(null, "aaa");
 
-        // set3Îª¿Õ.
+        // set3ä¸ºç©º.
         set3 = createArrayHashSet();
     }
 
@@ -276,12 +276,12 @@ public class ArrayHashSetTests extends AbstractTests {
     public void toArray() {
         Object[] array;
 
-        // ²»´ø²ÎÊıµÄtoArray().
+        // ä¸å¸¦å‚æ•°çš„toArray().
         array = set1.toArray();
         set1.removeAll(Arrays.asList(array));
         assertEquals(0, set1.size());
 
-        // ´ø²ÎÊıµÄtoArray(Object[]).
+        // å¸¦å‚æ•°çš„toArray(Object[]).
         array = new Object[2];
         set2.toArray(array);
         set2.removeAll(Arrays.asList(array));
@@ -292,7 +292,7 @@ public class ArrayHashSetTests extends AbstractTests {
     public void failFast() {
         Iterator<String> i;
 
-        // ĞŞ¸ÄsetÒÔºó, ÊÔÍ¼i.next()µ¼ÖÂÒì³£.
+        // ä¿®æ”¹setä»¥å, è¯•å›¾i.next()å¯¼è‡´å¼‚å¸¸.
         i = set1.iterator();
         set1.add("aaa+aaa");
 
@@ -302,7 +302,7 @@ public class ArrayHashSetTests extends AbstractTests {
         } catch (ConcurrentModificationException e) {
         }
 
-        // ĞŞ¸ÄsetÒÔºó, ÊÔÍ¼i.remove()µ¼ÖÂÒì³£.
+        // ä¿®æ”¹setä»¥å, è¯•å›¾i.remove()å¯¼è‡´å¼‚å¸¸.
         i = set2.iterator();
         i.next();
         set2.add("aaa+aaa");

@@ -25,194 +25,194 @@ import com.alibaba.citrus.util.i18n.LocaleUtil;
 import com.alibaba.citrus.util.internal.Entities;
 
 /**
- * ×Ö·û´®×ªÒå¹¤¾ßÀà£¬ÄÜ½«×Ö·û´®×ª»»³ÉÊÊÓ¦ Java¡¢Java Script¡¢HTML¡¢XML¡¢ºÍSQLÓï¾äµÄĞÎÊ½¡£
+ * å­—ç¬¦ä¸²è½¬ä¹‰å·¥å…·ç±»ï¼Œèƒ½å°†å­—ç¬¦ä¸²è½¬æ¢æˆé€‚åº” Javaã€Java Scriptã€HTMLã€XMLã€å’ŒSQLè¯­å¥çš„å½¢å¼ã€‚
  * 
  * @author Michael Zhou
  */
 public class StringEscapeUtil {
     // ==========================================================================
-    // JavaºÍJavaScript¡£ 
+    // Javaå’ŒJavaScriptã€‚ 
     // ==========================================================================
 
     /**
-     * °´JavaµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ×ªÒå¡£
+     * æŒ‰Javaçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œè½¬ä¹‰ã€‚
      * <p>
-     * ½«Ë«ÒıºÅºÍ¿ØÖÆ×Ö·û×ª»»³É<code>'\\'</code>¿ªÍ·µÄĞÎÊ½£¬ÀıÈçtabÖÆ±í·û½«±»×ª»»³É<code>\t</code>¡£
+     * å°†åŒå¼•å·å’Œæ§åˆ¶å­—ç¬¦è½¬æ¢æˆ<code>'\\'</code>å¼€å¤´çš„å½¢å¼ï¼Œä¾‹å¦‚tabåˆ¶è¡¨ç¬¦å°†è¢«è½¬æ¢æˆ<code>\t</code>ã€‚
      * </p>
      * <p>
-     * JavaºÍJavaScript×Ö·û´®µÄÎ¨Ò»²î±ğÊÇ£¬JavaScript±ØĞë¶Ôµ¥ÒıºÅ½øĞĞ×ªÒå£¬¶øJava²»ĞèÒª¡£
+     * Javaå’ŒJavaScriptå­—ç¬¦ä¸²çš„å”¯ä¸€å·®åˆ«æ˜¯ï¼ŒJavaScriptå¿…é¡»å¯¹å•å¼•å·è¿›è¡Œè½¬ä¹‰ï¼Œè€ŒJavaä¸éœ€è¦ã€‚
      * </p>
      * <p>
-     * ÀıÈç£º×Ö·û´®£º<code>He didn't say, "Stop!"</code>±»×ª»»³É
+     * ä¾‹å¦‚ï¼šå­—ç¬¦ä¸²ï¼š<code>He didn't say, "Stop!"</code>è¢«è½¬æ¢æˆ
      * <code>He didn't say, \"Stop!\"</code>
      * </p>
      * 
-     * @param str Òª×ªÒåµÄ×Ö·û´®
-     * @return ×ªÒåºóµÄ×Ö·û´®£¬Èç¹ûÔ­×Ö·û´®Îª<code>null</code>£¬Ôò·µ»Ø<code>null</code>
+     * @param str è¦è½¬ä¹‰çš„å­—ç¬¦ä¸²
+     * @return è½¬ä¹‰åçš„å­—ç¬¦ä¸²ï¼Œå¦‚æœåŸå­—ç¬¦ä¸²ä¸º<code>null</code>ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static String escapeJava(String str) {
         return escapeJavaStyleString(str, false, false);
     }
 
     /**
-     * °´JavaµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ×ªÒå¡£
+     * æŒ‰Javaçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œè½¬ä¹‰ã€‚
      * <p>
-     * ½«Ë«ÒıºÅºÍ¿ØÖÆ×Ö·û×ª»»³É<code>'\\'</code>¿ªÍ·µÄĞÎÊ½£¬ÀıÈçtabÖÆ±í·û½«±»×ª»»³É<code>\t</code>¡£
+     * å°†åŒå¼•å·å’Œæ§åˆ¶å­—ç¬¦è½¬æ¢æˆ<code>'\\'</code>å¼€å¤´çš„å½¢å¼ï¼Œä¾‹å¦‚tabåˆ¶è¡¨ç¬¦å°†è¢«è½¬æ¢æˆ<code>\t</code>ã€‚
      * </p>
      * <p>
-     * JavaºÍJavaScript×Ö·û´®µÄÎ¨Ò»²î±ğÊÇ£¬JavaScript±ØĞë¶Ôµ¥ÒıºÅ½øĞĞ×ªÒå£¬¶øJava²»ĞèÒª¡£
+     * Javaå’ŒJavaScriptå­—ç¬¦ä¸²çš„å”¯ä¸€å·®åˆ«æ˜¯ï¼ŒJavaScriptå¿…é¡»å¯¹å•å¼•å·è¿›è¡Œè½¬ä¹‰ï¼Œè€ŒJavaä¸éœ€è¦ã€‚
      * </p>
      * <p>
-     * ÀıÈç£º×Ö·û´®£º<code>He didn't say, "Stop!"</code>±»×ª»»³É
+     * ä¾‹å¦‚ï¼šå­—ç¬¦ä¸²ï¼š<code>He didn't say, "Stop!"</code>è¢«è½¬æ¢æˆ
      * <code>He didn't say, \"Stop!\"</code>
      * </p>
      * 
-     * @param str Òª×ªÒåµÄ×Ö·û´®
-     * @param strict ÊÇ·ñÒÔÑÏ¸ñµÄ·½Ê½±àÂë×Ö·û´®
-     * @return ×ªÒåºóµÄ×Ö·û´®£¬Èç¹ûÔ­×Ö·û´®Îª<code>null</code>£¬Ôò·µ»Ø<code>null</code>
+     * @param str è¦è½¬ä¹‰çš„å­—ç¬¦ä¸²
+     * @param strict æ˜¯å¦ä»¥ä¸¥æ ¼çš„æ–¹å¼ç¼–ç å­—ç¬¦ä¸²
+     * @return è½¬ä¹‰åçš„å­—ç¬¦ä¸²ï¼Œå¦‚æœåŸå­—ç¬¦ä¸²ä¸º<code>null</code>ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static String escapeJava(String str, boolean strict) {
         return escapeJavaStyleString(str, false, strict);
     }
 
     /**
-     * °´JavaµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ×ªÒå¡£
+     * æŒ‰Javaçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œè½¬ä¹‰ã€‚
      * <p>
-     * ½«Ë«ÒıºÅºÍ¿ØÖÆ×Ö·û×ª»»³É<code>'\\'</code>¿ªÍ·µÄĞÎÊ½£¬ÀıÈçtabÖÆ±í·û½«±»×ª»»³É<code>\t</code>¡£
+     * å°†åŒå¼•å·å’Œæ§åˆ¶å­—ç¬¦è½¬æ¢æˆ<code>'\\'</code>å¼€å¤´çš„å½¢å¼ï¼Œä¾‹å¦‚tabåˆ¶è¡¨ç¬¦å°†è¢«è½¬æ¢æˆ<code>\t</code>ã€‚
      * </p>
      * <p>
-     * JavaºÍJavaScript×Ö·û´®µÄÎ¨Ò»²î±ğÊÇ£¬JavaScript±ØĞë¶Ôµ¥ÒıºÅ½øĞĞ×ªÒå£¬¶øJava²»ĞèÒª¡£
+     * Javaå’ŒJavaScriptå­—ç¬¦ä¸²çš„å”¯ä¸€å·®åˆ«æ˜¯ï¼ŒJavaScriptå¿…é¡»å¯¹å•å¼•å·è¿›è¡Œè½¬ä¹‰ï¼Œè€ŒJavaä¸éœ€è¦ã€‚
      * </p>
      * <p>
-     * ÀıÈç£º×Ö·û´®£º<code>He didn't say, "Stop!"</code>±»×ª»»³É
+     * ä¾‹å¦‚ï¼šå­—ç¬¦ä¸²ï¼š<code>He didn't say, "Stop!"</code>è¢«è½¬æ¢æˆ
      * <code>He didn't say, \"Stop!\"</code>
      * </p>
      * 
-     * @param str Òª×ªÒåµÄ×Ö·û´®
-     * @param out Êä³öÁ÷
-     * @throws IllegalArgumentException Èç¹ûÊä³öÁ÷Îª<code>null</code>
-     * @throws IOException Èç¹ûÊä³öÊ§°Ü
+     * @param str è¦è½¬ä¹‰çš„å­—ç¬¦ä¸²
+     * @param out è¾“å‡ºæµ
+     * @throws IllegalArgumentException å¦‚æœè¾“å‡ºæµä¸º<code>null</code>
+     * @throws IOException å¦‚æœè¾“å‡ºå¤±è´¥
      */
     public static void escapeJava(String str, Appendable out) throws IOException {
         escapeJavaStyleString(str, false, out, false);
     }
 
     /**
-     * °´JavaµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ×ªÒå¡£
+     * æŒ‰Javaçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œè½¬ä¹‰ã€‚
      * <p>
-     * ½«Ë«ÒıºÅºÍ¿ØÖÆ×Ö·û×ª»»³É<code>'\\'</code>¿ªÍ·µÄĞÎÊ½£¬ÀıÈçtabÖÆ±í·û½«±»×ª»»³É<code>\t</code>¡£
+     * å°†åŒå¼•å·å’Œæ§åˆ¶å­—ç¬¦è½¬æ¢æˆ<code>'\\'</code>å¼€å¤´çš„å½¢å¼ï¼Œä¾‹å¦‚tabåˆ¶è¡¨ç¬¦å°†è¢«è½¬æ¢æˆ<code>\t</code>ã€‚
      * </p>
      * <p>
-     * JavaºÍJavaScript×Ö·û´®µÄÎ¨Ò»²î±ğÊÇ£¬JavaScript±ØĞë¶Ôµ¥ÒıºÅ½øĞĞ×ªÒå£¬¶øJava²»ĞèÒª¡£
+     * Javaå’ŒJavaScriptå­—ç¬¦ä¸²çš„å”¯ä¸€å·®åˆ«æ˜¯ï¼ŒJavaScriptå¿…é¡»å¯¹å•å¼•å·è¿›è¡Œè½¬ä¹‰ï¼Œè€ŒJavaä¸éœ€è¦ã€‚
      * </p>
      * <p>
-     * ÀıÈç£º×Ö·û´®£º<code>He didn't say, "Stop!"</code>±»×ª»»³É
+     * ä¾‹å¦‚ï¼šå­—ç¬¦ä¸²ï¼š<code>He didn't say, "Stop!"</code>è¢«è½¬æ¢æˆ
      * <code>He didn't say, \"Stop!\"</code>
      * </p>
      * 
-     * @param str Òª×ªÒåµÄ×Ö·û´®
-     * @param out Êä³öÁ÷
-     * @param strict ÊÇ·ñÒÔÑÏ¸ñµÄ·½Ê½±àÂë×Ö·û´®
-     * @throws IllegalArgumentException Èç¹ûÊä³öÁ÷Îª<code>null</code>
-     * @throws IOException Èç¹ûÊä³öÊ§°Ü
+     * @param str è¦è½¬ä¹‰çš„å­—ç¬¦ä¸²
+     * @param out è¾“å‡ºæµ
+     * @param strict æ˜¯å¦ä»¥ä¸¥æ ¼çš„æ–¹å¼ç¼–ç å­—ç¬¦ä¸²
+     * @throws IllegalArgumentException å¦‚æœè¾“å‡ºæµä¸º<code>null</code>
+     * @throws IOException å¦‚æœè¾“å‡ºå¤±è´¥
      */
     public static void escapeJava(String str, Appendable out, boolean strict) throws IOException {
         escapeJavaStyleString(str, false, out, strict);
     }
 
     /**
-     * °´JavaScriptµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ×ªÒå¡£
+     * æŒ‰JavaScriptçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œè½¬ä¹‰ã€‚
      * <p>
-     * ½«Ë«ÒıºÅ¡¢µ¥ÒıºÅºÍ¿ØÖÆ×Ö·û×ª»»³É<code>'\\'</code>¿ªÍ·µÄĞÎÊ½£¬ÀıÈçtabÖÆ±í·û½«±»×ª»»³É<code>\t</code>¡£
+     * å°†åŒå¼•å·ã€å•å¼•å·å’Œæ§åˆ¶å­—ç¬¦è½¬æ¢æˆ<code>'\\'</code>å¼€å¤´çš„å½¢å¼ï¼Œä¾‹å¦‚tabåˆ¶è¡¨ç¬¦å°†è¢«è½¬æ¢æˆ<code>\t</code>ã€‚
      * </p>
      * <p>
-     * JavaºÍJavaScript×Ö·û´®µÄÎ¨Ò»²î±ğÊÇ£¬JavaScript±ØĞë¶Ôµ¥ÒıºÅ½øĞĞ×ªÒå£¬¶øJava²»ĞèÒª¡£
+     * Javaå’ŒJavaScriptå­—ç¬¦ä¸²çš„å”¯ä¸€å·®åˆ«æ˜¯ï¼ŒJavaScriptå¿…é¡»å¯¹å•å¼•å·è¿›è¡Œè½¬ä¹‰ï¼Œè€ŒJavaä¸éœ€è¦ã€‚
      * </p>
      * <p>
-     * ÀıÈç£º×Ö·û´®£º<code>He didn't say, "Stop!"</code>±»×ª»»³É
+     * ä¾‹å¦‚ï¼šå­—ç¬¦ä¸²ï¼š<code>He didn't say, "Stop!"</code>è¢«è½¬æ¢æˆ
      * <code>He didn\'t say, \"Stop!\"</code>
      * </p>
      * 
-     * @param str Òª×ªÒåµÄ×Ö·û´®
-     * @return ×ªÒåºóµÄ×Ö·û´®£¬Èç¹ûÔ­×Ö·û´®Îª<code>null</code>£¬Ôò·µ»Ø<code>null</code>
+     * @param str è¦è½¬ä¹‰çš„å­—ç¬¦ä¸²
+     * @return è½¬ä¹‰åçš„å­—ç¬¦ä¸²ï¼Œå¦‚æœåŸå­—ç¬¦ä¸²ä¸º<code>null</code>ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static String escapeJavaScript(String str) {
         return escapeJavaStyleString(str, true, false);
     }
 
     /**
-     * °´JavaScriptµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ×ªÒå¡£
+     * æŒ‰JavaScriptçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œè½¬ä¹‰ã€‚
      * <p>
-     * ½«Ë«ÒıºÅ¡¢µ¥ÒıºÅºÍ¿ØÖÆ×Ö·û×ª»»³É<code>'\\'</code>¿ªÍ·µÄĞÎÊ½£¬ÀıÈçtabÖÆ±í·û½«±»×ª»»³É<code>\t</code>¡£
+     * å°†åŒå¼•å·ã€å•å¼•å·å’Œæ§åˆ¶å­—ç¬¦è½¬æ¢æˆ<code>'\\'</code>å¼€å¤´çš„å½¢å¼ï¼Œä¾‹å¦‚tabåˆ¶è¡¨ç¬¦å°†è¢«è½¬æ¢æˆ<code>\t</code>ã€‚
      * </p>
      * <p>
-     * JavaºÍJavaScript×Ö·û´®µÄÎ¨Ò»²î±ğÊÇ£¬JavaScript±ØĞë¶Ôµ¥ÒıºÅ½øĞĞ×ªÒå£¬¶øJava²»ĞèÒª¡£
+     * Javaå’ŒJavaScriptå­—ç¬¦ä¸²çš„å”¯ä¸€å·®åˆ«æ˜¯ï¼ŒJavaScriptå¿…é¡»å¯¹å•å¼•å·è¿›è¡Œè½¬ä¹‰ï¼Œè€ŒJavaä¸éœ€è¦ã€‚
      * </p>
      * <p>
-     * ÀıÈç£º×Ö·û´®£º<code>He didn't say, "Stop!"</code>±»×ª»»³É
+     * ä¾‹å¦‚ï¼šå­—ç¬¦ä¸²ï¼š<code>He didn't say, "Stop!"</code>è¢«è½¬æ¢æˆ
      * <code>He didn\'t say, \"Stop!\"</code>
      * </p>
      * 
-     * @param str Òª×ªÒåµÄ×Ö·û´®
-     * @param strict ÊÇ·ñÒÔÑÏ¸ñµÄ·½Ê½±àÂë×Ö·û´®
-     * @return ×ªÒåºóµÄ×Ö·û´®£¬Èç¹ûÔ­×Ö·û´®Îª<code>null</code>£¬Ôò·µ»Ø<code>null</code>
+     * @param str è¦è½¬ä¹‰çš„å­—ç¬¦ä¸²
+     * @param strict æ˜¯å¦ä»¥ä¸¥æ ¼çš„æ–¹å¼ç¼–ç å­—ç¬¦ä¸²
+     * @return è½¬ä¹‰åçš„å­—ç¬¦ä¸²ï¼Œå¦‚æœåŸå­—ç¬¦ä¸²ä¸º<code>null</code>ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static String escapeJavaScript(String str, boolean strict) {
         return escapeJavaStyleString(str, true, strict);
     }
 
     /**
-     * °´JavaScriptµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ×ªÒå¡£
+     * æŒ‰JavaScriptçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œè½¬ä¹‰ã€‚
      * <p>
-     * ½«Ë«ÒıºÅ¡¢µ¥ÒıºÅºÍ¿ØÖÆ×Ö·û×ª»»³É<code>'\\'</code>¿ªÍ·µÄĞÎÊ½£¬ÀıÈçtabÖÆ±í·û½«±»×ª»»³É<code>\t</code>¡£
+     * å°†åŒå¼•å·ã€å•å¼•å·å’Œæ§åˆ¶å­—ç¬¦è½¬æ¢æˆ<code>'\\'</code>å¼€å¤´çš„å½¢å¼ï¼Œä¾‹å¦‚tabåˆ¶è¡¨ç¬¦å°†è¢«è½¬æ¢æˆ<code>\t</code>ã€‚
      * </p>
      * <p>
-     * JavaºÍJavaScript×Ö·û´®µÄÎ¨Ò»²î±ğÊÇ£¬JavaScript±ØĞë¶Ôµ¥ÒıºÅ½øĞĞ×ªÒå£¬¶øJava²»ĞèÒª¡£
+     * Javaå’ŒJavaScriptå­—ç¬¦ä¸²çš„å”¯ä¸€å·®åˆ«æ˜¯ï¼ŒJavaScriptå¿…é¡»å¯¹å•å¼•å·è¿›è¡Œè½¬ä¹‰ï¼Œè€ŒJavaä¸éœ€è¦ã€‚
      * </p>
      * <p>
-     * ÀıÈç£º×Ö·û´®£º<code>He didn't say, "Stop!"</code>±»×ª»»³É
+     * ä¾‹å¦‚ï¼šå­—ç¬¦ä¸²ï¼š<code>He didn't say, "Stop!"</code>è¢«è½¬æ¢æˆ
      * <code>He didn\'t say, \"Stop!\"</code>
      * </p>
      * 
-     * @param str Òª×ªÒåµÄ×Ö·û´®
-     * @param out Êä³öÁ÷
-     * @throws IllegalArgumentException Èç¹ûÊä³öÁ÷Îª<code>null</code>
-     * @throws IOException Èç¹ûÊä³öÊ§°Ü
+     * @param str è¦è½¬ä¹‰çš„å­—ç¬¦ä¸²
+     * @param out è¾“å‡ºæµ
+     * @throws IllegalArgumentException å¦‚æœè¾“å‡ºæµä¸º<code>null</code>
+     * @throws IOException å¦‚æœè¾“å‡ºå¤±è´¥
      */
     public static void escapeJavaScript(String str, Appendable out) throws IOException {
         escapeJavaStyleString(str, true, out, false);
     }
 
     /**
-     * °´JavaScriptµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ×ªÒå¡£
+     * æŒ‰JavaScriptçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œè½¬ä¹‰ã€‚
      * <p>
-     * ½«Ë«ÒıºÅ¡¢µ¥ÒıºÅºÍ¿ØÖÆ×Ö·û×ª»»³É<code>'\\'</code>¿ªÍ·µÄĞÎÊ½£¬ÀıÈçtabÖÆ±í·û½«±»×ª»»³É<code>\t</code>¡£
+     * å°†åŒå¼•å·ã€å•å¼•å·å’Œæ§åˆ¶å­—ç¬¦è½¬æ¢æˆ<code>'\\'</code>å¼€å¤´çš„å½¢å¼ï¼Œä¾‹å¦‚tabåˆ¶è¡¨ç¬¦å°†è¢«è½¬æ¢æˆ<code>\t</code>ã€‚
      * </p>
      * <p>
-     * JavaºÍJavaScript×Ö·û´®µÄÎ¨Ò»²î±ğÊÇ£¬JavaScript±ØĞë¶Ôµ¥ÒıºÅ½øĞĞ×ªÒå£¬¶øJava²»ĞèÒª¡£
+     * Javaå’ŒJavaScriptå­—ç¬¦ä¸²çš„å”¯ä¸€å·®åˆ«æ˜¯ï¼ŒJavaScriptå¿…é¡»å¯¹å•å¼•å·è¿›è¡Œè½¬ä¹‰ï¼Œè€ŒJavaä¸éœ€è¦ã€‚
      * </p>
      * <p>
-     * ÀıÈç£º×Ö·û´®£º<code>He didn't say, "Stop!"</code>±»×ª»»³É
+     * ä¾‹å¦‚ï¼šå­—ç¬¦ä¸²ï¼š<code>He didn't say, "Stop!"</code>è¢«è½¬æ¢æˆ
      * <code>He didn\'t say, \"Stop!\"</code>
      * </p>
      * 
-     * @param str Òª×ªÒåµÄ×Ö·û´®
-     * @param out Êä³öÁ÷
-     * @param strict ÊÇ·ñÒÔÑÏ¸ñµÄ·½Ê½±àÂë×Ö·û´®
-     * @throws IllegalArgumentException Èç¹ûÊä³öÁ÷Îª<code>null</code>
-     * @throws IOException Èç¹ûÊä³öÊ§°Ü
+     * @param str è¦è½¬ä¹‰çš„å­—ç¬¦ä¸²
+     * @param out è¾“å‡ºæµ
+     * @param strict æ˜¯å¦ä»¥ä¸¥æ ¼çš„æ–¹å¼ç¼–ç å­—ç¬¦ä¸²
+     * @throws IllegalArgumentException å¦‚æœè¾“å‡ºæµä¸º<code>null</code>
+     * @throws IOException å¦‚æœè¾“å‡ºå¤±è´¥
      */
     public static void escapeJavaScript(String str, Appendable out, boolean strict) throws IOException {
         escapeJavaStyleString(str, true, out, strict);
     }
 
     /**
-     * °´Java»òJavaScriptµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ×ªÒå¡£
+     * æŒ‰Javaæˆ–JavaScriptçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œè½¬ä¹‰ã€‚
      * 
-     * @param str Òª×ªÒåµÄ×Ö·û´®
-     * @param javascript ÊÇ·ñ¶Ôµ¥ÒıºÅºÍslash½øĞĞ×ªÒå
-     * @param strict ÊÇ·ñÒÔÑÏ¸ñµÄ·½Ê½±àÂë×Ö·û´®
-     * @return ×ªÒåºóµÄ×Ö·û´®
+     * @param str è¦è½¬ä¹‰çš„å­—ç¬¦ä¸²
+     * @param javascript æ˜¯å¦å¯¹å•å¼•å·å’Œslashè¿›è¡Œè½¬ä¹‰
+     * @param strict æ˜¯å¦ä»¥ä¸¥æ ¼çš„æ–¹å¼ç¼–ç å­—ç¬¦ä¸²
+     * @return è½¬ä¹‰åçš„å­—ç¬¦ä¸²
      */
     private static String escapeJavaStyleString(String str, boolean javascript, boolean strict) {
         if (str == null) {
@@ -228,18 +228,18 @@ public class StringEscapeUtil {
 
             return str;
         } catch (IOException e) {
-            return str; // StringBuilder²»¿ÉÄÜ·¢ÉúÕâ¸öÒì³£
+            return str; // StringBuilderä¸å¯èƒ½å‘ç”Ÿè¿™ä¸ªå¼‚å¸¸
         }
     }
 
     /**
-     * °´Java»òJavaScriptµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ×ªÒå¡£
+     * æŒ‰Javaæˆ–JavaScriptçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œè½¬ä¹‰ã€‚
      * 
-     * @param str Òª×ªÒåµÄ×Ö·û´®
-     * @param javascript ÊÇ·ñ¶Ôµ¥ÒıºÅºÍslash½øĞĞ×ªÒå
-     * @param out Êä³öÁ÷
-     * @param strict ÊÇ·ñÒÔÑÏ¸ñµÄ·½Ê½±àÂë×Ö·û´®
-     * @return Èç¹û×Ö·û´®Ã»ÓĞ±ä»¯£¬Ôò·µ»Ø<code>false</code>
+     * @param str è¦è½¬ä¹‰çš„å­—ç¬¦ä¸²
+     * @param javascript æ˜¯å¦å¯¹å•å¼•å·å’Œslashè¿›è¡Œè½¬ä¹‰
+     * @param out è¾“å‡ºæµ
+     * @param strict æ˜¯å¦ä»¥ä¸¥æ ¼çš„æ–¹å¼ç¼–ç å­—ç¬¦ä¸²
+     * @return å¦‚æœå­—ç¬¦ä¸²æ²¡æœ‰å˜åŒ–ï¼Œåˆ™è¿”å›<code>false</code>
      */
     private static boolean escapeJavaStyleString(String str, boolean javascript, Appendable out, boolean strict)
             throws IOException {
@@ -296,7 +296,7 @@ public class StringEscapeUtil {
                         break;
                 }
 
-                // ÉèÖÃ¸Ä±ä±êÖ¾
+                // è®¾ç½®æ”¹å˜æ ‡å¿—
                 needToChange = true;
             } else if (strict && ch > 0xff) {
                 if (ch > 0xfff) {
@@ -305,17 +305,17 @@ public class StringEscapeUtil {
                     out.append("\\u0").append(Integer.toHexString(ch).toUpperCase());
                 }
 
-                // ÉèÖÃ¸Ä±ä±êÖ¾
+                // è®¾ç½®æ”¹å˜æ ‡å¿—
                 needToChange = true;
             } else {
                 switch (ch) {
                     case '\'':
-                    case '/': // ×¢Òâ£º¶ÔÓÚjavascript£¬¶Ô/½øĞĞescapeÊÇÖØÒªµÄ°²È«´ëÊ©¡£
+                    case '/': // æ³¨æ„ï¼šå¯¹äºjavascriptï¼Œå¯¹/è¿›è¡Œescapeæ˜¯é‡è¦çš„å®‰å…¨æªæ–½ã€‚
 
                         if (javascript) {
                             out.append('\\');
 
-                            // ÉèÖÃ¸Ä±ä±êÖ¾
+                            // è®¾ç½®æ”¹å˜æ ‡å¿—
                             needToChange = true;
                         }
 
@@ -327,7 +327,7 @@ public class StringEscapeUtil {
                         out.append('\\');
                         out.append('"');
 
-                        // ÉèÖÃ¸Ä±ä±êÖ¾
+                        // è®¾ç½®æ”¹å˜æ ‡å¿—
                         needToChange = true;
                         break;
 
@@ -335,7 +335,7 @@ public class StringEscapeUtil {
                         out.append('\\');
                         out.append('\\');
 
-                        // ÉèÖÃ¸Ä±ä±êÖ¾
+                        // è®¾ç½®æ”¹å˜æ ‡å¿—
                         needToChange = true;
                         break;
 
@@ -350,84 +350,84 @@ public class StringEscapeUtil {
     }
 
     /**
-     * °´JavaµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ·´Ïò×ªÒå¡£
+     * æŒ‰Javaçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œåå‘è½¬ä¹‰ã€‚
      * <p>
-     * <code>'\\'</code>¿ªÍ·µÄĞÎÊ½×ª»»³ÉÏàÓ¦µÄ×Ö·û£¬ÀıÈç<code>\t</code>½«±»×ª»»³ÉtabÖÆ±í·û
+     * <code>'\\'</code>å¼€å¤´çš„å½¢å¼è½¬æ¢æˆç›¸åº”çš„å­—ç¬¦ï¼Œä¾‹å¦‚<code>\t</code>å°†è¢«è½¬æ¢æˆtabåˆ¶è¡¨ç¬¦
      * </p>
      * <p>
-     * Èç¹û×ªÒå·û²»ÄÜ±»Ê¶±ğ£¬Ëü½«±»±£Áô²»±ä¡£
+     * å¦‚æœè½¬ä¹‰ç¬¦ä¸èƒ½è¢«è¯†åˆ«ï¼Œå®ƒå°†è¢«ä¿ç•™ä¸å˜ã€‚
      * </p>
      * 
-     * @param str ²»°üº¬×ªÒå×Ö·ûµÄ×Ö·û´®
-     * @return »Ö¸´³ÉÎ´×ªÒåµÄ×Ö·û´®£¬Èç¹ûÔ­×Ö·û´®Îª<code>null</code>£¬Ôò·µ»Ø<code>null</code>
+     * @param str ä¸åŒ…å«è½¬ä¹‰å­—ç¬¦çš„å­—ç¬¦ä¸²
+     * @return æ¢å¤æˆæœªè½¬ä¹‰çš„å­—ç¬¦ä¸²ï¼Œå¦‚æœåŸå­—ç¬¦ä¸²ä¸º<code>null</code>ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static String unescapeJava(String str) {
         return unescapeJavaStyleString(str);
     }
 
     /**
-     * °´JavaµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ·´Ïò×ªÒå¡£
+     * æŒ‰Javaçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œåå‘è½¬ä¹‰ã€‚
      * <p>
-     * <code>'\\'</code>¿ªÍ·µÄĞÎÊ½×ª»»³ÉÏàÓ¦µÄ×Ö·û£¬ÀıÈç<code>\t</code>½«±»×ª»»³ÉtabÖÆ±í·û
+     * <code>'\\'</code>å¼€å¤´çš„å½¢å¼è½¬æ¢æˆç›¸åº”çš„å­—ç¬¦ï¼Œä¾‹å¦‚<code>\t</code>å°†è¢«è½¬æ¢æˆtabåˆ¶è¡¨ç¬¦
      * </p>
      * <p>
-     * Èç¹û×ªÒå·û²»ÄÜ±»Ê¶±ğ£¬Ëü½«±»±£Áô²»±ä¡£
+     * å¦‚æœè½¬ä¹‰ç¬¦ä¸èƒ½è¢«è¯†åˆ«ï¼Œå®ƒå°†è¢«ä¿ç•™ä¸å˜ã€‚
      * </p>
      * 
-     * @param str °üº¬×ªÒå×Ö·ûµÄ×Ö·û´®
-     * @param out Êä³öÁ÷
-     * @throws IllegalArgumentException Èç¹ûÊä³öÁ÷Îª<code>null</code>
-     * @throws IOException Èç¹ûÊä³öÊ§°Ü
+     * @param str åŒ…å«è½¬ä¹‰å­—ç¬¦çš„å­—ç¬¦ä¸²
+     * @param out è¾“å‡ºæµ
+     * @throws IllegalArgumentException å¦‚æœè¾“å‡ºæµä¸º<code>null</code>
+     * @throws IOException å¦‚æœè¾“å‡ºå¤±è´¥
      */
     public static void unescapeJava(String str, Appendable out) throws IOException {
         unescapeJavaStyleString(str, out);
     }
 
     /**
-     * °´JavaScriptµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ·´Ïò×ªÒå¡£
+     * æŒ‰JavaScriptçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œåå‘è½¬ä¹‰ã€‚
      * <p>
-     * <code>'\\'</code>¿ªÍ·µÄĞÎÊ½×ª»»³ÉÏàÓ¦µÄ×Ö·û£¬ÀıÈç<code>\t</code>½«±»×ª»»³ÉtabÖÆ±í·û
+     * <code>'\\'</code>å¼€å¤´çš„å½¢å¼è½¬æ¢æˆç›¸åº”çš„å­—ç¬¦ï¼Œä¾‹å¦‚<code>\t</code>å°†è¢«è½¬æ¢æˆtabåˆ¶è¡¨ç¬¦
      * </p>
      * <p>
-     * Èç¹û×ªÒå·û²»ÄÜ±»Ê¶±ğ£¬Ëü½«±»±£Áô²»±ä¡£
+     * å¦‚æœè½¬ä¹‰ç¬¦ä¸èƒ½è¢«è¯†åˆ«ï¼Œå®ƒå°†è¢«ä¿ç•™ä¸å˜ã€‚
      * </p>
      * 
-     * @param str °üº¬×ªÒå×Ö·ûµÄ×Ö·û´®
-     * @return »Ö¸´³ÉÎ´×ªÒåµÄ×Ö·û´®£¬Èç¹ûÔ­×Ö·û´®Îª<code>null</code>£¬Ôò·µ»Ø<code>null</code>
+     * @param str åŒ…å«è½¬ä¹‰å­—ç¬¦çš„å­—ç¬¦ä¸²
+     * @return æ¢å¤æˆæœªè½¬ä¹‰çš„å­—ç¬¦ä¸²ï¼Œå¦‚æœåŸå­—ç¬¦ä¸²ä¸º<code>null</code>ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static String unescapeJavaScript(String str) {
         return unescapeJavaStyleString(str);
     }
 
     /**
-     * °´JavaµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ·´Ïò×ªÒå¡£
+     * æŒ‰Javaçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œåå‘è½¬ä¹‰ã€‚
      * <p>
-     * <code>'\\'</code>¿ªÍ·µÄĞÎÊ½×ª»»³ÉÏàÓ¦µÄ×Ö·û£¬ÀıÈç<code>\t</code>½«±»×ª»»³ÉtabÖÆ±í·û
+     * <code>'\\'</code>å¼€å¤´çš„å½¢å¼è½¬æ¢æˆç›¸åº”çš„å­—ç¬¦ï¼Œä¾‹å¦‚<code>\t</code>å°†è¢«è½¬æ¢æˆtabåˆ¶è¡¨ç¬¦
      * </p>
      * <p>
-     * Èç¹û×ªÒå·û²»ÄÜ±»Ê¶±ğ£¬Ëü½«±»±£Áô²»±ä¡£
+     * å¦‚æœè½¬ä¹‰ç¬¦ä¸èƒ½è¢«è¯†åˆ«ï¼Œå®ƒå°†è¢«ä¿ç•™ä¸å˜ã€‚
      * </p>
      * 
-     * @param str °üº¬×ªÒå×Ö·ûµÄ×Ö·û´®
-     * @param out Êä³öÁ÷
-     * @throws IllegalArgumentException Èç¹ûÊä³öÁ÷Îª<code>null</code>
-     * @throws IOException Èç¹ûÊä³öÊ§°Ü
+     * @param str åŒ…å«è½¬ä¹‰å­—ç¬¦çš„å­—ç¬¦ä¸²
+     * @param out è¾“å‡ºæµ
+     * @throws IllegalArgumentException å¦‚æœè¾“å‡ºæµä¸º<code>null</code>
+     * @throws IOException å¦‚æœè¾“å‡ºå¤±è´¥
      */
     public static void unescapeJavaScript(String str, Appendable out) throws IOException {
         unescapeJavaStyleString(str, out);
     }
 
     /**
-     * °´JavaµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ·´Ïò×ªÒå¡£
+     * æŒ‰Javaçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œåå‘è½¬ä¹‰ã€‚
      * <p>
-     * <code>'\\'</code>¿ªÍ·µÄĞÎÊ½×ª»»³ÉÏàÓ¦µÄ×Ö·û£¬ÀıÈç<code>\t</code>½«±»×ª»»³ÉtabÖÆ±í·û
+     * <code>'\\'</code>å¼€å¤´çš„å½¢å¼è½¬æ¢æˆç›¸åº”çš„å­—ç¬¦ï¼Œä¾‹å¦‚<code>\t</code>å°†è¢«è½¬æ¢æˆtabåˆ¶è¡¨ç¬¦
      * </p>
      * <p>
-     * Èç¹û×ªÒå·û²»ÄÜ±»Ê¶±ğ£¬Ëü½«±»±£Áô²»±ä¡£
+     * å¦‚æœè½¬ä¹‰ç¬¦ä¸èƒ½è¢«è¯†åˆ«ï¼Œå®ƒå°†è¢«ä¿ç•™ä¸å˜ã€‚
      * </p>
      * 
-     * @param str °üº¬×ªÒå×Ö·ûµÄ×Ö·û´®
-     * @return ²»°üº¬×ªÒå×Ö·ûµÄ×Ö·û´®
+     * @param str åŒ…å«è½¬ä¹‰å­—ç¬¦çš„å­—ç¬¦ä¸²
+     * @return ä¸åŒ…å«è½¬ä¹‰å­—ç¬¦çš„å­—ç¬¦ä¸²
      */
     private static String unescapeJavaStyleString(String str) {
         if (str == null) {
@@ -443,24 +443,24 @@ public class StringEscapeUtil {
 
             return str;
         } catch (IOException e) {
-            return str; // StringBuilder²»¿ÉÄÜ·¢ÉúÕâ¸öÒì³£
+            return str; // StringBuilderä¸å¯èƒ½å‘ç”Ÿè¿™ä¸ªå¼‚å¸¸
         }
     }
 
     /**
-     * °´JavaµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ·´Ïò×ªÒå¡£
+     * æŒ‰Javaçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œåå‘è½¬ä¹‰ã€‚
      * <p>
-     * <code>'\\'</code>¿ªÍ·µÄĞÎÊ½×ª»»³ÉÏàÓ¦µÄ×Ö·û£¬ÀıÈç<code>\t</code>½«±»×ª»»³ÉtabÖÆ±í·û
+     * <code>'\\'</code>å¼€å¤´çš„å½¢å¼è½¬æ¢æˆç›¸åº”çš„å­—ç¬¦ï¼Œä¾‹å¦‚<code>\t</code>å°†è¢«è½¬æ¢æˆtabåˆ¶è¡¨ç¬¦
      * </p>
      * <p>
-     * Èç¹û×ªÒå·û²»ÄÜ±»Ê¶±ğ£¬Ëü½«±»±£Áô²»±ä¡£
+     * å¦‚æœè½¬ä¹‰ç¬¦ä¸èƒ½è¢«è¯†åˆ«ï¼Œå®ƒå°†è¢«ä¿ç•™ä¸å˜ã€‚
      * </p>
      * 
-     * @param str °üº¬×ªÒå×Ö·ûµÄ×Ö·û´®
-     * @param out Êä³öÁ÷
-     * @return Èç¹û×Ö·û´®Ã»ÓĞ±ä»¯£¬Ôò·µ»Ø<code>false</code>
-     * @throws IllegalArgumentException Èç¹ûÊä³öÁ÷Îª<code>null</code>
-     * @throws IOException Èç¹ûÊä³öÊ§°Ü
+     * @param str åŒ…å«è½¬ä¹‰å­—ç¬¦çš„å­—ç¬¦ä¸²
+     * @param out è¾“å‡ºæµ
+     * @return å¦‚æœå­—ç¬¦ä¸²æ²¡æœ‰å˜åŒ–ï¼Œåˆ™è¿”å›<code>false</code>
+     * @throws IllegalArgumentException å¦‚æœè¾“å‡ºæµä¸º<code>null</code>
+     * @throws IOException å¦‚æœè¾“å‡ºå¤±è´¥
      */
     private static boolean unescapeJavaStyleString(String str, Appendable out) throws IOException {
         boolean needToChange = false;
@@ -495,7 +495,7 @@ public class StringEscapeUtil {
                         inUnicode = false;
                         hadSlash = false;
 
-                        // ÉèÖÃ¸Ä±ä±êÖ¾
+                        // è®¾ç½®æ”¹å˜æ ‡å¿—
                         needToChange = true;
                     } catch (NumberFormatException e) {
                         out.append("\\u" + unicodeStr);
@@ -512,56 +512,56 @@ public class StringEscapeUtil {
                     case '\\':
                         out.append('\\');
 
-                        // ÉèÖÃ¸Ä±ä±êÖ¾
+                        // è®¾ç½®æ”¹å˜æ ‡å¿—
                         needToChange = true;
                         break;
 
                     case '\'':
                         out.append('\'');
 
-                        // ÉèÖÃ¸Ä±ä±êÖ¾
+                        // è®¾ç½®æ”¹å˜æ ‡å¿—
                         needToChange = true;
                         break;
 
                     case '\"':
                         out.append('"');
 
-                        // ÉèÖÃ¸Ä±ä±êÖ¾
+                        // è®¾ç½®æ”¹å˜æ ‡å¿—
                         needToChange = true;
                         break;
 
                     case 'r':
                         out.append('\r');
 
-                        // ÉèÖÃ¸Ä±ä±êÖ¾
+                        // è®¾ç½®æ”¹å˜æ ‡å¿—
                         needToChange = true;
                         break;
 
                     case 'f':
                         out.append('\f');
 
-                        // ÉèÖÃ¸Ä±ä±êÖ¾
+                        // è®¾ç½®æ”¹å˜æ ‡å¿—
                         needToChange = true;
                         break;
 
                     case 't':
                         out.append('\t');
 
-                        // ÉèÖÃ¸Ä±ä±êÖ¾
+                        // è®¾ç½®æ”¹å˜æ ‡å¿—
                         needToChange = true;
                         break;
 
                     case 'n':
                         out.append('\n');
 
-                        // ÉèÖÃ¸Ä±ä±êÖ¾
+                        // è®¾ç½®æ”¹å˜æ ‡å¿—
                         needToChange = true;
                         break;
 
                     case 'b':
                         out.append('\b');
 
-                        // ÉèÖÃ¸Ä±ä±êÖ¾
+                        // è®¾ç½®æ”¹å˜æ ‡å¿—
                         needToChange = true;
                         break;
 
@@ -592,22 +592,22 @@ public class StringEscapeUtil {
     }
 
     // ==========================================================================
-    // HTMLºÍXML¡£ 
+    // HTMLå’ŒXMLã€‚ 
     // ==========================================================================
 
     /**
-     * ¸ù¾İHTMLµÄ¹æÔò£¬½«×Ö·û´®ÖĞµÄ²¿·Ö×Ö·û×ª»»³ÉÊµÌå±àÂë¡£
+     * æ ¹æ®HTMLçš„è§„åˆ™ï¼Œå°†å­—ç¬¦ä¸²ä¸­çš„éƒ¨åˆ†å­—ç¬¦è½¬æ¢æˆå®ä½“ç¼–ç ã€‚
      * <p>
-     * ÀıÈç£º<code>"bread" & "butter"</code>½«±»×ª»»³É
+     * ä¾‹å¦‚ï¼š<code>"bread" & "butter"</code>å°†è¢«è½¬æ¢æˆ
      * <tt>&amp;quot;bread&amp;quot; &amp;amp;
      * &amp;quot;butter&amp;quot;</tt>.
      * </p>
      * <p>
-     * Ö§³ÖËùÓĞHTML 4.0 entities¡£
+     * æ”¯æŒæ‰€æœ‰HTML 4.0 entitiesã€‚
      * </p>
      * 
-     * @param str Òª×ªÒåµÄ×Ö·û´®
-     * @return ÓÃÊµÌå±àÂë×ªÒåµÄ×Ö·û´®£¬Èç¹ûÔ­×Ö´®Îª<code>null</code>£¬Ôò·µ»Ø<code>null</code>
+     * @param str è¦è½¬ä¹‰çš„å­—ç¬¦ä¸²
+     * @return ç”¨å®ä½“ç¼–ç è½¬ä¹‰çš„å­—ç¬¦ä¸²ï¼Œå¦‚æœåŸå­—ä¸²ä¸º<code>null</code>ï¼Œåˆ™è¿”å›<code>null</code>
      * @see <a
      *      href="http://hotwired.lycos.com/webmonkey/reference/special_characters/">ISO
      *      Entities</a>
@@ -626,20 +626,20 @@ public class StringEscapeUtil {
     }
 
     /**
-     * ¸ù¾İHTMLµÄ¹æÔò£¬½«×Ö·û´®ÖĞµÄ²¿·Ö×Ö·û×ª»»³ÉÊµÌå±àÂë¡£
+     * æ ¹æ®HTMLçš„è§„åˆ™ï¼Œå°†å­—ç¬¦ä¸²ä¸­çš„éƒ¨åˆ†å­—ç¬¦è½¬æ¢æˆå®ä½“ç¼–ç ã€‚
      * <p>
-     * ÀıÈç£º<code>"bread" & "butter"</code>½«±»×ª»»³É
+     * ä¾‹å¦‚ï¼š<code>"bread" & "butter"</code>å°†è¢«è½¬æ¢æˆ
      * <tt>&amp;quot;bread&amp;quot; &amp;amp;
      * &amp;quot;butter&amp;quot;</tt>.
      * </p>
      * <p>
-     * Ö§³ÖËùÓĞHTML 4.0 entities¡£
+     * æ”¯æŒæ‰€æœ‰HTML 4.0 entitiesã€‚
      * </p>
      * 
-     * @param str Òª×ªÒåµÄ×Ö·û´®
-     * @param out Êä³öÁ÷
-     * @throws IllegalArgumentException Èç¹ûÊä³öÁ÷Îª<code>null</code>
-     * @throws IOException Èç¹ûÊä³öÊ§°Ü
+     * @param str è¦è½¬ä¹‰çš„å­—ç¬¦ä¸²
+     * @param out è¾“å‡ºæµ
+     * @throws IllegalArgumentException å¦‚æœè¾“å‡ºæµä¸º<code>null</code>
+     * @throws IOException å¦‚æœè¾“å‡ºå¤±è´¥
      * @see <a
      *      href="http://hotwired.lycos.com/webmonkey/reference/special_characters/">ISO
      *      Entities</a>
@@ -658,51 +658,51 @@ public class StringEscapeUtil {
     }
 
     /**
-     * ¸ù¾İXMLµÄ¹æÔò£¬½«×Ö·û´®ÖĞµÄ²¿·Ö×Ö·û×ª»»³ÉÊµÌå±àÂë¡£
+     * æ ¹æ®XMLçš„è§„åˆ™ï¼Œå°†å­—ç¬¦ä¸²ä¸­çš„éƒ¨åˆ†å­—ç¬¦è½¬æ¢æˆå®ä½“ç¼–ç ã€‚
      * <p>
-     * ÀıÈç£º<code>"bread" & "butter"</code>½«±»×ª»»³É
+     * ä¾‹å¦‚ï¼š<code>"bread" & "butter"</code>å°†è¢«è½¬æ¢æˆ
      * <tt>&amp;quot;bread&amp;quot; &amp;amp;
      * &amp;quot;butter&amp;quot;</tt>.
      * </p>
      * <p>
-     * Ö»×ª»»4ÖÖ»ù±¾µÄXMLÊµÌå£º<code>gt</code>¡¢<code>lt</code>¡¢<code>quot</code>ºÍ
-     * <code>amp</code>¡£ ²»Ö§³ÖDTD»òÍâ²¿ÊµÌå¡£
+     * åªè½¬æ¢4ç§åŸºæœ¬çš„XMLå®ä½“ï¼š<code>gt</code>ã€<code>lt</code>ã€<code>quot</code>å’Œ
+     * <code>amp</code>ã€‚ ä¸æ”¯æŒDTDæˆ–å¤–éƒ¨å®ä½“ã€‚
      * </p>
      * 
-     * @param str Òª×ªÒåµÄ×Ö·û´®
-     * @return ÓÃÊµÌå±àÂë×ªÒåµÄ×Ö·û´®£¬Èç¹ûÔ­×Ö´®Îª<code>null</code>£¬Ôò·µ»Ø<code>null</code>
+     * @param str è¦è½¬ä¹‰çš„å­—ç¬¦ä¸²
+     * @return ç”¨å®ä½“ç¼–ç è½¬ä¹‰çš„å­—ç¬¦ä¸²ï¼Œå¦‚æœåŸå­—ä¸²ä¸º<code>null</code>ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static String escapeXml(String str) {
         return escapeEntities(Entities.XML, str);
     }
 
     /**
-     * ¸ù¾İXMLµÄ¹æÔò£¬½«×Ö·û´®ÖĞµÄ²¿·Ö×Ö·û×ª»»³ÉÊµÌå±àÂë¡£
+     * æ ¹æ®XMLçš„è§„åˆ™ï¼Œå°†å­—ç¬¦ä¸²ä¸­çš„éƒ¨åˆ†å­—ç¬¦è½¬æ¢æˆå®ä½“ç¼–ç ã€‚
      * <p>
-     * ÀıÈç£º<code>"bread" & "butter"</code>½«±»×ª»»³É
+     * ä¾‹å¦‚ï¼š<code>"bread" & "butter"</code>å°†è¢«è½¬æ¢æˆ
      * <tt>&amp;quot;bread&amp;quot; &amp;amp;
      * &amp;quot;butter&amp;quot;</tt>.
      * </p>
      * <p>
-     * Ö»×ª»»4ÖÖ»ù±¾µÄXMLÊµÌå£º<code>gt</code>¡¢<code>lt</code>¡¢<code>quot</code>ºÍ
-     * <code>amp</code>¡£ ²»Ö§³ÖDTD»òÍâ²¿ÊµÌå¡£
+     * åªè½¬æ¢4ç§åŸºæœ¬çš„XMLå®ä½“ï¼š<code>gt</code>ã€<code>lt</code>ã€<code>quot</code>å’Œ
+     * <code>amp</code>ã€‚ ä¸æ”¯æŒDTDæˆ–å¤–éƒ¨å®ä½“ã€‚
      * </p>
      * 
-     * @param str Òª×ªÒåµÄ×Ö·û´®
-     * @param out Êä³öÁ÷
-     * @throws IllegalArgumentException Èç¹ûÊä³öÁ÷Îª<code>null</code>
-     * @throws IOException Èç¹ûÊä³öÊ§°Ü
+     * @param str è¦è½¬ä¹‰çš„å­—ç¬¦ä¸²
+     * @param out è¾“å‡ºæµ
+     * @throws IllegalArgumentException å¦‚æœè¾“å‡ºæµä¸º<code>null</code>
+     * @throws IOException å¦‚æœè¾“å‡ºå¤±è´¥
      */
     public static void escapeXml(String str, Appendable out) throws IOException {
         escapeEntities(Entities.XML, str, out);
     }
 
     /**
-     * ¸ù¾İÖ¸¶¨µÄ¹æÔò£¬½«×Ö·û´®ÖĞµÄ²¿·Ö×Ö·û×ª»»³ÉÊµÌå±àÂë¡£
+     * æ ¹æ®æŒ‡å®šçš„è§„åˆ™ï¼Œå°†å­—ç¬¦ä¸²ä¸­çš„éƒ¨åˆ†å­—ç¬¦è½¬æ¢æˆå®ä½“ç¼–ç ã€‚
      * 
-     * @param entities ÊµÌå¼¯ºÏ
-     * @param str Òª×ªÒåµÄ×Ö·û´®
-     * @return ÓÃÊµÌå±àÂë×ªÒåµÄ×Ö·û´®£¬Èç¹ûÔ­×Ö´®Îª<code>null</code>£¬Ôò·µ»Ø<code>null</code>
+     * @param entities å®ä½“é›†åˆ
+     * @param str è¦è½¬ä¹‰çš„å­—ç¬¦ä¸²
+     * @return ç”¨å®ä½“ç¼–ç è½¬ä¹‰çš„å­—ç¬¦ä¸²ï¼Œå¦‚æœåŸå­—ä¸²ä¸º<code>null</code>ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static String escapeEntities(Entities entities, String str) {
         if (str == null) {
@@ -718,99 +718,99 @@ public class StringEscapeUtil {
 
             return str;
         } catch (IOException e) {
-            return str; // StringBuilder²»¿ÉÄÜ·¢ÉúÕâ¸öÒì³£
+            return str; // StringBuilderä¸å¯èƒ½å‘ç”Ÿè¿™ä¸ªå¼‚å¸¸
         }
     }
 
     /**
-     * ¸ù¾İÖ¸¶¨µÄ¹æÔò£¬½«×Ö·û´®ÖĞµÄ²¿·Ö×Ö·û×ª»»³ÉÊµÌå±àÂë¡£
+     * æ ¹æ®æŒ‡å®šçš„è§„åˆ™ï¼Œå°†å­—ç¬¦ä¸²ä¸­çš„éƒ¨åˆ†å­—ç¬¦è½¬æ¢æˆå®ä½“ç¼–ç ã€‚
      * 
-     * @param entities ÊµÌå¼¯ºÏ
-     * @param str Òª×ªÒåµÄ×Ö·û´®
-     * @param out Êä³öÁ÷
-     * @throws IllegalArgumentException Èç¹ûÊä³öÁ÷Îª<code>null</code>
-     * @throws IOException Èç¹ûÊä³öÊ§°Ü
+     * @param entities å®ä½“é›†åˆ
+     * @param str è¦è½¬ä¹‰çš„å­—ç¬¦ä¸²
+     * @param out è¾“å‡ºæµ
+     * @throws IllegalArgumentException å¦‚æœè¾“å‡ºæµä¸º<code>null</code>
+     * @throws IOException å¦‚æœè¾“å‡ºå¤±è´¥
      */
     public static void escapeEntities(Entities entities, String str, Appendable out) throws IOException {
         escapeEntitiesInternal(entities, str, out);
     }
 
     /**
-     * °´HTMLµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ·´Ïò×ªÒå£¬Ö§³ÖHTML 4.0ÖĞµÄËùÓĞÊµÌå£¬ÒÔ¼°unicodeÊµÌåÈç<code>&amp;#12345;</code>
-     * ¡£
+     * æŒ‰HTMLçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œåå‘è½¬ä¹‰ï¼Œæ”¯æŒHTML 4.0ä¸­çš„æ‰€æœ‰å®ä½“ï¼Œä»¥åŠunicodeå®ä½“å¦‚<code>&amp;#12345;</code>
+     * ã€‚
      * <p>
-     * ÀıÈç£º"&amp;lt;Fran&amp;ccedil;ais&amp;gt;"½«±»×ª»»³É"&lt;Fran&ccedil;ais&gt;"
+     * ä¾‹å¦‚ï¼š"&amp;lt;Fran&amp;ccedil;ais&amp;gt;"å°†è¢«è½¬æ¢æˆ"&lt;Fran&ccedil;ais&gt;"
      * </p>
      * <p>
-     * Èç¹ûÊµÌå²»ÄÜ±»Ê¶±ğ£¬Ëü½«±»±£Áô²»±ä¡£
+     * å¦‚æœå®ä½“ä¸èƒ½è¢«è¯†åˆ«ï¼Œå®ƒå°†è¢«ä¿ç•™ä¸å˜ã€‚
      * </p>
      * 
-     * @param str ²»°üº¬×ªÒå×Ö·ûµÄ×Ö·û´®
-     * @return »Ö¸´³ÉÎ´×ªÒåµÄ×Ö·û´®£¬Èç¹ûÔ­×Ö·û´®Îª<code>null</code>£¬Ôò·µ»Ø<code>null</code>
+     * @param str ä¸åŒ…å«è½¬ä¹‰å­—ç¬¦çš„å­—ç¬¦ä¸²
+     * @return æ¢å¤æˆæœªè½¬ä¹‰çš„å­—ç¬¦ä¸²ï¼Œå¦‚æœåŸå­—ç¬¦ä¸²ä¸º<code>null</code>ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static String unescapeHtml(String str) {
         return unescapeEntities(Entities.HTML40, str);
     }
 
     /**
-     * °´HTMLµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ·´Ïò×ªÒå£¬Ö§³ÖHTML 4.0ÖĞµÄËùÓĞÊµÌå£¬ÒÔ¼°unicodeÊµÌåÈç<code>&amp;#12345;</code>
-     * ¡£
+     * æŒ‰HTMLçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œåå‘è½¬ä¹‰ï¼Œæ”¯æŒHTML 4.0ä¸­çš„æ‰€æœ‰å®ä½“ï¼Œä»¥åŠunicodeå®ä½“å¦‚<code>&amp;#12345;</code>
+     * ã€‚
      * <p>
-     * ÀıÈç£º"&amp;lt;Fran&amp;ccedil;ais&amp;gt;"½«±»×ª»»³É"&lt;Fran&ccedil;ais&gt;"
+     * ä¾‹å¦‚ï¼š"&amp;lt;Fran&amp;ccedil;ais&amp;gt;"å°†è¢«è½¬æ¢æˆ"&lt;Fran&ccedil;ais&gt;"
      * </p>
      * <p>
-     * Èç¹ûÊµÌå²»ÄÜ±»Ê¶±ğ£¬Ëü½«±»±£Áô²»±ä¡£
+     * å¦‚æœå®ä½“ä¸èƒ½è¢«è¯†åˆ«ï¼Œå®ƒå°†è¢«ä¿ç•™ä¸å˜ã€‚
      * </p>
      * 
-     * @param str °üº¬×ªÒå×Ö·ûµÄ×Ö·û´®
-     * @param out Êä³öÁ÷
-     * @throws IllegalArgumentException Èç¹ûÊä³öÁ÷Îª<code>null</code>
-     * @throws IOException Èç¹ûÊä³öÊ§°Ü
+     * @param str åŒ…å«è½¬ä¹‰å­—ç¬¦çš„å­—ç¬¦ä¸²
+     * @param out è¾“å‡ºæµ
+     * @throws IllegalArgumentException å¦‚æœè¾“å‡ºæµä¸º<code>null</code>
+     * @throws IOException å¦‚æœè¾“å‡ºå¤±è´¥
      */
     public static void unescapeHtml(String str, Appendable out) throws IOException {
         unescapeEntities(Entities.HTML40, str, out);
     }
 
     /**
-     * °´XMLµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ·´Ïò×ªÒå£¬Ö§³ÖunicodeÊµÌåÈç<code>&amp;#12345;</code>¡£
+     * æŒ‰XMLçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œåå‘è½¬ä¹‰ï¼Œæ”¯æŒunicodeå®ä½“å¦‚<code>&amp;#12345;</code>ã€‚
      * <p>
-     * ÀıÈç£º"&amp;lt;Fran&amp;ccedil;ais&amp;gt;"½«±»×ª»»³É"&lt;Fran&ccedil;ais&gt;"
+     * ä¾‹å¦‚ï¼š"&amp;lt;Fran&amp;ccedil;ais&amp;gt;"å°†è¢«è½¬æ¢æˆ"&lt;Fran&ccedil;ais&gt;"
      * </p>
      * <p>
-     * Èç¹ûÊµÌå²»ÄÜ±»Ê¶±ğ£¬Ëü½«±»±£Áô²»±ä¡£
+     * å¦‚æœå®ä½“ä¸èƒ½è¢«è¯†åˆ«ï¼Œå®ƒå°†è¢«ä¿ç•™ä¸å˜ã€‚
      * </p>
      * 
-     * @param str ²»°üº¬×ªÒå×Ö·ûµÄ×Ö·û´®
-     * @return »Ö¸´³ÉÎ´×ªÒåµÄ×Ö·û´®£¬Èç¹ûÔ­×Ö·û´®Îª<code>null</code>£¬Ôò·µ»Ø<code>null</code>
+     * @param str ä¸åŒ…å«è½¬ä¹‰å­—ç¬¦çš„å­—ç¬¦ä¸²
+     * @return æ¢å¤æˆæœªè½¬ä¹‰çš„å­—ç¬¦ä¸²ï¼Œå¦‚æœåŸå­—ç¬¦ä¸²ä¸º<code>null</code>ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static String unescapeXml(String str) {
         return unescapeEntities(Entities.XML, str);
     }
 
     /**
-     * °´XMLµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ·´Ïò×ªÒå£¬Ö§³ÖunicodeÊµÌåÈç<code>&amp;#12345;</code>¡£
+     * æŒ‰XMLçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œåå‘è½¬ä¹‰ï¼Œæ”¯æŒunicodeå®ä½“å¦‚<code>&amp;#12345;</code>ã€‚
      * <p>
-     * ÀıÈç£º"&amp;lt;Fran&amp;ccedil;ais&amp;gt;"½«±»×ª»»³É"&lt;Fran&ccedil;ais&gt;"
+     * ä¾‹å¦‚ï¼š"&amp;lt;Fran&amp;ccedil;ais&amp;gt;"å°†è¢«è½¬æ¢æˆ"&lt;Fran&ccedil;ais&gt;"
      * </p>
      * <p>
-     * Èç¹ûÊµÌå²»ÄÜ±»Ê¶±ğ£¬Ëü½«±»±£Áô²»±ä¡£
+     * å¦‚æœå®ä½“ä¸èƒ½è¢«è¯†åˆ«ï¼Œå®ƒå°†è¢«ä¿ç•™ä¸å˜ã€‚
      * </p>
      * 
-     * @param str ²»°üº¬×ªÒå×Ö·ûµÄ×Ö·û´®
-     * @param out Êä³öÁ÷
-     * @throws IllegalArgumentException Èç¹ûÊä³öÁ÷Îª<code>null</code>
-     * @throws IOException Èç¹ûÊä³öÊ§°Ü
+     * @param str ä¸åŒ…å«è½¬ä¹‰å­—ç¬¦çš„å­—ç¬¦ä¸²
+     * @param out è¾“å‡ºæµ
+     * @throws IllegalArgumentException å¦‚æœè¾“å‡ºæµä¸º<code>null</code>
+     * @throws IOException å¦‚æœè¾“å‡ºå¤±è´¥
      */
     public static void unescapeXml(String str, Appendable out) throws IOException {
         unescapeEntities(Entities.XML, str, out);
     }
 
     /**
-     * °´Ö¸¶¨µÄ¹æÔò¶Ô×Ö·û´®½øĞĞ·´Ïò×ªÒå¡£
+     * æŒ‰æŒ‡å®šçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œåå‘è½¬ä¹‰ã€‚
      * 
-     * @param entities ÊµÌå¼¯ºÏ
-     * @param str ²»°üº¬×ªÒå×Ö·ûµÄ×Ö·û´®
-     * @return »Ö¸´³ÉÎ´×ªÒåµÄ×Ö·û´®£¬Èç¹ûÔ­×Ö·û´®Îª<code>null</code>£¬Ôò·µ»Ø<code>null</code>
+     * @param entities å®ä½“é›†åˆ
+     * @param str ä¸åŒ…å«è½¬ä¹‰å­—ç¬¦çš„å­—ç¬¦ä¸²
+     * @return æ¢å¤æˆæœªè½¬ä¹‰çš„å­—ç¬¦ä¸²ï¼Œå¦‚æœåŸå­—ç¬¦ä¸²ä¸º<code>null</code>ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static String unescapeEntities(Entities entities, String str) {
         if (str == null) {
@@ -826,36 +826,36 @@ public class StringEscapeUtil {
 
             return str;
         } catch (IOException e) {
-            return str; // StringBuilder²»¿ÉÄÜ·¢ÉúÕâ¸öÒì³£
+            return str; // StringBuilderä¸å¯èƒ½å‘ç”Ÿè¿™ä¸ªå¼‚å¸¸
         }
     }
 
     /**
-     * °´Ö¸¶¨µÄ¹æÔò¶Ô×Ö·û´®½øĞĞ·´Ïò×ªÒå¡£
+     * æŒ‰æŒ‡å®šçš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œåå‘è½¬ä¹‰ã€‚
      * <p>
-     * Èç¹ûÊµÌå²»ÄÜ±»Ê¶±ğ£¬Ëü½«±»±£Áô²»±ä¡£
+     * å¦‚æœå®ä½“ä¸èƒ½è¢«è¯†åˆ«ï¼Œå®ƒå°†è¢«ä¿ç•™ä¸å˜ã€‚
      * </p>
      * 
-     * @param entities ÊµÌå¼¯ºÏ
-     * @param str ²»°üº¬×ªÒå×Ö·ûµÄ×Ö·û´®
-     * @param out Êä³öÁ÷
-     * @throws IllegalArgumentException Èç¹ûÊä³öÁ÷Îª<code>null</code>
-     * @throws IOException Èç¹ûÊä³öÊ§°Ü
+     * @param entities å®ä½“é›†åˆ
+     * @param str ä¸åŒ…å«è½¬ä¹‰å­—ç¬¦çš„å­—ç¬¦ä¸²
+     * @param out è¾“å‡ºæµ
+     * @throws IllegalArgumentException å¦‚æœè¾“å‡ºæµä¸º<code>null</code>
+     * @throws IOException å¦‚æœè¾“å‡ºå¤±è´¥
      */
     public static void unescapeEntities(Entities entities, String str, Appendable out) throws IOException {
         unescapeEntitiesInternal(entities, str, out);
     }
 
     /**
-     * ½«×Ö·û´®ÖĞµÄ²¿·Ö×Ö·û×ª»»³ÉÊµÌå±àÂë¡£
+     * å°†å­—ç¬¦ä¸²ä¸­çš„éƒ¨åˆ†å­—ç¬¦è½¬æ¢æˆå®ä½“ç¼–ç ã€‚
      * 
-     * @param entities ÊµÌå¼¯ºÏ
-     * @param str Òª×ªÒåµÄ×Ö·û´®
-     * @param out ×Ö·ûÊä³öÁ÷£¬²»ÄÜÎª<code>null</code>
-     * @return Èç¹û×Ö·û´®Ã»ÓĞ±ä»¯£¬Ôò·µ»Ø<code>false</code>
-     * @throws IllegalArgumentException Èç¹û<code>entities</code>»òÊä³öÁ÷Îª
+     * @param entities å®ä½“é›†åˆ
+     * @param str è¦è½¬ä¹‰çš„å­—ç¬¦ä¸²
+     * @param out å­—ç¬¦è¾“å‡ºæµï¼Œä¸èƒ½ä¸º<code>null</code>
+     * @return å¦‚æœå­—ç¬¦ä¸²æ²¡æœ‰å˜åŒ–ï¼Œåˆ™è¿”å›<code>false</code>
+     * @throws IllegalArgumentException å¦‚æœ<code>entities</code>æˆ–è¾“å‡ºæµä¸º
      *             <code>null</code>
-     * @throws IOException Èç¹ûÊä³öÊ§°Ü
+     * @throws IOException å¦‚æœè¾“å‡ºå¤±è´¥
      */
     private static boolean escapeEntitiesInternal(Entities entities, String str, Appendable out) throws IOException {
         boolean needToChange = false;
@@ -883,7 +883,7 @@ public class StringEscapeUtil {
                 out.append(entityName);
                 out.append(';');
 
-                // ÉèÖÃ¸Ä±ä±êÖ¾
+                // è®¾ç½®æ”¹å˜æ ‡å¿—
                 needToChange = true;
             }
         }
@@ -892,18 +892,18 @@ public class StringEscapeUtil {
     }
 
     /**
-     * ½«×Ö·û´®ÖĞµÄÒÑ¶¨ÒåÊµÌåºÍunicodeÊµÌåÈç<code>&amp;#12345;</code>×ª»»³ÉÏàÓ¦µÄunicode×Ö·û¡£
+     * å°†å­—ç¬¦ä¸²ä¸­çš„å·²å®šä¹‰å®ä½“å’Œunicodeå®ä½“å¦‚<code>&amp;#12345;</code>è½¬æ¢æˆç›¸åº”çš„unicodeå­—ç¬¦ã€‚
      * <p>
-     * Î´¶¨ÒåµÄÊµÌå½«±£Áô²»±ä¡£
+     * æœªå®šä¹‰çš„å®ä½“å°†ä¿ç•™ä¸å˜ã€‚
      * </p>
      * 
-     * @param entities ÊµÌå¼¯ºÏ£¬Èç¹ûÎª<code>null</code>£¬ÔòÖ»×ª»»<code>&amp;#number</code>
-     *            ÊµÌå¡£
-     * @param str °üº¬×ªÒå×Ö·ûµÄ×Ö·û´®
-     * @param out ×Ö·ûÊä³öÁ÷£¬²»ÄÜÎª<code>null</code>
-     * @return Èç¹û×Ö·û´®Ã»ÓĞ±ä»¯£¬Ôò·µ»Ø<code>false</code>
-     * @throws IllegalArgumentException Èç¹ûÊä³öÁ÷Îª<code>null</code>
-     * @throws IOException Èç¹ûÊä³öÊ§°Ü
+     * @param entities å®ä½“é›†åˆï¼Œå¦‚æœä¸º<code>null</code>ï¼Œåˆ™åªè½¬æ¢<code>&amp;#number</code>
+     *            å®ä½“ã€‚
+     * @param str åŒ…å«è½¬ä¹‰å­—ç¬¦çš„å­—ç¬¦ä¸²
+     * @param out å­—ç¬¦è¾“å‡ºæµï¼Œä¸èƒ½ä¸º<code>null</code>
+     * @return å¦‚æœå­—ç¬¦ä¸²æ²¡æœ‰å˜åŒ–ï¼Œåˆ™è¿”å›<code>false</code>
+     * @throws IllegalArgumentException å¦‚æœè¾“å‡ºæµä¸º<code>null</code>
+     * @throws IOException å¦‚æœè¾“å‡ºå¤±è´¥
      */
     private static boolean unescapeEntitiesInternal(Entities entities, String str, Appendable out) throws IOException {
         boolean needToChange = false;
@@ -920,7 +920,7 @@ public class StringEscapeUtil {
             char ch = str.charAt(i);
 
             if (ch == '&') {
-                // ²éÕÒ&xxxx;
+                // æŸ¥æ‰¾&xxxx;
                 int semi = str.indexOf(';', i + 1);
 
                 if (semi == -1 || i + 1 >= semi - 1) {
@@ -928,7 +928,7 @@ public class StringEscapeUtil {
                     continue;
                 }
 
-                // Èç¹ûÊÇ&#xxxxx;
+                // å¦‚æœæ˜¯&#xxxxx;
                 if (str.charAt(i + 1) == '#') {
                     int firstCharIndex = i + 2;
                     int radix = 10;
@@ -959,7 +959,7 @@ public class StringEscapeUtil {
 
                         out.append((char) entityValue);
 
-                        // ÉèÖÃ¸Ä±ä±êÖ¾
+                        // è®¾ç½®æ”¹å˜æ ‡å¿—
                         needToChange = true;
                     } catch (NumberFormatException e) {
                         out.append(ch);
@@ -982,7 +982,7 @@ public class StringEscapeUtil {
                     } else {
                         out.append((char) entityValue);
 
-                        // ÉèÖÃ¸Ä±ä±êÖ¾
+                        // è®¾ç½®æ”¹å˜æ ‡å¿—
                         needToChange = true;
                     }
                 }
@@ -997,13 +997,13 @@ public class StringEscapeUtil {
     }
 
     // ==========================================================================
-    // SQLÓï¾ä¡£ 
+    // SQLè¯­å¥ã€‚ 
     // ==========================================================================
 
     /**
-     * °´SQLÓï¾äµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ×ªÒå¡£
+     * æŒ‰SQLè¯­å¥çš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œè½¬ä¹‰ã€‚
      * <p>
-     * ÀıÈç£º
+     * ä¾‹å¦‚ï¼š
      * 
      * <pre>
      * statement.executeQuery(&quot;SELECT * FROM MOVIES WHERE TITLE='&quot; + StringEscapeUtil.escapeSql(&quot;McHale's Navy&quot;) + &quot;'&quot;);
@@ -1011,12 +1011,12 @@ public class StringEscapeUtil {
      * 
      * </p>
      * <p>
-     * Ä¿Ç°£¬´Ë·½·¨Ö»½«µ¥ÒıºÅ×ª»»³ÉÁ½¸öµ¥ÒıºÅ£º<code>"McHale's Navy"</code>×ª»»³É<code>"McHale''s
-     * Navy"</code>¡£²»´¦Àí×Ö·û´®ÖĞ°üº¬µÄ<code>%</code>ºÍ<code>_</code>×Ö·û¡£
+     * ç›®å‰ï¼Œæ­¤æ–¹æ³•åªå°†å•å¼•å·è½¬æ¢æˆä¸¤ä¸ªå•å¼•å·ï¼š<code>"McHale's Navy"</code>è½¬æ¢æˆ<code>"McHale''s
+     * Navy"</code>ã€‚ä¸å¤„ç†å­—ç¬¦ä¸²ä¸­åŒ…å«çš„<code>%</code>å’Œ<code>_</code>å­—ç¬¦ã€‚
      * </p>
      * 
-     * @param str Òª×ªÒåµÄ×Ö·û´®
-     * @return ×ªÒåºóµÄ×Ö·û´®£¬Èç¹ûÔ­×Ö·û´®Îª<code>null</code>£¬Ôò·µ»Ø<code>null</code>
+     * @param str è¦è½¬ä¹‰çš„å­—ç¬¦ä¸²
+     * @return è½¬ä¹‰åçš„å­—ç¬¦ä¸²ï¼Œå¦‚æœåŸå­—ç¬¦ä¸²ä¸º<code>null</code>ï¼Œåˆ™è¿”å›<code>null</code>
      * @see <a href="http://www.jguru.com/faq/view.jsp?EID=8881">faq</a>
      */
     public static String escapeSql(String str) {
@@ -1024,9 +1024,9 @@ public class StringEscapeUtil {
     }
 
     /**
-     * °´SQLÓï¾äµÄ¹æÔò¶Ô×Ö·û´®½øĞĞ×ªÒå¡£
+     * æŒ‰SQLè¯­å¥çš„è§„åˆ™å¯¹å­—ç¬¦ä¸²è¿›è¡Œè½¬ä¹‰ã€‚
      * <p>
-     * ÀıÈç£º
+     * ä¾‹å¦‚ï¼š
      * 
      * <pre>
      * statement.executeQuery(&quot;SELECT * FROM MOVIES WHERE TITLE='&quot; + StringEscapeUtil.escapeSql(&quot;McHale's Navy&quot;) + &quot;'&quot;);
@@ -1034,14 +1034,14 @@ public class StringEscapeUtil {
      * 
      * </p>
      * <p>
-     * Ä¿Ç°£¬´Ë·½·¨Ö»½«µ¥ÒıºÅ×ª»»³ÉÁ½¸öµ¥ÒıºÅ£º<code>"McHale's Navy"</code>×ª»»³É<code>"McHale''s
-     * Navy"</code>¡£²»´¦Àí×Ö·û´®ÖĞ°üº¬µÄ<code>%</code>ºÍ<code>_</code>×Ö·û¡£
+     * ç›®å‰ï¼Œæ­¤æ–¹æ³•åªå°†å•å¼•å·è½¬æ¢æˆä¸¤ä¸ªå•å¼•å·ï¼š<code>"McHale's Navy"</code>è½¬æ¢æˆ<code>"McHale''s
+     * Navy"</code>ã€‚ä¸å¤„ç†å­—ç¬¦ä¸²ä¸­åŒ…å«çš„<code>%</code>å’Œ<code>_</code>å­—ç¬¦ã€‚
      * </p>
      * 
-     * @param str Òª×ªÒåµÄ×Ö·û´®
-     * @param out Êä³öÁ÷
-     * @throws IllegalArgumentException Èç¹ûÊä³öÁ÷Îª<code>null</code>
-     * @throws IOException Èç¹ûÊä³öÊ§°Ü
+     * @param str è¦è½¬ä¹‰çš„å­—ç¬¦ä¸²
+     * @param out è¾“å‡ºæµ
+     * @throws IllegalArgumentException å¦‚æœè¾“å‡ºæµä¸º<code>null</code>
+     * @throws IOException å¦‚æœè¾“å‡ºå¤±è´¥
      * @see <a href="http://www.jguru.com/faq/view.jsp?EID=8881">faq</a>
      */
     public static void escapeSql(String str, Appendable out) throws IOException {
@@ -1057,8 +1057,8 @@ public class StringEscapeUtil {
     }
 
     // ==========================================================================
-    // URL/URI encoding/decoding¡£ 
-    // ¸ù¾İRFC2396£ºhttp://www.ietf.org/rfc/rfc2396.txt 
+    // URL/URI encoding/decodingã€‚ 
+    // æ ¹æ®RFC2396ï¼šhttp://www.ietf.org/rfc/rfc2396.txt 
     // ==========================================================================
 
     /** "Alpha" characters from RFC 2396. */
@@ -1124,89 +1124,89 @@ public class StringEscapeUtil {
         UNRESERVED.or(MARK);
     }
 
-    /** ½«Ò»¸öÊı×Ö×ª»»³É16½øÖÆµÄ×ª»»±í¡£ */
+    /** å°†ä¸€ä¸ªæ•°å­—è½¬æ¢æˆ16è¿›åˆ¶çš„è½¬æ¢è¡¨ã€‚ */
     private static char[] HEXADECIMAL = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
             'F' };
 
     /**
-     * ½«Ö¸¶¨×Ö·û´®±àÂë³É<code>application/x-www-form-urlencoded</code>¸ñÊ½¡£
+     * å°†æŒ‡å®šå­—ç¬¦ä¸²ç¼–ç æˆ<code>application/x-www-form-urlencoded</code>æ ¼å¼ã€‚
      * <p>
-     * ³ıÁËRFC2396ÖĞµÄ<code>unreserved</code>×Ö·ûÖ®ÍâµÄËùÓĞ×Ö·û£¬¶¼½«±»×ª»»³ÉURL±àÂë<code>%xx</code>¡£
-     * ¸ù¾İRFC2396£¬<code>unreserved</code>µÄ¶¨ÒåÈçÏÂ£º
+     * é™¤äº†RFC2396ä¸­çš„<code>unreserved</code>å­—ç¬¦ä¹‹å¤–çš„æ‰€æœ‰å­—ç¬¦ï¼Œéƒ½å°†è¢«è½¬æ¢æˆURLç¼–ç <code>%xx</code>ã€‚
+     * æ ¹æ®RFC2396ï¼Œ<code>unreserved</code>çš„å®šä¹‰å¦‚ä¸‹ï¼š
      * 
      * <pre>
      * &lt;![CDATA
      *  unreserved  = alphanum | mark
-     *  alphanum    = ´óĞ¡Ğ´Ó¢ÎÄ×ÖÄ¸ | Êı×Ö
+     *  alphanum    = å¤§å°å†™è‹±æ–‡å­—æ¯ | æ•°å­—
      *  mark        = &quot;-&quot; | &quot;_&quot; | &quot;.&quot; | &quot;!&quot; | &quot;&tilde;&quot; | &quot;*&quot; | &quot;'&quot; | &quot;(&quot; | &quot;)&quot;
      * ]]&gt;
      * </pre>
      * 
      * </p>
      * <p>
-     * ¾¯¸æ£º¸Ã·½·¨Ê¹ÓÃµ±Ç°Ïß³ÌÄ¬ÈÏµÄ×Ö·û±àÂëÀ´±àÂëURL£¬Òò´Ë¸Ã·½·¨ÔÚ²»Í¬µÄÉÏÏÂÎÄÖĞ¿ÉÄÜ»á²úÉú²»Í¬µÄ½á¹û¡£
+     * è­¦å‘Šï¼šè¯¥æ–¹æ³•ä½¿ç”¨å½“å‰çº¿ç¨‹é»˜è®¤çš„å­—ç¬¦ç¼–ç æ¥ç¼–ç URLï¼Œå› æ­¤è¯¥æ–¹æ³•åœ¨ä¸åŒçš„ä¸Šä¸‹æ–‡ä¸­å¯èƒ½ä¼šäº§ç”Ÿä¸åŒçš„ç»“æœã€‚
      * </p>
      * 
-     * @param str Òª±àÂëµÄ×Ö·û´®£¬¿ÉÒÔÊÇ<code>null</code>
-     * @return URL±àÂëºóµÄ×Ö·û´®
+     * @param str è¦ç¼–ç çš„å­—ç¬¦ä¸²ï¼Œå¯ä»¥æ˜¯<code>null</code>
+     * @return URLç¼–ç åçš„å­—ç¬¦ä¸²
      */
     public static String escapeURL(String str) {
         try {
             return escapeURLInternal(str, null, true);
         } catch (UnsupportedEncodingException e) {
-            return str; // ²»¿ÉÄÜ·¢ÉúÕâ¸öÒì³£
+            return str; // ä¸å¯èƒ½å‘ç”Ÿè¿™ä¸ªå¼‚å¸¸
         }
     }
 
     /**
-     * ½«Ö¸¶¨×Ö·û´®±àÂë³É<code>application/x-www-form-urlencoded</code>¸ñÊ½¡£
+     * å°†æŒ‡å®šå­—ç¬¦ä¸²ç¼–ç æˆ<code>application/x-www-form-urlencoded</code>æ ¼å¼ã€‚
      * <p>
-     * ³ıÁËRFC2396ÖĞµÄ<code>unreserved</code>×Ö·ûÖ®ÍâµÄËùÓĞ×Ö·û£¬¶¼½«±»×ª»»³ÉURL±àÂë<code>%xx</code>¡£
-     * ¸ù¾İRFC2396£¬<code>unreserved</code>µÄ¶¨ÒåÈçÏÂ£º
+     * é™¤äº†RFC2396ä¸­çš„<code>unreserved</code>å­—ç¬¦ä¹‹å¤–çš„æ‰€æœ‰å­—ç¬¦ï¼Œéƒ½å°†è¢«è½¬æ¢æˆURLç¼–ç <code>%xx</code>ã€‚
+     * æ ¹æ®RFC2396ï¼Œ<code>unreserved</code>çš„å®šä¹‰å¦‚ä¸‹ï¼š
      * 
      * <pre>
      * &lt;![CDATA
      *  unreserved  = alphanum | mark
-     *  alphanum    = ´óĞ¡Ğ´Ó¢ÎÄ×ÖÄ¸ | Êı×Ö
+     *  alphanum    = å¤§å°å†™è‹±æ–‡å­—æ¯ | æ•°å­—
      *  mark        = &quot;-&quot; | &quot;_&quot; | &quot;.&quot; | &quot;!&quot; | &quot;&tilde;&quot; | &quot;*&quot; | &quot;'&quot; | &quot;(&quot; | &quot;)&quot;
      * ]]&gt;
      * </pre>
      * 
      * </p>
      * <p>
-     * ¸Ã·½·¨Ê¹ÓÃÖ¸¶¨µÄ×Ö·û±àÂëÀ´±àÂëURL¡£
+     * è¯¥æ–¹æ³•ä½¿ç”¨æŒ‡å®šçš„å­—ç¬¦ç¼–ç æ¥ç¼–ç URLã€‚
      * </p>
      * 
-     * @param str Òª±àÂëµÄ×Ö·û´®£¬¿ÉÒÔÊÇ<code>null</code>
-     * @param encoding Êä³ö×Ö·û±àÂë£¬Èç¹ûÎª<code>null</code>£¬ÔòÊ¹ÓÃÏµÍ³Ä¬ÈÏ±àÂë
-     * @return URL±àÂëºóµÄ×Ö·û´®
-     * @throws UnsupportedEncodingException Èç¹ûÖ¸¶¨µÄ<code>encoding</code>Îª·Ç·¨µÄ
+     * @param str è¦ç¼–ç çš„å­—ç¬¦ä¸²ï¼Œå¯ä»¥æ˜¯<code>null</code>
+     * @param encoding è¾“å‡ºå­—ç¬¦ç¼–ç ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œåˆ™ä½¿ç”¨ç³»ç»Ÿé»˜è®¤ç¼–ç 
+     * @return URLç¼–ç åçš„å­—ç¬¦ä¸²
+     * @throws UnsupportedEncodingException å¦‚æœæŒ‡å®šçš„<code>encoding</code>ä¸ºéæ³•çš„
      */
     public static String escapeURL(String str, String encoding) throws UnsupportedEncodingException {
         return escapeURLInternal(str, encoding, true);
     }
 
     /**
-     * ½«Ö¸¶¨×Ö·û´®±àÂë³É<code>application/x-www-form-urlencoded</code>¸ñÊ½¡£
+     * å°†æŒ‡å®šå­—ç¬¦ä¸²ç¼–ç æˆ<code>application/x-www-form-urlencoded</code>æ ¼å¼ã€‚
      * <p>
-     * Èç¹ûÖ¸¶¨²ÎÊı<code>strict</code>Îª<code>true</code>£¬Ôò°´ÑÏ¸ñµÄ·½Ê½±àÂëURL¡£ ³ıÁËRFC2396ÖĞµÄ
-     * <code>unreserved</code>×Ö·ûÖ®ÍâµÄËùÓĞ×Ö·û£¬¶¼½«±»×ª»»³ÉURL±àÂë<code>%xx</code>¡£ ¸ù¾İRFC2396£¬
-     * <code>unreserved</code>µÄ¶¨ÒåÈçÏÂ£º
+     * å¦‚æœæŒ‡å®šå‚æ•°<code>strict</code>ä¸º<code>true</code>ï¼Œåˆ™æŒ‰ä¸¥æ ¼çš„æ–¹å¼ç¼–ç URLã€‚ é™¤äº†RFC2396ä¸­çš„
+     * <code>unreserved</code>å­—ç¬¦ä¹‹å¤–çš„æ‰€æœ‰å­—ç¬¦ï¼Œéƒ½å°†è¢«è½¬æ¢æˆURLç¼–ç <code>%xx</code>ã€‚ æ ¹æ®RFC2396ï¼Œ
+     * <code>unreserved</code>çš„å®šä¹‰å¦‚ä¸‹ï¼š
      * 
      * <pre>
      * &lt;![CDATA
      *  unreserved  = alphanum | mark
-     *  alphanum    = ´óĞ¡Ğ´Ó¢ÎÄ×ÖÄ¸ | Êı×Ö
+     *  alphanum    = å¤§å°å†™è‹±æ–‡å­—æ¯ | æ•°å­—
      *  mark        = &quot;-&quot; | &quot;_&quot; | &quot;.&quot; | &quot;!&quot; | &quot;&tilde;&quot; | &quot;*&quot; | &quot;'&quot; | &quot;(&quot; | &quot;)&quot;
      * ]]&gt;
      * </pre>
      * 
      * </p>
      * <p>
-     * Èç¹ûÖ¸¶¨²ÎÊı<code>strict</code>Îª<code>false</code>£¬ÔòÊ¹ÓÃ¿íËÉµÄ·½Ê½±àÂëURL¡£
-     * ³ıÁË¿ØÖÆ×Ö·û¡¢¿Õ°××Ö·ûÒÔ¼°RFC2396ÖĞµÄ<code>reserved</code>×Ö·ûÖ®ÍâµÄËùÓĞ×Ö·û£¬¶¼½«±»±£Áô²»±ä¡£
-     * ¸ù¾İRFC2396£¬Ö»ÓĞ¿ØÖÆ×Ö·û¡¢¿Õ°××Ö·ûÒÔ¼°·ûºÏÏÂÁĞ<code>reserved</code>¶¨ÒåµÄ×Ö·û²Å±»×ª»»³É
-     * <code>%xx</code>¸ñÊ½£º
+     * å¦‚æœæŒ‡å®šå‚æ•°<code>strict</code>ä¸º<code>false</code>ï¼Œåˆ™ä½¿ç”¨å®½æ¾çš„æ–¹å¼ç¼–ç URLã€‚
+     * é™¤äº†æ§åˆ¶å­—ç¬¦ã€ç©ºç™½å­—ç¬¦ä»¥åŠRFC2396ä¸­çš„<code>reserved</code>å­—ç¬¦ä¹‹å¤–çš„æ‰€æœ‰å­—ç¬¦ï¼Œéƒ½å°†è¢«ä¿ç•™ä¸å˜ã€‚
+     * æ ¹æ®RFC2396ï¼Œåªæœ‰æ§åˆ¶å­—ç¬¦ã€ç©ºç™½å­—ç¬¦ä»¥åŠç¬¦åˆä¸‹åˆ—<code>reserved</code>å®šä¹‰çš„å­—ç¬¦æ‰è¢«è½¬æ¢æˆ
+     * <code>%xx</code>æ ¼å¼ï¼š
      * 
      * <pre>
      * &lt;![CDATA
@@ -1216,70 +1216,70 @@ public class StringEscapeUtil {
      * 
      * </p>
      * <p>
-     * ¸Ã·½·¨Ê¹ÓÃÖ¸¶¨µÄ×Ö·û±àÂëÀ´±àÂëURL¡£
+     * è¯¥æ–¹æ³•ä½¿ç”¨æŒ‡å®šçš„å­—ç¬¦ç¼–ç æ¥ç¼–ç URLã€‚
      * </p>
      * 
-     * @param str Òª±àÂëµÄ×Ö·û´®£¬¿ÉÒÔÊÇ<code>null</code>
-     * @param encoding Êä³ö×Ö·û±àÂë£¬Èç¹ûÎª<code>null</code>£¬ÔòÊ¹ÓÃµ±Ç°Ïß³ÌÄ¬ÈÏµÄ±àÂë
-     * @param strict ÊÇ·ñÒÔÑÏ¸ñµÄ·½Ê½±àÂëURL
-     * @return URL±àÂëºóµÄ×Ö·û´®
-     * @throws UnsupportedEncodingException Èç¹ûÖ¸¶¨µÄ<code>encoding</code>Îª·Ç·¨µÄ
+     * @param str è¦ç¼–ç çš„å­—ç¬¦ä¸²ï¼Œå¯ä»¥æ˜¯<code>null</code>
+     * @param encoding è¾“å‡ºå­—ç¬¦ç¼–ç ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œåˆ™ä½¿ç”¨å½“å‰çº¿ç¨‹é»˜è®¤çš„ç¼–ç 
+     * @param strict æ˜¯å¦ä»¥ä¸¥æ ¼çš„æ–¹å¼ç¼–ç URL
+     * @return URLç¼–ç åçš„å­—ç¬¦ä¸²
+     * @throws UnsupportedEncodingException å¦‚æœæŒ‡å®šçš„<code>encoding</code>ä¸ºéæ³•çš„
      */
     public static String escapeURL(String str, String encoding, boolean strict) throws UnsupportedEncodingException {
         return escapeURLInternal(str, encoding, strict);
     }
 
     /**
-     * ½«Ö¸¶¨×Ö·û´®±àÂë³É<code>application/x-www-form-urlencoded</code>¸ñÊ½¡£
+     * å°†æŒ‡å®šå­—ç¬¦ä¸²ç¼–ç æˆ<code>application/x-www-form-urlencoded</code>æ ¼å¼ã€‚
      * <p>
-     * ³ıÁËRFC2396ÖĞµÄ<code>unreserved</code>×Ö·ûÖ®ÍâµÄËùÓĞ×Ö·û£¬¶¼½«±»×ª»»³ÉURL±àÂë<code>%xx</code>¡£
-     * ¸ù¾İRFC2396£¬<code>unreserved</code>µÄ¶¨ÒåÈçÏÂ£º
+     * é™¤äº†RFC2396ä¸­çš„<code>unreserved</code>å­—ç¬¦ä¹‹å¤–çš„æ‰€æœ‰å­—ç¬¦ï¼Œéƒ½å°†è¢«è½¬æ¢æˆURLç¼–ç <code>%xx</code>ã€‚
+     * æ ¹æ®RFC2396ï¼Œ<code>unreserved</code>çš„å®šä¹‰å¦‚ä¸‹ï¼š
      * 
      * <pre>
      * &lt;![CDATA
      *  unreserved  = alphanum | mark
-     *  alphanum    = ´óĞ¡Ğ´Ó¢ÎÄ×ÖÄ¸ | Êı×Ö
+     *  alphanum    = å¤§å°å†™è‹±æ–‡å­—æ¯ | æ•°å­—
      *  mark        = &quot;-&quot; | &quot;_&quot; | &quot;.&quot; | &quot;!&quot; | &quot;&tilde;&quot; | &quot;*&quot; | &quot;'&quot; | &quot;(&quot; | &quot;)&quot;
      * ]]&gt;
      * </pre>
      * 
      * </p>
      * <p>
-     * ¸Ã·½·¨Ê¹ÓÃÖ¸¶¨µÄ×Ö·û±àÂëÀ´±àÂëURL¡£
+     * è¯¥æ–¹æ³•ä½¿ç”¨æŒ‡å®šçš„å­—ç¬¦ç¼–ç æ¥ç¼–ç URLã€‚
      * </p>
      * 
-     * @param str Òª±àÂëµÄ×Ö·û´®£¬¿ÉÒÔÊÇ<code>null</code>
-     * @param encoding Êä³ö×Ö·û±àÂë£¬Èç¹ûÎª<code>null</code>£¬ÔòÊ¹ÓÃÏµÍ³Ä¬ÈÏ±àÂë
-     * @param out Êä³öµ½Ö¸¶¨×Ö·ûÁ÷
-     * @throws IOException Èç¹ûÊä³öµ½<code>out</code>Ê§°Ü
-     * @throws UnsupportedEncodingException Èç¹ûÖ¸¶¨µÄ<code>encoding</code>Îª·Ç·¨µÄ
-     * @throws IllegalArgumentException <code>out</code>Îª<code>null</code>
+     * @param str è¦ç¼–ç çš„å­—ç¬¦ä¸²ï¼Œå¯ä»¥æ˜¯<code>null</code>
+     * @param encoding è¾“å‡ºå­—ç¬¦ç¼–ç ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œåˆ™ä½¿ç”¨ç³»ç»Ÿé»˜è®¤ç¼–ç 
+     * @param out è¾“å‡ºåˆ°æŒ‡å®šå­—ç¬¦æµ
+     * @throws IOException å¦‚æœè¾“å‡ºåˆ°<code>out</code>å¤±è´¥
+     * @throws UnsupportedEncodingException å¦‚æœæŒ‡å®šçš„<code>encoding</code>ä¸ºéæ³•çš„
+     * @throws IllegalArgumentException <code>out</code>ä¸º<code>null</code>
      */
     public static void escapeURL(String str, String encoding, Appendable out) throws IOException {
         escapeURLInternal(str, encoding, out, true);
     }
 
     /**
-     * ½«Ö¸¶¨×Ö·û´®±àÂë³É<code>application/x-www-form-urlencoded</code>¸ñÊ½¡£
+     * å°†æŒ‡å®šå­—ç¬¦ä¸²ç¼–ç æˆ<code>application/x-www-form-urlencoded</code>æ ¼å¼ã€‚
      * <p>
-     * Èç¹ûÖ¸¶¨²ÎÊı<code>strict</code>Îª<code>true</code>£¬Ôò°´ÑÏ¸ñµÄ·½Ê½±àÂëURL¡£ ³ıÁËRFC2396ÖĞµÄ
-     * <code>unreserved</code>×Ö·ûÖ®ÍâµÄËùÓĞ×Ö·û£¬¶¼½«±»×ª»»³ÉURL±àÂë<code>%xx</code>¡£ ¸ù¾İRFC2396£¬
-     * <code>unreserved</code>µÄ¶¨ÒåÈçÏÂ£º
+     * å¦‚æœæŒ‡å®šå‚æ•°<code>strict</code>ä¸º<code>true</code>ï¼Œåˆ™æŒ‰ä¸¥æ ¼çš„æ–¹å¼ç¼–ç URLã€‚ é™¤äº†RFC2396ä¸­çš„
+     * <code>unreserved</code>å­—ç¬¦ä¹‹å¤–çš„æ‰€æœ‰å­—ç¬¦ï¼Œéƒ½å°†è¢«è½¬æ¢æˆURLç¼–ç <code>%xx</code>ã€‚ æ ¹æ®RFC2396ï¼Œ
+     * <code>unreserved</code>çš„å®šä¹‰å¦‚ä¸‹ï¼š
      * 
      * <pre>
      * &lt;![CDATA
      *  unreserved  = alphanum | mark
-     *  alphanum    = ´óĞ¡Ğ´Ó¢ÎÄ×ÖÄ¸ | Êı×Ö
+     *  alphanum    = å¤§å°å†™è‹±æ–‡å­—æ¯ | æ•°å­—
      *  mark        = &quot;-&quot; | &quot;_&quot; | &quot;.&quot; | &quot;!&quot; | &quot;&tilde;&quot; | &quot;*&quot; | &quot;'&quot; | &quot;(&quot; | &quot;)&quot;
      * ]]&gt;
      * </pre>
      * 
      * </p>
      * <p>
-     * Èç¹ûÖ¸¶¨²ÎÊı<code>strict</code>Îª<code>false</code>£¬ÔòÊ¹ÓÃ¿íËÉµÄ·½Ê½±àÂëURL¡£
-     * ³ıÁË¿ØÖÆ×Ö·û¡¢¿Õ°××Ö·ûÒÔ¼°RFC2396ÖĞµÄ<code>reserved</code>×Ö·ûÖ®ÍâµÄËùÓĞ×Ö·û£¬¶¼½«±»±£Áô²»±ä¡£
-     * ¸ù¾İRFC2396£¬Ö»ÓĞ¿ØÖÆ×Ö·û¡¢¿Õ°××Ö·ûÒÔ¼°·ûºÏÏÂÁĞ<code>reserved</code>¶¨ÒåµÄ×Ö·û²Å±»×ª»»³É
-     * <code>%xx</code>¸ñÊ½£º
+     * å¦‚æœæŒ‡å®šå‚æ•°<code>strict</code>ä¸º<code>false</code>ï¼Œåˆ™ä½¿ç”¨å®½æ¾çš„æ–¹å¼ç¼–ç URLã€‚
+     * é™¤äº†æ§åˆ¶å­—ç¬¦ã€ç©ºç™½å­—ç¬¦ä»¥åŠRFC2396ä¸­çš„<code>reserved</code>å­—ç¬¦ä¹‹å¤–çš„æ‰€æœ‰å­—ç¬¦ï¼Œéƒ½å°†è¢«ä¿ç•™ä¸å˜ã€‚
+     * æ ¹æ®RFC2396ï¼Œåªæœ‰æ§åˆ¶å­—ç¬¦ã€ç©ºç™½å­—ç¬¦ä»¥åŠç¬¦åˆä¸‹åˆ—<code>reserved</code>å®šä¹‰çš„å­—ç¬¦æ‰è¢«è½¬æ¢æˆ
+     * <code>%xx</code>æ ¼å¼ï¼š
      * 
      * <pre>
      * &lt;![CDATA
@@ -1289,29 +1289,29 @@ public class StringEscapeUtil {
      * 
      * </p>
      * <p>
-     * ¸Ã·½·¨Ê¹ÓÃÖ¸¶¨µÄ×Ö·û±àÂëÀ´±àÂëURL¡£
+     * è¯¥æ–¹æ³•ä½¿ç”¨æŒ‡å®šçš„å­—ç¬¦ç¼–ç æ¥ç¼–ç URLã€‚
      * </p>
      * 
-     * @param str Òª±àÂëµÄ×Ö·û´®£¬¿ÉÒÔÊÇ<code>null</code>
-     * @param encoding Êä³ö×Ö·û±àÂë£¬Èç¹ûÎª<code>null</code>£¬ÔòÊ¹ÓÃÏµÍ³Ä¬ÈÏ±àÂë
-     * @param out Êä³öµ½Ö¸¶¨×Ö·ûÁ÷
-     * @param strict ÊÇ·ñÒÔÑÏ¸ñµÄ·½Ê½±àÂëURL
-     * @throws IOException Èç¹ûÊä³öµ½<code>out</code>Ê§°Ü
-     * @throws UnsupportedEncodingException Èç¹ûÖ¸¶¨µÄ<code>encoding</code>Îª·Ç·¨µÄ
-     * @throws IllegalArgumentException <code>out</code>Îª<code>null</code>
+     * @param str è¦ç¼–ç çš„å­—ç¬¦ä¸²ï¼Œå¯ä»¥æ˜¯<code>null</code>
+     * @param encoding è¾“å‡ºå­—ç¬¦ç¼–ç ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œåˆ™ä½¿ç”¨ç³»ç»Ÿé»˜è®¤ç¼–ç 
+     * @param out è¾“å‡ºåˆ°æŒ‡å®šå­—ç¬¦æµ
+     * @param strict æ˜¯å¦ä»¥ä¸¥æ ¼çš„æ–¹å¼ç¼–ç URL
+     * @throws IOException å¦‚æœè¾“å‡ºåˆ°<code>out</code>å¤±è´¥
+     * @throws UnsupportedEncodingException å¦‚æœæŒ‡å®šçš„<code>encoding</code>ä¸ºéæ³•çš„
+     * @throws IllegalArgumentException <code>out</code>ä¸º<code>null</code>
      */
     public static void escapeURL(String str, String encoding, Appendable out, boolean strict) throws IOException {
         escapeURLInternal(str, encoding, out, strict);
     }
 
     /**
-     * ½«Ö¸¶¨×Ö·û´®±àÂë³É<code>application/x-www-form-urlencoded</code>¸ñÊ½¡£
+     * å°†æŒ‡å®šå­—ç¬¦ä¸²ç¼–ç æˆ<code>application/x-www-form-urlencoded</code>æ ¼å¼ã€‚
      * 
-     * @param str Òª±àÂëµÄ×Ö·û´®£¬¿ÉÒÔÊÇ<code>null</code>
-     * @param encoding Êä³ö×Ö·û±àÂë£¬Èç¹ûÎª<code>null</code>£¬ÔòÊ¹ÓÃÏµÍ³Ä¬ÈÏ±àÂë
-     * @param strict ÊÇ·ñÒÔÑÏ¸ñµÄ·½Ê½±àÂëURL
-     * @return URL±àÂëºóµÄ×Ö·û´®
-     * @throws UnsupportedEncodingException Èç¹ûÖ¸¶¨µÄ<code>encoding</code>Îª·Ç·¨µÄ
+     * @param str è¦ç¼–ç çš„å­—ç¬¦ä¸²ï¼Œå¯ä»¥æ˜¯<code>null</code>
+     * @param encoding è¾“å‡ºå­—ç¬¦ç¼–ç ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œåˆ™ä½¿ç”¨ç³»ç»Ÿé»˜è®¤ç¼–ç 
+     * @param strict æ˜¯å¦ä»¥ä¸¥æ ¼çš„æ–¹å¼ç¼–ç URL
+     * @return URLç¼–ç åçš„å­—ç¬¦ä¸²
+     * @throws UnsupportedEncodingException å¦‚æœæŒ‡å®šçš„<code>encoding</code>ä¸ºéæ³•çš„
      */
     private static String escapeURLInternal(String str, String encoding, boolean strict)
             throws UnsupportedEncodingException {
@@ -1330,21 +1330,21 @@ public class StringEscapeUtil {
         } catch (UnsupportedEncodingException e) {
             throw e;
         } catch (IOException e) {
-            return str; // StringBuilder²»¿ÉÄÜ·¢ÉúÕâ¸öÒì³£
+            return str; // StringBuilderä¸å¯èƒ½å‘ç”Ÿè¿™ä¸ªå¼‚å¸¸
         }
     }
 
     /**
-     * ½«Ö¸¶¨×Ö·û´®±àÂë³É<code>application/x-www-form-urlencoded</code>¸ñÊ½¡£
+     * å°†æŒ‡å®šå­—ç¬¦ä¸²ç¼–ç æˆ<code>application/x-www-form-urlencoded</code>æ ¼å¼ã€‚
      * 
-     * @param str Òª±àÂëµÄ×Ö·û´®£¬¿ÉÒÔÊÇ<code>null</code>
-     * @param encoding Êä³ö×Ö·û±àÂë£¬Èç¹ûÎª<code>null</code>£¬ÔòÊ¹ÓÃÏµÍ³Ä¬ÈÏ±àÂë
-     * @param strict ÊÇ·ñÒÔÑÏ¸ñµÄ·½Ê½±àÂëURL
-     * @param out Êä³öÁ÷
-     * @return Èç¹û×Ö·û´®±»¸Ä±ä£¬Ôò·µ»Ø<code>true</code>
-     * @throws IOException Èç¹ûÊä³öµ½<code>out</code>Ê§°Ü
-     * @throws UnsupportedEncodingException Èç¹ûÖ¸¶¨µÄ<code>encoding</code>Îª·Ç·¨µÄ
-     * @throws IllegalArgumentException <code>out</code>Îª<code>null</code>
+     * @param str è¦ç¼–ç çš„å­—ç¬¦ä¸²ï¼Œå¯ä»¥æ˜¯<code>null</code>
+     * @param encoding è¾“å‡ºå­—ç¬¦ç¼–ç ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œåˆ™ä½¿ç”¨ç³»ç»Ÿé»˜è®¤ç¼–ç 
+     * @param strict æ˜¯å¦ä»¥ä¸¥æ ¼çš„æ–¹å¼ç¼–ç URL
+     * @param out è¾“å‡ºæµ
+     * @return å¦‚æœå­—ç¬¦ä¸²è¢«æ”¹å˜ï¼Œåˆ™è¿”å›<code>true</code>
+     * @throws IOException å¦‚æœè¾“å‡ºåˆ°<code>out</code>å¤±è´¥
+     * @throws UnsupportedEncodingException å¦‚æœæŒ‡å®šçš„<code>encoding</code>ä¸ºéæ³•çš„
+     * @throws IllegalArgumentException <code>out</code>ä¸º<code>null</code>
      */
     private static boolean escapeURLInternal(String str, String encoding, Appendable out, boolean strict)
             throws IOException {
@@ -1369,17 +1369,17 @@ public class StringEscapeUtil {
             int ch = charArray[i];
 
             if (isSafeCharacter(ch, strict)) {
-                // ¡°°²È«¡±µÄ×Ö·û£¬Ö±½ÓÊä³ö
+                // â€œå®‰å…¨â€çš„å­—ç¬¦ï¼Œç›´æ¥è¾“å‡º
                 out.append((char) ch);
             } else if (ch == ' ') {
-                // ÌØÊâÇé¿ö£º¿Õ¸ñ£¨0x20£©×ª»»³É'+'
+                // ç‰¹æ®Šæƒ…å†µï¼šç©ºæ ¼ï¼ˆ0x20ï¼‰è½¬æ¢æˆ'+'
                 out.append('+');
 
-                // ÉèÖÃ¸Ä±ä±êÖ¾
+                // è®¾ç½®æ”¹å˜æ ‡å¿—
                 needToChange = true;
             } else {
-                // ¶Ôch½øĞĞURL±àÂë¡£
-                // Ê×ÏÈ°´Ö¸¶¨encodingÈ¡µÃ¸Ã×Ö·ûµÄ×Ö½ÚÂë¡£
+                // å¯¹chè¿›è¡ŒURLç¼–ç ã€‚
+                // é¦–å…ˆæŒ‰æŒ‡å®šencodingå–å¾—è¯¥å­—ç¬¦çš„å­—èŠ‚ç ã€‚
                 byte[] bytes = String.valueOf((char) ch).getBytes(encoding);
 
                 for (byte toEscape : bytes) {
@@ -1392,7 +1392,7 @@ public class StringEscapeUtil {
                     out.append(HEXADECIMAL[low]);
                 }
 
-                // ÉèÖÃ¸Ä±ä±êÖ¾
+                // è®¾ç½®æ”¹å˜æ ‡å¿—
                 needToChange = true;
             }
         }
@@ -1401,11 +1401,11 @@ public class StringEscapeUtil {
     }
 
     /**
-     * ÅĞ¶ÏÖ¸¶¨×Ö·ûÊÇ·ñÊÇ¡°°²È«¡±µÄ£¬Õâ¸ö×Ö·û½«²»±»×ª»»³ÉURL±àÂë¡£
+     * åˆ¤æ–­æŒ‡å®šå­—ç¬¦æ˜¯å¦æ˜¯â€œå®‰å…¨â€çš„ï¼Œè¿™ä¸ªå­—ç¬¦å°†ä¸è¢«è½¬æ¢æˆURLç¼–ç ã€‚
      * 
-     * @param ch ÒªÅĞ¶ÏµÄ×Ö·û
-     * @param strict ÊÇ·ñÒÔÑÏ¸ñµÄ·½Ê½±àÂë
-     * @return Èç¹ûÊÇ¡°°²È«¡±µÄ£¬Ôò·µ»Ø<code>true</code>
+     * @param ch è¦åˆ¤æ–­çš„å­—ç¬¦
+     * @param strict æ˜¯å¦ä»¥ä¸¥æ ¼çš„æ–¹å¼ç¼–ç 
+     * @return å¦‚æœæ˜¯â€œå®‰å…¨â€çš„ï¼Œåˆ™è¿”å›<code>true</code>
      */
     private static boolean isSafeCharacter(int ch, boolean strict) {
         if (strict) {
@@ -1416,55 +1416,55 @@ public class StringEscapeUtil {
     }
 
     /**
-     * ½âÂë<code>application/x-www-form-urlencoded</code>¸ñÊ½µÄ×Ö·û´®¡£
+     * è§£ç <code>application/x-www-form-urlencoded</code>æ ¼å¼çš„å­—ç¬¦ä¸²ã€‚
      * <p>
-     * ¾¯¸æ£º¸Ã·½·¨Ê¹ÓÃÏµÍ³×Ö·û±àÂëÀ´½âÂëURL£¬Òò´Ë¸Ã·½·¨ÔÚ²»Í¬µÄÏµÍ³ÖĞ¿ÉÄÜ»á²úÉú²»Í¬µÄ½á¹û¡£
+     * è­¦å‘Šï¼šè¯¥æ–¹æ³•ä½¿ç”¨ç³»ç»Ÿå­—ç¬¦ç¼–ç æ¥è§£ç URLï¼Œå› æ­¤è¯¥æ–¹æ³•åœ¨ä¸åŒçš„ç³»ç»Ÿä¸­å¯èƒ½ä¼šäº§ç”Ÿä¸åŒçš„ç»“æœã€‚
      * </p>
      * 
-     * @param str Òª½âÂëµÄ×Ö·û´®£¬¿ÉÒÔÊÇ<code>null</code>
-     * @return URL½âÂëºóµÄ×Ö·û´®
+     * @param str è¦è§£ç çš„å­—ç¬¦ä¸²ï¼Œå¯ä»¥æ˜¯<code>null</code>
+     * @return URLè§£ç åçš„å­—ç¬¦ä¸²
      */
     public static String unescapeURL(String str) {
         try {
             return unescapeURLInternal(str, null);
         } catch (UnsupportedEncodingException e) {
-            return str; // ²»¿ÉÄÜ·¢ÉúÕâ¸öÒì³£
+            return str; // ä¸å¯èƒ½å‘ç”Ÿè¿™ä¸ªå¼‚å¸¸
         }
     }
 
     /**
-     * ½âÂë<code>application/x-www-form-urlencoded</code>¸ñÊ½µÄ×Ö·û´®¡£
+     * è§£ç <code>application/x-www-form-urlencoded</code>æ ¼å¼çš„å­—ç¬¦ä¸²ã€‚
      * 
-     * @param str Òª½âÂëµÄ×Ö·û´®£¬¿ÉÒÔÊÇ<code>null</code>
-     * @param encoding Êä³ö×Ö·û±àÂë£¬Èç¹ûÎª<code>null</code>£¬ÔòÊ¹ÓÃÏµÍ³Ä¬ÈÏ±àÂë
-     * @return URL½âÂëºóµÄ×Ö·û´®
-     * @throws UnsupportedEncodingException Èç¹ûÖ¸¶¨µÄ<code>encoding</code>Îª·Ç·¨µÄ
+     * @param str è¦è§£ç çš„å­—ç¬¦ä¸²ï¼Œå¯ä»¥æ˜¯<code>null</code>
+     * @param encoding è¾“å‡ºå­—ç¬¦ç¼–ç ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œåˆ™ä½¿ç”¨ç³»ç»Ÿé»˜è®¤ç¼–ç 
+     * @return URLè§£ç åçš„å­—ç¬¦ä¸²
+     * @throws UnsupportedEncodingException å¦‚æœæŒ‡å®šçš„<code>encoding</code>ä¸ºéæ³•çš„
      */
     public static String unescapeURL(String str, String encoding) throws UnsupportedEncodingException {
         return unescapeURLInternal(str, encoding);
     }
 
     /**
-     * ½âÂë<code>application/x-www-form-urlencoded</code>¸ñÊ½µÄ×Ö·û´®¡£
+     * è§£ç <code>application/x-www-form-urlencoded</code>æ ¼å¼çš„å­—ç¬¦ä¸²ã€‚
      * 
-     * @param str Òª½âÂëµÄ×Ö·û´®£¬¿ÉÒÔÊÇ<code>null</code>
-     * @param encoding Êä³ö×Ö·û±àÂë£¬Èç¹ûÎª<code>null</code>£¬ÔòÊ¹ÓÃÏµÍ³Ä¬ÈÏ±àÂë
-     * @param out Êä³öÁ÷
-     * @throws IOException Èç¹ûÊä³öµ½<code>out</code>Ê§°Ü
-     * @throws UnsupportedEncodingException Èç¹ûÖ¸¶¨µÄ<code>encoding</code>Îª·Ç·¨µÄ
-     * @throws IllegalArgumentException <code>out</code>Îª<code>null</code>
+     * @param str è¦è§£ç çš„å­—ç¬¦ä¸²ï¼Œå¯ä»¥æ˜¯<code>null</code>
+     * @param encoding è¾“å‡ºå­—ç¬¦ç¼–ç ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œåˆ™ä½¿ç”¨ç³»ç»Ÿé»˜è®¤ç¼–ç 
+     * @param out è¾“å‡ºæµ
+     * @throws IOException å¦‚æœè¾“å‡ºåˆ°<code>out</code>å¤±è´¥
+     * @throws UnsupportedEncodingException å¦‚æœæŒ‡å®šçš„<code>encoding</code>ä¸ºéæ³•çš„
+     * @throws IllegalArgumentException <code>out</code>ä¸º<code>null</code>
      */
     public static void unescapeURL(String str, String encoding, Appendable out) throws IOException {
         unescapeURLInternal(str, encoding, out);
     }
 
     /**
-     * ½âÂë<code>application/x-www-form-urlencoded</code>¸ñÊ½µÄ×Ö·û´®¡£
+     * è§£ç <code>application/x-www-form-urlencoded</code>æ ¼å¼çš„å­—ç¬¦ä¸²ã€‚
      * 
-     * @param str Òª½âÂëµÄ×Ö·û´®£¬¿ÉÒÔÊÇ<code>null</code>
-     * @param encoding Êä³ö×Ö·û±àÂë£¬Èç¹ûÎª<code>null</code>£¬ÔòÊ¹ÓÃÏµÍ³Ä¬ÈÏ±àÂë
-     * @return URL½âÂëºóµÄ×Ö·û´®
-     * @throws UnsupportedEncodingException Èç¹ûÖ¸¶¨µÄ<code>encoding</code>Îª·Ç·¨µÄ
+     * @param str è¦è§£ç çš„å­—ç¬¦ä¸²ï¼Œå¯ä»¥æ˜¯<code>null</code>
+     * @param encoding è¾“å‡ºå­—ç¬¦ç¼–ç ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œåˆ™ä½¿ç”¨ç³»ç»Ÿé»˜è®¤ç¼–ç 
+     * @return URLè§£ç åçš„å­—ç¬¦ä¸²
+     * @throws UnsupportedEncodingException å¦‚æœæŒ‡å®šçš„<code>encoding</code>ä¸ºéæ³•çš„
      */
     private static String unescapeURLInternal(String str, String encoding) throws UnsupportedEncodingException {
         if (str == null) {
@@ -1482,20 +1482,20 @@ public class StringEscapeUtil {
         } catch (UnsupportedEncodingException e) {
             throw e;
         } catch (IOException e) {
-            return str; // StringBuilder²»¿ÉÄÜ·¢ÉúÕâ¸öÒì³£
+            return str; // StringBuilderä¸å¯èƒ½å‘ç”Ÿè¿™ä¸ªå¼‚å¸¸
         }
     }
 
     /**
-     * ½âÂë<code>application/x-www-form-urlencoded</code>¸ñÊ½µÄ×Ö·û´®¡£
+     * è§£ç <code>application/x-www-form-urlencoded</code>æ ¼å¼çš„å­—ç¬¦ä¸²ã€‚
      * 
-     * @param str Òª½âÂëµÄ×Ö·û´®£¬¿ÉÒÔÊÇ<code>null</code>
-     * @param encoding Êä³ö×Ö·û±àÂë£¬Èç¹ûÎª<code>null</code>£¬ÔòÊ¹ÓÃÏµÍ³Ä¬ÈÏ±àÂë
-     * @param out Êä³öÁ÷
-     * @return Èç¹û×Ö·û´®±»¸Ä±ä£¬Ôò·µ»Ø<code>true</code>
-     * @throws IOException Èç¹ûÊä³öµ½<code>out</code>Ê§°Ü
-     * @throws UnsupportedEncodingException Èç¹ûÖ¸¶¨µÄ<code>encoding</code>Îª·Ç·¨µÄ
-     * @throws IllegalArgumentException <code>out</code>Îª<code>null</code>
+     * @param str è¦è§£ç çš„å­—ç¬¦ä¸²ï¼Œå¯ä»¥æ˜¯<code>null</code>
+     * @param encoding è¾“å‡ºå­—ç¬¦ç¼–ç ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œåˆ™ä½¿ç”¨ç³»ç»Ÿé»˜è®¤ç¼–ç 
+     * @param out è¾“å‡ºæµ
+     * @return å¦‚æœå­—ç¬¦ä¸²è¢«æ”¹å˜ï¼Œåˆ™è¿”å›<code>true</code>
+     * @throws IOException å¦‚æœè¾“å‡ºåˆ°<code>out</code>å¤±è´¥
+     * @throws UnsupportedEncodingException å¦‚æœæŒ‡å®šçš„<code>encoding</code>ä¸ºéæ³•çš„
+     * @throws IllegalArgumentException <code>out</code>ä¸º<code>null</code>
      */
     private static boolean unescapeURLInternal(String str, String encoding, Appendable out) throws IOException {
         if (encoding == null) {
@@ -1519,9 +1519,9 @@ public class StringEscapeUtil {
             int ch = charArray[i];
 
             if (ch < 256) {
-                // ¶ÁÈ¡Á¬ĞøµÄ×Ö½Ú£¬²¢½«Ëü°´Ö¸¶¨±àÂë×ª»»³É×Ö·û¡£
+                // è¯»å–è¿ç»­çš„å­—èŠ‚ï¼Œå¹¶å°†å®ƒæŒ‰æŒ‡å®šç¼–ç è½¬æ¢æˆå­—ç¬¦ã€‚
                 if (buffer == null) {
-                    buffer = new byte[length - i]; // ×î³¤Ö»ĞèÒªlength - i
+                    buffer = new byte[length - i]; // æœ€é•¿åªéœ€è¦length - i
                 }
 
                 if (pos == 0) {
@@ -1531,10 +1531,10 @@ public class StringEscapeUtil {
                 switch (ch) {
                     case '+':
 
-                        // ½«'+'×ª»»³É' '
+                        // å°†'+'è½¬æ¢æˆ' '
                         buffer[pos++] = ' ';
 
-                        // ÉèÖÃ¸Ä±ä±êÖ¾
+                        // è®¾ç½®æ”¹å˜æ ‡å¿—
                         needToChange = true;
                         break;
 
@@ -1547,10 +1547,10 @@ public class StringEscapeUtil {
                                 buffer[pos++] = b;
                                 i += 2;
 
-                                // ÉèÖÃ¸Ä±ä±êÖ¾
+                                // è®¾ç½®æ”¹å˜æ ‡å¿—
                                 needToChange = true;
                             } catch (NumberFormatException e) {
-                                // Èç¹û%xx²»ÊÇºÏ·¨µÄ16½øÖÆÊı£¬ÔòÔ­ÑùÊä³ö
+                                // å¦‚æœ%xxä¸æ˜¯åˆæ³•çš„16è¿›åˆ¶æ•°ï¼Œåˆ™åŸæ ·è¾“å‡º
                                 buffer[pos++] = (byte) ch;
                             }
                         } else {
@@ -1561,12 +1561,12 @@ public class StringEscapeUtil {
 
                     default:
 
-                        // Ğ´µ½bytesÖĞ£¬µ½Ê±Ò»ÆğÊä³ö¡£
+                        // å†™åˆ°bytesä¸­ï¼Œåˆ°æ—¶ä¸€èµ·è¾“å‡ºã€‚
                         buffer[pos++] = (byte) ch;
                         break;
                 }
             } else {
-                // ÏÈ½«bufferÖĞµÄ×Ö½Ú´®×ª»»³É×Ö·û´®¡£
+                // å…ˆå°†bufferä¸­çš„å­—èŠ‚ä¸²è½¬æ¢æˆå­—ç¬¦ä¸²ã€‚
                 if (pos > 0) {
                     String s = new String(buffer, 0, pos, encoding);
 
@@ -1579,12 +1579,12 @@ public class StringEscapeUtil {
                     pos = 0;
                 }
 
-                // Èç¹ûchÊÇISO-8859-1ÒÔÍâµÄ×Ö·û£¬Ö±½ÓÊä³ö¼´¿É
+                // å¦‚æœchæ˜¯ISO-8859-1ä»¥å¤–çš„å­—ç¬¦ï¼Œç›´æ¥è¾“å‡ºå³å¯
                 out.append((char) ch);
             }
         }
 
-        // ÏÈ½«bufferÖĞµÄ×Ö½Ú´®×ª»»³É×Ö·û´®¡£
+        // å…ˆå°†bufferä¸­çš„å­—èŠ‚ä¸²è½¬æ¢æˆå­—ç¬¦ä¸²ã€‚
         if (pos > 0) {
             String s = new String(buffer, 0, pos, encoding);
 

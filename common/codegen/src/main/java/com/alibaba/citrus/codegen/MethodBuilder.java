@@ -26,7 +26,7 @@ import com.alibaba.citrus.asm.MethodVisitor;
 import com.alibaba.citrus.asm.Type;
 
 /**
- * ÓÃÀ´Éú³ÉÒ»¸ömethodµÄ¹¤¾ß¡£
+ * ç”¨æ¥ç”Ÿæˆä¸€ä¸ªmethodçš„å·¥å…·ã€‚
  * 
  * @author Michael Zhou
  */
@@ -42,14 +42,14 @@ public abstract class MethodBuilder {
     private CodeBuilder codeBuilder;
 
     /**
-     * ´´½¨<code>MethodBuilder</code>¡£
+     * åˆ›å»º<code>MethodBuilder</code>ã€‚
      * 
-     * @param cb methodËùÔÚµÄ<code>ClassBuilder</code>¶ÔÏó
-     * @param access ·ÃÎÊĞÔ£¬Èç¹ûÊÇ<code>-1</code>£¬ÔòÈ¡Ä¬ÈÏÖµ¡£
-     * @param returnType ·µ»ØÀàĞÍ£¬Îª<code>null</code>´ú±íÎŞ·µ»ØÖµ¡£
-     * @param methodName methodÃû³Æ
-     * @param parameterTypes ²ÎÊıÀàĞÍ
-     * @param exceptionTypes Òì³£ÀàĞÍ
+     * @param cb methodæ‰€åœ¨çš„<code>ClassBuilder</code>å¯¹è±¡
+     * @param access è®¿é—®æ€§ï¼Œå¦‚æœæ˜¯<code>-1</code>ï¼Œåˆ™å–é»˜è®¤å€¼ã€‚
+     * @param returnType è¿”å›ç±»å‹ï¼Œä¸º<code>null</code>ä»£è¡¨æ— è¿”å›å€¼ã€‚
+     * @param methodName methodåç§°
+     * @param parameterTypes å‚æ•°ç±»å‹
+     * @param exceptionTypes å¼‚å¸¸ç±»å‹
      */
     protected MethodBuilder(ClassBuilder cb, int access, Class<?> returnType, String methodName,
                             Class<?>[] parameterTypes, Class<?>[] exceptionTypes) {
@@ -84,63 +84,63 @@ public abstract class MethodBuilder {
     }
 
     /**
-     * È¡µÃmethodËùÔÚµÄ<code>ClassBuilder</code>¡£
+     * å–å¾—methodæ‰€åœ¨çš„<code>ClassBuilder</code>ã€‚
      */
     public ClassBuilder getClassBuilder() {
         return cb;
     }
 
     /**
-     * È¡µÃ<code>MethodVisitor</code>¡£
+     * å–å¾—<code>MethodVisitor</code>ã€‚
      */
     public MethodVisitor getMethodVisitor() {
         return mv;
     }
 
     /**
-     * È¡µÃ·µ»ØÀàĞÍ¡£
+     * å–å¾—è¿”å›ç±»å‹ã€‚
      */
     public Type getReturnType() {
         return returnType;
     }
 
     /**
-     * È¡µÃ·½·¨Ãû¡£
+     * å–å¾—æ–¹æ³•åã€‚
      */
     public String getMethodName() {
         return methodName;
     }
 
     /**
-     * ÊÇ·ñÎª¹¹Ôìº¯Êı¡£
+     * æ˜¯å¦ä¸ºæ„é€ å‡½æ•°ã€‚
      */
     public boolean isConstructor() {
         return CONSTRUCTOR_NAME.equals(methodName);
     }
 
     /**
-     * ÊÇ·ñÎª¾²Ì¬¹¹Ôìº¯Êı¡£
+     * æ˜¯å¦ä¸ºé™æ€æ„é€ å‡½æ•°ã€‚
      */
     public boolean isStaticConstructor() {
         return STATIC_CONSTRUCTOR_NAME.equals(methodName);
     }
 
     /**
-     * È¡µÃ²ÎÊıÀàĞÍ¡£
+     * å–å¾—å‚æ•°ç±»å‹ã€‚
      */
     public Type[] getParameterTypes() {
         return parameterTypes;
     }
 
     /**
-     * È¡µÃÒì³£ÀàĞÍ¡£
+     * å–å¾—å¼‚å¸¸ç±»å‹ã€‚
      */
     public Type[] getExceptionTypes() {
         return exceptionTypes;
     }
 
     /**
-     * ¿ªÊ¼´úÂë¡£
+     * å¼€å§‹ä»£ç ã€‚
      */
     public CodeBuilder startCode() {
         if (codeBuilder == null) {
@@ -151,11 +151,11 @@ public abstract class MethodBuilder {
     }
 
     /**
-     * ½áÊø·½·¨¡£
+     * ç»“æŸæ–¹æ³•ã€‚
      */
     protected void endMethod() {
         if (codeBuilder == null) {
-            mv.visitEnd(); // ¶ÔÓÚinterfaceºÍ³éÏó·½·¨
+            mv.visitEnd(); // å¯¹äºinterfaceå’ŒæŠ½è±¡æ–¹æ³•
         } else {
             codeBuilder.visitMaxs(1, 1); // auto calculate stacks and locals
             codeBuilder.visitEnd();
@@ -163,7 +163,7 @@ public abstract class MethodBuilder {
     }
 
     /**
-     * ¸ø×ÓÀàÒ»¸ö»ú»á°ü×°method visitor¡£
+     * ç»™å­ç±»ä¸€ä¸ªæœºä¼šåŒ…è£…method visitorã€‚
      */
     protected MethodVisitor decorate(MethodVisitor mv) {
         return mv;

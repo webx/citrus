@@ -30,7 +30,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.util.StringUtils;
 
 /**
- * ½«Ò»¸öresource loading service×°ÔØµÄ×ÊÔ´×ª»»³Éspring resourceµÄÊÊÅäÆ÷¡£
+ * å°†ä¸€ä¸ªresource loading serviceè£…è½½çš„èµ„æºè½¬æ¢æˆspring resourceçš„é€‚é…å™¨ã€‚
  * 
  * @author Michael Zhou
  */

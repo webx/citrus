@@ -32,7 +32,7 @@ import com.alibaba.citrus.service.requestcontext.support.AbstractResponseWrapper
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ÑÓ³ÙÌá½»responseµÄÊµÏÖ¡£
+ * å»¶è¿Ÿæäº¤responseçš„å®ç°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -45,9 +45,9 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
     private int status;
 
     /**
-     * °ü×°Ò»¸ö<code>RequestContext</code>¶ÔÏó¡£
+     * åŒ…è£…ä¸€ä¸ª<code>RequestContext</code>å¯¹è±¡ã€‚
      * 
-     * @param wrappedContext ±»°ü×°µÄ<code>RequestContext</code>
+     * @param wrappedContext è¢«åŒ…è£…çš„<code>RequestContext</code>
      */
     public LazyCommitRequestContextImpl(RequestContext wrappedContext) {
         super(wrappedContext);
@@ -56,18 +56,18 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
     }
 
     /**
-     * ÅĞ¶Ïµ±Ç°ÇëÇóÊÇ·ñÒÑ³ö´í¡£
+     * åˆ¤æ–­å½“å‰è¯·æ±‚æ˜¯å¦å·²å‡ºé”™ã€‚
      * 
-     * @return Èç¹û³ö´í£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚æœå‡ºé”™ï¼Œåˆ™è¿”å›<code>true</code>
      */
     public boolean isError() {
         return sendError != null;
     }
 
     /**
-     * Èç¹û<code>sendError()</code>·½·¨Ôø±»µ÷ÓÃ£¬Ôò¸Ã·½·¨·µ»ØÒ»¸öerror×´Ì¬Öµ¡£
+     * å¦‚æœ<code>sendError()</code>æ–¹æ³•æ›¾è¢«è°ƒç”¨ï¼Œåˆ™è¯¥æ–¹æ³•è¿”å›ä¸€ä¸ªerrorçŠ¶æ€å€¼ã€‚
      * 
-     * @return error×´Ì¬Öµ£¬ÈôÏµÍ³Õı³££¬Ôò·µ»Ø<code>0</code>
+     * @return errorçŠ¶æ€å€¼ï¼Œè‹¥ç³»ç»Ÿæ­£å¸¸ï¼Œåˆ™è¿”å›<code>0</code>
      */
     public int getErrorStatus() {
         if (sendError != null) {
@@ -78,9 +78,9 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
     }
 
     /**
-     * Èç¹û<code>sendError()</code>·½·¨Ôø±»µ÷ÓÃ£¬Ôò¸Ã·½·¨·µ»ØÒ»¸öerrorĞÅÏ¢¡£
+     * å¦‚æœ<code>sendError()</code>æ–¹æ³•æ›¾è¢«è°ƒç”¨ï¼Œåˆ™è¯¥æ–¹æ³•è¿”å›ä¸€ä¸ªerrorä¿¡æ¯ã€‚
      * 
-     * @return errorĞÅÏ¢£¬ÈôÏµÍ³Õı³££¬Ôò·µ»Ø<code>null</code>
+     * @return errorä¿¡æ¯ï¼Œè‹¥ç³»ç»Ÿæ­£å¸¸ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public String getErrorMessage() {
         if (sendError != null) {
@@ -91,36 +91,36 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
     }
 
     /**
-     * ÅĞ¶Ïµ±Ç°ÇëÇóÊÇ·ñÒÑ±»ÖØ¶¨Ïò¡£
+     * åˆ¤æ–­å½“å‰è¯·æ±‚æ˜¯å¦å·²è¢«é‡å®šå‘ã€‚
      * 
-     * @return Èç¹ûÖØ¶¨Ïò£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚æœé‡å®šå‘ï¼Œåˆ™è¿”å›<code>true</code>
      */
     public boolean isRedirected() {
         return setLocation || !StringUtil.isEmpty(sendRedirect);
     }
 
     /**
-     * È¡µÃÖØ¶¨ÏòµÄURI¡£
+     * å–å¾—é‡å®šå‘çš„URIã€‚
      * 
-     * @return ÖØ¶¨ÏòµÄURI£¬Èç¹ûÃ»ÓĞÖØ¶¨Ïò£¬Ôò·µ»Ø<code>null</code>
+     * @return é‡å®šå‘çš„URIï¼Œå¦‚æœæ²¡æœ‰é‡å®šå‘ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public String getRedirectLocation() {
         return sendRedirect;
     }
 
     /**
-     * È¡µÃ×î½üÉèÖÃµÄHTTP status¡£
+     * å–å¾—æœ€è¿‘è®¾ç½®çš„HTTP statusã€‚
      * 
-     * @return HTTP statusÖµ
+     * @return HTTP statuså€¼
      */
     public int getStatus() {
         return status;
     }
 
     /**
-     * ½áÊøÒ»¸öÇëÇó¡£
+     * ç»“æŸä¸€ä¸ªè¯·æ±‚ã€‚
      * 
-     * @throws LazyCommitFailedException Èç¹ûÊ§°Ü
+     * @throws LazyCommitFailedException å¦‚æœå¤±è´¥
      */
     @Override
     public void commit() throws LazyCommitFailedException {
@@ -132,7 +132,7 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
     }
 
     /**
-     * °ü×°response¡£
+     * åŒ…è£…responseã€‚
      */
     private class ResponseWrapper extends AbstractResponseWrapper {
         public ResponseWrapper(HttpServletResponse response) {
@@ -152,11 +152,11 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
         }
 
         /**
-         * ÉèÖÃÖØ¶¨ÏòURI¡£
+         * è®¾ç½®é‡å®šå‘URIã€‚
          * 
-         * @param location ÖØ¶¨ÏòµÄURI
-         * @throws IOException ÊäÈëÊä³öÊ§°Ü
-         * @throws IllegalStateException Èç¹ûresponseÒÑ¾­committed
+         * @param location é‡å®šå‘çš„URI
+         * @throws IOException è¾“å…¥è¾“å‡ºå¤±è´¥
+         * @throws IllegalStateException å¦‚æœresponseå·²ç»committed
          */
         @Override
         public void sendRedirect(String location) throws IOException {
@@ -180,9 +180,9 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
         }
 
         /**
-         * ÉèÖÃHTTP status¡£
+         * è®¾ç½®HTTP statusã€‚
          * 
-         * @param sc HTTP statusÖµ
+         * @param sc HTTP statuså€¼
          */
         @Override
         public void setStatus(int sc) {
@@ -208,7 +208,7 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
             } else if (sendRedirect != null) {
                 log.debug("Set redirect location to " + sendRedirect);
 
-                // ½«locationÓÃÊä³ö±àÂë×ª»»Ò»ÏÂ£¬ÕâÑù¿ÉÒÔÈ·±£°üº¬·ÇUS_ASCII×Ö·ûµÄURLÕıÈ·Êä³ö
+                // å°†locationç”¨è¾“å‡ºç¼–ç è½¬æ¢ä¸€ä¸‹ï¼Œè¿™æ ·å¯ä»¥ç¡®ä¿åŒ…å«éUS_ASCIIå­—ç¬¦çš„URLæ­£ç¡®è¾“å‡º
                 String charset = getCharacterEncoding();
 
                 if (charset != null) {
@@ -225,7 +225,7 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
     }
 
     /**
-     * ±£´æsendErrorµÄĞÅÏ¢¡£
+     * ä¿å­˜sendErrorçš„ä¿¡æ¯ã€‚
      */
     private class SendError {
         public final int status;

@@ -18,15 +18,15 @@
 package com.alibaba.citrus.service.requestcontext.parser;
 
 /**
- * ¹ıÂËÓÃ»§ÊäÈëµÄ²ÎÊıÖµ¡£
+ * è¿‡æ»¤ç”¨æˆ·è¾“å…¥çš„å‚æ•°å€¼ã€‚
  * 
  * @author Michael Zhou
  */
 public interface ParameterValueFilter extends ParameterParserFilter {
     /**
-     * ¹ıÂËÖ¸¶¨Öµ£¬Èç¹û·µ»Ø<code>null</code>±íÊ¾ºöÂÔ¸ÃÖµ¡£
+     * è¿‡æ»¤æŒ‡å®šå€¼ï¼Œå¦‚æœè¿”å›<code>null</code>è¡¨ç¤ºå¿½ç•¥è¯¥å€¼ã€‚
      * <p>
-     * ×¢Òâ£¬<code>value</code>¿ÉÄÜÊÇ<code>null</code>¡£
+     * æ³¨æ„ï¼Œ<code>value</code>å¯èƒ½æ˜¯<code>null</code>ã€‚
      * </p>
      */
     String filter(String key, String value, boolean isHtml);

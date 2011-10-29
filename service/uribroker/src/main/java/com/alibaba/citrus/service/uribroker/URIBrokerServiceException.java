@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.uribroker;
 
 /**
- * ´ú±íURIBrokerServiceµÄÒì³£¡£
+ * ä»£è¡¨URIBrokerServiceçš„å¼‚å¸¸ã€‚
  * 
  * @author Michael Zhou
  * @author dux.fangl
@@ -29,28 +29,28 @@ public class URIBrokerServiceException extends RuntimeException {
     private static final long serialVersionUID = 3257566204763058484L;
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      */
     public URIBrokerServiceException() {
         super();
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      */
     public URIBrokerServiceException(String message) {
         super(message);
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      */
     public URIBrokerServiceException(String message, Throwable cause) {
         super(message, cause);
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      */
     public URIBrokerServiceException(Throwable cause) {
         super(cause);

@@ -20,7 +20,7 @@ package com.alibaba.citrus.util;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>SystemUtil</code>¡£
+ * æµ‹è¯•<code>SystemUtil</code>ã€‚
  * 
  * @author Michael Zhou
  */

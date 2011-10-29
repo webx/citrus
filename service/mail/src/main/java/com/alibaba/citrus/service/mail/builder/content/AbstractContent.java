@@ -26,7 +26,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * Ò»¸ö<code>MailContent</code>µÄ»ùÀà¡£
+ * ä¸€ä¸ª<code>MailContent</code>çš„åŸºç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -36,29 +36,29 @@ public abstract class AbstractContent implements MailContent {
     private MailContent parentContent;
 
     /**
-     * È¡µÃcontentµÄÎ¨Ò»ID£¬´ËIDÔÚÕû¸ömail builderËù°üº¬µÄcontentÖĞÊÇÎ¨Ò»µÄ¡£
+     * å–å¾—contentçš„å”¯ä¸€IDï¼Œæ­¤IDåœ¨æ•´ä¸ªmail builderæ‰€åŒ…å«çš„contentä¸­æ˜¯å”¯ä¸€çš„ã€‚
      */
     public String getId() {
         return id;
     }
 
     /**
-     * ÉèÖÃcontentµÄÎ¨Ò»ID£¬´ËIDÔÚÕû¸ömail builderËù°üº¬µÄcontentÖĞÊÇÎ¨Ò»µÄ¡£
+     * è®¾ç½®contentçš„å”¯ä¸€IDï¼Œæ­¤IDåœ¨æ•´ä¸ªmail builderæ‰€åŒ…å«çš„contentä¸­æ˜¯å”¯ä¸€çš„ã€‚
      */
     public void setId(String id) {
         this.id = id;
     }
 
     /**
-     * È¡µÃ´ËcontentËùÊôµÄmail builder¡£¼ÙÈç²»´æÔÚ£¬ÔòÅ×<code>IllegalArgumentException</code>
-     * Òì³£¡£
+     * å–å¾—æ­¤contentæ‰€å±çš„mail builderã€‚å‡å¦‚ä¸å­˜åœ¨ï¼Œåˆ™æŠ›<code>IllegalArgumentException</code>
+     * å¼‚å¸¸ã€‚
      */
     public MailBuilder getMailBuilder() {
         return getMailBuilder(true);
     }
 
     /**
-     * È¡µÃ´ËcontentËùÊôµÄmail builder¡£
+     * å–å¾—æ­¤contentæ‰€å±çš„mail builderã€‚
      */
     protected final MailBuilder getMailBuilder(boolean required) {
         if (builder != null) {
@@ -77,28 +77,28 @@ public abstract class AbstractContent implements MailContent {
     }
 
     /**
-     * ÉèÖÃmail builder¡£
+     * è®¾ç½®mail builderã€‚
      */
     public void setMailBuilder(MailBuilder builder) {
         this.builder = builder;
     }
 
     /**
-     * È¡µÃ°üÈİ´ËÄÚÈİµÄ¸¸ÄÚÈİ¡£
+     * å–å¾—åŒ…å®¹æ­¤å†…å®¹çš„çˆ¶å†…å®¹ã€‚
      */
     public MailContent getParentContent() {
         return parentContent;
     }
 
     /**
-     * ÉèÖÃ°üÈİ´ËÄÚÈİµÄ¸¸ÄÚÈİ¡£
+     * è®¾ç½®åŒ…å®¹æ­¤å†…å®¹çš„çˆ¶å†…å®¹ã€‚
      */
     public void setParentContent(MailContent parentContent) {
         this.parentContent = parentContent;
     }
 
     /**
-     * Éî¶È¸´ÖÆÒ»¸öcontent¡£
+     * æ·±åº¦å¤åˆ¶ä¸€ä¸ªcontentã€‚
      */
     @Override
     public final AbstractContent clone() {
@@ -115,19 +115,19 @@ public abstract class AbstractContent implements MailContent {
     }
 
     /**
-     * ´´½¨Ò»¸öÍ¬ÀàĞÍµÄcontent¡£
+     * åˆ›å»ºä¸€ä¸ªåŒç±»å‹çš„contentã€‚
      */
     protected abstract AbstractContent newInstance();
 
     /**
-     * Éî¶È¸´ÖÆÒ»¸öcontent¡£
+     * æ·±åº¦å¤åˆ¶ä¸€ä¸ªcontentã€‚
      */
     protected void copyTo(AbstractContent copy) {
     }
 
     /**
-     * ÓÃÀ´È¡µÃÖ¸¶¨ÀàĞÍµÄserviceµÄ¸¨Öú·½·¨¡£¼ÙÈç<code>defaultInstance</code>·Ç¿Õ£¬ÔòÖ±½Ó·µ»ØÖ®£¬·ñÔòµ÷ÓÃ
-     * <code>getMailBuilder().getMailService().getService()</code>¡£
+     * ç”¨æ¥å–å¾—æŒ‡å®šç±»å‹çš„serviceçš„è¾…åŠ©æ–¹æ³•ã€‚å‡å¦‚<code>defaultInstance</code>éç©ºï¼Œåˆ™ç›´æ¥è¿”å›ä¹‹ï¼Œå¦åˆ™è°ƒç”¨
+     * <code>getMailBuilder().getMailService().getService()</code>ã€‚
      */
     protected final <T> T getService(Class<T> serviceType, String defaultId, T defaultInstance) {
         if (defaultInstance != null) {

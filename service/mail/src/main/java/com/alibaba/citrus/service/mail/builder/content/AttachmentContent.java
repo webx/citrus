@@ -49,7 +49,7 @@ import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ´ú±íÒ»¸öÓÊ¼şµÄ¸½¼ş¡£
+ * ä»£è¡¨ä¸€ä¸ªé‚®ä»¶çš„é™„ä»¶ã€‚
  * 
  * @author Michael Zhou
  */
@@ -59,20 +59,20 @@ public class AttachmentContent extends AbstractContent implements ResourceLoader
     private String fileName;
 
     /**
-     * ´´½¨Ò»¸ö¸½¼ş¡£
+     * åˆ›å»ºä¸€ä¸ªé™„ä»¶ã€‚
      */
     public AttachmentContent() {
     }
 
     /**
-     * ´ÓURLÖĞ´´½¨Ò»¸ö¸½¼ş¡£
+     * ä»URLä¸­åˆ›å»ºä¸€ä¸ªé™„ä»¶ã€‚
      */
     public AttachmentContent(URL attachmentURL) {
         setURL(attachmentURL);
     }
 
     /**
-     * ´ÓURLÖĞ´´½¨Ò»¸öÖ¸¶¨ÎÄ¼şÃûµÄ¸½¼ş¡£
+     * ä»URLä¸­åˆ›å»ºä¸€ä¸ªæŒ‡å®šæ–‡ä»¶åçš„é™„ä»¶ã€‚
      */
     public AttachmentContent(URL attachmentURL, String fileName) {
         setURL(attachmentURL);
@@ -80,14 +80,14 @@ public class AttachmentContent extends AbstractContent implements ResourceLoader
     }
 
     /**
-     * ´ÓÎÄ¼şÖĞ´´½¨Ò»¸ö¸½¼ş¡£
+     * ä»æ–‡ä»¶ä¸­åˆ›å»ºä¸€ä¸ªé™„ä»¶ã€‚
      */
     public AttachmentContent(File attachmentFile) {
         setFile(attachmentFile);
     }
 
     /**
-     * ´ÓÎÄ¼şÖĞ´´½¨Ò»¸öÖ¸¶¨ÎÄ¼şÃûµÄ¸½¼ş¡£
+     * ä»æ–‡ä»¶ä¸­åˆ›å»ºä¸€ä¸ªæŒ‡å®šæ–‡ä»¶åçš„é™„ä»¶ã€‚
      */
     public AttachmentContent(File attachmentFile, String fileName) {
         setFile(attachmentFile);
@@ -95,14 +95,14 @@ public class AttachmentContent extends AbstractContent implements ResourceLoader
     }
 
     /**
-     * ´Ó<code>DataSource</code>ÖĞ´´½¨Ò»¸ö¸½¼ş¡£
+     * ä»<code>DataSource</code>ä¸­åˆ›å»ºä¸€ä¸ªé™„ä»¶ã€‚
      */
     public AttachmentContent(DataSource dataSource) {
         setDataSource(dataSource);
     }
 
     /**
-     * ´Ó<code>DataSource</code>ÖĞ´´½¨Ò»¸öÖ¸¶¨ÎÄ¼şÃûµÄ¸½¼ş¡£
+     * ä»<code>DataSource</code>ä¸­åˆ›å»ºä¸€ä¸ªæŒ‡å®šæ–‡ä»¶åçš„é™„ä»¶ã€‚
      */
     public AttachmentContent(DataSource dataSource, String fileName) {
         setDataSource(dataSource);
@@ -110,14 +110,14 @@ public class AttachmentContent extends AbstractContent implements ResourceLoader
     }
 
     /**
-     * ´Ó<code>ResourceLoader</code>ÖĞ×°ÔØÒ»¸ö×ÊÔ´²¢´´½¨¸½¼ş¡£
+     * ä»<code>ResourceLoader</code>ä¸­è£…è½½ä¸€ä¸ªèµ„æºå¹¶åˆ›å»ºé™„ä»¶ã€‚
      */
     public AttachmentContent(String resourceName) {
         setResource(resourceName);
     }
 
     /**
-     * ´Ó<code>ResourceLoader</code>ÖĞ×°ÔØÒ»¸ö×ÊÔ´²¢´´½¨Ö¸¶¨ÎÄ¼şÃûµÄ¸½¼ş¡£
+     * ä»<code>ResourceLoader</code>ä¸­è£…è½½ä¸€ä¸ªèµ„æºå¹¶åˆ›å»ºæŒ‡å®šæ–‡ä»¶åçš„é™„ä»¶ã€‚
      */
     public AttachmentContent(String resourceName, String fileName) {
         setResource(resourceName);
@@ -125,42 +125,42 @@ public class AttachmentContent extends AbstractContent implements ResourceLoader
     }
 
     /**
-     * ½«ÁíÒ»·âÓÊ¼ş×÷Îª¸½¼ş¡£
+     * å°†å¦ä¸€å°é‚®ä»¶ä½œä¸ºé™„ä»¶ã€‚
      */
     public AttachmentContent(MailBuilder mailBuilder) {
         setMail(mailBuilder);
     }
 
     /**
-     * ½«ÁíÒ»·âÓÊ¼ş×÷Îª¸½¼ş¡£
+     * å°†å¦ä¸€å°é‚®ä»¶ä½œä¸ºé™„ä»¶ã€‚
      */
     public AttachmentContent(Message mail) {
         setMail(mail);
     }
 
     /**
-     * ÒÔURLµÄÄÚÈİÎª¸½¼ş¡£
+     * ä»¥URLçš„å†…å®¹ä¸ºé™„ä»¶ã€‚
      */
     public void setURL(URL attachmentURL) {
         setSource(new URLSource(this, attachmentURL));
     }
 
     /**
-     * ÒÔÎÄ¼şµÄÄÚÈİÎª¸½¼ş¡£
+     * ä»¥æ–‡ä»¶çš„å†…å®¹ä¸ºé™„ä»¶ã€‚
      */
     public void setFile(File attachmentFile) {
         setSource(new FileSource(this, attachmentFile));
     }
 
     /**
-     * ÒÔÊı¾İÔ´µÄÄÚÈİÎª¸½¼ş¡£
+     * ä»¥æ•°æ®æºçš„å†…å®¹ä¸ºé™„ä»¶ã€‚
      */
     public void setDataSource(DataSource dataSource) {
         setSource(new DsSource(this, dataSource));
     }
 
     /**
-     * ÒÔresource loader×°ÔØµÄ×ÊÔ´ÄÚÈİÎª¸½¼ş¡£
+     * ä»¥resource loaderè£…è½½çš„èµ„æºå†…å®¹ä¸ºé™„ä»¶ã€‚
      */
     public void setResource(String resourceName) {
         setSource(new ResourceSource(this, resourceName));
@@ -168,23 +168,23 @@ public class AttachmentContent extends AbstractContent implements ResourceLoader
     }
 
     /**
-     * È¡µÃÓÃÀ´×°ÔØ×ÊÔ´µÄ<code>ResourceLoader</code>¡£
+     * å–å¾—ç”¨æ¥è£…è½½èµ„æºçš„<code>ResourceLoader</code>ã€‚
      */
     public ResourceLoader getResourceLoader() {
         return resourceLoader;
     }
 
     /**
-     * ÉèÖÃÓÃÀ´×°ÔØ×ÊÔ´µÄ<code>ResourceLoader</code>¡£
+     * è®¾ç½®ç”¨æ¥è£…è½½èµ„æºçš„<code>ResourceLoader</code>ã€‚
      */
     public void setResourceLoader(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
     }
 
     /**
-     * ÉèÖÃ¸½¼şµÄÎÄ¼şÃû¡£
+     * è®¾ç½®é™„ä»¶çš„æ–‡ä»¶åã€‚
      * <p>
-     * ¸ÃÎÄ¼şÃûÖ»ÊÇÓÃÓÚÏÔÊ¾£¬Ã»ÓĞÊµ¼ÊµÄ¹¦Ğ§¡£
+     * è¯¥æ–‡ä»¶ååªæ˜¯ç”¨äºæ˜¾ç¤ºï¼Œæ²¡æœ‰å®é™…çš„åŠŸæ•ˆã€‚
      * </p>
      */
     public void setFileName(String fileName) {
@@ -192,21 +192,21 @@ public class AttachmentContent extends AbstractContent implements ResourceLoader
     }
 
     /**
-     * ÒÔÁíÒ»¸öÓÊ¼şÌåÎª¸½¼ş¡£
+     * ä»¥å¦ä¸€ä¸ªé‚®ä»¶ä½“ä¸ºé™„ä»¶ã€‚
      */
     public void setMail(MailBuilder mailBuilder) {
         setSource(new MailBuilderSource(this, mailBuilder));
     }
 
     /**
-     * ÒÔÁíÒ»¸öÓÊ¼şÌåÎª¸½¼ş¡£
+     * ä»¥å¦ä¸€ä¸ªé‚®ä»¶ä½“ä¸ºé™„ä»¶ã€‚
      */
     public void setMail(Message mail) {
         setSource(new MailSource(this, mail));
     }
 
     /**
-     * ÒÔmail serviceÖĞÈ¡µÃµÄÁíÒ»¸öÓÊ¼şÌåÎª¸½¼ş¡£
+     * ä»¥mail serviceä¸­å–å¾—çš„å¦ä¸€ä¸ªé‚®ä»¶ä½“ä¸ºé™„ä»¶ã€‚
      */
     public void setMail(String attachmentRefId) {
         setSource(new MailRefSource(this, attachmentRefId));
@@ -218,7 +218,7 @@ public class AttachmentContent extends AbstractContent implements ResourceLoader
     }
 
     /**
-     * äÖÈ¾ÓÊ¼şÄÚÈİ¡£
+     * æ¸²æŸ“é‚®ä»¶å†…å®¹ã€‚
      */
     public void render(Part mailPart) throws MessagingException {
         assertNotNull(source, "No attachment source was specified");
@@ -226,7 +226,7 @@ public class AttachmentContent extends AbstractContent implements ResourceLoader
     }
 
     /**
-     * ´´½¨Ò»¸öÍ¬ÀàĞÍµÄcontent¡£
+     * åˆ›å»ºä¸€ä¸ªåŒç±»å‹çš„contentã€‚
      */
     @Override
     protected AttachmentContent newInstance() {
@@ -234,7 +234,7 @@ public class AttachmentContent extends AbstractContent implements ResourceLoader
     }
 
     /**
-     * Éî¶È¸´ÖÆÒ»¸öcontent¡£
+     * æ·±åº¦å¤åˆ¶ä¸€ä¸ªcontentã€‚
      */
     @Override
     protected void copyTo(AbstractContent copy) {
@@ -256,7 +256,7 @@ public class AttachmentContent extends AbstractContent implements ResourceLoader
     }
 
     /**
-     * ´ú±íÒ»¸ö¸½¼şµÄÀàĞÍ¡£
+     * ä»£è¡¨ä¸€ä¸ªé™„ä»¶çš„ç±»å‹ã€‚
      */
     private abstract static class AttachmentSource implements Cloneable {
         protected transient AttachmentContent containingContent;
@@ -281,7 +281,7 @@ public class AttachmentContent extends AbstractContent implements ResourceLoader
         protected abstract void render(Part mailPart, String fileName);
 
         /**
-         * äÖÈ¾data source¡£
+         * æ¸²æŸ“data sourceã€‚
          */
         protected final void render(Part mailPart, String fileName, DataSource source) throws MailBuilderException {
             try {
@@ -291,7 +291,7 @@ public class AttachmentContent extends AbstractContent implements ResourceLoader
                     throw new MailBuilderException("No fileName was specified with " + this);
                 }
 
-                // È·±£fileNameÖĞ²»°üº¬/ºÍ\
+                // ç¡®ä¿fileNameä¸­ä¸åŒ…å«/å’Œ\
                 fileName = fileName.replace('\\', '/');
                 fileName = StringUtil.defaultIfEmpty(StringUtil.substringAfterLast(fileName, "/"), fileName);
 
@@ -304,7 +304,7 @@ public class AttachmentContent extends AbstractContent implements ResourceLoader
         }
 
         /**
-         * ÒÔÁíÒ»¸öÓÊ¼ş×÷Îª¸½¼ş¡£
+         * ä»¥å¦ä¸€ä¸ªé‚®ä»¶ä½œä¸ºé™„ä»¶ã€‚
          */
         protected final void render(Part mailPart, Message mail) throws MailBuilderException {
             try {

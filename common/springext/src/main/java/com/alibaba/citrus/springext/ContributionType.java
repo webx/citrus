@@ -21,7 +21,7 @@ import org.springframework.beans.factory.xml.BeanDefinitionDecorator;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
 
 /**
- * ContributionÀàÐÍ¡£
+ * Contributionç±»åž‹ã€‚
  * 
  * @author Michael Zhou
  */

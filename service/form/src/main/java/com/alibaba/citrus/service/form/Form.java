@@ -26,77 +26,77 @@ import org.springframework.beans.TypeConverter;
 import com.alibaba.citrus.service.form.configuration.FormConfig;
 
 /**
- * ´ú±íÒ»¸öÓÃ»§Ìá½»µÄformĞÅÏ¢¡£
+ * ä»£è¡¨ä¸€ä¸ªç”¨æˆ·æäº¤çš„formä¿¡æ¯ã€‚
  * <p>
- * ×¢Òâ£ºform¶ÔÏó²»ÊÇÏß³Ì°²È«µÄ£¬²»ÄÜ±»¶àÏß³Ì¹²Ïí¡£
+ * æ³¨æ„ï¼šformå¯¹è±¡ä¸æ˜¯çº¿ç¨‹å®‰å…¨çš„ï¼Œä¸èƒ½è¢«å¤šçº¿ç¨‹å…±äº«ã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface Form {
     /**
-     * È¡µÃformµÄÅäÖÃĞÅÏ¢¡£
+     * å–å¾—formçš„é…ç½®ä¿¡æ¯ã€‚
      */
     FormConfig getFormConfig();
 
     /**
-     * È¡µÃÓÃÓÚ×ª»»ÀàĞÍµÄconverter¡£
+     * å–å¾—ç”¨äºè½¬æ¢ç±»å‹çš„converterã€‚
      */
     TypeConverter getTypeConverter();
 
     /**
-     * ÊÇ·ñÇ¿ÖÆÎªÖ»½ÓÊÜpost±íµ¥¡£
+     * æ˜¯å¦å¼ºåˆ¶ä¸ºåªæ¥å—postè¡¨å•ã€‚
      */
     boolean isForcePostOnly();
 
     /**
-     * ÅĞ¶¨formÊÇ·ñÍ¨¹ıÑéÖ¤¡£
+     * åˆ¤å®šformæ˜¯å¦é€šè¿‡éªŒè¯ã€‚
      */
     boolean isValid();
 
     /**
-     * ³õÊ¼»¯form£¬½«form»Ö¸´³É¡°Î´ÑéÖ¤¡±×´Ì¬¡£Ëæºó£¬µ÷ÓÃÕß¿ÉÒÔÖØĞÂÉèÖÃÖµ²¢ÊÖ¹¤ÑéÖ¤±íµ¥¡£
+     * åˆå§‹åŒ–formï¼Œå°†formæ¢å¤æˆâ€œæœªéªŒè¯â€çŠ¶æ€ã€‚éšåï¼Œè°ƒç”¨è€…å¯ä»¥é‡æ–°è®¾ç½®å€¼å¹¶æ‰‹å·¥éªŒè¯è¡¨å•ã€‚
      */
     void init();
 
     /**
-     * ÓÃrequest³õÊ¼»¯form¡£¼ÙÈçrequestÎª<code>null</code>£¬Ôò½«formÉèÖÃ³É¡°Î´ÑéÖ¤¡±×´Ì¬£¬·ñÔò£¬ÑéÖ¤±íµ¥¡£
+     * ç”¨requeståˆå§‹åŒ–formã€‚å‡å¦‚requestä¸º<code>null</code>ï¼Œåˆ™å°†formè®¾ç½®æˆâ€œæœªéªŒè¯â€çŠ¶æ€ï¼Œå¦åˆ™ï¼ŒéªŒè¯è¡¨å•ã€‚
      */
     void init(HttpServletRequest request);
 
     /**
-     * ÑéÖ¤£¨»òÖØĞÂÑéÖ¤£©µ±Ç°µÄËùÓĞgroup instance¡£
+     * éªŒè¯ï¼ˆæˆ–é‡æ–°éªŒè¯ï¼‰å½“å‰çš„æ‰€æœ‰group instanceã€‚
      */
     void validate();
 
     /**
-     * È¡µÃ´ú±íformµÄkey¡£
+     * å–å¾—ä»£è¡¨formçš„keyã€‚
      */
     String getKey();
 
     /**
-     * È¡µÃËùÓĞgroupµÄÁĞ±í¡£
+     * å–å¾—æ‰€æœ‰groupçš„åˆ—è¡¨ã€‚
      */
     Collection<Group> getGroups();
 
     /**
-     * È¡µÃËùÓĞÖ¸¶¨Ãû³ÆµÄgroupµÄÁĞ±í¡£groupÃû³Æ´óĞ¡Ğ´²»Ãô¸Ğ¡£
+     * å–å¾—æ‰€æœ‰æŒ‡å®šåç§°çš„groupçš„åˆ—è¡¨ã€‚groupåç§°å¤§å°å†™ä¸æ•æ„Ÿã€‚
      */
     Collection<Group> getGroups(String groupName);
 
     /**
-     * È¡µÃÄ¬ÈÏµÄgroup instance¡£Èç¹û¸Ãgroup instance²»´æÔÚ£¬Ôò´´½¨Ö®¡£GroupÃû³Æ´óĞ¡Ğ´²»Ãô¸Ğ¡£
+     * å–å¾—é»˜è®¤çš„group instanceã€‚å¦‚æœè¯¥group instanceä¸å­˜åœ¨ï¼Œåˆ™åˆ›å»ºä¹‹ã€‚Groupåç§°å¤§å°å†™ä¸æ•æ„Ÿã€‚
      */
     Group getGroup(String groupName);
 
     /**
-     * È¡µÃgroup instance¡£Èç¹û¸Ãgroup instance²»´æÔÚ£¬Ôò´´½¨Ö®¡£GroupÃû³Æ´óĞ¡Ğ´²»Ãô¸Ğ¡£
+     * å–å¾—group instanceã€‚å¦‚æœè¯¥group instanceä¸å­˜åœ¨ï¼Œåˆ™åˆ›å»ºä¹‹ã€‚Groupåç§°å¤§å°å†™ä¸æ•æ„Ÿã€‚
      */
     Group getGroup(String groupName, String instanceKey);
 
     /**
-     * È¡µÃgroup instance¡£Èç¹û¸Ãgroup instance²»´æÔÚ£¬²¢ÇÒ<code>create == true</code>
-     * £¬Ôò´´½¨Ö®¡£GroupÃû³Æ´óĞ¡Ğ´²»Ãô¸Ğ¡£
+     * å–å¾—group instanceã€‚å¦‚æœè¯¥group instanceä¸å­˜åœ¨ï¼Œå¹¶ä¸”<code>create == true</code>
+     * ï¼Œåˆ™åˆ›å»ºä¹‹ã€‚Groupåç§°å¤§å°å†™ä¸æ•æ„Ÿã€‚
      */
     Group getGroup(String groupName, String instanceKey, boolean create);
 }

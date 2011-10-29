@@ -72,11 +72,11 @@ public class QueryStringParserTests {
     public void append() throws Exception {
         parser = new MyParser("GBK");
 
-        parser.append("ÖĞ", "¹ú1");
-        parser.append("ÖĞ", "¹ú2");
+        parser.append("ä¸­", "å›½1");
+        parser.append("ä¸­", "å›½2");
         parser.append("a", null);
         parser.append(null, "  ");
-        parser.append("a", ":=,"); // ¶Ô:=,½øĞĞ±àÂë
+        parser.append("a", ":=,"); // å¯¹:=,è¿›è¡Œç¼–ç 
 
         assertEquals("%D6%D0=%B9%FA1&%D6%D0=%B9%FA2&a=&=++&a=%3A%3D%2C", parser.toQueryString());
         assertEquals(null, parser.toQueryString());
@@ -87,11 +87,11 @@ public class QueryStringParserTests {
         parser = new MyParser("GBK");
         parser.setEqualSign(" : ").setAndSign(", ");
 
-        parser.append("ÖĞ", "¹ú1");
-        parser.append("ÖĞ", "¹ú2");
+        parser.append("ä¸­", "å›½1");
+        parser.append("ä¸­", "å›½2");
         parser.append("a", null);
         parser.append(null, "  ");
-        parser.append("a", ":=,"); // ¶Ô:=,½øĞĞ±àÂë
+        parser.append("a", ":=,"); // å¯¹:=,è¿›è¡Œç¼–ç 
 
         assertEquals("%D6%D0 : %B9%FA1, %D6%D0 : %B9%FA2, a : ,  : ++, a : %3A%3D%2C", parser.toQueryString());
         assertEquals(null, parser.toQueryString());
@@ -99,11 +99,11 @@ public class QueryStringParserTests {
         // turn off json-like
         parser.setEqualSign(null).setAndSign(null);
 
-        parser.append("ÖĞ", "¹ú1");
-        parser.append("ÖĞ", "¹ú2");
+        parser.append("ä¸­", "å›½1");
+        parser.append("ä¸­", "å›½2");
         parser.append("a", null);
         parser.append(null, "  ");
-        parser.append("a", ":=,"); // ¶Ô:=,½øĞĞ±àÂë
+        parser.append("a", ":=,"); // å¯¹:=,è¿›è¡Œç¼–ç 
 
         assertEquals("%D6%D0=%B9%FA1&%D6%D0=%B9%FA2&a=&=++&a=%3A%3D%2C", parser.toQueryString());
         assertEquals(null, parser.toQueryString());
@@ -115,10 +115,10 @@ public class QueryStringParserTests {
 
         Map<String, String> params = createLinkedHashMap();
 
-        params.put("ÖĞ", "¹ú1");
+        params.put("ä¸­", "å›½1");
         params.put("a", null);
         params.put(null, "  ");
-        params.put("b", ":="); // ¶Ô:=½øĞĞ±àÂë
+        params.put("b", ":="); // å¯¹:=è¿›è¡Œç¼–ç 
 
         parser.append(params);
 
@@ -131,12 +131,12 @@ public class QueryStringParserTests {
         assertParse("  &a=1&a=2&b=3& ", null, "a", "1", "a", "2", "b", "3"); // key-values
         assertParse("a", null, "a", ""); // key only
         assertParse("a&b=&=1", null, "a", "", "b", ""); // hybrid
-        assertParse("  &a = ++&a=+2+&b=+3+& ", null, "a", "  ", "a", " 2 ", "b", " 3 "); // with spaces£¬×¢Òâ£¬ºöÂÔ¿Õ¸ñ
+        assertParse("  &a = ++&a=+2+&b=+3+& ", null, "a", "  ", "a", " 2 ", "b", " 3 "); // with spacesï¼Œæ³¨æ„ï¼Œå¿½ç•¥ç©ºæ ¼
     }
 
     @Test
     public void parse_jsonLike() throws Exception {
-        assertParse("  ,a:1, a:2, b:3, ", null, true, "a", "1", "a", "2", "b", "3"); // key-values£¬×¢Òâ£¬ºöÂÔ¿Õ¸ñ
+        assertParse("  ,a:1, a:2, b:3, ", null, true, "a", "1", "a", "2", "b", "3"); // key-valuesï¼Œæ³¨æ„ï¼Œå¿½ç•¥ç©ºæ ¼
         assertParse("a", null, true, "a", ""); // key only
         assertParse("a,b:,:1", null, true, "a", "", "b", ""); // hybrid
         assertParse("  ,a:++,a:+2+,b:+3+, ", null, true, "a", "  ", "a", " 2 ", "b", " 3 "); // with spaces
@@ -154,32 +154,32 @@ public class QueryStringParserTests {
     }
 
     /**
-     * Ïàµ±ÓÚÔÚIEµØÖ·À¸ÖĞÖ±½ÓÊäÈëÖĞÎÄ£¬Ã»ÓĞURL encoding
+     * ç›¸å½“äºåœ¨IEåœ°å€æ ä¸­ç›´æ¥è¾“å…¥ä¸­æ–‡ï¼Œæ²¡æœ‰URL encoding
      */
     @Test
     public void parseRawBytes() throws Exception {
-        assertParse(reencode("ÖĞ=¹ú", "UTF-8"), "UTF-8", "ÖĞ", "¹ú");
-        assertParse(reencode("&ÖĞ=¹ú&", "GBK"), "GBK", "ÖĞ", "¹ú");
-        assertParse(reencode("name=ÖĞ»ªÃñ¹ú", "UTF-8"), "UTF-8", "name", "ÖĞ»ªÃñ¹ú");
+        assertParse(reencode("ä¸­=å›½", "UTF-8"), "UTF-8", "ä¸­", "å›½");
+        assertParse(reencode("&ä¸­=å›½&", "GBK"), "GBK", "ä¸­", "å›½");
+        assertParse(reencode("name=ä¸­åæ°‘å›½", "UTF-8"), "UTF-8", "name", "ä¸­åæ°‘å›½");
     }
 
     /**
-     * Ïàµ±ÓÚÔÚFirefoxµØÖ·À¸ÖĞÖ±½ÓÊäÈëÖĞÎÄ£¬ÓĞURL encoding
+     * ç›¸å½“äºåœ¨Firefoxåœ°å€æ ä¸­ç›´æ¥è¾“å…¥ä¸­æ–‡ï¼Œæœ‰URL encoding
      */
     @Test
     public void parseURLEncoded() throws Exception {
-        assertParse(urlencode("ÖĞ=¹ú", "UTF-8"), "UTF-8", "ÖĞ", "¹ú");
-        assertParse(urlencode("&ÖĞ=¹ú&", "GBK"), "GBK", "ÖĞ", "¹ú");
+        assertParse(urlencode("ä¸­=å›½", "UTF-8"), "UTF-8", "ä¸­", "å›½");
+        assertParse(urlencode("&ä¸­=å›½&", "GBK"), "GBK", "ä¸­", "å›½");
         assertParse(urlencode("name=Justin\u00b7Bieber", "GBK"), "GBK", "name", "Justin\u00b7Bieber");
     }
 
     /**
-     * Ö±½ÓÊÇunicode×Ö·û¡£
+     * ç›´æ¥æ˜¯unicodeå­—ç¬¦ã€‚
      */
     @Test
     public void parseUnicode() throws Exception {
-        assertParse("ÖĞ=" + reencode("¹ú", "UTF-8"), "UTF-8", "ÖĞ", "¹ú");
-        assertParse("&" + reencode("ÖĞ", "GBK") + "¹ú=ÊÀ½ç&", "GBK", "ÖĞ¹ú", "ÊÀ½ç");
+        assertParse("ä¸­=" + reencode("å›½", "UTF-8"), "UTF-8", "ä¸­", "å›½");
+        assertParse("&" + reencode("ä¸­", "GBK") + "å›½=ä¸–ç•Œ&", "GBK", "ä¸­å›½", "ä¸–ç•Œ");
     }
 
     private void assertParse(String queryString, String charset, String... expectedKeyValues) {

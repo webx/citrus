@@ -41,7 +41,7 @@ import com.alibaba.citrus.turbine.util.ControlTool;
 import com.alibaba.citrus.util.regex.Substitution;
 
 /**
- * Ö±½ÓäÖÈ¾control¡£
+ * ç›´æ¥æ¸²æŸ“controlã€‚
  * 
  * @author Michael Zhou
  */
@@ -60,24 +60,24 @@ public class ExportControlValve extends AbstractValve {
     private String moduleName;
 
     /**
-     * ÔÚpull serivceÖĞµÄ<code>ControlTool</code>µÄÃû³Æ¡£
+     * åœ¨pull serivceä¸­çš„<code>ControlTool</code>çš„åç§°ã€‚
      */
     public void setControlTool(String controlToolName) {
         this.controlToolName = trimToNull(controlToolName);
     }
 
     /**
-     * ÓÃÀ´´¦ÀícontrolÄÚÈİµÄtarget¡£
+     * ç”¨æ¥å¤„ç†controlå†…å®¹çš„targetã€‚
      */
     public void setControlExporterTarget(String controlExporterTarget) {
         this.controlExporterTarget = trimToNull(controlExporterTarget);
     }
 
     /**
-     * ÔÚ<code>PipelineContext</code>ÖĞµÄ<code>Substitution</code>µÄÃû³Æ£¬Ä¬ÈÏÎª
-     * <code>subst</code>¡£
+     * åœ¨<code>PipelineContext</code>ä¸­çš„<code>Substitution</code>çš„åç§°ï¼Œé»˜è®¤ä¸º
+     * <code>subst</code>ã€‚
      * <p>
-     * Õâ¸ösubstitution¶ÔÏóÍ¨³£ÊÇÓÉÄ³¸öconditionÆ¥Åäºó·Åµ½contextÖĞµÄ¡£
+     * è¿™ä¸ªsubstitutionå¯¹è±¡é€šå¸¸æ˜¯ç”±æŸä¸ªconditionåŒ¹é…åæ”¾åˆ°contextä¸­çš„ã€‚
      * </p>
      */
     public void setSubst(String substName) {
@@ -85,14 +85,14 @@ public class ExportControlValve extends AbstractValve {
     }
 
     /**
-     * ÉèÖÃcontrol templateÃû³Æ£¬¿ÉÒÔ°üº¬<code>$1</code>¡¢<code>$2</code>ÕâÑùµÄÌæ»»·û¡£
+     * è®¾ç½®control templateåç§°ï¼Œå¯ä»¥åŒ…å«<code>$1</code>ã€<code>$2</code>è¿™æ ·çš„æ›¿æ¢ç¬¦ã€‚
      */
     public void setTemplate(String templateName) {
         this.templateName = trimToNull(templateName);
     }
 
     /**
-     * ÉèÖÃcontrol moduleÃû³Æ£¬¿ÉÒÔ°üº¬<code>$1</code>¡¢<code>$2</code>ÕâÑùµÄÌæ»»·û¡£
+     * è®¾ç½®control moduleåç§°ï¼Œå¯ä»¥åŒ…å«<code>$1</code>ã€<code>$2</code>è¿™æ ·çš„æ›¿æ¢ç¬¦ã€‚
      */
     public void setModule(String moduleName) {
         this.moduleName = trimToNull(moduleName);
@@ -117,14 +117,14 @@ public class ExportControlValve extends AbstractValve {
         ControlTool controlTool = getControlTool(context, template, module, rundata);
 
         // render control
-        rundata.getResponse().getWriter(); // ±ØĞëÏÈÔ¤±¸ºÃbuffer
+        rundata.getResponse().getWriter(); // å¿…é¡»å…ˆé¢„å¤‡å¥½buffer
         String content = controlTool.render();
 
-        // ÉèÖÃcontext£¬ÒÔ±ãºóĞøÄ£¿éÄÜ¹»¶ÁÈ¡
-        context.put("controlContent", content); // controlContentÎªcontroläÖÈ¾µÄ½á¹û
+        // è®¾ç½®contextï¼Œä»¥ä¾¿åç»­æ¨¡å—èƒ½å¤Ÿè¯»å–
+        context.put("controlContent", content); // controlContentä¸ºcontrolæ¸²æŸ“çš„ç»“æœ
         context.put("controlTarget", template != null ? template : module);
 
-        // ÖØ¶¨ÏòÖÁcontrolExporter target
+        // é‡å®šå‘è‡³controlExporter target
         rundata.setRedirectTarget(controlExporterTarget);
 
         pipelineContext.invokeNext();

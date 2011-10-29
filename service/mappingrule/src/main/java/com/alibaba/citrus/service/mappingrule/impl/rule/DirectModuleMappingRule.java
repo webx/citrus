@@ -27,16 +27,16 @@ import com.alibaba.citrus.util.ArrayUtil;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ×î¼òµ¥Ä£¿éÓ³Éä¹æÔò¡£
+ * æœ€ç®€å•æ¨¡å—æ˜ å°„è§„åˆ™ã€‚
  * <ol>
- * <li>½«<code>"/"</code>Ìæ»»³É<code>"."</code>¡£</li>
- * <li>³ıÈ¥ÎÄ¼şÃûºó×º¡£</li>
- * <li>½«×îºóÒ»¸öµ¥´ÊÊ××ÖÄ¸¸Ä³É´óĞ´£¬ÒÔ·ûºÏÄ£¿éÃüÃûµÄ¹æÔò¡£</li>
- * <li>¸ÃruleÄ¬ÈÏ²»cache½á¹û¡£</li>
+ * <li>å°†<code>"/"</code>æ›¿æ¢æˆ<code>"."</code>ã€‚</li>
+ * <li>é™¤å»æ–‡ä»¶ååç¼€ã€‚</li>
+ * <li>å°†æœ€åä¸€ä¸ªå•è¯é¦–å­—æ¯æ”¹æˆå¤§å†™ï¼Œä»¥ç¬¦åˆæ¨¡å—å‘½åçš„è§„åˆ™ã€‚</li>
+ * <li>è¯¥ruleé»˜è®¤ä¸cacheç»“æœã€‚</li>
  * </ol>
  * <p>
- * ÀıÈç£º½«Ä£°åÃû£º<code>"about/directions/driving.vm"</code>Ó³Éäµ½screen module£º
- * <code>"about.directions.Driving"</code>¡£
+ * ä¾‹å¦‚ï¼šå°†æ¨¡æ¿åï¼š<code>"about/directions/driving.vm"</code>æ˜ å°„åˆ°screen moduleï¼š
+ * <code>"about.directions.Driving"</code>ã€‚
  * </p>
  * 
  * @author Michael Zhou

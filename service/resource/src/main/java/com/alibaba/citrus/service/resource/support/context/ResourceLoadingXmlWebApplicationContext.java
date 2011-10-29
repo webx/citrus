@@ -21,7 +21,7 @@ import com.alibaba.citrus.service.resource.support.ResourceLoadingSupport;
 import com.alibaba.citrus.springext.support.context.XmlWebApplicationContext;
 
 /**
- * ´Óresource loading serviceÖĞ×°ÔØ×ÊÔ´µÄ<code>ApplicationContext</code>ÊµÏÖ¡£
+ * ä»resource loading serviceä¸­è£…è½½èµ„æºçš„<code>ApplicationContext</code>å®ç°ã€‚
  * 
  * @author Michael Zhou
  * @see XmlWebApplicationContext

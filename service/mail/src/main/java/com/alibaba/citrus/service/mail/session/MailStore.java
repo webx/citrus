@@ -34,9 +34,9 @@ import com.alibaba.citrus.service.mail.MailException;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ·¢ËÍe-mailµÄÀà¡£
+ * å‘é€e-mailçš„ç±»ã€‚
  * <p>
- * ¸ÃÀà±»Éè¼Æ³É¡°ÓĞ×´Ì¬µÄ¡±£¬Ò²¾ÍÊÇËµ²»ÄÜ±»¶à¸öÏß³Ì¹²Ïí¡£
+ * è¯¥ç±»è¢«è®¾è®¡æˆâ€œæœ‰çŠ¶æ€çš„â€ï¼Œä¹Ÿå°±æ˜¯è¯´ä¸èƒ½è¢«å¤šä¸ªçº¿ç¨‹å…±äº«ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -48,13 +48,13 @@ public class MailStore extends MailSession {
     private Store store;
 
     /**
-     * ´´½¨Ò»¸ömail store¡£
+     * åˆ›å»ºä¸€ä¸ªmail storeã€‚
      */
     public MailStore() {
     }
 
     /**
-     * ¸´ÖÆÒ»¸ömail store¡£
+     * å¤åˆ¶ä¸€ä¸ªmail storeã€‚
      */
     public MailStore(MailStore store, Properties overrideProps) {
         super(store, overrideProps);
@@ -63,42 +63,42 @@ public class MailStore extends MailSession {
     }
 
     /**
-     * È¡µÃmail storeµÄĞ­Òé¡£
+     * å–å¾—mail storeçš„åè®®ã€‚
      */
     public String getProtocol() {
         return defaultIfNull(storeProtocol, DEFAULT_MAIL_STORE_PROTOCOL);
     }
 
     /**
-     * ÉèÖÃmail storeµÄĞ­Òé¡£
+     * è®¾ç½®mail storeçš„åè®®ã€‚
      */
     public void setProtocol(String protocol) {
         this.storeProtocol = trimToNull(protocol);
     }
 
     /**
-     * È¡µÃmail storeµÄÎÄ¼ş¼Ğ¡£
+     * å–å¾—mail storeçš„æ–‡ä»¶å¤¹ã€‚
      */
     public String getFolder() {
         return defaultIfNull(storeFolder, DEFAULT_MAIL_STORE_FOLDER);
     }
 
     /**
-     * ÉèÖÃmail storeµÄÎÄ¼ş¼Ğ¡£
+     * è®¾ç½®mail storeçš„æ–‡ä»¶å¤¹ã€‚
      */
     public void setFolder(String folder) {
         this.storeFolder = trimToNull(folder);
     }
 
     /**
-     * È¡µÃ½ÓÊÕe-mailµÄ´¦Àí³ÌĞò¡£
+     * å–å¾—æ¥æ”¶e-mailçš„å¤„ç†ç¨‹åºã€‚
      */
     public MailStoreHandler getHandler() {
         return handler;
     }
 
     /**
-     * ÉèÖÃ½ÓÊÕe-mailµÄ´¦Àí³ÌĞò¡£
+     * è®¾ç½®æ¥æ”¶e-mailçš„å¤„ç†ç¨‹åºã€‚
      */
     public void setHandler(MailStoreHandler newHandler) {
         if (newHandler != null) {
@@ -107,7 +107,7 @@ public class MailStore extends MailSession {
     }
 
     /**
-     * ÅĞ¶ÏÊÇ·ñÒÑ¾­Á¬½ÓÉÏ¡£
+     * åˆ¤æ–­æ˜¯å¦å·²ç»è¿æ¥ä¸Šã€‚
      */
     @Override
     public boolean isConnected() {
@@ -115,7 +115,7 @@ public class MailStore extends MailSession {
     }
 
     /**
-     * Á¬½Ómail·şÎñÆ÷¡£
+     * è¿æ¥mailæœåŠ¡å™¨ã€‚
      */
     @Override
     public void connect() throws MailException {
@@ -138,7 +138,7 @@ public class MailStore extends MailSession {
     }
 
     /**
-     * ¹Ø±Õmail·şÎñÆ÷µÄÁ¬½Ó¡£
+     * å…³é—­mailæœåŠ¡å™¨çš„è¿æ¥ã€‚
      */
     @Override
     public void close() {
@@ -153,14 +153,14 @@ public class MailStore extends MailSession {
     }
 
     /**
-     * ½ÓÊÕÓÊ¼ş¡£
+     * æ¥æ”¶é‚®ä»¶ã€‚
      */
     public void receive() throws MailException {
         receive(null);
     }
 
     /**
-     * ½ÓÊÕÓÊ¼ş¡£
+     * æ¥æ”¶é‚®ä»¶ã€‚
      */
     public void receive(MailStoreHandler handler) throws MailException {
         Folder inbox = null;

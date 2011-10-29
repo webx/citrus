@@ -40,13 +40,13 @@ import com.alibaba.citrus.util.io.ByteArray;
 import com.alibaba.citrus.util.io.ByteArrayOutputStream;
 
 /**
- * ÓĞ¹ØjavamailµÄ¹¤¾ßÀà¡£
+ * æœ‰å…³javamailçš„å·¥å…·ç±»ã€‚
  * 
  * @author Michael Zhou
  */
 public class MailUtil {
     /**
-     * Èç¹ûÖ¸¶¨<code>javaCharset</code>Îª¿Õ°×£¬Ôò·µ»ØÄ¬ÈÏcharset£¬·ñÔò·µ»ØÔ­Öµ¡£
+     * å¦‚æœæŒ‡å®š<code>javaCharset</code>ä¸ºç©ºç™½ï¼Œåˆ™è¿”å›é»˜è®¤charsetï¼Œå¦åˆ™è¿”å›åŸå€¼ã€‚
      */
     public static String getJavaCharset(String javaCharset) {
         javaCharset = trimToNull(javaCharset);
@@ -54,7 +54,7 @@ public class MailUtil {
     }
 
     /**
-     * ½«javamailÓÊ¼ş¶ÔÏó×ª»»³ÉÎÄ±¾ĞÎÊ½£¬Æä¸ñÊ½Îª±ê×¼µÄ<code>.eml</code>¸ñÊ½¡£
+     * å°†javamailé‚®ä»¶å¯¹è±¡è½¬æ¢æˆæ–‡æœ¬å½¢å¼ï¼Œå…¶æ ¼å¼ä¸ºæ ‡å‡†çš„<code>.eml</code>æ ¼å¼ã€‚
      */
     public static String toString(Message message) throws MessagingException {
         try {
@@ -66,7 +66,7 @@ public class MailUtil {
     }
 
     /**
-     * ½«javamailÓÊ¼ş¶ÔÏó×ª»»³ÉÎÄ±¾ĞÎÊ½£¬Æä¸ñÊ½Îª±ê×¼µÄ<code>.eml</code>¸ñÊ½¡£
+     * å°†javamailé‚®ä»¶å¯¹è±¡è½¬æ¢æˆæ–‡æœ¬å½¢å¼ï¼Œå…¶æ ¼å¼ä¸ºæ ‡å‡†çš„<code>.eml</code>æ ¼å¼ã€‚
      */
     public static String toString(Message message, String javaCharset) throws MessagingException,
             UnsupportedEncodingException {
@@ -88,13 +88,13 @@ public class MailUtil {
     }
 
     /**
-     * ¸ù¾İRFC822/MIME£¬±àÂëÓÊ¼şheader£¬Ê¹Ö®·ûºÏRFC2047¡£
+     * æ ¹æ®RFC822/MIMEï¼Œç¼–ç é‚®ä»¶headerï¼Œä½¿ä¹‹ç¬¦åˆRFC2047ã€‚
      * <p>
-     * Èç¹û´ó²¿·Ö×Ö·ûÎªASCII×Ö·û£¬ÔòÒÔ<code>"Q"</code>·½Ê½±àÂë£¬·ñÔòÒÔ<code>"B"</code>·½Ê½±àÂë¡£
+     * å¦‚æœå¤§éƒ¨åˆ†å­—ç¬¦ä¸ºASCIIå­—ç¬¦ï¼Œåˆ™ä»¥<code>"Q"</code>æ–¹å¼ç¼–ç ï¼Œå¦åˆ™ä»¥<code>"B"</code>æ–¹å¼ç¼–ç ã€‚
      * </p>
      * <p>
-     * Èç¹û<code>javaCharset</code>£¨ÓĞ±ğÓÚ<code>mimeCharset</code>£©Îª¿Õ£¬ÔòÈ¡Ä¬ÈÏÖµ£»Èç¹û
-     * <code>header</code>ÖµÎª¿Õ£¬ÔòÈ¡¿Õ°×¡£
+     * å¦‚æœ<code>javaCharset</code>ï¼ˆæœ‰åˆ«äº<code>mimeCharset</code>ï¼‰ä¸ºç©ºï¼Œåˆ™å–é»˜è®¤å€¼ï¼›å¦‚æœ
+     * <code>header</code>å€¼ä¸ºç©ºï¼Œåˆ™å–ç©ºç™½ã€‚
      * </p>
      */
     public static String encodeHeader(String header, String javaCharset) throws UnsupportedEncodingException {
@@ -102,14 +102,14 @@ public class MailUtil {
     }
 
     /**
-     * ¸ù¾İRFC822/MIME£¬±àÂëÓÊ¼şheader£¬Ê¹Ö®·ûºÏRFC2047¡£
+     * æ ¹æ®RFC822/MIMEï¼Œç¼–ç é‚®ä»¶headerï¼Œä½¿ä¹‹ç¬¦åˆRFC2047ã€‚
      * <p>
-     * Èç¹û<code>javaCharset</code>£¨ÓĞ±ğÓÚ<code>mimeCharset</code>£©Îª¿Õ£¬ÔòÈ¡Ä¬ÈÏÖµ£»Èç¹û
-     * <code>header</code>ÖµÎª¿Õ£¬ÔòÈ¡¿Õ°×¡£
+     * å¦‚æœ<code>javaCharset</code>ï¼ˆæœ‰åˆ«äº<code>mimeCharset</code>ï¼‰ä¸ºç©ºï¼Œåˆ™å–é»˜è®¤å€¼ï¼›å¦‚æœ
+     * <code>header</code>å€¼ä¸ºç©ºï¼Œåˆ™å–ç©ºç™½ã€‚
      * </p>
      * <p>
-     * encoding±àÂë·½Ê½£¬¿ÉÒÔÊÇ<code>"B"</code>»ò<code>"Q"</code>£¬Èç¹û¸ÃÖµÎª <code>null</code>
-     * £¬²¢ÇÒ´ó²¿·Ö×Ö·ûÎªASCII×Ö·û£¬ÔòÄ¬ÈÏÎª<code>"Q"</code>£¬·ñÔòÄ¬ÈÏÎª <code>"B"</code>¡£
+     * encodingç¼–ç æ–¹å¼ï¼Œå¯ä»¥æ˜¯<code>"B"</code>æˆ–<code>"Q"</code>ï¼Œå¦‚æœè¯¥å€¼ä¸º <code>null</code>
+     * ï¼Œå¹¶ä¸”å¤§éƒ¨åˆ†å­—ç¬¦ä¸ºASCIIå­—ç¬¦ï¼Œåˆ™é»˜è®¤ä¸º<code>"Q"</code>ï¼Œå¦åˆ™é»˜è®¤ä¸º <code>"B"</code>ã€‚
      * </p>
      */
     public static String encodeHeader(String header, String javaCharset, String encoding)
@@ -120,14 +120,14 @@ public class MailUtil {
     }
 
     /**
-     * ½âÎöÒ»×éÒÔ¶ººÅ»ò¿Õ¸ñ·Ö¸ôµÄmailµØÖ·¡£
+     * è§£æä¸€ç»„ä»¥é€—å·æˆ–ç©ºæ ¼åˆ†éš”çš„mailåœ°å€ã€‚
      * <p>
-     * Ö§³Ö¸ñÊ½£º<code>"My Name" &lt;name@addr.com&gt;</code>£¬ÆäÖĞÃû³Æ²¿·Ö
-     * <code>My Name</code>»áÒÔÖ¸¶¨ <code>javaCharset</code>À´±àÂë¡£
+     * æ”¯æŒæ ¼å¼ï¼š<code>"My Name" &lt;name@addr.com&gt;</code>ï¼Œå…¶ä¸­åç§°éƒ¨åˆ†
+     * <code>My Name</code>ä¼šä»¥æŒ‡å®š <code>javaCharset</code>æ¥ç¼–ç ã€‚
      * </p>
      * <p>
-     * µ±ÒÔ¿Õ¸ñ·Ö¸ôÊ±£¬½öÖ§³Ö¼òµ¥mailµØÖ·¸ñÊ½£¬²»°üº¬Ãû×Ö¡£ÀıÈç£º<code>name1@addr.com name2@addr.com</code>
-     * ¡£
+     * å½“ä»¥ç©ºæ ¼åˆ†éš”æ—¶ï¼Œä»…æ”¯æŒç®€å•mailåœ°å€æ ¼å¼ï¼Œä¸åŒ…å«åå­—ã€‚ä¾‹å¦‚ï¼š<code>name1@addr.com name2@addr.com</code>
+     * ã€‚
      * </p>
      */
     public static InternetAddress[] parse(String addrList, String javaCharset) throws AddressException,
@@ -136,14 +136,14 @@ public class MailUtil {
     }
 
     /**
-     * ½âÎöÒ»×éÒÔ¶ººÅ»ò¿Õ¸ñ·Ö¸ôµÄmailµØÖ·¡£
+     * è§£æä¸€ç»„ä»¥é€—å·æˆ–ç©ºæ ¼åˆ†éš”çš„mailåœ°å€ã€‚
      * <p>
-     * Ö§³Ö¸ñÊ½£º<code>"My Name" &lt;name@addr.com&gt;</code>£¬ÆäÖĞÃû³Æ²¿·Ö
-     * <code>My Name</code>»áÒÔÖ¸¶¨ <code>javaCharset</code>À´±àÂë¡£
+     * æ”¯æŒæ ¼å¼ï¼š<code>"My Name" &lt;name@addr.com&gt;</code>ï¼Œå…¶ä¸­åç§°éƒ¨åˆ†
+     * <code>My Name</code>ä¼šä»¥æŒ‡å®š <code>javaCharset</code>æ¥ç¼–ç ã€‚
      * </p>
      * <p>
-     * µ±<code>strict==true</code>Ê±£¬Ö§³ÖÒÔ¿Õ¸ñ·Ö¸ôµÄ¼òµ¥mailµØÖ·¸ñÊ½£¬²»°üº¬Ãû×Ö¡£ÀıÈç£º
-     * <code>name1@addr.com name2@addr.com</code> ¡£
+     * å½“<code>strict==true</code>æ—¶ï¼Œæ”¯æŒä»¥ç©ºæ ¼åˆ†éš”çš„ç®€å•mailåœ°å€æ ¼å¼ï¼Œä¸åŒ…å«åå­—ã€‚ä¾‹å¦‚ï¼š
+     * <code>name1@addr.com name2@addr.com</code> ã€‚
      * </p>
      */
     public static InternetAddress[] parse(String addrList, String javaCharset, boolean strict) throws AddressException,
@@ -154,7 +154,7 @@ public class MailUtil {
             String mimeCharset = MimeUtility.mimeCharset(getJavaCharset(javaCharset));
 
             for (InternetAddress addr : addrs) {
-                // JavaMail 1.4.2ÒÔÉÏ£¬ÔÚparseÊ±¾Í»á±¨empty address´íÎó¡£ÔÚ´Ë´¦ÅĞ¶Ï£¬Ê¹½ÏµÍ°æµÄjavamailĞĞÎªÒ»ÖÂ¡£
+                // JavaMail 1.4.2ä»¥ä¸Šï¼Œåœ¨parseæ—¶å°±ä¼šæŠ¥empty addressé”™è¯¯ã€‚åœ¨æ­¤å¤„åˆ¤æ–­ï¼Œä½¿è¾ƒä½ç‰ˆçš„javamailè¡Œä¸ºä¸€è‡´ã€‚
                 if (isEmpty(addr.getAddress())) {
                     throw new AddressException("Empty address");
                 }
@@ -167,7 +167,7 @@ public class MailUtil {
     }
 
     /**
-     * È¡µÃ<code>ContentType</code>¶ÔÏó¡£
+     * å–å¾—<code>ContentType</code>å¯¹è±¡ã€‚
      */
     public static ContentType getContentType(String contentType, String javaCharset) throws ParseException {
         assertNotNull(contentType, "contentType");

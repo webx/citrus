@@ -33,7 +33,7 @@ import com.alibaba.citrus.service.upload.UploadService;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ´´½¨<code>ParserRequestContext</code>µÄ¹¤³§¡£
+ * åˆ›å»º<code>ParserRequestContext</code>çš„å·¥å‚ã€‚
  * 
  * @author Michael Zhou
  */
@@ -111,38 +111,38 @@ public class ParserRequestContextFactoryImpl extends AbstractRequestContextFacto
 
     @Override
     protected void init() {
-        // ÀàĞÍ×ª»»³ö´íÊ±£¬ÊÇ·ñ²»±¨´í£¬¶øÊÇ·µ»ØÄ¬ÈÏÖµ
+        // ç±»å‹è½¬æ¢å‡ºé”™æ—¶ï¼Œæ˜¯å¦ä¸æŠ¥é”™ï¼Œè€Œæ˜¯è¿”å›é»˜è®¤å€¼
         converterQuiet = defaultIfNull(converterQuiet, CONVERTER_QUIET_DEFAULT);
 
-        // ²ÎÊıºÍcookiesÃû³ÆµÄ´óĞ¡Ğ´×ª»»Ñ¡Ïî
+        // å‚æ•°å’Œcookiesåç§°çš„å¤§å°å†™è½¬æ¢é€‰é¡¹
         caseFolding = defaultIfEmpty(caseFolding, URL_CASE_FOLDING_DEFAULT).toLowerCase();
 
-        // ÊÇ·ñ×Ô¶¯´¦ÀíÉÏ´«ÎÄ¼ş
+        // æ˜¯å¦è‡ªåŠ¨å¤„ç†ä¸Šä¼ æ–‡ä»¶
         autoUpload = defaultIfNull(autoUpload, AUTO_UPLOAD_DEFAULT);
 
-        // ÊÇ·ñ¶Ô²ÎÊı½øĞĞHTML entities½âÂë£¬Ä¬ÈÏÎªtrue
+        // æ˜¯å¦å¯¹å‚æ•°è¿›è¡ŒHTML entitiesè§£ç ï¼Œé»˜è®¤ä¸ºtrue
         unescapeParameters = defaultIfNull(unescapeParameters, UNESCAPE_PARAMETERS_DEFAULT);
 
-        // ÊÇ·ñÈÃservlet engineÀ´½âÎöGET²ÎÊı
+        // æ˜¯å¦è®©servlet engineæ¥è§£æGETå‚æ•°
         useServletEngineParser = defaultIfNull(useServletEngineParser, USE_SERVLET_ENGINE_PARSER_DEFAULT);
 
-        // ÊÇ·ñÒÔrequest.setCharacterEncodingËùÖ¸¶¨µÄ±àÂëÀ´½âÎöquery
+        // æ˜¯å¦ä»¥request.setCharacterEncodingæ‰€æŒ‡å®šçš„ç¼–ç æ¥è§£æquery
         useBodyEncodingForURI = defaultIfNull(useBodyEncodingForURI, USE_BODY_ENCODING_FOR_URI_DEFAULT);
 
-        // Èç¹û²»ÒÔrequest.setCharacterEncodingËùÖ¸¶¨µÄ±àÂëÀ´½âÎöquery£¬ÄÇÃ´¾ÍÓÃÕâ¸ö
+        // å¦‚æœä¸ä»¥request.setCharacterEncodingæ‰€æŒ‡å®šçš„ç¼–ç æ¥è§£æqueryï¼Œé‚£ä¹ˆå°±ç”¨è¿™ä¸ª
         uriEncoding = defaultIfNull(uriEncoding, URI_ENCODING_DEFAULT);
 
-        // ÊÇ·ñ¶Ô²ÎÊıÖµ½øĞĞtrimming
+        // æ˜¯å¦å¯¹å‚æ•°å€¼è¿›è¡Œtrimming
         trimming = defaultIfNull(trimming, TRIMMING_DEFAULT);
 
-        // HTMLÀàĞÍµÄ×Ö¶ÎÃûºó×º
+        // HTMLç±»å‹çš„å­—æ®µååç¼€
         htmlFieldSuffix = defaultIfEmpty(htmlFieldSuffix, HTML_FIELD_SUFFIX_DEFAULT);
     }
 
     /**
-     * °ü×°Ò»¸örequest context¡£
+     * åŒ…è£…ä¸€ä¸ªrequest contextã€‚
      * 
-     * @param wrappedContext ±»°ü×°µÄ<code>RequestContext</code>¶ÔÏó
+     * @param wrappedContext è¢«åŒ…è£…çš„<code>RequestContext</code>å¯¹è±¡
      * @return request context
      */
     public ParserRequestContext getRequestContextWrapper(RequestContext wrappedContext) {
@@ -172,14 +172,14 @@ public class ParserRequestContextFactoryImpl extends AbstractRequestContextFacto
     }
 
     /**
-     * ±¾ÀàÌá¹©ÁË½âÎö²ÎÊıºÍcookieµÄ¹¦ÄÜ¡£
+     * æœ¬ç±»æä¾›äº†è§£æå‚æ•°å’Œcookieçš„åŠŸèƒ½ã€‚
      */
     public String[] getFeatures() {
         return new String[] { "parseRequest" };
     }
 
     /**
-     * ±¾Àà²»ÒÀÀµÆäËüfeatures¡£
+     * æœ¬ç±»ä¸ä¾èµ–å…¶å®ƒfeaturesã€‚
      */
     public FeatureOrder[] featureOrders() {
         return null;

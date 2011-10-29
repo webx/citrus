@@ -32,7 +32,7 @@ public class AuthTargetPattern extends AuthPattern {
     protected String normalizePatternName(String patternName) {
         patternName = assertNotNull(trimToNull(patternName), "patternName");
 
-        // ¶ÔÓÚÏà¶ÔÂ·¾¶£¬×Ô¶¯ÔÚÇ°Ãæ¼ÓÉÏ/£¬±ä³É¾ø¶ÔÂ·¾¶¡£
+        // å¯¹äºç›¸å¯¹è·¯å¾„ï¼Œè‡ªåŠ¨åœ¨å‰é¢åŠ ä¸Š/ï¼Œå˜æˆç»å¯¹è·¯å¾„ã€‚
         if (!patternName.startsWith("/")) {
             patternName = "/" + patternName;
         }

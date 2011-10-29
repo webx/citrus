@@ -28,7 +28,7 @@ import com.alibaba.citrus.service.requestcontext.session.SessionConfig;
 import com.alibaba.citrus.service.requestcontext.session.SessionStore;
 
 /**
- * ´æ·ÅÔÚÄÚ´æÖĞµÄsession attributeµÄ»úÖÆ¡£
+ * å­˜æ”¾åœ¨å†…å­˜ä¸­çš„session attributeçš„æœºåˆ¶ã€‚
  * 
  * @author Michael Zhou
  */
@@ -36,20 +36,20 @@ public class SimpleMemoryStoreImpl implements SessionStore {
     private final ConcurrentMap<String, Map<String, Object>> sessions = createConcurrentHashMap();
 
     /**
-     * ³õÊ¼»¯SessionStore¡£
+     * åˆå§‹åŒ–SessionStoreã€‚
      */
     public void init(String storeName, SessionConfig sessionConfig) {
     }
 
     /**
-     * È¡µÃÖ¸¶¨session IDµÄËùÓĞÖµ¡£
+     * å–å¾—æŒ‡å®šsession IDçš„æ‰€æœ‰å€¼ã€‚
      */
     public Map<String, Object> getSession(String sessionID) {
         return sessions.get(sessionID);
     }
 
     /**
-     * È¡µÃÖ¸¶¨sessionµÄËùÓĞattributeÃû³Æ¡£
+     * å–å¾—æŒ‡å®šsessionçš„æ‰€æœ‰attributeåç§°ã€‚
      */
     public Iterable<String> getAttributeNames(String sessionID, StoreContext storeContext) {
         Map<String, Object> sessionData = sessions.get(sessionID);
@@ -62,7 +62,7 @@ public class SimpleMemoryStoreImpl implements SessionStore {
     }
 
     /**
-     * ×°ÔØÖ¸¶¨sessionµÄÄ³¸öattribute¡£
+     * è£…è½½æŒ‡å®šsessionçš„æŸä¸ªattributeã€‚
      */
     public Object loadAttribute(String attrName, String sessionID, StoreContext storeContext) {
         Map<String, Object> sessionData = sessions.get(sessionID);
@@ -75,14 +75,14 @@ public class SimpleMemoryStoreImpl implements SessionStore {
     }
 
     /**
-     * ¶ªÆúÖ¸¶¨session IDµÄËùÓĞÄÚÈİ¡£
+     * ä¸¢å¼ƒæŒ‡å®šsession IDçš„æ‰€æœ‰å†…å®¹ã€‚
      */
     public void invaldiate(String sessionID, StoreContext storeContext) {
         sessions.remove(sessionID);
     }
 
     /**
-     * ±£´æÖ¸¶¨sessionµÄattributes¡£attrsÎª<code>null</code>±íÊ¾É¾³ı¡£
+     * ä¿å­˜æŒ‡å®šsessionçš„attributesã€‚attrsä¸º<code>null</code>è¡¨ç¤ºåˆ é™¤ã€‚
      */
     public void commit(Map<String, Object> modifiedAttrs, String sessionID, StoreContext storeContext) {
         Map<String, Object> sessionData = null;

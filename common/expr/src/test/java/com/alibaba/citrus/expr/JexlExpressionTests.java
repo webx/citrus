@@ -29,7 +29,7 @@ import com.alibaba.citrus.expr.support.MappedExpressionContext;
 import com.alibaba.citrus.util.MessageUtil;
 
 /**
- * ²âÊÔ<code>JexlExpression</code>¡£
+ * æµ‹è¯•<code>JexlExpression</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -65,7 +65,7 @@ public class JexlExpressionTests {
 
     @Test
     public void jexlVariantParams() throws Exception {
-        // FIXME: ÎŞ²ÎÊıÊ±£¬jexl MethodExecutor.handleVarArg²»ÄÜÕıÈ·Ö´ĞĞ¡£
+        // FIXME: æ— å‚æ•°æ—¶ï¼Œjexl MethodExecutor.handleVarArgä¸èƒ½æ­£ç¡®æ‰§è¡Œã€‚
         // assertEquals("a:{0}, b:{1}, c:{2}", evaluate("msgs.formatMessage('a:{0}, b:{1}, c:{2}')"));
         assertEquals("a:1, b:{1}, c:{2}", evaluate("msgs.formatMessage('a:{0}, b:{1}, c:{2}', 1)"));
 

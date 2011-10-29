@@ -65,7 +65,7 @@ public class RequestContextChainingServiceDefinitionParser extends
     protected void registerBeanDefinition(BeanDefinitionHolder definition, BeanDefinitionRegistry registry) {
         super.registerBeanDefinition(definition, registry);
 
-        // Èç¹ûrequest contexts±»×¢²á£¨¶¥¼¶bean£©£¬ÔòÍ¬Ê±×¢²áBeanFactoryPostProcessor
+        // å¦‚æœrequest contextsè¢«æ³¨å†Œï¼ˆé¡¶çº§beanï¼‰ï¼Œåˆ™åŒæ—¶æ³¨å†ŒBeanFactoryPostProcessor
         if (RequestContextChainingServiceImpl.class.getName().equals(definition.getBeanDefinition().getBeanClassName())
                 && !definition.getBeanDefinition().isLazyInit()) {
             registerBeanFactoryPostProcessor(definition.getBeanName(), registry);
@@ -73,7 +73,7 @@ public class RequestContextChainingServiceDefinitionParser extends
     }
 
     /**
-     * ´´½¨BeanFactoryPostProcessor¡£
+     * åˆ›å»ºBeanFactoryPostProcessorã€‚
      */
     private void registerBeanFactoryPostProcessor(String requestContextsName, BeanDefinitionRegistry registry) {
         BeanDefinitionBuilder builder = BeanDefinitionBuilder

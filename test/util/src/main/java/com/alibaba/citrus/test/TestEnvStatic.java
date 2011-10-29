@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 
 /**
- * ÓÃÀ´³õÊ¼»¯²âÊÔ»·¾³µÄ¾²Ì¬¸¨ÖúÀà¡£
+ * ç”¨æ¥åˆå§‹åŒ–æµ‹è¯•ç¯å¢ƒçš„é™æ€è¾…åŠ©ç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -35,7 +35,7 @@ public class TestEnvStatic {
     public static final File javaHome = TestUtil.getJavaHome();
 
     /**
-     * ¼ÙÈçµ¥Ôª²âÊÔÀàÃ»ÓĞÏÔÊ½µØÒıÓÃÈÎºÎ³£Á¿£¬ÄÇÃ´µ÷ÓÃÕâ¸ö·½·¨¿ÉÒÔÈ·±£²âÊÔ»·¾³±»³õÊ¼»¯¡£
+     * å‡å¦‚å•å…ƒæµ‹è¯•ç±»æ²¡æœ‰æ˜¾å¼åœ°å¼•ç”¨ä»»ä½•å¸¸é‡ï¼Œé‚£ä¹ˆè°ƒç”¨è¿™ä¸ªæ–¹æ³•å¯ä»¥ç¡®ä¿æµ‹è¯•ç¯å¢ƒè¢«åˆå§‹åŒ–ã€‚
      */
     public static void init() {
         assertNotNull(env);

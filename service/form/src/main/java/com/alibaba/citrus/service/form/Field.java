@@ -23,122 +23,122 @@ import com.alibaba.citrus.service.form.configuration.FieldConfig;
 import com.alibaba.citrus.service.requestcontext.util.ValueList;
 
 /**
- * ´ú±íÓÃ»§ËùÌá½»±íµ¥ÖĞµÄÒ»¸öfield¡£
+ * ä»£è¡¨ç”¨æˆ·æ‰€æäº¤è¡¨å•ä¸­çš„ä¸€ä¸ªfieldã€‚
  * <p>
- * ×¢Òâ£ºfield¶ÔÏó²»ÊÇÏß³Ì°²È«µÄ£¬²»ÄÜ±»¶àÏß³Ì¹²Ïí¡£
+ * æ³¨æ„ï¼šfieldå¯¹è±¡ä¸æ˜¯çº¿ç¨‹å®‰å…¨çš„ï¼Œä¸èƒ½è¢«å¤šçº¿ç¨‹å…±äº«ã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface Field extends ValueList, CustomErrors {
     /**
-     * È¡µÃfieldµÄÅäÖÃĞÅÏ¢¡£
+     * å–å¾—fieldçš„é…ç½®ä¿¡æ¯ã€‚
      */
     FieldConfig getFieldConfig();
 
     /**
-     * È¡µÃ°üº¬´ËfieldµÄgroup¡£
+     * å–å¾—åŒ…å«æ­¤fieldçš„groupã€‚
      */
     Group getGroup();
 
     /**
-     * ÅĞ¶¨fieldÊÇ·ñÍ¨¹ıÑéÖ¤¡£
+     * åˆ¤å®šfieldæ˜¯å¦é€šè¿‡éªŒè¯ã€‚
      */
     boolean isValid();
 
     /**
-     * È¡µÃÔÚformÖĞÎ¨Ò»´ú±í¸ÃfieldµÄkey¡£
+     * å–å¾—åœ¨formä¸­å”¯ä¸€ä»£è¡¨è¯¥fieldçš„keyã€‚
      * <p>
-     * ÓÉ¹Ì¶¨Ç°×º<code>"_fm"</code>£¬¼ÓÉÏgroupÃûµÄËõĞ´£¬¼ÓÉÏgroup instance
-     * fieldKey£¬ÔÙ¼ÓÉÏfieldÃûµÄËõĞ´¹¹³É¡£ÀıÈç£º<code>_fm.m._0.n</code>¡£
+     * ç”±å›ºå®šå‰ç¼€<code>"_fm"</code>ï¼ŒåŠ ä¸Šgroupåçš„ç¼©å†™ï¼ŒåŠ ä¸Šgroup instance
+     * fieldKeyï¼Œå†åŠ ä¸Šfieldåçš„ç¼©å†™æ„æˆã€‚ä¾‹å¦‚ï¼š<code>_fm.m._0.n</code>ã€‚
      * </p>
      */
     String getKey();
 
     /**
-     * È¡µÃÔÚformÖĞÎ¨Ò»´ú±í¸ÃfieldµÄkey£¬µ±ÓÃ»§Ìá½»µÄ±íµ¥ÖĞÎ´°üº¬´ËfieldµÄĞÅÏ¢Ê±£¬È¡Õâ¸ökeyµÄÖµ×÷Îª¸ÃfieldµÄÖµ¡£
+     * å–å¾—åœ¨formä¸­å”¯ä¸€ä»£è¡¨è¯¥fieldçš„keyï¼Œå½“ç”¨æˆ·æäº¤çš„è¡¨å•ä¸­æœªåŒ…å«æ­¤fieldçš„ä¿¡æ¯æ—¶ï¼Œå–è¿™ä¸ªkeyçš„å€¼ä½œä¸ºè¯¥fieldçš„å€¼ã€‚
      * <p>
-     * Õâ¶ÔÓÚcheckboxÖ®ÀàµÄHTML¿Ø¼şÌØ±ğÓĞÓÃ¡£
+     * è¿™å¯¹äºcheckboxä¹‹ç±»çš„HTMLæ§ä»¶ç‰¹åˆ«æœ‰ç”¨ã€‚
      * </p>
      * <p>
-     * KeyµÄ¸ñÊ½Îª£º<code>_fm.groupKey.instanceKey.fieldKey.absent</code>¡£
+     * Keyçš„æ ¼å¼ä¸ºï¼š<code>_fm.groupKey.instanceKey.fieldKey.absent</code>ã€‚
      * </p>
      */
     String getAbsentKey();
 
     /**
-     * È¡µÃÔÚformÖĞºÍµ±Ç°field°ó¶¨µÄ¸½¼şµÄkey¡£
+     * å–å¾—åœ¨formä¸­å’Œå½“å‰fieldç»‘å®šçš„é™„ä»¶çš„keyã€‚
      * <p>
-     * KeyµÄ¸ñÊ½Îª£º<code>_fm.groupKey.instanceKey.fieldKey.attach</code>¡£
+     * Keyçš„æ ¼å¼ä¸ºï¼š<code>_fm.groupKey.instanceKey.fieldKey.attach</code>ã€‚
      * </p>
      */
     String getAttachmentKey();
 
     /**
-     * È¡µÃ³ö´íĞÅÏ¢¡£
+     * å–å¾—å‡ºé”™ä¿¡æ¯ã€‚
      */
     String getMessage();
 
     /**
-     * ³õÊ¼»¯fieldÖµ£¬µ«²»ÑéÖ¤±íµ¥×Ö¶Î¡£ÆäÖĞ£¬<code>request</code>¿ÉÒÔÊÇ<code>null</code>¡£
+     * åˆå§‹åŒ–fieldå€¼ï¼Œä½†ä¸éªŒè¯è¡¨å•å­—æ®µã€‚å…¶ä¸­ï¼Œ<code>request</code>å¯ä»¥æ˜¯<code>null</code>ã€‚
      */
     void init(HttpServletRequest request);
 
     /**
-     * È¡µÃfield name£¬Ïàµ±ÓÚ<code>getFieldConfig().getName()</code>¡£
+     * å–å¾—field nameï¼Œç›¸å½“äº<code>getFieldConfig().getName()</code>ã€‚
      */
     String getName();
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>""</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>""</code>ã€‚
      */
     String getStringValue();
 
     /**
-     * È¡µÃÓÃÀ´ÏÔÊ¾fieldµÄÃû³Æ£¬Ïàµ±ÓÚ<code>getFieldConfig().getDisplayName()</code>¡£
+     * å–å¾—ç”¨æ¥æ˜¾ç¤ºfieldçš„åç§°ï¼Œç›¸å½“äº<code>getFieldConfig().getDisplayName()</code>ã€‚
      */
     String getDisplayName();
 
     /**
-     * È¡µÃÄ¬ÈÏÖµ£¬Ïàµ±ÓÚ<code>getFieldConfig().getDefaultValue()</code>¡£
+     * å–å¾—é»˜è®¤å€¼ï¼Œç›¸å½“äº<code>getFieldConfig().getDefaultValue()</code>ã€‚
      */
     String getDefaultValue();
 
     /**
-     * È¡µÃÄ¬ÈÏÖµ£¬Ïàµ±ÓÚ<code>getFieldConfig().getDefaultValues()</code>¡£
+     * å–å¾—é»˜è®¤å€¼ï¼Œç›¸å½“äº<code>getFieldConfig().getDefaultValues()</code>ã€‚
      */
     String[] getDefaultValues();
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      */
     void addValue(Object value);
 
     /**
-     * ÉèÖÃ¸½¼ş¡£
+     * è®¾ç½®é™„ä»¶ã€‚
      */
     Object getAttachment();
 
     /**
-     * ÉèÖÃ±àÂëºóµÄ¸½¼ş¡£
+     * è®¾ç½®ç¼–ç åçš„é™„ä»¶ã€‚
      */
     String getAttachmentEncoded();
 
     /**
-     * ÊÇ·ñ°üº¬¸½¼ş£¿
+     * æ˜¯å¦åŒ…å«é™„ä»¶ï¼Ÿ
      */
     boolean hasAttachment();
 
     /**
-     * ÉèÖÃ¸½¼ş¡£
+     * è®¾ç½®é™„ä»¶ã€‚
      * <p>
-     * ×¢Òâ£¬µ±attachmentÒÑ¾­´æÔÚÊ±£¬¸Ã·½·¨µ÷ÓÃÎŞĞ§¡£ÓûÇ¿ÖÆÉèÈë£¬ÇëÏÈµ÷ÓÃ<code>clearAttachment()</code>¡£
+     * æ³¨æ„ï¼Œå½“attachmentå·²ç»å­˜åœ¨æ—¶ï¼Œè¯¥æ–¹æ³•è°ƒç”¨æ— æ•ˆã€‚æ¬²å¼ºåˆ¶è®¾å…¥ï¼Œè¯·å…ˆè°ƒç”¨<code>clearAttachment()</code>ã€‚
      * </p>
      */
     void setAttachment(Object attachment);
 
     /**
-     * Çå³ı¸½¼ş¡£
+     * æ¸…é™¤é™„ä»¶ã€‚
      */
     void clearAttachment();
 }

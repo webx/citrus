@@ -25,7 +25,7 @@ import com.alibaba.citrus.service.requestcontext.parser.CookieParser;
 import com.alibaba.citrus.service.requestcontext.parser.ParameterParser;
 
 /**
- * ¿É±»Ó¦ÓÃ³ÌĞòÊ¹ÓÃµÄrequest scopeÊı¾İ½Ó¿Ú¡£
+ * å¯è¢«åº”ç”¨ç¨‹åºä½¿ç”¨çš„request scopeæ•°æ®æ¥å£ã€‚
  * 
  * @author Michael Zhou
  */
@@ -61,8 +61,8 @@ public interface TurbineRunData {
     void setLayoutEnabled(boolean enabled);
 
     /**
-     * Ã÷È·Ö¸¶¨layoutÄ£°å£¬¸²¸ÇÄ¬ÈÏµÄlayout¹æÔò¡£ ×¢ÒâÈç¹ûÖ¸¶¨ÁËlayout£¬Ôò<code>layoutEnabled</code>
-     * ½«±»ÉèÖÃ³É<code>true</code>¡£
+     * æ˜ç¡®æŒ‡å®šlayoutæ¨¡æ¿ï¼Œè¦†ç›–é»˜è®¤çš„layoutè§„åˆ™ã€‚ æ³¨æ„å¦‚æœæŒ‡å®šäº†layoutï¼Œåˆ™<code>layoutEnabled</code>
+     * å°†è¢«è®¾ç½®æˆ<code>true</code>ã€‚
      */
     void setLayout(String layoutTemplate);
 }

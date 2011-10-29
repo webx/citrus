@@ -23,7 +23,7 @@ import com.alibaba.citrus.service.pull.ToolFactory;
 import com.alibaba.citrus.service.pull.ToolSetFactory;
 
 /**
- * Ã¿´Îµ÷ÓÃ·µ»ØÒ»¸öÈ«ĞÂobject¡£
+ * æ¯æ¬¡è°ƒç”¨è¿”å›ä¸€ä¸ªå…¨æ–°objectã€‚
  * 
  * @author Michael Zhou
  */

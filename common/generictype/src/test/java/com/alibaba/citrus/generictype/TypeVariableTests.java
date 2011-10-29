@@ -35,7 +35,7 @@ import com.alibaba.citrus.test.runner.Prototyped.TestData;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
 
 /**
- * ²âÊÔ{@link TypeVariableInfo}¡£
+ * æµ‹è¯•{@link TypeVariableInfo}ã€‚
  * 
  * @author Michael Zhou
  */
@@ -43,21 +43,21 @@ import com.alibaba.citrus.test.runner.Prototyped.TestName;
 public class TypeVariableTests extends BaseTypeTests implements Cloneable {
     private transient TypeVariableInfo typeInfo;
     private transient GenericDeclarationInfo decl; // generic declaration
-    private Class<?> ownerType; // ±äÁ¿ËùÔÚµÄÀà
-    private String methodName; // ±äÁ¿µÄ·½·¨Ãû
+    private Class<?> ownerType; // å˜é‡æ‰€åœ¨çš„ç±»
+    private String methodName; // å˜é‡çš„æ–¹æ³•å
     private String baseType; //baseType.toString()
     private String upperBounds; // upper bounds toString
     private Class<?> rawType; // rawClass
-    private String name; // Ãû³Æ
-    private boolean isInterface; // ÊÇ·ñÎª½Ó¿Ú
-    private TypeInfo primitiveWrapper; // Ô­×Ó°ü×°Àà
-    private TypeInfo componentType; // Êı×é³ÉÔ±ÀàĞÍ
-    private TypeInfo directComponentType; // Êı×éÖ±½Ó³ÉÔ±ÀàĞÍ
-    private String toString; // toString½á¹û
-    private String[] supertypes; // ¸¸Àà¡¢½Ó¿Ú
+    private String name; // åç§°
+    private boolean isInterface; // æ˜¯å¦ä¸ºæ¥å£
+    private TypeInfo primitiveWrapper; // åŸå­åŒ…è£…ç±»
+    private TypeInfo componentType; // æ•°ç»„æˆå‘˜ç±»å‹
+    private TypeInfo directComponentType; // æ•°ç»„ç›´æ¥æˆå‘˜ç±»å‹
+    private String toString; // toStringç»“æœ
+    private String[] supertypes; // çˆ¶ç±»ã€æ¥å£
     private GenericDeclarationInfo context; // resolve context
     private TypeInfo resolvedType; // resolve result;
-    private TypeInfo resolvedTypeDefault; // µ±contextÎªnullÊ±£¬resolve result
+    private TypeInfo resolvedTypeDefault; // å½“contextä¸ºnullæ—¶ï¼Œresolve result
 
     @Before
     public void init() {
@@ -100,12 +100,12 @@ public class TypeVariableTests extends BaseTypeTests implements Cloneable {
         TypeVariableTests prototype;
 
         /*
-         * ×¢£º ¶ÔÓÚvar¶øÑÔ£¬upper bounds²»ÄÜÎªÊı×é£¬Ò²²»Ö§³Ölower bounds
+         * æ³¨ï¼š å¯¹äºvarè€Œè¨€ï¼Œupper boundsä¸èƒ½ä¸ºæ•°ç»„ï¼Œä¹Ÿä¸æ”¯æŒlower bounds
          */
         GenericDeclarationInfo context = (GenericDeclarationInfo) factory.getType(ParameterizedTestClass.class);
 
         // =========================
-        // ÆÕÍ¨var£º <A>
+        // æ™®é€švarï¼š <A>
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClass.class;
@@ -125,7 +125,7 @@ public class TypeVariableTests extends BaseTypeTests implements Cloneable {
         prototype.resolvedTypeDefault = factory.getType(Object.class);
 
         // =========================
-        // °üº¬¶à¸öupper boundsµÄvar£º <B extends Number & Serializable>
+        // åŒ…å«å¤šä¸ªupper boundsçš„varï¼š <B extends Number & Serializable>
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClass.class;
@@ -145,7 +145,7 @@ public class TypeVariableTests extends BaseTypeTests implements Cloneable {
         prototype.resolvedTypeDefault = factory.getType(Number.class);
 
         // =========================
-        // upper boundsÎªgenericÀàĞÍ£º <C extends List<String>>
+        // upper boundsä¸ºgenericç±»å‹ï¼š <C extends List<String>>
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClass.class;
@@ -165,7 +165,7 @@ public class TypeVariableTests extends BaseTypeTests implements Cloneable {
         prototype.resolvedTypeDefault = factory.getParameterizedType(List.class, String.class);
 
         // =========================
-        // upper boundsÎªvar£º <D extends B>
+        // upper boundsä¸ºvarï¼š <D extends B>
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClass.class;
@@ -185,7 +185,7 @@ public class TypeVariableTests extends BaseTypeTests implements Cloneable {
         prototype.resolvedTypeDefault = factory.getType(Number.class);
 
         // =========================
-        // ¼ä½ÓÒıÓÃ£º E = F = String
+        // é—´æ¥å¼•ç”¨ï¼š E = F = String
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClass.class;
@@ -223,7 +223,7 @@ public class TypeVariableTests extends BaseTypeTests implements Cloneable {
         prototype.resolvedTypeDefault = factory.getType(Object.class);
 
         // =========================
-        // ÒıÓÃwildcard£º F = ? extends Number
+        // å¼•ç”¨wildcardï¼š F = ? extends Number
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClassDerived.class;
@@ -246,7 +246,7 @@ public class TypeVariableTests extends BaseTypeTests implements Cloneable {
     }
 
     /**
-     * {@link TypeVariableInfo}¹¦ÄÜ¡£
+     * {@link TypeVariableInfo}åŠŸèƒ½ã€‚
      */
     @Test
     public void bounds() {
@@ -256,7 +256,7 @@ public class TypeVariableTests extends BaseTypeTests implements Cloneable {
     }
 
     /**
-     * {@link TypeVariableInfo}¹¦ÄÜ¡£
+     * {@link TypeVariableInfo}åŠŸèƒ½ã€‚
      */
     @Test
     public void getGenericDeclaration() {

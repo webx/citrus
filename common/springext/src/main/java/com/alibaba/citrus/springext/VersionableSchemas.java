@@ -18,14 +18,14 @@
 package com.alibaba.citrus.springext;
 
 /**
- * ´ú±íÒ»¸öÖ÷schema£¬ÒÔ¼°Ò»×é±ê¼Ç°æ±¾µÄÍ¬Ãûschema¡£
+ * ä»£è¡¨ä¸€ä¸ªä¸»schemaï¼Œä»¥åŠä¸€ç»„æ ‡è®°ç‰ˆæœ¬çš„åŒåschemaã€‚
  * <p>
- * ÀıÈç£º
+ * ä¾‹å¦‚ï¼š
  * </p>
  * <ul>
- * <li>Ö÷schema£º<code>beans.xsd</code>£»</li>
- * <li>2.5°æ±¾schema£º<code>beans-2.5.xsd</code>£»</li>
- * <li>2.0°æ±¾schema£º<code>beans-2.0.xsd</code>¡£</li>
+ * <li>ä¸»schemaï¼š<code>beans.xsd</code>ï¼›</li>
+ * <li>2.5ç‰ˆæœ¬schemaï¼š<code>beans-2.5.xsd</code>ï¼›</li>
+ * <li>2.0ç‰ˆæœ¬schemaï¼š<code>beans-2.0.xsd</code>ã€‚</li>
  * </ul>
  * 
  * @author Michael Zhou

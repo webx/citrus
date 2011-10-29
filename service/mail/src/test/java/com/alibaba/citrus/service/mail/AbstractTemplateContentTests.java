@@ -30,7 +30,7 @@ import com.alibaba.citrus.service.template.TemplateNotFoundException;
 import com.alibaba.citrus.service.template.TemplateService;
 
 /**
- * Ä£°åcontent²âÊÔ»ùÀà¡£
+ * æ¨¡æ¿contentæµ‹è¯•åŸºç±»ã€‚
  * 
  * @author Michael Zhou
  */

@@ -20,33 +20,33 @@ package com.alibaba.citrus.service.template;
 import java.util.Set;
 
 /**
- * Ò»¸öÍ¨ÓÃµÄÄ£°åcontext½Ó¿Ú¡£¸Ã½Ó¿ÚÏàµ±ÓÚÒ»¸ö±»¼ò»¯µÄmap¡£
+ * ä¸€ä¸ªé€šç”¨çš„æ¨¡æ¿contextæ¥å£ã€‚è¯¥æ¥å£ç›¸å½“äºä¸€ä¸ªè¢«ç®€åŒ–çš„mapã€‚
  * 
  * @author Michael Zhou
  */
 public interface TemplateContext {
     /**
-     * Ìí¼ÓÒ»¸öÖµ¡£
+     * æ·»åŠ ä¸€ä¸ªå€¼ã€‚
      */
     void put(String key, Object value);
 
     /**
-     * È¡µÃÖ¸¶¨Öµ¡£
+     * å–å¾—æŒ‡å®šå€¼ã€‚
      */
     Object get(String key);
 
     /**
-     * É¾³ıÒ»¸öÖµ¡£
+     * åˆ é™¤ä¸€ä¸ªå€¼ã€‚
      */
     void remove(String key);
 
     /**
-     * ÅĞ¶ÏÊÇ·ñ°üº¬Ö¸¶¨µÄ¼ü¡£
+     * åˆ¤æ–­æ˜¯å¦åŒ…å«æŒ‡å®šçš„é”®ã€‚
      */
     boolean containsKey(String key);
 
     /**
-     * È¡µÃËùÓĞkeyµÄ¼¯ºÏ¡£
+     * å–å¾—æ‰€æœ‰keyçš„é›†åˆã€‚
      */
     Set<String> keySet();
 }

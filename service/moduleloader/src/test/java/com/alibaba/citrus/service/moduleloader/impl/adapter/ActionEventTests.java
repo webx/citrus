@@ -53,12 +53,12 @@ public class ActionEventTests extends AbstractWebTests {
     }
 
     /**
-     * µ±Ö¸¶¨ÁËdefaultLazyInit=false£¨Ä¬ÈÏÖµ£©Ê±£¬module´´½¨µÄÊ§°Ü»áÔÚcontext³õÊ¼»¯µÄÊ±ºòÅ×³ö¡£
+     * å½“æŒ‡å®šäº†defaultLazyInit=falseï¼ˆé»˜è®¤å€¼ï¼‰æ—¶ï¼Œmoduleåˆ›å»ºçš„å¤±è´¥ä¼šåœ¨contextåˆå§‹åŒ–çš„æ—¶å€™æŠ›å‡ºã€‚
      */
     @Test
     public void actionEvent_eagerInitFailure() {
         try {
-            createContext("adapter/services.xml", null); // ÎŞparent£¬¹ÊÈ¡²»µ½RunData
+            createContext("adapter/services.xml", null); // æ— parentï¼Œæ•…å–ä¸åˆ°RunData
             fail();
         } catch (BeansException e) {
             assertThat(e, exception(NoSuchBeanDefinitionException.class, "RunData"));
@@ -66,11 +66,11 @@ public class ActionEventTests extends AbstractWebTests {
     }
 
     /**
-     * µ±Ö¸¶¨ÁËdefaultLazyInit=trueÊ±£¬module´´½¨µÄÊ§°Ü»áÔÚÈ¡µÃmoduleÊ±Å×³ö¡£
+     * å½“æŒ‡å®šäº†defaultLazyInit=trueæ—¶ï¼Œmoduleåˆ›å»ºçš„å¤±è´¥ä¼šåœ¨å–å¾—moduleæ—¶æŠ›å‡ºã€‚
      */
     @Test
     public void actionEvent_noRequest() {
-        // ´´½¨²»°üº¬request-contexts¶ÔÏóµÄspring container
+        // åˆ›å»ºä¸åŒ…å«request-contextså¯¹è±¡çš„spring container
         ApplicationContext factory = createContext("adapter/services-lazyinit.xml", null);
         moduleLoader = (ModuleLoaderService) factory.getBean("moduleLoaderService");
 
@@ -87,11 +87,11 @@ public class ActionEventTests extends AbstractWebTests {
 
     @Test
     public void actionEvent_requestIsNotProxy() {
-        // ´´½¨²»°üº¬request-contexts¶ÔÏóµÄspring container
+        // åˆ›å»ºä¸åŒ…å«request-contextså¯¹è±¡çš„spring container
         ApplicationContext factory = createContext("adapter/services-lazyinit.xml", null);
         HttpServletRequest request = createMock(HttpServletRequest.class);
 
-        // ×¢²ámock request
+        // æ³¨å†Œmock request
         ((ConfigurableListableBeanFactory) factory.getAutowireCapableBeanFactory()).registerResolvableDependency(
                 HttpServletRequest.class, request);
 

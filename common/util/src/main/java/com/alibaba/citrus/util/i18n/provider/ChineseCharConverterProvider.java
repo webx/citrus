@@ -27,7 +27,7 @@ import com.alibaba.citrus.util.i18n.CharConverter;
 import com.alibaba.citrus.util.i18n.CharConverterProvider;
 
 /**
- * ÓÃÀ´×ª»»¼ò·±ÖĞÎÄµÄprovider¡£
+ * ç”¨æ¥è½¬æ¢ç®€ç¹ä¸­æ–‡çš„providerã€‚
  * 
  * @author Michael Zhou
  */
@@ -47,7 +47,7 @@ public abstract class ChineseCharConverterProvider implements CharConverterProvi
     }
 
     /**
-     * ×°ÔØ±àÂë±í¡£
+     * è£…è½½ç¼–ç è¡¨ã€‚
      */
     protected final char[] loadCodeTable() {
         if (codeTable == null) {

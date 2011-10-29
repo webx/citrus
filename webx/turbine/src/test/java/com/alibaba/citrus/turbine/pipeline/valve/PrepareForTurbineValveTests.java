@@ -53,16 +53,16 @@ public class PrepareForTurbineValveTests extends AbstractValveTests {
         assertNull(request.getAttribute("_webx3_turbine_rundata"));
 
         Context savedContext = (Context) request.getAttribute("_webx3_turbine_rundata_context");
-        assertNotNull(savedContext); // ±£Áôcontext
+        assertNotNull(savedContext); // ä¿ç•™context
 
-        // ÇĞ»»µ½root component£¬ÒÔÄ£Äâerror´¦ÀíµÄÇéĞÎ
+        // åˆ‡æ¢åˆ°root componentï¼Œä»¥æ¨¡æ‹Ÿerrorå¤„ç†çš„æƒ…å½¢
         WebxUtil.setCurrentComponent(request, component.getWebxComponents().getComponent(null));
 
         pipeline = (PipelineImpl) factory.getBean("prepareForTurbine2");
         pipeline.newInvocation().invoke();
 
         assertNull(request.getAttribute("_webx3_turbine_rundata"));
-        assertNull(request.getAttribute("_webx3_turbine_rundata_context")); // Çå³ıcontext
+        assertNull(request.getAttribute("_webx3_turbine_rundata_context")); // æ¸…é™¤context
     }
 
     private static TurbineRunData saved;
@@ -92,11 +92,11 @@ public class PrepareForTurbineValveTests extends AbstractValveTests {
             assertNotSame(saved, rundata);
             saved = null;
 
-            // µÚÒ»¸öpipeline³ö´íÒÔºó£¬µÚ¶ş¸öpipeline¿ÉÒÔÈ¡µÃÉÏ¸öpipelineµÄcontext¡£
-            // ÕâÑù£¬ÓÃÓÚ´íÎó´¦ÀíµÄexception pipleine¾Í¿ÉÒÔ»ñµÃÓ¦ÓÃµÄcontext×´Ì¬¡£
+            // ç¬¬ä¸€ä¸ªpipelineå‡ºé”™ä»¥åï¼Œç¬¬äºŒä¸ªpipelineå¯ä»¥å–å¾—ä¸Šä¸ªpipelineçš„contextã€‚
+            // è¿™æ ·ï¼Œç”¨äºé”™è¯¯å¤„ç†çš„exception pipleineå°±å¯ä»¥è·å¾—åº”ç”¨çš„contextçŠ¶æ€ã€‚
             assertEquals("world", rundata.getContext().get("hello"));
 
-            // root contextÖĞ²»°üº¬pull service£¬Òò´Ë²»´æÔÚcontrol tool¡£
+            // root contextä¸­ä¸åŒ…å«pull serviceï¼Œå› æ­¤ä¸å­˜åœ¨control toolã€‚
             assertNull(rundata.getContext().get("control"));
         }
     }

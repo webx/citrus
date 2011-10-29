@@ -120,7 +120,7 @@ public class SpringExtUtil {
     }
 
     /**
-     * ´´½¨<code>ManagedList</code>£¬±ÜÃâtype safety¾¯¸æ¡£
+     * åˆ›å»º<code>ManagedList</code>ï¼Œé¿å…type safetyè­¦å‘Šã€‚
      */
     @SuppressWarnings("unchecked")
     public static List<Object> createManagedList(Element element, ParserContext parserContext) {
@@ -132,7 +132,7 @@ public class SpringExtUtil {
     }
 
     /**
-     * ´´½¨<code>ManagedMap</code>£¬±ÜÃâtype safety¾¯¸æ¡£
+     * åˆ›å»º<code>ManagedMap</code>ï¼Œé¿å…type safetyè­¦å‘Šã€‚
      */
     @SuppressWarnings("unchecked")
     public static Map<Object, Object> createManagedMap(Element element, ParserContext parserContext) {
@@ -144,7 +144,7 @@ public class SpringExtUtil {
     }
 
     /**
-     * ´´½¨<code>ManagedSet</code>£¬±ÜÃâtype safety¾¯¸æ¡£
+     * åˆ›å»º<code>ManagedSet</code>ï¼Œé¿å…type safetyè­¦å‘Šã€‚
      */
     @SuppressWarnings("unchecked")
     public static Set<Object> createManagedSet(Element element, ParserContext parserContext) {
@@ -156,21 +156,21 @@ public class SpringExtUtil {
     }
 
     /**
-     * ½«×ÓelementµÄÖµÉèÈëproperties¡£
+     * å°†å­elementçš„å€¼è®¾å…¥propertiesã€‚
      */
     public static void subElementsToProperties(Element element, BeanDefinitionBuilder builder) {
         subElementsToProperties(element, null, builder, null);
     }
 
     /**
-     * ½«×ÓelementµÄÖµÉèÈëproperties¡£
+     * å°†å­elementçš„å€¼è®¾å…¥propertiesã€‚
      */
     public static void subElementsToProperties(Element element, BeanDefinitionBuilder builder, ElementSelector selector) {
         subElementsToProperties(element, null, builder, selector);
     }
 
     /**
-     * ½«×ÓelementµÄÖµÉèÈëproperties¡£
+     * å°†å­elementçš„å€¼è®¾å…¥propertiesã€‚
      */
     public static void subElementsToProperties(Element element, String propertyPrefix, BeanDefinitionBuilder builder,
                                                ElementSelector selector) {
@@ -180,14 +180,14 @@ public class SpringExtUtil {
     }
 
     /**
-     * ½«Ò»¸öelementµÄÖµÉèÈëproperty¡£
+     * å°†ä¸€ä¸ªelementçš„å€¼è®¾å…¥propertyã€‚
      */
     public static void elementToProperty(Element element, BeanDefinitionBuilder builder) {
         elementToProperty(element, null, builder);
     }
 
     /**
-     * ½«Ò»¸öelementµÄÖµÉèÈëproperty¡£
+     * å°†ä¸€ä¸ªelementçš„å€¼è®¾å…¥propertyã€‚
      */
     public static void elementToProperty(Element element, String propertyPrefix, BeanDefinitionBuilder builder) {
         String propName = element.getLocalName();
@@ -200,14 +200,14 @@ public class SpringExtUtil {
     }
 
     /**
-     * ½«attributeµÄÖµÉèÈëproperties¡£
+     * å°†attributeçš„å€¼è®¾å…¥propertiesã€‚
      */
     public static void attributesToProperties(Element element, BeanDefinitionBuilder builder, String... attrNames) {
         attributesToProperties(element, null, builder, attrNames);
     }
 
     /**
-     * ½«attributeµÄÖµÉèÈëproperties¡£
+     * å°†attributeçš„å€¼è®¾å…¥propertiesã€‚
      */
     public static void attributesToProperties(Element element, String propertyPrefix, BeanDefinitionBuilder builder,
                                               String... attrNames) {
@@ -230,7 +230,7 @@ public class SpringExtUtil {
     }
 
     /**
-     * ½«Ò»¸öattributeµÄÖµÉèÈëproperties¡£
+     * å°†ä¸€ä¸ªattributeçš„å€¼è®¾å…¥propertiesã€‚
      */
     public static void attributeToProperty(Attr attr, String propertyPrefix, BeanDefinitionBuilder builder) {
         String propName = attr.getNodeName();
@@ -243,7 +243,7 @@ public class SpringExtUtil {
     }
 
     /**
-     * ½âÎöbeans:beanµÄattributes¡£
+     * è§£æbeans:beançš„attributesã€‚
      */
     public static void parseBeanDefinitionAttributes(Element element, ParserContext parserContext,
                                                      BeanDefinitionBuilder builder) {
@@ -251,8 +251,8 @@ public class SpringExtUtil {
     }
 
     /**
-     * ´Óelement´´½¨Ö¸¶¨configuration pointµÄbean¡£Èç¹ûelement²»ÊôÓÚ¸Ãconfiguration
-     * pointµÄÃû×Ö¿Õ¼ä£¬Ôò·µ»Ø<code>null</code>¡£
+     * ä»elementåˆ›å»ºæŒ‡å®šconfiguration pointçš„beanã€‚å¦‚æœelementä¸å±äºè¯¥configuration
+     * pointçš„åå­—ç©ºé—´ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     public static BeanDefinitionHolder parseConfigurationPointBean(Element element, ConfigurationPoint cp,
                                                                    ParserContext parserContext,
@@ -264,7 +264,7 @@ public class SpringExtUtil {
         BeanDefinition containingBean = isInnerBean ? containingBeanBuilder.getRawBeanDefinition() : null;
         ElementSelector customSelector = ns(cp.getNamespaceUri());
 
-        // ½âÎöcustom element¡£
+        // è§£æcustom elementã€‚
         if (customSelector.accept(element)) {
             AbstractBeanDefinition bean = (AbstractBeanDefinition) delegate.parseCustomElement(element, containingBean);
             String beanName = trimToNull(element.getAttribute("id"));
@@ -280,7 +280,7 @@ public class SpringExtUtil {
     }
 
     /**
-     * ½âÎöbean element¡£
+     * è§£æbean elementã€‚
      */
     public static Object parseBean(Element element, ParserContext parserContext,
                                    BeanDefinitionBuilder containingBeanBuilder) {
@@ -289,13 +289,13 @@ public class SpringExtUtil {
     }
 
     /**
-     * ½âÎöbean element¡£
+     * è§£æbean elementã€‚
      */
     public static Object parseBean(Element element, ParserContext parserContext, BeanDefinition containingBean) {
         BeanDefinitionParserDelegate delegate = parserContext.getDelegate();
         String refName = trimToNull(element.getAttribute("ref"));
 
-        // Èç¹ûÊÇref
+        // å¦‚æœæ˜¯ref
         if (refName != null) {
             NamedBeanReference ref = new NamedBeanReference(refName, element.getAttribute("id"));
             ref.setSource(parserContext.extractSource(element));
@@ -303,7 +303,7 @@ public class SpringExtUtil {
             return ref;
         }
 
-        // Èç¹ûÊÇbean
+        // å¦‚æœæ˜¯bean
         else {
             BeanDefinitionHolder beanHolder = delegate.parseBeanDefinitionElement(element, containingBean);
 
@@ -316,7 +316,7 @@ public class SpringExtUtil {
     }
 
     /**
-     * È¡µÃ¶ÔÏóµÄbeanName¡£Èç²»Ö§³Ö£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—å¯¹è±¡çš„beanNameã€‚å¦‚ä¸æ”¯æŒï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     public static String getBeanName(Object bean) {
         if (bean instanceof BeanDefinitionHolder) {
@@ -331,10 +331,10 @@ public class SpringExtUtil {
     }
 
     /**
-     * ¸ù¾İbaseName´´½¨²»ÖØ¸´µÄbeanName¡£
+     * æ ¹æ®baseNameåˆ›å»ºä¸é‡å¤çš„beanNameã€‚
      * <p>
-     * ÓĞ±ğÓÚ {@link BeanDefinitionReaderUtils.generateBeanName()}
-     * ·½·¨£¬ÕâÀïÊ¹ÓÃÖ¸¶¨µÄbaseName£¬¶ø²»ÊÇÊ¹ÓÃÀàÃû×÷ÎªbaseName¡£
+     * æœ‰åˆ«äº {@link BeanDefinitionReaderUtils.generateBeanName()}
+     * æ–¹æ³•ï¼Œè¿™é‡Œä½¿ç”¨æŒ‡å®šçš„baseNameï¼Œè€Œä¸æ˜¯ä½¿ç”¨ç±»åä½œä¸ºbaseNameã€‚
      * </p>
      */
     public static String generateBeanName(String baseName, BeanDefinitionRegistry registry) {
@@ -342,13 +342,13 @@ public class SpringExtUtil {
     }
 
     /**
-     * ¸ù¾İbaseName´´½¨²»ÖØ¸´µÄbeanName¡£
+     * æ ¹æ®baseNameåˆ›å»ºä¸é‡å¤çš„beanNameã€‚
      * <p>
-     * ÓĞ±ğÓÚ {@link BeanDefinitionReaderUtils.generateBeanName()}
-     * ·½·¨£¬ÕâÀïÊ¹ÓÃÖ¸¶¨µÄbaseName£¬¶ø²»ÊÇÊ¹ÓÃÀàÃû×÷ÎªbaseName¡£
+     * æœ‰åˆ«äº {@link BeanDefinitionReaderUtils.generateBeanName()}
+     * æ–¹æ³•ï¼Œè¿™é‡Œä½¿ç”¨æŒ‡å®šçš„baseNameï¼Œè€Œä¸æ˜¯ä½¿ç”¨ç±»åä½œä¸ºbaseNameã€‚
      * </p>
      * <p>
-     * Èç¹ûÊÇinnerBean£¬ÔòĞèÒªÌá¹©bean definitionÀ´Éú³Éid¡£
+     * å¦‚æœæ˜¯innerBeanï¼Œåˆ™éœ€è¦æä¾›bean definitionæ¥ç”Ÿæˆidã€‚
      * </p>
      */
     public static String generateBeanName(String baseName, BeanDefinitionRegistry registry, BeanDefinition definition,
@@ -371,7 +371,7 @@ public class SpringExtUtil {
     }
 
     /**
-     * Ìí¼ÓÒ»¸öconstructor²ÎÊı¡£
+     * æ·»åŠ ä¸€ä¸ªconstructorå‚æ•°ã€‚
      */
     public static void addConstructorArg(BeanDefinitionBuilder builder, boolean required, Class<?> argType) {
         builder.addConstructorArgValue(createConstructorArg(builder.getRawBeanDefinition().getBeanClass(), required,
@@ -379,9 +379,9 @@ public class SpringExtUtil {
     }
 
     /**
-     * Ìí¼ÓÒ»¸öconstructor²ÎÊı¡£
+     * æ·»åŠ ä¸€ä¸ªconstructorå‚æ•°ã€‚
      * <p>
-     * ¼ÙÈçÎ´Ö¸¶¨argTypes£¬ÔòÖ»ÄÜÓĞÒ»¸öconstructor¡£
+     * å‡å¦‚æœªæŒ‡å®šargTypesï¼Œåˆ™åªèƒ½æœ‰ä¸€ä¸ªconstructorã€‚
      * </p>
      */
     public static void addConstructorArg(BeanDefinitionBuilder builder, boolean required, int argIndex,
@@ -391,33 +391,33 @@ public class SpringExtUtil {
     }
 
     /**
-     * ±¾·½·¨Ìá¹©Ò»¸öbean definition£¬¿É±»<code>BeanDefinitionParser</code>
-     * µ÷ÓÃ£¬ÓÃÀ´×¢Èë¿ÉÑ¡µÄconstructor arg£¬²¢Ö§³ÖresolvableDependency¶ÔÏóÒÔ¼°optionalÑ¡Ïî¡£
+     * æœ¬æ–¹æ³•æä¾›ä¸€ä¸ªbean definitionï¼Œå¯è¢«<code>BeanDefinitionParser</code>
+     * è°ƒç”¨ï¼Œç”¨æ¥æ³¨å…¥å¯é€‰çš„constructor argï¼Œå¹¶æ”¯æŒresolvableDependencyå¯¹è±¡ä»¥åŠoptionalé€‰é¡¹ã€‚
      */
     public static BeanDefinition createConstructorArg(Class<?> beanType, boolean required, Class<?> argType) {
         return createConstructorArg(beanType, required, 0, argType);
     }
 
     /**
-     * SpringÓĞÈıÖÖ×¢Èë·½·¨£º
+     * Springæœ‰ä¸‰ç§æ³¨å…¥æ–¹æ³•ï¼š
      * <ul>
-     * <li>Í¨¹ıÃ÷È·µÄbean definitionÉùÃ÷À´×¢Èë¶ÔÏó£¬È±µãÊÇÎŞ·¨×¢Èë
+     * <li>é€šè¿‡æ˜ç¡®çš„bean definitionå£°æ˜æ¥æ³¨å…¥å¯¹è±¡ï¼Œç¼ºç‚¹æ˜¯æ— æ³•æ³¨å…¥
      * <code>ConfigurableListableBeanFactory.registerResolvableDependency()</code>
-     * ÖĞ×¢²áµÄ¶ÔÏó£¬Èç<code>HttpServletRequest</code>¡£</li>
-     * <li>Í¨¹ıautowire
-     * byConstructorÀ´×¢Èë¶ÔÏó£¬¿ÉÒÔ×¢Èë°üÀ¨resolvableDependencyÔÚÄÚµÄ¶ÔÏó£¬È±µãÊÇÎŞ·¨½«×¢Èë¶ÔÏóÉè³É¡°optional¡±
-     * £¬¼´£º¶ÔÏó²»´æÔÚ£¬Ôò±¨´í¡£</li>
-     * <li>Í¨¹ıautowire
-     * byName/byTypeÀ´×¢Èë¶ÔÏó£¬Ïàµ±ÓÚoptional×¢Èë£¬È±µãÊÇ²»ÄÜ×¢Èë°üÀ¨resolvableDependencyÔÚÄÚµÄ¶ÔÏó
-     * £¬ÇÒ»á×Ô¶¯¶ÔËùÓĞproperty½øĞĞ×¢Èë£¬ÎŞ·¨¾«È·¿ØÖÆ£¬¿ÉÄÜÔì³É²»È·¶¨Çé¿ö¡£</li>
-     * <li>Í¨¹ı<code>@Autowired</code>
-     * annotationÀ´×¢Èë¶ÔÏó£¬¿ÉÒÔ×¢Èë°üÀ¨resolvableDependencyÔÚÄÚµÄ¶ÔÏó
-     * £¬Ò²¿ÉÒÔÉèÖÃoptionalÑ¡Ïî¡£È±µãÊÇÓĞÇÖÈëĞÔ£¬±ØĞëĞŞ¸Äbean classµÄ´úÂë¡£SpringextÊÔÍ¼½«×¢ÈëµÄ¶àÑùĞÔÏŞ¶¨ÔÚ
-     * <code>BeanDefinitionParser</code>µÄ·¶Î§ÖĞ£¬Òò´ËÊ¹ÓÃannotation²»ÊÇ×îºÃµÄ·½·¨¡£</li>
+     * ä¸­æ³¨å†Œçš„å¯¹è±¡ï¼Œå¦‚<code>HttpServletRequest</code>ã€‚</li>
+     * <li>é€šè¿‡autowire
+     * byConstructoræ¥æ³¨å…¥å¯¹è±¡ï¼Œå¯ä»¥æ³¨å…¥åŒ…æ‹¬resolvableDependencyåœ¨å†…çš„å¯¹è±¡ï¼Œç¼ºç‚¹æ˜¯æ— æ³•å°†æ³¨å…¥å¯¹è±¡è®¾æˆâ€œoptionalâ€
+     * ï¼Œå³ï¼šå¯¹è±¡ä¸å­˜åœ¨ï¼Œåˆ™æŠ¥é”™ã€‚</li>
+     * <li>é€šè¿‡autowire
+     * byName/byTypeæ¥æ³¨å…¥å¯¹è±¡ï¼Œç›¸å½“äºoptionalæ³¨å…¥ï¼Œç¼ºç‚¹æ˜¯ä¸èƒ½æ³¨å…¥åŒ…æ‹¬resolvableDependencyåœ¨å†…çš„å¯¹è±¡
+     * ï¼Œä¸”ä¼šè‡ªåŠ¨å¯¹æ‰€æœ‰propertyè¿›è¡Œæ³¨å…¥ï¼Œæ— æ³•ç²¾ç¡®æ§åˆ¶ï¼Œå¯èƒ½é€ æˆä¸ç¡®å®šæƒ…å†µã€‚</li>
+     * <li>é€šè¿‡<code>@Autowired</code>
+     * annotationæ¥æ³¨å…¥å¯¹è±¡ï¼Œå¯ä»¥æ³¨å…¥åŒ…æ‹¬resolvableDependencyåœ¨å†…çš„å¯¹è±¡
+     * ï¼Œä¹Ÿå¯ä»¥è®¾ç½®optionalé€‰é¡¹ã€‚ç¼ºç‚¹æ˜¯æœ‰ä¾µå…¥æ€§ï¼Œå¿…é¡»ä¿®æ”¹bean classçš„ä»£ç ã€‚Springextè¯•å›¾å°†æ³¨å…¥çš„å¤šæ ·æ€§é™å®šåœ¨
+     * <code>BeanDefinitionParser</code>çš„èŒƒå›´ä¸­ï¼Œå› æ­¤ä½¿ç”¨annotationä¸æ˜¯æœ€å¥½çš„æ–¹æ³•ã€‚</li>
      * </ul>
      * <p>
-     * ±¾·½·¨Ìá¹©Ò»¸öbean definition£¬¿É±»<code>BeanDefinitionParser</code>
-     * µ÷ÓÃ£¬ÓÃÀ´×¢Èëµ½µÄconstructor arg£¬²¢Ö§³ÖresolvableDependency¶ÔÏóÒÔ¼°optionalÑ¡Ïî¡£
+     * æœ¬æ–¹æ³•æä¾›ä¸€ä¸ªbean definitionï¼Œå¯è¢«<code>BeanDefinitionParser</code>
+     * è°ƒç”¨ï¼Œç”¨æ¥æ³¨å…¥åˆ°çš„constructor argï¼Œå¹¶æ”¯æŒresolvableDependencyå¯¹è±¡ä»¥åŠoptionalé€‰é¡¹ã€‚
      * </p>
      */
     public static BeanDefinition createConstructorArg(Class<?> beanType, boolean required, int argIndex,
@@ -425,7 +425,7 @@ public class SpringExtUtil {
         assertNotNull(beanType, "beanType");
         argTypes = defaultIfNull(argTypes, EMPTY_CLASS_ARRAY);
 
-        // ³¢ÊÔÈ¡µÃconstructor
+        // å°è¯•å–å¾—constructor
         Constructor<?> constructor;
 
         if (isEmptyArray(argTypes)) {
@@ -455,7 +455,7 @@ public class SpringExtUtil {
     }
 
     /**
-     * Ìí¼ÓÒ»¸öbeanÒıÓÃ£¬Ö§³ÖoptionalÑ¡Ïî¡£
+     * æ·»åŠ ä¸€ä¸ªbeanå¼•ç”¨ï¼Œæ”¯æŒoptionalé€‰é¡¹ã€‚
      */
     public static void addPropertyRef(BeanDefinitionBuilder builder, String propertyName, String beanName,
                                       Class<?> beanType, boolean required) {
@@ -467,8 +467,8 @@ public class SpringExtUtil {
     }
 
     /**
-     * ±¾·½·¨Ìá¹©Ò»¸öbean definition£¬¿É±»<code>BeanDefinitionParser</code>
-     * µ÷ÓÃ£¬ÓÃÀ´×¢Èëµ½µÄproperty arg£¬²»Ö§³ÖresolvableDependency¶ÔÏó£¬µ«Ö§³Öoptional×¢Èë¡£
+     * æœ¬æ–¹æ³•æä¾›ä¸€ä¸ªbean definitionï¼Œå¯è¢«<code>BeanDefinitionParser</code>
+     * è°ƒç”¨ï¼Œç”¨æ¥æ³¨å…¥åˆ°çš„property argï¼Œä¸æ”¯æŒresolvableDependencyå¯¹è±¡ï¼Œä½†æ”¯æŒoptionalæ³¨å…¥ã€‚
      */
     public static BeanDefinition createOptionalPropertyRef(String beanName, Class<?> beanType) {
         beanName = assertNotNull(trimToNull(beanName), "beanName");
@@ -486,16 +486,16 @@ public class SpringExtUtil {
     private final static ProxiedFilter proxiedFilter = new ProxiedFilter();
 
     /**
-     * ´´½¨Ö¸¶¨interfaceµÄproxy£¬µ±proxyµÄ·½·¨±»µ÷ÓÃÊ±£¬proxy½«»á´ÓfactoryÖĞÈ¡µÃÊµ¼Ê¶ÔÏó£¬
-     * È»ºó½«µ÷ÓÃdelegate¸øÊµ¼Ê¶ÔÏóÀ´Ö´ĞĞ¡£
+     * åˆ›å»ºæŒ‡å®šinterfaceçš„proxyï¼Œå½“proxyçš„æ–¹æ³•è¢«è°ƒç”¨æ—¶ï¼Œproxyå°†ä¼šä»factoryä¸­å–å¾—å®é™…å¯¹è±¡ï¼Œ
+     * ç„¶åå°†è°ƒç”¨delegateç»™å®é™…å¯¹è±¡æ¥æ‰§è¡Œã€‚
      */
     public static <T> T createProxy(final Class<T> intfs, final ProxyTargetFactory factory) {
         return createProxy(intfs, null, factory);
     }
 
     /**
-     * ´´½¨Ö¸¶¨interfaceµÄproxy£¬µ±proxyµÄ·½·¨±»µ÷ÓÃÊ±£¬proxy½«»á´ÓfactoryÖĞÈ¡µÃÊµ¼Ê¶ÔÏó£¬
-     * È»ºó½«µ÷ÓÃdelegate¸øÊµ¼Ê¶ÔÏóÀ´Ö´ĞĞ¡£
+     * åˆ›å»ºæŒ‡å®šinterfaceçš„proxyï¼Œå½“proxyçš„æ–¹æ³•è¢«è°ƒç”¨æ—¶ï¼Œproxyå°†ä¼šä»factoryä¸­å–å¾—å®é™…å¯¹è±¡ï¼Œ
+     * ç„¶åå°†è°ƒç”¨delegateç»™å®é™…å¯¹è±¡æ¥æ‰§è¡Œã€‚
      */
     public static <T> T createProxy(Class<T> intfs, ClassLoader classLoader, final ProxyTargetFactory factory) {
         assertNotNull(intfs, "no interface");
@@ -522,10 +522,10 @@ public class SpringExtUtil {
     }
 
     /**
-     * È·±£ËùµÃµ½µÄ¶ÔÏóÎª´úÀí¶ÔÏó¡£
+     * ç¡®ä¿æ‰€å¾—åˆ°çš„å¯¹è±¡ä¸ºä»£ç†å¯¹è±¡ã€‚
      * <p>
-     * <strong>×¢Òâ</strong>£¬´Ë·½·¨¿ÉÒÔ½ÓÊÜ<code>null</code>Öµ¡£Èç¹ûÏëÈ·±£·Ç¿Õ£¬Çë½áºÏ
-     * {@link Assert.assertNotNull}·½·¨Ê¹ÓÃ¡£
+     * <strong>æ³¨æ„</strong>ï¼Œæ­¤æ–¹æ³•å¯ä»¥æ¥å—<code>null</code>å€¼ã€‚å¦‚æœæƒ³ç¡®ä¿éç©ºï¼Œè¯·ç»“åˆ
+     * {@link Assert.assertNotNull}æ–¹æ³•ä½¿ç”¨ã€‚
      * </p>
      */
     public static <T> T assertProxy(T object) {
@@ -539,7 +539,7 @@ public class SpringExtUtil {
     }
 
     /**
-     * È¡µÃproxyËùÖ¸ÏòµÄÕæÊµ¶ÔÏó¡£
+     * å–å¾—proxyæ‰€æŒ‡å‘çš„çœŸå®å¯¹è±¡ã€‚
      */
     @SuppressWarnings("unchecked")
     public static <T> T getProxyTarget(T object) {
@@ -647,7 +647,7 @@ public class SpringExtUtil {
     }
 
     /**
-     * Ğ¯´øidµÄbean ref¡£
+     * æºå¸¦idçš„bean refã€‚
      */
     private static class NamedBeanReference extends RuntimeBeanReference {
         private final String id;
@@ -672,7 +672,7 @@ public class SpringExtUtil {
     }
 
     /**
-     * ·şÎñÓÚcreateProxy()·½·¨£¬ProxyµÄ»ùÀà¡£
+     * æœåŠ¡äºcreateProxy()æ–¹æ³•ï¼ŒProxyçš„åŸºç±»ã€‚
      */
     public static class AbstractProxy implements ProxyTargetFactory {
         private final Class<?> intfs;
@@ -735,7 +735,7 @@ public class SpringExtUtil {
     }
 
     /**
-     * ·şÎñÓÚcreateProxy()·½·¨£¬½«µ÷ÓÃ×ª·¢¸øproxy¶ÔÏó±¾Éí¡£
+     * æœåŠ¡äºcreateProxy()æ–¹æ³•ï¼Œå°†è°ƒç”¨è½¬å‘ç»™proxyå¯¹è±¡æœ¬èº«ã€‚
      */
     private static final class DefaultInterceptor implements MethodInterceptor {
         public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
@@ -744,7 +744,7 @@ public class SpringExtUtil {
     }
 
     /**
-     * ·şÎñÓÚcreateProxy()·½·¨£¬½«µ÷ÓÃÎ¯ÍĞ¸øProxyTargetFactoryËù·µ»ØµÄ¶ÔÏó¡£
+     * æœåŠ¡äºcreateProxy()æ–¹æ³•ï¼Œå°†è°ƒç”¨å§”æ‰˜ç»™ProxyTargetFactoryæ‰€è¿”å›çš„å¯¹è±¡ã€‚
      */
     private static final class ProxiedInterceptor implements MethodInterceptor {
         private final ProxyTargetFactory factory;
@@ -759,8 +759,8 @@ public class SpringExtUtil {
     }
 
     /**
-     * ·şÎñÓÚcreateProxy()·½·¨£¬¶ÔÓÚequals¡¢hashCode¡¢toStringºÍProxyTargetFactory.
-     * getObject·½·¨£¬ Ö´ĞĞdefaultInterceptor£¬·ñÔòÖ´ĞĞproxiedInterceptor¡£
+     * æœåŠ¡äºcreateProxy()æ–¹æ³•ï¼Œå¯¹äºequalsã€hashCodeã€toStringå’ŒProxyTargetFactory.
+     * getObjectæ–¹æ³•ï¼Œ æ‰§è¡ŒdefaultInterceptorï¼Œå¦åˆ™æ‰§è¡ŒproxiedInterceptorã€‚
      */
     private static final class ProxiedFilter implements CallbackFilter {
         public int accept(Method method) {
@@ -778,7 +778,7 @@ public class SpringExtUtil {
     }
 
     /**
-     * ·şÎñÓÚcreateProxy()·½·¨£¬·µ»ØÒÔinterface name×÷ÎªÇ°×ºµÄproxy class name¡£
+     * æœåŠ¡äºcreateProxy()æ–¹æ³•ï¼Œè¿”å›ä»¥interface nameä½œä¸ºå‰ç¼€çš„proxy class nameã€‚
      */
     private static final class ProxiedNamingPolicy extends DefaultNamingPolicy {
         private final Class<?> intfs;

@@ -20,13 +20,13 @@ package com.alibaba.citrus.springext;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 /**
- * Èç¹û<code>ApplicationContext</code>ÊµÏÖ¸Ã½Ó¿Ú£¬±íÊ¾ÆäÖ§³Ö¶Ô<code>ResourceLoader</code>µÄÀ©Õ¹¡£
+ * å¦‚æœ<code>ApplicationContext</code>å®ç°è¯¥æ¥å£ï¼Œè¡¨ç¤ºå…¶æ”¯æŒå¯¹<code>ResourceLoader</code>çš„æ‰©å±•ã€‚
  * 
  * @author Michael Zhou
  */
 public interface ResourceLoadingExtendable extends ResourcePatternResolver {
     /**
-     * ÉèÖÃÀ©Õ¹»úÖÆ¡£
+     * è®¾ç½®æ‰©å±•æœºåˆ¶ã€‚
      */
     void setResourceLoadingExtender(ResourceLoadingExtender resourceLoadingExtender);
 }

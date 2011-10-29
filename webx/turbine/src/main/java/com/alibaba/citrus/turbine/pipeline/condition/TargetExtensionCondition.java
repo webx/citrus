@@ -32,7 +32,7 @@ import com.alibaba.citrus.service.pipeline.support.AbstractConditionDefinitionPa
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ¸ù¾İtargetºó×ºÀ´ÅĞ¶Ï¡£
+ * æ ¹æ®targetåç¼€æ¥åˆ¤æ–­ã€‚
  */
 public class TargetExtensionCondition extends AbstractTurbineCondition {
     private final Set<String> extensions = createHashSet();
@@ -40,7 +40,7 @@ public class TargetExtensionCondition extends AbstractTurbineCondition {
     public void setExtension(String exts) {
         extensions.clear();
 
-        // Ö§³ÖÎŞºó×º
+        // æ”¯æŒæ— åç¼€
         if (exts == null) {
             extensions.add(null);
         } else {

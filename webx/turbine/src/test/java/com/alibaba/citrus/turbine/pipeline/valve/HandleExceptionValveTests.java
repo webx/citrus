@@ -78,25 +78,25 @@ public class HandleExceptionValveTests extends AbstractValveTests {
 
     @Test
     public void matchExceptions() throws Exception {
-        // ¾«È·Æ¥Åä
+        // ç²¾ç¡®åŒ¹é…
         assertException(IOException.class, "error_io_exception.vm");
         assertException(Exception.class, "error_exception.vm");
         assertException(IllegalArgumentException.class, "error_illegal_argument_exception.vm");
         assertException(RuntimeException.class, "error_runtime_exception.vm");
 
-        // FileNotFoundExceptionÎ´Ö¸¶¨£¬µ«ÊÇ´ÓIOExceptionÅÉÉú
+        // FileNotFoundExceptionæœªæŒ‡å®šï¼Œä½†æ˜¯ä»IOExceptionæ´¾ç”Ÿ
         assertException(FileNotFoundException.class, "error_io_exception.vm");
 
-        // ArithmeticExceptionÎ´Ö¸¶¨£¬µ«ÊÇ´ÓRuntimeExceptionÅÉÉú
+        // ArithmeticExceptionæœªæŒ‡å®šï¼Œä½†æ˜¯ä»RuntimeExceptionæ´¾ç”Ÿ
         assertException(ArithmeticException.class, "error_runtime_exception.vm");
 
-        // NumberFormatExceptionÎ´Ö¸¶¨£¬µ«ÊÇ´ÓIllegalArgumentExceptionÅÉÉú
+        // NumberFormatExceptionæœªæŒ‡å®šï¼Œä½†æ˜¯ä»IllegalArgumentExceptionæ´¾ç”Ÿ
         assertException(NumberFormatException.class, "error_illegal_argument_exception.vm");
 
-        // ClassNotFoundExceptionÎ´Ö¸¶¨£¬µ«ÊÇ´ÓExceptionÅÉÉú
+        // ClassNotFoundExceptionæœªæŒ‡å®šï¼Œä½†æ˜¯ä»Exceptionæ´¾ç”Ÿ
         assertException(ClassNotFoundException.class, "error_exception.vm");
 
-        // ErrorÎ´Æ¥Åä£¬È¡Ä¬ÈÏÖµ
+        // ErroræœªåŒ¹é…ï¼Œå–é»˜è®¤å€¼
         assertException(Error.class, "error.vm", false);
     }
 
@@ -105,13 +105,13 @@ public class HandleExceptionValveTests extends AbstractValveTests {
     }
 
     private void assertException(Class<? extends Throwable> type, String target, boolean indirect) throws Exception {
-        // Ö±½ÓÒì³£
+        // ç›´æ¥å¼‚å¸¸
         ErrorHandlerHelper.getInstance(newRequest).init("app1", type.newInstance(), null);
         pipeline.newInvocation().invoke();
 
         assertEquals(target, rundata.getTarget());
 
-        // ¼ä½ÓÒì³£
+        // é—´æ¥å¼‚å¸¸
         if (indirect) {
             Throwable t = new Exception(type.newInstance());
 

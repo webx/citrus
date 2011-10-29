@@ -32,7 +32,7 @@ import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.util.Utils;
 
 /**
- * Ô¤±¸turbineÔËĞĞËùĞèÒªµÄÒ»Ğ©ÄÚÈİ¡£
+ * é¢„å¤‡turbineè¿è¡Œæ‰€éœ€è¦çš„ä¸€äº›å†…å®¹ã€‚
  * 
  * @author Michael Zhou
  */

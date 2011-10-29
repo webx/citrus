@@ -40,11 +40,11 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 /**
- * Õâ¸öÀà´ÓTomcat 6.0.29µÄ<code>org.apache.tomcat.util.http.ServerCookie</code>¸Ä±à¡£
+ * è¿™ä¸ªç±»ä»Tomcat 6.0.29çš„<code>org.apache.tomcat.util.http.ServerCookie</code>æ”¹ç¼–ã€‚
  * <ul>
- * <li>É¾³ıÁË²»ĞèÒªµÄ´úÂë¡£</li>
- * <li>µ±valueÎª¿ÕÊ±£¬²»ÏÔÊ¾Îª""¡£</li>
- * <li>Ôö¼ÓÁËCookie Version=1Ê±£¬DiscardÖ§³Ö¡£</li>
+ * <li>åˆ é™¤äº†ä¸éœ€è¦çš„ä»£ç ã€‚</li>
+ * <li>å½“valueä¸ºç©ºæ—¶ï¼Œä¸æ˜¾ç¤ºä¸º""ã€‚</li>
+ * <li>å¢åŠ äº†Cookie Version=1æ—¶ï¼ŒDiscardæ”¯æŒã€‚</li>
  * </ul>
  * <p>
  * Server-side cookie representation. Allows recycling and uses MessageBytes as

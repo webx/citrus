@@ -26,16 +26,16 @@ import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextW
 import com.alibaba.citrus.util.io.ByteArray;
 
 /**
- * ¶Ôresponse.<code>getWriter()</code>ºÍresponse.<code>getOutputStream()</code>
- * Ëù·µ»ØµÄÊä³öÁ÷½øĞĞ»º´æ²Ù×÷¡£
+ * å¯¹response.<code>getWriter()</code>å’Œresponse.<code>getOutputStream()</code>
+ * æ‰€è¿”å›çš„è¾“å‡ºæµè¿›è¡Œç¼“å­˜æ“ä½œã€‚
  * 
  * @author Michael Zhou
  */
 public class BufferedRequestContextImpl extends AbstractRequestContextWrapper implements BufferedRequestContext {
     /**
-     * °ü×°Ò»¸ö<code>RequestContext</code>¶ÔÏó¡£
+     * åŒ…è£…ä¸€ä¸ª<code>RequestContext</code>å¯¹è±¡ã€‚
      * 
-     * @param wrappedContext ±»°ü×°µÄ<code>RequestContext</code>
+     * @param wrappedContext è¢«åŒ…è£…çš„<code>RequestContext</code>
      */
     public BufferedRequestContextImpl(RequestContext wrappedContext) {
         super(wrappedContext);
@@ -44,70 +44,70 @@ public class BufferedRequestContextImpl extends AbstractRequestContextWrapper im
     }
 
     /**
-     * ÉèÖÃÊÇ·ñ½«ËùÓĞĞÅÏ¢±£´æÔÚÄÚ´æÖĞ¡£
+     * è®¾ç½®æ˜¯å¦å°†æ‰€æœ‰ä¿¡æ¯ä¿å­˜åœ¨å†…å­˜ä¸­ã€‚
      * 
-     * @return Èç¹ûÊÇ£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚æœæ˜¯ï¼Œåˆ™è¿”å›<code>true</code>
      */
     public boolean isBuffering() {
         return getBufferedResponse().isBuffering();
     }
 
     /**
-     * ÉèÖÃbufferÄ£Ê½£¬Èç¹ûÉèÖÃ³É<code>true</code>£¬±íÊ¾½«ËùÓĞĞÅÏ¢±£´æÔÚÄÚ´æÖĞ£¬·ñÔòÖ±½ÓÊä³öµ½Ô­Ê¼responseÖĞ¡£
+     * è®¾ç½®bufferæ¨¡å¼ï¼Œå¦‚æœè®¾ç½®æˆ<code>true</code>ï¼Œè¡¨ç¤ºå°†æ‰€æœ‰ä¿¡æ¯ä¿å­˜åœ¨å†…å­˜ä¸­ï¼Œå¦åˆ™ç›´æ¥è¾“å‡ºåˆ°åŸå§‹responseä¸­ã€‚
      * <p>
-     * ´Ë·½·¨±ØĞëÔÚ<code>getOutputStream</code>ºÍ<code>getWriter</code>·½·¨Ö®Ç°Ö´ĞĞ£¬·ñÔò½«Å×³ö
-     * <code>IllegalStateException</code>¡£
+     * æ­¤æ–¹æ³•å¿…é¡»åœ¨<code>getOutputStream</code>å’Œ<code>getWriter</code>æ–¹æ³•ä¹‹å‰æ‰§è¡Œï¼Œå¦åˆ™å°†æŠ›å‡º
+     * <code>IllegalStateException</code>ã€‚
      * </p>
      * 
-     * @param buffering ÊÇ·ñbufferÄÚÈİ
-     * @throws IllegalStateException <code>getOutputStream</code>»ò
-     *             <code>getWriter</code>·½·¨ÒÑ¾­±»Ö´ĞĞ
+     * @param buffering æ˜¯å¦bufferå†…å®¹
+     * @throws IllegalStateException <code>getOutputStream</code>æˆ–
+     *             <code>getWriter</code>æ–¹æ³•å·²ç»è¢«æ‰§è¡Œ
      */
     public void setBuffering(boolean buffering) {
         getBufferedResponse().setBuffering(buffering);
     }
 
     /**
-     * ´´½¨ĞÂµÄbuffer£¬±£´æÀÏµÄbuffer¡£
+     * åˆ›å»ºæ–°çš„bufferï¼Œä¿å­˜è€çš„bufferã€‚
      * 
-     * @throws IllegalStateException Èç¹û²»ÔÚbufferÄ£Ê½£¬»ò<code>getWriter</code>¼°
-     *             <code>getOutputStream</code>·½·¨´ÓÎ´±»µ÷ÓÃ
+     * @throws IllegalStateException å¦‚æœä¸åœ¨bufferæ¨¡å¼ï¼Œæˆ–<code>getWriter</code>åŠ
+     *             <code>getOutputStream</code>æ–¹æ³•ä»æœªè¢«è°ƒç”¨
      */
     public void pushBuffer() {
         getBufferedResponse().pushBuffer();
     }
 
     /**
-     * µ¯³ö×î½üµÄbuffer£¬Èç¹û¶ÑÕ»ÖĞÖ»ÓĞÒ»¸öbuffer£¬Ôòµ¯³öºóÔÙ´´½¨Ò»¸öĞÂµÄ¡£
+     * å¼¹å‡ºæœ€è¿‘çš„bufferï¼Œå¦‚æœå †æ ˆä¸­åªæœ‰ä¸€ä¸ªbufferï¼Œåˆ™å¼¹å‡ºåå†åˆ›å»ºä¸€ä¸ªæ–°çš„ã€‚
      * 
-     * @return ×î½üµÄbufferÄÚÈİ
-     * @throws IllegalStateException Èç¹û²»ÔÚbufferÄ£Ê½£¬»ò<code>getWriter</code>
-     *             ·½·¨Ôø±»µ÷ÓÃ£¬»ò <code>getOutputStream</code>·½·¨´ÓÎ´±»µ÷ÓÃ
+     * @return æœ€è¿‘çš„bufferå†…å®¹
+     * @throws IllegalStateException å¦‚æœä¸åœ¨bufferæ¨¡å¼ï¼Œæˆ–<code>getWriter</code>
+     *             æ–¹æ³•æ›¾è¢«è°ƒç”¨ï¼Œæˆ– <code>getOutputStream</code>æ–¹æ³•ä»æœªè¢«è°ƒç”¨
      */
     public ByteArray popByteBuffer() {
         return getBufferedResponse().popByteBuffer();
     }
 
     /**
-     * µ¯³ö×î½üµÄbuffer£¬Èç¹û¶ÑÕ»ÖĞÖ»ÓĞÒ»¸öbuffer£¬Ôòµ¯³öºóÔÙ´´½¨Ò»¸öĞÂµÄ¡£
+     * å¼¹å‡ºæœ€è¿‘çš„bufferï¼Œå¦‚æœå †æ ˆä¸­åªæœ‰ä¸€ä¸ªbufferï¼Œåˆ™å¼¹å‡ºåå†åˆ›å»ºä¸€ä¸ªæ–°çš„ã€‚
      * 
-     * @return ×î½üµÄbufferÄÚÈİ
-     * @throws IllegalStateException Èç¹û²»ÔÚbufferÄ£Ê½£¬»ò<code>getOutputStream</code>
-     *             ·½·¨Ôø±»µ÷ÓÃ£¬»ò<code>getWriter</code>·½·¨´ÓÎ´±»µ÷ÓÃ
+     * @return æœ€è¿‘çš„bufferå†…å®¹
+     * @throws IllegalStateException å¦‚æœä¸åœ¨bufferæ¨¡å¼ï¼Œæˆ–<code>getOutputStream</code>
+     *             æ–¹æ³•æ›¾è¢«è°ƒç”¨ï¼Œæˆ–<code>getWriter</code>æ–¹æ³•ä»æœªè¢«è°ƒç”¨
      */
     public String popCharBuffer() {
         return getBufferedResponse().popCharBuffer();
     }
 
     /**
-     * ½«bufferÖĞµÄÄÚÈİÌá½»µ½ÕæÕıµÄservletÊä³öÁ÷ÖĞ¡£
+     * å°†bufferä¸­çš„å†…å®¹æäº¤åˆ°çœŸæ­£çš„servletè¾“å‡ºæµä¸­ã€‚
      * <p>
-     * Èç¹û´ÓÀ´Ã»ÓĞÖ´ĞĞ¹ı<code>getOutputStream</code>»ò<code>getWriter</code>
-     * ·½·¨£¬Ôò¸Ã·½·¨²»×öÈÎºÎÊÂÇé¡£
+     * å¦‚æœä»æ¥æ²¡æœ‰æ‰§è¡Œè¿‡<code>getOutputStream</code>æˆ–<code>getWriter</code>
+     * æ–¹æ³•ï¼Œåˆ™è¯¥æ–¹æ³•ä¸åšä»»ä½•äº‹æƒ…ã€‚
      * </p>
      * 
-     * @throws BufferCommitFailedException Èç¹ûÌá½»Ê§°Ü
-     * @throws IllegalStateException Èç¹ûbufferÕ»ÖĞ²»Ö¹Ò»¸öbuffer
+     * @throws BufferCommitFailedException å¦‚æœæäº¤å¤±è´¥
+     * @throws IllegalStateException å¦‚æœbufferæ ˆä¸­ä¸æ­¢ä¸€ä¸ªbuffer
      */
     @Override
     public void commit() throws BufferCommitFailedException {
@@ -121,9 +121,9 @@ public class BufferedRequestContextImpl extends AbstractRequestContextWrapper im
     }
 
     /**
-     * È¡µÃ<code>BufferedRunDataResponse</code>ÊµÀı¡£
+     * å–å¾—<code>BufferedRunDataResponse</code>å®ä¾‹ã€‚
      * 
-     * @return <code>BufferedRunDataResponse</code>ÊµÀı
+     * @return <code>BufferedRunDataResponse</code>å®ä¾‹
      */
     private BufferedResponseImpl getBufferedResponse() {
         return (BufferedResponseImpl) getResponse();

@@ -33,17 +33,17 @@ public class LoggerHacker {
     private final static int SLF4J_INDEX = 2;
 
     /**
-     * XXX Hack! FreeMarkerµÄÈÕÖ¾ÏµÍ³ÊÇ·â±ÕµÄ£¬Ö»Ö§³ÖÓĞÏŞµÄloggerÀàĞÍ£¬²»Ö§³Öslf4j¡£
-     * Õâ¸öhackĞŞ¸ÄÁËLIBINITÄÚ²¿±äÁ¿µÄÖµ£¬Ê¹Ëü³õÊ¼»¯SLF4J£¨È¡´úÁËAvalon£©¡£
-     * ¼ÙÈç½«À´Õâ¸ö»úÖÆ±»ĞŞ¸Ä£¬Õâ¶Î´úÂëÓĞ¿ÉÄÜ³ö´í£¬´ËÊ±½«Î¬³ÖFreeMarkerÄ¬ÈÏµÄÉèÖÃ¡£
+     * XXX Hack! FreeMarkerçš„æ—¥å¿—ç³»ç»Ÿæ˜¯å°é—­çš„ï¼Œåªæ”¯æŒæœ‰é™çš„loggerç±»å‹ï¼Œä¸æ”¯æŒslf4jã€‚
+     * è¿™ä¸ªhackä¿®æ”¹äº†LIBINITå†…éƒ¨å˜é‡çš„å€¼ï¼Œä½¿å®ƒåˆå§‹åŒ–SLF4Jï¼ˆå–ä»£äº†Avalonï¼‰ã€‚
+     * å‡å¦‚å°†æ¥è¿™ä¸ªæœºåˆ¶è¢«ä¿®æ”¹ï¼Œè¿™æ®µä»£ç æœ‰å¯èƒ½å‡ºé”™ï¼Œæ­¤æ—¶å°†ç»´æŒFreeMarkeré»˜è®¤çš„è®¾ç½®ã€‚
      */
     public static final void hackLogger(String prefix) {
         try {
-            // ½«PublicLoggerFactoryºÍSlf4jLoggerFactoryÈûµ½LoggerFactoryËùÔÚµÄloaderÖĞ¡£
+            // å°†PublicLoggerFactoryå’ŒSlf4jLoggerFactoryå¡åˆ°LoggerFactoryæ‰€åœ¨çš„loaderä¸­ã€‚
             definePublicLoggerFactory(Logger.class.getClassLoader(), "freemarker.log.PublicLoggerFactory");
             definePublicLoggerFactory(Logger.class.getClassLoader(), "freemarker.log.Slf4jLoggerFactory");
 
-            // Ê¹LoggerÑ¡Ôñslf4jÎªÈÕÖ¾ÏµÍ³
+            // ä½¿Loggeré€‰æ‹©slf4jä¸ºæ—¥å¿—ç³»ç»Ÿ
             Field field = Logger.class.getDeclaredField("LIBINIT");
             field.setAccessible(true);
 
@@ -55,7 +55,7 @@ public class LoggerHacker {
             Logger.selectLoggerLibrary(SLF4J_INDEX);
             Logger.setCategoryPrefix(prefix);
         } catch (Throwable e) {
-            // µ±illegal access·¢ÉúÊ±£¬ÈÕÖ¾ÏµÍ³»á³ö´í£¬getStackTrace(e)±ÜÃâÖ®¡£
+            // å½“illegal accesså‘ç”Ÿæ—¶ï¼Œæ—¥å¿—ç³»ç»Ÿä¼šå‡ºé”™ï¼ŒgetStackTrace(e)é¿å…ä¹‹ã€‚
             slf4jLog.warn("Could not hack FreeMarker Logging System: {}", ExceptionUtil.getStackTrace(e));
 
             try {

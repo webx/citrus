@@ -30,7 +30,7 @@ import com.alibaba.citrus.service.form.configuration.FieldConfig;
 import com.alibaba.citrus.service.form.configuration.GroupConfig;
 
 /**
- * ´ú±íÒ»¸öform fieldµÄ¶¨ÒåĞÅÏ¢¡£
+ * ä»£è¡¨ä¸€ä¸ªform fieldçš„å®šä¹‰ä¿¡æ¯ã€‚
  * 
  * @author Michael Zhou
  */
@@ -46,63 +46,63 @@ public class FieldConfigImpl extends AbstractConfig<FieldConfig> implements Fiel
     private List<Validator> validatorList;
 
     /**
-     * È¡µÃfieldËùÊôµÄgroup config¡£
+     * å–å¾—fieldæ‰€å±çš„group configã€‚
      */
     public GroupConfig getGroupConfig() {
         return groupConfig;
     }
 
     /**
-     * ÉèÖÃfieldËùÊôµÄgroup config¡£
+     * è®¾ç½®fieldæ‰€å±çš„group configã€‚
      */
     public void setGroupConfig(GroupConfig groupConfig) {
         this.groupConfig = groupConfig;
     }
 
     /**
-     * È¡µÃfield name¡£
+     * å–å¾—field nameã€‚
      */
     public String getName() {
         return name;
     }
 
     /**
-     * ÉèÖÃfield name¡£
+     * è®¾ç½®field nameã€‚
      */
     public void setName(String name) {
         this.name = trimToNull(name);
     }
 
     /**
-     * È¡µÃfield key¡£
+     * å–å¾—field keyã€‚
      */
     public String getKey() {
         return key;
     }
 
     /**
-     * ÉèÖÃfield key¡£
+     * è®¾ç½®field keyã€‚
      */
     public void setKey(String key) {
         this.key = trimToNull(key);
     }
 
     /**
-     * È¡µÃÓÃÀ´ÏÔÊ¾fieldµÄÃû³Æ¡£
+     * å–å¾—ç”¨æ¥æ˜¾ç¤ºfieldçš„åç§°ã€‚
      */
     public String getDisplayName() {
         return displayName == null ? getName() : displayName;
     }
 
     /**
-     * ÉèÖÃÓÃÀ´ÏÔÊ¾fieldµÄÃû³Æ¡£
+     * è®¾ç½®ç”¨æ¥æ˜¾ç¤ºfieldçš„åç§°ã€‚
      */
     public void setDisplayName(String displayName) {
         this.displayName = trimToNull(displayName);
     }
 
     /**
-     * È¡µÃtrimmingÑ¡Ïî¡£
+     * å–å¾—trimmingé€‰é¡¹ã€‚
      */
     public boolean isTrimming() {
         if (trimming == null) {
@@ -113,28 +113,28 @@ public class FieldConfigImpl extends AbstractConfig<FieldConfig> implements Fiel
     }
 
     /**
-     * ÉèÖÃtrimmingÑ¡Ïî¡£
+     * è®¾ç½®trimmingé€‰é¡¹ã€‚
      */
     public void setTrimming(boolean trimming) {
         this.trimming = trimming;
     }
 
     /**
-     * È¡µÃbean propertyÃû³Æ¡£
+     * å–å¾—bean propertyåç§°ã€‚
      */
     public String getPropertyName() {
         return propertyName == null ? getName() : propertyName;
     }
 
     /**
-     * ÉèÖÃbean propertyÃû³Æ¡£
+     * è®¾ç½®bean propertyåç§°ã€‚
      */
     public void setPropertyName(String propertyName) {
         this.propertyName = trimToNull(propertyName);
     }
 
     /**
-     * È¡µÃµ¥¸öÄ¬ÈÏÖµ¡£
+     * å–å¾—å•ä¸ªé»˜è®¤å€¼ã€‚
      */
     public String getDefaultValue() {
         if (!isEmptyArray(defaultValues)) {
@@ -145,7 +145,7 @@ public class FieldConfigImpl extends AbstractConfig<FieldConfig> implements Fiel
     }
 
     /**
-     * È¡µÃÒ»×éÄ¬ÈÏÖµ¡£
+     * å–å¾—ä¸€ç»„é»˜è®¤å€¼ã€‚
      */
     public String[] getDefaultValues() {
         if (!isEmptyArray(defaultValues)) {
@@ -156,7 +156,7 @@ public class FieldConfigImpl extends AbstractConfig<FieldConfig> implements Fiel
     }
 
     /**
-     * ÉèÖÃÄ¬ÈÏÖµ¡£
+     * è®¾ç½®é»˜è®¤å€¼ã€‚
      */
     public void setDefaultValues(String[] defaultValues) {
         if (!isEmptyArray(defaultValues)) {
@@ -165,7 +165,7 @@ public class FieldConfigImpl extends AbstractConfig<FieldConfig> implements Fiel
     }
 
     /**
-     * È¡µÃvalidatorÁĞ±í¡£
+     * å–å¾—validatoråˆ—è¡¨ã€‚
      */
     public List<Validator> getValidators() {
         if (validatorList == null) {
@@ -176,7 +176,7 @@ public class FieldConfigImpl extends AbstractConfig<FieldConfig> implements Fiel
     }
 
     /**
-     * ÉèÖÃÒ»×évalidator¡£
+     * è®¾ç½®ä¸€ç»„validatorã€‚
      */
     public void setValidators(List<Validator> validators) {
         if (validators != null) {
@@ -191,7 +191,7 @@ public class FieldConfigImpl extends AbstractConfig<FieldConfig> implements Fiel
     }
 
     /**
-     * ½«Ö¸¶¨fieldÖĞµÄÄÚÈİ¸´ÖÆµ½µ±Ç°fieldÖĞ¡£
+     * å°†æŒ‡å®šfieldä¸­çš„å†…å®¹å¤åˆ¶åˆ°å½“å‰fieldä¸­ã€‚
      */
     void mergeWith(FieldConfigImpl src) {
         if (name == null) {
@@ -224,7 +224,7 @@ public class FieldConfigImpl extends AbstractConfig<FieldConfig> implements Fiel
     }
 
     /**
-     * ×ª»»³ÉÒ×ÓÚÔÄ¶ÁµÄ×Ö·û´®¡£
+     * è½¬æ¢æˆæ˜“äºé˜…è¯»çš„å­—ç¬¦ä¸²ã€‚
      */
     @Override
     public String toString() {

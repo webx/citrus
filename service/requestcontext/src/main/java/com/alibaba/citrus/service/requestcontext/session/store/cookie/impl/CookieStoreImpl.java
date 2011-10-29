@@ -41,12 +41,12 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ½«Session×´Ì¬±£´æÔÚcookieÖĞ¡£
+ * å°†SessionçŠ¶æ€ä¿å­˜åœ¨cookieä¸­ã€‚
  * <ul>
- * <li>½«sessionÊı¾İÓÃ<code>SessionEncoder</code>±àÂë³É×Ö·û´®¡£</li>
- * <li>½«×Ö·û´®Êı¾İ·Ö¶Î±£´æÔÚcookieÖĞ£º<code>cookieName0</code>£¬<code>cookieName1</code>¡­¡­
- * <code>cookieNameN</code>¡£</li>
- * <li>¿ÉÑ¡Éú³Échecksum cookie£º<code>cookieNamesum</code>¡£
+ * <li>å°†sessionæ•°æ®ç”¨<code>SessionEncoder</code>ç¼–ç æˆå­—ç¬¦ä¸²ã€‚</li>
+ * <li>å°†å­—ç¬¦ä¸²æ•°æ®åˆ†æ®µä¿å­˜åœ¨cookieä¸­ï¼š<code>cookieName0</code>ï¼Œ<code>cookieName1</code>â€¦â€¦
+ * <code>cookieNameN</code>ã€‚</li>
+ * <li>å¯é€‰ç”Ÿæˆchecksum cookieï¼š<code>cookieNamesum</code>ã€‚
  * </ul>
  * 
  * @author Michael Zhou
@@ -83,18 +83,18 @@ public class CookieStoreImpl extends AbstractCookieStore {
 
     @Override
     protected void init() {
-        // ¸ù¾İcookieÃû³Æ£¬È¡µÃcookieÃû³ÆµÄÕıÔò±í´ïÊ½
+        // æ ¹æ®cookieåç§°ï¼Œå–å¾—cookieåç§°çš„æ­£åˆ™è¡¨è¾¾å¼
         namePattern = Pattern.compile(getName() + NAME_PATTERN_SUFFIX);
 
-        // È¡µÃcookie³¤¶ÈºÍ¸öÊıµÄÏŞÖÆ
+        // å–å¾—cookieé•¿åº¦å’Œä¸ªæ•°çš„é™åˆ¶
         maxLength = defaultIfNull(maxLength, MAX_LENGTH_DEFAULT);
         maxCount = defaultIfNull(maxCount, MAX_COUNT_DEFAULT);
 
-        // È¡µÃcookie checksumµÄÉèÖÃ
+        // å–å¾—cookie checksumçš„è®¾ç½®
         checksum = defaultIfNull(checksum, CHECKSUM_DEFAULT);
         checksumName = getName() + "sum";
 
-        // È¡µÃcookie encoder
+        // å–å¾—cookie encoder
         if (isEmptyArray(encoders)) {
             encoders = new SessionEncoder[] { createDefaultSessionEncoder() };
         }
@@ -198,7 +198,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
                 writeCookie(storeContext.getSessionRequestContext().getResponse(), cookieNameWithIndex, cookieValue);
                 state.requestCookies.remove(cookieNameWithIndex);
 
-                // ´´½¨cookie checksum
+                // åˆ›å»ºcookie checksum
                 if (checksumBuf != null) {
                     if (checksumBuf.length() > 0) {
                         checksumBuf.append(CHECKSUM_SEPARATOR);
@@ -212,8 +212,8 @@ public class CookieStoreImpl extends AbstractCookieStore {
                 writeCookie(storeContext.getSessionRequestContext().getResponse(), cookieName, null);
             }
 
-            // Èç¹ûrequestÖĞ°üÀ¨cookie checksum£¬²¢ÇÒ´Ë´ÎcookieÎª¿Õ£¬ÔòÇå³ıchecksum
-            // ·ñÔòÈç¹ûcookie checksum±»´ò¿ª£¬ÔòÉú³Échecksum²¢Ğ´Èëcookie
+            // å¦‚æœrequestä¸­åŒ…æ‹¬cookie checksumï¼Œå¹¶ä¸”æ­¤æ¬¡cookieä¸ºç©ºï¼Œåˆ™æ¸…é™¤checksum
+            // å¦åˆ™å¦‚æœcookie checksumè¢«æ‰“å¼€ï¼Œåˆ™ç”Ÿæˆchecksumå¹¶å†™å…¥cookie
             if (checksumBuf == null || checksumBuf.length() <= 0) {
                 if (state.hasChecksum) {
                     writeCookie(storeContext.getSessionRequestContext().getResponse(), checksumName, null);
@@ -225,7 +225,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
     }
 
     /**
-     * È¡µÃcookie storeµÄ×´Ì¬¡£
+     * å–å¾—cookie storeçš„çŠ¶æ€ã€‚
      */
     private State getState(StoreContext storeContext) {
         State state = (State) storeContext.getState();
@@ -240,7 +240,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
     }
 
     /**
-     * È·±£cookie±»×°ÔØ¡£
+     * ç¡®ä¿cookieè¢«è£…è½½ã€‚
      */
     private void ensureCookieLoading(State state, HttpServletRequest request, StoreContext storeContext) {
         if (state.cookieLoaded) {
@@ -249,24 +249,24 @@ public class CookieStoreImpl extends AbstractCookieStore {
 
         state.cookieLoaded = true;
 
-        // ¶ÁÈ¡cookies
+        // è¯»å–cookies
         CookiesInfo cookiesInfo = readCookies(request);
 
         state.requestCookies = cookiesInfo.requestCookies;
         state.hasChecksum = cookiesInfo.hasChecksum;
 
-        // ÑéÖ¤cookies
+        // éªŒè¯cookies
         state.checksumValid = validateCookies(cookiesInfo.cookieList, cookiesInfo.checksumList);
 
-        // ºÏ²¢cookies¡¢trimToNull
+        // åˆå¹¶cookiesã€trimToNull
         state.mergedCookieValue = mergeCookies(cookiesInfo.cookieList, cookiesInfo.checksumList);
 
-        // ÒÀ´ÎÊ¹ÓÃËùÓĞencoders£¬ÊÔ×Å¶ÔcookieState½âÂë£¬Èç¹ûÊ§°Ü£¬Ôò·µ»Ø¿Õ±í
+        // ä¾æ¬¡ä½¿ç”¨æ‰€æœ‰encodersï¼Œè¯•ç€å¯¹cookieStateè§£ç ï¼Œå¦‚æœå¤±è´¥ï¼Œåˆ™è¿”å›ç©ºè¡¨
         state.attributes = decodeCookieValue(state.mergedCookieValue, storeContext);
     }
 
     /**
-     * ¶ÁÈ¡cookies¡£
+     * è¯»å–cookiesã€‚
      */
     private CookiesInfo readCookies(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
@@ -282,7 +282,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
         cookiesInfo.hasChecksum = false;
         cookiesInfo.checksumList = null;
 
-        // É¨Ãècookie¡£
+        // æ‰«æcookieã€‚
         for (Cookie cookie : cookies) {
             String cookieName = cookie.getName();
 
@@ -303,7 +303,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
             }
         }
 
-        // ÅÅĞòcookie¡£
+        // æ’åºcookieã€‚
         Collections.sort(cookiesInfo.cookieList);
 
         if (log.isDebugEnabled()) {
@@ -337,7 +337,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
     }
 
     /**
-     * ¼ì²écookies¡£
+     * æ£€æŸ¥cookiesã€‚
      */
     private boolean validateCookies(List<CookieInfo> cookieList, String[] checksumList) {
         int checksumListSize = 0;
@@ -349,7 +349,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
 
         for (CookieInfo cookieInfo : cookieList) {
             if (cookieInfo.index != index || cookieInfo.value == null) {
-                break; // cookieÖĞµÄĞòºÅ±»ÖĞ¶Ï£¬ÔòÍË³ö¡£µ«ÎªÁËÈİ´í£¬ÈÔÈ»¿´×÷ºÏ·¨µÄcookies£¬Ö»¼ìÑéÇ°ÃæÁ¬ĞøµÄ²¿·Ö¡£
+                break; // cookieä¸­çš„åºå·è¢«ä¸­æ–­ï¼Œåˆ™é€€å‡ºã€‚ä½†ä¸ºäº†å®¹é”™ï¼Œä»ç„¶çœ‹ä½œåˆæ³•çš„cookiesï¼Œåªæ£€éªŒå‰é¢è¿ç»­çš„éƒ¨åˆ†ã€‚
             }
 
             if (index < checksumListSize) {
@@ -377,7 +377,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
     }
 
     /**
-     * ¼ì²éºÍºÏ²¢cookies¡£
+     * æ£€æŸ¥å’Œåˆå¹¶cookiesã€‚
      */
     private String mergeCookies(List<CookieInfo> cookieList, String[] checksumList) {
         StringBuilder buf = new StringBuilder();
@@ -385,7 +385,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
 
         for (CookieInfo cookieInfo : cookieList) {
             if (cookieInfo.index != index || cookieInfo.value == null) {
-                break; // cookieÖĞµÄĞòºÅ±»ÖĞ¶Ï£¬ÔòÍË³ö¡£µ«ÎªÁËÈİ´í£¬ÈÔÈ»¿´×÷ºÏ·¨µÄcookies£¬Ö»¼ìÑéÇ°ÃæÁ¬ĞøµÄ²¿·Ö¡£
+                break; // cookieä¸­çš„åºå·è¢«ä¸­æ–­ï¼Œåˆ™é€€å‡ºã€‚ä½†ä¸ºäº†å®¹é”™ï¼Œä»ç„¶çœ‹ä½œåˆæ³•çš„cookiesï¼Œåªæ£€éªŒå‰é¢è¿ç»­çš„éƒ¨åˆ†ã€‚
             }
 
             buf.append(cookieInfo.value);
@@ -423,7 +423,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
             attrs = createHashMap();
         }
 
-        // Èç¹ûÊ§°Ü£¬¼ÇÂ¼ÈÕÖ¾
+        // å¦‚æœå¤±è´¥ï¼Œè®°å½•æ—¥å¿—
         if (attrs.isEmpty() && encoderExceptions != null) {
             if (log.isWarnEnabled()) {
                 ToStringBuilder buf = new ToStringBuilder();
@@ -466,7 +466,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
     }
 
     /**
-     * ÓÃÀ´±£´æËùÓĞcookiesµÄĞÅÏ¢¡£
+     * ç”¨æ¥ä¿å­˜æ‰€æœ‰cookiesçš„ä¿¡æ¯ã€‚
      */
     private static class CookiesInfo {
         private Map<String, CookieInfo> requestCookies;
@@ -476,7 +476,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
     }
 
     /**
-     * ´æ·ÅcookieµÄ×´Ì¬¡£
+     * å­˜æ”¾cookieçš„çŠ¶æ€ã€‚
      */
     private class State {
         private boolean cookieLoaded;
@@ -491,7 +491,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
     }
 
     /**
-     * ±£´æÒ»¸öcookieµÄĞÅÏ¢¡£
+     * ä¿å­˜ä¸€ä¸ªcookieçš„ä¿¡æ¯ã€‚
      */
     private static class CookieInfo implements Comparable<CookieInfo> {
         public final int index;

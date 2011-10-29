@@ -23,15 +23,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * ÓÃÀ´±êÊ¶Ò»¸ö²ÎÊı£¬Ê¹Ö®´Órequest parametersÖĞÈ¡µÃÖµ¡£
+ * ç”¨æ¥æ ‡è¯†ä¸€ä¸ªå‚æ•°ï¼Œä½¿ä¹‹ä»request parametersä¸­å–å¾—å€¼ã€‚
  * <p>
- * ÓÃ·¨ÈçÏÂ£º
+ * ç”¨æ³•å¦‚ä¸‹ï¼š
  * </p>
  * <ol>
- * <li>½öÖ¸¶¨²ÎÊıÃû³Æ£º<code>@Param("name")</code>¡£</li>
- * <li>Ö¸¶¨²ÎÊıÃû³Æ£¬ÒÔ¼°µ¥¸öÄ¬ÈÏÖµ£º<code>@Param(name="name", defaultValue="123")</code>¡£</li>
- * <li>Ö¸¶¨²ÎÊıÃû³Æ£¬ÒÔ¼°Ò»×éÄ¬ÈÏÖµ£º
- * <code>@Param(name="name", defaultValues={"1", "2", "3"})</code>¡£</li>
+ * <li>ä»…æŒ‡å®šå‚æ•°åç§°ï¼š<code>@Param("name")</code>ã€‚</li>
+ * <li>æŒ‡å®šå‚æ•°åç§°ï¼Œä»¥åŠå•ä¸ªé»˜è®¤å€¼ï¼š<code>@Param(name="name", defaultValue="123")</code>ã€‚</li>
+ * <li>æŒ‡å®šå‚æ•°åç§°ï¼Œä»¥åŠä¸€ç»„é»˜è®¤å€¼ï¼š
+ * <code>@Param(name="name", defaultValues={"1", "2", "3"})</code>ã€‚</li>
  * </ol>
  * 
  * @author Michael Zhou
@@ -40,28 +40,28 @@ import java.lang.annotation.Target;
 @Target({ ElementType.PARAMETER })
 public @interface Param {
     /**
-     * ÓÃÓÚ±êÊ¶paramµÄÃû³Æ¡£
+     * ç”¨äºæ ‡è¯†paramçš„åç§°ã€‚
      * <p>
-     * ´Ë²ÎÊıÓÃÓÚ¼ò»¯µÄĞÎÊ½£º<code>@Param("paramName")</code>¡£
+     * æ­¤å‚æ•°ç”¨äºç®€åŒ–çš„å½¢å¼ï¼š<code>@Param("paramName")</code>ã€‚
      * </p>
      */
     String value() default "";
 
     /**
-     * ÓÃÓÚ±êÊ¶paramµÄÃû³Æ¡£
+     * ç”¨äºæ ‡è¯†paramçš„åç§°ã€‚
      * <p>
-     * ´Ë²ÎÊıÓÃÓÚÓĞ¶à¸ö²ÎÊıµÄĞÎÊ½£º<code>@Param(name="paramName", defaultValue="123")</code>¡£
+     * æ­¤å‚æ•°ç”¨äºæœ‰å¤šä¸ªå‚æ•°çš„å½¢å¼ï¼š<code>@Param(name="paramName", defaultValue="123")</code>ã€‚
      * </p>
      */
     String name() default "";
 
     /**
-     * Ö¸¶¨²ÎÊıµÄÄ¬ÈÏÖµ¡£
+     * æŒ‡å®šå‚æ•°çš„é»˜è®¤å€¼ã€‚
      */
     String defaultValue() default "";
 
     /**
-     * Ö¸¶¨²ÎÊıµÄÄ¬ÈÏÖµÊı×é¡£
+     * æŒ‡å®šå‚æ•°çš„é»˜è®¤å€¼æ•°ç»„ã€‚
      */
     String[] defaultValues() default {};
 }

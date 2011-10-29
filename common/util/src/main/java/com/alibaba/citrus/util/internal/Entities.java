@@ -24,9 +24,9 @@ import java.util.Map;
 import com.alibaba.citrus.util.collection.IntHashMap;
 
 /**
- * ´ú±íHTMLºÍXMLµÄÊµÌå¶¨Òå¡£
+ * ä»£è¡¨HTMLå’ŒXMLçš„å®ä½“å®šä¹‰ã€‚
  * <p>
- * ¸ÃÀà²ÉÓÃÒ»¸öhash±íºÍlookup²éÕÒ±íÏà½áºÏµÄËã·¨£¬È·±£ËÑË÷entitiesµÄĞÔÄÜ¡£
+ * è¯¥ç±»é‡‡ç”¨ä¸€ä¸ªhashè¡¨å’ŒlookupæŸ¥æ‰¾è¡¨ç›¸ç»“åˆçš„ç®—æ³•ï¼Œç¡®ä¿æœç´¢entitiesçš„æ€§èƒ½ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -43,18 +43,18 @@ import com.alibaba.citrus.util.collection.IntHashMap;
  *      4.01 Code positions</a>
  */
 public class Entities {
-    /** »ù±¾ÊµÌå¶¨Òå¡£ */
+    /** åŸºæœ¬å®ä½“å®šä¹‰ã€‚ */
     private static final String[][] BASIC_SET = { { "quot", "34" }, // " - double-quote
             { "amp", "38" }, // & - ampersand
             { "lt", "60" }, // < - less-than
             { "gt", "62" }, // > - greater-than
     };
 
-    /** XMLÊ¡ÂÔÓï¡£ */
+    /** XMLçœç•¥è¯­ã€‚ */
     private static final String[][] APOS_SET = { { "apos", "39" }, // XML apostrophe
     };
 
-    /** 8859-1ÊµÌå¶¨Òå¡£ */
+    /** 8859-1å®ä½“å®šä¹‰ã€‚ */
     private static final String[][] ISO_8859_1_SET = { { "nbsp", "160" }, // non-breaking space
             { "iexcl", "161" }, // inverted exclamation mark
             { "cent", "162" }, // cent sign
@@ -153,7 +153,7 @@ public class Entities {
             { "yuml", "255" }, // ? - lowercase y, umlaut
     };
 
-    /** HTML 4.0ÊµÌå¶¨Òå£¨http://www.w3.org/TR/REC-html40/sgml/entities.html£©¡£ */
+    /** HTML 4.0å®ä½“å®šä¹‰ï¼ˆhttp://www.w3.org/TR/REC-html40/sgml/entities.htmlï¼‰ã€‚ */
     private static final String[][] HTML40_SET = { { "fnof", "402" }, // latin small f with hook = function= florin, U+0192 ISOtech 
             { "Alpha", "913" }, // greek capital letter alpha, U+0391 
             { "Beta", "914" }, // greek capital letter beta, U+0392 
@@ -307,20 +307,20 @@ public class Entities {
             { "euro", "8364" }, // euro sign, U+20AC NEW 
     };
 
-    /** XML¹æ·¶¶¨ÒåµÄÊµÌå¼¯¡£ */
+    /** XMLè§„èŒƒå®šä¹‰çš„å®ä½“é›†ã€‚ */
     public static final Entities XML;
 
-    /** HTML 3.2¹æ·¶¶¨ÒåµÄÊµÌå¼¯¡£ */
+    /** HTML 3.2è§„èŒƒå®šä¹‰çš„å®ä½“é›†ã€‚ */
     public static final Entities HTML32;
 
-    /** HTML 4.0¹æ·¶¶¨ÒåµÄÊµÌå¼¯¡£ */
+    /** HTML 4.0è§„èŒƒå®šä¹‰çš„å®ä½“é›†ã€‚ */
     public static final Entities HTML40;
 
-    /** HTML 4.0¹æ·¶¶¨ÒåµÄÊµÌå¼¯£¬¼ÓÉÏ¶Ôµ¥ÒıºÅµÄ×ªÒå£¬ÒÔÔö¼ÓHTML°²È«ĞÔ¡£ */
+    /** HTML 4.0è§„èŒƒå®šä¹‰çš„å®ä½“é›†ï¼ŒåŠ ä¸Šå¯¹å•å¼•å·çš„è½¬ä¹‰ï¼Œä»¥å¢åŠ HTMLå®‰å…¨æ€§ã€‚ */
     public static final Entities HTML40_MODIFIED;
 
     /**
-     * ³õÊ¼»¯Ô¤¶¨ÒåµÄÊµÌå¼¯¡£
+     * åˆå§‹åŒ–é¢„å®šä¹‰çš„å®ä½“é›†ã€‚
      */
     static {
         XML = new Entities();
@@ -340,7 +340,7 @@ public class Entities {
         HTML40_MODIFIED.addEntity("#39", 39);
     }
 
-    /** ¿ìËÙ²éÕÒ±íµÄ´óĞ¡¡£ */
+    /** å¿«é€ŸæŸ¥æ‰¾è¡¨çš„å¤§å°ã€‚ */
     private static final int LOOKUP_TABLE_SIZE = 256;
 
     private Map<String, Integer> entityNameToValue = createHashMap();
@@ -351,7 +351,7 @@ public class Entities {
     }
 
     /**
-     * ¸´ÖÆentities¡£
+     * å¤åˆ¶entitiesã€‚
      */
     public Entities(Entities entities) {
         for (Map.Entry<String, Integer> entry : entities.entityNameToValue.entrySet()) {
@@ -360,9 +360,9 @@ public class Entities {
     }
 
     /**
-     * Ìí¼ÓÒ»×éentities¡£
+     * æ·»åŠ ä¸€ç»„entitiesã€‚
      * 
-     * @param entitySet entity¶¨ÒåÊı×é
+     * @param entitySet entityå®šä¹‰æ•°ç»„
      */
     public void addEntities(String[][] entitySet) {
         for (int i = 0; i < entitySet.length; ++i) {
@@ -371,30 +371,30 @@ public class Entities {
     }
 
     /**
-     * Ìí¼ÓÒ»¸öentity¡£
+     * æ·»åŠ ä¸€ä¸ªentityã€‚
      * 
-     * @param name entityÃû³Æ
-     * @param value entityÖµ
+     * @param name entityåç§°
+     * @param value entityå€¼
      */
     public void addEntity(String name, int value) {
         entityNameToValue.put(name, new Integer(value));
         entityValueToName.put(value, name);
 
-        // ¸üĞÂ²éÕÒ±í
+        // æ›´æ–°æŸ¥æ‰¾è¡¨
         if (value < LOOKUP_TABLE_SIZE && lookupTable != null) {
             lookupTable[value] = name;
         }
     }
 
     /**
-     * È¡µÃÖ¸¶¨Öµ¶ÔÓ¦µÄentityÃû³Æ¡£
+     * å–å¾—æŒ‡å®šå€¼å¯¹åº”çš„entityåç§°ã€‚
      * 
-     * @param value entityµÄÖµ
-     * @return entityµÄÃû³Æ
+     * @param value entityçš„å€¼
+     * @return entityçš„åç§°
      */
     public String getEntityName(int value) {
         if (value < LOOKUP_TABLE_SIZE) {
-            // ´´½¨¿ìËÙ²éÕÒ±í
+            // åˆ›å»ºå¿«é€ŸæŸ¥æ‰¾è¡¨
             if (lookupTable == null) {
                 lookupTable = new String[LOOKUP_TABLE_SIZE];
 
@@ -410,10 +410,10 @@ public class Entities {
     }
 
     /**
-     * È¡µÃÖ¸¶¨entityÃû³Æ¶ÔÓ¦µÄentityÖµ¡£
+     * å–å¾—æŒ‡å®šentityåç§°å¯¹åº”çš„entityå€¼ã€‚
      * 
-     * @param name entityµÄÃû³Æ
-     * @return entityµÄÖµ
+     * @param name entityçš„åç§°
+     * @return entityçš„å€¼
      */
     public int getEntityValue(String name) {
         Object value = entityNameToValue.get(name);

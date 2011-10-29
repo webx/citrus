@@ -18,13 +18,13 @@
 package com.alibaba.citrus.service.requestcontext.rewrite;
 
 /**
- * ´ú±íÒ»¸ö´¦ÀírewriteÌæ»»ÊÂ¼şµÄ´¦ÀíÆ÷¡£
+ * ä»£è¡¨ä¸€ä¸ªå¤„ç†rewriteæ›¿æ¢äº‹ä»¶çš„å¤„ç†å™¨ã€‚
  * 
  * @author Michael Zhou
  */
 public interface RewriteSubstitutionHandler {
     /**
-     * ´¦Àí³ÌĞòÓĞ»ú»á¿ÉÒÔĞŞ¸ÄpathºÍ²ÎÊı¡£
+     * å¤„ç†ç¨‹åºæœ‰æœºä¼šå¯ä»¥ä¿®æ”¹pathå’Œå‚æ•°ã€‚
      */
     void postSubstitution(RewriteSubstitutionContext context);
 }

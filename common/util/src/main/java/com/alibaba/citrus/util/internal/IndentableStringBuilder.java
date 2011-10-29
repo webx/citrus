@@ -25,7 +25,7 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.util.ArrayList;
 
 /**
- * Ö§³Ö·Ö¼¶Ëõ½øµÄstring builder¡£
+ * æ”¯æŒåˆ†çº§ç¼©è¿›çš„string builderã€‚
  * 
  * @author Michael Zhou
  */
@@ -34,8 +34,8 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
     private final int defaultIndent;
     private int indentLevel;
     private int quoteLevel;
-    private boolean lazyAppendNewLine; // ÍÆ³ÙÊä³ö»»ĞĞ£¬ÍÆ³Ùµ½ÏÂÒ»¸ö×Ö·û±»Êä³öÇ°
-    private boolean lazyStartHangingIndent; // ÍÆ³ÙÆô¶¯Ëõ½ø£¬ÍÆ³Ùµ½ÏÂÒ»¸ö»»ĞĞºó»òÏÂÒ»¸östart()¡£ÆäĞ§¹ûÎªĞü¹ÒËõ½ø
+    private boolean lazyAppendNewLine; // æ¨è¿Ÿè¾“å‡ºæ¢è¡Œï¼Œæ¨è¿Ÿåˆ°ä¸‹ä¸€ä¸ªå­—ç¬¦è¢«è¾“å‡ºå‰
+    private boolean lazyStartHangingIndent; // æ¨è¿Ÿå¯åŠ¨ç¼©è¿›ï¼Œæ¨è¿Ÿåˆ°ä¸‹ä¸€ä¸ªæ¢è¡Œåæˆ–ä¸‹ä¸€ä¸ªstart()ã€‚å…¶æ•ˆæœä¸ºæ‚¬æŒ‚ç¼©è¿›
     private int hangingIndent;
 
     public IndentableStringBuilder() {
@@ -59,7 +59,7 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
     }
 
     /**
-     * ´Ë´¦ÊÕµ½µÄ×Ö·ûÖĞ£¬ËùÓĞ CR/LF/CRLF ¾ùÒÑ±»¹æ¸ñ»¯³ÉÍ³Ò»µÄLFÁË¡£
+     * æ­¤å¤„æ”¶åˆ°çš„å­—ç¬¦ä¸­ï¼Œæ‰€æœ‰ CR/LF/CRLF å‡å·²è¢«è§„æ ¼åŒ–æˆç»Ÿä¸€çš„LFäº†ã€‚
      */
     @Override
     protected void visit(char c) {
@@ -71,13 +71,13 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
             return;
         }
 
-        // ÔÚend quoteºó×·¼Ó»»ĞĞ
+        // åœ¨end quoteåè¿½åŠ æ¢è¡Œ
         if (!newLine && lazyAppendNewLine) {
             appendInternalNewLine();
             newLine = true;
         }
 
-        // Êä³öbegin quotes
+        // è¾“å‡ºbegin quotes
         for (; quoteLevel < indentLevel; quoteLevel++) {
             String beginQuote = indents.getBeginQuote(quoteLevel);
 
@@ -91,7 +91,7 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
                     appendIndent(quoteLevel);
                 } else {
                     if (!endsWith(" ")) {
-                        appendInternal(" "); // begin quoteÇ°¿ÕÒ»¸ñ
+                        appendInternal(" "); // begin quoteå‰ç©ºä¸€æ ¼
                     }
                 }
 
@@ -104,7 +104,7 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
 
         lazyAppendNewLine = false;
 
-        // Êä³ö×Ö·û
+        // è¾“å‡ºå­—ç¬¦
         if (c == LF) {
             appendInternalNewLine();
         } else {
@@ -117,28 +117,28 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
     }
 
     /**
-     * ´´½¨Ò»¼¶Ëõ½ø¡£
+     * åˆ›å»ºä¸€çº§ç¼©è¿›ã€‚
      */
     public IndentableStringBuilder start() {
         return start(null, null, -1);
     }
 
     /**
-     * ´´½¨Ò»¼¶Ëõ½ø¡£
+     * åˆ›å»ºä¸€çº§ç¼©è¿›ã€‚
      */
     public IndentableStringBuilder start(int indent) {
         return start(null, null, indent);
     }
 
     /**
-     * ´´½¨Ò»¼¶Ëõ½ø£¬Ê¹ÓÃÖ¸¶¨µÄÇ°ºóÀ¨»¡¡£
+     * åˆ›å»ºä¸€çº§ç¼©è¿›ï¼Œä½¿ç”¨æŒ‡å®šçš„å‰åæ‹¬å¼§ã€‚
      */
     public IndentableStringBuilder start(String beginQuote, String endQuote) {
         return start(beginQuote, endQuote, -1);
     }
 
     /**
-     * ´´½¨Ò»¼¶Ëõ½ø£¬Ê¹ÓÃÖ¸¶¨µÄÇ°ºóÀ¨»¡¡£
+     * åˆ›å»ºä¸€çº§ç¼©è¿›ï¼Œä½¿ç”¨æŒ‡å®šçš„å‰åæ‹¬å¼§ã€‚
      */
     public IndentableStringBuilder start(String beginQuote, String endQuote, int indent) {
         doStartHanglingIndentIfRequired();
@@ -148,14 +148,14 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
     }
 
     /**
-     * ´ÓÏÂÒ»¸ö»»ĞĞ»òstart()¿ªÊ¼Ğü¹ÒËõ½ø¡£
+     * ä»ä¸‹ä¸€ä¸ªæ¢è¡Œæˆ–start()å¼€å§‹æ‚¬æŒ‚ç¼©è¿›ã€‚
      */
     public IndentableStringBuilder startHangingIndent() {
         return startHangingIndent(0);
     }
 
     /**
-     * ´ÓÏÂÒ»¸ö»»ĞĞ»òstart()¿ªÊ¼Ğü¹ÒËõ½ø¡£
+     * ä»ä¸‹ä¸€ä¸ªæ¢è¡Œæˆ–start()å¼€å§‹æ‚¬æŒ‚ç¼©è¿›ã€‚
      */
     public IndentableStringBuilder startHangingIndent(int indentOffset) {
         doStartHanglingIndentIfRequired();
@@ -172,7 +172,7 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
     }
 
     /**
-     * È·±£Ğü¹ÒËõ½ø£¨Èç¹ûÓĞµÄ»°£©ÒÑ¾­Æô¶¯¡£
+     * ç¡®ä¿æ‚¬æŒ‚ç¼©è¿›ï¼ˆå¦‚æœæœ‰çš„è¯ï¼‰å·²ç»å¯åŠ¨ã€‚
      */
     private void doStartHanglingIndentIfRequired() {
         if (lazyStartHangingIndent) {
@@ -182,12 +182,12 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
     }
 
     /**
-     * ½áÊøÒ»¼¶Ëõ½ø¡£×¢Òâ£¬Êä³ö½á¹ûÖ®Ç°£¬ĞëÖÁÉÙµ÷ÓÃÒ»´Îend()£¬ÒÔÈ·±£×îºóµÄ»»ĞĞ¿ÉÒÔ±»Êä³ö¡£
+     * ç»“æŸä¸€çº§ç¼©è¿›ã€‚æ³¨æ„ï¼Œè¾“å‡ºç»“æœä¹‹å‰ï¼Œé¡»è‡³å°‘è°ƒç”¨ä¸€æ¬¡end()ï¼Œä»¥ç¡®ä¿æœ€åçš„æ¢è¡Œå¯ä»¥è¢«è¾“å‡ºã€‚
      */
     public IndentableStringBuilder end() {
         flush();
 
-        // ½áÊøÎ´·¢ÉúµÄĞü¹ÒËõ½ø
+        // ç»“æŸæœªå‘ç”Ÿçš„æ‚¬æŒ‚ç¼©è¿›
         if (lazyStartHangingIndent) {
             if (!endsWithNewLine()) {
                 lazyAppendNewLine = true;
@@ -197,7 +197,7 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
             return this;
         }
 
-        // ¶ÔÓÚ¸Õ¿ªÊ¼¾Í½áÊøµÄ£¬²»Êä³öend quote
+        // å¯¹äºåˆšå¼€å§‹å°±ç»“æŸçš„ï¼Œä¸è¾“å‡ºend quote
         if (indentLevel > quoteLevel) {
             indentLevel--;
         } else {
@@ -210,12 +210,12 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
                 String endQuote = indents.getEndQuote(indentLevel);
 
                 if (!isEmpty(endQuote)) {
-                    // È·±£end quoteÖ®Ç°»»ĞĞ
+                    // ç¡®ä¿end quoteä¹‹å‰æ¢è¡Œ
                     if (!endsWithNewLine()) {
                         appendInternalNewLine();
                     }
 
-                    // Êä³öend quote
+                    // è¾“å‡ºend quote
                     appendIndent(indentLevel);
                     appendInternal(endQuote);
                 }
@@ -230,14 +230,14 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
     }
 
     /**
-     * È¡µÃµ±Ç°Ëõ½øµÄÊıÁ¿¡£
+     * å–å¾—å½“å‰ç¼©è¿›çš„æ•°é‡ã€‚
      */
     public int currentIndent() {
         return indents.getCurrentIndent();
     }
 
     /**
-     * Èç¹ûindentÎ´Ö¸¶¨£¬ÔòÈ¡µÃÄ¬ÈÏindent¡£
+     * å¦‚æœindentæœªæŒ‡å®šï¼Œåˆ™å–å¾—é»˜è®¤indentã€‚
      */
     private int defaultIndent(int indent) {
         return indent <= 0 ? defaultIndent : indent;
@@ -252,7 +252,7 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
     }
 
     /**
-     * ´æ·ÅËõ½øĞÅÏ¢µÄÕ»¡£
+     * å­˜æ”¾ç¼©è¿›ä¿¡æ¯çš„æ ˆã€‚
      */
     private class IndentStack extends ArrayList<Object> {
         private static final long serialVersionUID = -876139304840511103L;
@@ -283,7 +283,7 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
         }
 
         /**
-         * Èç¹ûµ±Ç°levelÒÀ¸½ÓÚºóÒ»¸ölevel£¬Ôò·µ»Øfalse¡£
+         * å¦‚æœå½“å‰levelä¾é™„äºåä¸€ä¸ªlevelï¼Œåˆ™è¿”å›falseã€‚
          */
         public boolean independent(int indentLevel) {
             if (indentLevel < 0 || indentLevel >= depth() - 1) {
@@ -330,7 +330,7 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
 }
 
 /**
- * ½«CR/LF/CRLFÍ³Ò»³ÉLFµÄstring builder¡£
+ * å°†CR/LF/CRLFç»Ÿä¸€æˆLFçš„string builderã€‚
  * 
  * @author Michael Zhou
  */
@@ -352,7 +352,7 @@ abstract class NormalizableStringBuilder<B extends NormalizableStringBuilder<B>>
     }
 
     /**
-     * Çå³ıËùÓĞÄÚÈİ¡£
+     * æ¸…é™¤æ‰€æœ‰å†…å®¹ã€‚
      */
     public void clear() {
         out.setLength(0);
@@ -361,28 +361,28 @@ abstract class NormalizableStringBuilder<B extends NormalizableStringBuilder<B>>
     }
 
     /**
-     * È¡µÃbufferÖĞÄÚÈİµÄ³¤¶È¡£
+     * å–å¾—bufferä¸­å†…å®¹çš„é•¿åº¦ã€‚
      */
     public final int length() {
         return out.length();
     }
 
     /**
-     * È¡µÃµ±Ç°ĞĞµÄ³¤¶È¡£
+     * å–å¾—å½“å‰è¡Œçš„é•¿åº¦ã€‚
      */
     public final int lineLength() {
         return out.length() - newLineStartIndex;
     }
 
     /**
-     * <code>Appendable</code>½Ó¿Ú·½·¨¡£
+     * <code>Appendable</code>æ¥å£æ–¹æ³•ã€‚
      */
     public final B append(CharSequence csq) {
         return append(csq, 0, csq.length());
     }
 
     /**
-     * <code>Appendable</code>½Ó¿Ú·½·¨¡£
+     * <code>Appendable</code>æ¥å£æ–¹æ³•ã€‚
      */
     public final B append(CharSequence csq, int start, int end) {
         for (int i = start; i < end; i++) {
@@ -393,10 +393,10 @@ abstract class NormalizableStringBuilder<B extends NormalizableStringBuilder<B>>
     }
 
     /**
-     * <code>Appendable</code>½Ó¿Ú·½·¨¡£
+     * <code>Appendable</code>æ¥å£æ–¹æ³•ã€‚
      */
     public final B append(char c) {
-        // ½« CR|LF|CRLF ×ª»¯³ÉÍ³Ò»µÄ LF
+        // å°† CR|LF|CRLF è½¬åŒ–æˆç»Ÿä¸€çš„ LF
         switch (readAheadBuffer) {
             case NONE:
                 switch (c) {
@@ -447,28 +447,28 @@ abstract class NormalizableStringBuilder<B extends NormalizableStringBuilder<B>>
     }
 
     /**
-     * ×ÓÀà¸²¸Ç´Ë·½·¨£¬ÒÔ±ã½ÓÊÕËùÓĞ×Ö·û¡£ÆäÖĞ£¬ËùÓĞ CR/LF/CRLF ¾ùÒÑ±»¹æ¸ñ»¯³ÉÍ³Ò»µÄLFÁË¡£
+     * å­ç±»è¦†ç›–æ­¤æ–¹æ³•ï¼Œä»¥ä¾¿æ¥æ”¶æ‰€æœ‰å­—ç¬¦ã€‚å…¶ä¸­ï¼Œæ‰€æœ‰ CR/LF/CRLF å‡å·²è¢«è§„æ ¼åŒ–æˆç»Ÿä¸€çš„LFäº†ã€‚
      */
     protected abstract void visit(char c);
 
     /**
-     * ×ÓÀàÍ¨¹ı´Ë·½·¨ÏòÄÚ²¿bufferÖĞÌí¼ÓÄÚÈİ¡£
+     * å­ç±»é€šè¿‡æ­¤æ–¹æ³•å‘å†…éƒ¨bufferä¸­æ·»åŠ å†…å®¹ã€‚
      */
     protected final void appendInternal(String s) {
         out.append(s);
     }
 
     /**
-     * ×ÓÀàÍ¨¹ı´Ë·½·¨ÏòÄÚ²¿bufferÖĞÌí¼ÓÄÚÈİ¡£
+     * å­ç±»é€šè¿‡æ­¤æ–¹æ³•å‘å†…éƒ¨bufferä¸­æ·»åŠ å†…å®¹ã€‚
      */
     protected final void appendInternal(char c) {
         out.append(c);
     }
 
     /**
-     * ×ÓÀàÍ¨¹ı´Ë·½·¨ÏòÄÚ²¿bufferÖĞÌí¼Ó»»ĞĞ¡£
+     * å­ç±»é€šè¿‡æ­¤æ–¹æ³•å‘å†…éƒ¨bufferä¸­æ·»åŠ æ¢è¡Œã€‚
      * <p>
-     * ×ÓÀà±ØĞëÍ¨¹ı´Ë·½·¨À´»»ĞĞ£¬·ñÔò<code>newLineStartIndex</code>»á²»ÕıÈ·¡£
+     * å­ç±»å¿…é¡»é€šè¿‡æ­¤æ–¹æ³•æ¥æ¢è¡Œï¼Œå¦åˆ™<code>newLineStartIndex</code>ä¼šä¸æ­£ç¡®ã€‚
      * </p>
      */
     protected final void appendInternalNewLine() {
@@ -477,7 +477,7 @@ abstract class NormalizableStringBuilder<B extends NormalizableStringBuilder<B>>
     }
 
     /**
-     * ÅĞ¶ÏbufÊÇ·ñÒÔÖ¸¶¨×Ö·û´®½áÎ²¡£
+     * åˆ¤æ–­bufæ˜¯å¦ä»¥æŒ‡å®šå­—ç¬¦ä¸²ç»“å°¾ã€‚
      */
     public final boolean endsWith(String testStr) {
         if (testStr == null) {
@@ -503,7 +503,7 @@ abstract class NormalizableStringBuilder<B extends NormalizableStringBuilder<B>>
     }
 
     /**
-     * ÅĞ¶ÏoutÊÇ·ñÒÔ»»ĞĞ½áÎ²£¬»òÕßÊÇ¿Õbuffer¡£
+     * åˆ¤æ–­outæ˜¯å¦ä»¥æ¢è¡Œç»“å°¾ï¼Œæˆ–è€…æ˜¯ç©ºbufferã€‚
      */
     public final boolean endsWithNewLine() {
         return out.length() == 0 || endsWith(newLine);
@@ -516,7 +516,7 @@ abstract class NormalizableStringBuilder<B extends NormalizableStringBuilder<B>>
     }
 
     /**
-     * È·±£×îºóÒ»¸ö»»ĞĞ±»Êä³ö¡£
+     * ç¡®ä¿æœ€åä¸€ä¸ªæ¢è¡Œè¢«è¾“å‡ºã€‚
      */
     public final void flush() {
         if (readAheadBuffer == CR) {

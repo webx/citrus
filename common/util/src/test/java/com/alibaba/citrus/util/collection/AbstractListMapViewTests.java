@@ -30,8 +30,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>ListMap.entryList()</code>, <code>ListMap.keyList()</code>,
- * <code>ListMap.valueList()</code> ·µ»ØµÄlist view¶ÔÏó.
+ * æµ‹è¯•<code>ListMap.entryList()</code>, <code>ListMap.keyList()</code>,
+ * <code>ListMap.valueList()</code> è¿”å›çš„list viewå¯¹è±¡.
  * 
  * @author Michael Zhou
  */
@@ -45,20 +45,20 @@ public abstract class AbstractListMapViewTests extends AbstractTests {
 
     @Before
     public void init() {
-        // map1²âÊÔÒ»°ãÇé¿ö.
+        // map1æµ‹è¯•ä¸€èˆ¬æƒ…å†µ.
         map1 = createListMap();
         map1.put("aaa", "111");
         map1.put("bbb", "222");
         map1.put("ccc", "333");
         view1 = getView(map1);
 
-        // map2²âÊÔkeyºÍvalueÎªnullµÄÇé¿ö.
+        // map2æµ‹è¯•keyå’Œvalueä¸ºnullçš„æƒ…å†µ.
         map2 = createListMap();
         map2.put(null, "111");
         map2.put("aaa", null);
         view2 = getView(map2);
 
-        // map3Îª¿Õ.
+        // map3ä¸ºç©º.
         map3 = createListMap();
         view3 = getView(map3);
     }
@@ -305,7 +305,7 @@ public abstract class AbstractListMapViewTests extends AbstractTests {
         i = (ListIterator<Object>) view2.listIterator();
         i.next();
 
-        // ´Ë²Ù×÷Ö»ÓĞvalueListÖ§³Ö.
+        // æ­¤æ“ä½œåªæœ‰valueListæ”¯æŒ.
         try {
             i.set(newItem("hello", "world"));
             assertEquals(newItem("hello", "world"), map2.get(0));
@@ -319,7 +319,7 @@ public abstract class AbstractListMapViewTests extends AbstractTests {
         Iterator<Object> i;
         ListIterator<Object> j;
 
-        // ĞŞ¸ÄmapÒÔºó, ÊÔÍ¼i.next()µ¼ÖÂÒì³£.
+        // ä¿®æ”¹mapä»¥å, è¯•å›¾i.next()å¯¼è‡´å¼‚å¸¸.
         i = (Iterator<Object>) view1.iterator();
         map1.put("aaa+aaa", "111+111");
 
@@ -329,7 +329,7 @@ public abstract class AbstractListMapViewTests extends AbstractTests {
         } catch (ConcurrentModificationException e) {
         }
 
-        // ĞŞ¸ÄmapÒÔºó, ÊÔÍ¼i.remove()µ¼ÖÂÒì³£.
+        // ä¿®æ”¹mapä»¥å, è¯•å›¾i.remove()å¯¼è‡´å¼‚å¸¸.
         j = (ListIterator<Object>) view2.listIterator();
         j.next();
         map2.put("aaa+aaa", "111+111");
@@ -344,21 +344,21 @@ public abstract class AbstractListMapViewTests extends AbstractTests {
     protected abstract ListMap<Object, Object> createListMap();
 
     /**
-     * ´Ó<code>ListMap</code>ÖĞÈ¡µÃview. ¿ÉÄÜÊÇ<code>ListMap.entryList()</code>,
-     * <code>ListMap.keyList()</code> ºÍ<code>ListMap.valueList()</code>
-     * µÈ·½·¨·µ»ØµÄ½á¹û.
+     * ä»<code>ListMap</code>ä¸­å–å¾—view. å¯èƒ½æ˜¯<code>ListMap.entryList()</code>,
+     * <code>ListMap.keyList()</code> å’Œ<code>ListMap.valueList()</code>
+     * ç­‰æ–¹æ³•è¿”å›çš„ç»“æœ.
      * 
-     * @param map ±»²âÊÔµÄviewËùÊôµÄ<code>ListMap</code>
+     * @param map è¢«æµ‹è¯•çš„viewæ‰€å±çš„<code>ListMap</code>
      * @return view
      */
     protected abstract List<?> getView(ListMap<Object, Object> map);
 
     /**
-     * ´´½¨Ò»¸öºÍViewÖĞ´æ·ÅµÄ¶ÔÏó¿É±È½ÏµÄ¶ÔÏó.
+     * åˆ›å»ºä¸€ä¸ªå’ŒViewä¸­å­˜æ”¾çš„å¯¹è±¡å¯æ¯”è¾ƒçš„å¯¹è±¡.
      * 
      * @param key key
      * @param value value
-     * @return ¶ÔÏó
+     * @return å¯¹è±¡
      */
     protected abstract Object createItem(Object key, Object value);
 }

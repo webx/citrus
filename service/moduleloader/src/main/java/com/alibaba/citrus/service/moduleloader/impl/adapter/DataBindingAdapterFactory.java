@@ -27,9 +27,9 @@ import com.alibaba.citrus.service.moduleloader.Module;
 import com.alibaba.citrus.service.moduleloader.ModuleInfo;
 
 /**
- * µ÷ÓÃ<code>execute()</code>·½·¨£¬²»ÒªÇóÊµÏÖ<code>Module</code>½Ó¿Ú¡£
+ * è°ƒç”¨<code>execute()</code>æ–¹æ³•ï¼Œä¸è¦æ±‚å®ç°<code>Module</code>æ¥å£ã€‚
  * <p>
- * Ö§³Ö°ó¶¨²ÎÊı£¬²Î¼û{@link DataResolverService}¡£
+ * æ”¯æŒç»‘å®šå‚æ•°ï¼Œå‚è§{@link DataResolverService}ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -44,7 +44,7 @@ public class DataBindingAdapterFactory extends AbstractDataBindingAdapterFactory
             FastClass fc = FastClass.create(moduleClass);
             FastMethod fm = fc.getMethod(executeMethod);
 
-            // ¶ÔÓÚaction£¬¿É±»¡°Ìø¹ı¡±Ö´ĞĞ¡£
+            // å¯¹äºactionï¼Œå¯è¢«â€œè·³è¿‡â€æ‰§è¡Œã€‚
             boolean skippable = "action".equalsIgnoreCase(type);
 
             return new DataBindingAdapter(moduleObject, getMethodInvoker(fm, moduleInfo, skippable));

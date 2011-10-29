@@ -27,7 +27,7 @@ import com.alibaba.citrus.expr.ExpressionParseException;
 import com.alibaba.citrus.expr.jexl.JexlExpressionFactory;
 
 /**
- * ´´½¨<code>CompositeExpression</code>µÄ¹¤³§¡£
+ * åˆ›å»º<code>CompositeExpression</code>çš„å·¥å‚ã€‚
  * 
  * @author Michael Zhou
  */
@@ -35,39 +35,39 @@ public class CompositeExpressionFactory implements ExpressionFactory {
     private ExpressionFactory factory;
 
     /**
-     * ´´½¨Ò»¸ö×éºÏ±í´ïÊ½µÄ¹¤³§£¬Ä¬ÈÏÊ¹ÓÃ<code>JexlExpressionFactory</code>À´½âÎö×Ó±í´ïÊ½¡£
+     * åˆ›å»ºä¸€ä¸ªç»„åˆè¡¨è¾¾å¼çš„å·¥å‚ï¼Œé»˜è®¤ä½¿ç”¨<code>JexlExpressionFactory</code>æ¥è§£æå­è¡¨è¾¾å¼ã€‚
      */
     public CompositeExpressionFactory() {
         this.factory = new JexlExpressionFactory();
     }
 
     /**
-     * ´´½¨Ò»¸ö×éºÏ±í´ïÊ½µÄ¹¤³§¡£
+     * åˆ›å»ºä¸€ä¸ªç»„åˆè¡¨è¾¾å¼çš„å·¥å‚ã€‚
      * 
-     * @param factory ´´½¨×éºÏ±í´ïÊ½ÖĞµÄ×Ó±í´ïÊ½µÄ¹¤³§
+     * @param factory åˆ›å»ºç»„åˆè¡¨è¾¾å¼ä¸­çš„å­è¡¨è¾¾å¼çš„å·¥å‚
      */
     public CompositeExpressionFactory(ExpressionFactory factory) {
         this.factory = factory;
     }
 
     /**
-     * ´´½¨±í´ïÊ½¡£
+     * åˆ›å»ºè¡¨è¾¾å¼ã€‚
      * <ul>
-     * <li>Èç¹û±í´ïÊ½ÖĞ²»°üº¬¡°<code>${...}</code>¡±£¬Ôò´´½¨<code>ConstantExpression</code>¡£</li>
-     * <li>Èç¹û±í´ïÊ½ÒÔ¡°<code>${</code>¡±¿ªÊ¼£¬²¢ÒÔ¡°<code>}</code>¡±½áÎ²£¬Ôòµ÷ÓÃÖ¸¶¨µÄ
-     * <code>ExpressionFactory</code>À´´´½¨·Ç×éºÏ±í´ïÊ½¡£</li>
-     * <li>Èç¹û±í´ïÊ½°üº¬¡°<code>${...}</code>¡±£¬µ«ÔÚ´ËÖ®Íâ»¹ÓĞ±ğµÄ×Ö·û£¬Ôò´´½¨
-     * <code>CompositeExpression</code>¡£</li>
+     * <li>å¦‚æœè¡¨è¾¾å¼ä¸­ä¸åŒ…å«â€œ<code>${...}</code>â€ï¼Œåˆ™åˆ›å»º<code>ConstantExpression</code>ã€‚</li>
+     * <li>å¦‚æœè¡¨è¾¾å¼ä»¥â€œ<code>${</code>â€å¼€å§‹ï¼Œå¹¶ä»¥â€œ<code>}</code>â€ç»“å°¾ï¼Œåˆ™è°ƒç”¨æŒ‡å®šçš„
+     * <code>ExpressionFactory</code>æ¥åˆ›å»ºéç»„åˆè¡¨è¾¾å¼ã€‚</li>
+     * <li>å¦‚æœè¡¨è¾¾å¼åŒ…å«â€œ<code>${...}</code>â€ï¼Œä½†åœ¨æ­¤ä¹‹å¤–è¿˜æœ‰åˆ«çš„å­—ç¬¦ï¼Œåˆ™åˆ›å»º
+     * <code>CompositeExpression</code>ã€‚</li>
      * </ul>
      * 
-     * @param expr ±í´ïÊ½×Ö·û´®
-     * @return ±í´ïÊ½
+     * @param expr è¡¨è¾¾å¼å­—ç¬¦ä¸²
+     * @return è¡¨è¾¾å¼
      */
     public Expression createExpression(String expr) throws ExpressionParseException {
         int length = expr.length();
         int startIndex = expr.indexOf("${");
 
-        // Èç¹û±í´ïÊ½²»°üº¬${}£¬Ôò´´½¨constant expression¡£
+        // å¦‚æœè¡¨è¾¾å¼ä¸åŒ…å«${}ï¼Œåˆ™åˆ›å»ºconstant expressionã€‚
         if (startIndex < 0) {
             return new ConstantExpression(expr);
         }
@@ -78,12 +78,12 @@ public class CompositeExpressionFactory implements ExpressionFactory {
             throw new ExpressionParseException("Missing '}' character at the end of expression: " + expr);
         }
 
-        // Èç¹û±í´ïÊ½ÒÔ${¿ªÍ·£¬ÒÔ}½áÎ²£¬ÔòÖ±½Óµ÷ÓÃfactoryÀ´´´½¨±í´ïÊ½¡£
+        // å¦‚æœè¡¨è¾¾å¼ä»¥${å¼€å¤´ï¼Œä»¥}ç»“å°¾ï¼Œåˆ™ç›´æ¥è°ƒç”¨factoryæ¥åˆ›å»ºè¡¨è¾¾å¼ã€‚
         if (startIndex == 0 && endIndex == length - 1) {
             return factory.createExpression(expr.substring(2, endIndex));
         }
 
-        // ´´½¨¸´ºÏµÄ±í´ïÊ½¡£
+        // åˆ›å»ºå¤åˆçš„è¡¨è¾¾å¼ã€‚
         List<Expression> expressions = createLinkedList();
         char ch = 0;
         int i = 0;

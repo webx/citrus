@@ -21,9 +21,9 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * ����һ��context��ͨ��context����ȡ�����е�tools��
+ * 代表一个context，通过context可以取得所有的tools。
  * <p>
- * ��ʵ�ְ����ӳټ��ص��߼���ֻ������Ҫʱ���Ż����ָ����tool��
+ * 该实现包含延迟加载的逻辑，只当有需要时，才会加载指定的tool。
  * </p>
  * 
  * @author Michael Zhou

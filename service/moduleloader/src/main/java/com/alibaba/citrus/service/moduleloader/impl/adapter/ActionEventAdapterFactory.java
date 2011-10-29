@@ -37,12 +37,12 @@ import com.alibaba.citrus.service.moduleloader.ModuleInfo;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
 
 /**
- * ÒÔÊÂ¼şµÄ·½Ê½µ÷ÓÃactionµÄ·½·¨¡£
+ * ä»¥äº‹ä»¶çš„æ–¹å¼è°ƒç”¨actionçš„æ–¹æ³•ã€‚
  * <p>
- * Èç¹ûsubmit°´Å¥ÒÔeventSubmit_doSomethingÃüÃû£¬²¢ÇÒactionÊµÏÖÖĞ°üº¬´Ë·½·¨£¬Ôòµ÷ÓÃÖ®¡£
+ * å¦‚æœsubmitæŒ‰é’®ä»¥eventSubmit_doSomethingå‘½åï¼Œå¹¶ä¸”actionå®ç°ä¸­åŒ…å«æ­¤æ–¹æ³•ï¼Œåˆ™è°ƒç”¨ä¹‹ã€‚
  * </p>
  * <p>
- * Ö§³Ö°ó¶¨²ÎÊı£¬²Î¼û{@link DataResolverService}¡£
+ * æ”¯æŒç»‘å®šå‚æ•°ï¼Œå‚è§{@link DataResolverService}ã€‚
  * </p>
  */
 public class ActionEventAdapterFactory extends AbstractDataBindingAdapterFactory implements ApplicationContextAware {
@@ -83,7 +83,7 @@ public class ActionEventAdapterFactory extends AbstractDataBindingAdapterFactory
                 moduleInfo, false), getMethodInvoker(postHanlder, moduleInfo, false));
 
         try {
-            // ×¢Èë²¢³õÊ¼»¯adapter£¨²»ÊÇ×¢ÈëmoduleObject£¬ºóÕßÈ¡¾öÓÚfactoryµÄÉèÖÃ£©
+            // æ³¨å…¥å¹¶åˆå§‹åŒ–adapterï¼ˆä¸æ˜¯æ³¨å…¥moduleObjectï¼Œåè€…å–å†³äºfactoryçš„è®¾ç½®ï¼‰
             autowireAndInitialize(adapter, context, AbstractBeanDefinition.AUTOWIRE_AUTODETECT, type + "." + name);
         } catch (Exception e) {
             throw new ModuleLoaderException("Failed to configure module adapter", e);
@@ -93,7 +93,7 @@ public class ActionEventAdapterFactory extends AbstractDataBindingAdapterFactory
     }
 
     /**
-     * È¡µÃÊÂ¼ş´¦Àí·½·¨¡£
+     * å–å¾—äº‹ä»¶å¤„ç†æ–¹æ³•ã€‚
      */
     private Map<String, Method> getEventHandlers(Class<?> moduleClass) {
         Map<String, Method> handlers = null;
@@ -125,7 +125,7 @@ public class ActionEventAdapterFactory extends AbstractDataBindingAdapterFactory
     }
 
     /**
-     * È¡µÃ·½·¨£¬Èç¹û²»´æÔÚ»ò²»·ûºÏÒªÇó£¬Ôò·µ»Ønull¡£
+     * å–å¾—æ–¹æ³•ï¼Œå¦‚æœä¸å­˜åœ¨æˆ–ä¸ç¬¦åˆè¦æ±‚ï¼Œåˆ™è¿”å›nullã€‚
      */
     private FastMethod getFastMethod(FastClass fc, String methodName) {
         Method method = getMethod(fc.getJavaClass(), methodName);

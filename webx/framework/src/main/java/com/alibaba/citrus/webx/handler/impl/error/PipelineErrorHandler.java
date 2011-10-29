@@ -24,7 +24,7 @@ import com.alibaba.citrus.webx.handler.RequestHandler;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 
 /**
- * ÓÃpipelineÀ´´¦ÀíÒì³£¡£
+ * ç”¨pipelineæ¥å¤„ç†å¼‚å¸¸ã€‚
  * 
  * @author Michael Zhou
  */

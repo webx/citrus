@@ -1,7 +1,7 @@
-Request Contexts µÄË³ĞòµÄËµÃ÷
+Request Contexts çš„é¡ºåºçš„è¯´æ˜
 ============================
 
-* ¼ÙÉèrequest contexts£ºrc1, rc2, rc3£¬ËüÃÇµÄË³ĞòÊÇÖ¸ËüÃÇÔÚÅäÖÃÎÄ¼şÖĞµÄË³Ğò£º
+* å‡è®¾request contextsï¼šrc1, rc2, rc3ï¼Œå®ƒä»¬çš„é¡ºåºæ˜¯æŒ‡å®ƒä»¬åœ¨é…ç½®æ–‡ä»¶ä¸­çš„é¡ºåºï¼š
 
   <request-contexts>
       <rc1/>
@@ -9,48 +9,48 @@ Request Contexts µÄË³ĞòµÄËµÃ÷
       <rc3/>
   </request-contexts>
 
-* ¼ÙÉèrequest contextsµÄË³ĞòÎªrc1, rc2, rc3£¬ÄÇÃ´£¬
-  1. prepareµÄË³ĞòÎªrc1, rc2, rc3
-  2. commitµÄË³ĞòÎªrc3, rc2, rc1
-  3. rc3 °üº¬(wrap) rc2£¬rc2 °üº¬(wrap) rc1£¬rc1 °üº¬(wrap) Ô­Ê¼µÄrequest/response/servletContext
+* å‡è®¾request contextsçš„é¡ºåºä¸ºrc1, rc2, rc3ï¼Œé‚£ä¹ˆï¼Œ
+  1. prepareçš„é¡ºåºä¸ºrc1, rc2, rc3
+  2. commitçš„é¡ºåºä¸ºrc3, rc2, rc1
+  3. rc3 åŒ…å«(wrap) rc2ï¼Œrc2 åŒ…å«(wrap) rc1ï¼Œrc1 åŒ…å«(wrap) åŸå§‹çš„request/response/servletContext
   
-* ¼ÙÉèrc2±ØĞëÔÚrc1Ö®ºó£¬ÒâË¼ÊÇ£ºrc1¡¢rc2²»±ØÍ¬Ê±´æÔÚ£¬µ«¼ÙÈçÍ¬Ê±´æÔÚÊ±£¬rc1ºÍrc2±ØĞëÓĞµÄÏÈºó¹ØÏµ¡£
+* å‡è®¾rc2å¿…é¡»åœ¨rc1ä¹‹åï¼Œæ„æ€æ˜¯ï¼šrc1ã€rc2ä¸å¿…åŒæ—¶å­˜åœ¨ï¼Œä½†å‡å¦‚åŒæ—¶å­˜åœ¨æ—¶ï¼Œrc1å’Œrc2å¿…é¡»æœ‰çš„å…ˆåå…³ç³»ã€‚
 
-* ¼ÙÉèrc2ÒÀÀµrc1£¬ÒâË¼²»½ö°üº¬ÁË¡°rc2±ØĞëÔÚrc1Ö®ºó¡±£¬»¹°üº¬ÁËÕâ¸öÒâË¼£ºrc2Ã»ÓĞrc1½«²»ÄÜÕı³£ÔËĞĞ¡£
+* å‡è®¾rc2ä¾èµ–rc1ï¼Œæ„æ€ä¸ä»…åŒ…å«äº†â€œrc2å¿…é¡»åœ¨rc1ä¹‹åâ€ï¼Œè¿˜åŒ…å«äº†è¿™ä¸ªæ„æ€ï¼šrc2æ²¡æœ‰rc1å°†ä¸èƒ½æ­£å¸¸è¿è¡Œã€‚
   
 
-Request Contexts µÄË³Ğò
+Request Contexts çš„é¡ºåº
 =======================
 
-* buffered request context¸ºÔğ»º³åHTTP content£¬lazyCommit request context¸ºÔğ»º³åheaders£¬
-  ÒòÎªheaders±ØĞë±ÈcontentÏÈÌá½»£¬ËùÒÔlazyCommitÓ¦ÔÚbufferedÖ®ºó£¨±ÈbufferedÏÈcommit£©¡£
+* buffered request contextè´Ÿè´£ç¼“å†²HTTP contentï¼ŒlazyCommit request contextè´Ÿè´£ç¼“å†²headersï¼Œ
+  å› ä¸ºheaderså¿…é¡»æ¯”contentå…ˆæäº¤ï¼Œæ‰€ä»¥lazyCommitåº”åœ¨bufferedä¹‹åï¼ˆæ¯”bufferedå…ˆcommitï¼‰ã€‚
 
-* Èç¹ûÃ»ÓĞbuffered£¬Ó¦ÓÃ³ÌĞòËùÊä³öµÄcontent»áµ¼ÖÂresponseÌáÇ°±»Ìá½»£¬´Ó¶øµ¼ÖÂlazyCommitÖĞµÄheadersÎŞ·¨Ìá½»¡£
-  ËùÒÔlazyCommitÒÀÀµbuffered¡£
+* å¦‚æœæ²¡æœ‰bufferedï¼Œåº”ç”¨ç¨‹åºæ‰€è¾“å‡ºçš„contentä¼šå¯¼è‡´responseæå‰è¢«æäº¤ï¼Œä»è€Œå¯¼è‡´lazyCommitä¸­çš„headersæ— æ³•æäº¤ã€‚
+  æ‰€ä»¥lazyCommitä¾èµ–bufferedã€‚
 
-* ¼ÙÈçÍøÕ¾Ö§³Öresource bundleºÍ¶àÓïÑÔ»·¾³£¬ÄÇÃ´setlocale»á°ÑlocaleĞÅÏ¢±£´æÔÚsessionÀï¡£
-  ¼ÙÉèÎÒÃÇÒªÊ¹ÓÃ»ùÓÚcookieµÄsession request context£¬ÄÇÃ´setlocale±ØĞëÔÚsession request contextÖ®ºó£¬
-  Ê¹setlocale°üº¬session£¬´Ó¶ø¿ÉÒÔÊ¹ÓÃĞÂµÄsession»úÖÆ¡£
+* å‡å¦‚ç½‘ç«™æ”¯æŒresource bundleå’Œå¤šè¯­è¨€ç¯å¢ƒï¼Œé‚£ä¹ˆsetlocaleä¼šæŠŠlocaleä¿¡æ¯ä¿å­˜åœ¨sessioné‡Œã€‚
+  å‡è®¾æˆ‘ä»¬è¦ä½¿ç”¨åŸºäºcookieçš„session request contextï¼Œé‚£ä¹ˆsetlocaleå¿…é¡»åœ¨session request contextä¹‹åï¼Œ
+  ä½¿setlocaleåŒ…å«sessionï¼Œä»è€Œå¯ä»¥ä½¿ç”¨æ–°çš„sessionæœºåˆ¶ã€‚
   
-* »ùÓÚcookieµÄsession»úÖÆ£¬»áÔÚcommitÊ±ĞŞ¸ÄcookieºÍheaders£¬Òò¶øÒÀÀµÓÚlazyCommit£¨Í¬Ê±ÅÅÔÚlazyCommitÖ®ºó£¬Ê¹Ö®¿ÉÔÚlazyCommitÖ®Ç°Ìá½»£©¡£
+* åŸºäºcookieçš„sessionæœºåˆ¶ï¼Œä¼šåœ¨commitæ—¶ä¿®æ”¹cookieå’Œheadersï¼Œå› è€Œä¾èµ–äºlazyCommitï¼ˆåŒæ—¶æ’åœ¨lazyCommitä¹‹åï¼Œä½¿ä¹‹å¯åœ¨lazyCommitä¹‹å‰æäº¤ï¼‰ã€‚
 
-* Session¿ò¼ÜÓÉÓÚÒª¶ÁĞ´cookie£¬Òò´ËÔÚparserÖ®ºó¡£
+* Sessionæ¡†æ¶ç”±äºè¦è¯»å†™cookieï¼Œå› æ­¤åœ¨parserä¹‹åã€‚
 
-* rewrite»úÖÆ»áÔÚprepare½×¶Î£¬ĞŞ¸ÄparametersºÍcookie£¬Òò´ËÒÀÀµÓÚparser¡£
+* rewriteæœºåˆ¶ä¼šåœ¨prepareé˜¶æ®µï¼Œä¿®æ”¹parameterså’Œcookieï¼Œå› æ­¤ä¾èµ–äºparserã€‚
 
-* µÚÒ»´Î·ÃÎÊparserµÄparametersÖ®Ç°£¬±ØĞëÉèÖÃlocale¡£ÉèÖÃlocaleÊÇÓÉsetlocale prepareÍê³ÉµÄ¡£
-  ÓÉÓÚrewrite prepare»á·ÃÎÊparser parameters£¬Òò´Ërewrite±ØĞëÔÚsetlocaleÖ®ºó¡£
+* ç¬¬ä¸€æ¬¡è®¿é—®parserçš„parametersä¹‹å‰ï¼Œå¿…é¡»è®¾ç½®localeã€‚è®¾ç½®localeæ˜¯ç”±setlocale prepareå®Œæˆçš„ã€‚
+  ç”±äºrewrite prepareä¼šè®¿é—®parser parametersï¼Œå› æ­¤rewriteå¿…é¡»åœ¨setlocaleä¹‹åã€‚
 
 
-×Ü½á
+æ€»ç»“
 =======================
 
-* ÒÀÀµ¹ØÏµ£º
+* ä¾èµ–å…³ç³»ï¼š
 
   lazyCommit => buffered
   session    => lazyCommit
 
-* ÏÈºó¹ØÏµ£º
+* å…ˆåå…³ç³»ï¼š
 
   buffered   <- lazyCommit
   session    <- setLocale
@@ -59,12 +59,12 @@ Request Contexts µÄË³Ğò
   parser     <- rewrite
   setLocale  <- rewrite
   
-* ·ûºÏÉÏÊöÔ¼ÊøµÄºÏÀíË³ĞòÎª£º
+* ç¬¦åˆä¸Šè¿°çº¦æŸçš„åˆç†é¡ºåºä¸ºï¼š
 
   buffered          -           - commit
   lazyCommit        -           - commit
-  parser                                    - °´Ğè³õÊ¼»¯£¬µ«³õÊ¼»¯Ö®Ç°£¬±ØĞëÖ´ĞĞsetLocale
-  session           -           - commit    - °´Ğè³õÊ¼»¯
+  parser                                    - æŒ‰éœ€åˆå§‹åŒ–ï¼Œä½†åˆå§‹åŒ–ä¹‹å‰ï¼Œå¿…é¡»æ‰§è¡ŒsetLocale
+  session           -           - commit    - æŒ‰éœ€åˆå§‹åŒ–
   setLocale         - prepare
   rewrite           - prepare
 

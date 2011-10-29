@@ -32,7 +32,7 @@ import com.alibaba.citrus.service.requestcontext.session.SessionModelEncoder;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 /**
- * <code>SessionModelEncoder</code>µÄÄ¬ÈÏÊµÏÖ£º½«modelÄÚÈİ±£´æ³É×Ö·û´®¡£
+ * <code>SessionModelEncoder</code>çš„é»˜è®¤å®ç°ï¼šå°†modelå†…å®¹ä¿å­˜æˆå­—ç¬¦ä¸²ã€‚
  * 
  * @author Michael Zhou
  */

@@ -20,34 +20,34 @@ package com.alibaba.citrus.service.moduleloader;
 import java.util.Set;
 
 /**
- * ÓÃÀ´×°ÔØmoduleµÄ·şÎñ¡£
+ * ç”¨æ¥è£…è½½moduleçš„æœåŠ¡ã€‚
  * <p>
- * Ò»¸ömoduleÊÇweb¿ò¼ÜÖĞ£¬¿É±»¿ª·¢ÕßÀ©Õ¹µÄcontrollerÄ£°å¡£
+ * ä¸€ä¸ªmoduleæ˜¯webæ¡†æ¶ä¸­ï¼Œå¯è¢«å¼€å‘è€…æ‰©å±•çš„controlleræ¨¡æ¿ã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface ModuleLoaderService {
     /**
-     * È¡µÃµ±Ç°factoryËùÖ§³ÖµÄËùÓĞmoduleÀàĞÍ¡£
+     * å–å¾—å½“å‰factoryæ‰€æ”¯æŒçš„æ‰€æœ‰moduleç±»å‹ã€‚
      */
     Set<String> getModuleTypes();
 
     /**
-     * È¡µÃÖ¸¶¨moduleÀàĞÍµÄËùÓĞmoduleÃû³Æ¡£
+     * å–å¾—æŒ‡å®šmoduleç±»å‹çš„æ‰€æœ‰moduleåç§°ã€‚
      */
     Set<String> getModuleNames(String moduleType);
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆºÍÀàĞÍµÄmoduleÊµÀı¡£
+     * å–å¾—æŒ‡å®šåç§°å’Œç±»å‹çš„moduleå®ä¾‹ã€‚
      */
     Module getModule(String moduleType, String moduleName) throws ModuleLoaderException, ModuleNotFoundException;
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆºÍÀàĞÍµÄmoduleÊµÀı¡£
+     * å–å¾—æŒ‡å®šåç§°å’Œç±»å‹çš„moduleå®ä¾‹ã€‚
      * <p>
-     * ºÍ<code>getModule()</code>²»Í¬µÄÊÇ£¬¸Ã·½·¨²»»áÅ×³ö<code>ModuleNotFoundException</code>
-     * ¡£Èç¹ûÄ£¿é²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å’Œ<code>getModule()</code>ä¸åŒçš„æ˜¯ï¼Œè¯¥æ–¹æ³•ä¸ä¼šæŠ›å‡º<code>ModuleNotFoundException</code>
+     * ã€‚å¦‚æœæ¨¡å—ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * </p>
      */
     Module getModuleQuiet(String moduleType, String moduleName) throws ModuleLoaderException;

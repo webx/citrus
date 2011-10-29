@@ -65,14 +65,14 @@ public class RedirectLocationInterceptorTests extends AbstractBasicResponseTests
         replayMocks();
 
         try {
-            response.addHeader(" location ", "http://localhost/"); // 特殊header：location，只调用redirect location interceptor
+            response.addHeader(" location ", "http://localhost/"); // 鐗规畩header锛歭ocation锛屽彧璋冪敤redirect location interceptor
             fail();
         } catch (RedirectLocationRejectedException e) {
             assertThat(e, exception("Redirect location rejected: http://localhost/"));
         }
 
         try {
-            response.setHeader(" location ", "http://localhost/"); // 特殊header：location，只调用redirect location interceptor
+            response.setHeader(" location ", "http://localhost/"); // 鐗规畩header锛歭ocation锛屽彧璋冪敤redirect location interceptor
             fail();
         } catch (RedirectLocationRejectedException e) {
             assertThat(e, exception("Redirect location rejected: http://localhost/"));
@@ -103,8 +103,8 @@ public class RedirectLocationInterceptorTests extends AbstractBasicResponseTests
 
         replayMocks();
 
-        response.addHeader(" location ", "http://localhost/"); // 特殊header：location，只调用redirect location interceptor
-        response.setHeader(" location ", "http://localhost/"); // 特殊header：location，只调用redirect location interceptor
+        response.addHeader(" location ", "http://localhost/"); // 鐗规畩header锛歭ocation锛屽彧璋冪敤redirect location interceptor
+        response.setHeader(" location ", "http://localhost/"); // 鐗规畩header锛歭ocation锛屽彧璋冪敤redirect location interceptor
 
         response.sendRedirect("http://localhost/");
 
@@ -126,8 +126,8 @@ public class RedirectLocationInterceptorTests extends AbstractBasicResponseTests
 
         replayMocks();
 
-        response.addHeader(" location ", "http://localhost/"); // 特殊header：location，只调用redirect location interceptor
-        response.setHeader(" location ", "http://localhost/"); // 特殊header：location，只调用redirect location interceptor
+        response.addHeader(" location ", "http://localhost/"); // 鐗规畩header锛歭ocation锛屽彧璋冪敤redirect location interceptor
+        response.setHeader(" location ", "http://localhost/"); // 鐗规畩header锛歭ocation锛屽彧璋冪敤redirect location interceptor
 
         response.sendRedirect("http://localhost/");
 
@@ -146,19 +146,19 @@ public class RedirectLocationInterceptorTests extends AbstractBasicResponseTests
         expect(requestMock.getRequestURL()).andReturn(new StringBuffer("http://localhost/test/"));
         responseMock.setHeader("Location", "http://localhost/test/hello");
         replayMocks();
-        response.addHeader(" location ", " hello "); // 特殊header：location，只调用redirect location interceptor
+        response.addHeader(" location ", " hello "); // 鐗规畩header锛歭ocation锛屽彧璋冪敤redirect location interceptor
         verifyMocks();
 
         expect(requestMock.getRequestURL()).andReturn(new StringBuffer("http://localhost/test/"));
         responseMock.setHeader("Location", "http://localhost/hello");
         replayMocks();
-        response.setHeader(" location ", " /hello "); // 特殊header：location，只调用redirect location interceptor
+        response.setHeader(" location ", " /hello "); // 鐗规畩header锛歭ocation锛屽彧璋冪敤redirect location interceptor
         verifyMocks();
 
         expect(requestMock.getRequestURL()).andReturn(new StringBuffer("http://localhost/test/"));
         responseMock.sendRedirect("http://localhost/hello");
         replayMocks();
-        response.sendRedirect(" /a/../hello "); // 特殊header：location，只调用redirect location interceptor
+        response.sendRedirect(" /a/../hello "); // 鐗规畩header锛歭ocation锛屽彧璋冪敤redirect location interceptor
         verifyMocks();
     }
 

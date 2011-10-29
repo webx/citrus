@@ -46,16 +46,16 @@ import com.alibaba.citrus.util.ServiceNotFoundException;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ÓÃÓÚÉú³ÉÒ»¸öÎ¨Ò»µÄID£¬À´·ÀÖ¹CSRF¹¥»÷£¨Cross Site Request Forgery£©¡£ ´ËÍâ£¬»¹¿ÉÒÔÓÃÀ´·ÀÖ¹ÖØ¸´Ìá½»Í¬Ò»ÕÅ±íµ¥¡£
+ * ç”¨äºç”Ÿæˆä¸€ä¸ªå”¯ä¸€çš„IDï¼Œæ¥é˜²æ­¢CSRFæ”»å‡»ï¼ˆCross Site Request Forgeryï¼‰ã€‚ æ­¤å¤–ï¼Œè¿˜å¯ä»¥ç”¨æ¥é˜²æ­¢é‡å¤æäº¤åŒä¸€å¼ è¡¨å•ã€‚
  * <p>
- * ¸ÃÀà¿É×÷Îªpull tool£¬ÓÉÓÚ²ÉÓÃÁËsingleton request proxy£¬ËùÒÔ¸ÃÀà¿É±»×¢²á³Églobal×÷ÓÃÓòµÄpull tool¡£
+ * è¯¥ç±»å¯ä½œä¸ºpull toolï¼Œç”±äºé‡‡ç”¨äº†singleton request proxyï¼Œæ‰€ä»¥è¯¥ç±»å¯è¢«æ³¨å†Œæˆglobalä½œç”¨åŸŸçš„pull toolã€‚
  * </p>
  * <p>
- * CSRF tokenµÄkeyÊÇ°´ÕÕÒÔÏÂÂß¼­È¡µÃµÄ£º
+ * CSRF tokençš„keyæ˜¯æŒ‰ç…§ä»¥ä¸‹é€»è¾‘å–å¾—çš„ï¼š
  * </p>
  * <ol>
- * <li>Èç¹ûThreadÉÏÏÂÎÄ<code>setContextTokenKey()</code>±»Ã÷È·ÉèÖÃ£¬ÔòÊ¹ÓÃËü£»</li>
- * <li>·ñÔò£¬Ê¹ÓÃÄ¬ÈÏÖµ¡°<code>_csrf_token</code>¡±¡£</li>
+ * <li>å¦‚æœThreadä¸Šä¸‹æ–‡<code>setContextTokenKey()</code>è¢«æ˜ç¡®è®¾ç½®ï¼Œåˆ™ä½¿ç”¨å®ƒï¼›</li>
+ * <li>å¦åˆ™ï¼Œä½¿ç”¨é»˜è®¤å€¼â€œ<code>_csrf_token</code>â€ã€‚</li>
  * </ol>
  * 
  * @author Michael Zhou
@@ -111,16 +111,16 @@ public class CsrfToken {
     }
 
     /**
-     * ´´½¨°üº¬csrf tokenµÄhidden field¡£ ËùÉú³ÉµÄtoken»á±£³ÖÓĞĞ§£¬Ö±µ½session¹ıÆÚ¡£
+     * åˆ›å»ºåŒ…å«csrf tokençš„hidden fieldã€‚ æ‰€ç”Ÿæˆçš„tokenä¼šä¿æŒæœ‰æ•ˆï¼Œç›´åˆ°sessionè¿‡æœŸã€‚
      */
     public Input getHiddenField() {
         return getLongLiveHiddenField();
     }
 
     /**
-     * ´´½¨°üº¬csrf tokenµÄhidden field¡£
+     * åˆ›å»ºåŒ…å«csrf tokençš„hidden fieldã€‚
      * 
-     * @param longLiveToken Èç¹ûÎª<code>true</code>£¬Ôòtoken»á±£³ÖÓĞĞ§£¬Ö±µ½session¹ıÆÚ¡£
+     * @param longLiveToken å¦‚æœä¸º<code>true</code>ï¼Œåˆ™tokenä¼šä¿æŒæœ‰æ•ˆï¼Œç›´åˆ°sessionè¿‡æœŸã€‚
      * @deprecated use getUniqueHiddenField() or getLongLiveHiddenField()
      *             instead
      */
@@ -138,7 +138,7 @@ public class CsrfToken {
     }
 
     /**
-     * ´´½¨csrf token£¬ËùÉú³ÉµÄtokenÖ»ÄÜ±»Ê¹ÓÃÒ»´Î¡£
+     * åˆ›å»ºcsrf tokenï¼Œæ‰€ç”Ÿæˆçš„tokenåªèƒ½è¢«ä½¿ç”¨ä¸€æ¬¡ã€‚
      */
     public String getUniqueToken() {
         HttpSession session = request.getSession();
@@ -147,10 +147,10 @@ public class CsrfToken {
         int maxTokens = getMaxTokens();
 
         if (tokenOfRequest == null) {
-            // ´´½¨ĞÂµÄtoken¡£
-            // Èç¹ûµ±Ç°sessionÖĞÒÑ¾­ÓĞtokenÁË£¬
-            // ²¢ÇÒtokenÊıÃ»ÓĞ³¬¹ı×î´óÊı£¬Ôò½«token×·¼Óµ½sessionÖĞ£»
-            // Èç¹ûtoken³¬¹ı×î´óÊı£¬Ôò¸²¸Ç×îÔçµÄtoken¡£
+            // åˆ›å»ºæ–°çš„tokenã€‚
+            // å¦‚æœå½“å‰sessionä¸­å·²ç»æœ‰tokenäº†ï¼Œ
+            // å¹¶ä¸”tokenæ•°æ²¡æœ‰è¶…è¿‡æœ€å¤§æ•°ï¼Œåˆ™å°†tokenè¿½åŠ åˆ°sessionä¸­ï¼›
+            // å¦‚æœtokenè¶…è¿‡æœ€å¤§æ•°ï¼Œåˆ™è¦†ç›–æœ€æ—©çš„tokenã€‚
             LinkedList<String> tokens = getTokensInSession(session, key);
 
             tokenOfRequest = getGenerator().generateUniqueToken();
@@ -169,7 +169,7 @@ public class CsrfToken {
     }
 
     /**
-     * È¡µÃ³¤Ğ§token¡£ºÍ<code>uniqueToken</code> ²»Í¬£¬³¤Ğ§tokenµÄÊÙÃüºÍsessionÏàÍ¬¡£
+     * å–å¾—é•¿æ•ˆtokenã€‚å’Œ<code>uniqueToken</code> ä¸åŒï¼Œé•¿æ•ˆtokençš„å¯¿å‘½å’Œsessionç›¸åŒã€‚
      */
     public String getLongLiveToken() {
         return getLongLiveTokenInSession(request.getSession());
@@ -201,7 +201,7 @@ public class CsrfToken {
     }
 
     /**
-     * ¼ì²étoken£¬Èç¹ûtoken´æÔÚ£¬Ôò·µ»Ø<code>true</code>¡£
+     * æ£€æŸ¥tokenï¼Œå¦‚æœtokenå­˜åœ¨ï¼Œåˆ™è¿”å›<code>true</code>ã€‚
      */
     public static boolean check(HttpServletRequest request) {
         String key = getKey();
@@ -236,7 +236,7 @@ public class CsrfToken {
     }
 
     /**
-     * pull tool factory¡£
+     * pull tool factoryã€‚
      */
     public static class Factory implements ToolFactory {
         private HttpServletRequest request;
@@ -277,7 +277,7 @@ public class CsrfToken {
     }
 
     /**
-     * ÔÊĞíÆäËüÄ£¿éoverrideÉú³ÉtokenµÄËã·¨¡£
+     * å…è®¸å…¶å®ƒæ¨¡å—overrideç”Ÿæˆtokençš„ç®—æ³•ã€‚
      */
     public interface Generator {
         String generateUniqueToken();

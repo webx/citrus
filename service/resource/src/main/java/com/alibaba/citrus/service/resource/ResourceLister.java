@@ -20,15 +20,15 @@ package com.alibaba.citrus.service.resource;
 import java.util.Set;
 
 /**
- * ´ú±íÒ»¸öÖ§³Ö×ÊÔ´ÁĞ±í²Ù×÷µÄloader¡£
+ * ä»£è¡¨ä¸€ä¸ªæ”¯æŒèµ„æºåˆ—è¡¨æ“ä½œçš„loaderã€‚
  * 
  * @author Michael Zhou
  */
 public interface ResourceLister extends ResourceLoader {
     /**
-     * ²éÕÒÖ¸¶¨×ÊÔ´µÄ×ÓÄ¿Â¼»òÎÄ¼şÃû¡£Ä¿Â¼ÃûÒÔ<code>/</code>½áÎ²¡£
+     * æŸ¥æ‰¾æŒ‡å®šèµ„æºçš„å­ç›®å½•æˆ–æ–‡ä»¶åã€‚ç›®å½•åä»¥<code>/</code>ç»“å°¾ã€‚
      * <p>
-     * Èç±»ÁĞ±íµÄ×ÊÔ´¸ù±¾²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å¦‚è¢«åˆ—è¡¨çš„èµ„æºæ ¹æœ¬ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * </p>
      */
     String[] list(ResourceListerContext context, Set<ResourceLoadingOption> options);

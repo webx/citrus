@@ -41,7 +41,7 @@ import com.alibaba.citrus.service.resource.support.FileResource;
 import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
- * ÓÃÀ´×°ÔØÎÄ¼şÏµÍ³ÖĞµÄ×ÊÔ´¡£
+ * ç”¨æ¥è£…è½½æ–‡ä»¶ç³»ç»Ÿä¸­çš„èµ„æºã€‚
  * 
  * @author Michael Zhou
  */
@@ -52,9 +52,9 @@ public class FileResourceLoader implements ResourceLister {
     private SearchPath[] paths;
 
     /**
-     * È¡µÃbasedir¡£
+     * å–å¾—basedirã€‚
      * <p>
-     * ¼ÙÈçÃ»ÓĞÖ¸¶¨£¬Ôò·µ»Øµ±Ç°ÅäÖÃÎÄ¼şËùÔÚµÄÄ¿Â¼£¨¼´file-loaderÅäÖÃËùÔÚµÄÄ¿Â¼£©¡£
+     * å‡å¦‚æ²¡æœ‰æŒ‡å®šï¼Œåˆ™è¿”å›å½“å‰é…ç½®æ–‡ä»¶æ‰€åœ¨çš„ç›®å½•ï¼ˆå³file-loaderé…ç½®æ‰€åœ¨çš„ç›®å½•ï¼‰ã€‚
      * </p>
      */
     public String getBasedir() {
@@ -62,19 +62,19 @@ public class FileResourceLoader implements ResourceLister {
     }
 
     /**
-     * ÉèÖÃbasedir¡£
+     * è®¾ç½®basedirã€‚
      */
     public void setBasedir(String basedir) {
         this.basedir = trimToNull(basedir);
     }
 
     /**
-     * È¡µÃÓÃÀ´ÅäÖÃµ±Ç°file-loaderµÄÅäÖÃÎÄ¼şËùÔÚµÄÄ¿Â¼¡£
+     * å–å¾—ç”¨æ¥é…ç½®å½“å‰file-loaderçš„é…ç½®æ–‡ä»¶æ‰€åœ¨çš„ç›®å½•ã€‚
      * <p>
-     * Õâ¸öÄ¿Â¼½«±»ÓÃ×÷Ä¬ÈÏµÄÏà¶ÔÂ·¾¶¸ùÄ¿Â¼¡£
+     * è¿™ä¸ªç›®å½•å°†è¢«ç”¨ä½œé»˜è®¤çš„ç›¸å¯¹è·¯å¾„æ ¹ç›®å½•ã€‚
      * </p>
      * <p>
-     * ¼ÙÈçÅäÖÃÎÄ¼ş²¢·ÇÖ±½Ó´ÓÎÄ¼şÏµÍ³ÖĞÈ¡µÃ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å‡å¦‚é…ç½®æ–‡ä»¶å¹¶éç›´æ¥ä»æ–‡ä»¶ç³»ç»Ÿä¸­å–å¾—ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * </p>
      */
     public String getConfigFileBasedir() {
@@ -82,7 +82,7 @@ public class FileResourceLoader implements ResourceLister {
     }
 
     /**
-     * ÉèÖÃfile-loaderËùÔÚµÄÅäÖÃÎÄ¼şµÄURL¡£
+     * è®¾ç½®file-loaderæ‰€åœ¨çš„é…ç½®æ–‡ä»¶çš„URLã€‚
      */
     public void setConfigFileURL(URL configFileURL) {
         if (configFileURL != null) {
@@ -109,14 +109,14 @@ public class FileResourceLoader implements ResourceLister {
     }
 
     /**
-     * ³õÊ¼»¯loader£¬²¢Éè¶¨loaderËùÔÚµÄ<code>ResourceLoadingService</code>µÄÊµÀı¡£
+     * åˆå§‹åŒ–loaderï¼Œå¹¶è®¾å®šloaderæ‰€åœ¨çš„<code>ResourceLoadingService</code>çš„å®ä¾‹ã€‚
      */
     public void init(ResourceLoadingService resourceLoadingService) {
-        // ÉèÖÃbasedir£º
-        // 1. Èç¹ûÃ»ÓĞÖ¸¶¨basedir£¬Ôò½«µ±Ç°ÅäÖÃÎÄ¼şËùÔÚÄ¿Â¼¿´×öbasedir
-        // 2. Èç¹ûÖ¸¶¨ÁËÏà¶ÔÂ·¾¶µÄbasedir£¬ÔòÏà¶ÔÓÚµ±Ç°ÅäÖÃÎÄ¼şËùÔÚÄ¿Â¼
-        // 3. Èç¹ûÖ¸¶¨ÁË¾ø¶ÔÂ·¾¶µÄbasedir£¬ÔòÒÔ´Ë×÷Îªbasedir
-        // ×îºó£¬¹æ¸ñ»¯basedir¡£
+        // è®¾ç½®basedirï¼š
+        // 1. å¦‚æœæ²¡æœ‰æŒ‡å®šbasedirï¼Œåˆ™å°†å½“å‰é…ç½®æ–‡ä»¶æ‰€åœ¨ç›®å½•çœ‹åšbasedir
+        // 2. å¦‚æœæŒ‡å®šäº†ç›¸å¯¹è·¯å¾„çš„basedirï¼Œåˆ™ç›¸å¯¹äºå½“å‰é…ç½®æ–‡ä»¶æ‰€åœ¨ç›®å½•
+        // 3. å¦‚æœæŒ‡å®šäº†ç»å¯¹è·¯å¾„çš„basedirï¼Œåˆ™ä»¥æ­¤ä½œä¸ºbasedir
+        // æœ€åï¼Œè§„æ ¼åŒ–basedirã€‚
         if (basedir == null) {
             basedir = configFileBasedir;
         } else {
@@ -127,19 +127,19 @@ public class FileResourceLoader implements ResourceLister {
 
         basedir = trimToNull(normalizePath(basedir));
 
-        // Èç¹ûÎ´Ö¸¶¨path£¬Ôò¼ÓÈëÄ¬ÈÏµÄpath£º/
+        // å¦‚æœæœªæŒ‡å®špathï¼Œåˆ™åŠ å…¥é»˜è®¤çš„pathï¼š/
         if (isEmptyArray(paths)) {
             paths = new SearchPath[] { new SearchPath("/", true) };
         }
 
-        // ÉèÖÃrelative pathµÄbasedir
+        // è®¾ç½®relative pathçš„basedir
         for (SearchPath searchPath : paths) {
             searchPath.init(basedir);
         }
     }
 
     /**
-     * ²éÕÒÎÄ¼ş×ÊÔ´¡£
+     * æŸ¥æ‰¾æ–‡ä»¶èµ„æºã€‚
      */
     public Resource getResource(ResourceLoaderContext context, Set<ResourceLoadingOption> options) {
         File file = find(context, options);
@@ -152,7 +152,7 @@ public class FileResourceLoader implements ResourceLister {
     }
 
     /**
-     * ²éÕÒÄ¿Â¼ÁĞ±í¡£
+     * æŸ¥æ‰¾ç›®å½•åˆ—è¡¨ã€‚
      */
     public String[] list(ResourceListerContext context, Set<ResourceLoadingOption> options) {
         File file = find(context, options);
@@ -176,7 +176,7 @@ public class FileResourceLoader implements ResourceLister {
     }
 
     /**
-     * ²éÕÒÎÄ¼ş¡£
+     * æŸ¥æ‰¾æ–‡ä»¶ã€‚
      */
     private File find(ResourceMatchResult context, Set<ResourceLoadingOption> options) {
         File file = null;
@@ -205,7 +205,7 @@ public class FileResourceLoader implements ResourceLister {
                 file = resourceFile;
                 break;
             } else {
-                // Èç¹ûÎÄ¼ş²»´æÔÚ£¬µ«Ö¸¶¨ÁËfor_create²ÎÊı£¬Ôò·µ»ØµÚÒ»¸ö²»´æÔÚµÄÎÄ¼ş¶ÔÏó¡£
+                // å¦‚æœæ–‡ä»¶ä¸å­˜åœ¨ï¼Œä½†æŒ‡å®šäº†for_createå‚æ•°ï¼Œåˆ™è¿”å›ç¬¬ä¸€ä¸ªä¸å­˜åœ¨çš„æ–‡ä»¶å¯¹è±¡ã€‚
                 if (options != null && options.contains(FOR_CREATE)) {
                     if (file == null) {
                         file = resourceFile;
@@ -223,9 +223,9 @@ public class FileResourceLoader implements ResourceLister {
     }
 
     /**
-     * ´ú±íÒ»¸öËÑË÷Â·¾¶¡£
+     * ä»£è¡¨ä¸€ä¸ªæœç´¢è·¯å¾„ã€‚
      * <p>
-     * ¼ÙÈçÖ¸¶¨ÁËbasedir£¬Ôò±íÊ¾pathÎªÏà¶ÔÓÚbasedirµÄÂ·¾¶£»·ñÔò±íÊ¾pathÎª¾ø¶ÔÂ·¾¶¡£
+     * å‡å¦‚æŒ‡å®šäº†basedirï¼Œåˆ™è¡¨ç¤ºpathä¸ºç›¸å¯¹äºbasedirçš„è·¯å¾„ï¼›å¦åˆ™è¡¨ç¤ºpathä¸ºç»å¯¹è·¯å¾„ã€‚
      * </p>
      */
     public static class SearchPath {
@@ -246,7 +246,7 @@ public class FileResourceLoader implements ResourceLister {
         }
 
         /**
-         * È¡µÃÆ¥ÅäµÄÂ·¾¶¡£
+         * å–å¾—åŒ¹é…çš„è·¯å¾„ã€‚
          */
         public File getPath(ResourceMatchResult context) {
             String realPath = context.substitute(path);

@@ -37,7 +37,7 @@ import com.alibaba.citrus.test.runner.Prototyped.TestData;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
 
 /**
- * ²âÊÔ{@link RawTypeInfo}¡£
+ * æµ‹è¯•{@link RawTypeInfo}ã€‚
  * 
  * @author Michael Zhou
  */
@@ -45,14 +45,14 @@ import com.alibaba.citrus.test.runner.Prototyped.TestName;
 public class RawTypeTests extends BaseTypeTests implements Cloneable {
     private transient RawTypeInfo typeInfo;
     private Class<?> clazz; // rawClass
-    private boolean generic; // ÊÇ²»ÊÇgeneric£¿
-    private String name; // Ãû³Æ
-    private String simpleName; // ¼ò³Æ
-    private Class<?> wrapper; // °ü×°Àà
-    private boolean isInterface; // ÊÇ·ñÎª½Ó¿Ú
-    private String params; // ²ÎÊı±ítoString
-    private String toString; // toString½á¹û
-    private String[] supertypes; // ¸¸Àà¡¢½Ó¿Ú
+    private boolean generic; // æ˜¯ä¸æ˜¯genericï¼Ÿ
+    private String name; // åç§°
+    private String simpleName; // ç®€ç§°
+    private Class<?> wrapper; // åŒ…è£…ç±»
+    private boolean isInterface; // æ˜¯å¦ä¸ºæ¥å£
+    private String params; // å‚æ•°è¡¨toString
+    private String toString; // toStringç»“æœ
+    private String[] supertypes; // çˆ¶ç±»ã€æ¥å£
     private String[] args; // actual args
 
     @Before
@@ -71,7 +71,7 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
         RawTypeTests prototype;
 
         // =========================
-        // ·ÇgenericÀà¡¢½Ó¿Ú
+        // égenericç±»ã€æ¥å£
         // -----------------
         prototype = data.newPrototype();
         prototype.clazz = String.class;
@@ -113,7 +113,7 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
         prototype.args = new String[] {};
 
         // =========================
-        // genericÀà¡¢½Ó¿Ú
+        // genericç±»ã€æ¥å£
         // -----------------
         prototype = data.newPrototype();
         prototype.clazz = List.class;
@@ -170,7 +170,7 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
         prototype.args = new String[] { "Number", "Number" };
 
         // =========================
-        // primitiveÀà
+        // primitiveç±»
         // -----------------
         prototype = data.newPrototype();
         prototype.clazz = boolean.class;
@@ -276,7 +276,7 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
         prototype.args = new String[] {};
 
         // =========================
-        // voidºÍVoid
+        // voidå’ŒVoid
         // -----------------
         prototype = data.newPrototype();
         prototype.clazz = void.class;
@@ -307,16 +307,16 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
     }
 
     @Test
-    public void ±¸Íü() {
-        // 1. ²âÊÔ£ºÏß³Ì1´´½¨rawClassInfoÊ±£¬
-        // ÁíÒ»¸öÏß³Ì2ÊÔÍ¼½âÎöParameterizedType£¬²¢ÇÒÒÀÀµÍ¬Ò»¸örawClassInfo£¬
-        // ´ËÊ±´ÓclassCacheÖĞÈ¡µÃµÄrawClassInfo¶ÔÏóÎ´³õÊ¼»¯Íê³É£¬ÆäÖĞgetParamters()Îªnull
+    public void å¤‡å¿˜() {
+        // 1. æµ‹è¯•ï¼šçº¿ç¨‹1åˆ›å»ºrawClassInfoæ—¶ï¼Œ
+        // å¦ä¸€ä¸ªçº¿ç¨‹2è¯•å›¾è§£æParameterizedTypeï¼Œå¹¶ä¸”ä¾èµ–åŒä¸€ä¸ªrawClassInfoï¼Œ
+        // æ­¤æ—¶ä»classCacheä¸­å–å¾—çš„rawClassInfoå¯¹è±¡æœªåˆå§‹åŒ–å®Œæˆï¼Œå…¶ä¸­getParamters()ä¸ºnull
 
-        // 2. class cacheÖĞµÄclass±»´´½¨ÒÔºó£¬weak refËæÖ®±»ÊÍ·Å£¬µ¼ÖÂÍ¬Ò»¸öclass¶à´Î±»³õÊ¼»¯¡£
+        // 2. class cacheä¸­çš„classè¢«åˆ›å»ºä»¥åï¼Œweak reféšä¹‹è¢«é‡Šæ”¾ï¼Œå¯¼è‡´åŒä¸€ä¸ªclasså¤šæ¬¡è¢«åˆå§‹åŒ–ã€‚
     }
 
     /**
-     * from {@link GenericDeclarationInfo}¡£
+     * from {@link GenericDeclarationInfo}ã€‚
      */
     @Test
     public void isGeneric() {
@@ -324,7 +324,7 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
     }
 
     /**
-     * from {@link GenericDeclarationInfo}¡£
+     * from {@link GenericDeclarationInfo}ã€‚
      */
     @Test
     public void getTypeParameters() {

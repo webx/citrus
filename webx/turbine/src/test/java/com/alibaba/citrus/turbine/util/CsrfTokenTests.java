@@ -115,7 +115,7 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
     @Deprecated
     public void getLongLiveToken() throws Exception {
         // -----------------------
-        // ÇëÇó1£¬È¡µÃtoken
+        // è¯·æ±‚1ï¼Œå–å¾—token
         String token = tool.getLongLiveToken();
 
         assertNotNull(token);
@@ -124,14 +124,14 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
         assertThat(tool.getLongLiveHiddenField().toString(), containsString(token));
         assertEquals("_csrf_token", CsrfToken.getKey());
 
-        // Í¬Ò»¸öÇëÇó£¬ÔÙ´ÎÈ¡µÃtoken
+        // åŒä¸€ä¸ªè¯·æ±‚ï¼Œå†æ¬¡å–å¾—token
         assertEquals(token, tool.getLongLiveToken());
         assertEquals(null, newRequest.getSession().getAttribute("_csrf_token"));
 
         commitRequestContext();
 
         // -----------------------
-        // ÇëÇó2£¬ÔÙ´ÎÈ¡µÃtoken
+        // è¯·æ±‚2ï¼Œå†æ¬¡å–å¾—token
         getInvocationContext("http://localhost/app1/1.html");
         initRequestContext();
 
@@ -142,7 +142,7 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
         assertThat(tool.getLongLiveHiddenField().toString(), containsString(token));
         assertEquals("_csrf_token", CsrfToken.getKey());
 
-        // ºÍunique token»ìÓÃ
+        // å’Œunique tokenæ··ç”¨
         String token2 = tool.getUniqueToken();
 
         assertNotNull(token2);
@@ -155,7 +155,7 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
         commitRequestContext();
 
         // -----------------------
-        // ÇëÇó3£¬È¡µÃtoken
+        // è¯·æ±‚3ï¼Œå–å¾—token
         getInvocationContext("http://localhost/app1/1.html");
         initRequestContext();
 
@@ -168,16 +168,16 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
 
         assertEquals(token2, newRequest.getSession().getAttribute("_csrf_token"));
 
-        // ÈÃsession¹ıÆÚ£¬µ«±£³ÖsessionId
+        // è®©sessionè¿‡æœŸï¼Œä½†ä¿æŒsessionId
         final String sessionId = newRequest.getSession().getId();
         newRequest.getSession().invalidate();
         commitRequestContext();
 
         // -----------------------
-        // ÇëÇó4£¬ÔÙ´ÎÈ¡µÃtoken
+        // è¯·æ±‚4ï¼Œå†æ¬¡å–å¾—token
         assertEquals("", client.getCookieValue("JSESSIONID"));
         assertTrue(client.getCookieDetails("JSESSIONID").isExpired());
-        Thread.sleep(10); // È·±£´´½¨Ê±¼ä¸Ä±ä
+        Thread.sleep(10); // ç¡®ä¿åˆ›å»ºæ—¶é—´æ”¹å˜
 
         getInvocationContext("http://localhost/app1/1.html", new WebRequestCallback() {
             public void process(WebRequest wr) {
@@ -187,12 +187,12 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
 
         initRequestContext();
 
-        assertTrue(newRequest.getSession().isNew()); // ĞÂsession
-        assertEquals(sessionId, newRequest.getSession().getId()); // id²»±ä
+        assertTrue(newRequest.getSession().isNew()); // æ–°session
+        assertEquals(sessionId, newRequest.getSession().getId()); // idä¸å˜
 
         String token3 = tool.getLongLiveToken();
 
-        assertFalse(token.equals(token3)); // tokenÓÉidºÍÊ±¼ä¹²Í¬Éú³É£¬Òò´Ë¼´Ê¹id²»±ä£¬tokenÒ²¸Ä±ä
+        assertFalse(token.equals(token3)); // tokenç”±idå’Œæ—¶é—´å…±åŒç”Ÿæˆï¼Œå› æ­¤å³ä½¿idä¸å˜ï¼Œtokenä¹Ÿæ”¹å˜
         assertNotNull(token3);
         assertThat(tool.getHiddenField(true).toString(),
                 containsString("<input name='_csrf_token' type='hidden' value='"));
@@ -205,7 +205,7 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
     @Test
     public void getUniqueToken() throws Exception {
         // -----------------------
-        // ÇëÇó1£¬È¡µÃtoken
+        // è¯·æ±‚1ï¼Œå–å¾—token
         String token = tool.getUniqueToken();
 
         assertNotNull(token);
@@ -214,14 +214,14 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
         assertThat(tool.getUniqueHiddenField().toString(), containsString(token));
         assertEquals("_csrf_token", CsrfToken.getKey());
 
-        // Í¬Ò»¸öÇëÇó£¬ÔÙ´ÎÈ¡µÃtoken
+        // åŒä¸€ä¸ªè¯·æ±‚ï¼Œå†æ¬¡å–å¾—token
         assertEquals(token, tool.getUniqueToken());
         assertEquals(token, newRequest.getSession().getAttribute("_csrf_token"));
 
         commitRequestContext();
 
         // -----------------------
-        // ÇëÇó2£¬ÔÙ´ÎÈ¡µÃtoken
+        // è¯·æ±‚2ï¼Œå†æ¬¡å–å¾—token
         getInvocationContext("http://localhost/app1/1.html");
         initRequestContext();
 
@@ -233,14 +233,14 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
         assertThat(tool.getUniqueHiddenField().toString(), containsString(token2));
         assertEquals("_csrf_token", CsrfToken.getKey());
 
-        // Í¬Ò»¸öÇëÇó£¬ÔÙ´ÎÈ¡µÃtoken
+        // åŒä¸€ä¸ªè¯·æ±‚ï¼Œå†æ¬¡å–å¾—token
         assertEquals(token2, tool.getUniqueToken());
         assertEquals(token + "/" + token2, newRequest.getSession().getAttribute("_csrf_token"));
 
         commitRequestContext();
 
         // -----------------------
-        // ÇëÇó3-8£¬È¡µÃtoken
+        // è¯·æ±‚3-8ï¼Œå–å¾—token
         String tokens = token + "/" + token2;
 
         for (int i = 2; i < 8; i++) {
@@ -255,7 +255,7 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
             assertThat(tool.getUniqueHiddenField().toString(), containsString(token_i));
             assertEquals("_csrf_token", CsrfToken.getKey());
 
-            // Í¬Ò»¸öÇëÇó£¬ÔÙ´ÎÈ¡µÃtoken
+            // åŒä¸€ä¸ªè¯·æ±‚ï¼Œå†æ¬¡å–å¾—token
             assertEquals(token_i, tool.getUniqueToken());
             assertEquals(tokens += "/" + token_i, newRequest.getSession().getAttribute("_csrf_token"));
 
@@ -263,7 +263,7 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
         }
 
         // -----------------------
-        // ÇëÇó9£¬È¡µÃtoken£¬Å×ÆúµÚÒ»¸ötoken
+        // è¯·æ±‚9ï¼Œå–å¾—tokenï¼ŒæŠ›å¼ƒç¬¬ä¸€ä¸ªtoken
         getInvocationContext("http://localhost/app1/1.html");
         initRequestContext();
 
@@ -277,7 +277,7 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
         commitRequestContext();
 
         // -----------------------
-        // ÇëÇó10£¬È¡µÃtoken£¬ÉèÖÃmaxTokens=3
+        // è¯·æ±‚10ï¼Œå–å¾—tokenï¼Œè®¾ç½®maxTokens=3
         getInvocationContext("http://localhost/app1/1.html");
         initRequestContext();
 

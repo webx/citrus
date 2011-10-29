@@ -404,7 +404,7 @@ public class PullServiceTests extends AbstractPullServiceTests {
 
     @Test
     public void service_getContext() {
-        // 在web环境中，context被cache，否则不cache
+        // 鍦╳eb鐜涓紝context琚玞ache锛屽惁鍒欎笉cache
         assertNotSame(service.getContext(), service.getContext());
 
         setRequestAttrs();
@@ -415,10 +415,10 @@ public class PullServiceTests extends AbstractPullServiceTests {
     public void service_getTools() {
         assertGetTools(service.getTools());
 
-        // 在非web环境中，context不被cache
+        // 鍦ㄩ潪web鐜涓紝context涓嶈cache
         assertNotSame(service.getTools(), service.getTools());
 
-        // 在web环境中，context被cache
+        // 鍦╳eb鐜涓紝context琚玞ache
         setRequestAttrs();
         assertSame(service.getTools(), service.getTools());
 
@@ -439,10 +439,10 @@ public class PullServiceTests extends AbstractPullServiceTests {
         assertArrayEquals(allNamesWithParent, tools.keySet().toArray());
         assertArrayEquals(allValuesWithParent, tools.values().toArray());
 
-        // 在非web环境中，context不被cache
+        // 鍦ㄩ潪web鐜涓紝context涓嶈cache
         assertNotSame(service.getTools(), service.getTools());
 
-        // 在web环境中，context被cache
+        // 鍦╳eb鐜涓紝context琚玞ache
         setRequestAttrs();
         assertSame(service.getTools(), service.getTools());
 
@@ -788,7 +788,7 @@ public class PullServiceTests extends AbstractPullServiceTests {
 
     @Test
     public void context_pull_withParent() {
-        setRequestAttrs(); // 确保每次取得同一个context，以便于测试
+        setRequestAttrs(); // 纭繚姣忔鍙栧緱鍚屼竴涓猚ontext锛屼互渚夸簬娴嬭瘯
 
         // init parent context
         Map<String, Object> parent_pulledTools;

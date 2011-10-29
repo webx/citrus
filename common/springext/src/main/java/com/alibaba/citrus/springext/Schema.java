@@ -44,10 +44,10 @@ public interface Schema {
     InputStream getInputStream() throws IOException;
 
     /**
-     * ȡ��dom�ĵ���
+     * 取得dom文档。
      * <p>
-     * �����ĵ���ȡʧ�ܣ��򷵻�<code>null</code>
-     * �������ӡ������־��������Ϊ�˱�����һ��schema�Ĵ��󣬵�������schema������װ�롣
+     * 假如文档读取失败，则返回<code>null</code>
+     * ，但会打印警告日志。这样是为了避免因一个schema的错误，导致所有schema均不能装入。
      * </p>
      */
     Document getDocument();

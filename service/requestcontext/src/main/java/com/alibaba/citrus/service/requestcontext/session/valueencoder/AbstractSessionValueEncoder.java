@@ -43,7 +43,7 @@ import com.alibaba.citrus.util.StringEscapeUtil;
 import com.alibaba.citrus.util.io.StreamUtil;
 
 /**
- * <code>SessionEncoder</code>Õë¶Ô·Ç´®ĞĞ»¯³¡¾°µÄ³éÏó±àÂëÊµÏÖ£¬¼ÓÃÜ£¬base64À´±àÂë¡¢½âÂë¡£
+ * <code>SessionEncoder</code>é’ˆå¯¹éä¸²è¡ŒåŒ–åœºæ™¯çš„æŠ½è±¡ç¼–ç å®ç°ï¼ŒåŠ å¯†ï¼Œbase64æ¥ç¼–ç ã€è§£ç ã€‚
  * 
  * @author youqun.zhangyq
  * @author Michael Zhou
@@ -78,13 +78,13 @@ public abstract class AbstractSessionValueEncoder extends BeanSupport implements
         try {
             String encodedValue = encodeValue(value);
 
-            // Èç¹ûÌá¹©ÁËencrypter£¬ÔòÑ¹Ëõ²¢¼ÓÃÜÖ®
+            // å¦‚æœæä¾›äº†encrypterï¼Œåˆ™å‹ç¼©å¹¶åŠ å¯†ä¹‹
             if (encrypter != null) {
                 encodedValue = new String(
                         Base64.encodeBase64(encrypter.encrypt(compress(encodedValue.getBytes("UTF-8")))), "8859_1");
             }
 
-            // Èç¹û¼ÓÃÜ£¬Ôò±ØĞë½øĞĞurl encoding
+            // å¦‚æœåŠ å¯†ï¼Œåˆ™å¿…é¡»è¿›è¡Œurl encoding
             if (doURLEncode() || encrypter != null) {
                 encodedValue = StringEscapeUtil.escapeURL(encodedValue, getCharset());
             }
@@ -97,12 +97,12 @@ public abstract class AbstractSessionValueEncoder extends BeanSupport implements
 
     public Object decode(String encodedValue, StoreContext storeContext) throws SessionValueEncoderException {
         try {
-            // Èç¹û¼ÓÃÜ£¬Ôò±ØĞë½øĞĞurl decoding
+            // å¦‚æœåŠ å¯†ï¼Œåˆ™å¿…é¡»è¿›è¡Œurl decoding
             if (doURLEncode() || encrypter != null) {
                 encodedValue = StringEscapeUtil.unescapeURL(encodedValue, getCharset());
             }
 
-            // Èç¹ûÌá¹©ÁËencrypter£¬Ôò½âÃÜ²¢½âÑ¹ËõÖ®
+            // å¦‚æœæä¾›äº†encrypterï¼Œåˆ™è§£å¯†å¹¶è§£å‹ç¼©ä¹‹
             if (encrypter != null) {
                 encodedValue = new String(decompress(encrypter.decrypt(Base64.decodeBase64(encodedValue
                         .getBytes("8859_1")))), "UTF-8");

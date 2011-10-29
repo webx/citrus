@@ -48,7 +48,7 @@ public class URIBrokerToolTests extends AbstractURIBrokerServiceTests {
         Object u3 = tools.get("uris");
 
         // -----------------------------------
-        // ĞÂµÄrequest
+        // æ–°çš„request
         prepareRequest();
 
         tools = assertRequest();
@@ -57,7 +57,7 @@ public class URIBrokerToolTests extends AbstractURIBrokerServiceTests {
         Object u22 = tools.get("linkCharset");
         Object u32 = tools.get("uris");
 
-        // È·±£Á½¸öÇëÇóÈ¡µÃ²»Í¬µÄ¶ÔÏó¡£
+        // ç¡®ä¿ä¸¤ä¸ªè¯·æ±‚å–å¾—ä¸åŒçš„å¯¹è±¡ã€‚
         assertNotSame(u1, u12);
         assertNotSame(u2, u22);
         assertNotSame(u3, u32);
@@ -67,16 +67,16 @@ public class URIBrokerToolTests extends AbstractURIBrokerServiceTests {
         Map<String, Object> tools = pull.getTools();
         assertEquals(4, tools.size());
 
-        // ´Ópull serviceÖĞÖ±½ÓÈ¡µÃ
+        // ä»pull serviceä¸­ç›´æ¥å–å¾—
         URIBroker u1 = (URIBroker) tools.get("link2");
         URIBroker u2 = (URIBroker) tools.get("linkCharset");
 
-        // Í¨¹ıuris toolÈ¡µÃ
+        // é€šè¿‡uris toolå–å¾—
         URIBrokerTool.Helper tool = (URIBrokerTool.Helper) tools.get("uris");
         URIBroker u1_2 = tool.get("link2");
         URIBroker u2_2 = tool.get("linkCharset");
 
-        // ²é¿´äÖÈ¾½á¹û£¬ºÜÃ÷ÏÔ£¬requestÒÑ¾­±»×¢Èë
+        // æŸ¥çœ‹æ¸²æŸ“ç»“æœï¼Œå¾ˆæ˜æ˜¾ï¼Œrequestå·²ç»è¢«æ³¨å…¥
         assertEquals("http://myuser2:mypass2@myservername2:1234/aaa/a1/bbb/ccc/ddd"
                 + "?aaa=1111&bbb=2222&ccc=3333#myreference2", u1.toString());
 
@@ -85,11 +85,11 @@ public class URIBrokerToolTests extends AbstractURIBrokerServiceTests {
         assertEquals(u1_2.toString(), u1.toString());
         assertEquals(u2_2.toString(), u2.toString());
 
-        // Í¨¹ıuri.get()·½·¨È¡µÃbroker£¬ÓĞcache¡£
+        // é€šè¿‡uri.get()æ–¹æ³•å–å¾—brokerï¼Œæœ‰cacheã€‚
         assertSame(u1_2, tool.get("link2"));
         assertSame(u2_2, tool.get("linkCharset"));
 
-        // ¿ÉÈ¡µÃ·Çexposed brokers
+        // å¯å–å¾—éexposed brokers
         assertEquals("http://localhost/", tool.get("link").toString());
 
         return tools;

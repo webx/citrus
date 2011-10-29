@@ -43,7 +43,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ½âÎöconfiguration point namespace¡£
+ * è§£æconfiguration point namespaceã€‚
  * 
  * @author Michael Zhou
  */
@@ -161,7 +161,7 @@ public class ConfigurationPointsImpl implements ConfigurationPoints {
     }
 
     private String normalizeConfigurationPointName(String name) {
-        return trimToNull(normalizeRelativePath(name, true)); // ¹æ¸ñ»¯£¬³ıÈ¥Ê×Î²slash
+        return trimToNull(normalizeRelativePath(name, true)); // è§„æ ¼åŒ–ï¼Œé™¤å»é¦–å°¾slash
     }
 
     private String normalizeNamespaceUri(String uri) {

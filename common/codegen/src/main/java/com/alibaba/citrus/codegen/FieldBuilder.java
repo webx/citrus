@@ -28,7 +28,7 @@ import com.alibaba.citrus.asm.FieldVisitor;
 import com.alibaba.citrus.asm.Type;
 
 /**
- * ÓÃÀ´Éú³ÉÒ»¸öfieldµÄ¹¤¾ß¡£
+ * ç”¨æ¥ç”Ÿæˆä¸€ä¸ªfieldçš„å·¥å…·ã€‚
  * 
  * @author Michael Zhou
  */
@@ -40,24 +40,24 @@ public abstract class FieldBuilder {
     private final String fieldName;
 
     /**
-     * ´´½¨Ò»¸ö<code>FieldBuilder</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>FieldBuilder</code>ã€‚
      * 
-     * @param cb fieldËùÔÚµÄ<code>ClassBuilder</code>¶ÔÏó
-     * @param access ·ÃÎÊĞÔ£¬Èç¹ûÊÇ<code>-1</code>£¬ÔòÈ¡Ä¬ÈÏÖµ¡£
-     * @param fieldType fieldÀàĞÍ
-     * @param fieldName fieldÃû³Æ
-     * @param value ×Ö¶ÎÖµ
+     * @param cb fieldæ‰€åœ¨çš„<code>ClassBuilder</code>å¯¹è±¡
+     * @param access è®¿é—®æ€§ï¼Œå¦‚æœæ˜¯<code>-1</code>ï¼Œåˆ™å–é»˜è®¤å€¼ã€‚
+     * @param fieldType fieldç±»å‹
+     * @param fieldName fieldåç§°
+     * @param value å­—æ®µå€¼
      */
     protected FieldBuilder(ClassBuilder cb, int access, Class<?> fieldType, String fieldName, Object value) {
         // class builder
         this.cb = cb;
 
         // access
-        if (access < 0) { // Ä¬ÈÏÖµ
+        if (access < 0) { // é»˜è®¤å€¼
             if (cb.isInterface()) {
-                access = ACC_PUBLIC | ACC_CONSTANT; // ¶Ôinterface¶øÑÔ£¬±ØĞëÎª£º public final static
+                access = ACC_PUBLIC | ACC_CONSTANT; // å¯¹interfaceè€Œè¨€ï¼Œå¿…é¡»ä¸ºï¼š public final static
             } else {
-                access = ACC_PRIVATE; // ¶ÔÓÚclass¶øÑÔ£¬Ä¬ÈÏÎª£º private
+                access = ACC_PRIVATE; // å¯¹äºclassè€Œè¨€ï¼Œé»˜è®¤ä¸ºï¼š private
             }
         }
 
@@ -76,63 +76,63 @@ public abstract class FieldBuilder {
     }
 
     /**
-     * È¡µÃfieldËùÔÚµÄ<code>ClassBuilder</code>¡£
+     * å–å¾—fieldæ‰€åœ¨çš„<code>ClassBuilder</code>ã€‚
      */
     public ClassBuilder getClassBuilder() {
         return cb;
     }
 
     /**
-     * È¡µÃ<code>FieldVisitor</code>¡£
+     * å–å¾—<code>FieldVisitor</code>ã€‚
      */
     public FieldVisitor getFieldVisitor() {
         return fv;
     }
 
     /**
-     * ÊÇ·ñÎª³£Á¿¡£
+     * æ˜¯å¦ä¸ºå¸¸é‡ã€‚
      */
     public boolean isConstant() {
         return isConstant;
     }
 
     /**
-     * È¡µÃfieldÀàĞÍ¡£
+     * å–å¾—fieldç±»å‹ã€‚
      */
     public Type getFieldType() {
         return fieldType;
     }
 
     /**
-     * È¡µÃfieldÃû³Æ¡£
+     * å–å¾—fieldåç§°ã€‚
      */
     public String getFieldName() {
         return fieldName;
     }
 
     /**
-     * ÊµÏÖ½Ó¿Ú<code>FieldVisitor</code>¡£
+     * å®ç°æ¥å£<code>FieldVisitor</code>ã€‚
      */
     public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
         return fv.visitAnnotation(desc, visible);
     }
 
     /**
-     * ÊµÏÖ½Ó¿Ú<code>FieldVisitor</code>¡£
+     * å®ç°æ¥å£<code>FieldVisitor</code>ã€‚
      */
     public void visitAttribute(Attribute attr) {
         fv.visitAttribute(attr);
     }
 
     /**
-     * ½áÊøfield¡£
+     * ç»“æŸfieldã€‚
      */
     protected void endField() {
         fv.visitEnd();
     }
 
     /**
-     * ¸ø×ÓÀàÒ»¸ö»ú»á°ü×°field visitor¡£
+     * ç»™å­ç±»ä¸€ä¸ªæœºä¼šåŒ…è£…field visitorã€‚
      */
     protected FieldVisitor decorate(FieldVisitor fv) {
         return fv;

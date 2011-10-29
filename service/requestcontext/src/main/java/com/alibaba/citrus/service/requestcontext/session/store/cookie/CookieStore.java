@@ -20,7 +20,7 @@ package com.alibaba.citrus.service.requestcontext.session.store.cookie;
 import com.alibaba.citrus.service.requestcontext.session.SessionStore;
 
 /**
- * »ùÓÚcookieµÄsession storeÊµÏÖ¡£
+ * åŸºäºcookieçš„session storeå®ç°ã€‚
  * 
  * @author Michael Zhou
  */

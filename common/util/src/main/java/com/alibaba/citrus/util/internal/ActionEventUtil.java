@@ -32,7 +32,7 @@ public class ActionEventUtil {
     static final String ACTION_EVENT_KEY = "_action_event_submit_do_";
 
     /**
-     * È¡µÃkey=eventSubmit_doXyz, value²»Îª¿ÕµÄ²ÎÊı¡£
+     * å–å¾—key=eventSubmit_doXyz, valueä¸ä¸ºç©ºçš„å‚æ•°ã€‚
      */
     public static String getEventName(HttpServletRequest request) {
         Object savedEvent = request.getAttribute(ACTION_EVENT_KEY);
@@ -74,7 +74,7 @@ public class ActionEventUtil {
                 int startIndex = EVENT_PATTERN_LENGTH;
                 int endIndex = paramKey.length();
 
-                // Ö§³Ö<input type="image">
+                // æ”¯æŒ<input type="image">
                 if (paramKey.endsWith(IMAGE_BUTTON_SUFFIX_1)) {
                     endIndex -= IMAGE_BUTTON_SUFFIX_1.length();
                 } else if (paramKey.endsWith(IMAGE_BUTTON_SUFFIX_2)) {

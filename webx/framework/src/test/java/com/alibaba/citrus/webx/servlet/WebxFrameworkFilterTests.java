@@ -94,7 +94,7 @@ public class WebxFrameworkFilterTests extends AbstractWebxTests {
         assertEquals(excluded, excludes.matches(request));
 
         if (excluded) {
-            filter.doFilter(request, response, filterChain); // ¶Ôexcluded requestµ÷ÓÃdoFilter£¬Ó¦¸ÃÁ¢¼´·µ»Ø
+            filter.doFilter(request, response, filterChain); // å¯¹excluded requestè°ƒç”¨doFilterï¼Œåº”è¯¥ç«‹å³è¿”å›
         }
 
         verify(request, response, filterChain);
@@ -287,7 +287,7 @@ public class WebxFrameworkFilterTests extends AbstractWebxTests {
         public boolean service(RequestContext requestContext) throws Exception {
             setAttribute("handleRequest", getComponent());
 
-            // ²âÊÔcomponentÊÇ·ñ±»ÖÃÈërequest attrs
+            // æµ‹è¯•componentæ˜¯å¦è¢«ç½®å…¥request attrs
             assertSame(getComponent(), WebxUtil.getCurrentComponent(requestContext.getRequest()));
 
             return false;

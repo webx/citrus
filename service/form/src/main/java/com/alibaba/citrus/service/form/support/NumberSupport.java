@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ÓÃÀ´·½±ã¸÷ÖÖÀàĞÍÊı×ÖµÄ±È½Ï²Ù×÷¡£
+ * ç”¨æ¥æ–¹ä¾¿å„ç§ç±»å‹æ•°å­—çš„æ¯”è¾ƒæ“ä½œã€‚
  * 
  * @author Michael Zhou
  */
@@ -108,7 +108,7 @@ public class NumberSupport implements Comparable<NumberSupport> {
     }
 
     /**
-     * Êı×ÖµÄÀàĞÍ¡£
+     * æ•°å­—çš„ç±»å‹ã€‚
      */
     public static enum Type {
         INT {

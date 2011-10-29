@@ -20,25 +20,25 @@ package com.alibaba.citrus.service.moduleloader;
 import java.util.Set;
 
 /**
- * ÓÃÀ´´´½¨modulesµÄ¹¤³§¡£
+ * ç”¨æ¥åˆ›å»ºmodulesçš„å·¥å‚ã€‚
  * 
  * @author Michael Zhou
  */
 public interface ModuleFactory {
     /**
-     * È¡µÃµ±Ç°factoryËùÖ§³ÖµÄËùÓĞmoduleÀàĞÍ¡£
+     * å–å¾—å½“å‰factoryæ‰€æ”¯æŒçš„æ‰€æœ‰moduleç±»å‹ã€‚
      */
     Set<String> getModuleTypes();
 
     /**
-     * È¡µÃÖ¸¶¨moduleÀàĞÍµÄËùÓĞmoduleÃû³Æ¡£
+     * å–å¾—æŒ‡å®šmoduleç±»å‹çš„æ‰€æœ‰moduleåç§°ã€‚
      */
     Set<String> getModuleNames(String moduleType);
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆºÍÀàĞÍµÄmoduleÊµÀı¡£
+     * å–å¾—æŒ‡å®šåç§°å’Œç±»å‹çš„moduleå®ä¾‹ã€‚
      * <p>
-     * Èç¹ûÎ´ÕÒµ½£¬Ôò·µ»Ø<code>null</code>¡£
+     * å¦‚æœæœªæ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * </p>
      */
     Object getModule(String moduleType, String moduleName) throws ModuleLoaderException;

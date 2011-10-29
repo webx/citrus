@@ -25,7 +25,7 @@ import java.util.Map;
 import com.alibaba.citrus.generictype.introspect.PropertyInfo;
 
 /**
- * ³éÏóµÄ{@link PropertiesFinder}ÊµÏÖ¡£
+ * æŠ½è±¡çš„{@link PropertiesFinder}å®ç°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -57,7 +57,7 @@ public abstract class AbstractPropertiesFinder extends AbstractTypeVisitor imple
             props.put(propName, propsWithSameName);
         }
 
-        // ºÏ²¢¼æÈİµÄproperties¡£
+        // åˆå¹¶å…¼å®¹çš„propertiesã€‚
         boolean merged = false;
 
         for (PropertyInfo propWithSameName : propsWithSameName) {
@@ -74,7 +74,7 @@ public abstract class AbstractPropertiesFinder extends AbstractTypeVisitor imple
     }
 
     /**
-     * ºÏ²¢Á½¸öÍ¬ÀàĞÍ¡¢Í¬ÃûµÄproperties¡£ Èç¹ûmerge³É¹¦£¬Ôò·µ»Ø<code>true</code>¡£
+     * åˆå¹¶ä¸¤ä¸ªåŒç±»å‹ã€åŒåçš„propertiesã€‚ å¦‚æœmergeæˆåŠŸï¼Œåˆ™è¿”å›<code>true</code>ã€‚
      */
     private boolean merge(PropertyInfo target, PropertyInfo with) {
         if (target instanceof AbstractPropertyInfo) {

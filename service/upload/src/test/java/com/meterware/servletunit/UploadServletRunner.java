@@ -32,7 +32,7 @@ import com.meterware.httpunit.FrameSelector;
 import com.meterware.httpunit.WebRequest;
 
 /**
- * ¶Ô<code>ServletRunner</code>µÄhack£¬Ö§³Ö¶Ôrequest contentµÄ¹ıÂË¡£
+ * å¯¹<code>ServletRunner</code>çš„hackï¼Œæ”¯æŒå¯¹request contentçš„è¿‡æ»¤ã€‚
  * 
  * @author Michael Zhou
  */

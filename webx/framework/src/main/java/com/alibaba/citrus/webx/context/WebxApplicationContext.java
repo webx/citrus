@@ -22,23 +22,23 @@ import static com.alibaba.citrus.webx.WebxConstant.*;
 import com.alibaba.citrus.service.resource.support.context.ResourceLoadingXmlWebApplicationContext;
 
 /**
- * ÓÃÓÚwebx¿ò¼ÜµÄapplication context¡£
+ * ç”¨äºwebxæ¡†æ¶çš„application contextã€‚
  * <ul>
- * <li>À©Õ¹ÁËSpringµÄ
+ * <li>æ‰©å±•äº†Springçš„
  * {@link org.springframework.web.context.support.XmlWebApplicationContext}
- * £¬Ìí¼ÓÁËSpringExtµÄÖ§³Ö£¬°üÀ¨configuration pointÒÔ¼°resource loadingÀ©Õ¹¡£</li>
- * <li>ĞŞ¸ÄÁËÄ¬ÈÏµÄÅäÖÃÎÄ¼şÃû£º<code>/WEB-INF/webx-*.xml</code>¡£</li>
+ * ï¼Œæ·»åŠ äº†SpringExtçš„æ”¯æŒï¼ŒåŒ…æ‹¬configuration pointä»¥åŠresource loadingæ‰©å±•ã€‚</li>
+ * <li>ä¿®æ”¹äº†é»˜è®¤çš„é…ç½®æ–‡ä»¶åï¼š<code>/WEB-INF/webx-*.xml</code>ã€‚</li>
  * </ul>
  * 
  * @author Michael Zhou
  */
 public class WebxApplicationContext extends ResourceLoadingXmlWebApplicationContext {
     /**
-     * È¡µÃÄ¬ÈÏµÄSpringÅäÖÃÎÄ¼şÃû¡£
+     * å–å¾—é»˜è®¤çš„Springé…ç½®æ–‡ä»¶åã€‚
      * <ul>
-     * <li>Root contextÄ¬ÈÏÅäÖÃÎÄ¼şÎª<code>/WEB-INF/webx.xml</code>£»</li>
-     * <li>¼ÙÉècomponentÃû³ÆÎª<code>"test"</code> £¬ÆäÄ¬ÈÏµÄÅäÖÃÎÄ¼şÊÇ
-     * <code>/WEB-INF/webx-test.xml</code>¡£</li>
+     * <li>Root contexté»˜è®¤é…ç½®æ–‡ä»¶ä¸º<code>/WEB-INF/webx.xml</code>ï¼›</li>
+     * <li>å‡è®¾componentåç§°ä¸º<code>"test"</code> ï¼Œå…¶é»˜è®¤çš„é…ç½®æ–‡ä»¶æ˜¯
+     * <code>/WEB-INF/webx-test.xml</code>ã€‚</li>
      * </ul>
      */
     @Override

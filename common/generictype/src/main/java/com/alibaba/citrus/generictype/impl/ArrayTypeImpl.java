@@ -32,7 +32,7 @@ import com.alibaba.citrus.util.internal.LazyLoader;
 import com.alibaba.citrus.util.internal.LazyLoader.Loader;
 
 /**
- * ¶Ô{@link ArrayTypeInfo}µÄÊµÏÖ¡£
+ * å¯¹{@link ArrayTypeInfo}çš„å®ç°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -132,7 +132,7 @@ class ArrayTypeImpl implements ArrayTypeInfo {
     }
 
     /**
-     * È¡µÃhashÖµ¡£
+     * å–å¾—hashå€¼ã€‚
      */
     @Override
     public int hashCode() {
@@ -140,7 +140,7 @@ class ArrayTypeImpl implements ArrayTypeInfo {
     }
 
     /**
-     * ÅĞ¶ÏÁ½¸ö¶ÔÏóÊÇ·ñÏàÍ¬¡£
+     * åˆ¤æ–­ä¸¤ä¸ªå¯¹è±¡æ˜¯å¦ç›¸åŒã€‚
      */
     @Override
     public boolean equals(Object other) {
@@ -158,7 +158,7 @@ class ArrayTypeImpl implements ArrayTypeInfo {
     }
 
     /**
-     * È¡µÃ×Ö·û´®±íÊ¾¡£
+     * å–å¾—å­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      */
     @Override
     public String toString() {
@@ -174,7 +174,7 @@ class ArrayTypeImpl implements ArrayTypeInfo {
     }
 
     /**
-     * ¸¸Àà¡¢½Ó¿ÚµÄĞÅÏ¢¡£
+     * çˆ¶ç±»ã€æ¥å£çš„ä¿¡æ¯ã€‚
      */
     private static class Supertypes {
         private static final TypeInfo[] ARRAY_SUPERTYPES;
@@ -213,7 +213,7 @@ class ArrayTypeImpl implements ArrayTypeInfo {
                 supertypes.add(arraySupertype);
             }
 
-            // ´´½¨lists
+            // åˆ›å»ºlists
             for (TypeInfo supertype : supertypes) {
                 if (supertype.getRawType().isInterface()) {
                     interfaces.add(supertype);
@@ -233,7 +233,7 @@ class ArrayTypeImpl implements ArrayTypeInfo {
     }
 
     /**
-     * ´´½¨supertypesµÄ×°ÔØÆ÷¡£
+     * åˆ›å»ºsupertypesçš„è£…è½½å™¨ã€‚
      */
     private class SupertypesLoader implements Loader<Supertypes, Object> {
         public Supertypes load(Object context) {

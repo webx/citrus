@@ -112,7 +112,7 @@ public abstract class AbstractCompositeValidatorTests<V extends AbstractComposit
     }
 
     /**
-     * Ô¤´¦ÀíÊµÀı£¬ÒÔ±ãÍ¨¹ı<code>AbstractCompositeValidatorTests</code>ÖĞµÄ²âÊÔ¡£
+     * é¢„å¤„ç†å®ä¾‹ï¼Œä»¥ä¾¿é€šè¿‡<code>AbstractCompositeValidatorTests</code>ä¸­çš„æµ‹è¯•ã€‚
      */
     protected void initFor_AbstractCompositeValidatorTests(V validator) {
         validator.setMessage("test");

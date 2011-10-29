@@ -37,10 +37,10 @@ import com.meterware.httpunit.HttpUnitUtils;
 import com.meterware.httpunit.WebRequest;
 
 /**
- * ½â¾öÈçÏÂÎÊÌâ£º
+ * è§£å†³å¦‚ä¸‹é—®é¢˜ï¼š
  * <ul>
- * <li>http unit servlet context²»Ö§³ÖgetResourcePaths·½·¨µÄÎÊÌâ¡£</li>
- * <li>²»Ö§³ÖhttpOnly cookieµÄÎÊÌâ¡£</li>
+ * <li>http unit servlet contextä¸æ”¯æŒgetResourcePathsæ–¹æ³•çš„é—®é¢˜ã€‚</li>
+ * <li>ä¸æ”¯æŒhttpOnly cookieçš„é—®é¢˜ã€‚</li>
  * </ul>
  * 
  * @author Michael Zhou

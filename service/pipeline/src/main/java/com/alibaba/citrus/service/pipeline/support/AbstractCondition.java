@@ -21,7 +21,7 @@ import com.alibaba.citrus.service.pipeline.Condition;
 import com.alibaba.citrus.springext.support.BeanSupport;
 
 /**
- * <code>Condition</code>µÄÍ¨ÓÃ»ùÀà£¬Ìá¹©ÁË»ùÓÚspringµÄ³õÊ¼»¯¹¦ÄÜ¡£
+ * <code>Condition</code>çš„é€šç”¨åŸºç±»ï¼Œæä¾›äº†åŸºäºspringçš„åˆå§‹åŒ–åŠŸèƒ½ã€‚
  * 
  * @author Michael Zhou
  */

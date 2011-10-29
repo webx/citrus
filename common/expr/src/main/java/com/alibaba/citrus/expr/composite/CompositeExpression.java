@@ -24,7 +24,7 @@ import com.alibaba.citrus.expr.ExpressionContext;
 import com.alibaba.citrus.expr.support.ExpressionSupport;
 
 /**
- * ´ú±íÒ»¸ö×éºÏµÄ±í´ïÊ½¡£
+ * ä»£è¡¨ä¸€ä¸ªç»„åˆçš„è¡¨è¾¾å¼ã€‚
  * 
  * @author Michael Zhou
  */
@@ -33,10 +33,10 @@ public class CompositeExpression extends ExpressionSupport {
     private Expression[] expressions;
 
     /**
-     * ´´½¨Ò»¸ö×éºÏµÄ±í´ïÊ½¡£
+     * åˆ›å»ºä¸€ä¸ªç»„åˆçš„è¡¨è¾¾å¼ã€‚
      * 
-     * @param expr ±í´ïÊ½×Ö·û´®
-     * @param expressions ±í´ïÊ½ÁĞ±í
+     * @param expr è¡¨è¾¾å¼å­—ç¬¦ä¸²
+     * @param expressions è¡¨è¾¾å¼åˆ—è¡¨
      */
     public CompositeExpression(String expr, List<Expression> expressions) {
         this.expr = expr;
@@ -44,19 +44,19 @@ public class CompositeExpression extends ExpressionSupport {
     }
 
     /**
-     * È¡µÃ±í´ïÊ½×Ö·û´®±íÊ¾¡£
+     * å–å¾—è¡¨è¾¾å¼å­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      * 
-     * @return ±í´ïÊ½×Ö·û´®±íÊ¾
+     * @return è¡¨è¾¾å¼å­—ç¬¦ä¸²è¡¨ç¤º
      */
     public String getExpressionText() {
         return expr;
     }
 
     /**
-     * ÔÚÖ¸¶¨µÄÉÏÏÂÎÄÖĞ¼ÆËã±í´ïÊ½¡£
+     * åœ¨æŒ‡å®šçš„ä¸Šä¸‹æ–‡ä¸­è®¡ç®—è¡¨è¾¾å¼ã€‚
      * 
-     * @param context <code>ExpressionContext</code>ÉÏÏÂÎÄ
-     * @return ±í´ïÊ½µÄ¼ÆËã½á¹û
+     * @param context <code>ExpressionContext</code>ä¸Šä¸‹æ–‡
+     * @return è¡¨è¾¾å¼çš„è®¡ç®—ç»“æœ
      */
     public Object evaluate(ExpressionContext context) {
         StringBuffer buffer = new StringBuffer();

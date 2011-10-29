@@ -53,7 +53,7 @@ import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 import com.meterware.servletunit.ServletRunner;
 
 /**
- * ²âÊÔÈ«¾ÖµÄrequest contextÏà¹ØµÄ¶ÔÏó¡£
+ * æµ‹è¯•å…¨å±€çš„request contextç›¸å…³çš„å¯¹è±¡ã€‚
  */
 public class GlobalRequestObjectsTests extends AbstractRequestContextsTests<RequestContext> {
     private static XmlWebApplicationContext subFactory;
@@ -65,7 +65,7 @@ public class GlobalRequestObjectsTests extends AbstractRequestContextsTests<Requ
         // parent context
         createBeanFactory("services.xml");
 
-        // sub context - web context½«»áÊÔÍ¼ÖØÐÂ×¢²árequestµÈ¶ÔÏó£¬µ«ÊÇÓÉÓÚparentÖÐÒÑ¾­´æÔÚ£¬±»ºöÂÔ
+        // sub context - web contextå°†ä¼šè¯•å›¾é‡æ–°æ³¨å†Œrequestç­‰å¯¹è±¡ï¼Œä½†æ˜¯ç”±äºŽparentä¸­å·²ç»å­˜åœ¨ï¼Œè¢«å¿½ç•¥
         subFactory = new XmlWebApplicationContext();
         subFactory.setConfigLocation("empty.xml");
         subFactory.setServletContext(new ServletRunner(new File(srcdir, "WEB-INF/web.xml"), "").newClient()
@@ -73,7 +73,7 @@ public class GlobalRequestObjectsTests extends AbstractRequestContextsTests<Requ
         subFactory.setParent((ApplicationContext) factory);
         subFactory.refresh();
 
-        // init global before request£¬parent contextÖÐµÄsingleton proxy½«±»×¢Èë
+        // init global before requestï¼Œparent contextä¸­çš„singleton proxyå°†è¢«æ³¨å…¥
         globals = new WebGlobals();
         subFactory.getAutowireCapableBeanFactory().autowireBeanProperties(globals,
                 AutowireCapableBeanFactory.AUTOWIRE_BY_TYPE, false);
@@ -130,7 +130,7 @@ public class GlobalRequestObjectsTests extends AbstractRequestContextsTests<Requ
 
         assertEquals(10, set.size());
 
-        // ½øÈëweb»·¾³
+        // è¿›å…¥webçŽ¯å¢ƒ
         setupWebEnvironment();
 
         for (Object obj : globals.getObjects()) {
@@ -222,9 +222,9 @@ public class GlobalRequestObjectsTests extends AbstractRequestContextsTests<Requ
 
     @Test
     public void session() throws Exception {
-        assertNull(globals.request.getSession(false)); // sessionÉÐÎ´´´½¨
-        assertNotNull(globals.session.getId()); // ´´½¨session
-        assertNotNull(globals.request.getSession(false)); // sessionÒÑ¾­´´½¨
+        assertNull(globals.request.getSession(false)); // sessionå°šæœªåˆ›å»º
+        assertNotNull(globals.session.getId()); // åˆ›å»ºsession
+        assertNotNull(globals.request.getSession(false)); // sessionå·²ç»åˆ›å»º
     }
 
     @Test

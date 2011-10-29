@@ -23,66 +23,66 @@ import com.alibaba.citrus.service.upload.UploadException;
 import com.alibaba.citrus.service.upload.UploadParameters;
 
 /**
- * <code>ParameterParser</code>ÊÇÓÃÀ´½âÎöHTTPÇëÇóÖĞGET»òPOSTµÄ²ÎÊıµÄ½Ó¿Ú¡£
+ * <code>ParameterParser</code>æ˜¯ç”¨æ¥è§£æHTTPè¯·æ±‚ä¸­GETæˆ–POSTçš„å‚æ•°çš„æ¥å£ã€‚
  * 
  * @author Michael Zhou
  */
 public interface ParameterParser extends ValueParser {
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄ<code>FileItem</code>¶ÔÏó£¬Èç¹û²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šåç§°çš„<code>FileItem</code>å¯¹è±¡ï¼Œå¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return <code>FileItem</code>¶ÔÏó
+     * @param key å‚æ•°å
+     * @return <code>FileItem</code>å¯¹è±¡
      */
     FileItem getFileItem(String key);
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄ<code>FileItem</code>¶ÔÏó£¬Èç¹û²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šåç§°çš„<code>FileItem</code>å¯¹è±¡ï¼Œå¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return <code>FileItem</code>¶ÔÏóµÄÊı×é
+     * @param key å‚æ•°å
+     * @return <code>FileItem</code>å¯¹è±¡çš„æ•°ç»„
      */
     FileItem[] getFileItems(String key);
 
     /**
-     * Ìí¼Ó<code>FileItem</code>¡£
+     * æ·»åŠ <code>FileItem</code>ã€‚
      * 
-     * @param name ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param name å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     void add(String name, FileItem value);
 
     /**
-     * ½âÎö·ûºÏ<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>±ê×¼µÄ
-     * <code>multipart/form-data</code>ÀàĞÍµÄHTTPÇëÇó¡£
+     * è§£æç¬¦åˆ<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>æ ‡å‡†çš„
+     * <code>multipart/form-data</code>ç±»å‹çš„HTTPè¯·æ±‚ã€‚
      * <p>
-     * ÒªÖ´ĞĞ´Ë·½·¨£¬Ğë½«<code>UploadService.automatic</code>ÅäÖÃ²ÎÊıÉèÖÃ³É<code>false</code>¡£
-     * ´Ë·½·¨¸²¸ÇÁËserviceµÄÄ¬ÈÏÉèÖÃ£¬ÊÊºÏÓÚÔÚaction»òservletÖĞÊÖ¹¤Ö´ĞĞ¡£
+     * è¦æ‰§è¡Œæ­¤æ–¹æ³•ï¼Œé¡»å°†<code>UploadService.automatic</code>é…ç½®å‚æ•°è®¾ç½®æˆ<code>false</code>ã€‚
+     * æ­¤æ–¹æ³•è¦†ç›–äº†serviceçš„é»˜è®¤è®¾ç½®ï¼Œé€‚åˆäºåœ¨actionæˆ–servletä¸­æ‰‹å·¥æ‰§è¡Œã€‚
      * </p>
      * 
-     * @throws UploadException Èç¹û½âÎöÊ±³ö´í
+     * @throws UploadException å¦‚æœè§£ææ—¶å‡ºé”™
      */
     void parseUpload() throws UploadException;
 
     /**
-     * ½âÎö·ûºÏ<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>±ê×¼µÄ
-     * <code>multipart/form-data</code>ÀàĞÍµÄHTTPÇëÇó¡£
+     * è§£æç¬¦åˆ<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>æ ‡å‡†çš„
+     * <code>multipart/form-data</code>ç±»å‹çš„HTTPè¯·æ±‚ã€‚
      * <p>
-     * ÒªÖ´ĞĞ´Ë·½·¨£¬Ğë½«<code>UploadService.automatic</code>ÅäÖÃ²ÎÊıÉèÖÃ³É<code>false</code>¡£
-     * ´Ë·½·¨¸²¸ÇÁËserviceµÄÄ¬ÈÏÉèÖÃ£¬ÊÊºÏÓÚÔÚaction»òservletÖĞÊÖ¹¤Ö´ĞĞ¡£
+     * è¦æ‰§è¡Œæ­¤æ–¹æ³•ï¼Œé¡»å°†<code>UploadService.automatic</code>é…ç½®å‚æ•°è®¾ç½®æˆ<code>false</code>ã€‚
+     * æ­¤æ–¹æ³•è¦†ç›–äº†serviceçš„é»˜è®¤è®¾ç½®ï¼Œé€‚åˆäºåœ¨actionæˆ–servletä¸­æ‰‹å·¥æ‰§è¡Œã€‚
      * </p>
      * 
-     * @param sizeThreshold ÎÄ¼ş·ÅÔÚÄÚ´æÖĞµÄãĞÖµ£¬Ğ¡ÓÚ´ËÖµµÄÎÄ¼ş±»±£´æÔÚÄÚ´æÖĞ¡£Èç¹û´ËÖµĞ¡ÓÚ0£¬ÔòÊ¹ÓÃÔ¤ÉèµÄÖµ
-     * @param sizeMax HTTPÇëÇóµÄ×î´ó³ß´ç£¬³¬¹ı´Ë³ß´çµÄÇëÇó½«±»Å×Æú¡£
-     * @param repositoryPath Ôİ´æÉÏÔØÎÄ¼şµÄ¾ø¶ÔÂ·¾¶
-     * @throws UploadException Èç¹û½âÎöÊ±³ö´í
+     * @param sizeThreshold æ–‡ä»¶æ”¾åœ¨å†…å­˜ä¸­çš„é˜ˆå€¼ï¼Œå°äºæ­¤å€¼çš„æ–‡ä»¶è¢«ä¿å­˜åœ¨å†…å­˜ä¸­ã€‚å¦‚æœæ­¤å€¼å°äº0ï¼Œåˆ™ä½¿ç”¨é¢„è®¾çš„å€¼
+     * @param sizeMax HTTPè¯·æ±‚çš„æœ€å¤§å°ºå¯¸ï¼Œè¶…è¿‡æ­¤å°ºå¯¸çš„è¯·æ±‚å°†è¢«æŠ›å¼ƒã€‚
+     * @param repositoryPath æš‚å­˜ä¸Šè½½æ–‡ä»¶çš„ç»å¯¹è·¯å¾„
+     * @throws UploadException å¦‚æœè§£ææ—¶å‡ºé”™
      */
     void parseUpload(UploadParameters params) throws UploadException;
 
     /**
-     * ½«parametersÖØĞÂ×é×°³Équery string¡£
+     * å°†parametersé‡æ–°ç»„è£…æˆquery stringã€‚
      * 
-     * @return query string£¬Èç¹ûÃ»ÓĞ²ÎÊı£¬Ôò·µ»Ø<code>null</code>
+     * @return query stringï¼Œå¦‚æœæ²¡æœ‰å‚æ•°ï¼Œåˆ™è¿”å›<code>null</code>
      */
     String toQueryString();
 }

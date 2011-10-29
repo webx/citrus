@@ -55,16 +55,16 @@ import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import com.alibaba.citrus.test.runner.TestNameAware;
 
 /**
- * ºÍmail builderÏà¹ØµÄ²âÊÔ»ùÀà¡£
+ * å’Œmail builderç›¸å…³çš„æµ‹è¯•åŸºç±»ã€‚
  * 
  * @author Michael Zhou
  */
 @RunWith(TestNameAware.class)
 public abstract class AbstractMailBuilderTests {
     protected final static String REGEX_EOL = "(\\r|\\n|\\r\\n)";
-    protected static final String ÎÒ°®±±¾©Ãô¸Ğ´Ê_I_LOVE_THE_PRESERVED_KEYWORDS = "ÎÒ°®±±¾©Ãô¸Ğ´Ê I love the preserved keywords.";
-    protected static final String ÖĞ¹ú_CHINA_EARTH_COM = "ÖĞ¹ú <china@earth.com>";
-    protected static final String ÃÀ¹ú_CHINA_EARTH_COM = "ÃÀ¹ú <us@earth.com>";
+    protected static final String æˆ‘çˆ±åŒ—äº¬æ•æ„Ÿè¯_I_LOVE_THE_PRESERVED_KEYWORDS = "æˆ‘çˆ±åŒ—äº¬æ•æ„Ÿè¯ I love the preserved keywords.";
+    protected static final String ä¸­å›½_CHINA_EARTH_COM = "ä¸­å›½ <china@earth.com>";
+    protected static final String ç¾å›½_CHINA_EARTH_COM = "ç¾å›½ <us@earth.com>";
     protected final Logger log = LoggerFactory.getLogger(getClass());
     protected static XmlApplicationContext factory;
     protected MailServiceImpl mailService;
@@ -74,7 +74,7 @@ public abstract class AbstractMailBuilderTests {
     @BeforeClass
     public static void initFactory() {
         factory = initFactory("services.xml");
-        System.setProperty("user.name", "baobao"); // javamail ServiceÀà»áÈ¥È¡user.name£¬´Ë´¦Ã÷È·Éè¶¨¸ÃÖµ¡£
+        System.setProperty("user.name", "baobao"); // javamail Serviceç±»ä¼šå»å–user.nameï¼Œæ­¤å¤„æ˜ç¡®è®¾å®šè¯¥å€¼ã€‚
     }
 
     protected static final XmlApplicationContext initFactory(String configFile) {
@@ -90,7 +90,7 @@ public abstract class AbstractMailBuilderTests {
     }
 
     /**
-     * È¡µÃmailµÄÎÄ±¾¸ñÊ½¡£
+     * å–å¾—mailçš„æ–‡æœ¬æ ¼å¼ã€‚
      */
     protected final String getMessageAsText() throws Exception {
         MailBuilder builderCopy = builder.clone();
@@ -98,7 +98,7 @@ public abstract class AbstractMailBuilderTests {
         assertNotSame(builder, builderCopy);
         assertNotSame(builder.getContent(), builderCopy.getContent());
 
-        return save(builderCopy.getMessageAsString(rawSession)); // Ë³±ã¼ì²écloneµÄĞ§¹û
+        return save(builderCopy.getMessageAsString(rawSession)); // é¡ºä¾¿æ£€æŸ¥cloneçš„æ•ˆæœ
     }
 
     protected final synchronized String save(String message) throws IOException {
@@ -144,7 +144,7 @@ public abstract class AbstractMailBuilderTests {
     }
 
     /**
-     * ³ıÈ¥resource URLµÄfilter¡£
+     * é™¤å»resource URLçš„filterã€‚
      */
     public static class NoURLFilter implements ResourceFilter {
         public void init(ResourceLoadingService resourceLoadingService) {

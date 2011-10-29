@@ -51,7 +51,7 @@ import com.alibaba.citrus.util.SystemUtil;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ÓÃÄ£°åÉú³ÉµÄHTMLµÄÄÚÈİ¡£
+ * ç”¨æ¨¡æ¿ç”Ÿæˆçš„HTMLçš„å†…å®¹ã€‚
  * 
  * @author Michael Zhou
  */
@@ -61,20 +61,20 @@ public class HTMLTemplateContent extends TemplateContent implements ResourceLoad
     private Map<String, InlineResource> inlineResources = createHashMap();
 
     /**
-     * ´´½¨Ò»¸ö<code>HTMLTemplateContent</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>HTMLTemplateContent</code>ã€‚
      */
     public HTMLTemplateContent() {
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>HTMLTemplateContent</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>HTMLTemplateContent</code>ã€‚
      */
     public HTMLTemplateContent(String templateName) {
         setTemplate(templateName);
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>HTMLTemplateContent</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>HTMLTemplateContent</code>ã€‚
      */
     public HTMLTemplateContent(String templateName, String contentType) {
         setTemplate(templateName);
@@ -82,21 +82,21 @@ public class HTMLTemplateContent extends TemplateContent implements ResourceLoad
     }
 
     /**
-     * È¡µÃÓÃÀ´×°ÔØ×ÊÔ´µÄ<code>ResourceLoader</code>¡£
+     * å–å¾—ç”¨æ¥è£…è½½èµ„æºçš„<code>ResourceLoader</code>ã€‚
      */
     public ResourceLoader getResourceLoader() {
         return resourceLoader;
     }
 
     /**
-     * ÉèÖÃÓÃÀ´×°ÔØ×ÊÔ´µÄ<code>ResourceLoader</code>¡£
+     * è®¾ç½®ç”¨æ¥è£…è½½èµ„æºçš„<code>ResourceLoader</code>ã€‚
      */
     public void setResourceLoader(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
     }
 
     /**
-     * ÉèÖÃÒ»×éÄÚÖÃ×ÊÔ´µÄtool¡£
+     * è®¾ç½®ä¸€ç»„å†…ç½®èµ„æºçš„toolã€‚
      */
     public void setInlineResources(Map<String, String> resourceMap) {
         if (resourceMap != null) {
@@ -109,8 +109,8 @@ public class HTMLTemplateContent extends TemplateContent implements ResourceLoad
     }
 
     /**
-     * Ìí¼ÓÒ»¸öÔÚÄ£°åÖĞ´ú±íÄÚÖÃ×ÊÔ´µÄtool¡£ÆäÖĞ£¬<code>id</code>ÎªÔÚÄ£°åÖĞÒıÓÃ¸ÃtoolµÄkey£¬
-     * <code>prefix</code>Îª¸ÃtoolÔÚ²éÕÒ×ÊÔ´Ê±£¬×Ô¶¯¼ÓÉÏÖ¸¶¨Ç°×º¡£
+     * æ·»åŠ ä¸€ä¸ªåœ¨æ¨¡æ¿ä¸­ä»£è¡¨å†…ç½®èµ„æºçš„toolã€‚å…¶ä¸­ï¼Œ<code>id</code>ä¸ºåœ¨æ¨¡æ¿ä¸­å¼•ç”¨è¯¥toolçš„keyï¼Œ
+     * <code>prefix</code>ä¸ºè¯¥toolåœ¨æŸ¥æ‰¾èµ„æºæ—¶ï¼Œè‡ªåŠ¨åŠ ä¸ŠæŒ‡å®šå‰ç¼€ã€‚
      */
     public void addInlineResource(String id, String prefix) {
         id = assertNotNull(trimToNull(id), "The ID of inline resource was not specified");
@@ -122,17 +122,17 @@ public class HTMLTemplateContent extends TemplateContent implements ResourceLoad
     }
 
     /**
-     * äÖÈ¾ÓÊ¼şÄÚÈİ¡£
+     * æ¸²æŸ“é‚®ä»¶å†…å®¹ã€‚
      */
     public void render(Part mailPart) throws MessagingException {
-        // ÉèÖÃÄÚÁª×ÊÔ´µÄhelper¶ÔÏó, ÒÔ±ãÄ£°å²úÉúresourceµÄÒıÓÃ.
+        // è®¾ç½®å†…è”èµ„æºçš„helperå¯¹è±¡, ä»¥ä¾¿æ¨¡æ¿äº§ç”Ÿresourceçš„å¼•ç”¨.
         inlineResources.clear();
 
-        // äÖÈ¾Ä£°å.
+        // æ¸²æŸ“æ¨¡æ¿.
         String text = renderTemplate();
 
-        // ÉèÖÃmessage part.
-        // Èç¹û°üÀ¨Ò»¸öÒÔÉÏµÄÄÚÇ¶×ÊÔ´, ÔòÊ¹ÓÃmultipart/relatedÀàĞÍ, ·ñÔòÊ¹ÓÃtext/htmlÀàĞÍ.
+        // è®¾ç½®message part.
+        // å¦‚æœåŒ…æ‹¬ä¸€ä¸ªä»¥ä¸Šçš„å†…åµŒèµ„æº, åˆ™ä½¿ç”¨multipart/relatedç±»å‹, å¦åˆ™ä½¿ç”¨text/htmlç±»å‹.
         try {
             if (inlineResources.isEmpty()) {
                 renderHTMLContent(mailPart, text);
@@ -143,7 +143,7 @@ public class HTMLTemplateContent extends TemplateContent implements ResourceLoad
                 renderHTMLContent(bodyPart, text);
                 multipartRelated.addBodyPart(bodyPart);
 
-                // È¡µÃËùÓĞÄÚÇ¶µÄ×ÊÔ´
+                // å–å¾—æ‰€æœ‰å†…åµŒçš„èµ„æº
                 Set<String> fileNames = createHashSet();
 
                 for (InlineResource inlineResource : inlineResources.values()) {
@@ -158,7 +158,7 @@ public class HTMLTemplateContent extends TemplateContent implements ResourceLoad
     }
 
     /**
-     * äÖÈ¾HTMLÄÚÈİ¡£
+     * æ¸²æŸ“HTMLå†…å®¹ã€‚
      */
     private void renderHTMLContent(Part mailPart, String text) throws MessagingException {
         String contentType = getContentType();
@@ -198,7 +198,7 @@ public class HTMLTemplateContent extends TemplateContent implements ResourceLoad
     }
 
     /**
-     * ×é×°templateContextÖĞµÄÄÚÈİ¡£
+     * ç»„è£…templateContextä¸­çš„å†…å®¹ã€‚
      */
     @Override
     protected void populateTemplateContext(TemplateContext templateContext) {
@@ -211,7 +211,7 @@ public class HTMLTemplateContent extends TemplateContent implements ResourceLoad
     }
 
     /**
-     * Éî¶È¸´ÖÆÒ»¸öcontent¡£
+     * æ·±åº¦å¤åˆ¶ä¸€ä¸ªcontentã€‚
      */
     @Override
     protected void copyTo(AbstractContent copy) {
@@ -242,7 +242,7 @@ public class HTMLTemplateContent extends TemplateContent implements ResourceLoad
     }
 
     /**
-     * ¼ÇÂ¼ÔÚÄ£°åÖĞÊ¹ÓÃµ½µÄËùÓĞÄÚÁª×ÊÔ´µÄĞÅÏ¢¡£
+     * è®°å½•åœ¨æ¨¡æ¿ä¸­ä½¿ç”¨åˆ°çš„æ‰€æœ‰å†…è”èµ„æºçš„ä¿¡æ¯ã€‚
      */
     private static class InlineResource {
         private static MessageFormat formatter = new MessageFormat("{0,time,yyyyMMdd.HHmmss}.{1}@{2}");
@@ -280,7 +280,7 @@ public class HTMLTemplateContent extends TemplateContent implements ResourceLoad
         }
 
         /**
-         * È¡µÃÎ¨Ò»µÄÎÄ¼şÃû¡£
+         * å–å¾—å”¯ä¸€çš„æ–‡ä»¶åã€‚
          */
         public String getUniqueFilename(Set<String> fileNames) {
             String name = filename;
@@ -301,7 +301,7 @@ public class HTMLTemplateContent extends TemplateContent implements ResourceLoad
     }
 
     /**
-     * ÔÚÄ£°åÖĞÇ¶ÈëÄÚÖÃµÄ×ÊÔ´µÄ¸¨ÖúÀà¡£
+     * åœ¨æ¨¡æ¿ä¸­åµŒå…¥å†…ç½®çš„èµ„æºçš„è¾…åŠ©ç±»ã€‚
      */
     public class InlineResourceHelper {
         private String prefix;

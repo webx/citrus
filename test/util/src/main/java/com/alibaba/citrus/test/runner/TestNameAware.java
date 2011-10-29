@@ -25,7 +25,7 @@ import org.junit.runners.model.InitializationError;
 import com.alibaba.citrus.test.TestUtil;
 
 /**
- * Ö§³Ö<code>TestUtil.getTestName()</code>£¬ÒÔ±ãÔÚ²âÊÔÖĞÈ¡µÃµ±Ç°²âÊÔµÄÃû³Æ¡£
+ * æ”¯æŒ<code>TestUtil.getTestName()</code>ï¼Œä»¥ä¾¿åœ¨æµ‹è¯•ä¸­å–å¾—å½“å‰æµ‹è¯•çš„åç§°ã€‚
  * 
  * @author Michael Zhou
  */

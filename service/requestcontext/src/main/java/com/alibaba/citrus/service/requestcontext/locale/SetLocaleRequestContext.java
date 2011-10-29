@@ -20,18 +20,18 @@ package com.alibaba.citrus.service.requestcontext.locale;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 
 /**
- * ÊµÏÖÁËServlet 2.4¹æ·¶ÖĞµÄresponseµÄ·½·¨¡£°üÀ¨£º
+ * å®ç°äº†Servlet 2.4è§„èŒƒä¸­çš„responseçš„æ–¹æ³•ã€‚åŒ…æ‹¬ï¼š
  * <ul>
- * <li>response.<code>setCharacterEncoding()</code>·½·¨£¬Ê¹Ö®¿ÉÒÔ·½±ãµØÉèÖÃÊä³ö×Ö·û±àÂë£¬¶ø²»ĞèÒªÒÀÀµÓÚ
- * <code>setContentType()</code>·½·¨¡£</li>
- * <li>response.<code>getContentType()</code>·½·¨£¬Ê¹Ö®¿ÉÒÔÈ¡µÃµ±Ç°Êä³öµÄcontent type¡£</li>
+ * <li>response.<code>setCharacterEncoding()</code>æ–¹æ³•ï¼Œä½¿ä¹‹å¯ä»¥æ–¹ä¾¿åœ°è®¾ç½®è¾“å‡ºå­—ç¬¦ç¼–ç ï¼Œè€Œä¸éœ€è¦ä¾èµ–äº
+ * <code>setContentType()</code>æ–¹æ³•ã€‚</li>
+ * <li>response.<code>getContentType()</code>æ–¹æ³•ï¼Œä½¿ä¹‹å¯ä»¥å–å¾—å½“å‰è¾“å‡ºçš„content typeã€‚</li>
  * </ul>
- * ÉèÖÃÇøÓòºÍ±àÂë×Ö·û¼¯¡£°üÀ¨£º
+ * è®¾ç½®åŒºåŸŸå’Œç¼–ç å­—ç¬¦é›†ã€‚åŒ…æ‹¬ï¼š
  * <ul>
  * <li><code>LocaleUtil.setContextLocale()</code></li>
  * <li><code>request.setCharacterEncoding()</code></li>
  * <li><code>response.setLocale()</code></li>
- * <li><code>response.setCharacterEncoding()</code>¡£</li>
+ * <li><code>response.setCharacterEncoding()</code>ã€‚</li>
  * </ul>
  * 
  * @author Michael Zhou
@@ -40,44 +40,44 @@ public interface SetLocaleRequestContext extends RequestContext {
     String INPUT_CHARSET_PARAM_DEFAULT = "_input_charset";
     String OUTPUT_CHARSET_PARAM_DEFAULT = "_output_charset";
 
-    /** ÓÃÀ´±£´ælocaleµÄsession keyµÄÃû³Æ¡£ */
+    /** ç”¨æ¥ä¿å­˜localeçš„session keyçš„åç§°ã€‚ */
     String SESSION_KEY_DEFAULT = "_lang";
 
-    /** ÓÃÀ´ÉèÖÃlocaleµÄparameter keyµÄÃû³Æ¡£ */
+    /** ç”¨æ¥è®¾ç½®localeçš„parameter keyçš„åç§°ã€‚ */
     String PARAMETER_KEY_DEFAULT = "_lang";
     String PARAMETER_SET_TO_DEFAULT_VALUE = "default";
 
-    /** Ä¬ÈÏµÄlocale¡£ */
+    /** é»˜è®¤çš„localeã€‚ */
     String LOCALE_DEFAULT = "en_US";
 
-    /** Ä¬ÈÏµÄcharset¡£ */
+    /** é»˜è®¤çš„charsetã€‚ */
     String CHARSET_DEFAULT = "UTF-8";
 
     /**
-     * È¡µÃcontent type¡£
+     * å–å¾—content typeã€‚
      * 
-     * @return content type£¬°üÀ¨charsetµÄ¶¨Òå
+     * @return content typeï¼ŒåŒ…æ‹¬charsetçš„å®šä¹‰
      */
     String getResponseContentType();
 
     /**
-     * ÉèÖÃcontent type¡£ Èç¹ûcontent type²»°üº¬charset£¬²¢ÇÒ
-     * <code>getCharacterEncoding</code>±»ÉèÖÃ£¬Ôò¼ÓÉÏcharset±ê¼Ç¡£
+     * è®¾ç½®content typeã€‚ å¦‚æœcontent typeä¸åŒ…å«charsetï¼Œå¹¶ä¸”
+     * <code>getCharacterEncoding</code>è¢«è®¾ç½®ï¼Œåˆ™åŠ ä¸Šcharsetæ ‡è®°ã€‚
      * <p>
-     * Èç¹û<code>appendCharset</code>Îª<code>false</code>£¬Ôòcontent
-     * typeÖĞ½«²»°üº¬charset±ê¼Ç¡£
+     * å¦‚æœ<code>appendCharset</code>ä¸º<code>false</code>ï¼Œåˆ™content
+     * typeä¸­å°†ä¸åŒ…å«charsetæ ‡è®°ã€‚
      * </p>
      * 
      * @param contentType content type
-     * @param appendCharset Êä³ö×Ö·û¼¯
+     * @param appendCharset è¾“å‡ºå­—ç¬¦é›†
      */
     void setResponseContentType(String contentType, boolean appendCharset);
 
     /**
-     * ÉèÖÃresponseÊä³ö×Ö·û¼¯¡£×¢Òâ£¬´Ë·½·¨±ØĞëÔÚµÚÒ»´Î<code>getWriter</code>Ö®Ç°Ö´ĞĞ¡£
+     * è®¾ç½®responseè¾“å‡ºå­—ç¬¦é›†ã€‚æ³¨æ„ï¼Œæ­¤æ–¹æ³•å¿…é¡»åœ¨ç¬¬ä¸€æ¬¡<code>getWriter</code>ä¹‹å‰æ‰§è¡Œã€‚
      * 
-     * @param charset Êä³ö×Ö·û¼¯£¬Èç¹ûcharsetÎª<code>null</code>
-     *            £¬Ôò´ÓcontentTypeÖĞÉ¾³ıcharset±ê¼Ç
+     * @param charset è¾“å‡ºå­—ç¬¦é›†ï¼Œå¦‚æœcharsetä¸º<code>null</code>
+     *            ï¼Œåˆ™ä»contentTypeä¸­åˆ é™¤charsetæ ‡è®°
      */
     void setResponseCharacterEncoding(String charset);
 }

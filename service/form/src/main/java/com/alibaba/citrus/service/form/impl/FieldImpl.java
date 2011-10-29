@@ -55,9 +55,9 @@ import com.alibaba.citrus.util.io.ByteArrayInputStream;
 import com.alibaba.citrus.util.io.ByteArrayOutputStream;
 
 /**
- * ´ú±íÓÃ»§ËùÌá½»±íµ¥ÖĞµÄÒ»¸öfield¡£
+ * ä»£è¡¨ç”¨æˆ·æ‰€æäº¤è¡¨å•ä¸­çš„ä¸€ä¸ªfieldã€‚
  * <p>
- * ×¢Òâ£ºfield¶ÔÏó²»ÊÇÏß³Ì°²È«µÄ£¬²»ÄÜ±»¶àÏß³Ì¹²Ïí¡£
+ * æ³¨æ„ï¼šfieldå¯¹è±¡ä¸æ˜¯çº¿ç¨‹å®‰å…¨çš„ï¼Œä¸èƒ½è¢«å¤šçº¿ç¨‹å…±äº«ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -73,7 +73,7 @@ public class FieldImpl extends ValueListSupport implements Field {
     private Attachment attachment;
 
     /**
-     * ´´½¨Ò»¸öĞÂfield¡£
+     * åˆ›å»ºä¸€ä¸ªæ–°fieldã€‚
      */
     public FieldImpl(FieldConfig fieldConfig, Group group) {
         super( //
@@ -87,31 +87,31 @@ public class FieldImpl extends ValueListSupport implements Field {
     }
 
     /**
-     * È¡µÃfieldµÄÅäÖÃĞÅÏ¢¡£
+     * å–å¾—fieldçš„é…ç½®ä¿¡æ¯ã€‚
      */
     public FieldConfig getFieldConfig() {
         return fieldConfig;
     }
 
     /**
-     * È¡µÃ°üº¬´ËfieldµÄgroup¡£
+     * å–å¾—åŒ…å«æ­¤fieldçš„groupã€‚
      */
     public Group getGroup() {
         return group;
     }
 
     /**
-     * ÅĞ¶¨fieldÊÇ·ñÍ¨¹ıÑéÖ¤¡£
+     * åˆ¤å®šfieldæ˜¯å¦é€šè¿‡éªŒè¯ã€‚
      */
     public boolean isValid() {
         return valid;
     }
 
     /**
-     * È¡µÃÔÚformÖĞÎ¨Ò»´ú±í¸ÃfieldµÄkey¡£
+     * å–å¾—åœ¨formä¸­å”¯ä¸€ä»£è¡¨è¯¥fieldçš„keyã€‚
      * <p>
-     * ÓÉ¹Ì¶¨Ç°×º<code>"_fm"</code>£¬¼ÓÉÏgroupÃûµÄËõĞ´£¬¼ÓÉÏgroup instance
-     * fieldKey£¬ÔÙ¼ÓÉÏfieldÃûµÄËõĞ´¹¹³É¡£ÀıÈç£º<code>_fm.m._0.n</code>¡£
+     * ç”±å›ºå®šå‰ç¼€<code>"_fm"</code>ï¼ŒåŠ ä¸Šgroupåçš„ç¼©å†™ï¼ŒåŠ ä¸Šgroup instance
+     * fieldKeyï¼Œå†åŠ ä¸Šfieldåçš„ç¼©å†™æ„æˆã€‚ä¾‹å¦‚ï¼š<code>_fm.m._0.n</code>ã€‚
      * </p>
      */
     public String getKey() {
@@ -119,12 +119,12 @@ public class FieldImpl extends ValueListSupport implements Field {
     }
 
     /**
-     * È¡µÃÔÚformÖĞÎ¨Ò»´ú±í¸ÃfieldµÄkey£¬µ±ÓÃ»§Ìá½»µÄ±íµ¥ÖĞÎ´°üº¬´ËfieldµÄĞÅÏ¢Ê±£¬È¡Õâ¸ökeyµÄÖµ×÷Îª¸ÃfieldµÄÖµ¡£
+     * å–å¾—åœ¨formä¸­å”¯ä¸€ä»£è¡¨è¯¥fieldçš„keyï¼Œå½“ç”¨æˆ·æäº¤çš„è¡¨å•ä¸­æœªåŒ…å«æ­¤fieldçš„ä¿¡æ¯æ—¶ï¼Œå–è¿™ä¸ªkeyçš„å€¼ä½œä¸ºè¯¥fieldçš„å€¼ã€‚
      * <p>
-     * Õâ¶ÔÓÚcheckboxÖ®ÀàµÄHTML¿Ø¼şÌØ±ğÓĞÓÃ¡£
+     * è¿™å¯¹äºcheckboxä¹‹ç±»çš„HTMLæ§ä»¶ç‰¹åˆ«æœ‰ç”¨ã€‚
      * </p>
      * <p>
-     * KeyµÄ¸ñÊ½Îª£º<code>_fm.groupKey.instanceKey.fieldKey.absent</code>¡£
+     * Keyçš„æ ¼å¼ä¸ºï¼š<code>_fm.groupKey.instanceKey.fieldKey.absent</code>ã€‚
      * </p>
      */
     public String getAbsentKey() {
@@ -132,9 +132,9 @@ public class FieldImpl extends ValueListSupport implements Field {
     }
 
     /**
-     * È¡µÃÔÚformÖĞºÍµ±Ç°field°ó¶¨µÄ¸½¼şµÄkey¡£
+     * å–å¾—åœ¨formä¸­å’Œå½“å‰fieldç»‘å®šçš„é™„ä»¶çš„keyã€‚
      * <p>
-     * KeyµÄ¸ñÊ½Îª£º<code>_fm.groupKey.instanceKey.fieldKey.attach</code>¡£
+     * Keyçš„æ ¼å¼ä¸ºï¼š<code>_fm.groupKey.instanceKey.fieldKey.attach</code>ã€‚
      * </p>
      */
     public String getAttachmentKey() {
@@ -142,19 +142,19 @@ public class FieldImpl extends ValueListSupport implements Field {
     }
 
     /**
-     * È¡µÃ³ö´íĞÅÏ¢¡£
+     * å–å¾—å‡ºé”™ä¿¡æ¯ã€‚
      */
     public String getMessage() {
         return message;
     }
 
     /**
-     * ÉèÖÃ´íÎóĞÅÏ¢£¬Í¬Ê±ÖÃ<code>isValid()</code>Îª<code>false</code>¡£
+     * è®¾ç½®é”™è¯¯ä¿¡æ¯ï¼ŒåŒæ—¶ç½®<code>isValid()</code>ä¸º<code>false</code>ã€‚
      * <p>
-     * ¶ÔÓÚ<code>isValid()</code>ÒÑ¾­ÊÇ<code>false</code>µÄ×Ö¶Î£¬¸Ã·½·¨ÎŞĞ§£¨²»¸²¸ÇÏÖÓĞµÄ´íÎóĞÅÏ¢£©
+     * å¯¹äº<code>isValid()</code>å·²ç»æ˜¯<code>false</code>çš„å­—æ®µï¼Œè¯¥æ–¹æ³•æ— æ•ˆï¼ˆä¸è¦†ç›–ç°æœ‰çš„é”™è¯¯ä¿¡æ¯ï¼‰
      * </p>
      * <p>
-     * id±íÊ¾´íÎóĞÅÏ¢µÄID£¬±ØĞë¶¨ÒåµÄformÃèÊöÎÄ¼şÖĞ¡£
+     * idè¡¨ç¤ºé”™è¯¯ä¿¡æ¯çš„IDï¼Œå¿…é¡»å®šä¹‰çš„formæè¿°æ–‡ä»¶ä¸­ã€‚
      * </p>
      */
     public void setMessage(String id) {
@@ -162,12 +162,12 @@ public class FieldImpl extends ValueListSupport implements Field {
     }
 
     /**
-     * ÉèÖÃ´íÎóĞÅÏ¢£¬Í¬Ê±ÖÃ<code>isValid()</code>Îª<code>false</code>¡£
+     * è®¾ç½®é”™è¯¯ä¿¡æ¯ï¼ŒåŒæ—¶ç½®<code>isValid()</code>ä¸º<code>false</code>ã€‚
      * <p>
-     * ¶ÔÓÚ<code>isValid()</code>ÒÑ¾­ÊÇ<code>false</code>µÄ×Ö¶Î£¬¸Ã·½·¨ÎŞĞ§£¨²»¸²¸ÇÏÖÓĞµÄ´íÎóĞÅÏ¢£©
+     * å¯¹äº<code>isValid()</code>å·²ç»æ˜¯<code>false</code>çš„å­—æ®µï¼Œè¯¥æ–¹æ³•æ— æ•ˆï¼ˆä¸è¦†ç›–ç°æœ‰çš„é”™è¯¯ä¿¡æ¯ï¼‰
      * </p>
      * <p>
-     * id±íÊ¾´íÎóĞÅÏ¢µÄID£¬±ØĞë¶¨ÒåµÄformÃèÊöÎÄ¼şÖĞ¡£params±íÊ¾Éú³É´íÎóĞÅÏ¢µÄ²ÎÊı±í¡£
+     * idè¡¨ç¤ºé”™è¯¯ä¿¡æ¯çš„IDï¼Œå¿…é¡»å®šä¹‰çš„formæè¿°æ–‡ä»¶ä¸­ã€‚paramsè¡¨ç¤ºç”Ÿæˆé”™è¯¯ä¿¡æ¯çš„å‚æ•°è¡¨ã€‚
      * </p>
      */
     public void setMessage(String id, Map<String, ?> params) {
@@ -200,31 +200,31 @@ public class FieldImpl extends ValueListSupport implements Field {
     }
 
     /**
-     * ³õÊ¼»¯fieldÖµ£¬µ«²»ÑéÖ¤±íµ¥×Ö¶Î¡£ÆäÖĞ£¬<code>request</code>¿ÉÒÔÊÇ<code>null</code>¡£
+     * åˆå§‹åŒ–fieldå€¼ï¼Œä½†ä¸éªŒè¯è¡¨å•å­—æ®µã€‚å…¶ä¸­ï¼Œ<code>request</code>å¯ä»¥æ˜¯<code>null</code>ã€‚
      */
     public void init(HttpServletRequest request) {
         valid = true;
         attachment = null;
 
-        // requestÎªnull£¬±íÊ¾ÊÇ¿Õ±íµ¥£¨²»ÊÇÓÃ»§Ìá½»µÄ£©£¬´ËÊ±×°ÔØÄ¬ÈÏÖµ
+        // requestä¸ºnullï¼Œè¡¨ç¤ºæ˜¯ç©ºè¡¨å•ï¼ˆä¸æ˜¯ç”¨æˆ·æäº¤çš„ï¼‰ï¼Œæ­¤æ—¶è£…è½½é»˜è®¤å€¼
         if (request == null) {
             setValues(getFieldConfig().getDefaultValues());
         } else {
             ParserRequestContext prc = findRequestContext(request, ParserRequestContext.class);
 
-            // ¼ÙÈçÅäÖÃÁËParserRequestContext£¬ÔòÈ¡µÃobjects£¬ÒÔ±ãÖ§³ÖFileItem£¬·ñÔòÖ»Ö§³Ö×Ö·û´®Öµ¡£
+            // å‡å¦‚é…ç½®äº†ParserRequestContextï¼Œåˆ™å–å¾—objectsï¼Œä»¥ä¾¿æ”¯æŒFileItemï¼Œå¦åˆ™åªæ”¯æŒå­—ç¬¦ä¸²å€¼ã€‚
             if (prc != null) {
                 setValues(prc.getParameters().getObjects(getKey()));
             } else {
                 setValues(request.getParameterValues(getKey()));
             }
 
-            // Èç¹ûfield²»´æÔÚ£¬Ôò¼ì²éabsent fieldKey¡£
+            // å¦‚æœfieldä¸å­˜åœ¨ï¼Œåˆ™æ£€æŸ¥absent fieldKeyã€‚
             if (size() == 0) {
                 setValues(request.getParameterValues(getAbsentKey()));
             }
 
-            // Èç¹û´æÔÚattachment£¬Ôò×°ÈëÖ®
+            // å¦‚æœå­˜åœ¨attachmentï¼Œåˆ™è£…å…¥ä¹‹
             String attachmentEncoded = trimToNull(request.getParameter(getAttachmentKey()));
 
             if (attachmentEncoded != null) {
@@ -234,7 +234,7 @@ public class FieldImpl extends ValueListSupport implements Field {
     }
 
     /**
-     * ÑéÖ¤£¨»òÖØĞÂÑéÖ¤£©×Ö¶Î¡£
+     * éªŒè¯ï¼ˆæˆ–é‡æ–°éªŒè¯ï¼‰å­—æ®µã€‚
      */
     protected void validate() {
         valid = true;
@@ -255,21 +255,21 @@ public class FieldImpl extends ValueListSupport implements Field {
     }
 
     /**
-     * È¡µÃfield¼¶±ğµÄ´íÎóĞÅÏ¢±í´ïÊ½µÄcontext¡£
+     * å–å¾—fieldçº§åˆ«çš„é”™è¯¯ä¿¡æ¯è¡¨è¾¾å¼çš„contextã€‚
      */
     protected MessageContext getMessageContext() {
         return messageContext;
     }
 
     /**
-     * È¡µÃfield name£¬Ïàµ±ÓÚ<code>getFieldConfig().getName()</code>¡£
+     * å–å¾—field nameï¼Œç›¸å½“äº<code>getFieldConfig().getName()</code>ã€‚
      */
     public String getName() {
         return getFieldConfig().getName();
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>""</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>""</code>ã€‚
      */
     @Override
     public String getStringValue() {
@@ -277,28 +277,28 @@ public class FieldImpl extends ValueListSupport implements Field {
     }
 
     /**
-     * È¡µÃÓÃÀ´ÏÔÊ¾fieldµÄÃû³Æ£¬Ïàµ±ÓÚ<code>getFieldConfig().getDisplayName()</code>¡£
+     * å–å¾—ç”¨æ¥æ˜¾ç¤ºfieldçš„åç§°ï¼Œç›¸å½“äº<code>getFieldConfig().getDisplayName()</code>ã€‚
      */
     public String getDisplayName() {
         return getFieldConfig().getDisplayName();
     }
 
     /**
-     * È¡µÃÄ¬ÈÏÖµ£¬Ïàµ±ÓÚ<code>getFieldConfig().getDefaultValue()</code>¡£
+     * å–å¾—é»˜è®¤å€¼ï¼Œç›¸å½“äº<code>getFieldConfig().getDefaultValue()</code>ã€‚
      */
     public String getDefaultValue() {
         return getFieldConfig().getDefaultValue();
     }
 
     /**
-     * È¡µÃÄ¬ÈÏÖµ£¬Ïàµ±ÓÚ<code>getFieldConfig().getDefaultValues()</code>¡£
+     * å–å¾—é»˜è®¤å€¼ï¼Œç›¸å½“äº<code>getFieldConfig().getDefaultValues()</code>ã€‚
      */
     public String[] getDefaultValues() {
         return getFieldConfig().getDefaultValues();
     }
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      */
     @Override
     public void addValue(Object value) {
@@ -310,30 +310,30 @@ public class FieldImpl extends ValueListSupport implements Field {
     }
 
     /**
-     * ÉèÖÃ¸½¼ş¡£
+     * è®¾ç½®é™„ä»¶ã€‚
      */
     public Object getAttachment() {
         return attachment == null ? null : attachment.getAttachment();
     }
 
     /**
-     * ÉèÖÃ±àÂëºóµÄ¸½¼ş¡£
+     * è®¾ç½®ç¼–ç åçš„é™„ä»¶ã€‚
      */
     public String getAttachmentEncoded() {
         return attachment == null ? null : attachment.getAttachmentEncoded();
     }
 
     /**
-     * ÊÇ·ñ°üº¬¸½¼ş£¿
+     * æ˜¯å¦åŒ…å«é™„ä»¶ï¼Ÿ
      */
     public boolean hasAttachment() {
         return attachment != null && attachment.getAttachment() != null;
     }
 
     /**
-     * ÉèÖÃ¸½¼ş¡£
+     * è®¾ç½®é™„ä»¶ã€‚
      * <p>
-     * ×¢Òâ£¬µ±attachmentÒÑ¾­´æÔÚÊ±£¬¸Ã·½·¨µ÷ÓÃÎŞĞ§¡£ÓûÇ¿ÖÆÉèÈë£¬ÇëÏÈµ÷ÓÃ<code>clearAttachment()</code>¡£
+     * æ³¨æ„ï¼Œå½“attachmentå·²ç»å­˜åœ¨æ—¶ï¼Œè¯¥æ–¹æ³•è°ƒç”¨æ— æ•ˆã€‚æ¬²å¼ºåˆ¶è®¾å…¥ï¼Œè¯·å…ˆè°ƒç”¨<code>clearAttachment()</code>ã€‚
      * </p>
      */
     public void setAttachment(Object attachment) {
@@ -343,14 +343,14 @@ public class FieldImpl extends ValueListSupport implements Field {
     }
 
     /**
-     * Çå³ı¸½¼ş¡£
+     * æ¸…é™¤é™„ä»¶ã€‚
      */
     public void clearAttachment() {
         this.attachment = null;
     }
 
     /**
-     * ×ª»»³ÉÒ×ÓÚÔÄ¶ÁµÄ×Ö·û´®¡£
+     * è½¬æ¢æˆæ˜“äºé˜…è¯»çš„å­—ç¬¦ä¸²ã€‚
      */
     @Override
     public String toString() {
@@ -360,7 +360,7 @@ public class FieldImpl extends ValueListSupport implements Field {
     }
 
     /**
-     * ´ú±íÒ»¸ö¸½¼ş¡£
+     * ä»£è¡¨ä¸€ä¸ªé™„ä»¶ã€‚
      */
     private static class Attachment {
         private Object attachment;
@@ -399,8 +399,8 @@ public class FieldImpl extends ValueListSupport implements Field {
             try {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-                // 1. ĞòÁĞ»¯
-                // 2. Ñ¹Ëõ
+                // 1. åºåˆ—åŒ–
+                // 2. å‹ç¼©
                 Deflater def = new Deflater(Deflater.BEST_COMPRESSION, false);
                 DeflaterOutputStream dos = new DeflaterOutputStream(baos, def);
                 ObjectOutputStream oos = null;
@@ -421,7 +421,7 @@ public class FieldImpl extends ValueListSupport implements Field {
 
                 byte[] plaintext = baos.toByteArray().toByteArray();
 
-                // 3. base64±àÂë
+                // 3. base64ç¼–ç 
                 return StringEscapeUtil.escapeURL(new String(Base64.encodeBase64(plaintext, false), "ISO-8859-1"));
             } catch (Exception e) {
                 log.error("Failed to encode field attachment", e);
@@ -434,7 +434,7 @@ public class FieldImpl extends ValueListSupport implements Field {
                 return null;
             }
 
-            // 1. base64½âÂë
+            // 1. base64è§£ç 
             byte[] plaintext = null;
 
             try {
@@ -450,12 +450,12 @@ public class FieldImpl extends ValueListSupport implements Field {
                 return null;
             }
 
-            // 2. ½âÑ¹Ëõ
+            // 2. è§£å‹ç¼©
             ByteArrayInputStream bais = new ByteArrayInputStream(plaintext);
             Inflater inf = new Inflater(false);
             InflaterInputStream iis = new InflaterInputStream(bais, inf);
 
-            // 3. ·´ĞòÁĞ»¯
+            // 3. ååºåˆ—åŒ–
             ObjectInputStream ois = null;
 
             try {

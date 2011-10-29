@@ -20,9 +20,9 @@ package com.alibaba.citrus.service.upload.impl.cfu;
 import java.io.File;
 
 /**
- * ÓÃÀ´´æ´¢form fieldµÄ<code>FileItem</code>ÊµÏÖ¡£
+ * ç”¨æ¥å­˜å‚¨form fieldçš„<code>FileItem</code>å®ç°ã€‚
  * <p>
- * ±ÜÃâÁË<code>DiskFileItem.finalize()</code>·½·¨µÄ¿ªÏú¡£
+ * é¿å…äº†<code>DiskFileItem.finalize()</code>æ–¹æ³•çš„å¼€é”€ã€‚
  * </p>
  * 
  * @author Michael Zhou

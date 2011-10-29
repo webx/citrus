@@ -20,49 +20,49 @@ package com.alibaba.citrus.util.collection;
 import static com.alibaba.citrus.util.BasicConstant.*;
 
 /**
- * Ê¹ÓÃÕûÊı×÷ÎªkeyµÄhash±í¡£
+ * ä½¿ç”¨æ•´æ•°ä½œä¸ºkeyçš„hashè¡¨ã€‚
  * 
  * @author Michael Zhou
  */
 public class IntHashMap<T> {
-    /** Ä¬ÈÏµÄ³õÊ¼ÈİÁ¿ - <code>2µÄÕûÊı´ÎÃİ</code>. */
+    /** é»˜è®¤çš„åˆå§‹å®¹é‡ - <code>2çš„æ•´æ•°æ¬¡å¹‚</code>. */
     private static final int DEFAULT_INITIAL_CAPACITY = 16;
 
-    /** ×î´óÈİÁ¿ - <code>2µÄÕûÊı´ÎÃİ</code>. */
+    /** æœ€å¤§å®¹é‡ - <code>2çš„æ•´æ•°æ¬¡å¹‚</code>. */
     private static final int MAXIMUM_CAPACITY = 1 << 30;
 
-    /** Ä¬ÈÏµÄ¸ºÔØÏµÊı */
+    /** é»˜è®¤çš„è´Ÿè½½ç³»æ•° */
     private static final float DEFAULT_LOAD_FACTOR = 0.75f;
 
-    // Ë½ÓĞ±äÁ¿
+    // ç§æœ‰å˜é‡
     private Entry<T>[] table;
     private int count;
     private int threshold;
     private float loadFactor;
 
     /**
-     * ´´½¨Ò»¸öhash±í£¬Ê¹ÓÃÄ¬ÈÏµÄ³õÊ¼ÈİÁ¿<code>16</code>ºÍÄ¬ÈÏµÄ¸ºÔØÏµÊı<code>0.75</code>¡£
+     * åˆ›å»ºä¸€ä¸ªhashè¡¨ï¼Œä½¿ç”¨é»˜è®¤çš„åˆå§‹å®¹é‡<code>16</code>å’Œé»˜è®¤çš„è´Ÿè½½ç³»æ•°<code>0.75</code>ã€‚
      */
     public IntHashMap() {
         this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);
     }
 
     /**
-     * ´´½¨Ò»¸öhash±í£¬Ê¹ÓÃÖ¸¶¨µÄ³õÊ¼ÈİÁ¿ºÍÄ¬ÈÏµÄ¸ºÔØÏµÊı<code>0.75</code>¡£
+     * åˆ›å»ºä¸€ä¸ªhashè¡¨ï¼Œä½¿ç”¨æŒ‡å®šçš„åˆå§‹å®¹é‡å’Œé»˜è®¤çš„è´Ÿè½½ç³»æ•°<code>0.75</code>ã€‚
      * 
-     * @param initialCapacity hash±íµÄ³õÊ¼ÈİÁ¿
-     * @throws IllegalArgumentException Èç¹û³õÊ¼ÈİÁ¿Ğ¡ÓÚ»òµÈÓÚ<code>0</code>
+     * @param initialCapacity hashè¡¨çš„åˆå§‹å®¹é‡
+     * @throws IllegalArgumentException å¦‚æœåˆå§‹å®¹é‡å°äºæˆ–ç­‰äº<code>0</code>
      */
     public IntHashMap(int initialCapacity) {
         this(initialCapacity, DEFAULT_LOAD_FACTOR);
     }
 
     /**
-     * ´´½¨Ò»¸öhash±í£¬Ê¹ÓÃÄ¬ÈÏµÄÖ¸¶¨µÄ³õÊ¼ÈİÁ¿ºÍÖ¸¶¨µÄ¸ºÔØÏµÊı¡£
+     * åˆ›å»ºä¸€ä¸ªhashè¡¨ï¼Œä½¿ç”¨é»˜è®¤çš„æŒ‡å®šçš„åˆå§‹å®¹é‡å’ŒæŒ‡å®šçš„è´Ÿè½½ç³»æ•°ã€‚
      * 
-     * @param initialCapacity hash±íµÄ³õÊ¼ÈİÁ¿
-     * @param loadFactor ¸ºÔØÏµÊı
-     * @throws IllegalArgumentException Èç¹û³õÊ¼ÈİÁ¿Ğ¡ÓÚ»òµÈÓÚ<code>0</code>£¬»ò¸ºÔØÏµÊı²»ÊÇÕıÊı
+     * @param initialCapacity hashè¡¨çš„åˆå§‹å®¹é‡
+     * @param loadFactor è´Ÿè½½ç³»æ•°
+     * @throws IllegalArgumentException å¦‚æœåˆå§‹å®¹é‡å°äºæˆ–ç­‰äº<code>0</code>ï¼Œæˆ–è´Ÿè½½ç³»æ•°ä¸æ˜¯æ­£æ•°
      */
     @SuppressWarnings("unchecked")
     public IntHashMap(int initialCapacity, float loadFactor) {
@@ -78,7 +78,7 @@ public class IntHashMap<T> {
             throw new IllegalArgumentException("Illegal Load: " + loadFactor);
         }
 
-        // È·±£³õÊ¼ÈİÁ¿Îª2µÄÕûÊı´ÎÃİ.
+        // ç¡®ä¿åˆå§‹å®¹é‡ä¸º2çš„æ•´æ•°æ¬¡å¹‚.
         int capacity = 1;
 
         while (capacity < initialCapacity) {
@@ -91,28 +91,28 @@ public class IntHashMap<T> {
     }
 
     /**
-     * È¡µÃµ±Ç°hash±íÖĞÔªËØµÄ¸öÊı¡£
+     * å–å¾—å½“å‰hashè¡¨ä¸­å…ƒç´ çš„ä¸ªæ•°ã€‚
      * 
-     * @return ÔªËØ¸öÊı
+     * @return å…ƒç´ ä¸ªæ•°
      */
     public int size() {
         return count;
     }
 
     /**
-     * ²âÊÔhash±íÊÇ·ñÎª¿Õ¡£
+     * æµ‹è¯•hashè¡¨æ˜¯å¦ä¸ºç©ºã€‚
      * 
-     * @return Èç¹ûÎª¿Õ£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚æœä¸ºç©ºï¼Œåˆ™è¿”å›<code>true</code>
      */
     public boolean isEmpty() {
         return count == 0;
     }
 
     /**
-     * ²é¿´hash±íÖĞÊÇ·ñ´æÔÚÖ¸¶¨µÄkey¡£
+     * æŸ¥çœ‹hashè¡¨ä¸­æ˜¯å¦å­˜åœ¨æŒ‡å®šçš„keyã€‚
      * 
-     * @param key ÒªËÑË÷µÄkey
-     * @return Èç¹ûÕÒµ½£¬Ôò·µ»Ø<code>true</code>
+     * @param key è¦æœç´¢çš„key
+     * @return å¦‚æœæ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>true</code>
      */
     public boolean containsKey(int key) {
         Entry<T>[] tab = table;
@@ -129,10 +129,10 @@ public class IntHashMap<T> {
     }
 
     /**
-     * ²é¿´hash±íÖĞÊÇ·ñ´æÔÚÖ¸¶¨µÄÖµ¡£
+     * æŸ¥çœ‹hashè¡¨ä¸­æ˜¯å¦å­˜åœ¨æŒ‡å®šçš„å€¼ã€‚
      * 
-     * @param value ÒªËÑË÷µÄÖµ
-     * @return Èç¹ûÕÒµ½£¬Ôò·µ»Ø<code>true</code>
+     * @param value è¦æœç´¢çš„å€¼
+     * @return å¦‚æœæ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>true</code>
      */
     public boolean containsValue(Object value) {
         Entry<T>[] tab = table;
@@ -151,10 +151,10 @@ public class IntHashMap<T> {
     }
 
     /**
-     * ´Óhash±íÖĞÈ¡µÃºÍÖ¸¶¨key¶ÔÓ¦µÄÖµ¡£
+     * ä»hashè¡¨ä¸­å–å¾—å’ŒæŒ‡å®škeyå¯¹åº”çš„å€¼ã€‚
      * 
-     * @param key Òª²éÕÒµÄkey
-     * @return keyËù¶ÔÓ¦µÄÖµ£¬Èç¹ûÃ»ÕÒµ½£¬Ôò·µ»Ø<code>null</code>
+     * @param key è¦æŸ¥æ‰¾çš„key
+     * @return keyæ‰€å¯¹åº”çš„å€¼ï¼Œå¦‚æœæ²¡æ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public T get(int key) {
         Entry<T>[] tab = table;
@@ -171,11 +171,11 @@ public class IntHashMap<T> {
     }
 
     /**
-     * ½«keyºÍÖ¸¶¨¶ÔÏóÏà¹ØÁª£¬²¢±£´æÔÚhash±íÖĞ¡£
+     * å°†keyå’ŒæŒ‡å®šå¯¹è±¡ç›¸å…³è”ï¼Œå¹¶ä¿å­˜åœ¨hashè¡¨ä¸­ã€‚
      * 
-     * @param key ¶ÔÏóµÄkey
-     * @param value ¶ÔÏó£¨Öµ£©
-     * @return Èç¹ûÖ¸¶¨keyÒÑ¾­´æÔÚ£¬Ôò·µ»ØkeyËù¶ÔÓ¦µÄÔ­ÏÈµÄÖµ
+     * @param key å¯¹è±¡çš„key
+     * @param value å¯¹è±¡ï¼ˆå€¼ï¼‰
+     * @return å¦‚æœæŒ‡å®škeyå·²ç»å­˜åœ¨ï¼Œåˆ™è¿”å›keyæ‰€å¯¹åº”çš„åŸå…ˆçš„å€¼
      */
     public T put(int key, T value) {
         // Makes sure the key is not already in the hashtable.
@@ -208,10 +208,10 @@ public class IntHashMap<T> {
     }
 
     /**
-     * ´Óhash±íÖĞÉ¾³ıÒ»¸öÖµ¡£
+     * ä»hashè¡¨ä¸­åˆ é™¤ä¸€ä¸ªå€¼ã€‚
      * 
-     * @param key ÒªÉ¾³ıµÄÖµËù¶ÔÓ¦µÄkey
-     * @return Èç¹ûÖ¸¶¨keyÒÑ¾­´æÔÚ£¬Ôò·µ»ØkeyËù¶ÔÓ¦µÄÔ­ÏÈµÄÖµ
+     * @param key è¦åˆ é™¤çš„å€¼æ‰€å¯¹åº”çš„key
+     * @return å¦‚æœæŒ‡å®škeyå·²ç»å­˜åœ¨ï¼Œåˆ™è¿”å›keyæ‰€å¯¹åº”çš„åŸå…ˆçš„å€¼
      */
     public T remove(int key) {
         Entry<T>[] tab = table;
@@ -239,7 +239,7 @@ public class IntHashMap<T> {
     }
 
     /**
-     * Çå³ıhash±í¡£
+     * æ¸…é™¤hashè¡¨ã€‚
      */
     public void clear() {
         Entry<T>[] tab = table;
@@ -272,9 +272,9 @@ public class IntHashMap<T> {
     }
 
     /**
-     * È¡µÃ×Ö·û´®±íÊ¾¡£
+     * å–å¾—å­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      * 
-     * @return ×Ö·û´®±íÊ¾
+     * @return å­—ç¬¦ä¸²è¡¨ç¤º
      */
     @Override
     public String toString() {
@@ -301,7 +301,7 @@ public class IntHashMap<T> {
     }
 
     /**
-     * ÖØ¹¹hash±í£¬±¶ÔöÆäÈİÁ¿¡£
+     * é‡æ„hashè¡¨ï¼Œå€å¢å…¶å®¹é‡ã€‚
      */
     protected void rehash() {
         int oldCapacity = table.length;
@@ -330,25 +330,25 @@ public class IntHashMap<T> {
     }
 
     /**
-     * È¡µÃhash±íµÄÈİÁ¿¡£
+     * å–å¾—hashè¡¨çš„å®¹é‡ã€‚
      * 
-     * @return hash±íµÄÈİÁ¿
+     * @return hashè¡¨çš„å®¹é‡
      */
     protected int getCapacity() {
         return table.length;
     }
 
     /**
-     * È¡µÃhash±íµÄãĞÖµ¡£
+     * å–å¾—hashè¡¨çš„é˜ˆå€¼ã€‚
      * 
-     * @return hash±íµÄãĞÖµ
+     * @return hashè¡¨çš„é˜ˆå€¼
      */
     protected int getThreshold() {
         return threshold;
     }
 
     /**
-     * ´ú±íhash±íÖĞµÄÒ»¸öÔªËØµÄÀà¡£
+     * ä»£è¡¨hashè¡¨ä¸­çš„ä¸€ä¸ªå…ƒç´ çš„ç±»ã€‚
      */
     protected static class Entry<T> {
         protected int hash;

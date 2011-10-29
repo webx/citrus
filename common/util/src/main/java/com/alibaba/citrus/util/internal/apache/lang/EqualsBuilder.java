@@ -35,7 +35,7 @@ package com.alibaba.citrus.util.internal.apache.lang;
 
 /**
  * <p>
- * ´ÓApache commons-langÖĞµÄÍ¬ÃûÀà¼ò»¯¶øµÃ¡£
+ * ä»Apache commons-langä¸­çš„åŒåç±»ç®€åŒ–è€Œå¾—ã€‚
  * </p>
  * <p>
  * Assists in implementing {@link Object#equals(Object)} methods.

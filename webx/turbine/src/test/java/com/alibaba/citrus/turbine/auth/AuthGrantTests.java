@@ -150,7 +150,7 @@ public class AuthGrantTests {
         grant.setUsers(new String[] { new String("*") /* new instance */});
         assertFalse(grant.isUserMatched(null));
         assertTrue(grant.isUserMatched("baobao"));
-        assertTrue(grant.isUserMatched("anonymous")); // 注意：用户名允许使用anonymous，但不代表真正的匿名用户
+        assertTrue(grant.isUserMatched("anonymous")); // 娉ㄦ剰锛氱敤鎴峰悕鍏佽浣跨敤anonymous锛屼絾涓嶄唬琛ㄧ湡姝ｇ殑鍖垮悕鐢ㄦ埛
 
         // * and anonymous
         grant.setUsers(new String[] { new String("*") /* new instance */, new String("anonymous") /*
@@ -159,13 +159,13 @@ public class AuthGrantTests {
                                                                                                    */});
         assertTrue(grant.isUserMatched(null));
         assertTrue(grant.isUserMatched("baobao"));
-        assertTrue(grant.isUserMatched("anonymous")); // 注意：用户名允许使用anonymous，但不代表真正的匿名用户
+        assertTrue(grant.isUserMatched("anonymous")); // 娉ㄦ剰锛氱敤鎴峰悕鍏佽浣跨敤anonymous锛屼絾涓嶄唬琛ㄧ湡姝ｇ殑鍖垮悕鐢ㄦ埛
 
         // specific name
         grant.setUsers(new String[] { "baobao" });
         assertFalse(grant.isUserMatched(null));
         assertTrue(grant.isUserMatched("baobao"));
-        assertFalse(grant.isUserMatched("anonymous")); // 注意：用户名允许使用anonymous，但不代表真正的匿名用户
+        assertFalse(grant.isUserMatched("anonymous")); // 娉ㄦ剰锛氱敤鎴峰悕鍏佽浣跨敤anonymous锛屼絾涓嶄唬琛ㄧ湡姝ｇ殑鍖垮悕鐢ㄦ埛
     }
 
     @Test

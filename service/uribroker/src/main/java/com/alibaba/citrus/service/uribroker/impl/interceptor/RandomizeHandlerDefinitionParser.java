@@ -29,7 +29,7 @@ import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
 
 /**
- * Ò»¸öÉú³ÉËæ»úURL Query DataµÄPathHandler Bean½âÎöÀà
+ * ä¸€ä¸ªç”ŸæˆéšæœºURL Query Dataçš„PathHandler Beanè§£æç±»
  * 
  * @author dux.fangl
  */

@@ -22,7 +22,7 @@ import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionP
 import com.alibaba.citrus.util.Utils;
 
 /**
- * °üº¬common-utilÖĞ³£ÓÃutilsµÄtoolset¡£
+ * åŒ…å«common-utilä¸­å¸¸ç”¨utilsçš„toolsetã€‚
  * 
  * @author Michael Zhou
  */

@@ -50,7 +50,7 @@ import com.alibaba.citrus.springext.support.SchemaSet;
 import com.alibaba.citrus.springext.support.resolver.SpringPluggableSchemas;
 
 /**
- * ×°ÔØºÍ·ÖÎöschemas£¬²¢Êä³öµ½ÈÎÒâÊä³öÁ÷¡£
+ * è£…è½½å’Œåˆ†æschemasï¼Œå¹¶è¾“å‡ºåˆ°ä»»æ„è¾“å‡ºæµã€‚
  * 
  * @author Michael Zhou
  */
@@ -74,7 +74,7 @@ public class SchemaExporter {
         this.schemas = new SchemaSet(schemasList);
         this.nsToSchemas = createHashMap();
 
-        // ½«ËùÓĞÏàÍ¬namespaceµÄschema·ÅÔÚÒ»Æğ£¬²¢°´Ãû³Æµ¹ÅÅĞò£¬¼´°´£ºbeans.xsd¡¢beans-2.5.xsd¡¢beans-2.0.xsd Ë³Ğò¡£
+        // å°†æ‰€æœ‰ç›¸åŒnamespaceçš„schemaæ”¾åœ¨ä¸€èµ·ï¼Œå¹¶æŒ‰åç§°å€’æ’åºï¼Œå³æŒ‰ï¼šbeans.xsdã€beans-2.5.xsdã€beans-2.0.xsd é¡ºåºã€‚
         for (Schema schema : schemas.getNamedMappings().values()) {
             this.entries.put(schema.getName(), new Entry(schema.getName(), schema));
 
@@ -123,7 +123,7 @@ public class SchemaExporter {
     }
 
     /**
-     * ´ú±íÒ»¸öschemaÎÄ¼ş½áµã¡£
+     * ä»£è¡¨ä¸€ä¸ªschemaæ–‡ä»¶ç»“ç‚¹ã€‚
      */
     public static final class Entry {
         private final String path;
@@ -134,7 +134,7 @@ public class SchemaExporter {
         private final Map<String, Entry> subEntries;
 
         /**
-         * ´´½¨ÌØÊâµÄroot entry¡£
+         * åˆ›å»ºç‰¹æ®Šçš„root entryã€‚
          */
         private Entry() {
             this.path = "";
@@ -325,7 +325,7 @@ public class SchemaExporter {
     }
 
     /**
-     * ÔÚËùÓĞ¿ÉÊ¶±ğµÄURIÉÏ£¬¼ÓÉÏÖ¸¶¨Ç°×º¡£
+     * åœ¨æ‰€æœ‰å¯è¯†åˆ«çš„URIä¸Šï¼ŒåŠ ä¸ŠæŒ‡å®šå‰ç¼€ã€‚
      */
     private class AddPrefixFilter implements DocumentFilter {
         private final String prefix;
@@ -385,23 +385,23 @@ public class SchemaExporter {
         }
 
         private String getNewSchemaLocation(String schemaLocation, String namespace, String systemId) {
-            // ¸ù¾İÖ¸¶¨µÄschemaLocationÅĞ¶Ï
+            // æ ¹æ®æŒ‡å®šçš„schemaLocationåˆ¤æ–­
             if (schemaLocation != null) {
                 Schema schema = schemas.findSchema(schemaLocation);
 
                 if (schema != null) {
                     return prefix + schema.getName();
                 } else {
-                    return schemaLocation; // ·µ»ØÔ­±¾µÄlocation£¬µ«¿ÉÄÜÊÇ´íÎóµÄ£¡
+                    return schemaLocation; // è¿”å›åŸæœ¬çš„locationï¼Œä½†å¯èƒ½æ˜¯é”™è¯¯çš„ï¼
                 }
             }
 
-            // ÔÙ¸ù¾İnamespaceÅĞ¶Ï
+            // å†æ ¹æ®namespaceåˆ¤æ–­
             if (namespace != null) {
                 Set<Schema> nsSchemas = nsToSchemas.get(namespace);
 
                 if (nsSchemas != null && !nsSchemas.isEmpty()) {
-                    // Ê×ÏÈ£¬ÔÚËùÓĞÏàÍ¬nsµÄschemaÖĞ²éÕÒ°æ±¾ÏàÍ¬µÄschema¡£
+                    // é¦–å…ˆï¼Œåœ¨æ‰€æœ‰ç›¸åŒnsçš„schemaä¸­æŸ¥æ‰¾ç‰ˆæœ¬ç›¸åŒçš„schemaã€‚
                     String versionedExtension = getVersionedExtension(systemId);
 
                     if (versionedExtension != null) {
@@ -412,7 +412,7 @@ public class SchemaExporter {
                         }
                     }
 
-                    // Æä´Î£¬Ñ¡ÔñµÚÒ»¸öÄ¬ÈÏµÄschema£¬ÆäË³ĞòÊÇ£ºbeans.xsd¡¢beans-2.5.xsd¡¢beans-2.0.xsd
+                    // å…¶æ¬¡ï¼Œé€‰æ‹©ç¬¬ä¸€ä¸ªé»˜è®¤çš„schemaï¼Œå…¶é¡ºåºæ˜¯ï¼šbeans.xsdã€beans-2.5.xsdã€beans-2.0.xsd
                     return prefix + nsSchemas.iterator().next().getName();
                 }
             }
@@ -421,7 +421,7 @@ public class SchemaExporter {
         }
 
         /**
-         * ¶ÔÓÚspring-aop-2.5.xsdÈ¡µÃ-2.5.xsd¡£
+         * å¯¹äºspring-aop-2.5.xsdå–å¾—-2.5.xsdã€‚
          */
         private String getVersionedExtension(String systemId) {
             if (systemId != null) {

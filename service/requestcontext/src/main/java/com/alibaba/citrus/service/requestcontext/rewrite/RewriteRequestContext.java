@@ -20,7 +20,7 @@ package com.alibaba.citrus.service.requestcontext.rewrite;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 
 /**
- * ÖØĞ´URL¼°²ÎÊıµÄrequest context£¬ÀàËÆÓÚapacheµÄmod_rewriteÄ£¿é¡£
+ * é‡å†™URLåŠå‚æ•°çš„request contextï¼Œç±»ä¼¼äºapacheçš„mod_rewriteæ¨¡å—ã€‚
  * 
  * @author Michael Zhou
  */

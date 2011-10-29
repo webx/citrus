@@ -38,14 +38,14 @@ public class DirectModuleTests extends AbstractMappingRuleTests {
 
         result = mappingRules.getMappedName("direct.module", "aaa/bbb/myOtherModule.vm");
         assertEquals("aaa.bbb.MyOtherModule", result);
-        assertNotSame(result, mappingRules.getMappedName("direct.module", "aaa/bbb/myOtherModule.vm")); // ≤ªcache
+        assertNotSame(result, mappingRules.getMappedName("direct.module", "aaa/bbb/myOtherModule.vm")); // ‰∏çcache
 
         result = mappingRules.getMappedName("direct.module", "aaa,bbb,myOtherModule.vm");
         assertEquals("aaa.bbb.MyOtherModule", result);
-        assertNotSame(result, mappingRules.getMappedName("direct.module", "aaa,bbb,myOtherModule.vm")); // ≤ªcache
+        assertNotSame(result, mappingRules.getMappedName("direct.module", "aaa,bbb,myOtherModule.vm")); // ‰∏çcache
 
         result = mappingRules.getMappedName("direct.module", "aaa,bbb,nonexistModule.vm");
         assertEquals("aaa.bbb.NonexistModule", result);
-        assertNotSame(result, mappingRules.getMappedName("direct.module", "aaa,bbb,nonexistModule.vm")); // ≤ªcache
+        assertNotSame(result, mappingRules.getMappedName("direct.module", "aaa,bbb,nonexistModule.vm")); // ‰∏çcache
     }
 }

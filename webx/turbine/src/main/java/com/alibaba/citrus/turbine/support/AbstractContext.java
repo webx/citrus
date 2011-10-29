@@ -27,37 +27,37 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ³éÏóµÄ<code>Context</code>ÊµÏÖ£¬Ìá¹©ÁË¿ÉÇ¶Ì×µÄcontext»úÖÆ¡£
+ * æŠ½è±¡çš„<code>Context</code>å®ç°ï¼Œæä¾›äº†å¯åµŒå¥—çš„contextæœºåˆ¶ã€‚
  * 
  * @author Michael Zhou
  */
 public abstract class AbstractContext implements Context {
-    /** ¸¸context£¬Èç¹ûÖ¸¶¨keyÔÚµ±Ç°context²»´æÔÚ£¬Ôò»áÔÚ¸¸contextÖĞ²éÕÒ¡£ */
+    /** çˆ¶contextï¼Œå¦‚æœæŒ‡å®škeyåœ¨å½“å‰contextä¸å­˜åœ¨ï¼Œåˆ™ä¼šåœ¨çˆ¶contextä¸­æŸ¥æ‰¾ã€‚ */
     private final Context parentContext;
 
     /**
-     * ´´½¨Ò»¸öcontext¡£
+     * åˆ›å»ºä¸€ä¸ªcontextã€‚
      */
     public AbstractContext() {
         this(null);
     }
 
     /**
-     * ´´½¨Ò»¸öcontext£¬Ö¸¶¨parent context¡£
+     * åˆ›å»ºä¸€ä¸ªcontextï¼ŒæŒ‡å®šparent contextã€‚
      */
     public AbstractContext(Context parentContext) {
         this.parentContext = parentContext;
     }
 
     /**
-     * È¡µÃ¸¸context£¬Èç²»´æÔÚÔò·µ»Ø<code>null</code>¡£
+     * å–å¾—çˆ¶contextï¼Œå¦‚ä¸å­˜åœ¨åˆ™è¿”å›<code>null</code>ã€‚
      */
     public Context getParentContext() {
         return parentContext;
     }
 
     /**
-     * Ìí¼ÓÒ»¸öÖµ¡£
+     * æ·»åŠ ä¸€ä¸ªå€¼ã€‚
      */
     public final void put(String key, Object value) {
         if (value == null) {
@@ -68,7 +68,7 @@ public abstract class AbstractContext implements Context {
     }
 
     /**
-     * È¡µÃÖ¸¶¨Öµ¡£
+     * å–å¾—æŒ‡å®šå€¼ã€‚
      */
     public final Object get(String key) {
         Object value = internalGet(key);
@@ -81,7 +81,7 @@ public abstract class AbstractContext implements Context {
     }
 
     /**
-     * É¾³ıÒ»¸öÖµ¡£
+     * åˆ é™¤ä¸€ä¸ªå€¼ã€‚
      */
     public final void remove(String key) {
         if (parentContext != null && parentContext.containsKey(key)) {
@@ -92,7 +92,7 @@ public abstract class AbstractContext implements Context {
     }
 
     /**
-     * ÅĞ¶ÏÊÇ·ñ°üº¬Ö¸¶¨µÄ¼ü¡£
+     * åˆ¤æ–­æ˜¯å¦åŒ…å«æŒ‡å®šçš„é”®ã€‚
      */
     public final boolean containsKey(String key) {
         boolean containsKey = internalContainsKey(key);
@@ -105,7 +105,7 @@ public abstract class AbstractContext implements Context {
     }
 
     /**
-     * È¡µÃËùÓĞkeyµÄ¼¯ºÏ¡£
+     * å–å¾—æ‰€æœ‰keyçš„é›†åˆã€‚
      */
     public final Set<String> keySet() {
         Set<String> internalKeySet = internalKeySet();
@@ -124,32 +124,32 @@ public abstract class AbstractContext implements Context {
     }
 
     /**
-     * È¡µÃËùÓĞkeyµÄ¼¯ºÏ¡£
+     * å–å¾—æ‰€æœ‰keyçš„é›†åˆã€‚
      */
     protected abstract Set<String> internalKeySet();
 
     /**
-     * È¡µÃÖ¸¶¨Öµ¡£
+     * å–å¾—æŒ‡å®šå€¼ã€‚
      */
     protected abstract Object internalGet(String key);
 
     /**
-     * É¾³ıÒ»¸öÖµ¡£
+     * åˆ é™¤ä¸€ä¸ªå€¼ã€‚
      */
     protected abstract void internalRemove(String key);
 
     /**
-     * ÅĞ¶ÏÊÇ·ñ°üº¬Ö¸¶¨µÄ¼ü¡£
+     * åˆ¤æ–­æ˜¯å¦åŒ…å«æŒ‡å®šçš„é”®ã€‚
      */
     protected abstract boolean internalContainsKey(String key);
 
     /**
-     * Ìí¼ÓÒ»¸öÖµ¡£
+     * æ·»åŠ ä¸€ä¸ªå€¼ã€‚
      */
     protected abstract void internalPut(String key, Object value);
 
     /**
-     * ½âÂëcontextµÄÖµ¡£Èç¹ûÎª<code>NULL_PLACEHOLDER</code>£¬Ôò·µ»Ø<code>null</code>¡£
+     * è§£ç contextçš„å€¼ã€‚å¦‚æœä¸º<code>NULL_PLACEHOLDER</code>ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     private Object decodeValue(Object value) {
         return value == NULL_PLACEHOLDER ? null : value;

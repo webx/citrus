@@ -23,7 +23,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * ´ú±íÒ»¸öÓÃÀ´Æ¥ÅäµÄpattern¡£
+ * ä»£è¡¨ä¸€ä¸ªç”¨æ¥åŒ¹é…çš„patternã€‚
  * 
  * @author Michael Zhou
  */

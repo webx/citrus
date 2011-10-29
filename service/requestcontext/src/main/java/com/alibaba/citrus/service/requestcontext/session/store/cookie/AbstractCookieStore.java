@@ -34,7 +34,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ³éÏóµÄcookie storeÊµÏÖ¡£
+ * æŠ½è±¡çš„cookie storeå®ç°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -115,7 +115,7 @@ public abstract class AbstractCookieStore implements CookieStore {
     }
 
     /**
-     * ³õÊ¼»¯cookie store¡£
+     * åˆå§‹åŒ–cookie storeã€‚
      */
     public final void init(String storeName, SessionConfig sessionConfig) throws Exception {
         this.idCookieConfig = assertNotNull(sessionConfig, "sessionConfig").getId().getCookie();
@@ -141,13 +141,13 @@ public abstract class AbstractCookieStore implements CookieStore {
     }
 
     /**
-     * ³õÊ¼»¯cookie store¡£
+     * åˆå§‹åŒ–cookie storeã€‚
      */
     protected void init() throws Exception {
     }
 
     /**
-     * ÏòresponseÖĞĞ´Èëcookie¡£
+     * å‘responseä¸­å†™å…¥cookieã€‚
      */
     protected void writeCookie(HttpServletResponse response, String cookieName, String cookieValue) {
         CookieSupport cookie = new CookieSupport(cookieName, cookieValue);

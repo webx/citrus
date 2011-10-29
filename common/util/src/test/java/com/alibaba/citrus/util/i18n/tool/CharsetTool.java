@@ -26,7 +26,7 @@ import java.text.ParseException;
 import com.alibaba.citrus.util.MessageUtil;
 
 /**
- * ÓÐ¹ØCharset¹¤¾ßµÄ»ùÀà¡£
+ * æœ‰å…³Charsetå·¥å…·çš„åŸºç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -43,7 +43,7 @@ public abstract class CharsetTool {
 
     static {
         try {
-            // ÉèÖÃÄ¿Â¼
+            // è®¾ç½®ç›®å½•
             File basedir = new File("").getCanonicalFile();
 
             System.setProperty("project.home", basedir.getAbsolutePath());

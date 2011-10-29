@@ -63,7 +63,7 @@ public class ActionEventUtilTests {
         assertEventName("deleteAll", "eventSubmit_doDeleteAll", "yes");
         assertEventName("deleteAll", "EVENTSubmit_DODeleteAll", "yes");
 
-        // 不能识别的key
+        // 涓嶈兘璇嗗埆鐨刱ey
         assertEventName(null, "eventSubmit_dodeleteAll", "yes");
     }
 

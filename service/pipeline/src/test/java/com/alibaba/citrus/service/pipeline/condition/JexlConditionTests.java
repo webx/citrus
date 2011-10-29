@@ -87,7 +87,7 @@ public class JexlConditionTests extends AbstractConditionTests<JexlCondition> {
             assertThat(e, exception(ExpressionParseException.class, "Invalid expression: \"a=\""));
         }
 
-        assertEquals("hello", condition.getExpression()); // 保持不变
+        assertEquals("hello", condition.getExpression()); // 淇濇寔涓嶅彉
     }
 
     @Test

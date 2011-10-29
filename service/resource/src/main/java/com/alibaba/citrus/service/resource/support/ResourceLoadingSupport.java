@@ -48,8 +48,8 @@ import com.alibaba.citrus.service.resource.ResourceNotFoundException;
 import com.alibaba.citrus.springext.ResourceLoadingExtender;
 
 /**
- * ½«<code>ResourceLoadingService</code>ÕûºÏµ½Spring <code>ApplicationContext</code>
- * ÖĞ¡£
+ * å°†<code>ResourceLoadingService</code>æ•´åˆåˆ°Spring <code>ApplicationContext</code>
+ * ä¸­ã€‚
  * 
  * @author Michael Zhou
  */
@@ -63,17 +63,17 @@ public class ResourceLoadingSupport implements ResourceLoadingExtender, Applicat
     private boolean complained = false;
 
     /**
-     * ´´½¨<code>ResourceLoadingSupport</code>£¬²¢Ö¸¶¨
-     * <code>ResourceLoadingService</code>ËùÔÚµÄbean factory¡£
+     * åˆ›å»º<code>ResourceLoadingSupport</code>ï¼Œå¹¶æŒ‡å®š
+     * <code>ResourceLoadingService</code>æ‰€åœ¨çš„bean factoryã€‚
      */
     public ResourceLoadingSupport(ApplicationContext factory) {
         this(factory, null);
     }
 
     /**
-     * ´´½¨<code>ResourceLoadingSupport</code>£¬²¢Ö¸¶¨
-     * <code>ResourceLoadingService</code>ËùÔÚµÄbean factory£¬ÒÔ¼°
-     * <code>ResourceLoadingService</code>µÄÃû³Æ¡£
+     * åˆ›å»º<code>ResourceLoadingSupport</code>ï¼Œå¹¶æŒ‡å®š
+     * <code>ResourceLoadingService</code>æ‰€åœ¨çš„bean factoryï¼Œä»¥åŠ
+     * <code>ResourceLoadingService</code>çš„åç§°ã€‚
      */
     public ResourceLoadingSupport(ApplicationContext factory, String resourceLoadingServiceName) {
         this.factory = assertNotNull(factory, "beanFactory");
@@ -83,7 +83,7 @@ public class ResourceLoadingSupport implements ResourceLoadingExtender, Applicat
     }
 
     /**
-     * µ±applicatioon context±»refreshºó£¬µ÷ÓÃ´Ë·½·¨³õÊ¼»¯¡£
+     * å½“applicatioon contextè¢«refreshåï¼Œè°ƒç”¨æ­¤æ–¹æ³•åˆå§‹åŒ–ã€‚
      */
     public void onApplicationEvent(ApplicationEvent event) {
         if (event instanceof ContextRefreshedEvent) {
@@ -93,7 +93,7 @@ public class ResourceLoadingSupport implements ResourceLoadingExtender, Applicat
     }
 
     /**
-     * È¡µÃ<code>ResourceLoadingService</code>£¬Èç¹û»¹Î´³õÊ¼»¯»ò²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—<code>ResourceLoadingService</code>ï¼Œå¦‚æœè¿˜æœªåˆå§‹åŒ–æˆ–ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     public ResourceLoadingService getResourceLoadingService() {
         if (contextRefreshed) {
@@ -107,7 +107,7 @@ public class ResourceLoadingSupport implements ResourceLoadingExtender, Applicat
         try {
             return (ResourceLoadingService) factory.getBean(resourceLoadingServiceName);
         } catch (IllegalStateException e) {
-            // beanFactoryÎ´×¼±¸ºÃ£¬ÊÔÒ»ÏÂparent factory¡£Èç¹û¾ùÈ¡²»µ½ResourceLoadingService£¬·µ»Ønull£¬²»´òÈÕÖ¾
+            // beanFactoryæœªå‡†å¤‡å¥½ï¼Œè¯•ä¸€ä¸‹parent factoryã€‚å¦‚æœå‡å–ä¸åˆ°ResourceLoadingServiceï¼Œè¿”å›nullï¼Œä¸æ‰“æ—¥å¿—
             ApplicationContext parent = factory.getParent();
 
             if (parent != null) {
@@ -127,16 +127,16 @@ public class ResourceLoadingSupport implements ResourceLoadingExtender, Applicat
     }
 
     /**
-     * È¡µÃÖ¸¶¨Â·¾¶Ãû³ÆËù´ú±íµÄ×ÊÔ´¶ÔÏó¡£
+     * å–å¾—æŒ‡å®šè·¯å¾„åç§°æ‰€ä»£è¡¨çš„èµ„æºå¯¹è±¡ã€‚
      * <p>
-     * Èç¹û·µ»Ø<code>null</code>±íÊ¾Ê¹ÓÃÔ­À´µÄ×°ÔØ»úÖÆÀ´È¡µÃ×ÊÔ´¡£
+     * å¦‚æœè¿”å›<code>null</code>è¡¨ç¤ºä½¿ç”¨åŸæ¥çš„è£…è½½æœºåˆ¶æ¥å–å¾—èµ„æºã€‚
      * </p>
      */
     public Resource getResourceByPath(String path) {
         ResourceLoadingService resourceLoadingService = getResourceLoadingService();
 
         if (resourceLoadingService == null) {
-            // Èç¹ûresource loading service²»´æÔÚ£¬Ôò·µ»Ønull£¬µ÷ÓÃÔ­À´µÄ×°ÔØ»úÖÆÀ´È¡µÃ×ÊÔ´¡£
+            // å¦‚æœresource loading serviceä¸å­˜åœ¨ï¼Œåˆ™è¿”å›nullï¼Œè°ƒç”¨åŸæ¥çš„è£…è½½æœºåˆ¶æ¥å–å¾—èµ„æºã€‚
             return null;
         }
 
@@ -145,9 +145,9 @@ public class ResourceLoadingSupport implements ResourceLoadingExtender, Applicat
         try {
             resource = resourceLoadingService.getResource(path, FOR_CREATE);
         } catch (IllegalStateException e) {
-            // resourceLoadingServiceÎ´×¼±¸ºÃ£¬ÓĞ¿ÉÄÜÊÇÔÚ³õÊ¼»¯resource loading serviceµÄ¹ı³ÌÖĞ£¬
-            // Ä³¸öloader»òfilterÍ¨¹ıspring resource loader×¢Èëresource£¬´Ó¶ø²úÉúµİ¹éµ÷ÓÃ¡£
-            // ´ËÊ±·µ»Ønull£¬µ÷ÓÃÔ­À´µÄ×°ÔØ»úÖÆÀ´È¡µÃ×ÊÔ´¡£
+            // resourceLoadingServiceæœªå‡†å¤‡å¥½ï¼Œæœ‰å¯èƒ½æ˜¯åœ¨åˆå§‹åŒ–resource loading serviceçš„è¿‡ç¨‹ä¸­ï¼Œ
+            // æŸä¸ªloaderæˆ–filteré€šè¿‡spring resource loaderæ³¨å…¥resourceï¼Œä»è€Œäº§ç”Ÿé€’å½’è°ƒç”¨ã€‚
+            // æ­¤æ—¶è¿”å›nullï¼Œè°ƒç”¨åŸæ¥çš„è£…è½½æœºåˆ¶æ¥å–å¾—èµ„æºã€‚
             return null;
         } catch (ResourceNotFoundException e) {
             return new NonExistResource(path, e);
@@ -157,14 +157,14 @@ public class ResourceLoadingSupport implements ResourceLoadingExtender, Applicat
     }
 
     /**
-     * È¡µÃÓÃÀ´½âÎöresource patternµÄ½âÎöÆ÷¡£
+     * å–å¾—ç”¨æ¥è§£æresource patternçš„è§£æå™¨ã€‚
      */
     public ResourcePatternResolver getResourcePatternResolver() {
         return resolver;
     }
 
     /**
-     * ÓÃ<code>ResourceLoadingService</code>À´½âÎöresource pattern¡£
+     * ç”¨<code>ResourceLoadingService</code>æ¥è§£æresource patternã€‚
      */
     private class ResourceLoadingServicePatternResolver extends PathMatchingResourcePatternResolver {
         public ResourceLoadingServicePatternResolver() {
@@ -177,8 +177,8 @@ public class ResourceLoadingSupport implements ResourceLoadingExtender, Applicat
                 throws IOException {
             ResourceLoadingService resourceLoadingService = getResourceLoadingService();
 
-            // Èç¹ûresource loading service²»´æÔÚ£¬»òÕßresource²»ÊÇ´Óresource loading serviceÈ¡µÃµÄ£¬
-            // Ôòµ÷ÓÃÔ­À´µÄ×°ÔØ»úÖÆÀ´È¡µÃ×ÊÔ´¡£
+            // å¦‚æœresource loading serviceä¸å­˜åœ¨ï¼Œæˆ–è€…resourceä¸æ˜¯ä»resource loading serviceå–å¾—çš„ï¼Œ
+            // åˆ™è°ƒç”¨åŸæ¥çš„è£…è½½æœºåˆ¶æ¥å–å¾—èµ„æºã€‚
             if (resourceLoadingService == null || !(rootDirResource instanceof ResourceAdapter)) {
                 return super.doFindPathMatchingFileResources(rootDirResource, subPattern);
             }
@@ -231,7 +231,7 @@ public class ResourceLoadingSupport implements ResourceLoadingExtender, Applicat
     }
 
     /**
-     * Ò»¸öÌØÊâµÄresource£º´ú±í×ÊÔ´Î´ÕÒµ½¡£
+     * ä¸€ä¸ªç‰¹æ®Šçš„resourceï¼šä»£è¡¨èµ„æºæœªæ‰¾åˆ°ã€‚
      */
     private static class NonExistResource extends AbstractResource implements ContextResource {
         private final String location;

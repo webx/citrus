@@ -21,17 +21,17 @@ import javax.servlet.http.HttpSession;
 
 public interface SessionLifecycleListener extends SessionInterceptor {
     /**
-     * µ±sessionµÚÒ»´Î±»´´½¨ÒÔºó£¬±»µ÷ÓÃ¡£
+     * å½“sessionç¬¬ä¸€æ¬¡è¢«åˆ›å»ºä»¥åï¼Œè¢«è°ƒç”¨ã€‚
      */
     void sessionCreated(HttpSession session);
 
     /**
-     * µ±session±»×÷·ÏºóÒÔºó£¬±»µ÷ÓÃ¡£
+     * å½“sessionè¢«ä½œåºŸåä»¥åï¼Œè¢«è°ƒç”¨ã€‚
      */
     void sessionInvalidated(HttpSession session);
 
     /**
-     * µ±session±»·ÃÎÊµÄÊ±ºò£¬±»µ÷ÓÃ¡£
+     * å½“sessionè¢«è®¿é—®çš„æ—¶å€™ï¼Œè¢«è°ƒç”¨ã€‚
      */
     void sessionVisited(HttpSession session);
 }

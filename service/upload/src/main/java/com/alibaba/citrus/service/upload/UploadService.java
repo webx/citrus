@@ -22,41 +22,41 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.fileupload.FileItem;
 
 /**
- * ÓÃÀ´´¦Àí<code>multipart/form-data</code>¸ñÊ½µÄHTTP POSTÇëÇó£¬²¢½«ËüÃÇ×ª»»³Éform×Ö¶Î»òÎÄ¼ş¡£
+ * ç”¨æ¥å¤„ç†<code>multipart/form-data</code>æ ¼å¼çš„HTTP POSTè¯·æ±‚ï¼Œå¹¶å°†å®ƒä»¬è½¬æ¢æˆformå­—æ®µæˆ–æ–‡ä»¶ã€‚
  * 
  * @author Michael Zhou
  */
 public interface UploadService extends UploadConfiguration {
     /**
-     * ÅĞ¶ÏÊÇ·ñÊÇ·ûºÏ<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>±ê×¼µÄ
-     * <code>multipart/form-data</code>ÀàĞÍµÄHTTPÇëÇó¡£
+     * åˆ¤æ–­æ˜¯å¦æ˜¯ç¬¦åˆ<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>æ ‡å‡†çš„
+     * <code>multipart/form-data</code>ç±»å‹çš„HTTPè¯·æ±‚ã€‚
      * 
-     * @param request HTTPÇëÇó
-     * @return Èç¹ûÊÇ£¬Ôò·µ»Ø<code>true</code>
+     * @param request HTTPè¯·æ±‚
+     * @return å¦‚æœæ˜¯ï¼Œåˆ™è¿”å›<code>true</code>
      */
     boolean isMultipartContent(HttpServletRequest request);
 
     /**
-     * ½âÎö·ûºÏ<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>±ê×¼µÄ
-     * <code>multipart/form-data</code>ÀàĞÍµÄHTTPÇëÇó¡£
+     * è§£æç¬¦åˆ<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>æ ‡å‡†çš„
+     * <code>multipart/form-data</code>ç±»å‹çš„HTTPè¯·æ±‚ã€‚
      * 
-     * @param request HTTPÇëÇó
-     * @return <code>FileItem</code>µÄÁĞ±í£¬°´ÆäÊäÈëµÄË³ĞòÂŞÁĞ
-     * @throws UploadException Èç¹û½âÎöÊ±³ö´í
+     * @param request HTTPè¯·æ±‚
+     * @return <code>FileItem</code>çš„åˆ—è¡¨ï¼ŒæŒ‰å…¶è¾“å…¥çš„é¡ºåºç½—åˆ—
+     * @throws UploadException å¦‚æœè§£ææ—¶å‡ºé”™
      */
     FileItem[] parseRequest(HttpServletRequest request);
 
     /**
-     * ½âÎö·ûºÏ<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>±ê×¼µÄ
-     * <code>multipart/form-data</code>ÀàĞÍµÄHTTPÇëÇó¡£
+     * è§£æç¬¦åˆ<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>æ ‡å‡†çš„
+     * <code>multipart/form-data</code>ç±»å‹çš„HTTPè¯·æ±‚ã€‚
      * <p>
-     * ´Ë·½·¨¸²¸ÇÁËserviceµÄÄ¬ÈÏÉèÖÃ£¬ÊÊºÏÓÚÔÚaction»òservletÖĞÊÖ¹¤Ö´ĞĞ¡£
+     * æ­¤æ–¹æ³•è¦†ç›–äº†serviceçš„é»˜è®¤è®¾ç½®ï¼Œé€‚åˆäºåœ¨actionæˆ–servletä¸­æ‰‹å·¥æ‰§è¡Œã€‚
      * </p>
      * 
-     * @param request HTTPÇëÇó
-     * @param params upload²ÎÊı
-     * @return <code>FileItem</code>µÄÁĞ±í£¬°´ÆäÊäÈëµÄË³ĞòÂŞÁĞ
-     * @throws UploadException Èç¹û½âÎöÊ±³ö´í
+     * @param request HTTPè¯·æ±‚
+     * @param params uploadå‚æ•°
+     * @return <code>FileItem</code>çš„åˆ—è¡¨ï¼ŒæŒ‰å…¶è¾“å…¥çš„é¡ºåºç½—åˆ—
+     * @throws UploadException å¦‚æœè§£ææ—¶å‡ºé”™
      */
     FileItem[] parseRequest(HttpServletRequest request, UploadParameters params);
 }

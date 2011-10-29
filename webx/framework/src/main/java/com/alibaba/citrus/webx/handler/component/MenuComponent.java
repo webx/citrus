@@ -35,7 +35,7 @@ import com.alibaba.citrus.webx.handler.RequestHandlerMapping;
 import com.alibaba.citrus.webx.handler.support.AbstractVisitor;
 
 /**
- * ÓÃÀ´ÏÔÊ¾¿ÉÓÃhandler²Ëµ¥µÄ×é¼þ¡£
+ * ç”¨æ¥æ˜¾ç¤ºå¯ç”¨handlerèœå•çš„ç»„ä»¶ã€‚
  * 
  * @author Michael Zhou
  */
@@ -59,11 +59,11 @@ public class MenuComponent extends PageComponent {
             int index = name.indexOf('/');
 
             for (; index >= 0; index = name.indexOf('/', index + 1)) {
-                String catName = name.substring(0, index + 1); // ÀýÈç£ºcat1/cat2/
+                String catName = name.substring(0, index + 1); // ä¾‹å¦‚ï¼šcat1/cat2/
                 entry = entry.getOrCreateSubEntry(catName);
             }
 
-            entry.getOrCreateSubEntry(name); // ÀýÈç£ºcat1/cat2/item1
+            entry.getOrCreateSubEntry(name); // ä¾‹å¦‚ï¼šcat1/cat2/item1
         }
 
         return root;
@@ -163,7 +163,7 @@ public class MenuComponent extends PageComponent {
         private Map<String, Entry> subEntries;
 
         /**
-         * ´´½¨ÌØÊâµÄroot entry¡£
+         * åˆ›å»ºç‰¹æ®Šçš„root entryã€‚
          */
         private Entry() {
             this.path = "";

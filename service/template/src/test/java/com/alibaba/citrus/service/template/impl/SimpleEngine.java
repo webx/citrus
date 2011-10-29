@@ -74,7 +74,7 @@ public class SimpleEngine implements TemplateEngine {
     }
 
     /**
-     * ·µ»ØÏà¶ÔÂ·¾¶µÄ×Ö½ÚÁ÷¡£
+     * è¿”å›ç›¸å¯¹è·¯å¾„çš„å­—èŠ‚æµã€‚
      */
     private InputStream getInputStream(String templateName) throws IOException {
         File templateFile = getTemplateFile(templateName).getCanonicalFile();

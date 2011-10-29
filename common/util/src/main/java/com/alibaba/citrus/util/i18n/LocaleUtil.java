@@ -39,27 +39,27 @@ import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.util.io.StreamUtil;
 
 /**
- * ÓÃÀ´´¦ÀíµØÓòºÍ×Ö·û±àÂëµÄ¹¤¾ßÀà¡£
+ * ç”¨æ¥å¤„ç†åœ°åŸŸå’Œå­—ç¬¦ç¼–ç çš„å·¥å…·ç±»ã€‚
  * <p>
- * ÓÉÓÚÏµÍ³localeºÍcharsetÊÇ²»¿É¿¿µÄ£¬²»Í¬µÄ»·¾³¿ÉÄÜ»áÓĞ²»Í¬µÄÏµÍ³ÉèÖÃ£¬Òò´ËÓ¦ÓÃ³ÌĞò×îºÃ²»ÒªÒÀÀµÕâ¸öÏµÍ³Öµ¡£
- * <code>LocaleUtil</code>Ìá¹©ÁËÒ»¸ö·½°¸£¬¿ÉÒÔ¡°ĞŞ¸Ä¡±Ä¬ÈÏlocaleºÍcharset¡£
+ * ç”±äºç³»ç»Ÿlocaleå’Œcharsetæ˜¯ä¸å¯é çš„ï¼Œä¸åŒçš„ç¯å¢ƒå¯èƒ½ä¼šæœ‰ä¸åŒçš„ç³»ç»Ÿè®¾ç½®ï¼Œå› æ­¤åº”ç”¨ç¨‹åºæœ€å¥½ä¸è¦ä¾èµ–è¿™ä¸ªç³»ç»Ÿå€¼ã€‚
+ * <code>LocaleUtil</code>æä¾›äº†ä¸€ä¸ªæ–¹æ¡ˆï¼Œå¯ä»¥â€œä¿®æ”¹â€é»˜è®¤localeå’Œcharsetã€‚
  * </p>
  * <p>
- * <code>LocaleUtil</code>Ìá¹©ÁËÒÔÏÂ¼¸¸ö×÷ÓÃÓòµÄlocale/charsetÉè¶¨£º
+ * <code>LocaleUtil</code>æä¾›äº†ä»¥ä¸‹å‡ ä¸ªä½œç”¨åŸŸçš„locale/charsetè®¾å®šï¼š
  * </p>
  * <ul>
- * <li>ÏµÍ³×÷ÓÃÓò£ºÓÉJVMËùÔËĞĞµÄ²Ù×÷ÏµÍ³»·¾³¾ö¶¨£¬ÔÚJVMÉúÃüÆÚÄÚ²»¸Ä±ä¡£¿ÉÍ¨¹ı<code>LocaleUtil.getSystem()</code>
- * È¡µÃ¡£</li>
- * <li>Ä¬ÈÏ×÷ÓÃÓò£ºÔÚÕû¸öJVMÖĞÈ«¾ÖÓĞĞ§£¬¿É±»¸Ä±ä¡£¿ÉÍ¨¹ı<code>LocaleUtil.getDefault()</code>
- * È¡µÃ¡£ÈçÎ´Ã÷È·Ö¸¶¨£¬ÔòÈ¡¡°ÏµÍ³×÷ÓÃÓò¡±µÄÖµ¡£</li>
- * <li>Ïß³Ì×÷ÓÃÓò£ºÔÚÕû¸öÏß³ÌÖĞÈ«¾ÖÓĞĞ§£¬¿É±»¸Ä±ä¡£¿ÉÍ¨¹ı<code>LocaleUtil.getContext()</code>
- * È¡µÃ¡£ÈçÎ´Ã÷È·Ö¸¶¨£¬ÔòÈ¡¡°Ä¬ÈÏ×÷ÓÃÓò¡±µÄÖµ¡£Ã¿¸öÏß³Ì¶¼¿ÉÒÔÓĞ×Ô¼ºµÄlocaleºÍcharsetÉèÖÃ£¬²»»á¸ÉÈÅÆäËüÏß³Ì¡£</li>
+ * <li>ç³»ç»Ÿä½œç”¨åŸŸï¼šç”±JVMæ‰€è¿è¡Œçš„æ“ä½œç³»ç»Ÿç¯å¢ƒå†³å®šï¼Œåœ¨JVMç”Ÿå‘½æœŸå†…ä¸æ”¹å˜ã€‚å¯é€šè¿‡<code>LocaleUtil.getSystem()</code>
+ * å–å¾—ã€‚</li>
+ * <li>é»˜è®¤ä½œç”¨åŸŸï¼šåœ¨æ•´ä¸ªJVMä¸­å…¨å±€æœ‰æ•ˆï¼Œå¯è¢«æ”¹å˜ã€‚å¯é€šè¿‡<code>LocaleUtil.getDefault()</code>
+ * å–å¾—ã€‚å¦‚æœªæ˜ç¡®æŒ‡å®šï¼Œåˆ™å–â€œç³»ç»Ÿä½œç”¨åŸŸâ€çš„å€¼ã€‚</li>
+ * <li>çº¿ç¨‹ä½œç”¨åŸŸï¼šåœ¨æ•´ä¸ªçº¿ç¨‹ä¸­å…¨å±€æœ‰æ•ˆï¼Œå¯è¢«æ”¹å˜ã€‚å¯é€šè¿‡<code>LocaleUtil.getContext()</code>
+ * å–å¾—ã€‚å¦‚æœªæ˜ç¡®æŒ‡å®šï¼Œåˆ™å–â€œé»˜è®¤ä½œç”¨åŸŸâ€çš„å€¼ã€‚æ¯ä¸ªçº¿ç¨‹éƒ½å¯ä»¥æœ‰è‡ªå·±çš„localeå’Œcharsetè®¾ç½®ï¼Œä¸ä¼šå¹²æ‰°å…¶å®ƒçº¿ç¨‹ã€‚</li>
  * </ul>
  * <p>
- * Util¹¤¾ßÏäÀïµÄÆäËü¹¤¾ßÀà£¬µ±ĞèÒªÊ±£¬½«´Ó<code>LocaleUtil.getContext()</code>
- * ÖĞÈ¡µÃµ±Ç°µÄlocaleºÍcharsetÉèÖÃ¡£ÀıÈç£º<code>StringEscapeUtil.escapeURL(value)</code>
- * £¬Èç²»Ö¸¶¨charset
- * £¬½«´ÓcontextÖĞÈ¡µÃcharset¡£ÕâÑù£¬¿ò¼ÜÍùÍù¿ÉÒÔĞŞ¸ÄcontextÖµ£¬¶øËùÓĞÏß³ÌÖĞµÄ·½·¨µ÷ÓÃ½«·ş´ÓÓÚ¿ò¼ÜµÄlocaleºÍcharsetÉè¶¨¡£
+ * Utilå·¥å…·ç®±é‡Œçš„å…¶å®ƒå·¥å…·ç±»ï¼Œå½“éœ€è¦æ—¶ï¼Œå°†ä»<code>LocaleUtil.getContext()</code>
+ * ä¸­å–å¾—å½“å‰çš„localeå’Œcharsetè®¾ç½®ã€‚ä¾‹å¦‚ï¼š<code>StringEscapeUtil.escapeURL(value)</code>
+ * ï¼Œå¦‚ä¸æŒ‡å®šcharset
+ * ï¼Œå°†ä»contextä¸­å–å¾—charsetã€‚è¿™æ ·ï¼Œæ¡†æ¶å¾€å¾€å¯ä»¥ä¿®æ”¹contextå€¼ï¼Œè€Œæ‰€æœ‰çº¿ç¨‹ä¸­çš„æ–¹æ³•è°ƒç”¨å°†æœä»äºæ¡†æ¶çš„localeå’Œcharsetè®¾å®šã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -70,9 +70,9 @@ public class LocaleUtil {
     private static final ThreadLocal<LocaleInfo> contextLocaleInfoHolder = new ThreadLocal<LocaleInfo>();
 
     /**
-     * ÅĞ¶ÏlocaleÊÇ·ñ±»Ö§³Ö¡£
+     * åˆ¤æ–­localeæ˜¯å¦è¢«æ”¯æŒã€‚
      * 
-     * @param locale Òª¼ì²éµÄlocale
+     * @param locale è¦æ£€æŸ¥çš„locale
      */
     public static boolean isLocaleSupported(Locale locale) {
         return locale != null && AvailableLocalesLoader.locales.AVAILABLE_LANGUAGES.contains(locale.getLanguage())
@@ -80,22 +80,22 @@ public class LocaleUtil {
     }
 
     /**
-     * ÅĞ¶ÏÖ¸¶¨µÄcharsetÊÇ·ñ±»Ö§³Ö¡£
+     * åˆ¤æ–­æŒ‡å®šçš„charsetæ˜¯å¦è¢«æ”¯æŒã€‚
      * 
-     * @param charset Òª¼ì²éµÄcharset
+     * @param charset è¦æ£€æŸ¥çš„charset
      */
     public static boolean isCharsetSupported(String charset) {
         return charset != null && Charset.isSupported(charset);
     }
 
     /**
-     * ½âÎölocale×Ö·û´®¡£
+     * è§£ælocaleå­—ç¬¦ä¸²ã€‚
      * <p>
-     * Locale×Ö·û´®ÊÇ·ûºÏÏÂÁĞ¸ñÊ½£º<code>language_country_variant</code>¡£
+     * Localeå­—ç¬¦ä¸²æ˜¯ç¬¦åˆä¸‹åˆ—æ ¼å¼ï¼š<code>language_country_variant</code>ã€‚
      * </p>
      * 
-     * @param localeString Òª½âÎöµÄ×Ö·û´®
-     * @return <code>Locale</code>¶ÔÏó£¬Èç¹ûlocale×Ö·û´®Îª¿Õ£¬Ôò·µ»Ø<code>null</code>
+     * @param localeString è¦è§£æçš„å­—ç¬¦ä¸²
+     * @return <code>Locale</code>å¯¹è±¡ï¼Œå¦‚æœlocaleå­—ç¬¦ä¸²ä¸ºç©ºï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static Locale parseLocale(String localeString) {
         localeString = trimToNull(localeString);
@@ -135,23 +135,23 @@ public class LocaleUtil {
     }
 
     /**
-     * È¡µÃÕı¹æµÄ×Ö·û¼¯Ãû³Æ, Èç¹ûÖ¸¶¨×Ö·û¼¯²»´æÔÚ, ÔòÅ×³ö<code>UnsupportedEncodingException</code>.
+     * å–å¾—æ­£è§„çš„å­—ç¬¦é›†åç§°, å¦‚æœæŒ‡å®šå­—ç¬¦é›†ä¸å­˜åœ¨, åˆ™æŠ›å‡º<code>UnsupportedEncodingException</code>.
      * 
-     * @param charset ×Ö·û¼¯Ãû³Æ
-     * @return Õı¹æµÄ×Ö·û¼¯Ãû³Æ
-     * @throws IllegalCharsetNameException Èç¹ûÖ¸¶¨×Ö·û¼¯Ãû³Æ·Ç·¨
-     * @throws UnsupportedCharsetException Èç¹ûÖ¸¶¨×Ö·û¼¯²»´æÔÚ
+     * @param charset å­—ç¬¦é›†åç§°
+     * @return æ­£è§„çš„å­—ç¬¦é›†åç§°
+     * @throws IllegalCharsetNameException å¦‚æœæŒ‡å®šå­—ç¬¦é›†åç§°éæ³•
+     * @throws UnsupportedCharsetException å¦‚æœæŒ‡å®šå­—ç¬¦é›†ä¸å­˜åœ¨
      */
     public static String getCanonicalCharset(String charset) {
         return Charset.forName(charset).name();
     }
 
     /**
-     * È¡µÃ±¸Ñ¡µÄresource bundle·ç¸ñµÄÃû³ÆÁĞ±í¡£
+     * å–å¾—å¤‡é€‰çš„resource bundleé£æ ¼çš„åç§°åˆ—è¡¨ã€‚
      * <p>
-     * ÀıÈç£º
+     * ä¾‹å¦‚ï¼š
      * <code>calculateBundleNames("hello.jsp", new Locale("zh", "CN", "variant"))</code>
-     * ½«·µ»ØÏÂÃæÁĞ±í£º
+     * å°†è¿”å›ä¸‹é¢åˆ—è¡¨ï¼š
      * <ol>
      * <li>hello_zh_CN_variant.jsp</li>
      * <li>hello_zh_CN.jsp</li>
@@ -160,20 +160,20 @@ public class LocaleUtil {
      * </ol>
      * </p>
      * 
-     * @param baseName bundleµÄ»ù±¾Ãû
-     * @param locale ÇøÓòÉèÖÃ
-     * @return ËùÓĞ±¸Ñ¡µÄbundleÃû
+     * @param baseName bundleçš„åŸºæœ¬å
+     * @param locale åŒºåŸŸè®¾ç½®
+     * @return æ‰€æœ‰å¤‡é€‰çš„bundleå
      */
     public static List<String> calculateBundleNames(String baseName, Locale locale) {
         return calculateBundleNames(baseName, locale, false);
     }
 
     /**
-     * È¡µÃ±¸Ñ¡µÄresource bundle·ç¸ñµÄÃû³ÆÁĞ±í¡£
+     * å–å¾—å¤‡é€‰çš„resource bundleé£æ ¼çš„åç§°åˆ—è¡¨ã€‚
      * <p>
-     * ÀıÈç£º
+     * ä¾‹å¦‚ï¼š
      * <code>calculateBundleNames("hello.jsp", new Locale("zh", "CN", "variant"),
-     * false)</code>½«·µ»ØÏÂÃæÁĞ±í£º
+     * false)</code>å°†è¿”å›ä¸‹é¢åˆ—è¡¨ï¼š
      * <ol>
      * <li>hello_zh_CN_variant.jsp</li>
      * <li>hello_zh_CN.jsp</li>
@@ -182,9 +182,9 @@ public class LocaleUtil {
      * </ol>
      * </p>
      * <p>
-     * µ±<code>noext</code>Îª<code>true</code>Ê±£¬²»¼ÆËãºó×ºÃû£¬ÀıÈç
+     * å½“<code>noext</code>ä¸º<code>true</code>æ—¶ï¼Œä¸è®¡ç®—åç¼€åï¼Œä¾‹å¦‚
      * <code>calculateBundleNames("hello.world",
-     * new Locale("zh", "CN", "variant"), true)</code>½«·µ»ØÏÂÃæÁĞ±í£º
+     * new Locale("zh", "CN", "variant"), true)</code>å°†è¿”å›ä¸‹é¢åˆ—è¡¨ï¼š
      * <ol>
      * <li>hello.world_zh_CN_variant</li>
      * <li>hello.world_zh_CN</li>
@@ -193,9 +193,9 @@ public class LocaleUtil {
      * </ol>
      * </p>
      * 
-     * @param baseName bundleµÄ»ù±¾Ãû
-     * @param locale ÇøÓòÉèÖÃ
-     * @return ËùÓĞ±¸Ñ¡µÄbundleÃû
+     * @param baseName bundleçš„åŸºæœ¬å
+     * @param locale åŒºåŸŸè®¾ç½®
+     * @return æ‰€æœ‰å¤‡é€‰çš„bundleå
      */
     public static List<String> calculateBundleNames(String baseName, Locale locale, boolean noext) {
         baseName = StringUtil.trimToEmpty(baseName);
@@ -204,7 +204,7 @@ public class LocaleUtil {
             locale = new Locale(EMPTY_STRING);
         }
 
-        // È¡ºó×º¡£
+        // å–åç¼€ã€‚
         String ext = EMPTY_STRING;
         int extLength = 0;
 
@@ -223,7 +223,7 @@ public class LocaleUtil {
             }
         }
 
-        // ¼ÆËãlocaleºó×º¡£
+        // è®¡ç®—localeåç¼€ã€‚
         LinkedList<String> result = createLinkedList();
         String language = locale.getLanguage();
         int languageLength = language.length();
@@ -238,12 +238,12 @@ public class LocaleUtil {
         result.addFirst(buffer.toString());
         buffer.setLength(buffer.length() - extLength);
 
-        // Èç¹ûlocaleÊÇ("", "", "").
+        // å¦‚æœlocaleæ˜¯("", "", "").
         if (languageLength + countryLength + variantLength == 0) {
             return result;
         }
 
-        // ¼ÓÈëbaseName_language£¬Èç¹ûbaseNameÎª¿Õ£¬Ôò²»¼ÓÏÂ»®Ïß¡£
+        // åŠ å…¥baseName_languageï¼Œå¦‚æœbaseNameä¸ºç©ºï¼Œåˆ™ä¸åŠ ä¸‹åˆ’çº¿ã€‚
         if (buffer.length() > 0) {
             buffer.append('_');
         }
@@ -260,7 +260,7 @@ public class LocaleUtil {
             return result;
         }
 
-        // ¼ÓÈëbaseName_language_country
+        // åŠ å…¥baseName_language_country
         buffer.append('_').append(country);
 
         if (countryLength > 0) {
@@ -273,7 +273,7 @@ public class LocaleUtil {
             return result;
         }
 
-        // ¼ÓÈëbaseName_language_country_variant
+        // åŠ å…¥baseName_language_country_variant
         buffer.append('_').append(variant);
 
         buffer.append(ext);
@@ -284,28 +284,28 @@ public class LocaleUtil {
     }
 
     /**
-     * È¡µÃ²Ù×÷ÏµÍ³Ä¬ÈÏµÄÇøÓò¡£
+     * å–å¾—æ“ä½œç³»ç»Ÿé»˜è®¤çš„åŒºåŸŸã€‚
      * 
-     * @return ²Ù×÷ÏµÍ³Ä¬ÈÏµÄÇøÓò
+     * @return æ“ä½œç³»ç»Ÿé»˜è®¤çš„åŒºåŸŸ
      */
     public static LocaleInfo getSystem() {
         return systemLocaleInfo;
     }
 
     /**
-     * È¡µÃÄ¬ÈÏµÄÇøÓò¡£
+     * å–å¾—é»˜è®¤çš„åŒºåŸŸã€‚
      * 
-     * @return Ä¬ÈÏµÄÇøÓò
+     * @return é»˜è®¤çš„åŒºåŸŸ
      */
     public static LocaleInfo getDefault() {
         return defaultLocalInfo == null ? systemLocaleInfo : defaultLocalInfo;
     }
 
     /**
-     * ÉèÖÃÄ¬ÈÏµÄÇøÓò¡£
+     * è®¾ç½®é»˜è®¤çš„åŒºåŸŸã€‚
      * 
-     * @param locale ÇøÓò
-     * @return Ô­À´µÄÄ¬ÈÏÇøÓò
+     * @param locale åŒºåŸŸ
+     * @return åŸæ¥çš„é»˜è®¤åŒºåŸŸ
      */
     public static LocaleInfo setDefault(Locale locale) {
         LocaleInfo old = getDefault();
@@ -314,11 +314,11 @@ public class LocaleUtil {
     }
 
     /**
-     * ÉèÖÃÄ¬ÈÏµÄÇøÓò¡£
+     * è®¾ç½®é»˜è®¤çš„åŒºåŸŸã€‚
      * 
-     * @param locale ÇøÓò
-     * @param charset ±àÂë×Ö·û¼¯
-     * @return Ô­À´µÄÄ¬ÈÏÇøÓò
+     * @param locale åŒºåŸŸ
+     * @param charset ç¼–ç å­—ç¬¦é›†
+     * @return åŸæ¥çš„é»˜è®¤åŒºåŸŸ
      */
     public static LocaleInfo setDefault(Locale locale, String charset) throws UnsupportedCharsetException {
         LocaleInfo old = getDefault();
@@ -327,10 +327,10 @@ public class LocaleUtil {
     }
 
     /**
-     * ÉèÖÃÄ¬ÈÏµÄÇøÓò¡£
+     * è®¾ç½®é»˜è®¤çš„åŒºåŸŸã€‚
      * 
-     * @param localeInfo ÇøÓòºÍ±àÂë×Ö·û¼¯ĞÅÏ¢
-     * @return Ô­À´µÄÄ¬ÈÏÇøÓò
+     * @param localeInfo åŒºåŸŸå’Œç¼–ç å­—ç¬¦é›†ä¿¡æ¯
+     * @return åŸæ¥çš„é»˜è®¤åŒºåŸŸ
      */
     public static LocaleInfo setDefault(LocaleInfo localeInfo) throws UnsupportedCharsetException {
         if (localeInfo == null) {
@@ -351,7 +351,7 @@ public class LocaleUtil {
     }
 
     /**
-     * ¸´Î»Ä¬ÈÏµÄÇøÓòÉèÖÃ¡£
+     * å¤ä½é»˜è®¤çš„åŒºåŸŸè®¾ç½®ã€‚
      */
     public static void resetDefault() {
         defaultLocalInfo = systemLocaleInfo;
@@ -362,9 +362,9 @@ public class LocaleUtil {
     }
 
     /**
-     * È¡µÃµ±Ç°threadÄ¬ÈÏµÄÇøÓò¡£
+     * å–å¾—å½“å‰threadé»˜è®¤çš„åŒºåŸŸã€‚
      * 
-     * @return µ±Ç°threadÄ¬ÈÏµÄÇøÓò
+     * @return å½“å‰threadé»˜è®¤çš„åŒºåŸŸ
      */
     public static LocaleInfo getContext() {
         LocaleInfo contextLocaleInfo = contextLocaleInfoHolder.get();
@@ -372,10 +372,10 @@ public class LocaleUtil {
     }
 
     /**
-     * ÉèÖÃµ±Ç°threadÄ¬ÈÏµÄÇøÓò¡£
+     * è®¾ç½®å½“å‰threadé»˜è®¤çš„åŒºåŸŸã€‚
      * 
-     * @param locale ÇøÓò
-     * @return Ô­À´µÄthreadÄ¬ÈÏµÄÇøÓò
+     * @param locale åŒºåŸŸ
+     * @return åŸæ¥çš„threadé»˜è®¤çš„åŒºåŸŸ
      */
     public static LocaleInfo setContext(Locale locale) {
         LocaleInfo old = getContext();
@@ -384,11 +384,11 @@ public class LocaleUtil {
     }
 
     /**
-     * ÉèÖÃµ±Ç°threadÄ¬ÈÏµÄÇøÓò¡£
+     * è®¾ç½®å½“å‰threadé»˜è®¤çš„åŒºåŸŸã€‚
      * 
-     * @param locale ÇøÓò
-     * @param charset ±àÂë×Ö·û¼¯
-     * @return Ô­À´µÄthreadÄ¬ÈÏµÄÇøÓò
+     * @param locale åŒºåŸŸ
+     * @param charset ç¼–ç å­—ç¬¦é›†
+     * @return åŸæ¥çš„threadé»˜è®¤çš„åŒºåŸŸ
      */
     public static LocaleInfo setContext(Locale locale, String charset) throws UnsupportedCharsetException {
         LocaleInfo old = getContext();
@@ -397,10 +397,10 @@ public class LocaleUtil {
     }
 
     /**
-     * ÉèÖÃµ±Ç°threadÄ¬ÈÏµÄÇøÓò¡£
+     * è®¾ç½®å½“å‰threadé»˜è®¤çš„åŒºåŸŸã€‚
      * 
-     * @param localeInfo ÇøÓòºÍ±àÂë×Ö·û¼¯ĞÅÏ¢
-     * @return Ô­À´µÄthreadÄ¬ÈÏµÄÇøÓò
+     * @param localeInfo åŒºåŸŸå’Œç¼–ç å­—ç¬¦é›†ä¿¡æ¯
+     * @return åŸæ¥çš„threadé»˜è®¤çš„åŒºåŸŸ
      */
     public static LocaleInfo setContext(LocaleInfo localeInfo) throws UnsupportedCharsetException {
         if (localeInfo == null) {
@@ -421,7 +421,7 @@ public class LocaleUtil {
     }
 
     /**
-     * ¸´Î»µ±Ç°threadµÄÇøÓòÉèÖÃ¡£
+     * å¤ä½å½“å‰threadçš„åŒºåŸŸè®¾ç½®ã€‚
      */
     public static void resetContext() {
         contextLocaleInfoHolder.remove();
@@ -454,7 +454,7 @@ public class LocaleUtil {
     }
 
     /**
-     * µ±default»òcontext locale±»¸Ä±äÊ±£¬Í¨Öª¼àÌıÆ÷¡£
+     * å½“defaultæˆ–context localeè¢«æ”¹å˜æ—¶ï¼Œé€šçŸ¥ç›‘å¬å™¨ã€‚
      */
     public interface Notifier extends EventListener {
         void defaultChanged(LocaleInfo newValue);
@@ -467,7 +467,7 @@ public class LocaleUtil {
     }
 
     /**
-     * ÑÓ³Ù¼ÓÔØËùÓĞ¿ÉÓÃµÄ¹ú¼ÒºÍÓïÑÔ¡£
+     * å»¶è¿ŸåŠ è½½æ‰€æœ‰å¯ç”¨çš„å›½å®¶å’Œè¯­è¨€ã€‚
      */
     private static class AvailableLocalesLoader {
         private static final AvailableLocales locales = new AvailableLocales();

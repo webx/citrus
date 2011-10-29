@@ -48,7 +48,7 @@ public class PageAuthorizationServiceTests {
                         // grants
                         grant(null, "*", "action", null), // 
                         grant("*", null, "read", null), //
-                        grant("anonymous", null, null, "write"), // Õâ¾ä½«±»ÏÂÃæÒ»ĞĞ¸²¸Ç
+                        grant("anonymous", null, null, "write"), // è¿™å¥å°†è¢«ä¸‹é¢ä¸€è¡Œè¦†ç›–
                         grant("anonymous", null, "write", null)), //
                 match("/**/*.vm", grant(null, "*", "*", null)) //
         });
@@ -93,7 +93,7 @@ public class PageAuthorizationServiceTests {
     }
 
     /**
-     * target²»Æ¥Åä¡£
+     * targetä¸åŒ¹é…ã€‚
      */
     @Test
     public void targetNotMatch() {
@@ -102,7 +102,7 @@ public class PageAuthorizationServiceTests {
     }
 
     /**
-     * ×î³¤µÄÆ¥ÅäÓÅÏÈÊÚÈ¨£¬ÏàÍ¬µÄÆ¥ÅäÒÔºóÃæµÄÎª×¼¡£
+     * æœ€é•¿çš„åŒ¹é…ä¼˜å…ˆæˆæƒï¼Œç›¸åŒçš„åŒ¹é…ä»¥åé¢çš„ä¸ºå‡†ã€‚
      */
     @Test
     public void priority() {
@@ -117,7 +117,7 @@ public class PageAuthorizationServiceTests {
     }
 
     /**
-     * targetÆ¥Åä£¬µ«ÓÃ»§Î´Æ¥Åä¡£
+     * targetåŒ¹é…ï¼Œä½†ç”¨æˆ·æœªåŒ¹é…ã€‚
      */
     @Test
     public void userNotMatch() {
@@ -126,7 +126,7 @@ public class PageAuthorizationServiceTests {
     }
 
     /**
-     * targetÆ¥Åä¡¢ÓÃ»§Æ¥Åä£¬µ«action²»Æ¥Åä¡£
+     * targetåŒ¹é…ã€ç”¨æˆ·åŒ¹é…ï¼Œä½†actionä¸åŒ¹é…ã€‚
      */
     @Test
     public void actionNotMatch() {
@@ -135,7 +135,7 @@ public class PageAuthorizationServiceTests {
     }
 
     /**
-     * Æ¥Åärole¡£
+     * åŒ¹é…roleã€‚
      */
     @Test
     public void role() {
@@ -145,31 +145,31 @@ public class PageAuthorizationServiceTests {
         // allow=*, action=write
         assertAuth(ALLOWED, "/user/profile/abc", "other", ADMIN_ROLE, "write");
 
-        // role=admin²»Æ¥Åänull
+        // role=adminä¸åŒ¹é…null
         assertAuth(GRANT_NOT_MATCH, "/user/profile/abc", "other", null, "write");
     }
 
     /**
-     * Ïà¶ÔÂ·¾¶¡£
+     * ç›¸å¯¹è·¯å¾„ã€‚
      */
     @Test
     public void relativeTarget() {
         // allow=*
         assertAuth(ALLOWED, "/user/hello.vm", "other", ADMIN_ROLE, "read");
 
-        // role=admin²»Æ¥Åänull
+        // role=adminä¸åŒ¹é…null
         assertAuth(GRANT_NOT_MATCH, "/user/world.vm", "other", null, "write");
     }
 
     /**
-     * ÄäÃû·ÃÎÊ¡£
+     * åŒ¿åè®¿é—®ã€‚
      */
     @Test
     public void anonymous() {
-        // role=*²»°üÀ¨¿Õrole
+        // role=*ä¸åŒ…æ‹¬ç©ºrole
         assertAuth(GRANT_NOT_MATCH, "/user/public/hello", null, null, "action");
 
-        // user=* ²»°üÀ¨anonymous
+        // user=* ä¸åŒ…æ‹¬anonymous
         assertAuth(GRANT_NOT_MATCH, "/user/public/hello", null, null, "read");
 
         // user=anonymous

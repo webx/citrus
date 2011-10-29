@@ -23,34 +23,34 @@ import java.util.List;
 import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 
 /**
- * URI BrokerµÄservice ½Ó¿Ú¶¨Òå¡£
+ * URI Brokerçš„service æ¥å£å®šä¹‰ã€‚
  * 
  * @author Michael Zhou
  * @author dux.fangl
  */
 public interface URIBrokerService {
     /**
-     * È¡µÃËùÓĞURI brokerÃû³Æ.
+     * å–å¾—æ‰€æœ‰URI brokeråç§°.
      */
     List<String> getNames();
 
     /**
-     * È¡µÃËùÓĞ±»µ¼³öµÄURI brokerÃû³Æ.
+     * å–å¾—æ‰€æœ‰è¢«å¯¼å‡ºçš„URI brokeråç§°.
      */
     List<String> getExposedNames();
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄURI broker.
+     * å–å¾—æŒ‡å®šåç§°çš„URI broker.
      */
     URIBroker getURIBroker(String name);
 
     /**
-     * ÁĞ³öËùÓĞµÄURI brokers.
+     * åˆ—å‡ºæ‰€æœ‰çš„URI brokers.
      */
     String dump();
 
     /**
-     * ÁĞ³öËùÓĞµÄURI brokers.
+     * åˆ—å‡ºæ‰€æœ‰çš„URI brokers.
      */
     void dump(Writer writer);
 }

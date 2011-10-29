@@ -27,7 +27,7 @@ import org.junit.Test;
 import com.alibaba.citrus.generictype.introspect.PropertyInfo;
 
 /**
- * ²âÊÔ<code>ArrayAnalyzer</code>¡£
+ * æµ‹è¯•<code>ArrayAnalyzer</code>ã€‚
  * 
  * @author Michael Zhou
  */

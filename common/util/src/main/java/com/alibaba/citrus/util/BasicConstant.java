@@ -20,62 +20,62 @@ package com.alibaba.citrus.util;
 import java.io.Serializable;
 
 /**
- * »ù±¾³£Á¿¡£
+ * åŸºæœ¬å¸¸é‡ã€‚
  * 
  * @author Michael Zhou
  */
 public final class BasicConstant {
     // =============================================================
-    //  Êı×é³£Á¿
+    //  æ•°ç»„å¸¸é‡
     // =============================================================
 
     // primitive arrays
 
-    /** ¿ÕµÄ<code>byte</code>Êı×é¡£ */
+    /** ç©ºçš„<code>byte</code>æ•°ç»„ã€‚ */
     public static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
     public static final Byte[] EMPTY_BYTE_OBJECT_ARRAY = new Byte[0];
 
-    /** ¿ÕµÄ<code>short</code>Êı×é¡£ */
+    /** ç©ºçš„<code>short</code>æ•°ç»„ã€‚ */
     public static final short[] EMPTY_SHORT_ARRAY = new short[0];
     public static final Short[] EMPTY_SHORT_OBJECT_ARRAY = new Short[0];
 
-    /** ¿ÕµÄ<code>int</code>Êı×é¡£ */
+    /** ç©ºçš„<code>int</code>æ•°ç»„ã€‚ */
     public static final int[] EMPTY_INT_ARRAY = new int[0];
     public static final Integer[] EMPTY_INTEGER_OBJECT_ARRAY = new Integer[0];
 
-    /** ¿ÕµÄ<code>long</code>Êı×é¡£ */
+    /** ç©ºçš„<code>long</code>æ•°ç»„ã€‚ */
     public static final long[] EMPTY_LONG_ARRAY = new long[0];
     public static final Long[] EMPTY_LONG_OBJECT_ARRAY = new Long[0];
 
-    /** ¿ÕµÄ<code>float</code>Êı×é¡£ */
+    /** ç©ºçš„<code>float</code>æ•°ç»„ã€‚ */
     public static final float[] EMPTY_FLOAT_ARRAY = new float[0];
     public static final Float[] EMPTY_FLOAT_OBJECT_ARRAY = new Float[0];
 
-    /** ¿ÕµÄ<code>double</code>Êı×é¡£ */
+    /** ç©ºçš„<code>double</code>æ•°ç»„ã€‚ */
     public static final double[] EMPTY_DOUBLE_ARRAY = new double[0];
     public static final Double[] EMPTY_DOUBLE_OBJECT_ARRAY = new Double[0];
 
-    /** ¿ÕµÄ<code>char</code>Êı×é¡£ */
+    /** ç©ºçš„<code>char</code>æ•°ç»„ã€‚ */
     public static final char[] EMPTY_CHAR_ARRAY = new char[0];
     public static final Character[] EMPTY_CHARACTER_OBJECT_ARRAY = new Character[0];
 
-    /** ¿ÕµÄ<code>boolean</code>Êı×é¡£ */
+    /** ç©ºçš„<code>boolean</code>æ•°ç»„ã€‚ */
     public static final boolean[] EMPTY_BOOLEAN_ARRAY = new boolean[0];
     public static final Boolean[] EMPTY_BOOLEAN_OBJECT_ARRAY = new Boolean[0];
 
     // object arrays
 
-    /** ¿ÕµÄ<code>Object</code>Êı×é¡£ */
+    /** ç©ºçš„<code>Object</code>æ•°ç»„ã€‚ */
     public static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
 
-    /** ¿ÕµÄ<code>Class</code>Êı×é¡£ */
+    /** ç©ºçš„<code>Class</code>æ•°ç»„ã€‚ */
     public static final Class<?>[] EMPTY_CLASS_ARRAY = new Class[0];
 
-    /** ¿ÕµÄ<code>String</code>Êı×é¡£ */
+    /** ç©ºçš„<code>String</code>æ•°ç»„ã€‚ */
     public static final String[] EMPTY_STRING_ARRAY = new String[0];
 
     // =============================================================
-    //  ¶ÔÏó³£Á¿
+    //  å¯¹è±¡å¸¸é‡
     // =============================================================
 
     // 0-valued primitive wrappers
@@ -88,7 +88,7 @@ public final class BasicConstant {
     public static final Character CHAR_NULL = new Character('\0');
     public static final Boolean BOOL_FALSE = Boolean.FALSE;
 
-    /** ´ú±ínullÖµµÄÕ¼Î»¶ÔÏó¡£ */
+    /** ä»£è¡¨nullå€¼çš„å ä½å¯¹è±¡ã€‚ */
     public static final Object NULL_PLACEHOLDER = new NullPlaceholder();
 
     private final static class NullPlaceholder implements Serializable {
@@ -104,6 +104,6 @@ public final class BasicConstant {
         }
     }
 
-    /** ¿Õ×Ö·û´®¡£ */
+    /** ç©ºå­—ç¬¦ä¸²ã€‚ */
     public static final String EMPTY_STRING = "";
 }

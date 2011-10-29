@@ -21,15 +21,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * ¸ù¾İÒì³£µÄÀàĞÍ£¬½«ÇëÇó·Ö·¢¸øÊÊµ±µÄrequest handler¡£
+ * æ ¹æ®å¼‚å¸¸çš„ç±»å‹ï¼Œå°†è¯·æ±‚åˆ†å‘ç»™é€‚å½“çš„request handlerã€‚
  * 
  * @author Michael Zhou
  */
 public interface ErrorHandlerMapping {
     /**
-     * È¡µÃexception¶ÔÓ¦µÄhandler¼°Ïà¹ØĞÅÏ¢¡£
+     * å–å¾—exceptionå¯¹åº”çš„handleråŠç›¸å…³ä¿¡æ¯ã€‚
      * <p>
-     * Èç¹û·µ»Ø<code>null</code>´ú±íÎŞ¶ÔÓ¦µÄ<code>RequestHandler</code>¡£
+     * å¦‚æœè¿”å›<code>null</code>ä»£è¡¨æ— å¯¹åº”çš„<code>RequestHandler</code>ã€‚
      * </p>
      */
     RequestHandlerContext getRequestHandler(HttpServletRequest request, HttpServletResponse response,

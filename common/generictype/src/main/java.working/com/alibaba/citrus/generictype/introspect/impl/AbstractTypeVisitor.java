@@ -27,7 +27,7 @@ import java.lang.reflect.Method;
 import com.alibaba.citrus.generictype.TypeInfo;
 
 /**
- * ³éÏóµÄ{@link TypeVisitor}ÊµÏÖ¡£
+ * æŠ½è±¡çš„{@link TypeVisitor}å®ç°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -57,16 +57,16 @@ public abstract class AbstractTypeVisitor implements TypeVisitor {
     }
 
     /**
-     * È¡µÃµ±Ç°ÕıÔÚ±»·ÃÎÊµÄÀàĞÍ¡£
+     * å–å¾—å½“å‰æ­£åœ¨è¢«è®¿é—®çš„ç±»å‹ã€‚
      */
     protected final TypeInfo getType() {
         return type;
     }
 
     /**
-     * È¡µÃ·ÃÎÊÏŞ¶¨·û¡£
+     * å–å¾—è®¿é—®é™å®šç¬¦ã€‚
      * <p>
-     * ¿ÉÄÜµÄÖµÎª£º<code>PUBLIC | PROTECTED | PRIVATE</code>¡£
+     * å¯èƒ½çš„å€¼ä¸ºï¼š<code>PUBLIC | PROTECTED | PRIVATE</code>ã€‚
      * </p>
      */
     protected final int getAccessQualifier(Member member) {

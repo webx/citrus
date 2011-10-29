@@ -18,50 +18,50 @@
 package com.alibaba.citrus.turbine;
 
 /**
- * ¾­µäµÄwebx·½°¸µÄ³£Á¿¡£ Ìí¼ÓÁËÒ»Ğ©citrusÓÃµ½µÄ³£Á¿
+ * ç»å…¸çš„webxæ–¹æ¡ˆçš„å¸¸é‡ã€‚ æ·»åŠ äº†ä¸€äº›citrusç”¨åˆ°çš„å¸¸é‡
  * 
  * @author Michael Zhou
  * @author dux.fangl
  */
 public interface TurbineConstant {
-    /* Turbine Scheme Ä£¿éºÍÄ£°åÀàĞÍ¡£ */
+    /* Turbine Scheme æ¨¡å—å’Œæ¨¡æ¿ç±»å‹ã€‚ */
 
-    /** Ä£¿éÀàĞÍ£ºaction£¬´¦ÀíÓÃ»§Ìá½»ÄÚÈİµÄÄ£¿é¡£ */
+    /** æ¨¡å—ç±»å‹ï¼šactionï¼Œå¤„ç†ç”¨æˆ·æäº¤å†…å®¹çš„æ¨¡å—ã€‚ */
     String ACTION_MODULE = "action";
 
-    /** Ä£¿éÀàĞÍ£ºscreen£¬´ú±íÒ³ÃæµÄÖ÷Ìå¡£ */
+    /** æ¨¡å—ç±»å‹ï¼šscreenï¼Œä»£è¡¨é¡µé¢çš„ä¸»ä½“ã€‚ */
     String SCREEN_MODULE = "screen";
 
-    /** Ä£¿éÀàĞÍ£ºscreen£¬´ú±íÒ³ÃæµÄÖ÷Ìå¡£ */
+    /** æ¨¡å—ç±»å‹ï¼šscreenï¼Œä»£è¡¨é¡µé¢çš„ä¸»ä½“ã€‚ */
     String SCREEN_MODULE_NO_TEMPLATE = "screen.notemplate";
 
-    /** Ä£¿éÀàĞÍ£ºcontrol£¬´ú±íÒ³ÃæµÄ¿ÉÖØÓÃÆ¬¶Î¡£ */
+    /** æ¨¡å—ç±»å‹ï¼šcontrolï¼Œä»£è¡¨é¡µé¢çš„å¯é‡ç”¨ç‰‡æ®µã€‚ */
     String CONTROL_MODULE = "control";
 
-    /** Ä£¿éÀàĞÍ£ºcontrol£¬´ú±íÒ³ÃæµÄ¿ÉÖØÓÃÆ¬¶Î¡£ */
+    /** æ¨¡å—ç±»å‹ï¼šcontrolï¼Œä»£è¡¨é¡µé¢çš„å¯é‡ç”¨ç‰‡æ®µã€‚ */
     String CONTROL_MODULE_NO_TEMPLATE = "control.notemplate";
 
-    /** Ä£°åÀàĞÍ£ºscreen£¬´ú±íÒ³ÃæµÄÖ÷Ìå¡£ */
+    /** æ¨¡æ¿ç±»å‹ï¼šscreenï¼Œä»£è¡¨é¡µé¢çš„ä¸»ä½“ã€‚ */
     String SCREEN_TEMPLATE = "screen.template";
 
-    /** Ä£°åÀàĞÍ£ºcontrol£¬´ú±íÒ³ÃæµÄ¿ÉÖØÓÃÆ¬¶Î¡£ */
+    /** æ¨¡æ¿ç±»å‹ï¼šcontrolï¼Œä»£è¡¨é¡µé¢çš„å¯é‡ç”¨ç‰‡æ®µã€‚ */
     String CONTROL_TEMPLATE = "control.template";
 
-    /** Ä£°åÀàĞÍ£ºlayout£¬´ú±íÒ³ÃæµÄ²¼¾Ö¡£ */
+    /** æ¨¡æ¿ç±»å‹ï¼šlayoutï¼Œä»£è¡¨é¡µé¢çš„å¸ƒå±€ã€‚ */
     String LAYOUT_TEMPLATE = "layout.template";
 
-    /** URLºó×º×ª»»£ºÊäÈë */
+    /** URLåç¼€è½¬æ¢ï¼šè¾“å…¥ */
     String EXTENSION_INPUT = "extension.input";
 
-    /** URLºó×º×ª»»£ºÊä³ö */
+    /** URLåç¼€è½¬æ¢ï¼šè¾“å‡º */
     String EXTENSION_OUTPUT = "extension.output";
 
-    /* Template contextÏà¹Ø³£Á¿¡£ */
+    /* Template contextç›¸å…³å¸¸é‡ã€‚ */
 
-    /** ÔÚrundata attributeºÍtemplate contextÖĞ´ú±íscreenµÄÄÚÈİµÄkey¡£ */
+    /** åœ¨rundata attributeå’Œtemplate contextä¸­ä»£è¡¨screençš„å†…å®¹çš„keyã€‚ */
     String SCREEN_PLACEHOLDER_KEY = "screen_placeholder";
 
-    /* HTML TemplateÏà¹ØµÄ³£Á¿(HtmlPageAttributeTool)¡£ */
+    /* HTML Templateç›¸å…³çš„å¸¸é‡(HtmlPageAttributeTool)ã€‚ */
 
     /** Default doctype root element. */
     String DEFAULT_HTML_DOCTYPE_ROOT_ELEMENT_KEY = "default.html.doctype.root.element";

@@ -36,7 +36,7 @@ import com.alibaba.citrus.service.requestcontext.util.CookieSupport;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * Ö§³ÖsessionµÄ<code>HttpRequestContext</code>ÊµÏÖ¡£
+ * æ”¯æŒsessionçš„<code>HttpRequestContext</code>å®ç°ã€‚
  */
 public class SessionRequestContextImpl extends AbstractRequestContextWrapper implements SessionRequestContext {
     private final static Logger log = LoggerFactory.getLogger(SessionRequestContext.class);
@@ -49,7 +49,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
     private boolean sessionReturned;
 
     /**
-     * ¹¹Ôìº¯Êı¡£
+     * æ„é€ å‡½æ•°ã€‚
      */
     public SessionRequestContextImpl(RequestContext wrappedContext, SessionConfig sessionConfig) {
         super(wrappedContext);
@@ -59,26 +59,26 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
     }
 
     /**
-     * È¡µÃ<code>SessionConfig</code>ÊµÀı¡£
+     * å–å¾—<code>SessionConfig</code>å®ä¾‹ã€‚
      * 
-     * @return <code>SessionConfig</code>ÊµÀı
+     * @return <code>SessionConfig</code>å®ä¾‹
      */
     public SessionConfig getSessionConfig() {
         return sessionConfig;
     }
 
     /**
-     * ÅĞ¶ÏsessionÊÇ·ñÒÑ¾­×÷·Ï¡£
+     * åˆ¤æ–­sessionæ˜¯å¦å·²ç»ä½œåºŸã€‚
      * 
-     * @return ÈçÒÑ×÷·Ï£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚å·²ä½œåºŸï¼Œåˆ™è¿”å›<code>true</code>
      */
     public boolean isSessionInvalidated() {
         return session == null ? false : session.isInvalidated();
     }
 
     /**
-     * Çå³ısession¡£ÀàËÆ<code>invalidate()</code>·½·¨£¬µ«Ö§³ÖºóĞø²Ù×÷£¬¶ø²»»áÅ×³ö
-     * <code>IllegalStateException</code>¡£
+     * æ¸…é™¤sessionã€‚ç±»ä¼¼<code>invalidate()</code>æ–¹æ³•ï¼Œä½†æ”¯æŒåç»­æ“ä½œï¼Œè€Œä¸ä¼šæŠ›å‡º
+     * <code>IllegalStateException</code>ã€‚
      */
     public void clear() {
         if (session != null) {
@@ -87,7 +87,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
     }
 
     /**
-     * È¡µÃµ±Ç°µÄsession ID¡£
+     * å–å¾—å½“å‰çš„session IDã€‚
      * 
      * @return session ID
      */
@@ -97,9 +97,9 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
     }
 
     /**
-     * µ±Ç°µÄsession IDÊÇ´ÓcookieÖĞÈ¡µÃµÄÂğ£¿
+     * å½“å‰çš„session IDæ˜¯ä»cookieä¸­å–å¾—çš„å—ï¼Ÿ
      * 
-     * @return Èç¹ûÊÇ£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚æœæ˜¯ï¼Œåˆ™è¿”å›<code>true</code>
      */
     public boolean isRequestedSessionIDFromCookie() {
         ensureRequestedSessionID();
@@ -107,9 +107,9 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
     }
 
     /**
-     * µ±Ç°µÄsession IDÊÇ´ÓURLÖĞÈ¡µÃµÄÂğ£¿
+     * å½“å‰çš„session IDæ˜¯ä»URLä¸­å–å¾—çš„å—ï¼Ÿ
      * 
-     * @return Èç¹ûÊÇ£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚æœæ˜¯ï¼Œåˆ™è¿”å›<code>true</code>
      */
     public boolean isRequestedSessionIDFromURL() {
         ensureRequestedSessionID();
@@ -117,9 +117,9 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
     }
 
     /**
-     * ÅĞ¶Ïµ±Ç°µÄsession IDÊÇ·ñÈÔÈ»ºÏ·¨¡£
+     * åˆ¤æ–­å½“å‰çš„session IDæ˜¯å¦ä»ç„¶åˆæ³•ã€‚
      * 
-     * @return Èç¹ûÊÇ£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚æœæ˜¯ï¼Œåˆ™è¿”å›<code>true</code>
      */
     public boolean isRequestedSessionIDValid() {
         HttpSession session = getSession(false);
@@ -128,7 +128,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
     }
 
     /**
-     * È·±£session IDÒÑ¾­´ÓrequestÖĞ±»½âÎö³öÀ´ÁË¡£
+     * ç¡®ä¿session IDå·²ç»ä»requestä¸­è¢«è§£æå‡ºæ¥äº†ã€‚
      */
     private void ensureRequestedSessionID() {
         if (!requestedSessionIDParsed) {
@@ -145,21 +145,21 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
     }
 
     /**
-     * ½«session ID±àÂëµ½CookieÖĞÈ¥¡£
+     * å°†session IDç¼–ç åˆ°Cookieä¸­å»ã€‚
      */
     public void encodeSessionIDIntoCookie() {
         writeSessionIDCookie(session.getId());
     }
 
     /**
-     * ½«session ID´ÓCookieÖĞÉ¾³ı¡£
+     * å°†session IDä»Cookieä¸­åˆ é™¤ã€‚
      */
     public void clearSessionIDFromCookie() {
         writeSessionIDCookie("");
     }
 
     /**
-     * Ğ´cookie¡£
+     * å†™cookieã€‚
      */
     private void writeSessionIDCookie(String cookieValue) {
         CookieConfig cookieConfig = sessionConfig.getId().getCookie();
@@ -191,9 +191,9 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
     }
 
     /**
-     * ´ÓcookieÖĞÈ¡µÃsession ID¡£
+     * ä»cookieä¸­å–å¾—session IDã€‚
      * 
-     * @return Èç¹û´æÔÚ£¬Ôò·µ»Øsession ID£¬·ñÔò·µ»Ø<code>null</code>
+     * @return å¦‚æœå­˜åœ¨ï¼Œåˆ™è¿”å›session IDï¼Œå¦åˆ™è¿”å›<code>null</code>
      */
     public String decodeSessionIDFromCookie() {
         Cookie[] cookies = getRequest().getCookies();
@@ -216,9 +216,9 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
     }
 
     /**
-     * ½«session ID±àÂëµ½URLÖĞÈ¥¡£
+     * å°†session IDç¼–ç åˆ°URLä¸­å»ã€‚
      * 
-     * @return °üº¬session IDµÄURL
+     * @return åŒ…å«session IDçš„URL
      */
     public String encodeSessionIDIntoURL(String url) {
         HttpSession session = getRequest().getSession(false);
@@ -270,9 +270,9 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
     }
 
     /**
-     * ´ÓURLÖĞÈ¡µÃsession ID¡£
+     * ä»URLä¸­å–å¾—session IDã€‚
      * 
-     * @return Èç¹û´æÔÚ£¬Ôò·µ»Øsession ID£¬·ñÔò·µ»Ø<code>null</code>
+     * @return å¦‚æœå­˜åœ¨ï¼Œåˆ™è¿”å›session IDï¼Œå¦åˆ™è¿”å›<code>null</code>
      */
     public String decodeSessionIDFromURL() {
         String uri = getRequest().getRequestURI();
@@ -304,48 +304,48 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
     }
 
     /**
-     * È¡µÃµ±Ç°µÄsession£¬Èç¹û²»´æÔÚ£¬ÇÒ<code>create</code>Îª<code>true</code>£¬Ôò´´½¨Ò»¸öĞÂµÄ¡£
+     * å–å¾—å½“å‰çš„sessionï¼Œå¦‚æœä¸å­˜åœ¨ï¼Œä¸”<code>create</code>ä¸º<code>true</code>ï¼Œåˆ™åˆ›å»ºä¸€ä¸ªæ–°çš„ã€‚
      * 
-     * @param create ±ØÒªÊ±ÊÇ·ñ´´½¨ĞÂµÄsession
-     * @return µ±Ç°µÄsession»òĞÂµÄsession£¬Èç¹û²»´æÔÚ£¬ÇÒ<code>create</code>Îª
-     *         <code>false</code> £¬Ôò·µ»Ø<code>null</code>
+     * @param create å¿…è¦æ—¶æ˜¯å¦åˆ›å»ºæ–°çš„session
+     * @return å½“å‰çš„sessionæˆ–æ–°çš„sessionï¼Œå¦‚æœä¸å­˜åœ¨ï¼Œä¸”<code>create</code>ä¸º
+     *         <code>false</code> ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public HttpSession getSession(boolean create) {
-        // Èç¹ûgetSession·½·¨ÒÑ¾­±»Ö´ĞĞ¹ıÁË£¬ÄÇÃ´Ö±½Ó·µ»Ø
+        // å¦‚æœgetSessionæ–¹æ³•å·²ç»è¢«æ‰§è¡Œè¿‡äº†ï¼Œé‚£ä¹ˆç›´æ¥è¿”å›
         if (session != null && sessionReturned) {
             return session;
         }
 
-        // ´´½¨session£¬¾¡¹ÜÓĞ¿ÉÄÜ´´½¨È´²»·µ»Ø
+        // åˆ›å»ºsessionï¼Œå°½ç®¡æœ‰å¯èƒ½åˆ›å»ºå´ä¸è¿”å›
         if (session == null) {
-            // ´ÓrequestÖĞÈ¡µÃsession ID
+            // ä»requestä¸­å–å¾—session ID
             ensureRequestedSessionID();
 
             String sessionID = requestedSessionID;
             boolean isNew = false;
 
-            // Èç¹ûsessionIDÎª¿Õ£¬Ôò´´½¨Ò»¸öĞÂµÄID
+            // å¦‚æœsessionIDä¸ºç©ºï¼Œåˆ™åˆ›å»ºä¸€ä¸ªæ–°çš„ID
             if (sessionID == null) {
                 if (!create) {
-                    return null; // ³ıÁËcreate=false£¬Ö±½Ó·µ»Ønull
+                    return null; // é™¤äº†create=falseï¼Œç›´æ¥è¿”å›null
                 }
 
                 sessionID = sessionConfig.getId().getGenerator().generateSessionID();
                 isNew = true;
             }
 
-            // ²»¹ÜÔõÑù£¬ÏÈ´´½¨Ò»¸ösession¶ÔÏóÔÙËµ£¬µ«Õâ¸ösessionÓĞ¿ÉÄÜ²»´æÔÚ»òÊÇ¹ıÆÚµÄ
+            // ä¸ç®¡æ€æ ·ï¼Œå…ˆåˆ›å»ºä¸€ä¸ªsessionå¯¹è±¡å†è¯´ï¼Œä½†è¿™ä¸ªsessionæœ‰å¯èƒ½ä¸å­˜åœ¨æˆ–æ˜¯è¿‡æœŸçš„
             session = new SessionImpl(sessionID, this, isNew, create);
         }
 
-        // SessionÎªnew£¬ÓĞ¿ÉÄÜÊÇsessionIDÎª¿Õ£¬»òÊÇsessionID¶ÔÓ¦µÄsession²»´æÔÚ£¬»òÊÇsessionÒÑ¹ıÆÚ
-        // Èç¹ûÍ¬Ê±createÎªfalse£¬·µ»Ønull¾Í¿ÉÒÔÁË¡£
+        // Sessionä¸ºnewï¼Œæœ‰å¯èƒ½æ˜¯sessionIDä¸ºç©ºï¼Œæˆ–æ˜¯sessionIDå¯¹åº”çš„sessionä¸å­˜åœ¨ï¼Œæˆ–æ˜¯sessionå·²è¿‡æœŸ
+        // å¦‚æœåŒæ—¶createä¸ºfalseï¼Œè¿”å›nullå°±å¯ä»¥äº†ã€‚
         if (session.isNew() && !create) {
             return null;
         }
 
-        // Èç¹ûÔ­À´sessionIDÒÑ´æÔÚÓÚrequestÖĞ£¬²»ÂÛsessionÊÇ·ñÊÇĞÂ½¨Óë·ñ£¬ÖØÓÃ¸ÃsessionID¡£
-        // Òò´Ë£¬ÔÚÕâÖÖÇé¿öÏÂ£¬¾Í²»ĞèÒªÔÙÉèÖÃcookieÁË¡£
+        // å¦‚æœåŸæ¥sessionIDå·²å­˜åœ¨äºrequestä¸­ï¼Œä¸è®ºsessionæ˜¯å¦æ˜¯æ–°å»ºä¸å¦ï¼Œé‡ç”¨è¯¥sessionIDã€‚
+        // å› æ­¤ï¼Œåœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œå°±ä¸éœ€è¦å†è®¾ç½®cookieäº†ã€‚
         if (sessionConfig.getId().isCookieEnabled() && !session.getId().equals(requestedSessionID)) {
             if (getResponse().isCommitted()) {
                 throw new IllegalStateException(
@@ -360,14 +360,14 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
     }
 
     /**
-     * ¿ªÊ¼Ò»¸öÇëÇó¡£
+     * å¼€å§‹ä¸€ä¸ªè¯·æ±‚ã€‚
      */
     @Override
     public void prepare() {
     }
 
     /**
-     * ½áÊøÒ»¸öÇëÇó¡£
+     * ç»“æŸä¸€ä¸ªè¯·æ±‚ã€‚
      */
     @Override
     public void commit() {
@@ -376,7 +376,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
         }
 
         if (session.isInvalidated()) {
-            // Çå³ıcookieÖĞµÄsession ID
+            // æ¸…é™¤cookieä¸­çš„session ID
             clearSessionIDFromCookie();
         }
 
@@ -384,20 +384,20 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
     }
 
     /**
-     * Ö§³ÖsessionµÄ<code>HttpServletRequestWrapper</code>¡£
+     * æ”¯æŒsessionçš„<code>HttpServletRequestWrapper</code>ã€‚
      */
     private class SessionRequestWrapper extends AbstractRequestWrapper {
         /**
-         * ¹¹Ôìº¯Êı¡£
+         * æ„é€ å‡½æ•°ã€‚
          * 
-         * @param request ±»°ü×°µÄ<code>HttpServletRequest</code>ÊµÀı
+         * @param request è¢«åŒ…è£…çš„<code>HttpServletRequest</code>å®ä¾‹
          */
         public SessionRequestWrapper(HttpServletRequest request) {
             super(SessionRequestContextImpl.this, request);
         }
 
         /**
-         * È¡µÃµ±Ç°requestÖĞµÄsession ID¡£
+         * å–å¾—å½“å‰requestä¸­çš„session IDã€‚
          * 
          * @return session ID
          */
@@ -407,9 +407,9 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
         }
 
         /**
-         * µ±Ç°µÄsession IDÊÇ´ÓcookieÖĞÈ¡µÃµÄÂğ£¿
+         * å½“å‰çš„session IDæ˜¯ä»cookieä¸­å–å¾—çš„å—ï¼Ÿ
          * 
-         * @return Èç¹ûÊÇ£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœæ˜¯ï¼Œåˆ™è¿”å›<code>true</code>
          */
         @Override
         public boolean isRequestedSessionIdFromCookie() {
@@ -417,9 +417,9 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
         }
 
         /**
-         * µ±Ç°µÄsession IDÊÇ´ÓURLÖĞÈ¡µÃµÄÂğ£¿
+         * å½“å‰çš„session IDæ˜¯ä»URLä¸­å–å¾—çš„å—ï¼Ÿ
          * 
-         * @return Èç¹ûÊÇ£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœæ˜¯ï¼Œåˆ™è¿”å›<code>true</code>
          */
         @Override
         public boolean isRequestedSessionIdFromURL() {
@@ -427,9 +427,9 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°µÄsession IDÊÇ·ñÈÔÈ»ºÏ·¨¡£
+         * åˆ¤æ–­å½“å‰çš„session IDæ˜¯å¦ä»ç„¶åˆæ³•ã€‚
          * 
-         * @return Èç¹ûÊÇ£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœæ˜¯ï¼Œåˆ™è¿”å›<code>true</code>
          */
         @Override
         public boolean isRequestedSessionIdValid() {
@@ -437,9 +437,9 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
         }
 
         /**
-         * È¡µÃµ±Ç°µÄsession£¬Èç¹û²»´æÔÚ£¬Ôò´´½¨Ò»¸öĞÂµÄ¡£
+         * å–å¾—å½“å‰çš„sessionï¼Œå¦‚æœä¸å­˜åœ¨ï¼Œåˆ™åˆ›å»ºä¸€ä¸ªæ–°çš„ã€‚
          * 
-         * @return µ±Ç°µÄsession»òĞÂµÄsession
+         * @return å½“å‰çš„sessionæˆ–æ–°çš„session
          */
         @Override
         public HttpSession getSession() {
@@ -447,11 +447,11 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
         }
 
         /**
-         * È¡µÃµ±Ç°µÄsession£¬Èç¹û²»´æÔÚ£¬ÇÒ<code>create</code>Îª<code>true</code>£¬Ôò´´½¨Ò»¸öĞÂµÄ¡£
+         * å–å¾—å½“å‰çš„sessionï¼Œå¦‚æœä¸å­˜åœ¨ï¼Œä¸”<code>create</code>ä¸º<code>true</code>ï¼Œåˆ™åˆ›å»ºä¸€ä¸ªæ–°çš„ã€‚
          * 
-         * @param create ±ØÒªÊ±ÊÇ·ñ´´½¨ĞÂµÄsession
-         * @return µ±Ç°µÄsession»òĞÂµÄsession£¬Èç¹û²»´æÔÚ£¬ÇÒ<code>create</code>Îª
-         *         <code>false</code>£¬Ôò·µ»Ø<code>null</code>
+         * @param create å¿…è¦æ—¶æ˜¯å¦åˆ›å»ºæ–°çš„session
+         * @return å½“å‰çš„sessionæˆ–æ–°çš„sessionï¼Œå¦‚æœä¸å­˜åœ¨ï¼Œä¸”<code>create</code>ä¸º
+         *         <code>false</code>ï¼Œåˆ™è¿”å›<code>null</code>
          */
         @Override
         public HttpSession getSession(boolean create) {
@@ -469,23 +469,23 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
     }
 
     /**
-     * Ö§³ÖsessionµÄ<code>HttpServletResponseWrapper</code>¡£
+     * æ”¯æŒsessionçš„<code>HttpServletResponseWrapper</code>ã€‚
      */
     private class SessionResponseWrapper extends AbstractResponseWrapper {
         /**
-         * ¹¹Ôìº¯Êı¡£
+         * æ„é€ å‡½æ•°ã€‚
          * 
-         * @param response ±»°ü×°µÄ<code>HttpServletResponse</code>ÊµÀı
+         * @param response è¢«åŒ…è£…çš„<code>HttpServletResponse</code>å®ä¾‹
          */
         public SessionResponseWrapper(HttpServletResponse response) {
             super(SessionRequestContextImpl.this, response);
         }
 
         /**
-         * ½«session ID±àÂëµ½URLÖĞ¡£
+         * å°†session IDç¼–ç åˆ°URLä¸­ã€‚
          * 
-         * @param url Òª±àÂëµÄURL
-         * @return °üº¬session IDµÄURL
+         * @param url è¦ç¼–ç çš„URL
+         * @return åŒ…å«session IDçš„URL
          */
         @Override
         public String encodeURL(String url) {
@@ -497,10 +497,10 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
         }
 
         /**
-         * ½«session ID±àÂëµ½URLÖĞ¡£
+         * å°†session IDç¼–ç åˆ°URLä¸­ã€‚
          * 
-         * @param url Òª±àÂëµÄURL
-         * @return °üº¬session IDµÄURL
+         * @param url è¦ç¼–ç çš„URL
+         * @return åŒ…å«session IDçš„URL
          */
         @Override
         public String encodeRedirectURL(String url) {

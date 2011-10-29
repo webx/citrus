@@ -32,7 +32,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 import com.alibaba.citrus.util.i18n.LocaleUtil;
 
 /**
- * ´´½¨<code>SetLocaleRequestContext</code>µÄ¹¤³§¡£
+ * åˆ›å»º<code>SetLocaleRequestContext</code>çš„å·¥å‚ã€‚
  * 
  * @author Michael Zhou
  */
@@ -93,9 +93,9 @@ public class SetLocaleRequestContextFactoryImpl extends AbstractRequestContextFa
     }
 
     /**
-     * °ü×°Ò»¸örequest context¡£
+     * åŒ…è£…ä¸€ä¸ªrequest contextã€‚
      * 
-     * @param wrappedContext ±»°ü×°µÄ<code>RequestContext</code>¶ÔÏó
+     * @param wrappedContext è¢«åŒ…è£…çš„<code>RequestContext</code>å¯¹è±¡
      * @return request context
      */
     public SetLocaleRequestContext getRequestContextWrapper(RequestContext wrappedContext) {
@@ -112,16 +112,16 @@ public class SetLocaleRequestContextFactoryImpl extends AbstractRequestContextFa
     }
 
     /**
-     * ±¾ÀàÌá¹©ÁËÉèÖÃ¶àÓïÑÔ»·¾³µÄ¹¦ÄÜ¡£
+     * æœ¬ç±»æä¾›äº†è®¾ç½®å¤šè¯­è¨€ç¯å¢ƒçš„åŠŸèƒ½ã€‚
      */
     public String[] getFeatures() {
         return new String[] { "setLocaleAndCharset" };
     }
 
     /**
-     * ¼ÙÈçÍøÕ¾Ö§³Öresource bundleºÍ¶àÓïÑÔ»·¾³£¬ÄÇÃ´±¾ÀàÌá¹©µÄrequest context»á°ÑlocaleĞÅÏ¢±£´æÔÚsessionÀï¡£
-     * ¼ÙÉèÎÒÃÇÒªÊ¹ÓÃ»ùÓÚcookieµÄsession£¬ÄÇÃ´±¾Àà±ØĞë·ÅÔÚÌá¹©session¹¦ÄÜµÄrequest
-     * contextÖ®ºó¡£²»¹ı£¬»ùÓÚcookieµÄsession»úÖÆ²¢²»ÊÇ±ØĞëµÄ¡£
+     * å‡å¦‚ç½‘ç«™æ”¯æŒresource bundleå’Œå¤šè¯­è¨€ç¯å¢ƒï¼Œé‚£ä¹ˆæœ¬ç±»æä¾›çš„request contextä¼šæŠŠlocaleä¿¡æ¯ä¿å­˜åœ¨sessioné‡Œã€‚
+     * å‡è®¾æˆ‘ä»¬è¦ä½¿ç”¨åŸºäºcookieçš„sessionï¼Œé‚£ä¹ˆæœ¬ç±»å¿…é¡»æ”¾åœ¨æä¾›sessionåŠŸèƒ½çš„request
+     * contextä¹‹åã€‚ä¸è¿‡ï¼ŒåŸºäºcookieçš„sessionæœºåˆ¶å¹¶ä¸æ˜¯å¿…é¡»çš„ã€‚
      */
     public FeatureOrder[] featureOrders() {
         return new FeatureOrder[] { new AfterFeature("session") };

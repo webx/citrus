@@ -26,8 +26,8 @@ import com.alibaba.citrus.generictype.TypeInfo;
 import com.alibaba.citrus.generictype.introspect.PropertyInfo;
 
 /**
- * ³éÏóµÄ{@link PropertiesFinder}ÊµÏÖ£¬ÓÃÀ´½«Êı×é¡¢<code>Collection</code>¡¢<code>Map</code>
- * µÈÀàĞÍ¿´×÷Ò»¸öµ¥¶ÀµÄproperty¡£
+ * æŠ½è±¡çš„{@link PropertiesFinder}å®ç°ï¼Œç”¨æ¥å°†æ•°ç»„ã€<code>Collection</code>ã€<code>Map</code>
+ * ç­‰ç±»å‹çœ‹ä½œä¸€ä¸ªå•ç‹¬çš„propertyã€‚
  * 
  * @author Michael Zhou
  */
@@ -43,7 +43,7 @@ public abstract class SinglePropertyFinder extends AbstractTypeVisitor implement
     }
 
     /**
-     * ¸ù¾İÀàĞÍ´´½¨Ò»¸ö{@link PropertyInfo}ÊµÀı£¬Èç¹ûÀàĞÍ²»Ö§³Ö£¬Ôò·µ»Ø<code>null</code>¡£
+     * æ ¹æ®ç±»å‹åˆ›å»ºä¸€ä¸ª{@link PropertyInfo}å®ä¾‹ï¼Œå¦‚æœç±»å‹ä¸æ”¯æŒï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     protected abstract PropertyInfo createPropertyInfo(TypeInfo type);
 }

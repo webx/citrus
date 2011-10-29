@@ -21,23 +21,23 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 /**
- * À©Õ¹SpringÔ­ÓĞµÄ<code>ResourceLoader</code>µÄ¹¦ÄÜ¡£
+ * æ‰©å±•SpringåŸæœ‰çš„<code>ResourceLoader</code>çš„åŠŸèƒ½ã€‚
  * 
  * @author Michael Zhou
  */
 public interface ResourceLoadingExtender {
     /**
-     * È¡µÃÖ¸¶¨Â·¾¶Ãû³ÆËù´ú±íµÄ×ÊÔ´¶ÔÏó¡£
+     * å–å¾—æŒ‡å®šè·¯å¾„åç§°æ‰€ä»£è¡¨çš„èµ„æºå¯¹è±¡ã€‚
      * <p>
-     * Èç¹û·µ»Ø<code>null</code>±íÊ¾Ê¹ÓÃÔ­À´µÄ×°ÔØ»úÖÆÀ´È¡µÃ×ÊÔ´¡£
+     * å¦‚æœè¿”å›<code>null</code>è¡¨ç¤ºä½¿ç”¨åŸæ¥çš„è£…è½½æœºåˆ¶æ¥å–å¾—èµ„æºã€‚
      * </p>
      */
     Resource getResourceByPath(String path);
 
     /**
-     * È¡µÃÓÃÀ´½âÎöresource patternµÄ½âÎöÆ÷¡£
+     * å–å¾—ç”¨æ¥è§£æresource patternçš„è§£æå™¨ã€‚
      * <p>
-     * Èç¹û·µ»Ø<code>null</code>±íÊ¾Ê¹ÓÃÔ­À´µÄ×°ÔØ»úÖÆ¡£
+     * å¦‚æœè¿”å›<code>null</code>è¡¨ç¤ºä½¿ç”¨åŸæ¥çš„è£…è½½æœºåˆ¶ã€‚
      * </p>
      */
     ResourcePatternResolver getResourcePatternResolver();

@@ -26,7 +26,7 @@ import org.junit.Test;
 import com.alibaba.citrus.util.CollectionUtil;
 
 /**
- * ²âÊÔ<code>CodegenUtil</code>¡£
+ * æµ‹è¯•<code>CodegenUtil</code>ã€‚
  * 
  * @author Michael Zhou
  */

@@ -1,32 +1,32 @@
-ËµÃ÷:
+è¯´æ˜:
 ======
 
-±¾ÏîÄ¿ÊÇ´ÓObjectWeb ASM v3.1(http://asm.objectweb.org/license.html)ÖĞÒÆÖ²£¬²¢×öÁËÈçÏÂĞŞ¸Ä£º
+æœ¬é¡¹ç›®æ˜¯ä»ObjectWeb ASM v3.1(http://asm.objectweb.org/license.html)ä¸­ç§»æ¤ï¼Œå¹¶åšäº†å¦‚ä¸‹ä¿®æ”¹ï¼š
 
-* ĞŞ¸Äpackage
+* ä¿®æ”¹package
   org.objectweb.asm -> com.alibaba.citrus.asm
   org/objectweb/asm -> com/alibaba/citrus/asm
 
-* ĞŞ¸Äµ¥Ôª²âÊÔ£º
-  1. Ö»±£ÁôÁËconform²âÊÔ¡£
-  2. Ôö¼ÓAsmTestParams¸¨ÖúÀà¡£
-  3. ĞŞ¸ÄAbstractTestÀà£¬Ê¹Ö®£º
-     # Ê¹ÓÃAsmTestParams¶ø²»ÊÇSystem properties¡£
-     # ¸Ä½øsuiteµÄÃû³Æ£¬¼ÓÉÏ¡°-part¡±
-     # ½«stream¸Ä³ÉURL£¬±ÜÃâÄÚ´æÒç³ö
-     # Ìí¼Óexclude²ÎÊı£¬ÅÅ³ı¶àÓàµÄÎÄ¼ş
-     # ¹Ø±ÕzipÁ÷
-     # ÉèÖÃÒ»¸ösuiteÖĞtestµÄ×î´óÊıÁ¿
-  4. ĞŞ¸ÄÁËASMifierUnitTest¡¢CheckClassAdapterUnitTest¡¢TraceClassAdapterUnitTestÖĞ´«¸ømainº¯ÊıµÄ²ÎÊı¡£
-  5. ĞŞ¸ÄÁËASMifierTest¡¢GASMifierTestÖĞµÄ²ÎÊı£ºclazz=java.lang
-  6. ĞŞ¸ÄÁËClassWriterComputeFramesTest¡¢LocalVariablesSorterTest2¡¢SimpleVerifierTestÖĞµÄ²ÎÊı£ºparts=2
-  7. ĞŞ¸ÄËùÓĞ¶ÔAbstractTest.isµÄÒıÓÃ£¬¸Ä³ÉopenStream()µ÷ÓÃ¡£
-  8. ĞŞ¸ÄÁËSerialVersionUIDAdderUnitTestÖĞµÄUID£¬ÒÔ±ãÍ¨¹ı²âÊÔ¡£
-  9. ClassNodeTestÖĞ£¬ÉèÖÃInsnList.check = false£¬ÒÔ±ãÍ¨¹ı²âÊÔ¡£
+* ä¿®æ”¹å•å…ƒæµ‹è¯•ï¼š
+  1. åªä¿ç•™äº†conformæµ‹è¯•ã€‚
+  2. å¢åŠ AsmTestParamsè¾…åŠ©ç±»ã€‚
+  3. ä¿®æ”¹AbstractTestç±»ï¼Œä½¿ä¹‹ï¼š
+     # ä½¿ç”¨AsmTestParamsè€Œä¸æ˜¯System propertiesã€‚
+     # æ”¹è¿›suiteçš„åç§°ï¼ŒåŠ ä¸Šâ€œ-partâ€
+     # å°†streamæ”¹æˆURLï¼Œé¿å…å†…å­˜æº¢å‡º
+     # æ·»åŠ excludeå‚æ•°ï¼Œæ’é™¤å¤šä½™çš„æ–‡ä»¶
+     # å…³é—­zipæµ
+     # è®¾ç½®ä¸€ä¸ªsuiteä¸­testçš„æœ€å¤§æ•°é‡
+  4. ä¿®æ”¹äº†ASMifierUnitTestã€CheckClassAdapterUnitTestã€TraceClassAdapterUnitTestä¸­ä¼ ç»™mainå‡½æ•°çš„å‚æ•°ã€‚
+  5. ä¿®æ”¹äº†ASMifierTestã€GASMifierTestä¸­çš„å‚æ•°ï¼šclazz=java.lang
+  6. ä¿®æ”¹äº†ClassWriterComputeFramesTestã€LocalVariablesSorterTest2ã€SimpleVerifierTestä¸­çš„å‚æ•°ï¼šparts=2
+  7. ä¿®æ”¹æ‰€æœ‰å¯¹AbstractTest.isçš„å¼•ç”¨ï¼Œæ”¹æˆopenStream()è°ƒç”¨ã€‚
+  8. ä¿®æ”¹äº†SerialVersionUIDAdderUnitTestä¸­çš„UIDï¼Œä»¥ä¾¿é€šè¿‡æµ‹è¯•ã€‚
+  9. ClassNodeTestä¸­ï¼Œè®¾ç½®InsnList.check = falseï¼Œä»¥ä¾¿é€šè¿‡æµ‹è¯•ã€‚
   
-* ½«StringBuffer¸Ä³ÉStringBuilder
+* å°†StringBufferæ”¹æˆStringBuilder
 
 * Cleanup
 
-* ²âÊÔÒªµã£ºÄÚ´æĞèÇó·Ç³£´ó£¬×îºÃ·ÖÅä1G-2GµÄ¿Õ¼ä£º-Xms1536M -Xmx1536M -XX:MaxPermSize=512M
+* æµ‹è¯•è¦ç‚¹ï¼šå†…å­˜éœ€æ±‚éå¸¸å¤§ï¼Œæœ€å¥½åˆ†é…1G-2Gçš„ç©ºé—´ï¼š-Xms1536M -Xmx1536M -XX:MaxPermSize=512M
 

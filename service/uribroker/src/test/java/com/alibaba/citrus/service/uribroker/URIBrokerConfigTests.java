@@ -41,7 +41,7 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker.URIType;
 import com.alibaba.citrus.util.i18n.LocaleUtil;
 
 /**
- * ²âÊÔuribrokerµÄÅäÖÃ¡£
+ * æµ‹è¯•uribrokerçš„é…ç½®ã€‚
  * 
  * @author Michael Zhou
  */
@@ -128,28 +128,28 @@ public class URIBrokerConfigTests extends AbstractURIBrokerServiceTests {
 
     @Test
     public void linkCharset_URLEncoding() {
-        // Î´Ö¸Ã÷charsetµÄ£¬Ê¹ÓÃcontextÖĞÖ¸¶¨µÄcharset½øĞĞURL encoding¡£
+        // æœªæŒ‡æ˜charsetçš„ï¼Œä½¿ç”¨contextä¸­æŒ‡å®šçš„charsetè¿›è¡ŒURL encodingã€‚
         uri = (GenericURIBroker) service.getURIBroker("link");
-        assertEquals("http://localhost/?str=%E4%B8%AD%E5%9B%BD", uri.addQueryData("str", "ÖĞ¹ú").render());
+        assertEquals("http://localhost/?str=%E4%B8%AD%E5%9B%BD", uri.addQueryData("str", "ä¸­å›½").render());
 
-        // Ö¸Ã÷charsetµÄ£¬Ê¹ÓÃÖ¸¶¨µÄcharset½øĞĞURL encoding¡£
+        // æŒ‡æ˜charsetçš„ï¼Œä½¿ç”¨æŒ‡å®šçš„charsetè¿›è¡ŒURL encodingã€‚
         uri = (GenericURIBroker) service.getURIBroker("linkCharset");
-        assertEquals("http://localhost/?str=%D6%D0%B9%FA", uri.addQueryData("str", "ÖĞ¹ú").render());
+        assertEquals("http://localhost/?str=%D6%D0%B9%FA", uri.addQueryData("str", "ä¸­å›½").render());
     }
 
     @Test
     public void linkWithInterceptor_URIBroker() {
         PullService pull = (PullService) factory.getBean("pullService");
 
-        // È·±£uri interceptorÔÚrenderÖ®Ç°Ã»ÓĞ±»Ö´ĞĞ¹ı
-        // Ôø¾­µÄbug£ºpull serviceÔÚloggingÎªdebugÊ±£¬»áÌáÇ°Ö´ĞĞuri.interceptors¡£
+        // ç¡®ä¿uri interceptoråœ¨renderä¹‹å‰æ²¡æœ‰è¢«æ‰§è¡Œè¿‡
+        // æ›¾ç»çš„bugï¼špull serviceåœ¨loggingä¸ºdebugæ—¶ï¼Œä¼šæå‰æ‰§è¡Œuri.interceptorsã€‚
         uri = (GenericURIBroker) pull.getContext().pull("linkWithInterceptor");
         assertTrue(uri.addQueryData("path", "hello").render().startsWith("http://www.mydomain.com/hello?path=hello&r="));
 
         assertTrue(uri.toString().startsWith("http://localhost/"));
         assertTrue(uri.render().startsWith("http://www.mydomain.com/abc?r="));
 
-        // Ìí¼ÓÁíÒ»¸öinterceptor
+        // æ·»åŠ å¦ä¸€ä¸ªinterceptor
         uri.addInterceptor(new URIBrokerInterceptor() {
             public void perform(URIBroker broker) {
                 broker.addQueryData("id", 1);
@@ -165,7 +165,7 @@ public class URIBrokerConfigTests extends AbstractURIBrokerServiceTests {
 
         assertEquals("http://www.mydomain.com/abc/def", uri.render());
 
-        // Ìí¼ÓÁíÒ»¸öinterceptor
+        // æ·»åŠ å¦ä¸€ä¸ªinterceptor
         uri.addInterceptor(new URIBrokerPathInterceptor() {
             public void perform(URIBroker broker) {
                 broker.setServerName("www.mydomain1.com");
@@ -209,11 +209,11 @@ public class URIBrokerConfigTests extends AbstractURIBrokerServiceTests {
 
         URIBroker link1 = service.getURIBroker("a");
         assertEquals(null, link1.getCharset());
-        assertEquals("http://localhost/?name=%E4%B8%AD%E5%9B%BD", link1.addQueryData("name", "ÖĞ¹ú").render()); // from context
+        assertEquals("http://localhost/?name=%E4%B8%AD%E5%9B%BD", link1.addQueryData("name", "ä¸­å›½").render()); // from context
 
         URIBroker link2 = service.getURIBroker("b");
         assertEquals("GBK", link2.getCharset());
-        assertEquals("http://localhost/?name=%D6%D0%B9%FA", link2.addQueryData("name", "ÖĞ¹ú").render());
+        assertEquals("http://localhost/?name=%D6%D0%B9%FA", link2.addQueryData("name", "ä¸­å›½").render());
     }
 
     @Test
@@ -222,11 +222,11 @@ public class URIBrokerConfigTests extends AbstractURIBrokerServiceTests {
 
         URIBroker link1 = service.getURIBroker("x");
         assertEquals("UTF-8", link1.getCharset());
-        assertEquals("http://localhost/?name=%E4%B8%AD%E5%9B%BD", link1.addQueryData("name", "ÖĞ¹ú").render());
+        assertEquals("http://localhost/?name=%E4%B8%AD%E5%9B%BD", link1.addQueryData("name", "ä¸­å›½").render());
 
         URIBroker link2 = service.getURIBroker("y");
         assertEquals("GBK", link2.getCharset());
-        assertEquals("http://localhost/?name=%D6%D0%B9%FA", link2.addQueryData("name", "ÖĞ¹ú").render());
+        assertEquals("http://localhost/?name=%D6%D0%B9%FA", link2.addQueryData("name", "ä¸­å›½").render());
     }
 
     @Test

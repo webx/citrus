@@ -21,9 +21,9 @@ import com.alibaba.citrus.service.uribroker.uri.ServletURIBroker;
 import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 
 /**
- * Webx·ç¸ñµÄURI¡£
+ * Webxé£Žæ ¼çš„URIã€‚
  * <p>
- * Ò»¸öWebx·ç¸ñµÄURI°üÀ¨ÈçÏÂ¼¸¸ö²¿·Ö£º
+ * ä¸€ä¸ªWebxé£Žæ ¼çš„URIåŒ…æ‹¬å¦‚ä¸‹å‡ ä¸ªéƒ¨åˆ†ï¼š
  * </p>
  * 
  * <pre>
@@ -35,7 +35,7 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
  * REFERENCE   = reference
  * </pre>
  * <p>
- * ÀýÈç£º
+ * ä¾‹å¦‚ï¼š
  * </p>
  * 
  * <pre>

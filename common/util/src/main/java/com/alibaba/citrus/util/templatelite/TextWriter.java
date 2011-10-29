@@ -28,7 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Ò»¸ö½«templateµÄÄÚÈİÊä³öµ½<code>Appendable</code>µÄvisitor¡£
+ * ä¸€ä¸ªå°†templateçš„å†…å®¹è¾“å‡ºåˆ°<code>Appendable</code>çš„visitorã€‚
  * 
  * @author Michael Zhou
  */
@@ -44,28 +44,28 @@ public abstract class TextWriter<A extends Appendable> implements VisitorInvocat
     }
 
     /**
-     * ·ÃÎÊ´¿ÎÄ±¾¡£
+     * è®¿é—®çº¯æ–‡æœ¬ã€‚
      */
     public final void visitText(String text) throws IOException {
         out().append(text);
     }
 
     /**
-     * È¡µÃÓÃÓÚÊä³öµÄ<code>Appendable</code>ÊµÀı¡£
+     * å–å¾—ç”¨äºè¾“å‡ºçš„<code>Appendable</code>å®ä¾‹ã€‚
      */
     public final A out() {
         return assertNotNull(out, ILLEGAL_STATE, "setOut() not called yet");
     }
 
     /**
-     * ÉèÖÃÓÃÓÚÊä³öµÄ<code>Appendable</code>ÊµÀı¡£
+     * è®¾ç½®ç”¨äºè¾“å‡ºçš„<code>Appendable</code>å®ä¾‹ã€‚
      */
     public final void setOut(A out) {
         this.out = out;
     }
 
     /**
-     * Ä¬ÈÏ´òÓ¡Òì³£ĞÅÏ¢¡£
+     * é»˜è®¤æ‰“å°å¼‚å¸¸ä¿¡æ¯ã€‚
      */
     public void handleInvocationError(String desc, Throwable e) throws Exception {
         log.debug("Error rendering " + desc, e);

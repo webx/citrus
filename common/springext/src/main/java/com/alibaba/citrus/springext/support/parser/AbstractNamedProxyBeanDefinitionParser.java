@@ -39,7 +39,7 @@ import com.alibaba.citrus.springext.support.parser.NamedBeanDefinitionParserMixi
 import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 
 /**
- * ÓÃÀ´´´½¨proxyµÄparser¡£
+ * ç”¨æ¥åˆ›å»ºproxyçš„parserã€‚
  * 
  * @author Michael Zhou
  */
@@ -48,15 +48,15 @@ public abstract class AbstractNamedProxyBeanDefinitionParser extends AbstractBea
     private final NamedBeanDefinitionParserMixin mixin = new NamedBeanDefinitionParserMixin(this);
 
     /**
-     * È¡µÃbeanµÄÄ¬ÈÏÃû³Æ¡£
+     * å–å¾—beançš„é»˜è®¤åç§°ã€‚
      * <p>
-     * ¿ÉÒÔ×¢²á¶à¸öÄ¬ÈÏÃû£¬ÒÔ¶ººÅ»ò¿Õ¸ñ·Ö¿ª¡£µÚ¶şÃûÃû³Æ¼°ÆäºóµÄÃû³Æ£¬½«±»×¢²á³É±ğÃû¡£
+     * å¯ä»¥æ³¨å†Œå¤šä¸ªé»˜è®¤åï¼Œä»¥é€—å·æˆ–ç©ºæ ¼åˆ†å¼€ã€‚ç¬¬äºŒååç§°åŠå…¶åçš„åç§°ï¼Œå°†è¢«æ³¨å†Œæˆåˆ«åã€‚
      * </p>
      */
     protected abstract String getDefaultName();
 
     /**
-     * ´Óid attributeÖĞÈ¡µÃbean name£¬¼ÙÈçÎ´Ö¸¶¨£¬Ôò´Ó<code>getDefaultName()</code>ÖĞÈ¡µÃÄ¬ÈÏÃû¡£
+     * ä»id attributeä¸­å–å¾—bean nameï¼Œå‡å¦‚æœªæŒ‡å®šï¼Œåˆ™ä»<code>getDefaultName()</code>ä¸­å–å¾—é»˜è®¤åã€‚
      */
     @Override
     protected String resolveId(Element element, AbstractBeanDefinition definition, ParserContext parserContext) {
@@ -64,7 +64,7 @@ public abstract class AbstractNamedProxyBeanDefinitionParser extends AbstractBea
     }
 
     /**
-     * ¼ÙÈçµ±Ç°bean nameÎªÄ¬ÈÏÃû£¬ÔòÍ¬Ê±×¢²áÄ¬ÈÏµÄaliases¡£
+     * å‡å¦‚å½“å‰bean nameä¸ºé»˜è®¤åï¼Œåˆ™åŒæ—¶æ³¨å†Œé»˜è®¤çš„aliasesã€‚
      */
     @Override
     protected void registerBeanDefinition(BeanDefinitionHolder definition, BeanDefinitionRegistry registry) {
@@ -84,13 +84,13 @@ public abstract class AbstractNamedProxyBeanDefinitionParser extends AbstractBea
         BeanDefinitionBuilder proxyBuilder = BeanDefinitionBuilder.genericBeanDefinition(ProxyFactoryBean.class);
         AbstractBeanDefinitionParser realParser = getRealObjectParser();
 
-        // È¡µÃÕæÊµµÄbean£¬×¢Òâ£¬ÓÉÓÚÉèÖÃÁËcontainingBean=proxyBean£¬Õâ¸öbean²»»á±»×¢²áµ½registry
+        // å–å¾—çœŸå®çš„beanï¼Œæ³¨æ„ï¼Œç”±äºè®¾ç½®äº†containingBean=proxyBeanï¼Œè¿™ä¸ªbeanä¸ä¼šè¢«æ³¨å†Œåˆ°registry
         ParserContext realBeanParserContext = new ParserContext(parserContext.getReaderContext(),
                 parserContext.getDelegate(), proxyBuilder.getRawBeanDefinition());
 
         AbstractBeanDefinition realBd = (AbstractBeanDefinition) realParser.parse(element, realBeanParserContext);
 
-        // ¼ì²éscope£¬¶ÔÓÚsingletonºÍprototype£¬²»´´½¨proxy£¬Ö±½Ó·µ»ØÕæÊµµÄbean£¬·ñÔò´´½¨proxy bean
+        // æ£€æŸ¥scopeï¼Œå¯¹äºsingletonå’Œprototypeï¼Œä¸åˆ›å»ºproxyï¼Œç›´æ¥è¿”å›çœŸå®çš„beanï¼Œå¦åˆ™åˆ›å»ºproxy bean
         String scope = trimToNull(getScope(element, realBd));
 
         if (scope == null || scope.equalsIgnoreCase(SCOPE_SINGLETON) || scope.equalsIgnoreCase(SCOPE_PROTOTYPE)) {
@@ -100,14 +100,14 @@ public abstract class AbstractNamedProxyBeanDefinitionParser extends AbstractBea
                 realBd.setScope(scope);
             }
 
-            // ½ûÖ¹autowire×¢ÈëÕâ¸öÊµ¼Êbean¡£
+            // ç¦æ­¢autowireæ³¨å…¥è¿™ä¸ªå®é™…beanã€‚
             realBd.setAutowireCandidate(false);
 
-            // ½«Ô­Ê¼bean×¢²á³ÉproxyTarget.*
+            // å°†åŸå§‹beanæ³¨å†ŒæˆproxyTarget.*
             String targetBeanName = "proxyTarget." + resolveId(element, realBd, parserContext);
             registerBeanDefinition(new BeanDefinitionHolder(realBd, targetBeanName), parserContext.getRegistry());
 
-            // ´´½¨proxy bean
+            // åˆ›å»ºproxy bean
             proxyBuilder.addConstructorArgValue(getProxyInterface(element));
             proxyBuilder.addConstructorArgValue(targetBeanName);
 

@@ -26,7 +26,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 
 /**
- * ºÍ<code>RequestContext</code>Ïà¹ØµÄ¸¨ÖúÀà¡£
+ * å’Œ<code>RequestContext</code>ç›¸å…³çš„è¾…åŠ©ç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -34,19 +34,19 @@ public class RequestContextUtil {
     private static final String REQUEST_CONTEXT_KEY = "_outer_webx3_request_context_";
 
     /**
-     * È¡µÃºÍµ±Ç°requestÏà¹ØÁªµÄ<code>RequestContext</code>¶ÔÏó¡£
+     * å–å¾—å’Œå½“å‰requestç›¸å…³è”çš„<code>RequestContext</code>å¯¹è±¡ã€‚
      * 
-     * @param request Òª¼ì²éµÄrequest
-     * @return <code>RequestContext</code>¶ÔÏó£¬Èç¹ûÃ»ÕÒµ½£¬Ôò·µ»Ø<code>null</code>
+     * @param request è¦æ£€æŸ¥çš„request
+     * @return <code>RequestContext</code>å¯¹è±¡ï¼Œå¦‚æœæ²¡æ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static RequestContext getRequestContext(HttpServletRequest request) {
         return (RequestContext) request.getAttribute(REQUEST_CONTEXT_KEY);
     }
 
     /**
-     * ½«<code>RequestContext</code>¶ÔÏóºÍrequestÏà¹ØÁª¡£
+     * å°†<code>RequestContext</code>å¯¹è±¡å’Œrequestç›¸å…³è”ã€‚
      * 
-     * @param requestContext <code>RequestContext</code>¶ÔÏó
+     * @param requestContext <code>RequestContext</code>å¯¹è±¡
      */
     public static void setRequestContext(RequestContext requestContext) {
         HttpServletRequest request = requestContext.getRequest();
@@ -55,18 +55,18 @@ public class RequestContextUtil {
     }
 
     /**
-     * ½«<code>RequestContext</code>¶ÔÏóºÍrequestÍÑÀë¹ØÁª¡£
+     * å°†<code>RequestContext</code>å¯¹è±¡å’Œrequestè„±ç¦»å…³è”ã€‚
      */
     public static void removeRequestContext(HttpServletRequest request) {
         request.removeAttribute(REQUEST_CONTEXT_KEY);
     }
 
     /**
-     * ÔÚÖ¸¶¨µÄrequest context¼°Æä¼¶ÁªµÄrequest contextÖĞÕÒµ½Ò»¸öÖ¸¶¨ÀàĞÍµÄrequest context¡£
+     * åœ¨æŒ‡å®šçš„request contextåŠå…¶çº§è”çš„request contextä¸­æ‰¾åˆ°ä¸€ä¸ªæŒ‡å®šç±»å‹çš„request contextã€‚
      * 
-     * @param request ´Ó¸Ã<code>HttpServletRequest</code>ÖĞÈ¡µÃrequest context
-     * @param requestContextInterface Òª²éÕÒµÄÀà
-     * @return <code>RequestContext</code>¶ÔÏó£¬Èç¹ûÃ»ÕÒµ½£¬Ôò·µ»Ø<code>null</code>
+     * @param request ä»è¯¥<code>HttpServletRequest</code>ä¸­å–å¾—request context
+     * @param requestContextInterface è¦æŸ¥æ‰¾çš„ç±»
+     * @return <code>RequestContext</code>å¯¹è±¡ï¼Œå¦‚æœæ²¡æ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static <R extends RequestContext> R findRequestContext(HttpServletRequest request,
                                                                   Class<R> requestContextInterface) {
@@ -74,11 +74,11 @@ public class RequestContextUtil {
     }
 
     /**
-     * ÔÚÖ¸¶¨µÄrequest context¼°Æä¼¶ÁªµÄrequest contextÖĞÕÒµ½Ò»¸öÖ¸¶¨ÀàĞÍµÄrequest context¡£
+     * åœ¨æŒ‡å®šçš„request contextåŠå…¶çº§è”çš„request contextä¸­æ‰¾åˆ°ä¸€ä¸ªæŒ‡å®šç±»å‹çš„request contextã€‚
      * 
-     * @param requestContext ÒªËÑË÷µÄrequest context
-     * @param requestContextInterface Òª²éÕÒµÄÀà
-     * @return <code>RequestContext</code>¶ÔÏó£¬Èç¹ûÃ»ÕÒµ½£¬Ôò·µ»Ø<code>null</code>
+     * @param requestContext è¦æœç´¢çš„request context
+     * @param requestContextInterface è¦æŸ¥æ‰¾çš„ç±»
+     * @return <code>RequestContext</code>å¯¹è±¡ï¼Œå¦‚æœæ²¡æ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static <R extends RequestContext> R findRequestContext(RequestContext requestContext,
                                                                   Class<R> requestContextInterface) {
@@ -94,8 +94,8 @@ public class RequestContextUtil {
     }
 
     /**
-     * ×¢²áspring <code>ServletRequestAttributes</code>ÖĞµÄÎö¹¹»Øµ÷·½·¨£¬ÕâĞ©·½·¨½«ÔÚrequest
-     * context±»Ìá½»Ö®ºóÒÀ´Îµ÷ÓÃ¡£
+     * æ³¨å†Œspring <code>ServletRequestAttributes</code>ä¸­çš„ææ„å›è°ƒæ–¹æ³•ï¼Œè¿™äº›æ–¹æ³•å°†åœ¨request
+     * contextè¢«æäº¤ä¹‹åä¾æ¬¡è°ƒç”¨ã€‚
      */
     public static void registerRequestDestructionCallback(String name, Runnable callback) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();

@@ -22,108 +22,108 @@ import org.springframework.beans.PropertyEditorRegistrar;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 
 /**
- * ×Ô¶¯½âÎörequest parametersºÍcookie parameters£¬²¢Í¸Ã÷µØ´¦ÀíuploadÇëÇóµÄrequest contextÊµÏÖ¡£
+ * è‡ªåŠ¨è§£ærequest parameterså’Œcookie parametersï¼Œå¹¶é€æ˜åœ°å¤„ç†uploadè¯·æ±‚çš„request contextå®ç°ã€‚
  * 
  * @author Michael Zhou
  */
 public interface ParserRequestContext extends RequestContext {
-    /** ÅäÖÃÎÄ¼şÊôĞÔ¿ÉÑ¡Ïî£º²»¶ÔparametersºÍcookiesµÄÃû³Æ½øĞĞ´óĞ¡Ğ´×ª»»¡£ */
+    /** é…ç½®æ–‡ä»¶å±æ€§å¯é€‰é¡¹ï¼šä¸å¯¹parameterså’Œcookiesçš„åç§°è¿›è¡Œå¤§å°å†™è½¬æ¢ã€‚ */
     String URL_CASE_FOLDING_NONE = "none";
 
-    /** ÅäÖÃÎÄ¼şÊôĞÔ¿ÉÑ¡Ïî£º½«parametersºÍcookiesµÄÃû³Æ×ª»»³ÉĞ¡Ğ´¡£ */
+    /** é…ç½®æ–‡ä»¶å±æ€§å¯é€‰é¡¹ï¼šå°†parameterså’Œcookiesçš„åç§°è½¬æ¢æˆå°å†™ã€‚ */
     String URL_CASE_FOLDING_LOWER = "lower";
 
-    /** ÅäÖÃÎÄ¼şÊôĞÔ¿ÉÑ¡Ïî£º½«parametersºÍcookiesµÄÃû³Æ×ª»»³ÉĞ¡Ğ´¼ÓÏÂ»®Ïß¡£ */
+    /** é…ç½®æ–‡ä»¶å±æ€§å¯é€‰é¡¹ï¼šå°†parameterså’Œcookiesçš„åç§°è½¬æ¢æˆå°å†™åŠ ä¸‹åˆ’çº¿ã€‚ */
     String URL_CASE_FOLDING_LOWER_WITH_UNDERSCORES = "lower_with_underscores";
 
-    /** ÅäÖÃÎÄ¼şÊôĞÔ¿ÉÑ¡Ïî£º½«parametersºÍcookiesµÄÃû³Æ×ª»»³É´óĞ´¡£ */
+    /** é…ç½®æ–‡ä»¶å±æ€§å¯é€‰é¡¹ï¼šå°†parameterså’Œcookiesçš„åç§°è½¬æ¢æˆå¤§å†™ã€‚ */
     String URL_CASE_FOLDING_UPPER = "upper";
 
-    /** ÅäÖÃÎÄ¼şÊôĞÔ¿ÉÑ¡Ïî£º½«parametersºÍcookiesµÄÃû³Æ×ª»»³É´óĞ´¼ÓÏÂ»®Ïß¡£ */
+    /** é…ç½®æ–‡ä»¶å±æ€§å¯é€‰é¡¹ï¼šå°†parameterså’Œcookiesçš„åç§°è½¬æ¢æˆå¤§å†™åŠ ä¸‹åˆ’çº¿ã€‚ */
     String URL_CASE_FOLDING_UPPER_WITH_UNDERSCORES = "upper_with_underscores";
 
-    /** Ä¬ÈÏµÄ±àÂë×Ö·û¼¯¡£ */
+    /** é»˜è®¤çš„ç¼–ç å­—ç¬¦é›†ã€‚ */
     String DEFAULT_CHARSET_ENCODING = "ISO-8859-1";
 
-    /** ÔÚparametersÖĞ±íÊ¾uploadÊ§°Ü£¬ÇëÇó±»ºöÂÔ¡£ */
+    /** åœ¨parametersä¸­è¡¨ç¤ºuploadå¤±è´¥ï¼Œè¯·æ±‚è¢«å¿½ç•¥ã€‚ */
     String UPLOAD_FAILED = "upload_failed";
 
-    /** ÔÚparametersÖĞ±íÊ¾uploadÎÄ¼ş³ß´ç³¬¹ıÏŞÖÆÖµ£¬ÇëÇó±»ºöÂÔ¡£ */
+    /** åœ¨parametersä¸­è¡¨ç¤ºuploadæ–‡ä»¶å°ºå¯¸è¶…è¿‡é™åˆ¶å€¼ï¼Œè¯·æ±‚è¢«å¿½ç•¥ã€‚ */
     String UPLOAD_SIZE_LIMIT_EXCEEDED = "upload_size_limit_exceeded";
 
     /**
-     * È¡µÃÓÃÀ´×ª»»²ÎÊıÀàĞÍµÄpropertyEditor×¢²áÆ÷¡£
+     * å–å¾—ç”¨æ¥è½¬æ¢å‚æ•°ç±»å‹çš„propertyEditoræ³¨å†Œå™¨ã€‚
      */
     PropertyEditorRegistrar getPropertyEditorRegistrar();
 
     /**
-     * ÀàĞÍ×ª»»³ö´íÊ±£¬ÊÇ·ñ²»±¨´í£¬¶øÊÇ·µ»ØÄ¬ÈÏÖµ¡£
+     * ç±»å‹è½¬æ¢å‡ºé”™æ—¶ï¼Œæ˜¯å¦ä¸æŠ¥é”™ï¼Œè€Œæ˜¯è¿”å›é»˜è®¤å€¼ã€‚
      */
     boolean isConverterQuiet();
 
     /**
-     * ÊÇ·ñ×Ô¶¯Ö´ĞĞUpload¡£
+     * æ˜¯å¦è‡ªåŠ¨æ‰§è¡ŒUploadã€‚
      */
     boolean isAutoUpload();
 
     /**
-     * È¡µÃ´ú±íHTML×Ö¶ÎµÄºó×º¡£
+     * å–å¾—ä»£è¡¨HTMLå­—æ®µçš„åç¼€ã€‚
      */
     String getHtmlFieldSuffix();
 
     /**
-     * °´ÕÕÖ¸¶¨µÄ·ç¸ñ×ª»»parametersºÍcookiesµÄÃû³Æ£¬Ä¬ÈÏÎª¡°Ğ¡Ğ´¼ÓÏÂ»®Ïß¡±¡£
+     * æŒ‰ç…§æŒ‡å®šçš„é£æ ¼è½¬æ¢parameterså’Œcookiesçš„åç§°ï¼Œé»˜è®¤ä¸ºâ€œå°å†™åŠ ä¸‹åˆ’çº¿â€ã€‚
      */
     String getCaseFolding();
 
     /**
-     * ÊÇ·ñ¶Ô²ÎÊı½øĞĞHTML entities½âÂë£¬Ä¬ÈÏÎª<code>true</code>¡£
+     * æ˜¯å¦å¯¹å‚æ•°è¿›è¡ŒHTML entitiesè§£ç ï¼Œé»˜è®¤ä¸º<code>true</code>ã€‚
      */
     boolean isUnescapeParameters();
 
     /**
-     * ÊÇ·ñÊ¹ÓÃservletÒıÇæµÄparser£¬Ä¬ÈÏÎª<code>false</code>¡£
+     * æ˜¯å¦ä½¿ç”¨servletå¼•æ“çš„parserï¼Œé»˜è®¤ä¸º<code>false</code>ã€‚
      */
     boolean isUseServletEngineParser();
 
     /**
-     * ÊÇ·ñÒÔrequest.setCharacterEncodingËùÖ¸¶¨µÄ±àÂëÀ´½âÎöquery£¬Ä¬ÈÏÎª<code>true</code>¡£
+     * æ˜¯å¦ä»¥request.setCharacterEncodingæ‰€æŒ‡å®šçš„ç¼–ç æ¥è§£æqueryï¼Œé»˜è®¤ä¸º<code>true</code>ã€‚
      * <p>
-     * Ö»ÓĞµ±<code>useServletEngineParser==false</code>Ê±£¬´ËÑ¡Ïî²ÅÓĞĞ§¡£
+     * åªæœ‰å½“<code>useServletEngineParser==false</code>æ—¶ï¼Œæ­¤é€‰é¡¹æ‰æœ‰æ•ˆã€‚
      * </p>
      */
     boolean isUseBodyEncodingForURI();
 
     /**
-     * µ±<code>useServletEngineParser==false</code>²¢ÇÒ
-     * <code>useBodyEncodingForURI=false</code>Ê±£¬ÓÃ¸Ã±àÂëÀ´½âÊÍGETÇëÇóµÄ²ÎÊı¡£
+     * å½“<code>useServletEngineParser==false</code>å¹¶ä¸”
+     * <code>useBodyEncodingForURI=false</code>æ—¶ï¼Œç”¨è¯¥ç¼–ç æ¥è§£é‡ŠGETè¯·æ±‚çš„å‚æ•°ã€‚
      */
     String getURIEncoding();
 
     /**
-     * ÊÇ·ñ¶ÔÊäÈë²ÎÊı½øĞĞtrimming¡£Ä¬ÈÏÎª<code>true</code>¡£
+     * æ˜¯å¦å¯¹è¾“å…¥å‚æ•°è¿›è¡Œtrimmingã€‚é»˜è®¤ä¸º<code>true</code>ã€‚
      */
     boolean isTrimming();
 
     /**
-     * È¡µÃËùÓĞquery²ÎÊı¡£µÚÒ»´ÎÖ´ĞĞ´Ë·½·¨Ê±£¬½«»á½âÎörequest£¬´ÓÖĞÈ¡µÃËùÓĞµÄ²ÎÊı¡£
+     * å–å¾—æ‰€æœ‰queryå‚æ•°ã€‚ç¬¬ä¸€æ¬¡æ‰§è¡Œæ­¤æ–¹æ³•æ—¶ï¼Œå°†ä¼šè§£ærequestï¼Œä»ä¸­å–å¾—æ‰€æœ‰çš„å‚æ•°ã€‚
      * 
-     * @return <code>ParameterParser</code>ÊµÀı
+     * @return <code>ParameterParser</code>å®ä¾‹
      */
     ParameterParser getParameters();
 
     /**
-     * È¡µÃËùÓĞcookie¡£µÚÒ»´ÎÖ´ĞĞ´Ë·½·¨Ê±£¬½«»á½âÎörequest£¬´ÓÖĞÈ¡µÃËùÓĞcookies¡£
+     * å–å¾—æ‰€æœ‰cookieã€‚ç¬¬ä¸€æ¬¡æ‰§è¡Œæ­¤æ–¹æ³•æ—¶ï¼Œå°†ä¼šè§£ærequestï¼Œä»ä¸­å–å¾—æ‰€æœ‰cookiesã€‚
      * 
-     * @return <code>CookieParser</code>ÊµÀı
+     * @return <code>CookieParser</code>å®ä¾‹
      */
     CookieParser getCookies();
 
     /**
-     * ½«Ö¸¶¨µÄ×Ö·û´®¸ù¾İ<code>getCaseFolding()</code>µÄÉèÖÃ£¬×ª»»³ÉÖ¸¶¨´óĞ¡Ğ´ĞÎÊ½¡£
+     * å°†æŒ‡å®šçš„å­—ç¬¦ä¸²æ ¹æ®<code>getCaseFolding()</code>çš„è®¾ç½®ï¼Œè½¬æ¢æˆæŒ‡å®šå¤§å°å†™å½¢å¼ã€‚
      * 
-     * @param str Òª×ª»»µÄ×Ö·û´®
-     * @return ×ª»»ºóµÄ×Ö·û´®
+     * @param str è¦è½¬æ¢çš„å­—ç¬¦ä¸²
+     * @return è½¬æ¢åçš„å­—ç¬¦ä¸²
      */
     String convertCase(String str);
 }

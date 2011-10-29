@@ -24,9 +24,9 @@ import javax.servlet.http.HttpServletRequest;
 import com.alibaba.citrus.util.ServletUtil;
 
 /**
- * Servlet·ç¸ñµÄURI¡£
+ * Servleté£æ ¼çš„URIã€‚
  * <p>
- * Ò»¸öServlet·ç¸ñµÄURI°üÀ¨ÈçÏÂ¼¸¸ö²¿·Ö£º
+ * ä¸€ä¸ªServleté£æ ¼çš„URIåŒ…æ‹¬å¦‚ä¸‹å‡ ä¸ªéƒ¨åˆ†ï¼š
  * </p>
  * 
  * <pre>
@@ -37,15 +37,15 @@ import com.alibaba.citrus.util.ServletUtil;
  * REFERENCE   = reference
  * </pre>
  * <p>
- * ÀıÈç£º
+ * ä¾‹å¦‚ï¼š
  * </p>
  * 
  * <pre>
  * http://user:pass@myserver.com:8080/mycontext/myservlet/view?id=1#top
  * </pre>
  * <p>
- * ×¢Òâ£¬<code>ServletURIBroker</code>Ã»ÓĞÌá¹©ĞŞ¸ÄpathInfoµÄ·½·¨¡£Èç¹ûÒªÌí¼Ó¡¢É¾³ı¡¢ĞŞ¸Äpath£¬ÇëÖ±½ÓÊ¹ÓÃ×ÓÀà
- * <code>GenericServletURIBroker</code>¡£
+ * æ³¨æ„ï¼Œ<code>ServletURIBroker</code>æ²¡æœ‰æä¾›ä¿®æ”¹pathInfoçš„æ–¹æ³•ã€‚å¦‚æœè¦æ·»åŠ ã€åˆ é™¤ã€ä¿®æ”¹pathï¼Œè¯·ç›´æ¥ä½¿ç”¨å­ç±»
+ * <code>GenericServletURIBroker</code>ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -57,17 +57,17 @@ public abstract class ServletURIBroker extends WebAppURIBroker {
     private boolean hasServletPath;
 
     /**
-     * ½«requestÖĞµÄÔËĞĞÊ±ĞÅÏ¢Ìî³äµ½uri brokerÖĞ¡£
+     * å°†requestä¸­çš„è¿è¡Œæ—¶ä¿¡æ¯å¡«å……åˆ°uri brokerä¸­ã€‚
      */
     @Override
     protected void populateWithRequest(HttpServletRequest request) {
-        boolean savedHasContextPath = hasContextPath; // ¸ÃÖµ¿ÉÄÜ±»populateWithRequest()¸Ä±ä
+        boolean savedHasContextPath = hasContextPath; // è¯¥å€¼å¯èƒ½è¢«populateWithRequest()æ”¹å˜
         super.populateWithRequest(request);
 
-        // ±ØĞëÉèÖÃÁËcontextPath£¬servletPath²Å»áÓĞÒâÒå¡£
+        // å¿…é¡»è®¾ç½®äº†contextPathï¼ŒservletPathæ‰ä¼šæœ‰æ„ä¹‰ã€‚
         if (!savedHasContextPath && !hasServletPath) {
-            // Ö»ÓĞÇ°×ºÆ¥ÅäÊ±£¬²ÅÉèÖÃservletPath¡£ÀıÈçÇ°×ºÆ¥Åä£º/myservlet/*¡£
-            // ¶ÔÓÚºó×ºÆ¥Åä£¬ÀıÈç*.htm£¬ÉèÖÃservletPathÃ»ÓĞÒâÒå¡£
+            // åªæœ‰å‰ç¼€åŒ¹é…æ—¶ï¼Œæ‰è®¾ç½®servletPathã€‚ä¾‹å¦‚å‰ç¼€åŒ¹é…ï¼š/myservlet/*ã€‚
+            // å¯¹äºåç¼€åŒ¹é…ï¼Œä¾‹å¦‚*.htmï¼Œè®¾ç½®servletPathæ²¡æœ‰æ„ä¹‰ã€‚
             if (ServletUtil.isPrefixServletMapping(request)) {
                 setServletPath(request.getServletPath());
             }
@@ -75,7 +75,7 @@ public abstract class ServletURIBroker extends WebAppURIBroker {
     }
 
     /**
-     * È¡µÃservlet path¡£
+     * å–å¾—servlet pathã€‚
      */
     public String getServletPath() {
         if (hasServletPath) {
@@ -86,7 +86,7 @@ public abstract class ServletURIBroker extends WebAppURIBroker {
     }
 
     /**
-     * ÉèÖÃservlet path¡£
+     * è®¾ç½®servlet pathã€‚
      */
     public ServletURIBroker setServletPath(String servletPath) {
         setPathSegment(SERVLET_PATH_INDEX, servletPath);
@@ -95,7 +95,7 @@ public abstract class ServletURIBroker extends WebAppURIBroker {
     }
 
     /**
-     * È¡µÃscriptÃû, ¾ÍÊÇcontextPath¼ÓservletName.
+     * å–å¾—scriptå, å°±æ˜¯contextPathåŠ servletName.
      */
     public String getScriptName() {
         if (hasContextPath) {
@@ -106,14 +106,14 @@ public abstract class ServletURIBroker extends WebAppURIBroker {
     }
 
     /**
-     * È¡µÃpath info¡£
+     * å–å¾—path infoã€‚
      */
     public String getPathInfo() {
         return getAllPathSegmentsAsString(PATH_INFO_INDEX);
     }
 
     /**
-     * È¡µÃÒ»×épath info¡£
+     * å–å¾—ä¸€ç»„path infoã€‚
      */
     public List<String> getPathInfoElements() {
         return getAllPathSegments(PATH_INFO_INDEX);

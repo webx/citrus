@@ -66,7 +66,7 @@ import com.alibaba.citrus.webx.WebxComponents;
 import com.alibaba.citrus.webx.WebxException;
 
 /**
- * ÉèÖÃºÍÏÔÊ¾Ò»¸öcontrol moduleµÄtool¡£
+ * è®¾ç½®å’Œæ˜¾ç¤ºä¸€ä¸ªcontrol moduleçš„toolã€‚
  * 
  * @author Michael Zhou
  */
@@ -100,10 +100,10 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
     }
 
     /**
-     * ÉèÖÃcontrolµÄÄ£°å¡£´Ë·½·¨ºÍ<code>setModule</code>Ö»ÄÜÖ´ĞĞÆäÒ»£¬·ñÔò½«ºöÂÔºóÕß¡£
+     * è®¾ç½®controlçš„æ¨¡æ¿ã€‚æ­¤æ–¹æ³•å’Œ<code>setModule</code>åªèƒ½æ‰§è¡Œå…¶ä¸€ï¼Œå¦åˆ™å°†å¿½ç•¥åè€…ã€‚
      * 
-     * @param template controlÄ£°åÃû
-     * @return <code>ControlTool</code>±¾Éí£¬ÒÔ·½±ãÄ£°åÖĞµÄ²Ù×÷
+     * @param template controlæ¨¡æ¿å
+     * @return <code>ControlTool</code>æœ¬èº«ï¼Œä»¥æ–¹ä¾¿æ¨¡æ¿ä¸­çš„æ“ä½œ
      */
     public ControlTool setTemplate(String template) {
         ControlParameters params = getControlParameters();
@@ -116,10 +116,10 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
     }
 
     /**
-     * ÉèÖÃcontrolµÄÄ£¿é¡£´Ë·½·¨ºÍ<code>setTemplate</code>Ö»ÄÜÖ´ĞĞÆäÒ»£¬·ñÔò½«ºöÂÔºóÕß¡£
+     * è®¾ç½®controlçš„æ¨¡å—ã€‚æ­¤æ–¹æ³•å’Œ<code>setTemplate</code>åªèƒ½æ‰§è¡Œå…¶ä¸€ï¼Œå¦åˆ™å°†å¿½ç•¥åè€…ã€‚
      * 
-     * @param module controlÄ£¿éÃû
-     * @return <code>ControlTool</code>±¾Éí£¬ÒÔ·½±ãÄ£°åÖĞµÄ²Ù×÷
+     * @param module controlæ¨¡å—å
+     * @return <code>ControlTool</code>æœ¬èº«ï¼Œä»¥æ–¹ä¾¿æ¨¡æ¿ä¸­çš„æ“ä½œ
      */
     public ControlTool setModule(String module) {
         ControlParameters params = getControlParameters();
@@ -132,14 +132,14 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
     }
 
     /**
-     * ÉèÖÃcontrolµÄ²ÎÊı¡£
+     * è®¾ç½®controlçš„å‚æ•°ã€‚
      * <p>
-     * ÕâĞ©²ÎÊı½«±»±£´æÔÚÒ»¸öÒ»´ÎĞÔµÄ<code>Map</code>ÖĞ£¬µ±render³É¹¦ÒÔºó£¬¸Ãmap¾Í±»¶ªÆú£¬ÒÔ±ãÔÙ´Îµ÷ÓÃ¸Ãcontrol¡£
+     * è¿™äº›å‚æ•°å°†è¢«ä¿å­˜åœ¨ä¸€ä¸ªä¸€æ¬¡æ€§çš„<code>Map</code>ä¸­ï¼Œå½“renderæˆåŠŸä»¥åï¼Œè¯¥mapå°±è¢«ä¸¢å¼ƒï¼Œä»¥ä¾¿å†æ¬¡è°ƒç”¨è¯¥controlã€‚
      * </p>
      * 
-     * @param name ÊôĞÔÃû
-     * @param value ¶ÔÏó
-     * @return <code>ControlTool</code>±¾Éí£¬ÒÔ·½±ãÄ£°åÖĞµÄ²Ù×÷
+     * @param name å±æ€§å
+     * @param value å¯¹è±¡
+     * @return <code>ControlTool</code>æœ¬èº«ï¼Œä»¥æ–¹ä¾¿æ¨¡æ¿ä¸­çš„æ“ä½œ
      */
     public ControlTool setParameter(String name, Object value) {
         ControlParameters params = getControlParameters();
@@ -150,7 +150,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
     }
 
     /**
-     * µ±screen½áÊøÊ±£¬µ¼³öÖ¸¶¨Ãû³ÆµÄ±äÁ¿£¬Ê¹µ÷ÓÃÕß¿ÉÒÔ·ÃÎÊ¡£
+     * å½“screenç»“æŸæ—¶ï¼Œå¯¼å‡ºæŒ‡å®šåç§°çš„å˜é‡ï¼Œä½¿è°ƒç”¨è€…å¯ä»¥è®¿é—®ã€‚
      */
     public ControlTool export(String... vars) {
         ControlParameters params = getControlParameters();
@@ -161,9 +161,9 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
     }
 
     /**
-     * äÖÈ¾¶ÔÏó¡£
+     * æ¸²æŸ“å¯¹è±¡ã€‚
      * 
-     * @return äÖÈ¾µÄ½á¹û
+     * @return æ¸²æŸ“çš„ç»“æœ
      */
     public String render() {
         assertInitialized();
@@ -187,7 +187,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
                 throw new IllegalArgumentException("Neither template nor module name was specified to render a control");
             }
 
-            // controlToolÖ§³Ö¿çcomponentµ÷ÓÃ£¬ÏÖÔÚÈ¡µÃÖ¸¶¨componentÏÂµÄservice¡£
+            // controlToolæ”¯æŒè·¨componentè°ƒç”¨ï¼Œç°åœ¨å–å¾—æŒ‡å®šcomponentä¸‹çš„serviceã€‚
             ModuleLoaderService moduleLoaderService = getService("moduleLoaderService", componentName,
                     this.moduleLoaderService, ModuleLoaderService.class);
 
@@ -197,7 +197,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
             TemplateService templateService = getService("templateService", componentName, this.templateService,
                     TemplateService.class);
 
-            // È¡µÃÊµ¼ÊµÄtemplate/moduleÃû³Æ
+            // å–å¾—å®é™…çš„template/moduleåç§°
             String templateName = null;
             String moduleName = null;
 
@@ -208,15 +208,15 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
                 moduleName = mappingRuleService.getMappedName(CONTROL_MODULE_NO_TEMPLATE, target);
             }
 
-            // Ö´ĞĞcontrol module
+            // æ‰§è¡Œcontrol module
             Module controlModule;
 
             if (templateName == null) {
-                // templateNameÎ´Ö¸¶¨Ê±£¬±ØĞëÓĞmodule£¬ÈçÃ»ÓĞÔòÅ×³öModuleNotFoundException
+                // templateNameæœªæŒ‡å®šæ—¶ï¼Œå¿…é¡»æœ‰moduleï¼Œå¦‚æ²¡æœ‰åˆ™æŠ›å‡ºModuleNotFoundException
                 controlModule = moduleLoaderService.getModule(CONTROL_MODULE, moduleName);
             } else {
-                // µ±Ö¸¶¨ÁËtemplateNameÊ±£¬¿ÉÒÔÃ»ÓĞµÄcontrol module£¬¶øµ¥µ¥äÖÈ¾Ä£°å¡£
-                // ÕâÑù¾ÍÊµÏÖÁËpage-driven£¬¼´ÏÈĞ´Ä£°å£¬±ØÒªÊ±ÔÙĞ´Ò»¸ömodule classÓëÖ®¶ÔÓ¦¡£
+                // å½“æŒ‡å®šäº†templateNameæ—¶ï¼Œå¯ä»¥æ²¡æœ‰çš„control moduleï¼Œè€Œå•å•æ¸²æŸ“æ¨¡æ¿ã€‚
+                // è¿™æ ·å°±å®ç°äº†page-drivenï¼Œå³å…ˆå†™æ¨¡æ¿ï¼Œå¿…è¦æ—¶å†å†™ä¸€ä¸ªmodule classä¸ä¹‹å¯¹åº”ã€‚
                 controlModule = moduleLoaderService.getModuleQuiet(CONTROL_MODULE, moduleName);
             }
 
@@ -228,11 +228,11 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
                 }
             }
 
-            // ÉèÖÃ²ÎÊı
+            // è®¾ç½®å‚æ•°
             this.bufferedRequestContext.pushBuffer();
 
             try {
-                controlParameterStack.addFirst(new ControlParameters()); // Ö§³ÖcontrolµÄÇ¶Ì×
+                controlParameterStack.addFirst(new ControlParameters()); // æ”¯æŒcontrolçš„åµŒå¥—
 
                 TurbineRunDataInternal rundata = (TurbineRunDataInternal) TurbineUtil.getTurbineRunData(this.request);
                 Context contextForControl = createContextForControl(params, componentName);
@@ -244,7 +244,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
                         controlModule.execute();
                     }
 
-                    // Control module¿ÉÒÔÍ¨¹ı×¢ÈëControlParameters½Ó¿ÚÀ´ĞŞ¸Ätemplate¡£
+                    // Control moduleå¯ä»¥é€šè¿‡æ³¨å…¥ControlParametersæ¥å£æ¥ä¿®æ”¹templateã€‚
                     String templateOverriden = rundata.getControlTemplate();
 
                     if (!isEquals(templateOverriden, templateName)) {
@@ -277,14 +277,14 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
             } catch (RuntimeException ee) {
             }
 
-            // Èç¹ûhandler·µ»Ø¿Õ£¬ÔòÅ×³öÒì³££¬·ñÔòÊä³öhandler·µ»ØµÄÄÚÈİ¡£
+            // å¦‚æœhandlerè¿”å›ç©ºï¼Œåˆ™æŠ›å‡ºå¼‚å¸¸ï¼Œå¦åˆ™è¾“å‡ºhandlerè¿”å›çš„å†…å®¹ã€‚
             if (content == null) {
                 throw new WebxException("Failed to execute control module: " + target, e);
             } else {
                 log.error("Failed to execute control module: " + target, e);
             }
         } finally {
-            // Çå³ı»·¾³£¬ÒÔ±ãÖØÓÃ
+            // æ¸…é™¤ç¯å¢ƒï¼Œä»¥ä¾¿é‡ç”¨
             params.template = null;
             params.module = null;
             params.exportVars = null;
@@ -295,7 +295,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
     }
 
     /**
-     * ¼ÙÈçtemplate»òmoduleµÄÃû³ÆÇ°ÓĞÖîÈç¡°componentName:¡±Ç°×º£¬Ôò·µ»Ø´ËcomponentName£¬·ñÔò·µ»Ønull¡£
+     * å‡å¦‚templateæˆ–moduleçš„åç§°å‰æœ‰è¯¸å¦‚â€œcomponentName:â€å‰ç¼€ï¼Œåˆ™è¿”å›æ­¤componentNameï¼Œå¦åˆ™è¿”å›nullã€‚
      */
     private String parseComponentName(String name) {
         int index = name == null ? -1 : name.indexOf(":");
@@ -308,7 +308,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
     }
 
     /**
-     * È¡µÃ²»°üº¬¡°componentName:¡±Ç°×ºµÄtemplate»òmoduleµÄÃû³Æ¡£
+     * å–å¾—ä¸åŒ…å«â€œcomponentName:â€å‰ç¼€çš„templateæˆ–moduleçš„åç§°ã€‚
      */
     private String parseLocalName(String name) {
         int index = name == null ? -1 : name.indexOf(":");
@@ -375,7 +375,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
     }
 
     /**
-     * È¡µÃÕ»¶¥µÄcontrol²ÎÊı¡£
+     * å–å¾—æ ˆé¡¶çš„controlå‚æ•°ã€‚
      */
     protected ControlParameters getControlParameters() {
         if (controlParameterStack.isEmpty()) {
@@ -386,7 +386,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
     }
 
     /**
-     * ´ú±íÒ»´ÎcontrolµÄµ÷ÓÃ²ÎÊı¡£
+     * ä»£è¡¨ä¸€æ¬¡controlçš„è°ƒç”¨å‚æ•°ã€‚
      */
     protected static class ControlParameters extends HashMap<String, Object> {
         private static final long serialVersionUID = 3256721796996084529L;
@@ -400,27 +400,27 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
     }
 
     /**
-     * ´òÓ¡Òì³£µÄÏêÏ¸³Ì¶È¡£
+     * æ‰“å°å¼‚å¸¸çš„è¯¦ç»†ç¨‹åº¦ã€‚
      */
     public static enum ErrorDetailLevel {
         /**
-         * Å×³öÒì³£¡£
+         * æŠ›å‡ºå¼‚å¸¸ã€‚
          */
         throwException,
         /**
-         * ²»Êä³öÈÎºÎ´íÎóÄÚÈİ¡£
+         * ä¸è¾“å‡ºä»»ä½•é”™è¯¯å†…å®¹ã€‚
          */
         quiet,
         /**
-         * Ö»Êä³öÒì³£ĞÅÏ¢¡£
+         * åªè¾“å‡ºå¼‚å¸¸ä¿¡æ¯ã€‚
          */
         messageOnly,
         /**
-         * Êä³öÒì³£µÄÏêÏ¸ĞÅÏ¢¡£
+         * è¾“å‡ºå¼‚å¸¸çš„è¯¦ç»†ä¿¡æ¯ã€‚
          */
         stackTrace,
         /**
-         * ½«Òì³£´òÓ¡ÔÚHTML×¢ÊÍÖĞ¡£
+         * å°†å¼‚å¸¸æ‰“å°åœ¨HTMLæ³¨é‡Šä¸­ã€‚
          */
         comment;
 
@@ -432,7 +432,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
     }
 
     /**
-     * ÓÃÀ´´¦ÀícontrolÖ´ĞĞ¹ı³ÌÖĞµÄÒì³£¡£
+     * ç”¨æ¥å¤„ç†controlæ‰§è¡Œè¿‡ç¨‹ä¸­çš„å¼‚å¸¸ã€‚
      */
     public static interface ErrorHandler {
         String handleException(String controlTarget, Exception e);
@@ -501,20 +501,20 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
                         msg = e.getClass().getSimpleName();
                     }
 
-                    pw.append(escapeHtml(msg)); // !!ÖØÒª£ºescapeHtml
+                    pw.append(escapeHtml(msg)); // !!é‡è¦ï¼šescapeHtml
 
                     pw.append("</div>");
                     break;
 
                 case stackTrace:
                     fmt.format("<div class=\"%s\">", getErrorTagClass());
-                    pw.append(ExceptionUtil.getStackTraceForHtmlComment(e)); // !!ÖØÒª£ºescapeHtml
+                    pw.append(ExceptionUtil.getStackTraceForHtmlComment(e)); // !!é‡è¦ï¼šescapeHtml
                     pw.append("</div>");
                     break;
 
                 case comment:
                     pw.append("<!-- stacktrace: \n");
-                    pw.append(ExceptionUtil.getStackTraceForHtmlComment(e)); // !!ÖØÒª£ºescapeHtml
+                    pw.append(ExceptionUtil.getStackTraceForHtmlComment(e)); // !!é‡è¦ï¼šescapeHtml
                     pw.append("-->");
                     break;
 
@@ -552,7 +552,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
     }
 
     /**
-     * pull tool factory¡£
+     * pull tool factoryã€‚
      */
     public static class Factory extends ControlToolConfiguration implements ToolFactory, ProductionModeAware {
         private ErrorDetailLevel errorDetailLevel;

@@ -20,9 +20,9 @@ package com.alibaba.citrus.service.uribroker.uri;
 import java.util.List;
 
 /**
- * Servlet·ç¸ñµÄURI¡£
+ * Servleté£Žæ ¼çš„URIã€‚
  * <p>
- * Ò»¸öServlet·ç¸ñµÄURI°üÀ¨ÈçÏÂ¼¸¸ö²¿·Ö£º
+ * ä¸€ä¸ªServleté£Žæ ¼çš„URIåŒ…æ‹¬å¦‚ä¸‹å‡ ä¸ªéƒ¨åˆ†ï¼š
  * </p>
  * 
  * <pre>
@@ -34,7 +34,7 @@ import java.util.List;
  * REFERENCE   = reference
  * </pre>
  * <p>
- * ÀýÈç£º
+ * ä¾‹å¦‚ï¼š
  * </p>
  * 
  * <pre>
@@ -45,7 +45,7 @@ import java.util.List;
  */
 public class GenericServletURIBroker extends ServletURIBroker {
     /**
-     * ÉèÖÃÒ»×épath info¡£
+     * è®¾ç½®ä¸€ç»„path infoã€‚
      */
     public void setPathInfoElements(List<String> path) {
         clearPathSegment(PATH_INFO_INDEX);
@@ -58,7 +58,7 @@ public class GenericServletURIBroker extends ServletURIBroker {
     }
 
     /**
-     * Ìí¼Ópath info¡£
+     * æ·»åŠ path infoã€‚
      */
     public ServletURIBroker addPathInfo(String path) {
         addPathSegment(PATH_INFO_INDEX, path);
@@ -66,7 +66,7 @@ public class GenericServletURIBroker extends ServletURIBroker {
     }
 
     /**
-     * Çå³ýËùÓÐpath info¡£
+     * æ¸…é™¤æ‰€æœ‰path infoã€‚
      */
     public ServletURIBroker clearPathInfo() {
         clearPathSegment(PATH_INFO_INDEX);

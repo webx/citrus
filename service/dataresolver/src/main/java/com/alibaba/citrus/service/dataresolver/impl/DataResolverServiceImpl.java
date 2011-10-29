@@ -93,9 +93,9 @@ public class DataResolverServiceImpl extends AbstractService<DataResolverService
     }
 
     /**
-     * ´Óµ±Ç°method¿ªÊ¼£¬ÒÀ´Î±éÀú±»¸²¸ÇµÄ¸¸Àà·½·¨£¬·µ»ØµÚÒ»¸ö´øÓĞannotation²ÎÊıµÄmethod¡£Èç¹ûÃ»ÓĞ£¬Ôò·µ»Ømethod±¾Éí¡£
+     * ä»å½“å‰methodå¼€å§‹ï¼Œä¾æ¬¡éå†è¢«è¦†ç›–çš„çˆ¶ç±»æ–¹æ³•ï¼Œè¿”å›ç¬¬ä¸€ä¸ªå¸¦æœ‰annotationå‚æ•°çš„methodã€‚å¦‚æœæ²¡æœ‰ï¼Œåˆ™è¿”å›methodæœ¬èº«ã€‚
      * <p>
-     * ÕâÑù×öµÄÔ­ÒòÊÇ£¬aopÔÚÔËĞĞÊ±»áÉú³ÉÅÉÉúÀàĞÍ£¬µ«ÊÇannotation²ÎÊıÈ´Ã»ÓĞ±»ÅÉÉú£¬µ¼ÖÂ´ÓĞÂµÄÀàĞÍÖĞÈ¡²»µ½annotation²ÎÊıµÄÎÊÌâ¡£
+     * è¿™æ ·åšçš„åŸå› æ˜¯ï¼Œaopåœ¨è¿è¡Œæ—¶ä¼šç”Ÿæˆæ´¾ç”Ÿç±»å‹ï¼Œä½†æ˜¯annotationå‚æ•°å´æ²¡æœ‰è¢«æ´¾ç”Ÿï¼Œå¯¼è‡´ä»æ–°çš„ç±»å‹ä¸­å–ä¸åˆ°annotationå‚æ•°çš„é—®é¢˜ã€‚
      * </p>
      */
     private Method getAnnotatedMethod(Method method) {
@@ -134,7 +134,7 @@ public class DataResolverServiceImpl extends AbstractService<DataResolverService
     }
 
     /**
-     * ¸´ÖÆextraInfo£¬²¢×·¼ÓmethodParameter¶ÔÏó¡£
+     * å¤åˆ¶extraInfoï¼Œå¹¶è¿½åŠ methodParameterå¯¹è±¡ã€‚
      */
     private Object[] getExtraInfo(Object[] extraInfo, Method method, int paramIndex) {
         Object[] result;

@@ -34,7 +34,7 @@ import org.junit.Test;
 import com.alibaba.citrus.util.i18n.LocaleUtil.Notifier;
 
 /**
- * ≤‚ ‘<code>LocaleUtil</code>°£
+ * ÊµãËØï<code>LocaleUtil</code>„ÄÇ
  * 
  * @author Michael Zhou
  */
@@ -110,7 +110,7 @@ public class LocaleUtilTests {
 
     @Test
     public void calculateBundleNames() {
-        // ø’baseName
+        // Á©∫baseName
         assertBundleNames("", null, null, null, LocaleUtil.calculateBundleNames("", null));
         assertBundleNames("", null, null, null, LocaleUtil.calculateBundleNames("", new Locale("")));
         assertBundleNames("", "zh", null, null, LocaleUtil.calculateBundleNames("", new Locale("zh")));
@@ -188,10 +188,10 @@ public class LocaleUtilTests {
 
     @Test
     public void defaultLocale() {
-        // Œ¥…Ë÷√
+        // Êú™ËÆæÁΩÆ
         assertLocaleInfo(systemLocale, systemCharset, LocaleUtil.getDefault());
 
-        // …Ë÷√
+        // ËÆæÁΩÆ
         assertLocaleInfo(systemLocale, systemCharset, LocaleUtil.setDefault(new LocaleInfo(Locale.CHINA, "GBK")));
         assertLocaleInfo(Locale.CHINA, "GBK", LocaleUtil.getDefault());
 
@@ -208,7 +208,7 @@ public class LocaleUtilTests {
             assertEquals("invalid", e.getCharsetName());
         }
 
-        // ∏¥Œª
+        // Â§ç‰Ωç
         LocaleUtil.resetDefault();
         assertLocaleInfo(systemLocale, systemCharset, LocaleUtil.getDefault());
     }
@@ -217,15 +217,15 @@ public class LocaleUtilTests {
     public void contextLocale() {
         LocaleUtil.setDefault(Locale.US, "ISO-8859-1");
 
-        // Œ¥…Ë÷√
+        // Êú™ËÆæÁΩÆ
         assertLocaleInfo(Locale.US, "ISO-8859-1", LocaleUtil.getContext());
 
-        // –ﬁ∏ƒdefault£¨contextƒ¨»œ÷µ“≤±ª–ﬁ∏ƒ
+        // ‰øÆÊîπdefaultÔºåcontextÈªòËÆ§ÂÄº‰πüË¢´‰øÆÊîπ
         LocaleUtil.setDefault(Locale.CANADA, "UTF-8");
         assertLocaleInfo(Locale.CANADA, "UTF-8", LocaleUtil.getContext());
         LocaleUtil.setDefault(Locale.US, "ISO-8859-1");
 
-        // …Ë÷√
+        // ËÆæÁΩÆ
         assertLocaleInfo(Locale.US, "ISO-8859-1", LocaleUtil.setContext(new LocaleInfo(Locale.CHINA, "GBK")));
         assertLocaleInfo(Locale.CHINA, "GBK", LocaleUtil.getContext());
 
@@ -242,11 +242,11 @@ public class LocaleUtilTests {
             assertEquals("invalid", e.getCharsetName());
         }
 
-        // ∏¥Œª
+        // Â§ç‰Ωç
         LocaleUtil.resetContext();
         assertLocaleInfo(Locale.US, "ISO-8859-1", LocaleUtil.getContext());
 
-        // –ﬁ∏ƒdefault£¨contextƒ¨»œ÷µ“≤±ª–ﬁ∏ƒ
+        // ‰øÆÊîπdefaultÔºåcontextÈªòËÆ§ÂÄº‰πüË¢´‰øÆÊîπ
         LocaleUtil.setDefault(Locale.CANADA, "UTF-8");
         assertLocaleInfo(Locale.CANADA, "UTF-8", LocaleUtil.getContext());
         LocaleUtil.setDefault(Locale.US, "ISO-8859-1");

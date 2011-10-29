@@ -20,15 +20,15 @@ package com.alibaba.citrus.service.requestcontext.parser;
 import org.apache.commons.fileupload.FileItem;
 
 /**
- * ¹ıÂËÓÃ»§ÉÏ´«µÄÎÄ¼ş¡£
+ * è¿‡æ»¤ç”¨æˆ·ä¸Šä¼ çš„æ–‡ä»¶ã€‚
  * 
  * @author Michael Zhou
  */
 public interface UploadedFileFilter extends ParameterParserFilter {
     /**
-     * ¹ıÂËÖ¸¶¨ÎÄ¼ş£¬Èç¹û·µ»Ø<code>null</code>±íÊ¾ºöÂÔ¸ÃÎÄ¼ş¡£
+     * è¿‡æ»¤æŒ‡å®šæ–‡ä»¶ï¼Œå¦‚æœè¿”å›<code>null</code>è¡¨ç¤ºå¿½ç•¥è¯¥æ–‡ä»¶ã€‚
      * <p>
-     * ×¢Òâ£¬<code>file</code>¿ÉÄÜÊÇ<code>null</code>¡£
+     * æ³¨æ„ï¼Œ<code>file</code>å¯èƒ½æ˜¯<code>null</code>ã€‚
      * </p>
      */
     FileItem filter(String key, FileItem file);

@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.upload;
 
 /**
- * ´ú±íÒ»¸öUploadServiceµÄÒì³£¡£
+ * ä»£è¡¨ä¸€ä¸ªUploadServiceçš„å¼‚å¸¸ã€‚
  * 
  * @author Michael Zhou
  */
@@ -26,35 +26,35 @@ public class UploadException extends RuntimeException {
     private static final long serialVersionUID = -5016622320749497155L;
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      */
     public UploadException() {
         super();
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param message Òì³£ĞÅÏ¢
+     * @param message å¼‚å¸¸ä¿¡æ¯
      */
     public UploadException(String message) {
         super(message);
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param message Òì³£ĞÅÏ¢
-     * @param cause Òì³£Ô­Òò
+     * @param message å¼‚å¸¸ä¿¡æ¯
+     * @param cause å¼‚å¸¸åŸå› 
      */
     public UploadException(String message, Throwable cause) {
         super(message, cause);
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param cause Òì³£Ô­Òò
+     * @param cause å¼‚å¸¸åŸå› 
      */
     public UploadException(Throwable cause) {
         super(cause);

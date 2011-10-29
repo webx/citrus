@@ -27,7 +27,7 @@ import java.io.Writer;
 import com.alibaba.citrus.util.i18n.provider.ChineseCharConverterProvider;
 
 /**
- * ¸ù¾İword×ª»»µÄdumpÎÄ¼ş´´½¨×ª»»Âë±í¡£
+ * æ ¹æ®wordè½¬æ¢çš„dumpæ–‡ä»¶åˆ›å»ºè½¬æ¢ç è¡¨ã€‚
  * 
  * @author Michael Zhou
  */

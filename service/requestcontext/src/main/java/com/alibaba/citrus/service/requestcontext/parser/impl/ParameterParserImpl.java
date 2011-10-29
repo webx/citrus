@@ -49,7 +49,7 @@ import com.alibaba.citrus.util.StringEscapeUtil;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ÓÃÀ´½âÎöHTTPÇëÇóÖĞGET»òPOSTµÄ²ÎÊıµÄ½Ó¿Ú<code>ParameterParser</code>µÄÄ¬ÈÏÊµÏÖ¡£
+ * ç”¨æ¥è§£æHTTPè¯·æ±‚ä¸­GETæˆ–POSTçš„å‚æ•°çš„æ¥å£<code>ParameterParser</code>çš„é»˜è®¤å®ç°ã€‚
  */
 public class ParameterParserImpl extends AbstractValueParser implements ParameterParser {
     private final static Logger log = LoggerFactory.getLogger(ParameterParser.class);
@@ -60,7 +60,7 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
     private final String htmlFieldSuffix;
 
     /**
-     * ´ÓrequestÖĞ´´½¨ĞÂµÄparameters£¬Èç¹ûÊÇmultipart-form£¬Ôò×Ô¶¯½âÎöÖ®¡£
+     * ä»requestä¸­åˆ›å»ºæ–°çš„parametersï¼Œå¦‚æœæ˜¯multipart-formï¼Œåˆ™è‡ªåŠ¨è§£æä¹‹ã€‚
      */
     public ParameterParserImpl(ParserRequestContext requestContext, UploadService upload, boolean trimming,
                                ParameterParserFilter[] filters, String htmlFieldSuffix) {
@@ -75,9 +75,9 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
         HttpServletRequest wrappedRequest = (HttpServletRequest) wrapper.getRequest();
         boolean isMultipart = false;
 
-        // ×Ô¶¯upload
+        // è‡ªåŠ¨upload
         if (requestContext.isAutoUpload() && upload != null) {
-            // Èç¹ûÊÇmultipart/*ÇëÇó£¬Ôòµ÷ÓÃupload serviceÀ´½âÎö¡£
+            // å¦‚æœæ˜¯multipart/*è¯·æ±‚ï¼Œåˆ™è°ƒç”¨upload serviceæ¥è§£æã€‚
             isMultipart = upload.isMultipartContent(wrappedRequest);
 
             if (isMultipart) {
@@ -94,31 +94,31 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
             }
         }
 
-        // ´ÓrequestÖĞÈ¡²ÎÊı
+        // ä»requestä¸­å–å‚æ•°
         if (!isMultipart) {
             String method = wrappedRequest.getMethod();
 
-            // °´ÕÕ±ê×¼£¬URLÖĞÖ»ÄÜ³öÏÖUS-ASCII×Ö·û£¬¼ÙÈçÓĞÆäËüÀàĞÍµÄ×Ö·û£¬±ØĞë¶ÔÆä½øĞĞURL±àÂë¡£
-            // ºÜ²»ĞÒ£¬Õâ¸ö±àÂëÒ²Ã»ÓĞÍ³Ò»µÄ±ê×¼¡£¿Í»§¶ËºÍ·şÎñ¶Ë±ØĞë´ï³ÉÄ³¸ö¹²Ê¶¡£
+            // æŒ‰ç…§æ ‡å‡†ï¼ŒURLä¸­åªèƒ½å‡ºç°US-ASCIIå­—ç¬¦ï¼Œå‡å¦‚æœ‰å…¶å®ƒç±»å‹çš„å­—ç¬¦ï¼Œå¿…é¡»å¯¹å…¶è¿›è¡ŒURLç¼–ç ã€‚
+            // å¾ˆä¸å¹¸ï¼Œè¿™ä¸ªç¼–ç ä¹Ÿæ²¡æœ‰ç»Ÿä¸€çš„æ ‡å‡†ã€‚å®¢æˆ·ç«¯å’ŒæœåŠ¡ç«¯å¿…é¡»è¾¾æˆæŸä¸ªå…±è¯†ã€‚
             //
-            // ¶ÔÓÚ¿Í»§¶Ë£¬ÓĞÒÔÏÂ¼¸ÖÖÇé¿ö£º
-            // 1. ä¯ÀÀÆ÷ËùÌá½»µÄ±íµ¥£¬¾ùÒÔµ±Ç°Ò³ÃæµÄ×Ö·û¼¯±àÂë¡£
-            // ÀıÈç£¬Ò»¸öGBK±àÂëµÄÒ³ÃæËùÌá½»µÄ±íµ¥£¬ÊÇÒÔGBK±àÂëµÄ£¬ÎŞÂÛÆämethodÎªGET»¹ÊÇPOST¡£
+            // å¯¹äºå®¢æˆ·ç«¯ï¼Œæœ‰ä»¥ä¸‹å‡ ç§æƒ…å†µï¼š
+            // 1. æµè§ˆå™¨æ‰€æäº¤çš„è¡¨å•ï¼Œå‡ä»¥å½“å‰é¡µé¢çš„å­—ç¬¦é›†ç¼–ç ã€‚
+            // ä¾‹å¦‚ï¼Œä¸€ä¸ªGBKç¼–ç çš„é¡µé¢æ‰€æäº¤çš„è¡¨å•ï¼Œæ˜¯ä»¥GBKç¼–ç çš„ï¼Œæ— è®ºå…¶methodä¸ºGETè¿˜æ˜¯POSTã€‚
             //
-            // 2. Ö±½ÓÊäÈëÔÚä¯ÀÀÆ÷µØÖ·À¸ÀïµÄURL£¬¸ù¾İä¯ÀÀÆ÷µÄÉèÖÃºÍ²Ù×÷ÏµÍ³µÄÉèÖÃÀ´È·¶¨±àÂë¡£
-            // ÀıÈç£¬ÖĞÎÄWindowsÖĞ£¬ÎŞÂÛie»¹ÊÇfirefox£¬¾­ÊÔÑéÄ¬ÈÏ¶¼ÊÇGBK¡£
-            // ¶øÔÚmacÏµÍ³ÖĞ£¬ÎŞÂÛsafari»¹ÊÇfirefox£¬¾­ÊÔÑéÄ¬ÈÏ¶¼ÊÇUTF-8¡£
+            // 2. ç›´æ¥è¾“å…¥åœ¨æµè§ˆå™¨åœ°å€æ é‡Œçš„URLï¼Œæ ¹æ®æµè§ˆå™¨çš„è®¾ç½®å’Œæ“ä½œç³»ç»Ÿçš„è®¾ç½®æ¥ç¡®å®šç¼–ç ã€‚
+            // ä¾‹å¦‚ï¼Œä¸­æ–‡Windowsä¸­ï¼Œæ— è®ºieè¿˜æ˜¯firefoxï¼Œç»è¯•éªŒé»˜è®¤éƒ½æ˜¯GBKã€‚
+            // è€Œåœ¨macç³»ç»Ÿä¸­ï¼Œæ— è®ºsafariè¿˜æ˜¯firefoxï¼Œç»è¯•éªŒé»˜è®¤éƒ½æ˜¯UTF-8ã€‚
             //
-            // ¶ÔÓÚ·şÎñ¶Ë£¬ÓĞÒÔÏÂ¼¸ÖÖÇé¿ö£º
-            // 1. Tomcat×ÜÊÇÒÔserver.xmlÖĞ£¬ÒÔ<Connector URIEncoding="xxx">ÖĞÖ¸¶¨µÄ±àÂë£¬À´½âÊÍGETÇëÇóµÄ²ÎÊı¡£ÈçÎ´Ö¸¶¨£¬¾ÍÊÇ8859_1¡£
-            // 2. Jetty×ÜÊÇÒÔUTF-8À´½âÂëGETÇëÇóµÄ²ÎÊı¡£
-            // 3. ¶ÔÓÚPOSTÇëÇó£¬ÔòÒÔrequest.setCharacterEncoding("xxx")µÄ±àÂëÎª×¼£¬ÈçÎ´Ö¸¶¨£¬¾ÍÊÇ8859_1¡£
-            // 4. Èç¹ûÉèÖÃÁËTomcat5²ÎÊı£º<Connector useBodyEncodingForURI="true">£¬ÄÇÃ´GETÇëÇóÒ²ÒÔrequest.setCharacterEncoding("xxx")µÄ±àÂëÎª×¼¡£
+            // å¯¹äºæœåŠ¡ç«¯ï¼Œæœ‰ä»¥ä¸‹å‡ ç§æƒ…å†µï¼š
+            // 1. Tomcatæ€»æ˜¯ä»¥server.xmlä¸­ï¼Œä»¥<Connector URIEncoding="xxx">ä¸­æŒ‡å®šçš„ç¼–ç ï¼Œæ¥è§£é‡ŠGETè¯·æ±‚çš„å‚æ•°ã€‚å¦‚æœªæŒ‡å®šï¼Œå°±æ˜¯8859_1ã€‚
+            // 2. Jettyæ€»æ˜¯ä»¥UTF-8æ¥è§£ç GETè¯·æ±‚çš„å‚æ•°ã€‚
+            // 3. å¯¹äºPOSTè¯·æ±‚ï¼Œåˆ™ä»¥request.setCharacterEncoding("xxx")çš„ç¼–ç ä¸ºå‡†ï¼Œå¦‚æœªæŒ‡å®šï¼Œå°±æ˜¯8859_1ã€‚
+            // 4. å¦‚æœè®¾ç½®äº†Tomcat5å‚æ•°ï¼š<Connector useBodyEncodingForURI="true">ï¼Œé‚£ä¹ˆGETè¯·æ±‚ä¹Ÿä»¥request.setCharacterEncoding("xxx")çš„ç¼–ç ä¸ºå‡†ã€‚
             //
-            // ¿É¼ûÈç¹û²»¼ÓÈÎºÎÉèÖÃ£¬Tomcat/Jetty×ÜÊÇÒÔ8859_1»òUTF-8À´½âÂëURL query£¬µ¼ÖÂ½âÂë´íÎó¡£
+            // å¯è§å¦‚æœä¸åŠ ä»»ä½•è®¾ç½®ï¼ŒTomcat/Jettyæ€»æ˜¯ä»¥8859_1æˆ–UTF-8æ¥è§£ç URL queryï¼Œå¯¼è‡´è§£ç é”™è¯¯ã€‚
             //
-            // ÎªÁËÊ¹Ó¦ÓÃ¶Ô·şÎñÆ÷µÄÅäÖÃÒÀÀµ½ÏÉÙ£¬¶ÔËùÓĞ·ÇPOST/PUTÇëÇó£¨Ò»°ãÊÇGETÇëÇó£©½øĞĞÊÖ¹¤½âÂë£¬¶ø²»ÒÀÀµÓÚservlet engineµÄ½âÂë»úÖÆ£¬
-            // ³ı·ÇÄãÉèÖÃÁËuseServletEngineParser=true¡£
+            // ä¸ºäº†ä½¿åº”ç”¨å¯¹æœåŠ¡å™¨çš„é…ç½®ä¾èµ–è¾ƒå°‘ï¼Œå¯¹æ‰€æœ‰éPOST/PUTè¯·æ±‚ï¼ˆä¸€èˆ¬æ˜¯GETè¯·æ±‚ï¼‰è¿›è¡Œæ‰‹å·¥è§£ç ï¼Œè€Œä¸ä¾èµ–äºservlet engineçš„è§£ç æœºåˆ¶ï¼Œ
+            // é™¤éä½ è®¾ç½®äº†useServletEngineParser=trueã€‚
             if (requestContext.isUseServletEngineParser() || "post".equalsIgnoreCase(method)
                     || "put".equalsIgnoreCase(method)) {
                 parseByServletEngine(wrappedRequest);
@@ -136,7 +136,7 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
     }
 
     /**
-     * ÓÃservlet engineÀ´½âÎö²ÎÊı¡£
+     * ç”¨servlet engineæ¥è§£æå‚æ•°ã€‚
      */
     private void parseByServletEngine(HttpServletRequest wrappedRequest) {
         @SuppressWarnings("unchecked")
@@ -155,12 +155,12 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
     }
 
     /**
-     * ×Ô¼º½âÎöquery string¡£
+     * è‡ªå·±è§£æquery stringã€‚
      */
     private void parseQueryString(ParserRequestContext requestContext, HttpServletRequest wrappedRequest) {
-        // µ±useBodyEncodingForURI=trueÊ±£¬ÓÃrequest.setCharacterEncoding()ËùÖ¸¶¨µÄÖµÀ´½âÂë£¬·ñÔòÊ¹ÓÃURIEncoding£¬Ä¬ÈÏÎªUTF-8¡£
-        // useBodyEncodingForURIÄ¬ÈÏÖµ¾ÍÊÇtrue¡£
-        // ¸ÃĞĞÎªºÍtomcatµÄ·ç¸ñÒ»ÖÂ¡££¨²»¹ıtomcatÄ¬ÈÏÊÇ8859_1£¬Õâ¸öÃ»¹ØÏµ£©
+        // å½“useBodyEncodingForURI=trueæ—¶ï¼Œç”¨request.setCharacterEncoding()æ‰€æŒ‡å®šçš„å€¼æ¥è§£ç ï¼Œå¦åˆ™ä½¿ç”¨URIEncodingï¼Œé»˜è®¤ä¸ºUTF-8ã€‚
+        // useBodyEncodingForURIé»˜è®¤å€¼å°±æ˜¯trueã€‚
+        // è¯¥è¡Œä¸ºå’Œtomcatçš„é£æ ¼ä¸€è‡´ã€‚ï¼ˆä¸è¿‡tomcaté»˜è®¤æ˜¯8859_1ï¼Œè¿™ä¸ªæ²¡å…³ç³»ï¼‰
         String charset = requestContext.isUseBodyEncodingForURI() ? wrappedRequest.getCharacterEncoding()
                 : requestContext.getURIEncoding();
 
@@ -175,9 +175,9 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
     }
 
     /**
-     * ´¦ÀíËùÓĞ²ÎÊı¡£
+     * å¤„ç†æ‰€æœ‰å‚æ•°ã€‚
      * <p>
-     * Èç¹û²ÎÊıÃûÎª.~html½áÎ²µÄ£¬Ôò°´HTML¹æÔò´¦Àí£¬·ñÔò°´ÆÕÍ¨¹æÔò´¦Àí¡£
+     * å¦‚æœå‚æ•°åä¸º.~htmlç»“å°¾çš„ï¼Œåˆ™æŒ‰HTMLè§„åˆ™å¤„ç†ï¼Œå¦åˆ™æŒ‰æ™®é€šè§„åˆ™å¤„ç†ã€‚
      * </p>
      */
     private void postProcessParams() {
@@ -224,12 +224,12 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
             Object value = values[i];
 
             if (value instanceof String) {
-                // ½«·ÇHTML×Ö¶ÎµÄ&#12345;×ª»»³Éunicode¡£
+                // å°†éHTMLå­—æ®µçš„&#12345;è½¬æ¢æˆunicodeã€‚
                 if (!isHtmlField && requestContext.isUnescapeParameters()) {
                     value = StringEscapeUtil.unescapeEntities(null, (String) value);
                 }
 
-                // ¹ıÂË×Ö·û´®Öµ
+                // è¿‡æ»¤å­—ç¬¦ä¸²å€¼
                 if (filtering != null) {
                     for (int j = 0; j < filters.length; j++) {
                         ParameterParserFilter filter = filters[j];
@@ -240,7 +240,7 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
                     }
                 }
             } else if (value instanceof FileItem) {
-                // ¹ıÂËÉÏ´«ÎÄ¼ş
+                // è¿‡æ»¤ä¸Šä¼ æ–‡ä»¶
                 if (filtering != null) {
                     for (int j = 0; j < filters.length; j++) {
                         ParameterParserFilter filter = filters[j];
@@ -259,10 +259,10 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄ<code>FileItem</code>¶ÔÏó£¬Èç¹û²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šåç§°çš„<code>FileItem</code>å¯¹è±¡ï¼Œå¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return <code>FileItem</code>¶ÔÏó
+     * @param key å‚æ•°å
+     * @return <code>FileItem</code>å¯¹è±¡
      */
     public FileItem getFileItem(String key) {
         ValueList container = getValueList(key, false);
@@ -271,10 +271,10 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄ<code>FileItem</code>¶ÔÏó£¬Èç¹û²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šåç§°çš„<code>FileItem</code>å¯¹è±¡ï¼Œå¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return <code>FileItem</code>¶ÔÏóµÄÊı×é
+     * @param key å‚æ•°å
+     * @return <code>FileItem</code>å¯¹è±¡çš„æ•°ç»„
      */
     public FileItem[] getFileItems(String key) {
         ValueList container = getValueList(key, false);
@@ -283,16 +283,16 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
     }
 
     /**
-     * Ìí¼Ó<code>FileItem</code>¡£
+     * æ·»åŠ <code>FileItem</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     public void add(String key, FileItem value) {
         if (value.isFormField()) {
             add(key, value.getString());
         } else {
-            // ºöÂÔ¿ÕµÄÉÏ´«Ïî¡£
+            // å¿½ç•¥ç©ºçš„ä¸Šä¼ é¡¹ã€‚
             if (!StringUtil.isEmpty(value.getName()) || value.getSize() > 0) {
                 add(key, (Object) value);
             }
@@ -300,10 +300,10 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
     }
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     @Override
     public void add(String key, Object value) {
@@ -319,31 +319,31 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
     }
 
     /**
-     * ½âÎö·ûºÏ<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>±ê×¼µÄ
-     * <code>multipart/form-data</code>ÀàĞÍµÄHTTPÇëÇó¡£
+     * è§£æç¬¦åˆ<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>æ ‡å‡†çš„
+     * <code>multipart/form-data</code>ç±»å‹çš„HTTPè¯·æ±‚ã€‚
      * <p>
-     * ÒªÖ´ĞĞ´Ë·½·¨£¬Ğë½«<code>UploadService.automatic</code>ÅäÖÃ²ÎÊıÉèÖÃ³É<code>false</code>¡£
-     * ´Ë·½·¨¸²¸ÇÁËserviceµÄÄ¬ÈÏÉèÖÃ£¬ÊÊºÏÓÚÔÚaction»òservletÖĞÊÖ¹¤Ö´ĞĞ¡£
+     * è¦æ‰§è¡Œæ­¤æ–¹æ³•ï¼Œé¡»å°†<code>UploadService.automatic</code>é…ç½®å‚æ•°è®¾ç½®æˆ<code>false</code>ã€‚
+     * æ­¤æ–¹æ³•è¦†ç›–äº†serviceçš„é»˜è®¤è®¾ç½®ï¼Œé€‚åˆäºåœ¨actionæˆ–servletä¸­æ‰‹å·¥æ‰§è¡Œã€‚
      * </p>
      * 
-     * @throws UploadException Èç¹û½âÎöÊ±³ö´í
+     * @throws UploadException å¦‚æœè§£ææ—¶å‡ºé”™
      */
     public void parseUpload() throws UploadException {
         parseUpload(null);
     }
 
     /**
-     * ½âÎö·ûºÏ<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>±ê×¼µÄ
-     * <code>multipart/form-data</code>ÀàĞÍµÄHTTPÇëÇó¡£
+     * è§£æç¬¦åˆ<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>æ ‡å‡†çš„
+     * <code>multipart/form-data</code>ç±»å‹çš„HTTPè¯·æ±‚ã€‚
      * <p>
-     * ÒªÖ´ĞĞ´Ë·½·¨£¬Ğë½«<code>UploadService.automatic</code>ÅäÖÃ²ÎÊıÉèÖÃ³É<code>false</code>¡£
-     * ´Ë·½·¨¸²¸ÇÁËserviceµÄÄ¬ÈÏÉèÖÃ£¬ÊÊºÏÓÚÔÚaction»òservletÖĞÊÖ¹¤Ö´ĞĞ¡£
+     * è¦æ‰§è¡Œæ­¤æ–¹æ³•ï¼Œé¡»å°†<code>UploadService.automatic</code>é…ç½®å‚æ•°è®¾ç½®æˆ<code>false</code>ã€‚
+     * æ­¤æ–¹æ³•è¦†ç›–äº†serviceçš„é»˜è®¤è®¾ç½®ï¼Œé€‚åˆäºåœ¨actionæˆ–servletä¸­æ‰‹å·¥æ‰§è¡Œã€‚
      * </p>
      * 
-     * @param sizeThreshold ÎÄ¼ş·ÅÔÚÄÚ´æÖĞµÄãĞÖµ£¬Ğ¡ÓÚ´ËÖµµÄÎÄ¼ş±»±£´æÔÚÄÚ´æÖĞ¡£Èç¹û´ËÖµĞ¡ÓÚ0£¬ÔòÊ¹ÓÃÔ¤ÉèµÄÖµ
-     * @param sizeMax HTTPÇëÇóµÄ×î´ó³ß´ç£¬³¬¹ı´Ë³ß´çµÄÇëÇó½«±»Å×Æú¡£
-     * @param repositoryPath Ôİ´æÉÏÔØÎÄ¼şµÄ¾ø¶ÔÂ·¾¶
-     * @throws UploadException Èç¹û½âÎöÊ±³ö´í
+     * @param sizeThreshold æ–‡ä»¶æ”¾åœ¨å†…å­˜ä¸­çš„é˜ˆå€¼ï¼Œå°äºæ­¤å€¼çš„æ–‡ä»¶è¢«ä¿å­˜åœ¨å†…å­˜ä¸­ã€‚å¦‚æœæ­¤å€¼å°äº0ï¼Œåˆ™ä½¿ç”¨é¢„è®¾çš„å€¼
+     * @param sizeMax HTTPè¯·æ±‚çš„æœ€å¤§å°ºå¯¸ï¼Œè¶…è¿‡æ­¤å°ºå¯¸çš„è¯·æ±‚å°†è¢«æŠ›å¼ƒã€‚
+     * @param repositoryPath æš‚å­˜ä¸Šè½½æ–‡ä»¶çš„ç»å¯¹è·¯å¾„
+     * @throws UploadException å¦‚æœè§£ææ—¶å‡ºé”™
      */
     public void parseUpload(UploadParameters params) throws UploadException {
         if (uploadProcessed || upload == null) {
@@ -362,13 +362,13 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
     }
 
     /**
-     * È¡µÃÓÃÓÚ½âÎö²ÎÊıµÄ±àÂë×Ö·û¼¯¡£²»Í¬µÄÊµÏÖÈ¡µÃ±àÂë×Ö·û¼¯µÄ·½·¨Ò²²»Í¬£¬ÀıÈç£¬¶ÔÓÚ<code>ParameterParser</code>£¬
-     * ´Ë±àÂë×Ö·û¼¯ÊÇÓÉ<code>request.getCharacterEncoding()</code>¾ö¶¨µÄ¡£
+     * å–å¾—ç”¨äºè§£æå‚æ•°çš„ç¼–ç å­—ç¬¦é›†ã€‚ä¸åŒçš„å®ç°å–å¾—ç¼–ç å­—ç¬¦é›†çš„æ–¹æ³•ä¹Ÿä¸åŒï¼Œä¾‹å¦‚ï¼Œå¯¹äº<code>ParameterParser</code>ï¼Œ
+     * æ­¤ç¼–ç å­—ç¬¦é›†æ˜¯ç”±<code>request.getCharacterEncoding()</code>å†³å®šçš„ã€‚
      * <p>
-     * Èç¹ûÎ´Ö¸¶¨£¬Ä¬ÈÏ·µ»Ø<code>ISO-8859-1</code>¡£
+     * å¦‚æœæœªæŒ‡å®šï¼Œé»˜è®¤è¿”å›<code>ISO-8859-1</code>ã€‚
      * </p>
      * 
-     * @return ±àÂë×Ö·û¼¯
+     * @return ç¼–ç å­—ç¬¦é›†
      */
     @Override
     protected String getCharacterEncoding() {
@@ -378,9 +378,9 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
     }
 
     /**
-     * ½«parametersÖØĞÂ×é×°³Équery string¡£
+     * å°†parametersé‡æ–°ç»„è£…æˆquery stringã€‚
      * 
-     * @return query string£¬Èç¹ûÃ»ÓĞ²ÎÊı£¬Ôò·µ»Ø<code>null</code>
+     * @return query stringï¼Œå¦‚æœæ²¡æœ‰å‚æ•°ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public String toQueryString() {
         QueryStringParser parser = new QueryStringParser();

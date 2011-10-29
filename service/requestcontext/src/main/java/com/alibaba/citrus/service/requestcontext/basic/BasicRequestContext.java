@@ -20,7 +20,7 @@ package com.alibaba.citrus.service.requestcontext.basic;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 
 /**
- * ÕâÊÇÒ»¸ö»ù´¡ĞÔµÄrequest context£¬Ìá¹©ÁËinterceptor»úÖÆ£¬Ö÷ÒªÓÃÓÚ¹¹½¨¿ÉÀ©Õ¹µÄ°²È«·½°¸¡£
+ * è¿™æ˜¯ä¸€ä¸ªåŸºç¡€æ€§çš„request contextï¼Œæä¾›äº†interceptoræœºåˆ¶ï¼Œä¸»è¦ç”¨äºæ„å»ºå¯æ‰©å±•çš„å®‰å…¨æ–¹æ¡ˆã€‚
  * 
  * @author Michael Zhou
  */

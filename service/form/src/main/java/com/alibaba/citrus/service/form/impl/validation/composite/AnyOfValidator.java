@@ -26,10 +26,10 @@ import com.alibaba.citrus.service.form.support.AbstractCompositeValidator;
 import com.alibaba.citrus.service.form.support.AbstractCompositeValidatorDefinitionParser;
 
 /**
- * µ±ÏÂÊôµÄÈÎºÎÒ»¸övalidatorÍ¨¹ıÑéÖ¤Ê±£¬´Ëvalidator¾ÍÍ¨¹ıÑéÖ¤¡£
+ * å½“ä¸‹å±çš„ä»»ä½•ä¸€ä¸ªvalidatoré€šè¿‡éªŒè¯æ—¶ï¼Œæ­¤validatorå°±é€šè¿‡éªŒè¯ã€‚
  * <p>
- * µ±ÑéÖ¤²»Í¨¹ıÊ±£¬messageÅäÖÃÖĞÖ¸¶¨µÄmessage£¬µ«¿ÉÊ¹ÓÃ±äÁ¿<code>${allMessages}</code>
- * ÒıÓÃËùÓĞÆäÏÂÊôµÄmessageÁĞ±í¡£
+ * å½“éªŒè¯ä¸é€šè¿‡æ—¶ï¼Œmessageé…ç½®ä¸­æŒ‡å®šçš„messageï¼Œä½†å¯ä½¿ç”¨å˜é‡<code>${allMessages}</code>
+ * å¼•ç”¨æ‰€æœ‰å…¶ä¸‹å±çš„messageåˆ—è¡¨ã€‚
  * </p>
  * 
  * @author Michael Zhou

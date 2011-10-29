@@ -84,9 +84,9 @@ public class DomComponent extends PageComponent {
             Iterator<Element> i = elements.iterator();
 
             if (i.hasNext() && i.next() != null && i.hasNext()) {
-                orderedTemplate.accept(this); // Èç¹ûÓĞ¶à¸öelements£¬ÔòÏÔÊ¾ol
+                orderedTemplate.accept(this); // å¦‚æœæœ‰å¤šä¸ªelementsï¼Œåˆ™æ˜¾ç¤ºol
             } else {
-                unorderedTemplate.accept(this); // ·ñÔòÏÔÊ¾ul
+                unorderedTemplate.accept(this); // å¦åˆ™æ˜¾ç¤ºul
             }
         }
 
@@ -180,7 +180,7 @@ public class DomComponent extends PageComponent {
         private void visitStyledValue(Template[] styledTextTemplates) {
             Template template;
 
-            // ´¿ÎÄ±¾
+            // çº¯æ–‡æœ¬
             if (value instanceof TextValue) {
                 template = styledTextTemplates[0];
                 context().put("value", value.getText());

@@ -53,7 +53,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
     public void test01_text_failure() throws Exception {
         String s;
 
-        // textÔÚ#abcºóÃæ
+        // textåœ¨#abcåé¢
         s = "";
         s += "#abc\n";
         s += "#end\n";
@@ -63,7 +63,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError, exception("Invalid text here at test.txt: Line 4 Column 3"));
 
-        // \#textÔÚ#abcºóÃæ
+        // \#textåœ¨#abcåé¢
         s = "";
         s += "#abc\n";
         s += "#end\n";
@@ -125,7 +125,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
         Placeholder placeholder = (Placeholder) template.nodes[0];
 
-        // ×ÓÄ£°åµÄË³ĞòºÍÄ£°åÎÄ¼şÖĞµÄÒ»ÖÂ
+        // å­æ¨¡æ¿çš„é¡ºåºå’Œæ¨¡æ¿æ–‡ä»¶ä¸­çš„ä¸€è‡´
         assertPlaceholder(placeholder, "for", "Line 3 Column 1", new String[] { "#aaa.d", "#aaa.c", "#aaa.b", "ccc" },
                 "#aaa.*, ccc");
 
@@ -162,7 +162,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
         Placeholder placeholder = (Placeholder) template.getSubTemplate("aaa").nodes[0];
 
-        // ×ÓÄ£°åµÄË³ĞòºÍÄ£°åÎÄ¼şÖĞµÄÒ»ÖÂ
+        // å­æ¨¡æ¿çš„é¡ºåºå’Œæ¨¡æ¿æ–‡ä»¶ä¸­çš„ä¸€è‡´
         assertPlaceholder(placeholder, "for", "Line 4 Column 3", new String[] { "#d", "#c", "#b", "ccc" }, "#*, ccc");
 
         PlaceholderParameter param;
@@ -193,7 +193,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
     public void test02_placeholder_failure() throws Exception {
         String s;
 
-        // ${}ÔÚ#abcºóÃæ
+        // ${}åœ¨#abcåé¢
         s = "";
         s += "#abc\n";
         s += "#end\n";
@@ -203,7 +203,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError, exception("Invalid ${hello} here at test.txt: Line 4 Column 3"));
 
-        // ${}ÔÚ#abcºóÃæ
+        // ${}åœ¨#abcåé¢
         s = "";
         s += "#abc\n";
         s += "#end\n";
@@ -222,7 +222,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError, exception("Reserved name: placeholder at test.txt: Line 3 Column 1"));
 
-        // ${xxx: #notexist}Ä£°åÎ´ÕÒµ½
+        // ${xxx: #notexist}æ¨¡æ¿æœªæ‰¾åˆ°
         s = "";
         s += "  ${xxx: aaa, #notexist}";
 
@@ -230,7 +230,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         assertThat(parseError,
                 exception("Referenced template notexist is not found in the context around test.txt: Line 1 Column 3"));
 
-        // ${xxx: #a.b.c}Ä£°åÎ´ÕÒµ½
+        // ${xxx: #a.b.c}æ¨¡æ¿æœªæ‰¾åˆ°
         s = "";
         s += "  ${xxx: #a.b.c}";
 
@@ -249,7 +249,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         assertThat(parseError,
                 exception("Referenced template a.b.c is not found in the context around test.txt: Line 1 Column 3"));
 
-        // ${xxx: #a.b.*}Ä£°åÎ´ÕÒµ½
+        // ${xxx: #a.b.*}æ¨¡æ¿æœªæ‰¾åˆ°
         s = "";
         s += "  ${xxx: #a.b.*}";
 
@@ -284,7 +284,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
     public void test03_subtemplate_failure() throws Exception {
         String s;
 
-        // #abcÇ°ÓĞÄÚÈİ
+        // #abcå‰æœ‰å†…å®¹
         s = "";
         s += "hhhhh  #abc\n";
         s += "#end\n";
@@ -292,7 +292,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError, exception("#abc should start at new line, which is now at test.txt: Line 1 Column 8"));
 
-        // #abcºó¸ú#end
+        // #abcåè·Ÿ#end
         s = "";
         s += "hhhhh\n";
         s += "  #abc#end\n";
@@ -300,7 +300,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError, exception("Invalid content followed after #abc at test.txt: Line 2 Column 7"));
 
-        // #abcºó¸úcontent
+        // #abcåè·Ÿcontent
         s = "";
         s += "hhhhh\n";
         s += "  #abc content\n";
@@ -309,7 +309,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError, exception("Invalid content followed after #abc at test.txt: Line 2 Column 8"));
 
-        // È±ÉÙ#end
+        // ç¼ºå°‘#end
         s = "";
         s += "#abc\n";
         s += "#def\n";
@@ -319,11 +319,11 @@ public class TemplateParserTests extends AbstractTemplateTests {
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError, exception("Unclosed tags: #def, #abc at test.txt: Line 5"));
 
-        // systemIdÎ´Ö¸¶¨Ê±µÄ´íÎóĞÅÏ¢
+        // systemIdæœªæŒ‡å®šæ—¶çš„é”™è¯¯ä¿¡æ¯
         loadTemplateFailure(s.getBytes(), null);
         assertThat(parseError, exception("Unclosed tags: #def, #abc at [unknown source]: Line 5"));
 
-        // #endºó¸ú()
+        // #endåè·Ÿ()
         s = "";
         s += "#abc\n";
         s += "#end ()";
@@ -338,7 +338,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError, exception("Invalid character '(' after #end tag at test.txt: Line 2 Column 5"));
 
-        // #endÌ«¶à
+        // #endå¤ªå¤š
         s = "";
         s += "#abc\n";
         s += "#def\n";
@@ -351,7 +351,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError, exception("Unmatched #end tag at test.txt: Line 7 Column 1"));
 
-        // import nameÎª¿Õ
+        // import nameä¸ºç©º
         s = "";
         s += "#abc()\n";
 
@@ -376,14 +376,14 @@ public class TemplateParserTests extends AbstractTemplateTests {
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError, exception("Import file name is not specified at test.txt: Line 1 Column 6"));
 
-        // ÎŞ·¨import£¬ÒòÎªinput source²»´æÔÚ
+        // æ— æ³•importï¼Œå› ä¸ºinput sourceä¸å­˜åœ¨
         s = "";
         s += "#abc(\"any.txt\")\n";
 
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError, exception("Could not import template file \"any.txt\" at test.txt: Line 1 Column 6"));
 
-        // template nameÖØ¸´
+        // template nameé‡å¤
         s = "";
         s += " #abc\n";
         s += "#end\n";
@@ -460,7 +460,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
     public void test04_include_template_failure() throws Exception {
         String s;
 
-        // $#{xxx}ÔÚ#abcºóÃæ
+        // $#{xxx}åœ¨#abcåé¢
         s = "";
         s += "#abc\n";
         s += "#end\n";
@@ -470,7 +470,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError, exception("Invalid $#{abc} here at test.txt: Line 4 Column 3"));
 
-        // $#{notexist}Ä£°åÎ´ÕÒµ½
+        // $#{notexist}æ¨¡æ¿æœªæ‰¾åˆ°
         s = "";
         s += "  $#{notexist}";
 
@@ -478,7 +478,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         assertThat(parseError,
                 exception("Included template notexist is not found in the context around test.txt: Line 1 Column 3"));
 
-        // $#{abc}Ä£°åÎ´ÕÒµ½£¨Ç¶Ì×£©
+        // $#{abc}æ¨¡æ¿æœªæ‰¾åˆ°ï¼ˆåµŒå¥—ï¼‰
         s = "";
         s += "#xxx\n";
         s += "  #yyy\n";
@@ -490,7 +490,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         assertThat(parseError,
                 exception("Included template abc is not found in the context around test.txt: Line 3 Column 12"));
 
-        // $#{a.b.c}Ä£°åÎ´ÕÒµ½£¨×ÓÄ£°å£©
+        // $#{a.b.c}æ¨¡æ¿æœªæ‰¾åˆ°ï¼ˆå­æ¨¡æ¿ï¼‰
         s = "$#{a.b.c}\n";
 
         loadTemplateFailure(s.getBytes(), "test.txt");
@@ -512,12 +512,12 @@ public class TemplateParserTests extends AbstractTemplateTests {
     public void test05_param_charset() {
         loadTemplate("test05_param_utf8.txt", 1, 0, 1);
 
-        assertText("\nÄãºÃ£¡", template.nodes[0]);
+        assertText("\nä½ å¥½ï¼", template.nodes[0]);
         assertEquals("UTF-8", template.getParameter("charset"));
 
         loadTemplate("test05_param_gbk.txt", 1, 0, 1);
 
-        assertText("\nÄãºÃ£¡", template.nodes[0]);
+        assertText("\nä½ å¥½ï¼", template.nodes[0]);
         assertEquals("GBK", template.getParameter("charset"));
     }
 
@@ -542,14 +542,14 @@ public class TemplateParserTests extends AbstractTemplateTests {
     public void test05_param_failure() throws Exception {
         String s;
 
-        // #@paramÇ°ÓĞÄÚÈİ
+        // #@paramå‰æœ‰å†…å®¹
         s = "";
         s += "hhhhh  #@param\n";
 
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError, exception("#@param should start at new line, which is now at test.txt: Line 1 Column 8"));
 
-        // #@paramÔÚtextµÄºóÃæ
+        // #@paramåœ¨textçš„åé¢
         s = "";
         s += "\n";
         s += "abc\n";
@@ -558,7 +558,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError, exception("Invalid #@hello here at test.txt: Line 3 Column 3"));
 
-        // #@paramÔÚ${abc}µÄºóÃæ
+        // #@paramåœ¨${abc}çš„åé¢
         s = "";
         s += "\n";
         s += "  ${abc}\n";
@@ -567,7 +567,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError, exception("Invalid #@hello here at test.txt: Line 3 Column 3"));
 
-        // #@paramÔÚ#abcºóÃæ
+        // #@paramåœ¨#abcåé¢
         s = "";
         s += "#abc\n";
         s += "#end\n";
@@ -836,7 +836,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
                 + "<head>\n" //
                 + "<title>", template.nodes[i++]);
 
-        assertPlaceholder(template.nodes[i++], "title", "Line 7 Column 12", new String[] { "ÎÒµÄ±êÌâ" }, "ÎÒµÄ±êÌâ");
+        assertPlaceholder(template.nodes[i++], "title", "Line 7 Column 12", new String[] { "æˆ‘çš„æ ‡é¢˜" }, "æˆ‘çš„æ ‡é¢˜");
 
         assertText("</title>\n" //
                 + "</head>\n" //
@@ -929,7 +929,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
             loadTemplate("test08_import_notfound.txt", 1, 1, 1);
             fail();
         } catch (TemplateParseException e) {
-            // source.getRelative()¼ÆËã³É¹¦£¬µ«ÊÇÎÄ¼şÃ»ÕÒµ½
+            // source.getRelative()è®¡ç®—æˆåŠŸï¼Œä½†æ˜¯æ–‡ä»¶æ²¡æ‰¾åˆ°
             assertThat(
                     e,
                     exception(FileNotFoundException.class, "Could not import template file \"notfound.txt\" at ",
@@ -951,7 +951,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
             new Template(f);
             fail();
         } catch (TemplateParseException e) {
-            // source.getRelative()±¨´í
+            // source.getRelative()æŠ¥é”™
             assertThat(
                     e,
                     exception(IllegalPathException.class,
@@ -969,7 +969,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
             new Template(new ByteArrayInputStream(s.getBytes()), "test.txt");
             fail();
         } catch (TemplateParseException e) {
-            // source.getRelative()·µ»Ønull
+            // source.getRelative()è¿”å›null
             assertThat(e, exception("Could not import template file \"def.htm\" at ", "Line 3 Column 6"));
         }
     }

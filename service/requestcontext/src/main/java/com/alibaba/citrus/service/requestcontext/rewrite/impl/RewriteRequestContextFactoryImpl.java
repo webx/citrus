@@ -25,7 +25,7 @@ import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextF
 import com.alibaba.citrus.util.ToStringBuilder.CollectionBuilder;
 
 /**
- * ´´½¨<code>RewriteRequestContext</code>µÄ¹¤³§¡£
+ * åˆ›å»º<code>RewriteRequestContext</code>çš„å·¥å‚ã€‚
  */
 public class RewriteRequestContextFactoryImpl extends AbstractRequestContextFactory<RewriteRequestContext> {
     private RewriteRule[] rules;
@@ -39,16 +39,16 @@ public class RewriteRequestContextFactoryImpl extends AbstractRequestContextFact
     }
 
     /**
-     * ±¾ÀàÌá¹©ÁËÖØĞ´request²ÎÊıºÍURLµÄ¹¦ÄÜ¡£
+     * æœ¬ç±»æä¾›äº†é‡å†™requestå‚æ•°å’ŒURLçš„åŠŸèƒ½ã€‚
      */
     public String[] getFeatures() {
         return new String[] { "rewrite" };
     }
 
     /**
-     * Rewrite»úÖÆ»áÔÚprepare½×¶Î£¬ĞŞ¸ÄparametersºÍcookie£¬Òò´ËÒÀÀµÓÚparser¡£´ËÍâ£¬
-     * µÚÒ»´Î·ÃÎÊparserµÄparametersÖ®Ç°£¬±ØĞëÉèÖÃlocale¡£ÉèÖÃlocaleÊÇÓÉsetlocale prepareÍê³ÉµÄ¡£
-     * ÓÉÓÚrewrite prepare»á·ÃÎÊparser parameters£¬Òò´Ërewrite±ØĞëÔÚsetlocaleÖ®ºó¡£
+     * Rewriteæœºåˆ¶ä¼šåœ¨prepareé˜¶æ®µï¼Œä¿®æ”¹parameterså’Œcookieï¼Œå› æ­¤ä¾èµ–äºparserã€‚æ­¤å¤–ï¼Œ
+     * ç¬¬ä¸€æ¬¡è®¿é—®parserçš„parametersä¹‹å‰ï¼Œå¿…é¡»è®¾ç½®localeã€‚è®¾ç½®localeæ˜¯ç”±setlocale prepareå®Œæˆçš„ã€‚
+     * ç”±äºrewrite prepareä¼šè®¿é—®parser parametersï¼Œå› æ­¤rewriteå¿…é¡»åœ¨setlocaleä¹‹åã€‚
      */
     public FeatureOrder[] featureOrders() {
         return new FeatureOrder[] { new RequiresFeature("parseRequest"), new AfterFeature("setLocaleAndCharset") };

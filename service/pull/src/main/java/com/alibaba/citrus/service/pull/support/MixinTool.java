@@ -36,7 +36,7 @@ import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionP
 import com.alibaba.citrus.util.internal.StaticFunctionDelegatorBuilder;
 
 /**
- * »òÕß´´½¨Ò»×éutilsÀàµÄmixin¡£
+ * æˆ–è€…åˆ›å»ºä¸€ç»„utilsç±»çš„mixinã€‚
  * 
  * @author Michael Zhou
  */

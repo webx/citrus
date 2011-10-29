@@ -37,7 +37,7 @@ import com.alibaba.citrus.generictype.TypeInfo;
 import com.alibaba.citrus.generictype.TypeVariableInfo;
 
 /**
- * ¶Ô{@link MethodInfo}µÄÊµÏÖ¡£
+ * å¯¹{@link MethodInfo}çš„å®ç°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -77,8 +77,8 @@ class MethodImpl extends AbstractGenericDeclarationInfo implements MethodInfo {
     }
 
     /**
-     * ºöÂÔunchecked exception£ºRuntimeException, Error£¬<br>
-     * ÅÅ³ıÒì³£µÄ×ÓÀà£¬ÀıÈç£ºExceptionºÍIOExceptionÍ¬Ê±³öÏÖ£¬ÔòÉ¾³ıIOException¡£
+     * å¿½ç•¥unchecked exceptionï¼šRuntimeException, Errorï¼Œ<br>
+     * æ’é™¤å¼‚å¸¸çš„å­ç±»ï¼Œä¾‹å¦‚ï¼šExceptionå’ŒIOExceptionåŒæ—¶å‡ºç°ï¼Œåˆ™åˆ é™¤IOExceptionã€‚
      */
     private List<TypeInfo> getEffectiveExceptionTypes(TypeInfo[] exceptionTypes) {
         ArrayList<TypeInfo> effectiveExceptions = createArrayList(exceptionTypes.length);

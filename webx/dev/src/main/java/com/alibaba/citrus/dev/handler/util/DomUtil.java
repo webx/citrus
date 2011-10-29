@@ -35,7 +35,7 @@ public class DomUtil {
     static {
         bs = new BitSet();
 
-        // ¸ù¾İ<a href="http://www.w3.org/TR/REC-xml/#id">http://www.w3.org/TR/REC-xml/#id</a>ËùÖ¸Ê¾µÄ±ê×¼£¬½«·Çid×Ö·û×ª³É_¡£
+        // æ ¹æ®<a href="http://www.w3.org/TR/REC-xml/#id">http://www.w3.org/TR/REC-xml/#id</a>æ‰€æŒ‡ç¤ºçš„æ ‡å‡†ï¼Œå°†éidå­—ç¬¦è½¬æˆ_ã€‚
         bs.set(':');
         bs.set('-');
         bs.set('.');
@@ -80,7 +80,7 @@ public class DomUtil {
     }
 
     /**
-     * ¶ÁÈ¡xmlÎÄ¼ş£¬×ª»»³Édom¡£
+     * è¯»å–xmlæ–‡ä»¶ï¼Œè½¬æ¢æˆdomã€‚
      */
     public static Element readDocument(String name, URL url, ElementFilter filter) throws Exception, IOException {
         Document doc = SchemaUtil.readDocument(url.openStream(), name, true);

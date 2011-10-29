@@ -38,10 +38,10 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 import com.alibaba.citrus.util.regex.MatchResultSubstitution;
 
 /**
- * ´ú±íÒ»¸örewrite¹æÔò¡£
+ * ä»£è¡¨ä¸€ä¸ªrewriteè§„åˆ™ã€‚
  * <p>
- * Ã¿¸örewrite¹æÔò±»Æ¥Åäºó£¬¾Í»áÔÙÊÔ×ÅÆ¥ÅäËùÓĞµÄconditions£¨Èç¹ûÓĞµÄ»°£©¡£¼ÙÈçconditionsÒ²±»Âú×ã£¬
- * ÄÇÃ´substitution¾Í»á±»Ö´ĞĞ¡£
+ * æ¯ä¸ªrewriteè§„åˆ™è¢«åŒ¹é…åï¼Œå°±ä¼šå†è¯•ç€åŒ¹é…æ‰€æœ‰çš„conditionsï¼ˆå¦‚æœæœ‰çš„è¯ï¼‰ã€‚å‡å¦‚conditionsä¹Ÿè¢«æ»¡è¶³ï¼Œ
+ * é‚£ä¹ˆsubstitutionå°±ä¼šè¢«æ‰§è¡Œã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -114,9 +114,9 @@ public class RewriteRule implements InitializingBean {
     }
 
     /**
-     * ÊÔÍ¼Æ¥Åärule¡£
+     * è¯•å›¾åŒ¹é…ruleã€‚
      * <p>
-     * Èç¹ûÆ¥Åä£¬Ôò·µ»ØÆ¥Åä½á¹û¡£·ñÔò·µ»Ø<code>null</code>±íÊ¾²»Æ¥Åä¡£
+     * å¦‚æœåŒ¹é…ï¼Œåˆ™è¿”å›åŒ¹é…ç»“æœã€‚å¦åˆ™è¿”å›<code>null</code>è¡¨ç¤ºä¸åŒ¹é…ã€‚
      * </p>
      */
     public MatchResult match(String path) {
@@ -157,7 +157,7 @@ public class RewriteRule implements InitializingBean {
             for (RewriteCondition condition : conditions) {
                 MatchResult result = condition.match(ruleMatchResult, conditionMatchResult, request);
 
-                // ÅĞ¶Ïornext±ê¼Ç£¬µ«¶Ô×îºóÒ»¸öconditionºöÂÔornext±ê¼Ç£¬·ñÔò»áµÃ³ö´íÎó½á¹û¡£
+                // åˆ¤æ–­ornextæ ‡è®°ï¼Œä½†å¯¹æœ€åä¸€ä¸ªconditionå¿½ç•¥ornextæ ‡è®°ï¼Œå¦åˆ™ä¼šå¾—å‡ºé”™è¯¯ç»“æœã€‚
                 boolean ornext = i < conditions.length - 1 && condition.getFlags().hasOR();
 
                 if (result == null) {
@@ -166,7 +166,7 @@ public class RewriteRule implements InitializingBean {
                         break;
                     }
 
-                    // ±£³ÖconditionMatchResult½á¹ûÎª×î½üµÄÒ»´ÎÆ¥Åä
+                    // ä¿æŒconditionMatchResultç»“æœä¸ºæœ€è¿‘çš„ä¸€æ¬¡åŒ¹é…
                 } else {
                     conditionMatchResult = result;
 

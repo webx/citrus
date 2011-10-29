@@ -30,7 +30,7 @@ import com.alibaba.citrus.springext.support.BeanSupport;
 import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
- * ÓÃËæ»úÊıÉú³Ésession IDµÄ»úÖÆ¡£
+ * ç”¨éšæœºæ•°ç”Ÿæˆsession IDçš„æœºåˆ¶ã€‚
  * 
  * @author Michael Zhou
  */
@@ -70,7 +70,7 @@ public class RandomIDGenerator extends BeanSupport implements SessionIDGenerator
         for (int i = 0; i < length; i++) {
             char ch = (char) b64Encoded[i];
 
-            // Ìæ»»µô/ºÍ+£¬ÒòÎªÕâÁ½¸ö×Ö·ûÔÚurlÖĞÓĞÌØÊâÓÃ´¦¡£
+            // æ›¿æ¢æ‰/å’Œ+ï¼Œå› ä¸ºè¿™ä¸¤ä¸ªå­—ç¬¦åœ¨urlä¸­æœ‰ç‰¹æ®Šç”¨å¤„ã€‚
             switch (ch) {
                 case '/':
                     ch = '$';

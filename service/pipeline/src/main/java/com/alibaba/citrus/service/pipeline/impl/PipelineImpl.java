@@ -38,7 +38,7 @@ import com.alibaba.citrus.service.pipeline.Valve;
 import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
- * ¶Ô<code>Pipeline</code>µÄÊµÏÖ¡£
+ * å¯¹<code>Pipeline</code>çš„å®žçŽ°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -87,7 +87,7 @@ public class PipelineImpl extends AbstractService<Pipeline> implements Pipeline 
     }
 
     /**
-     * ÊµÏÖ<code>PipelineContext</code>¡£
+     * å®žçŽ°<code>PipelineContext</code>ã€‚
      */
     private final class PipelineContextImpl implements PipelineContext, PipelineInvocationHandle {
         private final Logger log = getLogger();

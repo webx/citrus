@@ -61,7 +61,7 @@ public class ServletUtilTests implements Cloneable {
     public static Collection<Object[]> data() {
         List<Object[]> data = createLinkedList();
 
-        // ǰ׺ӳ�䣬pathInfo��Ϊ��
+        // 前缀映射，pathInfo不为空
         add(data, true, "/turbine", "/aaa/bbb", //
                 "/turbine/aaa/bbb", "http://localhost:8080/myapp", //
                 "/aaa/bbb", "http://localhost:8080/myapp/turbine", //
@@ -82,7 +82,7 @@ public class ServletUtilTests implements Cloneable {
                 "/", "http://localhost:8080/myapp", //
                 "http://localhost:8080/myapp/");
 
-        // ǰ׺ӳ�䣬��pathInfoΪ��
+        // 前缀映射，但pathInfo为空
         add(data, true, "/turbine", null, //
                 "/turbine", "http://localhost:8080/myapp", //
                 "", "http://localhost:8080/myapp/turbine", //
@@ -108,7 +108,7 @@ public class ServletUtilTests implements Cloneable {
                 "", "http://localhost:8080/myapp/hello.world/turbine", //
                 "http://localhost:8080/myapp/hello.world/turbine/");
 
-        // ��׺ӳ��
+        // 后缀映射
         add(data, false, "/aaa/bbb.htm", null, //
                 "/aaa/bbb.htm", "http://localhost:8080/myapp", //
                 "/aaa/bbb.htm", "http://localhost:8080/myapp", //

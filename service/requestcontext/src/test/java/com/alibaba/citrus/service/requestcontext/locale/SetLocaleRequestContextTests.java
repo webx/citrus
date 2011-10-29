@@ -31,7 +31,7 @@ import com.alibaba.citrus.util.i18n.LocaleUtil;
 import com.meterware.httpunit.HttpUnitUtils;
 
 /**
- * ²âÊÔ<code>SetLocaleRequestContext</code>¡£
+ * æµ‹è¯•<code>SetLocaleRequestContext</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -51,7 +51,7 @@ public class SetLocaleRequestContextTests extends AbstractRequestContextsTests<S
 
     @After
     public void dispose() {
-        // È·±£sessionÃ»ÓÐÆô¶¯
+        // ç¡®ä¿sessionæ²¡æœ‰å¯åŠ¨
         if (!useSession) {
             assertFalse("sessionCreated", ((MyHttpRequest) request).isSessionCreated());
         }
@@ -59,7 +59,7 @@ public class SetLocaleRequestContextTests extends AbstractRequestContextsTests<S
 
     @Test
     public void setContentTypeThenSetCharset() throws Exception {
-        // Ä¬ÈÏÎªutf8
+        // é»˜è®¤ä¸ºutf8
         newResponse.setContentType("text/plain");
         assertEquals("text/plain; charset=" + CHARSET_DEFAULT, requestContext.getResponseContentType());
         assertEquals("UTF-8", newResponse.getCharacterEncoding());
@@ -74,7 +74,7 @@ public class SetLocaleRequestContextTests extends AbstractRequestContextsTests<S
 
     @Test
     public void setCharsetThenSetContentType() throws Exception {
-        // ÔÚÃ»ÉèÖÃcontent typeÖ®Ç°£¬charsetÁ¢¼´ÉúÐ§£¨servlet 2.4£©
+        // åœ¨æ²¡è®¾ç½®content typeä¹‹å‰ï¼Œcharsetç«‹å³ç”Ÿæ•ˆï¼ˆservlet 2.4ï¼‰
         requestContext.setResponseCharacterEncoding("GBK");
         assertEquals(null, requestContext.getResponseContentType());
         assertEquals("GBK", newResponse.getCharacterEncoding());
@@ -145,7 +145,7 @@ public class SetLocaleRequestContextTests extends AbstractRequestContextsTests<S
         invokeNoopServlet("/servlet?_lang=zh_HK:Big5");
         initRequestContext();
 
-        assertEquals("UTF-8", request.getCharacterEncoding()); // ÊäÈëcharsetÈÔ°´ÇÐ»»Ç°µÄÎª×¼
+        assertEquals("UTF-8", request.getCharacterEncoding()); // è¾“å…¥charsetä»æŒ‰åˆ‡æ¢å‰çš„ä¸ºå‡†
         assertEquals("Big5", response.getCharacterEncoding());
 
         assertEquals("zh_HK:Big5", LocaleUtil.getContext().toString());
@@ -153,7 +153,7 @@ public class SetLocaleRequestContextTests extends AbstractRequestContextsTests<S
 
         commitToClient(); // commit response to client
 
-        // Õý³£·ÃÎÊ£ºzh_HK:Big5±»¼ÇÔÚsessionÀï
+        // æ­£å¸¸è®¿é—®ï¼šzh_HK:Big5è¢«è®°åœ¨sessioné‡Œ
         invokeNoopServlet("/servlet");
         initRequestContext();
 
@@ -165,7 +165,7 @@ public class SetLocaleRequestContextTests extends AbstractRequestContextsTests<S
 
         commitToClient(); // commit response to client
 
-        // »Ö¸´Ä¬ÈÏÖµ£ºzh_HK:Big5 -> zh_CN:UTF-8
+        // æ¢å¤é»˜è®¤å€¼ï¼šzh_HK:Big5 -> zh_CN:UTF-8
         invokeNoopServlet("/servlet?_lang=default");
         initRequestContext();
 
@@ -177,7 +177,7 @@ public class SetLocaleRequestContextTests extends AbstractRequestContextsTests<S
 
         commitToClient(); // commit response to client
 
-        // Õý³£·ÃÎÊ£ºzh_CN:UTF-8
+        // æ­£å¸¸è®¿é—®ï¼šzh_CN:UTF-8
         invokeNoopServlet("/servlet");
         initRequestContext();
 

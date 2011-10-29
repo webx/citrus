@@ -24,7 +24,7 @@ import static com.alibaba.citrus.util.regex.ClassNameWildcardCompiler.*;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ÓÃÀ´Ë÷ÒıÒ»¸ömoduleµÄkey¡£
+ * ç”¨æ¥ç´¢å¼•ä¸€ä¸ªmoduleçš„keyã€‚
  * 
  * @author Michael Zhou
  */
@@ -46,7 +46,7 @@ public final class ModuleKey {
     }
 
     /**
-     * ¹æ¸ñ»¯moduleÃû³Æ£¬½«Ö®×ª»»³É·ûºÏjavaÀàÃüÃû¹æ·¶µÄĞÎÊ½£¬ ÀıÈç£º<code>member.edit</code>½«×ª»»³É
+     * è§„æ ¼åŒ–moduleåç§°ï¼Œå°†ä¹‹è½¬æ¢æˆç¬¦åˆjavaç±»å‘½åè§„èŒƒçš„å½¢å¼ï¼Œ ä¾‹å¦‚ï¼š<code>member.edit</code>å°†è½¬æ¢æˆ
      * <code>member.Edit</code>
      */
     private String normalizeModuleName(String moduleName) {

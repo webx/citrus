@@ -114,7 +114,7 @@ public abstract class AbstractURIBrokerFeaturesTests<B extends URIBroker> {
         // default is no parent
         assertNull(b0.getParent());
 
-        // not a superclass - Ò²Ğí¿É£¬µ«Ö»ÓĞ¹²Í¬µÄ¸¸Àà²¿·ÖÊı¾İ±»¼Ì³Ğ
+        // not a superclass - ä¹Ÿè®¸å¯ï¼Œä½†åªæœ‰å…±åŒçš„çˆ¶ç±»éƒ¨åˆ†æ•°æ®è¢«ç»§æ‰¿
         b2.setParent(b1);
         assertSame(b1, b2.getParent());
 
@@ -223,7 +223,7 @@ public abstract class AbstractURIBrokerFeaturesTests<B extends URIBroker> {
     }
 
     /**
-     * init broker£¬brokerµÄÄÚÈİÎª¿Õ¡£
+     * init brokerï¼Œbrokerçš„å†…å®¹ä¸ºç©ºã€‚
      */
     @Test
     public final void init_broker_nonOverride() {
@@ -239,7 +239,7 @@ public abstract class AbstractURIBrokerFeaturesTests<B extends URIBroker> {
     }
 
     /**
-     * init broker£¬brokerÓĞÄÚÈİ¡£
+     * init brokerï¼Œbrokeræœ‰å†…å®¹ã€‚
      */
     @Test
     public final void init_broker_override() {
@@ -274,7 +274,7 @@ public abstract class AbstractURIBrokerFeaturesTests<B extends URIBroker> {
         assertBroker(broker);
 
         broker.reset();
-        assertParentBroker(broker); // µÈÍ¬ÓÚparent
+        assertParentBroker(broker); // ç­‰åŒäºparent
     }
 
     protected void assertAfterReset_noParent(B broker) {
@@ -335,27 +335,27 @@ public abstract class AbstractURIBrokerFeaturesTests<B extends URIBroker> {
 
         // broker, autoReset == true
         broker = (B) parent.fork();
-        assertFalse(broker.isRequestAware()); // requestºÍrequestAware±»¸´ÖÆ
+        assertFalse(broker.isRequestAware()); // requestå’ŒrequestAwareè¢«å¤åˆ¶
         assertSame(request, getFieldValue(broker, "request", HttpServletRequest.class));
         assertTrue(broker.isAutoReset());
-        assertSame(parent, broker.getParent()); // ÒòÎªparent.autoResetÎªfalse£¬ËùÒÔ¿É×÷Îªfork½á¹ûµÄparent
+        assertSame(parent, broker.getParent()); // å› ä¸ºparent.autoResetä¸ºfalseï¼Œæ‰€ä»¥å¯ä½œä¸ºforkç»“æœçš„parent
 
-        assertParentBroker(broker); // ´ËÊ±brokerºÍparentÊÇÄÚÈİÏàÍ¬µÄ
+        assertParentBroker(broker); // æ­¤æ—¶brokerå’Œparentæ˜¯å†…å®¹ç›¸åŒçš„
 
         setupBroker(broker);
-        assertBroker(broker); // ´ËÊ±brokerÄÚÈİ±»Ìí¼Ó
+        assertBroker(broker); // æ­¤æ—¶brokerå†…å®¹è¢«æ·»åŠ 
 
         // newBroker = broker.fork(), autoReset == true
-        // ½«ÔÚÄÚ²¿forkÒ»¸öĞÂµÄautoResetÎªfalseµÄparent
+        // å°†åœ¨å†…éƒ¨forkä¸€ä¸ªæ–°çš„autoResetä¸ºfalseçš„parent
         B newBroker = (B) broker.fork();
-        assertFalse(newBroker.isRequestAware()); // requestºÍrequestAware±»¸´ÖÆ
+        assertFalse(newBroker.isRequestAware()); // requestå’ŒrequestAwareè¢«å¤åˆ¶
         assertSame(request, getFieldValue(newBroker, "request", HttpServletRequest.class));
         assertTrue(newBroker.isAutoReset());
-        assertNotSame(broker, newBroker.getParent()); // ÒòÎªbroker.autoResetÎªtrue£¬ËùÒÔ±ØĞëforkÒÔºó²ÅÄÜ×÷ÎªĞÂbrokerµÄparent
+        assertNotSame(broker, newBroker.getParent()); // å› ä¸ºbroker.autoResetä¸ºtrueï¼Œæ‰€ä»¥å¿…é¡»forkä»¥åæ‰èƒ½ä½œä¸ºæ–°brokerçš„parent
 
-        assertParentBroker(broker); // forkÒÔºó£¬broker±»reset£¬ÈçÍ¬renderÒ»Ñù
-        assertBroker((B) newBroker.getParent()); // newBrokerµÄÖ±½ÓparentµÄÖµ£¬µÈÍ¬ÓÚresetÖ®Ç°µÄbroker
-        assertFalse(newBroker.getParent().isAutoReset()); // newBrokerµÄÖ±½ÓparentµÄautoReset==false
+        assertParentBroker(broker); // forkä»¥åï¼Œbrokerè¢«resetï¼Œå¦‚åŒrenderä¸€æ ·
+        assertBroker((B) newBroker.getParent()); // newBrokerçš„ç›´æ¥parentçš„å€¼ï¼Œç­‰åŒäºresetä¹‹å‰çš„broker
+        assertFalse(newBroker.getParent().isAutoReset()); // newBrokerçš„ç›´æ¥parentçš„autoReset==false
     }
 
     @Test
@@ -371,12 +371,12 @@ public abstract class AbstractURIBrokerFeaturesTests<B extends URIBroker> {
         broker.init();
 
         assertFalse(broker.isAutoReset());
-        assertEquals(broker.render(), broker.render()); // µ±autoreset=falseÊ±£¬render²»»áµ÷ÓÃinterceptors
+        assertEquals(broker.render(), broker.render()); // å½“autoreset=falseæ—¶ï¼Œrenderä¸ä¼šè°ƒç”¨interceptors
 
         verify(i1, i2, i3);
         reset(i1, i2, i3);
 
-        // broker.resetÒÔºó£¬ËùÓĞµÄinterceptors½«±»ÖØĞÂµ÷ÓÃ
+        // broker.resetä»¥åï¼Œæ‰€æœ‰çš„interceptorså°†è¢«é‡æ–°è°ƒç”¨
         broker.reset();
         setupBroker(broker);
         broker = (B) broker.fork();
@@ -406,18 +406,18 @@ public abstract class AbstractURIBrokerFeaturesTests<B extends URIBroker> {
         setupBroker(broker);
         assertTrue(broker.isAutoReset());
 
-        // ¶ÔÓÚautoReset=trueµÄbroker
+        // å¯¹äºautoReset=trueçš„broker
         assertBroker(broker);
-        broker.toString(); // toString²»»áreset
+        broker.toString(); // toStringä¸ä¼šreset
         assertBroker(broker);
-        broker.render(); // render»áreset
+        broker.render(); // renderä¼šreset
         assertParentBroker(broker);
 
-        // ¶ÔÓÚautoReset=falseµÄbroker
+        // å¯¹äºautoReset=falseçš„broker
         assertParentBroker(parent);
-        parent.toString(); // toString²»»áreset
+        parent.toString(); // toStringä¸ä¼šreset
         assertParentBroker(parent);
-        parent.render(); // renderÒ²²»»áreset
+        parent.render(); // renderä¹Ÿä¸ä¼šreset
         assertParentBroker(parent);
     }
 

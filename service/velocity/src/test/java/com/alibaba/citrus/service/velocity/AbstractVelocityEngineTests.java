@@ -48,8 +48,8 @@ public abstract class AbstractVelocityEngineTests {
     }
 
     protected static ApplicationContext createFactory(String configFile, boolean contextResourceSupport) {
-        // Èç¹û!contextResourceSupport£¬Ôòappcontext·µ»ØµÄresource½«±»×ª»»³É·ÇContextResource¶ÔÏó£¬
-        // ÓÃÓÚ²âÊÔpreloaded resource loader¡£
+        // å¦‚æœ!contextResourceSupportï¼Œåˆ™appcontextè¿”å›çš„resourceå°†è¢«è½¬æ¢æˆéContextResourceå¯¹è±¡ï¼Œ
+        // ç”¨äºæµ‹è¯•preloaded resource loaderã€‚
         if (contextResourceSupport) {
             return new ResourceLoadingXmlApplicationContext(new FileSystemResource(new File(srcdir, configFile)));
         } else {

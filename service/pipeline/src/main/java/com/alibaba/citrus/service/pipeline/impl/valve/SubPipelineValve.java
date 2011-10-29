@@ -30,7 +30,7 @@ import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser
 import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
- * ÓÃÀ´Ö´ĞĞÒ»¸ö×Ópipeline¡£
+ * ç”¨æ¥æ‰§è¡Œä¸€ä¸ªå­pipelineã€‚
  * 
  * @author Michael Zhou
  */

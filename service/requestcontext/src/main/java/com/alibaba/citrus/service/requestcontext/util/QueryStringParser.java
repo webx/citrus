@@ -30,7 +30,7 @@ import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.util.i18n.LocaleUtil;
 
 /**
- * ½âÎöºÍ×é×°query string¡£
+ * è§£æå’Œç»„è£…query stringã€‚
  * 
  * @author Michael Zhou
  */
@@ -68,7 +68,7 @@ public class QueryStringParser {
     }
 
     /**
-     * ÉèÖÃÓÃÀ´Ìæ´ú¡°=¡±µÄ×Ö·û¡£
+     * è®¾ç½®ç”¨æ¥æ›¿ä»£â€œ=â€çš„å­—ç¬¦ã€‚
      */
     public QueryStringParser setEqualSign(String equalSign) {
         this.equalSign = defaultIfNull(equalSign, "=");
@@ -76,7 +76,7 @@ public class QueryStringParser {
     }
 
     /**
-     * ÉèÖÃÓÃÀ´Ìæ´ú¡°&¡±µÄ×Ö·û¡£
+     * è®¾ç½®ç”¨æ¥æ›¿ä»£â€œ&â€çš„å­—ç¬¦ã€‚
      */
     public QueryStringParser setAndSign(String andSign) {
         this.andSign = defaultIfNull(andSign, "&");
@@ -115,7 +115,7 @@ public class QueryStringParser {
     }
 
     /**
-     * ½âÎöquery string¡£
+     * è§£æquery stringã€‚
      */
     public void parse(String queryString) {
         queryString = trimToNull(queryString);

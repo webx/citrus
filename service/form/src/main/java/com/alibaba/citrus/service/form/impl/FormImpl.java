@@ -44,9 +44,9 @@ import com.alibaba.citrus.service.form.configuration.GroupConfig;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ´ú±íÒ»¸öÓÃ»§Ìá½»µÄformĞÅÏ¢¡£
+ * ä»£è¡¨ä¸€ä¸ªç”¨æˆ·æäº¤çš„formä¿¡æ¯ã€‚
  * <p>
- * ×¢Òâ£ºform¶ÔÏó²»ÊÇÏß³Ì°²È«µÄ£¬²»ÄÜ±»¶àÏß³Ì¹²Ïí¡£
+ * æ³¨æ„ï¼šformå¯¹è±¡ä¸æ˜¯çº¿ç¨‹å®‰å…¨çš„ï¼Œä¸èƒ½è¢«å¤šçº¿ç¨‹å…±äº«ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -63,7 +63,7 @@ public class FormImpl implements Form {
     private SimpleTypeConverter typeConverter;
 
     /**
-     * ´´½¨Ò»¸öĞÂform¡£
+     * åˆ›å»ºä¸€ä¸ªæ–°formã€‚
      */
     public FormImpl(FormConfig formConfig, String formKey, boolean forcePostOnly) {
         this.formConfig = formConfig;
@@ -73,14 +73,14 @@ public class FormImpl implements Form {
     }
 
     /**
-     * È¡µÃformµÄÅäÖÃĞÅÏ¢¡£
+     * å–å¾—formçš„é…ç½®ä¿¡æ¯ã€‚
      */
     public FormConfig getFormConfig() {
         return formConfig;
     }
 
     /**
-     * È¡µÃÓÃÓÚ×ª»»ÀàĞÍµÄconverter¡£
+     * å–å¾—ç”¨äºè½¬æ¢ç±»å‹çš„converterã€‚
      */
     public TypeConverter getTypeConverter() {
         if (typeConverter == null) {
@@ -92,47 +92,47 @@ public class FormImpl implements Form {
     }
 
     /**
-     * ÊÇ·ñÇ¿ÖÆÎªÖ»½ÓÊÜpost±íµ¥¡£
+     * æ˜¯å¦å¼ºåˆ¶ä¸ºåªæ¥å—postè¡¨å•ã€‚
      */
     public boolean isForcePostOnly() {
         return forcePostOnly;
     }
 
     /**
-     * ÅĞ¶¨formÊÇ·ñÍ¨¹ıÑéÖ¤¡£
+     * åˆ¤å®šformæ˜¯å¦é€šè¿‡éªŒè¯ã€‚
      */
     public boolean isValid() {
         return valid;
     }
 
     /**
-     * ÉèÖÃformµÄºÏ·¨ĞÔ¡£¸ÃÖµ½«±»µş¼Óµ½µ±Ç°µÄ×´Ì¬ÖĞ£º<code>this.valid &= valid</code>
+     * è®¾ç½®formçš„åˆæ³•æ€§ã€‚è¯¥å€¼å°†è¢«å åŠ åˆ°å½“å‰çš„çŠ¶æ€ä¸­ï¼š<code>this.valid &= valid</code>
      */
     protected void setValid(boolean valid) {
         this.valid &= valid;
     }
 
     /**
-     * ³õÊ¼»¯form£¬½«form»Ö¸´³É¡°Î´ÑéÖ¤¡±×´Ì¬¡£Ëæºó£¬µ÷ÓÃÕß¿ÉÒÔÖØĞÂÉèÖÃÖµ²¢ÊÖ¹¤ÑéÖ¤±íµ¥¡£
+     * åˆå§‹åŒ–formï¼Œå°†formæ¢å¤æˆâ€œæœªéªŒè¯â€çŠ¶æ€ã€‚éšåï¼Œè°ƒç”¨è€…å¯ä»¥é‡æ–°è®¾ç½®å€¼å¹¶æ‰‹å·¥éªŒè¯è¡¨å•ã€‚
      */
     public void init() {
         init(null);
     }
 
     /**
-     * ÓÃrequest³õÊ¼»¯form¡£¼ÙÈçrequestÎª<code>null</code>£¬Ôò½«formÉèÖÃ³É¡°Î´ÑéÖ¤¡±×´Ì¬£¬·ñÔò£¬ÑéÖ¤±íµ¥¡£
+     * ç”¨requeståˆå§‹åŒ–formã€‚å‡å¦‚requestä¸º<code>null</code>ï¼Œåˆ™å°†formè®¾ç½®æˆâ€œæœªéªŒè¯â€çŠ¶æ€ï¼Œå¦åˆ™ï¼ŒéªŒè¯è¡¨å•ã€‚
      */
     public void init(HttpServletRequest request) {
         valid = true;
 
-        // Çå³ıËùÓĞgroup
+        // æ¸…é™¤æ‰€æœ‰group
         groups.clear();
 
         if (request != null) {
             Set<String> ignoredGroups = createHashSet();
             boolean logStarted = false;
 
-            // É¨ÃèÓÃ»§submit¹ıÀ´µÄËùÓĞform²ÎÊı£¬ÕÒµ½·ûºÏ¸ñÊ½µÄkey£ºformKey.groupKey.instanceKey.fieldKey
+            // æ‰«æç”¨æˆ·submitè¿‡æ¥çš„æ‰€æœ‰formå‚æ•°ï¼Œæ‰¾åˆ°ç¬¦åˆæ ¼å¼çš„keyï¼šformKey.groupKey.instanceKey.fieldKey
             @SuppressWarnings("unchecked")
             Enumeration<String> e = request.getParameterNames();
 
@@ -140,7 +140,7 @@ public class FormImpl implements Form {
                 String key = e.nextElement();
                 String[] keyInfo = parseParameterKey(key);
 
-                // keyInfoÎªnull±íÊ¾¸Ã²ÎÊı²»ÊÇ´Óform serviceÉú³ÉµÄ£¬ºöÂÔÖ®
+                // keyInfoä¸ºnullè¡¨ç¤ºè¯¥å‚æ•°ä¸æ˜¯ä»form serviceç”Ÿæˆçš„ï¼Œå¿½ç•¥ä¹‹
                 if (keyInfo != null && isEquals(keyInfo[0], formKey)) {
                     if (!logStarted) {
                         logStarted = true;
@@ -151,8 +151,8 @@ public class FormImpl implements Form {
                     String instanceKey = keyInfo[2];
                     String groupInstanceKey = getGroupInstanceKey(groupKey, instanceKey);
 
-                    // ÏÂÃæ´ÓrequestÖĞ³õÊ¼»¯ËùÓĞgroup instance£¬
-                    // ²¢È·±£²»»áÖØ¸´³õÊ¼»¯Í¬Ò»¸ögroup instance¡£
+                    // ä¸‹é¢ä»requestä¸­åˆå§‹åŒ–æ‰€æœ‰group instanceï¼Œ
+                    // å¹¶ç¡®ä¿ä¸ä¼šé‡å¤åˆå§‹åŒ–åŒä¸€ä¸ªgroup instanceã€‚
                     if (!groups.containsKey(groupInstanceKey) && !ignoredGroups.contains(groupInstanceKey)) {
                         GroupConfig groupConfig = getFormConfig().getGroupConfigByKey(groupKey);
 
@@ -186,8 +186,8 @@ public class FormImpl implements Form {
     }
 
     /**
-     * ½âÎö´ÓURLÖĞ´«¹ıÀ´µÄkey£¬Èç¹û½âÎö³É¹¦£¬Ôò·µ»ØÏàÓ¦µÄgroupKey£¬instanceKeyºÍfieldKey£¬·ñÔò·µ»Ø
-     * <code>null</code>¡£
+     * è§£æä»URLä¸­ä¼ è¿‡æ¥çš„keyï¼Œå¦‚æœè§£ææˆåŠŸï¼Œåˆ™è¿”å›ç›¸åº”çš„groupKeyï¼ŒinstanceKeyå’ŒfieldKeyï¼Œå¦åˆ™è¿”å›
+     * <code>null</code>ã€‚
      */
     private String[] parseParameterKey(String paramKey) {
         if (!paramKey.startsWith(FORM_KEY_PREFIX)) {
@@ -204,14 +204,14 @@ public class FormImpl implements Form {
     }
 
     /**
-     * È¡µÃgroup instanceµÄkey£¬ÓÃÀ´Ë÷ÒıËùÓĞgroup instance¡£
+     * å–å¾—group instanceçš„keyï¼Œç”¨æ¥ç´¢å¼•æ‰€æœ‰group instanceã€‚
      */
     private String getGroupInstanceKey(String groupKey, String instanceKey) {
         return groupKey + '.' + instanceKey;
     }
 
     /**
-     * ÑéÖ¤£¨»òÖØĞÂÑéÖ¤£©µ±Ç°µÄËùÓĞgroup instance¡£
+     * éªŒè¯ï¼ˆæˆ–é‡æ–°éªŒè¯ï¼‰å½“å‰çš„æ‰€æœ‰group instanceã€‚
      */
     public void validate() {
         valid = true;
@@ -222,21 +222,21 @@ public class FormImpl implements Form {
     }
 
     /**
-     * È¡µÃ´ú±íformµÄkey¡£
+     * å–å¾—ä»£è¡¨formçš„keyã€‚
      */
     public String getKey() {
         return formKey;
     }
 
     /**
-     * È¡µÃËùÓĞgroupµÄÁĞ±í¡£
+     * å–å¾—æ‰€æœ‰groupçš„åˆ—è¡¨ã€‚
      */
     public Collection<Group> getGroups() {
         return groupList;
     }
 
     /**
-     * È¡µÃËùÓĞÖ¸¶¨Ãû³ÆµÄgroupµÄÁĞ±í¡£groupÃû³Æ´óĞ¡Ğ´²»Ãô¸Ğ¡£
+     * å–å¾—æ‰€æœ‰æŒ‡å®šåç§°çš„groupçš„åˆ—è¡¨ã€‚groupåç§°å¤§å°å†™ä¸æ•æ„Ÿã€‚
      */
     public Collection<Group> getGroups(String groupName) {
         List<Group> resultGroups = createArrayList(groups.size());
@@ -251,22 +251,22 @@ public class FormImpl implements Form {
     }
 
     /**
-     * È¡µÃÄ¬ÈÏµÄgroup instance¡£Èç¹û¸Ãgroup instance²»´æÔÚ£¬Ôò´´½¨Ö®¡£GroupÃû³Æ´óĞ¡Ğ´²»Ãô¸Ğ¡£
+     * å–å¾—é»˜è®¤çš„group instanceã€‚å¦‚æœè¯¥group instanceä¸å­˜åœ¨ï¼Œåˆ™åˆ›å»ºä¹‹ã€‚Groupåç§°å¤§å°å†™ä¸æ•æ„Ÿã€‚
      */
     public Group getGroup(String groupName) {
         return getGroup(groupName, null, true);
     }
 
     /**
-     * È¡µÃgroup instance¡£Èç¹û¸Ãgroup instance²»´æÔÚ£¬Ôò´´½¨Ö®¡£GroupÃû³Æ´óĞ¡Ğ´²»Ãô¸Ğ¡£
+     * å–å¾—group instanceã€‚å¦‚æœè¯¥group instanceä¸å­˜åœ¨ï¼Œåˆ™åˆ›å»ºä¹‹ã€‚Groupåç§°å¤§å°å†™ä¸æ•æ„Ÿã€‚
      */
     public Group getGroup(String groupName, String instanceKey) {
         return getGroup(groupName, instanceKey, true);
     }
 
     /**
-     * È¡µÃgroup instance¡£Èç¹û¸Ãgroup instance²»´æÔÚ£¬²¢ÇÒ<code>create == true</code>
-     * £¬Ôò´´½¨Ö®¡£GroupÃû³Æ´óĞ¡Ğ´²»Ãô¸Ğ¡£
+     * å–å¾—group instanceã€‚å¦‚æœè¯¥group instanceä¸å­˜åœ¨ï¼Œå¹¶ä¸”<code>create == true</code>
+     * ï¼Œåˆ™åˆ›å»ºä¹‹ã€‚Groupåç§°å¤§å°å†™ä¸æ•æ„Ÿã€‚
      */
     public Group getGroup(String groupName, String instanceKey, boolean create) {
         GroupConfig groupConfig = getFormConfig().getGroupConfig(groupName);
@@ -290,14 +290,14 @@ public class FormImpl implements Form {
     }
 
     /**
-     * È¡µÃform¼¶±ğµÄ´íÎóĞÅÏ¢±í´ïÊ½µÄcontext£¬°üº¬³£ÓÃĞ¡¹¤¾ßºÍËùÓĞÏµÍ³ÊôĞÔ¡£
+     * å–å¾—formçº§åˆ«çš„é”™è¯¯ä¿¡æ¯è¡¨è¾¾å¼çš„contextï¼ŒåŒ…å«å¸¸ç”¨å°å·¥å…·å’Œæ‰€æœ‰ç³»ç»Ÿå±æ€§ã€‚
      */
     protected MessageContext getMessageContext() {
         return messageContext;
     }
 
     /**
-     * ×ª»»³ÉÒ×ÓÚÔÄ¶ÁµÄ×Ö·û´®¡£
+     * è½¬æ¢æˆæ˜“äºé˜…è¯»çš„å­—ç¬¦ä¸²ã€‚
      */
     @Override
     public String toString() {

@@ -33,7 +33,7 @@ import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 /**
- * ½«Ò»¸ö¼òµ¥ÀàĞÍ±àÂë³É×Ö·û´®£¬»ò·´Ö®¡£Ö§³Ö¼ÓÃÜ¡£
+ * å°†ä¸€ä¸ªç®€å•ç±»å‹ç¼–ç æˆå­—ç¬¦ä¸²ï¼Œæˆ–åä¹‹ã€‚æ”¯æŒåŠ å¯†ã€‚
  * 
  * @author Michael Zhou
  */
@@ -50,7 +50,7 @@ public class SimpleValueEncoder extends AbstractSessionValueEncoder {
     }
 
     /**
-     * ¼òµ¥Öµ²»Ñ¹Ëõ£¬È¡µÃµÄ×Ö·û´®½Ï¶Ì¡£
+     * ç®€å•å€¼ä¸å‹ç¼©ï¼Œå–å¾—çš„å­—ç¬¦ä¸²è¾ƒçŸ­ã€‚
      */
     @Override
     protected boolean doCompress() {

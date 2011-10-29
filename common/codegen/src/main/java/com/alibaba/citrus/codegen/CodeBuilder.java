@@ -21,7 +21,7 @@ import com.alibaba.citrus.asm.MethodVisitor;
 import com.alibaba.citrus.asm.commons.GeneratorAdapter;
 
 /**
- * ÓÃÀ´Éú³Émethod body´úÂëµÄ¹¤¾ß¡£
+ * ç”¨æ¥ç”Ÿæˆmethod bodyä»£ç çš„å·¥å…·ã€‚
  * 
  * @author Michael Zhou
  */
@@ -29,7 +29,7 @@ public class CodeBuilder extends GeneratorAdapter {
     private final MethodBuilder mb;
 
     /**
-     * ´´½¨<code>CodeBuilder</code>¡£
+     * åˆ›å»º<code>CodeBuilder</code>ã€‚
      */
     public CodeBuilder(MethodBuilder mb, MethodVisitor mv, int access, String name, String desc) {
         super(mv, access, name, desc);
@@ -38,14 +38,14 @@ public class CodeBuilder extends GeneratorAdapter {
     }
 
     /**
-     * È¡µÃµ±Ç°´úÂëËùÔÚ<code>MethodBuilder</code>¡£
+     * å–å¾—å½“å‰ä»£ç æ‰€åœ¨<code>MethodBuilder</code>ã€‚
      */
     public MethodBuilder getMethodBuilder() {
         return mb;
     }
 
     /**
-     * È¡µÃÓÃÀ´Éú³É´úÂëµÄ<code>MethodVisitor</code>¡£
+     * å–å¾—ç”¨æ¥ç”Ÿæˆä»£ç çš„<code>MethodVisitor</code>ã€‚
      */
     public MethodVisitor getMethodVisitor() {
         return mv;

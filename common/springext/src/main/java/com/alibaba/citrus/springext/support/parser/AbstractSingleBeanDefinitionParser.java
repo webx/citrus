@@ -22,7 +22,7 @@ import static com.alibaba.citrus.generictype.TypeInfoUtil.*;
 import org.w3c.dom.Element;
 
 /**
- * ¶¨ÒåÒ»¸öbean definition£¬¸ù¾İgeneric typeÈ¡µÃbean class¡£
+ * å®šä¹‰ä¸€ä¸ªbean definitionï¼Œæ ¹æ®generic typeå–å¾—bean classã€‚
  * 
  * @author Michael Zhou
  */

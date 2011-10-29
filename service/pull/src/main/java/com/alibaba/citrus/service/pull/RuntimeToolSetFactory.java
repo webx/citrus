@@ -18,14 +18,14 @@
 package com.alibaba.citrus.service.pull;
 
 /**
- * ����һ��pull tools�Ĺ�����
+ * 创建一组pull tools的工厂。
  * <p>
- * ��������������singleton����ȷ�����ܡ����Ǻ�<code>ToolSetFactory</code>��ͬ���ǣ�
+ * 工厂本身必须是singleton，以确保性能。但是和<code>ToolSetFactory</code>不同的是，
  * <code>RuntimeToolSetFactory.getToolNames()</code>
- * ����������ϵͳ��ʼ��ʱ�����õģ�������ÿ�����������౻����һ�Ρ�
+ * 方法不是在系统初始化时被调用的，而是在每个请求中至多被调用一次。
  * </p>
  * <p>
- * �����͵Ķ�������ܲ���<code>ToolSetFactory</code>���뾡��ʹ�ú��ߡ�
+ * 该类型的对象的性能不如<code>ToolSetFactory</code>，请尽量使用后者。
  * </p>
  * 
  * @see ToolFactory
@@ -34,34 +34,34 @@ package com.alibaba.citrus.service.pull;
  */
 public interface RuntimeToolSetFactory {
     /**
-     * ȡ��toolsetʵ����
+     * 取得toolset实例。
      * <p>
-     * �÷�����ÿ������ʱ�����౻����һ�Ρ�
+     * 该方法在每次请求时，至多被调用一次。
      * </p>
      * <p>
-     * �緵��<code>null</code>�����ʾ��tool�����á�
+     * 如返回<code>null</code>，则表示该tool不可用。
      * </p>
      * <p>
-     * ע�⣺ÿ�ε���<strong>����</strong>���ز�ͬ�Ķ���
+     * 注意：每次调用<strong>必须</strong>返回不同的对象。
      * </p>
      */
     Object createToolSet() throws Exception;
 
     /**
-     * ȡ��tools�����ơ�
+     * 取得tools的名称。
      * <p>
-     * ��ÿ�������У��÷������ᱻ��������һ�Ρ�
+     * 在每个请求中，该方法都会被调用至多一次。
      * </p>
      */
     Iterable<String> getToolNames(Object toolSet);
 
     /**
-     * ȡ��ָ�����Ƶ�toolʵ����
+     * 取得指定名称的tool实例。
      * <p>
-     * ���ڷ�singleton���ͣ��÷�����ÿ������ʱ��ÿ��<code>name</code>���౻����һ�Ρ�
+     * 对于非singleton类型，该方法在每次请求时，每个<code>name</code>至多被调用一次。
      * </p>
      * <p>
-     * �緵��<code>null</code>�����ʾ��tool�����á�
+     * 如返回<code>null</code>，则表示该tool不可用。
      * </p>
      */
     Object createTool(Object toolSet, String name) throws Exception;

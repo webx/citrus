@@ -33,10 +33,10 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * Õâ¸öÀà°ü×°ÁË<code>java.mail.Session</code>£¬ÒÔ¸üÓÑºÃµÄ·½Ê½À´Ö§³Ömail transportºÍstore¡£
+ * è¿™ä¸ªç±»åŒ…è£…äº†<code>java.mail.Session</code>ï¼Œä»¥æ›´å‹å¥½çš„æ–¹å¼æ¥æ”¯æŒmail transportå’Œstoreã€‚
  * <p>
- * ×¢Òâ£¬<code>java.mail.Session</code>ÊÇÔÚ¶à´Îµ÷ÓÃºÍ¶à¸öÏß³ÌÖĞ¹²ÏíµÄ£¬¶ø<code>MailSession</code>
- * ±»Éè¼Æ³ÉÃ¿´Îµ÷ÓÃ¶¼´´½¨ĞÂµÄ¡£
+ * æ³¨æ„ï¼Œ<code>java.mail.Session</code>æ˜¯åœ¨å¤šæ¬¡è°ƒç”¨å’Œå¤šä¸ªçº¿ç¨‹ä¸­å…±äº«çš„ï¼Œè€Œ<code>MailSession</code>
+ * è¢«è®¾è®¡æˆæ¯æ¬¡è°ƒç”¨éƒ½åˆ›å»ºæ–°çš„ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -53,17 +53,17 @@ public abstract class MailSession {
     private boolean defaultSession;
 
     /**
-     * ´´½¨Ò»¸ömail session¡£
+     * åˆ›å»ºä¸€ä¸ªmail sessionã€‚
      */
     public MailSession() {
     }
 
     /**
-     * ¸´ÖÆÒ»¸ömail session¡£
+     * å¤åˆ¶ä¸€ä¸ªmail sessionã€‚
      */
     public MailSession(MailSession session, Properties overrideProps) {
         this.mailService = session.mailService;
-        this.session = session.getSession(); // ×¢Òâ£¬´Ë·½·¨ÊÇsynchronized¡£
+        this.session = session.getSession(); // æ³¨æ„ï¼Œæ­¤æ–¹æ³•æ˜¯synchronizedã€‚
         this.host = session.host;
         this.port = session.port;
         this.user = session.user;
@@ -78,107 +78,107 @@ public abstract class MailSession {
                 String key = (String) element;
                 String value = overrideProps.getProperty(key);
 
-                // ×¢Òâ£¬Ö´ĞĞ´Ë·½·¨Ê±£¬Èç¹ûkey/valueºÍÔ­Öµ²»Í¬£¬session½«±»Çå¿Õ¡£
+                // æ³¨æ„ï¼Œæ‰§è¡Œæ­¤æ–¹æ³•æ—¶ï¼Œå¦‚æœkey/valueå’ŒåŸå€¼ä¸åŒï¼Œsessionå°†è¢«æ¸…ç©ºã€‚
                 setProperty(key, value, null);
             }
         }
     }
 
     /**
-     * È¡µÃ´´½¨¸ÃsessionµÄmail service¡£
+     * å–å¾—åˆ›å»ºè¯¥sessionçš„mail serviceã€‚
      */
     public MailService getMailService() {
         return mailService;
     }
 
     /**
-     * ÉèÖÃmail service¡£
+     * è®¾ç½®mail serviceã€‚
      */
     public void setMailService(MailService mailService) {
         this.mailService = mailService;
     }
 
     /**
-     * È¡µÃmail serverµÄ·şÎñÆ÷Ãû»òIPµØÖ·¡£
+     * å–å¾—mail serverçš„æœåŠ¡å™¨åæˆ–IPåœ°å€ã€‚
      */
     public String getHost() {
         return host;
     }
 
     /**
-     * ÉèÖÃmail serverµÄ·şÎñÆ÷Ãû»òIPµØÖ·¡£
+     * è®¾ç½®mail serverçš„æœåŠ¡å™¨åæˆ–IPåœ°å€ã€‚
      */
     public void setHost(String host) {
         this.host = trimToNull(host);
     }
 
     /**
-     * È¡µÃmail serverµÄ·şÎñÆ÷¶Ë¿Ú¡£
+     * å–å¾—mail serverçš„æœåŠ¡å™¨ç«¯å£ã€‚
      */
     public int getPort() {
         return port > 0 ? port : -1;
     }
 
     /**
-     * ÉèÖÃmail serverµÄ·şÎñÆ÷¶Ë¿Ú¡£
+     * è®¾ç½®mail serverçš„æœåŠ¡å™¨ç«¯å£ã€‚
      */
     public void setPort(int port) {
         this.port = port;
     }
 
     /**
-     * ÅĞ¶ÏÊÇ·ñĞèÒªÑéÖ¤¡£
+     * åˆ¤æ–­æ˜¯å¦éœ€è¦éªŒè¯ã€‚
      */
     public boolean useAuth() {
         return user != null;
     }
 
     /**
-     * È¡µÃmail serverµÄÑéÖ¤ÓÃ»§¡£
+     * å–å¾—mail serverçš„éªŒè¯ç”¨æˆ·ã€‚
      */
     public String getUser() {
         return user;
     }
 
     /**
-     * ÉèÖÃmail serverµÄÑéÖ¤ÓÃ»§¡£
+     * è®¾ç½®mail serverçš„éªŒè¯ç”¨æˆ·ã€‚
      */
     public void setUser(String user) {
         this.user = trimToNull(user);
     }
 
     /**
-     * È¡µÃmail serverµÄÑéÖ¤ÃÜÂë¡£
+     * å–å¾—mail serverçš„éªŒè¯å¯†ç ã€‚
      */
     public String getPassword() {
         return password;
     }
 
     /**
-     * ÉèÖÃmail serverµÄÑéÖ¤ÃÜÂë¡£
+     * è®¾ç½®mail serverçš„éªŒè¯å¯†ç ã€‚
      */
     public void setPassword(String password) {
         this.password = trimToNull(password);
     }
 
     /**
-     * ÊÇ·ñÊÇdebugÄ£Ê½¡£ÔÚ´ËÄ£Ê½ÏÂ£¬javamail»á´òÓ¡³ö¾ßÌåµÄĞÅÏ¢¡£
+     * æ˜¯å¦æ˜¯debugæ¨¡å¼ã€‚åœ¨æ­¤æ¨¡å¼ä¸‹ï¼Œjavamailä¼šæ‰“å°å‡ºå…·ä½“çš„ä¿¡æ¯ã€‚
      */
     public boolean isDebug() {
         return debug;
     }
 
     /**
-     * ÉèÖÃdebugÄ£Ê½¡£ÔÚ´ËÄ£Ê½ÏÂ£¬javamail»á´òÓ¡³ö¾ßÌåµÄĞÅÏ¢¡£
+     * è®¾ç½®debugæ¨¡å¼ã€‚åœ¨æ­¤æ¨¡å¼ä¸‹ï¼Œjavamailä¼šæ‰“å°å‡ºå…·ä½“çš„ä¿¡æ¯ã€‚
      */
     public void setDebug(boolean debug) {
         this.debug = debug;
     }
 
     /**
-     * ÊÇ·ñÎªÄ¬ÈÏµÄtransport»òstore¡£
+     * æ˜¯å¦ä¸ºé»˜è®¤çš„transportæˆ–storeã€‚
      * <p>
-     * ÔÚÒ»¸ö<code>MailService</code>ÖĞÖ»ÄÜÓĞÒ»¸öÄ¬ÈÏµÄtransportºÍÒ»¸öÄ¬ÈÏµÄstore¡£
+     * åœ¨ä¸€ä¸ª<code>MailService</code>ä¸­åªèƒ½æœ‰ä¸€ä¸ªé»˜è®¤çš„transportå’Œä¸€ä¸ªé»˜è®¤çš„storeã€‚
      * </p>
      */
     public boolean isDefault() {
@@ -186,9 +186,9 @@ public abstract class MailSession {
     }
 
     /**
-     * ÉèÖÃÎªÄ¬ÈÏµÄtransport»òstore¡£
+     * è®¾ç½®ä¸ºé»˜è®¤çš„transportæˆ–storeã€‚
      * <p>
-     * ÔÚÒ»¸ö<code>MailService</code>ÖĞÖ»ÄÜÓĞÒ»¸öÄ¬ÈÏµÄtransportºÍÒ»¸öÄ¬ÈÏµÄstore¡£
+     * åœ¨ä¸€ä¸ª<code>MailService</code>ä¸­åªèƒ½æœ‰ä¸€ä¸ªé»˜è®¤çš„transportå’Œä¸€ä¸ªé»˜è®¤çš„storeã€‚
      * </p>
      */
     public void setDefault(boolean defaultSession) {
@@ -196,7 +196,7 @@ public abstract class MailSession {
     }
 
     /**
-     * ÅúÁ¿ÉèÖÃÊôĞÔ¡£
+     * æ‰¹é‡è®¾ç½®å±æ€§ã€‚
      */
     public void setProperties(Map<String, String> props) {
         if (props != null) {
@@ -212,14 +212,14 @@ public abstract class MailSession {
     }
 
     /**
-     * ÉèÖÃsessionµÄÊôĞÔ£¬Èç¹ûÖµ±»¸Ä±äÁË£¬ÔòÇå³ısession¡£
+     * è®¾ç½®sessionçš„å±æ€§ï¼Œå¦‚æœå€¼è¢«æ”¹å˜äº†ï¼Œåˆ™æ¸…é™¤sessionã€‚
      */
     public void setProperty(String key, String value) {
         setProperty(key, value, null);
     }
 
     /**
-     * ÉèÖÃsessionµÄÊôĞÔ£¬Èç¹ûÖµ±»¸Ä±äÁË£¬ÔòÇå³ısession¡£
+     * è®¾ç½®sessionçš„å±æ€§ï¼Œå¦‚æœå€¼è¢«æ”¹å˜äº†ï¼Œåˆ™æ¸…é™¤sessionã€‚
      */
     protected final void setProperty(String key, String value, String defaultValue) {
         String currentValue = props.getProperty(key, defaultValue);
@@ -231,7 +231,7 @@ public abstract class MailSession {
     }
 
     /**
-     * È¡µÃsession properties¡£
+     * å–å¾—session propertiesã€‚
      */
     protected Properties getSessionProperties() {
         setProperty(MAIL_DEBUG, String.valueOf(isDebug()), "false");
@@ -239,13 +239,13 @@ public abstract class MailSession {
     }
 
     /**
-     * È¡µÃjavamail session¡£
+     * å–å¾—javamail sessionã€‚
      * <p>
-     * ´Ë·½·¨ÊÇÏß³Ì°²È«µÄ£¬ÓÈÆäÊÇÔÚ¸´ÖÆsessionµÄÊ±ºò¡£
+     * æ­¤æ–¹æ³•æ˜¯çº¿ç¨‹å®‰å…¨çš„ï¼Œå°¤å…¶æ˜¯åœ¨å¤åˆ¶sessionçš„æ—¶å€™ã€‚
      * </p>
      */
     protected synchronized Session getSession() {
-        // ×¢Òâ£¬ÔÚÖ´ĞĞ´Ë·½·¨Ê±£¬sessionÓĞ¿ÉÄÜ±»Çå¿Õ¡£
+        // æ³¨æ„ï¼Œåœ¨æ‰§è¡Œæ­¤æ–¹æ³•æ—¶ï¼Œsessionæœ‰å¯èƒ½è¢«æ¸…ç©ºã€‚
         Properties props = getSessionProperties();
 
         if (session == null) {
@@ -256,17 +256,17 @@ public abstract class MailSession {
     }
 
     /**
-     * ÅĞ¶ÏÊÇ·ñÒÑ¾­Á¬½ÓÉÏ¡£
+     * åˆ¤æ–­æ˜¯å¦å·²ç»è¿æ¥ä¸Šã€‚
      */
     protected abstract boolean isConnected();
 
     /**
-     * Á¬½Ómail·şÎñÆ÷¡£
+     * è¿æ¥mailæœåŠ¡å™¨ã€‚
      */
     protected abstract void connect() throws MailException;
 
     /**
-     * ¹Ø±Õmail·şÎñÆ÷µÄÁ¬½Ó¡£
+     * å…³é—­mailæœåŠ¡å™¨çš„è¿æ¥ã€‚
      */
     protected abstract void close() throws MailException;
 

@@ -18,7 +18,7 @@
 package com.alibaba.citrus.springext.util;
 
 /**
- * ÓÃÀ´´´½¨proxyÄ¿±ê¶ÔÏóµÄ¹¤³§¡£
+ * ç”¨æ¥åˆ›å»ºproxyç›®æ ‡å¯¹è±¡çš„å·¥å‚ã€‚
  * 
  * @author Michael Zhou
  */

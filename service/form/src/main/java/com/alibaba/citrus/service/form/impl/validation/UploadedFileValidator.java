@@ -32,7 +32,7 @@ import com.alibaba.citrus.util.FileUtil;
 import com.alibaba.citrus.util.HumanReadableSize;
 
 /**
- * ÑéÖ¤ÉÏ´«ÎÄ¼şµÄvalidator¡£
+ * éªŒè¯ä¸Šä¼ æ–‡ä»¶çš„validatorã€‚
  * 
  * @author Michael Zhou
  */
@@ -43,37 +43,37 @@ public class UploadedFileValidator extends AbstractValidator {
     private HumanReadableSize maxSize = new HumanReadableSize(-1);
 
     /**
-     * È¡µÃÉÏ´«ÎÄ¼şµÄcontentTypes¡£
+     * å–å¾—ä¸Šä¼ æ–‡ä»¶çš„contentTypesã€‚
      */
     public String[] getContentType() {
         return contentTypes;
     }
 
     /**
-     * ÉèÖÃÉÏ´«ÎÄ¼şµÄcontentType¡£
+     * è®¾ç½®ä¸Šä¼ æ–‡ä»¶çš„contentTypeã€‚
      */
     public void setContentType(String[] contentTypes) {
         this.contentTypes = normalizeStrings(contentTypes, 0);
     }
 
     /**
-     * È¡µÃÉÏ´«ÎÄ¼şµÄÎÄ¼şÃûºó×º¡£
+     * å–å¾—ä¸Šä¼ æ–‡ä»¶çš„æ–‡ä»¶ååç¼€ã€‚
      */
     public String[] getExtension() {
         return extensions;
     }
 
     /**
-     * ÉèÖÃÉÏ´«ÎÄ¼şµÄÎÄ¼şÃûºó×º¡£
+     * è®¾ç½®ä¸Šä¼ æ–‡ä»¶çš„æ–‡ä»¶ååç¼€ã€‚
      */
     public void setExtension(String[] extensions) {
         this.extensions = normalizeStrings(extensions, 1);
     }
 
     /**
-     * È¡µÃ×îĞ¡³ß´ç¡£
+     * å–å¾—æœ€å°å°ºå¯¸ã€‚
      * <p>
-     * Ö§³ÖK/M/G/TµÈ¡£
+     * æ”¯æŒK/M/G/Tç­‰ã€‚
      * </p>
      */
     public HumanReadableSize getMinSize() {
@@ -81,9 +81,9 @@ public class UploadedFileValidator extends AbstractValidator {
     }
 
     /**
-     * ÉèÖÃ×îĞ¡³ß´ç¡£
+     * è®¾ç½®æœ€å°å°ºå¯¸ã€‚
      * <p>
-     * Ö§³ÖK/M/G/TµÈ¡£
+     * æ”¯æŒK/M/G/Tç­‰ã€‚
      * </p>
      */
     public void setMinSize(HumanReadableSize minSize) {
@@ -91,9 +91,9 @@ public class UploadedFileValidator extends AbstractValidator {
     }
 
     /**
-     * È¡µÃ×î´ó³ß´ç¡£
+     * å–å¾—æœ€å¤§å°ºå¯¸ã€‚
      * <p>
-     * Ö§³ÖK/M/G/TµÈ¡£
+     * æ”¯æŒK/M/G/Tç­‰ã€‚
      * </p>
      */
     public HumanReadableSize getMaxSize() {
@@ -101,9 +101,9 @@ public class UploadedFileValidator extends AbstractValidator {
     }
 
     /**
-     * ÉèÖÃ×î´ó³ß´ç¡£
+     * è®¾ç½®æœ€å¤§å°ºå¯¸ã€‚
      * <p>
-     * Ö§³ÖK/M/G/TµÈ¡£
+     * æ”¯æŒK/M/G/Tç­‰ã€‚
      * </p>
      */
     public void setMaxSize(HumanReadableSize maxSize) {
@@ -111,7 +111,7 @@ public class UploadedFileValidator extends AbstractValidator {
     }
 
     /**
-     * ÑéÖ¤Ò»¸ö×Ö¶Î¡£
+     * éªŒè¯ä¸€ä¸ªå­—æ®µã€‚
      */
     public boolean validate(Context context) {
         long minSize = this.minSize.getValue();
@@ -123,17 +123,17 @@ public class UploadedFileValidator extends AbstractValidator {
 
         FileItem[] fileItems = context.getField().getFileItems();
 
-        // ¼ÙÈç²»´æÔÚfileItems£¬Ò²Í¨¹ıÑéÖ¤¡£ÓÃrequired-validatorÀ´È·±£fileItemÓĞÖµ¡£
+        // å‡å¦‚ä¸å­˜åœ¨fileItemsï¼Œä¹Ÿé€šè¿‡éªŒè¯ã€‚ç”¨required-validatoræ¥ç¡®ä¿fileItemæœ‰å€¼ã€‚
         if (isEmptyArray(fileItems)) {
             return true;
         }
 
         for (FileItem fileItem : fileItems) {
             if (fileItem == null) {
-                continue; // ºöÂÔ¿Õitem
+                continue; // å¿½ç•¥ç©ºitem
             }
 
-            // ¼ì²ésize limit¡£
+            // æ£€æŸ¥size limitã€‚
             if (minSize >= 0 && fileItem.getSize() < minSize) {
                 return false;
             }
@@ -142,7 +142,7 @@ public class UploadedFileValidator extends AbstractValidator {
                 return false;
             }
 
-            // ¼ì²écontent type¡£
+            // æ£€æŸ¥content typeã€‚
             if (!isEmptyArray(contentTypes)) {
                 String fileContentType = normalizeContentType(fileItem.getContentType());
 
@@ -164,11 +164,11 @@ public class UploadedFileValidator extends AbstractValidator {
                 }
             }
 
-            // ¼ì²éextension¡£
+            // æ£€æŸ¥extensionã€‚
             if (!isEmptyArray(extensions)) {
-                // Î´Ö¸¶¨ÎÄ¼şÃû - ·µ»Ønull
-                // ÎÄ¼şÃûÃ»ÓĞºó×º - ·µ»Ø×Ö·û´®¡°null¡±
-                // ºó×º±»¹æ¸ñ»¯ÎªĞ¡Ğ´×ÖÄ¸
+                // æœªæŒ‡å®šæ–‡ä»¶å - è¿”å›null
+                // æ–‡ä»¶åæ²¡æœ‰åç¼€ - è¿”å›å­—ç¬¦ä¸²â€œnullâ€
+                // åç¼€è¢«è§„æ ¼åŒ–ä¸ºå°å†™å­—æ¯
                 String ext = FileUtil.getExtension(fileItem.getName(), "null");
 
                 if (ext == null) {

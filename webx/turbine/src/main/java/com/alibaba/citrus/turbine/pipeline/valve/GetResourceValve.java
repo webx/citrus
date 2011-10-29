@@ -49,7 +49,7 @@ import com.alibaba.citrus.util.io.StreamUtil;
 import com.alibaba.citrus.util.regex.Substitution;
 
 /**
- * ´Óresource loaderÖĞ×°ÔØ×ÊÔ´£¬²¢Ö±½ÓÏÔÊ¾µÄvalve¡£
+ * ä»resource loaderä¸­è£…è½½èµ„æºï¼Œå¹¶ç›´æ¥æ˜¾ç¤ºçš„valveã€‚
  * 
  * @author Michael Zhou
  * @author dux.fangl
@@ -73,10 +73,10 @@ public class GetResourceValve extends AbstractValve implements ResourceLoaderAwa
     }
 
     /**
-     * ÔÚ<code>PipelineContext</code>ÖĞµÄ<code>Substitution</code>µÄÃû³Æ£¬Ä¬ÈÏÎª
-     * <code>subst</code>¡£
+     * åœ¨<code>PipelineContext</code>ä¸­çš„<code>Substitution</code>çš„åç§°ï¼Œé»˜è®¤ä¸º
+     * <code>subst</code>ã€‚
      * <p>
-     * Õâ¸ösubstitution¶ÔÏóÍ¨³£ÊÇÓÉÄ³¸öconditionÆ¥Åäºó·Åµ½contextÖĞµÄ¡£
+     * è¿™ä¸ªsubstitutionå¯¹è±¡é€šå¸¸æ˜¯ç”±æŸä¸ªconditionåŒ¹é…åæ”¾åˆ°contextä¸­çš„ã€‚
      * </p>
      */
     public void setSubst(String substName) {
@@ -84,7 +84,7 @@ public class GetResourceValve extends AbstractValve implements ResourceLoaderAwa
     }
 
     /**
-     * ÉèÖÃresourceÃû³Æ£¬¿ÉÒÔ°üº¬<code>$1</code>¡¢<code>$2</code>ÕâÑùµÄÌæ»»·û¡£
+     * è®¾ç½®resourceåç§°ï¼Œå¯ä»¥åŒ…å«<code>$1</code>ã€<code>$2</code>è¿™æ ·çš„æ›¿æ¢ç¬¦ã€‚
      */
     public void setName(String resourceName) {
         this.resourceName = trimToNull(resourceName);
@@ -140,7 +140,7 @@ public class GetResourceValve extends AbstractValve implements ResourceLoaderAwa
 
             istream = connection.getInputStream();
 
-            // ÏÖÔÚÒÑ¾­È¡µÃÊäÈëÁ÷£¬¿ªÊ¼Êä³ö¡£
+            // ç°åœ¨å·²ç»å–å¾—è¾“å…¥æµï¼Œå¼€å§‹è¾“å‡ºã€‚
             bufferedRequestContext.setBuffering(false);
 
             ostream = rundata.getResponse().getOutputStream();

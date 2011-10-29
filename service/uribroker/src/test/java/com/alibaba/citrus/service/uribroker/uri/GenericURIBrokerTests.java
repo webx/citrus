@@ -154,7 +154,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
 
     @Test
     public void reset_withRequest() {
-        // ¿Õbroker£¬not request aware£¬web»·¾³
+        // ç©ºbrokerï¼Œnot request awareï¼ŒwebçŽ¯å¢ƒ
         request = getMockRequest("https", "taobao.com", 8888);
         broker.setRequest(request);
         broker.setRequestAware(false);
@@ -169,7 +169,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
         assertEquals(null, broker.getLoginPassword());
         assertEquals(null, broker.getReference());
 
-        // ¿Õbroker£¬request aware, ·Çweb»·¾³
+        // ç©ºbrokerï¼Œrequest aware, éžwebçŽ¯å¢ƒ
         request = getMockRequest();
         broker.setRequest(request);
         broker.setRequestAware(true);
@@ -189,7 +189,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
         assertEquals(null, broker.getLoginPassword());
         assertEquals(null, broker.getReference());
 
-        // ¿Õbroker£¬request aware web»·¾³
+        // ç©ºbrokerï¼Œrequest aware webçŽ¯å¢ƒ
         request = getMockRequest("https", "taobao.com", 8888);
         broker.setRequest(request);
         broker.setRequestAware(true);
@@ -204,7 +204,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
         assertEquals(null, broker.getLoginPassword());
         assertEquals(null, broker.getReference());
 
-        // ·Ç¿Õbroker, request aware, web»·¾³
+        // éžç©ºbroker, request aware, webçŽ¯å¢ƒ
         GenericURIBroker parent = newInstance();
         parent.setServerName("localhost");
 
@@ -266,7 +266,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
 
     @Test
     public void setServerURI() {
-        // ÉèÖÃbroker.autoReset=true£¬È·±£getServerURI²»»áreset broker
+        // è®¾ç½®broker.autoReset=trueï¼Œç¡®ä¿getServerURIä¸ä¼šreset broker
         broker = (GenericURIBroker) broker.fork();
         assertTrue(broker.isAutoReset());
 
@@ -662,7 +662,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
         broker.setQueryData(" id ", null);
         assertEquals("", broker.getQuery().get("id"));
 
-        // String[] values£¬Ìæ»»ÆäÖÐµÄnull -> empty_string
+        // String[] valuesï¼Œæ›¿æ¢å…¶ä¸­çš„null -> empty_string
         broker.setQueryData("id", new String[] { null, "aa", " bb " });
         assertArrayEquals(new String[] { "", "aa", " bb " }, (String[]) broker.getQuery().get("id"));
 
@@ -670,7 +670,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
         broker.setQueryData("id", new int[] { 1, 2, 3 });
         assertArrayEquals(new String[] { "1", "2", "3" }, (String[]) broker.getQuery().get("id"));
 
-        // Object[] values, Ìæ»»ÆäÖÐµÄnull -> empty_string
+        // Object[] values, æ›¿æ¢å…¶ä¸­çš„null -> empty_string
         broker.setQueryData("id", new Object[] { null, "aa", 3 });
         assertArrayEquals(new String[] { "", "aa", "3" }, (String[]) broker.getQuery().get("id"));
 
@@ -681,18 +681,18 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
 
     @Test
     public void getQueryData() {
-        // ÎÞÖµ
+        // æ— å€¼
         assertNull(broker.getQueryData("myid"));
 
-        // nullÖµ
+        // nullå€¼
         broker.setQueryData("myid", null);
         assertEquals("", broker.getQueryData("myid"));
 
-        // µ¥Öµ
+        // å•å€¼
         broker.setQueryData("myid", "test");
         assertEquals("test", broker.getQueryData("myid"));
 
-        // ¶àÖµ
+        // å¤šå€¼
         broker.addQueryData("myid", "test2");
         assertArrayEquals(new String[] { "test", "test2" }, (String[]) broker.getQuery().get("myid"));
         assertEquals("test", broker.getQueryData("myid"));
@@ -818,10 +818,10 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
     public void charsetEncoding() {
         GenericURIBroker broker = new GenericURIBroker();
         broker.setServerURI("http://taobao.com");
-        broker.addPath("ÖÐ¹ú");
-        broker.addQueryData("ÖÐ¹ú", "ÍòËê");
+        broker.addPath("ä¸­å›½");
+        broker.addQueryData("ä¸­å›½", "ä¸‡å²");
 
-        // Ê¹ÓÃlocale context
+        // ä½¿ç”¨locale context
         assertNull(broker.getCharset());
 
         LocaleUtil.setContext(Locale.CHINA, "UTF-8");
@@ -830,7 +830,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
         LocaleUtil.setContext(Locale.CHINA, "GBK");
         assertEquals("http://taobao.com/%D6%D0%B9%FA?%D6%D0%B9%FA=%CD%F2%CB%EA", broker.render());
 
-        // Ö¸¶¨charset
+        // æŒ‡å®šcharset
         broker.setCharset("UTF-8");
         assertEquals("http://taobao.com/%E4%B8%AD%E5%9B%BD?%E4%B8%AD%E5%9B%BD=%E4%B8%87%E5%B2%81", broker.render());
     }
@@ -888,7 +888,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
 
     @Test
     public void prerender() {
-        // Çé¿öÒ»£¬¾­¹ýinitµÄbrokerÊÇ±»Ô¤äÖÈ¾µÄ¡£
+        // æƒ…å†µä¸€ï¼Œç»è¿‡initçš„brokeræ˜¯è¢«é¢„æ¸²æŸ“çš„ã€‚
         GenericURIBroker parent = newInstance();
         setupParentBroker(parent);
         parent.init();
@@ -896,7 +896,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
 
         assertPrerender((GenericURIBroker) parent.fork());
 
-        // Çé¿ö¶þ£¬·ÇautoResetµÄbroker£¬ÔÚfork(true)Ê±£¬»á×Ô¶¯´´½¨Ò»¸ö±»Ô¤äÖÈ¾µÄparent¡£
+        // æƒ…å†µäºŒï¼ŒéžautoResetçš„brokerï¼Œåœ¨fork(true)æ—¶ï¼Œä¼šè‡ªåŠ¨åˆ›å»ºä¸€ä¸ªè¢«é¢„æ¸²æŸ“çš„parentã€‚
         parent = (GenericURIBroker) newInstance().fork(); // autoReset=true
         setupParentBroker(parent);
         assertRenderer(parent, false, false, false, "https://user:pass@localhost/aa/bb?a=1&b=2#ref");
@@ -980,7 +980,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
     public void baseURI_request() {
         broker.setURIType(URIType.absolute);
 
-        // ÒÔrequest×÷ÎªbaseURI, requestAware=false/true
+        // ä»¥requestä½œä¸ºbaseURI, requestAware=false/true
         broker.setServerURI("http://www.taobao.com/hello/world/aaa/bbb/ccc.jsp");
         broker.setRequest(getMockRequest_withRequestURI("http", "www.taobao.com", 80));
 
@@ -1031,7 +1031,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
     public void baseURI_path() {
         broker.setURIType(URIType.absolute);
 
-        // ÉèÖÃrequest£¬µ«ÈçÓÐbaseURI£¬ÔòÒÔbaseURIÎª×¼
+        // è®¾ç½®requestï¼Œä½†å¦‚æœ‰baseURIï¼Œåˆ™ä»¥baseURIä¸ºå‡†
         broker.setServerURI("http://www.taobao.com/hello/world/aaa/bbb/ccc.jsp");
         broker.setRequest(getMockRequest_withRequestURI("http", "www.taobao.com", 80));
         broker.setRequestAware(true);

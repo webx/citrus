@@ -49,7 +49,7 @@ import com.alibaba.citrus.service.velocity.support.RenderableHandler;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ´ú±íÒ»×évelocity engineµÄÅäÖÃ¡£
+ * ä»£è¡¨ä¸€ç»„velocity engineçš„é…ç½®ã€‚
  * 
  * @author Michael Zhou
  */
@@ -77,7 +77,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
     private String[] macros;
 
     /**
-     * ´´½¨Ò»¸övelocityÅäÖÃ¡£
+     * åˆ›å»ºä¸€ä¸ªvelocityé…ç½®ã€‚
      */
     public VelocityConfigurationImpl(Logger log) {
         this.log = assertNotNull(log, "log");
@@ -96,7 +96,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
     }
 
     /**
-     * ÉèÖÃresource loader¡£
+     * è®¾ç½®resource loaderã€‚
      */
     public void setResourceLoader(ResourceLoader loader) {
         this.loader = loader;
@@ -107,63 +107,63 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
     }
 
     /**
-     * ÉèÖÃÉú²úÄ£Ê½¡£Ä¬ÈÏÎª<code>true</code>¡£
+     * è®¾ç½®ç”Ÿäº§æ¨¡å¼ã€‚é»˜è®¤ä¸º<code>true</code>ã€‚
      */
     public void setProductionMode(boolean productionMode) {
         this.productionMode = productionMode;
     }
 
     /**
-     * ÉèÖÃËÑË÷Ä£°åµÄ¸ùÄ¿Â¼¡£Ä¬ÈÏÎª<code>/templates</code>¡£
+     * è®¾ç½®æœç´¢æ¨¡æ¿çš„æ ¹ç›®å½•ã€‚é»˜è®¤ä¸º<code>/templates</code>ã€‚
      */
     public void setPath(String path) {
         this.path = trimToNull(path);
     }
 
     /**
-     * ÊÇ·ñ¿ªÆôÄ£°å»º´æ¡£ÔÚÉú²úÄ£Ê½ÏÂ£¬¸ÃÄ£Ê½½«±»Ç¿ĞĞ¿ªÆô¡£
+     * æ˜¯å¦å¼€å¯æ¨¡æ¿ç¼“å­˜ã€‚åœ¨ç”Ÿäº§æ¨¡å¼ä¸‹ï¼Œè¯¥æ¨¡å¼å°†è¢«å¼ºè¡Œå¼€å¯ã€‚
      */
     public void setCacheEnabled(boolean cacheEnabled) {
         this.cacheEnabled = cacheEnabled;
     }
 
     /**
-     * ÉèÖÃ¼ì²éÄ£°å±»ĞŞ¸ÄµÄ¼ä¸ô£¨Ãë£©¡£Ä¬ÈÏÎª2Ãë¡£
+     * è®¾ç½®æ£€æŸ¥æ¨¡æ¿è¢«ä¿®æ”¹çš„é—´éš”ï¼ˆç§’ï¼‰ã€‚é»˜è®¤ä¸º2ç§’ã€‚
      */
     public void setModificationCheckInterval(int modificationCheckInterval) {
         this.modificationCheckInterval = modificationCheckInterval;
     }
 
     /**
-     * ÉèÖÃstrict referenceÄ£Ê½¡£Ä¬ÈÏÎª<code>true</code>¡£
+     * è®¾ç½®strict referenceæ¨¡å¼ã€‚é»˜è®¤ä¸º<code>true</code>ã€‚
      */
     public void setStrictReference(boolean strictReference) {
         this.strictReference = strictReference;
     }
 
     /**
-     * ÉèÖÃÄ£°åµÄ×Ö·û¼¯±àÂë¡£
+     * è®¾ç½®æ¨¡æ¿çš„å­—ç¬¦é›†ç¼–ç ã€‚
      */
     public void setTemplateEncoding(String charset) {
         this.charset = trimToNull(charset);
     }
 
     /**
-     * ÉèÖÃÈ«¾ÖºêµÄÃû³Æ£¬¿É°üº¬Í¨Åä·û¡£
+     * è®¾ç½®å…¨å±€å®çš„åç§°ï¼Œå¯åŒ…å«é€šé…ç¬¦ã€‚
      */
     public void setGlobalMacros(String[] macros) {
         this.macros = macros;
     }
 
     /**
-     * ÉèÖÃplugins¡£
+     * è®¾ç½®pluginsã€‚
      */
     public void setPlugins(Object[] plugins) {
         this.plugins = plugins;
     }
 
     /**
-     * ÉèÖÃ¸ß¼¶ÅäÖÃ¡£
+     * è®¾ç½®é«˜çº§é…ç½®ã€‚
      */
     public void setAdvancedProperties(Map<String, Object> configuration) {
         this.properties.clear();
@@ -174,7 +174,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
     }
 
     /**
-     * ³õÊ¼»¯configuration¡£
+     * åˆå§‹åŒ–configurationã€‚
      */
     public void init() throws Exception {
         assertNotNull(loader, "resourceLoader");
@@ -184,7 +184,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
         initPlugins();
         initLogger();
         initMacros();
-        initResourceLoader(); // ÒÀÀµÓÚinitMacrosµÄ½á¹û
+        initResourceLoader(); // ä¾èµ–äºinitMacrosçš„ç»“æœ
         initEventHandlers();
         initMiscs();
     }
@@ -194,7 +194,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
     }
 
     /**
-     * É¾³ı±£ÁôµÄproperties£¬ÕâĞ©propertiesÓÃ»§²»ÄÜĞŞ¸Ä¡£
+     * åˆ é™¤ä¿ç•™çš„propertiesï¼Œè¿™äº›propertiesç”¨æˆ·ä¸èƒ½ä¿®æ”¹ã€‚
      */
     private void removeReservedProperties() {
         Set<String> keysToRemove = createHashSet();
@@ -218,7 +218,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
         // Remove macros
         keysToRemove.add(VM_LIBRARY);
 
-        // Remove event handlers: ½öÒÆ³ıeventhandler.xxx.class£¬±£ÁôÆäËü²ÎÊı
+        // Remove event handlers: ä»…ç§»é™¤eventhandler.xxx.classï¼Œä¿ç•™å…¶å®ƒå‚æ•°
         for (Iterator<?> i = properties.getKeys(); i.hasNext();) {
             Object key = i.next();
 
@@ -243,7 +243,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
     }
 
     /**
-     * ³õÊ¼»¯plugins¡£
+     * åˆå§‹åŒ–pluginsã€‚
      */
     private void initPlugins() throws Exception {
         if (plugins != null) {
@@ -256,11 +256,11 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
     }
 
     /**
-     * ³õÊ¼»¯resource loader¡£
+     * åˆå§‹åŒ–resource loaderã€‚
      * <p>
-     * ¹Ì¶¨Ê¹ÓÃResourceLoadingService/Spring
-     * ResourceLoaderÀ´×°ÔØ×ÊÔ´£¬ÓÉÓÚÒÔÉÏ»úÖÆÒÑ¾­°üº¬×ã¹»µÄÁé»îĞÔ£¬ËùÒÔ²»ÔÙÔÊĞíÓÃ»§ÔÚvelocity²ãÃæÅäÖÃresource
-     * loader¡£
+     * å›ºå®šä½¿ç”¨ResourceLoadingService/Spring
+     * ResourceLoaderæ¥è£…è½½èµ„æºï¼Œç”±äºä»¥ä¸Šæœºåˆ¶å·²ç»åŒ…å«è¶³å¤Ÿçš„çµæ´»æ€§ï¼Œæ‰€ä»¥ä¸å†å…è®¸ç”¨æˆ·åœ¨velocityå±‚é¢é…ç½®resource
+     * loaderã€‚
      * </p>
      */
     private void initResourceLoader() {
@@ -296,14 +296,14 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
     }
 
     /**
-     * ³õÊ¼»¯ÈÕÖ¾ÏµÍ³¡£
+     * åˆå§‹åŒ–æ—¥å¿—ç³»ç»Ÿã€‚
      */
     private void initLogger() {
         properties.setProperty(RUNTIME_LOG_LOGSYSTEM, new Slf4jLogChute(log));
     }
 
     /**
-     * ²éÕÒËùÓĞÈ«¾Ömacros¡£
+     * æŸ¥æ‰¾æ‰€æœ‰å…¨å±€macrosã€‚
      */
     private void initMacros() throws Exception {
         ResourcePatternResolver resolver;
@@ -353,7 +353,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
 
     private void addMacroResources(String path, Resource[] resources) {
         if (resources != null) {
-            // ±ØĞëÓÃvector£¬·ñÔòVelocimacroFactoryÀÏ´úÂë¶Á²»µ½Öµ
+            // å¿…é¡»ç”¨vectorï¼Œå¦åˆ™VelocimacroFactoryè€ä»£ç è¯»ä¸åˆ°å€¼
             @SuppressWarnings("unchecked")
             Set<String> macros = createHashSet(properties.getVector(VM_LIBRARY));
 
@@ -361,7 +361,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
                 if (resource.exists()) {
                     String templateName = null;
 
-                    // ¶ÔÓÚ¶àÊıresource£¬ÈçServletResource£¬ResourceAdapterµÈ£¬¶¼¿ÉÒÔ´ÓÖĞÈ¡µÃÔ­Ê¼µÄresourceName
+                    // å¯¹äºå¤šæ•°resourceï¼Œå¦‚ServletResourceï¼ŒResourceAdapterç­‰ï¼Œéƒ½å¯ä»¥ä»ä¸­å–å¾—åŸå§‹çš„resourceName
                     if (path != null && resource instanceof ContextResource) {
                         String resourceName = ((ContextResource) resource).getPathWithinContext();
 
@@ -370,7 +370,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
                         }
                     }
 
-                    // ¶ÔÓÚ²»¿ÉÈ¡µÃresourceNameµÄ£¬Ê¹ÓÃÌØÊâµÄ×°ÔØ»úÖÆ¡£
+                    // å¯¹äºä¸å¯å–å¾—resourceNameçš„ï¼Œä½¿ç”¨ç‰¹æ®Šçš„è£…è½½æœºåˆ¶ã€‚
                     if (templateName == null) {
                         templateName = getTemplateNameOfPreloadedResource(resource);
                     }
@@ -403,7 +403,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
 
         String templateName = templateNameBase;
 
-        // ·ÀÖ¹¼ÓÈëÖØ¸´µÄresource¶ÔÏó
+        // é˜²æ­¢åŠ å…¥é‡å¤çš„resourceå¯¹è±¡
         for (int i = 1; preloadedResources.containsKey(templateName)
                 && !resource.equals(preloadedResources.get(templateName)); i++) {
             templateName = templateNameBase + i;
@@ -415,7 +415,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
     }
 
     private void initEventHandlers() {
-        // ×¼±¸eventCartridge£¬²¢ÉèÖÃÄ¬ÈÏµÄhandler
+        // å‡†å¤‡eventCartridgeï¼Œå¹¶è®¾ç½®é»˜è®¤çš„handler
         boolean hasRenderableHandler = false;
 
         if (!isEmptyArray(plugins)) {
@@ -441,7 +441,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
     }
 
     /**
-     * ³õÊ¼»¯ÔÓÏî¡£
+     * åˆå§‹åŒ–æ‚é¡¹ã€‚
      */
     private void initMiscs() {
         if (charset == null) {
@@ -469,7 +469,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
     }
 
     /**
-     * ÉèÖÃÄ¬ÈÏÖµ¡£Èç¹ûÖµÒÑ´æÔÚ£¬Ôò²»¸²¸Ç¡£
+     * è®¾ç½®é»˜è®¤å€¼ã€‚å¦‚æœå€¼å·²å­˜åœ¨ï¼Œåˆ™ä¸è¦†ç›–ã€‚
      */
     private void setDefaultProperty(String key, Object value) {
         if (!properties.containsKey(key)) {

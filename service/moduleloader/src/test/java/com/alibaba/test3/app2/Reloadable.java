@@ -33,7 +33,7 @@
 package com.alibaba.test3.app2;
 
 /**
- * ¿ÉÒÔ¶¯Ì¬ReloadµÄ×é¼ş½Ó¿Ú
+ * å¯ä»¥åŠ¨æ€Reloadçš„ç»„ä»¶æ¥å£
  * 
  * @author youqun.zhangyq
  */

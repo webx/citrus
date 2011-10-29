@@ -26,7 +26,7 @@ import java.io.PrintWriter;
 import com.alibaba.citrus.util.MessageUtil;
 
 /**
- * ±È½ÏÁ½¸ödumpÎÄ¼şµÄ²îÒì¡£
+ * æ¯”è¾ƒä¸¤ä¸ªdumpæ–‡ä»¶çš„å·®å¼‚ã€‚
  * 
  * @author Michael Zhou
  */

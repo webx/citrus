@@ -100,17 +100,17 @@ public class DomUtilTests {
         // name==noNsTag
         assertElements(subElements(root, name("noNsTag")), "noNsTag@null");
 
-        // ¶àÖØÑ¡Ôñ£ºand
+        // å¤šé‡é€‰æ‹©ï¼šand
         assertElements(subElements(root, and(ns(null), name("noNsTag"))), "noNsTag@null");
 
-        // ¶àÖØÑ¡Ôñ£ºor
+        // å¤šé‡é€‰æ‹©ï¼šor
         assertElements(subElements(root, or(sameNs(root), ns("ns2"))), "ns1Tag@ns1", "ns2Tag@ns2");
 
-        // ·´ÏòÑ¡Ôñ£ºnot
+        // åå‘é€‰æ‹©ï¼šnot
         assertElements(subElements(root, not(sameNs(root))), "ns2Tag@ns2",
                 "beans@http://www.springframework.org/schema/beans", "noNsTag@null");
 
-        // ½ÓÊÜ»ò±¨´í
+        // æ¥å—æˆ–æŠ¥é”™
         try {
             subElements(root, or(sameNs(root), ns("ns2"), error()));
             fail();

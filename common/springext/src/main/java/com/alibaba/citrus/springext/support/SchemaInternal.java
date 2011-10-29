@@ -21,7 +21,7 @@ import com.alibaba.citrus.springext.Schema;
 
 public interface SchemaInternal extends Schema {
     /**
-     * ĞŞ¸ÄschemaµÄelements¡£Õâ¸öÖµÖ»ÄÜÓÉschemaSetÀ´ÉèÖÃ¡£
+     * ä¿®æ”¹schemaçš„elementsã€‚è¿™ä¸ªå€¼åªèƒ½ç”±schemaSetæ¥è®¾ç½®ã€‚
      */
     void setElements(String[] elements);
 }

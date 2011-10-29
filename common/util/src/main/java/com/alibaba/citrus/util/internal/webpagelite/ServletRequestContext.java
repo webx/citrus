@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * »ùÓÚservlet apiµÄrequest contextÊµÏÖ¡£
+ * åŸºäºservlet apiçš„request contextå®ç°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -85,7 +85,7 @@ public class ServletRequestContext extends RequestContext {
     }
 
     /**
-     * µ±ÇëÇóµÄ×ÊÔ´ÕÒ²»µ½Ê±£¬·½·¨±»µ÷ÓÃ¡£×ÓÀà¿ÉÒÔĞŞ¸Ä´ËĞĞÎª¡£
+     * å½“è¯·æ±‚çš„èµ„æºæ‰¾ä¸åˆ°æ—¶ï¼Œæ–¹æ³•è¢«è°ƒç”¨ã€‚å­ç±»å¯ä»¥ä¿®æ”¹æ­¤è¡Œä¸ºã€‚
      */
     @Override
     public void resourceNotFound(String resourceName) throws IOException {
@@ -93,7 +93,7 @@ public class ServletRequestContext extends RequestContext {
     }
 
     /**
-     * È¡µÃservlet request context¡£
+     * å–å¾—servlet request contextã€‚
      */
     public static ServletRequestContext getServletRequestContext(RequestContext request) {
         if (request instanceof ServletRequestContext) {
@@ -104,7 +104,7 @@ public class ServletRequestContext extends RequestContext {
     }
 
     /**
-     * ÉèÖÃhttp headers£¬½ûÓÃcache¡£
+     * è®¾ç½®http headersï¼Œç¦ç”¨cacheã€‚
      */
     public static void disableCache(RequestContext request) {
         if (getServletRequestContext(request) != null) {

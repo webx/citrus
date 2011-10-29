@@ -30,7 +30,7 @@ import org.junit.Test;
 import com.alibaba.citrus.util.SystemUtil.UserInfo;
 
 /**
- * ²âÊÔ<code>Utils</code>Àà¡£
+ * æµ‹è¯•<code>Utils</code>ç±»ã€‚
  * 
  * @author Michael Zhou
  */

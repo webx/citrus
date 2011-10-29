@@ -32,7 +32,7 @@ import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionPa
 import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 
 /**
- * ÓÃÀ´½âÎöconfigurationµÄparser¡£
+ * ç”¨æ¥è§£æconfigurationçš„parserã€‚
  * 
  * @author Michael Zhou
  */

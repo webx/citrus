@@ -30,7 +30,7 @@ import com.alibaba.citrus.service.form.support.CompareOperator;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ºÍÁíÒ»¸öfield±È½Ï×Ö·û´®ÖµµÄvalidator¡£
+ * å’Œå¦ä¸€ä¸ªfieldæ¯”è¾ƒå­—ç¬¦ä¸²å€¼çš„validatorã€‚
  * 
  * @author Michael Zhou
  */
@@ -40,28 +40,28 @@ public class StringCompareValidator extends AbstractOptionalValidator {
     private boolean ignoreCase;
 
     /**
-     * È¡µÃÒª±È½ÏµÄfieldÃû³Æ¡£
+     * å–å¾—è¦æ¯”è¾ƒçš„fieldåç§°ã€‚
      */
     public String getFieldName() {
         return fieldName;
     }
 
     /**
-     * È¡µÃ±È½Ï²Ù×÷µÄÀàĞÍ¡£
+     * å–å¾—æ¯”è¾ƒæ“ä½œçš„ç±»å‹ã€‚
      */
     public CompareOperator getOp() {
         return op;
     }
 
     /**
-     * ÉèÖÃµÈÓÚ²Ù×÷¡£
+     * è®¾ç½®ç­‰äºæ“ä½œã€‚
      */
     public void setEqualTo(String fieldName) {
         setFieldName(equalTo, fieldName);
     }
 
     /**
-     * ÉèÖÃ²»µÈÓÚ²Ù×÷¡£
+     * è®¾ç½®ä¸ç­‰äºæ“ä½œã€‚
      */
     public void setNotEqualTo(String fieldName) {
         setFieldName(notEqualTo, fieldName);
@@ -73,16 +73,16 @@ public class StringCompareValidator extends AbstractOptionalValidator {
     }
 
     /**
-     * ÉèÖÃºöÂÔ´óĞ¡Ğ´¡£
+     * è®¾ç½®å¿½ç•¥å¤§å°å†™ã€‚
      */
     public void setIgnoreCase(boolean ignoreCase) {
         this.ignoreCase = ignoreCase;
     }
 
     /**
-     * ÑéÖ¤²ÎÊı²¢³õÊ¼»¯¡£
+     * éªŒè¯å‚æ•°å¹¶åˆå§‹åŒ–ã€‚
      * <p>
-     * ´Ë³õÊ¼»¯·½·¨¿ÉÒÔÈ¡µ½Í¬×éÖĞµÄÆäËüfieldConfig¡£
+     * æ­¤åˆå§‹åŒ–æ–¹æ³•å¯ä»¥å–åˆ°åŒç»„ä¸­çš„å…¶å®ƒfieldConfigã€‚
      * </p>
      */
     @Override
@@ -98,7 +98,7 @@ public class StringCompareValidator extends AbstractOptionalValidator {
     }
 
     /**
-     * ÑéÖ¤Ò»¸ö×Ö¶Î¡£
+     * éªŒè¯ä¸€ä¸ªå­—æ®µã€‚
      */
     @Override
     protected boolean validate(Context context, String value) {

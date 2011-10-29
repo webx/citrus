@@ -23,7 +23,7 @@ import com.alibaba.citrus.service.pipeline.support.AbstractCompositeCondition;
 import com.alibaba.citrus.service.pipeline.support.AbstractCompositeConditionDefinitionParser;
 
 /**
- * Ö»ÓĞµ±ÏÂÊôµÄËùÓĞcondition¾ù·µ»Ø<code>true</code>Ê±£¬²Å·µ»Ø<code>true</code>¡£
+ * åªæœ‰å½“ä¸‹å±çš„æ‰€æœ‰conditionå‡è¿”å›<code>true</code>æ—¶ï¼Œæ‰è¿”å›<code>true</code>ã€‚
  * 
  * @author Michael Zhou
  */

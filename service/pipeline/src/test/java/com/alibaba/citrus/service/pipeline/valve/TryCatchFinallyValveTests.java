@@ -155,7 +155,7 @@ public class TryCatchFinallyValveTests extends AbstractValveTests<TryCatchFinall
     public void invoke_try() {
         pipeline = createPipeline(new LogValve(), valve, new LogValve());
 
-        // with try, no catch£¬Òì³£±»Å×³ö
+        // with try, no catchï¼Œå¼‚å¸¸è¢«æŠ›å‡º
         valve.setTry(createPipeline(new LogValve(), new WrongValve(), new LogValve()));
 
         try {
@@ -173,7 +173,7 @@ public class TryCatchFinallyValveTests extends AbstractValveTests<TryCatchFinall
     public void invoke_try_finally() {
         pipeline = createPipeline(new LogValve(), valve, new LogValve());
 
-        // no catch, with finally£¬Òì³£±»Å×³ö£¬µ«finally±»Ö´ÐÐ
+        // no catch, with finallyï¼Œå¼‚å¸¸è¢«æŠ›å‡ºï¼Œä½†finallyè¢«æ‰§è¡Œ
         valve.setTry(createPipeline(new LogValve(), new WrongValve(), new LogValve()));
         valve.setFinally(createPipeline(new LogValve(), new LogValve(), new LogValve()));
 

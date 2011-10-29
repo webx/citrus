@@ -27,14 +27,14 @@ import com.alibaba.citrus.service.resource.ResourceLoadingService;
 import com.alibaba.citrus.service.resource.ResourceNotFoundException;
 
 /**
- * ´ú±íÒ»´ÎresourceÁÐ±íµÄ²éÕÒµÄ¹ý³Ì¡£
+ * ä»£è¡¨ä¸€æ¬¡resourceåˆ—è¡¨çš„æŸ¥æ‰¾çš„è¿‡ç¨‹ã€‚
  * 
  * @author Michael Zhou
  */
 public class ResourceListerContextImpl extends AbstractResourceLoadingContext<String[]> implements
         ResourceListerContext {
     /**
-     * ´´½¨Ò»¸öcontext¡£
+     * åˆ›å»ºä¸€ä¸ªcontextã€‚
      */
     public ResourceListerContextImpl(String resourceName, Set<ResourceLoadingOption> options,
                                      ResourceMapping[] mappings, ResourceLoadingService parent, Logger log) {
@@ -42,21 +42,21 @@ public class ResourceListerContextImpl extends AbstractResourceLoadingContext<St
     }
 
     /**
-     * ¿ªÊ¼Ò»¸ö²éÕÒ¹ý³Ì¡£
+     * å¼€å§‹ä¸€ä¸ªæŸ¥æ‰¾è¿‡ç¨‹ã€‚
      */
     public String[] list() throws ResourceNotFoundException {
         return doLoad(resourceName, options);
     }
 
     /**
-     * »Øµ÷º¯Êý£º·ÃÎÊÄ³¸ömapping¡£
+     * å›žè°ƒå‡½æ•°ï¼šè®¿é—®æŸä¸ªmappingã€‚
      */
     @Override
     protected void visitMapping(ResourceMapping mapping) {
     }
 
     /**
-     * µ÷ÓÃparent resource loading serviceÈ¡µÃ×ÊÔ´¡£
+     * è°ƒç”¨parent resource loading serviceå–å¾—èµ„æºã€‚
      */
     @Override
     protected String[] loadParentResource(String resourceName, Set<ResourceLoadingOption> options)
@@ -69,7 +69,7 @@ public class ResourceListerContextImpl extends AbstractResourceLoadingContext<St
     }
 
     /**
-     * µ÷ÓÃmappingÈ¡µÃ×ÊÔ´¡£
+     * è°ƒç”¨mappingå–å¾—èµ„æºã€‚
      */
     @Override
     protected String[] loadMappedResource(ResourceLoaderMapping mapping, Set<ResourceLoadingOption> options) {
@@ -77,7 +77,7 @@ public class ResourceListerContextImpl extends AbstractResourceLoadingContext<St
     }
 
     /**
-     * ÊµÏÖ<code>ResourceListerContext.list()</code>¡£
+     * å®žçŽ°<code>ResourceListerContext.list()</code>ã€‚
      */
     public String[] list(String newResourceName, Set<ResourceLoadingOption> newOptions) {
         return loadContextResource(newResourceName, newOptions);

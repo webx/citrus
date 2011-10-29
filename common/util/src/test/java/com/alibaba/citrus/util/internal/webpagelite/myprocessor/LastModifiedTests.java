@@ -72,7 +72,7 @@ public class LastModifiedTests {
 
         request = invocationContext.getRequest();
 
-        // http unitÔÚÕâÀïÓĞ¸ö¿É³ÜµÄ´íÎó£¬HH:mm:ssĞ´³ÉÁËhh:mm:ss£¬µ¼ÖÂÈÕÆÚ´íÎó¡£
+        // http unitåœ¨è¿™é‡Œæœ‰ä¸ªå¯è€»çš„é”™è¯¯ï¼ŒHH:mm:sså†™æˆäº†hh:mm:ssï¼Œå¯¼è‡´æ—¥æœŸé”™è¯¯ã€‚
         response = new HttpServletResponseWrapper(invocationContext.getResponse()) {
             @Override
             public void setDateHeader(String name, long date) {

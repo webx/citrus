@@ -53,7 +53,7 @@ import com.alibaba.citrus.generictype.WildcardTypeInfo;
 import com.alibaba.citrus.util.ClassUtil;
 
 /**
- * ÓÃÀ´´´½¨{@link TypeInfo}µÄ¹¤³§¡£
+ * ç”¨æ¥åˆ›å»º{@link TypeInfo}çš„å·¥å‚ã€‚
  * 
  * @author Michael Zhou
  */
@@ -62,7 +62,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     private static Logger log = LoggerFactory.getLogger(TypeInfo.class);
 
     /**
-     * È¡µÃÖ¸¶¨{@link Type}¶ÔÓ¦µÄ{@link TypeInfo}¶ÔÏó¡£
+     * å–å¾—æŒ‡å®š{@link Type}å¯¹åº”çš„{@link TypeInfo}å¯¹è±¡ã€‚
      */
     @Override
     public final TypeInfo getType(Type type) {
@@ -70,7 +70,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * È¡µÃÒ»×é{@link TypeInfo}¶ÔÏó¡£
+     * å–å¾—ä¸€ç»„{@link TypeInfo}å¯¹è±¡ã€‚
      */
     @Override
     public final TypeInfo[] getTypes(Type[] types) {
@@ -78,7 +78,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * È¡µÃÖ¸¶¨{@link GenericDeclaration}¶ÔÓ¦µÄ{@link GenericDeclarationInfo}¶ÔÏó¡£
+     * å–å¾—æŒ‡å®š{@link GenericDeclaration}å¯¹åº”çš„{@link GenericDeclarationInfo}å¯¹è±¡ã€‚
      */
     @Override
     public final GenericDeclarationInfo getGenericDeclaration(GenericDeclaration declaration) {
@@ -86,7 +86,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * È¡µÃÖ¸¶¨{@link Field}¶ÔÓ¦µÄ{@link FieldInfo}¶ÔÏó¡£
+     * å–å¾—æŒ‡å®š{@link Field}å¯¹åº”çš„{@link FieldInfo}å¯¹è±¡ã€‚
      */
     @Override
     public final FieldInfo getField(Field field) {
@@ -97,7 +97,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * ´´½¨Ò»¸ö²ÎÊı»¯ÀàĞÍ¡£
+     * åˆ›å»ºä¸€ä¸ªå‚æ•°åŒ–ç±»å‹ã€‚
      */
     @Override
     public final ParameterizedTypeInfo getParameterizedType(TypeInfo type, TypeInfo... args) {
@@ -111,7 +111,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * ´´½¨Ò»¸öÊı×éÀàĞÍ¡£
+     * åˆ›å»ºä¸€ä¸ªæ•°ç»„ç±»å‹ã€‚
      */
     @Override
     public final ArrayTypeInfo getArrayType(TypeInfo componentType, int dimension) {
@@ -139,7 +139,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * ´Ó<code>java.lang.reflect.Type</code>´´½¨<code>TypeInfo</code>¡£
+     * ä»<code>java.lang.reflect.Type</code>åˆ›å»º<code>TypeInfo</code>ã€‚
      */
     private TypeInfo buildType(Type type, BuildingCache buildingCache) {
         assertNotNull(type, "type");
@@ -168,7 +168,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * ´´½¨Ò»×é<code>TypeInfo</code>¡£
+     * åˆ›å»ºä¸€ç»„<code>TypeInfo</code>ã€‚
      */
     private TypeInfo[] buildTypes(Type[] types, BuildingCache buildingCache) {
         if (isEmptyArray(types)) {
@@ -189,8 +189,8 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * ´Ó<code>java.lang.reflect.GenericDeclaration</code>´´½¨
-     * <code>GenericDeclarationInfo</code>¡£
+     * ä»<code>java.lang.reflect.GenericDeclaration</code>åˆ›å»º
+     * <code>GenericDeclarationInfo</code>ã€‚
      */
     private GenericDeclarationInfo buildGenericDeclaration(GenericDeclaration declaration, BuildingCache buildingCache) {
         assertNotNull(declaration, "declaration");
@@ -210,12 +210,12 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * ´Ó·ÇÊı×é<code>Class<?></code>ÖĞ´´½¨<code>RawTypeInfo</code>¡£
+     * ä»éæ•°ç»„<code>Class<?></code>ä¸­åˆ›å»º<code>RawTypeInfo</code>ã€‚
      */
     private RawTypeInfo buildRawType(Class<?> type, BuildingCache buildingCache) {
         RawTypeImpl rawType;
 
-        // ÏÈ²éÕÒbuilding cache£¬¼ÙÈçµ±Ç°ÀàĞÍÒÑ¾­ÔÚbuildÁË£¬ÔòÖ±½Ó·µ»ØÖ®¡£
+        // å…ˆæŸ¥æ‰¾building cacheï¼Œå‡å¦‚å½“å‰ç±»å‹å·²ç»åœ¨buildäº†ï¼Œåˆ™ç›´æ¥è¿”å›ä¹‹ã€‚
         if (buildingCache != null) {
             rawType = buildingCache.getRawType(type);
 
@@ -224,7 +224,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
             }
         }
 
-        // ·ñÔò£¬²é¿´ÓÀ¾Ãcache£¬·ÀÖ¹ÖØ¸´´´½¨¡£
+        // å¦åˆ™ï¼ŒæŸ¥çœ‹æ°¸ä¹…cacheï¼Œé˜²æ­¢é‡å¤åˆ›å»ºã€‚
         rawType = (RawTypeImpl) getFromClassCache(type);
 
         if (rawType == null) {
@@ -240,7 +240,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * ´´½¨type parameters£¬Èç¹ûÓĞµÄ»°
+     * åˆ›å»ºtype parametersï¼Œå¦‚æœæœ‰çš„è¯
      */
     private TypeVariableInfo[] buildTypeVariables(GenericDeclaration declaration, GenericDeclarationInfo declInfo,
                                                   BuildingCache buildingCache) {
@@ -263,7 +263,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * ´ÓÊı×é<code>Class<?></code>ÖĞ´´½¨<code>ArrayTypeInfo</code>¡£
+     * ä»æ•°ç»„<code>Class<?></code>ä¸­åˆ›å»º<code>ArrayTypeInfo</code>ã€‚
      */
     private ArrayTypeInfo buildArrayType(Class<?> type, BuildingCache buildingCache) {
         ArrayTypeImpl arrayType = (ArrayTypeImpl) getFromClassCache(type);
@@ -294,14 +294,14 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * ´ÓÊı×é<code>GenericArrayType</code>ÖĞ´´½¨<code>ArrayTypeInfo</code>¡£
+     * ä»æ•°ç»„<code>GenericArrayType</code>ä¸­åˆ›å»º<code>ArrayTypeInfo</code>ã€‚
      */
     private ArrayTypeInfo buildArrayType(GenericArrayType type, BuildingCache buildingCache) {
         int dimension = 0;
         Type component = type;
         Type directComponent = null;
 
-        // GenericArrayTypeµÄ³ÉÔ±ÀàĞÍ£¬Ö»¿ÉÄÜÊÇÈıÖÖ£ºClass£¬TypeVariableºÍGenericArrayType
+        // GenericArrayTypeçš„æˆå‘˜ç±»å‹ï¼Œåªå¯èƒ½æ˜¯ä¸‰ç§ï¼šClassï¼ŒTypeVariableå’ŒGenericArrayType
         for (;;) {
             if (component instanceof Class<?>) {
                 if (((Class<?>) component).isArray()) {
@@ -330,7 +330,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * ´Ó<code>ParameterizedType</code>ÖĞ´´½¨<code>ParameterizedTypeInfo</code>¡£
+     * ä»<code>ParameterizedType</code>ä¸­åˆ›å»º<code>ParameterizedTypeInfo</code>ã€‚
      */
     private ParameterizedTypeInfo buildParameterizedType(ParameterizedType type, BuildingCache buildingCache) {
         if (buildingCache == null) {
@@ -345,11 +345,11 @@ public class TypeInfoFactory extends TypeInfo.Factory {
             parameterizedTypeInfo = new ParameterizedTypeImpl(rawType);
             buildingCache.setParameterizedType(type, parameterizedTypeInfo);
 
-            // È¡µÃactual type arguments
+            // å–å¾—actual type arguments
             TypeInfo[] args = buildTypes(type.getActualTypeArguments(), buildingCache);
 
-            // ĞŞÕıwildcardµÄupper boundsÎª¶ÔÓ¦varµÄupper bounds
-            // ÀıÈç£¬varÎª<T extends Number>£¬¶øwildcardÎ´Ö¸¶¨upper bounds£¬ÄÇÃ´ĞŞÕıwildcardµÄupper boundsÎªNumber
+            // ä¿®æ­£wildcardçš„upper boundsä¸ºå¯¹åº”varçš„upper bounds
+            // ä¾‹å¦‚ï¼Œvarä¸º<T extends Number>ï¼Œè€ŒwildcardæœªæŒ‡å®šupper boundsï¼Œé‚£ä¹ˆä¿®æ­£wildcardçš„upper boundsä¸ºNumber
             for (int i = 0; i < args.length; i++) {
                 TypeInfo arg = args[i];
 
@@ -368,7 +368,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * ´Ó<code>TypeVariable</code>ÖĞ´´½¨<code>TypeVariableInfo</code>¡£
+     * ä»<code>TypeVariable</code>ä¸­åˆ›å»º<code>TypeVariableInfo</code>ã€‚
      */
     private TypeVariableInfo buildTypeVariable(TypeVariable<?> type, BuildingCache buildingCache) {
         if (buildingCache == null) {
@@ -383,7 +383,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * ´Ó<code>WildcardType</code>ÖĞ´´½¨<code>WildcardTypeInfo</code>¡£
+     * ä»<code>WildcardType</code>ä¸­åˆ›å»º<code>WildcardTypeInfo</code>ã€‚
      */
     private WildcardTypeInfo buildWildcardType(WildcardType type, BuildingCache buildingCache) {
         if (buildingCache == null) {
@@ -452,7 +452,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * »º´æ{@link ParameterizedTypeInfo}¡¢{@link Method}ºÍ{@link Constructor}¡£
+     * ç¼“å­˜{@link ParameterizedTypeInfo}ã€{@link Method}å’Œ{@link Constructor}ã€‚
      */
     private static class BuildingCache extends HashMap<Object, GenericDeclarationInfo> {
         private static final long serialVersionUID = -2169655543193524884L;
@@ -483,7 +483,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * ÔÚsuperÀàĞÍÖĞ²éÕÒµÈÍ¬ÓÚÖ¸¶¨ÀàµÄÀàĞÍ¡£
+     * åœ¨superç±»å‹ä¸­æŸ¥æ‰¾ç­‰åŒäºæŒ‡å®šç±»çš„ç±»å‹ã€‚
      */
     static TypeInfo findSupertype(TypeInfo type, Class<?> equivalentClass) {
         for (TypeInfo supertype : type.getSupertypes()) {
@@ -496,16 +496,16 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * ÔÚcontextÖĞ²éÕÒÀàĞÍ±äÁ¿¶ÔÓ¦µÄÊµ¼ÊÀàĞÍ¡£
+     * åœ¨contextä¸­æŸ¥æ‰¾ç±»å‹å˜é‡å¯¹åº”çš„å®é™…ç±»å‹ã€‚
      */
     static TypeInfo resolveTypeVariable(TypeVariableInfo var, GenericDeclarationInfo context, boolean includeBaseType) {
         GenericDeclarationInfo declaration = assertNotNull(var, "var").getGenericDeclaration();
         TypeInfo result = null;
 
-        // µ±Ç°varµÄdeclaration¿ÉÄÜÊÇ£º Class£¬´øÀàĞÍ²ÎÊıµÄmethod£¬´øÀàĞÍ²ÎÊıµÄconstructor¡£
+        // å½“å‰varçš„declarationå¯èƒ½æ˜¯ï¼š Classï¼Œå¸¦ç±»å‹å‚æ•°çš„methodï¼Œå¸¦ç±»å‹å‚æ•°çš„constructorã€‚
         //
-        // ÇéĞÎ1. delcarationÊÇClass£¬contextÒ²ÊÇClass£¬ÔòÔÚcontext.
-        // supertypesÖĞ²éÕÒºÍdeclarationÆ¥ÅäµÄtype
+        // æƒ…å½¢1. delcarationæ˜¯Classï¼Œcontextä¹Ÿæ˜¯Classï¼Œåˆ™åœ¨context.
+        // supertypesä¸­æŸ¥æ‰¾å’ŒdeclarationåŒ¹é…çš„type
         if (declaration instanceof ClassTypeInfo && context instanceof ClassTypeInfo) {
             TypeInfo declarationEquivalent = findSupertype((ClassTypeInfo) context,
                     ((ClassTypeInfo) declaration).getRawType());
@@ -524,10 +524,10 @@ public class TypeInfoFactory extends TypeInfo.Factory {
             }
         }
 
-        // ÇéĞÎ2. declarationÊÇMethod£¬contextÒ²ÊÇmethod
-        // µ«Ä¿Ç°MethodInfoÃ»ÓĞÊµÏÖParameterizedMethod£¬¹ÊÌø¹ı¡£
+        // æƒ…å½¢2. declarationæ˜¯Methodï¼Œcontextä¹Ÿæ˜¯method
+        // ä½†ç›®å‰MethodInfoæ²¡æœ‰å®ç°ParameterizedMethodï¼Œæ•…è·³è¿‡ã€‚
 
-        // ×îºó£¬Èç¹ûÕÒ²»µ½£¬Ôò·µ»ØbaseType¡£
+        // æœ€åï¼Œå¦‚æœæ‰¾ä¸åˆ°ï¼Œåˆ™è¿”å›baseTypeã€‚
         if (result == null) {
             if (includeBaseType) {
                 result = var.getUpperBounds().get(0).resolve(context, includeBaseType); // baseType.resolve()
@@ -540,16 +540,16 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * ²éÕÒ·Ç{@link BoundedTypeInfo}¡£
+     * æŸ¥æ‰¾é{@link BoundedTypeInfo}ã€‚
      * <p>
-     * ÀıÈç£º{@link TypeVariableInfo}£º<code>&lt;A extends B&gt;</code>£¬
-     * <code>&lt;B extends Number&gt;</code>£¬ÄÇÃ´£¬²éÕÒ<code>A</code>µÄ½á¹ûÎª
-     * <code>Number</code>¡£
+     * ä¾‹å¦‚ï¼š{@link TypeVariableInfo}ï¼š<code>&lt;A extends B&gt;</code>ï¼Œ
+     * <code>&lt;B extends Number&gt;</code>ï¼Œé‚£ä¹ˆï¼ŒæŸ¥æ‰¾<code>A</code>çš„ç»“æœä¸º
+     * <code>Number</code>ã€‚
      * </p>
      * <p>
-     * ÔÙÈç£º{@link WildcardTypeInfo}£º<code>&lt;? extends B&gt;</code>£¬
-     * <code>&lt;B extends Number&gt;</code>£¬ÄÇÃ´£¬²éÕÒ<code>?</code>µÄ½á¹ûÎª
-     * <code>Number</code>¡£
+     * å†å¦‚ï¼š{@link WildcardTypeInfo}ï¼š<code>&lt;? extends B&gt;</code>ï¼Œ
+     * <code>&lt;B extends Number&gt;</code>ï¼Œé‚£ä¹ˆï¼ŒæŸ¥æ‰¾<code>?</code>çš„ç»“æœä¸º
+     * <code>Number</code>ã€‚
      * </p>
      */
     static TypeInfo findNonBoundedType(TypeInfo type) {
@@ -561,7 +561,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * È¡µÃÀàĞÍÖĞµÄ·½·¨¡£
+     * å–å¾—ç±»å‹ä¸­çš„æ–¹æ³•ã€‚
      */
     static MethodInfo getMethod(ClassTypeInfo type, String methodName, Class<?>... paramTypes) {
         Class<?> rawType = assertNotNull(type, "type").getRawType();
@@ -569,14 +569,14 @@ public class TypeInfoFactory extends TypeInfo.Factory {
         Method method = null;
         Exception notFound = null;
 
-        // ÏÈÕÒpublic·½·¨
+        // å…ˆæ‰¾publicæ–¹æ³•
         try {
             method = rawType.getMethod(methodName, paramTypes);
         } catch (java.lang.NoSuchMethodException e) {
             notFound = e;
         }
 
-        // ÔÙÕÒprotected/package/private·½·¨
+        // å†æ‰¾protected/package/privateæ–¹æ³•
         if (method == null) {
             try {
                 method = rawType.getDeclaredMethod(methodName, paramTypes);
@@ -593,7 +593,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * È¡µÃÀàĞÍÖĞµÄ¹¹Ôìº¯Êı¡£
+     * å–å¾—ç±»å‹ä¸­çš„æ„é€ å‡½æ•°ã€‚
      */
     static MethodInfo getConstructor(ClassTypeInfo type, Class<?>... paramTypes) {
         Class<?> rawType = assertNotNull(type, "type").getRawType();
@@ -615,7 +615,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
     }
 
     /**
-     * È¡µÃÀàĞÍÖĞµÄ×Ö¶Î¡£
+     * å–å¾—ç±»å‹ä¸­çš„å­—æ®µã€‚
      */
     static FieldInfo getField(ClassTypeInfo type, ClassTypeInfo declaringType, String name) {
         Field field = null;

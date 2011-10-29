@@ -18,7 +18,7 @@
 package com.alibaba.citrus.expr;
 
 /**
- * ´ú±í½âÎö±í´ïÊ½µÄÒì³£¡£
+ * ä»£è¡¨è§£æè¡¨è¾¾å¼çš„å¼‚å¸¸ã€‚
  * 
  * @author Michael Zhou
  */
@@ -26,35 +26,35 @@ public class ExpressionParseException extends Exception {
     private static final long serialVersionUID = 3905519419391424825L;
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      */
     public ExpressionParseException() {
         super();
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param message Òì³£ĞÅÏ¢
+     * @param message å¼‚å¸¸ä¿¡æ¯
      */
     public ExpressionParseException(String message) {
         super(message);
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param message Òì³£ĞÅÏ¢
-     * @param cause Òì³£Ô­Òò
+     * @param message å¼‚å¸¸ä¿¡æ¯
+     * @param cause å¼‚å¸¸åŸå› 
      */
     public ExpressionParseException(String message, Throwable cause) {
         super(message, cause);
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param cause Òì³£Ô­Òò
+     * @param cause å¼‚å¸¸åŸå› 
      */
     public ExpressionParseException(Throwable cause) {
         super(cause);

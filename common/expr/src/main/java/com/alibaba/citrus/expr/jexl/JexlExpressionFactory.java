@@ -26,39 +26,39 @@ import com.alibaba.citrus.expr.ExpressionParseException;
 import com.alibaba.citrus.expr.support.ExpressionSupport;
 
 /**
- * ´´½¨<code>JexlExpression</code>µÄ¹¤³§¡£
+ * åˆ›å»º<code>JexlExpression</code>çš„å·¥å‚ã€‚
  * 
  * @author Michael Zhou
  */
 public class JexlExpressionFactory implements ExpressionFactory {
     private final JexlEngine engine = new JexlEngine();
 
-    /** ÊÇ·ñÖ§³Öcontext±äÁ¿£¬¾ÍÊÇÓÃĞ¡Êıµã·Ö¸ôµÄ±äÁ¿Ãû¡£ */
+    /** æ˜¯å¦æ”¯æŒcontextå˜é‡ï¼Œå°±æ˜¯ç”¨å°æ•°ç‚¹åˆ†éš”çš„å˜é‡åã€‚ */
     private boolean supportContextVariables = true;
 
     /**
-     * ÊÇ·ñÖ§³Öcontext±äÁ¿£¬¾ÍÊÇÓÃĞ¡Êıµã·Ö¸ôµÄ±äÁ¿Ãû¡£
+     * æ˜¯å¦æ”¯æŒcontextå˜é‡ï¼Œå°±æ˜¯ç”¨å°æ•°ç‚¹åˆ†éš”çš„å˜é‡åã€‚
      * 
-     * @return Èç¹ûÖ§³Ö£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚æœæ”¯æŒï¼Œåˆ™è¿”å›<code>true</code>
      */
     public boolean isSupportContextVariables() {
         return supportContextVariables;
     }
 
     /**
-     * ÉèÖÃÖ§³Öcontext±äÁ¿¡£
+     * è®¾ç½®æ”¯æŒcontextå˜é‡ã€‚
      * 
-     * @param supportContextVariables ÊÇ·ñÖ§³Öcontext±äÁ¿
+     * @param supportContextVariables æ˜¯å¦æ”¯æŒcontextå˜é‡
      */
     public void setSupportContextVariables(boolean supportContextVariables) {
         this.supportContextVariables = supportContextVariables;
     }
 
     /**
-     * ´´½¨±í´ïÊ½¡£
+     * åˆ›å»ºè¡¨è¾¾å¼ã€‚
      * 
-     * @param expr ±í´ïÊ½×Ö·û´®
-     * @return ±í´ïÊ½
+     * @param expr è¡¨è¾¾å¼å­—ç¬¦ä¸²
+     * @return è¡¨è¾¾å¼
      */
     public Expression createExpression(final String expr) throws ExpressionParseException {
         final Expression jexlExpression;
@@ -72,25 +72,25 @@ public class JexlExpressionFactory implements ExpressionFactory {
         if (isSupportContextVariables() && isValidContextVariableName(expr)) {
             return new ExpressionSupport() {
                 /**
-                 * È¡µÃ±í´ïÊ½×Ö·û´®±íÊ¾¡£
+                 * å–å¾—è¡¨è¾¾å¼å­—ç¬¦ä¸²è¡¨ç¤ºã€‚
                  * 
-                 * @return ±í´ïÊ½×Ö·û´®±íÊ¾
+                 * @return è¡¨è¾¾å¼å­—ç¬¦ä¸²è¡¨ç¤º
                  */
                 public String getExpressionText() {
                     return expr;
                 }
 
                 /**
-                 * ÔÚÖ¸¶¨µÄÉÏÏÂÎÄÖĞ¼ÆËã±í´ïÊ½¡£
+                 * åœ¨æŒ‡å®šçš„ä¸Šä¸‹æ–‡ä¸­è®¡ç®—è¡¨è¾¾å¼ã€‚
                  * 
-                 * @param context <code>ExpressionContext</code>ÉÏÏÂÎÄ
-                 * @return ±í´ïÊ½µÄ¼ÆËã½á¹û
+                 * @param context <code>ExpressionContext</code>ä¸Šä¸‹æ–‡
+                 * @return è¡¨è¾¾å¼çš„è®¡ç®—ç»“æœ
                  */
                 public Object evaluate(ExpressionContext context) {
-                    // Ê×ÏÈÖ´ĞĞjexl±í´ïÊ½
+                    // é¦–å…ˆæ‰§è¡Œjexlè¡¨è¾¾å¼
                     Object value = jexlExpression.evaluate(context);
 
-                    // Èç¹ûjexl±í´ïÊ½½á¹ûÎªnull£¬Ôò´ÓcontextÖĞÖ±½ÓÈ¡Öµ
+                    // å¦‚æœjexlè¡¨è¾¾å¼ç»“æœä¸ºnullï¼Œåˆ™ä»contextä¸­ç›´æ¥å–å€¼
                     if (value == null) {
                         value = context.get(expr);
                     }
@@ -104,9 +104,9 @@ public class JexlExpressionFactory implements ExpressionFactory {
     }
 
     /**
-     * ÅĞ¶ÏÊÇ·ñÎªcontext±äÁ¿¡£
+     * åˆ¤æ–­æ˜¯å¦ä¸ºcontextå˜é‡ã€‚
      * 
-     * @return Èç¹ûÊÇ£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚æœæ˜¯ï¼Œåˆ™è¿”å›<code>true</code>
      */
     protected boolean isValidContextVariableName(String varName) {
         for (int i = 0; i < varName.length(); i++) {

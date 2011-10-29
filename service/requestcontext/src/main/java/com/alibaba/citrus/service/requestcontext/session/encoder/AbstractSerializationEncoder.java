@@ -41,19 +41,19 @@ import com.alibaba.citrus.springext.support.BeanSupport;
 import com.alibaba.citrus.util.io.ByteArrayOutputStream;
 
 /**
- * Í¨¹ı<code>Serializer</code>Ìá¹©µÄĞòÁĞ»¯»úÖÆÀ´±àÂë¶ÔÏó£¬ÒÔ¼°½âÂë×Ö·û´®¡£
+ * é€šè¿‡<code>Serializer</code>æä¾›çš„åºåˆ—åŒ–æœºåˆ¶æ¥ç¼–ç å¯¹è±¡ï¼Œä»¥åŠè§£ç å­—ç¬¦ä¸²ã€‚
  * <p>
- * ±àÂë²½ÖèÎª£º
+ * ç¼–ç æ­¥éª¤ä¸ºï¼š
  * </p>
  * <ul>
- * <li>ÓÃ<code>Serializer</code>ĞòÁĞ»¯£¬Ä¬ÈÏÊ¹ÓÃ<code>HessianSerializer</code>¡£</li>
- * <li>Ñ¹Ëõ¡£</li>
- * <li>Èç¹û<code>Encrypter</code>´æÔÚ£¬ÓÃËü¼ÓÃÜ£¬·ñÔò£¬²»¼ÓÃÜ¡£</li>
- * <li>Base64±àÂë¡£</li>
- * <li>URL encoding£¬ÒÔÈ·±£ËùÓĞ×Ö·û¶¼·ûºÏHTTP headerµÄÒªÇó¡£</li>
+ * <li>ç”¨<code>Serializer</code>åºåˆ—åŒ–ï¼Œé»˜è®¤ä½¿ç”¨<code>HessianSerializer</code>ã€‚</li>
+ * <li>å‹ç¼©ã€‚</li>
+ * <li>å¦‚æœ<code>Encrypter</code>å­˜åœ¨ï¼Œç”¨å®ƒåŠ å¯†ï¼Œå¦åˆ™ï¼Œä¸åŠ å¯†ã€‚</li>
+ * <li>Base64ç¼–ç ã€‚</li>
+ * <li>URL encodingï¼Œä»¥ç¡®ä¿æ‰€æœ‰å­—ç¬¦éƒ½ç¬¦åˆHTTP headerçš„è¦æ±‚ã€‚</li>
  * </ul>
  * <p>
- * ½âÂë²½ÖèÏà·´¡£
+ * è§£ç æ­¥éª¤ç›¸åã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -70,13 +70,13 @@ public abstract class AbstractSerializationEncoder extends BeanSupport implement
     }
 
     /**
-     * ±àÂë¡£
+     * ç¼–ç ã€‚
      */
     public String encode(Map<String, Object> attrs, StoreContext storeContext) throws SessionEncoderException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-        // 1. ĞòÁĞ»¯
-        // 2. Ñ¹Ëõ
+        // 1. åºåˆ—åŒ–
+        // 2. å‹ç¼©
         Deflater def = new Deflater(Deflater.BEST_COMPRESSION, false);
         DeflaterOutputStream dos = new DeflaterOutputStream(baos, def);
 
@@ -95,10 +95,10 @@ public abstract class AbstractSerializationEncoder extends BeanSupport implement
 
         byte[] plaintext = baos.toByteArray().toByteArray();
 
-        // 3. ¼ÓÃÜ
+        // 3. åŠ å¯†
         byte[] cryptotext = encrypt(plaintext);
 
-        // 4. base64±àÂë
+        // 4. base64ç¼–ç 
         try {
             String encodedValue = new String(Base64.encodeBase64(cryptotext, false), "ISO-8859-1");
 
@@ -109,7 +109,7 @@ public abstract class AbstractSerializationEncoder extends BeanSupport implement
     }
 
     /**
-     * ¼ÓÃÜ¡£
+     * åŠ å¯†ã€‚
      */
     private byte[] encrypt(byte[] plaintext) throws SessionEncoderException {
         if (encrypter != null) {
@@ -120,10 +120,10 @@ public abstract class AbstractSerializationEncoder extends BeanSupport implement
     }
 
     /**
-     * ½âÂë¡£
+     * è§£ç ã€‚
      */
     public Map<String, Object> decode(String encodedValue, StoreContext storeContext) throws SessionEncoderException {
-        // 1. base64½âÂë
+        // 1. base64è§£ç 
         byte[] cryptotext = null;
 
         try {
@@ -137,19 +137,19 @@ public abstract class AbstractSerializationEncoder extends BeanSupport implement
             throw new SessionEncoderException("Failed to decode session state: ", e);
         }
 
-        // 2. ½âÃÜ
+        // 2. è§£å¯†
         byte[] plaintext = decrypt(cryptotext);
 
         if (isEmptyArray(plaintext)) {
             throw new SessionEncoderException("Decrypted session state is empty: " + encodedValue);
         }
 
-        // 3. ½âÑ¹Ëõ
+        // 3. è§£å‹ç¼©
         ByteArrayInputStream bais = new ByteArrayInputStream(plaintext);
         Inflater inf = new Inflater(false);
         InflaterInputStream iis = new InflaterInputStream(bais, inf);
 
-        // 4. ·´ĞòÁĞ»¯
+        // 4. ååºåˆ—åŒ–
         try {
             @SuppressWarnings("unchecked")
             Map<String, Object> attrs = (Map<String, Object>) serializer.deserialize(iis);
@@ -167,7 +167,7 @@ public abstract class AbstractSerializationEncoder extends BeanSupport implement
     }
 
     /**
-     * ½âÃÜ¡£
+     * è§£å¯†ã€‚
      */
     private byte[] decrypt(byte[] cryptotext) throws SessionEncoderException {
         if (encrypter != null) {

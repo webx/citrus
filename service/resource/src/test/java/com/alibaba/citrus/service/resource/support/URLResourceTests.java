@@ -24,7 +24,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>URLResource</code>¡£
+ * æµ‹è¯•<code>URLResource</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -63,7 +63,7 @@ public class URLResourceTests extends AbstractResourceTests {
         assertEquals("test", readText(resource.getInputStream(), null, true));
         assertTrue(resource.exists());
 
-        // == jarFile's lastModified£¬´ÓURLÖĞÈ¡µÃµÄÊ±¼ä´ÁÖ»ÄÜ¾«È·µ½Ãë
+        // == jarFile's lastModifiedï¼Œä»URLä¸­å–å¾—çš„æ—¶é—´æˆ³åªèƒ½ç²¾ç¡®åˆ°ç§’
         assertEquals(jarFile.lastModified() / 1000, resource.lastModified() / 1000);
 
         assertThat(resource.toString(), containsAll("URLResource[URL: ", "test.jar!/test.txt]"));

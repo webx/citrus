@@ -20,7 +20,7 @@ package com.alibaba.citrus.generictype;
 import java.lang.reflect.ParameterizedType;
 
 /**
- * ºÍ{@link ParameterizedType}¶ÔÓ¦£¬´ú±íÒ»¸ö²ÎÁ¿»¯ÀàĞÍµÄĞÅÏ¢¡£
+ * å’Œ{@link ParameterizedType}å¯¹åº”ï¼Œä»£è¡¨ä¸€ä¸ªå‚é‡åŒ–ç±»å‹çš„ä¿¡æ¯ã€‚
  * 
  * @author Michael Zhou
  */

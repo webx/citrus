@@ -41,10 +41,10 @@ import com.alibaba.citrus.util.internal.ActionEventUtil;
 import com.alibaba.citrus.webx.WebxComponent;
 
 /**
- * ¸ù¾İURLµÄÄÚÈİÀ´ÉèÖÃrundata¡£¸ù¾İÒÔÏÂ¹æÔò£º
+ * æ ¹æ®URLçš„å†…å®¹æ¥è®¾ç½®rundataã€‚æ ¹æ®ä»¥ä¸‹è§„åˆ™ï¼š
  * <ol>
- * <li>È¡µÃservletPath + pathInfo - componentPath×÷Îªtarget¡£</li>
- * <li>Ê¹ÓÃMappingRuleService£¬½«targetµÄºó×º×ª»»³ÉÍ³Ò»µÄÄÚ²¿ºó×º¡£ÀıÈç£º½«jhtml×ª»»³Éjsp¡£</li>
+ * <li>å–å¾—servletPath + pathInfo - componentPathä½œä¸ºtargetã€‚</li>
+ * <li>ä½¿ç”¨MappingRuleServiceï¼Œå°†targetçš„åç¼€è½¬æ¢æˆç»Ÿä¸€çš„å†…éƒ¨åç¼€ã€‚ä¾‹å¦‚ï¼šå°†jhtmlè½¬æ¢æˆjspã€‚</li>
  * </ol>
  * 
  * @author Michael Zhou
@@ -65,7 +65,7 @@ public class AnalyzeURLValve extends AbstractValve {
     private String actionParam;
 
     /**
-     * ÉèÖÃÔÚURL queryÖĞ´ú±íactionµÄ²ÎÊıÃû¡£
+     * è®¾ç½®åœ¨URL queryä¸­ä»£è¡¨actionçš„å‚æ•°åã€‚
      */
     public void setActionParam(String actionParam) {
         this.actionParam = trimToNull(actionParam);
@@ -94,7 +94,7 @@ public class AnalyzeURLValve extends AbstractValve {
         TurbineRunDataInternal rundata = (TurbineRunDataInternal) getTurbineRunData(request);
         String target = null;
 
-        // È¡µÃtarget£¬²¢×ª»»³ÉÍ³Ò»µÄÄÚ²¿ºó×ºÃû¡£
+        // å–å¾—targetï¼Œå¹¶è½¬æ¢æˆç»Ÿä¸€çš„å†…éƒ¨åç¼€åã€‚
         String pathInfo = ServletUtil.getResourcePath(rundata.getRequest()).substring(
                 component.getComponentPath().length());
 
@@ -102,7 +102,7 @@ public class AnalyzeURLValve extends AbstractValve {
             pathInfo = getHomepage();
         }
 
-        // ×¢Òâ£¬±ØĞë½«pathInfo×ª»»³ÉcamelCase¡£
+        // æ³¨æ„ï¼Œå¿…é¡»å°†pathInfoè½¬æ¢æˆcamelCaseã€‚
         int lastSlashIndex = pathInfo.lastIndexOf("/");
 
         if (lastSlashIndex >= 0) {
@@ -116,13 +116,13 @@ public class AnalyzeURLValve extends AbstractValve {
 
         rundata.setTarget(target);
 
-        // È¡µÃaction
+        // å–å¾—action
         String action = StringUtil.toCamelCase(trimToNull(rundata.getParameters().getString(actionParam)));
 
         action = mappingRuleService.getMappedName(ACTION_MODULE, action);
         rundata.setAction(action);
 
-        // È¡µÃactionEvent
+        // å–å¾—actionEvent
         String actionEvent = ActionEventUtil.getEventName(rundata.getRequest());
         rundata.setActionEvent(actionEvent);
 

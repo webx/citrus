@@ -28,7 +28,7 @@ import org.junit.Test;
 import com.alibaba.citrus.generictype.introspect.PropertyPath.Visitor;
 
 /**
- * ²âÊÔ<code>PropertyPath</code>¡£
+ * æµ‹è¯•<code>PropertyPath</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -126,10 +126,10 @@ public class PropertyPathTests {
     @Test
     public void parse_key_escape() {
         assertParser("['\\u02-3']", "[\"\\\\u02-3\"]");
-        assertParser("['\\u02-3\\u4e2d']", "[\"\\\\u02-3ÖÐ\"]");
+        assertParser("['\\u02-3\\u4e2d']", "[\"\\\\u02-3ä¸­\"]");
         assertParser("['test']", "[\"test\"]");
         assertParser("['\ntest\b']", "[\"\\ntest\\b\"]");
-        assertParser("['\u4e2d25foo\ntest\b']", "[\"ÖÐ25foo\\ntest\\b\"]");
+        assertParser("['\u4e2d25foo\ntest\b']", "[\"ä¸­25foo\\ntest\\b\"]");
         assertParser("['\\'\foo\teste\r']", "[\"'\\foo\\teste\\r\"]");
 
         assertParserFail("['\\']", "['\\\\']");

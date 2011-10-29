@@ -20,9 +20,9 @@ package com.alibaba.citrus.springext.support;
 import static com.alibaba.citrus.generictype.TypeInfoUtil.*;
 
 /**
- * Í¨¹ıgeneric²ÎÊıÀ´È¡µÃbeanInterfaceµÄbean»ùÀà¡£
+ * é€šè¿‡genericå‚æ•°æ¥å–å¾—beanInterfaceçš„beanåŸºç±»ã€‚
  * <p>
- * ĞèÒª×¢ÒâµÄÊÇ£¬½âÎögeneric²ÎÊıÓĞÒ»¶¨µÄĞÔÄÜ¿ªÏú£¬ËùÒÔÓ¦¸Ã±ÜÃâ½«´Ë»ùÀàÓÃÓÚ·ÇsingletonµÄ¶ÔÏó¡£
+ * éœ€è¦æ³¨æ„çš„æ˜¯ï¼Œè§£ægenericå‚æ•°æœ‰ä¸€å®šçš„æ€§èƒ½å¼€é”€ï¼Œæ‰€ä»¥åº”è¯¥é¿å…å°†æ­¤åŸºç±»ç”¨äºésingletonçš„å¯¹è±¡ã€‚
  * </p>
  */
 public class GenericBeanSupport<T> extends BeanSupport {

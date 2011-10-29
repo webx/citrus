@@ -28,7 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * ²âÊÔ<code>TestEnv</code>¡£
+ * æµ‹è¯•<code>TestEnv</code>ã€‚
  * 
  * @author Michael Zhou
  */

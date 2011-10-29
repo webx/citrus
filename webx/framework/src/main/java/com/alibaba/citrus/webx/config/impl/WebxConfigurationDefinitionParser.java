@@ -35,7 +35,7 @@ import com.alibaba.citrus.webx.config.impl.WebxConfigurationImpl.ComponentsConfi
 import com.alibaba.citrus.webx.impl.WebxControllerImpl;
 
 /**
- * ÓÃÀ´½âÎöwebx configurationµÄparser¡£
+ * ç”¨æ¥è§£æwebx configurationçš„parserã€‚
  * 
  * @author Michael Zhou
  */

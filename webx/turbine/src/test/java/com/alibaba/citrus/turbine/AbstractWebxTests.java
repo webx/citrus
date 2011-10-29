@@ -116,7 +116,7 @@ public abstract class AbstractWebxTests {
     }
 
     /**
-     * µ÷ÓÃservlet£¬È¡µÃrequest/response¡£
+     * è°ƒç”¨servletï¼Œå–å¾—request/responseã€‚
      */
     protected final void getInvocationContext(String uri) throws Exception {
         getInvocationContext(uri, null);
@@ -145,7 +145,7 @@ public abstract class AbstractWebxTests {
     }
 
     /**
-     * È¡µÃrequest context¡£
+     * å–å¾—request contextã€‚
      */
     protected final void initRequestContext() {
         requestContexts = (RequestContextChainingService) factory.getBean("requestContexts");

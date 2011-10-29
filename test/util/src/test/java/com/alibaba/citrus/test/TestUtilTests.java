@@ -27,7 +27,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>TestUtil</code>¡£
+ * æµ‹è¯•<code>TestUtil</code>ã€‚
  * 
  * @author Michael Zhou
  */

@@ -31,7 +31,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.regex.PathNameWildcardCompiler;
 
 /**
- * ÓÃÀ´Æ¥ÅäºÍ¹ıÂË<code>request.getRequestURI()</code>¡£
+ * ç”¨æ¥åŒ¹é…å’Œè¿‡æ»¤<code>request.getRequestURI()</code>ã€‚
  * 
  * @author Michael Zhou
  */

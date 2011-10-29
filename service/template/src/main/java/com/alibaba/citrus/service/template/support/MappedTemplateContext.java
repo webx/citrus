@@ -27,7 +27,7 @@ import com.alibaba.citrus.service.template.TemplateContext;
 import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
- * »ùÓÚ<code>Map</code>µÄ<code>TemplateContext</code>ÊµÏÖ¡£
+ * åŸºäº<code>Map</code>çš„<code>TemplateContext</code>å®ç°ã€‚
  * 
  * @author Michael Zhou
  */

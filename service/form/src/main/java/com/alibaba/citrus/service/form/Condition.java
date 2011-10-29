@@ -20,13 +20,13 @@ package com.alibaba.citrus.service.form;
 import com.alibaba.citrus.service.form.Validator.Context;
 
 /**
- * ´ú±íÒ»¸öÌõ¼ş¡£
+ * ä»£è¡¨ä¸€ä¸ªæ¡ä»¶ã€‚
  * 
  * @author Michael Zhou
  */
 public interface Condition {
     /**
-     * ÈçÂú×ãÌõ¼ş£¬Ôò·µ»Ø<code>true</code>¡£
+     * å¦‚æ»¡è¶³æ¡ä»¶ï¼Œåˆ™è¿”å›<code>true</code>ã€‚
      */
     boolean isSatisfied(Context context);
 }

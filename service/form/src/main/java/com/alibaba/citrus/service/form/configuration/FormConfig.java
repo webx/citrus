@@ -24,61 +24,61 @@ import org.springframework.beans.PropertyEditorRegistrar;
 import com.alibaba.citrus.service.form.FormService;
 
 /**
- * ´ú±íÒ»¸öformµÄ¶¨ÒåĞÅÏ¢¡£
+ * ä»£è¡¨ä¸€ä¸ªformçš„å®šä¹‰ä¿¡æ¯ã€‚
  * <p>
- * Form¶¨ÒåÊÇ²»¿É¸ü¸ÄµÄ¡£
+ * Formå®šä¹‰æ˜¯ä¸å¯æ›´æ”¹çš„ã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface FormConfig {
     /**
-     * È¡µÃ´´½¨´ËformµÄservice¡£
+     * å–å¾—åˆ›å»ºæ­¤formçš„serviceã€‚
      */
     FormService getFormService();
 
     /**
-     * ÀàĞÍ×ª»»³ö´íÊ±£¬ÊÇ·ñ²»±¨´í£¬¶øÊÇ·µ»ØÄ¬ÈÏÖµ¡£
+     * ç±»å‹è½¬æ¢å‡ºé”™æ—¶ï¼Œæ˜¯å¦ä¸æŠ¥é”™ï¼Œè€Œæ˜¯è¿”å›é»˜è®¤å€¼ã€‚
      */
     boolean isConverterQuiet();
 
     /**
-     * GroupÊÇ·ñÄ¬ÈÏ±ØĞë´ÓpostÇëÇóÖĞÈ¡µÃÊı¾İ¡£
+     * Groupæ˜¯å¦é»˜è®¤å¿…é¡»ä»postè¯·æ±‚ä¸­å–å¾—æ•°æ®ã€‚
      */
     boolean isPostOnlyByDefault();
 
     /**
-     * È¡µÃmessage codeµÄÇ°×º¡£
+     * å–å¾—message codeçš„å‰ç¼€ã€‚
      * <p>
-     * Validator¿ÉÒÔ´Óspring <code>MessageSource</code>
-     * ÖĞÈ¡µÃmessageÄÚÈİ¡£ÓÃÀ´ÒıÓÃmessageµÄcodeÎª£º
-     * <code>messageCodePrefix.groupName.fieldName.validatorId</code>¡£
+     * Validatorå¯ä»¥ä»spring <code>MessageSource</code>
+     * ä¸­å–å¾—messageå†…å®¹ã€‚ç”¨æ¥å¼•ç”¨messageçš„codeä¸ºï¼š
+     * <code>messageCodePrefix.groupName.fieldName.validatorId</code>ã€‚
      * </p>
      * <p>
-     * Ä¬ÈÏµÄÇ°×ºÎª£º<code>form.</code>¡£
+     * é»˜è®¤çš„å‰ç¼€ä¸ºï¼š<code>form.</code>ã€‚
      * </p>
      */
     String getMessageCodePrefix();
 
     /**
-     * È¡µÃËùÓĞgroup configµÄÁĞ±í¡£
+     * å–å¾—æ‰€æœ‰group configçš„åˆ—è¡¨ã€‚
      */
     List<GroupConfig> getGroupConfigList();
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄgroup config¡£Ãû³Æ´óĞ¡Ğ´²»Ãô¸Ğ¡£ Èç¹ûÎ´ÕÒµ½£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šåç§°çš„group configã€‚åç§°å¤§å°å†™ä¸æ•æ„Ÿã€‚ å¦‚æœæœªæ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     GroupConfig getGroupConfig(String groupName);
 
     /**
-     * È¡µÃºÍÖ¸¶¨keyÏà¶ÔÓ¦µÄgroup config¡£Èç¹ûÎ´ÕÒµ½£¬Ôò·µ»Ø<code>null</code>
+     * å–å¾—å’ŒæŒ‡å®škeyç›¸å¯¹åº”çš„group configã€‚å¦‚æœæœªæ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>
      */
     GroupConfig getGroupConfigByKey(String groupKey);
 
     /**
-     * È¡µÃ<code>PropertyEditor</code>×¢²áÆ÷¡£
+     * å–å¾—<code>PropertyEditor</code>æ³¨å†Œå™¨ã€‚
      * <p>
-     * <code>PropertyEditor</code>¸ºÔğ½«×Ö·û´®Öµ×ª»»³Ébean propertyµÄÀàĞÍ£¬»ò·´Ö®¡£
+     * <code>PropertyEditor</code>è´Ÿè´£å°†å­—ç¬¦ä¸²å€¼è½¬æ¢æˆbean propertyçš„ç±»å‹ï¼Œæˆ–åä¹‹ã€‚
      * </p>
      */
     PropertyEditorRegistrar getPropertyEditorRegistrar();

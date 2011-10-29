@@ -18,7 +18,7 @@
 package com.alibaba.citrus.webx;
 
 /**
- * ´ú±íÓĞ¹ØwebxµÄÒì³£´íÎó¡£
+ * ä»£è¡¨æœ‰å…³webxçš„å¼‚å¸¸é”™è¯¯ã€‚
  * 
  * @author Michael Zhou
  */

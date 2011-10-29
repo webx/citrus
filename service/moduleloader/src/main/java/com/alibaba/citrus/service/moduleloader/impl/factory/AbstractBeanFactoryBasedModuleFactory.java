@@ -32,7 +32,7 @@ import com.alibaba.citrus.service.moduleloader.ModuleFactory;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
 
 /**
- * Í¨¹ı²éÕÒbeansÀ´´´½¨ÏàÓ¦µÄmodulesµÄ¹¤³§¡£
+ * é€šè¿‡æŸ¥æ‰¾beansæ¥åˆ›å»ºç›¸åº”çš„modulesçš„å·¥å‚ã€‚
  * 
  * @author Michael Zhou
  */

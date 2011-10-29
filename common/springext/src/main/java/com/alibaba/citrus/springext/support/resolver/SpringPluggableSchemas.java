@@ -47,7 +47,7 @@ import com.alibaba.citrus.springext.impl.SchemaImpl;
 import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
- * ½«SpringËùÖ§³ÖµÄ<code>META-INF/spring.schemas</code>ÖĞ¶¨ÒåµÄschemasÒÆµ½±¾µØ·şÎñÆ÷¡£
+ * å°†Springæ‰€æ”¯æŒçš„<code>META-INF/spring.schemas</code>ä¸­å®šä¹‰çš„schemasç§»åˆ°æœ¬åœ°æœåŠ¡å™¨ã€‚
  * 
  * @author Michael Zhou
  */
@@ -164,8 +164,8 @@ public class SpringPluggableSchemas implements Schemas {
     }
 
     private String getSchemaName(String uri) {
-        // Ìæ»»URI£¬½«http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-        // Ìæ»»³É£ºwww.springframework.org/schema/beans/spring-beans-2.5.xsd
+        // æ›¿æ¢URIï¼Œå°†http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        // æ›¿æ¢æˆï¼šwww.springframework.org/schema/beans/spring-beans-2.5.xsd
         return URI.create(uri).normalize().getSchemeSpecificPart().replaceAll("^/+|/+$", "");
     }
 

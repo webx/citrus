@@ -44,14 +44,14 @@ public abstract class AbstractWebxController implements WebxController {
     }
 
     /**
-     * ´Ë·½·¨ÔÚ´´½¨controllerÊ±±»µ÷ÓÃ¡£
+     * æ­¤æ–¹æ³•åœ¨åˆ›å»ºcontrolleræ—¶è¢«è°ƒç”¨ã€‚
      */
     public void init(WebxComponent component) {
         this.component = component;
     }
 
     /**
-     * ´Ë·½·¨ÔÚ´´½¨»òË¢ÐÂWebApplicationContextÊ±±»µ÷ÓÃ¡£
+     * æ­¤æ–¹æ³•åœ¨åˆ›å»ºæˆ–åˆ·æ–°WebApplicationContextæ—¶è¢«è°ƒç”¨ã€‚
      */
     public void onRefreshContext() throws BeansException {
         initWebxConfiguration();

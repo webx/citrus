@@ -29,7 +29,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 
 /**
- * ²âÊÔ´Óresource loading serviceÖĞ×°ÔØ×ÓcontextµÄÅäÖÃÎÄ¼ş¡£
+ * æµ‹è¯•ä»resource loading serviceä¸­è£…è½½å­contextçš„é…ç½®æ–‡ä»¶ã€‚
  * 
  * @author Michael Zhou
  */

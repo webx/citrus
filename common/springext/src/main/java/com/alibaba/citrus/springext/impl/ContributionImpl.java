@@ -48,7 +48,7 @@ import com.alibaba.citrus.springext.VersionableSchemas;
 import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
- * ÊµÏÖ<code>Contribution</code>½Ó¿Ú¡£
+ * å®ç°<code>Contribution</code>æ¥å£ã€‚
  * 
  * @author Michael Zhou
  */
@@ -65,7 +65,7 @@ public class ContributionImpl implements Contribution {
         this.configurationPoint = assertNotNull(cp, "configurationPoint");
         this.settings = settings;
         this.key = new ContributionKey(name, type);
-        this.implementationClassName = contributionClassName; // ¿ÉÄÜÎª¿Õ£¬µ«ÍÆ³Ùµ½´´½¨Ê±ÔÙ±¨´í
+        this.implementationClassName = contributionClassName; // å¯èƒ½ä¸ºç©ºï¼Œä½†æ¨è¿Ÿåˆ°åˆ›å»ºæ—¶å†æŠ¥é”™
     }
 
     public ConfigurationPoint getConfigurationPoint() {
@@ -171,10 +171,10 @@ public class ContributionImpl implements Contribution {
     }
 
     /**
-     * ¼ì²éschemaName-version×éºÏÊÇ·ñÎªÁíÒ»¸öcontributionµÄÃû×Ö£¬Èç¹ûÊÇ£¬ÔòÅ×Æú¸Ã×éºÏ¡£
+     * æ£€æŸ¥schemaName-versionç»„åˆæ˜¯å¦ä¸ºå¦ä¸€ä¸ªcontributionçš„åå­—ï¼Œå¦‚æœæ˜¯ï¼Œåˆ™æŠ›å¼ƒè¯¥ç»„åˆã€‚
      * <p>
-     * ÀıÈç£ºÓĞÁ½¸öcontribution£º<code>break</code>ºÍ<code>break-if</code>¡£ÄÇÃ´ºóÕßµÄschema£º
-     * <code>break-if.xsd</code>¾Í»á±»ÎóÅĞ³ÉÇ°ÕßµÄÄ³¸översion°æ±¾¡£¸Ã·½·¨ÓÃÀ´¼ì²é²¢ÅÅ³ıÕâÖÖÇé¿ö¡£
+     * ä¾‹å¦‚ï¼šæœ‰ä¸¤ä¸ªcontributionï¼š<code>break</code>å’Œ<code>break-if</code>ã€‚é‚£ä¹ˆåè€…çš„schemaï¼š
+     * <code>break-if.xsd</code>å°±ä¼šè¢«è¯¯åˆ¤æˆå‰è€…çš„æŸä¸ªversionç‰ˆæœ¬ã€‚è¯¥æ–¹æ³•ç”¨æ¥æ£€æŸ¥å¹¶æ’é™¤è¿™ç§æƒ…å†µã€‚
      * </p>
      */
     private boolean checkVersion(String schemaVersion) {
@@ -194,7 +194,7 @@ public class ContributionImpl implements Contribution {
     }
 
     /**
-     * ÓÃÓÚÉú³É»òÈ¡µÃcontribution schemaµÄÄÚÈİ¡£
+     * ç”¨äºç”Ÿæˆæˆ–å–å¾—contribution schemaçš„å†…å®¹ã€‚
      */
     private static class ContributionSchemaSource implements InputStreamSource {
         private final URL url;
@@ -208,9 +208,9 @@ public class ContributionImpl implements Contribution {
         }
 
         /**
-         * ¶ÁÈ¡contribution schema£¬±ØÒªÊ±´¦ÀíºÍ¸Ä½øÆäÄÚÈİ¡£
+         * è¯»å–contribution schemaï¼Œå¿…è¦æ—¶å¤„ç†å’Œæ”¹è¿›å…¶å†…å®¹ã€‚
          * <p>
-         * µ«¼ÙÈçschema¶ÁÈ¡Ê§°Ü£¬ÔòÖ»·µ»ØÔ­Ê¼µÄschemaÁ÷¡£
+         * ä½†å‡å¦‚schemaè¯»å–å¤±è´¥ï¼Œåˆ™åªè¿”å›åŸå§‹çš„schemaæµã€‚
          * </p>
          */
         public InputStream getInputStream() throws IOException {

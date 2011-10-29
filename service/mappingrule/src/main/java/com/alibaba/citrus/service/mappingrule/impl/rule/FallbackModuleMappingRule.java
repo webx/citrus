@@ -34,29 +34,29 @@ import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ÏòÉÏËÑË÷µÄÄ£¿éÓ³Éä¹æÔò¡£
+ * å‘ä¸Šæœç´¢çš„æ¨¡å—æ˜ å°„è§„åˆ™ã€‚
  * <ol>
- * <li>½«<code>"/"</code>Ìæ»»³É<code>"."</code>¡£</li>
- * <li>³ıÈ¥ÎÄ¼şÃûºó×º¡£</li>
- * <li>½«×îºóÒ»¸öµ¥´ÊÊ××ÖÄ¸¸Ä³É´óĞ´£¬ÒÔ·ûºÏÄ£¿éÃüÃûµÄ¹æÔò¡£</li>
- * <li>µ÷ÓÃmodule loader service¼ì²éÄ£¿éÊÇ·ñ´æÔÚ£¬Èç¹û²»´æÔÚ£¬Ôò²éÕÒÉÏÒ»¼¶Ä£¿éÃû£¬Ò»Ö±ÕÒµ½¸ùÄ¿Â¼¡£</li>
- * <li>Èç¹ûÈ«ÕÒ²»µ½£¬Ôò²éÕÒÄ¬ÈÏÃû³Æ£¬²¢È·±£¸ÃÃû³ÆËù´ú±íµÄÄ£¿é´æÔÚ¡£</li>
- * <li>Èç¹û´æÔÚ£¬Ôò·µ»ØÖ®£¬·ñÔò·µ»ØµÚÒ»¸ö²»Æ¥ÅäµÄnormalizedÄ£¿éÃû£¨¼´¾«È·Æ¥Åä£©</li>
+ * <li>å°†<code>"/"</code>æ›¿æ¢æˆ<code>"."</code>ã€‚</li>
+ * <li>é™¤å»æ–‡ä»¶ååç¼€ã€‚</li>
+ * <li>å°†æœ€åä¸€ä¸ªå•è¯é¦–å­—æ¯æ”¹æˆå¤§å†™ï¼Œä»¥ç¬¦åˆæ¨¡å—å‘½åçš„è§„åˆ™ã€‚</li>
+ * <li>è°ƒç”¨module loader serviceæ£€æŸ¥æ¨¡å—æ˜¯å¦å­˜åœ¨ï¼Œå¦‚æœä¸å­˜åœ¨ï¼Œåˆ™æŸ¥æ‰¾ä¸Šä¸€çº§æ¨¡å—åï¼Œä¸€ç›´æ‰¾åˆ°æ ¹ç›®å½•ã€‚</li>
+ * <li>å¦‚æœå…¨æ‰¾ä¸åˆ°ï¼Œåˆ™æŸ¥æ‰¾é»˜è®¤åç§°ï¼Œå¹¶ç¡®ä¿è¯¥åç§°æ‰€ä»£è¡¨çš„æ¨¡å—å­˜åœ¨ã€‚</li>
+ * <li>å¦‚æœå­˜åœ¨ï¼Œåˆ™è¿”å›ä¹‹ï¼Œå¦åˆ™è¿”å›ç¬¬ä¸€ä¸ªä¸åŒ¹é…çš„normalizedæ¨¡å—åï¼ˆå³ç²¾ç¡®åŒ¹é…ï¼‰</li>
  * </ol>
  * <p>
- * ÀıÈç£º½«Ä£°åÃû£º<code>"about/directions/driving.vm"</code>Ó³Éäµ½screen
- * module£¬½«Ë³´ÎËÑË÷ÒÔÏÂmodule£º
+ * ä¾‹å¦‚ï¼šå°†æ¨¡æ¿åï¼š<code>"about/directions/driving.vm"</code>æ˜ å°„åˆ°screen
+ * moduleï¼Œå°†é¡ºæ¬¡æœç´¢ä»¥ä¸‹moduleï¼š
  * </p>
  * <ol>
  * <li><code>&quot;about.directions.Driving&quot;</code></li>
  * <li><code>&quot;about.directions.Default&quot;</code></li>
  * <li><code>&quot;about.Default&quot;</code></li>
  * <li><code>&quot;Default&quot;</code></li>
- * <li><code>&quot;DefaultScreen&quot;</code>£¨¼´ÅäÖÃÎÄ¼şÖĞÖ¸¶¨µÄÄ¬ÈÏmoduleÃû£©</li>
+ * <li><code>&quot;DefaultScreen&quot;</code>ï¼ˆå³é…ç½®æ–‡ä»¶ä¸­æŒ‡å®šçš„é»˜è®¤moduleåï¼‰</li>
  * </ol>
  * <p>
- * ×¢Òâ£¬Èç¹ûÉÏÀıÖĞ<code>DefaultScreen</code>²»´æÔÚ»òÎ´Ö¸¶¨Ä¬ÈÏÖµ£¬Ôò·µ»Ø×î³õµÄ½á¹û£º
- * <code>about.directions.Driving</code>¡£
+ * æ³¨æ„ï¼Œå¦‚æœä¸Šä¾‹ä¸­<code>DefaultScreen</code>ä¸å­˜åœ¨æˆ–æœªæŒ‡å®šé»˜è®¤å€¼ï¼Œåˆ™è¿”å›æœ€åˆçš„ç»“æœï¼š
+ * <code>about.directions.Driving</code>ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -87,7 +87,7 @@ public class FallbackModuleMappingRule extends AbstractModuleMappingRule {
         FallbackIterator iter = new FallbackModuleIterator(name, defaultName, matchLastName);
 
         String moduleName = null;
-        String firstModuleName = iter.getNext(); // ±£´æµÚÒ»¸ö¾«È·µÄÆ¥Åä£¬ÍòÒ»ÕÒ²»µ½£¬¾Í·µ»ØÕâ¸öÖµ
+        String firstModuleName = iter.getNext(); // ä¿å­˜ç¬¬ä¸€ä¸ªç²¾ç¡®çš„åŒ¹é…ï¼Œä¸‡ä¸€æ‰¾ä¸åˆ°ï¼Œå°±è¿”å›è¿™ä¸ªå€¼
 
         while (iter.hasNext()) {
             moduleName = iter.next();
@@ -97,7 +97,7 @@ public class FallbackModuleMappingRule extends AbstractModuleMappingRule {
             try {
                 if (getModuleLoaderService().getModuleQuiet(getModuleType(), moduleName) != null) {
                     return moduleName;
-                } // else ¼ÌĞø²éÕÒ
+                } // else ç»§ç»­æŸ¥æ‰¾
             } catch (ModuleLoaderException e) {
                 throw new MappingRuleException(e);
             }

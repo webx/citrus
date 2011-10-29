@@ -25,7 +25,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>ByteArrayResource</code>¡£
+ * æµ‹è¯•<code>ByteArrayResource</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -88,7 +88,7 @@ public class ByteArrayResourceTests extends AbstractResourceTests {
         assertTrue(resource.exists());
         assertEquals(0, resource.lastModified());
 
-        // ¶ÁÁ½´ÎÒÀÈ»ÕıÈ·,²»ÏñInputStreamResource
+        // è¯»ä¸¤æ¬¡ä¾ç„¶æ­£ç¡®,ä¸åƒInputStreamResource
         assertEquals("abcdefghijklmnopqrstuvwxyz", readText(resource.getInputStream(), null, true));
         assertEquals("abcdefghijklmnopqrstuvwxyz", readText(resource.getInputStream(), null, true));
 
@@ -114,7 +114,7 @@ public class ByteArrayResourceTests extends AbstractResourceTests {
         assertTrue(resource.exists());
         assertEquals(0, resource.lastModified());
 
-        // ¶ÁÁ½´ÎÒÀÈ»ÕıÈ·,²»ÏñInputStreamResource
+        // è¯»ä¸¤æ¬¡ä¾ç„¶æ­£ç¡®,ä¸åƒInputStreamResource
         assertEquals("klmnopqrstuvwxyz", readText(resource.getInputStream(), null, true));
         assertEquals("klmnopqrstuvwxyz", readText(resource.getInputStream(), null, true));
 

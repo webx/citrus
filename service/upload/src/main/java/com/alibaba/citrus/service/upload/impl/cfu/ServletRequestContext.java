@@ -20,12 +20,12 @@ package com.alibaba.citrus.service.upload.impl.cfu;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * ¼Ì³Ğ×Ôcommons-fileupload-1.2.1µÄÍ¬ÃûÀà£¬¸Ä½øÁËÈçÏÂÄÚÈİ£º
+ * ç»§æ‰¿è‡ªcommons-fileupload-1.2.1çš„åŒåç±»ï¼Œæ”¹è¿›äº†å¦‚ä¸‹å†…å®¹ï¼š
  * <ul>
- * <li>¼ÙÈç<code>request.getCharacterEncoding()</code>·µ»Ø<code>null</code> £¬ÄÇÃ´·µ»ØÄ¬ÈÏÖµ
- * <code>ISO-8859-1</code>¡£¸Ã·½·¨½«±»ÓÃÀ´½âÎöheader£¬ÆäÖĞ°üÀ¨field name£¬file nameµÈ¡£Ô­Ê¼ÀàÔÚ
- * <code>request.getCharacterEncoding()</code>·µ»Ø<code>null</code>
- * Ê±£¬½«Ê¹ÓÃ²Ù×÷ÏµÍ³Ä¬ÈÏ±àÂë£¬ÕâÑù½«·µ»Ø²»È·¶¨µÄ½á¹û¡£¾­¹ıĞŞ¸Äºó£¬¾ÍºÍservlet¹æ·¶ÏàÒ»ÖÂ¡£</li>
+ * <li>å‡å¦‚<code>request.getCharacterEncoding()</code>è¿”å›<code>null</code> ï¼Œé‚£ä¹ˆè¿”å›é»˜è®¤å€¼
+ * <code>ISO-8859-1</code>ã€‚è¯¥æ–¹æ³•å°†è¢«ç”¨æ¥è§£æheaderï¼Œå…¶ä¸­åŒ…æ‹¬field nameï¼Œfile nameç­‰ã€‚åŸå§‹ç±»åœ¨
+ * <code>request.getCharacterEncoding()</code>è¿”å›<code>null</code>
+ * æ—¶ï¼Œå°†ä½¿ç”¨æ“ä½œç³»ç»Ÿé»˜è®¤ç¼–ç ï¼Œè¿™æ ·å°†è¿”å›ä¸ç¡®å®šçš„ç»“æœã€‚ç»è¿‡ä¿®æ”¹åï¼Œå°±å’Œservletè§„èŒƒç›¸ä¸€è‡´ã€‚</li>
  * </ul>
  * 
  * @author Michael Zhou

@@ -22,9 +22,9 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 
 /**
- * Ó³Éäµ½Ä£¿éÃûµÄ<code>MappingRule</code>¡£
+ * æ˜ å°„åˆ°æ¨¡å—åçš„<code>MappingRule</code>ã€‚
  * <p>
- * ¸Ã<code>MappingRule</code>ÓĞ¿ÉÄÜµ÷ÓÃ<code>ModuleLoaderService</code>ÒÔÈ·¶¨Ä£¿éÊÇ·ñ´æÔÚ¡£
+ * è¯¥<code>MappingRule</code>æœ‰å¯èƒ½è°ƒç”¨<code>ModuleLoaderService</code>ä»¥ç¡®å®šæ¨¡å—æ˜¯å¦å­˜åœ¨ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -52,10 +52,10 @@ public abstract class AbstractModuleMappingRule extends AbstractMappingRule {
     }
 
     /**
-     * ½«Ö¸¶¨Ãû³Æ¹æ¸ñ»¯³É·ûºÏclassÃüÃû¹æ·¶µÄÃû³Æ£º³ıÈ¥ºó×º£¬½«Ê××Ö·û¸ÄÎª´óĞ´¡£
+     * å°†æŒ‡å®šåç§°è§„æ ¼åŒ–æˆç¬¦åˆclasså‘½åè§„èŒƒçš„åç§°ï¼šé™¤å»åç¼€ï¼Œå°†é¦–å­—ç¬¦æ”¹ä¸ºå¤§å†™ã€‚
      * 
-     * @param className Òª¹æ¸ñ»¯µÄÀàÃû
-     * @return ¹æ¸ñ»¯ºóµÄÀàÃû£¬Èç¹ûÀàÃû·Ç·¨£¬Ôò·µ»Ø<code>null</code>
+     * @param className è¦è§„æ ¼åŒ–çš„ç±»å
+     * @return è§„æ ¼åŒ–åçš„ç±»åï¼Œå¦‚æœç±»åéæ³•ï¼Œåˆ™è¿”å›<code>null</code>
      */
     protected static String normalizeClassName(String className) {
         className = trimToNull(className);
@@ -66,14 +66,14 @@ public abstract class AbstractModuleMappingRule extends AbstractMappingRule {
 
         StringBuilder buf = new StringBuilder(className);
 
-        // ³ıÈ¥ºó×º
+        // é™¤å»åç¼€
         int index = className.lastIndexOf(EXTENSION_SEPARATOR);
 
         if (index != -1) {
             buf.setLength(index);
         }
 
-        // Ê××Ö·û´óĞ´
+        // é¦–å­—ç¬¦å¤§å†™
         if (buf.length() == 0) {
             return null;
         } else {

@@ -20,7 +20,7 @@ package com.alibaba.citrus.generictype;
 import java.util.List;
 
 /**
- * ´ú±íÒ»¸ö°üº¬±ß½çĞÅÏ¢µÄÎ´È·¶¨ÀàĞÍĞÅÏ¢¡£°üº¬ÒÔÏÂ×ÓÀà£º
+ * ä»£è¡¨ä¸€ä¸ªåŒ…å«è¾¹ç•Œä¿¡æ¯çš„æœªç¡®å®šç±»å‹ä¿¡æ¯ã€‚åŒ…å«ä»¥ä¸‹å­ç±»ï¼š
  * <ul>
  * <li>{@link TypeVariableInfo}</li>
  * <li>{@link WildcardTypeInfo}</li>
@@ -30,17 +30,17 @@ import java.util.List;
  */
 public interface BoundedTypeInfo extends TypeInfo {
     /**
-     * È¡µÃ»ùÀàĞÍ¡£
+     * å–å¾—åŸºç±»å‹ã€‚
      */
     TypeInfo getBaseType();
 
     /**
-     * È¡µÃÉÏ½ç£¨»ùÀàºÍ½Ó¿Ú£©¡£
+     * å–å¾—ä¸Šç•Œï¼ˆåŸºç±»å’Œæ¥å£ï¼‰ã€‚
      */
     List<TypeInfo> getUpperBounds();
 
     /**
-     * È¡µÃÏÂ½ç£¨×ÓÀàºÍ×Ó½Ó¿Ú£©¡£
+     * å–å¾—ä¸‹ç•Œï¼ˆå­ç±»å’Œå­æ¥å£ï¼‰ã€‚
      */
     List<TypeInfo> getLowerBounds();
 }

@@ -33,7 +33,7 @@ import com.alibaba.citrus.service.form.impl.configuration.FormConfigImpl;
 import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
- * ÓÃÀ´´¦ÀíÓÃ»§Ìá½»±íµ¥µÄservice¡£
+ * ç”¨æ¥å¤„ç†ç”¨æˆ·æäº¤è¡¨å•çš„serviceã€‚
  * 
  * @author Michael Zhou
  */
@@ -47,7 +47,7 @@ public class FormServiceImpl extends AbstractService<FormService> implements For
     }
 
     /**
-     * È¡µÃform config¡£
+     * å–å¾—form configã€‚
      */
     public FormConfig getFormConfig() {
         return formConfig;
@@ -58,11 +58,11 @@ public class FormServiceImpl extends AbstractService<FormService> implements For
     }
 
     /**
-     * ³õÊ¼»¯service¡£
+     * åˆå§‹åŒ–serviceã€‚
      */
     @Override
     protected void init() {
-        // È·±£²»Í¬µÄformServiceÈ¡µÃ²»Í¬µÄformÊµÀı¡£
+        // ç¡®ä¿ä¸åŒçš„formServiceå–å¾—ä¸åŒçš„formå®ä¾‹ã€‚
         requestKey = "_FormService_" + defaultIfEmpty(getBeanName(), getClass().getName()) + "_"
                 + identityHashCode(this);
 
@@ -71,14 +71,14 @@ public class FormServiceImpl extends AbstractService<FormService> implements For
     }
 
     /**
-     * ´ÓrequestÖĞÈ¡µÃµ±Ç°ÇëÇóµÄform»ò´´½¨ĞÂµÄform¡£
+     * ä»requestä¸­å–å¾—å½“å‰è¯·æ±‚çš„formæˆ–åˆ›å»ºæ–°çš„formã€‚
      */
     public Form getForm() {
         return getForm(false);
     }
 
     /**
-     * ´ÓrequestÖĞÈ¡µÃµ±Ç°ÇëÇóµÄform»ò´´½¨ĞÂµÄform¡£
+     * ä»requestä¸­å–å¾—å½“å‰è¯·æ±‚çš„formæˆ–åˆ›å»ºæ–°çš„formã€‚
      */
     public Form getForm(boolean forcePostOnly) {
         Object form = assertNotNull(request, "Could not getForm: request is null").getAttribute(requestKey);

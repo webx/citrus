@@ -101,7 +101,7 @@ public class MailTransportTests extends AbstractMailSessionTests<MailTransport> 
         List<?> transportListeners = getFieldValue(rawTransport, "transportListeners", List.class);
         assertArrayEquals(new Object[] { handler1 }, transportListeners.toArray());
 
-        // add null - ÉèÖÃtransportListeners
+        // add null - è®¾ç½®transportListeners
         transportListeners.clear();
         session.setHandler(null);
         assertSame(handler1, session.getHandler());
@@ -241,11 +241,11 @@ public class MailTransportTests extends AbstractMailSessionTests<MailTransport> 
         session.send("simple_cn");
         assertFalse(session.isConnected());
 
-        assertEquals("ÎÒµÄ±êÌâ My Subject", receiveMail("to@alibaba.com").getSubject());
-        assertEquals("ÎÒµÄ±êÌâ My Subject", receiveMail("to2@alibaba.com").getSubject());
-        assertEquals("ÎÒµÄ±êÌâ My Subject", receiveMail("cc@alibaba.com").getSubject());
-        assertEquals("ÎÒµÄ±êÌâ My Subject", receiveMail("cc2@alibaba.com").getSubject());
-        assertEquals("ÎÒµÄ±êÌâ My Subject", receiveMail("bcc@alibaba.com").getSubject());
+        assertEquals("æˆ‘çš„æ ‡é¢˜ My Subject", receiveMail("to@alibaba.com").getSubject());
+        assertEquals("æˆ‘çš„æ ‡é¢˜ My Subject", receiveMail("to2@alibaba.com").getSubject());
+        assertEquals("æˆ‘çš„æ ‡é¢˜ My Subject", receiveMail("cc@alibaba.com").getSubject());
+        assertEquals("æˆ‘çš„æ ‡é¢˜ My Subject", receiveMail("cc2@alibaba.com").getSubject());
+        assertEquals("æˆ‘çš„æ ‡é¢˜ My Subject", receiveMail("bcc@alibaba.com").getSubject());
 
         // mail not found
         try {
@@ -278,11 +278,11 @@ public class MailTransportTests extends AbstractMailSessionTests<MailTransport> 
         assertFalse(session.isConnected());
         assertEquals("processMessage", handler.state);
 
-        assertEquals("ÎÒµÄ±êÌâ My Subject", receiveMail("to@alibaba.com").getSubject());
-        assertEquals("ÎÒµÄ±êÌâ My Subject", receiveMail("to2@alibaba.com").getSubject());
-        assertEquals("ÎÒµÄ±êÌâ My Subject", receiveMail("cc@alibaba.com").getSubject());
-        assertEquals("ÎÒµÄ±êÌâ My Subject", receiveMail("cc2@alibaba.com").getSubject());
-        assertEquals("ÎÒµÄ±êÌâ My Subject", receiveMail("bcc@alibaba.com").getSubject());
+        assertEquals("æˆ‘çš„æ ‡é¢˜ My Subject", receiveMail("to@alibaba.com").getSubject());
+        assertEquals("æˆ‘çš„æ ‡é¢˜ My Subject", receiveMail("to2@alibaba.com").getSubject());
+        assertEquals("æˆ‘çš„æ ‡é¢˜ My Subject", receiveMail("cc@alibaba.com").getSubject());
+        assertEquals("æˆ‘çš„æ ‡é¢˜ My Subject", receiveMail("cc2@alibaba.com").getSubject());
+        assertEquals("æˆ‘çš„æ ‡é¢˜ My Subject", receiveMail("bcc@alibaba.com").getSubject());
 
         Message msg = receiveMail("to@alibaba.com");
 
@@ -346,10 +346,10 @@ public class MailTransportTests extends AbstractMailSessionTests<MailTransport> 
             session.connect();
             assertTrue(session.isConnected());
 
-            session.send(createMailBuilder("ÎÒ°®±±¾©Ìì°²ÃÅ£¡", ALIREN_ALIBABA_COM));
+            session.send(createMailBuilder("æˆ‘çˆ±åŒ—äº¬å¤©å®‰é—¨ï¼", ALIREN_ALIBABA_COM));
             assertTrue(session.isConnected());
 
-            session.send(createMessage("ÎÒ°®ÖĞ¹ú£¡", ALIREN_ALIBABA_COM));
+            session.send(createMessage("æˆ‘çˆ±ä¸­å›½ï¼", ALIREN_ALIBABA_COM));
             assertTrue(session.isConnected());
 
             session.send("simple_cn");
@@ -361,10 +361,10 @@ public class MailTransportTests extends AbstractMailSessionTests<MailTransport> 
 
         Message[] msgs = receiveMails(ALIREN_ALIBABA_COM, 2);
 
-        assertEquals("ÎÒ°®ÖĞ¹ú£¡", msgs[0].getSubject());
-        assertEquals("ÎÒ°®±±¾©Ìì°²ÃÅ£¡", msgs[1].getSubject());
+        assertEquals("æˆ‘çˆ±ä¸­å›½ï¼", msgs[0].getSubject());
+        assertEquals("æˆ‘çˆ±åŒ—äº¬å¤©å®‰é—¨ï¼", msgs[1].getSubject());
 
-        assertEquals("ÎÒµÄ±êÌâ My Subject", receiveMail("to@alibaba.com").getSubject());
+        assertEquals("æˆ‘çš„æ ‡é¢˜ My Subject", receiveMail("to@alibaba.com").getSubject());
     }
 
     @Test
@@ -377,7 +377,7 @@ public class MailTransportTests extends AbstractMailSessionTests<MailTransport> 
         session.setPopBeforeSmtp("mystore");
 
         try {
-            session.send(createMessage("ÎÒ°®ÖĞ¹ú£¡", ALIREN_ALIBABA_COM));
+            session.send(createMessage("æˆ‘çˆ±ä¸­å›½ï¼", ALIREN_ALIBABA_COM));
             fail();
         } catch (MailStoreNotFoundException e) {
             assertThat(e, exception("Could not find mail store \"mystore\": mail service is not set"));
@@ -388,7 +388,7 @@ public class MailTransportTests extends AbstractMailSessionTests<MailTransport> 
         session.setPopBeforeSmtp("notExistStore");
 
         try {
-            session.send(createMessage("ÎÒ°®ÖĞ¹ú£¡", ALIREN_ALIBABA_COM));
+            session.send(createMessage("æˆ‘çˆ±ä¸­å›½ï¼", ALIREN_ALIBABA_COM));
             fail();
         } catch (MailStoreNotFoundException e) {
             assertThat(e, exception("Could not find mail store: notExistStore"));
@@ -399,7 +399,7 @@ public class MailTransportTests extends AbstractMailSessionTests<MailTransport> 
         session.setPopBeforeSmtp("mystore");
 
         try {
-            session.send(createMessage("ÎÒ°®ÖĞ¹ú£¡", ALIREN_ALIBABA_COM));
+            session.send(createMessage("æˆ‘çˆ±ä¸­å›½ï¼", ALIREN_ALIBABA_COM));
             assertEquals("closed", MyMockStore.stateHolder.get());
         } finally {
             MyMockStore.stateHolder.remove();

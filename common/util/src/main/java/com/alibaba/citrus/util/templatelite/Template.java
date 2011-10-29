@@ -55,15 +55,15 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * Ò»¸ö¼òÒ×µÄÄ£°å¡£
+ * ä¸€ä¸ªç®€æ˜“çš„æ¨¡æ¿ã€‚
  * <p>
- * ¸ñÊ½ÈçÏÂ£º
+ * æ ¼å¼å¦‚ä¸‹ï¼š
  * </p>
  * <dl>
- * <dt>Ä£°å½âÎö²ÎÊı</dt>
+ * <dt>æ¨¡æ¿è§£æå‚æ•°</dt>
  * <dd>
  * <p>
- * ²ÎÊı±ØĞë¶¨ÒåÔÚÄ£°å»ò×ÓÄ£°åµÄ¿ªÍ·£¬ÔÚËùÓĞµÄÄÚÈİ¿ªÊ¼Ö®Ç°¡£
+ * å‚æ•°å¿…é¡»å®šä¹‰åœ¨æ¨¡æ¿æˆ–å­æ¨¡æ¿çš„å¼€å¤´ï¼Œåœ¨æ‰€æœ‰çš„å†…å®¹å¼€å§‹ä¹‹å‰ã€‚
  * </p>
  * 
  * <pre>
@@ -71,10 +71,10 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * </pre>
  * 
  * </dd>
- * <dt>×¢ÊÍ</dt>
+ * <dt>æ³¨é‡Š</dt>
  * <dd>
  * <p>
- * ×¢ÊÍ¿ÉÒÔĞ´ÔÚÈÎºÎµØ·½¡£Èç¹ûÒ»¸ö×¢ÊÍ´ÓĞĞÊ×¿ªÊ¼£¬»òÕß×¢ÊÍÖ®Ç°Ã»ÓĞÈÎºÎ¿É¼û×Ö·û£¬ÔòÕûĞĞ½«±»ºöÂÔ¡£
+ * æ³¨é‡Šå¯ä»¥å†™åœ¨ä»»ä½•åœ°æ–¹ã€‚å¦‚æœä¸€ä¸ªæ³¨é‡Šä»è¡Œé¦–å¼€å§‹ï¼Œæˆ–è€…æ³¨é‡Šä¹‹å‰æ²¡æœ‰ä»»ä½•å¯è§å­—ç¬¦ï¼Œåˆ™æ•´è¡Œå°†è¢«å¿½ç•¥ã€‚
  * </p>
  * 
  * <pre>
@@ -82,10 +82,10 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * </pre>
  * 
  * </dd>
- * <dt>Ìæ»»±äÁ¿£¨placeholder£©</dt>
+ * <dt>æ›¿æ¢å˜é‡ï¼ˆplaceholderï¼‰</dt>
  * <dd>
  * <p>
- * ×î¼òµ¥µÄĞ´·¨£º
+ * æœ€ç®€å•çš„å†™æ³•ï¼š
  * </p>
  * 
  * <pre>
@@ -93,7 +93,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * </pre>
  * 
  * <p>
- * °üº¬Ò»¸ö»ò¶à¸ö²ÎÊı£º
+ * åŒ…å«ä¸€ä¸ªæˆ–å¤šä¸ªå‚æ•°ï¼š
  * </p>
  * 
  * <pre>
@@ -101,7 +101,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * </pre>
  * 
  * <p>
- * ¿ÉÒıÓÃÒ»¸ö»ò¶à¸ö×ÓÄ£°å×÷Îª²ÎÊı¡£ËùÒıÓÃµÄ×ÓÄ£°å½«´Óµ±Ç°×ÓÄ£°å»òÕßÉÏ¼¶×ÓÄ£°åÖĞ²éÕÒ¡£
+ * å¯å¼•ç”¨ä¸€ä¸ªæˆ–å¤šä¸ªå­æ¨¡æ¿ä½œä¸ºå‚æ•°ã€‚æ‰€å¼•ç”¨çš„å­æ¨¡æ¿å°†ä»å½“å‰å­æ¨¡æ¿æˆ–è€…ä¸Šçº§å­æ¨¡æ¿ä¸­æŸ¥æ‰¾ã€‚
  * </p>
  * 
  * <pre>
@@ -109,7 +109,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * </pre>
  * 
  * <p>
- * Ò²¿ÉÒıÓÃ¶à¼¶×ÓÄ£°å×÷Îª²ÎÊı¡£
+ * ä¹Ÿå¯å¼•ç”¨å¤šçº§å­æ¨¡æ¿ä½œä¸ºå‚æ•°ã€‚
  * </p>
  * 
  * <pre>
@@ -117,7 +117,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * </pre>
  * 
  * <p>
- * Ê¹ÓÃ.*¿É´ïµ½ÒıÓÃÒ»×éÄ£°åµÄ×÷ÓÃ¡£
+ * ä½¿ç”¨.*å¯è¾¾åˆ°å¼•ç”¨ä¸€ç»„æ¨¡æ¿çš„ä½œç”¨ã€‚
  * </p>
  * 
  * <pre>
@@ -125,10 +125,10 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * </pre>
  * 
  * </dd>
- * <dt>°üº¬×ÓÄ£°å</dt>
+ * <dt>åŒ…å«å­æ¨¡æ¿</dt>
  * <dd>
  * <p>
- * Ö±½Ó°üº¬Ò»¸ö×ÓÄ£°å£¬²»µ÷ÓÃvisitor¡£
+ * ç›´æ¥åŒ…å«ä¸€ä¸ªå­æ¨¡æ¿ï¼Œä¸è°ƒç”¨visitorã€‚
  * </p>
  * 
  * <pre>
@@ -136,7 +136,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * </pre>
  * 
  * <p>
- * Ò²¿É°üº¬¶à¼¶×ÓÄ£°å¡£
+ * ä¹Ÿå¯åŒ…å«å¤šçº§å­æ¨¡æ¿ã€‚
  * </p>
  * 
  * <pre>
@@ -144,10 +144,10 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * </pre>
  * 
  * </dd>
- * <dt>¶¨Òå×ÓÄ£°å</dt>
+ * <dt>å®šä¹‰å­æ¨¡æ¿</dt>
  * <dd>
  * <p>
- * ×ÓÄ£°å±ØĞëÎ»ÓÚÄ£°å»òÆäËü×ÓÄ£°åµÄÄ©Î²¡£´Ó×îºóÒ»ĞĞÄÚÈİµ½×ÓÄ£°åÖ®¼äµÄ¿ÕĞĞ½«±»ºöÂÔ¡£×ÓÄ£°å¿ÉÒÔ°üº¬ÆäËü×ÓÄ£°å¡£
+ * å­æ¨¡æ¿å¿…é¡»ä½äºæ¨¡æ¿æˆ–å…¶å®ƒå­æ¨¡æ¿çš„æœ«å°¾ã€‚ä»æœ€åä¸€è¡Œå†…å®¹åˆ°å­æ¨¡æ¿ä¹‹é—´çš„ç©ºè¡Œå°†è¢«å¿½ç•¥ã€‚å­æ¨¡æ¿å¯ä»¥åŒ…å«å…¶å®ƒå­æ¨¡æ¿ã€‚
  * </p>
  * 
  * <pre>
@@ -159,10 +159,10 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * </pre>
  * 
  * </dd>
- * <dt>µ¼Èë×ÓÄ£°å</dt>
+ * <dt>å¯¼å…¥å­æ¨¡æ¿</dt>
  * <dd>
  * <p>
- * µ¼ÈëÍâ²¿ÎÄ¼ş£¬×÷Îª×ÓÄ£°å¡£ÕâÖÖ·½·¨Ëù²úÉúµÄ×ÓÄ£°å£¬ºÍÖ±½Ó¶¨Òå×ÓÄ£°åµÄĞ§¹ûÍêÈ«ÏàÍ¬¡£µ«½«×ÓÄ£°å¶¨ÒåÔÚÍâ²¿ÎÄ¼şÖĞ£¬ÓĞÀûÓÚÕûÀí²¢Ëõ¶ÌÄ£°åµÄ³¤¶È¡£
+ * å¯¼å…¥å¤–éƒ¨æ–‡ä»¶ï¼Œä½œä¸ºå­æ¨¡æ¿ã€‚è¿™ç§æ–¹æ³•æ‰€äº§ç”Ÿçš„å­æ¨¡æ¿ï¼Œå’Œç›´æ¥å®šä¹‰å­æ¨¡æ¿çš„æ•ˆæœå®Œå…¨ç›¸åŒã€‚ä½†å°†å­æ¨¡æ¿å®šä¹‰åœ¨å¤–éƒ¨æ–‡ä»¶ä¸­ï¼Œæœ‰åˆ©äºæ•´ç†å¹¶ç¼©çŸ­æ¨¡æ¿çš„é•¿åº¦ã€‚
  * </p>
  * 
  * <pre>
@@ -170,7 +170,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * </pre>
  * 
  * <p>
- * »òÕß£º
+ * æˆ–è€…ï¼š
  * </p>
  * 
  * <pre>
@@ -195,41 +195,41 @@ public final class Template {
     Map<String, String> params;
 
     static {
-        // Ô¤¶¨ÒåÄ£°å£¬¿É¹©ÈÎºÎÄ£°åÖĞÖ±½ÓÊ¹ÓÃ£¬ÀıÈç£º$#{SPACE}¿ÉÇ¿ÖÆ²åÈë¿Õ¸ñ¡£
+        // é¢„å®šä¹‰æ¨¡æ¿ï¼Œå¯ä¾›ä»»ä½•æ¨¡æ¿ä¸­ç›´æ¥ä½¿ç”¨ï¼Œä¾‹å¦‚ï¼š$#{SPACE}å¯å¼ºåˆ¶æ’å…¥ç©ºæ ¼ã€‚
         predefineTemplate("SPACE", " ");
         predefineTemplate("BR", "\n");
     }
 
     /**
-     * ´ÓFileÖĞ´´½¨template¡£
+     * ä»Fileä¸­åˆ›å»ºtemplateã€‚
      */
     public Template(File source) {
         this(new InputSource(source, null), null);
     }
 
     /**
-     * ´ÓURLÖĞ´´½¨template¡£
+     * ä»URLä¸­åˆ›å»ºtemplateã€‚
      */
     public Template(URL source) {
         this(new InputSource(source, null), null);
     }
 
     /**
-     * ´ÓÊäÈëÁ÷ÖĞ´´½¨template¡£
+     * ä»è¾“å…¥æµä¸­åˆ›å»ºtemplateã€‚
      */
     public Template(InputStream stream, String systemId) {
         this(new InputSource(stream, systemId), null);
     }
 
     /**
-     * ´ÓÊäÈëÁ÷ÖĞ´´½¨template¡£
+     * ä»è¾“å…¥æµä¸­åˆ›å»ºtemplateã€‚
      */
     public Template(Reader reader, String systemId) {
         this(new InputSource(reader, systemId), null);
     }
 
     /**
-     * ÄÚ²¿¹¹Ôìº¯Êı£º´´½¨Ö÷Ä£°å¡£
+     * å†…éƒ¨æ„é€ å‡½æ•°ï¼šåˆ›å»ºä¸»æ¨¡æ¿ã€‚
      */
     private Template(InputSource source, String name) {
         this.name = trimToNull(name);
@@ -241,7 +241,7 @@ public final class Template {
     }
 
     /**
-     * ÄÚ²¿¹¹Ôìº¯Êı£º´´½¨×ÓÄ£°å¡£
+     * å†…éƒ¨æ„é€ å‡½æ•°ï¼šåˆ›å»ºå­æ¨¡æ¿ã€‚
      */
     private Template(String name, Node[] nodes, Map<String, String> params, Map<String, Template> subtemplates,
                      Location location) {
@@ -254,7 +254,7 @@ public final class Template {
     }
 
     /**
-     * ÄÚ²¿¹¹Ôìº¯Êı£º´´½¨template ref¡£
+     * å†…éƒ¨æ„é€ å‡½æ•°ï¼šåˆ›å»ºtemplate refã€‚
      */
     private Template(Template ref) {
         this.ref = assertNotNull(ref, "template ref");
@@ -306,7 +306,7 @@ public final class Template {
     }
 
     /**
-     * ½«Ä£°åäÖÈ¾³ÉÎÄ±¾¡£
+     * å°†æ¨¡æ¿æ¸²æŸ“æˆæ–‡æœ¬ã€‚
      */
     public String renderToString(TextWriter<? super StringBuilder> writer) {
         writer.setOut(new StringBuilder());
@@ -315,7 +315,7 @@ public final class Template {
     }
 
     /**
-     * äÖÈ¾Ä£°å¡£
+     * æ¸²æŸ“æ¨¡æ¿ã€‚
      */
     public void accept(Object visitor) throws TemplateRuntimeException {
         if (ref == null) {
@@ -327,21 +327,21 @@ public final class Template {
                 invokeVisitor(visitor, node);
             }
         } else {
-            // µ÷ÓÃref£¬Ò²¾ÍÊÇ${placeholder: #template}»òÕß$#{template}ÖĞ£¬±»×¢ÈëµÄtemplate¶ÔÏó¡£
-            // Ê×ÏÈµ÷ÓÃ£ºvisitTemplateName(Template)·½·¨£¬Èç¹û·½·¨²»´æÔÚ£¬ÔòÖ±½Óµ÷ÓÃ±»ÒıÓÃµÄtemplate¡£
+            // è°ƒç”¨refï¼Œä¹Ÿå°±æ˜¯${placeholder: #template}æˆ–è€…$#{template}ä¸­ï¼Œè¢«æ³¨å…¥çš„templateå¯¹è±¡ã€‚
+            // é¦–å…ˆè°ƒç”¨ï¼švisitTemplateName(Template)æ–¹æ³•ï¼Œå¦‚æœæ–¹æ³•ä¸å­˜åœ¨ï¼Œåˆ™ç›´æ¥è°ƒç”¨è¢«å¼•ç”¨çš„templateã€‚
             invokeVisitor(visitor, ref);
         }
     }
 
     /**
-     * µ÷ÓÃvisitTemplateName(Template)·½·¨£¬Èç¹û·½·¨²»´æÔÚ£¬ÔòÖ±½Óµ÷ÓÃ±»ÒıÓÃµÄtemplate¡£
+     * è°ƒç”¨visitTemplateName(Template)æ–¹æ³•ï¼Œå¦‚æœæ–¹æ³•ä¸å­˜åœ¨ï¼Œåˆ™ç›´æ¥è°ƒç”¨è¢«å¼•ç”¨çš„templateã€‚
      */
     private void invokeVisitor(Object visitor, Template templateRef) throws TemplateRuntimeException {
         invokeVisitor(visitor, templateRef, 0);
     }
 
     /**
-     * ¸ù¾İnodeÀàĞÍ£¬·ÃÎÊvisitorÏàÓ¦µÄ·½·¨¡£
+     * æ ¹æ®nodeç±»å‹ï¼Œè®¿é—®visitorç›¸åº”çš„æ–¹æ³•ã€‚
      */
     private void invokeVisitor(Object visitor, Node node) throws TemplateRuntimeException {
         assertNotRef();
@@ -349,10 +349,10 @@ public final class Template {
     }
 
     /**
-     * ¸ù¾İnodeÀàĞÍ£¬·ÃÎÊvisitorÏàÓ¦µÄ·½·¨¡£
+     * æ ¹æ®nodeç±»å‹ï¼Œè®¿é—®visitorç›¸åº”çš„æ–¹æ³•ã€‚
      */
     private void invokeVisitor(Object visitor, Object node, int redirectDepth) throws TemplateRuntimeException {
-        // ¶Ô$#{includeTemplate}Ö±½Óµ÷ÓÃtemplate
+        // å¯¹$#{includeTemplate}ç›´æ¥è°ƒç”¨template
         if (node instanceof IncludeTemplate) {
             assertNotNull(((IncludeTemplate) node).includedTemplate).accept(visitor);
             return;
@@ -364,33 +364,33 @@ public final class Template {
             Method method = null;
             Object[] params = null;
 
-            // ¶ÔÆÕÍ¨ÎÄ±¾µ÷ÓÃvisitText(String)
+            // å¯¹æ™®é€šæ–‡æœ¬è°ƒç”¨visitText(String)
             if (node instanceof Text) {
                 Text text = (Text) node;
                 method = findVisitTextMethod(visitorClass, "visitText");
                 params = new Object[] { text.text };
             }
 
-            // ¶Ôref templateµ÷ÓÃvisitTemplateName(Template)£¬Èç¹û²»´æÔÚ¸Ã·½·¨£¬ÔòÖ±½Óµ÷ÓÃtemplate
+            // å¯¹ref templateè°ƒç”¨visitTemplateName(Template)ï¼Œå¦‚æœä¸å­˜åœ¨è¯¥æ–¹æ³•ï¼Œåˆ™ç›´æ¥è°ƒç”¨template
             else if (node instanceof Template) {
                 Template ref = (Template) node;
                 method = findVisitTemplateMethod(visitorClass, "visit" + trimToEmpty(capitalize(ref.getName())));
 
                 if (method == null) {
-                    ref.accept(visitor); // ·½·¨²»´æÔÚ£¬Ö±½Óµ÷ÓÃref template
+                    ref.accept(visitor); // æ–¹æ³•ä¸å­˜åœ¨ï¼Œç›´æ¥è°ƒç”¨ref template
                     return;
                 }
 
                 params = new Object[] { ref };
             }
 
-            // ¶Ô${placeholder}µ÷ÓÃ£º
+            // å¯¹${placeholder}è°ƒç”¨ï¼š
             //
-            // 1. visitXyz()                                        // ÎŞ²ÎÊı
-            // 2. visitXyz(String[])                                // Êı×é²ÎÊı
+            // 1. visitXyz()                                        // æ— å‚æ•°
+            // 2. visitXyz(String[])                                // æ•°ç»„å‚æ•°
             //    visitXyz(Template[])
             //    visitXyz(Object[])
-            // 3. visitXyz(Template, String, String, Template, ...) // ¶ÀÁ¢²ÎÊı
+            // 3. visitXyz(Template, String, String, Template, ...) // ç‹¬ç«‹å‚æ•°
             else if (node instanceof Placeholder) {
                 Placeholder placeholder = (Placeholder) node;
                 int placeholderParamCount = placeholder.params.length;
@@ -446,7 +446,7 @@ public final class Template {
                     }
                 }
 
-                // Èç¹ûµ±Ç°visitor·µ»ØÁËÒ»¸öĞÂµÄvisitor¶ÔÏó£¬ÔòÖØ¶¨Ïòµ½ĞÂµÄvisitor¡£
+                // å¦‚æœå½“å‰visitorè¿”å›äº†ä¸€ä¸ªæ–°çš„visitorå¯¹è±¡ï¼Œåˆ™é‡å®šå‘åˆ°æ–°çš„visitorã€‚
                 if (newVisitor != null && visitor != newVisitor) {
                     if (redirectDepth >= MAX_REDIRECT_DEPTH) {
                         throw new TemplateRuntimeException("Redirection out of control (depth>" + MAX_REDIRECT_DEPTH
@@ -464,7 +464,7 @@ public final class Template {
     }
 
     /**
-     * ²éÕÒvisitText·½·¨¡£
+     * æŸ¥æ‰¾visitTextæ–¹æ³•ã€‚
      */
     private Method findVisitTextMethod(Class<?> visitorClass, String methodName) throws NoSuchMethodException {
         Method method = null;
@@ -490,7 +490,7 @@ public final class Template {
     }
 
     /**
-     * ²éÕÒvisitTemplate·½·¨¡£
+     * æŸ¥æ‰¾visitTemplateæ–¹æ³•ã€‚
      */
     private Method findVisitTemplateMethod(Class<?> visitorClass, String methodName) throws NoSuchMethodException {
         Method method = null;
@@ -512,14 +512,14 @@ public final class Template {
     }
 
     /**
-     * ²éÕÒvisitPlaceholder·½·¨¡£
+     * æŸ¥æ‰¾visitPlaceholderæ–¹æ³•ã€‚
      */
     private Method findVisitPlaceholderMethod(Class<?> visitorClass, String methodName,
                                               PlaceholderParameter[] placeholderParams) throws NoSuchMethodException {
         Method[] methods = visitorClass.getMethods();
 
-        // Í³¼Æplaceholder²ÎÊıµÄÀàĞÍ¼°ÊıÁ¿¡£
-        // PlaceholderÖ§³ÖÁ½ÖÖÀàĞÍµÄ²ÎÊı£ºStringºÍTemplate¡£
+        // ç»Ÿè®¡placeholderå‚æ•°çš„ç±»å‹åŠæ•°é‡ã€‚
+        // Placeholderæ”¯æŒä¸¤ç§ç±»å‹çš„å‚æ•°ï¼šStringå’ŒTemplateã€‚
         Class<?>[] placeholderParamTypes = new Class[placeholderParams.length];
         int placeholderParamCount = placeholderParamTypes.length;
         int placeholderParamStringCount = 0;
@@ -555,21 +555,21 @@ public final class Template {
                         break;
 
                     case 1:
-                        // Èç¹ûplaceholder²ÎÊıÈ«ÎªString£¬¿Éµ÷ÓÃvisitXyz(String[])
+                        // å¦‚æœplaceholderå‚æ•°å…¨ä¸ºStringï¼Œå¯è°ƒç”¨visitXyz(String[])
                         if (placeholderParamStringCount == placeholderParamCount
                                 && methodParamTypes[0].equals(String[].class)) {
                             paramTypeMatches = true;
                             indexWeight = 50;
                         }
 
-                        // Èç¹ûplaceholder²ÎÊıÈ«ÎªTemplate£¬¿Éµ÷ÓÃvisitXyz(Template[])
+                        // å¦‚æœplaceholderå‚æ•°å…¨ä¸ºTemplateï¼Œå¯è°ƒç”¨visitXyz(Template[])
                         if (placeholderParamTemplateCount == placeholderParamCount
                                 && methodParamTypes[0].equals(Template[].class)) {
                             paramTypeMatches = true;
                             indexWeight = 50;
                         }
 
-                        // ÈÎºÎplaceholder²ÎÊı£¬¶¼¿Éµ÷ÓÃvisitXyz(Object[])
+                        // ä»»ä½•placeholderå‚æ•°ï¼Œéƒ½å¯è°ƒç”¨visitXyz(Object[])
                         if (methodParamTypes[0].equals(Object[].class)) {
                             paramTypeMatches = true;
                             indexWeight = 90;
@@ -578,9 +578,9 @@ public final class Template {
                         // no break;
 
                     default:
-                        // Èç¹ûplaceholderµÄ²ÎÊı±È·½·¨ÖĞµÄ²ÎÊı¶à£¬¶àÓàµÄplaceholder²ÎÊı½«±»ºöÂÔ¡£
-                        // Èç¹ûplaceholderµÄ²ÎÊı±È·½·¨ÖĞµÄ²ÎÊıÉÙ£¬²»×ãµÄ²ÎÊıÖµ½«Îªnull¡£
-                        // ·ÃÎÊvisitXyz(Template, String, String, Template, ...)
+                        // å¦‚æœplaceholderçš„å‚æ•°æ¯”æ–¹æ³•ä¸­çš„å‚æ•°å¤šï¼Œå¤šä½™çš„placeholderå‚æ•°å°†è¢«å¿½ç•¥ã€‚
+                        // å¦‚æœplaceholderçš„å‚æ•°æ¯”æ–¹æ³•ä¸­çš„å‚æ•°å°‘ï¼Œä¸è¶³çš„å‚æ•°å€¼å°†ä¸ºnullã€‚
+                        // è®¿é—®visitXyz(Template, String, String, Template, ...)
                         if (!paramTypeMatches) {
                             paramTypeMatches = true;
 
@@ -625,7 +625,7 @@ public final class Template {
 
             buf.append("One of the following method:\n");
 
-            // ·½·¨1. ÏêÏ¸Æ¥Åä
+            // æ–¹æ³•1. è¯¦ç»†åŒ¹é…
             format.format("  %d. %s.%s(", count++, visitorClass.getSimpleName(), methodName);
 
             for (int i = 0; i < placeholderParamCount; i++) {
@@ -638,7 +638,7 @@ public final class Template {
 
             buf.append(")\n");
 
-            // ·½·¨2. Êı×éÆ¥Åä
+            // æ–¹æ³•2. æ•°ç»„åŒ¹é…
             format.format("  %d. %s.%s(", count++, visitorClass.getSimpleName(), methodName);
 
             if (placeholderParamStringCount == placeholderParamCount) {
@@ -651,7 +651,7 @@ public final class Template {
 
             buf.append("[])\n");
 
-            // ·½·¨3. ÎŞ²ÎÊı
+            // æ–¹æ³•3. æ— å‚æ•°
             if (placeholderParamCount > 0) {
                 format.format("  %d. %s.%s()", count++, visitorClass.getSimpleName(), methodName);
             }
@@ -706,7 +706,7 @@ public final class Template {
     }
 
     /**
-     * ´ú±íÒ»¸ö½áµã¡£
+     * ä»£è¡¨ä¸€ä¸ªç»“ç‚¹ã€‚
      */
     static abstract class Node {
         final Location location;
@@ -719,7 +719,7 @@ public final class Template {
     }
 
     /**
-     * ´ú±íÒ»¸öÎÄ±¾½áµã¡£
+     * ä»£è¡¨ä¸€ä¸ªæ–‡æœ¬ç»“ç‚¹ã€‚
      */
     static class Text extends Node {
         final String text;
@@ -749,7 +749,7 @@ public final class Template {
     }
 
     /**
-     * ´ú±íÒ»¸ö<code>${var}</code>½áµã¡£
+     * ä»£è¡¨ä¸€ä¸ª<code>${var}</code>ç»“ç‚¹ã€‚
      */
     static class Placeholder extends Node {
         private final static PlaceholderParameter[] EMPTY_PARAMS = new PlaceholderParameter[0];
@@ -825,7 +825,7 @@ public final class Template {
     }
 
     /**
-     * ´ú±íÒ»¸ö<code>$#{template}</code>½áµã¡£
+     * ä»£è¡¨ä¸€ä¸ª<code>$#{template}</code>ç»“ç‚¹ã€‚
      */
     static class IncludeTemplate extends Node {
         final String templateName;
@@ -885,7 +885,7 @@ public final class Template {
     }
 
     /**
-     * ½âÎöÆ÷
+     * è§£æå™¨
      */
     private static class Parser {
         private final static Pattern DIRECTIVE_PATTERN = Pattern.compile("\\\\(\\$|\\$#|#|#@|\\\\)" // group 1
@@ -952,10 +952,10 @@ public final class Template {
 
                     // Comment: ## xxx
                     else if (matcher.group(INDEX_OF_COMMENT) != null) {
-                        index = currentLine.length(); // ºöÂÔµ±Ç°ĞĞºóÃæËùÓĞÄÚÈİ
+                        index = currentLine.length(); // å¿½ç•¥å½“å‰è¡Œåé¢æ‰€æœ‰å†…å®¹
 
                         if (matcher.start(INDEX_OF_COMMENT) == 0) {
-                            appendNewLine = false; // Èç¹û×¢ÊÍÊÇ´ÓĞĞÊ×¿ªÊ¼£¬ÔòºöÂÔµôÕûĞĞ
+                            appendNewLine = false; // å¦‚æœæ³¨é‡Šæ˜¯ä»è¡Œé¦–å¼€å§‹ï¼Œåˆ™å¿½ç•¥æ‰æ•´è¡Œ
                         }
 
                         break; // ignore the rest of line
@@ -967,7 +967,7 @@ public final class Template {
 
                         String name = matcher.group(INDEX_OF_PARAM);
 
-                        // #@Ç°ÃæÖ»ÔÊĞíÓĞ¿Õ°×£¨Ö»ÔÊĞí´ÓĞĞÊ×¿ªÊ¼¶¨Òå£©£¬·ñÔò±¨´í¡£
+                        // #@å‰é¢åªå…è®¸æœ‰ç©ºç™½ï¼ˆåªå…è®¸ä»è¡Œé¦–å¼€å§‹å®šä¹‰ï¼‰ï¼Œå¦åˆ™æŠ¥é”™ã€‚
                         if (matcher.start() > 0) {
                             throw new TemplateParseException("#@" + name
                                     + " should start at new line, which is now at "
@@ -978,7 +978,7 @@ public final class Template {
 
                         stack.peek().addParam(name, value, lineNumber, matcher.end(INDEX_OF_PARAM_PREFIX) + 1);
 
-                        // ºöÂÔ±¾ĞĞ
+                        // å¿½ç•¥æœ¬è¡Œ
                         appendNewLine = false;
                     }
 
@@ -1009,7 +1009,7 @@ public final class Template {
                     else if (matcher.group(INDEX_OF_SUBTEMPLATE) != null) {
                         String name = matcher.group(INDEX_OF_SUBTEMPLATE);
 
-                        // #Ç°ÃæÖ»ÔÊĞíÓĞ¿Õ°×£¨Ö»ÔÊĞí´ÓĞĞÊ×¿ªÊ¼¶¨Òå£©£¬·ñÔò±¨´í¡£
+                        // #å‰é¢åªå…è®¸æœ‰ç©ºç™½ï¼ˆåªå…è®¸ä»è¡Œé¦–å¼€å§‹å®šä¹‰ï¼‰ï¼Œå¦åˆ™æŠ¥é”™ã€‚
                         if (matcher.start() > 0) {
                             throw new TemplateParseException("#"
                                     + name
@@ -1018,7 +1018,7 @@ public final class Template {
                                             matcher.end(INDEX_OF_SUBTEMPLATE_PREFIX) + 1));
                         }
 
-                        // #xxx±ØĞë¶ÀÕ¼Ò»ĞĞ
+                        // #xxxå¿…é¡»ç‹¬å ä¸€è¡Œ
                         if (matcher.end(INDEX_OF_SUBTEMPLATE_SUFFIX) < currentLine.length()) {
                             throw new TemplateParseException("Invalid content followed after #"
                                     + name
@@ -1031,14 +1031,14 @@ public final class Template {
 
                         // #end of sub-template
                         if ("end".equals(name)) {
-                            // #endºó¸ú()
+                            // #endåè·Ÿ()
                             if (matcher.group(INDEX_OF_IMPORT_FILE) != null) {
                                 throw new TemplateParseException("Invalid character '(' after #end tag at "
                                         + Location.toString(systemId, lineNumber, matcher.start(INDEX_OF_IMPORT_FILE)
                                                 + matcher.group(INDEX_OF_IMPORT_FILE).indexOf("(") + 1));
                             }
 
-                            // #endÃ»ÓĞ¶ÔÓ¦µÄ#template
+                            // #endæ²¡æœ‰å¯¹åº”çš„#template
                             else if (stack.size() <= 1) {
                                 throw new TemplateParseException("Unmatched #end tag at "
                                         + Location.toString(systemId, lineNumber,
@@ -1058,7 +1058,7 @@ public final class Template {
 
                             checkName(name, new Location(systemId, lineNumber, columnNumber));
 
-                            // ´ÓÁíÒ»¸öÎÄ¼şÖĞ¶ÁÈ¡×ÓÄ£°å
+                            // ä»å¦ä¸€ä¸ªæ–‡ä»¶ä¸­è¯»å–å­æ¨¡æ¿
                             if (matcher.group(INDEX_OF_IMPORT_FILE) != null) {
                                 String importedFileName = trimToNull(trim(
                                         trimToEmpty(matcher.group(INDEX_OF_IMPORT_FILE_NAME)), "\""));
@@ -1098,14 +1098,14 @@ public final class Template {
                                 stack.peek().addSubTemplate(importedTemplate);
                             }
 
-                            // ¿ªÊ¼Ò»¸öĞÂÄ£°å
+                            // å¼€å§‹ä¸€ä¸ªæ–°æ¨¡æ¿
                             else {
                                 stack.push(new ParsingTemplate(name, systemId, lineNumber, columnNumber,
                                         stack.peek().params));
                             }
                         }
 
-                        // ºöÂÔ±¾ĞĞ
+                        // å¿½ç•¥æœ¬è¡Œ
                         appendNewLine = false;
                     } else {
                         unreachableCode();
@@ -1172,11 +1172,11 @@ public final class Template {
         }
 
         /**
-         * ºóÆÚ´¦Àí¡£
+         * åæœŸå¤„ç†ã€‚
          * <ol>
-         * <li>¼ì²éinclude template¡£</li>
-         * <li>¼ì²éplaceholderÖĞµÄtemplate reference¡£</li>
-         * <li>¸ù¾İtrimmingºÍwhitespace²ÎÊıµÄÖµ£¬´¦ÀíÄ£°åÖĞµÄ¿Õ°×ºÍ»»ĞĞ¡£</li>
+         * <li>æ£€æŸ¥include templateã€‚</li>
+         * <li>æ£€æŸ¥placeholderä¸­çš„template referenceã€‚</li>
+         * <li>æ ¹æ®trimmingå’Œwhitespaceå‚æ•°çš„å€¼ï¼Œå¤„ç†æ¨¡æ¿ä¸­çš„ç©ºç™½å’Œæ¢è¡Œã€‚</li>
          * </ol>
          */
         private void postProcessParsingTemplate(ParsingTemplate parsingTemplate) {
@@ -1202,7 +1202,7 @@ public final class Template {
         private void postProcessTemplate(Template template, LinkedList<Map<String, Template>> templateStack) {
             templateStack.addFirst(template.subtemplates);
 
-            // ´¦Àínodes
+            // å¤„ç†nodes
             for (Node node : template.nodes) {
                 postProcessNode(node, templateStack);
             }
@@ -1215,7 +1215,7 @@ public final class Template {
 
             template.nodes = nodes.toArray(new Node[nodes.size()]);
 
-            // µİ¹é´¦Àí×ÓÄ£°å
+            // é€’å½’å¤„ç†å­æ¨¡æ¿
             for (Template subTemplate : template.subtemplates.values()) {
                 postProcessTemplate(subTemplate, templateStack);
             }
@@ -1292,12 +1292,12 @@ public final class Template {
                     }
                 }
 
-                // ÔÚpredefined templatesÖĞÕÒ
+                // åœ¨predefined templatesä¸­æ‰¾
                 if (template == null) {
                     template = predefinedTemplates.get(parts[0]);
                 }
 
-                // È¡×ÓÄ£°å
+                // å–å­æ¨¡æ¿
                 for (int i = 1; i < parts.length && template != null; i++) {
                     template = template.getSubTemplate(parts[i]);
                 }
@@ -1312,7 +1312,7 @@ public final class Template {
         }
 
         /**
-         * ³ıÈ¥template½áÎ²µÄ»»ĞĞ¡£
+         * é™¤å»templateç»“å°¾çš„æ¢è¡Œã€‚
          */
         private void chomp(LinkedList<Node> nodes) {
             if (!nodes.isEmpty() && nodes.getLast() instanceof Text) {
@@ -1332,7 +1332,7 @@ public final class Template {
         }
 
         /**
-         * È¥³ıÃ¿ĞĞµÄÊ×Î²¿Õ°×£¬È¥³ıÄ£°åÊ×Î²µÄ¿Õ°×ºÍ»»ĞĞ·û¡£
+         * å»é™¤æ¯è¡Œçš„é¦–å°¾ç©ºç™½ï¼Œå»é™¤æ¨¡æ¿é¦–å°¾çš„ç©ºç™½å’Œæ¢è¡Œç¬¦ã€‚
          */
         private boolean trimIfNeccessary(LinkedList<Node> nodes, Map<String, String> params) {
             boolean trimming = getBoolean(params.get("trimming"), false, "on", "yes", "true");
@@ -1341,7 +1341,7 @@ public final class Template {
                 return false;
             }
 
-            // È¥³ıÄ£°å¿ªÍ·µÄ¿Õ°×¡£
+            // å»é™¤æ¨¡æ¿å¼€å¤´çš„ç©ºç™½ã€‚
             if (!nodes.isEmpty() && nodes.getFirst() instanceof Text) {
                 Text firstNode = (Text) nodes.getFirst();
                 String text = trimStart(firstNode.text);
@@ -1353,7 +1353,7 @@ public final class Template {
                 }
             }
 
-            // È¥³ıÄ£°åÄ©Î²µÄ¿Õ°×¡£
+            // å»é™¤æ¨¡æ¿æœ«å°¾çš„ç©ºç™½ã€‚
             if (!nodes.isEmpty() && nodes.getLast() instanceof Text) {
                 Text lastNode = (Text) nodes.getLast();
                 String text = trimEnd(lastNode.text);
@@ -1365,7 +1365,7 @@ public final class Template {
                 }
             }
 
-            // È¥³ıÃ¿ĞĞÊ×Î²µÄ¿Õ°×
+            // å»é™¤æ¯è¡Œé¦–å°¾çš„ç©ºç™½
             boolean startOfLine = true;
             boolean endOfLine;
 
@@ -1415,7 +1415,7 @@ public final class Template {
         }
 
         /**
-         * ½«¶à¸ö¿Õ°×±ä³ÉÒ»¸ö¿Õ°×£»Èç¹û¶à¸ö¿Õ°×ÖĞ°üº¬»»ĞĞ·û£¬Ôò×ª»»³ÉÒ»¸ö»»ĞĞ·û¡£
+         * å°†å¤šä¸ªç©ºç™½å˜æˆä¸€ä¸ªç©ºç™½ï¼›å¦‚æœå¤šä¸ªç©ºç™½ä¸­åŒ…å«æ¢è¡Œç¬¦ï¼Œåˆ™è½¬æ¢æˆä¸€ä¸ªæ¢è¡Œç¬¦ã€‚
          */
         private boolean collapseWhitespacesIfNeccessary(LinkedList<Node> nodes, Map<String, String> params) {
             boolean collapseWhitespaces = getBoolean(params.get("whitespace"), false, "collapse");
@@ -1478,7 +1478,7 @@ public final class Template {
     }
 
     /**
-     * ±£´æ´¿ÎÄ±¾ÄÚÈİ£¬²¢¼ÇÂ¼µÚÒ»¸ö·Ç¿Õ×Ö·ûµÄĞĞÁĞºÅ¡£
+     * ä¿å­˜çº¯æ–‡æœ¬å†…å®¹ï¼Œå¹¶è®°å½•ç¬¬ä¸€ä¸ªéç©ºå­—ç¬¦çš„è¡Œåˆ—å·ã€‚
      */
     private static class TextBuffer {
         private final StringBuilder buf = new StringBuilder();
@@ -1596,14 +1596,14 @@ public final class Template {
         public void addNode(Node node) {
             if (node != null) {
                 if (!subtemplates.isEmpty()) {
-                    // ÔÚsub templates±»¶¨ÒåÒÔºó£¬²»ÄÜÔÙÔö¼ÓÈÎºÎnodes£¬·ñÔò±¨´í¡£
-                    // ÌØÊâÇé¿ö£º¶ÔÓÚtext node£¬Èç¹ûÎ´°üº¬¿É¼û×Ö·û£¬Ôò²»±¨´í£¬Ö»ÊÇ°²¾²µØ¶ªÆú¡£
+                    // åœ¨sub templatesè¢«å®šä¹‰ä»¥åï¼Œä¸èƒ½å†å¢åŠ ä»»ä½•nodesï¼Œå¦åˆ™æŠ¥é”™ã€‚
+                    // ç‰¹æ®Šæƒ…å†µï¼šå¯¹äºtext nodeï¼Œå¦‚æœæœªåŒ…å«å¯è§å­—ç¬¦ï¼Œåˆ™ä¸æŠ¥é”™ï¼Œåªæ˜¯å®‰é™åœ°ä¸¢å¼ƒã€‚
                     if (node.location.lineNumber > 0) {
                         throw new TemplateParseException("Invalid " + node.desc() + " here at " + node.location);
                     }
                 } else {
                     if (node instanceof Text && !nodes.isEmpty() && nodes.getLast() instanceof Text) {
-                        // ºÏ²¢text node
+                        // åˆå¹¶text node
                         Text lastNode = (Text) nodes.removeLast();
                         Text thisNode = (Text) node;
                         Location location;
@@ -1675,11 +1675,11 @@ public final class Template {
     }
 
     /**
-     * ±£´æÎÄ¼şÀ´Ô´£¬±ØÒªÊ±ÖØ×°Ä£°å¡£
+     * ä¿å­˜æ–‡ä»¶æ¥æºï¼Œå¿…è¦æ—¶é‡è£…æ¨¡æ¿ã€‚
      */
     static class InputSource {
         private final static Pattern CHARSET_DETECTIVE_PATTERN = Pattern.compile("^(\\s*##)" // comment
-                + "|^(\\s*)#@\\s*(\\w+)\\s+(.*?)\\s*(##.*)?$" // charset»òÆäËü²ÎÊı
+                + "|^(\\s*)#@\\s*(\\w+)\\s+(.*?)\\s*(##.*)?$" // charsetæˆ–å…¶å®ƒå‚æ•°
                 + "|^\\s*$" // empty line
         );
 
@@ -1757,7 +1757,7 @@ public final class Template {
         }
 
         /**
-         * ¸ù¾İÖ¸¶¨µÄÏà¶ÔÓÚµ±Ç°sourceµÄÂ·¾¶£¬È¡µÃinput source¡£
+         * æ ¹æ®æŒ‡å®šçš„ç›¸å¯¹äºå½“å‰sourceçš„è·¯å¾„ï¼Œå–å¾—input sourceã€‚
          */
         InputSource getRelative(String relativePath) throws Exception {
             relativePath = trimToNull(relativePath);
@@ -1816,7 +1816,7 @@ public final class Template {
         }
 
         /**
-         * ¶ÁÈ¡ÊäÈëÁ÷µÄÇ°¼¸ĞĞ£¬²éÕÒ<code>#@charset</code>²ÎÊı¡£Èç¹ûÎ´ÕÒµ½£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+         * è¯»å–è¾“å…¥æµçš„å‰å‡ è¡Œï¼ŒæŸ¥æ‰¾<code>#@charset</code>å‚æ•°ã€‚å¦‚æœæœªæ‰¾åˆ°ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
          */
         static String detectCharset(BufferedInputStream istream, String defaultCharset) throws IOException {
             int readlimit = 1024 * 4;
@@ -1840,13 +1840,13 @@ public final class Template {
                                 charset = matcher.group(4);
                             }
 
-                            // Èç¹ûÕÒµ½#@charsetÔò·µ»Ø¡£
-                            // ºöÂÔcharsetÇ°µÄ¿ÕĞĞ¡¢×¢ÊÍºÍÆäËü²ÎÊı¡£
+                            // å¦‚æœæ‰¾åˆ°#@charsetåˆ™è¿”å›ã€‚
+                            // å¿½ç•¥charsetå‰çš„ç©ºè¡Œã€æ³¨é‡Šå’Œå…¶å®ƒå‚æ•°ã€‚
                             if (charset != null) {
                                 return charset;
                             }
                         } else {
-                            // Åöµ½µÚÒ»ĞĞ·Ç×¢ÊÍ¡¢·Ç¿ÕĞĞ¡¢·Ç#@param£¬ÔòÁ¢¼´·µ»Ø¡£
+                            // ç¢°åˆ°ç¬¬ä¸€è¡Œéæ³¨é‡Šã€éç©ºè¡Œã€é#@paramï¼Œåˆ™ç«‹å³è¿”å›ã€‚
                             break;
                         }
                     } else {

@@ -18,7 +18,7 @@
 package com.alibaba.citrus.generictype.introspect;
 
 /**
- * ��propertyȡֵʧ�ܵ��쳣��
+ * 对property取值失败的异常。
  * 
  * @author Michael Zhou
  */

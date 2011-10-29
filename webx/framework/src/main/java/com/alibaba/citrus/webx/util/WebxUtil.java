@@ -42,7 +42,7 @@ public class WebxUtil {
     }
 
     /**
-     * È¡µÃwebx version¡£ °æ±¾ºÅÊÇÍ¨¹ıMETA-INF/MANIFEST.MFÖĞµÄĞÅÏ¢È¡µÃµÄ¡£
+     * å–å¾—webx versionã€‚ ç‰ˆæœ¬å·æ˜¯é€šè¿‡META-INF/MANIFEST.MFä¸­çš„ä¿¡æ¯å–å¾—çš„ã€‚
      */
     public static String getWebxVersion() {
         Package pkg = WebxUtil.class.getPackage();

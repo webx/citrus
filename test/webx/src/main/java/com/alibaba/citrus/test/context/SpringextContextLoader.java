@@ -24,7 +24,7 @@ import com.alibaba.citrus.service.resource.support.context.ResourceLoadingXmlApp
 import com.alibaba.citrus.springext.support.context.AbstractXmlApplicationContext;
 
 /**
- * ÓÃÀ´´´½¨»ùÓÚspringextµÄcontext¡£
+ * ç”¨æ¥åˆ›å»ºåŸºäºspringextçš„contextã€‚
  * 
  * @author Michael Zhou
  */

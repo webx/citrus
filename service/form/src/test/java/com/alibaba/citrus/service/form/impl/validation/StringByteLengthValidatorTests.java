@@ -67,7 +67,7 @@ public class StringByteLengthValidatorTests extends AbstractValidatorTests<Strin
 
     @Test
     public void validate_lessThan3() throws Exception {
-        request("a", "ÖÐ");
+        request("a", "ä¸­");
 
         assertEquals(false, field1.isValid());
         assertEquals("field1 length must be at least 3", field1.getMessage());
@@ -78,7 +78,7 @@ public class StringByteLengthValidatorTests extends AbstractValidatorTests<Strin
 
     @Test
     public void validate_between3and10() throws Exception {
-        request("abc", "ÖÐg");
+        request("abc", "ä¸­g");
 
         assertEquals(true, field1.isValid());
         assertEquals(null, field1.getMessage());
@@ -86,7 +86,7 @@ public class StringByteLengthValidatorTests extends AbstractValidatorTests<Strin
         assertEquals(true, field2.isValid());
         assertEquals(null, field2.getMessage());
 
-        request("abcd", "ÖÐ¹ú");
+        request("abcd", "ä¸­å›½");
 
         assertEquals(true, field1.isValid());
         assertEquals(null, field1.getMessage());
@@ -94,7 +94,7 @@ public class StringByteLengthValidatorTests extends AbstractValidatorTests<Strin
         assertEquals(true, field2.isValid());
         assertEquals(null, field2.getMessage());
 
-        request("abcdefghij", "hiÖÐ»ªÃñ¹ú");
+        request("abcdefghij", "hiä¸­åŽæ°‘å›½");
 
         assertEquals(true, field1.isValid());
         assertEquals(null, field1.getMessage());
@@ -105,7 +105,7 @@ public class StringByteLengthValidatorTests extends AbstractValidatorTests<Strin
 
     @Test
     public void validate_moreThan10() throws Exception {
-        request("abcdefghijk", "ÖÐ»ªÁª°îÌ¨Íå×ÔÖÎÖÞ");
+        request("abcdefghijk", "ä¸­åŽè”é‚¦å°æ¹¾è‡ªæ²»æ´²");
 
         assertEquals(false, field1.isValid());
         assertEquals("field1 length must be less than 10", field1.getMessage());

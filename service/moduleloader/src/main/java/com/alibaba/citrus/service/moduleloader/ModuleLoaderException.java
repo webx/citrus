@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.moduleloader;
 
 /**
- * ´ú±íÒ»¸ö<code>ModuleLoaderService</code>µÄÒì³£¡£
+ * ä»£è¡¨ä¸€ä¸ª<code>ModuleLoaderService</code>çš„å¼‚å¸¸ã€‚
  * 
  * @author Michael Zhou
  */

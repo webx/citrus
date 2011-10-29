@@ -38,7 +38,7 @@ import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.webx.WebxException;
 
 /**
- * Ö´ĞĞscreen¡£
+ * æ‰§è¡Œscreenã€‚
  * 
  * @author Michael Zhou
  */
@@ -59,7 +59,7 @@ public class PerformScreenValve extends AbstractValve {
     public void invoke(PipelineContext pipelineContext) throws Exception {
         TurbineRunData rundata = getTurbineRunData(request);
 
-        // ¼ì²éÖØ¶¨Ïò±êÖ¾£¬Èç¹ûÊÇÖØ¶¨Ïò£¬Ôò²»ĞèÒª½«Ò³ÃæÊä³ö¡£
+        // æ£€æŸ¥é‡å®šå‘æ ‡å¿—ï¼Œå¦‚æœæ˜¯é‡å®šå‘ï¼Œåˆ™ä¸éœ€è¦å°†é¡µé¢è¾“å‡ºã€‚
         if (!rundata.isRedirected()) {
             setContentType(rundata);
             performScreenModule(rundata);
@@ -69,33 +69,33 @@ public class PerformScreenValve extends AbstractValve {
     }
 
     /**
-     * ÉèÖÃcontent type¡£
+     * è®¾ç½®content typeã€‚
      */
     protected void setContentType(TurbineRunData rundata) {
-        // ÉèÖÃcontent type£¬²»ĞèÒªÉèÖÃcharset£¬ÒòÎªSetLocaleRequestContextÒÑ¾­ÉèÖÃÁËcharset¡£
-        // ±ÜÃâ¸²¸Ç±ğÈËÉèÖÃµÄcontentType¡£
+        // è®¾ç½®content typeï¼Œä¸éœ€è¦è®¾ç½®charsetï¼Œå› ä¸ºSetLocaleRequestContextå·²ç»è®¾ç½®äº†charsetã€‚
+        // é¿å…è¦†ç›–åˆ«äººè®¾ç½®çš„contentTypeã€‚
         if (StringUtil.isEmpty(rundata.getResponse().getContentType())) {
             rundata.getResponse().setContentType("text/html");
         }
     }
 
     /**
-     * Ö´ĞĞscreenÄ£¿é¡£
+     * æ‰§è¡Œscreenæ¨¡å—ã€‚
      */
     protected void performScreenModule(TurbineRunData rundata) {
         String target = assertNotNull(rundata.getTarget(), "Target was not specified");
 
-        // ´ÓtargetÖĞÈ¡µÃscreen moduleÃû³Æ
+        // ä»targetä¸­å–å¾—screen moduleåç§°
         String moduleName = getModuleName(target);
 
-        // Èç¹ûÉèÖÃÁËtemplate£¬ÔòÄ¬ÈÏ´ò¿ªlayout
+        // å¦‚æœè®¾ç½®äº†templateï¼Œåˆ™é»˜è®¤æ‰“å¼€layout
         rundata.setLayoutEnabled(true);
 
         try {
             Module module = moduleLoaderService.getModuleQuiet(SCREEN_MODULE, moduleName);
 
-            // µ±Ö¸¶¨ÁËtemplateNameÊ±£¬¿ÉÒÔÃ»ÓĞµÄscreen module£¬¶øµ¥µ¥äÖÈ¾Ä£°å¡£
-            // ÕâÑù¾ÍÊµÏÖÁËpage-driven£¬¼´ÏÈĞ´Ä£°å£¬±ØÒªÊ±ÔÙĞ´Ò»¸ömodule classÓëÖ®¶ÔÓ¦¡£
+            // å½“æŒ‡å®šäº†templateNameæ—¶ï¼Œå¯ä»¥æ²¡æœ‰çš„screen moduleï¼Œè€Œå•å•æ¸²æŸ“æ¨¡æ¿ã€‚
+            // è¿™æ ·å°±å®ç°äº†page-drivenï¼Œå³å…ˆå†™æ¨¡æ¿ï¼Œå¿…è¦æ—¶å†å†™ä¸€ä¸ªmodule classä¸ä¹‹å¯¹åº”ã€‚
             if (module != null) {
                 module.execute();
             } else {
@@ -111,14 +111,14 @@ public class PerformScreenValve extends AbstractValve {
     }
 
     /**
-     * Èç¹û·µ»Ø<code>true</code>£¬ÄÇÃ´µ±Ä£¿éÕÒ²»µ½Ê±£¬»áÅ×Òì³£¡£×ÓÀà¿ÉÒÔ¸²¸Ç´Ë·½·¨£¬ÒÔ¸Ä±äĞĞÎª¡£
+     * å¦‚æœè¿”å›<code>true</code>ï¼Œé‚£ä¹ˆå½“æ¨¡å—æ‰¾ä¸åˆ°æ—¶ï¼Œä¼šæŠ›å¼‚å¸¸ã€‚å­ç±»å¯ä»¥è¦†ç›–æ­¤æ–¹æ³•ï¼Œä»¥æ”¹å˜è¡Œä¸ºã€‚
      */
     protected boolean isScreenModuleRequired() {
         return true;
     }
 
     /**
-     * ¸ù¾İtargetÈ¡µÃscreenÄ£¿éÃû¡£×ÓÀà¿ÉÒÔĞŞ¸ÄÓ³Éä¹æÔò¡£
+     * æ ¹æ®targetå–å¾—screenæ¨¡å—åã€‚å­ç±»å¯ä»¥ä¿®æ”¹æ˜ å°„è§„åˆ™ã€‚
      */
     protected String getModuleName(String target) {
         return mappingRuleService.getMappedName(SCREEN_MODULE_NO_TEMPLATE, target);

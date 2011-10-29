@@ -24,98 +24,98 @@ import javax.servlet.http.HttpServletRequest;
 import com.alibaba.citrus.service.form.configuration.GroupConfig;
 
 /**
- * ´ú±íÓÃ»§ËùÌá½»±íµ¥ÖĞµÄÒ»×é×Ö¶Î¡£
+ * ä»£è¡¨ç”¨æˆ·æ‰€æäº¤è¡¨å•ä¸­çš„ä¸€ç»„å­—æ®µã€‚
  * <p>
- * ×¢Òâ£ºgroup¶ÔÏó²»ÊÇÏß³Ì°²È«µÄ£¬²»ÄÜ±»¶àÏß³Ì¹²Ïí¡£
+ * æ³¨æ„ï¼šgroupå¯¹è±¡ä¸æ˜¯çº¿ç¨‹å®‰å…¨çš„ï¼Œä¸èƒ½è¢«å¤šçº¿ç¨‹å…±äº«ã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface Group {
     /**
-     * È¡µÃgroupµÄÅäÖÃĞÅÏ¢¡£
+     * å–å¾—groupçš„é…ç½®ä¿¡æ¯ã€‚
      */
     GroupConfig getGroupConfig();
 
     /**
-     * È¡µÃ°üº¬´ËgroupµÄform¡£
+     * å–å¾—åŒ…å«æ­¤groupçš„formã€‚
      */
     Form getForm();
 
     /**
-     * È¡µÃgroup name£¬Ïàµ±ÓÚ<code>getGroupConfig().getName()</code>
+     * å–å¾—group nameï¼Œç›¸å½“äº<code>getGroupConfig().getName()</code>
      */
     String getName();
 
     /**
-     * È¡µÃ´ú±ígroupµÄkey¡£
+     * å–å¾—ä»£è¡¨groupçš„keyã€‚
      * <p>
-     * ÓÉ¹Ì¶¨Ç°×º<code>"_fm"</code>£¬¼ÓÉÏgroupÃûµÄËõĞ´£¬ÔÙ¼ÓÉÏgroup instance key¹¹³É¡£ÀıÈç£º
-     * <code>_fm.m._0</code>¡£
+     * ç”±å›ºå®šå‰ç¼€<code>"_fm"</code>ï¼ŒåŠ ä¸Šgroupåçš„ç¼©å†™ï¼Œå†åŠ ä¸Šgroup instance keyæ„æˆã€‚ä¾‹å¦‚ï¼š
+     * <code>_fm.m._0</code>ã€‚
      * </p>
      */
     String getKey();
 
     /**
-     * È¡µÃ±êÊ¶µ±Ç°groupµÄinstance key¡£
+     * å–å¾—æ ‡è¯†å½“å‰groupçš„instance keyã€‚
      */
     String getInstanceKey();
 
     /**
-     * ÅĞ¶¨groupÊÇ·ñÍ¨¹ıÑéÖ¤¡£
+     * åˆ¤å®šgroupæ˜¯å¦é€šè¿‡éªŒè¯ã€‚
      */
     boolean isValid();
 
     /**
-     * ÅĞ¶¨¸ÃgroupÊÇ·ñ±»ÖÃÖµ£¬²¢ÑéÖ¤¡£ÔÚÁ½ÖÖÇé¿öÏÂ£¬<code>isValidated()</code>Îª<code>true</code>¡£
+     * åˆ¤å®šè¯¥groupæ˜¯å¦è¢«ç½®å€¼ï¼Œå¹¶éªŒè¯ã€‚åœ¨ä¸¤ç§æƒ…å†µä¸‹ï¼Œ<code>isValidated()</code>ä¸º<code>true</code>ã€‚
      * <ol>
-     * <li>ÓÃ»§Ìá½»°üº¬µ±Ç°group×Ö¶ÎµÄ±íµ¥¡£´ËÊ±ÏàÓ¦µÄgroup±»³õÊ¼»¯²¢ÑéÖ¤¡£</li>
-     * <li>³ÌĞòµ÷ÓÃ<code>validate()</code>·½·¨¡£ÕâÖÖ·½Ê½ÏÂ£¬groupÖĞµÄ×Ö¶ÎÖµ¿ÉÒÔÓÉ³ÌĞòÀ´ÉèÖÃ£¬Ğ§¹ûÈçÍ¬ÓÃ»§Ìá½»±íµ¥Ò»Ñù¡£</li>
+     * <li>ç”¨æˆ·æäº¤åŒ…å«å½“å‰groupå­—æ®µçš„è¡¨å•ã€‚æ­¤æ—¶ç›¸åº”çš„groupè¢«åˆå§‹åŒ–å¹¶éªŒè¯ã€‚</li>
+     * <li>ç¨‹åºè°ƒç”¨<code>validate()</code>æ–¹æ³•ã€‚è¿™ç§æ–¹å¼ä¸‹ï¼Œgroupä¸­çš„å­—æ®µå€¼å¯ä»¥ç”±ç¨‹åºæ¥è®¾ç½®ï¼Œæ•ˆæœå¦‚åŒç”¨æˆ·æäº¤è¡¨å•ä¸€æ ·ã€‚</li>
      * </ol>
      */
     boolean isValidated();
 
     /**
-     * ³õÊ¼»¯group¡£
+     * åˆå§‹åŒ–groupã€‚
      */
     void init();
 
     /**
-     * ³õÊ¼»¯group¡£ ÆäÖĞ£¬ <code>request</code>¿ÉÒÔÊÇ<code>null</code>£¬Èç¹û
-     * <code>request</code>²»Îª<code>null</code>£¬ÔòÍ¬Ê±ÑéÖ¤±íµ¥¡£
+     * åˆå§‹åŒ–groupã€‚ å…¶ä¸­ï¼Œ <code>request</code>å¯ä»¥æ˜¯<code>null</code>ï¼Œå¦‚æœ
+     * <code>request</code>ä¸ä¸º<code>null</code>ï¼Œåˆ™åŒæ—¶éªŒè¯è¡¨å•ã€‚
      */
     void init(HttpServletRequest request);
 
     /**
-     * ÑéÖ¤£¨»òÖØĞÂÑéÖ¤£©µ±Ç°µÄ×Ö¶ÎÖµ¡£
+     * éªŒè¯ï¼ˆæˆ–é‡æ–°éªŒè¯ï¼‰å½“å‰çš„å­—æ®µå€¼ã€‚
      * <p>
-     * ×¢Òâ£¬´Ë·½·¨½«ÉèÖÃ<code>isValidated()</code>Îª<code>true</code>¡£
+     * æ³¨æ„ï¼Œæ­¤æ–¹æ³•å°†è®¾ç½®<code>isValidated()</code>ä¸º<code>true</code>ã€‚
      * </p>
      */
     void validate();
 
     /**
-     * È¡µÃËùÓĞfieldsµÄÁĞ±í¡£
+     * å–å¾—æ‰€æœ‰fieldsçš„åˆ—è¡¨ã€‚
      */
     Collection<Field> getFields();
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄfield¡£fieldÃû³Æ£¨´óĞ¡Ğ´²»Ãô¸Ğ£©
+     * å–å¾—æŒ‡å®šåç§°çš„fieldã€‚fieldåç§°ï¼ˆå¤§å°å†™ä¸æ•æ„Ÿï¼‰
      */
     Field getField(String fieldName);
 
     /**
-     * ½«¶ÔÏóÖĞµÄÊôĞÔÖµÖÃÈëµ½fieldsÖĞ¡£
+     * å°†å¯¹è±¡ä¸­çš„å±æ€§å€¼ç½®å…¥åˆ°fieldsä¸­ã€‚
      * <p>
-     * ¶ÔÓÚ<code>isValidated()</code>Îª<code>true</code>µÄgroup£¬¸Ã·½·¨ÎŞĞ§¡£
+     * å¯¹äº<code>isValidated()</code>ä¸º<code>true</code>çš„groupï¼Œè¯¥æ–¹æ³•æ— æ•ˆã€‚
      * </p>
      */
     void mapTo(Object object);
 
     /**
-     * ½«groupÖĞµÄÖµÖÃÈëÖ¸¶¨¶ÔÏó¡£
+     * å°†groupä¸­çš„å€¼ç½®å…¥æŒ‡å®šå¯¹è±¡ã€‚
      * <p>
-     * ¶ÔÓÚ<code>isValidated()</code>Îª<code>false</code>µÄgroup£¬¸Ã·½·¨ÎŞĞ§¡£
+     * å¯¹äº<code>isValidated()</code>ä¸º<code>false</code>çš„groupï¼Œè¯¥æ–¹æ³•æ— æ•ˆã€‚
      * </p>
      */
     void setProperties(Object object);

@@ -35,9 +35,9 @@ public class MappedValuesEncoderTests extends AbstractSingleValueEncoderTests {
         prototype.beanName = "mapped_default";
         prototype.attrName = "mapped-default";
         prototype.cookieName = "mapped-default-cookie";
-        prototype.value1 = newMap("hello", "你好", "world", "世界");
+        prototype.value1 = newMap("hello", "浣犲ソ", "world", "涓栫晫");
         prototype.value1Encoded = "\"hello:%E4%BD%A0%E5%A5%BD&world:%E4%B8%96%E7%95%8C\""; // utf8 encoded
-        prototype.value2 = newMap("hello", "你好", "world", "中国");
+        prototype.value2 = newMap("hello", "浣犲ソ", "world", "涓浗");
         prototype.value2Encoded = "\"hello:%E4%BD%A0%E5%A5%BD&world:%E4%B8%AD%E5%9B%BD\""; // utf8 encoded
         prototype.value3 = newMap("hello", "world");
         prototype.value3Encoded = "\"hello:world\"";
@@ -46,9 +46,9 @@ public class MappedValuesEncoderTests extends AbstractSingleValueEncoderTests {
         prototype.beanName = "mapped_specified";
         prototype.attrName = "mapped-specified";
         prototype.cookieName = "mapped-specified-cookie";
-        prototype.value1 = newMap("hello", "你好", "world", "世界");
+        prototype.value1 = newMap("hello", "浣犲ソ", "world", "涓栫晫");
         prototype.value1Encoded = "\"hello:%C4%E3%BA%C3&world:%CA%C0%BD%E7\""; // gbk encoded
-        prototype.value2 = newMap("hello", "你好", "world", "中国");
+        prototype.value2 = newMap("hello", "浣犲ソ", "world", "涓浗");
         prototype.value2Encoded = "\"hello:%C4%E3%BA%C3&world:%D6%D0%B9%FA\""; // gbk encoded
         prototype.value3 = newMap("hello", "world");
         prototype.value3Encoded = "\"hello:world\"";
@@ -57,10 +57,10 @@ public class MappedValuesEncoderTests extends AbstractSingleValueEncoderTests {
         prototype.beanName = "mapped_encrypted";
         prototype.attrName = "mapped-encrypted";
         prototype.cookieName = "mapped-encrypted-cookie";
-        prototype.value1 = newMap("hello", "你好", "world", "世界");
+        prototype.value1 = newMap("hello", "浣犲ソ", "world", "涓栫晫");
         prototype.value1Encoded = "iAgfpRQ1Tos2bm%2B7FoZNjf1HlHmXefwxOg3Nzcg"
                 + "QVVe0GT6V0xchmppCBj05e6b%2F490%2Fd65pNOA42zHQFCrxiQ%3D%3D"; // aes encrypted and base64, compressed
-        prototype.value2 = newMap("hello", "你好", "world", "中国");
+        prototype.value2 = newMap("hello", "浣犲ソ", "world", "涓浗");
         prototype.value2Encoded = "iAgfpRQ1Tos2bm%2B7FoZNjf1HlHmXefwxOg3Nzcg"
                 + "QVVeSAPjeZF%2BIKFJXcNDIYcQfN3Ii4GGpJMWRzZwn6hY%2B1A%3D%3D"; // aes encrypted and base64, compressed
         prototype.value3 = newMap("hello", "world");

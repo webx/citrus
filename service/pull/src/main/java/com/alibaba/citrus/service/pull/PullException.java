@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.pull;
 
 /**
- * ´ú±ípull serviceµÄÒì³£¡£
+ * ä»£è¡¨pull serviceçš„å¼‚å¸¸ã€‚
  * 
  * @author Michael Zhou
  */

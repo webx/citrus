@@ -18,23 +18,23 @@
 package com.alibaba.citrus.util.internal.webpagelite;
 
 /**
- * ´ú±íÒ»¸ö¼òµ¥µÄ×é¼ş×¢²á±í¡£
+ * ä»£è¡¨ä¸€ä¸ªç®€å•çš„ç»„ä»¶æ³¨å†Œè¡¨ã€‚
  * 
  * @author Michael Zhou
  */
 public interface PageComponentRegistry {
     /**
-     * ×¢²á×é¼ş¡£
+     * æ³¨å†Œç»„ä»¶ã€‚
      */
     void register(String componentPath, PageComponent component);
 
     /**
-     * È¡µÃËùÓĞµÄcomponentPaths¡£
+     * å–å¾—æ‰€æœ‰çš„componentPathsã€‚
      */
     String[] getComponentPaths();
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄ×é¼ş¡£
+     * å–å¾—æŒ‡å®šåç§°çš„ç»„ä»¶ã€‚
      */
     <PC extends PageComponent> PC getComponent(String componentPath, Class<PC> componentClass);
 }

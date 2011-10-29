@@ -20,22 +20,22 @@ package com.alibaba.citrus.service.requestcontext.session.valueencoder;
 import com.alibaba.citrus.service.requestcontext.session.SessionStore.StoreContext;
 
 /**
- * ½«¶ÔÏó×ª»»³É×Ö·û´®Öµ»ò·´Ö®¡£
+ * å°†å¯¹è±¡è½¬æ¢æˆå­—ç¬¦ä¸²å€¼æˆ–åä¹‹ã€‚
  * 
  * @author Michael Zhou
  */
 public interface SessionValueEncoder {
     /**
-     * ½«¶ÔÏó±àÂë³É×Ö·û´®¡£
+     * å°†å¯¹è±¡ç¼–ç æˆå­—ç¬¦ä¸²ã€‚
      * 
-     * @throws SessionValueEncoderException Èç¹û±àÂëÊ§°Ü
+     * @throws SessionValueEncoderException å¦‚æœç¼–ç å¤±è´¥
      */
     String encode(Object value, StoreContext storeContext) throws SessionValueEncoderException;
 
     /**
-     * ½«×Ö·û´®½âÂë³É¶ÔÏó¡£
+     * å°†å­—ç¬¦ä¸²è§£ç æˆå¯¹è±¡ã€‚
      * 
-     * @throws SessionValueEncoderException Èç¹û½âÂëÊ§°Ü
+     * @throws SessionValueEncoderException å¦‚æœè§£ç å¤±è´¥
      */
     Object decode(String encodedValue, StoreContext storeContext) throws SessionValueEncoderException;
 }

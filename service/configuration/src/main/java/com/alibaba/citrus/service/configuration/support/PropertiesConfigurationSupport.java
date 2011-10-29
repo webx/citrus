@@ -34,7 +34,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * »ùÓÚpropertiesµÄconfigurationÊµÏÖ¡£
+ * åŸºäºpropertiesçš„configurationå®ç°ã€‚
  * 
  * @author Michael Zhou
  */

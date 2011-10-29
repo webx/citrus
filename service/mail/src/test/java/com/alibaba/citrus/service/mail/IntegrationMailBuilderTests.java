@@ -40,7 +40,7 @@ import com.alibaba.citrus.service.template.TemplateService;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * °Ñ¸÷ÖÖcontentÕûºÏÔÚÒ»Æğ²âÊÔ¡£
+ * æŠŠå„ç§contentæ•´åˆåœ¨ä¸€èµ·æµ‹è¯•ã€‚
  * 
  * @author Michael Zhou
  */
@@ -62,7 +62,7 @@ public class IntegrationMailBuilderTests extends AbstractMailBuilderTests {
         builder = createVeryComplexMail();
         MailBuilder copy = builder.clone();
 
-        // ¼ì²écontent treeÊÇ·ñÎªÀàĞÍÏàÍ¬£¬ÊµÀı²»Í¬
+        // æ£€æŸ¥content treeæ˜¯å¦ä¸ºç±»å‹ç›¸åŒï¼Œå®ä¾‹ä¸åŒ
         Object[] tree1 = getMailBuilderTree(builder);
         Object[] tree2 = getMailBuilderTree(copy);
 
@@ -76,7 +76,7 @@ public class IntegrationMailBuilderTests extends AbstractMailBuilderTests {
             assertEquals(obj1.getClass(), obj2.getClass());
         }
 
-        // ¼ì²écopyÉú³ÉµÄmessageÄÚÈİ
+        // æ£€æŸ¥copyç”Ÿæˆçš„messageå†…å®¹
         String eml = getMessageAsText();
 
         assertEquals(1, StringUtil.countMatches(eml, "Content-Type: multipart/alternative"));
@@ -97,17 +97,17 @@ public class IntegrationMailBuilderTests extends AbstractMailBuilderTests {
     private MailBuilder createVeryComplexMail() {
         MailBuilder builder = new MailBuilder();
 
-        // ´´½¨ËùÓĞcontents¡£
+        // åˆ›å»ºæ‰€æœ‰contentsã€‚
         MultipartContent attachable = new MixedMultipartContent();
         attachable.setId("attachable");
 
         MultipartContent alternative = new AlternativeMultipartContent();
         alternative.setId("alternative");
 
-        TextContent plainText = new TextContent("ÎÒ°®±±¾©Ãô¸Ğ´Ê", "text/plain");
+        TextContent plainText = new TextContent("æˆ‘çˆ±åŒ—äº¬æ•æ„Ÿè¯", "text/plain");
         plainText.setId("plainText");
 
-        TextContent htmlText = new TextContent("<°®±±¾©Ãô¸Ğ´Ê>", "text/html");
+        TextContent htmlText = new TextContent("<çˆ±åŒ—äº¬æ•æ„Ÿè¯>", "text/html");
         htmlText.setId("htmlText");
 
         TextTemplateContent plainTextTemplate = new TextTemplateContent("mail/mytemplate.vm", "text/plain");
@@ -129,7 +129,7 @@ public class IntegrationMailBuilderTests extends AbstractMailBuilderTests {
 
         textAttachment.setResourceLoader(factory);
 
-        // ¼ÓÈëbuilder
+        // åŠ å…¥builder
         builder.setContent(attachable);
         {
             attachable.addContent(alternative);
@@ -143,7 +143,7 @@ public class IntegrationMailBuilderTests extends AbstractMailBuilderTests {
             attachable.addContent(htmlTemplate);
         }
 
-        // ¼ì²égetId()
+        // æ£€æŸ¥getId()
         assertSame(attachable, builder.getContent("attachable"));
         assertSame(alternative, builder.getContent("alternative"));
         assertSame(plainText, builder.getContent("plainText"));

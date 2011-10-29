@@ -24,7 +24,7 @@ import com.alibaba.citrus.webx.handler.support.AbstractVisitor;
 import com.alibaba.citrus.webx.handler.support.LayoutRequestProcessor;
 
 /**
- * ÓÃÀ´ÏÔÊ¾µ±Ç°²Ù×÷ÏµÍ³»·¾³±äÁ¿µÄĞÅÏ¢¡£
+ * ç”¨æ¥æ˜¾ç¤ºå½“å‰æ“ä½œç³»ç»Ÿç¯å¢ƒå˜é‡çš„ä¿¡æ¯ã€‚
  * 
  * @author Michael Zhou
  */

@@ -18,14 +18,14 @@
 package com.alibaba.citrus.util.templatelite;
 
 /**
- * µ±visit·½·¨ÕÒ²»µ½Ê±£¬µ÷ÓÃ´Ëvisitor¡£
+ * å½“visitæ–¹æ³•æ‰¾ä¸åˆ°æ—¶ï¼Œè°ƒç”¨æ­¤visitorã€‚
  * 
  * @author Michael Zhou
  */
 public interface FallbackVisitor {
     /**
-     * ·ÃÎÊ<code>${placeholder:param1, param2, ...}</code>¡£ ·µ»Ø<code>true</code>
-     * ±íÊ¾·ÃÎÊ³É¹¦£¬·ñÔò»¹ÊÇ»áÅ×³ö<code>NoSuchMethodException</code>¡£
+     * è®¿é—®<code>${placeholder:param1, param2, ...}</code>ã€‚ è¿”å›<code>true</code>
+     * è¡¨ç¤ºè®¿é—®æˆåŠŸï¼Œå¦åˆ™è¿˜æ˜¯ä¼šæŠ›å‡º<code>NoSuchMethodException</code>ã€‚
      */
     boolean visitPlaceholder(String name, Object[] params) throws Exception;
 }

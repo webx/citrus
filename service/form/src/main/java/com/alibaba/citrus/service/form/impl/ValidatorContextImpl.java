@@ -24,7 +24,7 @@ import com.alibaba.citrus.service.form.MessageContext;
 import com.alibaba.citrus.service.form.Validator;
 
 /**
- * Ğ¯´ø×ÅvalidatorÑéÖ¤Ëù±ØĞëµÄÉÏÏÂÎÄĞÅÏ¢¡£
+ * æºå¸¦ç€validatoréªŒè¯æ‰€å¿…é¡»çš„ä¸Šä¸‹æ–‡ä¿¡æ¯ã€‚
  * 
  * @author Michael Zhou
  */

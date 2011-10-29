@@ -35,7 +35,7 @@ import com.alibaba.citrus.service.uribroker.interceptor.URIBrokerInterceptor;
 import com.alibaba.citrus.util.StringEscapeUtil;
 
 /**
- * Õâ¸öÀà½«URIBrokerÖĞ£¬ºÍURLµÄ½á¹¹Ã»ÓĞÖ±½Ó¹ØÏµµÄÒ»Ğ©»ù´¡ÌØĞÔ·ÖÀë³öÀ´£¬Ê¹´úÂë¸üÇåÎú¡£
+ * è¿™ä¸ªç±»å°†URIBrokerä¸­ï¼Œå’ŒURLçš„ç»“æ„æ²¡æœ‰ç›´æ¥å…³ç³»çš„ä¸€äº›åŸºç¡€ç‰¹æ€§åˆ†ç¦»å‡ºæ¥ï¼Œä½¿ä»£ç æ›´æ¸…æ™°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -50,21 +50,21 @@ public abstract class URIBrokerFeatures implements Renderable {
     private Map<URIBrokerInterceptor, Integer> interceptors;
 
     /**
-     * ÉèÖÃÔËĞĞÊ±ĞÅÏ¢¡£ÓÉSpring×Ô¶¯×°Èë¡£
+     * è®¾ç½®è¿è¡Œæ—¶ä¿¡æ¯ã€‚ç”±Springè‡ªåŠ¨è£…å…¥ã€‚
      */
     public void setRequest(HttpServletRequest request) {
         this.request = request;
     }
 
     /**
-     * ÊÇ·ñ×Ô¶¯´ÓrequestÖĞÌî³äÖµ¡£
+     * æ˜¯å¦è‡ªåŠ¨ä»requestä¸­å¡«å……å€¼ã€‚
      */
     public boolean isRequestAware() {
         return requestAware == null ? false : requestAware;
     }
 
     /**
-     * ÉèÖÃÊÇ·ñ×Ô¶¯´ÓrequestÖĞÌî³äÖµ¡£
+     * è®¾ç½®æ˜¯å¦è‡ªåŠ¨ä»requestä¸­å¡«å……å€¼ã€‚
      */
     public void setRequestAware(boolean requestAware) {
         this.requestAware = requestAware;
@@ -77,16 +77,16 @@ public abstract class URIBrokerFeatures implements Renderable {
     }
 
     /**
-     * È¡µÃparent URI broker¡£
+     * å–å¾—parent URI brokerã€‚
      */
     public URIBroker getParent() {
         return parent;
     }
 
     /**
-     * ÉèÖÃparent URI broker¡£
+     * è®¾ç½®parent URI brokerã€‚
      * <p>
-     * Ã¿´Îreset£¬µ±Ç°URIBrokerµÄ×´Ì¬½«»á»Ö¸´³ÉºÍËüµÄparentÏàÍ¬¡£
+     * æ¯æ¬¡resetï¼Œå½“å‰URIBrokerçš„çŠ¶æ€å°†ä¼šæ¢å¤æˆå’Œå®ƒçš„parentç›¸åŒã€‚
      * </p>
      */
     public void setParent(URIBroker parent) {
@@ -98,9 +98,9 @@ public abstract class URIBrokerFeatures implements Renderable {
     }
 
     /**
-     * È¡µÃURL encodingµÄ±àÂë×Ö·û¼¯¡£
+     * å–å¾—URL encodingçš„ç¼–ç å­—ç¬¦é›†ã€‚
      * <p>
-     * ¼ÙÈçÖµÎª<code>null</code>£¬½«´Ó<code>LocaleUtil</code>ÖĞÈ¡µÃ¡£
+     * å‡å¦‚å€¼ä¸º<code>null</code>ï¼Œå°†ä»<code>LocaleUtil</code>ä¸­å–å¾—ã€‚
      * </p>
      */
     public String getCharset() {
@@ -108,17 +108,17 @@ public abstract class URIBrokerFeatures implements Renderable {
     }
 
     /**
-     * ÉèÖÃURL encodingµÄ±àÂë×Ö·û¼¯¡£
+     * è®¾ç½®URL encodingçš„ç¼–ç å­—ç¬¦é›†ã€‚
      */
     public void setCharset(String charset) {
         this.charset = trimToNull(charset);
     }
 
     /**
-     * ÊÇ·ñ×Ô¶¯reset¡£
+     * æ˜¯å¦è‡ªåŠ¨resetã€‚
      * <p>
-     * URI brokerÊÇÓĞ×´Ì¬µÄ¡£¼ÙÈç×Ô¶¯resetÉèÎª<code>true</code>£¬ÔòÆä×´Ì¬ÔÚÖ´ĞĞ<code>render()</code>
-     * ·½·¨Ö®ºó½«»Ö¸´Ô­×´¡£ ´ÓÅäÖÃÎÄ¼şÖĞÉú³ÉµÄuri broker£¬ÆäautoResetÎª<code>false</code>£¬ËµÃ÷Æä×´Ì¬²»ÄÜ±»¸Ä±ä¡£
+     * URI brokeræ˜¯æœ‰çŠ¶æ€çš„ã€‚å‡å¦‚è‡ªåŠ¨resetè®¾ä¸º<code>true</code>ï¼Œåˆ™å…¶çŠ¶æ€åœ¨æ‰§è¡Œ<code>render()</code>
+     * æ–¹æ³•ä¹‹åå°†æ¢å¤åŸçŠ¶ã€‚ ä»é…ç½®æ–‡ä»¶ä¸­ç”Ÿæˆçš„uri brokerï¼Œå…¶autoResetä¸º<code>false</code>ï¼Œè¯´æ˜å…¶çŠ¶æ€ä¸èƒ½è¢«æ”¹å˜ã€‚
      * </p>
      */
     public boolean isAutoReset() {
@@ -126,14 +126,14 @@ public abstract class URIBrokerFeatures implements Renderable {
     }
 
     /**
-     * ÊÇ·ñÓĞinterceptor£¿
+     * æ˜¯å¦æœ‰interceptorï¼Ÿ
      */
     public boolean hasInterceptors() {
         return interceptors != null && !interceptors.isEmpty();
     }
 
     /**
-     * È¡µÃËùÓĞµÄinterceptors¼°Æä×´Ì¬¡£
+     * å–å¾—æ‰€æœ‰çš„interceptorsåŠå…¶çŠ¶æ€ã€‚
      */
     protected Map<URIBrokerInterceptor, Integer> getInterceptorStates() {
         if (interceptors == null) {
@@ -144,14 +144,14 @@ public abstract class URIBrokerFeatures implements Renderable {
     }
 
     /**
-     * È¡µÃËùÓĞµÄinterceptors¡£
+     * å–å¾—æ‰€æœ‰çš„interceptorsã€‚
      */
     public Collection<URIBrokerInterceptor> getInterceptors() {
         return getInterceptorStates().keySet();
     }
 
     /**
-     * È¡µÃËùÓĞµÄinterceptors¡£
+     * å–å¾—æ‰€æœ‰çš„interceptorsã€‚
      */
     public void setInterceptors(Collection<URIBrokerInterceptor> interceptors) {
         clearInterceptors();
@@ -162,14 +162,14 @@ public abstract class URIBrokerFeatures implements Renderable {
     }
 
     /**
-     * Ìí¼ÓÒ»¸öinterceptor¡£
+     * æ·»åŠ ä¸€ä¸ªinterceptorã€‚
      */
     public void addInterceptor(URIBrokerInterceptor interceptor) {
         getInterceptorStates().put(assertNotNull(interceptor, "interceptor"), null);
     }
 
     /**
-     * Çå³ıinterceptors¡£
+     * æ¸…é™¤interceptorsã€‚
      */
     public void clearInterceptors() {
         if (interceptors != null) {
@@ -178,7 +178,7 @@ public abstract class URIBrokerFeatures implements Renderable {
     }
 
     /**
-     * ³õÊ¼»¯URI broker£¬½«µ±Ç°brokerÓëparentºÏ²¢¡£
+     * åˆå§‹åŒ–URI brokerï¼Œå°†å½“å‰brokerä¸parentåˆå¹¶ã€‚
      */
     public final void init() {
         if (initialized) {
@@ -188,7 +188,7 @@ public abstract class URIBrokerFeatures implements Renderable {
         initialized = true;
 
         if (parent != null) {
-            // È·±£parentÒÑ¾­³õÊ¼»¯
+            // ç¡®ä¿parentå·²ç»åˆå§‹åŒ–
             parent.init();
 
             // charset
@@ -201,7 +201,7 @@ public abstract class URIBrokerFeatures implements Renderable {
                 requestAware = parent.isRequestAware();
             }
 
-            // init interceptors£¬½«parent interceptors¼ÓÔÚÇ°Ãæ
+            // init interceptorsï¼Œå°†parent interceptorsåŠ åœ¨å‰é¢
             if (parent.hasInterceptors()) {
                 mergeLinkedHashMap(parent.getInterceptorStates(), getInterceptorStates());
             }
@@ -214,12 +214,12 @@ public abstract class URIBrokerFeatures implements Renderable {
     }
 
     /**
-     * ¸´ÖÆparent brokerÖĞµÄÖµ×÷ÎªÄ¬ÈÏÖµ£¬µ«²»¸²¸Çµ±Ç°brokerÖĞÒÑÓĞµÄÖµ¡£
+     * å¤åˆ¶parent brokerä¸­çš„å€¼ä½œä¸ºé»˜è®¤å€¼ï¼Œä½†ä¸è¦†ç›–å½“å‰brokerä¸­å·²æœ‰çš„å€¼ã€‚
      */
     protected abstract void initDefaults(URIBroker parent);
 
     /**
-     * ¸´Î»µ½parentµÄ×´Ì¬¡£
+     * å¤ä½åˆ°parentçš„çŠ¶æ€ã€‚
      */
     public final void reset() {
         URIBroker parent = this.parent;
@@ -243,8 +243,8 @@ public abstract class URIBrokerFeatures implements Renderable {
         // reset others
         copyFrom(parent);
 
-        // ¸´ÖÆrenderer¡£
-        // È·±£Í¬Ò»ÀàĞÍµÄbroker£¬²Å¸´ÖÆÔ¤äÖÈ¾buffer£¬ÒòÎª²»Í¬µÄbrokerÓĞ¿ÉÄÜäÖÈ¾½á¹û²»Í¬¡£
+        // å¤åˆ¶rendererã€‚
+        // ç¡®ä¿åŒä¸€ç±»å‹çš„brokerï¼Œæ‰å¤åˆ¶é¢„æ¸²æŸ“bufferï¼Œå› ä¸ºä¸åŒçš„brokeræœ‰å¯èƒ½æ¸²æŸ“ç»“æœä¸åŒã€‚
         if (parent.getClass().equals(getClass())) {
             renderer.copyFrom(parent.renderer);
         }
@@ -258,24 +258,24 @@ public abstract class URIBrokerFeatures implements Renderable {
     }
 
     /**
-     * ¸´ÖÆparentµÄ×´Ì¬¡£
+     * å¤åˆ¶parentçš„çŠ¶æ€ã€‚
      * <p>
-     * ×ÓÀàÓ¦¸Ã¸²¸Ç´Ë·½·¨£¬ÒÔÊµÏÖÌØ¶¨µÄreset¹¦ÄÜ¡£
+     * å­ç±»åº”è¯¥è¦†ç›–æ­¤æ–¹æ³•ï¼Œä»¥å®ç°ç‰¹å®šçš„resetåŠŸèƒ½ã€‚
      * </p>
      */
     protected abstract void copyFrom(URIBroker parent);
 
     /**
-     * ½«requestÖĞµÄÔËĞĞÊ±ĞÅÏ¢Ìî³äµ½uri brokerÖĞ¡£
+     * å°†requestä¸­çš„è¿è¡Œæ—¶ä¿¡æ¯å¡«å……åˆ°uri brokerä¸­ã€‚
      */
     protected abstract void populateWithRequest(HttpServletRequest request);
 
     /**
-     * µ±ÒÔÏÂÌõ¼ş³ÉÁ¢Ê±£¬·µ»ØÕæÊµµÄrequest¶ÔÏó¡£
+     * å½“ä»¥ä¸‹æ¡ä»¶æˆç«‹æ—¶ï¼Œè¿”å›çœŸå®çš„requestå¯¹è±¡ã€‚
      * <ul>
      * <li>isRequestAware == true</li>
      * <li>request != null</li>
-     * <li>´¦ÓÚweb»·¾³£¬request proxy¿ÉÈ¡µÃÕæÊµµÄrequest¶ÔÏó¡£</li>
+     * <li>å¤„äºwebç¯å¢ƒï¼Œrequest proxyå¯å–å¾—çœŸå®çš„requestå¯¹è±¡ã€‚</li>
      * </ul>
      */
     protected final HttpServletRequest getRealRequest() {
@@ -287,11 +287,11 @@ public abstract class URIBrokerFeatures implements Renderable {
     }
 
     /**
-     * ÒÔµ±Ç°URI brokerÎªÄ£°å, ´´½¨Ò»¸öĞÂµÄURI broker¡£ĞÂµÄbrokerÔÚÖ´ĞĞ<code>render()</code>
-     * ·½·¨ºó»á×Ô¶¯¸´Î»¡£
+     * ä»¥å½“å‰URI brokerä¸ºæ¨¡æ¿, åˆ›å»ºä¸€ä¸ªæ–°çš„URI brokerã€‚æ–°çš„brokeråœ¨æ‰§è¡Œ<code>render()</code>
+     * æ–¹æ³•åä¼šè‡ªåŠ¨å¤ä½ã€‚
      * <p>
-     * ´Ë·½·¨ºÍ<code>render()</code>¾ßÓĞÏàÍ¬µÄ¸±×÷ÓÃ£¬¼ÙÈç<code>autoReset == true</code>
-     * £¬ÄÇÃ´ËùÓĞ×´Ì¬×Ô¶¯¸´Î»¡£¿ÉÓ¦ÓÃÓÚÒÔÏÂ³¡¾°£¨velocity£©£º
+     * æ­¤æ–¹æ³•å’Œ<code>render()</code>å…·æœ‰ç›¸åŒçš„å‰¯ä½œç”¨ï¼Œå‡å¦‚<code>autoReset == true</code>
+     * ï¼Œé‚£ä¹ˆæ‰€æœ‰çŠ¶æ€è‡ªåŠ¨å¤ä½ã€‚å¯åº”ç”¨äºä»¥ä¸‹åœºæ™¯ï¼ˆvelocityï¼‰ï¼š
      * </p>
      * 
      * <pre>
@@ -307,25 +307,25 @@ public abstract class URIBrokerFeatures implements Renderable {
     }
 
     /**
-     * ÒÔµ±Ç°URI brokerÎªÄ£°å, ´´½¨Ò»¸öĞÂµÄURI broker¡£
+     * ä»¥å½“å‰URI brokerä¸ºæ¨¡æ¿, åˆ›å»ºä¸€ä¸ªæ–°çš„URI brokerã€‚
      */
     public final URIBroker fork(boolean autoReset) {
         URIBroker parentBroker;
         URIBroker broker = null;
 
-        // È·±£µ±Ç°broker²»ÊÇautoResetµÄ, ·ñÔòµ±Ç°brokerµÄreset»áÓ°ÏìĞÂÉú³ÉµÄbroker
+        // ç¡®ä¿å½“å‰brokerä¸æ˜¯autoResetçš„, å¦åˆ™å½“å‰brokerçš„resetä¼šå½±å“æ–°ç”Ÿæˆçš„broker
         if (autoReset && isAutoReset()) {
             parentBroker = fork(false);
             parentBroker.renderer.prerender();
 
-            // ¸´Î»µ±Ç°µÄbroker, ¾ÍÏóÖ´ĞĞ¹ırenderÒ»Ñù
+            // å¤ä½å½“å‰çš„broker, å°±è±¡æ‰§è¡Œè¿‡renderä¸€æ ·
             reset();
         } else {
             parentBroker = (URIBroker) this;
         }
 
-        // Éú³ÉĞÂµÄ»ùÓÚparentBrokerµÄbroker
-        // È·±£ĞÂ½¨µÄbrokerÊÇ·Ç¿Õ£¬ÇÒÎªÍ¬Ò»ÀàĞÍ¡£
+        // ç”Ÿæˆæ–°çš„åŸºäºparentBrokerçš„broker
+        // ç¡®ä¿æ–°å»ºçš„brokeræ˜¯éç©ºï¼Œä¸”ä¸ºåŒä¸€ç±»å‹ã€‚
         broker = newInstanceInternal();
 
         ((URIBrokerFeatures) broker).autoReset = autoReset;
@@ -338,7 +338,7 @@ public abstract class URIBrokerFeatures implements Renderable {
     }
 
     /**
-     * ´´½¨Ò»¸öĞÂµÄ¿Õ°×broker¡£
+     * åˆ›å»ºä¸€ä¸ªæ–°çš„ç©ºç™½brokerã€‚
      */
     protected final URIBroker newInstanceInternal() {
         URIBroker instance = assertNotNull(newInstance(), "%s.newInstance() returns null", getClass().getName());
@@ -352,12 +352,12 @@ public abstract class URIBrokerFeatures implements Renderable {
     }
 
     /**
-     * ´´½¨ĞÂµÄÊµÀı¡£
+     * åˆ›å»ºæ–°çš„å®ä¾‹ã€‚
      */
     protected abstract URIBroker newInstance();
 
     /**
-     * °´Ë³ĞòÖ´ĞĞËùÓĞinterceptors¡£
+     * æŒ‰é¡ºåºæ‰§è¡Œæ‰€æœ‰interceptorsã€‚
      */
     protected void processInterceptors() {
         if (hasInterceptors()) {
@@ -371,14 +371,14 @@ public abstract class URIBrokerFeatures implements Renderable {
     }
 
     /**
-     * äÖÈ¾uri¡£
+     * æ¸²æŸ“uriã€‚
      */
     public final String render() {
         return render(autoReset);
     }
 
     private String render(boolean reset) {
-        // ½öµ±resetÊ±²ÅÖ´ĞĞinterceptors£¬toString²»Ö´ĞĞ¡£
+        // ä»…å½“resetæ—¶æ‰æ‰§è¡Œinterceptorsï¼ŒtoStringä¸æ‰§è¡Œã€‚
         if (reset) {
             processInterceptors();
         }
@@ -402,7 +402,7 @@ public abstract class URIBrokerFeatures implements Renderable {
     protected abstract void renderQuery(StringBuilder buf);
 
     /**
-     * ¹¤¾ß·½·¨£º½øĞĞURL±àÂë£¬Ê¹ÓÃuribrokerÖĞÖ¸¶¨µÄcharset¡£
+     * å·¥å…·æ–¹æ³•ï¼šè¿›è¡ŒURLç¼–ç ï¼Œä½¿ç”¨uribrokerä¸­æŒ‡å®šçš„charsetã€‚
      */
     protected final String escapeURL(String str) {
         String charset = trimToNull(getCharset());
@@ -415,7 +415,7 @@ public abstract class URIBrokerFeatures implements Renderable {
     }
 
     /**
-     * ½«parent mapÖĞµÄÖµ²åÈëµ½µ±Ç°mapµÄÇ°Ãæ¡£
+     * å°†parent mapä¸­çš„å€¼æ’å…¥åˆ°å½“å‰mapçš„å‰é¢ã€‚
      */
     protected final <K, V> void mergeLinkedHashMap(Map<K, V> parentMap, Map<K, V> thisMap) {
         assertNotNull(thisMap, "thisMap");
@@ -432,7 +432,7 @@ public abstract class URIBrokerFeatures implements Renderable {
     }
 
     /**
-     * È¡µÃURI×Ö·û´®£¬µ«²»reset¡£
+     * å–å¾—URIå­—ç¬¦ä¸²ï¼Œä½†ä¸resetã€‚
      */
     @Override
     public String toString() {
@@ -440,12 +440,12 @@ public abstract class URIBrokerFeatures implements Renderable {
     }
 
     /**
-     * ÓÃÀ´äÖÈ¾URL¡¢¹ÜÀíbufferµÄ¸¨ÖúÀà¡£
+     * ç”¨æ¥æ¸²æŸ“URLã€ç®¡ç†bufferçš„è¾…åŠ©ç±»ã€‚
      * <p>
-     * ÎªÁË¼Ó¿ìäÖÈ¾URLµÄËÙ¶È£¬ÔÚinitµÄÊ±ºò»á½øĞĞÔ¤äÖÈ¾£¬ÒÔÌî³ä<code>serverBuffer</code>¡¢
-     * <code>pathBuffer</code>¡¢<code>queryBuffer</code>
-     * µÈÈı¸öbuffer¡£µ±forkµÄÊ±ºò£¬Ö±½Ó½«buffer¸´ÖÆ¸øĞÂµÄ¶ÔÏó
-     * £¬¼ÙÈçĞÂµÄbrokerÃ»ÓĞ¾­¹ıºÜ´óµÄĞŞ¸Ä¾ÍrenderµÄ»°£¬äÖÈ¾ËÙ¶È»á´ó´ó¼Ó¿ì¡£
+     * ä¸ºäº†åŠ å¿«æ¸²æŸ“URLçš„é€Ÿåº¦ï¼Œåœ¨initçš„æ—¶å€™ä¼šè¿›è¡Œé¢„æ¸²æŸ“ï¼Œä»¥å¡«å……<code>serverBuffer</code>ã€
+     * <code>pathBuffer</code>ã€<code>queryBuffer</code>
+     * ç­‰ä¸‰ä¸ªbufferã€‚å½“forkçš„æ—¶å€™ï¼Œç›´æ¥å°†bufferå¤åˆ¶ç»™æ–°çš„å¯¹è±¡
+     * ï¼Œå‡å¦‚æ–°çš„brokeræ²¡æœ‰ç»è¿‡å¾ˆå¤§çš„ä¿®æ”¹å°±renderçš„è¯ï¼Œæ¸²æŸ“é€Ÿåº¦ä¼šå¤§å¤§åŠ å¿«ã€‚
      * </p>
      */
     public final class Renderer {

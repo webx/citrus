@@ -25,7 +25,7 @@ import java.io.InputStream;
 import org.springframework.core.io.Resource;
 
 /**
- * ´ÓSpring resourceÖĞÈ¡µÃÊı¾İµÄ<code>DataSource</code>ÊµÏÖ¡£
+ * ä»Spring resourceä¸­å–å¾—æ•°æ®çš„<code>DataSource</code>å®ç°ã€‚
  * 
  * @author Michael Zhou
  */

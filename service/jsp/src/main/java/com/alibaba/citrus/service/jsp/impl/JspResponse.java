@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
 /**
- * ±ÜÃâÔÚJSPÖĞĞŞ¸Äcontent type¡¢localeºÍcharset¡£×÷ÎªÄ£°åÏµÍ³£¬JSP²»Ó¦¸Ã¿ØÖÆcontent typeºÍÊä³ö×Ö·û¼¯¡£
+ * é¿å…åœ¨JSPä¸­ä¿®æ”¹content typeã€localeå’Œcharsetã€‚ä½œä¸ºæ¨¡æ¿ç³»ç»Ÿï¼ŒJSPä¸åº”è¯¥æ§åˆ¶content typeå’Œè¾“å‡ºå­—ç¬¦é›†ã€‚
  * 
  * @author Michael Zhou
  */

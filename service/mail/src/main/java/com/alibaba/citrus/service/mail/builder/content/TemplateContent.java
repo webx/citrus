@@ -36,7 +36,7 @@ import com.alibaba.citrus.service.template.TemplateService;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ´ÓÄ£°åÉú³ÉµÄÄÚÈİ¡£
+ * ä»æ¨¡æ¿ç”Ÿæˆçš„å†…å®¹ã€‚
  * 
  * @author Michael Zhou
  */
@@ -48,49 +48,49 @@ public abstract class TemplateContent extends AbstractContent {
     private transient TemplateContext templateContext;
 
     /**
-     * È¡µÃtemplate·şÎñ¡£
+     * å–å¾—templateæœåŠ¡ã€‚
      */
     public TemplateService getTemplateService() {
         return assertNotNull(getService(TemplateService.class, "templateService", templateService), "templateService");
     }
 
     /**
-     * ÉèÖÃtemplate·şÎñ¡£
+     * è®¾ç½®templateæœåŠ¡ã€‚
      */
     public void setTemplateService(TemplateService templateService) {
         this.templateService = templateService;
     }
 
     /**
-     * È¡µÃpull·şÎñ¡£
+     * å–å¾—pullæœåŠ¡ã€‚
      */
     public PullService getPullService() {
         return getService(PullService.class, "pullService", pullService);
     }
 
     /**
-     * ÉèÖÃpull·şÎñ¡£
+     * è®¾ç½®pullæœåŠ¡ã€‚
      */
     public void setPullService(PullService pullService) {
         this.pullService = pullService;
     }
 
     /**
-     * È¡µÃÄ£°åµÄÃû³Æ¡£
+     * å–å¾—æ¨¡æ¿çš„åç§°ã€‚
      */
     public String getTemplateName() {
         return templateName;
     }
 
     /**
-     * ÉèÖÃÄ£°åµÄÃû³Æ¡£
+     * è®¾ç½®æ¨¡æ¿çš„åç§°ã€‚
      */
     public void setTemplate(String templateName) {
         this.templateName = trimToNull(templateName);
     }
 
     /**
-     * È¡µÃÎÄ±¾µÄcontent type¡£
+     * å–å¾—æ–‡æœ¬çš„content typeã€‚
      */
     public String getContentType() {
         return defaultIfNull(contentType, getDefaultContentType());
@@ -101,14 +101,14 @@ public abstract class TemplateContent extends AbstractContent {
     }
 
     /**
-     * ÉèÖÃÎÄ±¾µÄcontent type¡£
+     * è®¾ç½®æ–‡æœ¬çš„content typeã€‚
      */
     public void setContentType(String contentType) {
         this.contentType = trimToNull(contentType);
     }
 
     /**
-     * äÖÈ¾Ä£°å¡£
+     * æ¸²æŸ“æ¨¡æ¿ã€‚
      */
     protected final String renderTemplate() throws MailBuilderException {
         try {
@@ -121,7 +121,7 @@ public abstract class TemplateContent extends AbstractContent {
     }
 
     /**
-     * È¡µÃtemplate context¡£
+     * å–å¾—template contextã€‚
      */
     private TemplateContext getTemplateContext() {
         if (templateContext == null) {
@@ -141,13 +141,13 @@ public abstract class TemplateContent extends AbstractContent {
     }
 
     /**
-     * ¸ø×ÓÀàÒ»¸ö»ú»áÀ´³õÊ¼»¯context¡£
+     * ç»™å­ç±»ä¸€ä¸ªæœºä¼šæ¥åˆå§‹åŒ–contextã€‚
      */
     protected void populateTemplateContext(TemplateContext templateContext) {
     }
 
     /**
-     * Éî¶È¸´ÖÆÒ»¸öcontent¡£
+     * æ·±åº¦å¤åˆ¶ä¸€ä¸ªcontentã€‚
      */
     @Override
     protected void copyTo(AbstractContent copy) {
@@ -166,7 +166,7 @@ public abstract class TemplateContent extends AbstractContent {
     }
 
     /**
-     * ½«mail builderÊÊÅäµ½<code>TemplateContext</code>¡£
+     * å°†mail builderé€‚é…åˆ°<code>TemplateContext</code>ã€‚
      */
     private static class TemplateContextAdapter implements TemplateContext {
         private final MailBuilder builder;

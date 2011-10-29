@@ -20,7 +20,7 @@ package com.alibaba.citrus.service.moduleloader;
 import static com.alibaba.citrus.util.Assert.*;
 
 /**
- * ´ú±íÒ»¸öÄ£¿éµÄĞÅÏ¢¡£
+ * ä»£è¡¨ä¸€ä¸ªæ¨¡å—çš„ä¿¡æ¯ã€‚
  * 
  * @author Michael Zhou
  */

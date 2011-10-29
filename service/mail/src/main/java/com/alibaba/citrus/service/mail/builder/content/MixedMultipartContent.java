@@ -23,13 +23,13 @@ import javax.mail.Multipart;
 import javax.mail.internet.MimeMultipart;
 
 /**
- * ´ø¸½¼şµÄÓÊ¼şÄÚÈİ¡£
+ * å¸¦é™„ä»¶çš„é‚®ä»¶å†…å®¹ã€‚
  * 
  * @author Michael Zhou
  */
 public class MixedMultipartContent extends MultipartContent {
     /**
-     * È¡µÃ<code>Multipart</code>µÄÊµÏÖ¡£
+     * å–å¾—<code>Multipart</code>çš„å®ç°ã€‚
      */
     @Override
     protected Multipart getMultipart() {

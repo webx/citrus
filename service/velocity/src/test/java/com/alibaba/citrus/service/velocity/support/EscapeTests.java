@@ -54,17 +54,17 @@ public class EscapeTests extends AbstractVelocityEngineTests {
         assertEquals("", normalizeReference("$ "));
         assertEquals("", normalizeReference("$! "));
 
-        // ÓĞ{}
+        // æœ‰{}
         assertEquals("\" a${b}c \"", normalizeReference(" $ { \" a${b}c \" } "));
         assertEquals("\" a${b}c \"", normalizeReference(" $ ! { \" a${b}c \" } "));
 
-        // ÎŞ{}
+        // æ— {}
         assertEquals("\" a${b}c \"", normalizeReference(" $  \" a${b}c \"  "));
         assertEquals("\" a${b}c \"", normalizeReference(" $ !  \" a${b}c \"  "));
         assertEquals("abc", normalizeReference(" $ ! abc  "));
         assertEquals("abc", normalizeReference(" $ abc  "));
 
-        // ·Ç·¨
+        // éæ³•
         assertEquals("  { \" a${b}c \"  ", normalizeReference("  { \" a${b}c \"  "));
     }
 
@@ -133,36 +133,36 @@ public class EscapeTests extends AbstractVelocityEngineTests {
 
         TemplateContext ctx = new MappedTemplateContext();
         ctx.put("count", new Counter());
-        ctx.put("object", new MyRenderable("<world name=\"ÖĞ¹ú\" />"));
+        ctx.put("object", new MyRenderable("<world name=\"ä¸­å›½\" />"));
 
         String content = templateService.getText("escape/test_escape.vm", ctx);
 
         // original
-        assertThat(content, containsString("1. <world name=\"ÖĞ¹ú\" />"));
+        assertThat(content, containsString("1. <world name=\"ä¸­å›½\" />"));
 
         // html
-        assertThat(content, containsString("2. &lt;world name=&quot;ÖĞ¹ú&quot; /&gt;"));
+        assertThat(content, containsString("2. &lt;world name=&quot;ä¸­å›½&quot; /&gt;"));
 
         // javascript
-        assertThat(content, containsString("3. <world name=\\\"ÖĞ¹ú\\\" \\/>"));
+        assertThat(content, containsString("3. <world name=\\\"ä¸­å›½\\\" \\/>"));
 
         // html (restored)
-        assertThat(content, containsString("4. &lt;world name=&quot;ÖĞ¹ú&quot; /&gt;"));
+        assertThat(content, containsString("4. &lt;world name=&quot;ä¸­å›½&quot; /&gt;"));
 
         // noescape
-        assertThat(content, containsString("5. <world name=\"ÖĞ¹ú\" />"));
+        assertThat(content, containsString("5. <world name=\"ä¸­å›½\" />"));
 
         // url encoding
         assertThat(content, containsString("6. %3Cworld+name%3D%22%D6%D0%B9%FA%22+%2F%3E"));
 
         // noescape (restored)
-        assertThat(content, containsString("7. <world name=\"ÖĞ¹ú\" />"));
+        assertThat(content, containsString("7. <world name=\"ä¸­å›½\" />"));
 
         // html (restored)
-        assertThat(content, containsString("8. &lt;world name=&quot;ÖĞ¹ú&quot; /&gt;"));
+        assertThat(content, containsString("8. &lt;world name=&quot;ä¸­å›½&quot; /&gt;"));
 
         // original (restored)
-        assertThat(content, containsString("9. <world name=\"ÖĞ¹ú\" />"));
+        assertThat(content, containsString("9. <world name=\"ä¸­å›½\" />"));
 
         assertFalse(ctx.containsKey("_ESCAPE_SUPPORT_TYPE_"));
     }
@@ -173,36 +173,36 @@ public class EscapeTests extends AbstractVelocityEngineTests {
 
         TemplateContext ctx = new MappedTemplateContext();
         ctx.put("count", new Counter());
-        ctx.put("object", new MyRenderable("<world name=\"ÖĞ¹ú\" />"));
+        ctx.put("object", new MyRenderable("<world name=\"ä¸­å›½\" />"));
 
         String content = templateService.getText("escape/test_escape.vm", ctx);
 
         // original - default html
-        assertThat(content, containsString("1. &lt;world name=&quot;ÖĞ¹ú&quot; /&gt;"));
+        assertThat(content, containsString("1. &lt;world name=&quot;ä¸­å›½&quot; /&gt;"));
 
         // html
-        assertThat(content, containsString("2. &lt;world name=&quot;ÖĞ¹ú&quot; /&gt;"));
+        assertThat(content, containsString("2. &lt;world name=&quot;ä¸­å›½&quot; /&gt;"));
 
         // javascript
-        assertThat(content, containsString("3. <world name=\\\"ÖĞ¹ú\\\" \\/>"));
+        assertThat(content, containsString("3. <world name=\\\"ä¸­å›½\\\" \\/>"));
 
         // html (restored)
-        assertThat(content, containsString("4. &lt;world name=&quot;ÖĞ¹ú&quot; /&gt;"));
+        assertThat(content, containsString("4. &lt;world name=&quot;ä¸­å›½&quot; /&gt;"));
 
         // noescape
-        assertThat(content, containsString("5. <world name=\"ÖĞ¹ú\" />"));
+        assertThat(content, containsString("5. <world name=\"ä¸­å›½\" />"));
 
         // url encoding
         assertThat(content, containsString("6. %3Cworld+name%3D%22%D6%D0%B9%FA%22+%2F%3E"));
 
         // noescape (restored)
-        assertThat(content, containsString("7. <world name=\"ÖĞ¹ú\" />"));
+        assertThat(content, containsString("7. <world name=\"ä¸­å›½\" />"));
 
         // html (restored)
-        assertThat(content, containsString("8. &lt;world name=&quot;ÖĞ¹ú&quot; /&gt;"));
+        assertThat(content, containsString("8. &lt;world name=&quot;ä¸­å›½&quot; /&gt;"));
 
         // original (restored) - default html
-        assertThat(content, containsString("9. &lt;world name=&quot;ÖĞ¹ú&quot; /&gt;"));
+        assertThat(content, containsString("9. &lt;world name=&quot;ä¸­å›½&quot; /&gt;"));
 
         assertFalse(ctx.containsKey("_ESCAPE_SUPPORT_TYPE_"));
     }
@@ -213,11 +213,11 @@ public class EscapeTests extends AbstractVelocityEngineTests {
 
         TemplateContext ctx = new MappedTemplateContext();
         ctx.put("count", new Counter());
-        ctx.put("object", new MyRenderable("<world name=\"ÖĞ¹ú\" />"));
+        ctx.put("object", new MyRenderable("<world name=\"ä¸­å›½\" />"));
 
         String content = templateService.getText("escape/test_escape_interpolation.vm", ctx);
 
-        assertThat(content, containsString("1. &lt;world name=&quot;ÖĞ¹ú&quot; /&gt;"));
+        assertThat(content, containsString("1. &lt;world name=&quot;ä¸­å›½&quot; /&gt;"));
     }
 
     @Test
@@ -226,14 +226,14 @@ public class EscapeTests extends AbstractVelocityEngineTests {
 
         TemplateContext ctx = new MappedTemplateContext();
         ctx.put("count", new Counter());
-        ctx.put("object", new MyRenderable("<world name=\"ÖĞ¹ú\" />"));
+        ctx.put("object", new MyRenderable("<world name=\"ä¸­å›½\" />"));
 
         String content = templateService.getText("escape/test_escape_parse.vm", ctx);
 
-        assertThat(content, containsString("1. &lt;world name=&quot;ÖĞ¹ú&quot; /&gt;"));
+        assertThat(content, containsString("1. &lt;world name=&quot;ä¸­å›½&quot; /&gt;"));
 
-        // escape½«»áÓ°ÏìparseµÄ½á¹û£ºÕâÎ´±ØÊÇÎÒÃÇÏëÒªµÄ½á¹û£¬µ«Ä¿Ç°Ã»ÓĞ°ì·¨¡£
-        assertThat(content, containsString("2. &lt;world name=&quot;ÖĞ¹ú&quot; /&gt;"));
+        // escapeå°†ä¼šå½±å“parseçš„ç»“æœï¼šè¿™æœªå¿…æ˜¯æˆ‘ä»¬æƒ³è¦çš„ç»“æœï¼Œä½†ç›®å‰æ²¡æœ‰åŠæ³•ã€‚
+        assertThat(content, containsString("2. &lt;world name=&quot;ä¸­å›½&quot; /&gt;"));
     }
 
     @Test
@@ -242,30 +242,30 @@ public class EscapeTests extends AbstractVelocityEngineTests {
 
         TemplateContext ctx = new MappedTemplateContext();
         ctx.put("count", new Counter());
-        ctx.put("object", new MyRenderable("<world name=\"'ÖĞ¹ú'\" />"));
+        ctx.put("object", new MyRenderable("<world name=\"'ä¸­å›½'\" />"));
 
         String content = templateService.getText("escape/test_escape_all_types.vm", ctx);
 
         // noescape
-        assertThat(content, containsString("1. <world name=\"'ÖĞ¹ú'\" />"));
+        assertThat(content, containsString("1. <world name=\"'ä¸­å›½'\" />"));
 
         // java
-        assertThat(content, containsString("2. <world name=\\\"'ÖĞ¹ú'\\\" />"));
+        assertThat(content, containsString("2. <world name=\\\"'ä¸­å›½'\\\" />"));
 
         // javascript
-        assertThat(content, containsString("3. <world name=\\\"\\'ÖĞ¹ú\\'\\\" \\/>"));
+        assertThat(content, containsString("3. <world name=\\\"\\'ä¸­å›½\\'\\\" \\/>"));
 
         // html
-        assertThat(content, containsString("4. &lt;world name=&quot;&#39;ÖĞ¹ú&#39;&quot; /&gt;"));
+        assertThat(content, containsString("4. &lt;world name=&quot;&#39;ä¸­å›½&#39;&quot; /&gt;"));
 
         // xml
-        assertThat(content, containsString("5. &lt;world name=&quot;&apos;ÖĞ¹ú&apos;&quot; /&gt;"));
+        assertThat(content, containsString("5. &lt;world name=&quot;&apos;ä¸­å›½&apos;&quot; /&gt;"));
 
         // url
         assertThat(content, containsString("6. %3Cworld+name%3D%22'%D6%D0%B9%FA'%22+%2F%3E"));
 
         // sql
-        assertThat(content, containsString("7. <world name=\"''ÖĞ¹ú''\" />"));
+        assertThat(content, containsString("7. <world name=\"''ä¸­å›½''\" />"));
 
         assertFalse(ctx.containsKey("_ESCAPE_SUPPORT_TYPE_"));
     }
@@ -276,31 +276,31 @@ public class EscapeTests extends AbstractVelocityEngineTests {
 
         TemplateContext ctx = new MappedTemplateContext();
         ctx.put("count", new Counter());
-        ctx.put("object", new MyRenderable("<world name=\"'ÖĞ¹ú'\" />"));
+        ctx.put("object", new MyRenderable("<world name=\"'ä¸­å›½'\" />"));
 
         String content = templateService.getText("escape/test_escape_macros.vm", ctx);
 
         // noescape
-        assertThat(content, containsString("1. <world name=\"'ÖĞ¹ú'\" />"));
+        assertThat(content, containsString("1. <world name=\"'ä¸­å›½'\" />"));
 
         // java
-        assertThat(content, containsString("2. <world name=\\\"'ÖĞ¹ú'\\\" />"));
+        assertThat(content, containsString("2. <world name=\\\"'ä¸­å›½'\\\" />"));
 
         // javascript/js
-        assertThat(content, containsString("3. <world name=\\\"\\'ÖĞ¹ú\\'\\\" \\/>"));
-        assertThat(content, containsString("4. <world name=\\\"\\'ÖĞ¹ú\\'\\\" \\/>"));
+        assertThat(content, containsString("3. <world name=\\\"\\'ä¸­å›½\\'\\\" \\/>"));
+        assertThat(content, containsString("4. <world name=\\\"\\'ä¸­å›½\\'\\\" \\/>"));
 
         // html
-        assertThat(content, containsString("5. &lt;world name=&quot;&#39;ÖĞ¹ú&#39;&quot; /&gt;"));
+        assertThat(content, containsString("5. &lt;world name=&quot;&#39;ä¸­å›½&#39;&quot; /&gt;"));
 
         // xml
-        assertThat(content, containsString("6. &lt;world name=&quot;&apos;ÖĞ¹ú&apos;&quot; /&gt;"));
+        assertThat(content, containsString("6. &lt;world name=&quot;&apos;ä¸­å›½&apos;&quot; /&gt;"));
 
         // url
         assertThat(content, containsString("7. %3Cworld+name%3D%22'%D6%D0%B9%FA'%22+%2F%3E"));
 
         // sql
-        assertThat(content, containsString("8. <world name=\"''ÖĞ¹ú''\" />"));
+        assertThat(content, containsString("8. <world name=\"''ä¸­å›½''\" />"));
 
         assertFalse(ctx.containsKey("_ESCAPE_SUPPORT_TYPE_"));
     }
@@ -349,34 +349,34 @@ public class EscapeTests extends AbstractVelocityEngineTests {
         getEngine("with_rules", factory);
 
         TemplateContext ctx = new MappedTemplateContext();
-        ctx.put("value", "<world name=\"'ÖĞ¹ú'\" />");
-        ctx.put("jsValue", "<world name=\"'ÖĞ¹ú'\" />");
+        ctx.put("value", "<world name=\"'ä¸­å›½'\" />");
+        ctx.put("jsValue", "<world name=\"'ä¸­å›½'\" />");
         ctx.put("control", new MyControl());
-        ctx.put("Screen_Placeholder", "<world name=\"'ÖĞ¹ú'\" />");
+        ctx.put("Screen_Placeholder", "<world name=\"'ä¸­å›½'\" />");
         ctx.put("stringescapeutil", new StringEscapeUtil());
 
         String content = templateService.getText("escape/test_escape_rules.vm", ctx);
 
         // default = html
-        assertThat(content, containsString("1. &lt;world name=&quot;&#39;ÖĞ¹ú&#39;&quot; /&gt;"));
+        assertThat(content, containsString("1. &lt;world name=&quot;&#39;ä¸­å›½&#39;&quot; /&gt;"));
 
         // js* = javascript
-        assertThat(content, containsString("2. <world name=\\\"\\'ÖĞ¹ú\\'\\\" \\/>"));
+        assertThat(content, containsString("2. <world name=\\\"\\'ä¸­å›½\\'\\\" \\/>"));
 
         // control* = noescape
         assertThat(content, containsString("3. <hello />"));
 
         // screen_placeholder* = noescape, case insensitive
-        assertThat(content, containsString("4. <world name=\"'ÖĞ¹ú'\" />"));
+        assertThat(content, containsString("4. <world name=\"'ä¸­å›½'\" />"));
 
         // stringescapeutil.escape* = noescape, case insensitive
         assertThat(content, containsString("5. %3Chello+%2F%3E"));
 
-        // Ö¸¶¨escape = html
-        assertThat(content, containsString("6. &lt;world name=&quot;&#39;ÖĞ¹ú&#39;&quot; /&gt;"));
+        // æŒ‡å®šescape = html
+        assertThat(content, containsString("6. &lt;world name=&quot;&#39;ä¸­å›½&#39;&quot; /&gt;"));
 
-        // Ö¸¶¨noescape
-        assertThat(content, containsString("7. <world name=\"'ÖĞ¹ú'\" />"));
+        // æŒ‡å®šnoescape
+        assertThat(content, containsString("7. <world name=\"'ä¸­å›½'\" />"));
     }
 
     @Test
@@ -392,7 +392,7 @@ public class EscapeTests extends AbstractVelocityEngineTests {
     }
 
     /**
-     * ²âÊÔnoescapeÊ±£¬Ö±½Ó·µ»Øvalue object£¬¶ø²»ÊÇ¶ÔÆäÖ´ĞĞtoString·½·¨¡£
+     * æµ‹è¯•noescapeæ—¶ï¼Œç›´æ¥è¿”å›value objectï¼Œè€Œä¸æ˜¯å¯¹å…¶æ‰§è¡ŒtoStringæ–¹æ³•ã€‚
      */
     @Test
     public void escape_object_noescape() throws Exception {
@@ -400,8 +400,8 @@ public class EscapeTests extends AbstractVelocityEngineTests {
 
         TemplateContext ctx = new MappedTemplateContext();
 
-        // EscapeSupportÏÈÖ´ĞĞ£¬ÓÉÓÚÊÇnoescape£¬ËùÒÔÖ±½Ó·µ»Øvalue object£¬¶ø²»ÊÇvalue.toString()
-        // ºóĞøµÄRenderable2HandlerµÃÒÔÖ´ĞĞ£¬²¢µ÷ÓÃrender·½·¨¡£
+        // EscapeSupportå…ˆæ‰§è¡Œï¼Œç”±äºæ˜¯noescapeï¼Œæ‰€ä»¥ç›´æ¥è¿”å›value objectï¼Œè€Œä¸æ˜¯value.toString()
+        // åç»­çš„Renderable2Handlerå¾—ä»¥æ‰§è¡Œï¼Œå¹¶è°ƒç”¨renderæ–¹æ³•ã€‚
         ctx.put("myref", new Renderable2() {
             public String render2() {
                 return "render";

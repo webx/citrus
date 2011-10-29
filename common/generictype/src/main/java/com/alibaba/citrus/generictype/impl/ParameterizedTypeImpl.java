@@ -41,7 +41,7 @@ import com.alibaba.citrus.util.internal.LazyLoader;
 import com.alibaba.citrus.util.internal.LazyLoader.Loader;
 
 /**
- * ¶Ô{@link ParameterizedTypeInfo}µÄÊµÏÖ¡£
+ * å¯¹{@link ParameterizedTypeInfo}çš„å®ç°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -60,14 +60,14 @@ class ParameterizedTypeImpl implements ParameterizedTypeInfo {
     void init(TypeInfo[] actualTypeArguments) {
         this.actualTypeArguments = unmodifiableList(asList(actualTypeArguments));
 
-        // ¼ì²é²ÎÊı¸öÊıÊÇ·ñÆ¥Åä
+        // æ£€æŸ¥å‚æ•°ä¸ªæ•°æ˜¯å¦åŒ¹é…
         int actualArgs = this.actualTypeArguments.size();
         int expectedParams = getTypeParameters(rawType).length;
 
         assertTrue(actualArgs == expectedParams, "actual arguments length not match: expected %d, actual %d",
                 expectedParams, actualArgs);
 
-        // ¼ì²é²ÎÊıÀàĞÍÊÇ·ñÆ¥Åä
+        // æ£€æŸ¥å‚æ•°ç±»å‹æ˜¯å¦åŒ¹é…
         for (int i = 0; i < actualTypeArguments.length; i++) {
             TypeVariable<?> var = getTypeParameters(rawType)[i];
             Class<?> argClass = actualTypeArguments[i].getRawType();
@@ -77,11 +77,11 @@ class ParameterizedTypeImpl implements ParameterizedTypeInfo {
     }
 
     private static TypeVariable<?>[] getTypeParameters(RawTypeInfo rawType) {
-        return rawType.getRawType().getTypeParameters(); // ±ÜÃâµ÷ÓÃrawType.getTypeParameters()ÒÔÃâµİ¹é
+        return rawType.getRawType().getTypeParameters(); // é¿å…è°ƒç”¨rawType.getTypeParameters()ä»¥å…é€’å½’
     }
 
     /**
-     * ¼ì²éÀàĞÍ<code>argClass</code>ÊÇ²»ÊÇ<code>var</code>µÄboundsµÄ×ÓÀà¡£
+     * æ£€æŸ¥ç±»å‹<code>argClass</code>æ˜¯ä¸æ˜¯<code>var</code>çš„boundsçš„å­ç±»ã€‚
      */
     private static void checkBounds(TypeVariable<?> var, Type type, Class<?> argClass, boolean array) {
         if (type == null) {
@@ -207,7 +207,7 @@ class ParameterizedTypeImpl implements ParameterizedTypeInfo {
                     changed = true;
                 }
 
-                // ÓÅ»¯£ºÈç¹ûresolved£¬ÒÔºó¾Í²»±ØÖØĞÂresolved¡£
+                // ä¼˜åŒ–ï¼šå¦‚æœresolvedï¼Œä»¥åå°±ä¸å¿…é‡æ–°resolvedã€‚
                 if (resolvedArg instanceof ParameterizedTypeImpl) {
                     resolved &= ((ParameterizedTypeImpl) resolvedArg).resolved;
                 } else if (resolvedArg instanceof TypeVariableInfo) {
@@ -265,7 +265,7 @@ class ParameterizedTypeImpl implements ParameterizedTypeInfo {
     }
 
     /**
-     * È¡µÃhashÖµ¡£
+     * å–å¾—hashå€¼ã€‚
      */
     @Override
     public int hashCode() {
@@ -273,7 +273,7 @@ class ParameterizedTypeImpl implements ParameterizedTypeInfo {
     }
 
     /**
-     * ÅĞ¶ÏÁ½¸ö¶ÔÏóÊÇ·ñÏàÍ¬¡£
+     * åˆ¤æ–­ä¸¤ä¸ªå¯¹è±¡æ˜¯å¦ç›¸åŒã€‚
      */
     @Override
     public boolean equals(Object other) {
@@ -291,7 +291,7 @@ class ParameterizedTypeImpl implements ParameterizedTypeInfo {
     }
 
     /**
-     * È¡µÃ×Ö·û´®±íÊ¾¡£
+     * å–å¾—å­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      */
     @Override
     public String toString() {
@@ -314,7 +314,7 @@ class ParameterizedTypeImpl implements ParameterizedTypeInfo {
     }
 
     /**
-     * ¸¸Àà¡¢½Ó¿ÚµÄĞÅÏ¢¡£
+     * çˆ¶ç±»ã€æ¥å£çš„ä¿¡æ¯ã€‚
      */
     private static class Supertypes {
         private final List<TypeInfo> supertypes;
@@ -334,8 +334,8 @@ class ParameterizedTypeImpl implements ParameterizedTypeInfo {
             for (TypeInfo supertype : rawSupertypes) {
                 if (supertype instanceof RawTypeInfo) {
                     if (supertype == rawType) {
-                        supertypes.add(parameterizedType); // supertypeµÄµÚÒ»¸ö¾ÍÊÇ×Ô¼º£¨
-                        // Àà»ò½Ó¿Ú£©
+                        supertypes.add(parameterizedType); // supertypeçš„ç¬¬ä¸€ä¸ªå°±æ˜¯è‡ªå·±ï¼ˆ
+                        // ç±»æˆ–æ¥å£ï¼‰
                     } else {
                         supertypes.add(supertype);
                     }
@@ -346,7 +346,7 @@ class ParameterizedTypeImpl implements ParameterizedTypeInfo {
                 }
             }
 
-            // ´´½¨lists
+            // åˆ›å»ºlists
             for (TypeInfo supertype : supertypes) {
                 if (supertype.getRawType().isInterface()) {
                     interfaces.add(supertype);
@@ -366,7 +366,7 @@ class ParameterizedTypeImpl implements ParameterizedTypeInfo {
     }
 
     /**
-     * ´´½¨supertypesµÄ×°ÔØÆ÷¡£
+     * åˆ›å»ºsupertypesçš„è£…è½½å™¨ã€‚
      */
     private class SupertypesLoader implements Loader<Supertypes, Object> {
         public Supertypes load(Object context) {

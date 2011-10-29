@@ -45,7 +45,7 @@ public class FormGroupResolverTests extends AbstractDataResolverTests {
 
     @Test
     public void getGroup() throws Exception {
-        // 默认值：skipIfInvalid=true
+        // 榛樿鍊硷細skipIfInvalid=true
 
         // GET, empty form
         execute("action", "form.group.myAction", "doGetGroup", "");
@@ -61,7 +61,7 @@ public class FormGroupResolverTests extends AbstractDataResolverTests {
         assertNotNull(group);
         assertTrue(group.isValid());
 
-        // GET, invalid, but screen不支持skip
+        // GET, invalid, but screen涓嶆敮鎸乻kip
         execute("screen", "form.group.myScreen", "doGetGroup", "_fm.m._0.f=&_fm.m._0.fi=");
         group = (Group) newRequest.getAttribute("screenLog");
         assertNotNull(group);
@@ -70,7 +70,7 @@ public class FormGroupResolverTests extends AbstractDataResolverTests {
 
     @Test
     public void getGroupDontSkipAction() throws Exception {
-        // 默认值：skipIfInvalid=false
+        // 榛樿鍊硷細skipIfInvalid=false
 
         // GET, invalid
         execute("action", "form.group.myAction", "doGetGroupDontSkipAction", "_fm.m._0.f=&_fm.m._0.fi=");
@@ -87,7 +87,7 @@ public class FormGroupResolverTests extends AbstractDataResolverTests {
 
     @Test
     public void getGroupInstance_bean() throws Exception {
-        // 默认值：skipIfInvalid=true
+        // 榛樿鍊硷細skipIfInvalid=true
 
         // GET, invalid
         execute("action", "form.group.myAction", "doGetGroupInstanceBean", "_fm.m.aaa.f=&_fm.m.aaa.fi=");
@@ -101,7 +101,7 @@ public class FormGroupResolverTests extends AbstractDataResolverTests {
         assertArrayEquals(new Object[] { "a", "b" }, data.getField1().toArray());
         assertEquals(123, data.getField2());
 
-        // GET, invalid, but screen不支持skip
+        // GET, invalid, but screen涓嶆敮鎸乻kip
         execute("screen", "form.group.myScreenGetGroupInstanceBean", "doGetGroupInstanceBean",
                 "_fm.m.aaa.f=&_fm.m.aaa.fi=");
         data = (MyData) newRequest.getAttribute("screenLog");
@@ -110,7 +110,7 @@ public class FormGroupResolverTests extends AbstractDataResolverTests {
 
     @Test
     public void getGroupInstance_bean_dontSkipAction() throws Exception {
-        // 默认值：skipIfInvalid=false
+        // 榛樿鍊硷細skipIfInvalid=false
 
         // GET, invalid
         execute("action", "form.group.myAction", "doGetGroupInstanceBeanDontSkipAction", "_fm.m.aaa.f=&_fm.m.aaa.fi=");
@@ -128,7 +128,7 @@ public class FormGroupResolverTests extends AbstractDataResolverTests {
 
     @Test
     public void getGroupInstance_bean_convertError_quiet() throws Exception {
-        // 默认值：skipIfInvalid=true
+        // 榛樿鍊硷細skipIfInvalid=true
 
         // GET, valid
         execute("action", "form.group.myAction", "doGetGroupInstanceBean",
@@ -141,7 +141,7 @@ public class FormGroupResolverTests extends AbstractDataResolverTests {
 
     @Test
     public void getGroupInstance_bean_convertError_noisy() throws Exception {
-        // 默认值：skipIfInvalid=true
+        // 榛樿鍊硷細skipIfInvalid=true
         System.setProperty("convertQuiet", "false");
 
         try {

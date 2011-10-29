@@ -26,26 +26,26 @@ import javax.mail.internet.ContentType;
 import com.alibaba.citrus.service.mail.util.MailUtil;
 
 /**
- * ÓÃÄ£°åÉú³ÉµÄ´¿ÎÄ±¾µÄÄÚÈİ¡£
+ * ç”¨æ¨¡æ¿ç”Ÿæˆçš„çº¯æ–‡æœ¬çš„å†…å®¹ã€‚
  * 
  * @author Michael Zhou
  */
 public class TextTemplateContent extends TemplateContent {
     /**
-     * ´´½¨Ò»¸ö<code>TextTemplateContent</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>TextTemplateContent</code>ã€‚
      */
     public TextTemplateContent() {
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>TextTemplateContent</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>TextTemplateContent</code>ã€‚
      */
     public TextTemplateContent(String templateName) {
         setTemplate(templateName);
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>TextTemplateContent</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>TextTemplateContent</code>ã€‚
      */
     public TextTemplateContent(String templateName, String contentType) {
         setTemplate(templateName);
@@ -53,7 +53,7 @@ public class TextTemplateContent extends TemplateContent {
     }
 
     /**
-     * äÖÈ¾ÓÊ¼şÄÚÈİ¡£
+     * æ¸²æŸ“é‚®ä»¶å†…å®¹ã€‚
      */
     public void render(Part mailPart) throws MessagingException {
         String text = renderTemplate();

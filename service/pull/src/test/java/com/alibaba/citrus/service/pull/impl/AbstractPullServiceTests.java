@@ -98,14 +98,14 @@ public abstract class AbstractPullServiceTests {
     }
 
     /**
-     * ´´½¨<code>ToolFactory</code>¡£
+     * åˆ›å»º<code>ToolFactory</code>ã€‚
      */
     protected final ToolFactory newToolFactory(boolean isSingleton, Object object) {
         return new ToolFactoryImpl(isSingleton, object, null);
     }
 
     /**
-     * ´´½¨<code>ToolSetFactory</code>¡£
+     * åˆ›å»º<code>ToolSetFactory</code>ã€‚
      */
     protected final ToolSetFactory newToolSetFactory(boolean isSingleton, boolean isToolFactory, Object object,
                                                      Object... namesAndObjects) {
@@ -126,7 +126,7 @@ public abstract class AbstractPullServiceTests {
     }
 
     /**
-     * ´´½¨<code>RuntimeToolSetFactory</code>¡£
+     * åˆ›å»º<code>RuntimeToolSetFactory</code>ã€‚
      */
     protected final RuntimeToolSetFactory newRuntimeToolSetFactory(boolean isSingleton, boolean isToolFactory,
                                                                    Object object, Object... namesAndObjects) {

@@ -21,15 +21,15 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.ContextLoaderListener;
 
 /**
- * ÓÃÀ´Æô¶¯root contextµÄlistener¡£
+ * ç”¨æ¥å¯åŠ¨root contextçš„listenerã€‚
  * <p>
- * ºÍSpring {@link ContextLoaderListener}ÀàËÆ£¬listener½«¶ÁÈ¡
- * <code>/WEB-INF/web.xml</code>ÖĞcontext param <code>contextClass</code>
- * ËùÖ¸¶¨µÄÀàÃû£¬×÷Îªroot <code>ApplicationContext</code>µÄÊµÏÖÀà¡£¼ÙÈçÎ´Ã÷È·Ö¸¶¨£¬ÔòÊ¹ÓÃÄ¬ÈÏÖµ
- * {@link WebxApplicationContext}¡£
+ * å’ŒSpring {@link ContextLoaderListener}ç±»ä¼¼ï¼Œlistenerå°†è¯»å–
+ * <code>/WEB-INF/web.xml</code>ä¸­context param <code>contextClass</code>
+ * æ‰€æŒ‡å®šçš„ç±»åï¼Œä½œä¸ºroot <code>ApplicationContext</code>çš„å®ç°ç±»ã€‚å‡å¦‚æœªæ˜ç¡®æŒ‡å®šï¼Œåˆ™ä½¿ç”¨é»˜è®¤å€¼
+ * {@link WebxApplicationContext}ã€‚
  * </p>
  * <p>
- * Ä¬ÈÏÖµ¿ÉÒÔÍ¨¹ı¸²¸Ç<code>getDefaultContextClass()</code>À´¸Ä±ä¡£
+ * é»˜è®¤å€¼å¯ä»¥é€šè¿‡è¦†ç›–<code>getDefaultContextClass()</code>æ¥æ”¹å˜ã€‚
  * </p>
  * 
  * @author Michael Zhou

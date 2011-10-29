@@ -22,25 +22,25 @@ import java.util.Map;
 import com.alibaba.citrus.service.requestcontext.session.SessionStore.StoreContext;
 
 /**
- * ½«attributes map×ª»»³É×Ö·û´®Öµ»ò·´Ö®¡£
+ * å°†attributes mapè½¬æ¢æˆå­—ç¬¦ä¸²å€¼æˆ–åä¹‹ã€‚
  * 
  * @author Michael Zhou
  */
 public interface SessionEncoder {
     /**
-     * ½«¶ÔÏó±àÂë³É×Ö·û´®¡£
+     * å°†å¯¹è±¡ç¼–ç æˆå­—ç¬¦ä¸²ã€‚
      * 
-     * @throws SessionEncoderException Èç¹û±àÂëÊ§°Ü
+     * @throws SessionEncoderException å¦‚æœç¼–ç å¤±è´¥
      */
     String encode(Map<String, Object> attrs, StoreContext storeContext) throws SessionEncoderException;
 
     /**
-     * ½«×Ö·û´®½âÂë³É¶ÔÏó¡£
+     * å°†å­—ç¬¦ä¸²è§£ç æˆå¯¹è±¡ã€‚
      * <p>
-     * Èç¹ûÓĞ¶à¸öencoders´æÔÚ£¬µ±Ç°encoder½âÂëÊ§°ÜÅ×³öÒì³£ÒÔºó£¬ÏµÍ³»áÈ¥³¢ÊÔÓÃÆäËüencoders½âÂë
+     * å¦‚æœæœ‰å¤šä¸ªencoderså­˜åœ¨ï¼Œå½“å‰encoderè§£ç å¤±è´¥æŠ›å‡ºå¼‚å¸¸ä»¥åï¼Œç³»ç»Ÿä¼šå»å°è¯•ç”¨å…¶å®ƒencodersè§£ç 
      * </p>
      * 
-     * @throws SessionEncoderException Èç¹û½âÂëÊ§°Ü
+     * @throws SessionEncoderException å¦‚æœè§£ç å¤±è´¥
      */
     Map<String, Object> decode(String encodedValue, StoreContext storeContext) throws SessionEncoderException;
 }

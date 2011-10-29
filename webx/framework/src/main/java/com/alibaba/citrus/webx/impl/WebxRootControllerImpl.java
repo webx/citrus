@@ -26,7 +26,7 @@ import com.alibaba.citrus.webx.support.AbstractWebxRootController;
 import com.alibaba.citrus.webx.util.WebxUtil;
 
 /**
- * ¶Ô<code>WebxRootController</code>µÄÄ¬ÈÏÊµÏÖ¡£
+ * å¯¹<code>WebxRootController</code>çš„é»˜è®¤å®ç°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -35,15 +35,15 @@ public class WebxRootControllerImpl extends AbstractWebxRootController {
     protected boolean handleRequest(RequestContext requestContext) throws Exception {
         HttpServletRequest request = requestContext.getRequest();
 
-        // Servlet mappingÓĞÁ½ÖÖÆ¥Åä·½Ê½£ºÇ°×ºÆ¥ÅäºÍºó×ºÆ¥Åä¡£
-        // ¶ÔÓÚÇ°×ºÆ¥Åä£¬ÀıÈç£º/servlet/aaa/bbb£¬servlet pathÎª/servlet£¬path infoÎª/aaa/bbb
-        // ¶ÔÓÚÇ°×ºÆ¥Åä£¬µ±mapping patternÎª/*Ê±£¬/aaa/bbb£¬servlet pathÎª""£¬path infoÎª/aaa/bbb
-        // ¶ÔÓÚºó×ºÆ¥Åä£¬ÀıÈç£º/aaa/bbb.html£¬servlet pathÎª/aaa/bbb.html£¬path infoÎªnull
+        // Servlet mappingæœ‰ä¸¤ç§åŒ¹é…æ–¹å¼ï¼šå‰ç¼€åŒ¹é…å’Œåç¼€åŒ¹é…ã€‚
+        // å¯¹äºå‰ç¼€åŒ¹é…ï¼Œä¾‹å¦‚ï¼š/servlet/aaa/bbbï¼Œservlet pathä¸º/servletï¼Œpath infoä¸º/aaa/bbb
+        // å¯¹äºå‰ç¼€åŒ¹é…ï¼Œå½“mapping patternä¸º/*æ—¶ï¼Œ/aaa/bbbï¼Œservlet pathä¸º""ï¼Œpath infoä¸º/aaa/bbb
+        // å¯¹äºåç¼€åŒ¹é…ï¼Œä¾‹å¦‚ï¼š/aaa/bbb.htmlï¼Œservlet pathä¸º/aaa/bbb.htmlï¼Œpath infoä¸ºnull
         //
-        // ¶ÔÓÚÇ°×ºÆ¥Åä£¬È¡ÆäpathInfo£»¶ÔÓÚºó×ºÆ¥Åä£¬È¡ÆäservletPath¡£
+        // å¯¹äºå‰ç¼€åŒ¹é…ï¼Œå–å…¶pathInfoï¼›å¯¹äºåç¼€åŒ¹é…ï¼Œå–å…¶servletPathã€‚
         String path = ServletUtil.getResourcePath(request);
 
-        // ÔÙ¸ù¾İpath²éÕÒcomponent
+        // å†æ ¹æ®pathæŸ¥æ‰¾component
         WebxComponent component = getComponents().findMatchedComponent(path);
         boolean served = false;
 

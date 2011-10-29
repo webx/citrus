@@ -26,9 +26,9 @@ import com.alibaba.citrus.service.form.Validator;
 import com.alibaba.citrus.service.form.impl.validation.composite.AllOfValidator;
 
 /**
- * Ö»ÓĞÒ»¸ö×ÓvalidatorµÄ×éºÏÊ½validatorµÄ»ùÀà¡£
+ * åªæœ‰ä¸€ä¸ªå­validatorçš„ç»„åˆå¼validatorçš„åŸºç±»ã€‚
  * <p>
- * ¼ÙÈç±»ÉèÈëÁË¶à¸övalidator£¬Ôò×Ô¶¯´´½¨Ò»¸öÒşº¬µÄall-of-validator¡£
+ * å‡å¦‚è¢«è®¾å…¥äº†å¤šä¸ªvalidatorï¼Œåˆ™è‡ªåŠ¨åˆ›å»ºä¸€ä¸ªéšå«çš„all-of-validatorã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -58,7 +58,7 @@ public abstract class AbstractSimpleCompositeValidator extends AbstractComposite
     }
 
     /**
-     * È¡µÃÎ¨Ò»µÄvalidator¡£
+     * å–å¾—å”¯ä¸€çš„validatorã€‚
      */
     public Validator getValidator() {
         assertInitialized();
@@ -66,7 +66,7 @@ public abstract class AbstractSimpleCompositeValidator extends AbstractComposite
     }
 
     /**
-     * ÓÃ×ÓvalidatorÑéÖ¤£¬²¢È¡µÃÆä´íÎóĞÅÏ¢¡£
+     * ç”¨å­validatoréªŒè¯ï¼Œå¹¶å–å¾—å…¶é”™è¯¯ä¿¡æ¯ã€‚
      */
     protected final boolean doValidate(Context context) {
         Validator validator = getValidator();

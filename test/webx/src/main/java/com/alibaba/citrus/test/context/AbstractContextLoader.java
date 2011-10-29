@@ -38,7 +38,7 @@ import com.alibaba.citrus.util.ClassUtil;
 import com.alibaba.citrus.util.io.StreamUtil;
 
 /**
- * ContextLoaderµÄ»ùÀà¡£
+ * ContextLoaderçš„åŸºç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -47,7 +47,7 @@ public abstract class AbstractContextLoader extends org.springframework.test.con
     protected final static ApplicationContext testResourceLoader = getTestResourceLoader();
 
     /**
-     * È¡µÃ¿É×°ÔØ²âÊÔ»·¾³µÄ×ÊÔ´µÄresource loader¡£
+     * å–å¾—å¯è£…è½½æµ‹è¯•ç¯å¢ƒçš„èµ„æºçš„resource loaderã€‚
      */
     private static ApplicationContext getTestResourceLoader() {
         try {
@@ -99,7 +99,7 @@ public abstract class AbstractContextLoader extends org.springframework.test.con
     }
 
     /**
-     * Èç¹ûÄ¬ÈÏµÄÅäÖÃÎÄ¼ş²»´æÔÚ£¬ÊÇ·ñÉú³ÉÑù±¾£¿
+     * å¦‚æœé»˜è®¤çš„é…ç½®æ–‡ä»¶ä¸å­˜åœ¨ï¼Œæ˜¯å¦ç”Ÿæˆæ ·æœ¬ï¼Ÿ
      */
     protected boolean isGenerateContextConfigurations() {
         return true;

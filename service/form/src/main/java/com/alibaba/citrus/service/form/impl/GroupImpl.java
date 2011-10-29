@@ -47,9 +47,9 @@ import com.alibaba.citrus.util.ObjectUtil;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ´ú±íÓÃ»§ËùÌá½»±íµ¥ÖĞµÄÒ»×é×Ö¶Î¡£
+ * ä»£è¡¨ç”¨æˆ·æ‰€æäº¤è¡¨å•ä¸­çš„ä¸€ç»„å­—æ®µã€‚
  * <p>
- * ×¢Òâ£ºgroup¶ÔÏó²»ÊÇÏß³Ì°²È«µÄ£¬²»ÄÜ±»¶àÏß³Ì¹²Ïí¡£
+ * æ³¨æ„ï¼šgroupå¯¹è±¡ä¸æ˜¯çº¿ç¨‹å®‰å…¨çš„ï¼Œä¸èƒ½è¢«å¤šçº¿ç¨‹å…±äº«ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -67,7 +67,7 @@ public class GroupImpl implements Group {
     private boolean valid;
 
     /**
-     * ´´½¨Ò»¸öĞÂgroup¡£
+     * åˆ›å»ºä¸€ä¸ªæ–°groupã€‚
      */
     public GroupImpl(GroupConfig groupConfig, Form form, String instanceKey) {
         this.groupConfig = groupConfig;
@@ -78,31 +78,31 @@ public class GroupImpl implements Group {
     }
 
     /**
-     * È¡µÃgroupµÄÅäÖÃĞÅÏ¢¡£
+     * å–å¾—groupçš„é…ç½®ä¿¡æ¯ã€‚
      */
     public GroupConfig getGroupConfig() {
         return groupConfig;
     }
 
     /**
-     * È¡µÃ°üº¬´ËgroupµÄform¡£
+     * å–å¾—åŒ…å«æ­¤groupçš„formã€‚
      */
     public Form getForm() {
         return form;
     }
 
     /**
-     * È¡µÃgroup name£¬Ïàµ±ÓÚ<code>getGroupConfig().getName()</code>
+     * å–å¾—group nameï¼Œç›¸å½“äº<code>getGroupConfig().getName()</code>
      */
     public String getName() {
         return getGroupConfig().getName();
     }
 
     /**
-     * È¡µÃ´ú±ígroupµÄkey¡£
+     * å–å¾—ä»£è¡¨groupçš„keyã€‚
      * <p>
-     * ÓÉ¹Ì¶¨Ç°×º<code>"_fm"</code>£¬¼ÓÉÏgroupÃûµÄËõĞ´£¬ÔÙ¼ÓÉÏgroup instance key¹¹³É¡£ÀıÈç£º
-     * <code>_fm.m._0</code>¡£
+     * ç”±å›ºå®šå‰ç¼€<code>"_fm"</code>ï¼ŒåŠ ä¸Šgroupåçš„ç¼©å†™ï¼Œå†åŠ ä¸Šgroup instance keyæ„æˆã€‚ä¾‹å¦‚ï¼š
+     * <code>_fm.m._0</code>ã€‚
      * </p>
      */
     public String getKey() {
@@ -110,23 +110,23 @@ public class GroupImpl implements Group {
     }
 
     /**
-     * È¡µÃ±êÊ¶µ±Ç°groupµÄinstance key¡£
+     * å–å¾—æ ‡è¯†å½“å‰groupçš„instance keyã€‚
      */
     public String getInstanceKey() {
         return instanceKey;
     }
 
     /**
-     * ÅĞ¶¨groupÊÇ·ñÍ¨¹ıÑéÖ¤¡£
+     * åˆ¤å®šgroupæ˜¯å¦é€šè¿‡éªŒè¯ã€‚
      */
     public boolean isValid() {
         return valid;
     }
 
     /**
-     * ÉèÖÃgroupµÄÊÇ·ñÍ¨¹ıÑéÖ¤¡£
+     * è®¾ç½®groupçš„æ˜¯å¦é€šè¿‡éªŒè¯ã€‚
      * <p>
-     * ×¢Òâ£º¸ÃÖµ½«±»µş¼Óµ½µ±Ç°µÄ×´Ì¬ÖĞ£º<code>this.valid &= valid</code>
+     * æ³¨æ„ï¼šè¯¥å€¼å°†è¢«å åŠ åˆ°å½“å‰çš„çŠ¶æ€ä¸­ï¼š<code>this.valid &= valid</code>
      * </p>
      */
     protected void setValid(boolean valid) {
@@ -135,10 +135,10 @@ public class GroupImpl implements Group {
     }
 
     /**
-     * ÅĞ¶¨¸ÃgroupÊÇ·ñ±»ÖÃÖµ£¬²¢ÑéÖ¤¡£ÔÚÁ½ÖÖÇé¿öÏÂ£¬<code>isValidated()</code>Îª<code>true</code>¡£
+     * åˆ¤å®šè¯¥groupæ˜¯å¦è¢«ç½®å€¼ï¼Œå¹¶éªŒè¯ã€‚åœ¨ä¸¤ç§æƒ…å†µä¸‹ï¼Œ<code>isValidated()</code>ä¸º<code>true</code>ã€‚
      * <ol>
-     * <li>ÓÃ»§Ìá½»°üº¬µ±Ç°group×Ö¶ÎµÄ±íµ¥¡£´ËÊ±ÏàÓ¦µÄgroup±»³õÊ¼»¯²¢ÑéÖ¤¡£</li>
-     * <li>³ÌĞòµ÷ÓÃ<code>validate()</code>·½·¨¡£ÕâÖÖ·½Ê½ÏÂ£¬groupÖĞµÄ×Ö¶ÎÖµ¿ÉÒÔÓÉ³ÌĞòÀ´ÉèÖÃ£¬Ğ§¹ûÈçÍ¬ÓÃ»§Ìá½»±íµ¥Ò»Ñù¡£</li>
+     * <li>ç”¨æˆ·æäº¤åŒ…å«å½“å‰groupå­—æ®µçš„è¡¨å•ã€‚æ­¤æ—¶ç›¸åº”çš„groupè¢«åˆå§‹åŒ–å¹¶éªŒè¯ã€‚</li>
+     * <li>ç¨‹åºè°ƒç”¨<code>validate()</code>æ–¹æ³•ã€‚è¿™ç§æ–¹å¼ä¸‹ï¼Œgroupä¸­çš„å­—æ®µå€¼å¯ä»¥ç”±ç¨‹åºæ¥è®¾ç½®ï¼Œæ•ˆæœå¦‚åŒç”¨æˆ·æäº¤è¡¨å•ä¸€æ ·ã€‚</li>
      * </ol>
      */
     public boolean isValidated() {
@@ -146,15 +146,15 @@ public class GroupImpl implements Group {
     }
 
     /**
-     * ³õÊ¼»¯group¡£
+     * åˆå§‹åŒ–groupã€‚
      */
     public void init() {
         init(null);
     }
 
     /**
-     * ³õÊ¼»¯group¡£ ÆäÖĞ£¬ <code>request</code>¿ÉÒÔÊÇ<code>null</code>£¬Èç¹û
-     * <code>request</code>²»Îª<code>null</code>£¬ÔòÍ¬Ê±ÑéÖ¤±íµ¥¡£
+     * åˆå§‹åŒ–groupã€‚ å…¶ä¸­ï¼Œ <code>request</code>å¯ä»¥æ˜¯<code>null</code>ï¼Œå¦‚æœ
+     * <code>request</code>ä¸ä¸º<code>null</code>ï¼Œåˆ™åŒæ—¶éªŒè¯è¡¨å•ã€‚
      */
     public void init(HttpServletRequest request) {
         fields.clear();
@@ -168,7 +168,7 @@ public class GroupImpl implements Group {
             field.init(request);
         }
 
-        // ¼¯ÖĞÑéÖ¤±íµ¥×Ö¶Î£¨ÓĞĞ©validatorĞèÒª¶ÁÈ¡¶à¸ö×Ö¶ÎµÄÖµ£¬ÕâÑù×öÊÇÎªÁË±ÜÃâÕâĞ©validator¶Á²»µ½ÔÚÆäºó¶¨ÒåµÄfieldµÄÖµ£©
+        // é›†ä¸­éªŒè¯è¡¨å•å­—æ®µï¼ˆæœ‰äº›validatoréœ€è¦è¯»å–å¤šä¸ªå­—æ®µçš„å€¼ï¼Œè¿™æ ·åšæ˜¯ä¸ºäº†é¿å…è¿™äº›validatorè¯»ä¸åˆ°åœ¨å…¶åå®šä¹‰çš„fieldçš„å€¼ï¼‰
         if (request != null) {
             for (Field field : fields.values()) {
                 ((FieldImpl) field).validate();
@@ -177,9 +177,9 @@ public class GroupImpl implements Group {
     }
 
     /**
-     * ÑéÖ¤£¨»òÖØĞÂÑéÖ¤£©µ±Ç°µÄ×Ö¶ÎÖµ¡£
+     * éªŒè¯ï¼ˆæˆ–é‡æ–°éªŒè¯ï¼‰å½“å‰çš„å­—æ®µå€¼ã€‚
      * <p>
-     * ×¢Òâ£¬´Ë·½·¨½«ÉèÖÃ<code>isValidated()</code>Îª<code>true</code>¡£
+     * æ³¨æ„ï¼Œæ­¤æ–¹æ³•å°†è®¾ç½®<code>isValidated()</code>ä¸º<code>true</code>ã€‚
      * </p>
      */
     public void validate() {
@@ -192,30 +192,30 @@ public class GroupImpl implements Group {
     }
 
     /**
-     * È¡µÃËùÓĞfieldsµÄÁĞ±í¡£
+     * å–å¾—æ‰€æœ‰fieldsçš„åˆ—è¡¨ã€‚
      */
     public Collection<Field> getFields() {
         return fieldList;
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄfield¡£fieldÃû³Æ£¨´óĞ¡Ğ´²»Ãô¸Ğ£©
+     * å–å¾—æŒ‡å®šåç§°çš„fieldã€‚fieldåç§°ï¼ˆå¤§å°å†™ä¸æ•æ„Ÿï¼‰
      */
     public Field getField(String fieldName) {
         return fields.get(StringUtil.toLowerCase(fieldName));
     }
 
     /**
-     * È¡µÃgroup¼¶±ğµÄ´íÎóĞÅÏ¢±í´ïÊ½µÄcontext¡£
+     * å–å¾—groupçº§åˆ«çš„é”™è¯¯ä¿¡æ¯è¡¨è¾¾å¼çš„contextã€‚
      */
     protected MessageContext getMessageContext() {
         return messageContext;
     }
 
     /**
-     * ½«¶ÔÏóÖĞµÄÊôĞÔÖµÖÃÈëµ½fieldsÖĞ¡£
+     * å°†å¯¹è±¡ä¸­çš„å±æ€§å€¼ç½®å…¥åˆ°fieldsä¸­ã€‚
      * <p>
-     * ¶ÔÓÚ<code>isValidated()</code>Îª<code>true</code>µÄgroup£¬¸Ã·½·¨ÎŞĞ§¡£
+     * å¯¹äº<code>isValidated()</code>ä¸º<code>true</code>çš„groupï¼Œè¯¥æ–¹æ³•æ— æ•ˆã€‚
      * </p>
      */
     public void mapTo(Object object) {
@@ -260,9 +260,9 @@ public class GroupImpl implements Group {
     }
 
     /**
-     * ½«groupÖĞµÄÖµÖÃÈëÖ¸¶¨¶ÔÏó¡£
+     * å°†groupä¸­çš„å€¼ç½®å…¥æŒ‡å®šå¯¹è±¡ã€‚
      * <p>
-     * ¶ÔÓÚ<code>isValidated()</code>Îª<code>false</code>µÄgroup£¬¸Ã·½·¨ÎŞĞ§¡£
+     * å¯¹äº<code>isValidated()</code>ä¸º<code>false</code>çš„groupï¼Œè¯¥æ–¹æ³•æ— æ•ˆã€‚
      * </p>
      */
     public void setProperties(Object object) {
@@ -298,7 +298,7 @@ public class GroupImpl implements Group {
     }
 
     /**
-     * ×ª»»³ÉÒ×ÓÚÔÄ¶ÁµÄ×Ö·û´®¡£
+     * è½¬æ¢æˆæ˜“äºé˜…è¯»çš„å­—ç¬¦ä¸²ã€‚
      */
     @Override
     public String toString() {

@@ -41,7 +41,7 @@ import com.alibaba.citrus.turbine.TurbineRunDataInternal;
 import com.alibaba.citrus.turbine.support.ContextAdapter;
 
 /**
- * äÖÈ¾Ä£°å¡£
+ * æ¸²æŸ“æ¨¡æ¿ã€‚
  * 
  * @author dux.fangl
  * @author Michael Zhou
@@ -63,13 +63,13 @@ public class RenderTemplateValve extends AbstractValve {
         TurbineRunDataInternal rundata = (TurbineRunDataInternal) getTurbineRunData(request);
         String target = assertNotNull(rundata.getTarget(), "Target was not specified");
 
-        // ¼ì²éÖØ¶¨Ïò±êÖ¾£¬Èç¹ûÊÇÖØ¶¨Ïò£¬Ôò²»ĞèÒª½«Ò³ÃæÊä³ö¡£
+        // æ£€æŸ¥é‡å®šå‘æ ‡å¿—ï¼Œå¦‚æœæ˜¯é‡å®šå‘ï¼Œåˆ™ä¸éœ€è¦å°†é¡µé¢è¾“å‡ºã€‚
         if (!rundata.isRedirected()) {
             Context context = rundata.getContext();
 
             renderTemplate(getScreenTemplate(target), context, rundata);
 
-            // layout¿É±»½ûÓÃ¡£
+            // layoutå¯è¢«ç¦ç”¨ã€‚
             if (rundata.isLayoutEnabled()) {
                 String layoutTemplateOverride = rundata.getLayoutTemplateOverride();
 

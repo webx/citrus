@@ -40,7 +40,7 @@ import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionP
 import com.alibaba.citrus.util.StringEscapeUtil;
 
 /**
- * ±ãÓÚÄ£°åÊ¹ÓÃµÄpull tool¡£
+ * ä¾¿äºæ¨¡æ¿ä½¿ç”¨çš„pull toolã€‚
  * 
  * @author Michael Zhou
  */
@@ -59,7 +59,7 @@ public class FormTool implements ToolFactory {
     }
 
     /**
-     * Ã¿ÇëÇó·µ»ØÏàÍ¬µÄform tool¡£
+     * æ¯è¯·æ±‚è¿”å›ç›¸åŒçš„form toolã€‚
      */
     public boolean isSingleton() {
         return true;
@@ -70,28 +70,28 @@ public class FormTool implements ToolFactory {
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄgroup helper¡£
+     * å–å¾—æŒ‡å®šåç§°çš„group helperã€‚
      */
     public GroupHelper get(String groupName) {
         return new GroupHelper(groupName);
     }
 
     /**
-     * È¡µÃËùÓĞgroupÊµÀı¡£
+     * å–å¾—æ‰€æœ‰groupå®ä¾‹ã€‚
      */
     public Iterator<GroupInstanceHelper> getGroups() {
         return new GroupInstanceHelperIterator(getForm().getGroups().iterator());
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄgroupÊµÀı¡£
+     * å–å¾—æŒ‡å®šåç§°çš„groupå®ä¾‹ã€‚
      */
     public Iterator<GroupInstanceHelper> getGroups(String groupName) {
         return new GroupInstanceHelperIterator(getForm().getGroups(groupName).iterator());
     }
 
     /**
-     * ÅĞ¶ÏÕû¸öformÊÇ·ñÍ¨¹ıÑéÖ¤¡£
+     * åˆ¤æ–­æ•´ä¸ªformæ˜¯å¦é€šè¿‡éªŒè¯ã€‚
      */
     public boolean isValid() {
         return getForm().isValid();
@@ -107,20 +107,20 @@ public class FormTool implements ToolFactory {
     }
 
     /**
-     * ±ãÓÚÄ£°åÊ¹ÓÃµÄ¸¨ÖúÀà¡£
+     * ä¾¿äºæ¨¡æ¿ä½¿ç”¨çš„è¾…åŠ©ç±»ã€‚
      */
     public class GroupHelper {
         private final String groupName;
 
         /**
-         * ´´½¨group helper¡£
+         * åˆ›å»ºgroup helperã€‚
          */
         public GroupHelper(String groupName) {
             this.groupName = groupName;
         }
 
         /**
-         * È¡µÃµ±Ç°groupµÄÄ¬ÈÏinstance¡£
+         * å–å¾—å½“å‰groupçš„é»˜è®¤instanceã€‚
          */
         public GroupInstanceHelper getDefaultInstance() {
             Group group = getForm().getGroup(groupName);
@@ -128,7 +128,7 @@ public class FormTool implements ToolFactory {
         }
 
         /**
-         * È¡µÃµ±Ç°groupµÄÖ¸¶¨instance¡£
+         * å–å¾—å½“å‰groupçš„æŒ‡å®šinstanceã€‚
          */
         public GroupInstanceHelper getInstance(String instanceName) {
             Group group = getForm().getGroup(groupName, instanceName);
@@ -136,7 +136,7 @@ public class FormTool implements ToolFactory {
         }
 
         /**
-         * È¡µÃµ±Ç°groupµÄÖ¸¶¨instance¡£
+         * å–å¾—å½“å‰groupçš„æŒ‡å®šinstanceã€‚
          */
         public GroupInstanceHelper getInstance(String instanceName, boolean create) {
             Group group = getForm().getGroup(groupName, instanceName, create);
@@ -150,20 +150,20 @@ public class FormTool implements ToolFactory {
     }
 
     /**
-     * ±ãÓÚÄ£°åÊ¹ÓÃµÄ¸¨ÖúÀà¡£
+     * ä¾¿äºæ¨¡æ¿ä½¿ç”¨çš„è¾…åŠ©ç±»ã€‚
      */
     public class GroupInstanceHelper {
         private final Group group;
 
         /**
-         * ´´½¨group instance helper¡£
+         * åˆ›å»ºgroup instance helperã€‚
          */
         public GroupInstanceHelper(Group group) {
             this.group = group;
         }
 
         /**
-         * È¡µÃÖ¸¶¨Ãû³ÆµÄfield helper¡£
+         * å–å¾—æŒ‡å®šåç§°çš„field helperã€‚
          */
         public FieldHelper get(String fieldName) {
             Field field = group.getField(fieldName);
@@ -171,28 +171,28 @@ public class FormTool implements ToolFactory {
         }
 
         /**
-         * È¡µÃËùÓĞµÄfields¡£
+         * å–å¾—æ‰€æœ‰çš„fieldsã€‚
          */
         public Iterator<FieldHelper> getFields() {
             return new FieldHelperIterator(group.getFields().iterator());
         }
 
         /**
-         * ÅĞ¶ÏÕû¸ögroup instanceÊÇ·ñÍ¨¹ıÑéÖ¤¡£
+         * åˆ¤æ–­æ•´ä¸ªgroup instanceæ˜¯å¦é€šè¿‡éªŒè¯ã€‚
          */
         public boolean isValid() {
             return group.isValid();
         }
 
         /**
-         * ÅĞ¶ÏÕâ¸ögroupÓĞÃ»ÓĞ±»ÑéÖ¤¹ı¡£
+         * åˆ¤æ–­è¿™ä¸ªgroupæœ‰æ²¡æœ‰è¢«éªŒè¯è¿‡ã€‚
          */
         public boolean isValidated() {
             return group.isValidated();
         }
 
         /**
-         * ½«¶ÔÏóÖĞµÄÖµÖÃÈëµ±Ç°group instanceÖĞ¡£
+         * å°†å¯¹è±¡ä¸­çš„å€¼ç½®å…¥å½“å‰group instanceä¸­ã€‚
          */
         public void mapTo(Object object) {
             group.mapTo(object);
@@ -205,7 +205,7 @@ public class FormTool implements ToolFactory {
     }
 
     /**
-     * È¡µÃgroup instance helperµÄ±éÀúÆ÷¡£
+     * å–å¾—group instance helperçš„éå†å™¨ã€‚
      */
     private class GroupInstanceHelperIterator extends FilterIterator<GroupInstanceHelper, Group> {
         private GroupInstanceHelperIterator(Iterator<Group> i) {
@@ -218,35 +218,35 @@ public class FormTool implements ToolFactory {
     }
 
     /**
-     * ±ãÓÚÄ£°åÊ¹ÓÃµÄ¸¨ÖúÀà¡£
+     * ä¾¿äºæ¨¡æ¿ä½¿ç”¨çš„è¾…åŠ©ç±»ã€‚
      */
     public class FieldHelper {
         private final Field field;
         private String htmlFieldSuffix;
 
         /**
-         * ´´½¨field helper¡£
+         * åˆ›å»ºfield helperã€‚
          */
         public FieldHelper(Field field) {
             this.field = field;
         }
 
         /**
-         * È¡µÃfieldµÄÓÃÓÚÏÔÊ¾µÄÃû³Æ¡£
+         * å–å¾—fieldçš„ç”¨äºæ˜¾ç¤ºçš„åç§°ã€‚
          */
         public String getDisplayName() {
             return field.getFieldConfig().getDisplayName();
         }
 
         /**
-         * È¡µÃÔÚformÖĞÎ¨Ò»±íÊ¾¸ÃfieldµÄkey¡£
+         * å–å¾—åœ¨formä¸­å”¯ä¸€è¡¨ç¤ºè¯¥fieldçš„keyã€‚
          */
         public String getKey() {
             return field.getKey();
         }
 
         /**
-         * È¡µÃÔÚformÖĞÎ¨Ò»±íÊ¾¸ÃfieldµÄkey¡£
+         * å–å¾—åœ¨formä¸­å”¯ä¸€è¡¨ç¤ºè¯¥fieldçš„keyã€‚
          */
         public String getHtmlKey() {
             if (htmlFieldSuffix == null) {
@@ -258,42 +258,42 @@ public class FormTool implements ToolFactory {
         }
 
         /**
-         * È¡µÃÔÚformÖĞÎ¨Ò»±íÊ¾¸ÃfieldµÄkey£¬µ±ÓÃ»§Ìá½»µÄ±íµ¥ÖĞÎ´°üº¬´ËfieldµÄĞÅÏ¢Ê±£¬È¡Õâ¸ökeyµÄÖµ×÷Îª¸ÃfieldµÄÖµ¡£
+         * å–å¾—åœ¨formä¸­å”¯ä¸€è¡¨ç¤ºè¯¥fieldçš„keyï¼Œå½“ç”¨æˆ·æäº¤çš„è¡¨å•ä¸­æœªåŒ…å«æ­¤fieldçš„ä¿¡æ¯æ—¶ï¼Œå–è¿™ä¸ªkeyçš„å€¼ä½œä¸ºè¯¥fieldçš„å€¼ã€‚
          */
         public String getAbsentKey() {
             return field.getAbsentKey();
         }
 
         /**
-         * È¡µÃÔÚformÖĞºÍµ±Ç°field°ó¶¨µÄ¸½¼şµÄkey¡£
+         * å–å¾—åœ¨formä¸­å’Œå½“å‰fieldç»‘å®šçš„é™„ä»¶çš„keyã€‚
          */
         public String getAttachmentKey() {
             return field.getAttachmentKey();
         }
 
         /**
-         * È¡µÃfieldµÄÖµ¡£
+         * å–å¾—fieldçš„å€¼ã€‚
          */
         public String getValue() {
             return field.getStringValue();
         }
 
         /**
-         * È¡µÃfieldµÄÖµ£¬²¢½øĞĞ<code>escapeHtml</code>±àÂë¡£
+         * å–å¾—fieldçš„å€¼ï¼Œå¹¶è¿›è¡Œ<code>escapeHtml</code>ç¼–ç ã€‚
          */
         public String getEscapedValue() {
             return StringEscapeUtil.escapeHtml(field.getStringValue());
         }
 
         /**
-         * È¡µÃfieldµÄÖµ¡£
+         * å–å¾—fieldçš„å€¼ã€‚
          */
         public String[] getValues() {
             return field.getStringValues();
         }
 
         /**
-         * È¡µÃfieldµÄÖµ£¬²¢½øĞĞ<code>escapeHtml</code>±àÂë¡£
+         * å–å¾—fieldçš„å€¼ï¼Œå¹¶è¿›è¡Œ<code>escapeHtml</code>ç¼–ç ã€‚
          */
         public String[] getEscapedValues() {
             String[] values = field.getStringValues();
@@ -307,63 +307,63 @@ public class FormTool implements ToolFactory {
         }
 
         /**
-         * È¡µÃabsent×Ö¶ÎµÄHTML hidden field¡£
+         * å–å¾—absentå­—æ®µçš„HTML hidden fieldã€‚
          */
         public input getAbsentHiddenField(String value) {
             return new input("hidden", field.getAbsentKey(), defaultIfNull(value, EMPTY_STRING));
         }
 
         /**
-         * È¡µÃ¸½¼ş¡£
+         * å–å¾—é™„ä»¶ã€‚
          */
         public Object getAttachment() {
             return field.getAttachment();
         }
 
         /**
-         * È¡µÃ±àÂëºóµÄ¸½¼ş¡£
+         * å–å¾—ç¼–ç åçš„é™„ä»¶ã€‚
          */
         public String getAttachmentEncoded() {
             return defaultIfNull(field.getAttachmentEncoded(), EMPTY_STRING);
         }
 
         /**
-         * ÊÇ·ñ°üº¬¸½¼ş£¿
+         * æ˜¯å¦åŒ…å«é™„ä»¶ï¼Ÿ
          */
         public boolean hasAttachment() {
             return field.hasAttachment();
         }
 
         /**
-         * ÉèÖÃ¸½¼ş¡£
+         * è®¾ç½®é™„ä»¶ã€‚
          */
         public void setAttachment(Object attachment) {
             field.setAttachment(attachment);
         }
 
         /**
-         * È¡µÃ´ú±í¸½¼şµÄHTML hidden field¡£
+         * å–å¾—ä»£è¡¨é™„ä»¶çš„HTML hidden fieldã€‚
          */
         public input getAttachmentHiddenField() {
             return new input("hidden", field.getAttachmentKey(), getAttachmentEncoded());
         }
 
         /**
-         * Çå³ı¸½¼ş¡£
+         * æ¸…é™¤é™„ä»¶ã€‚
          */
         public void clearAttachment() {
             field.clearAttachment();
         }
 
         /**
-         * ÅĞ¶ÏÕâ¸öfieldÊÇ·ñÊÇºÏ·¨µÄ¡£
+         * åˆ¤æ–­è¿™ä¸ªfieldæ˜¯å¦æ˜¯åˆæ³•çš„ã€‚
          */
         public boolean isValid() {
             return field.isValid();
         }
 
         /**
-         * È¡µÃÕâ¸öfieldÏà¶ÔÓ¦µÄ³ö´íĞÅÏ¢¡£
+         * å–å¾—è¿™ä¸ªfieldç›¸å¯¹åº”çš„å‡ºé”™ä¿¡æ¯ã€‚
          */
         public String getMessage() {
             return field.getMessage();
@@ -376,7 +376,7 @@ public class FormTool implements ToolFactory {
     }
 
     /**
-     * È¡µÃfield helperµÄ±éÀúÆ÷¡£
+     * å–å¾—field helperçš„éå†å™¨ã€‚
      */
     private class FieldHelperIterator extends FilterIterator<FieldHelper, Field> {
         private FieldHelperIterator(Iterator<Field> i) {

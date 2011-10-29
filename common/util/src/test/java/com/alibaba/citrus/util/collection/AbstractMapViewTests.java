@@ -30,8 +30,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>Map.entrySet()</code>, <code>Map.keySet()</code>,
- * <code>Map.values()</code> ·µ»ØµÄcollection view¶ÔÏó.
+ * æµ‹è¯•<code>Map.entrySet()</code>, <code>Map.keySet()</code>,
+ * <code>Map.values()</code> è¿”å›çš„collection viewå¯¹è±¡.
  * 
  * @author Michael Zhou
  */
@@ -45,7 +45,7 @@ public abstract class AbstractMapViewTests extends AbstractTests {
 
     @Before
     public void init() {
-        // map1²âÊÔÒ»°ãÇé¿ö.
+        // map1æµ‹è¯•ä¸€èˆ¬æƒ…å†µ.
         map1 = createMap();
         map1.put("aaa", "111");
         map1.put("bbb", "222");
@@ -53,14 +53,14 @@ public abstract class AbstractMapViewTests extends AbstractTests {
 
         view1 = getView(map1);
 
-        // map2²âÊÔkeyºÍvalueÎªnullµÄÇé¿ö.
+        // map2æµ‹è¯•keyå’Œvalueä¸ºnullçš„æƒ…å†µ.
         map2 = createMap();
         map2.put(null, "111");
         map2.put("aaa", null);
 
         view2 = getView(map2);
 
-        // map3Îª¿Õ.
+        // map3ä¸ºç©º.
         map3 = createMap();
         view3 = getView(map3);
     }
@@ -100,11 +100,11 @@ public abstract class AbstractMapViewTests extends AbstractTests {
     private void assertAddAll(Collection<?> collection) {
         Collection<Object> items = (Collection<Object>) newCollection();
 
-        ((Collection<Object>) collection).addAll(items); // ¼ÓÈë¿Õcollection
+        ((Collection<Object>) collection).addAll(items); // åŠ å…¥ç©ºcollection
 
         try {
             items.add(newItem("key", "value"));
-            ((Collection<Object>) collection).addAll(items); // ¼ÓÈë·Ç¿Õcollection
+            ((Collection<Object>) collection).addAll(items); // åŠ å…¥éç©ºcollection
             fail("should throw an UnsupportedOperationException");
         } catch (UnsupportedOperationException e) {
         }
@@ -161,16 +161,16 @@ public abstract class AbstractMapViewTests extends AbstractTests {
     }
 
     /**
-     * ²âÊÔObject.equals()·½·¨. µ«²¢·ÇËùÓĞµÄcollection¶ÔÏó¶¼¶¨ÒåÁË´Ë·½·¨.
-     * Èç¹ûµ±Ç°²âÊÔµÄcollection¶ÔÏó²»Ö§³Ö±È½Ï²Ù×÷, Ôò createCollectionToCompareWith()Ó¦¸Ã·µ»Ønull.
+     * æµ‹è¯•Object.equals()æ–¹æ³•. ä½†å¹¶éæ‰€æœ‰çš„collectionå¯¹è±¡éƒ½å®šä¹‰äº†æ­¤æ–¹æ³•.
+     * å¦‚æœå½“å‰æµ‹è¯•çš„collectionå¯¹è±¡ä¸æ”¯æŒæ¯”è¾ƒæ“ä½œ, åˆ™ createCollectionToCompareWith()åº”è¯¥è¿”å›null.
      */
     @Test
     @SuppressWarnings("unchecked")
     public void equals_() {
         Collection<Object> items;
 
-        // Õâ¸ö·½·¨µ÷ÓÃ·µ»ØÒ»¸öcollection¶ÔÏó, ¿ÉÒÔÖ±½ÓºÍµ±Ç°µÄcollectionÏà±È½Ï.
-        // Èç¹û·µ»Ønull, ±íÊ¾µ±Ç°collection²»Ö§³Ö±È½Ï²Ù×÷, ËùÒÔÌø¹ı´ËÏî²âÊÔ.
+        // è¿™ä¸ªæ–¹æ³•è°ƒç”¨è¿”å›ä¸€ä¸ªcollectionå¯¹è±¡, å¯ä»¥ç›´æ¥å’Œå½“å‰çš„collectionç›¸æ¯”è¾ƒ.
+        // å¦‚æœè¿”å›null, è¡¨ç¤ºå½“å‰collectionä¸æ”¯æŒæ¯”è¾ƒæ“ä½œ, æ‰€ä»¥è·³è¿‡æ­¤é¡¹æµ‹è¯•.
         if (createCollectionToCompareWith() == null) {
             return;
         }
@@ -193,17 +193,17 @@ public abstract class AbstractMapViewTests extends AbstractTests {
     }
 
     /**
-     * ²âÊÔObject.hashCode()·½·¨. ¸Ã·½·¨×ÜÊÇºÍObject.equals()Ïà¹ØµÄ(ÏàµÈµÄ¶ÔÏóÓĞ ÏàÍ¬µÄhashCode),
-     * Òò´Ë,ÀàËÆequals_(), hashCode_Í¨¹ıÅĞ¶Ï
-     * createCollectionToCompareWith()ÊÇ·ñ·µ»ØnullÀ´¾ö¶¨ÊÇ·ñ ×öÕâÏî²âÊÔ.
+     * æµ‹è¯•Object.hashCode()æ–¹æ³•. è¯¥æ–¹æ³•æ€»æ˜¯å’ŒObject.equals()ç›¸å…³çš„(ç›¸ç­‰çš„å¯¹è±¡æœ‰ ç›¸åŒçš„hashCode),
+     * å› æ­¤,ç±»ä¼¼equals_(), hashCode_é€šè¿‡åˆ¤æ–­
+     * createCollectionToCompareWith()æ˜¯å¦è¿”å›nullæ¥å†³å®šæ˜¯å¦ åšè¿™é¡¹æµ‹è¯•.
      */
     @Test
     @SuppressWarnings("unchecked")
     public void hashCode_() {
         Collection<Object> items;
 
-        // Õâ¸ö·½·¨µ÷ÓÃ·µ»ØÒ»¸öcollection¶ÔÏó, ¿ÉÒÔÖ±½ÓºÍµ±Ç°µÄcollectionÏà±È½Ï.
-        // Èç¹û·µ»Ønull, ±íÊ¾µ±Ç°collection²»Ö§³Ö±È½Ï²Ù×÷, ËùÒÔ²»²âÊÔ´ËÏî.
+        // è¿™ä¸ªæ–¹æ³•è°ƒç”¨è¿”å›ä¸€ä¸ªcollectionå¯¹è±¡, å¯ä»¥ç›´æ¥å’Œå½“å‰çš„collectionç›¸æ¯”è¾ƒ.
+        // å¦‚æœè¿”å›null, è¡¨ç¤ºå½“å‰collectionä¸æ”¯æŒæ¯”è¾ƒæ“ä½œ, æ‰€ä»¥ä¸æµ‹è¯•æ­¤é¡¹.
         if (createCollectionToCompareWith() == null) {
             return;
         }
@@ -357,12 +357,12 @@ public abstract class AbstractMapViewTests extends AbstractTests {
     public void toArray() {
         Object[] array;
 
-        // ²»´ø²ÎÊıµÄtoArray().
+        // ä¸å¸¦å‚æ•°çš„toArray().
         array = view1.toArray();
         view1.removeAll(Arrays.asList(array));
         assertEquals(0, view1.size());
 
-        // ´ø²ÎÊıµÄtoArray(Object[]).
+        // å¸¦å‚æ•°çš„toArray(Object[]).
         array = new Object[2];
         view2.toArray(array);
         view2.removeAll(Arrays.asList(array));
@@ -373,7 +373,7 @@ public abstract class AbstractMapViewTests extends AbstractTests {
     public void failFast() {
         Iterator<?> i;
 
-        // ĞŞ¸ÄmapÒÔºó, ÊÔÍ¼i.next()µ¼ÖÂÒì³£.
+        // ä¿®æ”¹mapä»¥å, è¯•å›¾i.next()å¯¼è‡´å¼‚å¸¸.
         i = view1.iterator();
         map1.put("aaa+aaa", "111+111");
 
@@ -383,7 +383,7 @@ public abstract class AbstractMapViewTests extends AbstractTests {
         } catch (ConcurrentModificationException e) {
         }
 
-        // ĞŞ¸ÄmapÒÔºó, ÊÔÍ¼i.remove()µ¼ÖÂÒì³£.
+        // ä¿®æ”¹mapä»¥å, è¯•å›¾i.remove()å¯¼è‡´å¼‚å¸¸.
         i = view2.iterator();
         i.next();
         map2.put("aaa+aaa", "111+111");
@@ -398,29 +398,29 @@ public abstract class AbstractMapViewTests extends AbstractTests {
     protected abstract Map<Object, Object> createMap();
 
     /**
-     * ´Ó<code>Map</code>ÖĞÈ¡µÃview. ¿ÉÄÜÊÇ<code>Map.entrySet()</code>,
-     * <code>Map.keySet()</code> ºÍ<code>Map.values()</code>µÈ·½·¨·µ»ØµÄ½á¹û.
+     * ä»<code>Map</code>ä¸­å–å¾—view. å¯èƒ½æ˜¯<code>Map.entrySet()</code>,
+     * <code>Map.keySet()</code> å’Œ<code>Map.values()</code>ç­‰æ–¹æ³•è¿”å›çš„ç»“æœ.
      * 
-     * @param map ±»²âÊÔµÄviewËùÊôµÄ<code>Map</code>
+     * @param map è¢«æµ‹è¯•çš„viewæ‰€å±çš„<code>Map</code>
      * @return view
      */
     protected abstract Collection<?> getView(Map<Object, Object> map);
 
     /**
-     * ´´½¨Ò»¸ö¿ÉÒÔºÍµ±Ç°²âÊÔµÄviewÏà±È½ÏµÄ¶ÔÏó. ¶ÔÓÚ<code>Map.values()</code>·µ»ØµÄ
-     * <code>Collection</code>¶ÔÏó, Ã»ÓĞ¶¨Òå<code>equals</code> ºÍ
-     * <code>hashCode</code>·½·¨, ËùÒÔ²»¿É±È½Ï. ÕâÖÖÇé¿ö·µ»Ø<code>null</code>¼´¿É.
+     * åˆ›å»ºä¸€ä¸ªå¯ä»¥å’Œå½“å‰æµ‹è¯•çš„viewç›¸æ¯”è¾ƒçš„å¯¹è±¡. å¯¹äº<code>Map.values()</code>è¿”å›çš„
+     * <code>Collection</code>å¯¹è±¡, æ²¡æœ‰å®šä¹‰<code>equals</code> å’Œ
+     * <code>hashCode</code>æ–¹æ³•, æ‰€ä»¥ä¸å¯æ¯”è¾ƒ. è¿™ç§æƒ…å†µè¿”å›<code>null</code>å³å¯.
      * 
-     * @return <code>Collection</code>¶ÔÏó
+     * @return <code>Collection</code>å¯¹è±¡
      */
     protected abstract Collection<?> createCollectionToCompareWith();
 
     /**
-     * ´´½¨Ò»¸öºÍViewÖĞ´æ·ÅµÄ¶ÔÏó¿É±È½ÏµÄ¶ÔÏó.
+     * åˆ›å»ºä¸€ä¸ªå’ŒViewä¸­å­˜æ”¾çš„å¯¹è±¡å¯æ¯”è¾ƒçš„å¯¹è±¡.
      * 
      * @param key key
      * @param value value
-     * @return ¶ÔÏó
+     * @return å¯¹è±¡
      */
     protected abstract Object createItem(Object key, Object value);
 }

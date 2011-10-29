@@ -23,7 +23,7 @@ import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
 
 /**
- * ´ú±ífreemarkerµÄÅäÖÃ¡£
+ * ä»£è¡¨freemarkerçš„é…ç½®ã€‚
  * 
  * @author Michael Zhou
  */

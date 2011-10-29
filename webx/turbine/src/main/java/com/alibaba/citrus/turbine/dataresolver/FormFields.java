@@ -23,7 +23,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * ÓÃÀ´±êÊ¶Ò»¸ö²ÎÊı£¬Ê¹Ö®´Óform serviceÖĞÈ¡µÃÒ»×é<code>Group</code>ÖĞµÄÍ¬Ãû<code>Field</code>s¶ÔÏó¡£
+ * ç”¨æ¥æ ‡è¯†ä¸€ä¸ªå‚æ•°ï¼Œä½¿ä¹‹ä»form serviceä¸­å–å¾—ä¸€ç»„<code>Group</code>ä¸­çš„åŒå<code>Field</code>så¯¹è±¡ã€‚
  * 
  * @author Michael Zhou
  */
@@ -31,19 +31,19 @@ import java.lang.annotation.Target;
 @Target({ ElementType.PARAMETER })
 public @interface FormFields {
     /**
-     * ÓÃÓÚ±êÊ¶fieldµÄÃû³Æ¡£
+     * ç”¨äºæ ‡è¯†fieldçš„åç§°ã€‚
      */
     String name();
 
     /**
-     * ÓÃÓÚ±êÊ¶groupµÄÃû³Æ¡£
+     * ç”¨äºæ ‡è¯†groupçš„åç§°ã€‚
      */
     String group();
 
     /**
-     * ¼ÙÈç±íµ¥Î´ÑéÖ¤Í¨¹ı£¬ÔòÌø¹ıÄ£¿éµÄÖ´ĞĞ¡£Ä¬ÈÏÎª<code>true</code>¡£
+     * å‡å¦‚è¡¨å•æœªéªŒè¯é€šè¿‡ï¼Œåˆ™è·³è¿‡æ¨¡å—çš„æ‰§è¡Œã€‚é»˜è®¤ä¸º<code>true</code>ã€‚
      * <p>
-     * ×¢Òâ£¬Ö»ÓĞÌØ¶¨µÄÄ£¿é£¨action£©¿ÉÒÔ±»Ìø¹ı£¬¶ÔÓÚÆäÓàµÄÄ£¿é£¬´Ë²ÎÊıÎŞĞ§¡£
+     * æ³¨æ„ï¼Œåªæœ‰ç‰¹å®šçš„æ¨¡å—ï¼ˆactionï¼‰å¯ä»¥è¢«è·³è¿‡ï¼Œå¯¹äºå…¶ä½™çš„æ¨¡å—ï¼Œæ­¤å‚æ•°æ— æ•ˆã€‚
      * </p>
      */
     boolean skipIfInvalid() default true;

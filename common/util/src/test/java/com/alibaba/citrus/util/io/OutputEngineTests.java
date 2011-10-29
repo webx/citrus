@@ -40,36 +40,36 @@ public class OutputEngineTests {
 
     @Before
     public void init() throws Exception {
-        charData = StringUtil.repeat("ÖĞ»ªÃñ¹ú", 1024 / 16 * 100);
+        charData = StringUtil.repeat("ä¸­åæ°‘å›½", 1024 / 16 * 100);
         data = charData.getBytes("UTF-8");
     }
 
     @Test
     public void compressInputStream() throws Exception {
 
-        // GZIPInputStreamÊÇ¶ÔÑ¹ËõÁ÷½øĞĞ½âÑ¹Ëõ£ºread() Ô­Ê¼Êı¾İ <- decompress <- compressed data stream
-        // GZIPOutputStreamÊÇ¶ÔÊä³öÁ÷½øĞĞÑ¹Ëõ£ºwrite() Ô­Ê¼Êı¾İ -> compress -> compressed data stream
-        // µ«ÊÇJDKÖĞ²»´æÔÚÕâÑùÒ»¸öÁ÷£ºread() compressed data <- compress <- Ô­Ê¼Êı¾İÁ÷
-        // ÀûÓÃOutputEngine¾Í¿ÉÒÔÊµÏÖÕâÑùµÄÁ÷¡£
+        // GZIPInputStreamæ˜¯å¯¹å‹ç¼©æµè¿›è¡Œè§£å‹ç¼©ï¼šread() åŸå§‹æ•°æ® <- decompress <- compressed data stream
+        // GZIPOutputStreamæ˜¯å¯¹è¾“å‡ºæµè¿›è¡Œå‹ç¼©ï¼šwrite() åŸå§‹æ•°æ® -> compress -> compressed data stream
+        // ä½†æ˜¯JDKä¸­ä¸å­˜åœ¨è¿™æ ·ä¸€ä¸ªæµï¼šread() compressed data <- compress <- åŸå§‹æ•°æ®æµ
+        // åˆ©ç”¨OutputEngineå°±å¯ä»¥å®ç°è¿™æ ·çš„æµã€‚
 
-        // Ô­Ê¼Êı¾İÊäÈëÁ÷
+        // åŸå§‹æ•°æ®è¾“å…¥æµ
         InputStream rawDataStream = new ByteArrayInputStream(data);
 
-        // OutputEngine£º¶ÁÈ¡ÊäÈëÁ÷£¬Êä³öµ½GZIPOutputStream£¬ÊµÏÖÑ¹Ëõ¡£
+        // OutputEngineï¼šè¯»å–è¾“å…¥æµï¼Œè¾“å‡ºåˆ°GZIPOutputStreamï¼Œå®ç°å‹ç¼©ã€‚
         OutputEngine isoe = new InputStreamOutputEngine(rawDataStream, new OutputStreamFactory() {
             public OutputStream getOutputStream(OutputStream out) throws IOException {
                 return new GZIPOutputStream(out);
             }
         });
 
-        // ´ÓOutputEngineÖĞÖ±½ÓÈ¡µÃÑ¹ËõÊäÈëÁ÷
+        // ä»OutputEngineä¸­ç›´æ¥å–å¾—å‹ç¼©è¾“å…¥æµ
         OutputEngineInputStream compressedDataStream = new OutputEngineInputStream(isoe);
 
         byte[] compressedData = StreamUtil.readBytes(compressedDataStream, true).toByteArray();
 
         assertTrue(compressedData.length < data.length);
 
-        // ´ÓÑ¹ËõÁ÷ÖĞ»Ö¸´
+        // ä»å‹ç¼©æµä¸­æ¢å¤
         InputStream zis = new GZIPInputStream(new ByteArrayInputStream(compressedData));
 
         byte[] decompressedData = StreamUtil.readBytes(zis, true).toByteArray();
@@ -80,26 +80,26 @@ public class OutputEngineTests {
     @Test
     public void compressInputStream_fromReader() throws Exception {
 
-        // ´´½¨ÕâÑùµÄÊäÈëÁ÷£ºread() compressed data <- compress <- Ô­Ê¼charÊı¾İÁ÷
+        // åˆ›å»ºè¿™æ ·çš„è¾“å…¥æµï¼šread() compressed data <- compress <- åŸå§‹charæ•°æ®æµ
 
-        // Ô­Ê¼Êı¾İÊäÈëÁ÷
+        // åŸå§‹æ•°æ®è¾“å…¥æµ
         Reader rawDataStream = new StringReader(charData);
 
-        // OutputEngine£º¶ÁÈ¡ÊäÈëÁ÷£¬Êä³öµ½GZIPOutputStream£¬ÊµÏÖÑ¹Ëõ¡£
+        // OutputEngineï¼šè¯»å–è¾“å…¥æµï¼Œè¾“å‡ºåˆ°GZIPOutputStreamï¼Œå®ç°å‹ç¼©ã€‚
         OutputEngine isoe = new ReaderOutputEngine(rawDataStream, new OutputStreamFactory() {
             public OutputStream getOutputStream(OutputStream out) throws IOException {
                 return new GZIPOutputStream(out);
             }
         }, "UTF-8");
 
-        // ´ÓOutputEngineÖĞÖ±½ÓÈ¡µÃÑ¹ËõÊäÈëÁ÷
+        // ä»OutputEngineä¸­ç›´æ¥å–å¾—å‹ç¼©è¾“å…¥æµ
         OutputEngineInputStream compressedDataStream = new OutputEngineInputStream(isoe);
 
         byte[] compressedData = StreamUtil.readBytes(compressedDataStream, true).toByteArray();
 
         assertTrue(compressedData.length < charData.length());
 
-        // ´ÓÑ¹ËõÁ÷ÖĞ»Ö¸´
+        // ä»å‹ç¼©æµä¸­æ¢å¤
         Reader zis = new InputStreamReader(new GZIPInputStream(new ByteArrayInputStream(compressedData)), "UTF-8");
 
         String decompressedData = StreamUtil.readText(zis, true);

@@ -22,15 +22,15 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * ·ÇÍ¬²½µÄ<code>ByteArrayOutputStream</code>Ìæ»»·½°¸, Ö´ÐÐ<code>toByteArray()</code>
- * ·½·¨Ê±·µ»ØµÄÊÇÖ»¶ÁµÄÄÚ²¿×Ö½ÚÊý×é, ±ÜÃâÁËÃ»ÓÐ±ØÒªµÄ×Ö½Ú¸´ÖÆ. ±¾´úÂëÒÆÖ²×ÔIBM developer worksÎÄÕÂ£º
+ * éžåŒæ­¥çš„<code>ByteArrayOutputStream</code>æ›¿æ¢æ–¹æ¡ˆ, æ‰§è¡Œ<code>toByteArray()</code>
+ * æ–¹æ³•æ—¶è¿”å›žçš„æ˜¯åªè¯»çš„å†…éƒ¨å­—èŠ‚æ•°ç»„, é¿å…äº†æ²¡æœ‰å¿…è¦çš„å­—èŠ‚å¤åˆ¶. æœ¬ä»£ç ç§»æ¤è‡ªIBM developer worksæ–‡ç« ï¼š
  * <ul>
  * <li><a
- * href="http://www.ibm.com/developerworks/cn/java/j-io1/index.shtml">³¹µ××ª±äÁ÷£¬µÚ 1
- * ²¿·Ö£º´ÓÊä³öÁ÷ÖÐ¶ÁÈ¡</a>
+ * href="http://www.ibm.com/developerworks/cn/java/j-io1/index.shtml">å½»åº•è½¬å˜æµï¼Œç¬¬ 1
+ * éƒ¨åˆ†ï¼šä»Žè¾“å‡ºæµä¸­è¯»å–</a>
  * <li><a
- * href="http://www.ibm.com/developerworks/cn/java/j-io2/index.shtml">³¹µ××ª±äÁ÷£¬µÚ 2
- * ²¿·Ö£ºÓÅ»¯ Java ÄÚ²¿ I/O</a>
+ * href="http://www.ibm.com/developerworks/cn/java/j-io2/index.shtml">å½»åº•è½¬å˜æµï¼Œç¬¬ 2
+ * éƒ¨åˆ†ï¼šä¼˜åŒ– Java å†…éƒ¨ I/O</a>
  * </ul>
  * 
  * @author Michael Zhou

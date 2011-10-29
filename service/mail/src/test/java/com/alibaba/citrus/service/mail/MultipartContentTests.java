@@ -35,7 +35,7 @@ import com.alibaba.citrus.test.runner.Prototyped.TestData;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
 
 /**
- * ²âÊÔÁ½¸ömultipart contentµÄ¹¦ÄÜ¡£
+ * æµ‹è¯•ä¸¤ä¸ªmultipart contentçš„åŠŸèƒ½ã€‚
  * 
  * @author Michael Zhou
  */

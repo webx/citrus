@@ -156,7 +156,7 @@ public abstract class AbstractFormServiceTests {
                         if (files[i].getName().contains(".")) {
                             specs[i] = new UploadFileSpec(files[i]);
                         } else {
-                            specs[i] = new UploadFileSpec(files[i], ""); // 对于无后缀的文件，不设contentType
+                            specs[i] = new UploadFileSpec(files[i], ""); // 瀵逛簬鏃犲悗缂�鐨勬枃浠讹紝涓嶈contentType
                         }
                     }
 

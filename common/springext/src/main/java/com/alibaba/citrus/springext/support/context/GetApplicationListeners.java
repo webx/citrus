@@ -26,8 +26,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.support.AbstractApplicationContext;
 
 /**
- * ÓÉÓÚspring3ºÍspring2µÄapi²»ÍêÈ«¼æÈİ£¬µ¼ÖÂÔÚspring2ÉÏ±àÒëµÄcontext.getApplicationListeners()
- * ÃüÁîÔÚspring3ÖĞ±¨NoSuchMethodError¡£´ËÀàÓÃ·´ÉäµÄ·½·¨À´½â¾ö¼æÈİĞÔÎÊÌâ¡£½«À´ÍêÈ«Ç¨ÒÆµ½spring3ÒÔºó£¬¿ÉÒÔÉ¾³ıÕâ¸öÊµÏÖ¡£
+ * ç”±äºspring3å’Œspring2çš„apiä¸å®Œå…¨å…¼å®¹ï¼Œå¯¼è‡´åœ¨spring2ä¸Šç¼–è¯‘çš„context.getApplicationListeners()
+ * å‘½ä»¤åœ¨spring3ä¸­æŠ¥NoSuchMethodErrorã€‚æ­¤ç±»ç”¨åå°„çš„æ–¹æ³•æ¥è§£å†³å…¼å®¹æ€§é—®é¢˜ã€‚å°†æ¥å®Œå…¨è¿ç§»åˆ°spring3ä»¥åï¼Œå¯ä»¥åˆ é™¤è¿™ä¸ªå®ç°ã€‚
  * 
  * @author Michael Zhou
  */

@@ -20,23 +20,23 @@ package com.alibaba.citrus.service.form;
 import com.alibaba.citrus.service.form.configuration.FormConfig;
 
 /**
- * ÓÃÀ´´¦ÀíÓÃ»§Ìá½»±íµ¥µÄservice¡£
+ * ç”¨æ¥å¤„ç†ç”¨æˆ·æäº¤è¡¨å•çš„serviceã€‚
  * 
  * @author Michael Zhou
  */
 public interface FormService {
     /**
-     * È¡µÃformµÄ¶¨Òå¡£
+     * å–å¾—formçš„å®šä¹‰ã€‚
      */
     FormConfig getFormConfig();
 
     /**
-     * ´ÓrequestÖĞÈ¡µÃµ±Ç°ÇëÇóµÄform»ò´´½¨ĞÂµÄform¡£
+     * ä»requestä¸­å–å¾—å½“å‰è¯·æ±‚çš„formæˆ–åˆ›å»ºæ–°çš„formã€‚
      */
     Form getForm();
 
     /**
-     * ´ÓrequestÖĞÈ¡µÃµ±Ç°ÇëÇóµÄform»ò´´½¨ĞÂµÄform¡£
+     * ä»requestä¸­å–å¾—å½“å‰è¯·æ±‚çš„formæˆ–åˆ›å»ºæ–°çš„formã€‚
      */
     Form getForm(boolean forcePostOnly);
 }

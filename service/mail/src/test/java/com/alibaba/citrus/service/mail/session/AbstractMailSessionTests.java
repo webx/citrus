@@ -160,14 +160,14 @@ public abstract class AbstractMailSessionTests<T extends MailSession> extends Ab
         Properties props = session.getSessionProperties();
         assertTrue(props.isEmpty());
 
-        // È¡µÃsession
+        // å–å¾—session
         Session rawSession = session.getSession();
         assertNotNull(rawSession);
 
-        // µÚ¶ş´ÎÈ¡µÃsession£ºÍ¬Ò»¸ösession
+        // ç¬¬äºŒæ¬¡å–å¾—sessionï¼šåŒä¸€ä¸ªsession
         assertSame(rawSession, session.getSession());
 
-        // Ìí¼Óproperty£¬´Ó¶ø¸Ä±äsession
+        // æ·»åŠ propertyï¼Œä»è€Œæ”¹å˜session
         session.setProperty("aaa", "111");
         assertEquals(1, props.size());
         assertEquals("111", props.getProperty("aaa"));
@@ -175,13 +175,13 @@ public abstract class AbstractMailSessionTests<T extends MailSession> extends Ab
 
         rawSession = session.getSession();
 
-        // ÉèÖÃproperty£¬µ«ÖµÏàÍ¬£¬session²»±ä
+        // è®¾ç½®propertyï¼Œä½†å€¼ç›¸åŒï¼Œsessionä¸å˜
         session.setProperty("aaa", "111");
         assertEquals(1, props.size());
         assertEquals("111", props.getProperty("aaa"));
         assertSame(rawSession, session.getSession());
 
-        // ¸Ä±äproperty£¬session¸Ä±ä
+        // æ”¹å˜propertyï¼Œsessionæ”¹å˜
         session.setProperty("aaa", "222");
         assertEquals(1, props.size());
         assertEquals("222", props.getProperty("aaa"));
@@ -189,13 +189,13 @@ public abstract class AbstractMailSessionTests<T extends MailSession> extends Ab
 
         rawSession = session.getSession();
 
-        // ÉèÖÃÖµ£¬ºÍÄ¬ÈÏÖµÏàÍ¬£¬Òò´Ë²»ÉèÖÃ
+        // è®¾ç½®å€¼ï¼Œå’Œé»˜è®¤å€¼ç›¸åŒï¼Œå› æ­¤ä¸è®¾ç½®
         session.setProperty("bbb", "false", "false");
         assertEquals(1, props.size());
         assertEquals("222", props.getProperty("aaa"));
         assertSame(rawSession, session.getSession());
 
-        // ĞŞ¸Äµ±Ç°Öµ£¬½ö¹ÜºÍÄ¬ÈÏÖµÏàÍ¬£¬µ«Ò²ÉèÖÃ
+        // ä¿®æ”¹å½“å‰å€¼ï¼Œä»…ç®¡å’Œé»˜è®¤å€¼ç›¸åŒï¼Œä½†ä¹Ÿè®¾ç½®
         session.setProperty("aaa", "333", "333");
         assertEquals(1, props.size());
         assertEquals("333", props.getProperty("aaa"));
@@ -203,13 +203,13 @@ public abstract class AbstractMailSessionTests<T extends MailSession> extends Ab
 
         rawSession = session.getSession();
 
-        // ÅúÁ¿ÉèÖÃ - null£¬ÎŞÓ°Ïì
+        // æ‰¹é‡è®¾ç½® - nullï¼Œæ— å½±å“
         session.setProperties(null);
         assertEquals(1, props.size());
         assertEquals("333", props.getProperty("aaa"));
         assertSame(rawSession, session.getSession());
 
-        // ÅúÁ¿ÉèÖÃ - ¸²¸ÇÔ­Öµ
+        // æ‰¹é‡è®¾ç½® - è¦†ç›–åŸå€¼
         Map<String, String> values = createHashMap();
         values.put("ccc", "  333  ");
         values.put("ddd", "444");
@@ -220,7 +220,7 @@ public abstract class AbstractMailSessionTests<T extends MailSession> extends Ab
         assertEquals("444", props.getProperty("ddd"));
         assertNotSame(rawSession, session.getSession());
 
-        // ÅúÁ¿ÉèÖÃ - ·Ç·¨Öµ
+        // æ‰¹é‡è®¾ç½® - éæ³•å€¼
         values.put(null, "555");
 
         try {

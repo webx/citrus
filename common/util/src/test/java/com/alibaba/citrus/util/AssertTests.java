@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>Assert</code>Àà¡£
+ * æµ‹è¯•<code>Assert</code>ç±»ã€‚
  * 
  * @author Michael Zhou
  */

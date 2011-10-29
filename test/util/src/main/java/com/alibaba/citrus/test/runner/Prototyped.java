@@ -43,19 +43,19 @@ import org.junit.runners.model.TestClass;
 import com.alibaba.citrus.test.TestUtil;
 
 /**
- * ÀàËÆ{@link Parameterized}£¬×÷ÁËÈçÏÂ¸Ä½øºÍ±ä»¯£º
+ * ç±»ä¼¼{@link Parameterized}ï¼Œä½œäº†å¦‚ä¸‹æ”¹è¿›å’Œå˜åŒ–ï¼š
  * <p>
  * <ul>
- * <li>Í¨¹ıÔ­ĞÍ¶ÔÏóÀ´´´½¨test case¶ÔÏó</li> *
- * <li>¿ÉÍ¨¹ı@TestName×¢ÊÍÖ¸¶¨µÄ·½·¨£¨·Çstatic·½·¨£©À´ÉèÖÃ²âÊÔ×éµÄÃû³Æ£¬Èç¡°[0] xxx¡±£¬¶ø²»Ö»ÊÇ[0]¡¢[1]¡¢[2]¡£</li>
- * <li>Ö§³Ö¶à¸ö@Prototypes·½·¨¡£</li>
- * <li>Ö§³Ö<code>TestUtil.getTestName()</code>£¬ÒÔ±ãÔÚ²âÊÔÖĞÈ¡µÃµ±Ç°²âÊÔµÄÃû³Æ¡£</li>
+ * <li>é€šè¿‡åŸå‹å¯¹è±¡æ¥åˆ›å»ºtest caseå¯¹è±¡</li> *
+ * <li>å¯é€šè¿‡@TestNameæ³¨é‡ŠæŒ‡å®šçš„æ–¹æ³•ï¼ˆéstaticæ–¹æ³•ï¼‰æ¥è®¾ç½®æµ‹è¯•ç»„çš„åç§°ï¼Œå¦‚â€œ[0] xxxâ€ï¼Œè€Œä¸åªæ˜¯[0]ã€[1]ã€[2]ã€‚</li>
+ * <li>æ”¯æŒå¤šä¸ª@Prototypesæ–¹æ³•ã€‚</li>
+ * <li>æ”¯æŒ<code>TestUtil.getTestName()</code>ï¼Œä»¥ä¾¿åœ¨æµ‹è¯•ä¸­å–å¾—å½“å‰æµ‹è¯•çš„åç§°ã€‚</li>
  * </ul>
  * </p>
  */
 public class Prototyped extends Suite {
     /**
-     * ÏµÍ³½«Í¨¹ı±ê¼Ç´Ë×¢ÊÍµÄ·½·¨£¬È¡µÃ²âÊÔµÄÃû³Æ¡£
+     * ç³»ç»Ÿå°†é€šè¿‡æ ‡è®°æ­¤æ³¨é‡Šçš„æ–¹æ³•ï¼Œå–å¾—æµ‹è¯•çš„åç§°ã€‚
      */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
@@ -63,7 +63,7 @@ public class Prototyped extends Suite {
     }
 
     /**
-     * ÏµÍ³½«Í¨¹ı±ê¼Ç´Ë×¢ÊÍµÄ·½·¨£¬È¡µÃ²âÊÔµÄÊı¾İ¡£
+     * ç³»ç»Ÿå°†é€šè¿‡æ ‡è®°æ­¤æ³¨é‡Šçš„æ–¹æ³•ï¼Œå–å¾—æµ‹è¯•çš„æ•°æ®ã€‚
      */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
@@ -71,7 +71,7 @@ public class Prototyped extends Suite {
     }
 
     /**
-     * ÓÃÀ´¼ò»¯Prototyped²âÊÔ¡£
+     * ç”¨æ¥ç®€åŒ–Prototypedæµ‹è¯•ã€‚
      */
     public static class TestData<T> extends LinkedList<T> {
         private static final long serialVersionUID = 2818372350747718688L;

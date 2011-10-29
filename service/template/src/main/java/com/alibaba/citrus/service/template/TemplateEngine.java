@@ -22,37 +22,37 @@ import java.io.OutputStream;
 import java.io.Writer;
 
 /**
- * ´ú±íÒ»¸ötemplateÒıÇæµÄ·şÎñ¡£ÀıÈç£ºVelocity¡¢JSPµÈ¡£
+ * ä»£è¡¨ä¸€ä¸ªtemplateå¼•æ“çš„æœåŠ¡ã€‚ä¾‹å¦‚ï¼šVelocityã€JSPç­‰ã€‚
  * 
  * @author Michael Zhou
  */
 public interface TemplateEngine {
     /**
-     * È¡µÃÄ¬ÈÏµÄÄ£°åÃûºó×ºÁĞ±í¡£
+     * å–å¾—é»˜è®¤çš„æ¨¡æ¿ååç¼€åˆ—è¡¨ã€‚
      * <p>
-     * µ±<code>TemplateService</code>Ã»ÓĞÖ¸¶¨µ½µ±Ç°engineµÄmappingÊ±£¬½«È¡µÃ±¾·½·¨Ëù·µ»ØµÄºó×ºÃûÁĞ±í¡£
+     * å½“<code>TemplateService</code>æ²¡æœ‰æŒ‡å®šåˆ°å½“å‰engineçš„mappingæ—¶ï¼Œå°†å–å¾—æœ¬æ–¹æ³•æ‰€è¿”å›çš„åç¼€ååˆ—è¡¨ã€‚
      * </p>
      */
     String[] getDefaultExtensions();
 
     /**
-     * ÅĞ¶¨Ä£°åÊÇ·ñ´æÔÚ¡£
+     * åˆ¤å®šæ¨¡æ¿æ˜¯å¦å­˜åœ¨ã€‚
      */
     boolean exists(String templateName);
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢ÒÔ×Ö·û´®µÄĞÎÊ½È¡µÃäÖÈ¾µÄ½á¹û¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶ä»¥å­—ç¬¦ä¸²çš„å½¢å¼å–å¾—æ¸²æŸ“çš„ç»“æœã€‚
      */
     String getText(String templateName, TemplateContext context) throws TemplateException, IOException;
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢½«äÖÈ¾µÄ½á¹ûËÍµ½×Ö½ÚÊä³öÁ÷ÖĞ¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶å°†æ¸²æŸ“çš„ç»“æœé€åˆ°å­—èŠ‚è¾“å‡ºæµä¸­ã€‚
      */
     void writeTo(String templateName, TemplateContext context, OutputStream ostream) throws TemplateException,
             IOException;
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢½«äÖÈ¾µÄ½á¹ûËÍµ½×Ö·ûÊä³öÁ÷ÖĞ¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶å°†æ¸²æŸ“çš„ç»“æœé€åˆ°å­—ç¬¦è¾“å‡ºæµä¸­ã€‚
      */
     void writeTo(String templateName, TemplateContext context, Writer writer) throws TemplateException, IOException;
 }

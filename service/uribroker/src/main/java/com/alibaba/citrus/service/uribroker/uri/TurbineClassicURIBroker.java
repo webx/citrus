@@ -23,9 +23,9 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.util.Map;
 
 /**
- * Turbine´«Í³·ç¸ñµÄURI.
+ * Turbineä¼ ç»Ÿé£æ ¼çš„URI.
  * <p>
- * Ò»¸öTurbine´«Í³·ç¸ñµÄURI°üÀ¨ÈçÏÂ¼¸¸ö²¿·Ö£º
+ * ä¸€ä¸ªTurbineä¼ ç»Ÿé£æ ¼çš„URIåŒ…æ‹¬å¦‚ä¸‹å‡ ä¸ªéƒ¨åˆ†ï¼š
  * </p>
  * 
  * <pre>
@@ -37,7 +37,7 @@ import java.util.Map;
  * REFERENCE        = reference
  * </pre>
  * <p>
- * ÀıÈç£º
+ * ä¾‹å¦‚ï¼š
  * </p>
  * 
  * <pre>
@@ -57,7 +57,7 @@ public class TurbineClassicURIBroker extends ServletURIBroker {
     private boolean hasAction;
 
     /**
-     * È¡µÃpage¡£
+     * å–å¾—pageã€‚
      */
     public String getPage() {
         if (hasTemplate) {
@@ -68,7 +68,7 @@ public class TurbineClassicURIBroker extends ServletURIBroker {
     }
 
     /**
-     * ÉèÖÃpage¡£
+     * è®¾ç½®pageã€‚
      */
     public TurbineClassicURIBroker setPage(String page) {
         setPathInfo(TEMPLATE_INDEX, "template", page, false);
@@ -77,7 +77,7 @@ public class TurbineClassicURIBroker extends ServletURIBroker {
     }
 
     /**
-     * È¡µÃscreen¡£
+     * å–å¾—screenã€‚
      */
     public String getScreen() {
         if (hasScreen) {
@@ -88,7 +88,7 @@ public class TurbineClassicURIBroker extends ServletURIBroker {
     }
 
     /**
-     * ÉèÖÃscreen¡£
+     * è®¾ç½®screenã€‚
      */
     public TurbineClassicURIBroker setScreen(String screen) {
         setPathInfo(SCREEN_INDEX, "screen", screen, false);
@@ -97,7 +97,7 @@ public class TurbineClassicURIBroker extends ServletURIBroker {
     }
 
     /**
-     * È¡µÃaction¡£
+     * å–å¾—actionã€‚
      */
     public String getAction() {
         if (hasAction) {
@@ -108,7 +108,7 @@ public class TurbineClassicURIBroker extends ServletURIBroker {
     }
 
     /**
-     * ÉèÖÃaction¡£
+     * è®¾ç½®actionã€‚
      */
     public TurbineClassicURIBroker setAction(String action) {
         setPathInfo(ACTION_INDEX, "action", action, false);
@@ -117,7 +117,7 @@ public class TurbineClassicURIBroker extends ServletURIBroker {
     }
 
     /**
-     * Ìí¼ÓpathInfo.
+     * æ·»åŠ pathInfo.
      */
     public TurbineClassicURIBroker addPathInfo(String id, Object value) {
         setPathInfo(PATH_INFO_PARAM_INDEX, id, value, true);
@@ -125,7 +125,7 @@ public class TurbineClassicURIBroker extends ServletURIBroker {
     }
 
     /**
-     * Ìí¼ÓÒ»ÅúpathInfo¡£
+     * æ·»åŠ ä¸€æ‰¹pathInfoã€‚
      */
     public void setPathInfoParams(Map<String, Object> values) {
         clearPathInfoParams();
@@ -138,7 +138,7 @@ public class TurbineClassicURIBroker extends ServletURIBroker {
     }
 
     /**
-     * É¾³ıËùÓĞµÄpathInfo¡£
+     * åˆ é™¤æ‰€æœ‰çš„pathInfoã€‚
      */
     public TurbineClassicURIBroker clearPathInfoParams() {
         clearPathSegment(PATH_INFO_PARAM_INDEX);
@@ -148,7 +148,7 @@ public class TurbineClassicURIBroker extends ServletURIBroker {
     private void setPathInfo(int index, String id, Object value, boolean add) {
         id = assertNotNull(trimToNull(id), "empty pathInfo id");
 
-        // ¿Õ×Ö·û´®×ª»»³Énull
+        // ç©ºå­—ç¬¦ä¸²è½¬æ¢æˆnull
         String strValue = trimToNull(String.valueOf(value).replaceAll("/", ","));
 
         if (add) {

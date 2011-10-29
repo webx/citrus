@@ -20,10 +20,10 @@ package com.alibaba.citrus.service.upload.impl.cfu;
 import org.apache.commons.fileupload.FileItem;
 
 /**
- * ¼Ì³Ğ×Ôcommons-fileupload-1.2.1µÄÍ¬ÃûÀà£¬¸Ä½øÁËÈçÏÂÄÚÈİ£º
+ * ç»§æ‰¿è‡ªcommons-fileupload-1.2.1çš„åŒåç±»ï¼Œæ”¹è¿›äº†å¦‚ä¸‹å†…å®¹ï¼š
  * <ul>
- * <li>Ìí¼ÓĞÂµÄ<code>keepFormFieldInMemory</code>²ÎÊı¡£</li>
- * <li>´´½¨ĞÂµÄDiskFileItem¶ÔÏó¡£</li>
+ * <li>æ·»åŠ æ–°çš„<code>keepFormFieldInMemory</code>å‚æ•°ã€‚</li>
+ * <li>åˆ›å»ºæ–°çš„DiskFileItemå¯¹è±¡ã€‚</li>
  * </ul>
  * 
  * @author Michael Zhou

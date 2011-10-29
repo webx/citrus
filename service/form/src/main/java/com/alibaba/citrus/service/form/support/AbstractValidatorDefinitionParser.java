@@ -27,7 +27,7 @@ import org.w3c.dom.Element;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 /**
- * Validator½âÎöÆ÷µÄ»ùÀà£¬ÓÃÓÚÉèÖÃmessageĞÅÏ¢¡£
+ * Validatorè§£æå™¨çš„åŸºç±»ï¼Œç”¨äºè®¾ç½®messageä¿¡æ¯ã€‚
  * 
  * @author Michael Zhou
  */

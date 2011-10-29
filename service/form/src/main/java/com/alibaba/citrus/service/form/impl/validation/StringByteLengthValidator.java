@@ -26,7 +26,7 @@ import com.alibaba.citrus.service.form.support.AbstractValidatorDefinitionParser
 import com.alibaba.citrus.util.i18n.LocaleUtil;
 
 /**
- * ¼ì²éÊäÈëÖµµÄ×Ö·û´®³¤¶È£¬µ«ÊÇÏÈ×ª»»³ÉÖ¸¶¨×Ö·û¼¯µÄbytes¡£
+ * æ£€æŸ¥è¾“å…¥å€¼çš„å­—ç¬¦ä¸²é•¿åº¦ï¼Œä½†æ˜¯å…ˆè½¬æ¢æˆæŒ‡å®šå­—ç¬¦é›†çš„bytesã€‚
  * 
  * @author Michael Zhou
  */
@@ -34,7 +34,7 @@ public class StringByteLengthValidator extends StringLengthValidator {
     private String charset;
 
     /**
-     * ¼ÆËãÖ¸¶¨charsetµÄbytesÊı¡£
+     * è®¡ç®—æŒ‡å®šcharsetçš„bytesæ•°ã€‚
      */
     public String getCharset() {
         if (charset == null) {
@@ -45,7 +45,7 @@ public class StringByteLengthValidator extends StringLengthValidator {
     }
 
     /**
-     * ¼ÆËãÖ¸¶¨charsetµÄbytesÊı¡£
+     * è®¡ç®—æŒ‡å®šcharsetçš„bytesæ•°ã€‚
      */
     public void setCharset(String charset) {
         this.charset = trimToNull(charset);

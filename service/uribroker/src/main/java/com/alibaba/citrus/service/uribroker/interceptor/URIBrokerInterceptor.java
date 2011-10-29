@@ -20,16 +20,16 @@ package com.alibaba.citrus.service.uribroker.interceptor;
 import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 
 /**
- * Ìá¹©Ò»ÖÖ·½·¨¿ÉÒÔÔÚÔËĞĞÊ±¶¨ÖÆuri brokerµÄ²ÎÊı¡£
+ * æä¾›ä¸€ç§æ–¹æ³•å¯ä»¥åœ¨è¿è¡Œæ—¶å®šåˆ¶uri brokerçš„å‚æ•°ã€‚
  * 
  * @author Michael Zhou
  * @author dux.fangl
  */
 public interface URIBrokerInterceptor {
     /**
-     * ´¦ÀíÖ¸¶¨µÄuri broker¡£
+     * å¤„ç†æŒ‡å®šçš„uri brokerã€‚
      * <p>
-     * ¶ÔÓÚÍ¬Ò»¸öbroker£¬ÔÚreset()Ö®ºóµÄ¶à´ÎrenderÖĞ£¬Ğ©·½·¨Ö»Ö´ĞĞÒ»´Î¡£
+     * å¯¹äºåŒä¸€ä¸ªbrokerï¼Œåœ¨reset()ä¹‹åçš„å¤šæ¬¡renderä¸­ï¼Œäº›æ–¹æ³•åªæ‰§è¡Œä¸€æ¬¡ã€‚
      * </p>
      */
     void perform(URIBroker broker);

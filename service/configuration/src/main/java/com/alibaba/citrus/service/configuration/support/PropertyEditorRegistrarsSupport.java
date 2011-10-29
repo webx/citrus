@@ -35,8 +35,8 @@ import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
- * ´ú±íÒ»¸öproperty editor registrarµÄ¼¯ºÏ£¬È»¶øËü±¾ÉíÒ²ÊÇÒ»¸ö
- * <code>PropertyEditorRegistrar</code>¡£
+ * ä»£è¡¨ä¸€ä¸ªproperty editor registrarçš„é›†åˆï¼Œç„¶è€Œå®ƒæœ¬èº«ä¹Ÿæ˜¯ä¸€ä¸ª
+ * <code>PropertyEditorRegistrar</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -44,9 +44,9 @@ public class PropertyEditorRegistrarsSupport implements PropertyEditorRegistrar,
     private List<PropertyEditorRegistrar> propertyEditorRegistrars = emptyList();
 
     /**
-     * È¡µÃÒ»×é<code>PropertyEditor</code>×¢²áÆ÷¡£
+     * å–å¾—ä¸€ç»„<code>PropertyEditor</code>æ³¨å†Œå™¨ã€‚
      * <p>
-     * <code>PropertyEditor</code>¸ºÔğ½«×Ö·û´®Öµ×ª»»³Ébean propertyµÄÀàĞÍ£¬»ò·´Ö®¡£
+     * <code>PropertyEditor</code>è´Ÿè´£å°†å­—ç¬¦ä¸²å€¼è½¬æ¢æˆbean propertyçš„ç±»å‹ï¼Œæˆ–åä¹‹ã€‚
      * </p>
      */
     public PropertyEditorRegistrar[] getPropertyEditorRegistrars() {
@@ -54,9 +54,9 @@ public class PropertyEditorRegistrarsSupport implements PropertyEditorRegistrar,
     }
 
     /**
-     * ÉèÖÃÒ»×é<code>PropertyEditor</code>×¢²áÆ÷¡£
+     * è®¾ç½®ä¸€ç»„<code>PropertyEditor</code>æ³¨å†Œå™¨ã€‚
      * <p>
-     * <code>PropertyEditor</code>¸ºÔğ½«×Ö·û´®Öµ×ª»»³Ébean propertyµÄÀàĞÍ£¬»ò·´Ö®¡£
+     * <code>PropertyEditor</code>è´Ÿè´£å°†å­—ç¬¦ä¸²å€¼è½¬æ¢æˆbean propertyçš„ç±»å‹ï¼Œæˆ–åä¹‹ã€‚
      * </p>
      */
     public void setPropertyEditorRegistrars(PropertyEditorRegistrar[] propertyEditorRegistrars) {
@@ -64,7 +64,7 @@ public class PropertyEditorRegistrarsSupport implements PropertyEditorRegistrar,
     }
 
     /**
-     * ÔÚregistryÖĞ×¢²á×Ô¶¨ÒåµÄ<code>PropertyEditor</code>¡£
+     * åœ¨registryä¸­æ³¨å†Œè‡ªå®šä¹‰çš„<code>PropertyEditor</code>ã€‚
      */
     public void registerCustomEditors(PropertyEditorRegistry registry) {
         for (PropertyEditorRegistrar registrar : getPropertyEditorRegistrars()) {
@@ -73,21 +73,21 @@ public class PropertyEditorRegistrarsSupport implements PropertyEditorRegistrar,
     }
 
     /**
-     * ²é¿´ÓĞ¼¸¸öregistrars¡£
+     * æŸ¥çœ‹æœ‰å‡ ä¸ªregistrarsã€‚
      */
     public int size() {
         return propertyEditorRegistrars.size();
     }
 
     /**
-     * ±éÀúregistrars¡£
+     * éå†registrarsã€‚
      */
     public Iterator<PropertyEditorRegistrar> iterator() {
         return propertyEditorRegistrars.iterator();
     }
 
     /**
-     * ½âÎöelementÏÂµÄËùÓĞregistrars¡£
+     * è§£æelementä¸‹çš„æ‰€æœ‰registrarsã€‚
      */
     public static Object parseRegistrars(Element parentElement, ParserContext parserContext,
                                          BeanDefinitionBuilder containingBeanDefBuilder) {

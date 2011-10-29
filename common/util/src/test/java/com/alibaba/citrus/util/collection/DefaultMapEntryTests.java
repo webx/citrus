@@ -26,7 +26,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>DefaultMapEntry</code>Àà.
+ * æµ‹è¯•<code>DefaultMapEntry</code>ç±».
  * 
  * @author Michael Zhou
  */
@@ -47,7 +47,7 @@ public class DefaultMapEntryTests {
     }
 
     /**
-     * ²âÊÔequals·½·¨.
+     * æµ‹è¯•equalsæ–¹æ³•.
      */
     @Test
     public void equals_() {
@@ -63,7 +63,7 @@ public class DefaultMapEntryTests {
     }
 
     /**
-     * ²âÊÔhashCode·½·¨.
+     * æµ‹è¯•hashCodeæ–¹æ³•.
      */
     @Test
     public void hashCode_() {
@@ -73,7 +73,7 @@ public class DefaultMapEntryTests {
     }
 
     /**
-     * ²âÊÔtoString·½·¨.
+     * æµ‹è¯•toStringæ–¹æ³•.
      */
     @Test
     public void toString_() {
@@ -83,7 +83,7 @@ public class DefaultMapEntryTests {
     }
 
     /**
-     * ²âÊÔsetValue·½·¨.
+     * æµ‹è¯•setValueæ–¹æ³•.
      */
     @Test
     public void setValue() {

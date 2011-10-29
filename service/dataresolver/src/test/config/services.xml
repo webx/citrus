@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="GB18030" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:services="http://www.alibaba.com/schema/services"
     xmlns:dr-factories="http://www.alibaba.com/schema/services/data-resolver/factories"

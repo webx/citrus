@@ -21,19 +21,19 @@ import com.alibaba.citrus.service.template.TemplateEngine;
 import com.alibaba.citrus.service.template.TemplateNotFoundException;
 
 /**
- * JspÄ£°åÒıÇæ¡£
+ * Jspæ¨¡æ¿å¼•æ“ã€‚
  * <p>
- * ×¢Òâ£¬JspÄ£°åÒıÇæÃ»ÓĞÍêÕûµØÊµÏÖ<code>TemplateEngine</code>
- * ½Ó¿ÚµÄÔ¼¶¨¡£ÒòÎªJspÎŞ·¨Êä³öµ½Ö¸¶¨µÄÊä³öÁ÷£¬Ò²Ã»ÓĞ°ì·¨È¡µÃ½á¹û×Ö·û´®¡£JspÖ»ÄÜÊä³öµ½responseÖĞ¡£
- * Òò´Ë£¬JspÄ£°åÒıÇæÖ»ÄÜÓÃÓÚÉú³ÉWEBÒ³Ãæ£¬¶øÎŞ·¨ÓÃÓÚÍ¨ÓÃµÄÎÄ±¾Éú³É¡£
+ * æ³¨æ„ï¼ŒJspæ¨¡æ¿å¼•æ“æ²¡æœ‰å®Œæ•´åœ°å®ç°<code>TemplateEngine</code>
+ * æ¥å£çš„çº¦å®šã€‚å› ä¸ºJspæ— æ³•è¾“å‡ºåˆ°æŒ‡å®šçš„è¾“å‡ºæµï¼Œä¹Ÿæ²¡æœ‰åŠæ³•å–å¾—ç»“æœå­—ç¬¦ä¸²ã€‚Jspåªèƒ½è¾“å‡ºåˆ°responseä¸­ã€‚
+ * å› æ­¤ï¼ŒJspæ¨¡æ¿å¼•æ“åªèƒ½ç”¨äºç”ŸæˆWEBé¡µé¢ï¼Œè€Œæ— æ³•ç”¨äºé€šç”¨çš„æ–‡æœ¬ç”Ÿæˆã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface JspEngine extends TemplateEngine {
     /**
-     * È¡µÃÏà¶ÔÓÚservletContextµÄÄ£°åÂ·¾¶¡£Õâ¸öÂ·¾¶¿É±»
-     * <code>javax.servlet.RequestDispatcher</code> Ê¹ÓÃ£¬ÒÔ±ãÕÒµ½jspµÄÊµÀı¡£
+     * å–å¾—ç›¸å¯¹äºservletContextçš„æ¨¡æ¿è·¯å¾„ã€‚è¿™ä¸ªè·¯å¾„å¯è¢«
+     * <code>javax.servlet.RequestDispatcher</code> ä½¿ç”¨ï¼Œä»¥ä¾¿æ‰¾åˆ°jspçš„å®ä¾‹ã€‚
      */
     String getPathWithinServletContext(String templateName) throws TemplateNotFoundException;
 }

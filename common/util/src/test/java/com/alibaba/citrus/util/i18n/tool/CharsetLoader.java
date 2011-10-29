@@ -28,7 +28,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * ×°ÔØcharsetÎÄ¼ş¡£
+ * è£…è½½charsetæ–‡ä»¶ã€‚
  * 
  * @author Michael Zhou
  */

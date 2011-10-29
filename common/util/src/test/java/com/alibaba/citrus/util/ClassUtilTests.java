@@ -32,14 +32,14 @@ import org.junit.Test;
 import org.slf4j.Logger;
 
 /**
- * ²âÊÔ<code>ClassUtil</code>¡£
+ * æµ‹è¯•<code>ClassUtil</code>ã€‚
  * 
  * @author Michael Zhou
  */
 public class ClassUtilTests {
 
     // ==========================================================================
-    // È¡µÃÓÑºÃÀàÃûºÍpackageÃûµÄ·½·¨¡£                                                  
+    // å–å¾—å‹å¥½ç±»åå’Œpackageåçš„æ–¹æ³•ã€‚                                                  
     // ==========================================================================
 
     @Test
@@ -53,7 +53,7 @@ public class ClassUtilTests {
 
         assertEquals("  ", ClassUtil.getFriendlyClassName("  "));
 
-        // Êı×é
+        // æ•°ç»„
         assertGetFriendlyClassName("int[]", new int[0]);
         assertGetFriendlyClassName("int[][]", new int[0][]);
         assertGetFriendlyClassName("long[]", new long[0]);
@@ -73,10 +73,10 @@ public class ClassUtilTests {
         assertGetFriendlyClassName("java.util.List[]", new List[0]);
         assertGetFriendlyClassName("java.util.List[][]", new List[0][]);
 
-        // ·ÇÊı×é
+        // éæ•°ç»„
         assertGetFriendlyClassName("java.util.ArrayList", createArrayList());
 
-        // ÄÚÁªÀà/±¾µØÀà/ÄäÃûÀà
+        // å†…è”ç±»/æœ¬åœ°ç±»/åŒ¿åç±»
         assertGetFriendlyClassName("com.alibaba.citrus.util.ClassUtilTests.Inner", new Inner());
         assertGetFriendlyClassName("com.alibaba.citrus.util.ClassUtilTests.Inner[]", new Inner[0]);
 
@@ -92,7 +92,7 @@ public class ClassUtilTests {
 
         assertGetFriendlyClassName("com.alibaba.citrus.util.ClassUtilTests.1", anonymous);
 
-        // ·Ç·¨ÀàÃû
+        // éæ³•ç±»å
         assertEquals("", ClassUtil.getFriendlyClassName(""));
         assertEquals("[", ClassUtil.getFriendlyClassName("["));
         assertEquals("[[", ClassUtil.getFriendlyClassName("[["));
@@ -123,15 +123,15 @@ public class ClassUtilTests {
 
         assertEquals("  ", ClassUtil.getSimpleClassName("  "));
 
-        // ÆÕÍ¨Àà
+        // æ™®é€šç±»
         assertGetSimpleClassName("ClassUtil", new ClassUtil(), true);
         assertGetSimpleClassName("String", "hello", true);
 
-        // ÄÚÁªÀà
+        // å†…è”ç±»
         assertGetSimpleClassName("ClassUtilTests.Inner", new Inner(), true);
         assertGetSimpleClassName("ClassUtilTests$Inner", new Inner(), false);
 
-        // ÄÚÁªÀà/±¾µØÀà/ÄäÃûÀà
+        // å†…è”ç±»/æœ¬åœ°ç±»/åŒ¿åç±»
         assertGetSimpleClassName("ClassUtilTests.Inner", new Inner(), true);
         assertGetSimpleClassName("ClassUtilTests$Inner[]", new Inner[0], false);
 
@@ -150,7 +150,7 @@ public class ClassUtilTests {
         assertGetSimpleClassName("ClassUtilTests.2", anonymous, true);
         assertGetSimpleClassName("ClassUtilTests$2", anonymous, false);
 
-        // Êı×é
+        // æ•°ç»„
         assertGetSimpleClassName("int[]", new int[0], true);
         assertGetSimpleClassName("int[][]", new int[0][], true);
         assertGetSimpleClassName("long[]", new long[0], true);
@@ -171,7 +171,7 @@ public class ClassUtilTests {
         assertGetSimpleClassName("Map.Entry[]", new Map.Entry[0], true);
         assertGetSimpleClassName("Map$Entry[]", new Map.Entry[0], false);
 
-        // ·Ç·¨ÀàÃû
+        // éæ³•ç±»å
         assertEquals("", ClassUtil.getSimpleClassName(""));
         assertEquals("[", ClassUtil.getSimpleClassName("["));
         assertEquals("[[", ClassUtil.getSimpleClassName("[["));
@@ -278,7 +278,7 @@ public class ClassUtilTests {
         assertEquals("", ClassUtil.getPackageName((String) null));
         assertEquals("", ClassUtil.getPackageName("  "));
 
-        // Êı×é
+        // æ•°ç»„
         assertGetPackageName("", new int[0]);
         assertGetPackageName("", new int[0][]);
         assertGetPackageName("", new long[0]);
@@ -298,13 +298,13 @@ public class ClassUtilTests {
         assertGetPackageName("java.util", new List[0]);
         assertGetPackageName("java.util", new List[0][]);
 
-        // ·ÇÊı×é
+        // éæ•°ç»„
         assertGetPackageName("java.util", createArrayList());
         assertGetPackageName("com.alibaba.citrus.util", new ClassUtil());
         assertGetPackageName("com.alibaba.citrus.util", new Inner());
         assertGetPackageName("java.lang", new Integer[0]);
 
-        // ÄÚÁªÀà/±¾µØÀà/ÄäÃûÀà
+        // å†…è”ç±»/æœ¬åœ°ç±»/åŒ¿åç±»
         assertGetPackageName("com.alibaba.citrus.util", new Inner());
         assertGetPackageName("com.alibaba.citrus.util", new Inner[0]);
 
@@ -320,7 +320,7 @@ public class ClassUtilTests {
 
         assertGetPackageName("com.alibaba.citrus.util", anonymous);
 
-        // ·Ç·¨ÀàÃû
+        // éæ³•ç±»å
         assertEquals("", ClassUtil.getPackageName(""));
         assertEquals("", ClassUtil.getPackageName("["));
         assertEquals("", ClassUtil.getPackageName("[["));
@@ -343,9 +343,9 @@ public class ClassUtilTests {
     }
 
     // ==========================================================================
-    // È¡µÃÀàÃûºÍpackageÃûµÄresourceÃûµÄ·½·¨¡£                                      
+    // å–å¾—ç±»åå’Œpackageåçš„resourceåçš„æ–¹æ³•ã€‚                                      
     //  
-    // ºÍÀàÃû¡¢packageÃû²»Í¬µÄÊÇ£¬resourceÃû·ûºÏÎÄ¼şÃûÃüÃû¹æ·¶£¬ÀıÈç£º              
+    // å’Œç±»åã€packageåä¸åŒçš„æ˜¯ï¼Œresourceåç¬¦åˆæ–‡ä»¶åå‘½åè§„èŒƒï¼Œä¾‹å¦‚ï¼š              
     // java/lang/String.class                                                      
     // com/alibaba/commons/lang                                                    
     // etc.                                                                        
@@ -356,10 +356,10 @@ public class ClassUtilTests {
         // null
         assertNull(ClassUtil.getResourceNameForObjectClass(null));
 
-        // ·ÇÊı×é
+        // éæ•°ç»„
         assertEquals("java/util/ArrayList.class", ClassUtil.getResourceNameForObjectClass(createArrayList()));
 
-        // ÄÚÁªÀà
+        // å†…è”ç±»
         assertEquals("com/alibaba/citrus/util/ClassUtilTests$Inner.class",
                 ClassUtil.getResourceNameForObjectClass(new Inner()));
     }
@@ -369,10 +369,10 @@ public class ClassUtilTests {
         // null
         assertNull(ClassUtil.getResourceNameForClass((Class<?>) null));
 
-        // ·ÇÊı×é
+        // éæ•°ç»„
         assertEquals("java/util/ArrayList.class", ClassUtil.getResourceNameForClass(ArrayList.class));
 
-        // ÄÚÁªÀà
+        // å†…è”ç±»
         assertEquals("com/alibaba/citrus/util/ClassUtilTests$Inner.class",
                 ClassUtil.getResourceNameForClass(Inner.class));
     }
@@ -382,10 +382,10 @@ public class ClassUtilTests {
         // null
         assertNull(ClassUtil.getResourceNameForClass((String) null));
 
-        // ·ÇÊı×é
+        // éæ•°ç»„
         assertEquals("java/util/ArrayList.class", ClassUtil.getResourceNameForClass(ArrayList.class.getName()));
 
-        // ÄÚÁªÀà
+        // å†…è”ç±»
         assertEquals("com/alibaba/citrus/util/ClassUtilTests$Inner.class",
                 ClassUtil.getResourceNameForClass(Inner.class.getName()));
     }
@@ -418,7 +418,7 @@ public class ClassUtilTests {
     }
 
     // ==========================================================================
-    // È¡µÃÊı×éÀà¡£                                   
+    // å–å¾—æ•°ç»„ç±»ã€‚                                   
     // ==========================================================================
 
     @Test
@@ -460,7 +460,7 @@ public class ClassUtilTests {
     }
 
     // ==========================================================================
-    // È¡µÃÔ­×ÓÀàĞÍ»òÕßÆäwrapperÀà¡£                                   
+    // å–å¾—åŸå­ç±»å‹æˆ–è€…å…¶wrapperç±»ã€‚                                   
     // ==========================================================================
 
     @Test
@@ -556,7 +556,7 @@ public class ClassUtilTests {
     }
 
     // ==========================================================================
-    // ÀàĞÍÆ¥Åä¡£                                   
+    // ç±»å‹åŒ¹é…ã€‚                                   
     // ==========================================================================
 
     @Test
@@ -606,7 +606,7 @@ public class ClassUtilTests {
 
     @Test
     public void isAssignable_widening() {
-        // boolean¿ÉÒÔ½ÓÊÜ£ºboolean
+        // booleanå¯ä»¥æ¥å—ï¼šboolean
         assertTrue("boolean = boolean", ClassUtil.isAssignable(boolean.class, boolean.class));
         assertTrue("boolean = Boolean", ClassUtil.isAssignable(boolean.class, Boolean.class));
         assertFalse("boolean = char", ClassUtil.isAssignable(boolean.class, char.class));
@@ -624,7 +624,7 @@ public class ClassUtilTests {
         assertFalse("boolean = float", ClassUtil.isAssignable(boolean.class, float.class));
         assertFalse("boolean = Float", ClassUtil.isAssignable(boolean.class, Float.class));
 
-        // byte¿ÉÒÔ½ÓÊÜ£ºbyte
+        // byteå¯ä»¥æ¥å—ï¼šbyte
         assertFalse("byte = boolean", ClassUtil.isAssignable(byte.class, boolean.class));
         assertFalse("byte = Boolean", ClassUtil.isAssignable(byte.class, Boolean.class));
         assertFalse("byte = char", ClassUtil.isAssignable(byte.class, char.class));
@@ -642,7 +642,7 @@ public class ClassUtilTests {
         assertFalse("byte = float", ClassUtil.isAssignable(byte.class, float.class));
         assertFalse("byte = Float", ClassUtil.isAssignable(byte.class, Float.class));
 
-        // char¿ÉÒÔ½ÓÊÜ£ºchar
+        // charå¯ä»¥æ¥å—ï¼šchar
         assertFalse("char = boolean", ClassUtil.isAssignable(char.class, boolean.class));
         assertFalse("char = Boolean", ClassUtil.isAssignable(char.class, Boolean.class));
         assertTrue("char = char", ClassUtil.isAssignable(char.class, char.class));
@@ -660,7 +660,7 @@ public class ClassUtilTests {
         assertFalse("char = float", ClassUtil.isAssignable(char.class, float.class));
         assertFalse("char = Float", ClassUtil.isAssignable(char.class, Float.class));
 
-        // short¿ÉÒÔ½ÓÊÜ£ºshort, byte
+        // shortå¯ä»¥æ¥å—ï¼šshort, byte
         assertFalse("short = boolean", ClassUtil.isAssignable(short.class, boolean.class));
         assertFalse("short = Boolean", ClassUtil.isAssignable(short.class, Boolean.class));
         assertFalse("short = char", ClassUtil.isAssignable(short.class, char.class));
@@ -678,7 +678,7 @@ public class ClassUtilTests {
         assertFalse("short = float", ClassUtil.isAssignable(short.class, float.class));
         assertFalse("short = Float", ClassUtil.isAssignable(short.class, Float.class));
 
-        // int¿ÉÒÔ½ÓÊÜ£ºint¡¢byte¡¢short¡¢char
+        // intå¯ä»¥æ¥å—ï¼šintã€byteã€shortã€char
         assertFalse("int = boolean", ClassUtil.isAssignable(int.class, boolean.class));
         assertFalse("int = Boolean", ClassUtil.isAssignable(int.class, Boolean.class));
         assertTrue("int = char", ClassUtil.isAssignable(int.class, char.class));
@@ -696,7 +696,7 @@ public class ClassUtilTests {
         assertFalse("int = float", ClassUtil.isAssignable(int.class, float.class));
         assertFalse("int = Float", ClassUtil.isAssignable(int.class, Float.class));
 
-        // long¿ÉÒÔ½ÓÊÜ£ºlong¡¢int¡¢byte¡¢short¡¢char
+        // longå¯ä»¥æ¥å—ï¼šlongã€intã€byteã€shortã€char
         assertFalse("long = boolean", ClassUtil.isAssignable(long.class, boolean.class));
         assertFalse("long = Boolean", ClassUtil.isAssignable(long.class, Boolean.class));
         assertTrue("long = char", ClassUtil.isAssignable(long.class, char.class));
@@ -714,7 +714,7 @@ public class ClassUtilTests {
         assertFalse("long = float", ClassUtil.isAssignable(long.class, float.class));
         assertFalse("long = Float", ClassUtil.isAssignable(long.class, Float.class));
 
-        // float¿ÉÒÔ½ÓÊÜ£ºfloat, long, int, byte, short, char
+        // floatå¯ä»¥æ¥å—ï¼šfloat, long, int, byte, short, char
         assertFalse("float = boolean", ClassUtil.isAssignable(float.class, boolean.class));
         assertFalse("float = Boolean", ClassUtil.isAssignable(float.class, Boolean.class));
         assertTrue("float = char", ClassUtil.isAssignable(float.class, char.class));
@@ -732,7 +732,7 @@ public class ClassUtilTests {
         assertTrue("float = float", ClassUtil.isAssignable(float.class, float.class));
         assertTrue("float = Float", ClassUtil.isAssignable(float.class, Float.class));
 
-        // double¿ÉÒÔ½ÓÊÜ£ºdouble, float, long, int, byte, short, char
+        // doubleå¯ä»¥æ¥å—ï¼šdouble, float, long, int, byte, short, char
         assertFalse("double = boolean", ClassUtil.isAssignable(double.class, boolean.class));
         assertFalse("double = Boolean", ClassUtil.isAssignable(double.class, Boolean.class));
         assertTrue("double = char", ClassUtil.isAssignable(double.class, char.class));

@@ -27,7 +27,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * ÒÔÒ×¶ÁµÄ·½Ê½À´½âÎöºÍÏÔÊ¾×Ö½ÚÊý¡£
+ * ä»¥æ˜“è¯»çš„æ–¹å¼æ¥è§£æžå’Œæ˜¾ç¤ºå­—èŠ‚æ•°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -49,14 +49,14 @@ public class HumanReadableSize {
     }
 
     /**
-     * ½«Ò×¶ÁµÄ×Ö½ÚÊý×ª»»³ÉÕæÊµ×Ö½ÚÊý¡£
+     * å°†æ˜“è¯»çš„å­—èŠ‚æ•°è½¬æ¢æˆçœŸå®žå­—èŠ‚æ•°ã€‚
      * <ul>
-     * <li><code>1</code> ×ª»»³É <code>1</code>¡£</li>
-     * <li><code>1K</code> ×ª»»³É <code>1024</code>¡£</li>
-     * <li><code>1M</code> ×ª»»³É <code>1048576</code>¡£</li>
-     * <li><code>1G</code> ×ª»»³É <code>1073741824</code>¡£</li>
-     * <li><code>1T</code> ×ª»»³É <code>1099511627776</code>¡£</li>
-     * <li>Ö§³ÖÐ¡Êýµã£¬ÀýÈç£º<code>1.5K</code>¡£</li>
+     * <li><code>1</code> è½¬æ¢æˆ <code>1</code>ã€‚</li>
+     * <li><code>1K</code> è½¬æ¢æˆ <code>1024</code>ã€‚</li>
+     * <li><code>1M</code> è½¬æ¢æˆ <code>1048576</code>ã€‚</li>
+     * <li><code>1G</code> è½¬æ¢æˆ <code>1073741824</code>ã€‚</li>
+     * <li><code>1T</code> è½¬æ¢æˆ <code>1099511627776</code>ã€‚</li>
+     * <li>æ”¯æŒå°æ•°ç‚¹ï¼Œä¾‹å¦‚ï¼š<code>1.5K</code>ã€‚</li>
      * </ul>
      */
     public static long parse(String humanReadbleSize) {
@@ -89,14 +89,14 @@ public class HumanReadableSize {
     }
 
     /**
-     * ½«×Ö½ÚÊýÈ¡Õû£¬²¢×ª»»³ÉÒ×¶ÁµÄ¸ÅÒª×Ö½ÚÊý¡£
+     * å°†å­—èŠ‚æ•°å–æ•´ï¼Œå¹¶è½¬æ¢æˆæ˜“è¯»çš„æ¦‚è¦å­—èŠ‚æ•°ã€‚
      * <ul>
-     * <li><code>1</code>×ª»»³É<code>1</code>¡£</li>
-     * <li><code>1024</code>×ª»»³É<code>1K</code>¡£</li>
-     * <li><code>1048576</code>×ª»»³É<code>1M</code>¡£</li>
-     * <li><code>1073741824</code>×ª»»³É<code>1G</code>¡£</li>
-     * <li><code>1099511627776</code>×ª»»³É<code>1T</code>¡£</li>
-     * <li>Ð¡ÓÚ<code>0</code>µÄÒ»ÂÉ×ª»»³É<code>n/a</code>¡£</li>
+     * <li><code>1</code>è½¬æ¢æˆ<code>1</code>ã€‚</li>
+     * <li><code>1024</code>è½¬æ¢æˆ<code>1K</code>ã€‚</li>
+     * <li><code>1048576</code>è½¬æ¢æˆ<code>1M</code>ã€‚</li>
+     * <li><code>1073741824</code>è½¬æ¢æˆ<code>1G</code>ã€‚</li>
+     * <li><code>1099511627776</code>è½¬æ¢æˆ<code>1T</code>ã€‚</li>
+     * <li>å°äºŽ<code>0</code>çš„ä¸€å¾‹è½¬æ¢æˆ<code>n/a</code>ã€‚</li>
      * </ul>
      */
     public static String toHumanReadble(long size) {

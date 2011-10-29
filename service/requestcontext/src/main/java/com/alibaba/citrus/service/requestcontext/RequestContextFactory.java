@@ -18,15 +18,15 @@
 package com.alibaba.citrus.service.requestcontext;
 
 /**
- * ´´½¨request contextµÄ¹¤³§¡£
+ * åˆ›å»ºrequest contextçš„å·¥åŽ‚ã€‚
  * 
  * @author Michael Zhou
  */
 public interface RequestContextFactory<R extends RequestContext> extends RequestContextInfo<R> {
     /**
-     * °ü×°Ò»¸örequest context¡£
+     * åŒ…è£…ä¸€ä¸ªrequest contextã€‚
      * 
-     * @param wrappedContext ±»°ü×°µÄ<code>RequestContext</code>¶ÔÏó
+     * @param wrappedContext è¢«åŒ…è£…çš„<code>RequestContext</code>å¯¹è±¡
      * @return request context
      */
     R getRequestContextWrapper(RequestContext wrappedContext);

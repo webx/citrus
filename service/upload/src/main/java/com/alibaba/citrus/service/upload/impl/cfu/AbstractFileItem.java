@@ -56,15 +56,15 @@ import org.apache.commons.io.output.DeferredFileOutputStream;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ¸Ä½ø×Ô<code>commons-fileupload-1.2.1</code>µÄÍ¬ÃûÀà¡£
+ * æ”¹è¿›è‡ª<code>commons-fileupload-1.2.1</code>çš„åŒåç±»ã€‚
  * <p>
- * ½â¾öÁËÈçÏÂÎÊÌâ£º
+ * è§£å†³äº†å¦‚ä¸‹é—®é¢˜ï¼š
  * </p>
  * <ol>
- * <li>Ô­<code>DiskFileItem</code>Àà£¨ÒÔÏÂ¼ò³ÆÔ­Àà£©ÔÚ½âÎöform fieldµÄÖµÊ±£¬»áÀûÓÃ
- * <code>content-type</code>Í·²¿Ö¸¶¨µÄ<code>charset</code>ÖµÀ´¾ö¶¨Æä×Ö·û¼¯±àÂë¡£ÀıÈç£¬ÏÂÃæµÄ
- * <code>multipart/form-data</code>ÇëÇóÆ¬¶ÎÖ¸¶¨ÁËmyparam fieldÖµµÄ×Ö·û¼¯±àÂëÎª
- * <code>UTF-8</code>£º
+ * <li>åŸ<code>DiskFileItem</code>ç±»ï¼ˆä»¥ä¸‹ç®€ç§°åŸç±»ï¼‰åœ¨è§£æform fieldçš„å€¼æ—¶ï¼Œä¼šåˆ©ç”¨
+ * <code>content-type</code>å¤´éƒ¨æŒ‡å®šçš„<code>charset</code>å€¼æ¥å†³å®šå…¶å­—ç¬¦é›†ç¼–ç ã€‚ä¾‹å¦‚ï¼Œä¸‹é¢çš„
+ * <code>multipart/form-data</code>è¯·æ±‚ç‰‡æ®µæŒ‡å®šäº†myparam fieldå€¼çš„å­—ç¬¦é›†ç¼–ç ä¸º
+ * <code>UTF-8</code>ï¼š
  * 
  * <pre>
  * ----HttpUnit-part0-aSgQ2M
@@ -72,32 +72,32 @@ import com.alibaba.citrus.util.StringUtil;
  * Content-Type: text/plain; charset=UTF-8
  * </pre>
  * 
- * È»¶ø£¬³ıÁËµ¥Ôª²âÊÔËùÓÃµÄ<code>httpunit/servletunit</code>ÒÔÍâ£¬¼¸ºõÃ»ÓĞä¯ÀÀÆ÷»áÔÚÕâÀïÖ¸¶¨
- * <code>content-type</code>ÒÔ¼° <code>charset</code>¡£Òò´ËÔ­ÀàµÄ
- * <code>getString()</code>×ÜÊÇµÃ²»µ½½âÂëÕıÈ·µÄ×Ö·û´®¡£</li>
- * <li>Ô­Àà½«ÄÚÈİµÄ³¤¶È³¬¹ı<code>sizeThreshold</code>µÄ×Ö¶Î ¡ª¡ª ÎŞÂÛÆÕÍ¨µÄform fields»òÊÇÎÄ¼ş×Ö¶Î ¡ª¡ª
- * ¾ù´æÈëÎÄ¼ş ¡£ÕâÊÇÒ»ÖÖÓÅ»¯¡£È»¶øÔÚÄ³Ğ©Çé¿öÏÂ£¬ÎÒÃÇÏ£Íû¹Ø±ÕÕâÖÖÓÅ»¯ ¡ª¡ª ½« <code>sizeThreshold</code>ÉèÖÃ³É
- * <code>0</code> £¬ÒÔ±ãÈÃËùÓĞÉÏ´«ÎÄ¼şÎŞÂÛ´óĞ¡¶¼±»´æÈë´ÅÅÌ¡£È»¶øÈÔÈ»Ï£ÍûÆÕÍ¨µÄform fields±»±£´æÔÚÄÚ´æÀï¡£</li>
- * <li>´´½¨ÎÄ¼şÊ±£¬Ï£ÍûÄÜ×Ô¶¯´´½¨Ä¿Â¼¡£</li>
+ * ç„¶è€Œï¼Œé™¤äº†å•å…ƒæµ‹è¯•æ‰€ç”¨çš„<code>httpunit/servletunit</code>ä»¥å¤–ï¼Œå‡ ä¹æ²¡æœ‰æµè§ˆå™¨ä¼šåœ¨è¿™é‡ŒæŒ‡å®š
+ * <code>content-type</code>ä»¥åŠ <code>charset</code>ã€‚å› æ­¤åŸç±»çš„
+ * <code>getString()</code>æ€»æ˜¯å¾—ä¸åˆ°è§£ç æ­£ç¡®çš„å­—ç¬¦ä¸²ã€‚</li>
+ * <li>åŸç±»å°†å†…å®¹çš„é•¿åº¦è¶…è¿‡<code>sizeThreshold</code>çš„å­—æ®µ â€”â€” æ— è®ºæ™®é€šçš„form fieldsæˆ–æ˜¯æ–‡ä»¶å­—æ®µ â€”â€”
+ * å‡å­˜å…¥æ–‡ä»¶ ã€‚è¿™æ˜¯ä¸€ç§ä¼˜åŒ–ã€‚ç„¶è€Œåœ¨æŸäº›æƒ…å†µä¸‹ï¼Œæˆ‘ä»¬å¸Œæœ›å…³é—­è¿™ç§ä¼˜åŒ– â€”â€” å°† <code>sizeThreshold</code>è®¾ç½®æˆ
+ * <code>0</code> ï¼Œä»¥ä¾¿è®©æ‰€æœ‰ä¸Šä¼ æ–‡ä»¶æ— è®ºå¤§å°éƒ½è¢«å­˜å…¥ç£ç›˜ã€‚ç„¶è€Œä»ç„¶å¸Œæœ›æ™®é€šçš„form fieldsè¢«ä¿å­˜åœ¨å†…å­˜é‡Œã€‚</li>
+ * <li>åˆ›å»ºæ–‡ä»¶æ—¶ï¼Œå¸Œæœ›èƒ½è‡ªåŠ¨åˆ›å»ºç›®å½•ã€‚</li>
  * </ol>
  * <p>
- * ¾ßÌå¸Ä½øÁËÈçÏÂÄÚÈİ£º
+ * å…·ä½“æ”¹è¿›äº†å¦‚ä¸‹å†…å®¹ï¼š
  * </p>
  * <ul>
- * <li>ÀûÓÃ´«ÈëµÄ<code>charset</code>²ÎÊı£¬¶ø²»ÊÇ<code>content-type</code>À´½âÂëform
- * field¡£µ«¸Ã²ÎÊı¶ÔÓÚÎÄ¼şĞÍ×Ö¶ÎÎŞĞ§¡£</li>
- * <li>É¾³ı<code>getCharSet()</code>·½·¨£¬Ìí¼Ó<code>getCharset()</code>ºÍ
- * <code>setCharset()</code>·½·¨¡£</li>
- * <li>ĞŞ¸Ä<code>getString()</code>·½·¨£¬¶Ôform fieldÊ¹ÓÃÖ¸¶¨µÄ<code>charset</code>À´½âÂë¡£</li>
- * <li>Ìí¼Ó<code>keepFormFieldInMemory</code>ÊôĞÔ¡£</li>
- * <li>¸Ä½ø<code>getOutputStream()</code>·½·¨£¬£¬µ±
- * <code>keepFormFieldInMemory == true</code>Ê±£¬²»½«form fieldsĞ´ÈëÎÄ¼ş£¬¼´½«
- * <code>threshold</code>ÉèÖÃ³É<code>Integer.MAX_VALUE</code>¡£</li>
- * <li>ÀûÓÃ<code>File.createTempFile()</code>À´Éú³ÉÁÙÊ±ÎÄ¼ş£¬É¾³ıÔ­<code>getTempFile()</code>
- * ·½·¨£¬¼°Ïà¹ØµÄ<code>getUniqueId()</code>·½·¨¡¢<code>counter</code> field¡¢
- * <code>tempFile</code> field¡£</li>
- * <li>¸Ä½øwrite()·½·¨£¬µ±ÎÄ¼şÄ¿Â¼²»´æÔÚÊ±£¬´´½¨Ö®¡£</li>
- * <li>¸Ä½øtoString()·½·¨£¬Ê¹Ö®·µ»ØÎÄ¼şÃû£¬ÕâÖÖĞÎÊ½ÊÇÎªÁË·½±ãÒ³ÃæÒıÓÃ<code>FileItem</code>¶ÔÏó¡£</li>
+ * <li>åˆ©ç”¨ä¼ å…¥çš„<code>charset</code>å‚æ•°ï¼Œè€Œä¸æ˜¯<code>content-type</code>æ¥è§£ç form
+ * fieldã€‚ä½†è¯¥å‚æ•°å¯¹äºæ–‡ä»¶å‹å­—æ®µæ— æ•ˆã€‚</li>
+ * <li>åˆ é™¤<code>getCharSet()</code>æ–¹æ³•ï¼Œæ·»åŠ <code>getCharset()</code>å’Œ
+ * <code>setCharset()</code>æ–¹æ³•ã€‚</li>
+ * <li>ä¿®æ”¹<code>getString()</code>æ–¹æ³•ï¼Œå¯¹form fieldä½¿ç”¨æŒ‡å®šçš„<code>charset</code>æ¥è§£ç ã€‚</li>
+ * <li>æ·»åŠ <code>keepFormFieldInMemory</code>å±æ€§ã€‚</li>
+ * <li>æ”¹è¿›<code>getOutputStream()</code>æ–¹æ³•ï¼Œï¼Œå½“
+ * <code>keepFormFieldInMemory == true</code>æ—¶ï¼Œä¸å°†form fieldså†™å…¥æ–‡ä»¶ï¼Œå³å°†
+ * <code>threshold</code>è®¾ç½®æˆ<code>Integer.MAX_VALUE</code>ã€‚</li>
+ * <li>åˆ©ç”¨<code>File.createTempFile()</code>æ¥ç”Ÿæˆä¸´æ—¶æ–‡ä»¶ï¼Œåˆ é™¤åŸ<code>getTempFile()</code>
+ * æ–¹æ³•ï¼ŒåŠç›¸å…³çš„<code>getUniqueId()</code>æ–¹æ³•ã€<code>counter</code> fieldã€
+ * <code>tempFile</code> fieldã€‚</li>
+ * <li>æ”¹è¿›write()æ–¹æ³•ï¼Œå½“æ–‡ä»¶ç›®å½•ä¸å­˜åœ¨æ—¶ï¼Œåˆ›å»ºä¹‹ã€‚</li>
+ * <li>æ”¹è¿›toString()æ–¹æ³•ï¼Œä½¿ä¹‹è¿”å›æ–‡ä»¶åï¼Œè¿™ç§å½¢å¼æ˜¯ä¸ºäº†æ–¹ä¾¿é¡µé¢å¼•ç”¨<code>FileItem</code>å¯¹è±¡ã€‚</li>
  * </ul>
  * 
  * @author Michael Zhou
@@ -179,7 +179,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
     private FileItemHeaders headers;
 
     /**
-     * ÓÃÓÚ½âÂë×Ö¶ÎÖµµÄ×Ö·û¼¯±àÂë¡£
+     * ç”¨äºè§£ç å­—æ®µå€¼çš„å­—ç¬¦é›†ç¼–ç ã€‚
      */
     private String charset;
 
@@ -205,7 +205,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
      */
     public AbstractFileItem(String fieldName, String contentType, boolean isFormField, String fileName,
                             int sizeThreshold, boolean keepFormFieldInMemory, File repository) {
-        // ÉèÖÃÄ¬ÈÏÖµ
+        // è®¾ç½®é»˜è®¤å€¼
         if (sizeThreshold < 0) {
             sizeThreshold = 0;
         }
@@ -264,14 +264,14 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
     }
 
     /**
-     * È¡µÃµ±Ç°fieldµÄ×Ö·û¼¯±àÂë¡£
+     * å–å¾—å½“å‰fieldçš„å­—ç¬¦é›†ç¼–ç ã€‚
      */
     public String getCharset() {
         return charset;
     }
 
     /**
-     * ÉèÖÃµ±Ç°fieldµÄ×Ö·û¼¯±àÂë¡£
+     * è®¾ç½®å½“å‰fieldçš„å­—ç¬¦é›†ç¼–ç ã€‚
      */
     public void setCharset(String charset) {
         this.charset = charset;
@@ -370,16 +370,16 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
     }
 
     /**
-     * È¡µÃ×Ö¶Î»òÎÄ¼şµÄÄÚÈİ¡£
+     * å–å¾—å­—æ®µæˆ–æ–‡ä»¶çš„å†…å®¹ã€‚
      * <p>
-     * ¶ÔÓÚform field£¬½«Ê¹ÓÃ´«ÈëµÄ<code>charset</code>ËùÖ¸¶¨µÄ×Ö·û¼¯±àÂë¡£
+     * å¯¹äºform fieldï¼Œå°†ä½¿ç”¨ä¼ å…¥çš„<code>charset</code>æ‰€æŒ‡å®šçš„å­—ç¬¦é›†ç¼–ç ã€‚
      * </p>
      * <p>
-     * ¶ÔÓÚÎÄ¼ş£¬Ê¹ÓÃ¹Ì¶¨µÄ<code>ISO-8859-1</code>×Ö·û¼¯±àÂë¡£Èç¹ûÏëÒÔÆäËü±àÂëÀ´¶ÁÈ¡ÎÄ¼şÎÄ±¾£¬¿ÉÊ¹ÓÃ{@link
-     * getString(charset)} ·½·¨¡£
+     * å¯¹äºæ–‡ä»¶ï¼Œä½¿ç”¨å›ºå®šçš„<code>ISO-8859-1</code>å­—ç¬¦é›†ç¼–ç ã€‚å¦‚æœæƒ³ä»¥å…¶å®ƒç¼–ç æ¥è¯»å–æ–‡ä»¶æ–‡æœ¬ï¼Œå¯ä½¿ç”¨{@link
+     * getString(charset)} æ–¹æ³•ã€‚
      * </p>
      * 
-     * @return ×Ö¶ÎÖµ»òÎÄ¼şÎÄ±¾
+     * @return å­—æ®µå€¼æˆ–æ–‡ä»¶æ–‡æœ¬
      */
     public String getString() {
         byte[] rawdata = get();
@@ -424,7 +424,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
      * @throws Exception if an error occurs.
      */
     public void write(File file) throws Exception {
-        // ×Ô¶¯´´½¨Ä¿Â¼
+        // è‡ªåŠ¨åˆ›å»ºç›®å½•
         if (file != null) {
             file.getParentFile().mkdirs();
         }

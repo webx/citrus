@@ -39,9 +39,9 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ÓÃjexl±í´ïÊ½À´¼ÆËãÌõ¼ş¡£
+ * ç”¨jexlè¡¨è¾¾å¼æ¥è®¡ç®—æ¡ä»¶ã€‚
  * <p>
- * JEXLÓï·¨²Î¼û£º<a href="http://commons.apache.org/jexl/reference/syntax.html">JEXL
+ * JEXLè¯­æ³•å‚è§ï¼š<a href="http://commons.apache.org/jexl/reference/syntax.html">JEXL
  * Reference</a>
  * </p>
  * 

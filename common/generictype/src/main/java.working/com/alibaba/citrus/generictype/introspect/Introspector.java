@@ -25,7 +25,7 @@ import java.util.Map;
 import com.alibaba.citrus.generictype.TypeInfo;
 
 /**
- * ÓÃÀ´·ÖÎöÒ»¸öÀàĞÍµÄ·´ÉäĞÅÏ¢µÄ¹¤¾ß¡£
+ * ç”¨æ¥åˆ†æä¸€ä¸ªç±»å‹çš„åå°„ä¿¡æ¯çš„å·¥å…·ã€‚
  * 
  * @author Michael Zhou
  */
@@ -33,24 +33,24 @@ public abstract class Introspector {
     private final static Factory factory = newFactory();
 
     /**
-     * È¡µÃÀàĞÍ¶ÔÓ¦µÄ{@link Introspector}¡£
+     * å–å¾—ç±»å‹å¯¹åº”çš„{@link Introspector}ã€‚
      */
     public static Introspector getInstance(TypeInfo type) {
         return factory.getInstance(type);
     }
 
     /**
-     * È¡µÃËùÓĞµÄpropertiesĞÅÏ¢¡£
+     * å–å¾—æ‰€æœ‰çš„propertiesä¿¡æ¯ã€‚
      */
     public abstract Map<String, List<PropertyInfo>> getProperties();
 
     /**
-     * ²éÕÒÖ¸¶¨Ãû³Æ¡¢ÀàĞÍ¡¢¶ÁĞ´ÌØĞÔµÄsimple property¡£
+     * æŸ¥æ‰¾æŒ‡å®šåç§°ã€ç±»å‹ã€è¯»å†™ç‰¹æ€§çš„simple propertyã€‚
      * <p>
-     * Èç¹ûÎ´Ö¸¶¨ÀàĞÍ£¬±íÊ¾ÈÎÒâÀàĞÍ¡£Èç¹û¶ÁĞ´ÊôĞÔÎªfalse£¬±íÊ¾ÈÎÒâ¶ÁĞ´ÊôĞÔ¡£
+     * å¦‚æœæœªæŒ‡å®šç±»å‹ï¼Œè¡¨ç¤ºä»»æ„ç±»å‹ã€‚å¦‚æœè¯»å†™å±æ€§ä¸ºfalseï¼Œè¡¨ç¤ºä»»æ„è¯»å†™å±æ€§ã€‚
      * </p>
      * <p>
-     * Èç¹ûÕÒ²»µ½£¬Ôò·µ»Ø<code>null</code>¡£
+     * å¦‚æœæ‰¾ä¸åˆ°ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * </p>
      */
     public final SimplePropertyInfo findSimpleProperty(String propertyName, Class<?> type, boolean readable,
@@ -59,12 +59,12 @@ public abstract class Introspector {
     }
 
     /**
-     * ²éÕÒÖ¸¶¨Ãû³Æ¡¢ÀàĞÍ¡¢¶ÁĞ´ÌØĞÔµÄindexed property¡£
+     * æŸ¥æ‰¾æŒ‡å®šåç§°ã€ç±»å‹ã€è¯»å†™ç‰¹æ€§çš„indexed propertyã€‚
      * <p>
-     * Èç¹ûÎ´Ö¸¶¨ÀàĞÍ£¬±íÊ¾ÈÎÒâÀàĞÍ¡£Èç¹û¶ÁĞ´ÊôĞÔÎªfalse£¬±íÊ¾ÈÎÒâ¶ÁĞ´ÊôĞÔ¡£
+     * å¦‚æœæœªæŒ‡å®šç±»å‹ï¼Œè¡¨ç¤ºä»»æ„ç±»å‹ã€‚å¦‚æœè¯»å†™å±æ€§ä¸ºfalseï¼Œè¡¨ç¤ºä»»æ„è¯»å†™å±æ€§ã€‚
      * </p>
      * <p>
-     * Èç¹ûÕÒ²»µ½£¬Ôò·µ»Ø<code>null</code>¡£
+     * å¦‚æœæ‰¾ä¸åˆ°ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * </p>
      */
     public final IndexedPropertyInfo findIndexedProperty(String propertyName, Class<?> type, boolean readable,
@@ -73,12 +73,12 @@ public abstract class Introspector {
     }
 
     /**
-     * ²éÕÒÖ¸¶¨Ãû³Æ¡¢ÀàĞÍ¡¢¶ÁĞ´ÌØĞÔµÄmapped property¡£
+     * æŸ¥æ‰¾æŒ‡å®šåç§°ã€ç±»å‹ã€è¯»å†™ç‰¹æ€§çš„mapped propertyã€‚
      * <p>
-     * Èç¹ûÎ´Ö¸¶¨ÀàĞÍ£¬±íÊ¾ÈÎÒâÀàĞÍ¡£Èç¹û¶ÁĞ´ÊôĞÔÎªfalse£¬±íÊ¾ÈÎÒâ¶ÁĞ´ÊôĞÔ¡£
+     * å¦‚æœæœªæŒ‡å®šç±»å‹ï¼Œè¡¨ç¤ºä»»æ„ç±»å‹ã€‚å¦‚æœè¯»å†™å±æ€§ä¸ºfalseï¼Œè¡¨ç¤ºä»»æ„è¯»å†™å±æ€§ã€‚
      * </p>
      * <p>
-     * Èç¹ûÕÒ²»µ½£¬Ôò·µ»Ø<code>null</code>¡£
+     * å¦‚æœæ‰¾ä¸åˆ°ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * </p>
      */
     public final MappedPropertyInfo findMappedProperty(String propertyName, Class<?> type, boolean readable,
@@ -87,12 +87,12 @@ public abstract class Introspector {
     }
 
     /**
-     * ²éÕÒÖ¸¶¨Ãû³Æ¡¢ÀàĞÍ¡¢¶ÁĞ´ÌØĞÔµÄproperty¡£
+     * æŸ¥æ‰¾æŒ‡å®šåç§°ã€ç±»å‹ã€è¯»å†™ç‰¹æ€§çš„propertyã€‚
      * <p>
-     * Èç¹ûÎ´Ö¸¶¨ÀàĞÍ£¬±íÊ¾ÈÎÒâÀàĞÍ¡£Èç¹û¶ÁĞ´ÊôĞÔÎªfalse£¬±íÊ¾ÈÎÒâ¶ÁĞ´ÊôĞÔ¡£
+     * å¦‚æœæœªæŒ‡å®šç±»å‹ï¼Œè¡¨ç¤ºä»»æ„ç±»å‹ã€‚å¦‚æœè¯»å†™å±æ€§ä¸ºfalseï¼Œè¡¨ç¤ºä»»æ„è¯»å†™å±æ€§ã€‚
      * </p>
      * <p>
-     * Èç¹ûÕÒ²»µ½£¬Ôò·µ»Ø<code>null</code>¡£
+     * å¦‚æœæ‰¾ä¸åˆ°ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * </p>
      */
     private <T extends PropertyInfo> T findProperty(Class<T> propertyType, String propertyName, Class<?> type,
@@ -127,14 +127,14 @@ public abstract class Introspector {
     }
 
     /**
-     * ÓÃÓÚ´´½¨{@link Introspector}¡£
+     * ç”¨äºåˆ›å»º{@link Introspector}ã€‚
      */
     protected static interface Factory {
         Introspector getInstance(TypeInfo type);
     }
 
     /**
-     * ´´½¨factory£¬µ«±ÜÃâÔÚcompileÊ±¿ÌÒÀÀµimpl package¡£
+     * åˆ›å»ºfactoryï¼Œä½†é¿å…åœ¨compileæ—¶åˆ»ä¾èµ–impl packageã€‚
      */
     private static Factory newFactory() {
         String factoryImplName = Factory.class.getPackage().getName() + ".impl.IntrospectorImpl$FactoryImpl";

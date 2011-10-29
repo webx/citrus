@@ -40,7 +40,7 @@ import com.alibaba.citrus.util.i18n.LocaleInfo;
 import com.alibaba.citrus.util.i18n.LocaleUtil;
 
 /**
- * <code>SetLocaleRequestContext</code>µÄÊµÏÖ¡£
+ * <code>SetLocaleRequestContext</code>çš„å®ç°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -55,9 +55,9 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
     private Locale locale;
 
     /**
-     * °ü×°Ò»¸ö<code>RequestContext</code>¶ÔÏó¡£
+     * åŒ…è£…ä¸€ä¸ª<code>RequestContext</code>å¯¹è±¡ã€‚
      * 
-     * @param wrappedContext ±»°ü×°µÄ<code>RequestContext</code>
+     * @param wrappedContext è¢«åŒ…è£…çš„<code>RequestContext</code>
      */
     public SetLocaleRequestContextImpl(RequestContext wrappedContext) {
         super(wrappedContext);
@@ -90,49 +90,49 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
     }
 
     /**
-     * È¡µÃcontent type¡£
+     * å–å¾—content typeã€‚
      * 
-     * @return content type£¬°üÀ¨charsetµÄ¶¨Òå
+     * @return content typeï¼ŒåŒ…æ‹¬charsetçš„å®šä¹‰
      */
     public String getResponseContentType() {
         return ((ResponseWrapper) getResponse()).getContentType();
     }
 
     /**
-     * ÉèÖÃcontent type¡£ Èç¹ûcontent type²»°üº¬charset£¬²¢ÇÒ
-     * <code>getCharacterEncoding</code>±»ÉèÖÃ£¬Ôò¼ÓÉÏcharset±ê¼Ç¡£
+     * è®¾ç½®content typeã€‚ å¦‚æœcontent typeä¸åŒ…å«charsetï¼Œå¹¶ä¸”
+     * <code>getCharacterEncoding</code>è¢«è®¾ç½®ï¼Œåˆ™åŠ ä¸Šcharsetæ ‡è®°ã€‚
      * <p>
-     * Èç¹û<code>appendCharset</code>Îª<code>false</code>£¬Ôòcontent
-     * typeÖĞ½«²»°üº¬charset±ê¼Ç¡£
+     * å¦‚æœ<code>appendCharset</code>ä¸º<code>false</code>ï¼Œåˆ™content
+     * typeä¸­å°†ä¸åŒ…å«charsetæ ‡è®°ã€‚
      * </p>
      * 
      * @param contentType content type
-     * @param appendCharset Êä³ö×Ö·û¼¯
+     * @param appendCharset è¾“å‡ºå­—ç¬¦é›†
      */
     public void setResponseContentType(String contentType, boolean appendCharset) {
         ((ResponseWrapper) getResponse()).setContentType(contentType, appendCharset);
     }
 
     /**
-     * ÉèÖÃresponseÊä³ö×Ö·û¼¯¡£×¢Òâ£¬´Ë·½·¨±ØĞëÔÚµÚÒ»´Î<code>getWriter</code>Ö®Ç°Ö´ĞĞ¡£
+     * è®¾ç½®responseè¾“å‡ºå­—ç¬¦é›†ã€‚æ³¨æ„ï¼Œæ­¤æ–¹æ³•å¿…é¡»åœ¨ç¬¬ä¸€æ¬¡<code>getWriter</code>ä¹‹å‰æ‰§è¡Œã€‚
      * 
-     * @param charset Êä³ö×Ö·û¼¯£¬Èç¹ûcharsetÎª<code>null</code>
-     *            £¬Ôò´ÓcontentTypeÖĞÉ¾³ıcharset±ê¼Ç
+     * @param charset è¾“å‡ºå­—ç¬¦é›†ï¼Œå¦‚æœcharsetä¸º<code>null</code>
+     *            ï¼Œåˆ™ä»contentTypeä¸­åˆ é™¤charsetæ ‡è®°
      */
     public void setResponseCharacterEncoding(String charset) {
         ((ResponseWrapper) getResponse()).setCharacterEncoding(charset);
     }
 
     /**
-     * ÉèÖÃlocale¡£
+     * è®¾ç½®localeã€‚
      */
     @Override
     public void prepare() {
-        // Ê×ÏÈ´ÓsessionÖĞÈ¡µÃinput charset£¬²¢ÉèÖÃµ½requestÖĞ£¬ÒÔ±ã½øÒ»²½½âÎörequest parameters¡£
+        // é¦–å…ˆä»sessionä¸­å–å¾—input charsetï¼Œå¹¶è®¾ç½®åˆ°requestä¸­ï¼Œä»¥ä¾¿è¿›ä¸€æ­¥è§£ærequest parametersã€‚
         LocaleInfo locale = getLocaleFromSession();
 
         try {
-            // ÊÔÍ¼´ÓqueryStringÖĞÈ¡µÃinputCharset
+            // è¯•å›¾ä»queryStringä¸­å–å¾—inputCharset
             String queryString = getRequest().getQueryString();
             String inputCharset = locale.getCharset().name();
 
@@ -167,9 +167,9 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
             }
         }
 
-        // ´ÓparameterÖĞÈ¡localeĞÅÏ¢£¬Èç¹û´æÔÚ£¬ÔòÉèÖÃµ½cookieÖĞ¡£
+        // ä»parameterä¸­å–localeä¿¡æ¯ï¼Œå¦‚æœå­˜åœ¨ï¼Œåˆ™è®¾ç½®åˆ°cookieä¸­ã€‚
         if (PARAMETER_SET_TO_DEFAULT_VALUE.equalsIgnoreCase(getRequest().getParameter(paramKey))) {
-            HttpSession session = getRequest().getSession(false); // Èç¹ûsession²»´æÔÚ£¬Ò²²»ÓÃ´´½¨
+            HttpSession session = getRequest().getSession(false); // å¦‚æœsessionä¸å­˜åœ¨ï¼Œä¹Ÿä¸ç”¨åˆ›å»º
 
             if (session != null) {
                 session.removeAttribute(sessionKey);
@@ -179,7 +179,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
 
             log.debug("Reset OUTPUT locale:charset to " + locale);
         } else {
-            // ÊÔÍ¼´ÓqueryStringÖĞÈ¡µÃoutputCharset
+            // è¯•å›¾ä»queryStringä¸­å–å¾—outputCharset
             String queryString = getRequest().getQueryString();
             String outputCharset = null;
 
@@ -201,13 +201,13 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
                 }
             }
 
-            // Èç¹ûparameterÖĞÖ¸Ã÷ÁËlocale£¬ÔòÈ¡µÃ²¢±£´æÖ®
+            // å¦‚æœparameterä¸­æŒ‡æ˜äº†localeï¼Œåˆ™å–å¾—å¹¶ä¿å­˜ä¹‹
             LocaleInfo paramLocale = getLocaleFromParameter();
 
             if (paramLocale != null) {
                 getRequest().getSession().setAttribute(sessionKey, paramLocale.toString());
 
-                // ÓÃparameterÖĞµÄlocaleĞÅÏ¢¸²¸ÇcookieµÄĞÅÏ¢¡£
+                // ç”¨parameterä¸­çš„localeä¿¡æ¯è¦†ç›–cookieçš„ä¿¡æ¯ã€‚
                 locale = paramLocale;
             }
 
@@ -216,12 +216,12 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
             }
         }
 
-        // ÉèÖÃÓÃÓÚÊä³öµÄlocaleĞÅÏ¢¡£
+        // è®¾ç½®ç”¨äºè¾“å‡ºçš„localeä¿¡æ¯ã€‚
         getResponse().setLocale(locale.getLocale());
         setResponseCharacterEncoding(locale.getCharset().name());
         log.debug("Set OUTPUT locale:charset to " + locale);
 
-        // ÉèÖÃthread contextÖĞµÄlocaleĞÅÏ¢¡£
+        // è®¾ç½®thread contextä¸­çš„localeä¿¡æ¯ã€‚
         LocaleUtil.setContext(locale.getLocale(), locale.getCharset().name());
         log.debug("Set THREAD CONTEXT locale:charset to " + locale);
 
@@ -229,12 +229,12 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
     }
 
     /**
-     * ´Óµ±Ç°ÇëÇóµÄsessionÖĞÈ¡µÃÓÃ»§µÄlocaleÉèÖÃ¡£Èç¹ûsessionÎ´ÉèÖÃ£¬ÔòÈ¡Ä¬ÈÏÖµ¡£
+     * ä»å½“å‰è¯·æ±‚çš„sessionä¸­å–å¾—ç”¨æˆ·çš„localeè®¾ç½®ã€‚å¦‚æœsessionæœªè®¾ç½®ï¼Œåˆ™å–é»˜è®¤å€¼ã€‚
      * 
-     * @return µ±Ç°sessionÖĞµÄlocaleÉèÖÃ
+     * @return å½“å‰sessionä¸­çš„localeè®¾ç½®
      */
     private LocaleInfo getLocaleFromSession() {
-        HttpSession session = getRequest().getSession(false); // Èç¹ûsession²»´æÔÚ£¬Ò²²»ÓÃ´´½¨¡£
+        HttpSession session = getRequest().getSession(false); // å¦‚æœsessionä¸å­˜åœ¨ï¼Œä¹Ÿä¸ç”¨åˆ›å»ºã€‚
         String localeName = session == null ? null : (String) getRequest().getSession().getAttribute(sessionKey);
         LocaleInfo locale = null;
 
@@ -255,9 +255,9 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
     }
 
     /**
-     * ´Óµ±Ç°ÇëÇóµÄ²ÎÊıÖĞÈ¡µÃÓÃ»§µÄlocaleÉèÖÃ¡£Èç¹û²ÎÊıÎ´ÉèÖÃ£¬Ôò·µ»Ø<code>null</code>¡£
+     * ä»å½“å‰è¯·æ±‚çš„å‚æ•°ä¸­å–å¾—ç”¨æˆ·çš„localeè®¾ç½®ã€‚å¦‚æœå‚æ•°æœªè®¾ç½®ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @return µ±Ç°request parametersÖĞµÄlocaleÉèÖÃ
+     * @return å½“å‰request parametersä¸­çš„localeè®¾ç½®
      */
     private LocaleInfo getLocaleFromParameter() {
         String localeName = getRequest().getParameter(paramKey);
@@ -278,7 +278,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
     }
 
     /**
-     * °ü×°request¡£
+     * åŒ…è£…requestã€‚
      */
     private class RequestWrapper extends AbstractRequestWrapper {
         public RequestWrapper(HttpServletRequest request) {
@@ -292,7 +292,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
     }
 
     /**
-     * °ü×°response¡£
+     * åŒ…è£…responseã€‚
      */
     private class ResponseWrapper extends AbstractResponseWrapper {
         private String contentType;
@@ -303,9 +303,9 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
         }
 
         /**
-         * È¡µÃcontent type¡£
+         * å–å¾—content typeã€‚
          * 
-         * @return content type£¬°üÀ¨charsetµÄ¶¨Òå
+         * @return content typeï¼ŒåŒ…æ‹¬charsetçš„å®šä¹‰
          */
         @Override
         public String getContentType() {
@@ -313,8 +313,8 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
         }
 
         /**
-         * ÉèÖÃcontent type¡£ Èç¹ûcontent type²»°üº¬charset£¬²¢ÇÒ
-         * <code>getCharacterEncoding</code>±»ÉèÖÃ£¬Ôò¼ÓÉÏcharset±ê¼Ç¡£
+         * è®¾ç½®content typeã€‚ å¦‚æœcontent typeä¸åŒ…å«charsetï¼Œå¹¶ä¸”
+         * <code>getCharacterEncoding</code>è¢«è®¾ç½®ï¼Œåˆ™åŠ ä¸Šcharsetæ ‡è®°ã€‚
          * 
          * @param contentType content type
          */
@@ -324,34 +324,34 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
         }
 
         /**
-         * ÉèÖÃcontent type¡£ Èç¹ûcontent type²»°üº¬charset£¬²¢ÇÒ
-         * <code>getCharacterEncoding</code>±»ÉèÖÃ£¬Ôò¼ÓÉÏcharset±ê¼Ç¡£
+         * è®¾ç½®content typeã€‚ å¦‚æœcontent typeä¸åŒ…å«charsetï¼Œå¹¶ä¸”
+         * <code>getCharacterEncoding</code>è¢«è®¾ç½®ï¼Œåˆ™åŠ ä¸Šcharsetæ ‡è®°ã€‚
          * <p>
-         * Èç¹û<code>appendCharset</code>Îª<code>false</code>£¬Ôòcontent
-         * typeÖĞ½«²»°üº¬charset±ê¼Ç¡£
+         * å¦‚æœ<code>appendCharset</code>ä¸º<code>false</code>ï¼Œåˆ™content
+         * typeä¸­å°†ä¸åŒ…å«charsetæ ‡è®°ã€‚
          * </p>
          * 
          * @param contentType content type
-         * @param appendCharset Êä³ö×Ö·û¼¯
+         * @param appendCharset è¾“å‡ºå­—ç¬¦é›†
          */
         public void setContentType(String contentType, boolean appendCharset) {
-            // È¡µÃÖ¸¶¨contentTypeÖĞµÄ"; charset="²¿·Ö¡£
+            // å–å¾—æŒ‡å®šcontentTypeä¸­çš„"; charset="éƒ¨åˆ†ã€‚
             String charset = trimToNull(substringAfterLast(contentType, "charset="));
 
-            // Èç¹ûÎ´Ö¸¶¨charset£¬Ôò´Óthis.charsetÖĞÈ¡£¬ÕâÊÇÓÉsetCharacterEncoding·½·¨ËùÉèÖÃµÄ¡£
+            // å¦‚æœæœªæŒ‡å®šcharsetï¼Œåˆ™ä»this.charsetä¸­å–ï¼Œè¿™æ˜¯ç”±setCharacterEncodingæ–¹æ³•æ‰€è®¾ç½®çš„ã€‚
             if (charset == null) {
                 charset = this.charset;
             }
 
-            // ³ıÈ¥contentTypeÖĞµÄcharset²¿·Ö¡£
+            // é™¤å»contentTypeä¸­çš„charsetéƒ¨åˆ†ã€‚
             this.contentType = trimToNull(substringBefore(contentType, ";"));
 
-            // µ÷ÓÃsetCharacterEncoding·½·¨¼ÓÉÏcharset¡£
+            // è°ƒç”¨setCharacterEncodingæ–¹æ³•åŠ ä¸Šcharsetã€‚
             setCharacterEncoding(appendCharset ? charset : null);
         }
 
         /**
-         * È¡µÃresponseµÄÊä³ö×Ö·û¼¯¡£
+         * å–å¾—responseçš„è¾“å‡ºå­—ç¬¦é›†ã€‚
          */
         @Override
         public String getCharacterEncoding() {
@@ -359,10 +359,10 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
         }
 
         /**
-         * ÉèÖÃresponseÊä³ö×Ö·û¼¯¡£×¢Òâ£¬´Ë·½·¨±ØĞëÔÚµÚÒ»´Î<code>getWriter</code>Ö®Ç°Ö´ĞĞ¡£
+         * è®¾ç½®responseè¾“å‡ºå­—ç¬¦é›†ã€‚æ³¨æ„ï¼Œæ­¤æ–¹æ³•å¿…é¡»åœ¨ç¬¬ä¸€æ¬¡<code>getWriter</code>ä¹‹å‰æ‰§è¡Œã€‚
          * 
-         * @param charset Êä³ö×Ö·û¼¯£¬Èç¹ûcharsetÎª<code>null</code>
-         *            £¬Ôò´ÓcontentTypeÖĞÉ¾³ıcharset±ê¼Ç
+         * @param charset è¾“å‡ºå­—ç¬¦é›†ï¼Œå¦‚æœcharsetä¸º<code>null</code>
+         *            ï¼Œåˆ™ä»contentTypeä¸­åˆ é™¤charsetæ ‡è®°
          */
         @Override
         public void setCharacterEncoding(String charset) {
@@ -379,8 +379,8 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
 
                 super.setContentType(contentType);
             } else {
-                // ¼ÙÈçÃ»ÓĞÉèÖÃcontentType£¬È·±£charsetÈÔÈ»±»ÉèÖÃ¡£
-                // ÊÊÓÃÓÚServlet API 2.4¼°¸üĞÂ°æ¡£
+                // å‡å¦‚æ²¡æœ‰è®¾ç½®contentTypeï¼Œç¡®ä¿charsetä»ç„¶è¢«è®¾ç½®ã€‚
+                // é€‚ç”¨äºServlet API 2.4åŠæ›´æ–°ç‰ˆã€‚
                 try {
                     super.setCharacterEncoding(charset);
                 } catch (NoSuchMethodError e) {

@@ -29,7 +29,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ´ú±íÒ»¸öresource name patternµ½Ò»×éresource loaderµÄÓ³Éä¡£
+ * ä»£è¡¨ä¸€ä¸ªresource name patternåˆ°ä¸€ç»„resource loaderçš„æ˜ å°„ã€‚
  * 
  * @author Michael Zhou
  */
@@ -63,10 +63,10 @@ public class ResourceLoaderMapping extends ResourceMapping {
     public Resource getResource(ResourceLoaderContext context, Set<ResourceLoadingOption> options) {
         Resource firstResult = null;
 
-        // ²éÕÒËùÓĞµÄloader£º
-        // * ·µ»ØµÚÒ»¸ö´æÔÚµÄresource
-        // * ¼ÙÈçresource²»´æÔÚ£¬Ôò·µ»ØµÚÒ»¸ö·Ç¿ÕµÄresource¡£
-        //   ÀıÈç£¬file-loaderÔÚoption=FOR_CREATEÊ±£¬¿ÉÄÜ·µ»ØÒ»¸ö²»´æÔÚ£¬µ«¿É±»´´½¨µÄresource¡£
+        // æŸ¥æ‰¾æ‰€æœ‰çš„loaderï¼š
+        // * è¿”å›ç¬¬ä¸€ä¸ªå­˜åœ¨çš„resource
+        // * å‡å¦‚resourceä¸å­˜åœ¨ï¼Œåˆ™è¿”å›ç¬¬ä¸€ä¸ªéç©ºçš„resourceã€‚
+        //   ä¾‹å¦‚ï¼Œfile-loaderåœ¨option=FOR_CREATEæ—¶ï¼Œå¯èƒ½è¿”å›ä¸€ä¸ªä¸å­˜åœ¨ï¼Œä½†å¯è¢«åˆ›å»ºçš„resourceã€‚
         for (ResourceLoader loader : loaders) {
             Resource resource = loader.getResource(context, options);
 

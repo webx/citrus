@@ -42,7 +42,7 @@ import com.alibaba.citrus.springext.impl.SchemaImpl;
 import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
- * ½«Ò»×é<code>Schemas</code>ÕûºÏÔÚÒ»ÆğµÄ¼¯ºÏ¡£
+ * å°†ä¸€ç»„<code>Schemas</code>æ•´åˆåœ¨ä¸€èµ·çš„é›†åˆã€‚
  * 
  * @author Michael Zhou
  */
@@ -71,33 +71,33 @@ public class SchemaSet implements Schemas {
             }
         }, this.nameToSchemas.keySet());
 
-        // ¼ì²éËùÓĞschema£¬½«ÖØ¸´µÄincludeÌáµ½×îÉÏ²ã
+        // æ£€æŸ¥æ‰€æœ‰schemaï¼Œå°†é‡å¤çš„includeæåˆ°æœ€ä¸Šå±‚
         processIncludes();
     }
 
     /**
-     * ¼ì²éËùÓĞschema£¬½«ËùÓĞincludesÌáµ½×îÉÏ²ã¡£
+     * æ£€æŸ¥æ‰€æœ‰schemaï¼Œå°†æ‰€æœ‰includesæåˆ°æœ€ä¸Šå±‚ã€‚
      * <p>
-     * ÀıÈç£º
+     * ä¾‹å¦‚ï¼š
      * </p>
      * <ul>
-     * <li>all.xsd °üº¬ x.xsd ºÍ y.xsd</li>
-     * <li>x.xsd °üº¬ z.xsd</li>
-     * <li>y.xsd °üº¬ z.xsd</li>
+     * <li>all.xsd åŒ…å« x.xsd å’Œ y.xsd</li>
+     * <li>x.xsd åŒ…å« z.xsd</li>
+     * <li>y.xsd åŒ…å« z.xsd</li>
      * </ul>
      * <p>
-     * ÔÚÉÏÃæµÄÀı×ÓÖĞ£¬z.xsd±»°üº¬ÁËÁ½±é£¬µ¼ÖÂ½âÎö´íÎó¡£ ¸Ã·½·¨×öÈçÏÂ´¦Àí£¬´Ó¶ø±ÜÃâÁËÉÏÊöÎÊÌâ£º
+     * åœ¨ä¸Šé¢çš„ä¾‹å­ä¸­ï¼Œz.xsdè¢«åŒ…å«äº†ä¸¤éï¼Œå¯¼è‡´è§£æé”™è¯¯ã€‚ è¯¥æ–¹æ³•åšå¦‚ä¸‹å¤„ç†ï¼Œä»è€Œé¿å…äº†ä¸Šè¿°é—®é¢˜ï¼š
      * </p>
      * <ul>
-     * <li>all.xsd °üº¬ x.xsd£¬y.xsd and z.xsd</li>
-     * <li>x.xsd ²»°üº¬ z.xsd</li>
-     * <li>y.xsd ²»°üº¬ z.xsd</li>
+     * <li>all.xsd åŒ…å« x.xsdï¼Œy.xsd and z.xsd</li>
+     * <li>x.xsd ä¸åŒ…å« z.xsd</li>
+     * <li>y.xsd ä¸åŒ…å« z.xsd</li>
      * </ul>
      */
     private void processIncludes() {
-        // ËùÓĞ°üº¬ÁËincludeµÄ£¬²¢ÇÒ±»ÆäËüschemaËù°üº¬µÄschema£¬ÆäÒıÓÃĞèÒª±»ÒÆµ½×îÉÏ²ãµÄschemaÖĞ¡£
+        // æ‰€æœ‰åŒ…å«äº†includeçš„ï¼Œå¹¶ä¸”è¢«å…¶å®ƒschemaæ‰€åŒ…å«çš„schemaï¼Œå…¶å¼•ç”¨éœ€è¦è¢«ç§»åˆ°æœ€ä¸Šå±‚çš„schemaä¸­ã€‚
         for (Schema schema : createArrayList(nameToSchemas.values())) {
-            Map<String, Schema> allIncludes = getAllIncludes(schema); // Ö±½Ó»ò¼ä½ÓµÄËùÓĞincludes£¬°´ÒÀÀµË³ĞòÅÅÁĞ
+            Map<String, Schema> allIncludes = getAllIncludes(schema); // ç›´æ¥æˆ–é—´æ¥çš„æ‰€æœ‰includesï¼ŒæŒ‰ä¾èµ–é¡ºåºæ’åˆ—
             String[] allElements = getAllElements(schema, allIncludes.values());
             boolean withIndirectIncludes = false;
 
@@ -112,8 +112,8 @@ public class SchemaSet implements Schemas {
                 schema = setSchemaWithIncludes(schema, allIncludes);
             }
 
-            // ÊÕ¼¯µ±Ç°schemaµÄËùÓĞelements
-            // ÓÉÓÚ±íÖĞµÄschema¶ÔÏó¿ÉÄÜ±»Ìæ»»£¬ËùÒÔÔÚÕâÀïÈ·±£È¡µÃ×îĞÂµÄschema¶ÔÏó¡£
+            // æ”¶é›†å½“å‰schemaçš„æ‰€æœ‰elements
+            // ç”±äºè¡¨ä¸­çš„schemaå¯¹è±¡å¯èƒ½è¢«æ›¿æ¢ï¼Œæ‰€ä»¥åœ¨è¿™é‡Œç¡®ä¿å–å¾—æœ€æ–°çš„schemaå¯¹è±¡ã€‚
             Schema newSchema = nameToSchemas.get(schema.getName());
 
             if (newSchema instanceof SchemaInternal) {
@@ -161,15 +161,15 @@ public class SchemaSet implements Schemas {
     }
 
     /**
-     * È¡µÃËùÓĞµÄÖ±½Ó»ò¼ä½ÓµÄincludes¡£
+     * å–å¾—æ‰€æœ‰çš„ç›´æ¥æˆ–é—´æ¥çš„includesã€‚
      * <p>
-     * Ê¹ÓÃÉî¶ÈÓÅÏÈµÄËã·¨£¬±»includeµÄ×ÜÊÇÁĞÔÚ½ÏÇ°Ãæ¡£
+     * ä½¿ç”¨æ·±åº¦ä¼˜å…ˆçš„ç®—æ³•ï¼Œè¢«includeçš„æ€»æ˜¯åˆ—åœ¨è¾ƒå‰é¢ã€‚
      * </p>
      */
     private Map<String, Schema> getAllIncludes(Schema schema) {
         Map<String, Schema> includes = createLinkedHashMap();
         getAllIncludesDepthFirst(schema, includes);
-        includes.remove(schema.getName()); // ²»°üº¬×ÔÉí
+        includes.remove(schema.getName()); // ä¸åŒ…å«è‡ªèº«
         return includes;
     }
 
@@ -183,14 +183,14 @@ public class SchemaSet implements Schemas {
     }
 
     /**
-     * ²éÕÒinclude schema£¬ÈçÎ´ÕÒµ½£¬Å×Òì³£¡£
+     * æŸ¥æ‰¾include schemaï¼Œå¦‚æœªæ‰¾åˆ°ï¼ŒæŠ›å¼‚å¸¸ã€‚
      */
     private Schema findIncludedSchema(String include, String fromSchema) {
         return assertNotNull(findSchema(include), "Could not include schema \"%s\" in %s", include, fromSchema);
     }
 
     /**
-     * Ìí¼ÓÒ»¸öschema¡£
+     * æ·»åŠ ä¸€ä¸ªschemaã€‚
      */
     public void addSchema(Schema schema) {
         nameToSchemas.put(schema.getName(), schema);
@@ -198,14 +198,14 @@ public class SchemaSet implements Schemas {
     }
 
     /**
-     * È¡µÃÃû³ÆºÍschemaµÄÓ³Éä±í¡£
+     * å–å¾—åç§°å’Œschemaçš„æ˜ å°„è¡¨ã€‚
      */
     public Map<String, Schema> getNamedMappings() {
         return nameToSchemasUnmodifiable;
     }
 
     /**
-     * ²éÕÒsystemId¶ÔÓ¦µÄschema£¬ÈçÎ´ÕÒµ½£¬Ôò·µ»Ø<code>null</code>¡£
+     * æŸ¥æ‰¾systemIdå¯¹åº”çš„schemaï¼Œå¦‚æœªæ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     public Schema findSchema(String systemId) {
         systemId = assertNotNull(trimToNull(systemId), "systemId").replaceAll("\\\\", "/");

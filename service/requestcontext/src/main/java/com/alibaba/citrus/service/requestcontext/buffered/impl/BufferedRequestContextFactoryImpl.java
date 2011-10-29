@@ -22,15 +22,15 @@ import com.alibaba.citrus.service.requestcontext.buffered.BufferedRequestContext
 import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextFactory;
 
 /**
- * ´´½¨<code>BufferedRequestContext</code>µÄ¹¤³§¡£
+ * åˆ›å»º<code>BufferedRequestContext</code>çš„å·¥å‚ã€‚
  * 
  * @author Michael Zhou
  */
 public class BufferedRequestContextFactoryImpl extends AbstractRequestContextFactory<BufferedRequestContext> {
     /**
-     * °ü×°Ò»¸örequest context¡£
+     * åŒ…è£…ä¸€ä¸ªrequest contextã€‚
      * 
-     * @param wrappedContext ±»°ü×°µÄ<code>RequestContext</code>¶ÔÏó
+     * @param wrappedContext è¢«åŒ…è£…çš„<code>RequestContext</code>å¯¹è±¡
      * @return request context
      */
     public BufferedRequestContext getRequestContextWrapper(RequestContext wrappedContext) {
@@ -38,14 +38,14 @@ public class BufferedRequestContextFactoryImpl extends AbstractRequestContextFac
     }
 
     /**
-     * ±¾ÀàÌá¹©ÁËÑÓ³ÙÌá½»contentµÄ¹¦ÄÜ¡£
+     * æœ¬ç±»æä¾›äº†å»¶è¿Ÿæäº¤contentçš„åŠŸèƒ½ã€‚
      */
     public String[] getFeatures() {
         return new String[] { "lazyCommitContent" };
     }
 
     /**
-     * ±¾Àà²»ÒÀÀµÆäËüfeatures¡£
+     * æœ¬ç±»ä¸ä¾èµ–å…¶å®ƒfeaturesã€‚
      */
     public FeatureOrder[] featureOrders() {
         return null;

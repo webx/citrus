@@ -120,7 +120,7 @@ public class DataResolverServiceTests extends AbstractDataResolverTests {
         assertTrue(resolver0.resolve() instanceof HttpServletRequest);
         assertEquals("111", resolver1.resolve());
 
-        // °üº¬extraObject: MethodParameter
+        // åŒ…å«extraObject: MethodParameter
         MethodParameter param0 = resolver0.getContext().getExtraObject(MethodParameter.class);
         assertEquals(HttpServletRequest.class, param0.getParameterType());
         assertEquals(0, param0.getParameterIndex());

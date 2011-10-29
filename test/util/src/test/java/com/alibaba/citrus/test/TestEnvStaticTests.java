@@ -24,7 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * <code>TestEnvStatic</code>Ê¾Àý¡£
+ * <code>TestEnvStatic</code>ç¤ºä¾‹ã€‚
  * 
  * @author Michael Zhou
  */

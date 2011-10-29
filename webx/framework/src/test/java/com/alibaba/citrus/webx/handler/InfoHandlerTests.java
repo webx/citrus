@@ -43,14 +43,14 @@ public class InfoHandlerTests extends AbstractWebxTests {
 
         assertEquals(200, clientResponseCode);
 
-        // 包含home
+        // 鍖呭惈home
         assertThat(clientResponseContent, containsString("images/home1.gif\" alt=\"Home\" /> Home</a>"));
 
-        // 包含application home
+        // 鍖呭惈application home
         assertThat(clientResponseContent,
                 containsString("images/home2.gif\" alt=\"Application Home\" /> Application Home</a>"));
 
-        // 包含title
+        // 鍖呭惈title
         assertThat(clientResponseContent, containsString("<title>Request Info</title>"));
     }
 
@@ -60,14 +60,14 @@ public class InfoHandlerTests extends AbstractWebxTests {
 
         assertEquals(200, clientResponseCode);
 
-        // 包含home
+        // 鍖呭惈home
         assertThat(clientResponseContent, containsString("images/home1.gif\" alt=\"Home\" /> Home</a>"));
 
-        // 包含application home
+        // 鍖呭惈application home
         assertThat(clientResponseContent,
                 containsString("images/home2.gif\" alt=\"Application Home\" /> Application Home</a>"));
 
-        // 包含title
+        // 鍖呭惈title
         assertThat(clientResponseContent, containsString("<title>Environment Variables</title>"));
     }
 
@@ -77,14 +77,14 @@ public class InfoHandlerTests extends AbstractWebxTests {
 
         assertEquals(200, clientResponseCode);
 
-        // 包含home
+        // 鍖呭惈home
         assertThat(clientResponseContent, containsString("images/home1.gif\" alt=\"Home\" /> Home</a>"));
 
-        // 包含application home
+        // 鍖呭惈application home
         assertThat(clientResponseContent,
                 containsString("images/home2.gif\" alt=\"Application Home\" /> Application Home</a>"));
 
-        // 包含title
+        // 鍖呭惈title
         assertThat(clientResponseContent, containsString("<title>System Properties</title>"));
     }
 
@@ -94,14 +94,14 @@ public class InfoHandlerTests extends AbstractWebxTests {
 
         assertEquals(200, clientResponseCode);
 
-        // 包含home
+        // 鍖呭惈home
         assertThat(clientResponseContent, containsString("images/home1.gif\" alt=\"Home\" /> Home</a>"));
 
-        // 包含application home
+        // 鍖呭惈application home
         assertThat(clientResponseContent,
                 containsString("images/home2.gif\" alt=\"Application Home\" /> Application Home</a>"));
 
-        // 包含title
+        // 鍖呭惈title
         assertThat(clientResponseContent, containsString("<title>System Info</title>"));
     }
 }

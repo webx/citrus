@@ -38,7 +38,7 @@ import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionP
 import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 
 /**
- * <code>URIBroker</code>½âÎöÆ÷µÄ»ùÀà¡£
+ * <code>URIBroker</code>è§£æå™¨çš„åŸºç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -52,7 +52,7 @@ public class AbstractURIBrokerDefinitionParser<U extends URIBroker> extends Abst
 
     @Override
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
-        // bean attributes£¬ÊÊºÏÓÚÔÚspringÖĞÖ±½Ó´´½¨uri broker
+        // bean attributesï¼Œé€‚åˆäºåœ¨springä¸­ç›´æ¥åˆ›å»ºuri broker
         parseBeanDefinitionAttributes(element, parserContext, builder);
 
         doParseAttributes(element, parserContext, builder);

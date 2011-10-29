@@ -48,11 +48,11 @@ public class XsltFilterTests extends AbstractResourceLoadingTests {
     public void inMemory() throws Exception {
         Resource resource = resourceLoadingService.getResource("/myfolder/test.xml");
 
-        // ÒòÎªÃ»ÉèÖÃsaveTo£¬Òò´Ë²»¿ÉÒÔÈ¡µÃURLºÍFile¡£
+        // å› ä¸ºæ²¡è®¾ç½®saveToï¼Œå› æ­¤ä¸å¯ä»¥å–å¾—URLå’ŒFileã€‚
         assertNull(resource.getURL());
         assertNull(resource.getFile());
 
-        // ¼ì²é×ª»»µÄ½á¹û, ¶ÁÁ½±éÈÔÓ¦Õý³£
+        // æ£€æŸ¥è½¬æ¢çš„ç»“æžœ, è¯»ä¸¤éä»åº”æ­£å¸¸
         String output = normalizeString(StreamUtil.readText(resource.getInputStream(), "GB2312", true));
 
         output = normalizeString(StreamUtil.readText(resource.getInputStream(), "GB2312", true));
@@ -69,11 +69,11 @@ public class XsltFilterTests extends AbstractResourceLoadingTests {
     public void saveToFile() throws Exception {
         Resource resource = resourceLoadingService.getResource("/myfolder/test2.xml");
 
-        // ÒòÎªÉèÖÃÁËsaveToDir£¬Òò´Ë¿ÉÒÔÈ¡µÃURLºÍFile¡£
+        // å› ä¸ºè®¾ç½®äº†saveToDirï¼Œå› æ­¤å¯ä»¥å–å¾—URLå’ŒFileã€‚
         assertNotNull(resource.getURL());
         assertNotNull(resource.getFile());
 
-        // ¼ì²é×ª»»µÄ½á¹û
+        // æ£€æŸ¥è½¬æ¢çš„ç»“æžœ
         String output = normalizeString(StreamUtil.readText(resource.getInputStream(), "GB2312", true));
 
         output = normalizeString(StreamUtil.readText(resource.getInputStream(), "GB2312", true));
@@ -87,10 +87,10 @@ public class XsltFilterTests extends AbstractResourceLoadingTests {
     }
 
     /**
-     * ¹æ¸ñ»¯×Ö·û´®, °Ñ"\r\n"ºÍ"\r"»»³É"\n", ±ãÓÚ×Ö·û´®±È½Ï.
+     * è§„æ ¼åŒ–å­—ç¬¦ä¸², æŠŠ"\r\n"å’Œ"\r"æ¢æˆ"\n", ä¾¿äºŽå­—ç¬¦ä¸²æ¯”è¾ƒ.
      * 
-     * @param str ×Ö·û´®.
-     * @return ¹æ¸ñ»¯ºóµÄ×Ö·û´®.
+     * @param str å­—ç¬¦ä¸².
+     * @return è§„æ ¼åŒ–åŽçš„å­—ç¬¦ä¸².
      */
     public final String normalizeString(String str) {
         return str.replaceAll("\\r\\n?", "\n").replaceAll(">\\s*<", ">\n<");

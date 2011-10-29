@@ -38,7 +38,7 @@ import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 /**
- * Valve½âÎöÆ÷µÄ»ùÀà¡£
+ * Valveè§£æå™¨çš„åŸºç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -53,7 +53,7 @@ public abstract class AbstractValveDefinitionParser<V extends Valve> extends Abs
     }
 
     /**
-     * È¡µÃpipeline bean¡£
+     * å–å¾—pipeline beanã€‚
      */
     protected final Object parsePipeline(Element element, ParserContext parserContext) {
         return parsePipeline(element, null, parserContext);
@@ -65,8 +65,8 @@ public abstract class AbstractValveDefinitionParser<V extends Valve> extends Abs
 
     protected final Object parsePipeline(Element element, Element labelElement, ParserContext parserContext,
                                          String refAttribute) {
-        // pipeline¿ÉÒÔÊÇÒıÓÃ»ò×÷Îªinner-bean¡£
-        // ÒıÓÃpipelineÖ§³Ö×¢Èë²»Í¬scopeµÄpipeline£¬ÀıÈç£º×¢ÈëÒ»¸örequest scopeµÄpipeline scoped proxy¡£
+        // pipelineå¯ä»¥æ˜¯å¼•ç”¨æˆ–ä½œä¸ºinner-beanã€‚
+        // å¼•ç”¨pipelineæ”¯æŒæ³¨å…¥ä¸åŒscopeçš„pipelineï¼Œä¾‹å¦‚ï¼šæ³¨å…¥ä¸€ä¸ªrequest scopeçš„pipeline scoped proxyã€‚
         String pipelineRef = trimToNull(element.getAttribute(defaultIfNull(trimToNull(refAttribute), "pipeline-ref")));
 
         if (pipelineRef != null) {
@@ -76,8 +76,8 @@ public abstract class AbstractValveDefinitionParser<V extends Valve> extends Abs
         // parse pipeline as an inner-bean
         BeanDefinitionBuilder pipelineBuilder = BeanDefinitionBuilder.genericBeanDefinition(PipelineImpl.class);
 
-        // label attributeËùÔÚµÄelementÍ¨³£ÊÇºÍ¶¨Òå×ÓpipelineµÄelementÏàÍ¬µÄ£¬
-        // µ«ÊÇ¶ÔÓÚ¶à·ÖÖ§µÄ×Ópipeline£¬ÀıÈç£ºtry-catch-finally£¬choose-when-otherwiseµÈ£¬¿ÉÒÔ°Ñlabel¶¨ÒåÔÚ¶¥²ãelementÖĞ¡£
+        // label attributeæ‰€åœ¨çš„elementé€šå¸¸æ˜¯å’Œå®šä¹‰å­pipelineçš„elementç›¸åŒçš„ï¼Œ
+        // ä½†æ˜¯å¯¹äºå¤šåˆ†æ”¯çš„å­pipelineï¼Œä¾‹å¦‚ï¼štry-catch-finallyï¼Œchoose-when-otherwiseç­‰ï¼Œå¯ä»¥æŠŠlabelå®šä¹‰åœ¨é¡¶å±‚elementä¸­ã€‚
         if (labelElement == null) {
             labelElement = element;
         }
@@ -101,10 +101,10 @@ public abstract class AbstractValveDefinitionParser<V extends Valve> extends Abs
     }
 
     /**
-     * È¡µÃcondition bean¡£
+     * å–å¾—condition beanã€‚
      */
     protected final Object parseCondition(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
-        // ÏÈÊÔ´Ótest attributeÖĞ´´½¨jexl condition
+        // å…ˆè¯•ä»test attributeä¸­åˆ›å»ºjexl condition
         String jexl = trimToNull(element.getAttribute("test"));
 
         if (jexl != null) {
@@ -113,7 +113,7 @@ public abstract class AbstractValveDefinitionParser<V extends Valve> extends Abs
             return conditionBuilder.getBeanDefinition();
         }
 
-        // ÔÙÊÔ´Ócondition elementÖĞÈ¡µÃcondition
+        // å†è¯•ä»condition elementä¸­å–å¾—condition
         for (Element subElement : subElements(element)) {
             Object condition = parseConfigurationPointBean(subElement, conditionsConfigurationPoint, parserContext,
                     builder);

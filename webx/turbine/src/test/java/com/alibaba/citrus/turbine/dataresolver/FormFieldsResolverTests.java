@@ -38,7 +38,7 @@ public class FormFieldsResolverTests extends AbstractDataResolverTests {
 
     @Test
     public void getFields() throws Exception {
-        // ƒ¨»œ÷µ£∫skipIfInvalid=true
+        // ÈªòËÆ§ÂÄºÔºöskipIfInvalid=true
 
         // GET, empty form
         execute("action", "form.fields.myAction", "doGetFields", "");
@@ -58,7 +58,7 @@ public class FormFieldsResolverTests extends AbstractDataResolverTests {
         assertEquals("a", fieldArray[0].getStringValue());
         assertEquals("c", fieldArray[1].getStringValue());
 
-        // GET, invalid, but screen≤ª÷ß≥÷skip
+        // GET, invalid, but screen‰∏çÊîØÊåÅskip
         execute("screen", "form.fields.myScreen", "doGetFields", "_fm.m.aaa.f=&_fm.m.aaa.fi=" //
                 + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
         fieldArray = (Field[]) newRequest.getAttribute("screenLog");
@@ -73,7 +73,7 @@ public class FormFieldsResolverTests extends AbstractDataResolverTests {
     @Test
     @SuppressWarnings("unchecked")
     public void getFieldsDontSkipAction() throws Exception {
-        // ƒ¨»œ÷µ£∫skipIfInvalid=false
+        // ÈªòËÆ§ÂÄºÔºöskipIfInvalid=false
 
         // GET, invalid
         execute("action", "form.fields.myAction", "doGetFieldsDontSkipAction", "_fm.m.aaa.f=&_fm.m.aaa.fi=" //
@@ -101,7 +101,7 @@ public class FormFieldsResolverTests extends AbstractDataResolverTests {
 
     @Test
     public void getFieldsBeans() throws Exception {
-        // ƒ¨»œ÷µ£∫skipIfInvalid=true
+        // ÈªòËÆ§ÂÄºÔºöskipIfInvalid=true
 
         // GET, invalid
         execute("action", "form.fields.myAction", "doGetFieldsBeans", "_fm.m.aaa.f=&_fm.m.aaa.fi=" //
@@ -115,14 +115,14 @@ public class FormFieldsResolverTests extends AbstractDataResolverTests {
         assertNotNull(dataArray);
         assertArrayEquals(new int[] { 11, 21 }, dataArray);
 
-        // GET, valid£¨∂‡÷µ
+        // GET, validÔºåÂ§öÂÄº
         execute("action", "form.fields.myAction", "doGetFieldsBeans2", "_fm.m.aaa.f=11&_fm.m.aaa.f=12&_fm.m.aaa.fi=1" //
                 + "&_fm.m.bbb.f=21&_fm.m.bbb.f=22&_fm.m.bbb.fi=2");
         int[][] dataArray2 = (int[][]) newRequest.getAttribute("actionLog");
         assertNotNull(dataArray2);
         assertArrayEquals(new int[][] { { 11, 12 }, { 21, 22 } }, dataArray2);
 
-        // GET, invalid, but screen≤ª÷ß≥÷skip
+        // GET, invalid, but screen‰∏çÊîØÊåÅskip
         execute("screen", "form.fields.myScreenGetFieldsBeans", "doGetFieldsBeans", "_fm.m.aaa.f=&_fm.m.aaa.fi=" //
                 + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
         dataArray = (int[]) newRequest.getAttribute("screenLog");
@@ -132,7 +132,7 @@ public class FormFieldsResolverTests extends AbstractDataResolverTests {
     @Test
     @SuppressWarnings("unchecked")
     public void getFieldsBeans_dontSkipAction() throws Exception {
-        // ƒ¨»œ÷µ£∫skipIfInvalid=false
+        // ÈªòËÆ§ÂÄºÔºöskipIfInvalid=false
 
         // GET, invalid
         execute("action", "form.fields.myAction", "doGetFieldsBeansDontSkipAction", "_fm.m.aaa.f=&_fm.m.aaa.fi=" //
@@ -148,7 +148,7 @@ public class FormFieldsResolverTests extends AbstractDataResolverTests {
         assertNotNull(dataList);
         assertArrayEquals(new Object[] { 11L, 21L }, dataList.toArray());
 
-        // GET, valid£¨∂‡÷µ
+        // GET, validÔºåÂ§öÂÄº
         execute("action", "form.fields.myAction", "doGetFieldsBeansDontSkipAction2",
                 "_fm.m.aaa.f=11&_fm.m.aaa.f=12&_fm.m.aaa.fi=1" //
                         + "&_fm.m.bbb.f=21&_fm.m.bbb.f=22&_fm.m.bbb.fi=2");
@@ -159,7 +159,7 @@ public class FormFieldsResolverTests extends AbstractDataResolverTests {
 
     @Test
     public void getFieldInstance_bean_convertError_quiet() throws Exception {
-        // ƒ¨»œ÷µ£∫skipIfInvalid=true
+        // ÈªòËÆ§ÂÄºÔºöskipIfInvalid=true
 
         // GET, valid
         execute("action", "form.fields.myAction", "doGetFieldsBeans", "_fm.m.aaa.f=aa&_fm.m.aaa.f=12&_fm.m.aaa.fi=abc" //
@@ -171,7 +171,7 @@ public class FormFieldsResolverTests extends AbstractDataResolverTests {
 
     @Test
     public void getFieldInstance_bean_convertError_noisy() throws Exception {
-        // ƒ¨»œ÷µ£∫skipIfInvalid=true
+        // ÈªòËÆ§ÂÄºÔºöskipIfInvalid=true
         System.setProperty("convertQuiet", "false");
 
         try {

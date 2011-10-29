@@ -37,7 +37,7 @@ import com.alibaba.citrus.util.regex.MatchResultSubstitution;
 import com.alibaba.citrus.util.regex.Substitution;
 
 /**
- * ¸ù¾İservletPath + componentPath + pathInfoÀ´ÅĞ¶Ï¡£
+ * æ ¹æ®servletPath + componentPath + pathInfoæ¥åˆ¤æ–­ã€‚
  * 
  * @author Michael Zhou
  */

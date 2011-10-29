@@ -30,7 +30,7 @@ import com.alibaba.citrus.service.requestcontext.parser.ParameterValueFilter;
 import com.alibaba.citrus.springext.support.BeanSupport;
 
 /**
- * ¹ıÂË²ÎÊı¡£
+ * è¿‡æ»¤å‚æ•°ã€‚
  * 
  * @author Michael Zhou
  */

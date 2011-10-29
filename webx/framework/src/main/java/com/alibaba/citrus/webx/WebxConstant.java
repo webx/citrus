@@ -20,7 +20,7 @@ package com.alibaba.citrus.webx;
 import org.springframework.web.servlet.FrameworkServlet;
 
 /**
- * WebxÏà¹Ø³£Á¿¡£
+ * Webxç›¸å…³å¸¸é‡ã€‚
  * 
  * @author Michael Zhou
  */
@@ -29,8 +29,8 @@ public final class WebxConstant {
     public final static String WEBX_COMPONENT_CONFIGURATION_LOCATION_PATTERN = "/WEB-INF/webx-*.xml";
 
     /**
-     * ÓÃÓÚÔÚservlet contextÖĞ±£´æcomponent contextµÄattribute
-     * keyÇ°×º£¬¼æÈİFrameworkServlet¡£
+     * ç”¨äºåœ¨servlet contextä¸­ä¿å­˜component contextçš„attribute
+     * keyå‰ç¼€ï¼Œå…¼å®¹FrameworkServletã€‚
      */
     public final static String COMPONENT_CONTEXT_PREFIX = FrameworkServlet.SERVLET_CONTEXT_PREFIX;
 }

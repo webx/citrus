@@ -23,17 +23,17 @@ import javax.mail.Multipart;
 import javax.mail.internet.MimeMultipart;
 
 /**
- * ×ÔÊÊÓ¦µÄÓÊ¼şÄÚÈİ¡£
+ * è‡ªé€‚åº”çš„é‚®ä»¶å†…å®¹ã€‚
  * <p>
- * Í¨³£ÓÃÕâÖÖĞÎÊ½Í¬Ê±·¢ËÍÒ»¸öÓÊ¼şµÄ´¿ÎÄ±¾ºÍHTML°æ±¾£¬ÓÊ¼ş¿Í»§¶Ë»á×Ô¶¯Ñ¡ÔñÏÔÊ¾ÄÄÒ»¸ö°æ±¾¡£
- * Èç¹ûÒ»¸öÓÊ¼ş¿Í»§¶Ë²»Ö§³ÖHTML£¬ÓÃ»§½«¿´µ½´¿ÎÄ±¾µÄÓÊ¼ş¡£ÔÚÖ§³ÖHTMLµÄÆ½Ì¨ÉÏ£¬ÓÃ»§½«¿´µ½¸üÆ¯ÁÁµÄHTMLÓÊ¼ş¡£
+ * é€šå¸¸ç”¨è¿™ç§å½¢å¼åŒæ—¶å‘é€ä¸€ä¸ªé‚®ä»¶çš„çº¯æ–‡æœ¬å’ŒHTMLç‰ˆæœ¬ï¼Œé‚®ä»¶å®¢æˆ·ç«¯ä¼šè‡ªåŠ¨é€‰æ‹©æ˜¾ç¤ºå“ªä¸€ä¸ªç‰ˆæœ¬ã€‚
+ * å¦‚æœä¸€ä¸ªé‚®ä»¶å®¢æˆ·ç«¯ä¸æ”¯æŒHTMLï¼Œç”¨æˆ·å°†çœ‹åˆ°çº¯æ–‡æœ¬çš„é‚®ä»¶ã€‚åœ¨æ”¯æŒHTMLçš„å¹³å°ä¸Šï¼Œç”¨æˆ·å°†çœ‹åˆ°æ›´æ¼‚äº®çš„HTMLé‚®ä»¶ã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public class AlternativeMultipartContent extends MultipartContent {
     /**
-     * È¡µÃ<code>Multipart</code>µÄÊµÏÖ¡£
+     * å–å¾—<code>Multipart</code>çš„å®ç°ã€‚
      */
     @Override
     protected Multipart getMultipart() {

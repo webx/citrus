@@ -23,7 +23,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>Flags</code>¡£
+ * æµ‹è¯•<code>Flags</code>ã€‚
  * 
  * @author Michael Zhou
  */

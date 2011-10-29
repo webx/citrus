@@ -23,7 +23,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ´ú±ísessionÖĞµÄÒ»¸öÊôĞÔ¡£
+ * ä»£è¡¨sessionä¸­çš„ä¸€ä¸ªå±æ€§ã€‚
  * 
  * @author Michael Zhou
  */
@@ -38,9 +38,9 @@ public class SessionAttribute {
     private boolean modified;
 
     /**
-     * ´´½¨Ò»¸öattribute¡£
+     * åˆ›å»ºä¸€ä¸ªattributeã€‚
      * 
-     * @param name attributeµÄÃû³Æ
+     * @param name attributeçš„åç§°
      */
     public SessionAttribute(String name, SessionImpl session, String storeName, StoreContext storeContext) {
         this.name = name;
@@ -51,18 +51,18 @@ public class SessionAttribute {
     }
 
     /**
-     * È¡µÃattributeµÄÃû×Ö¡£
+     * å–å¾—attributeçš„åå­—ã€‚
      * 
-     * @return attributeµÄÃû×Ö
+     * @return attributeçš„åå­—
      */
     public String getName() {
         return name;
     }
 
     /**
-     * È¡µÃattributeµÄÖµ¡£
+     * å–å¾—attributeçš„å€¼ã€‚
      * 
-     * @return attributeµÄÖµ
+     * @return attributeçš„å€¼
      */
     public Object getValue() {
         if (!loaded && !modified) {
@@ -74,12 +74,12 @@ public class SessionAttribute {
     }
 
     /**
-     * ÉèÖÃattributeµÄÖµ¡£
+     * è®¾ç½®attributeçš„å€¼ã€‚
      * <p>
-     * µ±ÖµÎª<code>null</code>Ê±£¬±íÊ¾¸ÃÊôĞÔ½«±»É¾³ı¡£
+     * å½“å€¼ä¸º<code>null</code>æ—¶ï¼Œè¡¨ç¤ºè¯¥å±æ€§å°†è¢«åˆ é™¤ã€‚
      * </p>
      * 
-     * @param value attributeµÄÖµ
+     * @param value attributeçš„å€¼
      */
     public void setValue(Object value) {
         this.value = value;
@@ -87,9 +87,9 @@ public class SessionAttribute {
     }
 
     /**
-     * ½ö½öÉèÖÃattributeÖµ£¬µ«²»¸Ä±äÆämodified±êÖ¾¡£
+     * ä»…ä»…è®¾ç½®attributeå€¼ï¼Œä½†ä¸æ”¹å˜å…¶modifiedæ ‡å¿—ã€‚
      * <p>
-     * ÓÃÓÚÉèÖÃsession model¡£
+     * ç”¨äºè®¾ç½®session modelã€‚
      * </p>
      */
     void updateValue(Object value) {
@@ -97,27 +97,27 @@ public class SessionAttribute {
     }
 
     /**
-     * ÖµÊÇ·ñ±»¸Ä±ä¡£
+     * å€¼æ˜¯å¦è¢«æ”¹å˜ã€‚
      * 
-     * @return Èç¹û±»¸Ä±ä£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚æœè¢«æ”¹å˜ï¼Œåˆ™è¿”å›<code>true</code>
      */
     public boolean isModified() {
         return modified;
     }
 
     /**
-     * È¡µÃstoreÃû³Æ¡£
+     * å–å¾—storeåç§°ã€‚
      * 
-     * @return storeµÄÃû³Æ
+     * @return storeçš„åç§°
      */
     public String getStoreName() {
         return storeName;
     }
 
     /**
-     * È¡µÃstore¡£
+     * å–å¾—storeã€‚
      * 
-     * @return <code>SessionStore</code>ÊµÀı
+     * @return <code>SessionStore</code>å®ä¾‹
      */
     public SessionStore getStore() {
         return store;

@@ -36,8 +36,8 @@ import com.alibaba.citrus.service.upload.impl.cfu.ServletFileUpload;
 import com.alibaba.citrus.util.HumanReadableSize;
 
 /**
- * Õâ¸öservice¿ÉÒÔ´¦Àí<code>multipart/form-data</code>¸ñÊ½µÄHTTP
- * POSTÇëÇó£¬²¢½«ËüÃÇ×ª»»³Éform×Ö¶Î»òÊÇÎÄ¼ş¡£
+ * è¿™ä¸ªserviceå¯ä»¥å¤„ç†<code>multipart/form-data</code>æ ¼å¼çš„HTTP
+ * POSTè¯·æ±‚ï¼Œå¹¶å°†å®ƒä»¬è½¬æ¢æˆformå­—æ®µæˆ–æ˜¯æ–‡ä»¶ã€‚
  * 
  * @author Michael Zhou
  */
@@ -102,42 +102,42 @@ public class UploadServiceImpl extends AbstractService<UploadService> implements
     }
 
     /**
-     * ÅĞ¶ÏÊÇ·ñÊÇ·ûºÏ<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>±ê×¼µÄ
-     * <code>multipart/form-data</code>ÀàĞÍµÄHTTPÇëÇó¡£
+     * åˆ¤æ–­æ˜¯å¦æ˜¯ç¬¦åˆ<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>æ ‡å‡†çš„
+     * <code>multipart/form-data</code>ç±»å‹çš„HTTPè¯·æ±‚ã€‚
      * 
-     * @param request HTTPÇëÇó
-     * @return Èç¹ûÊÇ£¬Ôò·µ»Ø<code>true</code>
+     * @param request HTTPè¯·æ±‚
+     * @return å¦‚æœæ˜¯ï¼Œåˆ™è¿”å›<code>true</code>
      */
     public boolean isMultipartContent(HttpServletRequest request) {
         return org.apache.commons.fileupload.servlet.ServletFileUpload.isMultipartContent(request);
     }
 
     /**
-     * ½âÎö·ûºÏ<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>±ê×¼µÄ
-     * <code>multipart/form-data</code>ÀàĞÍµÄHTTPÇëÇó¡£
+     * è§£æç¬¦åˆ<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>æ ‡å‡†çš„
+     * <code>multipart/form-data</code>ç±»å‹çš„HTTPè¯·æ±‚ã€‚
      * 
-     * @param request HTTPÇëÇó
-     * @return <code>FileItem</code>µÄÁĞ±í£¬°´ÆäÊäÈëµÄË³ĞòÂŞÁĞ
-     * @throws UploadException Èç¹û½âÎöÊ±³ö´í
+     * @param request HTTPè¯·æ±‚
+     * @return <code>FileItem</code>çš„åˆ—è¡¨ï¼ŒæŒ‰å…¶è¾“å…¥çš„é¡ºåºç½—åˆ—
+     * @throws UploadException å¦‚æœè§£ææ—¶å‡ºé”™
      */
     public FileItem[] parseRequest(HttpServletRequest request) {
         return parseRequest(request, null);
     }
 
     /**
-     * ½âÎö·ûºÏ<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>±ê×¼µÄ
-     * <code>multipart/form-data</code>ÀàĞÍµÄHTTPÇëÇó¡£
+     * è§£æç¬¦åˆ<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>æ ‡å‡†çš„
+     * <code>multipart/form-data</code>ç±»å‹çš„HTTPè¯·æ±‚ã€‚
      * <p>
-     * ´Ë·½·¨¸²¸ÇÁËserviceµÄÄ¬ÈÏÉèÖÃ£¬ÊÊºÏÓÚÔÚaction»òservletÖĞÊÖ¹¤Ö´ĞĞ¡£
+     * æ­¤æ–¹æ³•è¦†ç›–äº†serviceçš„é»˜è®¤è®¾ç½®ï¼Œé€‚åˆäºåœ¨actionæˆ–servletä¸­æ‰‹å·¥æ‰§è¡Œã€‚
      * </p>
      * 
-     * @param request HTTPÇëÇó
-     * @param sizeThreshold ÎÄ¼ş·ÅÔÚÄÚ´æÖĞµÄãĞÖµ£¬Ğ¡ÓÚ´ËÖµµÄÎÄ¼ş±»±£´æÔÚÄÚ´æÖĞ¡£Èç¹û´ËÖµĞ¡ÓÚ0£¬ÔòÊ¹ÓÃÔ¤ÉèµÄÖµ
-     * @param sizeMax HTTPÇëÇóµÄ×î´ó³ß´ç£¬³¬¹ı´Ë³ß´çµÄÇëÇó½«±»Å×Æú¡£
-     * @param repositoryPath Ôİ´æÉÏÔØÎÄ¼şµÄ¾ø¶ÔÂ·¾¶
-     * @param charset ÓÃÀ´½âÎöHTTP headerµÄ±àÂë×Ö·û¼¯
-     * @return <code>FileItem</code>µÄÁĞ±í£¬°´ÆäÊäÈëµÄË³ĞòÂŞÁĞ
-     * @throws UploadException Èç¹û½âÎöÊ±³ö´í
+     * @param request HTTPè¯·æ±‚
+     * @param sizeThreshold æ–‡ä»¶æ”¾åœ¨å†…å­˜ä¸­çš„é˜ˆå€¼ï¼Œå°äºæ­¤å€¼çš„æ–‡ä»¶è¢«ä¿å­˜åœ¨å†…å­˜ä¸­ã€‚å¦‚æœæ­¤å€¼å°äº0ï¼Œåˆ™ä½¿ç”¨é¢„è®¾çš„å€¼
+     * @param sizeMax HTTPè¯·æ±‚çš„æœ€å¤§å°ºå¯¸ï¼Œè¶…è¿‡æ­¤å°ºå¯¸çš„è¯·æ±‚å°†è¢«æŠ›å¼ƒã€‚
+     * @param repositoryPath æš‚å­˜ä¸Šè½½æ–‡ä»¶çš„ç»å¯¹è·¯å¾„
+     * @param charset ç”¨æ¥è§£æHTTP headerçš„ç¼–ç å­—ç¬¦é›†
+     * @return <code>FileItem</code>çš„åˆ—è¡¨ï¼ŒæŒ‰å…¶è¾“å…¥çš„é¡ºåºç½—åˆ—
+     * @throws UploadException å¦‚æœè§£ææ—¶å‡ºé”™
      */
     public FileItem[] parseRequest(HttpServletRequest request, UploadParameters params) {
         assertInitialized();
@@ -166,7 +166,7 @@ public class UploadServiceImpl extends AbstractService<UploadService> implements
     }
 
     /**
-     * ¸ù¾İ²ÎÊı´´½¨<code>FileUpload</code>¶ÔÏó¡£
+     * æ ¹æ®å‚æ•°åˆ›å»º<code>FileUpload</code>å¯¹è±¡ã€‚
      */
     private ServletFileUpload getFileUpload(UploadParameters params, boolean applyDefaultValues) {
         if (applyDefaultValues) {
@@ -174,14 +174,14 @@ public class UploadServiceImpl extends AbstractService<UploadService> implements
             getLogger().debug("Upload Parameters: {}", params);
         }
 
-        // ÓÃÓÚÉú³ÉFileItemµÄ²ÎÊı
+        // ç”¨äºç”ŸæˆFileItemçš„å‚æ•°
         DiskFileItemFactory factory = new DiskFileItemFactory();
 
         factory.setRepository(params.getRepository());
         factory.setSizeThreshold((int) params.getSizeThreshold().getValue());
         factory.setKeepFormFieldInMemory(params.isKeepFormFieldInMemory());
 
-        // ÓÃÓÚ½âÎömultipart requestµÄ²ÎÊı
+        // ç”¨äºè§£æmultipart requestçš„å‚æ•°
         ServletFileUpload fileUpload = new ServletFileUpload(factory);
 
         fileUpload.setSizeMax(params.getSizeMax().getValue());

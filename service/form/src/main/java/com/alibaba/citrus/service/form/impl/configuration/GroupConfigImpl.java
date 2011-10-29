@@ -32,7 +32,7 @@ import com.alibaba.citrus.service.form.configuration.FormConfig;
 import com.alibaba.citrus.service.form.configuration.GroupConfig;
 
 /**
- * ´ú±íÒ»¸öform groupµÄ¶¨ÒåĞÅÏ¢¡£
+ * ä»£è¡¨ä¸€ä¸ªform groupçš„å®šä¹‰ä¿¡æ¯ã€‚
  * 
  * @author Michael Zhou
  */
@@ -50,77 +50,77 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
     private Boolean postOnly;
 
     /**
-     * È¡µÃgroupËùÊôµÄform config¡£
+     * å–å¾—groupæ‰€å±çš„form configã€‚
      */
     public FormConfig getFormConfig() {
         return formConfig;
     }
 
     /**
-     * ÉèÖÃgroupËùÊôµÄform config¡£
+     * è®¾ç½®groupæ‰€å±çš„form configã€‚
      */
     public void setFormConfig(FormConfig formConfig) {
         this.formConfig = formConfig;
     }
 
     /**
-     * È¡µÃgroup name¡£
+     * å–å¾—group nameã€‚
      */
     public String getName() {
         return name;
     }
 
     /**
-     * ÉèÖÃgroup name¡£
+     * è®¾ç½®group nameã€‚
      */
     public void setName(String name) {
         this.name = trimToNull(name);
     }
 
     /**
-     * È¡µÃgroup key¡£
+     * å–å¾—group keyã€‚
      */
     public String getKey() {
         return key;
     }
 
     /**
-     * ÉèÖÃgroup key¡£
+     * è®¾ç½®group keyã€‚
      */
     public void setKey(String key) {
         this.key = trimToNull(key);
     }
 
     /**
-     * È¡µÃparent group¡£
+     * å–å¾—parent groupã€‚
      */
     public String getParentGroup() {
         return parentGroup;
     }
 
     /**
-     * ÉèÖÃparent group£¬ËùÓĞparent groupÖĞµÄÄÚÈİ¶¼»á±»¼ÓÈëµ½µ±Ç°groupÖĞ¡£
+     * è®¾ç½®parent groupï¼Œæ‰€æœ‰parent groupä¸­çš„å†…å®¹éƒ½ä¼šè¢«åŠ å…¥åˆ°å½“å‰groupä¸­ã€‚
      */
     public void setParentGroup(String parentGroup) {
         this.parentGroup = trimToNull(parentGroup);
     }
 
     /**
-     * È¡µÃÄ¬ÈÏµÄtrimmingÑ¡Ïî¡£
+     * å–å¾—é»˜è®¤çš„trimmingé€‰é¡¹ã€‚
      */
     public boolean isTrimmingByDefault() {
         return trimmingByDefault == null ? true : trimmingByDefault.booleanValue();
     }
 
     /**
-     * ÉèÖÃÄ¬ÈÏµÄtrimmingÑ¡Ïî¡£
+     * è®¾ç½®é»˜è®¤çš„trimmingé€‰é¡¹ã€‚
      */
     public void setTrimmingByDefault(boolean trimmingByDefault) {
         this.trimmingByDefault = trimmingByDefault;
     }
 
     /**
-     * GroupÊÇ·ñ±ØĞë´ÓpostÇëÇóÖĞÈ¡µÃÊı¾İ¡£
+     * Groupæ˜¯å¦å¿…é¡»ä»postè¯·æ±‚ä¸­å–å¾—æ•°æ®ã€‚
      */
     public boolean isPostOnly() {
         if (postOnly == null) {
@@ -131,14 +131,14 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
     }
 
     /**
-     * ÉèÖÃgroupÊÇ·ñ±ØĞë´ÓpostÇëÇóÖĞÈ¡µÃÊı¾İ¡£
+     * è®¾ç½®groupæ˜¯å¦å¿…é¡»ä»postè¯·æ±‚ä¸­å–å¾—æ•°æ®ã€‚
      */
     public void setPostOnly(boolean postOnly) {
         this.postOnly = postOnly;
     }
 
     /**
-     * È¡µÃËùÓĞfield configµÄÁĞ±í¡£
+     * å–å¾—æ‰€æœ‰field configçš„åˆ—è¡¨ã€‚
      */
     public List<FieldConfig> getFieldConfigList() {
         if (fieldList == null) {
@@ -149,7 +149,7 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄfield config¡£Ãû³Æ´óĞ¡Ğ´²»Ãô¸Ğ¡£ Èç¹ûÎ´ÕÒµ½£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šåç§°çš„field configã€‚åç§°å¤§å°å†™ä¸æ•æ„Ÿã€‚ å¦‚æœæœªæ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     public FieldConfig getFieldConfig(String fieldName) {
         if (fields == null) {
@@ -160,34 +160,34 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
     }
 
     /**
-     * È¡µÃÖ¸¶¨key¶ÔÓ¦µÄfield config¡£Èç¹ûÎ´ÕÒµ½£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®škeyå¯¹åº”çš„field configã€‚å¦‚æœæœªæ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     public FieldConfig getFieldConfigByKey(String fieldKey) {
         return assertNotNull(fieldsByKey, ILLEGAL_STATE, "fieldsByKey not inited").get(fieldKey);
     }
 
     /**
-     * ÉèÖÃÒ»×éfield configs¡£
+     * è®¾ç½®ä¸€ç»„field configsã€‚
      */
     public void setFieldConfigImplList(List<FieldConfigImpl> fieldConfigList) {
         if (fieldConfigList != null) {
             fields = createLinkedHashMap();
 
             for (FieldConfigImpl fieldConfig : fieldConfigList) {
-                addFieldConfig(fieldConfig, true); // ´óĞ¡Ğ´²»Ãô¸Ğ£¡
+                addFieldConfig(fieldConfig, true); // å¤§å°å†™ä¸æ•æ„Ÿï¼
             }
         }
     }
 
     /**
-     * Ìí¼ÓÒ»¸öfield config¡£
+     * æ·»åŠ ä¸€ä¸ªfield configã€‚
      */
     private void addFieldConfig(FieldConfigImpl fieldConfig, boolean checkDuplicate) {
         if (fields == null) {
             fields = createLinkedHashMap();
         }
 
-        String fieldName = caseInsensitiveName(fieldConfig.getName()); // ´óĞ¡Ğ´²»Ãô¸Ğ£¡
+        String fieldName = caseInsensitiveName(fieldConfig.getName()); // å¤§å°å†™ä¸æ•æ„Ÿï¼
 
         if (checkDuplicate) {
             assertTrue(!fields.containsKey(fieldName), "Duplicated field name: \"%s.%s\"", getName(),
@@ -198,7 +198,7 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
     }
 
     /**
-     * È¡µÃËùÓĞµÄimports¡£
+     * å–å¾—æ‰€æœ‰çš„importsã€‚
      */
     public List<Import> getImports() {
         if (importList == null) {
@@ -209,7 +209,7 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
     }
 
     /**
-     * Òı½øÆäËügroupµÄ×Ö¶Î¡£Èç¹ûfieldNameÎªnull£¬ÔòÒı½øÕû¸ögroup£¨Í¬extends£©¡£
+     * å¼•è¿›å…¶å®ƒgroupçš„å­—æ®µã€‚å¦‚æœfieldNameä¸ºnullï¼Œåˆ™å¼•è¿›æ•´ä¸ªgroupï¼ˆåŒextendsï¼‰ã€‚
      */
     public void setImports(List<Import> imports) {
         if (imports != null) {
@@ -219,7 +219,7 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
     }
 
     /**
-     * À©Õ¹µ±Ç°group£¬½«Ö¸¶¨groupÖĞµÄÄÚÈİ¸´ÖÆµ½µ±Ç°groupÖĞ¡£
+     * æ‰©å±•å½“å‰groupï¼Œå°†æŒ‡å®šgroupä¸­çš„å†…å®¹å¤åˆ¶åˆ°å½“å‰groupä¸­ã€‚
      */
     void extendsFrom(GroupConfigImpl parentGroupConfig) {
         if (trimmingByDefault == null && parentGroupConfig.trimmingByDefault != null) {
@@ -234,14 +234,14 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
     }
 
     /**
-     * ½«Ö¸¶¨groupÖĞµÄÄÚÈİ¸´ÖÆµ½µ±Ç°groupÖĞ¡£
+     * å°†æŒ‡å®šgroupä¸­çš„å†…å®¹å¤åˆ¶åˆ°å½“å‰groupä¸­ã€‚
      */
     void importsFrom(GroupConfigImpl srcGroupConfig, String fieldName) {
         extendsOrImports(srcGroupConfig, fieldName, true);
     }
 
     /**
-     * À©Õ¹»òÒıÈëfields¡£
+     * æ‰©å±•æˆ–å¼•å…¥fieldsã€‚
      */
     private void extendsOrImports(GroupConfigImpl srcGroupConfig, String fieldName, boolean checkDuplicate) {
         if (fieldName == null) {
@@ -258,29 +258,29 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
     }
 
     /**
-     * ºÏ²¢field¡£
+     * åˆå¹¶fieldã€‚
      */
     private void mergeField(FieldConfigImpl srcFieldConfig, boolean checkDuplicate) {
         FieldConfigImpl copy = (FieldConfigImpl) getFieldConfig(srcFieldConfig.getName());
 
         if (copy == null) {
-            // Èç¹ûµ±Ç°groupÖĞÎ´¶¨ÒåÍ¬ÃûµÄfield£¬Ôò´´½¨Ö®
+            // å¦‚æœå½“å‰groupä¸­æœªå®šä¹‰åŒåçš„fieldï¼Œåˆ™åˆ›å»ºä¹‹
             copy = new FieldConfigImpl();
             copy.setGroupConfig(this);
         }
 
         copy.mergeWith(srcFieldConfig);
 
-        // Èç¹ûµ±Ç°groupÖĞÒÑ¾­¶¨ÒåÁËÍ¬ÃûµÄfield£¬ÄÇÃ´£¬
-        // µ±checkDuplicate==falseÊ±£¬ºÏ²¢field£¨extends groupµÄÇéĞÎ£©£¬
-        // µ±checkDuplicate==trueÊ±£¬±¨´í£¨imports fieldµÄÇéĞÎ£©
+        // å¦‚æœå½“å‰groupä¸­å·²ç»å®šä¹‰äº†åŒåçš„fieldï¼Œé‚£ä¹ˆï¼Œ
+        // å½“checkDuplicate==falseæ—¶ï¼Œåˆå¹¶fieldï¼ˆextends groupçš„æƒ…å½¢ï¼‰ï¼Œ
+        // å½“checkDuplicate==trueæ—¶ï¼ŒæŠ¥é”™ï¼ˆimports fieldçš„æƒ…å½¢ï¼‰
         addFieldConfig(copy, checkDuplicate);
     }
 
     /**
-     * ³õÊ¼»¯group config¡£
+     * åˆå§‹åŒ–group configã€‚
      * <p>
-     * ²»Í¬ÓÚ<code>init()</code>·½·¨£¬´Ë·½·¨ÊÇ±»<code>formConfig.init()</code>µ÷ÓÃ¡£
+     * ä¸åŒäº<code>init()</code>æ–¹æ³•ï¼Œæ­¤æ–¹æ³•æ˜¯è¢«<code>formConfig.init()</code>è°ƒç”¨ã€‚
      * </p>
      */
     void init2() throws Exception {
@@ -293,7 +293,7 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
             String caseInsensitiveName = entry.getKey();
             FieldConfigImpl fieldConfig = entry.getValue();
 
-            // ÉèÖÃ²»ÖØ¸´µÄkey
+            // è®¾ç½®ä¸é‡å¤çš„key
             for (int i = 1; i <= caseInsensitiveName.length(); i++) {
                 String key = caseInsensitiveName.substring(0, i);
 
@@ -304,16 +304,16 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
                 }
             }
 
-            // ÉèÖÃfield.group
+            // è®¾ç½®field.group
             fieldConfig.setGroupConfig(this);
 
-            // ÉèÖÃfieldList
+            // è®¾ç½®fieldList
             fieldList.add(fieldConfig);
         }
 
         fieldList = unmodifiableList(fieldList);
 
-        // ³õÊ¼»¯ËùÓĞvalidators
+        // åˆå§‹åŒ–æ‰€æœ‰validators
         for (FieldConfig fieldConfig : fieldList) {
             for (Validator validator : fieldConfig.getValidators()) {
                 validator.init(fieldConfig);
@@ -322,7 +322,7 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
     }
 
     /**
-     * ×ª»»³ÉÒ×ÓÚÔÄ¶ÁµÄ×Ö·û´®¡£
+     * è½¬æ¢æˆæ˜“äºé˜…è¯»çš„å­—ç¬¦ä¸²ã€‚
      */
     @Override
     public String toString() {
@@ -330,7 +330,7 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
     }
 
     /**
-     * ´ú±íimportÆäËügroupÖĞµÄfieldµÄĞÅÏ¢¡£
+     * ä»£è¡¨importå…¶å®ƒgroupä¸­çš„fieldçš„ä¿¡æ¯ã€‚
      */
     public static final class ImportImpl implements Import {
         private final String groupName;

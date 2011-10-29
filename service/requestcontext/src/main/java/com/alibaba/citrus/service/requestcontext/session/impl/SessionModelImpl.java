@@ -30,7 +30,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ´ú±íÒ»¸ösession±¾ÉíµÄĞÅÏ¢¡£¸Ã¶ÔÏóÊÇ¿ÉĞòÁĞ»¯µÄ¡£
+ * ä»£è¡¨ä¸€ä¸ªsessionæœ¬èº«çš„ä¿¡æ¯ã€‚è¯¥å¯¹è±¡æ˜¯å¯åºåˆ—åŒ–çš„ã€‚
  * 
  * @author Michael Zhou
  */
@@ -75,7 +75,7 @@ public class SessionModelImpl implements SessionModel {
     }
 
     /**
-     * ÉèÖÃmodelËùÔÚµÄsession¡£
+     * è®¾ç½®modelæ‰€åœ¨çš„sessionã€‚
      */
     public void setSession(SessionImpl session) {
         this.sessionConfig = session.getSessionRequestContext().getSessionConfig();
@@ -83,7 +83,7 @@ public class SessionModelImpl implements SessionModel {
     }
 
     /**
-     * È¡µÃsession ID¡£
+     * å–å¾—session IDã€‚
      * 
      * @return session ID
      */
@@ -92,52 +92,52 @@ public class SessionModelImpl implements SessionModel {
     }
 
     /**
-     * È¡µÃsessionµÄ´´½¨Ê±¼ä¡£
+     * å–å¾—sessionçš„åˆ›å»ºæ—¶é—´ã€‚
      * 
-     * @return ´´½¨Ê±¼äÂ¾
+     * @return åˆ›å»ºæ—¶é—´æˆ®
      */
     public long getCreationTime() {
         return creationTime;
     }
 
     /**
-     * È¡µÃ×î½ü·ÃÎÊÊ±¼ä¡£
+     * å–å¾—æœ€è¿‘è®¿é—®æ—¶é—´ã€‚
      * 
-     * @return ×î½ü·ÃÎÊÊ±¼äÂ¾
+     * @return æœ€è¿‘è®¿é—®æ—¶é—´æˆ®
      */
     public long getLastAccessedTime() {
         return lastAccessedTime;
     }
 
     /**
-     * È¡µÃsessionµÄ×î´ó²»»î¶¯ÆÚÏŞ£¬³¬¹ı´ËÊ±¼ä£¬session¾Í»áÊ§Ğ§¡£
+     * å–å¾—sessionçš„æœ€å¤§ä¸æ´»åŠ¨æœŸé™ï¼Œè¶…è¿‡æ­¤æ—¶é—´ï¼Œsessionå°±ä¼šå¤±æ•ˆã€‚
      * 
-     * @return ²»»î¶¯ÆÚÏŞµÄÃëÊı
+     * @return ä¸æ´»åŠ¨æœŸé™çš„ç§’æ•°
      */
     public int getMaxInactiveInterval() {
         return maxInactiveInterval;
     }
 
     /**
-     * ÉèÖÃsessionµÄ×î´ó²»»î¶¯ÆÚÏŞ£¬³¬¹ı´ËÊ±¼ä£¬session¾Í»áÊ§Ğ§¡£
+     * è®¾ç½®sessionçš„æœ€å¤§ä¸æ´»åŠ¨æœŸé™ï¼Œè¶…è¿‡æ­¤æ—¶é—´ï¼Œsessionå°±ä¼šå¤±æ•ˆã€‚
      * 
-     * @param maxInactiveInterval ²»»î¶¯ÆÚÏŞµÄÃëÊı
+     * @param maxInactiveInterval ä¸æ´»åŠ¨æœŸé™çš„ç§’æ•°
      */
     public void setMaxInactiveInterval(int maxInactiveInterval) {
         this.maxInactiveInterval = maxInactiveInterval;
     }
 
     /**
-     * ÅĞ¶ÏsessionÓĞÃ»ÓĞ¹ıÆÚ¡£
+     * åˆ¤æ–­sessionæœ‰æ²¡æœ‰è¿‡æœŸã€‚
      * 
-     * @return Èç¹û¹ıÆÚÁË£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚æœè¿‡æœŸäº†ï¼Œåˆ™è¿”å›<code>true</code>
      */
     public boolean isExpired() {
         int maxInactiveInterval = getMaxInactiveInterval();
         long forceExpirationPeriod = getSessionConfig().getForceExpirationPeriod();
         long current = System.currentTimeMillis();
 
-        // Èç¹û´Ó´´½¨Ö®Ê±ËãÆğ£¬ÒÑ¾­³¬¹ıÁËforceExpirationPeriod£¬ÔòÇ¿ÖÆ×÷·Ï¡£
+        // å¦‚æœä»åˆ›å»ºä¹‹æ—¶ç®—èµ·ï¼Œå·²ç»è¶…è¿‡äº†forceExpirationPeriodï¼Œåˆ™å¼ºåˆ¶ä½œåºŸã€‚
         if (forceExpirationPeriod > 0) {
             long expires = getCreationTime() + forceExpirationPeriod * 1000;
 
@@ -146,7 +146,7 @@ public class SessionModelImpl implements SessionModel {
             }
         }
 
-        // Èç¹û´ÓÉÏ´Î·ÃÎÊÊ±¼äËãÆğ£¬ÒÑ¾­³¬¹ımaxInactiveIntervalÃ»¶¯¾²ÁË£¬Ôò×÷·Ï¡£
+        // å¦‚æœä»ä¸Šæ¬¡è®¿é—®æ—¶é—´ç®—èµ·ï¼Œå·²ç»è¶…è¿‡maxInactiveIntervalæ²¡åŠ¨é™äº†ï¼Œåˆ™ä½œåºŸã€‚
         if (maxInactiveInterval > 0) {
             long expires = getLastAccessedTime() + maxInactiveInterval * 1000;
 
@@ -159,7 +159,7 @@ public class SessionModelImpl implements SessionModel {
     }
 
     /**
-     * ¸üĞÂsessionµÄ·ÃÎÊÊ±¼ä¡£
+     * æ›´æ–°sessionçš„è®¿é—®æ—¶é—´ã€‚
      */
     public void touch() {
         lastAccessedTime = System.currentTimeMillis();

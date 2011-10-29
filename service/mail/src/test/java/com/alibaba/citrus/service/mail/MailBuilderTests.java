@@ -52,7 +52,7 @@ import com.alibaba.citrus.service.mail.util.MailUtil;
 import com.alibaba.citrus.util.io.ByteArrayOutputStream;
 
 /**
- * ²âÊÔÊÖ¹¤×°Åämail builder¡£
+ * æµ‹è¯•æ‰‹å·¥è£…é…mail builderã€‚
  * 
  * @author Michael Zhou
  */
@@ -76,7 +76,7 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
 
     @Test
     public void session() {
-        // Ö»ÓĞÔÚbuild messageµÄ¹ı³ÌÖĞ²Å¿ÉÈ¡µÃsession¡£
+        // åªæœ‰åœ¨build messageçš„è¿‡ç¨‹ä¸­æ‰å¯å–å¾—sessionã€‚
         try {
             builder.getSession();
             fail();
@@ -84,7 +84,7 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
             assertThat(e, exception("Not in build time"));
         }
 
-        // ÔÚbuild¹ı³ÌÖĞÈ¡µÃsession
+        // åœ¨buildè¿‡ç¨‹ä¸­å–å¾—session
         final Session[] holder = new Session[1];
 
         builder.setContent(new AbstractContent() {
@@ -115,7 +115,7 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
 
         // address charset
         for (MailAddressType addrType : MailAddressType.values()) {
-            builder.setAddress(addrType, ÖĞ¹ú_CHINA_EARTH_COM);
+            builder.setAddress(addrType, ä¸­å›½_CHINA_EARTH_COM);
         }
 
         for (MailAddressType addrType : MailAddressType.values()) {
@@ -151,7 +151,7 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
         builder.setCharacterEncoding("invalid_charset");
 
         try {
-            builder.addAddress(MailAddressType.FROM, ÖĞ¹ú_CHINA_EARTH_COM);
+            builder.addAddress(MailAddressType.FROM, ä¸­å›½_CHINA_EARTH_COM);
             fail();
         } catch (MailBuilderException e) {
             assertThat(
@@ -163,8 +163,8 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
 
     @Test
     public void subject() throws Exception {
-        builder.setSubject(ÎÒ°®±±¾©Ãô¸Ğ´Ê_I_LOVE_THE_PRESERVED_KEYWORDS);
-        assertEquals(ÎÒ°®±±¾©Ãô¸Ğ´Ê_I_LOVE_THE_PRESERVED_KEYWORDS, builder.getSubject());
+        builder.setSubject(æˆ‘çˆ±åŒ—äº¬æ•æ„Ÿè¯_I_LOVE_THE_PRESERVED_KEYWORDS);
+        assertEquals(æˆ‘çˆ±åŒ—äº¬æ•æ„Ÿè¯_I_LOVE_THE_PRESERVED_KEYWORDS, builder.getSubject());
 
         // render as UTF-8
         assertThat(save(builder.getMessageAsString(rawSession)), containsAll( // 
@@ -268,8 +268,8 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
     @Test
     public void setAddress() {
         for (MailAddressType addrType : MailAddressType.values()) {
-            builder.setAddress(addrType, ÃÀ¹ú_CHINA_EARTH_COM);
-            builder.setAddress(addrType, ÖĞ¹ú_CHINA_EARTH_COM);
+            builder.setAddress(addrType, ç¾å›½_CHINA_EARTH_COM);
+            builder.setAddress(addrType, ä¸­å›½_CHINA_EARTH_COM);
         }
 
         for (MailAddressType addrType : MailAddressType.values()) {
@@ -283,9 +283,9 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
             builder.addAddress(addrType, null); // null
             builder.addAddress(addrType, ""); // empty list
             builder.addAddress(addrType, "  "); // empty list
-            builder.addAddress(addrType, ÃÀ¹ú_CHINA_EARTH_COM);
-            builder.addAddress(addrType, ÃÀ¹ú_CHINA_EARTH_COM); // dup address
-            builder.addAddress(addrType, ÖĞ¹ú_CHINA_EARTH_COM);
+            builder.addAddress(addrType, ç¾å›½_CHINA_EARTH_COM);
+            builder.addAddress(addrType, ç¾å›½_CHINA_EARTH_COM); // dup address
+            builder.addAddress(addrType, ä¸­å›½_CHINA_EARTH_COM);
         }
 
         for (MailAddressType addrType : MailAddressType.values()) {
@@ -307,7 +307,7 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
         builder.setCharacterEncoding("unknown_charset");
 
         try {
-            builder.addAddress(MailAddressType.FROM, ÖĞ¹ú_CHINA_EARTH_COM);
+            builder.addAddress(MailAddressType.FROM, ä¸­å›½_CHINA_EARTH_COM);
             fail();
         } catch (MailBuilderException e) {
             assertThat(e, exception(UnsupportedEncodingException.class, "Invalid charset", "unknown_charset"));
@@ -384,7 +384,7 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
         builder.setCharacterEncoding("EUC_JP");
 
         for (MailAddressType addrType : MailAddressType.values()) {
-            builder.addAddress(addrType, ÖĞ¹ú_CHINA_EARTH_COM);
+            builder.addAddress(addrType, ä¸­å›½_CHINA_EARTH_COM);
         }
 
         builder.setAttribute("aaa", obj);
@@ -541,7 +541,7 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
 
         initBuilder(builder, obj, sentDate);
 
-        builder.addAddress(MailAddressType.TO, ÃÀ¹ú_CHINA_EARTH_COM);
+        builder.addAddress(MailAddressType.TO, ç¾å›½_CHINA_EARTH_COM);
 
         String result = "";
 

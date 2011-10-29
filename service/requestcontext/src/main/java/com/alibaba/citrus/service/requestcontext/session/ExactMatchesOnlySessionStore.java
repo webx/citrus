@@ -18,13 +18,13 @@
 package com.alibaba.citrus.service.requestcontext.session;
 
 /**
- * Ò»¸ö<code>SessionStore</code>£¬Ö»½ÓÊÜ¾«È·Æ¥ÅäµÄattribute names¡£
+ * ä¸€ä¸ª<code>SessionStore</code>ï¼Œåªæ¥å—ç²¾ç¡®åŒ¹é…çš„attribute namesã€‚
  * 
  * @author Michael Zhou
  */
 public interface ExactMatchesOnlySessionStore extends SessionStore {
     /**
-     * ÉèÖÃËùÓĞ¾«È·Æ¥ÅäµÄattributeÃû³Æ¡£
+     * è®¾ç½®æ‰€æœ‰ç²¾ç¡®åŒ¹é…çš„attributeåç§°ã€‚
      */
     void initAttributeNames(String[] attrNames);
 }

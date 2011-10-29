@@ -56,7 +56,7 @@ public class RewriteRequestContextFactoryDefinitionParser extends
     }
 
     /**
-     * Ω‚Œˆrule°£
+     * Ëß£Êûêrule„ÄÇ
      */
     private BeanDefinition parseRule(Element ruleElement, ParserContext parserContext) {
         BeanDefinitionBuilder ruleBuilder = BeanDefinitionBuilder.genericBeanDefinition(RewriteRule.class);
@@ -96,7 +96,7 @@ public class RewriteRequestContextFactoryDefinitionParser extends
     }
 
     /**
-     * Ω‚Œˆrule/condition°£
+     * Ëß£Êûêrule/condition„ÄÇ
      */
     private BeanDefinition parseCondition(Element conditionElement, ParserContext parserContext) {
         BeanDefinitionBuilder conditionBuilder = BeanDefinitionBuilder.genericBeanDefinition(RewriteCondition.class);
@@ -107,7 +107,7 @@ public class RewriteRequestContextFactoryDefinitionParser extends
     }
 
     /**
-     * Ω‚Œˆrule/substitution°£
+     * Ëß£Êûêrule/substitution„ÄÇ
      */
     private BeanDefinition parseSubstitution(Element substitutionElement, ParserContext parserContext) {
         BeanDefinitionBuilder substitutionBuilder = BeanDefinitionBuilder
@@ -129,7 +129,7 @@ public class RewriteRequestContextFactoryDefinitionParser extends
     }
 
     /**
-     * Ω‚Œˆrule/substitution/parameter°£
+     * Ëß£Êûêrule/substitution/parameter„ÄÇ
      */
     private BeanDefinition parseParameter(Element parameterElement, ParserContext parserContext) {
         BeanDefinitionBuilder parameterBuilder = BeanDefinitionBuilder
@@ -153,7 +153,7 @@ public class RewriteRequestContextFactoryDefinitionParser extends
     }
 
     /**
-     * Ω‚Œˆrule/handlers°£
+     * Ëß£Êûêrule/handlers„ÄÇ
      */
     private List<Object> parseHandlers(Element handlersElement, ParserContext parserContext,
                                        BeanDefinitionBuilder ruleBuilder) {

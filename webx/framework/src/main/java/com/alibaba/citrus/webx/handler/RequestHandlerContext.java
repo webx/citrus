@@ -31,8 +31,8 @@ import com.alibaba.citrus.util.internal.webpagelite.ServletRequestContext;
 import com.alibaba.citrus.webx.ResourceNotFoundException;
 
 /**
- * Õâ¸öÀàÌá¹©¸ø<code>RequestHandler</code>Ïà¹ØµÄÉÏÏÂÎÄĞÅÏ¢£¬Ê¹<code>RequestHandler</code>ºÍ
- * <code>RequestProcessor</code>ÕûºÏÆğÀ´¡£
+ * è¿™ä¸ªç±»æä¾›ç»™<code>RequestHandler</code>ç›¸å…³çš„ä¸Šä¸‹æ–‡ä¿¡æ¯ï¼Œä½¿<code>RequestHandler</code>å’Œ
+ * <code>RequestProcessor</code>æ•´åˆèµ·æ¥ã€‚
  * 
  * @author Michael Zhou
  */
@@ -40,7 +40,7 @@ public abstract class RequestHandlerContext extends ServletRequestContext {
     private final String internalBaseURL;
 
     /**
-     * ´´½¨context¡£
+     * åˆ›å»ºcontextã€‚
      */
     public RequestHandlerContext(HttpServletRequest request, HttpServletResponse response,
                                  ServletContext servletContext, String internalBaseURL, String baseURL,
@@ -50,17 +50,17 @@ public abstract class RequestHandlerContext extends ServletRequestContext {
     }
 
     /**
-     * È¡µÃµ±Ç°µ÷ÓÃµÄ<code>RequestHandler</code>¶ÔÏó¡£
+     * å–å¾—å½“å‰è°ƒç”¨çš„<code>RequestHandler</code>å¯¹è±¡ã€‚
      */
     public abstract RequestHandler getRequestHandler();
 
     /**
-     * È¡µÃlogger¡£
+     * å–å¾—loggerã€‚
      */
     public abstract Logger getLogger();
 
     /**
-     * µ±ÇëÇóµÄ×ÊÔ´ÕÒ²»µ½Ê±£¬·½·¨±»µ÷ÓÃ¡£×ÓÀà¿ÉÒÔĞŞ¸Ä´ËĞĞÎª¡£
+     * å½“è¯·æ±‚çš„èµ„æºæ‰¾ä¸åˆ°æ—¶ï¼Œæ–¹æ³•è¢«è°ƒç”¨ã€‚å­ç±»å¯ä»¥ä¿®æ”¹æ­¤è¡Œä¸ºã€‚
      */
     @Override
     public void resourceNotFound(String resourceName) throws IOException {
@@ -68,7 +68,7 @@ public abstract class RequestHandlerContext extends ServletRequestContext {
     }
 
     /**
-     * È¡µÃÏà¶ÔÓÚinternalÄ¿Â¼µÄURL¡£
+     * å–å¾—ç›¸å¯¹äºinternalç›®å½•çš„URLã€‚
      */
 
     public final String getInternalResourceURL(String resourceName) {

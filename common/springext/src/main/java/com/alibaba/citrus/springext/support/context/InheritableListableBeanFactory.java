@@ -32,18 +32,18 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 
 /**
- * Õâ¸öÀàÀ©Õ¹ÁË<code>DefaultListableBeanFactory</code>£¬¸Ä½øÁËÈçÏÂÎÊÌâ£º
+ * è¿™ä¸ªç±»æ‰©å±•äº†<code>DefaultListableBeanFactory</code>ï¼Œæ”¹è¿›äº†å¦‚ä¸‹é—®é¢˜ï¼š
  * <ul>
- * <li>×Ócontext¿É¼Ì³Ğparent
- * <code>DefaultListableBeanFactory.resolvableDependencies</code>¡£
- * ÀıÈç£ºÔÚ¸¸contextÖĞ¶¨ÒåµÄ<code>&lt;request-contexts /&gt;</code>
- * ½«ÔÚresolvableDependenciesÖĞ×¢²á<code>HttpServletRequest</code>µÈsingleton
- * proxy¶ÔÏó¡£Èç¹ûÃ»ÓĞÕâ¸öÀà£¬ÄÇÃ´ÔÚ×ÓcontextÖĞ¶¨ÒåµÄbean£¬½«²»ÄÜ×¢ÈëÕâĞ©¶ÔÏó¡£</li>
- * <li>×Ócontext²»ÄÜ¸²¸Ç¸¸contextÖĞÒÑÓĞµÄÊµÏÖÁË<code>ProxyTargetFactory</code>
- * ½Ó¿ÚµÄresolvableDependencies¶ÔÏó¡£·ñÔò£¬
- * WebApplicationContext»á×Ô¶¯×¢²á·ÇsingletonµÄrequest¶ÔÏó
- * £¬Ê¹µÃ×Ócontext²»ÄÜÈ¡µÃ¸¸contextÖĞ×¢²áµÄsingleton proxy¡£</li>
- * <li>×Ô¶¯ºÏ²¢Í¬ÃûµÄbean definitions£¬ÒÔÊµÏÖ¹¦ÄÜ£º¿É¸²¸ÇbeanµÄÄ¬ÈÏÅäÖÃ¡£</li>
+ * <li>å­contextå¯ç»§æ‰¿parent
+ * <code>DefaultListableBeanFactory.resolvableDependencies</code>ã€‚
+ * ä¾‹å¦‚ï¼šåœ¨çˆ¶contextä¸­å®šä¹‰çš„<code>&lt;request-contexts /&gt;</code>
+ * å°†åœ¨resolvableDependenciesä¸­æ³¨å†Œ<code>HttpServletRequest</code>ç­‰singleton
+ * proxyå¯¹è±¡ã€‚å¦‚æœæ²¡æœ‰è¿™ä¸ªç±»ï¼Œé‚£ä¹ˆåœ¨å­contextä¸­å®šä¹‰çš„beanï¼Œå°†ä¸èƒ½æ³¨å…¥è¿™äº›å¯¹è±¡ã€‚</li>
+ * <li>å­contextä¸èƒ½è¦†ç›–çˆ¶contextä¸­å·²æœ‰çš„å®ç°äº†<code>ProxyTargetFactory</code>
+ * æ¥å£çš„resolvableDependencieså¯¹è±¡ã€‚å¦åˆ™ï¼Œ
+ * WebApplicationContextä¼šè‡ªåŠ¨æ³¨å†Œésingletonçš„requestå¯¹è±¡
+ * ï¼Œä½¿å¾—å­contextä¸èƒ½å–å¾—çˆ¶contextä¸­æ³¨å†Œçš„singleton proxyã€‚</li>
+ * <li>è‡ªåŠ¨åˆå¹¶åŒåçš„bean definitionsï¼Œä»¥å®ç°åŠŸèƒ½ï¼šå¯è¦†ç›–beançš„é»˜è®¤é…ç½®ã€‚</li>
  * </ul>
  * 
  * @author Michael Zhou
@@ -84,7 +84,7 @@ class InheritableListableBeanFactory extends DefaultListableBeanFactory {
     }
 
     /**
-     * ±ÜÃâÖØ¸´×¢²áparentÖĞÒÑÓĞµÄ¶ÔÏó£¬µ«¿ÉÒÔ¸²¸Çµ±Ç°contextÖĞµÄ¶ÔÏó¡£
+     * é¿å…é‡å¤æ³¨å†Œparentä¸­å·²æœ‰çš„å¯¹è±¡ï¼Œä½†å¯ä»¥è¦†ç›–å½“å‰contextä¸­çš„å¯¹è±¡ã€‚
      */
     @Override
     @SuppressWarnings("rawtypes")
@@ -99,14 +99,14 @@ class InheritableListableBeanFactory extends DefaultListableBeanFactory {
     public void registerBeanDefinition(String beanName, BeanDefinition bd) throws BeanDefinitionStoreException {
         BeanDefinition existingBd;
 
-        // ³¢ÊÔ²éÕÒµ±Ç°µÄbeanÊÇ·ñÒÑ¾­×¢²á¹ı
+        // å°è¯•æŸ¥æ‰¾å½“å‰çš„beanæ˜¯å¦å·²ç»æ³¨å†Œè¿‡
         try {
             existingBd = this.getBeanDefinition(beanName);
         } catch (NoSuchBeanDefinitionException e) {
             existingBd = null;
         }
 
-        // Èç¹ûµ±Ç°µÄbeanÒÑ¾­±»¶¨Òå£¬Ê¹ÓÃµ±Ç°µÄĞÂÅäÖÃÀ´¸²¸ÇÔ­Ê¼µÄ¶¨Òå
+        // å¦‚æœå½“å‰çš„beanå·²ç»è¢«å®šä¹‰ï¼Œä½¿ç”¨å½“å‰çš„æ–°é…ç½®æ¥è¦†ç›–åŸå§‹çš„å®šä¹‰
         if (existingBd != null && existingBd instanceof AbstractBeanDefinition) {
             ((AbstractBeanDefinition) existingBd).overrideFrom(bd);
             super.registerBeanDefinition(beanName, existingBd);

@@ -18,9 +18,9 @@
 package com.alibaba.citrus.service.uribroker.uri;
 
 /**
- * Í¨ÓÃµÄservlet content URI£¬ÓÃÓÚÏÔÊ¾webapp context pathÏÂµÄ×ÊÔ´£¨ÈçÍ¼Æ¬µÈ£©¡£
+ * é€šç”¨çš„servlet content URIï¼Œç”¨äºæ˜¾ç¤ºwebapp context pathä¸‹çš„èµ„æºï¼ˆå¦‚å›¾ç‰‡ç­‰ï¼‰ã€‚
  * <p>
- * Ò»¸öServlet·ç¸ñµÄContent URI°üÀ¨ÈçÏÂ¼¸¸ö²¿·Ö£º
+ * ä¸€ä¸ªServleté£æ ¼çš„Content URIåŒ…æ‹¬å¦‚ä¸‹å‡ ä¸ªéƒ¨åˆ†ï¼š
  * </p>
  * 
  * <pre>
@@ -31,7 +31,7 @@ package com.alibaba.citrus.service.uribroker.uri;
  * REFERENCE   = reference
  * </pre>
  * <p>
- * ÀıÈç£º
+ * ä¾‹å¦‚ï¼š
  * </p>
  * 
  * <pre>
@@ -48,7 +48,7 @@ public class ServletContentURIBroker extends WebAppURIBroker {
     private boolean hasContentPath;
 
     /**
-     * È¡µÃprefix path¡£
+     * å–å¾—prefix pathã€‚
      */
     public String getPrefixPath() {
         if (hasPrefixPath) {
@@ -59,7 +59,7 @@ public class ServletContentURIBroker extends WebAppURIBroker {
     }
 
     /**
-     * ÉèÖÃprefix path¡£
+     * è®¾ç½®prefix pathã€‚
      */
     public ServletContentURIBroker setPrefixPath(String prefixPath) {
         setPathSegment(PREFIX_PATH_INDEX, prefixPath);
@@ -68,7 +68,7 @@ public class ServletContentURIBroker extends WebAppURIBroker {
     }
 
     /**
-     * È¡µÃcontent path¡£
+     * å–å¾—content pathã€‚
      */
     public String getContentPath() {
         if (hasContentPath) {
@@ -79,7 +79,7 @@ public class ServletContentURIBroker extends WebAppURIBroker {
     }
 
     /**
-     * ÉèÖÃcontent path¡£
+     * è®¾ç½®content pathã€‚
      */
     public ServletContentURIBroker setContentPath(String contentPath) {
         setPathSegment(CONTENT_PATH_INDEX, contentPath);
@@ -88,7 +88,7 @@ public class ServletContentURIBroker extends WebAppURIBroker {
     }
 
     /**
-     * ÉèÖÃcontent path¡£
+     * è®¾ç½®content pathã€‚
      */
     public ServletContentURIBroker getURI(String uri) {
         return setContentPath(setUriAndGetPath(uri));

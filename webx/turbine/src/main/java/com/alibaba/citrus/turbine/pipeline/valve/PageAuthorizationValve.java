@@ -73,11 +73,11 @@ public class PageAuthorizationValve extends AbstractValve {
         String action = rundata.getAction();
         String event = capitalize(rundata.getActionEvent());
 
-        // È¡µÃµ±Ç°ÇëÇóµÄactions£¬°üÀ¨Èı²¿·Ö£º
+        // å–å¾—å½“å‰è¯·æ±‚çš„actionsï¼ŒåŒ…æ‹¬ä¸‰éƒ¨åˆ†ï¼š
         // 1. screen
-        // 2. action.*.event - ¼ÙÈçÇëÇó°üº¬action²ÎÊıµÄ»°
-        // 3. callback·µ»ØµÄ¶îÍâactions
-        // Ö»ÓĞµ±ËùÓĞactionÈ«²¿±»ÊÚÈ¨Ê±£¬ÇëÇó²Å»á¼ÌĞø´¦ÀíÏÂÈ¥¡£
+        // 2. action.*.event - å‡å¦‚è¯·æ±‚åŒ…å«actionå‚æ•°çš„è¯
+        // 3. callbackè¿”å›çš„é¢å¤–actions
+        // åªæœ‰å½“æ‰€æœ‰actionå…¨éƒ¨è¢«æˆæƒæ—¶ï¼Œè¯·æ±‚æ‰ä¼šç»§ç»­å¤„ç†ä¸‹å»ã€‚
         List<String> actions = createLinkedList();
 
         actions.add("screen");
@@ -98,10 +98,10 @@ public class PageAuthorizationValve extends AbstractValve {
             }
         }
 
-        // ¼ì²éÈ¨ÏŞ£¬¸ù¾İ£º
-        // 1. µ±Ç°µÄtarget
-        // 2. µ±Ç°µÄuserºÍroles
-        // 3. ½«ÒªÖ´ĞĞµÄactions£¬ÀıÈç£ºscreen¡¢action.xxx.UserAction
+        // æ£€æŸ¥æƒé™ï¼Œæ ¹æ®ï¼š
+        // 1. å½“å‰çš„target
+        // 2. å½“å‰çš„userå’Œroles
+        // 3. å°†è¦æ‰§è¡Œçš„actionsï¼Œä¾‹å¦‚ï¼šscreenã€action.xxx.UserAction
         if (pageAuthorizationService.isAllow(target, userName, roleNames, actions.toArray(new String[actions.size()]))) {
             cb.onAllow(status);
             pipelineContext.invokeNext();

@@ -37,23 +37,23 @@ import com.alibaba.citrus.service.resource.ResourceTraceElement;
 import com.alibaba.citrus.util.regex.MatchResultSubstitution;
 
 /**
- * ´ú±íÒ»´Îresource²éÕÒµÄ¹ı³Ì¡£
+ * ä»£è¡¨ä¸€æ¬¡resourceæŸ¥æ‰¾çš„è¿‡ç¨‹ã€‚
  * 
  * @author Michael Zhou
  */
 class ResourceLoaderContextImpl extends AbstractResourceLoadingContext<Resource> implements ResourceLoaderContext,
         ResourceFilterChain {
-    // ²»±äÁ¿
+    // ä¸å˜é‡
     private final String configLocation;
     private final String beanName;
     private final ResourceFilterMapping[] filterMappings;
     private final BestFiltersMatcher filtersMatcher;
 
-    // ±äÁ¿
+    // å˜é‡
     private List<ResourceTraceElement> trace;
 
     /**
-     * ´´½¨Ò»¸öcontext¡£
+     * åˆ›å»ºä¸€ä¸ªcontextã€‚
      */
     public ResourceLoaderContextImpl(String resourceName, Set<ResourceLoadingOption> options,
                                      ResourceFilterMapping[] filterMappings, ResourceMapping[] mappings,
@@ -67,7 +67,7 @@ class ResourceLoaderContextImpl extends AbstractResourceLoadingContext<Resource>
     }
 
     /**
-     * ¿ªÊ¼Ò»¸ö²éÕÒ¹ı³Ì¡£
+     * å¼€å§‹ä¸€ä¸ªæŸ¥æ‰¾è¿‡ç¨‹ã€‚
      */
     public Resource getResource() throws ResourceNotFoundException {
         if (filtersMatcher.matches(resourceName)) {
@@ -90,7 +90,7 @@ class ResourceLoaderContextImpl extends AbstractResourceLoadingContext<Resource>
     }
 
     /**
-     * ¸ú×ÙÒ»¸ö²éÕÒ¹ı¹ı³Ì¡£
+     * è·Ÿè¸ªä¸€ä¸ªæŸ¥æ‰¾è¿‡è¿‡ç¨‹ã€‚
      */
     public ResourceTrace getTrace() throws ResourceNotFoundException {
         trace = createLinkedList();
@@ -98,7 +98,7 @@ class ResourceLoaderContextImpl extends AbstractResourceLoadingContext<Resource>
         Resource resource = null;
 
         try {
-            resource = doLoad(resourceName, options); // Ô½¹ıfilters
+            resource = doLoad(resourceName, options); // è¶Šè¿‡filters
         } catch (ResourceNotFoundException e) {
             // ignore
         }
@@ -107,7 +107,7 @@ class ResourceLoaderContextImpl extends AbstractResourceLoadingContext<Resource>
     }
 
     /**
-     * ÊµÏÖ<code>ResourceFilterChain.doFilter()</code>£¬´ú±ífilterÁ´µÄÖÕ½áµã¡£
+     * å®ç°<code>ResourceFilterChain.doFilter()</code>ï¼Œä»£è¡¨filteré“¾çš„ç»ˆç»“ç‚¹ã€‚
      */
     public Resource doFilter(ResourceMatchResult filterMatchResult, Set<ResourceLoadingOption> options)
             throws ResourceNotFoundException {
@@ -115,7 +115,7 @@ class ResourceLoaderContextImpl extends AbstractResourceLoadingContext<Resource>
     }
 
     /**
-     * Trace mode£º¼ÇÂ¼resource nameµÄ±äÇ¨¡£
+     * Trace modeï¼šè®°å½•resource nameçš„å˜è¿ã€‚
      */
     @Override
     protected void visitMapping(ResourceMapping mapping) {
@@ -126,7 +126,7 @@ class ResourceLoaderContextImpl extends AbstractResourceLoadingContext<Resource>
     }
 
     /**
-     * È¡µÃparentµÄresource¡£¼ÙÈçÔÚtrace modeÖĞ£¬ÔòÍ¬Ê±Ìí¼ÓparentµÄtraceĞÅÏ¢¡£
+     * å–å¾—parentçš„resourceã€‚å‡å¦‚åœ¨trace modeä¸­ï¼Œåˆ™åŒæ—¶æ·»åŠ parentçš„traceä¿¡æ¯ã€‚
      */
     @Override
     protected Resource loadParentResource(String resourceName, Set<ResourceLoadingOption> options)
@@ -151,7 +151,7 @@ class ResourceLoaderContextImpl extends AbstractResourceLoadingContext<Resource>
     }
 
     /**
-     * µ÷ÓÃmappingÈ¡µÃ×ÊÔ´¡£
+     * è°ƒç”¨mappingå–å¾—èµ„æºã€‚
      */
     @Override
     protected Resource loadMappedResource(ResourceLoaderMapping mapping, Set<ResourceLoadingOption> options) {
@@ -159,7 +159,7 @@ class ResourceLoaderContextImpl extends AbstractResourceLoadingContext<Resource>
     }
 
     /**
-     * ÊµÏÖ<code>ResourceLoaderContext.getResource()</code>¡£
+     * å®ç°<code>ResourceLoaderContext.getResource()</code>ã€‚
      */
     public Resource getResource(String newResourceName, Set<ResourceLoadingOption> newOptions) {
         return loadContextResource(newResourceName, newOptions);
@@ -171,7 +171,7 @@ class ResourceLoaderContextImpl extends AbstractResourceLoadingContext<Resource>
     }
 
     /**
-     * ÕÒ³ö×îÆ¥ÅäµÄ&lt;resource-filters&gt;¡£
+     * æ‰¾å‡ºæœ€åŒ¹é…çš„&lt;resource-filters&gt;ã€‚
      */
     private class BestFiltersMatcher extends BestMatcher<ResourceFilterMapping> {
         private int i;

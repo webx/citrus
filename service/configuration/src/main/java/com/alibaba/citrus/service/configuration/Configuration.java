@@ -18,13 +18,13 @@
 package com.alibaba.citrus.service.configuration;
 
 /**
- * ´ú±íÒ»×éÓ¦ÓÃ³ÌĞòÅäÖÃĞÅÏ¢¡£
+ * ä»£è¡¨ä¸€ç»„åº”ç”¨ç¨‹åºé…ç½®ä¿¡æ¯ã€‚
  * 
  * @author Michael Zhou
  */
 public interface Configuration {
     /**
-     * Éú²úÄ£Ê½¡£Ä¬ÈÏÎª<code>false</code>£¬¼´¿ª·¢ÕßÄ£Ê½¡£
+     * ç”Ÿäº§æ¨¡å¼ã€‚é»˜è®¤ä¸º<code>false</code>ï¼Œå³å¼€å‘è€…æ¨¡å¼ã€‚
      */
     boolean isProductionMode();
 }

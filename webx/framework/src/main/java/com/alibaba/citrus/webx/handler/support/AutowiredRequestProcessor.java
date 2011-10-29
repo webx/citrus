@@ -32,7 +32,7 @@ import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 import com.alibaba.citrus.webx.handler.RequestHandlerNameAware;
 
 /**
- * ÎªËùÓĞµÄcomponentsÌá¹©×¢Èëspring beansµÄ¹¦ÄÜ¡£
+ * ä¸ºæ‰€æœ‰çš„componentsæä¾›æ³¨å…¥spring beansçš„åŠŸèƒ½ã€‚
  * 
  * @author Michael Zhou
  */
@@ -50,7 +50,7 @@ public abstract class AutowiredRequestProcessor extends RequestProcessor<Request
     }
 
     public final void afterPropertiesSet() throws Exception {
-        // ¶ÔËùÓĞµÄcomponent½øĞĞspring×¢Èë¡£
+        // å¯¹æ‰€æœ‰çš„componentè¿›è¡Œspringæ³¨å…¥ã€‚
         for (String path : getComponentPaths()) {
             PageComponent pc = getComponent(path, PageComponent.class);
 
@@ -80,6 +80,6 @@ public abstract class AutowiredRequestProcessor extends RequestProcessor<Request
 
     @Override
     protected boolean resourceExists(String resourceName) {
-        return isEmpty(resourceName); // ¶ÔÓÚµ¥Ò³ÃæµÄprocessor£¬Ö»½ÓÊÜ×ÔÉí£¬¼´resourceNameÎª¿Õ
+        return isEmpty(resourceName); // å¯¹äºå•é¡µé¢çš„processorï¼Œåªæ¥å—è‡ªèº«ï¼Œå³resourceNameä¸ºç©º
     }
 }

@@ -26,27 +26,27 @@ import com.alibaba.citrus.service.mail.MailException;
 import com.alibaba.citrus.service.mail.builder.MailBuilder;
 
 /**
- * ·¢ËÍe-mailµÄ´¦ÀíÆ÷¡£
+ * å‘é€e-mailçš„å¤„ç†å™¨ã€‚
  * <p>
- * ĞèÒª×¢ÒâµÄÊÇ£¬<code>TransportListener</code>ÊÇÒì²½µÄ¡£ÓÉÓÚÍøÂçµÄÊ±ÑÓ£¬
- * <code>TransportListener</code>ÖĞµÄ·½·¨²»Ò»¶¨»á±»Á¢¼´µ÷ÓÃ¡£
+ * éœ€è¦æ³¨æ„çš„æ˜¯ï¼Œ<code>TransportListener</code>æ˜¯å¼‚æ­¥çš„ã€‚ç”±äºç½‘ç»œçš„æ—¶å»¶ï¼Œ
+ * <code>TransportListener</code>ä¸­çš„æ–¹æ³•ä¸ä¸€å®šä¼šè¢«ç«‹å³è°ƒç”¨ã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface MailTransportHandler extends TransportListener {
     /**
-     * Ô¤´¦ÀíÁ¬½Ó¡£
+     * é¢„å¤„ç†è¿æ¥ã€‚
      */
     void prepareConnection(Transport transport) throws MailException, MessagingException;
 
     /**
-     * Ô¤´¦ÀíÓÊ¼ş¡£
+     * é¢„å¤„ç†é‚®ä»¶ã€‚
      */
     void prepareMessage(MailBuilder builder) throws MailException;
 
     /**
-     * ´¦ÀíÓÊ¼ş¡£
+     * å¤„ç†é‚®ä»¶ã€‚
      */
     void processMessage(Message message) throws MailException, MessagingException;
 }

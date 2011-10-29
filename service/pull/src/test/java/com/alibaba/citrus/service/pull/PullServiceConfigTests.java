@@ -80,24 +80,24 @@ public class PullServiceConfigTests extends AbstractPullServiceConfigTests {
         factory = createContext("pull/services-pull-names.xml");
         pullService = (PullService) factory.getBean("toolNames");
 
-        // 根据element自动生成toolName
+        // 鏍规嵁element鑷姩鐢熸垚toolName
         assertToolName("constants", ConstantTool.class); // <constants />
         assertToolName("myInner", InnerTool.class); // <my-inner-tool />
 
-        // 根据类名自动生成toolName
+        // 鏍规嵁绫诲悕鑷姩鐢熸垚toolName
         assertToolName("inner", InnerTool.class); // <factory class="...$InnerTool" />
         assertToolName("simple", SimpleTool.class); // <factory class="...SimpleTool" />
         assertToolName("simple", SimpleToolSet.class, "toolNames2"); // <factory class="...SimpleToolSet" />
 
-        // 指定toolName
+        // 鎸囧畾toolName
         assertToolName("myconst", ConstantTool.class); // <constants id="myconst" />
         assertToolName("inner3", InnerTool.class); // <my-inner-tool id="inner3" />
         assertToolName("simple2", SimpleTool.class); // <factory id="inner3" class="...SimpleTool" />
 
-        // 根据ref生成toolName
+        // 鏍规嵁ref鐢熸垚toolName
         assertToolName("outterSimple", SimpleTool.class); // <factory ref="outterSimple" />
 
-        // 根据class attribute生成toolName
+        // 鏍规嵁class attribute鐢熸垚toolName
         assertToolName("innerBean", InnerBean.class); // <bean-tool class="...$InnerBean" />
     }
 
@@ -147,7 +147,7 @@ public class PullServiceConfigTests extends AbstractPullServiceConfigTests {
         Object object2 = getTool("object2");
         Object object3 = getTool("object3");
         Object objectInSet1 = getTool("inset1");
-        Object objectInSet2 = getTool("runtime1"); // id由请求的参数决定
+        Object objectInSet2 = getTool("runtime1"); // id鐢辫姹傜殑鍙傛暟鍐冲畾
 
         assertNotNull(object1);
         assertNotNull(object2);
@@ -171,7 +171,7 @@ public class PullServiceConfigTests extends AbstractPullServiceConfigTests {
         assertNotNull(getTool("object3"));
         assertNotNull(getTool("inset1"));
         assertNull(getTool("runtime1"));
-        assertNotNull(getTool("runtime2")); // id由请求的参数决定
+        assertNotNull(getTool("runtime2")); // id鐢辫姹傜殑鍙傛暟鍐冲畾
 
         assertNotSame(object1, getTool("object1"));
         assertNotSame(object2, getTool("object2"));

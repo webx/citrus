@@ -18,7 +18,7 @@
 package com.alibaba.citrus.util.templatelite;
 
 /**
- * ´ú±íÒ»¸öÍ¨ÓÃµÄÄ£°åÒì³£¡£
+ * ä»£è¡¨ä¸€ä¸ªé€šç”¨çš„æ¨¡æ¿å¼‚å¸¸ã€‚
  * 
  * @author Michael Zhou
  */

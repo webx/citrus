@@ -59,8 +59,8 @@ public class HeaderNameInterceptorTests extends AbstractBasicResponseTests {
 
         replayMocks();
 
-        response.addHeader(" location ", "http://localhost/"); // 特殊header：location，只调用redirect location interceptor
-        response.setHeader(" location ", "http://localhost/"); // 特殊header：location，只调用redirect location interceptor
+        response.addHeader(" location ", "http://localhost/"); // 鐗规畩header锛歭ocation锛屽彧璋冪敤redirect location interceptor
+        response.setHeader(" location ", "http://localhost/"); // 鐗规畩header锛歭ocation锛屽彧璋冪敤redirect location interceptor
 
         try {
             response.addDateHeader("test", 123L);
@@ -129,8 +129,8 @@ public class HeaderNameInterceptorTests extends AbstractBasicResponseTests {
 
         replayMocks();
 
-        response.addHeader(" location ", "http://localhost/"); // 特殊header：location，只调用redirect location interceptor
-        response.setHeader(" location ", "http://localhost/"); // 特殊header：location，只调用redirect location interceptor
+        response.addHeader(" location ", "http://localhost/"); // 鐗规畩header锛歭ocation锛屽彧璋冪敤redirect location interceptor
+        response.setHeader(" location ", "http://localhost/"); // 鐗规畩header锛歭ocation锛屽彧璋冪敤redirect location interceptor
 
         response.addDateHeader("test", 123L);
         response.setDateHeader("test", 123L);
@@ -166,8 +166,8 @@ public class HeaderNameInterceptorTests extends AbstractBasicResponseTests {
 
         replayMocks();
 
-        response.addHeader(" location ", "http://localhost/"); // 特殊header：location，只调用redirect location interceptor
-        response.setHeader(" location ", "http://localhost/"); // 特殊header：location，只调用redirect location interceptor
+        response.addHeader(" location ", "http://localhost/"); // 鐗规畩header锛歭ocation锛屽彧璋冪敤redirect location interceptor
+        response.setHeader(" location ", "http://localhost/"); // 鐗规畩header锛歭ocation锛屽彧璋冪敤redirect location interceptor
 
         response.addDateHeader("test", 123L);
         response.setDateHeader("test", 123L);

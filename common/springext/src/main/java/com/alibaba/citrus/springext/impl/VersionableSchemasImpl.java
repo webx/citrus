@@ -40,7 +40,7 @@ public class VersionableSchemasImpl implements VersionableSchemas {
             this.versionedSchemas.put(schema.getVersion(), schema);
         }
 
-        // Ãû³Æ -> schemaÓ³Éä
+        // åç§° -> schemaæ˜ å°„
         TreeMap<String, Schema> mappings = createTreeMap();
 
         if (mainSchema != null) {

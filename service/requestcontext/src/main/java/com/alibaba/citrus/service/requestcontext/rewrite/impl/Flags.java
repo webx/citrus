@@ -44,7 +44,7 @@ public class Flags {
     }
 
     /**
-     * ¼ì²éflags£¬Èç¹û´æÔÚ£¬Ôò·µ»Ø<code>true</code>¡£
+     * æ£€æŸ¥flagsï¼Œå¦‚æœå­˜åœ¨ï¼Œåˆ™è¿”å›<code>true</code>ã€‚
      */
     protected boolean hasFlags(String... names) {
         assertTrue(!isEmptyArray(names), "names");
@@ -52,7 +52,7 @@ public class Flags {
         for (String flag : flags) {
             for (String name : names) {
                 if (flag.startsWith(name)) {
-                    // flag»òF=*
+                    // flagæˆ–F=*
                     if (flag.length() == name.length() || flag.charAt(name.length()) == '=') {
                         return true;
                     }
@@ -64,7 +64,7 @@ public class Flags {
     }
 
     /**
-     * Èç¹ûflag²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£Èç¹ûflagÎŞÖµ£¬Ôò·µ»Ø¿Õ×Ö·û´®¡£·ñÔò·µ»ØÖµ¡£
+     * å¦‚æœflagä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚å¦‚æœflagæ— å€¼ï¼Œåˆ™è¿”å›ç©ºå­—ç¬¦ä¸²ã€‚å¦åˆ™è¿”å›å€¼ã€‚
      */
     protected String getFlagValue(String... names) {
         assertTrue(!isEmptyArray(names), "names");

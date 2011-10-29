@@ -26,7 +26,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
 /**
- * ÈÃvelocityÄ£°åÏµÍ³Ê¹ÓÃspring resource loader×°ÔØÄ£°åµÄÊÊÅäÆ÷.
+ * è®©velocityæ¨¡æ¿ç³»ç»Ÿä½¿ç”¨spring resource loaderè£…è½½æ¨¡æ¿çš„é€‚é…å™¨.
  * 
  * @author Michael Zhou
  */
@@ -36,7 +36,7 @@ public class SpringResourceLoaderAdapter extends AbstractResourceLoader {
     private ResourceLoader springLoader;
 
     /**
-     * ³õÊ¼»¯resource loader.
+     * åˆå§‹åŒ–resource loader.
      */
     @Override
     public void init(ExtendedProperties configuration) {
@@ -56,7 +56,7 @@ public class SpringResourceLoaderAdapter extends AbstractResourceLoader {
     }
 
     /**
-     * È¡µÃ×ÊÔ´¡£
+     * å–å¾—èµ„æºã€‚
      */
     @Override
     protected Resource getResource(String templateName) {
@@ -64,7 +64,7 @@ public class SpringResourceLoaderAdapter extends AbstractResourceLoader {
     }
 
     /**
-     * È¡µÃÓÃÓÚÈÕÖ¾¼ÇÂ¼µÄID¡£
+     * å–å¾—ç”¨äºæ—¥å¿—è®°å½•çš„IDã€‚
      */
     @Override
     protected String getLogID() {

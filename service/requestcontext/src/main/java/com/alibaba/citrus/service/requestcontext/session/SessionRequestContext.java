@@ -20,28 +20,28 @@ package com.alibaba.citrus.service.requestcontext.session;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 
 /**
- * Ö§³ÖsessionµÄ<code>RequestContext</code>ÊµÏÖ¡£
+ * æ”¯æŒsessionçš„<code>RequestContext</code>å®ç°ã€‚
  * 
  * @author Michael Zhou
  */
 public interface SessionRequestContext extends RequestContext {
     /**
-     * È¡µÃ<code>SessionConfig</code>ÊµÀı¡£
+     * å–å¾—<code>SessionConfig</code>å®ä¾‹ã€‚
      * 
-     * @return <code>SessionConfig</code>ÊµÀı
+     * @return <code>SessionConfig</code>å®ä¾‹
      */
     SessionConfig getSessionConfig();
 
     /**
-     * ÅĞ¶ÏsessionÊÇ·ñÒÑ¾­×÷·Ï¡£
+     * åˆ¤æ–­sessionæ˜¯å¦å·²ç»ä½œåºŸã€‚
      * 
-     * @return ÈçÒÑ×÷·Ï£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚å·²ä½œåºŸï¼Œåˆ™è¿”å›<code>true</code>
      */
     boolean isSessionInvalidated();
 
     /**
-     * Çå³ısession¡£ÀàËÆ<code>invalidate()</code>·½·¨£¬µ«Ö§³ÖºóĞø²Ù×÷£¬¶ø²»»áÅ×³ö
-     * <code>IllegalStateException</code>¡£
+     * æ¸…é™¤sessionã€‚ç±»ä¼¼<code>invalidate()</code>æ–¹æ³•ï¼Œä½†æ”¯æŒåç»­æ“ä½œï¼Œè€Œä¸ä¼šæŠ›å‡º
+     * <code>IllegalStateException</code>ã€‚
      */
     void clear();
 }

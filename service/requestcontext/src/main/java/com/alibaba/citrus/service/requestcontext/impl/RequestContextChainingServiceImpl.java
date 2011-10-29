@@ -49,9 +49,9 @@ import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
 import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
- * ½«<code>RequestContext</code>¶ÔÏó´®ÁªÆğÀ´µÄservice¡£
+ * å°†<code>RequestContext</code>å¯¹è±¡ä¸²è”èµ·æ¥çš„serviceã€‚
  * <p>
- * Í¨¹ıËü¿ÉÒÔÊµÏÖ¶àÖØ°ü×°µÄHTTP requestºÍresponse¡£
+ * é€šè¿‡å®ƒå¯ä»¥å®ç°å¤šé‡åŒ…è£…çš„HTTP requestå’Œresponseã€‚
  * </p>
  */
 public class RequestContextChainingServiceImpl extends AbstractService<RequestContextChainingService> implements
@@ -80,7 +80,7 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
         }
 
         if (sort) {
-            // ÅÅĞò
+            // æ’åº
             Map<Integer, RequestContextFactory<?>> result = createLinkedHashMap();
             Set<Integer> processing = createHashSet();
 
@@ -92,7 +92,7 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
 
             factories = createArrayList(result.values());
 
-            // ¼ì²éÈ±Ê§µÄfeatures
+            // æ£€æŸ¥ç¼ºå¤±çš„features
             Set<String> usableFeatures = createHashSet();
 
             for (RequestContextFactory<?> f : factories) {
@@ -117,7 +117,7 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
     }
 
     /**
-     * ¶Ôfactories½øĞĞÅÅĞò£¬ÒÔ±ã·ûºÏ¸÷×ÔµÄÏŞ¶¨¡£
+     * å¯¹factoriesè¿›è¡Œæ’åºï¼Œä»¥ä¾¿ç¬¦åˆå„è‡ªçš„é™å®šã€‚
      */
     private void sort(int index, RequestContextFactory<?> f, Map<Integer, RequestContextFactory<?>> result,
                       Set<Integer> processing) {
@@ -134,7 +134,7 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
     }
 
     /**
-     * È¡µÃËùÓĞÔÚfÖ®Ç°µÄfactories¡£
+     * å–å¾—æ‰€æœ‰åœ¨fä¹‹å‰çš„factoriesã€‚
      */
     private Map<Integer, RequestContextFactory<?>> getFactoriesBefore(RequestContextFactory<?> f) {
         Map<Integer, RequestContextFactory<?>> allBefore = createLinkedHashMap();
@@ -151,9 +151,9 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
     }
 
     /**
-     * ±È½Ïf1ºÍf2£¬Èçf1ÔÚÇ°£¬·µ»Ø-1£¬Èçf1ÔÚºó£¬Ôò·µ»Ø1£¬²»È·¶¨Ôò·µ»Ø0¡£
+     * æ¯”è¾ƒf1å’Œf2ï¼Œå¦‚f1åœ¨å‰ï¼Œè¿”å›-1ï¼Œå¦‚f1åœ¨åï¼Œåˆ™è¿”å›1ï¼Œä¸ç¡®å®šåˆ™è¿”å›0ã€‚
      * <p>
-     * Ã÷È·Ö¸¶¨µÄÊ¤ÓÚÓÃ*Ö¸¶¨µÄ¡£
+     * æ˜ç¡®æŒ‡å®šçš„èƒœäºç”¨*æŒ‡å®šçš„ã€‚
      * </p>
      */
     private int compare(RequestContextFactory<?> f1, RequestContextFactory<?> f2) {
@@ -228,18 +228,18 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
     }
 
     /**
-     * È¡µÃËùÓĞµÄrequest contextµÄĞÅÏ¢¡£
+     * å–å¾—æ‰€æœ‰çš„request contextçš„ä¿¡æ¯ã€‚
      */
     public RequestContextInfo<?>[] getRequestContextInfos() {
         return factories.toArray(new RequestContextInfo<?>[factories.size()]);
     }
 
     /**
-     * È¡µÃ<code>RequestContext</code>´®¡£
+     * å–å¾—<code>RequestContext</code>ä¸²ã€‚
      * 
-     * @param servletContext <code>ServletContext</code>¶ÔÏó
-     * @param request <code>HttpServletRequest</code>¶ÔÏó
-     * @param response <code>HttpServletResponse</code>¶ÔÏó
+     * @param servletContext <code>ServletContext</code>å¯¹è±¡
+     * @param request <code>HttpServletRequest</code>å¯¹è±¡
+     * @param response <code>HttpServletResponse</code>å¯¹è±¡
      * @return request context
      */
     public RequestContext getRequestContext(ServletContext servletContext, HttpServletRequest request,
@@ -248,17 +248,17 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
 
         RequestContext requestContext = new SimpleRequestContext(servletContext, request, response);
 
-        // ½«requestContext·ÅÈërequestÖĞ£¬ÒÔ±ã½ñºóÖ»ĞèÒªÓÃrequest¾Í¿ÉÒÔÈ¡µÃrequestContext¡£
-        // ¼°ÔçÉèÖÃsetRequestContext£¬ÒÔ±ãËæºóµÄprepareRequestContext¾ÍÄÜÊ¹ÓÃ¡£
+        // å°†requestContextæ”¾å…¥requestä¸­ï¼Œä»¥ä¾¿ä»Šååªéœ€è¦ç”¨requestå°±å¯ä»¥å–å¾—requestContextã€‚
+        // åŠæ—©è®¾ç½®setRequestContextï¼Œä»¥ä¾¿éšåçš„prepareRequestContextå°±èƒ½ä½¿ç”¨ã€‚
         RequestContextUtil.setRequestContext(requestContext);
 
         for (RequestContextFactory<?> factory : factories) {
             requestContext = factory.getRequestContextWrapper(requestContext);
 
-            // µ÷ÓÃ<code>requestContext.prepare()</code>·½·¨
+            // è°ƒç”¨<code>requestContext.prepare()</code>æ–¹æ³•
             prepareRequestContext(requestContext);
 
-            // ½«requestContext·ÅÈërequestÖĞ£¬ÒÔ±ã½ñºóÖ»ĞèÒªÓÃrequest¾Í¿ÉÒÔÈ¡µÃrequestContext¡£
+            // å°†requestContextæ”¾å…¥requestä¸­ï¼Œä»¥ä¾¿ä»Šååªéœ€è¦ç”¨requestå°±å¯ä»¥å–å¾—requestContextã€‚
             RequestContextUtil.setRequestContext(requestContext);
         }
 
@@ -268,9 +268,9 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
     }
 
     /**
-     * µ÷ÓÃ<code>requestContext.prepare()</code>·½·¨¡£
+     * è°ƒç”¨<code>requestContext.prepare()</code>æ–¹æ³•ã€‚
      * 
-     * @param requestContext Òª³õÊ¼»¯µÄrequest context
+     * @param requestContext è¦åˆå§‹åŒ–çš„request context
      */
     private void prepareRequestContext(RequestContext requestContext) {
         if (getLogger().isTraceEnabled()) {
@@ -281,10 +281,10 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
     }
 
     /**
-     * ÓÉÍâµ½ÄÚµØµ÷ÓÃ<code>afterRequest()</code>·½·¨¡£
+     * ç”±å¤–åˆ°å†…åœ°è°ƒç”¨<code>afterRequest()</code>æ–¹æ³•ã€‚
      * 
-     * @param requestContext Òª³õÊ¼»¯µÄrequest context
-     * @throws RequestContextException Èç¹ûÊ§°Ü
+     * @param requestContext è¦åˆå§‹åŒ–çš„request context
+     * @throws RequestContextException å¦‚æœå¤±è´¥
      */
     public void commitRequestContext(RequestContext requestContext) throws RequestContextException {
         assertInitialized();

@@ -21,7 +21,7 @@ import com.alibaba.citrus.service.form.support.AbstractRegexpValidator;
 import com.alibaba.citrus.service.form.support.AbstractValidatorDefinitionParser;
 
 /**
- * ÅĞ¶ÏÊäÈëÖµÊÇ·ñÎªºÏ·¨µÄe-mail¸ñÊ½¡£
+ * åˆ¤æ–­è¾“å…¥å€¼æ˜¯å¦ä¸ºåˆæ³•çš„e-mailæ ¼å¼ã€‚
  * 
  * @author Michael Zhou
  */

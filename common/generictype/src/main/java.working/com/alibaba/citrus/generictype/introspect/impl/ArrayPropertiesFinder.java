@@ -25,7 +25,7 @@ import com.alibaba.citrus.generictype.introspect.PropertyEvaluationFailureExcept
 import com.alibaba.citrus.generictype.introspect.PropertyInfo;
 
 /**
- * ·ÖÎöÊı×é£¬½«Êı×é¿´×÷indexedÊôĞÔÀ´²Ù×÷¡£
+ * åˆ†ææ•°ç»„ï¼Œå°†æ•°ç»„çœ‹ä½œindexedå±æ€§æ¥æ“ä½œã€‚
  * 
  * @author Michael Zhou
  */
@@ -40,7 +40,7 @@ public class ArrayPropertiesFinder extends SinglePropertyFinder {
     }
 
     /**
-     * ´ú±íÒ»¸öÊı×éµÄÊôĞÔĞÅÏ¢¡£
+     * ä»£è¡¨ä¸€ä¸ªæ•°ç»„çš„å±æ€§ä¿¡æ¯ã€‚
      */
     private static class ArrayPropertyImpl extends AbstractPropertyInfo implements IndexedPropertyInfo {
         private ArrayPropertyImpl(TypeInfo declaringType) {

@@ -38,7 +38,7 @@ import com.alibaba.citrus.service.uribroker.URIBrokerService;
 import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 
 /**
- * URI Broker·şÎñµÄÊµÏÖ¡£
+ * URI BrokeræœåŠ¡çš„å®ç°ã€‚
  * 
  * @author Michael Zhou
  * @author dux.fangl
@@ -48,43 +48,43 @@ public class URIBrokerServiceImpl extends AbstractService<URIBrokerService> impl
     private URIBrokerService[] importUris;
     private Boolean requestAware;
     private String defaultCharset;
-    private URIBrokerInfo[] brokerInfos; // ÁÙÊ±brokersĞÅÏ¢£¬½öÓÃÓÚ³õÊ¼»¯
+    private URIBrokerInfo[] brokerInfos; // ä¸´æ—¶brokersä¿¡æ¯ï¼Œä»…ç”¨äºåˆå§‹åŒ–
     private Map<String, URIBroker> brokers;
     private List<String> exposedNames;
     private List<String> names;
 
     /**
-     * ´´½¨·şÎñ£¬È¡µÃrequest proxy¡£
+     * åˆ›å»ºæœåŠ¡ï¼Œå–å¾—request proxyã€‚
      */
     public URIBrokerServiceImpl(HttpServletRequest request) {
-        this.request = assertProxy(request); // request¿ÉÒÔÎª¿Õ
+        this.request = assertProxy(request); // requestå¯ä»¥ä¸ºç©º
     }
 
     /**
-     * ÉèÖÃÒªµ¼ÈëµÄuris¡£
+     * è®¾ç½®è¦å¯¼å…¥çš„urisã€‚
      */
     public void setImports(URIBrokerService[] importUris) {
         this.importUris = importUris;
     }
 
     /**
-     * ÊÇ·ñÊ¹ÓÃrequestµÄ²ÎÁ¿¡£
+     * æ˜¯å¦ä½¿ç”¨requestçš„å‚é‡ã€‚
      */
     public boolean isRequestAware() {
         return requestAware == null ? false : requestAware;
     }
 
     /**
-     * ÉèÖÃÊÇ·ñÊ¹ÓÃrequestµÄ²ÎÁ¿¡£
+     * è®¾ç½®æ˜¯å¦ä½¿ç”¨requestçš„å‚é‡ã€‚
      */
     public void setRequestAware(boolean requestAware) {
         this.requestAware = requestAware;
     }
 
     /**
-     * È¡µÃÄ¬ÈÏµÄcharset¡£
+     * å–å¾—é»˜è®¤çš„charsetã€‚
      * <p>
-     * Èç¹û²»ÌØ±ğÖ¸¶¨charset£¬uri broker½«È¡¸ÃÖµ×÷Îªcharset¡£
+     * å¦‚æœä¸ç‰¹åˆ«æŒ‡å®šcharsetï¼Œuri brokerå°†å–è¯¥å€¼ä½œä¸ºcharsetã€‚
      * </p>
      */
     public String getDefaultCharset() {
@@ -92,35 +92,35 @@ public class URIBrokerServiceImpl extends AbstractService<URIBrokerService> impl
     }
 
     /**
-     * ÉèÖÃÄ¬ÈÏµÄcharset¡£
+     * è®¾ç½®é»˜è®¤çš„charsetã€‚
      */
     public void setDefaultCharset(String defaultCharset) {
         this.defaultCharset = defaultCharset;
     }
 
     /**
-     * ÉèÖÃÒ»Åúuri broker¼¯ºÏ¡£
+     * è®¾ç½®ä¸€æ‰¹uri brokeré›†åˆã€‚
      */
     public void setBrokers(URIBrokerInfo[] brokerInfos) {
         this.brokerInfos = brokerInfos;
     }
 
     /**
-     * È¡µÃËùÓĞURI brokerÃû³Æ¡£
+     * å–å¾—æ‰€æœ‰URI brokeråç§°ã€‚
      */
     public List<String> getNames() {
         return unmodifiableList(names);
     }
 
     /**
-     * È¡µÃËùÓĞ±»µ¼³öµÄURI brokerÃû³Æ¡£
+     * å–å¾—æ‰€æœ‰è¢«å¯¼å‡ºçš„URI brokeråç§°ã€‚
      */
     public List<String> getExposedNames() {
         return unmodifiableList(exposedNames);
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄURI broker¡£
+     * å–å¾—æŒ‡å®šåç§°çš„URI brokerã€‚
      */
     public URIBroker getURIBroker(String name) {
         URIBroker broker = brokers.get(name);
@@ -128,14 +128,14 @@ public class URIBrokerServiceImpl extends AbstractService<URIBrokerService> impl
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄURI broker£¬µ«²»fork¡£
+     * å–å¾—æŒ‡å®šåç§°çš„URI brokerï¼Œä½†ä¸forkã€‚
      */
     URIBroker getURIBrokerInternal(String name) {
         return brokers.get(name);
     }
 
     /**
-     * ³õÊ¼»¯Ê±ËùÓĞµÄbrokers¡£
+     * åˆå§‹åŒ–æ—¶æ‰€æœ‰çš„brokersã€‚
      */
     @Override
     protected void init() {
@@ -145,7 +145,7 @@ public class URIBrokerServiceImpl extends AbstractService<URIBrokerService> impl
         names = createLinkedList();
         exposedNames = createLinkedList();
 
-        // ½¨Á¢nameºÍbrokerµÄÓ³Éä
+        // å»ºç«‹nameå’Œbrokerçš„æ˜ å°„
         Map<String, URIBrokerInfo> brokerInfoMap = createLinkedHashMap();
 
         for (URIBrokerInfo brokerInfo : brokerInfos) {
@@ -164,12 +164,12 @@ public class URIBrokerServiceImpl extends AbstractService<URIBrokerService> impl
                 exposedNames.add(brokerInfo.name);
             }
 
-            // ÉèÖÃ¶¥¼¶uriµÄÄ¬ÈÏÖµ£¬³ı·ÇÉèÖÃÁËrequestAware£¬·ñÔò±£³ÖbrokerÖĞµÄÄ¬ÈÏÖµ
+            // è®¾ç½®é¡¶çº§uriçš„é»˜è®¤å€¼ï¼Œé™¤éè®¾ç½®äº†requestAwareï¼Œå¦åˆ™ä¿æŒbrokerä¸­çš„é»˜è®¤å€¼
             if (requestAware != null && brokerInfo.parentName == null) {
                 broker.setRequestAwareDefault(requestAware);
             }
 
-            // ÉèÖÃ¶¥¼¶uriµÄÄ¬ÈÏÖµ£¬³ı·ÇÉèÖÃÁËdefaultCharset£¬·ñÔò±£³ÖÄ¬ÈÏµÄbroker charset¡£
+            // è®¾ç½®é¡¶çº§uriçš„é»˜è®¤å€¼ï¼Œé™¤éè®¾ç½®äº†defaultCharsetï¼Œå¦åˆ™ä¿æŒé»˜è®¤çš„broker charsetã€‚
             if (defaultCharset != null && brokerInfo.parentName == null && broker.getCharset() == null) {
                 broker.setCharset(defaultCharset);
             }
@@ -185,7 +185,7 @@ public class URIBrokerServiceImpl extends AbstractService<URIBrokerService> impl
                 Set<String> exposedImportNames = createHashSet(importUriBrokerService.getExposedNames());
 
                 for (String name : importUriBrokerService.getNames()) {
-                    // ÔÊĞíµ±Ç°ÎÄ¼şÖĞµÄuri¸²¸ÇparentÖĞµÄÍ¬Ãûuri¡£
+                    // å…è®¸å½“å‰æ–‡ä»¶ä¸­çš„uriè¦†ç›–parentä¸­çš„åŒåuriã€‚
                     if (brokers.containsKey(name)) {
                         continue;
                     }
@@ -208,13 +208,13 @@ public class URIBrokerServiceImpl extends AbstractService<URIBrokerService> impl
             }
         }
 
-        // ÉèÖÃparent brokers£¬È·±£parent brokerÔÚÀà²ã´ÎÉÏÒ²ÊÇ¸¸Àà»òÍ¬Àà£¬Í¬Ê±È·±£Ã»ÓĞµİ¹éÅÉÉú
+        // è®¾ç½®parent brokersï¼Œç¡®ä¿parent brokeråœ¨ç±»å±‚æ¬¡ä¸Šä¹Ÿæ˜¯çˆ¶ç±»æˆ–åŒç±»ï¼ŒåŒæ—¶ç¡®ä¿æ²¡æœ‰é€’å½’æ´¾ç”Ÿ
         for (Map.Entry<String, URIBrokerInfo> entry : brokerInfoMap.entrySet()) {
             String name = entry.getKey();
             URIBrokerInfo brokerInfo = entry.getValue();
             String parentName = brokerInfo.parentName;
 
-            // ¼ì²é¼Ì³ĞÁ´£¬È·±£Ã»ÓĞµİ¹é
+            // æ£€æŸ¥ç»§æ‰¿é“¾ï¼Œç¡®ä¿æ²¡æœ‰é€’å½’
             checkCyclic(brokerInfoMap, name, parentName);
 
             if (parentName != null) {
@@ -226,7 +226,7 @@ public class URIBrokerServiceImpl extends AbstractService<URIBrokerService> impl
             }
         }
 
-        // µİ¹é¸´ÖÆparentÖĞµÄĞÅÏ¢
+        // é€’å½’å¤åˆ¶parentä¸­çš„ä¿¡æ¯
         for (URIBroker broker : brokers.values()) {
             broker.init();
         }
@@ -257,7 +257,7 @@ public class URIBrokerServiceImpl extends AbstractService<URIBrokerService> impl
     }
 
     /**
-     * ÁĞ³öËùÓĞµÄURI brokers¡£
+     * åˆ—å‡ºæ‰€æœ‰çš„URI brokersã€‚
      */
     public String dump() {
         StringWriter buf = new StringWriter();
@@ -266,7 +266,7 @@ public class URIBrokerServiceImpl extends AbstractService<URIBrokerService> impl
     }
 
     /**
-     * ÁĞ³öËùÓĞµÄURI brokers¡£
+     * åˆ—å‡ºæ‰€æœ‰çš„URI brokersã€‚
      */
     public void dump(Writer writer) {
         PrintWriter out = null;
@@ -277,7 +277,7 @@ public class URIBrokerServiceImpl extends AbstractService<URIBrokerService> impl
             out = new PrintWriter(writer);
         }
 
-        // È¡µÃ×î³¤µÄkeyµÄ³¤¶È
+        // å–å¾—æœ€é•¿çš„keyçš„é•¿åº¦
         int classWidth = 0;
         int keyWidth = 0;
 
@@ -318,7 +318,7 @@ public class URIBrokerServiceImpl extends AbstractService<URIBrokerService> impl
     }
 
     /**
-     * ´æ·Åuri brokerµÄÅäÖÃĞÅÏ¢¡£
+     * å­˜æ”¾uri brokerçš„é…ç½®ä¿¡æ¯ã€‚
      */
     public static class URIBrokerInfo {
         public String name;

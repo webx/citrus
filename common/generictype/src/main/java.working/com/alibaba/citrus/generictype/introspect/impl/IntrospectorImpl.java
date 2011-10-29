@@ -35,7 +35,7 @@ import com.alibaba.citrus.generictype.introspect.Introspector;
 import com.alibaba.citrus.generictype.introspect.PropertyInfo;
 
 /**
- * ÊµÏÖ{@link Introspector}¡£
+ * å®ç°{@link Introspector}ã€‚
  * 
  * @author Michael Zhou
  */
@@ -44,7 +44,7 @@ public class IntrospectorImpl extends Introspector {
     private final Map<String, List<PropertyInfo>> props;
 
     /**
-     * ´´½¨Ò»¸ö{@link Introspector}ÊµÀı¡£
+     * åˆ›å»ºä¸€ä¸ª{@link Introspector}å®ä¾‹ã€‚
      */
     IntrospectorImpl(TypeInfo type) {
         this.type = assertNotNull(type, "type");
@@ -62,35 +62,35 @@ public class IntrospectorImpl extends Introspector {
     }
 
     /**
-     * É¨Ãè²¢·ÖÎöÀàĞÍ¡£
+     * æ‰«æå¹¶åˆ†æç±»å‹ã€‚
      */
     private class TypeScanner {
         private final TypeVisitor[] visitors = getVisitors();
         private final Map<MethodSignature, Method> methods = createHashMap();
 
         /**
-         * ·ÖÎöÒ»¸öÀà£¬¼°Æä»ùÀàºÍ½Ó¿Ú¡£
+         * åˆ†æä¸€ä¸ªç±»ï¼ŒåŠå…¶åŸºç±»å’Œæ¥å£ã€‚
          */
         public Map<String, List<PropertyInfo>> scan() {
             boolean first = true;
 
-            // ¿ªÊ¼
+            // å¼€å§‹
             for (TypeVisitor visitor : visitors) {
                 visitor.visit();
             }
 
-            // ·ÖÎö
+            // åˆ†æ
             for (TypeInfo t : type.getSupertypes()) {
                 scanType(t, true, first);
                 first = false;
             }
 
-            // ½áÊø
+            // ç»“æŸ
             for (TypeVisitor visitor : visitors) {
                 visitor.visitEnd();
             }
 
-            // ÊÕ¼¯½á¹û
+            // æ”¶é›†ç»“æœ
             PropertiesMap props = new PropertiesMap();
 
             for (TypeVisitor visitor : visitors) {
@@ -103,7 +103,7 @@ public class IntrospectorImpl extends Introspector {
         }
 
         /**
-         * ·ÖÎöÒ»¸öÀà¡£
+         * åˆ†æä¸€ä¸ªç±»ã€‚
          */
         private void scanType(TypeInfo type, boolean scanFields, boolean scanConstructors) {
             for (TypeVisitor visitor : visitors) {
@@ -112,7 +112,7 @@ public class IntrospectorImpl extends Introspector {
 
             Class<?> clazz = type.getRawType();
 
-            // É¨ÃèclassĞòÁĞÖĞµÄÃ¿Ò»¸öfield£¬ÎŞÂÛÆä·ÃÎÊĞÔÊÇÊ²Ã´¡£
+            // æ‰«æclassåºåˆ—ä¸­çš„æ¯ä¸€ä¸ªfieldï¼Œæ— è®ºå…¶è®¿é—®æ€§æ˜¯ä»€ä¹ˆã€‚
             if (scanFields) {
                 for (Field field : clazz.getDeclaredFields()) {
                     for (TypeVisitor visitor : visitors) {
@@ -121,7 +121,7 @@ public class IntrospectorImpl extends Introspector {
                 }
             }
 
-            // Ö»É¨ÃèµÚÒ»¸öclassÖĞµÄconstructor£¬ÎŞÂÛÆä·ÃÎÊĞÔÊÇÊ²Ã´¡£
+            // åªæ‰«æç¬¬ä¸€ä¸ªclassä¸­çš„constructorï¼Œæ— è®ºå…¶è®¿é—®æ€§æ˜¯ä»€ä¹ˆã€‚
             if (scanConstructors) {
                 for (Constructor<?> constructor : clazz.getDeclaredConstructors()) {
                     for (TypeVisitor visitor : visitors) {
@@ -130,8 +130,8 @@ public class IntrospectorImpl extends Introspector {
                 }
             }
 
-            // É¨ÃèclassĞòÁĞÖĞµÄÃ¿Ò»¸ömethod£¬ÎŞÂÛÆä·ÃÎÊĞÔÊÇÊ²Ã´¡£
-            // È»¶ø£¬¶ÔÓÚpublicºÍprotected method£¬Ö»ÓĞ×î¶¥²¿µÄÄÇ¸öÊµÏÖ»á±»·ÃÎÊ¡£
+            // æ‰«æclassåºåˆ—ä¸­çš„æ¯ä¸€ä¸ªmethodï¼Œæ— è®ºå…¶è®¿é—®æ€§æ˜¯ä»€ä¹ˆã€‚
+            // ç„¶è€Œï¼Œå¯¹äºpublicå’Œprotected methodï¼Œåªæœ‰æœ€é¡¶éƒ¨çš„é‚£ä¸ªå®ç°ä¼šè¢«è®¿é—®ã€‚
             for (Method method : clazz.getDeclaredMethods()) {
                 MethodSignature sig = new MethodSignature(method);
                 boolean accessible = (method.getModifiers() & (PUBLIC | PROTECTED)) != 0;
@@ -151,7 +151,7 @@ public class IntrospectorImpl extends Introspector {
     }
 
     /**
-     * ´ú±íÒ»¸öPropertiesµÄÓ³Éä±í¡£
+     * ä»£è¡¨ä¸€ä¸ªPropertiesçš„æ˜ å°„è¡¨ã€‚
      */
     private static class PropertiesMap extends HashMap<String, List<PropertyInfo>> {
         private static final long serialVersionUID = 3899442980552826145L;
@@ -199,7 +199,7 @@ public class IntrospectorImpl extends Introspector {
     }
 
     /**
-     * ´´½¨{@link Introspector}µÄ¹¤³§¡£
+     * åˆ›å»º{@link Introspector}çš„å·¥å‚ã€‚
      */
     public static class FactoryImpl implements Factory {
         public Introspector getInstance(TypeInfo type) {

@@ -48,7 +48,7 @@ import com.alibaba.citrus.service.requestcontext.session.store.simple.impl.Simpl
 import com.alibaba.citrus.service.requestcontext.util.CookieSupport;
 
 /**
- * ²âÊÔ<code>Session</code>¡£
+ * æµ‹è¯•<code>Session</code>ã€‚
  */
 public class SessionTests extends AbstractRequestContextsTests<SessionRequestContext> {
     private long currentTime;
@@ -68,9 +68,9 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
     }
 
     /**
-     * Ã»ÓĞÅäÖÃÈÎºÎstoreµÄÇéĞÎ¡£
+     * æ²¡æœ‰é…ç½®ä»»ä½•storeçš„æƒ…å½¢ã€‚
      * <p>
-     * ÓÉÓÚSESSION MODELÒ²ĞèÒª±»±£´æÔÚsessionÖĞ£¬Òò´Ë±¨´í¡£
+     * ç”±äºSESSION MODELä¹Ÿéœ€è¦è¢«ä¿å­˜åœ¨sessionä¸­ï¼Œå› æ­¤æŠ¥é”™ã€‚
      * </p>
      */
     @Test
@@ -89,9 +89,9 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
     }
 
     /**
-     * ½öÅäÖÃÁËÓÃÓÚ±£´æsession modelµÄstoreµÄÇéĞÎ¡£
+     * ä»…é…ç½®äº†ç”¨äºä¿å­˜session modelçš„storeçš„æƒ…å½¢ã€‚
      * <p>
-     * µ±setAttributeºÍremoveAttributeµÄÊ±ºò±¨´í¡£
+     * å½“setAttributeå’ŒremoveAttributeçš„æ—¶å€™æŠ¥é”™ã€‚
      * </p>
      */
     @Test
@@ -302,7 +302,7 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
         requestContexts.commitRequestContext(requestContext);
         commitToClient();
 
-        // ¼ì²écookie
+        // æ£€æŸ¥cookie
         String prefix = "JSESSIONID=" + sessionID + "; ";
         String path = "; Path=/";
         String httpOnly = "; HttpOnly";
@@ -374,7 +374,7 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
         requestContexts.commitRequestContext(requestContext);
         commitToClient();
 
-        // ¼ì²écookie£¬×¢Òâ£¬ÅäÖÃÎÄ¼şÖĞĞ´µÄÊÇtaobao.com£¬µ«ÕâÀï»á±»¹æ¸ñ»¯³É.taobao.com
+        // æ£€æŸ¥cookieï¼Œæ³¨æ„ï¼Œé…ç½®æ–‡ä»¶ä¸­å†™çš„æ˜¯taobao.comï¼Œä½†è¿™é‡Œä¼šè¢«è§„æ ¼åŒ–æˆ.taobao.com
         String prefix = "JSESSIONID=" + sessionID + "; Domain=.taobao.com; Expires=";
         String path = "; Path=/";
         String httpOnly = "; HttpOnly";
@@ -639,7 +639,7 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
         commitToClient();
 
         // request 2 no changes, and not keep in touch
-        Thread.sleep(600); // µÈ0.6s
+        Thread.sleep(600); // ç­‰0.6s
         invokeNoopServlet("/servlet");
         initRequestContext(beanName);
 
@@ -649,7 +649,7 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
         commitToClient();
 
         // request 3
-        Thread.sleep(600); // ÔÙµÈ0.6s£¬Èç¹ûÃ»ÓĞkeepInTouch£¬¾Í³¬¹ı1s¹ıÆÚÁË¡£µ«keepInTouchµÄ»°¾Í²»»á¹ıÆÚ¡£
+        Thread.sleep(600); // å†ç­‰0.6sï¼Œå¦‚æœæ²¡æœ‰keepInTouchï¼Œå°±è¶…è¿‡1sè¿‡æœŸäº†ã€‚ä½†keepInTouchçš„è¯å°±ä¸ä¼šè¿‡æœŸã€‚
         invokeNoopServlet("/servlet");
         initRequestContext(beanName);
 
@@ -667,19 +667,19 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
 
     @Test
     public void session_maxInactiveInterval_exceeds() throws Exception {
-        // forceExpirationPeriod=0£¬sleep=1.1, maxInactiveInterval=1
+        // forceExpirationPeriod=0ï¼Œsleep=1.1, maxInactiveInterval=1
         checkSessionExpired(null, 1, 1100, true);
     }
 
     @Test
     public void session_forceExpirationPeriod_exceeds() throws Exception {
-        // forceExpirationPeriod=2£¬sleep=2.1, maxInactiveInterval=10
+        // forceExpirationPeriod=2ï¼Œsleep=2.1, maxInactiveInterval=10
         checkSessionExpired("session-force-expire", 10, 2100, true);
     }
 
     @Test
     public void session_forceExpirationPeriod_notExceeds() throws Exception {
-        // forceExpirationPeriod=2£¬sleep=1, maxInactiveInterval=0
+        // forceExpirationPeriod=2ï¼Œsleep=1, maxInactiveInterval=0
         checkSessionExpired("session-force-expire", 0, 1000, false);
     }
 
@@ -915,7 +915,7 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
 
         assertEquals(sessionID, clientResponse.getNewCookieValue("JSESSIONID")); // new added cookie
 
-        // ²é¿´sessionµÄÄÚÈİ
+        // æŸ¥çœ‹sessionçš„å†…å®¹
         Map<String, Object> contentMap = sms.getSession(sessionID);
 
         assertEquals(2, contentMap.size());
@@ -941,7 +941,7 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
 
         assertEquals(null, clientResponse.getNewCookieValue("JSESSIONID")); // no new cookie
 
-        // ²é¿´sessionµÄÄÚÈİ
+        // æŸ¥çœ‹sessionçš„å†…å®¹
         assertEquals(2, contentMap.size());
         assertEquals("myValue2", contentMap.get("myObject"));
         assertNotSame(model, contentMap.get(MODEL_KEY_DEFAULT));
@@ -982,7 +982,7 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
 
         // request 2 - new session
         prepareWebClient();
-        client.putCookie("JSESSIONID", sessionID + "_changed"); // ¸Ä±äsessionid
+        client.putCookie("JSESSIONID", sessionID + "_changed"); // æ”¹å˜sessionid
         client.putCookie("myCookieStore0", cookieStoreContent);
 
         invokeNoopServlet("/servlet");
@@ -1006,7 +1006,7 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
         assertEquals(0, session.getAttribute("count"));
 
         Object sessionModel = session.getAttribute("SESSION_MODEL");
-        getAccessibleField(SessionModelImpl.class, "sessionID").set(sessionModel, null); // Çå³ısessionModelÖĞµÄsessionID
+        getAccessibleField(SessionModelImpl.class, "sessionID").set(sessionModel, null); // æ¸…é™¤sessionModelä¸­çš„sessionID
 
         requestContexts.commitRequestContext(requestContext);
         commitToClient();
@@ -1018,7 +1018,7 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
 
         // request 2
         prepareWebClient();
-        client.putCookie("JSESSIONID", sessionID + "_changed"); // ¸Ä±äsessionid
+        client.putCookie("JSESSIONID", sessionID + "_changed"); // æ”¹å˜sessionid
         client.putCookie("myCookieStore0", cookieStoreContent);
 
         invokeNoopServlet("/servlet");

@@ -22,14 +22,14 @@ import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.ClassUtil.*;
 
 /**
- * ÑÓ³Ù¼ÓÔØ¶ÔÏó¡£
+ * å»¶è¿ŸåŠ è½½å¯¹è±¡ã€‚
  * <p>
- * Ä¿Ç°ÓĞÈıÖÖ¿ÉÓÃµÄ¼ÓÔØ·½°¸£¬¸÷·½°¸µÄĞÔÄÜÒòJDKºÍ»·¾³¶øÒì£º
+ * ç›®å‰æœ‰ä¸‰ç§å¯ç”¨çš„åŠ è½½æ–¹æ¡ˆï¼Œå„æ–¹æ¡ˆçš„æ€§èƒ½å› JDKå’Œç¯å¢ƒè€Œå¼‚ï¼š
  * </p>
  * <ol>
- * <li>Í¬²½µÄ(Synchronized) £­ ×îÂı£¬µ«×î¾­µä¿É¿¿¡£</li>
- * <li>»ùÓÚÏß³ÌµÄ(PerThread) £­ ±ÈµÚÒ»ÖÖ¿ì5£­50±¶×óÓÒ£¬ÀíÂÛÉÏÒ²ÊÇ¿É¿¿µÄ¡£</li>
- * <li>»ùÓÚDCLµÄ(Double-Checked Locking) £­ ±ÈµÚÒ»ÖÖ¿ì5£­70±¶×óÓÒ£¬ÀíÂÛÉÏ²»¿É¿¿£¬µ«ÔÚJDK5ÒÔºóÓ¦¸ÃÃ»ÓĞÎÊÌâÁË¡£</li>
+ * <li>åŒæ­¥çš„(Synchronized) ï¼ æœ€æ…¢ï¼Œä½†æœ€ç»å…¸å¯é ã€‚</li>
+ * <li>åŸºäºçº¿ç¨‹çš„(PerThread) ï¼ æ¯”ç¬¬ä¸€ç§å¿«5ï¼50å€å·¦å³ï¼Œç†è®ºä¸Šä¹Ÿæ˜¯å¯é çš„ã€‚</li>
+ * <li>åŸºäºDCLçš„(Double-Checked Locking) ï¼ æ¯”ç¬¬ä¸€ç§å¿«5ï¼70å€å·¦å³ï¼Œç†è®ºä¸Šä¸å¯é ï¼Œä½†åœ¨JDK5ä»¥ååº”è¯¥æ²¡æœ‰é—®é¢˜äº†ã€‚</li>
  * </ol>
  * 
  * @author Michael Zhou
@@ -50,7 +50,7 @@ public abstract class LazyLoader<T, C> {
     public abstract boolean testInstance();
 
     /**
-     * µ÷ÓÃloader×°ÔØ¶ÔÏó¡£
+     * è°ƒç”¨loaderè£…è½½å¯¹è±¡ã€‚
      */
     protected final T load(C context) {
         try {
@@ -65,7 +65,7 @@ public abstract class LazyLoader<T, C> {
     }
 
     /**
-     * ÓÃÀ´´´½¨¶ÔÏóÊµÀı¡£
+     * ç”¨æ¥åˆ›å»ºå¯¹è±¡å®ä¾‹ã€‚
      */
     public static interface Loader<T, C> {
         T load(C context);
@@ -76,16 +76,16 @@ public abstract class LazyLoader<T, C> {
     }
 
     /**
-     * È¡µÃÄ¬ÈÏµÄ·½°¸¡£
+     * å–å¾—é»˜è®¤çš„æ–¹æ¡ˆã€‚
      */
     public static <T, C> LazyLoader<T, C> getDefault(Loader<T, C> loader) {
         return getDoubleCheckedLockingLazyLoader(loader);
     }
 
     /**
-     * ÓÃ±£ÊØµÄÍ¬²½·½·¨À´´´½¨¶ÔÏó¡£
+     * ç”¨ä¿å®ˆçš„åŒæ­¥æ–¹æ³•æ¥åˆ›å»ºå¯¹è±¡ã€‚
      * <p>
-     * ¸Ã·½°¸ÔÚÈÎºÎJVMÖĞ¶¼ÊÇ°²È«µÄ¡£
+     * è¯¥æ–¹æ¡ˆåœ¨ä»»ä½•JVMä¸­éƒ½æ˜¯å®‰å…¨çš„ã€‚
      * </p>
      */
     public static <T, C> LazyLoader<T, C> getSynchronizedLazyLoader(Loader<T, C> loader) {
@@ -113,9 +113,9 @@ public abstract class LazyLoader<T, C> {
     }
 
     /**
-     * ÀûÓÃ<code>ThreadLocal</code>À´±ê¼Çµ±Ç°Ïß³ÌÊÇ·ñÍê³ÉÁËÍ¬²½²Ù×÷£¬´Ó¶øÊµÏÖÑÓ³Ù×°ÔØ¡£
+     * åˆ©ç”¨<code>ThreadLocal</code>æ¥æ ‡è®°å½“å‰çº¿ç¨‹æ˜¯å¦å®Œæˆäº†åŒæ­¥æ“ä½œï¼Œä»è€Œå®ç°å»¶è¿Ÿè£…è½½ã€‚
      * <p>
-     * ¸Ã·½°¸ÔÚÈÎºÎJVMÖĞ¶¼ÊÇ°²È«µÄ¡£
+     * è¯¥æ–¹æ¡ˆåœ¨ä»»ä½•JVMä¸­éƒ½æ˜¯å®‰å…¨çš„ã€‚
      * </p>
      */
     public static <T, C> LazyLoader<T, C> getPerThreadLazyLoader(Loader<T, C> loader) {
@@ -158,10 +158,10 @@ public abstract class LazyLoader<T, C> {
     }
 
     /**
-     * ÀûÓÃ<code>volatile</code>±äÁ¿µÄÌØĞÔ£¬ÒÔDCLµÄ·½Ê½½øĞĞ×°ÔØ¡£
+     * åˆ©ç”¨<code>volatile</code>å˜é‡çš„ç‰¹æ€§ï¼Œä»¥DCLçš„æ–¹å¼è¿›è¡Œè£…è½½ã€‚
      * <p>
-     * ×¢Òâ£¬¸ÃÊµÏÖÀíÂÛÉÏ±È<code>SynchronizedLazyLoader</code>ÓĞ¸üºÃµÄĞÔÄÜ£¬µ«ÆäÕıÈ·ĞÔÈ¡¾öÓÚJVMµÄÊµÏÖ¡£<br>
-     * Ò»°ãÈÏÎª£¬JDK5ÒÔºó£¬Ö§³Ö¶Ô<code>volatile</code>±äÁ¿µÄDCL²Ù×÷¡£
+     * æ³¨æ„ï¼Œè¯¥å®ç°ç†è®ºä¸Šæ¯”<code>SynchronizedLazyLoader</code>æœ‰æ›´å¥½çš„æ€§èƒ½ï¼Œä½†å…¶æ­£ç¡®æ€§å–å†³äºJVMçš„å®ç°ã€‚<br>
+     * ä¸€èˆ¬è®¤ä¸ºï¼ŒJDK5ä»¥åï¼Œæ”¯æŒå¯¹<code>volatile</code>å˜é‡çš„DCLæ“ä½œã€‚
      * </p>
      */
     public static <T, C> LazyLoader<T, C> getDoubleCheckedLockingLazyLoader(Loader<T, C> loader) {
@@ -191,7 +191,7 @@ public abstract class LazyLoader<T, C> {
     }
 
     /**
-     * ×ª»»³É×Ö·û´®±íÊ¾¡£
+     * è½¬æ¢æˆå­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      */
     @Override
     public String toString() {

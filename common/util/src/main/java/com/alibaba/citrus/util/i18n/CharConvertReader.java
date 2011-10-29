@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.io.Reader;
 
 /**
- * ±ß¶ÁÊı¾İ±ß×ª»»µÄReader¡£
+ * è¾¹è¯»æ•°æ®è¾¹è½¬æ¢çš„Readerã€‚
  * 
  * @author Michael Zhou
  */

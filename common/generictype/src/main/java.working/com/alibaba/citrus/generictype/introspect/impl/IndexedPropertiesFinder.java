@@ -31,15 +31,15 @@ import com.alibaba.citrus.generictype.introspect.PropertyEvaluationFailureExcept
 import com.alibaba.citrus.generictype.introspect.PropertyInfo;
 
 /**
- * ·ÖÎöindexedµÄJava BeansÊôĞÔ£¬Ò²¾ÍÊÇ£º
+ * åˆ†æindexedçš„Java Beanså±æ€§ï¼Œä¹Ÿå°±æ˜¯ï¼š
  * <ul>
- * <li>¿É¶ÁÊôĞÔ£º<code>PropertyType getPropertyName(int index)</code>¡£</li>
- * <li>¿ÉĞ´ÊôĞÔ£º<code>setPropertyName(int index, PropertyType propertyValue)</code>¡£
+ * <li>å¯è¯»å±æ€§ï¼š<code>PropertyType getPropertyName(int index)</code>ã€‚</li>
+ * <li>å¯å†™å±æ€§ï¼š<code>setPropertyName(int index, PropertyType propertyValue)</code>ã€‚
  * </li>
  * </ul>
  * <p>
- * IndexedµÄJava BeansÊôĞÔµÄÃû³Æ¿ÉÒÔÎª¿Õ£¬»»ÑÔÖ®£¬<code>get(int)</code>/
- * <code>set(int, Object)</code> ·½·¨½«»á±»¿´×÷Ò»¸öproperty¡£
+ * Indexedçš„Java Beanså±æ€§çš„åç§°å¯ä»¥ä¸ºç©ºï¼Œæ¢è¨€ä¹‹ï¼Œ<code>get(int)</code>/
+ * <code>set(int, Object)</code> æ–¹æ³•å°†ä¼šè¢«çœ‹ä½œä¸€ä¸ªpropertyã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -99,7 +99,7 @@ public class IndexedPropertiesFinder extends AbstractPropertiesFinder {
     }
 
     /**
-     * ´ú±íÒ»¸ö´øË÷ÒıµÄÊôĞÔĞÅÏ¢¡£
+     * ä»£è¡¨ä¸€ä¸ªå¸¦ç´¢å¼•çš„å±æ€§ä¿¡æ¯ã€‚
      */
     private static class IndexedPropertyImpl extends AbstractPropertyInfo implements IndexedPropertyInfo {
         private IndexedPropertyImpl(String name, TypeInfo declaringType, TypeInfo type, MethodInfo readMethod,

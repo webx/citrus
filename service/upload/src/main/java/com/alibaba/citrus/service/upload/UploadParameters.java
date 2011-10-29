@@ -96,7 +96,7 @@ public class UploadParameters implements UploadConfiguration {
     }
 
     /**
-     * ÉèÖÃÄ¬ÈÏÖµ¡£
+     * è®¾ç½®é»˜è®¤å€¼ã€‚
      */
     public void applyDefaultValues() {
         if (sizeThreshold.getValue() == 0) {

@@ -31,13 +31,13 @@ import java.util.Set;
 import com.alibaba.citrus.util.internal.Entities;
 
 /**
- * ´¦ÀíÒì³£µÄ¹¤¾ßÀà¡£
+ * å¤„ç†å¼‚å¸¸çš„å·¥å…·ç±»ã€‚
  * 
  * @author Michael Zhou
  */
 public class ExceptionUtil {
     /**
-     * ¼ì²éÒì³£ÊÇ·ñÓÉÖ¸¶¨ÀàĞÍµÄÒì³£ÒıÆğ¡£
+     * æ£€æŸ¥å¼‚å¸¸æ˜¯å¦ç”±æŒ‡å®šç±»å‹çš„å¼‚å¸¸å¼•èµ·ã€‚
      */
     public static boolean causedBy(Throwable t, Class<? extends Throwable> causeType) {
         assertNotNull(causeType, "causeType");
@@ -52,7 +52,7 @@ public class ExceptionUtil {
     }
 
     /**
-     * È¡µÃ×î¸ù±¾µÄÒì³£¡£
+     * å–å¾—æœ€æ ¹æœ¬çš„å¼‚å¸¸ã€‚
      */
     public static Throwable getRootCause(Throwable t) {
         List<Throwable> causes = getCauses(t, true);
@@ -65,14 +65,14 @@ public class ExceptionUtil {
     }
 
     /**
-     * È¡µÃ°üÀ¨µ±Ç°Òì³£ÔÚÄÚµÄËùÓĞµÄcausesÒì³££¬°´³öÏÖµÄË³ĞòÅÅÁĞ¡£
+     * å–å¾—åŒ…æ‹¬å½“å‰å¼‚å¸¸åœ¨å†…çš„æ‰€æœ‰çš„causeså¼‚å¸¸ï¼ŒæŒ‰å‡ºç°çš„é¡ºåºæ’åˆ—ã€‚
      */
     public static List<Throwable> getCauses(Throwable t) {
         return getCauses(t, false);
     }
 
     /**
-     * È¡µÃ°üÀ¨µ±Ç°Òì³£ÔÚÄÚµÄËùÓĞµÄcausesÒì³££¬°´³öÏÖµÄË³ĞòÅÅÁĞ¡£
+     * å–å¾—åŒ…æ‹¬å½“å‰å¼‚å¸¸åœ¨å†…çš„æ‰€æœ‰çš„causeså¼‚å¸¸ï¼ŒæŒ‰å‡ºç°çš„é¡ºåºæ’åˆ—ã€‚
      */
     public static List<Throwable> getCauses(Throwable t, boolean reversed) {
         LinkedList<Throwable> causes = createLinkedList();
@@ -89,14 +89,14 @@ public class ExceptionUtil {
     }
 
     /**
-     * ½«Òì³£×ª»»³É<code>RuntimeException</code>¡£
+     * å°†å¼‚å¸¸è½¬æ¢æˆ<code>RuntimeException</code>ã€‚
      */
     public static RuntimeException toRuntimeException(Exception e) {
         return toRuntimeException(e, null);
     }
 
     /**
-     * ½«Òì³£×ª»»³É<code>RuntimeException</code>¡£
+     * å°†å¼‚å¸¸è½¬æ¢æˆ<code>RuntimeException</code>ã€‚
      */
     public static RuntimeException toRuntimeException(Exception e,
                                                       Class<? extends RuntimeException> runtimeExceptionClass) {
@@ -123,7 +123,7 @@ public class ExceptionUtil {
     }
 
     /**
-     * Å×³öThrowable£¬µ«²»ĞèÒªÉùÃ÷<code>throws Throwable</code>¡£
+     * æŠ›å‡ºThrowableï¼Œä½†ä¸éœ€è¦å£°æ˜<code>throws Throwable</code>ã€‚
      */
     public static void throwExceptionOrError(Throwable t) throws Exception {
         if (t instanceof Exception) {
@@ -136,7 +136,7 @@ public class ExceptionUtil {
     }
 
     /**
-     * Å×³öThrowable£¬µ«²»ĞèÒªÉùÃ÷<code>throws Throwable</code>¡£
+     * æŠ›å‡ºThrowableï¼Œä½†ä¸éœ€è¦å£°æ˜<code>throws Throwable</code>ã€‚
      */
     public static void throwRuntimeExceptionOrError(Throwable t) {
         if (t instanceof Error) {
@@ -149,10 +149,10 @@ public class ExceptionUtil {
     }
 
     /**
-     * È¡µÃÒì³£µÄstacktrace×Ö·û´®¡£
+     * å–å¾—å¼‚å¸¸çš„stacktraceå­—ç¬¦ä¸²ã€‚
      * 
-     * @param throwable Òì³£
-     * @return stacktrace×Ö·û´®
+     * @param throwable å¼‚å¸¸
+     * @return stacktraceå­—ç¬¦ä¸²
      */
     public static String getStackTrace(Throwable throwable) {
         StringWriter buffer = new StringWriter();
@@ -172,14 +172,14 @@ public class ExceptionUtil {
     }
 
     /**
-     * È¡µÃÒì³£µÄstacktrace×Ö·û´®£¬¿ÉÓÃÓÚÌîĞ´ÔÚHTML commentÖĞ¡£
+     * å–å¾—å¼‚å¸¸çš„stacktraceå­—ç¬¦ä¸²ï¼Œå¯ç”¨äºå¡«å†™åœ¨HTML commentä¸­ã€‚
      * <ul>
-     * <li>ÏÈ¶Ôstacktrace½øĞĞHTML escape¡£</li>
-     * <li>È»ºó³ıÈ¥double dash£¨--£©¡£</li>
+     * <li>å…ˆå¯¹stacktraceè¿›è¡ŒHTML escapeã€‚</li>
+     * <li>ç„¶åé™¤å»double dashï¼ˆ--ï¼‰ã€‚</li>
      * </ul>
      * 
-     * @param throwable Òì³£
-     * @return stacktrace×Ö·û´®
+     * @param throwable å¼‚å¸¸
+     * @return stacktraceå­—ç¬¦ä¸²
      */
     public static String getStackTraceForHtmlComment(Throwable throwable) {
         return escapeEntities(HTML40_COMMENT, getStackTrace(throwable));

@@ -19,29 +19,29 @@ package com.alibaba.citrus.service.pipeline;
 
 /**
  * <code>PipelineContext</code>
- * ÊÇÓÉpipelineÌá¹©¸øvalveµÄÒ»¸öÉÏÏÂÎÄ¶ÔÏó£¬Ëü´ú±íÁËµ±Ç°pipelineµÄÖ´ĞĞ×´Ì¬£¬²¢¿ØÖÆpipelineµÄÖ´ĞĞ²½Öè¡£
+ * æ˜¯ç”±pipelineæä¾›ç»™valveçš„ä¸€ä¸ªä¸Šä¸‹æ–‡å¯¹è±¡ï¼Œå®ƒä»£è¡¨äº†å½“å‰pipelineçš„æ‰§è¡ŒçŠ¶æ€ï¼Œå¹¶æ§åˆ¶pipelineçš„æ‰§è¡Œæ­¥éª¤ã€‚
  * 
  * @author Michael Zhou
  */
 public interface PipelineContext extends PipelineStates {
     /**
-     * Ö´ĞĞpipelineÖĞÏÂÒ»¸övalve¡£
+     * æ‰§è¡Œpipelineä¸­ä¸‹ä¸€ä¸ªvalveã€‚
      * 
-     * @throws IllegalStateException ¼ÙÈç¸Ã·½·¨±»¶à´Îµ÷ÓÃ¡£
+     * @throws IllegalStateException å‡å¦‚è¯¥æ–¹æ³•è¢«å¤šæ¬¡è°ƒç”¨ã€‚
      */
     void invokeNext() throws IllegalStateException, PipelineException;
 
     /**
-     * ÖĞ¶Ï²¢Ìø³öpipelineµÄÖ´ĞĞ¡£
+     * ä¸­æ–­å¹¶è·³å‡ºpipelineçš„æ‰§è¡Œã€‚
      * 
-     * @param levels ÖĞ¶Ï²¢Ìø³öÖ¸¶¨²ãÊıµÄpipeline£¬<code>0</code>´ú±í½öÖĞ¶Ïµ±Ç°pipelineµÄÖ´ĞĞ¡£
+     * @param levels ä¸­æ–­å¹¶è·³å‡ºæŒ‡å®šå±‚æ•°çš„pipelineï¼Œ<code>0</code>ä»£è¡¨ä»…ä¸­æ–­å½“å‰pipelineçš„æ‰§è¡Œã€‚
      */
     void breakPipeline(int levels);
 
     /**
-     * ÖĞ¶Ï²¢Ìø³öpipelineµÄÖ´ĞĞ¡£
+     * ä¸­æ–­å¹¶è·³å‡ºpipelineçš„æ‰§è¡Œã€‚
      * 
-     * @param label ÖĞ¶Ï²¢Ìø³öÖ¸¶¨labelµÄpipeline
+     * @param label ä¸­æ–­å¹¶è·³å‡ºæŒ‡å®šlabelçš„pipeline
      */
     void breakPipeline(String label);
 }

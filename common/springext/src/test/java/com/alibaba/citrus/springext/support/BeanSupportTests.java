@@ -32,7 +32,7 @@ import org.springframework.core.io.FileSystemResource;
 import com.alibaba.citrus.springext.support.context.XmlBeanFactory;
 
 /**
- * ²âÊÔ<code>BeanSupport</code>»ùÀà¡£
+ * æµ‹è¯•<code>BeanSupport</code>åŸºç±»ã€‚
  * 
  * @author Michael Zhou
  */

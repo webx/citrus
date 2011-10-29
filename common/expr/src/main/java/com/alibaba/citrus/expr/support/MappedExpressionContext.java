@@ -24,7 +24,7 @@ import java.util.Map;
 import com.alibaba.citrus.expr.ExpressionContext;
 
 /**
- * Ê¹ÓÃ<code>Map</code>ÊµÏÖµÄ<code>ExpressionContext</code>¡£
+ * ä½¿ç”¨<code>Map</code>å®ç°çš„<code>ExpressionContext</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -32,20 +32,20 @@ public class MappedExpressionContext implements ExpressionContext {
     private final Map<String, Object> context = createHashMap();
 
     /**
-     * È¡µÃÖ¸¶¨Öµ¡£
+     * å–å¾—æŒ‡å®šå€¼ã€‚
      * 
-     * @param key ¼ü
-     * @return ¼ü¶ÔÓ¦µÄÖµ
+     * @param key é”®
+     * @return é”®å¯¹åº”çš„å€¼
      */
     public Object get(String key) {
         return context.get(key);
     }
 
     /**
-     * Ìí¼ÓÒ»¸öÖµ¡£
+     * æ·»åŠ ä¸€ä¸ªå€¼ã€‚
      * 
-     * @param key ¼ü
-     * @param value ¶ÔÓ¦µÄÖµ
+     * @param key é”®
+     * @param value å¯¹åº”çš„å€¼
      */
     public void put(String key, Object value) {
         if (value == null) {

@@ -20,22 +20,22 @@ package com.alibaba.citrus.service.resource;
 import java.util.Set;
 
 /**
- * ´ú±íÒ»¸ö×°ÔØ×ÊÔ´µÄloader¡£
+ * ä»£è¡¨ä¸€ä¸ªè£…è½½èµ„æºçš„loaderã€‚
  * 
  * @author Michael Zhou
  */
 public interface ResourceLoader {
     /**
-     * ³õÊ¼»¯loader£¬²¢Éè¶¨loaderËùÔÚµÄ<code>ResourceLoadingService</code>µÄÊµÀı¡£
+     * åˆå§‹åŒ–loaderï¼Œå¹¶è®¾å®šloaderæ‰€åœ¨çš„<code>ResourceLoadingService</code>çš„å®ä¾‹ã€‚
      * <p>
-     * ×¢Òâ£¬´Ë´¦Ö»ÄÜ±£´æ<code>ResourceLoadingService</code>£¬µ«²»ÄÜµ÷ÓÃËü£¬ÒòÎª»¹Ã»³õÊ¼»¯Íê¡£·ñÔò½«Å×³ö
-     * <code>IllegalStateException</code>¡£
+     * æ³¨æ„ï¼Œæ­¤å¤„åªèƒ½ä¿å­˜<code>ResourceLoadingService</code>ï¼Œä½†ä¸èƒ½è°ƒç”¨å®ƒï¼Œå› ä¸ºè¿˜æ²¡åˆå§‹åŒ–å®Œã€‚å¦åˆ™å°†æŠ›å‡º
+     * <code>IllegalStateException</code>ã€‚
      * </p>
      */
     void init(ResourceLoadingService resourceLoadingService);
 
     /**
-     * ²éÕÒÖ¸¶¨Ãû³ÆµÄ×ÊÔ´£¬Èç¹ûÎ´ÕÒµ½£¬Ôò·µ»Ø<code>null</code>¡£
+     * æŸ¥æ‰¾æŒ‡å®šåç§°çš„èµ„æºï¼Œå¦‚æœæœªæ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     Resource getResource(ResourceLoaderContext context, Set<ResourceLoadingOption> options);
 }

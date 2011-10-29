@@ -36,7 +36,7 @@ public class ExtensionTests extends AbstractMappingRuleTests {
     public void testExtensionMappingRule() {
         assertEquals(".jsp", mappingRules.getMappedName("extension", ".jhtml"));
 
-        // Ğ¡Ğ´ºó×º
+        // å°å†™åç¼€
         assertEquals("/aaa/bbb/ccc.jsp", mappingRules.getMappedName("extension", "/aaa/bbb/ccc.jhtml"));
         assertEquals("/aaa/bbb/ccc.jsp", mappingRules.getMappedName("extension", "/aaa/bbb/ccc.php"));
         assertEquals("/aaa/bbb/ccc.vm", mappingRules.getMappedName("extension", "/aaa/bbb/ccc.vhtml"));
@@ -47,7 +47,7 @@ public class ExtensionTests extends AbstractMappingRuleTests {
         assertEquals("/aaa/bbb.bak/ccc.jsp", mappingRules.getMappedName("extension", "/aaa/bbb.bak/ccc"));
         assertEquals("/aaa/bbb/ccc/", mappingRules.getMappedName("extension", "/aaa/bbb/ccc/"));
 
-        // Ğ¡Ğ´ºó×º£¬ÎŞÄ¬ÈÏÖµ
+        // å°å†™åç¼€ï¼Œæ— é»˜è®¤å€¼
         assertEquals("/aaa/bbb/ccc.jsp", mappingRules.getMappedName("extension.nodef", "/aaa/bbb/ccc.jhtml"));
         assertEquals("/aaa/bbb/ccc.jsp", mappingRules.getMappedName("extension.nodef", "/aaa/bbb/ccc.php"));
         assertEquals("/aaa/bbb/ccc.vm", mappingRules.getMappedName("extension.nodef", "/aaa/bbb/ccc.vhtml"));
@@ -58,7 +58,7 @@ public class ExtensionTests extends AbstractMappingRuleTests {
         assertEquals("/aaa/bbb.bak/ccc", mappingRules.getMappedName("extension.nodef", "/aaa/bbb.bak/ccc"));
         assertEquals("/aaa/bbb/ccc/", mappingRules.getMappedName("extension.nodef", "/aaa/bbb/ccc/"));
 
-        // ´óĞ´ºó×º
+        // å¤§å†™åç¼€
         assertEquals("/aaa/bbb/ccc.jsp", mappingRules.getMappedName("extension", "/aaa/bbb/ccc.JHTML"));
         assertEquals("/aaa/bbb/ccc.jsp", mappingRules.getMappedName("extension", "/aaa/bbb/ccc.PHP"));
         assertEquals("/aaa/bbb/ccc.vm", mappingRules.getMappedName("extension", "/aaa/bbb/ccc.VHTML"));
@@ -68,7 +68,7 @@ public class ExtensionTests extends AbstractMappingRuleTests {
         assertEquals("/aaa/bbb/ccc.ABC", mappingRules.getMappedName("extension", "/aaa/bbb/ccc.ABC"));
         assertEquals("/aaa/bbb.bak/ccc.jsp", mappingRules.getMappedName("extension", "/aaa/bbb.bak/ccc"));
 
-        // ´óĞ´ºó×º£¬ÎŞÄ¬ÈÏÖµ
+        // å¤§å†™åç¼€ï¼Œæ— é»˜è®¤å€¼
         assertEquals("/aaa/bbb/ccc.jsp", mappingRules.getMappedName("extension.nodef", "/aaa/bbb/ccc.JHTML"));
         assertEquals("/aaa/bbb/ccc.jsp", mappingRules.getMappedName("extension.nodef", "/aaa/bbb/ccc.PHP"));
         assertEquals("/aaa/bbb/ccc.vm", mappingRules.getMappedName("extension.nodef", "/aaa/bbb/ccc.VHTML"));

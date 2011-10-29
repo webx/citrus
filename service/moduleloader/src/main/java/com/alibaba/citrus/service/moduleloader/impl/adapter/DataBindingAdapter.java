@@ -21,7 +21,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * µ÷ÓÃ<code>execute()</code>·½·¨£¬²»ÒªÇóÊµÏÖ<code>Module</code>½Ó¿Ú¡£
+ * è°ƒç”¨<code>execute()</code>æ–¹æ³•ï¼Œä¸è¦æ±‚å®ç°<code>Module</code>æ¥å£ã€‚
  * 
  * @author Michael Zhou
  */

@@ -36,9 +36,9 @@ import com.alibaba.citrus.util.FileUtil.FileNameAndExtension;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ×ª»»ÎÄ¼şÃûºó×ºµÄÓ³Éä¹æÔò¡£
+ * è½¬æ¢æ–‡ä»¶ååç¼€çš„æ˜ å°„è§„åˆ™ã€‚
  * <p>
- * ¸ÃruleÄ¬ÈÏ²»cache½á¹û¡£
+ * è¯¥ruleé»˜è®¤ä¸cacheç»“æœã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -65,7 +65,7 @@ public class ExtensionMappingRule extends AbstractMappingRule {
     @Override
     public String doMapping(String name) {
         FileNameAndExtension names = getFileNameAndExtension(name, true);
-        String extension = names.getExtension(); // ¿ÉÄÜÎªnull
+        String extension = names.getExtension(); // å¯èƒ½ä¸ºnull
 
         if (extension == null) {
             extension = EMPTY_STRING;
@@ -73,21 +73,21 @@ public class ExtensionMappingRule extends AbstractMappingRule {
             extension = extension.toLowerCase();
         }
 
-        // Èç¹ûÓ³Éä¹æÔò´æÔÚ£¬ÔòÌæ»»ºó×º
+        // å¦‚æœæ˜ å°„è§„åˆ™å­˜åœ¨ï¼Œåˆ™æ›¿æ¢åç¼€
         if (extensionMappings.containsKey(extension)) {
             String mapToExtension = extensionMappings.get(extension);
 
-            name = names.getFileName(); // ×Ü²»Îªnull
+            name = names.getFileName(); // æ€»ä¸ä¸ºnull
 
-            // Èç¹ûÒÔ/½áÎ²£¬¾Í²»¼Óºó×º¡£
+            // å¦‚æœä»¥/ç»“å°¾ï¼Œå°±ä¸åŠ åç¼€ã€‚
             if (name.length() == 0 || !StringUtil.contains(NAME_SEPARATOR, name.charAt(name.length() - 1))) {
-                // Èç¹û»ñÈ¡µÄÓ³Éäºó×º²»Îª¿Õ£¬Ôò¼ÓÉÏºó×º
+                // å¦‚æœè·å–çš„æ˜ å°„åç¼€ä¸ä¸ºç©ºï¼Œåˆ™åŠ ä¸Šåç¼€
                 if (!StringUtil.isEmpty(mapToExtension)) {
                     name = name + EXTENSION_SEPARATOR + mapToExtension;
                 }
             }
         } else {
-            // µ±ºó×º²»ÔÚÓ³Éä¹æÔòÖĞ£¬ÇÒºó×ºÎª¿Õ£¬ÔòÖÁ·µ»ØÃû³ÆµÄÇ°²¿
+            // å½“åç¼€ä¸åœ¨æ˜ å°„è§„åˆ™ä¸­ï¼Œä¸”åç¼€ä¸ºç©ºï¼Œåˆ™è‡³è¿”å›åç§°çš„å‰éƒ¨
             if (StringUtil.isEmpty(extension)) {
                 name = names.getFileName();
             }
@@ -102,7 +102,7 @@ public class ExtensionMappingRule extends AbstractMappingRule {
             Map<Object, Object> extensionMappings = createManagedMap(element, parserContext);
 
             for (Element subElement : subElements(element, and(sameNs(element), name("mapping")))) {
-                // Ò»ÂÉ×ª»»³ÉĞ¡Ğ´£¬Ö§³Ö¿Õ×Ö·û´®£¬±íÊ¾ÎŞºó×º
+                // ä¸€å¾‹è½¬æ¢æˆå°å†™ï¼Œæ”¯æŒç©ºå­—ç¬¦ä¸²ï¼Œè¡¨ç¤ºæ— åç¼€
                 String from = trimToEmpty(subElement.getAttribute("extension")).toLowerCase();
                 String to = trimToEmpty(subElement.getAttribute("to")).toLowerCase();
 

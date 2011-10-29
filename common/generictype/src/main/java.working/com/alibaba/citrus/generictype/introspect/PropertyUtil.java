@@ -22,14 +22,14 @@ import static com.alibaba.citrus.util.Assert.*;
 import com.alibaba.citrus.util.internal.StringUtil;
 
 /**
- * ÓÃÀ´¶ÁÈ¡»òÉèÖÃpropertyµÄ¹¤¾ß¡£
+ * ç”¨æ¥è¯»å–æˆ–è®¾ç½®propertyçš„å·¥å…·ã€‚
  * 
  * @author Michael Zhou
  */
 public class PropertyUtil {
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄproperty£¬Ö§³ÖÇ¶Ì×µÄproperty¡£
+     * å–å¾—æŒ‡å®šåç§°çš„propertyï¼Œæ”¯æŒåµŒå¥—çš„propertyã€‚
      */
     public static Object getProperty(Object object, String propertyPath, TypeConverter converter) {
         assertNotNull(object, "object");
@@ -42,7 +42,7 @@ public class PropertyUtil {
     }
 
     /**
-     * ¶ÔpropertyÈ¡ÖµµÄ¶ÔÏó¡£
+     * å¯¹propertyå–å€¼çš„å¯¹è±¡ã€‚
      */
     private static class PropertyEvaluater implements PropertyPath.Visitor {
         private final String propertyPath;

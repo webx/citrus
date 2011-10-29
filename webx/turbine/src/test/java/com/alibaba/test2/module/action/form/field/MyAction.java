@@ -34,7 +34,7 @@ public class MyAction {
     }
 
     public void doGetFieldDontSkipAction(@FormField(name = "field1", group = "myGroup1", skipIfInvalid = false)//
-    CustomErrors field) { // ×¢Èëcustom errorsÓ¦¸ÃÒ²¿ÉÒÔ£¬ÆäÊµ¾ÍÊÇfield¡£
+    CustomErrors field) { // æ³¨å…¥custom errorsåº”è¯¥ä¹Ÿå¯ä»¥ï¼Œå…¶å®å°±æ˜¯fieldã€‚
         setAttribute(field);
     }
 

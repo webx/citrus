@@ -149,7 +149,7 @@ public abstract class AbstractResourceLoadingTests {
             names = filter(names);
             assertArrayEquals(results, names);
 
-            assertTrue(basedir.exists()); // Ä¿Â¼´æÔÚ
+            assertTrue(basedir.exists()); // ç›®å½•å­˜åœ¨
 
             for (String name : names) {
                 String noSlashName = name;
@@ -175,7 +175,7 @@ public abstract class AbstractResourceLoadingTests {
             String[] names = filter(resources);
             assertArrayEquals(results, names);
 
-            assertTrue(basedir.exists()); // Ä¿Â¼´æÔÚ
+            assertTrue(basedir.exists()); // ç›®å½•å­˜åœ¨
 
             for (String name : names) {
                 String noSlashName = name;
@@ -196,7 +196,7 @@ public abstract class AbstractResourceLoadingTests {
     }
 
     /**
-     * ³ýÈ¥ignoreÎÄ¼þ¡£
+     * é™¤åŽ»ignoreæ–‡ä»¶ã€‚
      */
     private String[] filter(String[] names) {
         Arrays.sort(names);
@@ -215,7 +215,7 @@ public abstract class AbstractResourceLoadingTests {
     }
 
     /**
-     * ³ýÈ¥ignoreÎÄ¼þ¡£
+     * é™¤åŽ»ignoreæ–‡ä»¶ã€‚
      */
     private String[] filter(Resource[] resources) {
         Arrays.sort(resources, new Comparator<Resource>() {
@@ -255,7 +255,7 @@ public abstract class AbstractResourceLoadingTests {
     }
 
     /**
-     * httpunitÎ´ÊµÏÖgetResourcePaths·½·¨¡£
+     * httpunitæœªå®žçŽ°getResourcePathsæ–¹æ³•ã€‚
      */
     public static class ServletContextWrapper implements ServletContext {
         private final ServletContext servletContext;

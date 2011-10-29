@@ -117,8 +117,8 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
             return null;
         }
 
-        // Èç¹ûµ±Ç°ÒıÓÃÊÇÔÚ#set($v = "$ref")ÖĞµÄ£¬Ôò²»½øĞĞescape£¬ÍÆ³Ùµ½×îÖÕÊä³öÊ±ÔÙescape¡£
-        // Í¬Ê±±ÜÃâ¶Ô#define block½øĞĞescape¡£
+        // å¦‚æœå½“å‰å¼•ç”¨æ˜¯åœ¨#set($v = "$ref")ä¸­çš„ï¼Œåˆ™ä¸è¿›è¡Œescapeï¼Œæ¨è¿Ÿåˆ°æœ€ç»ˆè¾“å‡ºæ—¶å†escapeã€‚
+        // åŒæ—¶é¿å…å¯¹#define blockè¿›è¡Œescapeã€‚
         if (InterpolationUtil.isInInterpolation(context) || value instanceof Renderable) {
             return value;
         }
@@ -133,7 +133,7 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
     }
 
     private EscapeType getEscapeType(String reference) {
-        // 1. ¼ÙÈçÃ÷È·Ö¸¶¨ÁË#escape»ò#noescape£¬ÔòÊ¹ÓÃÖ®¡£
+        // 1. å‡å¦‚æ˜ç¡®æŒ‡å®šäº†#escapeæˆ–#noescapeï¼Œåˆ™ä½¿ç”¨ä¹‹ã€‚
         EscapeType escapeType = (EscapeType) context.get(ESCAPE_TYPE_KEY);
 
         if (escapeType != null) {
@@ -141,8 +141,8 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
             return escapeType;
         }
 
-        // 2. ¼ÙÈçÎ´Ã÷È·Ö¸¶¨£¬Ôò²éÕÒ¹æÔò
-        // 3. ¼ÙÈçÃ»ÓĞ¹æÔò£¬»ò¹æÔòÎ´Æ¥Åä£¬ÔòÊ¹ÓÃÄ¬ÈÏÖµ
+        // 2. å‡å¦‚æœªæ˜ç¡®æŒ‡å®šï¼Œåˆ™æŸ¥æ‰¾è§„åˆ™
+        // 3. å‡å¦‚æ²¡æœ‰è§„åˆ™ï¼Œæˆ–è§„åˆ™æœªåŒ¹é…ï¼Œåˆ™ä½¿ç”¨é»˜è®¤å€¼
         if (cacheReferences) {
             escapeType = referenceCache.get(reference);
         }
@@ -345,7 +345,7 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
     }
 
     /**
-     * Escape directive¡£
+     * Escape directiveã€‚
      */
     public static class Escape extends Directive {
         @Override
@@ -390,7 +390,7 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
     }
 
     /**
-     * Noescape directive¡£
+     * Noescape directiveã€‚
      */
     public static class Noescape extends Directive {
         @Override

@@ -61,7 +61,7 @@ public class SchemaImpl implements SchemaInternal {
     private boolean parsingTargetNamespace;
 
     /**
-     * ´´½¨ configuration point µÄ main schema ºÍ versioned schema¡£
+     * åˆ›å»º configuration point çš„ main schema å’Œ versioned schemaã€‚
      */
     public SchemaImpl(String name, String version, String targetNamespace, String preferredNsPrefix, String sourceDesc,
                       InputStreamSource source) {
@@ -69,14 +69,14 @@ public class SchemaImpl implements SchemaInternal {
     }
 
     /**
-     * ´´½¨ contribution µÄ main schema ºÍ versioned schema¡£
+     * åˆ›å»º contribution çš„ main schema å’Œ versioned schemaã€‚
      */
     public SchemaImpl(String name, String version, String sourceDesc, InputStreamSource source) {
         this(name, version, null, null, false, sourceDesc, source);
     }
 
     /**
-     * ´´½¨spring.schemasÖĞ¶¨ÒåµÄschema¡£
+     * åˆ›å»ºspring.schemasä¸­å®šä¹‰çš„schemaã€‚
      */
     public SchemaImpl(String name, String version, boolean parsingTargetNamespace, String sourceDesc,
                       InputStreamSource source) {
@@ -84,9 +84,9 @@ public class SchemaImpl implements SchemaInternal {
     }
 
     /**
-     * ´´½¨spring.schemasÖĞ¶¨ÒåµÄschema¡£
+     * åˆ›å»ºspring.schemasä¸­å®šä¹‰çš„schemaã€‚
      * <p>
-     * Èç¹û<code>parsingTargetNamespace</code>Îª <code>true</code>£¬ÔòÊÔÍ¼Í¨¹ı½âÎöxmlÀ´È¡µÃns¡£
+     * å¦‚æœ<code>parsingTargetNamespace</code>ä¸º <code>true</code>ï¼Œåˆ™è¯•å›¾é€šè¿‡è§£æxmlæ¥å–å¾—nsã€‚
      * </p>
      */
     private SchemaImpl(String name, String version, String targetNamespace, String preferredNsPrefix,
@@ -135,7 +135,7 @@ public class SchemaImpl implements SchemaInternal {
     }
 
     /**
-     * ÓÉschemaSetÀ´ÉèÖÃ¡£
+     * ç”±schemaSetæ¥è®¾ç½®ã€‚
      */
     public void setElements(String[] elements) {
         this.elements = elements;
@@ -203,7 +203,7 @@ public class SchemaImpl implements SchemaInternal {
     }
 
     /**
-     * ½âÎöschema£¬È¡µÃÒÔÏÂĞÅÏ¢£º
+     * è§£æschemaï¼Œå–å¾—ä»¥ä¸‹ä¿¡æ¯ï¼š
      * <ol>
      * <li>targetNamespace</li>
      * <li>include name</li>

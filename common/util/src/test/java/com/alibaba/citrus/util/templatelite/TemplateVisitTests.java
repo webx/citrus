@@ -41,7 +41,7 @@ public class TemplateVisitTests extends AbstractTemplateTests {
 
         loadTemplate(s.getBytes(), "test.txt", 1, 0, 0);
 
-        // ÎŞvisitText(String)·½·¨
+        // æ— visitText(String)æ–¹æ³•
         class Visitor {
         }
 
@@ -49,7 +49,7 @@ public class TemplateVisitTests extends AbstractTemplateTests {
         assertThat(runtimeError, exception(NoSuchMethodException.class, "Error rendering Text with 4 characters"));
         assertEquals("Visitor.visitText(String)", runtimeError.getCause().getMessage());
 
-        // ÓĞvisitText()·½·¨£¬µ«²ÎÊı²»Æ¥Åä
+        // æœ‰visitText()æ–¹æ³•ï¼Œä½†å‚æ•°ä¸åŒ¹é…
         @SuppressWarnings("unused")
         class Visitor2 {
             public void visitText() {
@@ -60,7 +60,7 @@ public class TemplateVisitTests extends AbstractTemplateTests {
         assertThat(runtimeError, exception(NoSuchMethodException.class, "Error rendering Text with 4 characters"));
         assertEquals("Visitor2.visitText(String)", runtimeError.getCause().getMessage());
 
-        // ÓĞvisitText()·½·¨£¬µ«²ÎÊı²»Æ¥Åä
+        // æœ‰visitText()æ–¹æ³•ï¼Œä½†å‚æ•°ä¸åŒ¹é…
         @SuppressWarnings("unused")
         class Visitor3 {
             public void visitText(Object o) {
@@ -76,23 +76,23 @@ public class TemplateVisitTests extends AbstractTemplateTests {
     public void render_methodNotFound_forPlaceholder_All_Strings() throws Exception {
         @SuppressWarnings("unused")
         class Visitor {
-            // ÎŞ·½·¨
+            // æ— æ–¹æ³•
             // public void visitTest1() {
             // }
 
-            // ÓĞ1¸ö²ÎÊı£¬µ«²ÎÊıÀàĞÍ·ÇÊı×é
+            // æœ‰1ä¸ªå‚æ•°ï¼Œä½†å‚æ•°ç±»å‹éæ•°ç»„
             public void visitTest2(Object obj) {
             }
 
-            // ÓĞ1¸ö²ÎÊı£¬µ«²ÎÊıÀàĞÍ·ÇÕıÈ·µÄÊı×é
+            // æœ‰1ä¸ªå‚æ•°ï¼Œä½†å‚æ•°ç±»å‹éæ­£ç¡®çš„æ•°ç»„
             public void visitTest3(Template[] params) {
             }
 
-            // ÓĞ¶à¸ö²ÎÊı£¬²ÎÊıÊıÁ¿´óÓÚplaceholder²ÎÊıÊıÁ¿£¬¶àÓàµÄ²ÎÊıÀàĞÍ²»ÕıÈ·
+            // æœ‰å¤šä¸ªå‚æ•°ï¼Œå‚æ•°æ•°é‡å¤§äºplaceholderå‚æ•°æ•°é‡ï¼Œå¤šä½™çš„å‚æ•°ç±»å‹ä¸æ­£ç¡®
             public void visitTest4(String a, String b, String c, Object d) {
             }
 
-            // ÓĞ¶à¸ö²ÎÊı£¬µ«²ÎÊıÀàĞÍ²»Æ¥Åä
+            // æœ‰å¤šä¸ªå‚æ•°ï¼Œä½†å‚æ•°ç±»å‹ä¸åŒ¹é…
             public void visitTest5(String a, String b, Template c) {
             }
         }
@@ -161,23 +161,23 @@ public class TemplateVisitTests extends AbstractTemplateTests {
     public void render_methodNotFound_forPlaceholder_All_Template() throws Exception {
         @SuppressWarnings("unused")
         class Visitor {
-            // ÎŞ·½·¨
+            // æ— æ–¹æ³•
             // public void visitTest1() {
             // }
 
-            // ÓĞ1¸ö²ÎÊı£¬µ«²ÎÊıÀàĞÍ·ÇÊı×é
+            // æœ‰1ä¸ªå‚æ•°ï¼Œä½†å‚æ•°ç±»å‹éæ•°ç»„
             public void visitTest2(Object obj) {
             }
 
-            // ÓĞ1¸ö²ÎÊı£¬µ«²ÎÊıÀàĞÍ·ÇÕıÈ·µÄÊı×é
+            // æœ‰1ä¸ªå‚æ•°ï¼Œä½†å‚æ•°ç±»å‹éæ­£ç¡®çš„æ•°ç»„
             public void visitTest3(String[] params) {
             }
 
-            // ÓĞ¶à¸ö²ÎÊı£¬²ÎÊıÊıÁ¿´óÓÚplaceholder²ÎÊıÊıÁ¿£¬¶àÓàµÄ²ÎÊıÀàĞÍ²»ÕıÈ·
+            // æœ‰å¤šä¸ªå‚æ•°ï¼Œå‚æ•°æ•°é‡å¤§äºplaceholderå‚æ•°æ•°é‡ï¼Œå¤šä½™çš„å‚æ•°ç±»å‹ä¸æ­£ç¡®
             public void visitTest4(Template a, Template b, Template c, Object d) {
             }
 
-            // ÓĞ¶à¸ö²ÎÊı£¬µ«²ÎÊıÀàĞÍ²»Æ¥Åä
+            // æœ‰å¤šä¸ªå‚æ•°ï¼Œä½†å‚æ•°ç±»å‹ä¸åŒ¹é…
             public void visitTest5(Template a, Template b, String c) {
             }
         }
@@ -249,27 +249,27 @@ public class TemplateVisitTests extends AbstractTemplateTests {
     public void render_methodNotFound_forPlaceholder_Hybrid_String_and_Template() throws Exception {
         @SuppressWarnings("unused")
         class Visitor {
-            // ÎŞ·½·¨
+            // æ— æ–¹æ³•
             // public void visitTest1() {
             // }
 
-            // ÓĞ1¸ö²ÎÊı£¬µ«²ÎÊıÀàĞÍ·ÇÊı×é
+            // æœ‰1ä¸ªå‚æ•°ï¼Œä½†å‚æ•°ç±»å‹éæ•°ç»„
             public void visitTest2(Object obj) {
             }
 
-            // ÓĞ1¸ö²ÎÊı£¬µ«²ÎÊıÀàĞÍ·ÇÕıÈ·µÄÊı×é
+            // æœ‰1ä¸ªå‚æ•°ï¼Œä½†å‚æ•°ç±»å‹éæ­£ç¡®çš„æ•°ç»„
             public void visitTest3(String[] params) {
             }
 
-            // ÓĞ1¸ö²ÎÊı£¬µ«²ÎÊıÀàĞÍ·ÇÕıÈ·µÄÊı×é
+            // æœ‰1ä¸ªå‚æ•°ï¼Œä½†å‚æ•°ç±»å‹éæ­£ç¡®çš„æ•°ç»„
             public void visitTest4(Template[] params) {
             }
 
-            // ÓĞ¶à¸ö²ÎÊı£¬²ÎÊıÊıÁ¿´óÓÚplaceholder²ÎÊıÊıÁ¿£¬¶àÓàµÄ²ÎÊıÀàĞÍ²»ÕıÈ·
+            // æœ‰å¤šä¸ªå‚æ•°ï¼Œå‚æ•°æ•°é‡å¤§äºplaceholderå‚æ•°æ•°é‡ï¼Œå¤šä½™çš„å‚æ•°ç±»å‹ä¸æ­£ç¡®
             public void visitTest5(String a, Template b, Template c, Object d) {
             }
 
-            // ÓĞ¶à¸ö²ÎÊı£¬µ«²ÎÊıÀàĞÍ²»Æ¥Åä
+            // æœ‰å¤šä¸ªå‚æ•°ï¼Œä½†å‚æ•°ç±»å‹ä¸åŒ¹é…
             public void visitTest6(String a, Template b, String c) {
             }
         }
@@ -353,32 +353,32 @@ public class TemplateVisitTests extends AbstractTemplateTests {
     public void render_forPlaceholder_All_Strings() throws Exception {
         @SuppressWarnings("unused")
         class Visitor extends TextWriter<StringBuilder> {
-            // ÎŞ²ÎÊı
+            // æ— å‚æ•°
             public void visitTest1() {
                 out().append("no_params");
             }
 
-            // 1¸ö²ÎÊı£ºString
+            // 1ä¸ªå‚æ•°ï¼šString
             public void visitTest2(String a) {
                 out().append(a);
             }
 
-            // ÓĞ1¸ö²ÎÊı£ºString[]
+            // æœ‰1ä¸ªå‚æ•°ï¼šString[]
             public void visitTest3(String[] params) {
                 out().append(join(params, ","));
             }
 
-            // ÓĞ1¸ö²ÎÊı£ºObject[]
+            // æœ‰1ä¸ªå‚æ•°ï¼šObject[]
             public void visitTest4(Object[] params) {
                 out().append(join(params, ","));
             }
 
-            // ÓĞ¶à¸ö²ÎÊı£¬²ÎÊıÊıÁ¿Ğ¡ÓÚplaceholder²ÎÊıÊıÁ¿
+            // æœ‰å¤šä¸ªå‚æ•°ï¼Œå‚æ•°æ•°é‡å°äºplaceholderå‚æ•°æ•°é‡
             public void visitTest5(String a, String b) {
                 out().append(a + "," + b);
             }
 
-            // ÓĞ¶à¸ö²ÎÊı£¬²ÎÊıÊıÁ¿ÍêÈ«Æ¥Åä
+            // æœ‰å¤šä¸ªå‚æ•°ï¼Œå‚æ•°æ•°é‡å®Œå…¨åŒ¹é…
             public void visitTest6(String a, String b, String c) {
                 out().append(a + "," + b + "," + c);
             }
@@ -407,37 +407,37 @@ public class TemplateVisitTests extends AbstractTemplateTests {
     public void render_forPlaceholder_All_Templates() throws Exception {
         @SuppressWarnings("unused")
         class Visitor extends TextWriter<StringBuilder> {
-            // ÎŞ²ÎÊı
+            // æ— å‚æ•°
             public void visitTest1() {
                 out().append("no_params");
             }
 
-            // 1¸ö²ÎÊı£ºString
+            // 1ä¸ªå‚æ•°ï¼šString
             public void visitTest2(Template a) {
                 a.accept(this);
             }
 
-            // ÓĞ1¸ö²ÎÊı£ºTemplate[]
+            // æœ‰1ä¸ªå‚æ•°ï¼šTemplate[]
             public void visitTest3(Template[] params) {
                 for (Template template : params) {
                     template.accept(this);
                 }
             }
 
-            // ÓĞ1¸ö²ÎÊı£ºObject[]
+            // æœ‰1ä¸ªå‚æ•°ï¼šObject[]
             public void visitTest4(Object[] params) {
                 for (Object template : params) {
                     ((Template) template).accept(this);
                 }
             }
 
-            // ÓĞ¶à¸ö²ÎÊı£¬²ÎÊıÊıÁ¿Ğ¡ÓÚplaceholder²ÎÊıÊıÁ¿
+            // æœ‰å¤šä¸ªå‚æ•°ï¼Œå‚æ•°æ•°é‡å°äºplaceholderå‚æ•°æ•°é‡
             public void visitTest5(Template a, Template b) {
                 a.accept(this);
                 b.accept(this);
             }
 
-            // ÓĞ¶à¸ö²ÎÊı£¬²ÎÊıÊıÁ¿ÍêÈ«Æ¥Åä
+            // æœ‰å¤šä¸ªå‚æ•°ï¼Œå‚æ•°æ•°é‡å®Œå…¨åŒ¹é…
             public void visitTest6(Template a, Template b, Template c) {
                 a.accept(this);
                 b.accept(this);
@@ -470,30 +470,30 @@ public class TemplateVisitTests extends AbstractTemplateTests {
     public void render_forPlaceholder_Hybrid_String_and_Template() throws Exception {
         @SuppressWarnings("unused")
         class Visitor extends TextWriter<StringBuilder> {
-            // ÎŞ²ÎÊı
+            // æ— å‚æ•°
             public void visitTest1() {
                 out().append("no_params");
             }
 
-            // 1¸ö²ÎÊı£ºString
+            // 1ä¸ªå‚æ•°ï¼šString
             public void visitTest2(String a) {
                 out().append(a);
             }
 
-            // ÓĞ1¸ö²ÎÊı£ºObject[]
+            // æœ‰1ä¸ªå‚æ•°ï¼šObject[]
             public void visitTest3(Object[] params) {
                 out().append(params[0]);
                 ((Template) params[1]).accept(this);
                 ((Template) params[2]).accept(this);
             }
 
-            // ÓĞ¶à¸ö²ÎÊı£¬²ÎÊıÊıÁ¿Ğ¡ÓÚplaceholder²ÎÊıÊıÁ¿
+            // æœ‰å¤šä¸ªå‚æ•°ï¼Œå‚æ•°æ•°é‡å°äºplaceholderå‚æ•°æ•°é‡
             public void visitTest4(String a, Template b) {
                 out().append(a);
                 b.accept(this);
             }
 
-            // ÓĞ¶à¸ö²ÎÊı£¬²ÎÊıÊıÁ¿ÍêÈ«Æ¥Åä
+            // æœ‰å¤šä¸ªå‚æ•°ï¼Œå‚æ•°æ•°é‡å®Œå…¨åŒ¹é…
             public void visitTest5(String a, Template b, Template c) {
                 out().append(a);
                 b.accept(this);
@@ -542,7 +542,7 @@ public class TemplateVisitTests extends AbstractTemplateTests {
             }
 
             /*
-             * // È±Ê§visitB public void visitB(Template b) { b.accept(this); }
+             * // ç¼ºå¤±visitB public void visitB(Template b) { b.accept(this); }
              */
 
             public void visitC(Template c) {
@@ -705,7 +705,7 @@ public class TemplateVisitTests extends AbstractTemplateTests {
 
         loadTemplate("${title}".getBytes(), "test.txt", 1, 0, 0);
 
-        // ´òÓ¡root cause
+        // æ‰“å°root cause
         assertThat(template.renderToString(new Visitor()),
                 containsAll("IllegalArgumentException - haha - ", Visitor.class.getName() + ".visitTitle("));
     }

@@ -38,9 +38,9 @@ import com.alibaba.citrus.service.pipeline.support.AbstractConditionDefinitionPa
 import com.alibaba.citrus.util.StringEscapeUtil;
 
 /**
- * ÓÃjexl±í´ïÊ½À´¼ÆËãµÄcondition¡£
+ * ç”¨jexlè¡¨è¾¾å¼æ¥è®¡ç®—çš„conditionã€‚
  * <p>
- * JEXLÓï·¨²Î¼û£º<a href="http://commons.apache.org/jexl/reference/syntax.html">JEXL
+ * JEXLè¯­æ³•å‚è§ï¼š<a href="http://commons.apache.org/jexl/reference/syntax.html">JEXL
  * Reference</a>
  * </p>
  * 

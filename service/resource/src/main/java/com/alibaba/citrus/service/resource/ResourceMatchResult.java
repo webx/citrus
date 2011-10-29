@@ -18,19 +18,19 @@
 package com.alibaba.citrus.service.resource;
 
 /**
- * ´ú±íÒ»¸ö<code>&lt;resource&gt;</code>¡¢<code>&lt;resource-alias&gt;</code>»ò
- * <code>&lt;resource-filters&gt;</code>µÄÆ¥Åä½á¹û¡£
+ * ä»£è¡¨ä¸€ä¸ª<code>&lt;resource&gt;</code>ã€<code>&lt;resource-alias&gt;</code>æˆ–
+ * <code>&lt;resource-filters&gt;</code>çš„åŒ¹é…ç»“æœã€‚
  * 
  * @author Michael Zhou
  */
 public interface ResourceMatchResult {
     /**
-     * È¡µÃÒÑ¾­Æ¥ÅäµÄÃû³Æ¡£
+     * å–å¾—å·²ç»åŒ¹é…çš„åç§°ã€‚
      */
     String getResourceName();
 
     /**
-     * ½«Æ¥Åä²¿·ÖÌæ»»³ÉÖ¸¶¨×Ö·û´®¡£
+     * å°†åŒ¹é…éƒ¨åˆ†æ›¿æ¢æˆæŒ‡å®šå­—ç¬¦ä¸²ã€‚
      */
     String substitute(String substitution);
 }

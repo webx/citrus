@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 
 /**
- * ÔÚURLÖĞÉú³ÉËæ»úÔªËØ£¬ÒÔ·ÀÖ¹ä¯ÀÀÆ÷»º´æÒ³Ãæ¡£
+ * åœ¨URLä¸­ç”Ÿæˆéšæœºå…ƒç´ ï¼Œä»¥é˜²æ­¢æµè§ˆå™¨ç¼“å­˜é¡µé¢ã€‚
  * 
  * @author Michael Zhou
  * @author dux.fangl
@@ -45,14 +45,14 @@ public class Randomize implements URIBrokerPathInterceptor {
     private String key;
 
     /**
-     * ÉèÖÃËæ»úÊıµÄquery ID¡£
+     * è®¾ç½®éšæœºæ•°çš„query IDã€‚
      */
     public void setKey(String key) {
         this.key = defaultIfNull(trimToNull(key), DEFAULT_KEY);
     }
 
     /**
-     * ÉèÖÃËæ»úÉú³ÉµÄ×Ö·û·¶Î§¡£
+     * è®¾ç½®éšæœºç”Ÿæˆçš„å­—ç¬¦èŒƒå›´ã€‚
      */
     public void setChars(String chars) {
         this.chars = defaultIfNull(trimToNull(chars), DEFAULT_CHARS).toCharArray();
@@ -60,7 +60,7 @@ public class Randomize implements URIBrokerPathInterceptor {
     }
 
     /**
-     * ÉèÖÃËæ»úÊı·¶Î§¡£
+     * è®¾ç½®éšæœºæ•°èŒƒå›´ã€‚
      */
     public void setRange(long range) {
         if (range == 0L) {
@@ -71,7 +71,7 @@ public class Randomize implements URIBrokerPathInterceptor {
     }
 
     /**
-     * ÉèÖÃÆ¥ÅäµÄÂ·¾¶ÕıÔò±í´ïÊ½£¬Ö»ÓĞÆ¥ÅäÖ¸¶¨pathµÄ½á¹û²Å»áÉú³ÉËæ»úÊı¡£
+     * è®¾ç½®åŒ¹é…çš„è·¯å¾„æ­£åˆ™è¡¨è¾¾å¼ï¼Œåªæœ‰åŒ¹é…æŒ‡å®špathçš„ç»“æœæ‰ä¼šç”Ÿæˆéšæœºæ•°ã€‚
      */
     public void setPath(String path) {
         this.path = trimToNull(path);
@@ -115,14 +115,14 @@ public class Randomize implements URIBrokerPathInterceptor {
     }
 
     /**
-     * Ëæ»úÊıÉú³ÉÆ÷¡£
+     * éšæœºæ•°ç”Ÿæˆå™¨ã€‚
      */
     protected final long random() {
         return (long) (Math.abs(random.nextLong()) * factor);
     }
 
     /**
-     * °ÑÊäÈëµÄËæ»úÊı±ä³É×Ö·û´®
+     * æŠŠè¾“å…¥çš„éšæœºæ•°å˜æˆå­—ç¬¦ä¸²
      */
     protected final String longToString(long longValue) {
         if (longValue == 0) {

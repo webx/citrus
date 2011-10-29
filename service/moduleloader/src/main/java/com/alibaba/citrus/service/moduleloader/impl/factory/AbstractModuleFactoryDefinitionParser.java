@@ -53,7 +53,7 @@ public abstract class AbstractModuleFactoryDefinitionParser<T> extends AbstractN
     protected final Logger log = LoggerFactory.getLogger(getBeanClass(null));
 
     /**
-     * ½âÎöÃ÷È·¶¨ÒåµÄbeans£¬ÕâĞ©beans½«¸²¸Ç×Ô¶¯ËÑË÷¶øµÃµÄmodule½Å±¾¡£
+     * è§£ææ˜ç¡®å®šä¹‰çš„beansï¼Œè¿™äº›beanså°†è¦†ç›–è‡ªåŠ¨æœç´¢è€Œå¾—çš„moduleè„šæœ¬ã€‚
      */
     protected final Map<String, ParsingModuleInfo> parseSpecificBeans(Element element, ParserContext parserContext,
                                                                       AbstractBeanDefinition containingBd,
@@ -106,7 +106,7 @@ public abstract class AbstractModuleFactoryDefinitionParser<T> extends AbstractN
 
     protected void postProcessItems(Element element, ParserContext parserContext, BeanDefinitionBuilder builder,
                                     Map<String, ParsingModuleInfo> items, String tags) {
-        // ×¢²áËùÓĞÃ÷È·¶¨ÒåµÄbeans
+        // æ³¨å†Œæ‰€æœ‰æ˜ç¡®å®šä¹‰çš„beans
         for (ParsingModuleInfo item : items.values()) {
             if (item.bd != null) {
                 assertNotNull(item.key, "Specificly-defined module could not be found in %s: %s", tags, item.itemName);
@@ -116,7 +116,7 @@ public abstract class AbstractModuleFactoryDefinitionParser<T> extends AbstractN
             }
         }
 
-        // ÉèÖÃModuleFactory.setModules()
+        // è®¾ç½®ModuleFactory.setModules()
         List<Object> moduleList = createManagedList(element, parserContext);
 
         log.debug("Defined {} modules with {}", items.size(), getBeanClass(null).getSimpleName());
@@ -139,7 +139,7 @@ public abstract class AbstractModuleFactoryDefinitionParser<T> extends AbstractN
     }
 
     /**
-     * ´¦ÀíÃ¿Ò»¸öÆ¥Åä¡£
+     * å¤„ç†æ¯ä¸€ä¸ªåŒ¹é…ã€‚
      */
     protected static class ParsingModuleMatcher {
         private final Map<String, ParsingModuleInfo> items;
@@ -172,7 +172,7 @@ public abstract class AbstractModuleFactoryDefinitionParser<T> extends AbstractN
                 return false;
             }
 
-            //¸ù¾İÓÃ»§Ìá¹©µÄFilterÀ´¹ıÂËµ±Ç°É¨ÃéµÄÔªĞÅÏ¢£¨ÊôÓÚ¶ş´Î¹ıÂË£©
+            //æ ¹æ®ç”¨æˆ·æä¾›çš„Filteræ¥è¿‡æ»¤å½“å‰æ‰«ç„çš„å…ƒä¿¡æ¯ï¼ˆå±äºäºŒæ¬¡è¿‡æ»¤ï¼‰
             boolean matched = true;
             if (this.includeFilters != null) {
                 matched = this.includeFilters.size() < 1;
@@ -236,12 +236,12 @@ public abstract class AbstractModuleFactoryDefinitionParser<T> extends AbstractN
             if (items.containsKey(itemName)) {
                 ParsingModuleInfo item = items.get(itemName);
 
-                // ¶ÔÓÚÌØ±ğ´´½¨µÄbean£¬²¹³äÆätypeºÍnameĞÅÏ¢¡£
+                // å¯¹äºç‰¹åˆ«åˆ›å»ºçš„beanï¼Œè¡¥å……å…¶typeå’Œnameä¿¡æ¯ã€‚
                 if (item.bd != null && item.key == null) {
                     item.key = new ModuleKey(type, name);
                 }
 
-                // ºöÂÔÖØ¸´Æ¥ÅäµÄÀà
+                // å¿½ç•¥é‡å¤åŒ¹é…çš„ç±»
                 return false;
             } else {
                 items.put(itemName, new ParsingModuleInfo(type, name, itemName));
@@ -263,7 +263,7 @@ public abstract class AbstractModuleFactoryDefinitionParser<T> extends AbstractN
     }
 
     /**
-     * ´ú±íÒ»¸ömoduleµÄ½âÎöÊ±ĞÅÏ¢¡£
+     * ä»£è¡¨ä¸€ä¸ªmoduleçš„è§£ææ—¶ä¿¡æ¯ã€‚
      */
     protected static class ParsingModuleInfo {
         final BeanDefinition bd;

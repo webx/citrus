@@ -19,9 +19,9 @@ package com.alibaba.citrus.service.requestcontext.basic;
 
 public interface StatusMessageInterceptor extends ResponseHeaderInterceptor {
     /**
-     * ¼ì²éstatusÏûÏ¢¡£
+     * æ£€æŸ¥statusæ¶ˆæ¯ã€‚
      * 
-     * @return ·µ»ØÖµ±íÊ¾ĞŞ¸ÄstatusÏûÏ¢£¬·µ»Ø<code>null</code>Ôò±íÊ¾²»ÉèÖÃstatusÏûÏ¢¡£
+     * @return è¿”å›å€¼è¡¨ç¤ºä¿®æ”¹statusæ¶ˆæ¯ï¼Œè¿”å›<code>null</code>åˆ™è¡¨ç¤ºä¸è®¾ç½®statusæ¶ˆæ¯ã€‚
      */
     String checkStatusMessage(int sc, String msg);
 }

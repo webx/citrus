@@ -23,8 +23,8 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Ò»¸ö½«templateµÄÄÚÈİÊä³öµ½<code>Appendable</code>
- * µÄvisitor£¬ÇÒµ±Óöµ½Î´¶¨ÒåµÄplaceholderÊ±£¬²»»á±¨´í£¬¶øÊÇ´ÓÄÚ²¿µÄcontextÖĞÈ¡Öµ¡£
+ * ä¸€ä¸ªå°†templateçš„å†…å®¹è¾“å‡ºåˆ°<code>Appendable</code>
+ * çš„visitorï¼Œä¸”å½“é‡åˆ°æœªå®šä¹‰çš„placeholderæ—¶ï¼Œä¸ä¼šæŠ¥é”™ï¼Œè€Œæ˜¯ä»å†…éƒ¨çš„contextä¸­å–å€¼ã€‚
  * 
  * @author Michael Zhou
  */

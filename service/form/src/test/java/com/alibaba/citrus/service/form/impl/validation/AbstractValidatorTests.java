@@ -77,7 +77,7 @@ public abstract class AbstractValidatorTests<V extends AbstractValidator> extend
     }
 
     /**
-     * ²âÊÔÔ¼¶¨£¬field1²»¼Órequired-validator¡£
+     * æµ‹è¯•çº¦å®šï¼Œfield1ä¸åŠ required-validatorã€‚
      */
     @Test
     public void validate_optional_noValue() throws Exception {
@@ -119,7 +119,7 @@ public abstract class AbstractValidatorTests<V extends AbstractValidator> extend
         }
 
         Object[][] args = new Object[values.length + extraCount][];
-        args[0] = new String[] { "sumbit", "Ìá½»" };
+        args[0] = new String[] { "sumbit", "æäº¤" };
 
         if (extraCount > 1) {
             System.arraycopy(extraValues, 0, args, 1, extraValues.length);
@@ -194,7 +194,7 @@ public abstract class AbstractValidatorTests<V extends AbstractValidator> extend
     }
 
     /**
-     * Ô¤´¦ÀíÊµÀı£¬ÒÔ±ãÍ¨¹ı<code>AbstractValidatorTests</code>ÖĞµÄ²âÊÔ¡£
+     * é¢„å¤„ç†å®ä¾‹ï¼Œä»¥ä¾¿é€šè¿‡<code>AbstractValidatorTests</code>ä¸­çš„æµ‹è¯•ã€‚
      */
     protected void initFor_AbstractValidatorTests(V validator) {
     }

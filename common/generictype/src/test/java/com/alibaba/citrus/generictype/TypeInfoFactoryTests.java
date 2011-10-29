@@ -35,7 +35,7 @@ import java.util.jar.JarFile;
 import org.junit.Test;
 
 /**
- * ×ÛºÏ²âÊÔ¡£
+ * ç»¼åˆæµ‹è¯•ã€‚
  * 
  * @author Michael Zhou
  */
@@ -107,7 +107,7 @@ public class TypeInfoFactoryTests {
     }
 
     /**
-     * µİ¹é´´½¨typesµÄÇéĞÎ¡£
+     * é€’å½’åˆ›å»ºtypesçš„æƒ…å½¢ã€‚
      */
     @Test
     public void recursiveType() {
@@ -136,13 +136,13 @@ public class TypeInfoFactoryTests {
         TypeVariableInfo varA = method.getTypeParameters().get(0);
         TypeVariableInfo varB = method.getTypeParameters().get(1);
 
-        // ·µ»ØÖµÀàĞÍ
+        // è¿”å›å€¼ç±»å‹
         TypeVariableInfo returnType = (TypeVariableInfo) method.getReturnType();
 
         assertEquals(varB, returnType);
         assertSame(method, returnType.getGenericDeclaration());
 
-        // ²ÎÊıÀàĞÍ
+        // å‚æ•°ç±»å‹
         ParameterizedTypeInfo paramType = (ParameterizedTypeInfo) method.getParameterTypes().get(0);
         TypeVariableInfo paramArgType = (TypeVariableInfo) paramType.getActualTypeArguments().get(0);
 
@@ -215,7 +215,7 @@ public class TypeInfoFactoryTests {
 
         assertEquals(expectedType, resolvedIterableType);
 
-        // resolvedIterableTypeÓ¦µ±»¹ÄÜÔÙ´Îresolve£ºIterable<T=A> => Iterable<T=Integer>
+        // resolvedIterableTypeåº”å½“è¿˜èƒ½å†æ¬¡resolveï¼šIterable<T=A> => Iterable<T=Integer>
         expectedType = factory.getParameterizedType(Iterable.class, Integer.class);
         ParameterizedTypeInfo context = factory.getParameterizedType(MyClass.class, Integer.class);
 
@@ -251,7 +251,7 @@ public class TypeInfoFactoryTests {
 
         assertEquals(expectedType, resolvedIterableType);
 
-        // resolvedIterableTypeÓ¦µ±»¹ÄÜÔÙ´Îresolve£ºIterable<T=List.E> => Iterable<T=Integer>
+        // resolvedIterableTypeåº”å½“è¿˜èƒ½å†æ¬¡resolveï¼šIterable<T=List.E> => Iterable<T=Integer>
         expectedType = factory.getParameterizedType(Iterable.class, Integer.class);
         ParameterizedTypeInfo context = factory.getParameterizedType(List.class, Integer.class);
 

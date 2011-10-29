@@ -29,7 +29,7 @@ import com.alibaba.citrus.util.CollectionUtil;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ÓÃÀ´±éÀú¿ÉÑ¡µÄmodule»òtemplateµÄÃû³Æ¡£
+ * ç”¨æ¥éå†å¯é€‰çš„moduleæˆ–templateçš„åç§°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -108,7 +108,7 @@ abstract class FallbackIterator implements Iterator<String> {
                     }
                 }
 
-                // Ëõ¼õÒ»¸ñ
+                // ç¼©å‡ä¸€æ ¼
                 names.remove(names.size() - 1);
 
                 if (matchLastName) {
@@ -163,17 +163,17 @@ abstract class FallbackIterator implements Iterator<String> {
     }
 
     /**
-     * ·Ç·¨Ãû³Æ£¬Å×³öÒì³£¡£
+     * éæ³•åç§°ï¼ŒæŠ›å‡ºå¼‚å¸¸ã€‚
      */
     protected abstract void invalidName(String name);
 
     /**
-     * ´¦Àí×îºóÒ»¸öÃû×Ö¡£
+     * å¤„ç†æœ€åä¸€ä¸ªåå­—ã€‚
      */
     protected abstract String normalizeLastName(String lastName);
 
     /**
-     * Éú³ÉÃû×Ö¡£
+     * ç”Ÿæˆåå­—ã€‚
      */
     protected abstract String generateFullName(List<String> names);
 }

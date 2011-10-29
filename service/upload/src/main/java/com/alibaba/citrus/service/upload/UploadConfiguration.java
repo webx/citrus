@@ -22,50 +22,50 @@ import java.io.File;
 import com.alibaba.citrus.util.HumanReadableSize;
 
 /**
- * ����<code>UploadService</code>�Ĳ�����
+ * 定义<code>UploadService</code>的参数。
  * 
  * @author Michael Zhou
  */
 public interface UploadConfiguration {
-    /** Ĭ��ֵ��HTTP��������ߴ磬�����˳ߴ�����󽫱������� */
+    /** 默认值：HTTP请求的最大尺寸，超过此尺寸的请求将被抛弃。 */
     long SIZE_MAX_DEFAULT = -1;
 
-    /** Ĭ��ֵ�������ļ����������ߴ磬�����˳ߴ�����󽫱������� */
+    /** 默认值：单个文件允许的最大尺寸，超过此尺寸的请求将被抛弃。 */
     long FILE_SIZE_MAX_DEFAULT = -1;
 
-    /** Ĭ��ֵ�����ļ������ڴ��е���ֵ��С�ڴ�ֵ���ļ����������ڴ��С� */
+    /** 默认值：将文件放在内存中的阈值，小于此值的文件被保存在内存中。 */
     int SIZE_THRESHOLD_DEFAULT = 10240;
 
     /**
-     * ȡ���ݴ��ļ���Ŀ¼��
+     * 取得暂存文件的目录。
      */
     File getRepository();
 
     /**
-     * ȡ��HTTP��������ߴ磬�����˳ߴ�����󽫱���������λ���ֽڣ�ֵ<code>-1</code>��ʾû�����ơ�
+     * 取得HTTP请求的最大尺寸，超过此尺寸的请求将被抛弃。单位：字节，值<code>-1</code>表示没有限制。
      */
     HumanReadableSize getSizeMax();
 
     /**
-     * ȡ�õ����ļ����������ߴ磬�����˳ߴ���ļ�������������λ���ֽڣ�ֵ<code>-1</code>��ʾû�����ơ�
+     * 取得单个文件允许的最大尺寸，超过此尺寸的文件将被抛弃。单位：字节，值<code>-1</code>表示没有限制。
      */
     HumanReadableSize getFileSizeMax();
 
     /**
-     * ȡ�ý��ļ������ڴ��е���ֵ��С�ڴ�ֵ���ļ����������ڴ��С���λ���ֽڡ�
+     * 取得将文件放在内存中的阈值，小于此值的文件被保存在内存中。单位：字节。
      */
     HumanReadableSize getSizeThreshold();
 
     /**
-     * �Ƿ���ͨ��form field�������ڴ����<code>sizeThreshold</code>ֵΪ<code>0</code>
-     * ��ʱ�򣬸�ֵ�Զ�Ϊ<code>true</code>��
+     * 是否将普通的form field保持在内存里？当<code>sizeThreshold</code>值为<code>0</code>
+     * 的时候，该值自动为<code>true</code>。
      */
     boolean isKeepFormFieldInMemory();
 
     /**
-     * ��׼���ϴ��ļ������У��������������ݣ�
+     * 标准的上传文件请求中，包含这样的内容：
      * <code>Content-Disposition: attachment; filename=xxx.txt</code>
-     * ��Ȼ����Щ���淶��Ӧ�ã���ȡ<code>fname=xxx.txt</code>���˱���Ϊ��������������衣
+     * 。然而有些不规范的应用，会取<code>fname=xxx.txt</code>。此变量为兼容这种情况而设。
      */
     String[] getFileNameKey();
 }

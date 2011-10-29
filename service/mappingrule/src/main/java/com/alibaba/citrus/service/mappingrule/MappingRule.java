@@ -18,13 +18,13 @@
 package com.alibaba.citrus.service.mappingrule;
 
 /**
- * ´ú±íÒ»¸öÃû×ÖÓ³ÉäµÄ²ßÂÔ¡£
+ * ä»£è¡¨ä¸€ä¸ªåå­—æ˜ å°„çš„ç­–ç•¥ã€‚
  * 
  * @author Michael Zhou
  */
 public interface MappingRule {
     /**
-     * ½«Ö¸¶¨Ãû³ÆÓ³Éä³ÉÖ¸¶¨ÀàĞÍµÄÃû³Æ¡£Èç¹ûÓ³Éä²»³É¹¦£¬Ôò·µ»Ø<code>null</code>¡£
+     * å°†æŒ‡å®šåç§°æ˜ å°„æˆæŒ‡å®šç±»å‹çš„åç§°ã€‚å¦‚æœæ˜ å°„ä¸æˆåŠŸï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     String getMappedName(String name);
 }

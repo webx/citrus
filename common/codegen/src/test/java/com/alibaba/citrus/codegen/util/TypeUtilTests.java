@@ -28,7 +28,7 @@ import org.junit.Test;
 import com.alibaba.citrus.asm.Type;
 
 /**
- * ≤‚ ‘<code>TypeUtil</code>¿‡°£
+ * ÊµãËØï<code>TypeUtil</code>Á±ª„ÄÇ
  * 
  * @author Michael Zhou
  */
@@ -134,13 +134,13 @@ public class TypeUtilTests {
             com.alibaba.citrus.asm.commons.Method asmMethod = new com.alibaba.citrus.asm.commons.Method("<init>",
                     Type.getConstructorDescriptor(constructor));
 
-            // ∑Ω Ω“ª
+            // ÊñπÂºè‰∏Ä
             MethodSignature signature = TypeUtil.getConstructorSignature(constructor);
 
             assertEquals(asmMethod.hashCode(), signature.hashCode());
             assertEquals(asmMethod, signature);
 
-            // ∑Ω Ω∂˛
+            // ÊñπÂºè‰∫å
             signature = TypeUtil.getConstructorSignature(constructor.getParameterTypes());
 
             assertEquals(asmMethod.hashCode(), signature.hashCode());
@@ -154,13 +154,13 @@ public class TypeUtilTests {
             com.alibaba.citrus.asm.commons.Method asmMethod = new com.alibaba.citrus.asm.commons.Method(
                     method.getName(), Type.getMethodDescriptor(method));
 
-            // ∑Ω Ω“ª
+            // ÊñπÂºè‰∏Ä
             MethodSignature signature = TypeUtil.getMethodSignature(method);
 
             assertEquals(asmMethod.hashCode(), signature.hashCode());
             assertEquals(asmMethod, signature);
 
-            // ∑Ω Ω∂˛
+            // ÊñπÂºè‰∫å
             signature = TypeUtil.getMethodSignature(method.getName(), method.getReturnType(),
                     method.getParameterTypes());
 

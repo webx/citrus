@@ -18,23 +18,23 @@
 package com.alibaba.citrus.expr;
 
 /**
- * ´ú±íÒ»¸ö±í´ïÊ½¡£
+ * ä»£è¡¨ä¸€ä¸ªè¡¨è¾¾å¼ã€‚
  * 
  * @author Michael Zhou
  */
 public interface Expression {
     /**
-     * È¡µÃ±í´ïÊ½×Ö·û´®±íÊ¾¡£
+     * å–å¾—è¡¨è¾¾å¼å­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      * 
-     * @return ±í´ïÊ½×Ö·û´®±íÊ¾
+     * @return è¡¨è¾¾å¼å­—ç¬¦ä¸²è¡¨ç¤º
      */
     String getExpressionText();
 
     /**
-     * ÔÚÖ¸¶¨µÄÉÏÏÂÎÄÖĞ¼ÆËã±í´ïÊ½¡£
+     * åœ¨æŒ‡å®šçš„ä¸Šä¸‹æ–‡ä¸­è®¡ç®—è¡¨è¾¾å¼ã€‚
      * 
-     * @param context <code>ExpressionContext</code>ÉÏÏÂÎÄ
-     * @return ±í´ïÊ½µÄ¼ÆËã½á¹û
+     * @param context <code>ExpressionContext</code>ä¸Šä¸‹æ–‡
+     * @return è¡¨è¾¾å¼çš„è®¡ç®—ç»“æœ
      */
     Object evaluate(ExpressionContext context);
 }

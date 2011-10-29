@@ -33,7 +33,7 @@ import java.util.ResourceBundle;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * Éú³É³ÌĞòÖĞµÄÈÕÖ¾¡¢´íÎóĞÅÏ¢µÄ¹¤¾ßÀà¡£
+ * ç”Ÿæˆç¨‹åºä¸­çš„æ—¥å¿—ã€é”™è¯¯ä¿¡æ¯çš„å·¥å…·ç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -41,21 +41,21 @@ public class MessageFormatter<T> {
     private final Map<Locale, Reference<ResourceBundle>> bundles;
 
     /**
-     * ´´½¨Ò»¸ö<code>MessageFormatter</code>ÊµÀı¡£
+     * åˆ›å»ºä¸€ä¸ª<code>MessageFormatter</code>å®ä¾‹ã€‚
      */
     public MessageFormatter() {
         this.bundles = createConcurrentHashMap();
     }
 
     /**
-     * È¡µÃ<code>ResourceBundle</code>µÄÃû³Æ£¬Ä¬ÈÏºÍÀàÃûÏàÍ¬¡£
+     * å–å¾—<code>ResourceBundle</code>çš„åç§°ï¼Œé»˜è®¤å’Œç±»åç›¸åŒã€‚
      */
     protected String getBundleName() {
         return getClass().getName();
     }
 
     /**
-     * È¡µÃÖ¸¶¨localeµÄ<code>ResourceBundle</code>¡£
+     * å–å¾—æŒ‡å®šlocaleçš„<code>ResourceBundle</code>ã€‚
      */
     private ResourceBundle getBundle(Locale locale) {
         if (locale == null) {
@@ -78,14 +78,14 @@ public class MessageFormatter<T> {
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÔÚenumÖĞËù±ê×¢µÄ¡¢ÏµÍ³Ä¬ÈÏlocaleµÄÏûÏ¢´®£¬²¢¸ñÊ½»¯Ö®¡£
+     * å–å¾—æŒ‡å®šåœ¨enumä¸­æ‰€æ ‡æ³¨çš„ã€ç³»ç»Ÿé»˜è®¤localeçš„æ¶ˆæ¯ä¸²ï¼Œå¹¶æ ¼å¼åŒ–ä¹‹ã€‚
      */
     public String format(T key, Object... args) {
         return format(key, null, args);
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÔÚenumÖĞËù±ê×¢µÄ¡¢Ö¸¶¨localeµÄÏûÏ¢´®£¬²¢¸ñÊ½»¯Ö®¡£
+     * å–å¾—æŒ‡å®šåœ¨enumä¸­æ‰€æ ‡æ³¨çš„ã€æŒ‡å®šlocaleçš„æ¶ˆæ¯ä¸²ï¼Œå¹¶æ ¼å¼åŒ–ä¹‹ã€‚
      */
     public String format(T key, Locale locale, Object... args) {
         ResourceBundle bundle = getBundle(locale);
@@ -124,7 +124,7 @@ public class MessageFormatter<T> {
     }
 
     /**
-     * Ô¤´¦Àí²ÎÊı£¬Ê¹Ö®¸üºÃµØ±»ÏÔÊ¾¡£
+     * é¢„å¤„ç†å‚æ•°ï¼Œä½¿ä¹‹æ›´å¥½åœ°è¢«æ˜¾ç¤ºã€‚
      */
     protected final Object preprocess(Object o) {
         if (o == null) {
@@ -161,7 +161,7 @@ public class MessageFormatter<T> {
     }
 
     /**
-     * ¸ø×ÓÀàÔ¤Áô½Ó¿Ú£¬ÒÔ±ã´¦ÀíÎ´ÖªÀàĞÍ¡£
+     * ç»™å­ç±»é¢„ç•™æ¥å£ï¼Œä»¥ä¾¿å¤„ç†æœªçŸ¥ç±»å‹ã€‚
      */
     protected Object preprocessObject(Object o) {
         return o;
@@ -255,7 +255,7 @@ public class MessageFormatter<T> {
     }
 
     /**
-     * È¡µÃÄ¬ÈÏµÄlocale¡£
+     * å–å¾—é»˜è®¤çš„localeã€‚
      */
     private static Locale getDefaultLocale() {
         Locale locale = null;
@@ -274,7 +274,7 @@ public class MessageFormatter<T> {
     private static ThreadLocal<Locale> defaultLocale;
 
     /**
-     * Õâ¸ö·½·¨ÊÇ¸øµ¥Ôª²âÊÔÔ¤ÁôµÄ£¬ÍâÃæµÄ³ÌĞò²»¿ÉÓÃ¡£
+     * è¿™ä¸ªæ–¹æ³•æ˜¯ç»™å•å…ƒæµ‹è¯•é¢„ç•™çš„ï¼Œå¤–é¢çš„ç¨‹åºä¸å¯ç”¨ã€‚
      */
     static void setDefaultLocale(Locale locale) {
         if (defaultLocale == null) {

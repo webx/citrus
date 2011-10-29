@@ -50,7 +50,7 @@ public class ContentURIBrokerConfigTests extends AbstractURIBrokerServiceTests {
     public void clink4_extendsURIBroker() {
         uri = (ContentURIBroker) service.getURIBroker("clink4");
 
-        // 只继承serverInfo和query，不会继承path
+        // 鍙户鎵縮erverInfo鍜宷uery锛屼笉浼氱户鎵縫ath
         assertEquals("http://myuser2:mypass2@myservername2:1234/?aaa=1111&bbb=2222&ccc=3333#myreference2", uri.render());
         assertEquals("http://myuser2:mypass2@myservername2:1234/a.jpg?aaa=1111&bbb=2222&ccc=3333#myreference2", uri
                 .setContentPath("a.jpg").render());

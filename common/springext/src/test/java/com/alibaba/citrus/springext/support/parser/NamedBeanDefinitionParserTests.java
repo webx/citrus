@@ -31,7 +31,7 @@ import org.springframework.core.io.FileSystemResource;
 import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 
 /**
- * ²âÊÔ<code>AbstractNamedBeanDefinitionParser</code>¡£
+ * æµ‹è¯•<code>AbstractNamedBeanDefinitionParser</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -44,7 +44,7 @@ public class NamedBeanDefinitionParserTests {
     }
 
     /**
-     * Î´Ö¸¶¨id£¬ÇÒ<code>getDefaultName()</code>·µ»Ø¿Õ¡£
+     * æœªæŒ‡å®šidï¼Œä¸”<code>getDefaultName()</code>è¿”å›žç©ºã€‚
      */
     @Test
     public void noDefaultName_And_NoIdSpecified() {
@@ -57,7 +57,7 @@ public class NamedBeanDefinitionParserTests {
     }
 
     /**
-     * Ö¸¶¨id£¬ÇÒ<code>getDefaultName()</code>·µ»Ø¿Õ¡£
+     * æŒ‡å®šidï¼Œä¸”<code>getDefaultName()</code>è¿”å›žç©ºã€‚
      */
     @Test
     public void noDefaultName() {

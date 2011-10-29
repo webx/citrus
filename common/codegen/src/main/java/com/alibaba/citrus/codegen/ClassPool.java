@@ -34,7 +34,7 @@ import com.alibaba.citrus.asm.ClassWriter;
 import com.alibaba.citrus.asm.util.TraceClassVisitor;
 
 /**
- * ¶¯Ì¬Éú³ÉºÍ±£´æÀà»ò½Ó¿Ú¡£
+ * åŠ¨æ€ç”Ÿæˆå’Œä¿å­˜ç±»æˆ–æ¥å£ã€‚
  * 
  * @author Michael Zhou
  */
@@ -46,15 +46,15 @@ public class ClassPool {
     private String packageName;
 
     /**
-     * ´´½¨Ò»¸ö<code>ClassPool</code>£¬Ê¹ÓÃ×°ÔØ<code>ClassPool</code>ÀàµÄ
-     * <code>ClassLoader</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>ClassPool</code>ï¼Œä½¿ç”¨è£…è½½<code>ClassPool</code>ç±»çš„
+     * <code>ClassLoader</code>ã€‚
      */
     public ClassPool() {
         this(null);
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>ClassPool</code>£¬Ê¹ÓÃÖ¸¶¨µÄ<code>ClassLoader</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>ClassPool</code>ï¼Œä½¿ç”¨æŒ‡å®šçš„<code>ClassLoader</code>ã€‚
      */
     public ClassPool(ClassLoader parentClassLoader) {
         if (parentClassLoader == null) {
@@ -67,84 +67,84 @@ public class ClassPool {
     }
 
     /**
-     * È¡µÃ<code>ClassLoader</code>¡£
+     * å–å¾—<code>ClassLoader</code>ã€‚
      */
     public ClassLoader getClassLoader() {
         return classLoader;
     }
 
     /**
-     * ÊÇ·ñ±£´æclassÔ´ÎÄ¼şºÍÄ¿±êÎÄ¼ş£¿
+     * æ˜¯å¦ä¿å­˜classæºæ–‡ä»¶å’Œç›®æ ‡æ–‡ä»¶ï¼Ÿ
      */
     public boolean isDebugging() {
         return debugging;
     }
 
     /**
-     * ÉèÖÃ²ÎÊı£ºÊÇ·ñ±£´æclassÔ´ÎÄ¼şºÍÄ¿±êÎÄ¼ş£¿
+     * è®¾ç½®å‚æ•°ï¼šæ˜¯å¦ä¿å­˜classæºæ–‡ä»¶å’Œç›®æ ‡æ–‡ä»¶ï¼Ÿ
      */
     public void setDebugging(boolean debugging) {
         this.debugging = debugging;
     }
 
     /**
-     * ClassµÄÔ´´úÂëºÍ¶ş½øÖÆÎÄ¼ş½«±»Êä³öµ½¸ÃÄ¿Â¼¡£
+     * Classçš„æºä»£ç å’ŒäºŒè¿›åˆ¶æ–‡ä»¶å°†è¢«è¾“å‡ºåˆ°è¯¥ç›®å½•ã€‚
      */
     public File getDebuggingLocation() {
         return debuggingLocation;
     }
 
     /**
-     * ÉèÖÃclassµÄÔ´´úÂëºÍ¶ş½øÖÆÎÄ¼şµÄÊä³öÄ¿Â¼¡£
+     * è®¾ç½®classçš„æºä»£ç å’ŒäºŒè¿›åˆ¶æ–‡ä»¶çš„è¾“å‡ºç›®å½•ã€‚
      */
     public void setDebuggingLocation(File debuggingLocation) {
         this.debuggingLocation = debuggingLocation;
     }
 
     /**
-     * È¡µÃ<code>ClassWriter</code>µÄ±êÖ¾Î»¡£
+     * å–å¾—<code>ClassWriter</code>çš„æ ‡å¿—ä½ã€‚
      */
     public int getClassWriterFlags() {
         return classWriterFlags;
     }
 
     /**
-     * ÉèÖÃ<code>ClassWriter</code>µÄ±êÖ¾Î»¡£
+     * è®¾ç½®<code>ClassWriter</code>çš„æ ‡å¿—ä½ã€‚
      */
     public void setClassWriterFlags(int classWriterFlags) {
         this.classWriterFlags = classWriterFlags;
     }
 
     /**
-     * È¡µÃÉú³É´úÂëµÄpackageÃû³Æ¡£
+     * å–å¾—ç”Ÿæˆä»£ç çš„packageåç§°ã€‚
      */
     public String getPackageName() {
         return packageName;
     }
 
     /**
-     * ÉèÖÃÉú³É´úÂëµÄpackageÃû³Æ¡£
+     * è®¾ç½®ç”Ÿæˆä»£ç çš„packageåç§°ã€‚
      */
     public void setPackageName(String packageName) {
         this.packageName = packageName;
     }
 
     /**
-     * »ùÓÚÖ¸¶¨µÄ<code>basename</code>Éú³ÉÒ»¸öÎ¨Ò»ÀàÃû£¬·µ»ØÓÃÀ´´´½¨¸ÃÀàĞÍµÄ<code>ClassBuilder</code>¡£
+     * åŸºäºæŒ‡å®šçš„<code>basename</code>ç”Ÿæˆä¸€ä¸ªå”¯ä¸€ç±»åï¼Œè¿”å›ç”¨æ¥åˆ›å»ºè¯¥ç±»å‹çš„<code>ClassBuilder</code>ã€‚
      */
     public ClassBuilder createClass(String basename, Class<?> superclass, Class<?>[] interfaces) {
         return createClassOrInterface(-1, false, basename, superclass, interfaces, -1, null);
     }
 
     /**
-     * »ùÓÚÖ¸¶¨µÄ<code>basename</code>Éú³ÉÒ»¸öÎ¨Ò»ÀàÃû£¬·µ»ØÓÃÀ´´´½¨¸ÃÀàĞÍµÄ<code>ClassBuilder</code>¡£
+     * åŸºäºæŒ‡å®šçš„<code>basename</code>ç”Ÿæˆä¸€ä¸ªå”¯ä¸€ç±»åï¼Œè¿”å›ç”¨æ¥åˆ›å»ºè¯¥ç±»å‹çš„<code>ClassBuilder</code>ã€‚
      */
     public ClassBuilder createClass(int access, String basename, Class<?> superclass, Class<?>[] interfaces) {
         return createClassOrInterface(access, false, basename, superclass, interfaces, -1, null);
     }
 
     /**
-     * »ùÓÚÖ¸¶¨µÄ<code>basename</code>Éú³ÉÒ»¸öÎ¨Ò»ÀàÃû£¬·µ»ØÓÃÀ´´´½¨¸ÃÀàĞÍµÄ<code>ClassBuilder</code>¡£
+     * åŸºäºæŒ‡å®šçš„<code>basename</code>ç”Ÿæˆä¸€ä¸ªå”¯ä¸€ç±»åï¼Œè¿”å›ç”¨æ¥åˆ›å»ºè¯¥ç±»å‹çš„<code>ClassBuilder</code>ã€‚
      */
     public ClassBuilder createClass(int access, String basename, Class<?> superclass, Class<?>[] interfaces,
                                     int classVersion, String source) {
@@ -152,21 +152,21 @@ public class ClassPool {
     }
 
     /**
-     * »ùÓÚÖ¸¶¨µÄ<code>basename</code>Éú³ÉÒ»¸öÎ¨Ò»½Ó¿ÚÃû£¬·µ»ØÓÃÀ´´´½¨¸ÃÀàĞÍµÄ<code>ClassBuilder</code>¡£
+     * åŸºäºæŒ‡å®šçš„<code>basename</code>ç”Ÿæˆä¸€ä¸ªå”¯ä¸€æ¥å£åï¼Œè¿”å›ç”¨æ¥åˆ›å»ºè¯¥ç±»å‹çš„<code>ClassBuilder</code>ã€‚
      */
     public ClassBuilder createInterface(String basename, Class<?>[] interfaces) {
         return createClassOrInterface(-1, true, basename, null, interfaces, -1, null);
     }
 
     /**
-     * »ùÓÚÖ¸¶¨µÄ<code>basename</code>Éú³ÉÒ»¸öÎ¨Ò»½Ó¿ÚÃû£¬·µ»ØÓÃÀ´´´½¨¸ÃÀàĞÍµÄ<code>ClassBuilder</code>¡£
+     * åŸºäºæŒ‡å®šçš„<code>basename</code>ç”Ÿæˆä¸€ä¸ªå”¯ä¸€æ¥å£åï¼Œè¿”å›ç”¨æ¥åˆ›å»ºè¯¥ç±»å‹çš„<code>ClassBuilder</code>ã€‚
      */
     public ClassBuilder createInterface(int access, String basename, Class<?>[] interfaces) {
         return createClassOrInterface(access, true, basename, null, interfaces, -1, null);
     }
 
     /**
-     * »ùÓÚÖ¸¶¨µÄ<code>basename</code>Éú³ÉÒ»¸öÎ¨Ò»½Ó¿ÚÃû£¬·µ»ØÓÃÀ´´´½¨¸ÃÀàĞÍµÄ<code>ClassBuilder</code>¡£
+     * åŸºäºæŒ‡å®šçš„<code>basename</code>ç”Ÿæˆä¸€ä¸ªå”¯ä¸€æ¥å£åï¼Œè¿”å›ç”¨æ¥åˆ›å»ºè¯¥ç±»å‹çš„<code>ClassBuilder</code>ã€‚
      */
     public ClassBuilder createInterface(int access, String basename, Class<?>[] interfaces, int classVersion,
                                         String source) {
@@ -174,7 +174,7 @@ public class ClassPool {
     }
 
     /**
-     * »ùÓÚÖ¸¶¨µÄ<code>basename</code>Éú³ÉÒ»¸öÎ¨Ò»ÀàÃû£¬·µ»ØÓÃÀ´´´½¨¸ÃÀàĞÍµÄ<code>ClassBuilder</code>¡£
+     * åŸºäºæŒ‡å®šçš„<code>basename</code>ç”Ÿæˆä¸€ä¸ªå”¯ä¸€ç±»åï¼Œè¿”å›ç”¨æ¥åˆ›å»ºè¯¥ç±»å‹çš„<code>ClassBuilder</code>ã€‚
      */
     private ClassBuilder createClassOrInterface(int access, boolean isInterface, String basename, Class<?> superclass,
                                                 Class<?>[] interfaces, int classVersion, String source) {
@@ -185,7 +185,7 @@ public class ClassPool {
     }
 
     /**
-     * ÓÃÀ´×°ÔØbytecodeµÄ<code>ClassLoader</code>¡£
+     * ç”¨æ¥è£…è½½bytecodeçš„<code>ClassLoader</code>ã€‚
      */
     private static class BytecodeLoader extends ClassLoader {
         public BytecodeLoader(ClassLoader parentClassLoader) {
@@ -198,7 +198,7 @@ public class ClassPool {
     }
 
     /**
-     * ¶¯Ì¬Éú³ÉÀà»ò½Ó¿Ú¡£
+     * åŠ¨æ€ç”Ÿæˆç±»æˆ–æ¥å£ã€‚
      */
     private class PooledClassBuilder extends ClassBuilder {
         public PooledClassBuilder(ClassWriter cw, int access, boolean isInterface, String className,
@@ -213,7 +213,7 @@ public class ClassPool {
     }
 
     /**
-     * Ö§³ÖdebuggingµÄÀà´´½¨Æ÷¡£
+     * æ”¯æŒdebuggingçš„ç±»åˆ›å»ºå™¨ã€‚
      */
     private class DebuggingClassWriter extends ClassWriter {
         private String className;
@@ -247,7 +247,7 @@ public class ClassPool {
 
                 if (classDir.exists() && classDir.isDirectory()) {
                     try {
-                        // Êä³öclassÎÄ¼ş
+                        // è¾“å‡ºclassæ–‡ä»¶
                         File classFile = new File(classDir, baseFile.getName() + ".class");
                         OutputStream out = new BufferedOutputStream(new FileOutputStream(classFile));
 
@@ -257,7 +257,7 @@ public class ClassPool {
                             out.close();
                         }
 
-                        // Êä³öasmÎÄ¼ş
+                        // è¾“å‡ºasmæ–‡ä»¶
                         File asmFile = new File(classDir, baseFile.getName() + ".asm");
                         out = new BufferedOutputStream(new FileOutputStream(asmFile));
 

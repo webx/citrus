@@ -40,11 +40,11 @@ import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 import com.meterware.servletunit.ServletRunner;
 
 /**
- * È·±£singleton proxy¿ÉÒÔ¹¤×÷¡£Éè¼ÆÒÔÏÂÇéĞÎ£º
+ * ç¡®ä¿singleton proxyå¯ä»¥å·¥ä½œã€‚è®¾è®¡ä»¥ä¸‹æƒ…å½¢ï¼š
  * <ul>
- * <li>parent contextÖĞ±»ÖÃÈëÁËresolvableDependencies¡£</li>
- * <li>this contextÖĞ±»ÖÃÈëÁËÍ¬ÃûµÄdependencies¡£</li>
- * <li>ÀûÓÃautowire×¢Èë¶ÔÏó£¬Ó¦¸Ã±»×¢ÈëparentÖĞµÄ¶ÔÏó¡£</li>
+ * <li>parent contextä¸­è¢«ç½®å…¥äº†resolvableDependenciesã€‚</li>
+ * <li>this contextä¸­è¢«ç½®å…¥äº†åŒåçš„dependenciesã€‚</li>
+ * <li>åˆ©ç”¨autowireæ³¨å…¥å¯¹è±¡ï¼Œåº”è¯¥è¢«æ³¨å…¥parentä¸­çš„å¯¹è±¡ã€‚</li>
  * </ul>
  * 
  * @author Michael Zhou
@@ -57,13 +57,13 @@ public class InheritableBeanFactoryTests {
         ServletContext servletContext = new ServletRunner(new File(srcdir, "WEB-INF/web.xml"), "").newClient()
                 .newInvocation("http://localhost/servlet").getServlet().getServletConfig().getServletContext();
 
-        // parent context£¬Èç¹ûwithMockRequest£¬Ôò×¢²á²¢¸²¸ÇÔ­ÓĞµÄrequest
+        // parent contextï¼Œå¦‚æœwithMockRequestï¼Œåˆ™æ³¨å†Œå¹¶è¦†ç›–åŸæœ‰çš„request
         parentContext = new XmlWebApplicationContext();
         parentContext.setConfigLocation(withMockRequest ? "beans-autowire-parent.xml" : "beans.xml");
         parentContext.setServletContext(servletContext);
         parentContext.refresh();
 
-        // this context½«»áÖØĞÂ×¢²árequest£¬µ«ÊÇÓÉÓÚparentÖĞÒÑ¾­×¢²áÁË£¬²»»á±»¸²¸Ç
+        // this contextå°†ä¼šé‡æ–°æ³¨å†Œrequestï¼Œä½†æ˜¯ç”±äºparentä¸­å·²ç»æ³¨å†Œäº†ï¼Œä¸ä¼šè¢«è¦†ç›–
         thisContext = new XmlWebApplicationContext();
         thisContext.setConfigLocation("beans-autowire.xml");
         thisContext.setServletContext(servletContext);
@@ -72,30 +72,30 @@ public class InheritableBeanFactoryTests {
     }
 
     /**
-     * Èç¹ûparent contextÖĞ±»ÖÃÈëmock request£¬ÄÇÃ´È¡µÃ²¢×¢Èëµ½autowire¶ÔÏóÖĞ¡£
+     * å¦‚æœparent contextä¸­è¢«ç½®å…¥mock requestï¼Œé‚£ä¹ˆå–å¾—å¹¶æ³¨å…¥åˆ°autowireå¯¹è±¡ä¸­ã€‚
      */
     @Test
     public void request1() throws Exception {
         initContext(true);
         MyObject obj = (MyObject) thisContext.getBean("autowiredObject");
         assertEquals("mock_uri", obj.request.getRequestURI());
-        assertSame(thisContext, obj.resourceLoader); // È·±£·ÇProxyTargetFactory½Ó¿ÚµÄ¶ÔÏó²»ÊÜÓ°Ïì
+        assertSame(thisContext, obj.resourceLoader); // ç¡®ä¿éProxyTargetFactoryæ¥å£çš„å¯¹è±¡ä¸å—å½±å“
     }
 
     /**
-     * Èç¹ûparent contextÖĞÃ»ÓĞÖÃÈëmock request£¬ÄÇÃ´autowireÊÔÍ¼È¡µÃrequestÊ§°Ü¡£
+     * å¦‚æœparent contextä¸­æ²¡æœ‰ç½®å…¥mock requestï¼Œé‚£ä¹ˆautowireè¯•å›¾å–å¾—requestå¤±è´¥ã€‚
      */
     @Test
     public void request2() throws Exception {
         try {
-            // ¶ÔÓÚspring2£¬ÕâÒ»²½¾Í»áÅ×³öIllegalStateException: no thread-bound request found.
+            // å¯¹äºspring2ï¼Œè¿™ä¸€æ­¥å°±ä¼šæŠ›å‡ºIllegalStateException: no thread-bound request found.
             initContext(false);
 
-            // ¶ÔÓÚspring3£¬»á½«request·ÃÎÊÍÆ³Ùµ½Ö´ĞĞrequest·½·¨Ê±£¬²Å»áÅ×³öIllegalStateException: no thread-bound request found.
-            // ÕâÒ»µãºÍrequest contextµÄÊÖ·¨ÏàÍ¬£¬µ«ÊÇÓÉÓÚrequest context²ÉÓÃÁËcglib£¬ËùÒÔĞÔÄÜÉÏ¸üºÃÒ»µã¡£
+            // å¯¹äºspring3ï¼Œä¼šå°†requestè®¿é—®æ¨è¿Ÿåˆ°æ‰§è¡Œrequestæ–¹æ³•æ—¶ï¼Œæ‰ä¼šæŠ›å‡ºIllegalStateException: no thread-bound request found.
+            // è¿™ä¸€ç‚¹å’Œrequest contextçš„æ‰‹æ³•ç›¸åŒï¼Œä½†æ˜¯ç”±äºrequest contexté‡‡ç”¨äº†cglibï¼Œæ‰€ä»¥æ€§èƒ½ä¸Šæ›´å¥½ä¸€ç‚¹ã€‚
             MyObject obj = (MyObject) thisContext.getBean("autowiredObject");
             assertTrue(Proxy.isProxyClass(obj.request.getClass()));
-            assertSame(thisContext, obj.resourceLoader); // È·±£·ÇProxyTargetFactory½Ó¿ÚµÄ¶ÔÏó²»ÊÜÓ°Ïì
+            assertSame(thisContext, obj.resourceLoader); // ç¡®ä¿éProxyTargetFactoryæ¥å£çš„å¯¹è±¡ä¸å—å½±å“
 
             obj.request.getRequestURI();
             fail();

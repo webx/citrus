@@ -22,43 +22,43 @@ import org.springframework.web.context.WebApplicationContext;
 import com.alibaba.citrus.webx.config.WebxConfiguration;
 
 /**
- * ´ú±íÒ»×éwebx componentµÄĞÅÏ¢¡£
+ * ä»£è¡¨ä¸€ç»„webx componentçš„ä¿¡æ¯ã€‚
  * 
  * @author Michael Zhou
  */
 public interface WebxComponents extends Iterable<WebxComponent> {
     /**
-     * È¡µÃËùÓĞcomponentsÃû³Æ¡£
+     * å–å¾—æ‰€æœ‰componentsåç§°ã€‚
      */
     String[] getComponentNames();
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄcomponent¡£
+     * å–å¾—æŒ‡å®šåç§°çš„componentã€‚
      */
     WebxComponent getComponent(String componentName);
 
     /**
-     * È¡µÃÄ¬ÈÏµÄcomponent¡£Èç¹ûÎ´ÉèÖÃ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—é»˜è®¤çš„componentã€‚å¦‚æœæœªè®¾ç½®ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     WebxComponent getDefaultComponent();
 
     /**
-     * ²éÕÒÆ¥ÅäµÄcomponent¡£
+     * æŸ¥æ‰¾åŒ¹é…çš„componentã€‚
      */
     WebxComponent findMatchedComponent(String path);
 
     /**
-     * È¡µÃÓÃÀ´´¦ÀíÇëÇóµÄcontroller¡£
+     * å–å¾—ç”¨æ¥å¤„ç†è¯·æ±‚çš„controllerã€‚
      */
     WebxRootController getWebxRootController();
 
     /**
-     * È¡µÃwebx configurationÉèÖÃ¡£
+     * å–å¾—webx configurationè®¾ç½®ã€‚
      */
     WebxConfiguration getParentWebxConfiguration();
 
     /**
-     * È¡µÃËùÓĞcomponentµÄ¸¸application contextÈİÆ÷£¬Èç¹ûÃ»ÓĞ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æ‰€æœ‰componentçš„çˆ¶application contextå®¹å™¨ï¼Œå¦‚æœæ²¡æœ‰ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     WebApplicationContext getParentApplicationContext();
 }

@@ -23,7 +23,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>Paginator</code>¡£
+ * æµ‹è¯•<code>Paginator</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -36,14 +36,14 @@ public class PaginatorTests {
     }
 
     /**
-     * ²âÊÔÎŞÏŞ¶àÏî¡£
+     * æµ‹è¯•æ— é™å¤šé¡¹ã€‚
      */
     @Test
     public void unknownItems() {
         assertEquals(Paginator.UNKNOWN_ITEMS, pg.getItems());
         assertEquals(10, pg.getItemsPerPage());
 
-        // ³õÊ¼×´Ì¬£¬µÚ1Ò³
+        // åˆå§‹çŠ¶æ€ï¼Œç¬¬1é¡µ
         assertEquals(1, pg.getPage());
         assertEquals(1, pg.getFirstPage());
         assertEquals(1, pg.getPreviousPage());
@@ -61,7 +61,7 @@ public class PaginatorTests {
         assertTrue(pg.isDisabledPage(1));
         assertFalse(pg.isDisabledPage(2));
 
-        // ÏÂÒ»Ò³£¬µÚ2Ò³
+        // ä¸‹ä¸€é¡µï¼Œç¬¬2é¡µ
         pg.setPage(2);
 
         assertEquals(2, pg.getPage());
@@ -81,7 +81,7 @@ public class PaginatorTests {
         assertFalse(pg.isDisabledPage(1));
         assertTrue(pg.isDisabledPage(2));
 
-        // µÚ11Ò³
+        // ç¬¬11é¡µ
         pg.setPage(11);
 
         assertEquals(11, pg.getPage());
@@ -105,7 +105,7 @@ public class PaginatorTests {
     }
 
     /**
-     * ²âÊÔÓĞÏŞ¶àÏî¡£
+     * æµ‹è¯•æœ‰é™å¤šé¡¹ã€‚
      */
     @Test
     public void limitedItems() {
@@ -115,7 +115,7 @@ public class PaginatorTests {
         assertEquals(123, pg.getItems());
         assertEquals(10, pg.getItemsPerPage());
 
-        // ³õÊ¼×´Ì¬£¬µÚ1Ò³
+        // åˆå§‹çŠ¶æ€ï¼Œç¬¬1é¡µ
         assertEquals(1, pg.getPage());
         assertEquals(1, pg.getFirstPage());
         assertEquals(1, pg.getPreviousPage());
@@ -136,7 +136,7 @@ public class PaginatorTests {
         assertFalse(pg.isDisabledPage(13));
         assertTrue(pg.isDisabledPage(14));
 
-        // ÏÂÒ»Ò³£¬µÚ2Ò³
+        // ä¸‹ä¸€é¡µï¼Œç¬¬2é¡µ
         pg.setPage(2);
 
         assertEquals(2, pg.getPage());
@@ -158,7 +158,7 @@ public class PaginatorTests {
         assertFalse(pg.isDisabledPage(13));
         assertTrue(pg.isDisabledPage(14));
 
-        // µÚ11Ò³
+        // ç¬¬11é¡µ
         pg.setPage(11);
 
         assertEquals(11, pg.getPage());
@@ -181,7 +181,7 @@ public class PaginatorTests {
         assertFalse(pg.isDisabledPage(13));
         assertTrue(pg.isDisabledPage(14));
 
-        // µÚ13Ò³£¨×îºóÒ»Ò³£©
+        // ç¬¬13é¡µï¼ˆæœ€åä¸€é¡µï¼‰
         pg.setPage(13);
 
         assertEquals(13, pg.getPage());
@@ -209,7 +209,7 @@ public class PaginatorTests {
     public void setItems() {
         pg.setItems(123);
         pg.setPage(11);
-        pg.setItems(133); // ¸Ä±äitems
+        pg.setItems(133); // æ”¹å˜items
 
         assertEquals(14, pg.getPages());
         assertEquals(133, pg.getItems());
@@ -242,7 +242,7 @@ public class PaginatorTests {
         pg.setItems(123);
         pg.setPage(11);
 
-        // ±ä´óitemsPerPage
+        // å˜å¤§itemsPerPage
         pg.setItemsPerPage(20);
 
         assertEquals(7, pg.getPages());
@@ -269,7 +269,7 @@ public class PaginatorTests {
         assertFalse(pg.isDisabledPage(7));
         assertTrue(pg.isDisabledPage(8));
 
-        // ±äĞ¡itemsPerPage
+        // å˜å°itemsPerPage
         pg.setItemsPerPage(5);
 
         assertEquals(25, pg.getPages());
@@ -330,7 +330,7 @@ public class PaginatorTests {
     public void setItem() {
         pg.setItems(123);
 
-        // 13Ò³
+        // 13é¡µ
         pg.setItem(122);
 
         assertEquals(13, pg.getPage());
@@ -353,7 +353,7 @@ public class PaginatorTests {
         assertTrue(pg.isDisabledPage(13));
         assertTrue(pg.isDisabledPage(14));
 
-        // 1Ò³
+        // 1é¡µ
         pg.setItem(0);
 
         assertEquals(1, pg.getPage());

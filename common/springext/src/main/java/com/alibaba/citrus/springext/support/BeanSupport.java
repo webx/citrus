@@ -22,12 +22,12 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * Ò»¸öÍ¨ÓÃ»ùÀà£¬·½±ãÊµÏÖcontributionÀà¡£°üº¬ÁËÒÔÏÂÌØĞÔ£º
+ * ä¸€ä¸ªé€šç”¨åŸºç±»ï¼Œæ–¹ä¾¿å®ç°contributionç±»ã€‚åŒ…å«äº†ä»¥ä¸‹ç‰¹æ€§ï¼š
  * <ul>
- * <li>×ÓÀà¿É¸²¸Ç<code>resolveBeanInterface()</code>·½·¨£¬ÒÔÈ¡µÃ½Ó¿Ú¡£</li>
- * <li>ÊµÏÖÄ¬ÈÏµÄ<code>toString()</code>·½·¨¡£</li>
- * <li>ÊµÏÖÁËspringµÄ³õÊ¼»¯¡¢Ïú»ÙµÈÉúÃüÆÚ·½·¨¡£</li>
- * <li>¿ÉÈ¡µÃÔÚspringÖĞ×¢²áµÄbean name¡£</li>
+ * <li>å­ç±»å¯è¦†ç›–<code>resolveBeanInterface()</code>æ–¹æ³•ï¼Œä»¥å–å¾—æ¥å£ã€‚</li>
+ * <li>å®ç°é»˜è®¤çš„<code>toString()</code>æ–¹æ³•ã€‚</li>
+ * <li>å®ç°äº†springçš„åˆå§‹åŒ–ã€é”€æ¯ç­‰ç”Ÿå‘½æœŸæ–¹æ³•ã€‚</li>
+ * <li>å¯å–å¾—åœ¨springä¸­æ³¨å†Œçš„bean nameã€‚</li>
  * </ul>
  * 
  * @author Michael Zhou
@@ -38,7 +38,7 @@ public abstract class BeanSupport implements InitializingBean, DisposableBean, B
     private boolean initialized;
 
     /**
-     * È¡µÃbean½Ó¿Ú¡£
+     * å–å¾—beanæ¥å£ã€‚
      */
     public final Class<?> getBeanInterface() {
         if (beanInterface == null) {
@@ -53,14 +53,14 @@ public abstract class BeanSupport implements InitializingBean, DisposableBean, B
     }
 
     /**
-     * ÊÇ·ñÒÑ¾­³õÊ¼»¯¡£
+     * æ˜¯å¦å·²ç»åˆå§‹åŒ–ã€‚
      */
     public boolean isInitialized() {
         return initialized;
     }
 
     /**
-     * ¼ì²é·şÎñÒÑ¾­±»³õÊ¼»¯£¬Èô·ñ£¬ÔòÅ×³ö<code>IllegalStateException</code>Òì³£¡£
+     * æ£€æŸ¥æœåŠ¡å·²ç»è¢«åˆå§‹åŒ–ï¼Œè‹¥å¦ï¼Œåˆ™æŠ›å‡º<code>IllegalStateException</code>å¼‚å¸¸ã€‚
      */
     public void assertInitialized() {
         if (!initialized) {
@@ -70,19 +70,19 @@ public abstract class BeanSupport implements InitializingBean, DisposableBean, B
     }
 
     /**
-     * ³õÊ¼»¯Ç°Ö´ĞĞ¡£
+     * åˆå§‹åŒ–å‰æ‰§è¡Œã€‚
      */
     protected void preInit() throws Exception {
     }
 
     /**
-     * ³õÊ¼»¯bean¡£
+     * åˆå§‹åŒ–beanã€‚
      */
     protected void init() throws Exception {
     }
 
     /**
-     * ³õÊ¼»¯ºóÖ´ĞĞ¡£
+     * åˆå§‹åŒ–åæ‰§è¡Œã€‚
      */
     protected void postInit() throws Exception {
     }
@@ -95,19 +95,19 @@ public abstract class BeanSupport implements InitializingBean, DisposableBean, B
     }
 
     /**
-     * Ïú»Ùbean¡£
+     * é”€æ¯beanã€‚
      */
     protected void dispose() {
     }
 
     /**
-     * Ïú»ÙÇ°Ö´ĞĞ¡£
+     * é”€æ¯å‰æ‰§è¡Œã€‚
      */
     protected void preDispose() {
     }
 
     /**
-     * Ïú»ÙºóÖ´ĞĞ¡£
+     * é”€æ¯åæ‰§è¡Œã€‚
      */
     protected void postDispose() {
     }
@@ -120,21 +120,21 @@ public abstract class BeanSupport implements InitializingBean, DisposableBean, B
     }
 
     /**
-     * È¡µÃspringÈİÆ÷ÖĞµÄbeanÃû³Æ£¬½öÓÃÓÚµ÷ÊÔ¡£
+     * å–å¾—springå®¹å™¨ä¸­çš„beanåç§°ï¼Œä»…ç”¨äºè°ƒè¯•ã€‚
      */
     public String getBeanName() {
         return beanName;
     }
 
     /**
-     * ÉèÖÃspringÈİÆ÷ÖĞµÄbeanÃû³Æ£¬½öÓÃÓÚµ÷ÊÔ¡£
+     * è®¾ç½®springå®¹å™¨ä¸­çš„beanåç§°ï¼Œä»…ç”¨äºè°ƒè¯•ã€‚
      */
     public void setBeanName(String beanName) {
         this.beanName = beanName;
     }
 
     /**
-     * ×ª»»³É×Ö·û´®¡£
+     * è½¬æ¢æˆå­—ç¬¦ä¸²ã€‚
      */
     @Override
     public String toString() {
@@ -142,14 +142,14 @@ public abstract class BeanSupport implements InitializingBean, DisposableBean, B
     }
 
     /**
-     * È¡µÃbeanµÄÃèÊö£º<code>beanName + ":" + beanInterfaceName</code>¡£
+     * å–å¾—beançš„æè¿°ï¼š<code>beanName + ":" + beanInterfaceName</code>ã€‚
      */
     protected String getBeanDescription() {
         return getBeanDescription(true);
     }
 
     /**
-     * È¡µÃbeanµÄÃèÊö£º<code>beanName + ":" + beanInterfaceName</code>¡£
+     * å–å¾—beançš„æè¿°ï¼š<code>beanName + ":" + beanInterfaceName</code>ã€‚
      */
     protected String getBeanDescription(boolean simpleName) {
         String interfaceDesc = simpleName ? getBeanInterface().getSimpleName() : getBeanInterface().getName();

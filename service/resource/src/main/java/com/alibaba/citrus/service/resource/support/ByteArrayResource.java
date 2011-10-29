@@ -29,7 +29,7 @@ import com.alibaba.citrus.service.resource.Resource;
 import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
- * ´ú±íÒ»¸ö<code>byte[]</code>µÄ×ÊÔ´¡£
+ * ä»£è¡¨ä¸€ä¸ª<code>byte[]</code>çš„èµ„æºã€‚
  * 
  * @author Michael Zhou
  */
@@ -39,14 +39,14 @@ public class ByteArrayResource implements Resource {
     private final int length;
 
     /**
-     * ´´½¨Ò»¸ö<code>ByteArrayResource</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>ByteArrayResource</code>ã€‚
      */
     public ByteArrayResource(byte[] bytes) {
         this(assertNotNull(bytes, "bytes"), 0, bytes.length);
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>ByteArrayResource</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>ByteArrayResource</code>ã€‚
      */
     public ByteArrayResource(byte[] bytes, int offset, int length) {
         this.bytes = assertNotNull(bytes, "bytes");
@@ -60,37 +60,37 @@ public class ByteArrayResource implements Resource {
     }
 
     /**
-     * È¡µÃ×ÊÔ´µÄ<code>URL</code>¡£
+     * å–å¾—èµ„æºçš„<code>URL</code>ã€‚
      */
     public URL getURL() {
         return null;
     }
 
     /**
-     * È¡µÃ×ÊÔ´µÄ<code>File</code>¡£
+     * å–å¾—èµ„æºçš„<code>File</code>ã€‚
      */
     public File getFile() {
         return null;
     }
 
     /**
-     * È¡µÃ×ÊÔ´µÄ<code>InputStream</code>¡£
+     * å–å¾—èµ„æºçš„<code>InputStream</code>ã€‚
      */
     public InputStream getInputStream() throws IOException {
         return new ByteArrayInputStream(bytes, offset, length);
     }
 
     /**
-     * ÅĞ¶Ï×ÊÔ´ÊÇ·ñ´æÔÚ¡£
+     * åˆ¤æ–­èµ„æºæ˜¯å¦å­˜åœ¨ã€‚
      */
     public boolean exists() {
         return bytes != null;
     }
 
     /**
-     * È¡µÃ×ÊÔ´×î½üĞŞ¸ÄÊ±¼ä¡£
+     * å–å¾—èµ„æºæœ€è¿‘ä¿®æ”¹æ—¶é—´ã€‚
      * 
-     * @return ×ÊÔ´µÄ×î½üĞŞ¸ÄÊ±¼ä£¬Èç¹û²»Ö§³Ö£¬Ôò·µ»Ø<code>0</code>
+     * @return èµ„æºçš„æœ€è¿‘ä¿®æ”¹æ—¶é—´ï¼Œå¦‚æœä¸æ”¯æŒï¼Œåˆ™è¿”å›<code>0</code>
      */
     public long lastModified() {
         return 0;
@@ -145,14 +145,14 @@ public class ByteArrayResource implements Resource {
     }
 
     /**
-     * ½«resource×ª»»³É×Ö·û´®±íÊ¾¡£
+     * å°†resourceè½¬æ¢æˆå­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      */
     @Override
     public String toString() {
         ToStringBuilder buf = new ToStringBuilder();
 
         buf.append(getClass().getSimpleName());
-        buf.appendArray(bytes, offset, 128); // ×î¶à´òÓ¡128¸ö×Ö½Ú
+        buf.appendArray(bytes, offset, 128); // æœ€å¤šæ‰“å°128ä¸ªå­—èŠ‚
 
         return buf.toString();
     }

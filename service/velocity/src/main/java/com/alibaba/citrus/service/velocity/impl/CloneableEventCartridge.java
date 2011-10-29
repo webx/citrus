@@ -35,10 +35,10 @@ import com.alibaba.citrus.service.template.TemplateException;
 import com.alibaba.citrus.service.velocity.FastCloneable;
 
 /**
- * À©Õ¹<code>EventCartridge</code>£¬Ôö¼ÓÈçÏÂ¹¦ÄÜ£º
+ * æ‰©å±•<code>EventCartridge</code>ï¼Œå¢åŠ å¦‚ä¸‹åŠŸèƒ½ï¼š
  * <ul>
- * <li>Ö»ÔÚÏµÍ³³õÊ¼»¯µÄÊ±ºò³õÊ¼»¯Ò»´Î¡£</li>
- * <li>¼ÙÈçevent handlerÊµÏÖÁË<code>ContextAware</code>½Ó¿Ú£¬ÔòÃ¿´ÎÖ´ĞĞÊ±¸´ÖÆÒ»·İ¡£</li>
+ * <li>åªåœ¨ç³»ç»Ÿåˆå§‹åŒ–çš„æ—¶å€™åˆå§‹åŒ–ä¸€æ¬¡ã€‚</li>
+ * <li>å‡å¦‚event handlerå®ç°äº†<code>ContextAware</code>æ¥å£ï¼Œåˆ™æ¯æ¬¡æ‰§è¡Œæ—¶å¤åˆ¶ä¸€ä»½ã€‚</li>
  * </ul>
  * 
  * @author Michael Zhou
@@ -66,7 +66,7 @@ public class CloneableEventCartridge extends EventCartridge {
     }
 
     /**
-     * ÔÚÏµÍ³Æô¶¯Ê±³õÊ¼»¯Ò»´Î¡£
+     * åœ¨ç³»ç»Ÿå¯åŠ¨æ—¶åˆå§‹åŒ–ä¸€æ¬¡ã€‚
      */
     public void initOnce(RuntimeServices rs) throws Exception {
         if (!initialized) {

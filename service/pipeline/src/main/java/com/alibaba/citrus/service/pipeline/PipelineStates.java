@@ -18,49 +18,49 @@
 package com.alibaba.citrus.service.pipeline;
 
 /**
- * PipelineµÄµ±Ç°×´Ì¬£¬ÊÇ±»<code>PipelineContext</code>ºÍ
- * <code>PipelineInvocationHandle</code>¹²ÏíµÄ½Ó¿Ú¡£
+ * Pipelineçš„å½“å‰çŠ¶æ€ï¼Œæ˜¯è¢«<code>PipelineContext</code>å’Œ
+ * <code>PipelineInvocationHandle</code>å…±äº«çš„æ¥å£ã€‚
  * 
  * @author Michael Zhou
  */
 public interface PipelineStates {
     /**
-     * È¡µÃµ±Ç°ÕıÔÚÖ´ĞĞµÄpipelineµÄÇ¶Ì×²ã´Î¡£×¢Òâ£¬¸ÃºÅÂë´Ó<code>1</code>¿ªÊ¼¼ÆÊı¡£
+     * å–å¾—å½“å‰æ­£åœ¨æ‰§è¡Œçš„pipelineçš„åµŒå¥—å±‚æ¬¡ã€‚æ³¨æ„ï¼Œè¯¥å·ç ä»<code>1</code>å¼€å§‹è®¡æ•°ã€‚
      */
     int level();
 
     /**
-     * È¡µÃµ±Ç°ÕıÔÚÖ´ĞĞµÄvalveµÄË÷ÒıºÅ¡£×¢Òâ£¬¸ÃºÅÂë´Ó<code>1</code>¿ªÊ¼¼ÆÊı¡£
+     * å–å¾—å½“å‰æ­£åœ¨æ‰§è¡Œçš„valveçš„ç´¢å¼•å·ã€‚æ³¨æ„ï¼Œè¯¥å·ç ä»<code>1</code>å¼€å§‹è®¡æ•°ã€‚
      */
     int index();
 
     /**
-     * ²éÕÒlabel£¬²¢·µ»ØÓëµ±Ç°pipelineÏà¸ôµÄ²ãÊı¡£
+     * æŸ¥æ‰¾labelï¼Œå¹¶è¿”å›ä¸å½“å‰pipelineç›¸éš”çš„å±‚æ•°ã€‚
      */
     int findLabel(String label);
 
     /**
-     * ¼ì²épipeline½«ÊÇ·ñ±»ÖĞ¶Ï¡£
+     * æ£€æŸ¥pipelineå°†æ˜¯å¦è¢«ä¸­æ–­ã€‚
      */
     boolean isBroken();
 
     /**
-     * ¼ì²épipeline½«ÊÇ·ñÒÑÖ´ĞĞÍê³É¡£
+     * æ£€æŸ¥pipelineå°†æ˜¯å¦å·²æ‰§è¡Œå®Œæˆã€‚
      */
     boolean isFinished();
 
     /**
-     * È¡µÃµ±Ç°pipelineÖ´ĞĞµÄ×´Ì¬¡£
+     * å–å¾—å½“å‰pipelineæ‰§è¡Œçš„çŠ¶æ€ã€‚
      * <p>
-     * ¼ÙÈçÈ¡²»µ½£¬ÔòÏòÉÏ²éÕÒ£¬Ö±µ½ÕÒµ½»òÕßµ½´ï¶¥²ã¡£
+     * å‡å¦‚å–ä¸åˆ°ï¼Œåˆ™å‘ä¸ŠæŸ¥æ‰¾ï¼Œç›´åˆ°æ‰¾åˆ°æˆ–è€…åˆ°è¾¾é¡¶å±‚ã€‚
      * </p>
      */
     Object getAttribute(String key);
 
     /**
-     * ÉèÖÃµ±Ç°pipelineµÄ×´Ì¬¡£
+     * è®¾ç½®å½“å‰pipelineçš„çŠ¶æ€ã€‚
      * <p>
-     * ÉèÖÃµ±Ç°pipelineÖ´ĞĞµÄ×´Ì¬£¬»á¸²¸ÇÉÏ²ãÍ¬ÃûµÄ×´Ì¬Öµ£¬È»¶øÈ´²»»áÓ°ÏìÉÏÒ»²ãÖ´ĞĞµÄ×´Ì¬¡£µ±Ö´ĞĞ·µ»Øµ½ÉÏÒ»²ãÊ±£¬ËùÒÔÓĞµÄ¸Ä±ä¶¼±»¶ªÆú¡£
+     * è®¾ç½®å½“å‰pipelineæ‰§è¡Œçš„çŠ¶æ€ï¼Œä¼šè¦†ç›–ä¸Šå±‚åŒåçš„çŠ¶æ€å€¼ï¼Œç„¶è€Œå´ä¸ä¼šå½±å“ä¸Šä¸€å±‚æ‰§è¡Œçš„çŠ¶æ€ã€‚å½“æ‰§è¡Œè¿”å›åˆ°ä¸Šä¸€å±‚æ—¶ï¼Œæ‰€ä»¥æœ‰çš„æ”¹å˜éƒ½è¢«ä¸¢å¼ƒã€‚
      * </p>
      */
     void setAttribute(String key, Object value);

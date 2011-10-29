@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.requestcontext.session;
 
 /**
- * Éú³Ésession IDµÄ»úÖÆ¡£
+ * ç”Ÿæˆsession IDçš„æœºåˆ¶ã€‚
  * 
  * @author Michael Zhou
  */
@@ -26,9 +26,9 @@ public interface SessionIDGenerator {
     Integer SESSION_ID_LENGTH_DEFAULT = 16;
 
     /**
-     * Éú³Ésession ID¡£
+     * ç”Ÿæˆsession IDã€‚
      * 
-     * @return ĞÂµÄsessionID
+     * @return æ–°çš„sessionID
      */
     String generateSessionID();
 }

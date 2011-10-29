@@ -100,7 +100,7 @@ public class FreeMarkerEngineTests {
         getEngine("with_args", factory);
 
         assertProperty("default_encoding", "GBK");
-        assertProperty("output_encoding", "UTF-8"); // templateEncoding²ÎÊı²»Ó°Ïìoutput encoding
+        assertProperty("output_encoding", "UTF-8"); // templateEncodingå‚æ•°ä¸å½±å“output encoding
 
         assertEquals("/new_templates/", templateLoader.getPath());
     }
@@ -163,7 +163,7 @@ public class FreeMarkerEngineTests {
         assertProperty("output_encoding", "UTF-8");
 
         TemplateContext ctx = new MappedTemplateContext();
-        ctx.put("world", "ÊÀ½ç");
+        ctx.put("world", "ä¸–ç•Œ");
 
         String content;
 
@@ -194,7 +194,7 @@ public class FreeMarkerEngineTests {
 
         TemplateContext ctx = new MappedTemplateContext();
 
-        // Î´ÕÒµ½Ä£°å
+        // æœªæ‰¾åˆ°æ¨¡æ¿
         try {
             templateService.getText("notExist.ftl", ctx);
             fail();
@@ -202,7 +202,7 @@ public class FreeMarkerEngineTests {
             assertThat(e, exception("Could not find template", "/notExist.ftl"));
         }
 
-        // ÔÚfreemarkerÖĞ£¬$worldÃ»ÓĞ¶¨ÒåÒ²»á³ö´í
+        // åœ¨freemarkerä¸­ï¼Œ$worldæ²¡æœ‰å®šä¹‰ä¹Ÿä¼šå‡ºé”™
         try {
             templateService.getText("test_render.ftl", ctx);
             fail();
@@ -213,7 +213,7 @@ public class FreeMarkerEngineTests {
                             "Expression world is undefined on line 6, column 10 in test_render.ftl"));
         }
 
-        // Óï·¨´í
+        // è¯­æ³•é”™
         try {
             templateService.getText("test_render_error.ftl", ctx);
             fail();
@@ -230,7 +230,7 @@ public class FreeMarkerEngineTests {
         assertProperty("output_encoding", "UTF-8");
 
         SimpleHash ctx = new SimpleHash();
-        ctx.put("world", "ÊÀ½ç");
+        ctx.put("world", "ä¸–ç•Œ");
 
         String content;
 
@@ -239,7 +239,7 @@ public class FreeMarkerEngineTests {
         assertContent(content);
 
         // Specific input charset encoding
-        ctx.put("world", new String("ÊÀ½ç".getBytes("GBK"), "ISO-8859-1")); // hack value
+        ctx.put("world", new String("ä¸–ç•Œ".getBytes("GBK"), "ISO-8859-1")); // hack value
         content = freemarkerEngine.mergeTemplate("test_render.ftl", ctx, "ISO-8859-1");
         content = new String(content.getBytes("ISO-8859-1"), "GBK");
         assertContent(content);
@@ -274,17 +274,17 @@ public class FreeMarkerEngineTests {
         getEngine("templateService", factory);
 
         TemplateContext ctx = new MappedTemplateContext();
-        ctx.put("world", "ÖĞ¹ú");
+        ctx.put("world", "ä¸­å›½");
 
         // configured value: UTF-8
         String content = templateService.getText("test_url_encode.ftl", ctx);
-        assertThat(content, containsString("ÄãºÃ£¬%E4%B8%AD%E5%9B%BD"));
+        assertThat(content, containsString("ä½ å¥½ï¼Œ%E4%B8%AD%E5%9B%BD"));
 
         // specified value: GBK
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         freemarkerEngine.mergeTemplate("test_url_encode.ftl", ctx, baos, null, "GBK");
         content = new String(baos.toByteArray(), "GBK");
-        assertThat(content, containsString("ÄãºÃ£¬%D6%D0%B9%FA"));
+        assertThat(content, containsString("ä½ å¥½ï¼Œ%D6%D0%B9%FA"));
     }
 
     @Test
@@ -292,20 +292,20 @@ public class FreeMarkerEngineTests {
         getEngine("templateService", factory);
 
         TemplateContext ctx = new MappedTemplateContext();
-        ctx.put("world", "<country name=\"ÖĞ¹ú\" />");
+        ctx.put("world", "<country name=\"ä¸­å›½\" />");
 
         // configured value: UTF-8
         String content = templateService.getText("test_html_escape.ftl", ctx);
-        assertThat(content, containsString("ÄãºÃ£¬&lt;country name=&quot;ÖĞ¹ú&quot; /&gt;"));
+        assertThat(content, containsString("ä½ å¥½ï¼Œ&lt;country name=&quot;ä¸­å›½&quot; /&gt;"));
     }
 
     private void assertContent(String content) {
         assertThat(content, containsAll(//
-                "ÎÒ°®±±¾©Ãô¸Ğ´Ê£¬", //
-                "Ãô¸Ğ´ÊÉÏÌ«ÑôÉı¡£", //
-                "Î°´óÁìĞäÃô¸Ğ´Ê£¬", //
-                "´øÁìÎÒÃÇÏòÇ°½ø£¡", //
-                "hello, ÊÀ½ç"));
+                "æˆ‘çˆ±åŒ—äº¬æ•æ„Ÿè¯ï¼Œ", //
+                "æ•æ„Ÿè¯ä¸Šå¤ªé˜³å‡ã€‚", //
+                "ä¼Ÿå¤§é¢†è¢–æ•æ„Ÿè¯ï¼Œ", //
+                "å¸¦é¢†æˆ‘ä»¬å‘å‰è¿›ï¼", //
+                "hello, ä¸–ç•Œ"));
     }
 
     private void assertProperty(String key, String value) {

@@ -28,9 +28,9 @@ import com.alibaba.citrus.service.requestcontext.RequestContextException;
 import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
- * <code>RequestContext</code>°ü×°Æ÷µÄÄ¬ÈÏÊµÏÖ¡£
+ * <code>RequestContext</code>åŒ…è£…å™¨çš„é»˜è®¤å®ç°ã€‚
  * <p>
- * ÕâÀï£¬<code>toString()</code>·½·¨¿ÉÒÔÁĞ³öËùÓĞ¼¶ÁªµÄ<code>RequestContext</code>¶ÔÏó¡£
+ * è¿™é‡Œï¼Œ<code>toString()</code>æ–¹æ³•å¯ä»¥åˆ—å‡ºæ‰€æœ‰çº§è”çš„<code>RequestContext</code>å¯¹è±¡ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -42,9 +42,9 @@ public abstract class AbstractRequestContextWrapper implements RequestContext {
     private HttpServletResponse response;
 
     /**
-     * °ü×°Ò»¸ö<code>RequestContext</code>¶ÔÏó¡£
+     * åŒ…è£…ä¸€ä¸ª<code>RequestContext</code>å¯¹è±¡ã€‚
      * 
-     * @param wrappedContext ±»°ü×°µÄ<code>RequestContext</code>
+     * @param wrappedContext è¢«åŒ…è£…çš„<code>RequestContext</code>
      */
     public AbstractRequestContextWrapper(RequestContext wrappedContext) {
         this.wrappedContext = assertNotNull(wrappedContext, "wrappedContext");
@@ -54,77 +54,77 @@ public abstract class AbstractRequestContextWrapper implements RequestContext {
     }
 
     /**
-     * È¡µÃ±»°ü×°µÄcontext¡£
+     * å–å¾—è¢«åŒ…è£…çš„contextã€‚
      * 
-     * @return ±»°ü×°µÄ<code>RequestContext</code>¶ÔÏó
+     * @return è¢«åŒ…è£…çš„<code>RequestContext</code>å¯¹è±¡
      */
     public RequestContext getWrappedRequestContext() {
         return wrappedContext;
     }
 
     /**
-     * È¡µÃservletContext¶ÔÏó¡£
+     * å–å¾—servletContextå¯¹è±¡ã€‚
      * 
-     * @return <code>ServletContext</code>¶ÔÏó
+     * @return <code>ServletContext</code>å¯¹è±¡
      */
     public ServletContext getServletContext() {
         return servletContext;
     }
 
     /**
-     * È¡µÃrequest¶ÔÏó¡£
+     * å–å¾—requestå¯¹è±¡ã€‚
      * 
-     * @return <code>HttpServletRequest</code>¶ÔÏó
+     * @return <code>HttpServletRequest</code>å¯¹è±¡
      */
     public HttpServletRequest getRequest() {
         return request;
     }
 
     /**
-     * ÉèÖÃrequest¶ÔÏó¡£
+     * è®¾ç½®requestå¯¹è±¡ã€‚
      * 
-     * @param request <code>HttpServletRequest</code>¶ÔÏó
+     * @param request <code>HttpServletRequest</code>å¯¹è±¡
      */
     protected void setRequest(HttpServletRequest request) {
         this.request = request;
     }
 
     /**
-     * È¡µÃresponse¶ÔÏó¡£
+     * å–å¾—responseå¯¹è±¡ã€‚
      * 
-     * @return <code>HttpServletResponse</code>¶ÔÏó
+     * @return <code>HttpServletResponse</code>å¯¹è±¡
      */
     public HttpServletResponse getResponse() {
         return response;
     }
 
     /**
-     * ÉèÖÃresponse¶ÔÏó¡£
+     * è®¾ç½®responseå¯¹è±¡ã€‚
      * 
-     * @param response <code>HttpServletResponse</code>¶ÔÏó
+     * @param response <code>HttpServletResponse</code>å¯¹è±¡
      */
     protected void setResponse(HttpServletResponse response) {
         this.response = response;
     }
 
     /**
-     * ¿ªÊ¼Ò»¸öÇëÇó¡£
+     * å¼€å§‹ä¸€ä¸ªè¯·æ±‚ã€‚
      */
     public void prepare() {
     }
 
     /**
-     * ½áÊøÒ»¸öÇëÇó¡£
+     * ç»“æŸä¸€ä¸ªè¯·æ±‚ã€‚
      * 
-     * @throws RequestContextException Èç¹ûÊ§°Ü
+     * @throws RequestContextException å¦‚æœå¤±è´¥
      */
     public void commit() throws RequestContextException {
     }
 
     /**
-     * ÏÔÊ¾µ±Ç°µÄ<code>RequestContext</code>ÒÔ¼°ËùÓĞ¼¶ÁªµÄ<code>RequestContext</code>¡£
+     * æ˜¾ç¤ºå½“å‰çš„<code>RequestContext</code>ä»¥åŠæ‰€æœ‰çº§è”çš„<code>RequestContext</code>ã€‚
      * 
-     * @return ×Ö·û´®±íÊ¾
+     * @return å­—ç¬¦ä¸²è¡¨ç¤º
      */
     @Override
     public String toString() {
@@ -132,7 +132,7 @@ public abstract class AbstractRequestContextWrapper implements RequestContext {
     }
 
     /**
-     * ÏÔÊ¾µ±Ç°<code>RequestContext</code>¶ÔÏó±¾ÉíµÄĞÅÏ¢¡£
+     * æ˜¾ç¤ºå½“å‰<code>RequestContext</code>å¯¹è±¡æœ¬èº«çš„ä¿¡æ¯ã€‚
      */
     protected String thisToString() {
         return super.toString();

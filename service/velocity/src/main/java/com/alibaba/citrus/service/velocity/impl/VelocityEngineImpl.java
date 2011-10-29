@@ -53,7 +53,7 @@ import com.alibaba.citrus.service.template.TemplateNotFoundException;
 import com.alibaba.citrus.service.velocity.VelocityEngine;
 
 /**
- * VelocityÄ£°åÒıÇæ·şÎñ¡£
+ * Velocityæ¨¡æ¿å¼•æ“æœåŠ¡ã€‚
  * 
  * @author Michael Zhou
  */
@@ -80,7 +80,7 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
     }
 
     /**
-     * ³õÊ¼»¯engine¡£
+     * åˆå§‹åŒ–engineã€‚
      */
     @Override
     protected void init() throws Exception {
@@ -93,7 +93,7 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
         ri.setProperty(EVENTHANDLER_REFERENCEINSERTION, RuntimeServicesExposer.class.getName());
         ri.init();
 
-        // ³õÊ¼»¯EventCartridge£¬ÒÔºó²»ÓÃÔÙ³õÊ¼»¯ÁË£¬ÒÔÈ·±£ĞÔÄÜ¡£
+        // åˆå§‹åŒ–EventCartridgeï¼Œä»¥åä¸ç”¨å†åˆå§‹åŒ–äº†ï¼Œä»¥ç¡®ä¿æ€§èƒ½ã€‚
         CloneableEventCartridge eventCartridge = configuration.getEventCartridge();
         RuntimeServices rs = assertNotNull((RuntimeServices) ri.getProperty(RUNTIME_SERVICES_KEY), "RuntimeServices");
 
@@ -101,9 +101,9 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
     }
 
     /**
-     * È¡µÃÄ¬ÈÏµÄÄ£°åÃûºó×ºÁĞ±í¡£
+     * å–å¾—é»˜è®¤çš„æ¨¡æ¿ååç¼€åˆ—è¡¨ã€‚
      * <p>
-     * µ±<code>TemplateService</code>Ã»ÓĞÖ¸¶¨µ½µ±Ç°engineµÄmappingÊ±£¬½«È¡µÃ±¾·½·¨Ëù·µ»ØµÄºó×ºÃûÁĞ±í¡£
+     * å½“<code>TemplateService</code>æ²¡æœ‰æŒ‡å®šåˆ°å½“å‰engineçš„mappingæ—¶ï¼Œå°†å–å¾—æœ¬æ–¹æ³•æ‰€è¿”å›çš„åç¼€ååˆ—è¡¨ã€‚
      * </p>
      */
     public String[] getDefaultExtensions() {
@@ -111,21 +111,21 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
     }
 
     /**
-     * ÅĞ¶¨Ä£°åÊÇ·ñ´æÔÚ¡£
+     * åˆ¤å®šæ¨¡æ¿æ˜¯å¦å­˜åœ¨ã€‚
      */
     public boolean exists(String templateName) {
         return ri.getLoaderNameForResource(templateName) != null;
     }
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢ÒÔ×Ö·û´®µÄĞÎÊ½È¡µÃäÖÈ¾µÄ½á¹û¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶ä»¥å­—ç¬¦ä¸²çš„å½¢å¼å–å¾—æ¸²æŸ“çš„ç»“æœã€‚
      */
     public String getText(String templateName, TemplateContext context) throws TemplateException, IOException {
         return mergeTemplate(templateName, new TemplateContextAdapter(context), null);
     }
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢½«äÖÈ¾µÄ½á¹ûËÍµ½×Ö½ÚÊä³öÁ÷ÖĞ¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶å°†æ¸²æŸ“çš„ç»“æœé€åˆ°å­—èŠ‚è¾“å‡ºæµä¸­ã€‚
      */
     public void writeTo(String templateName, TemplateContext context, OutputStream ostream) throws TemplateException,
             IOException {
@@ -133,7 +133,7 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
     }
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢½«äÖÈ¾µÄ½á¹ûËÍµ½×Ö·ûÊä³öÁ÷ÖĞ¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶å°†æ¸²æŸ“çš„ç»“æœé€åˆ°å­—ç¬¦è¾“å‡ºæµä¸­ã€‚
      */
     public void writeTo(String templateName, TemplateContext context, Writer writer) throws TemplateException,
             IOException {
@@ -141,7 +141,7 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
     }
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢ÒÔ×Ö·û´®µÄĞÎÊ½È¡µÃäÖÈ¾µÄ½á¹û¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶ä»¥å­—ç¬¦ä¸²çš„å½¢å¼å–å¾—æ¸²æŸ“çš„ç»“æœã€‚
      */
     public String mergeTemplate(String templateName, Context context, String inputEncoding) throws TemplateException,
             IOException {
@@ -151,7 +151,7 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
     }
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢½«äÖÈ¾µÄ½á¹ûËÍµ½×Ö½ÚÊä³öÁ÷ÖĞ¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶å°†æ¸²æŸ“çš„ç»“æœé€åˆ°å­—èŠ‚è¾“å‡ºæµä¸­ã€‚
      */
     public void mergeTemplate(String templateName, Context context, OutputStream ostream, String inputEncoding,
                               String outputEncoding) throws TemplateException, IOException {
@@ -168,11 +168,11 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
         }
 
         mergeTemplate(templateName, context, writer, inputEncoding);
-        writer.flush(); // È·±£ÄÚÈİ±»Ë¢ĞÂµ½streamÖĞ¡£
+        writer.flush(); // ç¡®ä¿å†…å®¹è¢«åˆ·æ–°åˆ°streamä¸­ã€‚
     }
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢½«äÖÈ¾µÄ½á¹ûËÍµ½×Ö·ûÊä³öÁ÷ÖĞ¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶å°†æ¸²æŸ“çš„ç»“æœé€åˆ°å­—ç¬¦è¾“å‡ºæµä¸­ã€‚
      */
     public void mergeTemplate(String templateName, Context context, Writer writer, String inputEncoding)
             throws TemplateException, IOException {
@@ -190,7 +190,7 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
     }
 
     /**
-     * Copied from org.apache.velocity.app.VelocityEngine¡£
+     * Copied from org.apache.velocity.app.VelocityEngineã€‚
      */
     private boolean mergeTemplate(String templateName, String encoding, Context context, Writer writer)
             throws ResourceNotFoundException, ParseErrorException, MethodInvocationException, Exception {
@@ -212,12 +212,12 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
         if (context instanceof InternalEventContext) {
             eventContext = context;
         } else {
-            // ½«Æä°ü×°³ÉEventContext£¬È·±£event cartridge¿ÉÒÔ¹¤×÷¡£
-            // Ä£°åÖĞµÄĞŞ¸Ä½«±£ÁôÔÚcontextÖĞ¡£
+            // å°†å…¶åŒ…è£…æˆEventContextï¼Œç¡®ä¿event cartridgeå¯ä»¥å·¥ä½œã€‚
+            // æ¨¡æ¿ä¸­çš„ä¿®æ”¹å°†ä¿ç•™åœ¨contextä¸­ã€‚
             eventContext = new EventContext(context);
         }
 
-        // ½«event cartridge¸´ÖÆÒÔºó£¨ÈçÓĞ±ØÒª£©¸½µ½contextÖĞ¡£
+        // å°†event cartridgeå¤åˆ¶ä»¥åï¼ˆå¦‚æœ‰å¿…è¦ï¼‰é™„åˆ°contextä¸­ã€‚
         EventCartridge ec = configuration.getEventCartridge().getRuntimeInstance();
 
         if (ec != null) {
@@ -227,12 +227,12 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
         return eventContext;
     }
 
-    // ÒÔÏÂÁ½¸öÎªĞÔÄÜÓÅ»¯
+    // ä»¥ä¸‹ä¸¤ä¸ªä¸ºæ€§èƒ½ä¼˜åŒ–
     private String defaultInputEncoding;
     private String defaultOutpuEncoding;
 
     /**
-     * È¡µÃ½âÎöÄ£°åÊ±µÄÄ¬ÈÏ±àÂë×Ö·û¼¯¡£
+     * å–å¾—è§£ææ¨¡æ¿æ—¶çš„é»˜è®¤ç¼–ç å­—ç¬¦é›†ã€‚
      */
     protected String getDefaultInputEncoding() {
         if (defaultInputEncoding == null) {
@@ -243,7 +243,7 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
     }
 
     /**
-     * È¡µÃÊä³öÄ£°åÊ±µÄÄ¬ÈÏ±àÂë×Ö·û¼¯¡£
+     * å–å¾—è¾“å‡ºæ¨¡æ¿æ—¶çš„é»˜è®¤ç¼–ç å­—ç¬¦é›†ã€‚
      */
     protected String getDefaultOutputEncoding() {
         if (defaultOutpuEncoding == null) {
@@ -254,7 +254,7 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
     }
 
     /**
-     * ´¦ÀíÒì³££¬ÏÔÊ¾¶îÍâµÄĞÅÏ¢¡£
+     * å¤„ç†å¼‚å¸¸ï¼Œæ˜¾ç¤ºé¢å¤–çš„ä¿¡æ¯ã€‚
      */
     private final void error(String templateName, Throwable e) throws TemplateException {
         String err = "Error rendering Velocity template: " + templateName;
@@ -273,7 +273,7 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
     }
 
     /**
-     * Ò»¸öhack£¬ÓÃÀ´È¡µÃruntime servicesÊµÀı¡£
+     * ä¸€ä¸ªhackï¼Œç”¨æ¥å–å¾—runtime serviceså®ä¾‹ã€‚
      */
     public static class RuntimeServicesExposer implements ReferenceInsertionEventHandler, RuntimeServicesAware {
         public Object referenceInsert(String reference, Object value) {
@@ -286,7 +286,7 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
     }
 
     /**
-     * °ü×°ÈÎÒâ<code>Context</code>£¬Ê¹Ö®Ö§³ÖEventCartridge¡£
+     * åŒ…è£…ä»»æ„<code>Context</code>ï¼Œä½¿ä¹‹æ”¯æŒEventCartridgeã€‚
      */
     private static class EventContext extends AbstractContext {
         private final Context context;

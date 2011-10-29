@@ -32,7 +32,7 @@ public class TurbineUtil {
     private final static String TURBINE_RUNDATA_CONTEXT_KEY = "_webx3_turbine_rundata_context";
 
     /**
-     * ´ÓrequestÖĞÈ¡µÃrundata£¬¼ÙÈç²»´æÔÚ£¬Ôò´´½¨Ö®¡£
+     * ä»requestä¸­å–å¾—rundataï¼Œå‡å¦‚ä¸å­˜åœ¨ï¼Œåˆ™åˆ›å»ºä¹‹ã€‚
      */
     public static TurbineRunData getTurbineRunData(HttpServletRequest request) {
         return getTurbineRunData(request, false);
@@ -52,7 +52,7 @@ public class TurbineUtil {
     }
 
     /**
-     * ´ÓrequestContextÖĞÈ¡µÃrundata¡£
+     * ä»requestContextä¸­å–å¾—rundataã€‚
      */
     public static TurbineRunData getTurbineRunData(RequestContext requestContext) {
         return getTurbineRunData(requestContext.getRequest());
@@ -66,7 +66,7 @@ public class TurbineUtil {
     }
 
     /**
-     * ´ÓrequestÖĞÇå³ıturbine rundata¡£
+     * ä»requestä¸­æ¸…é™¤turbine rundataã€‚
      */
     public static void cleanupTurbineRunData(HttpServletRequest request, boolean clearContext) {
         request.removeAttribute(TURBINE_RUNDATA_KEY);

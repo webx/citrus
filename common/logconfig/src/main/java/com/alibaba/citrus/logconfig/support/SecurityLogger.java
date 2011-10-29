@@ -21,7 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * ÓÃÀ´´´½¨°²È«ÈÕÖ¾¶ÔÏóµÄ¹¤³§¡£
+ * ç”¨æ¥åˆ›å»ºå®‰å…¨æ—¥å¿—å¯¹è±¡çš„å·¥å‚ã€‚
  * 
  * @author Michael Zhou
  */

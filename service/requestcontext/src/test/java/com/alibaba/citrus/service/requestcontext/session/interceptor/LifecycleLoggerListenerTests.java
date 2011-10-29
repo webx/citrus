@@ -33,20 +33,20 @@ public class LifecycleLoggerListenerTests extends AbstractSessionListenerTests {
 
     @Before
     public void init() throws Exception {
-        // ÉèÖÃlog1, log2
+        // è®¾ç½®log1, log2
         invokeNoopServlet("/servlet");
         initRequestContext();
 
         log1 = createMock(Logger.class);
         log2 = createMock(Logger.class);
 
-        setLevelEnabled(false, log1, log2); // ¹Ø±Õlog£¬ÒÔ·À³ö´í
+        setLevelEnabled(false, log1, log2); // å…³é—­logï¼Œä»¥é˜²å‡ºé”™
         replay(log1, log2);
 
         replaceLogger(log1, "log", "SECURITY", 0);
         replaceLogger(log2, "log", "hello.world", 1);
 
-        // Ô¤ÏÈÈ·¶¨session id ÒÔ±ã²âÊÔ
+        // é¢„å…ˆç¡®å®šsession id ä»¥ä¾¿æµ‹è¯•
         sessionId = "1234567890ABCDEFG";
         invokeNoopServlet("/servlet");
 
@@ -74,7 +74,7 @@ public class LifecycleLoggerListenerTests extends AbstractSessionListenerTests {
 
     @Test
     public void test() throws Exception {
-        setLevelEnabled(true, log1, log2); // ´ò¿ªlog£¬ÒÔ·À³ö´í
+        setLevelEnabled(true, log1, log2); // æ‰“å¼€logï¼Œä»¥é˜²å‡ºé”™
 
         log("session created, id=" + sessionId);
         visitLog("session visited, id=" + sessionId);

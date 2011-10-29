@@ -32,7 +32,7 @@ import org.springframework.core.io.ResourceLoader;
 import freemarker.cache.TemplateLoader;
 
 /**
- * ÄÜÈÃfreemarkerÄ£°åÏµÍ³Ê¹ÓÃspring resource loader×°ÔØÄ£°åµÄÊÊÅäÆ÷.
+ * èƒ½è®©freemarkeræ¨¡æ¿ç³»ç»Ÿä½¿ç”¨spring resource loaderè£…è½½æ¨¡æ¿çš„é€‚é…å™¨.
  * 
  * @author Michael Zhou
  */
@@ -93,7 +93,7 @@ public class SpringResourceLoaderAdapter implements TemplateLoader {
     }
 
     /**
-     * ¹æ¸ñ»¯Ä£°åÃû¡£
+     * è§„æ ¼åŒ–æ¨¡æ¿åã€‚
      */
     private String normalizeTemplateName(String templateName) {
         templateName = assertNotNull(trimToNull(templateName), "templateName");
@@ -106,7 +106,7 @@ public class SpringResourceLoaderAdapter implements TemplateLoader {
     }
 
     /**
-     * ±£´æresourceÒÑ¾­´ò¿ªµÄÁ÷£¬ÒÔ±ã¹Ø±Õ¡£
+     * ä¿å­˜resourceå·²ç»æ‰“å¼€çš„æµï¼Œä»¥ä¾¿å…³é—­ã€‚
      */
     public static class TemplateSource {
         private final Resource resource;

@@ -79,7 +79,7 @@ public abstract class AbstractIDGeneratorTests<G extends SessionIDGenerator> {
         System.out.printf("  Total time: %,d ms.%n", duration);
         System.out.printf("Average time: %,2.2f \u03BCs.%n", (double) duration / concurrency / loop * 1000);
 
-        // ¼ì²éÖØ¸´
+        // æ£€æŸ¥é‡å¤
         Set<String> allIDs = createHashSet();
 
         for (String[] result : results) {

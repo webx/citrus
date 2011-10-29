@@ -22,7 +22,7 @@ import com.alibaba.citrus.service.form.support.AbstractCompositeValidatorDefinit
 import com.alibaba.citrus.service.form.support.AbstractMultiValuesValidator;
 
 /**
- * µ±Ç°fieldµÄËùÓĞÖµ¾ùÎ´Í¨¹ıÑéÖ¤Ê±£¬´Ëvalidator²ÅÍ¨¹ıÑéÖ¤¡£
+ * å½“å‰fieldçš„æ‰€æœ‰å€¼å‡æœªé€šè¿‡éªŒè¯æ—¶ï¼Œæ­¤validatoræ‰é€šè¿‡éªŒè¯ã€‚
  * 
  * @author Michael Zhou
  */

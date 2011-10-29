@@ -107,7 +107,7 @@ public class UUIDTests {
         System.out.printf("  Total time: %,d ms.%n", duration);
         System.out.printf("Average time: %,2.2f \u03BCs.%n", (double) duration / concurrency / loop * 1000);
 
-        // ºÏ≤È÷ÿ∏¥
+        // Ê£ÄÊü•ÈáçÂ§ç
         Set<String> allIDs = createHashSet();
 
         for (String[] result : results) {

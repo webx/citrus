@@ -24,7 +24,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>FileResource</code>¡£
+ * æµ‹è¯•<code>FileResource</code>ã€‚
  * 
  * @author Michael Zhou
  */

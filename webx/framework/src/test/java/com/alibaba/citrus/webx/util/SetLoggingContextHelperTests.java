@@ -155,7 +155,7 @@ public class SetLoggingContextHelperTests {
             assertFalse(mdc.isEmpty());
 
             {
-                helper2.setLoggingContext(); // 不会set
+                helper2.setLoggingContext(); // 涓嶄細set
                 assertFalse(mdc.isEmpty());
                 int size = mdc.size();
 
@@ -164,7 +164,7 @@ public class SetLoggingContextHelperTests {
                 assertEquals(size + 1, mdc.size());
                 assertEquals("1", mdc.get("a"));
 
-                helper2.clearLoggingContext(); // 不会clear
+                helper2.clearLoggingContext(); // 涓嶄細clear
                 assertFalse(mdc.isEmpty());
                 assertEquals(size + 1, mdc.size());
             }

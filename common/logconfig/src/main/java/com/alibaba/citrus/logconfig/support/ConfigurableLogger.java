@@ -21,10 +21,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * °ü×°ÁË<code>Logger</code>£¬Ìá¹©ÁË¶îÍâµÄ¹¦ÄÜ¡£
+ * åŒ…è£…äº†<code>Logger</code>ï¼Œæä¾›äº†é¢å¤–çš„åŠŸèƒ½ã€‚
  * <ul>
- * <li>Ö§³ÖÄ¬ÈÏµÄlog£¬µ«¿ÉÒÔÍ¨¹ı<code>setLogName()</code>·½·¨À´¸Ä±ä¡£Í¨³£ÊÇÍ¨¹ıÅäÖÃÎÄ¼şÀ´ÉèÖÃ¸ÃÖµµÄ¡£</li>
- * <li>Ìá¹©<code>log(level, ...)</code>·½·¨£¬¿ÉÒÔÊä³öÖ¸¶¨levelµÄÈÕÖ¾¡£</li>
+ * <li>æ”¯æŒé»˜è®¤çš„logï¼Œä½†å¯ä»¥é€šè¿‡<code>setLogName()</code>æ–¹æ³•æ¥æ”¹å˜ã€‚é€šå¸¸æ˜¯é€šè¿‡é…ç½®æ–‡ä»¶æ¥è®¾ç½®è¯¥å€¼çš„ã€‚</li>
+ * <li>æä¾›<code>log(level, ...)</code>æ–¹æ³•ï¼Œå¯ä»¥è¾“å‡ºæŒ‡å®šlevelçš„æ—¥å¿—ã€‚</li>
  * </ul>
  * 
  * @author Michael Zhou
@@ -33,7 +33,7 @@ public abstract class ConfigurableLogger {
     private Logger log;
 
     /**
-     * ¼ÙÈçÃ»ÓĞÉèÖÃ<code>logName</code>£¬ÄÇÃ´¾Í°ÑÈÕÖ¾Êä³öµ½Õâ¸öÄ¬ÈÏµÄloggerÖĞ¡£
+     * å‡å¦‚æ²¡æœ‰è®¾ç½®<code>logName</code>ï¼Œé‚£ä¹ˆå°±æŠŠæ—¥å¿—è¾“å‡ºåˆ°è¿™ä¸ªé»˜è®¤çš„loggerä¸­ã€‚
      */
     protected abstract Logger getDefaultLogger();
 
@@ -129,7 +129,7 @@ public abstract class ConfigurableLogger {
     }
 
     /**
-     * ÈÕÖ¾µÄ¼¶±ğ¡£
+     * æ—¥å¿—çš„çº§åˆ«ã€‚
      */
     public static enum Level {
         trace,

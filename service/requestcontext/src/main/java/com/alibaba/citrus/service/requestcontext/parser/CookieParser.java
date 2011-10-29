@@ -18,9 +18,9 @@
 package com.alibaba.citrus.service.requestcontext.parser;
 
 /**
- * <code>CookieParser</code>ÊÇÓÃÀ´½âÎöºÍÌí¼ÓHTTPÇëÇóÖĞµÄcookiesµÄ½Ó¿Ú¡£
+ * <code>CookieParser</code>æ˜¯ç”¨æ¥è§£æå’Œæ·»åŠ HTTPè¯·æ±‚ä¸­çš„cookiesçš„æ¥å£ã€‚
  * <p>
- * ×¢Òâ£º<code>CookieParser</code>ÓÀÔ¶Ê¹ÓÃ<code>ISO-8859-1</code>±àÂëÀ´´¦ÀícookieµÄÃû³ÆºÍÖµ¡£
+ * æ³¨æ„ï¼š<code>CookieParser</code>æ°¸è¿œä½¿ç”¨<code>ISO-8859-1</code>ç¼–ç æ¥å¤„ç†cookieçš„åç§°å’Œå€¼ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -30,7 +30,7 @@ public interface CookieParser extends ValueParser {
     int AGE_DELETE = 0;
 
     /**
-     * ÉèÖÃsession cookie¡£
+     * è®¾ç½®session cookieã€‚
      */
     void setCookie(String name, String value);
 

@@ -44,7 +44,7 @@ import com.alibaba.citrus.service.resource.support.URLResource;
 import com.alibaba.citrus.springext.support.context.XmlWebApplicationContext;
 
 /**
- * ²âÊÔºÍspringÈİÆ÷µÄResourceLoaderÕûºÏµÄĞ§¹û¡£
+ * æµ‹è¯•å’Œspringå®¹å™¨çš„ResourceLoaderæ•´åˆçš„æ•ˆæœã€‚
  * 
  * @author Michael Zhou
  */
@@ -88,12 +88,12 @@ public class SpringIntegrationTests extends AbstractResourceLoadingTests {
 
     @Test
     public void getResource_contextNotReady() throws Exception {
-        // contextÎ´×¼±¸ºÃ£¬´ËÊ±Ê¹ÓÃÄ¬ÈÏµÄ»úÖÆ×°ÔØ×ÊÔ´¡£
+        // contextæœªå‡†å¤‡å¥½ï¼Œæ­¤æ—¶ä½¿ç”¨é»˜è®¤çš„æœºåˆ¶è£…è½½èµ„æºã€‚
         Resource resource = context.getResource("beans.xml");
         assertThat(resource, instanceOf(ServletContextResource.class));
         assertTrue(resource.exists());
 
-        // contextÎ´×¼±¸ºÃ£¬´ËÊ±Ê¹ÓÃÄ¬ÈÏµÄresource pattern resolver»úÖÆ²éÕÒ×ÊÔ´¡£
+        // contextæœªå‡†å¤‡å¥½ï¼Œæ­¤æ—¶ä½¿ç”¨é»˜è®¤çš„resource pattern resolveræœºåˆ¶æŸ¥æ‰¾èµ„æºã€‚
         Resource[] resources = context.getResources("WEB-INF/**/*.txt");
 
         assertEquals(2, resources.length);
@@ -110,12 +110,12 @@ public class SpringIntegrationTests extends AbstractResourceLoadingTests {
         context.setResourceLoadingExtender(new ResourceLoadingSupport(context, "nonExistId"));
         initContext("beans.xml");
 
-        // resourceLoadingService[id=nonExistId]²»´æÔÚ£¬Ê¹ÓÃÄ¬ÈÏµÄ»úÖÆ×°ÔØ×ÊÔ´
+        // resourceLoadingService[id=nonExistId]ä¸å­˜åœ¨ï¼Œä½¿ç”¨é»˜è®¤çš„æœºåˆ¶è£…è½½èµ„æº
         Resource resource = context.getResource("beans.xml");
         assertThat(resource, instanceOf(ServletContextResource.class));
         assertTrue(resource.exists());
 
-        // resourceLoadingService[id=nonExistId]²»´æÔÚ£¬Ê¹ÓÃÄ¬ÈÏµÄresource pattern resolver»úÖÆ²éÕÒ×ÊÔ´
+        // resourceLoadingService[id=nonExistId]ä¸å­˜åœ¨ï¼Œä½¿ç”¨é»˜è®¤çš„resource pattern resolveræœºåˆ¶æŸ¥æ‰¾èµ„æº
         Resource[] resources = context.getResources("WEB-INF/**/*.txt");
 
         assertEquals(2, resources.length);
@@ -131,12 +131,12 @@ public class SpringIntegrationTests extends AbstractResourceLoadingTests {
     public void getResource_recursively() throws Exception {
         initContext("beans.xml");
 
-        // ÓÉÓÚµİ¹éµ÷ÓÃ£¬myloader³õÊ¼»¯Ê±£¬resource loading service»¹Ã»³õÊ¼»¯Íê£¬´ËÊ±Ê¹ÓÃÄ¬ÈÏµÄ»úÖÆ×°ÔØ×ÊÔ´¡£
+        // ç”±äºé€’å½’è°ƒç”¨ï¼Œmyloaderåˆå§‹åŒ–æ—¶ï¼Œresource loading serviceè¿˜æ²¡åˆå§‹åŒ–å®Œï¼Œæ­¤æ—¶ä½¿ç”¨é»˜è®¤çš„æœºåˆ¶è£…è½½èµ„æºã€‚
         Resource resource = MyLoader.locationHolder.get();
         assertThat(resource, instanceOf(ServletContextResource.class));
         assertTrue(resource.exists());
 
-        // Í¨¹ımyloader×°ÔØ×ÊÔ´
+        // é€šè¿‡myloaderè£…è½½èµ„æº
         Resource resource2 = context.getResource("/test");
         assertThat(resource2, instanceOf(ResourceAdapter.class));
         assertTrue(resource2.exists());
@@ -148,7 +148,7 @@ public class SpringIntegrationTests extends AbstractResourceLoadingTests {
     public void getResource_notExist() throws Exception {
         initContext("beans.xml");
 
-        // ¶ÔÓÚ²»´æÔÚµÄ×ÊÔ´£¬·µ»ØNonExistResource
+        // å¯¹äºä¸å­˜åœ¨çš„èµ„æºï¼Œè¿”å›NonExistResource
         Resource resource = context.getResource("/classpath/not/exist");
         assertThat(resource.getClass().getName(), containsAll("NonExistResource"));
         assertFalse(resource.exists());
@@ -202,13 +202,13 @@ public class SpringIntegrationTests extends AbstractResourceLoadingTests {
     public void getResource_notExistFile() throws Exception {
         initContext("beans.xml");
 
-        // ÒÔFOR_CREATEµÄ·½Ê½µ÷ÓÃresourceLoadingService£¬Òò´ËÎÄ¼ş²»´æÔÚ»¹ÊÇÄÜ·µ»Ø
+        // ä»¥FOR_CREATEçš„æ–¹å¼è°ƒç”¨resourceLoadingServiceï¼Œå› æ­¤æ–‡ä»¶ä¸å­˜åœ¨è¿˜æ˜¯èƒ½è¿”å›
         Resource resource = context.getResource("/basedir/not/exist");
         assertThat(resource, instanceOf(ResourceAdapter.class));
         assertFalse(resource.exists());
         assertEquals("Resource[/basedir/not/exist, loaded by ResourceLoadingService]", resource.toString());
 
-        // ÆäËüresource adapterµÄ·½·¨
+        // å…¶å®ƒresource adapterçš„æ–¹æ³•
         assertEquals("/basedir/not/exist", ((ContextResource) resource).getPathWithinContext());
         assertEquals(new File(srcdir, "not/exist"), resource.getFile());
         assertEquals(new File(srcdir, "not/exist").toURI(), resource.getURI());
@@ -244,7 +244,7 @@ public class SpringIntegrationTests extends AbstractResourceLoadingTests {
             assertThat(e, exception(ResourceNotFoundException.class, "Could not find resource \"/WEB-INF/\""));
         }
 
-        // Resolver²»±£Ö¤·µ»ØµÄ×ÊÔ´ÊÇ´æÔÚµÄ£¡
+        // Resolverä¸ä¿è¯è¿”å›çš„èµ„æºæ˜¯å­˜åœ¨çš„ï¼
         Resource[] resources = context.getResources("/WEB-INF/notExist.txt");
 
         assertEquals(1, resources.length);
@@ -288,7 +288,7 @@ public class SpringIntegrationTests extends AbstractResourceLoadingTests {
 
         assertHashCodeAndEquals(r1, r2);
 
-        r2 = (ResourceAdapter) context.getResource("/basedir/beans.xml"); // ²»ÊÇÍ¬Ò»ÀàĞÍ
+        r2 = (ResourceAdapter) context.getResource("/basedir/beans.xml"); // ä¸æ˜¯åŒä¸€ç±»å‹
 
         assertNotSame(r1, r2);
         assertNotSame(r1.getResource(), r2.getResource());

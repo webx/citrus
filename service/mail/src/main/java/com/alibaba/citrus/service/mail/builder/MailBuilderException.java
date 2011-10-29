@@ -20,7 +20,7 @@ package com.alibaba.citrus.service.mail.builder;
 import com.alibaba.citrus.service.mail.MailException;
 
 /**
- * ´ú±íÒ»¸ömail builder´´½¨ÓÊ¼şÊ§°ÜµÄÒì³£¡£
+ * ä»£è¡¨ä¸€ä¸ªmail builderåˆ›å»ºé‚®ä»¶å¤±è´¥çš„å¼‚å¸¸ã€‚
  * 
  * @author Michael Zhou
  */

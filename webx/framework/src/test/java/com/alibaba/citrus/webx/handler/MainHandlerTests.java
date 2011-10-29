@@ -44,13 +44,13 @@ public class MainHandlerTests extends AbstractWebxTests {
         System.setProperty("productionModeFromSystemProperties", "true");
         prepareWebClient(null);
 
-        // homepage - ²»»áµ¼Ïòmain internal page
+        // homepage - ä¸ä¼šå¯¼å‘main internal page
         assertHomepage("");
         assertHomepage("/");
         assertHomepage("?home");
         assertHomepage("/?a=1&home=&b=2");
 
-        // ²»´æÔÚµÄinternalÒ³Ãæ
+        // ä¸å­˜åœ¨çš„internalé¡µé¢
         assertNotAvailable("/internal/notexist");
 
         // main - not available in production mode
@@ -67,12 +67,12 @@ public class MainHandlerTests extends AbstractWebxTests {
 
         assertEquals(404, clientResponseCode);
 
-        // http unit sendErrorµÄÊµÏÖ£¬ÕæÊµ·şÎñÆ÷½«·µ»Øweb.xmlÖĞµÄerror-page
+        // http unit sendErrorçš„å®ç°ï¼ŒçœŸå®æœåŠ¡å™¨å°†è¿”å›web.xmlä¸­çš„error-page
         assertThat(clientResponseContent, containsAll("<html><head><title></title></head><body></body></html>"));
     }
 
     /**
-     * ÔÚ¿ª·¢Ä£Ê½ÏÂ£¬·ÃÎÊ/»ò/internal£¬¶¼½«ÏÔÊ¾main internal page¡£
+     * åœ¨å¼€å‘æ¨¡å¼ä¸‹ï¼Œè®¿é—®/æˆ–/internalï¼Œéƒ½å°†æ˜¾ç¤ºmain internal pageã€‚
      */
     @Test
     public void internalRequest_main() throws Exception {
@@ -83,17 +83,17 @@ public class MainHandlerTests extends AbstractWebxTests {
     }
 
     /**
-     * ÔÚ¿ª·¢Ä£Ê½ÏÂ£¬·ÃÎÊ/?home£¬ÔòÏÔÊ¾Ô­À´µÄhomepage¡£
+     * åœ¨å¼€å‘æ¨¡å¼ä¸‹ï¼Œè®¿é—®/?homeï¼Œåˆ™æ˜¾ç¤ºåŸæ¥çš„homepageã€‚
      */
     @Test
     public void internalRequest_homepage() throws Exception {
-        // ÒÔÏÂÎªhome²ÎÊıµÄ¼¸ÖÖĞÎÌ¬£¬ÊÇÓÃÕıÔò±í´ïÊ½Æ¥ÅäµÄ
+        // ä»¥ä¸‹ä¸ºhomeå‚æ•°çš„å‡ ç§å½¢æ€ï¼Œæ˜¯ç”¨æ­£åˆ™è¡¨è¾¾å¼åŒ¹é…çš„
         assertHomepage("?home");
         assertHomepage("/?home=");
         assertHomepage("/?a=1&home=2&b=3");
         assertHomepage("/?a=1&home&b=3");
 
-        // Ö»ÓĞ/?home²Å»áÏÔÊ¾homepage
+        // åªæœ‰/?homeæ‰ä¼šæ˜¾ç¤ºhomepage
         assertMainInternalPage("/internal?home");
         assertMainInternalPage("/internal/?home");
     }
@@ -110,16 +110,16 @@ public class MainHandlerTests extends AbstractWebxTests {
 
         assertEquals(200, clientResponseCode);
 
-        // ÆäÖµ²»Í¬ÓÚResourceServletËù·µ»ØµÄhomepageÒ³
+        // å…¶å€¼ä¸åŒäºResourceServletæ‰€è¿”å›çš„homepageé¡µ
         assertThat(clientResponseContent, not(equalTo("Homepage")));
 
-        // °üº¬webx°æ±¾ºÅ
+        // åŒ…å«webxç‰ˆæœ¬å·
         assertThat(clientResponseContent, containsString(WebxUtil.getWebxVersion()));
 
-        // °üº¬home
+        // åŒ…å«home
         assertThat(clientResponseContent, containsString("images/home1.gif\" alt=\"Home\" /> Home</a>"));
 
-        // °üº¬application home
+        // åŒ…å«application home
         assertThat(clientResponseContent,
                 containsString("images/home2.gif\" alt=\"Application Home\" /> Application Home</a>"));
     }

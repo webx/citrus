@@ -27,7 +27,7 @@ import com.alibaba.citrus.generictype.TypeInfo;
 import com.alibaba.citrus.generictype.WildcardTypeInfo;
 
 /**
- * ¶Ô{@link WildcardTypeInfo}µÄÊµÏÖ¡£
+ * å¯¹{@link WildcardTypeInfo}çš„å®ç°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -73,7 +73,7 @@ class WildcardTypeImpl extends AbstractBoundedTypeInfo implements WildcardTypeIn
     }
 
     /**
-     * È¡µÃ×Ö·û´®±íÊ¾¡£
+     * å–å¾—å­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      */
     @Override
     public String toString() {
@@ -83,7 +83,7 @@ class WildcardTypeImpl extends AbstractBoundedTypeInfo implements WildcardTypeIn
 
         List<TypeInfo> lowerBounds = getLowerBounds();
 
-        // ÏÔÊ¾upperBounds¡£ Èç¹ûÎ¨Ò»µÄ»ùÀàÎªObject£¬¼´unknown wildcard£¬¾Í²»ĞèÒªÌØ±ğÏÔÊ¾ÁË¡£
+        // æ˜¾ç¤ºupperBoundsã€‚ å¦‚æœå”¯ä¸€çš„åŸºç±»ä¸ºObjectï¼Œå³unknown wildcardï¼Œå°±ä¸éœ€è¦ç‰¹åˆ«æ˜¾ç¤ºäº†ã€‚
         if (!unknown) {
             buf.append(" extends ");
             join(buf, getUpperBounds(), " & ");
@@ -93,7 +93,7 @@ class WildcardTypeImpl extends AbstractBoundedTypeInfo implements WildcardTypeIn
             }
         }
 
-        // ÏÔÊ¾lowerBounds¡£
+        // æ˜¾ç¤ºlowerBoundsã€‚
         if (!lowerBounds.isEmpty()) {
             buf.append(" super ");
             join(buf, lowerBounds, " & ");

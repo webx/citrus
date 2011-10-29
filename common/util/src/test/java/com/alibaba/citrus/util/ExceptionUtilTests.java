@@ -27,7 +27,7 @@ import java.util.List;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>ExceptionUtil</code>¡£
+ * æµ‹è¯•<code>ExceptionUtil</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -234,6 +234,6 @@ public class ExceptionUtilTests {
 
         assertTrue(stacktrace.contains(Throwable.class.getName()));
         assertTrue(stacktrace.contains(ExceptionUtilTests.class.getName() + ".getStackTrace"));
-        assertTrue(stacktrace.contains("&#45;&#45;&gt;")); // -->×ª»»³É&#...ÒÔ±ÜÃâhtml comment³ö´í
+        assertTrue(stacktrace.contains("&#45;&#45;&gt;")); // -->è½¬æ¢æˆ&#...ä»¥é¿å…html commentå‡ºé”™
     }
 }

@@ -72,7 +72,7 @@ public class ModuleLoaderServiceDefinitionParser extends AbstractNamedBeanDefini
             }
         }
 
-        // ¼ÙÈçincludeDefaultAdapters=true»òÎ´Ö¸¶¨£¬Ôò¼ÓÈëÄ¬ÈÏµÄadapter¡£
+        // å‡å¦‚includeDefaultAdapters=trueæˆ–æœªæŒ‡å®šï¼Œåˆ™åŠ å…¥é»˜è®¤çš„adapterã€‚
         String includeDefaultAdaptersValue = trimToNull(element.getAttribute("includeDefaultAdapters"));
         boolean includeDefaultAdapters = true;
 
@@ -106,7 +106,7 @@ public class ModuleLoaderServiceDefinitionParser extends AbstractNamedBeanDefini
 
         if (!found) {
             BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(beanClass);
-            AbstractDataBindingAdapterFactoryDefinitionParser.initAdapterBeanDefinition(null, builder); // ³õÊ¼»¯Ä¬ÈÏÅäÖÃ
+            AbstractDataBindingAdapterFactoryDefinitionParser.initAdapterBeanDefinition(null, builder); // åˆå§‹åŒ–é»˜è®¤é…ç½®
             adapterList.add(builder.getBeanDefinition());
         }
     }

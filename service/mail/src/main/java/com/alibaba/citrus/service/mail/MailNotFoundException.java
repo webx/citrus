@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.mail;
 
 /**
- * ´ú±ímail builderÎ´ÕÒµ½µÄ´íÎó¡£
+ * ä»£è¡¨mail builderæœªæ‰¾åˆ°çš„é”™è¯¯ã€‚
  * 
  * @author Michael Zhou
  */

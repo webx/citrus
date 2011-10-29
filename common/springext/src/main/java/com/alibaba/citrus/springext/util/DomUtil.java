@@ -42,13 +42,13 @@ import org.xml.sax.ext.LexicalHandler;
 import com.alibaba.citrus.util.Assert;
 
 /**
- * ·½±ã²Ù×÷domµÄ¹¤¾ß¡£
+ * æ–¹ä¾¿æ“ä½œdomçš„å·¥å…·ã€‚
  * 
  * @author Michael Zhou
  */
 public class DomUtil {
     /**
-     * ½«W3C element×ª»»³ÉDOM4j element¡£
+     * å°†W3C elementè½¬æ¢æˆDOM4j elementã€‚
      */
     public static org.dom4j.Element convertElement(Element element) {
         Document doc;
@@ -70,7 +70,7 @@ public class DomUtil {
     }
 
     /**
-     * ½«W3C element×ª»»³ÉSAXÊÂ¼ş¡£
+     * å°†W3C elementè½¬æ¢æˆSAXäº‹ä»¶ã€‚
      */
     public static void convertElement(Element element, ContentHandler contentHandler) throws SAXException {
         SAXWriter writer = new SAXWriter(contentHandler);
@@ -87,14 +87,14 @@ public class DomUtil {
     }
 
     /**
-     * È¡µÃËùÓĞ×Óelements¡£
+     * å–å¾—æ‰€æœ‰å­elementsã€‚
      */
     public static List<Element> subElements(Element element) {
         return subElements(element, null);
     }
 
     /**
-     * È¡µÃËùÓĞ×Óelements£¬Èç¹ûÎ´Ö¸¶¨selector£¬Ôò·µ»ØËùÓĞelements¡£
+     * å–å¾—æ‰€æœ‰å­elementsï¼Œå¦‚æœæœªæŒ‡å®šselectorï¼Œåˆ™è¿”å›æ‰€æœ‰elementsã€‚
      */
     public static List<Element> subElements(Element element, ElementSelector selector) {
         NodeList nodes = element.getChildNodes();
@@ -132,28 +132,28 @@ public class DomUtil {
     }
 
     /**
-     * ElementÑ¡ÔñÆ÷¡£
+     * Elementé€‰æ‹©å™¨ã€‚
      */
     public static interface ElementSelector {
         boolean accept(Element element);
     }
 
     /**
-     * ¹ıÂË³öÖ¸¶¨namespaceÏÂµÄelements¡£
+     * è¿‡æ»¤å‡ºæŒ‡å®šnamespaceä¸‹çš„elementsã€‚
      */
     public static ElementSelector sameNs(Element element) {
         return ns(assertNotNull(element, "element").getNamespaceURI());
     }
 
     /**
-     * ¹ıÂË³öÄ¬ÈÏnamespace£¬¼´beansÃû×Ö¿Õ¼äÏÂµÄelements¡£
+     * è¿‡æ»¤å‡ºé»˜è®¤namespaceï¼Œå³beansåå­—ç©ºé—´ä¸‹çš„elementsã€‚
      */
     public static ElementSelector beansNs() {
         return ns(BEANS_NAMESPACE_URI);
     }
 
     /**
-     * Æ¥ÅäÈÎÒâelement¡£
+     * åŒ¹é…ä»»æ„elementã€‚
      */
     public static ElementSelector any() {
         return new ElementSelector() {
@@ -169,7 +169,7 @@ public class DomUtil {
     }
 
     /**
-     * ²»Æ¥ÅäÈÎÒâelement¡£
+     * ä¸åŒ¹é…ä»»æ„elementã€‚
      */
     public static ElementSelector none() {
         return new ElementSelector() {
@@ -185,7 +185,7 @@ public class DomUtil {
     }
 
     /**
-     * ¹ıÂË³öÖ¸¶¨namespaceÏÂµÄelements¡£
+     * è¿‡æ»¤å‡ºæŒ‡å®šnamespaceä¸‹çš„elementsã€‚
      */
     public static ElementSelector ns(String nsUri) {
         final String trimmedNsUri = trimToNull(nsUri);
@@ -203,7 +203,7 @@ public class DomUtil {
     }
 
     /**
-     * ¹ıÂËÖ¸¶¨Ãû³ÆµÄelements¡£
+     * è¿‡æ»¤æŒ‡å®šåç§°çš„elementsã€‚
      */
     public static ElementSelector name(String name) {
         final String trimmedName = assertNotNull(trimToNull(name), "elementName");
@@ -222,7 +222,7 @@ public class DomUtil {
     }
 
     /**
-     * ·ûºÏÈÎÒâÒ»¸öselectorÌõ¼ş£¬¼´½ÓÊÜÖ®¡£
+     * ç¬¦åˆä»»æ„ä¸€ä¸ªselectoræ¡ä»¶ï¼Œå³æ¥å—ä¹‹ã€‚
      */
     public static ElementSelector or(final ElementSelector... selectors) {
         return new ElementSelector() {
@@ -248,7 +248,7 @@ public class DomUtil {
     }
 
     /**
-     * ·ûºÏËùÓĞselectorÌõ¼ş£¬²Å½ÓÊÜÖ®¡£
+     * ç¬¦åˆæ‰€æœ‰selectoræ¡ä»¶ï¼Œæ‰æ¥å—ä¹‹ã€‚
      */
     public static ElementSelector and(final ElementSelector... selectors) {
         return new ElementSelector() {
@@ -272,7 +272,7 @@ public class DomUtil {
     }
 
     /**
-     * ²»·ûºÏselectorÌõ¼ş£¬²Å½ÓÊÜÖ®¡£
+     * ä¸ç¬¦åˆselectoræ¡ä»¶ï¼Œæ‰æ¥å—ä¹‹ã€‚
      */
     public static ElementSelector not(final ElementSelector selector) {
         assertNotNull(selector, "selector");
@@ -289,14 +289,14 @@ public class DomUtil {
     }
 
     /**
-     * Å×³öÒì³££¬Í¨³£ºÍor×Ó¾äÅäºÏ¡£
+     * æŠ›å‡ºå¼‚å¸¸ï¼Œé€šå¸¸å’Œorå­å¥é…åˆã€‚
      */
     public static ElementSelector error() {
         return error(null, null);
     }
 
     /**
-     * Å×³öÒì³££¬Í¨³£ºÍor×Ó¾äÅäºÏ¡£
+     * æŠ›å‡ºå¼‚å¸¸ï¼Œé€šå¸¸å’Œorå­å¥é…åˆã€‚
      */
     public static ElementSelector error(final Assert.ExceptionType type, final String message) {
         return new ElementSelector() {

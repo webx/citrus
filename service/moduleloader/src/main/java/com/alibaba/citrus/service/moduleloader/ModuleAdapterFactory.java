@@ -18,13 +18,13 @@
 package com.alibaba.citrus.service.moduleloader;
 
 /**
- * ½«ÈÎÒâÀàĞÍµÄmodule¶ÔÏó×ª»»³É<code>Module</code>½Ó¿ÚµÄÊÊÅäÆ÷¹¤³§¡£
+ * å°†ä»»æ„ç±»å‹çš„moduleå¯¹è±¡è½¬æ¢æˆ<code>Module</code>æ¥å£çš„é€‚é…å™¨å·¥å‚ã€‚
  * 
  * @author Michael Zhou
  */
 public interface ModuleAdapterFactory {
     /**
-     * ½«¶ÔÏó×ª»»³Émodule½Ó¿Ú¡£
+     * å°†å¯¹è±¡è½¬æ¢æˆmoduleæ¥å£ã€‚
      */
     Module adapt(String type, String name, Object moduleObject) throws ModuleLoaderException;
 }

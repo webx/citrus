@@ -24,142 +24,142 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * ÓÃÀ´´¦ÀíÎÄ¼şÂ·¾¶ºÍºó×ºµÄ¹¤¾ß¡£
+ * ç”¨æ¥å¤„ç†æ–‡ä»¶è·¯å¾„å’Œåç¼€çš„å·¥å…·ã€‚
  * 
  * @author Michael Zhou
  */
 public class FileUtil {
 
     // ==========================================================================
-    // ¹æ¸ñ»¯Â·¾¶¡£
+    // è§„æ ¼åŒ–è·¯å¾„ã€‚
     // ==========================================================================
 
     /**
-     * ¹æ¸ñ»¯¾ø¶ÔÂ·¾¶¡£
+     * è§„æ ¼åŒ–ç»å¯¹è·¯å¾„ã€‚
      * <p>
-     * ¸Ã·½·¨·µ»ØÒÔ¡°<code>/</code>¡±¿ªÊ¼µÄ¾ø¶ÔÂ·¾¶¡£×ª»»¹æÔòÈçÏÂ£º
+     * è¯¥æ–¹æ³•è¿”å›ä»¥â€œ<code>/</code>â€å¼€å§‹çš„ç»å¯¹è·¯å¾„ã€‚è½¬æ¢è§„åˆ™å¦‚ä¸‹ï¼š
      * </p>
      * <ol>
-     * <li>Â·¾¶Îª¿Õ£¬Ôò·µ»Ø<code>""</code>¡£</li>
-     * <li>½«ËùÓĞbackslash("\\")×ª»¯³Éslash("/")¡£</li>
-     * <li>È¥³ıÖØ¸´µÄ"/"»ò"\\"¡£</li>
-     * <li>È¥³ı"."£¬Èç¹û·¢ÏÖ".."£¬ÔòÏòÉÏË·Ò»¼¶Ä¿Â¼¡£</li>
-     * <li>±£ÁôÂ·¾¶Ä©Î²µÄ"/"£¨Èç¹ûÓĞµÄ»°£¬³ıÁË¿ÕÂ·¾¶£©¡£</li>
-     * <li>¶ÔÓÚ¾ø¶ÔÂ·¾¶£¬Èç¹û".."ÉÏË·µÄÂ·¾¶³¬¹ıÁË¸ùÄ¿Â¼£¬Ôò¿´×÷·Ç·¨Â·¾¶£¬Å×³öÒì³£¡£</li>
+     * <li>è·¯å¾„ä¸ºç©ºï¼Œåˆ™è¿”å›<code>""</code>ã€‚</li>
+     * <li>å°†æ‰€æœ‰backslash("\\")è½¬åŒ–æˆslash("/")ã€‚</li>
+     * <li>å»é™¤é‡å¤çš„"/"æˆ–"\\"ã€‚</li>
+     * <li>å»é™¤"."ï¼Œå¦‚æœå‘ç°".."ï¼Œåˆ™å‘ä¸Šæœ”ä¸€çº§ç›®å½•ã€‚</li>
+     * <li>ä¿ç•™è·¯å¾„æœ«å°¾çš„"/"ï¼ˆå¦‚æœæœ‰çš„è¯ï¼Œé™¤äº†ç©ºè·¯å¾„ï¼‰ã€‚</li>
+     * <li>å¯¹äºç»å¯¹è·¯å¾„ï¼Œå¦‚æœ".."ä¸Šæœ”çš„è·¯å¾„è¶…è¿‡äº†æ ¹ç›®å½•ï¼Œåˆ™çœ‹ä½œéæ³•è·¯å¾„ï¼ŒæŠ›å‡ºå¼‚å¸¸ã€‚</li>
      * </ol>
      * 
-     * @param path Òª¹æ¸ñ»¯µÄÂ·¾¶
-     * @return ¹æ¸ñ»¯ºóµÄÂ·¾¶
-     * @throws IllegalPathException Èç¹ûÂ·¾¶·Ç·¨
+     * @param path è¦è§„æ ¼åŒ–çš„è·¯å¾„
+     * @return è§„æ ¼åŒ–åçš„è·¯å¾„
+     * @throws IllegalPathException å¦‚æœè·¯å¾„éæ³•
      */
     public static String normalizeAbsolutePath(String path) throws IllegalPathException {
         return normalizePath(path, true, false, false);
     }
 
     /**
-     * ¹æ¸ñ»¯¾ø¶ÔÂ·¾¶¡£
+     * è§„æ ¼åŒ–ç»å¯¹è·¯å¾„ã€‚
      * <p>
-     * ¸Ã·½·¨·µ»ØÒÔ¡°<code>/</code>¡±¿ªÊ¼µÄ¾ø¶ÔÂ·¾¶¡£×ª»»¹æÔòÈçÏÂ£º
+     * è¯¥æ–¹æ³•è¿”å›ä»¥â€œ<code>/</code>â€å¼€å§‹çš„ç»å¯¹è·¯å¾„ã€‚è½¬æ¢è§„åˆ™å¦‚ä¸‹ï¼š
      * </p>
      * <ol>
-     * <li>Â·¾¶Îª¿Õ£¬Ôò·µ»Ø<code>""</code>¡£</li>
-     * <li>½«ËùÓĞbackslash("\\")×ª»¯³Éslash("/")¡£</li>
-     * <li>È¥³ıÖØ¸´µÄ"/"»ò"\\"¡£</li>
-     * <li>È¥³ı"."£¬Èç¹û·¢ÏÖ".."£¬ÔòÏòÉÏË·Ò»¼¶Ä¿Â¼¡£</li>
-     * <li>±£ÁôÂ·¾¶Ä©Î²µÄ"/"£¨Èç¹ûÓĞµÄ»°£¬³ıÁË¿ÕÂ·¾¶ºÍÇ¿ÖÆÖ¸¶¨<code>removeTrailingSlash==true</code>£©¡£</li>
-     * <li>¶ÔÓÚ¾ø¶ÔÂ·¾¶£¬Èç¹û".."ÉÏË·µÄÂ·¾¶³¬¹ıÁË¸ùÄ¿Â¼£¬Ôò¿´×÷·Ç·¨Â·¾¶£¬Å×³öÒì³£¡£</li>
+     * <li>è·¯å¾„ä¸ºç©ºï¼Œåˆ™è¿”å›<code>""</code>ã€‚</li>
+     * <li>å°†æ‰€æœ‰backslash("\\")è½¬åŒ–æˆslash("/")ã€‚</li>
+     * <li>å»é™¤é‡å¤çš„"/"æˆ–"\\"ã€‚</li>
+     * <li>å»é™¤"."ï¼Œå¦‚æœå‘ç°".."ï¼Œåˆ™å‘ä¸Šæœ”ä¸€çº§ç›®å½•ã€‚</li>
+     * <li>ä¿ç•™è·¯å¾„æœ«å°¾çš„"/"ï¼ˆå¦‚æœæœ‰çš„è¯ï¼Œé™¤äº†ç©ºè·¯å¾„å’Œå¼ºåˆ¶æŒ‡å®š<code>removeTrailingSlash==true</code>ï¼‰ã€‚</li>
+     * <li>å¯¹äºç»å¯¹è·¯å¾„ï¼Œå¦‚æœ".."ä¸Šæœ”çš„è·¯å¾„è¶…è¿‡äº†æ ¹ç›®å½•ï¼Œåˆ™çœ‹ä½œéæ³•è·¯å¾„ï¼ŒæŠ›å‡ºå¼‚å¸¸ã€‚</li>
      * </ol>
      * 
-     * @param path Òª¹æ¸ñ»¯µÄÂ·¾¶
-     * @param removeTrailingSlash ÊÇ·ñÇ¿ÖÆÒÆ³ıÄ©Î²µÄ<code>"/"</code>
-     * @return ¹æ¸ñ»¯ºóµÄÂ·¾¶
-     * @throws IllegalPathException Èç¹ûÂ·¾¶·Ç·¨
+     * @param path è¦è§„æ ¼åŒ–çš„è·¯å¾„
+     * @param removeTrailingSlash æ˜¯å¦å¼ºåˆ¶ç§»é™¤æœ«å°¾çš„<code>"/"</code>
+     * @return è§„æ ¼åŒ–åçš„è·¯å¾„
+     * @throws IllegalPathException å¦‚æœè·¯å¾„éæ³•
      */
     public static String normalizeAbsolutePath(String path, boolean removeTrailingSlash) throws IllegalPathException {
         return normalizePath(path, true, false, removeTrailingSlash);
     }
 
     /**
-     * ¹æ¸ñ»¯Ïà¶ÔÂ·¾¶¡£
+     * è§„æ ¼åŒ–ç›¸å¯¹è·¯å¾„ã€‚
      * <p>
-     * ¸Ã·½·¨·µ»Ø²»ÒÔ¡°<code>/</code>¡±¿ªÊ¼µÄÏà¶ÔÂ·¾¶¡£×ª»»¹æÔòÈçÏÂ£º
+     * è¯¥æ–¹æ³•è¿”å›ä¸ä»¥â€œ<code>/</code>â€å¼€å§‹çš„ç›¸å¯¹è·¯å¾„ã€‚è½¬æ¢è§„åˆ™å¦‚ä¸‹ï¼š
      * </p>
      * <ol>
-     * <li>Â·¾¶Îª¿Õ£¬Ôò·µ»Ø<code>""</code>¡£</li>
-     * <li>½«ËùÓĞbackslash("\\")×ª»¯³Éslash("/")¡£</li>
-     * <li>È¥³ıÖØ¸´µÄ"/"»ò"\\"¡£</li>
-     * <li>È¥³ı"."£¬Èç¹û·¢ÏÖ".."£¬ÔòÏòÉÏË·Ò»¼¶Ä¿Â¼¡£</li>
-     * <li>¿ÕÏà¶ÔÂ·¾¶·µ»Ø""¡£</li>
-     * <li>±£ÁôÂ·¾¶Ä©Î²µÄ"/"£¨Èç¹ûÓĞµÄ»°£¬³ıÁË¿ÕÂ·¾¶£©¡£</li>
+     * <li>è·¯å¾„ä¸ºç©ºï¼Œåˆ™è¿”å›<code>""</code>ã€‚</li>
+     * <li>å°†æ‰€æœ‰backslash("\\")è½¬åŒ–æˆslash("/")ã€‚</li>
+     * <li>å»é™¤é‡å¤çš„"/"æˆ–"\\"ã€‚</li>
+     * <li>å»é™¤"."ï¼Œå¦‚æœå‘ç°".."ï¼Œåˆ™å‘ä¸Šæœ”ä¸€çº§ç›®å½•ã€‚</li>
+     * <li>ç©ºç›¸å¯¹è·¯å¾„è¿”å›""ã€‚</li>
+     * <li>ä¿ç•™è·¯å¾„æœ«å°¾çš„"/"ï¼ˆå¦‚æœæœ‰çš„è¯ï¼Œé™¤äº†ç©ºè·¯å¾„ï¼‰ã€‚</li>
      * </ol>
      * 
-     * @param path Òª¹æ¸ñ»¯µÄÂ·¾¶
-     * @return ¹æ¸ñ»¯ºóµÄÂ·¾¶
-     * @throws IllegalPathException Èç¹ûÂ·¾¶·Ç·¨
+     * @param path è¦è§„æ ¼åŒ–çš„è·¯å¾„
+     * @return è§„æ ¼åŒ–åçš„è·¯å¾„
+     * @throws IllegalPathException å¦‚æœè·¯å¾„éæ³•
      */
     public static String normalizeRelativePath(String path) throws IllegalPathException {
         return normalizePath(path, false, true, false);
     }
 
     /**
-     * ¹æ¸ñ»¯Ïà¶ÔÂ·¾¶¡£
+     * è§„æ ¼åŒ–ç›¸å¯¹è·¯å¾„ã€‚
      * <p>
-     * ¸Ã·½·¨·µ»Ø²»ÒÔ¡°<code>/</code>¡±¿ªÊ¼µÄÏà¶ÔÂ·¾¶¡£×ª»»¹æÔòÈçÏÂ£º
+     * è¯¥æ–¹æ³•è¿”å›ä¸ä»¥â€œ<code>/</code>â€å¼€å§‹çš„ç›¸å¯¹è·¯å¾„ã€‚è½¬æ¢è§„åˆ™å¦‚ä¸‹ï¼š
      * </p>
      * <ol>
-     * <li>Â·¾¶Îª¿Õ£¬Ôò·µ»Ø<code>""</code>¡£</li>
-     * <li>½«ËùÓĞbackslash("\\")×ª»¯³Éslash("/")¡£</li>
-     * <li>È¥³ıÖØ¸´µÄ"/"»ò"\\"¡£</li>
-     * <li>È¥³ı"."£¬Èç¹û·¢ÏÖ".."£¬ÔòÏòÉÏË·Ò»¼¶Ä¿Â¼¡£</li>
-     * <li>¿ÕÏà¶ÔÂ·¾¶·µ»Ø""¡£</li>
-     * <li>±£ÁôÂ·¾¶Ä©Î²µÄ"/"£¨Èç¹ûÓĞµÄ»°£¬³ıÁË¿ÕÂ·¾¶ºÍÇ¿ÖÆÖ¸¶¨<code>removeTrailingSlash==true</code>£©¡£</li>
+     * <li>è·¯å¾„ä¸ºç©ºï¼Œåˆ™è¿”å›<code>""</code>ã€‚</li>
+     * <li>å°†æ‰€æœ‰backslash("\\")è½¬åŒ–æˆslash("/")ã€‚</li>
+     * <li>å»é™¤é‡å¤çš„"/"æˆ–"\\"ã€‚</li>
+     * <li>å»é™¤"."ï¼Œå¦‚æœå‘ç°".."ï¼Œåˆ™å‘ä¸Šæœ”ä¸€çº§ç›®å½•ã€‚</li>
+     * <li>ç©ºç›¸å¯¹è·¯å¾„è¿”å›""ã€‚</li>
+     * <li>ä¿ç•™è·¯å¾„æœ«å°¾çš„"/"ï¼ˆå¦‚æœæœ‰çš„è¯ï¼Œé™¤äº†ç©ºè·¯å¾„å’Œå¼ºåˆ¶æŒ‡å®š<code>removeTrailingSlash==true</code>ï¼‰ã€‚</li>
      * </ol>
      * 
-     * @param path Òª¹æ¸ñ»¯µÄÂ·¾¶
-     * @param removeTrailingSlash ÊÇ·ñÇ¿ÖÆÒÆ³ıÄ©Î²µÄ<code>"/"</code>
-     * @return ¹æ¸ñ»¯ºóµÄÂ·¾¶
-     * @throws IllegalPathException Èç¹ûÂ·¾¶·Ç·¨
+     * @param path è¦è§„æ ¼åŒ–çš„è·¯å¾„
+     * @param removeTrailingSlash æ˜¯å¦å¼ºåˆ¶ç§»é™¤æœ«å°¾çš„<code>"/"</code>
+     * @return è§„æ ¼åŒ–åçš„è·¯å¾„
+     * @throws IllegalPathException å¦‚æœè·¯å¾„éæ³•
      */
     public static String normalizeRelativePath(String path, boolean removeTrailingSlash) throws IllegalPathException {
         return normalizePath(path, false, true, removeTrailingSlash);
     }
 
     /**
-     * ¹æ¸ñ»¯Â·¾¶¡£¹æÔòÈçÏÂ£º
+     * è§„æ ¼åŒ–è·¯å¾„ã€‚è§„åˆ™å¦‚ä¸‹ï¼š
      * <ol>
-     * <li>Â·¾¶Îª¿Õ£¬Ôò·µ»Ø<code>""</code>¡£</li>
-     * <li>½«ËùÓĞbackslash("\\")×ª»¯³Éslash("/")¡£</li>
-     * <li>È¥³ıÖØ¸´µÄ"/"»ò"\\"¡£</li>
-     * <li>È¥³ı"."£¬Èç¹û·¢ÏÖ".."£¬ÔòÏòÉÏË·Ò»¼¶Ä¿Â¼¡£</li>
-     * <li>¿Õ¾ø¶ÔÂ·¾¶·µ»Ø"/"£¬¿ÕÏà¶ÔÂ·¾¶·µ»Ø""¡£</li>
-     * <li>±£ÁôÂ·¾¶Ä©Î²µÄ"/"£¨Èç¹ûÓĞµÄ»°£¬³ıÁË¿ÕÂ·¾¶£©¡£</li>
-     * <li>¶ÔÓÚ¾ø¶ÔÂ·¾¶£¬Èç¹û".."ÉÏË·µÄÂ·¾¶³¬¹ıÁË¸ùÄ¿Â¼£¬Ôò¿´×÷·Ç·¨Â·¾¶£¬Å×³öÒì³£¡£</li>
+     * <li>è·¯å¾„ä¸ºç©ºï¼Œåˆ™è¿”å›<code>""</code>ã€‚</li>
+     * <li>å°†æ‰€æœ‰backslash("\\")è½¬åŒ–æˆslash("/")ã€‚</li>
+     * <li>å»é™¤é‡å¤çš„"/"æˆ–"\\"ã€‚</li>
+     * <li>å»é™¤"."ï¼Œå¦‚æœå‘ç°".."ï¼Œåˆ™å‘ä¸Šæœ”ä¸€çº§ç›®å½•ã€‚</li>
+     * <li>ç©ºç»å¯¹è·¯å¾„è¿”å›"/"ï¼Œç©ºç›¸å¯¹è·¯å¾„è¿”å›""ã€‚</li>
+     * <li>ä¿ç•™è·¯å¾„æœ«å°¾çš„"/"ï¼ˆå¦‚æœæœ‰çš„è¯ï¼Œé™¤äº†ç©ºè·¯å¾„ï¼‰ã€‚</li>
+     * <li>å¯¹äºç»å¯¹è·¯å¾„ï¼Œå¦‚æœ".."ä¸Šæœ”çš„è·¯å¾„è¶…è¿‡äº†æ ¹ç›®å½•ï¼Œåˆ™çœ‹ä½œéæ³•è·¯å¾„ï¼ŒæŠ›å‡ºå¼‚å¸¸ã€‚</li>
      * </ol>
      * 
-     * @param path Òª¹æ¸ñ»¯µÄÂ·¾¶
-     * @return ¹æ¸ñ»¯ºóµÄÂ·¾¶
-     * @throws IllegalPathException Èç¹ûÂ·¾¶·Ç·¨
+     * @param path è¦è§„æ ¼åŒ–çš„è·¯å¾„
+     * @return è§„æ ¼åŒ–åçš„è·¯å¾„
+     * @throws IllegalPathException å¦‚æœè·¯å¾„éæ³•
      */
     public static String normalizePath(String path) throws IllegalPathException {
         return normalizePath(path, false, false, false);
     }
 
     /**
-     * ¹æ¸ñ»¯Â·¾¶¡£¹æÔòÈçÏÂ£º
+     * è§„æ ¼åŒ–è·¯å¾„ã€‚è§„åˆ™å¦‚ä¸‹ï¼š
      * <ol>
-     * <li>Â·¾¶Îª¿Õ£¬Ôò·µ»Ø<code>""</code>¡£</li>
-     * <li>½«ËùÓĞbackslash("\\")×ª»¯³Éslash("/")¡£</li>
-     * <li>È¥³ıÖØ¸´µÄ"/"»ò"\\"¡£</li>
-     * <li>È¥³ı"."£¬Èç¹û·¢ÏÖ".."£¬ÔòÏòÉÏË·Ò»¼¶Ä¿Â¼¡£</li>
-     * <li>¿Õ¾ø¶ÔÂ·¾¶·µ»Ø"/"£¬¿ÕÏà¶ÔÂ·¾¶·µ»Ø""¡£</li>
-     * <li>±£ÁôÂ·¾¶Ä©Î²µÄ"/"£¨Èç¹ûÓĞµÄ»°£¬³ıÁË¿ÕÂ·¾¶ºÍÇ¿ÖÆÖ¸¶¨<code>removeTrailingSlash==true</code>£©¡£</li>
-     * <li>¶ÔÓÚ¾ø¶ÔÂ·¾¶£¬Èç¹û".."ÉÏË·µÄÂ·¾¶³¬¹ıÁË¸ùÄ¿Â¼£¬Ôò¿´×÷·Ç·¨Â·¾¶£¬Å×³öÒì³£¡£</li>
+     * <li>è·¯å¾„ä¸ºç©ºï¼Œåˆ™è¿”å›<code>""</code>ã€‚</li>
+     * <li>å°†æ‰€æœ‰backslash("\\")è½¬åŒ–æˆslash("/")ã€‚</li>
+     * <li>å»é™¤é‡å¤çš„"/"æˆ–"\\"ã€‚</li>
+     * <li>å»é™¤"."ï¼Œå¦‚æœå‘ç°".."ï¼Œåˆ™å‘ä¸Šæœ”ä¸€çº§ç›®å½•ã€‚</li>
+     * <li>ç©ºç»å¯¹è·¯å¾„è¿”å›"/"ï¼Œç©ºç›¸å¯¹è·¯å¾„è¿”å›""ã€‚</li>
+     * <li>ä¿ç•™è·¯å¾„æœ«å°¾çš„"/"ï¼ˆå¦‚æœæœ‰çš„è¯ï¼Œé™¤äº†ç©ºè·¯å¾„å’Œå¼ºåˆ¶æŒ‡å®š<code>removeTrailingSlash==true</code>ï¼‰ã€‚</li>
+     * <li>å¯¹äºç»å¯¹è·¯å¾„ï¼Œå¦‚æœ".."ä¸Šæœ”çš„è·¯å¾„è¶…è¿‡äº†æ ¹ç›®å½•ï¼Œåˆ™çœ‹ä½œéæ³•è·¯å¾„ï¼ŒæŠ›å‡ºå¼‚å¸¸ã€‚</li>
      * </ol>
      * 
-     * @param path Òª¹æ¸ñ»¯µÄÂ·¾¶
-     * @param removeTrailingSlash ÊÇ·ñÇ¿ÖÆÒÆ³ıÄ©Î²µÄ<code>"/"</code>
-     * @return ¹æ¸ñ»¯ºóµÄÂ·¾¶
-     * @throws IllegalPathException Èç¹ûÂ·¾¶·Ç·¨
+     * @param path è¦è§„æ ¼åŒ–çš„è·¯å¾„
+     * @param removeTrailingSlash æ˜¯å¦å¼ºåˆ¶ç§»é™¤æœ«å°¾çš„<code>"/"</code>
+     * @return è§„æ ¼åŒ–åçš„è·¯å¾„
+     * @throws IllegalPathException å¦‚æœè·¯å¾„éæ³•
      */
     public static String normalizePath(String path, boolean removeTrailingSlash) throws IllegalPathException {
         return normalizePath(path, false, false, removeTrailingSlash);
@@ -170,7 +170,7 @@ public class FileUtil {
         char[] pathChars = trimToEmpty(path).toCharArray();
         int length = pathChars.length;
 
-        // ¼ì²é¾ø¶ÔÂ·¾¶£¬ÒÔ¼°pathÎ²²¿µÄ"/"
+        // æ£€æŸ¥ç»å¯¹è·¯å¾„ï¼Œä»¥åŠpathå°¾éƒ¨çš„"/"
         boolean startsWithSlash = false;
         boolean endsWithSlash = false;
 
@@ -192,29 +192,29 @@ public class FileUtil {
         }
 
         while (index < length) {
-            // Ìøµ½µÚÒ»¸ö·Çslash×Ö·û£¬»òÄ©Î²
+            // è·³åˆ°ç¬¬ä¸€ä¸ªéslashå­—ç¬¦ï¼Œæˆ–æœ«å°¾
             index = indexOfSlash(pathChars, index + 1, false);
 
             if (index == length) {
                 break;
             }
 
-            // È¡µÃÏÂÒ»¸öslash index£¬»òÄ©Î²
+            // å–å¾—ä¸‹ä¸€ä¸ªslash indexï¼Œæˆ–æœ«å°¾
             int nextSlashIndex = indexOfSlash(pathChars, index, true);
 
             String element = new String(pathChars, index, nextSlashIndex - index);
             index = nextSlashIndex;
 
-            // ºöÂÔ"."
+            // å¿½ç•¥"."
             if (".".equals(element)) {
                 continue;
             }
 
-            // »ØË·".."
+            // å›æœ”".."
             if ("..".equals(element)) {
                 if (level == 0) {
-                    // Èç¹ûÊÇ¾ø¶ÔÂ·¾¶£¬../ÊÔÍ¼Ô½¹ı×îÉÏ²ãÄ¿Â¼£¬ÕâÊÇ²»¿ÉÄÜµÄ£¬
-                    // Å×³öÂ·¾¶·Ç·¨µÄÒì³£¡£
+                    // å¦‚æœæ˜¯ç»å¯¹è·¯å¾„ï¼Œ../è¯•å›¾è¶Šè¿‡æœ€ä¸Šå±‚ç›®å½•ï¼Œè¿™æ˜¯ä¸å¯èƒ½çš„ï¼Œ
+                    // æŠ›å‡ºè·¯å¾„éæ³•çš„å¼‚å¸¸ã€‚
                     if (isAbsolutePath) {
                         throw new IllegalPathException(path);
                     } else {
@@ -227,12 +227,12 @@ public class FileUtil {
                 continue;
             }
 
-            // Ìí¼Óµ½path
-            pathChars[level++] = (char) buf.length(); // ½«ÒÑ¾­¶Á¹ıµÄchars¿Õ¼äÓÃÓÚ¼ÇÂ¼Ö¸¶¨levelµÄindex
+            // æ·»åŠ åˆ°path
+            pathChars[level++] = (char) buf.length(); // å°†å·²ç»è¯»è¿‡çš„charsç©ºé—´ç”¨äºè®°å½•æŒ‡å®šlevelçš„index
             buf.append(element).append('/');
         }
 
-        // ³ıÈ¥×îºóµÄ"/"
+        // é™¤å»æœ€åçš„"/"
         if (buf.length() > 0) {
             if (!endsWithSlash || removeTrailingSlash) {
                 buf.setLength(buf.length() - 1);
@@ -263,19 +263,19 @@ public class FileUtil {
     }
 
     // ==========================================================================
-    // È¡µÃ»ùÓÚÖ¸¶¨basedir¹æ¸ñ»¯Â·¾¶¡£
+    // å–å¾—åŸºäºæŒ‡å®šbasedirè§„æ ¼åŒ–è·¯å¾„ã€‚
     // ==========================================================================
 
     /**
-     * Èç¹ûÖ¸¶¨Â·¾¶ÒÑ¾­ÊÇ¾ø¶ÔÂ·¾¶£¬Ôò¹æ¸ñ»¯ºóÖ±½Ó·µ»ØÖ®£¬·ñÔòÈ¡µÃ»ùÓÚÖ¸¶¨basedirµÄ¹æ¸ñ»¯Â·¾¶¡£
+     * å¦‚æœæŒ‡å®šè·¯å¾„å·²ç»æ˜¯ç»å¯¹è·¯å¾„ï¼Œåˆ™è§„æ ¼åŒ–åç›´æ¥è¿”å›ä¹‹ï¼Œå¦åˆ™å–å¾—åŸºäºæŒ‡å®šbasedirçš„è§„æ ¼åŒ–è·¯å¾„ã€‚
      * 
-     * @param basedir ¸ùÄ¿Â¼£¬Èç¹û<code>path</code>ÎªÏà¶ÔÂ·¾¶£¬±íÊ¾»ùÓÚ´ËÄ¿Â¼
-     * @param path Òª¼ì²éµÄÂ·¾¶
-     * @return ¹æ¸ñ»¯µÄ¾ø¶ÔÂ·¾¶
-     * @throws IllegalPathException Èç¹ûÂ·¾¶·Ç·¨
+     * @param basedir æ ¹ç›®å½•ï¼Œå¦‚æœ<code>path</code>ä¸ºç›¸å¯¹è·¯å¾„ï¼Œè¡¨ç¤ºåŸºäºæ­¤ç›®å½•
+     * @param path è¦æ£€æŸ¥çš„è·¯å¾„
+     * @return è§„æ ¼åŒ–çš„ç»å¯¹è·¯å¾„
+     * @throws IllegalPathException å¦‚æœè·¯å¾„éæ³•
      */
     public static String getAbsolutePathBasedOn(String basedir, String path) throws IllegalPathException {
-        // Èç¹ûpathÎª¾ø¶ÔÂ·¾¶£¬Ôò¹æ¸ñ»¯ºó·µ»Ø
+        // å¦‚æœpathä¸ºç»å¯¹è·¯å¾„ï¼Œåˆ™è§„æ ¼åŒ–åè¿”å›
         boolean isAbsolutePath = false;
 
         path = trimToEmpty(path);
@@ -286,7 +286,7 @@ public class FileUtil {
         }
 
         if (!isAbsolutePath) {
-            // Èç¹ûpathÎªÏà¶ÔÂ·¾¶£¬½«ËüºÍbasedirºÏ²¢¡£
+            // å¦‚æœpathä¸ºç›¸å¯¹è·¯å¾„ï¼Œå°†å®ƒå’Œbasediråˆå¹¶ã€‚
             if (path.length() > 0) {
                 path = trimToEmpty(basedir) + "/" + path;
             } else {
@@ -298,9 +298,9 @@ public class FileUtil {
     }
 
     /**
-     * È¡µÃºÍÏµÍ³Ïà¹ØµÄ¾ø¶ÔÂ·¾¶¡£
+     * å–å¾—å’Œç³»ç»Ÿç›¸å…³çš„ç»å¯¹è·¯å¾„ã€‚
      * 
-     * @throws IllegalPathException Èç¹ûbasedir²»ÊÇ¾ø¶ÔÂ·¾¶
+     * @throws IllegalPathException å¦‚æœbasedirä¸æ˜¯ç»å¯¹è·¯å¾„
      */
     public static String getSystemDependentAbsolutePathBasedOn(String basedir, String path) {
         path = trimToEmpty(path);
@@ -310,11 +310,11 @@ public class FileUtil {
         File pathFile = new File(path);
 
         if (pathFile.isAbsolute()) {
-            // Èç¹ûpathÒÑ¾­ÊÇ¾ø¶ÔÂ·¾¶ÁË£¬ÔòÖ±½Ó·µ»ØÖ®¡£
+            // å¦‚æœpathå·²ç»æ˜¯ç»å¯¹è·¯å¾„äº†ï¼Œåˆ™ç›´æ¥è¿”å›ä¹‹ã€‚
             path = pathFile.getAbsolutePath();
         } else {
-            // ·ñÔòÒÔbasedirÎª»ù±¾Â·¾¶¡£
-            // ÏÂÃæÈ·±£basedir±¾ÉíÎª¾ø¶ÔÂ·¾¶¡£
+            // å¦åˆ™ä»¥basedirä¸ºåŸºæœ¬è·¯å¾„ã€‚
+            // ä¸‹é¢ç¡®ä¿basediræœ¬èº«ä¸ºç»å¯¹è·¯å¾„ã€‚
             basedir = trimToEmpty(basedir);
 
             File baseFile = new File(basedir);
@@ -334,29 +334,29 @@ public class FileUtil {
     }
 
     // ==========================================================================
-    // È¡µÃÏà¶ÔÓÚÖ¸¶¨basedirÏà¶ÔÂ·¾¶¡£
+    // å–å¾—ç›¸å¯¹äºæŒ‡å®šbasedirç›¸å¯¹è·¯å¾„ã€‚
     // ==========================================================================
 
     /**
-     * È¡µÃÏà¶ÔÓÚÖ¸¶¨¸ùÄ¿Â¼µÄÏà¶ÔÂ·¾¶¡£
+     * å–å¾—ç›¸å¯¹äºæŒ‡å®šæ ¹ç›®å½•çš„ç›¸å¯¹è·¯å¾„ã€‚
      * 
-     * @param basedir ¸ùÄ¿Â¼
-     * @param path Òª¼ÆËãµÄÂ·¾¶
-     * @return Èç¹û<code>path</code>ºÍ<code>basedir</code>ÊÇ¼æÈİµÄ£¬Ôò·µ»ØÏà¶ÔÓÚ
-     *         <code>basedir</code>µÄÏà¶ÔÂ·¾¶£¬·ñÔò·µ»Ø<code>path</code>±¾Éí¡£
-     * @throws IllegalPathException Èç¹ûÂ·¾¶·Ç·¨
+     * @param basedir æ ¹ç›®å½•
+     * @param path è¦è®¡ç®—çš„è·¯å¾„
+     * @return å¦‚æœ<code>path</code>å’Œ<code>basedir</code>æ˜¯å…¼å®¹çš„ï¼Œåˆ™è¿”å›ç›¸å¯¹äº
+     *         <code>basedir</code>çš„ç›¸å¯¹è·¯å¾„ï¼Œå¦åˆ™è¿”å›<code>path</code>æœ¬èº«ã€‚
+     * @throws IllegalPathException å¦‚æœè·¯å¾„éæ³•
      */
     public static String getRelativePath(String basedir, String path) throws IllegalPathException {
-        // È¡µÃ¹æ¸ñ»¯µÄbasedir£¬È·±£ÆäÎª¾ø¶ÔÂ·¾¶
+        // å–å¾—è§„æ ¼åŒ–çš„basedirï¼Œç¡®ä¿å…¶ä¸ºç»å¯¹è·¯å¾„
         basedir = normalizeAbsolutePath(basedir);
 
-        // È¡µÃ¹æ¸ñ»¯µÄpath
+        // å–å¾—è§„æ ¼åŒ–çš„path
         path = getAbsolutePathBasedOn(basedir, path);
 
-        // ±£ÁôpathÎ²²¿µÄ"/"
+        // ä¿ç•™pathå°¾éƒ¨çš„"/"
         boolean endsWithSlash = path.endsWith("/");
 
-        // °´"/"·Ö¸ôbasedirºÍpath
+        // æŒ‰"/"åˆ†éš”basedirå’Œpath
         String[] baseParts = StringUtil.split(basedir, '/');
         String[] parts = StringUtil.split(path, '/');
         StringBuilder buf = new StringBuilder();
@@ -388,14 +388,14 @@ public class FileUtil {
     }
 
     // ==========================================================================
-    // È¡µÃÎÄ¼şÃûºó×º¡£
+    // å–å¾—æ–‡ä»¶ååç¼€ã€‚
     // ==========================================================================
 
     /**
-     * È¡µÃÎÄ¼şÂ·¾¶µÄºó×º¡£
+     * å–å¾—æ–‡ä»¶è·¯å¾„çš„åç¼€ã€‚
      * <ul>
-     * <li>Î´Ö¸¶¨ÎÄ¼şÃû - ·µ»Ø<code>null</code>¡£</li>
-     * <li>ÎÄ¼şÃûÃ»ÓĞºó×º - ·µ»Ø<code>null</code>¡£</li>
+     * <li>æœªæŒ‡å®šæ–‡ä»¶å - è¿”å›<code>null</code>ã€‚</li>
+     * <li>æ–‡ä»¶åæ²¡æœ‰åç¼€ - è¿”å›<code>null</code>ã€‚</li>
      * </ul>
      */
     public static String getExtension(String fileName) {
@@ -403,10 +403,10 @@ public class FileUtil {
     }
 
     /**
-     * È¡µÃÎÄ¼şÂ·¾¶µÄºó×º¡£
+     * å–å¾—æ–‡ä»¶è·¯å¾„çš„åç¼€ã€‚
      * <ul>
-     * <li>Î´Ö¸¶¨ÎÄ¼şÃû - ·µ»Ø<code>null</code>¡£</li>
-     * <li>ÎÄ¼şÃûÃ»ÓĞºó×º - ·µ»Ø<code>null</code>¡£</li>
+     * <li>æœªæŒ‡å®šæ–‡ä»¶å - è¿”å›<code>null</code>ã€‚</li>
+     * <li>æ–‡ä»¶åæ²¡æœ‰åç¼€ - è¿”å›<code>null</code>ã€‚</li>
      * </ul>
      */
     public static String getExtension(String fileName, boolean toLowerCase) {
@@ -414,10 +414,10 @@ public class FileUtil {
     }
 
     /**
-     * È¡µÃÎÄ¼şÂ·¾¶µÄºó×º¡£
+     * å–å¾—æ–‡ä»¶è·¯å¾„çš„åç¼€ã€‚
      * <ul>
-     * <li>Î´Ö¸¶¨ÎÄ¼şÃû - ·µ»Ø<code>null</code>¡£</li>
-     * <li>ÎÄ¼şÃûÃ»ÓĞºó×º - ·µ»ØÖ¸¶¨×Ö·û´®<code>nullExt</code>¡£</li>
+     * <li>æœªæŒ‡å®šæ–‡ä»¶å - è¿”å›<code>null</code>ã€‚</li>
+     * <li>æ–‡ä»¶åæ²¡æœ‰åç¼€ - è¿”å›æŒ‡å®šå­—ç¬¦ä¸²<code>nullExt</code>ã€‚</li>
      * </ul>
      */
     public static String getExtension(String fileName, String nullExt) {
@@ -425,10 +425,10 @@ public class FileUtil {
     }
 
     /**
-     * È¡µÃÎÄ¼şÂ·¾¶µÄºó×º¡£
+     * å–å¾—æ–‡ä»¶è·¯å¾„çš„åç¼€ã€‚
      * <ul>
-     * <li>Î´Ö¸¶¨ÎÄ¼şÃû - ·µ»Ø<code>null</code>¡£</li>
-     * <li>ÎÄ¼şÃûÃ»ÓĞºó×º - ·µ»ØÖ¸¶¨×Ö·û´®<code>nullExt</code>¡£</li>
+     * <li>æœªæŒ‡å®šæ–‡ä»¶å - è¿”å›<code>null</code>ã€‚</li>
+     * <li>æ–‡ä»¶åæ²¡æœ‰åç¼€ - è¿”å›æŒ‡å®šå­—ç¬¦ä¸²<code>nullExt</code>ã€‚</li>
      * </ul>
      */
     public static String getExtension(String fileName, String nullExt, boolean toLowerCase) {
@@ -456,20 +456,20 @@ public class FileUtil {
     }
 
     /**
-     * È¡µÃÖ¸¶¨Â·¾¶µÄÃû³ÆºÍºó×º¡£
+     * å–å¾—æŒ‡å®šè·¯å¾„çš„åç§°å’Œåç¼€ã€‚
      * 
-     * @param path Â·¾¶
-     * @return Â·¾¶ºÍºó×º
+     * @param path è·¯å¾„
+     * @return è·¯å¾„å’Œåç¼€
      */
     public static FileNameAndExtension getFileNameAndExtension(String path) {
         return getFileNameAndExtension(path, false);
     }
 
     /**
-     * È¡µÃÖ¸¶¨Â·¾¶µÄÃû³ÆºÍºó×º¡£
+     * å–å¾—æŒ‡å®šè·¯å¾„çš„åç§°å’Œåç¼€ã€‚
      * 
-     * @param path Â·¾¶
-     * @return Â·¾¶ºÍºó×º
+     * @param path è·¯å¾„
+     * @return è·¯å¾„å’Œåç¼€
      */
     public static FileNameAndExtension getFileNameAndExtension(String path, boolean extensionToLowerCase) {
         path = StringUtil.trimToEmpty(path);
@@ -478,7 +478,7 @@ public class FileUtil {
         String extension = null;
 
         if (!StringUtil.isEmpty(path)) {
-            // Èç¹ûÕÒµ½ºó×º£¬Ôòindex >= 0£¬ÇÒextension != null£¨³ı·ÇnameÒÔ.½áÎ²£©
+            // å¦‚æœæ‰¾åˆ°åç¼€ï¼Œåˆ™index >= 0ï¼Œä¸”extension != nullï¼ˆé™¤énameä»¥.ç»“å°¾ï¼‰
             int index = path.lastIndexOf('.');
 
             if (index >= 0) {
@@ -499,12 +499,12 @@ public class FileUtil {
     }
 
     /**
-     * ¹æ¸ñ»¯ÎÄ¼şÃûºó×º¡£
+     * è§„æ ¼åŒ–æ–‡ä»¶ååç¼€ã€‚
      * <ul>
-     * <li>³ıÈ¥Á½±ß¿Õ°×¡£</li>
-     * <li>×ª³ÉĞ¡Ğ´¡£</li>
-     * <li>³ıÈ¥¿ªÍ·µÄ¡°<code>.</code>¡±¡£</li>
-     * <li>¶Ô¿Õ°×µÄºó×º£¬·µ»Ø<code>null</code>¡£</li>
+     * <li>é™¤å»ä¸¤è¾¹ç©ºç™½ã€‚</li>
+     * <li>è½¬æˆå°å†™ã€‚</li>
+     * <li>é™¤å»å¼€å¤´çš„â€œ<code>.</code>â€ã€‚</li>
+     * <li>å¯¹ç©ºç™½çš„åç¼€ï¼Œè¿”å›<code>null</code>ã€‚</li>
      * </ul>
      */
     public static String normalizeExtension(String ext) {
@@ -525,8 +525,8 @@ public class FileUtil {
             "(file:/*[a-z]:)|(\\w+://.+?/)|((jar|zip):.+!/)|(\\w+:)", Pattern.CASE_INSENSITIVE);
 
     /**
-     * ¸ù¾İÖ¸¶¨urlºÍÏà¶ÔÂ·¾¶£¬¼ÆËã³öÏà¶ÔÂ·¾¶Ëù¶ÔÓ¦µÄÍêÕûurl¡£ÀàËÆÓÚ<code>URI.resolve()</code>
-     * ·½·¨£¬È»ºóºóÕß²»ÄÜÕıÈ·´¦ÀíjarÀàĞÍµÄURL¡£
+     * æ ¹æ®æŒ‡å®šurlå’Œç›¸å¯¹è·¯å¾„ï¼Œè®¡ç®—å‡ºç›¸å¯¹è·¯å¾„æ‰€å¯¹åº”çš„å®Œæ•´urlã€‚ç±»ä¼¼äº<code>URI.resolve()</code>
+     * æ–¹æ³•ï¼Œç„¶ååè€…ä¸èƒ½æ­£ç¡®å¤„ç†jarç±»å‹çš„URLã€‚
      */
     public static String resolve(String url, String relativePath) {
         url = trimToEmpty(url);

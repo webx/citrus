@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.moduleloader;
 
 /**
- * ´ú±íÖ´ĞĞaction eventÊ±²úÉúµÄÒì³£¡£
+ * ä»£è¡¨æ‰§è¡Œaction eventæ—¶äº§ç”Ÿçš„å¼‚å¸¸ã€‚
  * 
  * @author Michael Zhou
  */
@@ -26,35 +26,35 @@ public class ActionEventException extends RuntimeException {
     private static final long serialVersionUID = 3258133565630658361L;
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      */
     public ActionEventException() {
         super();
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param message Òì³£ĞÅÏ¢
+     * @param message å¼‚å¸¸ä¿¡æ¯
      */
     public ActionEventException(String message) {
         super(message);
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param message Òì³£ĞÅÏ¢
-     * @param cause Òì³£Ô­Òò
+     * @param message å¼‚å¸¸ä¿¡æ¯
+     * @param cause å¼‚å¸¸åŸå› 
      */
     public ActionEventException(String message, Throwable cause) {
         super(message, cause);
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param cause Òì³£Ô­Òò
+     * @param cause å¼‚å¸¸åŸå› 
      */
     public ActionEventException(Throwable cause) {
         super(cause);

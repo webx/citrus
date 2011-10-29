@@ -21,20 +21,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * ½«ÇëÇóÓ³Éäµ½ÊÊµ±µÄrequest handler¡£
+ * å°†è¯·æ±‚æ˜ å°„åˆ°é€‚å½“çš„request handlerã€‚
  * 
  * @author Michael Zhou
  */
 public interface RequestHandlerMapping {
     /**
-     * È¡µÃËùÓĞ¿ÉÓÃµÄrequest handlerµÄÃû³Æ¡£
+     * å–å¾—æ‰€æœ‰å¯ç”¨çš„request handlerçš„åç§°ã€‚
      */
     String[] getRequestHandlerNames();
 
     /**
-     * È¡µÃrequest¶ÔÓ¦µÄhandler¼°Ïà¹ØĞÅÏ¢¡£
+     * å–å¾—requestå¯¹åº”çš„handleråŠç›¸å…³ä¿¡æ¯ã€‚
      * <p>
-     * Èç¹û·µ»Ø<code>null</code>´ú±íÎŞ¶ÔÓ¦µÄ<code>RequestHandler</code>¡£
+     * å¦‚æœè¿”å›<code>null</code>ä»£è¡¨æ— å¯¹åº”çš„<code>RequestHandler</code>ã€‚
      * </p>
      */
     RequestHandlerContext getRequestHandler(HttpServletRequest request, HttpServletResponse response);

@@ -30,7 +30,7 @@ import com.alibaba.citrus.service.form.support.CompareOperator;
 import com.alibaba.citrus.service.form.support.NumberSupport;
 
 /**
- * ºÍÁíÒ»¸öfield±È½ÏÊı×ÖµÄvalidator¡£
+ * å’Œå¦ä¸€ä¸ªfieldæ¯”è¾ƒæ•°å­—çš„validatorã€‚
  * 
  * @author Michael Zhou
  */
@@ -39,56 +39,56 @@ public class NumberCompareValidator extends AbstractNumberValidator {
     private CompareOperator op;
 
     /**
-     * È¡µÃÒª±È½ÏµÄfieldÃû³Æ¡£
+     * å–å¾—è¦æ¯”è¾ƒçš„fieldåç§°ã€‚
      */
     public String getFieldName() {
         return fieldName;
     }
 
     /**
-     * È¡µÃ±È½Ï²Ù×÷µÄÀàĞÍ¡£
+     * å–å¾—æ¯”è¾ƒæ“ä½œçš„ç±»å‹ã€‚
      */
     public CompareOperator getOp() {
         return op;
     }
 
     /**
-     * ÉèÖÃµÈÓÚ²Ù×÷¡£
+     * è®¾ç½®ç­‰äºæ“ä½œã€‚
      */
     public void setEqualTo(String fieldName) {
         setFieldName(equalTo, fieldName);
     }
 
     /**
-     * ÉèÖÃ²»µÈÓÚ²Ù×÷¡£
+     * è®¾ç½®ä¸ç­‰äºæ“ä½œã€‚
      */
     public void setNotEqualTo(String fieldName) {
         setFieldName(notEqualTo, fieldName);
     }
 
     /**
-     * ÉèÖÃĞ¡ÓÚ²Ù×÷¡£
+     * è®¾ç½®å°äºæ“ä½œã€‚
      */
     public void setLessThan(String fieldName) {
         setFieldName(lessThan, fieldName);
     }
 
     /**
-     * ÉèÖÃ´óÓÚ²Ù×÷¡£
+     * è®¾ç½®å¤§äºæ“ä½œã€‚
      */
     public void setGreaterThan(String fieldName) {
         setFieldName(greaterThan, fieldName);
     }
 
     /**
-     * ÉèÖÃĞ¡ÓÚµÈÓÚ²Ù×÷¡£
+     * è®¾ç½®å°äºç­‰äºæ“ä½œã€‚
      */
     public void setLessThanOrEqualTo(String fieldName) {
         setFieldName(lessThanOrEqualTo, fieldName);
     }
 
     /**
-     * ÉèÖÃ´óÓÚµÈÓÚ²Ù×÷¡£
+     * è®¾ç½®å¤§äºç­‰äºæ“ä½œã€‚
      */
     public void setGreaterThanOrEqualTo(String fieldName) {
         setFieldName(greaterThanOrEqualTo, fieldName);
@@ -100,9 +100,9 @@ public class NumberCompareValidator extends AbstractNumberValidator {
     }
 
     /**
-     * ÑéÖ¤²ÎÊı²¢³õÊ¼»¯¡£
+     * éªŒè¯å‚æ•°å¹¶åˆå§‹åŒ–ã€‚
      * <p>
-     * ´Ë³õÊ¼»¯·½·¨¿ÉÒÔÈ¡µ½Í¬×éÖĞµÄÆäËüfieldConfig¡£
+     * æ­¤åˆå§‹åŒ–æ–¹æ³•å¯ä»¥å–åˆ°åŒç»„ä¸­çš„å…¶å®ƒfieldConfigã€‚
      * </p>
      */
     @Override
@@ -118,7 +118,7 @@ public class NumberCompareValidator extends AbstractNumberValidator {
     }
 
     /**
-     * ÑéÖ¤Ò»¸ö×Ö¶Î¡£
+     * éªŒè¯ä¸€ä¸ªå­—æ®µã€‚
      */
     @Override
     protected boolean validate(Context context, String value) {
@@ -129,7 +129,7 @@ public class NumberCompareValidator extends AbstractNumberValidator {
         try {
             return getOp().accept(thisValue.compareTo(otherValue));
         } catch (IllegalArgumentException e) {
-            return false; // °üÀ¨NumberFormatException¡£Èç¹ûgetValueÊ§°Ü£¬ÑéÖ¤Ê§°Ü¡£
+            return false; // åŒ…æ‹¬NumberFormatExceptionã€‚å¦‚æœgetValueå¤±è´¥ï¼ŒéªŒè¯å¤±è´¥ã€‚
         }
     }
 

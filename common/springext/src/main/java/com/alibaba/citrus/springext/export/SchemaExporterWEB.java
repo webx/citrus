@@ -28,9 +28,9 @@ import com.alibaba.citrus.util.templatelite.Template;
 import com.alibaba.citrus.util.templatelite.TextWriter;
 
 /**
- * ÔÚWEBÉÏµ÷ÓÃ<code>SchemaExporter</code>£¬¿ÉÒÔ°ÑschemaÏÔÊ¾ÔÚWEBÒ³ÃæÖĞ¡£ *
+ * åœ¨WEBä¸Šè°ƒç”¨<code>SchemaExporter</code>ï¼Œå¯ä»¥æŠŠschemaæ˜¾ç¤ºåœ¨WEBé¡µé¢ä¸­ã€‚ *
  * <p>
- * ±¾Àà²»ÒÀÀµÓÚservlet api¡£requestºÍresponse´´½¨ÊÊÅäÆ÷¡£
+ * æœ¬ç±»ä¸ä¾èµ–äºservlet apiã€‚requestå’Œresponseåˆ›å»ºé€‚é…å™¨ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -48,9 +48,9 @@ public class SchemaExporterWEB extends SchemaExporter {
             Entry entry = getEntry(resourceName);
 
             if (entry.isDirectory()) {
-                renderListPage(request, entry); // äÖÈ¾listÒ³Ãæ
+                renderListPage(request, entry); // æ¸²æŸ“listé¡µé¢
             } else {
-                renderContentPage(request, entry); // äÖÈ¾schemaÄÚÈİÒ³Ãæ
+                renderContentPage(request, entry); // æ¸²æŸ“schemaå†…å®¹é¡µé¢
             }
         }
     };
@@ -71,25 +71,25 @@ public class SchemaExporterWEB extends SchemaExporter {
 
     public interface MenuProvider {
         /**
-         * ÓÉ×ÓÀàÔÚlistÒ³ÃæÖĞ²åÈë²Ëµ¥¡£
+         * ç”±å­ç±»åœ¨listé¡µé¢ä¸­æ’å…¥èœå•ã€‚
          */
         void renderMenuHead(RequestContext request) throws Exception;
 
         /**
-         * ÓÉ×ÓÀàÔÚlistÒ³ÃæÖĞ²åÈë²Ëµ¥¡£
+         * ç”±å­ç±»åœ¨listé¡µé¢ä¸­æ’å…¥èœå•ã€‚
          */
         void renderMenu(RequestContext request) throws Exception;
     }
 
     /**
-     * ´¦ÀíÇëÇó¡£
+     * å¤„ç†è¯·æ±‚ã€‚
      */
     public void processRequest(RequestContext request) throws IOException {
         processor.processRequest(request);
     }
 
     /**
-     * äÖÈ¾ÁĞ±íÒ³Ãæ¡£
+     * æ¸²æŸ“åˆ—è¡¨é¡µé¢ã€‚
      */
     private void renderListPage(final RequestContext request, final Entry rootEntry) throws IOException {
         PrintWriter out = request.getWriter("text/html; charset=UTF-8");
@@ -98,7 +98,7 @@ public class SchemaExporterWEB extends SchemaExporter {
     }
 
     /**
-     * äÖÈ¾schemaÎÄ¼şÒ³Ãæ¡£
+     * æ¸²æŸ“schemaæ–‡ä»¶é¡µé¢ã€‚
      */
     private void renderContentPage(RequestContext request, Entry entry) throws IOException {
         PrintWriter out = request.getWriter("text/xml; charset=UTF-8");

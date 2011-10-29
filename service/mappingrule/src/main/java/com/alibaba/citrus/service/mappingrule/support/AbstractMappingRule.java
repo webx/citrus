@@ -31,10 +31,10 @@ import com.alibaba.citrus.service.mappingrule.MappingRuleException;
 import com.alibaba.citrus.springext.support.BeanSupport;
 
 public abstract class AbstractMappingRule extends BeanSupport implements MappingRule, ProductionModeAware {
-    /** ±»×ª»»µÄÃû³ÆµÄ·Ö¸ô·û¡£ */
+    /** è¢«è½¬æ¢çš„åç§°çš„åˆ†éš”ç¬¦ã€‚ */
     public static final String NAME_SEPARATOR = ",/";
 
-    /** ±»×ª»»µÄÃû³ÆµÄºó×º·Ö¸ô·û¡£ */
+    /** è¢«è½¬æ¢çš„åç§°çš„åç¼€åˆ†éš”ç¬¦ã€‚ */
     public static final String EXTENSION_SEPARATOR = ".";
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
@@ -51,10 +51,10 @@ public abstract class AbstractMappingRule extends BeanSupport implements Mapping
     }
 
     /**
-     * È¡µÃÄ¬ÈÏµÄ<code>cacheEnabled</code>Öµ¡£
+     * å–å¾—é»˜è®¤çš„<code>cacheEnabled</code>å€¼ã€‚
      * <p>
-     * Ä¬ÈÏÇé¿öÏÂÈ¡¾öÓÚµ±Ç°ÊÇ·ñÎªÉú²úÄ£Ê½¡£µ±<code>productionMode</code>Îª<code>true</code>
-     * Ê±£¬´ò¿ªcache¡£×ÓÀà¿ÉÒÔ¸Ä±ä´ËĞĞÎª¡£
+     * é»˜è®¤æƒ…å†µä¸‹å–å†³äºå½“å‰æ˜¯å¦ä¸ºç”Ÿäº§æ¨¡å¼ã€‚å½“<code>productionMode</code>ä¸º<code>true</code>
+     * æ—¶ï¼Œæ‰“å¼€cacheã€‚å­ç±»å¯ä»¥æ”¹å˜æ­¤è¡Œä¸ºã€‚
      * </p>
      */
     protected boolean isCacheEnabledByDefault() {
@@ -99,8 +99,8 @@ public abstract class AbstractMappingRule extends BeanSupport implements Mapping
         if (isCacheEnabled()) {
             mappedName = cache.get(name);
 
-            // Èç¹ûcacheÖĞÒÑ¾­ÓĞÖµÁË£¬ÔòÖ±½Ó·µ»Ø¡£
-            // ×¢Òâ£¬cacheÖĞµÄ¿Õ×Ö·û´®Öµ´ú±ínull¡£
+            // å¦‚æœcacheä¸­å·²ç»æœ‰å€¼äº†ï¼Œåˆ™ç›´æ¥è¿”å›ã€‚
+            // æ³¨æ„ï¼Œcacheä¸­çš„ç©ºå­—ç¬¦ä¸²å€¼ä»£è¡¨nullã€‚
             if (mappedName != null) {
                 return trimToNull(mappedName);
             }
@@ -112,7 +112,7 @@ public abstract class AbstractMappingRule extends BeanSupport implements Mapping
 
         log.debug("doMapping(\"{}\") returned: ", name, mappedName);
 
-        // ×¢Òâ£¬¿ÉÒÔcacheÖµÎªnullµÄ½á¹û£¨½«null×ª³É¿Õ×Ö·û´®²¢±£´æ£©
+        // æ³¨æ„ï¼Œå¯ä»¥cacheå€¼ä¸ºnullçš„ç»“æœï¼ˆå°†nullè½¬æˆç©ºå­—ç¬¦ä¸²å¹¶ä¿å­˜ï¼‰
         if (isCacheEnabled()) {
             cache.put(name, trimToEmpty(mappedName));
         }
@@ -121,19 +121,19 @@ public abstract class AbstractMappingRule extends BeanSupport implements Mapping
     }
 
     /**
-     * ½«Ö¸¶¨Ãû³ÆÓ³Éä³ÉÖ¸¶¨ÀàĞÍµÄÃû³Æ¡£Èç¹ûÓ³ÉäÊ§°Ü£¬Ôò·µ»Ø<code>null</code>¡£
+     * å°†æŒ‡å®šåç§°æ˜ å°„æˆæŒ‡å®šç±»å‹çš„åç§°ã€‚å¦‚æœæ˜ å°„å¤±è´¥ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     protected abstract String doMapping(String name);
 
     /**
-     * Å×³öÒì³££¬±íÊ¾Òª×ª»»µÄÃû³Æ·Ç·¨»ò×ª»»Ê§°Ü¡£
+     * æŠ›å‡ºå¼‚å¸¸ï¼Œè¡¨ç¤ºè¦è½¬æ¢çš„åç§°éæ³•æˆ–è½¬æ¢å¤±è´¥ã€‚
      */
     protected static String throwInvalidNameException(String name) {
         return throwInvalidNameException(name, null);
     }
 
     /**
-     * Å×³öÒì³££¬±íÊ¾Òª×ª»»µÄÃû³Æ·Ç·¨»ò×ª»»Ê§°Ü¡£
+     * æŠ›å‡ºå¼‚å¸¸ï¼Œè¡¨ç¤ºè¦è½¬æ¢çš„åç§°éæ³•æˆ–è½¬æ¢å¤±è´¥ã€‚
      */
     protected static String throwInvalidNameException(String name, Exception e) {
         throw new MappingRuleException("Failed to do mapping for name \"" + name + "\"", e);

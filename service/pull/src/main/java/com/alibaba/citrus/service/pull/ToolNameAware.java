@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.pull;
 
 /**
- * Pull tool¿ÉÒÔÈ¡µÃ×Ô¼ºµÄÃû×Ö¡£
+ * Pull toolå¯ä»¥å–å¾—è‡ªå·±çš„åå­—ã€‚
  * 
  * @author Michael Zhou
  */

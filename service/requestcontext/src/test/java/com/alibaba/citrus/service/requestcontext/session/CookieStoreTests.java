@@ -36,7 +36,7 @@ import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 import com.alibaba.citrus.service.requestcontext.util.CookieSupport;
 
 /**
- * ²âÊÔcookie store¡£
+ * æµ‹è¯•cookie storeã€‚
  * 
  * @author Michael Zhou
  */
@@ -244,7 +244,7 @@ public class CookieStoreTests extends AbstractRequestContextsTests<SessionReques
 
         assertEquals(true, session.isNew());
         assertEquals(null, session.getAttribute("count"));
-        assertEquals("baobao", session.getAttribute("loginName")); // ´æ»îµ½ÏÖÔÚ
+        assertEquals("baobao", session.getAttribute("loginName")); // å­˜æ´»åˆ°çŽ°åœ¨
 
         requestContexts.commitRequestContext(requestContext);
         commitToClient();
@@ -389,7 +389,7 @@ public class CookieStoreTests extends AbstractRequestContextsTests<SessionReques
 
         session.setAttribute("count", 0);
 
-        // Î±Ôìchecksum cookie£¬ÄÚÈÝ²»Æ¥Åä
+        // ä¼ªé€ checksum cookieï¼Œå†…å®¹ä¸åŒ¹é…
         CookieSupport cookie = new CookieSupport("myCookieStoresum", "hello");
         cookie.setDomain(".taobao.com");
         cookie.setPath("/");
@@ -473,10 +473,10 @@ public class CookieStoreTests extends AbstractRequestContextsTests<SessionReques
         // new request 2
         prepareWebClient();
         invokeNoopServlet("/servlet");
-        noSession = true; // ²»Òª´´½¨session£¬ÊÖ¹¤½¨cookies
+        noSession = true; // ä¸è¦åˆ›å»ºsessionï¼Œæ‰‹å·¥å»ºcookies
         initRequestContext("session_cookie");
 
-        // Î±Ôìchecksum cookie£¬ÊýÁ¿²»Æ¥Åä
+        // ä¼ªé€ checksum cookieï¼Œæ•°é‡ä¸åŒ¹é…
         CookieSupport cookie = new CookieSupport("JSESSIONID", sessionID);
         cookie.setDomain(".taobao.com");
         cookie.setPath("/");

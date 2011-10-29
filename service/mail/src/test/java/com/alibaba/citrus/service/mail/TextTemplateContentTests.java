@@ -25,7 +25,7 @@ import org.junit.Test;
 import com.alibaba.citrus.service.mail.builder.content.TextTemplateContent;
 
 /**
- * ²âÊÔ»ùÓÚÄ£°åµÄÎÄ±¾content¡£
+ * æµ‹è¯•åŸºäºæ¨¡æ¿çš„æ–‡æœ¬contentã€‚
  * 
  * @author Michael Zhou
  */

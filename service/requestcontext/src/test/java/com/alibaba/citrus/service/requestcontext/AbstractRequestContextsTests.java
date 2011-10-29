@@ -65,7 +65,7 @@ import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
 
 /**
- * ÓÃÀ´²âÊÔRequestContextChainingService¼°Ïà¹ØÀàµÄ»ùÀà¡£
+ * ç”¨æ¥æµ‹è¯•RequestContextChainingServiceåŠç›¸å…³ç±»çš„åŸºç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -95,14 +95,14 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
     protected HttpServletResponse newResponse;
 
     /**
-     * ´´½¨beanFactory¡£
+     * åˆ›å»ºbeanFactoryã€‚
      */
     protected final static void createBeanFactory(String configLocation) {
         factory = new XmlApplicationContext(new FileSystemResource(new File(srcdir, configLocation)));
     }
 
     /**
-     * ´´½¨web client£¬×¢²áservlets¡£
+     * åˆ›å»ºweb clientï¼Œæ³¨å†Œservletsã€‚
      */
     @Before
     public final void prepareWebClient() throws Exception {
@@ -127,7 +127,7 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
     }
 
     /**
-     * µ÷ÓÃnoop servlet£¬È¡µÃrequest/response¡£
+     * è°ƒç”¨noop servletï¼Œå–å¾—request/responseã€‚
      */
     protected final void invokeNoopServlet(String uri) throws Exception {
         if (uri != null && uri.startsWith("http")) {
@@ -140,7 +140,7 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
     }
 
     /**
-     * µ÷ÓÃnoop servlet£¬È¡µÃrequest/response¡£
+     * è°ƒç”¨noop servletï¼Œå–å¾—request/responseã€‚
      */
     protected final void invokeNoopServlet(WebRequest req) throws Exception {
         invocationContext = client.newInvocation(req);
@@ -150,17 +150,17 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
     }
 
     /**
-     * µ÷ÓÃreadfile servlet£¬È¡µÃrequest/response¡£
+     * è°ƒç”¨readfile servletï¼Œå–å¾—request/responseã€‚
      */
     protected final void invokeReadFileServlet(String htmlfile) throws Exception {
         String uri = URI.create("http://www.taobao.com/readfile" + "?file=" + htmlfile).normalize().toString();
 
-        // È¡µÃ³õÊ¼Ò³ÃæºÍform
+        // å–å¾—åˆå§‹é¡µé¢å’Œform
         WebResponse response = client.getResponse(new GetMethodWebRequest(uri));
 
         WebForm form = response.getFormWithName("myform");
 
-        // È¡µÃÌá½»formµÄrequest
+        // å–å¾—æäº¤formçš„request
         WebRequest request = form.getRequest();
 
         request.setParameter("myparam", new String[] { "hello",
@@ -182,8 +182,8 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
 
         this.request = new MyHttpRequest(invocationContext.getRequest(), uri);
 
-        // ÒòÎªÒ³ÃæµÄcontent typeÊÇtext/html; charset=UTF-8£¬
-        // ËùÒÔÓ¦¸ÃÒÔUTF-8·½Ê½½âÎörequest¡£
+        // å› ä¸ºé¡µé¢çš„content typeæ˜¯text/html; charset=UTF-8ï¼Œ
+        // æ‰€ä»¥åº”è¯¥ä»¥UTF-8æ–¹å¼è§£ærequestã€‚
         this.request.setCharacterEncoding("UTF-8");
 
         this.response = new MyHttpResponse(invocationContext.getResponse());
@@ -191,14 +191,14 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
     }
 
     /**
-     * È¡µÃrequest context¡£
+     * å–å¾—request contextã€‚
      */
     protected final void initRequestContext() throws Exception {
         initRequestContext(null);
     }
 
     /**
-     * È¡µÃrequest context¡£
+     * å–å¾—request contextã€‚
      */
     protected final void initRequestContext(String beanName) throws Exception {
         if (beanName == null) {
@@ -225,14 +225,14 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
     }
 
     /**
-     * ½«·şÎñ¶ËresponseÌá½»µ½client¡£
+     * å°†æœåŠ¡ç«¯responseæäº¤åˆ°clientã€‚
      */
     protected final void commitToClient() throws Exception {
         clientResponse = client.getResponse(invocationContext);
     }
 
     /**
-     * ´Órequest context interfaceÖĞÈ¡µÃÄ¬ÈÏbeanÃû³Æ¡£
+     * ä»request context interfaceä¸­å–å¾—é»˜è®¤beanåç§°ã€‚
      */
     protected String getDefaultBeanName() {
         String name = requestContextInterface.getSimpleName();
@@ -244,7 +244,7 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
     }
 
     /**
-     * ²»×öÈÎºÎÊÂµÄservlet¡£
+     * ä¸åšä»»ä½•äº‹çš„servletã€‚
      */
     public static class NoopServlet extends HttpServlet {
         private static final long serialVersionUID = 3034658026956449398L;
@@ -262,7 +262,7 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
     }
 
     /**
-     * ·µ»ØÎÄ¼şÄÚÈİµÄservlet¡£
+     * è¿”å›æ–‡ä»¶å†…å®¹çš„servletã€‚
      */
     public static class ReadFileServlet extends HttpServlet {
         private static final long serialVersionUID = 3689913963685360948L;
@@ -288,8 +288,8 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
     }
 
     /**
-     * ÓÉÓÚhttpunitÄ¿Ç°Î´ÊµÏÖsetCharacterEncoding·½·¨£¬getQueryString()Ò²ÊµÏÖµÃÓĞÎÊÌâ£¬
-     * ËùÒÔÖ»ÄÜ½«request°ü×°Ò»ÏÂ¡£
+     * ç”±äºhttpunitç›®å‰æœªå®ç°setCharacterEncodingæ–¹æ³•ï¼ŒgetQueryString()ä¹Ÿå®ç°å¾—æœ‰é—®é¢˜ï¼Œ
+     * æ‰€ä»¥åªèƒ½å°†requeståŒ…è£…ä¸€ä¸‹ã€‚
      */
     public static class MyHttpRequest extends HttpServletRequestWrapper {
         private String charset;
@@ -330,7 +330,7 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
         }
 
         /**
-         * Ä¬ÈÏÊµÏÖ×ÜÊÇ·µ»Ølocalhost£¬Ö»ºÃ¸²¸Ç´Ë·½·¨¡£
+         * é»˜è®¤å®ç°æ€»æ˜¯è¿”å›localhostï¼Œåªå¥½è¦†ç›–æ­¤æ–¹æ³•ã€‚
          */
         @Override
         public String getServerName() {
@@ -342,7 +342,7 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
         }
 
         /**
-         * Ä¬ÈÏÊµÏÖ×ÜÊÇ·µ»Ø0£¬Ö»ºÃ¸²¸Ç´Ë·½·¨¡£
+         * é»˜è®¤å®ç°æ€»æ˜¯è¿”å›0ï¼Œåªå¥½è¦†ç›–æ­¤æ–¹æ³•ã€‚
          */
         @Override
         public int getServerPort() {
@@ -354,7 +354,7 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
         }
 
         /**
-         * ¼àÊÓgetSession·½·¨µÄµ÷ÓÃ¡£
+         * ç›‘è§†getSessionæ–¹æ³•çš„è°ƒç”¨ã€‚
          */
         public boolean isSessionCreated() {
             return sessionCreated;
@@ -377,7 +377,7 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
     }
 
     /**
-     * ÓÉÓÚhttpunitÄ¿Ç°Î´ÊµÏÖcommitÒÔºóÅ×IllegalStateException£¬ËùÒÔÖ»ÄÜ½«response°ü×°Ò»ÏÂ¡£
+     * ç”±äºhttpunitç›®å‰æœªå®ç°commitä»¥åæŠ›IllegalStateExceptionï¼Œæ‰€ä»¥åªèƒ½å°†responseåŒ…è£…ä¸€ä¸‹ã€‚
      */
     public static class MyHttpResponse extends HttpServletResponseWrapper {
         private boolean committed;
@@ -438,7 +438,7 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
 
         @Override
         public void setLocale(Locale locale) {
-            // ·ÀÖ¹unsupported operation exception
+            // é˜²æ­¢unsupported operation exception
         }
 
         @Override

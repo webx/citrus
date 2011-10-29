@@ -39,7 +39,7 @@ import com.alibaba.citrus.util.internal.LazyLoader;
 import com.alibaba.citrus.util.internal.LazyLoader.Loader;
 
 /**
- * ¶Ô{@link RawTypeInfo}µÄÊµÏÖ¡£
+ * å¯¹{@link RawTypeInfo}çš„å®ç°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -62,7 +62,7 @@ class RawTypeImpl extends AbstractGenericDeclarationInfo implements RawTypeInfo 
     RawTypeImpl(Class<?> rawClass) {
         super(rawClass);
 
-        // ÑÓ³Ù±éÀú²¢È¡µÃËùÓĞ¸¸ÀàºÍ¸¸½Ó¿Ú¡£
+        // å»¶è¿Ÿéå†å¹¶å–å¾—æ‰€æœ‰çˆ¶ç±»å’Œçˆ¶æ¥å£ã€‚
         this.supertypesLoader = LazyLoader.getDefault(new SupertypesLoader());
     }
 
@@ -160,7 +160,7 @@ class RawTypeImpl extends AbstractGenericDeclarationInfo implements RawTypeInfo 
     }
 
     /**
-     * È¡µÃ×Ö·û´®±íÊ¾¡£
+     * å–å¾—å­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      */
     @Override
     public String toString() {
@@ -173,7 +173,7 @@ class RawTypeImpl extends AbstractGenericDeclarationInfo implements RawTypeInfo 
     }
 
     /**
-     * ¸¸Àà¡¢½Ó¿ÚµÄĞÅÏ¢¡£
+     * çˆ¶ç±»ã€æ¥å£çš„ä¿¡æ¯ã€‚
      */
     private static class Supertypes {
         private final List<TypeInfo> supertypes;
@@ -237,7 +237,7 @@ class RawTypeImpl extends AbstractGenericDeclarationInfo implements RawTypeInfo 
                 supertypes.add(TypeInfo.OBJECT);
             }
 
-            // ´´½¨lists
+            // åˆ›å»ºlists
             List<TypeInfo> interfaces = createArrayList(interfaceCount);
             List<TypeInfo> superclasses = createArrayList(supertypes.size() - interfaceCount);
 
@@ -258,7 +258,7 @@ class RawTypeImpl extends AbstractGenericDeclarationInfo implements RawTypeInfo 
     }
 
     /**
-     * ´´½¨supertypesµÄ×°ÔØÆ÷¡£
+     * åˆ›å»ºsupertypesçš„è£…è½½å™¨ã€‚
      */
     private class SupertypesLoader implements Loader<Supertypes, Object> {
         public Supertypes load(Object context) {
@@ -267,7 +267,7 @@ class RawTypeImpl extends AbstractGenericDeclarationInfo implements RawTypeInfo 
     }
 
     /**
-     * Ò»¸ö¼òµ¥µÄ½Ó¿Ú¶ÓÁĞ£¬ÓÃÀ´±éÀúËùÓĞ½Ó¿Ú¡£
+     * ä¸€ä¸ªç®€å•çš„æ¥å£é˜Ÿåˆ—ï¼Œç”¨æ¥éå†æ‰€æœ‰æ¥å£ã€‚
      */
     private static class InterfaceQueue {
         private final LinkedList<Type> queue = createLinkedList();

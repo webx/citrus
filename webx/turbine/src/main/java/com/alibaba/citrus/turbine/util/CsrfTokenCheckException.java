@@ -18,7 +18,7 @@
 package com.alibaba.citrus.turbine.util;
 
 /**
- * ´ú±íCSRF tokenÑéÖ¤Ê§°Ü¡£
+ * ä»£è¡¨CSRF tokenéªŒè¯å¤±è´¥ã€‚
  * 
  * @author Michael Zhou
  */

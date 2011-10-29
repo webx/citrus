@@ -31,7 +31,7 @@ import com.alibaba.citrus.service.form.impl.MessageContextFactory;
 import com.alibaba.citrus.service.form.impl.ValidatorContextImpl;
 
 /**
- * ×éºÏÊ½µÄvalidator»ùÀà¡£
+ * ç»„åˆå¼çš„validatoråŸºç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -40,14 +40,14 @@ public abstract class AbstractCompositeValidator extends AbstractValidator {
     private final List<Validator> validatorList = unmodifiableList(validators);
 
     /**
-     * È¡µÃ×Óvalidators¡£
+     * å–å¾—å­validatorsã€‚
      */
     public List<Validator> getValidators() {
         return validatorList;
     }
 
     /**
-     * ÉèÖÃ×Óvalidators¡£
+     * è®¾ç½®å­validatorsã€‚
      */
     public void setValidators(List<Validator> validators) {
         this.validators.clear();
@@ -60,9 +60,9 @@ public abstract class AbstractCompositeValidator extends AbstractValidator {
     }
 
     /**
-     * µ±GroupConfig±»³õÊ¼»¯Íê³ÉÒÔºó±»µ÷ÓÃ£¬´ËÊ±¿ÉÈ¡µÃÍ¬×éÖĞÆäËüµÄfields¡£
+     * å½“GroupConfigè¢«åˆå§‹åŒ–å®Œæˆä»¥åè¢«è°ƒç”¨ï¼Œæ­¤æ—¶å¯å–å¾—åŒç»„ä¸­å…¶å®ƒçš„fieldsã€‚
      * <p>
-     * ËùÓĞvalidatorµÄÍ¬Ãû·½·¨½«±»µ÷ÓÃ¡£
+     * æ‰€æœ‰validatorçš„åŒåæ–¹æ³•å°†è¢«è°ƒç”¨ã€‚
      * </p>
      */
     @Override
@@ -75,7 +75,7 @@ public abstract class AbstractCompositeValidator extends AbstractValidator {
     }
 
     /**
-     * Éî¶È¸´ÖÆvalidators¡£
+     * æ·±åº¦å¤åˆ¶validatorsã€‚
      */
     @Override
     public Validator clone() {
@@ -89,14 +89,14 @@ public abstract class AbstractCompositeValidator extends AbstractValidator {
     }
 
     /**
-     * ´´½¨Ò»¸öºÍÖ¸¶¨validatorÏà¹ØµÄcontext¡£
+     * åˆ›å»ºä¸€ä¸ªå’ŒæŒ‡å®švalidatorç›¸å…³çš„contextã€‚
      */
     protected final Context newContext(Context context, Validator validator) {
         return newContext(context, validator, context.getValue());
     }
 
     /**
-     * ´´½¨Ò»¸öºÍÖ¸¶¨validatorÏà¹ØµÄcontext£¬Ê¹ÓÃÖ¸¶¨µÄvalue¡£
+     * åˆ›å»ºä¸€ä¸ªå’ŒæŒ‡å®švalidatorç›¸å…³çš„contextï¼Œä½¿ç”¨æŒ‡å®šçš„valueã€‚
      */
     protected final Context newContext(Context context, Validator validator, Object value) {
         MessageContext expressionContext = MessageContextFactory.newInstance(context.getField(), validator);

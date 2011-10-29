@@ -22,35 +22,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * ½«Ò»¸ö¸ö<code>RequestContext</code>¶ÔÏó´®ÁªÆğÀ´µÄservice¡£
+ * å°†ä¸€ä¸ªä¸ª<code>RequestContext</code>å¯¹è±¡ä¸²è”èµ·æ¥çš„serviceã€‚
  * <p>
- * Í¨¹ıËü¿ÉÒÔÊµÏÖ¶àÖØ°ü×°µÄHTTP requestºÍresponse¡£
+ * é€šè¿‡å®ƒå¯ä»¥å®ç°å¤šé‡åŒ…è£…çš„HTTP requestå’Œresponseã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface RequestContextChainingService {
     /**
-     * È¡µÃËùÓĞµÄrequest contextµÄĞÅÏ¢¡£
+     * å–å¾—æ‰€æœ‰çš„request contextçš„ä¿¡æ¯ã€‚
      */
     RequestContextInfo<?>[] getRequestContextInfos();
 
     /**
-     * È¡µÃ<code>RequestContext</code>´®¡£
+     * å–å¾—<code>RequestContext</code>ä¸²ã€‚
      * 
-     * @param servletContext <code>ServletContext</code>¶ÔÏó
-     * @param request <code>HttpServletRequest</code>¶ÔÏó
-     * @param response <code>HttpServletResponse</code>¶ÔÏó
+     * @param servletContext <code>ServletContext</code>å¯¹è±¡
+     * @param request <code>HttpServletRequest</code>å¯¹è±¡
+     * @param response <code>HttpServletResponse</code>å¯¹è±¡
      * @return request context
      */
     RequestContext getRequestContext(ServletContext servletContext, HttpServletRequest request,
                                      HttpServletResponse response);
 
     /**
-     * ÓÉÍâµ½ÄÚµØµ÷ÓÃ<code>requestContext.commit()</code>·½·¨¡£
+     * ç”±å¤–åˆ°å†…åœ°è°ƒç”¨<code>requestContext.commit()</code>æ–¹æ³•ã€‚
      * 
-     * @param requestContext Òª³õÊ¼»¯µÄrequest context
-     * @throws RequestContextException Èç¹ûÊ§°Ü
+     * @param requestContext è¦åˆå§‹åŒ–çš„request context
+     * @throws RequestContextException å¦‚æœå¤±è´¥
      */
     void commitRequestContext(RequestContext requestContext);
 }

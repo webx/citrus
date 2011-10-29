@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="GB18030"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
     <xsl:output indent="no" method="xml" encoding="GB2312" />
     <xsl:template match="persons">

@@ -20,17 +20,17 @@ package com.alibaba.citrus.service.resource;
 import java.util.Set;
 
 /**
- * ´ú±íÒ»¸ö<code>ResourceLoader</code>µ÷ÓÃµÄÉÏÏÂÎÄĞÅÏ¢¡£
+ * ä»£è¡¨ä¸€ä¸ª<code>ResourceLoader</code>è°ƒç”¨çš„ä¸Šä¸‹æ–‡ä¿¡æ¯ã€‚
  * 
  * @author Michael Zhou
  */
 public interface ResourceLoaderContext extends ResourceMatchResult {
     /**
-     * È¡µÃ×ÊÔ´¡£ºÍ<code>ResourceLoadingService.getResource()</code>µÄÂß¼­²»Í¬£¬¸Ã·½·¨ÊÇ±»
-     * <code>ResourceLoader</code>ÄÚ²¿Ê¹ÓÃµÄ£º
+     * å–å¾—èµ„æºã€‚å’Œ<code>ResourceLoadingService.getResource()</code>çš„é€»è¾‘ä¸åŒï¼Œè¯¥æ–¹æ³•æ˜¯è¢«
+     * <code>ResourceLoader</code>å†…éƒ¨ä½¿ç”¨çš„ï¼š
      * <ul>
-     * <li>½«³ıÈ¥ÖØ¸´µÄÆ¥Åä£¬±ÜÃâÎŞÏŞÑ­»·¡£</li>
-     * <li>²»»áµ÷ÓÃfilter¡£</li>
+     * <li>å°†é™¤å»é‡å¤çš„åŒ¹é…ï¼Œé¿å…æ— é™å¾ªç¯ã€‚</li>
+     * <li>ä¸ä¼šè°ƒç”¨filterã€‚</li>
      * </ul>
      */
     Resource getResource(String newResourceName, Set<ResourceLoadingOption> options);

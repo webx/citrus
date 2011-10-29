@@ -34,7 +34,7 @@ import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionP
 import com.alibaba.citrus.util.ClassUtil;
 
 /**
- * ÓÃÀ´¿ØÖÆsession attributesµÄÊ¹ÓÃ¡£
+ * ç”¨æ¥æ§åˆ¶session attributesçš„ä½¿ç”¨ã€‚
  * 
  * @author Michael Zhou
  */

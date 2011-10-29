@@ -38,7 +38,7 @@ import com.alibaba.citrus.turbine.dataresolver.Param;
 import com.alibaba.citrus.turbine.dataresolver.Params;
 
 /**
- * È¡µÃÓÃ»§Ìá½»µÄ²ÎÊı¡£
+ * å–å¾—ç”¨æˆ·æäº¤çš„å‚æ•°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -50,11 +50,11 @@ public class ParameterResolverFactory implements DataResolverFactory {
     }
 
     public DataResolver getDataResolver(DataResolverContext context) {
-        // µ±ËùĞèÒªµÄ¶ÔÏóÎ´¶¨ÒåÊ±£¬resolver factoryÈÔ¿ÉÒÔ´´½¨£¬µ«ÔÚÈ¡µÃresolverÊ±±¨´í¡£
-        // ÕâÑùÊ¹µÃÍ¬Ò»Ì×ÅäÖÃ¿ÉÓÃÓÚËùÓĞ»·¾³£¬½öµ±ÄãĞèÒª×¢ÈëÌØ¶¨¶ÔÏóÊ±£¬²Å±¨´í¡£
+        // å½“æ‰€éœ€è¦çš„å¯¹è±¡æœªå®šä¹‰æ—¶ï¼Œresolver factoryä»å¯ä»¥åˆ›å»ºï¼Œä½†åœ¨å–å¾—resolveræ—¶æŠ¥é”™ã€‚
+        // è¿™æ ·ä½¿å¾—åŒä¸€å¥—é…ç½®å¯ç”¨äºæ‰€æœ‰ç¯å¢ƒï¼Œä»…å½“ä½ éœ€è¦æ³¨å…¥ç‰¹å®šå¯¹è±¡æ—¶ï¼Œæ‰æŠ¥é”™ã€‚
         assertNotNull(parserRequestContext, "no ParserRequestContext defined");
 
-        // µ¥¸ö²ÎÊı
+        // å•ä¸ªå‚æ•°
         Param paramAnnotation = context.getAnnotation(Param.class);
 
         if (paramAnnotation != null) {
@@ -65,7 +65,7 @@ public class ParameterResolverFactory implements DataResolverFactory {
             return new ParameterResolver(context, defaultValues, paramName);
         }
 
-        // ÅúÁ¿×¢Èë
+        // æ‰¹é‡æ³¨å…¥
         Params paramsAnnotation = context.getAnnotation(Params.class);
 
         if (paramsAnnotation != null) {
@@ -83,7 +83,7 @@ public class ParameterResolverFactory implements DataResolverFactory {
         if (defaultValue == null) {
             return param.defaultValues();
         } else {
-            // ±ÜÃâdefaultValueºÍdefaultValuesÍ¬Ê±³öÏÖ¡£
+            // é¿å…defaultValueå’ŒdefaultValuesåŒæ—¶å‡ºç°ã€‚
             assertTrue(isEmptyArray(param.defaultValues()),
                     "use @Param(... defaultValue=\"...\") or @Param(... defaultValues={...}): %s", context);
 
@@ -92,7 +92,7 @@ public class ParameterResolverFactory implements DataResolverFactory {
     }
 
     /**
-     * ÓÃÀ´½âÎöµ¥¸ö²ÎÊıµÄresolver¡£
+     * ç”¨æ¥è§£æå•ä¸ªå‚æ•°çš„resolverã€‚
      */
     private class ParameterResolver extends AbstractDataResolver {
         private final String[] defaultValues;
@@ -114,7 +114,7 @@ public class ParameterResolverFactory implements DataResolverFactory {
     }
 
     /**
-     * ÓÃÀ´½«¶à¸ö²ÎÊı×¢ÈëbeanÖĞµÄresolver¡£
+     * ç”¨æ¥å°†å¤šä¸ªå‚æ•°æ³¨å…¥beanä¸­çš„resolverã€‚
      */
     private class ParametersResolver extends AbstractDataResolver {
         private final FastConstructor fc;

@@ -41,7 +41,7 @@ import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 
 /**
- * Ö§³Ö¶àÌõ¼ş·ÖÖ§µÄvalidator¡£
+ * æ”¯æŒå¤šæ¡ä»¶åˆ†æ”¯çš„validatorã€‚
  * 
  * @author Michael Zhou
  */

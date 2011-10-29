@@ -44,9 +44,9 @@ import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ´ú±íÒ»¸ö½âÎöÆ÷µÄ»ùÀà£¬ÓÃÀ´È¡µÃHTTPÇëÇóÖĞµÄ²ÎÊıºÍcookies¡£
+ * ä»£è¡¨ä¸€ä¸ªè§£æå™¨çš„åŸºç±»ï¼Œç”¨æ¥å–å¾—HTTPè¯·æ±‚ä¸­çš„å‚æ•°å’Œcookiesã€‚
  * <p>
- * ×¢Òâ£º²ÎÊıºÍcookieµÄÃû³Æ¿ÉÄÜ±»×ª»»³ÉÈ«²¿´óĞ´»òÈ«²¿Ğ¡Ğ´¡£ ÕâÊÇ¸ù¾İÅäÖÃÎÄ¼şÖĞµÄ²ÎÊı£º<code>caseFolding</code> À´Ö¸¶¨µÄ¡£
+ * æ³¨æ„ï¼šå‚æ•°å’Œcookieçš„åç§°å¯èƒ½è¢«è½¬æ¢æˆå…¨éƒ¨å¤§å†™æˆ–å…¨éƒ¨å°å†™ã€‚ è¿™æ˜¯æ ¹æ®é…ç½®æ–‡ä»¶ä¸­çš„å‚æ•°ï¼š<code>caseFolding</code> æ¥æŒ‡å®šçš„ã€‚
  * </p>
  */
 public abstract class AbstractValueParser implements ValueParser {
@@ -72,62 +72,62 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     // =============================================================
-    //  ²éÑ¯²ÎÊıµÄ·½·¨ 
+    //  æŸ¥è¯¢å‚æ•°çš„æ–¹æ³• 
     // =============================================================
 
     /**
-     * È¡µÃÖµµÄÊıÁ¿¡£
+     * å–å¾—å€¼çš„æ•°é‡ã€‚
      * 
-     * @return ÖµµÄÊıÁ¿
+     * @return å€¼çš„æ•°é‡
      */
     public int size() {
         return parameters.size();
     }
 
     /**
-     * ÅĞ¶ÏÊÇ·ñÎŞÖµ¡£
+     * åˆ¤æ–­æ˜¯å¦æ— å€¼ã€‚
      * 
-     * @return Èç¹ûÎŞÖµ£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚æœæ— å€¼ï¼Œåˆ™è¿”å›<code>true</code>
      */
     public boolean isEmpty() {
         return parameters.isEmpty();
     }
 
     /**
-     * ¼ì²éÊÇ·ñ°üº¬Ö¸¶¨Ãû³ÆµÄ²ÎÊı¡£
+     * æ£€æŸ¥æ˜¯å¦åŒ…å«æŒ‡å®šåç§°çš„å‚æ•°ã€‚
      * 
-     * @param key Òª²éÕÒµÄ²ÎÊıÃû
-     * @return Èç¹û´æÔÚ£¬Ôò·µ»Ø<code>true</code>
+     * @param key è¦æŸ¥æ‰¾çš„å‚æ•°å
+     * @return å¦‚æœå­˜åœ¨ï¼Œåˆ™è¿”å›<code>true</code>
      */
     public boolean containsKey(String key) {
         return parameters.containsKey(convert(key));
     }
 
     /*
-     * È¡µÃËùÓĞ²ÎÊıÃûµÄ¼¯ºÏ¡£
-     * @return ËùÓĞ²ÎÊıÃûµÄ¼¯ºÏ
+     * å–å¾—æ‰€æœ‰å‚æ•°åçš„é›†åˆã€‚
+     * @return æ‰€æœ‰å‚æ•°åçš„é›†åˆ
      */
     public Set<String> keySet() {
         return createLinkedHashSet(parameterKeys.values());
     }
 
     /*
-     * È¡µÃËùÓĞ²ÎÊıÃûµÄÊı×é¡£
-     * @return ËùÓĞ²ÎÊıÃûµÄÊı×é
+     * å–å¾—æ‰€æœ‰å‚æ•°åçš„æ•°ç»„ã€‚
+     * @return æ‰€æœ‰å‚æ•°åçš„æ•°ç»„
      */
     public String[] getKeys() {
         return parameterKeys.values().toArray(new String[parameterKeys.size()]);
     }
 
     // =============================================================
-    //  È¡µÃ²ÎÊıµÄÖµ
+    //  å–å¾—å‚æ•°çš„å€¼
     // =============================================================
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>false</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>false</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     public boolean getBoolean(String key) {
         ValueList container = getValueList(key, false);
@@ -135,11 +135,11 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     public boolean getBoolean(String key, boolean defaultValue) {
         ValueList container = getValueList(key, false);
@@ -147,10 +147,10 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     public byte getByte(String key) {
         ValueList container = getValueList(key, false);
@@ -158,11 +158,11 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     public byte getByte(String key, byte defaultValue) {
         ValueList container = getValueList(key, false);
@@ -170,11 +170,11 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄ×Ö½Ú¡£Õâ¸ö×Ö½ÚÊÇ¸ù¾İ<code>getCharacterEncoding()</code>Ëù·µ»ØµÄ×Ö·û¼¯½øĞĞ±àÂëµÄ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„å­—èŠ‚ã€‚è¿™ä¸ªå­—èŠ‚æ˜¯æ ¹æ®<code>getCharacterEncoding()</code>æ‰€è¿”å›çš„å­—ç¬¦é›†è¿›è¡Œç¼–ç çš„ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµµÄ×Ö½ÚÊı×é£¬Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>
-     * @throws UnsupportedEncodingException Èç¹ûÖ¸¶¨ÁË´íÎóµÄ±àÂë×Ö·û¼¯
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼çš„å­—èŠ‚æ•°ç»„ï¼Œå¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>
+     * @throws UnsupportedEncodingException å¦‚æœæŒ‡å®šäº†é”™è¯¯çš„ç¼–ç å­—ç¬¦é›†
      */
     public byte[] getBytes(String key) throws UnsupportedEncodingException {
         ValueList container = getValueList(key, false);
@@ -182,10 +182,10 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>'\0'</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>'\0'</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     public char getChar(String key) {
         ValueList container = getValueList(key, false);
@@ -193,11 +193,11 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     public char getChar(String key, char defaultValue) {
         ValueList container = getValueList(key, false);
@@ -205,10 +205,10 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     public double getDouble(String key) {
         ValueList container = getValueList(key, false);
@@ -216,11 +216,11 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     public double getDouble(String key, double defaultValue) {
         ValueList container = getValueList(key, false);
@@ -228,10 +228,10 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     public float getFloat(String key) {
         ValueList container = getValueList(key, false);
@@ -239,11 +239,11 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     public float getFloat(String key, float defaultValue) {
         ValueList container = getValueList(key, false);
@@ -251,10 +251,10 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     public int getInt(String key) {
         ValueList container = getValueList(key, false);
@@ -262,11 +262,11 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     public int getInt(String key, int defaultValue) {
         ValueList container = getValueList(key, false);
@@ -274,10 +274,10 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     public int[] getInts(String key) {
         ValueList container = getValueList(key, false);
@@ -285,11 +285,11 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     public int[] getInts(String key, int[] defaultValue) {
         ValueList container = getValueList(key, false);
@@ -297,10 +297,10 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     public long getLong(String key) {
         ValueList container = getValueList(key, false);
@@ -308,11 +308,11 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     public long getLong(String key, long defaultValue) {
         ValueList container = getValueList(key, false);
@@ -320,10 +320,10 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     public long[] getLongs(String key) {
         ValueList container = getValueList(key, false);
@@ -331,11 +331,11 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     public long[] getLongs(String key, long[] defaultValue) {
         ValueList container = getValueList(key, false);
@@ -343,10 +343,10 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     public short getShort(String key) {
         ValueList container = getValueList(key, false);
@@ -354,11 +354,11 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     public short getShort(String key, short defaultValue) {
         ValueList container = getValueList(key, false);
@@ -366,10 +366,10 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     public String getString(String key) {
         ValueList container = getValueList(key, false);
@@ -377,11 +377,11 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     public String getString(String key, String defaultValue) {
         ValueList container = getValueList(key, false);
@@ -389,10 +389,10 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     public String[] getStrings(String key) {
         ValueList container = getValueList(key, false);
@@ -400,11 +400,11 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     public String[] getStrings(String key, String[] defaultValue) {
         ValueList container = getValueList(key, false);
@@ -412,22 +412,22 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£ ´Ë·½·¨ºÍ<code>getObject</code>
-     * Ò»Ñù£¬µ«ÔÚÄ£°åÖĞ±ãÒ×ÓÚÊ¹ÓÃ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚ æ­¤æ–¹æ³•å’Œ<code>getObject</code>
+     * ä¸€æ ·ï¼Œä½†åœ¨æ¨¡æ¿ä¸­ä¾¿æ˜“äºä½¿ç”¨ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     public Object get(String key) {
         return getObject(key);
     }
 
     /**
-     * È¡µÃÈÕÆÚ¡£×Ö·û´®½«Ê¹ÓÃÖ¸¶¨µÄ<code>DateFormat</code>À´½âÎö¡£Èç¹û²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æ—¥æœŸã€‚å­—ç¬¦ä¸²å°†ä½¿ç”¨æŒ‡å®šçš„<code>DateFormat</code>æ¥è§£æã€‚å¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param format <code>DateFormat</code>¶ÔÏó
-     * @return <code>java.util.Date</code>¶ÔÏó
+     * @param key å‚æ•°å
+     * @param format <code>DateFormat</code>å¯¹è±¡
+     * @return <code>java.util.Date</code>å¯¹è±¡
      */
     public Date getDate(String key, DateFormat format) {
         ValueList container = getValueList(key, false);
@@ -435,12 +435,12 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃÈÕÆÚ¡£×Ö·û´®½«Ê¹ÓÃÖ¸¶¨µÄ<code>DateFormat</code>À´½âÎö¡£Èç¹û²»´æÔÚ£¬Ôò·µ»ØÄ¬ÈÏÖµ¡£
+     * å–å¾—æ—¥æœŸã€‚å­—ç¬¦ä¸²å°†ä½¿ç”¨æŒ‡å®šçš„<code>DateFormat</code>æ¥è§£æã€‚å¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›é»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param format <code>DateFormat</code>¶ÔÏó
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return <code>java.util.Date</code>¶ÔÏó
+     * @param key å‚æ•°å
+     * @param format <code>DateFormat</code>å¯¹è±¡
+     * @param defaultValue é»˜è®¤å€¼
+     * @return <code>java.util.Date</code>å¯¹è±¡
      */
     public Date getDate(String key, DateFormat format, Date defaultValue) {
         ValueList container = getValueList(key, false);
@@ -448,10 +448,10 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     public Object getObject(String key) {
         ValueList container = getValueList(key, false);
@@ -459,11 +459,11 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÄ¬ÈÏÖµ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›é»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     public Object getObject(String key, Object defaultValue) {
         ValueList container = getValueList(key, false);
@@ -471,10 +471,10 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     public Object[] getObjects(String key) {
         ValueList container = getValueList(key, false);
@@ -482,11 +482,11 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     public Object[] getObjects(String key, Object[] defaultValue) {
         ValueList container = getValueList(key, false);
@@ -494,21 +494,21 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàĞÍµÄ¶ÔÏó¡£
+     * å–å¾—æŒ‡å®šç±»å‹çš„å¯¹è±¡ã€‚
      */
     public <T> T getObjectOfType(String key, Class<T> type) {
         return getObjectOfType(key, type, null, null);
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàĞÍµÄ¶ÔÏó¡£
+     * å–å¾—æŒ‡å®šç±»å‹çš„å¯¹è±¡ã€‚
      */
     public <T> T getObjectOfType(String key, Class<T> type, MethodParameter methodParameter, Object[] defaultValues) {
         return getObjectOfType(key, type, false, methodParameter, defaultValues);
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàĞÍµÄ¶ÔÏó¡£
+     * å–å¾—æŒ‡å®šç±»å‹çš„å¯¹è±¡ã€‚
      */
     <T> T getObjectOfType(String key, Class<T> type, boolean isPrimitive, MethodParameter methodParameter,
                           Object[] defaultValues) {
@@ -558,147 +558,147 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     // =============================================================
-    //  Ìí¼ÓºÍĞŞ¸Ä²ÎÊıµÄ·½·¨
+    //  æ·»åŠ å’Œä¿®æ”¹å‚æ•°çš„æ–¹æ³•
     // =============================================================
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     public void add(String key, boolean value) {
         getValueList(key, true).addValue(value);
     }
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     public void add(String key, byte value) {
         getValueList(key, true).addValue(value);
     }
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     public void add(String key, char value) {
         getValueList(key, true).addValue(value);
     }
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     public void add(String key, double value) {
         getValueList(key, true).addValue(value);
     }
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     public void add(String key, float value) {
         getValueList(key, true).addValue(value);
     }
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     public void add(String key, int value) {
         getValueList(key, true).addValue(value);
     }
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     public void add(String key, long value) {
         getValueList(key, true).addValue(value);
     }
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     public void add(String key, short value) {
         getValueList(key, true).addValue(value);
     }
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     public void add(String key, Object value) {
         getValueList(key, true).addValue(value);
     }
 
     /**
-     * ÉèÖÃ²ÎÊıÖµ¡£ºÍ<code>add</code>·½·¨²»Í¬£¬´Ë·½·¨½«¸²¸ÇÔ­ÓĞµÄÖµ¡£
+     * è®¾ç½®å‚æ•°å€¼ã€‚å’Œ<code>add</code>æ–¹æ³•ä¸åŒï¼Œæ­¤æ–¹æ³•å°†è¦†ç›–åŸæœ‰çš„å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     public void setString(String key, String value) {
         setObject(key, value);
     }
 
     /**
-     * ÉèÖÃ²ÎÊıÖµ¡£ºÍ<code>add</code>·½·¨²»Í¬£¬´Ë·½·¨½«¸²¸ÇÔ­ÓĞµÄÖµ¡£
+     * è®¾ç½®å‚æ•°å€¼ã€‚å’Œ<code>add</code>æ–¹æ³•ä¸åŒï¼Œæ­¤æ–¹æ³•å°†è¦†ç›–åŸæœ‰çš„å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param values ²ÎÊıÖµµÄÊı×é
+     * @param key å‚æ•°å
+     * @param values å‚æ•°å€¼çš„æ•°ç»„
      */
     public void setStrings(String key, String[] values) {
         setObjects(key, values);
     }
 
     /**
-     * ÉèÖÃ²ÎÊıÖµ¡£ºÍ<code>add</code>·½·¨²»Í¬£¬´Ë·½·¨½«¸²¸ÇÔ­ÓĞµÄÖµ¡£
+     * è®¾ç½®å‚æ•°å€¼ã€‚å’Œ<code>add</code>æ–¹æ³•ä¸åŒï¼Œæ­¤æ–¹æ³•å°†è¦†ç›–åŸæœ‰çš„å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     public void setObject(String key, Object value) {
         getValueList(key, true).setValue(value);
     }
 
     /**
-     * ÉèÖÃ²ÎÊıÖµ¡£ºÍ<code>add</code>·½·¨²»Í¬£¬´Ë·½·¨½«¸²¸ÇÔ­ÓĞµÄÖµ¡£
+     * è®¾ç½®å‚æ•°å€¼ã€‚å’Œ<code>add</code>æ–¹æ³•ä¸åŒï¼Œæ­¤æ–¹æ³•å°†è¦†ç›–åŸæœ‰çš„å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param values ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param values å‚æ•°å€¼
      */
     public void setObjects(String key, Object[] values) {
         getValueList(key, true).setValues(values);
     }
 
     // =============================================================
-    //  Çå³ı²ÎÊıµÄ·½·¨
+    //  æ¸…é™¤å‚æ•°çš„æ–¹æ³•
     // =============================================================
 
     /**
-     * É¾³ıÖ¸¶¨Ãû³ÆµÄ²ÎÊı¡£
+     * åˆ é™¤æŒ‡å®šåç§°çš„å‚æ•°ã€‚
      * 
-     * @return Ô­ÏÈºÍÖ¸¶¨Ãû³Æ¶ÔÓ¦µÄ²ÎÊıÖµ£¬¿ÉÄÜÊÇ<code>String[]</code>»ò<code>null</code>
+     * @return åŸå…ˆå’ŒæŒ‡å®šåç§°å¯¹åº”çš„å‚æ•°å€¼ï¼Œå¯èƒ½æ˜¯<code>String[]</code>æˆ–<code>null</code>
      */
     public Object remove(String key) {
         key = convert(key);
@@ -707,7 +707,7 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * Çå³ıËùÓĞÖµ¡£
+     * æ¸…é™¤æ‰€æœ‰å€¼ã€‚
      */
     public void clear() {
         parameterKeys.clear();
@@ -715,15 +715,15 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     // =============================================================
-    //  ¸¨Öú·½·¨
+    //  è¾…åŠ©æ–¹æ³•
     // =============================================================
 
     /**
-     * Ê×ÏÈ½«²ÎÊıÃû½øĞĞ<code>trim()</code>£¬È»ºóÔÙ½øĞĞ´óĞ¡Ğ´×ª»»¡£×ª»»ÊÇ¸ù¾İÅäÖÃÎÄ¼şÖĞµÄ
-     * <code>url.case.folding</code>À´Éè¶¨µÄ¡£
+     * é¦–å…ˆå°†å‚æ•°åè¿›è¡Œ<code>trim()</code>ï¼Œç„¶åå†è¿›è¡Œå¤§å°å†™è½¬æ¢ã€‚è½¬æ¢æ˜¯æ ¹æ®é…ç½®æ–‡ä»¶ä¸­çš„
+     * <code>url.case.folding</code>æ¥è®¾å®šçš„ã€‚
      * 
-     * @param key Òª×ª»»µÄ²ÎÊıÃû
-     * @return ±»<code>trim()</code>ºÍ´óĞ¡Ğ´×ª»»ºóµÄ²ÎÊıÃû£¬Èç¹ûÊÇ<code>null</code>£¬Ôò×ª»»³É¿Õ×Ö·û´®
+     * @param key è¦è½¬æ¢çš„å‚æ•°å
+     * @return è¢«<code>trim()</code>å’Œå¤§å°å†™è½¬æ¢åçš„å‚æ•°åï¼Œå¦‚æœæ˜¯<code>null</code>ï¼Œåˆ™è½¬æ¢æˆç©ºå­—ç¬¦ä¸²
      */
     protected String convert(String key) {
         if (requestContext == null) {
@@ -734,11 +734,11 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄÖµµÄÁĞ±í¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„å€¼çš„åˆ—è¡¨ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param create Èç¹û²ÎÊı²»´æÔÚ£¬ÊÇ·ñ´´½¨Ö®
-     * @return ²ÎÊıÖµµÄÁĞ±í£¬Èç¹û²ÎÊı²»´æÔÚ£¬ÇÒ<code>create==false</code>£¬Ôò·µ»Ø<code>null</code>
+     * @param key å‚æ•°å
+     * @param create å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œæ˜¯å¦åˆ›å»ºä¹‹
+     * @return å‚æ•°å€¼çš„åˆ—è¡¨ï¼Œå¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œä¸”<code>create==false</code>ï¼Œåˆ™è¿”å›<code>null</code>
      */
     protected ValueList getValueList(String key, boolean create) {
         String originalKey = key;
@@ -765,22 +765,22 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     /**
-     * È¡µÃÓÃÓÚ½âÎö²ÎÊıµÄ±àÂë×Ö·û¼¯¡£²»Í¬µÄÊµÏÖÈ¡µÃ±àÂë×Ö·û¼¯µÄ·½·¨Ò²²»Í¬£¬ÀıÈç£¬¶ÔÓÚ<code>ParameterParser</code>£¬
-     * ´Ë±àÂë×Ö·û¼¯ÊÇÓÉ<code>request.getCharacterEncoding()</code>¾ö¶¨µÄ¡£
+     * å–å¾—ç”¨äºè§£æå‚æ•°çš„ç¼–ç å­—ç¬¦é›†ã€‚ä¸åŒçš„å®ç°å–å¾—ç¼–ç å­—ç¬¦é›†çš„æ–¹æ³•ä¹Ÿä¸åŒï¼Œä¾‹å¦‚ï¼Œå¯¹äº<code>ParameterParser</code>ï¼Œ
+     * æ­¤ç¼–ç å­—ç¬¦é›†æ˜¯ç”±<code>request.getCharacterEncoding()</code>å†³å®šçš„ã€‚
      * <p>
-     * Ä¬ÈÏ×ÜÊÇ·µ»Ø<code>ISO-8859-1</code>¡£
+     * é»˜è®¤æ€»æ˜¯è¿”å›<code>ISO-8859-1</code>ã€‚
      * </p>
      * 
-     * @return ±àÂë×Ö·û¼¯
+     * @return ç¼–ç å­—ç¬¦é›†
      */
     protected String getCharacterEncoding() {
         return ParserRequestContext.DEFAULT_CHARSET_ENCODING;
     }
 
     /**
-     * ×ª»»³É×Ö·û´®¡£
+     * è½¬æ¢æˆå­—ç¬¦ä¸²ã€‚
      * 
-     * @return ×Ö·û´®±íÏÖ
+     * @return å­—ç¬¦ä¸²è¡¨ç°
      */
     @Override
     public String toString() {

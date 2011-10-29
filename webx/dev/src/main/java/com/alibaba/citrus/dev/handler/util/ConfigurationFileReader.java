@@ -46,7 +46,7 @@ public class ConfigurationFileReader {
     public ConfigurationFileReader(ResourceLoader loader, String[] configLocations) throws IOException {
         this.loader = assertNotNull(loader);
 
-        // 取得所有顶层resources
+        // 鍙栧緱鎵�鏈夐《灞俽esources
         List<NamedResource> resources = createLinkedList();
 
         for (String configLocation : configLocations) {
@@ -67,7 +67,7 @@ public class ConfigurationFileReader {
             }
         }
 
-        // 计算baseurl
+        // 璁＄畻baseurl
         URL base = null;
 
         try {
@@ -78,7 +78,7 @@ public class ConfigurationFileReader {
 
         this.baseURL = trimEnd(base.toExternalForm(), "/");
 
-        // 读取configuration files
+        // 璇诲彇configuration files
         List<ConfigurationFile> configurationFiles = createLinkedList();
         Set<String> parsedNames = createHashSet();
 
@@ -121,7 +121,7 @@ public class ConfigurationFileReader {
         try {
             rootElement = DomUtil.readDocument(name, url, new ElementFilter() {
                 public org.dom4j.Element filter(org.dom4j.Element e) throws Exception {
-                    // 删除schemaLocation
+                    // 鍒犻櫎schemaLocation
                     org.dom4j.Attribute attr = e.attribute(new QName("schemaLocation", new Namespace("xsi",
                             "http://www.w3.org/2001/XMLSchema-instance")));
 
@@ -129,7 +129,7 @@ public class ConfigurationFileReader {
                         e.remove(attr);
                     }
 
-                    // 导入beans:import，并删除element
+                    // 瀵煎叆beans:import锛屽苟鍒犻櫎element
                     if ("http://www.springframework.org/schema/beans".equals(e.getNamespaceURI())
                             && "import".equals(e.getName())) {
                         String importedResourceName = trimToNull(e.attributeValue("resource"));

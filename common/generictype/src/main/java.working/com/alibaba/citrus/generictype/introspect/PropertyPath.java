@@ -25,18 +25,18 @@ import java.util.List;
 import com.alibaba.citrus.util.internal.StringUtil;
 
 /**
- * ´ú±íÒ»¸ö<code>PropertyPath</code>£¬Æä¸ñÊ½Îª£º
+ * ä»£è¡¨ä¸€ä¸ª<code>PropertyPath</code>ï¼Œå…¶æ ¼å¼ä¸ºï¼š
  * 
  * <pre>
  * ( &quot;.&quot;? propertyName | [index] | [key] )
  *     ( &quot;.&quot; propertyName  | [index] | [key] )*
  * </pre>
  * <p>
- * ÆäÖĞ£¬<code>index</code>ÎªÕûÊı£¬<code>key</code>Îªµ¥ÒıºÅ»òË«ÒıºÅ°üÎ§µÄ×Ö·û´®¡£<br>
- * ÔÚ<code>key</code>ÖĞ£¬¿ÉÊ¹ÓÃJava×Ö·û´®×ªÒå·û£¬ÀıÈç£º<code>"\n\u1234"</code>¡£
+ * å…¶ä¸­ï¼Œ<code>index</code>ä¸ºæ•´æ•°ï¼Œ<code>key</code>ä¸ºå•å¼•å·æˆ–åŒå¼•å·åŒ…å›´çš„å­—ç¬¦ä¸²ã€‚<br>
+ * åœ¨<code>key</code>ä¸­ï¼Œå¯ä½¿ç”¨Javaå­—ç¬¦ä¸²è½¬ä¹‰ç¬¦ï¼Œä¾‹å¦‚ï¼š<code>"\n\u1234"</code>ã€‚
  * </p>
  * <p>
- * <code>PropertyPath</code>Ö§³ÖÊÂ¼şÄ£Ê½£¨ÀàËÆSAX£©ºÍDOMÁ½ÖÖÄ£Ê½¡£
+ * <code>PropertyPath</code>æ”¯æŒäº‹ä»¶æ¨¡å¼ï¼ˆç±»ä¼¼SAXï¼‰å’ŒDOMä¸¤ç§æ¨¡å¼ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -45,14 +45,14 @@ public class PropertyPath {
     private final Node[] nodes;
 
     /**
-     * ´´½¨Ò»¸ö<code>PropertyPath</code>½á¹¹¡£
+     * åˆ›å»ºä¸€ä¸ª<code>PropertyPath</code>ç»“æ„ã€‚
      */
     private PropertyPath(List<Node> nodes) {
         this.nodes = nodes.toArray(new Node[nodes.size()]);
     }
 
     /**
-     * ½âÎö×Ö·û´®²¢Éú³É<code>PropertyPath</code>½á¹¹¡£
+     * è§£æå­—ç¬¦ä¸²å¹¶ç”Ÿæˆ<code>PropertyPath</code>ç»“æ„ã€‚
      */
     public static PropertyPath parse(String propertyPath) {
         Parser parser = new Parser(propertyPath);
@@ -63,21 +63,21 @@ public class PropertyPath {
     }
 
     /**
-     * ½âÎö<code>PropertyPath</code>×Ö·û´®£¬²¢·ÃÎÊÖ¸¶¨visitor¡£
+     * è§£æ<code>PropertyPath</code>å­—ç¬¦ä¸²ï¼Œå¹¶è®¿é—®æŒ‡å®švisitorã€‚
      */
     public static void parse(String propertyPath, Visitor visitor) {
         new Parser(propertyPath, visitor).parse();
     }
 
     /**
-     * È¡µÃËùÓĞ½áµã¡£
+     * å–å¾—æ‰€æœ‰ç»“ç‚¹ã€‚
      */
     public Node[] getNodes() {
         return nodes.clone();
     }
 
     /**
-     * ·ÃÎÊvisitor¡£
+     * è®¿é—®visitorã€‚
      */
     public void accept(Visitor visitor) {
         int length = nodes.length;
@@ -109,7 +109,7 @@ public class PropertyPath {
     }
 
     /**
-     * ×ª»»³É×Ö·û´®¡£
+     * è½¬æ¢æˆå­—ç¬¦ä¸²ã€‚
      */
     @Override
     public String toString() {
@@ -127,37 +127,37 @@ public class PropertyPath {
     }
 
     /**
-     * ÓÃÀ´·ÃÎÊ<code>PropertyPath</code>µÄvisitor¡£
+     * ç”¨æ¥è®¿é—®<code>PropertyPath</code>çš„visitorã€‚
      */
     public static interface Visitor {
         /**
-         * ·ÃÎÊproperty[index]¡£
+         * è®¿é—®property[index]ã€‚
          */
         boolean visitIndexedProperty(String propertyName, int index, String displayName, boolean last);
 
         /**
-         * ·ÃÎÊproperty[key]¡£
+         * è®¿é—®property[key]ã€‚
          */
         boolean visitMappedProperty(String propertyName, String key, String displayName, boolean last);
 
         /**
-         * ·ÃÎÊproperty¡£
+         * è®¿é—®propertyã€‚
          */
         void visitSimpleProperty(String propertyName, String displayName, boolean last);
 
         /**
-         * ·ÃÎÊ[index]¡£
+         * è®¿é—®[index]ã€‚
          */
         void visitIndex(int index, String displayName, boolean last);
 
         /**
-         * ·ÃÎÊ[key]¡£
+         * è®¿é—®[key]ã€‚
          */
         void visitKey(String key, String displayName, boolean last);
     }
 
     /**
-     * ´ú±í<code>PropertyPath</code>ÖĞµÄÒ»¸ö½áµã¡£
+     * ä»£è¡¨<code>PropertyPath</code>ä¸­çš„ä¸€ä¸ªç»“ç‚¹ã€‚
      */
     public static interface Node {
         boolean accept(Visitor visitor, Node lookAhead);
@@ -166,7 +166,7 @@ public class PropertyPath {
     }
 
     /**
-     * ´ú±í<code>PropertyPath</code>ÖĞµÄÒ»¸öproperty name½áµã¡£
+     * ä»£è¡¨<code>PropertyPath</code>ä¸­çš„ä¸€ä¸ªproperty nameç»“ç‚¹ã€‚
      */
     public static final class PropertyName implements Node {
         private final String propertyName;
@@ -212,7 +212,7 @@ public class PropertyPath {
     }
 
     /**
-     * ´ú±í<code>PropertyPath</code>ÖĞµÄÒ»¸öindexed key½áµã¡£
+     * ä»£è¡¨<code>PropertyPath</code>ä¸­çš„ä¸€ä¸ªindexed keyç»“ç‚¹ã€‚
      */
     public static final class Index implements Node {
         private final int index;
@@ -248,7 +248,7 @@ public class PropertyPath {
     }
 
     /**
-     * ´ú±í<code>PropertyPath</code>ÖĞµÄÒ»¸ömapped key½áµã¡£
+     * ä»£è¡¨<code>PropertyPath</code>ä¸­çš„ä¸€ä¸ªmapped keyç»“ç‚¹ã€‚
      */
     public static final class Key implements Node {
         private final String key;
@@ -284,7 +284,7 @@ public class PropertyPath {
     }
 
     /**
-     * <code>PropertyPath</code>´Ê·¨·ÖÎöÆ÷¡£
+     * <code>PropertyPath</code>è¯æ³•åˆ†æå™¨ã€‚
      */
     private abstract static class Tokenizer {
         private final static char EOF = '\0';
@@ -294,7 +294,7 @@ public class PropertyPath {
         protected final String propertyPath;
         private final int lastIndex;
 
-        // ParserµÄ×´Ì¬
+        // Parserçš„çŠ¶æ€
         private int i = -1;
         private char ch = EOF;
         private String propertyName = null;
@@ -515,7 +515,7 @@ public class PropertyPath {
     }
 
     /**
-     * <code>PropertyPath</code>½âÎöÆ÷¡£
+     * <code>PropertyPath</code>è§£æå™¨ã€‚
      */
     private static class Parser extends Tokenizer implements Visitor {
         private final List<Node> nodes;
@@ -618,35 +618,35 @@ public class PropertyPath {
         }
 
         /**
-         * ·ÃÎÊproperty[index]¡£
+         * è®¿é—®property[index]ã€‚
          */
         public boolean visitIndexedProperty(String propertyName, int index, String displayName, boolean last) {
             return false;
         }
 
         /**
-         * ·ÃÎÊproperty[key]¡£
+         * è®¿é—®property[key]ã€‚
          */
         public boolean visitMappedProperty(String propertyName, String key, String displayName, boolean last) {
             return false;
         }
 
         /**
-         * ·ÃÎÊproperty¡£
+         * è®¿é—®propertyã€‚
          */
         public void visitSimpleProperty(String propertyName, String displayName, boolean last) {
             nodes.add(new PropertyName(propertyName, displayName, last));
         }
 
         /**
-         * ·ÃÎÊ[index]¡£
+         * è®¿é—®[index]ã€‚
          */
         public void visitIndex(int index, String displayName, boolean last) {
             nodes.add(new Index(index, displayName, last));
         }
 
         /**
-         * ·ÃÎÊ[key]¡£
+         * è®¿é—®[key]ã€‚
          */
         public void visitKey(String key, String displayName, boolean last) {
             nodes.add(new Key(key, displayName, last));

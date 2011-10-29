@@ -20,13 +20,13 @@ package com.alibaba.citrus.service.resource;
 import java.util.Set;
 
 /**
- * ´ú±íÒ»Á¬´®µÄ×ÊÔ´¹ıÂËÆ÷£¬°´ÕÕÅäÖÃÎÄ¼şÖĞµÄË³ĞòÒÀ´Îµ÷ÓÃ¹ıÂËÆ÷¡£
+ * ä»£è¡¨ä¸€è¿ä¸²çš„èµ„æºè¿‡æ»¤å™¨ï¼ŒæŒ‰ç…§é…ç½®æ–‡ä»¶ä¸­çš„é¡ºåºä¾æ¬¡è°ƒç”¨è¿‡æ»¤å™¨ã€‚
  * 
  * @author Michael Zhou
  */
 public interface ResourceFilterChain {
     /**
-     * ²éÕÒÖ¸¶¨Ãû³ÆµÄ×ÊÔ´¡£
+     * æŸ¥æ‰¾æŒ‡å®šåç§°çš„èµ„æºã€‚
      */
     Resource doFilter(ResourceMatchResult filterMatchResult, Set<ResourceLoadingOption> options)
             throws ResourceNotFoundException;

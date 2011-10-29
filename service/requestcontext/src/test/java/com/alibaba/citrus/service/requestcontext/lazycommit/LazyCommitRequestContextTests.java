@@ -30,7 +30,7 @@ import org.junit.Test;
 import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 
 /**
- * ²âÊÔ<code>LazyCommitRequestContext</code>¡£
+ * æµ‹è¯•<code>LazyCommitRequestContext</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -67,7 +67,7 @@ public class LazyCommitRequestContextTests extends AbstractRequestContextsTests<
         newResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
         assertFalse(newResponse.isCommitted());
 
-        newResponse.sendError(HttpServletResponse.SC_FORBIDDEN); // ÎÞÒì³££¬µ«ºöÂÔÖ®
+        newResponse.sendError(HttpServletResponse.SC_FORBIDDEN); // æ— å¼‚å¸¸ï¼Œä½†å¿½ç•¥ä¹‹
 
         requestContext.commit();
         assertTrue(newResponse.isCommitted());
@@ -94,7 +94,7 @@ public class LazyCommitRequestContextTests extends AbstractRequestContextsTests<
         newResponse.sendRedirect("mylocation");
         assertFalse(newResponse.isCommitted());
 
-        newResponse.sendRedirect("mylocation"); // ÎÞÒì³££¬µ«ºöÂÔÖ®
+        newResponse.sendRedirect("mylocation"); // æ— å¼‚å¸¸ï¼Œä½†å¿½ç•¥ä¹‹
 
         requestContext.commit();
         assertTrue(newResponse.isCommitted());
@@ -106,7 +106,7 @@ public class LazyCommitRequestContextTests extends AbstractRequestContextsTests<
         response.flushBuffer();
         assertTrue(response.isCommitted());
 
-        response.flushBuffer(); // ÖØ¸´flushÊÇÃ»ÎÊÌâµÄ
+        response.flushBuffer(); // é‡å¤flushæ˜¯æ²¡é—®é¢˜çš„
     }
 
     @Test
@@ -115,7 +115,7 @@ public class LazyCommitRequestContextTests extends AbstractRequestContextsTests<
         newResponse.flushBuffer();
         assertFalse(newResponse.isCommitted());
 
-        newResponse.flushBuffer(); // ÖØ¸´flushÊÇÃ»ÎÊÌâµÄ
+        newResponse.flushBuffer(); // é‡å¤flushæ˜¯æ²¡é—®é¢˜çš„
 
         requestContext.commit();
         assertTrue(newResponse.isCommitted());

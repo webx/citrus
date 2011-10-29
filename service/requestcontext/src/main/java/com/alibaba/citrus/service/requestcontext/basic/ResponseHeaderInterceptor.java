@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.requestcontext.basic;
 
 /**
- * ´ú±íÒ»¸öÀ¹½ØÆ÷£¬¿ÉÒÔĞŞ¸Ä»ò¾Ü¾øresponse headerÖĞµÄ²ÎÊı¡£
+ * ä»£è¡¨ä¸€ä¸ªæ‹¦æˆªå™¨ï¼Œå¯ä»¥ä¿®æ”¹æˆ–æ‹’ç»response headerä¸­çš„å‚æ•°ã€‚
  * 
  * @author Michael Zhou
  */

@@ -18,7 +18,7 @@
 package com.alibaba.citrus.generictype.introspect;
 
 /**
- * ´ú±íÒ»¸ö´ø×Ö·û´®¼üÖµÓ³ÉäµÄproperty¡£³£¼ûµÄĞÎÊ½ÊÇ£º </p>
+ * ä»£è¡¨ä¸€ä¸ªå¸¦å­—ç¬¦ä¸²é”®å€¼æ˜ å°„çš„propertyã€‚å¸¸è§çš„å½¢å¼æ˜¯ï¼š </p>
  * 
  * <pre>
  * public String getElement(String key);
@@ -26,20 +26,20 @@ package com.alibaba.citrus.generictype.introspect;
  * public void setElement(String key, String element);
  * </pre>
  * <p>
- * ÒÔÉÏÕâ¶Ô·½·¨¶¨ÒåÁËÒ»¸ö¿É¶Á¡¢¿ÉĞ´µÄmapped property£¬Ãû×Ö½Ğ<code>element</code>£¬ÀàĞÍÎª
- * <code>String</code>¡£
+ * ä»¥ä¸Šè¿™å¯¹æ–¹æ³•å®šä¹‰äº†ä¸€ä¸ªå¯è¯»ã€å¯å†™çš„mapped propertyï¼Œåå­—å«<code>element</code>ï¼Œç±»å‹ä¸º
+ * <code>String</code>ã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface MappedPropertyInfo extends PropertyInfo {
     /**
-     * È¡µÃpropertyµÄÖµ¡£
+     * å–å¾—propertyçš„å€¼ã€‚
      */
     Object getValue(Object object, String key);
 
     /**
-     * ÉèÖÃpropertyµÄÖµ¡£
+     * è®¾ç½®propertyçš„å€¼ã€‚
      */
     void setValue(Object object, String key, Object value);
 }

@@ -21,7 +21,7 @@ import com.alibaba.citrus.service.form.support.AbstractOptionalValidator;
 import com.alibaba.citrus.service.form.support.AbstractValidatorDefinitionParser;
 
 /**
- * ¼ì²éÊäÈëÖµµÄ×Ö·û´®³¤¶È¡£
+ * æ£€æŸ¥è¾“å…¥å€¼çš„å­—ç¬¦ä¸²é•¿åº¦ã€‚
  * 
  * @author Michael Zhou
  */
@@ -30,28 +30,28 @@ public class StringLengthValidator extends AbstractOptionalValidator {
     private int maxLength = -1;
 
     /**
-     * È¡µÃ×î¶Ì³¤¶È¡£
+     * å–å¾—æœ€çŸ­é•¿åº¦ã€‚
      */
     public int getMinLength() {
         return minLength;
     }
 
     /**
-     * ÉèÖÃ×î¶Ì³¤¶È¡£
+     * è®¾ç½®æœ€çŸ­é•¿åº¦ã€‚
      */
     public void setMinLength(int minLength) {
         this.minLength = minLength;
     }
 
     /**
-     * È¡µÃ×î´ó³¤¶È¡£
+     * å–å¾—æœ€å¤§é•¿åº¦ã€‚
      */
     public int getMaxLength() {
         return maxLength;
     }
 
     /**
-     * ÉèÖÃ×î´ó³¤¶È¡£
+     * è®¾ç½®æœ€å¤§é•¿åº¦ã€‚
      */
     public void setMaxLength(int maxLength) {
         this.maxLength = maxLength;

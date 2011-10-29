@@ -55,7 +55,7 @@ public class WebappLoaderIntegratingTests extends AbstractResourceLoadingTests {
 
         assertResourceServiceList("/webroot/notexist.txt", "notexist.txt", false, false);
 
-        // webapp-loader²»Ö§³Öfor_createÑ¡Ïî
+        // webapp-loaderä¸æ”¯æŒfor_createé€‰é¡¹
         try {
             resourceLoadingService.getResource("/webroot/not/found", FOR_CREATE);
             fail();
@@ -65,16 +65,16 @@ public class WebappLoaderIntegratingTests extends AbstractResourceLoadingTests {
 
     @Test
     public void factoryBean_init_recursively() {
-        // ½â¾öÁËÈçÏÂµÄÎÊÌâ£º
+        // è§£å†³äº†å¦‚ä¸‹çš„é—®é¢˜ï¼š
         // ---------------
-        // Ô­ÏÈ£¬webapp-loaderÍ¨¹ıinject by Type£¬½«servletContext×¢Èëconstructor¡£
-        // Õâ»á´¥·¢ËùÓĞFactoryBeanµÄ´´½¨£¬ÒÔ±ãÈ¡µÃfactoryBean.getObjectType()¡£
-        // ¼ÙÈçgetObjectType()ÒÀÀµÓÚ³õÊ¼»¯²ÅÄÜ·µ»Ø½á¹û£¨ÀıÈçwebx2 serviceFactoryBean£©£¬ÄÇÃ´spring»á¼ÌĞø³õÊ¼»¯factoryBean¡£
-        // ¼ÙÈçfactoryBeanµÄ³õÊ¼»¯ÓÖ´¥·¢ÁËresource loading»úÖÆ£¬ÓÉÓÚ´ËÊ±resource loading»¹Ã»³õÊ¼»¯Íê£¬Òò´Ë²»ÄÜ¹¤×÷£¬µ¼ÖÂÕÒ²»µ½×ÊÔ´ÎÄ¼ş£¬
-        // »òÖ»ÄÜÕÒµ½SpringÄ¬ÈÏµÄ×ÊÔ´£¨ÈçServletResource£©¡£
+        // åŸå…ˆï¼Œwebapp-loaderé€šè¿‡inject by Typeï¼Œå°†servletContextæ³¨å…¥constructorã€‚
+        // è¿™ä¼šè§¦å‘æ‰€æœ‰FactoryBeançš„åˆ›å»ºï¼Œä»¥ä¾¿å–å¾—factoryBean.getObjectType()ã€‚
+        // å‡å¦‚getObjectType()ä¾èµ–äºåˆå§‹åŒ–æ‰èƒ½è¿”å›ç»“æœï¼ˆä¾‹å¦‚webx2 serviceFactoryBeanï¼‰ï¼Œé‚£ä¹ˆspringä¼šç»§ç»­åˆå§‹åŒ–factoryBeanã€‚
+        // å‡å¦‚factoryBeançš„åˆå§‹åŒ–åˆè§¦å‘äº†resource loadingæœºåˆ¶ï¼Œç”±äºæ­¤æ—¶resource loadingè¿˜æ²¡åˆå§‹åŒ–å®Œï¼Œå› æ­¤ä¸èƒ½å·¥ä½œï¼Œå¯¼è‡´æ‰¾ä¸åˆ°èµ„æºæ–‡ä»¶ï¼Œ
+        // æˆ–åªèƒ½æ‰¾åˆ°Springé»˜è®¤çš„èµ„æºï¼ˆå¦‚ServletResourceï¼‰ã€‚
         // ---------------
-        // ÏÖÔÚ£¬ÎÒÃÇÍ¨¹ıServletContextAware½Ó¿Ú×¢ÈëservletContext£¬ÕâÑù±ã²»»á´¥·¢factoryBeanµÄ³õÊ¼»¯¡£
-        // ´Ó¶øÈ·±£factoryBeanÔÚ³õÊ¼»¯Ç°£¬Resource loading»úÖÆÒÑ¾­³õÊ¼»¯²¢¿ÉÓÃ£¬¿ÉÒÔÈ¡µÃ×ÊÔ´¡£
+        // ç°åœ¨ï¼Œæˆ‘ä»¬é€šè¿‡ServletContextAwareæ¥å£æ³¨å…¥servletContextï¼Œè¿™æ ·ä¾¿ä¸ä¼šè§¦å‘factoryBeançš„åˆå§‹åŒ–ã€‚
+        // ä»è€Œç¡®ä¿factoryBeanåœ¨åˆå§‹åŒ–å‰ï¼ŒResource loadingæœºåˆ¶å·²ç»åˆå§‹åŒ–å¹¶å¯ç”¨ï¼Œå¯ä»¥å–å¾—èµ„æºã€‚
         assertEquals("test", factory.getBean("myTest"));
     }
 

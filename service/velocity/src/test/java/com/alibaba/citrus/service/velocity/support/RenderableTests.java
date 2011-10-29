@@ -42,12 +42,12 @@ public class RenderableTests extends AbstractVelocityEngineTests {
     public void renderable() throws Exception {
         getEngine("default", factory);
 
-        // ÓÐÇÒ½öÓÐÒ»¸öhandler
+        // æœ‰ä¸”ä»…æœ‰ä¸€ä¸ªhandler
         Iterator<?> i = velocityEngine.getConfiguration().getEventCartridge().getReferenceInsertionEventHandlers();
         assertThat(i.next(), instanceOf(RenderableHandler.class));
         assertFalse(i.hasNext());
 
-        // äÖÈ¾
+        // æ¸²æŸ“
         TemplateContext ctx = new MappedTemplateContext();
         ctx.put("object", new MyRenderable());
 
@@ -60,13 +60,13 @@ public class RenderableTests extends AbstractVelocityEngineTests {
     public void renderable_config() throws Exception {
         getEngine("with_renderable_support", factory);
 
-        // ÓÐÁ½¸öhandler
+        // æœ‰ä¸¤ä¸ªhandler
         Iterator<?> i = velocityEngine.getConfiguration().getEventCartridge().getReferenceInsertionEventHandlers();
         assertThat(i.next(), instanceOf(MakeEverythingRenderable.class));
         assertThat(i.next(), instanceOf(RenderableHandler.class));
         assertFalse(i.hasNext());
 
-        // äÖÈ¾
+        // æ¸²æŸ“
         TemplateContext ctx = new MappedTemplateContext();
         ctx.put("object", "world");
 

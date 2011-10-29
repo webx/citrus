@@ -22,7 +22,7 @@ import com.alibaba.citrus.service.form.support.AbstractValidatorDefinitionParser
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ÑéÖ¤±ØÌî×Ö¶ÎµÄvalidator¡£
+ * éªŒè¯å¿…å¡«å­—æ®µçš„validatorã€‚
  * 
  * @author Michael Zhou
  */
@@ -31,7 +31,7 @@ public class RequiredValidator extends AbstractValidator {
         Object value = context.getValue();
 
         if (value instanceof String) {
-            // ÔÚtrimming=falseÄ£Ê½ÏÂ£¬¿Õ°×Ò²ËãÓĞÖµ¡£
+            // åœ¨trimming=falseæ¨¡å¼ä¸‹ï¼Œç©ºç™½ä¹Ÿç®—æœ‰å€¼ã€‚
             return !StringUtil.isEmpty((String) value);
         } else {
             return value != null;

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="GB18030"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -44,7 +44,7 @@
     </developers>
     <properties>
         <java.version>1.5</java.version>
-        <java.encoding>GBK</java.encoding>
+        <java.encoding>UTF-8</java.encoding>
         <webx-version>3.0.8</webx-version>
         <spring-version>2.5.6.SEC03</spring-version>
         <springext-plugin-version>1.0</springext-plugin-version>
@@ -107,7 +107,7 @@
     <dependencyManagement>
         <dependencies>
             <!-- ======================================== -->
-            <!-- ×ÓÏîÄ¿ÒÀÀµ -->
+            <!-- å­é¡¹ç›®ä¾èµ– -->
             <!-- ======================================== -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
@@ -273,34 +273,34 @@
                 <version>${webx-version}</version>
             </dependency>
             <!-- ================================================= -->
-            <!-- ÈÕÖ¾¼°Ïà¹ØÒÀÀµ£¨ÓÃslf4j+logback´úÌæjcl+log4j£© -->
+            <!-- æ—¥å¿—åŠç›¸å…³ä¾èµ–ï¼ˆç”¨slf4j+logbackä»£æ›¿jcl+log4jï¼‰ -->
             <!-- ================================================= -->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>1.6.1</version>
             </dependency>
-            <!-- ½«ÏÖÓÐµÄjakarta commons loggingµÄµ÷ÓÃ×ª»»³Élsf4jµÄµ÷ÓÃ¡£ -->
+            <!-- å°†çŽ°æœ‰çš„jakarta commons loggingçš„è°ƒç”¨è½¬æ¢æˆlsf4jçš„è°ƒç”¨ã€‚ -->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>jcl-over-slf4j</artifactId>
                 <version>1.6.1</version>
             </dependency>
-            <!-- Hack£ºÈ·±£commons-loggingµÄjar°ü²»±»ÒýÈë£¬·ñÔò½«ºÍjcl-over-slf4j³åÍ» -->
+            <!-- Hackï¼šç¡®ä¿commons-loggingçš„jaråŒ…ä¸è¢«å¼•å…¥ï¼Œå¦åˆ™å°†å’Œjcl-over-slf4jå†²çª -->
             <dependency>
                 <groupId>commons-logging</groupId>
                 <artifactId>commons-logging</artifactId>
                 <version>1.1.1</version>
                 <scope>provided</scope>
             </dependency>
-            <!-- slf4jµÄÊµÏÖ£ºlogback£¬ÓÃÀ´È¡´úlog4j¡£¸ü¿ì¡¢¸üÇ¿£¡ -->
+            <!-- slf4jçš„å®žçŽ°ï¼šlogbackï¼Œç”¨æ¥å–ä»£log4jã€‚æ›´å¿«ã€æ›´å¼ºï¼ -->
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
                 <version>0.9.24</version>
                 <scope>runtime</scope>
             </dependency>
-            <!-- log4jµÄÊµÏÖ£º±¸¶ø²»ÓÃ¡£ -->
+            <!-- log4jçš„å®žçŽ°ï¼šå¤‡è€Œä¸ç”¨ã€‚ -->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
@@ -314,7 +314,7 @@
                 <scope>runtime</scope>
             </dependency>
             <!-- ======================================== -->
-            <!-- µ¥Ôª²âÊÔ¼°Ïà¹ØÒÀÀµ -->
+            <!-- å•å…ƒæµ‹è¯•åŠç›¸å…³ä¾èµ– -->
             <!-- ======================================== -->
             <dependency>
                 <groupId>junit</groupId>
@@ -400,7 +400,7 @@
                 <version>2.0.8</version>
             </dependency>
             <!-- ======================================== -->
-            <!-- ÆäËüµÚÈý·½ÒÀÀµ -->
+            <!-- å…¶å®ƒç¬¬ä¸‰æ–¹ä¾èµ– -->
             <!-- ======================================== -->
             <dependency>
                 <groupId>ecs</groupId>
@@ -503,7 +503,7 @@
                 <version>1.3.04</version>
             </dependency>
             <!-- ======================================== -->
-            <!-- SpringÒÀÀµ -->
+            <!-- Springä¾èµ– -->
             <!-- ======================================== -->
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -678,7 +678,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <!-- ½ÏµÍ°æ±¾ÓÐbug£¬µ¼ÖÂhessian²»ÄÜ±àÒëÍ¨¹ý¡£ -->
+                    <!-- è¾ƒä½Žç‰ˆæœ¬æœ‰bugï¼Œå¯¼è‡´hessianä¸èƒ½ç¼–è¯‘é€šè¿‡ã€‚ -->
                     <version>2.3.2</version>
                 </plugin>
                 <plugin>

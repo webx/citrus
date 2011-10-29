@@ -28,7 +28,7 @@ import com.alibaba.citrus.generictype.BoundedTypeInfo;
 import com.alibaba.citrus.generictype.TypeInfo;
 
 /**
- * ¶Ô{@link BoundedTypeInfo}µÄ³éÏóÊµÏÖ¡£
+ * å¯¹{@link BoundedTypeInfo}çš„æŠ½è±¡å®ç°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -105,7 +105,7 @@ abstract class AbstractBoundedTypeInfo implements BoundedTypeInfo {
     }
 
     /**
-     * È¡µÃhashÖµ¡£
+     * å–å¾—hashå€¼ã€‚
      */
     @Override
     public int hashCode() {
@@ -113,7 +113,7 @@ abstract class AbstractBoundedTypeInfo implements BoundedTypeInfo {
     }
 
     /**
-     * ÅĞ¶ÏÁ½¸ö¶ÔÏóÊÇ·ñÏàÍ¬¡£
+     * åˆ¤æ–­ä¸¤ä¸ªå¯¹è±¡æ˜¯å¦ç›¸åŒã€‚
      */
     @Override
     public boolean equals(Object other) {
@@ -131,7 +131,7 @@ abstract class AbstractBoundedTypeInfo implements BoundedTypeInfo {
     }
 
     /**
-     * ×ª»»³É×Ö·û´®¡£
+     * è½¬æ¢æˆå­—ç¬¦ä¸²ã€‚
      */
     @Override
     public abstract String toString();

@@ -39,7 +39,7 @@ import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 /**
- * ½«Ò»¸ö<code>Map</code>±àÂë³É×Ö·û´®£¬»ò·´Ö®¡£Ö§³Ö¼ÓÃÜ¡£
+ * å°†ä¸€ä¸ª<code>Map</code>ç¼–ç æˆå­—ç¬¦ä¸²ï¼Œæˆ–åä¹‹ã€‚æ”¯æŒåŠ å¯†ã€‚
  * 
  * @author Michael Zhou
  */
@@ -56,7 +56,7 @@ public class MappedValuesEncoder extends AbstractSessionValueEncoder {
     }
 
     /**
-     * ¸´ÔÓÖµÑ¹Ëõ£¬È¡µÃµÄ×Ö·û´®½Ï¶Ì¡£
+     * å¤æ‚å€¼å‹ç¼©ï¼Œå–å¾—çš„å­—ç¬¦ä¸²è¾ƒçŸ­ã€‚
      */
     @Override
     protected boolean doCompress() {

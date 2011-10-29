@@ -29,7 +29,7 @@ import com.alibaba.citrus.asm.ClassWriter;
 import com.alibaba.citrus.asm.Type;
 
 /**
- * ÓÃÀ´Éú³ÉÒ»¸öÀà»ò½Ó¿ÚµÄ¹¤¾ß¡£
+ * ç”¨æ¥ç”Ÿæˆä¸€ä¸ªç±»æˆ–æ¥å£çš„å·¥å…·ã€‚
  * 
  * @author Michael Zhou
  */
@@ -44,16 +44,16 @@ public abstract class ClassBuilder {
     private Member lastMember;
 
     /**
-     * ´´½¨Ò»¸ö<code>ClassBuilder</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>ClassBuilder</code>ã€‚
      * 
-     * @param cw <code>ClassWriter</code>¶ÔÏó¡£
-     * @param access ·ÃÎÊĞÔ£¬Èç¹ûÊÇ<code>-1</code>£¬ÔòÈ¡Ä¬ÈÏÖµ<code>public</code>¡£
-     * @param isInterface ÊÇ·ñÎª½Ó¿Ú¡£
-     * @param className ÒªÉú³ÉµÄÀàÃû
-     * @param superclass ¸¸Àà
-     * @param interfaces ½Ó¿Ú
-     * @param classVersion ¶ş½øÖÆ°æ±¾£¬Èç¹ûÊÇ<code>-1</code>£¬ÔòÈ¡Ä¬ÈÏÖµ¡£
-     * @param source Ô´ÎÄ¼şÃû£¬Èç¹ûÊÇ<code>null</code>£¬ÔòÈ¡Ä¬ÈÏÖµ¡£
+     * @param cw <code>ClassWriter</code>å¯¹è±¡ã€‚
+     * @param access è®¿é—®æ€§ï¼Œå¦‚æœæ˜¯<code>-1</code>ï¼Œåˆ™å–é»˜è®¤å€¼<code>public</code>ã€‚
+     * @param isInterface æ˜¯å¦ä¸ºæ¥å£ã€‚
+     * @param className è¦ç”Ÿæˆçš„ç±»å
+     * @param superclass çˆ¶ç±»
+     * @param interfaces æ¥å£
+     * @param classVersion äºŒè¿›åˆ¶ç‰ˆæœ¬ï¼Œå¦‚æœæ˜¯<code>-1</code>ï¼Œåˆ™å–é»˜è®¤å€¼ã€‚
+     * @param source æºæ–‡ä»¶åï¼Œå¦‚æœæ˜¯<code>null</code>ï¼Œåˆ™å–é»˜è®¤å€¼ã€‚
      */
     public ClassBuilder(ClassWriter cw, int access, boolean isInterface, String className, Class<?> superclass,
                         Class<?>[] interfaces, int classVersion, String source) {
@@ -63,7 +63,7 @@ public abstract class ClassBuilder {
 
         // access
         if (access < 0) {
-            access = ACC_PUBLIC; // Ä¬ÈÏÖµ
+            access = ACC_PUBLIC; // é»˜è®¤å€¼
         }
 
         access |= ACC_SUPER; // for backward-compatibility
@@ -108,63 +108,63 @@ public abstract class ClassBuilder {
     }
 
     /**
-     * È¡µÃ<code>ClassVisitor</code>¡£
+     * å–å¾—<code>ClassVisitor</code>ã€‚
      */
     public ClassVisitor getClassVisitor() {
         return cv;
     }
 
     /**
-     * È¡µÃµ±Ç°µÄÀàÃû¡£
+     * å–å¾—å½“å‰çš„ç±»åã€‚
      */
     public String getClassName() {
         return className;
     }
 
     /**
-     * ÅĞ¶ÏÊÇ·ñÎª½Ó¿Ú¡£
+     * åˆ¤æ–­æ˜¯å¦ä¸ºæ¥å£ã€‚
      */
     public boolean isInterface() {
         return isInterface;
     }
 
     /**
-     * È¡µÃµ±Ç°µÄÀàĞÍĞÅÏ¢¡£
+     * å–å¾—å½“å‰çš„ç±»å‹ä¿¡æ¯ã€‚
      */
     public Type getType() {
         return classType;
     }
 
     /**
-     * È¡µÃ¸¸ÀàµÄÀàĞÍĞÅÏ¢¡£
+     * å–å¾—çˆ¶ç±»çš„ç±»å‹ä¿¡æ¯ã€‚
      */
     public Type getSuperType() {
         return superType;
     }
 
     /**
-     * ´´½¨Ò»¸öpublic³£Á¿field¡£
+     * åˆ›å»ºä¸€ä¸ªpublicå¸¸é‡fieldã€‚
      */
     public FieldBuilder addConstantField(Class<?> fieldType, String fieldName, Object value) {
         return addField(ACC_PUBLIC | ACC_CONSTANT, fieldType, fieldName, value);
     }
 
     /**
-     * ´´½¨Ò»¸ö³£Á¿field¡£
+     * åˆ›å»ºä¸€ä¸ªå¸¸é‡fieldã€‚
      */
     public FieldBuilder addConstantField(int access, Class<?> fieldType, String fieldName, Object value) {
         return addField(access | ACC_CONSTANT, fieldType, fieldName, value);
     }
 
     /**
-     * ´´½¨Ò»¸öprivate field¡£
+     * åˆ›å»ºä¸€ä¸ªprivate fieldã€‚
      */
     public FieldBuilder addField(Class<?> fieldType, String fieldName, Object value) {
         return addField(-1, fieldType, fieldName, value);
     }
 
     /**
-     * ´´½¨Ò»¸öfield¡£
+     * åˆ›å»ºä¸€ä¸ªfieldã€‚
      */
     public FieldBuilder addField(int access, Class<?> fieldType, String fieldName, Object value) {
         FieldBuilder fb = setMember(new FieldMember(this, access, fieldType, fieldName, value));
@@ -173,28 +173,28 @@ public abstract class ClassBuilder {
     }
 
     /**
-     * ´´½¨public¹¹Ôìº¯Êı¡£
+     * åˆ›å»ºpublicæ„é€ å‡½æ•°ã€‚
      */
     public MethodBuilder addConstructor(Class<?>[] parameterTypes, Class<?>[] exceptionTypes) {
         return addMethod(-1, null, CONSTRUCTOR_NAME, parameterTypes, exceptionTypes);
     }
 
     /**
-     * ´´½¨¹¹Ôìº¯Êı¡£
+     * åˆ›å»ºæ„é€ å‡½æ•°ã€‚
      */
     public MethodBuilder addConstructor(int access, Class<?>[] parameterTypes, Class<?>[] exceptionTypes) {
         return addMethod(access, null, CONSTRUCTOR_NAME, parameterTypes, exceptionTypes);
     }
 
     /**
-     * ´´½¨¾²Ì¬¹¹Ôìº¯Êı¡£
+     * åˆ›å»ºé™æ€æ„é€ å‡½æ•°ã€‚
      */
     public MethodBuilder addStaticConstructor() {
         return addMethod(-1, null, STATIC_CONSTRUCTOR_NAME, null, null);
     }
 
     /**
-     * ´´½¨public·½·¨¡£
+     * åˆ›å»ºpublicæ–¹æ³•ã€‚
      */
     public MethodBuilder addMethod(Method method) {
         return addMethod(-1, method.getReturnType(), method.getName(), method.getParameterTypes(),
@@ -202,7 +202,7 @@ public abstract class ClassBuilder {
     }
 
     /**
-     * ´´½¨public·½·¨¡£
+     * åˆ›å»ºpublicæ–¹æ³•ã€‚
      */
     public MethodBuilder addMethod(Class<?> returnType, String methodName, Class<?>[] parameterTypes,
                                    Class<?>[] exceptionTypes) {
@@ -210,7 +210,7 @@ public abstract class ClassBuilder {
     }
 
     /**
-     * ´´½¨·½·¨¡£
+     * åˆ›å»ºæ–¹æ³•ã€‚
      */
     public MethodBuilder addMethod(int access, Class<?> returnType, String methodName, Class<?>[] parameterTypes,
                                    Class<?>[] exceptionTypes) {
@@ -221,7 +221,7 @@ public abstract class ClassBuilder {
     }
 
     /**
-     * Éú³Éclass¡£
+     * ç”Ÿæˆclassã€‚
      */
     public final Class<?> toClass() {
         setMember(null);
@@ -232,26 +232,26 @@ public abstract class ClassBuilder {
     }
 
     /**
-     * ¸ø×ÓÀàÒ»¸ö»ú»á°ü×°class writer¡£
+     * ç»™å­ç±»ä¸€ä¸ªæœºä¼šåŒ…è£…class writerã€‚
      */
     protected ClassVisitor decorate(ClassVisitor cv) {
         return cv;
     }
 
     /**
-     * ¶¨Òå²¢×°ÔØÀà¡£
+     * å®šä¹‰å¹¶è£…è½½ç±»ã€‚
      */
     protected abstract Class<?> defineClass(String className, byte[] bytes);
 
     /**
-     * °üÀ¨<code>end</code>·½·¨µÄclass³ÉÔ±¡£
+     * åŒ…æ‹¬<code>end</code>æ–¹æ³•çš„classæˆå‘˜ã€‚
      */
     private interface Member {
         void end();
     }
 
     /**
-     * ½áÊøÇ°Ò»¸ö³ÉÔ±£¬¿ªÊ¼ĞÂµÄ³ÉÔ±¡£
+     * ç»“æŸå‰ä¸€ä¸ªæˆå‘˜ï¼Œå¼€å§‹æ–°çš„æˆå‘˜ã€‚
      */
     private <M extends Member> M setMember(M member) {
         if (lastMember != null) {
@@ -264,7 +264,7 @@ public abstract class ClassBuilder {
     }
 
     /**
-     * ¿É×Ô¶¯½áÊøµÄ<code>FieldBuilder</code>¡£
+     * å¯è‡ªåŠ¨ç»“æŸçš„<code>FieldBuilder</code>ã€‚
      */
     private class FieldMember extends FieldBuilder implements Member {
         protected FieldMember(ClassBuilder cb, int access, Class<?> fieldType, String fieldName, Object value) {
@@ -277,7 +277,7 @@ public abstract class ClassBuilder {
     }
 
     /**
-     * ¿É×Ô¶¯½áÊøµÄ<code>MethodBuilder</code>¡£
+     * å¯è‡ªåŠ¨ç»“æŸçš„<code>MethodBuilder</code>ã€‚
      */
     private class MethodMember extends MethodBuilder implements Member {
         protected MethodMember(ClassBuilder cb, int access, Class<?> returnType, String methodName,

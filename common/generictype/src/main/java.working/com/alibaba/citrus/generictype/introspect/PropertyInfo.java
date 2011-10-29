@@ -21,9 +21,9 @@ import com.alibaba.citrus.generictype.MethodInfo;
 import com.alibaba.citrus.generictype.TypeInfo;
 
 /**
- * ´ú±íÒ»¸öpropertyµÄĞÅÏ¢¡£
+ * ä»£è¡¨ä¸€ä¸ªpropertyçš„ä¿¡æ¯ã€‚
  * <p>
- * Property²»ÊÇÒ»¸öJavaÓïÑÔµÄÔªËØ£¬¶øÊÇÒ»ÖÖ¹æ·¶ºÍÔ¼¶¨¡£³£¼ûµÄĞÎÊ½ÊÇ£º
+ * Propertyä¸æ˜¯ä¸€ä¸ªJavaè¯­è¨€çš„å…ƒç´ ï¼Œè€Œæ˜¯ä¸€ç§è§„èŒƒå’Œçº¦å®šã€‚å¸¸è§çš„å½¢å¼æ˜¯ï¼š
  * </p>
  * 
  * <pre>
@@ -32,45 +32,45 @@ import com.alibaba.citrus.generictype.TypeInfo;
  * public void setName(String name);
  * </pre>
  * <p>
- * ÒÔÉÏÕâ¶Ô·½·¨¶¨ÒåÁËÒ»¸ö¿É¶Á¡¢¿ÉĞ´µÄproperty£¬Ãû×Ö½Ğ<code>name</code>£¬ÀàĞÍÎª<code>String</code>¡£
+ * ä»¥ä¸Šè¿™å¯¹æ–¹æ³•å®šä¹‰äº†ä¸€ä¸ªå¯è¯»ã€å¯å†™çš„propertyï¼Œåå­—å«<code>name</code>ï¼Œç±»å‹ä¸º<code>String</code>ã€‚
  * </p>
  */
 public interface PropertyInfo {
     /**
-     * È¡µÃpropertyµÄÃû³Æ¡£
+     * å–å¾—propertyçš„åç§°ã€‚
      * <p>
-     * ¶ÔÓÚindexed»òmapped property£¬ÆäÃû³Æ¿ÉÒÔÎª¿Õ£¨<code>""</code>£©¡£
+     * å¯¹äºindexedæˆ–mapped propertyï¼Œå…¶åç§°å¯ä»¥ä¸ºç©ºï¼ˆ<code>""</code>ï¼‰ã€‚
      * </p>
      */
     String getName();
 
     /**
-     * È¡µÃµ±Ç°propertyËùÔÚµÄÀàĞÍ¡£
+     * å–å¾—å½“å‰propertyæ‰€åœ¨çš„ç±»å‹ã€‚
      */
     TypeInfo getDeclaringType();
 
     /**
-     * È¡µÃpropertyµÄÀàĞÍ¡£
+     * å–å¾—propertyçš„ç±»å‹ã€‚
      */
     TypeInfo getType();
 
     /**
-     * ÅĞ¶ÏpropertyÊÇ·ñ¿É¶Á¡£
+     * åˆ¤æ–­propertyæ˜¯å¦å¯è¯»ã€‚
      */
     boolean isReadable();
 
     /**
-     * ÅĞ¶ÏpropertyÊÇ·ñ¿ÉĞ´¡£
+     * åˆ¤æ–­propertyæ˜¯å¦å¯å†™ã€‚
      */
     boolean isWritable();
 
     /**
-     * È¡µÃÓÃÀ´¶ÁÈ¡propertyµÄ·½·¨¡£
+     * å–å¾—ç”¨æ¥è¯»å–propertyçš„æ–¹æ³•ã€‚
      */
     MethodInfo getReadMethod();
 
     /**
-     * È¡µÃÓÃÀ´ĞŞ¸ÄpropertyµÄ·½·¨¡£
+     * å–å¾—ç”¨æ¥ä¿®æ”¹propertyçš„æ–¹æ³•ã€‚
      */
     MethodInfo getWriteMethod();
 }

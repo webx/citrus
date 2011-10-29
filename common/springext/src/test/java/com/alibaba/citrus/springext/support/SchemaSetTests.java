@@ -131,8 +131,8 @@ public class SchemaSetTests {
         // priority
         assertSame(s1, set1.findSchema("b/c"));
         assertSame(s2, set1.findSchema("b/d"));
-        assertSame(s3, set1.findSchema("a/b/c")); // Í¬Ê±Æ¥Åäb/cºÍa/b/c£¬µ«ºóÕßÓÅÏÈ
-        assertSame(s4, set1.findSchema("a/b/d")); // Í¬Ê±Æ¥Åäb/dºÍa/b/d£¬µ«ºóÕßÓÅÏÈ
+        assertSame(s3, set1.findSchema("a/b/c")); // åŒæ—¶åŒ¹é…b/cå’Œa/b/cï¼Œä½†åè€…ä¼˜å…ˆ
+        assertSame(s4, set1.findSchema("a/b/d")); // åŒæ—¶åŒ¹é…b/då’Œa/b/dï¼Œä½†åè€…ä¼˜å…ˆ
 
         // normalize
         assertSame(s3, set1.findSchema(" a/b/c "));
@@ -224,21 +224,21 @@ public class SchemaSetTests {
         Map<String, Schema> nameToSchemas = createHashMap();
         nameToSchemas.putAll(set2.getNamedMappings());
 
-        // all ±»Ìæ»»
+        // all è¢«æ›¿æ¢
         all = assertReplaced(nameToSchemas, "schema/all.xsd", all);
 
-        // x,y ±»Ìæ»»
+        // x,y è¢«æ›¿æ¢
         x = assertReplaced(nameToSchemas, "schema/x.xsd", x);
         y = assertReplaced(nameToSchemas, "schema/y.xsd", y);
 
-        // ÆäÓà²»±ä
+        // å…¶ä½™ä¸å˜
         assertSame(z, nameToSchemas.remove("schema/z.xsd"));
         assertSame(a, nameToSchemas.remove("schema/a.xsd"));
         assertSame(b, nameToSchemas.remove("schema/b.xsd"));
 
         assertTrue(nameToSchemas.isEmpty());
 
-        // ¼ì²éÄÚÈİ: all
+        // æ£€æŸ¥å†…å®¹: all
         Iterator<Element> i = getNodes(all, "http://www.alibaba.com/schema/test", 6).iterator();
         assertEquals("schema/a.xsd", i.next().attributeValue("schemaLocation"));
         assertEquals("schema/z.xsd", i.next().attributeValue("schemaLocation"));
@@ -247,11 +247,11 @@ public class SchemaSetTests {
         assertEquals("schema/y.xsd", i.next().attributeValue("schemaLocation"));
         assertEquals("test", i.next().attributeValue("name"));
 
-        // ¼ì²éÄÚÈİ: x
+        // æ£€æŸ¥å†…å®¹: x
         i = getNodes(x, null, 1).iterator();
         assertEquals("testx", i.next().attributeValue("name"));
 
-        // ¼ì²éÄÚÈİ: y
+        // æ£€æŸ¥å†…å®¹: y
         i = getNodes(y, null, 1).iterator();
         assertEquals("testy", i.next().attributeValue("name"));
     }

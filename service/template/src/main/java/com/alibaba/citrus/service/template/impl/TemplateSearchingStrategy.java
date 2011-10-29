@@ -18,20 +18,20 @@
 package com.alibaba.citrus.service.template.impl;
 
 /**
- * ÓÉ<code>TemplateService</code>µ÷ÓÃµÄ£¬ÓÃÀ´²éÕÒtemplateµÄstrategy¡£
+ * ç”±<code>TemplateService</code>è°ƒç”¨çš„ï¼Œç”¨æ¥æŸ¥æ‰¾templateçš„strategyã€‚
  * 
  * @author Michael Zhou
  */
 public interface TemplateSearchingStrategy {
     /**
-     * È¡µÃÓÃÀ´»º´æÄ£°åËÑË÷½á¹ûµÄkey¡£
+     * å–å¾—ç”¨æ¥ç¼“å­˜æ¨¡æ¿æœç´¢ç»“æœçš„keyã€‚
      */
     Object getKey(String templateName);
 
     /**
-     * ²éÕÒtemplate£¬Èç¹ûÕÒµ½£¬Ôò·µ»Ø<code>true</code>¡£
+     * æŸ¥æ‰¾templateï¼Œå¦‚æœæ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>true</code>ã€‚
      * <p>
-     * ¿É¸ü¸Ämatcher²ÎÊıÖĞµÄÄ£°åÃû³ÆºÍºó×º¡£
+     * å¯æ›´æ”¹matcherå‚æ•°ä¸­çš„æ¨¡æ¿åç§°å’Œåç¼€ã€‚
      * </p>
      */
     boolean findTemplate(TemplateMatcher matcher);

@@ -38,10 +38,10 @@ import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 public class URIBrokerServiceTests extends AbstractURIBrokerServiceTests {
     @Test
     public void requestProxy() {
-        // 可以接受：no request
+        // 鍙互鎺ュ彈锛歯o request
         new URIBrokerServiceImpl(null);
 
-        // 不可以接受：非proxy的request
+        // 涓嶅彲浠ユ帴鍙楋細闈瀙roxy鐨剅equest
         HttpServletRequest mockRequest = createMock(HttpServletRequest.class);
 
         try {
@@ -52,7 +52,7 @@ public class URIBrokerServiceTests extends AbstractURIBrokerServiceTests {
                     + mockRequest.getClass().getName()));
         }
 
-        // 正常request proxy
+        // 姝ｅ父request proxy
         assertTrue(getFieldValue(service, "request", HttpServletRequest.class) instanceof ProxyTargetFactory);
     }
 
@@ -64,7 +64,7 @@ public class URIBrokerServiceTests extends AbstractURIBrokerServiceTests {
         assertFalse(service.isRequestAware());
         assertNull(getFieldValue(service, "requestAware", Boolean.class));
 
-        // 用default值初始化uribroker，uribroker.isRequestAware == false
+        // 鐢╠efault鍊煎垵濮嬪寲uribroker锛寀ribroker.isRequestAware == false
         assertBrokerRequestAware(service, false);
 
         // set value
@@ -226,7 +226,7 @@ public class URIBrokerServiceTests extends AbstractURIBrokerServiceTests {
                 new URIBrokerInfo("b1", null, true, new ContentURIBroker()), //
         });
 
-        // 可继承非super class
+        // 鍙户鎵块潪super class
         service.afterPropertiesSet();
     }
 

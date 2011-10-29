@@ -37,7 +37,7 @@ import com.alibaba.citrus.util.templatelite.Template;
 import com.alibaba.citrus.util.templatelite.TextWriter;
 
 /**
- * Ò»¸ö¼òµ¥µÄ¡¢ÀûÓÃtemplatelite.<code>Template</code>Ä£°åÉú³ÉWEBÒ³Ãæ¼°Ïà¹Ø×ÊÔ´µÄ¹¤¾ßÀà¡£
+ * ä¸€ä¸ªç®€å•çš„ã€åˆ©ç”¨templatelite.<code>Template</code>æ¨¡æ¿ç”ŸæˆWEBé¡µé¢åŠç›¸å…³èµ„æºçš„å·¥å…·ç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -49,9 +49,9 @@ public abstract class RequestProcessor<RC extends RequestContext> implements Pag
             int lenDiff = s2.length() - s1.length();
 
             if (lenDiff != 0) {
-                return lenDiff; // ÏÈ°´Ãû³Æ³¤¶Èµ¹ÅÅĞò
+                return lenDiff; // å…ˆæŒ‰åç§°é•¿åº¦å€’æ’åº
             } else {
-                return s1.compareTo(s2); // ÔÙ°´×ÖÄ¸Ë³ĞòÅÅĞò
+                return s1.compareTo(s2); // å†æŒ‰å­—æ¯é¡ºåºæ’åº
             }
         }
     });
@@ -72,7 +72,7 @@ public abstract class RequestProcessor<RC extends RequestContext> implements Pag
     }
 
     /**
-     * ×¢²áÒ»¸ö×é¼ş¡£
+     * æ³¨å†Œä¸€ä¸ªç»„ä»¶ã€‚
      */
     public void register(String componentPath, PageComponent component) {
         assertNotNull(componentPath, "componentPath is null");
@@ -84,14 +84,14 @@ public abstract class RequestProcessor<RC extends RequestContext> implements Pag
     }
 
     /**
-     * È¡µÃËùÓĞµÄcomponentPaths¡£
+     * å–å¾—æ‰€æœ‰çš„componentPathsã€‚
      */
     public String[] getComponentPaths() {
         return components.keySet().toArray(new String[components.size()]);
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄ×é¼ş¡£
+     * å–å¾—æŒ‡å®šåç§°çš„ç»„ä»¶ã€‚
      */
     public <PC extends PageComponent> PC getComponent(String componentPath, Class<PC> componentClass) {
         componentPath = PageComponent.normalizeComponentPath(componentPath);
@@ -108,12 +108,12 @@ public abstract class RequestProcessor<RC extends RequestContext> implements Pag
     }
 
     /**
-     * ´¦ÀíÇëÇó¡£
+     * å¤„ç†è¯·æ±‚ã€‚
      */
     public final void processRequest(final RC request) throws IOException {
         final String resourceName = request.getResourceName();
 
-        // ÏÈ¿´¿´ÊÇ²»ÊÇcss¡¢jsÖ®ÀàµÄ×ÊÔ´ÎÄ¼ş£¬»òÕß×ÊÔ´ÎÄ¼şÄ£°å
+        // å…ˆçœ‹çœ‹æ˜¯ä¸æ˜¯cssã€jsä¹‹ç±»çš„èµ„æºæ–‡ä»¶ï¼Œæˆ–è€…èµ„æºæ–‡ä»¶æ¨¡æ¿
         URL tmpres = getRawResource(resourceName);
         final boolean template;
 
@@ -138,25 +138,25 @@ public abstract class RequestProcessor<RC extends RequestContext> implements Pag
             return;
         }
 
-        // ²éÕÒresource
+        // æŸ¥æ‰¾resource
         boolean found = resourceExists(resourceName);
 
         if (!found && !resourceName.endsWith("/")) {
             String indexPage = resourceName + "/";
 
             if (resourceExists(indexPage)) {
-                request.redirectTo(request.getResourceURL(indexPage)); // ÖØ¶¨Ïòµ½Ä¿Â¼µÄÕı¹æĞÎÊ½
+                request.redirectTo(request.getResourceURL(indexPage)); // é‡å®šå‘åˆ°ç›®å½•çš„æ­£è§„å½¢å¼
                 return;
             }
         }
 
-        // ±¨´í£º×ÊÔ´ÕÒ²»µ½
+        // æŠ¥é”™ï¼šèµ„æºæ‰¾ä¸åˆ°
         if (!found) {
             request.resourceNotFound(resourceName);
             return;
         }
 
-        // äÖÈ¾Ò³Ãæ
+        // æ¸²æŸ“é¡µé¢
         checkLastModified(request, getLastModifiedOfPage(request, resourceName), new Runnable() {
             public void run() throws IOException {
                 if (beforeRenderingPage(request, resourceName)) {
@@ -169,12 +169,12 @@ public abstract class RequestProcessor<RC extends RequestContext> implements Pag
     private void checkLastModified(RC request, long lastModified, Runnable runner) throws IOException {
         ServletRequestContext servletRequest = getServletRequestContext(request);
 
-        // ¼ÙÈç£º
-        // 1. requestÎªservlet request£»
-        //    ²¢ÇÒ£¬lastModified >= 0£»
-        //    ²¢ÇÒ£¬GET·½·¨£»
-        // 2. »òÕß£¬lastModified > ifModifiedSince
-        // Ö´ĞĞrunner
+        // å‡å¦‚ï¼š
+        // 1. requestä¸ºservlet requestï¼›
+        //    å¹¶ä¸”ï¼ŒlastModified >= 0ï¼›
+        //    å¹¶ä¸”ï¼ŒGETæ–¹æ³•ï¼›
+        // 2. æˆ–è€…ï¼ŒlastModified > ifModifiedSince
+        // æ‰§è¡Œrunner
         if (lastModified < 0 || servletRequest == null
                 || !"get".equalsIgnoreCase(servletRequest.getRequest().getMethod())) {
             runner.run();
@@ -194,14 +194,14 @@ public abstract class RequestProcessor<RC extends RequestContext> implements Pag
     }
 
     /**
-     * ÅĞ¶Ï×ÊÔ´ÊÇ·ñ´æÔÚ¡£
+     * åˆ¤æ–­èµ„æºæ˜¯å¦å­˜åœ¨ã€‚
      */
     protected abstract boolean resourceExists(String resourceName);
 
     /**
-     * ²éÕÒÖ¸¶¨Ãû³ÆµÄ×ÊÔ´URL£¬Èç¹ûÃ»ÕÒµ½£¬¾Í·µ»Ø<code>null</code>¡£
+     * æŸ¥æ‰¾æŒ‡å®šåç§°çš„èµ„æºURLï¼Œå¦‚æœæ²¡æ‰¾åˆ°ï¼Œå°±è¿”å›<code>null</code>ã€‚
      * <p>
-     * ÏÈ²éÕÒËùÓĞ×¢²áµÄcomponent£¬ÔÙ²éÕÒµ±Ç°ÀàÍ¬¼¶Ä¿Â¼µÄclasspath¡£
+     * å…ˆæŸ¥æ‰¾æ‰€æœ‰æ³¨å†Œçš„componentï¼Œå†æŸ¥æ‰¾å½“å‰ç±»åŒçº§ç›®å½•çš„classpathã€‚
      * </p>
      */
     private URL getRawResource(String resourceName) {
@@ -262,12 +262,12 @@ public abstract class RequestProcessor<RC extends RequestContext> implements Pag
     }
 
     /**
-     * äÖÈ¾Ò³Ãæ¡£
+     * æ¸²æŸ“é¡µé¢ã€‚
      */
     protected abstract void renderPage(RC request, String resourceName) throws IOException;
 
     /**
-     * äÖÈ¾css¡¢jsÖ®ÀàµÄ×ÊÔ´ÎÄ¼ş£¬»òÕß×ÊÔ´ÎÄ¼şÄ£°å¡£
+     * æ¸²æŸ“cssã€jsä¹‹ç±»çš„èµ„æºæ–‡ä»¶ï¼Œæˆ–è€…èµ„æºæ–‡ä»¶æ¨¡æ¿ã€‚
      */
     private void renderResource(final RC request, URL resource, boolean template) throws IOException {
         String resourceName = request.getResourceName();
@@ -281,7 +281,7 @@ public abstract class RequestProcessor<RC extends RequestContext> implements Pag
             Template tpl = new Template(resource);
             PrintWriter out = request.getWriter(contentType);
 
-            // ¶ÔÓÚÄ£°åÎÄ¼şÖĞ£¬${url:relativeUrl}½«±»×ª»»³ÉÍêÕûµÄURL
+            // å¯¹äºæ¨¡æ¿æ–‡ä»¶ä¸­ï¼Œ${url:relativeUrl}å°†è¢«è½¬æ¢æˆå®Œæ•´çš„URL
             tpl.accept(new TextWriter<PrintWriter>(out) {
                 @SuppressWarnings("unused")
                 public void visitUrl(String relativeUrl) {
@@ -294,7 +294,7 @@ public abstract class RequestProcessor<RC extends RequestContext> implements Pag
     }
 
     /**
-     * È¡µÃËùÓĞcomponentµÄ×ÊÔ´ÎÄ¼ş¡£
+     * å–å¾—æ‰€æœ‰componentçš„èµ„æºæ–‡ä»¶ã€‚
      */
     protected List<String> getComponentResources(String ext) {
         List<String> names = createLinkedList();

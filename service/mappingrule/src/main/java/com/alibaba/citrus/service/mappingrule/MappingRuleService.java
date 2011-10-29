@@ -18,21 +18,21 @@
 package com.alibaba.citrus.service.mappingrule;
 
 /**
- * ��һ������ӳ�䵽��һ�����Ƶķ���
+ * 将一个名称映射到另一个名称的服务。
  * <p>
- * ��webx�У���Ҫ��ģ����ת������Ӧ��module������layoutģ�����ȡ�
+ * 在webx中，需要将模板名转换成相应的module类名或layout模板名等。
  * </p>
  * <p>
- * <code>MappingRuleService</code>�ṩ��һ������չ��ͨ�÷�����������Щת������
+ * <code>MappingRuleService</code>提供了一个可扩展的通用方法来定义这些转换规则。
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface MappingRuleService {
     /**
-     * ��ָ������ӳ���ָ�����͵����ơ�
+     * 将指定名称映射成指定类型的名称。
      * <p>
-     * ����<code>ruleType</code>�����ڣ����׳��쳣��
+     * 假如<code>ruleType</code>不存在，则抛出异常。
      * </p>
      */
     String getMappedName(String ruleType, String name) throws MappingRuleNotFoundException, MappingRuleException;

@@ -85,7 +85,7 @@ public class SpringResourceLoaderAdapterTests {
         assertThat(source1.hashCode(), not(equalTo(source3.hashCode())));
         assertThat(source1, not(equalTo(source3)));
 
-        // Ä£°åÃûÎª¿Õ
+        // æ¨¡æ¿åä¸ºç©º
         try {
             freemarkerLoader.findTemplateSource(null);
             fail();
@@ -93,7 +93,7 @@ public class SpringResourceLoaderAdapterTests {
             assertThat(e, exception("templateName"));
         }
 
-        // Ä£°å²»´æÔÚ
+        // æ¨¡æ¿ä¸å­˜åœ¨
         assertNull(freemarkerLoader.findTemplateSource("notExist.ftl"));
     }
 
@@ -101,10 +101,10 @@ public class SpringResourceLoaderAdapterTests {
     public void getLastModified() throws IOException {
         long lastModified = factory.getResource("/templates/test.ftl").lastModified();
 
-        // ×ÊÔ´/templates/test.ftlÖ§³ÖlastModified
+        // èµ„æº/templates/test.ftlæ”¯æŒlastModified
         assertEquals(lastModified, lastModified("test.ftl"));
 
-        // ×ÊÔ´/templates/notExist.ftl²»´æÔÚ
+        // èµ„æº/templates/notExist.ftlä¸å­˜åœ¨
         try {
             lastModified("/notExist.ftl");
             fail();
@@ -112,7 +112,7 @@ public class SpringResourceLoaderAdapterTests {
             assertThat(e, exception("templateSource"));
         }
 
-        // ×ÊÔ´/templates/test2.ftl´æÔÚ£¬µ«²»Ö§³ÖlastModified£¬·µ»Ø-1
+        // èµ„æº/templates/test2.ftlå­˜åœ¨ï¼Œä½†ä¸æ”¯æŒlastModifiedï¼Œè¿”å›-1
         assertEquals(0, factory.getResource("/templates/test2.ftl").lastModified());
         assertEquals(-1, lastModified("test2.ftl"));
     }
@@ -126,7 +126,7 @@ public class SpringResourceLoaderAdapterTests {
         TemplateSource templateSource = (TemplateSource) freemarkerLoader.findTemplateSource("test3.ftl");
         Reader reader = freemarkerLoader.getReader(templateSource, "GBK");
 
-        assertEquals("ÖĞ¹ú", StreamUtil.readText(reader, true));
+        assertEquals("ä¸­å›½", StreamUtil.readText(reader, true));
 
         freemarkerLoader.closeTemplateSource(templateSource);
 
@@ -145,9 +145,9 @@ public class SpringResourceLoaderAdapterTests {
         InputStream istream = source.getInputStream();
 
         assertNotNull(istream);
-        assertSame(istream, source.getInputStream()); // Á½´Î·µ»ØÍ¬Ò»¸östream
+        assertSame(istream, source.getInputStream()); // ä¸¤æ¬¡è¿”å›åŒä¸€ä¸ªstream
 
-        // ¹Ø±Õºó£¬ÔÙ´ò¿ª£¬½«´´½¨ĞÂµÄstream
+        // å…³é—­åï¼Œå†æ‰“å¼€ï¼Œå°†åˆ›å»ºæ–°çš„stream
         freemarkerLoader.closeTemplateSource(source);
         assertNotSame(istream, source.getInputStream());
 
@@ -159,7 +159,7 @@ public class SpringResourceLoaderAdapterTests {
     }
 
     /**
-     * ³ıÈ¥resource URLµÄfilter¡£
+     * é™¤å»resource URLçš„filterã€‚
      */
     public static class NoURLFilter implements ResourceFilter {
         public void init(ResourceLoadingService resourceLoadingService) {

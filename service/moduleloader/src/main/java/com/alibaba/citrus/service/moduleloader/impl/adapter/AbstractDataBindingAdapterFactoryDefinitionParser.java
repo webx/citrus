@@ -39,7 +39,7 @@ public class AbstractDataBindingAdapterFactoryDefinitionParser<F extends Abstrac
     }
 
     /**
-     * ³õÊ¼»¯adapter BD£¬¿ÉÑ¡×¢ÈëdataResolverService¡£
+     * åˆå§‹åŒ–adapter BDï¼Œå¯é€‰æ³¨å…¥dataResolverServiceã€‚
      */
     public static void initAdapterBeanDefinition(Element element, BeanDefinitionBuilder builder) {
         String dataResolverRef = null;

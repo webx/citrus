@@ -18,8 +18,8 @@
 package com.alibaba.citrus.springext;
 
 /**
- * ¼ÙÈçÄ³¸ö<code>BeanDefinitionParser</code>»òÕß<code>BeanDefinitionDecorator</code>
- * ÊµÏÖÁËÕâ¸ö½Ó¿Ú£¬ÄÇÃ´ËüËùÊôµÄ<code>Contribution</code>ÊµÀı½«±»ÉèÖÃ½øÈ¥¡£
+ * å‡å¦‚æŸä¸ª<code>BeanDefinitionParser</code>æˆ–è€…<code>BeanDefinitionDecorator</code>
+ * å®ç°äº†è¿™ä¸ªæ¥å£ï¼Œé‚£ä¹ˆå®ƒæ‰€å±çš„<code>Contribution</code>å®ä¾‹å°†è¢«è®¾ç½®è¿›å»ã€‚
  * 
  * @author Michael Zhou
  */

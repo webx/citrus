@@ -36,7 +36,7 @@ import org.junit.Test;
 public class CharConverterTests {
     private CharConverter simpConverter;
     private CharConverter tradConverter;
-    private String simp = "ÎÒ°®±±¾©Ìì°²ÃÅ£¬Ìì°²ÃÅÉÏÌ«ÑôÉı£¡1234567890abcdefghijklmnopqrstuvwxyz";
+    private String simp = "æˆ‘çˆ±åŒ—äº¬å¤©å®‰é—¨ï¼Œå¤©å®‰é—¨ä¸Šå¤ªé˜³å‡ï¼1234567890abcdefghijklmnopqrstuvwxyz";
     private String trad = "\u6211\u611B\u5317\u4EAC\u5929\u5B89\u9580\uFF0C\u5929\u5B89\u9580\u4E0A\u592A\u967D\u5347\uFF011234567890abcdefghijklmnopqrstuvwxyz";
 
     @Before
@@ -87,9 +87,9 @@ public class CharConverterTests {
         long startTime = System.currentTimeMillis();
         int total = 0;
 
-        // Dump unicodeÖĞµÄ¼òÌå:
+        // Dump unicodeä¸­çš„ç®€ä½“:
         out.println("==================================================");
-        out.println(" 1. UnicodeÖĞµÄ¼òÌå×Ö£º");
+        out.println(" 1. Unicodeä¸­çš„ç®€ä½“å­—ï¼š");
         out.println("--------------------------------------------------");
 
         int count = 0;
@@ -109,9 +109,9 @@ public class CharConverterTests {
         out.println(" " + count + " words\n");
         total += count;
 
-        // Dump unicodeÖĞµÄ·±Ìå:
+        // Dump unicodeä¸­çš„ç¹ä½“:
         out.println("==================================================");
-        out.println(" 2. UnicodeÖĞµÄ·±Ìå×Ö£º");
+        out.println(" 2. Unicodeä¸­çš„ç¹ä½“å­—ï¼š");
         out.println("--------------------------------------------------");
 
         count = 0;
@@ -131,9 +131,9 @@ public class CharConverterTests {
         out.println(" " + count + " words\n");
         total += count;
 
-        // Dump·±¼ò²»Í¬µÄ×Ö:
+        // Dumpç¹ç®€ä¸åŒçš„å­—:
         out.println("==================================================");
-        out.println(" 3. UnicodeÖĞµÄ·±¼òÌå¾ù²»Í¬µÄ×Ö£º");
+        out.println(" 3. Unicodeä¸­çš„ç¹ç®€ä½“å‡ä¸åŒçš„å­—ï¼š");
         out.println("--------------------------------------------------");
 
         count = 0;

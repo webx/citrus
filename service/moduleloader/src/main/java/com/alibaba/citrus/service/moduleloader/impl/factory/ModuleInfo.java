@@ -22,7 +22,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ´ú±íÒ»¸ömoduleµÄĞÅÏ¢¡£
+ * ä»£è¡¨ä¸€ä¸ªmoduleçš„ä¿¡æ¯ã€‚
  * 
  * @author Michael Zhou
  */

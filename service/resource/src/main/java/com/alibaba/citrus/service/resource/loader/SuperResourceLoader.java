@@ -32,7 +32,7 @@ import com.alibaba.citrus.service.resource.ResourceLoadingService;
 import com.alibaba.citrus.service.resource.ResourceMatchResult;
 
 /**
- * Ò»¸öÌØÊâµÄresource loader£¬ÓÃÀ´°´Ä¬ÈÏµÄ·½·¨²éÕÒ×ÊÔ´¡£
+ * ä¸€ä¸ªç‰¹æ®Šçš„resource loaderï¼Œç”¨æ¥æŒ‰é»˜è®¤çš„æ–¹æ³•æŸ¥æ‰¾èµ„æºã€‚
  * 
  * @author Michael Zhou
  */
@@ -44,20 +44,20 @@ public class SuperResourceLoader implements ResourceLister {
     }
 
     /**
-     * ³õÊ¼»¯loader£¬²¢Éè¶¨loaderËùÔÚµÄ<code>ResourceLoadingService</code>µÄÊµÀı¡£
+     * åˆå§‹åŒ–loaderï¼Œå¹¶è®¾å®šloaderæ‰€åœ¨çš„<code>ResourceLoadingService</code>çš„å®ä¾‹ã€‚
      */
     public void init(ResourceLoadingService resourceLoadingService) {
     }
 
     /**
-     * ²éÕÒÖ¸¶¨Ãû³ÆµÄ×ÊÔ´¡£
+     * æŸ¥æ‰¾æŒ‡å®šåç§°çš„èµ„æºã€‚
      */
     public Resource getResource(ResourceLoaderContext context, Set<ResourceLoadingOption> options) {
         return context.getResource(getNewResourceName(context), options);
     }
 
     /**
-     * ²éÕÒÄ¿Â¼ÁĞ±í¡£
+     * æŸ¥æ‰¾ç›®å½•åˆ—è¡¨ã€‚
      */
     public String[] list(ResourceListerContext context, Set<ResourceLoadingOption> options) {
         return context.list(getNewResourceName(context), options);

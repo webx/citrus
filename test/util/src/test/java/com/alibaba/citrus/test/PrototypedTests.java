@@ -35,9 +35,9 @@ import com.alibaba.citrus.test.runner.Prototyped.TestData;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
 
 /**
- * Ô­ĞÍ»¯µ¥Ôª²âÊÔÊ¾Àı¡£
+ * åŸå‹åŒ–å•å…ƒæµ‹è¯•ç¤ºä¾‹ã€‚
  * <p>
- * ÊµÏÖ<code>Cloneable</code>½Ó¿Ú¡£
+ * å®ç°<code>Cloneable</code>æ¥å£ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -54,7 +54,7 @@ public class PrototypedTests implements Cloneable {
     }
 
     /**
-     * ÕâÊÇÒ»¸öÌØÊâµÄ·½·¨£¬»á¸ù¾İ²ÎÊı×Ô¶¯ÉèÖÃ²âÊÔµÄÃû³Æ¡£
+     * è¿™æ˜¯ä¸€ä¸ªç‰¹æ®Šçš„æ–¹æ³•ï¼Œä¼šæ ¹æ®å‚æ•°è‡ªåŠ¨è®¾ç½®æµ‹è¯•çš„åç§°ã€‚
      */
     @TestName
     public String testName() {
@@ -62,19 +62,19 @@ public class PrototypedTests implements Cloneable {
     }
 
     /**
-     * È¡µÃ²âÊÔÔ­ĞÍµÄ¼¯ºÏ¡£
+     * å–å¾—æµ‹è¯•åŸå‹çš„é›†åˆã€‚
      */
     @Prototypes
     public static Collection<PrototypedTests> data() {
         TestData<PrototypedTests> data = getInstance(PrototypedTests.class);
         PrototypedTests prototype;
 
-        // Êı¾İ1
+        // æ•°æ®1
         prototype = data.newPrototype();
         prototype.p1 = "data1";
         prototype.p2 = new int[] { 1, 2, 3 };
 
-        // Êı¾İ2
+        // æ•°æ®2
         prototype = data.newPrototype();
         prototype.p1 = "data2";
         prototype.p3 = new Object();

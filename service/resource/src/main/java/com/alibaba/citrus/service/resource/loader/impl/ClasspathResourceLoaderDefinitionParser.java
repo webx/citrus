@@ -25,7 +25,7 @@ import com.alibaba.citrus.service.resource.loader.ClasspathResourceLoader;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 /**
- * ÓÃÀ´½âÎöclasspath-loader¡£
+ * ç”¨æ¥è§£æclasspath-loaderã€‚
  * 
  * @author Michael Zhou
  */

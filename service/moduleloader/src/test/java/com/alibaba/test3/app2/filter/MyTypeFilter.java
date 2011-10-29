@@ -25,7 +25,7 @@ import org.springframework.core.type.classreading.MetadataReaderFactory;
 import org.springframework.core.type.filter.TypeFilter;
 
 /**
- * ×Ô¶¨ÒåµÄÉ¨Ãé¹ýÂËÆ÷
+ * è‡ªå®šä¹‰çš„æ‰«çž„è¿‡æ»¤å™¨
  * 
  * @author youqun.zhangyq
  */

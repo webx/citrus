@@ -21,7 +21,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ´ú±íÒ»¸öresource name patternµ½ÁíÒ»¸öresource nameµÄ±ğÃû¡£
+ * ä»£è¡¨ä¸€ä¸ªresource name patternåˆ°å¦ä¸€ä¸ªresource nameçš„åˆ«åã€‚
  * 
  * @author Michael Zhou
  */

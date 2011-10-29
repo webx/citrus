@@ -27,7 +27,7 @@ import com.alibaba.citrus.util.templatelite.TextWriter;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 
 /**
- * ÎªinternalÒ³ÃæºÍcomponentÌá¹©»ù±¾¹¦ÄÜµÄvisitor¡£
+ * ä¸ºinternalé¡µé¢å’Œcomponentæä¾›åŸºæœ¬åŠŸèƒ½çš„visitorã€‚
  * 
  * @author Michael Zhou
  */
@@ -36,9 +36,9 @@ public abstract class AbstractVisitor extends TextWriter<PrintWriter> {
     protected final RequestHandlerContext context;
 
     /**
-     * ÓÃÓÚ´´½¨pageÖĞµÄvisitor¡£
+     * ç”¨äºåˆ›å»ºpageä¸­çš„visitorã€‚
      * <p>
-     * ÔÚµ÷ÓÃ´Ë¹¹Ôìº¯ÊıÇ°£¬<code>context.getWriter(contentType)</code>±ØĞëÒÑ¾­È¡µÃ¡£
+     * åœ¨è°ƒç”¨æ­¤æ„é€ å‡½æ•°å‰ï¼Œ<code>context.getWriter(contentType)</code>å¿…é¡»å·²ç»å–å¾—ã€‚
      * </p>
      */
     public AbstractVisitor(RequestHandlerContext context) {
@@ -46,9 +46,9 @@ public abstract class AbstractVisitor extends TextWriter<PrintWriter> {
     }
 
     /**
-     * ÓÃÓÚ´´½¨componentÖĞµÄvisitor¡£
+     * ç”¨äºåˆ›å»ºcomponentä¸­çš„visitorã€‚
      * <p>
-     * ÔÚµ÷ÓÃ´Ë¹¹Ôìº¯ÊıÇ°£¬<code>context.getWriter(contentType)</code>±ØĞëÒÑ¾­È¡µÃ¡£
+     * åœ¨è°ƒç”¨æ­¤æ„é€ å‡½æ•°å‰ï¼Œ<code>context.getWriter(contentType)</code>å¿…é¡»å·²ç»å–å¾—ã€‚
      * </p>
      */
     public AbstractVisitor(RequestHandlerContext context, PageComponent component) {
@@ -58,9 +58,9 @@ public abstract class AbstractVisitor extends TextWriter<PrintWriter> {
     }
 
     /**
-     * ÓÃÓÚ´´½¨¶¥¼¶pageÖĞµÄvisitor¡£
+     * ç”¨äºåˆ›å»ºé¡¶çº§pageä¸­çš„visitorã€‚
      * <p>
-     * ¶¥¼¶page»á´´½¨writer£¬²¢´´½¨ÍêÕûµÄHTMLÒ³Ãæ¡£
+     * é¡¶çº§pageä¼šåˆ›å»ºwriterï¼Œå¹¶åˆ›å»ºå®Œæ•´çš„HTMLé¡µé¢ã€‚
      * </p>
      */
     public AbstractVisitor(RequestHandlerContext context, String contentTypeAndCharset) throws IOException {
@@ -70,14 +70,14 @@ public abstract class AbstractVisitor extends TextWriter<PrintWriter> {
     }
 
     /**
-     * È¡µÃÏà¶ÔÓÚµ±Ç°Ò³ÃæµÄURL¡£
+     * å–å¾—ç›¸å¯¹äºå½“å‰é¡µé¢çš„URLã€‚
      */
     public void visitUrl(String relativeUrl) {
         out().append(context.getResourceURL(relativeUrl));
     }
 
     /**
-     * È¡µÃÏà¶ÔÓÚµ±Ç°componentµÄURL¡£
+     * å–å¾—ç›¸å¯¹äºå½“å‰componentçš„URLã€‚
      */
     public void visitComponentUrl(String relativeUrl) {
         assertNotNull(component, "no component");

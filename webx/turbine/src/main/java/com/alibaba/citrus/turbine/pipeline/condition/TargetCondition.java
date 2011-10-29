@@ -18,7 +18,7 @@
 package com.alibaba.citrus.turbine.pipeline.condition;
 
 /**
- * ¸ù¾İtargetÀ´ÅĞ¶Ï¡£
+ * æ ¹æ®targetæ¥åˆ¤æ–­ã€‚
  * 
  * @author Michael Zhou
  */

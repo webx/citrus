@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.requestcontext;
 
 /**
- * ´ú±íÒ»¸öÍ¨ÓÃrequest contextÖĞ·¢ÉúµÄÒì³£¡£
+ * ä»£è¡¨ä¸€ä¸ªé€šç”¨request contextä¸­å‘ç”Ÿçš„å¼‚å¸¸ã€‚
  * 
  * @author Michael Zhou
  */
@@ -26,35 +26,35 @@ public class RequestContextException extends RuntimeException {
     private static final long serialVersionUID = 8129627799406228080L;
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      */
     public RequestContextException() {
         super();
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param message Òì³£ĞÅÏ¢
+     * @param message å¼‚å¸¸ä¿¡æ¯
      */
     public RequestContextException(String message) {
         super(message);
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param message Òì³£ĞÅÏ¢
-     * @param cause Òì³£Ô­Òò
+     * @param message å¼‚å¸¸ä¿¡æ¯
+     * @param cause å¼‚å¸¸åŸå› 
      */
     public RequestContextException(String message, Throwable cause) {
         super(message, cause);
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param cause Òì³£Ô­Òò
+     * @param cause å¼‚å¸¸åŸå› 
      */
     public RequestContextException(Throwable cause) {
         super(cause);

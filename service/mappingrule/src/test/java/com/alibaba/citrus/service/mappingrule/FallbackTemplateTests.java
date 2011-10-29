@@ -43,38 +43,38 @@ public class FallbackTemplateTests extends AbstractMappingRuleTests {
         // Exact match
         result = mappingRules.getMappedName("fallback.template", "aaa/bbb/myOtherModule.vm");
         assertEquals("myprefix/aaa/bbb/myOtherModule.vm", result);
-        assertSame(result, mappingRules.getMappedName("fallback.template", "aaa/bbb/myOtherModule.vm")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+        assertSame(result, mappingRules.getMappedName("fallback.template", "aaa/bbb/myOtherModule.vm")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
-        // Exact match£º¿Õºó×º
+        // Exact matchï¼šç©ºåç¼€
         result = mappingRules.getMappedName("fallback.template", "aaa/bbb/myOtherModule");
-        assertEquals("myprefix/aaa/bbb/myOtherModule", result);//²»²éÕÒÆäËûÀ©Õ¹Ãû£¬Òò´ËÕÒ²»µ½
-        assertSame(result, mappingRules.getMappedName("fallback.template", "aaa/bbb/myOtherModule")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+        assertEquals("myprefix/aaa/bbb/myOtherModule", result);//ä¸æŸ¥æ‰¾å…¶ä»–æ‰©å±•åï¼Œå› æ­¤æ‰¾ä¸åˆ°
+        assertSame(result, mappingRules.getMappedName("fallback.template", "aaa/bbb/myOtherModule")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
-        // Fallback level 1 ÊäÈëºó×º
+        // Fallback level 1 è¾“å…¥åç¼€
         result = mappingRules.getMappedName("fallback.template", "aaa/bbb/nonexistModule.vm");
-        assertEquals("myprefix/aaa/bbb/default.vm", result);//²»´æÔÚ·µ»Ødefault£¬ÊäÈëÀ©Õ¹ÃûÊÇvm£¬·µ»ØÒ²ÊÇvm
-        assertSame(result, mappingRules.getMappedName("fallback.template", "aaa/bbb/nonexistModule.vm")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+        assertEquals("myprefix/aaa/bbb/default.vm", result);//ä¸å­˜åœ¨è¿”å›defaultï¼Œè¾“å…¥æ‰©å±•åæ˜¯vmï¼Œè¿”å›ä¹Ÿæ˜¯vm
+        assertSame(result, mappingRules.getMappedName("fallback.template", "aaa/bbb/nonexistModule.vm")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
-        // Fallback level 1£º¿Õºó×º
+        // Fallback level 1ï¼šç©ºåç¼€
         result = mappingRules.getMappedName("fallback.template", "aaa/bbb/nonexistModule");
-        assertEquals("myprefix/aaa/bbb/default", result);//²»´æÔÚ·µ»Ødefault£¬ÊäÈëÀ©Õ¹ÃûÊÇ¿Õ£¬·µ»ØÒ²ÊÇ¿Õ
-        assertSame(result, mappingRules.getMappedName("fallback.template", "aaa/bbb/nonexistModule")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+        assertEquals("myprefix/aaa/bbb/default", result);//ä¸å­˜åœ¨è¿”å›defaultï¼Œè¾“å…¥æ‰©å±•åæ˜¯ç©ºï¼Œè¿”å›ä¹Ÿæ˜¯ç©º
+        assertSame(result, mappingRules.getMappedName("fallback.template", "aaa/bbb/nonexistModule")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
-        // Fallback level 2 ÊäÈëºó×º
+        // Fallback level 2 è¾“å…¥åç¼€
         result = mappingRules.getMappedName("fallback.template", "aaa/nonexistPackage/nonexistModule.vm");
-        assertEquals("myprefix/aaa/default.vm", result);//²»´æÔÚ·µ»Ødefault£¬ÊäÈëÀ©Õ¹ÃûÊÇvm£¬·µ»ØÒ²ÊÇvm
-        assertSame(result, mappingRules.getMappedName("fallback.template", "aaa/nonexistPackage/nonexistModule.vm")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+        assertEquals("myprefix/aaa/default.vm", result);//ä¸å­˜åœ¨è¿”å›defaultï¼Œè¾“å…¥æ‰©å±•åæ˜¯vmï¼Œè¿”å›ä¹Ÿæ˜¯vm
+        assertSame(result, mappingRules.getMappedName("fallback.template", "aaa/nonexistPackage/nonexistModule.vm")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
-        // Fallback level 2£º¿Õºó×º
+        // Fallback level 2ï¼šç©ºåç¼€
         result = mappingRules.getMappedName("fallback.template", "aaa/nonexistPackage/nonexistModule");
-        assertEquals("myprefix/aaa/default", result);//²»´æÔÚ·µ»Ødefault£¬ÊäÈëÀ©Õ¹ÃûÊÇ¿Õ£¬·µ»ØÒ²ÊÇ¿Õ
-        assertSame(result, mappingRules.getMappedName("fallback.template", "aaa/nonexistPackage/nonexistModule")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+        assertEquals("myprefix/aaa/default", result);//ä¸å­˜åœ¨è¿”å›defaultï¼Œè¾“å…¥æ‰©å±•åæ˜¯ç©ºï¼Œè¿”å›ä¹Ÿæ˜¯ç©º
+        assertSame(result, mappingRules.getMappedName("fallback.template", "aaa/nonexistPackage/nonexistModule")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
-        // not found ÊäÈëºó×º
+        // not found è¾“å…¥åç¼€
         result = mappingRules.getMappedName("fallback.template", "nonexistPackage1/nonexistPackage2/nonexistModule.vm");
-        assertEquals("myprefix/nonexistPackage1/nonexistPackage2/nonexistModule.vm", result);//È«²¿²»´æÔÚ·µ»ØÊäÈëµÄ£¬ÊäÈëÀ©Õ¹ÃûÊÇvm£¬·µ»ØÒ²ÊÇvm
+        assertEquals("myprefix/nonexistPackage1/nonexistPackage2/nonexistModule.vm", result);//å…¨éƒ¨ä¸å­˜åœ¨è¿”å›è¾“å…¥çš„ï¼Œè¾“å…¥æ‰©å±•åæ˜¯vmï¼Œè¿”å›ä¹Ÿæ˜¯vm
         assertSame(result,
-                mappingRules.getMappedName("fallback.template", "nonexistPackage1/nonexistPackage2/nonexistModule.vm")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+                mappingRules.getMappedName("fallback.template", "nonexistPackage1/nonexistPackage2/nonexistModule.vm")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
     }
 
     @Test
@@ -83,30 +83,30 @@ public class FallbackTemplateTests extends AbstractMappingRuleTests {
 
         result = mappingRules.getMappedName("fallback.template.searchExts", "aaa/bbb/myOtherModule.jsp");
         assertEquals("myprefix/aaa/bbb/myOtherModule.jsp", result);
-        assertSame(result, mappingRules.getMappedName("fallback.template.searchExts", "aaa/bbb/myOtherModule.jsp")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+        assertSame(result, mappingRules.getMappedName("fallback.template.searchExts", "aaa/bbb/myOtherModule.jsp")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
         // Fallback level 1
         result = mappingRules.getMappedName("fallback.template.searchExts", "aaa/bbb/nonexistModule.jsp");
         assertEquals("myprefix/aaa/bbb/default.jsp", result);
-        assertSame(result, mappingRules.getMappedName("fallback.template.searchExts", "aaa/bbb/nonexistModule.jsp")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+        assertSame(result, mappingRules.getMappedName("fallback.template.searchExts", "aaa/bbb/nonexistModule.jsp")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
         // Fallback level 2
         result = mappingRules.getMappedName("fallback.template.searchExts", "aaa/nonexistPackage/nonexistModule.jsp");
         assertEquals("myprefix/aaa/default.jsp", result);
         assertSame(result,
-                mappingRules.getMappedName("fallback.template.searchExts", "aaa/nonexistPackage/nonexistModule.jsp")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+                mappingRules.getMappedName("fallback.template.searchExts", "aaa/nonexistPackage/nonexistModule.jsp")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
         result = mappingRules.getMappedName("fallback.template.searchExts", "ccc/nonexistPackage/nonexistModule.jsp");
         assertEquals("myprefix/ccc/default.jsp", result);
         assertSame(result,
-                mappingRules.getMappedName("fallback.template.searchExts", "ccc/nonexistPackage/nonexistModule.jsp")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+                mappingRules.getMappedName("fallback.template.searchExts", "ccc/nonexistPackage/nonexistModule.jsp")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
         // not found
         result = mappingRules.getMappedName("fallback.template.searchExts",
                 "nonexistPackage1/nonexistPackage2/nonexistModule.jsp");
         assertEquals("myprefix/nonexistPackage1/nonexistPackage2/nonexistModule.jsp", result);
         assertSame(result, mappingRules.getMappedName("fallback.template.searchExts",
-                "nonexistPackage1/nonexistPackage2/nonexistModule.jsp")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+                "nonexistPackage1/nonexistPackage2/nonexistModule.jsp")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
     }
 
     @Test
@@ -116,40 +116,40 @@ public class FallbackTemplateTests extends AbstractMappingRuleTests {
         LocaleUtil.setContext(Locale.TAIWAN);
 
         result = mappingRules.getMappedName("fallback.template.searchExts.local", "aaa/bbb/myOtherModule.jsp");
-        assertEquals("myprefix.locale/aaa/bbb/myOtherModule.jsp", result);//Êµ¼ÊÊÇmyOtherModule.vm
+        assertEquals("myprefix.locale/aaa/bbb/myOtherModule.jsp", result);//å®é™…æ˜¯myOtherModule.vm
         assertSame(result,
-                mappingRules.getMappedName("fallback.template.searchExts.local", "aaa/bbb/myOtherModule.jsp")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+                mappingRules.getMappedName("fallback.template.searchExts.local", "aaa/bbb/myOtherModule.jsp")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
         LocaleUtil.setContext(Locale.CHINA);
         assertSame(result,
-                mappingRules.getMappedName("fallback.template.searchExts.local", "aaa/bbb/myOtherModule.jsp")); // ËäÈ»locale²»Í¬£¬µ«zhºÍzh_TWÊÇÔÚÒ»Æğ±»ËÑË÷µÄ£¬»¹ÊÇÓ¦¸Ã´ÓcacheÖĞÈ¡Öµ
+                mappingRules.getMappedName("fallback.template.searchExts.local", "aaa/bbb/myOtherModule.jsp")); // è™½ç„¶localeä¸åŒï¼Œä½†zhå’Œzh_TWæ˜¯åœ¨ä¸€èµ·è¢«æœç´¢çš„ï¼Œè¿˜æ˜¯åº”è¯¥ä»cacheä¸­å–å€¼
 
         LocaleUtil.setContext(Locale.TAIWAN);
         // Fallback level 1
         result = mappingRules.getMappedName("fallback.template.searchExts.local", "aaa/bbb/nonexistModule.jsp");
-        assertEquals("myprefix.locale/aaa/bbb/default.jsp", result);//Êµ¼ÊÊÇdefault.jsp
+        assertEquals("myprefix.locale/aaa/bbb/default.jsp", result);//å®é™…æ˜¯default.jsp
         assertSame(result,
-                mappingRules.getMappedName("fallback.template.searchExts.local", "aaa/bbb/nonexistModule.jsp")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+                mappingRules.getMappedName("fallback.template.searchExts.local", "aaa/bbb/nonexistModule.jsp")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
         // Fallback level 2
         result = mappingRules.getMappedName("fallback.template.searchExts.local",
                 "aaa/nonexistPackage/nonexistModule.jsp");
-        assertEquals("myprefix.locale/aaa/default.jsp", result);//Êµ¼ÊÊÇdefault.jsp
+        assertEquals("myprefix.locale/aaa/default.jsp", result);//å®é™…æ˜¯default.jsp
         assertSame(result, mappingRules.getMappedName("fallback.template.searchExts.local",
-                "aaa/nonexistPackage/nonexistModule.jsp")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+                "aaa/nonexistPackage/nonexistModule.jsp")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
         result = mappingRules.getMappedName("fallback.template.searchExts.local",
                 "ccc/nonexistPackage/nonexistModule.do");
-        assertEquals("myprefix.locale/ccc/default.do", result);//Êµ¼ÊÊÇdefault_zh.vm
+        assertEquals("myprefix.locale/ccc/default.do", result);//å®é™…æ˜¯default_zh.vm
         assertSame(result, mappingRules.getMappedName("fallback.template.searchExts.local",
-                "ccc/nonexistPackage/nonexistModule.do")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+                "ccc/nonexistPackage/nonexistModule.do")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
         // not found
         result = mappingRules.getMappedName("fallback.template.searchExts.local",
                 "nonexistPackage1/nonexistPackage2/nonexistModule.jsp");
         assertEquals("myprefix.locale/nonexistPackage1/nonexistPackage2/nonexistModule.jsp", result);
         assertSame(result, mappingRules.getMappedName("fallback.template.searchExts.local",
-                "nonexistPackage1/nonexistPackage2/nonexistModule.jsp")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+                "nonexistPackage1/nonexistPackage2/nonexistModule.jsp")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
         LocaleUtil.resetContext();
     }

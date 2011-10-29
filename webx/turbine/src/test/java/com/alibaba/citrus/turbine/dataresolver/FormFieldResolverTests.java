@@ -35,7 +35,7 @@ public class FormFieldResolverTests extends AbstractDataResolverTests {
 
     @Test
     public void getField() throws Exception {
-        // 默认值：skipIfInvalid=true
+        // 榛樿鍊硷細skipIfInvalid=true
 
         // GET, empty form
         execute("action", "form.field.myAction", "doGetField", "");
@@ -51,7 +51,7 @@ public class FormFieldResolverTests extends AbstractDataResolverTests {
         assertNotNull(field);
         assertTrue(field.isValid());
 
-        // GET, invalid, but screen不支持skip
+        // GET, invalid, but screen涓嶆敮鎸乻kip
         execute("screen", "form.field.myScreen", "doGetField", "_fm.m._0.f=&_fm.m._0.fi=");
         field = (Field) newRequest.getAttribute("screenLog");
         assertNotNull(field);
@@ -60,7 +60,7 @@ public class FormFieldResolverTests extends AbstractDataResolverTests {
 
     @Test
     public void getFieldDontSkipAction() throws Exception {
-        // 默认值：skipIfInvalid=false
+        // 榛樿鍊硷細skipIfInvalid=false
 
         // GET, invalid
         execute("action", "form.field.myAction", "doGetFieldDontSkipAction", "_fm.m._0.f=&_fm.m._0.fi=");
@@ -77,7 +77,7 @@ public class FormFieldResolverTests extends AbstractDataResolverTests {
 
     @Test
     public void getFieldInstance_value() throws Exception {
-        // 默认值：skipIfInvalid=true
+        // 榛樿鍊硷細skipIfInvalid=true
 
         // GET, invalid
         execute("action", "form.field.myAction", "doGetFieldInstanceValue", "_fm.m.aaa.f=&_fm.m.aaa.fi=");
@@ -90,7 +90,7 @@ public class FormFieldResolverTests extends AbstractDataResolverTests {
         assertNotNull(value1);
         assertArrayEquals(new String[] { "a", "b" }, value1);
 
-        // GET, invalid, but screen不支持skip
+        // GET, invalid, but screen涓嶆敮鎸乻kip
         execute("screen", "form.field.myScreenGetFieldInstanceValue", "doGetFieldInstanceValue",
                 "_fm.m.aaa.f=&_fm.m.aaa.fi=");
         value1 = (String[]) newRequest.getAttribute("screenLog");
@@ -99,7 +99,7 @@ public class FormFieldResolverTests extends AbstractDataResolverTests {
 
     @Test
     public void getFieldInstance_value_dontSkipAction() throws Exception {
-        // 默认值：skipIfInvalid=false
+        // 榛樿鍊硷細skipIfInvalid=false
 
         // GET, invalid
         execute("action", "form.field.myAction", "doGetFieldInstanceValueDontSkipAction", "_fm.m.aaa.f=&_fm.m.aaa.fi=");
@@ -116,7 +116,7 @@ public class FormFieldResolverTests extends AbstractDataResolverTests {
 
     @Test
     public void getFieldInstance_value_convertError_quiet() throws Exception {
-        // 默认值：skipIfInvalid=true
+        // 榛樿鍊硷細skipIfInvalid=true
 
         // GET, valid
         execute("action", "form.field.myAction", "doGetFieldInstanceValueDontSkipAction",
@@ -127,7 +127,7 @@ public class FormFieldResolverTests extends AbstractDataResolverTests {
 
     @Test
     public void getFieldInstance_value_convertError_noisy() throws Exception {
-        // 默认值：skipIfInvalid=true
+        // 榛樿鍊硷細skipIfInvalid=true
         System.setProperty("convertQuiet", "false");
 
         try {

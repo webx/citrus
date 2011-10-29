@@ -28,14 +28,14 @@ import java.util.Set;
 
 /**
  * <p>
- * Ò»¸ö¼¯ºÏµÄÊµÏÖ, ÊµÏÖÁË<code>Set</code>½Ó¿Ú.
+ * ä¸€ä¸ªé›†åˆçš„å®ç°, å®ç°äº†<code>Set</code>æ¥å£.
  * </p>
  * <p>
- * Õâ¸ö¼¯ºÏÔÚÄÚ²¿Ê¹ÓÃ<code>ArrayHashMap</code>±£´æ¼¯ºÏÖĞµÄÔªËØ, Òò¶ø¾ßÓĞÒÔÏÂÌØĞÔ:
+ * è¿™ä¸ªé›†åˆåœ¨å†…éƒ¨ä½¿ç”¨<code>ArrayHashMap</code>ä¿å­˜é›†åˆä¸­çš„å…ƒç´ , å› è€Œå…·æœ‰ä»¥ä¸‹ç‰¹æ€§:
  * </p>
  * <ul>
- * <li>²»Í¬ÓÚ<code>HashMap</code>, ¼¯ºÏÖĞÔªËØµÄË³ĞòÊÇÈ·¶¨µÄ</li>
- * <li>ºÍ<code>ArrayHashMap</code>Ò»Ñù, Ã»ÓĞ½øĞĞÈÎºÎ<code>synchronized</code>²Ù×÷</li>
+ * <li>ä¸åŒäº<code>HashMap</code>, é›†åˆä¸­å…ƒç´ çš„é¡ºåºæ˜¯ç¡®å®šçš„</li>
+ * <li>å’Œ<code>ArrayHashMap</code>ä¸€æ ·, æ²¡æœ‰è¿›è¡Œä»»ä½•<code>synchronized</code>æ“ä½œ</li>
  * </ul>
  * 
  * @author Michael Zhou
@@ -43,53 +43,53 @@ import java.util.Set;
  */
 public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable, Serializable {
     // ==========================================================================
-    // ³£Á¿                                                                      
+    // å¸¸é‡                                                                      
     // ==========================================================================
 
-    /** ±íÊ¾ÄÚ²¿hash±íµÄÖµ. */
+    /** è¡¨ç¤ºå†…éƒ¨hashè¡¨çš„å€¼. */
     private static final Object PRESENT = new Object();
 
     // ==========================================================================
-    // ³ÉÔ±±äÁ¿                                                                  
+    // æˆå‘˜å˜é‡                                                                  
     // ==========================================================================
 
-    /** ÄÚ²¿µÄhash±í. */
+    /** å†…éƒ¨çš„hashè¡¨. */
     protected transient ArrayHashMap<E, Object> map;
 
     // ==========================================================================
-    // ¹¹Ôìº¯Êı                                                                   
+    // æ„é€ å‡½æ•°                                                                   
     // ==========================================================================
 
     /**
-     * ´´½¨Ò»¸ö¿ÕµÄ¼¯ºÏ. Ê¹ÓÃÖ¸¶¨µÄÄ¬ÈÏµÄ³õÊ¼ÈİÁ¿(16)ºÍÄ¬ÈÏµÄ¸ºÔØÏµÊı(0.75).
+     * åˆ›å»ºä¸€ä¸ªç©ºçš„é›†åˆ. ä½¿ç”¨æŒ‡å®šçš„é»˜è®¤çš„åˆå§‹å®¹é‡(16)å’Œé»˜è®¤çš„è´Ÿè½½ç³»æ•°(0.75).
      */
     public ArrayHashSet() {
         map = new ArrayHashMap<E, Object>();
     }
 
     /**
-     * ´´½¨Ò»¸ö¿ÕµÄ¼¯ºÏ. Ê¹ÓÃÖ¸¶¨µÄ³õÊ¼ãĞÖµºÍÄ¬ÈÏµÄ¸ºÔØÏµÊı(0.75).
+     * åˆ›å»ºä¸€ä¸ªç©ºçš„é›†åˆ. ä½¿ç”¨æŒ‡å®šçš„åˆå§‹é˜ˆå€¼å’Œé»˜è®¤çš„è´Ÿè½½ç³»æ•°(0.75).
      * 
-     * @param initialCapacity ³õÊ¼ÈİÁ¿.
+     * @param initialCapacity åˆå§‹å®¹é‡.
      */
     public ArrayHashSet(int initialCapacity) {
         map = new ArrayHashMap<E, Object>(initialCapacity);
     }
 
     /**
-     * ´´½¨Ò»¸ö¿ÕµÄ¼¯ºÏ. Ê¹ÓÃÖ¸¶¨µÄ³õÊ¼ÈİÁ¿ºÍ¸ºÔØÏµÊı.
+     * åˆ›å»ºä¸€ä¸ªç©ºçš„é›†åˆ. ä½¿ç”¨æŒ‡å®šçš„åˆå§‹å®¹é‡å’Œè´Ÿè½½ç³»æ•°.
      * 
-     * @param initialCapacity ³õÊ¼ÈİÁ¿
-     * @param loadFactor ¸ºÔØÏµÊı.
+     * @param initialCapacity åˆå§‹å®¹é‡
+     * @param loadFactor è´Ÿè½½ç³»æ•°.
      */
     public ArrayHashSet(int initialCapacity, float loadFactor) {
         map = new ArrayHashMap<E, Object>(initialCapacity, loadFactor);
     }
 
     /**
-     * ´´½¨Ò»¸ö¿ÕµÄ¼¯ºÏ, ²¢¸´ÖÆÖ¸¶¨µÄ<code>Collection</code>µÄËùÓĞÏîµ½Õâ¸ö¼¯ºÏÖĞ. Ê¹ÓÃÄ¬ÈÏµÄ¸ºÔØÏµÊı(0.75).
+     * åˆ›å»ºä¸€ä¸ªç©ºçš„é›†åˆ, å¹¶å¤åˆ¶æŒ‡å®šçš„<code>Collection</code>çš„æ‰€æœ‰é¡¹åˆ°è¿™ä¸ªé›†åˆä¸­. ä½¿ç”¨é»˜è®¤çš„è´Ÿè½½ç³»æ•°(0.75).
      * 
-     * @param collection Òª¸´ÖÆµÄ<code>Collection</code>
+     * @param collection è¦å¤åˆ¶çš„<code>Collection</code>
      */
     public ArrayHashSet(Collection<? extends E> collection) {
         map = new ArrayHashMap<E, Object>(Math.max((int) (collection.size() / .75f) + 1, 16));
@@ -97,13 +97,13 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
     }
 
     // ==========================================================================
-    // ÊµÏÖSet½Ó¿ÚµÄ·½·¨                                                          
+    // å®ç°Setæ¥å£çš„æ–¹æ³•                                                          
     // ==========================================================================
 
     /**
-     * ·µ»Ø¼¯ºÏÖĞentryµÄ¸öÊı.
+     * è¿”å›é›†åˆä¸­entryçš„ä¸ªæ•°.
      * 
-     * @return ¼¯ºÏÖĞµÄentryÊı.
+     * @return é›†åˆä¸­çš„entryæ•°.
      */
     @Override
     public int size() {
@@ -111,9 +111,9 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
     }
 
     /**
-     * ÅĞ¶ÏÊÇ·ñÎª¿ÕµÄ¼¯ºÏ.
+     * åˆ¤æ–­æ˜¯å¦ä¸ºç©ºçš„é›†åˆ.
      * 
-     * @return Èç¹ûÎª¿Õ(<code>size() == 0</code>), Ôò·µ»Ø<code>true</code>.
+     * @return å¦‚æœä¸ºç©º(<code>size() == 0</code>), åˆ™è¿”å›<code>true</code>.
      */
     @Override
     public boolean isEmpty() {
@@ -121,10 +121,10 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
     }
 
     /**
-     * Èç¹û¼¯ºÏÖĞ°üº¬Ö¸¶¨Öµ, Ôò·µ»Ø<code>true</code>.
+     * å¦‚æœé›†åˆä¸­åŒ…å«æŒ‡å®šå€¼, åˆ™è¿”å›<code>true</code>.
      * 
-     * @param object ²âÊÔÖ¸¶¨ÖµÊÇ·ñ´æÔÚ.
-     * @return Èç¹ûÖ¸¶¨Öµ´æÔÚ, Ôò·µ»Ø<code>true</code>.
+     * @param object æµ‹è¯•æŒ‡å®šå€¼æ˜¯å¦å­˜åœ¨.
+     * @return å¦‚æœæŒ‡å®šå€¼å­˜åœ¨, åˆ™è¿”å›<code>true</code>.
      */
     @Override
     public boolean contains(Object object) {
@@ -132,10 +132,10 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
     }
 
     /**
-     * ½«Ö¸¶¨µÄÖµ¼ÓÈëµ½¼¯ºÏÖĞ.
+     * å°†æŒ‡å®šçš„å€¼åŠ å…¥åˆ°é›†åˆä¸­.
      * 
-     * @param object Òª¼ÓÈëµÄÖµ
-     * @return Èç¹û¼¯ºÏÖĞÒÑ¾­´æÔÚ´ËÖµ, Ôò·µ»Ø<code>false</code>. ·ñÔò·µ»Ø<code>true</code>.
+     * @param object è¦åŠ å…¥çš„å€¼
+     * @return å¦‚æœé›†åˆä¸­å·²ç»å­˜åœ¨æ­¤å€¼, åˆ™è¿”å›<code>false</code>. å¦åˆ™è¿”å›<code>true</code>.
      */
     @Override
     public boolean add(E object) {
@@ -143,10 +143,10 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
     }
 
     /**
-     * ½«Ö¸¶¨Öµ´Ó¼¯ºÏÖĞÉ¾³ı(Èç¹û¸ÃÖµ´æÔÚµÄ»°).
+     * å°†æŒ‡å®šå€¼ä»é›†åˆä¸­åˆ é™¤(å¦‚æœè¯¥å€¼å­˜åœ¨çš„è¯).
      * 
-     * @param object Òª±»É¾³ıµÄÖµ
-     * @return Èç¹û±»É¾³ıµÄÖµÔ­À´²»´æÔÚ, Ôò·µ»Ø<code>false</code>, ·ñÔò·µ»Ø<code>true</code>
+     * @param object è¦è¢«åˆ é™¤çš„å€¼
+     * @return å¦‚æœè¢«åˆ é™¤çš„å€¼åŸæ¥ä¸å­˜åœ¨, åˆ™è¿”å›<code>false</code>, å¦åˆ™è¿”å›<code>true</code>
      */
     @Override
     public boolean remove(Object object) {
@@ -154,7 +154,7 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
     }
 
     /**
-     * Çå³ı¼¯ºÏÖĞµÄËùÓĞ¶ÔÏó.
+     * æ¸…é™¤é›†åˆä¸­çš„æ‰€æœ‰å¯¹è±¡.
      */
     @Override
     public void clear() {
@@ -162,9 +162,9 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
     }
 
     /**
-     * È¡µÃ¼¯ºÏÖĞËùÓĞÏîµÄ±éÀúÆ÷.
+     * å–å¾—é›†åˆä¸­æ‰€æœ‰é¡¹çš„éå†å™¨.
      * 
-     * @return ¼¯ºÏÖĞËùÓĞÏîµÄ±éÀúÆ÷
+     * @return é›†åˆä¸­æ‰€æœ‰é¡¹çš„éå†å™¨
      */
     @Override
     public Iterator<E> iterator() {
@@ -172,13 +172,13 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
     }
 
     // ==========================================================================
-    // ¸´ÖÆ·½·¨(Clonable½Ó¿Ú)                                                     
+    // å¤åˆ¶æ–¹æ³•(Clonableæ¥å£)                                                     
     // ==========================================================================
 
     /**
-     * &quot;Ç³&quot;¿½±´¼¯ºÏ, ¼¯ºÏÖĞµÄ¶ÔÏó±¾Éí²¢²»±»¸´ÖÆ.
+     * &quot;æµ…&quot;æ‹·è´é›†åˆ, é›†åˆä¸­çš„å¯¹è±¡æœ¬èº«å¹¶ä¸è¢«å¤åˆ¶.
      * 
-     * @return ±»¸´ÖÆµÄ¼¯ºÏ.
+     * @return è¢«å¤åˆ¶çš„é›†åˆ.
      */
     @Override
     @SuppressWarnings("unchecked")
@@ -190,23 +190,23 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
 
             return newSet;
         } catch (CloneNotSupportedException e) {
-            throw new InternalError(); // ²»Ö§³Öclone(²»¿ÉÄÜ).
+            throw new InternalError(); // ä¸æ”¯æŒclone(ä¸å¯èƒ½).
         }
     }
 
     // ==========================================================================
-    // ĞòÁĞ»¯                                                                     
+    // åºåˆ—åŒ–                                                                     
     // ==========================================================================
 
-    /** ĞòÁĞ»¯°æ±¾ºÅ. */
+    /** åºåˆ—åŒ–ç‰ˆæœ¬å·. */
     private static final long serialVersionUID = -5024744406713321676L;
 
     /**
-     * ´ÓÊäÈëÁ÷ÖĞÖØ½¨¼¯ºÏ(Ò²¾ÍÊÇ·´ĞòÁĞ»¯).
+     * ä»è¾“å…¥æµä¸­é‡å»ºé›†åˆ(ä¹Ÿå°±æ˜¯ååºåˆ—åŒ–).
      * 
-     * @param is ÊäÈëÁ÷
-     * @exception IOException ÊäÈëÁ÷Òì³£
-     * @exception ClassNotFoundException ÀàÎ´ÕÒµ½
+     * @param is è¾“å…¥æµ
+     * @exception IOException è¾“å…¥æµå¼‚å¸¸
+     * @exception ClassNotFoundException ç±»æœªæ‰¾åˆ°
      */
     private void readObject(ObjectInputStream is) throws IOException, ClassNotFoundException {
         is.defaultReadObject();
@@ -227,10 +227,10 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
     }
 
     /**
-     * ½«¼¯ºÏµÄ×´Ì¬±£´æµ½Êä³öÁ÷ÖĞ(Ò²¾ÍÊÇĞòÁĞ»¯).
+     * å°†é›†åˆçš„çŠ¶æ€ä¿å­˜åˆ°è¾“å‡ºæµä¸­(ä¹Ÿå°±æ˜¯åºåˆ—åŒ–).
      * 
-     * @param os Êä³öÁ÷
-     * @exception IOException Êä³öÁ÷Òì³£
+     * @param os è¾“å‡ºæµ
+     * @exception IOException è¾“å‡ºæµå¼‚å¸¸
      */
     private void writeObject(ObjectOutputStream os) throws IOException {
         os.defaultWriteObject();

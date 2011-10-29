@@ -20,25 +20,25 @@ package com.alibaba.citrus.generictype;
 import java.lang.reflect.WildcardType;
 
 /**
- * ºÍ{@link WildcardType}¶ÔÓ¦£¬´ú±íÒ»¸öÍ¨Åä·ûÀàĞÍ±äÁ¿µÄĞÅÏ¢¡£
+ * å’Œ{@link WildcardType}å¯¹åº”ï¼Œä»£è¡¨ä¸€ä¸ªé€šé…ç¬¦ç±»å‹å˜é‡çš„ä¿¡æ¯ã€‚
  * 
  * @author Michael Zhou
  */
 public interface WildcardTypeInfo extends BoundedTypeInfo {
     /**
-     * ÅĞ¶ÏwildcardÊÇ·ñÎª¡°unknown wildcard¡±¡£
+     * åˆ¤æ–­wildcardæ˜¯å¦ä¸ºâ€œunknown wildcardâ€ã€‚
      * <p>
-     * WildcardÓĞÁ½ÖÖ£º
+     * Wildcardæœ‰ä¸¤ç§ï¼š
      * </p>
      * <ol>
-     * <li>Ò»ÖÖÊÇ¡°unknown wildcard¡±µÄ£¬ÀıÈç£º<code>Collection&lt;?&gt;</code>
-     * £¬ÒâË¼Îª£ºCollection of Unknown¡£»»ÑÔÖ®£¬¡°<code>?</code>¡±¿ÉÒÔÆ¥ÅäÈÎÒâÀàĞÍ¡£</li>
-     * <li>ÁíÒ»ÖÖÊÇ¡°bounded wildcard¡±£¬ÀıÈç£º
-     * <code>Collection&lt;? extends Number&gt;</code>¡£</li>
+     * <li>ä¸€ç§æ˜¯â€œunknown wildcardâ€çš„ï¼Œä¾‹å¦‚ï¼š<code>Collection&lt;?&gt;</code>
+     * ï¼Œæ„æ€ä¸ºï¼šCollection of Unknownã€‚æ¢è¨€ä¹‹ï¼Œâ€œ<code>?</code>â€å¯ä»¥åŒ¹é…ä»»æ„ç±»å‹ã€‚</li>
+     * <li>å¦ä¸€ç§æ˜¯â€œbounded wildcardâ€ï¼Œä¾‹å¦‚ï¼š
+     * <code>Collection&lt;? extends Number&gt;</code>ã€‚</li>
      * </ol>
      * <p>
-     * ¶ÔÓÚunknown wildcard£¬¾¡¹ÜJDKÌá¹©µÄAPI£¬ÈÔÈ»·µ»ØÆäupper boundÎª<code>Object</code>
-     * £¬È»¶øÆäÊÂÊµÉÏµÄupper boundÈ¡¾öÓÚ¶ÔÓ¦µÄ<code>TypeVariable</code>µÄupper bound¡£
+     * å¯¹äºunknown wildcardï¼Œå°½ç®¡JDKæä¾›çš„APIï¼Œä»ç„¶è¿”å›å…¶upper boundä¸º<code>Object</code>
+     * ï¼Œç„¶è€Œå…¶äº‹å®ä¸Šçš„upper boundå–å†³äºå¯¹åº”çš„<code>TypeVariable</code>çš„upper boundã€‚
      */
     boolean isUnknown();
 }

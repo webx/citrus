@@ -20,66 +20,66 @@ package com.alibaba.citrus.service.requestcontext.lazycommit;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 
 /**
- * ÑÓ³ÙÌá½»response¡£ÓĞĞ©·½·¨µÄµ÷ÓÃ»áµ¼ÖÂresponse±»Ìá½»£¬°üÀ¨£º
+ * å»¶è¿Ÿæäº¤responseã€‚æœ‰äº›æ–¹æ³•çš„è°ƒç”¨ä¼šå¯¼è‡´responseè¢«æäº¤ï¼ŒåŒ…æ‹¬ï¼š
  * <ul>
  * <li><code>sendError</code></li>
  * <li><code>sendRedirect</code></li>
  * <li><code>flushBuffer</code></li>
- * <li><code>setContentLength()</code>»ò
- * <code>setHeader("Content-Length", len)</code>£¬µ«ÓĞĞ©servlet
- * engine²»»áÔÚÕâÀïÌá½»response¡£</li>
+ * <li><code>setContentLength()</code>æˆ–
+ * <code>setHeader("Content-Length", len)</code>ï¼Œä½†æœ‰äº›servlet
+ * engineä¸ä¼šåœ¨è¿™é‡Œæäº¤responseã€‚</li>
  * </ul>
- * ResponseÒ»µ©Ìá½»£¬¾Í²»ÄÜĞŞ¸ÄheaderÁË¡£Õâ¶ÔÓÚÒ»Ğ©Ó¦ÓÃ£¨ÀıÈçcookie-based session£©µÄÊµÏÖÊÇÒ»¸öÎÊÌâ¡£
+ * Responseä¸€æ—¦æäº¤ï¼Œå°±ä¸èƒ½ä¿®æ”¹headeräº†ã€‚è¿™å¯¹äºä¸€äº›åº”ç”¨ï¼ˆä¾‹å¦‚cookie-based sessionï¼‰çš„å®ç°æ˜¯ä¸€ä¸ªé—®é¢˜ã€‚
  * <p>
- * ±¾ÀàÊ¹ÓÃÑÓ³ÙÌá½»À´Ö§³ÖÕâĞ©Ó¦ÓÃ¡£
+ * æœ¬ç±»ä½¿ç”¨å»¶è¿Ÿæäº¤æ¥æ”¯æŒè¿™äº›åº”ç”¨ã€‚
  * </p>
  * <p>
- * ×¢Òâ£¬±¾Àà²¢Î´´¦Àí<code>getWriter()</code>ºÍ<code>getOutputStream()</code>
- * ·½·¨Ëù²úÉúµÄÌá½»¡£¶ÔÓÚÕâĞ©·½·¨Ëù²úÉúµÄÌá½»£¬ĞèÒªÓÃ<code>BufferedRequestContext</code>À´´¦Àí¡£
+ * æ³¨æ„ï¼Œæœ¬ç±»å¹¶æœªå¤„ç†<code>getWriter()</code>å’Œ<code>getOutputStream()</code>
+ * æ–¹æ³•æ‰€äº§ç”Ÿçš„æäº¤ã€‚å¯¹äºè¿™äº›æ–¹æ³•æ‰€äº§ç”Ÿçš„æäº¤ï¼Œéœ€è¦ç”¨<code>BufferedRequestContext</code>æ¥å¤„ç†ã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface LazyCommitRequestContext extends RequestContext {
     /**
-     * ÅĞ¶Ïµ±Ç°ÇëÇóÊÇ·ñÒÑ³ö´í¡£
+     * åˆ¤æ–­å½“å‰è¯·æ±‚æ˜¯å¦å·²å‡ºé”™ã€‚
      * 
-     * @return Èç¹û³ö´í£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚æœå‡ºé”™ï¼Œåˆ™è¿”å›<code>true</code>
      */
     boolean isError();
 
     /**
-     * Èç¹û<code>sendError()</code>·½·¨Ôø±»µ÷ÓÃ£¬Ôò¸Ã·½·¨·µ»ØÒ»¸öerror×´Ì¬Öµ¡£
+     * å¦‚æœ<code>sendError()</code>æ–¹æ³•æ›¾è¢«è°ƒç”¨ï¼Œåˆ™è¯¥æ–¹æ³•è¿”å›ä¸€ä¸ªerrorçŠ¶æ€å€¼ã€‚
      * 
-     * @return error×´Ì¬Öµ£¬ÈôÏµÍ³Õı³££¬Ôò·µ»Ø<code>0</code>
+     * @return errorçŠ¶æ€å€¼ï¼Œè‹¥ç³»ç»Ÿæ­£å¸¸ï¼Œåˆ™è¿”å›<code>0</code>
      */
     int getErrorStatus();
 
     /**
-     * Èç¹û<code>sendError()</code>·½·¨Ôø±»µ÷ÓÃ£¬Ôò¸Ã·½·¨·µ»ØÒ»¸öerrorĞÅÏ¢¡£
+     * å¦‚æœ<code>sendError()</code>æ–¹æ³•æ›¾è¢«è°ƒç”¨ï¼Œåˆ™è¯¥æ–¹æ³•è¿”å›ä¸€ä¸ªerrorä¿¡æ¯ã€‚
      * 
-     * @return errorĞÅÏ¢£¬ÈôÏµÍ³Õı³££¬Ôò·µ»Ø<code>null</code>
+     * @return errorä¿¡æ¯ï¼Œè‹¥ç³»ç»Ÿæ­£å¸¸ï¼Œåˆ™è¿”å›<code>null</code>
      */
     String getErrorMessage();
 
     /**
-     * ÅĞ¶Ïµ±Ç°ÇëÇóÊÇ·ñÒÑ±»ÖØ¶¨Ïò¡£
+     * åˆ¤æ–­å½“å‰è¯·æ±‚æ˜¯å¦å·²è¢«é‡å®šå‘ã€‚
      * 
-     * @return Èç¹ûÖØ¶¨Ïò£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚æœé‡å®šå‘ï¼Œåˆ™è¿”å›<code>true</code>
      */
     boolean isRedirected();
 
     /**
-     * È¡µÃÖØ¶¨ÏòµÄURI¡£
+     * å–å¾—é‡å®šå‘çš„URIã€‚
      * 
-     * @return ÖØ¶¨ÏòµÄURI£¬Èç¹ûÃ»ÓĞÖØ¶¨Ïò£¬Ôò·µ»Ø<code>null</code>
+     * @return é‡å®šå‘çš„URIï¼Œå¦‚æœæ²¡æœ‰é‡å®šå‘ï¼Œåˆ™è¿”å›<code>null</code>
      */
     String getRedirectLocation();
 
     /**
-     * È¡µÃ×î½üÉèÖÃµÄHTTP status¡£
+     * å–å¾—æœ€è¿‘è®¾ç½®çš„HTTP statusã€‚
      * 
-     * @return HTTP statusÖµ
+     * @return HTTP statuså€¼
      */
     int getStatus();
 }

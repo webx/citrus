@@ -19,9 +19,9 @@ package com.alibaba.citrus.service.requestcontext.basic;
 
 public interface CookieHeaderValueInterceptor extends ResponseHeaderInterceptor {
     /**
-     * ¼ì²écookie header¡£
+     * æ£€æŸ¥cookie headerã€‚
      * 
-     * @return ·µ»ØÖµ±íÊ¾ĞŞ¸ÄheaderµÄÖµ£¬·µ»Ø<code>null</code>Ôò±íÊ¾¾Ü¾ø¸Ãcookie¡£
+     * @return è¿”å›å€¼è¡¨ç¤ºä¿®æ”¹headerçš„å€¼ï¼Œè¿”å›<code>null</code>åˆ™è¡¨ç¤ºæ‹’ç»è¯¥cookieã€‚
      */
     String checkCookieHeaderValue(String name, String value, boolean setHeader);
 }

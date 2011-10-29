@@ -19,7 +19,7 @@ package com.alibaba.citrus.webx.handler;
 
 public interface RequestHandlerNameAware {
     /**
-     * ÉèÖÃhandlerµÄÃû³Æ¡£
+     * è®¾ç½®handlerçš„åç§°ã€‚
      */
     void setName(String handlerName);
 }

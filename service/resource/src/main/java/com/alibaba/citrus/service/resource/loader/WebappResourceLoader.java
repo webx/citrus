@@ -39,10 +39,10 @@ import com.alibaba.citrus.service.resource.ResourceMatchResult;
 import com.alibaba.citrus.service.resource.support.URLResource;
 
 /**
- * ÓÃÀ´×°ÔØwebappÏÂµÄ×ÊÔ´¡£
+ * ç”¨æ¥è£…è½½webappä¸‹çš„èµ„æºã€‚
  * <p>
- * ÔÚ·Çweb»·¾³ÏÂ£¬¸ÃloaderÒ²¿É´æÔÚ£¬Ö»²»¹ıÓÉÓÚ<code>servletContext==null</code>
- * £¬Òò´ËÕÒ²»µ½×ÊÔ´¡£ÕâÑùÉè¼Æ£¬ÊÇÎªÁËÈÃ·Çweb»·¾³ºÍweb»·¾³¿ÉÒÔ¹²ÏíÏàÍ¬µÄÅäÖÃÎÄ¼ş¡£
+ * åœ¨éwebç¯å¢ƒä¸‹ï¼Œè¯¥loaderä¹Ÿå¯å­˜åœ¨ï¼Œåªä¸è¿‡ç”±äº<code>servletContext==null</code>
+ * ï¼Œå› æ­¤æ‰¾ä¸åˆ°èµ„æºã€‚è¿™æ ·è®¾è®¡ï¼Œæ˜¯ä¸ºäº†è®©éwebç¯å¢ƒå’Œwebç¯å¢ƒå¯ä»¥å…±äº«ç›¸åŒçš„é…ç½®æ–‡ä»¶ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -55,7 +55,7 @@ public class WebappResourceLoader implements ResourceLister, ServletContextAware
     }
 
     /**
-     * ³õÊ¼»¯loader£¬²¢Éè¶¨loaderËùÔÚµÄ<code>ResourceLoadingService</code>µÄÊµÀı¡£
+     * åˆå§‹åŒ–loaderï¼Œå¹¶è®¾å®šloaderæ‰€åœ¨çš„<code>ResourceLoadingService</code>çš„å®ä¾‹ã€‚
      */
     public void init(ResourceLoadingService resourceLoadingService) {
     }
@@ -69,7 +69,7 @@ public class WebappResourceLoader implements ResourceLister, ServletContextAware
         Resource resource = getServletResource(path, context, options);
 
         if (resource == null) {
-            return null; // Ä¿Â¼²»´æÔÚ£¬Ôò·µ»Ønull
+            return null; // ç›®å½•ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›null
         }
 
         boolean isDirectory = resource.getURL().getPath().endsWith("/");
@@ -83,7 +83,7 @@ public class WebappResourceLoader implements ResourceLister, ServletContextAware
 
         if (nameSet == null || nameSet.isEmpty()) {
             if (isDirectory) {
-                return EMPTY_STRING_ARRAY; // Ä¿Â¼´æÔÚ£¬µ«ÊÇÎŞÎÄ¼ş£¬·µ»Ø¿ÕÊı×é
+                return EMPTY_STRING_ARRAY; // ç›®å½•å­˜åœ¨ï¼Œä½†æ˜¯æ— æ–‡ä»¶ï¼Œè¿”å›ç©ºæ•°ç»„
             } else {
                 return null;
             }
@@ -127,9 +127,9 @@ public class WebappResourceLoader implements ResourceLister, ServletContextAware
             resource = new URLResource(resourceURL);
         }
 
-        // ¶ÔÓÚwebapp×ÊÔ´£¬Èç¹û±»ÕÒµ½£¬¿ÉÒÔ¿Ï¶¨×ÊÔ´´æÔÚ£¬²»ĞèÒªÔÙ¼ì²éÆä´æÔÚĞÔ¡£
-        // È»¶øÔÚhttpunit»·¾³ÏÂ£¬ÉÏÊö¹æÔò¿ÉÄÜ²»±»×ñÑ­¡£
-        // ÎªÁË±£ÏÕÆğ¼û£¬Í¬Ê±¼ì²éÒ»ÏÂÎÄ¼şµÄ´æÔÚĞÔ¡£
+        // å¯¹äºwebappèµ„æºï¼Œå¦‚æœè¢«æ‰¾åˆ°ï¼Œå¯ä»¥è‚¯å®šèµ„æºå­˜åœ¨ï¼Œä¸éœ€è¦å†æ£€æŸ¥å…¶å­˜åœ¨æ€§ã€‚
+        // ç„¶è€Œåœ¨httpunitç¯å¢ƒä¸‹ï¼Œä¸Šè¿°è§„åˆ™å¯èƒ½ä¸è¢«éµå¾ªã€‚
+        // ä¸ºäº†ä¿é™©èµ·è§ï¼ŒåŒæ—¶æ£€æŸ¥ä¸€ä¸‹æ–‡ä»¶çš„å­˜åœ¨æ€§ã€‚
         if (resource != null && resource.getFile() != null && !resource.getFile().exists()) {
             resource = null;
         }

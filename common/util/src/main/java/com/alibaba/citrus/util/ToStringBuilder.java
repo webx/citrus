@@ -32,7 +32,7 @@ import java.util.Map;
 import com.alibaba.citrus.util.internal.IndentableStringBuilder;
 
 /**
- * ·½±ãÊµÏÖ<code>toString()</code>·½·¨¡£
+ * æ–¹ä¾¿å®ç°<code>toString()</code>æ–¹æ³•ã€‚
  * 
  * @author Michael Zhou
  */
@@ -53,7 +53,7 @@ public class ToStringBuilder {
     }
 
     /**
-     * Çå³ıËùÓĞÊı¾İ¡£
+     * æ¸…é™¤æ‰€æœ‰æ•°æ®ã€‚
      */
     public void clear() {
         out.clear();
@@ -61,21 +61,21 @@ public class ToStringBuilder {
     }
 
     /**
-     * È¡µÃµ×²ãindentable string builder¡£
+     * å–å¾—åº•å±‚indentable string builderã€‚
      */
     public IndentableStringBuilder out() {
         return out;
     }
 
     /**
-     * ´òÓ¡Êı×éÊ±£¬ÊÇ·ñ´òÓ¡³öÃèÊö¡£
+     * æ‰“å°æ•°ç»„æ—¶ï¼Œæ˜¯å¦æ‰“å°å‡ºæè¿°ã€‚
      */
     public boolean isPrintDescription() {
         return printDescription;
     }
 
     /**
-     * ´òÓ¡Êı×éÊ±£¬ÊÇ·ñ´òÓ¡³öÃèÊö¡£
+     * æ‰“å°æ•°ç»„æ—¶ï¼Œæ˜¯å¦æ‰“å°å‡ºæè¿°ã€‚
      */
     public ToStringBuilder setPrintDescription(boolean printDescription) {
         this.printDescription = printDescription;
@@ -83,7 +83,7 @@ public class ToStringBuilder {
     }
 
     /**
-     * ´´½¨Ò»¼¶Ëõ½ø¡£
+     * åˆ›å»ºä¸€çº§ç¼©è¿›ã€‚
      */
     public ToStringBuilder start() {
         out.start();
@@ -91,7 +91,7 @@ public class ToStringBuilder {
     }
 
     /**
-     * ´´½¨Ò»¼¶Ëõ½ø¡£
+     * åˆ›å»ºä¸€çº§ç¼©è¿›ã€‚
      */
     public ToStringBuilder start(String beginQuote, String endQuote) {
         out.start(beginQuote, endQuote);
@@ -99,7 +99,7 @@ public class ToStringBuilder {
     }
 
     /**
-     * ½áÊøÒ»¼¶Ëõ½ø¡£×¢Òâ£¬Êä³ö½á¹ûÖ®Ç°£¬ĞëÖÁÉÙµ÷ÓÃÒ»´Îend()£¬ÒÔÈ·±£×îºóµÄ»»ĞĞ¿ÉÒÔ±»Êä³ö¡£
+     * ç»“æŸä¸€çº§ç¼©è¿›ã€‚æ³¨æ„ï¼Œè¾“å‡ºç»“æœä¹‹å‰ï¼Œé¡»è‡³å°‘è°ƒç”¨ä¸€æ¬¡end()ï¼Œä»¥ç¡®ä¿æœ€åçš„æ¢è¡Œå¯ä»¥è¢«è¾“å‡ºã€‚
      */
     public ToStringBuilder end() {
         out.end();
@@ -399,7 +399,7 @@ public class ToStringBuilder {
     }
 
     /**
-     * ¿ÉÓÃÀ´´´½¨Ò»¸ö½á¹¹µÄbuilder£¬ÀıÈç£ºmap£¬collectionµÈ¡£
+     * å¯ç”¨æ¥åˆ›å»ºä¸€ä¸ªç»“æ„çš„builderï¼Œä¾‹å¦‚ï¼šmapï¼Œcollectionç­‰ã€‚
      * 
      * @author Michael Zhou
      */
@@ -408,7 +408,7 @@ public class ToStringBuilder {
     }
 
     /**
-     * ´´½¨Ò»ÏµÁĞkey/valueÖµ¶Ô¡£
+     * åˆ›å»ºä¸€ç³»åˆ—key/valueå€¼å¯¹ã€‚
      */
     public static class MapBuilder implements StructureBuilder {
         private final Map<String, Object> map = createLinkedHashMap();
@@ -519,7 +519,7 @@ public class ToStringBuilder {
     }
 
     /**
-     * ´´½¨ÖµµÄÁĞ±í¡£
+     * åˆ›å»ºå€¼çš„åˆ—è¡¨ã€‚
      */
     public static class CollectionBuilder implements StructureBuilder {
         private final List<Object> list = createLinkedList();

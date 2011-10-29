@@ -32,25 +32,25 @@ public class MappingRuleServiceTests extends AbstractMappingRuleServiceTests {
     public void testParent() throws Exception {
         ApplicationContext ctx = createBeanFactory("services.xml", createBeanFactory("services-parent.xml"));
 
-        // Ä¬ÈÏÃû³Æ£¬Ä¬ÈÏparent
+        // é»˜è®¤åç§°ï¼Œé»˜è®¤parent
         mappingRules = (MappingRuleService) ctx.getBean("mappingRuleService");
         assertEquals("test.ext0", mappingRules.getMappedName("extension0", "test"));
 
-        // Ö¸¶¨Ãû³Æ£¬Í¬Ãûparent
+        // æŒ‡å®šåç§°ï¼ŒåŒåparent
         mappingRules = (MappingRuleService) ctx.getBean("extension1");
         assertEquals("test.ext1", mappingRules.getMappedName("extension1", "test"));
 
-        // Ö¸¶¨Ãû³Æ£¬Ä¬ÈÏparent
+        // æŒ‡å®šåç§°ï¼Œé»˜è®¤parent
         mappingRules = (MappingRuleService) ctx.getBean("extension2");
         assertEquals("test.ext0", mappingRules.getMappedName("extension0", "test"));
 
-        // Ö¸¶¨Ãû³Æ£¬Ö¸¶¨parent
+        // æŒ‡å®šåç§°ï¼ŒæŒ‡å®šparent
         mappingRules = (MappingRuleService) ctx.getBean("extension3");
         assertEquals("test.ext1", mappingRules.getMappedName("extension1", "test"));
     }
 
     /**
-     * ²âÊÔÒì³£²Ù×÷£¬°üÀ¨²»´æÔÚµÄrule£¬ÊäÈë¿ÕÃû³ÆµÈ
+     * æµ‹è¯•å¼‚å¸¸æ“ä½œï¼ŒåŒ…æ‹¬ä¸å­˜åœ¨çš„ruleï¼Œè¾“å…¥ç©ºåç§°ç­‰
      */
     @Test
     public void testExceptionOperation() {

@@ -23,7 +23,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * ÓÃÀ´±êÊ¶Ò»¸ö²ÎÊı£¬Ê¹Ö®´Óform serviceÖĞÈ¡µÃÒ»×é<code>Group</code>¶ÔÏó¡£
+ * ç”¨æ¥æ ‡è¯†ä¸€ä¸ªå‚æ•°ï¼Œä½¿ä¹‹ä»form serviceä¸­å–å¾—ä¸€ç»„<code>Group</code>å¯¹è±¡ã€‚
  * 
  * @author Michael Zhou
  */
@@ -31,25 +31,25 @@ import java.lang.annotation.Target;
 @Target({ ElementType.PARAMETER })
 public @interface FormGroups {
     /**
-     * ÓÃÓÚ±êÊ¶groupµÄÃû³Æ¡£
+     * ç”¨äºæ ‡è¯†groupçš„åç§°ã€‚
      * <p>
-     * ´Ë²ÎÊıÓÃÓÚ¼ò»¯µÄĞÎÊ½£º<code>@FormGroup("groupName")</code>¡£
+     * æ­¤å‚æ•°ç”¨äºç®€åŒ–çš„å½¢å¼ï¼š<code>@FormGroup("groupName")</code>ã€‚
      * </p>
      */
     String value() default "";
 
     /**
-     * ÓÃÓÚ±êÊ¶groupµÄÃû³Æ¡£
+     * ç”¨äºæ ‡è¯†groupçš„åç§°ã€‚
      * <p>
-     * ´Ë²ÎÊıÓÃÓÚÓĞ¶à¸ö²ÎÊıµÄĞÎÊ½£º<code>@FormGroup(name="groupName", ...)</code>¡£
+     * æ­¤å‚æ•°ç”¨äºæœ‰å¤šä¸ªå‚æ•°çš„å½¢å¼ï¼š<code>@FormGroup(name="groupName", ...)</code>ã€‚
      * </p>
      */
     String name() default "";
 
     /**
-     * ¼ÙÈç±íµ¥Î´ÑéÖ¤Í¨¹ı£¬ÔòÌø¹ıÄ£¿éµÄÖ´ĞĞ¡£Ä¬ÈÏÎª<code>true</code>¡£
+     * å‡å¦‚è¡¨å•æœªéªŒè¯é€šè¿‡ï¼Œåˆ™è·³è¿‡æ¨¡å—çš„æ‰§è¡Œã€‚é»˜è®¤ä¸º<code>true</code>ã€‚
      * <p>
-     * ×¢Òâ£¬Ö»ÓĞÌØ¶¨µÄÄ£¿é£¨action£©¿ÉÒÔ±»Ìø¹ı£¬¶ÔÓÚÆäÓàµÄÄ£¿é£¬´Ë²ÎÊıÎŞĞ§¡£
+     * æ³¨æ„ï¼Œåªæœ‰ç‰¹å®šçš„æ¨¡å—ï¼ˆactionï¼‰å¯ä»¥è¢«è·³è¿‡ï¼Œå¯¹äºå…¶ä½™çš„æ¨¡å—ï¼Œæ­¤å‚æ•°æ— æ•ˆã€‚
      * </p>
      */
     boolean skipIfInvalid() default true;

@@ -22,16 +22,16 @@ import com.alibaba.citrus.service.form.support.AbstractCompositeValidator;
 import com.alibaba.citrus.service.form.support.AbstractCompositeValidatorDefinitionParser;
 
 /**
- * Ö»ÓĞµ±ÏÂÊôµÄËùÓĞvalidator¾ùÍ¨¹ıÑéÖ¤Ê±£¬´Ëvalidator²ÅÍ¨¹ıÑéÖ¤¡£
+ * åªæœ‰å½“ä¸‹å±çš„æ‰€æœ‰validatorå‡é€šè¿‡éªŒè¯æ—¶ï¼Œæ­¤validatoræ‰é€šè¿‡éªŒè¯ã€‚
  * <p>
- * µ±ÑéÖ¤²»Í¨¹ıÊ±£¬messageÎªµÚÒ»¸öÎ´Í¨¹ıÑéÖ¤µÄ×ÓvalidatorµÄmessage¡£
+ * å½“éªŒè¯ä¸é€šè¿‡æ—¶ï¼Œmessageä¸ºç¬¬ä¸€ä¸ªæœªé€šè¿‡éªŒè¯çš„å­validatorçš„messageã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public class AllOfValidator extends AbstractCompositeValidator {
     /**
-     * ²»ĞèÒªÅäÖÃmessage£¬ÒòÎªËüµÄmessageÊÇÓÉ×ÓvalidatorÌá¹©µÄ¡£
+     * ä¸éœ€è¦é…ç½®messageï¼Œå› ä¸ºå®ƒçš„messageæ˜¯ç”±å­validatoræä¾›çš„ã€‚
      */
     @Override
     protected boolean requiresMessage() {

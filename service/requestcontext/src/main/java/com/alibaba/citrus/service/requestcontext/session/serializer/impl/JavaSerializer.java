@@ -27,7 +27,7 @@ import com.alibaba.citrus.service.requestcontext.session.serializer.Serializer;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 /**
- * JavaĞòÁĞ»¯¡£
+ * Javaåºåˆ—åŒ–ã€‚
  * 
  * @author Michael Zhou
  */

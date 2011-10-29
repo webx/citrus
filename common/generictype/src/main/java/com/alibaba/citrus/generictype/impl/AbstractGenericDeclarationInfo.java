@@ -29,7 +29,7 @@ import com.alibaba.citrus.generictype.TypeInfo;
 import com.alibaba.citrus.generictype.TypeVariableInfo;
 
 /**
- * ¶Ô{@link GenericDeclarationInfo}µÄ³éÏóÊµÏÖ¡£
+ * å¯¹{@link GenericDeclarationInfo}çš„æŠ½è±¡å®ç°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -75,7 +75,7 @@ abstract class AbstractGenericDeclarationInfo implements GenericDeclarationInfo 
     }
 
     /**
-     * È¡µÃhashÖµ¡£
+     * å–å¾—hashå€¼ã€‚
      */
     @Override
     public int hashCode() {
@@ -83,7 +83,7 @@ abstract class AbstractGenericDeclarationInfo implements GenericDeclarationInfo 
     }
 
     /**
-     * ÅĞ¶ÏÁ½¸ö¶ÔÏóÊÇ·ñÏàÍ¬¡£
+     * åˆ¤æ–­ä¸¤ä¸ªå¯¹è±¡æ˜¯å¦ç›¸åŒã€‚
      */
     @Override
     public boolean equals(Object other) {
@@ -101,13 +101,13 @@ abstract class AbstractGenericDeclarationInfo implements GenericDeclarationInfo 
     }
 
     /**
-     * ×ª»»³É×Ö·û´®¡£
+     * è½¬æ¢æˆå­—ç¬¦ä¸²ã€‚
      */
     @Override
     public abstract String toString();
 
     /**
-     * È¡µÃ²ÎÊı±íµÄ×Ö·û´®±íÊ¾¡£
+     * å–å¾—å‚æ•°è¡¨çš„å­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      */
     protected int appendTypeParameters(StringBuilder buf) {
         int length = buf.length();

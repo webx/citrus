@@ -27,7 +27,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 
 /**
- * ½«charsetµ¹µ½Ò»¸öÎÄ¼şÖĞ£¬ÒÔ±ãÓÃµÚÈı·½¹¤¾ß×ª»»±àÂë¡£
+ * å°†charsetå€’åˆ°ä¸€ä¸ªæ–‡ä»¶ä¸­ï¼Œä»¥ä¾¿ç”¨ç¬¬ä¸‰æ–¹å·¥å…·è½¬æ¢ç¼–ç ã€‚
  * 
  * @author Michael Zhou
  */

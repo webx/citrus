@@ -20,15 +20,15 @@ package com.alibaba.citrus.service.requestcontext.parser;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * ÓÃÀ´À¹½ØºÍĞŞ¸ÄÓÃ»§Ìá½»µÄÊı¾İ¡£
+ * ç”¨æ¥æ‹¦æˆªå’Œä¿®æ”¹ç”¨æˆ·æäº¤çš„æ•°æ®ã€‚
  * 
  * @author Michael Zhou
  */
 public interface ParameterParserFilter {
     /**
-     * ÊÇ·ñĞèÒª¹ıÂË£¬Èç¹û·µ»Ø·ñ£¬Ôò¶ÔÓÚ¸ÃÇëÇóµÄËùÓĞ²ÎÊı¾ù²»Ö´ĞĞ¸Ã¹ıÂËÆ÷¡£
+     * æ˜¯å¦éœ€è¦è¿‡æ»¤ï¼Œå¦‚æœè¿”å›å¦ï¼Œåˆ™å¯¹äºè¯¥è¯·æ±‚çš„æ‰€æœ‰å‚æ•°å‡ä¸æ‰§è¡Œè¯¥è¿‡æ»¤å™¨ã€‚
      * <p>
-     * ÓĞĞ©filter¿ÉÒÔ¸ù¾İURLÀ´È·¶¨ÊÇ·ñÒª¹ıÂË²ÎÊı¡£
+     * æœ‰äº›filterå¯ä»¥æ ¹æ®URLæ¥ç¡®å®šæ˜¯å¦è¦è¿‡æ»¤å‚æ•°ã€‚
      * </p>
      */
     boolean isFiltering(HttpServletRequest request);

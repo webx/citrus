@@ -39,7 +39,7 @@ import com.alibaba.citrus.service.mail.builder.content.TextContent;
 import com.alibaba.citrus.service.mail.support.ResourceDataSource;
 
 /**
- * ²âÊÔ¸½¼ş¡£
+ * æµ‹è¯•é™„ä»¶ã€‚
  * 
  * @author Michael Zhou
  */
@@ -143,17 +143,17 @@ public class AttachmentContentTests extends AbstractMailBuilderTests {
         // URL: gif image, name specified
         url = new File(srcdir, "java.gif").toURI().toURL();
 
-        content = new AttachmentContent(url, "ÎÒµÄÍ¼Æ¬.gif");
+        content = new AttachmentContent(url, "æˆ‘çš„å›¾ç‰‡.gif");
         builder.setContent(content);
 
-        assert_ImageGif_javagif_ÎÒµÄÍ¼Æ¬_base64();
+        assert_ImageGif_javagif_æˆ‘çš„å›¾ç‰‡_base64();
 
         // toString
         String result = "";
 
         result += "AttachmentContent {\n";
         result += "  source   = URL[" + url.toExternalForm() + "]\n";
-        result += "  fileName = ÎÒµÄÍ¼Æ¬.gif\n";
+        result += "  fileName = æˆ‘çš„å›¾ç‰‡.gif\n";
         result += "}";
 
         assertEquals(result, content.toString());
@@ -194,17 +194,17 @@ public class AttachmentContentTests extends AbstractMailBuilderTests {
         // File: gif image, name specified
         file = new File(srcdir, "java.gif");
 
-        content = new AttachmentContent(file, "ÎÒµÄÍ¼Æ¬.gif");
+        content = new AttachmentContent(file, "æˆ‘çš„å›¾ç‰‡.gif");
         builder.setContent(content);
 
-        assert_ImageGif_javagif_ÎÒµÄÍ¼Æ¬_base64();
+        assert_ImageGif_javagif_æˆ‘çš„å›¾ç‰‡_base64();
 
         // toString
         String result = "";
 
         result += "AttachmentContent {\n";
         result += "  source   = File[" + file.getAbsolutePath() + "]\n";
-        result += "  fileName = ÎÒµÄÍ¼Æ¬.gif\n";
+        result += "  fileName = æˆ‘çš„å›¾ç‰‡.gif\n";
         result += "}";
 
         assertEquals(result, content.toString());
@@ -270,17 +270,17 @@ public class AttachmentContentTests extends AbstractMailBuilderTests {
         // DS: gif image, name specfied
         dataSource = new ResourceDataSource(factory.getResource("java.gif"), null, "image/gif");
 
-        content = new AttachmentContent(dataSource, "ÎÒµÄÍ¼Æ¬.gif");
+        content = new AttachmentContent(dataSource, "æˆ‘çš„å›¾ç‰‡.gif");
         builder.setContent(content);
 
-        assert_ImageGif_javagif_ÎÒµÄÍ¼Æ¬_base64();
+        assert_ImageGif_javagif_æˆ‘çš„å›¾ç‰‡_base64();
 
         // toString
         String result = "";
 
         result += "AttachmentContent {\n";
         result += "  source   = DataSource[Resource[java.gif, loaded by ResourceLoadingService]]\n";
-        result += "  fileName = ÎÒµÄÍ¼Æ¬.gif\n";
+        result += "  fileName = æˆ‘çš„å›¾ç‰‡.gif\n";
         result += "}";
 
         assertEquals(result, content.toString());
@@ -355,18 +355,18 @@ public class AttachmentContentTests extends AbstractMailBuilderTests {
         assert_TextPlain_testfile_QuotedPrintable();
 
         // Resource: gif image, name specified
-        content = new AttachmentContent("java.gif", "ÎÒµÄÍ¼Æ¬.gif");
+        content = new AttachmentContent("java.gif", "æˆ‘çš„å›¾ç‰‡.gif");
         content.setResourceLoader(factory);
         builder.setContent(content);
 
-        assert_ImageGif_javagif_ÎÒµÄÍ¼Æ¬_base64();
+        assert_ImageGif_javagif_æˆ‘çš„å›¾ç‰‡_base64();
 
         // toString
         String result = "";
 
         result += "AttachmentContent {\n";
         result += "  source   = Resource[java.gif]\n";
-        result += "  fileName = ÎÒµÄÍ¼Æ¬.gif\n";
+        result += "  fileName = æˆ‘çš„å›¾ç‰‡.gif\n";
         result += "}";
 
         assertEquals(result, content.toString());
@@ -392,13 +392,13 @@ public class AttachmentContentTests extends AbstractMailBuilderTests {
         // mailBuilder
         MailBuilder attached = new MailBuilder();
 
-        attached.setSubject("¸½¼ş±êÌâ");
-        attached.setContent(new TextContent("ÎÒ°®±±¾©Ãô¸Ğ´Ê", "text/plain"));
+        attached.setSubject("é™„ä»¶æ ‡é¢˜");
+        attached.setContent(new TextContent("æˆ‘çˆ±åŒ—äº¬æ•æ„Ÿè¯", "text/plain"));
 
         content = new AttachmentContent(attached);
         builder.setContent(content);
 
-        assert_Mail_ÎÒ°®±±¾©Ãô¸Ğ´Ê();
+        assert_Mail_æˆ‘çˆ±åŒ—äº¬æ•æ„Ÿè¯();
 
         // toString
         String result = "";
@@ -431,15 +431,15 @@ public class AttachmentContentTests extends AbstractMailBuilderTests {
         // message
         MailBuilder attached = new MailBuilder();
 
-        attached.setSubject("¸½¼ş±êÌâ");
-        attached.setContent(new TextContent("ÎÒ°®±±¾©Ãô¸Ğ´Ê", "text/plain"));
+        attached.setSubject("é™„ä»¶æ ‡é¢˜");
+        attached.setContent(new TextContent("æˆ‘çˆ±åŒ—äº¬æ•æ„Ÿè¯", "text/plain"));
 
         Message mail = attached.getMessage(rawSession);
 
         content = new AttachmentContent(mail);
         builder.setContent(content);
 
-        assert_Mail_ÎÒ°®±±¾©Ãô¸Ğ´Ê();
+        assert_Mail_æˆ‘çˆ±åŒ—äº¬æ•æ„Ÿè¯();
 
         // toString
         String result = "";
@@ -482,8 +482,8 @@ public class AttachmentContentTests extends AbstractMailBuilderTests {
 
         // ref
         MailBuilder attached = new MailBuilder();
-        attached.setSubject("¸½¼ş±êÌâ");
-        attached.setContent(new TextContent("ÎÒ°®±±¾©Ãô¸Ğ´Ê", "text/plain"));
+        attached.setSubject("é™„ä»¶æ ‡é¢˜");
+        attached.setContent(new TextContent("æˆ‘çˆ±åŒ—äº¬æ•æ„Ÿè¯", "text/plain"));
 
         MailService service = createMock(MailService.class);
         expect(service.getMailBuilder("attachedMail")).andReturn(attached);
@@ -495,7 +495,7 @@ public class AttachmentContentTests extends AbstractMailBuilderTests {
         builder.setContent(content);
         builder.setMailService(service);
 
-        assert_Mail_ÎÒ°®±±¾©Ãô¸Ğ´Ê();
+        assert_Mail_æˆ‘çˆ±åŒ—äº¬æ•æ„Ÿè¯();
 
         // notExist ref
         content = new AttachmentContent();
@@ -533,13 +533,13 @@ public class AttachmentContentTests extends AbstractMailBuilderTests {
     private void assert_AppOctet_testfile_base64() throws Exception {
         String eml = getMessageAsText();
 
-        assertThat(eml, containsRegex("Content-Type: application/octet-stream")); // ÓÉÓÚÃ»ÓĞurl£¬ËùÒÔÎŞ·¨ÅĞ¶Ï³ötext/plain
+        assertThat(eml, containsRegex("Content-Type: application/octet-stream")); // ç”±äºæ²¡æœ‰urlï¼Œæ‰€ä»¥æ— æ³•åˆ¤æ–­å‡ºtext/plain
         assertThat(eml, containsRegex("Content-Transfer-Encoding: base64" + REGEX_EOL));
         assertThat(eml, containsRegex("Content-Disposition: attachment; filename=testfile.txt" + REGEX_EOL));
         assertThat(eml, containsRegex(re("aGVsbG+xprGm")));
     }
 
-    private void assert_ImageGif_javagif_ÎÒµÄÍ¼Æ¬_base64() throws Exception {
+    private void assert_ImageGif_javagif_æˆ‘çš„å›¾ç‰‡_base64() throws Exception {
         String eml = getMessageAsText();
 
         assertThat(eml, containsRegex("Content-Type: image/gif"));
@@ -548,7 +548,7 @@ public class AttachmentContentTests extends AbstractMailBuilderTests {
                 re("filename=\"=?UTF-8?B?5oiR55qE5Zu+54mHLmdpZg==?=\"")));
     }
 
-    private void assert_Mail_ÎÒ°®±±¾©Ãô¸Ğ´Ê() throws Exception {
+    private void assert_Mail_æˆ‘çˆ±åŒ—äº¬æ•æ„Ÿè¯() throws Exception {
         String eml = getMessageAsText();
 
         assertThat(eml, containsRegex("Content-Type: message/rfc822" + REGEX_EOL));
@@ -556,6 +556,6 @@ public class AttachmentContentTests extends AbstractMailBuilderTests {
         assertThat(eml, containsRegex("Subject: " + REGEX_EOL));
         assertThat(eml, containsRegex(re("Subject: =?UTF-8?B?6ZmE5Lu25qCH6aKY?=") + REGEX_EOL));
         assertThat(eml, containsRegex("Content-Type: text/plain; charset=UTF-8" + REGEX_EOL));
-        assertThat(eml, containsRegex("ÎÒ°®±±¾©Ãô¸Ğ´Ê"));
+        assertThat(eml, containsRegex("æˆ‘çˆ±åŒ—äº¬æ•æ„Ÿè¯"));
     }
 }

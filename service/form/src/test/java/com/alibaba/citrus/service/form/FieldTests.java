@@ -94,7 +94,7 @@ public class FieldTests extends AbstractFormServiceTests {
 
     @Test
     public void getDisplayName() {
-        assertEquals("ÎÒµÄ×Ö¶Î1", field1.getDisplayName());
+        assertEquals("æˆ‘çš„å­—æ®µ1", field1.getDisplayName());
         assertEquals("field2", field2.getDisplayName()); // same as field name
     }
 
@@ -129,7 +129,7 @@ public class FieldTests extends AbstractFormServiceTests {
         assertEquals("default1", field1.getValue()); // with default value
         assertEquals(null, field2.getValue()); // no default value
 
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.field1
                 { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
@@ -154,7 +154,7 @@ public class FieldTests extends AbstractFormServiceTests {
         assertArrayEquals(new String[] { "default1", "default2", "default3" }, field1.getValues()); // with default value
         assertEquals(null, field2.getValue()); // no default value
 
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", new String[] { "aaa", "bbb" } }, // group1.field1
                 { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
@@ -227,8 +227,8 @@ public class FieldTests extends AbstractFormServiceTests {
         assertEquals(null, field1.getAttachment());
         assertEquals(null, field1.getAttachmentEncoded());
 
-        // Í¨¹ıformĞ¯´øattachment
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        // é€šè¿‡formæºå¸¦attachment
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", new String[] { "aaa", "bbb" } }, // group1.field1
                 { "_fm.g._0.f.attach", code }, // group1.field1.attach
                 { "_fm.g._0.fi", "bbb" }, // group1.field2
@@ -254,8 +254,8 @@ public class FieldTests extends AbstractFormServiceTests {
         assertEquals(code, field1.getAttachmentEncoded());
         assertNotNull(field1.getAttachment());
 
-        // ½âÂëFailure
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        // è§£ç Failure
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", new String[] { "aaa", "bbb" } }, // group1.field1
                 { "_fm.g._0.f.attach", code }, // group1.field1.attach
                 { "_fm.g._0.fi", "bbb" }, // group1.field2
@@ -274,7 +274,7 @@ public class FieldTests extends AbstractFormServiceTests {
 
     @Test
     public void getAttachment_failureDecoding() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", new String[] { "aaa", "bbb" } }, // group1.field1
                 { "_fm.g._0.f.attach", "wrong format" }, // group1.field1.attach
                 { "_fm.g._0.fi", "bbb" }, // group1.field2
@@ -293,7 +293,7 @@ public class FieldTests extends AbstractFormServiceTests {
 
     @Test
     public void isValid() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.field1
                 { "_fm.g._0.fi", "" }, // group1.field2
         };
@@ -311,7 +311,7 @@ public class FieldTests extends AbstractFormServiceTests {
 
     @Test
     public void getMessage_invalidField() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "" }, // group1.field1
                 { "_fm.g._0.fi", "" }, // group1.field2
         };
@@ -325,7 +325,7 @@ public class FieldTests extends AbstractFormServiceTests {
         assertEquals(false, group.isValid());
 
         assertEquals(false, field1.isValid());
-        assertEquals("required ÎÒµÄ×Ö¶Î1", field1.getMessage());
+        assertEquals("required æˆ‘çš„å­—æ®µ1", field1.getMessage());
 
         assertEquals(false, field2.isValid());
         assertEquals("required field2", field2.getMessage());
@@ -333,7 +333,7 @@ public class FieldTests extends AbstractFormServiceTests {
 
     @Test
     public void getMessage_validField() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.field1
                 { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
@@ -376,16 +376,16 @@ public class FieldTests extends AbstractFormServiceTests {
         field2.setMessage("err2");
         assertEquals(false, field2.isValid());
         assertEquals(false, group.isValid());
-        assertEquals("hello, world", field2.getMessage()); // ´íÎóĞÅÏ¢²»¸²¸Ç
+        assertEquals("hello, world", field2.getMessage()); // é”™è¯¯ä¿¡æ¯ä¸è¦†ç›–
 
         // setMessage with params
         initForSetMessage();
         Map<String, String> params = createHashMap();
-        params.put("world", "ÊÀ½ç");
+        params.put("world", "ä¸–ç•Œ");
         field2.setMessage("err3", params);
         assertEquals(false, field2.isValid());
         assertEquals(false, group.isValid());
-        assertEquals("hello, ÊÀ½ç", field2.getMessage());
+        assertEquals("hello, ä¸–ç•Œ", field2.getMessage());
 
         // param not found
         initForSetMessage();
@@ -406,7 +406,7 @@ public class FieldTests extends AbstractFormServiceTests {
     }
 
     private void initForSetMessage() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.gro._0.f", "aaa" }, // group3.field1
                 { "_fm.gro._0.fi", "bbb" }, // group3.field2
         };
@@ -424,7 +424,7 @@ public class FieldTests extends AbstractFormServiceTests {
 
     @Test
     public void validate_withAbsentKey() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f.absent", "aaa" }, // group1.field1
                 { "_fm.g._0.fi", "bbb" }, // group1.field2
         };

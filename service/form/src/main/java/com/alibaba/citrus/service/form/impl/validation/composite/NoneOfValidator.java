@@ -22,7 +22,7 @@ import com.alibaba.citrus.service.form.support.AbstractCompositeValidator;
 import com.alibaba.citrus.service.form.support.AbstractCompositeValidatorDefinitionParser;
 
 /**
- * µ±ÏÂÊôµÄËùÓĞvalidator¾ùÎ´Í¨¹ıÑéÖ¤Ê±£¬´Ëvalidator²ÅÍ¨¹ıÑéÖ¤¡£
+ * å½“ä¸‹å±çš„æ‰€æœ‰validatorå‡æœªé€šè¿‡éªŒè¯æ—¶ï¼Œæ­¤validatoræ‰é€šè¿‡éªŒè¯ã€‚
  * 
  * @author Michael Zhou
  */

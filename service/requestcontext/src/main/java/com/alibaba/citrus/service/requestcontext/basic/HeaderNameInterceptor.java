@@ -19,9 +19,9 @@ package com.alibaba.citrus.service.requestcontext.basic;
 
 public interface HeaderNameInterceptor extends ResponseHeaderInterceptor {
     /**
-     * ¼ì²éheaderÃû³Æ¡£
+     * æ£€æŸ¥headeråç§°ã€‚
      * 
-     * @return ·µ»ØÖµ±íÊ¾ĞŞ¸ÄheaderµÄÃû³Æ£¬·µ»Ø<code>null</code>Ôò¶ªÆúheader¡£
+     * @return è¿”å›å€¼è¡¨ç¤ºä¿®æ”¹headerçš„åç§°ï¼Œè¿”å›<code>null</code>åˆ™ä¸¢å¼ƒheaderã€‚
      */
     String checkHeaderName(String name);
 }

@@ -20,72 +20,72 @@ package com.alibaba.citrus.service.form;
 import com.alibaba.citrus.service.form.configuration.FieldConfig;
 
 /**
- * ÓÃÓÚÑéÖ¤±íµ¥µÄÑéÖ¤Æ÷¡£
+ * ç”¨äºéªŒè¯è¡¨å•çš„éªŒè¯å™¨ã€‚
  * 
  * @author Michael Zhou
  */
 public interface Validator extends Cloneable {
     /**
-     * µ±GroupConfig±»³õÊ¼»¯Íê³ÉÒÔºó±»µ÷ÓÃ£¬´ËÊ±¿ÉÈ¡µÃÍ¬×éÖĞÆäËüµÄfields¡£
+     * å½“GroupConfigè¢«åˆå§‹åŒ–å®Œæˆä»¥åè¢«è°ƒç”¨ï¼Œæ­¤æ—¶å¯å–å¾—åŒç»„ä¸­å…¶å®ƒçš„fieldsã€‚
      */
     void init(FieldConfig fieldConfig) throws Exception;
 
     /**
-     * È¡µÃvalidatorµÄID£¬Í¨¹ı¸ÃID¿ÉÒÔÕÒµ½Ö¸¶¨µÄvalidator¡£
+     * å–å¾—validatorçš„IDï¼Œé€šè¿‡è¯¥IDå¯ä»¥æ‰¾åˆ°æŒ‡å®šçš„validatorã€‚
      */
     String getId();
 
     /**
-     * È¡µÃ³ö´íĞÅÏ¢¡£
+     * å–å¾—å‡ºé”™ä¿¡æ¯ã€‚
      */
     String getMessage(Context context);
 
     /**
-     * ÑéÖ¤Ò»¸ö×Ö¶Î¡£
+     * éªŒè¯ä¸€ä¸ªå­—æ®µã€‚
      */
     boolean validate(Context context);
 
     /**
-     * Éú³É¸±±¾¡£
+     * ç”Ÿæˆå‰¯æœ¬ã€‚
      */
     Validator clone();
 
     /**
-     * Ğ¯´ø×ÅvalidatorÑéÖ¤Ëù±ØĞëµÄÉÏÏÂÎÄĞÅÏ¢¡£
+     * æºå¸¦ç€validatoréªŒè¯æ‰€å¿…é¡»çš„ä¸Šä¸‹æ–‡ä¿¡æ¯ã€‚
      */
     interface Context {
         /**
-         * È¡µÃµ±Ç°field¡£
+         * å–å¾—å½“å‰fieldã€‚
          */
         Field getField();
 
         /**
-         * È¡µÃÖ¸¶¨Ãû³ÆµÄfield¡£
+         * å–å¾—æŒ‡å®šåç§°çš„fieldã€‚
          */
         Field getField(String fieldName);
 
         /**
-         * È¡µÃÖµ¡£
+         * å–å¾—å€¼ã€‚
          */
         Object getValue();
 
         /**
-         * È¡µÃÖ¸¶¨ÀàĞÍµÄÖµ¡£
+         * å–å¾—æŒ‡å®šç±»å‹çš„å€¼ã€‚
          */
         <T> T getValueAsType(Class<T> type);
 
         /**
-         * È¡µÃ´íÎóĞÅÏ¢¡£
+         * å–å¾—é”™è¯¯ä¿¡æ¯ã€‚
          */
         String getMessage();
 
         /**
-         * ÉèÖÃ´íÎóĞÅÏ¢¡£
+         * è®¾ç½®é”™è¯¯ä¿¡æ¯ã€‚
          */
         void setMessage(String message);
 
         /**
-         * È¡µÃÓÃÀ´¼ÆËã±í´ïÊ½µÄÉÏÏÂÎÄ¶ÔÏó¡£
+         * å–å¾—ç”¨æ¥è®¡ç®—è¡¨è¾¾å¼çš„ä¸Šä¸‹æ–‡å¯¹è±¡ã€‚
          */
         MessageContext getMessageContext();
     }

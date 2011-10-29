@@ -58,7 +58,7 @@ class MethodInvoker {
                 value = e.getValueForNonSkippable();
             }
 
-            // 特别处理：防止对primitive类型设置null
+            // 鐗瑰埆澶勭悊锛氶槻姝㈠primitive绫诲瀷璁剧疆null
             Class<?> paramType = fastMethod.getJavaMethod().getParameterTypes()[i];
 
             if (value == null && paramType.isPrimitive()) {

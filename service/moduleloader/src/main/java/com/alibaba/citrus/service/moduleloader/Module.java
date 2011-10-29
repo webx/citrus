@@ -18,13 +18,13 @@
 package com.alibaba.citrus.service.moduleloader;
 
 /**
- * ´ú±íÒ»¸öÄ£¿é¡£
+ * ä»£è¡¨ä¸€ä¸ªæ¨¡å—ã€‚
  * 
  * @author Michael Zhou
  */
 public interface Module {
     /**
-     * Ö´ĞĞÄ£¿é¡£
+     * æ‰§è¡Œæ¨¡å—ã€‚
      */
     void execute() throws Exception;
 }

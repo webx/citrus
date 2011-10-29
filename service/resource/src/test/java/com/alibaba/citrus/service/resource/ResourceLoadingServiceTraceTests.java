@@ -26,7 +26,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>ResourceLoadingService.trace()</code>¹¦ÄÜ¡£
+ * æµ‹è¯•<code>ResourceLoadingService.trace()</code>åŠŸèƒ½ã€‚
  * 
  * @author Michael Zhou
  */
@@ -50,8 +50,8 @@ public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTes
     public void resourceAlias_bySuperLoader() throws Exception {
         resourceLoadingService = (ResourceLoadingService) factory.getBean("resourceLoadingService_2");
 
-        // /myfolder/testres.txt Ó³Éäµ½<super-loader name="/webroot">
-        // ºÍ<resource-alias name="/webroot">µÈĞ§
+        // /myfolder/testres.txt æ˜ å°„åˆ°<super-loader name="/webroot">
+        // å’Œ<resource-alias name="/webroot">ç­‰æ•ˆ
         assertTrace(
                 true,
                 "/myfolder/testres.txt", //
@@ -79,7 +79,7 @@ public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTes
 
     @Test
     public void getResource_parent_defaultMapping() throws Exception {
-        // µ±Ç°resource loaderÖĞÃ»ÕÒµ½£¬µ½parentÖĞÕÒ£¬Æ¥Åä/
+        // å½“å‰resource loaderä¸­æ²¡æ‰¾åˆ°ï¼Œåˆ°parentä¸­æ‰¾ï¼ŒåŒ¹é…/
         assertTrace(
                 true,
                 "/myfolder/testres.txt", //
@@ -89,7 +89,7 @@ public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTes
 
     @Test
     public void getResource_alias_notFound() throws Exception {
-        // Alias±»Æ¥Åä£¬µ«Ã»ÕÒµ½resource mapping
+        // Aliasè¢«åŒ¹é…ï¼Œä½†æ²¡æ‰¾åˆ°resource mapping
         assertTrace(
                 null,
                 "/my/alias1/testres.txt", //
@@ -101,7 +101,7 @@ public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTes
 
     @Test
     public void getResource_alias_foundInParent() throws Exception {
-        // Alias±»Æ¥Åä£¬´Ódefault resource loaderÖĞÕÒµ½×ÊÔ´
+        // Aliasè¢«åŒ¹é…ï¼Œä»default resource loaderä¸­æ‰¾åˆ°èµ„æº
         assertTrace(
                 true,
                 "/my/alias3/testres.txt", //
@@ -112,21 +112,21 @@ public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTes
 
     @Test
     public void getResource_internal_found() throws Exception {
-        // Alias±»Æ¥Åä£¬internal mapping±»ÕÒµ½
+        // Aliasè¢«åŒ¹é…ï¼Œinternal mappingè¢«æ‰¾åˆ°
         assertTrace(
                 true,
                 "/my/alias4/testres.txt", //
                 "\"/my/alias4/testres.txt\" matched resource-alias [pattern=\"/my/alias4\"], at \"resources.xml\", beanName=\"resourceLoadingService\"", //
                 "\"/my/internal/resource/testres.txt\" matched resource [pattern=\"/my/internal/resource\", internal=\"true\"], at \"resources.xml\", beanName=\"resourceLoadingService\"");
 
-        // super-loader±»Æ¥Åä£¬internal mapping±»ÕÒµ½
+        // super-loaderè¢«åŒ¹é…ï¼Œinternal mappingè¢«æ‰¾åˆ°
         assertTrace(
                 true,
                 "/my/alias5/testres.txt", //
                 "\"/my/alias5/testres.txt\" matched resource [pattern=\"/my/alias5\"], at \"resources.xml\", beanName=\"resourceLoadingService\"", //
                 "\"/my/internal/resource/testres.txt\" matched resource [pattern=\"/my/internal/resource\", internal=\"true\"], at \"resources.xml\", beanName=\"resourceLoadingService\"");
 
-        // ÎŞparent
+        // æ— parent
         resourceLoadingService = resourceLoadingService.getParent();
 
         assertTrace(
@@ -138,14 +138,14 @@ public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTes
 
     @Test
     public void getResource_internal_notFound() throws Exception {
-        // Ö±½ÓÕÒinternal mappingÊÇ²»ĞĞµÄ
+        // ç›´æ¥æ‰¾internal mappingæ˜¯ä¸è¡Œçš„
         assertTrace(
                 null,
                 "/my/internal/resource/testres.txt", //
                 "\"/my/internal/resource/testres.txt\" matched resource-alias [pattern=\"/\"], at \"resources-root.xml\", beanName=\"resourceLoadingService\"", //
                 "\"/webroot/my/internal/resource/testres.txt\" matched resource [pattern=\"/webroot\", internal=\"true\"], at \"resources-root.xml\", beanName=\"resourceLoadingService\"");
 
-        // aliasÓ³Éäµ½parent internal mapping£¬ÕâÑùÊÇ²»ĞĞµÄ
+        // aliasæ˜ å°„åˆ°parent internal mappingï¼Œè¿™æ ·æ˜¯ä¸è¡Œçš„
         assertTrace(
                 null,
                 "/my/alias6/testres.txt", //
@@ -153,7 +153,7 @@ public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTes
                 "\"/webroot/myfolder/testres.txt\" matched resource-alias [pattern=\"/\"], at \"resources-root.xml\", beanName=\"resourceLoadingService\"", //
                 "\"/webroot/webroot/myfolder/testres.txt\" matched resource [pattern=\"/webroot\", internal=\"true\"], at \"resources-root.xml\", beanName=\"resourceLoadingService\"");
 
-        // super-loaderÓ³Éäµ½parent internal mapping£¬ÕâÑùÊÇ²»ĞĞµÄ
+        // super-loaderæ˜ å°„åˆ°parent internal mappingï¼Œè¿™æ ·æ˜¯ä¸è¡Œçš„
         assertTrace(
                 null,
                 "/my/alias7/testres.txt", //
@@ -161,7 +161,7 @@ public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTes
                 "\"/webroot/myfolder/testres.txt\" matched resource-alias [pattern=\"/\"], at \"resources-root.xml\", beanName=\"resourceLoadingService\"", //
                 "\"/webroot/webroot/myfolder/testres.txt\" matched resource [pattern=\"/webroot\", internal=\"true\"], at \"resources-root.xml\", beanName=\"resourceLoadingService\"");
 
-        // ÎŞparent
+        // æ— parent
         resourceLoadingService = resourceLoadingService.getParent();
 
         assertTrace(
@@ -173,7 +173,7 @@ public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTes
 
     @Test
     public void getResource_noLoaders() throws Exception {
-        // Æ¥Åä£¬µ«Ã»ÓĞloaders
+        // åŒ¹é…ï¼Œä½†æ²¡æœ‰loaders
         assertTrace(null,
                 "/my/resource/testres.txt", //
                 "\"/my/resource/testres.txt\" matched resource [pattern=\"/my/resource\"], at \"resources.xml\", beanName=\"resourceLoadingService\"");

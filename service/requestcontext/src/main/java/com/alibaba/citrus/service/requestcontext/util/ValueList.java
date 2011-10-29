@@ -25,364 +25,364 @@ import org.apache.commons.fileupload.FileItem;
 import org.springframework.core.MethodParameter;
 
 /**
- * ´ú±íÒ»¸öÖµµÄÁĞ±í¡£
+ * ä»£è¡¨ä¸€ä¸ªå€¼çš„åˆ—è¡¨ã€‚
  * 
  * @author Michael Zhou
  */
 public interface ValueList {
     // =============================================================
-    //  È¡µÃ²ÎÊıµÄÖµ 
+    //  å–å¾—å‚æ•°çš„å€¼ 
     // =============================================================
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>false</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>false</code>ã€‚
      * 
-     * @return ²ÎÊıÖµ
+     * @return å‚æ•°å€¼
      */
     boolean getBooleanValue();
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     boolean getBooleanValue(Boolean defaultValue);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @return ²ÎÊıÖµ
+     * @return å‚æ•°å€¼
      */
     byte getByteValue();
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     byte getByteValue(Byte defaultValue);
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄ×Ö½Ú¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„å­—èŠ‚ã€‚
      * 
-     * @param charset ÓÃÀ´×ª»»×Ö·ûµÄ±àÂë
-     * @return ²ÎÊıÖµµÄ×Ö½ÚÊı×é
-     * @throws UnsupportedEncodingException Èç¹ûÖ¸¶¨ÁË´íÎóµÄ±àÂë×Ö·û¼¯
+     * @param charset ç”¨æ¥è½¬æ¢å­—ç¬¦çš„ç¼–ç 
+     * @return å‚æ•°å€¼çš„å­—èŠ‚æ•°ç»„
+     * @throws UnsupportedEncodingException å¦‚æœæŒ‡å®šäº†é”™è¯¯çš„ç¼–ç å­—ç¬¦é›†
      */
     byte[] getBytes(String charset) throws UnsupportedEncodingException;
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>'\0'</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>'\0'</code>ã€‚
      * 
-     * @return ²ÎÊıÖµ
+     * @return å‚æ•°å€¼
      */
     char getCharacterValue();
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     char getCharacterValue(Character defaultValue);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @return ²ÎÊıÖµ
+     * @return å‚æ•°å€¼
      */
     double getDoubleValue();
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     double getDoubleValue(Double defaultValue);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @return ²ÎÊıÖµ
+     * @return å‚æ•°å€¼
      */
     float getFloatValue();
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     float getFloatValue(Float defaultValue);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @return ²ÎÊıÖµ
+     * @return å‚æ•°å€¼
      */
     int getIntegerValue();
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     int getIntegerValue(Integer defaultValue);
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     int[] getIntegerValues();
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     int[] getIntegerValues(int[] defaultValue);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @return ²ÎÊıÖµ
+     * @return å‚æ•°å€¼
      */
     long getLongValue();
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     long getLongValue(Long defaultValue);
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     long[] getLongValues();
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     long[] getLongValues(long[] defaultValue);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @return ²ÎÊıÖµ
+     * @return å‚æ•°å€¼
      */
     short getShortValue();
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     short getShortValue(Short defaultValue);
 
     /**
-     * È¡µÃÈÕÆÚ¡£×Ö·û´®½«Ê¹ÓÃÖ¸¶¨µÄ<code>DateFormat</code>À´½âÎö¡£Èç¹û²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æ—¥æœŸã€‚å­—ç¬¦ä¸²å°†ä½¿ç”¨æŒ‡å®šçš„<code>DateFormat</code>æ¥è§£æã€‚å¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @param format <code>DateFormat</code>¶ÔÏó
-     * @return <code>java.util.Date</code>¶ÔÏó
+     * @param format <code>DateFormat</code>å¯¹è±¡
+     * @return <code>java.util.Date</code>å¯¹è±¡
      */
     Date getDateValue(DateFormat format);
 
     /**
-     * È¡µÃÈÕÆÚ¡£×Ö·û´®½«Ê¹ÓÃÖ¸¶¨µÄ<code>DateFormat</code>À´½âÎö¡£Èç¹û²»´æÔÚ£¬Ôò·µ»ØÄ¬ÈÏÖµ¡£
+     * å–å¾—æ—¥æœŸã€‚å­—ç¬¦ä¸²å°†ä½¿ç”¨æŒ‡å®šçš„<code>DateFormat</code>æ¥è§£æã€‚å¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›é»˜è®¤å€¼ã€‚
      * 
-     * @param format <code>DateFormat</code>¶ÔÏó
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return <code>java.util.Date</code>¶ÔÏó
+     * @param format <code>DateFormat</code>å¯¹è±¡
+     * @param defaultValue é»˜è®¤å€¼
+     * @return <code>java.util.Date</code>å¯¹è±¡
      */
     Date getDateValue(DateFormat format, Date defaultValue);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @return ²ÎÊıÖµ
+     * @return å‚æ•°å€¼
      */
     String getStringValue();
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     String getStringValue(String defaultValue);
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     String[] getStringValues();
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     String[] getStringValues(String[] defaultValue);
 
     /**
-     * È¡µÃ<code>FileItem</code>¶ÔÏó£¬Èç¹û²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—<code>FileItem</code>å¯¹è±¡ï¼Œå¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @return <code>FileItem</code>¶ÔÏó
+     * @return <code>FileItem</code>å¯¹è±¡
      */
     FileItem getFileItem();
 
     /**
-     * È¡µÃ<code>FileItem</code>¶ÔÏó£¬Èç¹û²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—<code>FileItem</code>å¯¹è±¡ï¼Œå¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @return <code>FileItem</code>¶ÔÏóµÄÊı×é
+     * @return <code>FileItem</code>å¯¹è±¡çš„æ•°ç»„
      */
     FileItem[] getFileItems();
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @return ²ÎÊıÖµ
+     * @return å‚æ•°å€¼
      */
     Object getValue();
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÄ¬ÈÏÖµ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›é»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     Object getValue(Object defaultValue);
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     Object[] getValues();
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValues Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param defaultValues é»˜è®¤å€¼
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     Object[] getValues(Object[] defaultValues);
 
     /**
-     * È¡µÃÖ¸¶¨ÀàĞÍµÄÖµ¡£
+     * å–å¾—æŒ‡å®šç±»å‹çš„å€¼ã€‚
      */
     <T> T getValueOfType(Class<T> type, MethodParameter methodParameter, Object[] defaultValues);
 
     /**
-     * È¡µÃÖ¸¶¨ÀàĞÍµÄÖµ¡£
+     * å–å¾—æŒ‡å®šç±»å‹çš„å€¼ã€‚
      */
     <T> T getValueOfType(Class<T> type, boolean isPrimitive, MethodParameter methodParameter, Object[] defaultValues);
 
     // =============================================================
-    //  Ìí¼ÓºÍĞŞ¸Ä²ÎÊıµÄ·½·¨
+    //  æ·»åŠ å’Œä¿®æ”¹å‚æ•°çš„æ–¹æ³•
     // =============================================================
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param value ²ÎÊıÖµ
+     * @param value å‚æ•°å€¼
      */
     void addValue(boolean value);
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param value ²ÎÊıÖµ
+     * @param value å‚æ•°å€¼
      */
     void addValue(byte value);
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param value ²ÎÊıÖµ
+     * @param value å‚æ•°å€¼
      */
     void addValue(char value);
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param value ²ÎÊıÖµ
+     * @param value å‚æ•°å€¼
      */
     void addValue(double value);
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param value ²ÎÊıÖµ
+     * @param value å‚æ•°å€¼
      */
     void addValue(float value);
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param value ²ÎÊıÖµ
+     * @param value å‚æ•°å€¼
      */
     void addValue(int value);
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param value ²ÎÊıÖµ
+     * @param value å‚æ•°å€¼
      */
     void addValue(long value);
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param value ²ÎÊıÖµ
+     * @param value å‚æ•°å€¼
      */
     void addValue(short value);
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param value ²ÎÊıÖµ
+     * @param value å‚æ•°å€¼
      */
     void addValue(Object value);
 
     /**
-     * ÉèÖÃ²ÎÊıÖµ¡£ºÍ<code>add</code>·½·¨²»Í¬£¬´Ë·½·¨½«¸²¸ÇÔ­ÓĞµÄÖµ¡£
+     * è®¾ç½®å‚æ•°å€¼ã€‚å’Œ<code>add</code>æ–¹æ³•ä¸åŒï¼Œæ­¤æ–¹æ³•å°†è¦†ç›–åŸæœ‰çš„å€¼ã€‚
      * 
-     * @param value ²ÎÊıÖµ
+     * @param value å‚æ•°å€¼
      */
     void setValue(Object value);
 
     /**
-     * ÉèÖÃ²ÎÊıÖµ¡£ºÍ<code>add</code>·½·¨²»Í¬£¬´Ë·½·¨½«¸²¸ÇÔ­ÓĞµÄÖµ¡£
+     * è®¾ç½®å‚æ•°å€¼ã€‚å’Œ<code>add</code>æ–¹æ³•ä¸åŒï¼Œæ­¤æ–¹æ³•å°†è¦†ç›–åŸæœ‰çš„å€¼ã€‚
      * 
-     * @param values ²ÎÊıÖµ
+     * @param values å‚æ•°å€¼
      */
     void setValues(Object[] values);
 
     // =============================================================
-    //  ¸¨Öú·½·¨
+    //  è¾…åŠ©æ–¹æ³•
     // =============================================================
 
     /**
-     * È¡µÃÖµµÄ¸öÊı¡£
+     * å–å¾—å€¼çš„ä¸ªæ•°ã€‚
      * 
-     * @return ÖµµÄ¸öÊı
+     * @return å€¼çš„ä¸ªæ•°
      */
     int size();
 }

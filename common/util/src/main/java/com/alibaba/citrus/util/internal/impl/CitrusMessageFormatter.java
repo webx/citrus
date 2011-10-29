@@ -22,13 +22,13 @@ import static com.alibaba.citrus.util.Assert.*;
 import com.alibaba.citrus.util.internal.MessageFormatter;
 
 /**
- * CitrusÄÚ²¿×¨ÓÃµÄ<code>MessageFormatter</code>¡£
+ * Citruså†…éƒ¨ä¸“ç”¨çš„<code>MessageFormatter</code>ã€‚
  * <p>
- * MessageÀà±ØĞëÒÔ¡°
- * <code>com.alibaba.citrus.<strong>xxx.yyy.Zzz</strong>Messages</code>¡±·½Ê½ÃüÃû¡£<br>
- * ¶øÏàÓ¦µÄresource bundle×ÊÔ´ÃûÎª£º¡°
+ * Messageç±»å¿…é¡»ä»¥â€œ
+ * <code>com.alibaba.citrus.<strong>xxx.yyy.Zzz</strong>Messages</code>â€æ–¹å¼å‘½åã€‚<br>
+ * è€Œç›¸åº”çš„resource bundleèµ„æºåä¸ºï¼šâ€œ
  * <code>com/alibaba/citrus/messages/<strong>xxx_yyy_Zzz</strong>.properties</code>
- * ¡±¡£
+ * â€ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -40,7 +40,7 @@ public class CitrusMessageFormatter<T> extends MessageFormatter<T> {
     private final String bundleName;
 
     /**
-     * ´´½¨Ò»¸ö<code>CitrusMessageFormatter</code>ÊµÀı¡£
+     * åˆ›å»ºä¸€ä¸ª<code>CitrusMessageFormatter</code>å®ä¾‹ã€‚
      */
     public CitrusMessageFormatter() {
         String name = getClass().getName();
@@ -52,7 +52,7 @@ public class CitrusMessageFormatter<T> extends MessageFormatter<T> {
     }
 
     /**
-     * È¡µÃ<code>ResourceBundle</code>µÄÃû³Æ£¬Ä¬ÈÏºÍÀàÃûÏàÍ¬¡£
+     * å–å¾—<code>ResourceBundle</code>çš„åç§°ï¼Œé»˜è®¤å’Œç±»åç›¸åŒã€‚
      */
     @Override
     protected String getBundleName() {

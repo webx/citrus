@@ -85,19 +85,19 @@ public class FileLoaderIntegratingTests extends AbstractResourceLoadingTests {
 
     @Test
     public void misc() throws Exception {
-        // ´Óresource.xmlËùÔÚµÄÄ¿Â¼£¬²éÕÒÏà¶ÔÂ·¾¶
+        // ä»resource.xmlæ‰€åœ¨çš„ç›®å½•ï¼ŒæŸ¥æ‰¾ç›¸å¯¹è·¯å¾„
         assertEquals(new File(srcdir, "/WEB-INF/aaa/bbb/abc.txt"),
                 resourceLoadingService.getResourceAsFile("/file/resource/abc.txt"));
 
-        // ´ÓÖ¸¶¨µÄbasedirÄ¿Â¼£¬²éÕÒÏà¶ÔÂ·¾¶
+        // ä»æŒ‡å®šçš„basedirç›®å½•ï¼ŒæŸ¥æ‰¾ç›¸å¯¹è·¯å¾„
         assertEquals(new File(srcdir, "/myfolder/testres.txt"),
                 resourceLoadingService.getResourceAsFile("/file/resource/testres.txt"));
 
-        // ´ÓÖ¸¶¨µÄ¾ø¶ÔÂ·¾¶²éÕÒ
+        // ä»æŒ‡å®šçš„ç»å¯¹è·¯å¾„æŸ¥æ‰¾
         assertEquals(new File(srcdir, "/WEB-INF/aaa/bbb/abc.txt"),
                 resourceLoadingService.getResourceAsFile("/file/resource/WEB-INF/aaa/bbb/abc.txt"));
 
-        // ´ÓÄ¬ÈÏµÄpath²éÕÒ
+        // ä»é»˜è®¤çš„pathæŸ¥æ‰¾
         assertEquals(new File(srcdir, "/myfolder/testres.txt"),
                 resourceLoadingService.getResourceAsFile("/file/resource2/myfolder/testres.txt"));
     }

@@ -22,25 +22,25 @@ import java.io.IOException;
 import org.springframework.core.io.Resource;
 
 /**
- * PluginÊÇÒ»ÖÖ»úÖÆ£¬ÓÃÀ´¶Ôvelocity engine×öÒ»Ğ©¶îÍâµÄÀ©Õ¹¡£
+ * Pluginæ˜¯ä¸€ç§æœºåˆ¶ï¼Œç”¨æ¥å¯¹velocity engineåšä¸€äº›é¢å¤–çš„æ‰©å±•ã€‚
  * <p>
- * Plugin²»Ò»¶¨ÒªÊµÏÖÕâ¸ö<code>VelocityPlugin</code>½Ó¿Ú¡£Plugin»¹¿ÉÒÔÊµÏÖVelocityµÄ
- * <code>EventHandler</code>½Ó¿Ú£¬ÒÔ±ã´¦ÀívelocityÊÂ¼ş¡£
+ * Pluginä¸ä¸€å®šè¦å®ç°è¿™ä¸ª<code>VelocityPlugin</code>æ¥å£ã€‚Pluginè¿˜å¯ä»¥å®ç°Velocityçš„
+ * <code>EventHandler</code>æ¥å£ï¼Œä»¥ä¾¿å¤„ç†velocityäº‹ä»¶ã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface VelocityPlugin {
     /**
-     * ³õÊ¼»¯plugin¡£
+     * åˆå§‹åŒ–pluginã€‚
      * <p>
-     * Plugin¿ÉÒÔÔÚÕâÀïĞŞ¸Ävelocity engineµÄproperties¡£
+     * Pluginå¯ä»¥åœ¨è¿™é‡Œä¿®æ”¹velocity engineçš„propertiesã€‚
      * </p>
      */
     void init(VelocityConfiguration configuration) throws Exception;
 
     /**
-     * Plugin¿ÉÒÔÌá¹©¶îÍâµÄmacros¡£
+     * Pluginå¯ä»¥æä¾›é¢å¤–çš„macrosã€‚
      */
     Resource[] getMacros() throws IOException;
 }

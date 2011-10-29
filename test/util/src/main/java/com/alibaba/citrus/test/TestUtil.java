@@ -34,7 +34,7 @@ import org.hamcrest.Matcher;
 import org.slf4j.MDC;
 
 /**
- * ·½±ã²âÊÔµÄ¹¤¾ßÀà¡£
+ * æ–¹ä¾¿æµ‹è¯•çš„å·¥å…·ç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -145,7 +145,7 @@ public class TestUtil {
     }
 
     /**
-     * È¡µÃfield£¬²¢ÉèÖÃÎª¿É·ÃÎÊ¡£
+     * å–å¾—fieldï¼Œå¹¶è®¾ç½®ä¸ºå¯è®¿é—®ã€‚
      */
     public static Field getAccessibleField(Class<?> targetType, String fieldName) {
         assertNotNull("missing targetType", targetType);
@@ -170,7 +170,7 @@ public class TestUtil {
     }
 
     /**
-     * È¡µÃmethod£¬²¢ÉèÖÃÎª¿É·ÃÎÊ¡£
+     * å–å¾—methodï¼Œå¹¶è®¾ç½®ä¸ºå¯è®¿é—®ã€‚
      */
     public static Method getAccessibleMethod(Class<?> targetType, String methodName, Class<?>[] argTypes) {
         assertNotNull("missing targetType", targetType);
@@ -195,14 +195,14 @@ public class TestUtil {
     }
 
     /**
-     * È¡µÃfieldÖµ£¬¼´Ê¹privateÒ²¿ÉÒÔ¡£
+     * å–å¾—fieldå€¼ï¼Œå³ä½¿privateä¹Ÿå¯ä»¥ã€‚
      */
     public static <T> T getFieldValue(Object target, String fieldName, Class<T> fieldType) {
         return getFieldValue(target, null, fieldName, fieldType);
     }
 
     /**
-     * È¡µÃfieldÖµ£¬¼´Ê¹privateÒ²¿ÉÒÔ¡£
+     * å–å¾—fieldå€¼ï¼Œå³ä½¿privateä¹Ÿå¯ä»¥ã€‚
      */
     @SuppressWarnings("unchecked")
     public static <T> T getFieldValue(Object target, Class<?> targetType, String fieldName, Class<T> fieldType) {
@@ -228,7 +228,7 @@ public class TestUtil {
     }
 
     /**
-     * Ö´ĞĞ·½·¨£¬¼´Ê¹privateÒ²Ã»¹ØÏµ¡£
+     * æ‰§è¡Œæ–¹æ³•ï¼Œå³ä½¿privateä¹Ÿæ²¡å…³ç³»ã€‚
      */
     public static <T> T invokeMethod(Object target, String methodName, Class<?>[] argTypes, Object[] args,
                                      Class<T> returnType) throws IllegalArgumentException, IllegalAccessException,
@@ -237,7 +237,7 @@ public class TestUtil {
     }
 
     /**
-     * Ö´ĞĞ·½·¨£¬¼´Ê¹privateÒ²Ã»¹ØÏµ¡£
+     * æ‰§è¡Œæ–¹æ³•ï¼Œå³ä½¿privateä¹Ÿæ²¡å…³ç³»ã€‚
      */
     @SuppressWarnings("unchecked")
     public static <T> T invokeMethod(Object target, Class<?> targetType, String methodName, Class<?>[] argTypes,

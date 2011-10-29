@@ -29,7 +29,7 @@ import com.alibaba.citrus.webx.handler.support.LayoutRequestProcessor;
 import com.alibaba.citrus.webx.util.ErrorHandlerHelper;
 
 /**
- * ÓÃÀ´ÏÔÊ¾ÏêÏ¸³ö´íÒ³Ãæ¼°Ïà¹Ø×ÊÔ´µÄhandler¡£
+ * ç”¨æ¥æ˜¾ç¤ºè¯¦ç»†å‡ºé”™é¡µé¢åŠç›¸å…³èµ„æºçš„handlerã€‚
  * 
  * @author Michael Zhou
  */

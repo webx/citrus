@@ -40,9 +40,9 @@ import com.alibaba.citrus.service.mail.builder.MailBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ÓÃÀ´·¢ËÍe-mailµÄÀà¡£
+ * ç”¨æ¥å‘é€e-mailçš„ç±»ã€‚
  * <p>
- * ¸ÃÀà±»Éè¼Æ³É¡°ÓĞ×´Ì¬µÄ¡±£¬Ò²¾ÍÊÇËµ²»ÄÜ±»¶à¸öÏß³Ì¹²Ïí¡£
+ * è¯¥ç±»è¢«è®¾è®¡æˆâ€œæœ‰çŠ¶æ€çš„â€ï¼Œä¹Ÿå°±æ˜¯è¯´ä¸èƒ½è¢«å¤šä¸ªçº¿ç¨‹å…±äº«ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -54,13 +54,13 @@ public class MailTransport extends MailSession {
     private Transport transport;
 
     /**
-     * ´´½¨Ò»¸ömail transport¡£
+     * åˆ›å»ºä¸€ä¸ªmail transportã€‚
      */
     public MailTransport() {
     }
 
     /**
-     * ¸´ÖÆÒ»¸ömail transport¡£
+     * å¤åˆ¶ä¸€ä¸ªmail transportã€‚
      */
     public MailTransport(MailTransport transport, Properties overrideProps) {
         super(transport, overrideProps);
@@ -69,35 +69,35 @@ public class MailTransport extends MailSession {
     }
 
     /**
-     * È¡µÃmail transportµÄĞ­Òé¡£
+     * å–å¾—mail transportçš„åè®®ã€‚
      */
     public String getProtocol() {
         return defaultIfNull(transportProtocol, DEFAULT_MAIL_TRANSPORT_PROTOCOL);
     }
 
     /**
-     * ÉèÖÃmail transportµÄĞ­Òé¡£
+     * è®¾ç½®mail transportçš„åè®®ã€‚
      */
     public void setProtocol(String protocol) {
         this.transportProtocol = trimToNull(protocol);
     }
 
     /**
-     * È¡µÃpop before smtpµÄstore ID¡£
+     * å–å¾—pop before smtpçš„store IDã€‚
      */
     public String getPopBeforeSmtp() {
         return popBeforeSmtpId;
     }
 
     /**
-     * ÉèÖÃpop before smtpµÄstore ID¡£
+     * è®¾ç½®pop before smtpçš„store IDã€‚
      */
     public void setPopBeforeSmtp(String popBeforeSmtpId) {
         this.popBeforeSmtpId = trimToNull(popBeforeSmtpId);
     }
 
     /**
-     * È¡µÃsession properties¡£
+     * å–å¾—session propertiesã€‚
      */
     @Override
     protected Properties getSessionProperties() {
@@ -106,14 +106,14 @@ public class MailTransport extends MailSession {
     }
 
     /**
-     * È¡µÃ·¢ËÍe-mailµÄ´¦Àí³ÌĞò¡£
+     * å–å¾—å‘é€e-mailçš„å¤„ç†ç¨‹åºã€‚
      */
     public MailTransportHandler getHandler() {
         return handler;
     }
 
     /**
-     * ÉèÖÃ·¢ËÍe-mailµÄ´¦Àí³ÌĞò¡£
+     * è®¾ç½®å‘é€e-mailçš„å¤„ç†ç¨‹åºã€‚
      */
     public void setHandler(MailTransportHandler newHandler) {
         if (this.handler != null && this.transport != null) {
@@ -130,7 +130,7 @@ public class MailTransport extends MailSession {
     }
 
     /**
-     * ÅĞ¶ÏÊÇ·ñÒÑ¾­Á¬½ÓÉÏ¡£
+     * åˆ¤æ–­æ˜¯å¦å·²ç»è¿æ¥ä¸Šã€‚
      */
     @Override
     public boolean isConnected() {
@@ -138,7 +138,7 @@ public class MailTransport extends MailSession {
     }
 
     /**
-     * Á¬½Ómail·şÎñÆ÷¡£
+     * è¿æ¥mailæœåŠ¡å™¨ã€‚
      */
     @Override
     public void connect() throws MailException {
@@ -163,7 +163,7 @@ public class MailTransport extends MailSession {
     }
 
     /**
-     * ¹Ø±Õmail·şÎñÆ÷µÄÁ¬½Ó¡£
+     * å…³é—­mailæœåŠ¡å™¨çš„è¿æ¥ã€‚
      */
     @Override
     public void close() throws MailException {
@@ -179,14 +179,14 @@ public class MailTransport extends MailSession {
     }
 
     /**
-     * ·¢ËÍÒ»¸öemail¡£
+     * å‘é€ä¸€ä¸ªemailã€‚
      */
     public void send(String mailId) throws MailException {
         send(mailId, null);
     }
 
     /**
-     * ·¢ËÍÒ»¸öemail¡£
+     * å‘é€ä¸€ä¸ªemailã€‚
      */
     public void send(String mailId, MailTransportHandler handler) throws MailException {
         MailService service = getMailService();
@@ -201,14 +201,14 @@ public class MailTransport extends MailSession {
     }
 
     /**
-     * ·¢ËÍÒ»¸öemail¡£
+     * å‘é€ä¸€ä¸ªemailã€‚
      */
     public void send(MailBuilder builder) throws MailException {
         send(builder, null);
     }
 
     /**
-     * ·¢ËÍÒ»¸öemail¡£
+     * å‘é€ä¸€ä¸ªemailã€‚
      */
     public void send(MailBuilder builder, MailTransportHandler handler) throws MailException {
         setHandler(handler);
@@ -221,14 +221,14 @@ public class MailTransport extends MailSession {
     }
 
     /**
-     * ·¢ËÍÒ»¸öemail¡£
+     * å‘é€ä¸€ä¸ªemailã€‚
      */
     public void send(Message message) throws MailException {
         send(message, null);
     }
 
     /**
-     * ·¢ËÍÒ»¸öemail¡£
+     * å‘é€ä¸€ä¸ªemailã€‚
      */
     public void send(Message message, MailTransportHandler handler) throws MailException {
         boolean autoClose = false;
@@ -266,7 +266,7 @@ public class MailTransport extends MailSession {
     }
 
     /**
-     * ÓĞÒ»Ğ©·şÎñÆ÷ÒªÇóÔÚÁ¬smtpÖ®Ç°£¬µ½pop3·şÎñÆ÷ÉÏÈ¥ÑéÖ¤¡£
+     * æœ‰ä¸€äº›æœåŠ¡å™¨è¦æ±‚åœ¨è¿smtpä¹‹å‰ï¼Œåˆ°pop3æœåŠ¡å™¨ä¸Šå»éªŒè¯ã€‚
      */
     private void connectPopBeforeSmtp() throws MailException {
         if (popBeforeSmtpId != null) {

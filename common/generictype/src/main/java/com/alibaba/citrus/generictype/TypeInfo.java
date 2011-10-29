@@ -31,87 +31,87 @@ import java.lang.reflect.WildcardType;
 import java.util.List;
 
 /**
- * ´ú±íÒ»¸öÀàĞÍµÄĞÅÏ¢¡£<code>TypeInfo</code>ÊÇºÍJava {@link Type}Ïà¶ÔÓ¦µÄ£¬µ«±ÈJava Types¸üÒ×ÓÃ¡£
+ * ä»£è¡¨ä¸€ä¸ªç±»å‹çš„ä¿¡æ¯ã€‚<code>TypeInfo</code>æ˜¯å’ŒJava {@link Type}ç›¸å¯¹åº”çš„ï¼Œä½†æ¯”Java Typesæ›´æ˜“ç”¨ã€‚
  * <ul>
- * <li>{@link RawTypeInfo}ºÍ{@link Class}¶ÔÓ¦£¬µ«ÊÇ²»°üÀ¨Êı×éÀàĞÍ¡£</li>
- * <li>{@link ParameterizedTypeInfo}ºÍ{@link ParameterizedType}¶ÔÓ¦¡£</li>
- * <li>{@link TypeVariableInfo}ºÍ{@link TypeVariable}¶ÔÓ¦¡£</li>
- * <li>{@link WildcardTypeInfo}ºÍ{@link WildcardType}¶ÔÓ¦¡£</li>
- * <li>{@link ArrayTypeInfo}ºÍ{@link GenericArrayType}ÒÔ¼°´ú±íÊı×éµÄ{@link Class}¶ÔÓ¦¡£</li>
+ * <li>{@link RawTypeInfo}å’Œ{@link Class}å¯¹åº”ï¼Œä½†æ˜¯ä¸åŒ…æ‹¬æ•°ç»„ç±»å‹ã€‚</li>
+ * <li>{@link ParameterizedTypeInfo}å’Œ{@link ParameterizedType}å¯¹åº”ã€‚</li>
+ * <li>{@link TypeVariableInfo}å’Œ{@link TypeVariable}å¯¹åº”ã€‚</li>
+ * <li>{@link WildcardTypeInfo}å’Œ{@link WildcardType}å¯¹åº”ã€‚</li>
+ * <li>{@link ArrayTypeInfo}å’Œ{@link GenericArrayType}ä»¥åŠä»£è¡¨æ•°ç»„çš„{@link Class}å¯¹åº”ã€‚</li>
  * </ul>
  * 
  * @author Michael Zhou
  */
 public interface TypeInfo {
-    /** ÓÃÀ´È¡µÃ<code>TypeInfo</code>µÄ¹¤³§¡£ */
+    /** ç”¨æ¥å–å¾—<code>TypeInfo</code>çš„å·¥å‚ã€‚ */
     Factory factory = Factory.newFactory();
 
-    /** ÀàĞÍ{@link Object}µÄ<code>TypeInfo</code>¡£ */
+    /** ç±»å‹{@link Object}çš„<code>TypeInfo</code>ã€‚ */
     RawTypeInfo OBJECT = (RawTypeInfo) factory.getType(Object.class);
 
-    /** »ù±¾ÀàĞÍ{@link boolean}µÄ<code>TypeInfo</code>¡£ */
+    /** åŸºæœ¬ç±»å‹{@link boolean}çš„<code>TypeInfo</code>ã€‚ */
     RawTypeInfo PRIMITIVE_BOOLEAN = (RawTypeInfo) factory.getType(boolean.class);
 
-    /** »ù±¾ÀàĞÍ{@link byte}µÄ<code>TypeInfo</code>¡£ */
+    /** åŸºæœ¬ç±»å‹{@link byte}çš„<code>TypeInfo</code>ã€‚ */
     RawTypeInfo PRIMITIVE_BYTE = (RawTypeInfo) factory.getType(byte.class);
 
-    /** »ù±¾ÀàĞÍ{@link char}µÄ<code>TypeInfo</code>¡£ */
+    /** åŸºæœ¬ç±»å‹{@link char}çš„<code>TypeInfo</code>ã€‚ */
     RawTypeInfo PRIMITIVE_CHAR = (RawTypeInfo) factory.getType(char.class);
 
-    /** »ù±¾ÀàĞÍ{@link double}µÄ<code>TypeInfo</code>¡£ */
+    /** åŸºæœ¬ç±»å‹{@link double}çš„<code>TypeInfo</code>ã€‚ */
     RawTypeInfo PRIMITIVE_DOUBLE = (RawTypeInfo) factory.getType(double.class);
 
-    /** »ù±¾ÀàĞÍ{@link float}µÄ<code>TypeInfo</code>¡£ */
+    /** åŸºæœ¬ç±»å‹{@link float}çš„<code>TypeInfo</code>ã€‚ */
     RawTypeInfo PRIMITIVE_FLOAT = (RawTypeInfo) factory.getType(float.class);
 
-    /** »ù±¾ÀàĞÍ{@link int}µÄ<code>TypeInfo</code>¡£ */
+    /** åŸºæœ¬ç±»å‹{@link int}çš„<code>TypeInfo</code>ã€‚ */
     RawTypeInfo PRIMITIVE_INT = (RawTypeInfo) factory.getType(int.class);
 
-    /** »ù±¾ÀàĞÍ{@link long}µÄ<code>TypeInfo</code>¡£ */
+    /** åŸºæœ¬ç±»å‹{@link long}çš„<code>TypeInfo</code>ã€‚ */
     RawTypeInfo PRIMITIVE_LONG = (RawTypeInfo) factory.getType(long.class);
 
-    /** »ù±¾ÀàĞÍ{@link short}µÄ<code>TypeInfo</code>¡£ */
+    /** åŸºæœ¬ç±»å‹{@link short}çš„<code>TypeInfo</code>ã€‚ */
     RawTypeInfo PRIMITIVE_SHORT = (RawTypeInfo) factory.getType(short.class);
 
-    /** »ù±¾ÀàĞÍ{@link void}µÄ<code>TypeInfo</code>¡£ */
+    /** åŸºæœ¬ç±»å‹{@link void}çš„<code>TypeInfo</code>ã€‚ */
     RawTypeInfo PRIMITIVE_VOID = (RawTypeInfo) factory.getType(void.class);
 
     /**
-     * È¡µÃ¾­¹ıÀàĞÍ²Á³ı£¨type erasure£©Ö®ºóµÄÀàĞÍĞÅÏ¢¡£
+     * å–å¾—ç»è¿‡ç±»å‹æ“¦é™¤ï¼ˆtype erasureï¼‰ä¹‹åçš„ç±»å‹ä¿¡æ¯ã€‚
      * <p>
      * <table border="1">
      * <tr>
      * <th>TypeInfo</th>
-     * <th>·µ»ØÖµ</th>
-     * <th>Ê¾Àı</th>
+     * <th>è¿”å›å€¼</th>
+     * <th>ç¤ºä¾‹</th>
      * </tr>
      * <tr>
      * <td>{@link RawTypeInfo}</td>
-     * <td>×ÔÉí£¨<code>this</code>£©</td>
-     * <td><code>List</code> ½«·µ»Ø£º <code>List</code></td>
+     * <td>è‡ªèº«ï¼ˆ<code>this</code>ï¼‰</td>
+     * <td><code>List</code> å°†è¿”å›ï¼š <code>List</code></td>
      * </tr>
      * <tr>
      * <td>{@link ParameterizedTypeInfo}</td>
-     * <td>rawÀàĞÍ</td>
-     * <td><code>List&lt;Integer&gt;</code> ½«·µ»Ø£º <code>List</code></td>
+     * <td>rawç±»å‹</td>
+     * <td><code>List&lt;Integer&gt;</code> å°†è¿”å›ï¼š <code>List</code></td>
      * </tr>
      * <tr>
      * <td>{@link TypeVariableInfo}</td>
-     * <td>µÚÒ»¸öupper boundÀàĞÍ</td>
-     * <td><code>&lt;E&gt;</code> ½«·µ»Ø£º <code>Object</code><br>
-     * <code>&lt;E extends Number & Comparable&gt;</code> ½«·µ»Ø£º
+     * <td>ç¬¬ä¸€ä¸ªupper boundç±»å‹</td>
+     * <td><code>&lt;E&gt;</code> å°†è¿”å›ï¼š <code>Object</code><br>
+     * <code>&lt;E extends Number & Comparable&gt;</code> å°†è¿”å›ï¼š
      * <code>Number</code></td>
      * </tr>
      * <tr>
      * <td>{@link WildcardTypeInfo}</td>
-     * <td>µÚÒ»¸öupper boundÀàĞÍ</td>
-     * <td><code>&lt;?&gt;</code> ½«·µ»Ø£º <code>Object</code><br>
-     * <code>&lt;? extends Number&gt;</code> ½«·µ»Ø£º <code>Number</code></td>
+     * <td>ç¬¬ä¸€ä¸ªupper boundç±»å‹</td>
+     * <td><code>&lt;?&gt;</code> å°†è¿”å›ï¼š <code>Object</code><br>
+     * <code>&lt;? extends Number&gt;</code> å°†è¿”å›ï¼š <code>Number</code></td>
      * </tr>
      * <tr>
      * <td>{@link ArrayTypeInfo}</td>
-     * <td>rawTypeµÄÀàÃû</td>
-     * <td><code>List&lt;Integer&gt;[][]</code> ½«·µ»Ø£º<code>List[][]</code></td>
+     * <td>rawTypeçš„ç±»å</td>
+     * <td><code>List&lt;Integer&gt;[][]</code> å°†è¿”å›ï¼š<code>List[][]</code></td>
      * </tr>
      * </table>
      * </p>
@@ -119,39 +119,39 @@ public interface TypeInfo {
     Class<?> getRawType();
 
     /**
-     * È¡µÃÀàĞÍµÄÃû³Æ¡£
+     * å–å¾—ç±»å‹çš„åç§°ã€‚
      * <p>
      * <table border="1">
      * <tr>
      * <th>TypeInfo</th>
-     * <th>·µ»ØÖµ</th>
-     * <th>Ê¾Àı</th>
+     * <th>è¿”å›å€¼</th>
+     * <th>ç¤ºä¾‹</th>
      * </tr>
      * <tr>
      * <td>{@link RawTypeInfo}</td>
-     * <td>ÀàÃû</td>
-     * <td><code>java.util.List</code> ½«·µ»Ø£º <code>"java.util.List"</code></td>
+     * <td>ç±»å</td>
+     * <td><code>java.util.List</code> å°†è¿”å›ï¼š <code>"java.util.List"</code></td>
      * </tr>
      * <tr>
      * <td>{@link ParameterizedTypeInfo}</td>
-     * <td>rawTypeµÄÀàÃû</td>
-     * <td><code>java.util.List&lt;Integer&gt;</code> ½«·µ»Ø£º
+     * <td>rawTypeçš„ç±»å</td>
+     * <td><code>java.util.List&lt;Integer&gt;</code> å°†è¿”å›ï¼š
      * <code>"java.util.List"</code></td>
      * </tr>
      * <tr>
      * <td>{@link TypeVariableInfo}</td>
-     * <td>±äÁ¿Ãû</td>
-     * <td><code>&lt;E&gt;</code> ½«·µ»Ø£º <code>"E"</code></td>
+     * <td>å˜é‡å</td>
+     * <td><code>&lt;E&gt;</code> å°†è¿”å›ï¼š <code>"E"</code></td>
      * </tr>
      * <tr>
      * <td>{@link WildcardTypeInfo}</td>
-     * <td>ÎÊºÅ</td>
-     * <td><code>&lt;? extends Object&gt;</code> ½«·µ»Ø£º <code>"?"</code></td>
+     * <td>é—®å·</td>
+     * <td><code>&lt;? extends Object&gt;</code> å°†è¿”å›ï¼š <code>"?"</code></td>
      * </tr>
      * <tr>
      * <td>{@link ArrayTypeInfo}</td>
-     * <td>rawTypeµÄÀàÃû</td>
-     * <td><code>java.util.List&lt;Integer&gt;[][]</code> ½«·µ»Ø£º
+     * <td>rawTypeçš„ç±»å</td>
+     * <td><code>java.util.List&lt;Integer&gt;[][]</code> å°†è¿”å›ï¼š
      * <code>"[[Ljava.util.List;"</code></td>
      * </tr>
      * </table>
@@ -160,38 +160,38 @@ public interface TypeInfo {
     String getName();
 
     /**
-     * È¡µÃÀàĞÍµÄ¼ò¶ÌÃû³Æ¡£
+     * å–å¾—ç±»å‹çš„ç®€çŸ­åç§°ã€‚
      * <p>
      * <table border="1">
      * <tr>
      * <th>TypeInfo</th>
-     * <th>·µ»ØÖµ</th>
-     * <th>Ê¾Àı</th>
+     * <th>è¿”å›å€¼</th>
+     * <th>ç¤ºä¾‹</th>
      * </tr>
      * <tr>
      * <td>{@link RawTypeInfo}</td>
-     * <td>ÀàÃû</td>
-     * <td><code>java.util.List</code> ½«·µ»Ø£º <code>"List"</code></td>
+     * <td>ç±»å</td>
+     * <td><code>java.util.List</code> å°†è¿”å›ï¼š <code>"List"</code></td>
      * </tr>
      * <tr>
      * <td>{@link ParameterizedTypeInfo}</td>
-     * <td>rawTypeµÄÀàÃû</td>
-     * <td><code>java.util.List&lt;Integer&gt;</code> ½«·µ»Ø£º <code>"List"</code></td>
+     * <td>rawTypeçš„ç±»å</td>
+     * <td><code>java.util.List&lt;Integer&gt;</code> å°†è¿”å›ï¼š <code>"List"</code></td>
      * </tr>
      * <tr>
      * <td>{@link TypeVariableInfo}</td>
-     * <td>±äÁ¿Ãû</td>
-     * <td><code>&lt;E&gt;</code> ½«·µ»Ø£º <code>"E"</code></td>
+     * <td>å˜é‡å</td>
+     * <td><code>&lt;E&gt;</code> å°†è¿”å›ï¼š <code>"E"</code></td>
      * </tr>
      * <tr>
      * <td>{@link WildcardTypeInfo}</td>
-     * <td>ÎÊºÅ</td>
-     * <td><code>&lt;? extends Object&gt;</code> ½«·µ»Ø£º <code>"?"</code></td>
+     * <td>é—®å·</td>
+     * <td><code>&lt;? extends Object&gt;</code> å°†è¿”å›ï¼š <code>"?"</code></td>
      * </tr>
      * <tr>
      * <td>{@link ArrayTypeInfo}</td>
-     * <td>rawTypeµÄÀàÃû</td>
-     * <td><code>java.util.List&lt;Integer&gt;[][]</code> ½«·µ»Ø£º
+     * <td>rawTypeçš„ç±»å</td>
+     * <td><code>java.util.List&lt;Integer&gt;[][]</code> å°†è¿”å›ï¼š
      * <code>"List[][]"</code></td>
      * </tr>
      * </table>
@@ -200,130 +200,130 @@ public interface TypeInfo {
     String getSimpleName();
 
     /**
-     * ÅĞ¶Ïµ±Ç°ÀàĞÍÊÇ·ñÎªÔ­×ÓÀàĞÍ£¬ÀıÈç£º<code>int</code>¡¢<code>boolean</code>µÈ¡£
+     * åˆ¤æ–­å½“å‰ç±»å‹æ˜¯å¦ä¸ºåŸå­ç±»å‹ï¼Œä¾‹å¦‚ï¼š<code>int</code>ã€<code>boolean</code>ç­‰ã€‚
      */
     boolean isPrimitive();
 
     /**
-     * ÊÇ·ñÎªÊı×é£¿Ö»ÓĞÁ½ÖÖÀàĞÍµÄ{@link TypeInfo}²ÅÓĞ¿ÉÄÜÊÇÊı×é£º
+     * æ˜¯å¦ä¸ºæ•°ç»„ï¼Ÿåªæœ‰ä¸¤ç§ç±»å‹çš„{@link TypeInfo}æ‰æœ‰å¯èƒ½æ˜¯æ•°ç»„ï¼š
      * <ol>
-     * <li>{@link ArrayTypeInfo} - ÀıÈç£º<code>int[]</code>,
-     * <code>String[][]</code>, <code>List&lt;Integer&gt;[]</code>µÈ¡£</li>
-     * <li>{@link WildcardTypeInfo} - ÀıÈç£º<code>&lt;? extends int[]&gt;</code>,
+     * <li>{@link ArrayTypeInfo} - ä¾‹å¦‚ï¼š<code>int[]</code>,
+     * <code>String[][]</code>, <code>List&lt;Integer&gt;[]</code>ç­‰ã€‚</li>
+     * <li>{@link WildcardTypeInfo} - ä¾‹å¦‚ï¼š<code>&lt;? extends int[]&gt;</code>,
      * <code>&lt;? extends String[][]&gt;</code>,
-     * <code>&lt;? extends List&lt;Integer&gt;[]&gt;</code>µÈ¡£</li>
+     * <code>&lt;? extends List&lt;Integer&gt;[]&gt;</code>ç­‰ã€‚</li>
      * </ol>
      */
     boolean isArray();
 
     /**
-     * ÅĞ¶Ïµ±Ç°ÀàĞÍÊÇ·ñÎª½Ó¿Ú¡£
+     * åˆ¤æ–­å½“å‰ç±»å‹æ˜¯å¦ä¸ºæ¥å£ã€‚
      */
     boolean isInterface();
 
     /**
-     * ¼ÙÈçµ±Ç°{@link TypeInfo}ÊÇprimtiveÀàĞÍ£¨Èç<code>int</code>£©£¬Ôò·µ»ØÆä°ü×°ÀàĞÍ£¨Èç
-     * <code>Integer</code>£©£¬·ñÔò·µ»Ø<code>this</code>±¾Éí¡£
+     * å‡å¦‚å½“å‰{@link TypeInfo}æ˜¯primtiveç±»å‹ï¼ˆå¦‚<code>int</code>ï¼‰ï¼Œåˆ™è¿”å›å…¶åŒ…è£…ç±»å‹ï¼ˆå¦‚
+     * <code>Integer</code>ï¼‰ï¼Œå¦åˆ™è¿”å›<code>this</code>æœ¬èº«ã€‚
      */
     TypeInfo getPrimitiveWrapperType();
 
     /**
-     * È¡µÃÊı×éÔªËØµÄÀàĞÍ¡£
+     * å–å¾—æ•°ç»„å…ƒç´ çš„ç±»å‹ã€‚
      * <p>
-     * ¶ÔÓÚ¶àÎ¬Êı×é£¬·µ»Ø×îÖÕÔªËØÀàĞÍ¡£ÀıÈç£º<code>int[][]</code>·µ»Ø<code>int</code>¡£
+     * å¯¹äºå¤šç»´æ•°ç»„ï¼Œè¿”å›æœ€ç»ˆå…ƒç´ ç±»å‹ã€‚ä¾‹å¦‚ï¼š<code>int[][]</code>è¿”å›<code>int</code>ã€‚
      * </p>
      * <p>
-     * Èç¹û²»ÊÇÊı×é£¬Ôò·µ»Ø±¾Éí<code>this</code>¡£
+     * å¦‚æœä¸æ˜¯æ•°ç»„ï¼Œåˆ™è¿”å›æœ¬èº«<code>this</code>ã€‚
      * </p>
      */
     TypeInfo getComponentType();
 
     /**
-     * È¡µÃÖ±½ÓµÄÊı×éÔªËØµÄÀàĞÍ¡£
+     * å–å¾—ç›´æ¥çš„æ•°ç»„å…ƒç´ çš„ç±»å‹ã€‚
      * <p>
-     * ¶ÔÓÚ¶àÎ¬Êı×é£¬·µ»ØÉÏÒ»¼¶ÔªËØÀàĞÍ¡£ÀıÈç£º<code>int[][]</code>·µ»Ø<code>int[]</code>¡£
+     * å¯¹äºå¤šç»´æ•°ç»„ï¼Œè¿”å›ä¸Šä¸€çº§å…ƒç´ ç±»å‹ã€‚ä¾‹å¦‚ï¼š<code>int[][]</code>è¿”å›<code>int[]</code>ã€‚
      * </p>
      * <p>
-     * Èç¹û²»ÊÇÊı×é£¬Ôò·µ»Ø±¾Éí<code>this</code>¡£
+     * å¦‚æœä¸æ˜¯æ•°ç»„ï¼Œåˆ™è¿”å›æœ¬èº«<code>this</code>ã€‚
      * </p>
      */
     TypeInfo getDirectComponentType();
 
     /**
-     * ·µ»ØÊı×éµÄÎ¬¶È£¬Èç¹û²»ÊÇÊı×é£¬Ôò·µ»Ø<code>0</code>¡£
+     * è¿”å›æ•°ç»„çš„ç»´åº¦ï¼Œå¦‚æœä¸æ˜¯æ•°ç»„ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      */
     int getDimension();
 
     /**
-     * È¡µÃËùÓĞµÄ½Ó¿Ú£¬Èç¹ûµ±Ç°ÀàÊÇ½Ó¿ÚµÄ»°£¬°üÀ¨µ±Ç°Àà¡£
+     * å–å¾—æ‰€æœ‰çš„æ¥å£ï¼Œå¦‚æœå½“å‰ç±»æ˜¯æ¥å£çš„è¯ï¼ŒåŒ…æ‹¬å½“å‰ç±»ã€‚
      * 
      * @see #getSupertypes()
      */
     List<TypeInfo> getInterfaces();
 
     /**
-     * È¡µÃËùÓĞµÄ»ùÀà£¬´Óµ±Ç°ÀàÏòÉÏÍÆ£¬Èç¹ûµ±Ç°Àà²»ÊÇ½Ó¿ÚµÄ»°£¬°üÀ¨µ±Ç°Àà¡£
+     * å–å¾—æ‰€æœ‰çš„åŸºç±»ï¼Œä»å½“å‰ç±»å‘ä¸Šæ¨ï¼Œå¦‚æœå½“å‰ç±»ä¸æ˜¯æ¥å£çš„è¯ï¼ŒåŒ…æ‹¬å½“å‰ç±»ã€‚
      * 
      * @see #getSupertypes()
      */
     List<TypeInfo> getSuperclasses();
 
     /**
-     * È¡µÃËùÓĞµÄ»ùÀàºÍ½Ó¿Ú£¬´Óµ±Ç°ÀàÏòÉÏÍÆ£¬°üÀ¨µ±Ç°Àà¡£
+     * å–å¾—æ‰€æœ‰çš„åŸºç±»å’Œæ¥å£ï¼Œä»å½“å‰ç±»å‘ä¸Šæ¨ï¼ŒåŒ…æ‹¬å½“å‰ç±»ã€‚
      * <p>
-     * ¶ÔÓÚ°Ë¸öprimitiveÀàĞÍºÍÌØÊâÀàĞÍ<code>void</code>£¬ËüÃÇÃ»ÓĞÈÎºÎ¸¸Àà¡£
+     * å¯¹äºå…«ä¸ªprimitiveç±»å‹å’Œç‰¹æ®Šç±»å‹<code>void</code>ï¼Œå®ƒä»¬æ²¡æœ‰ä»»ä½•çˆ¶ç±»ã€‚
      * </p>
      * <p>
-     * Èç¹ûÒ»¸öÀàĞÍ£¬¼È²»ÊÇ½Ó¿Ú£¬Ò²²»ÊÇÊı×é£¬Ôò°´ÈçÏÂ´ÎĞòÁĞ³ö¸ÃÀàĞÍµÄ¸¸Àà¼°½Ó¿Ú¡£ ÀıÈç¶ÔÓÚ
-     * <code>java.util.ArrayList</code>ÀàĞÍ£¬½«µÃµ½ÒÔÏÂÁĞ±í£º£¨Ë³ĞòÎª£º±¾Àà¡¢¸¸Àà¡¢¸¸½Ó¿Ú¡¢ObjectÀà£©
-     * </p>
-     * <ol>
-     * <li>±¾Àà - <code>java.util.ArrayList</code></li>
-     * <li>¸¸Àà - <code>java.util.AbstractList</code></li>
-     * <li>¸¸Àà - <code>java.util.AbstractCollection</code></li>
-     * <li>¸¸½Ó¿Ú - <code>java.util.List</code></li>
-     * <li>¸¸½Ó¿Ú - <code>java.util.Collection</code></li>
-     * <li>¸¸½Ó¿Ú - <code>java.util.RandomAccess</code></li>
-     * <li>¸¸½Ó¿Ú - <code>java.lang.Cloneable</code></li>
-     * <li>¸¸½Ó¿Ú - <code>java.io.Serializable</code></li>
-     * <li>¸¸½Ó¿Ú - <code>java.io.Iterable</code></li>
-     * <li>ObjectÀà - <code>java.lang.Object</code></li>
-     * </ol>
-     * <p>
-     * ¶ÔÓÚÒ»¸ö½Ó¿ÚÀàĞÍ£¬Ôò°´ÈçÏÂ´ÎĞòÁĞ³ö¸ÃÀàµÄ¸¸½Ó¿Ú¡£ ÀıÈç¶ÔÓÚ<code>java.util.List</code>
-     * ÀàĞÍ£¬½«µÃµ½ÈçÏÂÁĞ±í£º£¨Ë³ĞòÎª£º±¾½Ó¿Ú¡¢¸¸½Ó¿Ú¡¢ObjectÀà£©
+     * å¦‚æœä¸€ä¸ªç±»å‹ï¼Œæ—¢ä¸æ˜¯æ¥å£ï¼Œä¹Ÿä¸æ˜¯æ•°ç»„ï¼Œåˆ™æŒ‰å¦‚ä¸‹æ¬¡åºåˆ—å‡ºè¯¥ç±»å‹çš„çˆ¶ç±»åŠæ¥å£ã€‚ ä¾‹å¦‚å¯¹äº
+     * <code>java.util.ArrayList</code>ç±»å‹ï¼Œå°†å¾—åˆ°ä»¥ä¸‹åˆ—è¡¨ï¼šï¼ˆé¡ºåºä¸ºï¼šæœ¬ç±»ã€çˆ¶ç±»ã€çˆ¶æ¥å£ã€Objectç±»ï¼‰
      * </p>
      * <ol>
-     * <li>±¾½Ó¿Ú - <code>java.util.List</code></li>
-     * <li>¸¸½Ó¿Ú - <code>java.util.Collection</code></li>
-     * <li>¸¸½Ó¿Ú - <code>java.util.Iterable</code></li>
-     * <li>ObjectÀà - <code>java.lang.Object</code></li>
+     * <li>æœ¬ç±» - <code>java.util.ArrayList</code></li>
+     * <li>çˆ¶ç±» - <code>java.util.AbstractList</code></li>
+     * <li>çˆ¶ç±» - <code>java.util.AbstractCollection</code></li>
+     * <li>çˆ¶æ¥å£ - <code>java.util.List</code></li>
+     * <li>çˆ¶æ¥å£ - <code>java.util.Collection</code></li>
+     * <li>çˆ¶æ¥å£ - <code>java.util.RandomAccess</code></li>
+     * <li>çˆ¶æ¥å£ - <code>java.lang.Cloneable</code></li>
+     * <li>çˆ¶æ¥å£ - <code>java.io.Serializable</code></li>
+     * <li>çˆ¶æ¥å£ - <code>java.io.Iterable</code></li>
+     * <li>Objectç±» - <code>java.lang.Object</code></li>
      * </ol>
      * <p>
-     * ¶ÔÓÚÒ»¸öÊı×é£¬´Ë·½·¨·µ»ØÒ»¸öÁĞ±í£¬ÁĞ³öËùÓĞcomponentÀàĞÍµÄ¸¸ÀàºÍ½Ó¿ÚµÄÎ¬ÊıÏàÍ¬µÄÊı×éÀàĞÍ¡£ ÀıÈç£º
+     * å¯¹äºä¸€ä¸ªæ¥å£ç±»å‹ï¼Œåˆ™æŒ‰å¦‚ä¸‹æ¬¡åºåˆ—å‡ºè¯¥ç±»çš„çˆ¶æ¥å£ã€‚ ä¾‹å¦‚å¯¹äº<code>java.util.List</code>
+     * ç±»å‹ï¼Œå°†å¾—åˆ°å¦‚ä¸‹åˆ—è¡¨ï¼šï¼ˆé¡ºåºä¸ºï¼šæœ¬æ¥å£ã€çˆ¶æ¥å£ã€Objectç±»ï¼‰
+     * </p>
+     * <ol>
+     * <li>æœ¬æ¥å£ - <code>java.util.List</code></li>
+     * <li>çˆ¶æ¥å£ - <code>java.util.Collection</code></li>
+     * <li>çˆ¶æ¥å£ - <code>java.util.Iterable</code></li>
+     * <li>Objectç±» - <code>java.lang.Object</code></li>
+     * </ol>
+     * <p>
+     * å¯¹äºä¸€ä¸ªæ•°ç»„ï¼Œæ­¤æ–¹æ³•è¿”å›ä¸€ä¸ªåˆ—è¡¨ï¼Œåˆ—å‡ºæ‰€æœ‰componentç±»å‹çš„çˆ¶ç±»å’Œæ¥å£çš„ç»´æ•°ç›¸åŒçš„æ•°ç»„ç±»å‹ã€‚ ä¾‹å¦‚ï¼š
      * <code>java.util.ArrayList[][]</code>
-     * ½«È¡µÃÒÔÏÂÁĞ±í£º£¨Ë³ĞòÎª£º±¾Êı×é¡¢¸¸ÀàÊı×é¡¢¸¸½Ó¿ÚÊı×é¡¢ObjectÀàÊı×é¡¢¸¸½Ó¿ÚÊı×é¡¢ObjectÀàÊı×é¡¢Êı×é¸¸½Ó¿Ú¡¢ObjectÀà£©£º
+     * å°†å–å¾—ä»¥ä¸‹åˆ—è¡¨ï¼šï¼ˆé¡ºåºä¸ºï¼šæœ¬æ•°ç»„ã€çˆ¶ç±»æ•°ç»„ã€çˆ¶æ¥å£æ•°ç»„ã€Objectç±»æ•°ç»„ã€çˆ¶æ¥å£æ•°ç»„ã€Objectç±»æ•°ç»„ã€æ•°ç»„çˆ¶æ¥å£ã€Objectç±»ï¼‰ï¼š
      * </p>
      * <ol>
-     * <li>±¾Êı×é - <code>java.util.ArrayList[][]</code></li>
-     * <li>¸¸ÀàÊı×é - <code>java.util.AbstractList[][]</code></li>
-     * <li>¸¸ÀàÊı×é - <code>java.util.AbstractCollection[][]</code></li>
-     * <li>¸¸½Ó¿ÚÊı×é - <code>java.util.List[][]</code></li>
-     * <li>¸¸½Ó¿ÚÊı×é - <code>java.util.Collection[][]</code></li>
-     * <li>¸¸½Ó¿ÚÊı×é - <code>java.util.RandomAccess[][]</code></li>
-     * <li>¸¸½Ó¿ÚÊı×é - <code>java.lang.Cloneable[][]</code></li>
-     * <li>¸¸½Ó¿ÚÊı×é - <code>java.io.Serializable[][]</code></li>
-     * <li>¸¸½Ó¿ÚÊı×é - <code>java.io.Iterable[][]</code></li>
-     * <li>ObjectÀàÊı×é - <code>java.lang.Object[][]</code></li>
-     * <li>¸¸½Ó¿ÚÊı×é - <code>java.lang.Cloneable[]</code></li>
-     * <li>¸¸½Ó¿ÚÊı×é - <code>java.io.Serializable[]</code></li>
-     * <li>ObjectÀàÊı×é - <code>java.lang.Object[]</code></li>
-     * <li>Êı×é¸¸½Ó¿Ú - <code>java.lang.Cloneable</code></li>
-     * <li>Êı×é¸¸½Ó¿Ú - <code>java.io.Serializable</code></li>
-     * <li>ObjectÀà - <code>java.lang.Object</code></li>
+     * <li>æœ¬æ•°ç»„ - <code>java.util.ArrayList[][]</code></li>
+     * <li>çˆ¶ç±»æ•°ç»„ - <code>java.util.AbstractList[][]</code></li>
+     * <li>çˆ¶ç±»æ•°ç»„ - <code>java.util.AbstractCollection[][]</code></li>
+     * <li>çˆ¶æ¥å£æ•°ç»„ - <code>java.util.List[][]</code></li>
+     * <li>çˆ¶æ¥å£æ•°ç»„ - <code>java.util.Collection[][]</code></li>
+     * <li>çˆ¶æ¥å£æ•°ç»„ - <code>java.util.RandomAccess[][]</code></li>
+     * <li>çˆ¶æ¥å£æ•°ç»„ - <code>java.lang.Cloneable[][]</code></li>
+     * <li>çˆ¶æ¥å£æ•°ç»„ - <code>java.io.Serializable[][]</code></li>
+     * <li>çˆ¶æ¥å£æ•°ç»„ - <code>java.io.Iterable[][]</code></li>
+     * <li>Objectç±»æ•°ç»„ - <code>java.lang.Object[][]</code></li>
+     * <li>çˆ¶æ¥å£æ•°ç»„ - <code>java.lang.Cloneable[]</code></li>
+     * <li>çˆ¶æ¥å£æ•°ç»„ - <code>java.io.Serializable[]</code></li>
+     * <li>Objectç±»æ•°ç»„ - <code>java.lang.Object[]</code></li>
+     * <li>æ•°ç»„çˆ¶æ¥å£ - <code>java.lang.Cloneable</code></li>
+     * <li>æ•°ç»„çˆ¶æ¥å£ - <code>java.io.Serializable</code></li>
+     * <li>Objectç±» - <code>java.lang.Object</code></li>
      * </ol>
      * <p>
-     * Ô­×ÓÀàĞÍµÄÊı×éÒ²ÊÇÀàËÆ¡£ÀıÈç£º<code>int[][]</code>½«µÃµ½ÒÔÏÂÁĞ±í£º
+     * åŸå­ç±»å‹çš„æ•°ç»„ä¹Ÿæ˜¯ç±»ä¼¼ã€‚ä¾‹å¦‚ï¼š<code>int[][]</code>å°†å¾—åˆ°ä»¥ä¸‹åˆ—è¡¨ï¼š
      * </p>
      * <ol>
      * <li><code>int[][]</code></li>
@@ -338,30 +338,30 @@ public interface TypeInfo {
     List<TypeInfo> getSupertypes();
 
     /**
-     * ÔÚËùÓĞ»ùÀàºÍ½Ó¿ÚÖĞ£¬²éÕÒrawClassÎª<code>equivalentClass</code>ÀàĞÍµÄ{@link TypeInfo}¡£
+     * åœ¨æ‰€æœ‰åŸºç±»å’Œæ¥å£ä¸­ï¼ŒæŸ¥æ‰¾rawClassä¸º<code>equivalentClass</code>ç±»å‹çš„{@link TypeInfo}ã€‚
      * <p>
-     * ÀıÈç£¬
+     * ä¾‹å¦‚ï¼Œ
      * <code>ArrayList&lt;Integer&gt;.getSupertype(List.class) =&gt; List&lt;Integer&gt;</code>
      * </p>
      */
     TypeInfo getSupertype(Class<?> equivalentClass);
 
     /**
-     * ÔÚÖ¸¶¨ÉÏÏÂÎÄÖĞ·ÖÎöÊµ¼ÊÀàĞÍ¡£
+     * åœ¨æŒ‡å®šä¸Šä¸‹æ–‡ä¸­åˆ†æå®é™…ç±»å‹ã€‚
      * <p>
-     * Ïàµ±ÓÚ{@link resolve(context, true)}¡£
+     * ç›¸å½“äº{@link resolve(context, true)}ã€‚
      * </p>
      */
     TypeInfo resolve(GenericDeclarationInfo context);
 
     /**
-     * ÔÚÖ¸¶¨ÉÏÏÂÎÄÖĞ·ÖÎöÊµ¼ÊÀàĞÍ¡£
+     * åœ¨æŒ‡å®šä¸Šä¸‹æ–‡ä¸­åˆ†æå®é™…ç±»å‹ã€‚
      * <p>
-     * ¼ÙÈç<code>context</code>Îª<code>List&lt;E=Integer&gt;</code>£¬<br>
-     * ÄÇÃ´½âÎö<code>List&lt;E&gt;</code>µÄ½á¹ûÎª£º<code>Integer</code>¡£
+     * å‡å¦‚<code>context</code>ä¸º<code>List&lt;E=Integer&gt;</code>ï¼Œ<br>
+     * é‚£ä¹ˆè§£æ<code>List&lt;E&gt;</code>çš„ç»“æœä¸ºï¼š<code>Integer</code>ã€‚
      * </p>
      * <p>
-     * Èç¹û<code>includeBaseType==false</code>£¬ÄÇÃ´½âÎöÀàĞÍ±äÁ¿Ê±£¬½«²»»áÈ¡µÃÆäbaseType¡£ ÀıÈç£º
+     * å¦‚æœ<code>includeBaseType==false</code>ï¼Œé‚£ä¹ˆè§£æç±»å‹å˜é‡æ—¶ï¼Œå°†ä¸ä¼šå–å¾—å…¶baseTypeã€‚ ä¾‹å¦‚ï¼š
      * </p>
      * 
      * <pre>
@@ -376,37 +376,37 @@ public interface TypeInfo {
      * }
      * </pre>
      * <p>
-     * ÄÇÃ´£¬<code>Iterable&lt;T=E&gt;.resolve(List&lt;A&gt;)</code>£¬½«·µ»Ø
-     * <code>Iterable&lt;T=A&gt;</code>¡£
+     * é‚£ä¹ˆï¼Œ<code>Iterable&lt;T=E&gt;.resolve(List&lt;A&gt;)</code>ï¼Œå°†è¿”å›
+     * <code>Iterable&lt;T=A&gt;</code>ã€‚
      * </p>
      * <p>
-     * Èç¹û<code>includeBaseType==true</code>£¬ÄÇÃ´£¬ÉÏÊöµ÷ÓÃ½«·µ»Ø
-     * <code>Iterable&lt;T=Object&gt;</code>¡£
+     * å¦‚æœ<code>includeBaseType==true</code>ï¼Œé‚£ä¹ˆï¼Œä¸Šè¿°è°ƒç”¨å°†è¿”å›
+     * <code>Iterable&lt;T=Object&gt;</code>ã€‚
      * </p>
      */
     TypeInfo resolve(GenericDeclarationInfo context, boolean includeBaseType);
 
     /**
-     * ÓÃÀ´´´½¨<code>TypeInfo</code>µÄ¹¤³§¡£
+     * ç”¨æ¥åˆ›å»º<code>TypeInfo</code>çš„å·¥å‚ã€‚
      */
     abstract class Factory {
         /**
-         * È¡µÃÖ¸¶¨{@link Type}¶ÔÓ¦µÄ{@link TypeInfo}¶ÔÏó¡£
+         * å–å¾—æŒ‡å®š{@link Type}å¯¹åº”çš„{@link TypeInfo}å¯¹è±¡ã€‚
          */
         public abstract TypeInfo getType(Type type);
 
         /**
-         * È¡µÃÖ¸¶¨·ÇÊı×é{@link Class}¶ÔÓ¦µÄ{@link ClassTypeInfo}¶ÔÏó¡£
+         * å–å¾—æŒ‡å®šéæ•°ç»„{@link Class}å¯¹åº”çš„{@link ClassTypeInfo}å¯¹è±¡ã€‚
          * <p>
-         * ±¾·½·¨²»½ÓÊÜÊı×éÀà£¬Èç¹ûÎªÊı×é£¬ÔòÅ×³ö<code>IllegalArgumentException</code>¡£
+         * æœ¬æ–¹æ³•ä¸æ¥å—æ•°ç»„ç±»ï¼Œå¦‚æœä¸ºæ•°ç»„ï¼Œåˆ™æŠ›å‡º<code>IllegalArgumentException</code>ã€‚
          * </p>
          * <p>
-         * ±¾·½·¨ºÍ{@link getType(Type)}ÊÇÍêÈ«µÈÍ¬µÄ£¬Ö»ÊÇÊ¡È¥ÁËÒ»Ğ©cast¶øÒÑ¡£
+         * æœ¬æ–¹æ³•å’Œ{@link getType(Type)}æ˜¯å®Œå…¨ç­‰åŒçš„ï¼Œåªæ˜¯çœå»äº†ä¸€äº›castè€Œå·²ã€‚
          * </p>
          * <p>
-         * ÓÉÓÚ{@link ClassTypeInfo}Ò²ÊÇ{@link GenericDeclarationInfo}µÄ×ÓÀà£¬<br>
-         * Òò´Ëµ±²ÎÊıÎª{@link Class}Ê±£¬±¾·½·¨µÄ½á¹ûºÍ{@link
-         * getGenericDeclaration(GenericDeclaration)}Ò²µÈÍ¬¡£
+         * ç”±äº{@link ClassTypeInfo}ä¹Ÿæ˜¯{@link GenericDeclarationInfo}çš„å­ç±»ï¼Œ<br>
+         * å› æ­¤å½“å‚æ•°ä¸º{@link Class}æ—¶ï¼Œæœ¬æ–¹æ³•çš„ç»“æœå’Œ{@link
+         * getGenericDeclaration(GenericDeclaration)}ä¹Ÿç­‰åŒã€‚
          * </p>
          */
         public final ClassTypeInfo getClassType(Class<?> type) {
@@ -415,9 +415,9 @@ public interface TypeInfo {
         }
 
         /**
-         * È¡µÃÖ¸¶¨{@link ParameterizedType}¶ÔÓ¦µÄ{@link ClassTypeInfo}¶ÔÏó¡£
+         * å–å¾—æŒ‡å®š{@link ParameterizedType}å¯¹åº”çš„{@link ClassTypeInfo}å¯¹è±¡ã€‚
          * <p>
-         * ±¾·½·¨ºÍ{@link getType(Type)}ÊÇÍêÈ«µÈÍ¬µÄ£¬Ö»ÊÇÃâÈ¥ÁËÒ»Ğ©cast¶øÒÑ¡£
+         * æœ¬æ–¹æ³•å’Œ{@link getType(Type)}æ˜¯å®Œå…¨ç­‰åŒçš„ï¼Œåªæ˜¯å…å»äº†ä¸€äº›castè€Œå·²ã€‚
          * </p>
          */
         public final ClassTypeInfo getClassType(ParameterizedType type) {
@@ -425,54 +425,54 @@ public interface TypeInfo {
         }
 
         /**
-         * È¡µÃÒ»×é{@link TypeInfo}¶ÔÏó¡£
+         * å–å¾—ä¸€ç»„{@link TypeInfo}å¯¹è±¡ã€‚
          */
         public abstract TypeInfo[] getTypes(Type[] types);
 
         /**
-         * È¡µÃÖ¸¶¨{@link GenericDeclaration}¶ÔÓ¦µÄ{@link GenericDeclarationInfo}¶ÔÏó¡£ *
+         * å–å¾—æŒ‡å®š{@link GenericDeclaration}å¯¹åº”çš„{@link GenericDeclarationInfo}å¯¹è±¡ã€‚ *
          * <p>
-         * ±¾·½·¨²»½ÓÊÜÊı×éÀà£¬Èç¹ûÎªÊı×é£¬ÔòÅ×³ö<code>IllegalArgumentException</code>¡£
+         * æœ¬æ–¹æ³•ä¸æ¥å—æ•°ç»„ç±»ï¼Œå¦‚æœä¸ºæ•°ç»„ï¼Œåˆ™æŠ›å‡º<code>IllegalArgumentException</code>ã€‚
          * </p>
          */
         public abstract GenericDeclarationInfo getGenericDeclaration(GenericDeclaration declaration);
 
         /**
-         * ´´½¨Ò»¸ö²ÎÊı»¯ÀàĞÍ¡£
+         * åˆ›å»ºä¸€ä¸ªå‚æ•°åŒ–ç±»å‹ã€‚
          */
         public abstract ParameterizedTypeInfo getParameterizedType(TypeInfo type, TypeInfo... args);
 
         /**
-         * ´´½¨Ò»¸ö²ÎÊı»¯ÀàĞÍ¡£
+         * åˆ›å»ºä¸€ä¸ªå‚æ•°åŒ–ç±»å‹ã€‚
          */
         public final ParameterizedTypeInfo getParameterizedType(TypeInfo type, Type... args) {
             return getParameterizedType(type, getTypes(args));
         }
 
         /**
-         * ´´½¨Ò»¸ö²ÎÊı»¯ÀàĞÍ¡£
+         * åˆ›å»ºä¸€ä¸ªå‚æ•°åŒ–ç±»å‹ã€‚
          */
         public final ParameterizedTypeInfo getParameterizedType(Class<?> type, Type... args) {
             return getParameterizedType(getType(type), getTypes(args));
         }
 
         /**
-         * ´´½¨Ò»¸öÊı×éÀàĞÍ¡£
+         * åˆ›å»ºä¸€ä¸ªæ•°ç»„ç±»å‹ã€‚
          */
         public abstract ArrayTypeInfo getArrayType(TypeInfo componentType, int dimension);
 
         /**
-         * ´´½¨Ò»¸öÊı×éÀàĞÍ¡£
+         * åˆ›å»ºä¸€ä¸ªæ•°ç»„ç±»å‹ã€‚
          */
         public final ArrayTypeInfo getArrayType(Class<?> componentType, int dimension) {
             return getArrayType(getType(componentType), dimension);
         }
 
         /**
-         * È¡µÃÖ¸¶¨{@link Method}¶ÔÓ¦µÄ{@link MethodInfo}¶ÔÏó¡£
+         * å–å¾—æŒ‡å®š{@link Method}å¯¹åº”çš„{@link MethodInfo}å¯¹è±¡ã€‚
          * <p>
-         * ±¾·½·¨ºÍ{@link getGenericDeclaration(GenericDeclaration)}
-         * ÊÇÍêÈ«µÈÍ¬µÄ£¬Ö»ÊÇÃâÈ¥ÁËÒ»Ğ©cast¶øÒÑ¡£
+         * æœ¬æ–¹æ³•å’Œ{@link getGenericDeclaration(GenericDeclaration)}
+         * æ˜¯å®Œå…¨ç­‰åŒçš„ï¼Œåªæ˜¯å…å»äº†ä¸€äº›castè€Œå·²ã€‚
          * </p>
          */
         public final MethodInfo getMethod(Method method) {
@@ -480,7 +480,7 @@ public interface TypeInfo {
         }
 
         /**
-         * ÒÔÖ¸¶¨ÀàĞÍ×÷ÎªÉÏÏÂÎÄ£¬È¡µÃÖ¸¶¨{@link Method}¶ÔÓ¦µÄ{@link MethodInfo}¶ÔÏó¡£
+         * ä»¥æŒ‡å®šç±»å‹ä½œä¸ºä¸Šä¸‹æ–‡ï¼Œå–å¾—æŒ‡å®š{@link Method}å¯¹åº”çš„{@link MethodInfo}å¯¹è±¡ã€‚
          */
         public final MethodInfo getMethod(Method method, TypeInfo type) {
             MethodInfo result = getMethod(method);
@@ -500,10 +500,10 @@ public interface TypeInfo {
         }
 
         /**
-         * È¡µÃÖ¸¶¨{@link Constructor}¶ÔÓ¦µÄ{@link MethodInfo}¶ÔÏó¡£
+         * å–å¾—æŒ‡å®š{@link Constructor}å¯¹åº”çš„{@link MethodInfo}å¯¹è±¡ã€‚
          * <p>
-         * ±¾·½·¨ºÍ{@link getGenericDeclaration(GenericDeclaration)}
-         * ÊÇÍêÈ«µÈÍ¬µÄ£¬Ö»ÊÇÃâÈ¥ÁËÒ»Ğ©cast¶øÒÑ¡£
+         * æœ¬æ–¹æ³•å’Œ{@link getGenericDeclaration(GenericDeclaration)}
+         * æ˜¯å®Œå…¨ç­‰åŒçš„ï¼Œåªæ˜¯å…å»äº†ä¸€äº›castè€Œå·²ã€‚
          * </p>
          */
         public final MethodInfo getConstructor(Constructor<?> constructor) {
@@ -511,7 +511,7 @@ public interface TypeInfo {
         }
 
         /**
-         * ÒÔÖ¸¶¨ÀàĞÍ×÷ÎªÉÏÏÂÎÄ£¬È¡µÃÖ¸¶¨{@link Constructor}¶ÔÓ¦µÄ{@link MethodInfo}¶ÔÏó¡£
+         * ä»¥æŒ‡å®šç±»å‹ä½œä¸ºä¸Šä¸‹æ–‡ï¼Œå–å¾—æŒ‡å®š{@link Constructor}å¯¹åº”çš„{@link MethodInfo}å¯¹è±¡ã€‚
          */
         public final MethodInfo getConstructor(Constructor<?> constructor, TypeInfo type) {
             MethodInfo result = getConstructor(constructor);
@@ -531,12 +531,12 @@ public interface TypeInfo {
         }
 
         /**
-         * È¡µÃÖ¸¶¨{@link Field}¶ÔÓ¦µÄ{@link FieldInfo}¶ÔÏó¡£
+         * å–å¾—æŒ‡å®š{@link Field}å¯¹åº”çš„{@link FieldInfo}å¯¹è±¡ã€‚
          */
         public abstract FieldInfo getField(Field field);
 
         /**
-         * ÒÔÖ¸¶¨ÀàĞÍ×÷ÎªÉÏÏÂÎÄ£¬È¡µÃÖ¸¶¨{@link Field}¶ÔÓ¦µÄ{@link FieldInfo}¶ÔÏó¡£
+         * ä»¥æŒ‡å®šç±»å‹ä½œä¸ºä¸Šä¸‹æ–‡ï¼Œå–å¾—æŒ‡å®š{@link Field}å¯¹åº”çš„{@link FieldInfo}å¯¹è±¡ã€‚
          */
         public final FieldInfo getField(Field field, TypeInfo type) {
             FieldInfo result = getField(field);
@@ -556,7 +556,7 @@ public interface TypeInfo {
         }
 
         /**
-         * ´´½¨factory£¬µ«±ÜÃâÔÚcompileÊ±¿ÌÒÀÀµimpl package¡£
+         * åˆ›å»ºfactoryï¼Œä½†é¿å…åœ¨compileæ—¶åˆ»ä¾èµ–impl packageã€‚
          */
         private static Factory newFactory() {
             String factoryImplName = Factory.class.getPackage().getName() + ".impl.TypeInfoFactory";

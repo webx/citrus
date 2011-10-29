@@ -21,7 +21,7 @@ import com.alibaba.citrus.service.requestcontext.session.SessionAttributeInterce
 import com.alibaba.citrus.service.requestcontext.session.SessionConfig;
 
 /**
- * ÓÃÀ´¿ØÖÆsession attributesµÄÊ¹ÓÃ¡£
+ * ç”¨æ¥æ§åˆ¶session attributesçš„ä½¿ç”¨ã€‚
  * 
  * @author Michael Zhou
  */

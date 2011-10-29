@@ -18,38 +18,38 @@
 package com.alibaba.citrus.service.form;
 
 /**
- * ´ú±íform serviceµÄ³£Á¿¡£
+ * ä»£è¡¨form serviceçš„å¸¸é‡ã€‚
  * 
  * @author Michael Zhou
  */
 public final class FormConstant {
     /**
-     * ÔÚrequest attributeÖĞ£¬»òÓÃ»§Ìá½»µÄformÖĞ£¬×÷Îªform keyµÄÇ°×º¡£
+     * åœ¨request attributeä¸­ï¼Œæˆ–ç”¨æˆ·æäº¤çš„formä¸­ï¼Œä½œä¸ºform keyçš„å‰ç¼€ã€‚
      */
     public final static String FORM_KEY_PREFIX = "_fm";
 
     /**
-     * ·Ö¸ôfield key¸÷²¿·ÖµÄ·Ö¸ô·û¡£
+     * åˆ†éš”field keyå„éƒ¨åˆ†çš„åˆ†éš”ç¬¦ã€‚
      */
     public final static char FIELD_KEY_SEPARATOR = '.';
 
     /**
-     * Ä¬ÈÏµÄgroup instance key¡£
+     * é»˜è®¤çš„group instance keyã€‚
      */
     public final static String DEFAULT_GROUP_INSTANCE_KEY = "_0";
 
     /**
-     * µ±ÓÃ»§Ìá½»µÄ±íµ¥ÖĞÎ´°üº¬Ö¸¶¨fieldĞÅÏ¢Ê±£¬È¡¸ÃÖµ×÷ÎªfieldµÄÖµ¡£
+     * å½“ç”¨æˆ·æäº¤çš„è¡¨å•ä¸­æœªåŒ…å«æŒ‡å®šfieldä¿¡æ¯æ—¶ï¼Œå–è¯¥å€¼ä½œä¸ºfieldçš„å€¼ã€‚
      */
     public final static String FORM_FIELD_ABSENT_KEY = ".absent";
 
     /**
-     * ´ú±íÄ³¸öfield¶ÔÏóµÄ¸½¼şµÄkeyµÄºó×º¡£
+     * ä»£è¡¨æŸä¸ªfieldå¯¹è±¡çš„é™„ä»¶çš„keyçš„åç¼€ã€‚
      */
     public final static String FORM_FIELD_ATTACHMENT_KEY = ".attach";
 
     /**
-     * ´ú±ímessage codeµÄÄ¬ÈÏÇ°×º¡£
+     * ä»£è¡¨message codeçš„é»˜è®¤å‰ç¼€ã€‚
      */
     public final static String FORM_MESSAGE_CODE_PREFIX = "form.";
 }

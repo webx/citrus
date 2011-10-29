@@ -27,7 +27,7 @@ import com.alibaba.citrus.service.pipeline.Condition;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 /**
- * <code>Condition</code>½âÎöÆ÷µÄ»ùÀà¡£
+ * <code>Condition</code>è§£æå™¨çš„åŸºç±»ã€‚
  * 
  * @author Michael Zhou
  */

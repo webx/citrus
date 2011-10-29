@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.requestcontext.session;
 
 /**
- * °üº¬sessionÏµÍ³µÄÅäÖÃ¡£
+ * åŒ…å«sessionç³»ç»Ÿçš„é…ç½®ã€‚
  * 
  * @author Michael Zhou
  */
@@ -29,89 +29,89 @@ public interface SessionConfig {
     Boolean KEEP_IN_TOUCH_DEFAULT = false;
 
     /**
-     * SessionµÄ×î³¤²»»î¶¯Ê±¼ä£¨Ãë£©¡£¼ÙÈçÓÃ»§²»»î¶¯£¬³¬¹ıÕâ¸öÊ±ÏŞ£¬session½«±»×÷·Ï¡£Öµ<code>0</code>±íÊ¾ÓÀ²»¹ıÆÚ¡£
+     * Sessionçš„æœ€é•¿ä¸æ´»åŠ¨æ—¶é—´ï¼ˆç§’ï¼‰ã€‚å‡å¦‚ç”¨æˆ·ä¸æ´»åŠ¨ï¼Œè¶…è¿‡è¿™ä¸ªæ—¶é™ï¼Œsessionå°†è¢«ä½œåºŸã€‚å€¼<code>0</code>è¡¨ç¤ºæ°¸ä¸è¿‡æœŸã€‚
      */
     int getMaxInactiveInterval();
 
     /**
-     * SessionÇ¿ÖÆ×÷·ÏÆÚÏŞ£¨Ãë£©¡£ÎŞÂÛÓÃ»§»î¶¯Óë·ñ£¬´Ósession´´½¨Ö®Ê±ËãÆğ£¬³¬¹ıÕâ¸öÆÚÏŞ£¬session½«±»Ç¿ÖÆ×÷·Ï¡£Öµ
-     * <code>0</code>±íÊ¾ÓÀ²»×÷·Ï¡£
+     * Sessionå¼ºåˆ¶ä½œåºŸæœŸé™ï¼ˆç§’ï¼‰ã€‚æ— è®ºç”¨æˆ·æ´»åŠ¨ä¸å¦ï¼Œä»sessionåˆ›å»ºä¹‹æ—¶ç®—èµ·ï¼Œè¶…è¿‡è¿™ä¸ªæœŸé™ï¼Œsessionå°†è¢«å¼ºåˆ¶ä½œåºŸã€‚å€¼
+     * <code>0</code>è¡¨ç¤ºæ°¸ä¸ä½œåºŸã€‚
      */
     long getForceExpirationPeriod();
 
     /**
-     * ´ú±ísession modelÔÚsessionÖĞ±»±£´æµÄ¼üÖµ¡£Session
-     * model±£´æ×Åµ±Ç°sessionµÄ×´Ì¬£¬ËüÒ²±»±£´æÔÚsessionÖĞ¡£ÔÚstore-mappingsÉèÖÃÖĞ£¬Äã¿ÉÒÔ°Ñsession
-     * model·ÖÅäµ½Ò»¸ösession storeÖĞ¡£
+     * ä»£è¡¨session modelåœ¨sessionä¸­è¢«ä¿å­˜çš„é”®å€¼ã€‚Session
+     * modelä¿å­˜ç€å½“å‰sessionçš„çŠ¶æ€ï¼Œå®ƒä¹Ÿè¢«ä¿å­˜åœ¨sessionä¸­ã€‚åœ¨store-mappingsè®¾ç½®ä¸­ï¼Œä½ å¯ä»¥æŠŠsession
+     * modelåˆ†é…åˆ°ä¸€ä¸ªsession storeä¸­ã€‚
      */
     String getModelKey();
 
     /**
-     * ÊÇ·ñÃ¿´ÎÇëÇó¶¼touch session¡£Èç¹ûÉèÎª<code>false</code>£¬Ö»ÔÚsessionÖµÓĞ¸Ä±äÊ±touch¡£µ±½«session
-     * model±£´æÔÚcookie storeÖĞÊ±£¬ÕâÑù×ö¿ÉÒÔ¼õÉÙÁ÷Á¿¡£
+     * æ˜¯å¦æ¯æ¬¡è¯·æ±‚éƒ½touch sessionã€‚å¦‚æœè®¾ä¸º<code>false</code>ï¼Œåªåœ¨sessionå€¼æœ‰æ”¹å˜æ—¶touchã€‚å½“å°†session
+     * modelä¿å­˜åœ¨cookie storeä¸­æ—¶ï¼Œè¿™æ ·åšå¯ä»¥å‡å°‘æµé‡ã€‚
      */
     boolean isKeepInTouch();
 
     /**
-     * È¡µÃsession IDµÄÅäÖÃ¡£
+     * å–å¾—session IDçš„é…ç½®ã€‚
      */
     IdConfig getId();
 
     /**
-     * È¡µÃËùÓĞstores¡£
+     * å–å¾—æ‰€æœ‰storesã€‚
      */
     StoresConfig getStores();
 
     /**
-     * È¡µÃËùÓĞstore mappings¡£
+     * å–å¾—æ‰€æœ‰store mappingsã€‚
      */
     StoreMappingsConfig getStoreMappings();
 
     /**
-     * È¡µÃmodel encoders¡£
+     * å–å¾—model encodersã€‚
      */
     SessionModelEncoder[] getSessionModelEncoders();
 
     /**
-     * È¡µÃÓÃÀ´¼àÌısessionĞĞÎªµÄinterceptors¡£
+     * å–å¾—ç”¨æ¥ç›‘å¬sessionè¡Œä¸ºçš„interceptorsã€‚
      */
     SessionInterceptor[] getSessionInterceptors();
 
     /**
-     * ´ú±ísession IDµÄÅäÖÃ¡£
+     * ä»£è¡¨session IDçš„é…ç½®ã€‚
      */
     interface IdConfig {
         Boolean COOKIE_ENABLED_DEFAULT = true;
         Boolean URL_ENCODE_ENABLED_DEFAULT = false;
 
         /**
-         * ÊÇ·ñ°Ñsession ID±£´æÔÚcookieÖĞ£¬ÈçÈô²»ÊÇ£¬ÔòÖ»ÄÜ±£´æµÄURLÖĞ¡£
+         * æ˜¯å¦æŠŠsession IDä¿å­˜åœ¨cookieä¸­ï¼Œå¦‚è‹¥ä¸æ˜¯ï¼Œåˆ™åªèƒ½ä¿å­˜çš„URLä¸­ã€‚
          */
         boolean isCookieEnabled();
 
         /**
-         * ÊÇ·ñÖ§³Ö°Ñsession ID±£´æÔÚURLÖĞ¡£
+         * æ˜¯å¦æ”¯æŒæŠŠsession IDä¿å­˜åœ¨URLä¸­ã€‚
          */
         boolean isUrlEncodeEnabled();
 
         /**
-         * È¡µÃsession ID cookieµÄÅäÖÃ¡£
+         * å–å¾—session ID cookieçš„é…ç½®ã€‚
          */
         CookieConfig getCookie();
 
         /**
-         * È¡µÃsession ID URL encodeµÄÅäÖÃ¡£
+         * å–å¾—session ID URL encodeçš„é…ç½®ã€‚
          */
         UrlEncodeConfig getUrlEncode();
 
         /**
-         * È¡µÃsession IDÉú³ÉÆ÷¡£
+         * å–å¾—session IDç”Ÿæˆå™¨ã€‚
          */
         SessionIDGenerator getGenerator();
     }
 
     /**
-     * ´ú±ícookieµÄÅäÖÃ¡£
+     * ä»£è¡¨cookieçš„é…ç½®ã€‚
      */
     interface CookieConfig {
         String COOKIE_NAME_DEFAULT = "JSESSIONID";
@@ -122,78 +122,78 @@ public interface SessionConfig {
         Boolean COOKIE_SECURE_DEFAULT = false;
 
         /**
-         * È¡µÃcookieÃû³Æ¡£
+         * å–å¾—cookieåç§°ã€‚
          */
         String getName();
 
         /**
-         * È¡µÃcookieµÄÓòÃû¡£Öµ<code>null</code>±íÊ¾¸ù¾İµ±Ç°ÇëÇó×Ô¶¯ÉèÖÃdomain¡£
+         * å–å¾—cookieçš„åŸŸåã€‚å€¼<code>null</code>è¡¨ç¤ºæ ¹æ®å½“å‰è¯·æ±‚è‡ªåŠ¨è®¾ç½®domainã€‚
          */
         String getDomain();
 
         /**
-         * È¡µÃcookieµÄÂ·¾¶¡£
+         * å–å¾—cookieçš„è·¯å¾„ã€‚
          */
         String getPath();
 
         /**
-         * CookieµÄ×î³¤´æ»îÊ±¼ä£¨Ãë£©¡£Öµ<code>0</code>±íÊ¾ÁÙÊ±cookie£¬Ëæä¯ÀÀÆ÷µÄ¹Ø±Õ¶øÏûÊ§¡£
+         * Cookieçš„æœ€é•¿å­˜æ´»æ—¶é—´ï¼ˆç§’ï¼‰ã€‚å€¼<code>0</code>è¡¨ç¤ºä¸´æ—¶cookieï¼Œéšæµè§ˆå™¨çš„å…³é—­è€Œæ¶ˆå¤±ã€‚
          */
         int getMaxAge();
 
         /**
-         * ÔÚcookieÉÏÉèÖÃhttpOnly±ê¼Ç¡£ÔÚIE6¼°¸üĞÂ°æ±¾ÖĞ£¬¿ÉÒÔ»º½âXSS¹¥»÷µÄÎ£ÏÕ¡£
+         * åœ¨cookieä¸Šè®¾ç½®httpOnlyæ ‡è®°ã€‚åœ¨IE6åŠæ›´æ–°ç‰ˆæœ¬ä¸­ï¼Œå¯ä»¥ç¼“è§£XSSæ”»å‡»çš„å±é™©ã€‚
          */
         boolean isHttpOnly();
 
         /**
-         * ÔÚcookieÉÏÉèÖÃsecure±ê¼Ç¡£Ö»ÓĞhttps°²È«ÇëÇó²ÅÄÜ·ÃÎÊ¸Ãcookie¡£
+         * åœ¨cookieä¸Šè®¾ç½®secureæ ‡è®°ã€‚åªæœ‰httpså®‰å…¨è¯·æ±‚æ‰èƒ½è®¿é—®è¯¥cookieã€‚
          */
         boolean isSecure();
     }
 
     /**
-     * ´ú±íurl encodeµÄÅäÖÃ¡£
+     * ä»£è¡¨url encodeçš„é…ç½®ã€‚
      */
     interface UrlEncodeConfig {
         String URL_ENCODE_NAME_DEFAULT = "JSESSIONID";
 
         /**
-         * È¡µÃURL encodeµÄÃû³Æ¡£
+         * å–å¾—URL encodeçš„åç§°ã€‚
          */
         String getName();
     }
 
     /**
-     * ´ú±ístoresµÄÅäÖÃ¡£
+     * ä»£è¡¨storesçš„é…ç½®ã€‚
      */
     interface StoresConfig {
         /**
-         * È¡µÃËùÓĞµÄsession storeµÄÃû³Æ¡£
+         * å–å¾—æ‰€æœ‰çš„session storeçš„åç§°ã€‚
          */
         String[] getStoreNames();
 
         /**
-         * È¡µÃÖ¸¶¨Ãû³ÆµÄ¶ÔÏóËù´æ·ÅµÄsession store¡£
+         * å–å¾—æŒ‡å®šåç§°çš„å¯¹è±¡æ‰€å­˜æ”¾çš„session storeã€‚
          */
         SessionStore getStore(String storeName);
     }
 
     /**
-     * ´ú±ístore mappingsµÄÅäÖÃ¡£
+     * ä»£è¡¨store mappingsçš„é…ç½®ã€‚
      */
     interface StoreMappingsConfig {
         String MATCHES_ALL_ATTRIBUTES = "*";
 
         /**
-         * È¡µÃÖ¸¶¨session attributeÃû³ÆµÄ¶ÔÏóËù´æ·ÅµÄsession store¡£
+         * å–å¾—æŒ‡å®šsession attributeåç§°çš„å¯¹è±¡æ‰€å­˜æ”¾çš„session storeã€‚
          */
         String getStoreNameForAttribute(String attrName);
 
         /**
-         * ·´²éÖ¸¶¨storeÃû³ÆËù¶ÔÓ¦µÄËùÓĞ¾«È·Æ¥ÅäµÄattributeÃû³Æ¡£
+         * åæŸ¥æŒ‡å®šstoreåç§°æ‰€å¯¹åº”çš„æ‰€æœ‰ç²¾ç¡®åŒ¹é…çš„attributeåç§°ã€‚
          * <p>
-         * ¼ÙÈç´æÔÚ·Ç¾«È·Æ¥ÅäµÄattributes£¬Ôò·µ»Ø<code>null</code>¡£
+         * å‡å¦‚å­˜åœ¨éç²¾ç¡®åŒ¹é…çš„attributesï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * </p>
          */
         String[] getExactMatchedAttributeNames(String storeName);

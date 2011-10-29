@@ -31,7 +31,7 @@ import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 
 /**
- * <code>AbstractCompositeCondition</code>½âÎöÆ÷µÄ»ùÀà¡£
+ * <code>AbstractCompositeCondition</code>è§£æå™¨çš„åŸºç±»ã€‚
  * 
  * @author Michael Zhou
  */

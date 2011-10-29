@@ -60,41 +60,41 @@ public class FormResolverFactory implements DataResolverFactory {
     }
 
     public DataResolver getDataResolver(DataResolverContext context) {
-        // µ±ËùĞèÒªµÄ¶ÔÏóÎ´¶¨ÒåÊ±£¬resolver factoryÈÔ¿ÉÒÔ´´½¨£¬µ«ÔÚÈ¡µÃresolverÊ±±¨´í¡£
-        // ÕâÑùÊ¹µÃÍ¬Ò»Ì×ÅäÖÃ¿ÉÓÃÓÚËùÓĞ»·¾³£¬½öµ±ÄãĞèÒª×¢ÈëÌØ¶¨¶ÔÏóÊ±£¬²Å±¨´í¡£
+        // å½“æ‰€éœ€è¦çš„å¯¹è±¡æœªå®šä¹‰æ—¶ï¼Œresolver factoryä»å¯ä»¥åˆ›å»ºï¼Œä½†åœ¨å–å¾—resolveræ—¶æŠ¥é”™ã€‚
+        // è¿™æ ·ä½¿å¾—åŒä¸€å¥—é…ç½®å¯ç”¨äºæ‰€æœ‰ç¯å¢ƒï¼Œä»…å½“ä½ éœ€è¦æ³¨å…¥ç‰¹å®šå¯¹è±¡æ—¶ï¼Œæ‰æŠ¥é”™ã€‚
         assertNotNull(formService, "no FormService defined");
 
         Class<?> paramType = context.getTypeInfo().getRawType();
 
-        // Form¶ÔÏó
+        // Formå¯¹è±¡
         FormData formAnnotation = context.getAnnotation(FormData.class);
 
         if (formAnnotation != null || paramType.isAssignableFrom(Form.class)) {
             return new FormResolver(context, paramType, formAnnotation);
         }
 
-        // Group¶ÔÏó£ºannotation @FormGroup£¬²ÎÊıÀàĞÍ¿ÉÎªGroup»òÈÎÒâPOJO
+        // Groupå¯¹è±¡ï¼šannotation @FormGroupï¼Œå‚æ•°ç±»å‹å¯ä¸ºGroupæˆ–ä»»æ„POJO
         FormGroup groupAnnotation = context.getAnnotation(FormGroup.class);
 
         if (groupAnnotation != null) {
             return new GroupResolver(context, paramType, groupAnnotation);
         }
 
-        // Field¶ÔÏó£ºannotation @FormField£¬²ÎÊıÀàĞÍ¿ÉÎªField»òÈÎÒâÀàĞÍ
+        // Fieldå¯¹è±¡ï¼šannotation @FormFieldï¼Œå‚æ•°ç±»å‹å¯ä¸ºFieldæˆ–ä»»æ„ç±»å‹
         FormField fieldAnnotation = context.getAnnotation(FormField.class);
 
         if (fieldAnnotation != null) {
             return new FieldResolver(context, paramType, fieldAnnotation);
         }
 
-        // Groups¶ÔÏó£ºannotation @FormGroups£¬²ÎÊıÀàĞÍ¿ÉÎªGroup[]£¬List<Group>»òÈÎÒâ¿É×ª»»µÄÀàĞÍ
+        // Groupså¯¹è±¡ï¼šannotation @FormGroupsï¼Œå‚æ•°ç±»å‹å¯ä¸ºGroup[]ï¼ŒList<Group>æˆ–ä»»æ„å¯è½¬æ¢çš„ç±»å‹
         FormGroups groupsAnnotation = context.getAnnotation(FormGroups.class);
 
         if (groupsAnnotation != null) {
             return new GroupsResolver(context, paramType, groupsAnnotation);
         }
 
-        // Fields¶ÔÏó£ºannotation @FormFields£¬²ÎÊıÀàĞÍ¿ÉÎªField[]£¬List<Field>»òÈÎÒâ¿É×ª»»µÄÀàĞÍ
+        // Fieldså¯¹è±¡ï¼šannotation @FormFieldsï¼Œå‚æ•°ç±»å‹å¯ä¸ºField[]ï¼ŒList<Field>æˆ–ä»»æ„å¯è½¬æ¢çš„ç±»å‹
         FormFields fieldsAnnotation = context.getAnnotation(FormFields.class);
 
         if (fieldsAnnotation != null) {
@@ -109,7 +109,7 @@ public class FormResolverFactory implements DataResolverFactory {
     }
 
     /**
-     * ¼ìÑéformÖĞµÄËùÓĞgroups¾ù±»¼ìÑé£¬²¢Í¨¹ıËùÓĞÑéÖ¤¡£
+     * æ£€éªŒformä¸­çš„æ‰€æœ‰groupså‡è¢«æ£€éªŒï¼Œå¹¶é€šè¿‡æ‰€æœ‰éªŒè¯ã€‚
      */
     private boolean isValidatedAndValid(Form form) {
         if (!form.isValid() || form.getGroups().isEmpty()) {
@@ -129,12 +129,12 @@ public class FormResolverFactory implements DataResolverFactory {
         public FormResolver(DataResolverContext context, Class<?> paramType, FormData formAnnotation) {
             super("FormResolver", context);
 
-            // ²ÎÊıÀàĞÍ±ØĞëÎªForm
+            // å‚æ•°ç±»å‹å¿…é¡»ä¸ºForm
             assertTrue(paramType.isAssignableFrom(Form.class), "Parameter type annotated with @FormData should be Form");
 
             this.skipIfInvalid = true;
 
-            // @FormData¿ÉÑ¡
+            // @FormDataå¯é€‰
             if (formAnnotation != null) {
                 this.skipIfInvalid = formAnnotation.skipIfInvalid();
             }
@@ -158,12 +158,12 @@ public class FormResolverFactory implements DataResolverFactory {
             groupInstanceKey = trimToNull(groupAnnotation.instanceKey());
             skipIfInvalid = groupAnnotation.skipIfInvalid();
 
-            // name()»òvalue() - È·±£group´æÔÚ
+            // name()æˆ–value() - ç¡®ä¿groupå­˜åœ¨
             groupName = getGroupConfig(
                     getAnnotationNameOrValue(FormGroup.class, groupAnnotation, context, groupInstanceKey != null
                             || skipIfInvalid == false)).getName();
 
-            // ¼ÙÈçÊÇpojo£¬ÔòÈ¡µÃconstructor¡£
+            // å‡å¦‚æ˜¯pojoï¼Œåˆ™å–å¾—constructorã€‚
             if (!paramType.isAssignableFrom(Group.class)) {
                 fc = getFastConstructor(paramType);
             } else {
@@ -202,10 +202,10 @@ public class FormResolverFactory implements DataResolverFactory {
         public FieldResolver(DataResolverContext context, Class<?> paramType, FormField fieldAnnotation) {
             super("FieldResolver", context);
 
-            // È·±£group´æÔÚ
+            // ç¡®ä¿groupå­˜åœ¨
             groupName = getGroupConfig(fieldAnnotation.group()).getName();
 
-            // È·±£field´æÔÚ
+            // ç¡®ä¿fieldå­˜åœ¨
             fieldName = getFieldConfig(groupName, fieldAnnotation.name()).getName();
 
             groupInstanceKey = trimToNull(fieldAnnotation.groupInstanceKey());
@@ -251,12 +251,12 @@ public class FormResolverFactory implements DataResolverFactory {
 
             skipIfInvalid = groupsAnnotation.skipIfInvalid();
 
-            // name()»òvalue() - È·±£group´æÔÚ
+            // name()æˆ–value() - ç¡®ä¿groupå­˜åœ¨
             groupName = getGroupConfig(
                     getAnnotationNameOrValue(FormGroups.class, groupsAnnotation, context, skipIfInvalid == false))
                     .getName();
 
-            // paramÀàĞÍ£ºÊı×é¡¢Collection
+            // paramç±»å‹ï¼šæ•°ç»„ã€Collection
             if (paramType.isArray()) {
                 componentType = paramType.getComponentType();
             } else if (Collection.class.isAssignableFrom(paramType)) {
@@ -265,7 +265,7 @@ public class FormResolverFactory implements DataResolverFactory {
                 componentType = null;
             }
 
-            // componentÀàĞÍ¿ÉÒÔÊÇGroup»òÈÎÒâÀà£¬µ«²»ÄÜÊÇObject¡£
+            // componentç±»å‹å¯ä»¥æ˜¯Groupæˆ–ä»»æ„ç±»ï¼Œä½†ä¸èƒ½æ˜¯Objectã€‚
             assertTrue(componentType != null && !Object.class.equals(componentType), "Invalid paramType: %s",
                     context.getTypeInfo());
 
@@ -338,13 +338,13 @@ public class FormResolverFactory implements DataResolverFactory {
 
             skipIfInvalid = fieldsAnnotation.skipIfInvalid();
 
-            // È·±£group´æÔÚ
+            // ç¡®ä¿groupå­˜åœ¨
             groupName = getGroupConfig(fieldsAnnotation.group()).getName();
 
-            // È·±£field´æÔÚ
+            // ç¡®ä¿fieldå­˜åœ¨
             fieldName = getFieldConfig(groupName, fieldsAnnotation.name()).getName();
 
-            // paramÀàĞÍ£ºÊı×é¡¢Collection
+            // paramç±»å‹ï¼šæ•°ç»„ã€Collection
             if (paramType.isArray()) {
                 componentType = paramType.getComponentType();
             } else if (Collection.class.isAssignableFrom(paramType)) {
@@ -353,7 +353,7 @@ public class FormResolverFactory implements DataResolverFactory {
                 componentType = null;
             }
 
-            // componentÀàĞÍ¿ÉÒÔÊÇField»òÈÎÒâÀà£¬µ«²»ÄÜÊÇObject¡£
+            // componentç±»å‹å¯ä»¥æ˜¯Fieldæˆ–ä»»æ„ç±»ï¼Œä½†ä¸èƒ½æ˜¯Objectã€‚
             assertTrue(componentType != null && !Object.class.equals(componentType), "Invalid paramType: %s",
                     context.getTypeInfo());
         }
@@ -361,7 +361,7 @@ public class FormResolverFactory implements DataResolverFactory {
         public Object resolve() {
             Form form = formService.getForm();
 
-            // È¡µÃÍ¬Ãûgroup instancesÖĞµÄÖ¸¶¨field¡£
+            // å–å¾—åŒågroup instancesä¸­çš„æŒ‡å®šfieldã€‚
             Collection<Group> groups = form.getGroups(groupName);
             List<Field> fields = new ArrayList<Field>(groups.size());
 

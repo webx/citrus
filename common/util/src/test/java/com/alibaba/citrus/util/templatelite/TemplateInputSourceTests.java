@@ -51,7 +51,7 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
         content = "";
         content += "\n";
         content += "  ## comment\n";
-        content += "  \\#@charset hello\n"; // ÕâĞĞµ¼ÖÂcharset¼ì²é½áÊø
+        content += "  \\#@charset hello\n"; // è¿™è¡Œå¯¼è‡´charsetæ£€æŸ¥ç»“æŸ
         content += "#@otherparam value value\n";
         content += " #@charset GB18030\n";
 
@@ -59,30 +59,30 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
 
         // -----------------
         content = "";
-        content += "\n"; // ºöÂÔ¿ÕĞĞ
-        content += "  \r\n"; // ºöÂÔ¿ÕĞĞ
-        content += "  ## comment\n"; // ºöÂÔ×¢ÊÍ
-        content += "#@otherparam value value\n"; // ºöÂÔÆäËü²ÎÊı
-        content += " #@charset GB18030\n"; // Æ¥Åächarset
+        content += "\n"; // å¿½ç•¥ç©ºè¡Œ
+        content += "  \r\n"; // å¿½ç•¥ç©ºè¡Œ
+        content += "  ## comment\n"; // å¿½ç•¥æ³¨é‡Š
+        content += "#@otherparam value value\n"; // å¿½ç•¥å…¶å®ƒå‚æ•°
+        content += " #@charset GB18030\n"; // åŒ¹é…charset
 
         assertEquals("GB18030", detectCharset(content));
 
         // -----------------
         content = "";
-        content += "##@charset 8859_1\n"; // ºöÂÔ×¢ÊÍ
-        content += " #@charset GB18030##comment\n"; // Æ¥Åächarset##comment
+        content += "##@charset 8859_1\n"; // å¿½ç•¥æ³¨é‡Š
+        content += " #@charset GB18030##comment\n"; // åŒ¹é…charset##comment
 
         assertEquals("GB18030", detectCharset(content));
 
         // -----------------
         content = "";
-        content += "######\n"; // ÎŞÄÚÈİ
+        content += "######\n"; // æ— å†…å®¹
 
         assertEquals("default", detectCharset(content));
 
         // -----------------
         content = repeat("#", 1024 * 4) + "\n";
-        content += " #@charset GB18030\n"; // ³¬¹ıÁËreadlimit 
+        content += " #@charset GB18030\n"; // è¶…è¿‡äº†readlimit 
 
         assertEquals("default", detectCharset(content));
     }
@@ -253,7 +253,7 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
             assertEquals("abc\n${abc}", t.renderToString(new FallbackTextWriter<StringBuilder>()));
         }
 
-        // ÓÉÓÚÎÄ¼şÏµÍ³µÄtimestampÊµ¼ÊÉÏÊÇÒÔÃë¼ÆµÄ£¬ËùÒÔ±ØĞëµÈ´ı1sÒÔÉÏ£¬ÎÄ¼şµÄlastModified²Å»á±ä»¯¡£
+        // ç”±äºæ–‡ä»¶ç³»ç»Ÿçš„timestampå®é™…ä¸Šæ˜¯ä»¥ç§’è®¡çš„ï¼Œæ‰€ä»¥å¿…é¡»ç­‰å¾…1sä»¥ä¸Šï¼Œæ–‡ä»¶çš„lastModifiedæ‰ä¼šå˜åŒ–ã€‚
         Thread.sleep(1001);
 
         // template from test07_reload_2.txt
@@ -284,7 +284,7 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
         Template template = new Template(new File(destdir, source));
         assertEquals("abc\n${abc}", template.renderToString(new FallbackTextWriter<StringBuilder>()));
 
-        // ÓÉÓÚÎÄ¼şÏµÍ³µÄtimestampÊµ¼ÊÉÏÊÇÒÔÃë¼ÆµÄ£¬ËùÒÔ±ØĞëµÈ´ı1sÒÔÉÏ£¬ÎÄ¼şµÄlastModified²Å»á±ä»¯¡£
+        // ç”±äºæ–‡ä»¶ç³»ç»Ÿçš„timestampå®é™…ä¸Šæ˜¯ä»¥ç§’è®¡çš„ï¼Œæ‰€ä»¥å¿…é¡»ç­‰å¾…1sä»¥ä¸Šï¼Œæ–‡ä»¶çš„lastModifiedæ‰ä¼šå˜åŒ–ã€‚
         Thread.sleep(1001);
 
         // template from test07_reload_2.txt

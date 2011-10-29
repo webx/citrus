@@ -37,7 +37,7 @@ import org.springframework.core.io.DefaultResourceLoader;
 import com.alibaba.citrus.test.TestEnvStatic;
 
 /**
- * ²âÊÔspringext-base.xsdÖĞµÄÀàĞÍ¡£
+ * æµ‹è¯•springext-base.xsdä¸­çš„ç±»å‹ã€‚
  * 
  * @author Michael Zhou
  */

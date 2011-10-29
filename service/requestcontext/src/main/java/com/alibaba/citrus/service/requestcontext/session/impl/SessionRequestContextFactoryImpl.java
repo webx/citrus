@@ -55,7 +55,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ÓÃÀ´´´½¨ºÍ³õÊ¼»¯<code>SessionRequestContext</code>µÄ¹¤³§¡£
+ * ç”¨æ¥åˆ›å»ºå’Œåˆå§‹åŒ–<code>SessionRequestContext</code>çš„å·¥å‚ã€‚
  */
 public class SessionRequestContextFactoryImpl extends AbstractRequestContextFactory<SessionRequestContext> {
     private final static Logger log = LoggerFactory.getLogger(SessionRequestContext.class);
@@ -66,7 +66,7 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
     }
 
     /**
-     * ³õÊ¼»¯factory¡£
+     * åˆå§‹åŒ–factoryã€‚
      */
     @Override
     protected void init() throws Exception {
@@ -80,9 +80,9 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
     }
 
     /**
-     * °ü×°Ò»¸örequest context¡£
+     * åŒ…è£…ä¸€ä¸ªrequest contextã€‚
      * 
-     * @param wrappedContext ±»°ü×°µÄ<code>RequestContext</code>¶ÔÏó
+     * @param wrappedContext è¢«åŒ…è£…çš„<code>RequestContext</code>å¯¹è±¡
      * @return request context
      */
     public SessionRequestContext getRequestContextWrapper(RequestContext wrappedContext) {
@@ -90,15 +90,15 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
     }
 
     /**
-     * ±¾ÀàÌá¹©ÁË¿ÉÀ©Õ¹µÄsession»úÖÆ¡£
+     * æœ¬ç±»æä¾›äº†å¯æ‰©å±•çš„sessionæœºåˆ¶ã€‚
      */
     public String[] getFeatures() {
         return new String[] { "session" };
     }
 
     /**
-     * »ùÓÚcookieµÄsession»úÖÆ£¬»áÔÚcommitÊ±ĞŞ¸ÄcookieºÍheaders£¬Òò¶øÒÀÀµÓÚlazyCommit¡£
-     * Session¿ò¼ÜÓÉÓÚÒª¶ÁĞ´cookie£¬Òò´ËÔÚparserÖ®ºó¡£
+     * åŸºäºcookieçš„sessionæœºåˆ¶ï¼Œä¼šåœ¨commitæ—¶ä¿®æ”¹cookieå’Œheadersï¼Œå› è€Œä¾èµ–äºlazyCommitã€‚
+     * Sessionæ¡†æ¶ç”±äºè¦è¯»å†™cookieï¼Œå› æ­¤åœ¨parserä¹‹åã€‚
      */
     public FeatureOrder[] featureOrders() {
         return new FeatureOrder[] { new AfterFeature("parseRequest"), new RequiresFeature("lazyCommitHeaders") };
@@ -109,7 +109,7 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
         return config;
     }
 
-    // ÊµÏÖSessionConfig¡£
+    // å®ç°SessionConfigã€‚
     @SuppressWarnings("unused")
     private static class ConfigImpl implements SessionConfig {
         private final IdConfigImpl id = new IdConfigImpl();
@@ -192,7 +192,7 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
             stores.init(this);
             storeMappings.init(stores);
 
-            // ¶ÔËùÓĞµÄExactMatchesOnlySessionStore£¬ÉèÖÃattribute names¡£
+            // å¯¹æ‰€æœ‰çš„ExactMatchesOnlySessionStoreï¼Œè®¾ç½®attribute namesã€‚
             for (String storeName : stores.getStoreNames()) {
                 SessionStore store = stores.getStore(storeName);
 
@@ -449,7 +449,7 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
                 stores = createLinkedHashMap();
             }
 
-            // ³õÊ¼»¯ËùÓĞstores
+            // åˆå§‹åŒ–æ‰€æœ‰stores
             for (Map.Entry<String, SessionStore> entry : stores.entrySet()) {
                 entry.getValue().init(entry.getKey(), sessionConfig);
             }
@@ -519,7 +519,7 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
                     }
                 }
 
-                // ×î³¤Æ¥ÅäÓÅÏÈ
+                // æœ€é•¿åŒ¹é…ä¼˜å…ˆ
                 Collections.sort(matches);
 
                 if (log.isTraceEnabled()) {
@@ -559,7 +559,7 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
 
             for (AttributePattern pattern : patterns) {
                 if (pattern.getStoreName().equals(storeName)) {
-                    // Èç¹ûÊÇ·Ç¾«È·Æ¥Åä£¬Ôò·µ»Ønull¡£
+                    // å¦‚æœæ˜¯éç²¾ç¡®åŒ¹é…ï¼Œåˆ™è¿”å›nullã€‚
                     if (pattern.isDefaultPattern() || pattern.isRegexPattern()) {
                         return null;
                     }
@@ -578,7 +578,7 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
     }
 
     /**
-     * ´ú±íÒ»¸öattributeµÄÆ¥Åä¡£
+     * ä»£è¡¨ä¸€ä¸ªattributeçš„åŒ¹é…ã€‚
      */
     private static class AttributeMatch implements Comparable<AttributeMatch> {
         private final AttributePattern pattern;
@@ -590,7 +590,7 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
         }
 
         /**
-         * ÏÈ±È½ÏÆ¥Åä³¤¶È£¬½Ï³¤µÄÓÅÏÈ¡£Æä´Î±È½ÏÆ¥ÅäµÄÀàĞÍ£¬¾«È·Æ¥Åä±ÈÕıÔò±í´ïÊ½Æ¥ÅäÓÅÏÈ¡£
+         * å…ˆæ¯”è¾ƒåŒ¹é…é•¿åº¦ï¼Œè¾ƒé•¿çš„ä¼˜å…ˆã€‚å…¶æ¬¡æ¯”è¾ƒåŒ¹é…çš„ç±»å‹ï¼Œç²¾ç¡®åŒ¹é…æ¯”æ­£åˆ™è¡¨è¾¾å¼åŒ¹é…ä¼˜å…ˆã€‚
          */
         public int compareTo(AttributeMatch o) {
             int result = o.matchLength - matchLength;
@@ -612,7 +612,7 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
     }
 
     /**
-     * ´ú±íÒ»¸öpatternµÄĞÅÏ¢¡£
+     * ä»£è¡¨ä¸€ä¸ªpatternçš„ä¿¡æ¯ã€‚
      */
     static class AttributePattern {
         public final String patternName;
@@ -620,21 +620,21 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
         public final Pattern pattern;
 
         /**
-         * ´´½¨Ä¬ÈÏÆ¥Åä£¬Æ¥ÅäËùÓĞattribute names¡£
+         * åˆ›å»ºé»˜è®¤åŒ¹é…ï¼ŒåŒ¹é…æ‰€æœ‰attribute namesã€‚
          */
         public static AttributePattern getDefaultPattern(String storeName) {
             return new AttributePattern(storeName, null, null);
         }
 
         /**
-         * ´´½¨¾«È·Æ¥Åä£¬Æ¥ÅäÃû³ÆÍêÈ«ÏàÍ¬µÄattribute names¡£
+         * åˆ›å»ºç²¾ç¡®åŒ¹é…ï¼ŒåŒ¹é…åç§°å®Œå…¨ç›¸åŒçš„attribute namesã€‚
          */
         public static AttributePattern getExactPattern(String storeName, String attrName) {
             return new AttributePattern(storeName, attrName, null);
         }
 
         /**
-         * ´´½¨ÕıÔò±í´ïÊ½Æ¥Åä¡£
+         * åˆ›å»ºæ­£åˆ™è¡¨è¾¾å¼åŒ¹é…ã€‚
          */
         public static AttributePattern getRegexPattern(String storeName, String regexName) {
             try {

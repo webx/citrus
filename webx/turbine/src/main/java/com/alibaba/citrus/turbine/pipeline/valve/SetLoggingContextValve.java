@@ -33,7 +33,7 @@ import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser
 import com.alibaba.citrus.webx.util.SetLoggingContextHelper;
 
 /**
- * ÉèÖÃ»òÇå³ýlogging MDCµÄvalve¡£
+ * è®¾ç½®æˆ–æ¸…é™¤logging MDCçš„valveã€‚
  * 
  * @author Michael Zhou
  */

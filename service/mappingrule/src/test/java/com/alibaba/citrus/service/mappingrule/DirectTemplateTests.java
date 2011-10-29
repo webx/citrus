@@ -38,19 +38,19 @@ public class DirectTemplateTests extends AbstractMappingRuleTests {
 
         result = mappingRules.getMappedName("direct.template", "aaa/bbb/myOtherModule.vm");
         assertEquals("myprefix/aaa/bbb/myOtherModule.vm", result);
-        assertNotSame(result, mappingRules.getMappedName("direct.template", "aaa/bbb/myOtherModule.vm")); // 不cache
+        assertNotSame(result, mappingRules.getMappedName("direct.template", "aaa/bbb/myOtherModule.vm")); // 涓峜ache
 
         result = mappingRules.getMappedName("direct.template", "aaa,bbb,myOtherModule.vm");
         assertEquals("myprefix/aaa/bbb/myOtherModule.vm", result);
-        assertNotSame(result, mappingRules.getMappedName("direct.template", "aaa,bbb,myOtherModule.vm")); // 不cache
+        assertNotSame(result, mappingRules.getMappedName("direct.template", "aaa,bbb,myOtherModule.vm")); // 涓峜ache
 
-        // 默认后缀
+        // 榛樿鍚庣紑
         result = mappingRules.getMappedName("direct.template", "aaa,bbb,myOtherModule");
         assertEquals("myprefix/aaa/bbb/myOtherModule", result);
-        assertNotSame(result, mappingRules.getMappedName("direct.template", "aaa,bbb,myOtherModule")); // 不cache
+        assertNotSame(result, mappingRules.getMappedName("direct.template", "aaa,bbb,myOtherModule")); // 涓峜ache
 
         result = mappingRules.getMappedName("direct.template", "aaa,bbb,nonexistModule.vm");
         assertEquals("myprefix/aaa/bbb/nonexistModule.vm", result);
-        assertNotSame(result, mappingRules.getMappedName("direct.template", "aaa/bbb/myOtherModule.vm")); // 不cache
+        assertNotSame(result, mappingRules.getMappedName("direct.template", "aaa/bbb/myOtherModule.vm")); // 涓峜ache
     }
 }

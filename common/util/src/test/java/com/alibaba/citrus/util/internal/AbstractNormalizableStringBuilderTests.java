@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>NormalizableStringBuilder</code>¡£
+ * æµ‹è¯•<code>NormalizableStringBuilder</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -31,7 +31,7 @@ public abstract class AbstractNormalizableStringBuilderTests<B extends Normaliza
 
     @Test
     public void crlf() {
-        // cr, lf, crlfÈ«²¿×ª»»³ÉÍ³Ò»µÄlf
+        // cr, lf, crlfå…¨éƒ¨è½¬æ¢æˆç»Ÿä¸€çš„lf
         buf.append("a\r");
         buf.append("b\n");
         buf.append("c\r\n");

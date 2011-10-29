@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.requestcontext.session;
 
 /**
- * ´ú±ísession¿ò¼ÜµÄÒì³£¡£
+ * ä»£è¡¨sessionæ¡†æž¶çš„å¼‚å¸¸ã€‚
  * 
  * @author Michael Zhou
  */

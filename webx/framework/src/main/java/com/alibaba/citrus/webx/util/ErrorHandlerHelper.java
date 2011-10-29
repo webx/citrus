@@ -29,12 +29,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * ·½±ã´æÈ¡requestÖĞµÄ´íÎóĞÅÏ¢µÄ¹¤¾ßÀà¡£
+ * æ–¹ä¾¿å­˜å–requestä¸­çš„é”™è¯¯ä¿¡æ¯çš„å·¥å…·ç±»ã€‚
  * 
  * @author Michael Zhou
  */
 public class ErrorHandlerHelper {
-    // Servlet¹æ·¶ÖĞÖ¸¶¨µÄÓÃÓÚ±íÊ¾errorĞÅÏ¢µÄkey¡£
+    // Servletè§„èŒƒä¸­æŒ‡å®šçš„ç”¨äºè¡¨ç¤ºerrorä¿¡æ¯çš„keyã€‚
     // SRV.9.9.1 Request Attributes
     public final static String KEY_STATUS_CODE = "javax.servlet.error.status_code";
     public final static String KEY_MESSAGE = "javax.servlet.error.message";
@@ -43,16 +43,16 @@ public class ErrorHandlerHelper {
     public final static String KEY_REQUEST_URI = "javax.servlet.error.request_uri";
     public final static String KEY_SERVLET_NAME = "javax.servlet.error.servlet_name";
 
-    // ÔÚrequestÖĞ±£´æerrorHandlerHelperµÄkey¡£
+    // åœ¨requestä¸­ä¿å­˜errorHandlerHelperçš„keyã€‚
     public final static String KEY_ERROR_HANDLER_HELPER = "_webx_errorHandlerHelper_";
 
-    /** HTTP±ê×¼statusCodeËù¶ÔÓ¦µÄmessageÏûÏ¢¡£ */
+    /** HTTPæ ‡å‡†statusCodeæ‰€å¯¹åº”çš„messageæ¶ˆæ¯ã€‚ */
     public final static Map<Integer, String> STATUS_CODE_MESSAGES = getCodeMessages();
 
-    // ¶ÔÓ¦µÄrequest
+    // å¯¹åº”çš„request
     private final HttpServletRequest request;
 
-    // ´íÎóĞÅÏ¢
+    // é”™è¯¯ä¿¡æ¯
     private int statusCode;
     private String message;
     private Throwable exception;
@@ -65,7 +65,7 @@ public class ErrorHandlerHelper {
     }
 
     /**
-     * ´ÓrequestÖĞÈ¡µÃhelper£¬Èç¹û²»´æÔÚ£¬Ôò´´½¨Ò»¸ö¡£
+     * ä»requestä¸­å–å¾—helperï¼Œå¦‚æœä¸å­˜åœ¨ï¼Œåˆ™åˆ›å»ºä¸€ä¸ªã€‚
      */
     public static ErrorHandlerHelper getInstance(HttpServletRequest request) {
         ErrorHandlerHelper helper = (ErrorHandlerHelper) assertNotNull(request, "request").getAttribute(
@@ -80,7 +80,7 @@ public class ErrorHandlerHelper {
     }
 
     /**
-     * ³õÊ¼»¯helper¡£
+     * åˆå§‹åŒ–helperã€‚
      */
     public void init(String servletName, Throwable exception, ExceptionCodeMapping mapping) {
         setRequestURI(request.getRequestURI());
@@ -104,7 +104,7 @@ public class ErrorHandlerHelper {
     }
 
     /**
-     * ½«helperÖĞµÄÒì³£ĞÅÏ¢ÉèÖÃ³É±ê×¼µÄrequest attributes¡£
+     * å°†helperä¸­çš„å¼‚å¸¸ä¿¡æ¯è®¾ç½®æˆæ ‡å‡†çš„request attributesã€‚
      */
     public void setServletErrorAttributes() {
         setAttribute(KEY_STATUS_CODE, getStatusCode());
@@ -116,7 +116,7 @@ public class ErrorHandlerHelper {
     }
 
     /**
-     * ´ÓrequestÖĞÉèÖÃ»òÉ¾³ıÖµ¡£
+     * ä»requestä¸­è®¾ç½®æˆ–åˆ é™¤å€¼ã€‚
      */
     private void setAttribute(String key, Object value) {
         if (value == null) {
@@ -127,7 +127,7 @@ public class ErrorHandlerHelper {
     }
 
     /**
-     * È¡µÃ´íÎó´úÂë£¬Èç¹ûÃ»ÓĞ£¬Ä¬ÈÏÎª500¡£
+     * å–å¾—é”™è¯¯ä»£ç ï¼Œå¦‚æœæ²¡æœ‰ï¼Œé»˜è®¤ä¸º500ã€‚
      */
     public int getStatusCode() {
         if (statusCode <= 0) {
@@ -138,7 +138,7 @@ public class ErrorHandlerHelper {
     }
 
     /**
-     * È¡µÃÒì³£µÄÏûÏ¢£¬Èç¹ûÃ»ÓĞ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—å¼‚å¸¸çš„æ¶ˆæ¯ï¼Œå¦‚æœæ²¡æœ‰ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     public String getMessage() {
         if (message == null) {
@@ -149,14 +149,14 @@ public class ErrorHandlerHelper {
     }
 
     /**
-     * ÉèÖÃ´íÎó´úÂë¡£
+     * è®¾ç½®é”™è¯¯ä»£ç ã€‚
      */
     public void setStatusCode(int sc) {
         setStatusCode(sc, null);
     }
 
     /**
-     * ÉèÖÃ´íÎó´úÂë¡£
+     * è®¾ç½®é”™è¯¯ä»£ç ã€‚
      */
     public void setStatusCode(int sc, String message) {
         Integer code = sc <= 0 ? null : sc;
@@ -170,21 +170,21 @@ public class ErrorHandlerHelper {
     }
 
     /**
-     * È¡µÃÒì³££¬Èç¹ûÃ»ÓĞ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—å¼‚å¸¸ï¼Œå¦‚æœæ²¡æœ‰ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     public Throwable getException() {
         return exception;
     }
 
     /**
-     * È¡µÃÒì³£ÀàĞÍ£¬Èç¹ûÃ»ÓĞ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—å¼‚å¸¸ç±»å‹ï¼Œå¦‚æœæ²¡æœ‰ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     public Class<?> getExceptionType() {
         return exceptionType;
     }
 
     /**
-     * ÉèÖÃÒì³£¡£
+     * è®¾ç½®å¼‚å¸¸ã€‚
      */
     public void setException(Throwable exception) {
         this.exception = exception;
@@ -192,35 +192,35 @@ public class ErrorHandlerHelper {
     }
 
     /**
-     * È¡µÃ·¢Éú´íÎóµÄrequest URI£¬Èç¹ûÃ»ÓĞ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—å‘ç”Ÿé”™è¯¯çš„request URIï¼Œå¦‚æœæ²¡æœ‰ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     public String getRequestURI() {
         return requestURI;
     }
 
     /**
-     * ÉèÖÃrequestURI¡£
+     * è®¾ç½®requestURIã€‚
      */
     public void setRequestURI(String requestURI) {
         this.requestURI = requestURI;
     }
 
     /**
-     * È¡µÃ·¢Éú´íÎóµÄservletÃû×Ö£¬Èç¹ûÃ»ÓĞ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—å‘ç”Ÿé”™è¯¯çš„servletåå­—ï¼Œå¦‚æœæ²¡æœ‰ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     public String getServletName() {
         return servletName;
     }
 
     /**
-     * ÉèÖÃservletName¡£
+     * è®¾ç½®servletNameã€‚
      */
     public void setServletName(String servletName) {
         this.servletName = servletName;
     }
 
     /**
-     * ´Ó<code>HttpServletResponse</code>ÖĞÈ¡µÃstatusCodeµÄÃèÊö¡£
+     * ä»<code>HttpServletResponse</code>ä¸­å–å¾—statusCodeçš„æè¿°ã€‚
      */
     private static Map<Integer, String> getCodeMessages() {
         Map<Integer, String> messages = createTreeMap();
@@ -252,11 +252,11 @@ public class ErrorHandlerHelper {
     }
 
     /**
-     * Í¨¹ıexceptionÈ¡µÃstatus codeµÄ½Ó¿Ú¡£
+     * é€šè¿‡exceptionå–å¾—status codeçš„æ¥å£ã€‚
      */
     public static interface ExceptionCodeMapping {
         /**
-         * È¡µÃstatus code¡£Èç¹û²»È·¶¨£¬Ôò·µ»Ø<code>0</code>»ò<code>-1</code>¡£
+         * å–å¾—status codeã€‚å¦‚æœä¸ç¡®å®šï¼Œåˆ™è¿”å›<code>0</code>æˆ–<code>-1</code>ã€‚
          */
         int getExceptionCode(Throwable exception);
     }

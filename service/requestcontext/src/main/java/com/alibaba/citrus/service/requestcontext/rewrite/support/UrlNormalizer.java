@@ -22,7 +22,7 @@ import com.alibaba.citrus.service.requestcontext.rewrite.RewriteSubstitutionCont
 import com.alibaba.citrus.service.requestcontext.rewrite.RewriteSubstitutionHandler;
 
 /**
- * Ìæ»»´¦Àí³ÌĞò£¬¿ÉÓÃÀ´¹æ¸ñ»¯URL£¬Ê¹ºóĞøµÄrewriteÅäÖÃ¸üÍ³Ò»¡£
+ * æ›¿æ¢å¤„ç†ç¨‹åºï¼Œå¯ç”¨æ¥è§„æ ¼åŒ–URLï¼Œä½¿åç»­çš„rewriteé…ç½®æ›´ç»Ÿä¸€ã€‚
  * 
  * @author Michael Zhou
  */

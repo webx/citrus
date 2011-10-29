@@ -18,13 +18,13 @@
 package com.alibaba.citrus.util.i18n;
 
 /**
- * ´ú±íÒ»¸ö<code>CharConverter</code>·½°¸µÄÌá¹©Õß¡£
+ * ä»£è¡¨ä¸€ä¸ª<code>CharConverter</code>æ–¹æ¡ˆçš„æä¾›è€…ã€‚
  * 
  * @author Michael Zhou
  */
 public interface CharConverterProvider {
     /**
-     * ´´½¨Ò»¸öĞÂµÄconverter¡£
+     * åˆ›å»ºä¸€ä¸ªæ–°çš„converterã€‚
      */
     CharConverter createCharConverter();
 }

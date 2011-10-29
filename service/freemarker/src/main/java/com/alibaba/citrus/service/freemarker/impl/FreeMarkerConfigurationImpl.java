@@ -41,7 +41,7 @@ import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
 
 /**
- * ´ú±íÒ»×éfreemarker engineµÄÅäÖÃ¡£
+ * ä»£è¡¨ä¸€ç»„freemarker engineçš„é…ç½®ã€‚
  * 
  * @author Michael Zhou
  */
@@ -57,21 +57,21 @@ public class FreeMarkerConfigurationImpl implements FreeMarkerConfiguration {
     private FreeMarkerPlugin[] plugins;
 
     /**
-     * ´´½¨Ò»¸öfreemarkerÅäÖÃ¡£
+     * åˆ›å»ºä¸€ä¸ªfreemarkeré…ç½®ã€‚
      */
     public FreeMarkerConfigurationImpl(Logger log) {
         this.log = assertNotNull(log, "log");
     }
 
     /**
-     * È¡µÃÓÃÓÚ×°ÔØÄ£°åµÄloader¡£
+     * å–å¾—ç”¨äºè£…è½½æ¨¡æ¿çš„loaderã€‚
      */
     public TemplateLoader getTemplateLoader() {
         return templateLoader;
     }
 
     /**
-     * È¡µÃfreemarkerµÄÅäÖÃ¡£
+     * å–å¾—freemarkerçš„é…ç½®ã€‚
      */
     public Configuration getConfiguration() {
         return configuration;
@@ -86,7 +86,7 @@ public class FreeMarkerConfigurationImpl implements FreeMarkerConfiguration {
     }
 
     /**
-     * ÉèÖÃresource loader¡£
+     * è®¾ç½®resource loaderã€‚
      */
     public void setResourceLoader(ResourceLoader loader) {
         this.loader = loader;
@@ -97,28 +97,28 @@ public class FreeMarkerConfigurationImpl implements FreeMarkerConfiguration {
     }
 
     /**
-     * ÉèÖÃÉú²úÄ£Ê½¡£Ä¬ÈÏÎª<code>true</code>¡£
+     * è®¾ç½®ç”Ÿäº§æ¨¡å¼ã€‚é»˜è®¤ä¸º<code>true</code>ã€‚
      */
     public void setProductionMode(boolean productionMode) {
         this.productionMode = productionMode;
     }
 
     /**
-     * ÉèÖÃËÑË÷Ä£°åµÄ¸ùÄ¿Â¼¡£Ä¬ÈÏÎª<code>/templates</code>¡£
+     * è®¾ç½®æœç´¢æ¨¡æ¿çš„æ ¹ç›®å½•ã€‚é»˜è®¤ä¸º<code>/templates</code>ã€‚
      */
     public void setPath(String path) {
         this.path = trimToNull(path);
     }
 
     /**
-     * ÉèÖÃÄ£°åµÄ×Ö·û¼¯±àÂë¡£
+     * è®¾ç½®æ¨¡æ¿çš„å­—ç¬¦é›†ç¼–ç ã€‚
      */
     public void setTemplateEncoding(String charset) {
         this.charset = trimToNull(charset);
     }
 
     /**
-     * ÉèÖÃ¸ß¼¶ÅäÖÃ¡£
+     * è®¾ç½®é«˜çº§é…ç½®ã€‚
      */
     public void setAdvancedProperties(Map<String, String> configuration) {
         this.properties.clear();
@@ -126,14 +126,14 @@ public class FreeMarkerConfigurationImpl implements FreeMarkerConfiguration {
     }
 
     /**
-     * ÉèÖÃplugins¡£
+     * è®¾ç½®pluginsã€‚
      */
     public void setPlugins(FreeMarkerPlugin[] plugins) {
         this.plugins = plugins;
     }
 
     /**
-     * ³õÊ¼»¯configuration¡£
+     * åˆå§‹åŒ–configurationã€‚
      */
     public void init() {
         removeReservedProperties();
@@ -144,7 +144,7 @@ public class FreeMarkerConfigurationImpl implements FreeMarkerConfiguration {
     }
 
     /**
-     * É¾³ı±£ÁôµÄproperties£¬ÕâĞ©propertiesÓÃ»§²»ÄÜĞŞ¸Ä¡£
+     * åˆ é™¤ä¿ç•™çš„propertiesï¼Œè¿™äº›propertiesç”¨æˆ·ä¸èƒ½ä¿®æ”¹ã€‚
      */
     private void removeReservedProperties() {
         Set<String> keysToRemove = createHashSet();
@@ -164,7 +164,7 @@ public class FreeMarkerConfigurationImpl implements FreeMarkerConfiguration {
     private void initProperties() {
         assertNotNull(loader, "resourceLoader");
 
-        // Ä£°å×Ö·û¼¯±àÂë
+        // æ¨¡æ¿å­—ç¬¦é›†ç¼–ç 
         if (charset == null) {
             charset = DEFAULT_CHARSET;
         }
@@ -174,18 +174,18 @@ public class FreeMarkerConfigurationImpl implements FreeMarkerConfiguration {
 
         configuration.setTemplateLoader(templateLoader);
 
-        // Ä¬ÈÏÊ¹ÓÃStrongCacheStorage
+        // é»˜è®¤ä½¿ç”¨StrongCacheStorage
         setDefaultProperty(CACHE_STORAGE_KEY, StrongCacheStorage.class.getName());
 
-        // Òì³£´¦ÀíÆ÷
+        // å¼‚å¸¸å¤„ç†å™¨
         setDefaultProperty(TEMPLATE_EXCEPTION_HANDLER_KEY, "rethrow");
 
-        // ÆäËüÄ¬ÈÏÑ¡Ïî
+        // å…¶å®ƒé»˜è®¤é€‰é¡¹
         setDefaultProperty(DEFAULT_ENCODING_KEY, charset);
         setDefaultProperty(OUTPUT_ENCODING_KEY, DEFAULT_CHARSET);
         setDefaultProperty(LOCALIZED_LOOKUP_KEY, "false");
 
-        // ÉèÖÃÑ¡Ïî
+        // è®¾ç½®é€‰é¡¹
         for (Map.Entry<String, String> entry : properties.entrySet()) {
             String key = entry.getKey();
             String value = trimToNull(entry.getValue());
@@ -209,12 +209,12 @@ public class FreeMarkerConfigurationImpl implements FreeMarkerConfiguration {
     }
 
     private void initWrapper() {
-        // ÉèÖÃObjectWrapper£¬Ê¹Ö®Ö§³ÖTemplateContext¶ÔÏó
+        // è®¾ç½®ObjectWrapperï¼Œä½¿ä¹‹æ”¯æŒTemplateContextå¯¹è±¡
         configuration.setObjectWrapper(new DefaultBeansWrapper(configuration.getObjectWrapper()));
     }
 
     /**
-     * ÉèÖÃÄ¬ÈÏÖµ¡£Èç¹ûÖµÒÑ´æÔÚ£¬Ôò²»¸²¸Ç¡£
+     * è®¾ç½®é»˜è®¤å€¼ã€‚å¦‚æœå€¼å·²å­˜åœ¨ï¼Œåˆ™ä¸è¦†ç›–ã€‚
      */
     private void setDefaultProperty(String key, String value) {
         if (properties.get(key) == null) {

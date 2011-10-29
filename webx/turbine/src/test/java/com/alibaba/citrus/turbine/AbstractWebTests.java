@@ -152,10 +152,10 @@ public abstract class AbstractWebTests {
         newRequest = topRC.getRequest();
         newResponse = topRC.getResponse();
 
-        // 创建turbine rundata
+        // 鍒涘缓turbine rundata
         TurbineUtil.getTurbineRunData(newRequest, true);
 
-        // 设置当前component
+        // 璁剧疆褰撳墠component
         WebxComponent component = createMock(WebxComponent.class);
         GenericWebApplicationContext webAppContext = new GenericWebApplicationContext();
         webAppContext.setParent(factory);

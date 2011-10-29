@@ -33,21 +33,21 @@ import com.alibaba.citrus.springext.ResourceLoadingExtender;
 import com.alibaba.citrus.springext.support.resolver.XmlBeanDefinitionReaderProcessor;
 
 /**
- * ´ÓXMLÅäÖÃÎÄ¼şÖĞ×°ÅäµÄ£¬ÓÃÓÚWEB»·¾³µÄ<code>ApplicationContext</code>ÊµÏÖÀà£¬ÅÉÉúÓÚ
+ * ä»XMLé…ç½®æ–‡ä»¶ä¸­è£…é…çš„ï¼Œç”¨äºWEBç¯å¢ƒçš„<code>ApplicationContext</code>å®ç°ç±»ï¼Œæ´¾ç”Ÿäº
  * {@link org.springframework.web.context.support.XmlWebApplicationContext}
- * £¬Ôö¼ÓÁËÈçÏÂÌØĞÔ£º
+ * ï¼Œå¢åŠ äº†å¦‚ä¸‹ç‰¹æ€§ï¼š
  * <ul>
- * <li>Ö§³Ö<code>ConfigurationPoint</code>»úÖÆ¡£</li>
- * <li>À©Õ¹µÄresource loading»úÖÆ¡£¼ÙÈç<code>ResourceLoadingExtender</code>
- * ±»ÉèÖÃ£¬ÔòÊ¹ÓÃËüÀ´×°ÔØ×ÊÔ´£¬·ñÔòÊ¹ÓÃÄ¬ÈÏµÄ×°ÔØÆ÷¡£</li>
- * <li>Ä¬ÈÏ´ò¿ªannotation config£¬Ïàµ±ÓÚ<code>&lt;context:annotation-config/&gt;</code>¡£
+ * <li>æ”¯æŒ<code>ConfigurationPoint</code>æœºåˆ¶ã€‚</li>
+ * <li>æ‰©å±•çš„resource loadingæœºåˆ¶ã€‚å‡å¦‚<code>ResourceLoadingExtender</code>
+ * è¢«è®¾ç½®ï¼Œåˆ™ä½¿ç”¨å®ƒæ¥è£…è½½èµ„æºï¼Œå¦åˆ™ä½¿ç”¨é»˜è®¤çš„è£…è½½å™¨ã€‚</li>
+ * <li>é»˜è®¤æ‰“å¼€annotation configï¼Œç›¸å½“äº<code>&lt;context:annotation-config/&gt;</code>ã€‚
  * </li>
- * <li>¼ÙÈç<code>parentResolvableDependenciesAccessible==true</code>£¬ÔòÖ§³Ö´Óparent
- * contextÖĞÈ¡µÃÔ¤ÏÈÖÃÈë<code>resolvableDependencies</code>ÖĞµÄ¶ÔÏó¡£Ä¬ÈÏÎª<code>true</code>¡£</li>
+ * <li>å‡å¦‚<code>parentResolvableDependenciesAccessible==true</code>ï¼Œåˆ™æ”¯æŒä»parent
+ * contextä¸­å–å¾—é¢„å…ˆç½®å…¥<code>resolvableDependencies</code>ä¸­çš„å¯¹è±¡ã€‚é»˜è®¤ä¸º<code>true</code>ã€‚</li>
  * </ul>
  * <p>
- * ½¨ÒéËùÓĞ·ÇWEBÓ¦ÓÃµÄapplication context´Ó{@link AbstractXmlApplicationContext}
- * ÅÉÉú£»¶ÔÓÚ¼òµ¥µÄÇéĞÎ£¬Èçµ¥Ôª²âÊÔ£¬Ö±½Ó´Ó×ÓÀà{@link XmlApplicationContext}ÖĞ´´½¨ÊµÀı¡£
+ * å»ºè®®æ‰€æœ‰éWEBåº”ç”¨çš„application contextä»{@link AbstractXmlApplicationContext}
+ * æ´¾ç”Ÿï¼›å¯¹äºç®€å•çš„æƒ…å½¢ï¼Œå¦‚å•å…ƒæµ‹è¯•ï¼Œç›´æ¥ä»å­ç±»{@link XmlApplicationContext}ä¸­åˆ›å»ºå®ä¾‹ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -60,7 +60,7 @@ public class XmlWebApplicationContext extends org.springframework.web.context.su
     private boolean parentResolvableDependenciesAccessible = true;
 
     /**
-     * ÊÇ·ñ¿É·ÃÎÊµ½parent contextÖĞµÄresolvableDependencies¡£ Ä¬ÈÏÊÇ¿É·ÃÎÊ¡£
+     * æ˜¯å¦å¯è®¿é—®åˆ°parent contextä¸­çš„resolvableDependenciesã€‚ é»˜è®¤æ˜¯å¯è®¿é—®ã€‚
      */
     public boolean isParentResolvableDependenciesAccessible() {
         return parentResolvableDependenciesAccessible;
@@ -90,7 +90,7 @@ public class XmlWebApplicationContext extends org.springframework.web.context.su
     }
 
     /**
-     * ´ò¿ªannotation×¢Èë¡£
+     * æ‰“å¼€annotationæ³¨å…¥ã€‚
      */
     @Override
     protected void customizeBeanFactory(DefaultListableBeanFactory beanFactory) {
@@ -108,7 +108,7 @@ public class XmlWebApplicationContext extends org.springframework.web.context.su
     }
 
     /**
-     * À©Õ¹<code>ResourceLoader</code>»úÖÆ£¬ÊµÏÖ×Ô¶¨ÒåµÄ×ÊÔ´×°ÔØ¡£
+     * æ‰©å±•<code>ResourceLoader</code>æœºåˆ¶ï¼Œå®ç°è‡ªå®šä¹‰çš„èµ„æºè£…è½½ã€‚
      */
     @Override
     protected Resource getResourceByPath(String path) {
@@ -126,7 +126,7 @@ public class XmlWebApplicationContext extends org.springframework.web.context.su
     }
 
     /**
-     * À©Õ¹<code>ResourcePatternResolver</code>»úÖÆ£¬ÊµÏÖ×Ô¶¨ÒåµÄ×ÊÔ´×°ÔØ¡£
+     * æ‰©å±•<code>ResourcePatternResolver</code>æœºåˆ¶ï¼Œå®ç°è‡ªå®šä¹‰çš„èµ„æºè£…è½½ã€‚
      */
     @Override
     protected ResourcePatternResolver getResourcePatternResolver() {

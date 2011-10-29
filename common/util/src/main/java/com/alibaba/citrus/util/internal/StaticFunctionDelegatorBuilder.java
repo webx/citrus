@@ -49,7 +49,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ½«Ò»×é¾²Ì¬·½·¨×éºÏ³ÉÒ»¸ö¶ÔÏó¡£
+ * å°†ä¸€ç»„é™æ€æ–¹æ³•ç»„åˆæˆä¸€ä¸ªå¯¹è±¡ã€‚
  * 
  * @author Michael Zhou
  */
@@ -225,7 +225,7 @@ public class StaticFunctionDelegatorBuilder {
     }
 
     private Map<Method, FastMethod> getMethodMappings(Class<?> intfs) {
-        // ²éÕÒinterfaceÖĞµÄ·½·¨ºÍ±»´úÀí·½·¨Ö®¼äµÄ¶ÔÓ¦¹ØÏµ
+        // æŸ¥æ‰¾interfaceä¸­çš„æ–¹æ³•å’Œè¢«ä»£ç†æ–¹æ³•ä¹‹é—´çš„å¯¹åº”å…³ç³»
         Map<Method, FastMethod> methodMappings = createHashMap();
 
         for (Method method : intfs.getMethods()) {

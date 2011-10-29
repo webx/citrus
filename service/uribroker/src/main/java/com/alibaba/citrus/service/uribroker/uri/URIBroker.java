@@ -43,9 +43,9 @@ import com.alibaba.citrus.service.uribroker.interceptor.URIBrokerPathInterceptor
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ´ú±íÒ»¸ö»ù±¾µÄURI·ç¸ñ¡£
+ * ä»£è¡¨ä¸€ä¸ªåŸºæœ¬çš„URIé£æ ¼ã€‚
  * <p>
- * Ò»¸öURI°üÀ¨ÈçÏÂ¼¸¸ö²¿·Ö£º
+ * ä¸€ä¸ªURIåŒ…æ‹¬å¦‚ä¸‹å‡ ä¸ªéƒ¨åˆ†ï¼š
  * </p>
  * 
  * <pre>
@@ -56,15 +56,15 @@ import com.alibaba.citrus.util.StringUtil;
  * REFERENCE   = reference
  * </pre>
  * <p>
- * ÀıÈç£º
+ * ä¾‹å¦‚ï¼š
  * </p>
  * 
  * <pre>
  * http://user:pass@myserver.com:8080/view?id=1#top
  * </pre>
  * <p>
- * ×¢Òâ£¬<code>URIBroker</code>Ã»ÓĞÌá¹©ĞŞ¸ÄpathµÄ·½·¨¡£Èç¹ûÒªÌí¼Ó¡¢É¾³ı¡¢ĞŞ¸Äpath£¬ÇëÖ±½ÓÊ¹ÓÃ×ÓÀà
- * <code>GenericURIBroker</code>¡£
+ * æ³¨æ„ï¼Œ<code>URIBroker</code>æ²¡æœ‰æä¾›ä¿®æ”¹pathçš„æ–¹æ³•ã€‚å¦‚æœè¦æ·»åŠ ã€åˆ é™¤ã€ä¿®æ”¹pathï¼Œè¯·ç›´æ¥ä½¿ç”¨å­ç±»
+ * <code>GenericURIBroker</code>ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -72,19 +72,19 @@ import com.alibaba.citrus.util.StringUtil;
  */
 public abstract class URIBroker extends URIBrokerFeatures {
     /**
-     * ´ú±íURIµÄÀàĞÍ¡£
+     * ä»£è¡¨URIçš„ç±»å‹ã€‚
      */
     public static enum URIType {
-        /** ×Ô¶¯Ñ¡ÔñURIµÄÀàĞÍ¡£ */
+        /** è‡ªåŠ¨é€‰æ‹©URIçš„ç±»å‹ã€‚ */
         auto,
 
-        /** ÍêÕûURI£¬°üÀ¨serverInfo, path¡£ */
+        /** å®Œæ•´URIï¼ŒåŒ…æ‹¬serverInfo, pathã€‚ */
         full,
 
-        /** ¾ø¶ÔURI£¬²»°üÀ¨serverInfo£¬µ«°üÀ¨ÍêÕûµÄpath¡£ */
+        /** ç»å¯¹URIï¼Œä¸åŒ…æ‹¬serverInfoï¼Œä½†åŒ…æ‹¬å®Œæ•´çš„pathã€‚ */
         absolute,
 
-        /** Ïà¶ÔURI£¬²»°üÀ¨serverInfo£¬ÆäpathÎªÏà¶ÔÓÚµ±Ç°ÇëÇóµÄURIµÄÏà¶ÔÂ·¾¶¡£ */
+        /** ç›¸å¯¹URIï¼Œä¸åŒ…æ‹¬serverInfoï¼Œå…¶pathä¸ºç›¸å¯¹äºå½“å‰è¯·æ±‚çš„URIçš„ç›¸å¯¹è·¯å¾„ã€‚ */
         relative
     }
 
@@ -109,14 +109,14 @@ public abstract class URIBroker extends URIBrokerFeatures {
     private final Map<String, Object> query = createLinkedHashMap();
 
     /**
-     * È¡µÃURIÀàĞÍ¡£
+     * å–å¾—URIç±»å‹ã€‚
      */
     public URIType getURIType() {
         return type;
     }
 
     /**
-     * ÉèÖÃURIÀàĞÍ¡£
+     * è®¾ç½®URIç±»å‹ã€‚
      */
     public URIBroker setURIType(URIType type) {
         this.type = type;
@@ -124,42 +124,42 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * ÉèÖÃ³É×Ô¶¯URIÀàĞÍ¡£
+     * è®¾ç½®æˆè‡ªåŠ¨URIç±»å‹ã€‚
      */
     public URIBroker autoURI() {
         return setURIType(URIType.auto);
     }
 
     /**
-     * ÉèÖÃ³ÉÍêÕûURIÀàĞÍ¡£
+     * è®¾ç½®æˆå®Œæ•´URIç±»å‹ã€‚
      */
     public URIBroker fullURI() {
         return setURIType(URIType.full);
     }
 
     /**
-     * ÉèÖÃ³É¾ø¶ÔURIÀàĞÍ¡£
+     * è®¾ç½®æˆç»å¯¹URIç±»å‹ã€‚
      */
     public URIBroker absoluteURI() {
         return setURIType(URIType.absolute);
     }
 
     /**
-     * ÉèÖÃ³ÉÏà¶ÔURIÀàĞÍ¡£
+     * è®¾ç½®æˆç›¸å¯¹URIç±»å‹ã€‚
      */
     public URIBroker relativeURI() {
         return setURIType(URIType.relative);
     }
 
     /**
-     * È¡µÃbaseURI£¬µ±<code>URIType==absolute/relative</code>Ê±£¬ÓÃÀ´Éú³ÉÒÔ´ËÎª»ù×¼µÄURI¡£
+     * å–å¾—baseURIï¼Œå½“<code>URIType==absolute/relative</code>æ—¶ï¼Œç”¨æ¥ç”Ÿæˆä»¥æ­¤ä¸ºåŸºå‡†çš„URIã€‚
      */
     public String getBaseURI() {
         return baseURI == null ? null : baseURI.toString();
     }
 
     /**
-     * ÉèÖÃbaseURI£¬µ±<code>URIType==absolute/relative</code>Ê±£¬ÓÃÀ´Éú³ÉÒÔ´ËÎª»ù×¼µÄURI¡£
+     * è®¾ç½®baseURIï¼Œå½“<code>URIType==absolute/relative</code>æ—¶ï¼Œç”¨æ¥ç”Ÿæˆä»¥æ­¤ä¸ºåŸºå‡†çš„URIã€‚
      */
     public URIBroker setBaseURI(String baseURI) {
         baseURI = trimToNull(baseURI);
@@ -168,7 +168,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * È¡µÃ²»°üº¬queryºÍreferenceµÄserverURI¡£
+     * å–å¾—ä¸åŒ…å«queryå’Œreferenceçš„serverURIã€‚
      */
     public String getServerURI() {
         processInterceptors();
@@ -180,7 +180,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * ÉèÖÃÏÖ³ÉµÄuri¡£
+     * è®¾ç½®ç°æˆçš„uriã€‚
      */
     public final URIBroker setServerURI(String uriString) {
         URL uri;
@@ -231,14 +231,14 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * È¡µÃURI scheme¡£
+     * å–å¾—URI schemeã€‚
      */
     public String getServerScheme() {
         return serverScheme;
     }
 
     /**
-     * ÉèÖÃURI scheme£¬Ö»ÄÜÊÇhttpºÍhttps¡£
+     * è®¾ç½®URI schemeï¼Œåªèƒ½æ˜¯httpå’Œhttpsã€‚
      */
     public URIBroker setServerScheme(String serverScheme) {
         this.serverScheme = trim(serverScheme);
@@ -247,14 +247,14 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * È¡µÃ·şÎñÆ÷Ãû¡£
+     * å–å¾—æœåŠ¡å™¨åã€‚
      */
     public String getServerName() {
         return serverName;
     }
 
     /**
-     * ÉèÖÃ·şÎñÆ÷Ãû¡£
+     * è®¾ç½®æœåŠ¡å™¨åã€‚
      */
     public URIBroker setServerName(String serverName) {
         this.serverName = trim(serverName);
@@ -263,14 +263,14 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * È¡µÃ·şÎñÆ÷¶Ë¿Ú¡£
+     * å–å¾—æœåŠ¡å™¨ç«¯å£ã€‚
      */
     public int getServerPort() {
         return serverPort;
     }
 
     /**
-     * ÉèÖÃ·şÎñÆ÷¶Ë¿Ú¡£×¢ÒâÄ¬ÈÏµÄ80¶Ë¿ÚºÍ443¶Ë¿Ú·Ö±ğÔÚhttpºÍhttpsÊ±²»×öÊä³ö¡£
+     * è®¾ç½®æœåŠ¡å™¨ç«¯å£ã€‚æ³¨æ„é»˜è®¤çš„80ç«¯å£å’Œ443ç«¯å£åˆ†åˆ«åœ¨httpå’Œhttpsæ—¶ä¸åšè¾“å‡ºã€‚
      */
     public URIBroker setServerPort(int serverPort) {
         this.serverPort = serverPort <= 0 ? -1 : serverPort;
@@ -279,14 +279,14 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * È¡µÃµÇÂ¼ÓÃ»§¡£
+     * å–å¾—ç™»å½•ç”¨æˆ·ã€‚
      */
     public String getLoginUser() {
         return loginUser;
     }
 
     /**
-     * ÉèÖÃµÇÂ¼ÓÃ»§¡£
+     * è®¾ç½®ç™»å½•ç”¨æˆ·ã€‚
      */
     public URIBroker setLoginUser(String loginUser) {
         this.loginUser = trim(loginUser);
@@ -295,14 +295,14 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * È¡µÃµÇÂ¼ÃÜÂë¡£
+     * å–å¾—ç™»å½•å¯†ç ã€‚
      */
     public String getLoginPassword() {
         return loginPassword;
     }
 
     /**
-     * ÉèÖÃµÇÂ¼ÃÜÂë¡£
+     * è®¾ç½®ç™»å½•å¯†ç ã€‚
      */
     public URIBroker setLoginPassword(String loginPassword) {
         this.loginPassword = trim(loginPassword);
@@ -311,14 +311,14 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * È¡µÃreferenceÒıÓÃ¡£
+     * å–å¾—referenceå¼•ç”¨ã€‚
      */
     public String getReference() {
         return reference;
     }
 
     /**
-     * ÉèÖÃreferenceÒıÓÃ¡£
+     * è®¾ç½®referenceå¼•ç”¨ã€‚
      */
     public URIBroker setReference(String reference) {
         this.reference = trim(reference);
@@ -326,21 +326,21 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * È¡µÃURLµÄpath²¿·Ö¡£
+     * å–å¾—URLçš„pathéƒ¨åˆ†ã€‚
      */
     public String getPath() {
         return getAllPathSegmentsAsString(PATH_INDEX);
     }
 
     /**
-     * È¡µÃURI pathÁĞ±í¡£
+     * å–å¾—URI pathåˆ—è¡¨ã€‚
      */
     public List<String> getPathElements() {
         return getAllPathSegments(PATH_INDEX);
     }
 
     /**
-     * È¡µÃµ±Ç°URI path·Ö³É¼¸¶Î¡£
+     * å–å¾—å½“å‰URI pathåˆ†æˆå‡ æ®µã€‚
      */
     protected abstract int getPathSegmentCount();
 
@@ -389,10 +389,10 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * ºÏ²¢¶à¸ölist£¬²¢¼ÓÈëµ½Ä³¸ösegmentÖĞ¡£
+     * åˆå¹¶å¤šä¸ªlistï¼Œå¹¶åŠ å…¥åˆ°æŸä¸ªsegmentä¸­ã€‚
      * <ul>
-     * <li>ÒÔ¸´ÖÆµÄ·½Ê½ºÏ²¢£¬Ö§³ÖÈçÏÂ²Ù×÷£ºpath = parent.path + path¡£</li>
-     * <li>ºÏ²¢Ê±²»ÔÙ½âÎöÃ¿Ò»Ïîpath£¬¼ÙÉèÃ¿Ò»ÏîpathÔÚºÏ²¢Ç°ÒÑ¾­ÊÇºÏ·¨µÄ¸ñÊ½£¬¼´²»°üº¬"/"¡£</li>
+     * <li>ä»¥å¤åˆ¶çš„æ–¹å¼åˆå¹¶ï¼Œæ”¯æŒå¦‚ä¸‹æ“ä½œï¼špath = parent.path + pathã€‚</li>
+     * <li>åˆå¹¶æ—¶ä¸å†è§£ææ¯ä¸€é¡¹pathï¼Œå‡è®¾æ¯ä¸€é¡¹pathåœ¨åˆå¹¶å‰å·²ç»æ˜¯åˆæ³•çš„æ ¼å¼ï¼Œå³ä¸åŒ…å«"/"ã€‚</li>
      * </ul>
      */
     @SuppressWarnings("unchecked")
@@ -440,7 +440,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
 
             int newAdded = index - pathSegmentIndexes[segment];
 
-            // Èç¹ûÊ²Ã´Ò²Ã»ÓĞ±»¼ÓÈë£¬Ôò¼ÓÈë¿Õ×Ö·û´®
+            // å¦‚æœä»€ä¹ˆä¹Ÿæ²¡æœ‰è¢«åŠ å…¥ï¼Œåˆ™åŠ å…¥ç©ºå­—ç¬¦ä¸²
             if (newAdded > 0) {
                 for (int i = segment; i < pathSegmentIndexes.length; i++) {
                     pathSegmentIndexes[i] += newAdded;
@@ -501,14 +501,14 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * È¡µÃURI query±í¡£
+     * å–å¾—URI queryè¡¨ã€‚
      */
     public Map<String, Object/* String or String[] */> getQuery() {
         return query;
     }
 
     /**
-     * ÉèÖÃÒ»×équery¡£
+     * è®¾ç½®ä¸€ç»„queryã€‚
      */
     public void setQuery(Map<String, Object> query) {
         getQuery().clear();
@@ -523,7 +523,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * É¾³ıËùÓĞµÄquery¡£
+     * åˆ é™¤æ‰€æœ‰çš„queryã€‚
      */
     public URIBroker clearQuery() {
         if (query != null) {
@@ -536,7 +536,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * È¡µÃÖ¸¶¨id¶ÔÓ¦µÄqueryÖµ¡£
+     * å–å¾—æŒ‡å®šidå¯¹åº”çš„queryå€¼ã€‚
      */
     public String getQueryData(String id) {
         Object value = getQuery().get(id);
@@ -555,7 +555,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * ÉèÖÃquery¡£
+     * è®¾ç½®queryã€‚
      */
     public URIBroker setQueryData(String id, Object values) {
         id = assertNotNull(trimToNull(id), "empty query id");
@@ -593,7 +593,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * Ìí¼Óquery¡£
+     * æ·»åŠ queryã€‚
      */
     public URIBroker addQueryData(String id, Object value) {
         id = assertNotNull(trimToNull(id), "empty query id");
@@ -631,7 +631,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * É¾³ıÖ¸¶¨µÄquery¡£
+     * åˆ é™¤æŒ‡å®šçš„queryã€‚
      */
     public URIBroker removeQueryData(String id) {
         if (query != null) {
@@ -644,7 +644,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * ·µ»Ø²»´ø²ÎÊıµÄuriÂ·¾¶£¬²¢½«²ÎÊı²¿·ÖÌí¼Óµ½queryÖĞ¡¢ÉèÖÃref£¨Èç¹ûÓĞµÄ»°£©¡£
+     * è¿”å›ä¸å¸¦å‚æ•°çš„uriè·¯å¾„ï¼Œå¹¶å°†å‚æ•°éƒ¨åˆ†æ·»åŠ åˆ°queryä¸­ã€è®¾ç½®refï¼ˆå¦‚æœæœ‰çš„è¯ï¼‰ã€‚
      */
     protected final String setUriAndGetPath(String uri) {
         if (uri != null) {
@@ -668,9 +668,9 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * ¸´ÖÆparent brokerÖĞµÄÖµ×÷ÎªÄ¬ÈÏÖµ£¬µ«²»¸²¸Çµ±Ç°brokerÖĞÒÑÓĞµÄÖµ¡£
+     * å¤åˆ¶parent brokerä¸­çš„å€¼ä½œä¸ºé»˜è®¤å€¼ï¼Œä½†ä¸è¦†ç›–å½“å‰brokerä¸­å·²æœ‰çš„å€¼ã€‚
      * <p>
-     * ×ÓÀàÓ¦¸Ã¸²¸Ç´Ë·½·¨£¬ÒÔÊµÏÖÌØ¶¨µÄinit¹¦ÄÜ¡£
+     * å­ç±»åº”è¯¥è¦†ç›–æ­¤æ–¹æ³•ï¼Œä»¥å®ç°ç‰¹å®šçš„initåŠŸèƒ½ã€‚
      * </p>
      */
     @Override
@@ -708,7 +708,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
         }
 
         if (!parent.getQuery().isEmpty()) {
-            // ºÏ²¢query£¬°üÀ¨ºÏ²¢queryµÄÖµ
+            // åˆå¹¶queryï¼ŒåŒ…æ‹¬åˆå¹¶queryçš„å€¼
             Map<String, Object> queryCopy = createLinkedHashMap();
             queryCopy.putAll(getQuery());
 
@@ -731,9 +731,9 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * ¸´ÖÆparentµÄ×´Ì¬¡£
+     * å¤åˆ¶parentçš„çŠ¶æ€ã€‚
      * <p>
-     * ×ÓÀàÓ¦¸Ã¸²¸Ç´Ë·½·¨£¬ÒÔÊµÏÖÌØ¶¨µÄreset¹¦ÄÜ¡£
+     * å­ç±»åº”è¯¥è¦†ç›–æ­¤æ–¹æ³•ï¼Œä»¥å®ç°ç‰¹å®šçš„resetåŠŸèƒ½ã€‚
      * </p>
      */
     @Override
@@ -752,11 +752,11 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * ½«requestÖĞµÄÔËĞĞÊ±ĞÅÏ¢Ìî³äµ½uri brokerÖĞ¡£
+     * å°†requestä¸­çš„è¿è¡Œæ—¶ä¿¡æ¯å¡«å……åˆ°uri brokerä¸­ã€‚
      */
     @Override
     protected void populateWithRequest(HttpServletRequest request) {
-        // scheme¡¢serverNameºÍserverPort±ØĞëÒ»ÆğÉè¡£
+        // schemeã€serverNameå’ŒserverPortå¿…é¡»ä¸€èµ·è®¾ã€‚
         if (serverScheme == null && serverName == null && serverPort <= 0) {
             setServerScheme(request.getScheme());
             setServerName(request.getServerName());
@@ -765,10 +765,10 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * °´Ë³ĞòÖ´ĞĞËùÓĞpath interceptors¡£
+     * æŒ‰é¡ºåºæ‰§è¡Œæ‰€æœ‰path interceptorsã€‚
      * <p>
-     * ºÍ<code>URIBrokerInterceptor</code>²»Í¬£¬
-     * <code>URIBrokerPathInterceptor</code>ÔÚÃ¿´ÎrenderÊ±¾ù»á±»µ÷ÓÃ¡£
+     * å’Œ<code>URIBrokerInterceptor</code>ä¸åŒï¼Œ
+     * <code>URIBrokerPathInterceptor</code>åœ¨æ¯æ¬¡renderæ—¶å‡ä¼šè¢«è°ƒç”¨ã€‚
      * </p>
      */
     protected String processPathInterceptors(String path) {
@@ -805,7 +805,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
                 baseURI = createBaseURI();
 
                 if (baseURI != null) {
-                    // µ±ÇÒ½öµ±baseURIÖĞµÄserverĞÅÏ¢ºÍbrokerÖĞµÄÒ»ÖÂ£¬²Å²»äÖÈ¾server
+                    // å½“ä¸”ä»…å½“baseURIä¸­çš„serverä¿¡æ¯å’Œbrokerä¸­çš„ä¸€è‡´ï¼Œæ‰ä¸æ¸²æŸ“server
                     String scheme = getEffectiveServerScheme(getServerScheme());
                     int port = getEffectiveServerPort(scheme, getServerPort());
 
@@ -846,7 +846,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
 
         path = trimToEmpty(processPathInterceptors(path));
 
-        // ½«path×ª»»³ÉÏà¶ÔÂ·¾¶£¨Ç°Ìá£ºserverÎ´äÖÈ¾£©
+        // å°†pathè½¬æ¢æˆç›¸å¯¹è·¯å¾„ï¼ˆå‰æï¼šserveræœªæ¸²æŸ“ï¼‰
         if (!renderServer) {
             switch (type) {
                 case relative:
@@ -892,7 +892,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * ´Órequest»òÖ¸¶¨URIÖĞ´´½¨²¢¹æ¸ñ»¯baseURI¡£
+     * ä»requestæˆ–æŒ‡å®šURIä¸­åˆ›å»ºå¹¶è§„æ ¼åŒ–baseURIã€‚
      */
     private BaseURI createBaseURI() {
         BaseURI result = null;
@@ -919,10 +919,10 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * ½«path×ª»»³ÉÏà¶ÔÓÚbaseµÄÏà¶ÔÂ·¾¶¡£
+     * å°†pathè½¬æ¢æˆç›¸å¯¹äºbaseçš„ç›¸å¯¹è·¯å¾„ã€‚
      */
     private String getRelativePath(String base, String path) {
-        // È¥³ıbaseÖĞ×îºóÒ»¶ÎÂ·¾¶£¬ÀıÈç£º
+        // å»é™¤baseä¸­æœ€åä¸€æ®µè·¯å¾„ï¼Œä¾‹å¦‚ï¼š
         //  /sub/dir/index.html -> /sub/dir
         //  /sub/dir/ -> /sub/dir
         int index = base.lastIndexOf("/");
@@ -931,7 +931,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
             base = base.substring(0, index);
         }
 
-        // ÌØÊâÇé¿ö£ºbaseÎª¿Õ£¬Ö±½Ó·µ»Øpath£¬µ«³ıÈ¥¿ªÍ·µÄ/
+        // ç‰¹æ®Šæƒ…å†µï¼šbaseä¸ºç©ºï¼Œç›´æ¥è¿”å›pathï¼Œä½†é™¤å»å¼€å¤´çš„/
         if (isEmpty(base)) {
             if (path.startsWith("/")) {
                 return path.replaceFirst("^/+", EMPTY_STRING);
@@ -946,7 +946,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
         boolean baseFound;
         boolean pathFound;
 
-        // È¥³ıbaseºÍpathÖĞÏàÍ¬µÄ²¿·Ö£¬ÀıÈç£º
+        // å»é™¤baseå’Œpathä¸­ç›¸åŒçš„éƒ¨åˆ†ï¼Œä¾‹å¦‚ï¼š
         //  /this/is/base/dir -> /base/dir
         //  /this/is/my/path  -> /my/path
         do {
@@ -956,12 +956,12 @@ public abstract class URIBroker extends URIBrokerFeatures {
 
         StringBuilder relativePath = new StringBuilder();
 
-        // ½«baseÖĞÊ£ÓàµÄ²¿·Ö£¬·Ö±ğ×ª»»³É../
+        // å°†baseä¸­å‰©ä½™çš„éƒ¨åˆ†ï¼Œåˆ†åˆ«è½¬æ¢æˆ../
         for (; baseFound; baseFound = baseMatcher.find()) {
             relativePath.append("../");
         }
 
-        // ½«pathÖĞÊ£ÓàµÄ²¿·Ö£¬×·¼Óµ½Ä©Î²
+        // å°†pathä¸­å‰©ä½™çš„éƒ¨åˆ†ï¼Œè¿½åŠ åˆ°æœ«å°¾
         while (pathFound) {
             relativePath.append(pathMatcher.group(2));
             pathFound = pathMatcher.find();
@@ -975,7 +975,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * äÖÈ¾URI·şÎñÆ÷ĞÅÏ¢¡£
+     * æ¸²æŸ“URIæœåŠ¡å™¨ä¿¡æ¯ã€‚
      */
     @Override
     protected final void renderServer(StringBuilder buf) {
@@ -1033,17 +1033,17 @@ public abstract class URIBroker extends URIBrokerFeatures {
         boolean isDefaultPort = serverPort <= 0;
 
         if (!isDefaultPort) {
-            // httpºÍ80
+            // httpå’Œ80
             isDefaultPort |= SERVER_SCHEME_HTTP.equals(serverScheme) && serverPort == SERVER_PORT_HTTP;
 
-            // httpsºÍ443
+            // httpså’Œ443
             isDefaultPort |= SERVER_SCHEME_HTTPS.equals(serverScheme) && serverPort == SERVER_PORT_HTTPS;
         }
         return isDefaultPort;
     }
 
     /**
-     * äÖÈ¾URI path¡£
+     * æ¸²æŸ“URI pathã€‚
      */
     @Override
     protected final void renderPath(StringBuilder buf) {
@@ -1053,7 +1053,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
     }
 
     /**
-     * äÖÈ¾URI query string¡£
+     * æ¸²æŸ“URI query stringã€‚
      */
     @Override
     protected final void renderQuery(StringBuilder buf) {

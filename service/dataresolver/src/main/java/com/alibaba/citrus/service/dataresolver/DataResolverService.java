@@ -22,23 +22,23 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
 /**
- * ÓÃÀ´È¡µÃ<code>DataResolver</code>µÄ·şÎñ¡£
+ * ç”¨æ¥å–å¾—<code>DataResolver</code>çš„æœåŠ¡ã€‚
  * <p>
- * Ò»¸ö<code>DataResolver</code>¿ÉÒÔÈ¡µÃÖ¸¶¨ÀàĞÍ»òÖ¸¶¨annotationËù¶¨ÒåµÄÊı¾İ¡£
- * <code>DataResolver</code>±»ÓÃÀ´½«ÊÊµ±µÄÊı¾İ×¢Èëµ½·½·¨µÄ²ÎÊı¡¢¶ÔÏóµÄpropertyÖĞ¡£
+ * ä¸€ä¸ª<code>DataResolver</code>å¯ä»¥å–å¾—æŒ‡å®šç±»å‹æˆ–æŒ‡å®šannotationæ‰€å®šä¹‰çš„æ•°æ®ã€‚
+ * <code>DataResolver</code>è¢«ç”¨æ¥å°†é€‚å½“çš„æ•°æ®æ³¨å…¥åˆ°æ–¹æ³•çš„å‚æ•°ã€å¯¹è±¡çš„propertyä¸­ã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface DataResolverService {
     /**
-     * È¡µÃÖ¸¶¨genericÀàĞÍ¡¢Ö¸¶¨annotationsµÄ²ÎÊı»òpropertyµÄÊı¾İ½âÎöÆ÷¡£
+     * å–å¾—æŒ‡å®šgenericç±»å‹ã€æŒ‡å®šannotationsçš„å‚æ•°æˆ–propertyçš„æ•°æ®è§£æå™¨ã€‚
      */
     DataResolver getDataResolver(Type type, Annotation[] annotations, Object... extraInfo)
             throws DataResolverNotFoundException;
 
     /**
-     * È¡µÃÖ¸¶¨·½·¨µÄ²ÎÊıÀàĞÍµÄÊı¾İ½âÎöÆ÷¡£
+     * å–å¾—æŒ‡å®šæ–¹æ³•çš„å‚æ•°ç±»å‹çš„æ•°æ®è§£æå™¨ã€‚
      */
     DataResolver[] getParameterResolvers(Method method, Object... extraInfo) throws DataResolverNotFoundException;
 }

@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.citrus.util.internal.webpagelite.ServletRequestContext;
 
 /**
- * µ÷ÓÃ<code>SchemaExportWEB</code>£¬ÏÔÊ¾Ò³Ãæ¡£
+ * è°ƒç”¨<code>SchemaExportWEB</code>ï¼Œæ˜¾ç¤ºé¡µé¢ã€‚
  * 
  * @author Michael Zhou
  */

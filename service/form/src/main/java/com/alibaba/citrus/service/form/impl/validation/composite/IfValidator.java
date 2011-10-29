@@ -35,7 +35,7 @@ import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 
 /**
- * ÓÃÓÚÌõ¼şÅĞ¶ÏµÄvalidator¡£
+ * ç”¨äºæ¡ä»¶åˆ¤æ–­çš„validatorã€‚
  * 
  * @author Michael Zhou
  */

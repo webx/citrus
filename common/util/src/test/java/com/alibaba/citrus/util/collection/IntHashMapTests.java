@@ -29,7 +29,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>IntHashMap</code>Àà¡£
+ * æµ‹è¯•<code>IntHashMap</code>ç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -40,18 +40,18 @@ public class IntHashMapTests {
 
     @Before
     public void init() {
-        // map1²âÊÔÒ»°ãÇé¿ö.
+        // map1æµ‹è¯•ä¸€èˆ¬æƒ…å†µ.
         map1 = new IntHashMap<String>();
 
         map1.put(111, "aaa");
         map1.put(222, "bbb");
         map1.put(333, "ccc");
 
-        // map2²âÊÔvalueÎªnullµÄÇé¿ö.
+        // map2æµ‹è¯•valueä¸ºnullçš„æƒ…å†µ.
         map2 = new IntHashMap<String>();
         map2.put(111, null);
 
-        // map3Îª¿Õ.
+        // map3ä¸ºç©º.
         map3 = new IntHashMap<Integer>();
     }
 
@@ -125,19 +125,19 @@ public class IntHashMapTests {
 
     @Test
     public void put() {
-        assertEquals("aaa", map1.put(111, "111+111")); // Ìæ»»111
-        assertEquals(null, map1.put(444, "222+222")); // ĞÂÔö444
+        assertEquals("aaa", map1.put(111, "111+111")); // æ›¿æ¢111
+        assertEquals(null, map1.put(444, "222+222")); // æ–°å¢444
         assertEquals("111+111", map1.get(111));
         assertEquals("222+222", map1.get(444));
         assertEquals(4, map1.size());
 
-        assertEquals(null, map2.put(111, "222+222")); // Ìæ»»111
-        assertEquals(null, map2.put(333, "333+333")); // ĞÂÔö333
+        assertEquals(null, map2.put(111, "222+222")); // æ›¿æ¢111
+        assertEquals(null, map2.put(333, "333+333")); // æ–°å¢333
         assertEquals("222+222", map2.get(111));
         assertEquals("333+333", map2.get(333));
         assertEquals(2, map2.size());
 
-        assertEquals(null, map3.put(111, 1111)); // ĞÂÔö111
+        assertEquals(null, map3.put(111, 1111)); // æ–°å¢111
         assertEquals(1111, map3.get(111).intValue());
         assertEquals(1, map3.size());
     }
@@ -193,24 +193,24 @@ public class IntHashMapTests {
     }
 
     /**
-     * ²âÊÔµ±hash±íÖĞµÄÏîÊı³¬¹ıãĞÖµÊ±µÄ±íÏÖ.
+     * æµ‹è¯•å½“hashè¡¨ä¸­çš„é¡¹æ•°è¶…è¿‡é˜ˆå€¼æ—¶çš„è¡¨ç°.
      */
     @Test
     public void resize() {
-        // È¡µÃ³õÊ¼ÈİÁ¿ºÍãĞÖµ.
+        // å–å¾—åˆå§‹å®¹é‡å’Œé˜ˆå€¼.
         int capacity = map3.getCapacity();
         int threshold = map3.getThreshold();
 
-        // Ô¤¼ÆÀ©ÈİÈı´Î.
+        // é¢„è®¡æ‰©å®¹ä¸‰æ¬¡.
         int max = threshold * 4 + 1;
 
         /**
-         * ·ÅÈë×ã¹»¶àµÄÏîµ½hash±íÖĞ, È·±£ÏîÊı³¬¹ıãĞÖµ.
+         * æ”¾å…¥è¶³å¤Ÿå¤šçš„é¡¹åˆ°hashè¡¨ä¸­, ç¡®ä¿é¡¹æ•°è¶…è¿‡é˜ˆå€¼.
          */
         for (int i = 0; i < max; i++) {
             map3.put(i, new Integer(i));
 
-            if (map3.size() > threshold) { // À©Èİ!
+            if (map3.size() > threshold) { // æ‰©å®¹!
                 threshold *= 2;
                 capacity *= 2;
             }
@@ -219,7 +219,7 @@ public class IntHashMapTests {
             assertEquals(threshold, map3.getThreshold());
         }
 
-        /** ¶Á³öËùÓĞÏî, ²¢ÅÅĞò²âÊÔÕıÈ·ĞÔ. */
+        /** è¯»å‡ºæ‰€æœ‰é¡¹, å¹¶æ’åºæµ‹è¯•æ­£ç¡®æ€§. */
         List<String> list;
 
         assertNotNull(list = parseToString(map3));
@@ -237,7 +237,7 @@ public class IntHashMapTests {
     }
 
     /**
-     * ½«map.toString()µÄ½á¹ûÖØĞÂÅÅĞòºóÊä³ö.
+     * å°†map.toString()çš„ç»“æœé‡æ–°æ’åºåè¾“å‡º.
      */
     private List<String> parseToString(IntHashMap<?> map) {
         List<String> list = createArrayList();

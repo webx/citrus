@@ -27,7 +27,7 @@ import com.alibaba.citrus.codegen.MethodBuilder;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ºÍÉú³ÉÀàÏà¹ØµÄ¹¤¾ß¡£
+ * å’Œç”Ÿæˆç±»ç›¸å…³çš„å·¥å…·ã€‚
  * 
  * @author Michael Zhou
  */
@@ -35,9 +35,9 @@ public class CodegenUtil {
     private static final AtomicLong uid = new AtomicLong(System.currentTimeMillis());
 
     /**
-     * Éú³ÉÒ»¸öÎ¨Ò»×Ö·û´®ÀàÃû¡£
+     * ç”Ÿæˆä¸€ä¸ªå”¯ä¸€å­—ç¬¦ä¸²ç±»åã€‚
      * <p>
-     * ËùÉú³ÉµÄÀàÃûºÍÖ¸¶¨<code>baseClass</code>µÄpackageÏàÍ¬¡£
+     * æ‰€ç”Ÿæˆçš„ç±»åå’ŒæŒ‡å®š<code>baseClass</code>çš„packageç›¸åŒã€‚
      * </p>
      */
     public static String generateClassName(Class<?> baseClass) {
@@ -47,9 +47,9 @@ public class CodegenUtil {
     }
 
     /**
-     * Éú³ÉÒ»¸öÎ¨Ò»×Ö·û´®ÀàÃû¡£
+     * ç”Ÿæˆä¸€ä¸ªå”¯ä¸€å­—ç¬¦ä¸²ç±»åã€‚
      * <p>
-     * ËùÉú³ÉµÄÀàÃûµÄpackage±»Ìæ»»³ÉÖ¸¶¨µÄ<code>packageReplacement</code>¡£
+     * æ‰€ç”Ÿæˆçš„ç±»åçš„packageè¢«æ›¿æ¢æˆæŒ‡å®šçš„<code>packageReplacement</code>ã€‚
      * </p>
      */
     public static String generateClassName(Class<?> baseClass, String packageReplacement) {
@@ -59,9 +59,9 @@ public class CodegenUtil {
     }
 
     /**
-     * Éú³ÉÒ»¸öÎ¨Ò»×Ö·û´®ÀàÃû¡£
+     * ç”Ÿæˆä¸€ä¸ªå”¯ä¸€å­—ç¬¦ä¸²ç±»åã€‚
      * <p>
-     * ËùÉú³ÉµÄÀàÃûºÍÖ¸¶¨<code>baseName</code>µÄpackageÏàÍ¬¡£
+     * æ‰€ç”Ÿæˆçš„ç±»åå’ŒæŒ‡å®š<code>baseName</code>çš„packageç›¸åŒã€‚
      * </p>
      */
     public static String generateClassName(String baseName) {
@@ -69,25 +69,25 @@ public class CodegenUtil {
     }
 
     /**
-     * Éú³ÉÒ»¸öÎ¨Ò»×Ö·û´®ÀàÃû¡£
+     * ç”Ÿæˆä¸€ä¸ªå”¯ä¸€å­—ç¬¦ä¸²ç±»åã€‚
      */
     public static String generateClassName(String baseName, String packageReplacement) {
         baseName = StringUtil.trimToEmpty(baseName);
         packageReplacement = StringUtil.trim(packageReplacement);
 
-        // È¡µÃbaseNameµÄpackage
+        // å–å¾—baseNameçš„package
         int index = baseName.lastIndexOf('.');
 
         if (packageReplacement == null && index > 0) {
             packageReplacement = baseName.substring(0, index);
         }
 
-        // È¡µÃ²»°üº¬packageµÄbaseName
+        // å–å¾—ä¸åŒ…å«packageçš„baseName
         if (index > 0) {
             baseName = baseName.substring(index + 1);
         }
 
-        // ¼ÆËãclassName
+        // è®¡ç®—className
         String className = "$" + baseName + "_" + uid();
 
         if (!StringUtil.isEmpty(packageReplacement)) {
@@ -98,14 +98,14 @@ public class CodegenUtil {
     }
 
     /**
-     * È¡µÃUID¡£
+     * å–å¾—UIDã€‚
      */
     private static String uid() {
         return StringUtil.longToString(uid.incrementAndGet());
     }
 
     /**
-     * ´´½¨Ä¬ÈÏ¹¹Ôìº¯Êı¡£
+     * åˆ›å»ºé»˜è®¤æ„é€ å‡½æ•°ã€‚
      */
     public static void addDefaultConstructor(ClassBuilder cb) {
         MethodBuilder mb = cb.addConstructor(null, null);
@@ -117,7 +117,7 @@ public class CodegenUtil {
     }
 
     /**
-     * ´´½¨Ò»¸ö·µ»Ø³£Á¿µÄ<code>toString()</code>·½·¨¡£
+     * åˆ›å»ºä¸€ä¸ªè¿”å›å¸¸é‡çš„<code>toString()</code>æ–¹æ³•ã€‚
      */
     public static void addToString(ClassBuilder cb, String constantToString) {
         MethodBuilder mb = cb.addMethod(String.class, "toString", null, null);

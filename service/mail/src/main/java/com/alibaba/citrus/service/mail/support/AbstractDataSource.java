@@ -25,7 +25,7 @@ import java.io.OutputStream;
 import javax.activation.DataSource;
 
 /**
- * ±ãÓÚÊµÏÖµÄ<code>DataSource</code>»ùÀà¡£
+ * ä¾¿äºå®ç°çš„<code>DataSource</code>åŸºç±»ã€‚
  * 
  * @author Michael Zhou
  */

@@ -28,7 +28,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ÊµÏÖÁË<code>RequestContext</code>½Ó¿Ú£¬°üº¬request¡¢responseºÍservletContextµÄĞÅÏ¢¡£
+ * å®ç°äº†<code>RequestContext</code>æ¥å£ï¼ŒåŒ…å«requestã€responseå’ŒservletContextçš„ä¿¡æ¯ã€‚
  * 
  * @author Michael Zhou
  */
@@ -38,11 +38,11 @@ public class SimpleRequestContext implements RequestContext {
     private final HttpServletResponse response;
 
     /**
-     * ´´½¨Ò»¸öĞÂµÄ<code>RequestContext</code>¶ÔÏó¡£
+     * åˆ›å»ºä¸€ä¸ªæ–°çš„<code>RequestContext</code>å¯¹è±¡ã€‚
      * 
-     * @param servletContext µ±Ç°ÇëÇóËùÔÚµÄ<code>ServletContext</code>
-     * @param request <code>HttpServletRequest</code>¶ÔÏó
-     * @param response <code>HttpServletResponse</code>¶ÔÏó
+     * @param servletContext å½“å‰è¯·æ±‚æ‰€åœ¨çš„<code>ServletContext</code>
+     * @param request <code>HttpServletRequest</code>å¯¹è±¡
+     * @param response <code>HttpServletResponse</code>å¯¹è±¡
      */
     public SimpleRequestContext(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response) {
         this.servletContext = assertNotNull(servletContext, "servletContext");
@@ -51,57 +51,57 @@ public class SimpleRequestContext implements RequestContext {
     }
 
     /**
-     * È¡µÃ±»°ü×°µÄcontext¡£
+     * å–å¾—è¢«åŒ…è£…çš„contextã€‚
      * 
-     * @return ±»°ü×°µÄ<code>RequestContext</code>¶ÔÏó
+     * @return è¢«åŒ…è£…çš„<code>RequestContext</code>å¯¹è±¡
      */
     public RequestContext getWrappedRequestContext() {
         return null;
     }
 
     /**
-     * È¡µÃservletContext¶ÔÏó¡£
+     * å–å¾—servletContextå¯¹è±¡ã€‚
      * 
-     * @return <code>ServletContext</code>¶ÔÏó
+     * @return <code>ServletContext</code>å¯¹è±¡
      */
     public ServletContext getServletContext() {
         return servletContext;
     }
 
     /**
-     * È¡µÃrequest¶ÔÏó¡£
+     * å–å¾—requestå¯¹è±¡ã€‚
      * 
-     * @return <code>HttpServletRequest</code>¶ÔÏó
+     * @return <code>HttpServletRequest</code>å¯¹è±¡
      */
     public HttpServletRequest getRequest() {
         return request;
     }
 
     /**
-     * È¡µÃresponse¶ÔÏó¡£
+     * å–å¾—responseå¯¹è±¡ã€‚
      * 
-     * @return <code>HttpServletResponse</code>¶ÔÏó
+     * @return <code>HttpServletResponse</code>å¯¹è±¡
      */
     public HttpServletResponse getResponse() {
         return response;
     }
 
     /**
-     * ¿ªÊ¼Ò»¸öÇëÇó¡£
+     * å¼€å§‹ä¸€ä¸ªè¯·æ±‚ã€‚
      */
     public void prepare() {
     }
 
     /**
-     * ½áÊøÒ»¸öÇëÇó¡£
+     * ç»“æŸä¸€ä¸ªè¯·æ±‚ã€‚
      */
     public void commit() {
     }
 
     /**
-     * ÏÔÊ¾µ±Ç°<code>RequestContext</code>µÄÄÚÈİ¡£
+     * æ˜¾ç¤ºå½“å‰<code>RequestContext</code>çš„å†…å®¹ã€‚
      * 
-     * @return ×Ö·û´®±íÊ¾
+     * @return å­—ç¬¦ä¸²è¡¨ç¤º
      */
     @Override
     public String toString() {

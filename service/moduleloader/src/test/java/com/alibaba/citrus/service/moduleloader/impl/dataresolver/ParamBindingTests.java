@@ -49,11 +49,11 @@ public class ParamBindingTests extends AbstractModuleLoaderTests {
         getInvocationContext("/app1?event_submit_do_my_event=yes");
         initRequestContext(factory);
 
-        // screen.execute(ÎŞ²ÎÊı) - Õı³£Ö´ĞĞ
+        // screen.execute(æ— å‚æ•°) - æ­£å¸¸æ‰§è¡Œ
         DataBindingAdapter dbAdapter = (DataBindingAdapter) moduleLoaderService.getModule("screen", "myScreen");
         dbAdapter.execute();
 
-        // screen.execute(´ø²ÎÊı)
+        // screen.execute(å¸¦å‚æ•°)
         try {
             moduleLoaderService.getModule("screen", "myParameterizedScreen");
             fail();
@@ -63,11 +63,11 @@ public class ParamBindingTests extends AbstractModuleLoaderTests {
                     + ": method execute has 2 parameters, but no DataResolvers defined."));
         }
 
-        // action.doMyEvent(ÎŞ²ÎÊı) - Õı³£Ö´ĞĞ
+        // action.doMyEvent(æ— å‚æ•°) - æ­£å¸¸æ‰§è¡Œ
         ActionEventAdapter aeAdapter = (ActionEventAdapter) moduleLoaderService.getModule("action", "myAction");
         aeAdapter.execute();
 
-        // action.doMyEvent(´ø²ÎÊı)
+        // action.doMyEvent(å¸¦å‚æ•°)
         try {
             moduleLoaderService.getModule("action", "myParameterizedAction");
             fail();
@@ -109,27 +109,27 @@ public class ParamBindingTests extends AbstractModuleLoaderTests {
         getInvocationContext("/app1?event_submit_do_my_event=yes");
         initRequestContext(factory);
 
-        // screen.execute(ÎŞ²ÎÊı)
+        // screen.execute(æ— å‚æ•°)
         DataBindingAdapter dbAdapter = (DataBindingAdapter) moduleLoaderService.getModule("screen", "myScreen");
         dbAdapter.execute();
         assertEquals("MyScreen.execute()", request.getAttribute("screenLog"));
 
-        // screen.execute(´ø²ÎÊı)
+        // screen.execute(å¸¦å‚æ•°)
         dbAdapter = (DataBindingAdapter) moduleLoaderService.getModule("screen", "myParameterizedScreen");
         dbAdapter.execute();
         assertEquals("MyParameterizedScreen.execute(request, 111)", request.getAttribute("screenLog"));
 
-        // action.doMyEvent(ÎŞ²ÎÊı) - Õı³£Ö´ĞĞ
+        // action.doMyEvent(æ— å‚æ•°) - æ­£å¸¸æ‰§è¡Œ
         ActionEventAdapter aeAdapter = (ActionEventAdapter) moduleLoaderService.getModule("action", "myAction");
         aeAdapter.execute();
         assertEquals("MyAction.doMyEvent()", request.getAttribute("actionLog"));
 
-        // action.doMyEvent(´ø²ÎÊı)
+        // action.doMyEvent(å¸¦å‚æ•°)
         aeAdapter = (ActionEventAdapter) moduleLoaderService.getModule("action", "myParameterizedAction");
         aeAdapter.execute();
         assertEquals("MyParameterizedAction.doMyEvent(request, 222)", request.getAttribute("actionLog"));
 
-        // action.doMyEvent(´øprimitive²ÎÊı)
+        // action.doMyEvent(å¸¦primitiveå‚æ•°)
         getInvocationContext("/app1?event_submit_do_my_event_primitive=yes");
         initRequestContext(factory);
 
@@ -145,14 +145,14 @@ public class ParamBindingTests extends AbstractModuleLoaderTests {
         getInvocationContext("/app1?event_submit_do_my_event=yes");
         initRequestContext(factory);
 
-        // screen.execute(@skip) - ²»»áÕæµÄskip£¬Ö»ÊÇ²ÎÊıÎªnull
+        // screen.execute(@skip) - ä¸ä¼šçœŸçš„skipï¼Œåªæ˜¯å‚æ•°ä¸ºnull
         DataBindingAdapter dbAdapter = (DataBindingAdapter) moduleLoaderService
                 .getModule("screen", "mySkippableScreen");
         dbAdapter.execute();
 
         assertEquals("result is haha", request.getAttribute("screenLog"));
 
-        // screen.execute(@skip primitive type) - ²»»áÕæµÄskip£¬Ö»ÊÇ²ÎÊıÎªfalse
+        // screen.execute(@skip primitive type) - ä¸ä¼šçœŸçš„skipï¼Œåªæ˜¯å‚æ•°ä¸ºfalse
         dbAdapter = (DataBindingAdapter) moduleLoaderService.getModule("screen", "mySkippableScreen2");
         dbAdapter.execute();
 
@@ -166,12 +166,12 @@ public class ParamBindingTests extends AbstractModuleLoaderTests {
         getInvocationContext("/app1?event_submit_do_my_event=yes");
         initRequestContext(factory);
 
-        // action.doMyEvent(@skip) - ±»skipºó£¬²»Ö´ĞĞ£¬µ«before/afterExecutionÈÔÖ´ĞĞ¡£
+        // action.doMyEvent(@skip) - è¢«skipåï¼Œä¸æ‰§è¡Œï¼Œä½†before/afterExecutionä»æ‰§è¡Œã€‚
         ActionEventAdapter aeAdapter = (ActionEventAdapter) moduleLoaderService
                 .getModule("action", "mySkippableAction");
         aeAdapter.execute();
 
-        assertEquals(null /* ²»ÊÇ"result is null" */, request.getAttribute("actionLog"));
+        assertEquals(null /* ä¸æ˜¯"result is null" */, request.getAttribute("actionLog"));
         assertEquals("result is haha", request.getAttribute("actionLog.before"));
         assertEquals("result is haha", request.getAttribute("actionLog.after"));
     }
@@ -183,11 +183,11 @@ public class ParamBindingTests extends AbstractModuleLoaderTests {
         getInvocationContext("/app1?event_submit_do_my_event=yes");
         initRequestContext(factory);
 
-        // action.execute(@skip) - ±»skipºó£¬²»Ö´ĞĞ¡£
+        // action.execute(@skip) - è¢«skipåï¼Œä¸æ‰§è¡Œã€‚
         DataBindingAdapter dbAdapter = (DataBindingAdapter) moduleLoaderService.getModule("action",
                 "mySkippableAction2");
         dbAdapter.execute();
 
-        assertEquals(null /* ²»ÊÇ"result is null" */, request.getAttribute("actionLog"));
+        assertEquals(null /* ä¸æ˜¯"result is null" */, request.getAttribute("actionLog"));
     }
 }

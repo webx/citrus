@@ -33,27 +33,27 @@ import com.alibaba.citrus.test.runner.Prototyped.TestData;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
 
 /**
- * ²âÊÔ{@link WildcardTypeInfo}¡£
+ * æµ‹è¯•{@link WildcardTypeInfo}ã€‚
  * 
  * @author Michael Zhou
  */
 @RunWith(Prototyped.class)
 public class WildcardTypeTests extends BaseTypeTests implements Cloneable {
     private transient WildcardTypeInfo typeInfo;
-    private Class<?> ownerType; // ?ËùÔÚµÄÀà
-    private String methodName; // ?ËùÔÚµÄ·½·¨Ãû
+    private Class<?> ownerType; // ?æ‰€åœ¨çš„ç±»
+    private String methodName; // ?æ‰€åœ¨çš„æ–¹æ³•å
     private String baseType; // baseType.toString()
     private String upperBounds; // upper bounds toString
     private String lowerBounds; // lower bounds toString
     private Class<?> rawType; // rawClass
-    private String name; // Ãû³Æ
-    private boolean array; // ÊÇ²»ÊÇarray£¿
-    private int dimension; // Êı×éÎ¬¶È
-    private TypeInfo componentType; // Êı×éÔªËØÀàĞÍ
-    private TypeInfo directComponentType; // Êı×éÖ±½Ó³ÉÔ±ÀàĞÍ
-    private String toString; // toString½á¹û
-    private String[] supertypes; // ¸¸Àà¡¢½Ó¿Ú
-    private String resolved; // resolve½á¹û
+    private String name; // åç§°
+    private boolean array; // æ˜¯ä¸æ˜¯arrayï¼Ÿ
+    private int dimension; // æ•°ç»„ç»´åº¦
+    private TypeInfo componentType; // æ•°ç»„å…ƒç´ ç±»å‹
+    private TypeInfo directComponentType; // æ•°ç»„ç›´æ¥æˆå‘˜ç±»å‹
+    private String toString; // toStringç»“æœ
+    private String[] supertypes; // çˆ¶ç±»ã€æ¥å£
+    private String resolved; // resolveç»“æœ
     private ClassTypeInfo context; // resolve context
 
     @Before
@@ -113,7 +113,7 @@ public class WildcardTypeTests extends BaseTypeTests implements Cloneable {
         WildcardTypeTests prototype;
 
         // =========================
-        // ÆÕÍ¨wildcard£º<?>
+        // æ™®é€šwildcardï¼š<?>
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClass.class;
@@ -151,7 +151,7 @@ public class WildcardTypeTests extends BaseTypeTests implements Cloneable {
         prototype.context = null;
 
         // =========================
-        // rawClass×÷Îªupper bounds£º<? extends Number>
+        // rawClassä½œä¸ºupper boundsï¼š<? extends Number>
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClass.class;
@@ -171,7 +171,7 @@ public class WildcardTypeTests extends BaseTypeTests implements Cloneable {
         prototype.context = null;
 
         // =========================
-        // rawClass×÷Îªlower bounds£º<? super Number>
+        // rawClassä½œä¸ºlower boundsï¼š<? super Number>
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClass.class;
@@ -191,7 +191,7 @@ public class WildcardTypeTests extends BaseTypeTests implements Cloneable {
         prototype.context = null;
 
         // =========================
-        // parameterized type×÷Îªupper bounds£º<? extends List<String>>
+        // parameterized typeä½œä¸ºupper boundsï¼š<? extends List<String>>
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClass.class;
@@ -211,7 +211,7 @@ public class WildcardTypeTests extends BaseTypeTests implements Cloneable {
         prototype.context = null;
 
         // =========================
-        // parameterized type×÷Îªlower bounds£º<? super List<String>>
+        // parameterized typeä½œä¸ºlower boundsï¼š<? super List<String>>
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClass.class;
@@ -231,7 +231,7 @@ public class WildcardTypeTests extends BaseTypeTests implements Cloneable {
         prototype.context = null;
 
         // =========================
-        // Êı×é×÷Îªupper bounds: <? extends int[]>, <? extends int[][]>,
+        // æ•°ç»„ä½œä¸ºupper bounds: <? extends int[]>, <? extends int[][]>,
         // <? extends List<String>[]>, <? extends List<String>[][]>
         // -----------------
         prototype = data.newPrototype();
@@ -309,7 +309,7 @@ public class WildcardTypeTests extends BaseTypeTests implements Cloneable {
         prototype.context = null;
 
         // =========================
-        // Êı×é×÷Îªlower bounds: <? super String[][]>, <? super List<String>[]>
+        // æ•°ç»„ä½œä¸ºlower bounds: <? super String[][]>, <? super List<String>[]>
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClass.class;
@@ -347,7 +347,7 @@ public class WildcardTypeTests extends BaseTypeTests implements Cloneable {
         prototype.context = null;
 
         // =========================
-        // Type var×÷Îªupper bounds: <? extends T>, <? extends T[][]>
+        // Type varä½œä¸ºupper bounds: <? extends T>, <? extends T[][]>
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClass.class;
@@ -405,7 +405,7 @@ public class WildcardTypeTests extends BaseTypeTests implements Cloneable {
         prototype.context = factory.getParameterizedType(TestClass.class, Integer.class);
 
         // =========================
-        // Type var×÷Îªlower bounds:
+        // Type varä½œä¸ºlower bounds:
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClass.class;
@@ -428,7 +428,7 @@ public class WildcardTypeTests extends BaseTypeTests implements Cloneable {
     }
 
     /**
-     * {@link TypeVariableInfo}¹¦ÄÜ¡£
+     * {@link TypeVariableInfo}åŠŸèƒ½ã€‚
      */
     @Test
     public void bounds() {

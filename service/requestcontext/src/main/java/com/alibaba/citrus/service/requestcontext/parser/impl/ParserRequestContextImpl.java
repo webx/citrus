@@ -42,7 +42,7 @@ import com.alibaba.citrus.service.upload.UploadService;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ×Ô¶¯½âÎörequest parametersºÍcookie parameters£¬²¢Í¸Ã÷µØ´¦ÀíuploadÇëÇóµÄrequest contextÊµÏÖ¡£
+ * è‡ªåŠ¨è§£ærequest parameterså’Œcookie parametersï¼Œå¹¶é€æ˜åœ°å¤„ç†uploadè¯·æ±‚çš„request contextå®ç°ã€‚
  */
 public class ParserRequestContextImpl extends AbstractRequestContextWrapper implements ParserRequestContext {
     private PropertyEditorRegistrar propertyEditorRegistrar;
@@ -61,9 +61,9 @@ public class ParserRequestContextImpl extends AbstractRequestContextWrapper impl
     private CookieParser cookies;
 
     /**
-     * °ü×°Ò»¸ö<code>RequestContext</code>¶ÔÏó¡£
+     * åŒ…è£…ä¸€ä¸ª<code>RequestContext</code>å¯¹è±¡ã€‚
      * 
-     * @param wrappedContext ±»°ü×°µÄ<code>RequestContext</code>
+     * @param wrappedContext è¢«åŒ…è£…çš„<code>RequestContext</code>
      */
     public ParserRequestContextImpl(RequestContext wrappedContext) {
         super(wrappedContext);
@@ -71,167 +71,167 @@ public class ParserRequestContextImpl extends AbstractRequestContextWrapper impl
     }
 
     /**
-     * È¡µÃÓÃÀ´×ª»»²ÎÊıÀàĞÍµÄpropertyEditor×¢²áÆ÷¡£
+     * å–å¾—ç”¨æ¥è½¬æ¢å‚æ•°ç±»å‹çš„propertyEditoræ³¨å†Œå™¨ã€‚
      */
     public PropertyEditorRegistrar getPropertyEditorRegistrar() {
         return propertyEditorRegistrar;
     }
 
     /**
-     * ÉèÖÃÓÃÀ´×ª»»²ÎÊıÀàĞÍµÄpropertyEditor×¢²áÆ÷¡£
+     * è®¾ç½®ç”¨æ¥è½¬æ¢å‚æ•°ç±»å‹çš„propertyEditoræ³¨å†Œå™¨ã€‚
      */
     public void setPropertyEditorRegistrar(PropertyEditorRegistrar propertyEditorRegistrar) {
         this.propertyEditorRegistrar = propertyEditorRegistrar;
     }
 
     /**
-     * ÀàĞÍ×ª»»³ö´íÊ±£¬ÊÇ·ñ²»±¨´í£¬¶øÊÇ·µ»ØÄ¬ÈÏÖµ¡£
+     * ç±»å‹è½¬æ¢å‡ºé”™æ—¶ï¼Œæ˜¯å¦ä¸æŠ¥é”™ï¼Œè€Œæ˜¯è¿”å›é»˜è®¤å€¼ã€‚
      */
     public boolean isConverterQuiet() {
         return converterQuiet;
     }
 
     /**
-     * ÉèÖÃÀàĞÍ×ª»»³ö´íÊ±£¬ÊÇ·ñ²»±¨´í£¬¶øÊÇ·µ»ØÄ¬ÈÏÖµ¡£
+     * è®¾ç½®ç±»å‹è½¬æ¢å‡ºé”™æ—¶ï¼Œæ˜¯å¦ä¸æŠ¥é”™ï¼Œè€Œæ˜¯è¿”å›é»˜è®¤å€¼ã€‚
      */
     public void setConverterQuiet(boolean converterQuiet) {
         this.converterQuiet = converterQuiet;
     }
 
     /**
-     * ÊÇ·ñ×Ô¶¯Ö´ĞĞUpload¡£
+     * æ˜¯å¦è‡ªåŠ¨æ‰§è¡ŒUploadã€‚
      */
     public boolean isAutoUpload() {
         return autoUpload;
     }
 
     /**
-     * ÊÇ·ñ×Ô¶¯Ö´ĞĞUpload¡£
+     * æ˜¯å¦è‡ªåŠ¨æ‰§è¡ŒUploadã€‚
      */
     public void setAutoUpload(boolean autoUpload) {
         this.autoUpload = autoUpload;
     }
 
     /**
-     * °´ÕÕÖ¸¶¨µÄ·ç¸ñ×ª»»parametersºÍcookiesµÄÃû³Æ£¬Ä¬ÈÏÎª¡°Ğ¡Ğ´¼ÓÏÂ»®Ïß¡±¡£
+     * æŒ‰ç…§æŒ‡å®šçš„é£æ ¼è½¬æ¢parameterså’Œcookiesçš„åç§°ï¼Œé»˜è®¤ä¸ºâ€œå°å†™åŠ ä¸‹åˆ’çº¿â€ã€‚
      */
     public String getCaseFolding() {
         return caseFolding;
     }
 
     /**
-     * °´ÕÕÖ¸¶¨µÄ·ç¸ñ×ª»»parametersºÍcookiesµÄÃû³Æ£¬Ä¬ÈÏÎª¡°Ğ¡Ğ´¼ÓÏÂ»®Ïß¡±¡£
+     * æŒ‰ç…§æŒ‡å®šçš„é£æ ¼è½¬æ¢parameterså’Œcookiesçš„åç§°ï¼Œé»˜è®¤ä¸ºâ€œå°å†™åŠ ä¸‹åˆ’çº¿â€ã€‚
      */
     public void setCaseFolding(String folding) {
         this.caseFolding = folding;
     }
 
     /**
-     * ÊÇ·ñ¶Ô²ÎÊı½øĞĞHTML entities½âÂë£¬Ä¬ÈÏÎª<code>false</code>¡£
+     * æ˜¯å¦å¯¹å‚æ•°è¿›è¡ŒHTML entitiesè§£ç ï¼Œé»˜è®¤ä¸º<code>false</code>ã€‚
      */
     public boolean isUnescapeParameters() {
         return unescapeParameters;
     }
 
     /**
-     * ÊÇ·ñ¶Ô²ÎÊı½øĞĞHTML entities½âÂë£¬Ä¬ÈÏÎª<code>false</code>¡£
+     * æ˜¯å¦å¯¹å‚æ•°è¿›è¡ŒHTML entitiesè§£ç ï¼Œé»˜è®¤ä¸º<code>false</code>ã€‚
      */
     public void setUnescapeParameters(boolean unescapeParameters) {
         this.unescapeParameters = unescapeParameters;
     }
 
     /**
-     * ÊÇ·ñÊ¹ÓÃservletÒıÇæµÄparser£¬Ä¬ÈÏÎª<code>false</code>¡£
+     * æ˜¯å¦ä½¿ç”¨servletå¼•æ“çš„parserï¼Œé»˜è®¤ä¸º<code>false</code>ã€‚
      */
     public void setUseServletEngineParser(boolean useServletEngineParser) {
         this.useServletEngineParser = useServletEngineParser;
     }
 
     /**
-     * ÊÇ·ñÊ¹ÓÃservletÒıÇæµÄparser£¬Ä¬ÈÏÎª<code>false</code>¡£
+     * æ˜¯å¦ä½¿ç”¨servletå¼•æ“çš„parserï¼Œé»˜è®¤ä¸º<code>false</code>ã€‚
      */
     public boolean isUseServletEngineParser() {
         return useServletEngineParser;
     }
 
     /**
-     * ÊÇ·ñÒÔrequest.setCharacterEncodingËùÖ¸¶¨µÄ±àÂëÀ´½âÎöquery£¬Ä¬ÈÏÎª<code>true</code>¡£
+     * æ˜¯å¦ä»¥request.setCharacterEncodingæ‰€æŒ‡å®šçš„ç¼–ç æ¥è§£æqueryï¼Œé»˜è®¤ä¸º<code>true</code>ã€‚
      */
     public boolean isUseBodyEncodingForURI() {
         return useBodyEncodingForURI;
     }
 
     /**
-     * ÊÇ·ñÒÔrequest.setCharacterEncodingËùÖ¸¶¨µÄ±àÂëÀ´½âÎöquery£¬Ä¬ÈÏÎª<code>true</code>¡£
+     * æ˜¯å¦ä»¥request.setCharacterEncodingæ‰€æŒ‡å®šçš„ç¼–ç æ¥è§£æqueryï¼Œé»˜è®¤ä¸º<code>true</code>ã€‚
      */
     public void setUseBodyEncodingForURI(boolean useBodyEncodingForURI) {
         this.useBodyEncodingForURI = useBodyEncodingForURI;
     }
 
     /**
-     * µ±<code>useServletEngineParser==false</code>²¢ÇÒ
-     * <code>useBodyEncodingForURI=false</code>Ê±£¬ÓÃ¸Ã±àÂëÀ´½âÊÍGETÇëÇóµÄ²ÎÊı¡£
+     * å½“<code>useServletEngineParser==false</code>å¹¶ä¸”
+     * <code>useBodyEncodingForURI=false</code>æ—¶ï¼Œç”¨è¯¥ç¼–ç æ¥è§£é‡ŠGETè¯·æ±‚çš„å‚æ•°ã€‚
      */
     public String getURIEncoding() {
         return uriEncoding;
     }
 
     /**
-     * µ±<code>useServletEngineParser==false</code>²¢ÇÒ
-     * <code>useBodyEncodingForURI=false</code>Ê±£¬ÓÃ¸Ã±àÂëÀ´½âÊÍGETÇëÇóµÄ²ÎÊı¡£
+     * å½“<code>useServletEngineParser==false</code>å¹¶ä¸”
+     * <code>useBodyEncodingForURI=false</code>æ—¶ï¼Œç”¨è¯¥ç¼–ç æ¥è§£é‡ŠGETè¯·æ±‚çš„å‚æ•°ã€‚
      */
     public void setURIEncoding(String uriEncoding) {
         this.uriEncoding = uriEncoding;
     }
 
     /**
-     * ÊÇ·ñ¶ÔÊäÈë²ÎÊı½øĞĞtrimming¡£Ä¬ÈÏÎª<code>true</code>¡£
+     * æ˜¯å¦å¯¹è¾“å…¥å‚æ•°è¿›è¡Œtrimmingã€‚é»˜è®¤ä¸º<code>true</code>ã€‚
      */
     public boolean isTrimming() {
         return trimming;
     }
 
     /**
-     * ÊÇ·ñ¶ÔÊäÈë²ÎÊı½øĞĞtrimming¡£Ä¬ÈÏÎª<code>true</code>¡£
+     * æ˜¯å¦å¯¹è¾“å…¥å‚æ•°è¿›è¡Œtrimmingã€‚é»˜è®¤ä¸º<code>true</code>ã€‚
      */
     public void setTrimming(boolean trimming) {
         this.trimming = trimming;
     }
 
     /**
-     * ÉèÖÃupload service¡£
+     * è®¾ç½®upload serviceã€‚
      * 
-     * @param upload <code>UploadService</code>¶ÔÏó
+     * @param upload <code>UploadService</code>å¯¹è±¡
      */
     public void setUploadService(UploadService upload) {
         this.upload = upload;
     }
 
     /**
-     * ÉèÖÃÓÃÓÚ¹ıÂË²ÎÊıµÄfilters¡£
+     * è®¾ç½®ç”¨äºè¿‡æ»¤å‚æ•°çš„filtersã€‚
      */
     public void setParameterParserFilters(ParameterParserFilter[] filters) {
         this.filters = filters;
     }
 
     /**
-     * È¡µÃ´ú±íHTML×Ö¶ÎµÄºó×º¡£
+     * å–å¾—ä»£è¡¨HTMLå­—æ®µçš„åç¼€ã€‚
      */
     public String getHtmlFieldSuffix() {
         return htmlFieldSuffix;
     }
 
     /**
-     * ÉèÖÃ´ú±íHTML×Ö¶ÎµÄºó×º¡£
+     * è®¾ç½®ä»£è¡¨HTMLå­—æ®µçš„åç¼€ã€‚
      */
     public void setHtmlFieldSuffix(String htmlFieldSuffix) {
         this.htmlFieldSuffix = htmlFieldSuffix;
     }
 
     /**
-     * È¡µÃËùÓĞquery²ÎÊı¡£µÚÒ»´ÎÖ´ĞĞ´Ë·½·¨Ê±£¬½«»á½âÎörequest£¬´ÓÖĞÈ¡µÃËùÓĞµÄ²ÎÊı¡£
+     * å–å¾—æ‰€æœ‰queryå‚æ•°ã€‚ç¬¬ä¸€æ¬¡æ‰§è¡Œæ­¤æ–¹æ³•æ—¶ï¼Œå°†ä¼šè§£ærequestï¼Œä»ä¸­å–å¾—æ‰€æœ‰çš„å‚æ•°ã€‚
      * 
-     * @return <code>ParameterParser</code>ÊµÀı
+     * @return <code>ParameterParser</code>å®ä¾‹
      */
     public ParameterParser getParameters() {
         if (parameters == null) {
@@ -242,9 +242,9 @@ public class ParserRequestContextImpl extends AbstractRequestContextWrapper impl
     }
 
     /**
-     * È¡µÃËùÓĞcookie¡£µÚÒ»´ÎÖ´ĞĞ´Ë·½·¨Ê±£¬½«»á½âÎörequest£¬´ÓÖĞÈ¡µÃËùÓĞcookies¡£
+     * å–å¾—æ‰€æœ‰cookieã€‚ç¬¬ä¸€æ¬¡æ‰§è¡Œæ­¤æ–¹æ³•æ—¶ï¼Œå°†ä¼šè§£ærequestï¼Œä»ä¸­å–å¾—æ‰€æœ‰cookiesã€‚
      * 
-     * @return <code>CookieParser</code>ÊµÀı
+     * @return <code>CookieParser</code>å®ä¾‹
      */
     public CookieParser getCookies() {
         if (cookies == null) {
@@ -255,10 +255,10 @@ public class ParserRequestContextImpl extends AbstractRequestContextWrapper impl
     }
 
     /**
-     * ½«Ö¸¶¨µÄ×Ö·û´®¸ù¾İ<code>getCaseFolding()</code>µÄÉèÖÃ£¬×ª»»³ÉÖ¸¶¨´óĞ¡Ğ´ĞÎÊ½¡£
+     * å°†æŒ‡å®šçš„å­—ç¬¦ä¸²æ ¹æ®<code>getCaseFolding()</code>çš„è®¾ç½®ï¼Œè½¬æ¢æˆæŒ‡å®šå¤§å°å†™å½¢å¼ã€‚
      * 
-     * @param str Òª×ª»»µÄ×Ö·û´®
-     * @return ×ª»»ºóµÄ×Ö·û´®
+     * @param str è¦è½¬æ¢çš„å­—ç¬¦ä¸²
+     * @return è½¬æ¢åçš„å­—ç¬¦ä¸²
      */
     public String convertCase(String str) {
         String folding = getCaseFolding();
@@ -279,7 +279,7 @@ public class ParserRequestContextImpl extends AbstractRequestContextWrapper impl
     }
 
     /**
-     * °ü×°request¡£
+     * åŒ…è£…requestã€‚
      */
     private class RequestWrapper extends AbstractRequestWrapper {
         private final ParameterMap parameterMap = new ParameterMap();
@@ -326,7 +326,7 @@ public class ParserRequestContextImpl extends AbstractRequestContextWrapper impl
     }
 
     /**
-     * Ò»¸öÒÔParameterParserÎª»ù´¡µÄmap¡£
+     * ä¸€ä¸ªä»¥ParameterParserä¸ºåŸºç¡€çš„mapã€‚
      */
     private class ParameterMap extends AbstractMap<String, String[]> {
         private final ParameterEntrySet entrySet = new ParameterEntrySet();

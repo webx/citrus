@@ -28,7 +28,7 @@ import com.alibaba.citrus.expr.composite.CompositeExpressionFactory;
 import com.alibaba.citrus.expr.support.MappedExpressionContext;
 
 /**
- * ²âÊÔ<code>CompositeExpression</code>¡£
+ * æµ‹è¯•<code>CompositeExpression</code>ã€‚
  * 
  * @author Michael Zhou
  */

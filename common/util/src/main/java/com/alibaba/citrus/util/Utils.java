@@ -27,7 +27,7 @@ import com.alibaba.citrus.util.internal.StaticFunctionDelegatorBuilder;
 import com.alibaba.citrus.util.io.StreamUtil;
 
 /**
- * ¼¯³É³£ÓÃµÄ¹¤¾ßÀà¡£
+ * é›†æˆå¸¸ç”¨çš„å·¥å…·ç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -90,7 +90,7 @@ public class Utils {
     }
 
     /**
-     * È¡µÃ°üº¬ËùÓĞutilsµÄmap
+     * å–å¾—åŒ…å«æ‰€æœ‰utilsçš„map
      * 
      * @return utils map
      */

@@ -23,7 +23,7 @@ import freemarker.template.ObjectWrapper;
 import freemarker.template.SimpleHash;
 
 /**
- * ½«TemplateContext×ª»»Îªfreemarker model¡£
+ * å°†TemplateContextè½¬æ¢ä¸ºfreemarker modelã€‚
  * 
  * @author Michael Zhou
  */

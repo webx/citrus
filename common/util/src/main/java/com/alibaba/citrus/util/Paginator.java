@@ -20,64 +20,64 @@ package com.alibaba.citrus.util;
 import java.io.Serializable;
 
 /**
- * ·­Ò³Æ÷¡£
+ * ç¿»é¡µå™¨ã€‚
  * <p>
- * ´ËÀà¶ÔÓÚÔÚwebÒ³ÃæÉÏ·ÖÒ³ÏÔÊ¾¶àÏîÄÚÈİ£¬¼ÆËãÒ³ÂëºÍµ±Ç°Ò³µÄÆ«ÒÆÁ¿£¬Ê®·Ö·½±ãÊµÓÃ¡£
+ * æ­¤ç±»å¯¹äºåœ¨webé¡µé¢ä¸Šåˆ†é¡µæ˜¾ç¤ºå¤šé¡¹å†…å®¹ï¼Œè®¡ç®—é¡µç å’Œå½“å‰é¡µçš„åç§»é‡ï¼Œååˆ†æ–¹ä¾¿å®ç”¨ã€‚
  * </p>
  * <p>
- * ¸ÃÀàÖ»ĞèÒªÖªµÀ×Ü¹²ÓĞ¶àÉÙÏî£¬µ±Ç°ÏÔÊ¾Ã¿¼¸Ò³£¬Ã¿Ò³ÏÔÊ¾¼¸Ïî£¬¾Í¿ÉÒÔ°ïÄã¼ÆËã³öÆäËüÊı¾İ£¬¶øÇÒ±£Ö¤ËùÓĞ¼ÆËã¶¼µÃ³öºÏÀíµÄÖµ£¬²»ÓÃµ£ĞÄÒ³Âë³¬³ö±ß½çÖ®ÀàµÄÎÊÌâ¡£
+ * è¯¥ç±»åªéœ€è¦çŸ¥é“æ€»å…±æœ‰å¤šå°‘é¡¹ï¼Œå½“å‰æ˜¾ç¤ºæ¯å‡ é¡µï¼Œæ¯é¡µæ˜¾ç¤ºå‡ é¡¹ï¼Œå°±å¯ä»¥å¸®ä½ è®¡ç®—å‡ºå…¶å®ƒæ•°æ®ï¼Œè€Œä¸”ä¿è¯æ‰€æœ‰è®¡ç®—éƒ½å¾—å‡ºåˆç†çš„å€¼ï¼Œä¸ç”¨æ‹…å¿ƒé¡µç è¶…å‡ºè¾¹ç•Œä¹‹ç±»çš„é—®é¢˜ã€‚
  * </p>
  * <p>
- * Ê¹ÓÃ·½·¨ÈçÏÂ:
+ * ä½¿ç”¨æ–¹æ³•å¦‚ä¸‹:
  * 
  * <pre>
  * <![CDATA[
  * 
- *   // ´´½¨Ò»¸ö·­Ò³Æ÷£¬¿ÉÒÔÔÚ´ËÖ¸¶¨Ã¿Ò³ÏÔÊ¾¼¸Ïî£¬Ò²¿ÉÒÔÒÔºóÔÙÖ¸¶¨¡£
- *   // Èç¹ûÃ»ÓĞÖ¸¶¨£¬ÔòÊ¹ÓÃÄ¬ÈÏÖµÃ¿Ò³×î¶àÏÔÊ¾10Ïî¡£
- *   Paginator pg = new Paginator();        // »ò new Paginator(itemsPerPage);
+ *   // åˆ›å»ºä¸€ä¸ªç¿»é¡µå™¨ï¼Œå¯ä»¥åœ¨æ­¤æŒ‡å®šæ¯é¡µæ˜¾ç¤ºå‡ é¡¹ï¼Œä¹Ÿå¯ä»¥ä»¥åå†æŒ‡å®šã€‚
+ *   // å¦‚æœæ²¡æœ‰æŒ‡å®šï¼Œåˆ™ä½¿ç”¨é»˜è®¤å€¼æ¯é¡µæœ€å¤šæ˜¾ç¤º10é¡¹ã€‚
+ *   Paginator pg = new Paginator();        // æˆ– new Paginator(itemsPerPage);
  * 
- *   // ¸æËßÎÒ×Ü¹²ÓĞ¼¸Ïî¡£Èç¹û¸øµÄÊı×ÖĞ¡ÓÚ0£¬¾Í¿´×÷0¡£
+ *   // å‘Šè¯‰æˆ‘æ€»å…±æœ‰å‡ é¡¹ã€‚å¦‚æœç»™çš„æ•°å­—å°äº0ï¼Œå°±çœ‹ä½œ0ã€‚
  *   pg.setItems(123);
  * 
- *   // Èç¹û²»ÖªµÀÓĞ¼¸Ïî£¬¿ÉÒÔÕâÑù¡£
+ *   // å¦‚æœä¸çŸ¥é“æœ‰å‡ é¡¹ï¼Œå¯ä»¥è¿™æ ·ã€‚
  *   pg.setItems(Paginator.UNKNOWN_ITEMS);
  * 
- *   // ÏÖÔÚÄ¬ÈÏµ±Ç°Ò³ÊÇµÚÒ»Ò³£¬µ«Äã¿ÉÒÔ¸Ä±äËü¡£
- *   pg.setPage(3);                         // ÕâÑùµ±Ç°Ò³¾ÍÊÇ3ÁË£¬²»ÓÃµ£ĞÄÒ³Êı»á³¬¹ı×ÜÒ³Êı¡£
+ *   // ç°åœ¨é»˜è®¤å½“å‰é¡µæ˜¯ç¬¬ä¸€é¡µï¼Œä½†ä½ å¯ä»¥æ”¹å˜å®ƒã€‚
+ *   pg.setPage(3);                         // è¿™æ ·å½“å‰é¡µå°±æ˜¯3äº†ï¼Œä¸ç”¨æ‹…å¿ƒé¡µæ•°ä¼šè¶…è¿‡æ€»é¡µæ•°ã€‚
  * 
- *   // ÏÖÔÚÄã¿ÉÒÔµÃµ½¸÷ÖÖÊı¾İÁË¡£
- *   int currentPage = pg.getPage();        // µÃµ½µ±Ç°Ò³
- *   int totalPages  = pg.getPages();       // ×Ü¹²ÓĞ¼¸Ò³
- *   int totalItems  = pg.getItems();       // ×Ü¹²ÓĞ¼¸Ïî
- *   int beginIndex  = pg.getBeginIndex();  // µÃµ½µ±Ç°Ò³µÚÒ»ÏîµÄĞòºÅ(´Ó1¿ªÊ¼ÊıµÄ)
- *   int endIndex    = pg.getEndIndex();    // µÃµ½µ±Ç°Ò³×îºóÒ»ÏîµÄĞòºÅ(Ò²ÊÇ´Ó1¿ªÊ¼Êı)
- *   int offset      = pg.getOffset();      // offsetºÍlength¿ÉÒÔ×÷Îªmysql²éÑ¯Óï¾ä
- *   int length      = pg.getLength();      //     µÄlimit offset£¬length×Ó¾ä¡£
+ *   // ç°åœ¨ä½ å¯ä»¥å¾—åˆ°å„ç§æ•°æ®äº†ã€‚
+ *   int currentPage = pg.getPage();        // å¾—åˆ°å½“å‰é¡µ
+ *   int totalPages  = pg.getPages();       // æ€»å…±æœ‰å‡ é¡µ
+ *   int totalItems  = pg.getItems();       // æ€»å…±æœ‰å‡ é¡¹
+ *   int beginIndex  = pg.getBeginIndex();  // å¾—åˆ°å½“å‰é¡µç¬¬ä¸€é¡¹çš„åºå·(ä»1å¼€å§‹æ•°çš„)
+ *   int endIndex    = pg.getEndIndex();    // å¾—åˆ°å½“å‰é¡µæœ€åä¸€é¡¹çš„åºå·(ä¹Ÿæ˜¯ä»1å¼€å§‹æ•°)
+ *   int offset      = pg.getOffset();      // offsetå’Œlengthå¯ä»¥ä½œä¸ºmysqlæŸ¥è¯¢è¯­å¥
+ *   int length      = pg.getLength();      //     çš„limit offsetï¼Œlengthå­å¥ã€‚
  * 
- *   // »¹¿ÉÒÔ×öµ÷Õû¡£
- *   setItemsPerPage(20);                   // ÕâÑù¾ÍÃ¿Ò³ÏÔÊ¾20¸öÁË£¬µ±Ç°Ò³µÄÖµ»á×Ô¶¯µ÷Õû,
- *                                          //     Ê¹ĞÂÒ³ºÍÔ­À´µÄÒ³ÏÔÊ¾Í¬ÑùµÄÏî£¬ÕâÑùÓÃ»§²»ÈİÒ×ÃÔ»ó¡£
- *   setItem(33);                           // ÕâÑù¿ÉÒÔ°ÑÒ³Âëµ÷Õûµ½ÏÔÊ¾µÚ33ºÅÏî(´Ó0¿ªÊ¼¼ÆÊı)µÄÄÇÒ»Ò³
+ *   // è¿˜å¯ä»¥åšè°ƒæ•´ã€‚
+ *   setItemsPerPage(20);                   // è¿™æ ·å°±æ¯é¡µæ˜¾ç¤º20ä¸ªäº†ï¼Œå½“å‰é¡µçš„å€¼ä¼šè‡ªåŠ¨è°ƒæ•´,
+ *                                          //     ä½¿æ–°é¡µå’ŒåŸæ¥çš„é¡µæ˜¾ç¤ºåŒæ ·çš„é¡¹ï¼Œè¿™æ ·ç”¨æˆ·ä¸å®¹æ˜“è¿·æƒ‘ã€‚
+ *   setItem(33);                           // è¿™æ ·å¯ä»¥æŠŠé¡µç è°ƒæ•´åˆ°æ˜¾ç¤ºç¬¬33å·é¡¹(ä»0å¼€å§‹è®¡æ•°)çš„é‚£ä¸€é¡µ
  * 
- *   // ¸ß¼¶¹¦ÄÜ£¬¿ªÒ»¸ö»¬¶¯´°¿Ú¡£ÎÒÃÇ¾­³£ÒªÔÚwebÒ³ÃæÉÏÏÔÊ¾Ò»´®µÄÏàÁÚÒ³Âë£¬¹©ÓÃ»§Ñ¡Ôñ¡£
+ *   // é«˜çº§åŠŸèƒ½ï¼Œå¼€ä¸€ä¸ªæ»‘åŠ¨çª—å£ã€‚æˆ‘ä»¬ç»å¸¸è¦åœ¨webé¡µé¢ä¸Šæ˜¾ç¤ºä¸€ä¸²çš„ç›¸é‚»é¡µç ï¼Œä¾›ç”¨æˆ·é€‰æ‹©ã€‚
  *   //        ____________________________________________________________
- *   // ÀıÈç:  <<     <       3     4    5    6    [7]    8    9    >    >>
+ *   // ä¾‹å¦‚:  <<     <       3     4    5    6    [7]    8    9    >    >>
  *   //        ^      ^                             ^               ^    ^
- *   //       µÚÒ»Ò³ Ç°Ò»Ò³                       µ±Ç°Ò³          ºóÒ»Ò³ ×îºóÒ»Ò³
+ *   //       ç¬¬ä¸€é¡µ å‰ä¸€é¡µ                       å½“å‰é¡µ          åä¸€é¡µ æœ€åä¸€é¡µ
  *   //
- *   // ÒÔÉÏÀı×Ó¾ÍÊÇÒ»¸ö´óĞ¡Îª7µÄ»¬¶¯´°¿Ú£¬µ±Ç°Ò³Âë±»¾¡¿ÉÄÜ°ÚÔÚÖĞ¼ä£¬³ı·Çµ±Ç°Ò³Î»ÓÚ¿ªÍ·»ò½áÎ²¡£
- *   // Ê¹ÓÃÏÂÃæµÄµ÷ÓÃ£¬¾Í¿ÉÒÔµÃµ½Ö¸¶¨´óĞ¡µÄ»¬¶¯´°¿ÚÖĞµÄÒ³ÂëÊı×é¡£
+ *   // ä»¥ä¸Šä¾‹å­å°±æ˜¯ä¸€ä¸ªå¤§å°ä¸º7çš„æ»‘åŠ¨çª—å£ï¼Œå½“å‰é¡µç è¢«å°½å¯èƒ½æ‘†åœ¨ä¸­é—´ï¼Œé™¤éå½“å‰é¡µä½äºå¼€å¤´æˆ–ç»“å°¾ã€‚
+ *   // ä½¿ç”¨ä¸‹é¢çš„è°ƒç”¨ï¼Œå°±å¯ä»¥å¾—åˆ°æŒ‡å®šå¤§å°çš„æ»‘åŠ¨çª—å£ä¸­çš„é¡µç æ•°ç»„ã€‚
  *   int[] slider = pg.getSlider(7);
  * 
- *   // ÕâÑù¿ÉÒÔÅĞ¶ÏÖ¸¶¨Ò³ÂëÊÇ·ñÓĞĞ§£¬»òÕßÊÇµ±Ç°Ò³¡£ÎŞĞ§µÄÒ³ÂëÔÚwebÒ³ÃæÉÏ²»ĞèÒªÁ´½Ó¡£
+ *   // è¿™æ ·å¯ä»¥åˆ¤æ–­æŒ‡å®šé¡µç æ˜¯å¦æœ‰æ•ˆï¼Œæˆ–è€…æ˜¯å½“å‰é¡µã€‚æ— æ•ˆçš„é¡µç åœ¨webé¡µé¢ä¸Šä¸éœ€è¦é“¾æ¥ã€‚
  *   if (pg.isDisabledPage(slider[i])) {
  *       show = "page " + slider[i];
  *   } else {
  *       show = "<a href=#> page " + slider[i] + " </a>";
  *   }
  * 
- *   // ¿ÉÒÔÖ±½Ó´òÓ¡³öpg£¬ÓÃÓÚµ÷ÊÔ³ÌĞò¡£
+ *   // å¯ä»¥ç›´æ¥æ‰“å°å‡ºpgï¼Œç”¨äºè°ƒè¯•ç¨‹åºã€‚
  *   System.out.println(pg);
  *   log.debug(pg);
  * 
@@ -89,41 +89,41 @@ import java.io.Serializable;
 public class Paginator implements Serializable, Cloneable {
     private static final long serialVersionUID = 3688506614705500726L;
 
-    /** Ã¿Ò³Ä¬ÈÏµÄÏîÊı(10)¡£ */
+    /** æ¯é¡µé»˜è®¤çš„é¡¹æ•°(10)ã€‚ */
     public static final int DEFAULT_ITEMS_PER_PAGE = 10;
 
-    /** »¬¶¯´°¿ÚÄ¬ÈÏµÄ´óĞ¡(7)¡£ */
+    /** æ»‘åŠ¨çª—å£é»˜è®¤çš„å¤§å°(7)ã€‚ */
     public static final int DEFAULT_SLIDER_SIZE = 7;
 
-    /** ±íÊ¾ÏîÊıÎ´Öª(<code>Integer.MAX_VALUE</code>)¡£ */
+    /** è¡¨ç¤ºé¡¹æ•°æœªçŸ¥(<code>Integer.MAX_VALUE</code>)ã€‚ */
     public static final int UNKNOWN_ITEMS = Integer.MAX_VALUE;
 
-    // ×´Ì¬Á¿
-    private int page; // µ±Ç°Ò³Âë¡£(1-based)
-    private int items; // ×Ü¹²ÏîÊı
-    private int itemsPerPage; // Ã¿Ò³ÏîÊı¡£
+    // çŠ¶æ€é‡
+    private int page; // å½“å‰é¡µç ã€‚(1-based)
+    private int items; // æ€»å…±é¡¹æ•°
+    private int itemsPerPage; // æ¯é¡µé¡¹æ•°ã€‚
 
     /**
-     * ´´½¨Ò»¸ö·ÖÒ³Æ÷£¬³õÊ¼ÏîÊıÎªÎŞÏŞ´ó<code>UNKNOWN_ITEMS</code>£¬Ä¬ÈÏÃ¿Ò³ÏÔÊ¾<code>10</code>Ïî¡£
+     * åˆ›å»ºä¸€ä¸ªåˆ†é¡µå™¨ï¼Œåˆå§‹é¡¹æ•°ä¸ºæ— é™å¤§<code>UNKNOWN_ITEMS</code>ï¼Œé»˜è®¤æ¯é¡µæ˜¾ç¤º<code>10</code>é¡¹ã€‚
      */
     public Paginator() {
         this(0);
     }
 
     /**
-     * ´´½¨Ò»¸ö·ÖÒ³Æ÷£¬³õÊ¼ÏîÊıÎªÎŞÏŞ´ó<code>UNKNOWN_ITEMS</code>£¬Ö¸¶¨Ã¿Ò³ÏîÊı¡£
+     * åˆ›å»ºä¸€ä¸ªåˆ†é¡µå™¨ï¼Œåˆå§‹é¡¹æ•°ä¸ºæ— é™å¤§<code>UNKNOWN_ITEMS</code>ï¼ŒæŒ‡å®šæ¯é¡µé¡¹æ•°ã€‚
      * 
-     * @param itemsPerPage Ã¿Ò³ÏîÊı¡£
+     * @param itemsPerPage æ¯é¡µé¡¹æ•°ã€‚
      */
     public Paginator(int itemsPerPage) {
         this(itemsPerPage, UNKNOWN_ITEMS);
     }
 
     /**
-     * ´´½¨Ò»¸ö·ÖÒ³Æ÷£¬³õÊ¼ÏîÊıÎªÎŞÏŞ´ó<code>UNKNOWN_ITEMS</code>£¬Ö¸¶¨Ã¿Ò³ÏîÊı¡£
+     * åˆ›å»ºä¸€ä¸ªåˆ†é¡µå™¨ï¼Œåˆå§‹é¡¹æ•°ä¸ºæ— é™å¤§<code>UNKNOWN_ITEMS</code>ï¼ŒæŒ‡å®šæ¯é¡µé¡¹æ•°ã€‚
      * 
-     * @param itemsPerPage Ã¿Ò³ÏîÊı¡£
-     * @param items ×ÜÏîÊı
+     * @param itemsPerPage æ¯é¡µé¡¹æ•°ã€‚
+     * @param items æ€»é¡¹æ•°
      */
     public Paginator(int itemsPerPage, int items) {
         this.items = items >= 0 ? items : 0;
@@ -132,47 +132,47 @@ public class Paginator implements Serializable, Cloneable {
     }
 
     /**
-     * È¡µÃ×ÜÒ³Êı¡£
+     * å–å¾—æ€»é¡µæ•°ã€‚
      * 
-     * @return ×ÜÒ³Êı
+     * @return æ€»é¡µæ•°
      */
     public int getPages() {
         return (int) Math.ceil((double) items / itemsPerPage);
     }
 
     /**
-     * È¡µÃµ±Ç°Ò³¡£
+     * å–å¾—å½“å‰é¡µã€‚
      * 
-     * @return µ±Ç°Ò³
+     * @return å½“å‰é¡µ
      */
     public int getPage() {
         return page;
     }
 
     /**
-     * ÉèÖÃ²¢È¡µÃµ±Ç°Ò³¡£Êµ¼ÊµÄµ±Ç°Ò³Öµ±»È·±£ÔÚÕıÈ·µÄ·¶Î§ÄÚ¡£
+     * è®¾ç½®å¹¶å–å¾—å½“å‰é¡µã€‚å®é™…çš„å½“å‰é¡µå€¼è¢«ç¡®ä¿åœ¨æ­£ç¡®çš„èŒƒå›´å†…ã€‚
      * 
-     * @param page µ±Ç°Ò³
-     * @return ÉèÖÃºóµÄµ±Ç°Ò³
+     * @param page å½“å‰é¡µ
+     * @return è®¾ç½®åçš„å½“å‰é¡µ
      */
     public int setPage(int page) {
         return this.page = calcPage(page);
     }
 
     /**
-     * È¡µÃ×ÜÏîÊı¡£
+     * å–å¾—æ€»é¡¹æ•°ã€‚
      * 
-     * @return ×ÜÏîÊı
+     * @return æ€»é¡¹æ•°
      */
     public int getItems() {
         return items;
     }
 
     /**
-     * ÉèÖÃ²¢È¡µÃ×ÜÏîÊı¡£Èç¹ûÖ¸¶¨µÄ×ÜÏîÊıĞ¡ÓÚ0£¬Ôò±»¿´×÷0¡£×Ô¶¯µ÷Õûµ±Ç°Ò³£¬È·±£µ±Ç°Ò³ÖµÔÚÕıÈ·µÄ·¶Î§ÄÚ¡£
+     * è®¾ç½®å¹¶å–å¾—æ€»é¡¹æ•°ã€‚å¦‚æœæŒ‡å®šçš„æ€»é¡¹æ•°å°äº0ï¼Œåˆ™è¢«çœ‹ä½œ0ã€‚è‡ªåŠ¨è°ƒæ•´å½“å‰é¡µï¼Œç¡®ä¿å½“å‰é¡µå€¼åœ¨æ­£ç¡®çš„èŒƒå›´å†…ã€‚
      * 
-     * @param items ×ÜÏîÊı
-     * @return ÉèÖÃÒÔºóµÄ×ÜÏîÊı
+     * @param items æ€»é¡¹æ•°
+     * @return è®¾ç½®ä»¥åçš„æ€»é¡¹æ•°
      */
     public int setItems(int items) {
         this.items = items >= 0 ? items : 0;
@@ -181,20 +181,20 @@ public class Paginator implements Serializable, Cloneable {
     }
 
     /**
-     * È¡µÃÃ¿Ò³ÏîÊı¡£
+     * å–å¾—æ¯é¡µé¡¹æ•°ã€‚
      * 
-     * @return Ã¿Ò³ÏîÊı
+     * @return æ¯é¡µé¡¹æ•°
      */
     public int getItemsPerPage() {
         return itemsPerPage;
     }
 
     /**
-     * ÉèÖÃ²¢È¡µÃÃ¿Ò³ÏîÊı¡£Èç¹ûÖ¸¶¨µÄÃ¿Ò³ÏîÊıĞ¡ÓÚµÈÓÚ0£¬ÔòÊ¹ÓÃÄ¬ÈÏÖµ<code>DEFAULT_ITEMS_PER_PAGE</code>¡£
-     * ²¢µ÷Õûµ±Ç°Ò³Ê¹Ö®ÔÚ¸Ä±äÃ¿Ò³ÏîÊıÇ°ºóÏÔÊ¾ÏàÍ¬µÄÏî¡£
+     * è®¾ç½®å¹¶å–å¾—æ¯é¡µé¡¹æ•°ã€‚å¦‚æœæŒ‡å®šçš„æ¯é¡µé¡¹æ•°å°äºç­‰äº0ï¼Œåˆ™ä½¿ç”¨é»˜è®¤å€¼<code>DEFAULT_ITEMS_PER_PAGE</code>ã€‚
+     * å¹¶è°ƒæ•´å½“å‰é¡µä½¿ä¹‹åœ¨æ”¹å˜æ¯é¡µé¡¹æ•°å‰åæ˜¾ç¤ºç›¸åŒçš„é¡¹ã€‚
      * 
-     * @param itemsPerPage Ã¿Ò³ÏîÊı
-     * @return ÉèÖÃºóµÄÃ¿Ò³ÏîÊı
+     * @param itemsPerPage æ¯é¡µé¡¹æ•°
+     * @return è®¾ç½®åçš„æ¯é¡µé¡¹æ•°
      */
     public int setItemsPerPage(int itemsPerPage) {
         int tmp = this.itemsPerPage;
@@ -209,18 +209,18 @@ public class Paginator implements Serializable, Cloneable {
     }
 
     /**
-     * È¡µÃµ±Ç°Ò³µÚÒ»ÏîÔÚÈ«²¿ÏîÖĞµÄÆ«ÒÆÁ¿ (0-based)¡£
+     * å–å¾—å½“å‰é¡µç¬¬ä¸€é¡¹åœ¨å…¨éƒ¨é¡¹ä¸­çš„åç§»é‡ (0-based)ã€‚
      * 
-     * @return Æ«ÒÆÁ¿
+     * @return åç§»é‡
      */
     public int getOffset() {
         return page > 0 ? itemsPerPage * (page - 1) : 0;
     }
 
     /**
-     * È¡µÃµ±Ç°Ò³µÄ³¤¶È£¬¼´µ±Ç°Ò³µÄÊµ¼ÊÏîÊı¡£Ïàµ±ÓÚ <code>endIndex() - beginIndex() + 1</code>
+     * å–å¾—å½“å‰é¡µçš„é•¿åº¦ï¼Œå³å½“å‰é¡µçš„å®é™…é¡¹æ•°ã€‚ç›¸å½“äº <code>endIndex() - beginIndex() + 1</code>
      * 
-     * @return µ±Ç°Ò³µÄ³¤¶È
+     * @return å½“å‰é¡µçš„é•¿åº¦
      */
     public int getLength() {
         if (page > 0) {
@@ -231,9 +231,9 @@ public class Paginator implements Serializable, Cloneable {
     }
 
     /**
-     * È¡µÃµ±Ç°Ò³ÏÔÊ¾µÄÏîµÄÆğÊ¼ĞòºÅ (1-based)¡£
+     * å–å¾—å½“å‰é¡µæ˜¾ç¤ºçš„é¡¹çš„èµ·å§‹åºå· (1-based)ã€‚
      * 
-     * @return ÆğÊ¼ĞòºÅ
+     * @return èµ·å§‹åºå·
      */
     public int getBeginIndex() {
         if (page > 0) {
@@ -244,9 +244,9 @@ public class Paginator implements Serializable, Cloneable {
     }
 
     /**
-     * È¡µÃµ±Ç°Ò³ÏÔÊ¾µÄÄ©ÏîĞòºÅ (1-based)¡£
+     * å–å¾—å½“å‰é¡µæ˜¾ç¤ºçš„æœ«é¡¹åºå· (1-based)ã€‚
      * 
-     * @return Ä©ÏîĞòºÅ
+     * @return æœ«é¡¹åºå·
      */
     public int getEndIndex() {
         if (page > 0) {
@@ -257,97 +257,97 @@ public class Paginator implements Serializable, Cloneable {
     }
 
     /**
-     * ÉèÖÃµ±Ç°Ò³£¬Ê¹Ö®ÏÔÊ¾Ö¸¶¨offset(0-based)µÄÏî¡£
+     * è®¾ç½®å½“å‰é¡µï¼Œä½¿ä¹‹æ˜¾ç¤ºæŒ‡å®šoffset(0-based)çš„é¡¹ã€‚
      * 
-     * @param itemOffset ÒªÏÔÊ¾µÄÏîµÄÆ«ÒÆÁ¿(0-based)
-     * @return Ö¸¶¨ÏîËùÔÚµÄÒ³
+     * @param itemOffset è¦æ˜¾ç¤ºçš„é¡¹çš„åç§»é‡(0-based)
+     * @return æŒ‡å®šé¡¹æ‰€åœ¨çš„é¡µ
      */
     public int setItem(int itemOffset) {
         return setPage(itemOffset / itemsPerPage + 1);
     }
 
     /**
-     * È¡µÃÊ×Ò³Ò³Âë¡£
+     * å–å¾—é¦–é¡µé¡µç ã€‚
      * 
-     * @return Ê×Ò³Ò³Âë
+     * @return é¦–é¡µé¡µç 
      */
     public int getFirstPage() {
         return calcPage(1);
     }
 
     /**
-     * È¡µÃÄ©Ò³Ò³Âë¡£
+     * å–å¾—æœ«é¡µé¡µç ã€‚
      * 
-     * @return Ä©Ò³Ò³Âë
+     * @return æœ«é¡µé¡µç 
      */
     public int getLastPage() {
         return calcPage(getPages());
     }
 
     /**
-     * È¡µÃÇ°Ò»Ò³Ò³Âë¡£
+     * å–å¾—å‰ä¸€é¡µé¡µç ã€‚
      * 
-     * @return Ç°Ò»Ò³Ò³Âë
+     * @return å‰ä¸€é¡µé¡µç 
      */
     public int getPreviousPage() {
         return calcPage(page - 1);
     }
 
     /**
-     * È¡µÃÇ°nÒ³Ò³Âë
+     * å–å¾—å‰né¡µé¡µç 
      * 
-     * @param n Ç°nÒ³
-     * @return Ç°nÒ³Ò³Âë
+     * @param n å‰né¡µ
+     * @return å‰né¡µé¡µç 
      */
     public int getPreviousPage(int n) {
         return calcPage(page - n);
     }
 
     /**
-     * È¡µÃºóÒ»Ò³Ò³Âë¡£
+     * å–å¾—åä¸€é¡µé¡µç ã€‚
      * 
-     * @return ºóÒ»Ò³Ò³Âë
+     * @return åä¸€é¡µé¡µç 
      */
     public int getNextPage() {
         return calcPage(page + 1);
     }
 
     /**
-     * È¡µÃºónÒ³Ò³Âë¡£
+     * å–å¾—åné¡µé¡µç ã€‚
      * 
-     * @param n ºónÃæ
-     * @return ºónÒ³Ò³Âë
+     * @param n åné¢
+     * @return åné¡µé¡µç 
      */
     public int getNextPage(int n) {
         return calcPage(page + n);
     }
 
     /**
-     * ÅĞ¶ÏÖ¸¶¨Ò³ÂëÊÇ·ñ±»½ûÖ¹£¬Ò²¾ÍÊÇËµÖ¸¶¨Ò³Âë³¬³öÁË·¶Î§»òµÈÓÚµ±Ç°Ò³Âë¡£
+     * åˆ¤æ–­æŒ‡å®šé¡µç æ˜¯å¦è¢«ç¦æ­¢ï¼Œä¹Ÿå°±æ˜¯è¯´æŒ‡å®šé¡µç è¶…å‡ºäº†èŒƒå›´æˆ–ç­‰äºå½“å‰é¡µç ã€‚
      * 
-     * @param page Ò³Âë
-     * @return boolean ÊÇ·ñÎª½ûÖ¹µÄÒ³Âë
+     * @param page é¡µç 
+     * @return boolean æ˜¯å¦ä¸ºç¦æ­¢çš„é¡µç 
      */
     public boolean isDisabledPage(int page) {
         return page < 1 || page > getPages() || page == this.page;
     }
 
     /**
-     * È¡µÃÄ¬ÈÏ´óĞ¡(<code>DEFAULT_SLIDER_SIZE</code>)µÄÒ³Âë»¬¶¯´°¿Ú£¬²¢½«µ±Ç°Ò³¾¡¿ÉÄÜµØ·ÅÔÚ»¬¶¯´°¿ÚµÄÖĞ¼ä²¿Î»¡£²Î¼û
-     * {@link #getSlider(int n)}¡£
+     * å–å¾—é»˜è®¤å¤§å°(<code>DEFAULT_SLIDER_SIZE</code>)çš„é¡µç æ»‘åŠ¨çª—å£ï¼Œå¹¶å°†å½“å‰é¡µå°½å¯èƒ½åœ°æ”¾åœ¨æ»‘åŠ¨çª—å£çš„ä¸­é—´éƒ¨ä½ã€‚å‚è§
+     * {@link #getSlider(int n)}ã€‚
      * 
-     * @return °üº¬Ò³ÂëµÄÊı×é
+     * @return åŒ…å«é¡µç çš„æ•°ç»„
      */
     public int[] getSlider() {
         return getSlider(DEFAULT_SLIDER_SIZE);
     }
 
     /**
-     * È¡µÃÖ¸¶¨´óĞ¡µÄÒ³Âë»¬¶¯´°¿Ú£¬²¢½«µ±Ç°Ò³¾¡¿ÉÄÜµØ·ÅÔÚ»¬¶¯´°¿ÚµÄÖĞ¼ä²¿Î»¡£ÀıÈç: ×Ü¹²ÓĞ13Ò³£¬µ±Ç°Ò³ÊÇµÚ5Ò³£¬È¡µÃÒ»¸ö´óĞ¡Îª5µÄ»¬¶¯´°¿Ú£¬½«°üÀ¨
-     * 3£¬4£¬5£¬6, 7Õâ¼¸¸öÒ³Âë£¬µÚ5Ò³±»·ÅÔÚÖĞ¼ä¡£Èç¹ûµ±Ç°Ò³ÊÇ12£¬Ôò·µ»ØÒ³ÂëÎª 9£¬10£¬11£¬12£¬13¡£
+     * å–å¾—æŒ‡å®šå¤§å°çš„é¡µç æ»‘åŠ¨çª—å£ï¼Œå¹¶å°†å½“å‰é¡µå°½å¯èƒ½åœ°æ”¾åœ¨æ»‘åŠ¨çª—å£çš„ä¸­é—´éƒ¨ä½ã€‚ä¾‹å¦‚: æ€»å…±æœ‰13é¡µï¼Œå½“å‰é¡µæ˜¯ç¬¬5é¡µï¼Œå–å¾—ä¸€ä¸ªå¤§å°ä¸º5çš„æ»‘åŠ¨çª—å£ï¼Œå°†åŒ…æ‹¬
+     * 3ï¼Œ4ï¼Œ5ï¼Œ6, 7è¿™å‡ ä¸ªé¡µç ï¼Œç¬¬5é¡µè¢«æ”¾åœ¨ä¸­é—´ã€‚å¦‚æœå½“å‰é¡µæ˜¯12ï¼Œåˆ™è¿”å›é¡µç ä¸º 9ï¼Œ10ï¼Œ11ï¼Œ12ï¼Œ13ã€‚
      * 
-     * @param width »¬¶¯´°¿Ú´óĞ¡
-     * @return °üº¬Ò³ÂëµÄÊı×é£¬Èç¹ûÖ¸¶¨»¬¶¯´°¿Ú´óĞ¡Ğ¡ÓÚ1»ò×ÜÒ³ÊıÎª0£¬Ôò·µ»Ø¿ÕÊı×é¡£
+     * @param width æ»‘åŠ¨çª—å£å¤§å°
+     * @return åŒ…å«é¡µç çš„æ•°ç»„ï¼Œå¦‚æœæŒ‡å®šæ»‘åŠ¨çª—å£å¤§å°å°äº1æˆ–æ€»é¡µæ•°ä¸º0ï¼Œåˆ™è¿”å›ç©ºæ•°ç»„ã€‚
      */
     public int[] getSlider(int width) {
         int pages = getPages();
@@ -379,10 +379,10 @@ public class Paginator implements Serializable, Cloneable {
     }
 
     /**
-     * ¼ÆËãÒ³Êı£¬µ«²»¸Ä±äµ±Ç°Ò³¡£
+     * è®¡ç®—é¡µæ•°ï¼Œä½†ä¸æ”¹å˜å½“å‰é¡µã€‚
      * 
-     * @param page Ò³Âë
-     * @return ·µ»ØÕıÈ·µÄÒ³Âë(±£Ö¤²»»á³ö±ß½ç)
+     * @param page é¡µç 
+     * @return è¿”å›æ­£ç¡®çš„é¡µç (ä¿è¯ä¸ä¼šå‡ºè¾¹ç•Œ)
      */
     protected int calcPage(int page) {
         int pages = getPages();
@@ -395,23 +395,23 @@ public class Paginator implements Serializable, Cloneable {
     }
 
     /**
-     * ´´½¨¸´±¾¡£
+     * åˆ›å»ºå¤æœ¬ã€‚
      * 
-     * @return ¸´±¾
+     * @return å¤æœ¬
      */
     @Override
     public Object clone() {
         try {
             return super.clone();
         } catch (java.lang.CloneNotSupportedException e) {
-            return null; // ²»¿ÉÄÜ·¢Éú
+            return null; // ä¸å¯èƒ½å‘ç”Ÿ
         }
     }
 
     /**
-     * ×ª»»³É×Ö·û´®±íÊ¾¡£
+     * è½¬æ¢æˆå­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      * 
-     * @return ×Ö·û´®±íÊ¾¡£
+     * @return å­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      */
     @Override
     public String toString() {

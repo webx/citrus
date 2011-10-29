@@ -21,7 +21,7 @@ import org.apache.commons.collections.ExtendedProperties;
 import org.springframework.core.io.ResourceLoader;
 
 /**
- * ´ú±ívelocityµÄÅäÖÃ¡£
+ * ä»£è¡¨velocityçš„é…ç½®ã€‚
  * 
  * @author Michael Zhou
  */

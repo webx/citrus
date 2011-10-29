@@ -25,19 +25,19 @@ import java.util.Map;
 import com.alibaba.citrus.logconfig.LogConfigurator;
 
 /**
- * ÓÃÀ´³õÊ¼»¯²âÊÔ»·¾³µÄ¸¨ÖúÀà¡£
+ * ç”¨æ¥åˆå§‹åŒ–æµ‹è¯•ç¯å¢ƒçš„è¾…åŠ©ç±»ã€‚
  * <p>
- * µ¥Ôª²âÊÔÒª¾¡¿ÉÄÜ¶ÀÁ¢ÓÚÆäËüÏîÄ¿¡£¸Ã¸¨ÖúÀà°ïÖúµ¥Ôª²âÊÔ´Óµ±Ç°ÏîÄ¿µÄÏà¶ÔÂ·¾¶ÖĞÈ¡µÃËùÓĞ×ÊÔ´ÎÄ¼ş£¬°üÀ¨£º
+ * å•å…ƒæµ‹è¯•è¦å°½å¯èƒ½ç‹¬ç«‹äºå…¶å®ƒé¡¹ç›®ã€‚è¯¥è¾…åŠ©ç±»å¸®åŠ©å•å…ƒæµ‹è¯•ä»å½“å‰é¡¹ç›®çš„ç›¸å¯¹è·¯å¾„ä¸­å–å¾—æ‰€æœ‰èµ„æºæ–‡ä»¶ï¼ŒåŒ…æ‹¬ï¼š
  * </p>
  * <ul>
- * <li>²âÊÔ¸ùÄ¿Â¼<code>basedir</code>£¬Ä¬ÈÏÎªÏîÄ¿¸ùÄ¿Â¼¡£</li>
- * <li>²âÊÔÔ´ÎÄ¼şÄ¿Â¼<code>srcdir</code>£¬Ä¬ÈÏÎª<code>${basedir}/src/test/config/</code>¡£</li>
- * <li>²âÊÔÄ¿±êÄ¿Â¼<code>destdir</code>£¬Ä¬ÈÏÎª<code>${basedir}/target/test/</code>¡£</li>
- * <li>LogbackÈÕÖ¾ÎÄ¼ş£¬Ä¬ÈÏÎª<code>${srcdir}/logback.xml</code>£¬¼ÙÈçÕÒ²»µ½£¬ÔòÊ¹ÓÃÄ¬ÈÏµÄÅäÖÃ£º
+ * <li>æµ‹è¯•æ ¹ç›®å½•<code>basedir</code>ï¼Œé»˜è®¤ä¸ºé¡¹ç›®æ ¹ç›®å½•ã€‚</li>
+ * <li>æµ‹è¯•æºæ–‡ä»¶ç›®å½•<code>srcdir</code>ï¼Œé»˜è®¤ä¸º<code>${basedir}/src/test/config/</code>ã€‚</li>
+ * <li>æµ‹è¯•ç›®æ ‡ç›®å½•<code>destdir</code>ï¼Œé»˜è®¤ä¸º<code>${basedir}/target/test/</code>ã€‚</li>
+ * <li>Logbackæ—¥å¿—æ–‡ä»¶ï¼Œé»˜è®¤ä¸º<code>${srcdir}/logback.xml</code>ï¼Œå‡å¦‚æ‰¾ä¸åˆ°ï¼Œåˆ™ä½¿ç”¨é»˜è®¤çš„é…ç½®ï¼š
  * <ul>
- * <li><code>WARN</code>ÒÔÏÂ´òÓ¡µ½<code>System.out</code>¡£</li>
- * <li><code>WARN</code>ÒÔÉÏ´òÓ¡µ½<code>System.err</code>¡£</li>
- * <li>ËùÓĞÈÕÖ¾Í¬Ê±´òÓ¡µ½<code>${destdir}/test.log</code>¡£</li>
+ * <li><code>WARN</code>ä»¥ä¸‹æ‰“å°åˆ°<code>System.out</code>ã€‚</li>
+ * <li><code>WARN</code>ä»¥ä¸Šæ‰“å°åˆ°<code>System.err</code>ã€‚</li>
+ * <li>æ‰€æœ‰æ—¥å¿—åŒæ—¶æ‰“å°åˆ°<code>${destdir}/test.log</code>ã€‚</li>
  * </ul>
  * </li>
  * </ul>
@@ -105,7 +105,7 @@ public class TestEnv {
     }
 
     /**
-     * ³õÊ¼»¯basedir, srcdirºÍdestdirµÈ¡£
+     * åˆå§‹åŒ–basedir, srcdirå’Œdestdirç­‰ã€‚
      */
     private void setupDirectories() throws IOException {
         Params params = getParams();
@@ -129,7 +129,7 @@ public class TestEnv {
     }
 
     /**
-     * ³õÊ¼»¯logback.xml£¬¿ÉÓÃ${basedir}, ${srcdir}, ${destdir}¡£
+     * åˆå§‹åŒ–logback.xmlï¼Œå¯ç”¨${basedir}, ${srcdir}, ${destdir}ã€‚
      */
     private void setupLogback(URL logConfigFile) throws IOException {
         if (logConfigFile == null) {
@@ -206,9 +206,9 @@ public class TestEnv {
     }
 
     /**
-     * È¡µÃ³õÊ¼»¯²ÎÊı¡£
+     * å–å¾—åˆå§‹åŒ–å‚æ•°ã€‚
      * <p>
-     * ÔÚ³õÊ¼»¯Íê³ÉÒÔºó£¬½«·µ»Ø<code>null</code>¡£
+     * åœ¨åˆå§‹åŒ–å®Œæˆä»¥åï¼Œå°†è¿”å›<code>null</code>ã€‚
      * </p>
      */
     protected final Params getParams() {
@@ -220,9 +220,9 @@ public class TestEnv {
     }
 
     /**
-     * ´´½¨³õÊ¼»¯²ÎÊı¡£
+     * åˆ›å»ºåˆå§‹åŒ–å‚æ•°ã€‚
      * <p>
-     * ×ÓÀà¿ÉÀ©Õ¹¸Ã²ÎÊı¡£
+     * å­ç±»å¯æ‰©å±•è¯¥å‚æ•°ã€‚
      * </p>
      */
     protected Params createParams() {
@@ -230,13 +230,13 @@ public class TestEnv {
     }
 
     /**
-     * ³õÊ¼»¯²ÎÊı¡£
+     * åˆå§‹åŒ–å‚æ•°ã€‚
      */
     protected class Params {
         public String basedirParam = ".";
         public String srcdirParam = "src/test/config/";
         public String destdirParam = "target/test/";
-        public String logbackConfigParam = "logback.xml"; // Ïà¶ÔÓÚsrcdir
+        public String logbackConfigParam = "logback.xml"; // ç›¸å¯¹äºsrcdir
         public Exception initFailure = null;
         public boolean inited = false;
     }

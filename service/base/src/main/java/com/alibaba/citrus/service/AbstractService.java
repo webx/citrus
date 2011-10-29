@@ -23,9 +23,9 @@ import org.slf4j.LoggerFactory;
 import com.alibaba.citrus.springext.support.GenericBeanSupport;
 
 /**
- * ×÷ÎªserviceµÄ»ùÀà£¬·½±ãserviceµÄÊµÏÖ¡£
+ * ä½œä¸ºserviceçš„åŸºç±»ï¼Œæ–¹ä¾¿serviceçš„å®ç°ã€‚
  * <p>
- * ·ÇsingletonµÄservice²»Ó¦¸ÃÊµÏÖ´Ë½Ó¿Ú¡£
+ * ésingletonçš„serviceä¸åº”è¯¥å®ç°æ­¤æ¥å£ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -42,7 +42,7 @@ public abstract class AbstractService<S> extends GenericBeanSupport<S> {
     }
 
     /**
-     * ´´½¨Ò»¸ölogger¡£
+     * åˆ›å»ºä¸€ä¸ªloggerã€‚
      */
     protected Logger createLogger() {
         return LoggerFactory.getLogger(getBeanInterface());

@@ -32,15 +32,15 @@ import com.alibaba.citrus.generictype.introspect.SimplePropertyInfo;
 import com.alibaba.citrus.util.internal.StringUtil;
 
 /**
- * ·ÖÎö¼òµ¥µÄJava BeansÊôĞÔ£¬Ò²¾ÍÊÇ£º
+ * åˆ†æç®€å•çš„Java Beanså±æ€§ï¼Œä¹Ÿå°±æ˜¯ï¼š
  * <ul>
- * <li>¿É¶ÁÊôĞÔ£º<code>PropertyType getPropertyName()</code>¡£</li>
- * <li>¿É¶ÁbooleanÊôĞÔ£º<code>boolean isPropertyName()</code>¡£</li>
- * <li>¿ÉĞ´ÊôĞÔ£º<code>setPropertyName(PropertyType propertyValue)</code>¡£</li>
+ * <li>å¯è¯»å±æ€§ï¼š<code>PropertyType getPropertyName()</code>ã€‚</li>
+ * <li>å¯è¯»booleanå±æ€§ï¼š<code>boolean isPropertyName()</code>ã€‚</li>
+ * <li>å¯å†™å±æ€§ï¼š<code>setPropertyName(PropertyType propertyValue)</code>ã€‚</li>
  * </ul>
  * <p>
- * ¼òµ¥µÄJava BeansÊôĞÔµÄÃû³Æ²»ÄÜÎª¿Õ£¬»»ÑÔÖ®£¬<code>get()</code>/<code>set()</code>
- * ·½·¨²»»á±»¿´×÷Ò»¸öproperty¡£
+ * ç®€å•çš„Java Beanså±æ€§çš„åç§°ä¸èƒ½ä¸ºç©ºï¼Œæ¢è¨€ä¹‹ï¼Œ<code>get()</code>/<code>set()</code>
+ * æ–¹æ³•ä¸ä¼šè¢«çœ‹ä½œä¸€ä¸ªpropertyã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -108,7 +108,7 @@ public class SimplePropertiesFinder extends AbstractPropertiesFinder {
     }
 
     /**
-     * ´ú±íÒ»¸ö¼òµ¥µÄÊôĞÔĞÅÏ¢¡£
+     * ä»£è¡¨ä¸€ä¸ªç®€å•çš„å±æ€§ä¿¡æ¯ã€‚
      */
     private static class SimplePropertyImpl extends AbstractPropertyInfo implements SimplePropertyInfo {
         private SimplePropertyImpl(String name, TypeInfo declaringType, TypeInfo type, MethodInfo readMethod,

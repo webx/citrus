@@ -35,7 +35,7 @@ import com.alibaba.citrus.springext.support.BeanSupport;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 /**
- * ´´½¨Ò»¸ö¼òµ¥beanµÄtool factory¡£
+ * åˆ›å»ºä¸€ä¸ªç®€å•beançš„tool factoryã€‚
  * 
  * @author Michael Zhou
  */
@@ -111,9 +111,9 @@ public class BeanTool extends BeanSupport implements ToolFactory, ApplicationCon
     }
 
     /**
-     * ×ÓÀà¿ÉÒÔµ÷ÓÃ¸Ã·½·¨À´½âÎö²ÎÊı¡£
+     * å­ç±»å¯ä»¥è°ƒç”¨è¯¥æ–¹æ³•æ¥è§£æå‚æ•°ã€‚
      * <ul>
-     * <li>²ÎÊı£º<code>scope="request|global"</code>£¬Ä¬ÈÏÎª<code>global</code>¡£</li>
+     * <li>å‚æ•°ï¼š<code>scope="request|global"</code>ï¼Œé»˜è®¤ä¸º<code>global</code>ã€‚</li>
      * </ul>
      */
     protected static final boolean parseBeanToolScope(Element element, ParserContext parserContext,
@@ -137,9 +137,9 @@ public class BeanTool extends BeanSupport implements ToolFactory, ApplicationCon
     }
 
     /**
-     * ×ÓÀà¿ÉÒÔµ÷ÓÃ¸Ã·½·¨À´½âÎö²ÎÊı¡£
+     * å­ç±»å¯ä»¥è°ƒç”¨è¯¥æ–¹æ³•æ¥è§£æå‚æ•°ã€‚
      * <ul>
-     * <li>²ÎÊı£º<code>class="..."</code>¡£</li>
+     * <li>å‚æ•°ï¼š<code>class="..."</code>ã€‚</li>
      * </ul>
      */
     protected static final String parseBeanToolClass(Element element, ParserContext parserContext,
@@ -154,9 +154,9 @@ public class BeanTool extends BeanSupport implements ToolFactory, ApplicationCon
     }
 
     /**
-     * ×ÓÀà¿ÉÒÔµ÷ÓÃ¸Ã·½·¨À´½âÎö²ÎÊı¡£
+     * å­ç±»å¯ä»¥è°ƒç”¨è¯¥æ–¹æ³•æ¥è§£æå‚æ•°ã€‚
      * <ul>
-     * <li>²ÎÊı£º<code>autowire="true|false"</code>£¬Ä¬ÈÏÎª<code>false</code>¡£</li>
+     * <li>å‚æ•°ï¼š<code>autowire="true|false"</code>ï¼Œé»˜è®¤ä¸º<code>false</code>ã€‚</li>
      * </ul>
      */
     protected static final void parseBeanToolAutowire(Element element, ParserContext parserContext,

@@ -44,12 +44,12 @@ import org.apache.velocity.util.introspection.Info;
 import org.apache.velocity.util.introspection.VelPropertyGet;
 
 /**
- * ĞŞ¸ÄvelocityÄ¬ÈÏµÄuberspect£¬¸Ä±äÄ¬ÈÏµÄget property·½·¨µÄË³Ğò£º
+ * ä¿®æ”¹velocityé»˜è®¤çš„uberspectï¼Œæ”¹å˜é»˜è®¤çš„get propertyæ–¹æ³•çš„é¡ºåºï¼š
  * <ul>
- * <li><code>getFoo()</code>»ò<code>getfoo()</code>¡£</li>
- * <li><code>isFoo()</code>»ò<code>isfoo()</code>¡£</li>
- * <li><code>Map.get(String)</code>¡£</li>
- * <li><code>AnyType.get(String)</code>¡£</li>
+ * <li><code>getFoo()</code>æˆ–<code>getfoo()</code>ã€‚</li>
+ * <li><code>isFoo()</code>æˆ–<code>isfoo()</code>ã€‚</li>
+ * <li><code>Map.get(String)</code>ã€‚</li>
+ * <li><code>AnyType.get(String)</code>ã€‚</li>
  * </ul>
  * 
  * @author Michael Zhou

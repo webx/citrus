@@ -21,7 +21,7 @@ import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 /**
- * µ÷ÓÃÖ¸¶¨visitorÖÐµÄvisitPlaceholder()·½·¨¡£
+ * è°ƒç”¨æŒ‡å®švisitorä¸­çš„visitPlaceholder()æ–¹æ³•ã€‚
  */
 public class FallbackToVisitor {
     private final Object visitor;

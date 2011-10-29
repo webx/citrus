@@ -28,7 +28,7 @@ import com.alibaba.citrus.webx.handler.component.FooterComponent;
 import com.alibaba.citrus.webx.handler.component.MenuComponent;
 
 /**
- * Îª×ÓÀàÌá¹©Ò»¸ölayout¡£
+ * ä¸ºå­ç±»æä¾›ä¸€ä¸ªlayoutã€‚
  * 
  * @author Michael Zhou
  */

@@ -32,7 +32,7 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 /**
- * È¡µÃËùÓĞ<code>URIBroker</code>µÄpull tool¡£
+ * å–å¾—æ‰€æœ‰<code>URIBroker</code>çš„pull toolã€‚
  * 
  * @author Michael Zhou
  */
@@ -45,48 +45,48 @@ public class URIBrokerTool implements ToolFactory, ToolSetFactory, InitializingB
     }
 
     /**
-     * ³õÊ¼»¯pull tool¡£
+     * åˆå§‹åŒ–pull toolã€‚
      */
     public void afterPropertiesSet() throws Exception {
         assertNotNull(brokers, "no URIBrokerService");
     }
 
     /**
-     * Ã¿¸öÇëÇó¶¼»á´´½¨ĞÂµÄÊµÀı¡£
+     * æ¯ä¸ªè¯·æ±‚éƒ½ä¼šåˆ›å»ºæ–°çš„å®ä¾‹ã€‚
      */
     public boolean isSingleton() {
         return false;
     }
 
     /**
-     * È¡µÃËùÓĞexposed URI brokerµÄÃû³Æ¡£
+     * å–å¾—æ‰€æœ‰exposed URI brokerçš„åç§°ã€‚
      */
     public Iterable<String> getToolNames() {
         return brokers.getExposedNames();
     }
 
     /**
-     * È¡µÃÒ»¸ö¶ÔÏó£¬¿ÉÒÔ´ÓÖĞÈ¡µÃËùÓĞµÄbrokers¡£
+     * å–å¾—ä¸€ä¸ªå¯¹è±¡ï¼Œå¯ä»¥ä»ä¸­å–å¾—æ‰€æœ‰çš„brokersã€‚
      */
     public Object createTool() throws Exception {
         return new Helper();
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄbroker¡£
+     * å–å¾—æŒ‡å®šåç§°çš„brokerã€‚
      */
     public Object createTool(String name) throws Exception {
         return brokers.getURIBroker(name);
     }
 
     /**
-     * ÕâÊÇÒ»¸ö¸¨ÖúÀà£¬Ã¿¸öÇëÇó¶¼»á´´½¨Ò»´Î¡£
+     * è¿™æ˜¯ä¸€ä¸ªè¾…åŠ©ç±»ï¼Œæ¯ä¸ªè¯·æ±‚éƒ½ä¼šåˆ›å»ºä¸€æ¬¡ã€‚
      */
     public class Helper {
         private Map<String, URIBroker> cache = createHashMap();
 
         /**
-         * ±ãÓÚÄ£°åÊ¹ÓÃµÄ·½·¨£ºÈ¡µÃÖ¸¶¨Ãû³ÆµÄbroker¡£
+         * ä¾¿äºæ¨¡æ¿ä½¿ç”¨çš„æ–¹æ³•ï¼šå–å¾—æŒ‡å®šåç§°çš„brokerã€‚
          */
         public URIBroker get(String name) {
             URIBroker broker = cache.get(name);

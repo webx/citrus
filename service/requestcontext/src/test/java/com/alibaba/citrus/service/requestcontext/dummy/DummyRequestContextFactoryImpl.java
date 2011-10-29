@@ -26,8 +26,8 @@ import com.alibaba.citrus.service.requestcontext.RequestContextException;
 import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextFactory;
 
 /**
- * ÕâÊÇÒ»¸öÃ»ÓĞÈÎºÎ¹¦ÄÜµÄfactory£¬ËüÖ±½Ó´´½¨RequestContext½Ó¿Ú£¬¶ø²»ÊÇÄ³¸ö×Ó½Ó¿Ú¡£
- * ÕâÑù£¬RequestContextPostProcessor½«²»»áÎªËü´´½¨singleton proxy¡£
+ * è¿™æ˜¯ä¸€ä¸ªæ²¡æœ‰ä»»ä½•åŠŸèƒ½çš„factoryï¼Œå®ƒç›´æ¥åˆ›å»ºRequestContextæ¥å£ï¼Œè€Œä¸æ˜¯æŸä¸ªå­æ¥å£ã€‚
+ * è¿™æ ·ï¼ŒRequestContextPostProcessorå°†ä¸ä¼šä¸ºå®ƒåˆ›å»ºsingleton proxyã€‚
  * 
  * @author Michael Zhou
  */

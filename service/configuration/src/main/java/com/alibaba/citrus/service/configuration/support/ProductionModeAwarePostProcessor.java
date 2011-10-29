@@ -26,7 +26,7 @@ import com.alibaba.citrus.service.configuration.Configuration;
 import com.alibaba.citrus.service.configuration.ProductionModeAware;
 
 /**
- * ÓÃÀ´Ö§³Ö<code>ProductionModeSensible</code>µÄpost processor¡£
+ * ç”¨æ¥æ”¯æŒ<code>ProductionModeSensible</code>çš„post processorã€‚
  * 
  * @author Michael Zhou
  */

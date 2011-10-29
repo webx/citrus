@@ -38,7 +38,7 @@ import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionP
 import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 
 /**
- * ½«spring contextÖĞµÄÖ¸¶¨bean×ª»»³Épull tool¡£
+ * å°†spring contextä¸­çš„æŒ‡å®šbeanè½¬æ¢æˆpull toolã€‚
  * 
  * @author Michael Zhou
  */
@@ -61,7 +61,7 @@ public class ContextExposerToolSet implements ToolSetFactory, ApplicationContext
             toolNamesAndBeanNames = createHashMap();
         }
 
-        // beanNameÄ¬ÈÏµÈÓÚtoolName
+        // beanNameé»˜è®¤ç­‰äºtoolName
         for (Entry<String, String> entry : toolNamesAndBeanNames.entrySet()) {
             String toolName = assertNotNull(trimToNull(entry.getKey()), "missing tool name");
             String beanName = trimToNull(entry.getValue());

@@ -34,22 +34,22 @@ import com.alibaba.citrus.test.runner.Prototyped.TestData;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
 
 /**
- * ²âÊÔ{@link FieldInfo}¡£
+ * æµ‹è¯•{@link FieldInfo}ã€‚
  * 
  * @author Michael Zhou
  */
 @RunWith(Prototyped.class)
 public class FieldTests extends BaseTypeTests implements Cloneable {
     private transient FieldInfo field;
-    private Class<?> topType; // ×Ö¶ÎËùÔÚÀàµÄ×ÓÀà
-    private Class<?> declaringType; // ×Ö¶ÎËùÔÚÀà
-    private String fieldName; // ×Ö¶ÎÃû
-    private int modifiers; // ÏŞ¶¨·û
-    private String type; // ×Ö¶ÎÀàĞÍ
-    private String toString; // toString½á¹û
-    private String resolved; // resolveµÄ½á¹û
-    private boolean resolveChanged; // Èç¹ûÎªfalse£¬´ú±íresolve·µ»Øthis
-    private String getFieldFromClassTypeInfo; // ClassTypeInfo.getFieldµÄ½á¹û
+    private Class<?> topType; // å­—æ®µæ‰€åœ¨ç±»çš„å­ç±»
+    private Class<?> declaringType; // å­—æ®µæ‰€åœ¨ç±»
+    private String fieldName; // å­—æ®µå
+    private int modifiers; // é™å®šç¬¦
+    private String type; // å­—æ®µç±»å‹
+    private String toString; // toStringç»“æœ
+    private String resolved; // resolveçš„ç»“æœ
+    private boolean resolveChanged; // å¦‚æœä¸ºfalseï¼Œä»£è¡¨resolveè¿”å›this
+    private String getFieldFromClassTypeInfo; // ClassTypeInfo.getFieldçš„ç»“æœ
 
     @Before
     public void init() throws Exception {

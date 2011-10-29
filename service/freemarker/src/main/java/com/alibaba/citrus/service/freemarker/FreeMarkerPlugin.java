@@ -18,15 +18,15 @@
 package com.alibaba.citrus.service.freemarker;
 
 /**
- * ÓÃÀ´À©Õ¹freemarkerµÄ¹¦ÄÜ¡£
+ * ç”¨æ¥æ‰©å±•freemarkerçš„åŠŸèƒ½ã€‚
  * 
  * @author Michael Zhou
  */
 public interface FreeMarkerPlugin {
     /**
-     * ³õÊ¼»¯freemarker¡£
+     * åˆå§‹åŒ–freemarkerã€‚
      * <p>
-     * ÔÚÕâÀï£¬plugin¿ÉÒÔ¸Ä±äºÍÉè¶¨configurationÖĞµÄÉèÖÃ¡£
+     * åœ¨è¿™é‡Œï¼Œpluginå¯ä»¥æ”¹å˜å’Œè®¾å®šconfigurationä¸­çš„è®¾ç½®ã€‚
      * </p>
      */
     void init(FreeMarkerConfiguration configuration);

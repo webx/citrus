@@ -27,13 +27,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.alibaba.citrus.util.io.ByteArrayOutputStream;
 
 /**
- * Éú³ÉÎ¨Ò»ID¡£
+ * ç”Ÿæˆå”¯ä¸€IDã€‚
  * <p>
- * Î¨Ò»IDÓÉÒÔÏÂÔªËØ¹¹³É£º<code>machineId-jvmId-timestamp-counter</code>¡£
+ * å”¯ä¸€IDç”±ä»¥ä¸‹å…ƒç´ æ„æˆï¼š<code>machineId-jvmId-timestamp-counter</code>ã€‚
  * </p>
  * <p>
- * Ä¬ÈÏÇé¿öÏÂ£¬UUIDÓÉÊı×ÖºÍ´óĞ´×ÖÄ¸¹¹³É¡£Èç¹ûÔÚ¹¹Ôìº¯ÊıÊ±£¬Ö¸¶¨<code>noCase=false</code>
- * £¬ÄÇÃ´ËùÉú³ÉµÄID½«°üº¬Ğ¡Ğ´×ÖÄ¸£¬ÕâÑùIDµÄ³¤¶È»á½Ï¶Ì¡£
+ * é»˜è®¤æƒ…å†µä¸‹ï¼ŒUUIDç”±æ•°å­—å’Œå¤§å†™å­—æ¯æ„æˆã€‚å¦‚æœåœ¨æ„é€ å‡½æ•°æ—¶ï¼ŒæŒ‡å®š<code>noCase=false</code>
+ * ï¼Œé‚£ä¹ˆæ‰€ç”Ÿæˆçš„IDå°†åŒ…å«å°å†™å­—æ¯ï¼Œè¿™æ ·IDçš„é•¿åº¦ä¼šè¾ƒçŸ­ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -48,10 +48,10 @@ public class UUID {
     }
 
     public UUID(boolean noCase) {
-        // 1. Machine ID - ¸ù¾İIP/MACÇø·Ö
+        // 1. Machine ID - æ ¹æ®IP/MACåŒºåˆ†
         byte[] machineId = getLocalHostAddress();
 
-        // 2. JVM ID - ¸ù¾İÆô¶¯Ê±¼äÇø·Ö + Ëæ»úÊı
+        // 2. JVM ID - æ ¹æ®å¯åŠ¨æ—¶é—´åŒºåˆ† + éšæœºæ•°
         byte[] jvmId = getRandomizedTime();
 
         this.instanceId = StringUtil.bytesToString(machineId, noCase) + "-" + StringUtil.bytesToString(jvmId, noCase);
@@ -63,7 +63,7 @@ public class UUID {
     }
 
     /**
-     * È¡µÃlocal hostµÄµØÖ·£¬Èç¹ûÓĞ¿ÉÄÜ£¬È¡µÃÎïÀíMACµØÖ·¡£
+     * å–å¾—local hostçš„åœ°å€ï¼Œå¦‚æœæœ‰å¯èƒ½ï¼Œå–å¾—ç‰©ç†MACåœ°å€ã€‚
      */
     private static byte[] getLocalHostAddress() {
         Method getHardwareAddress;
@@ -96,13 +96,13 @@ public class UUID {
     }
 
     /**
-     * È¡µÃµ±Ç°Ê±¼ä£¬¼ÓÉÏËæ»úÊı¡£
+     * å–å¾—å½“å‰æ—¶é—´ï¼ŒåŠ ä¸Šéšæœºæ•°ã€‚
      */
     private byte[] getRandomizedTime() {
         long jvmId = System.currentTimeMillis();
         long random = new SecureRandom().nextLong();
 
-        // È¡µÃÉÏÊöIDµÄbytes£¬²¢×ª»¯³É×Ö·û´®
+        // å–å¾—ä¸Šè¿°IDçš„bytesï¼Œå¹¶è½¬åŒ–æˆå­—ç¬¦ä¸²
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         DataOutputStream dos = new DataOutputStream(baos);
 
@@ -116,7 +116,7 @@ public class UUID {
     }
 
     public String nextID() {
-        // MACHINE_ID + JVM_ID + µ±Ç°Ê±¼ä + counter
+        // MACHINE_ID + JVM_ID + å½“å‰æ—¶é—´ + counter
         return instanceId + "-" + StringUtil.longToString(System.currentTimeMillis(), noCase) + "-"
                 + StringUtil.longToString(counter.getAndIncrement(), noCase);
     }

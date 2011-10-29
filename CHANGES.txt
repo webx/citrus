@@ -1,7 +1,7 @@
 -- Changes in 3.0.1
 
-* ¸Ä½øFormResolver£º½«¿Õ°×±íµ¥¿´×÷invalid£¬µÈÍ¬ÓÚÑéÖ¤Ê§°Ü£¬µ±skipIfInvalid=trueÊ±£¬±ÜÃâÖ´ĞĞaction¡£
-* ¸Ä½øWebxFrameworkFilter£ºÌí¼Óexcludes²ÎÊı£¬Ê¹Ëü¿ÉÒÔ¿ìËÙÅÅ³ı²»ĞèÒª´¦ÀíµÄrequestURI
+* æ”¹è¿›FormResolverï¼šå°†ç©ºç™½è¡¨å•çœ‹ä½œinvalidï¼Œç­‰åŒäºéªŒè¯å¤±è´¥ï¼Œå½“skipIfInvalid=trueæ—¶ï¼Œé¿å…æ‰§è¡Œactionã€‚
+* æ”¹è¿›WebxFrameworkFilterï¼šæ·»åŠ excludeså‚æ•°ï¼Œä½¿å®ƒå¯ä»¥å¿«é€Ÿæ’é™¤ä¸éœ€è¦å¤„ç†çš„requestURI
 
     <filter>
         <filter-name>webx</filter-name>
@@ -22,86 +22,86 @@
         <url-pattern>/otherservlet/*</url-pattern>
     </servlet-mapping>
 
-* ¸Ä½øCsrfToken£¬Ê¹ËüµÄÉú³ÉËã·¨¿ÉÒÔ±»±ğµÄÄ£¿éËù¸²¸Ç¡£
-* ¸Ä±äCsrfToken.getHiddenField()µÄÄ¬ÈÏĞĞÎª ©¤©¤ Ä¬ÈÏÉú³ÉlongLiveToken¶ø²»ÊÇÔ­À´µÄuniqueToken¡£
-* Bugfix£ºµ±fileItemÎª¿ÕÊ±£¬uploaded-file-validatorÅ×NPEµÄÎÊÌâ
-* Bugfix£ºµ±redirectÊ±£¬²»ÒªÖ´ĞĞaction
-* ¸Ä±ä<parser/> request contextÖĞÀûÓÃgetBeanByTypeÈ¡µÃupload serviceµÄ·½Ê½£º
-  ÓÉÓÚ<request-contexts>ºÍ<parser>»áÔÚBeanFactoryPostProcessorÖĞ³õÊ¼»¯£¬¶ø´ËÊ±aop post processor»¹Î´±»´´½¨¡£
-  ¶øgetBeanByType¿ÉÄÜµ¼ÖÂÄ³Ğ©FactoryBeanÇÀÔÚaop post processorÖ®Ç°±»³õÊ¼»¯£¬µ¼ÖÂÕâ²¿·ÖµÄbeanÎŞ·¨±»aopÀ¹½Ø¡£
-* ¸Ä½ø<data-resolver>·şÎñ»ñÈ¡parameter annotationsµÄ·½Ê½£º
-  ÓÉÓÚaop¿ÉÄÜ»áÔËĞĞÊ±ÅÉÉúÒ»¸öĞÂµÄÀà£¬¶øÕâ¸öÀà²¢Ã»ÓĞ°üº¬parameter annotations£¬µ¼ÖÂdata resolverÎŞ·¨½âÎö¸Ã²ÎÊı¡£
-  ¸Ä½øÒÔºó£¬data-resolver»á´Ósuper classµÄ±»¸²¸Ç·½·¨ÖĞÈ¡µÃannotation¡£
-* Bugfix£º½â¾öURIBroker.toString()È»ºóÔÙfork()£¬intercepters»á±»ÖØ¸´Ö´ĞĞµÄÎÊÌâ¡£
-* Bugfix£ºModuleLoaderServiceÖĞ²úÉúClassCastExceptionµÄÎÊÌâ¡£
-* ¸Ä½ø£ºÔÚExceptionUtilÖĞÔö¼ÓthrowExceptionOrError()ºÍthrowRuntimeExceptionOrError()·½·¨£¨ÓÃÀ´½â¾öÉÏÒ»¸öbug£©¡£
-* Bugfix: escape-support¶ÔÓÚ#define block»á¶àÖØescape¡£
-* ¸Ä½ø£º¶ÔÓÚnoescape£¬·µ»Øvalue object£¬±ÜÃâµ÷ÓÃvalue.toString()£¬ºÏºóĞøµÄhandler¿ÉÒÔ±»ÕıÈ·Ö´ĞĞ¡£
-* ¸Ä½ø£º<set-local inputCharsetParam="" outputCharsetParam="" >Ö§³Ö¶à¸ö²ÎÊı£¬ÓÃ|·Ö¸ô£¬ÀıÈç£º"_input_charset|ie"
-* ¸Ä½ø£ºLocaleUtil.isCharsetSupported(null)·µ»Øfalse£¬¶ø²»ÊÇÒì³£
-* ¸Ä½ø£ºÌí¼Óconfiguration point: rewrite/handlers£¬½«beans:beanµÄÒıÓÃ¸Ä³Éhandlers:handler¡£
-  ×¢Òâ£ºÕâ»áÒıÆğxml¸ñÊ½µÄ²»¼æÈİ£¬µ«ÊÇÕâ¸öÎÊÌâ¿ÉÒÔÔÚÓ¦ÓÃÆô¶¯Ê±Á¢¿Ì·¢ÏÖ£¬²¢ÇÒºÜÈİÒ×ĞŞ¸Ä¡£
-  step1: ÒıÈënamespace: xmlns:rewrite-handlers="http://www.alibaba.com/schema/services/request-contexts/rewrite/handlers"
-  step2: Ö¸¶¨schema location: http://www.alibaba.com/schema/services/request-contexts/rewrite/handlers http://localhost:8080/schema/services-request-contexts-rewrite-handlers.xsd
-  step3: ½«<handlers><beans:bean>¸Ä³É£º<handlers><rewrite-handlers:handler>
-* ¸Ä½øpomÊ¹ÏîÄ¿¿ÉÔÚÄ¬ÈÏµÄmaven repositoryÏÂbuild
-* ¸Ä½ømail service£¬Ê¹Ö®ÔÚjavamail 1.4.1ºÍ1.4.2ÏÂÓĞÒ»ÖÂµÄ±íÏÖ¡£
+* æ”¹è¿›CsrfTokenï¼Œä½¿å®ƒçš„ç”Ÿæˆç®—æ³•å¯ä»¥è¢«åˆ«çš„æ¨¡å—æ‰€è¦†ç›–ã€‚
+* æ”¹å˜CsrfToken.getHiddenField()çš„é»˜è®¤è¡Œä¸º â”€â”€ é»˜è®¤ç”ŸæˆlongLiveTokenè€Œä¸æ˜¯åŸæ¥çš„uniqueTokenã€‚
+* Bugfixï¼šå½“fileItemä¸ºç©ºæ—¶ï¼Œuploaded-file-validatoræŠ›NPEçš„é—®é¢˜
+* Bugfixï¼šå½“redirectæ—¶ï¼Œä¸è¦æ‰§è¡Œaction
+* æ”¹å˜<parser/> request contextä¸­åˆ©ç”¨getBeanByTypeå–å¾—upload serviceçš„æ–¹å¼ï¼š
+  ç”±äº<request-contexts>å’Œ<parser>ä¼šåœ¨BeanFactoryPostProcessorä¸­åˆå§‹åŒ–ï¼Œè€Œæ­¤æ—¶aop post processorè¿˜æœªè¢«åˆ›å»ºã€‚
+  è€ŒgetBeanByTypeå¯èƒ½å¯¼è‡´æŸäº›FactoryBeanæŠ¢åœ¨aop post processorä¹‹å‰è¢«åˆå§‹åŒ–ï¼Œå¯¼è‡´è¿™éƒ¨åˆ†çš„beanæ— æ³•è¢«aopæ‹¦æˆªã€‚
+* æ”¹è¿›<data-resolver>æœåŠ¡è·å–parameter annotationsçš„æ–¹å¼ï¼š
+  ç”±äºaopå¯èƒ½ä¼šè¿è¡Œæ—¶æ´¾ç”Ÿä¸€ä¸ªæ–°çš„ç±»ï¼Œè€Œè¿™ä¸ªç±»å¹¶æ²¡æœ‰åŒ…å«parameter annotationsï¼Œå¯¼è‡´data resolveræ— æ³•è§£æè¯¥å‚æ•°ã€‚
+  æ”¹è¿›ä»¥åï¼Œdata-resolverä¼šä»super classçš„è¢«è¦†ç›–æ–¹æ³•ä¸­å–å¾—annotationã€‚
+* Bugfixï¼šè§£å†³URIBroker.toString()ç„¶åå†fork()ï¼Œinterceptersä¼šè¢«é‡å¤æ‰§è¡Œçš„é—®é¢˜ã€‚
+* Bugfixï¼šModuleLoaderServiceä¸­äº§ç”ŸClassCastExceptionçš„é—®é¢˜ã€‚
+* æ”¹è¿›ï¼šåœ¨ExceptionUtilä¸­å¢åŠ throwExceptionOrError()å’ŒthrowRuntimeExceptionOrError()æ–¹æ³•ï¼ˆç”¨æ¥è§£å†³ä¸Šä¸€ä¸ªbugï¼‰ã€‚
+* Bugfix: escape-supportå¯¹äº#define blockä¼šå¤šé‡escapeã€‚
+* æ”¹è¿›ï¼šå¯¹äºnoescapeï¼Œè¿”å›value objectï¼Œé¿å…è°ƒç”¨value.toString()ï¼Œåˆåç»­çš„handlerå¯ä»¥è¢«æ­£ç¡®æ‰§è¡Œã€‚
+* æ”¹è¿›ï¼š<set-local inputCharsetParam="" outputCharsetParam="" >æ”¯æŒå¤šä¸ªå‚æ•°ï¼Œç”¨|åˆ†éš”ï¼Œä¾‹å¦‚ï¼š"_input_charset|ie"
+* æ”¹è¿›ï¼šLocaleUtil.isCharsetSupported(null)è¿”å›falseï¼Œè€Œä¸æ˜¯å¼‚å¸¸
+* æ”¹è¿›ï¼šæ·»åŠ configuration point: rewrite/handlersï¼Œå°†beans:beançš„å¼•ç”¨æ”¹æˆhandlers:handlerã€‚
+  æ³¨æ„ï¼šè¿™ä¼šå¼•èµ·xmlæ ¼å¼çš„ä¸å…¼å®¹ï¼Œä½†æ˜¯è¿™ä¸ªé—®é¢˜å¯ä»¥åœ¨åº”ç”¨å¯åŠ¨æ—¶ç«‹åˆ»å‘ç°ï¼Œå¹¶ä¸”å¾ˆå®¹æ˜“ä¿®æ”¹ã€‚
+  step1: å¼•å…¥namespace: xmlns:rewrite-handlers="http://www.alibaba.com/schema/services/request-contexts/rewrite/handlers"
+  step2: æŒ‡å®šschema location: http://www.alibaba.com/schema/services/request-contexts/rewrite/handlers http://localhost:8080/schema/services-request-contexts-rewrite-handlers.xsd
+  step3: å°†<handlers><beans:bean>æ”¹æˆï¼š<handlers><rewrite-handlers:handler>
+* æ”¹è¿›pomä½¿é¡¹ç›®å¯åœ¨é»˜è®¤çš„maven repositoryä¸‹build
+* æ”¹è¿›mail serviceï¼Œä½¿ä¹‹åœ¨javamail 1.4.1å’Œ1.4.2ä¸‹æœ‰ä¸€è‡´çš„è¡¨ç°ã€‚
 
 -- Changes in 3.0.2
 
-* ¸Ä½øSessionRequestContext£¬µ±attributesÎ´¸Ä±ä£¬²¢ÇÒinvalidateÎ´µ÷ÓÃÊ±£¬²»Ìá½»store£¬ÒÔÃâ²úÉú²»±ØÒªÖ®cookies¡£
+* æ”¹è¿›SessionRequestContextï¼Œå½“attributesæœªæ”¹å˜ï¼Œå¹¶ä¸”invalidateæœªè°ƒç”¨æ—¶ï¼Œä¸æäº¤storeï¼Œä»¥å…äº§ç”Ÿä¸å¿…è¦ä¹‹cookiesã€‚
 
-  ×¢Òâ£ºsession store²»±£Ö¤¶ÔÏóµÄÄÚ²¿ÊôĞÔµÄ¸Ä±ä»á±»±£´æµ½storeÖĞ£¬ÀıÈç£¬ÏÂÃæµÄ´úÂë²»Ò»¶¨¿ÉĞĞ£º
+  æ³¨æ„ï¼šsession storeä¸ä¿è¯å¯¹è±¡çš„å†…éƒ¨å±æ€§çš„æ”¹å˜ä¼šè¢«ä¿å­˜åˆ°storeä¸­ï¼Œä¾‹å¦‚ï¼Œä¸‹é¢çš„ä»£ç ä¸ä¸€å®šå¯è¡Œï¼š
 
   MyObject myObject = session.getAttribute("myObject");
   myObject.setValue(value);
 
   // next request of the same session
-  assertEquals(value, ((MyObject) session.getAttribute("myObject")).getValue()); // ¿ÉÄÜ²»µÈ
+  assertEquals(value, ((MyObject) session.getAttribute("myObject")).getValue()); // å¯èƒ½ä¸ç­‰
 
-* Bugfix: ÔÚ½âÎöquery²ÎÊıÊ±£¬¶Ô¡°Justin%A1%A4Bieber¡±½øĞĞURL unescapeÊ±£¨GBK£©£¬µÃµ½ÂÒÂë¡£
-* ¸Ä½øWebxComponentsContext½Ó¿Ú£¬Ê¹¿ª·¢ÕßÓĞ»ú»á¼Ì³Ğ²¢ÉèÖÃ¶îÍâµÄ²ÎÊı¡£ÀıÈç£ºÔÊĞíbean definitionÖØ¸´¶¨Òå¡£
-* Bugfix: µ±RequestContextÎ´À©Õ¹×Ó½Ó¿ÚÊ±£¬½«¶ÔRequestContext´´½¨singleton proxy£¬´Ó¶øµ¼ÖÂ×¢ÈëRequestContext½Ó¿ÚÊ±³ö´í¡£
-  ½â¾ö²½Öè£º1. ±ÜÃâ¶Ô´´½¨RequestContext½Ó¿Ú±¾Éí´´½¨singleton proxy
-          2. ²»Ê¹ÓÃspring±¾ÉíµÄObjectFactory×÷ÎªproxyµÄ½Ó¿Ú£¬¶øÊÇ´´½¨Ò»¸öĞÂµÄ½Ó¿Ú£ºProxyTargetFactory
-* Bugfix: ÔÚServlet 3.0/Tomcat 7.0ÖĞ£¬¶ÔCookie.isHttpOnly´´½¨FastClassÊ±³öClassNotFoundException¡£½â¾ö²½Öè£¬Ö¸¶¨ÕıÈ·µÄclassLoader¡£
-* ¸Ä½ø£ºÌí¼ÓExceptionUtil.getStackTraceForHtmlComment()·½·¨£¬Ê¹°üº¬¡°--¡±µÄÒì³£ĞÅÏ¢¿É±»ÕıÈ·Êä³öHTML commentÖĞ¡£
-* ¸Ä½ø£º(Servlet|Turbine|)ContentURIBroker.getURI("xxx?a=1&b=2#ref")Ö§³ÖqueryºÍref
-* ¸Ä½ø£ºURIBroker.setServerURI("xxx?a=1&b=2#ref")Ö§³ÖqueryºÍref
-* ¸Ä½ø£ºÖ§³Öµ¼³öcontrol contextÖĞµÄÖµµ½µ÷ÓÃÕß¡£
-  * ÁÙÊ±µ¼³ö£º$controlTool.export("var1", "var2", ...)
-  * µ¼³öÈ«²¿£¨²»ÍÆ¼ö£¬Ä¬ÈÏÎªfalse£©£º<control-tool exportAll="true" />
-* ¸Ä½ø£ºÖ§³ÖÔÚÄ£°åÖĞÖ¸¶¨layout£º$rundata.setLayout(xxx)
-* ¸Ä½ø£ºÊ¹error pipelineÖĞ¿ÉÒÔÈ¡µÃÓ¦ÓÃcontextÖĞµÄ¶ÔÏó£¨µ«ÊÇ²»°üÀ¨pull tools£©¡£
-* É¾³ı¹ıÆÚµÄExceptionRecoveryValve
-* Bugfix: µ±<input type=file>×Ö¶Î´æÔÚ£¬µ«Î´ÉÏ´«ÎÄ¼şÊ±£¬ValueListSupport.getFileItems()²»ÄÜÈ¡µÃÕıÈ·µÄ½á¹û¡£
+* Bugfix: åœ¨è§£æqueryå‚æ•°æ—¶ï¼Œå¯¹â€œJustin%A1%A4Bieberâ€è¿›è¡ŒURL unescapeæ—¶ï¼ˆGBKï¼‰ï¼Œå¾—åˆ°ä¹±ç ã€‚
+* æ”¹è¿›WebxComponentsContextæ¥å£ï¼Œä½¿å¼€å‘è€…æœ‰æœºä¼šç»§æ‰¿å¹¶è®¾ç½®é¢å¤–çš„å‚æ•°ã€‚ä¾‹å¦‚ï¼šå…è®¸bean definitioné‡å¤å®šä¹‰ã€‚
+* Bugfix: å½“RequestContextæœªæ‰©å±•å­æ¥å£æ—¶ï¼Œå°†å¯¹RequestContextåˆ›å»ºsingleton proxyï¼Œä»è€Œå¯¼è‡´æ³¨å…¥RequestContextæ¥å£æ—¶å‡ºé”™ã€‚
+  è§£å†³æ­¥éª¤ï¼š1. é¿å…å¯¹åˆ›å»ºRequestContextæ¥å£æœ¬èº«åˆ›å»ºsingleton proxy
+          2. ä¸ä½¿ç”¨springæœ¬èº«çš„ObjectFactoryä½œä¸ºproxyçš„æ¥å£ï¼Œè€Œæ˜¯åˆ›å»ºä¸€ä¸ªæ–°çš„æ¥å£ï¼šProxyTargetFactory
+* Bugfix: åœ¨Servlet 3.0/Tomcat 7.0ä¸­ï¼Œå¯¹Cookie.isHttpOnlyåˆ›å»ºFastClassæ—¶å‡ºClassNotFoundExceptionã€‚è§£å†³æ­¥éª¤ï¼ŒæŒ‡å®šæ­£ç¡®çš„classLoaderã€‚
+* æ”¹è¿›ï¼šæ·»åŠ ExceptionUtil.getStackTraceForHtmlComment()æ–¹æ³•ï¼Œä½¿åŒ…å«â€œ--â€çš„å¼‚å¸¸ä¿¡æ¯å¯è¢«æ­£ç¡®è¾“å‡ºHTML commentä¸­ã€‚
+* æ”¹è¿›ï¼š(Servlet|Turbine|)ContentURIBroker.getURI("xxx?a=1&b=2#ref")æ”¯æŒqueryå’Œref
+* æ”¹è¿›ï¼šURIBroker.setServerURI("xxx?a=1&b=2#ref")æ”¯æŒqueryå’Œref
+* æ”¹è¿›ï¼šæ”¯æŒå¯¼å‡ºcontrol contextä¸­çš„å€¼åˆ°è°ƒç”¨è€…ã€‚
+  * ä¸´æ—¶å¯¼å‡ºï¼š$controlTool.export("var1", "var2", ...)
+  * å¯¼å‡ºå…¨éƒ¨ï¼ˆä¸æ¨èï¼Œé»˜è®¤ä¸ºfalseï¼‰ï¼š<control-tool exportAll="true" />
+* æ”¹è¿›ï¼šæ”¯æŒåœ¨æ¨¡æ¿ä¸­æŒ‡å®šlayoutï¼š$rundata.setLayout(xxx)
+* æ”¹è¿›ï¼šä½¿error pipelineä¸­å¯ä»¥å–å¾—åº”ç”¨contextä¸­çš„å¯¹è±¡ï¼ˆä½†æ˜¯ä¸åŒ…æ‹¬pull toolsï¼‰ã€‚
+* åˆ é™¤è¿‡æœŸçš„ExceptionRecoveryValve
+* Bugfix: å½“<input type=file>å­—æ®µå­˜åœ¨ï¼Œä½†æœªä¸Šä¼ æ–‡ä»¶æ—¶ï¼ŒValueListSupport.getFileItems()ä¸èƒ½å–å¾—æ­£ç¡®çš„ç»“æœã€‚
 
 -- Changes in 3.0.3
 
-* ¸Ä½ø: new LocaleInfo(locale, charset)Ê±£¬¼´Ê¹charsetÎª·Ç·¨µÄ£¬Ò²²»±¨´í¡£°ÑÅĞ¶ÏcharsetºÏ·¨ĞÔµÄÈÎÎñ½»¸øLocaleUtil.isCharsetSupported()·½·¨¡£
-  £¨µ«ÔÚsetDefaultºÍsetContextÊ±»áÅĞ¶ÏcharsetµÄºÏ·¨ĞÔ£©
-  ÕâÑù¸Ä½ø±ÜÃâÁËsetLocaleRequestContextÖĞ³öÏÖUnsupportedCharsetExceptionÒì³£¡£
+* æ”¹è¿›: new LocaleInfo(locale, charset)æ—¶ï¼Œå³ä½¿charsetä¸ºéæ³•çš„ï¼Œä¹Ÿä¸æŠ¥é”™ã€‚æŠŠåˆ¤æ–­charsetåˆæ³•æ€§çš„ä»»åŠ¡äº¤ç»™LocaleUtil.isCharsetSupported()æ–¹æ³•ã€‚
+  ï¼ˆä½†åœ¨setDefaultå’ŒsetContextæ—¶ä¼šåˆ¤æ–­charsetçš„åˆæ³•æ€§ï¼‰
+  è¿™æ ·æ”¹è¿›é¿å…äº†setLocaleRequestContextä¸­å‡ºç°UnsupportedCharsetExceptionå¼‚å¸¸ã€‚
 
-* Ïà¹Ø¸Ä½ø£ºÌí¼Ó·½·¨£ºLocaleInfo.isCharsetSupported(), assertCharsetSupported()¡£
+* ç›¸å…³æ”¹è¿›ï¼šæ·»åŠ æ–¹æ³•ï¼šLocaleInfo.isCharsetSupported(), assertCharsetSupported()ã€‚
 
-* ¸Ä½ø£ºĞŞ¸ÄTurbineRunDataInternal½Ó¿Ú£¬½«get/setContextForControlµÄ¹¦ÄÜºÍpush/popContextºÏ²¢£¬¼ò»¯ÁËcontrolÖĞ´´½¨contextµÄÂß¼­¡£
-  ×¢Òâ£ºÓ¦ÓÃ²»Ó¦¸ÃÒÀÀµÓÚTurbineRunDataInternal½Ó¿Ú£¬Èç¹ûÒÀÀµÁË£¬²¢ÓÃµ½ÁËĞŞ¸ÄµÄ·½·¨£¬ÓĞ¿ÉÄÜÊÜÓ°Ïì¡£
-* ¸Ä½ø£ºÌí¼ÓÁËControlParameters½Ó¿Ú£¬Ëü¿ÉÒÔÍ¨¹ı²ÎÊı×¢Èëµ½control moduleÀàÖĞ¡£ControlÍ¨¹ıËü¿ÉÒÔĞŞ¸Ä»òÈ¡Ïûtemplate¡£
-* ¸Ä½ø£ºÌí¼ÓÁË@ContextValue×¢½â£¬¿ÉÒÔÍ¨¹ı²ÎÊıÖ±½Ó×¢ÈëContextÖĞµÄÖµ£¬»ò´«µİ¸øcontrolµÄ²ÎÊı¡£
+* æ”¹è¿›ï¼šä¿®æ”¹TurbineRunDataInternalæ¥å£ï¼Œå°†get/setContextForControlçš„åŠŸèƒ½å’Œpush/popContextåˆå¹¶ï¼Œç®€åŒ–äº†controlä¸­åˆ›å»ºcontextçš„é€»è¾‘ã€‚
+  æ³¨æ„ï¼šåº”ç”¨ä¸åº”è¯¥ä¾èµ–äºTurbineRunDataInternalæ¥å£ï¼Œå¦‚æœä¾èµ–äº†ï¼Œå¹¶ç”¨åˆ°äº†ä¿®æ”¹çš„æ–¹æ³•ï¼Œæœ‰å¯èƒ½å—å½±å“ã€‚
+* æ”¹è¿›ï¼šæ·»åŠ äº†ControlParametersæ¥å£ï¼Œå®ƒå¯ä»¥é€šè¿‡å‚æ•°æ³¨å…¥åˆ°control moduleç±»ä¸­ã€‚Controlé€šè¿‡å®ƒå¯ä»¥ä¿®æ”¹æˆ–å–æ¶ˆtemplateã€‚
+* æ”¹è¿›ï¼šæ·»åŠ äº†@ContextValueæ³¨è§£ï¼Œå¯ä»¥é€šè¿‡å‚æ•°ç›´æ¥æ³¨å…¥Contextä¸­çš„å€¼ï¼Œæˆ–ä¼ é€’ç»™controlçš„å‚æ•°ã€‚
 
-* ¸Ä½ø£ºÌí¼ÓVisitorInvocationErrorHandler½Ó¿Ú£¬Ê¹templatelite¿ÉÒÔÑ¡ÔñÅ×³övisitorµÄÒì³££¬»òÕßÓÉvisitorÀ´×Ô¼º´¦ÀíÒì³£¡£
-* ¸Ä½ø²¢bugfix£ºÈÃTextWriterÊµÏÖVisitorInvocationError£¬Ä¬ÈÏÏÔÊ¾root causeÒì³£²¢¼ÇÂ¼ÈÕÖ¾£¬µ«²»Å×³ö´íÎó¡£
-  ×¢½â£ºÓÉÓÚrequest attributesÖĞ´æÔÚturbine rundata proxyµÄÒıÓÃ£¬¶øÔÚdetailed error»·¾³ÖĞ²»´æÔÚrundata£¬Òò´Ëµ¼ÖÂÏÔÊ¾detailed errorÒ³ÃæÊ±³ö´í¡£
-  È»¶øÕâÖÖ´íÎóÍêÈ«ÊÇÎŞÎ½µÄ£¬ÖØÒªµÄÊÇÏÔÊ¾Ó¦ÓÃµÄÒì³£¡£´Ë¸Ä½øÊ¹detailed errorÒ³Ãæ²»»áÒòÎªvisitorµÄÊ§°Ü¶øÊ§°Ü¡£
+* æ”¹è¿›ï¼šæ·»åŠ VisitorInvocationErrorHandleræ¥å£ï¼Œä½¿templateliteå¯ä»¥é€‰æ‹©æŠ›å‡ºvisitorçš„å¼‚å¸¸ï¼Œæˆ–è€…ç”±visitoræ¥è‡ªå·±å¤„ç†å¼‚å¸¸ã€‚
+* æ”¹è¿›å¹¶bugfixï¼šè®©TextWriterå®ç°VisitorInvocationErrorï¼Œé»˜è®¤æ˜¾ç¤ºroot causeå¼‚å¸¸å¹¶è®°å½•æ—¥å¿—ï¼Œä½†ä¸æŠ›å‡ºé”™è¯¯ã€‚
+  æ³¨è§£ï¼šç”±äºrequest attributesä¸­å­˜åœ¨turbine rundata proxyçš„å¼•ç”¨ï¼Œè€Œåœ¨detailed errorç¯å¢ƒä¸­ä¸å­˜åœ¨rundataï¼Œå› æ­¤å¯¼è‡´æ˜¾ç¤ºdetailed erroré¡µé¢æ—¶å‡ºé”™ã€‚
+  ç„¶è€Œè¿™ç§é”™è¯¯å®Œå…¨æ˜¯æ— è°“çš„ï¼Œé‡è¦çš„æ˜¯æ˜¾ç¤ºåº”ç”¨çš„å¼‚å¸¸ã€‚æ­¤æ”¹è¿›ä½¿detailed erroré¡µé¢ä¸ä¼šå› ä¸ºvisitorçš„å¤±è´¥è€Œå¤±è´¥ã€‚
 
-* ¸Ä½ø£º¼ò»¯StaticFunctionDelegatorBuilderËùÉú³É¶ÔÏóµÄtoString·½·¨£¬Ê¹Ö®¸üÒ×¶Á£»
-* ¸Ä½ø£ºÌí¼ÓExceptionUtil.getRootCause()·½·¨¡£
+* æ”¹è¿›ï¼šç®€åŒ–StaticFunctionDelegatorBuilderæ‰€ç”Ÿæˆå¯¹è±¡çš„toStringæ–¹æ³•ï¼Œä½¿ä¹‹æ›´æ˜“è¯»ï¼›
+* æ”¹è¿›ï¼šæ·»åŠ ExceptionUtil.getRootCause()æ–¹æ³•ã€‚
 
 -- Changes in 3.0.4
 
-* bugfix: °Ñ/indexÖØĞ´£¨rewrite£©³É/index.htmÊ±£¬±ä³ÉÁË/index/.htm¡£
-* ¸Ä½ø£ºÈÃform serviceºÍuris serviceÖ§³Öimport£¬ÕâÑù£¬¾Í¿ÉÒÔ°Ñform.xmlºÍuris.xml·Ö¸î³É¶à¸öÎÄ¼ş£¬±ãÓÚ¹ÜÀí¡£
-  ĞèÒª×¢Òâ£¬ÓÉÓÚÓĞ¶à¸öformºÍurisÊµÀı´æÔÚ£¬ËùÒÔĞèÒªÖ¸¶¨primary²ÎÊı£¬·ñÔò×¢Èë»á³ö´í¡£
+* bugfix: æŠŠ/indexé‡å†™ï¼ˆrewriteï¼‰æˆ/index.htmæ—¶ï¼Œå˜æˆäº†/index/.htmã€‚
+* æ”¹è¿›ï¼šè®©form serviceå’Œuris serviceæ”¯æŒimportï¼Œè¿™æ ·ï¼Œå°±å¯ä»¥æŠŠform.xmlå’Œuris.xmlåˆ†å‰²æˆå¤šä¸ªæ–‡ä»¶ï¼Œä¾¿äºç®¡ç†ã€‚
+  éœ€è¦æ³¨æ„ï¼Œç”±äºæœ‰å¤šä¸ªformå’Œuriså®ä¾‹å­˜åœ¨ï¼Œæ‰€ä»¥éœ€è¦æŒ‡å®šprimaryå‚æ•°ï¼Œå¦åˆ™æ³¨å…¥ä¼šå‡ºé”™ã€‚
 
   <form id="common" />
 
@@ -115,61 +115,61 @@
     <import uris="common" />
   </uris>
 
-* ¸Ä½øTemplateLite¹¤¾ß£¬²¢½«Ëü´Óinternal°ü¿ª·¢µ½common-utilÖĞ£¬¿É¹©Íâ²¿Ê¹ÓÃ¡£
+* æ”¹è¿›TemplateLiteå·¥å…·ï¼Œå¹¶å°†å®ƒä»internalåŒ…å¼€å‘åˆ°common-utilä¸­ï¼Œå¯ä¾›å¤–éƒ¨ä½¿ç”¨ã€‚
 
-* ĞÂÔöexplorer¿ª·¢¹¤¾ß£¬ÔÚ¿ª·¢Ä£Ê½ÏÂ£¬¿ÉÒÔ£º
-  ¡Á ÁĞ³öËùÓĞcontextÖĞµÄspring beans£¬ÒÔ°ïÖú¿ª·¢ÕßÁË½âschemaËùÉú³ÉµÄbeans½á¹¹¡£
-  ¡Á ²é¿´resource loading·şÎñÖĞ×ÊÔ´¡£
-  ¡Á ²é¿´uri brokers¡£
-  ¡Á ²é¿´pull tools¡£
+* æ–°å¢explorerå¼€å‘å·¥å…·ï¼Œåœ¨å¼€å‘æ¨¡å¼ä¸‹ï¼Œå¯ä»¥ï¼š
+  Ã— åˆ—å‡ºæ‰€æœ‰contextä¸­çš„spring beansï¼Œä»¥å¸®åŠ©å¼€å‘è€…äº†è§£schemaæ‰€ç”Ÿæˆçš„beansç»“æ„ã€‚
+  Ã— æŸ¥çœ‹resource loadingæœåŠ¡ä¸­èµ„æºã€‚
+  Ã— æŸ¥çœ‹uri brokersã€‚
+  Ã— æŸ¥çœ‹pull toolsã€‚
 
-* ¸Ä½ø£ºresourceLoadingService.trace()Ê±£¬Èç¹û³É¹¦µÄ»°£¬ÄÜ¹»È¡µÃresource¶ÔÏó¡£
-* ¸Ä½ø£ºpullService£¬¿ÉÒÔÈ¡µÃtool-setµÄĞÅÏ¢£¬ÒÔ·½±ãexplorer²é¿´¡£
+* æ”¹è¿›ï¼šresourceLoadingService.trace()æ—¶ï¼Œå¦‚æœæˆåŠŸçš„è¯ï¼Œèƒ½å¤Ÿå–å¾—resourceå¯¹è±¡ã€‚
+* æ”¹è¿›ï¼špullServiceï¼Œå¯ä»¥å–å¾—tool-setçš„ä¿¡æ¯ï¼Œä»¥æ–¹ä¾¿exploreræŸ¥çœ‹ã€‚
 
-* ¸Ä½ø£ºÔÊĞíapplication contextÖĞ³öÏÖÖØ¸´¶¨ÒåµÄbean£¬ºÏ²¢ÖØ¸´¶¨ÒåµÄbean definitionµÄÄÚÈİ¡£ÕâÑù×öµÄÄ¿µÄÊÇÎªÁË¿ÉÒÔ¸²¸ÇbeanµÄÄ¬ÈÏÅäÖÃ¡£
-* ¸Ä½ø£ºÖ§³Ö´Óclasspath*:ÖĞ²éÕÒwebx×ÓÓ¦ÓÃµÄÅäÖÃÎÄ¼ş¡£ÀıÈç£º
+* æ”¹è¿›ï¼šå…è®¸application contextä¸­å‡ºç°é‡å¤å®šä¹‰çš„beanï¼Œåˆå¹¶é‡å¤å®šä¹‰çš„bean definitionçš„å†…å®¹ã€‚è¿™æ ·åšçš„ç›®çš„æ˜¯ä¸ºäº†å¯ä»¥è¦†ç›–beançš„é»˜è®¤é…ç½®ã€‚
+* æ”¹è¿›ï¼šæ”¯æŒä»classpath*:ä¸­æŸ¥æ‰¾webxå­åº”ç”¨çš„é…ç½®æ–‡ä»¶ã€‚ä¾‹å¦‚ï¼š
     <webx-configuration>
         <components componentConfigurationLocationPattern="classpath*:META-INF/mycomponent/*.xml" />
     </webx-configuration>
-* ¸Ä½ø£ºÈç¹ûÖ¸¶¨ÁË-DskipValidationÆô¶¯²ÎÊı£¬ÔòÌø¹ıschemaÑéÖ¤£¬ÒÔ¼Ó¿ìÆô¶¯ËÙ¶È¡£ÇëÎğÔÚÉú²ú»·¾³Ê¹ÓÃÕâ¸ö¹¦ÄÜ¡£
+* æ”¹è¿›ï¼šå¦‚æœæŒ‡å®šäº†-DskipValidationå¯åŠ¨å‚æ•°ï¼Œåˆ™è·³è¿‡schemaéªŒè¯ï¼Œä»¥åŠ å¿«å¯åŠ¨é€Ÿåº¦ã€‚è¯·å‹¿åœ¨ç”Ÿäº§ç¯å¢ƒä½¿ç”¨è¿™ä¸ªåŠŸèƒ½ã€‚
 
 -- Changes in 3.0.5
 
-* Bugfix: CsrfToken.getLongLiveTokenÔÚ¼¯Èº»úÆ÷ÉÏ²úÉú²»Ò»ÖÂµÄ½á¹û¡£
-* ¸Ä½ø£ºµ±Ö¸¶¨-DskipValidationÊ±£¬beans¶¨ÒåÖĞµÄ²ÎÊı¿ÉÈ¡µÃÕıÈ·µÄÄ¬ÈÏÖµ£¬ÀıÈç£ºdefault-autowire£¬default-dependency-checkµÈ¡£
+* Bugfix: CsrfToken.getLongLiveTokenåœ¨é›†ç¾¤æœºå™¨ä¸Šäº§ç”Ÿä¸ä¸€è‡´çš„ç»“æœã€‚
+* æ”¹è¿›ï¼šå½“æŒ‡å®š-DskipValidationæ—¶ï¼Œbeanså®šä¹‰ä¸­çš„å‚æ•°å¯å–å¾—æ­£ç¡®çš„é»˜è®¤å€¼ï¼Œä¾‹å¦‚ï¼šdefault-autowireï¼Œdefault-dependency-checkç­‰ã€‚
 
 -- Changes in 3.0.6
 
-* ¸Ä½ø£ºÈÃwebxÍ¬Ê±Ö§³Öspring2/3¡£
- £¨ĞŞ¸ÄÁËÒ»´¦´úÂë£¬Ê¹resource loading»úÖÆ¿ÉÔÚspring3ÏÂÔËĞĞ£»ĞŞ¸ÄÁËÈô¸Éµ¥Ôª²âÊÔ£¬Ê¹ËüÃÇÔÚspring3ÏÂ¿ÉÒÔÍ¨¹ı²âÊÔ¡££©
+* æ”¹è¿›ï¼šè®©webxåŒæ—¶æ”¯æŒspring2/3ã€‚
+ ï¼ˆä¿®æ”¹äº†ä¸€å¤„ä»£ç ï¼Œä½¿resource loadingæœºåˆ¶å¯åœ¨spring3ä¸‹è¿è¡Œï¼›ä¿®æ”¹äº†è‹¥å¹²å•å…ƒæµ‹è¯•ï¼Œä½¿å®ƒä»¬åœ¨spring3ä¸‹å¯ä»¥é€šè¿‡æµ‹è¯•ã€‚ï¼‰
   
-  ËäÈ»webxÈÔÒÔspring 2.5.6.SEC02±àÒë£¬µ«Ö»ĞèÒª½«ÏîÄ¿µÄpom.xmlÖĞµÄspringÒÀÀµ¸Ä³É3.0.6.RELEASE¾Í¿ÉÒÔ¹¤×÷¡£
-  ÈçÏ£ÍûÒÔspring3À´±àÒëwebx£¬Ö»ĞèÒªÖ¸¶¨²ÎÊı£ºmvn ... -Pspring3 ¼´¿É¡£ÕâÑù±àÒëËùÉú³ÉµÄcitrus-webx-all°ü½«ÒÀÀµÓÚspring 3¡£
+  è™½ç„¶webxä»ä»¥spring 2.5.6.SEC02ç¼–è¯‘ï¼Œä½†åªéœ€è¦å°†é¡¹ç›®çš„pom.xmlä¸­çš„springä¾èµ–æ”¹æˆ3.0.6.RELEASEå°±å¯ä»¥å·¥ä½œã€‚
+  å¦‚å¸Œæœ›ä»¥spring3æ¥ç¼–è¯‘webxï¼Œåªéœ€è¦æŒ‡å®šå‚æ•°ï¼šmvn ... -Pspring3 å³å¯ã€‚è¿™æ ·ç¼–è¯‘æ‰€ç”Ÿæˆçš„citrus-webx-allåŒ…å°†ä¾èµ–äºspring 3ã€‚
   
-  ×¢Òâ£ºspring3ºÍspring2µÄ´úÂëÊÇ²»ÍêÈ«¼æÈİµÄ¡£ÔÚspring2ÉÏ±àÒëµÄ´úÂë£¬Î´±ØÄÜÖ±½ÓÔÚspring3ÉÏÔËĞĞ£¬·´Ö®ÒàÈ»¡£
-  ÏÂÃæµÄÃüÁîÈ·±£webxÍ¬Ê±¼æÈİÓÚspringµÄÁ½¸ö°æ±¾¡£
-  mvn clean install           -- ÔÚspring2ÖĞ±àÒë²¢²âÊÔ
-  mvn surefire:test -Pspring3 -- ÔÚspring3ÖĞ²âÊÔµ«²»±àÒë
+  æ³¨æ„ï¼šspring3å’Œspring2çš„ä»£ç æ˜¯ä¸å®Œå…¨å…¼å®¹çš„ã€‚åœ¨spring2ä¸Šç¼–è¯‘çš„ä»£ç ï¼Œæœªå¿…èƒ½ç›´æ¥åœ¨spring3ä¸Šè¿è¡Œï¼Œåä¹‹äº¦ç„¶ã€‚
+  ä¸‹é¢çš„å‘½ä»¤ç¡®ä¿webxåŒæ—¶å…¼å®¹äºspringçš„ä¸¤ä¸ªç‰ˆæœ¬ã€‚
+  mvn clean install           -- åœ¨spring2ä¸­ç¼–è¯‘å¹¶æµ‹è¯•
+  mvn surefire:test -Pspring3 -- åœ¨spring3ä¸­æµ‹è¯•ä½†ä¸ç¼–è¯‘
 
-* ÔÚ¿ª·¢ÕßÊ×Ò³ÖĞÏÔÊ¾webx°æ±¾¡¢spring°æ±¾£»¸Ä½øÈ¡µÃwebx°æ±¾µÄ·½·¨£¬Ê¹ÓÃMETA-INF/MANIFEST.MFÖĞµÄĞÅÏ¢¡£
+* åœ¨å¼€å‘è€…é¦–é¡µä¸­æ˜¾ç¤ºwebxç‰ˆæœ¬ã€springç‰ˆæœ¬ï¼›æ”¹è¿›å–å¾—webxç‰ˆæœ¬çš„æ–¹æ³•ï¼Œä½¿ç”¨META-INF/MANIFEST.MFä¸­çš„ä¿¡æ¯ã€‚
 
-* °²È«¸Ä½ø£ºÎªdev modeÏÂµÄexplorerÌí¼Ó°²È«¿ØÖÆ¡£Ä¬ÈÏÖ»ÄÜ´Ó±¾»ú·ÃÎÊ¡£µ±´Ó·ÇÊÚÈ¨µÄÖ÷»ú·ÃÎÊÊ±£¬ÏÔÊ¾ÓÑºÃµÄÌáÊ¾ĞÅÏ¢¡£Ö§³ÖÏÂÃæµÄproperty:
+* å®‰å…¨æ”¹è¿›ï¼šä¸ºdev modeä¸‹çš„exploreræ·»åŠ å®‰å…¨æ§åˆ¶ã€‚é»˜è®¤åªèƒ½ä»æœ¬æœºè®¿é—®ã€‚å½“ä»éæˆæƒçš„ä¸»æœºè®¿é—®æ—¶ï¼Œæ˜¾ç¤ºå‹å¥½çš„æç¤ºä¿¡æ¯ã€‚æ”¯æŒä¸‹é¢çš„property:
   -DdevelopmentMode.allowedHosts=192.168.1.*
 
-* ¸Ä½ø£ºÔö¼ÓMDC: %X{productionMode}£¬ÔÚÈÕÖ¾ÖĞ×Ô¶¯ÏÔÊ¾µ±Ç°µÄÉú²úÄ£Ê½»ò¿ª·¢Ä£Ê½¡£
+* æ”¹è¿›ï¼šå¢åŠ MDC: %X{productionMode}ï¼Œåœ¨æ—¥å¿—ä¸­è‡ªåŠ¨æ˜¾ç¤ºå½“å‰çš„ç”Ÿäº§æ¨¡å¼æˆ–å¼€å‘æ¨¡å¼ã€‚
   
-* ĞÂÔö¹¦ÄÜ£º½«webxµ±×÷filterÊ¹ÓÃ£¬filter chainµÄÏÂÓÎ¿ÉÒÔÊ¹ÓÃwebxËùÌá¹©µÄrequest contexts¹¦ÄÜ¡£ÅäÖÃ·½·¨ÈçÏÂ£¨WEB-INF/web.xml£©£º
+* æ–°å¢åŠŸèƒ½ï¼šå°†webxå½“ä½œfilterä½¿ç”¨ï¼Œfilter chainçš„ä¸‹æ¸¸å¯ä»¥ä½¿ç”¨webxæ‰€æä¾›çš„request contextsåŠŸèƒ½ã€‚é…ç½®æ–¹æ³•å¦‚ä¸‹ï¼ˆWEB-INF/web.xmlï¼‰ï¼š
 
     <filter>
         <filter-name>webx</filter-name>
         <filter-class>com.alibaba.citrus.webx.servlet.WebxFrameworkFilter</filter-class>
         <init-param>
             <param-name>excludes</param-name>
-            <param-value>*.html</param-value><!-- ÈÃservletÒıÇæÀ´´¦Àí¾²Ì¬Ò³Ãæ -->
+            <param-value>*.html</param-value><!-- è®©servletå¼•æ“æ¥å¤„ç†é™æ€é¡µé¢ -->
         </init-param>
         <init-param>
             <param-name>passthru</param-name>
-            <param-value>/myservlet/*, *.xxx</param-value><!-- ½«ÒÔÉÏurl×ª¸øservlet´¦Àí£¬µ«ÔÚservletÖĞ¿ÉÓÃrequest contexts¡£ -->
+            <param-value>/myservlet/*, *.xxx</param-value><!-- å°†ä»¥ä¸Šurlè½¬ç»™servletå¤„ç†ï¼Œä½†åœ¨servletä¸­å¯ç”¨request contextsã€‚ -->
         </init-param>
     </filter>
 
@@ -179,51 +179,52 @@
         <url-pattern>*.xxx</url-pattern>
     </servlet-mapping>
 
-* ¸Ä½ø£ºµ±uribroker.toString()Ê±£¬²»Ö´ĞĞinterceptors£¬È·±£intercepters×ÜÔÚrenderÊ±±»µ÷ÓÃ£¬¶ø²»»áÒòÎªÄ³Ğ©Çé¿ö£¨ÈçÊä³öÈÕÖ¾Ê±£©±»µ÷ÓÃ¡£
-  ½â¾öÁËÈçÏÂÎÊÌâ£ºÔ­À´pull serviceÔÚ³õÊ¼»¯Ê±»áµ÷ÓÃuribroker.toString()£¬´Ó¶øµ÷ÓÃinterceptors¡£µ«´ËÊ±µ÷ÓÃinterceptors¿ÉÄÜ»áµÃµ½²»ÕıÈ·µÄ½á¹û¡£
+* æ”¹è¿›ï¼šå½“uribroker.toString()æ—¶ï¼Œä¸æ‰§è¡Œinterceptorsï¼Œç¡®ä¿interceptersæ€»åœ¨renderæ—¶è¢«è°ƒç”¨ï¼Œè€Œä¸ä¼šå› ä¸ºæŸäº›æƒ…å†µï¼ˆå¦‚è¾“å‡ºæ—¥å¿—æ—¶ï¼‰è¢«è°ƒç”¨ã€‚
+  è§£å†³äº†å¦‚ä¸‹é—®é¢˜ï¼šåŸæ¥pull serviceåœ¨åˆå§‹åŒ–æ—¶ä¼šè°ƒç”¨uribroker.toString()ï¼Œä»è€Œè°ƒç”¨interceptorsã€‚ä½†æ­¤æ—¶è°ƒç”¨interceptorså¯èƒ½ä¼šå¾—åˆ°ä¸æ­£ç¡®çš„ç»“æœã€‚
 
-* ĞŞ¸ÄURI broker serviceÖĞrequestAwareµÄÄ¬ÈÏÖµ£¬Ô­À´ÊÇtrue£¬ÏÖÔÚ¸ÄÎªfalse¡£
-  * µ±requestAwareÎªtrueÊ±£¬ËùÉú³ÉµÄURL»á×Ô¶¯¼ÓÉÏµ±Ç°requestµÄserverĞÅÏ¢¡£Õâ¸öÔÚ¾ø´ó¶àÊıÇé¿öÏÂÊÇ²»ĞèÒªµÄ¡£¹ÊĞŞ¸ÄÖ®¡£
+* ä¿®æ”¹URI broker serviceä¸­requestAwareçš„é»˜è®¤å€¼ï¼ŒåŸæ¥æ˜¯trueï¼Œç°åœ¨æ”¹ä¸ºfalseã€‚
+  * å½“requestAwareä¸ºtrueæ—¶ï¼Œæ‰€ç”Ÿæˆçš„URLä¼šè‡ªåŠ¨åŠ ä¸Šå½“å‰requestçš„serverä¿¡æ¯ã€‚è¿™ä¸ªåœ¨ç»å¤§å¤šæ•°æƒ…å†µä¸‹æ˜¯ä¸éœ€è¦çš„ã€‚æ•…ä¿®æ”¹ä¹‹ã€‚
 
-* ½«Ô­petstoreÊ¾ÀıÖĞµÄÒ³ÃæÑéÖ¤×é¼şPageAuthorizationServiceºÍPageAuthorizationValveÒÆÖ²µ½turbineÖĞ¡£
+* å°†åŸpetstoreç¤ºä¾‹ä¸­çš„é¡µé¢éªŒè¯ç»„ä»¶PageAuthorizationServiceå’ŒPageAuthorizationValveç§»æ¤åˆ°turbineä¸­ã€‚
 
-* ĞÂÔöpull tool£º<context-exposer>¿É½«contextÖĞµÄbeanÖ±½Ó±©Â¶µ½pull toolsÖĞ£¬¹©Ä£°åÊ¹ÓÃ¡£
+* æ–°å¢pull toolï¼š<context-exposer>å¯å°†contextä¸­çš„beanç›´æ¥æš´éœ²åˆ°pull toolsä¸­ï¼Œä¾›æ¨¡æ¿ä½¿ç”¨ã€‚
 
-* Ôö¼Ó¶ÔÓÚspring-testµÄÖ§³Ö¡£
+* å¢åŠ å¯¹äºspring-testçš„æ”¯æŒã€‚
 
-* Ôö¼Ó²âÊÔ¹¤¾ß£ºSpringextContextLoaderºÍServletTestContainer£¬Ê¹ÓÃ·½·¨²Î¼ûcitrus-test-webxµ¥Ôª²âÊÔ¡£
+* å¢åŠ æµ‹è¯•å·¥å…·ï¼šSpringextContextLoaderå’ŒServletTestContainerï¼Œä½¿ç”¨æ–¹æ³•å‚è§citrus-test-webxå•å…ƒæµ‹è¯•ã€‚
 
-* ¸Ä½ø£º½«¶ÁÈ¡action²ÎÊıµÄÈÎÎñÓÉperformAction valveÒÆµ½analyzeURL valve£¬´Ó¶øÊ¹ÆäËüµÄvalveÒ²ÄÜÍ¨¹ırundataÈ¡µÃaction²ÎÊı¡£ÀıÈç°²È«¼ìÑéµÄvalve¡£
-  * ×¢Òâ£ººÜÉÙÓĞÓ¦ÓÃ³ÌĞò»áÈ¥ĞŞ¸Äaction²ÎÊı¡£µ«Èç¹ûÓĞÈËÕâÑù×öÁË£¬ÔÚĞÂµÄÊµÏÖÏÂ£¬´úÂë¿ÉÄÜ»áÊ§Ğ§¡£
+* æ”¹è¿›ï¼šå°†è¯»å–actionå‚æ•°çš„ä»»åŠ¡ç”±performAction valveç§»åˆ°analyzeURL valveï¼Œä»è€Œä½¿å…¶å®ƒçš„valveä¹Ÿèƒ½é€šè¿‡rundataå–å¾—actionå‚æ•°ã€‚ä¾‹å¦‚å®‰å…¨æ£€éªŒçš„valveã€‚
+  * æ³¨æ„ï¼šå¾ˆå°‘æœ‰åº”ç”¨ç¨‹åºä¼šå»ä¿®æ”¹actionå‚æ•°ã€‚ä½†å¦‚æœæœ‰äººè¿™æ ·åšäº†ï¼Œåœ¨æ–°çš„å®ç°ä¸‹ï¼Œä»£ç å¯èƒ½ä¼šå¤±æ•ˆã€‚
 
-* ¸Ä½ø£ºrundata.setRedirectTarget()ÒÔºó£¬×Ô¶¯Çå³ıaction£¬±ÜÃâÖ´ĞĞaction¡£
+* æ”¹è¿›ï¼šrundata.setRedirectTarget()ä»¥åï¼Œè‡ªåŠ¨æ¸…é™¤actionï¼Œé¿å…æ‰§è¡Œactionã€‚
 
-* ¸Ä½ø£ºJspServiceÖ§³Öjspxºó×º¡£
+* æ”¹è¿›ï¼šJspServiceæ”¯æŒjspxåç¼€ã€‚
 
-* ½«util.internal.regex.*ºÍutil.internal.ToStringBuilderµÈÄÚ²¿ÀàÉı¼¶ÖÁ·ÇinternalÀà£¬ÒÔ·½±ãÆäËüÓ¦ÓÃÊ¹ÓÃ¡£
+* å°†util.internal.regex.*å’Œutil.internal.ToStringBuilderç­‰å†…éƒ¨ç±»å‡çº§è‡³éinternalç±»ï¼Œä»¥æ–¹ä¾¿å…¶å®ƒåº”ç”¨ä½¿ç”¨ã€‚
 
-* bugfix: ClassLoaderUtil.getResources(name)ÖĞµÄĞ¡ÎÊÌâ¡£
+* bugfix: ClassLoaderUtil.getResources(name)ä¸­çš„å°é—®é¢˜ã€‚
 
-* bugfix£ºInheritableListableBeanFactory.registerResolvableDependency()Ö»×èÖ¹¶Ôparent contextÖĞÒÑ×¢²áµÄProxyTargetFactory¶ÔÏóµÄ¸²¸Ç£¬
-  Ê¹ResourceLoaderºÍApplicationContextµÈ¶ÔÏóµÄ×¢Èë·½Ê½ÈÔÈ»ºÍspringÔ­À´ÏàÍ¬¡£
+* bugfixï¼šInheritableListableBeanFactory.registerResolvableDependency()åªé˜»æ­¢å¯¹parent contextä¸­å·²æ³¨å†Œçš„ProxyTargetFactoryå¯¹è±¡çš„è¦†ç›–ï¼Œ
+  ä½¿ResourceLoaderå’ŒApplicationContextç­‰å¯¹è±¡çš„æ³¨å…¥æ–¹å¼ä»ç„¶å’ŒspringåŸæ¥ç›¸åŒã€‚
 
-* È·±£ÔÚjava7ÏÂÃæ¿ÉÒÔ±àÒë²¢²âÊÔÍ¨¹ı¡£
+* ç¡®ä¿åœ¨java7ä¸‹é¢å¯ä»¥ç¼–è¯‘å¹¶æµ‹è¯•é€šè¿‡ã€‚
 
 -- Changes in 3.0.7
 
-* É¾³ıcitrus-springext-all-in-oneÏîÄ¿¡£
+* åˆ é™¤citrus-springext-all-in-oneé¡¹ç›®ã€‚
 
-* ĞŞ¸ÄÏîÄ¿µÄÃû³Æ£º
+* ä¿®æ”¹é¡¹ç›®çš„åç§°ï¼š
   citrus-webx-all-in-one -> citrus-webx-all
   citrus-test-all-in-one -> citrus-test-all
-  ËùÓĞÒÀÀµÕâÁ½¸ö°üµÄÓ¦ÓÃĞèÒªĞŞ¸ÄÒ»ÏÂpom.xml¡£
+  æ‰€æœ‰ä¾èµ–è¿™ä¸¤ä¸ªåŒ…çš„åº”ç”¨éœ€è¦ä¿®æ”¹ä¸€ä¸‹pom.xmlã€‚
 
-* ¸Ä½øpom.xml£¬ÒÔ±ã·¢²¼µ½central maven repositoryÖĞ£º
-  * Ìí¼Ójavadocs
-  * ĞŞ¸Äpom²ÎÊı
+* æ”¹è¿›pom.xmlï¼Œä»¥ä¾¿å‘å¸ƒåˆ°central maven repositoryä¸­ï¼š
+  * æ·»åŠ javadocs
+  * ä¿®æ”¹pomå‚æ•°
 
-* Éı¼¶jexlµ½2.0.1£¬Ê¹Ö®Ö§³Ö¿É±ä²ÎÊı£¬ÀıÈç£º$messageUtil.formatMessage(format, args...)
+* å‡çº§jexlåˆ°2.0.1ï¼Œä½¿ä¹‹æ”¯æŒå¯å˜å‚æ•°ï¼Œä¾‹å¦‚ï¼š$messageUtil.formatMessage(format, args...)
 
 -- Changes in 3.0.8
 
-* Ìí¼Ó·½·¨£ºnavigator.redirectTo(name).withParameter(..).end(); Í¨¹ıend()·½·¨¿ÉÒÔÃ÷È·½áÊøÓï¾ä£¬²¢·¢³öÖØ¶¨ÏòÇëÇó¡£
+* æ·»åŠ æ–¹æ³•ï¼šnavigator.redirectTo(name).withParameter(..).end(); é€šè¿‡end()æ–¹æ³•å¯ä»¥æ˜ç¡®ç»“æŸè¯­å¥ï¼Œå¹¶å‘å‡ºé‡å®šå‘è¯·æ±‚ã€‚
+* æ‰€æœ‰æºç æ”¹ç”¨UTF-8ï¼Œç¬¦åˆå¤šæ•°å¼€å‘ç¯å¢ƒçš„é»˜è®¤é…ç½®ã€‚

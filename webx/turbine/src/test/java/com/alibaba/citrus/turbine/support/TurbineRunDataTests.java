@@ -62,7 +62,7 @@ public class TurbineRunDataTests extends AbstractWebxTests {
         assertNull(rundata.getAction());
 
         // target=null, redirectTarget=null
-        // target²»±ä£¬ËùÒÔaction²»Çå³ı
+        // targetä¸å˜ï¼Œæ‰€ä»¥actionä¸æ¸…é™¤
         rundata.setAction("myaction");
         rundata.setRedirectTarget(null);
         assertEquals("myaction", rundata.getAction());
@@ -73,7 +73,7 @@ public class TurbineRunDataTests extends AbstractWebxTests {
         assertEquals(null, rundata.getAction());
 
         // target=test, redirectTarget=test
-        // target²»±ä£¬ËùÒÔaction²»Çå³ı
+        // targetä¸å˜ï¼Œæ‰€ä»¥actionä¸æ¸…é™¤
         rundata.setAction("myaction");
         rundata.setTarget("test");
         rundata.setRedirectTarget("test");
@@ -91,7 +91,7 @@ public class TurbineRunDataTests extends AbstractWebxTests {
         Context context1 = rundata.getContext();
         Context context2 = rundata.getContext("app2");
 
-        // getContext()È¡µÃµ±Ç°componentµÄcontext¡£
+        // getContext()å–å¾—å½“å‰componentçš„contextã€‚
         assertSame(rundata.getContext("app1"), rundata.getContext());
         assertSame(rundata.getContext("app1"), context1);
 

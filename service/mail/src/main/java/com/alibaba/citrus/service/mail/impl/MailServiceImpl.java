@@ -41,7 +41,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * Éú³ÉºÍ·¢ËÍe-mailµÄ·şÎñ¡£
+ * ç”Ÿæˆå’Œå‘é€e-mailçš„æœåŠ¡ã€‚
  * 
  * @author Michael Zhou
  */
@@ -73,7 +73,7 @@ public class MailServiceImpl extends AbstractService<MailService> implements Mai
             this.mails.clear();
             this.mails.putAll(mails);
 
-            // ÉèÖÃmail idºÍmail service
+            // è®¾ç½®mail idå’Œmail service
             for (Map.Entry<String, MailBuilder> entry : mails.entrySet()) {
                 String mailId = assertNotNull(trimToNull(entry.getKey()), "mail id");
                 MailBuilder builder = assertNotNull(entry.getValue(), "mail builder");
@@ -89,12 +89,12 @@ public class MailServiceImpl extends AbstractService<MailService> implements Mai
             this.mailStores.clear();
             this.mailStores.putAll(mailStores);
 
-            // Èç¹ûstoresÖĞÖ»ÓĞÒ»¸östore£¬ÔòÉèÖÃ³Édefault¡£
+            // å¦‚æœstoresä¸­åªæœ‰ä¸€ä¸ªstoreï¼Œåˆ™è®¾ç½®æˆdefaultã€‚
             if (mailStores.size() == 1) {
                 this.mailStores.put(DEFAULT_MAIL_SESSION_ID, mailStores.values().iterator().next());
             } else {
-                // Èç¹ûÓĞÒ»¸ömail store±»±ê¼ÇÎªdefault£¬ÔòÉèÖÃÎªdefault store¡£
-                // Èç¹ûÓĞÁ½¸ödefault stores£¬Ôò±¨´í¡£
+                // å¦‚æœæœ‰ä¸€ä¸ªmail storeè¢«æ ‡è®°ä¸ºdefaultï¼Œåˆ™è®¾ç½®ä¸ºdefault storeã€‚
+                // å¦‚æœæœ‰ä¸¤ä¸ªdefault storesï¼Œåˆ™æŠ¥é”™ã€‚
                 for (MailStore store : mailStores.values()) {
                     if (store.isDefault()) {
                         assertTrue(!this.mailStores.containsKey(DEFAULT_MAIL_SESSION_ID), "more than 1 default stores");
@@ -103,7 +103,7 @@ public class MailServiceImpl extends AbstractService<MailService> implements Mai
                 }
             }
 
-            // ÉèÖÃmail service¡£
+            // è®¾ç½®mail serviceã€‚
             for (MailStore store : this.mailStores.values()) {
                 store.setMailService(this);
             }
@@ -115,12 +115,12 @@ public class MailServiceImpl extends AbstractService<MailService> implements Mai
             this.mailTransports.clear();
             this.mailTransports.putAll(mailTransports);
 
-            // Èç¹ûtransportsÖĞÖ»ÓĞÒ»¸ötransport£¬ÔòÉèÖÃ³Édefault¡£
+            // å¦‚æœtransportsä¸­åªæœ‰ä¸€ä¸ªtransportï¼Œåˆ™è®¾ç½®æˆdefaultã€‚
             if (mailTransports.size() == 1) {
                 this.mailTransports.put(DEFAULT_MAIL_SESSION_ID, mailTransports.values().iterator().next());
             } else {
-                // Èç¹ûÓĞÒ»¸ömail transport±»±ê¼ÇÎªdefault£¬ÔòÉèÖÃÎªdefault transport¡£
-                // Èç¹ûÓĞÁ½¸ödefault transports£¬Ôò±¨´í¡£
+                // å¦‚æœæœ‰ä¸€ä¸ªmail transportè¢«æ ‡è®°ä¸ºdefaultï¼Œåˆ™è®¾ç½®ä¸ºdefault transportã€‚
+                // å¦‚æœæœ‰ä¸¤ä¸ªdefault transportsï¼Œåˆ™æŠ¥é”™ã€‚
                 for (MailTransport transport : mailTransports.values()) {
                     if (transport.isDefault()) {
                         assertTrue(!this.mailTransports.containsKey(DEFAULT_MAIL_SESSION_ID),
@@ -130,7 +130,7 @@ public class MailServiceImpl extends AbstractService<MailService> implements Mai
                 }
             }
 
-            // ÉèÖÃmail service¡£
+            // è®¾ç½®mail serviceã€‚
             for (MailTransport transport : this.mailTransports.values()) {
                 transport.setMailService(this);
             }
@@ -138,7 +138,7 @@ public class MailServiceImpl extends AbstractService<MailService> implements Mai
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàĞÍµÄ·şÎñ¡£ Èç¹ûÎ´Ö¸¶¨¸ÃÀà·şÎñ£¬ÔòÊ¹ÓÃÄ¬ÈÏID´ÓÈİÆ÷ÖĞÈ¡µÃ·şÎñ¡£
+     * å–å¾—æŒ‡å®šç±»å‹çš„æœåŠ¡ã€‚ å¦‚æœæœªæŒ‡å®šè¯¥ç±»æœåŠ¡ï¼Œåˆ™ä½¿ç”¨é»˜è®¤IDä»å®¹å™¨ä¸­å–å¾—æœåŠ¡ã€‚
      */
     public <T> T getService(Class<T> serviceType, String defaultServiceId) {
         assertNotNull(serviceType, "serviceType");
@@ -157,7 +157,7 @@ public class MailServiceImpl extends AbstractService<MailService> implements Mai
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄmail builder¡£
+     * å–å¾—æŒ‡å®šåç§°çš„mail builderã€‚
      */
     public MailBuilder getMailBuilder(String id) throws MailNotFoundException {
         id = assertNotNull(trimToNull(id), "no mail id");
@@ -168,33 +168,33 @@ public class MailServiceImpl extends AbstractService<MailService> implements Mai
             throw new MailNotFoundException("Could not find mail builder: " + id);
         }
 
-        // ·µ»Ømail builderµÄ¸´±¾
+        // è¿”å›mail builderçš„å¤æœ¬
         return builder.clone();
     }
 
     /**
-     * È¡µÃÄ¬ÈÏµÄmail store¡£
+     * å–å¾—é»˜è®¤çš„mail storeã€‚
      */
     public MailStore getMailStore() throws MailStoreNotFoundException {
         return getMailStore(DEFAULT_MAIL_SESSION_ID, null);
     }
 
     /**
-     * È¡µÃÄ¬ÈÏµÄmail store¡£
+     * å–å¾—é»˜è®¤çš„mail storeã€‚
      */
     public MailStore getMailStore(Properties overrideProps) throws MailStoreNotFoundException {
         return getMailStore(DEFAULT_MAIL_SESSION_ID, overrideProps);
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄmail store¡£
+     * å–å¾—æŒ‡å®šåç§°çš„mail storeã€‚
      */
     public MailStore getMailStore(String id) throws MailStoreNotFoundException {
         return getMailStore(id, null);
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄmail store¡£
+     * å–å¾—æŒ‡å®šåç§°çš„mail storeã€‚
      */
     public MailStore getMailStore(String id, Properties overrideProps) throws MailStoreNotFoundException {
         id = assertNotNull(trimToNull(id), "no mailStore id");
@@ -205,33 +205,33 @@ public class MailServiceImpl extends AbstractService<MailService> implements Mai
             throw new MailStoreNotFoundException("Could not find mail store: " + id);
         }
 
-        // ·µ»Ø¸´±¾
+        // è¿”å›å¤æœ¬
         return new MailStore(store, overrideProps);
     }
 
     /**
-     * È¡µÃÄ¬ÈÏµÄmail transport¡£
+     * å–å¾—é»˜è®¤çš„mail transportã€‚
      */
     public MailTransport getMailTransport() throws MailTransportNotFoundException {
         return getMailTransport(DEFAULT_MAIL_SESSION_ID, null);
     }
 
     /**
-     * È¡µÃÄ¬ÈÏµÄmail transport¡£
+     * å–å¾—é»˜è®¤çš„mail transportã€‚
      */
     public MailTransport getMailTransport(Properties overrideProps) throws MailTransportNotFoundException {
         return getMailTransport(DEFAULT_MAIL_SESSION_ID, overrideProps);
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄmail transport¡£
+     * å–å¾—æŒ‡å®šåç§°çš„mail transportã€‚
      */
     public MailTransport getMailTransport(String id) throws MailTransportNotFoundException {
         return getMailTransport(id, null);
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄmail transport¡£
+     * å–å¾—æŒ‡å®šåç§°çš„mail transportã€‚
      */
     public MailTransport getMailTransport(String id, Properties overrideProps) throws MailTransportNotFoundException {
         id = assertNotNull(trimToNull(id), "no mailTransport id");
@@ -242,7 +242,7 @@ public class MailServiceImpl extends AbstractService<MailService> implements Mai
             throw new MailTransportNotFoundException("Could not find mail transport: " + id);
         }
 
-        // ·µ»Ø¸´±¾
+        // è¿”å›å¤æœ¬
         return new MailTransport(transport, overrideProps);
     }
 

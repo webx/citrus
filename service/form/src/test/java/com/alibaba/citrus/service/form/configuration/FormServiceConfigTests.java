@@ -30,7 +30,7 @@ import com.alibaba.citrus.service.form.impl.configuration.FormConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.GroupConfigImpl;
 
 /**
- * ²âÊÔform serviceÅäÖÃ¼°¹¦ÄÜ¡£
+ * æµ‹è¯•form serviceé…ç½®åŠåŠŸèƒ½ã€‚
  * 
  * @author Michael Zhou
  */
@@ -138,7 +138,7 @@ public class FormServiceConfigTests extends AbstractFormServiceTests {
 
         assertEquals("nonEmptyFieldConfig", fieldConfig.getName());
         assertArrayEquals(new String[] { "a", "b", "c" }, fieldConfig.getDefaultValues());
-        assertEquals("·Ç¿ÕÓò", fieldConfig.getDisplayName());
+        assertEquals("éç©ºåŸŸ", fieldConfig.getDisplayName());
         assertEquals("n", fieldConfig.getKey());
         assertEquals("propertyName", fieldConfig.getPropertyName());
         assertEquals(2, fieldConfig.getValidators().size());

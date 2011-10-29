@@ -26,8 +26,8 @@ import java.util.regex.Pattern;
 import com.alibaba.citrus.service.resource.ResourceLoadingService;
 
 /**
- * <code>ResourceAlias</code>¡¢<code>ResourceLoaderMapping</code>¡¢
- * <code>ResourceFilterMapping</code>µÄ»ùÀà£¬Ìá¹©ÁËÕıÔò±í´ïÊ½µÄÖ§³Ö¡£
+ * <code>ResourceAlias</code>ã€<code>ResourceLoaderMapping</code>ã€
+ * <code>ResourceFilterMapping</code>çš„åŸºç±»ï¼Œæä¾›äº†æ­£åˆ™è¡¨è¾¾å¼çš„æ”¯æŒã€‚
  * 
  * @author Michael Zhou
  */
@@ -64,7 +64,7 @@ abstract class ResourcePattern {
     }
 
     /**
-     * ³õÊ¼»¯loader£¬²¢Éè¶¨loaderËùÔÚµÄ<code>ResourceLoadingService</code>µÄÊµÀı¡£
+     * åˆå§‹åŒ–loaderï¼Œå¹¶è®¾å®šloaderæ‰€åœ¨çš„<code>ResourceLoadingService</code>çš„å®ä¾‹ã€‚
      */
     public final void init(ResourceLoadingService resourceLoadingService) {
         this.pattern = compilePathName(patternName);

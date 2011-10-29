@@ -23,7 +23,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>Entities</code>Àà¡£
+ * æµ‹è¯•<code>Entities</code>ç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -75,7 +75,7 @@ public class EntitiesTests {
         assertEquals(1, map.getEntityValue("foo"));
         assertEquals("foo", map.getEntityName(1));
 
-        // ²éÕÒ±í½«±»¸üÐÂ
+        // æŸ¥æ‰¾è¡¨å°†è¢«æ›´æ–°
         map.addEntity("bar", 2);
         map.addEntity("baz", 3);
         assertEquals(3, map.getEntityValue("baz"));

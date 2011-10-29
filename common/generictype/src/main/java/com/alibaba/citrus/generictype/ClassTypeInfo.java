@@ -18,7 +18,7 @@
 package com.alibaba.citrus.generictype;
 
 /**
- * ´ú±íÒ»¸ö»ùÓÚ{@link Class}µÄÀàĞÍ¡£°üº¬ÒÔÏÂ×ÓÀà£º
+ * ä»£è¡¨ä¸€ä¸ªåŸºäº{@link Class}çš„ç±»å‹ã€‚åŒ…å«ä»¥ä¸‹å­ç±»ï¼š
  * <ul>
  * <li>{@link RawTypeInfo}</li>
  * <li>{@link ParameterizedTypeInfo}</li>
@@ -28,43 +28,43 @@ package com.alibaba.citrus.generictype;
  */
 public interface ClassTypeInfo extends TypeInfo, GenericDeclarationInfo {
     /**
-     * ÔÚÖ¸¶¨ÉÏÏÂÎÄÖĞ·ÖÎöÊµ¼ÊÀàĞÍ¡£
+     * åœ¨æŒ‡å®šä¸Šä¸‹æ–‡ä¸­åˆ†æå®é™…ç±»å‹ã€‚
      * <p>
-     * ×¢£º{@link ClassTypeInfo.resolve()}·µ»Ø{@link TypeInfo}µÄ×ÓÀà
-     * {@link ClassTypeInfo}¡£
+     * æ³¨ï¼š{@link ClassTypeInfo.resolve()}è¿”å›{@link TypeInfo}çš„å­ç±»
+     * {@link ClassTypeInfo}ã€‚
      * </p>
      */
     ClassTypeInfo resolve(GenericDeclarationInfo context);
 
     /**
-     * ÔÚÖ¸¶¨ÉÏÏÂÎÄÖĞ·ÖÎöÊµ¼ÊÀàĞÍ¡£
+     * åœ¨æŒ‡å®šä¸Šä¸‹æ–‡ä¸­åˆ†æå®é™…ç±»å‹ã€‚
      * <p>
-     * ×¢£º{@link ClassTypeInfo.resolve()}·µ»Ø{@link TypeInfo}µÄ×ÓÀà
-     * {@link ClassTypeInfo}¡£
+     * æ³¨ï¼š{@link ClassTypeInfo.resolve()}è¿”å›{@link TypeInfo}çš„å­ç±»
+     * {@link ClassTypeInfo}ã€‚
      * </p>
      */
     ClassTypeInfo resolve(GenericDeclarationInfo context, boolean includeBaseType);
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄ×Ö¶Î¡£
+     * å–å¾—æŒ‡å®šåç§°çš„å­—æ®µã€‚
      */
     FieldInfo getField(String name);
 
     /**
-     * È¡µÃÖ¸¶¨ÀàĞÍÖĞµÄÖ¸¶¨Ãû³ÆµÄ×Ö¶Î¡£
+     * å–å¾—æŒ‡å®šç±»å‹ä¸­çš„æŒ‡å®šåç§°çš„å­—æ®µã€‚
      * <p>
-     * Ö¸¶¨ÀàĞÍ±ØĞëÎªµ±Ç°ÀàĞÍ»òÆä¸¸Àà¡£
+     * æŒ‡å®šç±»å‹å¿…é¡»ä¸ºå½“å‰ç±»å‹æˆ–å…¶çˆ¶ç±»ã€‚
      * </p>
      */
     FieldInfo getField(ClassTypeInfo declaringType, String name);
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊı±í¶ÔÓ¦µÄ¹¹Ôìº¯Êı¡£
+     * å–å¾—æŒ‡å®šå‚æ•°è¡¨å¯¹åº”çš„æ„é€ å‡½æ•°ã€‚
      */
     MethodInfo getConstructor(Class<?>... paramTypes);
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆºÍ²ÎÊı±í¶ÔÓ¦µÄ·½·¨¡£
+     * å–å¾—æŒ‡å®šåç§°å’Œå‚æ•°è¡¨å¯¹åº”çš„æ–¹æ³•ã€‚
      */
     MethodInfo getMethod(String methodName, Class<?>... paramTypes);
 }

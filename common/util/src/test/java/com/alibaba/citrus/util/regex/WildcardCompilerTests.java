@@ -66,7 +66,7 @@ public class WildcardCompilerTests {
         assertTrue(contains("/xxx/yyy", pattern, ""));
         assertTrue(contains("/xxx/yyyzzz", pattern, "zzz"));
 
-        // 特殊处理
+        // 鐗规畩澶勭悊
         pattern = PathNameWildcardCompiler.compilePathName("/");
 
         assertTrue(contains("", pattern));

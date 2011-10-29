@@ -41,7 +41,7 @@ public class FileUtilTests {
         assertIllegalAbsolutePath("aaa\\bbb\\ccc\\..\\..\\..\\..\\..");
         assertIllegalAbsolutePath("aaa\\bbb\\ccc\\..\\..\\..\\..\\..\\ddd\\..");
 
-        // ø’÷µ
+        // Á©∫ÂÄº
         assertEquals("", FileUtil.normalizeAbsolutePath(null));
         assertEquals("", FileUtil.normalizeAbsolutePath(""));
         assertEquals("", FileUtil.normalizeAbsolutePath("  "));
@@ -104,7 +104,7 @@ public class FileUtilTests {
         assertEquals("../..", FileUtil.normalizeRelativePath("aaa\\bbb\\ccc\\..\\..\\..\\..\\.."));
         assertEquals("../..", FileUtil.normalizeRelativePath("aaa\\bbb\\ccc\\..\\..\\..\\..\\..\\ddd\\.."));
 
-        // ø’÷µ
+        // Á©∫ÂÄº
         assertEquals("", FileUtil.normalizeRelativePath(null));
         assertEquals("", FileUtil.normalizeRelativePath(""));
         assertEquals("", FileUtil.normalizeRelativePath("  "));
@@ -152,7 +152,7 @@ public class FileUtilTests {
         assertIllegalPath("\\aaa\\bbb\\ccc\\..\\..\\..\\..\\..");
         assertIllegalPath("\\aaa\\bbb\\ccc\\..\\..\\..\\..\\..\\ddd\\..");
 
-        // ø’÷µ
+        // Á©∫ÂÄº
         assertEquals("", FileUtil.normalizePath(null));
         assertEquals("", FileUtil.normalizePath(""));
         assertEquals("", FileUtil.normalizePath("  "));
@@ -346,11 +346,11 @@ public class FileUtilTests {
         assertEquals("", FileUtil.getRelativePath(null, "."));
         assertEquals("", FileUtil.getRelativePath(".", "."));
 
-        // æ¯∂‘¬∑æ∂
+        // ÁªùÂØπË∑ØÂæÑ
         assertEquals("../../aaa/bbb", FileUtil.getRelativePath("/ddd/eee", "/aaa/bbb"));
         assertEquals("../../aaa/bbb/", FileUtil.getRelativePath("/ddd/eee", "/aaa/bbb/"));
 
-        // œ‡∂‘¬∑æ∂
+        // Áõ∏ÂØπË∑ØÂæÑ
         assertEquals("aaa/bbb", FileUtil.getRelativePath("/ddd/eee", "aaa/bbb"));
         assertEquals("aaa/bbb/", FileUtil.getRelativePath("/ddd/eee", "aaa/bbb/"));
         assertEquals("", FileUtil.getRelativePath("/ddd/eee", ""));

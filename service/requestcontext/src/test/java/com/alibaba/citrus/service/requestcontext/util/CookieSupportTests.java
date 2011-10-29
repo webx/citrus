@@ -33,7 +33,7 @@ import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 
 /**
- * ²âÊÔ<code>CookieSupport</code>¡£
+ * æµ‹è¯•<code>CookieSupport</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -69,7 +69,7 @@ public class CookieSupportTests extends AbstractRequestContextsTests<RequestCont
 
     @Test
     public void getHeaderValue_invalid() {
-        // °üº¬¿ØÖÆ×Ö·û
+        // åŒ…å«æŽ§åˆ¶å­—ç¬¦
         cookie = new CookieSupport("my\"name\"", "my\nvalu\te");
 
         try {
@@ -79,7 +79,7 @@ public class CookieSupportTests extends AbstractRequestContextsTests<RequestCont
             assertThat(e, exception("Control character in cookie value, consider BASE64 encoding your value"));
         }
 
-        // escape´íÎó
+        // escapeé”™è¯¯
         cookie = new CookieSupport("myname", "\"my value\\");
 
         try {
@@ -101,13 +101,13 @@ public class CookieSupportTests extends AbstractRequestContextsTests<RequestCont
 
     @Test
     public void toString_invalid() {
-        // °üº¬¿ØÖÆ×Ö·û
+        // åŒ…å«æŽ§åˆ¶å­—ç¬¦
         cookie = new CookieSupport("my\"name\"", "my\nvalu\te");
 
         assertEquals("Set-Cookie: Control character in cookie value, consider BASE64 encoding your value",
                 cookie.toString());
 
-        // escape´íÎó
+        // escapeé”™è¯¯
         cookie = new CookieSupport("myname", "\"my value\\");
 
         assertEquals("Set-Cookie: Invalid escape character in cookie value.", cookie.toString());

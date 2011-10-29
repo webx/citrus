@@ -20,19 +20,19 @@ package com.alibaba.citrus.service.resource;
 import java.util.Set;
 
 /**
- * ´ú±íÒ»¸ö<code>ResourceLister</code>µ÷ÓÃµÄÉÏÏÂÎÄĞÅÏ¢¡£
+ * ä»£è¡¨ä¸€ä¸ª<code>ResourceLister</code>è°ƒç”¨çš„ä¸Šä¸‹æ–‡ä¿¡æ¯ã€‚
  * 
  * @author Michael Zhou
  */
 public interface ResourceListerContext extends ResourceMatchResult {
     /**
-     * È¡µÃ×ÊÔ´µÄ×ÓÄ¿Â¼»òÎÄ¼şÃûÁĞ±í¡£ºÍ<code>ResourceLoadingService.list()</code> µÄÂß¼­²»Í¬£¬¸Ã·½·¨ÊÇ±»
-     * <code>ResourceLoader</code>ÄÚ²¿Ê¹ÓÃµÄ£º
+     * å–å¾—èµ„æºçš„å­ç›®å½•æˆ–æ–‡ä»¶ååˆ—è¡¨ã€‚å’Œ<code>ResourceLoadingService.list()</code> çš„é€»è¾‘ä¸åŒï¼Œè¯¥æ–¹æ³•æ˜¯è¢«
+     * <code>ResourceLoader</code>å†…éƒ¨ä½¿ç”¨çš„ï¼š
      * <ul>
-     * <li>½«³ıÈ¥ÖØ¸´µÄÆ¥Åä£¬±ÜÃâÎŞÏŞÑ­»·¡£</li>
+     * <li>å°†é™¤å»é‡å¤çš„åŒ¹é…ï¼Œé¿å…æ— é™å¾ªç¯ã€‚</li>
      * </ul>
      * <p>
-     * Èç±»ÁĞ±íµÄ×ÊÔ´¸ù±¾²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å¦‚è¢«åˆ—è¡¨çš„èµ„æºæ ¹æœ¬ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * </p>
      */
     String[] list(String newResourceName, Set<ResourceLoadingOption> options);

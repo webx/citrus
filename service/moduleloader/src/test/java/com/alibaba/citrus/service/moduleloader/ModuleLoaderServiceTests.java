@@ -144,8 +144,8 @@ public class ModuleLoaderServiceTests extends AbstractModuleLoaderTests {
         assertThat(str, containsString("factories"));
         assertThat(str, containsString("adapters"));
         assertThat(str, containsString("ClassModuleFactory"));
-        assertThat(str, containsString("ActionEventAdapterFactory")); // Ä¬ÈÏadapter
-        assertThat(str, containsString("DataBindingAdapterFactory")); // Ä¬ÈÏadapter
+        assertThat(str, containsString("ActionEventAdapterFactory")); // é»˜è®¤adapter
+        assertThat(str, containsString("DataBindingAdapterFactory")); // é»˜è®¤adapter
         assertThat(str, containsString("}"));
 
         ModuleAdapterFactory[] adapters = getFieldValue(moduleLoaderService, "adapters", ModuleAdapterFactory[].class);
@@ -162,9 +162,9 @@ public class ModuleLoaderServiceTests extends AbstractModuleLoaderTests {
         assertThat(str, containsString("factories"));
         assertThat(str, containsString("adapters"));
         assertThat(str, containsString("ClassModuleFactory"));
-        assertThat(str, containsString("ActionEventAdapterFactory")); // Ã÷È·Ö¸¶¨
-        assertThat(str, containsString("MySimpleAdapterFactory")); // Ã÷È·Ö¸¶¨
-        assertThat(str, containsString("DataBindingAdapterFactory")); // Ã÷È·Ö¸¶¨
+        assertThat(str, containsString("ActionEventAdapterFactory")); // æ˜Žç¡®æŒ‡å®š
+        assertThat(str, containsString("MySimpleAdapterFactory")); // æ˜Žç¡®æŒ‡å®š
+        assertThat(str, containsString("DataBindingAdapterFactory")); // æ˜Žç¡®æŒ‡å®š
         assertThat(str, containsString("}"));
 
         ModuleAdapterFactory[] adapters = getFieldValue(moduleLoaderService, "adapters", ModuleAdapterFactory[].class);
@@ -181,9 +181,9 @@ public class ModuleLoaderServiceTests extends AbstractModuleLoaderTests {
         assertThat(str, containsString("factories"));
         assertThat(str, containsString("adapters"));
         assertThat(str, containsString("ClassModuleFactory"));
-        assertThat(str, containsString("ActionEventAdapterFactory")); // Ã÷È·Ö¸¶¨
-        assertThat(str, containsString("MySimpleAdapterFactory")); // Ã÷È·Ö¸¶¨
-        assertThat(str, not(containsString("DataBindingAdapterFactory"))); // Î´Ö¸¶¨
+        assertThat(str, containsString("ActionEventAdapterFactory")); // æ˜Žç¡®æŒ‡å®š
+        assertThat(str, containsString("MySimpleAdapterFactory")); // æ˜Žç¡®æŒ‡å®š
+        assertThat(str, not(containsString("DataBindingAdapterFactory"))); // æœªæŒ‡å®š
         assertThat(str, containsString("}"));
 
         ModuleAdapterFactory[] adapters = getFieldValue(moduleLoaderService, "adapters", ModuleAdapterFactory[].class);

@@ -44,7 +44,7 @@ import com.alibaba.citrus.util.collection.ArrayHashMap;
 import com.alibaba.citrus.util.collection.ArrayHashSet;
 
 /**
- * ²âÊÔ<code>CollectionUtil</code>Àà¡£
+ * æµ‹è¯•<code>CollectionUtil</code>ç±»ã€‚
  * 
  * @author Michael Zhou
  */

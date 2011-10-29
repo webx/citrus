@@ -30,7 +30,7 @@ import com.alibaba.citrus.service.mail.builder.MailContent;
 import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
- * ÓÉ¶à²¿·Ö¹¹³ÉµÄÓÊ¼şÄÚÈİ¡£
+ * ç”±å¤šéƒ¨åˆ†æ„æˆçš„é‚®ä»¶å†…å®¹ã€‚
  * 
  * @author Michael Zhou
  */
@@ -39,7 +39,7 @@ public abstract class MultipartContent extends AbstractContent implements
     private final List<MailContent> contents = createLinkedList();
 
     /**
-     * ÅúÁ¿Ìí¼Ócontents¡£
+     * æ‰¹é‡æ·»åŠ contentsã€‚
      */
     public void setContents(MailContent[] contents) {
         if (contents != null) {
@@ -52,7 +52,7 @@ public abstract class MultipartContent extends AbstractContent implements
     }
 
     /**
-     * Ìí¼ÓÒ»¸öÄÚÈİ²¿·Ö¡£
+     * æ·»åŠ ä¸€ä¸ªå†…å®¹éƒ¨åˆ†ã€‚
      */
     public void addContent(MailContent content) {
         if (content != null) {
@@ -62,14 +62,14 @@ public abstract class MultipartContent extends AbstractContent implements
     }
 
     /**
-     * È¡µÃËùÓĞµÄ×Ócontents¡£
+     * å–å¾—æ‰€æœ‰çš„å­contentsã€‚
      */
     public MailContent[] getContents() {
         return contents.toArray(new MailContent[contents.size()]);
     }
 
     /**
-     * äÖÈ¾ÓÊ¼şÄÚÈİ¡£
+     * æ¸²æŸ“é‚®ä»¶å†…å®¹ã€‚
      */
     public void render(Part mailPart) throws MessagingException {
         Multipart multipart = getMultipart();
@@ -88,12 +88,12 @@ public abstract class MultipartContent extends AbstractContent implements
     }
 
     /**
-     * È¡µÃ<code>Multipart</code>µÄÊµÏÖ¡£
+     * å–å¾—<code>Multipart</code>çš„å®ç°ã€‚
      */
     protected abstract Multipart getMultipart();
 
     /**
-     * Éî¶È¸´ÖÆÒ»¸öcontent¡£
+     * æ·±åº¦å¤åˆ¶ä¸€ä¸ªcontentã€‚
      */
     @Override
     protected void copyTo(AbstractContent copy) {

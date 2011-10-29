@@ -105,7 +105,7 @@ public class DateValidatorTests extends AbstractValidatorTests<DateValidator> {
             assertThat(e, exception("1911"));
         }
 
-        // wrong format 2£ººÍÖ¸¶¨format¸ñÊ½²»Ò»ÖÂ
+        // wrong format 2ï¼šå’ŒæŒ‡å®šformatæ ¼å¼ä¸ä¸€è‡´
         v = newValidator();
         v.setMessage("message");
         v.setFormat("yyyy-MM-dd HH:mm:ss");
@@ -157,7 +157,7 @@ public class DateValidatorTests extends AbstractValidatorTests<DateValidator> {
             assertThat(e, exception("1911"));
         }
 
-        // wrong format 2£ººÍÖ¸¶¨format¸ñÊ½²»Ò»ÖÂ
+        // wrong format 2ï¼šå’ŒæŒ‡å®šformatæ ¼å¼ä¸ä¸€è‡´
         v = newValidator();
         v.setMessage("message");
         v.setFormat("yyyy-MM-dd HH:mm:ss");

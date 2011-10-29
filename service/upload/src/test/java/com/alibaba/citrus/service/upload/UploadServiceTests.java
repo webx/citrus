@@ -55,12 +55,12 @@ import com.meterware.servletunit.ServletUnitClient;
 import com.meterware.servletunit.UploadServletRunner;
 
 /**
- * ²âÊÔ<code>UploadService</code>¡£
+ * æµ‹è¯•<code>UploadService</code>ã€‚
  * 
  * @author Michael Zhou
  */
 public class UploadServiceTests {
-    private static File ÖĞÎÄÎÄ¼şÃû;
+    private static File ä¸­æ–‡æ–‡ä»¶å;
     private static BeanFactory factory;
     private UploadService upload;
     private ServletUnitClient client;
@@ -70,12 +70,12 @@ public class UploadServiceTests {
     public static void initFactory() throws Exception {
         factory = new XmlBeanFactory(new FileSystemResource(new File(srcdir, "services.xml")));
 
-        // ´´½¨¡°ÖĞÎÄÎÄ¼şÃû.txt¡±
-        ÖĞÎÄÎÄ¼şÃû = new File(destdir, "ÖĞÎÄÎÄ¼şÃû.txt");
-        PrintWriter out = new PrintWriter(new OutputStreamWriter(new FileOutputStream(ÖĞÎÄÎÄ¼şÃû), "GBK"), true);
+        // åˆ›å»ºâ€œä¸­æ–‡æ–‡ä»¶å.txtâ€
+        ä¸­æ–‡æ–‡ä»¶å = new File(destdir, "ä¸­æ–‡æ–‡ä»¶å.txt");
+        PrintWriter out = new PrintWriter(new OutputStreamWriter(new FileOutputStream(ä¸­æ–‡æ–‡ä»¶å), "GBK"), true);
 
         for (int i = 0; i < 16; i++) {
-            out.println("ÎÒ°®±±¾©Ìì°²ÃÅ");
+            out.println("æˆ‘çˆ±åŒ—äº¬å¤©å®‰é—¨");
         }
 
         out.flush();
@@ -94,21 +94,21 @@ public class UploadServiceTests {
         // Servlet client
         client = servletRunner.newClient();
 
-        // È¡µÃ³õÊ¼Ò³Ãæform.html
+        // å–å¾—åˆå§‹é¡µé¢form.html
         WebResponse response = client.getResponse(new GetMethodWebRequest("http://localhost/myservlet"));
 
         WebForm form = response.getFormWithName("myform");
 
-        // È¡µÃÌá½»formµÄrequest
+        // å–å¾—æäº¤formçš„request
         WebRequest request = form.getRequest();
 
-        request.setParameter("myparam", "ÖĞ»ªÈËÃñ¹²ºÍ¹ú");
+        request.setParameter("myparam", "ä¸­åäººæ°‘å…±å’Œå›½");
         request.selectFile("myfile", new File(srcdir, "smallfile.txt"));
 
-        File nonAsciiFile = ÖĞÎÄÎÄ¼şÃû;
+        File nonAsciiFile = ä¸­æ–‡æ–‡ä»¶å;
 
         if (nonAsciiFile.exists()) {
-            request.selectFile("myfile_ÖĞÎÄ", nonAsciiFile);
+            request.selectFile("myfile_ä¸­æ–‡", nonAsciiFile);
         } else {
             fail("Could not find non-ascii filename: " + nonAsciiFile.getAbsolutePath()
                     + ".  Please make sure the OS charset is correctly set.");
@@ -118,8 +118,8 @@ public class UploadServiceTests {
 
         this.request = invocationContext.getRequest();
 
-        // ÒòÎªÒ³ÃæµÄcontent typeÊÇtext/html; charset=UTF-8£¬
-        // ËùÒÔÓ¦¸ÃÒÔUTF-8·½Ê½½âÎörequest¡£
+        // å› ä¸ºé¡µé¢çš„content typeæ˜¯text/html; charset=UTF-8ï¼Œ
+        // æ‰€ä»¥åº”è¯¥ä»¥UTF-8æ–¹å¼è§£ærequestã€‚
         this.request.setCharacterEncoding("UTF-8");
     }
 
@@ -127,7 +127,7 @@ public class UploadServiceTests {
     public void isMultipartContent() throws Exception {
         assertTrue(upload.isMultipartContent(request));
 
-        // ³õÊ¼Ò³ÃæµÄÇëÇóÊÇÒ»¸öÆÕÍ¨µÄ¡°application/x-www-form-urlencoded¡±ÇëÇó¡£
+        // åˆå§‹é¡µé¢çš„è¯·æ±‚æ˜¯ä¸€ä¸ªæ™®é€šçš„â€œapplication/x-www-form-urlencodedâ€è¯·æ±‚ã€‚
         WebRequest request = new GetMethodWebRequest("http://localhost/myservlet");
         InvocationContext invocationContext = client.newInvocation(request);
 
@@ -140,41 +140,41 @@ public class UploadServiceTests {
 
         assertEquals(4, items.length);
 
-        // ²ÎÊıµÄË³ĞòÊÇ¸ù¾İform.htmlÖĞµÄfieldµÄË³ĞòÀ´µÄ
-        // µÚÒ»¸ö²ÎÊı£º<input type="text" name="myparam"/>
+        // å‚æ•°çš„é¡ºåºæ˜¯æ ¹æ®form.htmlä¸­çš„fieldçš„é¡ºåºæ¥çš„
+        // ç¬¬ä¸€ä¸ªå‚æ•°ï¼š<input type="text" name="myparam"/>
         assertEquals("myparam", items[0].getFieldName());
         assertNull(items[0].getName());
         assertTrue(items[0].isFormField());
         assertTrue(items[0].isInMemory());
-        assertEquals("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", items[0].getString()); // ×Ô¶¯ÒÔUTF-8½âÂë
+        assertEquals("ä¸­åäººæ°‘å…±å’Œå›½", items[0].getString()); // è‡ªåŠ¨ä»¥UTF-8è§£ç 
 
-        // µÚ¶ş¸ö²ÎÊı£º<input type="file" name="myfile"/>
+        // ç¬¬äºŒä¸ªå‚æ•°ï¼š<input type="file" name="myfile"/>
         assertEquals("myfile", items[1].getFieldName());
         assertEquals(new File(srcdir, "smallfile.txt"), new File(items[1].getName()));
         assertFalse(items[1].isFormField());
 
-        // ¶ÔÓÚfileÀàĞÍ£¬²»»á×Ô¶¯ÓÃUTF-8½âÂë£¬Ä¬ÈÏÊ¹ÓÃ8859_1
-        assertEquals(new String("ÖĞ»ªÈËÃñ¹²ºÍ¹ú".getBytes("GBK"), "8859_1"), items[1].getString());
-        assertEquals("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", items[1].getString("GBK"));
+        // å¯¹äºfileç±»å‹ï¼Œä¸ä¼šè‡ªåŠ¨ç”¨UTF-8è§£ç ï¼Œé»˜è®¤ä½¿ç”¨8859_1
+        assertEquals(new String("ä¸­åäººæ°‘å…±å’Œå›½".getBytes("GBK"), "8859_1"), items[1].getString());
+        assertEquals("ä¸­åäººæ°‘å…±å’Œå›½", items[1].getString("GBK"));
 
-        // ÕâÃ´Ğ¡µÄÎÄ¼ş£¬Ó¦¸Ã·ÅÔÚÄÚ´æÖĞ
+        // è¿™ä¹ˆå°çš„æ–‡ä»¶ï¼Œåº”è¯¥æ”¾åœ¨å†…å­˜ä¸­
         assertTrue(items[1].isInMemory());
 
-        // µÚÈı¸ö²ÎÊı£º<input type="file" name="myfile_ÖĞÎÄ"/>
-        assertEquals("myfile_ÖĞÎÄ", items[2].getFieldName()); // ×Ô¶¯ÒÔUTF-8½âÂëheader
-        assertEquals(ÖĞÎÄÎÄ¼şÃû, new File(items[2].getName())); // ×Ô¶¯ÒÔUTF-8½âÂëheader
+        // ç¬¬ä¸‰ä¸ªå‚æ•°ï¼š<input type="file" name="myfile_ä¸­æ–‡"/>
+        assertEquals("myfile_ä¸­æ–‡", items[2].getFieldName()); // è‡ªåŠ¨ä»¥UTF-8è§£ç header
+        assertEquals(ä¸­æ–‡æ–‡ä»¶å, new File(items[2].getName())); // è‡ªåŠ¨ä»¥UTF-8è§£ç header
         assertFalse(items[2].isFormField());
 
-        // Õâ¸öÎÄ¼ş±È½Ï´ó£¬Ó¦¸ÃÔÚÎÄ¼şÖĞ
+        // è¿™ä¸ªæ–‡ä»¶æ¯”è¾ƒå¤§ï¼Œåº”è¯¥åœ¨æ–‡ä»¶ä¸­
         assertTrue(items[2].getSize() > 100);
         assertFalse(items[2].isInMemory());
 
-        // µÚËÄ¸ö²ÎÊı£º<input type="submit" name="submit" value="upload"/>
+        // ç¬¬å››ä¸ªå‚æ•°ï¼š<input type="submit" name="submit" value="upload"/>
         assertEquals("submit", items[3].getFieldName());
         assertNull(items[3].getName());
         assertTrue(items[3].isFormField());
         assertTrue(items[3].isInMemory());
-        assertEquals("upload", items[3].getString()); // ×Ô¶¯ÒÔUTF-8½âÂë
+        assertEquals("upload", items[3].getString()); // è‡ªåŠ¨ä»¥UTF-8è§£ç 
     }
 
     @Test
@@ -183,7 +183,7 @@ public class UploadServiceTests {
         UploadParameters params = new UploadParameters();
 
         params.setRepository(repositoryPath);
-        params.setSizeThreshold(0); // Ç¿ÖÆĞ´ÈëÎÄ¼ş
+        params.setSizeThreshold(0); // å¼ºåˆ¶å†™å…¥æ–‡ä»¶
 
         FileItem[] items = upload.parseRequest(request, params);
 
@@ -223,41 +223,41 @@ public class UploadServiceTests {
 
         assertEquals(4, items.length);
 
-        // ²ÎÊıµÄË³ĞòÊÇ¸ù¾İform.htmlÖĞµÄfieldµÄË³ĞòÀ´µÄ
-        // µÚÒ»¸ö²ÎÊı£º<input type="text" name="myparam"/>
+        // å‚æ•°çš„é¡ºåºæ˜¯æ ¹æ®form.htmlä¸­çš„fieldçš„é¡ºåºæ¥çš„
+        // ç¬¬ä¸€ä¸ªå‚æ•°ï¼š<input type="text" name="myparam"/>
         assertEquals("myparam", items[0].getFieldName());
         assertNull(items[0].getName());
         assertTrue(items[0].isFormField());
-        assertTrue(items[0].isInMemory()); // µ±thresholdÎª0Ê±£¬form fieldÓÀÔ¶ÔÚÄÚ´æÖĞ
-        assertEquals("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", items[0].getString()); // ×Ô¶¯ÒÔUTF-8½âÂë
+        assertTrue(items[0].isInMemory()); // å½“thresholdä¸º0æ—¶ï¼Œform fieldæ°¸è¿œåœ¨å†…å­˜ä¸­
+        assertEquals("ä¸­åäººæ°‘å…±å’Œå›½", items[0].getString()); // è‡ªåŠ¨ä»¥UTF-8è§£ç 
 
-        // µÚ¶ş¸ö²ÎÊı£º<input type="file" name="myfile"/>
+        // ç¬¬äºŒä¸ªå‚æ•°ï¼š<input type="file" name="myfile"/>
         assertEquals("myfile", items[1].getFieldName());
         assertEquals(new File(srcdir, "smallfile.txt"), new File(items[1].getName()));
         assertFalse(items[1].isFormField());
 
-        // ¶ÔÓÚfileÀàĞÍ£¬²»»á×Ô¶¯ÓÃUTF-8½âÂë£¬Ä¬ÈÏÊ¹ÓÃ8859_1
-        assertEquals(new String("ÖĞ»ªÈËÃñ¹²ºÍ¹ú".getBytes("GBK"), "8859_1"), items[1].getString());
-        assertEquals("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", items[1].getString("GBK"));
+        // å¯¹äºfileç±»å‹ï¼Œä¸ä¼šè‡ªåŠ¨ç”¨UTF-8è§£ç ï¼Œé»˜è®¤ä½¿ç”¨8859_1
+        assertEquals(new String("ä¸­åäººæ°‘å…±å’Œå›½".getBytes("GBK"), "8859_1"), items[1].getString());
+        assertEquals("ä¸­åäººæ°‘å…±å’Œå›½", items[1].getString("GBK"));
 
-        // ÒòÎªthresholdÊÇ0, ËùÒÔÉÏ´«ÎÄ¼ş×ÜÊÇ±£´æÔÚÎÄ¼şÏµÍ³ÖĞ
+        // å› ä¸ºthresholdæ˜¯0, æ‰€ä»¥ä¸Šä¼ æ–‡ä»¶æ€»æ˜¯ä¿å­˜åœ¨æ–‡ä»¶ç³»ç»Ÿä¸­
         assertFalse(items[1].isInMemory());
 
-        // µÚÈı¸ö²ÎÊı£º<input type="file" name="myfile_ÖĞÎÄ"/>
-        assertEquals("myfile_ÖĞÎÄ", items[2].getFieldName()); // ×Ô¶¯ÒÔUTF-8½âÂëheader
-        assertEquals(ÖĞÎÄÎÄ¼şÃû, new File(items[2].getName())); // ×Ô¶¯ÒÔUTF-8½âÂëheader
+        // ç¬¬ä¸‰ä¸ªå‚æ•°ï¼š<input type="file" name="myfile_ä¸­æ–‡"/>
+        assertEquals("myfile_ä¸­æ–‡", items[2].getFieldName()); // è‡ªåŠ¨ä»¥UTF-8è§£ç header
+        assertEquals(ä¸­æ–‡æ–‡ä»¶å, new File(items[2].getName())); // è‡ªåŠ¨ä»¥UTF-8è§£ç header
         assertFalse(items[2].isFormField());
 
-        // fileÀàĞÍÒ»¶¨ÔÚÎÄ¼şÖĞ
+        // fileç±»å‹ä¸€å®šåœ¨æ–‡ä»¶ä¸­
         assertTrue(items[2].getSize() > 100);
         assertFalse(items[2].isInMemory());
 
-        // µÚËÄ¸ö²ÎÊı£º<input type="submit" name="submit" value="upload"/>
+        // ç¬¬å››ä¸ªå‚æ•°ï¼š<input type="submit" name="submit" value="upload"/>
         assertEquals("submit", items[3].getFieldName());
         assertNull(items[3].getName());
         assertTrue(items[3].isFormField());
-        assertTrue(items[3].isInMemory()); // form fieldÓÀÔ¶ÔÚÄÚ´æÖĞ
-        assertEquals("upload", items[3].getString()); // ×Ô¶¯ÒÔUTF-8½âÂë
+        assertTrue(items[3].isInMemory()); // form fieldæ°¸è¿œåœ¨å†…å­˜ä¸­
+        assertEquals("upload", items[3].getString()); // è‡ªåŠ¨ä»¥UTF-8è§£ç 
     }
 
     @Test
@@ -278,25 +278,25 @@ public class UploadServiceTests {
 
         assertEquals(4, items.length);
 
-        // ²ÎÊıµÄË³ĞòÊÇ¸ù¾İform.htmlÖĞµÄfieldµÄË³ĞòÀ´µÄ
-        // µÚÒ»¸ö²ÎÊı£º<input type="text" name="myparam"/>
-        assertEquals("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", items[0].toString());
+        // å‚æ•°çš„é¡ºåºæ˜¯æ ¹æ®form.htmlä¸­çš„fieldçš„é¡ºåºæ¥çš„
+        // ç¬¬ä¸€ä¸ªå‚æ•°ï¼š<input type="text" name="myparam"/>
+        assertEquals("ä¸­åäººæ°‘å…±å’Œå›½", items[0].toString());
 
-        // µÚ¶ş¸ö²ÎÊı£º<input type="file" name="myfile"/>
+        // ç¬¬äºŒä¸ªå‚æ•°ï¼š<input type="file" name="myfile"/>
         assertEquals(new File(srcdir, "smallfile.txt").getAbsolutePath(), items[1].toString());
 
-        // µÚÈı¸ö²ÎÊı£º<input type="file" name="myfile_ÖĞÎÄ"/>
-        assertEquals(ÖĞÎÄÎÄ¼şÃû.getAbsolutePath(), items[2].toString());
+        // ç¬¬ä¸‰ä¸ªå‚æ•°ï¼š<input type="file" name="myfile_ä¸­æ–‡"/>
+        assertEquals(ä¸­æ–‡æ–‡ä»¶å.getAbsolutePath(), items[2].toString());
 
-        // µÚËÄ¸ö²ÎÊı£º<input type="submit" name="submit" value="upload"/>
+        // ç¬¬å››ä¸ªå‚æ•°ï¼š<input type="submit" name="submit" value="upload"/>
         assertEquals("upload", items[3].toString());
     }
 
     /**
-     * ¹ıÂËhttpunitÉú³ÉµÄrequest content£º
+     * è¿‡æ»¤httpunitç”Ÿæˆçš„request contentï¼š
      * <ul>
-     * <li>¹ıÂËµôContent-Type header£¬ÒòÎªÔÚÕıÊ½ä¯ÀÀÆ÷ÖĞ²»»á³öÏÖÕâ¸ö¡£</li>
-     * <li>½«filename="...\\..."ÖĞµÄË«Ğ±¸Ü»»³Éµ¥Ğ±¸Ü£¬ÒòÎªÕıÊ½ä¯ÀÀÆ÷Ò²²»»á³öÏÖË«Ğ±¸Ü¡£</li>
+     * <li>è¿‡æ»¤æ‰Content-Type headerï¼Œå› ä¸ºåœ¨æ­£å¼æµè§ˆå™¨ä¸­ä¸ä¼šå‡ºç°è¿™ä¸ªã€‚</li>
+     * <li>å°†filename="...\\..."ä¸­çš„åŒæ–œæ æ¢æˆå•æ–œæ ï¼Œå› ä¸ºæ­£å¼æµè§ˆå™¨ä¹Ÿä¸ä¼šå‡ºç°åŒæ–œæ ã€‚</li>
      * </ul>
      */
     private static final class FilterServletRunner extends UploadServletRunner {
@@ -318,7 +318,7 @@ public class UploadServiceTests {
                         line = line.replaceAll("\\\\+", "\\\\");
                     }
 
-                    writer.printf("%s\r\n", line); // ×¢Òâ£º´Ë´¦·Çplatform-specific»»ĞĞ¡£
+                    writer.printf("%s\r\n", line); // æ³¨æ„ï¼šæ­¤å¤„éplatform-specificæ¢è¡Œã€‚
                 }
 
                 writer.flush();

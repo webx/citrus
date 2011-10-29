@@ -20,9 +20,9 @@ package com.alibaba.citrus.generictype;
 import java.lang.reflect.GenericArrayType;
 
 /**
- * ºÍ{@link GenericArrayType}¼°Êı×éĞÍ{@link Class}¶ÔÓ¦£¬´ú±íÒ»¸öGenericÊı×éµÄĞÅÏ¢¡£
+ * å’Œ{@link GenericArrayType}åŠæ•°ç»„å‹{@link Class}å¯¹åº”ï¼Œä»£è¡¨ä¸€ä¸ªGenericæ•°ç»„çš„ä¿¡æ¯ã€‚
  * <p>
- * ºÍ{@link GenericArrayType}ºÍ{@link Class}²»Í¬µÄÊÇ£¬{@link ArrayTypeInfo}°üº¬Êı×éÎ¬¶ÈµÄĞÅÏ¢¡£
+ * å’Œ{@link GenericArrayType}å’Œ{@link Class}ä¸åŒçš„æ˜¯ï¼Œ{@link ArrayTypeInfo}åŒ…å«æ•°ç»„ç»´åº¦çš„ä¿¡æ¯ã€‚
  * </p>
  * 
  * @author Michael Zhou

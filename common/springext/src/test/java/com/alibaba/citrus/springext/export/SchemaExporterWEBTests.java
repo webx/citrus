@@ -68,7 +68,7 @@ public class SchemaExporterWEBTests {
     }
 
     /**
-     * µ÷ÓÃservlet£¬È¡µÃrequest/response¡£
+     * è°ƒç”¨servletï¼Œå–å¾—request/responseã€‚
      */
     protected final void invokeServlet(String uri) throws Exception {
         if (uri != null && uri.startsWith("http")) {

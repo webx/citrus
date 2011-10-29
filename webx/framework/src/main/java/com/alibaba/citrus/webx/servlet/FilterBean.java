@@ -54,10 +54,10 @@ import org.springframework.web.context.support.ServletContextResourceLoader;
 import org.springframework.web.servlet.HttpServletBean;
 
 /**
- * Ö§³Ö×¢Èë²ÎÊıµÄfilter»ùÀà¡£
+ * æ”¯æŒæ³¨å…¥å‚æ•°çš„filteråŸºç±»ã€‚
  * <p>
- * ½«init-params×¢Èëµ½filterÖĞ£¬½«requestºÍresponse×ª»»³É <code>HttpServletRequest</code>ºÍ
- * <code>HttpServletResponse</code>¡£
+ * å°†init-paramsæ³¨å…¥åˆ°filterä¸­ï¼Œå°†requestå’Œresponseè½¬æ¢æˆ <code>HttpServletRequest</code>å’Œ
+ * <code>HttpServletResponse</code>ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -69,14 +69,14 @@ public abstract class FilterBean implements Filter {
     private FilterConfig filterConfig;
 
     /**
-     * Ìí¼ÓÒ»¸ö±ØÑ¡ÅäÖÃÏî¡£
+     * æ·»åŠ ä¸€ä¸ªå¿…é€‰é…ç½®é¡¹ã€‚
      */
     protected final void addRequiredProperty(String name) {
         this.requiredProperties.add(name);
     }
 
     /**
-     * ³õÊ¼»¯filter¡£
+     * åˆå§‹åŒ–filterã€‚
      */
     public final void init(FilterConfig filterConfig) throws ServletException {
         this.filterConfig = filterConfig;
@@ -110,39 +110,39 @@ public abstract class FilterBean implements Filter {
     }
 
     /**
-     * ³õÊ¼»¯<code>BeanWrapper</code>¡£
+     * åˆå§‹åŒ–<code>BeanWrapper</code>ã€‚
      */
     protected void initBeanWrapper(BeanWrapper bw) throws BeansException {
     }
 
     /**
-     * ³õÊ¼»¯Filter¡£
+     * åˆå§‹åŒ–Filterã€‚
      */
     protected void init() throws Exception {
     }
 
     /**
-     * ÇåÀífilter¡£
+     * æ¸…ç†filterã€‚
      */
     public void destroy() {
     }
 
     /**
-     * È¡µÃfilterµÄÅäÖÃ¡£
+     * å–å¾—filterçš„é…ç½®ã€‚
      */
     public final FilterConfig getFilterConfig() {
         return filterConfig;
     }
 
     /**
-     * È¡µÃ¶¨ÒåÔÚweb.xmlÖĞµÄfilterÃû×Ö¡£
+     * å–å¾—å®šä¹‰åœ¨web.xmlä¸­çš„filteråå­—ã€‚
      */
     public final String getFilterName() {
         return filterConfig == null ? null : filterConfig.getFilterName();
     }
 
     /**
-     * È¡µÃµ±Ç°webappµÄcontext¡£
+     * å–å¾—å½“å‰webappçš„contextã€‚
      */
     public final ServletContext getServletContext() {
         return filterConfig == null ? null : filterConfig.getServletContext();
@@ -179,7 +179,7 @@ public abstract class FilterBean implements Filter {
             throws IOException, ServletException;
 
     /**
-     * ´Ófilter configÖĞÈ¡µÃËùÓĞµÄinit-params¡£
+     * ä»filter configä¸­å–å¾—æ‰€æœ‰çš„init-paramsã€‚
      */
     private static class FilterConfigPropertyValues extends MutablePropertyValues {
         private static final long serialVersionUID = -5359131251714023794L;
@@ -201,7 +201,7 @@ public abstract class FilterBean implements Filter {
     }
 
     /**
-     * ²»·µ»Øresponse bodyµÄresponseÊµÏÖ¡£
+     * ä¸è¿”å›response bodyçš„responseå®ç°ã€‚
      */
     private static class NoBodyResponse extends HttpServletResponseWrapper {
         private NoBodyOutputStream noBody = new NoBodyOutputStream();
@@ -240,7 +240,7 @@ public abstract class FilterBean implements Filter {
     }
 
     /**
-     * ²»·µ»Øresponse bodyµÄservlet output streamÊµÏÖ¡£
+     * ä¸è¿”å›response bodyçš„servlet output streamå®ç°ã€‚
      */
     private static class NoBodyOutputStream extends ServletOutputStream {
         private int contentLength;

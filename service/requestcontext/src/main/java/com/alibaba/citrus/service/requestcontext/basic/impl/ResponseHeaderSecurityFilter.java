@@ -46,7 +46,7 @@ import com.alibaba.citrus.util.HumanReadableSize;
 import com.alibaba.citrus.util.StringEscapeUtil;
 
 /**
- * ¹ıÂËheaderÖĞµÄcrlf£¬½«status messageÓÃHTML entities×ªÒå£¬ÏŞÖÆcookieµÄ×Ü´óĞ¡¡£
+ * è¿‡æ»¤headerä¸­çš„crlfï¼Œå°†status messageç”¨HTML entitiesè½¬ä¹‰ï¼Œé™åˆ¶cookieçš„æ€»å¤§å°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -65,7 +65,7 @@ public class ResponseHeaderSecurityFilter implements RequestContextLifecycleInte
     }
 
     public ResponseHeaderSecurityFilter(HttpServletRequest request) {
-        // ×¢Òâ£¬´ËrequestÎŞ·¨´Ó@AutowiredÖĞ×¢Èë£¬ÒòÎª´ËÊ±BeanPostProcessor»¹Î´³õÊ¼»¯¡£µ«Í¨¹ıconstructor×¢ÈëÊÇ¿ÉĞĞµÄ¡£
+        // æ³¨æ„ï¼Œæ­¤requestæ— æ³•ä»@Autowiredä¸­æ³¨å…¥ï¼Œå› ä¸ºæ­¤æ—¶BeanPostProcessorè¿˜æœªåˆå§‹åŒ–ã€‚ä½†é€šè¿‡constructoræ³¨å…¥æ˜¯å¯è¡Œçš„ã€‚
         assertProxy(request);
 
         if (request == null) {
@@ -175,7 +175,7 @@ public class ResponseHeaderSecurityFilter implements RequestContextLifecycleInte
     }
 
     /**
-     * Èç¹û²»°üº¬CRLF£¬Ôò·µ»Ø<code>null</code>£¬·ñÔò³ıÈ¥ËùÓĞCRLF£¬Ìæ»»³É¿Õ¸ñ¡£
+     * å¦‚æœä¸åŒ…å«CRLFï¼Œåˆ™è¿”å›<code>null</code>ï¼Œå¦åˆ™é™¤å»æ‰€æœ‰CRLFï¼Œæ›¿æ¢æˆç©ºæ ¼ã€‚
      */
     private String filterCRLF(String value, String logInfo) {
         if (containsCRLF(value)) {
@@ -270,7 +270,7 @@ public class ResponseHeaderSecurityFilter implements RequestContextLifecycleInte
         @Override
         protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
             attributesToProperties(element, builder, "logName", "maxSetCookieSize");
-            addConstructorArg(builder, true, HttpServletRequest.class); // ÒÀÀµrequest
+            addConstructorArg(builder, true, HttpServletRequest.class); // ä¾èµ–request
         }
     }
 }

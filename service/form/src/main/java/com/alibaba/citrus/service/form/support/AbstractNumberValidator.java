@@ -23,7 +23,7 @@ import static com.alibaba.citrus.util.Assert.*;
 import com.alibaba.citrus.service.form.support.NumberSupport.Type;
 
 /**
- * ½«fieldÖµ¿´×÷Ö¸¶¨Êı×ÖÀàĞÍµÄvalidator¡£
+ * å°†fieldå€¼çœ‹ä½œæŒ‡å®šæ•°å­—ç±»å‹çš„validatorã€‚
  * 
  * @author Michael Zhou
  */
@@ -31,14 +31,14 @@ public abstract class AbstractNumberValidator extends AbstractOptionalValidator 
     private Type numberType = INT;
 
     /**
-     * È¡µÃÊı×ÖµÄÀàĞÍ¡£
+     * å–å¾—æ•°å­—çš„ç±»å‹ã€‚
      */
     public Type getNumberType() {
         return numberType;
     }
 
     /**
-     * ÉèÖÃÊı×ÖµÄÀàĞÍ¡£
+     * è®¾ç½®æ•°å­—çš„ç±»å‹ã€‚
      */
     public void setNumberType(Type numberType) {
         this.numberType = assertNotNull(numberType, "numberType");

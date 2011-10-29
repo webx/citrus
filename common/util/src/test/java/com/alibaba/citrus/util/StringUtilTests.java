@@ -25,15 +25,15 @@ import java.util.Formatter;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>StringUtil</code>¡£
+ * æµ‹è¯•<code>StringUtil</code>ã€‚
  * 
  * @author Michael Zhou
  */
 public class StringUtilTests {
     // ==========================================================================
-    // »ù±¾º¯Êı¡£ 
+    // åŸºæœ¬å‡½æ•°ã€‚ 
     //
-    // ×¢£º¶ÔÓÚ´óĞ¡Ğ´Ãô¸ĞµÄisEquals·½·¨£¬ÇëÊ¹ÓÃObjectUtil.isEquals¡£
+    // æ³¨ï¼šå¯¹äºå¤§å°å†™æ•æ„Ÿçš„isEqualsæ–¹æ³•ï¼Œè¯·ä½¿ç”¨ObjectUtil.isEqualsã€‚
     // ==========================================================================
 
     @Test
@@ -53,12 +53,12 @@ public class StringUtilTests {
     }
 
     // ==========================================================================
-    // ÅĞ¿Õº¯Êı¡£ 
+    // åˆ¤ç©ºå‡½æ•°ã€‚ 
     //  
-    // ÒÔÏÂ·½·¨ÓÃÀ´ÅĞ¶¨Ò»¸ö×Ö·û´®ÊÇ·ñÎª£º 
+    // ä»¥ä¸‹æ–¹æ³•ç”¨æ¥åˆ¤å®šä¸€ä¸ªå­—ç¬¦ä¸²æ˜¯å¦ä¸ºï¼š 
     // 1. null 
     // 2. empty - "" 
-    // 3. blank - "È«²¿ÊÇ¿Õ°×" - ¿Õ°×ÓÉCharacter.isWhitespaceËù¶¨Òå¡£ 
+    // 3. blank - "å…¨éƒ¨æ˜¯ç©ºç™½" - ç©ºç™½ç”±Character.isWhitespaceæ‰€å®šä¹‰ã€‚ 
     // ==========================================================================
 
     @Test
@@ -69,7 +69,7 @@ public class StringUtilTests {
         assertFalse(StringUtil.isEmpty("bob"));
         assertFalse(StringUtil.isEmpty("  bob  "));
 
-        // Unicode¿Õ°×
+        // Unicodeç©ºç™½
         assertFalse(StringUtil.isEmpty("\u3000"));
         assertFalse(StringUtil.isEmpty("\r\n"));
     }
@@ -82,16 +82,16 @@ public class StringUtilTests {
         assertFalse(StringUtil.isBlank("bob"));
         assertFalse(StringUtil.isBlank("  bob  "));
 
-        // Unicode¿Õ°×
+        // Unicodeç©ºç™½
         assertTrue(StringUtil.isBlank("\u3000"));
         assertTrue(StringUtil.isBlank("\r\n"));
     }
 
     // ==========================================================================
-    // Ä¬ÈÏÖµº¯Êı¡£ 
+    // é»˜è®¤å€¼å‡½æ•°ã€‚ 
     //  
-    // µ±×Ö·û´®Îªempty»òblankÊ±£¬½«×Ö·û´®×ª»»³ÉÖ¸¶¨µÄÄ¬ÈÏ×Ö·û´®¡£
-    // ÅĞ¶Ï×Ö·û´®ÎªnullÊ±£¬¿ÉÓÃ¸üÍ¨ÓÃµÄObjectUtil.defaultIfNull¡£
+    // å½“å­—ç¬¦ä¸²ä¸ºemptyæˆ–blankæ—¶ï¼Œå°†å­—ç¬¦ä¸²è½¬æ¢æˆæŒ‡å®šçš„é»˜è®¤å­—ç¬¦ä¸²ã€‚
+    // åˆ¤æ–­å­—ç¬¦ä¸²ä¸ºnullæ—¶ï¼Œå¯ç”¨æ›´é€šç”¨çš„ObjectUtil.defaultIfNullã€‚
     // ==========================================================================
 
     @Test
@@ -111,9 +111,9 @@ public class StringUtilTests {
     }
 
     // ==========================================================================
-    // È¥¿Õ°×µÄº¯Êı¡£ 
+    // å»ç©ºç™½çš„å‡½æ•°ã€‚ 
     //  
-    // ÒÔÏÂ·½·¨ÓÃÀ´³ıÈ¥Ò»¸ö×Ö´®Ê×Î²µÄ¿Õ°×¡£ 
+    // ä»¥ä¸‹æ–¹æ³•ç”¨æ¥é™¤å»ä¸€ä¸ªå­—ä¸²é¦–å°¾çš„ç©ºç™½ã€‚ 
     // ==========================================================================
 
     @Test
@@ -132,7 +132,7 @@ public class StringUtilTests {
         assertNull(StringUtil.trimToNull(null));
         assertNull(StringUtil.trimToNull(""));
         assertNull(StringUtil.trimToNull("     "));
-        assertSame(abc, StringUtil.trimToNull(abc)); // ×Ö·û´®Ô­Ñù·µ»Ø£¬È·±£Ğ§ÂÊ
+        assertSame(abc, StringUtil.trimToNull(abc)); // å­—ç¬¦ä¸²åŸæ ·è¿”å›ï¼Œç¡®ä¿æ•ˆç‡
         assertEquals("abc", StringUtil.trimToNull("    abc    "));
     }
 
@@ -143,7 +143,7 @@ public class StringUtilTests {
         assertEquals("", StringUtil.trimToEmpty(null));
         assertEquals("", StringUtil.trimToEmpty(""));
         assertEquals("", StringUtil.trimToEmpty("     "));
-        assertSame(abc, StringUtil.trimToEmpty(abc)); // ×Ö·û´®Ô­Ñù·µ»Ø£¬È·±£Ğ§ÂÊ
+        assertSame(abc, StringUtil.trimToEmpty(abc)); // å­—ç¬¦ä¸²åŸæ ·è¿”å›ï¼Œç¡®ä¿æ•ˆç‡
         assertEquals("abc", StringUtil.trimToEmpty("    abc    "));
     }
 
@@ -154,13 +154,13 @@ public class StringUtilTests {
         assertNull(StringUtil.trim(null, null));
         assertEquals("", StringUtil.trim("", null));
         assertEquals("", StringUtil.trim("     ", null));
-        assertSame(abc, StringUtil.trim(abc, null)); // ×Ö·û´®Ô­Ñù·µ»Ø£¬È·±£Ğ§ÂÊ
+        assertSame(abc, StringUtil.trim(abc, null)); // å­—ç¬¦ä¸²åŸæ ·è¿”å›ï¼Œç¡®ä¿æ•ˆç‡
         assertEquals("abc", StringUtil.trim("    abc    ", null));
 
-        // Unicode¿Õ°×
+        // Unicodeç©ºç™½
         assertEquals("abc", StringUtil.trim("\u3000abc\r\n", null));
 
-        // Á½¸ö²ÎÊı
+        // ä¸¤ä¸ªå‚æ•°
         assertNull(StringUtil.trim(null, "xyz"));
         assertEquals("", StringUtil.trim("", "xyz"));
         assertEquals(abc, StringUtil.trim(abc, null));
@@ -182,10 +182,10 @@ public class StringUtilTests {
         assertEquals("abc  ", StringUtil.trimStart("abc  "));
         assertEquals("abc ", StringUtil.trimStart(" abc "));
 
-        // Unicode¿Õ°×
+        // Unicodeç©ºç™½
         assertEquals("abc\u3000", StringUtil.trimStart("\u3000abc\u3000"));
 
-        // Á½¸ö²ÎÊı
+        // ä¸¤ä¸ªå‚æ•°
         assertNull(StringUtil.trimStart(null, "xyz"));
         assertEquals("", StringUtil.trimStart("", "xyz"));
         assertEquals(abc, StringUtil.trimStart(abc, null));
@@ -210,10 +210,10 @@ public class StringUtilTests {
         assertEquals("abc", StringUtil.trimEnd("abc  "));
         assertEquals(" abc", StringUtil.trimEnd(" abc "));
 
-        // Unicode¿Õ°×
+        // Unicodeç©ºç™½
         assertEquals("\u3000abc", StringUtil.trimEnd("\u3000abc\u3000"));
 
-        // Á½¸ö²ÎÊı
+        // ä¸¤ä¸ªå‚æ•°
         assertNull(StringUtil.trimEnd(null, "xyz"));
         assertEquals("", StringUtil.trimEnd("", "xyz"));
         assertEquals(abc, StringUtil.trimEnd(abc, null));
@@ -231,13 +231,13 @@ public class StringUtilTests {
         assertNull(StringUtil.trimToNull(null, null));
         assertNull(StringUtil.trimToNull("", null));
         assertNull(StringUtil.trimToNull("     ", null));
-        assertSame(abc, StringUtil.trimToNull(abc, null)); // ×Ö·û´®Ô­Ñù·µ»Ø£¬È·±£Ğ§ÂÊ
+        assertSame(abc, StringUtil.trimToNull(abc, null)); // å­—ç¬¦ä¸²åŸæ ·è¿”å›ï¼Œç¡®ä¿æ•ˆç‡
         assertEquals("abc", StringUtil.trimToNull("    abc    ", null));
 
-        // Unicode¿Õ°×
+        // Unicodeç©ºç™½
         assertEquals("abc", StringUtil.trimToNull("\u3000abc\r\n", null));
 
-        // Á½¸ö²ÎÊı
+        // ä¸¤ä¸ªå‚æ•°
         assertNull(StringUtil.trimToNull(null, "xyz"));
         assertNull(StringUtil.trimToNull("", "xyz"));
         assertEquals(abc, StringUtil.trimToNull(abc, null));
@@ -254,13 +254,13 @@ public class StringUtilTests {
         assertEquals("", StringUtil.trimToEmpty(null, null));
         assertEquals("", StringUtil.trimToEmpty("", null));
         assertEquals("", StringUtil.trimToEmpty("     ", null));
-        assertSame(abc, StringUtil.trimToEmpty(abc, null)); // ×Ö·û´®Ô­Ñù·µ»Ø£¬È·±£Ğ§ÂÊ
+        assertSame(abc, StringUtil.trimToEmpty(abc, null)); // å­—ç¬¦ä¸²åŸæ ·è¿”å›ï¼Œç¡®ä¿æ•ˆç‡
         assertEquals("abc", StringUtil.trimToEmpty("    abc    ", null));
 
-        // Unicode¿Õ°×
+        // Unicodeç©ºç™½
         assertEquals("abc", StringUtil.trimToEmpty("\u3000abc\r\n", null));
 
-        // Á½¸ö²ÎÊı
+        // ä¸¤ä¸ªå‚æ•°
         assertEquals("", StringUtil.trimToEmpty(null, "xyz"));
         assertEquals("", StringUtil.trimToEmpty("", "xyz"));
         assertEquals(abc, StringUtil.trimToEmpty(abc, null));
@@ -271,7 +271,7 @@ public class StringUtilTests {
     }
 
     // ==========================================================================
-    // ´óĞ¡Ğ´×ª»»¡£ 
+    // å¤§å°å†™è½¬æ¢ã€‚ 
     // ==========================================================================
 
     @Test
@@ -343,9 +343,9 @@ public class StringUtilTests {
         assertEquals("aBcDefGhi123", StringUtil.toCamelCase("aBcDefGhi123"));
         assertEquals("aBcDefGhi123", StringUtil.toCamelCase("aBcDEFGhi123"));
 
-        assertEquals("123ABcDefGhi", StringUtil.toCamelCase("123aBcDEFGhi")); // Êı×Ö¿ªÊ¼
+        assertEquals("123ABcDefGhi", StringUtil.toCamelCase("123aBcDEFGhi")); // æ•°å­—å¼€å§‹
 
-        // ²»±£ÁôÏÂ»®Ïß
+        // ä¸ä¿ç•™ä¸‹åˆ’çº¿
         assertEquals("ab", StringUtil.toCamelCase("__AB__"));
         assertEquals("ab", StringUtil.toCamelCase("__Ab__"));
         assertEquals("aB", StringUtil.toCamelCase("__aB__"));
@@ -356,7 +356,7 @@ public class StringUtilTests {
         assertEquals("aB", StringUtil.toCamelCase("__a__B__"));
         assertEquals("aB", StringUtil.toCamelCase("__a__b__"));
 
-        // ±£Áô³ıÏÂ»®ÏßÒÔÍâµÄÆäËü·Ö¸ô·û
+        // ä¿ç•™é™¤ä¸‹åˆ’çº¿ä»¥å¤–çš„å…¶å®ƒåˆ†éš”ç¬¦
         assertEquals("..ab..", StringUtil.toCamelCase("..AB.."));
         assertEquals("..ab..", StringUtil.toCamelCase("..Ab.."));
         assertEquals("..aB..", StringUtil.toCamelCase("..aB.."));
@@ -403,9 +403,9 @@ public class StringUtilTests {
         assertEquals("ABcDefGhi123", StringUtil.toPascalCase("aBcDefGhi123"));
         assertEquals("ABcDefGhi123", StringUtil.toPascalCase("aBcDEFGhi123"));
 
-        assertEquals("123ABcDefGhi", StringUtil.toPascalCase("123aBcDEFGhi")); // Êı×Ö¿ªÊ¼
+        assertEquals("123ABcDefGhi", StringUtil.toPascalCase("123aBcDEFGhi")); // æ•°å­—å¼€å§‹
 
-        // ²»±£ÁôÏÂ»®Ïß
+        // ä¸ä¿ç•™ä¸‹åˆ’çº¿
         assertEquals("Ab", StringUtil.toPascalCase("__AB__"));
         assertEquals("Ab", StringUtil.toPascalCase("__Ab__"));
         assertEquals("AB", StringUtil.toPascalCase("__aB__"));
@@ -416,7 +416,7 @@ public class StringUtilTests {
         assertEquals("AB", StringUtil.toPascalCase("__a__B__"));
         assertEquals("AB", StringUtil.toPascalCase("__a__b__"));
 
-        // ±£Áô³ıÏÂ»®ÏßÒÔÍâµÄÆäËü·Ö¸ô·û
+        // ä¿ç•™é™¤ä¸‹åˆ’çº¿ä»¥å¤–çš„å…¶å®ƒåˆ†éš”ç¬¦
         assertEquals("..Ab..", StringUtil.toPascalCase("..AB.."));
         assertEquals("..Ab..", StringUtil.toPascalCase("..Ab.."));
         assertEquals("..AB..", StringUtil.toPascalCase("..aB.."));
@@ -463,9 +463,9 @@ public class StringUtilTests {
         assertEquals("A_BC_DEF_GHI_123", StringUtil.toUpperCaseWithUnderscores("aBcDefGhi123"));
         assertEquals("A_BC_DEF_GHI_123", StringUtil.toUpperCaseWithUnderscores("aBcDEFGhi123"));
 
-        assertEquals("123_A_BC_DEF_GHI", StringUtil.toUpperCaseWithUnderscores("123aBcDEFGhi")); // Êı×Ö¿ªÊ¼
+        assertEquals("123_A_BC_DEF_GHI", StringUtil.toUpperCaseWithUnderscores("123aBcDEFGhi")); // æ•°å­—å¼€å§‹
 
-        // ±£ÁôÏÂ»®Ïß
+        // ä¿ç•™ä¸‹åˆ’çº¿
         assertEquals("__AB__", StringUtil.toUpperCaseWithUnderscores("__AB__"));
         assertEquals("__AB__", StringUtil.toUpperCaseWithUnderscores("__Ab__"));
         assertEquals("__A_B__", StringUtil.toUpperCaseWithUnderscores("__aB__"));
@@ -476,7 +476,7 @@ public class StringUtilTests {
         assertEquals("__A__B__", StringUtil.toUpperCaseWithUnderscores("__a__B__"));
         assertEquals("__A__B__", StringUtil.toUpperCaseWithUnderscores("__a__b__"));
 
-        // ±£ÁôËùÓĞµÄ·Ö¸ô·û
+        // ä¿ç•™æ‰€æœ‰çš„åˆ†éš”ç¬¦
         assertEquals("..AB..", StringUtil.toUpperCaseWithUnderscores("..AB.."));
         assertEquals("..AB..", StringUtil.toUpperCaseWithUnderscores("..Ab.."));
         assertEquals("..A_B..", StringUtil.toUpperCaseWithUnderscores("..aB.."));
@@ -523,9 +523,9 @@ public class StringUtilTests {
         assertEquals("a_bc_def_ghi_123", StringUtil.toLowerCaseWithUnderscores("aBcDefGhi123"));
         assertEquals("a_bc_def_ghi_123", StringUtil.toLowerCaseWithUnderscores("aBcDEFGhi123"));
 
-        assertEquals("123_a_bc_def_ghi", StringUtil.toLowerCaseWithUnderscores("123aBcDEFGhi")); // Êı×Ö¿ªÊ¼
+        assertEquals("123_a_bc_def_ghi", StringUtil.toLowerCaseWithUnderscores("123aBcDEFGhi")); // æ•°å­—å¼€å§‹
 
-        // ±£ÁôÏÂ»®Ïß
+        // ä¿ç•™ä¸‹åˆ’çº¿
         assertEquals("__ab__", StringUtil.toLowerCaseWithUnderscores("__AB__"));
         assertEquals("__ab__", StringUtil.toLowerCaseWithUnderscores("__Ab__"));
         assertEquals("__a_b__", StringUtil.toLowerCaseWithUnderscores("__aB__"));
@@ -536,7 +536,7 @@ public class StringUtilTests {
         assertEquals("__a__b__", StringUtil.toLowerCaseWithUnderscores("__a__B__"));
         assertEquals("__a__b__", StringUtil.toLowerCaseWithUnderscores("__a__b__"));
 
-        // ±£ÁôËùÓĞµÄ·Ö¸ô·û
+        // ä¿ç•™æ‰€æœ‰çš„åˆ†éš”ç¬¦
         assertEquals("..ab..", StringUtil.toLowerCaseWithUnderscores("..AB.."));
         assertEquals("..ab..", StringUtil.toLowerCaseWithUnderscores("..Ab.."));
         assertEquals("..a_b..", StringUtil.toLowerCaseWithUnderscores("..aB.."));
@@ -557,9 +557,9 @@ public class StringUtilTests {
     }
 
     // ==========================================================================
-    // ×Ö·û´®·Ö¸îº¯Êı¡£ 
+    // å­—ç¬¦ä¸²åˆ†å‰²å‡½æ•°ã€‚ 
     //  
-    // ½«×Ö·û´®°´Ö¸¶¨·Ö¸ô·û·Ö¸î¡£ 
+    // å°†å­—ç¬¦ä¸²æŒ‰æŒ‡å®šåˆ†éš”ç¬¦åˆ†å‰²ã€‚ 
     // ==========================================================================
 
     @Test
@@ -600,9 +600,9 @@ public class StringUtilTests {
     }
 
     // ==========================================================================
-    // ×Ö·û´®Á¬½Óº¯Êı¡£ 
+    // å­—ç¬¦ä¸²è¿æ¥å‡½æ•°ã€‚ 
     //  
-    // ½«¶à¸ö¶ÔÏó°´Ö¸¶¨·Ö¸ô·ûÁ¬½Ó³É×Ö·û´®¡£ 
+    // å°†å¤šä¸ªå¯¹è±¡æŒ‰æŒ‡å®šåˆ†éš”ç¬¦è¿æ¥æˆå­—ç¬¦ä¸²ã€‚ 
     // ==========================================================================
 
     @Test
@@ -628,7 +628,7 @@ public class StringUtilTests {
     }
 
     // ==========================================================================
-    // ×Ö·û´®²éÕÒº¯Êı ¡ª¡ª ×Ö·û»ò×Ö·û´®¡£  
+    // å­—ç¬¦ä¸²æŸ¥æ‰¾å‡½æ•° â€”â€” å­—ç¬¦æˆ–å­—ç¬¦ä¸²ã€‚  
     // ==========================================================================
     @Test
     public void indexOfChar() {
@@ -850,7 +850,7 @@ public class StringUtilTests {
     }
 
     // ==========================================================================
-    // È¡×Ó´®º¯Êı¡£
+    // å–å­ä¸²å‡½æ•°ã€‚
     // ==========================================================================
 
     @Test
@@ -908,7 +908,7 @@ public class StringUtilTests {
     }
 
     // ==========================================================================
-    // ËÑË÷²¢È¡×Ó´®º¯Êı¡£
+    // æœç´¢å¹¶å–å­ä¸²å‡½æ•°ã€‚
     // ==========================================================================
     @Test
     public void substringBefore() {
@@ -979,7 +979,7 @@ public class StringUtilTests {
     }
 
     // ==========================================================================
-    // É¾³ı×Ö·û¡£ 
+    // åˆ é™¤å­—ç¬¦ã€‚ 
     // ==========================================================================
 
     @Test
@@ -991,7 +991,7 @@ public class StringUtilTests {
     }
 
     // ==========================================================================
-    // Ìæ»»×Ó´®¡£ 
+    // æ›¿æ¢å­ä¸²ã€‚ 
     // ==========================================================================
 
     @Test
@@ -1041,7 +1041,7 @@ public class StringUtilTests {
 
         String s = new String("abcba");
 
-        assertSame(s, StringUtil.replaceChars(s, "de", "xy")); // Î´¸Ä±ä
+        assertSame(s, StringUtil.replaceChars(s, "de", "xy")); // æœªæ”¹å˜
     }
 
     @Test
@@ -1060,7 +1060,7 @@ public class StringUtilTests {
     }
 
     // ==========================================================================
-    // Perl·ç¸ñµÄchompºÍchopº¯Êı¡£ 
+    // Perlé£æ ¼çš„chompå’Œchopå‡½æ•°ã€‚ 
     // ==========================================================================
 
     @Test
@@ -1109,7 +1109,7 @@ public class StringUtilTests {
     }
 
     // ==========================================================================
-    // ÖØ¸´×Ö·û´®¡£ 
+    // é‡å¤å­—ç¬¦ä¸²ã€‚ 
     // ==========================================================================
 
     @Test
@@ -1132,7 +1132,7 @@ public class StringUtilTests {
     }
 
     // ==========================================================================
-    // ·´×ª×Ö·û´®¡£
+    // åè½¬å­—ç¬¦ä¸²ã€‚
     // ==========================================================================
 
     @Test
@@ -1161,7 +1161,7 @@ public class StringUtilTests {
     }
 
     // ==========================================================================
-    // È¡µÃ×Ö·û´®µÄËõÂÔ¡£
+    // å–å¾—å­—ç¬¦ä¸²çš„ç¼©ç•¥ã€‚
     // ==========================================================================
 
     @Test
@@ -1173,7 +1173,7 @@ public class StringUtilTests {
         assertEquals("abcdefg", StringUtil.abbreviate("abcdefg", 8));
         assertEquals("a...", StringUtil.abbreviate("abcdefg", 4));
 
-        // maxWidth²»×ã4£¬ÔòÉèÖÃ³É4
+        // maxWidthä¸è¶³4ï¼Œåˆ™è®¾ç½®æˆ4
         assertEquals("a...", StringUtil.abbreviate("abcdefg", 3));
     }
 
@@ -1192,15 +1192,15 @@ public class StringUtilTests {
         assertEquals("...ijklmno", StringUtil.abbreviate("abcdefghijklmno", 12, 10));
         assertEquals("...ijklmno", StringUtil.abbreviate("abcdefghijklmno", 100, 10));
 
-        // maxWidth²»×ã4£¬ÔòÉèÖÃ³É4
+        // maxWidthä¸è¶³4ï¼Œåˆ™è®¾ç½®æˆ4
         assertEquals("a...", StringUtil.abbreviate("abcdefghij", 0, 3));
 
-        // maxWidth²»×ã7£¬ÔòÉèÖÃ³É7
+        // maxWidthä¸è¶³7ï¼Œåˆ™è®¾ç½®æˆ7
         assertEquals("...f...", StringUtil.abbreviate("abcdefghij", 5, 6));
     }
 
     // ==========================================================================
-    // ±È½ÏÁ½¸ö×Ö·û´®µÄÒìÍ¬¡£
+    // æ¯”è¾ƒä¸¤ä¸ªå­—ç¬¦ä¸²çš„å¼‚åŒã€‚
     // ==========================================================================
 
     @Test
@@ -1233,7 +1233,7 @@ public class StringUtilTests {
     }
 
     // ==========================================================================
-    // ½«Êı×Ö»ò×Ö½Ú×ª»»³ÉASCII×Ö·û´®µÄº¯Êı¡£ 
+    // å°†æ•°å­—æˆ–å­—èŠ‚è½¬æ¢æˆASCIIå­—ç¬¦ä¸²çš„å‡½æ•°ã€‚ 
     // ==========================================================================
 
     @Test
@@ -1290,7 +1290,7 @@ public class StringUtilTests {
     }
 
     // ==========================================================================
-    // Ëõ½øÅÅ°æº¯Êı¡£ 
+    // ç¼©è¿›æ’ç‰ˆå‡½æ•°ã€‚ 
     // ==========================================================================
 
     @Test

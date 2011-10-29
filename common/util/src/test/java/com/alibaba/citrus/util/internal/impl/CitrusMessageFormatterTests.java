@@ -26,7 +26,7 @@ import com.alibaba.WrongPrefixMessages;
 import com.alibaba.citrus.util.internal.MessageFormatterTests;
 
 /**
- * ²âÊÔ<code>CitrusMessageFormatter</code>¡£
+ * æµ‹è¯•<code>CitrusMessageFormatter</code>ã€‚
  * 
  * @author Michael Zhou
  */

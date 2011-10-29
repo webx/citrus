@@ -32,7 +32,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * µ±Ìõ¼şÂú×ãÊ±£¬Ö´ĞĞÑ­»·Ìå¡£
+ * å½“æ¡ä»¶æ»¡è¶³æ—¶ï¼Œæ‰§è¡Œå¾ªç¯ä½“ã€‚
  * 
  * @author Michael Zhou
  */
@@ -59,7 +59,7 @@ public class WhileLoopValve extends LoopValve {
 
         PipelineInvocationHandle handle = initLoop(pipelineContext);
 
-        while (condition.isSatisfied(handle)) { // ×¢Òâ£ºconditionµÄÉÏÏÂÎÄÎªhandle¶ø·Çµ±Ç°pipelineContext
+        while (condition.isSatisfied(handle)) { // æ³¨æ„ï¼šconditionçš„ä¸Šä¸‹æ–‡ä¸ºhandleè€Œéå½“å‰pipelineContext
             invokeBody(handle);
 
             if (handle.isBroken()) {

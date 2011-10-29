@@ -50,7 +50,7 @@ import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.util.io.StreamUtil;
 
 /**
- * ½«xml resource±ä»»¸ñÊ½µÄfilter¡£
+ * å°†xml resourceå˜æ¢æ ¼å¼çš„filterã€‚
  * 
  * @author Michael Zhou
  */
@@ -142,7 +142,7 @@ public class XsltResourceFilter implements ResourceFilter {
     }
 
     /**
-     * ÓÃXSLT×ª»»XML×ÊÔ´¡£
+     * ç”¨XSLTè½¬æ¢XMLèµ„æºã€‚
      */
     private Resource transformDocument(Resource xmlRes, String xmlResName, Resource xsltRes, String xsltResName)
             throws ResourceNotFoundException {
@@ -167,7 +167,7 @@ public class XsltResourceFilter implements ResourceFilter {
     }
 
     /**
-     * ½«×ÊÔ´±£´æµ½Ä¿Â¼ÖĞ¡£
+     * å°†èµ„æºä¿å­˜åˆ°ç›®å½•ä¸­ã€‚
      */
     private Resource saveToDir(Resource resource, String resourceName) {
         File fileToSave = new File(saveToDir, resourceName);

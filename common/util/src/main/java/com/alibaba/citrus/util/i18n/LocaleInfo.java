@@ -33,10 +33,10 @@ import java.util.Locale;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ´ú±íÒ»¸ölocaleĞÅÏ¢¡£
+ * ä»£è¡¨ä¸€ä¸ªlocaleä¿¡æ¯ã€‚
  * <p>
- * ¼´Ê¹charset²»ºÏ·¨£¬±¾ÀàÒ²²»»á±¨´í¡£ÇëÊ¹ÓÃ<code>LocaleUtil.isCharsetSupported()</code>
- * ·½·¨À´ÅĞ¶ÏcharsetµÄºÏ·¨ĞÔ¡£
+ * å³ä½¿charsetä¸åˆæ³•ï¼Œæœ¬ç±»ä¹Ÿä¸ä¼šæŠ¥é”™ã€‚è¯·ä½¿ç”¨<code>LocaleUtil.isCharsetSupported()</code>
+ * æ–¹æ³•æ¥åˆ¤æ–­charsetçš„åˆæ³•æ€§ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -47,10 +47,10 @@ public final class LocaleInfo implements Cloneable, Externalizable {
     private Charset charset;
 
     /**
-     * ½âÎö²¢´´½¨localeĞÅÏ¢¡£
+     * è§£æå¹¶åˆ›å»ºlocaleä¿¡æ¯ã€‚
      * 
-     * @param name localeĞÅÏ¢µÄ×Ö·û´®£¬°üº¬localeºÍcharsetĞÅÏ¢£¬ÒÔ¡°:¡±·Ö¸ô
-     * @return localeĞÅÏ¢
+     * @param name localeä¿¡æ¯çš„å­—ç¬¦ä¸²ï¼ŒåŒ…å«localeå’Œcharsetä¿¡æ¯ï¼Œä»¥â€œ:â€åˆ†éš”
+     * @return localeä¿¡æ¯
      */
     public static LocaleInfo parse(String name) {
         name = assertNotNull(trimToNull(name), "no locale name");
@@ -71,7 +71,7 @@ public final class LocaleInfo implements Cloneable, Externalizable {
     }
 
     /**
-     * ´´½¨ÏµÍ³Ä¬ÈÏµÄlocaleĞÅÏ¢¡£
+     * åˆ›å»ºç³»ç»Ÿé»˜è®¤çš„localeä¿¡æ¯ã€‚
      */
     public LocaleInfo() {
         this.locale = assertNotNull(Locale.getDefault(), "system locale");
@@ -79,30 +79,30 @@ public final class LocaleInfo implements Cloneable, Externalizable {
     }
 
     /**
-     * ´´½¨localeĞÅÏ¢¡£
+     * åˆ›å»ºlocaleä¿¡æ¯ã€‚
      * 
-     * @param locale ÇøÓòĞÅÏ¢
+     * @param locale åŒºåŸŸä¿¡æ¯
      */
     public LocaleInfo(Locale locale) {
         this(locale, null, LocaleUtil.getDefault());
     }
 
     /**
-     * ´´½¨localeĞÅÏ¢¡£
+     * åˆ›å»ºlocaleä¿¡æ¯ã€‚
      * 
-     * @param locale ÇøÓòĞÅÏ¢
-     * @param charset ±àÂë×Ö·û¼¯
+     * @param locale åŒºåŸŸä¿¡æ¯
+     * @param charset ç¼–ç å­—ç¬¦é›†
      */
     public LocaleInfo(Locale locale, String charset) {
         this(locale, charset, LocaleUtil.getDefault());
     }
 
     /**
-     * ´´½¨localeĞÅÏ¢¡£
+     * åˆ›å»ºlocaleä¿¡æ¯ã€‚
      * 
-     * @param locale ÇøÓòĞÅÏ¢
-     * @param charset ±àÂë×Ö·û¼¯
-     * @param fallbackLocaleInfo ÉÏÒ»¼¶localeĞÅÏ¢£¬Èç¹ûÎ´Ìá¹©localeºÍcharset£¬Ôò´ÓÉÏÒ»¼¶ÖĞÈ¡µÃ¡£
+     * @param locale åŒºåŸŸä¿¡æ¯
+     * @param charset ç¼–ç å­—ç¬¦é›†
+     * @param fallbackLocaleInfo ä¸Šä¸€çº§localeä¿¡æ¯ï¼Œå¦‚æœæœªæä¾›localeå’Œcharsetï¼Œåˆ™ä»ä¸Šä¸€çº§ä¸­å–å¾—ã€‚
      */
     LocaleInfo(Locale locale, String charset, LocaleInfo fallbackLocaleInfo) {
         assertNotNull(fallbackLocaleInfo, "fallbackLocaleInfo");
@@ -116,7 +116,7 @@ public final class LocaleInfo implements Cloneable, Externalizable {
             }
         } else {
             if (charset == null) {
-                charset = "UTF-8"; // Èç¹ûÖ¸¶¨ÁËlocale£¬µ«Î´Ö¸¶¨charset£¬ÔòÊ¹ÓÃÍòÄÜµÄUTF-8
+                charset = "UTF-8"; // å¦‚æœæŒ‡å®šäº†localeï¼Œä½†æœªæŒ‡å®šcharsetï¼Œåˆ™ä½¿ç”¨ä¸‡èƒ½çš„UTF-8
             }
         }
 
@@ -130,32 +130,32 @@ public final class LocaleInfo implements Cloneable, Externalizable {
     }
 
     /**
-     * È¡µÃÇøÓò¡£
+     * å–å¾—åŒºåŸŸã€‚
      * 
-     * @return ÇøÓò
+     * @return åŒºåŸŸ
      */
     public Locale getLocale() {
         return locale;
     }
 
     /**
-     * È¡µÃ±àÂë×Ö·û¼¯¡£
+     * å–å¾—ç¼–ç å­—ç¬¦é›†ã€‚
      * 
-     * @return ±àÂë×Ö·û¼¯
+     * @return ç¼–ç å­—ç¬¦é›†
      */
     public Charset getCharset() {
         return charset;
     }
 
     /**
-     * ÅĞ¶ÏcharsetÊÇ·ñ±»Ö§³Ö¡£
+     * åˆ¤æ–­charsetæ˜¯å¦è¢«æ”¯æŒã€‚
      */
     public boolean isCharsetSupported() {
         return !(charset instanceof UnknownCharset);
     }
 
     /**
-     * ÅĞ¶ÏcharsetÊÇ·ñ±»Ö§³Ö¡£
+     * åˆ¤æ–­charsetæ˜¯å¦è¢«æ”¯æŒã€‚
      */
     public LocaleInfo assertCharsetSupported() throws UnsupportedCharsetException {
         if (charset instanceof UnknownCharset) {
@@ -166,10 +166,10 @@ public final class LocaleInfo implements Cloneable, Externalizable {
     }
 
     /**
-     * ±È½Ï¶ÔÏó¡£
+     * æ¯”è¾ƒå¯¹è±¡ã€‚
      * 
-     * @param o ±»±È½ÏµÄ¶ÔÏó
-     * @return Èç¹û¶ÔÏóµÈĞ§£¬Ôò·µ»Ø<code>true</code>
+     * @param o è¢«æ¯”è¾ƒçš„å¯¹è±¡
+     * @return å¦‚æœå¯¹è±¡ç­‰æ•ˆï¼Œåˆ™è¿”å›<code>true</code>
      */
     @Override
     public boolean equals(Object o) {
@@ -222,7 +222,7 @@ public final class LocaleInfo implements Cloneable, Externalizable {
     }
 
     /**
-     * ´ú±íÒ»¸ö²»ÄÜÊ¶±ğµÄcharset¡£
+     * ä»£è¡¨ä¸€ä¸ªä¸èƒ½è¯†åˆ«çš„charsetã€‚
      */
     static class UnknownCharset extends Charset {
         public UnknownCharset(String name) {

@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.requestcontext.rewrite;
 
 /**
- * ´ú±íÒ»¸örewriteÉÏÏÂÎÄĞÅÏ¢¡£
+ * ä»£è¡¨ä¸€ä¸ªrewriteä¸Šä¸‹æ–‡ä¿¡æ¯ã€‚
  */
 public interface RewriteContext {
 }

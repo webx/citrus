@@ -20,7 +20,7 @@ package com.alibaba.citrus.service.requestcontext.rewrite;
 import com.alibaba.citrus.service.requestcontext.RequestContextException;
 
 /**
- * ´ú±írewrite²úÉúµÄÒì³£¡£
+ * ä»£è¡¨rewriteäº§ç”Ÿçš„å¼‚å¸¸ã€‚
  * 
  * @author Michael Zhou
  */

@@ -21,15 +21,15 @@ import com.alibaba.citrus.expr.Expression;
 import com.alibaba.citrus.util.ClassUtil;
 
 /**
- * ³éÏóµÄ<code>Expression</code>ÊµÏÖ¡£
+ * æŠ½è±¡çš„<code>Expression</code>å®ç°ã€‚
  * 
  * @author Michael Zhou
  */
 public abstract class ExpressionSupport implements Expression {
     /**
-     * È¡µÃ×Ö·û´®±íÊ¾¡£
+     * å–å¾—å­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      * 
-     * @return ±í´ïÊ½µÄ×Ö·û´®±íÊ¾
+     * @return è¡¨è¾¾å¼çš„å­—ç¬¦ä¸²è¡¨ç¤º
      */
     @Override
     public String toString() {

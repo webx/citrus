@@ -56,7 +56,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
 
     @Test
     public void notInited() {
-        // ÔÚservice³õÊ¼»¯¹ı³ÌÖĞ£¬Ä³¸öloader/filterÍ¨¹ıspring resource loader¼ä½Óµİ¹éµ÷ÓÃ¸ÃserviceÊ±£¬±¨´í¡£
+        // åœ¨serviceåˆå§‹åŒ–è¿‡ç¨‹ä¸­ï¼ŒæŸä¸ªloader/filteré€šè¿‡spring resource loaderé—´æ¥é€’å½’è°ƒç”¨è¯¥serviceæ—¶ï¼ŒæŠ¥é”™ã€‚
         try {
             new ResourceLoadingServiceImpl().getResource("test");
             fail();
@@ -88,7 +88,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
         ResourceLoadingService parentService = (ResourceLoadingService) parentFactory
                 .getBean("myParentResourceLoadingService");
 
-        // myResourceLoadingServiceÖ¸¶¨ÁËparentRef=myParentResourceLoadingService
+        // myResourceLoadingServiceæŒ‡å®šäº†parentRef=myParentResourceLoadingService
         resourceLoadingService = (ResourceLoadingService) factory.getBean("myResourceLoadingService");
 
         assertSame(parentService, resourceLoadingService.getParent());
@@ -100,7 +100,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
         ResourceLoadingService parentService = (ResourceLoadingService) parentFactory
                 .getBean("resourceLoadingService_1");
 
-        // resourceLoadingService_1Î´Ö¸¶¨parentRef£¬µ«ÊÇparent contextÖĞ°üº¬Í¬ÃûµÄservice
+        // resourceLoadingService_1æœªæŒ‡å®šparentRefï¼Œä½†æ˜¯parent contextä¸­åŒ…å«åŒåçš„service
         resourceLoadingService = (ResourceLoadingService) factory.getBean("resourceLoadingService_1");
 
         assertSame(parentService, resourceLoadingService.getParent());
@@ -112,13 +112,13 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
         ResourceLoadingService parentService = (ResourceLoadingService) parentFactory
                 .getBean("resourceLoadingService_2");
 
-        // resourceLoadingService_2Î´Ö¸¶¨parentRef£¬µ«ÊÇparent contextÖĞ°üº¬Í¬ÃûµÄservice
+        // resourceLoadingService_2æœªæŒ‡å®šparentRefï¼Œä½†æ˜¯parent contextä¸­åŒ…å«åŒåçš„service
         resourceLoadingService = (ResourceLoadingService) factory.getBean("resourceLoadingService_2");
 
         assertSame(parentService, resourceLoadingService.getParent());
 
-        // /myfolder/testres.txt Ó³Éäµ½<super-loader name="/webroot">
-        // ºÍ<resource-alias name="/webroot">µÈĞ§
+        // /myfolder/testres.txt æ˜ å°„åˆ°<super-loader name="/webroot">
+        // å’Œ<resource-alias name="/webroot">ç­‰æ•ˆ
         assertEquals(new File(srcdir, "/myfolder/testres.txt"),
                 resourceLoadingService.getResourceAsFile("/myfolder/testres.txt"));
     }
@@ -135,14 +135,14 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
 
     @Test
     public void getResource_parent_defaultMapping() throws Exception {
-        // µ±Ç°resource loaderÖĞÃ»ÕÒµ½£¬µ½parentÖĞÕÒ£¬Æ¥Åä/
+        // å½“å‰resource loaderä¸­æ²¡æ‰¾åˆ°ï¼Œåˆ°parentä¸­æ‰¾ï¼ŒåŒ¹é…/
         assertEquals(new File(srcdir, "/myfolder/testres.txt"),
                 resourceLoadingService.getResourceAsFile("/myfolder/testres.txt"));
     }
 
     @Test
     public void getResource_alias_notFound() throws Exception {
-        // Alias±»Æ¥Åä£¬µ«Ã»ÕÒµ½resource mapping
+        // Aliasè¢«åŒ¹é…ï¼Œä½†æ²¡æ‰¾åˆ°resource mapping
         try {
             resourceLoadingService.getResourceAsURL("/my/alias1/testres.txt");
             fail();
@@ -154,28 +154,28 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
 
     @Test
     public void getResource_alias_foundInParent() throws Exception {
-        // Alias±»Æ¥Åä£¬´Ódefault resource loaderÖĞÕÒµ½×ÊÔ´
+        // Aliasè¢«åŒ¹é…ï¼Œä»default resource loaderä¸­æ‰¾åˆ°èµ„æº
         assertEquals(new File(srcdir, "/myfolder/testres.txt"),
                 resourceLoadingService.getResourceAsFile("/my/alias3/testres.txt"));
     }
 
     @Test
     public void getResource_internal_found() throws Exception {
-        // Alias±»Æ¥Åä£¬internal mapping±»ÕÒµ½
+        // Aliasè¢«åŒ¹é…ï¼Œinternal mappingè¢«æ‰¾åˆ°
         assertEquals(new File(srcdir, "/myfolder/testres.txt"),
                 resourceLoadingService.getResourceAsFile("/my/alias4/testres.txt"));
 
         assertEquals(new File(srcdir, "/myfolder/testres.txt"),
                 resourceLoadingService.getParent().getResourceAsFile("/myfolder/testres.txt"));
 
-        // super-loader±»Æ¥Åä£¬internal mapping±»ÕÒµ½
+        // super-loaderè¢«åŒ¹é…ï¼Œinternal mappingè¢«æ‰¾åˆ°
         assertEquals(new File(srcdir, "/myfolder/testres.txt"),
                 resourceLoadingService.getResourceAsFile("/my/alias5/testres.txt"));
     }
 
     @Test
     public void getResource_internal_notFound() throws Exception {
-        // Ö±½ÓÕÒinternal mappingÊÇ²»ĞĞµÄ
+        // ç›´æ¥æ‰¾internal mappingæ˜¯ä¸è¡Œçš„
         try {
             resourceLoadingService.getResourceAsURL("/my/internal/resource/testres.txt");
             fail();
@@ -191,7 +191,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
             assertResourceNotFoundException(e, "/webroot/myfolder/testres.txt", "/webroot/webroot/myfolder/testres.txt");
         }
 
-        // aliasÓ³Éäµ½parent internal mapping£¬ÕâÑùÊÇ²»ĞĞµÄ
+        // aliasæ˜ å°„åˆ°parent internal mappingï¼Œè¿™æ ·æ˜¯ä¸è¡Œçš„
         try {
             resourceLoadingService.getResourceAsURL("/my/alias6/testres.txt");
             fail();
@@ -200,19 +200,19 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
                     "/webroot/webroot/myfolder/testres.txt");
         }
 
-        // super-loaderÓ³Éäµ½parent internal mapping£¬ÕâÑùÊÇ²»ĞĞµÄ
+        // super-loaderæ˜ å°„åˆ°parent internal mappingï¼Œè¿™æ ·æ˜¯ä¸è¡Œçš„
         try {
             resourceLoadingService.getResourceAsURL("/my/alias7/testres.txt");
             fail();
         } catch (ResourceNotFoundException e) {
-            // ÓÉÓÚÊÇloaderµÄ·½Ê½£¬¹Êcaused by¶ªÊ§
+            // ç”±äºæ˜¯loaderçš„æ–¹å¼ï¼Œæ•…caused byä¸¢å¤±
             assertResourceNotFoundException(e, "/my/alias7/testres.txt", "/webroot/myfolder/testres.txt");
         }
     }
 
     @Test
     public void getResource_noLoaders() throws Exception {
-        // Æ¥Åä£¬µ«Ã»ÓĞloaders
+        // åŒ¹é…ï¼Œä½†æ²¡æœ‰loaders
         try {
             resourceLoadingService.getResourceAsURL("/my/resource/testres.txt");
             fail();
@@ -222,11 +222,11 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
     }
 
     /**
-     * ÎŞÂÛresourceNameÊÇ·ñÒÔ/¿ªÊ¼£¬¶¼¿ÉÒÔÆ¥ÅäÏàÓ¦µÄ×ÊÔ´¡£
+     * æ— è®ºresourceNameæ˜¯å¦ä»¥/å¼€å§‹ï¼Œéƒ½å¯ä»¥åŒ¹é…ç›¸åº”çš„èµ„æºã€‚
      */
     @Test
     public void getResource_relativeResourceName() throws Exception {
-        // resource.xmlÖĞÎªÏà¶ÔÂ·¾¶£ºpattern="relative/resource"
+        // resource.xmlä¸­ä¸ºç›¸å¯¹è·¯å¾„ï¼špattern="relative/resource"
         assertEquals(new File(srcdir, "/WEB-INF/aaa/bbb/abc.txt"),
                 resourceLoadingService.getResourceAsFile("/relative/resource/abc.txt"));
         assertEquals(new File(srcdir, "/WEB-INF/aaa/bbb/abc.txt"),
@@ -238,7 +238,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
         assertEquals(new File(srcdir, "/WEB-INF/aaa/aaa/bbb/abc.txt"),
                 resourceLoadingService.getResourceAsFile("aaa/relative/resource/abc.txt", FOR_CREATE));
 
-        // resource.xmlÖĞÎª¾ø¶ÔÂ·¾¶£ºpattern="/absolute/resource"
+        // resource.xmlä¸­ä¸ºç»å¯¹è·¯å¾„ï¼špattern="/absolute/resource"
         assertEquals(new File(srcdir, "/WEB-INF/aaa/bbb/abc.txt"),
                 resourceLoadingService.getResourceAsFile("/absolute/resource/abc.txt"));
         assertEquals(new File(srcdir, "/WEB-INF/aaa/bbb/abc.txt"),
@@ -260,16 +260,16 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
     public void relevancy() throws Exception {
         resourceLoadingService = (ResourceLoadingService) factory.getBean("relevancy");
 
-        // /aaa/bbb/cccÆ¥Åä£º/, /aaa/**, /aaa/bbb/ccc, /**£¬
-        // µ«/aaa/bbb/ccc => /dir3×îÏà¹Ø
+        // /aaa/bbb/cccåŒ¹é…ï¼š/, /aaa/**, /aaa/bbb/ccc, /**ï¼Œ
+        // ä½†/aaa/bbb/ccc => /dir3æœ€ç›¸å…³
         assertEquals(new File(srcdir, "/dir3"), resourceLoadingService.getResourceAsFile("/aaa/bbb/ccc", FOR_CREATE));
 
-        // /aaa/bbb/dddÆ¥Åä£º/, /aaa/**, /**
-        // µ«/aaa/** => /dir2×îÏà¹Ø
+        // /aaa/bbb/dddåŒ¹é…ï¼š/, /aaa/**, /**
+        // ä½†/aaa/** => /dir2æœ€ç›¸å…³
         assertEquals(new File(srcdir, "/dir2"), resourceLoadingService.getResourceAsFile("/aaa/bbb/ddd", FOR_CREATE));
 
-        // /bbbÆ¥Åä£º/, /**
-        // µ«/**µÄÆ¥Åä³¤¶È½Ï³¤£¬¹ÊÑ¡Ôñ/** => /dir4×îÏà¹Ø
+        // /bbbåŒ¹é…ï¼š/, /**
+        // ä½†/**çš„åŒ¹é…é•¿åº¦è¾ƒé•¿ï¼Œæ•…é€‰æ‹©/** => /dir4æœ€ç›¸å…³
         assertEquals(new File(srcdir, "/dir4"), resourceLoadingService.getResourceAsFile("/bbb", FOR_CREATE));
     }
 
@@ -277,7 +277,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
     public void getResourceAsFile() throws Exception {
         resourceLoadingService = (ResourceLoadingService) factory.getBean("getResourceAs");
 
-        // file´æÔÚ
+        // fileå­˜åœ¨
         File f = new File(srcdir, "/myfolder/testres.txt");
 
         Resource resource = resourceLoadingService.getResource("/myfolder/testres.txt");
@@ -286,7 +286,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
         File resourceFile = resourceLoadingService.getResourceAsFile("/myfolder/testres.txt");
         assertEquals(f, resourceFile);
 
-        // file¿É´´½¨
+        // fileå¯åˆ›å»º
         f = new File(srcdir, "/not/found");
 
         resource = resourceLoadingService.getResource("/basedir/not/found", FOR_CREATE);
@@ -295,7 +295,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
         resourceFile = resourceLoadingService.getResourceAsFile("/basedir/not/found", FOR_CREATE);
         assertEquals(f, resourceFile);
 
-        // file²»´æÔÚ
+        // fileä¸å­˜åœ¨
         resource = resourceLoadingService.getResource("/classpath/java/lang/String.class");
         assertEquals(null, resource.getFile());
 
@@ -311,7 +311,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
     public void getResourceAsURL() throws Exception {
         resourceLoadingService = (ResourceLoadingService) factory.getBean("getResourceAs");
 
-        // URL´æÔÚ
+        // URLå­˜åœ¨
         URL u = new File(srcdir, "/myfolder/testres.txt").toURI().toURL();
 
         Resource resource = resourceLoadingService.getResource("/myfolder/testres.txt");
@@ -320,7 +320,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
         URL resourceURL = resourceLoadingService.getResourceAsURL("/myfolder/testres.txt");
         assertEquals(u, resourceURL);
 
-        // URL²»´æÔÚ
+        // URLä¸å­˜åœ¨
         resource = resourceLoadingService.getResource("/asURL/java/lang/String.class");
         assertEquals(null, resource.getURL());
 
@@ -338,14 +338,14 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
 
         String testresContent = readText(new FileInputStream(new File(srcdir, "/myfolder/testres.txt")), null, true);
 
-        // Stream´æÔÚ
+        // Streamå­˜åœ¨
         Resource resource = resourceLoadingService.getResource("/myfolder/testres.txt");
         assertEquals(testresContent, readText(resource.getInputStream(), null, true));
 
         assertEquals(testresContent,
                 readText(resourceLoadingService.getResourceAsStream("/myfolder/testres.txt"), null, true));
 
-        // Stream²»´æÔÚ
+        // Streamä¸å­˜åœ¨
         resource = resourceLoadingService.getResource("/asStream/java/lang/String.class");
         assertEquals(null, resource.getInputStream());
 
@@ -404,8 +404,8 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
     }
 
     /**
-     * µ±´æÔÚ¶à¸öloaders£¬µÚÒ»¸öloaderÕÒµ½µÄresource²»´æÔÚ£¨option=FOR_CREATE£©£¬
-     * µÚ¶ş¸öloaderÕÒµ½µÄresourceÒÑ¾­´æÔÚ£¬Ôò·µ»ØµÚ¶ş¸ö¡£
+     * å½“å­˜åœ¨å¤šä¸ªloadersï¼Œç¬¬ä¸€ä¸ªloaderæ‰¾åˆ°çš„resourceä¸å­˜åœ¨ï¼ˆoption=FOR_CREATEï¼‰ï¼Œ
+     * ç¬¬äºŒä¸ªloaderæ‰¾åˆ°çš„resourceå·²ç»å­˜åœ¨ï¼Œåˆ™è¿”å›ç¬¬äºŒä¸ªã€‚
      */
     @Test
     public void getResource_priority() {
@@ -440,7 +440,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
     }
 
     /**
-     * ³ıÈ¥resource URLµÄfilter¡£
+     * é™¤å»resource URLçš„filterã€‚
      */
     public static class NoURLFilter implements ResourceFilter {
         public void init(ResourceLoadingService resourceLoadingService) {
@@ -460,7 +460,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
     }
 
     /**
-     * ³ıÈ¥resource StreamµÄfilter¡£
+     * é™¤å»resource Streamçš„filterã€‚
      */
     public static class NoStreamFilter implements ResourceFilter {
         public void init(ResourceLoadingService resourceLoadingService) {

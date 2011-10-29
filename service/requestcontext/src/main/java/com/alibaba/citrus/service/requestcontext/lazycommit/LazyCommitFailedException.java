@@ -20,7 +20,7 @@ package com.alibaba.citrus.service.requestcontext.lazycommit;
 import com.alibaba.citrus.service.requestcontext.RequestContextException;
 
 /**
- * ´ú±íÒ»¸ölazy commitÊ§°ÜµÄÒì³£¡£
+ * ä»£è¡¨ä¸€ä¸ªlazy commitå¤±è´¥çš„å¼‚å¸¸ã€‚
  * 
  * @author Michael Zhou
  */
@@ -28,35 +28,35 @@ public class LazyCommitFailedException extends RequestContextException {
     private static final long serialVersionUID = -7855934887908937875L;
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      */
     public LazyCommitFailedException() {
         super();
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param message Òì³£ĞÅÏ¢
+     * @param message å¼‚å¸¸ä¿¡æ¯
      */
     public LazyCommitFailedException(String message) {
         super(message);
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param message Òì³£ĞÅÏ¢
-     * @param cause Òì³£Ô­Òò
+     * @param message å¼‚å¸¸ä¿¡æ¯
+     * @param cause å¼‚å¸¸åŸå› 
      */
     public LazyCommitFailedException(String message, Throwable cause) {
         super(message, cause);
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param cause Òì³£Ô­Òò
+     * @param cause å¼‚å¸¸åŸå› 
      */
     public LazyCommitFailedException(Throwable cause) {
         super(cause);

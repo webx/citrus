@@ -20,40 +20,40 @@ package com.alibaba.citrus.turbine;
 import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 
 /**
- * ÓÃÀ´·½±ã½øĞĞÄÚ²¿»òÍâ²¿ÖØ¶¨ÏòµÄ½Ó¿Ú¡£
+ * ç”¨æ¥æ–¹ä¾¿è¿›è¡Œå†…éƒ¨æˆ–å¤–éƒ¨é‡å®šå‘çš„æ¥å£ã€‚
  * 
  * @author Michael Zhou
  */
 public interface Navigator {
     /**
-     * ½øĞĞÄÚ²¿ÖØ¶¨Ïò£¬Ö¸¶¨Ò»¸ötargetÃû³Æ¡£
+     * è¿›è¡Œå†…éƒ¨é‡å®šå‘ï¼ŒæŒ‡å®šä¸€ä¸ªtargetåç§°ã€‚
      */
     Parameters forwardTo(String target);
 
     /**
-     * ½øĞĞÍâ²¿ÖØ¶¨Ïò£¬Ö¸¶¨Ò»¸öuri brokerµÄÃû³Æ¡£
+     * è¿›è¡Œå¤–éƒ¨é‡å®šå‘ï¼ŒæŒ‡å®šä¸€ä¸ªuri brokerçš„åç§°ã€‚
      */
     RedirectParameters redirectTo(String uriName);
 
     /**
-     * ½øĞĞÍâ²¿ÖØ¶¨Ïò£¬Ö¸¶¨Ò»¸öÍêÕûµÄURL location¡£
+     * è¿›è¡Œå¤–éƒ¨é‡å®šå‘ï¼ŒæŒ‡å®šä¸€ä¸ªå®Œæ•´çš„URL locationã€‚
      */
     void redirectToLocation(String location);
 
     /**
-     * ÖØ¶¨ÏòµÄ²ÎÊı¡£
+     * é‡å®šå‘çš„å‚æ•°ã€‚
      */
     interface Parameters {
         Parameters withParameter(String name, String... values);
 
         /**
-         * ¶ÔÓÚredirectTo()Óï¾ä£¬½áÊø²¢Á¢¼´·¢³öredirect¡£
+         * å¯¹äºredirectTo()è¯­å¥ï¼Œç»“æŸå¹¶ç«‹å³å‘å‡ºredirectã€‚
          */
         void end();
     }
 
     /**
-     * Íâ²¿ÖØ¶¨ÏòµÄ²ÎÊı¡£
+     * å¤–éƒ¨é‡å®šå‘çš„å‚æ•°ã€‚
      */
     interface RedirectParameters extends Parameters {
         RedirectParameters withTarget(String target);

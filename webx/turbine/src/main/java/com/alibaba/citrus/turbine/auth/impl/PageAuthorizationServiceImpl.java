@@ -35,7 +35,7 @@ import com.alibaba.citrus.turbine.auth.PageAuthorizationService;
 import com.alibaba.citrus.util.ObjectUtil;
 
 /**
- * ÎªÒ³ÃæÊÚÈ¨µÄservice¡£
+ * ä¸ºé¡µé¢æˆæƒçš„serviceã€‚
  * 
  * @author Michael Zhou
  */
@@ -88,7 +88,7 @@ public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizat
             roleNames = EMPTY_STRING_ARRAY;
         }
 
-        // ÕÒ³öËùÓĞÆ¥ÅäµÄpattern£¬°´Æ¥Åä³¤¶Èµ¹ÅÅĞò¡£
+        // æ‰¾å‡ºæ‰€æœ‰åŒ¹é…çš„patternï¼ŒæŒ‰åŒ¹é…é•¿åº¦å€’æ’åºã€‚
         MatchResult[] results = getMatchResults(target);
         PageAuthorizationResult result;
 
@@ -143,20 +143,20 @@ public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizat
 
     private Boolean isActionAllowed(MatchResult[] results, String target, String userName, String[] roleNames,
                                     String action) {
-        // °´Ë³Ğò¼ì²éÊÚÈ¨£¬Ö±µ½role»òuser±»allow»òdeny
+        // æŒ‰é¡ºåºæ£€æŸ¥æˆæƒï¼Œç›´åˆ°roleæˆ–userè¢«allowæˆ–deny
         for (MatchResult result : results) {
             AuthMatch match = result.match;
 
-            // µ¹Ğò¼ì²égrant£¬ºóÃæµÄ¸²¸ÇÇ°ÃæµÄ¡£
+            // å€’åºæ£€æŸ¥grantï¼Œåé¢çš„è¦†ç›–å‰é¢çš„ã€‚
             for (int i = match.getGrants().length - 1; i >= 0; i--) {
                 AuthGrant grant = match.getGrants()[i];
 
-                // ÅĞ¶Ïuser»òroleÊÇ·ñÆ¥Åä
+                // åˆ¤æ–­useræˆ–roleæ˜¯å¦åŒ¹é…
                 boolean userMatch = grant.isUserMatched(userName);
                 boolean roleMatch = grant.areRolesMatched(roleNames);
 
                 if (userMatch || roleMatch) {
-                    // ÅĞ¶ÏactionÊÇ·ñÆ¥Åä
+                    // åˆ¤æ–­actionæ˜¯å¦åŒ¹é…
                     boolean actionAllowed = grant.isActionAllowed(action);
                     boolean actionDenied = grant.isActionDenied(action);
 
@@ -193,7 +193,7 @@ public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizat
     private MatchResult[] getMatchResults(String target) {
         List<MatchResult> results = createArrayList(matches.size());
 
-        // Æ¥ÅäËùÓĞ£¬×¢Òâ£¬ÕâÀï°´µ¹ĞòÆ¥Åä£¬ÕâÑù³¤¶ÈÏàÍ¬µÄÆ¥Åä£¬ÒÔºóÃæµÄÎª×¼¡£
+        // åŒ¹é…æ‰€æœ‰ï¼Œæ³¨æ„ï¼Œè¿™é‡ŒæŒ‰å€’åºåŒ¹é…ï¼Œè¿™æ ·é•¿åº¦ç›¸åŒçš„åŒ¹é…ï¼Œä»¥åé¢çš„ä¸ºå‡†ã€‚
         for (ListIterator<AuthMatch> i = matches.listIterator(matches.size()); i.hasPrevious();) {
             AuthMatch match = i.previous();
             Matcher matcher = match.getPattern().matcher(target);
@@ -208,10 +208,10 @@ public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizat
             }
         }
 
-        // °´Æ¥Åä³¤¶Èµ¹ÅÅĞò£¬×¢Òâ£¬ÕâÊÇÎÈ¶¨ÅÅĞò£¬¶ÔÓÚ³¤¶ÈÏàÍ¬µÄÆ¥Åä£¬Ë³Ğò²»±ä¡£
+        // æŒ‰åŒ¹é…é•¿åº¦å€’æ’åºï¼Œæ³¨æ„ï¼Œè¿™æ˜¯ç¨³å®šæ’åºï¼Œå¯¹äºé•¿åº¦ç›¸åŒçš„åŒ¹é…ï¼Œé¡ºåºä¸å˜ã€‚
         sort(results);
 
-        // ³ıÈ¥ÖØ¸´µÄÆ¥Åä
+        // é™¤å»é‡å¤çš„åŒ¹é…
         Map<AuthGrant[], MatchResult> grantsSet = createLinkedHashMap();
 
         for (MatchResult result : results) {
@@ -242,22 +242,22 @@ public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizat
 
     public static enum PageAuthorizationResult {
         /**
-         * ´ú±íÒ³Ãæ±»Ğí¿É·ÃÎÊ¡£
+         * ä»£è¡¨é¡µé¢è¢«è®¸å¯è®¿é—®ã€‚
          */
         ALLOWED,
 
         /**
-         * ´ú±íÒ³Ãæ±»¾Ü¾ø·ÃÎÊ¡£
+         * ä»£è¡¨é¡µé¢è¢«æ‹’ç»è®¿é—®ã€‚
          */
         DENIED,
 
         /**
-         * ´ú±íµ±Ç°µÄtargetÎ´Æ¥Åä¡£
+         * ä»£è¡¨å½“å‰çš„targetæœªåŒ¹é…ã€‚
          */
         TARGET_NOT_MATCH,
 
         /**
-         * ´ú±íµ±Ç°µÄgrantÎ´Æ¥Åä£¬Ò²¾ÍÊÇuser/roles/actionsÎ´Æ¥Åä¡£
+         * ä»£è¡¨å½“å‰çš„grantæœªåŒ¹é…ï¼Œä¹Ÿå°±æ˜¯user/roles/actionsæœªåŒ¹é…ã€‚
          */
         GRANT_NOT_MATCH
     }

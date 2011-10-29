@@ -24,7 +24,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Í¨¹ıÕıÔò±í´ïÊ½À´ÑéÖ¤×Ö¶ÎµÄvalidator¡£
+ * é€šè¿‡æ­£åˆ™è¡¨è¾¾å¼æ¥éªŒè¯å­—æ®µçš„validatorã€‚
  * 
  * @author Michael Zhou
  */
@@ -33,28 +33,28 @@ public abstract class AbstractRegexpValidator extends AbstractOptionalValidator 
     private Pattern pattern;
 
     /**
-     * È¡µÃregexp¡£
+     * å–å¾—regexpã€‚
      */
     public String getPattern() {
         return patternString;
     }
 
     /**
-     * ÉèÖÃregexp¡£
+     * è®¾ç½®regexpã€‚
      */
     protected void setPattern(String pattern) {
         this.patternString = trimToNull(pattern);
     }
 
     /**
-     * È¡µÃÆ¥Åä»ò²»Æ¥Åä¡£
+     * å–å¾—åŒ¹é…æˆ–ä¸åŒ¹é…ã€‚
      */
     public boolean getNot() {
         return patternString == null ? false : patternString.startsWith("!");
     }
 
     /**
-     * ¼ì²éÅäÖÃ²ÎÊıµÄºÏ·¨ĞÔ¡£
+     * æ£€æŸ¥é…ç½®å‚æ•°çš„åˆæ³•æ€§ã€‚
      */
     @Override
     protected void init() throws Exception {
@@ -71,7 +71,7 @@ public abstract class AbstractRegexpValidator extends AbstractOptionalValidator 
     }
 
     /**
-     * ÑéÖ¤Ò»¸ö×Ö¶Î¡£
+     * éªŒè¯ä¸€ä¸ªå­—æ®µã€‚
      */
     @Override
     protected boolean validate(Context context, String value) {

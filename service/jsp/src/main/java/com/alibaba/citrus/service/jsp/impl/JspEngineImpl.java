@@ -47,7 +47,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * JspÄ£°åÒıÇæµÄÊµÏÖ¡£
+ * Jspæ¨¡æ¿å¼•æ“çš„å®ç°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -61,10 +61,10 @@ public class JspEngineImpl extends AbstractService<JspEngine> implements JspEngi
     private String path;
 
     /**
-     * ´´½¨jspÒıÇæ¡£
+     * åˆ›å»ºjspå¼•æ“ã€‚
      * <p>
-     * ĞèÒª×¢ÒâµÄÊÇ£¬ÓÃÀ´´´½¨jspÒıÇæµÄ²ÎÊı±ØĞëÊÇ¡°È«¾Ö¡±×÷ÓÃÓòµÄ£¬¶ø²»ÊÇ¡°request¡±×÷ÓÃÓòµÄ¡£ÕâÒ»µã¿ÉÓÉ
-     * <code>RequestContextChainingService</code>À´±£Ö¤¡£
+     * éœ€è¦æ³¨æ„çš„æ˜¯ï¼Œç”¨æ¥åˆ›å»ºjspå¼•æ“çš„å‚æ•°å¿…é¡»æ˜¯â€œå…¨å±€â€ä½œç”¨åŸŸçš„ï¼Œè€Œä¸æ˜¯â€œrequestâ€ä½œç”¨åŸŸçš„ã€‚è¿™ä¸€ç‚¹å¯ç”±
+     * <code>RequestContextChainingService</code>æ¥ä¿è¯ã€‚
      * </p>
      */
     public JspEngineImpl(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response) {
@@ -85,21 +85,21 @@ public class JspEngineImpl extends AbstractService<JspEngine> implements JspEngi
     protected void init() throws Exception {
         assertNotNull(resourceLoader, "resourceLoader");
 
-        // È¡µÃËÑË÷Â·¾¶£¨Ïà¶Ô£©¡£
+        // å–å¾—æœç´¢è·¯å¾„ï¼ˆç›¸å¯¹ï¼‰ã€‚
         if (path == null) {
             path = "/templates";
         }
 
-        // ¹æ¸ñ»¯Â·¾¶£¬ÒÔ"/"½áÎ²¡£
+        // è§„æ ¼åŒ–è·¯å¾„ï¼Œä»¥"/"ç»“å°¾ã€‚
         path = normalizeAbsolutePath(path + "/");
 
-        // È¡µÃwebroot¸ùÄ¿Â¼µÄURL
+        // å–å¾—webrootæ ¹ç›®å½•çš„URL
         URL url = servletContext.getResource("/");
 
         if (url != null) {
             contextRoot = url.toExternalForm();
         } else {
-            // Èç¹ûÈ¡²»µ½webroot¸ùÄ¿Â¼£¬ÔòÊÔ×ÅÈ¡µÃweb.xmlµÄURL£¬ÒÔ´ËÎª»ù×¼£¬¼ÆËãÏà¶ÔÓÚwebrootµÄURL¡£
+            // å¦‚æœå–ä¸åˆ°webrootæ ¹ç›®å½•ï¼Œåˆ™è¯•ç€å–å¾—web.xmlçš„URLï¼Œä»¥æ­¤ä¸ºåŸºå‡†ï¼Œè®¡ç®—ç›¸å¯¹äºwebrootçš„URLã€‚
             url = servletContext.getResource("/WEB-INF/web.xml");
 
             if (url != null) {
@@ -130,9 +130,9 @@ public class JspEngineImpl extends AbstractService<JspEngine> implements JspEngi
     }
 
     /**
-     * È¡µÃÄ¬ÈÏµÄÄ£°åÃûºó×ºÁĞ±í¡£
+     * å–å¾—é»˜è®¤çš„æ¨¡æ¿ååç¼€åˆ—è¡¨ã€‚
      * <p>
-     * µ±<code>TemplateService</code>Ã»ÓĞÖ¸¶¨µ½µ±Ç°engineµÄmappingÊ±£¬½«È¡µÃ±¾·½·¨Ëù·µ»ØµÄºó×ºÃûÁĞ±í¡£
+     * å½“<code>TemplateService</code>æ²¡æœ‰æŒ‡å®šåˆ°å½“å‰engineçš„mappingæ—¶ï¼Œå°†å–å¾—æœ¬æ–¹æ³•æ‰€è¿”å›çš„åç¼€ååˆ—è¡¨ã€‚
      * </p>
      */
     public String[] getDefaultExtensions() {
@@ -140,25 +140,25 @@ public class JspEngineImpl extends AbstractService<JspEngine> implements JspEngi
     }
 
     /**
-     * ÅĞ¶¨Ä£°åÊÇ·ñ´æÔÚ¡£
+     * åˆ¤å®šæ¨¡æ¿æ˜¯å¦å­˜åœ¨ã€‚
      */
     public boolean exists(String templateName) {
         return getPathWithinServletContextInternal(templateName) != null;
     }
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢ÒÔ×Ö·û´®µÄĞÎÊ½È¡µÃäÖÈ¾µÄ½á¹û¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶ä»¥å­—ç¬¦ä¸²çš„å½¢å¼å–å¾—æ¸²æŸ“çš„ç»“æœã€‚
      * 
-     * @param template Ä£°åÃû
+     * @param template æ¨¡æ¿å
      * @param context template context
-     * @return Ä£°åäÖÈ»µÄ½á¹û×Ö·û´®
-     * @throws TemplateException äÖÈ¾Ê§°Ü
+     * @return æ¨¡æ¿æ¸²ç„¶çš„ç»“æœå­—ç¬¦ä¸²
+     * @throws TemplateException æ¸²æŸ“å¤±è´¥
      */
     public String getText(String template, TemplateContext context) throws TemplateException, IOException {
-        // È¡µÃJSPÏà¶ÔÓÚwebappµÄÂ·¾¶¡£
+        // å–å¾—JSPç›¸å¯¹äºwebappçš„è·¯å¾„ã€‚
         String relativeTemplateName = getPathWithinServletContext(template);
 
-        // È¡µÃJSPµÄRequestDispatcher¡£
+        // å–å¾—JSPçš„RequestDispatcherã€‚
         RequestDispatcher dispatcher = servletContext.getRequestDispatcher(relativeTemplateName);
 
         if (dispatcher == null) {
@@ -166,10 +166,10 @@ public class JspEngineImpl extends AbstractService<JspEngine> implements JspEngi
         }
 
         try {
-            // ½«template contextÊÊÅäµ½request
+            // å°†template contexté€‚é…åˆ°request
             HttpServletRequest requestWrapper = new TemplateContextAdapter(request, context);
 
-            // ±ÜÃâÔÚjspÖĞĞŞ¸Äcontent type¡¢localeºÍcharset£¬ÕâÓ¦¸ÃÔÚÄ£°åÍâ²¿À´¿ØÖÆ
+            // é¿å…åœ¨jspä¸­ä¿®æ”¹content typeã€localeå’Œcharsetï¼Œè¿™åº”è¯¥åœ¨æ¨¡æ¿å¤–éƒ¨æ¥æ§åˆ¶
             HttpServletResponse responseWrapper = new JspResponse(response);
 
             dispatcher.include(requestWrapper, responseWrapper);
@@ -181,7 +181,7 @@ public class JspEngineImpl extends AbstractService<JspEngine> implements JspEngi
     }
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢½«äÖÈ¾µÄ½á¹ûËÍµ½×Ö½ÚÊä³öÁ÷ÖĞ¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶å°†æ¸²æŸ“çš„ç»“æœé€åˆ°å­—èŠ‚è¾“å‡ºæµä¸­ã€‚
      */
     public void writeTo(String templateName, TemplateContext context, OutputStream ostream) throws TemplateException,
             IOException {
@@ -189,7 +189,7 @@ public class JspEngineImpl extends AbstractService<JspEngine> implements JspEngi
     }
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢½«äÖÈ¾µÄ½á¹ûËÍµ½×Ö·ûÊä³öÁ÷ÖĞ¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶å°†æ¸²æŸ“çš„ç»“æœé€åˆ°å­—ç¬¦è¾“å‡ºæµä¸­ã€‚
      */
     public void writeTo(String templateName, TemplateContext context, Writer writer) throws TemplateException,
             IOException {
@@ -197,8 +197,8 @@ public class JspEngineImpl extends AbstractService<JspEngine> implements JspEngi
     }
 
     /**
-     * È¡µÃÏà¶ÔÓÚservletContextµÄÄ£°åÂ·¾¶¡£Õâ¸öÂ·¾¶¿É±»
-     * <code>javax.servlet.RequestDispatcher</code> Ê¹ÓÃ£¬ÒÔ±ãÕÒµ½jspµÄÊµÀı¡£
+     * å–å¾—ç›¸å¯¹äºservletContextçš„æ¨¡æ¿è·¯å¾„ã€‚è¿™ä¸ªè·¯å¾„å¯è¢«
+     * <code>javax.servlet.RequestDispatcher</code> ä½¿ç”¨ï¼Œä»¥ä¾¿æ‰¾åˆ°jspçš„å®ä¾‹ã€‚
      */
     public String getPathWithinServletContext(String templateName) throws TemplateNotFoundException {
         String path = getPathWithinServletContextInternal(templateName);
@@ -222,7 +222,7 @@ public class JspEngineImpl extends AbstractService<JspEngine> implements JspEngi
                 String url = resource.getURL().toExternalForm();
 
                 if (url.startsWith(contextRoot)) {
-                    path = url.substring(contextRoot.length() - 1); // ±£Áôslash:/
+                    path = url.substring(contextRoot.length() - 1); // ä¿ç•™slash:/
                 }
             } catch (IOException e) {
                 // ignore

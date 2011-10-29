@@ -57,10 +57,10 @@ public class MappingRuleServiceImpl extends AbstractService<MappingRuleService> 
     protected void init() throws Exception {
         assertNotNull(factory, "beanFactory");
 
-        // 取得parent mapping rules，依次尝试：
-        // 1. 在配置文件中明确设置parentRef
-        // 2. parent context中同名的对象
-        // 3. parent context中默认名称的对象
+        // 鍙栧緱parent mapping rules锛屼緷娆″皾璇曪細
+        // 1. 鍦ㄩ厤缃枃浠朵腑鏄庣‘璁剧疆parentRef
+        // 2. parent context涓悓鍚嶇殑瀵硅薄
+        // 3. parent context涓粯璁ゅ悕绉扮殑瀵硅薄
         if (parent == null && factory.getParent() != null) {
             String parentBeanName = null;
 

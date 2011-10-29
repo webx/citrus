@@ -114,7 +114,7 @@ public class UploadedFileValidatorTests extends AbstractValidatorTests<UploadedF
     }
 
     /**
-     * ÎÞfileItems£¬Ò²Í¨¹ý¡£Èç¹û²»ÔÊÐíÕâÖÖÇé¿ö£¬ÔòÓÃrequired-validatorÀ´È·±£fileItems´æÔÚ¡£
+     * æ— fileItemsï¼Œä¹Ÿé€šè¿‡ã€‚å¦‚æžœä¸å…è®¸è¿™ç§æƒ…å†µï¼Œåˆ™ç”¨required-validatoræ¥ç¡®ä¿fileItemså­˜åœ¨ã€‚
      */
     @Test
     public void validate_noFileItems() throws Exception {
@@ -124,7 +124,7 @@ public class UploadedFileValidatorTests extends AbstractValidatorTests<UploadedF
     }
 
     /**
-     * ÎÞ²ÎÊý¡£
+     * æ— å‚æ•°ã€‚
      */
     @Test
     public void validate_defaultConfig() throws Exception {

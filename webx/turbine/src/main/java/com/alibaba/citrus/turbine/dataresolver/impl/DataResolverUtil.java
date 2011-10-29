@@ -42,9 +42,9 @@ public class DataResolverUtil {
             String typeName = annotationType.getSimpleName();
             assertNotNull(name, "missing @%s's name: %s", typeName, context);
 
-            // Ô¼¶¨£º¼ÙÈçÓĞÆäËü¿ÉÑ¡²ÎÊı´æÔÚ£¬Ôò±ØĞëÊ¹ÓÃname()ÕâÖÖĞÎÊ½¡£
-            // ÀıÈç£º@Param("name")
-            // ºÍ£º  @Param(name="name", defaultValue="123")
+            // çº¦å®šï¼šå‡å¦‚æœ‰å…¶å®ƒå¯é€‰å‚æ•°å­˜åœ¨ï¼Œåˆ™å¿…é¡»ä½¿ç”¨name()è¿™ç§å½¢å¼ã€‚
+            // ä¾‹å¦‚ï¼š@Param("name")
+            // å’Œï¼š  @Param(name="name", defaultValue="123")
             assertTrue(!hasOptionalArgs, "use @%s(name=\"%s\") instead of @%s(value=\"%s\"): %s", typeName, name,
                     typeName, name, context);
         }

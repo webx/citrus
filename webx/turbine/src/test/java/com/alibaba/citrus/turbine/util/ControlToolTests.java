@@ -182,7 +182,7 @@ public class ControlToolTests extends AbstractPullToolTests<ControlTool> {
     public void render_withError() throws Exception {
         String content = tool.setModule("myControlWithError").setParameter("with_XSS", true).render();
 
-        // dev mode, errorDetail == stackTrace, »∑±£html escape°£
+        // dev mode, errorDetail == stackTrace, Á°Æ‰øùhtml escape„ÄÇ
         assertThat(
                 content,
                 containsAll(

@@ -58,7 +58,7 @@ public class FormResolverTests extends AbstractDataResolverTests {
     }
 
     private void getFormDefault(String event) throws Exception {
-        // 默认值：skipIfInvalid=true
+        // 榛樿鍊硷細skipIfInvalid=true
 
         // GET, empty form
         execute("action", "form.myAction", event, "");
@@ -74,7 +74,7 @@ public class FormResolverTests extends AbstractDataResolverTests {
         assertNotNull(form);
         assertTrue(form.isValid());
 
-        // GET, invalid, but screen不支持skip
+        // GET, invalid, but screen涓嶆敮鎸乻kip
         execute("screen", "form.myScreen", event, "_fm.m._0.f=&_fm.m._0.fi=");
         form = (Form) newRequest.getAttribute("screenLog");
         assertNotNull(form);

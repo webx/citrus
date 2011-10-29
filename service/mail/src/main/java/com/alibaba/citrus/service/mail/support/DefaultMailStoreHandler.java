@@ -25,27 +25,27 @@ import com.alibaba.citrus.service.mail.MailException;
 import com.alibaba.citrus.service.mail.session.MailStoreHandler;
 
 /**
- * Ä¬ÈÏµÄ½ÓÊÕe-mailµÄ´¦ÀíÆ÷¡£
+ * é»˜è®¤çš„æ¥æ”¶e-mailçš„å¤„ç†å™¨ã€‚
  * 
  * @author Michael Zhou
  */
 public class DefaultMailStoreHandler implements MailStoreHandler {
     /**
-     * Ô¤´¦ÀíÁ¬½Ó¡£
+     * é¢„å¤„ç†è¿æ¥ã€‚
      */
     public void prepareConnection(Store store) throws MailException, MessagingException {
     }
 
     /**
-     * È¡µÃÒ»´Î½ÓÊÕµÄÓÊ¼şÊı¡£²ÎÊı<code>messageCount</code>
-     * ´ú±íµ±Ç°ÓÊÏäÖĞ°üº¬µÄÓÊ¼ş×ÜÊı£¬·½·¨·µ»ØÒ»¸öÊı×Ö£¬´ú±íÒ»´Î½ÓÊÕÓÊ¼şµÄÊıÁ¿£¬±ØĞëĞ¡ÓÚ»òµÈÓÚ<code>messageCount</code>¡£
+     * å–å¾—ä¸€æ¬¡æ¥æ”¶çš„é‚®ä»¶æ•°ã€‚å‚æ•°<code>messageCount</code>
+     * ä»£è¡¨å½“å‰é‚®ç®±ä¸­åŒ…å«çš„é‚®ä»¶æ€»æ•°ï¼Œæ–¹æ³•è¿”å›ä¸€ä¸ªæ•°å­—ï¼Œä»£è¡¨ä¸€æ¬¡æ¥æ”¶é‚®ä»¶çš„æ•°é‡ï¼Œå¿…é¡»å°äºæˆ–ç­‰äº<code>messageCount</code>ã€‚
      */
     public int getMessageCount(int messageCount) throws MailException {
         return messageCount;
     }
 
     /**
-     * ´¦ÀíÒ»¸öÓÊ¼ş¡£·µ»Ø<code>true</code>´ú±íÉ¾³ıÓÊ¼ş¡£
+     * å¤„ç†ä¸€ä¸ªé‚®ä»¶ã€‚è¿”å›<code>true</code>ä»£è¡¨åˆ é™¤é‚®ä»¶ã€‚
      */
     public boolean processMessage(Message message) throws MailException, MessagingException {
         return false;

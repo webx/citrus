@@ -39,7 +39,7 @@ import com.alibaba.citrus.util.StringEscapeUtil;
 import com.alibaba.citrus.util.i18n.LocaleUtil;
 
 /**
- * ³éÏóµÄ<code>Validator</code>ÊµÏÖ¡£
+ * æŠ½è±¡çš„<code>Validator</code>å®ç°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -55,9 +55,9 @@ public abstract class AbstractValidator extends BeanSupport implements Validator
     }
 
     /**
-     * ÊÇ·ñĞèÒª¼ì²émessageÖµ£¿
+     * æ˜¯å¦éœ€è¦æ£€æŸ¥messageå€¼ï¼Ÿ
      * <p>
-     * Èç¹ûÊÇ£¬ÔòmessageÎ´Ö¸¶¨Ê±½«±¨´í¡£
+     * å¦‚æœæ˜¯ï¼Œåˆ™messageæœªæŒ‡å®šæ—¶å°†æŠ¥é”™ã€‚
      * </p>
      */
     protected boolean requiresMessage() {
@@ -65,13 +65,13 @@ public abstract class AbstractValidator extends BeanSupport implements Validator
     }
 
     /**
-     * µ±GroupConfig±»³õÊ¼»¯Íê³ÉÒÔºó±»µ÷ÓÃ£¬´ËÊ±¿ÉÈ¡µÃÍ¬×éÖĞÆäËüµÄfields¡£
+     * å½“GroupConfigè¢«åˆå§‹åŒ–å®Œæˆä»¥åè¢«è°ƒç”¨ï¼Œæ­¤æ—¶å¯å–å¾—åŒç»„ä¸­å…¶å®ƒçš„fieldsã€‚
      */
     public void init(FieldConfig fieldConfig) throws Exception {
         if (requiresMessage()) {
             boolean hasMessage = false;
 
-            // 1. ´ÓmessageSourceÖĞ²éÕÒ
+            // 1. ä»messageSourceä¸­æŸ¥æ‰¾
             if (id != null && messageSource != null) {
                 GroupConfig groupConfig = fieldConfig.getGroupConfig();
                 FormConfig formConfig = groupConfig.getFormConfig();
@@ -83,7 +83,7 @@ public abstract class AbstractValidator extends BeanSupport implements Validator
                 hasMessage = getMessageFromMessageSource() != null;
             }
 
-            // 2. Èç¹ûmessageSourceÖĞÕÒ²»µ½£¬Ôòvalidator±ØĞëÉèÖÃmessage
+            // 2. å¦‚æœmessageSourceä¸­æ‰¾ä¸åˆ°ï¼Œåˆ™validatorå¿…é¡»è®¾ç½®message
             if (!hasMessage) {
                 assertNotNull(message, "no message");
                 message.compile();
@@ -100,29 +100,29 @@ public abstract class AbstractValidator extends BeanSupport implements Validator
     }
 
     /**
-     * È¡µÃvalidatorµÄID£¬Í¨¹ı¸ÃID¿ÉÒÔÕÒµ½Ö¸¶¨µÄvalidator¡£
+     * å–å¾—validatorçš„IDï¼Œé€šè¿‡è¯¥IDå¯ä»¥æ‰¾åˆ°æŒ‡å®šçš„validatorã€‚
      */
     public String getId() {
         return id == null ? getBeanName() : id;
     }
 
     /**
-     * ÉèÖÃvalidatorµÄID£¬Í¨¹ı¸ÃID¿ÉÒÔÕÒµ½Ö¸¶¨µÄvalidator¡£
+     * è®¾ç½®validatorçš„IDï¼Œé€šè¿‡è¯¥IDå¯ä»¥æ‰¾åˆ°æŒ‡å®šçš„validatorã€‚
      */
     public void setId(String id) {
         this.id = trimToNull(id);
     }
 
     /**
-     * È¡µÃ³ö´íĞÅÏ¢¡£
+     * å–å¾—å‡ºé”™ä¿¡æ¯ã€‚
      */
     public final String getMessage(Context context) {
-        // Ê×ÏÈ£¬¼ÙÈçmessageÒÑ¾­±»ÉèÖÃ£¬ÔòÖ±½Ó·µ»Ø¡£
-        // ÀıÈçall-of-validator¾Í»áÉèÖÃÕâ¸ömessage¡£
+        // é¦–å…ˆï¼Œå‡å¦‚messageå·²ç»è¢«è®¾ç½®ï¼Œåˆ™ç›´æ¥è¿”å›ã€‚
+        // ä¾‹å¦‚all-of-validatorå°±ä¼šè®¾ç½®è¿™ä¸ªmessageã€‚
         String result = trimToNull(context.getMessage());
 
         if (result == null) {
-            // È»ºó£¬ÊÔ×Å²éÕÒmessage source£¨½öµ±id´æÔÚ£©
+            // ç„¶åï¼Œè¯•ç€æŸ¥æ‰¾message sourceï¼ˆä»…å½“idå­˜åœ¨ï¼‰
             Message message = this.message;
 
             if (messageCode != null && messageSource != null) {
@@ -134,7 +134,7 @@ public abstract class AbstractValidator extends BeanSupport implements Validator
                 }
             }
 
-            // äÖÈ¾message
+            // æ¸²æŸ“message
             if (message != null) {
                 result = message.getMessageString(context.getMessageContext());
             }
@@ -144,26 +144,26 @@ public abstract class AbstractValidator extends BeanSupport implements Validator
     }
 
     /**
-     * ÉèÖÃ³ö´íĞÅÏ¢¡£
+     * è®¾ç½®å‡ºé”™ä¿¡æ¯ã€‚
      */
     public void setMessage(String message) {
         this.message = new Message(message);
     }
 
     /**
-     * Éú³É¸±±¾¡£
+     * ç”Ÿæˆå‰¯æœ¬ã€‚
      */
     @Override
     public Validator clone() {
         try {
             return (Validator) super.clone();
         } catch (CloneNotSupportedException e) {
-            return null; // ²»¿ÉÄÜ·¢Éú£¡
+            return null; // ä¸å¯èƒ½å‘ç”Ÿï¼
         }
     }
 
     /**
-     * ´ú±íÒ»¸ömessage±í´ïÊ½¡£
+     * ä»£è¡¨ä¸€ä¸ªmessageè¡¨è¾¾å¼ã€‚
      */
     protected static class Message implements Cloneable {
         private String message;
@@ -174,7 +174,7 @@ public abstract class AbstractValidator extends BeanSupport implements Validator
         }
 
         /**
-         * ±àÒë±í´ïÊ½¡£
+         * ç¼–è¯‘è¡¨è¾¾å¼ã€‚
          */
         public void compile() {
             assertNotNull(message, "message");
@@ -188,7 +188,7 @@ public abstract class AbstractValidator extends BeanSupport implements Validator
         }
 
         /**
-         * È¡µÃ³ö´íĞÅÏ¢¡£
+         * å–å¾—å‡ºé”™ä¿¡æ¯ã€‚
          */
         public String getMessageString(ExpressionContext context) {
             return ObjectUtil.toString(messageExpression.evaluate(context), "");

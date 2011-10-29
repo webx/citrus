@@ -18,9 +18,9 @@
 package com.alibaba.citrus.webx;
 
 /**
- * ����ҳ��δ�ҵ����쳣��
+ * 代表页面未找到的异常。
  * <p>
- * ϵͳ�ڽ��ܵ�����쳣�Ժ󣬽�����<code>404 Not Found</code>����ҳ�档
+ * 系统在接受到这个异常以后，将返回<code>404 Not Found</code>错误页面。
  * </p>
  * 
  * @author Michael Zhou

@@ -19,23 +19,23 @@ package com.alibaba.citrus.service.requestcontext.session;
 
 public interface SessionAttributeInterceptor extends SessionInterceptor {
     /**
-     * ´ÓsessionÖĞÈ¡µÃÊı¾İºó£¬·½·¨±»µ÷ÓÃ¡£
+     * ä»sessionä¸­å–å¾—æ•°æ®åï¼Œæ–¹æ³•è¢«è°ƒç”¨ã€‚
      * <p>
-     * ·½·¨¿ÉÒÔĞŞ¸ÄÊı¾İ£¬²¢½«ĞŞ¸ÄºóµÄÖµ·µ»Ø¸øµ÷ÓÃÕß¡£
+     * æ–¹æ³•å¯ä»¥ä¿®æ”¹æ•°æ®ï¼Œå¹¶å°†ä¿®æ”¹åçš„å€¼è¿”å›ç»™è°ƒç”¨è€…ã€‚
      * </p>
      */
     Object onRead(String name, Object value);
 
     /**
-     * ½«ÖµÉèÖÃµ½sessionÖĞÖ®Ç°£¬·½·¨±»µ÷ÓÃ¡£
+     * å°†å€¼è®¾ç½®åˆ°sessionä¸­ä¹‹å‰ï¼Œæ–¹æ³•è¢«è°ƒç”¨ã€‚
      * <p>
-     * ·½·¨·µ»ØµÄÖµ£¬½«±»ÉèÖÃµ½sessionÖĞ¡£
+     * æ–¹æ³•è¿”å›çš„å€¼ï¼Œå°†è¢«è®¾ç½®åˆ°sessionä¸­ã€‚
      * </p>
      * <p>
-     * ÖµÎª<code>null</code>±íÊ¾½«Òª´ÓsessionÖĞÉ¾³ı¸ÃÌõÊı¾İ¡£
+     * å€¼ä¸º<code>null</code>è¡¨ç¤ºå°†è¦ä»sessionä¸­åˆ é™¤è¯¥æ¡æ•°æ®ã€‚
      * </p>
      * <p>
-     * ¼ÙÈç·½·¨Å×³öÒì³££¬ÄÇÃ´Ã»ÓĞÈÎºÎÖµ»á±»ÉèÈësessionÖĞ¡£
+     * å‡å¦‚æ–¹æ³•æŠ›å‡ºå¼‚å¸¸ï¼Œé‚£ä¹ˆæ²¡æœ‰ä»»ä½•å€¼ä¼šè¢«è®¾å…¥sessionä¸­ã€‚
      * </p>
      */
     Object onWrite(String name, Object value);

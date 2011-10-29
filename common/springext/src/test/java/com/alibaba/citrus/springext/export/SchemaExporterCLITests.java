@@ -38,7 +38,7 @@ public class SchemaExporterCLITests extends SchemaExporterTests {
 
     @Test
     public void test9_save() throws IOException {
-        ((SchemaExporterCLI) exporter).saveTo(new File(destdir, "schemas1"), null); // Î´Ö¸¶¨prefix
+        ((SchemaExporterCLI) exporter).saveTo(new File(destdir, "schemas1"), null); // æœªæŒ‡å®šprefix
 
         assertFile(new File(destdir, "schemas1/my-plugins.xsd"), "schemaLocation=\"my/plugins/plugin1.xsd\"");
         assertFile(new File(destdir, "schemas1/my/plugins/plugin1.xsd"));
@@ -56,7 +56,7 @@ public class SchemaExporterCLITests extends SchemaExporterTests {
     public void complete_save() throws IOException {
         SchemaExporterCLI exporter = new SchemaExporterCLI();
 
-        exporter.saveTo(new File(destdir, "schemas2")); // Ò»¸ö²ÎÊıµÄ°æ±¾£¬½«Ê¹ÓÃbasedir×÷Îªprefix
+        exporter.saveTo(new File(destdir, "schemas2")); // ä¸€ä¸ªå‚æ•°çš„ç‰ˆæœ¬ï¼Œå°†ä½¿ç”¨basedirä½œä¸ºprefix
 
         String prefix = new File(destdir, "schemas2").toURI().toString();
 
@@ -69,14 +69,14 @@ public class SchemaExporterCLITests extends SchemaExporterTests {
         assertFile(new File(destdir, "schemas2/services/tools/dateformat.xsd"), prefix
                 + "www.springframework.org/schema/beans/spring-beans.xsd");
 
-        // from spring£¬×¢Òâ°æ±¾ºÅµÄÆ¥Åä
+        // from springï¼Œæ³¨æ„ç‰ˆæœ¬å·çš„åŒ¹é…
         assertFile(new File(destdir, "schemas2/www.springframework.org/schema/aop/spring-aop-2.5.xsd"), prefix
                 + "www.springframework.org/schema/beans/spring-beans-2.5.xsd");
 
         assertFile(new File(destdir, "schemas2/www.springframework.org/schema/aop/spring-aop-2.0.xsd"), prefix
                 + "www.springframework.org/schema/beans/spring-beans-2.0.xsd");
 
-        // ±»×¢ÊÍµÄÓï¾äÖ»ÄÜÔÚspring2ÉÏ²âÊÔÍ¨¹ı¡£ÔÚspring3ÖĞ£¬spring-aop.xsdÒıÓÃµÄÊÇspring-beans-3.0.xsd
+        // è¢«æ³¨é‡Šçš„è¯­å¥åªèƒ½åœ¨spring2ä¸Šæµ‹è¯•é€šè¿‡ã€‚åœ¨spring3ä¸­ï¼Œspring-aop.xsdå¼•ç”¨çš„æ˜¯spring-beans-3.0.xsd
         // assertFile(new File(destdir, "schemas2/www.springframework.org/schema/aop/spring-aop.xsd"), prefix
         //           + "www.springframework.org/schema/beans/spring-beans.xsd");
 

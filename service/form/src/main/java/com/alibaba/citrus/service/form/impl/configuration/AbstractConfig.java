@@ -23,13 +23,13 @@ import com.alibaba.citrus.springext.support.GenericBeanSupport;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ËùÓĞformÅäÖÃ¶ÔÏóµÄ»ùÀà¡£
+ * æ‰€æœ‰formé…ç½®å¯¹è±¡çš„åŸºç±»ã€‚
  * 
  * @author Michael Zhou
  */
 public abstract class AbstractConfig<T> extends GenericBeanSupport<T> {
     /**
-     * È¡µÃºöÂÔ´óĞ¡Ğ´µÄÃû³Æ¡£
+     * å–å¾—å¿½ç•¥å¤§å°å†™çš„åç§°ã€‚
      */
     protected String caseInsensitiveName(String name) {
         assertNotNull(name, "name");

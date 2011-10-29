@@ -18,7 +18,7 @@
 package com.alibaba.citrus.generictype.introspect;
 
 /**
- * ´ú±íºÍÀàÊôĞÔÏà¹ØµÄÒì³£¡£
+ * ä»£è¡¨å’Œç±»å±æ€§ç›¸å…³çš„å¼‚å¸¸ã€‚
  * 
  * @author Michael Zhou
  */

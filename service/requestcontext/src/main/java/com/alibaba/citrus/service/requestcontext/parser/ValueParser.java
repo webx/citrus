@@ -26,473 +26,473 @@ import org.springframework.beans.TypeConverter;
 import org.springframework.core.MethodParameter;
 
 /**
- * ´ú±íÒ»¸ö½âÎöÆ÷£¬ÓÃÀ´È¡µÃHTTPÇëÇóÖĞµÄ²ÎÊıºÍcookies¡£
+ * ä»£è¡¨ä¸€ä¸ªè§£æå™¨ï¼Œç”¨æ¥å–å¾—HTTPè¯·æ±‚ä¸­çš„å‚æ•°å’Œcookiesã€‚
  * <p>
- * ×¢Òâ£º²ÎÊıºÍcookieµÄÃû³Æ¿ÉÄÜ±»×ª»»³ÉÈ«²¿´óĞ´»òÈ«²¿Ğ¡Ğ´¡£ ÕâÊÇ¸ù¾İÅäÖÃÎÄ¼şÖĞµÄ²ÎÊı£º<code>url.case.folding</code>
- * À´Ö¸¶¨µÄ¡£
+ * æ³¨æ„ï¼šå‚æ•°å’Œcookieçš„åç§°å¯èƒ½è¢«è½¬æ¢æˆå…¨éƒ¨å¤§å†™æˆ–å…¨éƒ¨å°å†™ã€‚ è¿™æ˜¯æ ¹æ®é…ç½®æ–‡ä»¶ä¸­çš„å‚æ•°ï¼š<code>url.case.folding</code>
+ * æ¥æŒ‡å®šçš„ã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface ValueParser {
     /**
-     * È¡µÃÀàĞÍ×ª»»Æ÷¡£
+     * å–å¾—ç±»å‹è½¬æ¢å™¨ã€‚
      */
     TypeConverter getTypeConverter();
 
     // =============================================================
-    //  ²éÑ¯²ÎÊıµÄ·½·¨
+    //  æŸ¥è¯¢å‚æ•°çš„æ–¹æ³•
     // =============================================================
 
     /**
-     * È¡µÃÖµµÄÊıÁ¿¡£
+     * å–å¾—å€¼çš„æ•°é‡ã€‚
      * 
-     * @return ÖµµÄÊıÁ¿
+     * @return å€¼çš„æ•°é‡
      */
     int size();
 
     /**
-     * ÅĞ¶ÏÊÇ·ñÎŞÖµ¡£
+     * åˆ¤æ–­æ˜¯å¦æ— å€¼ã€‚
      * 
-     * @return Èç¹ûÎŞÖµ£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚æœæ— å€¼ï¼Œåˆ™è¿”å›<code>true</code>
      */
     boolean isEmpty();
 
     /**
-     * ¼ì²éÊÇ·ñ°üº¬Ö¸¶¨Ãû³ÆµÄ²ÎÊı¡£
+     * æ£€æŸ¥æ˜¯å¦åŒ…å«æŒ‡å®šåç§°çš„å‚æ•°ã€‚
      * 
-     * @param key Òª²éÕÒµÄ²ÎÊıÃû
-     * @return Èç¹û´æÔÚ£¬Ôò·µ»Ø<code>true</code>
+     * @param key è¦æŸ¥æ‰¾çš„å‚æ•°å
+     * @return å¦‚æœå­˜åœ¨ï¼Œåˆ™è¿”å›<code>true</code>
      */
     boolean containsKey(String key);
 
     /*
-     * È¡µÃËùÓĞ²ÎÊıÃûµÄ¼¯ºÏ¡£
-     * @return ËùÓĞ²ÎÊıÃûµÄ¼¯ºÏ
+     * å–å¾—æ‰€æœ‰å‚æ•°åçš„é›†åˆã€‚
+     * @return æ‰€æœ‰å‚æ•°åçš„é›†åˆ
      */
     Set<String> keySet();
 
     /*
-     * È¡µÃËùÓĞ²ÎÊıÃûµÄÊı×é¡£
-     * @return ËùÓĞ²ÎÊıÃûµÄÊı×é
+     * å–å¾—æ‰€æœ‰å‚æ•°åçš„æ•°ç»„ã€‚
+     * @return æ‰€æœ‰å‚æ•°åçš„æ•°ç»„
      */
     String[] getKeys();
 
     // =============================================================
-    //  È¡µÃ²ÎÊıµÄÖµ
+    //  å–å¾—å‚æ•°çš„å€¼
     // =============================================================
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>false</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>false</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     boolean getBoolean(String key);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     boolean getBoolean(String key, boolean defaultValue);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     byte getByte(String key);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     byte getByte(String key, byte defaultValue);
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄ×Ö½Ú¡£Õâ¸ö×Ö½ÚÊÇ¸ù¾İ<code>getCharacterEncoding()</code>Ëù·µ»ØµÄ×Ö·û¼¯½øĞĞ±àÂëµÄ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„å­—èŠ‚ã€‚è¿™ä¸ªå­—èŠ‚æ˜¯æ ¹æ®<code>getCharacterEncoding()</code>æ‰€è¿”å›çš„å­—ç¬¦é›†è¿›è¡Œç¼–ç çš„ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµµÄ×Ö½ÚÊı×é
-     * @throws UnsupportedEncodingException Èç¹ûÖ¸¶¨ÁË´íÎóµÄ±àÂë×Ö·û¼¯
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼çš„å­—èŠ‚æ•°ç»„
+     * @throws UnsupportedEncodingException å¦‚æœæŒ‡å®šäº†é”™è¯¯çš„ç¼–ç å­—ç¬¦é›†
      */
     byte[] getBytes(String key) throws UnsupportedEncodingException;
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>'\0'</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>'\0'</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     char getChar(String key);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     char getChar(String key, char defaultValue);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     double getDouble(String key);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     double getDouble(String key, double defaultValue);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     float getFloat(String key);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     float getFloat(String key, float defaultValue);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     int getInt(String key);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     int getInt(String key, int defaultValue);
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     int[] getInts(String key);
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     int[] getInts(String key, int[] defaultValue);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     long getLong(String key);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     long getLong(String key, long defaultValue);
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     long[] getLongs(String key);
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     long[] getLongs(String key, long[] defaultValue);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     short getShort(String key);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     short getShort(String key, short defaultValue);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     String getString(String key);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     String getString(String key, String defaultValue);
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     String[] getStrings(String key);
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     String[] getStrings(String key, String[] defaultValue);
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£ ´Ë·½·¨ºÍ<code>getString</code>
-     * Ò»Ñù£¬µ«ÔÚÄ£°åÖĞ±ãÒ×ÓÚÊ¹ÓÃ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚ æ­¤æ–¹æ³•å’Œ<code>getString</code>
+     * ä¸€æ ·ï¼Œä½†åœ¨æ¨¡æ¿ä¸­ä¾¿æ˜“äºä½¿ç”¨ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     Object get(String key);
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼
      */
     Object getObject(String key);
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÄ¬ÈÏÖµ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›é»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     Object getObject(String key, Object defaultValue);
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param key å‚æ•°å
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     Object[] getObjects(String key);
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param key å‚æ•°å
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     Object[] getObjects(String key, Object[] defaultValue);
 
     /**
-     * È¡µÃÈÕÆÚ¡£×Ö·û´®½«Ê¹ÓÃÖ¸¶¨µÄ<code>DateFormat</code>À´½âÎö¡£Èç¹û²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æ—¥æœŸã€‚å­—ç¬¦ä¸²å°†ä½¿ç”¨æŒ‡å®šçš„<code>DateFormat</code>æ¥è§£æã€‚å¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param format <code>DateFormat</code>¶ÔÏó
-     * @return <code>java.util.Date</code>¶ÔÏó
+     * @param key å‚æ•°å
+     * @param format <code>DateFormat</code>å¯¹è±¡
+     * @return <code>java.util.Date</code>å¯¹è±¡
      */
     Date getDate(String key, DateFormat format);
 
     /**
-     * È¡µÃÈÕÆÚ¡£×Ö·û´®½«Ê¹ÓÃÖ¸¶¨µÄ<code>DateFormat</code>À´½âÎö¡£Èç¹û²»´æÔÚ£¬Ôò·µ»ØÄ¬ÈÏÖµ¡£
+     * å–å¾—æ—¥æœŸã€‚å­—ç¬¦ä¸²å°†ä½¿ç”¨æŒ‡å®šçš„<code>DateFormat</code>æ¥è§£æã€‚å¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›é»˜è®¤å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param format <code>DateFormat</code>¶ÔÏó
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return <code>java.util.Date</code>¶ÔÏó
+     * @param key å‚æ•°å
+     * @param format <code>DateFormat</code>å¯¹è±¡
+     * @param defaultValue é»˜è®¤å€¼
+     * @return <code>java.util.Date</code>å¯¹è±¡
      */
     Date getDate(String key, DateFormat format, Date defaultValue);
 
     /**
-     * È¡µÃÖ¸¶¨ÀàĞÍµÄ¶ÔÏó¡£
+     * å–å¾—æŒ‡å®šç±»å‹çš„å¯¹è±¡ã€‚
      */
     <T> T getObjectOfType(String key, Class<T> type);
 
     /**
-     * È¡µÃÖ¸¶¨ÀàĞÍµÄ¶ÔÏó¡£
+     * å–å¾—æŒ‡å®šç±»å‹çš„å¯¹è±¡ã€‚
      */
     <T> T getObjectOfType(String key, Class<T> type, MethodParameter methodParameter, Object[] defaultValues);
 
     /**
-     * ½«Êı¾İ±£´æµ½object propertiesÖĞ¡£
+     * å°†æ•°æ®ä¿å­˜åˆ°object propertiesä¸­ã€‚
      */
     void setProperties(Object object);
 
     // =============================================================
-    //  Ìí¼ÓºÍĞŞ¸Ä²ÎÊıµÄ·½·¨
+    //  æ·»åŠ å’Œä¿®æ”¹å‚æ•°çš„æ–¹æ³•
     // =============================================================
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     void add(String key, boolean value);
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     void add(String key, byte value);
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     void add(String key, char value);
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     void add(String key, double value);
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     void add(String key, float value);
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     void add(String key, int value);
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     void add(String key, long value);
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     void add(String key, short value);
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     void add(String key, Object value);
 
     /**
-     * ÉèÖÃ²ÎÊıÖµ¡£ºÍ<code>add</code>·½·¨²»Í¬£¬´Ë·½·¨½«¸²¸ÇÔ­ÓĞµÄÖµ¡£
+     * è®¾ç½®å‚æ•°å€¼ã€‚å’Œ<code>add</code>æ–¹æ³•ä¸åŒï¼Œæ­¤æ–¹æ³•å°†è¦†ç›–åŸæœ‰çš„å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     void setString(String key, String value);
 
     /**
-     * ÉèÖÃ²ÎÊıÖµ¡£ºÍ<code>add</code>·½·¨²»Í¬£¬´Ë·½·¨½«¸²¸ÇÔ­ÓĞµÄÖµ¡£
+     * è®¾ç½®å‚æ•°å€¼ã€‚å’Œ<code>add</code>æ–¹æ³•ä¸åŒï¼Œæ­¤æ–¹æ³•å°†è¦†ç›–åŸæœ‰çš„å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param values ²ÎÊıÖµµÄÊı×é
+     * @param key å‚æ•°å
+     * @param values å‚æ•°å€¼çš„æ•°ç»„
      */
     void setStrings(String key, String[] values);
 
     /**
-     * ÉèÖÃ²ÎÊıÖµ¡£ºÍ<code>add</code>·½·¨²»Í¬£¬´Ë·½·¨½«¸²¸ÇÔ­ÓĞµÄÖµ¡£
+     * è®¾ç½®å‚æ•°å€¼ã€‚å’Œ<code>add</code>æ–¹æ³•ä¸åŒï¼Œæ­¤æ–¹æ³•å°†è¦†ç›–åŸæœ‰çš„å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     void setObject(String key, Object value);
 
     /**
-     * ÉèÖÃ²ÎÊıÖµ¡£ºÍ<code>add</code>·½·¨²»Í¬£¬´Ë·½·¨½«¸²¸ÇÔ­ÓĞµÄÖµ¡£
+     * è®¾ç½®å‚æ•°å€¼ã€‚å’Œ<code>add</code>æ–¹æ³•ä¸åŒï¼Œæ­¤æ–¹æ³•å°†è¦†ç›–åŸæœ‰çš„å€¼ã€‚
      * 
-     * @param key ²ÎÊıÃû
-     * @param value ²ÎÊıÖµ
+     * @param key å‚æ•°å
+     * @param value å‚æ•°å€¼
      */
     void setObjects(String key, Object[] value);
 
     // =============================================================
-    //  Çå³ı²ÎÊıµÄ·½·¨ 
+    //  æ¸…é™¤å‚æ•°çš„æ–¹æ³• 
     // =============================================================
 
     /**
-     * É¾³ıÖ¸¶¨Ãû³ÆµÄ²ÎÊı¡£
+     * åˆ é™¤æŒ‡å®šåç§°çš„å‚æ•°ã€‚
      * 
-     * @return Ô­ÏÈºÍÖ¸¶¨Ãû³Æ¶ÔÓ¦µÄ²ÎÊıÖµ£¬¿ÉÄÜÊÇ<code>String[]</code>»ò<code>null</code>
+     * @return åŸå…ˆå’ŒæŒ‡å®šåç§°å¯¹åº”çš„å‚æ•°å€¼ï¼Œå¯èƒ½æ˜¯<code>String[]</code>æˆ–<code>null</code>
      */
     Object remove(String key);
 
     /**
-     * Çå³ıËùÓĞÖµ¡£
+     * æ¸…é™¤æ‰€æœ‰å€¼ã€‚
      */
     void clear();
 }

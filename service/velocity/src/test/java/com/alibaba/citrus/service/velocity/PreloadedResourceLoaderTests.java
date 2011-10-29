@@ -92,7 +92,7 @@ public class PreloadedResourceLoaderTests extends AbstractResourceLoaderTests {
         text = readText(velocityLoader.getResourceStream("/macros/c.vm"));
         assertEquals("test2", text);
 
-        // Ä£°åÃûÎª¿Õ
+        // æ¨¡æ¿åä¸ºç©º
         try {
             velocityLoader.getResourceStream(null);
             fail();
@@ -100,7 +100,7 @@ public class PreloadedResourceLoaderTests extends AbstractResourceLoaderTests {
             assertThat(e, exception("Need to specify a template name"));
         }
 
-        // Ä£°å²»´æÔÚ
+        // æ¨¡æ¿ä¸å­˜åœ¨
         try {
             velocityLoader.getResourceStream("notExist.vm");
             fail();
@@ -114,28 +114,28 @@ public class PreloadedResourceLoaderTests extends AbstractResourceLoaderTests {
         Resource templateResource = new Template();
         long lastModified = factory.getResource("/templates/test.vm").lastModified();
 
-        // ×ÊÔ´/templates/test.vmÖ§³ÖlastModified£¬µ«Ê±¼ä²»Í¬
+        // èµ„æº/templates/test.vmæ”¯æŒlastModifiedï¼Œä½†æ—¶é—´ä¸åŒ
         templateResource.setLastModified(1);
         templateResource.setName("/macros/a.vm");
 
         assertTrue(lastModified != templateResource.getLastModified());
         assertTrue(velocityLoader.isSourceModified(templateResource));
 
-        // ×ÊÔ´/templates/test.vmÖ§³ÖlastModified£¬Ê±¼äÏàÍ¬
+        // èµ„æº/templates/test.vmæ”¯æŒlastModifiedï¼Œæ—¶é—´ç›¸åŒ
         templateResource.setLastModified(lastModified);
         templateResource.setName("/macros/a.vm");
 
         assertEquals(lastModified, templateResource.getLastModified());
         assertFalse(velocityLoader.isSourceModified(templateResource));
 
-        // ×ÊÔ´/templates/notExist.vm²»´æÔÚ£¬¿´×÷±»ĞŞ¸ÄÁË
+        // èµ„æº/templates/notExist.vmä¸å­˜åœ¨ï¼Œçœ‹ä½œè¢«ä¿®æ”¹äº†
         templateResource.setLastModified(1);
         templateResource.setName("/notExist.vm");
 
         assertFalse(factory.getResource("/templates/notExist.vm").exists());
         assertTrue(velocityLoader.isSourceModified(templateResource));
 
-        // ×ÊÔ´/templates/test2.vm´æÔÚ£¬µ«²»Ö§³ÖlastModified£¬¿´×÷Î´ĞŞ¸Ä
+        // èµ„æº/templates/test2.vmå­˜åœ¨ï¼Œä½†ä¸æ”¯æŒlastModifiedï¼Œçœ‹ä½œæœªä¿®æ”¹
         templateResource.setLastModified(1);
         templateResource.setName("/macros/c.vm");
 
@@ -144,7 +144,7 @@ public class PreloadedResourceLoaderTests extends AbstractResourceLoaderTests {
         assertEquals(0, lastModified);
         assertFalse(velocityLoader.isSourceModified(templateResource));
 
-        // Ä£°åÃûÎª¿Õ
+        // æ¨¡æ¿åä¸ºç©º
         templateResource.setName(null);
 
         try {
@@ -160,19 +160,19 @@ public class PreloadedResourceLoaderTests extends AbstractResourceLoaderTests {
         Resource templateResource = new Template();
         long lastModified = factory.getResource("/templates/test.vm").lastModified();
 
-        // ×ÊÔ´/templates/test.vmÖ§³ÖlastModified
+        // èµ„æº/templates/test.vmæ”¯æŒlastModified
         templateResource.setName("/macros/a.vm");
         assertEquals(lastModified, velocityLoader.getLastModified(templateResource));
 
-        // ×ÊÔ´/templates/notExist.vm²»´æÔÚ£¬·µ»Ø0
+        // èµ„æº/templates/notExist.vmä¸å­˜åœ¨ï¼Œè¿”å›0
         templateResource.setName("/notExist.vm");
         assertEquals(0, velocityLoader.getLastModified(templateResource));
 
-        // ×ÊÔ´/templates/test2.vm´æÔÚ£¬µ«²»Ö§³ÖlastModified£¬·µ»Ø0
+        // èµ„æº/templates/test2.vmå­˜åœ¨ï¼Œä½†ä¸æ”¯æŒlastModifiedï¼Œè¿”å›0
         templateResource.setName("/macros/c.vm");
         assertEquals(0, velocityLoader.getLastModified(templateResource));
 
-        // Ä£°åÃûÎª¿Õ
+        // æ¨¡æ¿åä¸ºç©º
         templateResource.setName(null);
 
         try {

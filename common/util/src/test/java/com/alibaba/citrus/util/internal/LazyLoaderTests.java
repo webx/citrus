@@ -31,7 +31,7 @@ import com.alibaba.citrus.util.internal.LazyLoader.ExceptionHandler;
 import com.alibaba.citrus.util.internal.LazyLoader.Loader;
 
 /**
- * ²âÊÔ<code>LazyLoader</code>¡£
+ * æµ‹è¯•<code>LazyLoader</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -131,11 +131,11 @@ public class LazyLoaderTests {
     }
 
     /**
-     * È·±£:
+     * ç¡®ä¿:
      * <ul>
-     * <li>Ö»³õÊ¼»¯Ò»´Î</li>
-     * <li>ËùÓĞÏß³Ì¶¼ÄÜÄÃµ½ÏàÍ¬µÄ³õÊ¼»¯ºóµÄ¶ÔÏó</li>
-     * <li>Ö´ĞĞË³Ğò²»»áÎÉÂÒ£¬¼´ÄÃµ½Î´³õÊ¼»¯Íê³ÉµÄ¶ÔÏó</li>
+     * <li>åªåˆå§‹åŒ–ä¸€æ¬¡</li>
+     * <li>æ‰€æœ‰çº¿ç¨‹éƒ½èƒ½æ‹¿åˆ°ç›¸åŒçš„åˆå§‹åŒ–åçš„å¯¹è±¡</li>
+     * <li>æ‰§è¡Œé¡ºåºä¸ä¼šç´Šä¹±ï¼Œå³æ‹¿åˆ°æœªåˆå§‹åŒ–å®Œæˆçš„å¯¹è±¡</li>
      * </ul>
      */
     private void correctness_test(final int concurrency, final int loop, final LoaderType loaderType)
@@ -149,7 +149,7 @@ public class LazyLoaderTests {
 
         final CyclicBarrier startBarrier = new CyclicBarrier(concurrency, new Runnable() {
             public void run() {
-                lazyLoader = loaderType.getLoader(); // Çå¿Õloader£¬×¼±¸ÖØĞÂ×°ÔØ
+                lazyLoader = loaderType.getLoader(); // æ¸…ç©ºloaderï¼Œå‡†å¤‡é‡æ–°è£…è½½
                 counter1.incrementAndGet();
 
                 assertFalse(lazyLoader.testInstance());
@@ -188,14 +188,14 @@ public class LazyLoaderTests {
                 public void run() {
                     try {
                         for (int i = 0; i < loop && failed == null; i++) {
-                            startBarrier.await(); // Æë²½£¬×ß£¡
+                            startBarrier.await(); // é½æ­¥ï¼Œèµ°ï¼
 
                             results[index] = lazyLoader.getInstance();
 
                             assertNotNull(results[index]);
                             assertNotNull(results[index].innerObject);
 
-                            barrier.await(); // ¼ì²é½á¹û
+                            barrier.await(); // æ£€æŸ¥ç»“æœ
                         }
                     } catch (Throwable e) {
                         failed = e;
@@ -221,7 +221,7 @@ public class LazyLoaderTests {
 
         System.out.printf("%s test duration %,d ms\n", loaderType, System.currentTimeMillis() - start);
 
-        // ´òÓ¡creator·Ö²¼Í¼
+        // æ‰“å°creatoråˆ†å¸ƒå›¾
         int i = 0;
         for (int count : creators.values()) {
             System.out.printf("%4d ", count);
@@ -242,7 +242,7 @@ public class LazyLoaderTests {
     }
 
     /**
-     * ²âÊÔexception handler¡£
+     * æµ‹è¯•exception handlerã€‚
      */
     private void exception_test(final LoaderType loaderType) throws InterruptedException {
         LazyLoader<Object, Object> loader;
@@ -306,7 +306,7 @@ public class LazyLoaderTests {
     }
 
     /**
-     * ²âÊÔ×ÊÔ´Àà¡£
+     * æµ‹è¯•èµ„æºç±»ã€‚
      */
     private static class Resource {
         public Object innerObject;
@@ -314,7 +314,7 @@ public class LazyLoaderTests {
     }
 
     /**
-     * LoaderÀàĞÍ¡£
+     * Loaderç±»å‹ã€‚
      */
     private static enum LoaderType {
         SYNC_LOADER {
@@ -344,7 +344,7 @@ public class LazyLoaderTests {
     }
 
     /**
-     * Êµ¼ÊµÄloader¡£
+     * å®é™…çš„loaderã€‚
      */
     private static class ResourceLoader implements Loader<Resource, Object> {
         public Resource load(Object context) {
@@ -358,7 +358,7 @@ public class LazyLoaderTests {
     }
 
     /**
-     * ĞÔÄÜÊı¾İ¡£
+     * æ€§èƒ½æ•°æ®ã€‚
      */
     private static class PerformanceResult implements Comparable<PerformanceResult> {
         public final String name;

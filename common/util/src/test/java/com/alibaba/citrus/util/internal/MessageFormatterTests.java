@@ -26,7 +26,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>MessageFormatter</code>¡£
+ * æµ‹è¯•<code>MessageFormatter</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -50,16 +50,16 @@ public class MessageFormatterTests {
         assertEquals("hello {0}", msgs.format(MyMessages.b, Locale.CHINA));
         assertEquals("hello world", msgs.format(MyMessages.b, Locale.CHINA, "world"));
 
-        assertEquals("ÄãºÃ {0}", msgs.format(MyMessages.c));
-        assertEquals("ÄãºÃ {0}", msgs.format(MyMessages.c, Locale.CHINA));
-        assertEquals("ÄãºÃ world", msgs.format(MyMessages.c, Locale.CHINA, "world"));
+        assertEquals("ä½ å¥½ {0}", msgs.format(MyMessages.c));
+        assertEquals("ä½ å¥½ {0}", msgs.format(MyMessages.c, Locale.CHINA));
+        assertEquals("ä½ å¥½ world", msgs.format(MyMessages.c, Locale.CHINA, "world"));
 
-        assertEquals("ÄãºÃ world", msgs.format(MyMessages.d, "world"));
-        assertEquals("ÄãºÃ world", msgs.format(MyMessages.d, Locale.CHINA, "world"));
+        assertEquals("ä½ å¥½ world", msgs.format(MyMessages.d, "world"));
+        assertEquals("ä½ å¥½ world", msgs.format(MyMessages.d, Locale.CHINA, "world"));
 
-        // ÓÉÓÚLocale.ENGLISH²¢Ã»ÓĞ¶ÔÓ¦µÄpropertiesÎÄ¼ş´æÔÚ£¬ËùÒÔÓÉÏµÍ³µÄlocaleÀ´¾ö¶¨Æä½á¹û¡£
+        // ç”±äºLocale.ENGLISHå¹¶æ²¡æœ‰å¯¹åº”çš„propertiesæ–‡ä»¶å­˜åœ¨ï¼Œæ‰€ä»¥ç”±ç³»ç»Ÿçš„localeæ¥å†³å®šå…¶ç»“æœã€‚
         if (Locale.getDefault().equals(Locale.CHINA)) {
-            assertEquals("ÄãºÃ world", msgs.format(MyMessages.d, Locale.ENGLISH, "world"));
+            assertEquals("ä½ å¥½ world", msgs.format(MyMessages.d, Locale.ENGLISH, "world"));
         } else {
             assertEquals("hello world", msgs.format(MyMessages.d, Locale.ENGLISH, "world"));
         }

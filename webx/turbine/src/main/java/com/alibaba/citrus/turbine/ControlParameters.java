@@ -18,18 +18,18 @@
 package com.alibaba.citrus.turbine;
 
 /**
- * ÓÃÀ´ÔÚcontrol moduleÖĞĞŞ¸Äcontrol²ÎÊıµÄ½Ó¿Ú£¬¿É×¢Èëµ½control moduleµÄ²ÎÊıÖĞ¡£
+ * ç”¨æ¥åœ¨control moduleä¸­ä¿®æ”¹controlå‚æ•°çš„æ¥å£ï¼Œå¯æ³¨å…¥åˆ°control moduleçš„å‚æ•°ä¸­ã€‚
  * 
  * @author Michael Zhou
  */
 public interface ControlParameters {
     /**
-     * È¡µÃcontrolÄ£°å¡£
+     * å–å¾—controlæ¨¡æ¿ã€‚
      */
     String getControlTemplate();
 
     /**
-     * ÉèÖÃcontrolÄ£°å¡£¼ÙÈçÖ®Ç°ÒÑ¾­Ö¸¶¨ÁËcontrolÄ£°å£¬Ôò¸²¸ÇÖ®¡£
+     * è®¾ç½®controlæ¨¡æ¿ã€‚å‡å¦‚ä¹‹å‰å·²ç»æŒ‡å®šäº†controlæ¨¡æ¿ï¼Œåˆ™è¦†ç›–ä¹‹ã€‚
      */
     void setControlTemplate(String template);
 }

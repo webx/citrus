@@ -21,35 +21,35 @@ import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 /**
- * ´ú±íÒ»¸ö<code>RequestContext</code>Ïà¹ØµÄĞÅÏ¢¡£
+ * ä»£è¡¨ä¸€ä¸ª<code>RequestContext</code>ç›¸å…³çš„ä¿¡æ¯ã€‚
  * 
  * @author Michael Zhou
  */
 public interface RequestContextInfo<R extends RequestContext> {
     /**
-     * È¡µÃµ±Ç°factory½«Éú³ÉµÄrequest context½Ó¿Ú¡£
+     * å–å¾—å½“å‰factoryå°†ç”Ÿæˆçš„request contextæ¥å£ã€‚
      */
     Class<R> getRequestContextInterface();
 
     /**
-     * È¡µÃÓÃÓÚÉú³ÉproxyÀàµÄ½Ó¿Ú¡£
+     * å–å¾—ç”¨äºç”Ÿæˆproxyç±»çš„æ¥å£ã€‚
      */
     Class<? extends R> getRequestContextProxyInterface();
 
     /**
-     * È¡µÃµ±Ç°factoryÉú³ÉµÄrequest contextËùÌá¹©µÄfeatures¡£
-     * ËùÎ½features£¬ÊÇÒ»Ğ©×Ö·û´®¡£RequestContextChaining·şÎñÀûÓÃÕâĞ©feature¼°ÒÀÀµ¹ØÏµ£¬½«request
-     * contextÅÅĞò¡£
+     * å–å¾—å½“å‰factoryç”Ÿæˆçš„request contextæ‰€æä¾›çš„featuresã€‚
+     * æ‰€è°“featuresï¼Œæ˜¯ä¸€äº›å­—ç¬¦ä¸²ã€‚RequestContextChainingæœåŠ¡åˆ©ç”¨è¿™äº›featureåŠä¾èµ–å…³ç³»ï¼Œå°†request
+     * contextæ’åºã€‚
      */
     String[] getFeatures();
 
     /**
-     * Ö¸³öµ±Ç°request context±ØĞëÅÅÔÚÄÄĞ©featuresÖ®Ç°»òÖ®ºó¡£
+     * æŒ‡å‡ºå½“å‰request contextå¿…é¡»æ’åœ¨å“ªäº›featuresä¹‹å‰æˆ–ä¹‹åã€‚
      */
     FeatureOrder[] featureOrders();
 
     /**
-     * ´ú±írequest context featureµÄË³Ğò¡£
+     * ä»£è¡¨request context featureçš„é¡ºåºã€‚
      */
     abstract class FeatureOrder {
         public final String feature;
@@ -60,7 +60,7 @@ public interface RequestContextInfo<R extends RequestContext> {
     }
 
     /**
-     * ±íÊ¾µ±Ç°request contextÓ¦¸ÃÅÅÔÚÌá¹©Ö¸¶¨featureµÄrequest contextÖ®Ç°¡£
+     * è¡¨ç¤ºå½“å‰request contextåº”è¯¥æ’åœ¨æä¾›æŒ‡å®šfeatureçš„request contextä¹‹å‰ã€‚
      */
     class BeforeFeature extends FeatureOrder {
         public BeforeFeature(String feature) {
@@ -74,7 +74,7 @@ public interface RequestContextInfo<R extends RequestContext> {
     }
 
     /**
-     * ±íÊ¾µ±Ç°request contextÓ¦¸ÃÅÅÔÚÌá¹©Ö¸¶¨featureµÄrequest contextÖ®ºó¡£
+     * è¡¨ç¤ºå½“å‰request contextåº”è¯¥æ’åœ¨æä¾›æŒ‡å®šfeatureçš„request contextä¹‹åã€‚
      */
     class AfterFeature extends FeatureOrder {
         public AfterFeature(String feature) {
@@ -88,7 +88,7 @@ public interface RequestContextInfo<R extends RequestContext> {
     }
 
     /**
-     * ±íÊ¾µ±Ç°request contextÇ°Ãæ±ØĞëÓĞÌá¹©Ö¸¶¨featureµÄrequest context´æÔÚ¡£
+     * è¡¨ç¤ºå½“å‰request contextå‰é¢å¿…é¡»æœ‰æä¾›æŒ‡å®šfeatureçš„request contextå­˜åœ¨ã€‚
      */
     class RequiresFeature extends AfterFeature {
         public RequiresFeature(String feature) {

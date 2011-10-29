@@ -49,7 +49,7 @@ public class AllOfValuesValidatorTests extends AbstractSimpleCompositeValidatorT
     }
 
     /**
-     * ¼ì²éÃ¿¸öÖµÊÇ·ñ·Ö±ğ±»´«µİµ½×ÓvalidatorÖĞ£¬ÌØ±ğÊÇ£º×ÓvalidatorÎªcomposite validatorµÄÇé¿ö¡£
+     * æ£€æŸ¥æ¯ä¸ªå€¼æ˜¯å¦åˆ†åˆ«è¢«ä¼ é€’åˆ°å­validatorä¸­ï¼Œç‰¹åˆ«æ˜¯ï¼šå­validatorä¸ºcomposite validatorçš„æƒ…å†µã€‚
      */
     @Test
     public void validate_hidden_all_of_validator() throws Exception {

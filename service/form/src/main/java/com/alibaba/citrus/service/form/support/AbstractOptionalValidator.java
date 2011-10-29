@@ -20,18 +20,18 @@ package com.alibaba.citrus.service.form.support;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 /**
- * ³éÏóµÄ<code>Validator</code>ÊµÏÖ£¬Õâ¸öÀàµÄ×ÓÀà½«ºöÂÔÖµÎª¿ÕµÄÇéĞÎ¡£
+ * æŠ½è±¡çš„<code>Validator</code>å®ç°ï¼Œè¿™ä¸ªç±»çš„å­ç±»å°†å¿½ç•¥å€¼ä¸ºç©ºçš„æƒ…å½¢ã€‚
  * 
  * @author Michael Zhou
  */
 public abstract class AbstractOptionalValidator extends AbstractValidator {
     /**
-     * ÑéÖ¤Ò»¸ö×Ö¶Î¡£
+     * éªŒè¯ä¸€ä¸ªå­—æ®µã€‚
      */
     public boolean validate(Context context) {
         String value = context.getValueAsType(String.class);
 
-        // ÔÚtrimming=falseÄ£Ê½ÏÂ£¬¿Õ°×Ò²ËãÓĞÖµ¡£
+        // åœ¨trimming=falseæ¨¡å¼ä¸‹ï¼Œç©ºç™½ä¹Ÿç®—æœ‰å€¼ã€‚
         if (isEmpty(value)) {
             return true;
         }
@@ -40,7 +40,7 @@ public abstract class AbstractOptionalValidator extends AbstractValidator {
     }
 
     /**
-     * ÑéÖ¤Ò»¸ö×Ö¶Î¡£
+     * éªŒè¯ä¸€ä¸ªå­—æ®µã€‚
      */
     protected abstract boolean validate(Context context, String value);
 }

@@ -25,7 +25,7 @@ import java.io.InputStream;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>ByteArray</code>Àà¡£
+ * æµ‹è¯•<code>ByteArray</code>ç±»ã€‚
  * 
  * @author Michael Zhou
  */

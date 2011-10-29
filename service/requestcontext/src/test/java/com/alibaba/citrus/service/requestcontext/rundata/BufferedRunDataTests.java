@@ -31,7 +31,7 @@ import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 import com.alibaba.citrus.util.io.ByteArray;
 
 /**
- * ²âÊÔ<code>RunData</code>µÄbuffer¹¦ÄÜ¡£
+ * æµ‹è¯•<code>RunData</code>çš„bufferåŠŸèƒ½ã€‚
  * 
  * @author Michael Zhou
  */
@@ -56,7 +56,7 @@ public class BufferedRunDataTests extends AbstractRequestContextsTests<RunData> 
     public void byteBuffer() throws Exception {
         OutputStream ostream = newResponse.getOutputStream();
 
-        // write£¬pop
+        // writeï¼Œpop
         ostream.write("abc".getBytes());
         ostream.flush();
 
@@ -90,7 +90,7 @@ public class BufferedRunDataTests extends AbstractRequestContextsTests<RunData> 
     public void charBuffer() throws Exception {
         PrintWriter writer = newResponse.getWriter();
 
-        // write£¬pop
+        // writeï¼Œpop
         writer.write("abc");
         writer.flush();
 
@@ -121,7 +121,7 @@ public class BufferedRunDataTests extends AbstractRequestContextsTests<RunData> 
     }
 
     /**
-     * ÏÈgetWriter£¬ÔÙgetOutputStream£¬´ËÊ±½«´´½¨Ò»¸öÊÊÅäÆ÷¡£
+     * å…ˆgetWriterï¼Œå†getOutputStreamï¼Œæ­¤æ—¶å°†åˆ›å»ºä¸€ä¸ªé€‚é…å™¨ã€‚
      */
     @Test
     public void writeBytesAndReadChars() throws Exception {
@@ -129,7 +129,7 @@ public class BufferedRunDataTests extends AbstractRequestContextsTests<RunData> 
         Writer writer = newResponse.getWriter();
         OutputStream ostream = newResponse.getOutputStream();
 
-        // write£¬pop
+        // writeï¼Œpop
         ostream.write("abc".getBytes());
         ostream.flush();
 
@@ -160,7 +160,7 @@ public class BufferedRunDataTests extends AbstractRequestContextsTests<RunData> 
     }
 
     /**
-     * ÏÈgetOutputStream£¬ÔÙgetWriter£¬´ËÊ±½«´´½¨Ò»¸öÊÊÅäÆ÷¡£
+     * å…ˆgetOutputStreamï¼Œå†getWriterï¼Œæ­¤æ—¶å°†åˆ›å»ºä¸€ä¸ªé€‚é…å™¨ã€‚
      */
     @Test
     public void writeCharsAndReadBytes() throws Exception {
@@ -168,7 +168,7 @@ public class BufferedRunDataTests extends AbstractRequestContextsTests<RunData> 
         OutputStream ostream = newResponse.getOutputStream();
         Writer writer = newResponse.getWriter();
 
-        // write£¬pop
+        // writeï¼Œpop
         writer.write("abc");
         writer.flush();
 
@@ -200,7 +200,7 @@ public class BufferedRunDataTests extends AbstractRequestContextsTests<RunData> 
 
     @Test
     public void illegalStateExceptionForBytes() throws Exception {
-        // getOutputStreamÖ®ºóÊÔÍ¼popCharBuffer
+        // getOutputStreamä¹‹åè¯•å›¾popCharBuffer
         newResponse.getOutputStream();
 
         try {
@@ -209,7 +209,7 @@ public class BufferedRunDataTests extends AbstractRequestContextsTests<RunData> 
         } catch (IllegalStateException e) {
         }
 
-        // getOutputStreamÖ®ºóÊÔÍ¼¸Ä±äbufferÄ£Ê½
+        // getOutputStreamä¹‹åè¯•å›¾æ”¹å˜bufferæ¨¡å¼
         initRequestContext();
 
         newResponse.getOutputStream();
@@ -221,7 +221,7 @@ public class BufferedRunDataTests extends AbstractRequestContextsTests<RunData> 
         } catch (IllegalStateException e) {
         }
 
-        // ·ÇbufferingÄ£Ê½ÏÂ²Ù×÷byte buffer¡£
+        // ébufferingæ¨¡å¼ä¸‹æ“ä½œbyte bufferã€‚
         initRequestContext();
 
         requestContext.setBuffering(false);
@@ -244,7 +244,7 @@ public class BufferedRunDataTests extends AbstractRequestContextsTests<RunData> 
 
     @Test
     public void illegalStateExceptionForWriter() throws Exception {
-        // getWriterÖ®ºóÊÔÍ¼popByteBuffer
+        // getWriterä¹‹åè¯•å›¾popByteBuffer
         newResponse.getWriter();
 
         try {
@@ -253,7 +253,7 @@ public class BufferedRunDataTests extends AbstractRequestContextsTests<RunData> 
         } catch (IllegalStateException e) {
         }
 
-        // getWriterÖ®ºóÊÔÍ¼¸Ä±äbufferÄ£Ê½
+        // getWriterä¹‹åè¯•å›¾æ”¹å˜bufferæ¨¡å¼
         initRequestContext();
 
         newResponse.getWriter();
@@ -265,7 +265,7 @@ public class BufferedRunDataTests extends AbstractRequestContextsTests<RunData> 
         } catch (IllegalStateException e) {
         }
 
-        // ·ÇbufferingÄ£Ê½ÏÂ²Ù×÷char buffer¡£
+        // ébufferingæ¨¡å¼ä¸‹æ“ä½œchar bufferã€‚
         initRequestContext();
 
         requestContext.setBuffering(false);

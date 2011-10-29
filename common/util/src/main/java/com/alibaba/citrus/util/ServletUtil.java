@@ -27,19 +27,19 @@ import java.net.URL;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * ÓĞ¹ØservletµÄĞ¡¹¤¾ß¡£
+ * æœ‰å…³servletçš„å°å·¥å…·ã€‚
  * 
  * @author Michael Zhou
  */
 public class ServletUtil {
     /**
-     * ÅĞ¶ÏservletÊÇ·ñÎªÇ°×ºÓ³Éä¡£
+     * åˆ¤æ–­servletæ˜¯å¦ä¸ºå‰ç¼€æ˜ å°„ã€‚
      * <p>
-     * Servlet mappingÓĞÁ½ÖÖÆ¥Åä·½Ê½£ºÇ°×ºÆ¥ÅäºÍºó×ºÆ¥Åä¡£
+     * Servlet mappingæœ‰ä¸¤ç§åŒ¹é…æ–¹å¼ï¼šå‰ç¼€åŒ¹é…å’Œåç¼€åŒ¹é…ã€‚
      * </p>
      * <ul>
-     * <li>¶ÔÓÚÇ°×ºÆ¥Åä£¬ÀıÈç£º/turbine/aaa/bbb£¬servlet pathÎª/turbine£¬path infoÎª/aaa/bbb</li>
-     * <li>¶ÔÓÚºó×ºÆ¥Åä£¬ÀıÈç£º/aaa/bbb.html£¬servlet pathÎª/aaa/bbb.html£¬path infoÎªnull</li>
+     * <li>å¯¹äºå‰ç¼€åŒ¹é…ï¼Œä¾‹å¦‚ï¼š/turbine/aaa/bbbï¼Œservlet pathä¸º/turbineï¼Œpath infoä¸º/aaa/bbb</li>
+     * <li>å¯¹äºåç¼€åŒ¹é…ï¼Œä¾‹å¦‚ï¼š/aaa/bbb.htmlï¼Œservlet pathä¸º/aaa/bbb.htmlï¼Œpath infoä¸ºnull</li>
      * </ul>
      */
     public static boolean isPrefixServletMapping(HttpServletRequest request) {
@@ -48,9 +48,9 @@ public class ServletUtil {
         if (pathInfo != null) {
             return true;
         } else {
-            // ÌØÊâÇé¿ö£ºÇ°×ºÓ³Éä/turbine£¬requestURI=/turbine
-            // ´ËÊ±£¬pathInfoÒ²ÊÇnull£¬µ«ÆäÊµÊÇÇ°×ºÆ¥Åä¡£
-            // ÕâÖÖÇé¿ö¿ÉÒÔÍ¨¹ı²é¿´servletPathÊÇ·ñÓĞºó×ºÀ´²¿·ÖµØÊ¶±ğ¡£
+            // ç‰¹æ®Šæƒ…å†µï¼šå‰ç¼€æ˜ å°„/turbineï¼ŒrequestURI=/turbine
+            // æ­¤æ—¶ï¼ŒpathInfoä¹Ÿæ˜¯nullï¼Œä½†å…¶å®æ˜¯å‰ç¼€åŒ¹é…ã€‚
+            // è¿™ç§æƒ…å†µå¯ä»¥é€šè¿‡æŸ¥çœ‹servletPathæ˜¯å¦æœ‰åç¼€æ¥éƒ¨åˆ†åœ°è¯†åˆ«ã€‚
             String servletPath = trimToEmpty(request.getServletPath());
             int index = servletPath.lastIndexOf("/");
 
@@ -63,13 +63,13 @@ public class ServletUtil {
     }
 
     /**
-     * È¡µÃrequestËùÇëÇóµÄ×ÊÔ´Â·¾¶¡£
+     * å–å¾—requestæ‰€è¯·æ±‚çš„èµ„æºè·¯å¾„ã€‚
      * <p>
-     * ×ÊÔ´Â·¾¶Îª<code>getServletPath() + getPathInfo()</code>¡£
+     * èµ„æºè·¯å¾„ä¸º<code>getServletPath() + getPathInfo()</code>ã€‚
      * </p>
      * <p>
-     * ×¢Òâ£¬<code>ResourcePath</code>ÒÔ<code>"/"</code>¿ªÊ¼£¬Èç¹ûÎŞÄÚÈİ£¬Ôò·µ»Ø¿Õ×Ö·û´®
-     * <code>""</code>¡£
+     * æ³¨æ„ï¼Œ<code>ResourcePath</code>ä»¥<code>"/"</code>å¼€å§‹ï¼Œå¦‚æœæ— å†…å®¹ï¼Œåˆ™è¿”å›ç©ºå­—ç¬¦ä¸²
+     * <code>""</code>ã€‚
      * </p>
      */
     public static String getResourcePath(HttpServletRequest request) {
@@ -80,15 +80,15 @@ public class ServletUtil {
     }
 
     /**
-     * È¡µÃrequestÇëÇóµÄ»ù×¼URL¡£
+     * å–å¾—requestè¯·æ±‚çš„åŸºå‡†URLã€‚
      * <p>
-     * »ù×¼URLµÈÍ¬ÓÚ<code>SERVER/contextPath</code>¡£
+     * åŸºå‡†URLç­‰åŒäº<code>SERVER/contextPath</code>ã€‚
      * </p>
      * <p>
-     * »ù×¼URL×ÜÊÇ<strong>²»</strong>ÒÔ<code>"/"</code>½áÎ²¡£
+     * åŸºå‡†URLæ€»æ˜¯<strong>ä¸</strong>ä»¥<code>"/"</code>ç»“å°¾ã€‚
      * </p>
      * <p>
-     * ÒÔÏÂµÈÊ½×ÜÊÇ³ÉÁ¢£º<code>fullURL = baseURL + resourcePath</code>¡£
+     * ä»¥ä¸‹ç­‰å¼æ€»æ˜¯æˆç«‹ï¼š<code>fullURL = baseURL + resourcePath</code>ã€‚
      * </p>
      */
     public static String getBaseURL(HttpServletRequest request) {
@@ -101,32 +101,32 @@ public class ServletUtil {
             throw new IllegalArgumentException("Invalid URL: " + fullURL, e);
         }
 
-        // »ù±¾URL
+        // åŸºæœ¬URL
         StringBuilder buf = new StringBuilder(fullURL);
         buf.setLength(fullURL.length() - fullPath.length());
 
-        // ¼ÓÉÏcontextPath
+        // åŠ ä¸ŠcontextPath
         buf.append(normalizeAbsolutePath(request.getContextPath(), true));
 
         return buf.toString();
     }
 
     /**
-     * È¡µÃrequestËùÇëÇóµÄ×ÊÔ´Â·¾¶¡£
+     * å–å¾—requestæ‰€è¯·æ±‚çš„èµ„æºè·¯å¾„ã€‚
      * <ul>
-     * <li>¶ÔÓÚÇ°×ºÆ¥ÅäµÄservlet£¬µÈÍ¬ÓÚ<code>getPathInfo()</code>¡£ÀıÈçÓ³Éä
-     * <code>/turbine/*</code>£º<code>/turbine/xx/yy</code>µÄresource pathÎª
-     * <code>/xx/yy</code>¡£</li>
-     * <li>¶ÔÓÚºó×ºÆ¥ÅäµÄservlet£¬µÈÍ¬ÓÚ <code>getServletPath()</code>¡£ÀıÈçÓ³Éä
-     * <code>*.do</code>£º<code>/xx/yy.do</code>µÄresource pathÎª
-     * <code>/xx/yy.do</code>¡£</li>
+     * <li>å¯¹äºå‰ç¼€åŒ¹é…çš„servletï¼Œç­‰åŒäº<code>getPathInfo()</code>ã€‚ä¾‹å¦‚æ˜ å°„
+     * <code>/turbine/*</code>ï¼š<code>/turbine/xx/yy</code>çš„resource pathä¸º
+     * <code>/xx/yy</code>ã€‚</li>
+     * <li>å¯¹äºåç¼€åŒ¹é…çš„servletï¼Œç­‰åŒäº <code>getServletPath()</code>ã€‚ä¾‹å¦‚æ˜ å°„
+     * <code>*.do</code>ï¼š<code>/xx/yy.do</code>çš„resource pathä¸º
+     * <code>/xx/yy.do</code>ã€‚</li>
      * </ul>
      * <p>
-     * ×¢Òâ£¬<code>ResourcePath</code>ÒÔ<code>"/"</code>¿ªÊ¼£¬Èç¹ûÎŞÄÚÈİ£¬Ôò·µ»Ø¿Õ×Ö·û´®
-     * <code>""</code>¡£
+     * æ³¨æ„ï¼Œ<code>ResourcePath</code>ä»¥<code>"/"</code>å¼€å§‹ï¼Œå¦‚æœæ— å†…å®¹ï¼Œåˆ™è¿”å›ç©ºå­—ç¬¦ä¸²
+     * <code>""</code>ã€‚
      * </p>
      * <p>
-     * ±¾·½·¨ÊÊÓÃÓÚservlet-mapping¶ÔÓ¦µÄURL¡£
+     * æœ¬æ–¹æ³•é€‚ç”¨äºservlet-mappingå¯¹åº”çš„URLã€‚
      * </p>
      */
     public static String getServletResourcePath(HttpServletRequest request) {
@@ -144,23 +144,23 @@ public class ServletUtil {
     }
 
     /**
-     * È¡µÃrequestÇëÇóµÄ»ù×¼URL¡£
+     * å–å¾—requestè¯·æ±‚çš„åŸºå‡†URLã€‚
      * <ul>
-     * <li>¶ÔÓÚÇ°×ºÆ¥ÅäµÄservlet£¬µÈÍ¬ÓÚ<code>SERVER/contextPath/servletPath</code>¡£ÀıÈçÓ³Éä
-     * <code>/turbine/*</code>£º<code>http://localhost/myapp/turbine/xx/yy</code>
-     * µÄbaseURLÎª <code>http://localhost/myapp/turbine</code>¡£</li>
-     * <li>¶ÔÓÚºó×ºÆ¥ÅäµÄservlet£¬µÈÍ¬ÓÚ<code>SERVER/contextPath</code>¡£ÀıÈçÓ³Éä
-     * <code>*.do</code>£º<code>http://localhost/myapp/xx/yy.do</code>µÄbaseURLÎª
-     * <code>http://localhost/myapp</code>¡£</li>
+     * <li>å¯¹äºå‰ç¼€åŒ¹é…çš„servletï¼Œç­‰åŒäº<code>SERVER/contextPath/servletPath</code>ã€‚ä¾‹å¦‚æ˜ å°„
+     * <code>/turbine/*</code>ï¼š<code>http://localhost/myapp/turbine/xx/yy</code>
+     * çš„baseURLä¸º <code>http://localhost/myapp/turbine</code>ã€‚</li>
+     * <li>å¯¹äºåç¼€åŒ¹é…çš„servletï¼Œç­‰åŒäº<code>SERVER/contextPath</code>ã€‚ä¾‹å¦‚æ˜ å°„
+     * <code>*.do</code>ï¼š<code>http://localhost/myapp/xx/yy.do</code>çš„baseURLä¸º
+     * <code>http://localhost/myapp</code>ã€‚</li>
      * </ul>
      * <p>
-     * »ù×¼URL×ÜÊÇ<strong>²»</strong>ÒÔ<code>"/"</code>½áÎ²¡£
+     * åŸºå‡†URLæ€»æ˜¯<strong>ä¸</strong>ä»¥<code>"/"</code>ç»“å°¾ã€‚
      * </p>
      * <p>
-     * ÒÔÏÂµÈÊ½×ÜÊÇ³ÉÁ¢£º<code>fullURL = servletBaseURL + servletResourcePath</code>¡£
+     * ä»¥ä¸‹ç­‰å¼æ€»æ˜¯æˆç«‹ï¼š<code>fullURL = servletBaseURL + servletResourcePath</code>ã€‚
      * </p>
      * <p>
-     * ±¾·½·¨ÊÊÓÃÓÚservlet-mapping¶ÔÓ¦µÄURL¡£
+     * æœ¬æ–¹æ³•é€‚ç”¨äºservlet-mappingå¯¹åº”çš„URLã€‚
      * </p>
      */
     public static String getServletBaseURL(HttpServletRequest request) {
@@ -173,14 +173,14 @@ public class ServletUtil {
             throw new IllegalArgumentException("Invalid URL: " + fullURL, e);
         }
 
-        // »ù±¾URL
+        // åŸºæœ¬URL
         StringBuilder buf = new StringBuilder(fullURL);
         buf.setLength(fullURL.length() - fullPath.length());
 
-        // ¼ÓÉÏcontextPath
+        // åŠ ä¸ŠcontextPath
         buf.append(normalizeAbsolutePath(request.getContextPath(), true));
 
-        // ¶ÔÓÚÇ°×ºÆ¥Åä£¬¼ÓÉÏservletPath
+        // å¯¹äºå‰ç¼€åŒ¹é…ï¼ŒåŠ ä¸ŠservletPath
         if (isPrefixServletMapping(request)) {
             buf.append(normalizeAbsolutePath(request.getServletPath(), true));
         }
@@ -189,17 +189,17 @@ public class ServletUtil {
     }
 
     /**
-     * ¹æ¸ñ»¯URI¡£
+     * è§„æ ¼åŒ–URIã€‚
      */
     public static String normalizeURI(String uri) {
         return URI.create(trimToEmpty(uri)).normalize().toString();
     }
 
     /**
-     * ÅĞ¶ÏpathÊÇ·ñÎªfullpathµÄÇ°×º£¬Æ¥Åäµ½¡°/¡±±ß½ç¡£
+     * åˆ¤æ–­pathæ˜¯å¦ä¸ºfullpathçš„å‰ç¼€ï¼ŒåŒ¹é…åˆ°â€œ/â€è¾¹ç•Œã€‚
      * <ul>
-     * <li><code>startsWithPath("/index", "/index.htm") == false</code>¡£</li>
-     * <li><code>startsWithPath("/path", "/path/index") == true</code>¡£</li>
+     * <li><code>startsWithPath("/index", "/index.htm") == false</code>ã€‚</li>
+     * <li><code>startsWithPath("/path", "/path/index") == true</code>ã€‚</li>
      * </ul>
      */
     public static boolean startsWithPath(String path, String fullpath) {

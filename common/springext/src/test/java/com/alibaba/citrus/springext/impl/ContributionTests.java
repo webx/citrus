@@ -129,7 +129,7 @@ public class ContributionTests {
         String test3 = getSchemaText(cp2.getContribution("test3", BEAN_DEFINITION_PARSER));
         String test4 = getSchemaText(cp2.getContribution("test4", BEAN_DEFINITION_PARSER));
 
-        // ¼ÙÈçnsÒÑ¾­importÁË£¬È·±£²»ÖØ¸´import£»È·±£²»import×Ô¼ºËùÔÚµÄcp¡£
+        // å‡å¦‚nså·²ç»importäº†ï¼Œç¡®ä¿ä¸é‡å¤importï¼›ç¡®ä¿ä¸importè‡ªå·±æ‰€åœ¨çš„cpã€‚
         assertSchemaText(test1, 1);
         assertSchemaText(test2, 2);
         assertSchemaText(test3, 3);
@@ -137,7 +137,7 @@ public class ContributionTests {
     }
 
     private void assertSchemaText(String text, int caseNo) {
-        text = text.replaceAll("\\s+", " "); // È¥³ı»»ĞĞ£¬±ãÓÚ¼ì²é
+        text = text.replaceAll("\\s+", " "); // å»é™¤æ¢è¡Œï¼Œä¾¿äºæ£€æŸ¥
 
         String import_cp1 = "<xsd:import namespace=\"http://www.alibaba.com/schema/my/cp1\"";
         String import_cp1_location = "<xsd:import namespace=\"http://www.alibaba.com/schema/my/cp1\" schemaLocation=\"my-cp1.xsd\"/>";

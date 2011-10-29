@@ -42,7 +42,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ÊµÏÖ<code>ResourceLoadingService</code>¡£
+ * å®ç°<code>ResourceLoadingService</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -117,21 +117,21 @@ public class ResourceLoadingServiceImpl extends AbstractService<ResourceLoadingS
     }
 
     /**
-     * ²éÕÒÖ¸¶¨Ãû³ÆµÄ×ÊÔ´¡£
+     * æŸ¥æ‰¾æŒ‡å®šåç§°çš„èµ„æºã€‚
      */
     public URL getResourceAsURL(String resourceName) throws ResourceNotFoundException {
         return checkResource(getResource(resourceName).getURL(), resourceName, URL.class);
     }
 
     /**
-     * ²éÕÒÖ¸¶¨Ãû³ÆµÄ×ÊÔ´¡£
+     * æŸ¥æ‰¾æŒ‡å®šåç§°çš„èµ„æºã€‚
      */
     public File getResourceAsFile(String resourceName) throws ResourceNotFoundException {
         return checkResource(getResource(resourceName).getFile(), resourceName, File.class);
     }
 
     /**
-     * ²éÕÒÖ¸¶¨Ãû³ÆµÄ×ÊÔ´¡£
+     * æŸ¥æ‰¾æŒ‡å®šåç§°çš„èµ„æºã€‚
      */
     public File getResourceAsFile(String resourceName, Set<ResourceLoadingOption> options)
             throws ResourceNotFoundException {
@@ -139,14 +139,14 @@ public class ResourceLoadingServiceImpl extends AbstractService<ResourceLoadingS
     }
 
     /**
-     * ²éÕÒÖ¸¶¨Ãû³ÆµÄ×ÊÔ´¡£
+     * æŸ¥æ‰¾æŒ‡å®šåç§°çš„èµ„æºã€‚
      */
     public InputStream getResourceAsStream(String resourceName) throws ResourceNotFoundException, IOException {
         return checkResource(getResource(resourceName).getInputStream(), resourceName, InputStream.class);
     }
 
     /**
-     * ÅĞ¶Ï·Ç¿Õ¡£
+     * åˆ¤æ–­éç©ºã€‚
      */
     private <T> T checkResource(T resource, String resourceName, Class<T> type) throws ResourceNotFoundException {
         if (resource == null) {
@@ -158,14 +158,14 @@ public class ResourceLoadingServiceImpl extends AbstractService<ResourceLoadingS
     }
 
     /**
-     * ²éÕÒÖ¸¶¨Ãû³ÆµÄ×ÊÔ´¡£
+     * æŸ¥æ‰¾æŒ‡å®šåç§°çš„èµ„æºã€‚
      */
     public Resource getResource(String resourceName) throws ResourceNotFoundException {
         return getResource(resourceName, null);
     }
 
     /**
-     * ²éÕÒÖ¸¶¨Ãû³ÆµÄ×ÊÔ´¡£
+     * æŸ¥æ‰¾æŒ‡å®šåç§°çš„èµ„æºã€‚
      */
     public Resource getResource(String resourceName, Set<ResourceLoadingOption> options)
             throws ResourceNotFoundException {
@@ -175,7 +175,7 @@ public class ResourceLoadingServiceImpl extends AbstractService<ResourceLoadingS
     }
 
     /**
-     * ÅĞ¶ÏÖ¸¶¨Ãû³ÆµÄ×ÊÔ´ÊÇ·ñ´æÔÚ¡£Èç¹û´æÔÚ£¬Ôò·µ»Ø<code>true</code>¡£
+     * åˆ¤æ–­æŒ‡å®šåç§°çš„èµ„æºæ˜¯å¦å­˜åœ¨ã€‚å¦‚æœå­˜åœ¨ï¼Œåˆ™è¿”å›<code>true</code>ã€‚
      */
     public boolean exists(String resourceName) {
         try {
@@ -187,14 +187,14 @@ public class ResourceLoadingServiceImpl extends AbstractService<ResourceLoadingS
     }
 
     /**
-     * ¸ú×Ù²¢»ñÈ¡ËÑË÷×ÊÔ´µÄÂ·¾¶¡£
+     * è·Ÿè¸ªå¹¶è·å–æœç´¢èµ„æºçš„è·¯å¾„ã€‚
      */
     public ResourceTrace trace(String resourceName) {
         return trace(resourceName, FOR_CREATE);
     }
 
     /**
-     * ¸ú×Ù²¢»ñÈ¡ËÑË÷×ÊÔ´µÄÂ·¾¶¡£
+     * è·Ÿè¸ªå¹¶è·å–æœç´¢èµ„æºçš„è·¯å¾„ã€‚
      */
     public ResourceTrace trace(String resourceName, Set<ResourceLoadingOption> options) {
         assertInitialized();
@@ -203,14 +203,14 @@ public class ResourceLoadingServiceImpl extends AbstractService<ResourceLoadingS
     }
 
     /**
-     * ÂŞÁĞ³öÖ¸¶¨×ÊÔ´µÄ×ÓÄ¿Â¼»òÎÄ¼şÃû¡£Èç¹û²»´æÔÚ£¬Ôò·µ»Ø¿ÕÊı×é¡£
+     * ç½—åˆ—å‡ºæŒ‡å®šèµ„æºçš„å­ç›®å½•æˆ–æ–‡ä»¶åã€‚å¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›ç©ºæ•°ç»„ã€‚
      */
     public String[] list(String resourceName) throws ResourceNotFoundException {
         return list(resourceName, null);
     }
 
     /**
-     * ÂŞÁĞ³öÖ¸¶¨×ÊÔ´µÄ×ÓÄ¿Â¼»òÎÄ¼şÃû¡£Èç¹û²»´æÔÚ£¬Ôò·µ»Ø¿ÕÊı×é¡£
+     * ç½—åˆ—å‡ºæŒ‡å®šèµ„æºçš„å­ç›®å½•æˆ–æ–‡ä»¶åã€‚å¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›ç©ºæ•°ç»„ã€‚
      */
     public String[] list(String resourceName, Set<ResourceLoadingOption> options) throws ResourceNotFoundException {
         assertInitialized();
@@ -218,14 +218,14 @@ public class ResourceLoadingServiceImpl extends AbstractService<ResourceLoadingS
     }
 
     /**
-     * ÂŞÁĞ³öÖ¸¶¨×ÊÔ´µÄ×ÓÄ¿Â¼»òÎÄ¼ş×ÊÔ´¡£Èç¹û²»´æÔÚ£¬Ôò·µ»Ø¿ÕÊı×é¡£
+     * ç½—åˆ—å‡ºæŒ‡å®šèµ„æºçš„å­ç›®å½•æˆ–æ–‡ä»¶èµ„æºã€‚å¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›ç©ºæ•°ç»„ã€‚
      */
     public Resource[] listResources(String resourceName) throws ResourceNotFoundException {
         return listResources(resourceName, null);
     }
 
     /**
-     * ÂŞÁĞ³öÖ¸¶¨×ÊÔ´µÄ×ÓÄ¿Â¼»òÎÄ¼ş×ÊÔ´¡£Èç¹û²»´æÔÚ£¬Ôò·µ»Ø¿ÕÊı×é¡£
+     * ç½—åˆ—å‡ºæŒ‡å®šèµ„æºçš„å­ç›®å½•æˆ–æ–‡ä»¶èµ„æºã€‚å¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›ç©ºæ•°ç»„ã€‚
      */
     public Resource[] listResources(String resourceName, Set<ResourceLoadingOption> options)
             throws ResourceNotFoundException {
@@ -251,7 +251,7 @@ public class ResourceLoadingServiceImpl extends AbstractService<ResourceLoadingS
     }
 
     /**
-     * È¡µÃËùÓĞµÄpatternsÃû³Æ¡£
+     * å–å¾—æ‰€æœ‰çš„patternsåç§°ã€‚
      */
     public String[] getPatterns(boolean includeParent) {
         Set<String> patterns = createLinkedHashSet();

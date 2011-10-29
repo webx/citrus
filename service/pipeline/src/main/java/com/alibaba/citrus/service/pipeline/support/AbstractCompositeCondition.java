@@ -21,7 +21,7 @@ import com.alibaba.citrus.service.pipeline.Condition;
 import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
- * ×éºÏÊ½µÄcondition»ùÀà¡£
+ * ç»„åˆå¼çš„conditionåŸºç±»ã€‚
  * 
  * @author Michael Zhou
  */

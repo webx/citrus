@@ -29,10 +29,10 @@ import com.alibaba.citrus.service.pipeline.support.AbstractValve;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
 
 /**
- * ÓÃÀ´ÖĞ¶Ïµ±Ç°pipeline¡£
+ * ç”¨æ¥ä¸­æ–­å½“å‰pipelineã€‚
  * <p>
- * ºÍjavaÓïÑÔÖĞµÄbreak²»Í¬£¬java breakÖ»ÄÜÖĞ¶Ï²¢Ìø³öÑ­»·Ìå£¬¶øbreak valveÔòÖĞ¶Ïµ±Ç°pipeline£¬ÎŞÂÛÊÇif
- * block»¹ÊÇÑ­»·Ìå¡£
+ * å’Œjavaè¯­è¨€ä¸­çš„breakä¸åŒï¼Œjava breakåªèƒ½ä¸­æ–­å¹¶è·³å‡ºå¾ªç¯ä½“ï¼Œè€Œbreak valveåˆ™ä¸­æ–­å½“å‰pipelineï¼Œæ— è®ºæ˜¯if
+ * blockè¿˜æ˜¯å¾ªç¯ä½“ã€‚
  * </p>
  * 
  * @author Michael Zhou

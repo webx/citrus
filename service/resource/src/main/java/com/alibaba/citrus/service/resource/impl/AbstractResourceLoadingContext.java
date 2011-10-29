@@ -39,14 +39,14 @@ import com.alibaba.citrus.util.Assert;
 import com.alibaba.citrus.util.regex.MatchResultSubstitution;
 
 /**
- * ²éÕÒºÍ×°ÔØresourceµÄÂß¼­¡£
+ * æŸ¥æ‰¾å’Œè£…è½½resourceçš„é€»è¾‘ã€‚
  * 
  * @author Michael Zhou
  */
 abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult {
     private final static Set<ResourceLoadingOption> EMPTY_OPTIONS = emptySet();
 
-    // ²»±äÁ¿
+    // ä¸å˜é‡
     protected final Logger log;
     protected final ResourceLoadingService parent;
     private final String originalResourceName;
@@ -54,19 +54,19 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
     private final ResourceMapping[] mappings;
     private final BestResourcesMatcher resourcesMatcher;
 
-    // ±äÁ¿
+    // å˜é‡
     private List<ResourceMapping> visitedMappings;
-    protected String resourceName; // µ±Ç°ÕıÔÚÆ¥ÅäµÄresourceName
-    protected Set<ResourceLoadingOption> options; // µ±Ç°ÕıÔÚÊ¹ÓÃµÄoptions
-    protected ResourcePattern lastMatchedPattern; // ×î½üµÄÆ¥Åä
-    protected MatchResultSubstitution lastSubstitution; // ºÍ×î½üµÄÆ¥Åä¶ÔÓ¦µÄÌæ»»¹¤¾ß
+    protected String resourceName; // å½“å‰æ­£åœ¨åŒ¹é…çš„resourceName
+    protected Set<ResourceLoadingOption> options; // å½“å‰æ­£åœ¨ä½¿ç”¨çš„options
+    protected ResourcePattern lastMatchedPattern; // æœ€è¿‘çš„åŒ¹é…
+    protected MatchResultSubstitution lastSubstitution; // å’Œæœ€è¿‘çš„åŒ¹é…å¯¹åº”çš„æ›¿æ¢å·¥å…·
 
     /**
-     * ´´½¨Ò»¸öcontext¡£
+     * åˆ›å»ºä¸€ä¸ªcontextã€‚
      */
     public AbstractResourceLoadingContext(String resourceName, Set<ResourceLoadingOption> options,
                                           ResourceMapping[] mappings, ResourceLoadingService parent, Logger log) {
-        // ²»±äÁ¿
+        // ä¸å˜é‡
         this.log = assertNotNull(log, "logger");
         this.parent = parent;
         this.originalResourceName = normalizeAbsolutePath(assertNotNull(trimToNull(resourceName), "resourceName"));
@@ -74,20 +74,20 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
         this.mappings = assertNotNull(mappings, "mappings");
         this.resourcesMatcher = new BestResourcesMatcher();
 
-        // ±äÁ¿
+        // å˜é‡
         this.resourceName = originalResourceName;
         this.options = originalOptions;
     }
 
     /**
-     * ÊµÏÖ<code>ResourceMatchResult.getResourceName()</code>¡£
+     * å®ç°<code>ResourceMatchResult.getResourceName()</code>ã€‚
      */
     public String getResourceName() {
         return resourceName;
     }
 
     /**
-     * ÊµÏÖ<code>ResourceMatchResult.substitute()</code>¡£
+     * å®ç°<code>ResourceMatchResult.substitute()</code>ã€‚
      */
     public String substitute(String substitution) {
         return resourceName.substring(0, lastSubstitution.getMatch().start())
@@ -95,7 +95,7 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
     }
 
     /**
-     * Ñ°ÕÒ×ÊÔ´µÄÕæÊµÂß¼­£¬±»filter chainµ÷ÓÃ£¬»ò±»getResourceÖ±½Óµ÷ÓÃ£¨¼ÙÈçÃ»ÓĞfilter£©£¬»ò±»listµ÷ÓÃ¡£
+     * å¯»æ‰¾èµ„æºçš„çœŸå®é€»è¾‘ï¼Œè¢«filter chainè°ƒç”¨ï¼Œæˆ–è¢«getResourceç›´æ¥è°ƒç”¨ï¼ˆå‡å¦‚æ²¡æœ‰filterï¼‰ï¼Œæˆ–è¢«listè°ƒç”¨ã€‚
      */
     protected R doLoad(String newResourceName, Set<ResourceLoadingOption> newOptions) throws ResourceNotFoundException {
         resourceName = newResourceName;
@@ -111,7 +111,7 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
         }
 
         if (findBestMatch()) {
-            // findBestMatch() Çé¿ö1. ÕÒµ½alias£¬µ«Ã»ÓĞÕÒµ½×îÖÕµÄresource mapping
+            // findBestMatch() æƒ…å†µ1. æ‰¾åˆ°aliasï¼Œä½†æ²¡æœ‰æ‰¾åˆ°æœ€ç»ˆçš„resource mapping
             if (lastMatchedPattern instanceof ResourceAlias) {
                 if (parent != null) {
                     log.trace("Resource \"{}\" not found.  Trying to find it in super ResourceLoadingService",
@@ -120,18 +120,18 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
                     try {
                         resource = loadParentResource(resourceName, options);
                     } catch (ResourceNotFoundException e) {
-                        // alias½«¸Ä±äresourceName£¬¹Ê±£´æÒì³£×÷Îªcaused byÒì³£
+                        // aliaså°†æ”¹å˜resourceNameï¼Œæ•…ä¿å­˜å¼‚å¸¸ä½œä¸ºcaused byå¼‚å¸¸
                         chainingException = e;
                     }
                 }
             } else {
-                // findBestMatch() Çé¿ö2, 3. ÕÒµ½resource mapping
+                // findBestMatch() æƒ…å†µ2, 3. æ‰¾åˆ°resource mapping
                 ResourceLoaderMapping mapping = (ResourceLoaderMapping) lastMatchedPattern;
 
                 resource = loadMappedResource(mapping, options);
 
                 if (resource == null) {
-                    // ¼ÙÈçresourceName±»¸Ä±ä£¬Ôò±£´æÒì³£×÷Îªcaused byÒì³£
+                    // å‡å¦‚resourceNameè¢«æ”¹å˜ï¼Œåˆ™ä¿å­˜å¼‚å¸¸ä½œä¸ºcaused byå¼‚å¸¸
                     if (!isEquals(resourceName, originalResourceName)) {
                         logResourceNotFound(resourceName);
                         chainingException = new ResourceNotFoundException(String.format(
@@ -141,13 +141,13 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
             }
         }
 
-        // findBestMatch() Çé¿ö4. Ê²Ã´Ò²Ã»ÕÒµ½
+        // findBestMatch() æƒ…å†µ4. ä»€ä¹ˆä¹Ÿæ²¡æ‰¾åˆ°
         else {
             if (parent != null) {
                 log.trace("Resource \"{}\" not found.  " + "Trying to find it in super ResourceLoadingService",
                         resourceName);
 
-                // Ö±½ÓÅ×³öÒì³££¬ÒòÎªËÍ¸øparentµÄresourceName²¢Î´¸Ä±ä£¬Ã»±ØÒª´´½¨ÖØ¸´µÄÒì³£ĞÅÏ¢
+                // ç›´æ¥æŠ›å‡ºå¼‚å¸¸ï¼Œå› ä¸ºé€ç»™parentçš„resourceNameå¹¶æœªæ”¹å˜ï¼Œæ²¡å¿…è¦åˆ›å»ºé‡å¤çš„å¼‚å¸¸ä¿¡æ¯
                 resource = loadParentResource(resourceName, options);
             }
         }
@@ -164,7 +164,7 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
     }
 
     /**
-     * ²éÕÒ×î¼ÑÆ¥ÅäµÄ&lt;resource&gt;»ò&lt;resource-alias&gt;¡£
+     * æŸ¥æ‰¾æœ€ä½³åŒ¹é…çš„&lt;resource&gt;æˆ–&lt;resource-alias&gt;ã€‚
      */
     private boolean findBestMatch() throws ResourceNotFoundException {
         if (resourcesMatcher.matches(resourceName)) {
@@ -173,11 +173,11 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
             lastMatchedPattern = resourceMapping;
             lastSubstitution = new MatchResultSubstitution(resourcesMatcher.bestMatchResult);
 
-            // µİ¹é²éÕÒresource alias£¬Ö±µ½Ò»¸öresource mapping±»Æ¥ÅäÎªÖ¹
+            // é€’å½’æŸ¥æ‰¾resource aliasï¼Œç›´åˆ°ä¸€ä¸ªresource mappingè¢«åŒ¹é…ä¸ºæ­¢
             if (resourceMapping instanceof ResourceAlias) {
                 ResourceAlias alias = (ResourceAlias) resourceMapping;
 
-                // ÉèÖÃaliasÌæ»»ºó²úÉúĞÂµÄresourceName
+                // è®¾ç½®aliasæ›¿æ¢åäº§ç”Ÿæ–°çš„resourceName
                 String newResourceName = substitute(alias.getName());
 
                 if (log.isDebugEnabled()) {
@@ -191,15 +191,15 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
 
                 resourceName = newResourceName;
 
-                // µİ¹éÆ¥Åäalias
+                // é€’å½’åŒ¹é…alias
                 findBestMatch();
 
-                // ÇéĞÎ1. findBestMatch()==false, Æ¥ÅäÁËÒ»¸öalias£¬µ«Ã»ÕÒµ½¿É¼ÌĞøÆ¥ÅäÏî£¬Ôò·µ»Ø×îºóÆ¥ÅäµÄalias¡£
-                // ÇéĞÎ2. findBestMatch()==true, Æ¥ÅäÁËÒ»¸öalias£¬²¢µİ¹éÕÒµ½ÁË¾­¹ıÌæ»»ºóµÄĞÂÆ¥ÅäÏî£¬Ôò·µ»Ø×îÖÕµÄÆ¥Åä¡£
-                // ÎŞÂÛÄÄÖÖÇéĞÍ£¬¶¼·µ»Øtrue
+                // æƒ…å½¢1. findBestMatch()==false, åŒ¹é…äº†ä¸€ä¸ªaliasï¼Œä½†æ²¡æ‰¾åˆ°å¯ç»§ç»­åŒ¹é…é¡¹ï¼Œåˆ™è¿”å›æœ€ååŒ¹é…çš„aliasã€‚
+                // æƒ…å½¢2. findBestMatch()==true, åŒ¹é…äº†ä¸€ä¸ªaliasï¼Œå¹¶é€’å½’æ‰¾åˆ°äº†ç»è¿‡æ›¿æ¢åçš„æ–°åŒ¹é…é¡¹ï¼Œåˆ™è¿”å›æœ€ç»ˆçš„åŒ¹é…ã€‚
+                // æ— è®ºå“ªç§æƒ…å‹ï¼Œéƒ½è¿”å›true
             }
 
-            // Èç¹û±»Æ¥ÅäµÄÊÇresource loader mapping£¬Ôò·µ»ØÖ®¡£
+            // å¦‚æœè¢«åŒ¹é…çš„æ˜¯resource loader mappingï¼Œåˆ™è¿”å›ä¹‹ã€‚
             else if (resourceMapping instanceof ResourceLoaderMapping) {
                 ResourceLoaderMapping mapping = (ResourceLoaderMapping) resourceMapping;
 
@@ -208,42 +208,42 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
                 visitMapping(mapping);
                 visitedMappings.add(mapping);
 
-                // ÇéĞÎ3. Æ¥ÅäÁËÒ»¸öresource£¬·µ»Øtrue
+                // æƒ…å½¢3. åŒ¹é…äº†ä¸€ä¸ªresourceï¼Œè¿”å›true
             }
 
             return true;
         }
 
-        // ÇéĞÎ4. Ê²Ã´Ò²Ã»ÓĞÆ¥Åä¡£
+        // æƒ…å½¢4. ä»€ä¹ˆä¹Ÿæ²¡æœ‰åŒ¹é…ã€‚
         return false;
     }
 
     /**
-     * »Øµ÷º¯Êı£º·ÃÎÊÄ³¸ömapping¡£
+     * å›è°ƒå‡½æ•°ï¼šè®¿é—®æŸä¸ªmappingã€‚
      */
     protected abstract void visitMapping(ResourceMapping mapping);
 
     /**
-     * µ÷ÓÃparent resource loading serviceÈ¡µÃ×ÊÔ´¡£
+     * è°ƒç”¨parent resource loading serviceå–å¾—èµ„æºã€‚
      */
     protected abstract R loadParentResource(String resourceName, Set<ResourceLoadingOption> options)
             throws ResourceNotFoundException;
 
     /**
-     * µ÷ÓÃmappingÈ¡µÃ×ÊÔ´¡£
+     * è°ƒç”¨mappingå–å¾—èµ„æºã€‚
      */
     protected abstract R loadMappedResource(ResourceLoaderMapping mapping, Set<ResourceLoadingOption> options);
 
     /**
-     * ±»<code>ResourceLoaderContext.getResource()</code>ºÍ
-     * <code>ResourceListerContext.list()</code>µ÷ÓÃµÄÍ¨ÓÃ·½·¨¡£
+     * è¢«<code>ResourceLoaderContext.getResource()</code>å’Œ
+     * <code>ResourceListerContext.list()</code>è°ƒç”¨çš„é€šç”¨æ–¹æ³•ã€‚
      */
     protected final R loadContextResource(String newResourceName, Set<ResourceLoadingOption> newOptions) {
         assertTrue(!visitedMappings.isEmpty(), Assert.ExceptionType.ILLEGAL_STATE,
                 "getResource() can only be called within a ResourceLoader");
 
         try {
-            // Èç¹ûµ±Ç°resourceNameºÍĞÂµÄresourceNameÏàÍ¬£¬ÔòÖ±½Óµ÷ÓÃparent service
+            // å¦‚æœå½“å‰resourceNameå’Œæ–°çš„resourceNameç›¸åŒï¼Œåˆ™ç›´æ¥è°ƒç”¨parent service
             if (resourceName.equals(newResourceName)) {
                 if (parent == null) {
                     log.debug("No parent ResourceLoadingService exists for loading resource \"{}\"", newResourceName);
@@ -252,7 +252,7 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
                     return loadParentResource(newResourceName, newOptions);
                 }
             } else {
-                // ÓÃĞÂµÄÃû³Æ×°ÔØ×ÊÔ´
+                // ç”¨æ–°çš„åç§°è£…è½½èµ„æº
                 log.trace("Trying to find resource \"{}\" using a new resourceName: \"{}\"", resourceName,
                         newResourceName);
 
@@ -268,9 +268,9 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
     }
 
     /**
-     * ÕÒ³ö×îÏà¹ØµÄÆ¥Åä¡£
+     * æ‰¾å‡ºæœ€ç›¸å…³çš„åŒ¹é…ã€‚
      * <p>
-     * Ëã·¨£ºÏÈ°´patternÏà¹Ø¶ÈÅÅĞò£¬ÔÙ°´Æ¥Åä³¤¶ÈÅÅĞò¡£
+     * ç®—æ³•ï¼šå…ˆæŒ‰patternç›¸å…³åº¦æ’åºï¼Œå†æŒ‰åŒ¹é…é•¿åº¦æ’åºã€‚
      * </p>
      */
     protected static abstract class BestMatcher<P extends ResourcePattern> {
@@ -287,7 +287,7 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
         protected abstract P nextPattern();
 
         public final boolean matches(String resourceName) {
-            // ÒòÎª´Ë¶ÔÏó»á±»¶à´Î¸´ÓÃ£¬ËùÒÔÊ¹ÓÃÇ°±ØĞë³õÊ¼»¯²ÎÊı
+            // å› ä¸ºæ­¤å¯¹è±¡ä¼šè¢«å¤šæ¬¡å¤ç”¨ï¼Œæ‰€ä»¥ä½¿ç”¨å‰å¿…é¡»åˆå§‹åŒ–å‚æ•°
             this.resourceName = assertNotNull(resourceName, "resourceName");
             this.bestMatchPettern = null;
             this.bestMatchResult = null;
@@ -317,7 +317,7 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
     }
 
     /**
-     * ÕÒ³ö×îÆ¥ÅäµÄ&lt;resource&gt;»ò&lt;resource-alias&gt;¡£
+     * æ‰¾å‡ºæœ€åŒ¹é…çš„&lt;resource&gt;æˆ–&lt;resource-alias&gt;ã€‚
      */
     private class BestResourcesMatcher extends BestMatcher<ResourceMapping> {
         private int i;
@@ -339,12 +339,12 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
 
         @Override
         protected boolean accept(ResourceMapping pattern) {
-            // visitedMappingsÎª¿Õ£¬±íÊ¾ÊÇµÚÒ»¸öÆ¥Åä£¬´ËÊ±²»ÊÊÓÃinternal mappings
+            // visitedMappingsä¸ºç©ºï¼Œè¡¨ç¤ºæ˜¯ç¬¬ä¸€ä¸ªåŒ¹é…ï¼Œæ­¤æ—¶ä¸é€‚ç”¨internal mappings
             if (visitedMappings.isEmpty() && pattern.isInternal()) {
                 return false;
             }
 
-            // ³ıÈ¥ÒÑ¾­Æ¥Åä¹ıµÄmatch£¬·ÀÖ¹ËÀÑ­»·
+            // é™¤å»å·²ç»åŒ¹é…è¿‡çš„matchï¼Œé˜²æ­¢æ­»å¾ªç¯
             if (visitedMappings.contains(pattern)) {
                 return false;
             }

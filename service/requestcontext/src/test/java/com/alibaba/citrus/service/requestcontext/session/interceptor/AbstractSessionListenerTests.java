@@ -43,7 +43,7 @@ public abstract class AbstractSessionListenerTests extends AbstractRequestContex
     }
 
     /**
-     * ÃÊªªlog°£
+     * ÊõøÊç¢log„ÄÇ
      */
     protected final void replaceLogger(Logger log, String logField, String originalLogName, int index) throws Exception {
         invokeNoopServlet("/servlet");

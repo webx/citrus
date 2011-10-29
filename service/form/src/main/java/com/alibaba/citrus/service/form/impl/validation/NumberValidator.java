@@ -26,7 +26,7 @@ import com.alibaba.citrus.service.form.support.CompareOperator;
 import com.alibaba.citrus.service.form.support.NumberSupport;
 
 /**
- * ÑéÖ¤ÓÃ»§ÊäÈëµÄÊÇÕıÈ·µÄÊı×Ö¸ñÊ½£¬²¢ÇÒÊı×Ö·ûºÏÏŞ¶¨µÄ·¶Î§¡£
+ * éªŒè¯ç”¨æˆ·è¾“å…¥çš„æ˜¯æ­£ç¡®çš„æ•°å­—æ ¼å¼ï¼Œå¹¶ä¸”æ•°å­—ç¬¦åˆé™å®šçš„èŒƒå›´ã€‚
  * 
  * @author Michael Zhou
  */
@@ -34,84 +34,84 @@ public class NumberValidator extends AbstractNumberValidator {
     private NumberSupport[] operands = new NumberSupport[CompareOperator.values().length];
 
     /**
-     * È¡µÃÏŞ¶¨Öµ£ºµÈÓÚ¡£
+     * å–å¾—é™å®šå€¼ï¼šç­‰äºã€‚
      */
     public String getEqualTo() {
         return getOperandString(equalTo);
     }
 
     /**
-     * ÉèÖÃÏŞ¶¨Öµ£ºµÈÓÚ¡£
+     * è®¾ç½®é™å®šå€¼ï¼šç­‰äºã€‚
      */
     public void setEqualTo(String value) {
         setOperand(equalTo, value);
     }
 
     /**
-     * È¡µÃÏŞ¶¨Öµ£º²»µÈÓÚ¡£
+     * å–å¾—é™å®šå€¼ï¼šä¸ç­‰äºã€‚
      */
     public String getNotEqualTo() {
         return getOperandString(notEqualTo);
     }
 
     /**
-     * ÉèÖÃÏŞ¶¨Öµ£º²»µÈÓÚ¡£
+     * è®¾ç½®é™å®šå€¼ï¼šä¸ç­‰äºã€‚
      */
     public void setNotEqualTo(String value) {
         setOperand(notEqualTo, value);
     }
 
     /**
-     * È¡µÃÏŞ¶¨Öµ£ºĞ¡ÓÚ¡£
+     * å–å¾—é™å®šå€¼ï¼šå°äºã€‚
      */
     public String getLessThan() {
         return getOperandString(lessThan);
     }
 
     /**
-     * ÉèÖÃÏŞ¶¨Öµ£ºĞ¡ÓÚ¡£
+     * è®¾ç½®é™å®šå€¼ï¼šå°äºã€‚
      */
     public void setLessThan(String value) {
         setOperand(lessThan, value);
     }
 
     /**
-     * È¡µÃÏŞ¶¨Öµ£º´óÓÚ¡£
+     * å–å¾—é™å®šå€¼ï¼šå¤§äºã€‚
      */
     public String getGreaterThan() {
         return getOperandString(greaterThan);
     }
 
     /**
-     * ÉèÖÃÏŞ¶¨Öµ£º´óÓÚ¡£
+     * è®¾ç½®é™å®šå€¼ï¼šå¤§äºã€‚
      */
     public void setGreaterThan(String value) {
         setOperand(greaterThan, value);
     }
 
     /**
-     * È¡µÃÏŞ¶¨Öµ£ºĞ¡ÓÚµÈÓÚ¡£
+     * å–å¾—é™å®šå€¼ï¼šå°äºç­‰äºã€‚
      */
     public String getLessThanOrEqualTo() {
         return getOperandString(lessThanOrEqualTo);
     }
 
     /**
-     * ÉèÖÃÏŞ¶¨Öµ£ºĞ¡ÓÚµÈÓÚ¡£
+     * è®¾ç½®é™å®šå€¼ï¼šå°äºç­‰äºã€‚
      */
     public void setLessThanOrEqualTo(String value) {
         setOperand(lessThanOrEqualTo, value);
     }
 
     /**
-     * È¡µÃÏŞ¶¨Öµ£º´óÓÚµÈÓÚ¡£
+     * å–å¾—é™å®šå€¼ï¼šå¤§äºç­‰äºã€‚
      */
     public String getGreaterThanOrEqualTo() {
         return getOperandString(greaterThanOrEqualTo);
     }
 
     /**
-     * ÉèÖÃÏŞ¶¨Öµ£º´óÓÚµÈÓÚ¡£
+     * è®¾ç½®é™å®šå€¼ï¼šå¤§äºç­‰äºã€‚
      */
     public void setGreaterThanOrEqualTo(String value) {
         setOperand(greaterThanOrEqualTo, value);
@@ -144,7 +144,7 @@ public class NumberValidator extends AbstractNumberValidator {
     }
 
     /**
-     * ÑéÖ¤Ò»¸ö×Ö¶Î¡£
+     * éªŒè¯ä¸€ä¸ªå­—æ®µã€‚
      */
     @Override
     protected boolean validate(Context context, String value) {

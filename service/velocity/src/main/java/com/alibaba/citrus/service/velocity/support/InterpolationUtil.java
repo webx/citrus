@@ -23,10 +23,10 @@ public class InterpolationUtil {
     public static final String INTERPOLATE_KEY = "_INTERPOLATION_";
 
     /**
-     * Èç¹ûµ±Ç°ÕıÔÚ½âÎö<code>StringLiteral</code>£¬Ôò·µ»Ø<code>true</code>¡£
+     * å¦‚æœå½“å‰æ­£åœ¨è§£æ<code>StringLiteral</code>ï¼Œåˆ™è¿”å›<code>true</code>ã€‚
      * <p>
-     * ´ËÌØĞÔĞèÒª´ò¿ªvelocity configuration£º
-     * <code>runtime.interpolate.string.literals.hack == true</code>¡£
+     * æ­¤ç‰¹æ€§éœ€è¦æ‰“å¼€velocity configurationï¼š
+     * <code>runtime.interpolate.string.literals.hack == true</code>ã€‚
      * </p>
      */
     public static boolean isInInterpolation(Context context) {

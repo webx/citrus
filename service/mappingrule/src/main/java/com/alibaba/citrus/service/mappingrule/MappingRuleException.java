@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.mappingrule;
 
 /**
- * ´ú±íÒ»¸öMappingRuleServiceµÄÒì³£¡£
+ * ä»£è¡¨ä¸€ä¸ªMappingRuleServiceçš„å¼‚å¸¸ã€‚
  * 
  * @author Michael Zhou
  */
@@ -26,35 +26,35 @@ public class MappingRuleException extends RuntimeException {
     private static final long serialVersionUID = 3760561988245338425L;
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      */
     public MappingRuleException() {
         super();
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param message Òì³£ĞÅÏ¢
+     * @param message å¼‚å¸¸ä¿¡æ¯
      */
     public MappingRuleException(String message) {
         super(message);
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param message Òì³£ĞÅÏ¢
-     * @param cause Òì³£Ô­Òò
+     * @param message å¼‚å¸¸ä¿¡æ¯
+     * @param cause å¼‚å¸¸åŸå› 
      */
     public MappingRuleException(String message, Throwable cause) {
         super(message, cause);
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param cause Òì³£Ô­Òò
+     * @param cause å¼‚å¸¸åŸå› 
      */
     public MappingRuleException(Throwable cause) {
         super(cause);

@@ -25,25 +25,25 @@ import com.alibaba.citrus.service.template.TemplateEngine;
 import com.alibaba.citrus.service.template.TemplateException;
 
 /**
- * FreeMarkerÄ£°åÒıÇæ¡£
+ * FreeMarkeræ¨¡æ¿å¼•æ“ã€‚
  * 
  * @author Michael Zhou
  */
 public interface FreeMarkerEngine extends TemplateEngine {
     /**
-     * äÖÈ¾Ä£°å£¬²¢ÒÔ×Ö·û´®µÄĞÎÊ½È¡µÃäÖÈ¾µÄ½á¹û¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶ä»¥å­—ç¬¦ä¸²çš„å½¢å¼å–å¾—æ¸²æŸ“çš„ç»“æœã€‚
      */
     String mergeTemplate(String templateName, Object context, String inputCharset) throws TemplateException,
             IOException;
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢½«äÖÈ¾µÄ½á¹ûËÍµ½×Ö½ÚÊä³öÁ÷ÖĞ¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶å°†æ¸²æŸ“çš„ç»“æœé€åˆ°å­—èŠ‚è¾“å‡ºæµä¸­ã€‚
      */
     void mergeTemplate(String templateName, Object context, OutputStream ostream, String inputCharset,
                        String outputCharset) throws TemplateException, IOException;
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢½«äÖÈ¾µÄ½á¹ûËÍµ½×Ö·ûÊä³öÁ÷ÖĞ¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶å°†æ¸²æŸ“çš„ç»“æœé€åˆ°å­—ç¬¦è¾“å‡ºæµä¸­ã€‚
      */
     void mergeTemplate(String templateName, Object context, Writer out, String inputCharset) throws TemplateException,
             IOException;

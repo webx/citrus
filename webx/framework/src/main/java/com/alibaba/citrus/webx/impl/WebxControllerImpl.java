@@ -43,7 +43,7 @@ public class WebxControllerImpl extends AbstractWebxController {
 
         handle.invoke();
 
-        // ¼ÙÈçpipeline±»ÖĞ¶Ï£¬ÔòÊÓ×÷ÇëÇóÎ´±»´¦Àí¡£filter½«×ªÈëchainÖĞ¼ÌĞø´¦ÀíÇëÇó¡£
+        // å‡å¦‚pipelineè¢«ä¸­æ–­ï¼Œåˆ™è§†ä½œè¯·æ±‚æœªè¢«å¤„ç†ã€‚filterå°†è½¬å…¥chainä¸­ç»§ç»­å¤„ç†è¯·æ±‚ã€‚
         return !handle.isBroken();
     }
 }

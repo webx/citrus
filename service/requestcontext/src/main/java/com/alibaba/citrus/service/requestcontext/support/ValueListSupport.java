@@ -43,7 +43,7 @@ import com.alibaba.citrus.util.ObjectUtil;
 import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
- * ´ú±íÒ»¸öÖµµÄÁĞ±í¡£
+ * ä»£è¡¨ä¸€ä¸ªå€¼çš„åˆ—è¡¨ã€‚
  * 
  * @author Michael Zhou
  */
@@ -58,53 +58,53 @@ public class ValueListSupport implements ValueList {
     }
 
     // =============================================================
-    //  È¡µÃ²ÎÊıµÄÖµ 
+    //  å–å¾—å‚æ•°çš„å€¼ 
     // =============================================================
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>false</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>false</code>ã€‚
      * 
-     * @return ²ÎÊıÖµ
+     * @return å‚æ•°å€¼
      */
     public boolean getBooleanValue() {
         return getBooleanValue(null);
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     public boolean getBooleanValue(Boolean defaultValue) {
         return getValueOfType(Boolean.class, true, (MethodParameter) null, new Object[] { defaultValue });
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @return ²ÎÊıÖµ
+     * @return å‚æ•°å€¼
      */
     public byte getByteValue() {
         return getByteValue(null);
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     public byte getByteValue(Byte defaultValue) {
         return getValueOfType(Byte.class, true, (MethodParameter) null, new Object[] { defaultValue });
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄ×Ö½Ú¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„å­—èŠ‚ã€‚
      * 
-     * @param charset ÓÃÀ´×ª»»×Ö·ûµÄ±àÂë
-     * @return ²ÎÊıÖµµÄ×Ö½ÚÊı×é
-     * @throws UnsupportedEncodingException Èç¹ûÖ¸¶¨ÁË´íÎóµÄ±àÂë×Ö·û¼¯
+     * @param charset ç”¨æ¥è½¬æ¢å­—ç¬¦çš„ç¼–ç 
+     * @return å‚æ•°å€¼çš„å­—èŠ‚æ•°ç»„
+     * @throws UnsupportedEncodingException å¦‚æœæŒ‡å®šäº†é”™è¯¯çš„ç¼–ç å­—ç¬¦é›†
      */
     public byte[] getBytes(String charset) throws UnsupportedEncodingException {
         String value = getStringValue();
@@ -112,173 +112,173 @@ public class ValueListSupport implements ValueList {
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>'\0'</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>'\0'</code>ã€‚
      * 
-     * @return ²ÎÊıÖµ
+     * @return å‚æ•°å€¼
      */
     public char getCharacterValue() {
         return getCharacterValue(null);
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     public char getCharacterValue(Character defaultValue) {
         return getValueOfType(Character.class, true, (MethodParameter) null, new Object[] { defaultValue });
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @return ²ÎÊıÖµ
+     * @return å‚æ•°å€¼
      */
     public double getDoubleValue() {
         return getDoubleValue(null);
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     public double getDoubleValue(Double defaultValue) {
         return getValueOfType(Double.class, true, (MethodParameter) null, new Object[] { defaultValue });
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @return ²ÎÊıÖµ
+     * @return å‚æ•°å€¼
      */
     public float getFloatValue() {
         return getFloatValue(null);
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     public float getFloatValue(Float defaultValue) {
         return getValueOfType(Float.class, true, (MethodParameter) null, new Object[] { defaultValue });
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @return ²ÎÊıÖµ
+     * @return å‚æ•°å€¼
      */
     public int getIntegerValue() {
         return getIntegerValue(null);
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     public int getIntegerValue(Integer defaultValue) {
         return getValueOfType(Integer.class, true, (MethodParameter) null, new Object[] { defaultValue });
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     public int[] getIntegerValues() {
         return getIntegerValues(EMPTY_INT_ARRAY);
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     public int[] getIntegerValues(int[] defaultValue) {
         return getValueOfType(int[].class, null, toIntegerArray(defaultValue));
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @return ²ÎÊıÖµ
+     * @return å‚æ•°å€¼
      */
     public long getLongValue() {
         return getLongValue(null);
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     public long getLongValue(Long defaultValue) {
         return getValueOfType(Long.class, true, (MethodParameter) null, new Object[] { defaultValue });
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     public long[] getLongValues() {
         return getLongValues(EMPTY_LONG_ARRAY);
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     public long[] getLongValues(long[] defaultValue) {
         return getValueOfType(long[].class, null, toLongArray(defaultValue));
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
      * 
-     * @return ²ÎÊıÖµ
+     * @return å‚æ•°å€¼
      */
     public short getShortValue() {
         return getShortValue(null);
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     public short getShortValue(Short defaultValue) {
         return getValueOfType(Short.class, true, (MethodParameter) null, new Object[] { defaultValue });
     }
 
     /**
-     * È¡µÃÈÕÆÚ¡£×Ö·û´®½«Ê¹ÓÃÖ¸¶¨µÄ<code>DateFormat</code>À´½âÎö¡£Èç¹û²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æ—¥æœŸã€‚å­—ç¬¦ä¸²å°†ä½¿ç”¨æŒ‡å®šçš„<code>DateFormat</code>æ¥è§£æã€‚å¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @param format <code>DateFormat</code>¶ÔÏó
-     * @return <code>java.util.Date</code>¶ÔÏó
+     * @param format <code>DateFormat</code>å¯¹è±¡
+     * @return <code>java.util.Date</code>å¯¹è±¡
      */
     public Date getDateValue(DateFormat format) {
         return getDateValue(format, null);
     }
 
     /**
-     * È¡µÃÈÕÆÚ¡£×Ö·û´®½«Ê¹ÓÃÖ¸¶¨µÄ<code>DateFormat</code>À´½âÎö¡£Èç¹û²»´æÔÚ£¬Ôò·µ»ØÄ¬ÈÏÖµ¡£
+     * å–å¾—æ—¥æœŸã€‚å­—ç¬¦ä¸²å°†ä½¿ç”¨æŒ‡å®šçš„<code>DateFormat</code>æ¥è§£æã€‚å¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›é»˜è®¤å€¼ã€‚
      * 
-     * @param format <code>DateFormat</code>¶ÔÏó
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return <code>java.util.Date</code>¶ÔÏó
+     * @param format <code>DateFormat</code>å¯¹è±¡
+     * @param defaultValue é»˜è®¤å€¼
+     * @return <code>java.util.Date</code>å¯¹è±¡
      */
     public Date getDateValue(DateFormat format, Date defaultValue) {
         String value = getStringValue();
@@ -297,19 +297,19 @@ public class ValueListSupport implements ValueList {
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @return ²ÎÊıÖµ
+     * @return å‚æ•°å€¼
      */
     public String getStringValue() {
         return getStringValue(null);
     }
 
     /**
-     * È¡µÃ²ÎÊıÖµ£¬Èç¹ûÖ¸¶¨Ãû³ÆµÄ²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—å‚æ•°å€¼ï¼Œå¦‚æœæŒ‡å®šåç§°çš„å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     public String getStringValue(String defaultValue) {
         String value = getValueOfType(String.class, null, new Object[] { defaultValue });
@@ -322,19 +322,19 @@ public class ValueListSupport implements ValueList {
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     public String[] getStringValues() {
         return getStringValues(EMPTY_STRING_ARRAY);
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     public String[] getStringValues(String[] defaultValue) {
         String[] values = getValueOfType(String[].class, null, defaultValue);
@@ -353,9 +353,9 @@ public class ValueListSupport implements ValueList {
     }
 
     /**
-     * È¡µÃ<code>FileItem</code>¶ÔÏó£¬Èç¹û²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—<code>FileItem</code>å¯¹è±¡ï¼Œå¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @return <code>FileItem</code>¶ÔÏó
+     * @return <code>FileItem</code>å¯¹è±¡
      */
     public FileItem getFileItem() {
         Object value = getValue();
@@ -364,9 +364,9 @@ public class ValueListSupport implements ValueList {
     }
 
     /**
-     * È¡µÃ<code>FileItem</code>¶ÔÏó£¬Èç¹û²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—<code>FileItem</code>å¯¹è±¡ï¼Œå¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @return <code>FileItem</code>¶ÔÏóµÄÊı×é
+     * @return <code>FileItem</code>å¯¹è±¡çš„æ•°ç»„
      */
     public FileItem[] getFileItems() {
         List<FileItem> items = createLinkedList();
@@ -381,19 +381,19 @@ public class ValueListSupport implements ValueList {
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @return ²ÎÊıÖµ
+     * @return å‚æ•°å€¼
      */
     public Object getValue() {
         return getValue(null);
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÄ¬ÈÏÖµ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›é»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValue Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµ
+     * @param defaultValue é»˜è®¤å€¼
+     * @return å‚æ•°å€¼
      */
     public Object getValue(Object defaultValue) {
         Object value = null;
@@ -406,19 +406,19 @@ public class ValueListSupport implements ValueList {
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * 
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     public Object[] getValues() {
         return getValues(EMPTY_OBJECT_ARRAY);
     }
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıµÄËùÓĞÖµ¡£Èç¹û²ÎÊı²»´æÔÚ£¬Ôò·µ»ØÖ¸¶¨Ä¬ÈÏÖµ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°çš„æ‰€æœ‰å€¼ã€‚å¦‚æœå‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›æŒ‡å®šé»˜è®¤å€¼ã€‚
      * 
-     * @param defaultValues Ä¬ÈÏÖµ
-     * @return ²ÎÊıÖµµÄÊı×é
+     * @param defaultValues é»˜è®¤å€¼
+     * @return å‚æ•°å€¼çš„æ•°ç»„
      */
     public Object[] getValues(Object[] defaultValues) {
         Object[] values = this.values.toArray();
@@ -426,23 +426,23 @@ public class ValueListSupport implements ValueList {
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàĞÍµÄÖµ¡£
+     * å–å¾—æŒ‡å®šç±»å‹çš„å€¼ã€‚
      */
     public <T> T getValueOfType(Class<T> type, MethodParameter methodParameter, Object[] defaultValues) {
         return getValueOfType(type, false, methodParameter, defaultValues);
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàĞÍµÄÖµ¡£
+     * å–å¾—æŒ‡å®šç±»å‹çš„å€¼ã€‚
      */
     public <T> T getValueOfType(Class<T> type, boolean isPrimitive, MethodParameter methodParameter,
                                 Object[] defaultValues) {
-        // ´¦ÀíÄ¬ÈÏÖµ£¬ÈçÎª¿Õ£¬×ª»»Îª¿ÕÊı×é¡£
+        // å¤„ç†é»˜è®¤å€¼ï¼Œå¦‚ä¸ºç©ºï¼Œè½¬æ¢ä¸ºç©ºæ•°ç»„ã€‚
         if (defaultValues == null || defaultValues.length == 1 && defaultValues[0] == null) {
             defaultValues = EMPTY_OBJECT_ARRAY;
         }
 
-        // ¶ÔÓÚprimitiveÀàĞÍ£¬×ª»»ÎªÏµÍ³Ä¬ÈÏÖµ¡£
+        // å¯¹äºprimitiveç±»å‹ï¼Œè½¬æ¢ä¸ºç³»ç»Ÿé»˜è®¤å€¼ã€‚
         if (type.isPrimitive()) {
             isPrimitive = true;
             type = ClassUtil.getWrapperTypeIfPrimitive(type);
@@ -456,10 +456,10 @@ public class ValueListSupport implements ValueList {
             }
         }
 
-        // È¡µÃÖµ£¬¼ÙÈç²ÎÊı²»´æÔÚ£¬ÔòÈ¡Ä¬ÈÏÖµ¡£
+        // å–å¾—å€¼ï¼Œå‡å¦‚å‚æ•°ä¸å­˜åœ¨ï¼Œåˆ™å–é»˜è®¤å€¼ã€‚
         Object[] values = getValues(defaultValues);
 
-        // ÌØÊâÇé¿ö£¬[""]Ò²È¡Ä¬ÈÏÖµ¡£
+        // ç‰¹æ®Šæƒ…å†µï¼Œ[""]ä¹Ÿå–é»˜è®¤å€¼ã€‚
         if (values.length == 1 && isEmptyObject(values[0])) {
             values = defaultValues;
         }
@@ -537,94 +537,94 @@ public class ValueListSupport implements ValueList {
     }
 
     // =============================================================
-    //  Ìí¼ÓºÍĞŞ¸Ä²ÎÊıµÄ·½·¨
+    //  æ·»åŠ å’Œä¿®æ”¹å‚æ•°çš„æ–¹æ³•
     // =============================================================
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param value ²ÎÊıÖµ
+     * @param value å‚æ•°å€¼
      */
     public void addValue(boolean value) {
         addValue(Boolean.toString(value));
     }
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param value ²ÎÊıÖµ
+     * @param value å‚æ•°å€¼
      */
     public void addValue(byte value) {
         addValue(Byte.toString(value));
     }
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param value ²ÎÊıÖµ
+     * @param value å‚æ•°å€¼
      */
     public void addValue(char value) {
         addValue(Character.toString(value));
     }
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param value ²ÎÊıÖµ
+     * @param value å‚æ•°å€¼
      */
     public void addValue(double value) {
         addValue(Double.toString(value));
     }
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param value ²ÎÊıÖµ
+     * @param value å‚æ•°å€¼
      */
     public void addValue(float value) {
         addValue(Float.toString(value));
     }
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param value ²ÎÊıÖµ
+     * @param value å‚æ•°å€¼
      */
     public void addValue(int value) {
         addValue(Integer.toString(value));
     }
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param value ²ÎÊıÖµ
+     * @param value å‚æ•°å€¼
      */
     public void addValue(long value) {
         addValue(Long.toString(value));
     }
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param value ²ÎÊıÖµ
+     * @param value å‚æ•°å€¼
      */
     public void addValue(short value) {
         addValue(Short.toString(value));
     }
 
     /**
-     * Ìí¼Ó²ÎÊıÃû/²ÎÊıÖµ¡£
+     * æ·»åŠ å‚æ•°å/å‚æ•°å€¼ã€‚
      * 
-     * @param value ²ÎÊıÖµ
+     * @param value å‚æ•°å€¼
      */
     public void addValue(Object value) {
         values.add(value);
     }
 
     /**
-     * ÉèÖÃ²ÎÊıÖµ¡£ºÍ<code>add</code>·½·¨²»Í¬£¬´Ë·½·¨½«¸²¸ÇÔ­ÓĞµÄÖµ¡£
+     * è®¾ç½®å‚æ•°å€¼ã€‚å’Œ<code>add</code>æ–¹æ³•ä¸åŒï¼Œæ­¤æ–¹æ³•å°†è¦†ç›–åŸæœ‰çš„å€¼ã€‚
      * 
-     * @param value ²ÎÊıÖµ
+     * @param value å‚æ•°å€¼
      */
     public void setValue(Object value) {
         clear();
@@ -632,9 +632,9 @@ public class ValueListSupport implements ValueList {
     }
 
     /**
-     * ÉèÖÃ²ÎÊıÖµ¡£ºÍ<code>add</code>·½·¨²»Í¬£¬´Ë·½·¨½«¸²¸ÇÔ­ÓĞµÄÖµ¡£
+     * è®¾ç½®å‚æ•°å€¼ã€‚å’Œ<code>add</code>æ–¹æ³•ä¸åŒï¼Œæ­¤æ–¹æ³•å°†è¦†ç›–åŸæœ‰çš„å€¼ã€‚
      * 
-     * @param values ²ÎÊıÖµ
+     * @param values å‚æ•°å€¼
      */
     public void setValues(Object[] values) {
         clear();
@@ -647,29 +647,29 @@ public class ValueListSupport implements ValueList {
     }
 
     // =============================================================
-    //  ¸¨Öú·½·¨
+    //  è¾…åŠ©æ–¹æ³•
     // =============================================================
 
     /**
-     * È¡µÃÖµµÄ¸öÊı¡£
+     * å–å¾—å€¼çš„ä¸ªæ•°ã€‚
      * 
-     * @return ÖµµÄ¸öÊı
+     * @return å€¼çš„ä¸ªæ•°
      */
     public int size() {
         return values.size();
     }
 
     /**
-     * Çå³ıËùÓĞÖµ¡£
+     * æ¸…é™¤æ‰€æœ‰å€¼ã€‚
      */
     protected void clear() {
         values.clear();
     }
 
     /**
-     * È¡µÃ×Ö·û´®±íÊ¾¡£
+     * å–å¾—å­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      * 
-     * @return ×Ö·û´®±íÊ¾
+     * @return å­—ç¬¦ä¸²è¡¨ç¤º
      */
     @Override
     public String toString() {

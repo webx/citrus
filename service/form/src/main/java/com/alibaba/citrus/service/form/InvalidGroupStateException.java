@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.form;
 
 /**
- * ´ú±íÒ»¸ögroup instance×´Ì¬²»¶ÔµÄÔËĞĞÊ±Òì³£¡£
+ * ä»£è¡¨ä¸€ä¸ªgroup instanceçŠ¶æ€ä¸å¯¹çš„è¿è¡Œæ—¶å¼‚å¸¸ã€‚
  * 
  * @author Michael Zhou
  */

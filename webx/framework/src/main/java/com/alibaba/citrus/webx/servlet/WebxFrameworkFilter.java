@@ -38,7 +38,7 @@ import com.alibaba.citrus.webx.context.WebxComponentsContext;
 import com.alibaba.citrus.webx.util.RequestURIFilter;
 
 /**
- * ³õÊ¼»¯springÈİÆ÷µÄfilter¡£
+ * åˆå§‹åŒ–springå®¹å™¨çš„filterã€‚
  * 
  * @author Michael Zhou
  */
@@ -50,43 +50,43 @@ public class WebxFrameworkFilter extends FilterBean {
     private RequestURIFilter passthruFilter;
 
     /**
-     * ÓÃÓÚÔÚservletContextÖĞ±£´æparent contextµÄattribute key¡£
+     * ç”¨äºåœ¨servletContextä¸­ä¿å­˜parent contextçš„attribute keyã€‚
      */
     public final String getParentContextAttribute() {
         return parentContextAttribute;
     }
 
     /**
-     * ÉèÖÃÓÃÓÚÔÚservletContextÖĞ±£´æparent contextµÄattribute key¡£
+     * è®¾ç½®ç”¨äºåœ¨servletContextä¸­ä¿å­˜parent contextçš„attribute keyã€‚
      */
     public final void setParentContextAttribute(String parentContextAttribute) {
         this.parentContextAttribute = trimToNull(parentContextAttribute);
     }
 
     /**
-     * ÉèÖÃÒªÅÅ³ıµôµÄURL¡£
+     * è®¾ç½®è¦æ’é™¤æ‰çš„URLã€‚
      */
     public void setExcludes(String excludes) {
         excludeFilter = new RequestURIFilter(excludes);
     }
 
     /**
-     * ÉèÖÃ²»ĞèÒªÖ´ĞĞpipelineµÄURL¡£¸Ã¹¦ÄÜ¿É±»ÓÃÓÚ½«webx×÷ÎªÆäËüservletµÄfilter£¬ÕâÑù£¬
-     * ÆäËüµÄservlet¿ÉÒÔÊ¹ÓÃwebxËùÌá¹©µÄrequest context¹¦ÄÜ£¬ÀıÈç£ºsessionµÈ¡£
+     * è®¾ç½®ä¸éœ€è¦æ‰§è¡Œpipelineçš„URLã€‚è¯¥åŠŸèƒ½å¯è¢«ç”¨äºå°†webxä½œä¸ºå…¶å®ƒservletçš„filterï¼Œè¿™æ ·ï¼Œ
+     * å…¶å®ƒçš„servletå¯ä»¥ä½¿ç”¨webxæ‰€æä¾›çš„request contextåŠŸèƒ½ï¼Œä¾‹å¦‚ï¼šsessionç­‰ã€‚
      */
     public void setPassthru(String passthru) {
         passthruFilter = new RequestURIFilter(passthru);
     }
 
     /**
-     * È¡µÃËùÓĞcomponentsµÄĞÅÏ¢¡£
+     * å–å¾—æ‰€æœ‰componentsçš„ä¿¡æ¯ã€‚
      */
     public WebxComponents getWebxComponents() {
         return components;
     }
 
     /**
-     * ³õÊ¼»¯filter¡£
+     * åˆå§‹åŒ–filterã€‚
      */
     @Override
     protected final void init() throws Exception {
@@ -111,11 +111,11 @@ public class WebxFrameworkFilter extends FilterBean {
     }
 
     /**
-     * ÔÚ<code>ServletContext</code>ÖĞ²éÕÒparent context¡£
+     * åœ¨<code>ServletContext</code>ä¸­æŸ¥æ‰¾parent contextã€‚
      * <ul>
-     * <li>¼ÙÈçÎ´Ö¸¶¨<code>parentContextAttribute</code>£¬Ôò²éÕÒÄ¬ÈÏµÄattribute key¡£</li>
-     * <li>¼ÙÈçÖ¸¶¨ÁËinit-param <code>parentContextAttribute</code>£¬Ôò²éÕÒÖ¸¶¨µÄattribute
-     * key¡£¼ÙÈçÃ»ÕÒµ½£¬Ôò±¨´í¡£</li>
+     * <li>å‡å¦‚æœªæŒ‡å®š<code>parentContextAttribute</code>ï¼Œåˆ™æŸ¥æ‰¾é»˜è®¤çš„attribute keyã€‚</li>
+     * <li>å‡å¦‚æŒ‡å®šäº†init-param <code>parentContextAttribute</code>ï¼Œåˆ™æŸ¥æ‰¾æŒ‡å®šçš„attribute
+     * keyã€‚å‡å¦‚æ²¡æ‰¾åˆ°ï¼Œåˆ™æŠ¥é”™ã€‚</li>
      * </ul>
      */
     private WebApplicationContext findParentContext() {
@@ -139,8 +139,8 @@ public class WebxFrameworkFilter extends FilterBean {
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        // Èç¹ûÖ¸¶¨ÁËexcludes£¬²¢ÇÒµ±Ç°requestURIÆ¥ÅäÈÎºÎÒ»¸öexclude pattern£¬
-        // ÔòÁ¢¼´·ÅÆú¿ØÖÆ£¬½«¿ØÖÆ»¹¸øservlet engine¡£
+        // å¦‚æœæŒ‡å®šäº†excludesï¼Œå¹¶ä¸”å½“å‰requestURIåŒ¹é…ä»»ä½•ä¸€ä¸ªexclude patternï¼Œ
+        // åˆ™ç«‹å³æ”¾å¼ƒæ§åˆ¶ï¼Œå°†æ§åˆ¶è¿˜ç»™servlet engineã€‚
         if (excludeFilter != null && excludeFilter.matches(request)) {
             chain.doFilter(request, response);
             return;

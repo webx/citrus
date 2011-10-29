@@ -30,7 +30,7 @@ import com.alibaba.citrus.webx.handler.support.AbstractVisitor;
 import com.alibaba.citrus.webx.handler.support.AutowiredRequestProcessor;
 
 /**
- * ÓÃÀ´Õ¹Ê¾schemaÒ³ÃæµÄhandler¡£
+ * ç”¨æ¥å±•ç¤ºschemaé¡µé¢çš„handlerã€‚
  * 
  * @author Michael Zhou
  */
@@ -76,14 +76,14 @@ public class SchemaExporterHandler extends AutowiredRequestProcessor {
     @Override
     public void handleRequest(RequestHandlerContext context) throws Exception {
         try {
-            exporter.processRequest(context); // ÏÈÕÒexporterÖĞµÄ×ÊÔ´
+            exporter.processRequest(context); // å…ˆæ‰¾exporterä¸­çš„èµ„æº
         } catch (ResourceNotFoundException e) {
-            super.handleRequest(context); // Èç¹ûÃ»ÕÒµ½£¬ÔÙÕÒµ±Ç°handlerÉÏÏÂÎÄÖĞµÄ×ÊÔ´
+            super.handleRequest(context); // å¦‚æœæ²¡æ‰¾åˆ°ï¼Œå†æ‰¾å½“å‰handlerä¸Šä¸‹æ–‡ä¸­çš„èµ„æº
         }
     }
 
     @Override
     protected void renderPage(RequestHandlerContext request, String resourceName) throws IOException {
-        // ±¾Ò³ÃæÊÇµ÷ÓÃSchemaExporterWEBÀ´Êä³ö£¬Òò´Ë£¬Ã»ÓĞ×Ô¼ºµÄÒ³ÃæÂß¼­¡£
+        // æœ¬é¡µé¢æ˜¯è°ƒç”¨SchemaExporterWEBæ¥è¾“å‡ºï¼Œå› æ­¤ï¼Œæ²¡æœ‰è‡ªå·±çš„é¡µé¢é€»è¾‘ã€‚
     }
 }

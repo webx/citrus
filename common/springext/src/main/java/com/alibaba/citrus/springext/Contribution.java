@@ -19,32 +19,32 @@ package com.alibaba.citrus.springext;
 
 public interface Contribution {
     /**
-     * È¡µÃconfiguration point¡£
+     * å–å¾—configuration pointã€‚
      */
     ConfigurationPoint getConfigurationPoint();
 
     /**
-     * È¡µÃcontributionµÄÃû³Æ¡£
+     * å–å¾—contributionçš„åç§°ã€‚
      */
     String getName();
 
     /**
-     * È¡µÃcontributionµÄÀàĞÍ¡£
+     * å–å¾—contributionçš„ç±»å‹ã€‚
      */
     ContributionType getType();
 
     /**
-     * È¡µÃcontributionµÄÊµÏÖÀàÃû³Æ¡£
+     * å–å¾—contributionçš„å®ç°ç±»åç§°ã€‚
      */
     String getImplementationClassName();
 
     /**
-     * È¡µÃschemas¡£
+     * å–å¾—schemasã€‚
      */
     VersionableSchemas getSchemas();
 
     /**
-     * È¡µÃÃèÊö¡£
+     * å–å¾—æè¿°ã€‚
      */
     String getDescription();
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="GB18030"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -12,7 +12,7 @@
     <artifactId>citrus-common-generictype</artifactId>
     <name>Citrus Generic Type Analyzer</name>
     <build>
-        <!-- 因尚未开发完成，故略过测试。 -->
+        <!-- 鍥犲皻鏈紑鍙戝畬鎴愶紝鏁呯暐杩囨祴璇曘�� -->
         <plugins>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>

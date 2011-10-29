@@ -24,7 +24,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * ·½±ãÊ¹ÓÃ{@link TypeInfo}µÄ¹¤¾ß¡£
+ * æ–¹ä¾¿ä½¿ç”¨{@link TypeInfo}çš„å·¥å…·ã€‚
  * 
  * @author Michael Zhou
  */
@@ -35,11 +35,11 @@ public class TypeInfoUtil {
     public final static TypeInfo TYPE_VAR_ITERATOR_ELEMENT = factory.getType(Iterator.class.getTypeParameters()[0]);
 
     /**
-     * È¡µÃÖ¸¶¨ÀàĞÍµÄÊµ¼Ê²ÎÊı¡£
+     * å–å¾—æŒ‡å®šç±»å‹çš„å®é™…å‚æ•°ã€‚
      * <p>
-     * ÀıÈç£º<code>class MyClass extends BaseClass&lt;Integer&gt;</code>£¬ÄÇÃ´µ÷ÓÃ£º
-     * <code>resolveParameter(MyClass.class, BaseClass.class, 0)</code>½«·µ»Ø
-     * <code>Integer</code>¡£
+     * ä¾‹å¦‚ï¼š<code>class MyClass extends BaseClass&lt;Integer&gt;</code>ï¼Œé‚£ä¹ˆè°ƒç”¨ï¼š
+     * <code>resolveParameter(MyClass.class, BaseClass.class, 0)</code>å°†è¿”å›
+     * <code>Integer</code>ã€‚
      * </p>
      */
     public static TypeInfo resolveParameter(Class<?> contextClass, Class<?> parentClass, int index) {
@@ -54,14 +54,14 @@ public class TypeInfoUtil {
     }
 
     /**
-     * È¡µÃ{@link Map}µÄkeyÀàĞÍ¡£
+     * å–å¾—{@link Map}çš„keyç±»å‹ã€‚
      */
     public static TypeInfo resolveMapKey(Class<?> mapClass) {
         return resolveMapKey(factory.getClassType(mapClass));
     }
 
     /**
-     * È¡µÃ{@link Map}µÄkeyÀàĞÍ¡£
+     * å–å¾—{@link Map}çš„keyç±»å‹ã€‚
      */
     public static TypeInfo resolveMapKey(TypeInfo mapType) {
         assertTrue(
@@ -72,14 +72,14 @@ public class TypeInfoUtil {
     }
 
     /**
-     * È¡µÃ{@link Map}µÄvalueÀàĞÍ¡£
+     * å–å¾—{@link Map}çš„valueç±»å‹ã€‚
      */
     public static TypeInfo resolveMapValue(Class<?> mapClass) {
         return resolveMapValue(factory.getClassType(mapClass));
     }
 
     /**
-     * È¡µÃ{@link Map}µÄvalueÀàĞÍ¡£
+     * å–å¾—{@link Map}çš„valueç±»å‹ã€‚
      */
     public static TypeInfo resolveMapValue(TypeInfo mapType) {
         assertTrue(
@@ -90,14 +90,14 @@ public class TypeInfoUtil {
     }
 
     /**
-     * È¡µÃ{@link Iterable}µÄelementÀàĞÍ¡£
+     * å–å¾—{@link Iterable}çš„elementç±»å‹ã€‚
      */
     public static TypeInfo resolveIterableElement(Class<?> iterableClass) {
         return resolveIterableElement(factory.getClassType(iterableClass));
     }
 
     /**
-     * È¡µÃ{@link Iterable}µÄelementÀàĞÍ¡£
+     * å–å¾—{@link Iterable}çš„elementç±»å‹ã€‚
      */
     public static TypeInfo resolveIterableElement(TypeInfo iterableType) {
         assertTrue(
@@ -108,14 +108,14 @@ public class TypeInfoUtil {
     }
 
     /**
-     * È¡µÃ{@link Iterator}µÄelementÀàĞÍ¡£
+     * å–å¾—{@link Iterator}çš„elementç±»å‹ã€‚
      */
     public static TypeInfo resolveIteratorElement(Class<?> iteratorClass) {
         return resolveIteratorElement(factory.getClassType(iteratorClass));
     }
 
     /**
-     * È¡µÃ{@link Iterator}µÄelementÀàĞÍ¡£
+     * å–å¾—{@link Iterator}çš„elementç±»å‹ã€‚
      */
     public static TypeInfo resolveIteratorElement(TypeInfo iteratorType) {
         assertTrue(

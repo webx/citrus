@@ -57,7 +57,7 @@ import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
 
 /**
- * ´´½¨ÓÃÓÚ²âÊÔµÄservletÈİÆ÷£¬Ö§³Örequest contexts»úÖÆ¡£
+ * åˆ›å»ºç”¨äºæµ‹è¯•çš„servletå®¹å™¨ï¼Œæ”¯æŒrequest contextsæœºåˆ¶ã€‚
  * 
  * @author Michael Zhou
  */
@@ -161,7 +161,7 @@ public class ServletTestContainer {
     }
 
     /**
-     * ½«·şÎñ¶ËresponseÌá½»µ½client¡£
+     * å°†æœåŠ¡ç«¯responseæäº¤åˆ°clientã€‚
      */
     public void commit() {
         try {
@@ -188,7 +188,7 @@ public class ServletTestContainer {
     }
 
     /**
-     * ²»×öÈÎºÎÊÂµÄservlet¡£
+     * ä¸åšä»»ä½•äº‹çš„servletã€‚
      */
     public static class NoopServlet extends HttpServlet {
         private static final long serialVersionUID = 3034658026956449398L;
@@ -200,8 +200,8 @@ public class ServletTestContainer {
     }
 
     /**
-     * ÓÉÓÚhttpunitÄ¿Ç°Î´ÊµÏÖsetCharacterEncoding·½·¨£¬getQueryString()Ò²ÊµÏÖµÃÓĞÎÊÌâ£¬
-     * ËùÒÔÖ»ÄÜ½«request°ü×°Ò»ÏÂ¡£
+     * ç”±äºhttpunitç›®å‰æœªå®ç°setCharacterEncodingæ–¹æ³•ï¼ŒgetQueryString()ä¹Ÿå®ç°å¾—æœ‰é—®é¢˜ï¼Œ
+     * æ‰€ä»¥åªèƒ½å°†requeståŒ…è£…ä¸€ä¸‹ã€‚
      */
     public static class MyHttpRequest extends HttpServletRequestWrapper {
         private String charset;
@@ -242,7 +242,7 @@ public class ServletTestContainer {
         }
 
         /**
-         * Ä¬ÈÏÊµÏÖ×ÜÊÇ·µ»Ølocalhost£¬Ö»ºÃ¸²¸Ç´Ë·½·¨¡£
+         * é»˜è®¤å®ç°æ€»æ˜¯è¿”å›localhostï¼Œåªå¥½è¦†ç›–æ­¤æ–¹æ³•ã€‚
          */
         @Override
         public String getServerName() {
@@ -254,7 +254,7 @@ public class ServletTestContainer {
         }
 
         /**
-         * Ä¬ÈÏÊµÏÖ×ÜÊÇ·µ»Ø0£¬Ö»ºÃ¸²¸Ç´Ë·½·¨¡£
+         * é»˜è®¤å®ç°æ€»æ˜¯è¿”å›0ï¼Œåªå¥½è¦†ç›–æ­¤æ–¹æ³•ã€‚
          */
         @Override
         public int getServerPort() {
@@ -266,7 +266,7 @@ public class ServletTestContainer {
         }
 
         /**
-         * ¼àÊÓgetSession·½·¨µÄµ÷ÓÃ¡£
+         * ç›‘è§†getSessionæ–¹æ³•çš„è°ƒç”¨ã€‚
          */
         public boolean isSessionCreated() {
             return sessionCreated;
@@ -289,7 +289,7 @@ public class ServletTestContainer {
     }
 
     /**
-     * ÓÉÓÚhttpunitÄ¿Ç°Î´ÊµÏÖcommitÒÔºóÅ×IllegalStateException£¬ËùÒÔÖ»ÄÜ½«response°ü×°Ò»ÏÂ¡£
+     * ç”±äºhttpunitç›®å‰æœªå®ç°commitä»¥åæŠ›IllegalStateExceptionï¼Œæ‰€ä»¥åªèƒ½å°†responseåŒ…è£…ä¸€ä¸‹ã€‚
      */
     public static class MyHttpResponse extends HttpServletResponseWrapper {
         private boolean committed;
@@ -350,7 +350,7 @@ public class ServletTestContainer {
 
         @Override
         public void setLocale(Locale locale) {
-            // ·ÀÖ¹unsupported operation exception
+            // é˜²æ­¢unsupported operation exception
         }
 
         @Override

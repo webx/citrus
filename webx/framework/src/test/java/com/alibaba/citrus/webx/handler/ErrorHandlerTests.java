@@ -77,7 +77,7 @@ public class ErrorHandlerTests extends AbstractWebxTests {
         assertEquals(404, clientResponseCode);
         assertEquals("text/html", clientResponse.getContentType());
 
-        // http unit sendError的实现，真实服务器将返回web.xml中的error-page
+        // http unit sendError鐨勫疄鐜帮紝鐪熷疄鏈嶅姟鍣ㄥ皢杩斿洖web.xml涓殑error-page
         assertThat(clientResponseContent, containsAll("<html><head><title></title></head><body></body></html>"));
     }
 

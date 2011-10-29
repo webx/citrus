@@ -38,7 +38,7 @@ public abstract class AbstractResourceLoaderTests {
     }
 
     /**
-     * ³ýÈ¥resource URLµÄfilter¡£
+     * é™¤åŽ»resource URLçš„filterã€‚
      */
     public static class NoURLFilter implements ResourceFilter {
         public void init(ResourceLoadingService resourceLoadingService) {

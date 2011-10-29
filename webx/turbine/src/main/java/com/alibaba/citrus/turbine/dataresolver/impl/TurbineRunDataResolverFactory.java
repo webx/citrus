@@ -48,7 +48,7 @@ import com.alibaba.citrus.turbine.dataresolver.ContextValue;
 import com.alibaba.citrus.turbine.util.TurbineUtil;
 
 /**
- * È¡µÃºÍ<code>TurbineRunData</code>Ïà¹ØµÄ¶ÔÏó¡£
+ * å–å¾—å’Œ<code>TurbineRunData</code>ç›¸å…³çš„å¯¹è±¡ã€‚
  * <ul>
  * <li>TurbineRunData</li>
  * <li>HttpServletRequest</li>
@@ -58,8 +58,8 @@ import com.alibaba.citrus.turbine.util.TurbineUtil;
  * <li>ParameterParser</li>
  * <li>CookieParser</li>
  * <li>Context</li>
- * <li>RequestContext¼°Æä×ÓÀà</li>
- * <li>ContextÖĞµÄÖµ£¬ĞèÒªÖ¸¶¨<code>@ContextValue("name")</code>×¢½â¡£</li>
+ * <li>RequestContextåŠå…¶å­ç±»</li>
+ * <li>Contextä¸­çš„å€¼ï¼Œéœ€è¦æŒ‡å®š<code>@ContextValue("name")</code>æ³¨è§£ã€‚</li>
  * </ul>
  * 
  * @author Michael Zhou
@@ -85,7 +85,7 @@ public class TurbineRunDataResolverFactory implements DataResolverFactory {
     private int getResolvableTypeIndex(DataResolverContext context) {
         Class<?> type = context.getTypeInfo().getRawType();
 
-        // ÅÅ³ıobject
+        // æ’é™¤object
         if (type.equals(Object.class)) {
             return -1;
         }
@@ -122,7 +122,7 @@ public class TurbineRunDataResolverFactory implements DataResolverFactory {
             return index_Context;
         }
 
-        // typeÊÇRequestContextµÄ×ÓÀà
+        // typeæ˜¯RequestContextçš„å­ç±»
         if (RequestContext.class.isAssignableFrom(type)) {
             return index_RequestContext;
         }
@@ -131,8 +131,8 @@ public class TurbineRunDataResolverFactory implements DataResolverFactory {
     }
 
     public DataResolver getDataResolver(DataResolverContext context) {
-        // µ±ËùĞèÒªµÄ¶ÔÏóÎ´¶¨ÒåÊ±£¬resolver factoryÈÔ¿ÉÒÔ´´½¨£¬µ«ÔÚÈ¡µÃresolverÊ±±¨´í¡£
-        // ÕâÑùÊ¹µÃÍ¬Ò»Ì×ÅäÖÃ¿ÉÓÃÓÚËùÓĞ»·¾³£¬½öµ±ÄãĞèÒª×¢ÈëÌØ¶¨¶ÔÏóÊ±£¬²Å±¨´í¡£
+        // å½“æ‰€éœ€è¦çš„å¯¹è±¡æœªå®šä¹‰æ—¶ï¼Œresolver factoryä»å¯ä»¥åˆ›å»ºï¼Œä½†åœ¨å–å¾—resolveræ—¶æŠ¥é”™ã€‚
+        // è¿™æ ·ä½¿å¾—åŒä¸€å¥—é…ç½®å¯ç”¨äºæ‰€æœ‰ç¯å¢ƒï¼Œä»…å½“ä½ éœ€è¦æ³¨å…¥ç‰¹å®šå¯¹è±¡æ—¶ï¼Œæ‰æŠ¥é”™ã€‚
         assertNotNull(request, "no HttpServletRequest proxy defined");
 
         int resolvableTypeIndex = getResolvableTypeIndex(context);
@@ -179,36 +179,36 @@ public class TurbineRunDataResolverFactory implements DataResolverFactory {
         public Object resolve() {
             switch (resolvableTypeIndex) {
                 case index_TurbineRunData:
-                    // È¡µÃTurbineRunData/Navigator
+                    // å–å¾—TurbineRunData/Navigator
                     return getTurbineRunData();
 
                 case index_HttpServletRequest:
-                    // È¡µÃµ±Ç°µÄrequest
+                    // å–å¾—å½“å‰çš„request
                     return getTurbineRunData().getRequest();
 
                 case index_HttpServletResponse:
-                    // È¡µÃµ±Ç°µÄresponse
+                    // å–å¾—å½“å‰çš„response
                     return getTurbineRunData().getResponse();
 
                 case index_HttpSession:
-                    // È¡µÃµ±Ç°µÄsession
+                    // å–å¾—å½“å‰çš„session
                     return getTurbineRunData().getRequest().getSession();
 
                 case index_ServletContext:
-                    // È¡µÃµ±Ç°µÄservletÈİÆ÷
+                    // å–å¾—å½“å‰çš„servletå®¹å™¨
                     return getTurbineRunData().getRequestContext().getServletContext();
 
                 case index_Parameters:
-                    // È¡µÃµ±Ç°ÇëÇóµÄ²ÎÊı¼¯
+                    // å–å¾—å½“å‰è¯·æ±‚çš„å‚æ•°é›†
                     return getTurbineRunData().getParameters();
 
                 case index_Cookies:
-                    // È¡µÃµ±Ç°ÇëÇóµÄcookie¼¯
+                    // å–å¾—å½“å‰è¯·æ±‚çš„cookieé›†
                     return getTurbineRunData().getCookies();
 
                 case index_Context:
-                    // È¡µÃµ±Ç°µÄcontext£¬
-                    // ¶ÔÓÚcontrol module£¬·µ»Øcontrol context£¬·ñÔò·µ»ØÈ«¾Öcontext¡£
+                    // å–å¾—å½“å‰çš„contextï¼Œ
+                    // å¯¹äºcontrol moduleï¼Œè¿”å›control contextï¼Œå¦åˆ™è¿”å›å…¨å±€contextã€‚
                     String moduleType = getModuleType(context);
 
                     if ("control".equalsIgnoreCase(moduleType)) {
@@ -218,7 +218,7 @@ public class TurbineRunDataResolverFactory implements DataResolverFactory {
                     }
 
                 case index_RequestContext:
-                    // È¡µÃ²ÎÊıÀàĞÍËù¶¨ÒåµÄRequestContext£¬¼ÙÈç²»´æÔÚ£¬Ôò·µ»Ønull
+                    // å–å¾—å‚æ•°ç±»å‹æ‰€å®šä¹‰çš„RequestContextï¼Œå‡å¦‚ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›null
                     @SuppressWarnings("unchecked")
                     Class<? extends RequestContext> requestContextType = (Class<? extends RequestContext>) context
                             .getTypeInfo().getRawType();
@@ -246,14 +246,14 @@ public class TurbineRunDataResolverFactory implements DataResolverFactory {
             Context turbineContext = rundata.getCurrentContext();
 
             if (turbineContext == null) {
-                turbineContext = rundata.getContext(); // Ä¬ÈÏÈ¡µÃscreen context
+                turbineContext = rundata.getContext(); // é»˜è®¤å–å¾—screen context
             }
 
             Class<?> paramType = context.getTypeInfo().getRawType();
             Object value = turbineContext.get(name);
 
             if (paramType.isPrimitive()) {
-                // ½«nullÖµ×ª»»³ÉprimitiveÄ¬ÈÏÖµ£¬±ÜÃâ³ö´í¡£
+                // å°†nullå€¼è½¬æ¢æˆprimitiveé»˜è®¤å€¼ï¼Œé¿å…å‡ºé”™ã€‚
                 if (value == null && paramType.isPrimitive()) {
                     value = getPrimitiveDefaultValue(paramType);
                 }

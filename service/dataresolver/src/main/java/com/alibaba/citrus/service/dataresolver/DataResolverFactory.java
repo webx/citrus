@@ -18,16 +18,16 @@
 package com.alibaba.citrus.service.dataresolver;
 
 /**
- * ´´½¨Êı¾İ½âÎöÆ÷µÄ¹¤³§¡£
+ * åˆ›å»ºæ•°æ®è§£æå™¨çš„å·¥å‚ã€‚
  * 
  * @author Michael Zhou
  */
 public interface DataResolverFactory {
     /**
-     * È¡µÃÖ¸¶¨genericÀàĞÍ¡¢Ö¸¶¨annotationsµÄ²ÎÊı»òpropertyµÄÊı¾İ½âÎöÆ÷¡£
+     * å–å¾—æŒ‡å®šgenericç±»å‹ã€æŒ‡å®šannotationsçš„å‚æ•°æˆ–propertyçš„æ•°æ®è§£æå™¨ã€‚
      * <p>
-     * ¼ÙÈçµ±Ç°factory²»ÄÜ½ÓÊÜÖ¸¶¨µÄÀàĞÍºÍannotation£¬Ôò·µ»Ø<code>null</code>£¬
-     * <code>DataResolverService</code>»á³¢ÊÔÏÂÒ»¸öfactory£¬Ö±µ½ÕÒµ½ºÏÊÊµÄÎªÖ¹¡£
+     * å‡å¦‚å½“å‰factoryä¸èƒ½æ¥å—æŒ‡å®šçš„ç±»å‹å’Œannotationï¼Œåˆ™è¿”å›<code>null</code>ï¼Œ
+     * <code>DataResolverService</code>ä¼šå°è¯•ä¸‹ä¸€ä¸ªfactoryï¼Œç›´åˆ°æ‰¾åˆ°åˆé€‚çš„ä¸ºæ­¢ã€‚
      * </p>
      */
     DataResolver getDataResolver(DataResolverContext context);

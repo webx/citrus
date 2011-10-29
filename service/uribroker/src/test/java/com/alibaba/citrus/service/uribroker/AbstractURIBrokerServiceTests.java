@@ -88,7 +88,7 @@ public abstract class AbstractURIBrokerServiceTests {
     }
 
     /**
-     * ²»×öÈÎºÎÊÂµÄservlet¡£
+     * ä¸åšä»»ä½•äº‹çš„servletã€‚
      */
     public static class NoopServlet extends HttpServlet {
         private static final long serialVersionUID = 3034658026956449398L;

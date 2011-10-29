@@ -41,27 +41,27 @@ import com.alibaba.citrus.util.collection.ArrayHashMap;
 import com.alibaba.citrus.util.collection.ArrayHashSet;
 
 /**
- * ·½±ã´´½¨ÈİÆ÷¶ÔÏóµÄ¹¤¾ß¡£
+ * æ–¹ä¾¿åˆ›å»ºå®¹å™¨å¯¹è±¡çš„å·¥å…·ã€‚
  * 
  * @author Michael Zhou
  */
 public final class CollectionUtil {
     /**
-     * ´´½¨Ò»¸ö<code>ArrayList</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>ArrayList</code>ã€‚
      */
     public static <T> ArrayList<T> createArrayList() {
         return new ArrayList<T>();
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>ArrayList</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>ArrayList</code>ã€‚
      */
     public static <T> ArrayList<T> createArrayList(int initialCapacity) {
         return new ArrayList<T>(initialCapacity);
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>ArrayList</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>ArrayList</code>ã€‚
      */
     public static <T> ArrayList<T> createArrayList(Iterable<? extends T> c) {
         ArrayList<T> list;
@@ -80,7 +80,7 @@ public final class CollectionUtil {
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>ArrayList</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>ArrayList</code>ã€‚
      */
     public static <T, V extends T> ArrayList<T> createArrayList(V... args) {
         if (args == null || args.length == 0) {
@@ -97,14 +97,14 @@ public final class CollectionUtil {
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>LinkedList</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>LinkedList</code>ã€‚
      */
     public static <T> LinkedList<T> createLinkedList() {
         return new LinkedList<T>();
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>LinkedList</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>LinkedList</code>ã€‚
      */
     public static <T> LinkedList<T> createLinkedList(Iterable<? extends T> c) {
         LinkedList<T> list = new LinkedList<T>();
@@ -115,7 +115,7 @@ public final class CollectionUtil {
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>LinkedList</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>LinkedList</code>ã€‚
      */
     public static <T, V extends T> LinkedList<T> createLinkedList(V... args) {
         LinkedList<T> list = new LinkedList<T>();
@@ -130,10 +130,10 @@ public final class CollectionUtil {
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>List</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>List</code>ã€‚
      * <p>
-     * ºÍ{@code createArrayList(args)}²»Í¬£¬±¾·½·¨»á·µ»ØÒ»¸ö²»¿É±ä³¤¶ÈµÄÁĞ±í£¬ÇÒĞÔÄÜ¸ßÓÚ
-     * {@code createArrayList(args)}¡£
+     * å’Œ{@code createArrayList(args)}ä¸åŒï¼Œæœ¬æ–¹æ³•ä¼šè¿”å›ä¸€ä¸ªä¸å¯å˜é•¿åº¦çš„åˆ—è¡¨ï¼Œä¸”æ€§èƒ½é«˜äº
+     * {@code createArrayList(args)}ã€‚
      * </p>
      */
     public static <T> List<T> asList(T... args) {
@@ -145,77 +145,77 @@ public final class CollectionUtil {
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>HashMap</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>HashMap</code>ã€‚
      */
     public static <K, V> HashMap<K, V> createHashMap() {
         return new HashMap<K, V>();
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>HashMap</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>HashMap</code>ã€‚
      */
     public static <K, V> HashMap<K, V> createHashMap(int initialCapacity) {
         return new HashMap<K, V>(initialCapacity);
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>ArrayHashMap</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>ArrayHashMap</code>ã€‚
      */
     public static <K, V> ArrayHashMap<K, V> createArrayHashMap() {
         return new ArrayHashMap<K, V>();
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>ArrayHashMap</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>ArrayHashMap</code>ã€‚
      */
     public static <K, V> ArrayHashMap<K, V> createArrayHashMap(int initialCapacity) {
         return new ArrayHashMap<K, V>(initialCapacity);
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>LinkedHashMap</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>LinkedHashMap</code>ã€‚
      */
     public static <K, V> LinkedHashMap<K, V> createLinkedHashMap() {
         return new LinkedHashMap<K, V>();
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>LinkedHashMap</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>LinkedHashMap</code>ã€‚
      */
     public static <K, V> LinkedHashMap<K, V> createLinkedHashMap(int initialCapacity) {
         return new LinkedHashMap<K, V>(initialCapacity);
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>TreeMap</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>TreeMap</code>ã€‚
      */
     public static <K, V> TreeMap<K, V> createTreeMap() {
         return new TreeMap<K, V>();
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>TreeMap</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>TreeMap</code>ã€‚
      */
     public static <K, V> TreeMap<K, V> createTreeMap(Comparator<? super K> comparator) {
         return new TreeMap<K, V>(comparator);
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>ConcurrentHashMap</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>ConcurrentHashMap</code>ã€‚
      */
     public static <K, V> ConcurrentHashMap<K, V> createConcurrentHashMap() {
         return new ConcurrentHashMap<K, V>();
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>HashSet</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>HashSet</code>ã€‚
      */
     public static <T> HashSet<T> createHashSet() {
         return new HashSet<T>();
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>HashSet</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>HashSet</code>ã€‚
      */
     public static <T, V extends T> HashSet<T> createHashSet(V... args) {
         if (args == null || args.length == 0) {
@@ -232,7 +232,7 @@ public final class CollectionUtil {
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>HashSet</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>HashSet</code>ã€‚
      */
     public static <T> HashSet<T> createHashSet(Iterable<? extends T> c) {
         HashSet<T> set;
@@ -248,14 +248,14 @@ public final class CollectionUtil {
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>ArrayHashSet</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>ArrayHashSet</code>ã€‚
      */
     public static <T> ArrayHashSet<T> createArrayHashSet() {
         return new ArrayHashSet<T>();
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>ArrayHashSet</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>ArrayHashSet</code>ã€‚
      */
     public static <T, V extends T> ArrayHashSet<T> createArrayHashSet(V... args) {
         if (args == null || args.length == 0) {
@@ -272,7 +272,7 @@ public final class CollectionUtil {
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>ArrayHashSet</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>ArrayHashSet</code>ã€‚
      */
     public static <T> ArrayHashSet<T> createArrayHashSet(Iterable<? extends T> c) {
         ArrayHashSet<T> set;
@@ -288,14 +288,14 @@ public final class CollectionUtil {
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>LinkedHashSet</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>LinkedHashSet</code>ã€‚
      */
     public static <T> LinkedHashSet<T> createLinkedHashSet() {
         return new LinkedHashSet<T>();
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>LinkedHashSet</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>LinkedHashSet</code>ã€‚
      */
     public static <T, V extends T> LinkedHashSet<T> createLinkedHashSet(V... args) {
         if (args == null || args.length == 0) {
@@ -312,7 +312,7 @@ public final class CollectionUtil {
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>LinkedHashSet</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>LinkedHashSet</code>ã€‚
      */
     public static <T> LinkedHashSet<T> createLinkedHashSet(Iterable<? extends T> c) {
         LinkedHashSet<T> set;
@@ -328,14 +328,14 @@ public final class CollectionUtil {
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>TreeSet</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>TreeSet</code>ã€‚
      */
     public static <T> TreeSet<T> createTreeSet() {
         return new TreeSet<T>();
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>TreeSet</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>TreeSet</code>ã€‚
      */
     @SuppressWarnings("unchecked")
     public static <T, V extends T> TreeSet<T> createTreeSet(V... args) {
@@ -343,21 +343,21 @@ public final class CollectionUtil {
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>TreeSet</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>TreeSet</code>ã€‚
      */
     public static <T> TreeSet<T> createTreeSet(Iterable<? extends T> c) {
         return createTreeSet(null, c);
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>TreeSet</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>TreeSet</code>ã€‚
      */
     public static <T> TreeSet<T> createTreeSet(Comparator<? super T> comparator) {
         return new TreeSet<T>(comparator);
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>TreeSet</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>TreeSet</code>ã€‚
      */
     public static <T, V extends T> TreeSet<T> createTreeSet(Comparator<? super T> comparator, V... args) {
         TreeSet<T> set = new TreeSet<T>(comparator);
@@ -372,7 +372,7 @@ public final class CollectionUtil {
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>TreeSet</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>TreeSet</code>ã€‚
      */
     public static <T> TreeSet<T> createTreeSet(Comparator<? super T> comparator, Iterable<? extends T> c) {
         TreeSet<T> set = new TreeSet<T>(comparator);
@@ -383,7 +383,7 @@ public final class CollectionUtil {
     }
 
     /**
-     * ½«ÁĞ±íÖĞµÄ¶ÔÏóÁ¬½Ó³É×Ö·û´®¡£
+     * å°†åˆ—è¡¨ä¸­çš„å¯¹è±¡è¿æ¥æˆå­—ç¬¦ä¸²ã€‚
      */
     public static String join(Iterable<?> objs, String sep) {
         StringBuilder buf = new StringBuilder();
@@ -394,7 +394,7 @@ public final class CollectionUtil {
     }
 
     /**
-     * ½«ÁĞ±íÖĞµÄ¶ÔÏóÁ¬½ÓÆğÀ´¡£
+     * å°†åˆ—è¡¨ä¸­çš„å¯¹è±¡è¿æ¥èµ·æ¥ã€‚
      */
     public static void join(StringBuilder buf, Iterable<?> objs, String sep) {
         try {
@@ -405,7 +405,7 @@ public final class CollectionUtil {
     }
 
     /**
-     * ½«ÁĞ±íÖĞµÄ¶ÔÏóÁ¬½ÓÆğÀ´¡£
+     * å°†åˆ—è¡¨ä¸­çš„å¯¹è±¡è¿æ¥èµ·æ¥ã€‚
      */
     public static void join(Appendable buf, Iterable<?> objs, String sep) throws IOException {
         if (objs == null) {

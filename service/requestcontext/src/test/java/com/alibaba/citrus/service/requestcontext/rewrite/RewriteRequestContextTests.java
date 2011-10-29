@@ -66,7 +66,7 @@ public class RewriteRequestContextTests extends AbstractRequestContextsTests<Rew
     public void emptyRules() throws Exception {
         initRequest("/servlet/test.htm", "rewrite_empty", null, -1);
 
-        // ÎÞ¹æÔò£¬ÎÞ±ä»¯
+        // æ— è§„åˆ™ï¼Œæ— å˜åŒ–
         assertEquals("/servlet", newRequest.getServletPath());
         assertEquals("/test.htm", newRequest.getPathInfo());
 
@@ -103,7 +103,7 @@ public class RewriteRequestContextTests extends AbstractRequestContextsTests<Rew
 
         commitToClient();
 
-        // ÓÉÓÚhttpunit²¢²»ÖªµÀ¶Ë¿ÚµÄÐÞ¸Ä£¬ËùÒÔÕâÀï»¹ÊÇ80¶Ë¿Ú
+        // ç”±äºŽhttpunitå¹¶ä¸çŸ¥é“ç«¯å£çš„ä¿®æ”¹ï¼Œæ‰€ä»¥è¿™é‡Œè¿˜æ˜¯80ç«¯å£
         assertEquals("http://www.taobao.com/servlet/test2/hello.htm?a=1", clientResponse.getURL().toString());
         assertEquals(302, clientResponse.getResponseCode());
         assertEquals("http://www.taobao.com:8080/servlet/test2/new_hello.htm",
@@ -135,48 +135,48 @@ public class RewriteRequestContextTests extends AbstractRequestContextsTests<Rew
 
     @Test
     public void test3_internal_redirect_prefix_mapping() throws Exception {
-        // ServletÎªÇ°×ºÓ³Éä£º/servlet/*
+        // Servletä¸ºå‰ç¼€æ˜ å°„ï¼š/servlet/*
         initRequest("/servlet/test3/hello.htm");
 
-        // ÖØÐ´ÒÔºó£¬±£³ÖÔ­ÓÐµÄservletPath¡£
+        // é‡å†™ä»¥åŽï¼Œä¿æŒåŽŸæœ‰çš„servletPathã€‚
         assertEquals("/servlet", newRequest.getServletPath());
         assertEquals("/test3/new_hello.htm", newRequest.getPathInfo());
 
-        // Request URI´ú±íµÄÊÇHTTPÇëÇóµÄÐÅÏ¢£¬¹Ê²»±ä¡£
+        // Request URIä»£è¡¨çš„æ˜¯HTTPè¯·æ±‚çš„ä¿¡æ¯ï¼Œæ•…ä¸å˜ã€‚
         assertEquals("/servlet/test3/hello.htm", newRequest.getRequestURI());
 
-        // Request URLÒ²²»±ä¡£
+        // Request URLä¹Ÿä¸å˜ã€‚
         assertEquals("http://www.taobao.com/servlet/test3/hello.htm", newRequest.getRequestURL().toString());
     }
 
     @Test
     public void test3_5_internal_redirect_prefix_mapping() throws Exception {
-        // ServletÎªÇ°×ºÓ³Éä£º/servlet/*
+        // Servletä¸ºå‰ç¼€æ˜ å°„ï¼š/servlet/*
         initRequest("/servlet/test3.5/hello.htm");
 
-        // ÖØÐ´ÒÔºó£¬servletPath±»¸Ä±ä¡£
+        // é‡å†™ä»¥åŽï¼ŒservletPathè¢«æ”¹å˜ã€‚
         assertEquals("", newRequest.getServletPath());
         assertEquals("/new_servlet/test3.5/new_hello.htm", newRequest.getPathInfo());
 
-        // Request URI´ú±íµÄÊÇHTTPÇëÇóµÄÐÅÏ¢£¬¹Ê²»±ä¡£
+        // Request URIä»£è¡¨çš„æ˜¯HTTPè¯·æ±‚çš„ä¿¡æ¯ï¼Œæ•…ä¸å˜ã€‚
         assertEquals("/servlet/test3.5/hello.htm", newRequest.getRequestURI());
 
-        // Request URLÒ²²»±ä¡£
+        // Request URLä¹Ÿä¸å˜ã€‚
         assertEquals("http://www.taobao.com/servlet/test3.5/hello.htm", newRequest.getRequestURL().toString());
     }
 
     @Test
     public void test3_internal_redirect_suffix_mapping() throws Exception {
-        // ServletÎªºó×ºÓ³Éä£º*.do
+        // Servletä¸ºåŽç¼€æ˜ å°„ï¼š*.do
         initRequest("/test3/hello.do");
 
         assertEquals("/test3/new_hello.do", newRequest.getServletPath());
         assertEquals(null, newRequest.getPathInfo());
 
-        // Request URI´ú±íµÄÊÇHTTPÇëÇóµÄÐÅÏ¢£¬¹Ê²»±ä¡£
+        // Request URIä»£è¡¨çš„æ˜¯HTTPè¯·æ±‚çš„ä¿¡æ¯ï¼Œæ•…ä¸å˜ã€‚
         assertEquals("/test3/hello.do", newRequest.getRequestURI());
 
-        // Request URLÒ²²»±ä¡£
+        // Request URLä¹Ÿä¸å˜ã€‚
         assertEquals("http://www.taobao.com/test3/hello.do", newRequest.getRequestURL().toString());
     }
 
@@ -195,11 +195,11 @@ public class RewriteRequestContextTests extends AbstractRequestContextsTests<Rew
     public void test5_clear_parameters() throws Exception {
         initRequest("/servlet/test5/hello.htm?x=1&y=2&z=3");
 
-        // Â·¾¶²»±ä
+        // è·¯å¾„ä¸å˜
         assertEquals("/servlet", newRequest.getServletPath());
         assertEquals("/test5/hello.htm", newRequest.getPathInfo());
 
-        // ²ÎÊý±»Çå³ý
+        // å‚æ•°è¢«æ¸…é™¤
         assertNull(newRequest.getParameter("x"));
         assertNull(newRequest.getParameter("y"));
         assertNull(newRequest.getParameter("z"));
@@ -213,11 +213,11 @@ public class RewriteRequestContextTests extends AbstractRequestContextsTests<Rew
     public void test6_reserve_parameters() throws Exception {
         initRequest("/servlet/test6/hello.htm?x=1&y=2&z=3");
 
-        // Â·¾¶²»±ä
+        // è·¯å¾„ä¸å˜
         assertEquals("/servlet", newRequest.getServletPath());
         assertEquals("/test6/hello.htm", newRequest.getPathInfo());
 
-        // ²ÎÊý±»±£Áô
+        // å‚æ•°è¢«ä¿ç•™
         assertNull(newRequest.getParameter("x"));
         assertArrayEquals(new String[] { "2" }, newRequest.getParameterValues("y"));
         assertArrayEquals(new String[] { "3" }, newRequest.getParameterValues("z"));
@@ -229,13 +229,13 @@ public class RewriteRequestContextTests extends AbstractRequestContextsTests<Rew
 
     @Test
     public void test7_chaining() throws Exception {
-        // htmºó×º±»Í¨¹ý
+        // htmåŽç¼€è¢«é€šè¿‡
         initRequest("/servlet/test7/hello.htm");
 
         assertEquals("/servlet", newRequest.getServletPath());
         assertEquals("/test7/new_hello.htm", newRequest.getPathInfo());
 
-        // doºó×º±»ÖÐÖ¹
+        // doåŽç¼€è¢«ä¸­æ­¢
         initRequest("/servlet/test7/hello.do");
 
         assertEquals("/servlet", newRequest.getServletPath());
@@ -246,7 +246,7 @@ public class RewriteRequestContextTests extends AbstractRequestContextsTests<Rew
     public void test8_handlers_normalizeURL() throws Exception {
         initRequest("/servlet/test8/HelloWorld/INDEX.htm");
 
-        // Â·¾¶±ä³ÉÐ¡Ð´¼ÓÏÂ»®Ïß
+        // è·¯å¾„å˜æˆå°å†™åŠ ä¸‹åˆ’çº¿
         assertEquals("/servlet", newRequest.getServletPath());
         assertEquals("/test_8/hello_world/new_index.htm", newRequest.getPathInfo());
     }

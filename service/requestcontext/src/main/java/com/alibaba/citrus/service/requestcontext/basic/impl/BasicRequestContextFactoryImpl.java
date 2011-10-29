@@ -22,7 +22,7 @@ import com.alibaba.citrus.service.requestcontext.basic.BasicRequestContext;
 import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextFactory;
 
 /**
- * ´´½¨<code>BasicRequestContext</code>µÄ¹¤³§¡£
+ * åˆ›å»º<code>BasicRequestContext</code>çš„å·¥å‚ã€‚
  * 
  * @author Michael Zhou
  */
@@ -34,9 +34,9 @@ public class BasicRequestContextFactoryImpl extends AbstractRequestContextFactor
     }
 
     /**
-     * °ü×°Ò»¸örequest context¡£
+     * åŒ…è£…ä¸€ä¸ªrequest contextã€‚
      * 
-     * @param wrappedContext ±»°ü×°µÄ<code>RequestContext</code>¶ÔÏó
+     * @param wrappedContext è¢«åŒ…è£…çš„<code>RequestContext</code>å¯¹è±¡
      * @return request context
      */
     public BasicRequestContext getRequestContextWrapper(RequestContext wrappedContext) {
@@ -44,14 +44,14 @@ public class BasicRequestContextFactoryImpl extends AbstractRequestContextFactor
     }
 
     /**
-     * ±¾ÀàÌá¹©ÁËÀ¹½ØheadersµÄ¹¦ÄÜ¡£
+     * æœ¬ç±»æä¾›äº†æ‹¦æˆªheadersçš„åŠŸèƒ½ã€‚
      */
     public String[] getFeatures() {
         return new String[] { "headerInterceptors" };
     }
 
     /**
-     * ±¾ÀàÌá¹©ÁË»ù´¡ĞÔµÄ°²È«»úÖÆ£¬Òò´ËÓ¦¸Ã°ÑËü·ÅÔÚ×îÇ°Ãæ¡£
+     * æœ¬ç±»æä¾›äº†åŸºç¡€æ€§çš„å®‰å…¨æœºåˆ¶ï¼Œå› æ­¤åº”è¯¥æŠŠå®ƒæ”¾åœ¨æœ€å‰é¢ã€‚
      */
     public FeatureOrder[] featureOrders() {
         return new FeatureOrder[] { new BeforeFeature("*") };

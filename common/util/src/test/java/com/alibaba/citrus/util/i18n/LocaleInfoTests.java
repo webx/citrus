@@ -63,7 +63,7 @@ public class LocaleInfoTests {
             localeInfo = new LocaleInfo(Locale.US);
 
             assertEquals(Locale.US, localeInfo.getLocale());
-            assertEquals("UTF-8", localeInfo.getCharset().name()); // È«ÄÜcharset
+            assertEquals("UTF-8", localeInfo.getCharset().name()); // å…¨èƒ½charset
         } finally {
             LocaleUtil.resetDefault();
         }

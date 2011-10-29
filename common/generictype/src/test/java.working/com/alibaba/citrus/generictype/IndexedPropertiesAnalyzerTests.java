@@ -28,13 +28,13 @@ import org.junit.Test;
 import com.alibaba.citrus.generictype.introspect.PropertyInfo;
 
 /**
- * ²âÊÔ<code>IndexedPropertiesAnalyzer</code>¡£
+ * æµ‹è¯•<code>IndexedPropertiesAnalyzer</code>ã€‚
  * 
  * @author Michael Zhou
  */
 public class IndexedPropertiesAnalyzerTests extends AbstractPropertiesAnalyzerTests {
     /**
-     * ²âÊÔ²»Í¬µÄ·ÃÎÊ¿ØÖÆ¡£
+     * æµ‹è¯•ä¸åŒçš„è®¿é—®æ§åˆ¶ã€‚
      */
     @Test
     public void accessible() {
@@ -84,69 +84,69 @@ public class IndexedPropertiesAnalyzerTests extends AbstractPropertiesAnalyzerTe
     }
 
     /**
-     * ²âÊÔ²»Í¬µÄ·½·¨ĞÎÌ¬¡£
+     * æµ‹è¯•ä¸åŒçš„æ–¹æ³•å½¢æ€ã€‚
      */
     @Test
     public void signatures() {
         @SuppressWarnings("unused")
         class MyClass {
-            // getµ«Ã»ÓĞ·µ»ØÖµ
+            // getä½†æ²¡æœ‰è¿”å›å€¼
             public void getNoReturn(int index) {
             }
 
-            // ²»Ö§³Öis
+            // ä¸æ”¯æŒis
             public String isNotBoolean(int index) {
                 return null;
             }
 
-            // get´ø²ÎÊı
+            // getå¸¦å‚æ•°
             public String getWithParams(int index, String s) {
                 return null;
             }
 
-            // set´øÓĞ·µ»ØÖµ
+            // setå¸¦æœ‰è¿”å›å€¼
             public String setWithReturn(int index, int i) {
                 return null;
             }
 
-            // set´øÓĞË«²ÎÊı
+            // setå¸¦æœ‰åŒå‚æ•°
             public void setWith2Params(int index, int i, long j) {
             }
 
-            // Õı³£µÄset
+            // æ­£å¸¸çš„set
             public void setNormal(int index, String s) {
             }
 
-            // Õı³£µÄget
+            // æ­£å¸¸çš„get
             public String getNormal(int index) {
                 return null;
             }
 
-            // ²»Ö§³Öis
+            // ä¸æ”¯æŒis
             public boolean isNormal(int index) {
                 return false;
             }
 
-            // ´óĞ´µÄproperty
+            // å¤§å†™çš„property
             public URL getURL(int index) {
                 return null;
             }
 
-            // Ğ¡Ğ´µÄproperty
+            // å°å†™çš„property
             public URL getUrl(int index) {
                 return null;
             }
 
-            // Õı³£µÄset£¬µ«ºÍObject.getClassÀàĞÍ²»Í¬
+            // æ­£å¸¸çš„setï¼Œä½†å’ŒObject.getClassç±»å‹ä¸åŒ
             public void setClass(int index, String s) {
             }
 
-            // ²»Ö§³Öis
+            // ä¸æ”¯æŒis
             public boolean isBoolean(int index) {
                 return false;
             }
 
-            // Õı³£µÄboolean get
+            // æ­£å¸¸çš„boolean get
             public boolean getBoolean(int index) {
                 return false;
             }

@@ -32,9 +32,9 @@ public class SimpleValueEncoderTests extends AbstractSingleValueEncoderTests {
         prototype.beanName = "simple_default";
         prototype.attrName = "simple-default";
         prototype.cookieName = "simple-default-cookie";
-        prototype.value1 = "hello, 世界";
+        prototype.value1 = "hello, 涓栫晫";
         prototype.value1Encoded = "hello%2C+%E4%B8%96%E7%95%8C"; // utf8 encoded
-        prototype.value2 = "hello, 中国";
+        prototype.value2 = "hello, 涓浗";
         prototype.value2Encoded = "hello%2C+%E4%B8%AD%E5%9B%BD"; // utf8 encoded
         prototype.value3 = "hello, world";
         prototype.value3Encoded = "hello%2C+world";
@@ -43,9 +43,9 @@ public class SimpleValueEncoderTests extends AbstractSingleValueEncoderTests {
         prototype.beanName = "simple_specified";
         prototype.attrName = "simple-specified";
         prototype.cookieName = "simple-specified-cookie";
-        prototype.value1 = "hello, 世界";
+        prototype.value1 = "hello, 涓栫晫";
         prototype.value1Encoded = "hello%2C+%CA%C0%BD%E7"; // gbk encoded
-        prototype.value2 = "hello, 中国";
+        prototype.value2 = "hello, 涓浗";
         prototype.value2Encoded = "hello%2C+%D6%D0%B9%FA"; // gbk encoded
         prototype.value3 = "hello, world";
         prototype.value3Encoded = "hello%2C+world";
@@ -54,9 +54,9 @@ public class SimpleValueEncoderTests extends AbstractSingleValueEncoderTests {
         prototype.beanName = "simple_encrypted";
         prototype.attrName = "simple-encrypted";
         prototype.cookieName = "simple-encrypted-cookie";
-        prototype.value1 = "hello, 世界";
+        prototype.value1 = "hello, 涓栫晫";
         prototype.value1Encoded = "371M9HBO8gt7KxgvMoO5PQ%3D%3D"; // aes encrypted and base64, no compression
-        prototype.value2 = "hello, 中国";
+        prototype.value2 = "hello, 涓浗";
         prototype.value2Encoded = "Z1bysRNn7lOYEkWMUsOOyw%3D%3D"; // aes encrypted and base64, no compression
         prototype.value3 = "hello, world";
         prototype.value3Encoded = "M81hCx4qUfD38DtyQOUVaA%3D%3D"; // aes encrypted and base64, no compression

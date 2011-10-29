@@ -51,7 +51,7 @@ import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 import com.alibaba.citrus.util.regex.ClassNameWildcardCompiler;
 
 /**
- * ½âÎöclass-modules¡£
+ * è§£æclass-modulesã€‚
  * 
  * @author Michael Zhou
  */
@@ -103,7 +103,7 @@ public class ClassModuleFactoryDefinitionParser extends AbstractModuleFactoryDef
                     .getAttribute("includeAbstractClasses")));
 
             if (classResourceName != null) {
-                // ´¦ÀíËùÓĞµÄinclude/exclude filters
+                // å¤„ç†æ‰€æœ‰çš„include/exclude filters
                 ClassLoader classLoader = scanner.getResourceLoader().getClassLoader();
                 List<TypeFilter> includes = createLinkedList();
                 List<TypeFilter> excludes = createLinkedList();
@@ -113,10 +113,10 @@ public class ClassModuleFactoryDefinitionParser extends AbstractModuleFactoryDef
                 ModuleTypeFilter filter = new ModuleTypeFilter(classes, classNamePattern, typeName, moduleName,
                         includes);
 
-                // ÊÂÊµÉÏ£¬Ö»ÓĞÒ»¸ö¶¥¼¶µÄinclude filter£¬ÆäËüµÄinclude filter±»ÕâÒ»¸ömoduleTypeFilterËùµ÷ÓÃ¡£
+                // äº‹å®ä¸Šï¼Œåªæœ‰ä¸€ä¸ªé¡¶çº§çš„include filterï¼Œå…¶å®ƒçš„include filterè¢«è¿™ä¸€ä¸ªmoduleTypeFilteræ‰€è°ƒç”¨ã€‚
                 scanner.addIncludeFilter(filter);
 
-                // Exclude filter±È½Ï¼òµ¥£¬Ö±½Ó¼Óµ½scannerÖĞ¼´¿É¡£
+                // Exclude filteræ¯”è¾ƒç®€å•ï¼Œç›´æ¥åŠ åˆ°scannerä¸­å³å¯ã€‚
                 for (TypeFilter exclude : excludes) {
                     scanner.addExcludeFilter(exclude);
                 }
@@ -152,7 +152,7 @@ public class ClassModuleFactoryDefinitionParser extends AbstractModuleFactoryDef
     }
 
     /**
-     * ½âÎö<code>TypeFilter</code>s¡£
+     * è§£æ<code>TypeFilter</code>sã€‚
      */
     private void parseTypeFilters(Element element, ClassLoader classLoader, List<TypeFilter> includes,
                                   List<TypeFilter> excludes) {
@@ -177,7 +177,7 @@ public class ClassModuleFactoryDefinitionParser extends AbstractModuleFactoryDef
     }
 
     /**
-     * ´´½¨Ö¸¶¨µÄTypeFilter¡£
+     * åˆ›å»ºæŒ‡å®šçš„TypeFilterã€‚
      */
     private TypeFilter createTypeFilter(Element element, ClassLoader classLoader) {
         String filterType = defaultIfNull(trimToNull(element.getAttribute("type")), "wildcard");
@@ -221,12 +221,12 @@ public class ClassModuleFactoryDefinitionParser extends AbstractModuleFactoryDef
 
         @Override
         protected boolean isCandidateComponent(AnnotatedBeanDefinition beanDefinition) {
-            // ÅÅ³ıÄÚÁªÀà
+            // æ’é™¤å†…è”ç±»
             if (beanDefinition.getMetadata().getClassName().contains("$")) {
                 return false;
             }
 
-            // ¶ÔÓÚconcreteClass£¬Ö±½Ó·µ»Øtrue
+            // å¯¹äºconcreteClassï¼Œç›´æ¥è¿”å›true
             if (super.isCandidateComponent(beanDefinition)) {
                 return true;
             }
@@ -235,7 +235,7 @@ public class ClassModuleFactoryDefinitionParser extends AbstractModuleFactoryDef
                 return false;
             }
 
-            // ·Çconcrete£¬µ«Ö¸¶¨ÁËincludeAbstractClasses=true
+            // éconcreteï¼Œä½†æŒ‡å®šäº†includeAbstractClasses=true
             beanDefinition.setBeanClassName(NonInstantiatableClassFactoryBean.class.getName());
             beanDefinition.getConstructorArgumentValues().addIndexedArgumentValue(0,
                     beanDefinition.getMetadata().getClassName(), Class.class.getName());
@@ -258,8 +258,8 @@ public class ClassModuleFactoryDefinitionParser extends AbstractModuleFactoryDef
         public String generateBeanName(BeanDefinition definition, BeanDefinitionRegistry registry) {
             String className;
 
-            // ´ÓmetadataÖĞÈ¡µÃclassname£¬ÒòÎª¶ÔÓÚ·ÇconcreteÀà£¬µ±includeAbstractClasses=trueÊ±£¬
-            // definition.getBeanClassName() == NonInstantiatableObject£¬¶ø²»ÊÇ×îÖÕµÄÀà¡£
+            // ä»metadataä¸­å–å¾—classnameï¼Œå› ä¸ºå¯¹äºéconcreteç±»ï¼Œå½“includeAbstractClasses=trueæ—¶ï¼Œ
+            // definition.getBeanClassName() == NonInstantiatableObjectï¼Œè€Œä¸æ˜¯æœ€ç»ˆçš„ç±»ã€‚
             if (definition instanceof AnnotatedBeanDefinition) {
                 className = ((AnnotatedBeanDefinition) definition).getMetadata().getClassName();
             } else {

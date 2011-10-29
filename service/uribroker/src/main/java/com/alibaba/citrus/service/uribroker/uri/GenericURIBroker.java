@@ -23,9 +23,9 @@ import java.net.URL;
 import java.util.List;
 
 /**
- * ´ú±íÒ»¸ö»ù±¾µÄURI·ç¸ñ¡£
+ * ä»£è¡¨ä¸€ä¸ªåŸºæœ¬çš„URIé£æ ¼ã€‚
  * <p>
- * Ò»¸öURI°üÀ¨ÈçÏÂ¼¸¸ö²¿·Ö£º
+ * ä¸€ä¸ªURIåŒ…æ‹¬å¦‚ä¸‹å‡ ä¸ªéƒ¨åˆ†ï¼š
  * </p>
  * 
  * <pre>
@@ -36,7 +36,7 @@ import java.util.List;
  * REFERENCE   = reference
  * </pre>
  * <p>
- * ÀıÈç£º
+ * ä¾‹å¦‚ï¼š
  * </p>
  * 
  * <pre>
@@ -52,7 +52,7 @@ public class GenericURIBroker extends URIBroker {
     }
 
     /**
-     * ÉèÖÃÒ»×épath¡£
+     * è®¾ç½®ä¸€ç»„pathã€‚
      */
     public void setPathElements(List<String> path) {
         clearPathSegment(PATH_INDEX);
@@ -65,7 +65,7 @@ public class GenericURIBroker extends URIBroker {
     }
 
     /**
-     * Ìí¼Ópath¡£
+     * æ·»åŠ pathã€‚
      */
     public GenericURIBroker addPath(String path) {
         addPathSegment(PATH_INDEX, path);
@@ -73,7 +73,7 @@ public class GenericURIBroker extends URIBroker {
     }
 
     /**
-     * Çå³ıËùÓĞpath¡£
+     * æ¸…é™¤æ‰€æœ‰pathã€‚
      */
     public GenericURIBroker clearPath() {
         clearPathSegment(PATH_INDEX);
@@ -106,7 +106,7 @@ public class GenericURIBroker extends URIBroker {
     }
 
     /**
-     * È¡µÃµ±Ç°URI path·Ö³É¼¸¶Î¡£
+     * å–å¾—å½“å‰URI pathåˆ†æˆå‡ æ®µã€‚
      */
     @Override
     protected int getPathSegmentCount() {

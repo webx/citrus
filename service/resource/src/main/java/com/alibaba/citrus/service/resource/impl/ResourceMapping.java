@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.resource.impl;
 
 /**
- * <code>ResourceAlias</code>¡¢<code>ResourceLoaderMapping</code>µÄ»ùÀà¡£
+ * <code>ResourceAlias</code>ã€<code>ResourceLoaderMapping</code>çš„åŸºç±»ã€‚
  * 
  * @author Michael Zhou
  */

@@ -101,7 +101,7 @@ public abstract class AbstractLogConfiguratorTests {
         assertNotNull(testMethod);
         testMethod.setAccessible(true);
 
-        assertFalse(testMethod.toString(), Modifier.isPublic(testMethod.getModifiers())); // ·ÀÖ¹´íÎóµØµ÷ÓÃpublic·½·¨
+        assertFalse(testMethod.toString(), Modifier.isPublic(testMethod.getModifiers())); // é˜²æ­¢é”™è¯¯åœ°è°ƒç”¨publicæ–¹æ³•
 
         Method initStdoutStderr = thisClass.getDeclaredMethod("initStdoutStderr");
         Method restoreStdoutStderr = thisClass.getDeclaredMethod("restoreStdoutStderr");
@@ -153,7 +153,7 @@ public abstract class AbstractLogConfiguratorTests {
         }
 
         if (envLogSystems != null) {
-            // ÒÀ´Î¼ÓÈëprovider jars¡£
+            // ä¾æ¬¡åŠ å…¥provider jarsã€‚
             for (String envLogSystem : envLogSystems.split("(,|\\s)+")) {
                 envLogSystem = LogConfigurator.trimToNull(envLogSystem);
 

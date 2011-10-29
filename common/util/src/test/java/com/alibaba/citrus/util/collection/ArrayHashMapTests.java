@@ -35,7 +35,7 @@ import com.alibaba.citrus.util.collection.ArrayHashMapTests.ListMapKeyList;
 import com.alibaba.citrus.util.collection.ArrayHashMapTests.ListMapValueList;
 
 /**
- * ²âÊÔ<code>ArrayHashMap</code>Àà.
+ * æµ‹è¯•<code>ArrayHashMap</code>ç±».
  * 
  * @author Michael Zhou
  */
@@ -119,7 +119,7 @@ public class ArrayHashMapTests {
         private ArrayHashMap<Object, Object> map;
 
         /**
-         * ²âÊÔ¹¹Ôìº¯Êı(initialCapacity, loadFactor).
+         * æµ‹è¯•æ„é€ å‡½æ•°(initialCapacity, loadFactor).
          */
         @Test
         public void constructor1() {
@@ -141,7 +141,7 @@ public class ArrayHashMapTests {
         }
 
         /**
-         * ²âÊÔ¹¹Ôìº¯Êı(initialCapacity).
+         * æµ‹è¯•æ„é€ å‡½æ•°(initialCapacity).
          */
         @Test
         public void constructor2() {
@@ -152,7 +152,7 @@ public class ArrayHashMapTests {
         }
 
         /**
-         * ²âÊÔ¹¹Ôìº¯Êı(ÎŞ²ÎÊı).
+         * æµ‹è¯•æ„é€ å‡½æ•°(æ— å‚æ•°).
          */
         @Test
         public void constructor3() {
@@ -161,7 +161,7 @@ public class ArrayHashMapTests {
         }
 
         /**
-         * ²âÊÔ¹¹Ôìº¯Êı(Map).
+         * æµ‹è¯•æ„é€ å‡½æ•°(Map).
          */
         @Test
         public void constructor4() {
@@ -180,10 +180,10 @@ public class ArrayHashMapTests {
         }
 
         /**
-         * ²âÊÔÄÚ²¿²ÎÊı: thresholdºÍcapacity.
+         * æµ‹è¯•å†…éƒ¨å‚æ•°: thresholdå’Œcapacity.
          * 
-         * @param expectedThreshold ÆÚÍûµÄãĞÖµ
-         * @param expectedCapacity ÆÚÍûµÄÈİÁ¿
+         * @param expectedThreshold æœŸæœ›çš„é˜ˆå€¼
+         * @param expectedCapacity æœŸæœ›çš„å®¹é‡
          */
         private void assertParameters(int expectedThreshold, int expectedCapacity) {
             assertEquals(expectedThreshold, getThreshold(map));
@@ -191,10 +191,10 @@ public class ArrayHashMapTests {
         }
 
         /**
-         * ²âÊÔ²¢ÊÔÍ¼µÃµ½Exception.
+         * æµ‹è¯•å¹¶è¯•å›¾å¾—åˆ°Exception.
          * 
-         * @param initialCapacity ³õÊ¼ÈİÁ¿
-         * @param loadFactor ¸ºÔØÏµÊı
+         * @param initialCapacity åˆå§‹å®¹é‡
+         * @param loadFactor è´Ÿè½½ç³»æ•°
          */
         private void assertConstructorException(int initialCapacity, float loadFactor) {
             try {
@@ -205,9 +205,9 @@ public class ArrayHashMapTests {
         }
 
         /**
-         * ²âÊÔ²¢ÊÔÍ¼µÃµ½Exception.
+         * æµ‹è¯•å¹¶è¯•å›¾å¾—åˆ°Exception.
          * 
-         * @param initialCapacity ³õÊ¼ÈİÁ¿
+         * @param initialCapacity åˆå§‹å®¹é‡
          */
         private void assertConstructorException(int initialCapacity) {
             try {

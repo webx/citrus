@@ -22,16 +22,16 @@ import java.lang.reflect.Method;
 import java.lang.reflect.TypeVariable;
 
 /**
- * ºÍ{@link TypeVariable}¶ÔÓ¦£¬´ú±íÒ»¸öÀàĞÍ±äÁ¿µÄĞÅÏ¢¡£
+ * å’Œ{@link TypeVariable}å¯¹åº”ï¼Œä»£è¡¨ä¸€ä¸ªç±»å‹å˜é‡çš„ä¿¡æ¯ã€‚
  * 
  * @author Michael Zhou
  */
 public interface TypeVariableInfo extends BoundedTypeInfo {
     /**
-     * È¡µÃ±äÁ¿ËùÔÚµÄÉùÃ÷£¬¿ÉÄÜÎª£º
+     * å–å¾—å˜é‡æ‰€åœ¨çš„å£°æ˜ï¼Œå¯èƒ½ä¸ºï¼š
      * <ul>
      * <li>{@link ClassTypeInfo}</li>
-     * <li>{@link MethodInfo}£¬´ú±í{@link Method}»ò{@link Constructor}</li>
+     * <li>{@link MethodInfo}ï¼Œä»£è¡¨{@link Method}æˆ–{@link Constructor}</li>
      * </ul>
      */
     GenericDeclarationInfo getGenericDeclaration();

@@ -22,89 +22,89 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 /**
- * ÓÃÀ´³Ö¾Ã»¯´æ´¢session attributeµÄ»úÖÆ¡£
+ * ç”¨æ¥æŒä¹…åŒ–å­˜å‚¨session attributeçš„æœºåˆ¶ã€‚
  * 
  * @author Michael Zhou
  */
 public interface SessionStore {
     /**
-     * ³õÊ¼»¯SessionStore¡£
+     * åˆå§‹åŒ–SessionStoreã€‚
      */
     void init(String storeName, SessionConfig sessionConfig) throws Exception;
 
     /**
-     * È¡µÃÖ¸¶¨sessionµÄËùÓĞattributeÃû³Æ¡£
+     * å–å¾—æŒ‡å®šsessionçš„æ‰€æœ‰attributeåç§°ã€‚
      * 
-     * @param sessionID Òª×°ÔØµÄsession ID
-     * @param storeContext ÓÃÀ´È¡µÃrequestĞÅÏ¢£¬²¢´æ·Åstoreµ±Ç°µÄ×´Ì¬
-     * @return attributesµÄÁĞ±í
+     * @param sessionID è¦è£…è½½çš„session ID
+     * @param storeContext ç”¨æ¥å–å¾—requestä¿¡æ¯ï¼Œå¹¶å­˜æ”¾storeå½“å‰çš„çŠ¶æ€
+     * @return attributesçš„åˆ—è¡¨
      */
     Iterable<String> getAttributeNames(String sessionID, StoreContext storeContext);
 
     /**
-     * ×°ÔØÖ¸¶¨sessionµÄÄ³¸öattribute¡£
+     * è£…è½½æŒ‡å®šsessionçš„æŸä¸ªattributeã€‚
      * 
-     * @param attrName Òª×°ÔØµÄattributeÃû³Æ
-     * @param sessionID Òª´æÈ¡µÄsession ID
-     * @param storeContext ÓÃÀ´È¡µÃrequestĞÅÏ¢£¬²¢´æ·Åstoreµ±Ç°µÄ×´Ì¬
-     * @return attributeµÄÖµ£¨Èç¹û´æÔÚµÄ»°£©
+     * @param attrName è¦è£…è½½çš„attributeåç§°
+     * @param sessionID è¦å­˜å–çš„session ID
+     * @param storeContext ç”¨æ¥å–å¾—requestä¿¡æ¯ï¼Œå¹¶å­˜æ”¾storeå½“å‰çš„çŠ¶æ€
+     * @return attributeçš„å€¼ï¼ˆå¦‚æœå­˜åœ¨çš„è¯ï¼‰
      */
     Object loadAttribute(String attrName, String sessionID, StoreContext storeContext);
 
     /**
-     * ¶ªÆúÖ¸¶¨session IDµÄËùÓĞÄÚÈİ¡£
+     * ä¸¢å¼ƒæŒ‡å®šsession IDçš„æ‰€æœ‰å†…å®¹ã€‚
      * 
-     * @param sessionID Òª¶ªÆúµÄsession ID
-     * @param storeContext ÓÃÀ´È¡µÃrequestĞÅÏ¢£¬²¢´æ·Åstoreµ±Ç°µÄ×´Ì¬
+     * @param sessionID è¦ä¸¢å¼ƒçš„session ID
+     * @param storeContext ç”¨æ¥å–å¾—requestä¿¡æ¯ï¼Œå¹¶å­˜æ”¾storeå½“å‰çš„çŠ¶æ€
      */
     void invaldiate(String sessionID, StoreContext storeContext);
 
     /**
-     * ±£´æÖ¸¶¨sessionµÄattributes¡£
+     * ä¿å­˜æŒ‡å®šsessionçš„attributesã€‚
      * 
-     * @param modifiedAttrs Òª±£´æµÄattrs£¬Èç¹ûÖµÎª<code>null</code>±íÊ¾É¾³ı
-     * @param sessionID Òª±£´æµÄsessionID
-     * @param storeContext ÓÃÀ´È¡µÃrequestĞÅÏ¢£¬²¢´æ·Åstoreµ±Ç°µÄ×´Ì¬
+     * @param modifiedAttrs è¦ä¿å­˜çš„attrsï¼Œå¦‚æœå€¼ä¸º<code>null</code>è¡¨ç¤ºåˆ é™¤
+     * @param sessionID è¦ä¿å­˜çš„sessionID
+     * @param storeContext ç”¨æ¥å–å¾—requestä¿¡æ¯ï¼Œå¹¶å­˜æ”¾storeå½“å‰çš„çŠ¶æ€
      */
     void commit(Map<String, Object> modifiedAttrs, String sessionID, StoreContext storeContext);
 
     /**
-     * °ïÖústoreÈ¡µÃµ±Ç°requestµÄĞÅÏ¢£¬²¢´æ·ÅËüÃÇ×Ô¼ºµÄµ±Ç°×´Ì¬¡£
+     * å¸®åŠ©storeå–å¾—å½“å‰requestçš„ä¿¡æ¯ï¼Œå¹¶å­˜æ”¾å®ƒä»¬è‡ªå·±çš„å½“å‰çŠ¶æ€ã€‚
      */
     interface StoreContext {
         /**
-         * È¡µÃstoreµÄrequest scope×´Ì¬Êı¾İ¡£
+         * å–å¾—storeçš„request scopeçŠ¶æ€æ•°æ®ã€‚
          * 
-         * @return ×´Ì¬Öµ
+         * @return çŠ¶æ€å€¼
          */
         Object getState();
 
         /**
-         * ÉèÖÃstoreµÄrequest scope×´Ì¬Êı¾İ¡£
+         * è®¾ç½®storeçš„request scopeçŠ¶æ€æ•°æ®ã€‚
          * 
-         * @param stateObject ×´Ì¬Öµ
+         * @param stateObject çŠ¶æ€å€¼
          */
         void setState(Object stateObject);
 
         /**
-         * È¡µÃÖ¸¶¨Ãû³ÆµÄstoreµÄ×´Ì¬Êı¾İ¡£
+         * å–å¾—æŒ‡å®šåç§°çš„storeçš„çŠ¶æ€æ•°æ®ã€‚
          * 
-         * @param storeName storeÃû³Æ
-         * @return ×´Ì¬Öµ
+         * @param storeName storeåç§°
+         * @return çŠ¶æ€å€¼
          */
         StoreContext getStoreContext(String storeName);
 
         /**
-         * È¡µÃµ±Ç°µÄrequest context¡£
+         * å–å¾—å½“å‰çš„request contextã€‚
          * 
-         * @return <code>SessionRequestContext</code>¶ÔÏó
+         * @return <code>SessionRequestContext</code>å¯¹è±¡
          */
         SessionRequestContext getSessionRequestContext();
 
         /**
-         * È¡µÃµ±Ç°µÄsession¶ÔÏó¡£
+         * å–å¾—å½“å‰çš„sessionå¯¹è±¡ã€‚
          * 
-         * @return <code>HttpSession</code>¶ÔÏó
+         * @return <code>HttpSession</code>å¯¹è±¡
          */
         HttpSession getHttpSession();
     }

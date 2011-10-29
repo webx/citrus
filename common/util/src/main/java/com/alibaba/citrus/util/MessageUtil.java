@@ -22,19 +22,19 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
- * ºÍ<code>ResourceBundle</code>¼°ÏûÏ¢×Ö·û´®ÓĞ¹ØµÄ¹¤¾ßÀà¡£
+ * å’Œ<code>ResourceBundle</code>åŠæ¶ˆæ¯å­—ç¬¦ä¸²æœ‰å…³çš„å·¥å…·ç±»ã€‚
  * 
  * @author Michael Zhou
  */
 public class MessageUtil {
     /**
-     * ´Ó<code>ResourceBundle</code>ÖĞÈ¡µÃ×Ö·û´®£¬²¢Ê¹ÓÃ<code>MessageFormat</code>¸ñÊ½»¯×Ö·û´®.
+     * ä»<code>ResourceBundle</code>ä¸­å–å¾—å­—ç¬¦ä¸²ï¼Œå¹¶ä½¿ç”¨<code>MessageFormat</code>æ ¼å¼åŒ–å­—ç¬¦ä¸².
      * 
      * @param bundle resource bundle
-     * @param key Òª²éÕÒµÄ¼ü
-     * @param params ²ÎÊı±í
-     * @return key¶ÔÓ¦µÄ×Ö·û´®£¬Èç¹ûkeyÎª<code>null</code>»òresource bundleÎª
-     *         <code>null</code>£¬»òresource keyÎ´ÕÒµ½£¬Ôò·µ»Ø<code>key</code>
+     * @param key è¦æŸ¥æ‰¾çš„é”®
+     * @param params å‚æ•°è¡¨
+     * @return keyå¯¹åº”çš„å­—ç¬¦ä¸²ï¼Œå¦‚æœkeyä¸º<code>null</code>æˆ–resource bundleä¸º
+     *         <code>null</code>ï¼Œæˆ–resource keyæœªæ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>key</code>
      */
     public static String getMessage(ResourceBundle bundle, String key, Object... params) {
         if (bundle == null || key == null) {
@@ -49,11 +49,11 @@ public class MessageUtil {
     }
 
     /**
-     * Ê¹ÓÃ<code>MessageFormat</code>¸ñÊ½»¯×Ö·û´®.
+     * ä½¿ç”¨<code>MessageFormat</code>æ ¼å¼åŒ–å­—ç¬¦ä¸².
      * 
-     * @param message Òª¸ñÊ½»¯µÄ×Ö·û´®
-     * @param params ²ÎÊı±í
-     * @return ¸ñÊ½»¯µÄ×Ö·û´®£¬Èç¹ûmessageÎª<code>null</code>£¬Ôò·µ»Ø<code>null</code>
+     * @param message è¦æ ¼å¼åŒ–çš„å­—ç¬¦ä¸²
+     * @param params å‚æ•°è¡¨
+     * @return æ ¼å¼åŒ–çš„å­—ç¬¦ä¸²ï¼Œå¦‚æœmessageä¸º<code>null</code>ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static String formatMessage(String message, Object... params) {
         if (message == null || params == null || params.length == 0) {

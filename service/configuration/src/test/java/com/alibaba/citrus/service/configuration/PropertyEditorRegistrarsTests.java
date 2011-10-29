@@ -54,7 +54,7 @@ public class PropertyEditorRegistrarsTests {
         SimpleTypeConverter converter = new SimpleTypeConverter();
         registrars.registerCustomEditors(converter);
 
-        // Ö»×¢²áÁËlong£¬Ã»×¢²áLong
+        // åªæ³¨å†Œäº†longï¼Œæ²¡æ³¨å†ŒLong
         try {
             converter.convertIfNecessary("ten", Long.class);
             fail();

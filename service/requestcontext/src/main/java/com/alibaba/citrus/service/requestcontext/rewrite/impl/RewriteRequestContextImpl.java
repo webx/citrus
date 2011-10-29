@@ -49,7 +49,7 @@ import com.alibaba.citrus.util.StringEscapeUtil;
 import com.alibaba.citrus.util.regex.MatchResultSubstitution;
 
 /**
- * ÖØĞ´URL¼°²ÎÊıµÄrequest context£¬ÀàËÆÓÚapacheµÄmod_rewriteÄ£¿é¡£
+ * é‡å†™URLåŠå‚æ•°çš„request contextï¼Œç±»ä¼¼äºapacheçš„mod_rewriteæ¨¡å—ã€‚
  */
 public class RewriteRequestContextImpl extends AbstractRequestContextWrapper implements RewriteRequestContext {
     private final static Logger log = LoggerFactory.getLogger(RewriteRequestContext.class);
@@ -62,26 +62,26 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
     private HttpServletRequest wrappedRequest;
 
     /**
-     * °ü×°Ò»¸ö<code>RequestContext</code>¶ÔÏó¡£
+     * åŒ…è£…ä¸€ä¸ª<code>RequestContext</code>å¯¹è±¡ã€‚
      * 
-     * @param wrappedContext ±»°ü×°µÄ<code>RequestContext</code>
-     * @param rewriteConfig rewriteµÄÅäÖÃÎÄ¼şĞÅÏ¢
+     * @param wrappedContext è¢«åŒ…è£…çš„<code>RequestContext</code>
+     * @param rewriteConfig rewriteçš„é…ç½®æ–‡ä»¶ä¿¡æ¯
      */
     public RewriteRequestContextImpl(RequestContext wrappedContext, RewriteRule[] rules) {
         super(wrappedContext);
 
         this.rules = defaultIfEmptyArray(rules, null);
 
-        // È¡µÃparser request context£¬ÒÔ±ãĞŞ¸Ä²ÎÊı
+        // å–å¾—parser request contextï¼Œä»¥ä¾¿ä¿®æ”¹å‚æ•°
         this.parserRequestContext = assertNotNull(findRequestContext(wrappedContext, ParserRequestContext.class),
                 "Could not find ParserRequestContext in request context chain");
 
-        // ±£´æÉÏÒ»²ãµÄrequest¶ÔÏó£¬ÒÔ±ãÈ¡µÃÔ­À´µÄservletPath¡¢pathInfoÖ®ÀàµÄĞÅÏ¢
+        // ä¿å­˜ä¸Šä¸€å±‚çš„requestå¯¹è±¡ï¼Œä»¥ä¾¿å–å¾—åŸæ¥çš„servletPathã€pathInfoä¹‹ç±»çš„ä¿¡æ¯
         this.wrappedRequest = wrappedContext.getRequest();
     }
 
     /**
-     * ¿ªÊ¼Ò»¸öÇëÇó¡£
+     * å¼€å§‹ä¸€ä¸ªè¯·æ±‚ã€‚
      */
     @Override
     public void prepare() {
@@ -89,7 +89,7 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
             return;
         }
 
-        // È¡µÃservletPath+pathInfo£¬ºöÂÔcontextPath
+        // å–å¾—servletPath+pathInfoï¼Œå¿½ç•¥contextPath
         String originalPath = wrappedRequest.getServletPath()
                 + defaultIfNull(wrappedRequest.getPathInfo(), EMPTY_STRING);
         String path = originalPath;
@@ -99,7 +99,7 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
             log.debug("Starting rewrite engine: path=\"{}\"", StringEscapeUtil.escapeJava(path));
         }
 
-        // ¿ªÊ¼Æ¥Åä
+        // å¼€å§‹åŒ¹é…
         int redirectCode = 0;
 
         for (RewriteRule rule : rules) {
@@ -107,12 +107,12 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
             MatchResult conditionMatchResult = null;
             RewriteSubstitution subs = rule.getSubstitution();
 
-            // Èç¹ûÆ¥Åä£¬Ôò²é¿´conditions
+            // å¦‚æœåŒ¹é…ï¼Œåˆ™æŸ¥çœ‹conditions
             if (ruleMatchResult != null) {
                 conditionMatchResult = rule.matchConditions(ruleMatchResult, wrappedRequest);
             }
 
-            // Èç¹ûC±êÖ¾±»Ö¸¶¨£¬Ôò³ı·ÇÆ¥Åä£¬·ñÔò²»È¥ÅĞ¶ÏÓàÏÂµÄ¹æÔò
+            // å¦‚æœCæ ‡å¿—è¢«æŒ‡å®šï¼Œåˆ™é™¤éåŒ¹é…ï¼Œå¦åˆ™ä¸å»åˆ¤æ–­ä½™ä¸‹çš„è§„åˆ™
             boolean chainRule = subs.getFlags().hasC();
 
             if (conditionMatchResult == null) {
@@ -123,10 +123,10 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
                 }
             }
 
-            // ÓÃruleºÍconditionµÄÆ¥Åä½á¹ûÀ´Ìæ»»±äÁ¿
+            // ç”¨ruleå’Œconditionçš„åŒ¹é…ç»“æœæ¥æ›¿æ¢å˜é‡
             MatchResultSubstitution resultSubs = getMatchResultSubstitution(ruleMatchResult, conditionMatchResult);
 
-            // Ìæ»»path
+            // æ›¿æ¢path
             log.debug("Rule conditions have been satisfied, starting substitution to uri");
 
             path = subs.substitute(path, resultSubs);
@@ -135,16 +135,16 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
                 path = FileUtil.normalizeAbsolutePath(path);
             }
 
-            // ´¦Àíparameters
+            // å¤„ç†parameters
             parameterSubstituted |= subs.substituteParameters(parserRequestContext.getParameters(), resultSubs);
 
-            // post substitution´¦Àí
+            // post substitutionå¤„ç†
             path = firePostSubstitutionEvent(rule, path, parserRequestContext, resultSubs);
 
-            // ²é¿´ÖØ¶¨Ïò±êÖ¾
+            // æŸ¥çœ‹é‡å®šå‘æ ‡å¿—
             redirectCode = subs.getFlags().getRedirectCode();
 
-            // Èç¹ûL±êÖ¾±»Ö¸¶¨£¬ÔòÁ¢¼´½áÊø
+            // å¦‚æœLæ ‡å¿—è¢«æŒ‡å®šï¼Œåˆ™ç«‹å³ç»“æŸ
             boolean lastRule = subs.getFlags().hasL();
 
             if (lastRule) {
@@ -152,9 +152,9 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
             }
         }
 
-        // Èç¹ûpath±»¸Ä±äÁË£¬ÔòÌæ»»request»òÖØ¶¨Ïò
+        // å¦‚æœpathè¢«æ”¹å˜äº†ï¼Œåˆ™æ›¿æ¢requestæˆ–é‡å®šå‘
         if (!isEquals(originalPath, path)) {
-            // Èç¹ûÊÇÖØ¶¨Ïò£¬Ôò×éºÏ³öĞÂµÄURL
+            // å¦‚æœæ˜¯é‡å®šå‘ï¼Œåˆ™ç»„åˆå‡ºæ–°çš„URL
             if (redirectCode > 0) {
                 StringBuffer uri = new StringBuffer();
                 HttpServletRequest request = getRequest();
@@ -164,11 +164,11 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
 
                     boolean isDefaultPort = false;
 
-                    // httpºÍ80
+                    // httpå’Œ80
                     isDefaultPort |= SERVER_SCHEME_HTTP.equals(request.getScheme())
                             && request.getServerPort() == SERVER_PORT_HTTP;
 
-                    // httpsºÍ443
+                    // httpså’Œ443
                     isDefaultPort |= SERVER_SCHEME_HTTPS.equals(request.getScheme())
                             && request.getServerPort() == SERVER_PORT_HTTPS;
 
@@ -231,7 +231,7 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
 
                 ((RewriteSubstitutionHandler) handler).postSubstitution(context);
 
-                // path¿ÉÒÔ±»¸Ä±ä
+                // pathå¯ä»¥è¢«æ”¹å˜
                 String newPath = context.getPath();
 
                 if (newPath != null && !isEquals(path, newPath)) {
@@ -249,7 +249,7 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
     }
 
     /**
-     * ÊµÏÖ<code>RewriteSubstitutionContext</code>¡£
+     * å®ç°<code>RewriteSubstitutionContext</code>ã€‚
      */
     private class RewriteSubstitutionContextImpl implements RewriteSubstitutionContext {
         private String path;
@@ -285,7 +285,7 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
     }
 
     /**
-     * °ü×°request¡£
+     * åŒ…è£…requestã€‚
      */
     private class RequestWrapper extends AbstractRequestWrapper {
         private String path;
@@ -295,9 +295,9 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
         public RequestWrapper(HttpServletRequest request) {
             super(RewriteRequestContextImpl.this, request);
 
-            // Servlet mappingÓĞÁ½ÖÖÆ¥Åä·½Ê½£ºÇ°×ºÆ¥ÅäºÍºó×ºÆ¥Åä¡£
-            // ¶ÔÓÚÇ°×ºÆ¥Åä£¬ÀıÈç£º/turbine/aaa/bbb£¬servlet pathÎª/turbine£¬path infoÎª/aaa/bbb
-            // ¶ÔÓÚºó×ºÆ¥Åä£¬ÀıÈç£º/aaa/bbb.html£¬servlet pathÎª/aaa/bbb.html£¬path infoÎªnull
+            // Servlet mappingæœ‰ä¸¤ç§åŒ¹é…æ–¹å¼ï¼šå‰ç¼€åŒ¹é…å’Œåç¼€åŒ¹é…ã€‚
+            // å¯¹äºå‰ç¼€åŒ¹é…ï¼Œä¾‹å¦‚ï¼š/turbine/aaa/bbbï¼Œservlet pathä¸º/turbineï¼Œpath infoä¸º/aaa/bbb
+            // å¯¹äºåç¼€åŒ¹é…ï¼Œä¾‹å¦‚ï¼š/aaa/bbb.htmlï¼Œservlet pathä¸º/aaa/bbb.htmlï¼Œpath infoä¸ºnull
             this.prefixMapping = ServletUtil.isPrefixServletMapping(request);
             this.originalServletPath = request.getServletPath();
         }
@@ -313,7 +313,7 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
             } else {
                 if (prefixMapping) {
                     if (startsWithPath(originalServletPath, path)) {
-                        return originalServletPath; // ±£³ÖÔ­ÓĞµÄservletPath
+                        return originalServletPath; // ä¿æŒåŸæœ‰çš„servletPath
                     } else {
                         return "";
                     }
@@ -330,7 +330,7 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
             } else {
                 if (prefixMapping) {
                     if (startsWithPath(originalServletPath, path)) {
-                        return path.substring(originalServletPath.length()); // ³ıÈ¥servletPathºóÊ£ÏÂµÄ²¿·Ö
+                        return path.substring(originalServletPath.length()); // é™¤å»servletPathåå‰©ä¸‹çš„éƒ¨åˆ†
                     } else {
                         return path;
                     }

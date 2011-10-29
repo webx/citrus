@@ -44,7 +44,7 @@ import org.springframework.beans.propertyeditors.CustomNumberEditor;
 import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 
 /**
- * ²âÊÔValueParserÀà¡£
+ * æµ‹è¯•ValueParserç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -92,23 +92,23 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
         parser.add("Aa_a", " true ");
         parser.add("aaA", false);
 
-        // ²âÊÔµ¥Ïî
+        // æµ‹è¯•å•é¡¹
         assertEquals(true, parser.getBoolean("aa_a"));
 
-        // ²âÊÔÊý×é
+        // æµ‹è¯•æ•°ç»„
         assertAnyArrayEquals(new boolean[] { true, false }, parser.getObjectOfType("aa_a", boolean[].class));
 
-        // ²âÊÔÄ¬ÈÏÖµ
+        // æµ‹è¯•é»˜è®¤å€¼
         assertEquals(false, parser.getBoolean("bbb"));
         assertEquals(true, parser.getBoolean("bbb", true));
 
-        // ²âÊÔÊý×éÄ¬ÈÏÖµ
+        // æµ‹è¯•æ•°ç»„é»˜è®¤å€¼
         parser.add("bbb", null);
         assertAnyArrayEquals(new boolean[] {}, parser.getObjectOfType("bbb", boolean[].class));
         assertAnyArrayEquals(new boolean[] { true, true, false },
                 parser.getObjectOfType("bbb", boolean[].class, null, new Boolean[] { true, true, false }));
 
-        // ²âÊÔ·Ç·¨Öµ
+        // æµ‹è¯•éžæ³•å€¼
         parser.add("ccc", "illegal");
         assertEquals(false, parser.getBoolean("ccc"));
 
@@ -126,23 +126,23 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
         parser.add("Aa_a", " 11  ");
         parser.add("aaA", (byte) 22);
 
-        // ²âÊÔµ¥Ïî
+        // æµ‹è¯•å•é¡¹
         assertEquals((byte) 11, parser.getByte("aa_a"));
 
-        // ²âÊÔÊý×é
+        // æµ‹è¯•æ•°ç»„
         assertArrayEquals(new byte[] { 11, 22 }, parser.getObjectOfType("aa_a", byte[].class));
 
-        // ²âÊÔÄ¬ÈÏÖµ
+        // æµ‹è¯•é»˜è®¤å€¼
         assertEquals((byte) 0, parser.getByte("bbb"));
         assertEquals((byte) 33, parser.getByte("bbb", (byte) 33));
 
-        // ²âÊÔÊý×éÄ¬ÈÏÖµ
+        // æµ‹è¯•æ•°ç»„é»˜è®¤å€¼
         parser.add("bbb", null);
         assertArrayEquals(new byte[] {}, parser.getObjectOfType("bbb", byte[].class));
         assertArrayEquals(new byte[] { 33, 44 },
                 parser.getObjectOfType("bbb", byte[].class, null, new Byte[] { 33, 44 }));
 
-        // ²âÊÔ·Ç·¨Öµ
+        // æµ‹è¯•éžæ³•å€¼
         parser.add("ccc", "illegal");
         assertEquals(0, parser.getByte("ccc"));
 
@@ -173,26 +173,26 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
         parser.add("Aa_a", "a");
         parser.add("aaA", 'b');
 
-        // ²âÊÔµ¥Ïî
+        // æµ‹è¯•å•é¡¹
         assertEquals('a', parser.getChar("aa_a"));
 
-        // ²âÊÔÊý×é
+        // æµ‹è¯•æ•°ç»„
         char[] values = parser.getObjectOfType("aa_a", char[].class);
 
         assertEquals('a', values[0]);
         assertEquals('b', values[1]);
 
-        // ²âÊÔÄ¬ÈÏÖµ
+        // æµ‹è¯•é»˜è®¤å€¼
         assertEquals('\0', parser.getChar("bbb"));
         assertEquals('c', parser.getChar("bbb", 'c'));
 
-        // ²âÊÔÊý×éÄ¬ÈÏÖµ
+        // æµ‹è¯•æ•°ç»„é»˜è®¤å€¼
         parser.add("bbb", null);
         assertArrayEquals(new char[] {}, parser.getObjectOfType("bbb", char[].class));
         assertArrayEquals(new char[] { 'a', 'b' },
                 parser.getObjectOfType("bbb", char[].class, null, new Character[] { 'a', 'b' }));
 
-        // ²âÊÔ·Ç·¨Öµ
+        // æµ‹è¯•éžæ³•å€¼
         parser.add("ccc", "illegal");
         assertEquals('\0', parser.getChar("ccc"));
 
@@ -210,26 +210,26 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
         parser.add("Aa_a", " 1.23 ");
         parser.add("aaA", 2.34D);
 
-        // ²âÊÔµ¥Ïî
+        // æµ‹è¯•å•é¡¹
         assertEquals(1.23D, parser.getDouble("aa_a"), 0.0D);
 
-        // ²âÊÔÊý×é
+        // æµ‹è¯•æ•°ç»„
         double[] values = parser.getObjectOfType("aa_a", double[].class);
 
         assertEquals(1.23D, values[0], 0);
         assertEquals(2.34D, values[1], 0);
 
-        // ²âÊÔÄ¬ÈÏÖµ
+        // æµ‹è¯•é»˜è®¤å€¼
         assertEquals(0.0D, parser.getDouble("bbb"), 0.0D);
         assertEquals(3.45D, parser.getDouble("bbb", 3.45D), 0.0D);
 
-        // ²âÊÔÊý×éÄ¬ÈÏÖµ
+        // æµ‹è¯•æ•°ç»„é»˜è®¤å€¼
         parser.add("bbb", null);
         assertAnyArrayEquals(new double[] {}, parser.getObjectOfType("bbb", double[].class));
         assertAnyArrayEquals(new double[] { 11D, 22D },
                 parser.getObjectOfType("bbb", double[].class, null, new Double[] { 11D, 22D }));
 
-        // ²âÊÔ·Ç·¨Öµ
+        // æµ‹è¯•éžæ³•å€¼
         parser.add("ccc", "illegal");
         assertEquals(0D, parser.getDouble("ccc"), 0);
 
@@ -247,26 +247,26 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
         parser.add("Aa_a", "  1.23  ");
         parser.add("aaA", 2.34F);
 
-        // ²âÊÔµ¥Ïî
+        // æµ‹è¯•å•é¡¹
         assertEquals(1.23F, parser.getFloat("aa_a"), 0.0F);
 
-        // ²âÊÔÊý×é
+        // æµ‹è¯•æ•°ç»„
         float[] values = parser.getObjectOfType("aa_a", float[].class);
 
         assertEquals(1.23F, values[0], 0);
         assertEquals(2.34F, values[1], 0);
 
-        // ²âÊÔÄ¬ÈÏÖµ
+        // æµ‹è¯•é»˜è®¤å€¼
         assertEquals(0.0f, parser.getFloat("bbb"), 0.0F);
         assertEquals(3.45F, parser.getFloat("bbb", 3.45F), 0.0D);
 
-        // ²âÊÔÊý×éÄ¬ÈÏÖµ
+        // æµ‹è¯•æ•°ç»„é»˜è®¤å€¼
         parser.add("bbb", null);
         assertAnyArrayEquals(new float[] {}, parser.getObjectOfType("bbb", float[].class));
         assertAnyArrayEquals(new float[] { 11F, 22F },
                 parser.getObjectOfType("bbb", float[].class, null, new Float[] { 11F, 22F }));
 
-        // ²âÊÔ·Ç·¨Öµ
+        // æµ‹è¯•éžæ³•å€¼
         parser.add("ccc", "illegal");
         assertEquals(0D, parser.getFloat("ccc"), 0);
 
@@ -284,22 +284,22 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
         parser.add("Aa_a", "  111  ");
         parser.add("aaA", 222);
 
-        // ²âÊÔµ¥Ïî
+        // æµ‹è¯•å•é¡¹
         assertEquals(111, parser.getInt("aa_a"));
 
-        // ²âÊÔÊý×é
+        // æµ‹è¯•æ•°ç»„
         assertArrayEquals(new int[] { 111, 222 }, parser.getInts("aa_a"));
 
-        // ²âÊÔÄ¬ÈÏÖµ
+        // æµ‹è¯•é»˜è®¤å€¼
         assertEquals(0, parser.getInt("bbb"));
         assertEquals(333, parser.getInt("bbb", 333));
 
-        // ²âÊÔÊý×éÄ¬ÈÏÖµ
+        // æµ‹è¯•æ•°ç»„é»˜è®¤å€¼
         parser.add("bbb", null);
         assertArrayEquals(new int[] {}, parser.getInts("bbb"));
         assertArrayEquals(new int[] { 3, 4 }, parser.getInts("bbb", new int[] { 3, 4 }));
 
-        // ²âÊÔ·Ç·¨Öµ
+        // æµ‹è¯•éžæ³•å€¼
         parser.add("ccc", "illegal");
         assertEquals(0D, parser.getInt("ccc"), 0);
 
@@ -317,22 +317,22 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
         parser.add("Aa_a", 111L);
         parser.add("aaA", 222L);
 
-        // ²âÊÔµ¥Ïî
+        // æµ‹è¯•å•é¡¹
         assertEquals(111L, parser.getLong("aa_a"));
 
-        // ²âÊÔÊý×é
+        // æµ‹è¯•æ•°ç»„
         assertArrayEquals(new long[] { 111L, 222L }, parser.getLongs("aa_a"));
 
-        // ²âÊÔÄ¬ÈÏÖµ
+        // æµ‹è¯•é»˜è®¤å€¼
         assertEquals(0L, parser.getLong("bbb"));
         assertEquals(333, parser.getLong("bbb", 333));
 
-        // ²âÊÔÊý×éÄ¬ÈÏÖµ
+        // æµ‹è¯•æ•°ç»„é»˜è®¤å€¼
         parser.add("bbb", null);
         assertArrayEquals(new long[] {}, parser.getLongs("bbb"));
         assertArrayEquals(new long[] { 1, 2 }, parser.getLongs("bbb", new long[] { 1, 2 }));
 
-        // ²âÊÔ·Ç·¨Öµ
+        // æµ‹è¯•éžæ³•å€¼
         parser.add("ccc", "illegal");
         assertEquals(0D, parser.getLong("ccc"), 0);
 
@@ -350,23 +350,23 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
         parser.add("Aa_a", (short) 11);
         parser.add("aaA", (short) 22);
 
-        // ²âÊÔµ¥Ïî
+        // æµ‹è¯•å•é¡¹
         assertEquals((short) 11, parser.getShort("aa_a"));
 
-        // ²âÊÔÊý×é
+        // æµ‹è¯•æ•°ç»„
         assertAnyArrayEquals(new short[] { 11, 22 }, parser.getObjectOfType("aa_a", short[].class));
 
-        // ²âÊÔÄ¬ÈÏÖµ
+        // æµ‹è¯•é»˜è®¤å€¼
         assertEquals((short) 0, parser.getShort("bbb"));
         assertEquals((short) 33, parser.getShort("bbb", (short) 33));
 
-        // ²âÊÔÊý×éÄ¬ÈÏÖµ
+        // æµ‹è¯•æ•°ç»„é»˜è®¤å€¼
         parser.add("bbb", null);
         assertAnyArrayEquals(new short[] {}, parser.getObjectOfType("bbb", short[].class, null, null));
         assertAnyArrayEquals(new short[] { 1, 2 },
                 parser.getObjectOfType("bbb", short[].class, null, new Short[] { 1, 2 }));
 
-        // ²âÊÔ·Ç·¨Öµ
+        // æµ‹è¯•éžæ³•å€¼
         parser.add("ccc", "illegal");
         assertEquals(0D, parser.getShort("ccc"), 0);
 
@@ -384,23 +384,23 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
         parser.add("Aa_a", "111");
         parser.add("aaA", "222");
 
-        // ²âÊÔµ¥Ïî
+        // æµ‹è¯•å•é¡¹
         assertEquals("111", parser.getString("aa_a"));
 
-        // ²âÊÔÊý×é
+        // æµ‹è¯•æ•°ç»„
         assertArrayEquals(new String[] { "111", "222" }, parser.getStrings("aa_a"));
 
-        // ²âÊÔÄ¬ÈÏÖµ
+        // æµ‹è¯•é»˜è®¤å€¼
         assertEquals(null, parser.getString("bbb"));
         assertEquals("333", parser.getString("bbb", "333"));
         assertEquals(null, parser.getString("bbb", null));
 
-        // ²âÊÔÊý×éÄ¬ÈÏÖµ
+        // æµ‹è¯•æ•°ç»„é»˜è®¤å€¼
         parser.add("bbb", null);
         assertArrayEquals(new String[] {}, parser.getStrings("bbb"));
         assertArrayEquals(new String[] { "aa", "bb" }, parser.getStrings("bbb", new String[] { "aa", "bb" }));
 
-        // ÌØÊâÇé¿ö
+        // ç‰¹æ®Šæƒ…å†µ
         parser.add("ccc", "null");
         assertEquals(null, parser.getString("ccc"));
         assertEquals("333", parser.getString("ccc", "333"));
@@ -425,17 +425,17 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
         parser.add("Aa_a", new Integer(111));
         parser.add("aaA", new Double(222));
 
-        // ²âÊÔµ¥Ïî
+        // æµ‹è¯•å•é¡¹
         assertEquals(new Integer(111), parser.getObject("aa_a"));
 
-        // ²âÊÔÊý×é
+        // æµ‹è¯•æ•°ç»„
         assertArrayEquals(new Object[] { 111, 222D }, parser.getObjects("aa_a"));
 
-        // ²âÊÔÄ¬ÈÏÖµ
+        // æµ‹è¯•é»˜è®¤å€¼
         assertEquals(null, parser.getObject("bbb"));
         assertEquals("333", parser.getObject("bbb", "333"));
 
-        // ²âÊÔÊý×éÄ¬ÈÏÖµ
+        // æµ‹è¯•æ•°ç»„é»˜è®¤å€¼
         assertArrayEquals(new Object[] {}, parser.getObjects("bbb"));
         assertArrayEquals(new Object[] { 111 }, parser.getObjects("bbb", new Object[] { 111 }));
     }
@@ -445,23 +445,23 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
         parser.add("Aa_a", "  111  ");
         parser.add("aaA", 222);
 
-        // ²âÊÔµ¥Ïî
+        // æµ‹è¯•å•é¡¹
         assertEquals((Integer) 111, parser.getObjectOfType("aa_a", Integer.class));
 
-        // ²âÊÔÊý×é
+        // æµ‹è¯•æ•°ç»„
         assertArrayEquals(new int[] { 111, 222 }, parser.getObjectOfType("aa_a", int[].class));
 
-        // ²âÊÔÄ¬ÈÏÖµ
+        // æµ‹è¯•é»˜è®¤å€¼
         assertEquals(null, parser.getObjectOfType("bbb", Integer.class));
         assertEquals((Integer) 0, parser.getObjectOfType("bbb", Integer.class, true, null, null));
         assertEquals((Integer) 333, parser.getObjectOfType("bbb", Integer.class, null, new Object[] { 333 }));
 
-        // ²âÊÔÊý×éÄ¬ÈÏÖµ
+        // æµ‹è¯•æ•°ç»„é»˜è®¤å€¼
         parser.add("bbb", null);
         assertArrayEquals(new int[] {}, parser.getObjectOfType("bbb", int[].class));
         assertArrayEquals(new int[] { 3, 4 }, parser.getObjectOfType("bbb", int[].class, null, new Integer[] { 3, 4 }));
 
-        // ²âÊÔ·Ç·¨Öµ
+        // æµ‹è¯•éžæ³•å€¼
         parser.add("ccc", "illegal");
         assertEquals(null, parser.getObjectOfType("ccc", Integer.class));
 

@@ -23,12 +23,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * ÓÃÀ´±êÊ¶Ò»¸öcontextÖĞµÄÖµ¡£
+ * ç”¨æ¥æ ‡è¯†ä¸€ä¸ªcontextä¸­çš„å€¼ã€‚
  * <p>
- * ÓÃ·¨ÈçÏÂ£º
+ * ç”¨æ³•å¦‚ä¸‹ï¼š
  * </p>
  * <ol>
- * <li>Ö¸¶¨ÖµµÄÃû³Æ£º<code>@ContextValue("name")</code>¡£</li> </li>
+ * <li>æŒ‡å®šå€¼çš„åç§°ï¼š<code>@ContextValue("name")</code>ã€‚</li> </li>
  * </ol>
  * 
  * @author Michael Zhou
@@ -37,9 +37,9 @@ import java.lang.annotation.Target;
 @Target({ ElementType.PARAMETER })
 public @interface ContextValue {
     /**
-     * ÓÃÓÚ±êÊ¶contextÖµµÄÃû³Æ¡£
+     * ç”¨äºæ ‡è¯†contextå€¼çš„åç§°ã€‚
      * <p>
-     * ´Ë²ÎÊıÓÃÓÚ¼ò»¯µÄĞÎÊ½£º<code>@ContextValue("name")</code>¡£
+     * æ­¤å‚æ•°ç”¨äºç®€åŒ–çš„å½¢å¼ï¼š<code>@ContextValue("name")</code>ã€‚
      * </p>
      */
     String value();

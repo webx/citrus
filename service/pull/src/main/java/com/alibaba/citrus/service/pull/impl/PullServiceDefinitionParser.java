@@ -85,7 +85,7 @@ public class PullServiceDefinitionParser extends AbstractNamedBeanDefinitionPars
         }
 
         String refName = trimToNull(element.getAttribute("ref"));
-        String toolName = getToolName(bean, refName, element); // ¸ù¾İid, ref, element name»òclass nameÈ¡µÃtool name
+        String toolName = getToolName(bean, refName, element); // æ ¹æ®id, ref, element nameæˆ–class nameå–å¾—tool name
 
         assertNotNull(toolName, "missing id for tool: %s", bean);
 
@@ -104,7 +104,7 @@ public class PullServiceDefinitionParser extends AbstractNamedBeanDefinitionPars
     }
 
     private String getToolName(BeanDefinitionHolder bean, String refName, Element element) {
-        // ÒÀ´Î³¢ÊÔ£º
+        // ä¾æ¬¡å°è¯•ï¼š
 
         // 1. id attribute
         String toolName = bean.getBeanName();
@@ -113,12 +113,12 @@ public class PullServiceDefinitionParser extends AbstractNamedBeanDefinitionPars
             toolName = null;
         }
 
-        // 2. È¡refName
+        // 2. å–refName
         if (toolName == null) {
             toolName = refName;
         }
 
-        // 3. È¡class attribute
+        // 3. å–class attribute
         if (toolName == null) {
             String classAttr = trimToNull(element.getAttribute("class"));
 
@@ -127,7 +127,7 @@ public class PullServiceDefinitionParser extends AbstractNamedBeanDefinitionPars
             }
         }
 
-        // 4. ¸ù¾İelementÃû³ÆÉú³É
+        // 4. æ ¹æ®elementåç§°ç”Ÿæˆ
         String elementName = element.getLocalName();
 
         if (toolName == null && elementName != null && !elementName.equals("factory")) {
@@ -135,7 +135,7 @@ public class PullServiceDefinitionParser extends AbstractNamedBeanDefinitionPars
             toolName = trimToNull(StringUtil.toCamelCase(toolName.replace('-', '_')));
         }
 
-        // 5. ¸ù¾İclassNameÉú³É
+        // 5. æ ¹æ®classNameç”Ÿæˆ
         if (toolName == null) {
             BeanDefinition bd = bean.getBeanDefinition();
             String className = bd.getBeanClassName();

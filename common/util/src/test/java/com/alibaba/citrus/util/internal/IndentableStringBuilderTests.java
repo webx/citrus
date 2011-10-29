@@ -23,7 +23,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>IndentableStringBuilder</code>¡£
+ * æµ‹è¯•<code>IndentableStringBuilder</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -63,7 +63,7 @@ public class IndentableStringBuilderTests extends AbstractNormalizableStringBuil
 
         buf.append("b\n");
         buf.append("bb\n");
-        buf.append("bbb\n"); // ×îºóÒ»¸ö\n»á±»ºöÂÔ
+        buf.append("bbb\n"); // æœ€åä¸€ä¸ª\nä¼šè¢«å¿½ç•¥
 
         buf.end();
 
@@ -103,19 +103,19 @@ public class IndentableStringBuilderTests extends AbstractNormalizableStringBuil
 
                     buf.startHangingIndent();
                     {
-                        buf.append("fff\nhhh\niii"); // Ğü¹ÒËõ½ø£ºÄ¬ÈÏËõ½ø2
+                        buf.append("fff\nhhh\niii"); // æ‚¬æŒ‚ç¼©è¿›ï¼šé»˜è®¤ç¼©è¿›2
                     }
                     buf.end();
 
                     buf.startHangingIndent();
                     {
-                        buf.append("jjj"); // Ğü¹ÒËõ½ø £¨ÓÉÓÚÃ»ÓĞ»»ĞĞ£¬ËùÒÔÊµ¼Ê²»Ëõ½ø£©
+                        buf.append("jjj"); // æ‚¬æŒ‚ç¼©è¿› ï¼ˆç”±äºæ²¡æœ‰æ¢è¡Œï¼Œæ‰€ä»¥å®é™…ä¸ç¼©è¿›ï¼‰
                     }
                     buf.end();
 
                     buf.append("value = ").startHangingIndent();
                     {
-                        buf.append("lll\n"); // Ğü¹ÒËõ½ø£ºËõ½øµ½µ±Ç°ÁĞ£¨¼´value = Ö®ºó£©
+                        buf.append("lll\n"); // æ‚¬æŒ‚ç¼©è¿›ï¼šç¼©è¿›åˆ°å½“å‰åˆ—ï¼ˆå³value = ä¹‹åï¼‰
                         buf.append("mmm");
                     }
                     buf.end();

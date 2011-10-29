@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 
 /**
- * ±»<code>RequestContext</code>Ö§³ÖµÄ<code>HttpServletRequestWrapper</code>¡£
+ * è¢«<code>RequestContext</code>æ”¯æŒçš„<code>HttpServletRequestWrapper</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -34,7 +34,7 @@ public abstract class AbstractRequestWrapper extends HttpServletRequestWrapper {
     private RequestContext context;
 
     /**
-     * ´´½¨Ò»¸örequest wrapper¡£
+     * åˆ›å»ºä¸€ä¸ªrequest wrapperã€‚
      * 
      * @param context request context
      * @param request request
@@ -46,27 +46,27 @@ public abstract class AbstractRequestWrapper extends HttpServletRequestWrapper {
     }
 
     /**
-     * È¡µÃµ±Ç°requestËù´¦µÄservlet context»·¾³¡£
+     * å–å¾—å½“å‰requestæ‰€å¤„çš„servlet contextç¯å¢ƒã€‚
      * 
-     * @return <code>ServletContext</code>¶ÔÏó
+     * @return <code>ServletContext</code>å¯¹è±¡
      */
     protected ServletContext getServletContext() {
         return getRequestContext().getServletContext();
     }
 
     /**
-     * È¡µÃÖ§³ÖËüÃÇµÄ<code>RequestContext</code>¡£
+     * å–å¾—æ”¯æŒå®ƒä»¬çš„<code>RequestContext</code>ã€‚
      * 
-     * @return <code>RequestContext</code>ÊµÀı
+     * @return <code>RequestContext</code>å®ä¾‹
      */
     protected RequestContext getRequestContext() {
         return context;
     }
 
     /**
-     * È¡µÃ×Ö·û´®±íÊ¾¡£
+     * å–å¾—å­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      * 
-     * @return ×Ö·û´®±íÊ¾
+     * @return å­—ç¬¦ä¸²è¡¨ç¤º
      */
     @Override
     public String toString() {

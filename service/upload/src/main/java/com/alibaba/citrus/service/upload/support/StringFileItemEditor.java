@@ -22,7 +22,7 @@ import java.beans.PropertyEditorSupport;
 import org.apache.commons.fileupload.FileItem;
 
 /**
- * ½«<code>FileItem</code>×ª»»³É×Ö·û´®¡£
+ * å°†<code>FileItem</code>è½¬æ¢æˆå­—ç¬¦ä¸²ã€‚
  * 
  * @author Michael Zhou
  */

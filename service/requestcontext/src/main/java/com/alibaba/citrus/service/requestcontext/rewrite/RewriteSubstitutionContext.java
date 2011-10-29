@@ -22,9 +22,9 @@ import com.alibaba.citrus.service.requestcontext.parser.ParserRequestContext;
 import com.alibaba.citrus.util.regex.MatchResultSubstitution;
 
 /**
- * ´ú±íÒ»¸öÌæ»»¹ı³ÌµÄÉÏÏÂÎÄĞÅÏ¢¡£
+ * ä»£è¡¨ä¸€ä¸ªæ›¿æ¢è¿‡ç¨‹çš„ä¸Šä¸‹æ–‡ä¿¡æ¯ã€‚
  * <p>
- * ÓÃ»§<code>RewriteSubstitutionHandler</code>´¦Àí³ÌĞò¿ÉÒÔĞŞ¸ÄpathºÍ²ÎÊı¡£
+ * ç”¨æˆ·<code>RewriteSubstitutionHandler</code>å¤„ç†ç¨‹åºå¯ä»¥ä¿®æ”¹pathå’Œå‚æ•°ã€‚
  * </p>
  * 
  * @author Michael Zhou

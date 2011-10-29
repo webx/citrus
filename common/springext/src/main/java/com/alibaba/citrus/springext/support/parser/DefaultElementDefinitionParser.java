@@ -33,7 +33,7 @@ import org.w3c.dom.Element;
 import com.alibaba.citrus.springext.util.SpringExtUtil;
 
 /**
- * ÓÃÀ´½âÎödefault elementµÄparser¡£
+ * ç”¨æ¥è§£ædefault elementçš„parserã€‚
  * 
  * @author Michael Zhou
  */

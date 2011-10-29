@@ -18,11 +18,11 @@
 package com.alibaba.citrus.service.resource;
 
 /**
- * ¶¨ÒåÁË²éÕÒresourceÊ±µÄ²ÎÊý¡£
+ * å®šä¹‰äº†æŸ¥æ‰¾resourceæ—¶çš„å‚æ•°ã€‚
  */
 public enum ResourceLoadingOption {
     /**
-     * ¼ÙÈçÖ¸¶¨ÁËÕâ¸öÑ¡Ïî£¬Ôò±íÃ÷Ëù²éÕÒµÄresourceÊÇÓÃÀ´¡°±»´´½¨¡±µÄ£¬Òò´Ë²»±Ø´æÔÚ¡£ ÀýÈç£¬ÎªÁË´´½¨ÐÂÎÄ¼þ¡¢ÐÂÄ¿Â¼¶ø²éÕÒ×ÊÔ´¡£
+     * å‡å¦‚æŒ‡å®šäº†è¿™ä¸ªé€‰é¡¹ï¼Œåˆ™è¡¨æ˜Žæ‰€æŸ¥æ‰¾çš„resourceæ˜¯ç”¨æ¥â€œè¢«åˆ›å»ºâ€çš„ï¼Œå› æ­¤ä¸å¿…å­˜åœ¨ã€‚ ä¾‹å¦‚ï¼Œä¸ºäº†åˆ›å»ºæ–°æ–‡ä»¶ã€æ–°ç›®å½•è€ŒæŸ¥æ‰¾èµ„æºã€‚
      */
     FOR_CREATE;
 }

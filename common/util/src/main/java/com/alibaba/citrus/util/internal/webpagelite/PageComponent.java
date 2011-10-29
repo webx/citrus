@@ -26,7 +26,7 @@ import java.net.URL;
 import com.alibaba.citrus.util.templatelite.Template;
 
 /**
- * ´ú±íÒ»¸ö¼òµ¥µÄÒ³Ãæ×é¼ş¡£
+ * ä»£è¡¨ä¸€ä¸ªç®€å•çš„é¡µé¢ç»„ä»¶ã€‚
  * 
  * @author Michael Zhou
  */
@@ -37,7 +37,7 @@ public abstract class PageComponent {
     private final Template template;
 
     /**
-     * ´´½¨²¢×¢²áÒ³Ãæ×é¼ş¡£
+     * åˆ›å»ºå¹¶æ³¨å†Œé¡µé¢ç»„ä»¶ã€‚
      */
     public PageComponent(PageComponentRegistry registry, String componentPath) {
         this.registry = assertNotNull(registry, "pageComponentRegistry");
@@ -45,7 +45,7 @@ public abstract class PageComponent {
 
         registry.register(componentPath, this);
 
-        // ¸ù¾İnaming convention´´½¨template
+        // æ ¹æ®naming conventionåˆ›å»ºtemplate
         String className = getClass().getSimpleName();
         StringBuilder name = new StringBuilder(className);
 
@@ -66,10 +66,10 @@ public abstract class PageComponent {
     }
 
     /**
-     * ¹æ¸ñ»¯componentPath¡£
+     * è§„æ ¼åŒ–componentPathã€‚
      */
     static String normalizeComponentPath(String componentPath) {
-        // È¥³ı¿ªÊ¼µÄ/£¬È·±£ÒÔ/½áÎ²£¬³ı·ÇÊÇ¿ÕÂ·¾¶
+        // å»é™¤å¼€å§‹çš„/ï¼Œç¡®ä¿ä»¥/ç»“å°¾ï¼Œé™¤éæ˜¯ç©ºè·¯å¾„
         componentPath = normalizeURI(componentPath).replaceAll("^/|/$", "") + "/";
 
         if (componentPath.equals("/")) {
@@ -96,7 +96,7 @@ public abstract class PageComponent {
     }
 
     /**
-     * Éú³Écomponent×ÊÔ´µÄURL£¬¹©visitorµ÷ÓÃ¡£
+     * ç”Ÿæˆcomponentèµ„æºçš„URLï¼Œä¾›visitorè°ƒç”¨ã€‚
      */
     public String getComponentURL(RequestContext request, String relativeUrl) {
         return request.getResourceURL(getComponentPath() + relativeUrl);

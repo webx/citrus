@@ -32,9 +32,9 @@ import com.alibaba.citrus.util.ObjectUtil;
 import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
- * ÔÚÄ£°åÖĞÊ¹ÓÃconstantµÄtool¡£
+ * åœ¨æ¨¡æ¿ä¸­ä½¿ç”¨constantçš„toolã€‚
  * <p>
- * ÀıÈç£º<code>$myconstant.MY_CONSTANT</code>¡£
+ * ä¾‹å¦‚ï¼š<code>$myconstant.MY_CONSTANT</code>ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -59,9 +59,9 @@ public class ConstantTool implements ToolFactory {
         for (Field field : fields) {
             int modifier = field.getModifiers();
 
-            // È¡µÃpublic static finalµÄ³£Á¿¡£
+            // å–å¾—public static finalçš„å¸¸é‡ã€‚
             if (Modifier.isPublic(modifier) && Modifier.isFinal(modifier) && Modifier.isStatic(modifier)) {
-                // ´¦ÀíÃû³Æ³åÍ»£¬È·±£×ÓÀà¸²¸Ç¸¸ÀàµÄ³£Á¿¡£
+                // å¤„ç†åç§°å†²çªï¼Œç¡®ä¿å­ç±»è¦†ç›–çˆ¶ç±»çš„å¸¸é‡ã€‚
                 if (fieldsMap.containsKey(field.getName())) {
                     Field existField = fieldsMap.get(field.getName());
 

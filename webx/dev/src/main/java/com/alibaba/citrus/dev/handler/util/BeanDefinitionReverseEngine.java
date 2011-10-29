@@ -49,7 +49,7 @@ import org.springframework.beans.factory.support.ReplaceOverride;
 import org.springframework.beans.factory.xml.BeanDefinitionParserDelegate;
 
 /**
- * ½«<code>BeanDefinition</code>×ª»»³Éxml¡£
+ * å°†<code>BeanDefinition</code>è½¬æ¢æˆxmlã€‚
  * 
  * @author Michael Zhou
  */
@@ -407,12 +407,12 @@ public class BeanDefinitionReverseEngine {
                 String type = ((TypedStringValue) keyOrValue).getTargetTypeName();
 
                 if (type != null) {
-                    // Èç¹û<map>ÖĞÃ»ÓĞtype attribute£¬Ôò°ÑtypeÉèÖÃµ½mapÖĞ£¬×÷ÎªÄ¬ÈÏµÄtype¡£
+                    // å¦‚æœ<map>ä¸­æ²¡æœ‰type attributeï¼Œåˆ™æŠŠtypeè®¾ç½®åˆ°mapä¸­ï¼Œä½œä¸ºé»˜è®¤çš„typeã€‚
                     if (mapElement != null && typeAttrName != null && !mapElement.hasAttribute(typeAttrName)) {
                         mapElement.addAttribute(typeAttrName, new ClassValue(type));
                     }
 
-                    // Èç¹ûtypeºÍ<map>ÖĞµÄÄ¬ÈÏtypeÏàÍ¬£¬Ôò²»ÏÔÊ¾
+                    // å¦‚æœtypeå’Œ<map>ä¸­çš„é»˜è®¤typeç›¸åŒï¼Œåˆ™ä¸æ˜¾ç¤º
                     if (type.equals(mapElement.getAttribute(typeAttrName))) {
                         type = null;
                     }
@@ -445,12 +445,12 @@ public class BeanDefinitionReverseEngine {
     private void simpleValue(Element element, StyledValue value, String type, boolean supportValueAttribute,
                              Element containerElement, String typeAttrName) {
         if (type != null) {
-            // Èç¹û<list>ÖĞÃ»ÓĞtype attribute£¬Ôò°ÑtypeÉèÖÃµ½mapÖĞ£¬×÷ÎªÄ¬ÈÏµÄtype¡£
+            // å¦‚æœ<list>ä¸­æ²¡æœ‰type attributeï¼Œåˆ™æŠŠtypeè®¾ç½®åˆ°mapä¸­ï¼Œä½œä¸ºé»˜è®¤çš„typeã€‚
             if (containerElement != null && typeAttrName != null && !containerElement.hasAttribute(typeAttrName)) {
                 containerElement.addAttribute(typeAttrName, new ClassValue(type));
             }
 
-            // Èç¹ûtypeºÍ<list>ÖĞµÄÄ¬ÈÏtypeÏàÍ¬£¬Ôò²»ÏÔÊ¾
+            // å¦‚æœtypeå’Œ<list>ä¸­çš„é»˜è®¤typeç›¸åŒï¼Œåˆ™ä¸æ˜¾ç¤º
             if (type.equals(containerElement.getAttribute(typeAttrName))) {
                 type = null;
             }

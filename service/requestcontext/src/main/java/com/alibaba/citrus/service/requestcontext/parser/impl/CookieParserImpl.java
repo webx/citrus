@@ -30,9 +30,9 @@ import com.alibaba.citrus.service.requestcontext.parser.CookieParser;
 import com.alibaba.citrus.service.requestcontext.parser.ParserRequestContext;
 
 /**
- * <code>CookieParser</code>ÊÇÓÃÀ´½âÎöºÍÌí¼ÓHTTPÇëÇóÖĞµÄcookiesµÄ½Ó¿Ú¡£
+ * <code>CookieParser</code>æ˜¯ç”¨æ¥è§£æå’Œæ·»åŠ HTTPè¯·æ±‚ä¸­çš„cookiesçš„æ¥å£ã€‚
  * <p>
- * ×¢Òâ£º<code>CookieParser</code>ÓÀÔ¶Ê¹ÓÃ<code>ISO-8859-1</code>±àÂëÀ´´¦ÀícookieµÄÃû³ÆºÍÖµ¡£
+ * æ³¨æ„ï¼š<code>CookieParser</code>æ°¸è¿œä½¿ç”¨<code>ISO-8859-1</code>ç¼–ç æ¥å¤„ç†cookieçš„åç§°å’Œå€¼ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -41,7 +41,7 @@ public class CookieParserImpl extends AbstractValueParser implements CookieParse
     private final static Logger log = LoggerFactory.getLogger(CookieParser.class);
 
     /**
-     * ´ÓrequestÖĞ´´½¨ĞÂµÄcookies¡£
+     * ä»requestä¸­åˆ›å»ºæ–°çš„cookiesã€‚
      */
     public CookieParserImpl(ParserRequestContext requestContext) {
         super(requestContext);
@@ -86,7 +86,7 @@ public class CookieParserImpl extends AbstractValueParser implements CookieParse
     public void setCookie(String name, String value, int seconds_age) {
         Cookie cookie = new Cookie(name, value);
 
-        // ÉèÖÃcookie×÷ÓÃÊ±¼ä¡¢domainºÍpath¡£
+        // è®¾ç½®cookieä½œç”¨æ—¶é—´ã€domainå’Œpathã€‚
         cookie.setMaxAge(seconds_age);
         cookie.setDomain(getCookieDomain());
         cookie.setPath(getCookiePath());
@@ -95,9 +95,9 @@ public class CookieParserImpl extends AbstractValueParser implements CookieParse
     }
 
     /**
-     * È¡µÃcookieµÄdomain¡£
+     * å–å¾—cookieçš„domainã€‚
      * 
-     * @return cookieµÄdomain
+     * @return cookieçš„domain
      */
     protected String getCookieDomain() {
         String domain = defaultIfEmpty(requestContext.getRequest().getServerName(), EMPTY_STRING);
@@ -107,15 +107,15 @@ public class CookieParserImpl extends AbstractValueParser implements CookieParse
         if (length < 2) {
             return domain;
         } else {
-            // Ö»È¡×îºóÁ½²¿·Ö£¬ÕâÊÇ×îÆÕ±éµÄÇéĞÎ
+            // åªå–æœ€åä¸¤éƒ¨åˆ†ï¼Œè¿™æ˜¯æœ€æ™®éçš„æƒ…å½¢
             return "." + parts[length - 2] + "." + parts[length - 1];
         }
     }
 
     /**
-     * È¡µÃcookieµÄpath¡£
+     * å–å¾—cookieçš„pathã€‚
      * 
-     * @return cookieµÄpath
+     * @return cookieçš„path
      */
     protected String getCookiePath() {
         return defaultIfEmpty(requestContext.getRequest().getContextPath(), "/");

@@ -59,28 +59,28 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
     private PullService parent;
     private String contextKey;
 
-    // toolName -> factory£¬°üº¬ËùÓĞÀàĞÍµÄfactories£¬³õÊ¼»¯ºó¼´Çå³ı¡£
-    // ¿ÉÄÜ°üº¬£º
+    // toolName -> factoryï¼ŒåŒ…å«æ‰€æœ‰ç±»å‹çš„factoriesï¼Œåˆå§‹åŒ–åå³æ¸…é™¤ã€‚
+    // å¯èƒ½åŒ…å«ï¼š
     // 1. ToolFactory           - non-singleton or singleton
     // 2. ToolSetFactory        - non-singleton or singleton
     // 3. RuntimeToolSetFactory - non-singleton
     private Map<String, Object> toolFactories;
 
-    // toolName -> toolFactory£¬non-singleton tool factories
+    // toolName -> toolFactoryï¼Œnon-singleton tool factories
     private Map<String, ToolFactory> tools;
 
-    // toolName -> toolSetFactory£¬non-singleton tool set factories
+    // toolName -> toolSetFactoryï¼Œnon-singleton tool set factories
     private Map<String, ToolSetInfo<ToolSetFactory>> toolsInSet;
 
     // toolName -> runtimeToolSetFactory
     private Map<String, RuntimeToolSetFactory> toolsRuntime;
 
-    // ÔÚ³õÊ¼»¯Ê±£¬Ô¤ÏÈ±»pullµÄtools£¬ÓĞÁ½ÖÖÀ´Ô´£º
+    // åœ¨åˆå§‹åŒ–æ—¶ï¼Œé¢„å…ˆè¢«pullçš„toolsï¼Œæœ‰ä¸¤ç§æ¥æºï¼š
     // 1. singleton toolFactory
     // 2. singleton toolSetFactory
     private Map<String, Object> prePulledTools;
 
-    // ËùÓĞ·Çruntime toolsµÄÃû³Æ£¬°üÀ¨£º
+    // æ‰€æœ‰éruntime toolsçš„åç§°ï¼ŒåŒ…æ‹¬ï¼š
     // 1. singleton or non-singleton tools
     // 1. singleton or non-singleton tools in set
     private Set<ToolName> toolNames;
@@ -110,17 +110,17 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
     }
 
     /**
-     * ³õÊ¼»¯parent pull service¡£
+     * åˆå§‹åŒ–parent pull serviceã€‚
      */
     private void initParent() {
         if (parent != null || beanFactory == null || beanFactory.getParent() == null) {
             return;
         }
 
-        // È¡µÃparent pull service£¬ÒÀ´Î³¢ÊÔ£º
-        // 1. ÔÚÅäÖÃÎÄ¼şÖĞÃ÷È·ÉèÖÃparentRef
-        // 2. parent contextÖĞÍ¬ÃûµÄ¶ÔÏó
-        // 3. parent contextÖĞÄ¬ÈÏÃû³ÆµÄ¶ÔÏó
+        // å–å¾—parent pull serviceï¼Œä¾æ¬¡å°è¯•ï¼š
+        // 1. åœ¨é…ç½®æ–‡ä»¶ä¸­æ˜ç¡®è®¾ç½®parentRef
+        // 2. parent contextä¸­åŒåçš„å¯¹è±¡
+        // 3. parent contextä¸­é»˜è®¤åç§°çš„å¯¹è±¡
         String parentBeanName = null;
 
         if (beanFactory.getParent().containsBean(getBeanName())) {
@@ -135,7 +135,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
     }
 
     /**
-     * ´´½¨Ò»¸öÔÚÕû¸öJVMÖĞ²»ÖØ¸´µÄcontextKey¡£
+     * åˆ›å»ºä¸€ä¸ªåœ¨æ•´ä¸ªJVMä¸­ä¸é‡å¤çš„contextKeyã€‚
      */
     private void initContextKey() {
         int i = contextKeyCounter.getAndIncrement();
@@ -143,7 +143,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
     }
 
     /**
-     * ³õÊ¼»¯ËùÓĞtool factories¡£
+     * åˆå§‹åŒ–æ‰€æœ‰tool factoriesã€‚
      */
     private void initToolFactories() {
         tools = createHashMap();
@@ -164,7 +164,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
                 int type = getFactoryType(factory);
 
                 if (testBit(type, SINGLETON)) {
-                    // ½«singleton toolÔ¤ÏÈÈ¡Öµ
+                    // å°†singleton toolé¢„å…ˆå–å€¼
                     if (testBit(type, TOOL_FACTORY)) {
                         Object tool;
 
@@ -184,7 +184,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
                         }
                     }
 
-                    // ½«singleton tool setÔ¤ÏÈÈ¡µÃÃ¿Ò»¸öÖµ
+                    // å°†singleton tool seté¢„å…ˆå–å¾—æ¯ä¸€ä¸ªå€¼
                     if (testBit(type, TOOL_SET_FACTORY)) {
                         Iterable<String> names = ((ToolSetFactory) factory).getToolNames();
 
@@ -215,7 +215,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
                         }
                     }
                 } else {
-                    // ½«non-singleton tool£¬Ô¤ÏÈÈ¡µÃÆäÃû³Æ¡£
+                    // å°†non-singleton toolï¼Œé¢„å…ˆå–å¾—å…¶åç§°ã€‚
                     if (testBit(type, TOOL_FACTORY)) {
                         ToolName toolName = new ToolName(null, name, false);
 
@@ -225,7 +225,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
                         getLogger().debug("Pre-queued tool: {}", toolName);
                     }
 
-                    // ½«non-singleton tool set£¬Ô¤ÏÈÈ¡µÃÃ¿Ò»¸öÃû³Æ¡£
+                    // å°†non-singleton tool setï¼Œé¢„å…ˆå–å¾—æ¯ä¸€ä¸ªåç§°ã€‚
                     if (testBit(type, TOOL_SET_FACTORY)) {
                         Iterable<String> names = ((ToolSetFactory) factory).getToolNames();
 
@@ -246,7 +246,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
                         }
                     }
 
-                    // ±£´æruntime tool
+                    // ä¿å­˜runtime tool
                     if (testBit(type, RUNTIME_TOOL_SET_FACTORY)) {
                         toolsRuntime.put(name, (RuntimeToolSetFactory) factory);
                     }
@@ -260,8 +260,8 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
     public PullContext getContext() {
         RequestAttributes attrs = null;
 
-        // ´ÓrequestÖĞÈ¡µÃcontext£¬¼ÙÈçµ±Ç°²»ÊÇÔÚweb»·¾³ÖĞ£¬Ôò´´½¨Ò»¸öĞÂµÄcontext£¬
-        // ´Ó¶øÈ·±£ÔÚ·Çweb»·¾³ÖĞÒ²¿ÉÒÔÊ¹ÓÃpull service¡£
+        // ä»requestä¸­å–å¾—contextï¼Œå‡å¦‚å½“å‰ä¸æ˜¯åœ¨webç¯å¢ƒä¸­ï¼Œåˆ™åˆ›å»ºä¸€ä¸ªæ–°çš„contextï¼Œ
+        // ä»è€Œç¡®ä¿åœ¨éwebç¯å¢ƒä¸­ä¹Ÿå¯ä»¥ä½¿ç”¨pull serviceã€‚
         try {
             attrs = RequestContextHolder.currentRequestAttributes();
         } catch (IllegalStateException e) {
@@ -392,7 +392,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
             }
 
             pulledTools = createHashMap();
-            toolsRuntime = createTreeMap(); // ÅÅĞòÒÔ±£Ö¤µ¥Ôª²âÊÔµÄÈ·¶¨ĞÔ
+            toolsRuntime = createTreeMap(); // æ’åºä»¥ä¿è¯å•å…ƒæµ‹è¯•çš„ç¡®å®šæ€§
             toolsInRuntimeSet = createHashMap();
             toolNames = createHashSet();
 
@@ -412,11 +412,11 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
 
             Object tool;
 
-            // Èç¹ûnameÒÑ¾­±»pre-pulled£¬ÔòÖ±½Ó·µ»Ø
+            // å¦‚æœnameå·²ç»è¢«pre-pulledï¼Œåˆ™ç›´æ¥è¿”å›
             tool = prePulledTools.get(name);
 
             if (tool == null) {
-                // ¼ì²é±¾µØ»º´æ£¬Èç¹ûnameÔçÒÑ´æÔÚ£¬ÔòÖ±½Ó·µ»Ø
+                // æ£€æŸ¥æœ¬åœ°ç¼“å­˜ï¼Œå¦‚æœnameæ—©å·²å­˜åœ¨ï¼Œåˆ™ç›´æ¥è¿”å›
                 tool = pulledTools.get(name);
 
                 if (tool == null) {
@@ -428,7 +428,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
                 }
             }
 
-            // Èç¹ûÓĞparent context£¬ÔòÊÔ×Å´ÓparentÖĞÈ¡µÃ
+            // å¦‚æœæœ‰parent contextï¼Œåˆ™è¯•ç€ä»parentä¸­å–å¾—
             if (tool == null && parentContext != null) {
                 return parentContext.pull(name);
             } else {
@@ -437,7 +437,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
         }
 
         private Object doPulling(String name) {
-            // Èç¹û´æÔÚÓÚtoolsÖĞ£¬ÔòpullÖ®¡£
+            // å¦‚æœå­˜åœ¨äºtoolsä¸­ï¼Œåˆ™pullä¹‹ã€‚
             ToolFactory toolFactory = tools.get(name);
 
             if (toolFactory != null) {
@@ -456,7 +456,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
                 return encode(tool);
             }
 
-            // Èç¹û´æÔÚÓÚtoolsInSetÖĞ£¬ÔòpullÖ®¡£
+            // å¦‚æœå­˜åœ¨äºtoolsInSetä¸­ï¼Œåˆ™pullä¹‹ã€‚
             ToolSetInfo<ToolSetFactory> toolSetInfo = toolsInSet.get(name);
 
             if (toolSetInfo != null) {
@@ -477,7 +477,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
                 return encode(tool);
             }
 
-            // Èç¹û´æÔÚÓÚtoolsInRuntimeSetÖĞ£¬ÔòpullÖ®¡£
+            // å¦‚æœå­˜åœ¨äºtoolsInRuntimeSetä¸­ï¼Œåˆ™pullä¹‹ã€‚
             pullToolsRuntime(name);
 
             ToolSetInfo<RuntimeToolSetFactory> runtimeToolSetInfo = toolsInRuntimeSet.get(name);
@@ -539,7 +539,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
 
                 getLogger().debug("Queued {} tools for runtime tool-set \"{}\"", count, toolSetName);
 
-                // ¼ÙÈçÒÑ¾­ÕÒµ½ÁËstopOnName£¬ÔòÁ¢¼´·µ»Ø
+                // å‡å¦‚å·²ç»æ‰¾åˆ°äº†stopOnNameï¼Œåˆ™ç«‹å³è¿”å›
                 if (stopOnName != null && toolsInRuntimeSet.containsKey(stopOnName)) {
                     break;
                 }

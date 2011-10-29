@@ -21,7 +21,7 @@ import com.alibaba.citrus.expr.ExpressionContext;
 import com.alibaba.citrus.expr.support.ExpressionSupport;
 
 /**
- * ´ú±íÒ»¸ö³£Á¿±í´ïÊ½£¬¸Ã±í´ïÊ½µÄÖµ²»ÒÀÀµÓÚ<code>ExpressionContext</code>¡£
+ * ä»£è¡¨ä¸€ä¸ªå¸¸é‡è¡¨è¾¾å¼ï¼Œè¯¥è¡¨è¾¾å¼çš„å€¼ä¸ä¾èµ–äº<code>ExpressionContext</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -29,52 +29,52 @@ public class ConstantExpression extends ExpressionSupport {
     private Object value;
 
     /**
-     * ´´½¨Ò»¸ö³£Á¿±í´ïÊ½¡£
+     * åˆ›å»ºä¸€ä¸ªå¸¸é‡è¡¨è¾¾å¼ã€‚
      */
     public ConstantExpression() {
     }
 
     /**
-     * ´´½¨Ò»¸ö³£Á¿±í´ïÊ½¡£
+     * åˆ›å»ºä¸€ä¸ªå¸¸é‡è¡¨è¾¾å¼ã€‚
      * 
-     * @param value ³£Á¿Öµ
+     * @param value å¸¸é‡å€¼
      */
     public ConstantExpression(Object value) {
         this.value = value;
     }
 
     /**
-     * È¡µÃ³£Á¿Öµ¡£
+     * å–å¾—å¸¸é‡å€¼ã€‚
      * 
-     * @return ³£Á¿Öµ
+     * @return å¸¸é‡å€¼
      */
     public Object getValue() {
         return value;
     }
 
     /**
-     * ÉèÖÃ³£Á¿Öµ¡£
+     * è®¾ç½®å¸¸é‡å€¼ã€‚
      * 
-     * @param value ³£Á¿Öµ
+     * @param value å¸¸é‡å€¼
      */
     public void setValue(Object value) {
         this.value = value;
     }
 
     /**
-     * È¡µÃ±í´ïÊ½×Ö·û´®±íÊ¾¡£
+     * å–å¾—è¡¨è¾¾å¼å­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      * 
-     * @return ±í´ïÊ½×Ö·û´®±íÊ¾
+     * @return è¡¨è¾¾å¼å­—ç¬¦ä¸²è¡¨ç¤º
      */
     public String getExpressionText() {
         return String.valueOf(value);
     }
 
     /**
-     * ÔÚÖ¸¶¨µÄÉÏÏÂÎÄÖĞ¼ÆËã±í´ïÊ½¡£
+     * åœ¨æŒ‡å®šçš„ä¸Šä¸‹æ–‡ä¸­è®¡ç®—è¡¨è¾¾å¼ã€‚
      * 
-     * @param context <code>ExpressionContext</code>ÉÏÏÂÎÄ
-     * @return ±í´ïÊ½µÄ¼ÆËã½á¹û
+     * @param context <code>ExpressionContext</code>ä¸Šä¸‹æ–‡
+     * @return è¡¨è¾¾å¼çš„è®¡ç®—ç»“æœ
      */
     public Object evaluate(ExpressionContext context) {
         return value;

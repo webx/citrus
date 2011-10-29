@@ -31,15 +31,15 @@ import com.alibaba.citrus.util.ToStringBuilder.CollectionBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ´ú±íÒ»¸öÊÚÈ¨£¬¿ÉÒÔ¶ÔroleºÍuser½øĞĞÊÚÈ¨¡£
+ * ä»£è¡¨ä¸€ä¸ªæˆæƒï¼Œå¯ä»¥å¯¹roleå’Œuserè¿›è¡Œæˆæƒã€‚
  * 
  * @author Michael Zhou
  */
 public class AuthGrant {
-    /** MATCH_EVERYTHING´ú±íËùÓĞÓÃ»§ºÍrole£¬µ«²»°üº¬ÄäÃûÓÃ»§ */
+    /** MATCH_EVERYTHINGä»£è¡¨æ‰€æœ‰ç”¨æˆ·å’Œroleï¼Œä½†ä¸åŒ…å«åŒ¿åç”¨æˆ· */
     public final static String MATCH_EVERYTHING = "*";
 
-    /** ÌØÀıÓÃ»§Ãû£ºÄäÃûÓÃ»§ */
+    /** ç‰¹ä¾‹ç”¨æˆ·åï¼šåŒ¿åç”¨æˆ· */
     public final static String ANONYMOUS_USER = "anonymous";
 
     private String[] users;
@@ -71,7 +71,7 @@ public class AuthGrant {
                 item = trimToNull(item);
 
                 if (item != null) {
-                    // ÓÅ»¯ĞÔÄÜ£¬±ÜÃâ×Ö·û´®µÄ±È½Ï£¬Ö»ĞèÒªÓÃ==±È½Ï¼´¿É¡£
+                    // ä¼˜åŒ–æ€§èƒ½ï¼Œé¿å…å­—ç¬¦ä¸²çš„æ¯”è¾ƒï¼Œåªéœ€è¦ç”¨==æ¯”è¾ƒå³å¯ã€‚
                     if (canonicals != null) {
                         int i = arrayIndexOf(canonicals, item);
 

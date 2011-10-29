@@ -18,18 +18,18 @@
 package com.alibaba.citrus.service.mail.builder;
 
 /**
- * Ö§³Ö½«¶à¸öcontent×éºÏÆğÀ´µÄcontent½Ó¿Ú¡£
+ * æ”¯æŒå°†å¤šä¸ªcontentç»„åˆèµ·æ¥çš„contentæ¥å£ã€‚
  * 
  * @author Michael Zhou
  */
 public interface Multipart {
     /**
-     * Ìí¼ÓÒ»¸öÄÚÈİ²¿·Ö¡£
+     * æ·»åŠ ä¸€ä¸ªå†…å®¹éƒ¨åˆ†ã€‚
      */
     void addContent(MailContent content);
 
     /**
-     * È¡µÃËùÓĞµÄ×Ócontents¡£
+     * å–å¾—æ‰€æœ‰çš„å­contentsã€‚
      */
     MailContent[] getContents();
 }

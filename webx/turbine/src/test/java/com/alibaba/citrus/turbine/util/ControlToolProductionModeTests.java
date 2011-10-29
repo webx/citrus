@@ -57,7 +57,7 @@ public class ControlToolProductionModeTests extends AbstractPullToolTests<Contro
     public void render_withError() throws Exception {
         String content = tool.setModule("myControlWithError").setParameter("with_XSS", true).render();
 
-        // prod mode, errorDetail == messageOnly, È·±£html escape¡£
+        // prod mode, errorDetail == messageOnly, ç¡®ä¿html escapeã€‚
         assertThat(
                 content,
                 containsAll(

@@ -21,10 +21,10 @@ import javax.servlet.http.Cookie;
 
 public interface CookieInterceptor extends ResponseHeaderInterceptor {
     /**
-     * ¼ì²écookie¡£
+     * æ£€æŸ¥cookieã€‚
      * 
-     * @return ·µ»ØÖµ±íÊ¾ĞŞ¸Äcookie£¬·µ»Ø<code>null</code>Ôò±íÊ¾¾Ü¾ø¸Ãcookie¡£ ÌØ±ğÖ§³Ö
-     *         <code>CookieSupport</code>Àà¡£
+     * @return è¿”å›å€¼è¡¨ç¤ºä¿®æ”¹cookieï¼Œè¿”å›<code>null</code>åˆ™è¡¨ç¤ºæ‹’ç»è¯¥cookieã€‚ ç‰¹åˆ«æ”¯æŒ
+     *         <code>CookieSupport</code>ç±»ã€‚
      */
     Cookie checkCookie(Cookie cookie);
 }

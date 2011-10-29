@@ -1,4 +1,4 @@
-ÀàĞÍ¹ØÏµÍ¼£º
+ç±»å‹å…³ç³»å›¾ï¼š
 ---------------
 
 class ClassInteger extends ClassA<Integer> {
@@ -17,15 +17,15 @@ class ClassC<C1, C2> {
 
 
 (RawTypeInfo) ClassInteger --> (ParameterizedTypeInfo) ClassA<A=Ingteger>
-                                   ¡ı
+                                   â†“
                                (RawTypeInfo) ClassA                       --> (ParameterizedTypeInfo) ClassB<B=A>
-                                                                                  ¡ı
+                                                                                  â†“
                                                                               (RawTypeInfo) ClassB                 --> (ParameterizedType) ClassC<C1=String, C2=B>
-                                                                                                                             ¡ı
+                                                                                                                             â†“
                                                                                                                        (RawTypeInfo) ClassC
 
-ËµÃ÷£º
+è¯´æ˜ï¼š
 -----
 
-* Ã¿Ò»ĞĞ´ú±íÒ»¸öTypeInfo¼°Æä¸¸Àà¡¢½Ó¿ÚËùĞÎ³ÉµÄÁ´¡£
-* RawTypeInfo±»»º´æ£¬¶øParameterizedTypeInfoÊÇËæ»ú´´½¨µÄ¡£
+* æ¯ä¸€è¡Œä»£è¡¨ä¸€ä¸ªTypeInfoåŠå…¶çˆ¶ç±»ã€æ¥å£æ‰€å½¢æˆçš„é“¾ã€‚
+* RawTypeInfoè¢«ç¼“å­˜ï¼Œè€ŒParameterizedTypeInfoæ˜¯éšæœºåˆ›å»ºçš„ã€‚

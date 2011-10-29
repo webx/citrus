@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>MessageUtil</code>¡£
+ * æµ‹è¯•<code>MessageUtil</code>ã€‚
  * 
  * @author Michael Zhou
  */

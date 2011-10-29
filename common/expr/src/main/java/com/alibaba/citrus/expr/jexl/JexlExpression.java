@@ -28,7 +28,7 @@ import com.alibaba.citrus.expr.ExpressionContext;
 import com.alibaba.citrus.expr.support.ExpressionSupport;
 
 /**
- * ´ú±íÒ»¸öjexl±í´ïÊ½¡£
+ * ä»£è¡¨ä¸€ä¸ªjexlè¡¨è¾¾å¼ã€‚
  * 
  * @author Michael Zhou
  */
@@ -37,28 +37,28 @@ public class JexlExpression extends ExpressionSupport {
     private Expression expression;
 
     /**
-     * ´´½¨Ò»¸öJexl±í´ïÊ½¡£
+     * åˆ›å»ºä¸€ä¸ªJexlè¡¨è¾¾å¼ã€‚
      * 
-     * @param expr jexl±í´ïÊ½¶ÔÏó
+     * @param expr jexlè¡¨è¾¾å¼å¯¹è±¡
      */
     public JexlExpression(Expression expr) {
         this.expression = expr;
     }
 
     /**
-     * È¡µÃ±í´ïÊ½×Ö·û´®±íÊ¾¡£
+     * å–å¾—è¡¨è¾¾å¼å­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      * 
-     * @return ±í´ïÊ½×Ö·û´®±íÊ¾
+     * @return è¡¨è¾¾å¼å­—ç¬¦ä¸²è¡¨ç¤º
      */
     public String getExpressionText() {
         return expression.getExpression();
     }
 
     /**
-     * ÔÚÖ¸¶¨µÄÉÏÏÂÎÄÖĞ¼ÆËã±í´ïÊ½¡£
+     * åœ¨æŒ‡å®šçš„ä¸Šä¸‹æ–‡ä¸­è®¡ç®—è¡¨è¾¾å¼ã€‚
      * 
-     * @param context <code>ExpressionContext</code>ÉÏÏÂÎÄ
-     * @return ±í´ïÊ½µÄ¼ÆËã½á¹û
+     * @param context <code>ExpressionContext</code>ä¸Šä¸‹æ–‡
+     * @return è¡¨è¾¾å¼çš„è®¡ç®—ç»“æœ
      */
     public Object evaluate(ExpressionContext context) {
         try {
@@ -82,7 +82,7 @@ public class JexlExpression extends ExpressionSupport {
     }
 
     /**
-     * ½«<code>ExpressionContext</code>ÊÊÅäµ½<code>JexlContext</code>¡£
+     * å°†<code>ExpressionContext</code>é€‚é…åˆ°<code>JexlContext</code>ã€‚
      */
     private static class JexlContextAdapter implements JexlContext {
         private ExpressionContext expressionContext;

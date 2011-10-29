@@ -27,7 +27,7 @@ import com.alibaba.citrus.generictype.introspect.PropertyInfo;
 import com.alibaba.citrus.util.internal.ArrayUtil;
 
 /**
- * <code>PropertiesAnalyzerTests</code>�Ļ��ࡣ
+ * <code>PropertiesAnalyzerTests</code>的基类。
  * 
  * @author Michael Zhou
  */

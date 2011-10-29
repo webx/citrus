@@ -39,7 +39,7 @@ public class InterceptorForkTests {
         assertEquals("http://localhost:8080/", u1.toString());
         assertEquals("http://localhost:8080/?test=webx3", u1.render());
 
-        // u1.toString“‘∫Û£¨interceptor≤ª±ª÷¥––°£
+        // u1.toString‰ª•ÂêéÔºåinterceptor‰∏çË¢´ÊâßË°å„ÄÇ
         u1.toString(); // http://localhost:8080/
         URIBroker u2 = u1.fork();
 

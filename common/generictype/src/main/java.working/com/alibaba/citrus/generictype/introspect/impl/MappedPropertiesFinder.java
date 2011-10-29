@@ -31,15 +31,15 @@ import com.alibaba.citrus.generictype.introspect.PropertyEvaluationFailureExcept
 import com.alibaba.citrus.generictype.introspect.PropertyInfo;
 
 /**
- * ·ÖÎömappedµÄJava BeansÊôĞÔ£¬Ò²¾ÍÊÇ£º
+ * åˆ†æmappedçš„Java Beanså±æ€§ï¼Œä¹Ÿå°±æ˜¯ï¼š
  * <ul>
- * <li>¿É¶ÁÊôĞÔ£º<code>PropertyType getPropertyName(String key)</code>¡£</li>
- * <li>¿ÉĞ´ÊôĞÔ£º
- * <code>setPropertyName(String key, PropertyType propertyValue)</code>¡£</li>
+ * <li>å¯è¯»å±æ€§ï¼š<code>PropertyType getPropertyName(String key)</code>ã€‚</li>
+ * <li>å¯å†™å±æ€§ï¼š
+ * <code>setPropertyName(String key, PropertyType propertyValue)</code>ã€‚</li>
  * </ul>
  * <p>
- * MappedµÄJava BeansÊôĞÔµÄÃû³Æ¿ÉÒÔÎª¿Õ£¬»»ÑÔÖ®£¬<code>get(String)</code>/
- * <code>set(String, Object)</code> ·½·¨½«»á±»¿´×÷Ò»¸öproperty¡£
+ * Mappedçš„Java Beanså±æ€§çš„åç§°å¯ä»¥ä¸ºç©ºï¼Œæ¢è¨€ä¹‹ï¼Œ<code>get(String)</code>/
+ * <code>set(String, Object)</code> æ–¹æ³•å°†ä¼šè¢«çœ‹ä½œä¸€ä¸ªpropertyã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -99,7 +99,7 @@ public class MappedPropertiesFinder extends AbstractPropertiesFinder {
     }
 
     /**
-     * ´ú±íÒ»¸ö´økeyµÄÊôĞÔĞÅÏ¢¡£
+     * ä»£è¡¨ä¸€ä¸ªå¸¦keyçš„å±æ€§ä¿¡æ¯ã€‚
      */
     private static class MappedPropertyImpl extends AbstractPropertyInfo implements MappedPropertyInfo {
         private MappedPropertyImpl(String name, TypeInfo declaringType, TypeInfo type, MethodInfo readMethod,

@@ -21,8 +21,8 @@ import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 /**
- * ´ú±íÒ»¸öÌæ»»¡£Ìæ»»×Ö·û´®ÖĞµÄ±äÁ¿¡£Í¨³£±äÁ¿ÒÔ<code>'$'</code>¿ªÊ¼£¬ÀıÈç£º <code>$1</code>£¬<code>$2</code>
- * µÈ£¬µ«<code>Substitution</code>Àà¿ÉÖ§³Ö¶Ô¶àÖÖ²»Í¬Ç°×ºµÄ±äÁ¿½øĞĞÌæ»»¡£
+ * ä»£è¡¨ä¸€ä¸ªæ›¿æ¢ã€‚æ›¿æ¢å­—ç¬¦ä¸²ä¸­çš„å˜é‡ã€‚é€šå¸¸å˜é‡ä»¥<code>'$'</code>å¼€å§‹ï¼Œä¾‹å¦‚ï¼š <code>$1</code>ï¼Œ<code>$2</code>
+ * ç­‰ï¼Œä½†<code>Substitution</code>ç±»å¯æ”¯æŒå¯¹å¤šç§ä¸åŒå‰ç¼€çš„å˜é‡è¿›è¡Œæ›¿æ¢ã€‚
  * 
  * @author Michael Zhou
  */
@@ -30,21 +30,21 @@ public abstract class Substitution {
     protected final String replacementPrefixes;
 
     /**
-     * ´´½¨Ò»¸öÌæ»»£¬ÒÔ<code>'$'</code>Îª±äÁ¿Ç°×º¡£
+     * åˆ›å»ºä¸€ä¸ªæ›¿æ¢ï¼Œä»¥<code>'$'</code>ä¸ºå˜é‡å‰ç¼€ã€‚
      */
     public Substitution() {
         this("$");
     }
 
     /**
-     * ´´½¨Ò»¸öÌæ»»£¬ÒÔÖ¸¶¨×Ö·ûÎª±äÁ¿Ç°×º¡£
+     * åˆ›å»ºä¸€ä¸ªæ›¿æ¢ï¼Œä»¥æŒ‡å®šå­—ç¬¦ä¸ºå˜é‡å‰ç¼€ã€‚
      */
     public Substitution(String replacementPrefixes) {
         this.replacementPrefixes = assertNotNull(trimToNull(replacementPrefixes), "replacementPrefixes");
     }
 
     /**
-     * Ìæ»»×Ö·û´®ÖĞµÄ±äÁ¿¡£
+     * æ›¿æ¢å­—ç¬¦ä¸²ä¸­çš„å˜é‡ã€‚
      */
     public final String substitute(String input) {
         if (input == null) {
@@ -59,7 +59,7 @@ public abstract class Substitution {
     }
 
     /**
-     * Ìæ»»×Ö·û´®ÖĞµÄ±äÁ¿¡£
+     * æ›¿æ¢å­—ç¬¦ä¸²ä¸­çš„å˜é‡ã€‚
      */
     public final void substitute(StringBuilder buf, String input) {
         int length = input.length();
@@ -80,7 +80,7 @@ public abstract class Substitution {
                 i++;
 
                 int num = -1;
-                int numStartIndex = i; // ±£´æindex
+                int numStartIndex = i; // ä¿å­˜index
 
                 while (i < length) {
                     int digit = input.charAt(i) - '0';
@@ -116,7 +116,7 @@ public abstract class Substitution {
     }
 
     /**
-     * ×ÓÀà¸²¸Ç´Ë·½·¨£¬ÒÔÌá¹©Ö¸¶¨ÀàĞÍ¡¢Ö¸¶¨groupĞòºÅµÄµÄreplacement½á¹û¡£
+     * å­ç±»è¦†ç›–æ­¤æ–¹æ³•ï¼Œä»¥æä¾›æŒ‡å®šç±»å‹ã€æŒ‡å®šgroupåºå·çš„çš„replacementç»“æœã€‚
      */
     protected abstract String group(int index, int groupNumber);
 }

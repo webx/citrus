@@ -20,9 +20,9 @@ package com.alibaba.citrus.turbine.uribroker.uri;
 import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 
 /**
- * Turbine·ç¸ñµÄcontent URI¡£
+ * Turbineé£æ ¼çš„content URIã€‚
  * <p>
- * Ò»¸öTurbine·ç¸ñµÄcontent URI°üÀ¨ÈçÏÂ¼¸¸ö²¿·Ö£º
+ * ä¸€ä¸ªTurbineé£æ ¼çš„content URIåŒ…æ‹¬å¦‚ä¸‹å‡ ä¸ªéƒ¨åˆ†ï¼š
  * </p>
  * 
  * <pre>
@@ -34,7 +34,7 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
  * REFERENCE   = reference
  * </pre>
  * <p>
- * ÀıÈç£º
+ * ä¾‹å¦‚ï¼š
  * </p>
  * 
  * <pre>
@@ -51,7 +51,7 @@ public class TurbineContentURIBroker extends WebxURIBroker {
     private boolean hasContentPath;
 
     /**
-     * È¡µÃprefix path¡£
+     * å–å¾—prefix pathã€‚
      */
     public String getPrefixPath() {
         if (hasPrefixPath) {
@@ -62,7 +62,7 @@ public class TurbineContentURIBroker extends WebxURIBroker {
     }
 
     /**
-     * ÉèÖÃprefix path¡£
+     * è®¾ç½®prefix pathã€‚
      */
     public TurbineContentURIBroker setPrefixPath(String prefixPath) {
         setPathSegment(PREFIX_PATH_INDEX, prefixPath);
@@ -71,7 +71,7 @@ public class TurbineContentURIBroker extends WebxURIBroker {
     }
 
     /**
-     * È¡µÃcontent path¡£
+     * å–å¾—content pathã€‚
      */
     public String getContentPath() {
         if (hasContentPath) {
@@ -82,7 +82,7 @@ public class TurbineContentURIBroker extends WebxURIBroker {
     }
 
     /**
-     * ÉèÖÃcontent path¡£
+     * è®¾ç½®content pathã€‚
      */
     public TurbineContentURIBroker setContentPath(String contentPath) {
         setPathSegment(CONTENT_PATH_INDEX, contentPath);
@@ -91,7 +91,7 @@ public class TurbineContentURIBroker extends WebxURIBroker {
     }
 
     /**
-     * ÉèÖÃcontent path¡£
+     * è®¾ç½®content pathã€‚
      */
     public TurbineContentURIBroker getURI(String uri) {
         return setContentPath(setUriAndGetPath(uri));

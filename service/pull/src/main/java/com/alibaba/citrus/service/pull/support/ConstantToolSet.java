@@ -28,10 +28,10 @@ import com.alibaba.citrus.service.pull.ToolSetFactory;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 /**
- * ÔÚÄ£°åÖĞÊ¹ÓÃconstantµÄtool¡£
+ * åœ¨æ¨¡æ¿ä¸­ä½¿ç”¨constantçš„toolã€‚
  * <p>
- * ´ËÀà¼È¿ÉÒÔÒÔtool-setµÄ·½Ê½Ê¹ÓÃ£¬Ò²¿ÉÒÔ×÷ÎªÆÕÍ¨µÄpull toolÊ¹ÓÃ£¬ÀıÈç
- * <code>$myconstant.MY_CONSTANT</code>¡£
+ * æ­¤ç±»æ—¢å¯ä»¥ä»¥tool-setçš„æ–¹å¼ä½¿ç”¨ï¼Œä¹Ÿå¯ä»¥ä½œä¸ºæ™®é€šçš„pull toolä½¿ç”¨ï¼Œä¾‹å¦‚
+ * <code>$myconstant.MY_CONSTANT</code>ã€‚
  * </p>
  * 
  * @author Michael Zhou

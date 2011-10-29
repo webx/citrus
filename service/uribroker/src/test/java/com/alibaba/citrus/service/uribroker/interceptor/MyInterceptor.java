@@ -34,7 +34,7 @@ public class MyInterceptor implements URIBrokerInterceptor {
         String path = getPath();
 
         if (broker.getQueryData("path") != null) {
-            // interceptorÖ´ĞĞ½á¹ûÊÜµ½query dataµÄÓ°Ïì£¬ÓÃÀ´²âÊÔÈ·±£interceptor²»ÔÚ³õÊ¼»¯Ê±±»Ö´ĞĞ¡£
+            // interceptoræ‰§è¡Œç»“æœå—åˆ°query dataçš„å½±å“ï¼Œç”¨æ¥æµ‹è¯•ç¡®ä¿interceptorä¸åœ¨åˆå§‹åŒ–æ—¶è¢«æ‰§è¡Œã€‚
             path = broker.getQueryData("path");
         }
 

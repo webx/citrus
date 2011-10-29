@@ -27,7 +27,7 @@ import com.alibaba.citrus.generictype.introspect.PropertyEvaluationFailureExcept
 import com.alibaba.citrus.generictype.introspect.PropertyInfo;
 
 /**
- * ·ÖÎö<code>Map</code>£¬½«map¿´×÷mappedÊôĞÔÀ´²Ù×÷¡£
+ * åˆ†æ<code>Map</code>ï¼Œå°†mapçœ‹ä½œmappedå±æ€§æ¥æ“ä½œã€‚
  * 
  * @author Michael Zhou
  */
@@ -50,7 +50,7 @@ public class MapPropertiesFinder extends SinglePropertyFinder {
     }
 
     /**
-     * ´ú±íÒ»¸ömapµÄÊôĞÔĞÅÏ¢¡£
+     * ä»£è¡¨ä¸€ä¸ªmapçš„å±æ€§ä¿¡æ¯ã€‚
      */
     private static class MapPropertyImpl extends AbstractPropertyInfo implements IndexedPropertyInfo {
         private MapPropertyImpl(TypeInfo declaringType, TypeInfo type, MethodInfo readMethod, MethodInfo writeMethod) {

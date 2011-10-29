@@ -62,7 +62,7 @@ public class MessageSourceTests extends AbstractFormServiceTests {
     public void getMessage_fromMessageSource() throws Exception {
         init("form1");
 
-        Object[][] args = new Object[][] { { "sumbit", "�ύ" }, //
+        Object[][] args = new Object[][] { { "sumbit", "提交" }, //
                 { "_fm.g._0.f", "" }, // group1.field1
                 { "_fm.g._0.fi", "" }, // group1.field2
         };
@@ -79,10 +79,10 @@ public class MessageSourceTests extends AbstractFormServiceTests {
         assertEquals(false, group.isValid());
 
         assertEquals(false, field1.isValid());
-        assertEquals("ȱ���ҵ��ֶ�1", field1.getMessage());
+        assertEquals("缺少我的字段1", field1.getMessage());
 
         assertEquals(false, field2.isValid());
-        assertEquals("ȱ��field2", field2.getMessage());
+        assertEquals("缺少field2", field2.getMessage());
 
         // zh_TW
         LocaleUtil.setContext(Locale.TAIWAN);
@@ -96,17 +96,17 @@ public class MessageSourceTests extends AbstractFormServiceTests {
         assertEquals(false, group.isValid());
 
         assertEquals(false, field1.isValid());
-        assertEquals("ȱʧ�ҵ��ֶ�1", field1.getMessage());
+        assertEquals("缺失我的字段1", field1.getMessage());
 
         assertEquals(false, field2.isValid());
-        assertEquals("ȱʧfield2", field2.getMessage());
+        assertEquals("缺失field2", field2.getMessage());
     }
 
     @Test
     public void getMessage_noMessage_or_noId() throws Exception {
         init("form2");
 
-        Object[][] args = new Object[][] { { "sumbit", "�ύ" }, //
+        Object[][] args = new Object[][] { { "sumbit", "提交" }, //
                 { "_fm.g._0.f", "" }, // group1.field1
                 { "_fm.g._0.fi", "" }, // group1.field2
         };
@@ -123,7 +123,7 @@ public class MessageSourceTests extends AbstractFormServiceTests {
         assertEquals(false, group.isValid());
 
         assertEquals(false, field1.isValid());
-        assertEquals("myform - ȱ���ҵ��ֶ�1", field1.getMessage());
+        assertEquals("myform - 缺少我的字段1", field1.getMessage());
 
         assertEquals(false, field2.isValid());
         assertEquals("required field2", field2.getMessage()); // from message
@@ -140,7 +140,7 @@ public class MessageSourceTests extends AbstractFormServiceTests {
         assertEquals(false, group.isValid());
 
         assertEquals(false, field1.isValid());
-        assertEquals("myform - ȱʧ�ҵ��ֶ�1", field1.getMessage());
+        assertEquals("myform - 缺失我的字段1", field1.getMessage());
 
         assertEquals(false, field2.isValid());
         assertEquals("required field2", field2.getMessage()); // from message

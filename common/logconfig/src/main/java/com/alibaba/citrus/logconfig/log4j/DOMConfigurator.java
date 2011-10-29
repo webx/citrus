@@ -27,8 +27,8 @@ import org.apache.log4j.helpers.LogLog;
 import org.w3c.dom.Element;
 
 /**
- * ´ÓXMLÎÄ¼şÅäÖÃlog4jµÄ¹¤¾ßÀà¡£ºÍLog4jÄ¬ÈÏµÄ<code>DOMConfigurator</code>
- * Ïà±È£¬Õâ¸öÀàÔÊĞíÌá¹©¶îÍâµÄproperties¶ÔÏó£¬ÔÚÅäÖÃÎÄ¼şÖĞ±»ÒıÓÃ¡£
+ * ä»XMLæ–‡ä»¶é…ç½®log4jçš„å·¥å…·ç±»ã€‚å’ŒLog4jé»˜è®¤çš„<code>DOMConfigurator</code>
+ * ç›¸æ¯”ï¼Œè¿™ä¸ªç±»å…è®¸æä¾›é¢å¤–çš„propertieså¯¹è±¡ï¼Œåœ¨é…ç½®æ–‡ä»¶ä¸­è¢«å¼•ç”¨ã€‚
  * 
  * @author Michael Zhou
  */
@@ -47,103 +47,103 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
     }
 
     /**
-     * ´´½¨ĞÂ¶ÔÏó¡£
+     * åˆ›å»ºæ–°å¯¹è±¡ã€‚
      */
     public DOMConfigurator() {
         this(null);
     }
 
     /**
-     * ´´½¨ĞÂ¶ÔÏó¡£
+     * åˆ›å»ºæ–°å¯¹è±¡ã€‚
      * 
-     * @param props ¿ÉÔÚÅäÖÃÎÄ¼şÖĞ±»ÒıÓÃµÄÊôĞÔ
+     * @param props å¯åœ¨é…ç½®æ–‡ä»¶ä¸­è¢«å¼•ç”¨çš„å±æ€§
      */
     public DOMConfigurator(Properties props) {
         setProperties(props);
     }
 
     /**
-     * Ê¹ÓÃXMLÎÄ¼şÅäÖÃlog4j¡£
+     * ä½¿ç”¨XMLæ–‡ä»¶é…ç½®log4jã€‚
      * 
-     * @param filename ÅäÖÃÎÄ¼şÃû
+     * @param filename é…ç½®æ–‡ä»¶å
      */
     public static void configure(String filename) {
         new DOMConfigurator().doConfigure(filename, LogManager.getLoggerRepository());
     }
 
     /**
-     * Ê¹ÓÃXMLÎÄ¼şÅäÖÃlog4j¡£
+     * ä½¿ç”¨XMLæ–‡ä»¶é…ç½®log4jã€‚
      * 
-     * @param filename ÅäÖÃÎÄ¼şÃû
-     * @param props ¿ÉÔÚÅäÖÃÎÄ¼şÖĞ±»ÒıÓÃµÄÊôĞÔ
+     * @param filename é…ç½®æ–‡ä»¶å
+     * @param props å¯åœ¨é…ç½®æ–‡ä»¶ä¸­è¢«å¼•ç”¨çš„å±æ€§
      */
     public static void configure(String filename, Properties props) {
         new DOMConfigurator(props).doConfigure(filename, LogManager.getLoggerRepository());
     }
 
     /**
-     * Ê¹ÓÃXMLÎÄ¼şÅäÖÃlog4j¡£
+     * ä½¿ç”¨XMLæ–‡ä»¶é…ç½®log4jã€‚
      * 
-     * @param url ÅäÖÃÎÄ¼şµÄURL
+     * @param url é…ç½®æ–‡ä»¶çš„URL
      */
     public static void configure(URL url) {
         new DOMConfigurator().doConfigure(url, LogManager.getLoggerRepository());
     }
 
     /**
-     * Ê¹ÓÃXMLÎÄ¼şÅäÖÃlog4j¡£
+     * ä½¿ç”¨XMLæ–‡ä»¶é…ç½®log4jã€‚
      * 
-     * @param url ÅäÖÃÎÄ¼şµÄURL
-     * @param props ¿ÉÔÚÅäÖÃÎÄ¼şÖĞ±»ÒıÓÃµÄÊôĞÔ
+     * @param url é…ç½®æ–‡ä»¶çš„URL
+     * @param props å¯åœ¨é…ç½®æ–‡ä»¶ä¸­è¢«å¼•ç”¨çš„å±æ€§
      */
     public static void configure(URL url, Properties props) {
         new DOMConfigurator(props).doConfigure(url, LogManager.getLoggerRepository());
     }
 
     /**
-     * Ê¹ÓÃXMLÎÄ¼şÅäÖÃlog4j¡£
+     * ä½¿ç”¨XMLæ–‡ä»¶é…ç½®log4jã€‚
      * 
-     * @param element ÅäÖÃÎÄ¼şÃûµÄDOM element
+     * @param element é…ç½®æ–‡ä»¶åçš„DOM element
      */
     public static void configure(Element element) {
         new DOMConfigurator().doConfigure(element, LogManager.getLoggerRepository());
     }
 
     /**
-     * Ê¹ÓÃXMLÎÄ¼şÅäÖÃlog4j¡£
+     * ä½¿ç”¨XMLæ–‡ä»¶é…ç½®log4jã€‚
      * 
-     * @param element ÅäÖÃÎÄ¼şÃûµÄDOM element
-     * @param props ¿ÉÔÚÅäÖÃÎÄ¼şÖĞ±»ÒıÓÃµÄÊôĞÔ
+     * @param element é…ç½®æ–‡ä»¶åçš„DOM element
+     * @param props å¯åœ¨é…ç½®æ–‡ä»¶ä¸­è¢«å¼•ç”¨çš„å±æ€§
      */
     public static void configure(Element element, Properties props) {
         new DOMConfigurator(props).doConfigure(element, LogManager.getLoggerRepository());
     }
 
     /**
-     * Ê¹ÓÃXMLÎÄ¼şÅäÖÃlog4j£¬Í¬Ê±¼à¿ØÎÄ¼şµÄ¸ü¸Ä¡£
+     * ä½¿ç”¨XMLæ–‡ä»¶é…ç½®log4jï¼ŒåŒæ—¶ç›‘æ§æ–‡ä»¶çš„æ›´æ”¹ã€‚
      * 
-     * @param filename ÅäÖÃÎÄ¼şÃû
+     * @param filename é…ç½®æ–‡ä»¶å
      */
     public static void configureAndWatch(String filename) {
         configureAndWatch(filename, null, FileWatchdog.DEFAULT_DELAY);
     }
 
     /**
-     * Ê¹ÓÃXMLÎÄ¼şÅäÖÃlog4j£¬Í¬Ê±¼à¿ØÎÄ¼şµÄ¸ü¸Ä¡£
+     * ä½¿ç”¨XMLæ–‡ä»¶é…ç½®log4jï¼ŒåŒæ—¶ç›‘æ§æ–‡ä»¶çš„æ›´æ”¹ã€‚
      * 
-     * @param filename ÅäÖÃÎÄ¼şÃû
-     * @param props ¿ÉÔÚÅäÖÃÎÄ¼şÖĞ±»ÒıÓÃµÄÊôĞÔ
+     * @param filename é…ç½®æ–‡ä»¶å
+     * @param props å¯åœ¨é…ç½®æ–‡ä»¶ä¸­è¢«å¼•ç”¨çš„å±æ€§
      */
     public static void configureAndWatch(String filename, Properties props) {
         configureAndWatch(filename, props, FileWatchdog.DEFAULT_DELAY);
     }
 
     /**
-     * Ê¹ÓÃXMLÎÄ¼şÅäÖÃlog4j£¬Í¬Ê±¼à¿ØÎÄ¼şµÄ¸ü¸Ä¡£´Ë·½·¨½«´´½¨Ò»¸ö¼à¿ØÏß³Ì£¬¸ÃÏß³ÌµÚ¸ôÖ¸¶¨Ê±¼ä¾Í»á¼ì²éÎÄ¼şÊÇ·ñ±»´´½¨»ò¸Ä±ä£¬Èç¹ûÊÇ£¬
-     * Ôò´ÓÎÄ¼şÖĞ¶ÁÈ¡log4jÅäÖÃ¡£
+     * ä½¿ç”¨XMLæ–‡ä»¶é…ç½®log4jï¼ŒåŒæ—¶ç›‘æ§æ–‡ä»¶çš„æ›´æ”¹ã€‚æ­¤æ–¹æ³•å°†åˆ›å»ºä¸€ä¸ªç›‘æ§çº¿ç¨‹ï¼Œè¯¥çº¿ç¨‹ç¬¬éš”æŒ‡å®šæ—¶é—´å°±ä¼šæ£€æŸ¥æ–‡ä»¶æ˜¯å¦è¢«åˆ›å»ºæˆ–æ”¹å˜ï¼Œå¦‚æœæ˜¯ï¼Œ
+     * åˆ™ä»æ–‡ä»¶ä¸­è¯»å–log4jé…ç½®ã€‚
      * 
-     * @param filename ÅäÖÃÎÄ¼şÃû
-     * @param interval ¼à¿ØÏß³Ì¼ì²é¼ä¸ô£¨ms£©
+     * @param filename é…ç½®æ–‡ä»¶å
+     * @param interval ç›‘æ§çº¿ç¨‹æ£€æŸ¥é—´éš”ï¼ˆmsï¼‰
      */
     public static void configureAndWatch(String filename, long interval) {
         XMLWatchdog xdog = new XMLWatchdog(filename, null);
@@ -153,12 +153,12 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
     }
 
     /**
-     * Ê¹ÓÃXMLÎÄ¼şÅäÖÃlog4j£¬Í¬Ê±¼à¿ØÎÄ¼şµÄ¸ü¸Ä¡£´Ë·½·¨½«´´½¨Ò»¸ö¼à¿ØÏß³Ì£¬¸ÃÏß³ÌµÚ¸ôÖ¸¶¨Ê±¼ä¾Í»á¼ì²éÎÄ¼şÊÇ·ñ±»´´½¨»ò¸Ä±ä£¬Èç¹ûÊÇ£¬
-     * Ôò´ÓÎÄ¼şÖĞ¶ÁÈ¡log4jÅäÖÃ¡£
+     * ä½¿ç”¨XMLæ–‡ä»¶é…ç½®log4jï¼ŒåŒæ—¶ç›‘æ§æ–‡ä»¶çš„æ›´æ”¹ã€‚æ­¤æ–¹æ³•å°†åˆ›å»ºä¸€ä¸ªç›‘æ§çº¿ç¨‹ï¼Œè¯¥çº¿ç¨‹ç¬¬éš”æŒ‡å®šæ—¶é—´å°±ä¼šæ£€æŸ¥æ–‡ä»¶æ˜¯å¦è¢«åˆ›å»ºæˆ–æ”¹å˜ï¼Œå¦‚æœæ˜¯ï¼Œ
+     * åˆ™ä»æ–‡ä»¶ä¸­è¯»å–log4jé…ç½®ã€‚
      * 
-     * @param filename ÅäÖÃÎÄ¼şÃû
-     * @param props ¿ÉÔÚÅäÖÃÎÄ¼şÖĞ±»ÒıÓÃµÄÊôĞÔ
-     * @param interval ¼à¿ØÏß³Ì¼ì²é¼ä¸ô£¨ms£©
+     * @param filename é…ç½®æ–‡ä»¶å
+     * @param props å¯åœ¨é…ç½®æ–‡ä»¶ä¸­è¢«å¼•ç”¨çš„å±æ€§
+     * @param interval ç›‘æ§çº¿ç¨‹æ£€æŸ¥é—´éš”ï¼ˆmsï¼‰
      */
     public static void configureAndWatch(String filename, Properties props, long interval) {
         XMLWatchdog xdog = new XMLWatchdog(filename, props);
@@ -168,9 +168,9 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
     }
 
     /**
-     * ÉèÖÃÊôĞÔ£¬ÕâĞ©ÊôĞÔ¿ÉÒÔÔÚÅäÖÃÎÄ¼şÖĞ±»ÒıÓÃ¡£
+     * è®¾ç½®å±æ€§ï¼Œè¿™äº›å±æ€§å¯ä»¥åœ¨é…ç½®æ–‡ä»¶ä¸­è¢«å¼•ç”¨ã€‚
      * 
-     * @param props ÊôĞÔ
+     * @param props å±æ€§
      */
     public void setProperties(Properties props) {
         try {
@@ -182,7 +182,7 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
     }
 
     /**
-     * ¼à¿ØÏß³Ì¡£
+     * ç›‘æ§çº¿ç¨‹ã€‚
      */
     private static class XMLWatchdog extends FileWatchdog {
         private Properties props;

@@ -75,7 +75,7 @@ import com.alibaba.citrus.webx.config.impl.WebxConfigurationImpl;
 import com.alibaba.citrus.webx.config.impl.WebxConfigurationImpl.ComponentsConfigImpl;
 
 /**
- * ÓÃÀ´×°ÔØwebx componentsµÄ×°ÔØÆ÷¡£
+ * ç”¨æ¥è£…è½½webx componentsçš„è£…è½½å™¨ã€‚
  * 
  * @author Michael Zhou
  */
@@ -87,21 +87,21 @@ public class WebxComponentsLoader extends ContextLoader {
     private WebxComponentsImpl components;
 
     /**
-     * È¡µÃcontextÖĞ<code>WebxConfiguration</code>µÄÃû³Æ¡£
+     * å–å¾—contextä¸­<code>WebxConfiguration</code>çš„åç§°ã€‚
      */
     public String getWebxConfigurationName() {
         return webxConfigurationName == null ? "webxConfiguration" : webxConfigurationName;
     }
 
     /**
-     * ÉèÖÃcontextÖĞ<code>WebxConfiguration</code>µÄÃû³Æ¡£
+     * è®¾ç½®contextä¸­<code>WebxConfiguration</code>çš„åç§°ã€‚
      */
     public void setWebxConfigurationName(String webxConfigurationName) {
         this.webxConfigurationName = trimToNull(webxConfigurationName);
     }
 
     /**
-     * È¡µÃÔÚservlet contextÖĞ±£´æcomponent contextµÄkey¡£
+     * å–å¾—åœ¨servlet contextä¸­ä¿å­˜component contextçš„keyã€‚
      */
     public String getComponentContextAttributeName(String componentName) {
         return COMPONENT_CONTEXT_PREFIX + componentName;
@@ -112,7 +112,7 @@ public class WebxComponentsLoader extends ContextLoader {
     }
 
     /**
-     * È¡µÃcomponents¡£
+     * å–å¾—componentsã€‚
      */
     public WebxComponents getWebxComponents() {
         return components;
@@ -148,9 +148,9 @@ public class WebxComponentsLoader extends ContextLoader {
     }
 
     /**
-     * È¡µÃÄ¬ÈÏµÄcomponents <code>WebApplicationContext</code>ÊµÏÖÀà¡£
+     * å–å¾—é»˜è®¤çš„components <code>WebApplicationContext</code>å®ç°ç±»ã€‚
      * <p>
-     * ×ÓÀà¿ÉÒÔ¸²¸Ç²¢ĞŞ¸Ä´Ë·½·¨¡£
+     * å­ç±»å¯ä»¥è¦†ç›–å¹¶ä¿®æ”¹æ­¤æ–¹æ³•ã€‚
      * </p>
      */
     protected Class<? extends WebxComponentsContext> getDefaultContextClass() {
@@ -158,7 +158,7 @@ public class WebxComponentsLoader extends ContextLoader {
     }
 
     /**
-     * ÔÚcomponentsContext.refresh()Ö®Ç°±»µ÷ÓÃ¡£
+     * åœ¨componentsContext.refresh()ä¹‹å‰è¢«è°ƒç”¨ã€‚
      */
     @Override
     protected void customizeContext(ServletContext servletContext, ConfigurableWebApplicationContext componentsContext) {
@@ -170,19 +170,19 @@ public class WebxComponentsLoader extends ContextLoader {
     }
 
     /**
-     * ÔÚ´´½¨beanFactoryÖ®³õ±»µ÷ÓÃ¡£
+     * åœ¨åˆ›å»ºbeanFactoryä¹‹åˆè¢«è°ƒç”¨ã€‚
      * 
      * @param webxComponentsContext
      */
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
-        // ÓÉÓÚ³õÊ¼»¯componentsÒÀÀµÓÚwebxConfiguration£¬¶øwebxConfiguration¿ÉÄÜĞèÒªÓÉPropertyPlaceholderConfigurerÀ´´¦Àí£¬
-        // ´ËÍâ£¬ÆäËüÓĞÒ»Ğ©BeanFactoryPostProcessors»áÓÃµ½components£¬
-        // Òò´Ëcomponents±ØĞëÔÚPropertyPlaceholderConfigurerÖ®ºó³õÊ¼»¯£¬²¢ÔÚÆäËüBeanFactoryPostProcessorsÖ®Ç°³õÊ¼»¯¡£
+        // ç”±äºåˆå§‹åŒ–componentsä¾èµ–äºwebxConfigurationï¼Œè€ŒwebxConfigurationå¯èƒ½éœ€è¦ç”±PropertyPlaceholderConfigureræ¥å¤„ç†ï¼Œ
+        // æ­¤å¤–ï¼Œå…¶å®ƒæœ‰ä¸€äº›BeanFactoryPostProcessorsä¼šç”¨åˆ°componentsï¼Œ
+        // å› æ­¤componentså¿…é¡»åœ¨PropertyPlaceholderConfigurerä¹‹ååˆå§‹åŒ–ï¼Œå¹¶åœ¨å…¶å®ƒBeanFactoryPostProcessorsä¹‹å‰åˆå§‹åŒ–ã€‚
         //
-        // ÏÂÃæ´´½¨µÄWebxComponentsCreator¸¨ÖúÀà¾ÍÊÇÓÃÀ´È·±£Õâ¸ö³õÊ¼»¯Ë³Ğò£º
+        // ä¸‹é¢åˆ›å»ºçš„WebxComponentsCreatorè¾…åŠ©ç±»å°±æ˜¯ç”¨æ¥ç¡®ä¿è¿™ä¸ªåˆå§‹åŒ–é¡ºåºï¼š
         // 1. PriorityOrdered - PropertyPlaceholderConfigurer
         // 2. Ordered - WebxComponentsCreator
-        // 3. ÆÕÍ¨ - ÆäËüBeanFactoryPostProcessors
+        // 3. æ™®é€š - å…¶å®ƒBeanFactoryPostProcessors
         BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(WebxComponentsCreator.class);
         builder.addConstructorArgValue(this);
         BeanDefinition componentsCreator = builder.getBeanDefinition();
@@ -216,7 +216,7 @@ public class WebxComponentsLoader extends ContextLoader {
     }
 
     /**
-     * ³õÊ¼»¯ËùÓĞcomponents¡£
+     * åˆå§‹åŒ–æ‰€æœ‰componentsã€‚
      */
     public void finishRefresh() {
         components.getWebxRootController().onFinishedProcessContext();
@@ -240,38 +240,38 @@ public class WebxComponentsLoader extends ContextLoader {
     }
 
     /**
-     * ³õÊ¼»¯components¡£
+     * åˆå§‹åŒ–componentsã€‚
      */
     private WebxComponentsImpl createComponents(WebxConfiguration parentConfiguration,
                                                 ConfigurableListableBeanFactory beanFactory) {
         ComponentsConfig componentsConfig = getComponentsConfig(parentConfiguration);
 
-        // ¼ÙÈçisAutoDiscoverComponents==true£¬ÊÔÍ¼×Ô¶¯·¢ÏÖcomponents
+        // å‡å¦‚isAutoDiscoverComponents==trueï¼Œè¯•å›¾è‡ªåŠ¨å‘ç°components
         Map<String, String> componentNamesAndLocations = findComponents(componentsConfig, getServletContext());
 
-        // È¡µÃÌØ±ğÖ¸¶¨µÄcomponents
+        // å–å¾—ç‰¹åˆ«æŒ‡å®šçš„components
         Map<String, ComponentConfig> specifiedComponents = componentsConfig.getComponents();
 
-        // Êµ¼ÊÒª³õÊ¼»¯µÄcomonents£¬ÎªÉÏÊöÁ½ÖÖÀ´Ô´µÄ²¢¼¯
+        // å®é™…è¦åˆå§‹åŒ–çš„comonentsï¼Œä¸ºä¸Šè¿°ä¸¤ç§æ¥æºçš„å¹¶é›†
         Set<String> componentNames = createTreeSet();
 
         componentNames.addAll(componentNamesAndLocations.keySet());
         componentNames.addAll(specifiedComponents.keySet());
 
-        // ´´½¨root controller
+        // åˆ›å»ºroot controller
         WebxRootController rootController = componentsConfig.getRootController();
 
         if (rootController == null) {
             rootController = (WebxRootController) BeanUtils.instantiateClass(componentsConfig.getRootControllerClass());
         }
 
-        // ´´½¨²¢½«components¶ÔÏóÖÃÈëresolvable dependencies£¬ÒÔ±ã×¢Èëµ½ĞèÒªµÄbeanÖĞ
+        // åˆ›å»ºå¹¶å°†componentså¯¹è±¡ç½®å…¥resolvable dependenciesï¼Œä»¥ä¾¿æ³¨å…¥åˆ°éœ€è¦çš„beanä¸­
         WebxComponentsImpl components = new WebxComponentsImpl(componentsContext,
                 componentsConfig.getDefaultComponent(), rootController, parentConfiguration);
 
         beanFactory.registerResolvableDependency(WebxComponents.class, components);
 
-        // ³õÊ¼»¯Ã¿¸öcomponent
+        // åˆå§‹åŒ–æ¯ä¸ªcomponent
         for (String componentName : componentNames) {
             ComponentConfig componentConfig = specifiedComponents.get(componentName);
 
@@ -313,7 +313,7 @@ public class WebxComponentsLoader extends ContextLoader {
 
         component.setApplicationContext(wcc);
 
-        // ½«context±£´æÔÚservletContextÖĞ
+        // å°†contextä¿å­˜åœ¨servletContextä¸­
         String attrName = getComponentContextAttributeName(componentName);
         getServletContext().setAttribute(attrName, wcc);
 
@@ -322,7 +322,7 @@ public class WebxComponentsLoader extends ContextLoader {
     }
 
     /**
-     * ²éÕÒcomponentÃû³Æ¡£
+     * æŸ¥æ‰¾componentåç§°ã€‚
      */
     private Map<String, String> findComponents(ComponentsConfig componentsConfig, ServletContext servletContext) {
         String locationPattern = componentsConfig.getComponentConfigurationLocationPattern();
@@ -361,19 +361,19 @@ public class WebxComponentsLoader extends ContextLoader {
     }
 
     /**
-     * ¼ì²écomponentConfigurationLocationPatternÊÇ·ñ·ûºÏÒÔÏÂÒªÇó£º
+     * æ£€æŸ¥componentConfigurationLocationPatternæ˜¯å¦ç¬¦åˆä»¥ä¸‹è¦æ±‚ï¼š
      * <ol>
-     * <li>·Ç¿Õ¡£</li>
-     * <li>°üº¬ÇÒÖ»°üº¬Ò»¸ö<code>*</code>¡£</li>
-     * <li>Ö§³Ö<code>classpath*:</code>Ç°×º¡£</li>
+     * <li>éç©ºã€‚</li>
+     * <li>åŒ…å«ä¸”åªåŒ…å«ä¸€ä¸ª<code>*</code>ã€‚</li>
+     * <li>æ”¯æŒ<code>classpath*:</code>å‰ç¼€ã€‚</li>
      * </ol>
      * <p>
-     * ·µ»ØÊı×é£º[Ç°×º, ²»°üº¬<code>classpath*:</code>µÄÂ·¾¶]¡£
+     * è¿”å›æ•°ç»„ï¼š[å‰ç¼€, ä¸åŒ…å«<code>classpath*:</code>çš„è·¯å¾„]ã€‚
      * </p>
      */
     private String[] checkComponentConfigurationLocationPattern(String componentConfigurationLocationPattern) {
         if (componentConfigurationLocationPattern != null) {
-            // ÔÊĞí²¢ÌŞ³ıclasspath*:Ç°×º¡£
+            // å…è®¸å¹¶å‰”é™¤classpath*:å‰ç¼€ã€‚
             boolean classpath = componentConfigurationLocationPattern.startsWith("classpath*:");
             String pathPattern = componentConfigurationLocationPattern;
 
@@ -381,7 +381,7 @@ public class WebxComponentsLoader extends ContextLoader {
                 pathPattern = componentConfigurationLocationPattern.substring("classpath*:".length()).trim();
             }
 
-            // ¼ì²éÂ·¾¶¡£
+            // æ£€æŸ¥è·¯å¾„ã€‚
             int index = pathPattern.indexOf("*");
 
             if (index >= 0) {
@@ -402,7 +402,7 @@ public class WebxComponentsLoader extends ContextLoader {
     }
 
     /**
-     * ´Óparent configurationÖĞÈ¡µÃcomponentsÅäÖÃ¡£
+     * ä»parent configurationä¸­å–å¾—componentsé…ç½®ã€‚
      */
     private ComponentsConfig getComponentsConfig(WebxConfiguration parentConfiguration) {
         ComponentsConfig componentsConfig = assertNotNull(parentConfiguration, "parentConfiguration")
@@ -417,7 +417,7 @@ public class WebxComponentsLoader extends ContextLoader {
     }
 
     /**
-     * ´Óparent contextÖĞÈ¡µÃ<code>WebxConfiguration</code>¡£
+     * ä»parent contextä¸­å–å¾—<code>WebxConfiguration</code>ã€‚
      */
     private WebxConfiguration getParentConfiguration() {
         try {
@@ -497,7 +497,7 @@ public class WebxComponentsLoader extends ContextLoader {
             WebxComponent defaultComponent = getDefaultComponent();
             WebxComponent matched = null;
 
-            // Ç°×ºÆ¥ÅäcomponentPath¡£
+            // å‰ç¼€åŒ¹é…componentPathã€‚
             for (WebxComponent component : this) {
                 if (component == defaultComponent) {
                     continue;
@@ -509,7 +509,7 @@ public class WebxComponentsLoader extends ContextLoader {
                     continue;
                 }
 
-                // path¸ÕºÃµÈÓÚcomponentPath£¬»òÕßpathÒÔcomponentPath/ÎªÇ°×º
+                // pathåˆšå¥½ç­‰äºcomponentPathï¼Œæˆ–è€…pathä»¥componentPath/ä¸ºå‰ç¼€
                 if (path.length() == componentPath.length() || path.charAt(componentPath.length()) == '/') {
                     matched = component;
                     break;
@@ -555,7 +555,7 @@ public class WebxComponentsLoader extends ContextLoader {
         }
 
         /**
-         * ÕâÊÇÒ»¸öÌØÊâµÄcomponentÊµÏÖ£¬¶ÔÓ¦ÓÚroot context¡£
+         * è¿™æ˜¯ä¸€ä¸ªç‰¹æ®Šçš„componentå®ç°ï¼Œå¯¹åº”äºroot contextã€‚
          */
         private class RootComponent implements WebxComponent {
             public WebxComponents getWebxComponents() {
@@ -605,7 +605,7 @@ public class WebxComponentsLoader extends ContextLoader {
             this.controller = assertNotNull(controller, "controller");
             this.webxConfigurationName = assertNotNull(webxConfigurationName, "webxConfigurationName");
 
-            // ¹æ¸ñ»¯path£¬È¥³ıÎ²²¿µÄ/£»¿ÕÂ·¾¶ÔòÉèÎªnull
+            // è§„æ ¼åŒ–pathï¼Œå»é™¤å°¾éƒ¨çš„/ï¼›ç©ºè·¯å¾„åˆ™è®¾ä¸ºnull
             path = trimToNull(normalizeAbsolutePath(path, true));
 
             if (defaultComponent) {

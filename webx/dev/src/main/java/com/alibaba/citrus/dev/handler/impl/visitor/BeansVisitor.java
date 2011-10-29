@@ -72,7 +72,7 @@ public class BeansVisitor extends AbstractFallbackVisitor<ExplorerVisitor> {
     }
 
     /**
-     * ½«bean namesÅÅĞò¡£ÏÈ°´bean nameµÄ¸´ÔÓ¶ÈÅÅĞò£¬ÔÙ°´×ÖÄ¸Ë³ĞòÅÅĞò¡£
+     * å°†bean namesæ’åºã€‚å…ˆæŒ‰bean nameçš„å¤æ‚åº¦æ’åºï¼Œå†æŒ‰å­—æ¯é¡ºåºæ’åºã€‚
      */
     private String[] getSortedBeanNames() {
         String[] names = factory.getBeanDefinitionNames();

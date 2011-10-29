@@ -28,7 +28,7 @@ import org.springframework.core.io.Resource;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ÈÃvelocity¶ÁÈ¡Ô¤×°ÔØµÄ×ÊÔ´¡£
+ * è®©velocityè¯»å–é¢„è£…è½½çš„èµ„æºã€‚
  * 
  * @author Michael Zhou
  */
@@ -37,7 +37,7 @@ public class PreloadedResourceLoader extends AbstractResourceLoader {
     private Map<String, Resource> preloadedResources;
 
     /**
-     * ³õÊ¼»¯resource loader.
+     * åˆå§‹åŒ–resource loader.
      */
     @Override
     public void init(ExtendedProperties configuration) {
@@ -61,7 +61,7 @@ public class PreloadedResourceLoader extends AbstractResourceLoader {
     }
 
     /**
-     * È¡µÃÓÃÓÚÈÕÖ¾¼ÇÂ¼µÄID¡£
+     * å–å¾—ç”¨äºæ—¥å¿—è®°å½•çš„IDã€‚
      */
     @Override
     protected String getLogID() {
@@ -69,7 +69,7 @@ public class PreloadedResourceLoader extends AbstractResourceLoader {
     }
 
     /**
-     * È¡µÃ×ÊÔ´¡£
+     * å–å¾—èµ„æºã€‚
      */
     @Override
     protected Resource getResource(String templateName) {

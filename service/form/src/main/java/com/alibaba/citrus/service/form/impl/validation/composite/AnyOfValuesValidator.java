@@ -26,10 +26,10 @@ import com.alibaba.citrus.service.form.support.AbstractCompositeValidatorDefinit
 import com.alibaba.citrus.service.form.support.AbstractMultiValuesValidator;
 
 /**
- * µ±Ç°fieldµÄÈÎºÎÒ»¸öÖµÍ¨¹ıÑéÖ¤Ê±£¬´Ëvalidator¾ÍÍ¨¹ıÑéÖ¤¡£
+ * å½“å‰fieldçš„ä»»ä½•ä¸€ä¸ªå€¼é€šè¿‡éªŒè¯æ—¶ï¼Œæ­¤validatorå°±é€šè¿‡éªŒè¯ã€‚
  * <p>
- * Message¿ÉÊ¹ÓÃ<code>${allMessages}</code>È¡µÃ×ÓvalidatorµÄmessage¡£
- * ×ÓvalidatorµÄmessage¿ÉÊ¹ÓÃ<code>${valueIndex}</code>È¡µÃµ±Ç°Ë÷ÒıÖµ¡£
+ * Messageå¯ä½¿ç”¨<code>${allMessages}</code>å–å¾—å­validatorçš„messageã€‚
+ * å­validatorçš„messageå¯ä½¿ç”¨<code>${valueIndex}</code>å–å¾—å½“å‰ç´¢å¼•å€¼ã€‚
  * </p>
  * 
  * @author Michael Zhou

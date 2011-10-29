@@ -60,11 +60,11 @@ public class MailUtilTests {
     public void messageToString() throws Exception {
         // specified charset
         String mailContent = MailUtil.toString(readMessage("welcome.eml"), "GBK");
-        assertThat(mailContent, containsAll("zyh@alibaba-inc.com", "你好，欢迎！"));
+        assertThat(mailContent, containsAll("zyh@alibaba-inc.com", "浣犲ソ锛屾杩庯紒"));
 
         // default UTF-8
         mailContent = MailUtil.toString(readMessage("welcome_utf8.eml"));
-        assertThat(mailContent, containsAll("zyh@alibaba-inc.com", "你好，欢迎！"));
+        assertThat(mailContent, containsAll("zyh@alibaba-inc.com", "浣犲ソ锛屾杩庯紒"));
     }
 
     @Test
@@ -74,22 +74,22 @@ public class MailUtilTests {
         assertEquals("", MailUtil.encodeHeader("", "GBK"));
 
         // javaCharset == mimeCharset
-        assertEquals("=?GBK?Q?=D6=D0=B9=FA?=", MailUtil.encodeHeader("中国", "GBK", "Q"));
+        assertEquals("=?GBK?Q?=D6=D0=B9=FA?=", MailUtil.encodeHeader("涓浗", "GBK", "Q"));
 
         // javaCharset != mimeCharset
         assertEquals("=?ISO-8859-1?Q?=D6=D0=B9=FA?=",
-                MailUtil.encodeHeader(new String("中国".getBytes("GBK"), "8859_1"), "8859_1", "Q"));
-        assertEquals("=?euc-cn?Q?=D6=D0=B9=FA?=", MailUtil.encodeHeader("中国", "EUC_CN", "Q")); // EUC_CN即GB2312_80
-        assertEquals("=?euc-cn?Q?=D6=D0=B9=FA?=", MailUtil.encodeHeader("中国", "euc-cn", "Q")); // EUC_CN即GB2312_80
+                MailUtil.encodeHeader(new String("涓浗".getBytes("GBK"), "8859_1"), "8859_1", "Q"));
+        assertEquals("=?euc-cn?Q?=D6=D0=B9=FA?=", MailUtil.encodeHeader("涓浗", "EUC_CN", "Q")); // EUC_CN鍗矴B2312_80
+        assertEquals("=?euc-cn?Q?=D6=D0=B9=FA?=", MailUtil.encodeHeader("涓浗", "euc-cn", "Q")); // EUC_CN鍗矴B2312_80
 
         // default java charset: UTF-8
-        assertEquals("=?UTF-8?Q?=E4=B8=AD=E5=9B=BD?=", MailUtil.encodeHeader("中国", null, "Q"));
+        assertEquals("=?UTF-8?Q?=E4=B8=AD=E5=9B=BD?=", MailUtil.encodeHeader("涓浗", null, "Q"));
 
         // auto encoding: use the shorter one
-        assertEquals("=?GBK?B?1tC5+g==?=", MailUtil.encodeHeader("中国", "GBK"));
-        assertEquals("=?GBK?B?1tC5+g==?=", MailUtil.encodeHeader("中国", "GBK", null));
-        assertEquals("=?GBK?Q?abcdefg=D6=D0=B9=FA?=", MailUtil.encodeHeader("abcdefg中国", "GBK"));
-        assertEquals("=?GBK?Q?abcdefg=D6=D0=B9=FA?=", MailUtil.encodeHeader("abcdefg中国", "GBK", null));
+        assertEquals("=?GBK?B?1tC5+g==?=", MailUtil.encodeHeader("涓浗", "GBK"));
+        assertEquals("=?GBK?B?1tC5+g==?=", MailUtil.encodeHeader("涓浗", "GBK", null));
+        assertEquals("=?GBK?Q?abcdefg=D6=D0=B9=FA?=", MailUtil.encodeHeader("abcdefg涓浗", "GBK"));
+        assertEquals("=?GBK?Q?abcdefg=D6=D0=B9=FA?=", MailUtil.encodeHeader("abcdefg涓浗", "GBK", null));
     }
 
     @Test
@@ -102,28 +102,28 @@ public class MailUtilTests {
 
         // Java charset is UTF-8
         InternetAddress[] addrs = MailUtil.parse("=?GBK?B?1tDW0A==?= <zhong_zhong@msn.com>  , "
-                + "\"国国\" <guo_guo@hotmail.com>, <aa@bb.com> , cc@dd.com", "UTF-8");
+                + "\"鍥藉浗\" <guo_guo@hotmail.com>, <aa@bb.com> , cc@dd.com", "UTF-8");
 
         int i = 0;
         assertEquals(4, addrs.length);
-        assertAddress(addrs[i++], "中中", "=?UTF-8?B?5Lit5Lit?= <zhong_zhong@msn.com>");
-        assertAddress(addrs[i++], "国国", "=?UTF-8?B?5Zu95Zu9?= <guo_guo@hotmail.com>");
+        assertAddress(addrs[i++], "涓腑", "=?UTF-8?B?5Lit5Lit?= <zhong_zhong@msn.com>");
+        assertAddress(addrs[i++], "鍥藉浗", "=?UTF-8?B?5Zu95Zu9?= <guo_guo@hotmail.com>");
         assertAddress(addrs[i++], null, "aa@bb.com");
         assertAddress(addrs[i++], null, "cc@dd.com");
 
         // UTF-8 as default
-        addrs = MailUtil.parse("中中 <zhong_zhong@msn.com>", null);
+        addrs = MailUtil.parse("涓腑 <zhong_zhong@msn.com>", null);
 
         i = 0;
         assertEquals(1, addrs.length);
-        assertAddress(addrs[i++], "中中", "=?UTF-8?B?5Lit5Lit?= <zhong_zhong@msn.com>");
+        assertAddress(addrs[i++], "涓腑", "=?UTF-8?B?5Lit5Lit?= <zhong_zhong@msn.com>");
 
         // Convert to mime charset
-        addrs = MailUtil.parse("中中 <zhong_zhong@msn.com>", "EUC_CN");
+        addrs = MailUtil.parse("涓腑 <zhong_zhong@msn.com>", "EUC_CN");
 
         i = 0;
         assertEquals(1, addrs.length);
-        assertAddress(addrs[i++], "中中", "=?euc-cn?B?1tDW0A==?= <zhong_zhong@msn.com>");
+        assertAddress(addrs[i++], "涓腑", "=?euc-cn?B?1tDW0A==?= <zhong_zhong@msn.com>");
 
         // strict mode
         try {

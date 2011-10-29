@@ -52,7 +52,7 @@ import com.alibaba.citrus.service.mail.session.MailStore;
 import com.alibaba.citrus.service.mail.session.MailTransport;
 
 /**
- * ²âÊÔmail service¼°ÆäÅäÖÃ¡£
+ * æµ‹è¯•mail serviceåŠå…¶é…ç½®ã€‚
  * 
  * @author Michael Zhou
  */
@@ -454,21 +454,21 @@ public class MailServiceTests extends AbstractMailBuilderTests {
 
     @Test
     public void mail_simple_cn() throws Exception {
-        getAndAssertMail("simple_cn", "EUC_CN", "ÎÒµÄ±êÌâ My Subject");
+        getAndAssertMail("simple_cn", "EUC_CN", "æˆ‘çš„æ ‡é¢˜ My Subject");
 
         for (MailAddressType addrType : MailAddressType.values()) {
             InternetAddress[] addrs = builder.getAddresses(addrType);
 
             switch (addrType) {
                 case TO:
-                    // Ò»ĞĞ<to>ÖĞ°üÀ¨¶à¸öµØÖ·
+                    // ä¸€è¡Œ<to>ä¸­åŒ…æ‹¬å¤šä¸ªåœ°å€
 
                 case CC:
-                    // Á½ĞĞ<cc>
+                    // ä¸¤è¡Œ<cc>
                     assertEquals(2, addrs.length);
 
-                    assertEquals("ÎÒµÄµØÖ·", addrs[0].getPersonal());
-                    assertEquals("ÎÒµÄµØÖ·", addrs[1].getPersonal());
+                    assertEquals("æˆ‘çš„åœ°å€", addrs[0].getPersonal());
+                    assertEquals("æˆ‘çš„åœ°å€", addrs[1].getPersonal());
 
                     assertEquals(addrType.getTagName() + "@alibaba.com", addrs[0].getAddress());
                     assertEquals(addrType.getTagName() + "2@alibaba.com", addrs[1].getAddress());
@@ -476,11 +476,11 @@ public class MailServiceTests extends AbstractMailBuilderTests {
                     break;
 
                 case FROM:
-                    // addrÖĞ°üº¬¿Õ°×£¬±»³ıÈ¥
+                    // addrä¸­åŒ…å«ç©ºç™½ï¼Œè¢«é™¤å»
 
                 default:
                     assertEquals(1, addrs.length);
-                    assertEquals("ÎÒµÄµØÖ·", addrs[0].getPersonal());
+                    assertEquals("æˆ‘çš„åœ°å€", addrs[0].getPersonal());
                     assertEquals(addrType.getTagName() + "@alibaba.com", addrs[0].getAddress());
                     break;
             }
@@ -526,14 +526,14 @@ public class MailServiceTests extends AbstractMailBuilderTests {
 
         content = (TextContent) builder.getContent();
         assertEquals("text/html", content.getContentType());
-        assertEquals("hello, ÖĞ¹ú", content.getText());
+        assertEquals("hello, ä¸­å›½", content.getText());
 
         eml = getMessageAsText();
 
         assertThat(eml, containsRegex("Subject: " + REGEX_EOL));
         assertThat(eml, containsRegex("Content-Type: text/html; charset=GBK" + REGEX_EOL));
         assertThat(eml, containsRegex("Content-Transfer-Encoding: 8bit" + REGEX_EOL));
-        assertThat(eml, containsRegex(REGEX_EOL + REGEX_EOL + "hello, ÖĞ¹ú$"));
+        assertThat(eml, containsRegex(REGEX_EOL + REGEX_EOL + "hello, ä¸­å›½$"));
     }
 
     @Test
@@ -556,7 +556,7 @@ public class MailServiceTests extends AbstractMailBuilderTests {
         String eml = getMessageAsText();
 
         assertThat(eml, containsRegex("Subject: " + REGEX_EOL));
-        assertThat(eml, containsRegex("Content-Type: text/plain")); // ÎÄ±¾¸½¼şµÄ±àÂëÊÇÈ¡¾öÓÚÏµÍ³µÄ£¬²»Ò»¶¨ÊÇGBK
+        assertThat(eml, containsRegex("Content-Type: text/plain")); // æ–‡æœ¬é™„ä»¶çš„ç¼–ç æ˜¯å–å†³äºç³»ç»Ÿçš„ï¼Œä¸ä¸€å®šæ˜¯GBK
         assertThat(eml, containsRegex("Content-Transfer-Encoding: quoted-printable" + REGEX_EOL));
         assertThat(eml, containsRegex("Content-Disposition: attachment; filename=testfile.txt" + REGEX_EOL));
         assertThat(eml, containsRegex(REGEX_EOL + REGEX_EOL + "hello=B1=A6=B1=A6$"));
@@ -568,7 +568,7 @@ public class MailServiceTests extends AbstractMailBuilderTests {
         eml = getMessageAsText();
 
         assertThat(eml, containsRegex("Subject: " + REGEX_EOL));
-        assertThat(eml, containsRegex("Content-Type: text/plain")); // ÎÄ±¾¸½¼şµÄ±àÂëÊÇÈ¡¾öÓÚÏµÍ³µÄ£¬²»Ò»¶¨ÊÇGBK
+        assertThat(eml, containsRegex("Content-Type: text/plain")); // æ–‡æœ¬é™„ä»¶çš„ç¼–ç æ˜¯å–å†³äºç³»ç»Ÿçš„ï¼Œä¸ä¸€å®šæ˜¯GBK
         assertThat(eml, containsRegex("Content-Transfer-Encoding: quoted-printable" + REGEX_EOL));
         assertThat(eml, containsRegex(re("Content-Disposition: attachment; filename=\"=?GBK?B?ztK1xM7EvP4udHh0?=\"")
                 + REGEX_EOL));
@@ -603,18 +603,18 @@ public class MailServiceTests extends AbstractMailBuilderTests {
         assertThat(eml, containsRegex("\\$hello"));
 
         // velocity template, with context vars
-        builder.setAttribute("hello", "ÖĞ¹ú");
+        builder.setAttribute("hello", "ä¸­å›½");
 
         eml = getMessageAsText();
 
         assertThat(eml, not(containsRegex("\\$hello")));
-        assertThat(eml, containsRegex("ÖĞ¹ú"));
+        assertThat(eml, containsRegex("ä¸­å›½"));
 
         // freemarker template, contentType=text/html
         getAndAssertMail("textTemplateContent_ftl", "GBK", null);
         assertThat(builder.getContent(), instanceOf(TextTemplateContent.class));
 
-        builder.setAttribute("hello", "ÖĞ¹ú");
+        builder.setAttribute("hello", "ä¸­å›½");
 
         eml = getMessageAsText();
 
@@ -624,7 +624,7 @@ public class MailServiceTests extends AbstractMailBuilderTests {
         assertThat(eml, containsRegex(REGEX_EOL + REGEX_EOL + "freemarker" + REGEX_EOL));
         assertThat(eml, containsRegex("1  2  3  4  5  6  7  8  9  10"));
         assertThat(eml, containsRegex("Constant\\[MailConstant\\]"));
-        assertThat(eml, containsRegex("ÖĞ¹ú"));
+        assertThat(eml, containsRegex("ä¸­å›½"));
     }
 
     @Test
@@ -841,7 +841,7 @@ public class MailServiceTests extends AbstractMailBuilderTests {
     private void getAndAssertMail(String id, String charset, String subject) {
         builder = mailService.getMailBuilder(id);
 
-        assertNotSame(builder, mailService.getMailBuilder(id)); // Á½´ÎÈ¡µÃ²»Í¬µÄ¶ÔÏó
+        assertNotSame(builder, mailService.getMailBuilder(id)); // ä¸¤æ¬¡å–å¾—ä¸åŒçš„å¯¹è±¡
 
         assertEquals(charset, builder.getCharacterEncoding());
         assertSame(mailService, builder.getMailService());

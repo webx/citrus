@@ -26,10 +26,10 @@ import org.springframework.core.io.Resource;
 import com.alibaba.citrus.springext.support.resolver.XmlBeanDefinitionReaderProcessor;
 
 /**
- * ´ÓXMLÅäÖÃÎÄ¼şÖĞ×°ÅäµÄ<code>BeanFactory</code>µÄ»ùÀà£¬ÅÉÉúÓÚ
- * {@link DefaultListableBeanFactory} £¬Ôö¼ÓÁËÈçÏÂÌØĞÔ£º
+ * ä»XMLé…ç½®æ–‡ä»¶ä¸­è£…é…çš„<code>BeanFactory</code>çš„åŸºç±»ï¼Œæ´¾ç”Ÿäº
+ * {@link DefaultListableBeanFactory} ï¼Œå¢åŠ äº†å¦‚ä¸‹ç‰¹æ€§ï¼š
  * <ul>
- * <li>Ö§³Ö<code>ConfigurationPoint</code>»úÖÆ¡£</li>
+ * <li>æ”¯æŒ<code>ConfigurationPoint</code>æœºåˆ¶ã€‚</li>
  * </ul>
  * 
  * @author Michael Zhou

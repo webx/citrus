@@ -22,8 +22,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 
 /**
- * Ò»¸ö¼òÒ×µÄapplication context£¬ÓÃÀ´´ÓÒ»¸öresourceÖĞÆô¶¯spring¡£ÈçĞèÒª¸ü¸´ÔÓµÄĞèÇó£¬ÇëÖ±½Ó´Ó
- * {@link AbstractXmlApplicationContext}ÅÉÉú¡£
+ * ä¸€ä¸ªç®€æ˜“çš„application contextï¼Œç”¨æ¥ä»ä¸€ä¸ªresourceä¸­å¯åŠ¨springã€‚å¦‚éœ€è¦æ›´å¤æ‚çš„éœ€æ±‚ï¼Œè¯·ç›´æ¥ä»
+ * {@link AbstractXmlApplicationContext}æ´¾ç”Ÿã€‚
  * 
  * @author Michael Zhou
  * @see AbstractXmlApplicationContext

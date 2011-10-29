@@ -27,103 +27,103 @@ import java.util.EnumSet;
 import java.util.Set;
 
 /**
- * װ����Դ��service������ȡ��ָ�����Ƶ���Դ��URL���ļ���File������������InputStream����
+ * 装载资源的service，可以取得指定名称的资源的URL、文件（File）或输入流（InputStream）。
  * <p>
- * ��Ҫע����ǣ������������͵���Դ������ͬʱȡ��URL��File��InputStream�ġ�
+ * 需要注意的是，不是所有类型的资源都可以同时取得URL、File和InputStream的。
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface ResourceLoadingService {
     /**
-     * ����ѡ�<code>FOR_CREATE</code>��
+     * 常用选项：<code>FOR_CREATE</code>。
      */
     Set<ResourceLoadingOption> FOR_CREATE = unmodifiableSet(EnumSet.of(ResourceLoadingOption.FOR_CREATE));
 
     /**
-     * ȡ��parentװ�ط���
+     * 取得parent装载服务。
      */
     ResourceLoadingService getParent();
 
     /**
-     * ����ָ�����Ƶ���Դ��
+     * 查找指定名称的资源。
      */
     URL getResourceAsURL(String resourceName) throws ResourceNotFoundException;
 
     /**
-     * ����ָ�����Ƶ���Դ��
+     * 查找指定名称的资源。
      */
     File getResourceAsFile(String resourceName) throws ResourceNotFoundException;
 
     /**
-     * ����ָ�����Ƶ���Դ��
+     * 查找指定名称的资源。
      */
     File getResourceAsFile(String resourceName, Set<ResourceLoadingOption> options) throws ResourceNotFoundException;
 
     /**
-     * ����ָ�����Ƶ���Դ��
+     * 查找指定名称的资源。
      */
     InputStream getResourceAsStream(String resourceName) throws ResourceNotFoundException, IOException;
 
     /**
-     * ����ָ�����Ƶ���Դ��
+     * 查找指定名称的资源。
      */
     Resource getResource(String resourceName) throws ResourceNotFoundException;
 
     /**
-     * ����ָ�����Ƶ���Դ��
+     * 查找指定名称的资源。
      */
     Resource getResource(String resourceName, Set<ResourceLoadingOption> options) throws ResourceNotFoundException;
 
     /**
-     * �ж�ָ�����Ƶ���Դ�Ƿ���ڡ�������ڣ��򷵻�<code>true</code>��
+     * 判断指定名称的资源是否存在。如果存在，则返回<code>true</code>。
      */
     boolean exists(String resourceName);
 
     /**
-     * ���ٲ���ȡ������Դ��·����
+     * 跟踪并获取搜索资源的路径。
      * <p>
-     * ��ʹ��Դ�޷��ҵ���<code>trace</code>����Ҳ�᷵���������Թ�������·�����������׳��쳣��
+     * 即使资源无法找到，<code>trace</code>方法也会返回它所尝试过的搜索路径，而不是抛出异常。
      * </p>
      * <p>
-     * �÷�����Ҫ���ڵ��ԺͲ��Է���
+     * 该方法主要用于调试和测试服务。
      * </p>
      */
     ResourceTrace trace(String resourceName);
 
     /**
-     * ���ٲ���ȡ������Դ��·����
+     * 跟踪并获取搜索资源的路径。
      * <p>
-     * ��ʹ��Դ�޷��ҵ���<code>trace</code>����Ҳ�᷵���������Թ�������·�����������׳��쳣��
+     * 即使资源无法找到，<code>trace</code>方法也会返回它所尝试过的搜索路径，而不是抛出异常。
      * </p>
      * <p>
-     * �÷�����Ҫ���ڵ��ԺͲ��Է���
+     * 该方法主要用于调试和测试服务。
      * </p>
      */
     ResourceTrace trace(String resourceName, Set<ResourceLoadingOption> options);
 
     /**
-     * ���г�ָ����Դ����Ŀ¼���ļ�����Ŀ¼����<code>/</code>��β�����Ŀ¼�����ڣ��򷵻�<code>null</code>��
+     * 罗列出指定资源的子目录或文件名。目录名以<code>/</code>结尾。如果目录不存在，则返回<code>null</code>。
      */
     String[] list(String resourceName) throws ResourceNotFoundException;
 
     /**
-     * ���г�ָ����Դ����Ŀ¼���ļ�����Ŀ¼����<code>/</code>��β�����Ŀ¼�����ڣ��򷵻�<code>null</code>��
+     * 罗列出指定资源的子目录或文件名。目录名以<code>/</code>结尾。如果目录不存在，则返回<code>null</code>。
      */
     String[] list(String resourceName, Set<ResourceLoadingOption> options) throws ResourceNotFoundException;
 
     /**
-     * ���г�ָ����Դ����Ŀ¼���ļ���Դ�����Ŀ¼�����ڣ��򷵻�<code>null</code>��
+     * 罗列出指定资源的子目录或文件资源。如果目录不存在，则返回<code>null</code>。
      */
     Resource[] listResources(String resourceName) throws ResourceNotFoundException;
 
     /**
-     * ���г�ָ����Դ����Ŀ¼���ļ���Դ�����Ŀ¼�����ڣ��򷵻�<code>null</code>��
+     * 罗列出指定资源的子目录或文件资源。如果目录不存在，则返回<code>null</code>。
      */
     Resource[] listResources(String resourceName, Set<ResourceLoadingOption> options) throws ResourceNotFoundException;
 
     /**
-     * ȡ�����е�patterns���ơ�
+     * 取得所有的patterns名称。
      */
     String[] getPatterns(boolean includeParent);
 }

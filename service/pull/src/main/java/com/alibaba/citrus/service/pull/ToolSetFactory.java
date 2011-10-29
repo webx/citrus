@@ -18,16 +18,16 @@
 package com.alibaba.citrus.service.pull;
 
 /**
- * ´´½¨Ò»×épull toolsµÄ¹¤³§¡£
+ * åˆ›å»ºä¸€ç»„pull toolsçš„å·¥å‚ã€‚
  * <p>
- * ¹¤³§±¾Éí±ØĞëÊÇsingleton£¬ÒÔÈ·±£ĞÔÄÜ¡£
+ * å·¥å‚æœ¬èº«å¿…é¡»æ˜¯singletonï¼Œä»¥ç¡®ä¿æ€§èƒ½ã€‚
  * </p>
  * <ul>
- * <li><code>getToolNames()</code>·½·¨×ÜÊÇÔÚÏµÍ³³õÊ¼»¯Ê±±»µ÷ÓÃ£¨Pre-queueing£©¡£</li>
- * <li>µ±<code>isSingleton() == true</code> Ê±£¬<code>createTool(name)</code>
- * ·½·¨»áÔÚÏµÍ³³õÊ¼»¯Ê±±»µ÷ÓÃ£¨Pre-pulling£©¡£</li>
- * <li>µ±<code>isSingleton() == false</code> Ê±£¬Ã¿Ò»´ÎÇëÇó£¬¶ÔÓÚÃ¿¸ö<code>name</code>£¬
- * <code>createTool(name)</code> ·½·¨ÖÁ¶à±»µ÷ÓÃÒ»´Î¡£</li>
+ * <li><code>getToolNames()</code>æ–¹æ³•æ€»æ˜¯åœ¨ç³»ç»Ÿåˆå§‹åŒ–æ—¶è¢«è°ƒç”¨ï¼ˆPre-queueingï¼‰ã€‚</li>
+ * <li>å½“<code>isSingleton() == true</code> æ—¶ï¼Œ<code>createTool(name)</code>
+ * æ–¹æ³•ä¼šåœ¨ç³»ç»Ÿåˆå§‹åŒ–æ—¶è¢«è°ƒç”¨ï¼ˆPre-pullingï¼‰ã€‚</li>
+ * <li>å½“<code>isSingleton() == false</code> æ—¶ï¼Œæ¯ä¸€æ¬¡è¯·æ±‚ï¼Œå¯¹äºæ¯ä¸ª<code>name</code>ï¼Œ
+ * <code>createTool(name)</code> æ–¹æ³•è‡³å¤šè¢«è°ƒç”¨ä¸€æ¬¡ã€‚</li>
  * </ul>
  * 
  * @see ToolFactory
@@ -35,28 +35,28 @@ package com.alibaba.citrus.service.pull;
  */
 public interface ToolSetFactory {
     /**
-     * FactoryËù´´½¨µÄtoolÊÇ²»ÊÇsingleton£¿
+     * Factoryæ‰€åˆ›å»ºçš„toolæ˜¯ä¸æ˜¯singletonï¼Ÿ
      */
     boolean isSingleton();
 
     /**
-     * È¡µÃtoolsµÄÃû³Æ¡£
+     * å–å¾—toolsçš„åç§°ã€‚
      * <p>
-     * ÔÚÏµÍ³³õÊ¼»¯Ê±£¬¸Ã·½·¨»á±»µ÷ÓÃÒ»´Î£¬ÒÔºó²»ÔÙµ÷ÓÃ¡£
+     * åœ¨ç³»ç»Ÿåˆå§‹åŒ–æ—¶ï¼Œè¯¥æ–¹æ³•ä¼šè¢«è°ƒç”¨ä¸€æ¬¡ï¼Œä»¥åä¸å†è°ƒç”¨ã€‚
      * </p>
      */
     Iterable<String> getToolNames();
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄtoolÊµÀı¡£
+     * å–å¾—æŒ‡å®šåç§°çš„toolå®ä¾‹ã€‚
      * <p>
-     * ¶ÔÓÚ·ÇsingletonÀàĞÍ£¬¸Ã·½·¨ÔÚÃ¿´ÎÇëÇóÊ±£¬Ã¿¸ö<code>name</code>ÖÁ¶à±»µ÷ÓÃÒ»´Î¡£
+     * å¯¹äºésingletonç±»å‹ï¼Œè¯¥æ–¹æ³•åœ¨æ¯æ¬¡è¯·æ±‚æ—¶ï¼Œæ¯ä¸ª<code>name</code>è‡³å¤šè¢«è°ƒç”¨ä¸€æ¬¡ã€‚
      * </p>
      * <p>
-     * Èç·µ»Ø<code>null</code>£¬Ôò±íÊ¾¸Ãtool²»¿ÉÓÃ¡£
+     * å¦‚è¿”å›<code>null</code>ï¼Œåˆ™è¡¨ç¤ºè¯¥toolä¸å¯ç”¨ã€‚
      * </p>
      * <p>
-     * ×¢Òâ£º¶ÔÓÚ·ÇsingletonÀàĞÍ£¬<strong>±ØĞë</strong>Ã¿´Î·µ»Ø²»Í¬µÄ¶ÔÏó¡£
+     * æ³¨æ„ï¼šå¯¹äºésingletonç±»å‹ï¼Œ<strong>å¿…é¡»</strong>æ¯æ¬¡è¿”å›ä¸åŒçš„å¯¹è±¡ã€‚
      * </p>
      */
     Object createTool(String name) throws Exception;

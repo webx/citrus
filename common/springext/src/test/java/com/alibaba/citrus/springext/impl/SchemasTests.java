@@ -136,19 +136,19 @@ public class SchemasTests {
         Schema mainSchema = schemas.getMainSchema();
 
         assertEquals("http://www.alibaba.com/my/services", mainSchema.getTargetNamespace());
-        assertEquals("svc", mainSchema.getNamespacePrefix()); // cps定义中指定了nsPrefix
+        assertEquals("svc", mainSchema.getNamespacePrefix()); // cps瀹氫箟涓寚瀹氫簡nsPrefix
 
         // cp - version 1.0 schema
         Schema versionedSchema_10 = schemas.getVersionedSchema("1.0");
 
         assertEquals("http://www.alibaba.com/my/services", versionedSchema_10.getTargetNamespace());
-        assertEquals("svc", versionedSchema_10.getNamespacePrefix()); // cps定义中指定了nsPrefix
+        assertEquals("svc", versionedSchema_10.getNamespacePrefix()); // cps瀹氫箟涓寚瀹氫簡nsPrefix
 
         // cp - version 2.0 schema
         Schema versionedSchema_20 = schemas.getVersionedSchema("2.0");
 
         assertEquals("http://www.alibaba.com/my/services", versionedSchema_20.getTargetNamespace());
-        assertEquals("svc", versionedSchema_20.getNamespacePrefix()); // cps定义中指定了nsPrefix
+        assertEquals("svc", versionedSchema_20.getNamespacePrefix()); // cps瀹氫箟涓寚瀹氫簡nsPrefix
 
         // cp - main schema, no nsPrefix specified
         cp = cps.getConfigurationPointByName("my/plugins");
@@ -156,7 +156,7 @@ public class SchemasTests {
         mainSchema = schemas.getMainSchema();
 
         assertEquals("http://www.alibaba.com/my/plugins", mainSchema.getTargetNamespace());
-        assertEquals("plugins", mainSchema.getNamespacePrefix()); // 根据targetNamespace生成
+        assertEquals("plugins", mainSchema.getNamespacePrefix()); // 鏍规嵁targetNamespace鐢熸垚
     }
 
     @Test

@@ -20,7 +20,7 @@ package com.alibaba.citrus.util;
 import java.beans.PropertyEditorSupport;
 
 /**
- * ÓÃÓÚ×¢Èë<code>HumanReadableSizeEditor</code>ÀàĞÍµÄproperty¡£
+ * ç”¨äºæ³¨å…¥<code>HumanReadableSizeEditor</code>ç±»å‹çš„propertyã€‚
  * 
  * @author Michael Zhou
  */

@@ -84,7 +84,7 @@ public abstract class AbstractWebxTests {
     }
 
     /**
-     * µ÷ÓÃservlet£¬È¡µÃrequest/response¡£
+     * è°ƒç”¨servletï¼Œå–å¾—request/responseã€‚
      */
     protected final void invokeServlet(String uri) throws Exception {
         if (uri != null && uri.startsWith("http")) {
@@ -114,7 +114,7 @@ public abstract class AbstractWebxTests {
     }
 
     /**
-     * ÉèÖÃ<code>WebxDispatcherServlet.internalHandlerMapping.errorHandler</code>¡£
+     * è®¾ç½®<code>WebxDispatcherServlet.internalHandlerMapping.errorHandler</code>ã€‚
      */
     protected void setErrorHandler(AbstractWebxRootController controller, RequestHandler handler) throws Exception {
         Object o1 = getFieldValue(controller, "internalHandlerMapping", null);
@@ -122,7 +122,7 @@ public abstract class AbstractWebxTests {
     }
 
     /**
-     * ¼ò»¯µÄerror page handler¡£
+     * ç®€åŒ–çš„error page handlerã€‚
      */
     protected static class SimpleValveRunner implements ValveRunner {
         public void run(RunData rundata, PipelineContext pipelineContext) throws Exception {
@@ -132,7 +132,7 @@ public abstract class AbstractWebxTests {
     }
 
     /**
-     * ¼ò»¯µÄerror page handler¡£
+     * ç®€åŒ–çš„error page handlerã€‚
      */
     public static class TestErrorHandler implements RequestHandler {
         public void handleRequest(RequestHandlerContext ctx) throws Exception {
@@ -178,7 +178,7 @@ public abstract class AbstractWebxTests {
     }
 
     /**
-     * ÓÉÓÚhttpunit getQueryString()ÊµÏÖµÃÓĞÎÊÌâ£¬ ËùÒÔÖ»ÄÜ½«request°ü×°Ò»ÏÂ¡£
+     * ç”±äºhttpunit getQueryString()å®ç°å¾—æœ‰é—®é¢˜ï¼Œ æ‰€ä»¥åªèƒ½å°†requeståŒ…è£…ä¸€ä¸‹ã€‚
      */
     public static class MyHttpRequest extends HttpServletRequestWrapper {
         private String overrideQueryString;

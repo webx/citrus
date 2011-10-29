@@ -35,7 +35,7 @@ import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser
 import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
- * ÓÃÀ´·´¸´Ö´ĞĞÍ¬Ò»¸ö×Ópipeline¡£
+ * ç”¨æ¥åå¤æ‰§è¡ŒåŒä¸€ä¸ªå­pipelineã€‚
  * 
  * @author Michael Zhou
  */
@@ -98,7 +98,7 @@ public class LoopValve extends AbstractValve {
         int loopCount = (Integer) handle.getAttribute(loopCounterName);
         int maxLoopCount = getMaxLoopCount();
 
-        // maxLoopCount<=0£¬ÒâÎ¶×ÅÃ»ÓĞÑ­»·´ÎÊıµÄÏŞÖÆ¡£
+        // maxLoopCount<=0ï¼Œæ„å‘³ç€æ²¡æœ‰å¾ªç¯æ¬¡æ•°çš„é™åˆ¶ã€‚
         if (maxLoopCount > 0 && loopCount >= maxLoopCount) {
             throw new TooManyLoopsException("Too many loops: exceeds the maximum count: " + maxLoopCount);
         }

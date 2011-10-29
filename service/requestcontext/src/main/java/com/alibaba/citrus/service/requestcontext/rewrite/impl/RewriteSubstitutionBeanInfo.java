@@ -26,7 +26,7 @@ import java.beans.SimpleBeanInfo;
 import java.util.List;
 
 /**
- * ÓÉÓÚflagsÊôĞÔµÄgetterºÍsetter·½·¨¾ßÓĞ²»Í¬µÄÀàĞÍ£¬ËùÒÔ±ØĞëÈË¹¤ÊµÏÖbeanInfo¡£
+ * ç”±äºflagså±æ€§çš„getterå’Œsetteræ–¹æ³•å…·æœ‰ä¸åŒçš„ç±»å‹ï¼Œæ‰€ä»¥å¿…é¡»äººå·¥å®ç°beanInfoã€‚
  * 
  * @author Michael Zhou
  */

@@ -21,13 +21,13 @@ import com.alibaba.citrus.service.form.support.AbstractRegexpValidator;
 import com.alibaba.citrus.service.form.support.AbstractValidatorDefinitionParser;
 
 /**
- * Í¨¹ıÕıÔò±í´ïÊ½À´ÑéÖ¤×Ö¶ÎµÄvalidator¡£
+ * é€šè¿‡æ­£åˆ™è¡¨è¾¾å¼æ¥éªŒè¯å­—æ®µçš„validatorã€‚
  * 
  * @author Michael Zhou
  */
 public class RegexpValidator extends AbstractRegexpValidator {
     /**
-     * ÉèÖÃregexp¡£
+     * è®¾ç½®regexpã€‚
      */
     @Override
     public void setPattern(String pattern) {

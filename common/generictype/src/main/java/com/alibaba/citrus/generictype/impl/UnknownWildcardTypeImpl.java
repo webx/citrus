@@ -28,7 +28,7 @@ import com.alibaba.citrus.generictype.TypeInfo;
 import com.alibaba.citrus.generictype.WildcardTypeInfo;
 
 /**
- * ÓÃÀ´°ü×°unknown wildcardÀàĞÍµÄ°ü×°Æ÷£¬·µ»Ø¶ÔÓ¦<code>TypeVariable</code>µÄupper bounds¡£
+ * ç”¨æ¥åŒ…è£…unknown wildcardç±»å‹çš„åŒ…è£…å™¨ï¼Œè¿”å›å¯¹åº”<code>TypeVariable</code>çš„upper boundsã€‚
  */
 class UnknownWildcardTypeImpl implements WildcardTypeInfo {
     private final WildcardTypeInfo wildcard;
@@ -130,7 +130,7 @@ class UnknownWildcardTypeImpl implements WildcardTypeInfo {
     }
 
     /**
-     * È¡µÃhashÖµ¡£
+     * å–å¾—hashå€¼ã€‚
      */
     @Override
     public int hashCode() {
@@ -139,7 +139,7 @@ class UnknownWildcardTypeImpl implements WildcardTypeInfo {
     }
 
     /**
-     * ÅĞ¶ÏÁ½¸ö¶ÔÏóÊÇ·ñÏàÍ¬¡£
+     * åˆ¤æ–­ä¸¤ä¸ªå¯¹è±¡æ˜¯å¦ç›¸åŒã€‚
      */
     @Override
     public boolean equals(Object other) {
@@ -159,7 +159,7 @@ class UnknownWildcardTypeImpl implements WildcardTypeInfo {
     }
 
     /**
-     * È¡µÃ×Ö·û´®±íÊ¾¡£
+     * å–å¾—å­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      */
     @Override
     public String toString() {

@@ -30,7 +30,7 @@ import java.net.URL;
 import com.alibaba.citrus.service.resource.Resource;
 
 /**
- * ´ú±íÒ»¸öÎÄ¼ş<code>File</code>µÄ×ÊÔ´¡£
+ * ä»£è¡¨ä¸€ä¸ªæ–‡ä»¶<code>File</code>çš„èµ„æºã€‚
  * 
  * @author Michael Zhou
  */
@@ -38,14 +38,14 @@ public class FileResource implements Resource {
     private final File file;
 
     /**
-     * ´´½¨Ò»¸ö<code>FileResource</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>FileResource</code>ã€‚
      */
     public FileResource(File file) {
         this.file = assertNotNull(file, "file");
     }
 
     /**
-     * È¡µÃ×ÊÔ´µÄ<code>URL</code>¡£
+     * å–å¾—èµ„æºçš„<code>URL</code>ã€‚
      */
     public URL getURL() {
         try {
@@ -56,14 +56,14 @@ public class FileResource implements Resource {
     }
 
     /**
-     * È¡µÃ×ÊÔ´µÄ<code>File</code>¡£
+     * å–å¾—èµ„æºçš„<code>File</code>ã€‚
      */
     public File getFile() {
         return file;
     }
 
     /**
-     * È¡µÃ×ÊÔ´µÄ<code>InputStream</code>¡£
+     * å–å¾—èµ„æºçš„<code>InputStream</code>ã€‚
      */
     public InputStream getInputStream() throws IOException {
         try {
@@ -74,14 +74,14 @@ public class FileResource implements Resource {
     }
 
     /**
-     * ÅĞ¶Ï×ÊÔ´ÊÇ·ñ´æÔÚ¡£
+     * åˆ¤æ–­èµ„æºæ˜¯å¦å­˜åœ¨ã€‚
      */
     public boolean exists() {
         return file.exists();
     }
 
     /**
-     * È¡µÃ×ÊÔ´×î½üĞŞ¸ÄÊ±¼ä¡£
+     * å–å¾—èµ„æºæœ€è¿‘ä¿®æ”¹æ—¶é—´ã€‚
      */
     public long lastModified() {
         return file.lastModified();
@@ -123,7 +123,7 @@ public class FileResource implements Resource {
     }
 
     /**
-     * ½«resource×ª»»³É×Ö·û´®±íÊ¾¡£
+     * å°†resourceè½¬æ¢æˆå­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      */
     @Override
     public String toString() {

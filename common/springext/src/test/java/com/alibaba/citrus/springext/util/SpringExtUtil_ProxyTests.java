@@ -72,13 +72,13 @@ public class SpringExtUtil_ProxyTests {
     public void proxyClass() {
         Class<?> proxyClass = proxy.getClass();
 
-        // 对于同一个interface，总是返回完全相同的class
+        // 瀵逛簬鍚屼竴涓猧nterface锛屾�绘槸杩斿洖瀹屽叏鐩稿悓鐨刢lass
         assertSame(createProxy(MyInterface.class, factory).getClass(), proxyClass);
         assertSame(createProxy(MyInterface.class, new MyProxyTargetFactory(actualObject)).getClass(), proxyClass);
         assertSame(createProxy(MyInterface.class, new MyProxyTargetFactory(new MyInterfaceImpl("world"))).getClass(),
                 proxyClass);
 
-        // 对于不同的interface，则返回不同的class
+        // 瀵逛簬涓嶅悓鐨刬nterface锛屽垯杩斿洖涓嶅悓鐨刢lass
         assertNotSame(createProxy(List.class, factory).getClass(), proxyClass);
 
         // Class name
@@ -135,10 +135,10 @@ public class SpringExtUtil_ProxyTests {
 
     @Test
     public void assertProxy_() {
-        // 接受null
+        // 鎺ュ彈null
         assertProxy(null);
 
-        // 非proxy
+        // 闈瀙roxy
         try {
             assertProxy(actualObject);
             fail();
@@ -148,7 +148,7 @@ public class SpringExtUtil_ProxyTests {
         }
 
         // proxy
-        assertSame(factory, assertProxy(factory)); // 只要实现了ProxyTargetFactory接口，就认可
+        assertSame(factory, assertProxy(factory)); // 鍙瀹炵幇浜哖roxyTargetFactory鎺ュ彛锛屽氨璁ゅ彲
         assertSame(proxy, assertProxy(proxy));
 
     }
@@ -158,11 +158,11 @@ public class SpringExtUtil_ProxyTests {
         // null
         assertNull(getProxyTarget(null));
 
-        // 非proxy
+        // 闈瀙roxy
         assertSame(actualObject, getProxyTarget(actualObject));
 
         // proxy
-        assertSame(actualObject, getProxyTarget(factory)); // 只要实现了ProxyTargetFactory接口，就认可
+        assertSame(actualObject, getProxyTarget(factory)); // 鍙瀹炵幇浜哖roxyTargetFactory鎺ュ彛锛屽氨璁ゅ彲
         assertSame(actualObject, getProxyTarget(proxy));
 
         // getObject error

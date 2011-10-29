@@ -42,7 +42,7 @@ import com.alibaba.citrus.test.runner.Prototyped.TestData;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
 
 /**
- * ²âÊÔsession encoder¡£
+ * æµ‹è¯•session encoderã€‚
  * 
  * @author Michael Zhou
  */

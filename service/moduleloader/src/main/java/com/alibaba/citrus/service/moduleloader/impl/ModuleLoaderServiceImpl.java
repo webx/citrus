@@ -36,7 +36,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ÊµÏÖ<code>ModuleLoaderService</code>¡£
+ * å®žçŽ°<code>ModuleLoaderService</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -78,7 +78,7 @@ public class ModuleLoaderServiceImpl extends AbstractService<ModuleLoaderService
         assertNotNull(adapters, "adapters");
 
         if (cacheEnabled == null) {
-            cacheEnabled = productionMode; // Èç¹ûÎ´Ö¸¶¨cacheEnabled£¬ÔòÄ¬ÈÏµ±productionModeÊ±£¬´ò¿ªcache¡£
+            cacheEnabled = productionMode; // å¦‚æžœæœªæŒ‡å®šcacheEnabledï¼Œåˆ™é»˜è®¤å½“productionModeæ—¶ï¼Œæ‰“å¼€cacheã€‚
         }
 
         getLogger().debug("Initialized {}", this);
@@ -119,7 +119,7 @@ public class ModuleLoaderServiceImpl extends AbstractService<ModuleLoaderService
         moduleType = moduleKey.getModuleType();
         moduleName = moduleKey.getModuleName();
 
-        // ÏÈ¼ì²écache
+        // å…ˆæ£€æŸ¥cache
         if (cacheEnabled) {
             Module module = moduleCache.get(moduleKey);
 
@@ -128,7 +128,7 @@ public class ModuleLoaderServiceImpl extends AbstractService<ModuleLoaderService
             }
         }
 
-        // ´ÓfactoryÖÐ×°ÔØ
+        // ä»Žfactoryä¸­è£…è½½
         Object moduleObject = null;
         Module module = null;
 
@@ -140,10 +140,10 @@ public class ModuleLoaderServiceImpl extends AbstractService<ModuleLoaderService
             }
         }
 
-        // Í¨¹ýÊÊÅäÆ÷×ª»»½Ó¿Ú
+        // é€šè¿‡é€‚é…å™¨è½¬æ¢æŽ¥å£
         if (moduleObject != null) {
             if (moduleObject instanceof Module) {
-                module = (Module) moduleObject; // ¼ÙÈçmoduleObjectÖ±½ÓÊµÏÖÁË½Ó¿Ú
+                module = (Module) moduleObject; // å‡å¦‚moduleObjectç›´æŽ¥å®žçŽ°äº†æŽ¥å£
             } else {
                 for (ModuleAdapterFactory adapter : adapters) {
                     module = adapter.adapt(moduleType, moduleName, moduleObject);
@@ -162,7 +162,7 @@ public class ModuleLoaderServiceImpl extends AbstractService<ModuleLoaderService
             }
         }
 
-        // ±£´æµ½cache¡£
+        // ä¿å­˜åˆ°cacheã€‚
         if (cacheEnabled && module != null) {
             moduleCache.put(moduleKey, module);
         }

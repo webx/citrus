@@ -58,8 +58,8 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ´ú±íÒ»¸öconfiguration pointµÄÊµÏÖ£¬²¢´¦Àíconfiguration point
- * namespaceÏÂµÄelements¼°attributes¡£
+ * ä»£è¡¨ä¸€ä¸ªconfiguration pointçš„å®ç°ï¼Œå¹¶å¤„ç†configuration point
+ * namespaceä¸‹çš„elementsåŠattributesã€‚
  * 
  * @author Michael Zhou
  */
@@ -131,7 +131,7 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
             loadContributions(type);
         }
 
-        // ×¢²ádefault element parser
+        // æ³¨å†Œdefault element parser
         String defaultName = getDefaultElementName();
 
         if (defaultName != null) {
@@ -278,7 +278,7 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
     }
 
     private Schema[] loadVersionedSchemas(String mainName) {
-        // ÊÕ¼¯ËùÓĞcontribution schemaµÄ°æ±¾
+        // æ”¶é›†æ‰€æœ‰contribution schemaçš„ç‰ˆæœ¬
         Set<String> allVersions = createTreeSet();
 
         for (Contribution contrib : getContributions()) {
@@ -287,7 +287,7 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
             }
         }
 
-        // Éú³ÉÃ¿¸öschemas¡£
+        // ç”Ÿæˆæ¯ä¸ªschemasã€‚
         Schema[] schemas = new Schema[allVersions.size()];
         int i = 0;
         for (String version : allVersions) {
@@ -324,7 +324,7 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
     }
 
     /**
-     * ÓÃÀ´Éú³Éconfiguration point schemaµÄÄÚÈİ¡£
+     * ç”¨æ¥ç”Ÿæˆconfiguration point schemaçš„å†…å®¹ã€‚
      */
     private static class ConfigurationPointSchemaSource implements InputStreamSource {
         private final ConfigurationPoint configurationPoint;

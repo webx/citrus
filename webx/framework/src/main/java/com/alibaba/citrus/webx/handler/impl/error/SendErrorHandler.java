@@ -22,7 +22,7 @@ import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 import com.alibaba.citrus.webx.util.ErrorHandlerHelper;
 
 /**
- * ½«´íÎóÍ¨¹ısendError×ª·¢¸øservlet engine£¬ÓÉweb.xmlÖĞ¶¨ÒåµÄ´íÎóÒ³ÃæÀ´´¦ÀíÖ®¡£
+ * å°†é”™è¯¯é€šè¿‡sendErrorè½¬å‘ç»™servlet engineï¼Œç”±web.xmlä¸­å®šä¹‰çš„é”™è¯¯é¡µé¢æ¥å¤„ç†ä¹‹ã€‚
  * 
  * @author Michael Zhou
  */

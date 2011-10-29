@@ -22,40 +22,40 @@ import java.io.OutputStream;
 import java.io.Writer;
 
 /**
- * Õâ¸ö·şÎñÌá¹©ÁËÒ»¸öäÖÈ¾Ä£°åµÄÍ¨ÓÃ½Ó¿Ú£¬Í¨¹ıÕâ¸ö·şÎñ¡£Ò»¸öÌØ¶¨µÄÄ£°åÏµÍ³£¬ÀıÈçVelocity»òJSP£¬Ö» ĞèÒªÊµÏÖ
- * <code>TemplateEngine</code>½Ó¿Ú£¬²¢Ïòtemplate serviceµÇ¼Ç×Ô¼º£¬¾Í¿ÉÒÔ±»Í³Ò»µÄ·½·¨À´µ÷ÓÃ¡£
+ * è¿™ä¸ªæœåŠ¡æä¾›äº†ä¸€ä¸ªæ¸²æŸ“æ¨¡æ¿çš„é€šç”¨æ¥å£ï¼Œé€šè¿‡è¿™ä¸ªæœåŠ¡ã€‚ä¸€ä¸ªç‰¹å®šçš„æ¨¡æ¿ç³»ç»Ÿï¼Œä¾‹å¦‚Velocityæˆ–JSPï¼Œåª éœ€è¦å®ç°
+ * <code>TemplateEngine</code>æ¥å£ï¼Œå¹¶å‘template serviceç™»è®°è‡ªå·±ï¼Œå°±å¯ä»¥è¢«ç»Ÿä¸€çš„æ–¹æ³•æ¥è°ƒç”¨ã€‚
  * 
  * @author Michael Zhou
  */
 public interface TemplateService {
     /**
-     * È¡µÃËùÓĞ±»µÇ¼ÇµÄÄ£°åÃûºó×º¡£
+     * å–å¾—æ‰€æœ‰è¢«ç™»è®°çš„æ¨¡æ¿ååç¼€ã€‚
      */
     String[] getSupportedExtensions();
 
     /**
-     * È¡µÃÖ¸¶¨Ä£°åÃûºó×º¶ÔÓ¦µÄÄ£°åÒıÇæ¡£
+     * å–å¾—æŒ‡å®šæ¨¡æ¿ååç¼€å¯¹åº”çš„æ¨¡æ¿å¼•æ“ã€‚
      */
     TemplateEngine getTemplateEngine(String extension);
 
     /**
-     * ´Ë·½·¨´úÀíµ½ÏàÓ¦µÄÄ£°åÒıÇæ£¬²¢ÅĞ¶¨Ä£°åÊÇ·ñ´æÔÚ¡£
+     * æ­¤æ–¹æ³•ä»£ç†åˆ°ç›¸åº”çš„æ¨¡æ¿å¼•æ“ï¼Œå¹¶åˆ¤å®šæ¨¡æ¿æ˜¯å¦å­˜åœ¨ã€‚
      */
     boolean exists(String templateName);
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢ÒÔ×Ö·û´®µÄĞÎÊ½È¡µÃäÖÈ¾µÄ½á¹û¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶ä»¥å­—ç¬¦ä¸²çš„å½¢å¼å–å¾—æ¸²æŸ“çš„ç»“æœã€‚
      */
     String getText(String templateName, TemplateContext context) throws TemplateException, IOException;
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢½«äÖÈ¾µÄ½á¹ûËÍµ½×Ö½ÚÊä³öÁ÷ÖĞ¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶å°†æ¸²æŸ“çš„ç»“æœé€åˆ°å­—èŠ‚è¾“å‡ºæµä¸­ã€‚
      */
     void writeTo(String templateName, TemplateContext context, OutputStream ostream) throws TemplateException,
             IOException;
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢½«äÖÈ¾µÄ½á¹ûËÍµ½×Ö·ûÊä³öÁ÷ÖĞ¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶å°†æ¸²æŸ“çš„ç»“æœé€åˆ°å­—ç¬¦è¾“å‡ºæµä¸­ã€‚
      */
     void writeTo(String templateName, TemplateContext context, Writer writer) throws TemplateException, IOException;
 }

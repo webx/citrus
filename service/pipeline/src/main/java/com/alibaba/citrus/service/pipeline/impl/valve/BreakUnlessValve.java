@@ -29,7 +29,7 @@ import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
 
 /**
- * ³ı·ÇÌõ¼şÂú×ã£¬·ñÔòÖĞ¶Ïpipeline¡£
+ * é™¤éæ¡ä»¶æ»¡è¶³ï¼Œå¦åˆ™ä¸­æ–­pipelineã€‚
  * 
  * @author Michael Zhou
  */

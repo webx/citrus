@@ -25,7 +25,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import com.alibaba.citrus.webx.WebxComponents;
 
 /**
- * ÓÃÀ´³õÊ¼»¯<code>WebxComponents</code>¡£
+ * ç”¨æ¥åˆå§‹åŒ–<code>WebxComponents</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -41,7 +41,7 @@ public class WebxComponentsContext extends WebxApplicationContext {
     }
 
     /**
-     * È¡µÃËùÓĞµÄcomponents¡£
+     * å–å¾—æ‰€æœ‰çš„componentsã€‚
      */
     public WebxComponents getWebxComponents() {
         return getLoader().getWebxComponents();
@@ -60,7 +60,7 @@ public class WebxComponentsContext extends WebxApplicationContext {
     }
 
     /**
-     * ÔÚ´´½¨×ÓÈİÆ÷Ê±£¬¸øparentÒ»¸öÉèÖÃ×ÓcontextµÄ»ú»á¡£
+     * åœ¨åˆ›å»ºå­å®¹å™¨æ—¶ï¼Œç»™parentä¸€ä¸ªè®¾ç½®å­contextçš„æœºä¼šã€‚
      */
     protected void setupComponentContext(WebxComponentContext componentContext) {
     }

@@ -74,11 +74,11 @@ public class MyConfigurationTests {
 
     @Test
     public void globalConf() {
-        assertEquals(true, globalConf.isProductionMode()); // Ö¸¶¨
-        assertEquals("globalStringValue", globalConf.getStringValue()); // Ö¸¶¨
-        assertSameBean(globalFactory.getBean("myBean1"), globalConf.getMyBean1()); // Ä¬ÈÏ
-        assertSameBean(globalFactory.getBean("myBean2Global"), globalConf.getMyBean2()); // Ö¸¶¨
-        assertNull(globalConf.getMyBean3()); // ¿ÉÑ¡bean£¬Ä¬ÈÏbeanÕÒ²»µ½
+        assertEquals(true, globalConf.isProductionMode()); // æŒ‡å®š
+        assertEquals("globalStringValue", globalConf.getStringValue()); // æŒ‡å®š
+        assertSameBean(globalFactory.getBean("myBean1"), globalConf.getMyBean1()); // é»˜è®¤
+        assertSameBean(globalFactory.getBean("myBean2Global"), globalConf.getMyBean2()); // æŒ‡å®š
+        assertNull(globalConf.getMyBean3()); // å¯é€‰beanï¼Œé»˜è®¤beanæ‰¾ä¸åˆ°
 
         String str = globalConf.toString();
 
@@ -91,11 +91,11 @@ public class MyConfigurationTests {
 
     @Test
     public void conf1() {
-        assertEquals(true, conf1.isProductionMode()); // ¸²¸Ç
-        assertEquals("stringValue", conf1.getStringValue()); // ¸²¸Ç
-        assertSameBean(globalFactory.getBean("myBean1"), conf1.getMyBean1()); // Ö¸¶¨£¬µ«´ÓparentÈ¡bean
-        assertSameBean(globalFactory.getBean("myBean2Global"), conf1.getMyBean2()); // ¼Ì³Ğ
-        assertNull(conf1.getMyBean3()); // ¿ÉÑ¡bean£¬Ä¬ÈÏbeanÕÒ²»µ½
+        assertEquals(true, conf1.isProductionMode()); // è¦†ç›–
+        assertEquals("stringValue", conf1.getStringValue()); // è¦†ç›–
+        assertSameBean(globalFactory.getBean("myBean1"), conf1.getMyBean1()); // æŒ‡å®šï¼Œä½†ä»parentå–bean
+        assertSameBean(globalFactory.getBean("myBean2Global"), conf1.getMyBean2()); // ç»§æ‰¿
+        assertNull(conf1.getMyBean3()); // å¯é€‰beanï¼Œé»˜è®¤beanæ‰¾ä¸åˆ°
 
         String str = conf1.toString();
 
@@ -108,11 +108,11 @@ public class MyConfigurationTests {
 
     @Test
     public void conf2() {
-        assertEquals(true, conf2.isProductionMode()); // ¼Ì³Ğ
-        assertEquals("globalStringValue", conf2.getStringValue()); // ¼Ì³Ğ
-        assertSameBean(globalFactory.getBean("myBean1"), conf2.getMyBean1()); // Ä¬ÈÏÖµ
-        assertSameBean(globalFactory.getBean("myBean2Global"), conf2.getMyBean2()); // ¼Ì³Ğ
-        assertSameBean(factory.getBean("myBean3_haha"), conf2.getMyBean3()); // Ö¸¶¨
+        assertEquals(true, conf2.isProductionMode()); // ç»§æ‰¿
+        assertEquals("globalStringValue", conf2.getStringValue()); // ç»§æ‰¿
+        assertSameBean(globalFactory.getBean("myBean1"), conf2.getMyBean1()); // é»˜è®¤å€¼
+        assertSameBean(globalFactory.getBean("myBean2Global"), conf2.getMyBean2()); // ç»§æ‰¿
+        assertSameBean(factory.getBean("myBean3_haha"), conf2.getMyBean3()); // æŒ‡å®š
 
         String str = conf2.toString();
 

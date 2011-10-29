@@ -27,15 +27,15 @@ import com.alibaba.citrus.util.ArrayUtil;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ×î¼òµ¥Ä£°åÓ³Éä¹æÔò,²»²éÑ¯templateService£¬Ö»Æ´×°Â·¾¶¡£
+ * æœ€ç®€å•æ¨¡æ¿æ˜ å°„è§„åˆ™,ä¸æŸ¥è¯¢templateServiceï¼Œåªæ‹¼è£…è·¯å¾„ã€‚
  * <ol>
- * <li>ÔÚÄ£°åÃûÇ°¼ÓÉÏtemplate prefix£¨Èç¹ûÓĞµÄ»°£©¡£</li>
- * <li>Èç¹ûÄ£°åÃûÎ´Ö¸¶¨ºó×º£¬ÔòÒ²²»¼ÓÉÏºó×º¡£</li>
- * <li>¸ÃruleÄ¬ÈÏ²»cache½á¹û¡£</li>
+ * <li>åœ¨æ¨¡æ¿åå‰åŠ ä¸Štemplate prefixï¼ˆå¦‚æœæœ‰çš„è¯ï¼‰ã€‚</li>
+ * <li>å¦‚æœæ¨¡æ¿åæœªæŒ‡å®šåç¼€ï¼Œåˆ™ä¹Ÿä¸åŠ ä¸Šåç¼€ã€‚</li>
+ * <li>è¯¥ruleé»˜è®¤ä¸cacheç»“æœã€‚</li>
  * </ol>
  * <p>
- * ÀıÈç£º½«Ä£°åÃû£º<code>"about/directions/driving.vm"</code>Ó³Éäµ½layout(template prefix)£º
- * <code>"layout/about/directions/driving.vm"</code>¡£
+ * ä¾‹å¦‚ï¼šå°†æ¨¡æ¿åï¼š<code>"about/directions/driving.vm"</code>æ˜ å°„åˆ°layout(template prefix)ï¼š
+ * <code>"layout/about/directions/driving.vm"</code>ã€‚
  * </p>
  * 
  * @author Michael Zhou

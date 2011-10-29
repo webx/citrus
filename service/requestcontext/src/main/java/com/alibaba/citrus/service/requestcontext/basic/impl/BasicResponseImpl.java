@@ -43,10 +43,10 @@ import com.alibaba.citrus.service.requestcontext.util.CookieSupport;
 import com.alibaba.citrus.util.StringEscapeUtil;
 
 /**
- * °ü¹ü<code>HttpServletResponse</code>£¬Ê¹Ö®¾ß±¸£º
+ * åŒ…è£¹<code>HttpServletResponse</code>ï¼Œä½¿ä¹‹å…·å¤‡ï¼š
  * <ul>
- * <li>HeaderµÄ°²È«ĞÔ£º¹ıÂËCRLF¡£</li>
- * <li>CookieµÄ°²È«ĞÔ£ºÏŞÖÆcookieµÄ´óĞ¡¡£</li>
+ * <li>Headerçš„å®‰å…¨æ€§ï¼šè¿‡æ»¤CRLFã€‚</li>
+ * <li>Cookieçš„å®‰å…¨æ€§ï¼šé™åˆ¶cookieçš„å¤§å°ã€‚</li>
  * </ul>
  * 
  * @author Michael Zhou
@@ -139,7 +139,7 @@ public class BasicResponseImpl extends AbstractResponseWrapper {
     }
 
     private String checkHeaderName(String name) throws ResponseHeaderRejectedException {
-        String newName = assertNotNull(name, "header name is null"); // name==null±¨´í
+        String newName = assertNotNull(name, "header name is null"); // name==nullæŠ¥é”™
 
         for (Object interceptor : interceptors) {
             if (interceptor instanceof HeaderNameInterceptor) {
@@ -160,7 +160,7 @@ public class BasicResponseImpl extends AbstractResponseWrapper {
 
     private String checkHeaderValue(String name, String value) throws ResponseHeaderRejectedException {
         if (value == null) {
-            return null; // value==null·µ»Ø
+            return null; // value==nullè¿”å›
         }
 
         String newValue = value;
@@ -191,10 +191,10 @@ public class BasicResponseImpl extends AbstractResponseWrapper {
         if (newCookie instanceof CookieSupport) {
             newCookieSupport = (CookieSupport) newCookie;
         } else {
-            newCookieSupport = new CookieSupport(newCookie); // ½«cookieÇ¿ÖÆ×ª»¯³Écookie support
+            newCookieSupport = new CookieSupport(newCookie); // å°†cookieå¼ºåˆ¶è½¬åŒ–æˆcookie support
         }
 
-        newCookieSupport.addCookie(this); // Í¨¹ıset-cookie headerÀ´Ìí¼Ócookie£¬ÒÔ±ãÍ³Ò»¼à¹Ü
+        newCookieSupport.addCookie(this); // é€šè¿‡set-cookie headeræ¥æ·»åŠ cookieï¼Œä»¥ä¾¿ç»Ÿä¸€ç›‘ç®¡
     }
 
     private Cookie checkCookie(Cookie cookie) throws CookieRejectedException {
@@ -222,7 +222,7 @@ public class BasicResponseImpl extends AbstractResponseWrapper {
 
     private String checkCookieHeaderValue(String name, String value, boolean setHeader) throws CookieRejectedException {
         if (value == null) {
-            return null; // value==null·µ»Ø
+            return null; // value==nullè¿”å›
         }
 
         String newValue = value;

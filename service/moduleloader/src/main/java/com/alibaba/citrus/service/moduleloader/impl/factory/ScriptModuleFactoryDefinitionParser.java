@@ -41,7 +41,7 @@ import org.w3c.dom.Element;
 import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 
 /**
- * ½âÎöscript-modules¡£
+ * è§£æscript-modulesã€‚
  * 
  * @author Michael Zhou
  */
@@ -69,14 +69,14 @@ public class ScriptModuleFactoryDefinitionParser extends AbstractModuleFactoryDe
                 String folderName = assertNotNull(normalizePathName(subElement.getAttribute("folders")),
                         "no folder name provided for search-folders");
 
-                // È¡prefix
+                // å–prefix
                 prefix = getPrefix(folderName);
 
                 if (prefix != null) {
                     folderName = folderName.substring(prefix.length() + 1);
                 }
 
-                // folderName²»ÒÔ/¿ªÊ¼
+                // folderNameä¸ä»¥/å¼€å§‹
                 if (folderName.startsWith("/")) {
                     folderName = folderName.substring(1);
                 }
@@ -92,17 +92,17 @@ public class ScriptModuleFactoryDefinitionParser extends AbstractModuleFactoryDe
                 String fileName = assertNotNull(normalizePathName(subElement.getAttribute("files")),
                         "no script file name provided for search-files");
 
-                // fileName²»ÒÔ/½áÎ²
+                // fileNameä¸ä»¥/ç»“å°¾
                 assertTrue(!fileName.endsWith("/"), "invalid script file name: %s", fileName);
 
-                // È¡prefix
+                // å–prefix
                 prefix = getPrefix(fileName);
 
                 if (prefix != null) {
                     fileName = fileName.substring(prefix.length() + 1);
                 }
 
-                // fileName²»ÒÔ/¿ªÊ¼
+                // fileNameä¸ä»¥/å¼€å§‹
                 if (fileName.startsWith("/")) {
                     fileName = fileName.substring(1);
                 }
@@ -120,7 +120,7 @@ public class ScriptModuleFactoryDefinitionParser extends AbstractModuleFactoryDe
             if (scriptResourceName != null) {
                 scriptResourceName = prefix == null ? scriptResourceName : prefix + ":" + scriptResourceName;
 
-                // É¨Ãèscripts
+                // æ‰«æscripts
                 ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(parserContext
                         .getReaderContext().getResourceLoader());
                 int found = 0;
@@ -237,8 +237,8 @@ public class ScriptModuleFactoryDefinitionParser extends AbstractModuleFactoryDe
     }
 
     /**
-     * ¶Ôscript-modules£¬Ä¬ÈÏlazy-initÎªtrue£¬ÕâÊÇÎªÁË·ÀÖ¹´´½¨³éÏóÀà£¬µ¼ÖÂ³õÊ¼»¯Ê§°Ü¡££¨class-
-     * modules²»´æÔÚÕâÑùµÄÎÊÌâ¡££©
+     * å¯¹script-modulesï¼Œé»˜è®¤lazy-initä¸ºtrueï¼Œè¿™æ˜¯ä¸ºäº†é˜²æ­¢åˆ›å»ºæŠ½è±¡ç±»ï¼Œå¯¼è‡´åˆå§‹åŒ–å¤±è´¥ã€‚ï¼ˆclass-
+     * modulesä¸å­˜åœ¨è¿™æ ·çš„é—®é¢˜ã€‚ï¼‰
      */
     @Override
     protected boolean getDefaultLazyInit() {

@@ -18,15 +18,15 @@
 package com.alibaba.citrus.service.pipeline;
 
 /**
- * ´ú±íÒ»´ÎpipelineµÄÖ´ĞĞ¡£
+ * ä»£è¡¨ä¸€æ¬¡pipelineçš„æ‰§è¡Œã€‚
  * 
  * @author Michael Zhou
  */
 public interface PipelineInvocationHandle extends PipelineStates {
     /**
-     * Ö´ĞĞpipeline¡£
+     * æ‰§è¡Œpipelineã€‚
      * 
-     * @throws IllegalStateException ±»ÖĞ¶ÏµÄpipelineÎŞ·¨ÔÙ´Îinvoke£¬·ñÔòÅ×´ËÒì³£¡£
+     * @throws IllegalStateException è¢«ä¸­æ–­çš„pipelineæ— æ³•å†æ¬¡invokeï¼Œå¦åˆ™æŠ›æ­¤å¼‚å¸¸ã€‚
      */
     void invoke() throws IllegalStateException, PipelineException;
 }

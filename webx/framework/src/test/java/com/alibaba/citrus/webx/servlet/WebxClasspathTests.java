@@ -34,7 +34,7 @@ import com.meterware.servletunit.PatchedServletRunner;
 import com.meterware.servletunit.ServletRunner;
 
 /**
- * ²âÊÔ´ÓclasspathÖĞ×°ÔØÅäÖÃÎÄ¼ş¡£
+ * æµ‹è¯•ä»classpathä¸­è£…è½½é…ç½®æ–‡ä»¶ã€‚
  * 
  * @author Michael Zhou
  */

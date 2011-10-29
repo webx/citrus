@@ -41,30 +41,30 @@ import com.alibaba.citrus.test.runner.Prototyped.TestName;
 import com.alibaba.citrus.util.ClassUtil;
 
 /**
- * ²âÊÔ{@link MethodInfo}¡£
+ * æµ‹è¯•{@link MethodInfo}ã€‚
  * 
  * @author Michael Zhou
  */
 @RunWith(Prototyped.class)
 public class MethodTests extends BaseTypeTests implements Cloneable {
     private transient MethodInfo method;
-    private transient boolean isConstructor; // ÊÇ·ñÎª¹¹Ôìº¯Êı£¿
-    private transient String name; // ·½·¨Ãû£¬Èç¹ûÊÇ¹¹Ôìº¯Êı£¬ÔòÎª<init>
-    private Class<?> ownerType; // ·½·¨ËùÔÚÀàµÄ×ÓÀà
-    private Class<?> declaringType; // ·½·¨ËùÔÚÀà
-    private String methodName; // ·½·¨Ãû£¬Èç¹ûÊÇ¹¹Ôìº¯Êı£¬ÔòÎªnull
-    private Class<?>[] paramTypes; // ²ÎÊıÀàĞÍ±í
-    private boolean isGeneric; // ÊÇ·ñ°üº¬ÀàĞÍ²ÎÊı£¿
-    private String typeParams; // ÀàĞÍ²ÎÊıtoString
-    private String signature; // ·½·¨Ç©Ãû
-    private int modifiers; // ÏŞ¶¨·û
-    private String returnType; // ·µ»ØÀàĞÍ
-    private String exceptionTypes; // Òì³£ÀàĞÍ
-    private String effectiveExceptionTypes; // ÓĞĞ§Òì³£ÀàĞÍ
-    private String toString; // toString½á¹û
-    private String resolved; // resolveµÄ½á¹û
-    private boolean resolveChanged; // Èç¹ûÎªfalse£¬´ú±íresolve·µ»Øthis
-    private String getMethodFromClassTypeInfo; // ClassTypeInfo.getMethodµÄ½á¹û
+    private transient boolean isConstructor; // æ˜¯å¦ä¸ºæ„é€ å‡½æ•°ï¼Ÿ
+    private transient String name; // æ–¹æ³•åï¼Œå¦‚æœæ˜¯æ„é€ å‡½æ•°ï¼Œåˆ™ä¸º<init>
+    private Class<?> ownerType; // æ–¹æ³•æ‰€åœ¨ç±»çš„å­ç±»
+    private Class<?> declaringType; // æ–¹æ³•æ‰€åœ¨ç±»
+    private String methodName; // æ–¹æ³•åï¼Œå¦‚æœæ˜¯æ„é€ å‡½æ•°ï¼Œåˆ™ä¸ºnull
+    private Class<?>[] paramTypes; // å‚æ•°ç±»å‹è¡¨
+    private boolean isGeneric; // æ˜¯å¦åŒ…å«ç±»å‹å‚æ•°ï¼Ÿ
+    private String typeParams; // ç±»å‹å‚æ•°toString
+    private String signature; // æ–¹æ³•ç­¾å
+    private int modifiers; // é™å®šç¬¦
+    private String returnType; // è¿”å›ç±»å‹
+    private String exceptionTypes; // å¼‚å¸¸ç±»å‹
+    private String effectiveExceptionTypes; // æœ‰æ•ˆå¼‚å¸¸ç±»å‹
+    private String toString; // toStringç»“æœ
+    private String resolved; // resolveçš„ç»“æœ
+    private boolean resolveChanged; // å¦‚æœä¸ºfalseï¼Œä»£è¡¨resolveè¿”å›this
+    private String getMethodFromClassTypeInfo; // ClassTypeInfo.getMethodçš„ç»“æœ
 
     @Before
     public void init() throws Exception {

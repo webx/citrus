@@ -28,7 +28,7 @@ import com.alibaba.citrus.util.io.StreamUtil;
 import com.alibaba.citrus.webx.AbstractWebxTests;
 
 /**
- * ²âÊÔ/internal/Webx/Schema¡£
+ * æµ‹è¯•/internal/Webx/Schemaã€‚
  * 
  * @author Michael Zhou
  */

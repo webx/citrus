@@ -35,10 +35,10 @@ import org.apache.commons.fileupload.ParameterParser;
 import org.apache.commons.fileupload.RequestContext;
 
 /**
- * ¼Ì³Ğ×Ôcommons-fileupload-1.2.1µÄÍ¬ÃûÀà£¬¸Ä½øÁËÈçÏÂÄÚÈİ£º
+ * ç»§æ‰¿è‡ªcommons-fileupload-1.2.1çš„åŒåç±»ï¼Œæ”¹è¿›äº†å¦‚ä¸‹å†…å®¹ï¼š
  * <ul>
- * <li>Ê¹ÓÃĞÂµÄ<code>ServletRequestContext</code>,ÒÔ±ãÔÚ´¦Àí×Ö·û¼¯±àÂëÊ±£¬ºÍservlet¹æ·¶ÏàÈİ¡£Ïê¼û
- * {@link ServletRequestContext}¡£</li>
+ * <li>ä½¿ç”¨æ–°çš„<code>ServletRequestContext</code>,ä»¥ä¾¿åœ¨å¤„ç†å­—ç¬¦é›†ç¼–ç æ—¶ï¼Œå’Œservletè§„èŒƒç›¸å®¹ã€‚è¯¦è§
+ * {@link ServletRequestContext}ã€‚</li>
  * </ul>
  * 
  * @author Michael Zhou
@@ -111,7 +111,7 @@ public class ServletFileUpload extends org.apache.commons.fileupload.servlet.Ser
                 @SuppressWarnings("unchecked")
                 Map<String, String> params = parser.parse(pContentDisposition, ';');
 
-                // ½â¾öÀàËÆFlashÉÏ´«¸ü¸ÄÁËfilename Îª fname µÄ¶à¿Í»§¶ËÖ§³Ö
+                // è§£å†³ç±»ä¼¼Flashä¸Šä¼ æ›´æ”¹äº†filename ä¸º fname çš„å¤šå®¢æˆ·ç«¯æ”¯æŒ
                 for (String key : getFileNameKey()) {
                     fileName = trimToNull(params.get(key));
 

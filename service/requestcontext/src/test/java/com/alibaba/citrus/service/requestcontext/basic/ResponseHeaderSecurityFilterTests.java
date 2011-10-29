@@ -135,8 +135,8 @@ public class ResponseHeaderSecurityFilterTests extends AbstractBasicResponseTest
 
     @Test
     public void checkRedirectLocation() throws IOException {
-        // Õı³£Çé¿öÏÂ£¬°üº¬crlfµÄlocationÊÇÃ»ÓĞ»ú»á±»crlfFilter·¢ÏÖµÄ£¬ÒòÎªÔÚ´ËÖ®Ç°ÒÑ¾­³ö´í¡£
-        // µ«ÎªÁË±£ÕÏ°²È«£¬ÈÔ×÷´Ë²âÊÔ¡£
+        // æ­£å¸¸æƒ…å†µä¸‹ï¼ŒåŒ…å«crlfçš„locationæ˜¯æ²¡æœ‰æœºä¼šè¢«crlfFilterå‘ç°çš„ï¼Œå› ä¸ºåœ¨æ­¤ä¹‹å‰å·²ç»å‡ºé”™ã€‚
+        // ä½†ä¸ºäº†ä¿éšœå®‰å…¨ï¼Œä»ä½œæ­¤æµ‹è¯•ã€‚
         assertEquals("value1 value2 value3 ",
                 new ResponseHeaderSecurityFilter().checkRedirectLocation("value1\r\nvalue2\rvalue3\n"));
     }

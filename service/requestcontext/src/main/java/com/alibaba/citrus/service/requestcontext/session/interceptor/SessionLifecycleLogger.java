@@ -33,7 +33,7 @@ import com.alibaba.citrus.service.requestcontext.session.SessionLifecycleListene
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 /**
- * ÓÃÀ´¼ÇÂ¼sessionÈÕÖ¾ÉúÃüÆÚÊÂ¼şµÄlistener¡£
+ * ç”¨æ¥è®°å½•sessionæ—¥å¿—ç”Ÿå‘½æœŸäº‹ä»¶çš„listenerã€‚
  * 
  * @author Michael Zhou
  */

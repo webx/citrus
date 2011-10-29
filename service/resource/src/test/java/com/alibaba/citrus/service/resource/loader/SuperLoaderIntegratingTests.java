@@ -76,14 +76,14 @@ public class SuperLoaderIntegratingTests extends AbstractResourceLoadingTests {
     public void defaultName() throws Exception {
         resourceLoadingService = (ResourceLoadingService) factory.getBean("defaultName");
 
-        // Ä¬ÈÏÓ³Éä¡°/¡±
+        // é»˜è®¤æ˜ å°„â€œ/â€
         assertResourceServiceList("/test.txt", "test.txt", true, false);
         assertResourceServiceList("/", "", true, true, "WEB-INF/", "appcontext/", "beans.xml", "filter/", "loader/",
                 "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml", "test.txt");
 
         resourceLoadingService = (ResourceLoadingService) factory.getBean("defaultName1");
 
-        // Ä¬ÈÏÓ³Éä¡°¡±
+        // é»˜è®¤æ˜ å°„â€œâ€
         assertResourceServiceList("/test.txt", "test.txt", true, false);
     }
 
@@ -110,19 +110,19 @@ public class SuperLoaderIntegratingTests extends AbstractResourceLoadingTests {
     public void misc() throws Exception {
         resourceLoadingService = (ResourceLoadingService) factory.getBean("misc");
 
-        // abc.txt´æÔÚÓÚparentµÄÂ·¾¶/aaa/bbbÉÏ£¬Ò²´æÔÚÓÚ/myfolderÉÏ
+        // abc.txtå­˜åœ¨äºparentçš„è·¯å¾„/aaa/bbbä¸Šï¼Œä¹Ÿå­˜åœ¨äº/myfolderä¸Š
         assertEquals(new File(srcdir, "/WEB-INF/aaa/bbb/abc.txt"),
                 resourceLoadingService.getResourceAsFile("/WEB-INF/aaa/bbb/abc.txt"));
 
-        // def.txtÖ»´æÔÚÓÚ/myfolderÉÏ
+        // def.txtåªå­˜åœ¨äº/myfolderä¸Š
         assertEquals(new File(srcdir, "/myfolder/def.txt"),
                 resourceLoadingService.getResourceAsFile("/WEB-INF/aaa/bbb/def.txt"));
 
-        // abc.txt´æÔÚÓÚparentµÄÂ·¾¶/aaa/bbbÉÏ£¬Ò²´æÔÚÓÚ/myfolderÉÏ
+        // abc.txtå­˜åœ¨äºparentçš„è·¯å¾„/aaa/bbbä¸Šï¼Œä¹Ÿå­˜åœ¨äº/myfolderä¸Š
         assertEquals(new File(srcdir, "/WEB-INF/aaa/bbb/abc.txt"),
                 resourceLoadingService.getResourceAsFile("/WEB-INF2/aaa/bbb/abc.txt"));
 
-        // def.txtÖ»´æÔÚÓÚ/myfolderÉÏ
+        // def.txtåªå­˜åœ¨äº/myfolderä¸Š
         assertEquals(new File(srcdir, "/myfolder/def.txt"),
                 resourceLoadingService.getResourceAsFile("/WEB-INF2/aaa/bbb/def.txt"));
     }

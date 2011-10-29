@@ -22,56 +22,56 @@ import java.util.List;
 import com.alibaba.citrus.service.form.Validator;
 
 /**
- * ´ú±íÒ»¸öform fieldµÄ¶¨ÒåĞÅÏ¢¡£
+ * ä»£è¡¨ä¸€ä¸ªform fieldçš„å®šä¹‰ä¿¡æ¯ã€‚
  * <p>
- * Form field¶¨ÒåÊÇ²»¿É¸ü¸ÄµÄ¡£
+ * Form fieldå®šä¹‰æ˜¯ä¸å¯æ›´æ”¹çš„ã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface FieldConfig {
     /**
-     * È¡µÃfieldËùÊôµÄgroup config¡£
+     * å–å¾—fieldæ‰€å±çš„group configã€‚
      */
     GroupConfig getGroupConfig();
 
     /**
-     * È¡µÃfield name¡£
+     * å–å¾—field nameã€‚
      */
     String getName();
 
     /**
-     * È¡µÃfield key¡£
+     * å–å¾—field keyã€‚
      */
     String getKey();
 
     /**
-     * È¡µÃÓÃÀ´ÏÔÊ¾fieldµÄÃû³Æ¡£
+     * å–å¾—ç”¨æ¥æ˜¾ç¤ºfieldçš„åç§°ã€‚
      */
     String getDisplayName();
 
     /**
-     * È¡µÃtrimmingÑ¡Ïî¡£
+     * å–å¾—trimmingé€‰é¡¹ã€‚
      */
     boolean isTrimming();
 
     /**
-     * È¡µÃbean propertyÃû³Æ¡£
+     * å–å¾—bean propertyåç§°ã€‚
      */
     String getPropertyName();
 
     /**
-     * È¡µÃµ¥¸öÄ¬ÈÏÖµ¡£
+     * å–å¾—å•ä¸ªé»˜è®¤å€¼ã€‚
      */
     String getDefaultValue();
 
     /**
-     * È¡µÃÒ»×éÄ¬ÈÏÖµ¡£
+     * å–å¾—ä¸€ç»„é»˜è®¤å€¼ã€‚
      */
     String[] getDefaultValues();
 
     /**
-     * È¡µÃvalidatorÁĞ±í¡£
+     * å–å¾—validatoråˆ—è¡¨ã€‚
      */
     List<Validator> getValidators();
 }

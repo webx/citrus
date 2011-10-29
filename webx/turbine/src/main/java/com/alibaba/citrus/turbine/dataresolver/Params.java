@@ -23,7 +23,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * ÓÃÀ´±êÊ¶Ò»¸ö²ÎÊı£¬Ê¹Ö®´Órequest parametersÖĞÈ¡µÃpropertiesÖµ¡£
+ * ç”¨æ¥æ ‡è¯†ä¸€ä¸ªå‚æ•°ï¼Œä½¿ä¹‹ä»request parametersä¸­å–å¾—propertieså€¼ã€‚
  * 
  * @author Michael Zhou
  */

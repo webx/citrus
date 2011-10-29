@@ -18,22 +18,22 @@
 package com.alibaba.citrus.service.template;
 
 /**
- * ����һ�����ɱ���Ⱦ���Ķ�����������ͨ�����õ�<code>toString</code>����Ⱦ����ķ�����ʵ�ִ˽ӿ������ºô���
+ * 代表一个“可被渲染”的对象，用来代替通常所用的<code>toString</code>来渲染对象的方法。实现此接口有如下好处：
  * <ol>
- * <li>��<code>toString</code>�����Դ����쳣�����ýӿ��ṩ�ķ���֧���쳣������</li>
- * <li>ͨ��<code>toString</code>���ӵ��Դ�����Ѷȡ�</li>
- * <li>ʹ��<code>toString</code>�������ö����������ʼ�����󣬶��ýӿ�������㡣</li>
+ * <li>在<code>toString</code>中难以处理异常，而该接口提供的方法支持异常处理。</li>
+ * <li>通过<code>toString</code>增加调试代码的难度。</li>
+ * <li>使用<code>toString</code>难以利用多个步骤来初始化对象，而该接口则更方便。</li>
  * </ol>
  * <p>
- * �����ض���template engine����Ҫͨ���ض��ķ�����֧�ִ˽ӿڡ����磬Velocity��ͨ��event cartrige������
- * <code>Renderable</code>�ӿڡ�
+ * 对于特定的template engine，需要通过特定的方法来支持此接口。例如，Velocity可通过event cartrige来处理
+ * <code>Renderable</code>接口。
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface Renderable {
     /**
-     * ��Ⱦ����
+     * 渲染对象。
      */
     String render();
 }

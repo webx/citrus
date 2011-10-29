@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.mappingrule;
 
 /**
- * ´ú±íruleÕÒ²»µ½µÄÒì³£¡£
+ * ä»£è¡¨ruleæ‰¾ä¸åˆ°çš„å¼‚å¸¸ã€‚
  * 
  * @author Michael Zhou
  */

@@ -23,50 +23,50 @@ import java.io.InputStream;
 import java.net.URL;
 
 /**
- * ����һ����Դ��
+ * 代表一个资源。
  * <p>
- * һ����Դ���Ա���ʾ��<code>URL</code>��<code>File</code>����<code>InputStream</code>��
- * ��Ҫע����ǣ������������͵���Դ������ͬʱȡ������������ʽ��
+ * 一个资源可以被表示成<code>URL</code>、<code>File</code>或是<code>InputStream</code>。
+ * 需要注意的是，不是所有类型的资源都可以同时取得上述三种形式。
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface Resource {
     /**
-     * ȡ����Դ��<code>URL</code>�������Դ���ܱ���ʾ��<code>URL</code>���򷵻�<code>null</code>��
+     * 取得资源的<code>URL</code>。如果资源不能被表示成<code>URL</code>，则返回<code>null</code>。
      */
     URL getURL();
 
     /**
-     * ȡ����Դ��<code>File</code>�������Դ���ܱ���ʾ��<code>File</code>���򷵻�<code>null</code>��
+     * 取得资源的<code>File</code>。如果资源不能被表示成<code>File</code>，则返回<code>null</code>。
      */
     File getFile();
 
     /**
-     * ȡ����Դ��<code>InputStream</code>�������Դ���ܱ���ʾ��<code>InputStream</code>���򷵻�
-     * <code>null</code>��
+     * 取得资源的<code>InputStream</code>。如果资源不能被表示成<code>InputStream</code>，则返回
+     * <code>null</code>。
      */
     InputStream getInputStream() throws IOException;
 
     /**
-     * �ж���Դ�Ƿ���ڡ�
+     * 判断资源是否存在。
      * 
-     * @return ������ڣ��򷵻�<code>true</code>
+     * @return 如果存在，则返回<code>true</code>
      */
     boolean exists();
 
     /**
-     * ȡ����Դ����޸�ʱ�䣨ms���������֧�֣��򷵻�<code>0</code>��
+     * 取得资源最近修改时间（ms）。如果不支持，则返回<code>0</code>。
      */
     long lastModified();
 
     /**
-     * ��ԴӦ��ʵ�ָ÷�����
+     * 资源应该实现该方法。
      */
     int hashCode();
 
     /**
-     * ��ԴӦ��ʵ�ָ÷�����
+     * 资源应该实现该方法。
      */
     boolean equals(Object other);
 }

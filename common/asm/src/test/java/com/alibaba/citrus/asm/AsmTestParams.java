@@ -27,7 +27,7 @@ import com.alibaba.citrus.asm.test.cases.Generator;
 import com.alibaba.citrus.test.TestUtil;
 
 /**
- * °ïÖúasm²âÊÔ¡£
+ * å¸®åŠ©asmæµ‹è¯•ã€‚
  * 
  * @author Michael Zhou
  */
@@ -59,7 +59,7 @@ public class AsmTestParams {
         defaultInclude = "";
         defaultExclude = AsmTestParams.class.getPackage().getName();
 
-        // Éú³É²âÊÔÓÃµÄclassÎÄ¼ş
+        // ç”Ÿæˆæµ‹è¯•ç”¨çš„classæ–‡ä»¶
         try {
             Generator.main(new String[] { cases.getAbsolutePath() });
         } catch (IOException e) {

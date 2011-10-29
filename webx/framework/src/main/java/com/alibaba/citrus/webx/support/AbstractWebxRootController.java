@@ -80,13 +80,13 @@ import com.alibaba.citrus.webx.util.WebxUtil;
 public abstract class AbstractWebxRootController implements WebxRootController, PassThruSupportable {
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
-    /** ÔÚrequestÖĞ±£´ærequest context ownerµÄ¼üÃû¡£ */
+    /** åœ¨requestä¸­ä¿å­˜request context ownerçš„é”®åã€‚ */
     private static final String REQUEST_CONTEXT_OWNER_KEY = "_request_context_owner_";
 
-    /** ÓÃÀ´×¢²árequest handlerµÄÎÄ¼şÃû¡£ */
+    /** ç”¨æ¥æ³¨å†Œrequest handlerçš„æ–‡ä»¶åã€‚ */
     private static final String REQUEST_HANDLER_LOCATION = "META-INF/webx.internal-request-handlers";
 
-    /** ErrorÒ³ÃæµÄÇ°×º¡£ */
+    /** Erroré¡µé¢çš„å‰ç¼€ã€‚ */
     private static final String ERROR_PREFIX = "error";
 
     private WebxComponents components;
@@ -111,14 +111,14 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
     }
 
     /**
-     * ´Ë·½·¨ÔÚ´´½¨controllerÊ±±»µ÷ÓÃ¡£
+     * æ­¤æ–¹æ³•åœ¨åˆ›å»ºcontrolleræ—¶è¢«è°ƒç”¨ã€‚
      */
     public void init(WebxComponents components) {
         this.components = components;
     }
 
     /**
-     * ´Ë·½·¨ÔÚ´´½¨»òË¢ĞÂWebApplicationContextÊ±±»µ÷ÓÃ¡£
+     * æ­¤æ–¹æ³•åœ¨åˆ›å»ºæˆ–åˆ·æ–°WebApplicationContextæ—¶è¢«è°ƒç”¨ã€‚
      */
     public void onRefreshContext() throws BeansException {
         initWebxConfiguration();
@@ -160,9 +160,9 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
                 RequestHandlerContext ctx = internalHandlerMapping.getRequestHandler(request, response);
 
                 if (ctx == null) {
-                    // Èç¹û¶¨ÒåÁËpassthru filter£¬ÔòÅĞ¶ÏrequestÊÇ·ñ±»passthru£¬
-                    // ¶ÔÓÚĞèÒª±»passthruµÄrequest²»Ö´ĞĞhandleRequest£¬¶øÖ±½Ó·µ»Ø¡£
-                    // ¸Ã¹¦ÄÜÊÊÓÃÓÚ½ö½«webxÊÓ×÷ÆÕÍ¨µÄfilter£¬¶øfilter chainµÄ½ÓÏÂÀ´µÄ²¿·Ö½«¿ÉÊ¹ÓÃwebxËùÌá¹©µÄrequest contexts¡£
+                    // å¦‚æœå®šä¹‰äº†passthru filterï¼Œåˆ™åˆ¤æ–­requestæ˜¯å¦è¢«passthruï¼Œ
+                    // å¯¹äºéœ€è¦è¢«passthruçš„requestä¸æ‰§è¡ŒhandleRequestï¼Œè€Œç›´æ¥è¿”å›ã€‚
+                    // è¯¥åŠŸèƒ½é€‚ç”¨äºä»…å°†webxè§†ä½œæ™®é€šçš„filterï¼Œè€Œfilter chainçš„æ¥ä¸‹æ¥çš„éƒ¨åˆ†å°†å¯ä½¿ç”¨webxæ‰€æä¾›çš„request contextsã€‚
                     boolean requestProcessed = false;
 
                     if (passthruFilter == null || !passthruFilter.matches(request)) {
@@ -177,14 +177,14 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
                 }
             }
         } catch (Throwable e) {
-            // ´¦ÀíÒì³£eµÄ¹ı³Ì£º
+            // å¤„ç†å¼‚å¸¸eçš„è¿‡ç¨‹ï¼š
             //
-            // 1. Ê×ÏÈµ÷ÓÃerrorHandler´¦ÀíÒì³£e£¬errorHandler½«Éú³ÉÓÑºÃµÄ´íÎóÒ³Ãæ¡£
-            //    errorHandlerÒ²¸ºÔğ¼ÇÂ¼ÈÕÖ¾ ©¤ Èç¹û±ØÒªµÄ»°¡£
-            // 2. Handler¿ÉÒÔÖ±½Ó°ÑÒì³£Å×»ØÀ´£¬ÕâÑùservlet engine¾Í»á½Ó¹ÜÕâ¸öÒì³£¡£Í¨³£ÊÇÏÔÊ¾web.xmlÖĞÖ¸¶¨µÄ´íÎóÒ³Ãæ¡£
-            //    ÕâÖÖÇé¿öÏÂ£¬errorHandler»¹ÊÇÒª¸ºÔğ¼ÇÂ¼ÈÕÖ¾¡£
-            // 3. ¼ÙÈç²»ĞÒerrorHandler±¾ÉíÓöµ½Òì³££¬Ôòservlet engine¾Í»á½Ó¹ÜÕâ¸öÒì³£¡£Í¨³£ÊÇÏÔÊ¾web.xmlÖĞÖ¸¶¨µÄ´íÎóÒ³Ãæ¡£
-            //    ÕâÖÖÇé¿öÏÂ£¬ĞÂÀÏÒì³£¶¼»á±»¼ÇÂ¼µ½ÈÕÖ¾ÖĞ¡£
+            // 1. é¦–å…ˆè°ƒç”¨errorHandlerå¤„ç†å¼‚å¸¸eï¼ŒerrorHandlerå°†ç”Ÿæˆå‹å¥½çš„é”™è¯¯é¡µé¢ã€‚
+            //    errorHandlerä¹Ÿè´Ÿè´£è®°å½•æ—¥å¿— â”€ å¦‚æœå¿…è¦çš„è¯ã€‚
+            // 2. Handlerå¯ä»¥ç›´æ¥æŠŠå¼‚å¸¸æŠ›å›æ¥ï¼Œè¿™æ ·servlet engineå°±ä¼šæ¥ç®¡è¿™ä¸ªå¼‚å¸¸ã€‚é€šå¸¸æ˜¯æ˜¾ç¤ºweb.xmlä¸­æŒ‡å®šçš„é”™è¯¯é¡µé¢ã€‚
+            //    è¿™ç§æƒ…å†µä¸‹ï¼ŒerrorHandlerè¿˜æ˜¯è¦è´Ÿè´£è®°å½•æ—¥å¿—ã€‚
+            // 3. å‡å¦‚ä¸å¹¸errorHandleræœ¬èº«é‡åˆ°å¼‚å¸¸ï¼Œåˆ™servlet engineå°±ä¼šæ¥ç®¡è¿™ä¸ªå¼‚å¸¸ã€‚é€šå¸¸æ˜¯æ˜¾ç¤ºweb.xmlä¸­æŒ‡å®šçš„é”™è¯¯é¡µé¢ã€‚
+            //    è¿™ç§æƒ…å†µä¸‹ï¼Œæ–°è€å¼‚å¸¸éƒ½ä¼šè¢«è®°å½•åˆ°æ—¥å¿—ä¸­ã€‚
             try {
                 try {
                     response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -194,25 +194,25 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
 
                 clearBuffer(requestContext, response);
 
-                // È¡µÃ²¢Ö´ĞĞerrorHandler
+                // å–å¾—å¹¶æ‰§è¡ŒerrorHandler
                 RequestHandlerContext ctx = internalHandlerMapping.getRequestHandler(request, response, e);
 
                 assertNotNull(ctx, "Could not get exception handler for exception: %s", e);
 
-                // ¼ÇÂ¼ÈÕÖ¾
+                // è®°å½•æ—¥å¿—
                 ctx.getLogger().error("Error occurred while process request " + request.getRequestURI(), e);
 
                 try {
-                    // ¶ÔÓÚerror´¦Àí¹ı³Ì£¬ÉèÖÃcomponentÎªÌØÊâµÄroot component¡£
+                    // å¯¹äºerrorå¤„ç†è¿‡ç¨‹ï¼Œè®¾ç½®componentä¸ºç‰¹æ®Šçš„root componentã€‚
                     WebxUtil.setCurrentComponent(request, components.getComponent(null));
                     ctx.getRequestHandler().handleRequest(ctx);
                 } finally {
                     WebxUtil.setCurrentComponent(request, null);
                 }
             } catch (Throwable ee) {
-                // ÓĞÁ½ÖÖÇé¿ö£º
-                // 1. ee causedBy e£¬Õâ¸ö±íÃ÷ÊÇerrorHandlerÌØÒâ½«Òì³£ÖØĞÂÅ×³ö£¬×ª½»¸øservlet engineÀ´´¦Àí
-                // 2. eeºÍeÎŞ¹Ø£¬Õâ¸ö±íÃ÷ÊÇerrorHandler×ÔÉí³öÏÖ´íÎó¡£¶ÔÓÚÕâÖÖÇé¿ö£¬ĞèÒª¼ÇÂ¼ÈÕÖ¾¡£
+                // æœ‰ä¸¤ç§æƒ…å†µï¼š
+                // 1. ee causedBy eï¼Œè¿™ä¸ªè¡¨æ˜æ˜¯errorHandlerç‰¹æ„å°†å¼‚å¸¸é‡æ–°æŠ›å‡ºï¼Œè½¬äº¤ç»™servlet engineæ¥å¤„ç†
+                // 2. eeå’Œeæ— å…³ï¼Œè¿™ä¸ªè¡¨æ˜æ˜¯errorHandlerè‡ªèº«å‡ºç°é”™è¯¯ã€‚å¯¹äºè¿™ç§æƒ…å†µï¼Œéœ€è¦è®°å½•æ—¥å¿—ã€‚
                 if (!getCauses(ee).contains(e)) {
                     log.error("Another exception occurred while handling exception " + e.getClass().getSimpleName()
                             + ": " + e.getMessage(), ee);
@@ -244,33 +244,33 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
     }
 
     /**
-     * ·ÅÆú¿ØÖÆ£¬½«¿ØÖÆÈ¨·µ»Ø¸øservlet engine¡£
+     * æ”¾å¼ƒæ§åˆ¶ï¼Œå°†æ§åˆ¶æƒè¿”å›ç»™servlet engineã€‚
      */
     private void giveUpControl(RequestContext requestContext, FilterChain chain) throws IOException, ServletException {
-        // 1. ¹Ø±Õbuffering
+        // 1. å…³é—­buffering
         BufferedRequestContext brc = findRequestContext(requestContext, BufferedRequestContext.class);
 
         if (brc != null) {
             try {
                 brc.setBuffering(false);
             } catch (IllegalStateException e) {
-                // getInputStream»ògetWriterÒÑ¾­±»µ÷ÓÃÁË£¬²»ÄÜ¸ü¸Äbuffering²ÎÊı¡£
+                // getInputStreamæˆ–getWriterå·²ç»è¢«è°ƒç”¨äº†ï¼Œä¸èƒ½æ›´æ”¹bufferingå‚æ•°ã€‚
             }
         }
 
-        // 2. È¡ÏûcontentTypeµÄÉèÖÃ
+        // 2. å–æ¶ˆcontentTypeçš„è®¾ç½®
         try {
             requestContext.getResponse().setContentType(null);
         } catch (Exception e) {
-            // ignored, ÓĞ¿ÉÄÜÓĞµÄservlet engine²»Ö§³Önull²ÎÊı
+            // ignored, æœ‰å¯èƒ½æœ‰çš„servlet engineä¸æ”¯æŒnullå‚æ•°
         }
 
-        // µ÷ÓÃfilter chain
+        // è°ƒç”¨filter chain
         chain.doFilter(requestContext.getRequest(), requestContext.getResponse());
     }
 
     /**
-     * ¼ì²érequest£¬Èç¹û·µ»Ø<code>true</code>£¬Ôò½øÒ»²½´¦ÀíÇëÇó£¬·ñÔòÁ¢¼´½áÊøÇëÇó¡£
+     * æ£€æŸ¥requestï¼Œå¦‚æœè¿”å›<code>true</code>ï¼Œåˆ™è¿›ä¸€æ­¥å¤„ç†è¯·æ±‚ï¼Œå¦åˆ™ç«‹å³ç»“æŸè¯·æ±‚ã€‚
      */
     protected boolean checkRequest(RequestContext requestContext) {
         LazyCommitRequestContext lcrc = findRequestContext(requestContext, LazyCommitRequestContext.class);
@@ -283,15 +283,15 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
     }
 
     /**
-     * ´¦ÀíÇëÇó¡£
+     * å¤„ç†è¯·æ±‚ã€‚
      */
     protected abstract boolean handleRequest(RequestContext requestContext) throws Exception;
 
     /**
-     * Çå³ıbuffer¡£
+     * æ¸…é™¤bufferã€‚
      */
     private void clearBuffer(RequestContext requestContext, HttpServletResponse response) {
-        // ÓĞ¿ÉÄÜÊÇÔÚ´´½¨requestContextÊ±³ö´í£¬´ËÊ±requestContextÎª¿Õ¡£
+        // æœ‰å¯èƒ½æ˜¯åœ¨åˆ›å»ºrequestContextæ—¶å‡ºé”™ï¼Œæ­¤æ—¶requestContextä¸ºç©ºã€‚
         if (requestContext != null) {
             response = requestContext.getResponse();
         }
@@ -302,7 +302,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
     }
 
     /**
-     * È¡µÃrequest context¶ÔÏó¡£
+     * å–å¾—request contextå¯¹è±¡ã€‚
      */
     private RequestContext getRequestContext(HttpServletRequest request, HttpServletResponse response) {
         RequestContext requestContext = RequestContextUtil.getRequestContext(request);
@@ -317,7 +317,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
     }
 
     /**
-     * Ìá½»request context¡£
+     * æäº¤request contextã€‚
      */
     private void commitRequestContext(RequestContext requestContext) {
         if (this == requestContext.getRequest().getAttribute(REQUEST_CONTEXT_OWNER_KEY)) {
@@ -327,7 +327,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
     }
 
     /**
-     * ´ú±íwebxÄÚ²¿ÇëÇóµÄÏà¹ØĞÅÏ¢¡£
+     * ä»£è¡¨webxå†…éƒ¨è¯·æ±‚çš„ç›¸å…³ä¿¡æ¯ã€‚
      */
     private class InternalRequestHandlerContext extends RequestHandlerContext {
         private final RequestHandler handler;
@@ -352,7 +352,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
     }
 
     /**
-     * ÓÃÀ´´¦ÀíwebxÄÚ²¿ÇëÇóµÄmapping¡£
+     * ç”¨æ¥å¤„ç†webxå†…éƒ¨è¯·æ±‚çš„mappingã€‚
      */
     private class InternalRequestHandlerMapping implements RequestHandlerMapping, ErrorHandlerMapping {
         private final Pattern homepagePattern = Pattern.compile("(^|\\?|&)home(=|&|$)");
@@ -365,7 +365,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
         public InternalRequestHandlerMapping() {
             productionMode = getWebxConfiguration().isProductionMode();
 
-            // ½«mapping·Åµ½application contextÖĞ£¬ÒÔ±ã×¢Èëµ½handlerÖĞ¡£
+            // å°†mappingæ”¾åˆ°application contextä¸­ï¼Œä»¥ä¾¿æ³¨å…¥åˆ°handlerä¸­ã€‚
             ConfigurableListableBeanFactory beanFactory = ((ConfigurableApplicationContext) components
                     .getParentApplicationContext()).getBeanFactory();
 
@@ -373,16 +373,16 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
 
             // internalPathPrefix
             internalPathPrefix = getWebxConfiguration().getInternalPathPrefix();
-            internalPathPrefix = normalizeAbsolutePath(internalPathPrefix, true); // ¹æ¸ñ»¯³É/internal
+            internalPathPrefix = normalizeAbsolutePath(internalPathPrefix, true); // è§„æ ¼åŒ–æˆ/internal
 
             if (isEmpty(internalPathPrefix)) {
                 throw new IllegalArgumentException("Invalid internalPathPrefix: "
                         + getWebxConfiguration().getInternalPathPrefix());
             }
 
-            // ´´½¨²¢³õÊ¼»¯errorHandler
-            // ÔÚproduction modeÏÂ£¬¼ÙÈçconfigÖĞÖ¸¶¨ÁËexception pipeline£¬ÔòÖ´ĞĞÖ®£»
-            // ·ñÔòsendError£¬ÓÉweb.xmlÖĞÖ¸¶¨µÄ´íÎóÒ³ÃæÀ´´¦Àí¡£
+            // åˆ›å»ºå¹¶åˆå§‹åŒ–errorHandler
+            // åœ¨production modeä¸‹ï¼Œå‡å¦‚configä¸­æŒ‡å®šäº†exception pipelineï¼Œåˆ™æ‰§è¡Œä¹‹ï¼›
+            // å¦åˆ™sendErrorï¼Œç”±web.xmlä¸­æŒ‡å®šçš„é”™è¯¯é¡µé¢æ¥å¤„ç†ã€‚
             if (productionMode) {
                 Pipeline exceptionPipeline = getWebxConfiguration().getExceptionPipeline();
 
@@ -394,7 +394,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
                 }
             }
 
-            // ÔÚ¿ª·¢ÕßÄ£Ê½ÏÂ£¬ÏÔÊ¾ÏêÏ¸³ö´íÒ³Ãæ¡£
+            // åœ¨å¼€å‘è€…æ¨¡å¼ä¸‹ï¼Œæ˜¾ç¤ºè¯¦ç»†å‡ºé”™é¡µé¢ã€‚
             else {
                 errorHandler = new DetailedErrorHandler();
                 ((DetailedErrorHandler) errorHandler).setName(ERROR_PREFIX);
@@ -403,12 +403,12 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
             autowireAndInitialize(errorHandler, components.getParentApplicationContext(), AUTOWIRE_NO, ERROR_PREFIX);
             log.debug("Using Exception Handler: {}.", errorHandler.getClass().getName());
 
-            // Ö»ÔÚ¿ª·¢ÕßÄ£Ê½ÏÂÏÔÊ¾Ö÷Ò³ºÍÆäËühandlers
+            // åªåœ¨å¼€å‘è€…æ¨¡å¼ä¸‹æ˜¾ç¤ºä¸»é¡µå’Œå…¶å®ƒhandlers
             if (!productionMode) {
-                // ´ÓMETA-INF/webx.internal-request-handlers£¬²»°üº¬error handlerºÍmain handler
+                // ä»META-INF/webx.internal-request-handlersï¼Œä¸åŒ…å«error handlerå’Œmain handler
                 internalHandlers = loadInternalHandlers(REQUEST_HANDLER_LOCATION);
 
-                // ´´½¨²¢³õÊ¼»¯mainHandler
+                // åˆ›å»ºå¹¶åˆå§‹åŒ–mainHandler
                 mainHandler = new MainHandler();
                 ((MainHandler) mainHandler).setName(EMPTY_STRING);
                 autowireAndInitialize(mainHandler, components.getParentApplicationContext(), AUTOWIRE_NO, ERROR_PREFIX);
@@ -421,12 +421,12 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
 
         public RequestHandlerContext getRequestHandler(HttpServletRequest request, HttpServletResponse response) {
             String baseURL = getBaseURL(request);
-            String path = getResourcePath(request).replace(' ', '+'); // ½«¿Õ°×»»³É+£¬ÒòÎªinternalHandlersµÄkey²»»á°üº¬¿Õ°×¡£
+            String path = getResourcePath(request).replace(' ', '+'); // å°†ç©ºç™½æ¢æˆ+ï¼Œå› ä¸ºinternalHandlersçš„keyä¸ä¼šåŒ…å«ç©ºç™½ã€‚
             String internalBaseURL = baseURL + internalPathPrefix;
 
-            // Èç¹ûÊÇ/Ê×Ò³£¬²¢ÇÒmainHandler´æÔÚ£¨¿ª·¢Ä£Ê½£©£¬Ôò½øÈëÄÚ²¿Ê×Ò³
+            // å¦‚æœæ˜¯/é¦–é¡µï¼Œå¹¶ä¸”mainHandlerå­˜åœ¨ï¼ˆå¼€å‘æ¨¡å¼ï¼‰ï¼Œåˆ™è¿›å…¥å†…éƒ¨é¦–é¡µ
             if (mainHandler != null && (EMPTY_STRING.equals(path) || "/".equals(path))) {
-                // ³ı·Ç²ÎÊıÖĞÖ¸¶¨ÁË?home
+                // é™¤éå‚æ•°ä¸­æŒ‡å®šäº†?home
                 String qs = request.getQueryString();
 
                 if (isEmpty(qs) || !homepagePattern.matcher(qs).find()) {
@@ -435,18 +435,18 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
                 }
             }
 
-            // Èç¹ûÊÇ/internal
+            // å¦‚æœæ˜¯/internal
             if (startsWithElement(path, internalPathPrefix)) {
                 path = removeStartElement(path, internalPathPrefix);
 
-                // Èç¹ûÊÇ/error£¬½ö¿ª·¢Ä£Ê½²Å½øÈë
+                // å¦‚æœæ˜¯/errorï¼Œä»…å¼€å‘æ¨¡å¼æ‰è¿›å…¥
                 if (errorHandler != null && !productionMode && startsWithElement(path, ERROR_PREFIX)) {
                     path = removeStartElement(path, ERROR_PREFIX);
                     return new InternalRequestHandlerContext(request, response, internalBaseURL, internalBaseURL + "/"
                             + ERROR_PREFIX, path, errorHandler);
                 }
 
-                // internalHandlersÖĞ×¢²áµÄÇ°×º
+                // internalHandlersä¸­æ³¨å†Œçš„å‰ç¼€
                 for (Map.Entry<String, RequestHandler> entry : internalHandlers.entrySet()) {
                     String prefix = entry.getKey();
 
@@ -459,13 +459,13 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
                     }
                 }
 
-                // Ä¬ÈÏÓÉmain pageÀ´´¦Àí
+                // é»˜è®¤ç”±main pageæ¥å¤„ç†
                 if (mainHandler != null) {
                     return new InternalRequestHandlerContext(request, response, internalBaseURL, internalBaseURL, path,
                             mainHandler);
                 }
 
-                // Èç¹ûÎ´Æ¥Åä
+                // å¦‚æœæœªåŒ¹é…
                 throw new ResourceNotFoundException(request.getRequestURI());
             }
 
@@ -487,7 +487,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
         }
 
         /**
-         * Ïàµ±ÓÚÕıÔò±í´ïÊ½£º<code>^element/|^element$</code>¡£
+         * ç›¸å½“äºæ­£åˆ™è¡¨è¾¾å¼ï¼š<code>^element/|^element$</code>ã€‚
          */
         private boolean startsWithElement(String path, String element) {
             if (path.equals(element)) {
@@ -502,7 +502,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
         }
 
         /**
-         * ³ıÈ¥¿ªÍ·µÄ<code>^element/|^element$</code>¡£
+         * é™¤å»å¼€å¤´çš„<code>^element/|^element$</code>ã€‚
          */
         private String removeStartElement(String path, String element) {
             if (path.equals(element)) {
@@ -522,24 +522,24 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
                 throw new WebxException("Could not load " + location, e);
             }
 
-            // ×°ÔØhandlers
+            // è£…è½½handlers
             Map<String, RequestHandler> handlers = createTreeMap(new Comparator<String>() {
                 public int compare(String s1, String s2) {
                     int lenDiff = s2.length() - s1.length();
 
                     if (lenDiff != 0) {
-                        return lenDiff; // ÏÈ°´Ãû³Æ³¤¶Èµ¹ÅÅĞò
+                        return lenDiff; // å…ˆæŒ‰åç§°é•¿åº¦å€’æ’åº
                     } else {
-                        return s1.compareTo(s2); // ÔÙ°´×ÖÄ¸Ë³ĞòÅÅĞò
+                        return s1.compareTo(s2); // å†æŒ‰å­—æ¯é¡ºåºæ’åº
                     }
                 }
             });
 
             for (Map.Entry<?, ?> entry : handlerNames.entrySet()) {
-                String name = normalizeRelativePath((String) entry.getKey(), true); // ¹æ¸ñ»¯£ºxxx/yyy/zzz
+                String name = normalizeRelativePath((String) entry.getKey(), true); // è§„æ ¼åŒ–ï¼šxxx/yyy/zzz
                 String handlerClass = trimToNull((String) entry.getValue());
 
-                // ºöÂÔ¿ÕµÄÖµ
+                // å¿½ç•¥ç©ºçš„å€¼
                 if (!isEmpty(name) && handlerClass != null) {
                     if (ERROR_PREFIX.equals(name)) {
                         log.warn("Ignored request handler with reserved name [" + ERROR_PREFIX + "]: " + handlerClass);
@@ -558,12 +558,12 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
                         try {
                             handlers.put(name, RequestHandler.class.cast(handler));
                         } catch (ClassCastException e) {
-                            // Èç¹ûÓĞÒ»¸öhandler³ö´í£¬Ò²²»ÍË³ö¡£
+                            // å¦‚æœæœ‰ä¸€ä¸ªhandlerå‡ºé”™ï¼Œä¹Ÿä¸é€€å‡ºã€‚
                             log.error("Declared internal request handler must implement InternalRequestHandler: "
                                     + name + "=" + handlerClass, e);
                         }
                     } catch (Exception e) {
-                        // Èç¹ûÓĞÒ»¸öhandler³ö´í£¬Ò²²»ÍË³ö¡£
+                        // å¦‚æœæœ‰ä¸€ä¸ªhandlerå‡ºé”™ï¼Œä¹Ÿä¸é€€å‡ºã€‚
                         log.error("Could not create internal request handler: " + name + "=" + handlerClass, e);
                     }
                 }
@@ -578,7 +578,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
         }
 
         /**
-         * ExceptionºÍstatusCodeµÄÓ³Éä¡£
+         * Exceptionå’ŒstatusCodeçš„æ˜ å°„ã€‚
          */
         private final ExceptionCodeMapping exceptionCodeMapping = new ExceptionCodeMapping() {
             public int getExceptionCode(Throwable exception) {

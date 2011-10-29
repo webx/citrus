@@ -26,7 +26,7 @@ import com.alibaba.citrus.generictype.ClassTypeInfo;
 import com.alibaba.citrus.generictype.TypeInfo;
 
 /**
- * Ö§³ÖDAOµÄgeneric»ùÀà£¬ÊµÏÖÁËCRUD»ù±¾Âß¼­¡£
+ * æ”¯æŒDAOçš„genericåŸºç±»ï¼Œå®ç°äº†CRUDåŸºæœ¬é€»è¾‘ã€‚
  * 
  * @author Michael Zhou
  */
@@ -43,7 +43,7 @@ public class GenericDao<DO extends DataObject<PK>, PK extends Object & Serializa
     }
 
     public void create(PK primaryKey, DO dataObject) {
-        // ÔİÎ´ÊµÏÖ
+        // æš‚æœªå®ç°
     }
 
     public DO read(PK primaryKey) {
@@ -61,11 +61,11 @@ public class GenericDao<DO extends DataObject<PK>, PK extends Object & Serializa
     }
 
     public void update(PK primaryKey, DO dataObject) {
-        // ÔİÎ´ÊµÏÖ
+        // æš‚æœªå®ç°
     }
 
     public void delete(PK primaryKey) {
-        // ÔİÎ´ÊµÏÖ
+        // æš‚æœªå®ç°
     }
 
     @Override

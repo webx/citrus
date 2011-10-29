@@ -20,16 +20,16 @@ package com.alibaba.citrus.service.pull;
 import java.util.Map;
 
 /**
- * <code>PullService</code>Ìá¹©ÁËÒ»¸ö×Ô¶¯×é×°template contextµÄ»úÖÆ¡£
+ * <code>PullService</code>æä¾›äº†ä¸€ä¸ªè‡ªåŠ¨ç»„è£…template contextçš„æœºåˆ¶ã€‚
  */
 public interface PullService {
     /**
-     * È¡µÃcontext£¬Í¨¹ı¸Ãcontext¿ÉÈ¡µÃËùÓĞµÄtools¡£
+     * å–å¾—contextï¼Œé€šè¿‡è¯¥contextå¯å–å¾—æ‰€æœ‰çš„toolsã€‚
      */
     PullContext getContext();
 
     /**
-     * È¡µÃËùÓĞµÄtools¡£
+     * å–å¾—æ‰€æœ‰çš„toolsã€‚
      */
     Map<String, Object> getTools();
 }

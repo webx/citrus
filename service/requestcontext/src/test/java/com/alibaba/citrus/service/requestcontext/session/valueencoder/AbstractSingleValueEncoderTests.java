@@ -134,7 +134,7 @@ public abstract class AbstractSingleValueEncoderTests extends AbstractRequestCon
 
         assertEquals(false, session.isNew());
 
-        // assertFalse(session.getAttributeNames().hasMoreElements()); // no attributes, ÓÉÓÚhttpunit parse cookieµÄbug£¬string=; ÕæÊµ»·¾³²»»áÕâÑù¡£
+        // assertFalse(session.getAttributeNames().hasMoreElements()); // no attributes, ç”±äºhttpunit parse cookieçš„bugï¼Œstring=; çœŸå®ç¯å¢ƒä¸ä¼šè¿™æ ·ã€‚
 
         session.setAttribute(attrName, value3);
 
@@ -155,7 +155,7 @@ public abstract class AbstractSingleValueEncoderTests extends AbstractRequestCon
         initRequestContext(beanName);
 
         assertEquals(false, session.isNew());
-        session.setAttribute("count", 1); // ¸Ä±äsession£¬µ«²»¸Ä±äsingleValued storeÖĞµÄÖµ£¬Õâ½«ÒıÆğ¿ÕmapÌá½»
+        session.setAttribute("count", 1); // æ”¹å˜sessionï¼Œä½†ä¸æ”¹å˜singleValued storeä¸­çš„å€¼ï¼Œè¿™å°†å¼•èµ·ç©ºmapæäº¤
 
         requestContexts.commitRequestContext(requestContext);
         commitToClient();
@@ -165,7 +165,7 @@ public abstract class AbstractSingleValueEncoderTests extends AbstractRequestCon
 
         Arrays.sort(newCookies);
 
-        assertEquals(0, newCookies.length); // ÓÉÓÚÖµÎ´¸Ä±ä£¬ËùÒÔ²»Ìá½»cookie
+        assertEquals(0, newCookies.length); // ç”±äºå€¼æœªæ”¹å˜ï¼Œæ‰€ä»¥ä¸æäº¤cookie
 
         // request 6 - invalidate
         invokeNoopServlet("/servlet");

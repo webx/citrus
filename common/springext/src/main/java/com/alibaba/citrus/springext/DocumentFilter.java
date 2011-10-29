@@ -20,7 +20,7 @@ package com.alibaba.citrus.springext;
 import org.dom4j.Document;
 
 /**
- * ÓÃÀ´¹ıÂËdocµÄ¹ıÂËÆ÷£¬¿ÉÒÔ¸Ä±äÊä³öµÄËùÊä³öµÄXMLÎÄ¼ş¡£
+ * ç”¨æ¥è¿‡æ»¤docçš„è¿‡æ»¤å™¨ï¼Œå¯ä»¥æ”¹å˜è¾“å‡ºçš„æ‰€è¾“å‡ºçš„XMLæ–‡ä»¶ã€‚
  * 
  * @author Michael Zhou
  */

@@ -28,14 +28,14 @@ import java.util.NoSuchElementException;
 
 /**
  * <p>
- * Ò»¸öHash±íµÄÊµÏÖ, ÊµÏÖÁË<code>ListMap</code>ºÍ<code>Map</code>½Ó¿Ú.
+ * ä¸€ä¸ªHashè¡¨çš„å®ç°, å®ç°äº†<code>ListMap</code>å’Œ<code>Map</code>æ¥å£.
  * </p>
  * <p>
- * Õâ¸öhash±íµÄÊµÏÖ¾ßÓĞÒÔÏÂÌØĞÔ:
+ * è¿™ä¸ªhashè¡¨çš„å®ç°å…·æœ‰ä»¥ä¸‹ç‰¹æ€§:
  * </p>
  * <ul>
- * <li>ÔÚÄÚ²¿ÒÔÊı×éµÄ·½Ê½±£´æËùÓĞentry, ¿ÉÒÔË³Ğò·ÃÎÊ</li>
- * <li>ºÍ<code>DefaultHashMap</code>Ò»Ñù, Ã»ÓĞ½øĞĞÈÎºÎ<code>synchronized</code>²Ù×÷</li>
+ * <li>åœ¨å†…éƒ¨ä»¥æ•°ç»„çš„æ–¹å¼ä¿å­˜æ‰€æœ‰entry, å¯ä»¥é¡ºåºè®¿é—®</li>
+ * <li>å’Œ<code>DefaultHashMap</code>ä¸€æ ·, æ²¡æœ‰è¿›è¡Œä»»ä½•<code>synchronized</code>æ“ä½œ</li>
  * </ul>
  * 
  * @author Michael Zhou
@@ -46,73 +46,73 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     private static final long serialVersionUID = 3258411729271927857L;
 
     // ==========================================================================
-    // ³ÉÔ±±äÁ¿ 
+    // æˆå‘˜å˜é‡ 
     // ==========================================================================
 
-    /** ¼ÇÂ¼entryµÄË³ĞòµÄÊı×é. */
+    /** è®°å½•entryçš„é¡ºåºçš„æ•°ç»„. */
     protected transient DefaultHashMap.Entry<K, V>[] order;
 
-    /** KeyµÄÁĞ±íÊÓÍ¼. */
+    /** Keyçš„åˆ—è¡¨è§†å›¾. */
     private transient List<K> keyList;
 
-    /** ValueµÄÁĞ±íÊÓÍ¼. */
+    /** Valueçš„åˆ—è¡¨è§†å›¾. */
     private transient List<V> valueList;
 
-    /** EntryµÄÁĞ±íÊÓÍ¼. */
+    /** Entryçš„åˆ—è¡¨è§†å›¾. */
     private transient List<Map.Entry<K, V>> entryList;
 
     // ==========================================================================
-    // ¹¹Ôìº¯Êı 
+    // æ„é€ å‡½æ•° 
     // ==========================================================================
 
     /**
-     * ´´½¨Ò»¸ö¿ÕµÄhash±í. Ê¹ÓÃÖ¸¶¨µÄÄ¬ÈÏµÄ³õÊ¼ÈİÁ¿(16)ºÍÄ¬ÈÏµÄ¸ºÔØÏµÊı(0.75).
+     * åˆ›å»ºä¸€ä¸ªç©ºçš„hashè¡¨. ä½¿ç”¨æŒ‡å®šçš„é»˜è®¤çš„åˆå§‹å®¹é‡(16)å’Œé»˜è®¤çš„è´Ÿè½½ç³»æ•°(0.75).
      */
     public ArrayHashMap() {
         super();
     }
 
     /**
-     * ´´½¨Ò»¸ö¿ÕµÄhash±í. Ê¹ÓÃÖ¸¶¨µÄ³õÊ¼ãĞÖµºÍÄ¬ÈÏµÄ¸ºÔØÏµÊı(0.75).
+     * åˆ›å»ºä¸€ä¸ªç©ºçš„hashè¡¨. ä½¿ç”¨æŒ‡å®šçš„åˆå§‹é˜ˆå€¼å’Œé»˜è®¤çš„è´Ÿè½½ç³»æ•°(0.75).
      * 
-     * @param initialCapacity ³õÊ¼ÈİÁ¿.
+     * @param initialCapacity åˆå§‹å®¹é‡.
      */
     public ArrayHashMap(int initialCapacity) {
         super(initialCapacity);
     }
 
     /**
-     * ´´½¨Ò»¸ö¿ÕµÄhash±í. Ê¹ÓÃÖ¸¶¨µÄ³õÊ¼ÈİÁ¿ºÍ¸ºÔØÏµÊı.
+     * åˆ›å»ºä¸€ä¸ªç©ºçš„hashè¡¨. ä½¿ç”¨æŒ‡å®šçš„åˆå§‹å®¹é‡å’Œè´Ÿè½½ç³»æ•°.
      * 
-     * @param initialCapacity ³õÊ¼ÈİÁ¿
-     * @param loadFactor ¸ºÔØÏµÊı.
+     * @param initialCapacity åˆå§‹å®¹é‡
+     * @param loadFactor è´Ÿè½½ç³»æ•°.
      */
     public ArrayHashMap(int initialCapacity, float loadFactor) {
         super(initialCapacity, loadFactor);
     }
 
     /**
-     * ¸´ÖÆÖ¸¶¨<code>Map</code>ÄÚÈİÏàÍ¬µÄ<code>HashMap</code>. Ê¹ÓÃÄ¬ÈÏµÄ¸ºÔØÏµÊı(0.75).
+     * å¤åˆ¶æŒ‡å®š<code>Map</code>å†…å®¹ç›¸åŒçš„<code>HashMap</code>. ä½¿ç”¨é»˜è®¤çš„è´Ÿè½½ç³»æ•°(0.75).
      * 
-     * @param map Òª¸´ÖÆµÄ<code>Map</code>
+     * @param map è¦å¤åˆ¶çš„<code>Map</code>
      */
     public ArrayHashMap(Map<? extends K, ? extends V> map) {
         super(map);
     }
 
     // ==========================================================================
-    // ÊµÏÖMapºÍListMap½Ó¿ÚµÄ·½·¨ 
+    // å®ç°Mapå’ŒListMapæ¥å£çš„æ–¹æ³• 
     // ==========================================================================
 
     /**
-     * Èç¹ûhash±íÖĞ°üº¬Ò»¸ö»ò¶à¸ökey¶ÔÓ¦Ö¸¶¨µÄvalue, Ôò·µ»Øtrue.
+     * å¦‚æœhashè¡¨ä¸­åŒ…å«ä¸€ä¸ªæˆ–å¤šä¸ªkeyå¯¹åº”æŒ‡å®šçš„value, åˆ™è¿”å›true.
      * 
-     * @param value Ö¸¶¨value, ¼ì²éËüµÄ´æÔÚÓë·ñ.
-     * @return Èç¹ûhash±íÖĞ°üº¬Ò»¸ö»ò¶à¸ökey¶ÔÓ¦Ö¸¶¨µÄvalue, Ôò·µ»Ø<code>true</code>.
+     * @param value æŒ‡å®švalue, æ£€æŸ¥å®ƒçš„å­˜åœ¨ä¸å¦.
+     * @return å¦‚æœhashè¡¨ä¸­åŒ…å«ä¸€ä¸ªæˆ–å¤šä¸ªkeyå¯¹åº”æŒ‡å®šçš„value, åˆ™è¿”å›<code>true</code>.
      */
     @Override
     public boolean containsValue(Object value) {
-        // ¸²¸Ç´Ë·½·¨ÊÇ³öÓÚĞÔÄÜµÄ¿¼ÂÇ.  ÀûÓÃÊı×é²éÕÒ¸üÓĞĞ§.
+        // è¦†ç›–æ­¤æ–¹æ³•æ˜¯å‡ºäºæ€§èƒ½çš„è€ƒè™‘.  åˆ©ç”¨æ•°ç»„æŸ¥æ‰¾æ›´æœ‰æ•ˆ.
         for (int i = 0; i < size; i++) {
             Entry entry = (Entry) order[i];
 
@@ -125,7 +125,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     /**
-     * Çå³ıhash±íÖĞµÄËùÓĞentry.
+     * æ¸…é™¤hashè¡¨ä¸­çš„æ‰€æœ‰entry.
      */
     @Override
     public void clear() {
@@ -134,10 +134,10 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     /**
-     * ·µ»ØÖ¸¶¨index´¦µÄvalue. Èç¹ûindex³¬³ö·¶Î§, ÔòÖÀ³ö<code>IndexOutOfBoundsException</code>.
+     * è¿”å›æŒ‡å®šindexå¤„çš„value. å¦‚æœindexè¶…å‡ºèŒƒå›´, åˆ™æ·å‡º<code>IndexOutOfBoundsException</code>.
      * 
-     * @param index Òª·µ»ØµÄvalueµÄË÷ÒıÖµ
-     * @return Ö¸¶¨index´¦µÄvalue¶ÔÏó
+     * @param index è¦è¿”å›çš„valueçš„ç´¢å¼•å€¼
+     * @return æŒ‡å®šindexå¤„çš„valueå¯¹è±¡
      */
     public V get(int index) {
         checkRange(index);
@@ -145,10 +145,10 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     /**
-     * ·µ»ØÖ¸¶¨index´¦µÄkey. Èç¹ûindex³¬³ö·¶Î§, ÔòÖÀ³ö<code>IndexOutOfBoundsException</code>.
+     * è¿”å›æŒ‡å®šindexå¤„çš„key. å¦‚æœindexè¶…å‡ºèŒƒå›´, åˆ™æ·å‡º<code>IndexOutOfBoundsException</code>.
      * 
-     * @param index Òª·µ»ØµÄkeyµÄË÷ÒıÖµ
-     * @return Ö¸¶¨index´¦µÄkey¶ÔÏó
+     * @param index è¦è¿”å›çš„keyçš„ç´¢å¼•å€¼
+     * @return æŒ‡å®šindexå¤„çš„keyå¯¹è±¡
      */
     public K getKey(int index) {
         checkRange(index);
@@ -156,10 +156,10 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     /**
-     * É¾³ıÖ¸¶¨index´¦µÄÏî. Èç¹ûindex³¬³ö·¶Î§, ÔòÖÀ³ö<code>IndexOutOfBoundsException</code>.
+     * åˆ é™¤æŒ‡å®šindexå¤„çš„é¡¹. å¦‚æœindexè¶…å‡ºèŒƒå›´, åˆ™æ·å‡º<code>IndexOutOfBoundsException</code>.
      * 
-     * @param index ÒªÉ¾³ıµÄÏîµÄË÷ÒıÖµ
-     * @return ±»É¾³ıµÄ<code>Map.Entry</code>Ïî
+     * @param index è¦åˆ é™¤çš„é¡¹çš„ç´¢å¼•å€¼
+     * @return è¢«åˆ é™¤çš„<code>Map.Entry</code>é¡¹
      */
     public Map.Entry<K, V> removeEntry(int index) {
         checkRange(index);
@@ -167,57 +167,57 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     /**
-     * ·µ»ØËùÓĞkeyµÄ<code>List</code>.
+     * è¿”å›æ‰€æœ‰keyçš„<code>List</code>.
      * 
-     * @return ËùÓĞkeyµÄ<code>List</code>.
+     * @return æ‰€æœ‰keyçš„<code>List</code>.
      */
     public List<K> keyList() {
         return keyList != null ? keyList : (keyList = new KeyList());
     }
 
     /**
-     * ·µ»ØËùÓĞvalueµÄ<code>List</code>.
+     * è¿”å›æ‰€æœ‰valueçš„<code>List</code>.
      * 
-     * @return ËùÓĞvalueµÄ<code>List</code>.
+     * @return æ‰€æœ‰valueçš„<code>List</code>.
      */
     public List<V> valueList() {
         return valueList != null ? valueList : (valueList = new ValueList());
     }
 
     /**
-     * ·µ»ØËùÓĞentryµÄ<code>List</code>.
+     * è¿”å›æ‰€æœ‰entryçš„<code>List</code>.
      * 
-     * @return ËùÓĞentryµÄ<code>List</code>.
+     * @return æ‰€æœ‰entryçš„<code>List</code>.
      */
     public List<Map.Entry<K, V>> entryList() {
         return entryList != null ? entryList : (entryList = new EntryList());
     }
 
     // ==========================================================================
-    // ÄÚ²¿Àà 
+    // å†…éƒ¨ç±» 
     // ==========================================================================
 
     /**
-     * <code>Map.Entry</code>µÄÊµÏÖ.
+     * <code>Map.Entry</code>çš„å®ç°.
      */
     protected class Entry extends DefaultHashMap.Entry<K, V> {
-        /** EntryÔÚÁĞ±íÖĞµÄË÷ÒıÖµ. */
+        /** Entryåœ¨åˆ—è¡¨ä¸­çš„ç´¢å¼•å€¼. */
         protected int index;
 
         /**
-         * ´´½¨Ò»¸öĞÂµÄentry.
+         * åˆ›å»ºä¸€ä¸ªæ–°çš„entry.
          * 
-         * @param h keyµÄhashÖµ
-         * @param k entryµÄkey
-         * @param v entryµÄvalue
-         * @param n Á´±íÖĞµÄÏÂÒ»¸öentry
+         * @param h keyçš„hashå€¼
+         * @param k entryçš„key
+         * @param v entryçš„value
+         * @param n é“¾è¡¨ä¸­çš„ä¸‹ä¸€ä¸ªentry
          */
         protected Entry(int h, K k, V v, DefaultHashMap.Entry<K, V> n) {
             super(h, k, v, n);
         }
 
         /**
-         * µ±entry½«±»É¾³ıÊ±, ¸üĞÂºóĞøµÄentryµÄË÷ÒıÖµ.
+         * å½“entryå°†è¢«åˆ é™¤æ—¶, æ›´æ–°åç»­çš„entryçš„ç´¢å¼•å€¼.
          */
         @Override
         protected void onRemove() {
@@ -236,22 +236,22 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     /**
-     * ±éÀúÆ÷.
+     * éå†å™¨.
      */
     private abstract class ArrayHashIterator<E> implements ListIterator<E> {
-        /** ×î½ü·µ»ØµÄentry. */
+        /** æœ€è¿‘è¿”å›çš„entry. */
         private Entry lastReturned;
 
-        /** µ±Ç°Î»ÖÃ. */
+        /** å½“å‰ä½ç½®. */
         private int cursor;
 
-        /** ´´½¨iteratorÊ±µÄĞŞ¸Ä¼ÆÊı. */
+        /** åˆ›å»ºiteratoræ—¶çš„ä¿®æ”¹è®¡æ•°. */
         private int expectedModCount;
 
         /**
-         * ´´½¨Ò»¸ölist iterator.
+         * åˆ›å»ºä¸€ä¸ªlist iterator.
          * 
-         * @param index ÆğÊ¼µã
+         * @param index èµ·å§‹ç‚¹
          */
         protected ArrayHashIterator(int index) {
             if (index < 0 || index > size()) {
@@ -263,61 +263,61 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * ½«Ö¸¶¨¶ÔÏó²åÈëµ½ÁĞ±íÖĞ. (²»Ö§³Ö´Ë²Ù×÷)
+         * å°†æŒ‡å®šå¯¹è±¡æ’å…¥åˆ°åˆ—è¡¨ä¸­. (ä¸æ”¯æŒæ­¤æ“ä½œ)
          * 
-         * @param o Òª²åÈëµÄ¶ÔÏó
+         * @param o è¦æ’å…¥çš„å¯¹è±¡
          */
         public void add(E o) {
             throw new UnsupportedOperationException();
         }
 
         /**
-         * ½«Ö¸¶¨¶ÔÏóÌæ»»µ½ÁĞ±íÖĞ. (³ıÁË<code>valueList</code>ÒÔÍâ, ²»Ö§³Ö´Ë²Ù×÷)
+         * å°†æŒ‡å®šå¯¹è±¡æ›¿æ¢åˆ°åˆ—è¡¨ä¸­. (é™¤äº†<code>valueList</code>ä»¥å¤–, ä¸æ”¯æŒæ­¤æ“ä½œ)
          * 
-         * @param o ÒªÌæ»»µÄ¶ÔÏó
+         * @param o è¦æ›¿æ¢çš„å¯¹è±¡
          */
         public void set(E o) {
             throw new UnsupportedOperationException();
         }
 
         /**
-         * ·µ»Ø±éÀúÆ÷ÖĞÊÇ·ñ»¹ÓĞÏÂÒ»¸öentry.
+         * è¿”å›éå†å™¨ä¸­æ˜¯å¦è¿˜æœ‰ä¸‹ä¸€ä¸ªentry.
          * 
-         * @return Èç¹û±éÀúÆ÷ÖĞ»¹ÓĞÏÂÒ»¸öentry, ·µ»Ø<code>true</code>
+         * @return å¦‚æœéå†å™¨ä¸­è¿˜æœ‰ä¸‹ä¸€ä¸ªentry, è¿”å›<code>true</code>
          */
         public boolean hasNext() {
             return cursor < size;
         }
 
         /**
-         * ·µ»Ø±éÀúÆ÷ÖĞÊÇ·ñ»¹ÓĞÇ°Ò»¸öentry.
+         * è¿”å›éå†å™¨ä¸­æ˜¯å¦è¿˜æœ‰å‰ä¸€ä¸ªentry.
          * 
-         * @return Èç¹û±éÀúÆ÷ÖĞ»¹ÓĞÇ°Ò»¸öentry, ·µ»Ø<code>true</code>
+         * @return å¦‚æœéå†å™¨ä¸­è¿˜æœ‰å‰ä¸€ä¸ªentry, è¿”å›<code>true</code>
          */
         public boolean hasPrevious() {
             return cursor > 0;
         }
 
         /**
-         * È¡µÃÏÂÒ»¸öindex. Èç¹ûÊÇ×îºóÒ»Ïî, Ôò·µ»Ø<code>size</code>.
+         * å–å¾—ä¸‹ä¸€ä¸ªindex. å¦‚æœæ˜¯æœ€åä¸€é¡¹, åˆ™è¿”å›<code>size</code>.
          * 
-         * @return ºóÒ»ÏîµÄindex
+         * @return åä¸€é¡¹çš„index
          */
         public int nextIndex() {
             return cursor;
         }
 
         /**
-         * È¡µÃÇ°Ò»¸öindex. Èç¹ûÊÇµÚÒ»Ïî, Ôò·µ»Ø<code>-1</code>.
+         * å–å¾—å‰ä¸€ä¸ªindex. å¦‚æœæ˜¯ç¬¬ä¸€é¡¹, åˆ™è¿”å›<code>-1</code>.
          * 
-         * @return Ç°Ò»ÏîµÄindex
+         * @return å‰ä¸€é¡¹çš„index
          */
         public int previousIndex() {
             return cursor - 1;
         }
 
         /**
-         * É¾³ıÒ»¸öµ±Ç°entry. Ö´ĞĞÇ°±ØĞëÏÈÖ´ĞĞ<code>next()</code>»ò<code>previous()</code>·½·¨.
+         * åˆ é™¤ä¸€ä¸ªå½“å‰entry. æ‰§è¡Œå‰å¿…é¡»å…ˆæ‰§è¡Œ<code>next()</code>æˆ–<code>previous()</code>æ–¹æ³•.
          */
         public void remove() {
             if (lastReturned == null) {
@@ -337,9 +337,9 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * È¡µÃÏÂÒ»¸öentry.
+         * å–å¾—ä¸‹ä¸€ä¸ªentry.
          * 
-         * @return ÏÂÒ»¸öentry
+         * @return ä¸‹ä¸€ä¸ªentry
          */
         protected Entry nextEntry() {
             checkForComodification();
@@ -354,9 +354,9 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * È¡µÃÇ°Ò»¸öentry.
+         * å–å¾—å‰ä¸€ä¸ªentry.
          * 
-         * @return Ç°Ò»¸öentry
+         * @return å‰ä¸€ä¸ªentry
          */
         protected Entry previousEntry() {
             checkForComodification();
@@ -371,9 +371,9 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * ÉèÖÃµ±Ç°entryµÄÖµ.
+         * è®¾ç½®å½“å‰entryçš„å€¼.
          * 
-         * @param o ÒªÉèÖÃµÄÖµ
+         * @param o è¦è®¾ç½®çš„å€¼
          */
         protected void setValue(V o) {
             if (lastReturned == null) {
@@ -386,7 +386,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * ¼ì²éÊÇ·ñÍ¬Ê±±»ĞŞ¸Ä.
+         * æ£€æŸ¥æ˜¯å¦åŒæ—¶è¢«ä¿®æ”¹.
          */
         private void checkForComodification() {
             if (modCount != expectedModCount) {
@@ -396,31 +396,31 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     /**
-     * È¡µÃhash±íµÄkeyµÄ±éÀúÆ÷.
+     * å–å¾—hashè¡¨çš„keyçš„éå†å™¨.
      */
     private class KeyIterator extends ArrayHashIterator<K> {
         /**
-         * ´´½¨Ò»¸ölist iterator.
+         * åˆ›å»ºä¸€ä¸ªlist iterator.
          * 
-         * @param index ÆğÊ¼µã
+         * @param index èµ·å§‹ç‚¹
          */
         protected KeyIterator(int index) {
             super(index);
         }
 
         /**
-         * È¡µÃÏÂÒ»¸ökey.
+         * å–å¾—ä¸‹ä¸€ä¸ªkey.
          * 
-         * @return ÏÂÒ»¸ökey
+         * @return ä¸‹ä¸€ä¸ªkey
          */
         public K next() {
             return nextEntry().getKey();
         }
 
         /**
-         * È¡µÃÇ°Ò»¸ökey.
+         * å–å¾—å‰ä¸€ä¸ªkey.
          * 
-         * @return Ç°Ò»¸ökey
+         * @return å‰ä¸€ä¸ªkey
          */
         public K previous() {
             return previousEntry().getKey();
@@ -428,22 +428,22 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     /**
-     * È¡µÃhash±íµÄvalueµÄ±éÀúÆ÷.
+     * å–å¾—hashè¡¨çš„valueçš„éå†å™¨.
      */
     private class ValueIterator extends ArrayHashIterator<V> {
         /**
-         * ´´½¨Ò»¸ölist iterator.
+         * åˆ›å»ºä¸€ä¸ªlist iterator.
          * 
-         * @param index ÆğÊ¼µã
+         * @param index èµ·å§‹ç‚¹
          */
         protected ValueIterator(int index) {
             super(index);
         }
 
         /**
-         * ½«Ö¸¶¨¶ÔÏóÌæ»»µ½ÁĞ±íÖĞ.
+         * å°†æŒ‡å®šå¯¹è±¡æ›¿æ¢åˆ°åˆ—è¡¨ä¸­.
          * 
-         * @param o ÒªÌæ»»µÄ¶ÔÏó(value)
+         * @param o è¦æ›¿æ¢çš„å¯¹è±¡(value)
          */
         @Override
         public void set(V o) {
@@ -451,18 +451,18 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * È¡µÃÏÂÒ»¸övalue.
+         * å–å¾—ä¸‹ä¸€ä¸ªvalue.
          * 
-         * @return ÏÂÒ»¸övalue
+         * @return ä¸‹ä¸€ä¸ªvalue
          */
         public V next() {
             return nextEntry().getValue();
         }
 
         /**
-         * È¡µÃÇ°Ò»¸övalue.
+         * å–å¾—å‰ä¸€ä¸ªvalue.
          * 
-         * @return Ç°Ò»¸övalue
+         * @return å‰ä¸€ä¸ªvalue
          */
         public V previous() {
             return previousEntry().getValue();
@@ -470,31 +470,31 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     /**
-     * È¡µÃhash±íµÄentryµÄ±éÀúÆ÷.
+     * å–å¾—hashè¡¨çš„entryçš„éå†å™¨.
      */
     private class EntryIterator extends ArrayHashIterator<Map.Entry<K, V>> {
         /**
-         * ´´½¨Ò»¸ölist iterator.
+         * åˆ›å»ºä¸€ä¸ªlist iterator.
          * 
-         * @param index ÆğÊ¼µã
+         * @param index èµ·å§‹ç‚¹
          */
         protected EntryIterator(int index) {
             super(index);
         }
 
         /**
-         * È¡µÃÏÂÒ»¸öentry.
+         * å–å¾—ä¸‹ä¸€ä¸ªentry.
          * 
-         * @return ÏÂÒ»¸öentry
+         * @return ä¸‹ä¸€ä¸ªentry
          */
         public Map.Entry<K, V> next() {
             return nextEntry();
         }
 
         /**
-         * È¡µÃÇ°Ò»¸öentry.
+         * å–å¾—å‰ä¸€ä¸ªentry.
          * 
-         * @return Ç°Ò»¸öentry
+         * @return å‰ä¸€ä¸ªentry
          */
         public Map.Entry<K, V> previous() {
             return previousEntry();
@@ -502,13 +502,13 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     /**
-     * ÁĞ±íÊÓÍ¼.
+     * åˆ—è¡¨è§†å›¾.
      */
     private abstract class ArrayHashList<E> extends AbstractList<E> {
         /**
-         * ·µ»Øhash±íÖĞentryµÄ¸öÊı.
+         * è¿”å›hashè¡¨ä¸­entryçš„ä¸ªæ•°.
          * 
-         * @return hash±íÖĞµÄentryÊı.
+         * @return hashè¡¨ä¸­çš„entryæ•°.
          */
         @Override
         public int size() {
@@ -516,9 +516,9 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * ÅĞ¶ÏÊÇ·ñÎª¿ÕµÄhash±í.
+         * åˆ¤æ–­æ˜¯å¦ä¸ºç©ºçš„hashè¡¨.
          * 
-         * @return Èç¹ûÎª¿Õ(<code>size() == 0</code>), Ôò·µ»Ø<code>true</code>.
+         * @return å¦‚æœä¸ºç©º(<code>size() == 0</code>), åˆ™è¿”å›<code>true</code>.
          */
         @Override
         public boolean isEmpty() {
@@ -526,7 +526,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * Çå³ıËùÓĞentry.
+         * æ¸…é™¤æ‰€æœ‰entry.
          */
         @Override
         public void clear() {
@@ -534,10 +534,10 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * È¡µÃÖ¸¶¨entryµÄË÷Òı. Í¬<code>indexOf</code>·½·¨.
+         * å–å¾—æŒ‡å®šentryçš„ç´¢å¼•. åŒ<code>indexOf</code>æ–¹æ³•.
          * 
-         * @param o Òª²éÕÒµÄentry
-         * @return Ö¸¶¨entryµÄË÷Òı
+         * @param o è¦æŸ¥æ‰¾çš„entry
+         * @return æŒ‡å®šentryçš„ç´¢å¼•
          */
         @Override
         public int lastIndexOf(Object o) {
@@ -546,14 +546,14 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     /**
-     * entryµÄÁĞ±íÊÓÍ¼.
+     * entryçš„åˆ—è¡¨è§†å›¾.
      */
     private class EntryList extends ArrayHashList<Map.Entry<K, V>> {
         /**
-         * ÅĞ¶ÏentryÁĞ±íÖĞÊÇ·ñ°üº¬Ö¸¶¨¶ÔÏó.
+         * åˆ¤æ–­entryåˆ—è¡¨ä¸­æ˜¯å¦åŒ…å«æŒ‡å®šå¯¹è±¡.
          * 
-         * @param o Òª²éÕÒµÄ¶ÔÏó
-         * @return Èç¹ûentryÁĞ±íÖĞÊÇ·ñ°üº¬Ö¸¶¨¶ÔÏó, Ôò·µ»Ø<code>true</code>
+         * @param o è¦æŸ¥æ‰¾çš„å¯¹è±¡
+         * @return å¦‚æœentryåˆ—è¡¨ä¸­æ˜¯å¦åŒ…å«æŒ‡å®šå¯¹è±¡, åˆ™è¿”å›<code>true</code>
          */
         @Override
         public boolean contains(Object o) {
@@ -568,9 +568,9 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * È¡µÃentryµÄ±éÀúÆ÷.
+         * å–å¾—entryçš„éå†å™¨.
          * 
-         * @return entryµÄ±éÀúÆ÷
+         * @return entryçš„éå†å™¨
          */
         @Override
         public Iterator<Map.Entry<K, V>> iterator() {
@@ -578,10 +578,10 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * É¾³ıÖ¸¶¨µÄentry.
+         * åˆ é™¤æŒ‡å®šçš„entry.
          * 
-         * @param o ÒªÉ¾³ıµÄentry
-         * @return Èç¹ûÉ¾³ı³É¹¦, ·µ»Ø<code>true</code>
+         * @param o è¦åˆ é™¤çš„entry
+         * @return å¦‚æœåˆ é™¤æˆåŠŸ, è¿”å›<code>true</code>
          */
         @Override
         public boolean remove(Object o) {
@@ -589,10 +589,10 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * É¾³ıÖ¸¶¨index´¦µÄÏî. Èç¹ûindex³¬³ö·¶Î§, ÔòÖÀ³ö<code>IndexOutOfBoundsException</code>.
+         * åˆ é™¤æŒ‡å®šindexå¤„çš„é¡¹. å¦‚æœindexè¶…å‡ºèŒƒå›´, åˆ™æ·å‡º<code>IndexOutOfBoundsException</code>.
          * 
-         * @param index ÒªÉ¾³ıµÄÏîµÄË÷ÒıÖµ
-         * @return ±»É¾³ıµÄ<code>Map.Entry</code>Ïî
+         * @param index è¦åˆ é™¤çš„é¡¹çš„ç´¢å¼•å€¼
+         * @return è¢«åˆ é™¤çš„<code>Map.Entry</code>é¡¹
          */
         @Override
         public Map.Entry<K, V> remove(int index) {
@@ -601,11 +601,11 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * ·µ»ØÖ¸¶¨index´¦µÄentry. Èç¹ûindex³¬³ö·¶Î§, ÔòÖÀ³ö
+         * è¿”å›æŒ‡å®šindexå¤„çš„entry. å¦‚æœindexè¶…å‡ºèŒƒå›´, åˆ™æ·å‡º
          * <code>IndexOutOfBoundsException</code>.
          * 
-         * @param index Òª·µ»ØµÄentryµÄË÷ÒıÖµ
-         * @return Ö¸¶¨index´¦µÄentry¶ÔÏó
+         * @param index è¦è¿”å›çš„entryçš„ç´¢å¼•å€¼
+         * @return æŒ‡å®šindexå¤„çš„entryå¯¹è±¡
          */
         @Override
         public Map.Entry<K, V> get(int index) {
@@ -614,10 +614,10 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * È¡µÃÖ¸¶¨entryµÄË÷Òı.
+         * å–å¾—æŒ‡å®šentryçš„ç´¢å¼•.
          * 
-         * @param o Òª²éÕÒµÄentry
-         * @return Ö¸¶¨entryµÄË÷Òı
+         * @param o è¦æŸ¥æ‰¾çš„entry
+         * @return æŒ‡å®šentryçš„ç´¢å¼•
          */
         @Override
         public int indexOf(Object o) {
@@ -633,9 +633,9 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * È¡µÃlist iterator, ²¢ÉèÖÃµ±Ç°Î»ÖÃ.
+         * å–å¾—list iterator, å¹¶è®¾ç½®å½“å‰ä½ç½®.
          * 
-         * @param index µ±Ç°Î»ÖÃ
+         * @param index å½“å‰ä½ç½®
          * @return list iterator
          */
         @Override
@@ -645,14 +645,14 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     /**
-     * keyµÄÁĞ±íÊÓÍ¼.
+     * keyçš„åˆ—è¡¨è§†å›¾.
      */
     private class KeyList extends ArrayHashList<K> {
         /**
-         * ÅĞ¶ÏkeyÁĞ±íÖĞÊÇ·ñ°üº¬Ö¸¶¨¶ÔÏó.
+         * åˆ¤æ–­keyåˆ—è¡¨ä¸­æ˜¯å¦åŒ…å«æŒ‡å®šå¯¹è±¡.
          * 
-         * @param o Òª²éÕÒµÄ¶ÔÏó
-         * @return Èç¹ûkeyÁĞ±íÖĞÊÇ·ñ°üº¬Ö¸¶¨¶ÔÏó, Ôò·µ»Ø<code>true</code>
+         * @param o è¦æŸ¥æ‰¾çš„å¯¹è±¡
+         * @return å¦‚æœkeyåˆ—è¡¨ä¸­æ˜¯å¦åŒ…å«æŒ‡å®šå¯¹è±¡, åˆ™è¿”å›<code>true</code>
          */
         @Override
         public boolean contains(Object o) {
@@ -660,9 +660,9 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * È¡µÃkeyµÄ±éÀúÆ÷.
+         * å–å¾—keyçš„éå†å™¨.
          * 
-         * @return keyµÄ±éÀúÆ÷
+         * @return keyçš„éå†å™¨
          */
         @Override
         public Iterator<K> iterator() {
@@ -670,10 +670,10 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * É¾³ıÖ¸¶¨µÄkey.
+         * åˆ é™¤æŒ‡å®šçš„key.
          * 
-         * @param o ÒªÉ¾³ıµÄkey
-         * @return Èç¹ûÉ¾³ı³É¹¦, ·µ»Ø<code>true</code>
+         * @param o è¦åˆ é™¤çš„key
+         * @return å¦‚æœåˆ é™¤æˆåŠŸ, è¿”å›<code>true</code>
          */
         @Override
         public boolean remove(Object o) {
@@ -688,10 +688,10 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * É¾³ıÖ¸¶¨index´¦µÄÏî. Èç¹ûindex³¬³ö·¶Î§, ÔòÖÀ³ö<code>IndexOutOfBoundsException</code>.
+         * åˆ é™¤æŒ‡å®šindexå¤„çš„é¡¹. å¦‚æœindexè¶…å‡ºèŒƒå›´, åˆ™æ·å‡º<code>IndexOutOfBoundsException</code>.
          * 
-         * @param index ÒªÉ¾³ıµÄÏîµÄË÷ÒıÖµ
-         * @return ±»É¾³ıµÄ<code>Map.Entry</code>Ïî
+         * @param index è¦åˆ é™¤çš„é¡¹çš„ç´¢å¼•å€¼
+         * @return è¢«åˆ é™¤çš„<code>Map.Entry</code>é¡¹
          */
         @Override
         public K remove(int index) {
@@ -700,11 +700,11 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * ·µ»ØÖ¸¶¨index´¦µÄkey. Èç¹ûindex³¬³ö·¶Î§, ÔòÖÀ³ö
+         * è¿”å›æŒ‡å®šindexå¤„çš„key. å¦‚æœindexè¶…å‡ºèŒƒå›´, åˆ™æ·å‡º
          * <code>IndexOutOfBoundsException</code>.
          * 
-         * @param index Òª·µ»ØµÄkeyµÄË÷ÒıÖµ
-         * @return Ö¸¶¨index´¦µÄkey¶ÔÏó
+         * @param index è¦è¿”å›çš„keyçš„ç´¢å¼•å€¼
+         * @return æŒ‡å®šindexå¤„çš„keyå¯¹è±¡
          */
         @Override
         public K get(int index) {
@@ -713,10 +713,10 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * È¡µÃÖ¸¶¨keyµÄË÷Òı.
+         * å–å¾—æŒ‡å®škeyçš„ç´¢å¼•.
          * 
-         * @param o Òª²éÕÒµÄkey
-         * @return Ö¸¶¨keyµÄË÷Òı
+         * @param o è¦æŸ¥æ‰¾çš„key
+         * @return æŒ‡å®škeyçš„ç´¢å¼•
          */
         @Override
         public int indexOf(Object o) {
@@ -730,9 +730,9 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * È¡µÃlist iterator, ²¢ÉèÖÃµ±Ç°Î»ÖÃ.
+         * å–å¾—list iterator, å¹¶è®¾ç½®å½“å‰ä½ç½®.
          * 
-         * @param index µ±Ç°Î»ÖÃ
+         * @param index å½“å‰ä½ç½®
          * @return list iterator
          */
         @Override
@@ -742,14 +742,14 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     /**
-     * valueµÄÁĞ±íÊÓÍ¼.
+     * valueçš„åˆ—è¡¨è§†å›¾.
      */
     private class ValueList extends ArrayHashList<V> {
         /**
-         * ÅĞ¶ÏvalueÁĞ±íÖĞÊÇ·ñ°üº¬Ö¸¶¨¶ÔÏó.
+         * åˆ¤æ–­valueåˆ—è¡¨ä¸­æ˜¯å¦åŒ…å«æŒ‡å®šå¯¹è±¡.
          * 
-         * @param o Òª²éÕÒµÄ¶ÔÏó
-         * @return Èç¹ûvalueÁĞ±íÖĞÊÇ·ñ°üº¬Ö¸¶¨¶ÔÏó, Ôò·µ»Ø<code>true</code>
+         * @param o è¦æŸ¥æ‰¾çš„å¯¹è±¡
+         * @return å¦‚æœvalueåˆ—è¡¨ä¸­æ˜¯å¦åŒ…å«æŒ‡å®šå¯¹è±¡, åˆ™è¿”å›<code>true</code>
          */
         @Override
         public boolean contains(Object o) {
@@ -757,9 +757,9 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * È¡µÃvalueµÄ±éÀúÆ÷.
+         * å–å¾—valueçš„éå†å™¨.
          * 
-         * @return valueµÄ±éÀúÆ÷
+         * @return valueçš„éå†å™¨
          */
         @Override
         public Iterator<V> iterator() {
@@ -767,10 +767,10 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * É¾³ıÖ¸¶¨µÄvalue.
+         * åˆ é™¤æŒ‡å®šçš„value.
          * 
-         * @param o ÒªÉ¾³ıµÄvalue
-         * @return Èç¹ûÉ¾³ı³É¹¦, ·µ»Ø<code>true</code>
+         * @param o è¦åˆ é™¤çš„value
+         * @return å¦‚æœåˆ é™¤æˆåŠŸ, è¿”å›<code>true</code>
          */
         @Override
         public boolean remove(Object o) {
@@ -785,10 +785,10 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * É¾³ıÖ¸¶¨index´¦µÄÏî. Èç¹ûindex³¬³ö·¶Î§, ÔòÖÀ³ö<code>IndexOutOfBoundsException</code>.
+         * åˆ é™¤æŒ‡å®šindexå¤„çš„é¡¹. å¦‚æœindexè¶…å‡ºèŒƒå›´, åˆ™æ·å‡º<code>IndexOutOfBoundsException</code>.
          * 
-         * @param index ÒªÉ¾³ıµÄÏîµÄË÷ÒıÖµ
-         * @return ±»É¾³ıµÄ<code>Map.Entry</code>Ïî
+         * @param index è¦åˆ é™¤çš„é¡¹çš„ç´¢å¼•å€¼
+         * @return è¢«åˆ é™¤çš„<code>Map.Entry</code>é¡¹
          */
         @Override
         public V remove(int index) {
@@ -797,11 +797,11 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * ·µ»ØÖ¸¶¨index´¦µÄvalue. Èç¹ûindex³¬³ö·¶Î§, ÔòÖÀ³ö
+         * è¿”å›æŒ‡å®šindexå¤„çš„value. å¦‚æœindexè¶…å‡ºèŒƒå›´, åˆ™æ·å‡º
          * <code>IndexOutOfBoundsException</code>.
          * 
-         * @param index Òª·µ»ØµÄvalueµÄË÷ÒıÖµ
-         * @return Ö¸¶¨index´¦µÄvalue¶ÔÏó
+         * @param index è¦è¿”å›çš„valueçš„ç´¢å¼•å€¼
+         * @return æŒ‡å®šindexå¤„çš„valueå¯¹è±¡
          */
         @Override
         public V get(int index) {
@@ -810,10 +810,10 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * È¡µÃÖ¸¶¨valueµÄË÷Òı.
+         * å–å¾—æŒ‡å®švalueçš„ç´¢å¼•.
          * 
-         * @param o Òª²éÕÒµÄvalue
-         * @return Ö¸¶¨valueµÄË÷Òı
+         * @param o è¦æŸ¥æ‰¾çš„value
+         * @return æŒ‡å®švalueçš„ç´¢å¼•
          */
         @Override
         public int indexOf(Object o) {
@@ -827,9 +827,9 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
 
         /**
-         * È¡µÃlist iterator, ²¢ÉèÖÃµ±Ç°Î»ÖÃ.
+         * å–å¾—list iterator, å¹¶è®¾ç½®å½“å‰ä½ç½®.
          * 
-         * @param index µ±Ç°Î»ÖÃ
+         * @param index å½“å‰ä½ç½®
          * @return list iterator
          */
         @Override
@@ -839,11 +839,11 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     // ==========================================================================
-    // ÄÚ²¿·½·¨ 
+    // å†…éƒ¨æ–¹æ³• 
     // ==========================================================================
 
     /**
-     * ³õÊ¼»¯Ê±hash±í.
+     * åˆå§‹åŒ–æ—¶hashè¡¨.
      */
     @Override
     @SuppressWarnings("unchecked")
@@ -852,10 +852,10 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     /**
-     * ´Ë·½·¨¸²¸ÇÁË¸¸ÀàµÄ·½·¨. Ïò±íÖĞÔö¼ÓÒ»¸öentry, Í¬Ê±½«entry¼ÇÂ¼µ½orderÁĞ±íÖĞ.
+     * æ­¤æ–¹æ³•è¦†ç›–äº†çˆ¶ç±»çš„æ–¹æ³•. å‘è¡¨ä¸­å¢åŠ ä¸€ä¸ªentry, åŒæ—¶å°†entryè®°å½•åˆ°orderåˆ—è¡¨ä¸­.
      * 
-     * @param key hash±íµÄkey
-     * @param value hash±íµÄvalue
+     * @param key hashè¡¨çš„key
+     * @param value hashè¡¨çš„value
      */
     @Override
     protected void addEntry(K key, V value) {
@@ -869,9 +869,9 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     /**
-     * ¸²¸Ç¸¸ÀàµÄ·½·¨, ÓÃÀ´´´½¨keyµÄ±éÀúÆ÷.
+     * è¦†ç›–çˆ¶ç±»çš„æ–¹æ³•, ç”¨æ¥åˆ›å»ºkeyçš„éå†å™¨.
      * 
-     * @return hash±íµÄkeyµÄ±éÀúÆ÷
+     * @return hashè¡¨çš„keyçš„éå†å™¨
      */
     @Override
     protected Iterator<K> newKeyIterator() {
@@ -879,9 +879,9 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     /**
-     * ¸²¸Ç¸¸ÀàµÄ·½·¨, ÓÃÀ´´´½¨valueµÄ±éÀúÆ÷.
+     * è¦†ç›–çˆ¶ç±»çš„æ–¹æ³•, ç”¨æ¥åˆ›å»ºvalueçš„éå†å™¨.
      * 
-     * @return hash±íµÄkeyµÄ±éÀúÆ÷
+     * @return hashè¡¨çš„keyçš„éå†å™¨
      */
     @Override
     protected Iterator<V> newValueIterator() {
@@ -889,9 +889,9 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     /**
-     * ¸²¸Ç¸¸ÀàµÄ·½·¨, ÓÃÀ´´´½¨entryµÄ±éÀúÆ÷.
+     * è¦†ç›–çˆ¶ç±»çš„æ–¹æ³•, ç”¨æ¥åˆ›å»ºentryçš„éå†å™¨.
      * 
-     * @return hash±íµÄkeyµÄ±éÀúÆ÷
+     * @return hashè¡¨çš„keyçš„éå†å™¨
      */
     @Override
     protected Iterator<Map.Entry<K, V>> newEntryIterator() {
@@ -899,9 +899,9 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     /**
-     * ¶Ômap½øĞĞÀ©Èİ. ´Ë·½·¨ÔÚentryÊı³¬¹ıãĞÖµÊ±±»µ÷ÓÃ.
+     * å¯¹mapè¿›è¡Œæ‰©å®¹. æ­¤æ–¹æ³•åœ¨entryæ•°è¶…è¿‡é˜ˆå€¼æ—¶è¢«è°ƒç”¨.
      * 
-     * @param newCapacity ĞÂµÄÈİÁ¿
+     * @param newCapacity æ–°çš„å®¹é‡
      */
     @Override
     protected void resize(int newCapacity) {
@@ -918,10 +918,10 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     /**
-     * »ùÀàÔÚ<code>resize</code>Ê±»áµ÷ÓÃ´Ë·½·¨°ÑËùÓĞµÄÏî¸´ÖÆµ½ĞÂµÄÊı×éÖĞ. ¸²¸Ç´Ë·½·¨ÊÇ³öÓÚĞÔÄÜµÄ¿¼ÂÇ,
-     * ÒòÎªÀûÓÃÊı×é±éÀúhash±í±ÈÔ­À´µÄÊµÏÖ·½·¨¸üÓĞĞ§.
+     * åŸºç±»åœ¨<code>resize</code>æ—¶ä¼šè°ƒç”¨æ­¤æ–¹æ³•æŠŠæ‰€æœ‰çš„é¡¹å¤åˆ¶åˆ°æ–°çš„æ•°ç»„ä¸­. è¦†ç›–æ­¤æ–¹æ³•æ˜¯å‡ºäºæ€§èƒ½çš„è€ƒè™‘,
+     * å› ä¸ºåˆ©ç”¨æ•°ç»„éå†hashè¡¨æ¯”åŸæ¥çš„å®ç°æ–¹æ³•æ›´æœ‰æ•ˆ.
      * 
-     * @param newTable ĞÂ±í
+     * @param newTable æ–°è¡¨
      */
     @Override
     protected void transfer(DefaultHashMap.Entry<K, V>[] newTable) {
@@ -937,9 +937,9 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     }
 
     /**
-     * ¼ì²éÖ¸¶¨µÄË÷ÒıÖµÊÇ·ñÔ½½ç. Èç¹ûÊÇ, ÔòÖÀ³öÔËĞĞÊ±Òì³£.
+     * æ£€æŸ¥æŒ‡å®šçš„ç´¢å¼•å€¼æ˜¯å¦è¶Šç•Œ. å¦‚æœæ˜¯, åˆ™æ·å‡ºè¿è¡Œæ—¶å¼‚å¸¸.
      * 
-     * @param index Òª¼ì²éµÄÒì³£
+     * @param index è¦æ£€æŸ¥çš„å¼‚å¸¸
      */
     private void checkRange(int index) {
         if (index >= size || index < 0) {

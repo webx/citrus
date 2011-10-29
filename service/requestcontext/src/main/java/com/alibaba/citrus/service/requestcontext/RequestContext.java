@@ -22,48 +22,48 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * °üº¬ÁËrequest¡¢responseºÍservletContext¼¸¸ö¶ÔÏóµÄ¼¯ºÏÌå£¬ÓÃÀ´±íÊ¾µ±Ç°HTTPÇëÇóµÄ×´Ì¬¡£
+ * åŒ…å«äº†requestã€responseå’ŒservletContextå‡ ä¸ªå¯¹è±¡çš„é›†åˆä½“ï¼Œç”¨æ¥è¡¨ç¤ºå½“å‰HTTPè¯·æ±‚çš„çŠ¶æ€ã€‚
  * 
  * @author Michael Zhou
  */
 public interface RequestContext {
     /**
-     * È¡µÃ±»°ü×°µÄcontext¡£
+     * å–å¾—è¢«åŒ…è£…çš„contextã€‚
      * 
-     * @return ±»°ü×°µÄ<code>RequestContext</code>¶ÔÏó
+     * @return è¢«åŒ…è£…çš„<code>RequestContext</code>å¯¹è±¡
      */
     RequestContext getWrappedRequestContext();
 
     /**
-     * È¡µÃservletContext¶ÔÏó¡£
+     * å–å¾—servletContextå¯¹è±¡ã€‚
      * 
-     * @return <code>ServletContext</code>¶ÔÏó
+     * @return <code>ServletContext</code>å¯¹è±¡
      */
     ServletContext getServletContext();
 
     /**
-     * È¡µÃrequest¶ÔÏó¡£
+     * å–å¾—requestå¯¹è±¡ã€‚
      * 
-     * @return <code>HttpServletRequest</code>¶ÔÏó
+     * @return <code>HttpServletRequest</code>å¯¹è±¡
      */
     HttpServletRequest getRequest();
 
     /**
-     * È¡µÃresponse¶ÔÏó¡£
+     * å–å¾—responseå¯¹è±¡ã€‚
      * 
-     * @return <code>HttpServletResponse</code>¶ÔÏó
+     * @return <code>HttpServletResponse</code>å¯¹è±¡
      */
     HttpServletResponse getResponse();
 
     /**
-     * ¿ªÊ¼Ò»¸öÇëÇó¡£
+     * å¼€å§‹ä¸€ä¸ªè¯·æ±‚ã€‚
      */
     void prepare();
 
     /**
-     * ½áÊøÒ»¸öÇëÇó¡£
+     * ç»“æŸä¸€ä¸ªè¯·æ±‚ã€‚
      * 
-     * @throws RequestContextException Èç¹ûÊ§°Ü
+     * @throws RequestContextException å¦‚æœå¤±è´¥
      */
     void commit() throws RequestContextException;
 }

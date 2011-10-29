@@ -48,10 +48,10 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ÊµÏÖÁË<code>HttpSession</code>½Ó¿Ú¡£
+ * å®ç°äº†<code>HttpSession</code>æ¥å£ã€‚
  * <p>
- * ×¢Òâ£¬Ã¿¸örequest¾ù»á´´½¨¶ÀÁ¢µÄsession¶ÔÏó£¬´Ë¶ÔÏó±¾Éí²»ÊÇÏß³Ì°²È«µÄ£¬²»ÄÜ±»¶àÏß³ÌÍ¬Ê±·ÃÎÊ¡£µ«Æäºó±¸µÄsession
- * storeÊÇÏß³Ì°²È«µÄ¡£
+ * æ³¨æ„ï¼Œæ¯ä¸ªrequestå‡ä¼šåˆ›å»ºç‹¬ç«‹çš„sessionå¯¹è±¡ï¼Œæ­¤å¯¹è±¡æœ¬èº«ä¸æ˜¯çº¿ç¨‹å®‰å…¨çš„ï¼Œä¸èƒ½è¢«å¤šçº¿ç¨‹åŒæ—¶è®¿é—®ã€‚ä½†å…¶åå¤‡çš„session
+ * storeæ˜¯çº¿ç¨‹å®‰å…¨çš„ã€‚
  * </p>
  */
 public class SessionImpl implements HttpSession {
@@ -68,7 +68,7 @@ public class SessionImpl implements HttpSession {
     private boolean cleared = false;
 
     /**
-     * ´´½¨Ò»¸ösession¶ÔÏó¡£
+     * åˆ›å»ºä¸€ä¸ªsessionå¯¹è±¡ã€‚
      */
     public SessionImpl(String sessionID, SessionRequestContext requestContext, boolean isNew, boolean create) {
         this.sessionID = assertNotNull(sessionID, "no sessionID");
@@ -77,16 +77,16 @@ public class SessionImpl implements HttpSession {
 
         EventType event;
 
-        // ½øµ½ÕâÀïµÄsession¿ÉÄÜÓĞËÄÖÖÇé¿ö£º
-        // 1. Requested sessionIDÎª¿Õ
-        // 2. Requested sessionIDËù¶ÔÓ¦µÄsession²»´æÔÚ
-        // 3. Requested sessionIDËù¶ÔÓ¦µÄsessionÒÑ¾­¹ıÆÚ
-        // 3.5 Requested sessionIDºÍmodelÖĞµÄsession ID²»Æ¥Åä£¬ÊÓ×÷session¹ıÆÚ
-        // 4. Requested sessionIDËù¶ÔÓ¦µÄsession´æÔÚÇÒºÏ·¨
+        // è¿›åˆ°è¿™é‡Œçš„sessionå¯èƒ½æœ‰å››ç§æƒ…å†µï¼š
+        // 1. Requested sessionIDä¸ºç©º
+        // 2. Requested sessionIDæ‰€å¯¹åº”çš„sessionä¸å­˜åœ¨
+        // 3. Requested sessionIDæ‰€å¯¹åº”çš„sessionå·²ç»è¿‡æœŸ
+        // 3.5 Requested sessionIDå’Œmodelä¸­çš„session IDä¸åŒ¹é…ï¼Œè§†ä½œsessionè¿‡æœŸ
+        // 4. Requested sessionIDæ‰€å¯¹åº”çš„sessionå­˜åœ¨ä¸”åˆæ³•
         if (isNew) {
             event = EventType.CREATED;
 
-            // Çé¿ö1£º´´½¨ĞÂµÄmodel£¬²¢±£´æÖ®¡£
+            // æƒ…å†µ1ï¼šåˆ›å»ºæ–°çš„modelï¼Œå¹¶ä¿å­˜ä¹‹ã€‚
             log.debug("No session ID was found in cookie or URL.  A new session will be created.");
             sessionInternal.invalidate();
         } else {
@@ -95,7 +95,7 @@ public class SessionImpl implements HttpSession {
             if (model == null) {
                 event = EventType.CREATED;
 
-                // Çé¿ö2£º´´½¨ĞÂµÄmodel£¬²¢±£´æÖ®¡£
+                // æƒ…å†µ2ï¼šåˆ›å»ºæ–°çš„modelï¼Œå¹¶ä¿å­˜ä¹‹ã€‚
                 log.debug("Session state was not found for sessionID \"{}\".  A new session will be created.",
                         sessionID);
                 isNew = true;
@@ -105,17 +105,17 @@ public class SessionImpl implements HttpSession {
 
                 String modelSessionID = trimToNull(model.getSessionID());
 
-                // ¼ì²éSessionIDµÄÖµÊÇ·ñÏàµÈ£¬²¢¼æÈİSessionModelÖĞÃ»ÓĞÉèÖÃSessionIDµÄ³¡¾°
-                // ÌØÊâÇé¿ö£ºmodelÖĞÎ´°üº¬session ID£¬ÕâÊ±£¬²»×÷¼ì²é£¬ÒÔrequestÖĞµÄsessionIDÎª×¼
+                // æ£€æŸ¥SessionIDçš„å€¼æ˜¯å¦ç›¸ç­‰ï¼Œå¹¶å…¼å®¹SessionModelä¸­æ²¡æœ‰è®¾ç½®SessionIDçš„åœºæ™¯
+                // ç‰¹æ®Šæƒ…å†µï¼šmodelä¸­æœªåŒ…å«session IDï¼Œè¿™æ—¶ï¼Œä¸ä½œæ£€æŸ¥ï¼Œä»¥requestä¸­çš„sessionIDä¸ºå‡†
                 if (modelSessionID != null && !modelSessionID.equals(sessionID)) {
-                    // Çé¿ö3.5 ÊÓ×÷¹ıÆÚ
+                    // æƒ…å†µ3.5 è§†ä½œè¿‡æœŸ
                     expired = true;
 
                     log.warn("Requested session ID \"{}\" does not match the ID in session model \"{}\".  "
                             + "Force expired the session.", sessionID, modelSessionID);
                 }
 
-                // Session model±»·µ»ØÇ°£¬»áÏÈ±»decode¡£Òò´Ë£¬ĞŞ¸ÄËù·µ»ØµÄsession model¶ÔÏó£¬²¢²»»áÓ°ÏìstoreÖĞµÄ¶ÔÏóÖµ¡£
+                // Session modelè¢«è¿”å›å‰ï¼Œä¼šå…ˆè¢«decodeã€‚å› æ­¤ï¼Œä¿®æ”¹æ‰€è¿”å›çš„session modelå¯¹è±¡ï¼Œå¹¶ä¸ä¼šå½±å“storeä¸­çš„å¯¹è±¡å€¼ã€‚
                 model.setSession(this); // update the session config & session id in model
 
                 expired |= model.isExpired();
@@ -123,7 +123,7 @@ public class SessionImpl implements HttpSession {
                 if (expired) {
                     event = EventType.RECREATED;
 
-                    // Çé¿ö3£º¸üĞÂmodelÈçÍ¬ĞÂ½¨µÄÒ»Ñù£¬Í¬Ê±Çå³ıÀÏÊı¾İ¡£
+                    // æƒ…å†µ3ï¼šæ›´æ–°modelå¦‚åŒæ–°å»ºçš„ä¸€æ ·ï¼ŒåŒæ—¶æ¸…é™¤è€æ•°æ®ã€‚
                     if (log.isDebugEnabled()) {
                         log.debug(
                                 "Session has expired: sessionID={}, created at {}, last accessed at {}, "
@@ -138,7 +138,7 @@ public class SessionImpl implements HttpSession {
                 } else {
                     event = EventType.VISITED;
 
-                    // Çé¿ö4£º¸üĞÂmodelµÄ×î½ü·ÃÎÊÊ±¼ä¡£
+                    // æƒ…å†µ4ï¼šæ›´æ–°modelçš„æœ€è¿‘è®¿é—®æ—¶é—´ã€‚
                     if (log.isTraceEnabled()) {
                         log.trace(
                                 "Activate session: sessionID={}, last accessed at {}, maxInactiveInterval={}",
@@ -153,15 +153,15 @@ public class SessionImpl implements HttpSession {
 
         this.isNew = isNew;
 
-        // È·±£model attributeµÄmodified=true
+        // ç¡®ä¿model attributeçš„modified=true
         sessionInternal.setAttribute(modelKey, model);
 
-        // µ÷ÓÃsession lifecycle listener
+        // è°ƒç”¨session lifecycle listener
         fireEvent(event);
     }
 
     /**
-     * È¡µÃ´´½¨¸ÃsessionµÄrequest context¡£
+     * å–å¾—åˆ›å»ºè¯¥sessionçš„request contextã€‚
      * 
      * @return request context
      */
@@ -170,16 +170,16 @@ public class SessionImpl implements HttpSession {
     }
 
     /**
-     * È¡µÃµ±Ç°µÄmodel¡£
+     * å–å¾—å½“å‰çš„modelã€‚
      * 
-     * @return model¶ÔÏó
+     * @return modelå¯¹è±¡
      */
     public SessionModel getSessionModel() {
         return model;
     }
 
     /**
-     * È¡µÃsession ID¡£
+     * å–å¾—session IDã€‚
      * 
      * @return session ID
      */
@@ -188,10 +188,10 @@ public class SessionImpl implements HttpSession {
     }
 
     /**
-     * È¡µÃsessionµÄ´´½¨Ê±¼ä¡£
+     * å–å¾—sessionçš„åˆ›å»ºæ—¶é—´ã€‚
      * 
-     * @return ´´½¨Ê±¼äÂ¾
-     * @throws IllegalStateException Èç¹ûsessionÒÑ¾­invalidated
+     * @return åˆ›å»ºæ—¶é—´æˆ®
+     * @throws IllegalStateException å¦‚æœsessionå·²ç»invalidated
      */
     public long getCreationTime() {
         assertValid("getCreationTime");
@@ -199,10 +199,10 @@ public class SessionImpl implements HttpSession {
     }
 
     /**
-     * È¡µÃ×î½ü·ÃÎÊÊ±¼ä¡£
+     * å–å¾—æœ€è¿‘è®¿é—®æ—¶é—´ã€‚
      * 
-     * @return ×î½ü·ÃÎÊÊ±¼äÂ¾
-     * @throws IllegalStateException Èç¹ûsessionÒÑ¾­invalidated
+     * @return æœ€è¿‘è®¿é—®æ—¶é—´æˆ®
+     * @throws IllegalStateException å¦‚æœsessionå·²ç»invalidated
      */
     public long getLastAccessedTime() {
         assertValid("getLastAccessedTime");
@@ -210,9 +210,9 @@ public class SessionImpl implements HttpSession {
     }
 
     /**
-     * È¡µÃsessionµÄ×î´ó²»»î¶¯ÆÚÏŞ£¬³¬¹ı´ËÊ±¼ä£¬session¾Í»áÊ§Ğ§¡£
+     * å–å¾—sessionçš„æœ€å¤§ä¸æ´»åŠ¨æœŸé™ï¼Œè¶…è¿‡æ­¤æ—¶é—´ï¼Œsessionå°±ä¼šå¤±æ•ˆã€‚
      * 
-     * @return ²»»î¶¯ÆÚÏŞµÄÃëÊı
+     * @return ä¸æ´»åŠ¨æœŸé™çš„ç§’æ•°
      */
     public int getMaxInactiveInterval() {
         assertModel("getMaxInactiveInterval");
@@ -220,9 +220,9 @@ public class SessionImpl implements HttpSession {
     }
 
     /**
-     * ÉèÖÃsessionµÄ×î´ó²»»î¶¯ÆÚÏŞ£¬³¬¹ı´ËÊ±¼ä£¬session¾Í»áÊ§Ğ§¡£
+     * è®¾ç½®sessionçš„æœ€å¤§ä¸æ´»åŠ¨æœŸé™ï¼Œè¶…è¿‡æ­¤æ—¶é—´ï¼Œsessionå°±ä¼šå¤±æ•ˆã€‚
      * 
-     * @param maxInactiveInterval ²»»î¶¯ÆÚÏŞµÄÃëÊı
+     * @param maxInactiveInterval ä¸æ´»åŠ¨æœŸé™çš„ç§’æ•°
      */
     public void setMaxInactiveInterval(int maxInactiveInterval) {
         assertModel("setMaxInactiveInterval");
@@ -230,20 +230,20 @@ public class SessionImpl implements HttpSession {
     }
 
     /**
-     * È¡µÃµ±Ç°sessionËùÊôµÄservlet context¡£
+     * å–å¾—å½“å‰sessionæ‰€å±çš„servlet contextã€‚
      * 
-     * @return <code>ServletContext</code>¶ÔÏó
+     * @return <code>ServletContext</code>å¯¹è±¡
      */
     public ServletContext getServletContext() {
         return requestContext.getServletContext();
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄattributeÖµ¡£
+     * å–å¾—æŒ‡å®šåç§°çš„attributeå€¼ã€‚
      * 
-     * @param name attributeÃû³Æ
-     * @return attributeµÄÖµ
-     * @throws IllegalStateException Èç¹ûsessionÒÑ¾­invalidated
+     * @param name attributeåç§°
+     * @return attributeçš„å€¼
+     * @throws IllegalStateException å¦‚æœsessionå·²ç»invalidated
      */
     public Object getAttribute(String name) {
         assertValid("getAttribute");
@@ -251,10 +251,10 @@ public class SessionImpl implements HttpSession {
     }
 
     /**
-     * È¡µÃËùÓĞattributesµÄÃû³Æ¡£
+     * å–å¾—æ‰€æœ‰attributesçš„åç§°ã€‚
      * 
-     * @return attributeÃû³ÆÁĞ±í
-     * @throws IllegalStateException Èç¹ûsessionÒÑ¾­invalidated
+     * @return attributeåç§°åˆ—è¡¨
+     * @throws IllegalStateException å¦‚æœsessionå·²ç»invalidated
      */
     public Enumeration<String> getAttributeNames() {
         assertValid("getAttributeNames");
@@ -303,12 +303,12 @@ public class SessionImpl implements HttpSession {
     }
 
     /**
-     * ÉèÖÃÖ¸¶¨Ãû³ÆµÄattributeÖµ¡£
+     * è®¾ç½®æŒ‡å®šåç§°çš„attributeå€¼ã€‚
      * 
-     * @param name attributeÃû³Æ
-     * @param value attributeµÄÖµ
-     * @throws IllegalStateException Èç¹ûsessionÒÑ¾­invalidated
-     * @throws IllegalArgumentException Èç¹ûÖ¸¶¨µÄattributeÃû³Æ²»±»Ö§³Ö
+     * @param name attributeåç§°
+     * @param value attributeçš„å€¼
+     * @throws IllegalStateException å¦‚æœsessionå·²ç»invalidated
+     * @throws IllegalArgumentException å¦‚æœæŒ‡å®šçš„attributeåç§°ä¸è¢«æ”¯æŒ
      */
     public void setAttribute(String name, Object value) {
         assertValid("setAttribute");
@@ -317,10 +317,10 @@ public class SessionImpl implements HttpSession {
     }
 
     /**
-     * É¾³ıÒ»¸öattribute¡£
+     * åˆ é™¤ä¸€ä¸ªattributeã€‚
      * 
-     * @param name ÒªÉ¾³ıµÄattributeÃû³Æ
-     * @throws IllegalStateException Èç¹ûsessionÒÑ¾­invalidated
+     * @param name è¦åˆ é™¤çš„attributeåç§°
+     * @throws IllegalStateException å¦‚æœsessionå·²ç»invalidated
      */
     public void removeAttribute(String name) {
         assertValid("removeAttribute");
@@ -329,9 +329,9 @@ public class SessionImpl implements HttpSession {
     }
 
     /**
-     * Ê¹Ò»¸ösession×÷·Ï¡£
+     * ä½¿ä¸€ä¸ªsessionä½œåºŸã€‚
      * 
-     * @throws IllegalStateException Èç¹ûsessionÒÑ¾­invalidated
+     * @throws IllegalStateException å¦‚æœsessionå·²ç»invalidated
      */
     public void invalidate() {
         assertValid("invalidate");
@@ -342,9 +342,9 @@ public class SessionImpl implements HttpSession {
     }
 
     /**
-     * Çå³ıÒ»¸ösession¡£
+     * æ¸…é™¤ä¸€ä¸ªsessionã€‚
      * 
-     * @throws IllegalStateException Èç¹ûsessionÒÑ¾­invalidated
+     * @throws IllegalStateException å¦‚æœsessionå·²ç»invalidated
      */
     public void clear() {
         assertValid("clear");
@@ -352,17 +352,17 @@ public class SessionImpl implements HttpSession {
     }
 
     /**
-     * ÅĞ¶Ïµ±Ç°sessionÊÇ·ñ·Ç·¨¡£
+     * åˆ¤æ–­å½“å‰sessionæ˜¯å¦éæ³•ã€‚
      */
     public boolean isInvalidated() {
         return invalidated;
     }
 
     /**
-     * µ±Ç°sessionÊÇ·ñÎªĞÂµÄ£¿
+     * å½“å‰sessionæ˜¯å¦ä¸ºæ–°çš„ï¼Ÿ
      * 
-     * @return Èç¹ûÊÇĞÂµÄ£¬Ôò·µ»Ø<code>true</code>
-     * @throws IllegalStateException Èç¹ûsessionÒÑ¾­invalidated
+     * @return å¦‚æœæ˜¯æ–°çš„ï¼Œåˆ™è¿”å›<code>true</code>
+     * @throws IllegalStateException å¦‚æœsessionå·²ç»invalidated
      */
     public boolean isNew() {
         assertValid("isNew");
@@ -370,9 +370,9 @@ public class SessionImpl implements HttpSession {
     }
 
     /**
-     * È·±£modelÒÑ¾­±»È¡µÃ£¬¼´sessionÒÑ±»³õÊ¼»¯¡£
+     * ç¡®ä¿modelå·²ç»è¢«å–å¾—ï¼Œå³sessionå·²è¢«åˆå§‹åŒ–ã€‚
      * 
-     * @param methodName µ±Ç°ÕıÒªÖ´ĞĞµÄ·½·¨
+     * @param methodName å½“å‰æ­£è¦æ‰§è¡Œçš„æ–¹æ³•
      */
     protected void assertModel(String methodName) {
         if (model == null) {
@@ -382,9 +382,9 @@ public class SessionImpl implements HttpSession {
     }
 
     /**
-     * È·±£session´¦ÓÚvalid×´Ì¬¡£
+     * ç¡®ä¿sessionå¤„äºvalidçŠ¶æ€ã€‚
      * 
-     * @param methodName µ±Ç°ÕıÒªÖ´ĞĞµÄ·½·¨
+     * @param methodName å½“å‰æ­£è¦æ‰§è¡Œçš„æ–¹æ³•
      */
     protected void assertValid(String methodName) {
         assertModel(methodName);
@@ -396,7 +396,7 @@ public class SessionImpl implements HttpSession {
     }
 
     /**
-     * ¼ì²é½«Òª¸ü¸ÄµÄattr nameÊÇ·ñºÏ·¨¡£
+     * æ£€æŸ¥å°†è¦æ›´æ”¹çš„attr nameæ˜¯å¦åˆæ³•ã€‚
      */
     protected void assertAttributeNameForModification(String methodName, String attrName) {
         if (modelKey.equals(attrName)) {
@@ -405,13 +405,13 @@ public class SessionImpl implements HttpSession {
     }
 
     /**
-     * Ìá½»sessionµÄÄÚÈİ£¬É¾³ıµÄ¡¢ĞÂÔöµÄ¡¢ĞŞ¸ÄµÄÄÚÈİ±»±£´æ¡£
+     * æäº¤sessionçš„å†…å®¹ï¼Œåˆ é™¤çš„ã€æ–°å¢çš„ã€ä¿®æ”¹çš„å†…å®¹è¢«ä¿å­˜ã€‚
      */
     public void commit() {
         String[] storeNames = requestContext.getSessionConfig().getStores().getStoreNames();
         Map<String, Object[]> stores = createHashMap();
 
-        // °´store¶Ôattrs½øĞĞ·Ö¶Ñ¡£
+        // æŒ‰storeå¯¹attrsè¿›è¡Œåˆ†å †ã€‚
         boolean modified = false;
 
         for (Map.Entry<String, SessionAttribute> entry : attrs.entrySet()) {
@@ -432,12 +432,12 @@ public class SessionImpl implements HttpSession {
                 Map<String, Object> storeAttrs = (Map<String, Object>) storeInfo[1];
                 Object attrValue = attr.getValue();
 
-                // ÌØÊâ´¦Àímodel£¬½«Æä×ª»»³ÉstoreÖĞµÄÖµ¡£
+                // ç‰¹æ®Šå¤„ç†modelï¼Œå°†å…¶è½¬æ¢æˆstoreä¸­çš„å€¼ã€‚
                 if (attrValue instanceof SessionModel) {
                     attrValue = requestContext.getSessionConfig().getSessionModelEncoders()[0]
                             .encode((SessionModel) attrValue);
                 } else {
-                    // Ö»¼ì²é·Çsession model¶ÔÏóµÄmodified×´Ì¬
+                    // åªæ£€æŸ¥ésession modelå¯¹è±¡çš„modifiedçŠ¶æ€
                     modified = true;
                 }
 
@@ -445,14 +445,14 @@ public class SessionImpl implements HttpSession {
             }
         }
 
-        // Èç¹û¼ÈÃ»ÓĞ²ÎÊı¸Ä±ä£¨¼´Ã»ÓĞµ÷ÓÃsetAttributeºÍremoveAttribute£©£¬
-        // Ò²Ã»ÓĞ±»Çå³ı£¨¼´Ã»ÓĞµ÷ÓÃinvalidateºÍclear£©£¬²¢ÇÒisKeepInTouch=false£¬
-        // Ôò²»Ìá½»ÁË£¬Ö±½ÓÍË³ö¡£
+        // å¦‚æœæ—¢æ²¡æœ‰å‚æ•°æ”¹å˜ï¼ˆå³æ²¡æœ‰è°ƒç”¨setAttributeå’ŒremoveAttributeï¼‰ï¼Œ
+        // ä¹Ÿæ²¡æœ‰è¢«æ¸…é™¤ï¼ˆå³æ²¡æœ‰è°ƒç”¨invalidateå’Œclearï¼‰ï¼Œå¹¶ä¸”isKeepInTouch=falseï¼Œ
+        // åˆ™ä¸æäº¤äº†ï¼Œç›´æ¥é€€å‡ºã€‚
         if (!modified && !cleared && !requestContext.getSessionConfig().isKeepInTouch()) {
             return;
         }
 
-        // ¶ÔÃ¿Ò»¸östore·Ö±ğ²Ù×÷¡£
+        // å¯¹æ¯ä¸€ä¸ªstoreåˆ†åˆ«æ“ä½œã€‚
         for (Map.Entry<String, Object[]> entry : stores.entrySet()) {
             String storeName = entry.getKey();
             SessionStore store = (SessionStore) entry.getValue()[0];
@@ -463,7 +463,7 @@ public class SessionImpl implements HttpSession {
             store.commit(storeAttrs, getId(), new StoreContextImpl(storeName));
         }
 
-        // ¼ÙÈçinvalidateºÍclear±»µ÷ÓÃ£¬Ôò¼ì²éÊ£ÓàµÄstore£¬Í¨ÖªËüÃÇÇå³ıµ±Ç°µÄÊı¾İ¡£
+        // å‡å¦‚invalidateå’Œclearè¢«è°ƒç”¨ï¼Œåˆ™æ£€æŸ¥å‰©ä½™çš„storeï¼Œé€šçŸ¥å®ƒä»¬æ¸…é™¤å½“å‰çš„æ•°æ®ã€‚
         if (cleared) {
             if (storeNames.length > stores.size()) {
                 for (String storeName : storeNames) {
@@ -565,7 +565,7 @@ public class SessionImpl implements HttpSession {
                             unreachableCode();
                     }
                 } catch (Exception e) {
-                    // ±ÜÃâÒòlistener³ö´íµ¼ÖÂÓ¦ÓÃµÄÍË³ö¡£
+                    // é¿å…å› listenerå‡ºé”™å¯¼è‡´åº”ç”¨çš„é€€å‡ºã€‚
                     log.error("Listener \"" + listener.getClass().getSimpleName() + "\" failed", e);
                 }
             }
@@ -573,17 +573,17 @@ public class SessionImpl implements HttpSession {
     }
 
     /**
-     * SessionÊÂ¼şµÄÀàĞÍ¡£
+     * Sessionäº‹ä»¶çš„ç±»å‹ã€‚
      */
     private enum EventType {
         CREATED,
-        RECREATED, // ÏÈinvalidateÈ»ºóÔÙcreate
+        RECREATED, // å…ˆinvalidateç„¶åå†create
         INVALIDATED,
         VISITED
     }
 
     /**
-     * ´æ·Åsession storeµÄ×´Ì¬¡£
+     * å­˜æ”¾session storeçš„çŠ¶æ€ã€‚
      */
     private class StoreContextImpl implements StoreContext {
         private String storeName;
@@ -618,7 +618,7 @@ public class SessionImpl implements HttpSession {
     }
 
     /**
-     * ÄÚ²¿Ê¹ÓÃµÄsession¶ÔÏó£¬²»»áÅ×³ö<code>IllegalStateException</code>Òì³£¡£
+     * å†…éƒ¨ä½¿ç”¨çš„sessionå¯¹è±¡ï¼Œä¸ä¼šæŠ›å‡º<code>IllegalStateException</code>å¼‚å¸¸ã€‚
      */
     private class HttpSessionInternal implements HttpSession {
         public String getId() {
@@ -659,13 +659,13 @@ public class SessionImpl implements HttpSession {
                     attr = new SessionAttribute(name, SessionImpl.this, storeName, new StoreContextImpl(storeName));
                     value = attr.getValue();
 
-                    // ¶ÔÓÚsession model£¬ĞèÒª¶ÔÆä½âÂë
+                    // å¯¹äºsession modelï¼Œéœ€è¦å¯¹å…¶è§£ç 
                     if (value != null && modelKey.equals(name)) {
-                        value = decodeSessionModel(value); // Èç¹û½âÂëÊ§°Ü£¬Ôò·µ»Ønull
+                        value = decodeSessionModel(value); // å¦‚æœè§£ç å¤±è´¥ï¼Œåˆ™è¿”å›null
                         attr.updateValue(value);
                     }
 
-                    // Ö»ÓĞµ±value·Ç¿Õ£¨storeÖĞ°üº¬ÁË´Ë¶ÔÏó£©£¬²Å°ÑËü·Åµ½attrs±íÖĞ£¬·ñÔò¿ÉÄÜ»á²úÉúºÜ¶àÀ¬»øattr¶ÔÏó
+                    // åªæœ‰å½“valueéç©ºï¼ˆstoreä¸­åŒ…å«äº†æ­¤å¯¹è±¡ï¼‰ï¼Œæ‰æŠŠå®ƒæ”¾åˆ°attrsè¡¨ä¸­ï¼Œå¦åˆ™å¯èƒ½ä¼šäº§ç”Ÿå¾ˆå¤šåƒåœ¾attrå¯¹è±¡
                     if (value != null) {
                         attrs.put(name, attr);
                     }
@@ -754,11 +754,11 @@ public class SessionImpl implements HttpSession {
         }
 
         public void invalidate() {
-            // Çå³ısessionÊı¾İ
+            // æ¸…é™¤sessionæ•°æ®
             attrs.clear();
             cleared = true;
 
-            // Í¨ÖªËùÓĞµÄstore¹ıÆÚÆäÊı¾İ
+            // é€šçŸ¥æ‰€æœ‰çš„storeè¿‡æœŸå…¶æ•°æ®
             SessionConfig sessionConfig = requestContext.getSessionConfig();
             String[] storeNames = sessionConfig.getStores().getStoreNames();
 
@@ -768,7 +768,7 @@ public class SessionImpl implements HttpSession {
                 store.invaldiate(sessionID, new StoreContextImpl(storeName));
             }
 
-            // Çå³ımodel
+            // æ¸…é™¤model
             if (model == null) {
                 model = new SessionModelImpl(SessionImpl.this);
             } else {

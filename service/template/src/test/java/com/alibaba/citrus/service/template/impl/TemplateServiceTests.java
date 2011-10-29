@@ -59,7 +59,7 @@ public class TemplateServiceTests {
     public void createServiceDirectly_uninited() throws Exception {
         templateService = new TemplateServiceImpl();
 
-        // Î´³õÊ¼»¯£¬²»ÄÜÖ´ĞĞexistsµÈ·½·¨
+        // æœªåˆå§‹åŒ–ï¼Œä¸èƒ½æ‰§è¡Œexistsç­‰æ–¹æ³•
         try {
             templateService.exists("test.vm");
             fail();
@@ -103,7 +103,7 @@ public class TemplateServiceTests {
 
     @Test
     public void bean_definition_parser_errors() {
-        // È±ÉÙextension
+        // ç¼ºå°‘extension
         try {
             createContext("template-noExtension.xml");
             fail();
@@ -111,7 +111,7 @@ public class TemplateServiceTests {
             assertThat(e, exception(IllegalArgumentException.class, "extension"));
         }
 
-        // È±ÉÙengineName
+        // ç¼ºå°‘engineName
         try {
             createContext("template-noEngineName.xml");
             fail();
@@ -119,7 +119,7 @@ public class TemplateServiceTests {
             assertThat(e, exception(IllegalArgumentException.class, "engine"));
         }
 
-        // extensionÖØ¸´
+        // extensioné‡å¤
         try {
             createContext("template-dupExtensions.xml");
             fail();

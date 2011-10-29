@@ -24,7 +24,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * ´ú±íÒ»´Î×ÊÔ´ËÑË÷¹ı³Ì¡£
+ * ä»£è¡¨ä¸€æ¬¡èµ„æºæœç´¢è¿‡ç¨‹ã€‚
  * 
  * @author Michael Zhou
  */

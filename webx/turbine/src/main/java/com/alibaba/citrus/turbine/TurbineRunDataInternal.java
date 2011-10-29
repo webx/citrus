@@ -18,7 +18,7 @@
 package com.alibaba.citrus.turbine;
 
 /**
- * ½ö¹©¿ò¼ÜÄÚ²¿Ê¹ÓÃ¡£
+ * ä»…ä¾›æ¡†æ¶å†…éƒ¨ä½¿ç”¨ã€‚
  * 
  * @author Michael Zhou
  */
@@ -34,29 +34,29 @@ public interface TurbineRunDataInternal extends TurbineRunData, Navigator, Contr
     Context getContext();
 
     /**
-     * È¡µÃµ±Ç°µÄcontext¡£
+     * å–å¾—å½“å‰çš„contextã€‚
      */
     Context getCurrentContext();
 
     /**
-     * ĞŞ¸Äµ±Ç°µÄcontext¡£
+     * ä¿®æ”¹å½“å‰çš„contextã€‚
      */
     void pushContext(Context context);
 
     /**
-     * ĞŞ¸Äµ±Ç°µÄcontext¡£
+     * ä¿®æ”¹å½“å‰çš„contextã€‚
      */
     void pushContext(Context context, String template);
 
     /**
-     * µ¯³öµ±Ç°µÄcontext£¬»Ö¸´ÉÏÒ»¸öcontext¡£
+     * å¼¹å‡ºå½“å‰çš„contextï¼Œæ¢å¤ä¸Šä¸€ä¸ªcontextã€‚
      * 
-     * @throws IllegalStateException Èç¹ûpopºÍpush²»Åä¶Ô£¬ÔòÅ×´í
+     * @throws IllegalStateException å¦‚æœpopå’Œpushä¸é…å¯¹ï¼Œåˆ™æŠ›é”™
      */
     Context popContext() throws IllegalStateException;
 
     /**
-     * È¡µÃÃ÷È·Ö¸¶¨µÄlayoutÄ£°å¡£
+     * å–å¾—æ˜ç¡®æŒ‡å®šçš„layoutæ¨¡æ¿ã€‚
      */
     String getLayoutTemplateOverride();
 }

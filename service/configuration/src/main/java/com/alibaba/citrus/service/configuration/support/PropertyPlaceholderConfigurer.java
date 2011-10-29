@@ -31,22 +31,22 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.StringUtils;
 
 /**
- * À©Õ¹SpringµÄ
+ * æ‰©å±•Springçš„
  * {@link org.springframework.beans.factory.config.PropertyPlaceholderConfigurer}
- * £¬Ôö¼ÓÄ¬ÈÏÖµµÄ¹¦ÄÜ¡£
+ * ï¼Œå¢åŠ é»˜è®¤å€¼çš„åŠŸèƒ½ã€‚
  * <p>
- * ÀıÈç£º<code>${placeholder:defaultValue}</code>£¬¼ÙÈçplaceholderµÄÖµ²»´æÔÚ£¬ÔòÄ¬ÈÏÈ¡µÃ
- * <code>defaultValue</code>¡£
+ * ä¾‹å¦‚ï¼š<code>${placeholder:defaultValue}</code>ï¼Œå‡å¦‚placeholderçš„å€¼ä¸å­˜åœ¨ï¼Œåˆ™é»˜è®¤å–å¾—
+ * <code>defaultValue</code>ã€‚
  * </p>
  * <p>
- * ´ËÍâ£¬¸ÃÀà×ÔÉíµÄlocationÒ²¿ÉÒÔ°üº¬placeholderÇÒÖ§³ÖÄ¬ÈÏÖµ£¬ÀıÈç£º
+ * æ­¤å¤–ï¼Œè¯¥ç±»è‡ªèº«çš„locationä¹Ÿå¯ä»¥åŒ…å«placeholderä¸”æ”¯æŒé»˜è®¤å€¼ï¼Œä¾‹å¦‚ï¼š
  * </p>
  * 
  * <pre>
  * &lt;services:property-placeholder location="${props:default.properties}" /&gt;
  * </pre>
  * <p>
- * ¼ÙÈçÎ´Ö¸¶¨-Dprops=xyz£¬ÄÇÃ´¾ÍÈ¡Ä¬ÈÏÖµ£º<code>default.properties</code>¡£
+ * å‡å¦‚æœªæŒ‡å®š-Dprops=xyzï¼Œé‚£ä¹ˆå°±å–é»˜è®¤å€¼ï¼š<code>default.properties</code>ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -60,7 +60,7 @@ public class PropertyPlaceholderConfigurer extends
     private String locationNames;
 
     public PropertyPlaceholderConfigurer() {
-        setIgnoreUnresolvablePlaceholders(true); // Ä¬ÈÏÖµ
+        setIgnoreUnresolvablePlaceholders(true); // é»˜è®¤å€¼
     }
 
     public void setResourceLoader(ResourceLoader loader) {

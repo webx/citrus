@@ -21,38 +21,38 @@ import javax.mail.MessagingException;
 import javax.mail.Part;
 
 /**
- * ´ú±íÒ»¸öjavamailµÄÄÚÈİ¡£
+ * ä»£è¡¨ä¸€ä¸ªjavamailçš„å†…å®¹ã€‚
  * 
  * @author Michael Zhou
  */
 public interface MailContent extends Cloneable {
     /**
-     * È¡µÃcontentµÄÎ¨Ò»ID£¬´ËIDÔÚÕû¸ömail builderËù°üº¬µÄcontentÖĞÊÇÎ¨Ò»µÄ¡£
+     * å–å¾—contentçš„å”¯ä¸€IDï¼Œæ­¤IDåœ¨æ•´ä¸ªmail builderæ‰€åŒ…å«çš„contentä¸­æ˜¯å”¯ä¸€çš„ã€‚
      */
     String getId();
 
     /**
-     * Éî¶È¸´ÖÆÒ»¸öcontent¡£
+     * æ·±åº¦å¤åˆ¶ä¸€ä¸ªcontentã€‚
      */
     MailContent clone();
 
     /**
-     * È¡µÃcontentËùÊôµÄmail builder¡£
+     * å–å¾—contentæ‰€å±çš„mail builderã€‚
      */
     MailBuilder getMailBuilder();
 
     /**
-     * ÉèÖÃcontentËùÊôµÄmail builder¡£
+     * è®¾ç½®contentæ‰€å±çš„mail builderã€‚
      */
     void setMailBuilder(MailBuilder builder);
 
     /**
-     * ÉèÖÃ°üÈİ´ËÄÚÈİµÄ¸¸ÄÚÈİ¡£
+     * è®¾ç½®åŒ…å®¹æ­¤å†…å®¹çš„çˆ¶å†…å®¹ã€‚
      */
     void setParentContent(MailContent parentContent);
 
     /**
-     * äÖÈ¾ÓÊ¼şÄÚÈİ¡£
+     * æ¸²æŸ“é‚®ä»¶å†…å®¹ã€‚
      */
     void render(Part mailPart) throws MessagingException;
 }

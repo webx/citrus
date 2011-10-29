@@ -26,9 +26,9 @@ import org.w3c.dom.Element;
 import com.alibaba.citrus.springext.support.parser.NamedBeanDefinitionParserMixin.DefaultNameBDParser;
 
 /**
- * ¶¨ÒåÒ»¸öbean definition£¬Èç¹ûÎ´Ö¸¶¨id£¬ÔòÊ¹ÓÃ<code>getDefaultName()</code>Ëù·µ»ØµÄÄ¬ÈÏÃû³Æ¡£
+ * å®šä¹‰ä¸€ä¸ªbean definitionï¼Œå¦‚æœæœªæŒ‡å®šidï¼Œåˆ™ä½¿ç”¨<code>getDefaultName()</code>æ‰€è¿”å›çš„é»˜è®¤åç§°ã€‚
  * <p>
- * ×¢Òâ£¬´ËÃû³ÆÉú³É»úÖÆÖ»¶Ô¶¥¼¶beanÓĞĞ§£¬¶ÔinnerBeanÈÔÈ»Ê¹ÓÃÔ­ÓĞµÄÃüÃû»úÖÆ¡£
+ * æ³¨æ„ï¼Œæ­¤åç§°ç”Ÿæˆæœºåˆ¶åªå¯¹é¡¶çº§beanæœ‰æ•ˆï¼Œå¯¹innerBeanä»ç„¶ä½¿ç”¨åŸæœ‰çš„å‘½åæœºåˆ¶ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -38,15 +38,15 @@ public abstract class AbstractNamedBeanDefinitionParser<T> extends AbstractSingl
     private final NamedBeanDefinitionParserMixin mixin = new NamedBeanDefinitionParserMixin(this);
 
     /**
-     * È¡µÃbeanµÄÄ¬ÈÏÃû³Æ¡£
+     * å–å¾—beançš„é»˜è®¤åç§°ã€‚
      * <p>
-     * ¿ÉÒÔ×¢²á¶à¸öÄ¬ÈÏÃû£¬ÒÔ¶ººÅ»ò¿Õ¸ñ·Ö¿ª¡£µÚ¶şÃûÃû³Æ¼°ÆäºóµÄÃû³Æ£¬½«±»×¢²á³É±ğÃû¡£
+     * å¯ä»¥æ³¨å†Œå¤šä¸ªé»˜è®¤åï¼Œä»¥é€—å·æˆ–ç©ºæ ¼åˆ†å¼€ã€‚ç¬¬äºŒååç§°åŠå…¶åçš„åç§°ï¼Œå°†è¢«æ³¨å†Œæˆåˆ«åã€‚
      * </p>
      */
     protected abstract String getDefaultName();
 
     /**
-     * ´Óid attributeÖĞÈ¡µÃbean name£¬¼ÙÈçÎ´Ö¸¶¨£¬Ôò´Ó<code>getDefaultName()</code>ÖĞÈ¡µÃÄ¬ÈÏÃû¡£
+     * ä»id attributeä¸­å–å¾—bean nameï¼Œå‡å¦‚æœªæŒ‡å®šï¼Œåˆ™ä»<code>getDefaultName()</code>ä¸­å–å¾—é»˜è®¤åã€‚
      */
     @Override
     protected final String resolveId(Element element, AbstractBeanDefinition definition, ParserContext parserContext) {
@@ -54,7 +54,7 @@ public abstract class AbstractNamedBeanDefinitionParser<T> extends AbstractSingl
     }
 
     /**
-     * ¼ÙÈçµ±Ç°bean nameÎªÄ¬ÈÏÃû£¬ÔòÍ¬Ê±×¢²áÄ¬ÈÏµÄaliases¡£
+     * å‡å¦‚å½“å‰bean nameä¸ºé»˜è®¤åï¼Œåˆ™åŒæ—¶æ³¨å†Œé»˜è®¤çš„aliasesã€‚
      */
     @Override
     protected void registerBeanDefinition(BeanDefinitionHolder definition, BeanDefinitionRegistry registry) {

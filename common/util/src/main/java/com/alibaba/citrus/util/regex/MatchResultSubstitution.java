@@ -28,15 +28,15 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ÓÃ<code>MatchResult</code>À´Ìæ»»×Ö·û´®ÖĞµÄ±äÁ¿¡£Í¨³£±äÁ¿ÒÔ<code>'$'</code>¿ªÊ¼£¬ÀıÈç£º
- * <code>$1</code>£¬<code>$2</code>µÈ£¬µ«<code>MatchResultSubstitution</code>ÀàÖ§³Ö¶Ô¶à¸ö
- * <code>MatchResult</code>±äÁ¿½øĞĞÌæ»»£¬·Ö±ğ¶ÔÓ¦²»Í¬µÄÇ°×º¡£
+ * ç”¨<code>MatchResult</code>æ¥æ›¿æ¢å­—ç¬¦ä¸²ä¸­çš„å˜é‡ã€‚é€šå¸¸å˜é‡ä»¥<code>'$'</code>å¼€å§‹ï¼Œä¾‹å¦‚ï¼š
+ * <code>$1</code>ï¼Œ<code>$2</code>ç­‰ï¼Œä½†<code>MatchResultSubstitution</code>ç±»æ”¯æŒå¯¹å¤šä¸ª
+ * <code>MatchResult</code>å˜é‡è¿›è¡Œæ›¿æ¢ï¼Œåˆ†åˆ«å¯¹åº”ä¸åŒçš„å‰ç¼€ã€‚
  * 
  * @author Michael Zhou
  */
 public class MatchResultSubstitution extends Substitution {
     /**
-     * ´ú±íÒ»¸ö³É¹¦µ«ÎŞÄÚÈİµÄÆ¥Åä½á¹û¡£
+     * ä»£è¡¨ä¸€ä¸ªæˆåŠŸä½†æ— å†…å®¹çš„åŒ¹é…ç»“æœã€‚
      */
     public static final MatchResult EMPTY_MATCH_RESULT = createEmptyMatchResult();
 
@@ -51,21 +51,21 @@ public class MatchResultSubstitution extends Substitution {
     }
 
     /**
-     * ´´½¨Ò»¸öÌæ»»¡£Ìæ»»ËùÓĞ<code>$num</code>Ëù´ú±íµÄ±äÁ¿¡£
+     * åˆ›å»ºä¸€ä¸ªæ›¿æ¢ã€‚æ›¿æ¢æ‰€æœ‰<code>$num</code>æ‰€ä»£è¡¨çš„å˜é‡ã€‚
      */
     public MatchResultSubstitution() {
         this("$", EMPTY_MATCH_RESULT);
     }
 
     /**
-     * ´´½¨Ò»¸öÌæ»»¡£Ìæ»»ËùÓĞ<code>$num</code>Ëù´ú±íµÄ±äÁ¿¡£
+     * åˆ›å»ºä¸€ä¸ªæ›¿æ¢ã€‚æ›¿æ¢æ‰€æœ‰<code>$num</code>æ‰€ä»£è¡¨çš„å˜é‡ã€‚
      */
     public MatchResultSubstitution(MatchResult result) {
         this("$", result);
     }
 
     /**
-     * ÉèÖÃĞÂÆ¥Åä¡£
+     * è®¾ç½®æ–°åŒ¹é…ã€‚
      */
     public void setMatchResult(MatchResult result) {
         if (results.length != 1) {
@@ -76,7 +76,7 @@ public class MatchResultSubstitution extends Substitution {
     }
 
     /**
-     * ÉèÖÃĞÂÆ¥Åä¡£
+     * è®¾ç½®æ–°åŒ¹é…ã€‚
      */
     public void setMatchResults(MatchResult... results) {
         assertTrue(!isEmptyArray(results), "results");
@@ -91,7 +91,7 @@ public class MatchResultSubstitution extends Substitution {
     }
 
     /**
-     * ´´½¨Ò»¸öÌæ»»¡£½«ËùÓĞÖ¸¶¨Ç°×ºËù´ú±íµÄ±äÁ¿Ìæ»»³ÉÏàÓ¦<code>MatchResult.group(num)</code>µÄÖµ¡£
+     * åˆ›å»ºä¸€ä¸ªæ›¿æ¢ã€‚å°†æ‰€æœ‰æŒ‡å®šå‰ç¼€æ‰€ä»£è¡¨çš„å˜é‡æ›¿æ¢æˆç›¸åº”<code>MatchResult.group(num)</code>çš„å€¼ã€‚
      */
     public MatchResultSubstitution(String replacementPrefixes, MatchResult... results) {
         super(replacementPrefixes);
@@ -101,14 +101,14 @@ public class MatchResultSubstitution extends Substitution {
     }
 
     /**
-     * È¡µÃÆ¥Åä¡£
+     * å–å¾—åŒ¹é…ã€‚
      */
     public MatchResult getMatch() {
         return getMatch(0);
     }
 
     /**
-     * È¡µÃÆ¥Åä¡£
+     * å–å¾—åŒ¹é…ã€‚
      */
     public MatchResult getMatch(int index) {
         return results[index];

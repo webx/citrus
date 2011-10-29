@@ -29,7 +29,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * <code>MapTest</code>²âÊÔ<code>java.util.Map</code>µÄ»ù±¾ĞĞÎª¡£
+ * <code>MapTest</code>æµ‹è¯•<code>java.util.Map</code>çš„åŸºæœ¬è¡Œä¸ºã€‚
  * 
  * @author Michael Zhou
  */
@@ -40,18 +40,18 @@ public abstract class AbstractMapTests extends AbstractTests {
 
     @Before
     public void init() {
-        // map1²âÊÔÒ»°ãÇé¿ö.
+        // map1æµ‹è¯•ä¸€èˆ¬æƒ…å†µ.
         map1 = createMap();
         map1.put("aaa", "111");
         map1.put("bbb", "222");
         map1.put("ccc", "333");
 
-        // map2²âÊÔkeyºÍvalueÎªnullµÄÇé¿ö.
+        // map2æµ‹è¯•keyå’Œvalueä¸ºnullçš„æƒ…å†µ.
         map2 = createMap();
         map2.put(null, "111");
         map2.put("aaa", null);
 
-        // map3Îª¿Õ.
+        // map3ä¸ºç©º.
         map3 = createMap();
     }
 
@@ -159,26 +159,26 @@ public abstract class AbstractMapTests extends AbstractTests {
 
     @Test
     public void put() {
-        assertEquals("111", map1.put("aaa", "111+111")); // Ìæ»»aaa
+        assertEquals("111", map1.put("aaa", "111+111")); // æ›¿æ¢aaa
 
-        assertEquals(null, map1.put("ddd", "222+222")); // ĞÂÔöddd
+        assertEquals(null, map1.put("ddd", "222+222")); // æ–°å¢ddd
 
         assertEquals("111+111", map1.get("aaa"));
         assertEquals("222+222", map1.get("ddd"));
         assertEquals(4, map1.size());
 
-        assertEquals("111", map2.put(null, "111+111")); // Ìæ»»null
+        assertEquals("111", map2.put(null, "111+111")); // æ›¿æ¢null
 
-        assertEquals(null, map2.put("aaa", "222+222")); // Ìæ»»aaa
+        assertEquals(null, map2.put("aaa", "222+222")); // æ›¿æ¢aaa
 
-        assertEquals(null, map2.put("ccc", "333+333")); // ĞÂÔöccc
+        assertEquals(null, map2.put("ccc", "333+333")); // æ–°å¢ccc
 
         assertEquals("111+111", map2.get(null));
         assertEquals("222+222", map2.get("aaa"));
         assertEquals("333+333", map2.get("ccc"));
         assertEquals(3, map2.size());
 
-        assertEquals(null, map3.put("aaa", "111+111")); // ĞÂÔöaaa
+        assertEquals(null, map3.put("aaa", "111+111")); // æ–°å¢aaa
 
         assertEquals("111+111", map3.get("aaa"));
         assertEquals(1, map3.size());
@@ -188,7 +188,7 @@ public abstract class AbstractMapTests extends AbstractTests {
     public void putAll() {
         Map<Object, Object> newMap;
 
-        // ¼ÓÈë¿Õmap.
+        // åŠ å…¥ç©ºmap.
         newMap = newMap();
         map1.putAll(newMap);
         map2.putAll(newMap);
@@ -202,7 +202,7 @@ public abstract class AbstractMapTests extends AbstractTests {
         assertEquals(null, map2.get("aaa"));
         assertEquals("111", map2.get(null));
 
-        // ¼ÓÈë·Ç¿ÕµÄmap.
+        // åŠ å…¥éç©ºçš„map.
         newMap = newMap();
         newMap.put("aaa", "111+111");
         newMap.put("ddd", "444+444");
@@ -214,20 +214,20 @@ public abstract class AbstractMapTests extends AbstractTests {
         assertEquals(6, map1.size());
         assertEquals(4, map2.size());
         assertEquals(4, map3.size());
-        assertEquals("111+111", map1.get("aaa")); // ±»Ìæ»»
-        assertEquals("222", map1.get("bbb")); // ²»±ä
-        assertEquals("333", map1.get("ccc")); // ²»±ä
-        assertEquals("444+444", map1.get("ddd")); // ĞÂÔöddd
-        assertEquals(null, map1.get("eee")); // ĞÂÔöeee
-        assertEquals("111+111", map1.get(null)); // ĞÂÔönull
-        assertEquals("111+111", map2.get("aaa")); // ±»Ìæ»»
-        assertEquals("111+111", map2.get(null)); // ±»Ìæ»»
-        assertEquals("444+444", map2.get("ddd")); // ĞÂÔöddd
-        assertEquals(null, map2.get("eee")); // ĞÂÔöeee
-        assertEquals("111+111", map3.get("aaa")); // ĞÂÔöaaa
-        assertEquals("111+111", map3.get(null)); // ĞÂÔönull
-        assertEquals("444+444", map3.get("ddd")); // ĞÂÔöddd
-        assertEquals(null, map3.get("eee")); // ĞÂÔöeee
+        assertEquals("111+111", map1.get("aaa")); // è¢«æ›¿æ¢
+        assertEquals("222", map1.get("bbb")); // ä¸å˜
+        assertEquals("333", map1.get("ccc")); // ä¸å˜
+        assertEquals("444+444", map1.get("ddd")); // æ–°å¢ddd
+        assertEquals(null, map1.get("eee")); // æ–°å¢eee
+        assertEquals("111+111", map1.get(null)); // æ–°å¢null
+        assertEquals("111+111", map2.get("aaa")); // è¢«æ›¿æ¢
+        assertEquals("111+111", map2.get(null)); // è¢«æ›¿æ¢
+        assertEquals("444+444", map2.get("ddd")); // æ–°å¢ddd
+        assertEquals(null, map2.get("eee")); // æ–°å¢eee
+        assertEquals("111+111", map3.get("aaa")); // æ–°å¢aaa
+        assertEquals("111+111", map3.get(null)); // æ–°å¢null
+        assertEquals("444+444", map3.get("ddd")); // æ–°å¢ddd
+        assertEquals(null, map3.get("eee")); // æ–°å¢eee
     }
 
     @Test
@@ -260,8 +260,8 @@ public abstract class AbstractMapTests extends AbstractTests {
 
         try {
             copy = cloneMap(map1);
-            assertNotSame(map1, copy); // ²»Í¬
-            assertEquals(map1, copy); // µ«ÏàµÈ
+            assertNotSame(map1, copy); // ä¸åŒ
+            assertEquals(map1, copy); // ä½†ç›¸ç­‰
             assertEquals(map1.hashCode(), copy.hashCode());
 
             assertEquals(3, copy.size());
@@ -270,8 +270,8 @@ public abstract class AbstractMapTests extends AbstractTests {
             assertEquals("333", copy.get("ccc"));
 
             copy = cloneMap(map2);
-            assertNotSame(map2, copy); // ²»Í¬
-            assertEquals(map2, copy); // µ«ÏàµÈ
+            assertNotSame(map2, copy); // ä¸åŒ
+            assertEquals(map2, copy); // ä½†ç›¸ç­‰
             assertEquals(map2.hashCode(), copy.hashCode());
 
             assertEquals(2, copy.size());
@@ -280,13 +280,13 @@ public abstract class AbstractMapTests extends AbstractTests {
             assertTrue(copy.containsKey("aaa"));
 
             copy = cloneMap(map3);
-            assertNotSame(map3, copy); // ²»Í¬
-            assertEquals(map3, copy); // µ«ÏàµÈ
+            assertNotSame(map3, copy); // ä¸åŒ
+            assertEquals(map3, copy); // ä½†ç›¸ç­‰
             assertEquals(map3.hashCode(), copy.hashCode());
 
             assertEquals(0, copy.size());
         } catch (UnsupportedOperationException e) {
-            // ±»²âÊÔµÄMap²»Ö§³Öclone
+            // è¢«æµ‹è¯•çš„Mapä¸æ”¯æŒclone
         }
     }
 
@@ -308,10 +308,10 @@ public abstract class AbstractMapTests extends AbstractTests {
     }
 
     /**
-     * ½«map.toString()µÄ½á¹ûÖØĞÂÅÅĞòºóÊä³ö.
+     * å°†map.toString()çš„ç»“æœé‡æ–°æ’åºåè¾“å‡º.
      * 
-     * @param map Òª´¦ÀíµÄmap
-     * @return ÖØĞÂÅÅĞòºóµÄ½á¹û
+     * @param map è¦å¤„ç†çš„map
+     * @return é‡æ–°æ’åºåçš„ç»“æœ
      */
     private List<String> parseToString(Map<Object, Object> map) {
         List<String> list = createArrayList();
@@ -340,8 +340,8 @@ public abstract class AbstractMapTests extends AbstractTests {
 
         try {
             copy = cloneBySerialization(map1);
-            assertNotSame(map1, copy); // ²»Í¬
-            assertEquals(map1, copy); // µ«ÏàµÈ
+            assertNotSame(map1, copy); // ä¸åŒ
+            assertEquals(map1, copy); // ä½†ç›¸ç­‰
             assertEquals(map1.hashCode(), copy.hashCode());
 
             assertEquals(3, copy.size());
@@ -350,8 +350,8 @@ public abstract class AbstractMapTests extends AbstractTests {
             assertEquals("333", copy.get("ccc"));
 
             copy = cloneBySerialization(map2);
-            assertNotSame(map2, copy); // ²»Í¬
-            assertEquals(map2, copy); // µ«ÏàµÈ
+            assertNotSame(map2, copy); // ä¸åŒ
+            assertEquals(map2, copy); // ä½†ç›¸ç­‰
             assertEquals(map2.hashCode(), copy.hashCode());
 
             assertEquals(2, copy.size());
@@ -360,25 +360,25 @@ public abstract class AbstractMapTests extends AbstractTests {
             assertTrue(copy.containsKey("aaa"));
 
             copy = cloneBySerialization(map3);
-            assertNotSame(map3, copy); // ²»Í¬
-            assertEquals(map3, copy); // µ«ÏàµÈ
+            assertNotSame(map3, copy); // ä¸åŒ
+            assertEquals(map3, copy); // ä½†ç›¸ç­‰
             assertEquals(map3.hashCode(), copy.hashCode());
 
             assertEquals(0, copy.size());
         } catch (UnsupportedOperationException e) {
-            // ±»²âÊÔµÄMap²»Ö§³Öserialize
+            // è¢«æµ‹è¯•çš„Mapä¸æ”¯æŒserialize
         }
     }
 
     /**
-     * ²âÊÔµ±hash±íÖĞµÄÏîÊı³¬¹ıãĞÖµÊ±µÄ±íÏÖ.
+     * æµ‹è¯•å½“hashè¡¨ä¸­çš„é¡¹æ•°è¶…è¿‡é˜ˆå€¼æ—¶çš„è¡¨ç°.
      */
     @Test
     public void resize() {
         int capacity = 0;
         int threshold = 0;
 
-        // È¡µÃ³õÊ¼ÈİÁ¿ºÍãĞÖµ, Èç¹ûÖÀ³öexception, Ôò²»²âÊÔ´ËÏî.
+        // å–å¾—åˆå§‹å®¹é‡å’Œé˜ˆå€¼, å¦‚æœæ·å‡ºexception, åˆ™ä¸æµ‹è¯•æ­¤é¡¹.
         try {
             capacity = getCapacity(map3);
             threshold = getThreshold(map3);
@@ -386,17 +386,17 @@ public abstract class AbstractMapTests extends AbstractTests {
             return;
         }
 
-        // Ô¤¼ÆÀ©ÈİÈı´Î.
+        // é¢„è®¡æ‰©å®¹ä¸‰æ¬¡.
         int max = threshold * 4 + 1;
 
-        /** ·ÅÈë×ã¹»¶àµÄÏîµ½hash±íÖĞ, È·±£ÏîÊı³¬¹ıãĞÖµ. */
+        /** æ”¾å…¥è¶³å¤Ÿå¤šçš„é¡¹åˆ°hashè¡¨ä¸­, ç¡®ä¿é¡¹æ•°è¶…è¿‡é˜ˆå€¼. */
         String key = "";
 
         for (int i = 0; i < max; i++) {
             key += "a";
             map3.put(key, new Integer(i));
 
-            if (map3.size() > threshold) { // À©Èİ!
+            if (map3.size() > threshold) { // æ‰©å®¹!
                 threshold *= 2;
                 capacity *= 2;
             }
@@ -405,7 +405,7 @@ public abstract class AbstractMapTests extends AbstractTests {
             assertEquals(threshold, getThreshold(map3));
         }
 
-        /** ¶Á³öËùÓĞÏî, ²¢ÅÅĞò²âÊÔÕıÈ·ĞÔ. */
+        /** è¯»å‡ºæ‰€æœ‰é¡¹, å¹¶æ’åºæµ‹è¯•æ­£ç¡®æ€§. */
         List<String> list;
 
         assertNotNull(list = parseToString(map3));

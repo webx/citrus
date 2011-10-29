@@ -21,47 +21,47 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * ÔöÁ¿µØ½«Êı¾İÔ´Ğ´Èëµ½Ö¸¶¨Êä³öÁ÷µÄÒıÇæ¡£
+ * å¢é‡åœ°å°†æ•°æ®æºå†™å…¥åˆ°æŒ‡å®šè¾“å‡ºæµçš„å¼•æ“ã€‚
  * <p>
- * <code>OutputEngine</code>ÓĞÊ²Ã´ÓÃ£¿¾ÙÀıËµÃ÷¡£ <code>GZIPInputStream</code>ÊÇ¶ÔÑ¹ËõÁ÷½øĞĞ½âÑ¹Ëõ£º
+ * <code>OutputEngine</code>æœ‰ä»€ä¹ˆç”¨ï¼Ÿä¸¾ä¾‹è¯´æ˜ã€‚ <code>GZIPInputStream</code>æ˜¯å¯¹å‹ç¼©æµè¿›è¡Œè§£å‹ç¼©ï¼š
  * </p>
  * 
  * <pre>
- * read Ô­Ê¼Êı¾İ &lt;- decompress &lt;- compressed data stream
+ * read åŸå§‹æ•°æ® &lt;- decompress &lt;- compressed data stream
  * </pre>
  * <p>
- * <code>GZIPOutputStream</code>ÊÇ¶ÔÊä³öÁ÷½øĞĞÑ¹Ëõ£º
+ * <code>GZIPOutputStream</code>æ˜¯å¯¹è¾“å‡ºæµè¿›è¡Œå‹ç¼©ï¼š
  * </p>
  * 
  * <pre>
- * write Ô­Ê¼Êı¾İ -&gt; compress -&gt; compressed data stream
+ * write åŸå§‹æ•°æ® -&gt; compress -&gt; compressed data stream
  * </pre>
  * <p>
- * µ«ÊÇJDKÖĞ²»´æÔÚÕâÑùÒ»¸öÁ÷£º
+ * ä½†æ˜¯JDKä¸­ä¸å­˜åœ¨è¿™æ ·ä¸€ä¸ªæµï¼š
  * </p>
  * 
  * <pre>
- * read compressed data &lt;- compress &lt;- Ô­Ê¼Êı¾İÁ÷
+ * read compressed data &lt;- compress &lt;- åŸå§‹æ•°æ®æµ
  * </pre>
  * <p>
- * ÀûÓÃOutputEngine¾Í¿ÉÒÔÊµÏÖÕâÑùµÄÁ÷¡£
+ * åˆ©ç”¨OutputEngineå°±å¯ä»¥å®ç°è¿™æ ·çš„æµã€‚
  * </p>
  * <p>
- * ±¾´úÂëÒÆÖ²×ÔIBM developer worksÎÄÕÂ£º
+ * æœ¬ä»£ç ç§»æ¤è‡ªIBM developer worksæ–‡ç« ï¼š
  * </p>
  * <ul>
  * <li><a
- * href="http://www.ibm.com/developerworks/cn/java/j-io1/index.shtml">³¹µ××ª±äÁ÷£¬µÚ 1
- * ²¿·Ö£º´ÓÊä³öÁ÷ÖĞ¶ÁÈ¡</a>
+ * href="http://www.ibm.com/developerworks/cn/java/j-io1/index.shtml">å½»åº•è½¬å˜æµï¼Œç¬¬ 1
+ * éƒ¨åˆ†ï¼šä»è¾“å‡ºæµä¸­è¯»å–</a>
  * <li><a
- * href="http://www.ibm.com/developerworks/cn/java/j-io2/index.shtml">³¹µ××ª±äÁ÷£¬µÚ 2
- * ²¿·Ö£ºÓÅ»¯ Java ÄÚ²¿ I/O</a>
+ * href="http://www.ibm.com/developerworks/cn/java/j-io2/index.shtml">å½»åº•è½¬å˜æµï¼Œç¬¬ 2
+ * éƒ¨åˆ†ï¼šä¼˜åŒ– Java å†…éƒ¨ I/O</a>
  * </ul>
  * 
  * @author Michael Zhou
  */
 public interface OutputEngine {
-    /** Ä¬ÈÏµÄÊä³öÁ÷¹¤³§, Ö±½Ó·µ»ØÖ¸¶¨µÄÊä³öÁ÷. */
+    /** é»˜è®¤çš„è¾“å‡ºæµå·¥å‚, ç›´æ¥è¿”å›æŒ‡å®šçš„è¾“å‡ºæµ. */
     OutputStreamFactory DEFAULT_OUTPUT_STREAM_FACTORY = new OutputStreamFactory() {
         public OutputStream getOutputStream(OutputStream out) {
             return out;
@@ -69,39 +69,39 @@ public interface OutputEngine {
     };
 
     /**
-     * ³õÊ¼»¯Êä³öÒıÇæ, Í¨³£<code>OutputEngine</code>µÄÊµÏÖ»á½«Ò»¸ö
-     * <code>FilterOutputStream</code>Á¬½Óµ½Ö¸¶¨µÄÊä³öÁ÷ÖĞ.
+     * åˆå§‹åŒ–è¾“å‡ºå¼•æ“, é€šå¸¸<code>OutputEngine</code>çš„å®ç°ä¼šå°†ä¸€ä¸ª
+     * <code>FilterOutputStream</code>è¿æ¥åˆ°æŒ‡å®šçš„è¾“å‡ºæµä¸­.
      * 
-     * @param out Êä³öµ½Ö¸¶¨µÄÊä³öÁ÷
-     * @throws IOException ÊäÈëÊä³öÒì³£
+     * @param out è¾“å‡ºåˆ°æŒ‡å®šçš„è¾“å‡ºæµ
+     * @throws IOException è¾“å…¥è¾“å‡ºå¼‚å¸¸
      */
     void open(OutputStream out) throws IOException;
 
     /**
-     * Ö´ĞĞÒ»´ÎÊä³öÒıÇæ. ´Ë²Ù×÷ÔÚ<code>OutputEngine</code>µÄÉúÃüÆÚÖĞ»á±»Ö´ĞĞ¶à´Î,
-     * Ã¿´Î¶¼½«ÉÙÁ¿Êı¾İĞ´Èëµ½³õÊ¼»¯Ê±Ö¸¶¨µÄÊä³öÁ÷.
+     * æ‰§è¡Œä¸€æ¬¡è¾“å‡ºå¼•æ“. æ­¤æ“ä½œåœ¨<code>OutputEngine</code>çš„ç”Ÿå‘½æœŸä¸­ä¼šè¢«æ‰§è¡Œå¤šæ¬¡,
+     * æ¯æ¬¡éƒ½å°†å°‘é‡æ•°æ®å†™å…¥åˆ°åˆå§‹åŒ–æ—¶æŒ‡å®šçš„è¾“å‡ºæµ.
      * 
-     * @throws IOException ÊäÈëÊä³öÒì³£
+     * @throws IOException è¾“å…¥è¾“å‡ºå¼‚å¸¸
      */
     void execute() throws IOException;
 
     /**
-     * É¨Î²¹¤×÷. µ±ËùÓĞµÄÊä³ö¶¼Íê³ÉÒÔºó, ´Ë·½·¨±»µ÷ÓÃ.
+     * æ‰«å°¾å·¥ä½œ. å½“æ‰€æœ‰çš„è¾“å‡ºéƒ½å®Œæˆä»¥å, æ­¤æ–¹æ³•è¢«è°ƒç”¨.
      * 
-     * @throws IOException ÊäÈëÊä³öÒì³£
+     * @throws IOException è¾“å…¥è¾“å‡ºå¼‚å¸¸
      */
     void close() throws IOException;
 
     /**
-     * ´´½¨Êä³öÁ÷µÄ¹¤³§.
+     * åˆ›å»ºè¾“å‡ºæµçš„å·¥å‚.
      */
     interface OutputStreamFactory {
         /**
-         * ´´½¨Êä³öÁ÷, Í¨³£·µ»ØÒ»¸ö<code>FilterOutputStream</code>Á¬½Óµ½Ö¸¶¨µÄÊä³öÁ÷ÖĞ.
+         * åˆ›å»ºè¾“å‡ºæµ, é€šå¸¸è¿”å›ä¸€ä¸ª<code>FilterOutputStream</code>è¿æ¥åˆ°æŒ‡å®šçš„è¾“å‡ºæµä¸­.
          * 
-         * @param out Êä³öµ½Ö¸¶¨µÄÊä³öÁ÷
-         * @return Êä³öÁ÷
-         * @throws IOException ÊäÈëÊä³öÒì³£
+         * @param out è¾“å‡ºåˆ°æŒ‡å®šçš„è¾“å‡ºæµ
+         * @return è¾“å‡ºæµ
+         * @throws IOException è¾“å…¥è¾“å‡ºå¼‚å¸¸
          */
         OutputStream getOutputStream(OutputStream out) throws IOException;
     }

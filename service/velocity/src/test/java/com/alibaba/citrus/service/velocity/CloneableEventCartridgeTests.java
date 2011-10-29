@@ -62,7 +62,7 @@ public class CloneableEventCartridgeTests {
         eventCartridge.initOnce(rsvc);
         assertSame(rsvc, handler.getRuntimeServices());
 
-        // 第二次初始化无效
+        // 绗簩娆″垵濮嬪寲鏃犳晥
         eventCartridge.initOnce(new RuntimeInstance());
         assertSame(rsvc, handler.getRuntimeServices());
     }
@@ -83,7 +83,7 @@ public class CloneableEventCartridgeTests {
 
     @Test
     public void addEventHandlers() {
-        // 正常handler
+        // 姝ｅ父handler
         assertTrue(eventCartridge.addEventHandler(new MyHandler()));
 
         // not supported handler

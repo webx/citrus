@@ -30,7 +30,7 @@ import com.alibaba.citrus.logconfig.LogConfigurator;
 import com.alibaba.citrus.springext.Schemas;
 
 /**
- * ÔÚÃüÁîĞĞÉÏµ÷ÓÃ<code>SchemaExporter</code>£¬¿ÉÒÔ°ÑschemaÊä³öµ½ÎÄ¼şÖĞ¡£
+ * åœ¨å‘½ä»¤è¡Œä¸Šè°ƒç”¨<code>SchemaExporter</code>ï¼Œå¯ä»¥æŠŠschemaè¾“å‡ºåˆ°æ–‡ä»¶ä¸­ã€‚
  * 
  * @author Michael Zhou
  */

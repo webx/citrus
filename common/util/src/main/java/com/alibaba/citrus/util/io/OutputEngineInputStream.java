@@ -22,15 +22,15 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * ´Ó<code>OutputEngine</code>È¡µÃÊı¾İµÄÊäÈëÁ÷, ×÷Îª<code>PipedInputStream</code>µÄÌæ»»·½°¸,
- * Õâ¸öÀàÌá¹©ÁË¼«¸ßµÄĞÔÄÜ. ±¾´úÂëÒÆÖ²×ÔIBM developer worksÎÄÕÂ£º
+ * ä»<code>OutputEngine</code>å–å¾—æ•°æ®çš„è¾“å…¥æµ, ä½œä¸º<code>PipedInputStream</code>çš„æ›¿æ¢æ–¹æ¡ˆ,
+ * è¿™ä¸ªç±»æä¾›äº†æé«˜çš„æ€§èƒ½. æœ¬ä»£ç ç§»æ¤è‡ªIBM developer worksæ–‡ç« ï¼š
  * <ul>
  * <li><a
- * href="http://www.ibm.com/developerworks/cn/java/j-io1/index.shtml">³¹µ××ª±äÁ÷£¬µÚ 1
- * ²¿·Ö£º´ÓÊä³öÁ÷ÖĞ¶ÁÈ¡</a>
+ * href="http://www.ibm.com/developerworks/cn/java/j-io1/index.shtml">å½»åº•è½¬å˜æµï¼Œç¬¬ 1
+ * éƒ¨åˆ†ï¼šä»è¾“å‡ºæµä¸­è¯»å–</a>
  * <li><a
- * href="http://www.ibm.com/developerworks/cn/java/j-io2/index.shtml">³¹µ××ª±äÁ÷£¬µÚ 2
- * ²¿·Ö£ºÓÅ»¯ Java ÄÚ²¿ I/O</a>
+ * href="http://www.ibm.com/developerworks/cn/java/j-io2/index.shtml">å½»åº•è½¬å˜æµï¼Œç¬¬ 2
+ * éƒ¨åˆ†ï¼šä¼˜åŒ– Java å†…éƒ¨ I/O</a>
  * </ul>
  * 
  * @author Michael Zhou

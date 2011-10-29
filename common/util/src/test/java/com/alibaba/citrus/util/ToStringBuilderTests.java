@@ -30,7 +30,7 @@ import com.alibaba.citrus.util.ToStringBuilder.CollectionBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ²âÊÔ<code>ToStringBuilder</code>¡£
+ * æµ‹è¯•<code>ToStringBuilder</code>ã€‚
  * 
  * @author Michael Zhou
  */

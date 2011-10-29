@@ -29,7 +29,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * <code>RequestContextFactory</code>½Ó¿ÚµÄ»ù±¾ÊµÏÖ¡£
+ * <code>RequestContextFactory</code>æ¥å£çš„åŸºæœ¬å®ç°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -45,7 +45,7 @@ public abstract class AbstractRequestContextFactory<R extends RequestContext> ex
     }
 
     /**
-     * È¡µÃµ±Ç°factory½«Éú³ÉµÄrequest context½Ó¿Ú¡£
+     * å–å¾—å½“å‰factoryå°†ç”Ÿæˆçš„request contextæ¥å£ã€‚
      */
     public final Class<R> getRequestContextInterface() {
         return requestContextInterface;
@@ -56,7 +56,7 @@ public abstract class AbstractRequestContextFactory<R extends RequestContext> ex
     }
 
     /**
-     * ³õÊ¼»¯Íê³Éºó´òÓ¡ÈÕÖ¾¡£
+     * åˆå§‹åŒ–å®Œæˆåæ‰“å°æ—¥å¿—ã€‚
      */
     @Override
     protected void postInit() {
@@ -64,9 +64,9 @@ public abstract class AbstractRequestContextFactory<R extends RequestContext> ex
     }
 
     /**
-     * È¡µÃ×Ö·û´®±íÊ¾¡£
+     * å–å¾—å­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      * 
-     * @return ×Ö·û´®±íÊ¾
+     * @return å­—ç¬¦ä¸²è¡¨ç¤º
      */
     @Override
     public String toString() {

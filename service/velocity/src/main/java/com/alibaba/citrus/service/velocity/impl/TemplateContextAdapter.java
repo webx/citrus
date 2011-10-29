@@ -22,7 +22,7 @@ import org.apache.velocity.context.AbstractContext;
 import com.alibaba.citrus.service.template.TemplateContext;
 
 /**
- * ½«<code>TemplateContext</code>ÊÊÅäµ½velocity contextµÄÊÊÅäÆ÷¡£
+ * å°†<code>TemplateContext</code>é€‚é…åˆ°velocity contextçš„é€‚é…å™¨ã€‚
  * 
  * @author Michael Zhou
  */
@@ -30,21 +30,21 @@ public class TemplateContextAdapter extends AbstractContext {
     private final TemplateContext context;
 
     /**
-     * ´´½¨Ò»¸öÊÊÅäÆ÷¡£
+     * åˆ›å»ºä¸€ä¸ªé€‚é…å™¨ã€‚
      */
     public TemplateContextAdapter(TemplateContext context) {
         this.context = context;
     }
 
     /**
-     * È¡µÃ±»ÊÊÅäµÄ<code>TemplateContext</code>¶ÔÏó¡£
+     * å–å¾—è¢«é€‚é…çš„<code>TemplateContext</code>å¯¹è±¡ã€‚
      */
     public TemplateContext getTemplateContext() {
         return context;
     }
 
     /**
-     * È¡µÃÖ¸¶¨Öµ¡£
+     * å–å¾—æŒ‡å®šå€¼ã€‚
      */
     @Override
     public Object internalGet(String key) {
@@ -52,7 +52,7 @@ public class TemplateContextAdapter extends AbstractContext {
     }
 
     /**
-     * Ìí¼ÓÒ»¸öÖµ£¬Èç¹û²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * æ·»åŠ ä¸€ä¸ªå€¼ï¼Œå¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     @Override
     public Object internalPut(String key, Object value) {
@@ -62,7 +62,7 @@ public class TemplateContextAdapter extends AbstractContext {
     }
 
     /**
-     * ÅĞ¶ÏÊÇ·ñ°üº¬Ö¸¶¨µÄ¼ü¡£
+     * åˆ¤æ–­æ˜¯å¦åŒ…å«æŒ‡å®šçš„é”®ã€‚
      */
     @Override
     public boolean internalContainsKey(Object key) {
@@ -74,7 +74,7 @@ public class TemplateContextAdapter extends AbstractContext {
     }
 
     /**
-     * È¡µÃËùÓĞkeyµÄ¼¯ºÏ¡£
+     * å–å¾—æ‰€æœ‰keyçš„é›†åˆã€‚
      */
     @Override
     public Object[] internalGetKeys() {
@@ -82,7 +82,7 @@ public class TemplateContextAdapter extends AbstractContext {
     }
 
     /**
-     * É¾³ıÒ»¸öÖµ£¬·µ»ØÔ­Öµ¡£
+     * åˆ é™¤ä¸€ä¸ªå€¼ï¼Œè¿”å›åŸå€¼ã€‚
      */
     @Override
     public Object internalRemove(Object key) {

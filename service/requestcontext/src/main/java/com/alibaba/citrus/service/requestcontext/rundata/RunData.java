@@ -30,280 +30,280 @@ import com.alibaba.citrus.service.requestcontext.parser.ParameterParser;
 import com.alibaba.citrus.util.io.ByteArray;
 
 /**
- * <code>RunData</code>Ìá¹©ÁË¶Ô³£ÓÃrequest contextÒ»Õ¾Ê½µÄ·ÃÎÊ·½·¨¡£
+ * <code>RunData</code>æä¾›äº†å¯¹å¸¸ç”¨request contextä¸€ç«™å¼çš„è®¿é—®æ–¹æ³•ã€‚
  * <p>
- * Õâ²»ÊÇÒ»¸ö±Ø±¸µÄrequest context£¬ÄãÒ²¿ÉÒÔÖ±½ÓÈ¡µÃÏÂ²ãµÄrequest
- * contextÀ´´ïµ½Í¬ÑùµÄ¹¦ÄÜ¡£µ«rundataÎªÓ¦ÓÃÌá¹©ÁËÒ»¸ö¿ì½İ·½Ê½¡£
+ * è¿™ä¸æ˜¯ä¸€ä¸ªå¿…å¤‡çš„request contextï¼Œä½ ä¹Ÿå¯ä»¥ç›´æ¥å–å¾—ä¸‹å±‚çš„request
+ * contextæ¥è¾¾åˆ°åŒæ ·çš„åŠŸèƒ½ã€‚ä½†rundataä¸ºåº”ç”¨æä¾›äº†ä¸€ä¸ªå¿«æ·æ–¹å¼ã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface RunData extends RequestContext {
     // ===================================================
-    // HTTP requestĞÅÏ¢¡£
+    // HTTP requestä¿¡æ¯ã€‚
     // ===================================================
 
     /**
-     * È¡µÃËùÓĞquery²ÎÊı¡£
+     * å–å¾—æ‰€æœ‰queryå‚æ•°ã€‚
      * 
-     * @return <code>ParameterParser</code>ÊµÀı
+     * @return <code>ParameterParser</code>å®ä¾‹
      */
     ParameterParser getParameters();
 
     /**
-     * È¡µÃËùÓĞcookie¡£
+     * å–å¾—æ‰€æœ‰cookieã€‚
      * 
-     * @return <code>CookieParser</code>ÊµÀı
+     * @return <code>CookieParser</code>å®ä¾‹
      */
     CookieParser getCookies();
 
     /**
-     * È¡µÃµ±Ç°ÕıÔÚ´¦ÀíµÄHTTPÇëÇó¡£
+     * å–å¾—å½“å‰æ­£åœ¨å¤„ç†çš„HTTPè¯·æ±‚ã€‚
      * 
-     * @return HTTPÇëÇó¶ÔÏó
+     * @return HTTPè¯·æ±‚å¯¹è±¡
      */
     HttpServletRequest getRequest();
 
     /**
-     * È¡µÃµ±Ç°ÕıÔÚ´¦ÀíµÄHTTPÏìÓ¦¡£
+     * å–å¾—å½“å‰æ­£åœ¨å¤„ç†çš„HTTPå“åº”ã€‚
      * 
-     * @return HTTPÏìÓ¦¶ÔÏó
+     * @return HTTPå“åº”å¯¹è±¡
      */
     HttpServletResponse getResponse();
 
     /**
-     * È¡µÃµ±Ç°ÇëÇóµÄHTTP session¡£
+     * å–å¾—å½“å‰è¯·æ±‚çš„HTTP sessionã€‚
      * 
-     * @return HTTP session¶ÔÏó
+     * @return HTTP sessionå¯¹è±¡
      */
     HttpSession getSession();
 
     /**
-     * È¡µÃ´´½¨µ±Ç°servletµÄcontainerµÄÉÏÏÂÎÄĞÅÏ¢¡£
+     * å–å¾—åˆ›å»ºå½“å‰servletçš„containerçš„ä¸Šä¸‹æ–‡ä¿¡æ¯ã€‚
      * 
-     * @return ´´½¨µ±Ç°servletµÄcontainerµÄÉÏÏÂÎÄĞÅÏ¢
+     * @return åˆ›å»ºå½“å‰servletçš„containerçš„ä¸Šä¸‹æ–‡ä¿¡æ¯
      */
     ServletContext getServletContext();
 
     /**
-     * È¡µÃwebÓ¦ÓÃµÄÉÏÏÂÎÄÂ·¾¶£¬Ïàµ±ÓÚ<code>HttpServletRequest.getContextPath</code>Ëù·µ»ØµÄÖµ¡£
+     * å–å¾—webåº”ç”¨çš„ä¸Šä¸‹æ–‡è·¯å¾„ï¼Œç›¸å½“äº<code>HttpServletRequest.getContextPath</code>æ‰€è¿”å›çš„å€¼ã€‚
      * 
-     * @return webÓ¦ÓÃµÄÉÏÏÂÎÄÂ·¾¶
+     * @return webåº”ç”¨çš„ä¸Šä¸‹æ–‡è·¯å¾„
      */
     String getContextPath();
 
     /**
-     * È¡µÃservletÂ·¾¶£¬Ïàµ±ÓÚ<code>HttpServletRequest.getServletPath</code>Ëù·µ»ØµÄÖµ¡£
+     * å–å¾—servletè·¯å¾„ï¼Œç›¸å½“äº<code>HttpServletRequest.getServletPath</code>æ‰€è¿”å›çš„å€¼ã€‚
      * 
-     * @return servletÂ·¾¶
+     * @return servletè·¯å¾„
      */
     String getServletPath();
 
     /**
-     * È¡µÃpath infoÂ·¾¶£¬Ïàµ±ÓÚ<code>HttpServletRequest.getPathInfo</code>Ëù·µ»ØµÄÖµ¡£
+     * å–å¾—path infoè·¯å¾„ï¼Œç›¸å½“äº<code>HttpServletRequest.getPathInfo</code>æ‰€è¿”å›çš„å€¼ã€‚
      * 
-     * @return path infoÂ·¾¶
+     * @return path infoè·¯å¾„
      */
     String getPathInfo();
 
     /**
-     * È¡µÃµ±Ç°µÄrequest URL£¬°üÀ¨query string¡£
+     * å–å¾—å½“å‰çš„request URLï¼ŒåŒ…æ‹¬query stringã€‚
      * 
-     * @return µ±Ç°ÇëÇóµÄrequest URL
+     * @return å½“å‰è¯·æ±‚çš„request URL
      */
     String getRequestURL();
 
     /**
-     * È¡µÃµ±Ç°µÄrequest URL£¬°üÀ¨query string¡£
+     * å–å¾—å½“å‰çš„request URLï¼ŒåŒ…æ‹¬query stringã€‚
      * 
-     * @param withQueryString ÊÇ·ñ°üº¬query string
-     * @return µ±Ç°ÇëÇóµÄrequest URL
+     * @param withQueryString æ˜¯å¦åŒ…å«query string
+     * @return å½“å‰è¯·æ±‚çš„request URL
      */
     String getRequestURL(boolean withQueryString);
 
     /**
-     * ¼ì²éÇëÇóµÄÀàĞÍÊÇ·ñÎªpost¡£
+     * æ£€æŸ¥è¯·æ±‚çš„ç±»å‹æ˜¯å¦ä¸ºpostã€‚
      */
     boolean isPostRequest();
 
     // ===================================================
-    // ¸½¼ÓĞÅÏ¢¡£
+    // é™„åŠ ä¿¡æ¯ã€‚
     // ===================================================
 
     /**
-     * È¡µÃÕıÔÚ·ÃÎÊµ±Ç°Ó¦ÓÃµÄÓÃ»§¡£
+     * å–å¾—æ­£åœ¨è®¿é—®å½“å‰åº”ç”¨çš„ç”¨æˆ·ã€‚
      * 
-     * @return ÓÃ»§¶ÔÏó
+     * @return ç”¨æˆ·å¯¹è±¡
      */
     User getUser();
 
     /**
-     * ÉèÖÃÕıÔÚ·ÃÎÊµ±Ç°Ó¦ÓÃµÄÓÃ»§¡£
+     * è®¾ç½®æ­£åœ¨è®¿é—®å½“å‰åº”ç”¨çš„ç”¨æˆ·ã€‚
      * 
-     * @param user ÓÃ»§¶ÔÏó
+     * @param user ç”¨æˆ·å¯¹è±¡
      */
     void setUser(User user);
 
     /**
-     * È¡µÃºÍµ±Ç°ÇëÇó°ó¶¨µÄ¶ÔÏó¡£µ±ÇëÇó½áÊøÊ±£¬ËùÓĞµÄattributes½«±»Å×Æú¡£
+     * å–å¾—å’Œå½“å‰è¯·æ±‚ç»‘å®šçš„å¯¹è±¡ã€‚å½“è¯·æ±‚ç»“æŸæ—¶ï¼Œæ‰€æœ‰çš„attributeså°†è¢«æŠ›å¼ƒã€‚
      * 
-     * @param key ¶ÔÏóµÄkey
-     * @return ºÍkeyÏà¶ÔÓ¦µÄ¶ÔÏó
+     * @param key å¯¹è±¡çš„key
+     * @return å’Œkeyç›¸å¯¹åº”çš„å¯¹è±¡
      */
     Object getAttribute(String key);
 
     /**
-     * ½«Ö¸¶¨¶ÔÏó°ó¶¨µ½µ±Ç°ÇëÇóÖĞ¡£µ±ÇëÇó½áÊøÊ±£¬ËùÓĞµÄattributes½«±»Å×Æú¡£
+     * å°†æŒ‡å®šå¯¹è±¡ç»‘å®šåˆ°å½“å‰è¯·æ±‚ä¸­ã€‚å½“è¯·æ±‚ç»“æŸæ—¶ï¼Œæ‰€æœ‰çš„attributeså°†è¢«æŠ›å¼ƒã€‚
      * 
-     * @param key ¶ÔÏóµÄkey
-     * @param object ºÍkeyÏà¶ÔÓ¦µÄ¶ÔÏó
+     * @param key å¯¹è±¡çš„key
+     * @param object å’Œkeyç›¸å¯¹åº”çš„å¯¹è±¡
      */
     void setAttribute(String key, Object object);
 
     // ===================================================
-    // HTTP responseĞÅÏ¢¡£
+    // HTTP responseä¿¡æ¯ã€‚
     // ===================================================
 
     /**
-     * È¡µÃcontent type¡£
+     * å–å¾—content typeã€‚
      * 
-     * @return content type£¬°üÀ¨charsetµÄ¶¨Òå
+     * @return content typeï¼ŒåŒ…æ‹¬charsetçš„å®šä¹‰
      */
     String getContentType();
 
     /**
-     * ÉèÖÃcontent type¡£ Èç¹ûcontent type²»°üº¬charset£¬²¢ÇÒ
-     * <code>getCharacterEncoding</code>±»ÉèÖÃ£¬Ôò¼ÓÉÏcharset±ê¼Ç¡£
+     * è®¾ç½®content typeã€‚ å¦‚æœcontent typeä¸åŒ…å«charsetï¼Œå¹¶ä¸”
+     * <code>getCharacterEncoding</code>è¢«è®¾ç½®ï¼Œåˆ™åŠ ä¸Šcharsetæ ‡è®°ã€‚
      * 
      * @param contentType content type
      */
     void setContentType(String contentType);
 
     /**
-     * ÉèÖÃcontent type¡£ Èç¹ûcontent type²»°üº¬charset£¬²¢ÇÒ
-     * <code>getCharacterEncoding</code>±»ÉèÖÃ£¬Ôò¼ÓÉÏcharset±ê¼Ç¡£
+     * è®¾ç½®content typeã€‚ å¦‚æœcontent typeä¸åŒ…å«charsetï¼Œå¹¶ä¸”
+     * <code>getCharacterEncoding</code>è¢«è®¾ç½®ï¼Œåˆ™åŠ ä¸Šcharsetæ ‡è®°ã€‚
      * <p>
-     * Èç¹û<code>appendCharset</code>Îª<code>false</code>£¬Ôòcontent
-     * typeÖĞ½«²»°üº¬charset±ê¼Ç¡£
+     * å¦‚æœ<code>appendCharset</code>ä¸º<code>false</code>ï¼Œåˆ™content
+     * typeä¸­å°†ä¸åŒ…å«charsetæ ‡è®°ã€‚
      * </p>
      * 
      * @param contentType content type
-     * @param appendCharset Êä³ö×Ö·û¼¯
+     * @param appendCharset è¾“å‡ºå­—ç¬¦é›†
      */
     void setContentType(String contentType, boolean appendCharset);
 
     /**
-     * È¡µÃresponseµÄÊä³ö×Ö·û¼¯¡£
+     * å–å¾—responseçš„è¾“å‡ºå­—ç¬¦é›†ã€‚
      */
     String getCharacterEncoding();
 
     /**
-     * ÉèÖÃresponseÊä³ö×Ö·û¼¯¡£×¢Òâ£¬´Ë·½·¨±ØĞëÔÚµÚÒ»´Î<code>getWriter</code>Ö®Ç°Ö´ĞĞ¡£
+     * è®¾ç½®responseè¾“å‡ºå­—ç¬¦é›†ã€‚æ³¨æ„ï¼Œæ­¤æ–¹æ³•å¿…é¡»åœ¨ç¬¬ä¸€æ¬¡<code>getWriter</code>ä¹‹å‰æ‰§è¡Œã€‚
      * 
-     * @param charset Êä³ö×Ö·û¼¯£¬Èç¹ûcharsetÎª<code>null</code>
-     *            £¬Ôò´ÓcontentTypeÖĞÉ¾³ıcharset±ê¼Ç
+     * @param charset è¾“å‡ºå­—ç¬¦é›†ï¼Œå¦‚æœcharsetä¸º<code>null</code>
+     *            ï¼Œåˆ™ä»contentTypeä¸­åˆ é™¤charsetæ ‡è®°
      */
     void setCharacterEncoding(String charset);
 
     /**
-     * È¡µÃÖØ¶¨ÏòµÄURI¡£
+     * å–å¾—é‡å®šå‘çš„URIã€‚
      * 
-     * @return ÖØ¶¨ÏòµÄURI£¬Èç¹ûÃ»ÓĞÖØ¶¨Ïò£¬Ôò·µ»Ø<code>null</code>
+     * @return é‡å®šå‘çš„URIï¼Œå¦‚æœæ²¡æœ‰é‡å®šå‘ï¼Œåˆ™è¿”å›<code>null</code>
      */
     String getRedirectLocation();
 
     /**
-     * ÉèÖÃÖØ¶¨ÏòURI¡£
+     * è®¾ç½®é‡å®šå‘URIã€‚
      * 
-     * @param location ÖØ¶¨ÏòµÄURI
-     * @throws IOException ÊäÈëÊä³öÊ§°Ü
-     * @throws IllegalStateException Èç¹ûresponseÒÑ¾­committed
+     * @param location é‡å®šå‘çš„URI
+     * @throws IOException è¾“å…¥è¾“å‡ºå¤±è´¥
+     * @throws IllegalStateException å¦‚æœresponseå·²ç»committed
      */
     void setRedirectLocation(String location) throws IOException;
 
     /**
-     * ÅĞ¾öÏµÍ³ÊÇ·ñÒÑ¾­ÖØ¶¨Ïò¡£
+     * åˆ¤å†³ç³»ç»Ÿæ˜¯å¦å·²ç»é‡å®šå‘ã€‚
      * 
-     * @return Èç¹û<code>setRedirectLocation</code>±»µ÷ÓÃ£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚æœ<code>setRedirectLocation</code>è¢«è°ƒç”¨ï¼Œåˆ™è¿”å›<code>true</code>
      */
     boolean isRedirected();
 
     /**
-     * È¡µÃ×î½üÉèÖÃµÄHTTP status¡£
+     * å–å¾—æœ€è¿‘è®¾ç½®çš„HTTP statusã€‚
      * 
-     * @return HTTP statusÖµ
+     * @return HTTP statuså€¼
      */
     int getStatusCode();
 
     /**
-     * ÉèÖÃHTTP status¡£
+     * è®¾ç½®HTTP statusã€‚
      * 
-     * @param status HTTP statusÖµ
+     * @param status HTTP statuså€¼
      */
     void setStatusCode(int status);
 
     // ===================================================
-    // Response buffer¿ØÖÆ¡£
+    // Response bufferæ§åˆ¶ã€‚
     // ===================================================
 
     /**
-     * ÉèÖÃÊÇ·ñ½«ËùÓĞĞÅÏ¢±£´æÔÚÄÚ´æÖĞ¡£
+     * è®¾ç½®æ˜¯å¦å°†æ‰€æœ‰ä¿¡æ¯ä¿å­˜åœ¨å†…å­˜ä¸­ã€‚
      * 
-     * @return Èç¹ûÊÇ£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚æœæ˜¯ï¼Œåˆ™è¿”å›<code>true</code>
      */
     boolean isBuffering();
 
     /**
-     * ÉèÖÃbufferÄ£Ê½£¬Èç¹ûÉèÖÃ³É<code>true</code>£¬±íÊ¾½«ËùÓĞĞÅÏ¢±£´æÔÚÄÚ´æÖĞ£¬·ñÔòÖ±½ÓÊä³öµ½Ô­Ê¼responseÖĞ¡£
+     * è®¾ç½®bufferæ¨¡å¼ï¼Œå¦‚æœè®¾ç½®æˆ<code>true</code>ï¼Œè¡¨ç¤ºå°†æ‰€æœ‰ä¿¡æ¯ä¿å­˜åœ¨å†…å­˜ä¸­ï¼Œå¦åˆ™ç›´æ¥è¾“å‡ºåˆ°åŸå§‹responseä¸­ã€‚
      * <p>
-     * ´Ë·½·¨±ØĞëÔÚ<code>getOutputStream</code>ºÍ<code>getWriter</code>·½·¨Ö®Ç°Ö´ĞĞ£¬·ñÔò½«Å×³ö
-     * <code>IllegalStateException</code>¡£
+     * æ­¤æ–¹æ³•å¿…é¡»åœ¨<code>getOutputStream</code>å’Œ<code>getWriter</code>æ–¹æ³•ä¹‹å‰æ‰§è¡Œï¼Œå¦åˆ™å°†æŠ›å‡º
+     * <code>IllegalStateException</code>ã€‚
      * </p>
      * 
-     * @param buffering ÊÇ·ñbufferÄÚÈİ
-     * @throws IllegalStateException <code>getOutputStream</code>»ò
-     *             <code>getWriter</code>·½·¨ÒÑ¾­±»Ö´ĞĞ
+     * @param buffering æ˜¯å¦bufferå†…å®¹
+     * @throws IllegalStateException <code>getOutputStream</code>æˆ–
+     *             <code>getWriter</code>æ–¹æ³•å·²ç»è¢«æ‰§è¡Œ
      */
     void setBuffering(boolean buffering);
 
     /**
-     * ´´½¨ĞÂµÄbuffer£¬±£´æÀÏµÄbuffer¡£
+     * åˆ›å»ºæ–°çš„bufferï¼Œä¿å­˜è€çš„bufferã€‚
      * 
-     * @throws IllegalStateException Èç¹û²»ÔÚbufferÄ£Ê½£¬»ò<code>getWriter</code>¼°
-     *             <code>getOutputStream</code>·½·¨´ÓÎ´±»µ÷ÓÃ
+     * @throws IllegalStateException å¦‚æœä¸åœ¨bufferæ¨¡å¼ï¼Œæˆ–<code>getWriter</code>åŠ
+     *             <code>getOutputStream</code>æ–¹æ³•ä»æœªè¢«è°ƒç”¨
      */
     void pushBuffer();
 
     /**
-     * µ¯³ö×î½üµÄbuffer£¬Èç¹û¶ÑÕ»ÖĞÖ»ÓĞÒ»¸öbuffer£¬Ôòµ¯³öºóÔÙ´´½¨Ò»¸öĞÂµÄ¡£
+     * å¼¹å‡ºæœ€è¿‘çš„bufferï¼Œå¦‚æœå †æ ˆä¸­åªæœ‰ä¸€ä¸ªbufferï¼Œåˆ™å¼¹å‡ºåå†åˆ›å»ºä¸€ä¸ªæ–°çš„ã€‚
      * 
-     * @return ×î½üµÄbufferÄÚÈİ
-     * @throws IllegalStateException Èç¹û²»ÔÚbufferÄ£Ê½£¬»ò<code>getWriter</code>
-     *             ·½·¨Ôø±»µ÷ÓÃ£¬»ò<code>getOutputStream</code>·½·¨´ÓÎ´±»µ÷ÓÃ
+     * @return æœ€è¿‘çš„bufferå†…å®¹
+     * @throws IllegalStateException å¦‚æœä¸åœ¨bufferæ¨¡å¼ï¼Œæˆ–<code>getWriter</code>
+     *             æ–¹æ³•æ›¾è¢«è°ƒç”¨ï¼Œæˆ–<code>getOutputStream</code>æ–¹æ³•ä»æœªè¢«è°ƒç”¨
      */
     ByteArray popByteBuffer();
 
     /**
-     * µ¯³ö×î½üµÄbuffer£¬Èç¹û¶ÑÕ»ÖĞÖ»ÓĞÒ»¸öbuffer£¬Ôòµ¯³öºóÔÙ´´½¨Ò»¸öĞÂµÄ¡£
+     * å¼¹å‡ºæœ€è¿‘çš„bufferï¼Œå¦‚æœå †æ ˆä¸­åªæœ‰ä¸€ä¸ªbufferï¼Œåˆ™å¼¹å‡ºåå†åˆ›å»ºä¸€ä¸ªæ–°çš„ã€‚
      * 
-     * @return ×î½üµÄbufferÄÚÈİ
-     * @throws IllegalStateException Èç¹û²»ÔÚbufferÄ£Ê½£¬»ò<code>getOutputStream</code>
-     *             ·½·¨Ôø±»µ÷ÓÃ£¬»ò<code>getWriter</code>·½·¨´ÓÎ´±»µ÷ÓÃ
+     * @return æœ€è¿‘çš„bufferå†…å®¹
+     * @throws IllegalStateException å¦‚æœä¸åœ¨bufferæ¨¡å¼ï¼Œæˆ–<code>getOutputStream</code>
+     *             æ–¹æ³•æ›¾è¢«è°ƒç”¨ï¼Œæˆ–<code>getWriter</code>æ–¹æ³•ä»æœªè¢«è°ƒç”¨
      */
     String popCharBuffer();
 
     /**
-     * Çå³ıËùÓĞbuffers£¬³£ÓÃÓÚÏÔÊ¾³ö´íĞÅÏ¢¡£
+     * æ¸…é™¤æ‰€æœ‰buffersï¼Œå¸¸ç”¨äºæ˜¾ç¤ºå‡ºé”™ä¿¡æ¯ã€‚
      * 
-     * @throws IllegalStateException Èç¹ûresponseÒÑ¾­commit
+     * @throws IllegalStateException å¦‚æœresponseå·²ç»commit
      */
     void resetBuffer();
 
     /**
-     * ½«Ö¸¶¨µÄ×Ö·û´®¸ù¾İ<code>getCaseFolding()</code>µÄÉèÖÃ£¬×ª»»³ÉÖ¸¶¨´óĞ¡Ğ´ĞÎÊ½¡£
+     * å°†æŒ‡å®šçš„å­—ç¬¦ä¸²æ ¹æ®<code>getCaseFolding()</code>çš„è®¾ç½®ï¼Œè½¬æ¢æˆæŒ‡å®šå¤§å°å†™å½¢å¼ã€‚
      * 
-     * @param str Òª×ª»»µÄ×Ö·û´®
-     * @return ×ª»»ºóµÄ×Ö·û´®
+     * @param str è¦è½¬æ¢çš„å­—ç¬¦ä¸²
+     * @return è½¬æ¢åçš„å­—ç¬¦ä¸²
      */
     String convertCase(String str);
 }

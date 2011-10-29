@@ -22,7 +22,7 @@ import static com.alibaba.citrus.util.Assert.*;
 import com.alibaba.citrus.springext.ContributionType;
 
 /**
- * ÓÃÀ´Ë÷ÒıcontributionsµÄkey¡£
+ * ç”¨æ¥ç´¢å¼•contributionsçš„keyã€‚
  * 
  * @author Michael Zhou
  */

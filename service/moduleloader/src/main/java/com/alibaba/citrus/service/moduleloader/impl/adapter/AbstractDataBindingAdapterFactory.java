@@ -36,7 +36,7 @@ public abstract class AbstractDataBindingAdapterFactory implements ModuleAdapter
     }
 
     /**
-     * È¡µÃ·½·¨£¬Èç¹û²»´æÔÚ»ò²»·ûºÏÒªÇó£¬Ôò·µ»Ønull¡£
+     * å–å¾—æ–¹æ³•ï¼Œå¦‚æœä¸å­˜åœ¨æˆ–ä¸ç¬¦åˆè¦æ±‚ï¼Œåˆ™è¿”å›nullã€‚
      */
     protected Method getMethod(Class<?> moduleClass, String methodName) {
         for (Method candidateMethod : moduleClass.getMethods()) {
@@ -49,7 +49,7 @@ public abstract class AbstractDataBindingAdapterFactory implements ModuleAdapter
     }
 
     /**
-     * ¼ì²é·½·¨£ºpublic»òprotected¡¢·Çstatic¡¢²ÎÊıÈÎÒâ¡£
+     * æ£€æŸ¥æ–¹æ³•ï¼špublicæˆ–protectedã€éstaticã€å‚æ•°ä»»æ„ã€‚
      */
     protected boolean checkMethod(Method method) {
         int modifiers = method.getModifiers();
@@ -66,7 +66,7 @@ public abstract class AbstractDataBindingAdapterFactory implements ModuleAdapter
     }
 
     /**
-     * È¡µÃmethodµ÷ÓÃÆ÷¡£ÆäÖĞ£¬moduleInfoÎªdataResolverFactoryÌá¹©¶îÍâµÄĞÅÏ¢£¬ÓÃÀ´Éú³ÉÊÊµ±µÄresolver¡£
+     * å–å¾—methodè°ƒç”¨å™¨ã€‚å…¶ä¸­ï¼ŒmoduleInfoä¸ºdataResolverFactoryæä¾›é¢å¤–çš„ä¿¡æ¯ï¼Œç”¨æ¥ç”Ÿæˆé€‚å½“çš„resolverã€‚
      */
     protected MethodInvoker getMethodInvoker(FastMethod fastMethod, ModuleInfo moduleInfo, boolean skippable) {
         if (fastMethod == null) {

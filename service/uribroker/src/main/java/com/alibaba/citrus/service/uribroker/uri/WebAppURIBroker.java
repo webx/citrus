@@ -20,7 +20,7 @@ package com.alibaba.citrus.service.uribroker.uri;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Ö§³Öwebapp»·¾³µÄ<code>URIBroker</code>»ùÀà¡£
+ * æ”¯æŒwebappç¯å¢ƒçš„<code>URIBroker</code>åŸºç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -29,7 +29,7 @@ public abstract class WebAppURIBroker extends URIBroker {
     protected boolean hasContextPath;
 
     /**
-     * ½«requestÖĞµÄÔËĞĞÊ±ĞÅÏ¢Ìî³äµ½uri brokerÖĞ¡£
+     * å°†requestä¸­çš„è¿è¡Œæ—¶ä¿¡æ¯å¡«å……åˆ°uri brokerä¸­ã€‚
      */
     @Override
     protected void populateWithRequest(HttpServletRequest request) {
@@ -41,7 +41,7 @@ public abstract class WebAppURIBroker extends URIBroker {
     }
 
     /**
-     * È¡µÃcontext path¡£
+     * å–å¾—context pathã€‚
      */
     public String getContextPath() {
         if (hasContextPath) {
@@ -52,7 +52,7 @@ public abstract class WebAppURIBroker extends URIBroker {
     }
 
     /**
-     * ÉèÖÃcontext path¡£
+     * è®¾ç½®context pathã€‚
      */
     public WebAppURIBroker setContextPath(String contextPath) {
         setPathSegment(CONTEXT_PATH_INDEX, contextPath);

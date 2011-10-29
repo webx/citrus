@@ -41,9 +41,9 @@ import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
 import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 
 /**
- * ´´½¨È«¾ÖµÄrequest context¶ÔÏó£¬ÒÔ¼°request¡¢response¶ÔÏó¡£
+ * åˆ›å»ºå…¨å±€çš„request contextå¯¹è±¡ï¼Œä»¥åŠrequestã€responseå¯¹è±¡ã€‚
  * <p>
- * ÎŞÂÛÊÇºÎÖÖbean¶¼¿ÉÒÔ×¢ÈëÕâĞ©¶ÔÏó£ºrequest context¡¢request¡¢response¡£
+ * æ— è®ºæ˜¯ä½•ç§beanéƒ½å¯ä»¥æ³¨å…¥è¿™äº›å¯¹è±¡ï¼šrequest contextã€requestã€responseã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -57,36 +57,36 @@ public class RequestContextBeanFactoryPostProcessor implements BeanFactoryPostPr
     }
 
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        // ÏÈ×¢²árequest/response/session£¬ÔÙ´ÓbeanFactoryÖĞÈ¡µÃrequestContexts¡£
+        // å…ˆæ³¨å†Œrequest/response/sessionï¼Œå†ä»beanFactoryä¸­å–å¾—requestContextsã€‚
 
-        // ´´½¨È«¾ÖµÄrequestÊµÀı¡£
+        // åˆ›å»ºå…¨å±€çš„requestå®ä¾‹ã€‚
         register(
                 beanFactory,
                 ServletRequest.class,
                 createProxy(HttpServletRequest.class, beanFactory.getBeanClassLoader(), new RequestProxyTargetFactory()));
 
-        // ´´½¨È«¾ÖµÄsessionÊµÀı¡£
+        // åˆ›å»ºå…¨å±€çš„sessionå®ä¾‹ã€‚
         register(beanFactory, HttpSession.class,
                 createProxy(HttpSession.class, beanFactory.getBeanClassLoader(), new SessionProxyTargetFactory()));
 
-        // ´´½¨È«¾ÖµÄresponseÊµÀı¡£
+        // åˆ›å»ºå…¨å±€çš„responseå®ä¾‹ã€‚
         register(
                 beanFactory,
                 ServletResponse.class,
                 createProxy(HttpServletResponse.class, beanFactory.getBeanClassLoader(),
                         new ResponseProxyTargetFactory()));
 
-        // È¡µÃrequestContextsÊ±»á¼¤»îrequestContextsµÄ³õÊ¼»¯¡£
-        // ÓÉÓÚrequest/response/sessionÒÑ¾­±»×¢²á£¬Òò´ËÒÑ¾­¿É±»×¢Èëµ½requestContextsµÄ×Ó¶ÔÏóÖĞ¡£
+        // å–å¾—requestContextsæ—¶ä¼šæ¿€æ´»requestContextsçš„åˆå§‹åŒ–ã€‚
+        // ç”±äºrequest/response/sessionå·²ç»è¢«æ³¨å†Œï¼Œå› æ­¤å·²ç»å¯è¢«æ³¨å…¥åˆ°requestContextsçš„å­å¯¹è±¡ä¸­ã€‚
         RequestContextChainingService requestContexts = (RequestContextChainingService) beanFactory.getBean(
                 requestContextsName, RequestContextChainingService.class);
 
-        // ´´½¨È«¾ÖµÄrequest contextÊµÀı¡£
+        // åˆ›å»ºå…¨å±€çš„request contextå®ä¾‹ã€‚
         for (RequestContextInfo<?> info : requestContexts.getRequestContextInfos()) {
             Class<? extends RequestContext> requestContextInterface = info.getRequestContextInterface();
             Class<? extends RequestContext> requestContextProxyInterface = info.getRequestContextProxyInterface();
 
-            // ±ÜÃâ¶ÔÃ»ÓĞ×Ó½Ó¿ÚµÄrequest context¶ÔÏó´´½¨proxy£¬·ñÔòÃ»ÓĞÒâÒå¡£
+            // é¿å…å¯¹æ²¡æœ‰å­æ¥å£çš„request contextå¯¹è±¡åˆ›å»ºproxyï¼Œå¦åˆ™æ²¡æœ‰æ„ä¹‰ã€‚
             if (!RequestContext.class.equals(requestContextProxyInterface)) {
                 register(
                         beanFactory,

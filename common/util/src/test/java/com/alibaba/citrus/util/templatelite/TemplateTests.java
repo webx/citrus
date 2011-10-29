@@ -57,7 +57,7 @@ public class TemplateTests extends AbstractTemplateTests {
                 , "sub-templates\\s+= \\[" //
                 , "\\[1/3\\] charset=UTF-8" //
                 , "\\[1/5\\] Text with 21 characters:" //
-                , "\\[2/5\\] \\$\\{title:我的标题\\} at .+test06_real_case.txt: Line 7 Column 12" //
+                , "\\[2/5\\] \\$\\{title:鎴戠殑鏍囬\\} at .+test06_real_case.txt: Line 7 Column 12" //
                 , "\\[1/1\\] #itemlist with 3 nodes at .+test06_real_case.txt: Line 14 Column 1" //
         ));
     }

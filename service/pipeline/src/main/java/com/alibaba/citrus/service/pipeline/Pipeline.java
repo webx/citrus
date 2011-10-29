@@ -18,31 +18,31 @@
 package com.alibaba.citrus.service.pipeline;
 
 /**
- * ´ú±íÒ»×éË³ĞòÖ´ĞĞµÄ²Ù×÷£¬ºÃÏóÒºÌåÁ÷¹ıÒ»¸ù¹ÜµÀÒ»Ñù¡£
+ * ä»£è¡¨ä¸€ç»„é¡ºåºæ‰§è¡Œçš„æ“ä½œï¼Œå¥½è±¡æ¶²ä½“æµè¿‡ä¸€æ ¹ç®¡é“ä¸€æ ·ã€‚
  * 
  * @author Michael Zhou
  */
 public interface Pipeline {
     /**
-     * ÌØÊâµÄlabel£¬ÓÃÀ´ÖĞ¶ÏÕû¸öpipelineµÄÖ´ĞĞ¡£
+     * ç‰¹æ®Šçš„labelï¼Œç”¨æ¥ä¸­æ–­æ•´ä¸ªpipelineçš„æ‰§è¡Œã€‚
      */
     String TOP_LABEL = "#TOP";
 
     /**
-     * È¡µÃpipelineµÄ±êÇ©¡£
+     * å–å¾—pipelineçš„æ ‡ç­¾ã€‚
      * <p>
-     * ÕâÊÇÒ»¸ö¿ÉÑ¡µÄ²ÎÊı£¬ÓÃÀ´·½±ãbreakÖĞ¶ÏÖ¸¶¨labelµÄpipeline¡£
+     * è¿™æ˜¯ä¸€ä¸ªå¯é€‰çš„å‚æ•°ï¼Œç”¨æ¥æ–¹ä¾¿breakä¸­æ–­æŒ‡å®šlabelçš„pipelineã€‚
      * </p>
      */
     String getLabel();
 
     /**
-     * ´´½¨Ò»´ÎĞÂµÄÖ´ĞĞ¡£
+     * åˆ›å»ºä¸€æ¬¡æ–°çš„æ‰§è¡Œã€‚
      */
     PipelineInvocationHandle newInvocation();
 
     /**
-     * ´´½¨Ò»´ÎĞÂµÄÖ´ĞĞ£¬²¢½«´Ë´ÎÖ´ĞĞ¿´×÷ÁíÒ»¸öÖ´ĞĞµÄ×Ó¹ı³Ì¡£
+     * åˆ›å»ºä¸€æ¬¡æ–°çš„æ‰§è¡Œï¼Œå¹¶å°†æ­¤æ¬¡æ‰§è¡Œçœ‹ä½œå¦ä¸€ä¸ªæ‰§è¡Œçš„å­è¿‡ç¨‹ã€‚
      */
     PipelineInvocationHandle newInvocation(PipelineContext parentContext);
 }

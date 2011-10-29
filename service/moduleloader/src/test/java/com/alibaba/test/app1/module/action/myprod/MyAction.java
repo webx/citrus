@@ -34,7 +34,7 @@ public class MyAction {
         rundata.setAttribute("handler", "doSomethingInteresting");
     }
 
-    // inner class²»±»°üº¬
+    // inner classä¸è¢«åŒ…å«
     public static class InnerClass {
     }
 }

@@ -163,7 +163,7 @@ public class MessageContextTests extends AbstractFormServiceTests {
     private void assertFieldContext(MessageContext ctx) {
         // field properties
         assertEquals("field1", ctx.get("name"));
-        assertEquals("ÎÒµÄ×Ö¶Î1", ctx.get("displayName"));
+        assertEquals("æˆ‘çš„å­—æ®µ1", ctx.get("displayName"));
         assertEquals("default1", ctx.get("value"));
         assertArrayEquals(new Object[] { "default1" }, ((List<Object>) ctx.get("values")).toArray());
         assertEquals("default1", ctx.get("defaultValue"));

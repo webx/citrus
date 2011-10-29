@@ -32,7 +32,7 @@ import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 import com.meterware.httpunit.HttpUnitUtils;
 
 /**
- * ²âÊÔ<code>RunData</code>¡£
+ * æµ‹è¯•<code>RunData</code>ã€‚
  */
 public class RunDataTests extends AbstractRequestContextsTests<RunData> {
     @BeforeClass
@@ -87,7 +87,7 @@ public class RunDataTests extends AbstractRequestContextsTests<RunData> {
 
     @Test
     public void getRequestURL() throws Exception {
-        // ÎŞ²ÎÊı
+        // æ— å‚æ•°
         invokeNoopServlet("/servlet");
         initRequestContext();
 
@@ -95,7 +95,7 @@ public class RunDataTests extends AbstractRequestContextsTests<RunData> {
         assertEquals("http://www.taobao.com/servlet", requestContext.getRequestURL(true));
         assertEquals("http://www.taobao.com/servlet", requestContext.getRequestURL(false));
 
-        // ÓĞ²ÎÊı
+        // æœ‰å‚æ•°
         invokeNoopServlet("/servlet?aaa=111");
         initRequestContext();
 
@@ -111,7 +111,7 @@ public class RunDataTests extends AbstractRequestContextsTests<RunData> {
 
         assertEquals("hello", requestContext.getParameters().getString("myparam"));
         assertEquals("hello", requestContext.getParameters().getStrings("myparam")[0]);
-        assertEquals("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", requestContext.getParameters().getStrings("myparam")[1]);
+        assertEquals("ä¸­åäººæ°‘å…±å’Œå›½", requestContext.getParameters().getStrings("myparam")[1]);
     }
 
     @Test
@@ -123,8 +123,8 @@ public class RunDataTests extends AbstractRequestContextsTests<RunData> {
         assertEquals("myfile", fileItem.getFieldName());
         assertEquals(new File(srcdir, "smallfile.txt"), new File(fileItem.getName()));
         assertFalse(fileItem.isFormField());
-        assertEquals(new String("ÖĞ»ªÈËÃñ¹²ºÍ¹ú".getBytes("GBK"), "8859_1"), fileItem.getString());
-        assertEquals("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", fileItem.getString("GBK"));
+        assertEquals(new String("ä¸­åäººæ°‘å…±å’Œå›½".getBytes("GBK"), "8859_1"), fileItem.getString());
+        assertEquals("ä¸­åäººæ°‘å…±å’Œå›½", fileItem.getString("GBK"));
         assertTrue(fileItem.isInMemory());
     }
 
@@ -159,7 +159,7 @@ public class RunDataTests extends AbstractRequestContextsTests<RunData> {
     public void charsetAndContentType() throws Exception {
         requestContext.setCharacterEncoding(null);
 
-        // ÔÚÃ»ÉèÖÃcontent typeÖ®Ç°£¬charsetÁ¢¼´ÉúĞ§£¨servlet 2.4£©
+        // åœ¨æ²¡è®¾ç½®content typeä¹‹å‰ï¼Œcharsetç«‹å³ç”Ÿæ•ˆï¼ˆservlet 2.4ï¼‰
         requestContext.setCharacterEncoding("GBK");
         assertEquals(null, requestContext.getContentType());
         assertEquals("GBK", requestContext.getCharacterEncoding());

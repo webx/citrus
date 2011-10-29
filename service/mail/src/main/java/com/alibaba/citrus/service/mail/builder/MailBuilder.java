@@ -48,9 +48,9 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ´´½¨Ò»¸öjavamail¶ÔÏóµÄ¹¤¾ßÀà¡£
+ * åˆ›å»ºä¸€ä¸ªjavamailå¯¹è±¡çš„å·¥å…·ç±»ã€‚
  * <p>
- * <code>MailBuilder</code>¶ÔÏóÊÇÓĞ×´Ì¬µÄ£¬²»ÄÜ±»¶à¸öÏß³ÌÍ¬Ê±Ê¹ÓÃ¡£
+ * <code>MailBuilder</code>å¯¹è±¡æ˜¯æœ‰çŠ¶æ€çš„ï¼Œä¸èƒ½è¢«å¤šä¸ªçº¿ç¨‹åŒæ—¶ä½¿ç”¨ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -73,7 +73,7 @@ public class MailBuilder implements Cloneable {
     }
 
     /**
-     * Éî¶È¸´ÖÆÒ»¸ömail builder¡£
+     * æ·±åº¦å¤åˆ¶ä¸€ä¸ªmail builderã€‚
      */
     @Override
     public MailBuilder clone() {
@@ -103,37 +103,37 @@ public class MailBuilder implements Cloneable {
     }
 
     /**
-     * È¡µÃ´Ëmail builderËùÊôµÄservice¡£
+     * å–å¾—æ­¤mail builderæ‰€å±çš„serviceã€‚
      */
     public MailService getMailService() {
         return mailService;
     }
 
     /**
-     * ÉèÖÃ´Ëmail builderËùÊôµÄservice¡£
+     * è®¾ç½®æ­¤mail builderæ‰€å±çš„serviceã€‚
      */
     public void setMailService(MailService mailService) {
         this.mailService = mailService;
     }
 
     /**
-     * È¡µÃmail builderµÄID¡£
+     * å–å¾—mail builderçš„IDã€‚
      */
     public String getId() {
         return id;
     }
 
     /**
-     * ÉèÖÃmail builderµÄID¡£
+     * è®¾ç½®mail builderçš„IDã€‚
      */
     public void setId(String id) {
         this.id = trimToNull(id);
     }
 
     /**
-     * È¡µÃµ±Ç°mail builderµÄsession¡£
+     * å–å¾—å½“å‰mail builderçš„sessionã€‚
      * <p>
-     * Ö»ÓĞÔÚbuild½×¶Î·½¿ÉµÃµ½´ËÖµ¡£
+     * åªæœ‰åœ¨buildé˜¶æ®µæ–¹å¯å¾—åˆ°æ­¤å€¼ã€‚
      * </p>
      */
     public Session getSession() {
@@ -141,28 +141,28 @@ public class MailBuilder implements Cloneable {
     }
 
     /**
-     * È¡µÃÓÊ¼şµÄÖ÷Ìâ¡£
+     * å–å¾—é‚®ä»¶çš„ä¸»é¢˜ã€‚
      */
     public String getSubject() {
         return subject;
     }
 
     /**
-     * ÉèÖÃÓÊ¼şµÄÖ÷Ìâ¡£
+     * è®¾ç½®é‚®ä»¶çš„ä¸»é¢˜ã€‚
      */
     public void setSubject(String subject) {
         this.subject = trimToNull(subject);
     }
 
     /**
-     * È¡µÃÉú³ÉÓÊ¼şÊ±Ê¹ÓÃµÄ±àÂë×Ö·û¼¯¡£Èç¹ûÎ´Ö¸¶¨£¬Ôò·µ»ØÄ¬ÈÏ×Ö·û¼¯<code>UTF-8</code>¡£
+     * å–å¾—ç”Ÿæˆé‚®ä»¶æ—¶ä½¿ç”¨çš„ç¼–ç å­—ç¬¦é›†ã€‚å¦‚æœæœªæŒ‡å®šï¼Œåˆ™è¿”å›é»˜è®¤å­—ç¬¦é›†<code>UTF-8</code>ã€‚
      */
     public String getCharacterEncoding() {
         return getDefaultCharsetIfNull(charset);
     }
 
     /**
-     * ÉèÖÃÉú³ÉÓÊ¼şÊ±Ê¹ÓÃµÄ±àÂë×Ö·û¼¯¡£
+     * è®¾ç½®ç”Ÿæˆé‚®ä»¶æ—¶ä½¿ç”¨çš„ç¼–ç å­—ç¬¦é›†ã€‚
      */
     public void setCharacterEncoding(String javaCharset) {
         javaCharset = trimToNull(javaCharset);
@@ -197,7 +197,7 @@ public class MailBuilder implements Cloneable {
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàĞÍµÄËùÓĞµØÖ·¡£Èç¹ûÎ´ÉèÖÃ¸ÃÀàĞÍµÄµØÖ·£¬Ôò·µ»Ø¿ÕÊı×é¡£
+     * å–å¾—æŒ‡å®šç±»å‹çš„æ‰€æœ‰åœ°å€ã€‚å¦‚æœæœªè®¾ç½®è¯¥ç±»å‹çš„åœ°å€ï¼Œåˆ™è¿”å›ç©ºæ•°ç»„ã€‚
      */
     public InternetAddress[] getAddresses(MailAddressType addrType) {
         Set<InternetAddress> addrSet = getAddressSet(addrType, false);
@@ -210,7 +210,7 @@ public class MailBuilder implements Cloneable {
     }
 
     /**
-     * Ìí¼ÓÓÊ¼şµØÖ·¡£
+     * æ·»åŠ é‚®ä»¶åœ°å€ã€‚
      */
     public void addAddress(MailAddressType addrType, String addrList) throws InvalidAddressException {
         if (isEmpty(addrList)) {
@@ -237,9 +237,9 @@ public class MailBuilder implements Cloneable {
     }
 
     /**
-     * ÉèÖÃÓÊ¼şµØÖ·¡£
+     * è®¾ç½®é‚®ä»¶åœ°å€ã€‚
      * <p>
-     * ºÍ<code>addAddress</code>·½·¨²»Í¬£¬¸Ã·½·¨Çå³ıÔ­ÓĞµÄµØÖ·¡£
+     * å’Œ<code>addAddress</code>æ–¹æ³•ä¸åŒï¼Œè¯¥æ–¹æ³•æ¸…é™¤åŸæœ‰çš„åœ°å€ã€‚
      * </p>
      */
     public void setAddress(MailAddressType addrType, String addr) throws InvalidAddressException {
@@ -248,19 +248,19 @@ public class MailBuilder implements Cloneable {
     }
 
     /**
-     * È¡µÃÓÊ¼şÄÚÈİ¡£
+     * å–å¾—é‚®ä»¶å†…å®¹ã€‚
      */
     public MailContent getContent() {
         return content;
     }
 
     /**
-     * È¡µÃÖ¸¶¨IDµÄcontent¡£
+     * å–å¾—æŒ‡å®šIDçš„contentã€‚
      * <p>
-     * Èç¹ûcontentÎ´Ö¸¶¨ID£¬ÔòÎŞ·¨ÕÒµ½¡£
+     * å¦‚æœcontentæœªæŒ‡å®šIDï¼Œåˆ™æ— æ³•æ‰¾åˆ°ã€‚
      * </p>
      * <p>
-     * Èç¹ûºÍID¶ÔÓ¦µÄcontentÊµÀıÎ´ÕÒµ½£¬Ôò·µ»Ø<code>null</code>¡£
+     * å¦‚æœå’ŒIDå¯¹åº”çš„contentå®ä¾‹æœªæ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * </p>
      */
     public MailContent getContent(String id) {
@@ -268,7 +268,7 @@ public class MailBuilder implements Cloneable {
     }
 
     /**
-     * ÉèÖÃÓÊ¼şÄÚÈİ¡£
+     * è®¾ç½®é‚®ä»¶å†…å®¹ã€‚
      */
     public void setContent(MailContent content) {
         MailContent oldContent = this.content;
@@ -282,7 +282,7 @@ public class MailBuilder implements Cloneable {
     }
 
     /**
-     * È¡µÃ·¢ĞÅÈÕÆÚ£¬Èç¹ûÎ´ÉèÖÃ£¬ÔòÈ¡µÃµ±Ç°Ê±¼ä¡£
+     * å–å¾—å‘ä¿¡æ—¥æœŸï¼Œå¦‚æœæœªè®¾ç½®ï¼Œåˆ™å–å¾—å½“å‰æ—¶é—´ã€‚
      */
     public Date getSentDate() {
         if (sentDate == null) {
@@ -293,28 +293,28 @@ public class MailBuilder implements Cloneable {
     }
 
     /**
-     * ÉèÖÃ·¢ĞÅÈÕÆÚ¡£
+     * è®¾ç½®å‘ä¿¡æ—¥æœŸã€‚
      */
     public void setSentDate(Date sentDate) {
         this.sentDate = sentDate;
     }
 
     /**
-     * È¡µÃ°ó¶¨µÄ¶ÔÏó¡£
+     * å–å¾—ç»‘å®šçš„å¯¹è±¡ã€‚
      */
     public Object getAttribute(String key) {
         return attributes.get(key);
     }
 
     /**
-     * È¡µÃattributesµÄkey¼¯ºÏ¡£
+     * å–å¾—attributesçš„keyé›†åˆã€‚
      */
     public Set<String> getAttributeKeys() {
         return attributes.keySet();
     }
 
     /**
-     * °ó¶¨Ö¸¶¨µÄ¶ÔÏó¡£
+     * ç»‘å®šæŒ‡å®šçš„å¯¹è±¡ã€‚
      */
     public void setAttribute(String key, Object object) {
         if (object == null) {
@@ -325,14 +325,14 @@ public class MailBuilder implements Cloneable {
     }
 
     /**
-     * ÅúÁ¿°ó¶¨¶ÔÏó¡£
+     * æ‰¹é‡ç»‘å®šå¯¹è±¡ã€‚
      */
     public void setAttributes(Map<String, Object> attrs) {
         attributes.putAll(attrs);
     }
 
     /**
-     * ×ª»»³ÉjavamailÓÊ¼ş¶ÔÏó¡£
+     * è½¬æ¢æˆjavamailé‚®ä»¶å¯¹è±¡ã€‚
      */
     public MimeMessage getMessage(Session session) throws MailBuilderException {
         this.session = assertNotNull(session, "session");
@@ -377,7 +377,7 @@ public class MailBuilder implements Cloneable {
     }
 
     /**
-     * ½«javamailÓÊ¼ş¶ÔÏó×ª»»³ÉÎÄ±¾ĞÎÊ½£¬Æä¸ñÊ½Îª±ê×¼µÄ<code>.eml</code>¸ñÊ½¡£
+     * å°†javamailé‚®ä»¶å¯¹è±¡è½¬æ¢æˆæ–‡æœ¬å½¢å¼ï¼Œå…¶æ ¼å¼ä¸ºæ ‡å‡†çš„<code>.eml</code>æ ¼å¼ã€‚
      */
     public String getMessageAsString(Session session) throws MailBuilderException {
         Message message = getMessage(session);
@@ -393,7 +393,7 @@ public class MailBuilder implements Cloneable {
     }
 
     /**
-     * ½«javamailÓÊ¼ş¶ÔÏóÊä³öµ½Ö¸¶¨Á÷ÖĞ¡£
+     * å°†javamailé‚®ä»¶å¯¹è±¡è¾“å‡ºåˆ°æŒ‡å®šæµä¸­ã€‚
      */
     public void writeTo(OutputStream ostream, Session session) throws MailBuilderException, IOException {
         Message message = getMessage(session);
@@ -406,9 +406,9 @@ public class MailBuilder implements Cloneable {
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàĞÍµÄÓÊ¼şµØÖ·¼¯ºÏ¡£
+     * å–å¾—æŒ‡å®šç±»å‹çš„é‚®ä»¶åœ°å€é›†åˆã€‚
      * <p>
-     * Èç¹û¸ÃÀàĞÍµØÖ·²»´æÔÚ£¬·µ»Ø<code>null</code>¡£¼ÙÈç<code>create==true</code>£¬Ôò»á×Ô¶¯´´½¨¼¯ºÏ¡£
+     * å¦‚æœè¯¥ç±»å‹åœ°å€ä¸å­˜åœ¨ï¼Œè¿”å›<code>null</code>ã€‚å‡å¦‚<code>create==true</code>ï¼Œåˆ™ä¼šè‡ªåŠ¨åˆ›å»ºé›†åˆã€‚
      * </p>
      */
     private Set<InternetAddress> getAddressSet(MailAddressType addrType, boolean create) {
@@ -428,7 +428,7 @@ public class MailBuilder implements Cloneable {
     }
 
     /**
-     * µİ¹é²éÕÒÖ¸¶¨IDµÄcontent¡£
+     * é€’å½’æŸ¥æ‰¾æŒ‡å®šIDçš„contentã€‚
      */
     private MailContent findContent(String id, MailContent content) {
         MailContent result = null;

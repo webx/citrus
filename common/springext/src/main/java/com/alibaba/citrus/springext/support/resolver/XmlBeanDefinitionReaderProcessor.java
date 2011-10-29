@@ -39,7 +39,7 @@ import org.xml.sax.EntityResolver;
 import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
 
 /**
- * ÓÃÀ´´¦Àí<code>XmlBeanDefinitionReader</code>£¬Ìí¼Óconfiguration pointµÄ¹¦ÄÜ¡£
+ * ç”¨æ¥å¤„ç†<code>XmlBeanDefinitionReader</code>ï¼Œæ·»åŠ configuration pointçš„åŠŸèƒ½ã€‚
  * 
  * @author Michael Zhou
  */
@@ -61,8 +61,8 @@ public class XmlBeanDefinitionReaderProcessor {
     public void addConfigurationPointsSupport() {
         if (skipValidation) {
             reader.setValidationMode(XmlBeanDefinitionReader.VALIDATION_NONE);
-            reader.setNamespaceAware(true); // ÎªÁËÌí¼ÓConfiguration PointÖ§³Ö£¬namespaceÊÇ±ØĞë´ò¿ªµÄ¡£
-            reader.setDocumentReaderClass(DocumentReaderSkippingValidation.class); // ¶ÔbeansÖĞµÄ²ÎÊıÌá¹©Ä¬ÈÏÖµ
+            reader.setNamespaceAware(true); // ä¸ºäº†æ·»åŠ Configuration Pointæ”¯æŒï¼Œnamespaceæ˜¯å¿…é¡»æ‰“å¼€çš„ã€‚
+            reader.setDocumentReaderClass(DocumentReaderSkippingValidation.class); // å¯¹beansä¸­çš„å‚æ•°æä¾›é»˜è®¤å€¼
 
             log.warn(
                     "XSD validation has been disabled according to the system property: -D{}.  Please be warned: NEVER skipping validation in Production Environment.",
@@ -95,9 +95,9 @@ public class XmlBeanDefinitionReaderProcessor {
     }
 
     /**
-     * ÔÚÓĞschemaÑéÖ¤µÄÇé¿öÏÂ£¬²¿·ÖattributeµÄÄ¬ÈÏÖµÊÇÓÉschemaÌá¹©µÄ¡£µ±Ã»ÓĞschemaÑéÖ¤Ê±£¬ÕâĞ©Ä¬ÈÏÖµ±ã²»¸´´æÔÚ£¬
-     * Õâµ¼ÖÂspringµÄĞĞÎªÔÚ<code>-DskipValidation</code>
-     * Ê±ºÍÔ­À´²»Í¬¡£±¾Àà¼Ì³ĞÁËspringµÄÔ­ÓĞÀà£¬µ«¶ÔÈ±Ê§µÄÄ¬ÈÏÖµÌá¹©Ã÷È·µÄÖµ¡£
+     * åœ¨æœ‰schemaéªŒè¯çš„æƒ…å†µä¸‹ï¼Œéƒ¨åˆ†attributeçš„é»˜è®¤å€¼æ˜¯ç”±schemaæä¾›çš„ã€‚å½“æ²¡æœ‰schemaéªŒè¯æ—¶ï¼Œè¿™äº›é»˜è®¤å€¼ä¾¿ä¸å¤å­˜åœ¨ï¼Œ
+     * è¿™å¯¼è‡´springçš„è¡Œä¸ºåœ¨<code>-DskipValidation</code>
+     * æ—¶å’ŒåŸæ¥ä¸åŒã€‚æœ¬ç±»ç»§æ‰¿äº†springçš„åŸæœ‰ç±»ï¼Œä½†å¯¹ç¼ºå¤±çš„é»˜è®¤å€¼æä¾›æ˜ç¡®çš„å€¼ã€‚
      */
     public static class DocumentReaderSkippingValidation extends DefaultBeanDefinitionDocumentReader {
         @Override

@@ -34,7 +34,7 @@ import java.util.List;
 import com.alibaba.citrus.generictype.impl.TypeInfoFactory;
 
 /**
- * ²âÊÔÀàµÄ»ùÀà¡£
+ * æµ‹è¯•ç±»çš„åŸºç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -53,7 +53,7 @@ public abstract class BaseTypeTests {
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄmethod»òÖ¸¶¨²ÎÊı¸öÊıµÄconstructor¡£
+     * å–å¾—æŒ‡å®šåç§°çš„methodæˆ–æŒ‡å®šå‚æ•°ä¸ªæ•°çš„constructorã€‚
      */
     protected static GenericDeclaration getMethodOrConstructor(Class<?> ownerType, String methodName,
                                                                Class<?>[] paramTypes) throws NoSuchMethodException {
@@ -73,10 +73,10 @@ public abstract class BaseTypeTests {
         List<TypeInfo> superclasses = createArrayList(type.getSuperclasses());
         List<TypeInfo> interfaces = createArrayList(type.getInterfaces());
 
-        // ÏÈÅĞ¶ÏË³Ğò£º±¾Éí¡¢Àà¡¢½Ó¿Ú¡¢Object
+        // å…ˆåˆ¤æ–­é¡ºåºï¼šæœ¬èº«ã€ç±»ã€æ¥å£ã€Object
         assertThat(supertypes.size(), greaterThan(0));
 
-        // µÚÒ»¸öÊÇ×Ô¼º
+        // ç¬¬ä¸€ä¸ªæ˜¯è‡ªå·±
         TypeInfo first = findNonBoundedType(type);
 
         if (first.getComponentType() instanceof BoundedTypeInfo) {
@@ -88,21 +88,21 @@ public abstract class BaseTypeTests {
         boolean isInterface = type.getRawType().isInterface();
 
         if (!isInterface && !type.getRawType().isPrimitive()) {
-            assertEquals(Object.class, supertypes.get(supertypes.size() - 1).getRawType()); // ×îºóÒ»¸öÊÇObject
+            assertEquals(Object.class, supertypes.get(supertypes.size() - 1).getRawType()); // æœ€åä¸€ä¸ªæ˜¯Object
         }
 
-        // ÅÅĞò
+        // æ’åº
         Comparator<TypeInfo> comparator = new Comparator<TypeInfo>() {
             public int compare(TypeInfo o1, TypeInfo o2) {
                 int c1 = o1.getRawType().isInterface() ? 1 : o1.getRawType().equals(Object.class) ? 2 : 0;
                 int c2 = o2.getRawType().isInterface() ? 1 : o2.getRawType().equals(Object.class) ? 2 : 0;
 
                 if (c1 != c2) {
-                    return c1 - c2; // °´class, interface, ObjectÅÅĞò
+                    return c1 - c2; // æŒ‰class, interface, Objectæ’åº
                 } else if (c1 == 0) {
-                    return 0; // class²»ÅÅĞò
+                    return 0; // classä¸æ’åº
                 } else {
-                    return o1.toString().compareTo(o2.toString()); // interface°´Ãû³ÆÅÅĞò
+                    return o1.toString().compareTo(o2.toString()); // interfaceæŒ‰åç§°æ’åº
                 }
             }
         };
@@ -149,7 +149,7 @@ public abstract class BaseTypeTests {
             assertTrue(String.format("%s is not assignable from %s", supertype, type), supertype.getRawType()
                     .isAssignableFrom(type.getRawType()));
 
-            // ²âÊÔgetSupertype()
+            // æµ‹è¯•getSupertype()
             assertSame(supertype, type.getSupertype(supertype.getRawType()));
         }
 
@@ -158,7 +158,7 @@ public abstract class BaseTypeTests {
         assertFalse("getSuperclasses still has elements", classes.hasNext());
     }
 
-    // µ÷ÓÃTypeInfoFactory.findNonBoundedType
+    // è°ƒç”¨TypeInfoFactory.findNonBoundedType
     protected static TypeInfo findNonBoundedType(TypeInfo type) {
         Method m;
 

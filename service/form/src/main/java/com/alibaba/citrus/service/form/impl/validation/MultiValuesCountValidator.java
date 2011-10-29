@@ -21,7 +21,7 @@ import com.alibaba.citrus.service.form.support.AbstractValidator;
 import com.alibaba.citrus.service.form.support.AbstractValidatorDefinitionParser;
 
 /**
- * ÅĞ¶Ï¶àÖµfieldÖĞ£¬valuesµÄÊıÁ¿µÄvalidator¡£
+ * åˆ¤æ–­å¤šå€¼fieldä¸­ï¼Œvaluesçš„æ•°é‡çš„validatorã€‚
  * 
  * @author Michael Zhou
  */

@@ -20,7 +20,7 @@ package com.alibaba.citrus.service.requestcontext.session.store;
 import com.alibaba.citrus.service.requestcontext.session.SessionFrameworkException;
 
 /**
- * ¹¹½¨SessionStoreÊ±µÄÔËĞĞÆÚÒì³£¡£
+ * æ„å»ºSessionStoreæ—¶çš„è¿è¡ŒæœŸå¼‚å¸¸ã€‚
  * 
  * @author youqun.zhangyq
  */

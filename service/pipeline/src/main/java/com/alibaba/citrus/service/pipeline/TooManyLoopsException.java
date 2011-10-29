@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.pipeline;
 
 /**
- * ´ú±ípipelineÑ­»·´ÎÊı¹ı¶àµÄÒì³£¡£
+ * ä»£è¡¨pipelineå¾ªç¯æ¬¡æ•°è¿‡å¤šçš„å¼‚å¸¸ã€‚
  * 
  * @author Michael Zhou
  */

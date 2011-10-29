@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.requestcontext.session.encrypter;
 
 /**
- * ¼ÓÃÜÆ÷¡£
+ * åŠ å¯†å™¨ã€‚
  * 
  * @author Michael Zhou
  */

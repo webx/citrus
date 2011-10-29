@@ -18,21 +18,21 @@
 package com.alibaba.citrus.service.requestcontext.session;
 
 /**
- * ½«session model×ª»»ÎªstoreÖĞ¿É´æ´¢µÄ¶ÔÏó£¬»òÕß½«storeÖĞÈ¡µÃµÄ¶ÔÏó×ª»»»Øsession model¡£
+ * å°†session modelè½¬æ¢ä¸ºstoreä¸­å¯å­˜å‚¨çš„å¯¹è±¡ï¼Œæˆ–è€…å°†storeä¸­å–å¾—çš„å¯¹è±¡è½¬æ¢å›session modelã€‚
  * 
  * @author Michael Zhou
  */
 public interface SessionModelEncoder {
     /**
-     * ½«session model×ª»»³ÉstoreÖĞ¿É´æ´¢µÄ¶ÔÏó¡£
+     * å°†session modelè½¬æ¢æˆstoreä¸­å¯å­˜å‚¨çš„å¯¹è±¡ã€‚
      */
     Object encode(SessionModel model);
 
     /**
-     * ½«storeÖĞÈ¡µÃµÄÊı¾İ×ª»»³Ésession model¡£
+     * å°†storeä¸­å–å¾—çš„æ•°æ®è½¬æ¢æˆsession modelã€‚
      * <p>
-     * Èç¹û·µ»Ø<code>null</code>£¬ÔòÊı¾İ¸ñÊ½²»Ö§³Ö¡£¿ò¼Ü½«»á³¢ÊÔÓÃÆäÓàµÄ<code>SessionModelEncoder</code>
-     * À´½âÂë¡£
+     * å¦‚æœè¿”å›<code>null</code>ï¼Œåˆ™æ•°æ®æ ¼å¼ä¸æ”¯æŒã€‚æ¡†æ¶å°†ä¼šå°è¯•ç”¨å…¶ä½™çš„<code>SessionModelEncoder</code>
+     * æ¥è§£ç ã€‚
      * </p>
      */
     SessionModel decode(Object data, SessionModel.Factory factory);

@@ -70,14 +70,14 @@ import com.alibaba.citrus.util.StringUtil;
  * <li>http://josephoconnell.com/java/xss-html-filter/
  * </ul>
  * <p>
- * ×öÁËÈçÏÂĞŞ¸Ä£º
+ * åšäº†å¦‚ä¸‹ä¿®æ”¹ï¼š
  * </p>
  * <ul>
- * <li>Ğ§ÂÊ¸Ä½ø£ºË³ĞòËÑË÷±äÎªËÑË÷Set¡£
- * <li>Ğ§ÂÊ¸Ä½ø£ºÔ¤±àÒëÕıÔò±í´ïÊ½patterns¡£
- * <li>Ğ§ÂÊ¸Ä½ø£º±ÜÃâÁËÍ¬²½²Ù×÷¡£
- * <li>ĞŞ¸ÄÁË¹¹Ôìº¯Êı£¬ÅäºÏservice½øĞĞÅäÖÃ¡£
- * <li>ĞŞÕıÁËÊäÈëÖĞ°üº¬$Ê±³ö´íµÄbug¡£
+ * <li>æ•ˆç‡æ”¹è¿›ï¼šé¡ºåºæœç´¢å˜ä¸ºæœç´¢Setã€‚
+ * <li>æ•ˆç‡æ”¹è¿›ï¼šé¢„ç¼–è¯‘æ­£åˆ™è¡¨è¾¾å¼patternsã€‚
+ * <li>æ•ˆç‡æ”¹è¿›ï¼šé¿å…äº†åŒæ­¥æ“ä½œã€‚
+ * <li>ä¿®æ”¹äº†æ„é€ å‡½æ•°ï¼Œé…åˆserviceè¿›è¡Œé…ç½®ã€‚
+ * <li>ä¿®æ­£äº†è¾“å…¥ä¸­åŒ…å«$æ—¶å‡ºé”™çš„bugã€‚
  * </ul>
  * 
  * @author Joseph O'Connell <joe.oconnell at gmail dot com>
@@ -398,7 +398,7 @@ final class FilterRunner {
             String body = m.group(2);
             String ending = m.group(3);
 
-            // É¾³ı±»¾Ü¾øµÄtag
+            // åˆ é™¤è¢«æ‹’ç»çš„tag
             if (filter.vDeniedTags.contains(name)) {
                 return "";
             }
@@ -615,7 +615,7 @@ final class FilterRunner {
     }
 
     /**
-     * ´ÓJDK5ÖĞ<code>Matcher.quoteReplacement()</code>¸´ÖÆ¹ıÀ´£¬È·±£JDK1.4µÄ¼æÈİĞÔ¡£
+     * ä»JDK5ä¸­<code>Matcher.quoteReplacement()</code>å¤åˆ¶è¿‡æ¥ï¼Œç¡®ä¿JDK1.4çš„å…¼å®¹æ€§ã€‚
      */
     private String quoteReplacement(String s) {
         if (s.indexOf('\\') == -1 && s.indexOf('$') == -1) {

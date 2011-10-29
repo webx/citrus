@@ -23,34 +23,34 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 /**
- * Õâ¸öÀà½«Ò»¸ö°üº¬Í¨Åä·ûµÄÎÄ¼şÂ·¾¶, ±àÒë³ÉÕıÔò±í´ïÊ½. ¸ñÊ½ÃèÊöÈçÏÂ:
+ * è¿™ä¸ªç±»å°†ä¸€ä¸ªåŒ…å«é€šé…ç¬¦çš„æ–‡ä»¶è·¯å¾„, ç¼–è¯‘æˆæ­£åˆ™è¡¨è¾¾å¼. æ ¼å¼æè¿°å¦‚ä¸‹:
  * <ul>
- * <li>ºÏ·¨µÄ<em>ÎÄ¼şÃû×Ö·û</em>°üÀ¨: ×ÖÄ¸/Êı×Ö/ÏÂ»®Ïß/Ğ¡Êıµã/¶ÌºáÏß;</li>
- * <li>ºÏ·¨µÄ<em>Â·¾¶·Ö¸ô·û</em>ÎªĞ±¸Ü"/";</li>
- * <li>"£ª"´ú±í0¸ö»ò¶à¸ö<em>ÎÄ¼şÃû×Ö·û</em>;</li>
- * <li>"£¿"´ú±í1¸ö<em>ÎÄ¼şÃû×Ö·û</em>;</li>
- * <li>"£ª£ª"´ú±í0¸ö»ò¶à¸ö<em>ÎÄ¼şÃû×Ö·û</em>»ò<em>Â·¾¶·Ö¸ô·û</em>;</li>
- * <li>²»ÄÜÁ¬Ğø³öÏÖ3¸ö"£ª";</li>
- * <li>²»ÄÜÁ¬Ğø³öÏÖ2¸ö<em>Â·¾¶·Ö¸ô·û</em>;</li>
- * <li>"£ª£ª"µÄÇ°ºóÖ»ÄÜÊÇ<em>Â·¾¶·Ö¸ô·û</em>.</li>
+ * <li>åˆæ³•çš„<em>æ–‡ä»¶åå­—ç¬¦</em>åŒ…æ‹¬: å­—æ¯/æ•°å­—/ä¸‹åˆ’çº¿/å°æ•°ç‚¹/çŸ­æ¨ªçº¿;</li>
+ * <li>åˆæ³•çš„<em>è·¯å¾„åˆ†éš”ç¬¦</em>ä¸ºæ–œæ "/";</li>
+ * <li>"ï¼Š"ä»£è¡¨0ä¸ªæˆ–å¤šä¸ª<em>æ–‡ä»¶åå­—ç¬¦</em>;</li>
+ * <li>"ï¼Ÿ"ä»£è¡¨1ä¸ª<em>æ–‡ä»¶åå­—ç¬¦</em>;</li>
+ * <li>"ï¼Šï¼Š"ä»£è¡¨0ä¸ªæˆ–å¤šä¸ª<em>æ–‡ä»¶åå­—ç¬¦</em>æˆ–<em>è·¯å¾„åˆ†éš”ç¬¦</em>;</li>
+ * <li>ä¸èƒ½è¿ç»­å‡ºç°3ä¸ª"ï¼Š";</li>
+ * <li>ä¸èƒ½è¿ç»­å‡ºç°2ä¸ª<em>è·¯å¾„åˆ†éš”ç¬¦</em>;</li>
+ * <li>"ï¼Šï¼Š"çš„å‰ååªèƒ½æ˜¯<em>è·¯å¾„åˆ†éš”ç¬¦</em>.</li>
  * </ul>
  * <p>
- * ×ª»»ºóµÄÕıÔò±í´ïÊ½, ¶ÔÃ¿Ò»¸öÍ¨Åä·û½¨Á¢<em>ÒıÓÃ±äÁ¿</em>, ÒÀ´ÎÎª<code>$1</code>, <code>$2</code>, ...
+ * è½¬æ¢åçš„æ­£åˆ™è¡¨è¾¾å¼, å¯¹æ¯ä¸€ä¸ªé€šé…ç¬¦å»ºç«‹<em>å¼•ç”¨å˜é‡</em>, ä¾æ¬¡ä¸º<code>$1</code>, <code>$2</code>, ...
  * </p>
  * 
  * @author Michael Zhou
  */
 public class PathNameWildcardCompiler {
-    /** Ç¿ÖÆÊ¹ÓÃ¾ø¶ÔÂ·¾¶ */
+    /** å¼ºåˆ¶ä½¿ç”¨ç»å¯¹è·¯å¾„ */
     public static final int FORCE_ABSOLUTE_PATH = 0x1000;
 
-    /** Ç¿ÖÆÊ¹ÓÃÏà¶ÔÂ·¾¶ */
+    /** å¼ºåˆ¶ä½¿ç”¨ç›¸å¯¹è·¯å¾„ */
     public static final int FORCE_RELATIVE_PATH = 0x2000;
 
-    /** ´ÓÍ·Æ¥Åä */
+    /** ä»å¤´åŒ¹é… */
     public static final int FORCE_MATCH_PREFIX = 0x4000;
 
-    // Ë½ÓĞ³£Á¿
+    // ç§æœ‰å¸¸é‡
     private static final char ESCAPE_CHAR = '\\';
     private static final char SLASH = '/';
     private static final char UNDERSCORE = '_';
@@ -68,7 +68,7 @@ public class PathNameWildcardCompiler {
     private static final String REGEX_FILE_PATH = "(" + REGEX_FILE_NAME_CHAR + "+(?:" + REGEX_SLASH_NO_DUP
             + REGEX_FILE_NAME_CHAR + "*)*(?=" + REGEX_SLASH + "|$)|)" + REGEX_SLASH + "?";
 
-    // ÉÏÒ»¸ötokenµÄ×´Ì¬
+    // ä¸Šä¸€ä¸ªtokençš„çŠ¶æ€
     private static final int LAST_TOKEN_START = 0;
     private static final int LAST_TOKEN_SLASH = 1;
     private static final int LAST_TOKEN_FILE_NAME = 2;
@@ -80,24 +80,24 @@ public class PathNameWildcardCompiler {
     }
 
     /**
-     * ½«°üº¬Í¨Åä·ûµÄÂ·¾¶±í´ïÊ½, ±àÒë³ÉÕıÔò±í´ïÊ½.
+     * å°†åŒ…å«é€šé…ç¬¦çš„è·¯å¾„è¡¨è¾¾å¼, ç¼–è¯‘æˆæ­£åˆ™è¡¨è¾¾å¼.
      */
     public static Pattern compilePathName(String pattern) throws PatternSyntaxException {
         return compilePathName(pattern, 0);
     }
 
     /**
-     * ½«°üº¬Í¨Åä·ûµÄÂ·¾¶±í´ïÊ½, ±àÒë³ÉÕıÔò±í´ïÊ½.
+     * å°†åŒ…å«é€šé…ç¬¦çš„è·¯å¾„è¡¨è¾¾å¼, ç¼–è¯‘æˆæ­£åˆ™è¡¨è¾¾å¼.
      */
     public static Pattern compilePathName(String pattern, int options) throws PatternSyntaxException {
         return Pattern.compile(pathNameToRegex(pattern, options), options);
     }
 
     /**
-     * È¡µÃÏà¹Ø¶ÈÊıÖµ¡£
+     * å–å¾—ç›¸å…³åº¦æ•°å€¼ã€‚
      * <p>
-     * ËùÎ½Ïà¹Ø¶ÈÊıÖµ£¬¼´³ıÈ¥·Ö¸ô·ûºÍÍ¨Åä·ûÒÔºó£¬Ê£ÏÂµÄ×Ö·û³¤¶È¡£
-     * Ïà¹Ø¶ÈÊıÖµ¿ÉÓÃÀ´¶ÔÆ¥Åä½á¹ûÅÅĞò¡£ÀıÈç£º/a/b/c¼ÈÆ¥Åä/aÓÖÆ¥Åä/*£¬µ«ÏÔÈ»Ç°ÕßÎª¸ü¡°Ïà¹Ø¡±µÄÆ¥Åä¡£
+     * æ‰€è°“ç›¸å…³åº¦æ•°å€¼ï¼Œå³é™¤å»åˆ†éš”ç¬¦å’Œé€šé…ç¬¦ä»¥åï¼Œå‰©ä¸‹çš„å­—ç¬¦é•¿åº¦ã€‚
+     * ç›¸å…³åº¦æ•°å€¼å¯ç”¨æ¥å¯¹åŒ¹é…ç»“æœæ’åºã€‚ä¾‹å¦‚ï¼š/a/b/cæ—¢åŒ¹é…/aåˆåŒ¹é…/*ï¼Œä½†æ˜¾ç„¶å‰è€…ä¸ºæ›´â€œç›¸å…³â€çš„åŒ¹é…ã€‚
      * </p>
      */
     public static int getPathNameRelevancy(String pattern) {
@@ -125,7 +125,7 @@ public class PathNameWildcardCompiler {
     }
 
     /**
-     * ½«°üº¬Í¨Åä·ûµÄÂ·¾¶±í´ïÊ½, ×ª»»³ÉÕıÔò±í´ïÊ½.
+     * å°†åŒ…å«é€šé…ç¬¦çš„è·¯å¾„è¡¨è¾¾å¼, è½¬æ¢æˆæ­£åˆ™è¡¨è¾¾å¼.
      */
     public static String pathNameToRegex(String pattern, int options) throws PatternSyntaxException {
         pattern = assertNotNull(normalizePathName(pattern), "pattern");
@@ -137,12 +137,12 @@ public class PathNameWildcardCompiler {
         boolean forceAbsolutePath = (options & FORCE_ABSOLUTE_PATH) != 0;
         boolean forceRelativePath = (options & FORCE_RELATIVE_PATH) != 0;
 
-        // Èç¹ûµÚÒ»¸ö×Ö·ûÎªslash, »òµ÷ÓÃÕßÒªÇóforceMatchPrefix, Ôò´ÓÍ·Æ¥Åä
+        // å¦‚æœç¬¬ä¸€ä¸ªå­—ç¬¦ä¸ºslash, æˆ–è°ƒç”¨è€…è¦æ±‚forceMatchPrefix, åˆ™ä»å¤´åŒ¹é…
         if (forceMatchPrefix || pattern.length() > 0 && pattern.charAt(0) == SLASH) {
             buf.append(REGEX_MATCH_PREFIX);
         }
 
-        // ÌØÊâÇé¿ö£º/¿´×÷""
+        // ç‰¹æ®Šæƒ…å†µï¼š/çœ‹ä½œ""
         if (pattern.length() == 1 && pattern.charAt(0) == SLASH) {
             pattern = "";
         }
@@ -156,14 +156,14 @@ public class PathNameWildcardCompiler {
 
             switch (ch) {
                 case SLASH:
-                    // slashºóÃæ²»ÄÜÊÇslash, slash²»ÄÜÎ»ÓÚÊ××Ö·û(Èç¹ûÖ¸¶¨ÁËforce relative pathµÄ»°)
+                    // slashåé¢ä¸èƒ½æ˜¯slash, slashä¸èƒ½ä½äºé¦–å­—ç¬¦(å¦‚æœæŒ‡å®šäº†force relative pathçš„è¯)
                     if (lastToken == LAST_TOKEN_SLASH) {
                         throw new PatternSyntaxException("Syntax Error", pattern, i);
                     } else if (forceRelativePath && lastToken == LAST_TOKEN_START) {
                         throw new PatternSyntaxException("Syntax Error", pattern, i);
                     }
 
-                    // ÒòÎª**ÒÑ¾­°üÀ¨ÁËslash, ËùÒÔ²»ĞèÒª¶îÍâµØÆ¥Åäslash
+                    // å› ä¸º**å·²ç»åŒ…æ‹¬äº†slash, æ‰€ä»¥ä¸éœ€è¦é¢å¤–åœ°åŒ¹é…slash
                     if (lastToken != LAST_TOKEN_DOUBLE_STAR) {
                         buf.append(REGEX_SLASH_NO_DUP);
                     }
@@ -177,7 +177,7 @@ public class PathNameWildcardCompiler {
                     if (j < pattern.length() && pattern.charAt(j) == STAR) {
                         i = j;
 
-                        // **Ç°ÃæÖ»ÄÜÊÇslash
+                        // **å‰é¢åªèƒ½æ˜¯slash
                         if (lastToken != LAST_TOKEN_START && lastToken != LAST_TOKEN_SLASH) {
                             throw new PatternSyntaxException("Syntax Error", pattern, i);
                         }
@@ -185,7 +185,7 @@ public class PathNameWildcardCompiler {
                         lastToken = LAST_TOKEN_DOUBLE_STAR;
                         buf.append(REGEX_FILE_PATH);
                     } else {
-                        // *Ç°Ãæ²»ÄÜÊÇ*»ò**
+                        // *å‰é¢ä¸èƒ½æ˜¯*æˆ–**
                         if (lastToken == LAST_TOKEN_STAR || lastToken == LAST_TOKEN_DOUBLE_STAR) {
                             throw new PatternSyntaxException("Syntax Error", pattern, i);
                         }
@@ -202,17 +202,17 @@ public class PathNameWildcardCompiler {
                     break;
 
                 default:
-                    // **ºóÖ»ÄÜÊÇslash
+                    // **ååªèƒ½æ˜¯slash
                     if (lastToken == LAST_TOKEN_DOUBLE_STAR) {
                         throw new PatternSyntaxException("Syntax Error", pattern, i);
                     }
 
                     if (Character.isLetterOrDigit(ch) || ch == UNDERSCORE || ch == DASH) {
-                        // ¼ÓÉÏword±ß½ç, ½øĞĞÕû×ÖÆ¥Åä
+                        // åŠ ä¸Šwordè¾¹ç•Œ, è¿›è¡Œæ•´å­—åŒ¹é…
                         if (lastToken == LAST_TOKEN_START) {
-                            buf.append(REGEX_WORD_BOUNDARY).append(ch); // Ç°±ß½ç
+                            buf.append(REGEX_WORD_BOUNDARY).append(ch); // å‰è¾¹ç•Œ
                         } else if (i + 1 == pattern.length()) {
-                            buf.append(ch).append(REGEX_WORD_BOUNDARY); // ºó±ß½ç
+                            buf.append(ch).append(REGEX_WORD_BOUNDARY); // åè¾¹ç•Œ
                         } else {
                             buf.append(ch);
                         }
@@ -230,11 +230,11 @@ public class PathNameWildcardCompiler {
     }
 
     /**
-     * ¹æ¸ñ»¯ÀàÃû¡£
+     * è§„æ ¼åŒ–ç±»åã€‚
      * <ul>
-     * <li>³ıÈ¥Á½¶Ë¿Õ°×</li>
-     * <li>½«"\\"×ª»»³É"//"</li>
-     * <li>½«ÖØ¸´µÄ"/"×ª»»³Éµ¥¸öµÄ"/"</li>
+     * <li>é™¤å»ä¸¤ç«¯ç©ºç™½</li>
+     * <li>å°†"\\"è½¬æ¢æˆ"//"</li>
+     * <li>å°†é‡å¤çš„"/"è½¬æ¢æˆå•ä¸ªçš„"/"</li>
      * </ul>
      */
     public static String normalizePathName(String name) {

@@ -66,7 +66,7 @@ public class URIBrokerServiceDefinitionParser extends AbstractNamedBeanDefinitio
 
         builder.addPropertyValue("imports", imports);
 
-        // ½âÎöURI Broker¼¯ºÏ
+        // è§£æURI Brokeré›†åˆ
         List<Object> brokers = createManagedList(element, parserContext);
 
         for (Element subElement : subElements(element)) {

@@ -18,19 +18,19 @@
 package com.alibaba.citrus.webx.handler;
 
 /**
- * ÓÃÀ´´¦ÀírequestÇëÇóµÄhandler¡£
+ * ç”¨æ¥å¤„ç†requestè¯·æ±‚çš„handlerã€‚
  * <p>
- * ÕâÊÇ½Ó¿ÚÊÇ±»¿ò¼ÜÄÚ²¿Ê¹ÓÃµÄ£¬ÓÃÀ´ÏÔÊ¾ÖîÈç´íÎóÒ³ÃæµÈÏà¹ØÒ³Ãæ¡¢Í¼Æ¬µÄ¡£Ó¦ÓÃ³ÌĞòÍ¨³£²»ĞèÒªÀ©Õ¹´Ë½Ó¿Ú¡£
+ * è¿™æ˜¯æ¥å£æ˜¯è¢«æ¡†æ¶å†…éƒ¨ä½¿ç”¨çš„ï¼Œç”¨æ¥æ˜¾ç¤ºè¯¸å¦‚é”™è¯¯é¡µé¢ç­‰ç›¸å…³é¡µé¢ã€å›¾ç‰‡çš„ã€‚åº”ç”¨ç¨‹åºé€šå¸¸ä¸éœ€è¦æ‰©å±•æ­¤æ¥å£ã€‚
  * </p>
  * <p>
- * Ïß³Ì°²È«ĞÔ£º<code>RequestHandler</code>¶ÔÏó¿É±»¶à¸örequest¹²Ïí£¬ËùÒÔ±ØĞë×¢ÒâÏß³Ì°²È«ÎÊÌâ¡£
+ * çº¿ç¨‹å®‰å…¨æ€§ï¼š<code>RequestHandler</code>å¯¹è±¡å¯è¢«å¤šä¸ªrequestå…±äº«ï¼Œæ‰€ä»¥å¿…é¡»æ³¨æ„çº¿ç¨‹å®‰å…¨é—®é¢˜ã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface RequestHandler {
     /**
-     * ´¦ÀíÇëÇó¡£
+     * å¤„ç†è¯·æ±‚ã€‚
      */
     void handleRequest(RequestHandlerContext context) throws Exception;
 }

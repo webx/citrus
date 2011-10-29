@@ -19,9 +19,9 @@ package com.alibaba.citrus.service.requestcontext.basic;
 
 public interface RedirectLocationInterceptor extends ResponseHeaderInterceptor {
     /**
-     * ¼ì²éÖØ¶¨Ïòlocation¡£
+     * æ£€æŸ¥é‡å®šå‘locationã€‚
      * 
-     * @return ·µ»ØÖµ±íÊ¾ĞŞ¸Älocation£¬·µ»Ø<code>null</code>Ôò±íÊ¾¾Ü¾ø¸Ãlocation¡£
+     * @return è¿”å›å€¼è¡¨ç¤ºä¿®æ”¹locationï¼Œè¿”å›<code>null</code>åˆ™è¡¨ç¤ºæ‹’ç»è¯¥locationã€‚
      */
     String checkRedirectLocation(String location);
 }

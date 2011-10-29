@@ -54,7 +54,7 @@ public abstract class AbstractNumberValidatorTests<V extends AbstractNumberValid
     }
 
     /**
-     * Ô¤´¦ÀíÊµÀı£¬ÒÔ±ãÍ¨¹ı<code>AbstractNumberValidatorTests</code>ÖĞµÄ²âÊÔ¡£
+     * é¢„å¤„ç†å®ä¾‹ï¼Œä»¥ä¾¿é€šè¿‡<code>AbstractNumberValidatorTests</code>ä¸­çš„æµ‹è¯•ã€‚
      */
     protected void initFor_AbstractNumberValidatorTests(V validator) {
     }

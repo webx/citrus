@@ -25,7 +25,7 @@ import com.alibaba.citrus.service.template.TemplateContext;
 import com.alibaba.citrus.turbine.Context;
 
 /**
- * ½«turbine contextÊÊÅäµ½template context¡£
+ * å°†turbine contexté€‚é…åˆ°template contextã€‚
  * 
  * @author Michael Zhou
  */

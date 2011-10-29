@@ -24,28 +24,28 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 /**
- * Õâ¸öÀà½«Ò»¸ö°üº¬Í¨Åä·ûµÄÀàÃû, ±àÒë³ÉÕıÔò±í´ïÊ½. ¸ñÊ½ÃèÊöÈçÏÂ:
+ * è¿™ä¸ªç±»å°†ä¸€ä¸ªåŒ…å«é€šé…ç¬¦çš„ç±»å, ç¼–è¯‘æˆæ­£åˆ™è¡¨è¾¾å¼. æ ¼å¼æè¿°å¦‚ä¸‹:
  * <ul>
- * <li>ºÏ·¨µÄ<em>ÀàÃû×Ö·û</em>°üÀ¨: ×ÖÄ¸/Êı×Ö/ÏÂ»®Ïß/'$';</li>
- * <li>ºÏ·¨µÄ<em>ÀàÃû·Ö¸ô·û</em>ÎªĞ¡Êıµã".";</li>
- * <li>"£ª"´ú±í0¸ö»ò¶à¸ö<em>ÀàÃû×Ö·û</em>;</li>
- * <li>"£¿"´ú±í1¸ö<em>ÀàÃû×Ö·û</em>;</li>
- * <li>"£ª£ª"´ú±í0¸ö»ò¶à¸ö<em>ÀàÃû×Ö·û</em>»ò<em>ÀàÃû·Ö¸ô·û</em>;</li>
- * <li>²»ÄÜÁ¬Ğø³öÏÖ3¸ö"£ª";</li>
- * <li>²»ÄÜÁ¬Ğø³öÏÖ2¸ö<em>ÀàÃû·Ö¸ô·û</em>;</li>
- * <li>"£ª£ª"µÄÇ°ºóÖ»ÄÜÊÇ<em>ÀàÃû·Ö¸ô·û</em>.</li>
+ * <li>åˆæ³•çš„<em>ç±»åå­—ç¬¦</em>åŒ…æ‹¬: å­—æ¯/æ•°å­—/ä¸‹åˆ’çº¿/'$';</li>
+ * <li>åˆæ³•çš„<em>ç±»ååˆ†éš”ç¬¦</em>ä¸ºå°æ•°ç‚¹".";</li>
+ * <li>"ï¼Š"ä»£è¡¨0ä¸ªæˆ–å¤šä¸ª<em>ç±»åå­—ç¬¦</em>;</li>
+ * <li>"ï¼Ÿ"ä»£è¡¨1ä¸ª<em>ç±»åå­—ç¬¦</em>;</li>
+ * <li>"ï¼Šï¼Š"ä»£è¡¨0ä¸ªæˆ–å¤šä¸ª<em>ç±»åå­—ç¬¦</em>æˆ–<em>ç±»ååˆ†éš”ç¬¦</em>;</li>
+ * <li>ä¸èƒ½è¿ç»­å‡ºç°3ä¸ª"ï¼Š";</li>
+ * <li>ä¸èƒ½è¿ç»­å‡ºç°2ä¸ª<em>ç±»ååˆ†éš”ç¬¦</em>;</li>
+ * <li>"ï¼Šï¼Š"çš„å‰ååªèƒ½æ˜¯<em>ç±»ååˆ†éš”ç¬¦</em>.</li>
  * </ul>
  * <p>
- * ×ª»»ºóµÄÕıÔò±í´ïÊ½, ¶ÔÃ¿Ò»¸öÍ¨Åä·û½¨Á¢<em>ÒıÓÃ±äÁ¿</em>, ÒÀ´ÎÎª<code>$1</code>, <code>$2</code>, ...
+ * è½¬æ¢åçš„æ­£åˆ™è¡¨è¾¾å¼, å¯¹æ¯ä¸€ä¸ªé€šé…ç¬¦å»ºç«‹<em>å¼•ç”¨å˜é‡</em>, ä¾æ¬¡ä¸º<code>$1</code>, <code>$2</code>, ...
  * </p>
  * 
  * @author Michael Zhou
  */
 public class ClassNameWildcardCompiler {
-    /** Ç¿ÖÆ´ÓÍ·Æ¥Åä */
+    /** å¼ºåˆ¶ä»å¤´åŒ¹é… */
     public static final int MATCH_PREFIX = 0x1000;
 
-    // Ë½ÓĞ³£Á¿
+    // ç§æœ‰å¸¸é‡
     private static final char ESCAPE_CHAR = '\\';
     private static final char DOT = '.';
     private static final char UNDERSCORE = '_';
@@ -62,7 +62,7 @@ public class ClassNameWildcardCompiler {
     private static final String REGEX_CLASS_NAME_FULL = "(" + REGEX_CLASS_NAME_CHAR + "+(?:" + REGEX_DOT_NO_DUP
             + REGEX_CLASS_NAME_CHAR + "*)*(?=" + REGEX_DOT + "|$)|)" + REGEX_DOT + "?";
 
-    // ÉÏÒ»¸ötokenµÄ×´Ì¬
+    // ä¸Šä¸€ä¸ªtokençš„çŠ¶æ€
     private static final int LAST_TOKEN_START = 0;
     private static final int LAST_TOKEN_DOT = 1;
     private static final int LAST_TOKEN_CLASS_NAME = 2;
@@ -74,24 +74,24 @@ public class ClassNameWildcardCompiler {
     }
 
     /**
-     * ½«°üº¬Í¨Åä·ûµÄÀàÃû, ±àÒë³ÉÕıÔò±í´ïÊ½.
+     * å°†åŒ…å«é€šé…ç¬¦çš„ç±»å, ç¼–è¯‘æˆæ­£åˆ™è¡¨è¾¾å¼.
      */
     public static Pattern compileClassName(String pattern) throws PatternSyntaxException {
         return compileClassName(pattern, 0);
     }
 
     /**
-     * ½«°üº¬Í¨Åä·ûµÄÀàÃû, ±àÒë³ÉÕıÔò±í´ïÊ½.
+     * å°†åŒ…å«é€šé…ç¬¦çš„ç±»å, ç¼–è¯‘æˆæ­£åˆ™è¡¨è¾¾å¼.
      */
     public static Pattern compileClassName(String pattern, int options) throws PatternSyntaxException {
         return Pattern.compile(classNameToRegex(pattern, options), options);
     }
 
     /**
-     * È¡µÃÏà¹Ø¶ÈÊıÖµ¡£
+     * å–å¾—ç›¸å…³åº¦æ•°å€¼ã€‚
      * <p>
-     * ËùÎ½Ïà¹Ø¶ÈÊıÖµ£¬¼´³ıÈ¥·Ö¸ô·ûºÍÍ¨Åä·ûÒÔºó£¬Ê£ÏÂµÄ×Ö·û³¤¶È¡£
-     * Ïà¹Ø¶ÈÊıÖµ¿ÉÓÃÀ´¶ÔÆ¥Åä½á¹ûÅÅĞò¡£ÀıÈç£ºa.b.c¼ÈÆ¥ÅäaÓÖÆ¥Åä*£¬µ«ÏÔÈ»Ç°ÕßÎª¸ü¡°Ïà¹Ø¡±µÄÆ¥Åä¡£
+     * æ‰€è°“ç›¸å…³åº¦æ•°å€¼ï¼Œå³é™¤å»åˆ†éš”ç¬¦å’Œé€šé…ç¬¦ä»¥åï¼Œå‰©ä¸‹çš„å­—ç¬¦é•¿åº¦ã€‚
+     * ç›¸å…³åº¦æ•°å€¼å¯ç”¨æ¥å¯¹åŒ¹é…ç»“æœæ’åºã€‚ä¾‹å¦‚ï¼ša.b.cæ—¢åŒ¹é…aåˆåŒ¹é…*ï¼Œä½†æ˜¾ç„¶å‰è€…ä¸ºæ›´â€œç›¸å…³â€çš„åŒ¹é…ã€‚
      * </p>
      */
     public static int getClassNameRelevancy(String pattern) {
@@ -119,7 +119,7 @@ public class ClassNameWildcardCompiler {
     }
 
     /**
-     * ½«°üº¬Í¨Åä·ûµÄÀàÃû, ±àÒë³ÉÕıÔò±í´ïÊ½.
+     * å°†åŒ…å«é€šé…ç¬¦çš„ç±»å, ç¼–è¯‘æˆæ­£åˆ™è¡¨è¾¾å¼.
      */
     public static String classNameToRegex(String pattern, int options) throws PatternSyntaxException {
         pattern = assertNotNull(normalizeClassName(pattern), "pattern");
@@ -138,12 +138,12 @@ public class ClassNameWildcardCompiler {
 
             switch (ch) {
                 case DOT:
-                    // dotºóÃæ²»ÄÜÊÇdot, dot²»ÄÜ×÷Îª×Ö·û´®µÄ¿ªÊ¼
+                    // dotåé¢ä¸èƒ½æ˜¯dot, dotä¸èƒ½ä½œä¸ºå­—ç¬¦ä¸²çš„å¼€å§‹
                     if (lastToken == LAST_TOKEN_DOT || lastToken == LAST_TOKEN_START) {
                         throw new PatternSyntaxException("Syntax Error", pattern, i);
                     }
 
-                    // ÒòÎª**ÒÑ¾­°üÀ¨ÁËdot, ËùÒÔ²»ĞèÒª¶îÍâµØÆ¥Åädot
+                    // å› ä¸º**å·²ç»åŒ…æ‹¬äº†dot, æ‰€ä»¥ä¸éœ€è¦é¢å¤–åœ°åŒ¹é…dot
                     if (lastToken != LAST_TOKEN_DOUBLE_STAR) {
                         buffer.append(REGEX_DOT_NO_DUP);
                     }
@@ -157,7 +157,7 @@ public class ClassNameWildcardCompiler {
                     if (j < pattern.length() && pattern.charAt(j) == STAR) {
                         i = j;
 
-                        // **Ç°ÃæÖ»ÄÜÊÇdot
+                        // **å‰é¢åªèƒ½æ˜¯dot
                         if (lastToken != LAST_TOKEN_START && lastToken != LAST_TOKEN_DOT) {
                             throw new PatternSyntaxException("Syntax Error", pattern, i);
                         }
@@ -165,7 +165,7 @@ public class ClassNameWildcardCompiler {
                         lastToken = LAST_TOKEN_DOUBLE_STAR;
                         buffer.append(REGEX_CLASS_NAME_FULL);
                     } else {
-                        // *Ç°Ãæ²»ÄÜÊÇ*»ò**
+                        // *å‰é¢ä¸èƒ½æ˜¯*æˆ–**
                         if (lastToken == LAST_TOKEN_STAR || lastToken == LAST_TOKEN_DOUBLE_STAR) {
                             throw new PatternSyntaxException("Syntax Error", pattern, i);
                         }
@@ -182,17 +182,17 @@ public class ClassNameWildcardCompiler {
                     break;
 
                 default:
-                    // **ºóÖ»ÄÜÊÇdot
+                    // **ååªèƒ½æ˜¯dot
                     if (lastToken == LAST_TOKEN_DOUBLE_STAR) {
                         throw new PatternSyntaxException("Syntax Error", pattern, i);
                     }
 
                     if (Character.isLetterOrDigit(ch) || ch == UNDERSCORE) {
-                        // ¼ÓÉÏword±ß½ç, ½øĞĞÕû×ÖÆ¥Åä
+                        // åŠ ä¸Šwordè¾¹ç•Œ, è¿›è¡Œæ•´å­—åŒ¹é…
                         if (lastToken == LAST_TOKEN_START) {
-                            buffer.append(REGEX_WORD_BOUNDARY).append(ch); // Ç°±ß½ç
+                            buffer.append(REGEX_WORD_BOUNDARY).append(ch); // å‰è¾¹ç•Œ
                         } else if (i + 1 == pattern.length()) {
-                            buffer.append(ch).append(REGEX_WORD_BOUNDARY); // ºó±ß½ç
+                            buffer.append(ch).append(REGEX_WORD_BOUNDARY); // åè¾¹ç•Œ
                         } else {
                             buffer.append(ch);
                         }
@@ -210,12 +210,12 @@ public class ClassNameWildcardCompiler {
     }
 
     /**
-     * ¹æ¸ñ»¯ÀàÃû¡£
+     * è§„æ ¼åŒ–ç±»åã€‚
      * <ul>
-     * <li>³ıÈ¥Á½¶Ë¿Õ°×</li>
-     * <li>½«"/"ºÍ"\\"×ª»»³É"."</li>
-     * <li>½«ÖØ¸´µÄ"."×ª»»³Éµ¥¸öµÄ"."</li>
-     * <li>³ıÈ¥Ê×Î²µÄ"."</li>
+     * <li>é™¤å»ä¸¤ç«¯ç©ºç™½</li>
+     * <li>å°†"/"å’Œ"\\"è½¬æ¢æˆ"."</li>
+     * <li>å°†é‡å¤çš„"."è½¬æ¢æˆå•ä¸ªçš„"."</li>
+     * <li>é™¤å»é¦–å°¾çš„"."</li>
      * </ul>
      */
     public static String normalizeClassName(String name) {
@@ -231,10 +231,10 @@ public class ClassNameWildcardCompiler {
     }
 
     /**
-     * ½«ÀàÃû×ª»¯³ÉÂ·¾¶Ãû¡£
+     * å°†ç±»åè½¬åŒ–æˆè·¯å¾„åã€‚
      * <ul>
-     * <li>¹æ¸ñ»¯ÀàÃû</li>
-     * <li>½«"."×ª»»³É"/"</li>
+     * <li>è§„æ ¼åŒ–ç±»å</li>
+     * <li>å°†"."è½¬æ¢æˆ"/"</li>
      * </ul>
      */
     public static String classNameToPathName(String name) {

@@ -53,7 +53,7 @@ public class ClasspathLoaderIntegratingTests extends AbstractResourceLoadingTest
         assertResourceService("/classpath/WEB-INF", "WEB-INF/", true); // dir
         assertResourceService("/classpath/WEB-INF/web.xml", "WEB-INF/web.xml", true);
 
-        // classpath-loader不支持for_create选项
+        // classpath-loader涓嶆敮鎸乫or_create閫夐」
         try {
             resourceLoadingService.getResource("/classpath/WEB-INF/not/found", FOR_CREATE);
             fail();

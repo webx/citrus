@@ -30,7 +30,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 /**
- * ´Óinit-paramÖĞÈ¡µÃlogSystemºÍlogConfiguration£¬²¢³õÊ¼»¯¡£
+ * ä»init-paramä¸­å–å¾—logSystemå’ŒlogConfigurationï¼Œå¹¶åˆå§‹åŒ–ã€‚
  * 
  * @author Michael Zhou
  */
@@ -44,24 +44,24 @@ public class LogConfiguratorListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent event) {
         ServletContext servletContext = event.getServletContext();
 
-        // È¡µÃËùÓĞÒÔlog¿ªÍ·µÄinit params¡£
+        // å–å¾—æ‰€æœ‰ä»¥logå¼€å¤´çš„init paramsã€‚
         Map<String, String> params = getLogInitParams(servletContext);
 
-        // ´Ócontext init-paramÖĞÈ¡µÃlogSystemµÄÖµ£¬¿ÉÄÜÎªnull¡£
+        // ä»context init-paramä¸­å–å¾—logSystemçš„å€¼ï¼Œå¯èƒ½ä¸ºnullã€‚
         String[] logSystems = getLogSystems(params);
 
-        // È¡µÃÖ¸¶¨Ãû³ÆµÄlogConfigurator£¬ÈçÎ´È¡µÃ£¬ÔòÅ×³öÒì³££¬listenerÊ§°Ü¡£
+        // å–å¾—æŒ‡å®šåç§°çš„logConfiguratorï¼Œå¦‚æœªå–å¾—ï¼Œåˆ™æŠ›å‡ºå¼‚å¸¸ï¼Œlistenerå¤±è´¥ã€‚
         logConfigurators = LogConfigurator.getConfigurators(logSystems);
 
         for (LogConfigurator logConfigurator : logConfigurators) {
             String logSystem = logConfigurator.getLogSystem();
 
-            // È¡µÃÖ¸¶¨logConfiguratorµÄÅäÖÃÎÄ¼ş¡£
+            // å–å¾—æŒ‡å®šlogConfiguratorçš„é…ç½®æ–‡ä»¶ã€‚
             String logConfiguration = getLogConfiguration(params, logSystem);
 
             servletContext.log(String.format("Initializing %s system", logSystem));
 
-            // È¡µÃlogÅäÖÃÎÄ¼ş¡£
+            // å–å¾—logé…ç½®æ–‡ä»¶ã€‚
             URL logConfigurationResource;
 
             try {
@@ -70,7 +70,7 @@ public class LogConfiguratorListener implements ServletContextListener {
                 logConfigurationResource = null;
             }
 
-            // ÈçÎ´ÕÒµ½ÅäÖÃÎÄ¼ş£¬ÔòÓÃÄ¬ÈÏµÄÖµÀ´ÅäÖÃ£¬·ñÔòÅäÖÃÖ®¡£
+            // å¦‚æœªæ‰¾åˆ°é…ç½®æ–‡ä»¶ï¼Œåˆ™ç”¨é»˜è®¤çš„å€¼æ¥é…ç½®ï¼Œå¦åˆ™é…ç½®ä¹‹ã€‚
             if (logConfigurationResource == null) {
                 servletContext
                         .log(String
@@ -89,7 +89,7 @@ public class LogConfiguratorListener implements ServletContextListener {
     }
 
     /**
-     * ×ÓÀà¿É¸²¸Ç£¬²¢´´½¨×Ô¼ºµÄplaceholders¡£
+     * å­ç±»å¯è¦†ç›–ï¼Œå¹¶åˆ›å»ºè‡ªå·±çš„placeholdersã€‚
      */
     protected void initProperties(Map<String, String> props) {
     }
@@ -126,7 +126,7 @@ public class LogConfiguratorListener implements ServletContextListener {
     }
 
     /**
-     * È¡µÃËùÓĞÒÔlog¿ªÍ·µÄinit params¡£
+     * å–å¾—æ‰€æœ‰ä»¥logå¼€å¤´çš„init paramsã€‚
      */
     private Map<String, String> getLogInitParams(ServletContext servletContext) {
         Map<String, String> params = new HashMap<String, String>();

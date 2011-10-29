@@ -35,7 +35,7 @@ import com.alibaba.citrus.service.mappingrule.impl.rule.FallbackModuleMappingRul
 import com.alibaba.citrus.service.mappingrule.impl.rule.FallbackTemplateMappingRule.FallbackTemplateIterator;
 
 /**
- * ²âÊÔ<code>FallbackIterator</code>¡£
+ * æµ‹è¯•<code>FallbackIterator</code>ã€‚
  * 
  * @author Michael Zhou
  */

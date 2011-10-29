@@ -25,7 +25,7 @@ import com.alibaba.citrus.generictype.introspect.PropertyInfo;
 import com.alibaba.citrus.util.internal.StringUtil;
 
 /**
- * ¶Ô{@link PropertyInfo}µÄ³éÏóÊµÏÖ¡£
+ * å¯¹{@link PropertyInfo}çš„æŠ½è±¡å®ç°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -74,7 +74,7 @@ public abstract class AbstractPropertyInfo implements PropertyInfo {
     }
 
     /**
-     * ¼ì²é¶ÔÏóµÄÀàĞÍ£¬È·±£ÆäÎª{@link getDeclaringType()}µÄ×ÓÀà¡£
+     * æ£€æŸ¥å¯¹è±¡çš„ç±»å‹ï¼Œç¡®ä¿å…¶ä¸º{@link getDeclaringType()}çš„å­ç±»ã€‚
      */
     protected final Object checkType(Object object) {
         assertTrue(getDeclaringType().getRawType().isInstance(object));
@@ -83,7 +83,7 @@ public abstract class AbstractPropertyInfo implements PropertyInfo {
     }
 
     /**
-     * ±È½ÏÁ½¸öpropertyĞÅÏ¢ÊÇ·ñÈ«µÈ¡£
+     * æ¯”è¾ƒä¸¤ä¸ªpropertyä¿¡æ¯æ˜¯å¦å…¨ç­‰ã€‚
      */
     @Override
     public boolean equals(Object other) {
@@ -108,7 +108,7 @@ public abstract class AbstractPropertyInfo implements PropertyInfo {
     }
 
     /**
-     * ¼ÆËãhashÖµ¡£
+     * è®¡ç®—hashå€¼ã€‚
      */
     @Override
     public int hashCode() {
@@ -124,7 +124,7 @@ public abstract class AbstractPropertyInfo implements PropertyInfo {
     }
 
     /**
-     * ×ª»»³É×Ö·û´®¡£
+     * è½¬æ¢æˆå­—ç¬¦ä¸²ã€‚
      */
     @Override
     public String toString() {

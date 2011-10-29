@@ -78,6 +78,6 @@ public class ModuleLoaderServiceSkipValidationTests {
     public void classModule() {
         ModuleFactory[] factories = getFieldValue(moduleLoaderService, "factories", ModuleFactory[].class);
         ClassModuleFactory classModuleFactory = (ClassModuleFactory) factories[0];
-        assertTrue(classModuleFactory.getModule("screen", "MyScreen") instanceof MyScreen); // 说明include-filter有效
+        assertTrue(classModuleFactory.getModule("screen", "MyScreen") instanceof MyScreen); // 璇存槑include-filter鏈夋晥
     }
 }

@@ -29,7 +29,7 @@ import com.alibaba.citrus.asm.Type;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ²¹³ä<code>Type</code>ÖĞµÄ¹¦ÄÜ¡£
+ * è¡¥å……<code>Type</code>ä¸­çš„åŠŸèƒ½ã€‚
  * 
  * @author Michael Zhou
  */
@@ -49,10 +49,10 @@ public class TypeUtil {
     }
 
     // ===========================================================
-    // [region] Class.getName() -> ¸÷ÖÖĞÎÊ½
+    // [region] Class.getName() -> å„ç§å½¢å¼
 
     /**
-     * È¡µÃÀàÃûµÄÄÚ²¿±íÊ¾¡£Ö»ÓĞÆÕÍ¨ÀàºÍ½Ó¿Ú¿ÉÒÔ×ª»»³ÉÕâÖÖĞÎÊ½£¬Ô­×ÓÀàĞÍºÍÊı×é²»Ö§³Ö¸Ã·½·¨¡£
+     * å–å¾—ç±»åçš„å†…éƒ¨è¡¨ç¤ºã€‚åªæœ‰æ™®é€šç±»å’Œæ¥å£å¯ä»¥è½¬æ¢æˆè¿™ç§å½¢å¼ï¼ŒåŸå­ç±»å‹å’Œæ•°ç»„ä¸æ”¯æŒè¯¥æ–¹æ³•ã€‚
      */
     public static String getInternalNameFromClassName(String className) {
         assertTrue(!StringUtil.isEmpty(className), "className is empty");
@@ -63,7 +63,7 @@ public class TypeUtil {
     }
 
     /**
-     * È¡µÃÀàĞÍÃû³ÆµÄdescriptor¡£ÕâÀïµÄÀàĞÍÃû³ÆÎª<code>Class.getName()</code>µÄ·µ»ØÖµ¡£ ÀıÈç£º
+     * å–å¾—ç±»å‹åç§°çš„descriptorã€‚è¿™é‡Œçš„ç±»å‹åç§°ä¸º<code>Class.getName()</code>çš„è¿”å›å€¼ã€‚ ä¾‹å¦‚ï¼š
      * 
      * <pre>
      *  TypeUtil.getDescriptorFromClassName(int.class.getName())         = &quot;I&quot;  // int
@@ -75,41 +75,41 @@ public class TypeUtil {
     public static String getDescriptorFromClassName(String className) {
         assertTrue(!StringUtil.isEmpty(className), "className is empty");
 
-        // ÊÇÊı×é£º[I¡¢[Ljava.lang.Object;
+        // æ˜¯æ•°ç»„ï¼š[Iã€[Ljava.lang.Object;
         if (className.startsWith("[")) {
             return className.replace('.', '/');
         }
 
-        // ÊÇprimitiveÀàĞÍ
+        // æ˜¯primitiveç±»å‹
         String descriptor = PRIMITIVE_DESCRIPTORS.get(className);
 
         if (descriptor != null) {
             return descriptor;
         }
 
-        // ÊÇÆÕÍ¨ÀàĞÍ
+        // æ˜¯æ™®é€šç±»å‹
         return "L" + className.replace('.', '/') + ";";
     }
 
     // ===========================================================
-    // [region] ¸÷ÖÖĞÎÊ½ -> Type
+    // [region] å„ç§å½¢å¼ -> Type
 
     /**
-     * ½«ÄÚ²¿ÀàÃû×ª»»³É<code>Type</code>¡£
+     * å°†å†…éƒ¨ç±»åè½¬æ¢æˆ<code>Type</code>ã€‚
      */
     public static Type getTypeFromInternalName(String internalName) {
         return getObjectType(internalName);
     }
 
     /**
-     * ½«ÀàÃû×ª»»³É<code>Type</code>¡£
+     * å°†ç±»åè½¬æ¢æˆ<code>Type</code>ã€‚
      */
     public static Type getTypeFromClassName(String className) {
         return getType(getDescriptorFromClassName(className));
     }
 
     /**
-     * ½«ÀàĞÍ×ª»»³É<code>Type</code>¡£
+     * å°†ç±»å‹è½¬æ¢æˆ<code>Type</code>ã€‚
      */
     public static Type getTypeFromClass(Class<?> type) {
         assertNotNull(type, "class");
@@ -117,10 +117,10 @@ public class TypeUtil {
     }
 
     // ===========================================================
-    // [region] Type»òÃû³ÆµÄÊı×é
+    // [region] Typeæˆ–åç§°çš„æ•°ç»„
 
     /**
-     * ½«Ò»×éclass×ª»»³É<code>Type[]</code>¡£
+     * å°†ä¸€ç»„classè½¬æ¢æˆ<code>Type[]</code>ã€‚
      */
     public static Type[] getTypes(Class<?>[] classes) {
         if (classes == null) {
@@ -137,7 +137,7 @@ public class TypeUtil {
     }
 
     /**
-     * ½«<code>Type[]</code>×ª»»³ÉÄÚ²¿Ãû³Æ¡£
+     * å°†<code>Type[]</code>è½¬æ¢æˆå†…éƒ¨åç§°ã€‚
      */
     public static String[] getInternalNames(Type[] types) {
         if (types == null) {
@@ -158,41 +158,41 @@ public class TypeUtil {
     }
 
     // ===========================================================
-    // [region] ¸÷ÖÖĞÎÊ½ -> MethodDescriptor
+    // [region] å„ç§å½¢å¼ -> MethodDescriptor
 
     /**
-     * È¡µÃ<code>Method</code>¶ÔÓ¦µÄÇ©Ãû¡£
+     * å–å¾—<code>Method</code>å¯¹åº”çš„ç­¾åã€‚
      */
     public static MethodSignature getMethodSignature(Method method) {
         return new MethodSignature(method);
     }
 
     /**
-     * È¡µÃ<code>Method</code>¶ÔÓ¦µÄÇ©Ãû¡£
+     * å–å¾—<code>Method</code>å¯¹åº”çš„ç­¾åã€‚
      */
     public static MethodSignature getMethodSignature(String name, Class<?> returnType, Class<?>[] parameterTypes) {
         return new MethodSignature(name, returnType, parameterTypes);
     }
 
     /**
-     * È¡µÃ<code>Constructor</code>¶ÔÓ¦µÄÇ©Ãû¡£
+     * å–å¾—<code>Constructor</code>å¯¹åº”çš„ç­¾åã€‚
      */
     public static MethodSignature getConstructorSignature(Constructor<?> constructor) {
         return new MethodSignature(constructor);
     }
 
     /**
-     * È¡µÃ<code>Constructor</code>¶ÔÓ¦µÄÇ©Ãû¡£
+     * å–å¾—<code>Constructor</code>å¯¹åº”çš„ç­¾åã€‚
      */
     public static MethodSignature getConstructorSignature(Class<?>[] parameterTypes) {
         return new MethodSignature(CodegenConstant.CONSTRUCTOR_NAME, void.class, parameterTypes);
     }
 
     // ===========================================================
-    // [region] ÆäËü¹¦ÄÜ
+    // [region] å…¶å®ƒåŠŸèƒ½
 
     /**
-     * ¼ì²â±êÖ¾Î»ÊÇ·ñ±»ÉèÖÃ¡£
+     * æ£€æµ‹æ ‡å¿—ä½æ˜¯å¦è¢«è®¾ç½®ã€‚
      */
     public static boolean testBits(int flags, int bits) {
         return (flags & bits) != 0;

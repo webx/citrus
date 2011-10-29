@@ -29,7 +29,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>StreamUtil</code>Àà¡£
+ * æµ‹è¯•<code>StreamUtil</code>ç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -39,7 +39,7 @@ public class StreamUtilTests {
 
     @BeforeClass
     public static void init() throws IOException {
-        chars = "ÖĞ»ªÈËÃñ¹²ºÍ¹úabcdefghijklmnopqrstuvwxyz";
+        chars = "ä¸­åäººæ°‘å…±å’Œå›½abcdefghijklmnopqrstuvwxyz";
         bytes = chars.getBytes("GBK");
     }
 

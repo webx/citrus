@@ -23,7 +23,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * <code>ListMapTest</code>²âÊÔ<code>ListMap</code>µÄ»ù±¾ĞĞÎª.
+ * <code>ListMapTest</code>æµ‹è¯•<code>ListMap</code>çš„åŸºæœ¬è¡Œä¸º.
  * 
  * @author Michael Zhou
  */
@@ -34,7 +34,7 @@ public abstract class AbstractListMapTests extends AbstractTests {
 
     @Before
     public void init() {
-        // map1ÖĞÌîÈëÓĞĞòµÄÊı¾İ.
+        // map1ä¸­å¡«å…¥æœ‰åºçš„æ•°æ®.
         map1 = createListMap();
 
         String key = "";
@@ -44,12 +44,12 @@ public abstract class AbstractListMapTests extends AbstractTests {
             map1.put(key, new Integer(i));
         }
 
-        // map2²âÊÔkeyºÍvalueÎªnullµÄÇé¿ö.
+        // map2æµ‹è¯•keyå’Œvalueä¸ºnullçš„æƒ…å†µ.
         map2 = createListMap();
         map2.put(null, "111");
         map2.put("aaa", null);
 
-        // map3Îª¿Õ.
+        // map3ä¸ºç©º.
         map3 = createListMap();
     }
 
@@ -65,24 +65,24 @@ public abstract class AbstractListMapTests extends AbstractTests {
             map1.get(100);
             fail("Should throw IndexOutOfBoundsException");
         } catch (IndexOutOfBoundsException e) {
-            // Ã»ÓĞµÚ101ÏîÁË
+            // æ²¡æœ‰ç¬¬101é¡¹äº†
         }
 
         assertEquals("111", map2.get(0));
-        assertEquals(null, map2.get(1)); // µÚ¶şÏîµÄÖµÎªnull
+        assertEquals(null, map2.get(1)); // ç¬¬äºŒé¡¹çš„å€¼ä¸ºnull
 
         try {
             map2.get(2);
             fail("Should throw IndexOutOfBoundsException");
         } catch (IndexOutOfBoundsException e) {
-            // Ã»ÓĞµÚ3ÏîÁË
+            // æ²¡æœ‰ç¬¬3é¡¹äº†
         }
 
         try {
             map3.get(0);
             fail("Should throw IndexOutOfBoundsException");
         } catch (IndexOutOfBoundsException e) {
-            // ¿Õmap
+            // ç©ºmap
         }
     }
 
@@ -99,23 +99,23 @@ public abstract class AbstractListMapTests extends AbstractTests {
             map1.getKey(100);
             fail("Should throw IndexOutOfBoundsException");
         } catch (IndexOutOfBoundsException e) {
-            // Ã»ÓĞµÚ101ÏîÁË
+            // æ²¡æœ‰ç¬¬101é¡¹äº†
         }
 
-        assertEquals(null, map2.getKey(0)); // µÚÒ»ÏîµÄkeyÎªnull
+        assertEquals(null, map2.getKey(0)); // ç¬¬ä¸€é¡¹çš„keyä¸ºnull
         assertEquals("aaa", map2.getKey(1));
 
         try {
             map2.getKey(2);
             fail("Should throw IndexOutOfBoundsException");
         } catch (IndexOutOfBoundsException e) {
-            // Ã»ÓĞµÚ3ÏîÁË
+            // æ²¡æœ‰ç¬¬3é¡¹äº†
         }
     }
 
     @Test
     public void removeEntry() {
-        // ´ÓÇ°Ãæ¿ªÊ¼É¾50¸ö.
+        // ä»å‰é¢å¼€å§‹åˆ 50ä¸ª.
         String key = "";
 
         for (int i = 0; i < 50; i++) {
@@ -132,7 +132,7 @@ public abstract class AbstractListMapTests extends AbstractTests {
             }
         }
 
-        // ´ÓºóÃæ¿ªÊ¼É¾50¸ö.
+        // ä»åé¢å¼€å§‹åˆ 50ä¸ª.
         key = "";
 
         for (int i = 0; i <= 100; i++) {
@@ -161,7 +161,7 @@ public abstract class AbstractListMapTests extends AbstractTests {
             map2.removeEntry(0);
             fail("Should throw IndexOutOfBoundsException");
         } catch (IndexOutOfBoundsException e) {
-            // ¿Õmap
+            // ç©ºmap
         }
 
         // map3
@@ -169,7 +169,7 @@ public abstract class AbstractListMapTests extends AbstractTests {
             map3.removeEntry(0);
             fail("Should throw IndexOutOfBoundsException");
         } catch (IndexOutOfBoundsException e) {
-            // ¿Õmap
+            // ç©ºmap
         }
     }
 
@@ -230,10 +230,10 @@ public abstract class AbstractListMapTests extends AbstractTests {
     protected abstract ListMap<Object, Object> createListMap();
 
     /**
-     * ¸´ÖÆÒ»¸ö<code>ListMap</code>.
+     * å¤åˆ¶ä¸€ä¸ª<code>ListMap</code>.
      * 
-     * @param map Òª¸´ÖÆµÄmap
-     * @return ¸´ÖÆÆ·
+     * @param map è¦å¤åˆ¶çš„map
+     * @return å¤åˆ¶å“
      */
     protected abstract ListMap<Object, Object> cloneListMap(ListMap<Object, Object> map);
 }

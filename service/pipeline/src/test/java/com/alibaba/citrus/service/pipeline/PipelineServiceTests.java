@@ -33,7 +33,7 @@ import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.config.Scope;
 
 /**
- * ²âÊÔpipelineµÄÅäÖÃ£¬ÒÔ¼°valveµÄ¹¦ÄÜ¡£
+ * æµ‹è¯•pipelineçš„é…ç½®ï¼Œä»¥åŠvalveçš„åŠŸèƒ½ã€‚
  * 
  * @author Michael Zhou
  */
@@ -63,7 +63,7 @@ public class PipelineServiceTests extends AbstractPipelineTests {
         Pipeline real1 = getProxyTarget(pipelineProxy);
         assertSame(real1, beansHolder.get().get("proxyTarget.scoped"));
 
-        // Çå³ıscope£¬ÖØĞÂµ÷ÓÃproxy
+        // æ¸…é™¤scopeï¼Œé‡æ–°è°ƒç”¨proxy
         beansHolder.remove();
 
         assertInvoke(pipelineProxy, false);
@@ -85,7 +85,7 @@ public class PipelineServiceTests extends AbstractPipelineTests {
                 "1-3");
     }
 
-    // ÓÉÓÚspring2ºÍspring3µÄscope½Ó¿ÚÊÇ²»¼æÈİµÄ£¨ºóÕß»ùÓÚgeneric type£©£¬ËùÒÔÓÃproxyÀ´²âÊÔ£¬È·±£ÔÚÁ½ÖÖ»·¾³ÏÂ¾ù¿É±àÒë¡£
+    // ç”±äºspring2å’Œspring3çš„scopeæ¥å£æ˜¯ä¸å…¼å®¹çš„ï¼ˆåè€…åŸºäºgeneric typeï¼‰ï¼Œæ‰€ä»¥ç”¨proxyæ¥æµ‹è¯•ï¼Œç¡®ä¿åœ¨ä¸¤ç§ç¯å¢ƒä¸‹å‡å¯ç¼–è¯‘ã€‚
     public static class TestOnlyScope implements FactoryBean {
         public Class<?> getObjectType() {
             return Scope.class;

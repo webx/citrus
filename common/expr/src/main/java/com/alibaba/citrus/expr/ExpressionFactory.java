@@ -18,16 +18,16 @@
 package com.alibaba.citrus.expr;
 
 /**
- * ´´½¨<code>Expression</code>µÄ¹¤³§¡£
+ * åˆ›å»º<code>Expression</code>çš„å·¥å‚ã€‚
  * 
  * @author Michael Zhou
  */
 public interface ExpressionFactory {
     /**
-     * ´´½¨±í´ïÊ½¡£
+     * åˆ›å»ºè¡¨è¾¾å¼ã€‚
      * 
-     * @param expr ±í´ïÊ½×Ö·û´®
-     * @return ±í´ïÊ½
+     * @param expr è¡¨è¾¾å¼å­—ç¬¦ä¸²
+     * @return è¡¨è¾¾å¼
      */
     Expression createExpression(String expr) throws ExpressionParseException;
 }

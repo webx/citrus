@@ -26,13 +26,13 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.core.io.Resource;
 
 /**
- * Velocity <code>ResourceLoader</code>µÄ³éÏóÊµÏÖ¡£
+ * Velocity <code>ResourceLoader</code>çš„æŠ½è±¡å®ç°ã€‚
  * 
  * @author Michael Zhou
  */
 public abstract class AbstractResourceLoader extends org.apache.velocity.runtime.resource.loader.ResourceLoader {
     /**
-     * È¡µÃÊäÈëÁ÷¡£
+     * å–å¾—è¾“å…¥æµã€‚
      */
     @Override
     public final InputStream getResourceStream(String templateName) throws ResourceNotFoundException {
@@ -51,13 +51,13 @@ public abstract class AbstractResourceLoader extends org.apache.velocity.runtime
     }
 
     /**
-     * ÅĞ¶Ï×ÊÔ´ÊÇ·ñ±»¸Ä±ä¡£
+     * åˆ¤æ–­èµ„æºæ˜¯å¦è¢«æ”¹å˜ã€‚
      */
     @Override
     public final boolean isSourceModified(org.apache.velocity.runtime.resource.Resource templateResource) {
         Resource resource = getResource(templateResource.getName());
 
-        // 1. ¼ÙÈç×ÊÔ´Ã»ÕÒµ½£¬¿ÉÄÜÊÇ±»É¾³ıÁË£¬ÄÇÃ´ÈÏÎªmodified==true£¬Ä£°å½«»áÔÚÖØĞÂ×°ÔØÊ±±¨´í¡£
+        // 1. å‡å¦‚èµ„æºæ²¡æ‰¾åˆ°ï¼Œå¯èƒ½æ˜¯è¢«åˆ é™¤äº†ï¼Œé‚£ä¹ˆè®¤ä¸ºmodified==trueï¼Œæ¨¡æ¿å°†ä¼šåœ¨é‡æ–°è£…è½½æ—¶æŠ¥é”™ã€‚
         if (resource == null || !resource.exists()) {
             return true;
         }
@@ -70,17 +70,17 @@ public abstract class AbstractResourceLoader extends org.apache.velocity.runtime
             lastModified = 0;
         }
 
-        // 2. ¼ÙÈç×ÊÔ´ÕÒµ½ÁË£¬µ«ÊÇ²»Ö§³ÖlastModified¹¦ÄÜ£¬ÔòÈÏÎªmodified==false£¬Ä£°å²»»áÖØĞÂ×°ÔØ¡£
+        // 2. å‡å¦‚èµ„æºæ‰¾åˆ°äº†ï¼Œä½†æ˜¯ä¸æ”¯æŒlastModifiedåŠŸèƒ½ï¼Œåˆ™è®¤ä¸ºmodified==falseï¼Œæ¨¡æ¿ä¸ä¼šé‡æ–°è£…è½½ã€‚
         if (lastModified <= 0L) {
             return false;
         }
 
-        // 3. ×ÊÔ´ÕÒµ½£¬²¢Ö§³ÖlastModified¹¦ÄÜ£¬Ôò±È½ÏlastModified¡£
+        // 3. èµ„æºæ‰¾åˆ°ï¼Œå¹¶æ”¯æŒlastModifiedåŠŸèƒ½ï¼Œåˆ™æ¯”è¾ƒlastModifiedã€‚
         return lastModified != templateResource.getLastModified();
     }
 
     /**
-     * È¡µÃ×î½ü±»ĞŞ¸ÄµÄÊ±¼ä¡£
+     * å–å¾—æœ€è¿‘è¢«ä¿®æ”¹çš„æ—¶é—´ã€‚
      */
     @Override
     public final long getLastModified(org.apache.velocity.runtime.resource.Resource templateResource) {
@@ -97,7 +97,7 @@ public abstract class AbstractResourceLoader extends org.apache.velocity.runtime
     }
 
     /**
-     * ¹æ¸ñ»¯Ä£°åÃû¡£
+     * è§„æ ¼åŒ–æ¨¡æ¿åã€‚
      */
     protected final String normalizeTemplateName(String templateName) {
         if (isEmpty(templateName)) {
@@ -112,12 +112,12 @@ public abstract class AbstractResourceLoader extends org.apache.velocity.runtime
     }
 
     /**
-     * È¡µÃ×ÊÔ´¡£
+     * å–å¾—èµ„æºã€‚
      */
     protected abstract Resource getResource(String templateName);
 
     /**
-     * ÓÅ»¯ÅĞ¶ÏÂß¼­£¬¾¡Á¿±ÜÃâÈ¡µÃresource stream¡£
+     * ä¼˜åŒ–åˆ¤æ–­é€»è¾‘ï¼Œå°½é‡é¿å…å–å¾—resource streamã€‚
      */
     @Override
     public boolean resourceExists(String resourceName) {
@@ -126,7 +126,7 @@ public abstract class AbstractResourceLoader extends org.apache.velocity.runtime
     }
 
     /**
-     * È¡µÃÓÃÓÚÈÕÖ¾¼ÇÂ¼µÄID¡£
+     * å–å¾—ç”¨äºæ—¥å¿—è®°å½•çš„IDã€‚
      */
     protected abstract String getLogID();
 

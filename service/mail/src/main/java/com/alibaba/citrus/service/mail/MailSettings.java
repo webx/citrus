@@ -18,13 +18,13 @@
 package com.alibaba.citrus.service.mail;
 
 /**
- * ´ú±íÒ»×éºÍmailÏà¹ØµÄÉè¶¨¡£
+ * ä»£è¡¨ä¸€ç»„å’Œmailç›¸å…³çš„è®¾å®šã€‚
  * 
  * @author Michael Zhou
  */
 public interface MailSettings {
     /**
-     * È¡µÃÖ¸¶¨ÀàĞÍµÄ·şÎñ¡£ Èç¹ûÎ´Ö¸¶¨¸ÃÀà·şÎñ£¬ÔòÊ¹ÓÃÄ¬ÈÏID´ÓÈİÆ÷ÖĞÈ¡µÃ·şÎñ¡£
+     * å–å¾—æŒ‡å®šç±»å‹çš„æœåŠ¡ã€‚ å¦‚æœæœªæŒ‡å®šè¯¥ç±»æœåŠ¡ï¼Œåˆ™ä½¿ç”¨é»˜è®¤IDä»å®¹å™¨ä¸­å–å¾—æœåŠ¡ã€‚
      */
     <T> T getService(Class<T> serviceType, String defaultServiceId);
 }

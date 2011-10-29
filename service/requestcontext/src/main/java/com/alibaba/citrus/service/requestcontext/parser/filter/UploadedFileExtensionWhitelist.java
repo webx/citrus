@@ -36,7 +36,7 @@ import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionP
 import com.alibaba.citrus.util.FileUtil;
 
 /**
- * ¸ù¾İÎÄ¼şÃûºó×º¹ıÂËÉÏ´«ÎÄ¼ş¡£
+ * æ ¹æ®æ–‡ä»¶ååç¼€è¿‡æ»¤ä¸Šä¼ æ–‡ä»¶ã€‚
  * 
  * @author Michael Zhou
  */
@@ -74,9 +74,9 @@ public class UploadedFileExtensionWhitelist extends BeanSupport implements Uploa
 
         boolean allowed = false;
 
-        // Î´Ö¸¶¨ÎÄ¼şÃû - ·µ»Ønull
-        // ÎÄ¼şÃûÃ»ÓĞºó×º - ·µ»Ø×Ö·û´®¡°null¡±
-        // ºó×º±»¹æ¸ñ»¯ÎªĞ¡Ğ´×ÖÄ¸
+        // æœªæŒ‡å®šæ–‡ä»¶å - è¿”å›null
+        // æ–‡ä»¶åæ²¡æœ‰åç¼€ - è¿”å›å­—ç¬¦ä¸²â€œnullâ€
+        // åç¼€è¢«è§„æ ¼åŒ–ä¸ºå°å†™å­—æ¯
         String ext = getExtension(file.getName(), "null", true);
 
         if (ext != null) {

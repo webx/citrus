@@ -27,7 +27,7 @@ import java.net.URL;
 import com.alibaba.citrus.service.resource.Resource;
 
 /**
- * ´ú±íÒ»¸ö<code>InputStream</code>µÄ×ÊÔ´¡£
+ * ä»£è¡¨ä¸€ä¸ª<code>InputStream</code>çš„èµ„æºã€‚
  * 
  * @author Michael Zhou
  */
@@ -35,42 +35,42 @@ public class InputStreamResource implements Resource {
     private final InputStream stream;
 
     /**
-     * ´´½¨Ò»¸ö<code>InputStreamResource</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>InputStreamResource</code>ã€‚
      */
     public InputStreamResource(InputStream stream) {
         this.stream = assertNotNull(stream, "stream");
     }
 
     /**
-     * È¡µÃ×ÊÔ´µÄ<code>URL</code>¡£
+     * å–å¾—èµ„æºçš„<code>URL</code>ã€‚
      */
     public URL getURL() {
         return null;
     }
 
     /**
-     * È¡µÃ×ÊÔ´µÄ<code>File</code>¡£
+     * å–å¾—èµ„æºçš„<code>File</code>ã€‚
      */
     public File getFile() {
         return null;
     }
 
     /**
-     * È¡µÃ×ÊÔ´µÄ<code>InputStream</code>¡£
+     * å–å¾—èµ„æºçš„<code>InputStream</code>ã€‚
      */
     public InputStream getInputStream() throws IOException {
         return stream;
     }
 
     /**
-     * ÅĞ¶Ï×ÊÔ´ÊÇ·ñ´æÔÚ¡£
+     * åˆ¤æ–­èµ„æºæ˜¯å¦å­˜åœ¨ã€‚
      */
     public boolean exists() {
         return stream != null;
     }
 
     /**
-     * È¡µÃ×ÊÔ´×î½üĞŞ¸ÄÊ±¼ä¡£
+     * å–å¾—èµ„æºæœ€è¿‘ä¿®æ”¹æ—¶é—´ã€‚
      */
     public long lastModified() {
         return 0;
@@ -112,7 +112,7 @@ public class InputStreamResource implements Resource {
     }
 
     /**
-     * ½«resource×ª»»³É×Ö·û´®±íÊ¾¡£
+     * å°†resourceè½¬æ¢æˆå­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      */
     @Override
     public String toString() {

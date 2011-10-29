@@ -20,7 +20,7 @@ package com.alibaba.citrus.generictype.introspect;
 import com.alibaba.citrus.util.internal.StringUtil;
 
 /**
- * ´ú±í½âÎö<code>PropertyPath</code>µÄ´íÎó¡£
+ * ä»£è¡¨è§£æ<code>PropertyPath</code>çš„é”™è¯¯ã€‚
  * 
  * @author Michael Zhou
  */

@@ -59,7 +59,7 @@ public class GroupTests extends AbstractFormServiceTests {
 
     @Parameters
     public static Collection<Object[]> data() {
-        // ·Ö±ğ²âÊÔÁ½×é£º1. ÓĞparser request context  2. ÎŞparser request context£¬´¿HttpServletRequest
+        // åˆ†åˆ«æµ‹è¯•ä¸¤ç»„ï¼š1. æœ‰parser request context  2. æ— parser request contextï¼Œçº¯HttpServletRequest
         ApplicationContext withParserRequestContextAndUpload = createContext("services-form.xml", true);
         ApplicationContext noParserRequestContextOrUpload = createContext("services-form.xml", false);
 
@@ -118,14 +118,14 @@ public class GroupTests extends AbstractFormServiceTests {
     }
 
     /**
-     * È·±£validator¿ÉÒÔ¶Áµ½ºóÃæµÄfieldÖµ¡£
+     * ç¡®ä¿validatorå¯ä»¥è¯»åˆ°åé¢çš„fieldå€¼ã€‚
      */
     @Test
     public void validate_multiFields() throws Exception {
         getFormService("form2", factory);
 
         // field1 failed to validate
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.field1
                 { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
@@ -141,7 +141,7 @@ public class GroupTests extends AbstractFormServiceTests {
         assertEquals(true, group.getField("field2").isValid());
 
         // succeeded in validating
-        args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "value1" }, // group1.field1
                 { "_fm.g._0.fi", "value2" }, // group1.field2
         };
@@ -163,7 +163,7 @@ public class GroupTests extends AbstractFormServiceTests {
         assertEquals(false, group.isValidated());
 
         // with data
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.field1
                 { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
@@ -181,7 +181,7 @@ public class GroupTests extends AbstractFormServiceTests {
 
     @Test
     public void getFields() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.field1
         };
 
@@ -212,7 +212,7 @@ public class GroupTests extends AbstractFormServiceTests {
     public void mapTo_null() throws Exception {
         group.mapTo(null);
 
-        // ×´Ì¬²»±ä
+        // çŠ¶æ€ä¸å˜
         assertEquals(false, group.isValidated());
         assertEquals(true, group.isValid());
 
@@ -221,7 +221,7 @@ public class GroupTests extends AbstractFormServiceTests {
     }
 
     /**
-     * isValidated == true£¬²»ÔÊĞíÖ´ĞĞmapTo¡£
+     * isValidated == trueï¼Œä¸å…è®¸æ‰§è¡ŒmapToã€‚
      */
     @Test
     public void mapTo_isValidated() throws Exception {
@@ -231,12 +231,12 @@ public class GroupTests extends AbstractFormServiceTests {
 
         group.mapTo(new MyIntObject(234));
 
-        // Ô­×´Ì¬²»ÊÜÓ°Ïì
+        // åŸçŠ¶æ€ä¸å—å½±å“
         assertEquals(true, group.isValidated());
         assertEquals(false, group.isValid());
 
         assertEquals(true, field1.isValid());
-        assertEquals("default1", field1.getValue()); // ²»ÊÇ234
+        assertEquals("default1", field1.getValue()); // ä¸æ˜¯234
 
         assertEquals(false, field2.isValid());
         assertEquals(null, field2.getValue());
@@ -246,8 +246,8 @@ public class GroupTests extends AbstractFormServiceTests {
     public void mapTo_simpleValue() throws Exception {
         group.mapTo(new MyIntObject(234));
 
-        // field1(property1)´æÔÚ£¬field2²»´æÔÚ
-        // mapTo²»Ó°ÏìisValidatedºÍisValid×´Ì¬
+        // field1(property1)å­˜åœ¨ï¼Œfield2ä¸å­˜åœ¨
+        // mapToä¸å½±å“isValidatedå’ŒisValidçŠ¶æ€
         assertEquals(false, group.isValidated());
         assertEquals(true, group.isValid());
 
@@ -262,8 +262,8 @@ public class GroupTests extends AbstractFormServiceTests {
     public void mapTo_stringArray() throws Exception {
         group.mapTo(new MyStringArrayObject("aaa", "bbb"));
 
-        // field1(property1)²»´æÔÚ£¬field2´æÔÚ
-        // mapTo²»Ó°ÏìisValidatedºÍisValid×´Ì¬
+        // field1(property1)ä¸å­˜åœ¨ï¼Œfield2å­˜åœ¨
+        // mapToä¸å½±å“isValidatedå’ŒisValidçŠ¶æ€
         assertEquals(false, group.isValidated());
         assertEquals(true, group.isValid());
 
@@ -279,8 +279,8 @@ public class GroupTests extends AbstractFormServiceTests {
     public void mapTo_customType() throws Exception {
         group.mapTo(new MyCustomObject(new SimpleValue("aaa")));
 
-        // field1(property1)²»´æÔÚ£¬field2´æÔÚ
-        // mapTo²»Ó°ÏìisValidatedºÍisValid×´Ì¬
+        // field1(property1)ä¸å­˜åœ¨ï¼Œfield2å­˜åœ¨
+        // mapToä¸å½±å“isValidatedå’ŒisValidçŠ¶æ€
         assertEquals(false, group.isValidated());
         assertEquals(true, group.isValid());
 
@@ -307,7 +307,7 @@ public class GroupTests extends AbstractFormServiceTests {
 
     @Test
     public void setProperties_null() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.field1
                 { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
@@ -345,7 +345,7 @@ public class GroupTests extends AbstractFormServiceTests {
 
     @Test
     public void setProperties_invalid() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.field1
                 { "_fm.g._0.fi", "" }, // group1.field2
         };
@@ -372,7 +372,7 @@ public class GroupTests extends AbstractFormServiceTests {
 
     @Test
     public void setProperties_simpleValue() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "234" }, // group1.field1
                 { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
@@ -384,11 +384,11 @@ public class GroupTests extends AbstractFormServiceTests {
         assertEquals(true, group.isValid());
         assertEquals(true, group.isValidated());
 
-        // field1(property1)´æÔÚ£¬field2²»´æÔÚ
+        // field1(property1)å­˜åœ¨ï¼Œfield2ä¸å­˜åœ¨
         MyIntObject obj = new MyIntObject();
         group.setProperties(obj);
 
-        assertEquals(123, obj.getProperty1()); // ÓÉÓÚcustom editorµÄ´æÔÚ£¬Öµ±ä³É123
+        assertEquals(123, obj.getProperty1()); // ç”±äºcustom editorçš„å­˜åœ¨ï¼Œå€¼å˜æˆ123
 
         assertEquals(true, group.isValid());
         assertEquals(true, group.isValidated());
@@ -398,7 +398,7 @@ public class GroupTests extends AbstractFormServiceTests {
     public void setProperties_quietMode() throws Exception {
         getFormService("form3", factory);
 
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "illegal" }, // group1.field1
         };
 
@@ -409,7 +409,7 @@ public class GroupTests extends AbstractFormServiceTests {
         assertEquals(true, group.isValid());
         assertEquals(true, group.isValidated());
 
-        // ×ª»»Ê§°Ü£¬µ«ÊÇquiet=true£¬Ê¹ÓÃÄ¬ÈÏÖµ¡£
+        // è½¬æ¢å¤±è´¥ï¼Œä½†æ˜¯quiet=trueï¼Œä½¿ç”¨é»˜è®¤å€¼ã€‚
         MyIntObject obj = new MyIntObject();
         group.setProperties(obj);
 
@@ -420,7 +420,7 @@ public class GroupTests extends AbstractFormServiceTests {
     public void setProperties_noisyMode() throws Exception {
         getFormService("form4", factory);
 
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "illegal" }, // group1.field1
         };
 
@@ -431,7 +431,7 @@ public class GroupTests extends AbstractFormServiceTests {
         assertEquals(true, group.isValid());
         assertEquals(true, group.isValidated());
 
-        // ×ª»»Ê§°Ü£¬µ«ÊÇquiet=true£¬Ê¹ÓÃÄ¬ÈÏÖµ¡£
+        // è½¬æ¢å¤±è´¥ï¼Œä½†æ˜¯quiet=trueï¼Œä½¿ç”¨é»˜è®¤å€¼ã€‚
         try {
             group.setProperties(new MyIntObject());
             fail();
@@ -442,7 +442,7 @@ public class GroupTests extends AbstractFormServiceTests {
 
     @Test
     public void setProperties_stringArray() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.field1
                 { "_fm.g._0.fi", new String[] { "bbb", "ccc", "ddd" } }, // group1.field2
         };
@@ -454,7 +454,7 @@ public class GroupTests extends AbstractFormServiceTests {
         assertEquals(true, group.isValid());
         assertEquals(true, group.isValidated());
 
-        // field1(property1)²»´æÔÚ£¬field2´æÔÚ
+        // field1(property1)ä¸å­˜åœ¨ï¼Œfield2å­˜åœ¨
         MyStringArrayObject obj = new MyStringArrayObject();
         group.setProperties(obj);
 
@@ -466,7 +466,7 @@ public class GroupTests extends AbstractFormServiceTests {
 
     @Test
     public void setProperties_customType() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.field1
                 { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
@@ -478,7 +478,7 @@ public class GroupTests extends AbstractFormServiceTests {
         assertEquals(true, group.isValid());
         assertEquals(true, group.isValidated());
 
-        // field1(property1)²»´æÔÚ£¬field2´æÔÚ
+        // field1(property1)ä¸å­˜åœ¨ï¼Œfield2å­˜åœ¨
         MyCustomObject obj = new MyCustomObject();
         group.setProperties(obj);
 
@@ -490,7 +490,7 @@ public class GroupTests extends AbstractFormServiceTests {
 
     @Test
     public void setProperties_noValues() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.gro._0.f", "aaa" }, // group3.field1
         };
 
@@ -501,7 +501,7 @@ public class GroupTests extends AbstractFormServiceTests {
         assertEquals(true, group.isValid());
         assertEquals(true, group.isValidated());
 
-        // field1(property1)²»´æÔÚ£¬field2´æÔÚ
+        // field1(property1)ä¸å­˜åœ¨ï¼Œfield2å­˜åœ¨
         MyCustomObject obj = new MyCustomObject();
         group.setProperties(obj);
 
@@ -513,7 +513,7 @@ public class GroupTests extends AbstractFormServiceTests {
 
     @Test
     public void setProperties_fileItem() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.field1
                 { "_fm.g._0.fi", new File(srcdir, "data/file1.txt") }, // group1.field2
         };
@@ -543,7 +543,7 @@ public class GroupTests extends AbstractFormServiceTests {
     @Test
     public void setProperties_fileItems() throws Exception {
         Object[][] args = new Object[][] {
-                { "sumbit", "Ìá½»" }, //
+                { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.field1
                 { "_fm.g._0.fi", new File[] { new File(srcdir, "data/file1.txt"), new File(srcdir, "data/file2.txt") } }, // group1.field2
         };
@@ -574,7 +574,7 @@ public class GroupTests extends AbstractFormServiceTests {
 
     @Test
     public void setProperties_date() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "1989-6-4" }, // group1.field1
                 { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
@@ -600,7 +600,7 @@ public class GroupTests extends AbstractFormServiceTests {
 
     @Test
     public void toString_() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.default.field1
                 { "_fm.g.11.f", "aaa" }, // group1.11.field1
         };

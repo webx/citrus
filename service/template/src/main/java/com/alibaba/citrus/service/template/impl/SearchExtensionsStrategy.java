@@ -23,10 +23,10 @@ import static com.alibaba.citrus.util.CollectionUtil.*;
 import java.util.List;
 
 /**
- * ¼ÙÈçµ±Ç°Ä£°åÃûºó×ºÎŞ·¨ÕÒµ½Ä£°å£¬ÊÔ×ÅÒÔÆäËüºó×ºÑ°ÕÒ¡£
+ * å‡å¦‚å½“å‰æ¨¡æ¿ååç¼€æ— æ³•æ‰¾åˆ°æ¨¡æ¿ï¼Œè¯•ç€ä»¥å…¶å®ƒåç¼€å¯»æ‰¾ã€‚
  * <p>
- * ÀıÈç£ºÄ£°å<code>test.vm</code>²»´æÔÚ£¬ÄÇÃ´¾Í³¢ÊÔÒ»ÏÂ<code>test.jsp</code>¡¢
- * <code>test.ftl</code>µÈ¡£
+ * ä¾‹å¦‚ï¼šæ¨¡æ¿<code>test.vm</code>ä¸å­˜åœ¨ï¼Œé‚£ä¹ˆå°±å°è¯•ä¸€ä¸‹<code>test.jsp</code>ã€
+ * <code>test.ftl</code>ç­‰ã€‚
  * </p>
  * 
  * @author Michael Zhou

@@ -40,7 +40,7 @@ import com.alibaba.citrus.service.form.configuration.GroupConfig;
 import com.alibaba.citrus.service.form.configuration.GroupConfig.Import;
 
 /**
- * ÊµÏÖ<code>FormConfig</code>¡£
+ * å®ç°<code>FormConfig</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -56,63 +56,63 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
     private String messageCodePrefix;
 
     /**
-     * È¡µÃ´´½¨´ËformµÄservice¡£
+     * å–å¾—åˆ›å»ºæ­¤formçš„serviceã€‚
      */
     public FormService getFormService() {
         return formService;
     }
 
     /**
-     * ÉèÖÃ´´½¨´ËformµÄservice¡£
+     * è®¾ç½®åˆ›å»ºæ­¤formçš„serviceã€‚
      */
     public void setFormService(FormService formService) {
         this.formService = assertNotNull(formService, "formService");
     }
 
     /**
-     * ÉèÖÃÒªµ¼ÈëµÄform¡£
+     * è®¾ç½®è¦å¯¼å…¥çš„formã€‚
      */
     public void setImports(FormService[] importFromServices) {
         this.importFormServices = importFromServices;
     }
 
     /**
-     * ÀàĞÍ×ª»»³ö´íÊ±£¬ÊÇ·ñ²»±¨´í£¬¶øÊÇ·µ»ØÄ¬ÈÏÖµ¡£
+     * ç±»å‹è½¬æ¢å‡ºé”™æ—¶ï¼Œæ˜¯å¦ä¸æŠ¥é”™ï¼Œè€Œæ˜¯è¿”å›é»˜è®¤å€¼ã€‚
      */
     public boolean isConverterQuiet() {
         return converterQuiet == null ? true : converterQuiet.booleanValue();
     }
 
     /**
-     * ÉèÖÃÀàĞÍ×ª»»³ö´íÊ±£¬ÊÇ·ñ²»±¨´í£¬¶øÊÇ·µ»ØÄ¬ÈÏÖµ¡£
+     * è®¾ç½®ç±»å‹è½¬æ¢å‡ºé”™æ—¶ï¼Œæ˜¯å¦ä¸æŠ¥é”™ï¼Œè€Œæ˜¯è¿”å›é»˜è®¤å€¼ã€‚
      */
     public void setConverterQuiet(boolean converterQuiet) {
         this.converterQuiet = converterQuiet;
     }
 
     /**
-     * GroupÊÇ·ñÄ¬ÈÏ±ØĞë´ÓpostÇëÇóÖĞÈ¡µÃÊı¾İ¡£
+     * Groupæ˜¯å¦é»˜è®¤å¿…é¡»ä»postè¯·æ±‚ä¸­å–å¾—æ•°æ®ã€‚
      */
     public boolean isPostOnlyByDefault() {
         return postOnlyByDefault == null ? true : postOnlyByDefault.booleanValue();
     }
 
     /**
-     * ÉèÖÃgroupÊÇ·ñÄ¬ÈÏ±ØĞë´ÓpostÇëÇóÖĞÈ¡µÃÊı¾İ¡£
+     * è®¾ç½®groupæ˜¯å¦é»˜è®¤å¿…é¡»ä»postè¯·æ±‚ä¸­å–å¾—æ•°æ®ã€‚
      */
     public void setPostOnlyByDefault(boolean postOnlyByDefault) {
         this.postOnlyByDefault = postOnlyByDefault;
     }
 
     /**
-     * È¡µÃmessage codeµÄÇ°×º¡£
+     * å–å¾—message codeçš„å‰ç¼€ã€‚
      * <p>
-     * Validator¿ÉÒÔ´Óspring <code>MessageSource</code>
-     * ÖĞÈ¡µÃmessageÄÚÈİ¡£ÓÃÀ´ÒıÓÃmessageµÄcodeÎª£º
-     * <code>messageCodePrefix.groupName.fieldName.validatorId</code>¡£
+     * Validatorå¯ä»¥ä»spring <code>MessageSource</code>
+     * ä¸­å–å¾—messageå†…å®¹ã€‚ç”¨æ¥å¼•ç”¨messageçš„codeä¸ºï¼š
+     * <code>messageCodePrefix.groupName.fieldName.validatorId</code>ã€‚
      * </p>
      * <p>
-     * Ä¬ÈÏµÄÇ°×ºÎª£º<code>form.</code>¡£
+     * é»˜è®¤çš„å‰ç¼€ä¸ºï¼š<code>form.</code>ã€‚
      * </p>
      */
     public String getMessageCodePrefix() {
@@ -120,7 +120,7 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
     }
 
     /**
-     * ÉèÖÃmessage codeµÄÇ°×º¡£
+     * è®¾ç½®message codeçš„å‰ç¼€ã€‚
      */
     public void setMessageCodePrefix(String messageCodePrefix) {
         this.messageCodePrefix = normalizeMessageCodePrefix(messageCodePrefix);
@@ -137,7 +137,7 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
     }
 
     /**
-     * È¡µÃËùÓĞgroup configµÄÁĞ±í¡£
+     * å–å¾—æ‰€æœ‰group configçš„åˆ—è¡¨ã€‚
      */
     public List<GroupConfig> getGroupConfigList() {
         if (groupList == null) {
@@ -148,7 +148,7 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄgroup config¡£Ãû³Æ´óĞ¡Ğ´²»Ãô¸Ğ¡£ Èç¹ûÎ´ÕÒµ½£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šåç§°çš„group configã€‚åç§°å¤§å°å†™ä¸æ•æ„Ÿã€‚ å¦‚æœæœªæ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     public GroupConfig getGroupConfig(String groupName) {
         if (groups == null) {
@@ -159,14 +159,14 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
     }
 
     /**
-     * È¡µÃºÍÖ¸¶¨keyÏà¶ÔÓ¦µÄgroup config¡£Èç¹ûÎ´ÕÒµ½£¬Ôò·µ»Ø<code>null</code>
+     * å–å¾—å’ŒæŒ‡å®škeyç›¸å¯¹åº”çš„group configã€‚å¦‚æœæœªæ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public GroupConfig getGroupConfigByKey(String groupKey) {
         return assertNotNull(groupsByKey, ILLEGAL_STATE, "groupsByKey not inited").get(groupKey);
     }
 
     /**
-     * ÉèÖÃgroup configs¡£
+     * è®¾ç½®group configsã€‚
      */
     public void setGroupConfigImplList(List<GroupConfigImpl> groupConfigList) {
         groups = null;
@@ -180,10 +180,10 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
             }
 
             for (GroupConfigImpl groupConfig : groupConfigList) {
-                String groupName = caseInsensitiveName(groupConfig.getName()); // ´óĞ¡Ğ´²»Ãô¸Ğ£¡
+                String groupName = caseInsensitiveName(groupConfig.getName()); // å¤§å°å†™ä¸æ•æ„Ÿï¼
 
-                // Èç¹ûÊÇimporting form£¬ÔÊĞíÖØÃû£¬²¢ºöÂÔ±»import formÖĞµÄgroup
-                // ¶ÔÓÚµ±Ç°formÖĞµÄgroup£¬²»ÔÊĞíÖØÃû¡£
+                // å¦‚æœæ˜¯importing formï¼Œå…è®¸é‡åï¼Œå¹¶å¿½ç•¥è¢«import formä¸­çš„group
+                // å¯¹äºå½“å‰formä¸­çš„groupï¼Œä¸å…è®¸é‡åã€‚
                 if (!importing) {
                     assertTrue(!groups.containsKey(groupName), "Duplicated group name: %s", groupConfig.getName());
                 }
@@ -196,9 +196,9 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
     }
 
     /**
-     * È¡µÃ<code>PropertyEditor</code>×¢²áÆ÷¡£
+     * å–å¾—<code>PropertyEditor</code>æ³¨å†Œå™¨ã€‚
      * <p>
-     * <code>PropertyEditor</code>¸ºÔğ½«×Ö·û´®Öµ×ª»»³Ébean propertyµÄÀàĞÍ£¬»ò·´Ö®¡£
+     * <code>PropertyEditor</code>è´Ÿè´£å°†å­—ç¬¦ä¸²å€¼è½¬æ¢æˆbean propertyçš„ç±»å‹ï¼Œæˆ–åä¹‹ã€‚
      * </p>
      */
     public PropertyEditorRegistrar getPropertyEditorRegistrar() {
@@ -206,9 +206,9 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
     }
 
     /**
-     * ÉèÖÃÒ»×é<code>PropertyEditor</code>×¢²áÆ÷¡£
+     * è®¾ç½®ä¸€ç»„<code>PropertyEditor</code>æ³¨å†Œå™¨ã€‚
      * <p>
-     * <code>PropertyEditor</code>¸ºÔğ½«×Ö·û´®Öµ×ª»»³Ébean propertyµÄÀàĞÍ£¬»ò·´Ö®¡£
+     * <code>PropertyEditor</code>è´Ÿè´£å°†å­—ç¬¦ä¸²å€¼è½¬æ¢æˆbean propertyçš„ç±»å‹ï¼Œæˆ–åä¹‹ã€‚
      * </p>
      */
     public void setPropertyEditorRegistrars(PropertyEditorRegistrar[] registrars) {
@@ -216,11 +216,11 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
     }
 
     /**
-     * ³õÊ¼»¯form config¡£
+     * åˆå§‹åŒ–form configã€‚
      */
     @Override
     protected void init() throws Exception {
-        // ´¦Àíform import¡£
+        // å¤„ç†form importã€‚
         if (!isEmptyArray(importFormServices)) {
             List<GroupConfigImpl> importGroups = createLinkedList();
 
@@ -241,7 +241,7 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
             addGroupConfigImplList(importGroups, true);
         }
 
-        // ³õ²½³õÊ¼»¯ËùÓĞgroups
+        // åˆæ­¥åˆå§‹åŒ–æ‰€æœ‰groups
         assertNotNull(groups, "no groups");
 
         groupsByKey = createHashMap();
@@ -251,7 +251,7 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
             String caseInsensitiveName = entry.getKey();
             GroupConfigImpl groupConfig = entry.getValue();
 
-            // ÉèÖÃ²»ÖØ¸´µÄkey
+            // è®¾ç½®ä¸é‡å¤çš„key
             for (int i = 1; i <= caseInsensitiveName.length(); i++) {
                 String key = caseInsensitiveName.substring(0, i);
 
@@ -262,17 +262,17 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
                 }
             }
 
-            // ÉèÖÃgroup.form
+            // è®¾ç½®group.form
             groupConfig.setFormConfig(this);
 
-            // ÉèÖÃgroupList
+            // è®¾ç½®groupList
             groupList.add(groupConfig);
         }
 
         groupList = unmodifiableList(groupList);
 
-        // ´¦ÀígroupÖ®¼äµÄ¼Ì³Ğ¹ØÏµ£¬½«parent groupºÍimportsÖĞµÄÄÚÈİÕ¹¿ªµ½×ÓgroupÖĞ¡£
-        // Ã¿¸ögroup.init2()½«±»µ÷ÓÃ¡£
+        // å¤„ç†groupä¹‹é—´çš„ç»§æ‰¿å…³ç³»ï¼Œå°†parent groupå’Œimportsä¸­çš„å†…å®¹å±•å¼€åˆ°å­groupä¸­ã€‚
+        // æ¯ä¸ªgroup.init2()å°†è¢«è°ƒç”¨ã€‚
         Set<GroupConfigImpl> processedGroups = createHashSet();
         GroupStack processingGroups = new GroupStack();
 
@@ -282,13 +282,13 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
     }
 
     /**
-     * ´¦ÀígroupÖ®¼äµÄ¼Ì³Ğ¹ØÏµ£¬½«parent groupºÍimportsÖĞµÄÄÚÈİÕ¹¿ªµ½×ÓgroupÖĞ¡£
+     * å¤„ç†groupä¹‹é—´çš„ç»§æ‰¿å…³ç³»ï¼Œå°†parent groupå’Œimportsä¸­çš„å†…å®¹å±•å¼€åˆ°å­groupä¸­ã€‚
      */
     private void processGroup(GroupConfigImpl groupConfig, Set<GroupConfigImpl> processedGroups,
                               GroupStack processingGroups) throws Exception {
         if (!processedGroups.contains(groupConfig)) {
             if (groupConfig.getParentGroup() != null || !groupConfig.getImports().isEmpty()) {
-                // ·ÀÖ¹Ñ­»·¼Ì³Ğ»òimport
+                // é˜²æ­¢å¾ªç¯ç»§æ‰¿æˆ–import
                 if (processingGroups.contains(groupConfig)) {
                     StringBuilder buf = new StringBuilder();
 
@@ -309,12 +309,12 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
 
                 processingGroups.push(groupConfig);
 
-                // ´¦ÀíparentGroup
+                // å¤„ç†parentGroup
                 if (groupConfig.getParentGroup() != null) {
                     copyFields(groupConfig, groupConfig.getParentGroup(), null, true, processedGroups, processingGroups);
                 }
 
-                // ´¦Àíimports
+                // å¤„ç†imports
                 for (Import impot : groupConfig.getImports()) {
                     copyFields(groupConfig, impot.getGroupName(), impot.getFieldName(), false, processedGroups,
                             processingGroups);
@@ -323,8 +323,8 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
                 processingGroups.pop();
             }
 
-            processedGroups.add(groupConfig); // ·ÀÖ¹ÖØ¸´´¦Àí
-            groupConfig.init2(); // ³õÊ¼»¯group
+            processedGroups.add(groupConfig); // é˜²æ­¢é‡å¤å¤„ç†
+            groupConfig.init2(); // åˆå§‹åŒ–group
         }
     }
 
@@ -333,10 +333,10 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
         GroupConfigImpl srcGroup = (GroupConfigImpl) assertNotNull(getGroupConfig(srcGroupName),
                 "Parent or imported group name \"%s\" not found", srcGroupName);
 
-        // µİ¹é´¦ÀíparentGroupºÍimported Groups¡£
+        // é€’å½’å¤„ç†parentGroupå’Œimported Groupsã€‚
         processGroup(srcGroup, processedGroups, processingGroups);
 
-        // ½«parentGroup»òimported GroupsÖĞµÄËùÓĞÄÚÈİ¸´ÖÆµ½µ±Ç°groupÖĞ¡£
+        // å°†parentGroupæˆ–imported Groupsä¸­çš„æ‰€æœ‰å†…å®¹å¤åˆ¶åˆ°å½“å‰groupä¸­ã€‚
         if (isExtends) {
             targetGroup.extendsFrom(srcGroup);
         } else {
@@ -345,7 +345,7 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
     }
 
     /**
-     * ×ª»»³ÉÒ×ÓÚÔÄ¶ÁµÄ×Ö·û´®¡£
+     * è½¬æ¢æˆæ˜“äºé˜…è¯»çš„å­—ç¬¦ä¸²ã€‚
      */
     @Override
     public String toString() {
@@ -353,7 +353,7 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
     }
 
     /**
-     * ÓÃÀ´·ÀÖ¹groupµİ¹é¼Ì³Ğ¡£
+     * ç”¨æ¥é˜²æ­¢groupé€’å½’ç»§æ‰¿ã€‚
      */
     private static class GroupStack implements Iterable<GroupConfigImpl> {
         private final LinkedList<GroupConfigImpl> groups = createLinkedList();

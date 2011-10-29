@@ -34,7 +34,7 @@ import java.util.TreeSet;
 import org.slf4j.LoggerFactory;
 
 /**
- * ³õÊ¼»¯ÈÕÖ¾£¬µ«²»ÒıÈë¶ÔÌØ¶¨ÈÕÖ¾ÏµÍ³µÄÒÀÀµ¡£
+ * åˆå§‹åŒ–æ—¥å¿—ï¼Œä½†ä¸å¼•å…¥å¯¹ç‰¹å®šæ—¥å¿—ç³»ç»Ÿçš„ä¾èµ–ã€‚
  * 
  * @author Michael Zhou
  */
@@ -48,9 +48,9 @@ public abstract class LogConfigurator {
     private String logSystem;
 
     /**
-     * ÓÃÖ¸¶¨µÄÅäÖÃÎÄ¼şÀ´ÅäÖÃlog system¡£
+     * ç”¨æŒ‡å®šçš„é…ç½®æ–‡ä»¶æ¥é…ç½®log systemã€‚
      * <p>
-     * ×¢Òâ£¬¼´Ê¹ÅäÖÃ¹ı³ÌÊ§°Ü£¬Ò²²»»áÅ×³öÈÎºÎÒì³££¬Ö»ÊÇ´òÓ¡´íÎóĞÅÏ¢¡£ÈÕÖ¾ÏµÍ³µÄÊ§°Ü²»Ó¦¸ÃÓ°ÏìÓ¦ÓÃÏµÍ³¡£
+     * æ³¨æ„ï¼Œå³ä½¿é…ç½®è¿‡ç¨‹å¤±è´¥ï¼Œä¹Ÿä¸ä¼šæŠ›å‡ºä»»ä½•å¼‚å¸¸ï¼Œåªæ˜¯æ‰“å°é”™è¯¯ä¿¡æ¯ã€‚æ—¥å¿—ç³»ç»Ÿçš„å¤±è´¥ä¸åº”è¯¥å½±å“åº”ç”¨ç³»ç»Ÿã€‚
      * <p>
      */
     public final void configure(URL configFile) {
@@ -58,9 +58,9 @@ public abstract class LogConfigurator {
     }
 
     /**
-     * ÓÃÖ¸¶¨µÄÅäÖÃÎÄ¼şºÍpropertiesÀ´ÅäÖÃlog system¡£
+     * ç”¨æŒ‡å®šçš„é…ç½®æ–‡ä»¶å’Œpropertiesæ¥é…ç½®log systemã€‚
      * <p>
-     * ×¢Òâ£¬¼´Ê¹ÅäÖÃ¹ı³ÌÊ§°Ü£¬Ò²²»»áÅ×³öÈÎºÎÒì³££¬Ö»ÊÇ´òÓ¡´íÎóĞÅÏ¢¡£ÈÕÖ¾ÏµÍ³µÄÊ§°Ü²»Ó¦¸ÃÓ°ÏìÓ¦ÓÃÏµÍ³¡£
+     * æ³¨æ„ï¼Œå³ä½¿é…ç½®è¿‡ç¨‹å¤±è´¥ï¼Œä¹Ÿä¸ä¼šæŠ›å‡ºä»»ä½•å¼‚å¸¸ï¼Œåªæ˜¯æ‰“å°é”™è¯¯ä¿¡æ¯ã€‚æ—¥å¿—ç³»ç»Ÿçš„å¤±è´¥ä¸åº”è¯¥å½±å“åº”ç”¨ç³»ç»Ÿã€‚
      * <p>
      */
     public final void configure(URL configFile, Map<String, String> props) {
@@ -75,7 +75,7 @@ public abstract class LogConfigurator {
         for (String key : new TreeSet<String>(props.keySet())) {
             String value = props.get(key);
 
-            // ÒÔlog¿ªÍ·µÄproperty£¬»òÕßÖµÓësystem properties²»Í¬µÄ£¬´òÓ¡³öÀ´¡£
+            // ä»¥logå¼€å¤´çš„propertyï¼Œæˆ–è€…å€¼ä¸system propertiesä¸åŒçš„ï¼Œæ‰“å°å‡ºæ¥ã€‚
             if (key.startsWith("log") || value != null && !value.equals(System.getProperty(key))) {
                 buf.append(" - with property ").append(key).append(" = ").append(value).append("\n");
             }
@@ -91,10 +91,10 @@ public abstract class LogConfigurator {
     }
 
     /**
-     * ÓÃÄ¬ÈÏµÄÅäÖÃÎÄ¼şºÍÄ¬ÈÏµÄpropertiesÀ´ÅäÖÃlog system¡£
+     * ç”¨é»˜è®¤çš„é…ç½®æ–‡ä»¶å’Œé»˜è®¤çš„propertiesæ¥é…ç½®log systemã€‚
      * <p>
-     * Ïàµ±ÓÚ£º
-     * <code>configure(getDefaultConfigFile(), getDefaultProperties());</code> ¡£
+     * ç›¸å½“äºï¼š
+     * <code>configure(getDefaultConfigFile(), getDefaultProperties());</code> ã€‚
      * </p>
      */
     public final void configureDefault() {
@@ -102,11 +102,11 @@ public abstract class LogConfigurator {
     }
 
     /**
-     * ÓÃÄ¬ÈÏµÄÅäÖÃÎÄ¼şºÍÄ¬ÈÏµÄpropertiesÀ´ÅäÖÃlog system¡£
+     * ç”¨é»˜è®¤çš„é…ç½®æ–‡ä»¶å’Œé»˜è®¤çš„propertiesæ¥é…ç½®log systemã€‚
      * <p>
-     * Ïàµ±ÓÚ£º
+     * ç›¸å½“äºï¼š
      * <code>configure(getDefaultConfigFile(), getDefaultProperties(debug));</code>
-     * ¡£
+     * ã€‚
      * </p>
      */
     public final void configureDefault(Boolean debug) {
@@ -121,14 +121,14 @@ public abstract class LogConfigurator {
     }
 
     /**
-     * È¡µÃµ±Ç°configurator¶ÔÓ¦µÄlog systemµÄÃû³Æ£¬ÀıÈç£º<code>logback</code>¡£
+     * å–å¾—å½“å‰configuratorå¯¹åº”çš„log systemçš„åç§°ï¼Œä¾‹å¦‚ï¼š<code>logback</code>ã€‚
      */
     public final String getLogSystem() {
         return logSystem;
     }
 
     /**
-     * È¡µÃÄ¬ÈÏµÄÅäÖÃÎÄ¼şURL¡£
+     * å–å¾—é»˜è®¤çš„é…ç½®æ–‡ä»¶URLã€‚
      */
     public final URL getDefaultConfigFile() {
         return getClass().getClassLoader().getResource(
@@ -136,9 +136,9 @@ public abstract class LogConfigurator {
     }
 
     /**
-     * È¡µÃÄ¬ÈÏµÄÅäÖÃÎÄ¼şÃû¡£
+     * å–å¾—é»˜è®¤çš„é…ç½®æ–‡ä»¶åã€‚
      * <p>
-     * ×ÓÀà¿ÉÒÔ¸²¸Ç´Ë·½·¨£¬ÒÔÈ¡µÃÌØ¶¨µÄÅäÖÃÎÄ¼ş¡£Èç²»¸²¸Ç£¬Ä¬ÈÏ·µ»Ø<code>logsystem.xml</code>¡£
+     * å­ç±»å¯ä»¥è¦†ç›–æ­¤æ–¹æ³•ï¼Œä»¥å–å¾—ç‰¹å®šçš„é…ç½®æ–‡ä»¶ã€‚å¦‚ä¸è¦†ç›–ï¼Œé»˜è®¤è¿”å›<code>logsystem.xml</code>ã€‚
      * </p>
      */
     protected String getDefaultConfigFileName() {
@@ -146,15 +146,15 @@ public abstract class LogConfigurator {
     }
 
     /**
-     * È¡µÃÓÃÓÚÅäÖÃlog systemµÄÄ¬ÈÏµÄproperties£¬°üº¬ÒÔÏÂÄÚÈİ£º
+     * å–å¾—ç”¨äºé…ç½®log systemçš„é»˜è®¤çš„propertiesï¼ŒåŒ…å«ä»¥ä¸‹å†…å®¹ï¼š
      * <ul>
-     * <li>system properties¡£</li>
-     * <li><code>loggingCharset</code> - Êä³öcharset£¬È¡¾öÓÚÏµÍ³Ä¬ÈÏÖµ¡£</li>
-     * <li><code>loggingLevel</code> - ÈÕÖ¾level£¬È¡¾öÓÚdebug²ÎÊı¡£</li>
-     * <li><code>loggingRoot</code> - ÈÕÖ¾¸ùÄ¿Â¼£¬Ä¬ÈÏÎª<code>$HOME/logs</code>¡£</li>
-     * <li><code>localHost</code> - µ±Ç°»úÆ÷Ãû¡£</li>
-     * <li><code>localAddress</code> - µ±Ç°ÍøÖ·¡£</li>
-     * <li>×ÓÀà¿É¸²¸Ç<code>setDefaultProperties()</code>·½·¨£¬ÒÔ±ãĞŞ¸ÄËùÉèÖÃµÄÖµ¡£</li>
+     * <li>system propertiesã€‚</li>
+     * <li><code>loggingCharset</code> - è¾“å‡ºcharsetï¼Œå–å†³äºç³»ç»Ÿé»˜è®¤å€¼ã€‚</li>
+     * <li><code>loggingLevel</code> - æ—¥å¿—levelï¼Œå–å†³äºdebugå‚æ•°ã€‚</li>
+     * <li><code>loggingRoot</code> - æ—¥å¿—æ ¹ç›®å½•ï¼Œé»˜è®¤ä¸º<code>$HOME/logs</code>ã€‚</li>
+     * <li><code>localHost</code> - å½“å‰æœºå™¨åã€‚</li>
+     * <li><code>localAddress</code> - å½“å‰ç½‘å€ã€‚</li>
+     * <li>å­ç±»å¯è¦†ç›–<code>setDefaultProperties()</code>æ–¹æ³•ï¼Œä»¥ä¾¿ä¿®æ”¹æ‰€è®¾ç½®çš„å€¼ã€‚</li>
      * </ul>
      */
     public final Map<String, String> getDefaultProperties() {
@@ -162,15 +162,15 @@ public abstract class LogConfigurator {
     }
 
     /**
-     * È¡µÃÓÃÓÚÅäÖÃlog systemµÄÄ¬ÈÏµÄproperties£¬°üº¬ÒÔÏÂÄÚÈİ£º
+     * å–å¾—ç”¨äºé…ç½®log systemçš„é»˜è®¤çš„propertiesï¼ŒåŒ…å«ä»¥ä¸‹å†…å®¹ï¼š
      * <ul>
-     * <li>system properties¡£</li>
-     * <li><code>loggingCharset</code> - Êä³öcharset£¬È¡¾öÓÚÏµÍ³Ä¬ÈÏÖµ¡£</li>
-     * <li><code>loggingLevel</code> - ÈÕÖ¾level£¬È¡¾öÓÚdebug²ÎÊı¡£</li>
-     * <li><code>loggingRoot</code> - ÈÕÖ¾¸ùÄ¿Â¼£¬Ä¬ÈÏÎª<code>$HOME/logs</code>¡£</li>
-     * <li><code>localHost</code> - µ±Ç°»úÆ÷Ãû¡£</li>
-     * <li><code>localAddress</code> - µ±Ç°ÍøÖ·¡£</li>
-     * <li>×ÓÀà¿É¸²¸Ç<code>setDefaultProperties()</code>·½·¨£¬ÒÔ±ãĞŞ¸ÄËùÉèÖÃµÄÖµ¡£</li>
+     * <li>system propertiesã€‚</li>
+     * <li><code>loggingCharset</code> - è¾“å‡ºcharsetï¼Œå–å†³äºç³»ç»Ÿé»˜è®¤å€¼ã€‚</li>
+     * <li><code>loggingLevel</code> - æ—¥å¿—levelï¼Œå–å†³äºdebugå‚æ•°ã€‚</li>
+     * <li><code>loggingRoot</code> - æ—¥å¿—æ ¹ç›®å½•ï¼Œé»˜è®¤ä¸º<code>$HOME/logs</code>ã€‚</li>
+     * <li><code>localHost</code> - å½“å‰æœºå™¨åã€‚</li>
+     * <li><code>localAddress</code> - å½“å‰ç½‘å€ã€‚</li>
+     * <li>å­ç±»å¯è¦†ç›–<code>setDefaultProperties()</code>æ–¹æ³•ï¼Œä»¥ä¾¿ä¿®æ”¹æ‰€è®¾ç½®çš„å€¼ã€‚</li>
      * </ul>
      */
     public final Map<String, String> getDefaultProperties(Boolean debug) {
@@ -217,7 +217,7 @@ public abstract class LogConfigurator {
         props.put(LOCAL_HOST, hostName);
         props.put(LOCAL_ADDRESS, hostAddress);
 
-        // ¸ø×ÓÀàÒ»¸ö»ú»áÉèÖÃproperties
+        // ç»™å­ç±»ä¸€ä¸ªæœºä¼šè®¾ç½®properties
         setDefaultProperties(props);
 
         return props;
@@ -240,33 +240,33 @@ public abstract class LogConfigurator {
     }
 
     /**
-     * ÉèÖÃÄ¬ÈÏµÄproperties¡£
+     * è®¾ç½®é»˜è®¤çš„propertiesã€‚
      * <p>
-     * ×ÓÀà¿ÉÒÔ¸²¸ÇËü£¬ÒÔÉèÖÃ×Ô¼ºµÄÄ¬ÈÏÖµ¡£
+     * å­ç±»å¯ä»¥è¦†ç›–å®ƒï¼Œä»¥è®¾ç½®è‡ªå·±çš„é»˜è®¤å€¼ã€‚
      * </p>
      */
     protected void setDefaultProperties(Map<String, String> props) {
     }
 
     /**
-     * ÅäÖÃ¶ÔÓ¦µÄlog system£¬ÓÉ×ÓÀàÊµÏÖ¡£
+     * é…ç½®å¯¹åº”çš„log systemï¼Œç”±å­ç±»å®ç°ã€‚
      */
     protected abstract void doConfigure(URL configFile, Map<String, String> props) throws Exception;
 
     /**
-     * ¹Ø±ÕºÍÇåÀílog system£¬ÓÉ×ÓÀàÊµÏÖ¡£
+     * å…³é—­å’Œæ¸…ç†log systemï¼Œç”±å­ç±»å®ç°ã€‚
      */
     public abstract void shutdown();
 
     /**
-     * È¡µÃÖ¸¶¨µÄÈÕÖ¾ÏµÍ³ÅäÖÃÆ÷¡£¼ÙÈçÎ´Ö¸¶¨ÈÕÖ¾ÏµÍ³µÄÃû³Æ£¬ÔòÊÔ×Å´Óslf4jÖĞ×Ô¶¯È¡µÃµ±Ç°¿ÉÓÃµÄÈÕÖ¾ÏµÍ³¡£
+     * å–å¾—æŒ‡å®šçš„æ—¥å¿—ç³»ç»Ÿé…ç½®å™¨ã€‚å‡å¦‚æœªæŒ‡å®šæ—¥å¿—ç³»ç»Ÿçš„åç§°ï¼Œåˆ™è¯•ç€ä»slf4jä¸­è‡ªåŠ¨å–å¾—å½“å‰å¯ç”¨çš„æ—¥å¿—ç³»ç»Ÿã€‚
      */
     public static LogConfigurator getConfigurator() {
         return getConfigurator((String) null);
     }
 
     /**
-     * È¡µÃÖ¸¶¨µÄÈÕÖ¾ÏµÍ³ÅäÖÃÆ÷¡£¼ÙÈçÎ´Ö¸¶¨ÈÕÖ¾ÏµÍ³µÄÃû³Æ£¬ÔòÊÔ×Å´Óslf4jÖĞ×Ô¶¯È¡µÃµ±Ç°¿ÉÓÃµÄÈÕÖ¾ÏµÍ³¡£
+     * å–å¾—æŒ‡å®šçš„æ—¥å¿—ç³»ç»Ÿé…ç½®å™¨ã€‚å‡å¦‚æœªæŒ‡å®šæ—¥å¿—ç³»ç»Ÿçš„åç§°ï¼Œåˆ™è¯•ç€ä»slf4jä¸­è‡ªåŠ¨å–å¾—å½“å‰å¯ç”¨çš„æ—¥å¿—ç³»ç»Ÿã€‚
      */
     public static LogConfigurator getConfigurator(String logSystem) {
         LogConfigurator[] configurators = getConfigurators(logSystem);
@@ -279,16 +279,16 @@ public abstract class LogConfigurator {
     }
 
     /**
-     * È¡µÃÖ¸¶¨µÄÈÕÖ¾ÏµÍ³ÅäÖÃÆ÷¡£¼ÙÈçÎ´Ö¸¶¨ÈÕÖ¾ÏµÍ³µÄÃû³Æ£¬ÔòÊÔ×Å´Óslf4jÖĞ×Ô¶¯È¡µÃµ±Ç°¿ÉÓÃµÄÈÕÖ¾ÏµÍ³¡£
+     * å–å¾—æŒ‡å®šçš„æ—¥å¿—ç³»ç»Ÿé…ç½®å™¨ã€‚å‡å¦‚æœªæŒ‡å®šæ—¥å¿—ç³»ç»Ÿçš„åç§°ï¼Œåˆ™è¯•ç€ä»slf4jä¸­è‡ªåŠ¨å–å¾—å½“å‰å¯ç”¨çš„æ—¥å¿—ç³»ç»Ÿã€‚
      */
     public static LogConfigurator[] getConfigurators(String... logSystems) {
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
         Map<String, String> providers = getProviders(PROVIDERS_PATTERN, cl);
 
-        // ¼ì²éSLF4JËùÑ¡ÔñµÄÈÕÖ¾ÏµÍ³
+        // æ£€æŸ¥SLF4Jæ‰€é€‰æ‹©çš„æ—¥å¿—ç³»ç»Ÿ
         String slf4jLogSystem = guessSlf4jLogSystem(providers);
 
-        // ¹æ¸ñ»¯ËùÓĞlogSystems
+        // è§„æ ¼åŒ–æ‰€æœ‰logSystems
         if (logSystems == null || logSystems.length == 0) {
             logSystems = new String[1];
         }
@@ -318,17 +318,17 @@ public abstract class LogConfigurator {
             logSystems[i] = logSystem;
         }
 
-        // ¼ÙÈçlogSystemsÁĞ±íÖĞÎ´°üº¬slf4jLogSystem£¬Ôò±¨¾¯¡£
+        // å‡å¦‚logSystemsåˆ—è¡¨ä¸­æœªåŒ…å«slf4jLogSystemï¼Œåˆ™æŠ¥è­¦ã€‚
         if (slf4jLogSystem != null && !containsSlf4jLogSystem) {
             log("WARN: SLF4J chose [" + slf4jLogSystem + "] as its logging system, not " + Arrays.toString(logSystems));
         }
 
-        // Èç¹ûÏµÍ³ÖĞ²»´æÔÚÄ¬ÈÏµÄlogSystems£¬Ôò±¨´í
+        // å¦‚æœç³»ç»Ÿä¸­ä¸å­˜åœ¨é»˜è®¤çš„logSystemsï¼Œåˆ™æŠ¥é”™
         if (containsNull) {
             throw new IllegalArgumentException("No log system bound with SLF4J");
         }
 
-        // È¡µÃlog configurators
+        // å–å¾—log configurators
         LogConfigurator[] configurators = new LogConfigurator[logSystems.length];
 
         for (int i = 0; i < logSystems.length; i++) {
@@ -452,7 +452,7 @@ public abstract class LogConfigurator {
     }
 
     protected static void log(String msg, Throwable e) {
-        System.out.flush(); // ·ÀÖ¹¿ØÖÆÌ¨Êä³öÂÒĞò
+        System.out.flush(); // é˜²æ­¢æ§åˆ¶å°è¾“å‡ºä¹±åº
         System.err.println(msg);
 
         if (e != null) {

@@ -36,7 +36,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * Ö§³Ötry-catch-finally½á¹¹¡£
+ * æ”¯æŒtry-catch-finallyç»“æ„ã€‚
  * 
  * @author Michael Zhou
  */

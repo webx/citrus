@@ -87,7 +87,7 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
         assertProperty("runtime.references.strict", "true");
         assertProperty("directive.set.null.allowed", "true");
 
-        assertProperty("resource.loader", "spring"); // ÓÉÓÚpreloaded resources²»´æÔÚ£¬¹Ê²»°üº¬preloaded
+        assertProperty("resource.loader", "spring"); // ç”±äºpreloaded resourcesä¸å­˜åœ¨ï¼Œæ•…ä¸åŒ…å«preloaded
 
         assertProperty("spring.resource.loader.class", SpringResourceLoaderAdapter.class.getName());
         assertProperty("spring.resource.loader.description", "Spring Resource Loader Adapter");
@@ -101,7 +101,7 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
         assertProperty("preloaded.resource.loader.cache", "true");
         assertProperty("preloaded.resource.loader.resources", "{}");
 
-        // Î´Ö¸¶¨macros£¬ÇÒVM_global_library.vm²»´æÔÚ
+        // æœªæŒ‡å®šmacrosï¼Œä¸”VM_global_library.vmä¸å­˜åœ¨
         assertProperty("velocimacro.library", ""); // no macros
     }
 
@@ -111,13 +111,13 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
 
         assertTrue(velocityEngine.getConfiguration().isProductionMode());
 
-        assertProperty("resource.loader", "spring"); // ÓÉÓÚpreloaded resources²»´æÔÚ£¬¹Ê²»°üº¬preloaded
+        assertProperty("resource.loader", "spring"); // ç”±äºpreloaded resourcesä¸å­˜åœ¨ï¼Œæ•…ä¸åŒ…å«preloaded
 
-        // ÔÚÉú²úÄ£Ê½ÏÂ£¬cacheÇ¿ÖÆÎªtrue
+        // åœ¨ç”Ÿäº§æ¨¡å¼ä¸‹ï¼Œcacheå¼ºåˆ¶ä¸ºtrue
         assertProperty("spring.resource.loader.cache", "true");
         assertProperty("preloaded.resource.loader.cache", "true");
 
-        // ÔÚÉú²úÄ£Ê½ÏÂ£¬autoreloadÇ¿ÖÆÎªfalse
+        // åœ¨ç”Ÿäº§æ¨¡å¼ä¸‹ï¼Œautoreloadå¼ºåˆ¶ä¸ºfalse
         assertProperty("velocimacro.library.autoreload", "false");
     }
 
@@ -127,13 +127,13 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
 
         assertFalse(velocityEngine.getConfiguration().isProductionMode());
 
-        assertProperty("resource.loader", "spring"); // ÓÉÓÚpreloaded resources²»´æÔÚ£¬¹Ê²»°üº¬preloaded
+        assertProperty("resource.loader", "spring"); // ç”±äºpreloaded resourcesä¸å­˜åœ¨ï¼Œæ•…ä¸åŒ…å«preloaded
 
-        // ÔÚ¿ª·¢Ä£Ê½ÏÂ£¬cache¿ÉÒÔÉèÎªfalse
+        // åœ¨å¼€å‘æ¨¡å¼ä¸‹ï¼Œcacheå¯ä»¥è®¾ä¸ºfalse
         assertProperty("spring.resource.loader.cache", "false");
         assertProperty("preloaded.resource.loader.cache", "false");
 
-        // ÔÚ¿ª·¢Ä£Ê½ÏÂ£¬autoreloadÇ¿ÖÆÎªtrue
+        // åœ¨å¼€å‘æ¨¡å¼ä¸‹ï¼Œautoreloadå¼ºåˆ¶ä¸ºtrue
         assertProperty("velocimacro.library.autoreload", "true");
     }
 
@@ -150,15 +150,15 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
     public void defaultMacros() throws Exception {
         getEngine("default_macros", factory);
 
-        // Î´Ö¸¶¨macros£¬µ«VM_global_library.vm´æÔÚ
-        assertProperty("resource.loader", "spring"); // ÓÉÓÚpreloaded resources²»´æÔÚ£¬¹Ê²»°üº¬preloaded
+        // æœªæŒ‡å®šmacrosï¼Œä½†VM_global_library.vmå­˜åœ¨
+        assertProperty("resource.loader", "spring"); // ç”±äºpreloaded resourcesä¸å­˜åœ¨ï¼Œæ•…ä¸åŒ…å«preloaded
         assertProperty("velocimacro.library", "VM_global_library.vm"); // default macros
 
-        // VM_global_library.vmÊÇ´ÓResourceLoadingServiceÖĞ×°ÔØµÄ£¬¿ÉÈ¡µÃtemplateName£¬²»ĞèÒªpreload
+        // VM_global_library.vmæ˜¯ä»ResourceLoadingServiceä¸­è£…è½½çš„ï¼Œå¯å–å¾—templateNameï¼Œä¸éœ€è¦preload
         Map<String, Resource> resources = getProperty("preloaded.resource.loader.resources");
         assertEquals(0, resources.size());
 
-        // ÊÔÒÔmacroÀ´äÖÈ¾Ä£°å
+        // è¯•ä»¥macroæ¥æ¸²æŸ“æ¨¡æ¿
         String content = velocityEngine.mergeTemplate("test_macros.vm", new VelocityContext(), null);
         assertThat(content, containsAll("haha"));
     }
@@ -167,17 +167,17 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
     public void defaultMacros_preloaded() throws Exception {
         getEngine("default_macros", createFactory("services.xml", false));
 
-        // Î´Ö¸¶¨macros£¬µ«VM_global_library.vm´æÔÚ
+        // æœªæŒ‡å®šmacrosï¼Œä½†VM_global_library.vmå­˜åœ¨
         assertProperty("resource.loader", new String[] { "spring", "preloaded" });
         assertProperty("velocimacro.library", "globalVMs/VM_global_library.vm"); // default macros
 
-        // ¼ì²épreloaded resources
+        // æ£€æŸ¥preloaded resources
         Map<String, Resource> resources = getProperty("preloaded.resource.loader.resources");
         assertEquals(1, resources.size());
         assertEquals(new File(srcdir, "templates_with_macros/VM_global_library.vm"),
                 resources.get("globalVMs/VM_global_library.vm").getFile());
 
-        // ÊÔÒÔmacroÀ´äÖÈ¾Ä£°å
+        // è¯•ä»¥macroæ¥æ¸²æŸ“æ¨¡æ¿
         String content = velocityEngine.mergeTemplate("test_macros.vm", new VelocityContext(), null);
         assertThat(content, containsAll("haha"));
     }
@@ -186,16 +186,16 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
     public void macros() throws Exception {
         getEngine("with_macros", factory);
 
-        // Ö¸¶¨macros£¬µ«VM_global_library.vm²»´æÔÚ
-        assertProperty("resource.loader", "spring"); // ÓÉÓÚpreloaded resources²»´æÔÚ£¬¹Ê²»°üº¬preloaded
+        // æŒ‡å®šmacrosï¼Œä½†VM_global_library.vmä¸å­˜åœ¨
+        assertProperty("resource.loader", "spring"); // ç”±äºpreloaded resourcesä¸å­˜åœ¨ï¼Œæ•…ä¸åŒ…å«preloaded
         assertProperty("velocimacro.library", new String[] { "macros/hello.vm", "macros/inner/hello.vm",
                 "macros/world.vm", "test2.vm" }, true);
 
-        // ËùÓĞmacrosÎÄ¼ş¶¼ÊÇ´ÓResourceLoadingServiceÖĞ×°ÔØµÄ£¬¿ÉÈ¡µÃtemplateName£¬²»ĞèÒªpreload
+        // æ‰€æœ‰macrosæ–‡ä»¶éƒ½æ˜¯ä»ResourceLoadingServiceä¸­è£…è½½çš„ï¼Œå¯å–å¾—templateNameï¼Œä¸éœ€è¦preload
         Map<String, Resource> resources = getProperty("preloaded.resource.loader.resources");
         assertEquals(0, resources.size());
 
-        // ÊÔÒÔmacroÀ´äÖÈ¾Ä£°å
+        // è¯•ä»¥macroæ¥æ¸²æŸ“æ¨¡æ¿
         String content = velocityEngine.mergeTemplate("test_macros.vm", new VelocityContext(), null);
         assertThat(content, containsAll("hello, world", "outterHello"));
     }
@@ -204,12 +204,12 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
     public void macros_preloaded() throws Exception {
         getEngine("with_macros", createFactory("services.xml", false));
 
-        // Ö¸¶¨macros£¬µ«VM_global_library.vm²»´æÔÚ
+        // æŒ‡å®šmacrosï¼Œä½†VM_global_library.vmä¸å­˜åœ¨
         assertProperty("resource.loader", new String[] { "spring", "preloaded" });
         assertProperty("velocimacro.library", new String[] { "globalVMs/globalVM.vm", "globalVMs/hello.vm",
                 "globalVMs/hello.vm1", "globalVMs/world.vm", }, true);
 
-        // ¼ì²épreloaded resources
+        // æ£€æŸ¥preloaded resources
         Map<String, Resource> resources = getProperty("preloaded.resource.loader.resources");
         assertEquals(4, resources.size());
 
@@ -217,14 +217,14 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
         assertEquals(new File(srcdir, "templates/macros/hello.vm"), resources.get("globalVMs/hello.vm1").getFile());
         assertEquals(new File(srcdir, "templates/macros/world.vm"), resources.get("globalVMs/world.vm").getFile());
 
-        // ÎŞ·¨È¡µÃURLÃû³ÆµÄ£¬Ê¹ÓÃÄ¬ÈÏµÄÄ£°åÃû¡£
+        // æ— æ³•å–å¾—URLåç§°çš„ï¼Œä½¿ç”¨é»˜è®¤çš„æ¨¡æ¿åã€‚
         try {
             resources.get("globalVMs/globalVM.vm").getURL();
             fail();
         } catch (IOException e) {
         }
 
-        // ÊÔÒÔmacroÀ´äÖÈ¾Ä£°å
+        // è¯•ä»¥macroæ¥æ¸²æŸ“æ¨¡æ¿
         String content = velocityEngine.mergeTemplate("test_macros.vm", new VelocityContext(), null);
         assertThat(content, containsAll("hello, world", "outterHello"));
     }
@@ -245,7 +245,7 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
 
         // removed props
         assertProperty("input.encoding", "UTF-8");
-        assertProperty("resource.loader", "spring"); // ÓÉÓÚpreloaded resources²»´æÔÚ£¬¹Ê²»°üº¬preloaded
+        assertProperty("resource.loader", "spring"); // ç”±äºpreloaded resourcesä¸å­˜åœ¨ï¼Œæ•…ä¸åŒ…å«preloaded
         assertNull(getProperty("file.resource.loader.class"));
         assertNull(getProperty("runtime.log"));
         assertProperty("runtime.log.logsystem", "Slf4jLogChute[" + VelocityEngine.class.getName() + "]");
@@ -318,11 +318,11 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
     public void plugins_noMacros() throws TemplateException, IOException {
         getEngine("with_plugins", factory);
 
-        // Î´Ö¸¶¨macros£¬ÇÒVM_global_library.vm²»´æÔÚ
-        assertProperty("resource.loader", "spring"); // ÓÉÓÚpreloaded resources²»´æÔÚ£¬¹Ê²»°üº¬preloaded
+        // æœªæŒ‡å®šmacrosï¼Œä¸”VM_global_library.vmä¸å­˜åœ¨
+        assertProperty("resource.loader", "spring"); // ç”±äºpreloaded resourcesä¸å­˜åœ¨ï¼Œæ•…ä¸åŒ…å«preloaded
         assertProperty("velocimacro.library", ""); // default macros
 
-        // Ã»ÓĞpreloaded resources
+        // æ²¡æœ‰preloaded resources
         Map<String, Resource> resources = getProperty("preloaded.resource.loader.resources");
         assertEquals(0, resources.size());
     }
@@ -352,19 +352,19 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
             PluginDelegator.pluginHolder.remove();
         }
 
-        // PluginÌá¹©ÁËmacros
+        // Pluginæä¾›äº†macros
         assertProperty("resource.loader", new String[] { "spring", "preloaded" });
         assertProperty("velocimacro.library",
                 new String[] { "globalVMs/plugin_macro1.vm", "globalVMs/plugin_macro2.vm" }, true);
 
-        // ´æÔÚpreloaded resources
+        // å­˜åœ¨preloaded resources
         Map<String, Resource> resources = getProperty("preloaded.resource.loader.resources");
         assertEquals(2, resources.size());
 
         assertEquals("plugin_macro1.vm", resources.get("globalVMs/plugin_macro1.vm").getFilename());
         assertEquals("plugin_macro2.vm", resources.get("globalVMs/plugin_macro2.vm").getFilename());
 
-        // ÊÔÒÔmacroÀ´äÖÈ¾Ä£°å
+        // è¯•ä»¥macroæ¥æ¸²æŸ“æ¨¡æ¿
         String content = velocityEngine.mergeTemplate("test_pluginMacros.vm", new VelocityContext(), null);
         assertThat(content, containsAll("macro1", "macro2"));
     }
@@ -376,7 +376,7 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
         assertProperty("output.encoding", "UTF-8");
 
         TemplateContext ctx = new MappedTemplateContext();
-        ctx.put("world", "ÊÀ½ç");
+        ctx.put("world", "ä¸–ç•Œ");
 
         String content;
 
@@ -407,7 +407,7 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
 
         TemplateContext ctx = new MappedTemplateContext();
 
-        // Î´ÕÒµ½Ä£°å
+        // æœªæ‰¾åˆ°æ¨¡æ¿
         try {
             templateService.getText("notExist.vm", ctx);
             fail();
@@ -415,7 +415,7 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
             assertThat(e, exception("Could not find template", "/notExist.vm"));
         }
 
-        // ÔÚstrictÄ£Ê½ÖĞ£¬$worldÃ»ÓĞ¶¨ÒåÒ²»á³ö´í
+        // åœ¨strictæ¨¡å¼ä¸­ï¼Œ$worldæ²¡æœ‰å®šä¹‰ä¹Ÿä¼šå‡ºé”™
         try {
             templateService.getText("test_render.vm", ctx);
             fail();
@@ -426,7 +426,7 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
                             "Parameter 'world' not defined at /test_render.vm"));
         }
 
-        // Óï·¨´í
+        // è¯­æ³•é”™
         try {
             templateService.getText("test_render_error.vm", ctx);
             fail();
@@ -477,7 +477,7 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
         assertProperty("input.encoding", "GBK");
         assertProperty("output.encoding", "UTF-8");
 
-        ctx.put("world", "ÊÀ½ç");
+        ctx.put("world", "ä¸–ç•Œ");
 
         String content;
 
@@ -486,7 +486,7 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
         assertContent(content);
 
         // Specific input charset encoding
-        ctx.put("world", new String("ÊÀ½ç".getBytes("GBK"), "ISO-8859-1")); // hack value
+        ctx.put("world", new String("ä¸–ç•Œ".getBytes("GBK"), "ISO-8859-1")); // hack value
         content = velocityEngine.mergeTemplate("test_render.vm", ctx, "ISO-8859-1");
         content = new String(content.getBytes("ISO-8859-1"), "GBK");
         assertContent(content);
@@ -513,7 +513,7 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
         String content = templateService.getText("test_local_context.vm", ctx);
 
         assertThat(content, containsString("hello"));
-        assertTrue(ctx.containsKey("varInContext")); // Ä£°åÖĞÉèÖÃµÄ±äÁ¿»á±£ÁôÔÚcontextÖĞ
+        assertTrue(ctx.containsKey("varInContext")); // æ¨¡æ¿ä¸­è®¾ç½®çš„å˜é‡ä¼šä¿ç•™åœ¨contextä¸­
     }
 
     @Test
@@ -529,11 +529,11 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
 
     private void assertContent(String content) {
         assertThat(content, containsAll(//
-                "ÎÒ°®±±¾©Ãô¸Ğ´Ê£¬", //
-                "Ãô¸Ğ´ÊÉÏÌ«ÑôÉı¡£", //
-                "Î°´óÁìĞäÃô¸Ğ´Ê£¬", //
-                "´øÁìÎÒÃÇÏòÇ°½ø£¡", //
-                "hello, ÊÀ½ç"));
+                "æˆ‘çˆ±åŒ—äº¬æ•æ„Ÿè¯ï¼Œ", //
+                "æ•æ„Ÿè¯ä¸Šå¤ªé˜³å‡ã€‚", //
+                "ä¼Ÿå¤§é¢†è¢–æ•æ„Ÿè¯ï¼Œ", //
+                "å¸¦é¢†æˆ‘ä»¬å‘å‰è¿›ï¼", //
+                "hello, ä¸–ç•Œ"));
     }
 
     @SuppressWarnings("unchecked")

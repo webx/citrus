@@ -72,7 +72,7 @@ public abstract class AbstractSimpleCompositeValidatorTests<V extends AbstractSi
     }
 
     /**
-     * Ô¤´¦ÀíÊµÀı£¬ÒÔ±ãÍ¨¹ı<code>AbstractSimpleCompositeValidatorTests</code>ÖĞµÄ²âÊÔ¡£
+     * é¢„å¤„ç†å®ä¾‹ï¼Œä»¥ä¾¿é€šè¿‡<code>AbstractSimpleCompositeValidatorTests</code>ä¸­çš„æµ‹è¯•ã€‚
      */
     protected void initFor_AbstractSimpleCompositeValidatorTests(V validator) {
     }

@@ -27,23 +27,23 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.citrus.webx.util.SetLoggingContextHelper;
 
 /**
- * Í¨¹ıSLF4J MDCÀ´¼ÇÂ¼ÓÃ»§ºÍÇëÇóµÄĞÅÏ¢¡£
+ * é€šè¿‡SLF4J MDCæ¥è®°å½•ç”¨æˆ·å’Œè¯·æ±‚çš„ä¿¡æ¯ã€‚
  * <p>
- * ½¨ÒéÔÚlog4jµÄÅäÖÃÎÄ¼şÖĞ£¬ÉèÖÃÈçÏÂpattern layout£º
+ * å»ºè®®åœ¨log4jçš„é…ç½®æ–‡ä»¶ä¸­ï¼Œè®¾ç½®å¦‚ä¸‹pattern layoutï¼š
  * </p>
  * 
  * <pre>
  * &lt;layout class="org.apache.log4j.PatternLayout"&gt;
- *     &lt;param name="ConversionPattern" value="%-4r [%d{yyyy-MM-dd HH:mm:ss}] - %X{remoteAddr} %X{requestURI} %X{referrer} %X{userAgent} %X{cookie.Ãû³Æ} - %m%n" /&gt;
+ *     &lt;param name="ConversionPattern" value="%-4r [%d{yyyy-MM-dd HH:mm:ss}] - %X{remoteAddr} %X{requestURI} %X{referrer} %X{userAgent} %X{cookie.åç§°} - %m%n" /&gt;
  * &lt;/layout&gt;
  * </pre>
  * <p>
- * ÏÂÃæÊÇlogback°æ±¾£º
+ * ä¸‹é¢æ˜¯logbackç‰ˆæœ¬ï¼š
  * </p>
  * 
  * <pre>
  * &lt;layout class="ch.qos.logback.classic.PatternLayout"&gt;
- *     &lt;pattern&gt;%-4r [%d{yyyy-MM-dd HH:mm:ss}] - %X{remoteAddr} %X{requestURI} %X{referrer} %X{userAgent} %X{cookie.Ãû³Æ} - %m%n&lt;/pattern&gt;
+ *     &lt;pattern&gt;%-4r [%d{yyyy-MM-dd HH:mm:ss}] - %X{remoteAddr} %X{requestURI} %X{referrer} %X{userAgent} %X{cookie.åç§°} - %m%n&lt;/pattern&gt;
  * &lt;/layout&gt;
  * </pre>
  * 

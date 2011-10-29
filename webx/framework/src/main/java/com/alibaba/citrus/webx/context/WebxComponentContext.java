@@ -25,7 +25,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.alibaba.citrus.webx.WebxComponent;
 
 /**
- * ºÍ<code>WebxComponent</code>¶ÔÓ¦µÄcontextÀà¡£
+ * å’Œ<code>WebxComponent</code>å¯¹åº”çš„contextç±»ã€‚
  * 
  * @author Michael Zhou
  */

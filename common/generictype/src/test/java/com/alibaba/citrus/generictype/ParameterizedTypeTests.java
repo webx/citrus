@@ -35,26 +35,26 @@ import com.alibaba.citrus.test.runner.Prototyped.TestData;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
 
 /**
- * ²âÊÔ{@link ParameterizedTypeInfo}¡£
+ * æµ‹è¯•{@link ParameterizedTypeInfo}ã€‚
  * 
  * @author Michael Zhou
  */
 @RunWith(Prototyped.class)
 public class ParameterizedTypeTests extends BaseTypeTests implements Cloneable {
     private transient ParameterizedTypeInfo typeInfo;
-    private Class<?> ownerType; // ±äÁ¿ËùÔÚµÄÀà
-    private String methodName; // ±äÁ¿µÄ·½·¨Ãû
+    private Class<?> ownerType; // å˜é‡æ‰€åœ¨çš„ç±»
+    private String methodName; // å˜é‡çš„æ–¹æ³•å
     private Class<?> clazz; // rawClass
-    private String name; // Ãû³Æ
-    private String simpleName; // ¼ò³Æ
-    private boolean isInterface; // ÊÇ·ñÎª½Ó¿Ú
-    private String toString; // toString½á¹û
-    private String[] supertypes; // ¸¸Àà¡¢½Ó¿Ú
-    private GenericDeclarationInfo context; // resolve²ÎÊı
-    private String params; // ²ÎÊı±ítoString
+    private String name; // åç§°
+    private String simpleName; // ç®€ç§°
+    private boolean isInterface; // æ˜¯å¦ä¸ºæ¥å£
+    private String toString; // toStringç»“æœ
+    private String[] supertypes; // çˆ¶ç±»ã€æ¥å£
+    private GenericDeclarationInfo context; // resolveå‚æ•°
+    private String params; // å‚æ•°è¡¨toString
     private String[] args; // actual args
-    private String[] resolvedArgs; // resolve½á¹û
-    private boolean resolveChanged; // Èç¹ûÎªfalse£¬±íÊ¾resolve·½·¨·µ»Øthis
+    private String[] resolvedArgs; // resolveç»“æœ
+    private boolean resolveChanged; // å¦‚æœä¸ºfalseï¼Œè¡¨ç¤ºresolveæ–¹æ³•è¿”å›this
 
     @Before
     public void init() {
@@ -83,11 +83,11 @@ public class ParameterizedTypeTests extends BaseTypeTests implements Cloneable {
 
         List<? extends Class<?>> e();
 
-        NumberType<?> e_1(); // ½«±»ĞŞÕı³É? extends Number
+        NumberType<?> e_1(); // å°†è¢«ä¿®æ­£æˆ? extends Number
 
         NumberType<? extends Integer> e_2();
 
-        Enum<? extends Enum<?>> e_3(); // ½«±»ĞŞÕı³É? extends Enum<?>
+        Enum<? extends Enum<?>> e_3(); // å°†è¢«ä¿®æ­£æˆ? extends Enum<?>
 
         List<Map<String, Integer>> f();
 
@@ -111,7 +111,7 @@ public class ParameterizedTypeTests extends BaseTypeTests implements Cloneable {
         ParameterizedTypeTests prototype;
 
         // =========================
-        // ÒÔrawclass×÷Îªactual args
+        // ä»¥rawclassä½œä¸ºactual args
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClass.class;
@@ -128,7 +128,7 @@ public class ParameterizedTypeTests extends BaseTypeTests implements Cloneable {
         prototype.resolvedArgs = new String[] { "String" };
 
         // =========================
-        // ÒÔtype var×÷Îªactual args
+        // ä»¥type varä½œä¸ºactual args
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClass.class;
@@ -147,7 +147,7 @@ public class ParameterizedTypeTests extends BaseTypeTests implements Cloneable {
         prototype.resolveChanged = true;
 
         // =========================
-        // ÒÔwildcard×÷Îªactual args
+        // ä»¥wildcardä½œä¸ºactual args
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClass.class;
@@ -246,7 +246,7 @@ public class ParameterizedTypeTests extends BaseTypeTests implements Cloneable {
         prototype.resolveChanged = true;
 
         // =========================
-        // ÒÔparameterized type×÷Îªactual args
+        // ä»¥parameterized typeä½œä¸ºactual args
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClass.class;
@@ -281,7 +281,7 @@ public class ParameterizedTypeTests extends BaseTypeTests implements Cloneable {
         prototype.resolveChanged = true;
 
         // =========================
-        // ÒÔarray type×÷Îªactual args
+        // ä»¥array typeä½œä¸ºactual args
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClass.class;
@@ -333,7 +333,7 @@ public class ParameterizedTypeTests extends BaseTypeTests implements Cloneable {
     }
 
     /**
-     * from {@link GenericDeclarationInfo}¡£
+     * from {@link GenericDeclarationInfo}ã€‚
      */
     @Test
     public void isGeneric() {
@@ -341,7 +341,7 @@ public class ParameterizedTypeTests extends BaseTypeTests implements Cloneable {
     }
 
     /**
-     * from {@link GenericDeclarationInfo}¡£
+     * from {@link GenericDeclarationInfo}ã€‚
      */
     @Test
     public void getTypeParameters() {

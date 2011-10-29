@@ -19,42 +19,42 @@ package com.alibaba.citrus.service.requestcontext.session;
 
 public interface SessionModel {
     /**
-     * È¡µÃsession ID¡£
+     * å–å¾—session IDã€‚
      * 
      * @return session ID
      */
     String getSessionID();
 
     /**
-     * È¡µÃsessionµÄ´´½¨Ê±¼ä¡£
+     * å–å¾—sessionçš„åˆ›å»ºæ—¶é—´ã€‚
      * 
-     * @return ´´½¨Ê±¼äÂ¾
+     * @return åˆ›å»ºæ—¶é—´æˆ®
      */
     long getCreationTime();
 
     /**
-     * È¡µÃ×î½ü·ÃÎÊÊ±¼ä¡£
+     * å–å¾—æœ€è¿‘è®¿é—®æ—¶é—´ã€‚
      * 
-     * @return ×î½ü·ÃÎÊÊ±¼äÂ¾
+     * @return æœ€è¿‘è®¿é—®æ—¶é—´æˆ®
      */
     long getLastAccessedTime();
 
     /**
-     * È¡µÃsessionµÄ×î´ó²»»î¶¯ÆÚÏŞ£¬³¬¹ı´ËÊ±¼ä£¬session¾Í»áÊ§Ğ§¡£
+     * å–å¾—sessionçš„æœ€å¤§ä¸æ´»åŠ¨æœŸé™ï¼Œè¶…è¿‡æ­¤æ—¶é—´ï¼Œsessionå°±ä¼šå¤±æ•ˆã€‚
      * 
-     * @return ²»»î¶¯ÆÚÏŞµÄÃëÊı
+     * @return ä¸æ´»åŠ¨æœŸé™çš„ç§’æ•°
      */
     int getMaxInactiveInterval();
 
     /**
-     * ÅĞ¶ÏsessionÓĞÃ»ÓĞ¹ıÆÚ¡£
+     * åˆ¤æ–­sessionæœ‰æ²¡æœ‰è¿‡æœŸã€‚
      * 
-     * @return Èç¹û¹ıÆÚÁË£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚æœè¿‡æœŸäº†ï¼Œåˆ™è¿”å›<code>true</code>
      */
     boolean isExpired();
 
     /**
-     * ÓÃÀ´´´½¨session modelÊµÀıµÄ¹¤³§¡£
+     * ç”¨æ¥åˆ›å»ºsession modelå®ä¾‹çš„å·¥å‚ã€‚
      */
     interface Factory {
         SessionModel newInstance(String sessionID, long creationTime, long lastAccessedTime, int maxInactiveInterval);

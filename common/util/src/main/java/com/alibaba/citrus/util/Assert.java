@@ -20,32 +20,32 @@ package com.alibaba.citrus.util;
 import static com.alibaba.citrus.util.Assert.ExceptionType.*;
 
 /**
- * ¶ÏÑÔ¹¤¾ß£¬ÓÃÀ´ÊµÏÖ<a
- * href="http://martinfowler.com/ieeeSoftware/failFast.pdf">Fail-Fast</a>¡£
+ * æ–­è¨€å·¥å…·ï¼Œç”¨æ¥å®ç°<a
+ * href="http://martinfowler.com/ieeeSoftware/failFast.pdf">Fail-Fast</a>ã€‚
  * <p>
- * <strong>×¢ÒâÊÂÏî£º</strong>
+ * <strong>æ³¨æ„äº‹é¡¹ï¼š</strong>
  * </p>
  * <ul>
- * <li>AssertionÊÇÓÃÀ´Ã÷È·ÉèÖÃ³ÌĞòÖĞµÄÌõ¼şºÍÔ¼¶¨µÄ£¬ËüÊÇÒ»ÖÖ³ÌĞòÔ±Ö®¼ä½»Á÷µÄ¹¤¾ß£¬¶ø²»ÊÇºÍ×îÖÕÓÃ»§½»Á÷µÄ¹¤¾ß¡£</li>
- * <li>Ò»¸ö¾­¹ıÍêÕûµ¥Ôª²âÊÔµÄÕıÈ·³ÌĞò£¬²»Ó¦¸ÃÊ¹ÈÎºÎÒ»ÌõassertionÊ§°Ü¡£</li>
- * <li>Ó¦±ÜÃâ¹ıÓÚ¸´ÔÓµÄassertionÌõ¼ş£¬¶øÕ¼ÓÃ¹ı¶àµÄÔËĞĞÊ±¼ä¡£³ı·ÇAssertionÊ§°Ü¡£</li>
- * <li>AssertionµÄ³ö´íĞÅÏ¢²»ÊÇ¸ø×îÖÕÓÃ»§¿´µÄ£¬Òò´ËÃ»±ØÒªĞ´µÃ¹ıÓÚÏêÏ¸£¬¸üÃ»±ØÒª¿¼ÂÇ¹ú¼Ê»¯µÄÎÊÌâ£¬ÒÔÖÁÓÚÀË·ÑCPUµÄÊ±¼ä¡£
- * ÀıÈçÏÂÃæµÄÓï¾äÊÇÒª±ÜÃâµÄ£º
+ * <li>Assertionæ˜¯ç”¨æ¥æ˜ç¡®è®¾ç½®ç¨‹åºä¸­çš„æ¡ä»¶å’Œçº¦å®šçš„ï¼Œå®ƒæ˜¯ä¸€ç§ç¨‹åºå‘˜ä¹‹é—´äº¤æµçš„å·¥å…·ï¼Œè€Œä¸æ˜¯å’Œæœ€ç»ˆç”¨æˆ·äº¤æµçš„å·¥å…·ã€‚</li>
+ * <li>ä¸€ä¸ªç»è¿‡å®Œæ•´å•å…ƒæµ‹è¯•çš„æ­£ç¡®ç¨‹åºï¼Œä¸åº”è¯¥ä½¿ä»»ä½•ä¸€æ¡assertionå¤±è´¥ã€‚</li>
+ * <li>åº”é¿å…è¿‡äºå¤æ‚çš„assertionæ¡ä»¶ï¼Œè€Œå ç”¨è¿‡å¤šçš„è¿è¡Œæ—¶é—´ã€‚é™¤éAssertionå¤±è´¥ã€‚</li>
+ * <li>Assertionçš„å‡ºé”™ä¿¡æ¯ä¸æ˜¯ç»™æœ€ç»ˆç”¨æˆ·çœ‹çš„ï¼Œå› æ­¤æ²¡å¿…è¦å†™å¾—è¿‡äºè¯¦ç»†ï¼Œæ›´æ²¡å¿…è¦è€ƒè™‘å›½é™…åŒ–çš„é—®é¢˜ï¼Œä»¥è‡³äºæµªè´¹CPUçš„æ—¶é—´ã€‚
+ * ä¾‹å¦‚ä¸‹é¢çš„è¯­å¥æ˜¯è¦é¿å…çš„ï¼š
  * 
  * <pre>
  * assertTrue(type instanceof MyType, &quot;Unsupported type: &quot; + type);
  * </pre>
  * 
- * ¿ÉÒÔÌæ»»³É£º
+ * å¯ä»¥æ›¿æ¢æˆï¼š
  * 
  * <pre>
  * assertTrue(type instanceof MyType, &quot;Unsupported type: %s&quot;, type);
  * </pre>
  * 
- * ÕâÑù£¬µ±assertionË³ÀûÍ¨¹ıÊ±£¬²»»áÕ¼ÓÃCPUÊ±¼ä¡£</li>
+ * è¿™æ ·ï¼Œå½“assertioné¡ºåˆ©é€šè¿‡æ—¶ï¼Œä¸ä¼šå ç”¨CPUæ—¶é—´ã€‚</li>
  * </ul>
  * <p>
- * ´ËÍâ£¬²¿·Ö·½·¨¾ßÓĞ·µ»ØÖµ£¬ÒÔ·½±ã±à³Ì£¬ÀıÈç£º
+ * æ­¤å¤–ï¼Œéƒ¨åˆ†æ–¹æ³•å…·æœ‰è¿”å›å€¼ï¼Œä»¥æ–¹ä¾¿ç¼–ç¨‹ï¼Œä¾‹å¦‚ï¼š
  * </p>
  * 
  * <pre>
@@ -66,21 +66,21 @@ import static com.alibaba.citrus.util.Assert.ExceptionType.*;
  */
 public final class Assert {
     /**
-     * È·±£¶ÔÏó²»Îª¿Õ£¬·ñÔòÅ×³ö<code>IllegalArgumentException</code>¡£
+     * ç¡®ä¿å¯¹è±¡ä¸ä¸ºç©ºï¼Œå¦åˆ™æŠ›å‡º<code>IllegalArgumentException</code>ã€‚
      */
     public static <T> T assertNotNull(T object) {
         return assertNotNull(object, null, null, (Object[]) null);
     }
 
     /**
-     * È·±£¶ÔÏó²»Îª¿Õ£¬·ñÔòÅ×³ö<code>IllegalArgumentException</code>¡£
+     * ç¡®ä¿å¯¹è±¡ä¸ä¸ºç©ºï¼Œå¦åˆ™æŠ›å‡º<code>IllegalArgumentException</code>ã€‚
      */
     public static <T> T assertNotNull(T object, String message, Object... args) {
         return assertNotNull(object, null, message, args);
     }
 
     /**
-     * È·±£¶ÔÏó²»Îª¿Õ£¬·ñÔòÅ×³öÖ¸¶¨Òì³££¬Ä¬ÈÏÎª<code>IllegalArgumentException</code>¡£
+     * ç¡®ä¿å¯¹è±¡ä¸ä¸ºç©ºï¼Œå¦åˆ™æŠ›å‡ºæŒ‡å®šå¼‚å¸¸ï¼Œé»˜è®¤ä¸º<code>IllegalArgumentException</code>ã€‚
      */
     public static <T> T assertNotNull(T object, ExceptionType exceptionType, String message, Object... args) {
         if (object == null) {
@@ -96,21 +96,21 @@ public final class Assert {
     }
 
     /**
-     * È·±£¶ÔÏóÎª¿Õ£¬·ñÔòÅ×³ö<code>IllegalArgumentException</code>¡£
+     * ç¡®ä¿å¯¹è±¡ä¸ºç©ºï¼Œå¦åˆ™æŠ›å‡º<code>IllegalArgumentException</code>ã€‚
      */
     public static <T> T assertNull(T object) {
         return assertNull(object, null, null, (Object[]) null);
     }
 
     /**
-     * È·±£¶ÔÏóÎª¿Õ£¬·ñÔòÅ×³ö<code>IllegalArgumentException</code>¡£
+     * ç¡®ä¿å¯¹è±¡ä¸ºç©ºï¼Œå¦åˆ™æŠ›å‡º<code>IllegalArgumentException</code>ã€‚
      */
     public static <T> T assertNull(T object, String message, Object... args) {
         return assertNull(object, null, message, args);
     }
 
     /**
-     * È·±£¶ÔÏóÎª¿Õ£¬·ñÔòÅ×³öÖ¸¶¨Òì³££¬Ä¬ÈÏÎª<code>IllegalArgumentException</code>¡£
+     * ç¡®ä¿å¯¹è±¡ä¸ºç©ºï¼Œå¦åˆ™æŠ›å‡ºæŒ‡å®šå¼‚å¸¸ï¼Œé»˜è®¤ä¸º<code>IllegalArgumentException</code>ã€‚
      */
     public static <T> T assertNull(T object, ExceptionType exceptionType, String message, Object... args) {
         if (object != null) {
@@ -126,21 +126,21 @@ public final class Assert {
     }
 
     /**
-     * È·±£±í´ïÊ½ÎªÕæ£¬·ñÔòÅ×³ö<code>IllegalArgumentException</code>¡£
+     * ç¡®ä¿è¡¨è¾¾å¼ä¸ºçœŸï¼Œå¦åˆ™æŠ›å‡º<code>IllegalArgumentException</code>ã€‚
      */
     public static void assertTrue(boolean expression) {
         assertTrue(expression, null, null, (Object[]) null);
     }
 
     /**
-     * È·±£±í´ïÊ½ÎªÕæ£¬·ñÔòÅ×³ö<code>IllegalArgumentException</code>¡£
+     * ç¡®ä¿è¡¨è¾¾å¼ä¸ºçœŸï¼Œå¦åˆ™æŠ›å‡º<code>IllegalArgumentException</code>ã€‚
      */
     public static void assertTrue(boolean expression, String message, Object... args) {
         assertTrue(expression, null, message, args);
     }
 
     /**
-     * È·±£±í´ïÊ½ÎªÕæ£¬·ñÔòÅ×³öÖ¸¶¨Òì³££¬Ä¬ÈÏÎª<code>IllegalArgumentException</code>¡£
+     * ç¡®ä¿è¡¨è¾¾å¼ä¸ºçœŸï¼Œå¦åˆ™æŠ›å‡ºæŒ‡å®šå¼‚å¸¸ï¼Œé»˜è®¤ä¸º<code>IllegalArgumentException</code>ã€‚
      */
     public static void assertTrue(boolean expression, ExceptionType exceptionType, String message, Object... args) {
         if (!expression) {
@@ -154,7 +154,7 @@ public final class Assert {
     }
 
     /**
-     * ²»¿ÉÄÜµ½´ïµÄ´úÂë¡£
+     * ä¸å¯èƒ½åˆ°è¾¾çš„ä»£ç ã€‚
      */
     public static <T> T unreachableCode() {
         unreachableCode(null, (Object[]) null);
@@ -162,7 +162,7 @@ public final class Assert {
     }
 
     /**
-     * ²»¿ÉÄÜµ½´ïµÄ´úÂë¡£
+     * ä¸å¯èƒ½åˆ°è¾¾çš„ä»£ç ã€‚
      */
     public static <T> T unreachableCode(String message, Object... args) {
         throw UNREACHABLE_CODE.newInstance(getMessage(message, args,
@@ -170,7 +170,7 @@ public final class Assert {
     }
 
     /**
-     * ²»¿ÉÄÜ·¢ÉúµÄÒì³£¡£
+     * ä¸å¯èƒ½å‘ç”Ÿçš„å¼‚å¸¸ã€‚
      */
     public static <T> T unexpectedException(Throwable e) {
         unexpectedException(e, null, (Object[]) null);
@@ -178,7 +178,7 @@ public final class Assert {
     }
 
     /**
-     * ²»¿ÉÄÜ·¢ÉúµÄÒì³£¡£
+     * ä¸å¯èƒ½å‘ç”Ÿçš„å¼‚å¸¸ã€‚
      */
     public static <T> T unexpectedException(Throwable e, String message, Object... args) {
         RuntimeException exception = UNEXPECTED_FAILURE.newInstance(getMessage(message, args,
@@ -190,7 +190,7 @@ public final class Assert {
     }
 
     /**
-     * Î´Ô¤ÁÏµÄÊ§°Ü¡£
+     * æœªé¢„æ–™çš„å¤±è´¥ã€‚
      */
     public static <T> T fail() {
         fail(null, (Object[]) null);
@@ -198,14 +198,14 @@ public final class Assert {
     }
 
     /**
-     * Î´Ô¤ÁÏµÄÊ§°Ü¡£
+     * æœªé¢„æ–™çš„å¤±è´¥ã€‚
      */
     public static <T> T fail(String message, Object... args) {
         throw UNEXPECTED_FAILURE.newInstance(getMessage(message, args, "[Assertion failed] - unexpected failure"));
     }
 
     /**
-     * ²»Ö§³ÖµÄ²Ù×÷¡£
+     * ä¸æ”¯æŒçš„æ“ä½œã€‚
      */
     public static <T> T unsupportedOperation() {
         unsupportedOperation(null, (Object[]) null);
@@ -213,7 +213,7 @@ public final class Assert {
     }
 
     /**
-     * ²»Ö§³ÖµÄ²Ù×÷¡£
+     * ä¸æ”¯æŒçš„æ“ä½œã€‚
      */
     public static <T> T unsupportedOperation(String message, Object... args) {
         throw UNSUPPORTED_OPERATION.newInstance(getMessage(message, args,
@@ -221,7 +221,7 @@ public final class Assert {
     }
 
     /**
-     * È¡µÃ´ø²ÎÊıµÄÏûÏ¢¡£
+     * å–å¾—å¸¦å‚æ•°çš„æ¶ˆæ¯ã€‚
      */
     private static String getMessage(String message, Object[] args, String defaultMessage) {
         if (message == null) {
@@ -236,7 +236,7 @@ public final class Assert {
     }
 
     /**
-     * Assertion´íÎóÀàĞÍ¡£
+     * Assertioné”™è¯¯ç±»å‹ã€‚
      */
     public static enum ExceptionType {
         ILLEGAL_ARGUMENT {

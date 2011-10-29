@@ -54,7 +54,7 @@ import com.alibaba.citrus.webx.WebxException;
 import com.alibaba.citrus.webx.util.WebxUtil;
 
 /**
- * ÊµÏÖ<code>TurbineRunData</code>½Ó¿Ú¡£
+ * å®ç°<code>TurbineRunData</code>æ¥å£ã€‚
  */
 public class TurbineRunDataImpl implements TurbineRunDataInternal {
     private final RequestContext topRequestContext;
@@ -78,7 +78,7 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
     }
 
     /**
-     * ´´½¨Ò»¸öturbine rundata£¬Ê¹ÓÃÖ¸¶¨µÄcontext¡£ ÕâÖÖĞÎÊ½ÓÃÓÚ´´½¨error pipelineµÄrundata¶ÔÏó¡£
+     * åˆ›å»ºä¸€ä¸ªturbine rundataï¼Œä½¿ç”¨æŒ‡å®šçš„contextã€‚ è¿™ç§å½¢å¼ç”¨äºåˆ›å»ºerror pipelineçš„rundataå¯¹è±¡ã€‚
      */
     public TurbineRunDataImpl(HttpServletRequest request, Context context) {
         this.topRequestContext = assertNotNull(RequestContextUtil.getRequestContext(request),
@@ -89,7 +89,7 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
         this.contexts = createHashMap();
 
         if (context != null) {
-            // ½«contextÖĞµÄÄÚÈİ¸´ÖÆµ½ĞÂµÄcontextÖĞ£¬µ«ÊÇ²»Òª°üº¬pull tools¡£
+            // å°†contextä¸­çš„å†…å®¹å¤åˆ¶åˆ°æ–°çš„contextä¸­ï¼Œä½†æ˜¯ä¸è¦åŒ…å«pull toolsã€‚
             Context newContext = getContext();
             Set<String> keys;
 
@@ -198,7 +198,7 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
     public void setRedirectTarget(String redirectTarget) {
         redirectTarget = trimToNull(redirectTarget);
 
-        // Èç¹ûtarget²»ÏàÍ¬£¬²ÅĞèÒªÖØ¶¨Ïò¡£
+        // å¦‚æœtargetä¸ç›¸åŒï¼Œæ‰éœ€è¦é‡å®šå‘ã€‚
         if (!isEquals(target, redirectTarget)) {
             this.redirectTarget = redirectTarget;
             this.action = null;
@@ -235,7 +235,7 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
     }
 
     /**
-     * ÉèÖÃÓÃÓÚÖØ¶¨ÏòµÄuri broker¡£¸Ãuri»áÔÚÏÂÒ»´Î¼ì²éisRedirected()Ê±±»ÉèÖÃµ½responseÖĞ¡£
+     * è®¾ç½®ç”¨äºé‡å®šå‘çš„uri brokerã€‚è¯¥uriä¼šåœ¨ä¸‹ä¸€æ¬¡æ£€æŸ¥isRedirected()æ—¶è¢«è®¾ç½®åˆ°responseä¸­ã€‚
      */
     private void setRedirectLocation(URIBroker uri) {
         this.redirectURI = uri;
@@ -251,7 +251,7 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
     }
 
     public boolean isRedirected() {
-        commitRedirectLocation(); // È·±£redirect uri broker±»Ìá½»
+        commitRedirectLocation(); // ç¡®ä¿redirect uri brokerè¢«æäº¤
         return redirectTarget != null || getLazyCommitRequestContext().isRedirected();
     }
 
@@ -321,8 +321,8 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
     }
 
     /**
-     * Ã÷È·Ö¸¶¨layoutÄ£°å£¬¸²¸ÇÄ¬ÈÏµÄlayout¹æÔò¡£ ×¢ÒâÈç¹ûÖ¸¶¨ÁËlayout£¬Ôò<code>layoutEnabled</code>
-     * ½«±»ÉèÖÃ³É<code>true</code>¡£
+     * æ˜ç¡®æŒ‡å®šlayoutæ¨¡æ¿ï¼Œè¦†ç›–é»˜è®¤çš„layoutè§„åˆ™ã€‚ æ³¨æ„å¦‚æœæŒ‡å®šäº†layoutï¼Œåˆ™<code>layoutEnabled</code>
+     * å°†è¢«è®¾ç½®æˆ<code>true</code>ã€‚
      */
     public void setLayout(String layoutTemplate) {
         layoutTemplateOverride = trimToNull(layoutTemplate);
@@ -333,7 +333,7 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
     }
 
     /**
-     * È¡µÃÃ÷È·Ö¸¶¨µÄlayoutÄ£°å¡£
+     * å–å¾—æ˜ç¡®æŒ‡å®šçš„layoutæ¨¡æ¿ã€‚
      */
     public String getLayoutTemplateOverride() {
         return layoutTemplateOverride;
@@ -358,7 +358,7 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
     }
 
     /**
-     * ½øĞĞÍâ²¿ÖØ¶¨Ïò£¬Ö¸¶¨Ò»¸öÍêÕûµÄURL location¡£
+     * è¿›è¡Œå¤–éƒ¨é‡å®šå‘ï¼ŒæŒ‡å®šä¸€ä¸ªå®Œæ•´çš„URL locationã€‚
      */
     public void redirectToLocation(String location) {
         setRedirectLocation(location);
@@ -417,14 +417,14 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
     }
 
     /**
-     * ´ú±ímoduleµÄµ÷ÓÃÕ»¡£
+     * ä»£è¡¨moduleçš„è°ƒç”¨æ ˆã€‚
      */
     private class ModuleTraces extends LinkedList<ModuleTrace> {
         private static final long serialVersionUID = 8167955929944105578L;
     }
 
     /**
-     * ´ú±íÒ»¸ömoduleµ÷ÓÃµÄĞÅÏ¢¡£
+     * ä»£è¡¨ä¸€ä¸ªmoduleè°ƒç”¨çš„ä¿¡æ¯ã€‚
      */
     private class ModuleTrace {
         private final Context context;

@@ -22,15 +22,15 @@ import com.alibaba.citrus.service.requestcontext.lazycommit.LazyCommitRequestCon
 import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextFactory;
 
 /**
- * ´´½¨<code>LazyCommitRequestContext</code>µÄ¹¤³§¡£
+ * åˆ›å»º<code>LazyCommitRequestContext</code>çš„å·¥å‚ã€‚
  * 
  * @author Michael Zhou
  */
 public class LazyCommitRequestContextFactoryImpl extends AbstractRequestContextFactory<LazyCommitRequestContext> {
     /**
-     * °ü×°Ò»¸örequest context¡£
+     * åŒ…è£…ä¸€ä¸ªrequest contextã€‚
      * 
-     * @param wrappedContext ±»°ü×°µÄ<code>RequestContext</code>¶ÔÏó
+     * @param wrappedContext è¢«åŒ…è£…çš„<code>RequestContext</code>å¯¹è±¡
      * @return request context
      */
     public LazyCommitRequestContext getRequestContextWrapper(RequestContext wrappedContext) {
@@ -38,17 +38,17 @@ public class LazyCommitRequestContextFactoryImpl extends AbstractRequestContextF
     }
 
     /**
-     * ±¾ÀàÌá¹©ÁËÑÓ³ÙÌá½»headersµÄ¹¦ÄÜ¡£
+     * æœ¬ç±»æä¾›äº†å»¶è¿Ÿæäº¤headersçš„åŠŸèƒ½ã€‚
      */
     public String[] getFeatures() {
         return new String[] { "lazyCommitHeaders" };
     }
 
     /**
-     * ±¾ÀàÊµÏÖÁËÑÓ³ÙÌá½»headersµÄ¹¦ÄÜ¡£µ«ÊÇ£¬¼ÙÈç²»¶ÔcontentÒ²½øĞĞÑÓ³ÙÌá½»µÄ»°£¬
-     * Ó¦ÓÃ³ÌĞòËùÊä³öµÄcontent»áµ¼ÖÂresponseÌáÇ°±»Ìá½»£¬´Ó¶øµ¼ÖÂheadersÎŞ·¨Ìá½»¡£
-     * ¶øÇÒ£¬headers±ØĞëÏÈÓÚcontentÌá½»¡£Òò´Ë£¬lazyCommitHeaders ±ØĞëÅÅÔÚ
-     * lazyCommitContentÖ®ºó£¬ÇÒÒÀÀµÓÚlazyCommitContent¹¦ÄÜ¡£
+     * æœ¬ç±»å®ç°äº†å»¶è¿Ÿæäº¤headersçš„åŠŸèƒ½ã€‚ä½†æ˜¯ï¼Œå‡å¦‚ä¸å¯¹contentä¹Ÿè¿›è¡Œå»¶è¿Ÿæäº¤çš„è¯ï¼Œ
+     * åº”ç”¨ç¨‹åºæ‰€è¾“å‡ºçš„contentä¼šå¯¼è‡´responseæå‰è¢«æäº¤ï¼Œä»è€Œå¯¼è‡´headersæ— æ³•æäº¤ã€‚
+     * è€Œä¸”ï¼Œheaderså¿…é¡»å…ˆäºcontentæäº¤ã€‚å› æ­¤ï¼ŒlazyCommitHeaders å¿…é¡»æ’åœ¨
+     * lazyCommitContentä¹‹åï¼Œä¸”ä¾èµ–äºlazyCommitContentåŠŸèƒ½ã€‚
      */
     public FeatureOrder[] featureOrders() {
         return new FeatureOrder[] { new RequiresFeature("lazyCommitContent") };

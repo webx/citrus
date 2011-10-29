@@ -25,7 +25,7 @@ import com.alibaba.citrus.webx.handler.support.LayoutRequestProcessor;
 import com.alibaba.citrus.webx.util.WebxUtil;
 
 /**
- * InternalÒ³ÃæµÄÖ÷Ò³¡£
+ * Internalé¡µé¢çš„ä¸»é¡µã€‚
  * 
  * @author Michael Zhou
  */

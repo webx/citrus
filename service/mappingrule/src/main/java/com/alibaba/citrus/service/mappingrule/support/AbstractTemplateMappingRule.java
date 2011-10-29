@@ -22,9 +22,9 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import com.alibaba.citrus.service.template.TemplateService;
 
 /**
- * Ó³Éäµ½Ä£°åÃûµÄ<code>MappingRule</code>¡£
+ * æ˜ å°„åˆ°æ¨¡æ¿åçš„<code>MappingRule</code>ã€‚
  * <p>
- * ¸Ã<code>MappingRule</code>ÓĞ¿ÉÄÜµ÷ÓÃ<code>TemplateService</code>ÒÔÈ·¶¨Ä£°åÊÇ·ñ´æÔÚ¡£
+ * è¯¥<code>MappingRule</code>æœ‰å¯èƒ½è°ƒç”¨<code>TemplateService</code>ä»¥ç¡®å®šæ¨¡æ¿æ˜¯å¦å­˜åœ¨ã€‚
  * </p>
  * 
  * @author Michael Zhou

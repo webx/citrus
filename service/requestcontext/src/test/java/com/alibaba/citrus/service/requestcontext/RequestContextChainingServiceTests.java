@@ -42,7 +42,7 @@ import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextW
 import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
 
 /**
- * ²âÊÔ<code>RequestContextChainingService</code>¡£
+ * æµ‹è¯•<code>RequestContextChainingService</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -83,13 +83,13 @@ public class RequestContextChainingServiceTests extends AbstractRequestContextsT
     public void emptyRequestContext() throws Exception {
         initRequestContext("empty");
 
-        // ÔÚÃ»ÓĞÈÎºÎrequest context factoryµÄÊ±ºò£¬
-        //   requestContext.getRequest()¾ÍÊÇÔ­À´µÄrequest
-        //   requestContext.getResponse()¾ÍÊÇÔ­À´µÄresponse
+        // åœ¨æ²¡æœ‰ä»»ä½•request context factoryçš„æ—¶å€™ï¼Œ
+        //   requestContext.getRequest()å°±æ˜¯åŸæ¥çš„request
+        //   requestContext.getResponse()å°±æ˜¯åŸæ¥çš„response
         assertSame(request, newRequest);
         assertSame(response, newResponse);
 
-        // È·±£¿ÉÒÔ´ÓrequestÖĞÈ¡µÃrequestContext
+        // ç¡®ä¿å¯ä»¥ä»requestä¸­å–å¾—requestContext
         assertSame(requestContext, RequestContextUtil.getRequestContext(request));
     }
 
@@ -142,7 +142,7 @@ public class RequestContextChainingServiceTests extends AbstractRequestContextsT
 
         requestContexts.commitRequestContext(requestContext);
 
-        // Ë³ĞòËäÈ»Óësort()²»Í¬£¬µ«ÈÔÈ»·ûºÏËùÓĞÌõ¼ş¡£
+        // é¡ºåºè™½ç„¶ä¸sort()ä¸åŒï¼Œä½†ä»ç„¶ç¬¦åˆæ‰€æœ‰æ¡ä»¶ã€‚
         assertArrayEquals(new Object[] { -3, -2, 5, 4, 3, 2, 1, 0, -1, -4 }, prepareOrder.toArray());
         assertArrayEquals(new Object[] { -4, -1, 0, 1, 2, 3, 4, 5, -2, -3 }, commitOrder.toArray());
     }
@@ -215,10 +215,10 @@ public class RequestContextChainingServiceTests extends AbstractRequestContextsT
                     return new FeatureOrder[] { new BeforeFeature("f-2") };
 
                 case -2:
-                    return new FeatureOrder[] { new BeforeFeature("*") }; // *±íÊ¾ÔÚËùÓĞfeatureÖ®Ç°
+                    return new FeatureOrder[] { new BeforeFeature("*") }; // *è¡¨ç¤ºåœ¨æ‰€æœ‰featureä¹‹å‰
 
                 case -1:
-                    return new FeatureOrder[] { new AfterFeature("*") }; // *±íÊ¾ÔÚËùÓĞfeatureÖ®ºó
+                    return new FeatureOrder[] { new AfterFeature("*") }; // *è¡¨ç¤ºåœ¨æ‰€æœ‰featureä¹‹å
 
                 case -4:
                     return new FeatureOrder[] { new AfterFeature("f-1") };

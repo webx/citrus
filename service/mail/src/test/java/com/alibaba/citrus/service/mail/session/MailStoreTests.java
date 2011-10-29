@@ -252,7 +252,7 @@ public class MailStoreTests extends AbstractMailSessionTests<MailStore> {
         addMail("222");
         addMail("333");
 
-        MyHandler handler = new MyHandler(1, true); // 每次收一封信
+        MyHandler handler = new MyHandler(1, true); // 姣忔鏀朵竴灏佷俊
 
         try {
             assertFalse(session.isConnected());

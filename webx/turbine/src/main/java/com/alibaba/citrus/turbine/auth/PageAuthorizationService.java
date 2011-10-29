@@ -18,7 +18,7 @@
 package com.alibaba.citrus.turbine.auth;
 
 /**
- * ÎªÒ³ÃæÊÚÈ¨µÄservice¡£
+ * ä¸ºé¡µé¢æˆæƒçš„serviceã€‚
  * 
  * @author Michael Zhou
  */

@@ -26,7 +26,7 @@ import java.io.InputStream;
 import org.junit.Test;
 
 /**
- * ²âÊÔ<code>InputStreamResource</code>¡£
+ * æµ‹è¯•<code>InputStreamResource</code>ã€‚
  * 
  * @author Michael Zhou
  */

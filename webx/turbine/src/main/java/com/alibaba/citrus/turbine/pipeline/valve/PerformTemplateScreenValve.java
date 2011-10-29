@@ -22,7 +22,7 @@ import static com.alibaba.citrus.turbine.TurbineConstant.*;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
 
 /**
- * Ö´ĞĞ»ùÓÚÄ£°åµÄscreen¡£
+ * æ‰§è¡ŒåŸºäºæ¨¡æ¿çš„screenã€‚
  * 
  * @author Michael Zhou
  */

@@ -24,7 +24,7 @@ import com.alibaba.citrus.generictype.TypeInfo;
 import com.alibaba.citrus.generictype.TypeVariableInfo;
 
 /**
- * ¶Ô{@link TypeVariableInfo}µÄÊµÏÖ¡£
+ * å¯¹{@link TypeVariableInfo}çš„å®ç°ã€‚
  * 
  * @author Michael Zhou
  */
@@ -66,7 +66,7 @@ class TypeVariableImpl extends AbstractBoundedTypeInfo implements TypeVariableIn
     }
 
     /**
-     * È¡µÃhashÖµ¡£
+     * å–å¾—hashå€¼ã€‚
      */
     @Override
     public int hashCode() {
@@ -74,7 +74,7 @@ class TypeVariableImpl extends AbstractBoundedTypeInfo implements TypeVariableIn
     }
 
     /**
-     * ÅĞ¶ÏÁ½¸ö¶ÔÏóÊÇ·ñÏàÍ¬¡£
+     * åˆ¤æ–­ä¸¤ä¸ªå¯¹è±¡æ˜¯å¦ç›¸åŒã€‚
      */
     @Override
     public boolean equals(Object other) {
@@ -92,7 +92,7 @@ class TypeVariableImpl extends AbstractBoundedTypeInfo implements TypeVariableIn
     }
 
     /**
-     * È¡µÃ×Ö·û´®±íÊ¾¡£
+     * å–å¾—å­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      */
     @Override
     public String toString() {

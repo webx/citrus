@@ -32,7 +32,7 @@ import com.alibaba.citrus.service.resource.ResourceLoadingService;
 import com.alibaba.citrus.service.resource.support.URLResource;
 
 /**
- * ´ÓclassloaderÖĞ×°ÔØ×ÊÔ´¡£
+ * ä»classloaderä¸­è£…è½½èµ„æºã€‚
  * 
  * @author Michael Zhou
  */
@@ -52,7 +52,7 @@ public class ClasspathResourceLoader implements ResourceLoader, ResourceLoaderAw
     }
 
     /**
-     * ³õÊ¼»¯loader£¬²¢Éè¶¨loaderËùÔÚµÄ<code>ResourceLoadingService</code>µÄÊµÀı¡£
+     * åˆå§‹åŒ–loaderï¼Œå¹¶è®¾å®šloaderæ‰€åœ¨çš„<code>ResourceLoadingService</code>çš„å®ä¾‹ã€‚
      */
     public void init(ResourceLoadingService resourceLoadingService) {
         if (cl == null) {

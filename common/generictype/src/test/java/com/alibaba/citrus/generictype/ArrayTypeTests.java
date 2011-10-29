@@ -35,26 +35,26 @@ import com.alibaba.citrus.test.runner.Prototyped.TestData;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
 
 /**
- * ²âÊÔ{@link ArrayTypeInfo}¡£
+ * æµ‹è¯•{@link ArrayTypeInfo}ã€‚
  * 
  * @author Michael Zhou
  */
 @RunWith(Prototyped.class)
 public class ArrayTypeTests extends BaseTypeTests implements Cloneable {
     private transient ArrayTypeInfo typeInfo;
-    private Class<?> ownerType; // ±äÁ¿ËùÔÚµÄÀà
-    private String methodName; // ±äÁ¿µÄ·½·¨Ãû
-    private String name; // Ãû³Æ
-    private String simpleName; // ¼ò³Æ
+    private Class<?> ownerType; // å˜é‡æ‰€åœ¨çš„ç±»
+    private String methodName; // å˜é‡çš„æ–¹æ³•å
+    private String name; // åç§°
+    private String simpleName; // ç®€ç§°
     private Class<?> clazz; // rawType
-    private int dimension; // Êı×éÎ¬¶È
-    private TypeInfo componentType; // Êı×éÔªËØÀàĞÍ
-    private TypeInfo directComponentType; // Êı×éÖ±½ÓÔªËØÀàĞÍ
-    private String toString; // toString½á¹û
-    private String[] supertypes; // ¸¸Àà¡¢½Ó¿Ú
+    private int dimension; // æ•°ç»„ç»´åº¦
+    private TypeInfo componentType; // æ•°ç»„å…ƒç´ ç±»å‹
+    private TypeInfo directComponentType; // æ•°ç»„ç›´æ¥å…ƒç´ ç±»å‹
+    private String toString; // toStringç»“æœ
+    private String[] supertypes; // çˆ¶ç±»ã€æ¥å£
     private GenericDeclarationInfo context; // resolve context
     private TypeInfo resolvedType; // resolve result;
-    private boolean resolveChanged; // Èç¹ûÎªfalse£¬´ú±íresolve·µ»Øthis
+    private boolean resolveChanged; // å¦‚æœä¸ºfalseï¼Œä»£è¡¨resolveè¿”å›this
 
     @Before
     public void init() {
@@ -108,7 +108,7 @@ public class ArrayTypeTests extends BaseTypeTests implements Cloneable {
         ArrayTypeTests prototype;
 
         // =========================
-        // rawClassÊı×é
+        // rawClassæ•°ç»„
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClass.class;
@@ -174,7 +174,7 @@ public class ArrayTypeTests extends BaseTypeTests implements Cloneable {
         prototype.resolvedType = factory.getType(int[][].class);
 
         // =========================
-        // parameterized typeÊı×é
+        // parameterized typeæ•°ç»„
         // -----------------
         prototype = data.newPrototype();
         prototype.ownerType = TestClass.class;
@@ -227,7 +227,7 @@ public class ArrayTypeTests extends BaseTypeTests implements Cloneable {
         prototype.resolvedType = factory.getType(getReturnType(TestClass.class, "e"));
 
         // =========================
-        // varÊı×é
+        // varæ•°ç»„
         // -----------------
 
         // -----------------

@@ -32,7 +32,7 @@ import com.alibaba.citrus.service.mail.builder.content.HTMLTemplateContent;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * ²âÊÔ»ùÓÚÄ£°åµÄhtml content¡£
+ * æµ‹è¯•åŸºäºæ¨¡æ¿çš„html contentã€‚
  * 
  * @author Michael Zhou
  */
@@ -291,10 +291,10 @@ public class HTMLTemplateContentTests extends AbstractTemplateContentTests<HTMLT
         assertThat(eml, containsRegex("Content-Disposition: inline; filename=bible.jpg"));
         assertThat(eml, containsRegex(extra + REGEX_EOL));
 
-        // ÓĞÇÒ½öÓĞ4¸öcontent type
+        // æœ‰ä¸”ä»…æœ‰4ä¸ªcontent type
         assertEquals(4, StringUtil.countMatches(eml, "Content-Type:"));
 
-        // url1ºÍurl2Ö¸ÏòÍ¬Ò»¸öimage£¬ºÍurl3²»Í¬
+        // url1å’Œurl2æŒ‡å‘åŒä¸€ä¸ªimageï¼Œå’Œurl3ä¸åŒ
         Pattern pattern = Pattern.compile("<img src=\"cid:([^\"]+)\"/>");
         Matcher matcher = pattern.matcher(eml);
 
@@ -319,10 +319,10 @@ public class HTMLTemplateContentTests extends AbstractTemplateContentTests<HTMLT
         assertThat(eml, containsRegex("Content-Type: text/html; charset=UTF-8" + REGEX_EOL));
         assertThat(eml, containsRegex("Content-Transfer-Encoding: 8bit" + REGEX_EOL));
         assertThat(eml, containsRegex("cid:"));
-        assertThat(eml, containsRegex("Content-Type: application/octet-stream")); // ²»Ö§³Öurl£¬ËùÒÔÈ¡²»µ½content type
+        assertThat(eml, containsRegex("Content-Type: application/octet-stream")); // ä¸æ”¯æŒurlï¼Œæ‰€ä»¥å–ä¸åˆ°content type
         assertThat(eml, containsRegex("Content-Disposition: inline; filename=java.gif"));
 
-        // ÓĞÇÒ½öÓĞ3¸öcontent type
+        // æœ‰ä¸”ä»…æœ‰3ä¸ªcontent type
         assertEquals(3, StringUtil.countMatches(eml, "Content-Type:"));
     }
 

@@ -24,32 +24,32 @@ import com.alibaba.citrus.asm.Opcodes;
 import com.alibaba.citrus.asm.Type;
 
 /**
- * ºÍ¶ş½øÖÆÂëÉú³ÉÏà¹ØµÄ³£Á¿¡£
+ * å’ŒäºŒè¿›åˆ¶ç ç”Ÿæˆç›¸å…³çš„å¸¸é‡ã€‚
  * 
  * @author Michael Zhou
  */
 public final class CodegenConstant {
-    /** Ä¬ÈÏµÄ<code>ClassWriter</code>±êÖ¾Î»¡£ */
+    /** é»˜è®¤çš„<code>ClassWriter</code>æ ‡å¿—ä½ã€‚ */
     public final static int DEFAULT_CLASS_WRITER_FLAGS = ClassWriter.COMPUTE_MAXS;
 
-    /** Ä¬ÈÏµÄclassÎÄ¼ş°æ±¾¡£ */
+    /** é»˜è®¤çš„classæ–‡ä»¶ç‰ˆæœ¬ã€‚ */
     public final static int DEFAULT_CLASS_VERSION = Opcodes.V1_5;
 
-    /** Ä¬ÈÏµÄclassÔ´ÎÄ¼şÃû¡£ */
+    /** é»˜è®¤çš„classæºæ–‡ä»¶åã€‚ */
     public final static String DEFAULT_SOURCE = "<generated>";
 
-    /** Ä¬ÈÏµÄclass°üÃû¡£ */
+    /** é»˜è®¤çš„classåŒ…åã€‚ */
     public final static String DEFAULT_PACKAGE_NAME = "generated";
 
-    /** <code>java.lang.Object</code>¶ÔÓ¦µÄ<code>Type</code>¶ÔÏó¡£ */
+    /** <code>java.lang.Object</code>å¯¹åº”çš„<code>Type</code>å¯¹è±¡ã€‚ */
     public final static Type OBJECT_TYPE = Type.getType(Object.class);
 
-    /** ³£Á¿ĞŞÊÎ·û¡£ */
+    /** å¸¸é‡ä¿®é¥°ç¬¦ã€‚ */
     public final static int ACC_CONSTANT = ACC_STATIC | ACC_FINAL;
 
-    /** ¹¹Ôìº¯ÊıµÄÃû³Æ¡£ */
+    /** æ„é€ å‡½æ•°çš„åç§°ã€‚ */
     public final static String CONSTRUCTOR_NAME = "<init>";
 
-    /** ¾²Ì¬¹¹Ôìº¯ÊıµÄÃû³Æ¡£ */
+    /** é™æ€æ„é€ å‡½æ•°çš„åç§°ã€‚ */
     public final static String STATIC_CONSTRUCTOR_NAME = "<clinit>";
 }

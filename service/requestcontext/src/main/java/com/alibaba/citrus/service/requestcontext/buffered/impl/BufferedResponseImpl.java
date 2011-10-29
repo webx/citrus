@@ -45,7 +45,7 @@ import com.alibaba.citrus.util.io.ByteArrayOutputStream;
 import com.alibaba.citrus.util.io.StreamUtil;
 
 /**
- * °ü¹ü<code>HttpServletResponse</code>£¬Ê¹Ö®Êä³öµ½ÄÚ´æÖĞ¡£
+ * åŒ…è£¹<code>HttpServletResponse</code>ï¼Œä½¿ä¹‹è¾“å‡ºåˆ°å†…å­˜ä¸­ã€‚
  * 
  * @author Michael Zhou
  */
@@ -60,20 +60,20 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
     private ServletOutputStream writerAdapter;
 
     /**
-     * ´´½¨Ò»¸ö<code>BufferedResponseImpl</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>BufferedResponseImpl</code>ã€‚
      * 
-     * @param requestContext responseËùÔÚµÄrequest context
-     * @param response Ô­Ê¼µÄresponse
+     * @param requestContext responseæ‰€åœ¨çš„request context
+     * @param response åŸå§‹çš„response
      */
     public BufferedResponseImpl(RequestContext requestContext, HttpServletResponse response) {
         super(requestContext, response);
     }
 
     /**
-     * È¡µÃÊä³öÁ÷¡£
+     * å–å¾—è¾“å‡ºæµã€‚
      * 
-     * @return responseµÄÊä³öÁ÷
-     * @throws IOException ÊäÈëÊä³öÊ§°Ü
+     * @return responseçš„è¾“å‡ºæµ
+     * @throws IOException è¾“å…¥è¾“å‡ºå¤±è´¥
      */
     @Override
     public ServletOutputStream getOutputStream() throws IOException {
@@ -82,9 +82,9 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
         }
 
         if (writer != null) {
-            // Èç¹ûgetWriter·½·¨ÒÑ¾­±»µ÷ÓÃ£¬Ôò½«writer×ª»»³ÉOutputStream
-            // ÕâÑù×ö»áÔö¼ÓÉÙÁ¿¶îÍâµÄÄÚ´æ¿ªÏú£¬µ«±ê×¼µÄservlet engine²»»áÓöµ½ÕâÖÖÇéĞÎ£¬
-            // Ö»ÓĞÉÙÊıservlet engineĞèÒªÕâÖÖ×ö·¨£¨resin£©¡£
+            // å¦‚æœgetWriteræ–¹æ³•å·²ç»è¢«è°ƒç”¨ï¼Œåˆ™å°†writerè½¬æ¢æˆOutputStream
+            // è¿™æ ·åšä¼šå¢åŠ å°‘é‡é¢å¤–çš„å†…å­˜å¼€é”€ï¼Œä½†æ ‡å‡†çš„servlet engineä¸ä¼šé‡åˆ°è¿™ç§æƒ…å½¢ï¼Œ
+            // åªæœ‰å°‘æ•°servlet engineéœ€è¦è¿™ç§åšæ³•ï¼ˆresinï¼‰ã€‚
             if (writerAdapter != null) {
                 return writerAdapter;
             } else {
@@ -95,8 +95,8 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
         }
 
         if (buffering) {
-            // ×¢Òâ£¬servletStreamÒ»µ©´´½¨£¬¾Í²»¸Ä±ä£¬
-            // Èç¹ûĞèÒª¸Ä±ä£¬Ö»ĞèÒª¸Ä±äÆäÏÂÃæµÄbytesÁ÷¼´¿É¡£
+            // æ³¨æ„ï¼ŒservletStreamä¸€æ—¦åˆ›å»ºï¼Œå°±ä¸æ”¹å˜ï¼Œ
+            // å¦‚æœéœ€è¦æ”¹å˜ï¼Œåªéœ€è¦æ”¹å˜å…¶ä¸‹é¢çš„bytesæµå³å¯ã€‚
             if (bytesStack == null) {
                 bytesStack = new Stack<ByteArrayOutputStream>();
             }
@@ -115,10 +115,10 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
     }
 
     /**
-     * È¡µÃÊä³ö×Ö·ûÁ÷¡£
+     * å–å¾—è¾“å‡ºå­—ç¬¦æµã€‚
      * 
-     * @return responseµÄÊä³ö×Ö·ûÁ÷
-     * @throws IOException ÊäÈëÊä³öÊ§°Ü
+     * @return responseçš„è¾“å‡ºå­—ç¬¦æµ
+     * @throws IOException è¾“å…¥è¾“å‡ºå¤±è´¥
      */
     @Override
     public PrintWriter getWriter() throws IOException {
@@ -127,9 +127,9 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
         }
 
         if (stream != null) {
-            // Èç¹ûgetOutputStream·½·¨ÒÑ¾­±»µ÷ÓÃ£¬Ôò½«stream×ª»»³ÉPrintWriter¡£
-            // ÕâÑù×ö»áÔö¼ÓÉÙÁ¿¶îÍâµÄÄÚ´æ¿ªÏú£¬µ«±ê×¼µÄservlet engine²»»áÓöµ½ÕâÖÖÇéĞÎ£¬
-            // Ö»ÓĞÉÙÊıservlet engineĞèÒªÕâÖÖ×ö·¨£¨resin£©¡£
+            // å¦‚æœgetOutputStreamæ–¹æ³•å·²ç»è¢«è°ƒç”¨ï¼Œåˆ™å°†streamè½¬æ¢æˆPrintWriterã€‚
+            // è¿™æ ·åšä¼šå¢åŠ å°‘é‡é¢å¤–çš„å†…å­˜å¼€é”€ï¼Œä½†æ ‡å‡†çš„servlet engineä¸ä¼šé‡åˆ°è¿™ç§æƒ…å½¢ï¼Œ
+            // åªæœ‰å°‘æ•°servlet engineéœ€è¦è¿™ç§åšæ³•ï¼ˆresinï¼‰ã€‚
             if (streamAdapter != null) {
                 return streamAdapter;
             } else {
@@ -140,8 +140,8 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
         }
 
         if (buffering) {
-            // ×¢Òâ£¬servletWriterÒ»µ©´´½¨£¬¾Í²»¸Ä±ä£¬
-            // Èç¹ûĞèÒª¸Ä±ä£¬Ö»ĞèÒª¸Ä±äÆäÏÂÃæµÄcharsÁ÷¼´¿É¡£
+            // æ³¨æ„ï¼ŒservletWriterä¸€æ—¦åˆ›å»ºï¼Œå°±ä¸æ”¹å˜ï¼Œ
+            // å¦‚æœéœ€è¦æ”¹å˜ï¼Œåªéœ€è¦æ”¹å˜å…¶ä¸‹é¢çš„charsæµå³å¯ã€‚
             if (charsStack == null) {
                 charsStack = new Stack<StringWriter>();
             }
@@ -160,9 +160,9 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
     }
 
     /**
-     * ÉèÖÃcontent³¤¶È¡£¸Ãµ÷ÓÃÖ»ÔÚ<code>setBuffering(false)</code>Ê±ÓĞĞ§¡£
+     * è®¾ç½®contenté•¿åº¦ã€‚è¯¥è°ƒç”¨åªåœ¨<code>setBuffering(false)</code>æ—¶æœ‰æ•ˆã€‚
      * 
-     * @param length content³¤¶È
+     * @param length contenté•¿åº¦
      */
     @Override
     public void setContentLength(int length) {
@@ -172,9 +172,9 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
     }
 
     /**
-     * ³åÏ´buffer¡£
+     * å†²æ´—bufferã€‚
      * 
-     * @throws IOException Èç¹ûÊ§°Ü
+     * @throws IOException å¦‚æœå¤±è´¥
      */
     @Override
     public void flushBuffer() throws IOException {
@@ -192,9 +192,9 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
     }
 
     /**
-     * Çå³ıËùÓĞbuffers£¬³£ÓÃÓÚÏÔÊ¾³ö´íĞÅÏ¢¡£
+     * æ¸…é™¤æ‰€æœ‰buffersï¼Œå¸¸ç”¨äºæ˜¾ç¤ºå‡ºé”™ä¿¡æ¯ã€‚
      * 
-     * @throws IllegalStateException Èç¹ûresponseÒÑ¾­commit
+     * @throws IllegalStateException å¦‚æœresponseå·²ç»commit
      */
     @Override
     public void resetBuffer() {
@@ -218,24 +218,24 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
     }
 
     /**
-     * ÉèÖÃÊÇ·ñ½«ËùÓĞĞÅÏ¢±£´æÔÚÄÚ´æÖĞ¡£
+     * è®¾ç½®æ˜¯å¦å°†æ‰€æœ‰ä¿¡æ¯ä¿å­˜åœ¨å†…å­˜ä¸­ã€‚
      * 
-     * @return Èç¹ûÊÇ£¬Ôò·µ»Ø<code>true</code>
+     * @return å¦‚æœæ˜¯ï¼Œåˆ™è¿”å›<code>true</code>
      */
     public boolean isBuffering() {
         return buffering;
     }
 
     /**
-     * ÉèÖÃbufferÄ£Ê½£¬Èç¹ûÉèÖÃ³É<code>true</code>£¬±íÊ¾½«ËùÓĞĞÅÏ¢±£´æÔÚÄÚ´æÖĞ£¬·ñÔòÖ±½ÓÊä³öµ½Ô­Ê¼responseÖĞ¡£
+     * è®¾ç½®bufferæ¨¡å¼ï¼Œå¦‚æœè®¾ç½®æˆ<code>true</code>ï¼Œè¡¨ç¤ºå°†æ‰€æœ‰ä¿¡æ¯ä¿å­˜åœ¨å†…å­˜ä¸­ï¼Œå¦åˆ™ç›´æ¥è¾“å‡ºåˆ°åŸå§‹responseä¸­ã€‚
      * <p>
-     * ´Ë·½·¨±ØĞëÔÚ<code>getOutputStream</code>ºÍ<code>getWriter</code>·½·¨Ö®Ç°Ö´ĞĞ£¬·ñÔò½«Å×³ö
-     * <code>IllegalStateException</code>¡£
+     * æ­¤æ–¹æ³•å¿…é¡»åœ¨<code>getOutputStream</code>å’Œ<code>getWriter</code>æ–¹æ³•ä¹‹å‰æ‰§è¡Œï¼Œå¦åˆ™å°†æŠ›å‡º
+     * <code>IllegalStateException</code>ã€‚
      * </p>
      * 
-     * @param buffering ÊÇ·ñbufferÄÚÈİ
-     * @throws IllegalStateException <code>getOutputStream</code>»ò
-     *             <code>getWriter</code>·½·¨ÒÑ¾­±»Ö´ĞĞ
+     * @param buffering æ˜¯å¦bufferå†…å®¹
+     * @throws IllegalStateException <code>getOutputStream</code>æˆ–
+     *             <code>getWriter</code>æ–¹æ³•å·²ç»è¢«æ‰§è¡Œ
      */
     public void setBuffering(boolean buffering) {
         if (stream == null && writer == null) {
@@ -252,10 +252,10 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
     }
 
     /**
-     * ´´½¨ĞÂµÄbuffer£¬±£´æÀÏµÄbuffer¡£
+     * åˆ›å»ºæ–°çš„bufferï¼Œä¿å­˜è€çš„bufferã€‚
      * 
-     * @throws IllegalStateException Èç¹û²»ÔÚbufferÄ£Ê½£¬»ò<code>getWriter</code>
-     *             ·½·¨Ôø±»µ÷ÓÃ£¬»ò<code>getOutputStream</code>·½·¨´ÓÎ´±»µ÷ÓÃ
+     * @throws IllegalStateException å¦‚æœä¸åœ¨bufferæ¨¡å¼ï¼Œæˆ–<code>getWriter</code>
+     *             æ–¹æ³•æ›¾è¢«è°ƒç”¨ï¼Œæˆ–<code>getOutputStream</code>æ–¹æ³•ä»æœªè¢«è°ƒç”¨
      */
     public void pushBuffer() {
         if (!buffering) {
@@ -268,7 +268,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
 
         flushBufferAdapter();
 
-        // Ïòstream»òwriter stackÖĞÑ¹ÈëĞÂµÄbuffer¡£
+        // å‘streamæˆ–writer stackä¸­å‹å…¥æ–°çš„bufferã€‚
         if (stream != null) {
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 
@@ -289,10 +289,10 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
     }
 
     /**
-     * µ¯³ö×î½üµÄbuffer£¬Èç¹û¶ÑÕ»ÖĞÖ»ÓĞÒ»¸öbuffer£¬Ôòµ¯³öºóÔÙ´´½¨Ò»¸öĞÂµÄ¡£
+     * å¼¹å‡ºæœ€è¿‘çš„bufferï¼Œå¦‚æœå †æ ˆä¸­åªæœ‰ä¸€ä¸ªbufferï¼Œåˆ™å¼¹å‡ºåå†åˆ›å»ºä¸€ä¸ªæ–°çš„ã€‚
      * 
-     * @return ×î½üµÄbufferÄÚÈİ£¬Èç¹û<code>getOutputStream</code>·½·¨´ÓÎ´±»µ÷ÓÃ£¬Ôò·µ»Ø¿ÕµÄbyte array
-     * @throws IllegalStateException Èç¹û²»ÔÚbufferÄ£Ê½£¬»ò<code>getWriter</code>·½·¨Ôø±»µ÷ÓÃ
+     * @return æœ€è¿‘çš„bufferå†…å®¹ï¼Œå¦‚æœ<code>getOutputStream</code>æ–¹æ³•ä»æœªè¢«è°ƒç”¨ï¼Œåˆ™è¿”å›ç©ºçš„byte array
+     * @throws IllegalStateException å¦‚æœä¸åœ¨bufferæ¨¡å¼ï¼Œæˆ–<code>getWriter</code>æ–¹æ³•æ›¾è¢«è°ƒç”¨
      */
     public ByteArray popByteBuffer() {
         if (!buffering) {
@@ -323,11 +323,11 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
     }
 
     /**
-     * µ¯³ö×î½üµÄbuffer£¬Èç¹û¶ÑÕ»ÖĞÖ»ÓĞÒ»¸öbuffer£¬Ôòµ¯³öºóÔÙ´´½¨Ò»¸öĞÂµÄ¡£
+     * å¼¹å‡ºæœ€è¿‘çš„bufferï¼Œå¦‚æœå †æ ˆä¸­åªæœ‰ä¸€ä¸ªbufferï¼Œåˆ™å¼¹å‡ºåå†åˆ›å»ºä¸€ä¸ªæ–°çš„ã€‚
      * 
-     * @return ×î½üµÄbufferÄÚÈİ£¬Èç¹û<code>getWriter</code>·½·¨´ÓÎ´±»µ÷ÓÃ£¬Ôò·µ»Ø¿ÕµÄ×Ö·û´®
-     * @throws IllegalStateException Èç¹û²»ÔÚbufferÄ£Ê½£¬»ò<code>getOutputStream</code>
-     *             ·½·¨Ôø±»µ÷ÓÃ
+     * @return æœ€è¿‘çš„bufferå†…å®¹ï¼Œå¦‚æœ<code>getWriter</code>æ–¹æ³•ä»æœªè¢«è°ƒç”¨ï¼Œåˆ™è¿”å›ç©ºçš„å­—ç¬¦ä¸²
+     * @throws IllegalStateException å¦‚æœä¸åœ¨bufferæ¨¡å¼ï¼Œæˆ–<code>getOutputStream</code>
+     *             æ–¹æ³•æ›¾è¢«è°ƒç”¨
      */
     public String popCharBuffer() {
         if (!buffering) {
@@ -359,14 +359,14 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
     }
 
     /**
-     * ½«bufferÖĞµÄÄÚÈİÌá½»µ½ÕæÕıµÄservletÊä³öÁ÷ÖĞ¡£
+     * å°†bufferä¸­çš„å†…å®¹æäº¤åˆ°çœŸæ­£çš„servletè¾“å‡ºæµä¸­ã€‚
      * <p>
-     * Èç¹û´ÓÀ´Ã»ÓĞÖ´ĞĞ¹ı<code>getOutputStream</code>»ò<code>getWriter</code>
-     * ·½·¨£¬Ôò¸Ã·½·¨²»×öÈÎºÎÊÂÇé¡£
+     * å¦‚æœä»æ¥æ²¡æœ‰æ‰§è¡Œè¿‡<code>getOutputStream</code>æˆ–<code>getWriter</code>
+     * æ–¹æ³•ï¼Œåˆ™è¯¥æ–¹æ³•ä¸åšä»»ä½•äº‹æƒ…ã€‚
      * </p>
      * 
-     * @throws IOException Èç¹ûÊäÈëÊä³öÊ§°Ü
-     * @throws IllegalStateException Èç¹û²»ÊÇÔÚbufferÄ£Ê½£¬»òbufferÕ»ÖĞ²»Ö¹Ò»¸öbuffer
+     * @throws IOException å¦‚æœè¾“å…¥è¾“å‡ºå¤±è´¥
+     * @throws IllegalStateException å¦‚æœä¸æ˜¯åœ¨bufferæ¨¡å¼ï¼Œæˆ–bufferæ ˆä¸­ä¸æ­¢ä¸€ä¸ªbuffer
      */
     public void commitBuffer() throws IOException {
         if (stream == null && writer == null) {
@@ -377,7 +377,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
             throw new IllegalStateException("Buffering mode is required for commitBuffer");
         }
 
-        // Êä³öbytes
+        // è¾“å‡ºbytes
         if (stream != null) {
             if (bytesStack.size() > 1) {
                 throw new IllegalStateException("More than 1 byte-buffers in the stack");
@@ -393,7 +393,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
             log.debug("Committed buffered bytes to the Servlet output stream");
         }
 
-        // Êä³öchars
+        // è¾“å‡ºchars
         if (writer != null) {
             if (charsStack.size() > 1) {
                 throw new IllegalStateException("More than 1 char-buffers in the stack");
@@ -411,7 +411,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
     }
 
     /**
-     * ³åÏ´buffer adapter£¬È·±£adapterÖĞµÄĞÅÏ¢±»Ğ´ÈëbufferÖĞ¡£
+     * å†²æ´—buffer adapterï¼Œç¡®ä¿adapterä¸­çš„ä¿¡æ¯è¢«å†™å…¥bufferä¸­ã€‚
      */
     private void flushBufferAdapter() {
         if (streamAdapter != null) {
@@ -427,8 +427,8 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
     }
 
     /**
-     * ´Ó<code>LinkedList</code>¼Ì³ĞµÄstack£¬±ÜÃâ<code>java.util.Stack</code>
-     * ÖĞsynchronizedµÄ´ú¼Û¡£
+     * ä»<code>LinkedList</code>ç»§æ‰¿çš„stackï¼Œé¿å…<code>java.util.Stack</code>
+     * ä¸­synchronizedçš„ä»£ä»·ã€‚
      */
     private static class Stack<T> {
         private final LinkedList<T> list = createLinkedList();
@@ -467,7 +467,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
     }
 
     /**
-     * ´ú±íÒ»¸ö½«ÄÚÈİ±£´æÔÚÄÚ´æÖĞµÄ<code>ServletOutputStream</code>¡£
+     * ä»£è¡¨ä¸€ä¸ªå°†å†…å®¹ä¿å­˜åœ¨å†…å­˜ä¸­çš„<code>ServletOutputStream</code>ã€‚
      */
     private static class BufferedServletOutputStream extends ServletOutputStream {
         private ByteArrayOutputStream bytes;
@@ -508,7 +508,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
     }
 
     /**
-     * ´ú±íÒ»¸ö½«ÄÚÈİ±£´æÔÚÄÚ´æÖĞµÄ<code>PrintWriter</code>¡£
+     * ä»£è¡¨ä¸€ä¸ªå°†å†…å®¹ä¿å­˜åœ¨å†…å­˜ä¸­çš„<code>PrintWriter</code>ã€‚
      */
     private static class BufferedServletWriter extends PrintWriter {
         public BufferedServletWriter(StringWriter chars) {
@@ -521,7 +521,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
     }
 
     /**
-     * ½«<code>Writer</code>ÊÊÅäµ½<code>ServletOutputStream</code>¡£
+     * å°†<code>Writer</code>é€‚é…åˆ°<code>ServletOutputStream</code>ã€‚
      */
     private static class WriterOutputStream extends ServletOutputStream {
         private ByteArrayOutputStream buffer = new ByteArrayOutputStream();

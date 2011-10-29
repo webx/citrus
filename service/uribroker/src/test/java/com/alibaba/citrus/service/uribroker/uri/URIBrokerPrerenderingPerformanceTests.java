@@ -27,7 +27,7 @@ public class URIBrokerPrerenderingPerformanceTests {
     private GenericURIBroker broker;
 
     private void setupBroker(GenericURIBroker broker) {
-        broker.setCharset("GBK"); // 避免LocaleUtil初始化的时间
+        broker.setCharset("GBK"); // 閬垮厤LocaleUtil鍒濆鍖栫殑鏃堕棿
 
         broker.setServerScheme("https");
         broker.setServerName("localhost");
@@ -46,7 +46,7 @@ public class URIBrokerPrerenderingPerformanceTests {
         parent = new GenericURIBroker();
         setupBroker(parent);
 
-        // parent不是autoreset的，因此fork出来的broker不会prerendering
+        // parent涓嶆槸autoreset鐨勶紝鍥犳fork鍑烘潵鐨刡roker涓嶄細prerendering
         broker = (GenericURIBroker) parent.fork();
 
         broker.addPath("cc");
@@ -62,7 +62,7 @@ public class URIBrokerPrerenderingPerformanceTests {
         parent = (GenericURIBroker) new GenericURIBroker().fork();
         setupBroker(parent);
 
-        // parent是autoreset的，因此fork出来的broker会prerendering
+        // parent鏄痑utoreset鐨勶紝鍥犳fork鍑烘潵鐨刡roker浼歱rerendering
         broker = (GenericURIBroker) parent.fork();
 
         broker.addPath("cc");

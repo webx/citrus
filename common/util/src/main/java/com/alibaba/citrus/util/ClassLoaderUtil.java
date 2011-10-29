@@ -31,34 +31,34 @@ import com.alibaba.citrus.util.io.StreamUtil;
 
 /**
  * <p>
- * ²éÕÒ²¢×°ÈëÀàºÍ×ÊÔ´µÄ¸¨ÖúÀà¡£
+ * æŸ¥æ‰¾å¹¶è£…å…¥ç±»å’Œèµ„æºçš„è¾…åŠ©ç±»ã€‚
  * </p>
  * <p>
- * <code>ClassLoaderUtil</code>²éÕÒÀàºÍ×ÊÔ´µÄĞ§¹û£¬ Ïàµ±ÓÚ<code>ClassLoader.loadClass</code>
- * ·½·¨ºÍ<code>ClassLoader.getResource</code>·½·¨¡£ µ«<code>ClassLoaderUtil</code>
- * ×ÜÊÇÊ×ÏÈ³¢ÊÔ´Ó<code>Thread.getContextClassLoader()</code>·½·¨È¡µÃ
- * <code>ClassLoader</code>ÖĞ²¢×°ÈëÀàºÍ×ÊÔ´¡£ ÕâÖÖ·½·¨±ÜÃâÁËÔÚ¶à¼¶<code>ClassLoader</code>
- * µÄÇé¿öÏÂ£¬ÕÒ²»µ½Àà»ò×ÊÔ´µÄÇé¿ö¡£
+ * <code>ClassLoaderUtil</code>æŸ¥æ‰¾ç±»å’Œèµ„æºçš„æ•ˆæœï¼Œ ç›¸å½“äº<code>ClassLoader.loadClass</code>
+ * æ–¹æ³•å’Œ<code>ClassLoader.getResource</code>æ–¹æ³•ã€‚ ä½†<code>ClassLoaderUtil</code>
+ * æ€»æ˜¯é¦–å…ˆå°è¯•ä»<code>Thread.getContextClassLoader()</code>æ–¹æ³•å–å¾—
+ * <code>ClassLoader</code>ä¸­å¹¶è£…å…¥ç±»å’Œèµ„æºã€‚ è¿™ç§æ–¹æ³•é¿å…äº†åœ¨å¤šçº§<code>ClassLoader</code>
+ * çš„æƒ…å†µä¸‹ï¼Œæ‰¾ä¸åˆ°ç±»æˆ–èµ„æºçš„æƒ…å†µã€‚
  * </p>
  * <p>
- * ¼ÙÉèÓĞÈçÏÂÇé¿ö:
+ * å‡è®¾æœ‰å¦‚ä¸‹æƒ…å†µ:
  * </p>
  * <ul>
- * <li>¹¤¾ßÀà<code>A</code>ÊÇ´ÓÏµÍ³<code>ClassLoader</code>×°ÈëµÄ(classpath)</li>
- * <li>Àà<code>B</code>ÊÇWeb ApplicationÖĞµÄÒ»¸öÀà£¬ÊÇÓÉservletÒıÇæµÄ<code>ClassLoader</code>
- * ¶¯Ì¬×°ÈëµÄ</li>
- * <li>×ÊÔ´ÎÄ¼ş<code>C.properties</code>Ò²ÔÚWeb ApplicationÖĞ£¬Ö»ÓĞservletÒıÇæµÄ¶¯Ì¬
- * <code>ClassLoader</code>¿ÉÒÔÕÒµ½Ëü</li>
- * <li>Àà<code>B</code>µ÷ÓÃ¹¤¾ßÀà<code>A</code>µÄ·½·¨£¬Ï£ÍûÍ¨¹ıÀà<code>A</code>È¡µÃ×ÊÔ´ÎÄ¼ş
+ * <li>å·¥å…·ç±»<code>A</code>æ˜¯ä»ç³»ç»Ÿ<code>ClassLoader</code>è£…å…¥çš„(classpath)</li>
+ * <li>ç±»<code>B</code>æ˜¯Web Applicationä¸­çš„ä¸€ä¸ªç±»ï¼Œæ˜¯ç”±servletå¼•æ“çš„<code>ClassLoader</code>
+ * åŠ¨æ€è£…å…¥çš„</li>
+ * <li>èµ„æºæ–‡ä»¶<code>C.properties</code>ä¹Ÿåœ¨Web Applicationä¸­ï¼Œåªæœ‰servletå¼•æ“çš„åŠ¨æ€
+ * <code>ClassLoader</code>å¯ä»¥æ‰¾åˆ°å®ƒ</li>
+ * <li>ç±»<code>B</code>è°ƒç”¨å·¥å…·ç±»<code>A</code>çš„æ–¹æ³•ï¼Œå¸Œæœ›é€šè¿‡ç±»<code>A</code>å–å¾—èµ„æºæ–‡ä»¶
  * <code>C.properties</code></li>
  * </ul>
  * <p>
- * Èç¹ûÀà<code>A</code>Ê¹ÓÃ
+ * å¦‚æœç±»<code>A</code>ä½¿ç”¨
  * <code>getClass().getClassLoader().getResource(&quot;C.properties&quot;)</code>
- * £¬ ¾Í»áÊ§°Ü£¬ÒòÎªÏµÍ³<code>ClassLoader</code>²»ÄÜÕÒµ½´Ë×ÊÔ´¡£
- * µ«ÀàA¿ÉÒÔÊ¹ÓÃClassLoaderUtil.getResource(&quot;C.properties&quot;)£¬¾Í¿ÉÒÔÕÒµ½Õâ¸ö×ÊÔ´£¬
- * ÒòÎªClassLoaderUtilµ÷ÓÃ<code>Thread.currentThead().getContextClassLoader()</code>
- * È¡µÃÁËservletÒıÇæµÄ<code>ClassLoader</code>£¬ ´Ó¶øÕÒµ½ÁËÕâ¸ö×ÊÔ´ÎÄ¼ş¡£
+ * ï¼Œ å°±ä¼šå¤±è´¥ï¼Œå› ä¸ºç³»ç»Ÿ<code>ClassLoader</code>ä¸èƒ½æ‰¾åˆ°æ­¤èµ„æºã€‚
+ * ä½†ç±»Aå¯ä»¥ä½¿ç”¨ClassLoaderUtil.getResource(&quot;C.properties&quot;)ï¼Œå°±å¯ä»¥æ‰¾åˆ°è¿™ä¸ªèµ„æºï¼Œ
+ * å› ä¸ºClassLoaderUtilè°ƒç”¨<code>Thread.currentThead().getContextClassLoader()</code>
+ * å–å¾—äº†servletå¼•æ“çš„<code>ClassLoader</code>ï¼Œ ä»è€Œæ‰¾åˆ°äº†è¿™ä¸ªèµ„æºæ–‡ä»¶ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -66,60 +66,60 @@ import com.alibaba.citrus.util.io.StreamUtil;
 public class ClassLoaderUtil {
 
     // ==========================================================================
-    // È¡µÃcontext class loaderµÄ·½·¨¡£ 
+    // å–å¾—context class loaderçš„æ–¹æ³•ã€‚ 
     // ==========================================================================
 
     /**
-     * È¡µÃµ±Ç°Ïß³ÌµÄ<code>ClassLoader</code>¡£Õâ¸ö¹¦ÄÜĞèÒªJDK1.2»ò¸ü¸ß°æ±¾µÄJDKµÄÖ§³Ö¡£
+     * å–å¾—å½“å‰çº¿ç¨‹çš„<code>ClassLoader</code>ã€‚è¿™ä¸ªåŠŸèƒ½éœ€è¦JDK1.2æˆ–æ›´é«˜ç‰ˆæœ¬çš„JDKçš„æ”¯æŒã€‚
      * 
-     * @return µ±Ç°Ïß³ÌµÄ<code>ClassLoader</code>
+     * @return å½“å‰çº¿ç¨‹çš„<code>ClassLoader</code>
      */
     public static ClassLoader getContextClassLoader() {
         return Thread.currentThread().getContextClassLoader();
     }
 
     // ==========================================================================
-    // ×°ÈëÀàµÄ·½·¨¡£ 
+    // è£…å…¥ç±»çš„æ–¹æ³•ã€‚ 
     // ==========================================================================
 
     /**
-     * ´Óµ±Ç°Ïß³ÌµÄ<code>ClassLoader</code>×°ÈëÀà¡£¶ÔÓÚJDK1.2ÒÔÏÂ£¬ÔòÏàµ±ÓÚ
-     * <code>Class.forName</code>¡£
+     * ä»å½“å‰çº¿ç¨‹çš„<code>ClassLoader</code>è£…å…¥ç±»ã€‚å¯¹äºJDK1.2ä»¥ä¸‹ï¼Œåˆ™ç›¸å½“äº
+     * <code>Class.forName</code>ã€‚
      * 
-     * @param className Òª×°ÈëµÄÀàÃû
-     * @return ÒÑ×°ÈëµÄÀà
-     * @throws ClassNotFoundException Èç¹ûÀàÃ»ÕÒµ½
+     * @param className è¦è£…å…¥çš„ç±»å
+     * @return å·²è£…å…¥çš„ç±»
+     * @throws ClassNotFoundException å¦‚æœç±»æ²¡æ‰¾åˆ°
      */
     public static Class<?> loadClass(String className) throws ClassNotFoundException {
         return loadClass(className, getContextClassLoader());
     }
 
     /**
-     * ´ÓÖ¸¶¨µÄµ÷ÓÃÕßµÄ<code>ClassLoader</code>×°ÈëÀà¡£
+     * ä»æŒ‡å®šçš„è°ƒç”¨è€…çš„<code>ClassLoader</code>è£…å…¥ç±»ã€‚
      * 
-     * @param className Òª×°ÈëµÄÀàÃû
-     * @param referrer µ÷ÓÃÕßÀà£¬Èç¹ûÎª<code>null</code>£¬Ôò¸Ã·½·¨Ïàµ±ÓÚ
+     * @param className è¦è£…å…¥çš„ç±»å
+     * @param referrer è°ƒç”¨è€…ç±»ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œåˆ™è¯¥æ–¹æ³•ç›¸å½“äº
      *            <code>Class.forName</code>
-     * @return ÒÑ×°ÈëµÄÀà
-     * @throws ClassNotFoundException Èç¹ûÀàÃ»ÕÒµ½
+     * @return å·²è£…å…¥çš„ç±»
+     * @throws ClassNotFoundException å¦‚æœç±»æ²¡æ‰¾åˆ°
      */
     public static Class<?> loadClass(String className, Class<?> referrer) throws ClassNotFoundException {
         ClassLoader classLoader = getReferrerClassLoader(referrer);
 
-        // Èç¹ûclassLoaderÎªnull£¬±íÊ¾´ÓClassLoaderUtilËùÔÚµÄclassloaderÖĞ×°ÔØ£¬
-        // Õâ¸öclassloaderÎ´±ØÊÇSystem class loader¡£
+        // å¦‚æœclassLoaderä¸ºnullï¼Œè¡¨ç¤ºä»ClassLoaderUtilæ‰€åœ¨çš„classloaderä¸­è£…è½½ï¼Œ
+        // è¿™ä¸ªclassloaderæœªå¿…æ˜¯System class loaderã€‚
         return loadClass(className, classLoader);
     }
 
     /**
-     * ´ÓÖ¸¶¨µÄ<code>ClassLoader</code>ÖĞ×°ÈëÀà¡£Èç¹ûÎ´Ö¸¶¨<code>ClassLoader</code>£¬ Ôò´Ó×°ÔØ
-     * <code>ClassLoaderUtil</code>µÄ<code>ClassLoader</code>ÖĞ×°Èë¡£
+     * ä»æŒ‡å®šçš„<code>ClassLoader</code>ä¸­è£…å…¥ç±»ã€‚å¦‚æœæœªæŒ‡å®š<code>ClassLoader</code>ï¼Œ åˆ™ä»è£…è½½
+     * <code>ClassLoaderUtil</code>çš„<code>ClassLoader</code>ä¸­è£…å…¥ã€‚
      * 
-     * @param className Òª×°ÈëµÄÀàÃû
-     * @param classLoader ´ÓÖ¸¶¨µÄ<code>ClassLoader</code>ÖĞ×°ÈëÀà£¬Èç¹ûÎª<code>null</code>
-     *            £¬±íÊ¾´Ó<code>ClassLoaderUtil</code>ËùÔÚµÄclass loaderÖĞ×°ÔØ
-     * @return ÒÑ×°ÈëµÄÀà
-     * @throws ClassNotFoundException Èç¹ûÀàÃ»ÕÒµ½
+     * @param className è¦è£…å…¥çš„ç±»å
+     * @param classLoader ä»æŒ‡å®šçš„<code>ClassLoader</code>ä¸­è£…å…¥ç±»ï¼Œå¦‚æœä¸º<code>null</code>
+     *            ï¼Œè¡¨ç¤ºä»<code>ClassLoaderUtil</code>æ‰€åœ¨çš„class loaderä¸­è£…è½½
+     * @return å·²è£…å…¥çš„ç±»
+     * @throws ClassNotFoundException å¦‚æœç±»æ²¡æ‰¾åˆ°
      */
     public static Class<?> loadClass(String className, ClassLoader classLoader) throws ClassNotFoundException {
         if (className == null) {
@@ -134,52 +134,52 @@ public class ClassLoaderUtil {
     }
 
     /**
-     * °´ÕÕ±ê×¼µÄjar service¹æ·¶ËÑË÷²¢×°ÔØÖ¸¶¨Ãû³ÆµÄserviceÀà¡£
+     * æŒ‰ç…§æ ‡å‡†çš„jar serviceè§„èŒƒæœç´¢å¹¶è£…è½½æŒ‡å®šåç§°çš„serviceç±»ã€‚
      * <p>
-     * ËÑË÷·½·¨ÊÇÔÚclass loaderÖĞ²éÕÒ<code>META-INF/services/serviceId</code>
-     * ÎÄ¼ş£¬²¢½«ÆäÄÚÈİ×÷ÎªserviceÀàÃû¡£
+     * æœç´¢æ–¹æ³•æ˜¯åœ¨class loaderä¸­æŸ¥æ‰¾<code>META-INF/services/serviceId</code>
+     * æ–‡ä»¶ï¼Œå¹¶å°†å…¶å†…å®¹ä½œä¸ºserviceç±»åã€‚
      * </p>
      * 
-     * @param serviceId ·şÎñÃû
+     * @param serviceId æœåŠ¡å
      * @return service class
-     * @throws ClassNotFoundException Èç¹ûservice classÕÒ²»µ½£¬»ò×°ÔØserviceÎÄ¼şÊ§°Ü
+     * @throws ClassNotFoundException å¦‚æœservice classæ‰¾ä¸åˆ°ï¼Œæˆ–è£…è½½serviceæ–‡ä»¶å¤±è´¥
      */
     public static Class<?> loadServiceClass(String serviceId) throws ClassNotFoundException {
         return loadServiceClass(serviceId, getContextClassLoader());
     }
 
     /**
-     * °´ÕÕ±ê×¼µÄjar service¹æ·¶ËÑË÷²¢×°ÔØÖ¸¶¨Ãû³ÆµÄserviceÀà¡£
+     * æŒ‰ç…§æ ‡å‡†çš„jar serviceè§„èŒƒæœç´¢å¹¶è£…è½½æŒ‡å®šåç§°çš„serviceç±»ã€‚
      * <p>
-     * ËÑË÷·½·¨ÊÇÔÚclass loaderÖĞ²éÕÒ<code>META-INF/services/serviceId</code>
-     * ÎÄ¼ş£¬²¢½«ÆäÄÚÈİ×÷ÎªserviceÀàÃû¡£
+     * æœç´¢æ–¹æ³•æ˜¯åœ¨class loaderä¸­æŸ¥æ‰¾<code>META-INF/services/serviceId</code>
+     * æ–‡ä»¶ï¼Œå¹¶å°†å…¶å†…å®¹ä½œä¸ºserviceç±»åã€‚
      * </p>
      * 
-     * @param serviceId ·şÎñÃû
-     * @param referrer µ÷ÓÃÕßÀà£¬Èç¹ûÎª<code>null</code>£¬±íÊ¾ÔÚ<code>ClassLoaderUtil</code>
-     *            µÄclass loaderÖĞÕÒ¡£
+     * @param serviceId æœåŠ¡å
+     * @param referrer è°ƒç”¨è€…ç±»ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œè¡¨ç¤ºåœ¨<code>ClassLoaderUtil</code>
+     *            çš„class loaderä¸­æ‰¾ã€‚
      * @return service class
-     * @throws ClassNotFoundException Èç¹ûservice classÕÒ²»µ½£¬»ò×°ÔØserviceÎÄ¼şÊ§°Ü
+     * @throws ClassNotFoundException å¦‚æœservice classæ‰¾ä¸åˆ°ï¼Œæˆ–è£…è½½serviceæ–‡ä»¶å¤±è´¥
      */
     public static Class<?> loadServiceClass(String serviceId, Class<?> referrer) throws ClassNotFoundException {
         ClassLoader classLoader = getReferrerClassLoader(referrer);
 
-        // Èç¹ûclassLoaderÎªnull£¬±íÊ¾´ÓClassLoaderUtilËùÔÚµÄclassloaderÖĞ²éÕÒ£¬
+        // å¦‚æœclassLoaderä¸ºnullï¼Œè¡¨ç¤ºä»ClassLoaderUtilæ‰€åœ¨çš„classloaderä¸­æŸ¥æ‰¾ï¼Œ
         return loadServiceClass(serviceId, classLoader);
     }
 
     /**
-     * °´ÕÕ±ê×¼µÄjar service¹æ·¶ËÑË÷²¢×°ÔØÖ¸¶¨Ãû³ÆµÄserviceÀà¡£
+     * æŒ‰ç…§æ ‡å‡†çš„jar serviceè§„èŒƒæœç´¢å¹¶è£…è½½æŒ‡å®šåç§°çš„serviceç±»ã€‚
      * <p>
-     * ËÑË÷·½·¨ÊÇÔÚclass loaderÖĞ²éÕÒ<code>META-INF/services/serviceId</code>
-     * ÎÄ¼ş£¬²¢½«ÆäÄÚÈİ×÷ÎªserviceÀàÃû¡£
+     * æœç´¢æ–¹æ³•æ˜¯åœ¨class loaderä¸­æŸ¥æ‰¾<code>META-INF/services/serviceId</code>
+     * æ–‡ä»¶ï¼Œå¹¶å°†å…¶å†…å®¹ä½œä¸ºserviceç±»åã€‚
      * </p>
      * 
-     * @param serviceId ·şÎñÃû
-     * @param classLoader ÔÚÖ¸¶¨classLoaderÖĞ²éÕÒ£¬Èç¹ûÎª<code>null</code>£¬±íÊ¾ÔÚ
-     *            <code>ClassLoaderUtil</code>µÄclass loaderÖĞÕÒ¡£
+     * @param serviceId æœåŠ¡å
+     * @param classLoader åœ¨æŒ‡å®šclassLoaderä¸­æŸ¥æ‰¾ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œè¡¨ç¤ºåœ¨
+     *            <code>ClassLoaderUtil</code>çš„class loaderä¸­æ‰¾ã€‚
      * @return service class
-     * @throws ClassNotFoundException Èç¹ûservice classÕÒ²»µ½£¬»ò×°ÔØserviceÎÄ¼şÊ§°Ü
+     * @throws ClassNotFoundException å¦‚æœservice classæ‰¾ä¸åˆ°ï¼Œæˆ–è£…è½½serviceæ–‡ä»¶å¤±è´¥
      */
     public static Class<?> loadServiceClass(String serviceId, ClassLoader classLoader) throws ClassNotFoundException {
         if (serviceId == null) {
@@ -194,7 +194,7 @@ public class ClassLoaderUtil {
             throw new ServiceNotFoundException("Could not find " + serviceId);
         }
 
-        // ¶ÁÎÄ¼ş/META-INF/services/serviceId¡£
+        // è¯»æ–‡ä»¶/META-INF/services/serviceIdã€‚
         String serviceClassName;
 
         try {
@@ -207,76 +207,76 @@ public class ClassLoaderUtil {
     }
 
     /**
-     * Ê×ÏÈÊÔÍ¼×°ÈëÖ¸¶¨Ãû³ÆµÄÀà£¬Èç¹ûÕÒ²»µ½£¬ÔÙ°´ÕÕ±ê×¼µÄjar service¹æ·¶ËÑË÷²¢×°ÔØÖ¸¶¨Ãû³ÆµÄserviceÀà¡£
+     * é¦–å…ˆè¯•å›¾è£…å…¥æŒ‡å®šåç§°çš„ç±»ï¼Œå¦‚æœæ‰¾ä¸åˆ°ï¼Œå†æŒ‰ç…§æ ‡å‡†çš„jar serviceè§„èŒƒæœç´¢å¹¶è£…è½½æŒ‡å®šåç§°çš„serviceç±»ã€‚
      * <p>
-     * ËÑË÷serviceµÄ·½·¨ÊÇÔÚclass loaderÖĞ²éÕÒ<code>META-INF/services/serviceId</code>
-     * ÎÄ¼ş£¬²¢½«ÆäÄÚÈİ×÷ÎªserviceÀàÃû¡£
+     * æœç´¢serviceçš„æ–¹æ³•æ˜¯åœ¨class loaderä¸­æŸ¥æ‰¾<code>META-INF/services/serviceId</code>
+     * æ–‡ä»¶ï¼Œå¹¶å°†å…¶å†…å®¹ä½œä¸ºserviceç±»åã€‚
      * </p>
      * 
-     * @param className Òª×°ÈëµÄÀàÃû
-     * @param serviceId ·şÎñÃû
+     * @param className è¦è£…å…¥çš„ç±»å
+     * @param serviceId æœåŠ¡å
      * @return service class
-     * @throws ClassNotFoundException Èç¹ûservice classÕÒ²»µ½£¬»ò×°ÔØserviceÎÄ¼şÊ§°Ü
+     * @throws ClassNotFoundException å¦‚æœservice classæ‰¾ä¸åˆ°ï¼Œæˆ–è£…è½½serviceæ–‡ä»¶å¤±è´¥
      */
     public static Class<?> loadServiceClass(String className, String serviceId) throws ClassNotFoundException {
         return loadServiceClass(className, serviceId, getContextClassLoader());
     }
 
     /**
-     * Ê×ÏÈÊÔÍ¼×°ÈëÖ¸¶¨Ãû³ÆµÄÀà£¬Èç¹ûÕÒ²»µ½£¬ÔÙ°´ÕÕ±ê×¼µÄjar service¹æ·¶ËÑË÷²¢×°ÔØÖ¸¶¨Ãû³ÆµÄserviceÀà¡£
+     * é¦–å…ˆè¯•å›¾è£…å…¥æŒ‡å®šåç§°çš„ç±»ï¼Œå¦‚æœæ‰¾ä¸åˆ°ï¼Œå†æŒ‰ç…§æ ‡å‡†çš„jar serviceè§„èŒƒæœç´¢å¹¶è£…è½½æŒ‡å®šåç§°çš„serviceç±»ã€‚
      * <p>
-     * ËÑË÷serviceµÄ·½·¨ÊÇÔÚclass loaderÖĞ²éÕÒ<code>META-INF/services/serviceId</code>
-     * ÎÄ¼ş£¬²¢½«ÆäÄÚÈİ×÷ÎªserviceÀàÃû¡£
+     * æœç´¢serviceçš„æ–¹æ³•æ˜¯åœ¨class loaderä¸­æŸ¥æ‰¾<code>META-INF/services/serviceId</code>
+     * æ–‡ä»¶ï¼Œå¹¶å°†å…¶å†…å®¹ä½œä¸ºserviceç±»åã€‚
      * </p>
      * 
-     * @param className Òª×°ÈëµÄÀàÃû
-     * @param serviceId ·şÎñÃû
-     * @param referrer µ÷ÓÃÕßÀà£¬Èç¹ûÎª<code>null</code>£¬±íÊ¾ÔÚ<code>ClassLoaderUtil</code>
-     *            µÄclass loaderÖĞÕÒ¡£
+     * @param className è¦è£…å…¥çš„ç±»å
+     * @param serviceId æœåŠ¡å
+     * @param referrer è°ƒç”¨è€…ç±»ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œè¡¨ç¤ºåœ¨<code>ClassLoaderUtil</code>
+     *            çš„class loaderä¸­æ‰¾ã€‚
      * @return service class
-     * @throws ClassNotFoundException Èç¹ûservice classÕÒ²»µ½£¬»ò×°ÔØserviceÎÄ¼şÊ§°Ü
+     * @throws ClassNotFoundException å¦‚æœservice classæ‰¾ä¸åˆ°ï¼Œæˆ–è£…è½½serviceæ–‡ä»¶å¤±è´¥
      */
     public static Class<?> loadServiceClass(String className, String serviceId, Class<?> referrer)
             throws ClassNotFoundException {
         ClassLoader classLoader = getReferrerClassLoader(referrer);
 
-        // Èç¹ûclassLoaderÎªnull£¬±íÊ¾´ÓClassLoaderUtilËùÔÚµÄclassloaderÖĞ²éÕÒ£¬
+        // å¦‚æœclassLoaderä¸ºnullï¼Œè¡¨ç¤ºä»ClassLoaderUtilæ‰€åœ¨çš„classloaderä¸­æŸ¥æ‰¾ï¼Œ
         return loadServiceClass(className, serviceId, classLoader);
     }
 
     /**
-     * Ê×ÏÈÊÔÍ¼×°ÈëÖ¸¶¨Ãû³ÆµÄÀà£¬Èç¹ûÕÒ²»µ½£¬ÔÙ°´ÕÕ±ê×¼µÄjar service¹æ·¶ËÑË÷²¢×°ÔØÖ¸¶¨Ãû³ÆµÄserviceÀà¡£
+     * é¦–å…ˆè¯•å›¾è£…å…¥æŒ‡å®šåç§°çš„ç±»ï¼Œå¦‚æœæ‰¾ä¸åˆ°ï¼Œå†æŒ‰ç…§æ ‡å‡†çš„jar serviceè§„èŒƒæœç´¢å¹¶è£…è½½æŒ‡å®šåç§°çš„serviceç±»ã€‚
      * <p>
-     * ËÑË÷serviceµÄ·½·¨ÊÇÔÚclass loaderÖĞ²éÕÒ<code>META-INF/services/serviceId</code>
-     * ÎÄ¼ş£¬²¢½«ÆäÄÚÈİ×÷ÎªserviceÀàÃû¡£
+     * æœç´¢serviceçš„æ–¹æ³•æ˜¯åœ¨class loaderä¸­æŸ¥æ‰¾<code>META-INF/services/serviceId</code>
+     * æ–‡ä»¶ï¼Œå¹¶å°†å…¶å†…å®¹ä½œä¸ºserviceç±»åã€‚
      * </p>
      * 
-     * @param className Òª×°ÈëµÄÀàÃû
-     * @param serviceId ·şÎñÃû
-     * @param classLoader ÔÚÖ¸¶¨classLoaderÖĞ²éÕÒ£¬Èç¹ûÎª<code>null</code>£¬±íÊ¾ÔÚ
-     *            <code>ClassLoaderUtil</code>µÄclass loaderÖĞÕÒ¡£
+     * @param className è¦è£…å…¥çš„ç±»å
+     * @param serviceId æœåŠ¡å
+     * @param classLoader åœ¨æŒ‡å®šclassLoaderä¸­æŸ¥æ‰¾ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œè¡¨ç¤ºåœ¨
+     *            <code>ClassLoaderUtil</code>çš„class loaderä¸­æ‰¾ã€‚
      * @return service class
-     * @throws ClassNotFoundException Èç¹ûservice classÕÒ²»µ½£¬»ò×°ÔØserviceÎÄ¼şÊ§°Ü
+     * @throws ClassNotFoundException å¦‚æœservice classæ‰¾ä¸åˆ°ï¼Œæˆ–è£…è½½serviceæ–‡ä»¶å¤±è´¥
      */
     public static Class<?> loadServiceClass(String className, String serviceId, ClassLoader classLoader)
             throws ClassNotFoundException {
         try {
-            // ÏÈ³¢ÊÔ×°Èëclass¡£
+            // å…ˆå°è¯•è£…å…¥classã€‚
             if (className != null) {
                 return loadClass(className, classLoader);
             }
         } catch (ClassNotFoundException e) {
         }
 
-        // ÕÒ²»µ½£¬³¢ÊÔ²éÕÒservice¡£
+        // æ‰¾ä¸åˆ°ï¼Œå°è¯•æŸ¥æ‰¾serviceã€‚
         return loadServiceClass(serviceId, classLoader);
     }
 
     /**
-     * È¡µÃµ÷ÓÃÕßµÄclass loader¡£
+     * å–å¾—è°ƒç”¨è€…çš„class loaderã€‚
      * 
-     * @param referrer µ÷ÓÃÕßÀà
-     * @return µ÷ÓÃÕßµÄclass loader£¬Èç¹ûreferrerÎª<code>null</code>£¬Ôò·µ»Ø
+     * @param referrer è°ƒç”¨è€…ç±»
+     * @return è°ƒç”¨è€…çš„class loaderï¼Œå¦‚æœreferrerä¸º<code>null</code>ï¼Œåˆ™è¿”å›
      *         <code>null</code>
      */
     private static ClassLoader getReferrerClassLoader(Class<?> referrer) {
@@ -285,8 +285,8 @@ public class ClassLoaderUtil {
         if (referrer != null) {
             classLoader = referrer.getClassLoader();
 
-            // classLoaderÎªnull£¬ËµÃ÷referrerÀàÊÇÓÉbootstrap classloader×°ÔØµÄ£¬
-            // ÀıÈç£ºjava.lang.String
+            // classLoaderä¸ºnullï¼Œè¯´æ˜referrerç±»æ˜¯ç”±bootstrap classloaderè£…è½½çš„ï¼Œ
+            // ä¾‹å¦‚ï¼šjava.lang.String
             if (classLoader == null) {
                 classLoader = ClassLoader.getSystemClassLoader();
             }
@@ -296,30 +296,30 @@ public class ClassLoaderUtil {
     }
 
     // ==========================================================================
-    // ×°Èë²¢ÊµÀı»¯ÀàµÄ·½·¨¡£ 
+    // è£…å…¥å¹¶å®ä¾‹åŒ–ç±»çš„æ–¹æ³•ã€‚ 
     // ==========================================================================
 
     /**
-     * ´Óµ±Ç°Ïß³ÌµÄ<code>ClassLoader</code>×°ÈëÀà²¢ÊµÀı»¯Ö®¡£
+     * ä»å½“å‰çº¿ç¨‹çš„<code>ClassLoader</code>è£…å…¥ç±»å¹¶å®ä¾‹åŒ–ä¹‹ã€‚
      * 
-     * @param className ÒªÊµÀı»¯µÄÀàÃû
-     * @return Ö¸¶¨ÀàÃûµÄÊµÀı
-     * @throws ClassNotFoundException Èç¹ûÀàÃ»ÕÒµ½
-     * @throws ClassInstantiationException Èç¹ûÊµÀı»¯Ê§°Ü
+     * @param className è¦å®ä¾‹åŒ–çš„ç±»å
+     * @return æŒ‡å®šç±»åçš„å®ä¾‹
+     * @throws ClassNotFoundException å¦‚æœç±»æ²¡æ‰¾åˆ°
+     * @throws ClassInstantiationException å¦‚æœå®ä¾‹åŒ–å¤±è´¥
      */
     public static Object newInstance(String className) throws ClassNotFoundException, ClassInstantiationException {
         return newInstance(loadClass(className));
     }
 
     /**
-     * ´ÓÖ¸¶¨µÄµ÷ÓÃÕßµÄ<code>ClassLoader</code>×°ÈëÀà²¢ÊµÀı»¯Ö®¡£
+     * ä»æŒ‡å®šçš„è°ƒç”¨è€…çš„<code>ClassLoader</code>è£…å…¥ç±»å¹¶å®ä¾‹åŒ–ä¹‹ã€‚
      * 
-     * @param className ÒªÊµÀı»¯µÄÀàÃû
-     * @param referrer µ÷ÓÃÕßÀà£¬Èç¹ûÎª<code>null</code>£¬Ôò´Ó<code>ClassLoaderUtil</code>
-     *            ËùÔÚµÄclass loader×°ÔØ
-     * @return Ö¸¶¨ÀàÃûµÄÊµÀı
-     * @throws ClassNotFoundException Èç¹ûÀàÃ»ÕÒµ½
-     * @throws ClassInstantiationException Èç¹ûÊµÀı»¯Ê§°Ü
+     * @param className è¦å®ä¾‹åŒ–çš„ç±»å
+     * @param referrer è°ƒç”¨è€…ç±»ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œåˆ™ä»<code>ClassLoaderUtil</code>
+     *            æ‰€åœ¨çš„class loaderè£…è½½
+     * @return æŒ‡å®šç±»åçš„å®ä¾‹
+     * @throws ClassNotFoundException å¦‚æœç±»æ²¡æ‰¾åˆ°
+     * @throws ClassInstantiationException å¦‚æœå®ä¾‹åŒ–å¤±è´¥
      */
     public static Object newInstance(String className, Class<?> referrer) throws ClassNotFoundException,
             ClassInstantiationException {
@@ -327,15 +327,15 @@ public class ClassLoaderUtil {
     }
 
     /**
-     * ´ÓÖ¸¶¨µÄ<code>ClassLoader</code>ÖĞ×°ÈëÀà²¢ÊµÀı»¯Ö®¡£Èç¹ûÎ´Ö¸¶¨<code>ClassLoader</code>£¬ Ôò´Ó×°ÔØ
-     * <code>ClassLoaderUtil</code>µÄ<code>ClassLoader</code>ÖĞ×°Èë¡£
+     * ä»æŒ‡å®šçš„<code>ClassLoader</code>ä¸­è£…å…¥ç±»å¹¶å®ä¾‹åŒ–ä¹‹ã€‚å¦‚æœæœªæŒ‡å®š<code>ClassLoader</code>ï¼Œ åˆ™ä»è£…è½½
+     * <code>ClassLoaderUtil</code>çš„<code>ClassLoader</code>ä¸­è£…å…¥ã€‚
      * 
-     * @param className ÒªÊµÀı»¯µÄÀàÃû
-     * @param classLoader ´ÓÖ¸¶¨µÄ<code>ClassLoader</code>ÖĞ×°ÈëÀà£¬Èç¹ûÎª<code>null</code>
-     *            £¬±íÊ¾´Ó<code>ClassLoaderUtil</code>ËùÔÚµÄclass loaderÖĞ×°ÔØ
-     * @return Ö¸¶¨ÀàÃûµÄÊµÀı
-     * @throws ClassNotFoundException Èç¹ûÀàÃ»ÕÒµ½
-     * @throws ClassInstantiationException Èç¹ûÊµÀı»¯Ê§°Ü
+     * @param className è¦å®ä¾‹åŒ–çš„ç±»å
+     * @param classLoader ä»æŒ‡å®šçš„<code>ClassLoader</code>ä¸­è£…å…¥ç±»ï¼Œå¦‚æœä¸º<code>null</code>
+     *            ï¼Œè¡¨ç¤ºä»<code>ClassLoaderUtil</code>æ‰€åœ¨çš„class loaderä¸­è£…è½½
+     * @return æŒ‡å®šç±»åçš„å®ä¾‹
+     * @throws ClassNotFoundException å¦‚æœç±»æ²¡æ‰¾åˆ°
+     * @throws ClassInstantiationException å¦‚æœå®ä¾‹åŒ–å¤±è´¥
      */
     public static Object newInstance(String className, ClassLoader classLoader) throws ClassNotFoundException,
             ClassInstantiationException {
@@ -343,11 +343,11 @@ public class ClassLoaderUtil {
     }
 
     /**
-     * ´´½¨Ö¸¶¨ÀàµÄÊµÀı¡£
+     * åˆ›å»ºæŒ‡å®šç±»çš„å®ä¾‹ã€‚
      * 
-     * @param clazz Òª´´½¨ÊµÀıµÄÀà
-     * @return Ö¸¶¨ÀàµÄÊµÀı
-     * @throws ClassInstantiationException Èç¹ûÊµÀı»¯Ê§°Ü
+     * @param clazz è¦åˆ›å»ºå®ä¾‹çš„ç±»
+     * @return æŒ‡å®šç±»çš„å®ä¾‹
+     * @throws ClassInstantiationException å¦‚æœå®ä¾‹åŒ–å¤±è´¥
      */
     private static Object newInstance(Class<?> clazz) throws ClassInstantiationException {
         if (clazz == null) {
@@ -366,16 +366,16 @@ public class ClassLoaderUtil {
     }
 
     /**
-     * °´ÕÕ±ê×¼µÄjar service¹æ·¶ËÑË÷²¢×°ÔØÖ¸¶¨Ãû³ÆµÄserviceÀà²¢ÊµÀı»¯Ö®¡£
+     * æŒ‰ç…§æ ‡å‡†çš„jar serviceè§„èŒƒæœç´¢å¹¶è£…è½½æŒ‡å®šåç§°çš„serviceç±»å¹¶å®ä¾‹åŒ–ä¹‹ã€‚
      * <p>
-     * ËÑË÷serviceµÄ·½·¨ÊÇÔÚclass loaderÖĞ²éÕÒ<code>META-INF/services/serviceId</code>
-     * ÎÄ¼ş£¬²¢½«ÆäÄÚÈİ×÷ÎªserviceÀàÃû¡£
+     * æœç´¢serviceçš„æ–¹æ³•æ˜¯åœ¨class loaderä¸­æŸ¥æ‰¾<code>META-INF/services/serviceId</code>
+     * æ–‡ä»¶ï¼Œå¹¶å°†å…¶å†…å®¹ä½œä¸ºserviceç±»åã€‚
      * </p>
      * 
-     * @param serviceId ·şÎñÃû
-     * @return ÊµÀıÀà
-     * @throws ClassNotFoundException Èç¹ûservice classÕÒ²»µ½£¬»ò×°ÔØserviceÎÄ¼şÊ§°Ü
-     * @throws ClassInstantiationException Èç¹ûÊµÀı»¯Ê§°Ü
+     * @param serviceId æœåŠ¡å
+     * @return å®ä¾‹ç±»
+     * @throws ClassNotFoundException å¦‚æœservice classæ‰¾ä¸åˆ°ï¼Œæˆ–è£…è½½serviceæ–‡ä»¶å¤±è´¥
+     * @throws ClassInstantiationException å¦‚æœå®ä¾‹åŒ–å¤±è´¥
      */
     public static Object newServiceInstance(String serviceId) throws ClassNotFoundException,
             ClassInstantiationException {
@@ -383,18 +383,18 @@ public class ClassLoaderUtil {
     }
 
     /**
-     * °´ÕÕ±ê×¼µÄjar service¹æ·¶ËÑË÷²¢×°ÔØÖ¸¶¨Ãû³ÆµÄserviceÀà²¢ÊµÀı»¯Ö®¡£
+     * æŒ‰ç…§æ ‡å‡†çš„jar serviceè§„èŒƒæœç´¢å¹¶è£…è½½æŒ‡å®šåç§°çš„serviceç±»å¹¶å®ä¾‹åŒ–ä¹‹ã€‚
      * <p>
-     * ËÑË÷serviceµÄ·½·¨ÊÇÔÚclass loaderÖĞ²éÕÒ<code>META-INF/services/serviceId</code>
-     * ÎÄ¼ş£¬²¢½«ÆäÄÚÈİ×÷ÎªserviceÀàÃû¡£
+     * æœç´¢serviceçš„æ–¹æ³•æ˜¯åœ¨class loaderä¸­æŸ¥æ‰¾<code>META-INF/services/serviceId</code>
+     * æ–‡ä»¶ï¼Œå¹¶å°†å…¶å†…å®¹ä½œä¸ºserviceç±»åã€‚
      * </p>
      * 
-     * @param serviceId ·şÎñÃû
-     * @param referrer µ÷ÓÃÕßÀà£¬Èç¹ûÎª<code>null</code>£¬±íÊ¾ÔÚ<code>ClassLoaderUtil</code>
-     *            µÄclass loaderÖĞÕÒ¡£
-     * @return ÊµÀıÀà
-     * @throws ClassNotFoundException Èç¹ûservice classÕÒ²»µ½£¬»ò×°ÔØserviceÎÄ¼şÊ§°Ü
-     * @throws ClassInstantiationException Èç¹ûÊµÀı»¯Ê§°Ü
+     * @param serviceId æœåŠ¡å
+     * @param referrer è°ƒç”¨è€…ç±»ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œè¡¨ç¤ºåœ¨<code>ClassLoaderUtil</code>
+     *            çš„class loaderä¸­æ‰¾ã€‚
+     * @return å®ä¾‹ç±»
+     * @throws ClassNotFoundException å¦‚æœservice classæ‰¾ä¸åˆ°ï¼Œæˆ–è£…è½½serviceæ–‡ä»¶å¤±è´¥
+     * @throws ClassInstantiationException å¦‚æœå®ä¾‹åŒ–å¤±è´¥
      */
     public static Object newServiceInstance(String serviceId, Class<?> referrer) throws ClassNotFoundException,
             ClassInstantiationException {
@@ -402,18 +402,18 @@ public class ClassLoaderUtil {
     }
 
     /**
-     * °´ÕÕ±ê×¼µÄjar service¹æ·¶ËÑË÷²¢×°ÔØÖ¸¶¨Ãû³ÆµÄserviceÀà²¢ÊµÀı»¯Ö®¡£
+     * æŒ‰ç…§æ ‡å‡†çš„jar serviceè§„èŒƒæœç´¢å¹¶è£…è½½æŒ‡å®šåç§°çš„serviceç±»å¹¶å®ä¾‹åŒ–ä¹‹ã€‚
      * <p>
-     * ËÑË÷serviceµÄ·½·¨ÊÇÔÚclass loaderÖĞ²éÕÒ<code>META-INF/services/serviceId</code>
-     * ÎÄ¼ş£¬²¢½«ÆäÄÚÈİ×÷ÎªserviceÀàÃû¡£
+     * æœç´¢serviceçš„æ–¹æ³•æ˜¯åœ¨class loaderä¸­æŸ¥æ‰¾<code>META-INF/services/serviceId</code>
+     * æ–‡ä»¶ï¼Œå¹¶å°†å…¶å†…å®¹ä½œä¸ºserviceç±»åã€‚
      * </p>
      * 
-     * @param serviceId ·şÎñÃû
-     * @param classLoader ÔÚÖ¸¶¨classLoaderÖĞ²éÕÒ£¬Èç¹ûÎª<code>null</code>£¬±íÊ¾ÔÚ
-     *            <code>ClassLoaderUtil</code>µÄclass loaderÖĞÕÒ¡£
-     * @return ÊµÀıÀà
-     * @throws ClassNotFoundException Èç¹ûservice classÕÒ²»µ½£¬»ò×°ÔØserviceÎÄ¼şÊ§°Ü
-     * @throws ClassInstantiationException Èç¹ûÊµÀı»¯Ê§°Ü
+     * @param serviceId æœåŠ¡å
+     * @param classLoader åœ¨æŒ‡å®šclassLoaderä¸­æŸ¥æ‰¾ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œè¡¨ç¤ºåœ¨
+     *            <code>ClassLoaderUtil</code>çš„class loaderä¸­æ‰¾ã€‚
+     * @return å®ä¾‹ç±»
+     * @throws ClassNotFoundException å¦‚æœservice classæ‰¾ä¸åˆ°ï¼Œæˆ–è£…è½½serviceæ–‡ä»¶å¤±è´¥
+     * @throws ClassInstantiationException å¦‚æœå®ä¾‹åŒ–å¤±è´¥
      */
     public static Object newServiceInstance(String serviceId, ClassLoader classLoader) throws ClassNotFoundException,
             ClassInstantiationException {
@@ -421,17 +421,17 @@ public class ClassLoaderUtil {
     }
 
     /**
-     * Ê×ÏÈÊÔÍ¼×°ÈëÖ¸¶¨Ãû³ÆµÄÀà£¬Èç¹ûÕÒ²»µ½£¬ÔÙ°´ÕÕ±ê×¼µÄjar service¹æ·¶ËÑË÷²¢×°ÔØÖ¸¶¨Ãû³ÆµÄserviceÀà¡£ ÕÒµ½ÒÔºóÊµÀı»¯Ö®¡£
+     * é¦–å…ˆè¯•å›¾è£…å…¥æŒ‡å®šåç§°çš„ç±»ï¼Œå¦‚æœæ‰¾ä¸åˆ°ï¼Œå†æŒ‰ç…§æ ‡å‡†çš„jar serviceè§„èŒƒæœç´¢å¹¶è£…è½½æŒ‡å®šåç§°çš„serviceç±»ã€‚ æ‰¾åˆ°ä»¥åå®ä¾‹åŒ–ä¹‹ã€‚
      * <p>
-     * ËÑË÷serviceµÄ·½·¨ÊÇÔÚclass loaderÖĞ²éÕÒ<code>META-INF/services/serviceId</code>
-     * ÎÄ¼ş£¬²¢½«ÆäÄÚÈİ×÷ÎªserviceÀàÃû¡£
+     * æœç´¢serviceçš„æ–¹æ³•æ˜¯åœ¨class loaderä¸­æŸ¥æ‰¾<code>META-INF/services/serviceId</code>
+     * æ–‡ä»¶ï¼Œå¹¶å°†å…¶å†…å®¹ä½œä¸ºserviceç±»åã€‚
      * </p>
      * 
-     * @param className Òª×°ÈëµÄÀàÃû
-     * @param serviceId ·şÎñÃû
-     * @return ÊµÀıÀà
-     * @throws ClassNotFoundException Èç¹ûservice classÕÒ²»µ½£¬»ò×°ÔØserviceÎÄ¼şÊ§°Ü
-     * @throws ClassInstantiationException Èç¹ûÊµÀı»¯Ê§°Ü
+     * @param className è¦è£…å…¥çš„ç±»å
+     * @param serviceId æœåŠ¡å
+     * @return å®ä¾‹ç±»
+     * @throws ClassNotFoundException å¦‚æœservice classæ‰¾ä¸åˆ°ï¼Œæˆ–è£…è½½serviceæ–‡ä»¶å¤±è´¥
+     * @throws ClassInstantiationException å¦‚æœå®ä¾‹åŒ–å¤±è´¥
      */
     public static Object newServiceInstance(String className, String serviceId) throws ClassNotFoundException,
             ClassInstantiationException {
@@ -439,19 +439,19 @@ public class ClassLoaderUtil {
     }
 
     /**
-     * Ê×ÏÈÊÔÍ¼×°ÈëÖ¸¶¨Ãû³ÆµÄÀà£¬Èç¹ûÕÒ²»µ½£¬ÔÙ°´ÕÕ±ê×¼µÄjar service¹æ·¶ËÑË÷²¢×°ÔØÖ¸¶¨Ãû³ÆµÄserviceÀà¡£ ÕÒµ½ÒÔºóÊµÀı»¯Ö®¡£
+     * é¦–å…ˆè¯•å›¾è£…å…¥æŒ‡å®šåç§°çš„ç±»ï¼Œå¦‚æœæ‰¾ä¸åˆ°ï¼Œå†æŒ‰ç…§æ ‡å‡†çš„jar serviceè§„èŒƒæœç´¢å¹¶è£…è½½æŒ‡å®šåç§°çš„serviceç±»ã€‚ æ‰¾åˆ°ä»¥åå®ä¾‹åŒ–ä¹‹ã€‚
      * <p>
-     * ËÑË÷serviceµÄ·½·¨ÊÇÔÚclass loaderÖĞ²éÕÒ<code>META-INF/services/serviceId</code>
-     * ÎÄ¼ş£¬²¢½«ÆäÄÚÈİ×÷ÎªserviceÀàÃû¡£
+     * æœç´¢serviceçš„æ–¹æ³•æ˜¯åœ¨class loaderä¸­æŸ¥æ‰¾<code>META-INF/services/serviceId</code>
+     * æ–‡ä»¶ï¼Œå¹¶å°†å…¶å†…å®¹ä½œä¸ºserviceç±»åã€‚
      * </p>
      * 
-     * @param className Òª×°ÈëµÄÀàÃû
-     * @param serviceId ·şÎñÃû
-     * @param referrer µ÷ÓÃÕßÀà£¬Èç¹ûÎª<code>null</code>£¬±íÊ¾ÔÚ<code>ClassLoaderUtil</code>
-     *            µÄclass loaderÖĞÕÒ¡£
-     * @return ÊµÀıÀà
-     * @throws ClassNotFoundException Èç¹ûservice classÕÒ²»µ½£¬»ò×°ÔØserviceÎÄ¼şÊ§°Ü
-     * @throws ClassInstantiationException Èç¹ûÊµÀı»¯Ê§°Ü
+     * @param className è¦è£…å…¥çš„ç±»å
+     * @param serviceId æœåŠ¡å
+     * @param referrer è°ƒç”¨è€…ç±»ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œè¡¨ç¤ºåœ¨<code>ClassLoaderUtil</code>
+     *            çš„class loaderä¸­æ‰¾ã€‚
+     * @return å®ä¾‹ç±»
+     * @throws ClassNotFoundException å¦‚æœservice classæ‰¾ä¸åˆ°ï¼Œæˆ–è£…è½½serviceæ–‡ä»¶å¤±è´¥
+     * @throws ClassInstantiationException å¦‚æœå®ä¾‹åŒ–å¤±è´¥
      */
     public static Object newServiceInstance(String className, String serviceId, Class<?> referrer)
             throws ClassNotFoundException, ClassInstantiationException {
@@ -459,19 +459,19 @@ public class ClassLoaderUtil {
     }
 
     /**
-     * Ê×ÏÈÊÔÍ¼×°ÈëÖ¸¶¨Ãû³ÆµÄÀà£¬Èç¹ûÕÒ²»µ½£¬ÔÙ°´ÕÕ±ê×¼µÄjar service¹æ·¶ËÑË÷²¢×°ÔØÖ¸¶¨Ãû³ÆµÄserviceÀà¡£ ÕÒµ½ÒÔºóÊµÀı»¯Ö®¡£
+     * é¦–å…ˆè¯•å›¾è£…å…¥æŒ‡å®šåç§°çš„ç±»ï¼Œå¦‚æœæ‰¾ä¸åˆ°ï¼Œå†æŒ‰ç…§æ ‡å‡†çš„jar serviceè§„èŒƒæœç´¢å¹¶è£…è½½æŒ‡å®šåç§°çš„serviceç±»ã€‚ æ‰¾åˆ°ä»¥åå®ä¾‹åŒ–ä¹‹ã€‚
      * <p>
-     * ËÑË÷serviceµÄ·½·¨ÊÇÔÚclass loaderÖĞ²éÕÒ<code>META-INF/services/serviceId</code>
-     * ÎÄ¼ş£¬²¢½«ÆäÄÚÈİ×÷ÎªserviceÀàÃû¡£
+     * æœç´¢serviceçš„æ–¹æ³•æ˜¯åœ¨class loaderä¸­æŸ¥æ‰¾<code>META-INF/services/serviceId</code>
+     * æ–‡ä»¶ï¼Œå¹¶å°†å…¶å†…å®¹ä½œä¸ºserviceç±»åã€‚
      * </p>
      * 
-     * @param className Òª×°ÈëµÄÀàÃû
-     * @param serviceId ·şÎñÃû
-     * @param classLoader ÔÚÖ¸¶¨classLoaderÖĞ²éÕÒ£¬Èç¹ûÎª<code>null</code>£¬±íÊ¾ÔÚ
-     *            <code>ClassLoaderUtil</code>µÄclass loaderÖĞÕÒ¡£
-     * @return ÊµÀıÀà
-     * @throws ClassNotFoundException Èç¹ûservice classÕÒ²»µ½£¬»ò×°ÔØserviceÎÄ¼şÊ§°Ü
-     * @throws ClassInstantiationException Èç¹ûÊµÀı»¯Ê§°Ü
+     * @param className è¦è£…å…¥çš„ç±»å
+     * @param serviceId æœåŠ¡å
+     * @param classLoader åœ¨æŒ‡å®šclassLoaderä¸­æŸ¥æ‰¾ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œè¡¨ç¤ºåœ¨
+     *            <code>ClassLoaderUtil</code>çš„class loaderä¸­æ‰¾ã€‚
+     * @return å®ä¾‹ç±»
+     * @throws ClassNotFoundException å¦‚æœservice classæ‰¾ä¸åˆ°ï¼Œæˆ–è£…è½½serviceæ–‡ä»¶å¤±è´¥
+     * @throws ClassInstantiationException å¦‚æœå®ä¾‹åŒ–å¤±è´¥
      */
     public static Object newServiceInstance(String className, String serviceId, ClassLoader classLoader)
             throws ClassNotFoundException, ClassInstantiationException {
@@ -479,49 +479,49 @@ public class ClassLoaderUtil {
     }
 
     // ==========================================================================
-    // ×°ÈëºÍ²éÕÒ×ÊÔ´ÎÄ¼şµÄ·½·¨¡£ 
+    // è£…å…¥å’ŒæŸ¥æ‰¾èµ„æºæ–‡ä»¶çš„æ–¹æ³•ã€‚ 
     // ==========================================================================
 
     /**
-     * ´Ó<code>ClassLoader</code>È¡µÃËùÓĞresource URL¡£°´ÈçÏÂË³Ğò²éÕÒ:
+     * ä»<code>ClassLoader</code>å–å¾—æ‰€æœ‰resource URLã€‚æŒ‰å¦‚ä¸‹é¡ºåºæŸ¥æ‰¾:
      * <ol>
-     * <li>ÔÚµ±Ç°Ïß³ÌµÄ<code>ClassLoader</code>ÖĞ²éÕÒ¡£</li>
-     * <li>ÔÚ×°Èë×Ô¼ºµÄ<code>ClassLoader</code>ÖĞ²éÕÒ¡£</li>
-     * <li>Í¨¹ı<code>ClassLoader.getSystemResource</code>·½·¨²éÕÒ¡£</li>
+     * <li>åœ¨å½“å‰çº¿ç¨‹çš„<code>ClassLoader</code>ä¸­æŸ¥æ‰¾ã€‚</li>
+     * <li>åœ¨è£…å…¥è‡ªå·±çš„<code>ClassLoader</code>ä¸­æŸ¥æ‰¾ã€‚</li>
+     * <li>é€šè¿‡<code>ClassLoader.getSystemResource</code>æ–¹æ³•æŸ¥æ‰¾ã€‚</li>
      * </ol>
      * 
-     * @param resourceName Òª²éÕÒµÄ×ÊÔ´Ãû£¬¾ÍÊÇÒÔ&quot;/&quot;·Ö¸ôµÄ±êÊ¶·û×Ö·û´®
-     * @return resourceµÄURLÊı×é£¬Èç¹ûÃ»ÕÒµ½£¬Ôò·µ»Ø¿ÕÊı×é¡£Êı×éÖĞ±£Ö¤²»°üº¬ÖØ¸´µÄURL¡£
+     * @param resourceName è¦æŸ¥æ‰¾çš„èµ„æºåï¼Œå°±æ˜¯ä»¥&quot;/&quot;åˆ†éš”çš„æ ‡è¯†ç¬¦å­—ç¬¦ä¸²
+     * @return resourceçš„URLæ•°ç»„ï¼Œå¦‚æœæ²¡æ‰¾åˆ°ï¼Œåˆ™è¿”å›ç©ºæ•°ç»„ã€‚æ•°ç»„ä¸­ä¿è¯ä¸åŒ…å«é‡å¤çš„URLã€‚
      */
     public static URL[] getResources(String resourceName) {
         List<URL> urls = createLinkedList();
         boolean found = false;
 
-        // Ê×ÏÈÊÔ×Å´Óµ±Ç°Ïß³ÌµÄClassLoaderÖĞ²éÕÒ¡£
+        // é¦–å…ˆè¯•ç€ä»å½“å‰çº¿ç¨‹çš„ClassLoaderä¸­æŸ¥æ‰¾ã€‚
         found = getResources(urls, resourceName, getContextClassLoader(), false);
 
-        // Èç¹ûÃ»ÕÒµ½£¬ÊÔ×Å´Ó×°Èë×Ô¼ºµÄClassLoaderÖĞ²éÕÒ¡£
+        // å¦‚æœæ²¡æ‰¾åˆ°ï¼Œè¯•ç€ä»è£…å…¥è‡ªå·±çš„ClassLoaderä¸­æŸ¥æ‰¾ã€‚
         if (!found) {
             found = getResources(urls, resourceName, ClassLoaderUtil.class.getClassLoader(), false);
         }
 
-        // ×îºóµÄ³¢ÊÔ: ÔÚÏµÍ³ClassLoaderÖĞ²éÕÒ(JDK1.2ÒÔÉÏ)£¬
-        // »òÕßÔÚJDKµÄÄÚ²¿ClassLoaderÖĞ²éÕÒ(JDK1.2ÒÔÏÂ)¡£
+        // æœ€åçš„å°è¯•: åœ¨ç³»ç»ŸClassLoaderä¸­æŸ¥æ‰¾(JDK1.2ä»¥ä¸Š)ï¼Œ
+        // æˆ–è€…åœ¨JDKçš„å†…éƒ¨ClassLoaderä¸­æŸ¥æ‰¾(JDK1.2ä»¥ä¸‹)ã€‚
         if (!found) {
             found = getResources(urls, resourceName, null, true);
         }
 
-        // ·µ»Ø²»ÖØ¸´µÄÁĞ±í¡£
+        // è¿”å›ä¸é‡å¤çš„åˆ—è¡¨ã€‚
         return getDistinctURLs(urls);
     }
 
     /**
-     * ´ÓÖ¸¶¨µ÷ÓÃÕßËùÊôµÄ<code>ClassLoader</code>È¡µÃËùÓĞresource URL¡£
+     * ä»æŒ‡å®šè°ƒç”¨è€…æ‰€å±çš„<code>ClassLoader</code>å–å¾—æ‰€æœ‰resource URLã€‚
      * 
-     * @param resourceName Òª²éÕÒµÄ×ÊÔ´Ãû£¬¾ÍÊÇÒÔ&quot;/&quot;·Ö¸ôµÄ±êÊ¶·û×Ö·û´®
-     * @param referrer µ÷ÓÃÕßÀà£¬Èç¹ûÎª<code>null</code>£¬±íÊ¾ÔÚ<code>ClassLoaderUtil</code>
-     *            µÄclass loaderÖĞÕÒ
-     * @return resourceµÄURLÊı×é£¬Èç¹ûÃ»ÕÒµ½£¬Ôò·µ»Ø¿ÕÊı×é¡£Êı×éÖĞ±£Ö¤²»°üº¬ÖØ¸´µÄURL¡£
+     * @param resourceName è¦æŸ¥æ‰¾çš„èµ„æºåï¼Œå°±æ˜¯ä»¥&quot;/&quot;åˆ†éš”çš„æ ‡è¯†ç¬¦å­—ç¬¦ä¸²
+     * @param referrer è°ƒç”¨è€…ç±»ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œè¡¨ç¤ºåœ¨<code>ClassLoaderUtil</code>
+     *            çš„class loaderä¸­æ‰¾
+     * @return resourceçš„URLæ•°ç»„ï¼Œå¦‚æœæ²¡æ‰¾åˆ°ï¼Œåˆ™è¿”å›ç©ºæ•°ç»„ã€‚æ•°ç»„ä¸­ä¿è¯ä¸åŒ…å«é‡å¤çš„URLã€‚
      */
     public static URL[] getResources(String resourceName, Class<?> referrer) {
         ClassLoader classLoader = getReferrerClassLoader(referrer);
@@ -529,36 +529,36 @@ public class ClassLoaderUtil {
 
         getResources(urls, resourceName, classLoader, classLoader == null);
 
-        // ·µ»Ø²»ÖØ¸´µÄÁĞ±í¡£
+        // è¿”å›ä¸é‡å¤çš„åˆ—è¡¨ã€‚
         return getDistinctURLs(urls);
     }
 
     /**
-     * ´ÓÖ¸¶¨µÄ<code>ClassLoader</code>ÖĞÈ¡µÃËùÓĞresource URL¡£Èç¹ûÎ´Ö¸¶¨
-     * <code>ClassLoader</code>£¬ Ôò´Ó×°ÔØ<code>ClassLoaderUtil</code>µÄ
-     * <code>ClassLoader</code>ÖĞÈ¡µÃËùÓĞresource URL¡£
+     * ä»æŒ‡å®šçš„<code>ClassLoader</code>ä¸­å–å¾—æ‰€æœ‰resource URLã€‚å¦‚æœæœªæŒ‡å®š
+     * <code>ClassLoader</code>ï¼Œ åˆ™ä»è£…è½½<code>ClassLoaderUtil</code>çš„
+     * <code>ClassLoader</code>ä¸­å–å¾—æ‰€æœ‰resource URLã€‚
      * 
-     * @param resourceName Òª²éÕÒµÄ×ÊÔ´Ãû£¬¾ÍÊÇÒÔ&quot;/&quot;·Ö¸ôµÄ±êÊ¶·û×Ö·û´®
-     * @param classLoader ´ÓÖ¸¶¨µÄ<code>ClassLoader</code>ÖĞ²éÕÒ
-     * @return resourceµÄURLÊı×é£¬Èç¹ûÃ»ÕÒµ½£¬Ôò·µ»Ø¿ÕÊı×é¡£Êı×éÖĞ±£Ö¤²»°üº¬ÖØ¸´µÄURL¡£
+     * @param resourceName è¦æŸ¥æ‰¾çš„èµ„æºåï¼Œå°±æ˜¯ä»¥&quot;/&quot;åˆ†éš”çš„æ ‡è¯†ç¬¦å­—ç¬¦ä¸²
+     * @param classLoader ä»æŒ‡å®šçš„<code>ClassLoader</code>ä¸­æŸ¥æ‰¾
+     * @return resourceçš„URLæ•°ç»„ï¼Œå¦‚æœæ²¡æ‰¾åˆ°ï¼Œåˆ™è¿”å›ç©ºæ•°ç»„ã€‚æ•°ç»„ä¸­ä¿è¯ä¸åŒ…å«é‡å¤çš„URLã€‚
      */
     public static URL[] getResources(String resourceName, ClassLoader classLoader) {
         List<URL> urls = createLinkedList();
 
         getResources(urls, resourceName, classLoader, classLoader == null);
 
-        // ·µ»Ø²»ÖØ¸´µÄÁĞ±í¡£
+        // è¿”å›ä¸é‡å¤çš„åˆ—è¡¨ã€‚
         return getDistinctURLs(urls);
     }
 
     /**
-     * ÔÚÖ¸¶¨class loaderÖĞ²éÕÒÖ¸¶¨Ãû³ÆµÄresource£¬°ÑËùÓĞÕÒµ½µÄresourceµÄURL·ÅÈëÖ¸¶¨µÄ¼¯ºÏÖĞ¡£
+     * åœ¨æŒ‡å®šclass loaderä¸­æŸ¥æ‰¾æŒ‡å®šåç§°çš„resourceï¼ŒæŠŠæ‰€æœ‰æ‰¾åˆ°çš„resourceçš„URLæ”¾å…¥æŒ‡å®šçš„é›†åˆä¸­ã€‚
      * 
-     * @param urlSet ´æ·Åresource URLµÄ¼¯ºÏ
-     * @param resourceName ×ÊÔ´Ãû
-     * @param classLoader Àà×°ÈëÆ÷
-     * @param sysClassLoader ÊÇ·ñÓÃsystem class loader×°ÔØ×ÊÔ´
-     * @return Èç¹ûÕÒµ½£¬Ôò·µ»Ø<code>true</code>
+     * @param urlSet å­˜æ”¾resource URLçš„é›†åˆ
+     * @param resourceName èµ„æºå
+     * @param classLoader ç±»è£…å…¥å™¨
+     * @param sysClassLoader æ˜¯å¦ç”¨system class loaderè£…è½½èµ„æº
+     * @return å¦‚æœæ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>true</code>
      */
     private static boolean getResources(List<URL> urlSet, String resourceName, ClassLoader classLoader,
                                         boolean sysClassLoader) {
@@ -589,10 +589,10 @@ public class ClassLoaderUtil {
     }
 
     /**
-     * È¥³ıURLÁĞ±íÖĞµÄÖØ¸´Ïî¡£
+     * å»é™¤URLåˆ—è¡¨ä¸­çš„é‡å¤é¡¹ã€‚
      * 
-     * @param urls URLÁĞ±í
-     * @return ²»ÖØ¸´µÄURLÊı×é£¬Èç¹ûurlsÎª<code>null</code>£¬Ôò·µ»Ø¿ÕÊı×é
+     * @param urls URLåˆ—è¡¨
+     * @return ä¸é‡å¤çš„URLæ•°ç»„ï¼Œå¦‚æœurlsä¸º<code>null</code>ï¼Œåˆ™è¿”å›ç©ºæ•°ç»„
      */
     private static URL[] getDistinctURLs(List<URL> urls) {
         if (urls == null || urls.size() == 0) {
@@ -616,16 +616,16 @@ public class ClassLoaderUtil {
 
     /**
      * <p>
-     * ´Ó<code>ClassLoader</code>È¡µÃresource URL¡£°´ÈçÏÂË³Ğò²éÕÒ:
+     * ä»<code>ClassLoader</code>å–å¾—resource URLã€‚æŒ‰å¦‚ä¸‹é¡ºåºæŸ¥æ‰¾:
      * </p>
      * <ol>
-     * <li>ÔÚµ±Ç°Ïß³ÌµÄ<code>ClassLoader</code>ÖĞ²éÕÒ¡£</li>
-     * <li>ÔÚ×°Èë×Ô¼ºµÄ<code>ClassLoader</code>ÖĞ²éÕÒ¡£</li>
-     * <li>Í¨¹ı<code>ClassLoader.getSystemResource</code>·½·¨²éÕÒ¡£</li>
+     * <li>åœ¨å½“å‰çº¿ç¨‹çš„<code>ClassLoader</code>ä¸­æŸ¥æ‰¾ã€‚</li>
+     * <li>åœ¨è£…å…¥è‡ªå·±çš„<code>ClassLoader</code>ä¸­æŸ¥æ‰¾ã€‚</li>
+     * <li>é€šè¿‡<code>ClassLoader.getSystemResource</code>æ–¹æ³•æŸ¥æ‰¾ã€‚</li>
      * </ol>
      * 
-     * @param resourceName Òª²éÕÒµÄ×ÊÔ´Ãû£¬¾ÍÊÇÒÔ&quot;/&quot;·Ö¸ôµÄ±êÊ¶·û×Ö·û´®
-     * @return resourceµÄURL
+     * @param resourceName è¦æŸ¥æ‰¾çš„èµ„æºåï¼Œå°±æ˜¯ä»¥&quot;/&quot;åˆ†éš”çš„æ ‡è¯†ç¬¦å­—ç¬¦ä¸²
+     * @return resourceçš„URL
      */
     public static URL getResource(String resourceName) {
         if (resourceName == null) {
@@ -635,7 +635,7 @@ public class ClassLoaderUtil {
         ClassLoader classLoader = null;
         URL url = null;
 
-        // Ê×ÏÈÊÔ×Å´Óµ±Ç°Ïß³ÌµÄClassLoaderÖĞ²éÕÒ¡£
+        // é¦–å…ˆè¯•ç€ä»å½“å‰çº¿ç¨‹çš„ClassLoaderä¸­æŸ¥æ‰¾ã€‚
         classLoader = getContextClassLoader();
 
         if (classLoader != null) {
@@ -646,7 +646,7 @@ public class ClassLoaderUtil {
             }
         }
 
-        // Èç¹ûÃ»ÕÒµ½£¬ÊÔ×Å´Ó×°Èë×Ô¼ºµÄClassLoaderÖĞ²éÕÒ¡£
+        // å¦‚æœæ²¡æ‰¾åˆ°ï¼Œè¯•ç€ä»è£…å…¥è‡ªå·±çš„ClassLoaderä¸­æŸ¥æ‰¾ã€‚
         classLoader = ClassLoaderUtil.class.getClassLoader();
 
         if (classLoader != null) {
@@ -657,18 +657,18 @@ public class ClassLoaderUtil {
             }
         }
 
-        // ×îºóµÄ³¢ÊÔ: ÔÚÏµÍ³ClassLoaderÖĞ²éÕÒ(JDK1.2ÒÔÉÏ)£¬
-        // »òÕßÔÚJDKµÄÄÚ²¿ClassLoaderÖĞ²éÕÒ(JDK1.2ÒÔÏÂ)¡£
+        // æœ€åçš„å°è¯•: åœ¨ç³»ç»ŸClassLoaderä¸­æŸ¥æ‰¾(JDK1.2ä»¥ä¸Š)ï¼Œ
+        // æˆ–è€…åœ¨JDKçš„å†…éƒ¨ClassLoaderä¸­æŸ¥æ‰¾(JDK1.2ä»¥ä¸‹)ã€‚
         return ClassLoader.getSystemResource(resourceName);
     }
 
     /**
-     * ´ÓÖ¸¶¨µ÷ÓÃÕßËùÊôµÄ<code>ClassLoader</code>È¡µÃresource URL¡£
+     * ä»æŒ‡å®šè°ƒç”¨è€…æ‰€å±çš„<code>ClassLoader</code>å–å¾—resource URLã€‚
      * 
-     * @param resourceName Òª²éÕÒµÄ×ÊÔ´Ãû£¬¾ÍÊÇÒÔ&quot;/&quot;·Ö¸ôµÄ±êÊ¶·û×Ö·û´®
-     * @param referrer µ÷ÓÃÕßÀà£¬Èç¹ûÎª<code>null</code>£¬±íÊ¾ÔÚ<code>ClassLoaderUtil</code>
-     *            µÄclass loaderÖĞÕÒ¡£
-     * @return resource URL£¬Èç¹ûÃ»ÕÒµ½£¬Ôò·µ»Ø<code>null</code>
+     * @param resourceName è¦æŸ¥æ‰¾çš„èµ„æºåï¼Œå°±æ˜¯ä»¥&quot;/&quot;åˆ†éš”çš„æ ‡è¯†ç¬¦å­—ç¬¦ä¸²
+     * @param referrer è°ƒç”¨è€…ç±»ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œè¡¨ç¤ºåœ¨<code>ClassLoaderUtil</code>
+     *            çš„class loaderä¸­æ‰¾ã€‚
+     * @return resource URLï¼Œå¦‚æœæ²¡æ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static URL getResource(String resourceName, Class<?> referrer) {
         if (resourceName == null) {
@@ -682,12 +682,12 @@ public class ClassLoaderUtil {
     }
 
     /**
-     * ´ÓÖ¸¶¨µÄ<code>ClassLoader</code>È¡µÃresource URL¡£
+     * ä»æŒ‡å®šçš„<code>ClassLoader</code>å–å¾—resource URLã€‚
      * 
-     * @param resourceName Òª²éÕÒµÄ×ÊÔ´Ãû£¬¾ÍÊÇÒÔ&quot;/&quot;·Ö¸ôµÄ±êÊ¶·û×Ö·û´®
-     * @param classLoader ÔÚÖ¸¶¨classLoaderÖĞ²éÕÒ£¬Èç¹ûÎª<code>null</code>£¬±íÊ¾ÔÚ
-     *            <code>ClassLoaderUtil</code>µÄclass loaderÖĞÕÒ¡£
-     * @return resource URL£¬Èç¹ûÃ»ÕÒµ½£¬Ôò·µ»Ø<code>null</code>
+     * @param resourceName è¦æŸ¥æ‰¾çš„èµ„æºåï¼Œå°±æ˜¯ä»¥&quot;/&quot;åˆ†éš”çš„æ ‡è¯†ç¬¦å­—ç¬¦ä¸²
+     * @param classLoader åœ¨æŒ‡å®šclassLoaderä¸­æŸ¥æ‰¾ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œè¡¨ç¤ºåœ¨
+     *            <code>ClassLoaderUtil</code>çš„class loaderä¸­æ‰¾ã€‚
+     * @return resource URLï¼Œå¦‚æœæ²¡æ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static URL getResource(String resourceName, ClassLoader classLoader) {
         if (resourceName == null) {
@@ -699,11 +699,11 @@ public class ClassLoaderUtil {
     }
 
     /**
-     * ´Ó<code>ClassLoader</code>È¡µÃresourceµÄÊäÈëÁ÷¡£ Ïàµ±ÓÚ
-     * <code>getResource(resourceName).openStream()</code>¡£
+     * ä»<code>ClassLoader</code>å–å¾—resourceçš„è¾“å…¥æµã€‚ ç›¸å½“äº
+     * <code>getResource(resourceName).openStream()</code>ã€‚
      * 
-     * @param resourceName Òª²éÕÒµÄ×ÊÔ´Ãû£¬¾ÍÊÇÒÔ"/"·Ö¸ôµÄ±êÊ¶·û×Ö·û´®
-     * @return resourceµÄÊäÈëÁ÷
+     * @param resourceName è¦æŸ¥æ‰¾çš„èµ„æºåï¼Œå°±æ˜¯ä»¥"/"åˆ†éš”çš„æ ‡è¯†ç¬¦å­—ç¬¦ä¸²
+     * @return resourceçš„è¾“å…¥æµ
      */
     public static InputStream getResourceAsStream(String resourceName) {
         URL url = getResource(resourceName);
@@ -713,21 +713,21 @@ public class ClassLoaderUtil {
                 return url.openStream();
             }
         } catch (IOException e) {
-            // ´ò¿ªURLÊ§°Ü¡£
+            // æ‰“å¼€URLå¤±è´¥ã€‚
         }
 
         return null;
     }
 
     /**
-     * ´Ó<code>ClassLoader</code>È¡µÃresourceµÄÊäÈëÁ÷¡£ Ïàµ±ÓÚ
+     * ä»<code>ClassLoader</code>å–å¾—resourceçš„è¾“å…¥æµã€‚ ç›¸å½“äº
      * <code>getResource(resourceName,
-     * referrer).openStream()</code>¡£
+     * referrer).openStream()</code>ã€‚
      * 
-     * @param resourceName Òª²éÕÒµÄ×ÊÔ´Ãû£¬¾ÍÊÇÒÔ"/"·Ö¸ôµÄ±êÊ¶·û×Ö·û´®
-     * @param referrer µ÷ÓÃÕßÀà£¬Èç¹ûÎª<code>null</code>£¬±íÊ¾ÔÚ<code>ClassLoaderUtil</code>
-     *            µÄclass loaderÖĞÕÒ¡£
-     * @return resourceµÄÊäÈëÁ÷
+     * @param resourceName è¦æŸ¥æ‰¾çš„èµ„æºåï¼Œå°±æ˜¯ä»¥"/"åˆ†éš”çš„æ ‡è¯†ç¬¦å­—ç¬¦ä¸²
+     * @param referrer è°ƒç”¨è€…ç±»ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œè¡¨ç¤ºåœ¨<code>ClassLoaderUtil</code>
+     *            çš„class loaderä¸­æ‰¾ã€‚
+     * @return resourceçš„è¾“å…¥æµ
      */
     public static InputStream getResourceAsStream(String resourceName, Class<?> referrer) {
         URL url = getResource(resourceName, referrer);
@@ -737,21 +737,21 @@ public class ClassLoaderUtil {
                 return url.openStream();
             }
         } catch (IOException e) {
-            // ´ò¿ªURLÊ§°Ü¡£
+            // æ‰“å¼€URLå¤±è´¥ã€‚
         }
 
         return null;
     }
 
     /**
-     * ´Ó<code>ClassLoader</code>È¡µÃresourceµÄÊäÈëÁ÷¡£ Ïàµ±ÓÚ
+     * ä»<code>ClassLoader</code>å–å¾—resourceçš„è¾“å…¥æµã€‚ ç›¸å½“äº
      * <code>getResource(resourceName,
-     * classLoader).openStream()</code>¡£
+     * classLoader).openStream()</code>ã€‚
      * 
-     * @param resourceName Òª²éÕÒµÄ×ÊÔ´Ãû£¬¾ÍÊÇÒÔ"/"·Ö¸ôµÄ±êÊ¶·û×Ö·û´®
-     * @param classLoader ÔÚÖ¸¶¨classLoaderÖĞ²éÕÒ£¬Èç¹ûÎª<code>null</code>£¬±íÊ¾ÔÚ
-     *            <code>ClassLoaderUtil</code>µÄclass loaderÖĞÕÒ¡£
-     * @return resourceµÄÊäÈëÁ÷
+     * @param resourceName è¦æŸ¥æ‰¾çš„èµ„æºåï¼Œå°±æ˜¯ä»¥"/"åˆ†éš”çš„æ ‡è¯†ç¬¦å­—ç¬¦ä¸²
+     * @param classLoader åœ¨æŒ‡å®šclassLoaderä¸­æŸ¥æ‰¾ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œè¡¨ç¤ºåœ¨
+     *            <code>ClassLoaderUtil</code>çš„class loaderä¸­æ‰¾ã€‚
+     * @return resourceçš„è¾“å…¥æµ
      */
     public static InputStream getResourceAsStream(String resourceName, ClassLoader classLoader) {
         URL url = getResource(resourceName, classLoader);
@@ -761,81 +761,81 @@ public class ClassLoaderUtil {
                 return url.openStream();
             }
         } catch (IOException e) {
-            // ´ò¿ªURLÊ§°Ü¡£
+            // æ‰“å¼€URLå¤±è´¥ã€‚
         }
 
         return null;
     }
 
     // ==========================================================================
-    // ²éÕÒclassµÄÎ»ÖÃ¡£ 
+    // æŸ¥æ‰¾classçš„ä½ç½®ã€‚ 
     //
-    // ÀàËÆÓÚUNIXµÄwhich·½·¨¡£ 
+    // ç±»ä¼¼äºUNIXçš„whichæ–¹æ³•ã€‚ 
     // ==========================================================================
 
     /**
-     * ´Óµ±Ç°Ïß³ÌµÄ<code>ClassLoader</code>ÖĞ²éÕÒÖ¸¶¨Ãû³ÆµÄÀà¡£
+     * ä»å½“å‰çº¿ç¨‹çš„<code>ClassLoader</code>ä¸­æŸ¥æ‰¾æŒ‡å®šåç§°çš„ç±»ã€‚
      * 
-     * @param className Òª²éÕÒµÄÀàÃû
-     * @return URLÊı×é£¬ÁĞ¾ÙÁËÏµÍ³ÖĞËùÓĞ¿ÉÕÒµ½µÄÍ¬ÃûÀà£¬Èç¹ûÎ´ÕÒµ½£¬Ôò·µ»ØÒ»¸ö¿ÕÊı×é
+     * @param className è¦æŸ¥æ‰¾çš„ç±»å
+     * @return URLæ•°ç»„ï¼Œåˆ—ä¸¾äº†ç³»ç»Ÿä¸­æ‰€æœ‰å¯æ‰¾åˆ°çš„åŒåç±»ï¼Œå¦‚æœæœªæ‰¾åˆ°ï¼Œåˆ™è¿”å›ä¸€ä¸ªç©ºæ•°ç»„
      */
     public static URL[] whichClasses(String className) {
         return getResources(ClassUtil.getResourceNameForClass(className));
     }
 
     /**
-     * ´Óµ±Ç°Ïß³ÌµÄ<code>ClassLoader</code>ÖĞ²éÕÒÖ¸¶¨Ãû³ÆµÄÀà¡£
+     * ä»å½“å‰çº¿ç¨‹çš„<code>ClassLoader</code>ä¸­æŸ¥æ‰¾æŒ‡å®šåç§°çš„ç±»ã€‚
      * 
-     * @param className Òª²éÕÒµÄÀàÃû
-     * @param referrer µ÷ÓÃÕßÀà£¬Èç¹ûÎª<code>null</code>£¬±íÊ¾ÔÚ<code>ClassLoaderUtil</code>
-     *            µÄclass loaderÖĞÕÒ¡£
-     * @return URLÊı×é£¬ÁĞ¾ÙÁËÏµÍ³ÖĞËùÓĞ¿ÉÕÒµ½µÄÍ¬ÃûÀà£¬Èç¹ûÎ´ÕÒµ½£¬Ôò·µ»ØÒ»¸ö¿ÕÊı×é
+     * @param className è¦æŸ¥æ‰¾çš„ç±»å
+     * @param referrer è°ƒç”¨è€…ç±»ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œè¡¨ç¤ºåœ¨<code>ClassLoaderUtil</code>
+     *            çš„class loaderä¸­æ‰¾ã€‚
+     * @return URLæ•°ç»„ï¼Œåˆ—ä¸¾äº†ç³»ç»Ÿä¸­æ‰€æœ‰å¯æ‰¾åˆ°çš„åŒåç±»ï¼Œå¦‚æœæœªæ‰¾åˆ°ï¼Œåˆ™è¿”å›ä¸€ä¸ªç©ºæ•°ç»„
      */
     public static URL[] whichClasses(String className, Class<?> referrer) {
         return getResources(ClassUtil.getResourceNameForClass(className), referrer);
     }
 
     /**
-     * ´Óµ±Ç°Ïß³ÌµÄ<code>ClassLoader</code>ÖĞ²éÕÒÖ¸¶¨Ãû³ÆµÄÀà¡£
+     * ä»å½“å‰çº¿ç¨‹çš„<code>ClassLoader</code>ä¸­æŸ¥æ‰¾æŒ‡å®šåç§°çš„ç±»ã€‚
      * 
-     * @param className Òª²éÕÒµÄÀàÃû
-     * @param classLoader ÔÚÖ¸¶¨classLoaderÖĞ²éÕÒ£¬Èç¹ûÎª<code>null</code>£¬±íÊ¾ÔÚ
-     *            <code>ClassLoaderUtil</code>µÄclass loaderÖĞÕÒ¡£
-     * @return URLÊı×é£¬ÁĞ¾ÙÁËÏµÍ³ÖĞËùÓĞ¿ÉÕÒµ½µÄÍ¬ÃûÀà£¬Èç¹ûÎ´ÕÒµ½£¬Ôò·µ»ØÒ»¸ö¿ÕÊı×é
+     * @param className è¦æŸ¥æ‰¾çš„ç±»å
+     * @param classLoader åœ¨æŒ‡å®šclassLoaderä¸­æŸ¥æ‰¾ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œè¡¨ç¤ºåœ¨
+     *            <code>ClassLoaderUtil</code>çš„class loaderä¸­æ‰¾ã€‚
+     * @return URLæ•°ç»„ï¼Œåˆ—ä¸¾äº†ç³»ç»Ÿä¸­æ‰€æœ‰å¯æ‰¾åˆ°çš„åŒåç±»ï¼Œå¦‚æœæœªæ‰¾åˆ°ï¼Œåˆ™è¿”å›ä¸€ä¸ªç©ºæ•°ç»„
      */
     public static URL[] whichClasses(String className, ClassLoader classLoader) {
         return getResources(ClassUtil.getResourceNameForClass(className), classLoader);
     }
 
     /**
-     * ´Óµ±Ç°Ïß³ÌµÄ<code>ClassLoader</code>ÖĞ²éÕÒÖ¸¶¨Ãû³ÆµÄÀà¡£
+     * ä»å½“å‰çº¿ç¨‹çš„<code>ClassLoader</code>ä¸­æŸ¥æ‰¾æŒ‡å®šåç§°çš„ç±»ã€‚
      * 
-     * @param className Òª²éÕÒµÄÀàÃû
-     * @return ÀàÎÄ¼şµÄURL£¬Èç¹ûÎ´ÕÒµ½£¬Ôò·µ»Ø<code>null</code>
+     * @param className è¦æŸ¥æ‰¾çš„ç±»å
+     * @return ç±»æ–‡ä»¶çš„URLï¼Œå¦‚æœæœªæ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static URL whichClass(String className) {
         return getResource(ClassUtil.getResourceNameForClass(className));
     }
 
     /**
-     * ´Óµ±Ç°Ïß³ÌµÄ<code>ClassLoader</code>ÖĞ²éÕÒÖ¸¶¨Ãû³ÆµÄÀà¡£
+     * ä»å½“å‰çº¿ç¨‹çš„<code>ClassLoader</code>ä¸­æŸ¥æ‰¾æŒ‡å®šåç§°çš„ç±»ã€‚
      * 
-     * @param className Òª²éÕÒµÄÀàÃû
-     * @param referrer µ÷ÓÃÕßÀà£¬Èç¹ûÎª<code>null</code>£¬±íÊ¾ÔÚ<code>ClassLoaderUtil</code>
-     *            µÄclass loaderÖĞÕÒ¡£
-     * @return ÀàÎÄ¼şµÄURL£¬Èç¹ûÎ´ÕÒµ½£¬Ôò·µ»Ø<code>null</code>
+     * @param className è¦æŸ¥æ‰¾çš„ç±»å
+     * @param referrer è°ƒç”¨è€…ç±»ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œè¡¨ç¤ºåœ¨<code>ClassLoaderUtil</code>
+     *            çš„class loaderä¸­æ‰¾ã€‚
+     * @return ç±»æ–‡ä»¶çš„URLï¼Œå¦‚æœæœªæ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static URL whichClass(String className, Class<?> referrer) {
         return getResource(ClassUtil.getResourceNameForClass(className), referrer);
     }
 
     /**
-     * ´Óµ±Ç°Ïß³ÌµÄ<code>ClassLoader</code>ÖĞ²éÕÒÖ¸¶¨Ãû³ÆµÄÀà¡£
+     * ä»å½“å‰çº¿ç¨‹çš„<code>ClassLoader</code>ä¸­æŸ¥æ‰¾æŒ‡å®šåç§°çš„ç±»ã€‚
      * 
-     * @param className Òª²éÕÒµÄÀàÃû
-     * @param classLoader ÔÚÖ¸¶¨classLoaderÖĞ²éÕÒ£¬Èç¹ûÎª<code>null</code>£¬±íÊ¾ÔÚ
-     *            <code>ClassLoaderUtil</code>µÄclass loaderÖĞÕÒ¡£
-     * @return ÀàÎÄ¼şµÄURL£¬Èç¹ûÎ´ÕÒµ½£¬Ôò·µ»Ø<code>null</code>
+     * @param className è¦æŸ¥æ‰¾çš„ç±»å
+     * @param classLoader åœ¨æŒ‡å®šclassLoaderä¸­æŸ¥æ‰¾ï¼Œå¦‚æœä¸º<code>null</code>ï¼Œè¡¨ç¤ºåœ¨
+     *            <code>ClassLoaderUtil</code>çš„class loaderä¸­æ‰¾ã€‚
+     * @return ç±»æ–‡ä»¶çš„URLï¼Œå¦‚æœæœªæ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>
      */
     public static URL whichClass(String className, ClassLoader classLoader) {
         return getResource(ClassUtil.getResourceNameForClass(className), classLoader);

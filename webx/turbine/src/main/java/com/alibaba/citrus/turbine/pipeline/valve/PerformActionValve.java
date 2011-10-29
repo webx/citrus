@@ -34,7 +34,7 @@ import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * Ö´ĞĞaction module£¬Í¨³£ÓÃÀ´´¦ÀíÓÃ»§Ìá½»µÄ±íµ¥¡£
+ * æ‰§è¡Œaction moduleï¼Œé€šå¸¸ç”¨æ¥å¤„ç†ç”¨æˆ·æäº¤çš„è¡¨å•ã€‚
  * 
  * @author Michael Zhou
  */
@@ -48,15 +48,15 @@ public class PerformActionValve extends AbstractValve {
     public void invoke(PipelineContext pipelineContext) throws Exception {
         TurbineRunData rundata = getTurbineRunData(request);
 
-        // ¼ì²éÖØ¶¨Ïò±êÖ¾£¬Èç¹ûÊÇÖØ¶¨Ïò£¬Ôò²»ĞèÒª½«Ò³ÃæÊä³ö¡£
+        // æ£€æŸ¥é‡å®šå‘æ ‡å¿—ï¼Œå¦‚æœæ˜¯é‡å®šå‘ï¼Œåˆ™ä¸éœ€è¦å°†é¡µé¢è¾“å‡ºã€‚
         if (!rundata.isRedirected()) {
             String action = rundata.getAction();
 
-            // Èç¹ûÕÒµ½action£¬ÔòÖ´ĞĞÖ®¡£
+            // å¦‚æœæ‰¾åˆ°actionï¼Œåˆ™æ‰§è¡Œä¹‹ã€‚
             if (!StringUtil.isEmpty(action)) {
                 String actionKey = "_action_" + action;
 
-                // ·ÀÖ¹ÖØ¸´Ö´ĞĞÍ¬Ò»¸öaction¡£
+                // é˜²æ­¢é‡å¤æ‰§è¡ŒåŒä¸€ä¸ªactionã€‚
                 if (rundata.getRequest().getAttribute(actionKey) == null) {
                     rundata.getRequest().setAttribute(actionKey, "executed");
 

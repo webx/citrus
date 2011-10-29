@@ -28,7 +28,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ÓÃÓÚÉú³Évalidator³ö´íĞÅÏ¢µÄcontext¡£
+ * ç”¨äºç”Ÿæˆvalidatorå‡ºé”™ä¿¡æ¯çš„contextã€‚
  * 
  * @author Michael Zhou
  */
@@ -36,7 +36,7 @@ public abstract class MessageContext implements ExpressionContext {
     protected final Map<Object, Object> thisContext = createHashMap();
 
     /**
-     * È¡µÃÖ¸¶¨Öµ¡£
+     * å–å¾—æŒ‡å®šå€¼ã€‚
      */
     public Object get(String key) {
         Object value = thisContext.get(key);
@@ -55,7 +55,7 @@ public abstract class MessageContext implements ExpressionContext {
     }
 
     /**
-     * ¼ÙÈçÊÇÊı×é£¬×ª»»³É¸üÒ×²Ù×÷µÄ<code>List</code>¡£
+     * å‡å¦‚æ˜¯æ•°ç»„ï¼Œè½¬æ¢æˆæ›´æ˜“æ“ä½œçš„<code>List</code>ã€‚
      */
     protected Object decorate(Object value) {
         if (value != null && value.getClass().isArray()) {
@@ -73,7 +73,7 @@ public abstract class MessageContext implements ExpressionContext {
     }
 
     /**
-     * Ìí¼ÓÒ»¸öÖµ¡£
+     * æ·»åŠ ä¸€ä¸ªå€¼ã€‚
      */
     public void put(String key, Object value) {
         if (value == null) {
@@ -90,7 +90,7 @@ public abstract class MessageContext implements ExpressionContext {
     }
 
     /**
-     * ÅúÁ¿Ìí¼ÓÖµ¡£
+     * æ‰¹é‡æ·»åŠ å€¼ã€‚
      */
     public void putAll(Map<?, ?> values) {
         if (values != null) {
@@ -99,7 +99,7 @@ public abstract class MessageContext implements ExpressionContext {
     }
 
     /**
-     * ´ÓÁíÒ»¸ö<code>MessageContext</code>ÖĞ£¬¸´ÖÆËùÓĞ±¾µØcontext£¬µ«²»¸²¸Ç¡£
+     * ä»å¦ä¸€ä¸ª<code>MessageContext</code>ä¸­ï¼Œå¤åˆ¶æ‰€æœ‰æœ¬åœ°contextï¼Œä½†ä¸è¦†ç›–ã€‚
      */
     public void copyLocalContext(MessageContext src) {
         for (Map.Entry<Object, Object> entry : src.thisContext.entrySet()) {
@@ -112,12 +112,12 @@ public abstract class MessageContext implements ExpressionContext {
     }
 
     /**
-     * È¡µÃÖ¸¶¨Öµ¡£
+     * å–å¾—æŒ‡å®šå€¼ã€‚
      */
     protected abstract Object internalGet(String key);
 
     /**
-     * È¡µÃparent context¡£
+     * å–å¾—parent contextã€‚
      */
     public abstract ExpressionContext getParentContext();
 

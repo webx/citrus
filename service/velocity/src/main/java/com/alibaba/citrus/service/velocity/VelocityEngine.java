@@ -27,28 +27,28 @@ import com.alibaba.citrus.service.template.TemplateEngine;
 import com.alibaba.citrus.service.template.TemplateException;
 
 /**
- * VelocityÄ£°åÒıÇæ¡£
+ * Velocityæ¨¡æ¿å¼•æ“ã€‚
  * <p>
- * VelocityÄ£°åÒıÇæ¼È¿ÉÒÔ²åÈëµ½<code>TemplateService</code>ÖĞ£¬Ò²¿ÉÒÔµ¥¶ÀÊ¹ÓÃ¡£ËüÌá¹©ÁËÒ»×évelocityÔ­ÉúµÄ·½·¨
- * <code>mergeTemplate()</code>ÒÔ¼°×÷Îª<code>TemplateService</code>²å¼şµÄ·½·¨¡£
+ * Velocityæ¨¡æ¿å¼•æ“æ—¢å¯ä»¥æ’å…¥åˆ°<code>TemplateService</code>ä¸­ï¼Œä¹Ÿå¯ä»¥å•ç‹¬ä½¿ç”¨ã€‚å®ƒæä¾›äº†ä¸€ç»„velocityåŸç”Ÿçš„æ–¹æ³•
+ * <code>mergeTemplate()</code>ä»¥åŠä½œä¸º<code>TemplateService</code>æ’ä»¶çš„æ–¹æ³•ã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface VelocityEngine extends TemplateEngine {
     /**
-     * äÖÈ¾Ä£°å£¬²¢ÒÔ×Ö·û´®µÄĞÎÊ½È¡µÃäÖÈ¾µÄ½á¹û¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶ä»¥å­—ç¬¦ä¸²çš„å½¢å¼å–å¾—æ¸²æŸ“çš„ç»“æœã€‚
      */
     String mergeTemplate(String template, Context context, String inputEncoding) throws TemplateException, IOException;
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢½«äÖÈ¾µÄ½á¹ûËÍµ½×Ö½ÚÊä³öÁ÷ÖĞ¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶å°†æ¸²æŸ“çš„ç»“æœé€åˆ°å­—èŠ‚è¾“å‡ºæµä¸­ã€‚
      */
     void mergeTemplate(String template, Context context, OutputStream ostream, String inputEncoding,
                        String outputEncoding) throws TemplateException, IOException;
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢½«äÖÈ¾µÄ½á¹ûËÍµ½×Ö·ûÊä³öÁ÷ÖĞ¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶å°†æ¸²æŸ“çš„ç»“æœé€åˆ°å­—ç¬¦è¾“å‡ºæµä¸­ã€‚
      */
     void mergeTemplate(String template, Context context, Writer writer, String inputEncoding) throws TemplateException,
             IOException;

@@ -112,7 +112,7 @@ public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
         public AbstractExplorerVisitor(RequestHandlerContext context) {
             super(context);
 
-            // È¡µÃµ±Ç°µÄcomponentĞÅÏ¢
+            // å–å¾—å½“å‰çš„componentä¿¡æ¯
             String contextName = trimToNull(context.getRequest().getParameter("context"));
             WebxComponent component = getWebxComponents().getComponent(contextName);
 
@@ -124,13 +124,13 @@ public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
 
             currentComponent = getWebxComponents().getComponent(currentContextName);
 
-            // È¡µÃµ±Ç°µÄ¹¦ÄÜ
+            // å–å¾—å½“å‰çš„åŠŸèƒ½
             this.currentFunctionName = getFunctionName(context.getRequest().getParameter("fn"));
 
-            // È¡µÃcontextĞÅÏ¢
+            // å–å¾—contextä¿¡æ¯
             this.appcontext = (AbstractApplicationContext) currentComponent.getApplicationContext();
 
-            // È¡µÃconfig locations
+            // å–å¾—config locations
             String[] locations;
 
             try {

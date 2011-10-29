@@ -20,66 +20,66 @@ package com.alibaba.citrus.service.form.configuration;
 import java.util.List;
 
 /**
- * ´ú±íÒ»¸öform groupµÄ¶¨ÒåĞÅÏ¢¡£
+ * ä»£è¡¨ä¸€ä¸ªform groupçš„å®šä¹‰ä¿¡æ¯ã€‚
  * <p>
- * Form group¶¨ÒåÊÇ²»¿É¸ü¸ÄµÄ¡£
+ * Form groupå®šä¹‰æ˜¯ä¸å¯æ›´æ”¹çš„ã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface GroupConfig {
     /**
-     * È¡µÃgroupËùÊôµÄform config¡£
+     * å–å¾—groupæ‰€å±çš„form configã€‚
      */
     FormConfig getFormConfig();
 
     /**
-     * È¡µÃgroup name¡£
+     * å–å¾—group nameã€‚
      */
     String getName();
 
     /**
-     * È¡µÃparent group¡£
+     * å–å¾—parent groupã€‚
      */
     String getParentGroup();
 
     /**
-     * È¡µÃgroup key¡£
+     * å–å¾—group keyã€‚
      */
     String getKey();
 
     /**
-     * È¡µÃÄ¬ÈÏµÄtrimmingÑ¡Ïî¡£
+     * å–å¾—é»˜è®¤çš„trimmingé€‰é¡¹ã€‚
      */
     boolean isTrimmingByDefault();
 
     /**
-     * GroupÊÇ·ñ±ØĞë´ÓpostÇëÇóÖĞÈ¡µÃÊı¾İ¡£
+     * Groupæ˜¯å¦å¿…é¡»ä»postè¯·æ±‚ä¸­å–å¾—æ•°æ®ã€‚
      */
     boolean isPostOnly();
 
     /**
-     * È¡µÃËùÓĞfield configµÄÁĞ±í¡£
+     * å–å¾—æ‰€æœ‰field configçš„åˆ—è¡¨ã€‚
      */
     List<FieldConfig> getFieldConfigList();
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄfield config¡£Ãû³Æ´óĞ¡Ğ´²»Ãô¸Ğ¡£ Èç¹ûÎ´ÕÒµ½£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®šåç§°çš„field configã€‚åç§°å¤§å°å†™ä¸æ•æ„Ÿã€‚ å¦‚æœæœªæ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     FieldConfig getFieldConfig(String fieldName);
 
     /**
-     * È¡µÃÖ¸¶¨key¶ÔÓ¦µÄfield config¡£Èç¹ûÎ´ÕÒµ½£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æŒ‡å®škeyå¯¹åº”çš„field configã€‚å¦‚æœæœªæ‰¾åˆ°ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     FieldConfig getFieldConfigByKey(String fieldKey);
 
     /**
-     * È¡µÃËùÓĞµÄimports¡£
+     * å–å¾—æ‰€æœ‰çš„importsã€‚
      */
     List<Import> getImports();
 
     /**
-     * ´ú±íimportÆäËügroupÖĞµÄfieldµÄĞÅÏ¢¡£
+     * ä»£è¡¨importå…¶å®ƒgroupä¸­çš„fieldçš„ä¿¡æ¯ã€‚
      */
     interface Import {
         String getGroupName();

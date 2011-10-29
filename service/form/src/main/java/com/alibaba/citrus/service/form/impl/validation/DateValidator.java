@@ -28,9 +28,9 @@ import com.alibaba.citrus.service.form.support.AbstractOptionalValidator;
 import com.alibaba.citrus.service.form.support.AbstractValidatorDefinitionParser;
 
 /**
- * ¼ì²éÊäÈëÖµµÄÈÕÆÚ¸ñÊ½ÊÇ·ñ·ûºÏÖ¸¶¨µÄ¸ñÊ½£¬ÊÇ·ñÔÚÉè¶¨µÄÇøÓòÄÚ¡£
- * Èç£ºÖ¸¶¨ÈÕÆÚ¸ñÊ½DateFromatÎª"yyyy-MM-dd"£¬Èç¹ûÊäÈëµÄÈÕÆÚÖµ¸ñÊ½²»·ûºÏ£¬Ôò²»ºÏ·¨£»
- * ÈôÍ¬Ê±Ö¸¶¨ÁË×îĞ¡ÖµÎª"2000-12-31"£¬×î´óÖµÎª"2005-12-31"£¬¶øÊäÈëµÄÈÕÆÚ²»ÔÚ´ËÇø¼ä ÄÚ£¬Ôò²»ºÏ·¨£»Ò²¿ÉÒÔÖ»Ö¸¶¨ÆäÖĞµÄÄ³Ò»¸ö¡£
+ * æ£€æŸ¥è¾“å…¥å€¼çš„æ—¥æœŸæ ¼å¼æ˜¯å¦ç¬¦åˆæŒ‡å®šçš„æ ¼å¼ï¼Œæ˜¯å¦åœ¨è®¾å®šçš„åŒºåŸŸå†…ã€‚
+ * å¦‚ï¼šæŒ‡å®šæ—¥æœŸæ ¼å¼DateFromatä¸º"yyyy-MM-dd"ï¼Œå¦‚æœè¾“å…¥çš„æ—¥æœŸå€¼æ ¼å¼ä¸ç¬¦åˆï¼Œåˆ™ä¸åˆæ³•ï¼›
+ * è‹¥åŒæ—¶æŒ‡å®šäº†æœ€å°å€¼ä¸º"2000-12-31"ï¼Œæœ€å¤§å€¼ä¸º"2005-12-31"ï¼Œè€Œè¾“å…¥çš„æ—¥æœŸä¸åœ¨æ­¤åŒºé—´ å†…ï¼Œåˆ™ä¸åˆæ³•ï¼›ä¹Ÿå¯ä»¥åªæŒ‡å®šå…¶ä¸­çš„æŸä¸€ä¸ªã€‚
  * 
  * @author Michael Zhou
  */
@@ -43,42 +43,42 @@ public class DateValidator extends AbstractOptionalValidator {
     private String maxDateStr;
 
     /**
-     * È¡ÈÕÆÚ¸ñÊ½£¬²Î¼û<code>SimpleDateFormat</code>µÄ×¢ÊÍ¡£
+     * å–æ—¥æœŸæ ¼å¼ï¼Œå‚è§<code>SimpleDateFormat</code>çš„æ³¨é‡Šã€‚
      */
     public String getFormat() {
         return dateFormatStr;
     }
 
     /**
-     * ÉèÖÃÈÕÆÚ¸ñÊ½£¬²Î¼û<code>SimpleDateFormat</code>µÄ×¢ÊÍ¡£
+     * è®¾ç½®æ—¥æœŸæ ¼å¼ï¼Œå‚è§<code>SimpleDateFormat</code>çš„æ³¨é‡Šã€‚
      */
     public void setFormat(String formatStr) {
         this.dateFormatStr = trimToNull(formatStr);
     }
 
     /**
-     * È¡×îĞ¡ÈÕÆÚ£¬×Ö·û´®ĞÎÊ½£¬¸ñÊ½·ûºÏsetDateFormat()ÉèÖÃ¡£
+     * å–æœ€å°æ—¥æœŸï¼Œå­—ç¬¦ä¸²å½¢å¼ï¼Œæ ¼å¼ç¬¦åˆsetDateFormat()è®¾ç½®ã€‚
      */
     public String getMinDate() {
         return minDateStr;
     }
 
     /**
-     * ÉèÖÃ×îĞ¡ÈÕÆÚ£¬×Ö·û´®ĞÎÊ½£¬¸ñÊ½·ûºÏsetDateFormat()ÉèÖÃ¡£
+     * è®¾ç½®æœ€å°æ—¥æœŸï¼Œå­—ç¬¦ä¸²å½¢å¼ï¼Œæ ¼å¼ç¬¦åˆsetDateFormat()è®¾ç½®ã€‚
      */
     public void setMinDate(String minDate) {
         this.minDateStr = trimToNull(minDate);
     }
 
     /**
-     * È¡×îĞ¡ÈÕÆÚ£¬×Ö·û´®ĞÎÊ½£¬¸ñÊ½·ûºÏsetDateFormat()ÉèÖÃ¡£
+     * å–æœ€å°æ—¥æœŸï¼Œå­—ç¬¦ä¸²å½¢å¼ï¼Œæ ¼å¼ç¬¦åˆsetDateFormat()è®¾ç½®ã€‚
      */
     public String getMaxDate() {
         return maxDateStr;
     }
 
     /**
-     * ÉèÖÃ×î´óÈÕÆÚ£¬×Ö·û´®ĞÎÊ½£¬¸ñÊ½·ûºÏsetDateFormat()ÉèÖÃ¡£
+     * è®¾ç½®æœ€å¤§æ—¥æœŸï¼Œå­—ç¬¦ä¸²å½¢å¼ï¼Œæ ¼å¼ç¬¦åˆsetDateFormat()è®¾ç½®ã€‚
      */
     public void setMaxDate(String maxDate) {
         this.maxDateStr = trimToNull(maxDate);
@@ -112,9 +112,9 @@ public class DateValidator extends AbstractOptionalValidator {
     }
 
     /**
-     * Ğ£ÑéÊäÈëÈÕÆÚÖµÊÇ·ñ·ûºÏÖ¸¶¨µÄ¸ñÊ½£¬ÊÇ·ñÔÚÉè¶¨µÄÇøÓòÄÚ¡£
-     * Èç£ºÖ¸¶¨ÈÕÆÚ¸ñÊ½DateFromatÎª"yyyy-MM-dd"£¬Èç¹ûÊäÈëµÄÈÕÆÚÖµ¸ñÊ½²»·ûºÏ£¬Ôò²»ºÏ·¨£»
-     * ÈôÍ¬Ê±Ö¸¶¨ÁË×îĞ¡ÖµÎª"2000-12-31"£¬×î´óÖµÎª"2005-12-31"£¬¶øÊäÈëµÄÈÕÆÚ²»ÔÚ´ËÇø¼ä ÄÚ£¬Ôò²»ºÏ·¨£»Ò²¿ÉÒÔÖ»Ö¸¶¨ÆäÖĞµÄÄ³Ò»¸ö
+     * æ ¡éªŒè¾“å…¥æ—¥æœŸå€¼æ˜¯å¦ç¬¦åˆæŒ‡å®šçš„æ ¼å¼ï¼Œæ˜¯å¦åœ¨è®¾å®šçš„åŒºåŸŸå†…ã€‚
+     * å¦‚ï¼šæŒ‡å®šæ—¥æœŸæ ¼å¼DateFromatä¸º"yyyy-MM-dd"ï¼Œå¦‚æœè¾“å…¥çš„æ—¥æœŸå€¼æ ¼å¼ä¸ç¬¦åˆï¼Œåˆ™ä¸åˆæ³•ï¼›
+     * è‹¥åŒæ—¶æŒ‡å®šäº†æœ€å°å€¼ä¸º"2000-12-31"ï¼Œæœ€å¤§å€¼ä¸º"2005-12-31"ï¼Œè€Œè¾“å…¥çš„æ—¥æœŸä¸åœ¨æ­¤åŒºé—´ å†…ï¼Œåˆ™ä¸åˆæ³•ï¼›ä¹Ÿå¯ä»¥åªæŒ‡å®šå…¶ä¸­çš„æŸä¸€ä¸ª
      */
     @Override
     protected boolean validate(Context context, String value) {

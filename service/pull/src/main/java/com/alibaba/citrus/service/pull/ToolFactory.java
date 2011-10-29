@@ -18,35 +18,35 @@
 package com.alibaba.citrus.service.pull;
 
 /**
- * ´´½¨pull toolµÄ¹¤³§¡£
+ * åˆ›å»ºpull toolçš„å·¥å‚ã€‚
  * <p>
- * ¹¤³§±¾Éí±ØĞëÊÇsingleton£¬ÒÔÈ·±£ĞÔÄÜ¡£
+ * å·¥å‚æœ¬èº«å¿…é¡»æ˜¯singletonï¼Œä»¥ç¡®ä¿æ€§èƒ½ã€‚
  * </p>
  * <ul>
- * <li>µ±<code>isSingleton() == true</code> Ê±£¬<code>createTool()</code>
- * ·½·¨»áÔÚÏµÍ³³õÊ¼»¯Ê±±»µ÷ÓÃ£¨Pre-pulling£©¡£</li>
- * <li>µ±<code>isSingleton() == false</code> Ê±£¬Ã¿Ò»´ÎÇëÇó£¬<code>creteTool()</code>
- * ·½·¨ÖÁ¶à±»µ÷ÓÃÒ»´Î¡£</li>
+ * <li>å½“<code>isSingleton() == true</code> æ—¶ï¼Œ<code>createTool()</code>
+ * æ–¹æ³•ä¼šåœ¨ç³»ç»Ÿåˆå§‹åŒ–æ—¶è¢«è°ƒç”¨ï¼ˆPre-pullingï¼‰ã€‚</li>
+ * <li>å½“<code>isSingleton() == false</code> æ—¶ï¼Œæ¯ä¸€æ¬¡è¯·æ±‚ï¼Œ<code>creteTool()</code>
+ * æ–¹æ³•è‡³å¤šè¢«è°ƒç”¨ä¸€æ¬¡ã€‚</li>
  * </ul>
  * 
  * @author Michael Zhou
  */
 public interface ToolFactory {
     /**
-     * FactoryËù´´½¨µÄtoolÊÇ²»ÊÇsingleton£¿
+     * Factoryæ‰€åˆ›å»ºçš„toolæ˜¯ä¸æ˜¯singletonï¼Ÿ
      */
     boolean isSingleton();
 
     /**
-     * È¡µÃtoolÊµÀı¡£
+     * å–å¾—toolå®ä¾‹ã€‚
      * <p>
-     * ¶ÔÓÚ·ÇsingletonÀàĞÍ£¬¸Ã·½·¨ÔÚÃ¿´ÎÇëÇóÊ±£¬ÖÁ¶à±»µ÷ÓÃÒ»´Î¡£
+     * å¯¹äºésingletonç±»å‹ï¼Œè¯¥æ–¹æ³•åœ¨æ¯æ¬¡è¯·æ±‚æ—¶ï¼Œè‡³å¤šè¢«è°ƒç”¨ä¸€æ¬¡ã€‚
      * </p>
      * <p>
-     * Èç·µ»Ø<code>null</code>£¬Ôò±íÊ¾¸Ãtool²»¿ÉÓÃ¡£
+     * å¦‚è¿”å›<code>null</code>ï¼Œåˆ™è¡¨ç¤ºè¯¥toolä¸å¯ç”¨ã€‚
      * </p>
      * <p>
-     * ×¢Òâ£º¶ÔÓÚ·ÇsingletonÀàĞÍ£¬<strong>±ØĞë</strong>Ã¿´Î·µ»Ø²»Í¬µÄ¶ÔÏó¡£
+     * æ³¨æ„ï¼šå¯¹äºésingletonç±»å‹ï¼Œ<strong>å¿…é¡»</strong>æ¯æ¬¡è¿”å›ä¸åŒçš„å¯¹è±¡ã€‚
      * </p>
      */
     Object createTool() throws Exception;

@@ -34,10 +34,10 @@ import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 /**
- * Í¨¹ı<code>Serializer</code>Ìá¹©µÄĞòÁĞ»¯»úÖÆÀ´±àÂë¶ÔÏó£¬ÒÔ¼°½âÂë×Ö·û´®¡£
+ * é€šè¿‡<code>Serializer</code>æä¾›çš„åºåˆ—åŒ–æœºåˆ¶æ¥ç¼–ç å¯¹è±¡ï¼Œä»¥åŠè§£ç å­—ç¬¦ä¸²ã€‚
  * <p>
- * ¿ÉÉèÖÃ<code>Serializer</code>ºÍ<code>Encrypter</code>£¬ <code>Serializer</code>
- * µÄÄ¬ÈÏÖµÎª<code>HessianSerializer</code>¡£
+ * å¯è®¾ç½®<code>Serializer</code>å’Œ<code>Encrypter</code>ï¼Œ <code>Serializer</code>
+ * çš„é»˜è®¤å€¼ä¸º<code>HessianSerializer</code>ã€‚
  * </p>
  * 
  * @author Michael Zhou

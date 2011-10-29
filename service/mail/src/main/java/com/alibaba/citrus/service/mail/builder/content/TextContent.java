@@ -30,7 +30,7 @@ import com.alibaba.citrus.service.mail.util.MailUtil;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * »ùÓÚÎÄ±¾µÄÓÊ¼şÄÚÈİ£¬ÀıÈç´¿ÎÄ±¾ºÍHTML¡£
+ * åŸºäºæ–‡æœ¬çš„é‚®ä»¶å†…å®¹ï¼Œä¾‹å¦‚çº¯æ–‡æœ¬å’ŒHTMLã€‚
  * 
  * @author Michael Zhou
  */
@@ -39,20 +39,20 @@ public class TextContent extends AbstractContent {
     private String contentType;
 
     /**
-     * ´´½¨Ò»¸ö<code>TextContent</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>TextContent</code>ã€‚
      */
     public TextContent() {
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>TextContent</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>TextContent</code>ã€‚
      */
     public TextContent(String text) {
         setText(text);
     }
 
     /**
-     * ´´½¨Ò»¸ö<code>TextContent</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>TextContent</code>ã€‚
      */
     public TextContent(String text, String contentType) {
         setText(text);
@@ -60,35 +60,35 @@ public class TextContent extends AbstractContent {
     }
 
     /**
-     * È¡µÃÎÄ±¾µÄÄÚÈİ¡£
+     * å–å¾—æ–‡æœ¬çš„å†…å®¹ã€‚
      */
     public String getText() {
         return defaultIfNull(text, EMPTY_STRING);
     }
 
     /**
-     * ÉèÖÃÎÄ±¾µÄÄÚÈİ¡£
+     * è®¾ç½®æ–‡æœ¬çš„å†…å®¹ã€‚
      */
     public void setText(String text) {
         this.text = text;
     }
 
     /**
-     * È¡µÃÎÄ±¾µÄcontent type¡£
+     * å–å¾—æ–‡æœ¬çš„content typeã€‚
      */
     public String getContentType() {
         return defaultIfNull(this.contentType, CONTENT_TYPE_TEXT_PLAIN);
     }
 
     /**
-     * ÉèÖÃÎÄ±¾µÄcontent type¡£
+     * è®¾ç½®æ–‡æœ¬çš„content typeã€‚
      */
     public void setContentType(String contentType) {
         this.contentType = trimToNull(contentType);
     }
 
     /**
-     * äÖÈ¾ÓÊ¼şÄÚÈİ¡£
+     * æ¸²æŸ“é‚®ä»¶å†…å®¹ã€‚
      */
     public void render(Part mailPart) throws MessagingException {
         String text = getText();
@@ -100,7 +100,7 @@ public class TextContent extends AbstractContent {
     }
 
     /**
-     * ´´½¨Ò»¸öÍ¬ÀàĞÍµÄcontent¡£
+     * åˆ›å»ºä¸€ä¸ªåŒç±»å‹çš„contentã€‚
      */
     @Override
     protected TextContent newInstance() {

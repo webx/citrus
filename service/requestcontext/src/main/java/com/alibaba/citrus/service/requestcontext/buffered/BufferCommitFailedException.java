@@ -20,7 +20,7 @@ package com.alibaba.citrus.service.requestcontext.buffered;
 import com.alibaba.citrus.service.requestcontext.RequestContextException;
 
 /**
- * ´ú±íÒ»¸öbuffer commitÊ§°ÜµÄÒì³£¡£
+ * ä»£è¡¨ä¸€ä¸ªbuffer commitå¤±è´¥çš„å¼‚å¸¸ã€‚
  * 
  * @author Michael Zhou
  */
@@ -28,35 +28,35 @@ public class BufferCommitFailedException extends RequestContextException {
     private static final long serialVersionUID = 4884236978077840652L;
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      */
     public BufferCommitFailedException() {
         super();
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param message Òì³£ĞÅÏ¢
+     * @param message å¼‚å¸¸ä¿¡æ¯
      */
     public BufferCommitFailedException(String message) {
         super(message);
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param message Òì³£ĞÅÏ¢
-     * @param cause Òì³£Ô­Òò
+     * @param message å¼‚å¸¸ä¿¡æ¯
+     * @param cause å¼‚å¸¸åŸå› 
      */
     public BufferCommitFailedException(String message, Throwable cause) {
         super(message, cause);
     }
 
     /**
-     * ´´½¨Ò»¸öÒì³£¡£
+     * åˆ›å»ºä¸€ä¸ªå¼‚å¸¸ã€‚
      * 
-     * @param cause Òì³£Ô­Òò
+     * @param cause å¼‚å¸¸åŸå› 
      */
     public BufferCommitFailedException(Throwable cause) {
         super(cause);

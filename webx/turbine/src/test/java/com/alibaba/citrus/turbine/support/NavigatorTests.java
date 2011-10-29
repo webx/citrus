@@ -115,7 +115,7 @@ public class NavigatorTests extends AbstractWebxTests {
     public void redirect_then_checkRedirected() {
         rundata.redirectTo("link2").withTarget("hello");
 
-        // isRedirected会触发commit redirect uri
+        // isRedirected浼氳Е鍙慶ommit redirect uri
         assertTrue(rundata.isRedirected());
         assertEquals("http://www.taobao.com/hello", getRedirectLocationRaw());
     }
@@ -125,7 +125,7 @@ public class NavigatorTests extends AbstractWebxTests {
         rundata.redirectTo("link1").withParameter("aaa", "111").withParameter("bbb", "222", "333")
                 .withParameter("ccc", (String) null).withParameter("ddd", (String[]) null);
 
-        // getRedirectLocation会触发commit redirect uri
+        // getRedirectLocation浼氳Е鍙慶ommit redirect uri
         assertEquals("http://www.taobao.com/?aaa=111&bbb=222&bbb=333&ccc=&ddd=", rundata.getRedirectLocation());
     }
 
@@ -134,7 +134,7 @@ public class NavigatorTests extends AbstractWebxTests {
         rundata.redirectTo("link1").withParameter("aaa", "111").withParameter("bbb", "222", "333")
                 .withParameter("ccc", (String) null).withParameter("ddd", (String[]) null).end();
 
-        // getRedirectLocation会触发commit redirect uri
+        // getRedirectLocation浼氳Е鍙慶ommit redirect uri
         assertEquals("http://www.taobao.com/?aaa=111&bbb=222&bbb=333&ccc=&ddd=", getRedirectLocationRaw());
     }
 

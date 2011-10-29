@@ -18,7 +18,7 @@
 package freemarker.log;
 
 /**
- * ÈÃFreeMarkerÊ¹ÓÃSLF4jÀ´Êä³öÈÕÖ¾¡£
+ * è®©FreeMarkerä½¿ç”¨SLF4jæ¥è¾“å‡ºæ—¥å¿—ã€‚
  * 
  * @author Michael Zhou
  */

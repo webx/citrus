@@ -58,7 +58,7 @@ public class FormToolTests extends AbstractFormServiceTests {
     }
 
     private void submitForm() throws Exception {
-        invokePost(new Object[][] { { "sumbit", "Ìá½»" }, //
+        invokePost(new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "aa" }, // group1.default.field1
                 { "_fm.g.1.f", "bb" }, // group1.1.field1
                 { "_fm.gr._0.f", "cc" }, // group2.default.field1
@@ -143,19 +143,19 @@ public class FormToolTests extends AbstractFormServiceTests {
 
     @Test
     public void form_isValid() throws Exception {
-        // ³õÊ¼×´Ì¬£ºtrue
+        // åˆå§‹çŠ¶æ€ï¼štrue
         assertEquals(true, tool.isValid());
 
-        // ÑéÖ¤Ê§°Ü£ºfalse
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        // éªŒè¯å¤±è´¥ï¼šfalse
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.field1
         };
 
         invokePost(args);
         assertEquals(false, tool.isValid());
 
-        // ÑéÖ¤³É¹¦£ºtrue
-        args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        // éªŒè¯æˆåŠŸï¼štrue
+        args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.field1
                 { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
@@ -256,7 +256,7 @@ public class FormToolTests extends AbstractFormServiceTests {
         submitForm();
 
         group = tool.get("group1").getDefaultInstance();
-        group.mapTo(obj); // ¶Ôvalidated groupÎŞĞ§¹û
+        group.mapTo(obj); // å¯¹validated groupæ— æ•ˆæœ
 
         assertEquals("aa", group.get("field1").getValue());
         assertEquals("", group.get("field2").getValue());
@@ -268,7 +268,7 @@ public class FormToolTests extends AbstractFormServiceTests {
         FieldHelper field = group.get("field1");
         setFieldValues(field, new String[] { "<&\">", "hello" });
 
-        assertEquals("ÎÒµÄ×Ö¶Î1", field.getDisplayName());
+        assertEquals("æˆ‘çš„å­—æ®µ1", field.getDisplayName());
         assertEquals("_fm.g._0.f", field.getKey());
         assertEquals("_fm.g._0.f.~html", field.getHtmlKey());
         assertEquals("_fm.g._0.f.absent", field.getAbsentKey());

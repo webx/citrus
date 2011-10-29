@@ -20,7 +20,7 @@ package com.alibaba.citrus.service.requestcontext.session.encoder;
 import com.alibaba.citrus.service.requestcontext.session.SessionFrameworkException;
 
 /**
- * ´ú±í±àÂë¡¢½âÂëÊ±·¢ÉúµÄ´íÎó¡£
+ * ä»£è¡¨ç¼–ç ã€è§£ç æ—¶å‘ç”Ÿçš„é”™è¯¯ã€‚
  * 
  * @author Michael Zhou
  */

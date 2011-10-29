@@ -38,7 +38,7 @@ import com.alibaba.citrus.service.template.TemplateNotFoundException;
 import com.alibaba.citrus.service.template.TemplateService;
 
 /**
- * ÊµÏÖ<code>TemplateService</code>¡£
+ * å®ç°<code>TemplateService</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -92,7 +92,7 @@ public class TemplateServiceImpl extends AbstractService<TemplateService> implem
     }
 
     /**
-     * ³õÊ¼»¯service¡£
+     * åˆå§‹åŒ–serviceã€‚
      */
     @Override
     protected void init() {
@@ -105,7 +105,7 @@ public class TemplateServiceImpl extends AbstractService<TemplateService> implem
         }
 
         if (cacheEnabled == null) {
-            cacheEnabled = productionMode; // Èç¹ûÎ´Ö¸¶¨cacheEnabled£¬ÔòÄ¬ÈÏµ±productionModeÊ±£¬´ò¿ªcache¡£
+            cacheEnabled = productionMode; // å¦‚æœæœªæŒ‡å®šcacheEnabledï¼Œåˆ™é»˜è®¤å½“productionModeæ—¶ï¼Œæ‰“å¼€cacheã€‚
         }
 
         if (cacheEnabled) {
@@ -115,7 +115,7 @@ public class TemplateServiceImpl extends AbstractService<TemplateService> implem
         Set<String> remappedNames = createHashSet();
         engineMappings = createTreeMap();
 
-        // Éú³ÉengineMappings
+        // ç”ŸæˆengineMappings
         if (engineNameMappings != null) {
             for (Map.Entry<String, String> entry : engineNameMappings.entrySet()) {
                 String ext = entry.getKey();
@@ -134,7 +134,7 @@ public class TemplateServiceImpl extends AbstractService<TemplateService> implem
             engineNameMappings = null;
         }
 
-        // ¶ÔÓÚÃ»ÓĞÖ¸¶¨mappingµÄengine£¬È¡µÃÆäÄ¬ÈÏºó×º
+        // å¯¹äºæ²¡æœ‰æŒ‡å®šmappingçš„engineï¼Œå–å¾—å…¶é»˜è®¤åç¼€
         for (Map.Entry<String, TemplateEngine> entry : engines.entrySet()) {
             String engineName = entry.getKey();
             TemplateEngine engine = entry.getValue();
@@ -175,14 +175,14 @@ public class TemplateServiceImpl extends AbstractService<TemplateService> implem
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ä£°åÃûºó×º¶ÔÓ¦µÄengine¡£
+     * å–å¾—æŒ‡å®šæ¨¡æ¿ååç¼€å¯¹åº”çš„engineã€‚
      */
     public TemplateEngine getEngineOfName(String engineName) {
         return engines.get(engineName);
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ä£°åÃûºó×º¶ÔÓ¦µÄengine¡£
+     * å–å¾—æŒ‡å®šæ¨¡æ¿ååç¼€å¯¹åº”çš„engineã€‚
      */
     public TemplateEngine getTemplateEngine(String extension) {
         if (extension == null) {
@@ -193,14 +193,14 @@ public class TemplateServiceImpl extends AbstractService<TemplateService> implem
     }
 
     /**
-     * È¡µÃËùÓĞ±»µÇ¼ÇµÄÎÄ¼şÃûºó×º¡£
+     * å–å¾—æ‰€æœ‰è¢«ç™»è®°çš„æ–‡ä»¶ååç¼€ã€‚
      */
     public String[] getSupportedExtensions() {
         return engineMappings.keySet().toArray(new String[engineMappings.size()]);
     }
 
     /**
-     * ÅĞ¶ÏÄ£°åÊÇ·ñ´æÔÚ¡£
+     * åˆ¤æ–­æ¨¡æ¿æ˜¯å¦å­˜åœ¨ã€‚
      */
     public boolean exists(String templateName) {
         try {
@@ -212,7 +212,7 @@ public class TemplateServiceImpl extends AbstractService<TemplateService> implem
     }
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢ÒÔ×Ö·û´®µÄĞÎÊ½È¡µÃäÖÈ¾µÄ½á¹û¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶ä»¥å­—ç¬¦ä¸²çš„å½¢å¼å–å¾—æ¸²æŸ“çš„ç»“æœã€‚
      */
     public String getText(String templateName, TemplateContext context) throws TemplateException, IOException {
         TemplateMatchResult result = findTemplate(templateName);
@@ -222,7 +222,7 @@ public class TemplateServiceImpl extends AbstractService<TemplateService> implem
     }
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢½«äÖÈ¾µÄ½á¹ûËÍµ½×Ö½ÚÊä³öÁ÷ÖĞ¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶å°†æ¸²æŸ“çš„ç»“æœé€åˆ°å­—èŠ‚è¾“å‡ºæµä¸­ã€‚
      */
     public void writeTo(String templateName, TemplateContext context, OutputStream ostream) throws TemplateException,
             IOException {
@@ -233,7 +233,7 @@ public class TemplateServiceImpl extends AbstractService<TemplateService> implem
     }
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢½«äÖÈ¾µÄ½á¹ûËÍµ½×Ö·ûÊä³öÁ÷ÖĞ¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶å°†æ¸²æŸ“çš„ç»“æœé€åˆ°å­—ç¬¦è¾“å‡ºæµä¸­ã€‚
      */
     public void writeTo(String templateName, TemplateContext context, Writer writer) throws TemplateException,
             IOException {
@@ -244,7 +244,7 @@ public class TemplateServiceImpl extends AbstractService<TemplateService> implem
     }
 
     /**
-     * ²éÕÒÖ¸¶¨Ãû³ÆµÄÄ£°å¡£
+     * æŸ¥æ‰¾æŒ‡å®šåç§°çš„æ¨¡æ¿ã€‚
      */
     TemplateMatchResult findTemplate(String templateName) {
         assertInitialized();
@@ -267,7 +267,7 @@ public class TemplateServiceImpl extends AbstractService<TemplateService> implem
             public boolean findTemplate() {
                 boolean found = false;
 
-                // ±£´æ×´Ì¬£¬¼ÙÈçÃ»ÓĞÆ¥Åä£¬Ôò»Ö¸´×´Ì¬
+                // ä¿å­˜çŠ¶æ€ï¼Œå‡å¦‚æ²¡æœ‰åŒ¹é…ï¼Œåˆ™æ¢å¤çŠ¶æ€
                 String savedTemplateNameWithoutExtension = getTemplateNameWithoutExtension();
                 String savedExtension = getExtension();
                 TemplateEngine savedEngine = getEngine();
@@ -281,7 +281,7 @@ public class TemplateServiceImpl extends AbstractService<TemplateService> implem
                     }
                 } finally {
                     if (!found) {
-                        // »Ö¸´×´Ì¬£¬ÒÔ±ã³¢ÊÔÆäËüÆ½¼¶strategies
+                        // æ¢å¤çŠ¶æ€ï¼Œä»¥ä¾¿å°è¯•å…¶å®ƒå¹³çº§strategies
                         setTemplateNameWithoutExtension(savedTemplateNameWithoutExtension);
                         setExtension(savedExtension);
                         setEngine(savedEngine);
@@ -308,7 +308,7 @@ public class TemplateServiceImpl extends AbstractService<TemplateService> implem
     }
 
     /**
-     * ²éÕÒÄ£°åµÄ×îÖÕstrategy½áµã¡£
+     * æŸ¥æ‰¾æ¨¡æ¿çš„æœ€ç»ˆstrategyç»“ç‚¹ã€‚
      */
     private boolean findTemplateInTemplateEngine(TemplateMatcher matcher) {
         TemplateEngine engine = getTemplateEngine(matcher.getExtension());

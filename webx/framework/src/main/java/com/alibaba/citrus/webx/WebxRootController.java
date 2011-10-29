@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.BeansException;
 
 /**
- * ÓÃÀ´´¦ÀíÇëÇóµÄ¿ØÖÆÆ÷¡£
+ * ç”¨æ¥å¤„ç†è¯·æ±‚çš„æ§åˆ¶å™¨ã€‚
  * 
  * @author Michael Zhou
  */

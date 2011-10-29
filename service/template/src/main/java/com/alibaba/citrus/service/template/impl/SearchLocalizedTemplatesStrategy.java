@@ -25,9 +25,9 @@ import java.util.Locale;
 import com.alibaba.citrus.util.i18n.LocaleUtil;
 
 /**
- * ���ݵ�ǰlocale��������ƥ��ı��ػ�ģ�塣
+ * 根据当前locale，查找最匹配的本地化模板。
  * <p>
- * ���磺����ģ��<code>test.vm</code>�����統ǰlocaleΪ<code>zh_CN</code>�������γ��Բ��ң�
+ * 例如：对于模板<code>test.vm</code>，假如当前locale为<code>zh_CN</code>，则依次尝试查找：
  * </p>
  * <ul>
  * <li>test_zh_CN.vm</li>

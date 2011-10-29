@@ -23,32 +23,32 @@ import com.alibaba.citrus.webx.config.WebxConfiguration;
 
 public interface WebxComponent {
     /**
-     * È¡µÃµ±Ç°componentËùÊôµÄcomponents¼¯ºÏ¡£
+     * å–å¾—å½“å‰componentæ‰€å±çš„componentsé›†åˆã€‚
      */
     WebxComponents getWebxComponents();
 
     /**
-     * È¡µÃËùÓĞcomponentµÄÃû³Æ¡£
+     * å–å¾—æ‰€æœ‰componentçš„åç§°ã€‚
      */
     String getName();
 
     /**
-     * È¡µÃÖ¸¶¨componentµÄcomponent path¡£Èç¹ûÊÇÄ¬ÈÏcomponent£¬Ôò·µ»Ø¿Õ×Ö·û´®¡£
+     * å–å¾—æŒ‡å®šcomponentçš„component pathã€‚å¦‚æœæ˜¯é»˜è®¤componentï¼Œåˆ™è¿”å›ç©ºå­—ç¬¦ä¸²ã€‚
      */
     String getComponentPath();
 
     /**
-     * È¡µÃwebx configurationÉèÖÃ¡£
+     * å–å¾—webx configurationè®¾ç½®ã€‚
      */
     WebxConfiguration getWebxConfiguration();
 
     /**
-     * È¡µÃÓÃÀ´´¦Àíµ±Ç°componentÇëÇóµÄcontroller¡£
+     * å–å¾—ç”¨æ¥å¤„ç†å½“å‰componentè¯·æ±‚çš„controllerã€‚
      */
     WebxController getWebxController();
 
     /**
-     * È¡µÃµ±Ç°component¶ÔÓ¦µÄapplication contextÈİÆ÷¡£
+     * å–å¾—å½“å‰componentå¯¹åº”çš„application contextå®¹å™¨ã€‚
      */
     WebApplicationContext getApplicationContext();
 }

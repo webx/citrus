@@ -144,7 +144,7 @@ public class RewriteCondition implements InitializingBean {
     }
 
     /**
-     * ´ú±íconditionµÄ±êÖ¾Î»¡£
+     * ä»£è¡¨conditionçš„æ ‡å¿—ä½ã€‚
      */
     public static class ConditionFlags extends Flags {
         public ConditionFlags() {
@@ -156,7 +156,7 @@ public class RewriteCondition implements InitializingBean {
         }
 
         /**
-         * ±êÖ¾Î»£ººÍÏÂÒ»¸öcondition³Ê¡°»ò¡±µÄ¹ØÏµ¡£
+         * æ ‡å¿—ä½ï¼šå’Œä¸‹ä¸€ä¸ªconditionå‘ˆâ€œæˆ–â€çš„å…³ç³»ã€‚
          */
         public boolean hasOR() {
             return hasFlags("OR", "ornext");

@@ -35,10 +35,10 @@ import com.alibaba.citrus.util.Utils;
 
 public class MessageContextFactory {
     /**
-     * ÉèÖÃform¼¶±ğµÄ´íÎóĞÅÏ¢context£¬°üº¬ÏÂÁĞÄÚÈİ£º
+     * è®¾ç½®formçº§åˆ«çš„é”™è¯¯ä¿¡æ¯contextï¼ŒåŒ…å«ä¸‹åˆ—å†…å®¹ï¼š
      * <ol>
-     * <li>ËùÓĞÏµÍ³ÊôĞÔ£º<code>System.getProperties()</code>¡£</li>
-     * <li>³£ÓÃĞ¡¹¤¾ßÈç£º<code>stringUtil</code>ºÍ<code>stringEscapeUtil</code>µÈ¡£</li>
+     * <li>æ‰€æœ‰ç³»ç»Ÿå±æ€§ï¼š<code>System.getProperties()</code>ã€‚</li>
+     * <li>å¸¸ç”¨å°å·¥å…·å¦‚ï¼š<code>stringUtil</code>å’Œ<code>stringEscapeUtil</code>ç­‰ã€‚</li>
      * </ol>
      */
     public static MessageContext newInstance(final Form form) {
@@ -73,11 +73,11 @@ public class MessageContextFactory {
     }
 
     /**
-     * ÉèÖÃgroup¼¶±ğµÄ´íÎóĞÅÏ¢context£¬°üº¬ÏÂÁĞÄÚÈİ£º
+     * è®¾ç½®groupçº§åˆ«çš„é”™è¯¯ä¿¡æ¯contextï¼ŒåŒ…å«ä¸‹åˆ—å†…å®¹ï¼š
      * <ol>
-     * <li>Form¼¶±ğµÄcontextµÄËùÓĞÄÚÈİ¡£</li>
-     * <li><code>form</code>Ö¸Ïòµ±Ç°±íµ¥¶ÔÏó</li>
-     * <li>GroupÖĞµÄËùÓĞfield¡£</li>
+     * <li>Formçº§åˆ«çš„contextçš„æ‰€æœ‰å†…å®¹ã€‚</li>
+     * <li><code>form</code>æŒ‡å‘å½“å‰è¡¨å•å¯¹è±¡</li>
+     * <li>Groupä¸­çš„æ‰€æœ‰fieldã€‚</li>
      * </ol>
      */
     public static MessageContext newInstance(final Group group) {
@@ -86,7 +86,7 @@ public class MessageContextFactory {
             protected Object internalGet(String key) {
                 Object value = null;
 
-                // ²éÕÒfields
+                // æŸ¥æ‰¾fields
                 value = group.getField(key);
 
                 if (value == null) {
@@ -118,12 +118,12 @@ public class MessageContextFactory {
     }
 
     /**
-     * ÉèÖÃfield¼¶±ğµÄ´íÎóĞÅÏ¢context£¬°üº¬ÏÂÁĞÄÚÈİ£º
+     * è®¾ç½®fieldçº§åˆ«çš„é”™è¯¯ä¿¡æ¯contextï¼ŒåŒ…å«ä¸‹åˆ—å†…å®¹ï¼š
      * <ol>
-     * <li>Group¼¶±ğµÄcontextµÄËùÓĞÄÚÈİ¡£</li>
-     * <li><code>group</code>Ö¸Ïòµ±Ç°×é¶ÔÏó</li>
-     * <li>Field¶ÔÏóµÄÊôĞÔ£¬Èç£º<code>displayName</code>¡¢<code>value</code>ºÍ
-     * <code>values</code>¡¢<code>defaultValue</code>ºÍ<code>defaultValues</code>¡£
+     * <li>Groupçº§åˆ«çš„contextçš„æ‰€æœ‰å†…å®¹ã€‚</li>
+     * <li><code>group</code>æŒ‡å‘å½“å‰ç»„å¯¹è±¡</li>
+     * <li>Fieldå¯¹è±¡çš„å±æ€§ï¼Œå¦‚ï¼š<code>displayName</code>ã€<code>value</code>å’Œ
+     * <code>values</code>ã€<code>defaultValue</code>å’Œ<code>defaultValues</code>ã€‚
      * </li>
      * </ol>
      */
@@ -139,7 +139,7 @@ public class MessageContextFactory {
                             .registerCustomEditors(fieldWrapper);
                 }
 
-                // ÔÚfieldÊµÀıÖĞ²éÕÒproperty
+                // åœ¨fieldå®ä¾‹ä¸­æŸ¥æ‰¾property
                 try {
                     return fieldWrapper.getPropertyValue(key);
                 } catch (BeansException e) {
@@ -167,10 +167,10 @@ public class MessageContextFactory {
     }
 
     /**
-     * ÉèÖÃvalidator¼¶±ğµÄ´íÎóĞÅÏ¢context£¬°üº¬ÏÂÁĞÄÚÈİ£º
+     * è®¾ç½®validatorçº§åˆ«çš„é”™è¯¯ä¿¡æ¯contextï¼ŒåŒ…å«ä¸‹åˆ—å†…å®¹ï¼š
      * <ol>
-     * <li>Field¼¶±ğµÄcontextµÄËùÓĞÄÚÈİ¡£</li>
-     * <li>Validator¶ÔÏóµÄËùÓĞÊôĞÔ¡£</li>
+     * <li>Fieldçº§åˆ«çš„contextçš„æ‰€æœ‰å†…å®¹ã€‚</li>
+     * <li>Validatorå¯¹è±¡çš„æ‰€æœ‰å±æ€§ã€‚</li>
      * </ol>
      */
     public static MessageContext newInstance(final Field field, final Validator validator) {
@@ -185,7 +185,7 @@ public class MessageContextFactory {
                             .registerCustomEditors(validatorWrapper);
                 }
 
-                // ÔÚvalidator objectÖĞ²éÕÒproperty
+                // åœ¨validator objectä¸­æŸ¥æ‰¾property
                 try {
                     return validatorWrapper.getPropertyValue(key);
                 } catch (BeansException e) {

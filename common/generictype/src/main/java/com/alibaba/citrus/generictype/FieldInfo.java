@@ -20,51 +20,51 @@ package com.alibaba.citrus.generictype;
 import java.lang.reflect.Field;
 
 /**
- * ´ú±íÒ»¸ö{@link Field}×Ö¶ÎµÄĞÅÏ¢¡£
+ * ä»£è¡¨ä¸€ä¸ª{@link Field}å­—æ®µçš„ä¿¡æ¯ã€‚
  * 
  * @author Michael Zhou
  */
 public interface FieldInfo {
     /**
-     * È¡µÃ×Ö¶Î¡£
+     * å–å¾—å­—æ®µã€‚
      */
     Field getField();
 
     /**
-     * È¡µÃ×Ö¶ÎËùÔÚµÄÀàĞÍ¡£
+     * å–å¾—å­—æ®µæ‰€åœ¨çš„ç±»å‹ã€‚
      */
     TypeInfo getDeclaringType();
 
     /**
-     * È¡µÃ×Ö¶ÎµÄ·ÃÎÊĞŞÊÎ·û¡£
+     * å–å¾—å­—æ®µçš„è®¿é—®ä¿®é¥°ç¬¦ã€‚
      */
     int getModifiers();
 
     /**
-     * È¡µÃ×Ö¶ÎÀàĞÍ¡£
+     * å–å¾—å­—æ®µç±»å‹ã€‚
      */
     TypeInfo getType();
 
     /**
-     * È¡µÃ×Ö¶ÎµÄÃû³Æ¡£
+     * å–å¾—å­—æ®µçš„åç§°ã€‚
      */
     String getName();
 
     /**
-     * ÔÚÖ¸¶¨ÉÏÏÂÎÄÖĞ·ÖÎö×Ö¶ÎµÄÊµ¼ÊÀàĞÍ¡£
+     * åœ¨æŒ‡å®šä¸Šä¸‹æ–‡ä¸­åˆ†æå­—æ®µçš„å®é™…ç±»å‹ã€‚
      * <p>
-     * Ïàµ±ÓÚ{@link resolve(context, true)}¡£
+     * ç›¸å½“äº{@link resolve(context, true)}ã€‚
      * </p>
      */
     FieldInfo resolve(GenericDeclarationInfo context);
 
     /**
-     * ÔÚÖ¸¶¨ÉÏÏÂÎÄÖĞ·ÖÎö×Ö¶ÎµÄÊµ¼ÊÀàĞÍ¡£
+     * åœ¨æŒ‡å®šä¸Šä¸‹æ–‡ä¸­åˆ†æå­—æ®µçš„å®é™…ç±»å‹ã€‚
      * <p>
-     * Èç¹û<code>includeBaseType==false</code>£¬ÄÇÃ´½âÎöÀàĞÍ±äÁ¿Ê±£¬½«²»»áÈ¡µÃÆäbaseType¡£
+     * å¦‚æœ<code>includeBaseType==false</code>ï¼Œé‚£ä¹ˆè§£æç±»å‹å˜é‡æ—¶ï¼Œå°†ä¸ä¼šå–å¾—å…¶baseTypeã€‚
      * </p>
      * <p>
-     * ²Î¼û£º{@link TypeInfo.resolve()}¡£
+     * å‚è§ï¼š{@link TypeInfo.resolve()}ã€‚
      * </p>
      */
     FieldInfo resolve(GenericDeclarationInfo context, boolean includeBaseType);

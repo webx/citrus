@@ -24,53 +24,53 @@ import com.alibaba.citrus.service.mail.session.MailStore;
 import com.alibaba.citrus.service.mail.session.MailTransport;
 
 /**
- * Éú³ÉºÍ·¢ËÍe-mailµÄ·şÎñ¡£
+ * ç”Ÿæˆå’Œå‘é€e-mailçš„æœåŠ¡ã€‚
  * 
  * @author Michael Zhou
  */
 public interface MailService extends MailSettings {
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄmail builder¡£
+     * å–å¾—æŒ‡å®šåç§°çš„mail builderã€‚
      */
     MailBuilder getMailBuilder(String id) throws MailNotFoundException;
 
     /**
-     * È¡µÃÄ¬ÈÏµÄmail store¡£
+     * å–å¾—é»˜è®¤çš„mail storeã€‚
      */
     MailStore getMailStore() throws MailStoreNotFoundException;
 
     /**
-     * È¡µÃÄ¬ÈÏµÄmail store¡£
+     * å–å¾—é»˜è®¤çš„mail storeã€‚
      */
     MailStore getMailStore(Properties overrideProps) throws MailStoreNotFoundException;
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄmail store¡£
+     * å–å¾—æŒ‡å®šåç§°çš„mail storeã€‚
      */
     MailStore getMailStore(String id) throws MailStoreNotFoundException;
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄmail store¡£
+     * å–å¾—æŒ‡å®šåç§°çš„mail storeã€‚
      */
     MailStore getMailStore(String id, Properties overrideProps) throws MailStoreNotFoundException;
 
     /**
-     * È¡µÃÄ¬ÈÏµÄmail transport¡£
+     * å–å¾—é»˜è®¤çš„mail transportã€‚
      */
     MailTransport getMailTransport() throws MailTransportNotFoundException;
 
     /**
-     * È¡µÃÄ¬ÈÏµÄmail transport¡£
+     * å–å¾—é»˜è®¤çš„mail transportã€‚
      */
     MailTransport getMailTransport(Properties overrideProps) throws MailTransportNotFoundException;
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄmail transport¡£
+     * å–å¾—æŒ‡å®šåç§°çš„mail transportã€‚
      */
     MailTransport getMailTransport(String id) throws MailTransportNotFoundException;
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄmail transport¡£
+     * å–å¾—æŒ‡å®šåç§°çš„mail transportã€‚
      */
     MailTransport getMailTransport(String id, Properties overrideProps) throws MailTransportNotFoundException;
 }

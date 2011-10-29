@@ -95,17 +95,17 @@ public class ResourceLoadingExtendableTests implements Cloneable {
 
     @Test
     public void noExtender() throws Exception {
-        // classpathÇ°×º
+        // classpathå‰ç¼€
         assertResource("classpath:java/lang/String.class", "jar:", "java/lang/String.class");
 
-        // ÎŞclasspathÇ°×º
+        // æ— classpathå‰ç¼€
         assertResource("java/lang/String.class", contextResourceType(), "java/lang/String.class");
 
         // resource pattern
         if (defaultServletResource) {
-            assertResources("WEB-INF/*", "web.xml"); // ÓÃspring servlet context resolver
+            assertResources("WEB-INF/*", "web.xml"); // ç”¨spring servlet context resolver
         } else {
-            assertResources("WEB-INF/*"); // ÓÃ class resolver£¬not found
+            assertResources("WEB-INF/*"); // ç”¨ class resolverï¼Œnot found
         }
     }
 
@@ -114,17 +114,17 @@ public class ResourceLoadingExtendableTests implements Cloneable {
         MyResourceLoadingExtender loader = new MyResourceLoadingExtender();
         context.setResourceLoadingExtender(loader);
 
-        // classpathÇ°×º
+        // classpathå‰ç¼€
         assertResource("classpath:java/lang/String.class", "jar:", "java/lang/String.class");
 
-        // ÎŞclasspathÇ°×º
+        // æ— classpathå‰ç¼€
         assertResource("java/lang/String.class", contextResourceType(), "java/lang/String.class");
 
         // resource pattern
         if (defaultServletResource) {
-            assertResources("WEB-INF/*", "web.xml"); // ÓÃspring servlet context resolver
+            assertResources("WEB-INF/*", "web.xml"); // ç”¨spring servlet context resolver
         } else {
-            assertResources("WEB-INF/*"); // ÓÃ class resolver£¬not found
+            assertResources("WEB-INF/*"); // ç”¨ class resolverï¼Œnot found
         }
     }
 
@@ -134,10 +134,10 @@ public class ResourceLoadingExtendableTests implements Cloneable {
         context.setResourceLoadingExtender(loader);
         loader.setResource(resource1);
 
-        // classpathÇ°×º£ºÓÀÔ¶·µ»ØÔ­À´µÄÖµ
+        // classpathå‰ç¼€ï¼šæ°¸è¿œè¿”å›åŸæ¥çš„å€¼
         assertResource("classpath:java/lang/String.class", "jar:", "java/lang/String.class");
 
-        // ÎŞclasspathÇ°×º
+        // æ— classpathå‰ç¼€
         assertResource("java/lang/String.class", contextResourceType(), "java/util/List.class");
 
         // resource pattern
@@ -223,7 +223,7 @@ public class ResourceLoadingExtendableTests implements Cloneable {
     }
 
     /**
-     * httpunitÎ´ÊµÏÖgetResourcePaths·½·¨¡£
+     * httpunitæœªå®ç°getResourcePathsæ–¹æ³•ã€‚
      */
     public static class ServletContextWrapper implements ServletContext {
         private final ServletContext servletContext;

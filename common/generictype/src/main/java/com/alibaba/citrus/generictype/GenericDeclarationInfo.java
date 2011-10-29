@@ -23,53 +23,53 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 /**
- * ºÍ{@link GenericDeclaration}¶ÔÓ¦£¬´ú±í°üº¬ÀàĞÍ±äÁ¿µÄÉùÃ÷¡£°üÀ¨ÏÂÁĞ×ÓÀà£º
+ * å’Œ{@link GenericDeclaration}å¯¹åº”ï¼Œä»£è¡¨åŒ…å«ç±»å‹å˜é‡çš„å£°æ˜ã€‚åŒ…æ‹¬ä¸‹åˆ—å­ç±»ï¼š
  * <ul>
- * <li>{@link ClassTypeInfo}£¬´ú±í{@link Class}</li>
- * <li>{@link MethodInfo}£¬´ú±í{@link Method}ºÍ{@link Constructor}</li>
+ * <li>{@link ClassTypeInfo}ï¼Œä»£è¡¨{@link Class}</li>
+ * <li>{@link MethodInfo}ï¼Œä»£è¡¨{@link Method}å’Œ{@link Constructor}</li>
  * </ul>
  * 
  * @author Michael Zhou
  */
 public interface GenericDeclarationInfo {
     /**
-     * ÅĞ¶Ïµ±Ç°ÉùÃ÷ÊÇ·ñÎªgenericÉùÃ÷£¬Òà¼´£¬ÊÇ·ñ°üº¬ÀàĞÍ±äÁ¿Èç£º<code>List&lt;E&gt;</code>¡£
+     * åˆ¤æ–­å½“å‰å£°æ˜æ˜¯å¦ä¸ºgenericå£°æ˜ï¼Œäº¦å³ï¼Œæ˜¯å¦åŒ…å«ç±»å‹å˜é‡å¦‚ï¼š<code>List&lt;E&gt;</code>ã€‚
      */
     boolean isGeneric();
 
     /**
-     * È¡µÃÀàĞÍ²ÎÊı±í£¬
+     * å–å¾—ç±»å‹å‚æ•°è¡¨ï¼Œ
      * <p>
-     * ÀıÈç£¬<code>Map&lt;K, V&gt;</code>µÄ²ÎÊı±íÎª<code>[K, V]</code>£»<br>
-     * Èç¹û²»ÊÇgenericÀàĞÍ£¬Ôò·µ»Ø¿ÕÁĞ±í¡£
+     * ä¾‹å¦‚ï¼Œ<code>Map&lt;K, V&gt;</code>çš„å‚æ•°è¡¨ä¸º<code>[K, V]</code>ï¼›<br>
+     * å¦‚æœä¸æ˜¯genericç±»å‹ï¼Œåˆ™è¿”å›ç©ºåˆ—è¡¨ã€‚
      * </p>
      */
     List<TypeVariableInfo> getTypeParameters();
 
     /**
-     * È¡µÃÀàĞÍ²ÎÊıËù¶ÔÓ¦µÄÊµ¼ÊÀàĞÍ¡£
+     * å–å¾—ç±»å‹å‚æ•°æ‰€å¯¹åº”çš„å®é™…ç±»å‹ã€‚
      * <p>
-     * ÀıÈç£¬{@link RawTypeInfo}£º<code>MyClass&lt;A extends Number, B&gt;</code>
-     * ¶ÔÓ¦µÄÊµ¼Ê²ÎÊıÀàĞÍÎª <code>[Number, Object]</code>£»<br>
-     * {@link ParameterizedTypeInfo}£º<code>List&lt;E=Integer&gt;</code>
-     * ¶ÔÓ¦µÄÊµ¼Ê²ÎÊıÀàĞÍÎª<code>[Integer]</code>¡£
+     * ä¾‹å¦‚ï¼Œ{@link RawTypeInfo}ï¼š<code>MyClass&lt;A extends Number, B&gt;</code>
+     * å¯¹åº”çš„å®é™…å‚æ•°ç±»å‹ä¸º <code>[Number, Object]</code>ï¼›<br>
+     * {@link ParameterizedTypeInfo}ï¼š<code>List&lt;E=Integer&gt;</code>
+     * å¯¹åº”çš„å®é™…å‚æ•°ç±»å‹ä¸º<code>[Integer]</code>ã€‚
      * </p>
      * <p>
-     * Èç¹û²»ÊÇgenericÀàĞÍ£¬Ôò·µ»Ø¿ÕÁĞ±í¡£
+     * å¦‚æœä¸æ˜¯genericç±»å‹ï¼Œåˆ™è¿”å›ç©ºåˆ—è¡¨ã€‚
      * </p>
      */
     List<TypeInfo> getActualTypeArguments();
 
     /**
-     * È¡µÃÖ¸¶¨²ÎÊıÃû³ÆµÄÊµ¼ÊÀàĞÍ¡£
+     * å–å¾—æŒ‡å®šå‚æ•°åç§°çš„å®é™…ç±»å‹ã€‚
      * <p>
-     * ÀıÈç£¬{@link RawTypeInfo}£º<code>MyClass&lt;A extends Number, B&gt;</code>
-     * ±äÁ¿Ãû<code>A</code>¶ÔÓ¦µÄÊµ¼Ê²ÎÊıÀàĞÍÎª <code>Number</code>£»<br>
-     * {@link ParameterizedTypeInfo}£º<code>List&lt;E=Integer&gt;</code> ±äÁ¿
-     * <code>E</code>¶ÔÓ¦µÄÊµ¼Ê²ÎÊıÀàĞÍÎª<code>Integer</code>¡£
+     * ä¾‹å¦‚ï¼Œ{@link RawTypeInfo}ï¼š<code>MyClass&lt;A extends Number, B&gt;</code>
+     * å˜é‡å<code>A</code>å¯¹åº”çš„å®é™…å‚æ•°ç±»å‹ä¸º <code>Number</code>ï¼›<br>
+     * {@link ParameterizedTypeInfo}ï¼š<code>List&lt;E=Integer&gt;</code> å˜é‡
+     * <code>E</code>å¯¹åº”çš„å®é™…å‚æ•°ç±»å‹ä¸º<code>Integer</code>ã€‚
      * </p>
      * <p>
-     * Èç¹û±äÁ¿Ãû²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å¦‚æœå˜é‡åä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * </p>
      */
     TypeInfo getActualTypeArgument(String name);

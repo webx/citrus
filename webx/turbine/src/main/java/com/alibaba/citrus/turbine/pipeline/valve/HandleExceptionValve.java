@@ -41,7 +41,7 @@ import com.alibaba.citrus.turbine.TurbineRunDataInternal;
 import com.alibaba.citrus.webx.util.ErrorHandlerHelper;
 
 /**
- * ÔÚ<code>&lt;pipeline id=&quot;exceptionPipeline&quot;&gt;</code>ÖÐ£¬´¦ÀíÒì³£µÄvalve¡£
+ * åœ¨<code>&lt;pipeline id=&quot;exceptionPipeline&quot;&gt;</code>ä¸­ï¼Œå¤„ç†å¼‚å¸¸çš„valveã€‚
  * 
  * @author Michael Zhou
  */
@@ -76,7 +76,7 @@ public class HandleExceptionValve extends AbstractValve {
             exceptionHandlers = new ExceptionHandler[0];
         }
 
-        // °´exceptionÅÅÐò£¬½«×ÓÀàÅÅÔÚÇ°
+        // æŒ‰exceptionæŽ’åºï¼Œå°†å­ç±»æŽ’åœ¨å‰
         exceptionHandlers = sortExceptions(exceptionHandlers);
 
         if (helperName == null) {
@@ -117,18 +117,18 @@ public class HandleExceptionValve extends AbstractValve {
         ErrorHandlerHelper helper = ErrorHandlerHelper.getInstance(request);
         Throwable exception = helper.getException();
 
-        // Ä£°åÖÐ¿ÉÓÃµÄhelper
+        // æ¨¡æ¿ä¸­å¯ç”¨çš„helper
         rundata.getContext().put(helperName, helper);
 
         if (exception != null) {
             int statusCode = -1;
             String target = null;
 
-            // ´Ó×î¸ù±¾µÄexception cause¿ªÊ¼·´Ïò×·ËÝ£¬ÀýÈç£ºt1 caused by t2 caused by t3£¬
-            // ÄÇÃ´£¬¼ì²éË³ÐòÎªt3, t2, t1¡£
+            // ä»Žæœ€æ ¹æœ¬çš„exception causeå¼€å§‹åå‘è¿½æº¯ï¼Œä¾‹å¦‚ï¼št1 caused by t2 caused by t3ï¼Œ
+            // é‚£ä¹ˆï¼Œæ£€æŸ¥é¡ºåºä¸ºt3, t2, t1ã€‚
             CAUSES: for (Throwable cause : getCauses(exception, true)) {
-                // ¶ÔÓÚÃ¿¸öÒì³££¬²éÕÒÆ¥ÅäµÄexception handlers¡£
-                // ËùÓÐhandlersÒÑ¾­ÅÅÐò£¬½ÏÌØÊâµÄÒì³£ÔÚÇ°£¬¼ÙÉèT1 extends T2£¬ÄÇÃ´T1ÔÚT2Ö®Ç°¡£
+                // å¯¹äºŽæ¯ä¸ªå¼‚å¸¸ï¼ŒæŸ¥æ‰¾åŒ¹é…çš„exception handlersã€‚
+                // æ‰€æœ‰handlerså·²ç»æŽ’åºï¼Œè¾ƒç‰¹æ®Šçš„å¼‚å¸¸åœ¨å‰ï¼Œå‡è®¾T1 extends T2ï¼Œé‚£ä¹ˆT1åœ¨T2ä¹‹å‰ã€‚
                 for (ExceptionHandler exceptionHandler : exceptionHandlers) {
                     if (exceptionHandler.getExceptionType().isInstance(cause)) {
                         statusCode = exceptionHandler.getStatusCode();
@@ -140,7 +140,7 @@ public class HandleExceptionValve extends AbstractValve {
 
             if (statusCode > 0) {
                 rundata.getResponse().setStatus(statusCode);
-                helper.setStatusCode(statusCode); // ¸üÐÂrequest attributes
+                helper.setStatusCode(statusCode); // æ›´æ–°request attributes
             }
 
             if (target == null) {
@@ -150,7 +150,7 @@ public class HandleExceptionValve extends AbstractValve {
             rundata.setTarget(target);
         }
 
-        // Ö´ÐÐÏÂÒ»¸öValve
+        // æ‰§è¡Œä¸‹ä¸€ä¸ªValve
         pipelineContext.invokeNext();
     }
 

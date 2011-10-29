@@ -30,10 +30,10 @@ import java.util.Set;
 import com.alibaba.citrus.util.i18n.LocaleUtil;
 
 /**
- * È¡µÃÓĞ¹ØÏµÍ³ĞÅÏ¢µÄ¹¤¾ßÀà¡£
+ * å–å¾—æœ‰å…³ç³»ç»Ÿä¿¡æ¯çš„å·¥å…·ç±»ã€‚
  * <p>
- * Èç¹ûÒòÎªJava°²È«µÄÔ­Òò¶ø²»ÄÜÈ¡µÃ<code>System.getProperty</code>£¬ÔòÏàÓ¦µÄ×Ö¶Î½«±»ÉèÖÃ³É
- * <code>null</code>£¬ ²¢ÇÒÕâ¸öÏûÏ¢½«±»Êä³öµ½<code>System.err</code>ÖĞ¡£
+ * å¦‚æœå› ä¸ºJavaå®‰å…¨çš„åŸå› è€Œä¸èƒ½å–å¾—<code>System.getProperty</code>ï¼Œåˆ™ç›¸åº”çš„å­—æ®µå°†è¢«è®¾ç½®æˆ
+ * <code>null</code>ï¼Œ å¹¶ä¸”è¿™ä¸ªæ¶ˆæ¯å°†è¢«è¾“å‡ºåˆ°<code>System.err</code>ä¸­ã€‚
  * </p>
  * 
  * @author Michael Zhou
@@ -49,79 +49,79 @@ public class SystemUtil {
     private static final JavaRuntimeInfo JAVA_RUNTIME_INFO = new JavaRuntimeInfo();
 
     /**
-     * È¡µÃJava Virtual Machine SpecificationµÄĞÅÏ¢¡£
+     * å–å¾—Java Virtual Machine Specificationçš„ä¿¡æ¯ã€‚
      * 
-     * @return <code>JvmSpecInfo</code>¶ÔÏó
+     * @return <code>JvmSpecInfo</code>å¯¹è±¡
      */
     public static final JvmSpecInfo getJvmSpecInfo() {
         return JVM_SPEC_INFO;
     }
 
     /**
-     * È¡µÃJava Virtual Machine ImplementationµÄĞÅÏ¢¡£
+     * å–å¾—Java Virtual Machine Implementationçš„ä¿¡æ¯ã€‚
      * 
-     * @return <code>JvmInfo</code>¶ÔÏó
+     * @return <code>JvmInfo</code>å¯¹è±¡
      */
     public static final JvmInfo getJvmInfo() {
         return JVM_INFO;
     }
 
     /**
-     * È¡µÃJava SpecificationµÄĞÅÏ¢¡£
+     * å–å¾—Java Specificationçš„ä¿¡æ¯ã€‚
      * 
-     * @return <code>JavaSpecInfo</code>¶ÔÏó
+     * @return <code>JavaSpecInfo</code>å¯¹è±¡
      */
     public static final JavaSpecInfo getJavaSpecInfo() {
         return JAVA_SPEC_INFO;
     }
 
     /**
-     * È¡µÃJava ImplementationµÄĞÅÏ¢¡£
+     * å–å¾—Java Implementationçš„ä¿¡æ¯ã€‚
      * 
-     * @return <code>JavaInfo</code>¶ÔÏó
+     * @return <code>JavaInfo</code>å¯¹è±¡
      */
     public static final JavaInfo getJavaInfo() {
         return JAVA_INFO;
     }
 
     /**
-     * È¡µÃµ±Ç°ÔËĞĞµÄJREµÄĞÅÏ¢¡£
+     * å–å¾—å½“å‰è¿è¡Œçš„JREçš„ä¿¡æ¯ã€‚
      * 
-     * @return <code>JreInfo</code>¶ÔÏó
+     * @return <code>JreInfo</code>å¯¹è±¡
      */
     public static final JavaRuntimeInfo getJavaRuntimeInfo() {
         return JAVA_RUNTIME_INFO;
     }
 
     /**
-     * È¡µÃOSµÄĞÅÏ¢¡£
+     * å–å¾—OSçš„ä¿¡æ¯ã€‚
      * 
-     * @return <code>OsInfo</code>¶ÔÏó
+     * @return <code>OsInfo</code>å¯¹è±¡
      */
     public static final OsInfo getOsInfo() {
         return OS_INFO;
     }
 
     /**
-     * È¡µÃUserµÄĞÅÏ¢¡£
+     * å–å¾—Userçš„ä¿¡æ¯ã€‚
      * 
-     * @return <code>UserInfo</code>¶ÔÏó
+     * @return <code>UserInfo</code>å¯¹è±¡
      */
     public static final UserInfo getUserInfo() {
         return USER_INFO;
     }
 
     /**
-     * È¡µÃHostµÄĞÅÏ¢¡£
+     * å–å¾—Hostçš„ä¿¡æ¯ã€‚
      * 
-     * @return <code>HostInfo</code>¶ÔÏó
+     * @return <code>HostInfo</code>å¯¹è±¡
      */
     public static final HostInfo getHostInfo() {
         return HOST_INFO;
     }
 
     /**
-     * ´ú±íJava Virutal Machine SpecificationµÄĞÅÏ¢¡£
+     * ä»£è¡¨Java Virutal Machine Specificationçš„ä¿¡æ¯ã€‚
      */
     public static final class JvmSpecInfo {
         private final String JAVA_VM_SPECIFICATION_NAME = getSystemProperty("java.vm.specification.name", false);
@@ -129,18 +129,18 @@ public class SystemUtil {
         private final String JAVA_VM_SPECIFICATION_VENDOR = getSystemProperty("java.vm.specification.vendor", false);
 
         /**
-         * ·ÀÖ¹´ÓÍâ½ç´´½¨´Ë¶ÔÏó¡£
+         * é˜²æ­¢ä»å¤–ç•Œåˆ›å»ºæ­¤å¯¹è±¡ã€‚
          */
         private JvmSpecInfo() {
         }
 
         /**
-         * È¡µÃµ±Ç°JVM spec.µÄÃû³Æ£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.vm.specification.name</code>£©¡£
+         * å–å¾—å½“å‰JVM spec.çš„åç§°ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.vm.specification.name</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"Java Virtual Machine Specification"</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"Java Virtual Machine Specification"</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.2
          */
         public final String getName() {
@@ -148,12 +148,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°JVM spec.µÄ°æ±¾£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.vm.specification.version</code>£©¡£
+         * å–å¾—å½“å‰JVM spec.çš„ç‰ˆæœ¬ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.vm.specification.version</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"1.0"</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"1.0"</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.2
          */
         public final String getVersion() {
@@ -161,12 +161,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°JVM spec.µÄ³§ÉÌ£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.vm.specification.vendor</code>£©¡£
+         * å–å¾—å½“å‰JVM spec.çš„å‚å•†ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.vm.specification.vendor</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"Sun Microsystems Inc."</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"Sun Microsystems Inc."</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.2
          */
         public final String getVendor() {
@@ -174,9 +174,9 @@ public class SystemUtil {
         }
 
         /**
-         * ½«Java Virutal Machine SpecificationµÄĞÅÏ¢×ª»»³É×Ö·û´®¡£
+         * å°†Java Virutal Machine Specificationçš„ä¿¡æ¯è½¬æ¢æˆå­—ç¬¦ä¸²ã€‚
          * 
-         * @return JVM spec.µÄ×Ö·û´®±íÊ¾
+         * @return JVM spec.çš„å­—ç¬¦ä¸²è¡¨ç¤º
          */
         @Override
         public final String toString() {
@@ -191,7 +191,7 @@ public class SystemUtil {
     }
 
     /**
-     * ´ú±íJava Virtual Machine ImplementationµÄĞÅÏ¢¡£
+     * ä»£è¡¨Java Virtual Machine Implementationçš„ä¿¡æ¯ã€‚
      */
     public static final class JvmInfo {
         private final String JAVA_VM_NAME = getSystemProperty("java.vm.name", false);
@@ -200,18 +200,18 @@ public class SystemUtil {
         private final String JAVA_VM_INFO = getSystemProperty("java.vm.info", false);
 
         /**
-         * ·ÀÖ¹´ÓÍâ½ç´´½¨´Ë¶ÔÏó¡£
+         * é˜²æ­¢ä»å¤–ç•Œåˆ›å»ºæ­¤å¯¹è±¡ã€‚
          */
         private JvmInfo() {
         }
 
         /**
-         * È¡µÃµ±Ç°JVM impl.µÄÃû³Æ£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.vm.name</code>£©¡£
+         * å–å¾—å½“å‰JVM impl.çš„åç§°ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.vm.name</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"Java HotSpot(TM) Client VM"</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"Java HotSpot(TM) Client VM"</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.2
          */
         public final String getName() {
@@ -219,12 +219,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°JVM impl.µÄ°æ±¾£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.vm.version</code>£©¡£
+         * å–å¾—å½“å‰JVM impl.çš„ç‰ˆæœ¬ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.vm.version</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"1.4.2-b28"</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"1.4.2-b28"</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.2
          */
         public final String getVersion() {
@@ -232,12 +232,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°JVM impl.µÄ³§ÉÌ£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.vm.vendor</code>£©¡£
+         * å–å¾—å½“å‰JVM impl.çš„å‚å•†ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.vm.vendor</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"Sun Microsystems Inc."</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"Sun Microsystems Inc."</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.2
          */
         public final String getVendor() {
@@ -245,12 +245,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°JVM impl.µÄĞÅÏ¢£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.vm.info</code>£©¡£
+         * å–å¾—å½“å‰JVM impl.çš„ä¿¡æ¯ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.vm.info</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"mixed mode"</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"mixed mode"</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.2
          */
         public final String getInfo() {
@@ -258,9 +258,9 @@ public class SystemUtil {
         }
 
         /**
-         * ½«Java Virutal Machine ImplementationµÄĞÅÏ¢×ª»»³É×Ö·û´®¡£
+         * å°†Java Virutal Machine Implementationçš„ä¿¡æ¯è½¬æ¢æˆå­—ç¬¦ä¸²ã€‚
          * 
-         * @return JVM impl.µÄ×Ö·û´®±íÊ¾
+         * @return JVM impl.çš„å­—ç¬¦ä¸²è¡¨ç¤º
          */
         @Override
         public final String toString() {
@@ -276,7 +276,7 @@ public class SystemUtil {
     }
 
     /**
-     * ´ú±íJava SpecificationµÄĞÅÏ¢¡£
+     * ä»£è¡¨Java Specificationçš„ä¿¡æ¯ã€‚
      */
     public static final class JavaSpecInfo {
         private final String JAVA_SPECIFICATION_NAME = getSystemProperty("java.specification.name", false);
@@ -284,18 +284,18 @@ public class SystemUtil {
         private final String JAVA_SPECIFICATION_VENDOR = getSystemProperty("java.specification.vendor", false);
 
         /**
-         * ·ÀÖ¹´ÓÍâ½ç´´½¨´Ë¶ÔÏó¡£
+         * é˜²æ­¢ä»å¤–ç•Œåˆ›å»ºæ­¤å¯¹è±¡ã€‚
          */
         private JavaSpecInfo() {
         }
 
         /**
-         * È¡µÃµ±Ç°Java Spec.µÄÃû³Æ£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.specification.name</code>£©¡£
+         * å–å¾—å½“å‰Java Spec.çš„åç§°ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.specification.name</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"Java Platform API Specification"</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"Java Platform API Specification"</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.2
          */
         public final String getName() {
@@ -303,12 +303,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°Java Spec.µÄ°æ±¾£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.specification.version</code>£©¡£
+         * å–å¾—å½“å‰Java Spec.çš„ç‰ˆæœ¬ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.specification.version</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"1.4"</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"1.4"</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.3
          */
         public final String getVersion() {
@@ -316,12 +316,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°Java Spec.µÄ³§ÉÌ£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.specification.vendor</code>£©¡£
+         * å–å¾—å½“å‰Java Spec.çš„å‚å•†ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.specification.vendor</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"Sun Microsystems Inc."</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"Sun Microsystems Inc."</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.2
          */
         public final String getVendor() {
@@ -329,9 +329,9 @@ public class SystemUtil {
         }
 
         /**
-         * ½«Java SpecificationµÄĞÅÏ¢×ª»»³É×Ö·û´®¡£
+         * å°†Java Specificationçš„ä¿¡æ¯è½¬æ¢æˆå­—ç¬¦ä¸²ã€‚
          * 
-         * @return JVM spec.µÄ×Ö·û´®±íÊ¾
+         * @return JVM spec.çš„å­—ç¬¦ä¸²è¡¨ç¤º
          */
         @Override
         public final String toString() {
@@ -346,7 +346,7 @@ public class SystemUtil {
     }
 
     /**
-     * ´ú±íJava ImplementationµÄĞÅÏ¢¡£
+     * ä»£è¡¨Java Implementationçš„ä¿¡æ¯ã€‚
      */
     public static final class JavaInfo {
         private final String JAVA_VERSION = getSystemProperty("java.version", false);
@@ -361,18 +361,18 @@ public class SystemUtil {
         private final boolean IS_JAVA_1_5 = getJavaVersionMatches("1.5");
 
         /**
-         * ·ÀÖ¹´ÓÍâ½ç´´½¨´Ë¶ÔÏó¡£
+         * é˜²æ­¢ä»å¤–ç•Œåˆ›å»ºæ­¤å¯¹è±¡ã€‚
          */
         private JavaInfo() {
         }
 
         /**
-         * È¡µÃµ±Ç°Java impl.µÄ°æ±¾£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.version</code>£©¡£
+         * å–å¾—å½“å‰Java impl.çš„ç‰ˆæœ¬ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.version</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"1.4.2"</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"1.4.2"</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.1
          */
         public final String getVersion() {
@@ -380,16 +380,16 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°Java impl.µÄ°æ±¾£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.version</code>£©¡£
+         * å–å¾—å½“å‰Java impl.çš„ç‰ˆæœ¬ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.version</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈç£º
+         * ä¾‹å¦‚ï¼š
          * <ul>
-         * <li>JDK 1.2£º<code>1.2f</code>¡£</li>
-         * <li>JDK 1.3.1£º<code>1.31f</code></li>
+         * <li>JDK 1.2ï¼š<code>1.2f</code>ã€‚</li>
+         * <li>JDK 1.3.1ï¼š<code>1.31f</code></li>
          * </ul>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
          * @since Java 1.1
          */
         public final float getVersionFloat() {
@@ -397,16 +397,16 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°Java impl.µÄ°æ±¾£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.version</code>£©¡£
+         * å–å¾—å½“å‰Java impl.çš„ç‰ˆæœ¬ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.version</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈç£º
+         * ä¾‹å¦‚ï¼š
          * <ul>
-         * <li>JDK 1.2£º<code>120</code>¡£</li>
-         * <li>JDK 1.3.1£º<code>131</code></li>
+         * <li>JDK 1.2ï¼š<code>120</code>ã€‚</li>
+         * <li>JDK 1.3.1ï¼š<code>131</code></li>
          * </ul>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>0</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
          * @since Java 1.1
          */
         public final int getVersionInt() {
@@ -414,9 +414,9 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°Java impl.µÄ°æ±¾µÄ<code>float</code>Öµ¡£
+         * å–å¾—å½“å‰Java impl.çš„ç‰ˆæœ¬çš„<code>float</code>å€¼ã€‚
          * 
-         * @return Java°æ±¾µÄ<code>float</code>Öµ»ò<code>0</code>
+         * @return Javaç‰ˆæœ¬çš„<code>float</code>å€¼æˆ–<code>0</code>
          */
         private final float getJavaVersionAsFloat() {
             if (JAVA_VERSION == null) {
@@ -433,9 +433,9 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°Java impl.µÄ°æ±¾µÄ<code>int</code>Öµ¡£
+         * å–å¾—å½“å‰Java impl.çš„ç‰ˆæœ¬çš„<code>int</code>å€¼ã€‚
          * 
-         * @return Java°æ±¾µÄ<code>int</code>Öµ»ò<code>0</code>
+         * @return Javaç‰ˆæœ¬çš„<code>int</code>å€¼æˆ–<code>0</code>
          */
         private final int getJavaVersionAsInt() {
             if (JAVA_VERSION == null) {
@@ -456,12 +456,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°Java impl.µÄ³§ÉÌ£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.vendor</code>£©¡£
+         * å–å¾—å½“å‰Java impl.çš„å‚å•†ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.vendor</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"Sun Microsystems Inc."</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"Sun Microsystems Inc."</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.1
          */
         public final String getVendor() {
@@ -469,12 +469,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°Java impl.µÄ³§ÉÌÍøÕ¾µÄURL£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.vendor.url</code>£©¡£
+         * å–å¾—å½“å‰Java impl.çš„å‚å•†ç½‘ç«™çš„URLï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.vendor.url</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"http://java.sun.com/"</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"http://java.sun.com/"</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.1
          */
         public final String getVendorURL() {
@@ -482,75 +482,75 @@ public class SystemUtil {
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°JavaµÄ°æ±¾¡£
+         * åˆ¤æ–­å½“å‰Javaçš„ç‰ˆæœ¬ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>java.version</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>java.version</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›
          * <code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°Java°æ±¾Îª1.1£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰Javaç‰ˆæœ¬ä¸º1.1ï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isJava11() {
             return IS_JAVA_1_1;
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°JavaµÄ°æ±¾¡£
+         * åˆ¤æ–­å½“å‰Javaçš„ç‰ˆæœ¬ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>java.version</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>java.version</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›
          * <code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°Java°æ±¾Îª1.2£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰Javaç‰ˆæœ¬ä¸º1.2ï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isJava12() {
             return IS_JAVA_1_2;
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°JavaµÄ°æ±¾¡£
+         * åˆ¤æ–­å½“å‰Javaçš„ç‰ˆæœ¬ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>java.version</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>java.version</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›
          * <code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°Java°æ±¾Îª1.3£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰Javaç‰ˆæœ¬ä¸º1.3ï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isJava13() {
             return IS_JAVA_1_3;
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°JavaµÄ°æ±¾¡£
+         * åˆ¤æ–­å½“å‰Javaçš„ç‰ˆæœ¬ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>java.version</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>java.version</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›
          * <code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°Java°æ±¾Îª1.4£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰Javaç‰ˆæœ¬ä¸º1.4ï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isJava14() {
             return IS_JAVA_1_4;
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°JavaµÄ°æ±¾¡£
+         * åˆ¤æ–­å½“å‰Javaçš„ç‰ˆæœ¬ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>java.version</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>java.version</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›
          * <code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°Java°æ±¾Îª1.5£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰Javaç‰ˆæœ¬ä¸º1.5ï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isJava15() {
             return IS_JAVA_1_5;
         }
 
         /**
-         * Æ¥Åäµ±Ç°JavaµÄ°æ±¾¡£
+         * åŒ¹é…å½“å‰Javaçš„ç‰ˆæœ¬ã€‚
          * 
-         * @param versionPrefix Java°æ±¾Ç°×º
-         * @return Èç¹û°æ±¾Æ¥Åä£¬Ôò·µ»Ø<code>true</code>
+         * @param versionPrefix Javaç‰ˆæœ¬å‰ç¼€
+         * @return å¦‚æœç‰ˆæœ¬åŒ¹é…ï¼Œåˆ™è¿”å›<code>true</code>
          */
         private final boolean getJavaVersionMatches(String versionPrefix) {
             if (JAVA_VERSION == null) {
@@ -561,43 +561,43 @@ public class SystemUtil {
         }
 
         /**
-         * ÅĞ¶¨µ±Ç°JavaµÄ°æ±¾ÊÇ·ñ´óÓÚµÈÓÚÖ¸¶¨µÄ°æ±¾ºÅ¡£
+         * åˆ¤å®šå½“å‰Javaçš„ç‰ˆæœ¬æ˜¯å¦å¤§äºç­‰äºæŒ‡å®šçš„ç‰ˆæœ¬å·ã€‚
          * <p>
-         * ÀıÈç£º
+         * ä¾‹å¦‚ï¼š
          * </p>
          * <ul>
-         * <li>²âÊÔJDK 1.2£º<code>isJavaVersionAtLeast(1.2f)</code></li>
-         * <li>²âÊÔJDK 1.2.1£º<code>isJavaVersionAtLeast(1.31f)</code></li>
+         * <li>æµ‹è¯•JDK 1.2ï¼š<code>isJavaVersionAtLeast(1.2f)</code></li>
+         * <li>æµ‹è¯•JDK 1.2.1ï¼š<code>isJavaVersionAtLeast(1.31f)</code></li>
          * </ul>
          * 
-         * @param requiredVersion ĞèÒªµÄ°æ±¾
-         * @return Èç¹ûµ±Ç°Java°æ±¾´óÓÚ»òµÈÓÚÖ¸¶¨µÄ°æ±¾£¬Ôò·µ»Ø<code>true</code>
+         * @param requiredVersion éœ€è¦çš„ç‰ˆæœ¬
+         * @return å¦‚æœå½“å‰Javaç‰ˆæœ¬å¤§äºæˆ–ç­‰äºæŒ‡å®šçš„ç‰ˆæœ¬ï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isJavaVersionAtLeast(float requiredVersion) {
             return getVersionFloat() >= requiredVersion;
         }
 
         /**
-         * ÅĞ¶¨µ±Ç°JavaµÄ°æ±¾ÊÇ·ñ´óÓÚµÈÓÚÖ¸¶¨µÄ°æ±¾ºÅ¡£
+         * åˆ¤å®šå½“å‰Javaçš„ç‰ˆæœ¬æ˜¯å¦å¤§äºç­‰äºæŒ‡å®šçš„ç‰ˆæœ¬å·ã€‚
          * <p>
-         * ÀıÈç£º
+         * ä¾‹å¦‚ï¼š
          * </p>
          * <ul>
-         * <li>²âÊÔJDK 1.2£º<code>isJavaVersionAtLeast(120)</code></li>
-         * <li>²âÊÔJDK 1.2.1£º<code>isJavaVersionAtLeast(131)</code></li>
+         * <li>æµ‹è¯•JDK 1.2ï¼š<code>isJavaVersionAtLeast(120)</code></li>
+         * <li>æµ‹è¯•JDK 1.2.1ï¼š<code>isJavaVersionAtLeast(131)</code></li>
          * </ul>
          * 
-         * @param requiredVersion ĞèÒªµÄ°æ±¾
-         * @return Èç¹ûµ±Ç°Java°æ±¾´óÓÚ»òµÈÓÚÖ¸¶¨µÄ°æ±¾£¬Ôò·µ»Ø<code>true</code>
+         * @param requiredVersion éœ€è¦çš„ç‰ˆæœ¬
+         * @return å¦‚æœå½“å‰Javaç‰ˆæœ¬å¤§äºæˆ–ç­‰äºæŒ‡å®šçš„ç‰ˆæœ¬ï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isJavaVersionAtLeast(int requiredVersion) {
             return getVersionInt() >= requiredVersion;
         }
 
         /**
-         * ½«Java ImplementationµÄĞÅÏ¢×ª»»³É×Ö·û´®¡£
+         * å°†Java Implementationçš„ä¿¡æ¯è½¬æ¢æˆå­—ç¬¦ä¸²ã€‚
          * 
-         * @return JVM impl.µÄ×Ö·û´®±íÊ¾
+         * @return JVM impl.çš„å­—ç¬¦ä¸²è¡¨ç¤º
          */
         @Override
         public final String toString() {
@@ -612,7 +612,7 @@ public class SystemUtil {
     }
 
     /**
-     * ´ú±íµ±Ç°ÔËĞĞµÄJREµÄĞÅÏ¢¡£
+     * ä»£è¡¨å½“å‰è¿è¡Œçš„JREçš„ä¿¡æ¯ã€‚
      */
     public static final class JavaRuntimeInfo {
         private final String JAVA_RUNTIME_NAME = getSystemProperty("java.runtime.name", false);
@@ -625,19 +625,19 @@ public class SystemUtil {
         private final String JAVA_LIBRARY_PATH = getSystemProperty("java.library.path", false);
 
         /**
-         * ·ÀÖ¹´ÓÍâ½ç´´½¨´Ë¶ÔÏó¡£
+         * é˜²æ­¢ä»å¤–ç•Œåˆ›å»ºæ­¤å¯¹è±¡ã€‚
          */
         private JavaRuntimeInfo() {
         }
 
         /**
-         * È¡µÃµ±Ç°JREµÄÃû³Æ£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.runtime.name</code>£©¡£
+         * å–å¾—å½“å‰JREçš„åç§°ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.runtime.name</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š
          * <code>"Java(TM) 2 Runtime Environment, Standard Edition"</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.3
          */
         public final String getName() {
@@ -645,12 +645,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°JREµÄ°æ±¾£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.runtime.version</code>£©¡£
+         * å–å¾—å½“å‰JREçš„ç‰ˆæœ¬ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.runtime.version</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"1.4.2-b28"</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"1.4.2-b28"</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.3
          */
         public final String getVersion() {
@@ -658,12 +658,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°JREµÄ°²×°Ä¿Â¼£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.home</code>£©¡£
+         * å–å¾—å½“å‰JREçš„å®‰è£…ç›®å½•ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.home</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"/opt/jdk1.4.2/jre"</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"/opt/jdk1.4.2/jre"</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.1
          */
         public final String getHomeDir() {
@@ -671,12 +671,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°JREµÄÀ©Õ¹Ä¿Â¼ÁĞ±í£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.ext.dirs</code>£©¡£
+         * å–å¾—å½“å‰JREçš„æ‰©å±•ç›®å½•åˆ—è¡¨ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.ext.dirs</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"/opt/jdk1.4.2/jre/lib/ext:..."</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"/opt/jdk1.4.2/jre/lib/ext:..."</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.3
          */
         public final String getExtDirs() {
@@ -684,12 +684,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°JREµÄendorsedÄ¿Â¼ÁĞ±í£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.endorsed.dirs</code>£©¡£
+         * å–å¾—å½“å‰JREçš„endorsedç›®å½•åˆ—è¡¨ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.endorsed.dirs</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"/opt/jdk1.4.2/jre/lib/endorsed:..."</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"/opt/jdk1.4.2/jre/lib/endorsed:..."</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.4
          */
         public final String getEndorsedDirs() {
@@ -697,12 +697,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°JREµÄÏµÍ³classpath£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.class.path</code>£©¡£
+         * å–å¾—å½“å‰JREçš„ç³»ç»Ÿclasspathï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.class.path</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈç£º<code>"/home/admin/myclasses:/home/admin/..."</code>
+         * ä¾‹å¦‚ï¼š<code>"/home/admin/myclasses:/home/admin/..."</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.1
          */
         public final String getClassPath() {
@@ -710,12 +710,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°JREµÄÏµÍ³classpath£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.class.path</code>£©¡£
+         * å–å¾—å½“å‰JREçš„ç³»ç»Ÿclasspathï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.class.path</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈç£º<code>"/home/admin/myclasses:/home/admin/..."</code>
+         * ä¾‹å¦‚ï¼š<code>"/home/admin/myclasses:/home/admin/..."</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.1
          */
         public final String[] getClassPathArray() {
@@ -723,12 +723,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°JREµÄclassÎÄ¼ş¸ñÊ½µÄ°æ±¾£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.class.version</code>£©¡£
+         * å–å¾—å½“å‰JREçš„classæ–‡ä»¶æ ¼å¼çš„ç‰ˆæœ¬ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.class.version</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"48.0"</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"48.0"</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.1
          */
         public final String getClassVersion() {
@@ -736,12 +736,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°JREµÄlibraryËÑË÷Â·¾¶£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.library.path</code>£©¡£
+         * å–å¾—å½“å‰JREçš„libraryæœç´¢è·¯å¾„ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.library.path</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"/opt/jdk1.4.2/bin:..."</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"/opt/jdk1.4.2/bin:..."</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.2
          */
         public final String getLibraryPath() {
@@ -749,12 +749,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°JREµÄlibraryËÑË÷Â·¾¶£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.library.path</code>£©¡£
+         * å–å¾—å½“å‰JREçš„libraryæœç´¢è·¯å¾„ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.library.path</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"/opt/jdk1.4.2/bin:..."</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"/opt/jdk1.4.2/bin:..."</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.2
          */
         public final String[] getLibraryPathArray() {
@@ -762,12 +762,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°JREµÄURLĞ­ÒépackagesÁĞ±í£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.library.path</code>£©¡£
+         * å–å¾—å½“å‰JREçš„URLåè®®packagesåˆ—è¡¨ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.library.path</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈçSun JDK 1.4.2£º<code>"sun.net.www.protocol|..."</code>
+         * ä¾‹å¦‚Sun JDK 1.4.2ï¼š<code>"sun.net.www.protocol|..."</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.2
          */
         public final String getProtocolPackages() {
@@ -775,9 +775,9 @@ public class SystemUtil {
         }
 
         /**
-         * ½«µ±Ç°ÔËĞĞµÄJREĞÅÏ¢×ª»»³É×Ö·û´®¡£
+         * å°†å½“å‰è¿è¡Œçš„JREä¿¡æ¯è½¬æ¢æˆå­—ç¬¦ä¸²ã€‚
          * 
-         * @return JREĞÅÏ¢µÄ×Ö·û´®±íÊ¾
+         * @return JREä¿¡æ¯çš„å­—ç¬¦ä¸²è¡¨ç¤º
          */
         @Override
         public final String toString() {
@@ -798,7 +798,7 @@ public class SystemUtil {
     }
 
     /**
-     * ´ú±íµ±Ç°OSµÄĞÅÏ¢¡£
+     * ä»£è¡¨å½“å‰OSçš„ä¿¡æ¯ã€‚
      */
     public static final class OsInfo {
         private final String OS_VERSION = getSystemProperty("os.version", false);
@@ -821,25 +821,25 @@ public class SystemUtil {
         private final boolean IS_OS_WINDOWS_NT = getOSMatches("Windows NT");
         private final boolean IS_OS_WINDOWS_XP = getOSMatches("Windows", "5.1");
 
-        // ÓÉÓÚ¸Ä±äfile.encodingÊôĞÔ²¢²»»á¸Ä±äÏµÍ³×Ö·û±àÂë£¬ÎªÁË±£³ÖÒ»ÖÂ£¬Í¨¹ıLocaleUtilÈ¡ÏµÍ³Ä¬ÈÏ±àÂë¡£
+        // ç”±äºæ”¹å˜file.encodingå±æ€§å¹¶ä¸ä¼šæ”¹å˜ç³»ç»Ÿå­—ç¬¦ç¼–ç ï¼Œä¸ºäº†ä¿æŒä¸€è‡´ï¼Œé€šè¿‡LocaleUtilå–ç³»ç»Ÿé»˜è®¤ç¼–ç ã€‚
         private final String FILE_ENCODING = LocaleUtil.getSystem().getCharset().name();
         private final String FILE_SEPARATOR = getSystemProperty("file.separator", false);
         private final String LINE_SEPARATOR = getSystemProperty("line.separator", false);
         private final String PATH_SEPARATOR = getSystemProperty("path.separator", false);
 
         /**
-         * ·ÀÖ¹´ÓÍâ½ç´´½¨´Ë¶ÔÏó¡£
+         * é˜²æ­¢ä»å¤–ç•Œåˆ›å»ºæ­¤å¯¹è±¡ã€‚
          */
         private OsInfo() {
         }
 
         /**
-         * È¡µÃµ±Ç°OSµÄ¼Ü¹¹£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>os.arch</code>£©¡£
+         * å–å¾—å½“å‰OSçš„æ¶æ„ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>os.arch</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈç£º<code>"x86"</code>
+         * ä¾‹å¦‚ï¼š<code>"x86"</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.1
          */
         public final String getArch() {
@@ -847,12 +847,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°OSµÄÃû³Æ£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>os.name</code>£©¡£
+         * å–å¾—å½“å‰OSçš„åç§°ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>os.name</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈç£º<code>"Windows XP"</code>
+         * ä¾‹å¦‚ï¼š<code>"Windows XP"</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.1
          */
         public final String getName() {
@@ -860,12 +860,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°OSµÄ°æ±¾£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>os.version</code>£©¡£
+         * å–å¾—å½“å‰OSçš„ç‰ˆæœ¬ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>os.version</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈç£º<code>"5.1"</code>
+         * ä¾‹å¦‚ï¼š<code>"5.1"</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.1
          */
         public final String getVersion() {
@@ -873,202 +873,202 @@ public class SystemUtil {
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°OSµÄÀàĞÍ¡£
+         * åˆ¤æ–­å½“å‰OSçš„ç±»å‹ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>os.name</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø<code>false</code>
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>os.name</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›<code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°OSÀàĞÍÎªAIX£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰OSç±»å‹ä¸ºAIXï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isAix() {
             return IS_OS_AIX;
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°OSµÄÀàĞÍ¡£
+         * åˆ¤æ–­å½“å‰OSçš„ç±»å‹ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>os.name</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø<code>false</code>
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>os.name</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›<code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°OSÀàĞÍÎªHP-UX£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰OSç±»å‹ä¸ºHP-UXï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isHpUx() {
             return IS_OS_HP_UX;
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°OSµÄÀàĞÍ¡£
+         * åˆ¤æ–­å½“å‰OSçš„ç±»å‹ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>os.name</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø<code>false</code>
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>os.name</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›<code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°OSÀàĞÍÎªIRIX£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰OSç±»å‹ä¸ºIRIXï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isIrix() {
             return IS_OS_IRIX;
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°OSµÄÀàĞÍ¡£
+         * åˆ¤æ–­å½“å‰OSçš„ç±»å‹ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>os.name</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø<code>false</code>
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>os.name</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›<code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°OSÀàĞÍÎªLinux£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰OSç±»å‹ä¸ºLinuxï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isLinux() {
             return IS_OS_LINUX;
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°OSµÄÀàĞÍ¡£
+         * åˆ¤æ–­å½“å‰OSçš„ç±»å‹ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>os.name</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø<code>false</code>
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>os.name</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›<code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°OSÀàĞÍÎªMac£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰OSç±»å‹ä¸ºMacï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isMac() {
             return IS_OS_MAC;
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°OSµÄÀàĞÍ¡£
+         * åˆ¤æ–­å½“å‰OSçš„ç±»å‹ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>os.name</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø<code>false</code>
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>os.name</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›<code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°OSÀàĞÍÎªMacOS X£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰OSç±»å‹ä¸ºMacOS Xï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isMacOsX() {
             return IS_OS_MAC_OSX;
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°OSµÄÀàĞÍ¡£
+         * åˆ¤æ–­å½“å‰OSçš„ç±»å‹ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>os.name</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø<code>false</code>
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>os.name</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›<code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°OSÀàĞÍÎªOS2£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰OSç±»å‹ä¸ºOS2ï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isOs2() {
             return IS_OS_OS2;
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°OSµÄÀàĞÍ¡£
+         * åˆ¤æ–­å½“å‰OSçš„ç±»å‹ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>os.name</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø<code>false</code>
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>os.name</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›<code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°OSÀàĞÍÎªSolaris£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰OSç±»å‹ä¸ºSolarisï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isSolaris() {
             return IS_OS_SOLARIS;
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°OSµÄÀàĞÍ¡£
+         * åˆ¤æ–­å½“å‰OSçš„ç±»å‹ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>os.name</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø<code>false</code>
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>os.name</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›<code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°OSÀàĞÍÎªSun OS£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰OSç±»å‹ä¸ºSun OSï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isSunOS() {
             return IS_OS_SUN_OS;
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°OSµÄÀàĞÍ¡£
+         * åˆ¤æ–­å½“å‰OSçš„ç±»å‹ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>os.name</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø<code>false</code>
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>os.name</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›<code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°OSÀàĞÍÎªWindows£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰OSç±»å‹ä¸ºWindowsï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isWindows() {
             return IS_OS_WINDOWS;
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°OSµÄÀàĞÍ¡£
+         * åˆ¤æ–­å½“å‰OSçš„ç±»å‹ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>os.name</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø<code>false</code>
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>os.name</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›<code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°OSÀàĞÍÎªWindows 2000£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰OSç±»å‹ä¸ºWindows 2000ï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isWindows2000() {
             return IS_OS_WINDOWS_2000;
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°OSµÄÀàĞÍ¡£
+         * åˆ¤æ–­å½“å‰OSçš„ç±»å‹ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>os.name</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø<code>false</code>
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>os.name</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›<code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°OSÀàĞÍÎªWindows 95£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰OSç±»å‹ä¸ºWindows 95ï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isWindows95() {
             return IS_OS_WINDOWS_95;
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°OSµÄÀàĞÍ¡£
+         * åˆ¤æ–­å½“å‰OSçš„ç±»å‹ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>os.name</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø<code>false</code>
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>os.name</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›<code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°OSÀàĞÍÎªWindows 98£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰OSç±»å‹ä¸ºWindows 98ï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isWindows98() {
             return IS_OS_WINDOWS_98;
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°OSµÄÀàĞÍ¡£
+         * åˆ¤æ–­å½“å‰OSçš„ç±»å‹ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>os.name</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø<code>false</code>
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>os.name</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›<code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°OSÀàĞÍÎªWindows ME£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰OSç±»å‹ä¸ºWindows MEï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isWindowsME() {
             return IS_OS_WINDOWS_ME;
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°OSµÄÀàĞÍ¡£
+         * åˆ¤æ–­å½“å‰OSçš„ç±»å‹ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>os.name</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø<code>false</code>
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>os.name</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›<code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°OSÀàĞÍÎªWindows NT£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰OSç±»å‹ä¸ºWindows NTï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isWindowsNT() {
             return IS_OS_WINDOWS_NT;
         }
 
         /**
-         * ÅĞ¶Ïµ±Ç°OSµÄÀàĞÍ¡£
+         * åˆ¤æ–­å½“å‰OSçš„ç±»å‹ã€‚
          * <p>
-         * Èç¹û²»ÄÜÈ¡µÃÏµÍ³ÊôĞÔ<code>os.name</code>£¨ÒòÎªJava°²È«ÏŞÖÆ£©£¬Ôò×ÜÊÇ·µ»Ø<code>false</code>
+         * å¦‚æœä¸èƒ½å–å¾—ç³»ç»Ÿå±æ€§<code>os.name</code>ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰ï¼Œåˆ™æ€»æ˜¯è¿”å›<code>false</code>
          * </p>
          * 
-         * @return Èç¹ûµ±Ç°OSÀàĞÍÎªWindows XP£¬Ôò·µ»Ø<code>true</code>
+         * @return å¦‚æœå½“å‰OSç±»å‹ä¸ºWindows XPï¼Œåˆ™è¿”å›<code>true</code>
          */
         public final boolean isWindowsXP() {
             return IS_OS_WINDOWS_XP;
         }
 
         /**
-         * Æ¥ÅäOSÃû³Æ¡£
+         * åŒ¹é…OSåç§°ã€‚
          * 
-         * @param osNamePrefix OSÃû³ÆÇ°×º
-         * @return Èç¹ûÆ¥Åä£¬Ôò·µ»Ø<code>true</code>
+         * @param osNamePrefix OSåç§°å‰ç¼€
+         * @return å¦‚æœåŒ¹é…ï¼Œåˆ™è¿”å›<code>true</code>
          */
         private final boolean getOSMatches(String osNamePrefix) {
             if (OS_NAME == null) {
@@ -1079,11 +1079,11 @@ public class SystemUtil {
         }
 
         /**
-         * Æ¥ÅäOSÃû³Æ¡£
+         * åŒ¹é…OSåç§°ã€‚
          * 
-         * @param osNamePrefix OSÃû³ÆÇ°×º
-         * @param osVersionPrefix OS°æ±¾Ç°×º
-         * @return Èç¹ûÆ¥Åä£¬Ôò·µ»Ø<code>true</code>
+         * @param osNamePrefix OSåç§°å‰ç¼€
+         * @param osVersionPrefix OSç‰ˆæœ¬å‰ç¼€
+         * @return å¦‚æœåŒ¹é…ï¼Œåˆ™è¿”å›<code>true</code>
          */
         private final boolean getOSMatches(String osNamePrefix, String osVersionPrefix) {
             if (OS_NAME == null || OS_VERSION == null) {
@@ -1094,12 +1094,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃOSµÄÄ¬ÈÏ×Ö·û±àÂë¼¯£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>file.encoding</code>£©¡£
+         * å–å¾—OSçš„é»˜è®¤å­—ç¬¦ç¼–ç é›†ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>file.encoding</code>ï¼‰ã€‚
          * <p>
-         * Õâ¸ö±àÂë×Ö·û¼¯½«±»×÷Îªµ±Ç°JVM×ª»»×Ö½Ú/×Ö·ûµÄÄ¬ÈÏ·½Ê½¡£ ÀıÈç£º<code>GBK</code>¡£
+         * è¿™ä¸ªç¼–ç å­—ç¬¦é›†å°†è¢«ä½œä¸ºå½“å‰JVMè½¬æ¢å­—èŠ‚/å­—ç¬¦çš„é»˜è®¤æ–¹å¼ã€‚ ä¾‹å¦‚ï¼š<code>GBK</code>ã€‚
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.2
          */
         public final String getFileEncoding() {
@@ -1107,12 +1107,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃOSµÄÎÄ¼şÂ·¾¶µÄ·Ö¸ô·û£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>file.separator</code>£©¡£
+         * å–å¾—OSçš„æ–‡ä»¶è·¯å¾„çš„åˆ†éš”ç¬¦ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>file.separator</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈç£ºUnixÎª<code>"/"</code>£¬WindowsÎª<code>"\\"</code>¡£
+         * ä¾‹å¦‚ï¼šUnixä¸º<code>"/"</code>ï¼ŒWindowsä¸º<code>"\\"</code>ã€‚
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.1
          */
         public final String getFileSeparator() {
@@ -1120,12 +1120,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃOSµÄÎÄ±¾ÎÄ¼ş»»ĞĞ·û£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>line.separator</code>£©¡£
+         * å–å¾—OSçš„æ–‡æœ¬æ–‡ä»¶æ¢è¡Œç¬¦ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>line.separator</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈç£ºUnixÎª<code>"\n"</code>£¬WindowsÎª<code>"\r\n"</code>¡£
+         * ä¾‹å¦‚ï¼šUnixä¸º<code>"\n"</code>ï¼ŒWindowsä¸º<code>"\r\n"</code>ã€‚
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.1
          */
         public final String getLineSeparator() {
@@ -1133,12 +1133,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃOSµÄËÑË÷Â·¾¶·Ö¸ô·û£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>path.separator</code>£©¡£
+         * å–å¾—OSçš„æœç´¢è·¯å¾„åˆ†éš”ç¬¦ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>path.separator</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈç£ºUnixÎª<code>":"</code>£¬WindowsÎª<code>";"</code>¡£
+         * ä¾‹å¦‚ï¼šUnixä¸º<code>":"</code>ï¼ŒWindowsä¸º<code>";"</code>ã€‚
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.1
          */
         public final String getPathSeparator() {
@@ -1146,9 +1146,9 @@ public class SystemUtil {
         }
 
         /**
-         * ½«OSµÄĞÅÏ¢×ª»»³É×Ö·û´®¡£
+         * å°†OSçš„ä¿¡æ¯è½¬æ¢æˆå­—ç¬¦ä¸²ã€‚
          * 
-         * @return OSµÄ×Ö·û´®±íÊ¾
+         * @return OSçš„å­—ç¬¦ä¸²è¡¨ç¤º
          */
         @Override
         public final String toString() {
@@ -1167,7 +1167,7 @@ public class SystemUtil {
     }
 
     /**
-     * ´ú±íµ±Ç°ÓÃ»§µÄĞÅÏ¢¡£
+     * ä»£è¡¨å½“å‰ç”¨æˆ·çš„ä¿¡æ¯ã€‚
      */
     public static final class UserInfo {
         private final String USER_NAME = getSystemProperty("user.name", false);
@@ -1179,18 +1179,18 @@ public class SystemUtil {
         private final String JAVA_IO_TMPDIR = getSystemProperty("java.io.tmpdir", false);
 
         /**
-         * ·ÀÖ¹´ÓÍâ½ç´´½¨´Ë¶ÔÏó¡£
+         * é˜²æ­¢ä»å¤–ç•Œåˆ›å»ºæ­¤å¯¹è±¡ã€‚
          */
         private UserInfo() {
         }
 
         /**
-         * È¡µÃµ±Ç°µÇÂ¼ÓÃ»§µÄÃû×Ö£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>user.name</code>£©¡£
+         * å–å¾—å½“å‰ç™»å½•ç”¨æˆ·çš„åå­—ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>user.name</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈç£º<code>"admin"</code>
+         * ä¾‹å¦‚ï¼š<code>"admin"</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.1
          */
         public final String getName() {
@@ -1198,12 +1198,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°µÇÂ¼ÓÃ»§µÄhomeÄ¿Â¼£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>user.home</code>£©¡£
+         * å–å¾—å½“å‰ç™»å½•ç”¨æˆ·çš„homeç›®å½•ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>user.home</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈç£º<code>"/home/admin"</code>
+         * ä¾‹å¦‚ï¼š<code>"/home/admin"</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.1
          */
         public final String getHomeDir() {
@@ -1211,12 +1211,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°Ä¿Â¼£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>user.dir</code>£©¡£
+         * å–å¾—å½“å‰ç›®å½•ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>user.dir</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈç£º<code>"/home/admin/working"</code>
+         * ä¾‹å¦‚ï¼š<code>"/home/admin/working"</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.1
          */
         public final String getCurrentDir() {
@@ -1224,12 +1224,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃÁÙÊ±Ä¿Â¼£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>java.io.tmpdir</code>£©¡£
+         * å–å¾—ä¸´æ—¶ç›®å½•ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>java.io.tmpdir</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈç£º<code>"/tmp"</code>
+         * ä¾‹å¦‚ï¼š<code>"/tmp"</code>
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.2
          */
         public final String getTempDir() {
@@ -1237,12 +1237,12 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°µÇÂ¼ÓÃ»§µÄÓïÑÔÉèÖÃ£¨È¡×ÔÏµÍ³ÊôĞÔ£º<code>user.language</code>£©¡£
+         * å–å¾—å½“å‰ç™»å½•ç”¨æˆ·çš„è¯­è¨€è®¾ç½®ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼š<code>user.language</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈç£º<code>"zh"</code>¡¢<code>"en"</code>µÈ
+         * ä¾‹å¦‚ï¼š<code>"zh"</code>ã€<code>"en"</code>ç­‰
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.2
          */
         public final String getLanguage() {
@@ -1250,13 +1250,13 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°µÇÂ¼ÓÃ»§µÄ¹ú¼Ò»òÇøÓòÉèÖÃ£¨È¡×ÔÏµÍ³ÊôĞÔ£ºJDK1.4 <code>user.country</code>»òJDK1.2
-         * <code>user.region</code>£©¡£
+         * å–å¾—å½“å‰ç™»å½•ç”¨æˆ·çš„å›½å®¶æˆ–åŒºåŸŸè®¾ç½®ï¼ˆå–è‡ªç³»ç»Ÿå±æ€§ï¼šJDK1.4 <code>user.country</code>æˆ–JDK1.2
+         * <code>user.region</code>ï¼‰ã€‚
          * <p>
-         * ÀıÈç£º<code>"CN"</code>¡¢<code>"US"</code>µÈ
+         * ä¾‹å¦‚ï¼š<code>"CN"</code>ã€<code>"US"</code>ç­‰
          * </p>
          * 
-         * @return ÊôĞÔÖµ£¬Èç¹û²»ÄÜÈ¡µÃ£¨ÒòÎªJava°²È«ÏŞÖÆ£©»òÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+         * @return å±æ€§å€¼ï¼Œå¦‚æœä¸èƒ½å–å¾—ï¼ˆå› ä¸ºJavaå®‰å…¨é™åˆ¶ï¼‰æˆ–å€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
          * @since Java 1.2
          */
         public final String getCountry() {
@@ -1264,9 +1264,9 @@ public class SystemUtil {
         }
 
         /**
-         * ½«µ±Ç°ÓÃ»§µÄĞÅÏ¢×ª»»³É×Ö·û´®¡£
+         * å°†å½“å‰ç”¨æˆ·çš„ä¿¡æ¯è½¬æ¢æˆå­—ç¬¦ä¸²ã€‚
          * 
-         * @return ÓÃ»§ĞÅÏ¢µÄ×Ö·û´®±íÊ¾
+         * @return ç”¨æˆ·ä¿¡æ¯çš„å­—ç¬¦ä¸²è¡¨ç¤º
          */
         @Override
         public final String toString() {
@@ -1284,14 +1284,14 @@ public class SystemUtil {
     }
 
     /**
-     * ´ú±íµ±Ç°Ö÷»úµÄĞÅÏ¢¡£
+     * ä»£è¡¨å½“å‰ä¸»æœºçš„ä¿¡æ¯ã€‚
      */
     public static final class HostInfo {
         private final String HOST_NAME;
         private final String HOST_ADDRESS;
 
         /**
-         * ·ÀÖ¹´ÓÍâ½ç´´½¨´Ë¶ÔÏó¡£
+         * é˜²æ­¢ä»å¤–ç•Œåˆ›å»ºæ­¤å¯¹è±¡ã€‚
          */
         private HostInfo() {
             String hostName;
@@ -1312,33 +1312,33 @@ public class SystemUtil {
         }
 
         /**
-         * È¡µÃµ±Ç°Ö÷»úµÄÃû³Æ¡£
+         * å–å¾—å½“å‰ä¸»æœºçš„åç§°ã€‚
          * <p>
-         * ÀıÈç£º<code>"webserver1"</code>
+         * ä¾‹å¦‚ï¼š<code>"webserver1"</code>
          * </p>
          * 
-         * @return Ö÷»úÃû
+         * @return ä¸»æœºå
          */
         public final String getName() {
             return HOST_NAME;
         }
 
         /**
-         * È¡µÃµ±Ç°Ö÷»úµÄµØÖ·¡£
+         * å–å¾—å½“å‰ä¸»æœºçš„åœ°å€ã€‚
          * <p>
-         * ÀıÈç£º<code>"192.168.0.1"</code>
+         * ä¾‹å¦‚ï¼š<code>"192.168.0.1"</code>
          * </p>
          * 
-         * @return Ö÷»úµØÖ·
+         * @return ä¸»æœºåœ°å€
          */
         public final String getAddress() {
             return HOST_ADDRESS;
         }
 
         /**
-         * ½«µ±Ç°Ö÷»úµÄĞÅÏ¢×ª»»³É×Ö·û´®¡£
+         * å°†å½“å‰ä¸»æœºçš„ä¿¡æ¯è½¬æ¢æˆå­—ç¬¦ä¸²ã€‚
          * 
-         * @return Ö÷»úĞÅÏ¢µÄ×Ö·û´®±íÊ¾
+         * @return ä¸»æœºä¿¡æ¯çš„å­—ç¬¦ä¸²è¡¨ç¤º
          */
         @Override
         public final String toString() {
@@ -1352,16 +1352,16 @@ public class SystemUtil {
     }
 
     /**
-     * ½«ÏµÍ³ĞÅÏ¢Êä³öµ½Ö¸¶¨<code>PrintWriter</code>ÖĞ¡£
+     * å°†ç³»ç»Ÿä¿¡æ¯è¾“å‡ºåˆ°æŒ‡å®š<code>PrintWriter</code>ä¸­ã€‚
      */
     public static final void dumpSystemInfo() {
         dumpSystemInfo(new PrintWriter(System.out));
     }
 
     /**
-     * ½«ÏµÍ³ĞÅÏ¢Êä³öµ½Ö¸¶¨<code>PrintWriter</code>ÖĞ¡£
+     * å°†ç³»ç»Ÿä¿¡æ¯è¾“å‡ºåˆ°æŒ‡å®š<code>PrintWriter</code>ä¸­ã€‚
      * 
-     * @param out <code>PrintWriter</code>Êä³öÁ÷
+     * @param out <code>PrintWriter</code>è¾“å‡ºæµ
      */
     public static final void dumpSystemInfo(PrintWriter out) {
         out.println("--------------");
@@ -1385,12 +1385,12 @@ public class SystemUtil {
     }
 
     /**
-     * È¡µÃÏµÍ³ÊôĞÔ£¬Èç¹ûÒòÎªJava°²È«µÄÏŞÖÆ¶øÊ§°Ü£¬Ôò½«´íÎó´òÔÚ<code>System.err</code>ÖĞ£¬È»ºó·µ»Ø
-     * <code>null</code>¡£
+     * å–å¾—ç³»ç»Ÿå±æ€§ï¼Œå¦‚æœå› ä¸ºJavaå®‰å…¨çš„é™åˆ¶è€Œå¤±è´¥ï¼Œåˆ™å°†é”™è¯¯æ‰“åœ¨<code>System.err</code>ä¸­ï¼Œç„¶åè¿”å›
+     * <code>null</code>ã€‚
      * 
-     * @param name ÊôĞÔÃû
-     * @param quiet °²¾²Ä£Ê½£¬²»½«³ö´íĞÅÏ¢´òÔÚ<code>System.err</code>ÖĞ
-     * @return ÊôĞÔÖµ»ò<code>null</code>
+     * @param name å±æ€§å
+     * @param quiet å®‰é™æ¨¡å¼ï¼Œä¸å°†å‡ºé”™ä¿¡æ¯æ‰“åœ¨<code>System.err</code>ä¸­
+     * @return å±æ€§å€¼æˆ–<code>null</code>
      */
     private static String getSystemProperty(String name, boolean quiet) {
         try {
@@ -1406,11 +1406,11 @@ public class SystemUtil {
     }
 
     /**
-     * Êä³öµ½<code>StringBuilder</code>¡£
+     * è¾“å‡ºåˆ°<code>StringBuilder</code>ã€‚
      * 
-     * @param buffer <code>StringBuilder</code>¶ÔÏó
-     * @param caption ±êÌâ
-     * @param value Öµ
+     * @param buffer <code>StringBuilder</code>å¯¹è±¡
+     * @param caption æ ‡é¢˜
+     * @param value å€¼
      */
     private static void append(StringBuilder buffer, String caption, String value) {
         buffer.append(caption).append(defaultIfNull(StringEscapeUtil.escapeJava(value), "[n/a]")).append("\n");

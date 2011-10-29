@@ -40,7 +40,7 @@ class NamedBeanDefinitionParserMixin {
     }
 
     /**
-     * ´Óid attributeÖĞÈ¡µÃbean name£¬¼ÙÈçÎ´Ö¸¶¨£¬Ôò´Ó<code>getDefaultName()</code>ÖĞÈ¡µÃÄ¬ÈÏÃû¡£
+     * ä»id attributeä¸­å–å¾—bean nameï¼Œå‡å¦‚æœªæŒ‡å®šï¼Œåˆ™ä»<code>getDefaultName()</code>ä¸­å–å¾—é»˜è®¤åã€‚
      */
     String resolveId(Element element, AbstractBeanDefinition definition, ParserContext parserContext) {
         String id = trimToNull(element.getAttribute(ID_ATTRIBUTE));
@@ -54,7 +54,7 @@ class NamedBeanDefinitionParserMixin {
     }
 
     /**
-     * ¼ÙÈçµ±Ç°bean nameÎªÄ¬ÈÏÃû£¬ÔòÍ¬Ê±×¢²áÄ¬ÈÏµÄaliases¡£
+     * å‡å¦‚å½“å‰bean nameä¸ºé»˜è®¤åï¼Œåˆ™åŒæ—¶æ³¨å†Œé»˜è®¤çš„aliasesã€‚
      */
     protected void registerBeanDefinition(BeanDefinitionHolder definition, BeanDefinitionRegistry registry) {
         BeanDefinitionHolder newHolder = definition;

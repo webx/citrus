@@ -41,7 +41,7 @@ import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 import com.alibaba.citrus.util.i18n.LocaleUtil;
 
 /**
- * ²âÊÔ<code>ParserRequestContext</code>¡£
+ * æµ‹è¯•<code>ParserRequestContext</code>ã€‚
  */
 public class ParserRequestContextTests extends AbstractRequestContextsTests<ParserRequestContext> {
     @BeforeClass
@@ -54,7 +54,7 @@ public class ParserRequestContextTests extends AbstractRequestContextsTests<Pars
         invokeReadFileServlet("form.html");
         initRequestContext();
 
-        // ÉèÖÃthread context±àÂë£¬ÒÔ±ãurl encodingÕıÈ·Ö´ĞĞ
+        // è®¾ç½®thread contextç¼–ç ï¼Œä»¥ä¾¿url encodingæ­£ç¡®æ‰§è¡Œ
         LocaleUtil.setContext(null, "GBK");
     }
 
@@ -65,29 +65,29 @@ public class ParserRequestContextTests extends AbstractRequestContextsTests<Pars
 
         assertEquals("hello", requestContext.getParameters().getString("myparam"));
         assertEquals("hello", requestContext.getParameters().getStrings("myparam")[0]);
-        assertEquals("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", requestContext.getParameters().getStrings("myparam")[1]);
+        assertEquals("ä¸­åäººæ°‘å…±å’Œå›½", requestContext.getParameters().getStrings("myparam")[1]);
 
-        // ÓÃrequest½Ó¿ÚÖ±½ÓÈ¡Öµ
+        // ç”¨requestæ¥å£ç›´æ¥å–å€¼
         assertEquals("hello", newRequest.getParameter("myparam"));
         assertEquals("hello", newRequest.getParameterValues("myparam")[0]);
-        assertEquals("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", newRequest.getParameterValues("myparam")[1]);
+        assertEquals("ä¸­åäººæ°‘å…±å’Œå›½", newRequest.getParameterValues("myparam")[1]);
     }
 
     @Test
     public void multipartForm() throws Exception {
         assertEquals("hello", requestContext.getParameters().getString("myparam"));
 
-        // È¡µÃµ¥¸öfile item
+        // å–å¾—å•ä¸ªfile item
         FileItem fileItem = requestContext.getParameters().getFileItem("myfile");
 
         assertEquals("myfile", fileItem.getFieldName());
         assertEquals(new File(srcdir, "smallfile.txt"), new File(fileItem.getName()));
         assertFalse(fileItem.isFormField());
-        assertEquals(new String("ÖĞ»ªÈËÃñ¹²ºÍ¹ú".getBytes("GBK"), "8859_1"), fileItem.getString());
-        assertEquals("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", fileItem.getString("GBK"));
+        assertEquals(new String("ä¸­åäººæ°‘å…±å’Œå›½".getBytes("GBK"), "8859_1"), fileItem.getString());
+        assertEquals("ä¸­åäººæ°‘å…±å’Œå›½", fileItem.getString("GBK"));
         assertTrue(fileItem.isInMemory());
 
-        // È¡µÃ¶à¸öfile items
+        // å–å¾—å¤šä¸ªfile items
         FileItem[] fileItems = requestContext.getParameters().getFileItems("myfile");
         String[] fileNames = requestContext.getParameters().getStrings("myfile");
 
@@ -104,7 +104,7 @@ public class ParserRequestContextTests extends AbstractRequestContextsTests<Pars
         assertEquals(new File(srcdir, "smallfile.gif"), new File(fileNames[2]));
         assertEquals(new File(srcdir, "smallfile"), new File(fileNames[3]));
 
-        // ÓÃrequest½Ó¿ÚÖ±½ÓÈ¡Öµ
+        // ç”¨requestæ¥å£ç›´æ¥å–å€¼
         assertEquals("hello", newRequest.getParameter("myparam"));
         assertEquals(new File(srcdir, "smallfile.txt"), new File(newRequest.getParameter("myfile")));
     }
@@ -114,7 +114,7 @@ public class ParserRequestContextTests extends AbstractRequestContextsTests<Pars
         invokeReadFileServlet("form.html");
         initRequestContext("parser_whitelist");
 
-        // È¡µÃ¶à¸öfile items
+        // å–å¾—å¤šä¸ªfile items
         FileItem[] fileItems = requestContext.getParameters().getFileItems("myfile");
         String[] fileNames = requestContext.getParameters().getStrings("myfile");
 
@@ -135,7 +135,7 @@ public class ParserRequestContextTests extends AbstractRequestContextsTests<Pars
         invokeReadFileServlet("form.html");
         initRequestContext("parser_whitelist2");
 
-        // È¡µÃ¶à¸öfile items
+        // å–å¾—å¤šä¸ªfile items
         FileItem[] fileItems = requestContext.getParameters().getFileItems("myfile");
         String[] fileNames = requestContext.getParameters().getStrings("myfile");
 
@@ -210,7 +210,7 @@ public class ParserRequestContextTests extends AbstractRequestContextsTests<Pars
         String[] submit = (String[]) paramMap.get("submit");
 
         assertEquals("hello", myparam[0]);
-        assertEquals("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", myparam[1]);
+        assertEquals("ä¸­åäººæ°‘å…±å’Œå›½", myparam[1]);
 
         assertEquals(new File(srcdir, "smallfile.txt"), new File(myfile[0]));
 
@@ -247,7 +247,7 @@ public class ParserRequestContextTests extends AbstractRequestContextsTests<Pars
 
     @Test
     public void parse_post() throws Exception {
-        // ÔÚpost/put·½·¨ÖĞ£¬½«ÓÉÒıÇæÀ´½âÂëform data
+        // åœ¨post/putæ–¹æ³•ä¸­ï¼Œå°†ç”±å¼•æ“æ¥è§£ç form data
         Map<String, String[]> engineDecodedParams = createLinkedHashMap();
         engineDecodedParams.put("a", new String[] { "2" });
 
@@ -264,82 +264,82 @@ public class ParserRequestContextTests extends AbstractRequestContextsTests<Pars
 
     @Test
     public void parse_get() throws Exception {
-        String utf8_ÖĞ¹ú = URLEncoder.encode("ÖĞ¹ú", "UTF-8");
-        String gbk_ÖĞ¹ú = URLEncoder.encode("ÖĞ¹ú", "GBK");
+        String utf8_ä¸­å›½ = URLEncoder.encode("ä¸­å›½", "UTF-8");
+        String gbk_ä¸­å›½ = URLEncoder.encode("ä¸­å›½", "GBK");
 
-        String utf8_ÖĞ¹ú_raw = new String("ÖĞ¹ú".getBytes("UTF-8"), "8859_1"); // Ä£·ÂieĞĞÎª£¬²»½øĞĞurlencoding
-        String gbk_ÖĞ¹ú_raw = new String("ÖĞ¹ú".getBytes("GBK"), "8859_1"); // Ä£·ÂieĞĞÎª£¬²»½øĞĞurlencoding
+        String utf8_ä¸­å›½_raw = new String("ä¸­å›½".getBytes("UTF-8"), "8859_1"); // æ¨¡ä»¿ieè¡Œä¸ºï¼Œä¸è¿›è¡Œurlencoding
+        String gbk_ä¸­å›½_raw = new String("ä¸­å›½".getBytes("GBK"), "8859_1"); // æ¨¡ä»¿ieè¡Œä¸ºï¼Œä¸è¿›è¡Œurlencoding
 
         Map<String, String[]> engineDecodedParams = createLinkedHashMap();
         engineDecodedParams.put("a", new String[] { "China" });
 
-        // ÔÚget/head·½·¨ÖĞ£¬½«×ÔĞĞ½âÎöquery£¬²»µ÷ÓÃÒıÇæ
-        // ÇÒuseBodyEncodingForURI=true£¬Ê¹ÓÃÖ¸¶¨µÄcharsetÀ´½âÂë
-        initMockRequest("GET", "a=" + gbk_ÖĞ¹ú, "GBK", null);
+        // åœ¨get/headæ–¹æ³•ä¸­ï¼Œå°†è‡ªè¡Œè§£æqueryï¼Œä¸è°ƒç”¨å¼•æ“
+        // ä¸”useBodyEncodingForURI=trueï¼Œä½¿ç”¨æŒ‡å®šçš„charsetæ¥è§£ç 
+        initMockRequest("GET", "a=" + gbk_ä¸­å›½, "GBK", null);
         initRequestContext();
         assertFalse(requestContext.isUseServletEngineParser());
         assertTrue(requestContext.isUseBodyEncodingForURI());
-        assertArrayEquals(new String[] { "ÖĞ¹ú" }, newRequest.getParameterValues("a"));
+        assertArrayEquals(new String[] { "ä¸­å›½" }, newRequest.getParameterValues("a"));
 
-        initMockRequest("HEAD", gbk_ÖĞ¹ú + "=1", "GBK", null);
+        initMockRequest("HEAD", gbk_ä¸­å›½ + "=1", "GBK", null);
         initRequestContext();
         assertFalse(requestContext.isUseServletEngineParser());
         assertTrue(requestContext.isUseBodyEncodingForURI());
-        assertArrayEquals(new String[] { "1" }, newRequest.getParameterValues("ÖĞ¹ú"));
+        assertArrayEquals(new String[] { "1" }, newRequest.getParameterValues("ä¸­å›½"));
 
-        initMockRequest("GET", "a=" + gbk_ÖĞ¹ú_raw, "GBK", null);
+        initMockRequest("GET", "a=" + gbk_ä¸­å›½_raw, "GBK", null);
         initRequestContext();
         assertFalse(requestContext.isUseServletEngineParser());
         assertTrue(requestContext.isUseBodyEncodingForURI());
-        assertArrayEquals(new String[] { "ÖĞ¹ú" }, newRequest.getParameterValues("a"));
+        assertArrayEquals(new String[] { "ä¸­å›½" }, newRequest.getParameterValues("a"));
 
-        initMockRequest("HEAD", gbk_ÖĞ¹ú_raw + "=1", "GBK", null);
+        initMockRequest("HEAD", gbk_ä¸­å›½_raw + "=1", "GBK", null);
         initRequestContext();
         assertFalse(requestContext.isUseServletEngineParser());
         assertTrue(requestContext.isUseBodyEncodingForURI());
-        assertArrayEquals(new String[] { "1" }, newRequest.getParameterValues("ÖĞ¹ú"));
+        assertArrayEquals(new String[] { "1" }, newRequest.getParameterValues("ä¸­å›½"));
 
-        // ÔÚget/head·½·¨ÖĞ£¬Ã÷È·ÉèÖÃuseServletEngineParser£¬´ËÊ±useBodyEncodingForURIÎŞĞ§
+        // åœ¨get/headæ–¹æ³•ä¸­ï¼Œæ˜ç¡®è®¾ç½®useServletEngineParserï¼Œæ­¤æ—¶useBodyEncodingForURIæ— æ•ˆ
         initMockRequest("GET", null, null, engineDecodedParams);
         initRequestContext("parser_useServletEngineParser");
         assertTrue(requestContext.isUseServletEngineParser());
         assertTrue(requestContext.isUseBodyEncodingForURI());
         assertArrayEquals(new String[] { "China" }, newRequest.getParameterValues("a"));
 
-        // ÔÚget/head·½·¨ÖĞ£¬useBodyEncodingForURI=false£¬×ÜÊÇÊ¹ÓÃutf-8½âÂë
-        initMockRequest("GET", "a=" + utf8_ÖĞ¹ú, "GBK", null);
+        // åœ¨get/headæ–¹æ³•ä¸­ï¼ŒuseBodyEncodingForURI=falseï¼Œæ€»æ˜¯ä½¿ç”¨utf-8è§£ç 
+        initMockRequest("GET", "a=" + utf8_ä¸­å›½, "GBK", null);
         initRequestContext("parser_dont_useBodyEncodingForURI");
         assertFalse(requestContext.isUseServletEngineParser());
         assertFalse(requestContext.isUseBodyEncodingForURI());
         assertEquals("UTF-8", requestContext.getURIEncoding());
-        assertArrayEquals(new String[] { "ÖĞ¹ú" }, newRequest.getParameterValues("a"));
+        assertArrayEquals(new String[] { "ä¸­å›½" }, newRequest.getParameterValues("a"));
 
-        initMockRequest("GET", "a=" + utf8_ÖĞ¹ú_raw, "GBK", null);
+        initMockRequest("GET", "a=" + utf8_ä¸­å›½_raw, "GBK", null);
         initRequestContext("parser_dont_useBodyEncodingForURI");
         assertFalse(requestContext.isUseServletEngineParser());
         assertFalse(requestContext.isUseBodyEncodingForURI());
         assertEquals("UTF-8", requestContext.getURIEncoding());
-        assertArrayEquals(new String[] { "ÖĞ¹ú" }, newRequest.getParameterValues("a"));
+        assertArrayEquals(new String[] { "ä¸­å›½" }, newRequest.getParameterValues("a"));
 
-        // ÔÚget/head·½·¨ÖĞ£¬useBodyEncodingForURI=true£¬µ«Î´Ö¸¶¨charset£¬ÔòÊ¹ÓÃISO-8859-1
-        initMockRequest("GET", "a=" + gbk_ÖĞ¹ú, null, null);
+        // åœ¨get/headæ–¹æ³•ä¸­ï¼ŒuseBodyEncodingForURI=trueï¼Œä½†æœªæŒ‡å®šcharsetï¼Œåˆ™ä½¿ç”¨ISO-8859-1
+        initMockRequest("GET", "a=" + gbk_ä¸­å›½, null, null);
         initRequestContext();
         assertFalse(requestContext.isUseServletEngineParser());
         assertTrue(requestContext.isUseBodyEncodingForURI());
-        assertArrayEquals(new String[] { new String("ÖĞ¹ú".getBytes("GBK"), "8859_1") },
+        assertArrayEquals(new String[] { new String("ä¸­å›½".getBytes("GBK"), "8859_1") },
                 newRequest.getParameterValues("a"));
     }
 
     @Test
     public void parse_query() throws Exception {
-        // ¶àÖµ
+        // å¤šå€¼
         initMockRequest("GET", "  &a=1&a=2&b=3& ", "GBK", null);
         initRequestContext();
         assertArrayEquals(new String[] { "1", "2" }, newRequest.getParameterValues("a"));
         assertArrayEquals(new String[] { "3" }, newRequest.getParameterValues("b"));
         assertArrayEquals(new Object[] { "a", "b" }, newRequest.getParameterMap().keySet().toArray());
 
-        // ¿ÕÖµ
+        // ç©ºå€¼
         initMockRequest("GET", "a", "GBK", null);
         initRequestContext();
         assertArrayEquals(new String[] {}, newRequest.getParameterValues("a"));

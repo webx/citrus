@@ -24,7 +24,7 @@ import org.apache.velocity.runtime.log.LogChute;
 import org.slf4j.Logger;
 
 /**
- * ½«ÈÕÖ¾Êä³öµ½slf4j¡£
+ * å°†æ—¥å¿—è¾“å‡ºåˆ°slf4jã€‚
  * 
  * @author Michael Zhou
  */
@@ -43,7 +43,7 @@ public class Slf4jLogChute implements LogChute {
     }
 
     public void log(int level, String message, Throwable t) {
-        // ¶ÔWARNÒÔÏÂlevel²»¼ÇÂ¼Òì³£ÏêÇé ©¤©¤ ±ÜÃâVelocityÔÚÕÒ²»µ½×ÊÔ´Ê±»á´òÓ¡Òì³£¡£
+        // å¯¹WARNä»¥ä¸‹levelä¸è®°å½•å¼‚å¸¸è¯¦æƒ… â”€â”€ é¿å…Velocityåœ¨æ‰¾ä¸åˆ°èµ„æºæ—¶ä¼šæ‰“å°å¼‚å¸¸ã€‚
         switch (level) {
             case TRACE_ID:
             case DEBUG_ID:

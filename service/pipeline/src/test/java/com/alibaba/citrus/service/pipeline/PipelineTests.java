@@ -30,7 +30,7 @@ import com.alibaba.citrus.service.pipeline.valve.LogAndReturnValve;
 import com.alibaba.citrus.service.pipeline.valve.LogValve;
 
 /**
- * ²âÊÔpipeline±¾ÉíµÄ¹¦ÄÜ£¬²»°üÀ¨ÅäÖÃ¡£
+ * æµ‹è¯•pipelineæœ¬èº«çš„åŠŸèƒ½ï¼Œä¸åŒ…æ‹¬é…ç½®ã€‚
  * 
  * @author Michael Zhou
  */
@@ -128,21 +128,21 @@ public class PipelineTests extends AbstractPipelineTests {
         // init is null
         assertNull(getFieldValue(handle, "attributes", null));
 
-        // getAttribute£¬²»»á´´½¨attributes
+        // getAttributeï¼Œä¸ä¼šåˆ›å»ºattributes
         assertNull(handle.getAttribute("test"));
         assertNull(getFieldValue(handle, "attributes", null));
 
-        // setAttribute(null)£¬»á´´½¨attributes
+        // setAttribute(null)ï¼Œä¼šåˆ›å»ºattributes
         handle.setAttribute("test", null);
         assertNotNull(getFieldValue(handle, "attributes", null));
         assertNull(handle.getAttribute("test"));
 
-        // setAttribute(value)£¬×Ô¶¯´´½¨attributes
+        // setAttribute(value)ï¼Œè‡ªåŠ¨åˆ›å»ºattributes
         handle.setAttribute("test", "value");
         assertNotNull(getFieldValue(handle, "attributes", null));
         assertEquals("value", handle.getAttribute("test"));
 
-        // ÔÙ´Îinvoke£¬context²»Í¬
+        // å†æ¬¡invokeï¼Œcontextä¸åŒ
         handle = assertInvoke(pipeline, true);
         assertNull(handle.getAttribute("test"));
     }

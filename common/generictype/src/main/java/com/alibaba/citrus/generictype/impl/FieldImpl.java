@@ -29,7 +29,7 @@ import com.alibaba.citrus.generictype.GenericDeclarationInfo;
 import com.alibaba.citrus.generictype.TypeInfo;
 
 /**
- * ¶Ô{@link FieldInfo}µÄÊµÏÖ¡£
+ * å¯¹{@link FieldInfo}çš„å®žçŽ°ã€‚
  * 
  * @author Michael Zhou
  */

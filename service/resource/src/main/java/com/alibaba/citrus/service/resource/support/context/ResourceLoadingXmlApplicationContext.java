@@ -25,7 +25,7 @@ import com.alibaba.citrus.service.resource.support.ResourceLoadingSupport;
 import com.alibaba.citrus.springext.support.context.AbstractXmlApplicationContext;
 
 /**
- * ´Óresource loading serviceÖĞ×°ÔØÅäÖÃÎÄ¼ş<code>ApplicationContext</code>ÊµÏÖ¡£
+ * ä»resource loading serviceä¸­è£…è½½é…ç½®æ–‡ä»¶<code>ApplicationContext</code>å®ç°ã€‚
  * 
  * @author Michael Zhou
  * @see AbstractXmlApplicationContext
@@ -34,14 +34,14 @@ public class ResourceLoadingXmlApplicationContext extends AbstractXmlApplication
     private Resource configResource;
 
     /**
-     * ´ÓÒ»¸öÏÖ³ÉµÄ<code>Resource</code>ÖĞ´´½¨springÈİÆ÷£¬²¢³õÊ¼»¯¡£
+     * ä»ä¸€ä¸ªç°æˆçš„<code>Resource</code>ä¸­åˆ›å»ºspringå®¹å™¨ï¼Œå¹¶åˆå§‹åŒ–ã€‚
      */
     public ResourceLoadingXmlApplicationContext(Resource resource) throws BeansException {
         this(resource, null);
     }
 
     /**
-     * ´ÓÒ»¸öÏÖ³ÉµÄ<code>Resource</code>ÖĞ´´½¨springÈİÆ÷£¬²¢³õÊ¼»¯¡£
+     * ä»ä¸€ä¸ªç°æˆçš„<code>Resource</code>ä¸­åˆ›å»ºspringå®¹å™¨ï¼Œå¹¶åˆå§‹åŒ–ã€‚
      */
     public ResourceLoadingXmlApplicationContext(Resource resource, ApplicationContext parentContext)
             throws BeansException {
@@ -49,7 +49,7 @@ public class ResourceLoadingXmlApplicationContext extends AbstractXmlApplication
     }
 
     /**
-     * ´ÓÒ»¸öÏÖ³ÉµÄ<code>Resource</code>ÖĞ´´½¨springÈİÆ÷£¬²¢³õÊ¼»¯¡£
+     * ä»ä¸€ä¸ªç°æˆçš„<code>Resource</code>ä¸­åˆ›å»ºspringå®¹å™¨ï¼Œå¹¶åˆå§‹åŒ–ã€‚
      */
     public ResourceLoadingXmlApplicationContext(Resource resource, ApplicationContext parentContext, boolean refresh)
             throws BeansException {
@@ -63,10 +63,10 @@ public class ResourceLoadingXmlApplicationContext extends AbstractXmlApplication
     }
 
     /**
-     * ´ÓÒ»×éÅäÖÃÎÄ¼şÃûÖĞ£¬´´½¨springÈİÆ÷£¬²¢³õÊ¼»¯¡£
+     * ä»ä¸€ç»„é…ç½®æ–‡ä»¶åä¸­ï¼Œåˆ›å»ºspringå®¹å™¨ï¼Œå¹¶åˆå§‹åŒ–ã€‚
      * <p>
-     * ¼ÙÈç<code>parentContext</code>ÖĞ¶¨ÒåÁË<code>ResourceLoadingService</code>£¬ÄÇÃ´
-     * <code>configLocations</code>ÒÔ¼°ËùÓĞµÄimports½«´ÓÖĞ×°ÔØ¡£
+     * å‡å¦‚<code>parentContext</code>ä¸­å®šä¹‰äº†<code>ResourceLoadingService</code>ï¼Œé‚£ä¹ˆ
+     * <code>configLocations</code>ä»¥åŠæ‰€æœ‰çš„importså°†ä»ä¸­è£…è½½ã€‚
      * </p>
      */
     public ResourceLoadingXmlApplicationContext(String[] configLocations, ApplicationContext parentContext) {
@@ -74,10 +74,10 @@ public class ResourceLoadingXmlApplicationContext extends AbstractXmlApplication
     }
 
     /**
-     * ´ÓÒ»×éÅäÖÃÎÄ¼şÃûÖĞ£¬´´½¨springÈİÆ÷£¬²¢³õÊ¼»¯¡£
+     * ä»ä¸€ç»„é…ç½®æ–‡ä»¶åä¸­ï¼Œåˆ›å»ºspringå®¹å™¨ï¼Œå¹¶åˆå§‹åŒ–ã€‚
      * <p>
-     * ¼ÙÈç<code>parentContext</code>ÖĞ¶¨ÒåÁË<code>ResourceLoadingService</code>£¬ÄÇÃ´
-     * <code>configLocations</code>ÒÔ¼°ËùÓĞµÄimports½«´ÓÖĞ×°ÔØ¡£
+     * å‡å¦‚<code>parentContext</code>ä¸­å®šä¹‰äº†<code>ResourceLoadingService</code>ï¼Œé‚£ä¹ˆ
+     * <code>configLocations</code>ä»¥åŠæ‰€æœ‰çš„importså°†ä»ä¸­è£…è½½ã€‚
      * </p>
      */
     public ResourceLoadingXmlApplicationContext(String[] configLocations, ApplicationContext parentContext,

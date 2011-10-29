@@ -35,7 +35,7 @@ import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser
 import com.alibaba.citrus.turbine.TurbineRunData;
 
 /**
- * µ÷ÓÃSpring MVCµÄ<code>HttpRequestHandler</code>¡£
+ * è°ƒç”¨Spring MVCçš„<code>HttpRequestHandler</code>ã€‚
  * 
  * @author yuming.wangym
  * @author dux.fangl

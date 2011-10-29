@@ -18,7 +18,7 @@
 package com.alibaba.citrus.generictype.introspect;
 
 /**
- * ´ú±íÒ»¸ö¼òµ¥µÄproperty¡£³£¼ûµÄĞÎÊ½ÊÇ£º </p> *
+ * ä»£è¡¨ä¸€ä¸ªç®€å•çš„propertyã€‚å¸¸è§çš„å½¢å¼æ˜¯ï¼š </p> *
  * 
  * <pre>
  * public String getName();
@@ -26,20 +26,20 @@ package com.alibaba.citrus.generictype.introspect;
  * public void setName(String name);
  * </pre>
  * <p>
- * ÒÔÉÏÕâ¶Ô·½·¨¶¨ÒåÁËÒ»¸ö¿É¶Á¡¢¿ÉĞ´µÄsimple property£¬Ãû×Ö½Ğ<code>name</code>£¬ÀàĞÍÎª <code>String</code>
- * ¡£
+ * ä»¥ä¸Šè¿™å¯¹æ–¹æ³•å®šä¹‰äº†ä¸€ä¸ªå¯è¯»ã€å¯å†™çš„simple propertyï¼Œåå­—å«<code>name</code>ï¼Œç±»å‹ä¸º <code>String</code>
+ * ã€‚
  * </p>
  * 
  * @author Michael Zhou
  */
 public interface SimplePropertyInfo extends PropertyInfo {
     /**
-     * È¡µÃpropertyµÄÖµ¡£
+     * å–å¾—propertyçš„å€¼ã€‚
      */
     Object getValue(Object object);
 
     /**
-     * ÉèÖÃpropertyµÄÖµ¡£
+     * è®¾ç½®propertyçš„å€¼ã€‚
      */
     void setValue(Object object, Object value);
 }

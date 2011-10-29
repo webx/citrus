@@ -70,7 +70,7 @@ public class WebxRootControllerTests extends AbstractWebxTests {
         assertEquals(200, clientResponseCode);
         assertEquals("hello, app1", clientResponseContent); // text from plain text file
 
-        // ÆÕÍ¨request
+        // æ™®é€šrequest
         invokeServlet("/app1/plaintext2.txt");
 
         assertEquals(200, clientResponseCode);
@@ -82,7 +82,7 @@ public class WebxRootControllerTests extends AbstractWebxTests {
         // internal
         invokeServlet("/internal/notexist");
 
-        // ÓÉmain handler½ÓÊÖ£¬È»ºóÅ×³öÒì³£
+        // ç”±main handleræ¥æ‰‹ï¼Œç„¶åæŠ›å‡ºå¼‚å¸¸
         assertEquals(404, clientResponseCode);
         assertEquals("text/html", clientResponse.getContentType());
         assertThat(
@@ -206,9 +206,9 @@ public class WebxRootControllerTests extends AbstractWebxTests {
             invokeServlet("/app1/test.htm");
             fail();
         } catch (ServletException e) {
-            // ÕæÕıµÄservlet engineÔÚÕâÀï»áÏÔÊ¾web.xmlÖĞµÄ´íÎóÒ³Ãæ£¬¶ø²âÊÔÊ±Ö»»á½ÓÊÕÒì³£¡£
-            assertThat(e, exception(IllegalStateException.class)); // ËùÅ×³öµÄÊÇµÚÒ»¸öÓ¦ÓÃ²úÉúµÄÒì³£
-            assertThat(e, not(exception(IllegalArgumentException.class))); // ¶ø²»ÊÇµÚ¶ş¸öerrorHandler²úÉúµÄÒì³£
+            // çœŸæ­£çš„servlet engineåœ¨è¿™é‡Œä¼šæ˜¾ç¤ºweb.xmlä¸­çš„é”™è¯¯é¡µé¢ï¼Œè€Œæµ‹è¯•æ—¶åªä¼šæ¥æ”¶å¼‚å¸¸ã€‚
+            assertThat(e, exception(IllegalStateException.class)); // æ‰€æŠ›å‡ºçš„æ˜¯ç¬¬ä¸€ä¸ªåº”ç”¨äº§ç”Ÿçš„å¼‚å¸¸
+            assertThat(e, not(exception(IllegalArgumentException.class))); // è€Œä¸æ˜¯ç¬¬äºŒä¸ªerrorHandleräº§ç”Ÿçš„å¼‚å¸¸
         }
     }
 
@@ -230,7 +230,7 @@ public class WebxRootControllerTests extends AbstractWebxTests {
             invokeServlet("/app1/test.htm");
             fail();
         } catch (ServletException e) {
-            // ÕæÕıµÄservlet engineÔÚÕâÀï»áÏÔÊ¾web.xmlÖĞµÄ´íÎóÒ³Ãæ£¬¶ø²âÊÔÊ±Ö»»á½ÓÊÕÒì³£¡£
+            // çœŸæ­£çš„servlet engineåœ¨è¿™é‡Œä¼šæ˜¾ç¤ºweb.xmlä¸­çš„é”™è¯¯é¡µé¢ï¼Œè€Œæµ‹è¯•æ—¶åªä¼šæ¥æ”¶å¼‚å¸¸ã€‚
             assertThat(e, exception(IllegalStateException.class));
         }
     }

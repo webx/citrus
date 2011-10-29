@@ -43,7 +43,7 @@ import freemarker.core.ParseException;
 import freemarker.template.Template;
 
 /**
- * FreeMarkerÄ£°åÒıÇæ¡£
+ * FreeMarkeræ¨¡æ¿å¼•æ“ã€‚
  * 
  * @author Michael Zhou
  */
@@ -51,7 +51,7 @@ public class FreeMarkerEngineImpl extends AbstractService<FreeMarkerEngine> impl
         ResourceLoaderAware, ProductionModeAware {
     private final FreeMarkerConfigurationImpl configuration = new FreeMarkerConfigurationImpl(getLogger());
 
-    // ³õÊ¼»¯slf4jÈÕÖ¾¡£
+    // åˆå§‹åŒ–slf4jæ—¥å¿—ã€‚
     static {
         String prefix = FreeMarkerEngine.class.getName();
         int index = prefix.indexOf("freemarker");
@@ -78,7 +78,7 @@ public class FreeMarkerEngineImpl extends AbstractService<FreeMarkerEngine> impl
     }
 
     /**
-     * ³õÊ¼»¯engine¡£
+     * åˆå§‹åŒ–engineã€‚
      */
     @Override
     protected void init() {
@@ -88,9 +88,9 @@ public class FreeMarkerEngineImpl extends AbstractService<FreeMarkerEngine> impl
     }
 
     /**
-     * È¡µÃÄ¬ÈÏµÄÄ£°åÃûºó×ºÁĞ±í¡£
+     * å–å¾—é»˜è®¤çš„æ¨¡æ¿ååç¼€åˆ—è¡¨ã€‚
      * <p>
-     * µ±<code>TemplateService</code>Ã»ÓĞÖ¸¶¨µ½µ±Ç°engineµÄmappingÊ±£¬½«È¡µÃ±¾·½·¨Ëù·µ»ØµÄºó×ºÃûÁĞ±í¡£
+     * å½“<code>TemplateService</code>æ²¡æœ‰æŒ‡å®šåˆ°å½“å‰engineçš„mappingæ—¶ï¼Œå°†å–å¾—æœ¬æ–¹æ³•æ‰€è¿”å›çš„åç¼€ååˆ—è¡¨ã€‚
      * </p>
      */
     public String[] getDefaultExtensions() {
@@ -98,7 +98,7 @@ public class FreeMarkerEngineImpl extends AbstractService<FreeMarkerEngine> impl
     }
 
     /**
-     * ÅĞ¶¨Ä£°åÊÇ·ñ´æÔÚ¡£
+     * åˆ¤å®šæ¨¡æ¿æ˜¯å¦å­˜åœ¨ã€‚
      */
     public boolean exists(String templateName) {
         try {
@@ -109,7 +109,7 @@ public class FreeMarkerEngineImpl extends AbstractService<FreeMarkerEngine> impl
     }
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢ÒÔ×Ö·û´®µÄĞÎÊ½È¡µÃäÖÈ¾µÄ½á¹û¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶ä»¥å­—ç¬¦ä¸²çš„å½¢å¼å–å¾—æ¸²æŸ“çš„ç»“æœã€‚
      */
     public String getText(String templateName, TemplateContext context) throws TemplateException, IOException {
         StringWriter out = new StringWriter();
@@ -118,7 +118,7 @@ public class FreeMarkerEngineImpl extends AbstractService<FreeMarkerEngine> impl
     }
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢½«äÖÈ¾µÄ½á¹ûËÍµ½×Ö½ÚÊä³öÁ÷ÖĞ¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶å°†æ¸²æŸ“çš„ç»“æœé€åˆ°å­—èŠ‚è¾“å‡ºæµä¸­ã€‚
      */
     public void writeTo(String templateName, TemplateContext context, OutputStream ostream) throws TemplateException,
             IOException {
@@ -126,7 +126,7 @@ public class FreeMarkerEngineImpl extends AbstractService<FreeMarkerEngine> impl
     }
 
     /**
-     * äÖÈ¾Ä£°å£¬²¢½«äÖÈ¾µÄ½á¹ûËÍµ½×Ö·ûÊä³öÁ÷ÖĞ¡£
+     * æ¸²æŸ“æ¨¡æ¿ï¼Œå¹¶å°†æ¸²æŸ“çš„ç»“æœé€åˆ°å­—ç¬¦è¾“å‡ºæµä¸­ã€‚
      */
     public void writeTo(String templateName, TemplateContext context, Writer writer) throws TemplateException,
             IOException {
@@ -151,20 +151,20 @@ public class FreeMarkerEngineImpl extends AbstractService<FreeMarkerEngine> impl
     }
 
     /**
-     * äÖÈ¾Ä£°åµ½Ö¸¶¨Êä³öÁ÷¡£
+     * æ¸²æŸ“æ¨¡æ¿åˆ°æŒ‡å®šè¾“å‡ºæµã€‚
      */
     private void render(String templateName, Object context, Writer writer, OutputStream ostream, String inputCharset,
                         String outputCharset) throws TemplateException, IOException {
         Locale locale = LocaleUtil.getContext().getLocale();
 
-        // inputCharsetÒÀ´ÎÎª£ºÖ¸¶¨Öµ¡¢engine³õÊ¼»¯Ê±µÄÄ¬ÈÏÖµ¡¢DEFAULT_CHARSET
+        // inputCharsetä¾æ¬¡ä¸ºï¼šæŒ‡å®šå€¼ã€engineåˆå§‹åŒ–æ—¶çš„é»˜è®¤å€¼ã€DEFAULT_CHARSET
         if (isEmpty(inputCharset)) {
             inputCharset = configuration.getConfiguration().getDefaultEncoding();
         }
 
         inputCharset = defaultIfEmpty(inputCharset, DEFAULT_CHARSET);
 
-        // outputCharsetÒÀ´ÎÎª£ºÖ¸¶¨Öµ¡¢engine³õÊ¼»¯Ê±µÄÄ¬ÈÏÖµ¡¢DEFAULT_CHARSET
+        // outputCharsetä¾æ¬¡ä¸ºï¼šæŒ‡å®šå€¼ã€engineåˆå§‹åŒ–æ—¶çš„é»˜è®¤å€¼ã€DEFAULT_CHARSET
         if (isEmpty(outputCharset)) {
             outputCharset = configuration.getConfiguration().getOutputEncoding();
         }

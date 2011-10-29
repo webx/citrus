@@ -32,7 +32,7 @@ import com.alibaba.citrus.util.i18n.LocaleUtil;
 import com.alibaba.citrus.util.internal.Entities;
 
 /**
- * ²âÊÔ<code>StringEscapeUtil</code>¡£
+ * æµ‹è¯•<code>StringEscapeUtil</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -47,7 +47,7 @@ public class StringEscapeUtilTests {
     }
 
     /* ==================================================================== */
-    /* ²âÊÔJavaºÍJavaScript¡£ */
+    /* æµ‹è¯•Javaå’ŒJavaScriptã€‚ */
     /* ==================================================================== */
     @Test
     public void escapeJava() throws IOException {
@@ -82,10 +82,10 @@ public class StringEscapeUtilTests {
                 "This space is non-breaking:\u00a0", false);
         assertEscapeJava("\uABCD\u1234\u012C", "\uABCD\u1234\u012C", false);
 
-        // ¶ÔslashµÄescape
+        // å¯¹slashçš„escape
         assertEscapeJava("He didn't say, /stop!/", "He didn't say, /stop!/", false);
 
-        // ²»ĞèÒªescapeµÄ×Ö·û´®£¬Ó¦¸Ã·µ»ØÔ­×Ö·û´®£¬ÒÔÌá¸ßĞ§ÂÊ
+        // ä¸éœ€è¦escapeçš„å­—ç¬¦ä¸²ï¼Œåº”è¯¥è¿”å›åŸå­—ç¬¦ä¸²ï¼Œä»¥æé«˜æ•ˆç‡
         assertEscapeJava("hello, i'm baobao", "hello, i'm baobao", false);
     }
 
@@ -122,7 +122,7 @@ public class StringEscapeUtilTests {
                 "This space is non-breaking:\u00a0", true);
         assertEscapeJava("\\uABCD\\u1234\\u012C", "\uABCD\u1234\u012C", true);
 
-        // ²»ĞèÒªescapeµÄ×Ö·û´®£¬Ó¦¸Ã·µ»ØÔ­×Ö·û´®£¬ÒÔÌá¸ßĞ§ÂÊ
+        // ä¸éœ€è¦escapeçš„å­—ç¬¦ä¸²ï¼Œåº”è¯¥è¿”å›åŸå­—ç¬¦ä¸²ï¼Œä»¥æé«˜æ•ˆç‡
         assertEscapeJava("hello, i'm baobao", "hello, i'm baobao", true);
     }
 
@@ -136,7 +136,7 @@ public class StringEscapeUtilTests {
         message = "escapeJava(String) failed" + (message == null ? "" : ": " + message);
         assertEquals(message, expected, converted);
 
-        // Èç¹ûconvertedºÍoriginalÏàµÈµÄ»°£¬ËüÃÇÓ¦¸ÃÊÇÍ¬Ò»¸ö¶ÔÏó
+        // å¦‚æœconvertedå’Œoriginalç›¸ç­‰çš„è¯ï¼Œå®ƒä»¬åº”è¯¥æ˜¯åŒä¸€ä¸ªå¯¹è±¡
         if (original != null && original.equals(converted)) {
             assertSame(original, converted);
         }
@@ -181,7 +181,7 @@ public class StringEscapeUtilTests {
         assertUnescapeJava("uppercase unicode", "\uABCDx", "\\uABCDx");
         assertUnescapeJava("unicode as final character", "\uABCD", "\\uabcd");
 
-        // ²»ĞèÒªunescapeµÄ×Ö·û´®£¬Ó¦¸Ã·µ»ØÔ­×Ö·û´®£¬ÒÔÌá¸ßĞ§ÂÊ
+        // ä¸éœ€è¦unescapeçš„å­—ç¬¦ä¸²ï¼Œåº”è¯¥è¿”å›åŸå­—ç¬¦ä¸²ï¼Œä»¥æé«˜æ•ˆç‡
         assertUnescapeJava("hello, i'm baobao", "hello, i'm baobao");
     }
 
@@ -197,7 +197,7 @@ public class StringEscapeUtilTests {
                 + StringEscapeUtil.escapeJava(expected) // we escape this so we can see it in the error message
                 + "' actual '" + StringEscapeUtil.escapeJava(actual) + "'", expected, actual);
 
-        // Èç¹ûactualºÍoriginalÏàµÈµÄ»°£¬ËüÃÇÓ¦¸ÃÊÇÍ¬Ò»¸ö¶ÔÏó
+        // å¦‚æœactualå’Œoriginalç›¸ç­‰çš„è¯ï¼Œå®ƒä»¬åº”è¯¥æ˜¯åŒä¸€ä¸ªå¯¹è±¡
         if (original != null && original.equals(actual)) {
             assertSame(original, actual);
         }
@@ -226,13 +226,13 @@ public class StringEscapeUtilTests {
 
         assertEquals("He didn\\'t say, \\\"stop!\\\"", StringEscapeUtil.escapeJavaScript("He didn't say, \"stop!\""));
 
-        // ¶ÔslashµÄescape
+        // å¯¹slashçš„escape
         assertEquals("He didn\\'t say, \\/stop!\\/", StringEscapeUtil.escapeJavaScript("He didn't say, /stop!/"));
 
-        // ²»ĞèÒªescapeµÄ×Ö·û´®£¬Ó¦¸Ã·µ»ØÔ­×Ö·û´®£¬ÒÔÌá¸ßĞ§ÂÊ
+        // ä¸éœ€è¦escapeçš„å­—ç¬¦ä¸²ï¼Œåº”è¯¥è¿”å›åŸå­—ç¬¦ä¸²ï¼Œä»¥æé«˜æ•ˆç‡
         assertSame("hello, im baobao", StringEscapeUtil.escapeJavaScript("hello, im baobao"));
 
-        // ·Çstrict
+        // éstrict
         assertEquals("\u1234", StringEscapeUtil.escapeJavaScript("\u1234", false));
         assertEquals("\u0234", StringEscapeUtil.escapeJavaScript("\u0234", false));
         assertEquals("\u00EF", StringEscapeUtil.escapeJavaScript("\u00ef", false));
@@ -249,7 +249,7 @@ public class StringEscapeUtilTests {
     }
 
     /* ==================================================================== */
-    /* ²âÊÔHTMLºÍXML¡£ */
+    /* æµ‹è¯•HTMLå’ŒXMLã€‚ */
     /* ==================================================================== */
     private String[][] HTML_ESCAPES = {
             { "no escaping", "plain text", "plain text" },
@@ -288,9 +288,9 @@ public class StringEscapeUtilTests {
             { "html versions", "&Beta;", "\u0392" }, { "illegal entity", "&zzzz;", "&zzzz;" },
             { "illegal entity", "&", "&" }, { "illegal entity", "&;", "&;" }, { "illegal entity", "&#", "&#" },
             { "illegal entity", "&#;", "&#;" }, { "illegal entity", "&#abc;", "&#abc;" },
-            { "number entity", "&#20013;", "ÖĞ" }, { "illegal entity", "&#x", "&#x" },
+            { "number entity", "&#20013;", "ä¸­" }, { "illegal entity", "&#x", "&#x" },
             { "illegal entity", "&#x;", "&#x;" }, { "illegal entity", "&#xzzz;", "&#xzzz;" },
-            { "number entity", "&#x4E2D;", "ÖĞ" }, { "number entity", "&#X4E2D;", "ÖĞ" }, };
+            { "number entity", "&#x4E2D;", "ä¸­" }, { "number entity", "&#X4E2D;", "ä¸­" }, };
 
     @Test
     public void escapeUnescapeHtml() throws IOException {
@@ -334,7 +334,7 @@ public class StringEscapeUtilTests {
 
             assertEquals(message, expected, result);
 
-            // Èç¹ûÊäÈëÊä³ö×Ö·û´®ÏàµÈ£¬ÔòËüÃÇÓ¦¸ÃÊÇÍ¬Ò»¸ö×Ö·û´®£¬ÕâÑùÏµÍ³ĞÔÄÜ¸üºÃ
+            // å¦‚æœè¾“å…¥è¾“å‡ºå­—ç¬¦ä¸²ç›¸ç­‰ï¼Œåˆ™å®ƒä»¬åº”è¯¥æ˜¯åŒä¸€ä¸ªå­—ç¬¦ä¸²ï¼Œè¿™æ ·ç³»ç»Ÿæ€§èƒ½æ›´å¥½
             if (result != null && result.equals(str)) {
                 assertSame(str, result);
             }
@@ -345,7 +345,7 @@ public class StringEscapeUtilTests {
 
             assertEquals(message, expected, result);
 
-            // Èç¹ûÊäÈëÊä³ö×Ö·û´®ÏàµÈ£¬ÔòËüÃÇÓ¦¸ÃÊÇÍ¬Ò»¸ö×Ö·û´®£¬ÕâÑùÏµÍ³ĞÔÄÜ¸üºÃ
+            // å¦‚æœè¾“å…¥è¾“å‡ºå­—ç¬¦ä¸²ç›¸ç­‰ï¼Œåˆ™å®ƒä»¬åº”è¯¥æ˜¯åŒä¸€ä¸ªå­—ç¬¦ä¸²ï¼Œè¿™æ ·ç³»ç»Ÿæ€§èƒ½æ›´å¥½
             if (result != null && result.equals(str)) {
                 assertSame(str, result);
             }
@@ -395,7 +395,7 @@ public class StringEscapeUtilTests {
 
             assertEquals(expected, result);
 
-            // Èç¹ûÊäÈëÊä³ö×Ö·û´®ÏàµÈ£¬ÔòËüÃÇÓ¦¸ÃÊÇÍ¬Ò»¸ö×Ö·û´®£¬ÕâÑùÏµÍ³ĞÔÄÜ¸üºÃ
+            // å¦‚æœè¾“å…¥è¾“å‡ºå­—ç¬¦ä¸²ç›¸ç­‰ï¼Œåˆ™å®ƒä»¬åº”è¯¥æ˜¯åŒä¸€ä¸ªå­—ç¬¦ä¸²ï¼Œè¿™æ ·ç³»ç»Ÿæ€§èƒ½æ›´å¥½
             if (result != null && result.equals(str)) {
                 assertSame(str, result);
             }
@@ -406,7 +406,7 @@ public class StringEscapeUtilTests {
 
             assertEquals(expected, result);
 
-            // Èç¹ûÊäÈëÊä³ö×Ö·û´®ÏàµÈ£¬ÔòËüÃÇÓ¦¸ÃÊÇÍ¬Ò»¸ö×Ö·û´®£¬ÕâÑùÏµÍ³ĞÔÄÜ¸üºÃ
+            // å¦‚æœè¾“å…¥è¾“å‡ºå­—ç¬¦ä¸²ç›¸ç­‰ï¼Œåˆ™å®ƒä»¬åº”è¯¥æ˜¯åŒä¸€ä¸ªå­—ç¬¦ä¸²ï¼Œè¿™æ ·ç³»ç»Ÿæ€§èƒ½æ›´å¥½
             if (result != null && result.equals(str)) {
                 assertSame(str, result);
             }
@@ -420,7 +420,7 @@ public class StringEscapeUtilTests {
     }
 
     /* ==================================================================== */
-    /* ²âÊÔÒ»°ãµÄentities¡£ */
+    /* æµ‹è¯•ä¸€èˆ¬çš„entitiesã€‚ */
     /* ==================================================================== */
     @Test
     public void escapeEntity() throws IOException {
@@ -455,10 +455,10 @@ public class StringEscapeUtilTests {
     @Test
     public void unescapeUnicodeEntity() throws IOException {
         assertEscapeEntities("\u00A1", "&#161;", false);
-        assertEscapeEntities("xÖĞx", "x&#x4E2D;x", false);
+        assertEscapeEntities("xä¸­x", "x&#x4E2D;x", false);
 
         entities = null;
-        assertEscapeEntities("xÖĞx", "x&#x4E2D;x", false);
+        assertEscapeEntities("xä¸­x", "x&#x4E2D;x", false);
     }
 
     @Test
@@ -485,14 +485,14 @@ public class StringEscapeUtilTests {
 
     @Test
     public void testUnEscapeNullEntities() {
-        assertEquals("ÖĞ»ªÈËÃñ¹²ºÍ¹ú",
+        assertEquals("ä¸­åäººæ°‘å…±å’Œå›½",
                 StringEscapeUtil.unescapeEntities(null, "&#20013;&#21326;&#20154;&#27665;&#20849;&#21644;&#22269;"));
         assertEquals("&amp;&lt;", StringEscapeUtil.unescapeEntities(null, "&amp;&lt;"));
     }
 
     /* ==================================================================== */
-    /* ²âÊÔSQL¡£ */
-    /* ²Î¿¼£ºhttp://www.jguru.com/faq/view.jsp?EID=8881 */
+    /* æµ‹è¯•SQLã€‚ */
+    /* å‚è€ƒï¼šhttp://www.jguru.com/faq/view.jsp?EID=8881 */
     /* ==================================================================== */
     @Test
     public void escapeSql() throws Exception {
@@ -517,8 +517,8 @@ public class StringEscapeUtilTests {
     }
 
     /* ==================================================================== */
-    /* URL/URI encoding/decoding¡£ */
-    /* ¸ù¾İRFC2396£ºhttp://www.ietf.org/rfc/rfc2396.txt */
+    /* URL/URI encoding/decodingã€‚ */
+    /* æ ¹æ®RFC2396ï¼šhttp://www.ietf.org/rfc/rfc2396.txt */
     /* ==================================================================== */
     @Test
     public void escapeURLStrict() throws Exception {
@@ -526,7 +526,7 @@ public class StringEscapeUtilTests {
 
         assertSame(unreserved, StringEscapeUtil.escapeURL(unreserved));
 
-        // ²âÊÔËùÓĞISO-8859-1×Ö·û
+        // æµ‹è¯•æ‰€æœ‰ISO-8859-1å­—ç¬¦
         StringBuilder buffer = new StringBuilder(256);
         StringBuilder expectedBuffer = new StringBuilder(256 * 3);
 
@@ -547,18 +547,18 @@ public class StringEscapeUtilTests {
 
         assertEquals(expectedStr, StringEscapeUtil.escapeURL(str, "8859_1"));
 
-        // ²âÊÔwriter
+        // æµ‹è¯•writer
         StringWriter writer = new StringWriter();
 
         StringEscapeUtil.escapeURL(str, "8859_1", writer);
         assertEquals(expectedStr, writer.toString());
 
-        // ²âÊÔÖĞÎÄ
-        assertEquals("%D6%D0%BB%AA%C8%CB%C3%F1%B9%B2%BA%CD%B9%FA", StringEscapeUtil.escapeURL("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", "GBK"));
+        // æµ‹è¯•ä¸­æ–‡
+        assertEquals("%D6%D0%BB%AA%C8%CB%C3%F1%B9%B2%BA%CD%B9%FA", StringEscapeUtil.escapeURL("ä¸­åäººæ°‘å…±å’Œå›½", "GBK"));
 
-        // ÖĞÎÄwriter
+        // ä¸­æ–‡writer
         writer = new StringWriter();
-        StringEscapeUtil.escapeURL("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", "GBK", writer);
+        StringEscapeUtil.escapeURL("ä¸­åäººæ°‘å…±å’Œå›½", "GBK", writer);
         assertEquals("%D6%D0%BB%AA%C8%CB%C3%F1%B9%B2%BA%CD%B9%FA", writer.toString());
     }
 
@@ -568,7 +568,7 @@ public class StringEscapeUtilTests {
 
         assertEquals("%3B%2F%3F%3A%40%26%3D%2B%24%2C", StringEscapeUtil.escapeURL(reserved, "8859_1", false));
 
-        // ²âÊÔËùÓĞISO-8859-1×Ö·û
+        // æµ‹è¯•æ‰€æœ‰ISO-8859-1å­—ç¬¦
         StringBuilder buffer = new StringBuilder(256);
         StringBuilder expectedBuffer = new StringBuilder(256 * 3);
 
@@ -589,32 +589,32 @@ public class StringEscapeUtilTests {
 
         assertEquals(expectedStr, StringEscapeUtil.escapeURL(str, "8859_1", false));
 
-        // ²âÊÔwriter
+        // æµ‹è¯•writer
         StringWriter writer = new StringWriter();
 
         StringEscapeUtil.escapeURL(str, "8859_1", writer, false);
         assertEquals(expectedStr, writer.toString());
 
-        // ²âÊÔÖĞÎÄºÍÈ«½Ç¿Õ¸ñ
-        str = "ÖĞ»ªÈËÃñ¹²ºÍ¹ú";
+        // æµ‹è¯•ä¸­æ–‡å’Œå…¨è§’ç©ºæ ¼
+        str = "ä¸­åäººæ°‘å…±å’Œå›½";
         assertSame(str, StringEscapeUtil.escapeURL(str, "GBK", false));
 
-        str = "ÖĞ»ªÈËÃñ¹²ºÍ¹ú\u3000";
-        assertEquals("ÖĞ»ªÈËÃñ¹²ºÍ¹ú%A1%A1", StringEscapeUtil.escapeURL(str, "GBK", false));
+        str = "ä¸­åäººæ°‘å…±å’Œå›½\u3000";
+        assertEquals("ä¸­åäººæ°‘å…±å’Œå›½%A1%A1", StringEscapeUtil.escapeURL(str, "GBK", false));
 
-        // ÖĞÎÄwriter
+        // ä¸­æ–‡writer
         writer = new StringWriter();
-        StringEscapeUtil.escapeURL("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", "GBK", writer, false);
-        assertEquals("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", writer.toString());
+        StringEscapeUtil.escapeURL("ä¸­åäººæ°‘å…±å’Œå›½", "GBK", writer, false);
+        assertEquals("ä¸­åäººæ°‘å…±å’Œå›½", writer.toString());
     }
 
     @Test
     public void escapeURLEncoding() {
         LocaleUtil.setContext(Locale.CHINA, "GBK");
-        assertEquals("%D6%D0%BB%AA%C8%CB%C3%F1%B9%B2%BA%CD%B9%FA", StringEscapeUtil.escapeURL("ÖĞ»ªÈËÃñ¹²ºÍ¹ú"));
+        assertEquals("%D6%D0%BB%AA%C8%CB%C3%F1%B9%B2%BA%CD%B9%FA", StringEscapeUtil.escapeURL("ä¸­åäººæ°‘å…±å’Œå›½"));
 
         LocaleUtil.setContext(Locale.US, "8859_1");
-        assertEquals("%3F%3F%3F%3F%3F%3F%3F", StringEscapeUtil.escapeURL("ÖĞ»ªÈËÃñ¹²ºÍ¹ú"));
+        assertEquals("%3F%3F%3F%3F%3F%3F%3F", StringEscapeUtil.escapeURL("ä¸­åäººæ°‘å…±å’Œå›½"));
 
         LocaleUtil.resetContext();
     }
@@ -638,7 +638,7 @@ public class StringEscapeUtilTests {
 
         assertSame(unreserved, StringEscapeUtil.unescapeURL(escaped));
 
-        // ²âÊÔËùÓĞISO-8859-1×Ö·û
+        // æµ‹è¯•æ‰€æœ‰ISO-8859-1å­—ç¬¦
         StringBuilder buffer = new StringBuilder(256);
         StringBuilder expectedBuffer = new StringBuilder(256 * 3);
 
@@ -661,22 +661,22 @@ public class StringEscapeUtilTests {
         assertEquals(expectedStr, escaped);
         assertEquals(str, StringEscapeUtil.unescapeURL(escaped, "8859_1"));
 
-        // ²âÊÔwriter
+        // æµ‹è¯•writer
         StringWriter writer = new StringWriter();
 
         StringEscapeUtil.unescapeURL(escaped, "8859_1", writer);
         assertEquals(str, writer.toString());
 
-        // ²âÊÔÖĞÎÄ
-        escaped = StringEscapeUtil.escapeURL("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", "GBK");
-        assertEquals("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", StringEscapeUtil.unescapeURL(escaped, "GBK"));
+        // æµ‹è¯•ä¸­æ–‡
+        escaped = StringEscapeUtil.escapeURL("ä¸­åäººæ°‘å…±å’Œå›½", "GBK");
+        assertEquals("ä¸­åäººæ°‘å…±å’Œå›½", StringEscapeUtil.unescapeURL(escaped, "GBK"));
 
-        // ÖĞÎÄwriter
+        // ä¸­æ–‡writer
         writer = new StringWriter();
         StringEscapeUtil.unescapeURL(escaped, "GBK", writer);
-        assertEquals("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", writer.toString());
+        assertEquals("ä¸­åäººæ°‘å…±å’Œå›½", writer.toString());
 
-        // ´íÎóµÄ±àÂë
+        // é”™è¯¯çš„ç¼–ç 
         str = "abc%xx%20%1";
         assertEquals("abc%xx %1", StringEscapeUtil.unescapeURL(str));
 
@@ -691,7 +691,7 @@ public class StringEscapeUtilTests {
 
         assertEquals(reserved, StringEscapeUtil.unescapeURL(escaped, "8859_1"));
 
-        // ²âÊÔËùÓĞISO-8859-1×Ö·û
+        // æµ‹è¯•æ‰€æœ‰ISO-8859-1å­—ç¬¦
         StringBuilder buffer = new StringBuilder(256);
         StringBuilder expectedBuffer = new StringBuilder(256 * 3);
 
@@ -715,7 +715,7 @@ public class StringEscapeUtilTests {
         assertEquals(expectedStr, escaped);
         assertEquals(str, StringEscapeUtil.unescapeURL(escaped, "8859_1"));
 
-        // ²âÊÔwriter
+        // æµ‹è¯•writer
         StringWriter writer = new StringWriter();
 
         escaped = StringEscapeUtil.escapeURL(str, "8859_1", false);
@@ -723,23 +723,23 @@ public class StringEscapeUtilTests {
 
         assertEquals(str, writer.toString());
 
-        // ²âÊÔÖĞÎÄºÍÈ«½Ç¿Õ¸ñ
-        str = "ÖĞ»ªÈËÃñ¹²ºÍ¹ú";
-        assertSame(str, StringEscapeUtil.unescapeURL("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", "GBK"));
+        // æµ‹è¯•ä¸­æ–‡å’Œå…¨è§’ç©ºæ ¼
+        str = "ä¸­åäººæ°‘å…±å’Œå›½";
+        assertSame(str, StringEscapeUtil.unescapeURL("ä¸­åäººæ°‘å…±å’Œå›½", "GBK"));
 
-        str = "ÖĞ»ªÈËÃñ¹²ºÍ¹ú\u3000";
-        assertEquals(str, StringEscapeUtil.unescapeURL("ÖĞ»ªÈËÃñ¹²ºÍ¹ú%A1%A1", "GBK"));
+        str = "ä¸­åäººæ°‘å…±å’Œå›½\u3000";
+        assertEquals(str, StringEscapeUtil.unescapeURL("ä¸­åäººæ°‘å…±å’Œå›½%A1%A1", "GBK"));
 
-        // ÖĞÎÄwriter
+        // ä¸­æ–‡writer
         writer = new StringWriter();
-        StringEscapeUtil.unescapeURL("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", "GBK", writer);
-        assertEquals("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", writer.toString());
+        StringEscapeUtil.unescapeURL("ä¸­åäººæ°‘å…±å’Œå›½", "GBK", writer);
+        assertEquals("ä¸­åäººæ°‘å…±å’Œå›½", writer.toString());
     }
 
     @Test
     public void unescapeURLEncoding() {
         LocaleUtil.setContext(Locale.CHINA, "GBK");
-        assertEquals("ÖĞ»ªÈËÃñ¹²ºÍ¹ú", StringEscapeUtil.unescapeURL("%D6%D0%BB%AA%C8%CB%C3%F1%B9%B2%BA%CD%B9%FA"));
+        assertEquals("ä¸­åäººæ°‘å…±å’Œå›½", StringEscapeUtil.unescapeURL("%D6%D0%BB%AA%C8%CB%C3%F1%B9%B2%BA%CD%B9%FA"));
 
         LocaleUtil.setContext(Locale.US, "8859_1");
         assertEquals("\u00D6\u00D0\u00BB\u00AA\u00C8\u00CB\u00C3\u00F1\u00B9\u00B2\u00BA\u00CD\u00B9\u00FA",
@@ -754,16 +754,16 @@ public class StringEscapeUtilTests {
         String escaped = StringEscapeUtil.escapeURL("Justin\u00b7Bieber");
 
         assertEquals("Justin\u00b7Bieber", StringEscapeUtil.unescapeURL(escaped));
-        assertEquals("ÖĞ»ªÃñ¹ú100Äê", StringEscapeUtil.unescapeURL(reencode("ÖĞ»ªÃñ¹ú100Äê", "GBK"), "GBK"));
+        assertEquals("ä¸­åæ°‘å›½100å¹´", StringEscapeUtil.unescapeURL(reencode("ä¸­åæ°‘å›½100å¹´", "GBK"), "GBK"));
 
-        // »ìºÏÖĞ/Ó¢ÎÄ¡¢±àÂë/Î´±àÂë
-        assertEquals("ÖĞ»ªabc ÈËÃñ¹²ºÍ¹úabc ÈË", StringEscapeUtil.unescapeURL("ÖĞ»ªabc+\310%CBÃñ¹²ºÍ¹úabc+\310%CB", "GBK"));
-        assertSame("abcÖĞ»ª", StringEscapeUtil.unescapeURL("abcÖĞ»ª", "GBK"));
-        assertSame("abÖĞ»ªc", StringEscapeUtil.unescapeURL("abÖĞ»ªc", "GBK"));
-        assertSame("ÖĞ»ªabc", StringEscapeUtil.unescapeURL("ÖĞ»ªabc", "GBK"));
-        assertSame("ÖĞabc»ª", StringEscapeUtil.unescapeURL("ÖĞabc»ª", "GBK"));
-        assertEquals("abcÖĞ»ª", StringEscapeUtil.unescapeURL(reencode("abcÖĞ", "GBK") + "»ª", "GBK"));
-        assertEquals("ÖĞ»ªabc", StringEscapeUtil.unescapeURL(reencode("ÖĞ", "GBK") + "»ªabc", "GBK"));
+        // æ··åˆä¸­/è‹±æ–‡ã€ç¼–ç /æœªç¼–ç 
+        assertEquals("ä¸­åabc äººæ°‘å…±å’Œå›½abc äºº", StringEscapeUtil.unescapeURL("ä¸­åabc+\310%CBæ°‘å…±å’Œå›½abc+\310%CB", "GBK"));
+        assertSame("abcä¸­å", StringEscapeUtil.unescapeURL("abcä¸­å", "GBK"));
+        assertSame("abä¸­åc", StringEscapeUtil.unescapeURL("abä¸­åc", "GBK"));
+        assertSame("ä¸­åabc", StringEscapeUtil.unescapeURL("ä¸­åabc", "GBK"));
+        assertSame("ä¸­abcå", StringEscapeUtil.unescapeURL("ä¸­abcå", "GBK"));
+        assertEquals("abcä¸­å", StringEscapeUtil.unescapeURL(reencode("abcä¸­", "GBK") + "å", "GBK"));
+        assertEquals("ä¸­åabc", StringEscapeUtil.unescapeURL(reencode("ä¸­", "GBK") + "åabc", "GBK"));
 
         LocaleUtil.resetContext();
     }

@@ -120,7 +120,7 @@ public class SpringExtUtilTests {
 
         List<Object> list = createArrayList(container.values());
 
-        // °üº¬Ò»¸östr, Ò»¸ödateformat£¬Á½¸ödate
+        // åŒ…å«ä¸€ä¸ªstr, ä¸€ä¸ªdateformatï¼Œä¸¤ä¸ªdate
         for (Iterator<Object> i = list.iterator(); i.hasNext();) {
             Object o = i.next();
 
@@ -184,12 +184,12 @@ public class SpringExtUtilTests {
 
     @Test
     public void generateBeanName() throws Exception {
-        // newNameÔÚcontainerÖĞÉĞ²»´æÔÚ£¬Ö±½Ó·µ»Ø¡£
+        // newNameåœ¨containerä¸­å°šä¸å­˜åœ¨ï¼Œç›´æ¥è¿”å›ã€‚
         assertEquals("newName", SpringExtUtil.generateBeanName("newName", (BeanDefinitionRegistry) factory));
         assertEquals("newName",
                 SpringExtUtil.generateBeanName("newName", (BeanDefinitionRegistry) factory, null, false));
 
-        // testNameºÍtestName#0ÒÑ¾­ÔÚcontainerÖĞ´æÔÚ£¬¹Ê·µ»ØtestName#1¡£
+        // testNameå’ŒtestName#0å·²ç»åœ¨containerä¸­å­˜åœ¨ï¼Œæ•…è¿”å›testName#1ã€‚
         assertEquals("testName#1", SpringExtUtil.generateBeanName("testName", (BeanDefinitionRegistry) factory));
         assertEquals("testName#1",
                 SpringExtUtil.generateBeanName("testName", (BeanDefinitionRegistry) factory, null, false));
@@ -304,8 +304,8 @@ public class SpringExtUtilTests {
 
         // required arg, no value injected
         try {
-            context = createApplicationContext_forConstructorArg(contextType, true, false, true); // appcontext.refreshÊ±±¨´í
-            context.getBean("myClass"); // beanfactory.getBeanÊ±±¨´í
+            context = createApplicationContext_forConstructorArg(contextType, true, false, true); // appcontext.refreshæ—¶æŠ¥é”™
+            context.getBean("myClass"); // beanfactory.getBeanæ—¶æŠ¥é”™
             fail();
         } catch (BeanCreationException e) {
             assertThat(e, exception(NoSuchBeanDefinitionException.class, "myClass"));

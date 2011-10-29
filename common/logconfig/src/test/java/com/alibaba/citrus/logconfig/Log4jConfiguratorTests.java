@@ -41,7 +41,7 @@ public class Log4jConfiguratorTests extends AbstractLogConfiguratorTests {
 
     @Test
     public void getConfigurator_wrongContext() throws Exception {
-        // ÔÚlogbackµÄ»·¾³ÖĞ£¬´´½¨log4j£¬³É¹¦£¬µ«´òÓ¡¾¯¸æ¡£
+        // åœ¨logbackçš„ç¯å¢ƒä¸­ï¼Œåˆ›å»ºlog4jï¼ŒæˆåŠŸï¼Œä½†æ‰“å°è­¦å‘Šã€‚
         invokeInLoader("logback", "getConfigurator", "log4j");
         assertThat(err, containsString("WARN: SLF4J chose [logback] as its logging system, not [log4j]"));
     }

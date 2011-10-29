@@ -161,7 +161,7 @@ public class RewriteSubstitution implements InitializingBean {
     }
 
     /**
-     * ´ú±ísubstitutionµÄ±êÖ¾Î»¡£
+     * ä»£è¡¨substitutionçš„æ ‡å¿—ä½ã€‚
      */
     public static class SubstitutionFlags extends Flags {
         public SubstitutionFlags() {
@@ -173,31 +173,31 @@ public class RewriteSubstitution implements InitializingBean {
         }
 
         /**
-         * ±êÖ¾Î»£º±£ÁôËùÓĞGET¡¢POST¡¢UPLOADËùµÃµÄ²ÎÊı¡£
+         * æ ‡å¿—ä½ï¼šä¿ç•™æ‰€æœ‰GETã€POSTã€UPLOADæ‰€å¾—çš„å‚æ•°ã€‚
          */
         public boolean hasQSA() {
             return hasFlags("QSA", "qsappend");
         }
 
         /**
-         * ±êÖ¾Î»£ºÈç¹ûÒ»¸ö¹æÔò±»Æ¥Åä£¬Ôò¼ÌĞø´¦ÀíÆäºó¼Ì¹æÔò£»Èç¹û¸Ã¹æÔò²»±»Æ¥Åä£¬ÔòÆäºó¼Ì¹æÔò½«±»Ìø¹ı¡£
+         * æ ‡å¿—ä½ï¼šå¦‚æœä¸€ä¸ªè§„åˆ™è¢«åŒ¹é…ï¼Œåˆ™ç»§ç»­å¤„ç†å…¶åç»§è§„åˆ™ï¼›å¦‚æœè¯¥è§„åˆ™ä¸è¢«åŒ¹é…ï¼Œåˆ™å…¶åç»§è§„åˆ™å°†è¢«è·³è¿‡ã€‚
          */
         public boolean hasC() {
             return hasFlags("C", "chain");
         }
 
         /**
-         * ±êÖ¾Î»£ºÈç¹ûÒ»¸ö¹æÔò±»Æ¥Åä£¬²¢Ö¸Ã÷¸Ã²ÎÊı£¬ÔòÁ¢¼´½áÊø¡£
+         * æ ‡å¿—ä½ï¼šå¦‚æœä¸€ä¸ªè§„åˆ™è¢«åŒ¹é…ï¼Œå¹¶æŒ‡æ˜è¯¥å‚æ•°ï¼Œåˆ™ç«‹å³ç»“æŸã€‚
          */
         public boolean hasL() {
             return hasFlags("L", "last");
         }
 
         /**
-         * ±êÖ¾Î»£ºÖØ¶¨Ïò£¬²¢È¡µÃredirect code¡£Èç¹ûÎ´Ö¸¶¨ÖØ¶¨Ïò£¬Ôò·µ»Ø<code>0</code>¡£
+         * æ ‡å¿—ä½ï¼šé‡å®šå‘ï¼Œå¹¶å–å¾—redirect codeã€‚å¦‚æœæœªæŒ‡å®šé‡å®šå‘ï¼Œåˆ™è¿”å›<code>0</code>ã€‚
          * <p>
-         * Ä¬ÈÏÎª<code>302 moved temporarily</code>¡£ÈçÖ¸¶¨<code>R=301</code>Ôò±íÊ¾
-         * <code>301 moved permanently</code>¡£
+         * é»˜è®¤ä¸º<code>302 moved temporarily</code>ã€‚å¦‚æŒ‡å®š<code>R=301</code>åˆ™è¡¨ç¤º
+         * <code>301 moved permanently</code>ã€‚
          * </p>
          */
         public int getRedirectCode() {

@@ -39,23 +39,23 @@ public class FallbackModuleTests extends AbstractMappingRuleTests {
         // Exact match
         result = mappingRules.getMappedName("fallback.module", "aaa/bbb/myOtherModule.vm");
         assertEquals("aaa.bbb.MyOtherModule", result);
-        assertSame(result, mappingRules.getMappedName("fallback.module", "aaa/bbb/myOtherModule.vm")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+        assertSame(result, mappingRules.getMappedName("fallback.module", "aaa/bbb/myOtherModule.vm")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
         // Fallback level 1
         result = mappingRules.getMappedName("fallback.module", "aaa/bbb/nonexistModule.vm");
         assertEquals("aaa.bbb.Default", result);
-        assertSame(result, mappingRules.getMappedName("fallback.module", "aaa/bbb/nonexistModule.vm")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+        assertSame(result, mappingRules.getMappedName("fallback.module", "aaa/bbb/nonexistModule.vm")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
         // Fallback level 2
         result = mappingRules.getMappedName("fallback.module", "aaa/nonexistPackage/nonexistModule.vm");
         assertEquals("aaa.Default", result);
-        assertSame(result, mappingRules.getMappedName("fallback.module", "aaa/nonexistPackage/nonexistModule.vm")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+        assertSame(result, mappingRules.getMappedName("fallback.module", "aaa/nonexistPackage/nonexistModule.vm")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
         // Fallback to default
         result = mappingRules.getMappedName("fallback.module", "nonexistPackage1/nonexistPackage2/nonexistModule.vm");
         assertEquals("MyDefaultModule", result);
         assertSame(result,
-                mappingRules.getMappedName("fallback.module", "nonexistPackage1/nonexistPackage2/nonexistModule.vm")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+                mappingRules.getMappedName("fallback.module", "nonexistPackage1/nonexistPackage2/nonexistModule.vm")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
     }
 
     @Test
@@ -65,24 +65,24 @@ public class FallbackModuleTests extends AbstractMappingRuleTests {
         // Exact match
         result = mappingRules.getMappedName("fallback.module.nodefault", "aaa/bbb/myOtherModule.vm");
         assertEquals("aaa.bbb.MyOtherModule", result);
-        assertSame(result, mappingRules.getMappedName("fallback.module.nodefault", "aaa/bbb/myOtherModule.vm")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+        assertSame(result, mappingRules.getMappedName("fallback.module.nodefault", "aaa/bbb/myOtherModule.vm")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
         // Fallback level 1
         result = mappingRules.getMappedName("fallback.module.nodefault", "aaa/bbb/nonexistModule.vm");
         assertEquals("aaa.bbb.Default", result);
-        assertSame(result, mappingRules.getMappedName("fallback.module.nodefault", "aaa/bbb/nonexistModule.vm")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+        assertSame(result, mappingRules.getMappedName("fallback.module.nodefault", "aaa/bbb/nonexistModule.vm")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
         // Fallback level 2
         result = mappingRules.getMappedName("fallback.module.nodefault", "aaa/nonexistPackage/nonexistModule.vm");
         assertEquals("aaa.Default", result);
         assertSame(result,
-                mappingRules.getMappedName("fallback.module.nodefault", "aaa/nonexistPackage/nonexistModule.vm")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+                mappingRules.getMappedName("fallback.module.nodefault", "aaa/nonexistPackage/nonexistModule.vm")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
 
         // Fallback to default - failed - so return the original string(normalized)
         result = mappingRules.getMappedName("fallback.module.nodefault",
                 "nonexistPackage1/nonexistPackage2/nonexistModule.vm");
         assertEquals("nonexistPackage1.nonexistPackage2.NonexistModule", result);
         assertSame(result, mappingRules.getMappedName("fallback.module.nodefault",
-                "nonexistPackage1/nonexistPackage2/nonexistModule.vm")); // ÓÉÓÚcache´æÔÚ£¬ËùÒÔµÚ¶ş´ÎÓ¦Á¢¼´·µ»Ø
+                "nonexistPackage1/nonexistPackage2/nonexistModule.vm")); // ç”±äºcacheå­˜åœ¨ï¼Œæ‰€ä»¥ç¬¬äºŒæ¬¡åº”ç«‹å³è¿”å›
     }
 }

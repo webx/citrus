@@ -31,39 +31,39 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.MDC;
 
 /**
- * ÉèÖÃ»òÇå³ılogging MDCµÄ¹¤¾ßÀà¡£
+ * è®¾ç½®æˆ–æ¸…é™¤logging MDCçš„å·¥å…·ç±»ã€‚
  * <p>
- * ¸Ã¹¤¾ßÀà¿É±»ÓÃÓÚvalveºÍfilterÖĞ¡£ÔÚÇëÇó¿ªÊ¼µÄÊ±ºò£¬µ÷ÓÃ<code>setLoggingContext()</code>£¬½áÊøÊ±µ÷ÓÃ
- * <code>clearLoggingContext()</code>¡£ ÈçÔÚ<code>clearLoggingContext()</code>
- * Ö®Ç°£¬¶à´Îµ÷ÓÃ<code>setLoggingContext()</code>£¬²»»áÔö¼Ó¶îÍâµÄ¿ªÏú¡£
+ * è¯¥å·¥å…·ç±»å¯è¢«ç”¨äºvalveå’Œfilterä¸­ã€‚åœ¨è¯·æ±‚å¼€å§‹çš„æ—¶å€™ï¼Œè°ƒç”¨<code>setLoggingContext()</code>ï¼Œç»“æŸæ—¶è°ƒç”¨
+ * <code>clearLoggingContext()</code>ã€‚ å¦‚åœ¨<code>clearLoggingContext()</code>
+ * ä¹‹å‰ï¼Œå¤šæ¬¡è°ƒç”¨<code>setLoggingContext()</code>ï¼Œä¸ä¼šå¢åŠ é¢å¤–çš„å¼€é”€ã€‚
  * </p>
  * <p>
- * µ÷ÓÃ<code>setLoggingContext()</code>Ö®ºó£¬SLF4j
- * MDCÖĞ»á´´½¨ÈçÏÂÖµ£¬ÕâĞ©Öµ¿ÉÔÚlogback»òlog4jÅäÖÃÎÄ¼şÖĞÖ±½ÓÒıÓÃ¡£
+ * è°ƒç”¨<code>setLoggingContext()</code>ä¹‹åï¼ŒSLF4j
+ * MDCä¸­ä¼šåˆ›å»ºå¦‚ä¸‹å€¼ï¼Œè¿™äº›å€¼å¯åœ¨logbackæˆ–log4jé…ç½®æ–‡ä»¶ä¸­ç›´æ¥å¼•ç”¨ã€‚
  * </p>
  * <table border="1" cellpadding="5">
  * <tr>
- * <td colspan="2"><strong>ÇëÇóĞÅÏ¢</strong></td>
+ * <td colspan="2"><strong>è¯·æ±‚ä¿¡æ¯</strong></td>
  * </tr>
  * <tr>
  * <td>%X{method}</td>
- * <td>ÇëÇóÀàĞÍ£ºGET¡¢POST</td>
+ * <td>è¯·æ±‚ç±»å‹ï¼šGETã€POST</td>
  * </tr>
  * <tr>
  * <td>%X{requestURL}</td>
- * <td>ÍêÕûµÄURL</td>
+ * <td>å®Œæ•´çš„URL</td>
  * </tr>
  * <tr>
  * <td>%X{requestURLWithQueryString}</td>
- * <td>ÍêÕûµÄURL£¬º¬querydata</td>
+ * <td>å®Œæ•´çš„URLï¼Œå«querydata</td>
  * </tr>
  * <tr>
  * <td>%X{requestURI}</td>
- * <td>²»°üÀ¨hostĞÅÏ¢µÄURL</td>
+ * <td>ä¸åŒ…æ‹¬hostä¿¡æ¯çš„URL</td>
  * </tr>
  * <tr>
  * <td>%X{requestURIWithQueryString}</td>
- * <td>²»°üÀ¨hostĞÅÏ¢µÄURL£¬º¬querydata</td>
+ * <td>ä¸åŒ…æ‹¬hostä¿¡æ¯çš„URLï¼Œå«querydata</td>
  * </tr>
  * <tr>
  * <td>%X{queryString}</td>
@@ -71,30 +71,30 @@ import org.slf4j.MDC;
  * </tr>
  * <tr>
  * <td>%X{cookies}</td>
- * <td>ËùÓĞcookieµÄÃû³Æ£¬ÒÔ¶ººÅ·Ö¸ô</td>
+ * <td>æ‰€æœ‰cookieçš„åç§°ï¼Œä»¥é€—å·åˆ†éš”</td>
  * </tr>
  * <tr>
  * <td>%X{cookie.*}</td>
- * <td>Ö¸¶¨cookieµÄÖµ£¬ÀıÈç£ºcookie.JSESSIONID</td>
+ * <td>æŒ‡å®šcookieçš„å€¼ï¼Œä¾‹å¦‚ï¼šcookie.JSESSIONID</td>
  * </tr>
  * <tr>
- * <td colspan="2"><strong>¿Í»§¶ËĞÅÏ¢</strong></td>
+ * <td colspan="2"><strong>å®¢æˆ·ç«¯ä¿¡æ¯</strong></td>
  * </tr>
  * <tr>
  * <td>%X{remoteAddr}</td>
- * <td>ÓÃ»§IPµØÖ·</td>
+ * <td>ç”¨æˆ·IPåœ°å€</td>
  * </tr>
  * <tr>
  * <td>%X{remoteHost}</td>
- * <td>ÓÃ»§ÓòÃû£¨Ò²¿ÉÄÜÊÇIPµØÖ·£©</td>
+ * <td>ç”¨æˆ·åŸŸåï¼ˆä¹Ÿå¯èƒ½æ˜¯IPåœ°å€ï¼‰</td>
  * </tr>
  * <tr>
  * <td>%X{userAgent}</td>
- * <td>ÓÃ»§ä¯ÀÀÆ÷</td>
+ * <td>ç”¨æˆ·æµè§ˆå™¨</td>
  * </tr>
  * <tr>
  * <td>%X{referrer}</td>
- * <td>ÉÏÒ»¸öÁ´½Ó</td>
+ * <td>ä¸Šä¸€ä¸ªé“¾æ¥</td>
  * </tr>
  * </table>
  * 
@@ -123,14 +123,14 @@ public class SetLoggingContextHelper {
     }
 
     /**
-     * ÉèÖÃrequestĞÅÏ¢µ½mdc¡£
+     * è®¾ç½®requestä¿¡æ¯åˆ°mdcã€‚
      */
     public void setLoggingContext() {
         setLoggingContext(null);
     }
 
     /**
-     * ÉèÖÃrequestĞÅÏ¢ºÍÆäËüĞÅÏ¢£¨Èç¹ûÓĞµÄ»°£©µ½mdc¡£
+     * è®¾ç½®requestä¿¡æ¯å’Œå…¶å®ƒä¿¡æ¯ï¼ˆå¦‚æœæœ‰çš„è¯ï¼‰åˆ°mdcã€‚
      */
     public void setLoggingContext(Map<String, String> extra) {
         boolean setRequestInfo = testAndSetRequestInfo();
@@ -152,9 +152,9 @@ public class SetLoggingContextHelper {
     }
 
     /**
-     * Çå³ıMDC¡£
+     * æ¸…é™¤MDCã€‚
      * <p>
-     * Ö»ÓĞµ±Ç°¶ÔÏó×Ô¼ºÉèÖÃµÄMDC²ÅÄÜ±»Çå³ı¡£
+     * åªæœ‰å½“å‰å¯¹è±¡è‡ªå·±è®¾ç½®çš„MDCæ‰èƒ½è¢«æ¸…é™¤ã€‚
      * </p>
      */
     public void clearLoggingContext() {
@@ -168,14 +168,14 @@ public class SetLoggingContextHelper {
         // GET or POST
         putMDC(mdc, MDC_METHOD, request.getMethod());
 
-        // request URL£ºÍêÕûµÄURL
+        // request URLï¼šå®Œæ•´çš„URL
         StringBuffer requestURL = request.getRequestURL();
         String queryString = trimToNull(request.getQueryString());
 
         putMDC(mdc, MDC_REQUEST_URL, getRequestURL(requestURL, null));
         putMDC(mdc, MDC_REQUEST_URL_WITH_QUERY_STRING, getRequestURL(requestURL, queryString));
 
-        // request URI£º²»°üÀ¨hostĞÅÏ¢µÄURL
+        // request URIï¼šä¸åŒ…æ‹¬hostä¿¡æ¯çš„URL
         String requestURI = request.getRequestURI();
         String requestURIWithQueryString = queryString == null ? requestURI : requestURI + "?" + queryString;
 
@@ -221,10 +221,10 @@ public class SetLoggingContextHelper {
     }
 
     /**
-     * È¡µÃµ±Ç°µÄrequest URL£¬°üÀ¨query string¡£
+     * å–å¾—å½“å‰çš„request URLï¼ŒåŒ…æ‹¬query stringã€‚
      * 
-     * @param withQueryString ÊÇ·ñ°üº¬query string
-     * @return µ±Ç°ÇëÇóµÄrequest URL
+     * @param withQueryString æ˜¯å¦åŒ…å«query string
+     * @return å½“å‰è¯·æ±‚çš„request URL
      */
     private String getRequestURL(StringBuffer requestURL, String queryString) {
         int length = requestURL.length();
@@ -241,7 +241,7 @@ public class SetLoggingContextHelper {
     }
 
     /**
-     * ÉèÖÃmdc£¬Èç¹ûvalueÎª¿Õ£¬Ôò²»ÖÃÈë¡£
+     * è®¾ç½®mdcï¼Œå¦‚æœvalueä¸ºç©ºï¼Œåˆ™ä¸ç½®å…¥ã€‚
      */
     private void putMDC(Map<String, String> mdc, String key, String value) {
         if (value != null) {
@@ -250,7 +250,7 @@ public class SetLoggingContextHelper {
     }
 
     /**
-     * È¡µÃµ±Ç°MDC mapµÄ¸´±¾¡£
+     * å–å¾—å½“å‰MDC mapçš„å¤æœ¬ã€‚
      */
     @SuppressWarnings("unchecked")
     protected Map<String, String> getMDCCopy() {
@@ -264,14 +264,14 @@ public class SetLoggingContextHelper {
     }
 
     /**
-     * ½«mapÖĞµÄÖµÉèÖÃµ½MDCÖĞ¡£
+     * å°†mapä¸­çš„å€¼è®¾ç½®åˆ°MDCä¸­ã€‚
      */
     protected void setMDC(Map<String, String> mdc) {
         MDC.setContextMap(mdc);
     }
 
     /**
-     * ÇåÀíMDC¡£
+     * æ¸…ç†MDCã€‚
      */
     protected void clearMDC() {
         MDC.clear();

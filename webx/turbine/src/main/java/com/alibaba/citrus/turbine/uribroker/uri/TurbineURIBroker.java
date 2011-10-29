@@ -26,9 +26,9 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
- * Turbine·ç¸ñµÄURI¡£
+ * Turbineé£Žæ ¼çš„URIã€‚
  * <p>
- * Ò»¸öTurbine·ç¸ñµÄURI°üÀ¨ÈçÏÂ¼¸¸ö²¿·Ö£º
+ * ä¸€ä¸ªTurbineé£Žæ ¼çš„URIåŒ…æ‹¬å¦‚ä¸‹å‡ ä¸ªéƒ¨åˆ†ï¼š
  * </p>
  * 
  * <pre>
@@ -40,7 +40,7 @@ import com.alibaba.citrus.util.StringUtil;
  * REFERENCE   = reference
  * </pre>
  * <p>
- * ÀýÈç£º
+ * ä¾‹å¦‚ï¼š
  * </p>
  * 
  * <pre>
@@ -88,14 +88,14 @@ public class TurbineURIBroker extends WebxURIBroker {
         target = trimToNull(target);
 
         if (target != null) {
-            // ½«targetÓ³Éä³ÉÍâ²¿ÐÎÊ½¡£
+            // å°†targetæ˜ å°„æˆå¤–éƒ¨å½¢å¼ã€‚
             if (getMappingRuleService() != null) {
                 target = getMappingRuleService().getMappedName(getTargetMappingRule(), target);
             }
 
             if (!isEmpty(target)) {
                 if (isConvertTargetCase()) {
-                    // ½«target×ª»»³Étarget_nameÐÎÊ½¡£
+                    // å°†targetè½¬æ¢æˆtarget_nameå½¢å¼ã€‚
                     int lastSlashIndex = target.lastIndexOf("/");
 
                     if (lastSlashIndex >= 0) {

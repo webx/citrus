@@ -31,7 +31,7 @@ import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 
 /**
- * ÓÃÀ´´´½¨×éºÏÊ½validatorµÄparser»ùÀà¡£
+ * ç”¨æ¥åˆ›å»ºç»„åˆå¼validatorçš„parseråŸºç±»ã€‚
  */
 public abstract class AbstractCompositeValidatorDefinitionParser<V extends AbstractCompositeValidator> extends
         AbstractValidatorDefinitionParser<V> implements ContributionAware {

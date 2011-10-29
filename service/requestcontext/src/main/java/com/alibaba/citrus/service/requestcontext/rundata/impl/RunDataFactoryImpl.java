@@ -27,14 +27,14 @@ public class RunDataFactoryImpl extends AbstractRequestContextFactory<RunData> {
     }
 
     /**
-     * RunData±¾Éí²»Ìá¹©ĞÂ¹¦ÄÜ¡£
+     * RunDataæœ¬èº«ä¸æä¾›æ–°åŠŸèƒ½ã€‚
      */
     public String[] getFeatures() {
         return null;
     }
 
     /**
-     * RunData±ØĞëÅÅÔÚËùÓĞrequest contextÖ®ºó£¬²¢ÇÒÒÀÀµÄ³¼¸ÖÖrequest context¡£
+     * RunDataå¿…é¡»æ’åœ¨æ‰€æœ‰request contextä¹‹åï¼Œå¹¶ä¸”ä¾èµ–æŸå‡ ç§request contextã€‚
      */
     public FeatureOrder[] featureOrders() {
         return new FeatureOrder[] { new AfterFeature("*"), new AfterFeature("lazyCommitContent"),

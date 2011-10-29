@@ -26,7 +26,7 @@ import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
 import com.alibaba.citrus.util.regex.MatchResultSubstitution;
 
 /**
- * ºÍrewriteÏà¹ØµÄ¹¤¾ßÀà¡£
+ * å’Œrewriteç›¸å…³çš„å·¥å…·ç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -51,7 +51,7 @@ public class RewriteUtil {
         int length = expr.length();
         int startIndex = expr.indexOf("%{");
 
-        // Èç¹û±í´ïÊ½²»°üº¬%{}£¬ÔòÖ±½Ó·µ»ØÖ®¡£
+        // å¦‚æœè¡¨è¾¾å¼ä¸åŒ…å«%{}ï¼Œåˆ™ç›´æ¥è¿”å›ä¹‹ã€‚
         if (startIndex < 0) {
             return expr;
         }
@@ -62,7 +62,7 @@ public class RewriteUtil {
             return expr;
         }
 
-        // ´´½¨¸´ºÏµÄ±í´ïÊ½¡£
+        // åˆ›å»ºå¤åˆçš„è¡¨è¾¾å¼ã€‚
         StringBuffer resultBuffer = new StringBuffer();
         StringBuffer charBuffer = new StringBuffer();
         StringBuffer varNameBuffer = new StringBuffer();
@@ -147,9 +147,9 @@ public class RewriteUtil {
     }
 
     /**
-     * Õ¹¿ª±äÁ¿¡£
+     * å±•å¼€å˜é‡ã€‚
      * 
-     * @return ×¢Òâ£¬Èç¹û·µ»Ønull£¬±íÊ¾°´Ô­ÑùÏÔÊ¾£¬ÀıÈç£º%{XYZ}
+     * @return æ³¨æ„ï¼Œå¦‚æœè¿”å›nullï¼Œè¡¨ç¤ºæŒ‰åŸæ ·æ˜¾ç¤ºï¼Œä¾‹å¦‚ï¼š%{XYZ}
      */
     private static String expand(String varName, HttpServletRequest request) {
         boolean valid = true;
@@ -248,7 +248,7 @@ public class RewriteUtil {
             valid = false;
         }
 
-        // Èç¹û±äÁ¿ºÏ·¨£¬µ«ÖµÎªnull£¬Ôò·µ»Ø""
+        // å¦‚æœå˜é‡åˆæ³•ï¼Œä½†å€¼ä¸ºnullï¼Œåˆ™è¿”å›""
         if (valid && result == null) {
             result = "";
         }

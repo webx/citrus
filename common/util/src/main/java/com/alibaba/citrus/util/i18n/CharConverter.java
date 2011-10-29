@@ -25,22 +25,22 @@ import com.alibaba.citrus.util.ClassInstantiationException;
 import com.alibaba.citrus.util.ClassLoaderUtil;
 
 /**
- * ´ú±íÒ»¸ö×Ö·û×ª»»Æ÷¡£ÀıÈç£º½«¼òÌåÖĞÎÄ×ªÎª·±ÌåÖĞÎÄ¡£
+ * ä»£è¡¨ä¸€ä¸ªå­—ç¬¦è½¬æ¢å™¨ã€‚ä¾‹å¦‚ï¼šå°†ç®€ä½“ä¸­æ–‡è½¬ä¸ºç¹ä½“ä¸­æ–‡ã€‚
  * 
  * @author Michael Zhou
  */
 public abstract class CharConverter {
-    /** ¼òÌåÖĞÎÄµ½·±ÌåÖĞÎÄµÄ×ª»»Æ÷Ãû³Æ¡£ */
+    /** ç®€ä½“ä¸­æ–‡åˆ°ç¹ä½“ä¸­æ–‡çš„è½¬æ¢å™¨åç§°ã€‚ */
     public static final String SIMPLIFIED_TO_TRADITIONAL_CHINESE = "SimplifiedToTraditionalChinese";
 
-    /** ·±ÌåÖĞÎÄµ½¼òÌåÖĞÎÄµÄ×ª»»Æ÷Ãû³Æ¡£ */
+    /** ç¹ä½“ä¸­æ–‡åˆ°ç®€ä½“ä¸­æ–‡çš„è½¬æ¢å™¨åç§°ã€‚ */
     public static final String TRADITIONAL_TO_SIMPLIFIED_CHINESE = "TraditionalToSimplifiedChinese";
 
-    // Ë½ÓĞ±äÁ¿
+    // ç§æœ‰å˜é‡
     private static final Map<String, CharConverter> converters = createConcurrentHashMap();
 
     /**
-     * È¡µÃÒ»¸öÖ¸¶¨Ãû³ÆµÄ×ª»»Æ÷¡£
+     * å–å¾—ä¸€ä¸ªæŒ‡å®šåç§°çš„è½¬æ¢å™¨ã€‚
      */
     public static final CharConverter getInstance(String name) {
         CharConverter converter = converters.get(name);
@@ -66,19 +66,19 @@ public abstract class CharConverter {
     }
 
     /**
-     * ×ª»»Ò»¸ö×Ö·û¡£
+     * è½¬æ¢ä¸€ä¸ªå­—ç¬¦ã€‚
      */
     public abstract char convert(char ch);
 
     /**
-     * ×ª»»Ò»¸ö×Ö·û´®¡£
+     * è½¬æ¢ä¸€ä¸ªå­—ç¬¦ä¸²ã€‚
      */
     public String convert(CharSequence chars) {
         return convert(chars, 0, chars.length());
     }
 
     /**
-     * ×ª»»Ò»¸ö×Ö·û´®¡£
+     * è½¬æ¢ä¸€ä¸ªå­—ç¬¦ä¸²ã€‚
      */
     public String convert(CharSequence chars, int offset, int count) {
         if (offset < 0) {
@@ -105,16 +105,16 @@ public abstract class CharConverter {
     }
 
     /**
-     * ×ª»»Ò»¸ö×Ö·ûÊı×é£¬½«½á¹ûĞ´ÈëÔ­Êı×é¡£
+     * è½¬æ¢ä¸€ä¸ªå­—ç¬¦æ•°ç»„ï¼Œå°†ç»“æœå†™å…¥åŸæ•°ç»„ã€‚
      */
     public void convert(char[] chars) {
         convert(chars, 0, chars.length);
     }
 
     /**
-     * ×ª»»Ò»¸ö×Ö·ûÊı×é£¬½«½á¹ûĞ´ÈëÔ­Êı×é¡£
+     * è½¬æ¢ä¸€ä¸ªå­—ç¬¦æ•°ç»„ï¼Œå°†ç»“æœå†™å…¥åŸæ•°ç»„ã€‚
      * <p>
-     * ¸Ã·½·¨¼ÙÉè×ª»»Ç°ºóµÄ×Ö·ûÊıÊÇÏàµÈµÄ£¬ÕâÖÖ¼ÙÉèÓĞÀûÓÚĞ´Ìá¸ß×ª»»µÄĞÔÄÜ¡£
+     * è¯¥æ–¹æ³•å‡è®¾è½¬æ¢å‰åçš„å­—ç¬¦æ•°æ˜¯ç›¸ç­‰çš„ï¼Œè¿™ç§å‡è®¾æœ‰åˆ©äºå†™æé«˜è½¬æ¢çš„æ€§èƒ½ã€‚
      * </p>
      */
     public void convert(char[] chars, int offset, int count) {

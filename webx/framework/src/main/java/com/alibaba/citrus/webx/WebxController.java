@@ -22,7 +22,7 @@ import org.springframework.beans.BeansException;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 
 /**
- * ÓÃÀ´´¦Àí¶ÔÌØ¶¨<code>WebxComponent</code>µÄÇëÇóµÄ¿ØÖÆÆ÷¡£
+ * ç”¨æ¥å¤„ç†å¯¹ç‰¹å®š<code>WebxComponent</code>çš„è¯·æ±‚çš„æ§åˆ¶å™¨ã€‚
  * 
  * @author Michael Zhou
  */

@@ -40,7 +40,7 @@ public class PageComponentTests extends AbstractRequestProcessorTests {
         new SimpleComponent(processor, "x/b/c");
         new SimpleComponent(processor, "x/b/d");
 
-        // ×¢ÒâÅÅĞò
+        // æ³¨æ„æ’åº
         assertArrayEquals(new String[] { "simple/", "x/b/c/", "x/b/d/", "x/b/", "x/c/", "a/" },
                 processor.getComponentPaths());
     }

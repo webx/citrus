@@ -32,7 +32,7 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import com.alibaba.citrus.service.form.impl.FormServiceImpl;
 
 /**
- * ²âÊÔform serviceÅäÖÃ¼°¹¦ÄÜ¡£
+ * æµ‹è¯•form serviceé…ç½®åŠåŠŸèƒ½ã€‚
  * 
  * @author Michael Zhou
  */
@@ -97,12 +97,12 @@ public class FormServiceTests extends AbstractFormServiceTests {
 
     @Test
     public void getForm_notPostOnly() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.field1
                 { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
 
-        // ËÄÖÖ×éºÏ£ºGET/POST, getForm()/getForm(false)
+        // å››ç§ç»„åˆï¼šGET/POST, getForm()/getForm(false)
         for (int i = 0; i < 4; i++) {
             if (i % 2 == 0) {
                 invokeGet(args);
@@ -130,7 +130,7 @@ public class FormServiceTests extends AbstractFormServiceTests {
 
     @Test
     public void getForm_forcePostOnly() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.field1
                 { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
@@ -159,7 +159,7 @@ public class FormServiceTests extends AbstractFormServiceTests {
 
     @Test
     public void getForm_postOnly() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ìá½»" }, //
+        Object[][] args = new Object[][] { { "sumbit", "æäº¤" }, //
                 { "_fm.gr._0.f", "aaa" }, // group2.field1
                 { "_fm.gr._0.fi", "bbb" }, // group2.field2
         };

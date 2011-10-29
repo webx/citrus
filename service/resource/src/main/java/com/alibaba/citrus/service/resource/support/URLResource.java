@@ -31,7 +31,7 @@ import java.net.URLConnection;
 import com.alibaba.citrus.service.resource.Resource;
 
 /**
- * ´ú±íÒ»¸ö<code>URL</code>µÄ×ÊÔ´¡£
+ * ä»£è¡¨ä¸€ä¸ª<code>URL</code>çš„èµ„æºã€‚
  * 
  * @author Michael Zhou
  */
@@ -40,7 +40,7 @@ public class URLResource implements Resource {
     private final File file;
 
     /**
-     * ´´½¨Ò»¸ö<code>URLResource</code>¡£
+     * åˆ›å»ºä¸€ä¸ª<code>URLResource</code>ã€‚
      */
     public URLResource(URL url) {
         this.url = assertNotNull(url, "url");
@@ -60,24 +60,24 @@ public class URLResource implements Resource {
     }
 
     /**
-     * È¡µÃ×ÊÔ´µÄ<code>URL</code>¡£
+     * å–å¾—èµ„æºçš„<code>URL</code>ã€‚
      */
     public URL getURL() {
         return url;
     }
 
     /**
-     * È¡µÃ×ÊÔ´µÄ<code>File</code>¡£
+     * å–å¾—èµ„æºçš„<code>File</code>ã€‚
      */
     public File getFile() {
         return file;
     }
 
     /**
-     * È¡µÃ×ÊÔ´µÄ<code>InputStream</code>¡£
+     * å–å¾—èµ„æºçš„<code>InputStream</code>ã€‚
      */
     public InputStream getInputStream() throws IOException {
-        // ¶ÔÎÄ¼şÓÅ»¯
+        // å¯¹æ–‡ä»¶ä¼˜åŒ–
         if (file != null) {
             try {
                 return new FileInputStream(file);
@@ -90,10 +90,10 @@ public class URLResource implements Resource {
     }
 
     /**
-     * ÅĞ¶Ï×ÊÔ´ÊÇ·ñ´æÔÚ¡£
+     * åˆ¤æ–­èµ„æºæ˜¯å¦å­˜åœ¨ã€‚
      */
     public boolean exists() {
-        // ¶ÔÎÄ¼şÓÅ»¯
+        // å¯¹æ–‡ä»¶ä¼˜åŒ–
         if (file != null) {
             return file.exists();
         } else {
@@ -118,7 +118,7 @@ public class URLResource implements Resource {
     }
 
     /**
-     * È¡µÃ×ÊÔ´×î½üĞŞ¸ÄÊ±¼ä¡£
+     * å–å¾—èµ„æºæœ€è¿‘ä¿®æ”¹æ—¶é—´ã€‚
      */
     public long lastModified() {
         if (file != null) {
@@ -173,7 +173,7 @@ public class URLResource implements Resource {
     }
 
     /**
-     * ½«resource×ª»»³É×Ö·û´®±íÊ¾¡£
+     * å°†resourceè½¬æ¢æˆå­—ç¬¦ä¸²è¡¨ç¤ºã€‚
      */
     @Override
     public String toString() {
@@ -182,7 +182,7 @@ public class URLResource implements Resource {
         buf.append(getClass().getSimpleName()).append("[");
 
         if (file != null) {
-            // °´ÎÄ¼şĞÎÊ½ÏÔÊ¾
+            // æŒ‰æ–‡ä»¶å½¢å¼æ˜¾ç¤º
             if (file.exists()) {
                 buf.append(file.isFile() ? "file: " : "directory: ");
                 buf.append(file.getAbsolutePath());
@@ -190,7 +190,7 @@ public class URLResource implements Resource {
                 buf.append("file or directory does not exist: ").append(file.getAbsolutePath());
             }
         } else {
-            // °´URLĞÎÊ½ÏÔÊ¾
+            // æŒ‰URLå½¢å¼æ˜¾ç¤º
             buf.append("URL: ").append(url.toExternalForm());
         }
 

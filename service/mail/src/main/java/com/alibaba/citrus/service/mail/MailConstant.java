@@ -18,62 +18,62 @@
 package com.alibaba.citrus.service.mail;
 
 /**
- * MailÏà¹Ø³£Á¿¡£
+ * Mailç›¸å…³å¸¸é‡ã€‚
  * 
  * @author Michael Zhou
  */
 public final class MailConstant {
-    /** µ±Ã»ÓĞÖ¸¶¨textÀàĞÍµÄcontentµÄcharsetÊ±, Ê¹ÓÃÄ¬ÈÏÖµ¡£ */
+    /** å½“æ²¡æœ‰æŒ‡å®štextç±»å‹çš„contentçš„charsetæ—¶, ä½¿ç”¨é»˜è®¤å€¼ã€‚ */
     public final static String DEFAULT_CHARSET = "UTF-8";
 
-    /** ´«Êä±àÂë·½Ê½µÄheaderÃû¡£ */
+    /** ä¼ è¾“ç¼–ç æ–¹å¼çš„headeråã€‚ */
     public final static String CONTENT_TRANSFER_ENCODING = "Content-Transfer-Encoding";
 
-    /** ÄÚÈİÃèÊöµÄheaderÃû¡£ */
+    /** å†…å®¹æè¿°çš„headeråã€‚ */
     public final static String CONTENT_DESCRIPTION = "Content-Description";
 
-    /** Content IDµÄheaderÃû¡£ */
+    /** Content IDçš„headeråã€‚ */
     public final static String CONTENT_ID = "Content-ID";
 
-    /** Ä¬ÈÏµÄ´«Êä±àÂë¡£ */
+    /** é»˜è®¤çš„ä¼ è¾“ç¼–ç ã€‚ */
     public final static String DEFAULT_TRANSFER_ENCODING = "8bit";
 
-    /** ÉèÖÃÔÚContentTypeÖĞµÄcharsetÃû³Æ¡£ */
+    /** è®¾ç½®åœ¨ContentTypeä¸­çš„charsetåç§°ã€‚ */
     public final static String CONTENT_TYPE_CHARSET = "charset";
 
-    /** ´¿ÎÄ±¾µÄcontent type¡£ */
+    /** çº¯æ–‡æœ¬çš„content typeã€‚ */
     public final static String CONTENT_TYPE_TEXT_PLAIN = "text/plain";
 
-    /** ´¿HTMLµÄcontent type¡£ */
+    /** çº¯HTMLçš„content typeã€‚ */
     public final static String CONTENT_TYPE_TEXT_HTML = "text/html";
 
-    /** ¸½¼şmessageµÄcontent type¡£ */
+    /** é™„ä»¶messageçš„content typeã€‚ */
     public final static String CONTENT_TYPE_MESSAGE = "message/rfc822";
 
-    /** ÄÚÇ¶×ÊÔ´µÄHTMLµÄcontent type×ÓÀàĞÍ¡£ */
+    /** å†…åµŒèµ„æºçš„HTMLçš„content typeå­ç±»å‹ã€‚ */
     public final static String CONTENT_TYPE_MULTIPART_SUBTYPE_RELATED = "related";
 
-    /** Ñ¡ÔñĞÍmultipartµÄcontent type×ÓÀàĞÍ¡£ */
+    /** é€‰æ‹©å‹multipartçš„content typeå­ç±»å‹ã€‚ */
     public final static String CONTENT_TYPE_MULTIPART_SUBTYPE_ALTERNATIVE = "alternative";
 
-    /** »ìºÏĞÍmultipartµÄcontent type×ÓÀàĞÍ¡£ */
+    /** æ··åˆå‹multipartçš„content typeå­ç±»å‹ã€‚ */
     public final static String CONTENT_TYPE_MULTIPART_SUBTYPE_MIXED = "mixed";
 
-    /** Ä¬ÈÏµÄmail-storeĞ­Òé¡£ */
+    /** é»˜è®¤çš„mail-storeåè®®ã€‚ */
     public final static String DEFAULT_MAIL_STORE_PROTOCOL = "pop3";
 
-    /** Ä¬ÈÏµÄmail-transportĞ­Òé¡£ */
+    /** é»˜è®¤çš„mail-transportåè®®ã€‚ */
     public final static String DEFAULT_MAIL_TRANSPORT_PROTOCOL = "smtp";
 
-    /** Éè¶¨ĞèÒªÑéÖ¤µÄsmtpµÄÊôĞÔÃû³Æ¡£ */
+    /** è®¾å®šéœ€è¦éªŒè¯çš„smtpçš„å±æ€§åç§°ã€‚ */
     public final static String SMTP_AUTH = "mail.smtp.auth";
 
-    /** Ä¬ÈÏµÄmail-storeµÄfolderÃû¡£ */
+    /** é»˜è®¤çš„mail-storeçš„folderåã€‚ */
     public final static String DEFAULT_MAIL_STORE_FOLDER = "INBOX";
 
-    /** Ä¬ÈÏµÄstore»òtransportµÄID¡£ */
+    /** é»˜è®¤çš„storeæˆ–transportçš„IDã€‚ */
     public final static String DEFAULT_MAIL_SESSION_ID = "_DEFAULT_";
 
-    /** ÊÇ·ñ´ò¿ªdebugĞÅÏ¢¡£ */
+    /** æ˜¯å¦æ‰“å¼€debugä¿¡æ¯ã€‚ */
     public final static String MAIL_DEBUG = "mail.debug";
 }

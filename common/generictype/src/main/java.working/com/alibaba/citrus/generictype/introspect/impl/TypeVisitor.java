@@ -25,9 +25,9 @@ import com.alibaba.citrus.generictype.TypeInfo;
 import com.alibaba.citrus.generictype.introspect.Introspector;
 
 /**
- * ÓÃÀ´·ÖÎöÒ»¸öÀàĞÍ£¬±»{@link Introspector}µ÷ÓÃ¡£
+ * ç”¨æ¥åˆ†æä¸€ä¸ªç±»å‹ï¼Œè¢«{@link Introspector}è°ƒç”¨ã€‚
  * <p>
- * VisitorÖĞµÄ·½·¨µ÷ÓÃË³ĞòÈçÏÂ£º
+ * Visitorä¸­çš„æ–¹æ³•è°ƒç”¨é¡ºåºå¦‚ä¸‹ï¼š
  * </p>
  * 
  * <pre>

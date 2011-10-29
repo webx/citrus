@@ -27,9 +27,9 @@ import java.io.PrintWriter;
 import com.alibaba.citrus.util.Assert.ExceptionType;
 
 /**
- * ´ú±íÒ»¸örequest/response context¡£
+ * ä»£è¡¨ä¸€ä¸ªrequest/response contextã€‚
  * <p>
- * Ê¹ÓÃ´Ë³éÏóÀà£¬¶ø²»ÊÇÊ¹ÓÃ±ê×¼µÄservlet api£¬Ä¿µÄÊÇÎªÁË¾¡Á¿¼õÉÙ¶ÔÍâ½çapiµÄÒÀÀµ¡£
+ * ä½¿ç”¨æ­¤æŠ½è±¡ç±»ï¼Œè€Œä¸æ˜¯ä½¿ç”¨æ ‡å‡†çš„servlet apiï¼Œç›®çš„æ˜¯ä¸ºäº†å°½é‡å‡å°‘å¯¹å¤–ç•Œapiçš„ä¾èµ–ã€‚
  * </p>
  */
 public abstract class RequestContext {
@@ -52,38 +52,38 @@ public abstract class RequestContext {
     }
 
     /**
-     * È¡µÃURLÖĞËùÇëÇóµÄ×ÊÔ´Ãû³Æ¡£
+     * å–å¾—URLä¸­æ‰€è¯·æ±‚çš„èµ„æºåç§°ã€‚
      */
     public final String getResourceName() {
         return resourceName;
     }
 
     /**
-     * È¡µÃ»ù×¼URL¡£
+     * å–å¾—åŸºå‡†URLã€‚
      */
     public final String getBaseURL() {
         return baseURL;
     }
 
     /**
-     * È¡µÃÖ¸¶¨×ÊÔ´Ãû³ÆËù¶ÔÓ¦µÄURL¡£
+     * å–å¾—æŒ‡å®šèµ„æºåç§°æ‰€å¯¹åº”çš„URLã€‚
      */
     public final String getResourceURL(String resourceName) {
         return normalizeURI(baseURL + resourceName);
     }
 
     /**
-     * È¡µÃÒÑ¾­È¡µÃ¹ıµÄwriter¡£
+     * å–å¾—å·²ç»å–å¾—è¿‡çš„writerã€‚
      * 
-     * @throws IllegalStateException Èç¹û<code>getWriter(contentType)</code>
-     *             »¹Ã»ÓĞ±»µ÷ÓÃ¹ı¡£
+     * @throws IllegalStateException å¦‚æœ<code>getWriter(contentType)</code>
+     *             è¿˜æ²¡æœ‰è¢«è°ƒç”¨è¿‡ã€‚
      */
     public final PrintWriter getWriter() {
         return assertNotNull(writer, ExceptionType.ILLEGAL_STATE, "call getWriter(contentType) first");
     }
 
     /**
-     * È¡µÃÓÃÀ´Êä³öÎÄ±¾Ò³ÃæµÄ<code>Writer</code>¡£
+     * å–å¾—ç”¨æ¥è¾“å‡ºæ–‡æœ¬é¡µé¢çš„<code>Writer</code>ã€‚
      */
     public final PrintWriter getWriter(String contentType) throws IOException {
         if (writer == null) {
@@ -96,17 +96,17 @@ public abstract class RequestContext {
     protected abstract PrintWriter doGetWriter(String contentType) throws IOException;
 
     /**
-     * È¡µÃÒÑ¾­È¡µÃ¹ıµÄstream¡£
+     * å–å¾—å·²ç»å–å¾—è¿‡çš„streamã€‚
      * 
-     * @throws IllegalStateException Èç¹û<code>getOutputStream(contentType)</code>
-     *             »¹Ã»ÓĞ±»µ÷ÓÃ¹ı¡£
+     * @throws IllegalStateException å¦‚æœ<code>getOutputStream(contentType)</code>
+     *             è¿˜æ²¡æœ‰è¢«è°ƒç”¨è¿‡ã€‚
      */
     public final OutputStream getOutputStream() {
         return assertNotNull(stream, ExceptionType.ILLEGAL_STATE, "call getOutputStream(contentType) first");
     }
 
     /**
-     * È¡µÃÓÃÀ´Êä³ö¶ş½øÖÆÄÚÈİµÄ<code>OutputStream</code>¡£
+     * å–å¾—ç”¨æ¥è¾“å‡ºäºŒè¿›åˆ¶å†…å®¹çš„<code>OutputStream</code>ã€‚
      */
     public final OutputStream getOutputStream(String contentType) throws IOException {
         if (stream == null) {
@@ -119,12 +119,12 @@ public abstract class RequestContext {
     protected abstract OutputStream doGetOutputStream(String contentType) throws IOException;
 
     /**
-     * ×ÊÔ´Î´ÕÒµ½¡£
+     * èµ„æºæœªæ‰¾åˆ°ã€‚
      */
     public abstract void resourceNotFound(String resourceName) throws IOException;
 
     /**
-     * ÖØ¶¨ÏòÒ³Ãæ¡£
+     * é‡å®šå‘é¡µé¢ã€‚
      */
     public abstract void redirectTo(String location) throws IOException;
 

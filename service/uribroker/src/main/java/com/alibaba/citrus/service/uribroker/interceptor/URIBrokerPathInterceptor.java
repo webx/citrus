@@ -20,16 +20,16 @@ package com.alibaba.citrus.service.uribroker.interceptor;
 import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 
 /**
- * ÔÚÔËĞĞÊ±¶ÔURI BrokerµÄpath½øĞĞ´¦Àí
+ * åœ¨è¿è¡Œæ—¶å¯¹URI Brokerçš„pathè¿›è¡Œå¤„ç†
  * 
  * @author Michael Zhou
  * @author dux.fangl
  */
 public interface URIBrokerPathInterceptor extends URIBrokerInterceptor {
     /**
-     * ´¦ÀíÖ¸¶¨µÄuri broker£¬²¢·µ»ØĞŞ¸ÄºóµÄpath¡£
+     * å¤„ç†æŒ‡å®šçš„uri brokerï¼Œå¹¶è¿”å›ä¿®æ”¹åçš„pathã€‚
      * <p>
-     * ¶ÔÓÚÍ¬Ò»¸öbroker£¬ÔÚreset()Ö®ºóµÄ¶à´ÎrenderÖĞ£¬Ã¿´Îrender¾ù»áµ÷ÓÃ´Ë·½·¨¡£
+     * å¯¹äºåŒä¸€ä¸ªbrokerï¼Œåœ¨reset()ä¹‹åçš„å¤šæ¬¡renderä¸­ï¼Œæ¯æ¬¡renderå‡ä¼šè°ƒç”¨æ­¤æ–¹æ³•ã€‚
      * </p>
      */
     String perform(URIBroker broker, String path);

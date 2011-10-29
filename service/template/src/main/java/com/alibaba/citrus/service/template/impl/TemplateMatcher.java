@@ -20,7 +20,7 @@ package com.alibaba.citrus.service.template.impl;
 import com.alibaba.citrus.service.template.TemplateEngine;
 
 /**
- * ÓÃÀ´²éÕÒºÍÆ¥ÅäÄ£°åÃû¡£
+ * ç”¨æ¥æŸ¥æ‰¾å’ŒåŒ¹é…æ¨¡æ¿åã€‚
  * 
  * @author Michael Zhou
  */

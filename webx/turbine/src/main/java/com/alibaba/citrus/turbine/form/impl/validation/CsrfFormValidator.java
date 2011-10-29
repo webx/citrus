@@ -31,7 +31,7 @@ import com.alibaba.citrus.service.form.support.AbstractValidatorDefinitionParser
 import com.alibaba.citrus.turbine.util.CsrfToken;
 
 /**
- * ÔÚ±íµ¥Àï¼ÓÉÏ¸Ãvalidator£¬¿ÉÓÃÀ´È·±£csrf token±»Ìá½»¡£
+ * åœ¨è¡¨å•é‡ŒåŠ ä¸Šè¯¥validatorï¼Œå¯ç”¨æ¥ç¡®ä¿csrf tokenè¢«æäº¤ã€‚
  * 
  * @author Michael Zhou
  */

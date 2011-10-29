@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
 import com.alibaba.citrus.service.requestcontext.util.tomcat.ServerCookie;
 
 /**
- * À©Õ¹Ô­cookie£¬Ê¹Ö®Ö§³ÖHttpOnly cookie¡£
+ * æ‰©å±•åŸcookieï¼Œä½¿ä¹‹æ”¯æŒHttpOnly cookieã€‚
  * 
  * @author Michael Zhou
  */
@@ -47,21 +47,21 @@ public class CookieSupport extends Cookie {
     private boolean httpOnly;
 
     /**
-     * ´´½¨Ò»¸öcookie¡£
+     * åˆ›å»ºä¸€ä¸ªcookieã€‚
      */
     public CookieSupport(String name, String value) {
         super(assertNotNull(trimToNull(name), "cookieName"), value);
     }
 
     /**
-     * ¸´ÖÆÒ»¸öcookie¡£
+     * å¤åˆ¶ä¸€ä¸ªcookieã€‚
      */
     public CookieSupport(Cookie cookie) {
         this(cookie, null);
     }
 
     /**
-     * ¸´ÖÆÒ»¸öcookie£¬ĞŞ¸ÄcookieµÄÃû³Æ¡£
+     * å¤åˆ¶ä¸€ä¸ªcookieï¼Œä¿®æ”¹cookieçš„åç§°ã€‚
      */
     public CookieSupport(Cookie cookie, String name) {
         super(assertNotNull(getCookieName(cookie, name), "cookieName"), cookie.getValue());
@@ -100,7 +100,7 @@ public class CookieSupport extends Cookie {
     }
 
     /**
-     * ¶ÔÓÚservlet spec 3.0£¬ÒÑ¾­Ö§³Ö<code>isHttpOnly</code>·½·¨¡£
+     * å¯¹äºservlet spec 3.0ï¼Œå·²ç»æ”¯æŒ<code>isHttpOnly</code>æ–¹æ³•ã€‚
      */
     private static FastMethod getHttpOnlyMethod() {
         Method m = null;
@@ -109,7 +109,7 @@ public class CookieSupport extends Cookie {
             m = Cookie.class.getMethod("isHttpOnly"); // servlet 3.0 spec draft
         } catch (Exception e) {
             try {
-                m = Cookie.class.getMethod("getHttpOnly"); // ÁíÒ»ÖÖ¿ÉÄÜ
+                m = Cookie.class.getMethod("getHttpOnly"); // å¦ä¸€ç§å¯èƒ½
             } catch (Exception ee) {
             }
         }
@@ -135,21 +135,21 @@ public class CookieSupport extends Cookie {
     }
 
     /**
-     * ÊÇ·ñÉú³ÉIE6Ö§³ÖµÄHttpOnly±ê¼Ç¡£
+     * æ˜¯å¦ç”ŸæˆIE6æ”¯æŒçš„HttpOnlyæ ‡è®°ã€‚
      */
     public boolean isHttpOnly() {
         return httpOnly;
     }
 
     /**
-     * ÊÇ·ñÉú³ÉIE6Ö§³ÖµÄHttpOnly±ê¼Ç¡£
+     * æ˜¯å¦ç”ŸæˆIE6æ”¯æŒçš„HttpOnlyæ ‡è®°ã€‚
      */
     public boolean getHttpOnly() {
         return httpOnly;
     }
 
     /**
-     * ÊÇ·ñÉú³ÉIE6Ö§³ÖµÄHttpOnly±ê¼Ç¡£
+     * æ˜¯å¦ç”ŸæˆIE6æ”¯æŒçš„HttpOnlyæ ‡è®°ã€‚
      */
     public void setHttpOnly(boolean httpOnly) {
         this.httpOnly = httpOnly;
@@ -163,27 +163,27 @@ public class CookieSupport extends Cookie {
             domain = "." + domain;
         }
 
-        super.setDomain(domain); // ¸ù¾İRFC2109£¬È·±£ÒÔ¡°.¡±ÎªÇ°×º
+        super.setDomain(domain); // æ ¹æ®RFC2109ï¼Œç¡®ä¿ä»¥â€œ.â€ä¸ºå‰ç¼€
     }
 
     /**
-     * ½«cookieÌí¼Óµ½responseÖĞ¡£
+     * å°†cookieæ·»åŠ åˆ°responseä¸­ã€‚
      */
     public void addCookie(HttpServletResponse response) {
         response.addHeader(getCookieHeaderName(), getCookieHeaderValue());
     }
 
     /**
-     * È¡µÃcookie headerµÄÃû³Æ¡£
+     * å–å¾—cookie headerçš„åç§°ã€‚
      */
     public String getCookieHeaderName() {
         return ServerCookie.getCookieHeaderName(getVersion());
     }
 
     /**
-     * È¡µÃcookie headerµÄÖµ¡£
+     * å–å¾—cookie headerçš„å€¼ã€‚
      * 
-     * @throws IllegalArgumentException ¼ÙÈçcookie valueÖĞ°üº¬·Ç·¨Öµ
+     * @throws IllegalArgumentException å‡å¦‚cookie valueä¸­åŒ…å«éæ³•å€¼
      */
     public String getCookieHeaderValue() throws IllegalArgumentException {
         return appendCookieHeaderValue(new StringBuilder()).toString();
@@ -206,10 +206,10 @@ public class CookieSupport extends Cookie {
     }
 
     /**
-     * Éú³Éset-cookie headerµÄÖµ£¬¼´Ê¹cookie valueÖĞ°üº¬·Ç·¨Öµ£¬Ò²²»»á±¨´í¡£
+     * ç”Ÿæˆset-cookie headerçš„å€¼ï¼Œå³ä½¿cookie valueä¸­åŒ…å«éæ³•å€¼ï¼Œä¹Ÿä¸ä¼šæŠ¥é”™ã€‚
      * <p>
-     * Çë²»ÒªÊ¹ÓÃ<code>toString()</code>·½·¨À´Éú³Écookie header£¬¶øÓ¦¸ÃÊ¹ÓÃ
-     * <code>getCookieHeaderValue()</code>À´È¡´ú¡£
+     * è¯·ä¸è¦ä½¿ç”¨<code>toString()</code>æ–¹æ³•æ¥ç”Ÿæˆcookie headerï¼Œè€Œåº”è¯¥ä½¿ç”¨
+     * <code>getCookieHeaderValue()</code>æ¥å–ä»£ã€‚
      * </p>
      */
     @Override

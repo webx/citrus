@@ -27,7 +27,7 @@ import java.util.List;
 import org.junit.Test;
 
 /**
- * ²âÊÔ{@link TypeInfoTests}¡£
+ * æµ‹è¯•{@link TypeInfoTests}ã€‚
  * 
  * @author Michael Zhou
  */

@@ -30,7 +30,7 @@ import com.alibaba.citrus.service.mail.builder.content.AbstractContent;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ²âÊÔ<code>AbstractContent</code>µÄ»ù±¾¹¦ÄÜ¡£
+ * æµ‹è¯•<code>AbstractContent</code>çš„åŸºæœ¬åŠŸèƒ½ã€‚
  * 
  * @author Michael Zhou
  */
@@ -63,12 +63,12 @@ public class MailContentBasicTests extends AbstractMailBuilderTests {
     @Test
     public void getMailBuilder() {
         assertSame(builder, content1.getMailBuilder());
-        assertSame(builder, content2.getMailBuilder()); // ¼Ì³Ð×Ôcontent1
+        assertSame(builder, content2.getMailBuilder()); // ç»§æ‰¿è‡ªcontent1
 
         content1.setMailBuilder(null);
 
         assertNoMailBuilder(content1);
-        assertNoMailBuilder(content2); // ¼Ì³Ð×Ôcontent1
+        assertNoMailBuilder(content2); // ç»§æ‰¿è‡ªcontent1
     }
 
     @Test
@@ -79,7 +79,7 @@ public class MailContentBasicTests extends AbstractMailBuilderTests {
 
     @Test
     public void clone_() {
-        // Ò»²ãcontent
+        // ä¸€å±‚content
         MyContent contentCopy = (MyContent) content1.clone();
 
         assertEquals("content1", contentCopy.getId());
@@ -87,7 +87,7 @@ public class MailContentBasicTests extends AbstractMailBuilderTests {
         assertEquals(null, contentCopy.getParentContent());
         assertEquals("content1_name", contentCopy.name); // clone by copyTo()
 
-        // Á½²ãcontent
+        // ä¸¤å±‚content
         contentCopy = (MyContent) content2.clone();
 
         assertEquals("content2", contentCopy.getId());

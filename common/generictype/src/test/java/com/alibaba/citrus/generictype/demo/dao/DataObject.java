@@ -20,7 +20,7 @@ package com.alibaba.citrus.generictype.demo.dao;
 import java.io.Serializable;
 
 /**
- * DOµÄ½Ó¿Ú£¬PKÎªprimary key£¬¿ÉÒÔÍ¨¹ıËü²éÕÒDO¡£
+ * DOçš„æ¥å£ï¼ŒPKä¸ºprimary keyï¼Œå¯ä»¥é€šè¿‡å®ƒæŸ¥æ‰¾DOã€‚
  * 
  * @author Michael Zhou
  */

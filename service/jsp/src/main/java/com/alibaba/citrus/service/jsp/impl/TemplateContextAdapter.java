@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import com.alibaba.citrus.service.template.TemplateContext;
 
 /**
- * ½«<code>TemplateContext</code>ÊÊÅäµ½HTTP requestµÄÊÊÅäÆ÷¡£
+ * å°†<code>TemplateContext</code>é€‚é…åˆ°HTTP requestçš„é€‚é…å™¨ã€‚
  * 
  * @author Michael Zhou
  */
@@ -43,17 +43,17 @@ public class TemplateContextAdapter extends HttpServletRequestWrapper {
     }
 
     /**
-     * È¡µÃ±»ÊÊÅäµÄ<code>TemplateContext</code>¶ÔÏó¡£
+     * å–å¾—è¢«é€‚é…çš„<code>TemplateContext</code>å¯¹è±¡ã€‚
      */
     public TemplateContext getTemplateContext() {
         return context;
     }
 
     /**
-     * È¡µÃrequest×÷ÓÃÓòµÄËùÓĞÊôĞÔµÄkeys¡£
+     * å–å¾—requestä½œç”¨åŸŸçš„æ‰€æœ‰å±æ€§çš„keysã€‚
      * <p>
-     * Ê×ÏÈÈ¡µÃcontextÖĞµÄËùÓĞkeys£¬È»ºóÈ¡µÃ<code>request.getAttributeNames</code>
-     * Ëù·µ»ØµÄkeys¡£keys²»»áÖØ¸´¡£
+     * é¦–å…ˆå–å¾—contextä¸­çš„æ‰€æœ‰keysï¼Œç„¶åå–å¾—<code>request.getAttributeNames</code>
+     * æ‰€è¿”å›çš„keysã€‚keysä¸ä¼šé‡å¤ã€‚
      * </p>
      */
     @Override
@@ -64,12 +64,12 @@ public class TemplateContextAdapter extends HttpServletRequestWrapper {
     }
 
     /**
-     * È¡µÃrequest×÷ÓÃÓòµÄÊôĞÔ¡£
+     * å–å¾—requestä½œç”¨åŸŸçš„å±æ€§ã€‚
      * <p>
-     * Èç¹ûcontextÖĞ´æÔÚÖ¸¶¨Ãû³ÆµÄ¶ÔÏó£¬Ôò·µ»ØÖ®£¬·ñÔò·µ»Ø<code>request.getAttribute</code>µÄÖµ¡£
+     * å¦‚æœcontextä¸­å­˜åœ¨æŒ‡å®šåç§°çš„å¯¹è±¡ï¼Œåˆ™è¿”å›ä¹‹ï¼Œå¦åˆ™è¿”å›<code>request.getAttribute</code>çš„å€¼ã€‚
      * </p>
      * <p>
-     * Èç¹ûÖµ²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>¡£
+     * å¦‚æœå€¼ä¸å­˜åœ¨ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      * </p>
      */
     @Override
@@ -84,10 +84,10 @@ public class TemplateContextAdapter extends HttpServletRequestWrapper {
     }
 
     /**
-     * ÉèÖÃrequest×÷ÓÃÓòµÄÊôĞÔ¡£
+     * è®¾ç½®requestä½œç”¨åŸŸçš„å±æ€§ã€‚
      * <p>
-     * ¸ÃÖµ½«±»ÉèÖÃµ½<code>request.setAttribute</code>
-     * ÖĞ£¬¶øcontextÖĞµÄÍ¬ÃûÖµ½«±»É¾³ı£¬ÒÔ±ãËæºóµÄ´úÂë¿ÉÒÔ·ÃÎÊĞÂÉèÖÃµÄÖµ¡£
+     * è¯¥å€¼å°†è¢«è®¾ç½®åˆ°<code>request.setAttribute</code>
+     * ä¸­ï¼Œè€Œcontextä¸­çš„åŒåå€¼å°†è¢«åˆ é™¤ï¼Œä»¥ä¾¿éšåçš„ä»£ç å¯ä»¥è®¿é—®æ–°è®¾ç½®çš„å€¼ã€‚
      * </p>
      */
     @Override
@@ -97,8 +97,8 @@ public class TemplateContextAdapter extends HttpServletRequestWrapper {
     }
 
     /**
-     * É¾³ırequest×÷ÓÃÓòµÄÊôĞÔ¡£Í¬Ê±´Ó<code>request.removeAttribute</code>
-     * ºÍcontextÖĞÉ¾³ıÖ¸¶¨Ãû³ÆµÄÊôĞÔ¡£
+     * åˆ é™¤requestä½œç”¨åŸŸçš„å±æ€§ã€‚åŒæ—¶ä»<code>request.removeAttribute</code>
+     * å’Œcontextä¸­åˆ é™¤æŒ‡å®šåç§°çš„å±æ€§ã€‚
      */
     @Override
     public void removeAttribute(String name) {
@@ -112,18 +112,18 @@ public class TemplateContextAdapter extends HttpServletRequestWrapper {
     }
 
     /**
-     * ½«Ò»¸ö¼¯ºÏºÍÒ»¸ö<code>Enumeration</code>½áºÏµÄ<code>Enumeration</code>¡£
+     * å°†ä¸€ä¸ªé›†åˆå’Œä¸€ä¸ª<code>Enumeration</code>ç»“åˆçš„<code>Enumeration</code>ã€‚
      */
     private static class AttributeNamesEnumeration implements Enumeration<String> {
         private final Set<String> set;
         private final Iterator<String> iterator;
-        private final Enumeration<String> enumeration; // ¿ÉÒÔÎªnull
+        private final Enumeration<String> enumeration; // å¯ä»¥ä¸ºnull
         private String next = null;
 
         public AttributeNamesEnumeration(Set<String> set, Enumeration<String> enumeration) {
             this.set = set;
             this.iterator = set.iterator();
-            this.enumeration = enumeration; // ¿ÉÒÔÎªnull
+            this.enumeration = enumeration; // å¯ä»¥ä¸ºnull
         }
 
         public boolean hasMoreElements() {

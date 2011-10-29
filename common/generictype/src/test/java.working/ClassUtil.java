@@ -35,7 +35,7 @@ import com.alibaba.citrus.util.internal.ArrayUtil;
 import com.alibaba.citrus.util.internal.StringUtil;
 
 /**
- * ÓĞ¹ØÀàĞÍµÄ¹¤¾ßÀà¡£
+ * æœ‰å…³ç±»å‹çš„å·¥å…·ç±»ã€‚
  * 
  * @author Michael Zhou
  */
@@ -55,7 +55,7 @@ public class ClassUtil {
     }
 
     /**
-     * ´ú±íÒ»¸öprimitiveÀàĞÍµÄĞÅÏ¢¡£
+     * ä»£è¡¨ä¸€ä¸ªprimitiveç±»å‹çš„ä¿¡æ¯ã€‚
      */
     private static class PrimitiveInfo<T> {
         final Class<T> type;
@@ -72,9 +72,9 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃprimitiveÀà¡£
+     * å–å¾—primitiveç±»ã€‚
      * <p>
-     * ÀıÈç£º
+     * ä¾‹å¦‚ï¼š
      * 
      * <pre>
      * ClassUtil.getPrimitiveType(&quot;int&quot;) = int.class;
@@ -94,9 +94,9 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃprimitiveÀàĞÍµÄwrapper¡£Èç¹û²»ÊÇprimitive£¬ÔòÔ­Ñù·µ»Ø¡£
+     * å–å¾—primitiveç±»å‹çš„wrapperã€‚å¦‚æœä¸æ˜¯primitiveï¼Œåˆ™åŸæ ·è¿”å›ã€‚
      * <p>
-     * ÀıÈç£º
+     * ä¾‹å¦‚ï¼š
      * 
      * <pre>
      * ClassUtil.getPrimitiveWrapperType(int.class) = Integer.class;
@@ -117,7 +117,7 @@ public class ClassUtil {
     }
 
     /**
-     * ´ú±íArrayµÄĞÅÏ¢¡£
+     * ä»£è¡¨Arrayçš„ä¿¡æ¯ã€‚
      */
     public static final class ArrayInfo {
         public final Class<?> componentType;
@@ -130,7 +130,7 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÊı×éµÄÎ¬¶È£¬·ÇÊı×éÔò·µ»Ø<code>0</code>¡£
+     * å–å¾—æ•°ç»„çš„ç»´åº¦ï¼Œéæ•°ç»„åˆ™è¿”å›<code>0</code>ã€‚
      */
     public static ArrayInfo getArrayInfo(Class<?> arrayType) {
         assertNotNull(arrayType, "arrayType");
@@ -146,7 +146,7 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÖ¸¶¨componentÀàĞÍºÍÎ¬¶ÈµÄÊı×éÀà¡£
+     * å–å¾—æŒ‡å®šcomponentç±»å‹å’Œç»´åº¦çš„æ•°ç»„ç±»ã€‚
      */
     public static Class<?> getArrayType(Class<?> componentType, int dimension) {
         assertTrue(dimension >= 0, "dimension");
@@ -159,9 +159,9 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃJVMÄÚ²¿µÄÀàÃû¡£
+     * å–å¾—JVMå†…éƒ¨çš„ç±»åã€‚
      * <p>
-     * ÀıÈç£º
+     * ä¾‹å¦‚ï¼š
      * 
      * <pre>
      *  ClassUtil.getJVMClassName(&quot;int[]&quot;) = &quot;[I&quot;
@@ -170,7 +170,7 @@ public class ClassUtil {
      * 
      * </p>
      * <p>
-     * ¸Ã·½·¨Ëù·µ»ØµÄÀàÃû¿ÉÓÃÓÚ <code>Class.forName</code> ²Ù×÷¡£
+     * è¯¥æ–¹æ³•æ‰€è¿”å›çš„ç±»åå¯ç”¨äº <code>Class.forName</code> æ“ä½œã€‚
      * </p>
      */
     public static String getJVMClassName(String name) {
@@ -178,9 +178,9 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃJVMÄÚ²¿µÄÊı×éÀàÃû¡£
+     * å–å¾—JVMå†…éƒ¨çš„æ•°ç»„ç±»åã€‚
      * <p>
-     * ÀıÈç£º
+     * ä¾‹å¦‚ï¼š
      * 
      * <pre>
      *  ClassUtil.getJVMClassName(&quot;int&quot;, 1) = &quot;[I&quot;  // int[]
@@ -192,7 +192,7 @@ public class ClassUtil {
      * 
      * </p>
      * <p>
-     * ¸Ã·½·¨Ëù·µ»ØµÄÀàÃû¿ÉÓÃÓÚ <code>Class.forName</code> ²Ù×÷¡£
+     * è¯¥æ–¹æ³•æ‰€è¿”å›çš„ç±»åå¯ç”¨äº <code>Class.forName</code> æ“ä½œã€‚
      * </p>
      */
     public static String getJVMClassName(String name, int dimension) {
@@ -231,13 +231,13 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÍêÕûµÄÀàÃû¡£
+     * å–å¾—å®Œæ•´çš„ç±»åã€‚
      * <p>
-     * ¶ÔÓÚÊı×é£¬½«·µ»ØÒÔ¡°<code>[]</code>¡±½áÎ²µÄÃû×Ö¡£
+     * å¯¹äºæ•°ç»„ï¼Œå°†è¿”å›ä»¥â€œ<code>[]</code>â€ç»“å°¾çš„åå­—ã€‚
      * </p>
      * <p>
-     * ±¾·½·¨ºÍ<code>Class.getCanonicalName()</code>µÄÇø±ğÔÚÓÚ£¬±¾·½·¨»á±£ÁôinnerÀàµÄ
-     * <code>$</code>·ûºÅ¡£
+     * æœ¬æ–¹æ³•å’Œ<code>Class.getCanonicalName()</code>çš„åŒºåˆ«åœ¨äºï¼Œæœ¬æ–¹æ³•ä¼šä¿ç•™innerç±»çš„
+     * <code>$</code>ç¬¦å·ã€‚
      * </p>
      */
     public static String getJavaClassName(Class<?> clazz) {
@@ -249,13 +249,13 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÍêÕûµÄÀàÃû¡£
+     * å–å¾—å®Œæ•´çš„ç±»åã€‚
      * <p>
-     * ¶ÔÓÚÊı×é£¬½«·µ»ØÒÔ¡°<code>[]</code>¡±½áÎ²µÄÃû×Ö¡£
+     * å¯¹äºæ•°ç»„ï¼Œå°†è¿”å›ä»¥â€œ<code>[]</code>â€ç»“å°¾çš„åå­—ã€‚
      * </p>
      * <p>
-     * ±¾·½·¨ºÍ<code>Class.getSimpleName()</code>µÄÇø±ğÔÚÓÚ£¬±¾·½·¨»á±£ÁôinnerÀàµÄ<code>$</code>
-     * ·ûºÅ¡£
+     * æœ¬æ–¹æ³•å’Œ<code>Class.getSimpleName()</code>çš„åŒºåˆ«åœ¨äºï¼Œæœ¬æ–¹æ³•ä¼šä¿ç•™innerç±»çš„<code>$</code>
+     * ç¬¦å·ã€‚
      * </p>
      */
     public static String getSimpleJavaClassName(Class<?> clazz) {
@@ -265,14 +265,14 @@ public class ClassUtil {
     }
 
     /**
-     * ÅĞ¶Ï·½·¨ÊÇ²»ÊÇ<code>String toString()</code>·½·¨¡£
+     * åˆ¤æ–­æ–¹æ³•æ˜¯ä¸æ˜¯<code>String toString()</code>æ–¹æ³•ã€‚
      */
     public static boolean isToString(Method method) {
         return isToString(new MethodSignature(method));
     }
 
     /**
-     * ÅĞ¶Ï·½·¨ÊÇ²»ÊÇ<code>String toString()</code>·½·¨¡£
+     * åˆ¤æ–­æ–¹æ³•æ˜¯ä¸æ˜¯<code>String toString()</code>æ–¹æ³•ã€‚
      */
     public static boolean isToString(MethodSignature method) {
         if (!"toString".equals(method.getName())) {
@@ -287,65 +287,65 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàµÄËùÓĞ¸¸ÀàºÍ½Ó¿Ú¡£
+     * å–å¾—æŒ‡å®šç±»çš„æ‰€æœ‰çˆ¶ç±»å’Œæ¥å£ã€‚
      * <p>
-     * ¶ÔÓÚÒ»¸ö<code>Class</code>¶ÔÏó£¬Èç¹ûËü¼´²»ÊÇ½Ó¿Ú£¬Ò²²»ÊÇÊı×é£¬Ôò°´ÈçÏÂ´ÎĞòÁĞ³ö¸ÃÀàµÄ¸¸Àà¼°½Ó¿Ú¡£
+     * å¯¹äºä¸€ä¸ª<code>Class</code>å¯¹è±¡ï¼Œå¦‚æœå®ƒå³ä¸æ˜¯æ¥å£ï¼Œä¹Ÿä¸æ˜¯æ•°ç»„ï¼Œåˆ™æŒ‰å¦‚ä¸‹æ¬¡åºåˆ—å‡ºè¯¥ç±»çš„çˆ¶ç±»åŠæ¥å£ã€‚
      * </p>
      * <p>
-     * ÀıÈç<code>ClassUtil.getSupertypes(java.util.ArrayList.class)</code>·µ»ØÒÔÏÂÁĞ±í£º
-     * £¨Ë³ĞòÎª£º±¾Àà¡¢¸¸Àà¡¢¸¸½Ó¿Ú¡¢ObjectÀà£©
+     * ä¾‹å¦‚<code>ClassUtil.getSupertypes(java.util.ArrayList.class)</code>è¿”å›ä»¥ä¸‹åˆ—è¡¨ï¼š
+     * ï¼ˆé¡ºåºä¸ºï¼šæœ¬ç±»ã€çˆ¶ç±»ã€çˆ¶æ¥å£ã€Objectç±»ï¼‰
      * <ol>
-     * <li>±¾Àà - <code>java.util.ArrayList</code></li>
-     * <li>¸¸Àà - <code>java.util.AbstractList</code></li>
-     * <li>¸¸Àà - <code>java.util.AbstractCollection</code></li>
-     * <li>¸¸½Ó¿Ú - <code>java.util.List</code></li>
-     * <li>¸¸½Ó¿Ú - <code>java.util.Collection</code></li>
-     * <li>¸¸½Ó¿Ú - <code>java.util.RandomAccess</code></li>
-     * <li>¸¸½Ó¿Ú - <code>java.lang.Cloneable</code></li>
-     * <li>¸¸½Ó¿Ú - <code>java.io.Serializable</code></li>
-     * <li>¸¸½Ó¿Ú - <code>java.io.Iterable</code></li>
-     * <li>ObjectÀà - <code>java.lang.Object</code></li>
+     * <li>æœ¬ç±» - <code>java.util.ArrayList</code></li>
+     * <li>çˆ¶ç±» - <code>java.util.AbstractList</code></li>
+     * <li>çˆ¶ç±» - <code>java.util.AbstractCollection</code></li>
+     * <li>çˆ¶æ¥å£ - <code>java.util.List</code></li>
+     * <li>çˆ¶æ¥å£ - <code>java.util.Collection</code></li>
+     * <li>çˆ¶æ¥å£ - <code>java.util.RandomAccess</code></li>
+     * <li>çˆ¶æ¥å£ - <code>java.lang.Cloneable</code></li>
+     * <li>çˆ¶æ¥å£ - <code>java.io.Serializable</code></li>
+     * <li>çˆ¶æ¥å£ - <code>java.io.Iterable</code></li>
+     * <li>Objectç±» - <code>java.lang.Object</code></li>
      * </ol>
      * </p>
      * <p>
-     * ¶ÔÓÚÒ»¸ö<code>Class</code>¶ÔÏó£¬Èç¹ûËüÊÇ½Ó¿Ú£¬Ôò°´ÈçÏÂ´ÎĞòÁĞ³ö¸ÃÀàµÄ¸¸½Ó¿Ú¡£
+     * å¯¹äºä¸€ä¸ª<code>Class</code>å¯¹è±¡ï¼Œå¦‚æœå®ƒæ˜¯æ¥å£ï¼Œåˆ™æŒ‰å¦‚ä¸‹æ¬¡åºåˆ—å‡ºè¯¥ç±»çš„çˆ¶æ¥å£ã€‚
      * </p>
      * <p>
-     * ÀıÈç<code>ClassUtil.getSupertypes(java.util.List.class)</code>½«·µ»ØÈçÏÂÁĞ±í£º
-     * £¨Ë³ĞòÎª£º±¾½Ó¿Ú¡¢¸¸½Ó¿Ú¡¢ObjectÀà£©
+     * ä¾‹å¦‚<code>ClassUtil.getSupertypes(java.util.List.class)</code>å°†è¿”å›å¦‚ä¸‹åˆ—è¡¨ï¼š
+     * ï¼ˆé¡ºåºä¸ºï¼šæœ¬æ¥å£ã€çˆ¶æ¥å£ã€Objectç±»ï¼‰
      * </p>
      * <ol>
-     * <li>±¾½Ó¿Ú - <code>java.util.List</code></li>
-     * <li>¸¸½Ó¿Ú - <code>java.util.Collection</code></li>
-     * <li>¸¸½Ó¿Ú - <code>java.util.Iterable</code></li>
-     * <li>ObjectÀà - <code>java.lang.Object</code></li>
+     * <li>æœ¬æ¥å£ - <code>java.util.List</code></li>
+     * <li>çˆ¶æ¥å£ - <code>java.util.Collection</code></li>
+     * <li>çˆ¶æ¥å£ - <code>java.util.Iterable</code></li>
+     * <li>Objectç±» - <code>java.lang.Object</code></li>
      * </ol>
      * <p>
-     * ¶ÔÓÚÒ»¸öÊı×é£¬´Ë·½·¨·µ»ØÒ»¸öÁĞ±í£¬ÁĞ³öËùÓĞcomponentÀàĞÍµÄ¸¸ÀàºÍ½Ó¿ÚµÄÎ¬ÊıÏàÍ¬µÄÊı×éÀàĞÍ¡£ ÀıÈç£º
+     * å¯¹äºä¸€ä¸ªæ•°ç»„ï¼Œæ­¤æ–¹æ³•è¿”å›ä¸€ä¸ªåˆ—è¡¨ï¼Œåˆ—å‡ºæ‰€æœ‰componentç±»å‹çš„çˆ¶ç±»å’Œæ¥å£çš„ç»´æ•°ç›¸åŒçš„æ•°ç»„ç±»å‹ã€‚ ä¾‹å¦‚ï¼š
      * <code>ClassUtil.getSupertypes(java.util.ArrayList[][].class)</code>
-     * ·µ»ØÒÔÏÂÁĞ±í£º£¨Ë³ĞòÎª£º±¾Êı×é¡¢¸¸ÀàÊı×é¡¢¸¸½Ó¿ÚÊı×é¡¢ObjectÀàÊı×é¡¢Êı×é¸¸Àà¡¢Êı×é¸¸½Ó¿Ú¡¢ObjectÀà£©
+     * è¿”å›ä»¥ä¸‹åˆ—è¡¨ï¼šï¼ˆé¡ºåºä¸ºï¼šæœ¬æ•°ç»„ã€çˆ¶ç±»æ•°ç»„ã€çˆ¶æ¥å£æ•°ç»„ã€Objectç±»æ•°ç»„ã€æ•°ç»„çˆ¶ç±»ã€æ•°ç»„çˆ¶æ¥å£ã€Objectç±»ï¼‰
      * <ol>
-     * <li>±¾Êı×é - <code>java.util.ArrayList[][]</code></li>
-     * <li>¸¸ÀàÊı×é - <code>java.util.AbstractList[][]</code></li>
-     * <li>¸¸ÀàÊı×é - <code>java.util.AbstractCollection[][]</code></li>
-     * <li>¸¸½Ó¿ÚÊı×é - <code>java.util.List[][]</code></li>
-     * <li>¸¸½Ó¿ÚÊı×é - <code>java.util.Collection[][]</code></li>
-     * <li>¸¸½Ó¿ÚÊı×é - <code>java.util.RandomAccess[][]</code></li>
-     * <li>¸¸½Ó¿ÚÊı×é - <code>java.lang.Cloneable[][]</code></li>
-     * <li>¸¸½Ó¿ÚÊı×é - <code>java.io.Serializable[][]</code></li>
-     * <li>¸¸½Ó¿ÚÊı×é - <code>java.io.Iterable[][]</code></li>
-     * <li>ObjectÀàÊı×é - <code>java.lang.Object[][]</code></li>
-     * <li>Êı×é¸¸Àà - <code>java.lang.Object[]</code></li>
-     * <li>Êı×é¸¸½Ó¿Ú - <code>java.lang.Cloneable</code></li>
-     * <li>Êı×é¸¸½Ó¿Ú - <code>java.io.Serializable</code></li>
-     * <li>ObjectÀà - <code>java.lang.Object</code></li>
+     * <li>æœ¬æ•°ç»„ - <code>java.util.ArrayList[][]</code></li>
+     * <li>çˆ¶ç±»æ•°ç»„ - <code>java.util.AbstractList[][]</code></li>
+     * <li>çˆ¶ç±»æ•°ç»„ - <code>java.util.AbstractCollection[][]</code></li>
+     * <li>çˆ¶æ¥å£æ•°ç»„ - <code>java.util.List[][]</code></li>
+     * <li>çˆ¶æ¥å£æ•°ç»„ - <code>java.util.Collection[][]</code></li>
+     * <li>çˆ¶æ¥å£æ•°ç»„ - <code>java.util.RandomAccess[][]</code></li>
+     * <li>çˆ¶æ¥å£æ•°ç»„ - <code>java.lang.Cloneable[][]</code></li>
+     * <li>çˆ¶æ¥å£æ•°ç»„ - <code>java.io.Serializable[][]</code></li>
+     * <li>çˆ¶æ¥å£æ•°ç»„ - <code>java.io.Iterable[][]</code></li>
+     * <li>Objectç±»æ•°ç»„ - <code>java.lang.Object[][]</code></li>
+     * <li>æ•°ç»„çˆ¶ç±» - <code>java.lang.Object[]</code></li>
+     * <li>æ•°ç»„çˆ¶æ¥å£ - <code>java.lang.Cloneable</code></li>
+     * <li>æ•°ç»„çˆ¶æ¥å£ - <code>java.io.Serializable</code></li>
+     * <li>Objectç±» - <code>java.lang.Object</code></li>
      * </ol>
-     * ÌØÊâÀàĞÍ<code>void</code>¡¢<code>Void</code>Ã»ÓĞÈÎºÎ¸¸Àà¡£
+     * ç‰¹æ®Šç±»å‹<code>void</code>ã€<code>Void</code>æ²¡æœ‰ä»»ä½•çˆ¶ç±»ã€‚
      * <ol>
      * <li><code>java.lang.Void</code></li>
      * </ol>
-     * ×îºó£¬Ô­×ÓÀàĞÍ½«»á±»×ª»»³É°ü×°Àà¡£ ÀıÈç£º<code>ClassUtil.getSupertypes(int.class)</code>
-     * ·µ»ØÒÔÏÂÁĞ±í£º
+     * æœ€åï¼ŒåŸå­ç±»å‹å°†ä¼šè¢«è½¬æ¢æˆåŒ…è£…ç±»ã€‚ ä¾‹å¦‚ï¼š<code>ClassUtil.getSupertypes(int.class)</code>
+     * è¿”å›ä»¥ä¸‹åˆ—è¡¨ï¼š
      * <ol>
      * <li><code>java.lang.Integer</code></li>
      * <li><code>java.lang.Number</code></li>
@@ -353,8 +353,8 @@ public class ClassUtil {
      * <li><code>java.io.Serializable</code></li>
      * <li><code>java.lang.Object</code></li>
      * </ol>
-     * µ«ÊÇÔ­×ÓÀàĞÍµÄÊı×é²¢²»»á±»×ª³É°ü×°Àà¡£ÀıÈç£º<code>ClassUtil.getSupertypes(int[][].class)</code>
-     * ·µ»ØÒÔÏÂÁĞ±í£º
+     * ä½†æ˜¯åŸå­ç±»å‹çš„æ•°ç»„å¹¶ä¸ä¼šè¢«è½¬æˆåŒ…è£…ç±»ã€‚ä¾‹å¦‚ï¼š<code>ClassUtil.getSupertypes(int[][].class)</code>
+     * è¿”å›ä»¥ä¸‹åˆ—è¡¨ï¼š
      * <ol>
      * <li><code>int[][]</code></li>
      * <li><code>Object[]</code></li>
@@ -369,7 +369,7 @@ public class ClassUtil {
     }
 
     /**
-     * ±éÀúËùÓĞ¸¸ÀàºÍ½Ó¿Ú¡£
+     * éå†æ‰€æœ‰çˆ¶ç±»å’Œæ¥å£ã€‚
      */
     private static class Supertypes implements Iterable<Class<?>> {
         private Class<?> clazz;
@@ -384,7 +384,7 @@ public class ClassUtil {
     }
 
     /**
-     * ±éÀúËùÓĞ¸¸ÀàºÍ½Ó¿ÚµÄ±éÀúÆ÷¡£
+     * éå†æ‰€æœ‰çˆ¶ç±»å’Œæ¥å£çš„éå†å™¨ã€‚
      */
     private static class SupertypeIterator implements Iterator<Class<?>> {
         private static enum State {
@@ -414,13 +414,13 @@ public class ClassUtil {
 
             queueInterfaces(clazz);
 
-            // ÊÇ·ñÎªÊı×é£¿
+            // æ˜¯å¦ä¸ºæ•°ç»„ï¼Ÿ
             ArrayInfo ai = getArrayInfo(clazz);
 
             this.clazz = clazz = ai.componentType;
             this.dimension = ai.dimension;
 
-            // ÉèÖÃ³õÊ¼×´Ì¬
+            // è®¾ç½®åˆå§‹çŠ¶æ€
             if (dimension > 0) {
                 componentTypes = new SupertypeIterator(clazz, false);
                 state = State.ARRAYS;
@@ -523,7 +523,7 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÀàÃû¶ÔÓ¦µÄ×ÊÔ´Ãû¡£
+     * å–å¾—ç±»åå¯¹åº”çš„èµ„æºåã€‚
      */
     public static String getResourceNameOfClass(Class<?> clazz) {
         String className = clazz == null ? null : clazz.getName();
@@ -532,7 +532,7 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÀàÃû¶ÔÓ¦µÄ×ÊÔ´Ãû¡£
+     * å–å¾—ç±»åå¯¹åº”çš„èµ„æºåã€‚
      */
     public static String getResourceNameOfClass(String className) {
         if (className == null) {
@@ -543,9 +543,9 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÖ¸¶¨Àà»ò½Ó¿ÚµÄËùÓĞ<code>public</code>·½·¨Ç©Ãû¡£
+     * å–å¾—æŒ‡å®šç±»æˆ–æ¥å£çš„æ‰€æœ‰<code>public</code>æ–¹æ³•ç­¾åã€‚
      * <p>
-     * ¸Ã·½·¨·µ»ØµÄÇ©ÃûÊÇ±»ÅÅĞòµÄ¡£
+     * è¯¥æ–¹æ³•è¿”å›çš„ç­¾åæ˜¯è¢«æ’åºçš„ã€‚
      * </p>
      */
     public static Map<MethodSignature, Class<?>> getMethodSignatures(Class<?>... classes)
@@ -600,14 +600,14 @@ public class ClassUtil {
     }
 
     /**
-     * µ÷ÓÃ¹¹Ôìº¯Êı´´½¨¶ÔÏó¡£
+     * è°ƒç”¨æ„é€ å‡½æ•°åˆ›å»ºå¯¹è±¡ã€‚
      */
     public static <T> T newInstance(Class<T> clazz) {
         return newInstance(clazz, null, null);
     }
 
     /**
-     * µ÷ÓÃ¹¹Ôìº¯Êı´´½¨¶ÔÏó¡£
+     * è°ƒç”¨æ„é€ å‡½æ•°åˆ›å»ºå¯¹è±¡ã€‚
      */
     public static <T> T newInstance(Class<T> clazz, Class<?>[] paramTypes, Object[] paramValues) {
         try {

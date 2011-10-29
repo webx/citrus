@@ -29,23 +29,23 @@ import com.alibaba.citrus.service.velocity.impl.parser.ASTStringLiteralEnhanced;
 import com.alibaba.citrus.service.velocity.impl.parser.SimpleNodeUtil;
 
 /**
- * À©Õ¹ÁËvelocityµÄ<code>RuntimeInstance</code>Àà£¬ÊµÏÖÒ»¸ö¹¦ÄÜ£¬Ê¹
- * <code>ReferenceInsertionEventHandler</code>¿ÉÒÔ¸ĞÖª±»À¹½ØµÄÒıÓÃÊÇ·ñÎ»ÓÚ
- * <code>StringLiteral</code>ÖĞ¡£ ÀıÈç£º
+ * æ‰©å±•äº†velocityçš„<code>RuntimeInstance</code>ç±»ï¼Œå®ç°ä¸€ä¸ªåŠŸèƒ½ï¼Œä½¿
+ * <code>ReferenceInsertionEventHandler</code>å¯ä»¥æ„ŸçŸ¥è¢«æ‹¦æˆªçš„å¼•ç”¨æ˜¯å¦ä½äº
+ * <code>StringLiteral</code>ä¸­ã€‚ ä¾‹å¦‚ï¼š
  * <p>
- * <code>EscapeSupport</code>¿ÉÒÔ¸ù¾İÒıÓÃµÄÎ»ÖÃ£¬À´¾ö¶¨ÊÇ·ñÒª¶Ô½á¹û½øĞĞescape×ªÒå¡£ÏÂÃæµÄvelocityÓï¾ä½«²»»á±»×ªÒå£º
+ * <code>EscapeSupport</code>å¯ä»¥æ ¹æ®å¼•ç”¨çš„ä½ç½®ï¼Œæ¥å†³å®šæ˜¯å¦è¦å¯¹ç»“æœè¿›è¡Œescapeè½¬ä¹‰ã€‚ä¸‹é¢çš„velocityè¯­å¥å°†ä¸ä¼šè¢«è½¬ä¹‰ï¼š
  * </p>
  * 
  * <pre>
  * #set ($value = "hello, $name")
  * </pre>
  * <p>
- * Í¨¹ıµ÷ÓÃ<code>InterpolationUtil.isInInterpolation(context)</code>¼´¿ÉÖªÏş´ËÏ¸½Ú¡£
+ * é€šè¿‡è°ƒç”¨<code>InterpolationUtil.isInInterpolation(context)</code>å³å¯çŸ¥æ™“æ­¤ç»†èŠ‚ã€‚
  * </p>
  * <p>
- * Í¨¹ıvelocity configuration£º
- * <code>runtime.interpolate.string.literals.hack</code>¿ÉÒÔ¿ª¹Ø´ËÌØĞÔ£¬Ä¬ÈÏÖµÎª
- * <code>true</code>¡£
+ * é€šè¿‡velocity configurationï¼š
+ * <code>runtime.interpolate.string.literals.hack</code>å¯ä»¥å¼€å…³æ­¤ç‰¹æ€§ï¼Œé»˜è®¤å€¼ä¸º
+ * <code>true</code>ã€‚
  * </p>
  * 
  * @author Michael Zhou

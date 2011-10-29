@@ -30,7 +30,7 @@ import org.springframework.beans.TypeConverter;
 import com.alibaba.citrus.service.form.configuration.FormConfig;
 
 /**
- * ≤‚ ‘form¿‡°£
+ * ÊµãËØïformÁ±ª„ÄÇ
  * 
  * @author Michael Zhou
  */
@@ -67,7 +67,7 @@ public class FormTests extends AbstractFormServiceTests {
         TypeConverter tc = form.getTypeConverter();
 
         assertNotNull(tc);
-        assertSame(tc, form.getTypeConverter()); // ¡Ω¥Œ∑µªÿœ‡Õ¨µƒ
+        assertSame(tc, form.getTypeConverter()); // ‰∏§Ê¨°ËøîÂõûÁõ∏ÂêåÁöÑ
 
         assertEquals(new Integer(123), tc.convertIfNecessary("any", Integer.class));
     }
@@ -87,7 +87,7 @@ public class FormTests extends AbstractFormServiceTests {
 
     @Test
     public void isValid() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ã·Ωª" }, //
+        Object[][] args = new Object[][] { { "sumbit", "Êèê‰∫§" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.field1
                 { "_fm.g._0.fi", "bbb" }, // group1.field2
                 { "_fm.gr._0.f", "aaa" }, // group2.field1
@@ -123,7 +123,7 @@ public class FormTests extends AbstractFormServiceTests {
 
     @Test
     public void init_noFormData() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ã·Ωª" }, //
+        Object[][] args = new Object[][] { { "sumbit", "Êèê‰∫§" }, //
                 { "_fm.gr._0", "aaa" }, // not a field
         };
 
@@ -136,7 +136,7 @@ public class FormTests extends AbstractFormServiceTests {
 
     @Test
     public void init_undefinedGroup() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ã·Ωª" }, //
+        Object[][] args = new Object[][] { { "sumbit", "Êèê‰∫§" }, //
                 { "_fm.u._0.f", "aaa" }, // ??.field1
                 { "_fm.u._0.fi", "bbb" }, // ??.field2
         };
@@ -150,7 +150,7 @@ public class FormTests extends AbstractFormServiceTests {
 
     @Test
     public void init_withAbsentKey() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ã·Ωª" }, //
+        Object[][] args = new Object[][] { { "sumbit", "Êèê‰∫§" }, //
                 { "_fm.gr._0.f.absent", "aaa" }, // group2.field1 if absent
                 { "_fm.gr._0.fi", "bbb" }, // group2.field2
         };
@@ -169,7 +169,7 @@ public class FormTests extends AbstractFormServiceTests {
 
     @Test
     public void init_withAbsentKey_override() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ã·Ωª" }, //
+        Object[][] args = new Object[][] { { "sumbit", "Êèê‰∫§" }, //
                 { "_fm.gr._0.f", "aaaaa" }, // group2.field1
                 { "_fm.gr._0.f.absent", "aaa" }, // group2.field1 if absent
                 { "_fm.gr._0.fi", "bbb" }, // group2.field2
@@ -189,7 +189,7 @@ public class FormTests extends AbstractFormServiceTests {
 
     @Test
     public void init_postOnly() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ã·Ωª" }, //
+        Object[][] args = new Object[][] { { "sumbit", "Êèê‰∫§" }, //
                 { "_fm.gr._0.f", "aaa" }, // group2.field1
                 { "_fm.gr._0.fi", "bbb" }, // group2.field2
         };
@@ -203,7 +203,7 @@ public class FormTests extends AbstractFormServiceTests {
 
     @Test
     public void init_andValidate() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ã·Ωª" }, //
+        Object[][] args = new Object[][] { { "sumbit", "Êèê‰∫§" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.field1
                 { "_fm.g._0.fi", "bbb" }, // group1.field2
                 { "_fm.gr._0.f", "aaa" }, // group2.field1
@@ -268,7 +268,7 @@ public class FormTests extends AbstractFormServiceTests {
 
     @Test
     public void getGroups() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ã·Ωª" }, //
+        Object[][] args = new Object[][] { { "sumbit", "Êèê‰∫§" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.default.field1
                 { "_fm.g._0.fi", "bbb" }, // group1.default.field2
                 { "_fm.gr.111.f", "ccc" }, // group2.111.field1
@@ -349,7 +349,7 @@ public class FormTests extends AbstractFormServiceTests {
 
     @Test
     public void toString_() throws Exception {
-        Object[][] args = new Object[][] { { "sumbit", "Ã·Ωª" }, //
+        Object[][] args = new Object[][] { { "sumbit", "Êèê‰∫§" }, //
                 { "_fm.g._0.f", "aaa" }, // group1.default.field1
                 { "_fm.g._0.fi", "bbb" }, // group1.default.field2
                 { "_fm.gr.111.f", "ccc" }, // group2.111.field1

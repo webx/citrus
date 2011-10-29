@@ -24,86 +24,86 @@ import java.util.List;
 import com.alibaba.citrus.codegen.util.MethodSignature;
 
 /**
- * ´ú±íÒ»¸ö{@link Method}»ò{@link Constructor}µÄĞÅÏ¢¡£
+ * ä»£è¡¨ä¸€ä¸ª{@link Method}æˆ–{@link Constructor}çš„ä¿¡æ¯ã€‚
  * 
  * @author Michael Zhou
  */
 public interface MethodInfo extends GenericDeclarationInfo {
     /**
-     * ÊÇ·ñÎª¹¹Ôìº¯Êı£¿
+     * æ˜¯å¦ä¸ºæ„é€ å‡½æ•°ï¼Ÿ
      */
     boolean isConstructor();
 
     /**
-     * È¡µÃ·½·¨£¬Èç¹û²»ÊÇ·½·¨£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æ–¹æ³•ï¼Œå¦‚æœä¸æ˜¯æ–¹æ³•ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     Method getMethod();
 
     /**
-     * È¡µÃ¹¹Ôìº¯Êı£¬Èç¹û²»ÊÇ¹¹Ôìº¯Êı£¬Ôò·µ»Ø<code>null</code>¡£
+     * å–å¾—æ„é€ å‡½æ•°ï¼Œå¦‚æœä¸æ˜¯æ„é€ å‡½æ•°ï¼Œåˆ™è¿”å›<code>null</code>ã€‚
      */
     Constructor<?> getConstructor();
 
     /**
-     * È¡µÃµ±Ç°·½·¨ËùÔÚµÄÀàĞÍ¡£
+     * å–å¾—å½“å‰æ–¹æ³•æ‰€åœ¨çš„ç±»å‹ã€‚
      */
     TypeInfo getDeclaringType();
 
     /**
-     * È¡µÃµ±Ç°·½·¨»ò¹¹Ôìº¯ÊıµÄÇ©Ãû¡£
+     * å–å¾—å½“å‰æ–¹æ³•æˆ–æ„é€ å‡½æ•°çš„ç­¾åã€‚
      * <p>
-     * Ç©ÃûÖ»°üº¬·½·¨µÄÃû³ÆºÍ²ÎÊıĞÅÏ¢¡£
+     * ç­¾ååªåŒ…å«æ–¹æ³•çš„åç§°å’Œå‚æ•°ä¿¡æ¯ã€‚
      * </p>
      */
     MethodSignature getSignature();
 
     /**
-     * È¡µÃ·½·¨»ò¹¹Ôìº¯ÊıµÄ·ÃÎÊĞŞÊÎ·û¡£
+     * å–å¾—æ–¹æ³•æˆ–æ„é€ å‡½æ•°çš„è®¿é—®ä¿®é¥°ç¬¦ã€‚
      */
     int getModifiers();
 
     /**
-     * È¡µÃ·µ»ØÀàĞÍ¡£
+     * å–å¾—è¿”å›ç±»å‹ã€‚
      */
     TypeInfo getReturnType();
 
     /**
-     * È¡µÃ·½·¨µÄÃû³Æ£¬¶ÔÓÚ¹¹Ôìº¯Êı£¬Ôò·µ»Ø<code>&lt;init&gt;</code>¡£
+     * å–å¾—æ–¹æ³•çš„åç§°ï¼Œå¯¹äºæ„é€ å‡½æ•°ï¼Œåˆ™è¿”å›<code>&lt;init&gt;</code>ã€‚
      */
     String getName();
 
     /**
-     * È¡µÃ²ÎÊıÀàĞÍ±í¡£
+     * å–å¾—å‚æ•°ç±»å‹è¡¨ã€‚
      */
     List<TypeInfo> getParameterTypes();
 
     /**
-     * È¡µÃÒì³£ÀàĞÍ±í¡£
+     * å–å¾—å¼‚å¸¸ç±»å‹è¡¨ã€‚
      */
     List<TypeInfo> getExceptionTypes();
 
     /**
-     * È¡µÃÓĞĞ§Òì³£ÀàĞÍ±í£¬¼´·Ç´Ó<code>RuntimeException</code>ºÍ<code>Error</code>ÅÉÉúµÄÒì³££¬<br>
-     * ²¢ÌŞ³ıÏàÖØµÄÒì³££¬ÀıÈç<code>Exception</code>ºÍ<code>IOException</code>Í¬Ê±³öÏÖ£¬ÔòÉ¾³ı
-     * <code>IOException</code>¡£
+     * å–å¾—æœ‰æ•ˆå¼‚å¸¸ç±»å‹è¡¨ï¼Œå³éä»<code>RuntimeException</code>å’Œ<code>Error</code>æ´¾ç”Ÿçš„å¼‚å¸¸ï¼Œ<br>
+     * å¹¶å‰”é™¤ç›¸é‡çš„å¼‚å¸¸ï¼Œä¾‹å¦‚<code>Exception</code>å’Œ<code>IOException</code>åŒæ—¶å‡ºç°ï¼Œåˆ™åˆ é™¤
+     * <code>IOException</code>ã€‚
      */
     List<TypeInfo> getEffectiveExceptionTypes();
 
     /**
-     * ÔÚÖ¸¶¨ÉÏÏÂÎÄÖĞ·ÖÎö·½·¨µÄ·µ»ØÖµ¡¢²ÎÊıÀàĞÍ¡¢Òì³£ÀàĞÍµÄÊµ¼ÊÀàĞÍ¡£
+     * åœ¨æŒ‡å®šä¸Šä¸‹æ–‡ä¸­åˆ†ææ–¹æ³•çš„è¿”å›å€¼ã€å‚æ•°ç±»å‹ã€å¼‚å¸¸ç±»å‹çš„å®é™…ç±»å‹ã€‚
      * <p>
-     * Ïàµ±ÓÚ{@link resolve(context, true)}¡£
+     * ç›¸å½“äº{@link resolve(context, true)}ã€‚
      * </p>
      */
     MethodInfo resolve(GenericDeclarationInfo context);
 
     /**
-     * ÔÚÖ¸¶¨ÉÏÏÂÎÄÖĞ·ÖÎö·½·¨µÄ·µ»ØÖµ¡¢²ÎÊıÀàĞÍ¡¢Òì³£ÀàĞÍµÄÊµ¼ÊÀàĞÍ¡£
+     * åœ¨æŒ‡å®šä¸Šä¸‹æ–‡ä¸­åˆ†ææ–¹æ³•çš„è¿”å›å€¼ã€å‚æ•°ç±»å‹ã€å¼‚å¸¸ç±»å‹çš„å®é™…ç±»å‹ã€‚
      * <p>
-     * Èç¹û<code>includeBaseType==false</code>£¬ÄÇÃ´½âÎöÀàĞÍ±äÁ¿Ê±£¬½«²»»áÈ¡µÃÆäbaseType¡£ ¡£
+     * å¦‚æœ<code>includeBaseType==false</code>ï¼Œé‚£ä¹ˆè§£æç±»å‹å˜é‡æ—¶ï¼Œå°†ä¸ä¼šå–å¾—å…¶baseTypeã€‚ ã€‚
      * </p>
      * <p>
-     * ²Î¼û£º{@link TypeInfo.resolve()}¡£
+     * å‚è§ï¼š{@link TypeInfo.resolve()}ã€‚
      * </p>
      */
     MethodInfo resolve(GenericDeclarationInfo context, boolean includeBaseType);

@@ -27,7 +27,7 @@ import com.alibaba.citrus.service.pull.RuntimeToolSetFactory;
 import com.alibaba.citrus.service.pull.ToolFactory;
 
 /**
- * ¸ù¾İrequestÖĞµÄid²ÎÊıÉèÖÃtool name¡£
+ * æ ¹æ®requestä¸­çš„idå‚æ•°è®¾ç½®tool nameã€‚
  * 
  * @author Michael Zhou
  */

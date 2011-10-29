@@ -38,7 +38,7 @@ import com.alibaba.citrus.service.requestcontext.session.impl.SessionRequestCont
 import com.alibaba.citrus.test.TestEnvStatic;
 
 /**
- * ²âÊÔstore mappingµÄÂß¼­¡£
+ * æµ‹è¯•store mappingçš„é€»è¾‘ã€‚
  * 
  * @author Michael Zhou
  */
@@ -109,16 +109,16 @@ public class StoreMappingTests {
             assertThat(e, exception("attrName"));
         }
 
-        // Ä¬ÈÏÆ¥Åä
+        // é»˜è®¤åŒ¹é…
         assertEquals("s1", mappings.getStoreNameForAttribute("nomatch"));
 
-        // Æ¥Åä½Ï³¤µÄ£¬±¸Ñ¡£ºs1, s4, s3
+        // åŒ¹é…è¾ƒé•¿çš„ï¼Œå¤‡é€‰ï¼šs1, s4, s3
         assertEquals("s3", mappings.getStoreNameForAttribute("abcdef"));
 
-        // Æ¥Åä½Ï¾«È·µÄ£¬±¸Ñ¡£ºs1, s5, s4, s2 
+        // åŒ¹é…è¾ƒç²¾ç¡®çš„ï¼Œå¤‡é€‰ï¼šs1, s5, s4, s2 
         assertEquals("s2", mappings.getStoreNameForAttribute("abc"));
 
-        // Æ¥ÅäÅÅÔÚÇ°µÄ£¬±¸Ñ¡£ºs1, s5, s4 
+        // åŒ¹é…æ’åœ¨å‰çš„ï¼Œå¤‡é€‰ï¼šs1, s5, s4 
         assertEquals("s5", mappings.getStoreNameForAttribute("acc"));
     }
 

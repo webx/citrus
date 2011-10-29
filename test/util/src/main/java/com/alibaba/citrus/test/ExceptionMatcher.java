@@ -29,7 +29,7 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
 /**
- * ÓÃÀ´¼ì²éÒ»¸öÒì³£µÄÀàĞÍºÍmessageÄÚÈİ¡£
+ * ç”¨æ¥æ£€æŸ¥ä¸€ä¸ªå¼‚å¸¸çš„ç±»å‹å’Œmessageå†…å®¹ã€‚
  * 
  * @author Michael Zhou
  */

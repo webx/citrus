@@ -62,7 +62,7 @@ public class ResourceFilterMapping extends ResourcePattern {
     }
 
     /**
-     * È¡µÃÓÃÓÚÖ´ĞĞfilterµÄÁ´¡£
+     * å–å¾—ç”¨äºæ‰§è¡Œfilterçš„é“¾ã€‚
      */
     public ResourceFilterChain getResourceFilterChain(final ResourceFilterChain root) {
         if (isEmptyArray(filters)) {

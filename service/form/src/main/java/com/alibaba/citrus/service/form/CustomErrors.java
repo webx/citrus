@@ -20,29 +20,29 @@ package com.alibaba.citrus.service.form;
 import java.util.Map;
 
 /**
- * ¿ÉÉèÖÃ´íÎóĞÅÏ¢µÄfield¡£
+ * å¯è®¾ç½®é”™è¯¯ä¿¡æ¯çš„fieldã€‚
  * 
  * @author Michael Zhou
  */
 public interface CustomErrors {
     /**
-     * ÉèÖÃ´íÎóĞÅÏ¢£¬Í¬Ê±ÖÃ<code>isValid()</code>Îª<code>false</code>¡£
+     * è®¾ç½®é”™è¯¯ä¿¡æ¯ï¼ŒåŒæ—¶ç½®<code>isValid()</code>ä¸º<code>false</code>ã€‚
      * <p>
-     * ¶ÔÓÚ<code>isValid()</code>ÒÑ¾­ÊÇ<code>false</code>µÄ×Ö¶Î£¬¸Ã·½·¨ÎŞĞ§£¨²»¸²¸ÇÏÖÓĞµÄ´íÎóĞÅÏ¢£©
+     * å¯¹äº<code>isValid()</code>å·²ç»æ˜¯<code>false</code>çš„å­—æ®µï¼Œè¯¥æ–¹æ³•æ— æ•ˆï¼ˆä¸è¦†ç›–ç°æœ‰çš„é”™è¯¯ä¿¡æ¯ï¼‰
      * </p>
      * <p>
-     * id±íÊ¾´íÎóĞÅÏ¢µÄID£¬±ØĞë¶¨ÒåµÄformÃèÊöÎÄ¼şÖĞ¡£
+     * idè¡¨ç¤ºé”™è¯¯ä¿¡æ¯çš„IDï¼Œå¿…é¡»å®šä¹‰çš„formæè¿°æ–‡ä»¶ä¸­ã€‚
      * </p>
      */
     void setMessage(String id);
 
     /**
-     * ÉèÖÃ´íÎóĞÅÏ¢£¬Í¬Ê±ÖÃ<code>isValid()</code>Îª<code>false</code>¡£
+     * è®¾ç½®é”™è¯¯ä¿¡æ¯ï¼ŒåŒæ—¶ç½®<code>isValid()</code>ä¸º<code>false</code>ã€‚
      * <p>
-     * ¶ÔÓÚ<code>isValid()</code>ÒÑ¾­ÊÇ<code>false</code>µÄ×Ö¶Î£¬¸Ã·½·¨ÎŞĞ§£¨²»¸²¸ÇÏÖÓĞµÄ´íÎóĞÅÏ¢£©
+     * å¯¹äº<code>isValid()</code>å·²ç»æ˜¯<code>false</code>çš„å­—æ®µï¼Œè¯¥æ–¹æ³•æ— æ•ˆï¼ˆä¸è¦†ç›–ç°æœ‰çš„é”™è¯¯ä¿¡æ¯ï¼‰
      * </p>
      * <p>
-     * id±íÊ¾´íÎóĞÅÏ¢µÄID£¬±ØĞë¶¨ÒåµÄformÃèÊöÎÄ¼şÖĞ¡£params±íÊ¾Éú³É´íÎóĞÅÏ¢µÄ²ÎÊı±í¡£
+     * idè¡¨ç¤ºé”™è¯¯ä¿¡æ¯çš„IDï¼Œå¿…é¡»å®šä¹‰çš„formæè¿°æ–‡ä»¶ä¸­ã€‚paramsè¡¨ç¤ºç”Ÿæˆé”™è¯¯ä¿¡æ¯çš„å‚æ•°è¡¨ã€‚
      * </p>
      */
     void setMessage(String id, Map<String, ?> params);

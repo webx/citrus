@@ -32,7 +32,7 @@ import com.alibaba.citrus.webx.impl.WebxControllerImpl;
 import com.alibaba.citrus.webx.impl.WebxRootControllerImpl;
 
 /**
- * ÊµÏÖ<code>WebxConfiguration</code>¡£
+ * å®ç°<code>WebxConfiguration</code>ã€‚
  * 
  * @author Michael Zhou
  */
@@ -54,7 +54,7 @@ public class WebxConfigurationImpl extends PropertiesConfigurationSupport<WebxCo
     }
 
     /**
-     * ÄÚ²¿Á´½ÓURLµÄÇ°×º¡£ÄÚ²¿Á´½ÓÓÃÀ´ÏÔÊ¾´íÎóĞÅÏ¢¡¢¿ª·¢ÕßĞÅÏ¢¡£
+     * å†…éƒ¨é“¾æ¥URLçš„å‰ç¼€ã€‚å†…éƒ¨é“¾æ¥ç”¨æ¥æ˜¾ç¤ºé”™è¯¯ä¿¡æ¯ã€å¼€å‘è€…ä¿¡æ¯ã€‚
      */
     public String getInternalPathPrefix() {
         return getProperty("internalPathPrefix", "internal");
@@ -65,7 +65,7 @@ public class WebxConfigurationImpl extends PropertiesConfigurationSupport<WebxCo
     }
 
     /**
-     * Request contexts·şÎñ¡£
+     * Request contextsæœåŠ¡ã€‚
      */
     public RequestContextChainingService getRequestContexts() {
         return getBean("requestContexts", "requestContexts", RequestContextChainingService.class);
@@ -76,7 +76,7 @@ public class WebxConfigurationImpl extends PropertiesConfigurationSupport<WebxCo
     }
 
     /**
-     * Pipeline·şÎñ¡£
+     * PipelineæœåŠ¡ã€‚
      */
     public Pipeline getPipeline() {
         return getBean("pipeline", "pipeline", Pipeline.class, false);
@@ -87,9 +87,9 @@ public class WebxConfigurationImpl extends PropertiesConfigurationSupport<WebxCo
     }
 
     /**
-     * ÓÃÓÚÒì³£´¦ÀíµÄpipeline·şÎñ¡£
+     * ç”¨äºå¼‚å¸¸å¤„ç†çš„pipelineæœåŠ¡ã€‚
      * <p>
-     * ¿ÉÑ¡¡£¼ÙÈçÃ»ÓĞÅäÖÃÕâ¸öpipeline£¬ÔÚproductionModeÏÂ£¬´íÎó½«±»sendError£¬È»ºóÓÉservlet engineÀ´´¦Àí¡£
+     * å¯é€‰ã€‚å‡å¦‚æ²¡æœ‰é…ç½®è¿™ä¸ªpipelineï¼Œåœ¨productionModeä¸‹ï¼Œé”™è¯¯å°†è¢«sendErrorï¼Œç„¶åç”±servlet engineæ¥å¤„ç†ã€‚
      * </p>
      */
     public Pipeline getExceptionPipeline() {
@@ -101,7 +101,7 @@ public class WebxConfigurationImpl extends PropertiesConfigurationSupport<WebxCo
     }
 
     /**
-     * È¡µÃÒ»×é¹ØÓÚcomponentsµÄÅäÖÃ¡£
+     * å–å¾—ä¸€ç»„å…³äºcomponentsçš„é…ç½®ã€‚
      */
     public ComponentsConfig getComponentsConfig() {
         return getProperty("componentsConfig", null);

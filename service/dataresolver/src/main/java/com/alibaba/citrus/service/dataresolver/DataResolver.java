@@ -18,7 +18,7 @@
 package com.alibaba.citrus.service.dataresolver;
 
 /**
- * Ò»¸öÊı¾İ½âÎöÆ÷£¬ÓÃÀ´È¡µÃÒ»¸ö²ÎÊı»òpropertyµÄÖµ¡£
+ * ä¸€ä¸ªæ•°æ®è§£æå™¨ï¼Œç”¨æ¥å–å¾—ä¸€ä¸ªå‚æ•°æˆ–propertyçš„å€¼ã€‚
  * 
  * @author Michael Zhou
  */

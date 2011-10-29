@@ -27,9 +27,9 @@ import java.lang.reflect.Method;
 import com.alibaba.citrus.asm.Type;
 
 /**
- * ´ú±íÒ»¸ö¹¹Ôìº¯Êý»ò·½·¨µÄÇ©Ãû£¬ÓÃÀ´±æ±ðÏàÍ¬µÄ·½·¨¡£
+ * ä»£è¡¨ä¸€ä¸ªæž„é€ å‡½æ•°æˆ–æ–¹æ³•çš„ç­¾åï¼Œç”¨æ¥è¾¨åˆ«ç›¸åŒçš„æ–¹æ³•ã€‚
  * <p>
- * ±È½Ï·½·¨Ç©ÃûÊ±£¬Ö»ÓÐ·½·¨µÄÀàÐÍ£¨¹¹Ôìº¯Êý»òÆÕÍ¨·½·¨£©¡¢·½·¨ÃûºÍ²ÎÊý²ÎÓëÁË±È½Ï¡£
+ * æ¯”è¾ƒæ–¹æ³•ç­¾åæ—¶ï¼Œåªæœ‰æ–¹æ³•çš„ç±»åž‹ï¼ˆæž„é€ å‡½æ•°æˆ–æ™®é€šæ–¹æ³•ï¼‰ã€æ–¹æ³•åå’Œå‚æ•°å‚ä¸Žäº†æ¯”è¾ƒã€‚
  * </p>
  * 
  * @author Michael Zhou

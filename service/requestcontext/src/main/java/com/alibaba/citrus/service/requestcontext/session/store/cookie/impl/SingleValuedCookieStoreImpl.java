@@ -36,10 +36,10 @@ import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
- * ½«Session×´Ì¬±£´æÔÚcookieÖĞ¡£
+ * å°†SessionçŠ¶æ€ä¿å­˜åœ¨cookieä¸­ã€‚
  * <ul>
- * <li>Ã¿¸östoreÖ»ÄÜ±£´æÒ»¸öÖµ¡£</li>
- * <li>½«½öÓĞµÄsession attribute valueÓÃ<code>SessionValueEncoder</code>±àÂë³É×Ö·û´®¡£</li>
+ * <li>æ¯ä¸ªstoreåªèƒ½ä¿å­˜ä¸€ä¸ªå€¼ã€‚</li>
+ * <li>å°†ä»…æœ‰çš„session attribute valueç”¨<code>SessionValueEncoder</code>ç¼–ç æˆå­—ç¬¦ä¸²ã€‚</li>
  * </ul>
  * 
  * @author Michael Zhou
@@ -133,7 +133,7 @@ public class SingleValuedCookieStoreImpl extends AbstractCookieStore implements 
     }
 
     /**
-     * È¡µÃcookie storeµÄ×´Ì¬¡£
+     * å–å¾—cookie storeçš„çŠ¶æ€ã€‚
      */
     private State getState(StoreContext storeContext) {
         State state = (State) storeContext.getState();
@@ -148,7 +148,7 @@ public class SingleValuedCookieStoreImpl extends AbstractCookieStore implements 
     }
 
     /**
-     * È·±£cookie±»×°ÔØ¡£
+     * ç¡®ä¿cookieè¢«è£…è½½ã€‚
      */
     private void ensureCookieLoading(State state, HttpServletRequest request, StoreContext storeContext) {
         if (state.cookieLoaded) {
@@ -157,16 +157,16 @@ public class SingleValuedCookieStoreImpl extends AbstractCookieStore implements 
 
         state.cookieLoaded = true;
 
-        // ¶ÁÈ¡cookie
+        // è¯»å–cookie
         state.requestCookieValue = readCookie(request);
 
-        // ÒÀ´ÎÊ¹ÓÃËùÓĞencoders£¬ÊÔ×Å¶ÔcookieValue½âÂë£¬Èç¹ûÊ§°Ü£¬Ôò·µ»Ø¿Õ±í
-        // Èç¹û³É¹¦£¬Ôò·µ»Øµ¥Öµmap¡£
+        // ä¾æ¬¡ä½¿ç”¨æ‰€æœ‰encodersï¼Œè¯•ç€å¯¹cookieValueè§£ç ï¼Œå¦‚æœå¤±è´¥ï¼Œåˆ™è¿”å›ç©ºè¡¨
+        // å¦‚æœæˆåŠŸï¼Œåˆ™è¿”å›å•å€¼mapã€‚
         state.attributes = decodeCookieValue(state.requestCookieValue, storeContext);
     }
 
     /**
-     * ¶ÁÈ¡cookies¡£
+     * è¯»å–cookiesã€‚
      */
     private String readCookie(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
@@ -175,7 +175,7 @@ public class SingleValuedCookieStoreImpl extends AbstractCookieStore implements 
             cookies = new Cookie[0];
         }
 
-        // É¨Ãècookie¡£
+        // æ‰«æcookieã€‚
         String cookieValue = null;
 
         for (Cookie cookie : cookies) {
@@ -220,7 +220,7 @@ public class SingleValuedCookieStoreImpl extends AbstractCookieStore implements 
             }
         }
 
-        // Èç¹ûÊ§°Ü£¬¼ÇÂ¼ÈÕÖ¾
+        // å¦‚æœå¤±è´¥ï¼Œè®°å½•æ—¥å¿—
         if (attrs.isEmpty() && encoderExceptions != null) {
             if (log.isWarnEnabled()) {
                 ToStringBuilder buf = new ToStringBuilder();
@@ -259,7 +259,7 @@ public class SingleValuedCookieStoreImpl extends AbstractCookieStore implements 
     }
 
     /**
-     * ´æ·ÅcookieµÄ×´Ì¬¡£
+     * å­˜æ”¾cookieçš„çŠ¶æ€ã€‚
      */
     private class State {
         private boolean cookieLoaded;

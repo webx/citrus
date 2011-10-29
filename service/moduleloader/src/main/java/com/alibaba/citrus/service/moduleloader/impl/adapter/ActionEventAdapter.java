@@ -56,28 +56,28 @@ public class ActionEventAdapter extends AbstractDataBindingAdapter implements In
     }
 
     /**
-     * Ö´ĞĞÒ»¸ömodule¡£
+     * æ‰§è¡Œä¸€ä¸ªmoduleã€‚
      */
     public void execute() throws ActionEventException, ActionEventNotFoundException {
         String event = getEventName(request);
         MethodInvoker handler = null;
 
-        // ²éÕÒ¾«È·Æ¥ÅäµÄ·½·¨
+        // æŸ¥æ‰¾ç²¾ç¡®åŒ¹é…çš„æ–¹æ³•
         if (event != null) {
             handler = handlers.get(event);
         }
 
-        // ²éÕÒfallback method
+        // æŸ¥æ‰¾fallback method
         if (handler == null) {
             handler = handlers.get(null);
         }
 
-        // Î´ÕÒµ½ºÏÊÊµÄhandler method£¬±¨´í
+        // æœªæ‰¾åˆ°åˆé€‚çš„handler methodï¼ŒæŠ¥é”™
         if (handler == null) {
             throw new ActionEventNotFoundException("Could not find handler method for action event: " + event);
         }
 
-        // Ö´ĞĞpreHandler
+        // æ‰§è¡ŒpreHandler
         if (preHandler != null) {
             log.debug("Invoking pre-action event handler for event {}: {}", event, preHandler);
 
@@ -91,7 +91,7 @@ public class ActionEventAdapter extends AbstractDataBindingAdapter implements In
         ActionEventException exception = null;
 
         try {
-            // Ö´ĞĞevent handler
+            // æ‰§è¡Œevent handler
             log.debug("Invoking action event handler for event {}: {}", event, handler);
 
             try {
@@ -100,7 +100,7 @@ public class ActionEventAdapter extends AbstractDataBindingAdapter implements In
                 exception = new ActionEventException("Failed to execute action event handler: " + handler, e);
             }
         } finally {
-            // Ö´ĞĞpostHandler
+            // æ‰§è¡ŒpostHandler
             if (postHandler != null) {
                 log.debug("Invoking post-action event handler for event {}: {}", event, postHandler);
 

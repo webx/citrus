@@ -31,7 +31,7 @@ import com.alibaba.citrus.logconfig.spi.AbstractLogConfigurator;
 public class LogConfiguratorTests extends AbstractLogConfiguratorTests {
     @Test
     public void getConfigurator_failure() throws Exception {
-        // ¼ÈÃ»ÓĞÖ¸¶¨logsystem£¬Ò²Ã»ÕÒµ½ÏµÍ³Ä¬ÈÏµÄlogsystem¡£
+        // æ—¢æ²¡æœ‰æŒ‡å®šlogsystemï¼Œä¹Ÿæ²¡æ‰¾åˆ°ç³»ç»Ÿé»˜è®¤çš„logsystemã€‚
         assertGetConfiguratorFailure(null, "", "No log system bound with SLF4J");
 
         // provider not found
@@ -87,23 +87,23 @@ public class LogConfiguratorTests extends AbstractLogConfiguratorTests {
 
     @Test
     public void getConfigurators() throws Exception {
-        // getConfigurators() - ÎŞ²ÎÊı - Ä¬ÈÏÖµ
+        // getConfigurators() - æ— å‚æ•° - é»˜è®¤å€¼
         invokeInLoader("log4j", "getConfigurators", new String[0], new String[] { "log4j" });
 
-        // getConfigurators("log4j", "logback") - ¶à¸ö²ÎÊı
+        // getConfigurators("log4j", "logback") - å¤šä¸ªå‚æ•°
         invokeInLoader("log4j", "getConfigurators", new String[] { "log4j", "logback" }, new String[] { "log4j",
                 "logback" });
 
-        // getConfigurators(null, "  ") - ¿Õ²ÎÊı - Ä¬ÈÏÖµ
+        // getConfigurators(null, "  ") - ç©ºå‚æ•° - é»˜è®¤å€¼
         invokeInLoader("log4j", "getConfigurators", new String[] { null, "  " }, new String[] { "log4j", "log4j" });
 
-        // getConfigurators("logback") - Ö¸¶¨ÖµÓëslf4j²»Æ¥Åä
+        // getConfigurators("logback") - æŒ‡å®šå€¼ä¸slf4jä¸åŒ¹é…
         invokeInLoader("log4j", "getConfigurators", new String[] { "logback" }, new String[] { "logback" });
 
         assertEquals("", out);
         assertEquals("WARN: SLF4J chose [log4j] as its logging system, not [logback]", err.trim());
 
-        // getConfigurators("logback", null) - ÕÒ²»µ½Ä¬ÈÏÖµ
+        // getConfigurators("logback", null) - æ‰¾ä¸åˆ°é»˜è®¤å€¼
         try {
             invokeInLoader("", "getConfigurators", new String[] { "logback", null }, null);
             fail();
