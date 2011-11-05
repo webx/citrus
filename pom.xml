@@ -51,6 +51,7 @@
         <maven-util-version>1.0</maven-util-version>
         <jetty-version>6.1.22</jetty-version>
         <project.build.sourceEncoding>${java.encoding}</project.build.sourceEncoding>
+        <gpg.skip>true</gpg.skip>
     </properties>
     <profiles>
         <profile>
