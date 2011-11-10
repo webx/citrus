@@ -211,5 +211,13 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>citrus-webx-dev</artifactId>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+        </dependency>
     </dependencies>
 </project>
