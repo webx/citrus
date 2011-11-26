@@ -939,7 +939,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
     @Test
     public void test08_import_invalid() throws Exception {
-        String importedFile = repeat("../", countMatches(srcdir.toURL().toExternalForm(), "/")) + "../def.htm";
+        String importedFile = repeat("../", countMatches(srcdir.toURI().toURL().toExternalForm(), "/")) + "../def.htm";
         String s = "#@trimming on\n";
         s += "${abc: #abc}\n";
         s += "#abc(" + importedFile + ") ## xxxx";

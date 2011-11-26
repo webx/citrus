@@ -228,3 +228,5 @@
 
 * 添加方法：navigator.redirectTo(name).withParameter(..).end(); 通过end()方法可以明确结束语句，并发出重定向请求。
 * 所有源码改用UTF-8，符合多数开发环境的默认配置。
+* 改进pom，在开发时使用较高版本的java，发布时使用保守的Java 1.5。
+

@@ -1766,7 +1766,7 @@ public final class Template {
                 String sourceURI = null;
 
                 if (source instanceof File) {
-                    sourceURI = ((File) source).toURL().toExternalForm();
+                    sourceURI = ((File) source).toURI().toString();
                 } else if (source instanceof URL) {
                     sourceURI = ((URL) source).toExternalForm();
                 }

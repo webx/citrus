@@ -104,7 +104,7 @@ public abstract class AbstractTemplateTests {
 
         io(new FileInputStream(new File(srcdir, src)), new FileOutputStream(destfile), true, true);
 
-        return destfile.toURL();
+        return destfile.toURI().toURL();
     }
 
     protected URL copyFilesToJar(String destJar, String... srcdest) throws IOException {
@@ -124,7 +124,7 @@ public abstract class AbstractTemplateTests {
 
         jos.close();
 
-        return destJarFile.toURL();
+        return destJarFile.toURI().toURL();
     }
 
     protected void acceptFailure(Object visitor) {

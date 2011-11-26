@@ -82,7 +82,7 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
 
         // -----------------
         content = repeat("#", 1024 * 4) + "\n";
-        content += " #@charset GB18030\n"; // 超过了readlimit 
+        content += " #@charset GB18030\n"; // 超过了readlimit
 
         assertEquals("default", detectCharset(content));
     }
@@ -100,10 +100,10 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
         assertNull(parentSource.getRelative("  "));
 
         inputSource = parentSource.getRelative(" b.txt ");
-        assertEquals(new File("/aa/bb/b.txt").toURL().toExternalForm(), inputSource.systemId);
+        assertEquals(new File("/aa/bb/b.txt").toURI().toURL().toExternalForm(), inputSource.systemId);
 
         inputSource = parentSource.getRelative(" /b.txt ");
-        assertEquals(new File("/aa/bb/b.txt").toURL().toExternalForm(), inputSource.systemId);
+        assertEquals(new File("/aa/bb/b.txt").toURI().toURL().toExternalForm(), inputSource.systemId);
 
         inputSource = parentSource.getRelative(" ../b.txt ");
         assertEquals(new File("/aa/b.txt").toURI().normalize().toURL().toExternalForm(), inputSource.systemId);
@@ -171,8 +171,8 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
         assertReader("GBK", f, f.toURI().toString());
 
         // file: url as input source
-        inputSource = new InputSource(f.toURL());
-        assertReader("GBK", f, f.toURL().toExternalForm());
+        inputSource = new InputSource(f.toURI().toURL());
+        assertReader("GBK", f, f.toURI().toURL().toExternalForm());
 
         // url as input source
         URL jarurl = copyFilesToJar("test.jar", "test05_param_gbk.txt", "gbk.txt");
