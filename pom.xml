@@ -625,7 +625,7 @@
 					<includes>
 						<include>**/*Tests.java</include>
 					</includes>
-					<argLine>-Xmx256m -Dfile.encoding=GB2312</argLine>
+					<argLine>-Xmx256m</argLine>
 				</configuration>
 			</plugin>
 			<plugin>
