@@ -22,10 +22,13 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.lang.reflect.Method;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.velocity.app.event.ReferenceInsertionEventHandler;
 import org.apache.velocity.exception.ParseErrorException;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -39,11 +42,22 @@ import com.alibaba.citrus.service.velocity.VelocityEngineTests.MyRenderable;
 import com.alibaba.citrus.service.velocity.support.EscapeSupport.EscapeType;
 import com.alibaba.citrus.test.TestUtil;
 import com.alibaba.citrus.util.StringEscapeUtil;
+import com.alibaba.citrus.util.i18n.LocaleUtil;
 
 public class EscapeTests extends AbstractVelocityEngineTests {
     @BeforeClass
     public static void initFactory() {
         factory = createFactory("services_escape.xml");
+    }
+
+    @Before
+    public void initLocale() {
+        LocaleUtil.setContext(Locale.CHINA, "GBK");
+    }
+
+    @After
+    public void resetLocale() {
+        LocaleUtil.resetContext();
     }
 
     @Test
