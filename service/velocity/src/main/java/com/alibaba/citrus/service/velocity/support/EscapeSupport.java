@@ -17,13 +17,18 @@
 
 package com.alibaba.citrus.service.velocity.support;
 
-import static com.alibaba.citrus.util.ArrayUtil.*;
-import static com.alibaba.citrus.util.Assert.*;
-import static com.alibaba.citrus.util.BasicConstant.*;
-import static com.alibaba.citrus.util.CollectionUtil.*;
-import static com.alibaba.citrus.util.StringUtil.*;
+import static com.alibaba.citrus.util.ArrayUtil.isEmptyArray;
+import static com.alibaba.citrus.util.Assert.assertNotNull;
+import static com.alibaba.citrus.util.Assert.assertTrue;
+import static com.alibaba.citrus.util.Assert.unreachableCode;
+import static com.alibaba.citrus.util.BasicConstant.EMPTY_STRING;
+import static com.alibaba.citrus.util.CollectionUtil.createArrayList;
+import static com.alibaba.citrus.util.CollectionUtil.createConcurrentHashMap;
+import static com.alibaba.citrus.util.CollectionUtil.createHashMap;
+import static com.alibaba.citrus.util.StringUtil.trimToNull;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +48,7 @@ import org.apache.velocity.runtime.RuntimeServices;
 import org.apache.velocity.runtime.directive.Directive;
 import org.apache.velocity.runtime.parser.node.Node;
 import org.apache.velocity.util.ContextAware;
+import org.apache.velocity.util.RuntimeServicesAware;
 import org.apache.velocity.util.introspection.Info;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,9 +62,10 @@ import com.alibaba.citrus.service.velocity.VelocityPlugin;
 import com.alibaba.citrus.util.StringEscapeUtil;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import static org.apache.velocity.runtime.RuntimeConstants.*;
 
 public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHandler, ContextAware, FastCloneable,
-        ProductionModeAware {
+        ProductionModeAware, RuntimeServicesAware {
     private final static Logger log = LoggerFactory.getLogger(EscapeSupport.class);
     private final static String ESCAPE_TYPE_KEY = "_ESCAPE_SUPPORT_TYPE_";
     private ResourceLoader loader;
@@ -67,6 +74,9 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
     private boolean cacheReferences;
     private Map<String, EscapeType> referenceCache = createConcurrentHashMap();
     private transient Context context;
+	private transient RuntimeServices runtimeServices;
+
+	private String inputEncoding;
 
     public Object createCopy() {
         EscapeSupport copy = new EscapeSupport();
@@ -97,6 +107,11 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
 
         configuration.getProperties().addProperty("userdirective", Escape.class.getName());
         configuration.getProperties().addProperty("userdirective", Noescape.class.getName());
+    }
+    
+    public void setRuntimeServices(RuntimeServices rs) {
+    	this.runtimeServices = rs;
+    	this.inputEncoding = this.runtimeServices.getString(INPUT_ENCODING);
     }
 
     public Resource[] getMacros() throws IOException {
@@ -129,7 +144,7 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
             return value;
         }
 
-        return escapeType.escape(value);
+        return escapeType.escape(value, inputEncoding);
     }
 
     private EscapeType getEscapeType(String reference) {
@@ -239,12 +254,12 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
     public static enum EscapeType {
         NO_ESCAPE("noescape") {
             @Override
-            public Object escape(Object value) {
+            public Object escape(Object value, String encoding) {
                 return value;
             }
 
             @Override
-            protected String escape(String strValue) {
+            protected String escape(String strValue, String encoding) {
                 unreachableCode();
                 return strValue;
             }
@@ -257,42 +272,46 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
 
         JAVA("java") {
             @Override
-            protected String escape(String strValue) {
+            protected String escape(String strValue, String encoding) {
                 return StringEscapeUtil.escapeJava(strValue);
             }
         },
 
         JAVA_SCRIPT("javascript") {
             @Override
-            protected String escape(String strValue) {
+            protected String escape(String strValue, String encoding) {
                 return StringEscapeUtil.escapeJavaScript(strValue);
             }
         },
 
         HTML("html") {
             @Override
-            protected String escape(String strValue) {
+            protected String escape(String strValue, String encoding) {
                 return StringEscapeUtil.escapeHtml(strValue);
             }
         },
 
         XML("xml") {
             @Override
-            protected String escape(String strValue) {
+            protected String escape(String strValue, String encoding) {
                 return StringEscapeUtil.escapeXml(strValue);
             }
         },
 
         URL("url") {
             @Override
-            protected String escape(String strValue) {
-                return StringEscapeUtil.escapeURL(strValue);
+            protected String escape(String strValue, String encoding) {
+                try {
+					return StringEscapeUtil.escapeURL(strValue, encoding);
+				} catch (UnsupportedEncodingException e) {
+					throw new IllegalArgumentException(e);
+				}
             }
         },
 
         SQL("sql") {
             @Override
-            protected String escape(String strValue) {
+            protected String escape(String strValue, String encoding) {
                 return StringEscapeUtil.escapeSql(strValue);
             }
         };
@@ -318,11 +337,11 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
             return name;
         }
 
-        public Object escape(Object value) {
-            return escape(value.toString());
+        public Object escape(Object value, String encoding) {
+            return escape(value.toString(), encoding);
         }
 
-        protected abstract String escape(String strValue);
+        protected abstract String escape(String strValue, String encoding);
 
         public static EscapeType getEscapeType(String name) {
             name = trimToNull(name);
