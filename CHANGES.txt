@@ -230,4 +230,5 @@
 * 所有源码改用UTF-8，符合多数开发环境的默认配置。
 * 改进pom，在开发时使用较高版本的java，发布时使用保守的Java 1.5。
 * 改进form/velocity service测试，使之可以在非(locale=CHINA, charset=GBK)的情况下测试通过。
+* bugfix: number-validator设置限定范围以后，当用户输入非法数字时，validator抛出异常。
 

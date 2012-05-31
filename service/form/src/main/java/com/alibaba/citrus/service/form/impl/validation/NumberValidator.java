@@ -157,9 +157,11 @@ public class NumberValidator extends AbstractNumberValidator {
             valid = false;
         }
 
-        for (int i = 0; i < operands.length; i++) {
-            if (operands[i] != null) {
-                valid &= CompareOperator.values()[i].accept(numberValue.compareTo(operands[i]));
+        if (valid) {
+            for (int i = 0; i < operands.length; i++) {
+                if (operands[i] != null) {
+                    valid &= CompareOperator.values()[i].accept(numberValue.compareTo(operands[i]));
+                }
             }
         }
 

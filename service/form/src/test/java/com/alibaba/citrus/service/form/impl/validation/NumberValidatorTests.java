@@ -124,6 +124,10 @@ public class NumberValidatorTests extends AbstractNumberValidatorTests<NumberVal
 
     @Test
     public void validate_equalTo() throws Exception {
+        request("invalid");
+        assertEquals(false, field1.isValid());
+        assertEquals("field1 must equal to 123", field1.getMessage());
+
         request("1");
         assertEquals(false, field1.isValid());
         assertEquals("field1 must equal to 123", field1.getMessage());
@@ -135,6 +139,10 @@ public class NumberValidatorTests extends AbstractNumberValidatorTests<NumberVal
 
     @Test
     public void validate_notEqualTo() throws Exception {
+        request(null, "invalid");
+        assertEquals(false, field2.isValid());
+        assertEquals("field2 must not equal to 123", field2.getMessage());
+
         request(null, "123");
         assertEquals(false, field2.isValid());
         assertEquals("field2 must not equal to 123", field2.getMessage());
@@ -146,6 +154,10 @@ public class NumberValidatorTests extends AbstractNumberValidatorTests<NumberVal
 
     @Test
     public void validate_lessThan() throws Exception {
+        request(null, null, "invalid");
+        assertEquals(false, field3.isValid());
+        assertEquals("field3 must be less than 123", field3.getMessage());
+
         request(null, null, "123");
         assertEquals(false, field3.isValid());
         assertEquals("field3 must be less than 123", field3.getMessage());
@@ -161,6 +173,10 @@ public class NumberValidatorTests extends AbstractNumberValidatorTests<NumberVal
 
     @Test
     public void validate_greaterThan() throws Exception {
+        request(null, null, null, "invalid");
+        assertEquals(false, field4.isValid());
+        assertEquals("field4 must be greater than 123", field4.getMessage());
+
         request(null, null, null, "123");
         assertEquals(false, field4.isValid());
         assertEquals("field4 must be greater than 123", field4.getMessage());
@@ -176,6 +192,10 @@ public class NumberValidatorTests extends AbstractNumberValidatorTests<NumberVal
 
     @Test
     public void validate_lessThanOrEqualTo() throws Exception {
+        request(null, null, null, null, "invalid");
+        assertEquals(false, field5.isValid());
+        assertEquals("field5 must be less than or equal to 123", field5.getMessage());
+
         request(null, null, null, null, "234");
         assertEquals(false, field5.isValid());
         assertEquals("field5 must be less than or equal to 123", field5.getMessage());
@@ -191,6 +211,10 @@ public class NumberValidatorTests extends AbstractNumberValidatorTests<NumberVal
 
     @Test
     public void validate_greaterThanOrEqualTo() throws Exception {
+        request(null, null, null, null, null, "invalid");
+        assertEquals(false, field6.isValid());
+        assertEquals("field6 must be greater than or equal to 123", field6.getMessage());
+
         request(null, null, null, null, null, "1");
         assertEquals(false, field6.isValid());
         assertEquals("field6 must be greater than or equal to 123", field6.getMessage());
@@ -206,7 +230,7 @@ public class NumberValidatorTests extends AbstractNumberValidatorTests<NumberVal
 
     @Test
     public void validate_noLimit() throws Exception {
-        request(null, null, null, null, null, null, "abc");
+        request(null, null, null, null, null, null, "invalid");
         assertEquals(false, field7.isValid());
         assertEquals("field7 must be of type INT", field7.getMessage());
 
@@ -217,6 +241,10 @@ public class NumberValidatorTests extends AbstractNumberValidatorTests<NumberVal
 
     @Test
     public void validate_combine() throws Exception {
+        request(null, null, null, null, null, null, null, "invalid");
+        assertEquals(false, field8.isValid());
+        assertEquals("field8 must between 100 and 200", field8.getMessage());
+
         request(null, null, null, null, null, null, null, "100");
         assertEquals(false, field8.isValid());
         assertEquals("field8 must between 100 and 200", field8.getMessage());
