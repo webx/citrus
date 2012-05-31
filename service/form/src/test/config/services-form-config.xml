@@ -12,7 +12,7 @@
 
     <form id="emptyFormConfig" />
 
-    <form id="nonEmptyFormConfig" converterQuiet="false" postOnlyByDefault="false">
+    <form id="nonEmptyFormConfig" converterQuiet="false" postOnlyByDefault="false" fieldKeyFormat="uncompressed">
         <property-editor-registrar
             class="com.alibaba.citrus.service.form.impl.MyPropertyEditorRegistrar" />
         <property-editor-registrar

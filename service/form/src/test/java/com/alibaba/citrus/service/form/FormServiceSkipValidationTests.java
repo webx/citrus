@@ -30,6 +30,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.springframework.context.ApplicationContext;
 
+import com.alibaba.citrus.service.form.configuration.FormConfig.FieldKeyFormat;
 import com.alibaba.citrus.service.form.impl.FormServiceImpl;
 import com.alibaba.citrus.service.form.impl.configuration.FormConfigImpl;
 
@@ -68,6 +69,7 @@ public class FormServiceSkipValidationTests extends AbstractFormServiceTests {
     public void formConfig() {
         assertEquals(true, config.isConverterQuiet());
         assertEquals(true, config.isPostOnlyByDefault());
+        assertSame(FieldKeyFormat.compressed, config.getFieldKeyFormat());
         assertEquals("form.", config.getMessageCodePrefix());
     }
 

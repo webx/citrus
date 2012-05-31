@@ -38,10 +38,18 @@
         </xsd:sequence>
         <xsd:attribute name="converterQuiet" type="springext:booleanOrPlaceholder" default="true" />
         <xsd:attribute name="postOnlyByDefault" type="springext:booleanOrPlaceholder" default="true" />
+        <xsd:attribute name="fieldKeyFormat" type="FormFieldKeyFormatType" default="compressed" />
         <xsd:attribute name="messageCodePrefix" type="xsd:string" default="form." />
         <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
     </xsd:complexType>
 
+    <xsd:simpleType name="FormFieldKeyFormatType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="compressed" />
+            <xsd:enumeration value="uncompressed" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    
     <xsd:complexType name="FormImportType">
         <xsd:attribute name="form" type="xsd:string" use="required" />
     </xsd:complexType>

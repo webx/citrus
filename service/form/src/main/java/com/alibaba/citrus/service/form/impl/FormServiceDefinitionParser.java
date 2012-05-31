@@ -62,7 +62,7 @@ public class FormServiceDefinitionParser extends AbstractNamedBeanDefinitionPars
         // new FormConfigImp()
         BeanDefinitionBuilder formConfigBuilder = BeanDefinitionBuilder.genericBeanDefinition(FormConfigImpl.class);
 
-        attributesToProperties(element, formConfigBuilder, "converterQuiet", "postOnlyByDefault", "messageCodePrefix");
+        attributesToProperties(element, formConfigBuilder, "converterQuiet", "postOnlyByDefault", "fieldKeyFormat", "messageCodePrefix");
 
         // import forms
         ElementSelector importSelector = and(sameNs(element), name("import"));

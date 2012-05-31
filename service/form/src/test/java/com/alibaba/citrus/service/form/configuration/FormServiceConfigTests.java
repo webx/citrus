@@ -25,6 +25,7 @@ import org.junit.Test;
 
 import com.alibaba.citrus.service.configuration.support.PropertyEditorRegistrarsSupport;
 import com.alibaba.citrus.service.form.AbstractFormServiceTests;
+import com.alibaba.citrus.service.form.configuration.FormConfig.FieldKeyFormat;
 import com.alibaba.citrus.service.form.impl.configuration.FieldConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.FormConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.GroupConfigImpl;
@@ -55,6 +56,7 @@ public class FormServiceConfigTests extends AbstractFormServiceTests {
         assertEquals(0, getRegisrarsSupport().size());
         assertEquals(0, formConfig.getGroupConfigList().size());
         assertEquals(true, formConfig.isPostOnlyByDefault());
+        assertSame(FieldKeyFormat.compressed, formConfig.getFieldKeyFormat());
     }
 
     @Test
@@ -64,6 +66,7 @@ public class FormServiceConfigTests extends AbstractFormServiceTests {
         assertEquals(2, getRegisrarsSupport().size());
         assertEquals(2, formConfig.getGroupConfigList().size());
         assertEquals(false, formConfig.isPostOnlyByDefault());
+        assertSame(FieldKeyFormat.uncompressed, formConfig.getFieldKeyFormat());
     }
 
     @Test

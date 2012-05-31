@@ -53,6 +53,7 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
     private PropertyEditorRegistrarsSupport propertyEditorRegistrars = new PropertyEditorRegistrarsSupport();
     private Boolean converterQuiet;
     private Boolean postOnlyByDefault;
+    private FieldKeyFormat fieldKeyFormat;
     private String messageCodePrefix;
 
     /**
@@ -102,6 +103,20 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
      */
     public void setPostOnlyByDefault(boolean postOnlyByDefault) {
         this.postOnlyByDefault = postOnlyByDefault;
+    }
+
+    /**
+     * 取得field key的格式，可以是压缩或不压缩的。
+     */
+    public FieldKeyFormat getFieldKeyFormat() {
+        return fieldKeyFormat == null ? FieldKeyFormat.compressed : fieldKeyFormat;
+    }
+
+    /**
+     * 设置field key的格式，可以是压缩或不压缩的。
+     */
+    public void setFieldKeyFormat(FieldKeyFormat fieldKeyFormat) {
+        this.fieldKeyFormat = fieldKeyFormat;
     }
 
     /**

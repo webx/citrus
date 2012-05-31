@@ -30,6 +30,7 @@ import org.springframework.beans.SimpleTypeConverter;
 
 import com.alibaba.citrus.service.configuration.support.PropertyEditorRegistrarsSupport;
 import com.alibaba.citrus.service.form.FormService;
+import com.alibaba.citrus.service.form.configuration.FormConfig.FieldKeyFormat;
 import com.alibaba.citrus.service.form.impl.MyPropertyEditorRegistrar;
 import com.alibaba.citrus.service.form.impl.configuration.FieldConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.FormConfigImpl;
@@ -106,6 +107,16 @@ public class FormConfigTests extends AbstractConfigTests {
         // set value
         formConfig.setPostOnlyByDefault(false);
         assertFalse(formConfig.isPostOnlyByDefault());
+    }
+
+    @Test
+    public void getFieldKeyFormat() {
+        // default value
+        assertSame(FieldKeyFormat.compressed, formConfig.getFieldKeyFormat());
+
+        // set value
+        formConfig.setFieldKeyFormat(FieldKeyFormat.uncompressed);
+        assertSame(FieldKeyFormat.uncompressed, formConfig.getFieldKeyFormat());
     }
 
     @Test

@@ -32,6 +32,11 @@ import com.alibaba.citrus.service.form.FormService;
  * @author Michael Zhou
  */
 public interface FormConfig {
+    enum FieldKeyFormat {
+        compressed,
+        uncompressed
+    }
+
     /**
      * 取得创建此form的service。
      */
@@ -46,6 +51,11 @@ public interface FormConfig {
      * Group是否默认必须从post请求中取得数据。
      */
     boolean isPostOnlyByDefault();
+
+    /**
+     * 取得field key的格式，可以是压缩或不压缩的。
+     */
+    FieldKeyFormat getFieldKeyFormat();
 
     /**
      * 取得message code的前缀。
