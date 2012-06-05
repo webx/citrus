@@ -19,8 +19,6 @@ package com.alibaba.citrus.service.form;
 
 import java.util.Collection;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.alibaba.citrus.service.form.configuration.GroupConfig;
 
 /**
@@ -79,12 +77,6 @@ public interface Group {
      * 初始化group。
      */
     void init();
-
-    /**
-     * 初始化group。 其中， <code>request</code>可以是<code>null</code>，如果
-     * <code>request</code>不为<code>null</code>，则同时验证表单。
-     */
-    void init(HttpServletRequest request);
 
     /**
      * 验证（或重新验证）当前的字段值。

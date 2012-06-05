@@ -31,7 +31,7 @@ public final class FormConstant {
     /**
      * 分隔field key各部分的分隔符。
      */
-    public final static char FIELD_KEY_SEPARATOR = '.';
+    public final static String FIELD_KEY_SEPARATOR = ".";
 
     /**
      * 默认的group instance key。

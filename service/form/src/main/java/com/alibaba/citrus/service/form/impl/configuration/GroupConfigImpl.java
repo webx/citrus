@@ -293,16 +293,28 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
             String caseInsensitiveName = entry.getKey();
             FieldConfigImpl fieldConfig = entry.getValue();
 
-            // 设置不重复的key
-            for (int i = 1; i <= caseInsensitiveName.length(); i++) {
-                String key = caseInsensitiveName.substring(0, i);
-
-                if (!fieldsByKey.containsKey(key)) {
-                    fieldConfig.setKey(key);
-                    fieldsByKey.put(key, fieldConfig);
+            switch (getFormConfig().getFieldKeyFormat()) {
+                case uncompressed:
+                    fieldConfig.setKey(caseInsensitiveName);
                     break;
-                }
+
+                default:
+                    // 设置不重复的、压缩的key
+                    for (int i = 1; i <= caseInsensitiveName.length(); i++) {
+                        String key = caseInsensitiveName.substring(0, i);
+
+                        if (!fieldsByKey.containsKey(key)) {
+                            fieldConfig.setKey(key);
+                            fieldsByKey.put(key, fieldConfig);
+                            break;
+                        }
+                    }
+
+                    break;
             }
+
+            // 设置不压缩的key - 不可能重复，因为前面已经判断过了
+            fieldsByKey.put(caseInsensitiveName, fieldConfig);
 
             // 设置field.group
             fieldConfig.setGroupConfig(this);

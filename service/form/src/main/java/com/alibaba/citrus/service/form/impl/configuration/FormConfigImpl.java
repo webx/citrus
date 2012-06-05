@@ -266,16 +266,28 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
             String caseInsensitiveName = entry.getKey();
             GroupConfigImpl groupConfig = entry.getValue();
 
-            // 设置不重复的key
-            for (int i = 1; i <= caseInsensitiveName.length(); i++) {
-                String key = caseInsensitiveName.substring(0, i);
-
-                if (!groupsByKey.containsKey(key)) {
-                    groupConfig.setKey(key);
-                    groupsByKey.put(key, groupConfig);
+            switch (getFieldKeyFormat()) {
+                case uncompressed:
+                    groupConfig.setKey(caseInsensitiveName);
                     break;
-                }
+
+                default:
+                    // 设置不重复的、压缩的key
+                    for (int i = 1; i <= caseInsensitiveName.length(); i++) {
+                        String key = caseInsensitiveName.substring(0, i);
+
+                        if (!groupsByKey.containsKey(key)) {
+                            groupConfig.setKey(key);
+                            groupsByKey.put(key, groupConfig);
+                            break;
+                        }
+                    }
+
+                    break;
             }
+
+            // 设置不压缩的key - 不可能重复，因为前面已经判断过了
+            groupsByKey.put(caseInsensitiveName, groupConfig);
 
             // 设置group.form
             groupConfig.setFormConfig(this);

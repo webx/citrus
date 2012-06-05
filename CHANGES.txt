@@ -231,4 +231,5 @@
 * 改进pom，在开发时使用较高版本的java，发布时使用保守的Java 1.5。
 * 改进form/velocity service测试，使之可以在非(locale=CHINA, charset=GBK)的情况下测试通过。
 * bugfix: number-validator设置限定范围以后，当用户输入非法数字时，validator抛出异常。
-
+* 改进form，对于field.getKey()，同时支持压缩格式（_fm.g._0.f）和非压缩格式（_fm.group._0.field），大小写不敏感。这样可以方便测试。
+  如果<form fieldKeyFormat="uncompressed">参数被明确指定，那么所有输出的字段名全为非压缩的，并且不支持压缩格式。 

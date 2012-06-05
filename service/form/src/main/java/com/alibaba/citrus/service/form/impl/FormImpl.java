@@ -39,8 +39,10 @@ import org.springframework.beans.TypeConverter;
 import com.alibaba.citrus.service.form.Form;
 import com.alibaba.citrus.service.form.Group;
 import com.alibaba.citrus.service.form.MessageContext;
+import com.alibaba.citrus.service.form.configuration.FieldConfig;
 import com.alibaba.citrus.service.form.configuration.FormConfig;
 import com.alibaba.citrus.service.form.configuration.GroupConfig;
+import com.alibaba.citrus.service.form.impl.FormParameters.FormParameter;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
@@ -135,20 +137,23 @@ public class FormImpl implements Form {
             // 扫描用户submit过来的所有form参数，找到符合格式的key：formKey.groupKey.instanceKey.fieldKey
             @SuppressWarnings("unchecked")
             Enumeration<String> e = request.getParameterNames();
+            FormParameters params = new FormParameters(request);
 
             while (e.hasMoreElements()) {
                 String key = e.nextElement();
-                String[] keyInfo = parseParameterKey(key);
+                FormParameter param = parseParameterKey(key);
 
-                // keyInfo为null表示该参数不是从form service生成的，忽略之
-                if (keyInfo != null && isEquals(keyInfo[0], formKey)) {
+                // param为null表示该参数不是从form service生成的，忽略之
+                if (param != null) {
                     if (!logStarted) {
                         logStarted = true;
                         log.debug("Initializing user-submitted form for validating");
                     }
 
-                    String groupKey = keyInfo[1];
-                    String instanceKey = keyInfo[2];
+                    params.addFormParameter(param);
+
+                    String groupKey = param.groupKey;
+                    String instanceKey = param.instanceKey;
                     String groupInstanceKey = getGroupInstanceKey(groupKey, instanceKey);
 
                     // 下面从request中初始化所有group instance，
@@ -166,20 +171,23 @@ public class FormImpl implements Form {
                             setValid(false);
                             continue;
                         } else {
-                            if (log.isDebugEnabled()) {
-                                if (DEFAULT_GROUP_INSTANCE_KEY.equals(instanceKey)) {
-                                    log.debug("Initializing form group: {}", groupConfig.getName());
-                                } else {
-                                    log.debug("Initializing form group: {}[{}]", groupConfig.getName(), instanceKey);
-                                }
-                            }
-
-                            Group group = new GroupImpl(groupConfig, this, instanceKey);
-
-                            groups.put(groupInstanceKey, group);
-                            group.init(request);
+                            groups.put(groupInstanceKey, new GroupImpl(groupConfig, this, instanceKey));
                         }
                     }
+                }
+            }
+
+            for (Group group : groups.values()) {
+                if (log.isDebugEnabled()) {
+                    if (DEFAULT_GROUP_INSTANCE_KEY.equals(group.getInstanceKey())) {
+                        log.debug("Initializing form group: {}", group.getName());
+                    } else {
+                        log.debug("Initializing form group: {}[{}]", group.getName(), group.getInstanceKey());
+                    }
+                }
+
+                if (group instanceof GroupImpl) {
+                    ((GroupImpl) group).init(params);
                 }
             }
         }
@@ -189,25 +197,50 @@ public class FormImpl implements Form {
      * 解析从URL中传过来的key，如果解析成功，则返回相应的groupKey，instanceKey和fieldKey，否则返回
      * <code>null</code>。
      */
-    private String[] parseParameterKey(String paramKey) {
+    private FormParameter parseParameterKey(String paramKey) {
         if (!paramKey.startsWith(FORM_KEY_PREFIX)) {
             return null;
         }
 
-        String[] parts = StringUtil.split(paramKey, FIELD_KEY_SEPARATOR);
+        String[] parts = StringUtil.split(paramKey, FIELD_KEY_SEPARATOR, 5);
 
-        if (parts.length < 4) {
+        if (parts.length < 4 || !isEquals(parts[0], this.formKey)) {
             return null;
         }
 
-        return parts;
+        String groupKey = toLowerCase(parts[1]);
+        String instanceKey = parts[2];
+        String fieldKey = toLowerCase(parts[3]);
+        String additionalInfo = parts.length > 4 ? parts[4] : null;
+
+        // 取得规格化的group/field key，即压缩格式
+        GroupConfig groupConfig = getFormConfig().getGroupConfigByKey(groupKey);
+
+        if (groupConfig != null) {
+            groupKey = groupConfig.getKey();
+
+            FieldConfig fieldConfig = groupConfig.getFieldConfigByKey(fieldKey);
+
+            if (fieldConfig != null) {
+                fieldKey = fieldConfig.getKey();
+            }
+        }
+
+        String normalizedKey = FORM_KEY_PREFIX + FIELD_KEY_SEPARATOR + groupKey + FIELD_KEY_SEPARATOR + instanceKey
+                + FIELD_KEY_SEPARATOR + fieldKey;
+
+        if (additionalInfo != null) {
+            normalizedKey += FIELD_KEY_SEPARATOR + additionalInfo;
+        }
+
+        return new FormParameter(groupKey, fieldKey, instanceKey, additionalInfo, paramKey, normalizedKey);
     }
 
     /**
      * 取得group instance的key，用来索引所有group instance。
      */
     private String getGroupInstanceKey(String groupKey, String instanceKey) {
-        return groupKey + '.' + instanceKey;
+        return groupKey + FIELD_KEY_SEPARATOR + instanceKey;
     }
 
     /**

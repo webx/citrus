@@ -17,8 +17,6 @@
 
 package com.alibaba.citrus.service.form;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.alibaba.citrus.service.form.configuration.FieldConfig;
 import com.alibaba.citrus.service.requestcontext.util.ValueList;
 
@@ -78,11 +76,6 @@ public interface Field extends ValueList, CustomErrors {
      * 取得出错信息。
      */
     String getMessage();
-
-    /**
-     * 初始化field值，但不验证表单字段。其中，<code>request</code>可以是<code>null</code>。
-     */
-    void init(HttpServletRequest request);
 
     /**
      * 取得field name，相当于<code>getFieldConfig().getName()</code>。

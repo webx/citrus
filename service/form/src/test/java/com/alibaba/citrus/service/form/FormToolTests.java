@@ -288,7 +288,6 @@ public class FormToolTests extends AbstractFormServiceTests {
         input hiddenTag = field.getAbsentHiddenField("defaultValue");
         assertThat(hiddenTag.toString(),
                 containsAll("<input", "name='_fm.g._0.f.absent'", "type='hidden'", "value='defaultValue'", "/>"));
-
     }
 
     @Test

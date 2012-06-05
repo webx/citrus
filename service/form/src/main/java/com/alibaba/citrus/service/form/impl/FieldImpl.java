@@ -18,7 +18,6 @@
 package com.alibaba.citrus.service.form.impl;
 
 import static com.alibaba.citrus.service.form.FormConstant.*;
-import static com.alibaba.citrus.service.requestcontext.util.RequestContextUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.ObjectUtil.*;
@@ -33,8 +32,6 @@ import java.util.zip.DeflaterOutputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +43,6 @@ import com.alibaba.citrus.service.form.MessageContext;
 import com.alibaba.citrus.service.form.Validator;
 import com.alibaba.citrus.service.form.Validator.Context;
 import com.alibaba.citrus.service.form.configuration.FieldConfig;
-import com.alibaba.citrus.service.requestcontext.parser.ParserRequestContext;
 import com.alibaba.citrus.service.requestcontext.support.ValueListSupport;
 import com.alibaba.citrus.util.ArrayUtil;
 import com.alibaba.citrus.util.ObjectUtil;
@@ -202,7 +198,7 @@ public class FieldImpl extends ValueListSupport implements Field {
     /**
      * 初始化field值，但不验证表单字段。其中，<code>request</code>可以是<code>null</code>。
      */
-    public void init(HttpServletRequest request) {
+    public void init(FormParameters request) {
         valid = true;
         attachment = null;
 
@@ -210,22 +206,15 @@ public class FieldImpl extends ValueListSupport implements Field {
         if (request == null) {
             setValues(getFieldConfig().getDefaultValues());
         } else {
-            ParserRequestContext prc = findRequestContext(request, ParserRequestContext.class);
-
-            // 假如配置了ParserRequestContext，则取得objects，以便支持FileItem，否则只支持字符串值。
-            if (prc != null) {
-                setValues(prc.getParameters().getObjects(getKey()));
-            } else {
-                setValues(request.getParameterValues(getKey()));
-            }
+            setValues(request.getValues(getKey()));
 
             // 如果field不存在，则检查absent fieldKey。
             if (size() == 0) {
-                setValues(request.getParameterValues(getAbsentKey()));
+                setValues(request.getValues(getAbsentKey()));
             }
 
             // 如果存在attachment，则装入之
-            String attachmentEncoded = trimToNull(request.getParameter(getAttachmentKey()));
+            String attachmentEncoded = trimToNull(request.getStringValue(getAttachmentKey()));
 
             if (attachmentEncoded != null) {
                 attachment = new Attachment(attachmentEncoded);

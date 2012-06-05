@@ -26,8 +26,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -156,13 +154,13 @@ public class GroupImpl implements Group {
      * 初始化group。 其中， <code>request</code>可以是<code>null</code>，如果
      * <code>request</code>不为<code>null</code>，则同时验证表单。
      */
-    public void init(HttpServletRequest request) {
+    void init(FormParameters request) {
         fields.clear();
         valid = true;
         validated = request != null;
 
         for (FieldConfig fieldConfig : getGroupConfig().getFieldConfigList()) {
-            Field field = new FieldImpl(fieldConfig, this);
+            FieldImpl field = new FieldImpl(fieldConfig, this);
 
             fields.put(StringUtil.toLowerCase(fieldConfig.getName()), field);
             field.init(request);
