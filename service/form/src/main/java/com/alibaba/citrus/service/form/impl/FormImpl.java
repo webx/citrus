@@ -213,7 +213,10 @@ public class FormImpl implements Form {
         String fieldKey = toLowerCase(parts[3]);
         String additionalInfo = parts.length > 4 ? parts[4] : null;
 
-        // 取得规格化的group/field key，即压缩格式
+        // 取得规格化的group/field key，即：
+        // 如果fieldKeyFormat=compressed，则为压缩格式；
+        // 如果fieldKeyFormat=uncompressed，则为非压缩格式；
+        // 如果group或field不存在，则暂且保持key原值，后面会报警告。
         GroupConfig groupConfig = getFormConfig().getGroupConfigByKey(groupKey);
 
         if (groupConfig != null) {

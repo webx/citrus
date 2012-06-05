@@ -8,9 +8,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.citrus.service.requestcontext.parser.ParserRequestContext;
+import com.alibaba.citrus.util.ToStringBuilder;
 
 final class FormParameters {
-    private final Map<String, FormParameter> params = createHashMap();
+    private final Map<String, FormParameter> params = createLinkedHashMap();
     private final HttpServletRequest request;
     private final ParserRequestContext prc;
 
@@ -53,6 +54,11 @@ final class FormParameters {
         }
     }
 
+    @Override
+    public String toString() {
+        return new ToStringBuilder().append("FormParameters").append(params.values()).toString();
+    }
+
     /**
      * 代表一个表单参数的信息。
      */
@@ -72,6 +78,11 @@ final class FormParameters {
             this.additionalInfo = additionalInfo;
             this.originalKey = originalKey;
             this.normalizedKey = normalizedKey;
+        }
+
+        @Override
+        public String toString() {
+            return normalizedKey;
         }
     }
 }
