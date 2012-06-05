@@ -17,7 +17,7 @@
 
 package com.alibaba.citrus.generictype.impl;
 
-import static com.alibaba.citrus.codegen.util.TypeUtil.*;
+import static com.alibaba.citrus.generictype.codegen.TypeUtil.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static java.lang.reflect.Modifier.*;
 import static java.util.Collections.*;
@@ -29,12 +29,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.alibaba.citrus.codegen.util.MethodSignature;
 import com.alibaba.citrus.generictype.ClassTypeInfo;
 import com.alibaba.citrus.generictype.GenericDeclarationInfo;
 import com.alibaba.citrus.generictype.MethodInfo;
 import com.alibaba.citrus.generictype.TypeInfo;
 import com.alibaba.citrus.generictype.TypeVariableInfo;
+import com.alibaba.citrus.generictype.codegen.MethodSignature;
 
 /**
  * 对{@link MethodInfo}的实现。

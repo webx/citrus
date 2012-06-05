@@ -21,7 +21,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import com.alibaba.citrus.codegen.util.MethodSignature;
+import com.alibaba.citrus.generictype.codegen.MethodSignature;
 
 /**
  * 代表一个{@link Method}或{@link Constructor}的信息。

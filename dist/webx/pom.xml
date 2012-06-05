@@ -43,7 +43,7 @@
                             <dependencySourceIncludes>
                                 <dependencySourceInclude>${project.groupId}:*</dependencySourceInclude>
                             </dependencySourceIncludes>
-                            <excludePackageNames>com.alibaba.citrus.asm:com.alibaba.citrus.hessian:com.alibaba.citrus.burlap:freemarker</excludePackageNames>
+                            <excludePackageNames>com.alibaba.citrus.hessian:com.alibaba.citrus.burlap:freemarker</excludePackageNames>
                         </configuration>
                     </execution>
                 </executions>
@@ -112,14 +112,6 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>citrus-common-generictype</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>citrus-common-asm</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>citrus-common-codegen</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

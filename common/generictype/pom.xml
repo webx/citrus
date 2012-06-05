@@ -29,10 +29,6 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>citrus-common-codegen</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>citrus-test-util</artifactId>
         </dependency>
     </dependencies>
