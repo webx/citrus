@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 
 /**
  * 用来处理文件路径和后缀的工具。
- * 
+ *
  * @author Michael Zhou
  */
 public class FileUtil {
@@ -47,7 +47,7 @@ public class FileUtil {
      * <li>保留路径末尾的"/"（如果有的话，除了空路径）。</li>
      * <li>对于绝对路径，如果".."上朔的路径超过了根目录，则看作非法路径，抛出异常。</li>
      * </ol>
-     * 
+     *
      * @param path 要规格化的路径
      * @return 规格化后的路径
      * @throws IllegalPathException 如果路径非法
@@ -69,7 +69,7 @@ public class FileUtil {
      * <li>保留路径末尾的"/"（如果有的话，除了空路径和强制指定<code>removeTrailingSlash==true</code>）。</li>
      * <li>对于绝对路径，如果".."上朔的路径超过了根目录，则看作非法路径，抛出异常。</li>
      * </ol>
-     * 
+     *
      * @param path 要规格化的路径
      * @param removeTrailingSlash 是否强制移除末尾的<code>"/"</code>
      * @return 规格化后的路径
@@ -92,7 +92,7 @@ public class FileUtil {
      * <li>空相对路径返回""。</li>
      * <li>保留路径末尾的"/"（如果有的话，除了空路径）。</li>
      * </ol>
-     * 
+     *
      * @param path 要规格化的路径
      * @return 规格化后的路径
      * @throws IllegalPathException 如果路径非法
@@ -114,7 +114,7 @@ public class FileUtil {
      * <li>空相对路径返回""。</li>
      * <li>保留路径末尾的"/"（如果有的话，除了空路径和强制指定<code>removeTrailingSlash==true</code>）。</li>
      * </ol>
-     * 
+     *
      * @param path 要规格化的路径
      * @param removeTrailingSlash 是否强制移除末尾的<code>"/"</code>
      * @return 规格化后的路径
@@ -135,7 +135,7 @@ public class FileUtil {
      * <li>保留路径末尾的"/"（如果有的话，除了空路径）。</li>
      * <li>对于绝对路径，如果".."上朔的路径超过了根目录，则看作非法路径，抛出异常。</li>
      * </ol>
-     * 
+     *
      * @param path 要规格化的路径
      * @return 规格化后的路径
      * @throws IllegalPathException 如果路径非法
@@ -155,7 +155,7 @@ public class FileUtil {
      * <li>保留路径末尾的"/"（如果有的话，除了空路径和强制指定<code>removeTrailingSlash==true</code>）。</li>
      * <li>对于绝对路径，如果".."上朔的路径超过了根目录，则看作非法路径，抛出异常。</li>
      * </ol>
-     * 
+     *
      * @param path 要规格化的路径
      * @param removeTrailingSlash 是否强制移除末尾的<code>"/"</code>
      * @return 规格化后的路径
@@ -268,7 +268,7 @@ public class FileUtil {
 
     /**
      * 如果指定路径已经是绝对路径，则规格化后直接返回之，否则取得基于指定basedir的规格化路径。
-     * 
+     *
      * @param basedir 根目录，如果<code>path</code>为相对路径，表示基于此目录
      * @param path 要检查的路径
      * @return 规格化的绝对路径
@@ -299,7 +299,7 @@ public class FileUtil {
 
     /**
      * 取得和系统相关的绝对路径。
-     * 
+     *
      * @throws IllegalPathException 如果basedir不是绝对路径
      */
     public static String getSystemDependentAbsolutePathBasedOn(String basedir, String path) {
@@ -339,7 +339,7 @@ public class FileUtil {
 
     /**
      * 取得相对于指定根目录的相对路径。
-     * 
+     *
      * @param basedir 根目录
      * @param path 要计算的路径
      * @return 如果<code>path</code>和<code>basedir</code>是兼容的，则返回相对于
@@ -457,7 +457,7 @@ public class FileUtil {
 
     /**
      * 取得指定路径的名称和后缀。
-     * 
+     *
      * @param path 路径
      * @return 路径和后缀
      */
@@ -467,7 +467,7 @@ public class FileUtil {
 
     /**
      * 取得指定路径的名称和后缀。
-     * 
+     *
      * @param path 路径
      * @return 路径和后缀
      */

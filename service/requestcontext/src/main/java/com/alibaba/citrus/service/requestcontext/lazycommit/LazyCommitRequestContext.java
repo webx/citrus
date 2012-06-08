@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,48 +37,48 @@ import com.alibaba.citrus.service.requestcontext.RequestContext;
  * 注意，本类并未处理<code>getWriter()</code>和<code>getOutputStream()</code>
  * 方法所产生的提交。对于这些方法所产生的提交，需要用<code>BufferedRequestContext</code>来处理。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public interface LazyCommitRequestContext extends RequestContext {
     /**
      * 判断当前请求是否已出错。
-     * 
+     *
      * @return 如果出错，则返回<code>true</code>
      */
     boolean isError();
 
     /**
      * 如果<code>sendError()</code>方法曾被调用，则该方法返回一个error状态值。
-     * 
+     *
      * @return error状态值，若系统正常，则返回<code>0</code>
      */
     int getErrorStatus();
 
     /**
      * 如果<code>sendError()</code>方法曾被调用，则该方法返回一个error信息。
-     * 
+     *
      * @return error信息，若系统正常，则返回<code>null</code>
      */
     String getErrorMessage();
 
     /**
      * 判断当前请求是否已被重定向。
-     * 
+     *
      * @return 如果重定向，则返回<code>true</code>
      */
     boolean isRedirected();
 
     /**
      * 取得重定向的URI。
-     * 
+     *
      * @return 重定向的URI，如果没有重定向，则返回<code>null</code>
      */
     String getRedirectLocation();
 
     /**
      * 取得最近设置的HTTP status。
-     * 
+     *
      * @return HTTP status值
      */
     int getStatus();

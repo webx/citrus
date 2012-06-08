@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ import static com.alibaba.citrus.util.ClassUtil.*;
  * <li>基于线程的(PerThread) － 比第一种快5－50倍左右，理论上也是可靠的。</li>
  * <li>基于DCL的(Double-Checked Locking) － 比第一种快5－70倍左右，理论上不可靠，但在JDK5以后应该没有问题了。</li>
  * </ol>
- * 
+ *
  * @author Michael Zhou
  */
 public abstract class LazyLoader<T, C> {

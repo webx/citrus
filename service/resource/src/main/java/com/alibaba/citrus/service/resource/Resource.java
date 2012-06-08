@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +28,7 @@ import java.net.URL;
  * 一个资源可以被表示成<code>URL</code>、<code>File</code>或是<code>InputStream</code>。
  * 需要注意的是，不是所有类型的资源都可以同时取得上述三种形式。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public interface Resource {
@@ -50,7 +50,7 @@ public interface Resource {
 
     /**
      * 判断资源是否存在。
-     * 
+     *
      * @return 如果存在，则返回<code>true</code>
      */
     boolean exists();

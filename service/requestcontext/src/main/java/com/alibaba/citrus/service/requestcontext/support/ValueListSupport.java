@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -44,7 +44,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
  * 代表一个值的列表。
- * 
+ *
  * @author Michael Zhou
  */
 public class ValueListSupport implements ValueList {
@@ -58,12 +58,12 @@ public class ValueListSupport implements ValueList {
     }
 
     // =============================================================
-    //  取得参数的值 
+    //  取得参数的值
     // =============================================================
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>false</code>。
-     * 
+     *
      * @return 参数值
      */
     public boolean getBooleanValue() {
@@ -72,7 +72,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param defaultValue 默认值
      * @return 参数值
      */
@@ -82,7 +82,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>0</code>。
-     * 
+     *
      * @return 参数值
      */
     public byte getByteValue() {
@@ -91,7 +91,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param defaultValue 默认值
      * @return 参数值
      */
@@ -101,7 +101,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得指定参数的字节。
-     * 
+     *
      * @param charset 用来转换字符的编码
      * @return 参数值的字节数组
      * @throws UnsupportedEncodingException 如果指定了错误的编码字符集
@@ -113,7 +113,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>'\0'</code>。
-     * 
+     *
      * @return 参数值
      */
     public char getCharacterValue() {
@@ -122,7 +122,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param defaultValue 默认值
      * @return 参数值
      */
@@ -132,7 +132,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>0</code>。
-     * 
+     *
      * @return 参数值
      */
     public double getDoubleValue() {
@@ -141,7 +141,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param defaultValue 默认值
      * @return 参数值
      */
@@ -151,7 +151,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>0</code>。
-     * 
+     *
      * @return 参数值
      */
     public float getFloatValue() {
@@ -160,7 +160,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param defaultValue 默认值
      * @return 参数值
      */
@@ -170,7 +170,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>0</code>。
-     * 
+     *
      * @return 参数值
      */
     public int getIntegerValue() {
@@ -179,7 +179,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param defaultValue 默认值
      * @return 参数值
      */
@@ -189,7 +189,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回<code>null</code>。
-     * 
+     *
      * @return 参数值的数组
      */
     public int[] getIntegerValues() {
@@ -198,7 +198,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回指定默认值。
-     * 
+     *
      * @param defaultValue 默认值
      * @return 参数值的数组
      */
@@ -208,7 +208,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>0</code>。
-     * 
+     *
      * @return 参数值
      */
     public long getLongValue() {
@@ -217,7 +217,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param defaultValue 默认值
      * @return 参数值
      */
@@ -227,7 +227,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回<code>null</code>。
-     * 
+     *
      * @return 参数值的数组
      */
     public long[] getLongValues() {
@@ -236,7 +236,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回指定默认值。
-     * 
+     *
      * @param defaultValue 默认值
      * @return 参数值的数组
      */
@@ -246,7 +246,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>0</code>。
-     * 
+     *
      * @return 参数值
      */
     public short getShortValue() {
@@ -255,7 +255,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param defaultValue 默认值
      * @return 参数值
      */
@@ -265,7 +265,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得日期。字符串将使用指定的<code>DateFormat</code>来解析。如果不存在，则返回<code>null</code>。
-     * 
+     *
      * @param format <code>DateFormat</code>对象
      * @return <code>java.util.Date</code>对象
      */
@@ -275,7 +275,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得日期。字符串将使用指定的<code>DateFormat</code>来解析。如果不存在，则返回默认值。
-     * 
+     *
      * @param format <code>DateFormat</code>对象
      * @param defaultValue 默认值
      * @return <code>java.util.Date</code>对象
@@ -298,7 +298,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>null</code>。
-     * 
+     *
      * @return 参数值
      */
     public String getStringValue() {
@@ -307,7 +307,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param defaultValue 默认值
      * @return 参数值
      */
@@ -323,7 +323,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回<code>null</code>。
-     * 
+     *
      * @return 参数值的数组
      */
     public String[] getStringValues() {
@@ -332,7 +332,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回指定默认值。
-     * 
+     *
      * @param defaultValue 默认值
      * @return 参数值的数组
      */
@@ -354,7 +354,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得<code>FileItem</code>对象，如果不存在，则返回<code>null</code>。
-     * 
+     *
      * @return <code>FileItem</code>对象
      */
     public FileItem getFileItem() {
@@ -365,7 +365,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得<code>FileItem</code>对象，如果不存在，则返回<code>null</code>。
-     * 
+     *
      * @return <code>FileItem</code>对象的数组
      */
     public FileItem[] getFileItems() {
@@ -382,7 +382,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得指定参数的值。如果参数不存在，则返回<code>null</code>。
-     * 
+     *
      * @return 参数值
      */
     public Object getValue() {
@@ -391,7 +391,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得指定参数的值。如果参数不存在，则返回默认值。
-     * 
+     *
      * @param defaultValue 默认值
      * @return 参数值
      */
@@ -407,7 +407,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回<code>null</code>。
-     * 
+     *
      * @return 参数值的数组
      */
     public Object[] getValues() {
@@ -416,7 +416,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回指定默认值。
-     * 
+     *
      * @param defaultValues 默认值
      * @return 参数值的数组
      */
@@ -542,7 +542,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param value 参数值
      */
     public void addValue(boolean value) {
@@ -551,7 +551,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param value 参数值
      */
     public void addValue(byte value) {
@@ -560,7 +560,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param value 参数值
      */
     public void addValue(char value) {
@@ -569,7 +569,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param value 参数值
      */
     public void addValue(double value) {
@@ -578,7 +578,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param value 参数值
      */
     public void addValue(float value) {
@@ -587,7 +587,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param value 参数值
      */
     public void addValue(int value) {
@@ -596,7 +596,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param value 参数值
      */
     public void addValue(long value) {
@@ -605,7 +605,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param value 参数值
      */
     public void addValue(short value) {
@@ -614,7 +614,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param value 参数值
      */
     public void addValue(Object value) {
@@ -623,7 +623,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 设置参数值。和<code>add</code>方法不同，此方法将覆盖原有的值。
-     * 
+     *
      * @param value 参数值
      */
     public void setValue(Object value) {
@@ -633,7 +633,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 设置参数值。和<code>add</code>方法不同，此方法将覆盖原有的值。
-     * 
+     *
      * @param values 参数值
      */
     public void setValues(Object[] values) {
@@ -652,7 +652,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得值的个数。
-     * 
+     *
      * @return 值的个数
      */
     public int size() {
@@ -668,7 +668,7 @@ public class ValueListSupport implements ValueList {
 
     /**
      * 取得字符串表示。
-     * 
+     *
      * @return 字符串表示
      */
     @Override

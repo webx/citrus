@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -55,7 +55,7 @@ import com.alibaba.citrus.util.StringUtil;
  * A note on naming conventions: instance variables are prefixed with a "v";
  * global constants are in all caps.
  * </p>
- * 
+ *
  * <pre>
  * Sample use:
  * String input = ...
@@ -79,7 +79,7 @@ import com.alibaba.citrus.util.StringUtil;
  * <li>修改了构造函数，配合service进行配置。
  * <li>修正了输入中包含$时出错的bug。
  * </ul>
- * 
+ *
  * @author Joseph O'Connell <joe.oconnell at gmail dot com>
  * @author Michael Zhou
  * @version 1.0
@@ -219,7 +219,7 @@ public class HTMLInputFilter {
     /**
      * given a user submitted input String, filter out any invalid or restricted
      * html.
-     * 
+     *
      * @param input text (i.e. submitted by a user) than may contain html
      * @return "clean" version of input, with only valid, whitelisted html
      *         elements allowed

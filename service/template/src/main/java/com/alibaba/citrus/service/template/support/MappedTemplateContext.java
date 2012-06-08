@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +28,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
  * 基于<code>Map</code>的<code>TemplateContext</code>实现。
- * 
+ *
  * @author Michael Zhou
  */
 public class MappedTemplateContext implements TemplateContext {

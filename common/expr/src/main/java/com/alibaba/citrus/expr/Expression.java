@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,20 +19,20 @@ package com.alibaba.citrus.expr;
 
 /**
  * 代表一个表达式。
- * 
+ *
  * @author Michael Zhou
  */
 public interface Expression {
     /**
      * 取得表达式字符串表示。
-     * 
+     *
      * @return 表达式字符串表示
      */
     String getExpressionText();
 
     /**
      * 在指定的上下文中计算表达式。
-     * 
+     *
      * @param context <code>ExpressionContext</code>上下文
      * @return 表达式的计算结果
      */

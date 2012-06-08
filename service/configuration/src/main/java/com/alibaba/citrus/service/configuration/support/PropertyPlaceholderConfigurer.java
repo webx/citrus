@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,14 +41,14 @@ import org.springframework.util.StringUtils;
  * <p>
  * 此外，该类自身的location也可以包含placeholder且支持默认值，例如：
  * </p>
- * 
+ *
  * <pre>
  * &lt;services:property-placeholder location="${props:default.properties}" /&gt;
  * </pre>
  * <p>
  * 假如未指定-Dprops=xyz，那么就取默认值：<code>default.properties</code>。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public class PropertyPlaceholderConfigurer extends

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -45,7 +45,7 @@ import com.alibaba.citrus.springext.util.ProxyTargetFactory;
  * ，使得子context不能取得父context中注册的singleton proxy。</li>
  * <li>自动合并同名的bean definitions，以实现功能：可覆盖bean的默认配置。</li>
  * </ul>
- * 
+ *
  * @author Michael Zhou
  */
 class InheritableListableBeanFactory extends DefaultListableBeanFactory {

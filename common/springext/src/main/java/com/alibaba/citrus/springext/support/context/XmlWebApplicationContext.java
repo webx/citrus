@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -49,7 +49,7 @@ import com.alibaba.citrus.springext.support.resolver.XmlBeanDefinitionReaderProc
  * 建议所有非WEB应用的application context从{@link AbstractXmlApplicationContext}
  * 派生；对于简单的情形，如单元测试，直接从子类{@link XmlApplicationContext}中创建实例。
  * </p>
- * 
+ *
  * @author Michael Zhou
  * @see AbstractXmlApplicationContext
  * @see XmlApplicationContext

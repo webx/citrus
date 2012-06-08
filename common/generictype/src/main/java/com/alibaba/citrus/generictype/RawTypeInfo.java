@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,7 @@ package com.alibaba.citrus.generictype;
 
 /**
  * 和非数组的{@link Class}对应，代表一个经过type erasure以后的基本类型信息。
- * 
+ *
  * @author Michael Zhou
  */
 public interface RawTypeInfo extends ClassTypeInfo {

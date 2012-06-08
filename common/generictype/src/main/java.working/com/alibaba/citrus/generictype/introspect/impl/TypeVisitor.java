@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,7 +29,7 @@ import com.alibaba.citrus.generictype.introspect.Introspector;
  * <p>
  * Visitor中的方法调用顺序如下：
  * </p>
- * 
+ *
  * <pre>
  * visit
  * ( visitType
@@ -39,7 +39,7 @@ import com.alibaba.citrus.generictype.introspect.Introspector;
  * )+
  * visitEnd
  * </pre>
- * 
+ *
  * @author Michael Zhou
  */
 public interface TypeVisitor {

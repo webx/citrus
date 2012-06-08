@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +24,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 代表session中的一个属性。
- * 
+ *
  * @author Michael Zhou
  */
 public class SessionAttribute {
@@ -39,7 +39,7 @@ public class SessionAttribute {
 
     /**
      * 创建一个attribute。
-     * 
+     *
      * @param name attribute的名称
      */
     public SessionAttribute(String name, SessionImpl session, String storeName, StoreContext storeContext) {
@@ -52,7 +52,7 @@ public class SessionAttribute {
 
     /**
      * 取得attribute的名字。
-     * 
+     *
      * @return attribute的名字
      */
     public String getName() {
@@ -61,7 +61,7 @@ public class SessionAttribute {
 
     /**
      * 取得attribute的值。
-     * 
+     *
      * @return attribute的值
      */
     public Object getValue() {
@@ -78,7 +78,7 @@ public class SessionAttribute {
      * <p>
      * 当值为<code>null</code>时，表示该属性将被删除。
      * </p>
-     * 
+     *
      * @param value attribute的值
      */
     public void setValue(Object value) {
@@ -98,7 +98,7 @@ public class SessionAttribute {
 
     /**
      * 值是否被改变。
-     * 
+     *
      * @return 如果被改变，则返回<code>true</code>
      */
     public boolean isModified() {
@@ -107,7 +107,7 @@ public class SessionAttribute {
 
     /**
      * 取得store名称。
-     * 
+     *
      * @return store的名称
      */
     public String getStoreName() {
@@ -116,7 +116,7 @@ public class SessionAttribute {
 
     /**
      * 取得store。
-     * 
+     *
      * @return <code>SessionStore</code>实例
      */
     public SessionStore getStore() {

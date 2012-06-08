@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +20,7 @@ package com.alibaba.citrus.service.requestcontext.basic;
 public interface StatusMessageInterceptor extends ResponseHeaderInterceptor {
     /**
      * 检查status消息。
-     * 
+     *
      * @return 返回值表示修改status消息，返回<code>null</code>则表示不设置status消息。
      */
     String checkStatusMessage(int sc, String msg);

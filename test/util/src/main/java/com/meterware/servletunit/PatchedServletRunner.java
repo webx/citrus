@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,7 +42,7 @@ import com.meterware.httpunit.WebRequest;
  * <li>http unit servlet context不支持getResourcePaths方法的问题。</li>
  * <li>不支持httpOnly cookie的问题。</li>
  * </ul>
- * 
+ *
  * @author Michael Zhou
  */
 public class PatchedServletRunner extends ServletRunner {

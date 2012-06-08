@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -74,7 +74,7 @@ public abstract class RequestContext {
 
     /**
      * 取得已经取得过的writer。
-     * 
+     *
      * @throws IllegalStateException 如果<code>getWriter(contentType)</code>
      *             还没有被调用过。
      */
@@ -97,7 +97,7 @@ public abstract class RequestContext {
 
     /**
      * 取得已经取得过的stream。
-     * 
+     *
      * @throws IllegalStateException 如果<code>getOutputStream(contentType)</code>
      *             还没有被调用过。
      */

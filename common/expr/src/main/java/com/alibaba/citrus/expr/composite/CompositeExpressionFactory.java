@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +28,7 @@ import com.alibaba.citrus.expr.jexl.JexlExpressionFactory;
 
 /**
  * 创建<code>CompositeExpression</code>的工厂。
- * 
+ *
  * @author Michael Zhou
  */
 public class CompositeExpressionFactory implements ExpressionFactory {
@@ -43,7 +43,7 @@ public class CompositeExpressionFactory implements ExpressionFactory {
 
     /**
      * 创建一个组合表达式的工厂。
-     * 
+     *
      * @param factory 创建组合表达式中的子表达式的工厂
      */
     public CompositeExpressionFactory(ExpressionFactory factory) {
@@ -59,7 +59,7 @@ public class CompositeExpressionFactory implements ExpressionFactory {
      * <li>如果表达式包含“<code>${...}</code>”，但在此之外还有别的字符，则创建
      * <code>CompositeExpression</code>。</li>
      * </ul>
-     * 
+     *
      * @param expr 表达式字符串
      * @return 表达式
      */

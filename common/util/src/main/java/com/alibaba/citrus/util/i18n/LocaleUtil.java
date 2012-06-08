@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -61,7 +61,7 @@ import com.alibaba.citrus.util.io.StreamUtil;
  * ，如不指定charset
  * ，将从context中取得charset。这样，框架往往可以修改context值，而所有线程中的方法调用将服从于框架的locale和charset设定。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public class LocaleUtil {
@@ -71,7 +71,7 @@ public class LocaleUtil {
 
     /**
      * 判断locale是否被支持。
-     * 
+     *
      * @param locale 要检查的locale
      */
     public static boolean isLocaleSupported(Locale locale) {
@@ -81,7 +81,7 @@ public class LocaleUtil {
 
     /**
      * 判断指定的charset是否被支持。
-     * 
+     *
      * @param charset 要检查的charset
      */
     public static boolean isCharsetSupported(String charset) {
@@ -93,7 +93,7 @@ public class LocaleUtil {
      * <p>
      * Locale字符串是符合下列格式：<code>language_country_variant</code>。
      * </p>
-     * 
+     *
      * @param localeString 要解析的字符串
      * @return <code>Locale</code>对象，如果locale字符串为空，则返回<code>null</code>
      */
@@ -136,7 +136,7 @@ public class LocaleUtil {
 
     /**
      * 取得正规的字符集名称, 如果指定字符集不存在, 则抛出<code>UnsupportedEncodingException</code>.
-     * 
+     *
      * @param charset 字符集名称
      * @return 正规的字符集名称
      * @throws IllegalCharsetNameException 如果指定字符集名称非法
@@ -159,7 +159,7 @@ public class LocaleUtil {
      * <li>hello.jsp</li>
      * </ol>
      * </p>
-     * 
+     *
      * @param baseName bundle的基本名
      * @param locale 区域设置
      * @return 所有备选的bundle名
@@ -192,7 +192,7 @@ public class LocaleUtil {
      * <li>hello.world</li>
      * </ol>
      * </p>
-     * 
+     *
      * @param baseName bundle的基本名
      * @param locale 区域设置
      * @return 所有备选的bundle名
@@ -285,7 +285,7 @@ public class LocaleUtil {
 
     /**
      * 取得操作系统默认的区域。
-     * 
+     *
      * @return 操作系统默认的区域
      */
     public static LocaleInfo getSystem() {
@@ -294,7 +294,7 @@ public class LocaleUtil {
 
     /**
      * 取得默认的区域。
-     * 
+     *
      * @return 默认的区域
      */
     public static LocaleInfo getDefault() {
@@ -303,7 +303,7 @@ public class LocaleUtil {
 
     /**
      * 设置默认的区域。
-     * 
+     *
      * @param locale 区域
      * @return 原来的默认区域
      */
@@ -315,7 +315,7 @@ public class LocaleUtil {
 
     /**
      * 设置默认的区域。
-     * 
+     *
      * @param locale 区域
      * @param charset 编码字符集
      * @return 原来的默认区域
@@ -328,7 +328,7 @@ public class LocaleUtil {
 
     /**
      * 设置默认的区域。
-     * 
+     *
      * @param localeInfo 区域和编码字符集信息
      * @return 原来的默认区域
      */
@@ -363,7 +363,7 @@ public class LocaleUtil {
 
     /**
      * 取得当前thread默认的区域。
-     * 
+     *
      * @return 当前thread默认的区域
      */
     public static LocaleInfo getContext() {
@@ -373,7 +373,7 @@ public class LocaleUtil {
 
     /**
      * 设置当前thread默认的区域。
-     * 
+     *
      * @param locale 区域
      * @return 原来的thread默认的区域
      */
@@ -385,7 +385,7 @@ public class LocaleUtil {
 
     /**
      * 设置当前thread默认的区域。
-     * 
+     *
      * @param locale 区域
      * @param charset 编码字符集
      * @return 原来的thread默认的区域
@@ -398,7 +398,7 @@ public class LocaleUtil {
 
     /**
      * 设置当前thread默认的区域。
-     * 
+     *
      * @param localeInfo 区域和编码字符集信息
      * @return 原来的thread默认的区域
      */

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -126,7 +126,7 @@ public class FileLoaderTests extends AbstractResourceLoaderTests<FileResourceLoa
 
     @Test
     public void basedir_rel() throws Exception {
-        createLoader("..", // srcdir/aaa/.. 
+        createLoader("..", // srcdir/aaa/..
                 new File(srcdir, "aaa/config.xml").toURI().toURL(), // srcdir/aaa
                 new SearchPath("WEB-INF", true), // srcdir/WEB-INF
                 new SearchPath(new File(srcdir, "aaa").getAbsolutePath(), false)); // srcdir/aaa
@@ -139,7 +139,7 @@ public class FileLoaderTests extends AbstractResourceLoaderTests<FileResourceLoa
     @Test
     public void basedir_configURLonly() throws Exception {
         createLoader(null, //
-                new File(srcdir, "aaa/config.xml").toURI().toURL(), // basedir=srcdir/aaa 
+                new File(srcdir, "aaa/config.xml").toURI().toURL(), // basedir=srcdir/aaa
                 new SearchPath("../WEB-INF", true), // srcdir/aaa/../WEB-INF
                 new SearchPath(new File(srcdir, "aaa/bbb").getAbsolutePath(), false)); // srcdir/aaa/bbb
 
@@ -167,7 +167,7 @@ public class FileLoaderTests extends AbstractResourceLoaderTests<FileResourceLoa
 
     @Test
     public void search2() throws Exception {
-        createLoader(null, new File(srcdir, "aaa/config.xml").toURI().toURL(), // basedir=srcdir/aaa 
+        createLoader(null, new File(srcdir, "aaa/config.xml").toURI().toURL(), // basedir=srcdir/aaa
                 new SearchPath("../WEB-INF", true), // srcdir/aaa/../WEB-INF
                 new SearchPath(new File(srcdir, "WEB-INF/aaa/bbb").getAbsolutePath(), false)); // srcdir/aaa/bbb
 

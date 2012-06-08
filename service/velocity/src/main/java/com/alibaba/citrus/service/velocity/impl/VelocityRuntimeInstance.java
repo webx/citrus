@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,7 +35,7 @@ import com.alibaba.citrus.service.velocity.impl.parser.SimpleNodeUtil;
  * <p>
  * <code>EscapeSupport</code>可以根据引用的位置，来决定是否要对结果进行escape转义。下面的velocity语句将不会被转义：
  * </p>
- * 
+ *
  * <pre>
  * #set ($value = "hello, $name")
  * </pre>
@@ -47,7 +47,7 @@ import com.alibaba.citrus.service.velocity.impl.parser.SimpleNodeUtil;
  * <code>runtime.interpolate.string.literals.hack</code>可以开关此特性，默认值为
  * <code>true</code>。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public class VelocityRuntimeInstance extends RuntimeInstance {

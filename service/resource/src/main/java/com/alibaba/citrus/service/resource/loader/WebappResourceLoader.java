@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -44,7 +44,7 @@ import com.alibaba.citrus.service.resource.support.URLResource;
  * 在非web环境下，该loader也可存在，只不过由于<code>servletContext==null</code>
  * ，因此找不到资源。这样设计，是为了让非web环境和web环境可以共享相同的配置文件。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public class WebappResourceLoader implements ResourceLister, ServletContextAware {

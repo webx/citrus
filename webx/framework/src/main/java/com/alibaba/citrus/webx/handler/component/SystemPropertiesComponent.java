@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,7 +32,7 @@ import com.alibaba.citrus.webx.handler.support.AbstractVisitor;
 
 /**
  * 用来显示系统properties的组件。
- * 
+ *
  * @author Michael Zhou
  */
 public class SystemPropertiesComponent extends PageComponent {

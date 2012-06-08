@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ import com.alibaba.citrus.service.pipeline.valve.LogValve;
 
 /**
  * 测试pipeline本身的功能，不包括配置。
- * 
+ *
  * @author Michael Zhou
  */
 public class PipelineTests extends AbstractPipelineTests {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ import org.springframework.core.MethodParameter;
  * 注意：参数和cookie的名称可能被转换成全部大写或全部小写。 这是根据配置文件中的参数：<code>url.case.folding</code>
  * 来指定的。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public interface ValueParser {
@@ -46,21 +46,21 @@ public interface ValueParser {
 
     /**
      * 取得值的数量。
-     * 
+     *
      * @return 值的数量
      */
     int size();
 
     /**
      * 判断是否无值。
-     * 
+     *
      * @return 如果无值，则返回<code>true</code>
      */
     boolean isEmpty();
 
     /**
      * 检查是否包含指定名称的参数。
-     * 
+     *
      * @param key 要查找的参数名
      * @return 如果存在，则返回<code>true</code>
      */
@@ -84,7 +84,7 @@ public interface ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>false</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -92,7 +92,7 @@ public interface ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值
@@ -101,7 +101,7 @@ public interface ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>0</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -109,7 +109,7 @@ public interface ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值
@@ -118,7 +118,7 @@ public interface ValueParser {
 
     /**
      * 取得指定参数的字节。这个字节是根据<code>getCharacterEncoding()</code>所返回的字符集进行编码的。
-     * 
+     *
      * @param key 参数名
      * @return 参数值的字节数组
      * @throws UnsupportedEncodingException 如果指定了错误的编码字符集
@@ -127,7 +127,7 @@ public interface ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>'\0'</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -135,7 +135,7 @@ public interface ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值
@@ -144,7 +144,7 @@ public interface ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>0</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -152,7 +152,7 @@ public interface ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值
@@ -161,7 +161,7 @@ public interface ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>0</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -169,7 +169,7 @@ public interface ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值
@@ -178,7 +178,7 @@ public interface ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>0</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -186,7 +186,7 @@ public interface ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值
@@ -195,7 +195,7 @@ public interface ValueParser {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回<code>null</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值的数组
      */
@@ -203,7 +203,7 @@ public interface ValueParser {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值的数组
@@ -212,7 +212,7 @@ public interface ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>0</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -220,7 +220,7 @@ public interface ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值
@@ -229,7 +229,7 @@ public interface ValueParser {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回<code>null</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值的数组
      */
@@ -237,7 +237,7 @@ public interface ValueParser {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值的数组
@@ -246,7 +246,7 @@ public interface ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>0</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -254,7 +254,7 @@ public interface ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值
@@ -263,7 +263,7 @@ public interface ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>null</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -271,7 +271,7 @@ public interface ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值
@@ -280,7 +280,7 @@ public interface ValueParser {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回<code>null</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值的数组
      */
@@ -288,7 +288,7 @@ public interface ValueParser {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值的数组
@@ -298,7 +298,7 @@ public interface ValueParser {
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>null</code>。 此方法和<code>getString</code>
      * 一样，但在模板中便易于使用。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -306,7 +306,7 @@ public interface ValueParser {
 
     /**
      * 取得指定参数的值。如果参数不存在，则返回<code>null</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -314,7 +314,7 @@ public interface ValueParser {
 
     /**
      * 取得指定参数的值。如果参数不存在，则返回默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值
@@ -323,7 +323,7 @@ public interface ValueParser {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回<code>null</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值的数组
      */
@@ -331,7 +331,7 @@ public interface ValueParser {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值的数组
@@ -340,7 +340,7 @@ public interface ValueParser {
 
     /**
      * 取得日期。字符串将使用指定的<code>DateFormat</code>来解析。如果不存在，则返回<code>null</code>。
-     * 
+     *
      * @param key 参数名
      * @param format <code>DateFormat</code>对象
      * @return <code>java.util.Date</code>对象
@@ -349,7 +349,7 @@ public interface ValueParser {
 
     /**
      * 取得日期。字符串将使用指定的<code>DateFormat</code>来解析。如果不存在，则返回默认值。
-     * 
+     *
      * @param key 参数名
      * @param format <code>DateFormat</code>对象
      * @param defaultValue 默认值
@@ -378,7 +378,7 @@ public interface ValueParser {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -386,7 +386,7 @@ public interface ValueParser {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -394,7 +394,7 @@ public interface ValueParser {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -402,7 +402,7 @@ public interface ValueParser {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -410,7 +410,7 @@ public interface ValueParser {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -418,7 +418,7 @@ public interface ValueParser {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -426,7 +426,7 @@ public interface ValueParser {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -434,7 +434,7 @@ public interface ValueParser {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -442,7 +442,7 @@ public interface ValueParser {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -450,7 +450,7 @@ public interface ValueParser {
 
     /**
      * 设置参数值。和<code>add</code>方法不同，此方法将覆盖原有的值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -458,7 +458,7 @@ public interface ValueParser {
 
     /**
      * 设置参数值。和<code>add</code>方法不同，此方法将覆盖原有的值。
-     * 
+     *
      * @param key 参数名
      * @param values 参数值的数组
      */
@@ -466,7 +466,7 @@ public interface ValueParser {
 
     /**
      * 设置参数值。和<code>add</code>方法不同，此方法将覆盖原有的值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -474,19 +474,19 @@ public interface ValueParser {
 
     /**
      * 设置参数值。和<code>add</code>方法不同，此方法将覆盖原有的值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
     void setObjects(String key, Object[] value);
 
     // =============================================================
-    //  清除参数的方法 
+    //  清除参数的方法
     // =============================================================
 
     /**
      * 删除指定名称的参数。
-     * 
+     *
      * @return 原先和指定名称对应的参数值，可能是<code>String[]</code>或<code>null</code>
      */
     Object remove(String key);

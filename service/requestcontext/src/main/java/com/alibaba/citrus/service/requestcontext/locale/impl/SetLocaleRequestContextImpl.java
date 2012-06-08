@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,7 +41,7 @@ import com.alibaba.citrus.util.i18n.LocaleUtil;
 
 /**
  * <code>SetLocaleRequestContext</code>的实现。
- * 
+ *
  * @author Michael Zhou
  */
 public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper implements SetLocaleRequestContext {
@@ -56,7 +56,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
 
     /**
      * 包装一个<code>RequestContext</code>对象。
-     * 
+     *
      * @param wrappedContext 被包装的<code>RequestContext</code>
      */
     public SetLocaleRequestContextImpl(RequestContext wrappedContext) {
@@ -91,7 +91,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
 
     /**
      * 取得content type。
-     * 
+     *
      * @return content type，包括charset的定义
      */
     public String getResponseContentType() {
@@ -105,7 +105,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
      * 如果<code>appendCharset</code>为<code>false</code>，则content
      * type中将不包含charset标记。
      * </p>
-     * 
+     *
      * @param contentType content type
      * @param appendCharset 输出字符集
      */
@@ -115,7 +115,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
 
     /**
      * 设置response输出字符集。注意，此方法必须在第一次<code>getWriter</code>之前执行。
-     * 
+     *
      * @param charset 输出字符集，如果charset为<code>null</code>
      *            ，则从contentType中删除charset标记
      */
@@ -230,7 +230,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
 
     /**
      * 从当前请求的session中取得用户的locale设置。如果session未设置，则取默认值。
-     * 
+     *
      * @return 当前session中的locale设置
      */
     private LocaleInfo getLocaleFromSession() {
@@ -256,7 +256,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
 
     /**
      * 从当前请求的参数中取得用户的locale设置。如果参数未设置，则返回<code>null</code>。
-     * 
+     *
      * @return 当前request parameters中的locale设置
      */
     private LocaleInfo getLocaleFromParameter() {
@@ -304,7 +304,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
 
         /**
          * 取得content type。
-         * 
+         *
          * @return content type，包括charset的定义
          */
         @Override
@@ -315,7 +315,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
         /**
          * 设置content type。 如果content type不包含charset，并且
          * <code>getCharacterEncoding</code>被设置，则加上charset标记。
-         * 
+         *
          * @param contentType content type
          */
         @Override
@@ -330,7 +330,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
          * 如果<code>appendCharset</code>为<code>false</code>，则content
          * type中将不包含charset标记。
          * </p>
-         * 
+         *
          * @param contentType content type
          * @param appendCharset 输出字符集
          */
@@ -360,7 +360,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
 
         /**
          * 设置response输出字符集。注意，此方法必须在第一次<code>getWriter</code>之前执行。
-         * 
+         *
          * @param charset 输出字符集，如果charset为<code>null</code>
          *            ，则从contentType中删除charset标记
          */

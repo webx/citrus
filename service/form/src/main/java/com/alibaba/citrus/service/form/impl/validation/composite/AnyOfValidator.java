@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ import com.alibaba.citrus.service.form.support.AbstractCompositeValidatorDefinit
  * 当验证不通过时，message配置中指定的message，但可使用变量<code>${allMessages}</code>
  * 引用所有其下属的message列表。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public class AnyOfValidator extends AbstractCompositeValidator {

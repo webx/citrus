@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,7 +39,7 @@ import com.alibaba.citrus.test.TestEnvStatic;
 
 /**
  * 测试store mapping的逻辑。
- * 
+ *
  * @author Michael Zhou
  */
 public class StoreMappingTests {
@@ -115,10 +115,10 @@ public class StoreMappingTests {
         // 匹配较长的，备选：s1, s4, s3
         assertEquals("s3", mappings.getStoreNameForAttribute("abcdef"));
 
-        // 匹配较精确的，备选：s1, s5, s4, s2 
+        // 匹配较精确的，备选：s1, s5, s4, s2
         assertEquals("s2", mappings.getStoreNameForAttribute("abc"));
 
-        // 匹配排在前的，备选：s1, s5, s4 
+        // 匹配排在前的，备选：s1, s5, s4
         assertEquals("s5", mappings.getStoreNameForAttribute("acc"));
     }
 

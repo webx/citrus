@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,7 +22,7 @@ import javax.servlet.http.Cookie;
 public interface CookieInterceptor extends ResponseHeaderInterceptor {
     /**
      * 检查cookie。
-     * 
+     *
      * @return 返回值表示修改cookie，返回<code>null</code>则表示拒绝该cookie。 特别支持
      *         <code>CookieSupport</code>类。
      */

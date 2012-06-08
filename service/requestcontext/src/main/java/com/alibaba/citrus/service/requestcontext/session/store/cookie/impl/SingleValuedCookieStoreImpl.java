@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,7 +41,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * <li>每个store只能保存一个值。</li>
  * <li>将仅有的session attribute value用<code>SessionValueEncoder</code>编码成字符串。</li>
  * </ul>
- * 
+ *
  * @author Michael Zhou
  */
 public class SingleValuedCookieStoreImpl extends AbstractCookieStore implements ExactMatchesOnlySessionStore {

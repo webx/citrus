@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,7 @@ import com.alibaba.citrus.util.regex.MatchResultSubstitution;
 
 /**
  * 和rewrite相关的工具类。
- * 
+ *
  * @author Michael Zhou
  */
 public class RewriteUtil {
@@ -148,7 +148,7 @@ public class RewriteUtil {
 
     /**
      * 展开变量。
-     * 
+     *
      * @return 注意，如果返回null，表示按原样显示，例如：%{XYZ}
      */
     private static String expand(String varName, HttpServletRequest request) {

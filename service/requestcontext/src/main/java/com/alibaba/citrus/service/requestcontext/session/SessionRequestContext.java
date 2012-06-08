@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,20 +21,20 @@ import com.alibaba.citrus.service.requestcontext.RequestContext;
 
 /**
  * 支持session的<code>RequestContext</code>实现。
- * 
+ *
  * @author Michael Zhou
  */
 public interface SessionRequestContext extends RequestContext {
     /**
      * 取得<code>SessionConfig</code>实例。
-     * 
+     *
      * @return <code>SessionConfig</code>实例
      */
     SessionConfig getSessionConfig();
 
     /**
      * 判断session是否已经作废。
-     * 
+     *
      * @return 如已作废，则返回<code>true</code>
      */
     boolean isSessionInvalidated();

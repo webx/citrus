@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 初始化日志，但不引入对特定日志系统的依赖。
- * 
+ *
  * @author Michael Zhou
  */
 public abstract class LogConfigurator {

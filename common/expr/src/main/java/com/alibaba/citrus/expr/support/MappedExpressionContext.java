@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,7 +25,7 @@ import com.alibaba.citrus.expr.ExpressionContext;
 
 /**
  * 使用<code>Map</code>实现的<code>ExpressionContext</code>。
- * 
+ *
  * @author Michael Zhou
  */
 public class MappedExpressionContext implements ExpressionContext {
@@ -33,7 +33,7 @@ public class MappedExpressionContext implements ExpressionContext {
 
     /**
      * 取得指定值。
-     * 
+     *
      * @param key 键
      * @return 键对应的值
      */
@@ -43,7 +43,7 @@ public class MappedExpressionContext implements ExpressionContext {
 
     /**
      * 添加一个值。
-     * 
+     *
      * @param key 键
      * @param value 对应的值
      */

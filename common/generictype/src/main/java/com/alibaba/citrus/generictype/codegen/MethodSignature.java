@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ import com.alibaba.citrus.generictype.codegen.asm.Type;
  * <p>
  * 比较方法签名时，只有方法的类型（构造函数或普通方法）、方法名和参数参与了比较。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public class MethodSignature extends com.alibaba.citrus.generictype.codegen.asm.Method {

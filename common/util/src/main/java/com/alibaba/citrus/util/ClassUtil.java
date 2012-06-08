@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,13 +36,13 @@ import java.util.Set;
  * 这个类中的每个方法都可以“安全”地处理 <code>null</code> ，而不会抛出
  * <code>NullPointerException</code>。
  * </p>
- * 
+ *
  * @author Michael Zhou
  * @version $Id: ClassUtil.java 509 2004-02-16 05:42:07Z baobao $
  */
 public class ClassUtil {
     // ==========================================================================
-    // 取得友好类名和package名的方法。                                                  
+    // 取得友好类名和package名的方法。
     // ==========================================================================
 
     /**
@@ -50,11 +50,11 @@ public class ClassUtil {
      * <p>
      * 类似<code>object.getClass().getName()</code>，但不同的是，该方法用更友好的方式显示数组类型。 例如：
      * </p>
-     * 
+     *
      * <pre>
      *  int[].class.getName() = "[I"
      *  ClassUtil.getFriendlyClassName(int[].class) = "int[]"
-     * 
+     *
      *  Integer[][].class.getName() = "[[Ljava.lang.Integer;"
      *  ClassUtil.getFriendlyClassName(Integer[][].class) = "java.lang.Integer[][]"
      * </pre>
@@ -64,7 +64,7 @@ public class ClassUtil {
      * <p>
      * 注意，该方法所返回的数组类名只能用于显示给人看，不能用于 <code>Class.forName</code> 操作。
      * </p>
-     * 
+     *
      * @param object 要显示类名的对象
      * @return 用于显示的友好类名，如果对象为空，则返回<code>null</code>
      */
@@ -83,11 +83,11 @@ public class ClassUtil {
      * <p>
      * 类似<code>clazz.getName()</code>，但不同的是，该方法用更友好的方式显示数组类型。 例如：
      * </p>
-     * 
+     *
      * <pre>
      *  int[].class.getName() = "[I"
      *  ClassUtil.getFriendlyClassName(int[].class) = "int[]"
-     * 
+     *
      *  Integer[][].class.getName() = "[[Ljava.lang.Integer;"
      *  ClassUtil.getFriendlyClassName(Integer[][].class) = "java.lang.Integer[][]"
      * </pre>
@@ -97,7 +97,7 @@ public class ClassUtil {
      * <p>
      * 注意，该方法所返回的数组类名只能用于显示给人看，不能用于 <code>Class.forName</code> 操作。
      * </p>
-     * 
+     *
      * @param object 要显示类名的对象
      * @return 用于显示的友好类名，如果类对象为空，则返回<code>null</code>
      */
@@ -117,11 +117,11 @@ public class ClassUtil {
      * <code>className</code> 必须是从 <code>clazz.getName()</code>
      * 所返回的合法类名。该方法用更友好的方式显示数组类型。 例如：
      * </p>
-     * 
+     *
      * <pre>
      *  int[].class.getName() = "[I"
      *  ClassUtil.getFriendlyClassName(int[].class) = "int[]"
-     * 
+     *
      *  Integer[][].class.getName() = "[[Ljava.lang.Integer;"
      *  ClassUtil.getFriendlyClassName(Integer[][].class) = "java.lang.Integer[][]"
      * </pre>
@@ -131,7 +131,7 @@ public class ClassUtil {
      * <p>
      * 注意，该方法所返回的数组类名只能用于显示给人看，不能用于 <code>Class.forName</code> 操作。
      * </p>
-     * 
+     *
      * @param javaClassName 要转换的类名
      * @return 用于显示的友好类名，如果原类名为空，则返回 <code>null</code> ，如果原类名是非法的，则返回原类名
      */
@@ -141,7 +141,7 @@ public class ClassUtil {
 
     /**
      * 将Java类名转换成友好类名。
-     * 
+     *
      * @param javaClassName Java类名
      * @param processInnerClass 是否将内联类分隔符 <code>'$'</code> 转换成 <code>'.'</code>
      * @return 友好的类名。如果参数非法或空，则返回<code>null</code>。
@@ -236,7 +236,7 @@ public class ClassUtil {
      * 取得指定对象所属的类的简单类名，不包括package名。
      * <p>
      * 此方法可以正确显示数组和内联类的名称。 例如：
-     * 
+     *
      * <pre>
      *  ClassUtil.getSimpleClassNameForObject(Boolean.TRUE) = "Boolean"
      *  ClassUtil.getSimpleClassNameForObject(new Boolean[10]) = "Boolean[]"
@@ -245,7 +245,7 @@ public class ClassUtil {
      * <p>
      * 本方法和<code>Class.getSimpleName()</code>的区别在于，本方法会保留inner类的外层类名称。
      * </p>
-     * 
+     *
      * @param object 要查看的对象
      * @return 简单类名，如果对象为 <code>null</code> ，则返回 <code>null</code>
      */
@@ -261,7 +261,7 @@ public class ClassUtil {
      * 取得指定对象所属的类的简单类名，不包括package名。
      * <p>
      * 此方法可以正确显示数组和内联类的名称。 例如：
-     * 
+     *
      * <pre>
      *  ClassUtil.getSimpleClassNameForObject(Boolean.TRUE) = "Boolean"
      *  ClassUtil.getSimpleClassNameForObject(new Boolean[10]) = "Boolean[]"
@@ -270,7 +270,7 @@ public class ClassUtil {
      * <p>
      * 本方法和<code>Class.getSimpleName()</code>的区别在于，本方法会保留inner类的外层类名称。
      * </p>
-     * 
+     *
      * @param object 要查看的对象
      * @return 简单类名，如果对象为 <code>null</code> ，则返回 <code>null</code>
      */
@@ -286,7 +286,7 @@ public class ClassUtil {
      * 取得简单类名，不包括package名。
      * <p>
      * 此方法可以正确显示数组和内联类的名称。 例如：
-     * 
+     *
      * <pre>
      *  ClassUtil.getSimpleClassName(Boolean.class) = "Boolean"
      *  ClassUtil.getSimpleClassName(Boolean[].class) = "Boolean[]"
@@ -296,7 +296,7 @@ public class ClassUtil {
      * <p>
      * 本方法和<code>Class.getSimpleName()</code>的区别在于，本方法会保留inner类的外层类名称。
      * </p>
-     * 
+     *
      * @param clazz 要查看的类
      * @return 简单类名，如果类为 <code>null</code> ，则返回 <code>null</code>
      */
@@ -312,7 +312,7 @@ public class ClassUtil {
      * 取得简单类名，不包括package名。
      * <p>
      * 此方法可以正确显示数组和内联类的名称。 例如：
-     * 
+     *
      * <pre>
      *  ClassUtil.getSimpleClassName(Boolean.class) = "Boolean"
      *  ClassUtil.getSimpleClassName(Boolean[].class) = "Boolean[]"
@@ -322,7 +322,7 @@ public class ClassUtil {
      * <p>
      * 本方法和<code>Class.getSimpleName()</code>的区别在于，本方法会保留inner类的外层类名称。
      * </p>
-     * 
+     *
      * @param clazz 要查看的类
      * @return 简单类名，如果类为 <code>null</code> ，则返回 <code>null</code>
      */
@@ -338,7 +338,7 @@ public class ClassUtil {
      * 取得类名，不包括package名。
      * <p>
      * 此方法可以正确显示数组和内联类的名称。 例如：
-     * 
+     *
      * <pre>
      *  ClassUtil.getSimpleClassName(Boolean.class.getName()) = "Boolean"
      *  ClassUtil.getSimpleClassName(Boolean[].class.getName()) = "Boolean[]"
@@ -348,7 +348,7 @@ public class ClassUtil {
      * <p>
      * 本方法和<code>Class.getSimpleName()</code>的区别在于，本方法会保留inner类的外层类名称。
      * </p>
-     * 
+     *
      * @param javaClassName 要查看的类名
      * @return 简单类名，如果类名为空，则返回 <code>null</code>
      */
@@ -360,7 +360,7 @@ public class ClassUtil {
      * 取得类名，不包括package名。
      * <p>
      * 此方法可以正确显示数组和内联类的名称。 例如：
-     * 
+     *
      * <pre>
      *  ClassUtil.getSimpleClassName(Boolean.class.getName()) = "Boolean"
      *  ClassUtil.getSimpleClassName(Boolean[].class.getName()) = "Boolean[]"
@@ -370,7 +370,7 @@ public class ClassUtil {
      * <p>
      * 本方法和<code>Class.getSimpleName()</code>的区别在于，本方法会保留inner类的外层类名称。
      * </p>
-     * 
+     *
      * @param javaClassName 要查看的类名
      * @return 简单类名，如果类名为空，则返回 <code>null</code>
      */
@@ -472,7 +472,7 @@ public class ClassUtil {
      * <p>
      * 对于数组，此方法返回的是数组元素类型的package名。
      * </p>
-     * 
+     *
      * @param object 要查看的对象
      * @return package名，如果对象为 <code>null</code> ，则返回<code>""</code>
      */
@@ -489,7 +489,7 @@ public class ClassUtil {
      * <p>
      * 对于数组，此方法返回的是数组元素类型的package名。
      * </p>
-     * 
+     *
      * @param clazz 要查看的类
      * @return package名，如果类为 <code>null</code> ，则返回<code>""</code>
      */
@@ -506,7 +506,7 @@ public class ClassUtil {
      * <p>
      * 对于数组，此方法返回的是数组元素类型的package名。
      * </p>
-     * 
+     *
      * @param javaClassName 要查看的类名
      * @return package名，如果类名为空，则返回 <code>null</code>
      */
@@ -527,12 +527,12 @@ public class ClassUtil {
     }
 
     // ==========================================================================
-    // 取得类名和package名的resource名的方法。                                      
-    //  
-    // 和类名、package名不同的是，resource名符合文件名命名规范，例如：              
-    // java/lang/String.class                                                      
-    // com/alibaba/commons/lang                                                    
-    // etc.                                                                        
+    // 取得类名和package名的resource名的方法。
+    //
+    // 和类名、package名不同的是，resource名符合文件名命名规范，例如：
+    // java/lang/String.class
+    // com/alibaba/commons/lang
+    // etc.
     // ==========================================================================
 
     /**
@@ -540,11 +540,11 @@ public class ClassUtil {
      * <p>
      * 例如：
      * </p>
-     * 
+     *
      * <pre>
      * ClassUtil.getResourceNameForObjectClass(&quot;This is a string&quot;) = &quot;java/lang/String.class&quot;
      * </pre>
-     * 
+     *
      * @param object 要显示类名的对象
      * @return 指定对象所属类的资源名，如果对象为空，则返回<code>null</code>
      */
@@ -561,11 +561,11 @@ public class ClassUtil {
      * <p>
      * 例如：
      * </p>
-     * 
+     *
      * <pre>
      * ClassUtil.getResourceNameForClass(String.class) = &quot;java/lang/String.class&quot;
      * </pre>
-     * 
+     *
      * @param clazz 要显示类名的类
      * @return 指定类的资源名，如果指定类为空，则返回<code>null</code>
      */
@@ -582,11 +582,11 @@ public class ClassUtil {
      * <p>
      * 例如：
      * </p>
-     * 
+     *
      * <pre>
      * ClassUtil.getResourceNameForClass(&quot;java.lang.String&quot;) = &quot;java/lang/String.class&quot;
      * </pre>
-     * 
+     *
      * @param className 要显示的类名
      * @return 指定类名对应的资源名，如果指定类名为空，则返回<code>null</code>
      */
@@ -603,7 +603,7 @@ public class ClassUtil {
      * <p>
      * 对于数组，此方法返回的是数组元素类型的package名。
      * </p>
-     * 
+     *
      * @param object 要查看的对象
      * @return package名，如果对象为 <code>null</code> ，则返回 <code>null</code>
      */
@@ -620,7 +620,7 @@ public class ClassUtil {
      * <p>
      * 对于数组，此方法返回的是数组元素类型的package名。
      * </p>
-     * 
+     *
      * @param clazz 要查看的类
      * @return package名，如果类为 <code>null</code> ，则返回 <code>null</code>
      */
@@ -637,7 +637,7 @@ public class ClassUtil {
      * <p>
      * 对于数组，此方法返回的是数组元素类型的package名。
      * </p>
-     * 
+     *
      * @param className 要查看的类名
      * @return package名，如果类名为空，则返回 <code>null</code>
      */
@@ -650,12 +650,12 @@ public class ClassUtil {
     }
 
     // ==========================================================================
-    // 取得数组类。                                   
+    // 取得数组类。
     // ==========================================================================
 
     /**
      * 取得指定一维数组类.
-     * 
+     *
      * @param componentType 数组的基础类
      * @return 数组类，如果数组的基类为 <code>null</code> ，则返回 <code>null</code>
      */
@@ -665,7 +665,7 @@ public class ClassUtil {
 
     /**
      * 取得指定维数的 <code>Array</code>类.
-     * 
+     *
      * @param componentType 数组的基类
      * @param dimension 维数，如果小于 <code>0</code> 则看作 <code>0</code>
      * @return 如果维数为0, 则返回基类本身, 否则返回数组类，如果数组的基类为 <code>null</code> ，则返回
@@ -691,19 +691,19 @@ public class ClassUtil {
     }
 
     // ==========================================================================
-    // 取得原子类型或者其wrapper类。                                   
+    // 取得原子类型或者其wrapper类。
     // ==========================================================================
 
     /**
      * 取得primitive类。
      * <p>
      * 例如：
-     * 
+     *
      * <pre>
      * ClassUtil.getPrimitiveType(&quot;int&quot;) = int.class;
      * ClassUtil.getPrimitiveType(&quot;long&quot;) = long.class;
      * </pre>
-     * 
+     *
      * </p>
      */
     public static Class<?> getPrimitiveType(String name) {
@@ -720,12 +720,12 @@ public class ClassUtil {
      * 取得primitive类。
      * <p>
      * 例如：
-     * 
+     *
      * <pre>
      * ClassUtil.getPrimitiveType(Integer.class) = int.class;
      * ClassUtil.getPrimitiveType(Long.class) = long.class;
      * </pre>
-     * 
+     *
      * </p>
      */
     public static Class<?> getPrimitiveType(Class<?> type) {
@@ -736,14 +736,14 @@ public class ClassUtil {
      * 取得primitive类型的wrapper。如果不是primitive，则原样返回。
      * <p>
      * 例如：
-     * 
+     *
      * <pre>
      * ClassUtil.getPrimitiveWrapperType(int.class) = Integer.class;
      * ClassUtil.getPrimitiveWrapperType(int[].class) = int[].class;
      * ClassUtil.getPrimitiveWrapperType(int[][].class) = int[][].class;
      * ClassUtil.getPrimitiveWrapperType(String[][].class) = String[][].class;
      * </pre>
-     * 
+     *
      * </p>
      */
     @SuppressWarnings("unchecked")
@@ -759,13 +759,13 @@ public class ClassUtil {
      * 取得primitive类型的默认值。如果不是primitive，则返回<code>null</code>。
      * <p>
      * 例如：
-     * 
+     *
      * <pre>
      * ClassUtil.getPrimitiveDefaultValue(int.class) = 0;
      * ClassUtil.getPrimitiveDefaultValue(boolean.class) = false;
      * ClassUtil.getPrimitiveDefaultValue(char.class) = '\0';
      * </pre>
-     * 
+     *
      * </p>
      */
     @SuppressWarnings("unchecked")
@@ -822,7 +822,7 @@ public class ClassUtil {
     }
 
     // ==========================================================================
-    // 类型匹配。                                   
+    // 类型匹配。
     // ==========================================================================
 
     /**
@@ -855,7 +855,7 @@ public class ClassUtil {
      * <li>不满足上述所有条件，则返回 <code>false</code>。</li>
      * </ol>
      * </p>
-     * 
+     *
      * @param classes 目标类型列表，如果是 <code>null</code> 总是返回 <code>false</code>
      * @param fromClasses 参数类型列表， <code>null</code> 表示可赋值给任意非原子类型
      * @return 如果可以被赋值，则返回 <code>true</code>
@@ -911,7 +911,7 @@ public class ClassUtil {
      * <li>不满足上述所有条件，则返回 <code>false</code>。</li>
      * </ol>
      * </p>
-     * 
+     *
      * @param clazz 目标类型，如果是 <code>null</code> 总是返回 <code>false</code>
      * @param fromClass 参数类型， <code>null</code> 表示可赋值给任意非原子类型
      * @return 如果可以被赋值，则返回 <code>null</code>
@@ -984,7 +984,7 @@ public class ClassUtil {
     }
 
     // ==========================================================================
-    // 定位class的位置。                                   
+    // 定位class的位置。
     // ==========================================================================
 
     /**

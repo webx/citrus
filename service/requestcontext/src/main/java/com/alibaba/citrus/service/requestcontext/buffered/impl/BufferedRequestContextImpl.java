@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,13 +28,13 @@ import com.alibaba.citrus.util.io.ByteArray;
 /**
  * 对response.<code>getWriter()</code>和response.<code>getOutputStream()</code>
  * 所返回的输出流进行缓存操作。
- * 
+ *
  * @author Michael Zhou
  */
 public class BufferedRequestContextImpl extends AbstractRequestContextWrapper implements BufferedRequestContext {
     /**
      * 包装一个<code>RequestContext</code>对象。
-     * 
+     *
      * @param wrappedContext 被包装的<code>RequestContext</code>
      */
     public BufferedRequestContextImpl(RequestContext wrappedContext) {
@@ -45,7 +45,7 @@ public class BufferedRequestContextImpl extends AbstractRequestContextWrapper im
 
     /**
      * 设置是否将所有信息保存在内存中。
-     * 
+     *
      * @return 如果是，则返回<code>true</code>
      */
     public boolean isBuffering() {
@@ -58,7 +58,7 @@ public class BufferedRequestContextImpl extends AbstractRequestContextWrapper im
      * 此方法必须在<code>getOutputStream</code>和<code>getWriter</code>方法之前执行，否则将抛出
      * <code>IllegalStateException</code>。
      * </p>
-     * 
+     *
      * @param buffering 是否buffer内容
      * @throws IllegalStateException <code>getOutputStream</code>或
      *             <code>getWriter</code>方法已经被执行
@@ -69,7 +69,7 @@ public class BufferedRequestContextImpl extends AbstractRequestContextWrapper im
 
     /**
      * 创建新的buffer，保存老的buffer。
-     * 
+     *
      * @throws IllegalStateException 如果不在buffer模式，或<code>getWriter</code>及
      *             <code>getOutputStream</code>方法从未被调用
      */
@@ -79,7 +79,7 @@ public class BufferedRequestContextImpl extends AbstractRequestContextWrapper im
 
     /**
      * 弹出最近的buffer，如果堆栈中只有一个buffer，则弹出后再创建一个新的。
-     * 
+     *
      * @return 最近的buffer内容
      * @throws IllegalStateException 如果不在buffer模式，或<code>getWriter</code>
      *             方法曾被调用，或 <code>getOutputStream</code>方法从未被调用
@@ -90,7 +90,7 @@ public class BufferedRequestContextImpl extends AbstractRequestContextWrapper im
 
     /**
      * 弹出最近的buffer，如果堆栈中只有一个buffer，则弹出后再创建一个新的。
-     * 
+     *
      * @return 最近的buffer内容
      * @throws IllegalStateException 如果不在buffer模式，或<code>getOutputStream</code>
      *             方法曾被调用，或<code>getWriter</code>方法从未被调用
@@ -105,7 +105,7 @@ public class BufferedRequestContextImpl extends AbstractRequestContextWrapper im
      * 如果从来没有执行过<code>getOutputStream</code>或<code>getWriter</code>
      * 方法，则该方法不做任何事情。
      * </p>
-     * 
+     *
      * @throws BufferCommitFailedException 如果提交失败
      * @throws IllegalStateException 如果buffer栈中不止一个buffer
      */
@@ -122,7 +122,7 @@ public class BufferedRequestContextImpl extends AbstractRequestContextWrapper im
 
     /**
      * 取得<code>BufferedRunDataResponse</code>实例。
-     * 
+     *
      * @return <code>BufferedRunDataResponse</code>实例
      */
     private BufferedResponseImpl getBufferedResponse() {

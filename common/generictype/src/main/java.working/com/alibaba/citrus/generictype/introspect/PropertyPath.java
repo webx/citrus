@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +26,7 @@ import com.alibaba.citrus.util.internal.StringUtil;
 
 /**
  * 代表一个<code>PropertyPath</code>，其格式为：
- * 
+ *
  * <pre>
  * ( &quot;.&quot;? propertyName | [index] | [key] )
  *     ( &quot;.&quot; propertyName  | [index] | [key] )*
@@ -38,7 +38,7 @@ import com.alibaba.citrus.util.internal.StringUtil;
  * <p>
  * <code>PropertyPath</code>支持事件模式（类似SAX）和DOM两种模式。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public class PropertyPath {

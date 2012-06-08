@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,7 @@ import com.alibaba.citrus.service.template.TemplateNotFoundException;
  * 接口的约定。因为Jsp无法输出到指定的输出流，也没有办法取得结果字符串。Jsp只能输出到response中。
  * 因此，Jsp模板引擎只能用于生成WEB页面，而无法用于通用的文本生成。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public interface JspEngine extends TemplateEngine {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,7 @@ import com.alibaba.citrus.service.requestcontext.RequestContextException;
 
 /**
  * 代表一个lazy commit失败的异常。
- * 
+ *
  * @author Michael Zhou
  */
 public class LazyCommitFailedException extends RequestContextException {
@@ -36,7 +36,7 @@ public class LazyCommitFailedException extends RequestContextException {
 
     /**
      * 创建一个异常。
-     * 
+     *
      * @param message 异常信息
      */
     public LazyCommitFailedException(String message) {
@@ -45,7 +45,7 @@ public class LazyCommitFailedException extends RequestContextException {
 
     /**
      * 创建一个异常。
-     * 
+     *
      * @param message 异常信息
      * @param cause 异常原因
      */
@@ -55,7 +55,7 @@ public class LazyCommitFailedException extends RequestContextException {
 
     /**
      * 创建一个异常。
-     * 
+     *
      * @param cause 异常原因
      */
     public LazyCommitFailedException(Throwable cause) {

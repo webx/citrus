@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * 一个将template的内容输出到<code>Appendable</code>
  * 的visitor，且当遇到未定义的placeholder时，不会报错，而是从内部的context中取值。
- * 
+ *
  * @author Michael Zhou
  */
 public class FallbackTextWriter<A extends Appendable> extends TextWriter<A> implements FallbackVisitor {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,7 +22,7 @@ package com.alibaba.citrus.webx;
  * <p>
  * 系统在接受到这个异常以后，将返回<code>404 Not Found</code>错误页面。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public class ResourceNotFoundException extends WebxException {

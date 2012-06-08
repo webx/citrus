@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -57,7 +57,7 @@ import com.alibaba.citrus.util.StringUtil;
  * <li>如果Thread上下文<code>setContextTokenKey()</code>被明确设置，则使用它；</li>
  * <li>否则，使用默认值“<code>_csrf_token</code>”。</li>
  * </ol>
- * 
+ *
  * @author Michael Zhou
  */
 public class CsrfToken {
@@ -119,7 +119,7 @@ public class CsrfToken {
 
     /**
      * 创建包含csrf token的hidden field。
-     * 
+     *
      * @param longLiveToken 如果为<code>true</code>，则token会保持有效，直到session过期。
      * @deprecated use getUniqueHiddenField() or getLongLiveHiddenField()
      *             instead

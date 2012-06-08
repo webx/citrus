@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,26 +15,11 @@
  * limitations under the License.
  */
 
-/**
- * Project: citrus-service-moduleloader
- * 
- * File Created at May 14, 2010
- * $Id$
- * 
- * Copyright 2008 Alibaba.com Croporation Limited.
- * All rights reserved.
- *
- * This software is the confidential and proprietary information of
- * Alibaba Company. ("Confidential Information").  You shall not
- * disclose such Confidential Information and shall use it only in
- * accordance with the terms of the license agreement you entered into
- * with Alibaba.com.
- */
 package com.alibaba.test3.app2;
 
 /**
  * 可以动态Reload的组件接口
- * 
+ *
  * @author youqun.zhangyq
  */
 public interface Reloadable {

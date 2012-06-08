@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +28,7 @@ import javax.mail.internet.MimeMultipart;
  * 通常用这种形式同时发送一个邮件的纯文本和HTML版本，邮件客户端会自动选择显示哪一个版本。
  * 如果一个邮件客户端不支持HTML，用户将看到纯文本的邮件。在支持HTML的平台上，用户将看到更漂亮的HTML邮件。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public class AlternativeMultipartContent extends MultipartContent {

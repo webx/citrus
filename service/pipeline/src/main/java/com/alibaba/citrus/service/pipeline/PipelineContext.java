@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,27 +20,27 @@ package com.alibaba.citrus.service.pipeline;
 /**
  * <code>PipelineContext</code>
  * 是由pipeline提供给valve的一个上下文对象，它代表了当前pipeline的执行状态，并控制pipeline的执行步骤。
- * 
+ *
  * @author Michael Zhou
  */
 public interface PipelineContext extends PipelineStates {
     /**
      * 执行pipeline中下一个valve。
-     * 
+     *
      * @throws IllegalStateException 假如该方法被多次调用。
      */
     void invokeNext() throws IllegalStateException, PipelineException;
 
     /**
      * 中断并跳出pipeline的执行。
-     * 
+     *
      * @param levels 中断并跳出指定层数的pipeline，<code>0</code>代表仅中断当前pipeline的执行。
      */
     void breakPipeline(int levels);
 
     /**
      * 中断并跳出pipeline的执行。
-     * 
+     *
      * @param label 中断并跳出指定label的pipeline
      */
     void breakPipeline(String label);

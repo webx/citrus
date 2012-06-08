@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -53,7 +53,7 @@ import com.alibaba.citrus.util.io.ByteArrayOutputStream;
 
 /**
  * 测试手工装配mail builder。
- * 
+ *
  * @author Michael Zhou
  */
 public class MailBuilderTests extends AbstractMailBuilderTests {
@@ -167,7 +167,7 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
         assertEquals(我爱北京敏感词_I_LOVE_THE_PRESERVED_KEYWORDS, builder.getSubject());
 
         // render as UTF-8
-        assertThat(save(builder.getMessageAsString(rawSession)), containsAll( // 
+        assertThat(save(builder.getMessageAsString(rawSession)), containsAll( //
                 "=?UTF-8?Q?=E6=88=91=E7=88=B1=E5=8C=97=E4=BA=AC?=", //
                 "=?UTF-8?Q?=E6=95=8F=E6=84=9F=E8=AF=8D_I?=", //
                 "=?UTF-8?Q?_love_the_?=", //
@@ -175,7 +175,7 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
 
         // render as GBK
         builder.setCharacterEncoding("GBK");
-        assertThat(save(builder.getMessageAsString(rawSession)), containsAll( // 
+        assertThat(save(builder.getMessageAsString(rawSession)), containsAll( //
                 "=?GBK?Q?=CE=D2=B0=AE=B1=B1=BE=A9=C3=F4=B8=D0=B4=CA_I_love_the_?=", //
                 "=?GBK?Q?preserved_keywords.?="));
     }
@@ -187,7 +187,7 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
         assertNotNull(sentDate);
         assertTrue(sentDate.getTime() - System.currentTimeMillis() < 1000);
 
-        assertThat(save(builder.getMessageAsString(rawSession)), containsAll( // 
+        assertThat(save(builder.getMessageAsString(rawSession)), containsAll( //
                 newDateFormat().format(sentDate)));
     }
 
@@ -290,7 +290,7 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
 
         for (MailAddressType addrType : MailAddressType.values()) {
             assertAddresses(builder, addrType, //
-                    "=?UTF-8?B?576O5Zu9?= <us@earth.com>", // 
+                    "=?UTF-8?B?576O5Zu9?= <us@earth.com>", //
                     "=?UTF-8?B?5Lit5Zu9?= <china@earth.com>");
         }
     }

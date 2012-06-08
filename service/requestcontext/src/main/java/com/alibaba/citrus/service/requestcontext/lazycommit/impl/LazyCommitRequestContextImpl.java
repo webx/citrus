@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,7 +33,7 @@ import com.alibaba.citrus.util.StringUtil;
 
 /**
  * 延迟提交response的实现。
- * 
+ *
  * @author Michael Zhou
  */
 public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper implements LazyCommitRequestContext {
@@ -46,7 +46,7 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
 
     /**
      * 包装一个<code>RequestContext</code>对象。
-     * 
+     *
      * @param wrappedContext 被包装的<code>RequestContext</code>
      */
     public LazyCommitRequestContextImpl(RequestContext wrappedContext) {
@@ -57,7 +57,7 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
 
     /**
      * 判断当前请求是否已出错。
-     * 
+     *
      * @return 如果出错，则返回<code>true</code>
      */
     public boolean isError() {
@@ -66,7 +66,7 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
 
     /**
      * 如果<code>sendError()</code>方法曾被调用，则该方法返回一个error状态值。
-     * 
+     *
      * @return error状态值，若系统正常，则返回<code>0</code>
      */
     public int getErrorStatus() {
@@ -79,7 +79,7 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
 
     /**
      * 如果<code>sendError()</code>方法曾被调用，则该方法返回一个error信息。
-     * 
+     *
      * @return error信息，若系统正常，则返回<code>null</code>
      */
     public String getErrorMessage() {
@@ -92,7 +92,7 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
 
     /**
      * 判断当前请求是否已被重定向。
-     * 
+     *
      * @return 如果重定向，则返回<code>true</code>
      */
     public boolean isRedirected() {
@@ -101,7 +101,7 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
 
     /**
      * 取得重定向的URI。
-     * 
+     *
      * @return 重定向的URI，如果没有重定向，则返回<code>null</code>
      */
     public String getRedirectLocation() {
@@ -110,7 +110,7 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
 
     /**
      * 取得最近设置的HTTP status。
-     * 
+     *
      * @return HTTP status值
      */
     public int getStatus() {
@@ -119,7 +119,7 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
 
     /**
      * 结束一个请求。
-     * 
+     *
      * @throws LazyCommitFailedException 如果失败
      */
     @Override
@@ -153,7 +153,7 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
 
         /**
          * 设置重定向URI。
-         * 
+         *
          * @param location 重定向的URI
          * @throws IOException 输入输出失败
          * @throws IllegalStateException 如果response已经committed
@@ -181,7 +181,7 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
 
         /**
          * 设置HTTP status。
-         * 
+         *
          * @param sc HTTP status值
          */
         @Override

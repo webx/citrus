@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +24,7 @@ import java.io.Writer;
 /**
  * 这个服务提供了一个渲染模板的通用接口，通过这个服务。一个特定的模板系统，例如Velocity或JSP，只 需要实现
  * <code>TemplateEngine</code>接口，并向template service登记自己，就可以被统一的方法来调用。
- * 
+ *
  * @author Michael Zhou
  */
 public interface TemplateService {

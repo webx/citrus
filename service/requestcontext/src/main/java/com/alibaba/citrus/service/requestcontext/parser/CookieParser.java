@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,7 +22,7 @@ package com.alibaba.citrus.service.requestcontext.parser;
  * <p>
  * 注意：<code>CookieParser</code>永远使用<code>ISO-8859-1</code>编码来处理cookie的名称和值。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public interface CookieParser extends ValueParser {

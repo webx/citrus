@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,7 +38,7 @@ import java.util.regex.PatternSyntaxException;
  * <p>
  * 转换后的正则表达式, 对每一个通配符建立<em>引用变量</em>, 依次为<code>$1</code>, <code>$2</code>, ...
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public class ClassNameWildcardCompiler {

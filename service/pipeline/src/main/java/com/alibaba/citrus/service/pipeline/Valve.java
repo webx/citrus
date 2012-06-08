@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +23,7 @@ package com.alibaba.citrus.service.pipeline;
  * 如同真实世界里的水管中的阀门，它可以控制和改变液体的流向，<code>Valve</code> 也可以控制pipeline中后续valves的执行。
  * <code>Valve</code>可以决定是否继续执行后续的valves，或是中断整个pipeline的执行。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public interface Valve {

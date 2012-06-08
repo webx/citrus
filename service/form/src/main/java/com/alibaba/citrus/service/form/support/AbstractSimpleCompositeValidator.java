@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,7 @@ import com.alibaba.citrus.service.form.impl.validation.composite.AllOfValidator;
  * <p>
  * 假如被设入了多个validator，则自动创建一个隐含的all-of-validator。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public abstract class AbstractSimpleCompositeValidator extends AbstractCompositeValidator {

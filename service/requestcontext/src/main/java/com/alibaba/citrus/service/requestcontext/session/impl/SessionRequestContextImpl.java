@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -60,7 +60,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
 
     /**
      * 取得<code>SessionConfig</code>实例。
-     * 
+     *
      * @return <code>SessionConfig</code>实例
      */
     public SessionConfig getSessionConfig() {
@@ -69,7 +69,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
 
     /**
      * 判断session是否已经作废。
-     * 
+     *
      * @return 如已作废，则返回<code>true</code>
      */
     public boolean isSessionInvalidated() {
@@ -88,7 +88,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
 
     /**
      * 取得当前的session ID。
-     * 
+     *
      * @return session ID
      */
     public String getRequestedSessionID() {
@@ -98,7 +98,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
 
     /**
      * 当前的session ID是从cookie中取得的吗？
-     * 
+     *
      * @return 如果是，则返回<code>true</code>
      */
     public boolean isRequestedSessionIDFromCookie() {
@@ -108,7 +108,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
 
     /**
      * 当前的session ID是从URL中取得的吗？
-     * 
+     *
      * @return 如果是，则返回<code>true</code>
      */
     public boolean isRequestedSessionIDFromURL() {
@@ -118,7 +118,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
 
     /**
      * 判断当前的session ID是否仍然合法。
-     * 
+     *
      * @return 如果是，则返回<code>true</code>
      */
     public boolean isRequestedSessionIDValid() {
@@ -192,7 +192,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
 
     /**
      * 从cookie中取得session ID。
-     * 
+     *
      * @return 如果存在，则返回session ID，否则返回<code>null</code>
      */
     public String decodeSessionIDFromCookie() {
@@ -217,7 +217,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
 
     /**
      * 将session ID编码到URL中去。
-     * 
+     *
      * @return 包含session ID的URL
      */
     public String encodeSessionIDIntoURL(String url) {
@@ -271,7 +271,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
 
     /**
      * 从URL中取得session ID。
-     * 
+     *
      * @return 如果存在，则返回session ID，否则返回<code>null</code>
      */
     public String decodeSessionIDFromURL() {
@@ -305,7 +305,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
 
     /**
      * 取得当前的session，如果不存在，且<code>create</code>为<code>true</code>，则创建一个新的。
-     * 
+     *
      * @param create 必要时是否创建新的session
      * @return 当前的session或新的session，如果不存在，且<code>create</code>为
      *         <code>false</code> ，则返回<code>null</code>
@@ -389,7 +389,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
     private class SessionRequestWrapper extends AbstractRequestWrapper {
         /**
          * 构造函数。
-         * 
+         *
          * @param request 被包装的<code>HttpServletRequest</code>实例
          */
         public SessionRequestWrapper(HttpServletRequest request) {
@@ -398,7 +398,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
 
         /**
          * 取得当前request中的session ID。
-         * 
+         *
          * @return session ID
          */
         @Override
@@ -408,7 +408,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
 
         /**
          * 当前的session ID是从cookie中取得的吗？
-         * 
+         *
          * @return 如果是，则返回<code>true</code>
          */
         @Override
@@ -418,7 +418,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
 
         /**
          * 当前的session ID是从URL中取得的吗？
-         * 
+         *
          * @return 如果是，则返回<code>true</code>
          */
         @Override
@@ -428,7 +428,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
 
         /**
          * 判断当前的session ID是否仍然合法。
-         * 
+         *
          * @return 如果是，则返回<code>true</code>
          */
         @Override
@@ -438,7 +438,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
 
         /**
          * 取得当前的session，如果不存在，则创建一个新的。
-         * 
+         *
          * @return 当前的session或新的session
          */
         @Override
@@ -448,7 +448,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
 
         /**
          * 取得当前的session，如果不存在，且<code>create</code>为<code>true</code>，则创建一个新的。
-         * 
+         *
          * @param create 必要时是否创建新的session
          * @return 当前的session或新的session，如果不存在，且<code>create</code>为
          *         <code>false</code>，则返回<code>null</code>
@@ -474,7 +474,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
     private class SessionResponseWrapper extends AbstractResponseWrapper {
         /**
          * 构造函数。
-         * 
+         *
          * @param response 被包装的<code>HttpServletResponse</code>实例
          */
         public SessionResponseWrapper(HttpServletResponse response) {
@@ -483,7 +483,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
 
         /**
          * 将session ID编码到URL中。
-         * 
+         *
          * @param url 要编码的URL
          * @return 包含session ID的URL
          */
@@ -498,7 +498,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
 
         /**
          * 将session ID编码到URL中。
-         * 
+         *
          * @param url 要编码的URL
          * @return 包含session ID的URL
          */

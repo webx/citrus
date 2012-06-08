@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,7 +46,7 @@ import com.alibaba.citrus.util.io.StreamUtil;
 
 /**
  * 包裹<code>HttpServletResponse</code>，使之输出到内存中。
- * 
+ *
  * @author Michael Zhou
  */
 public class BufferedResponseImpl extends AbstractResponseWrapper {
@@ -61,7 +61,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
 
     /**
      * 创建一个<code>BufferedResponseImpl</code>。
-     * 
+     *
      * @param requestContext response所在的request context
      * @param response 原始的response
      */
@@ -71,7 +71,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
 
     /**
      * 取得输出流。
-     * 
+     *
      * @return response的输出流
      * @throws IOException 输入输出失败
      */
@@ -116,7 +116,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
 
     /**
      * 取得输出字符流。
-     * 
+     *
      * @return response的输出字符流
      * @throws IOException 输入输出失败
      */
@@ -161,7 +161,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
 
     /**
      * 设置content长度。该调用只在<code>setBuffering(false)</code>时有效。
-     * 
+     *
      * @param length content长度
      */
     @Override
@@ -173,7 +173,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
 
     /**
      * 冲洗buffer。
-     * 
+     *
      * @throws IOException 如果失败
      */
     @Override
@@ -193,7 +193,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
 
     /**
      * 清除所有buffers，常用于显示出错信息。
-     * 
+     *
      * @throws IllegalStateException 如果response已经commit
      */
     @Override
@@ -219,7 +219,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
 
     /**
      * 设置是否将所有信息保存在内存中。
-     * 
+     *
      * @return 如果是，则返回<code>true</code>
      */
     public boolean isBuffering() {
@@ -232,7 +232,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
      * 此方法必须在<code>getOutputStream</code>和<code>getWriter</code>方法之前执行，否则将抛出
      * <code>IllegalStateException</code>。
      * </p>
-     * 
+     *
      * @param buffering 是否buffer内容
      * @throws IllegalStateException <code>getOutputStream</code>或
      *             <code>getWriter</code>方法已经被执行
@@ -253,7 +253,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
 
     /**
      * 创建新的buffer，保存老的buffer。
-     * 
+     *
      * @throws IllegalStateException 如果不在buffer模式，或<code>getWriter</code>
      *             方法曾被调用，或<code>getOutputStream</code>方法从未被调用
      */
@@ -290,7 +290,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
 
     /**
      * 弹出最近的buffer，如果堆栈中只有一个buffer，则弹出后再创建一个新的。
-     * 
+     *
      * @return 最近的buffer内容，如果<code>getOutputStream</code>方法从未被调用，则返回空的byte array
      * @throws IllegalStateException 如果不在buffer模式，或<code>getWriter</code>方法曾被调用
      */
@@ -324,7 +324,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
 
     /**
      * 弹出最近的buffer，如果堆栈中只有一个buffer，则弹出后再创建一个新的。
-     * 
+     *
      * @return 最近的buffer内容，如果<code>getWriter</code>方法从未被调用，则返回空的字符串
      * @throws IllegalStateException 如果不在buffer模式，或<code>getOutputStream</code>
      *             方法曾被调用
@@ -364,7 +364,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
      * 如果从来没有执行过<code>getOutputStream</code>或<code>getWriter</code>
      * 方法，则该方法不做任何事情。
      * </p>
-     * 
+     *
      * @throws IOException 如果输入输出失败
      * @throws IllegalStateException 如果不是在buffer模式，或buffer栈中不止一个buffer
      */

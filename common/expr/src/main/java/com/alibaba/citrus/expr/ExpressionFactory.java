@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,13 +19,13 @@ package com.alibaba.citrus.expr;
 
 /**
  * 创建<code>Expression</code>的工厂。
- * 
+ *
  * @author Michael Zhou
  */
 public interface ExpressionFactory {
     /**
      * 创建表达式。
-     * 
+     *
      * @param expr 表达式字符串
      * @return 表达式
      */

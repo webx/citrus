@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 根据异常的类型，将请求分发给适当的request handler。
- * 
+ *
  * @author Michael Zhou
  */
 public interface ErrorHandlerMapping {

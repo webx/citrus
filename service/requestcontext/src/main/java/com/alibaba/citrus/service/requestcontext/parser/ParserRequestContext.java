@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +23,7 @@ import com.alibaba.citrus.service.requestcontext.RequestContext;
 
 /**
  * 自动解析request parameters和cookie parameters，并透明地处理upload请求的request context实现。
- * 
+ *
  * @author Michael Zhou
  */
 public interface ParserRequestContext extends RequestContext {
@@ -107,21 +107,21 @@ public interface ParserRequestContext extends RequestContext {
 
     /**
      * 取得所有query参数。第一次执行此方法时，将会解析request，从中取得所有的参数。
-     * 
+     *
      * @return <code>ParameterParser</code>实例
      */
     ParameterParser getParameters();
 
     /**
      * 取得所有cookie。第一次执行此方法时，将会解析request，从中取得所有cookies。
-     * 
+     *
      * @return <code>CookieParser</code>实例
      */
     CookieParser getCookies();
 
     /**
      * 将指定的字符串根据<code>getCaseFolding()</code>的设置，转换成指定大小写形式。
-     * 
+     *
      * @param str 要转换的字符串
      * @return 转换后的字符串
      */

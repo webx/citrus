@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,14 +23,14 @@ import org.apache.commons.fileupload.FileItem;
 
 /**
  * 用来处理<code>multipart/form-data</code>格式的HTTP POST请求，并将它们转换成form字段或文件。
- * 
+ *
  * @author Michael Zhou
  */
 public interface UploadService extends UploadConfiguration {
     /**
      * 判断是否是符合<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>标准的
      * <code>multipart/form-data</code>类型的HTTP请求。
-     * 
+     *
      * @param request HTTP请求
      * @return 如果是，则返回<code>true</code>
      */
@@ -39,7 +39,7 @@ public interface UploadService extends UploadConfiguration {
     /**
      * 解析符合<a href="http://www.ietf.org/rfc/rfc1867.txt">RFC 1867</a>标准的
      * <code>multipart/form-data</code>类型的HTTP请求。
-     * 
+     *
      * @param request HTTP请求
      * @return <code>FileItem</code>的列表，按其输入的顺序罗列
      * @throws UploadException 如果解析时出错
@@ -52,7 +52,7 @@ public interface UploadService extends UploadConfiguration {
      * <p>
      * 此方法覆盖了service的默认设置，适合于在action或servlet中手工执行。
      * </p>
-     * 
+     *
      * @param request HTTP请求
      * @param params upload参数
      * @return <code>FileItem</code>的列表，按其输入的顺序罗列

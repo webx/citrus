@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,7 +48,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * Jsp模板引擎的实现。
- * 
+ *
  * @author Michael Zhou
  */
 public class JspEngineImpl extends AbstractService<JspEngine> implements JspEngine, ResourceLoaderAware,
@@ -148,7 +148,7 @@ public class JspEngineImpl extends AbstractService<JspEngine> implements JspEngi
 
     /**
      * 渲染模板，并以字符串的形式取得渲染的结果。
-     * 
+     *
      * @param template 模板名
      * @param context template context
      * @return 模板渲然的结果字符串

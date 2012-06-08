@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,7 @@ package com.alibaba.citrus.service.pull;
  * <p>
  * 该类型的对象的性能不如<code>ToolSetFactory</code>，请尽量使用后者。
  * </p>
- * 
+ *
  * @see ToolFactory
  * @see ToolSetFactory
  * @author Michael Zhou

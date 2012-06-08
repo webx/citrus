@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -43,7 +43,7 @@ import com.alibaba.citrus.util.StringUtil;
 
 /**
  * 用来检查<code>CsrfToken</code>的valve，用来防止csrf攻击和重复提交同一表单。
- * 
+ *
  * @author Michael Zhou
  */
 public class CheckCsrfTokenValve extends AbstractValve {
@@ -105,7 +105,7 @@ public class CheckCsrfTokenValve extends AbstractValve {
         if (tokenFromRequest != null) {
             HttpSession session = rundata.getRequest().getSession();
 
-            // 先检查longLiveToken，如果匹配，则不用检查uniqueToken了。 
+            // 先检查longLiveToken，如果匹配，则不用检查uniqueToken了。
             if (!tokenFromRequest.equals(CsrfToken.getLongLiveTokenInSession(session))) {
                 List<String> tokensInSession = CsrfToken.getTokensInSession(session, tokenKey);
 

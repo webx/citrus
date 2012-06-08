@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,7 +47,7 @@ import com.alibaba.citrus.util.StringUtil;
  * <p>
  * 一个URI包括如下几个部分：
  * </p>
- * 
+ *
  * <pre>
  * URI         = SERVER_INFO + PATH + &quot;?&quot; + QUERY_DATA + &quot;#&quot; + REFERENCE
  * SERVER_INFO = scheme://loginUser:loginPassword@serverName:serverPort
@@ -58,7 +58,7 @@ import com.alibaba.citrus.util.StringUtil;
  * <p>
  * 例如：
  * </p>
- * 
+ *
  * <pre>
  * http://user:pass@myserver.com:8080/view?id=1#top
  * </pre>
@@ -66,7 +66,7 @@ import com.alibaba.citrus.util.StringUtil;
  * 注意，<code>URIBroker</code>没有提供修改path的方法。如果要添加、删除、修改path，请直接使用子类
  * <code>GenericURIBroker</code>。
  * </p>
- * 
+ *
  * @author Michael Zhou
  * @author dux.fangl
  */

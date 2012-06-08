@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,7 @@ import org.springframework.core.io.ResourceLoader;
 
 /**
  * 让velocity模板系统使用spring resource loader装载模板的适配器.
- * 
+ *
  * @author Michael Zhou
  */
 public class SpringResourceLoaderAdapter extends AbstractResourceLoader {

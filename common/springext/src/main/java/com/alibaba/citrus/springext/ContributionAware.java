@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +20,7 @@ package com.alibaba.citrus.springext;
 /**
  * 假如某个<code>BeanDefinitionParser</code>或者<code>BeanDefinitionDecorator</code>
  * 实现了这个接口，那么它所属的<code>Contribution</code>实例将被设置进去。
- * 
+ *
  * @author Michael Zhou
  */
 public interface ContributionAware {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,7 +29,7 @@ import org.w3c.dom.Element;
 /**
  * 从XML文件配置log4j的工具类。和Log4j默认的<code>DOMConfigurator</code>
  * 相比，这个类允许提供额外的properties对象，在配置文件中被引用。
- * 
+ *
  * @author Michael Zhou
  */
 public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
@@ -55,7 +55,7 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
 
     /**
      * 创建新对象。
-     * 
+     *
      * @param props 可在配置文件中被引用的属性
      */
     public DOMConfigurator(Properties props) {
@@ -64,7 +64,7 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
 
     /**
      * 使用XML文件配置log4j。
-     * 
+     *
      * @param filename 配置文件名
      */
     public static void configure(String filename) {
@@ -73,7 +73,7 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
 
     /**
      * 使用XML文件配置log4j。
-     * 
+     *
      * @param filename 配置文件名
      * @param props 可在配置文件中被引用的属性
      */
@@ -83,7 +83,7 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
 
     /**
      * 使用XML文件配置log4j。
-     * 
+     *
      * @param url 配置文件的URL
      */
     public static void configure(URL url) {
@@ -92,7 +92,7 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
 
     /**
      * 使用XML文件配置log4j。
-     * 
+     *
      * @param url 配置文件的URL
      * @param props 可在配置文件中被引用的属性
      */
@@ -102,7 +102,7 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
 
     /**
      * 使用XML文件配置log4j。
-     * 
+     *
      * @param element 配置文件名的DOM element
      */
     public static void configure(Element element) {
@@ -111,7 +111,7 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
 
     /**
      * 使用XML文件配置log4j。
-     * 
+     *
      * @param element 配置文件名的DOM element
      * @param props 可在配置文件中被引用的属性
      */
@@ -121,7 +121,7 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
 
     /**
      * 使用XML文件配置log4j，同时监控文件的更改。
-     * 
+     *
      * @param filename 配置文件名
      */
     public static void configureAndWatch(String filename) {
@@ -130,7 +130,7 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
 
     /**
      * 使用XML文件配置log4j，同时监控文件的更改。
-     * 
+     *
      * @param filename 配置文件名
      * @param props 可在配置文件中被引用的属性
      */
@@ -141,7 +141,7 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
     /**
      * 使用XML文件配置log4j，同时监控文件的更改。此方法将创建一个监控线程，该线程第隔指定时间就会检查文件是否被创建或改变，如果是，
      * 则从文件中读取log4j配置。
-     * 
+     *
      * @param filename 配置文件名
      * @param interval 监控线程检查间隔（ms）
      */
@@ -155,7 +155,7 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
     /**
      * 使用XML文件配置log4j，同时监控文件的更改。此方法将创建一个监控线程，该线程第隔指定时间就会检查文件是否被创建或改变，如果是，
      * 则从文件中读取log4j配置。
-     * 
+     *
      * @param filename 配置文件名
      * @param props 可在配置文件中被引用的属性
      * @param interval 监控线程检查间隔（ms）
@@ -169,7 +169,7 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
 
     /**
      * 设置属性，这些属性可以在配置文件中被引用。
-     * 
+     *
      * @param props 属性
      */
     public void setProperties(Properties props) {

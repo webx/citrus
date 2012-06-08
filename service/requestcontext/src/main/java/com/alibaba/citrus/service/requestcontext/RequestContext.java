@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,34 +23,34 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 包含了request、response和servletContext几个对象的集合体，用来表示当前HTTP请求的状态。
- * 
+ *
  * @author Michael Zhou
  */
 public interface RequestContext {
     /**
      * 取得被包装的context。
-     * 
+     *
      * @return 被包装的<code>RequestContext</code>对象
      */
     RequestContext getWrappedRequestContext();
 
     /**
      * 取得servletContext对象。
-     * 
+     *
      * @return <code>ServletContext</code>对象
      */
     ServletContext getServletContext();
 
     /**
      * 取得request对象。
-     * 
+     *
      * @return <code>HttpServletRequest</code>对象
      */
     HttpServletRequest getRequest();
 
     /**
      * 取得response对象。
-     * 
+     *
      * @return <code>HttpServletResponse</code>对象
      */
     HttpServletResponse getResponse();
@@ -62,7 +62,7 @@ public interface RequestContext {
 
     /**
      * 结束一个请求。
-     * 
+     *
      * @throws RequestContextException 如果失败
      */
     void commit() throws RequestContextException;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -67,7 +67,7 @@ import com.alibaba.citrus.webx.WebxException;
 
 /**
  * 设置和显示一个control module的tool。
- * 
+ *
  * @author Michael Zhou
  */
 public class ControlTool extends ControlToolConfiguration implements Renderable {
@@ -101,7 +101,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
 
     /**
      * 设置control的模板。此方法和<code>setModule</code>只能执行其一，否则将忽略后者。
-     * 
+     *
      * @param template control模板名
      * @return <code>ControlTool</code>本身，以方便模板中的操作
      */
@@ -117,7 +117,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
 
     /**
      * 设置control的模块。此方法和<code>setTemplate</code>只能执行其一，否则将忽略后者。
-     * 
+     *
      * @param module control模块名
      * @return <code>ControlTool</code>本身，以方便模板中的操作
      */
@@ -136,7 +136,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
      * <p>
      * 这些参数将被保存在一个一次性的<code>Map</code>中，当render成功以后，该map就被丢弃，以便再次调用该control。
      * </p>
-     * 
+     *
      * @param name 属性名
      * @param value 对象
      * @return <code>ControlTool</code>本身，以方便模板中的操作
@@ -162,7 +162,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
 
     /**
      * 渲染对象。
-     * 
+     *
      * @return 渲染的结果
      */
     public String render() {

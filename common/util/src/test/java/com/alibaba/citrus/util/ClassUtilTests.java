@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,13 +33,13 @@ import org.slf4j.Logger;
 
 /**
  * 测试<code>ClassUtil</code>。
- * 
+ *
  * @author Michael Zhou
  */
 public class ClassUtilTests {
 
     // ==========================================================================
-    // 取得友好类名和package名的方法。                                                  
+    // 取得友好类名和package名的方法。
     // ==========================================================================
 
     @Test
@@ -343,12 +343,12 @@ public class ClassUtilTests {
     }
 
     // ==========================================================================
-    // 取得类名和package名的resource名的方法。                                      
-    //  
-    // 和类名、package名不同的是，resource名符合文件名命名规范，例如：              
-    // java/lang/String.class                                                      
-    // com/alibaba/commons/lang                                                    
-    // etc.                                                                        
+    // 取得类名和package名的resource名的方法。
+    //
+    // 和类名、package名不同的是，resource名符合文件名命名规范，例如：
+    // java/lang/String.class
+    // com/alibaba/commons/lang
+    // etc.
     // ==========================================================================
 
     @Test
@@ -418,7 +418,7 @@ public class ClassUtilTests {
     }
 
     // ==========================================================================
-    // 取得数组类。                                   
+    // 取得数组类。
     // ==========================================================================
 
     @Test
@@ -460,7 +460,7 @@ public class ClassUtilTests {
     }
 
     // ==========================================================================
-    // 取得原子类型或者其wrapper类。                                   
+    // 取得原子类型或者其wrapper类。
     // ==========================================================================
 
     @Test
@@ -556,7 +556,7 @@ public class ClassUtilTests {
     }
 
     // ==========================================================================
-    // 类型匹配。                                   
+    // 类型匹配。
     // ==========================================================================
 
     @Test

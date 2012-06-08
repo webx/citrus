@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -43,7 +43,7 @@ import com.alibaba.citrus.util.regex.MatchResultSubstitution;
  * 每个rewrite规则被匹配后，就会再试着匹配所有的conditions（如果有的话）。假如conditions也被满足，
  * 那么substitution就会被执行。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public class RewriteRule implements InitializingBean {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,7 @@ import org.junit.Test;
 
 /**
  * <code>MapTest</code>测试<code>java.util.Map</code>的基本行为。
- * 
+ *
  * @author Michael Zhou
  */
 public abstract class AbstractMapTests extends AbstractTests {
@@ -309,7 +309,7 @@ public abstract class AbstractMapTests extends AbstractTests {
 
     /**
      * 将map.toString()的结果重新排序后输出.
-     * 
+     *
      * @param map 要处理的map
      * @return 重新排序后的结果
      */

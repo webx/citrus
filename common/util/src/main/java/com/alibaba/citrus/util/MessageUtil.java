@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,13 +23,13 @@ import java.util.ResourceBundle;
 
 /**
  * 和<code>ResourceBundle</code>及消息字符串有关的工具类。
- * 
+ *
  * @author Michael Zhou
  */
 public class MessageUtil {
     /**
      * 从<code>ResourceBundle</code>中取得字符串，并使用<code>MessageFormat</code>格式化字符串.
-     * 
+     *
      * @param bundle resource bundle
      * @param key 要查找的键
      * @param params 参数表
@@ -50,7 +50,7 @@ public class MessageUtil {
 
     /**
      * 使用<code>MessageFormat</code>格式化字符串.
-     * 
+     *
      * @param message 要格式化的字符串
      * @param params 参数表
      * @return 格式化的字符串，如果message为<code>null</code>，则返回<code>null</code>

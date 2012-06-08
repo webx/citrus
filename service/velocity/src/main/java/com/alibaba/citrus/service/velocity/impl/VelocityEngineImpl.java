@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -54,7 +54,7 @@ import com.alibaba.citrus.service.velocity.VelocityEngine;
 
 /**
  * Velocity模板引擎服务。
- * 
+ *
  * @author Michael Zhou
  */
 public class VelocityEngineImpl extends AbstractService<VelocityEngine> implements VelocityEngine, ResourceLoaderAware,

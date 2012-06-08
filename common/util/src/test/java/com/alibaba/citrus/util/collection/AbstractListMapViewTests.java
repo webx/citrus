@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,7 +32,7 @@ import org.junit.Test;
 /**
  * 测试<code>ListMap.entryList()</code>, <code>ListMap.keyList()</code>,
  * <code>ListMap.valueList()</code> 返回的list view对象.
- * 
+ *
  * @author Michael Zhou
  */
 public abstract class AbstractListMapViewTests extends AbstractTests {
@@ -347,7 +347,7 @@ public abstract class AbstractListMapViewTests extends AbstractTests {
      * 从<code>ListMap</code>中取得view. 可能是<code>ListMap.entryList()</code>,
      * <code>ListMap.keyList()</code> 和<code>ListMap.valueList()</code>
      * 等方法返回的结果.
-     * 
+     *
      * @param map 被测试的view所属的<code>ListMap</code>
      * @return view
      */
@@ -355,7 +355,7 @@ public abstract class AbstractListMapViewTests extends AbstractTests {
 
     /**
      * 创建一个和View中存放的对象可比较的对象.
-     * 
+     *
      * @param key key
      * @param value value
      * @return 对象

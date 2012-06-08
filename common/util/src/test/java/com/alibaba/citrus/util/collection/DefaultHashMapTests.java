@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,7 +36,7 @@ import com.alibaba.citrus.util.collection.DefaultHashMapTests.MapValues;
 
 /**
  * 测试<code>DefaultHashMap</code>类.
- * 
+ *
  * @author Michael Zhou
  */
 @RunWith(Suite.class)
@@ -205,7 +205,7 @@ public class DefaultHashMapTests {
 
         /**
          * 测试内部参数: threshold和capacity.
-         * 
+         *
          * @param expectedThreshold 期望的阈值
          * @param expectedCapacity 期望的容量
          */
@@ -216,7 +216,7 @@ public class DefaultHashMapTests {
 
         /**
          * 测试并试图得到Exception.
-         * 
+         *
          * @param initialCapacity 初始容量
          * @param loadFactor 负载系数
          */
@@ -230,7 +230,7 @@ public class DefaultHashMapTests {
 
         /**
          * 测试并试图得到Exception.
-         * 
+         *
          * @param initialCapacity 初始容量
          */
         private void assertConstructorException(int initialCapacity) {

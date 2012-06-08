@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -54,7 +54,7 @@ import com.alibaba.citrus.springext.Schema;
 
 /**
  * 处理schema和xml的工具。
- * 
+ *
  * @author Michael Zhou
  */
 public class SchemaUtil {
@@ -204,14 +204,14 @@ public class SchemaUtil {
     /**
      * 取得contribution schema的内容，将其中引用其它configuration
      * point的element修改成具体的element名称。例如，将如下定义：
-     * 
+     *
      * <pre>
      * &lt;xsd:any namespace="http://www.alibaba.com/schema/services/template/engines" /&gt;
      * </pre>
      * <p>
      * 修改成：
      * </p>
-     * 
+     *
      * <pre>
      * &lt;xsd:choose xmlns:tpl-engines="http://www.alibaba.com/schema/services/template/engines"&gt;
      *   &lt;xsd:element ref="tpl-engines:velocity-engine" /&gt;
@@ -323,7 +323,7 @@ public class SchemaUtil {
                 // 注意：必须将ns定义加在顶层element，否则低版本的xerces会报错。
                 root.addNamespace(nsPrefix, ns);
 
-                // <xsd:choice minOccurs="?" maxOccurs="?" /> 
+                // <xsd:choice minOccurs="?" maxOccurs="?" />
                 if (anyElement.attribute("minOccurs") != null) {
                     choiceElement.addAttribute("minOccurs", anyElement.attribute("minOccurs").getValue());
                 }
@@ -392,7 +392,7 @@ public class SchemaUtil {
                 i.remove();
             }
 
-            // 添加includes 
+            // 添加includes
             @SuppressWarnings("unchecked")
             List<Node> nodes = root.elements();
             int i = 0;

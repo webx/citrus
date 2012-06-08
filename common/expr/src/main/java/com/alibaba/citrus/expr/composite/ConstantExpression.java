@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,7 +22,7 @@ import com.alibaba.citrus.expr.support.ExpressionSupport;
 
 /**
  * 代表一个常量表达式，该表达式的值不依赖于<code>ExpressionContext</code>。
- * 
+ *
  * @author Michael Zhou
  */
 public class ConstantExpression extends ExpressionSupport {
@@ -36,7 +36,7 @@ public class ConstantExpression extends ExpressionSupport {
 
     /**
      * 创建一个常量表达式。
-     * 
+     *
      * @param value 常量值
      */
     public ConstantExpression(Object value) {
@@ -45,7 +45,7 @@ public class ConstantExpression extends ExpressionSupport {
 
     /**
      * 取得常量值。
-     * 
+     *
      * @return 常量值
      */
     public Object getValue() {
@@ -54,7 +54,7 @@ public class ConstantExpression extends ExpressionSupport {
 
     /**
      * 设置常量值。
-     * 
+     *
      * @param value 常量值
      */
     public void setValue(Object value) {
@@ -63,7 +63,7 @@ public class ConstantExpression extends ExpressionSupport {
 
     /**
      * 取得表达式字符串表示。
-     * 
+     *
      * @return 表达式字符串表示
      */
     public String getExpressionText() {
@@ -72,7 +72,7 @@ public class ConstantExpression extends ExpressionSupport {
 
     /**
      * 在指定的上下文中计算表达式。
-     * 
+     *
      * @param context <code>ExpressionContext</code>上下文
      * @return 表达式的计算结果
      */

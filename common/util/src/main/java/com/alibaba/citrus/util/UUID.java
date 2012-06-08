@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,7 +35,7 @@ import com.alibaba.citrus.util.io.ByteArrayOutputStream;
  * 默认情况下，UUID由数字和大写字母构成。如果在构造函数时，指定<code>noCase=false</code>
  * ，那么所生成的ID将包含小写字母，这样ID的长度会较短。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public class UUID {

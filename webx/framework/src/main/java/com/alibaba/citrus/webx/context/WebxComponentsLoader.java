@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -76,7 +76,7 @@ import com.alibaba.citrus.webx.config.impl.WebxConfigurationImpl.ComponentsConfi
 
 /**
  * 用来装载webx components的装载器。
- * 
+ *
  * @author Michael Zhou
  */
 public class WebxComponentsLoader extends ContextLoader {
@@ -171,7 +171,7 @@ public class WebxComponentsLoader extends ContextLoader {
 
     /**
      * 在创建beanFactory之初被调用。
-     * 
+     *
      * @param webxComponentsContext
      */
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {

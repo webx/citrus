@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -56,7 +56,7 @@ import com.alibaba.citrus.test.runner.TestNameAware;
 
 /**
  * 和mail builder相关的测试基类。
- * 
+ *
  * @author Michael Zhou
  */
 @RunWith(TestNameAware.class)

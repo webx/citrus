@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,7 +25,7 @@ package com.alibaba.citrus.webx.handler;
  * <p>
  * 线程安全性：<code>RequestHandler</code>对象可被多个request共享，所以必须注意线程安全问题。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public interface RequestHandler {

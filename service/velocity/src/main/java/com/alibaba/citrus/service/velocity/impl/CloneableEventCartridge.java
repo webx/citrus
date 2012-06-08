@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,7 +40,7 @@ import com.alibaba.citrus.service.velocity.FastCloneable;
  * <li>只在系统初始化的时候初始化一次。</li>
  * <li>假如event handler实现了<code>ContextAware</code>接口，则每次执行时复制一份。</li>
  * </ul>
- * 
+ *
  * @author Michael Zhou
  */
 public class CloneableEventCartridge extends EventCartridge {

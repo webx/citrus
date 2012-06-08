@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 
 /**
  * 如果<code>ApplicationContext</code>实现该接口，表示其支持对<code>ResourceLoader</code>的扩展。
- * 
+ *
  * @author Michael Zhou
  */
 public interface ResourceLoadingExtendable extends ResourcePatternResolver {

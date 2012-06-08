@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,7 +32,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
  * <p>
  * 这里，<code>toString()</code>方法可以列出所有级联的<code>RequestContext</code>对象。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public abstract class AbstractRequestContextWrapper implements RequestContext {
@@ -43,7 +43,7 @@ public abstract class AbstractRequestContextWrapper implements RequestContext {
 
     /**
      * 包装一个<code>RequestContext</code>对象。
-     * 
+     *
      * @param wrappedContext 被包装的<code>RequestContext</code>
      */
     public AbstractRequestContextWrapper(RequestContext wrappedContext) {
@@ -55,7 +55,7 @@ public abstract class AbstractRequestContextWrapper implements RequestContext {
 
     /**
      * 取得被包装的context。
-     * 
+     *
      * @return 被包装的<code>RequestContext</code>对象
      */
     public RequestContext getWrappedRequestContext() {
@@ -64,7 +64,7 @@ public abstract class AbstractRequestContextWrapper implements RequestContext {
 
     /**
      * 取得servletContext对象。
-     * 
+     *
      * @return <code>ServletContext</code>对象
      */
     public ServletContext getServletContext() {
@@ -73,7 +73,7 @@ public abstract class AbstractRequestContextWrapper implements RequestContext {
 
     /**
      * 取得request对象。
-     * 
+     *
      * @return <code>HttpServletRequest</code>对象
      */
     public HttpServletRequest getRequest() {
@@ -82,7 +82,7 @@ public abstract class AbstractRequestContextWrapper implements RequestContext {
 
     /**
      * 设置request对象。
-     * 
+     *
      * @param request <code>HttpServletRequest</code>对象
      */
     protected void setRequest(HttpServletRequest request) {
@@ -91,7 +91,7 @@ public abstract class AbstractRequestContextWrapper implements RequestContext {
 
     /**
      * 取得response对象。
-     * 
+     *
      * @return <code>HttpServletResponse</code>对象
      */
     public HttpServletResponse getResponse() {
@@ -100,7 +100,7 @@ public abstract class AbstractRequestContextWrapper implements RequestContext {
 
     /**
      * 设置response对象。
-     * 
+     *
      * @param response <code>HttpServletResponse</code>对象
      */
     protected void setResponse(HttpServletResponse response) {
@@ -115,7 +115,7 @@ public abstract class AbstractRequestContextWrapper implements RequestContext {
 
     /**
      * 结束一个请求。
-     * 
+     *
      * @throws RequestContextException 如果失败
      */
     public void commit() throws RequestContextException {
@@ -123,7 +123,7 @@ public abstract class AbstractRequestContextWrapper implements RequestContext {
 
     /**
      * 显示当前的<code>RequestContext</code>以及所有级联的<code>RequestContext</code>。
-     * 
+     *
      * @return 字符串表示
      */
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,7 @@ import com.alibaba.citrus.util.StringUtil;
  * <p>
  * 一个Turbine风格的URI包括如下几个部分：
  * </p>
- * 
+ *
  * <pre>
  * URI         = SERVER_INFO + PATH + "?" + QUERY_DATA + "#" + REFERENCE
  * SERVER_INFO = scheme://loginUser:loginPassword@serverName:serverPort
@@ -42,11 +42,11 @@ import com.alibaba.citrus.util.StringUtil;
  * <p>
  * 例如：
  * </p>
- * 
+ *
  * <pre>
  * http://user:pass@myserver.com:8080/mycontext/myservlet/mycomponent/myTarget.jhtml
  * </pre>
- * 
+ *
  * @author Michael Zhou
  */
 public class TurbineURIBroker extends WebxURIBroker {

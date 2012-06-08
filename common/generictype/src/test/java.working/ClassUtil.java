@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,7 +36,7 @@ import com.alibaba.citrus.util.internal.StringUtil;
 
 /**
  * 有关类型的工具类。
- * 
+ *
  * @author Michael Zhou
  */
 public class ClassUtil {
@@ -75,12 +75,12 @@ public class ClassUtil {
      * 取得primitive类。
      * <p>
      * 例如：
-     * 
+     *
      * <pre>
      * ClassUtil.getPrimitiveType(&quot;int&quot;) = int.class;
      * ClassUtil.getPrimitiveType(&quot;long&quot;) = long.class;
      * </pre>
-     * 
+     *
      * </p>
      */
     public static Class<?> getPrimitiveType(String name) {
@@ -97,14 +97,14 @@ public class ClassUtil {
      * 取得primitive类型的wrapper。如果不是primitive，则原样返回。
      * <p>
      * 例如：
-     * 
+     *
      * <pre>
      * ClassUtil.getPrimitiveWrapperType(int.class) = Integer.class;
      * ClassUtil.getPrimitiveWrapperType(int[].class) = int[].class;
      * ClassUtil.getPrimitiveWrapperType(int[][].class) = int[][].class;
      * ClassUtil.getPrimitiveWrapperType(String[][].class) = String[][].class;
      * </pre>
-     * 
+     *
      * </p>
      */
     @SuppressWarnings("unchecked")
@@ -162,12 +162,12 @@ public class ClassUtil {
      * 取得JVM内部的类名。
      * <p>
      * 例如：
-     * 
+     *
      * <pre>
      *  ClassUtil.getJVMClassName(&quot;int[]&quot;) = &quot;[I&quot;
      *  ClassUtil.getJVMClassName(&quot;java.lang.Integer[][]&quot;) = &quot;[[Ljava.lang.Integer;&quot;
      * </pre>
-     * 
+     *
      * </p>
      * <p>
      * 该方法所返回的类名可用于 <code>Class.forName</code> 操作。
@@ -181,15 +181,15 @@ public class ClassUtil {
      * 取得JVM内部的数组类名。
      * <p>
      * 例如：
-     * 
+     *
      * <pre>
      *  ClassUtil.getJVMClassName(&quot;int&quot;, 1) = &quot;[I&quot;  // int[]
      *  ClassUtil.getJVMClassName(&quot;java.lang.Integer&quot;, 2) = &quot;[[Ljava.lang.Integer;&quot; // Integer[][]
-     * 
+     *
      *  ClassUtil.getJVMClassName(&quot;int[]&quot;, 1) = &quot;[[I&quot;  // int[][]
      *  ClassUtil.getJVMClassName(&quot;java.lang.Integer[]&quot;, 1) = &quot;[[Ljava.lang.Integer;&quot; // Integer[][]
      * </pre>
-     * 
+     *
      * </p>
      * <p>
      * 该方法所返回的类名可用于 <code>Class.forName</code> 操作。

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,7 +48,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
  * 将Spring所支持的<code>META-INF/spring.schemas</code>中定义的schemas移到本地服务器。
- * 
+ *
  * @author Michael Zhou
  */
 public class SpringPluggableSchemas implements Schemas {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -61,7 +61,7 @@ import com.alibaba.citrus.turbine.util.TurbineUtil;
  * <li>RequestContext及其子类</li>
  * <li>Context中的值，需要指定<code>@ContextValue("name")</code>注解。</li>
  * </ul>
- * 
+ *
  * @author Michael Zhou
  */
 public class TurbineRunDataResolverFactory implements DataResolverFactory {

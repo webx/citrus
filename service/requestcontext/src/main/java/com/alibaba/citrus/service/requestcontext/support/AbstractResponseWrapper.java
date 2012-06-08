@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +28,7 @@ import com.alibaba.citrus.service.requestcontext.RequestContext;
 /**
  * 被<code>com.alibaba.webx.request.contextRequestContext</code>支持的
  * <code>ServletResponseWrapper</code>。
- * 
+ *
  * @author Michael Zhou
  */
 public class AbstractResponseWrapper extends HttpServletResponseWrapper {
@@ -36,7 +36,7 @@ public class AbstractResponseWrapper extends HttpServletResponseWrapper {
 
     /**
      * 创建一个response wrapper。
-     * 
+     *
      * @param context request context
      * @param response response
      */
@@ -48,7 +48,7 @@ public class AbstractResponseWrapper extends HttpServletResponseWrapper {
 
     /**
      * 取得当前request所处的servlet context环境。
-     * 
+     *
      * @return <code>ServletContext</code>对象
      */
     public ServletContext getServletContext() {
@@ -57,7 +57,7 @@ public class AbstractResponseWrapper extends HttpServletResponseWrapper {
 
     /**
      * 取得支持它们的<code>RequestContext</code>。
-     * 
+     *
      * @return <code>RequestContext</code>实例
      */
     public RequestContext getRequestContext() {
@@ -66,7 +66,7 @@ public class AbstractResponseWrapper extends HttpServletResponseWrapper {
 
     /**
      * 取得字符串表示。
-     * 
+     *
      * @return 字符串表示
      */
     @Override

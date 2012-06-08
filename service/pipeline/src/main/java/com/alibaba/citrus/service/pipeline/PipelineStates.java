@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +20,7 @@ package com.alibaba.citrus.service.pipeline;
 /**
  * Pipeline的当前状态，是被<code>PipelineContext</code>和
  * <code>PipelineInvocationHandle</code>共享的接口。
- * 
+ *
  * @author Michael Zhou
  */
 public interface PipelineStates {

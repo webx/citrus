@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,7 @@ package com.alibaba.citrus.service.requestcontext.session;
 
 /**
  * 生成session ID的机制。
- * 
+ *
  * @author Michael Zhou
  */
 public interface SessionIDGenerator {
@@ -27,7 +27,7 @@ public interface SessionIDGenerator {
 
     /**
      * 生成session ID。
-     * 
+     *
      * @return 新的sessionID
      */
     String generateSessionID();

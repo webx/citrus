@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,7 @@ import com.alibaba.citrus.service.requestcontext.RequestContext;
 
 /**
  * 和<code>RequestContext</code>相关的辅助类。
- * 
+ *
  * @author Michael Zhou
  */
 public class RequestContextUtil {
@@ -35,7 +35,7 @@ public class RequestContextUtil {
 
     /**
      * 取得和当前request相关联的<code>RequestContext</code>对象。
-     * 
+     *
      * @param request 要检查的request
      * @return <code>RequestContext</code>对象，如果没找到，则返回<code>null</code>
      */
@@ -45,7 +45,7 @@ public class RequestContextUtil {
 
     /**
      * 将<code>RequestContext</code>对象和request相关联。
-     * 
+     *
      * @param requestContext <code>RequestContext</code>对象
      */
     public static void setRequestContext(RequestContext requestContext) {
@@ -63,7 +63,7 @@ public class RequestContextUtil {
 
     /**
      * 在指定的request context及其级联的request context中找到一个指定类型的request context。
-     * 
+     *
      * @param request 从该<code>HttpServletRequest</code>中取得request context
      * @param requestContextInterface 要查找的类
      * @return <code>RequestContext</code>对象，如果没找到，则返回<code>null</code>
@@ -75,7 +75,7 @@ public class RequestContextUtil {
 
     /**
      * 在指定的request context及其级联的request context中找到一个指定类型的request context。
-     * 
+     *
      * @param requestContext 要搜索的request context
      * @param requestContextInterface 要查找的类
      * @return <code>RequestContext</code>对象，如果没找到，则返回<code>null</code>

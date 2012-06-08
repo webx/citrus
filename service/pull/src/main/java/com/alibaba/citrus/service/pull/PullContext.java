@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,7 +25,7 @@ import java.util.Set;
  * <p>
  * 该实现包含延迟加载的逻辑，只当有需要时，才会加载指定的tool。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public interface PullContext {

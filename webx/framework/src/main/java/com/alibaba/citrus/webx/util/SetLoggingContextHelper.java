@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -97,7 +97,7 @@ import org.slf4j.MDC;
  * <td>上一个链接</td>
  * </tr>
  * </table>
- * 
+ *
  * @author Michael Zhou
  */
 public class SetLoggingContextHelper {
@@ -222,7 +222,7 @@ public class SetLoggingContextHelper {
 
     /**
      * 取得当前的request URL，包括query string。
-     * 
+     *
      * @param withQueryString 是否包含query string
      * @return 当前请求的request URL
      */

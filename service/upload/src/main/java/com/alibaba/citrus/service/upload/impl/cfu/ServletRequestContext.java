@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletRequest;
  * <code>request.getCharacterEncoding()</code>返回<code>null</code>
  * 时，将使用操作系统默认编码，这样将返回不确定的结果。经过修改后，就和servlet规范相一致。</li>
  * </ul>
- * 
+ *
  * @author Michael Zhou
  */
 public class ServletRequestContext extends org.apache.commons.fileupload.servlet.ServletRequestContext {

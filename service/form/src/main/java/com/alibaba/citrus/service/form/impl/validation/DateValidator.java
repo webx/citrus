@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ import com.alibaba.citrus.service.form.support.AbstractValidatorDefinitionParser
  * 检查输入值的日期格式是否符合指定的格式，是否在设定的区域内。
  * 如：指定日期格式DateFromat为"yyyy-MM-dd"，如果输入的日期值格式不符合，则不合法；
  * 若同时指定了最小值为"2000-12-31"，最大值为"2005-12-31"，而输入的日期不在此区间 内，则不合法；也可以只指定其中的某一个。
- * 
+ *
  * @author Michael Zhou
  */
 public class DateValidator extends AbstractOptionalValidator {

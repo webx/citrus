@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  * <p>
  * 通过它可以实现多重包装的HTTP request和response。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public interface RequestContextChainingService {
@@ -37,7 +37,7 @@ public interface RequestContextChainingService {
 
     /**
      * 取得<code>RequestContext</code>串。
-     * 
+     *
      * @param servletContext <code>ServletContext</code>对象
      * @param request <code>HttpServletRequest</code>对象
      * @param response <code>HttpServletResponse</code>对象
@@ -48,7 +48,7 @@ public interface RequestContextChainingService {
 
     /**
      * 由外到内地调用<code>requestContext.commit()</code>方法。
-     * 
+     *
      * @param requestContext 要初始化的request context
      * @throws RequestContextException 如果失败
      */

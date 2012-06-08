@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,7 @@ import com.alibaba.citrus.expr.support.ExpressionSupport;
 
 /**
  * 创建<code>JexlExpression</code>的工厂。
- * 
+ *
  * @author Michael Zhou
  */
 public class JexlExpressionFactory implements ExpressionFactory {
@@ -38,7 +38,7 @@ public class JexlExpressionFactory implements ExpressionFactory {
 
     /**
      * 是否支持context变量，就是用小数点分隔的变量名。
-     * 
+     *
      * @return 如果支持，则返回<code>true</code>
      */
     public boolean isSupportContextVariables() {
@@ -47,7 +47,7 @@ public class JexlExpressionFactory implements ExpressionFactory {
 
     /**
      * 设置支持context变量。
-     * 
+     *
      * @param supportContextVariables 是否支持context变量
      */
     public void setSupportContextVariables(boolean supportContextVariables) {
@@ -56,7 +56,7 @@ public class JexlExpressionFactory implements ExpressionFactory {
 
     /**
      * 创建表达式。
-     * 
+     *
      * @param expr 表达式字符串
      * @return 表达式
      */
@@ -73,7 +73,7 @@ public class JexlExpressionFactory implements ExpressionFactory {
             return new ExpressionSupport() {
                 /**
                  * 取得表达式字符串表示。
-                 * 
+                 *
                  * @return 表达式字符串表示
                  */
                 public String getExpressionText() {
@@ -82,7 +82,7 @@ public class JexlExpressionFactory implements ExpressionFactory {
 
                 /**
                  * 在指定的上下文中计算表达式。
-                 * 
+                 *
                  * @param context <code>ExpressionContext</code>上下文
                  * @return 表达式的计算结果
                  */
@@ -105,7 +105,7 @@ public class JexlExpressionFactory implements ExpressionFactory {
 
     /**
      * 判断是否为context变量。
-     * 
+     *
      * @return 如果是，则返回<code>true</code>
      */
     protected boolean isValidContextVariableName(String varName) {

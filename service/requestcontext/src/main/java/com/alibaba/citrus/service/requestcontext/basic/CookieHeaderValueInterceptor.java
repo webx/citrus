@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +20,7 @@ package com.alibaba.citrus.service.requestcontext.basic;
 public interface CookieHeaderValueInterceptor extends ResponseHeaderInterceptor {
     /**
      * 检查cookie header。
-     * 
+     *
      * @return 返回值表示修改header的值，返回<code>null</code>则表示拒绝该cookie。
      */
     String checkCookieHeaderValue(String name, String value, boolean setHeader);

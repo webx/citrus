@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -72,12 +72,12 @@ public abstract class AbstractValueParser implements ValueParser {
     }
 
     // =============================================================
-    //  查询参数的方法 
+    //  查询参数的方法
     // =============================================================
 
     /**
      * 取得值的数量。
-     * 
+     *
      * @return 值的数量
      */
     public int size() {
@@ -86,7 +86,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 判断是否无值。
-     * 
+     *
      * @return 如果无值，则返回<code>true</code>
      */
     public boolean isEmpty() {
@@ -95,7 +95,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 检查是否包含指定名称的参数。
-     * 
+     *
      * @param key 要查找的参数名
      * @return 如果存在，则返回<code>true</code>
      */
@@ -125,7 +125,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>false</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -136,7 +136,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值
@@ -148,7 +148,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>0</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -159,7 +159,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值
@@ -171,7 +171,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得指定参数的字节。这个字节是根据<code>getCharacterEncoding()</code>所返回的字符集进行编码的。
-     * 
+     *
      * @param key 参数名
      * @return 参数值的字节数组，如果参数不存在，则返回<code>null</code>
      * @throws UnsupportedEncodingException 如果指定了错误的编码字符集
@@ -183,7 +183,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>'\0'</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -194,7 +194,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值
@@ -206,7 +206,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>0</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -217,7 +217,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值
@@ -229,7 +229,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>0</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -240,7 +240,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值
@@ -252,7 +252,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>0</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -263,7 +263,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值
@@ -275,7 +275,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回<code>null</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值的数组
      */
@@ -286,7 +286,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值的数组
@@ -298,7 +298,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>0</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -309,7 +309,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值
@@ -321,7 +321,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回<code>null</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值的数组
      */
@@ -332,7 +332,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值的数组
@@ -344,7 +344,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>0</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -355,7 +355,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值
@@ -367,7 +367,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>null</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -378,7 +378,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值
@@ -390,7 +390,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回<code>null</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值的数组
      */
@@ -401,7 +401,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值的数组
@@ -414,7 +414,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回<code>null</code>。 此方法和<code>getObject</code>
      * 一样，但在模板中便易于使用。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -424,7 +424,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得日期。字符串将使用指定的<code>DateFormat</code>来解析。如果不存在，则返回<code>null</code>。
-     * 
+     *
      * @param key 参数名
      * @param format <code>DateFormat</code>对象
      * @return <code>java.util.Date</code>对象
@@ -436,7 +436,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得日期。字符串将使用指定的<code>DateFormat</code>来解析。如果不存在，则返回默认值。
-     * 
+     *
      * @param key 参数名
      * @param format <code>DateFormat</code>对象
      * @param defaultValue 默认值
@@ -449,7 +449,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得指定参数的值。如果参数不存在，则返回<code>null</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值
      */
@@ -460,7 +460,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得指定参数的值。如果参数不存在，则返回默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值
@@ -472,7 +472,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回<code>null</code>。
-     * 
+     *
      * @param key 参数名
      * @return 参数值的数组
      */
@@ -483,7 +483,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回指定默认值。
-     * 
+     *
      * @param key 参数名
      * @param defaultValue 默认值
      * @return 参数值的数组
@@ -563,7 +563,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -573,7 +573,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -583,7 +583,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -593,7 +593,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -603,7 +603,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -613,7 +613,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -623,7 +623,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -633,7 +633,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -643,7 +643,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -653,7 +653,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 设置参数值。和<code>add</code>方法不同，此方法将覆盖原有的值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -663,7 +663,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 设置参数值。和<code>add</code>方法不同，此方法将覆盖原有的值。
-     * 
+     *
      * @param key 参数名
      * @param values 参数值的数组
      */
@@ -673,7 +673,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 设置参数值。和<code>add</code>方法不同，此方法将覆盖原有的值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -683,7 +683,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 设置参数值。和<code>add</code>方法不同，此方法将覆盖原有的值。
-     * 
+     *
      * @param key 参数名
      * @param values 参数值
      */
@@ -697,7 +697,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 删除指定名称的参数。
-     * 
+     *
      * @return 原先和指定名称对应的参数值，可能是<code>String[]</code>或<code>null</code>
      */
     public Object remove(String key) {
@@ -721,7 +721,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 首先将参数名进行<code>trim()</code>，然后再进行大小写转换。转换是根据配置文件中的
      * <code>url.case.folding</code>来设定的。
-     * 
+     *
      * @param key 要转换的参数名
      * @return 被<code>trim()</code>和大小写转换后的参数名，如果是<code>null</code>，则转换成空字符串
      */
@@ -735,7 +735,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 取得指定参数的值的列表。
-     * 
+     *
      * @param key 参数名
      * @param create 如果参数不存在，是否创建之
      * @return 参数值的列表，如果参数不存在，且<code>create==false</code>，则返回<code>null</code>
@@ -770,7 +770,7 @@ public abstract class AbstractValueParser implements ValueParser {
      * <p>
      * 默认总是返回<code>ISO-8859-1</code>。
      * </p>
-     * 
+     *
      * @return 编码字符集
      */
     protected String getCharacterEncoding() {
@@ -779,7 +779,7 @@ public abstract class AbstractValueParser implements ValueParser {
 
     /**
      * 转换成字符串。
-     * 
+     *
      * @return 字符串表现
      */
     @Override

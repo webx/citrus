@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,17 +19,17 @@ package com.alibaba.citrus.generictype.introspect;
 
 /**
  * 代表一个简单的property。常见的形式是： </p> *
- * 
+ *
  * <pre>
  * public String getName();
- * 
+ *
  * public void setName(String name);
  * </pre>
  * <p>
  * 以上这对方法定义了一个可读、可写的simple property，名字叫<code>name</code>，类型为 <code>String</code>
  * 。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public interface SimplePropertyInfo extends PropertyInfo {

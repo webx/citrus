@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,20 +21,20 @@ import com.alibaba.citrus.service.requestcontext.session.SessionStore.StoreConte
 
 /**
  * 将对象转换成字符串值或反之。
- * 
+ *
  * @author Michael Zhou
  */
 public interface SessionValueEncoder {
     /**
      * 将对象编码成字符串。
-     * 
+     *
      * @throws SessionValueEncoderException 如果编码失败
      */
     String encode(Object value, StoreContext storeContext) throws SessionValueEncoderException;
 
     /**
      * 将字符串解码成对象。
-     * 
+     *
      * @throws SessionValueEncoderException 如果解码失败
      */
     Object decode(String encodedValue, StoreContext storeContext) throws SessionValueEncoderException;

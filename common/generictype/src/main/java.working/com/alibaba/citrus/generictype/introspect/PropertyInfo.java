@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,10 +25,10 @@ import com.alibaba.citrus.generictype.TypeInfo;
  * <p>
  * Property不是一个Java语言的元素，而是一种规范和约定。常见的形式是：
  * </p>
- * 
+ *
  * <pre>
  * public String getName();
- * 
+ *
  * public void setName(String name);
  * </pre>
  * <p>

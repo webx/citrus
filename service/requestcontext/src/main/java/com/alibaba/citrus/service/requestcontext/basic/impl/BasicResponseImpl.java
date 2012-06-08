@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,7 +48,7 @@ import com.alibaba.citrus.util.StringEscapeUtil;
  * <li>Header的安全性：过滤CRLF。</li>
  * <li>Cookie的安全性：限制cookie的大小。</li>
  * </ul>
- * 
+ *
  * @author Michael Zhou
  */
 public class BasicResponseImpl extends AbstractResponseWrapper {

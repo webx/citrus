@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,7 +34,7 @@ import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser
  * 和java语言中的break不同，java break只能中断并跳出循环体，而break valve则中断当前pipeline，无论是if
  * block还是循环体。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public class BreakValve extends AbstractValve {

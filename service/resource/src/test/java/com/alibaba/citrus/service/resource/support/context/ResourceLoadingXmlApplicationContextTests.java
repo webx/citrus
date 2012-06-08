@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,7 @@ import org.springframework.core.io.FileSystemResource;
 
 /**
  * 测试从resource loading service中装载子context的配置文件。
- * 
+ *
  * @author Michael Zhou
  */
 public class ResourceLoadingXmlApplicationContextTests {

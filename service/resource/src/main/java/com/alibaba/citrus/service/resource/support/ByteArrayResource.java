@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
  * 代表一个<code>byte[]</code>的资源。
- * 
+ *
  * @author Michael Zhou
  */
 public class ByteArrayResource implements Resource {
@@ -89,7 +89,7 @@ public class ByteArrayResource implements Resource {
 
     /**
      * 取得资源最近修改时间。
-     * 
+     *
      * @return 资源的最近修改时间，如果不支持，则返回<code>0</code>
      */
     public long lastModified() {

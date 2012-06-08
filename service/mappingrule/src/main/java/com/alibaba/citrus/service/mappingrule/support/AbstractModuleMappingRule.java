@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +26,7 @@ import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
  * <p>
  * 该<code>MappingRule</code>有可能调用<code>ModuleLoaderService</code>以确定模块是否存在。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public abstract class AbstractModuleMappingRule extends AbstractMappingRule {
@@ -53,7 +53,7 @@ public abstract class AbstractModuleMappingRule extends AbstractMappingRule {
 
     /**
      * 将指定名称规格化成符合class命名规范的名称：除去后缀，将首字符改为大写。
-     * 
+     *
      * @param className 要规格化的类名
      * @return 规格化后的类名，如果类名非法，则返回<code>null</code>
      */

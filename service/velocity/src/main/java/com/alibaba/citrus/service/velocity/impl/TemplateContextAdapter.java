@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +23,7 @@ import com.alibaba.citrus.service.template.TemplateContext;
 
 /**
  * 将<code>TemplateContext</code>适配到velocity context的适配器。
- * 
+ *
  * @author Michael Zhou
  */
 public class TemplateContextAdapter extends AbstractContext {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,7 +35,7 @@ import com.alibaba.citrus.util.i18n.LocaleUtil;
  * 如果因为Java安全的原因而不能取得<code>System.getProperty</code>，则相应的字段将被设置成
  * <code>null</code>， 并且这个消息将被输出到<code>System.err</code>中。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public class SystemUtil {
@@ -50,7 +50,7 @@ public class SystemUtil {
 
     /**
      * 取得Java Virtual Machine Specification的信息。
-     * 
+     *
      * @return <code>JvmSpecInfo</code>对象
      */
     public static final JvmSpecInfo getJvmSpecInfo() {
@@ -59,7 +59,7 @@ public class SystemUtil {
 
     /**
      * 取得Java Virtual Machine Implementation的信息。
-     * 
+     *
      * @return <code>JvmInfo</code>对象
      */
     public static final JvmInfo getJvmInfo() {
@@ -68,7 +68,7 @@ public class SystemUtil {
 
     /**
      * 取得Java Specification的信息。
-     * 
+     *
      * @return <code>JavaSpecInfo</code>对象
      */
     public static final JavaSpecInfo getJavaSpecInfo() {
@@ -77,7 +77,7 @@ public class SystemUtil {
 
     /**
      * 取得Java Implementation的信息。
-     * 
+     *
      * @return <code>JavaInfo</code>对象
      */
     public static final JavaInfo getJavaInfo() {
@@ -86,7 +86,7 @@ public class SystemUtil {
 
     /**
      * 取得当前运行的JRE的信息。
-     * 
+     *
      * @return <code>JreInfo</code>对象
      */
     public static final JavaRuntimeInfo getJavaRuntimeInfo() {
@@ -95,7 +95,7 @@ public class SystemUtil {
 
     /**
      * 取得OS的信息。
-     * 
+     *
      * @return <code>OsInfo</code>对象
      */
     public static final OsInfo getOsInfo() {
@@ -104,7 +104,7 @@ public class SystemUtil {
 
     /**
      * 取得User的信息。
-     * 
+     *
      * @return <code>UserInfo</code>对象
      */
     public static final UserInfo getUserInfo() {
@@ -113,7 +113,7 @@ public class SystemUtil {
 
     /**
      * 取得Host的信息。
-     * 
+     *
      * @return <code>HostInfo</code>对象
      */
     public static final HostInfo getHostInfo() {
@@ -139,7 +139,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"Java Virtual Machine Specification"</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.2
          */
@@ -152,7 +152,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"1.0"</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.2
          */
@@ -165,7 +165,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"Sun Microsystems Inc."</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.2
          */
@@ -175,7 +175,7 @@ public class SystemUtil {
 
         /**
          * 将Java Virutal Machine Specification的信息转换成字符串。
-         * 
+         *
          * @return JVM spec.的字符串表示
          */
         @Override
@@ -210,7 +210,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"Java HotSpot(TM) Client VM"</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.2
          */
@@ -223,7 +223,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"1.4.2-b28"</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.2
          */
@@ -236,7 +236,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"Sun Microsystems Inc."</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.2
          */
@@ -249,7 +249,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"mixed mode"</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.2
          */
@@ -259,7 +259,7 @@ public class SystemUtil {
 
         /**
          * 将Java Virutal Machine Implementation的信息转换成字符串。
-         * 
+         *
          * @return JVM impl.的字符串表示
          */
         @Override
@@ -294,7 +294,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"Java Platform API Specification"</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.2
          */
@@ -307,7 +307,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"1.4"</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.3
          */
@@ -320,7 +320,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"Sun Microsystems Inc."</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.2
          */
@@ -330,7 +330,7 @@ public class SystemUtil {
 
         /**
          * 将Java Specification的信息转换成字符串。
-         * 
+         *
          * @return JVM spec.的字符串表示
          */
         @Override
@@ -371,7 +371,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"1.4.2"</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.1
          */
@@ -388,7 +388,7 @@ public class SystemUtil {
          * <li>JDK 1.3.1：<code>1.31f</code></li>
          * </ul>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>0</code>。
          * @since Java 1.1
          */
@@ -405,7 +405,7 @@ public class SystemUtil {
          * <li>JDK 1.3.1：<code>131</code></li>
          * </ul>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>0</code>。
          * @since Java 1.1
          */
@@ -415,7 +415,7 @@ public class SystemUtil {
 
         /**
          * 取得当前Java impl.的版本的<code>float</code>值。
-         * 
+         *
          * @return Java版本的<code>float</code>值或<code>0</code>
          */
         private final float getJavaVersionAsFloat() {
@@ -434,7 +434,7 @@ public class SystemUtil {
 
         /**
          * 取得当前Java impl.的版本的<code>int</code>值。
-         * 
+         *
          * @return Java版本的<code>int</code>值或<code>0</code>
          */
         private final int getJavaVersionAsInt() {
@@ -460,7 +460,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"Sun Microsystems Inc."</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.1
          */
@@ -473,7 +473,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"http://java.sun.com/"</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.1
          */
@@ -487,7 +487,7 @@ public class SystemUtil {
          * 如果不能取得系统属性<code>java.version</code>（因为Java安全限制），则总是返回
          * <code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前Java版本为1.1，则返回<code>true</code>
          */
         public final boolean isJava11() {
@@ -500,7 +500,7 @@ public class SystemUtil {
          * 如果不能取得系统属性<code>java.version</code>（因为Java安全限制），则总是返回
          * <code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前Java版本为1.2，则返回<code>true</code>
          */
         public final boolean isJava12() {
@@ -513,7 +513,7 @@ public class SystemUtil {
          * 如果不能取得系统属性<code>java.version</code>（因为Java安全限制），则总是返回
          * <code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前Java版本为1.3，则返回<code>true</code>
          */
         public final boolean isJava13() {
@@ -526,7 +526,7 @@ public class SystemUtil {
          * 如果不能取得系统属性<code>java.version</code>（因为Java安全限制），则总是返回
          * <code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前Java版本为1.4，则返回<code>true</code>
          */
         public final boolean isJava14() {
@@ -539,7 +539,7 @@ public class SystemUtil {
          * 如果不能取得系统属性<code>java.version</code>（因为Java安全限制），则总是返回
          * <code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前Java版本为1.5，则返回<code>true</code>
          */
         public final boolean isJava15() {
@@ -548,7 +548,7 @@ public class SystemUtil {
 
         /**
          * 匹配当前Java的版本。
-         * 
+         *
          * @param versionPrefix Java版本前缀
          * @return 如果版本匹配，则返回<code>true</code>
          */
@@ -569,7 +569,7 @@ public class SystemUtil {
          * <li>测试JDK 1.2：<code>isJavaVersionAtLeast(1.2f)</code></li>
          * <li>测试JDK 1.2.1：<code>isJavaVersionAtLeast(1.31f)</code></li>
          * </ul>
-         * 
+         *
          * @param requiredVersion 需要的版本
          * @return 如果当前Java版本大于或等于指定的版本，则返回<code>true</code>
          */
@@ -586,7 +586,7 @@ public class SystemUtil {
          * <li>测试JDK 1.2：<code>isJavaVersionAtLeast(120)</code></li>
          * <li>测试JDK 1.2.1：<code>isJavaVersionAtLeast(131)</code></li>
          * </ul>
-         * 
+         *
          * @param requiredVersion 需要的版本
          * @return 如果当前Java版本大于或等于指定的版本，则返回<code>true</code>
          */
@@ -596,7 +596,7 @@ public class SystemUtil {
 
         /**
          * 将Java Implementation的信息转换成字符串。
-         * 
+         *
          * @return JVM impl.的字符串表示
          */
         @Override
@@ -636,7 +636,7 @@ public class SystemUtil {
          * 例如Sun JDK 1.4.2：
          * <code>"Java(TM) 2 Runtime Environment, Standard Edition"</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.3
          */
@@ -649,7 +649,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"1.4.2-b28"</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.3
          */
@@ -662,7 +662,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"/opt/jdk1.4.2/jre"</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.1
          */
@@ -675,7 +675,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"/opt/jdk1.4.2/jre/lib/ext:..."</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.3
          */
@@ -688,7 +688,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"/opt/jdk1.4.2/jre/lib/endorsed:..."</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.4
          */
@@ -701,7 +701,7 @@ public class SystemUtil {
          * <p>
          * 例如：<code>"/home/admin/myclasses:/home/admin/..."</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.1
          */
@@ -714,7 +714,7 @@ public class SystemUtil {
          * <p>
          * 例如：<code>"/home/admin/myclasses:/home/admin/..."</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.1
          */
@@ -727,7 +727,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"48.0"</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.1
          */
@@ -740,7 +740,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"/opt/jdk1.4.2/bin:..."</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.2
          */
@@ -753,7 +753,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"/opt/jdk1.4.2/bin:..."</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.2
          */
@@ -766,7 +766,7 @@ public class SystemUtil {
          * <p>
          * 例如Sun JDK 1.4.2：<code>"sun.net.www.protocol|..."</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.2
          */
@@ -776,7 +776,7 @@ public class SystemUtil {
 
         /**
          * 将当前运行的JRE信息转换成字符串。
-         * 
+         *
          * @return JRE信息的字符串表示
          */
         @Override
@@ -838,7 +838,7 @@ public class SystemUtil {
          * <p>
          * 例如：<code>"x86"</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.1
          */
@@ -851,7 +851,7 @@ public class SystemUtil {
          * <p>
          * 例如：<code>"Windows XP"</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.1
          */
@@ -864,7 +864,7 @@ public class SystemUtil {
          * <p>
          * 例如：<code>"5.1"</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.1
          */
@@ -877,7 +877,7 @@ public class SystemUtil {
          * <p>
          * 如果不能取得系统属性<code>os.name</code>（因为Java安全限制），则总是返回<code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前OS类型为AIX，则返回<code>true</code>
          */
         public final boolean isAix() {
@@ -889,7 +889,7 @@ public class SystemUtil {
          * <p>
          * 如果不能取得系统属性<code>os.name</code>（因为Java安全限制），则总是返回<code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前OS类型为HP-UX，则返回<code>true</code>
          */
         public final boolean isHpUx() {
@@ -901,7 +901,7 @@ public class SystemUtil {
          * <p>
          * 如果不能取得系统属性<code>os.name</code>（因为Java安全限制），则总是返回<code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前OS类型为IRIX，则返回<code>true</code>
          */
         public final boolean isIrix() {
@@ -913,7 +913,7 @@ public class SystemUtil {
          * <p>
          * 如果不能取得系统属性<code>os.name</code>（因为Java安全限制），则总是返回<code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前OS类型为Linux，则返回<code>true</code>
          */
         public final boolean isLinux() {
@@ -925,7 +925,7 @@ public class SystemUtil {
          * <p>
          * 如果不能取得系统属性<code>os.name</code>（因为Java安全限制），则总是返回<code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前OS类型为Mac，则返回<code>true</code>
          */
         public final boolean isMac() {
@@ -937,7 +937,7 @@ public class SystemUtil {
          * <p>
          * 如果不能取得系统属性<code>os.name</code>（因为Java安全限制），则总是返回<code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前OS类型为MacOS X，则返回<code>true</code>
          */
         public final boolean isMacOsX() {
@@ -949,7 +949,7 @@ public class SystemUtil {
          * <p>
          * 如果不能取得系统属性<code>os.name</code>（因为Java安全限制），则总是返回<code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前OS类型为OS2，则返回<code>true</code>
          */
         public final boolean isOs2() {
@@ -961,7 +961,7 @@ public class SystemUtil {
          * <p>
          * 如果不能取得系统属性<code>os.name</code>（因为Java安全限制），则总是返回<code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前OS类型为Solaris，则返回<code>true</code>
          */
         public final boolean isSolaris() {
@@ -973,7 +973,7 @@ public class SystemUtil {
          * <p>
          * 如果不能取得系统属性<code>os.name</code>（因为Java安全限制），则总是返回<code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前OS类型为Sun OS，则返回<code>true</code>
          */
         public final boolean isSunOS() {
@@ -985,7 +985,7 @@ public class SystemUtil {
          * <p>
          * 如果不能取得系统属性<code>os.name</code>（因为Java安全限制），则总是返回<code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前OS类型为Windows，则返回<code>true</code>
          */
         public final boolean isWindows() {
@@ -997,7 +997,7 @@ public class SystemUtil {
          * <p>
          * 如果不能取得系统属性<code>os.name</code>（因为Java安全限制），则总是返回<code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前OS类型为Windows 2000，则返回<code>true</code>
          */
         public final boolean isWindows2000() {
@@ -1009,7 +1009,7 @@ public class SystemUtil {
          * <p>
          * 如果不能取得系统属性<code>os.name</code>（因为Java安全限制），则总是返回<code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前OS类型为Windows 95，则返回<code>true</code>
          */
         public final boolean isWindows95() {
@@ -1021,7 +1021,7 @@ public class SystemUtil {
          * <p>
          * 如果不能取得系统属性<code>os.name</code>（因为Java安全限制），则总是返回<code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前OS类型为Windows 98，则返回<code>true</code>
          */
         public final boolean isWindows98() {
@@ -1033,7 +1033,7 @@ public class SystemUtil {
          * <p>
          * 如果不能取得系统属性<code>os.name</code>（因为Java安全限制），则总是返回<code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前OS类型为Windows ME，则返回<code>true</code>
          */
         public final boolean isWindowsME() {
@@ -1045,7 +1045,7 @@ public class SystemUtil {
          * <p>
          * 如果不能取得系统属性<code>os.name</code>（因为Java安全限制），则总是返回<code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前OS类型为Windows NT，则返回<code>true</code>
          */
         public final boolean isWindowsNT() {
@@ -1057,7 +1057,7 @@ public class SystemUtil {
          * <p>
          * 如果不能取得系统属性<code>os.name</code>（因为Java安全限制），则总是返回<code>false</code>
          * </p>
-         * 
+         *
          * @return 如果当前OS类型为Windows XP，则返回<code>true</code>
          */
         public final boolean isWindowsXP() {
@@ -1066,7 +1066,7 @@ public class SystemUtil {
 
         /**
          * 匹配OS名称。
-         * 
+         *
          * @param osNamePrefix OS名称前缀
          * @return 如果匹配，则返回<code>true</code>
          */
@@ -1080,7 +1080,7 @@ public class SystemUtil {
 
         /**
          * 匹配OS名称。
-         * 
+         *
          * @param osNamePrefix OS名称前缀
          * @param osVersionPrefix OS版本前缀
          * @return 如果匹配，则返回<code>true</code>
@@ -1098,7 +1098,7 @@ public class SystemUtil {
          * <p>
          * 这个编码字符集将被作为当前JVM转换字节/字符的默认方式。 例如：<code>GBK</code>。
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.2
          */
@@ -1111,7 +1111,7 @@ public class SystemUtil {
          * <p>
          * 例如：Unix为<code>"/"</code>，Windows为<code>"\\"</code>。
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.1
          */
@@ -1124,7 +1124,7 @@ public class SystemUtil {
          * <p>
          * 例如：Unix为<code>"\n"</code>，Windows为<code>"\r\n"</code>。
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.1
          */
@@ -1137,7 +1137,7 @@ public class SystemUtil {
          * <p>
          * 例如：Unix为<code>":"</code>，Windows为<code>";"</code>。
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.1
          */
@@ -1147,7 +1147,7 @@ public class SystemUtil {
 
         /**
          * 将OS的信息转换成字符串。
-         * 
+         *
          * @return OS的字符串表示
          */
         @Override
@@ -1189,7 +1189,7 @@ public class SystemUtil {
          * <p>
          * 例如：<code>"admin"</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.1
          */
@@ -1202,7 +1202,7 @@ public class SystemUtil {
          * <p>
          * 例如：<code>"/home/admin"</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.1
          */
@@ -1215,7 +1215,7 @@ public class SystemUtil {
          * <p>
          * 例如：<code>"/home/admin/working"</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.1
          */
@@ -1228,7 +1228,7 @@ public class SystemUtil {
          * <p>
          * 例如：<code>"/tmp"</code>
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.2
          */
@@ -1241,7 +1241,7 @@ public class SystemUtil {
          * <p>
          * 例如：<code>"zh"</code>、<code>"en"</code>等
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.2
          */
@@ -1255,7 +1255,7 @@ public class SystemUtil {
          * <p>
          * 例如：<code>"CN"</code>、<code>"US"</code>等
          * </p>
-         * 
+         *
          * @return 属性值，如果不能取得（因为Java安全限制）或值不存在，则返回<code>null</code>。
          * @since Java 1.2
          */
@@ -1265,7 +1265,7 @@ public class SystemUtil {
 
         /**
          * 将当前用户的信息转换成字符串。
-         * 
+         *
          * @return 用户信息的字符串表示
          */
         @Override
@@ -1316,7 +1316,7 @@ public class SystemUtil {
          * <p>
          * 例如：<code>"webserver1"</code>
          * </p>
-         * 
+         *
          * @return 主机名
          */
         public final String getName() {
@@ -1328,7 +1328,7 @@ public class SystemUtil {
          * <p>
          * 例如：<code>"192.168.0.1"</code>
          * </p>
-         * 
+         *
          * @return 主机地址
          */
         public final String getAddress() {
@@ -1337,7 +1337,7 @@ public class SystemUtil {
 
         /**
          * 将当前主机的信息转换成字符串。
-         * 
+         *
          * @return 主机信息的字符串表示
          */
         @Override
@@ -1360,7 +1360,7 @@ public class SystemUtil {
 
     /**
      * 将系统信息输出到指定<code>PrintWriter</code>中。
-     * 
+     *
      * @param out <code>PrintWriter</code>输出流
      */
     public static final void dumpSystemInfo(PrintWriter out) {
@@ -1387,7 +1387,7 @@ public class SystemUtil {
     /**
      * 取得系统属性，如果因为Java安全的限制而失败，则将错误打在<code>System.err</code>中，然后返回
      * <code>null</code>。
-     * 
+     *
      * @param name 属性名
      * @param quiet 安静模式，不将出错信息打在<code>System.err</code>中
      * @return 属性值或<code>null</code>
@@ -1407,7 +1407,7 @@ public class SystemUtil {
 
     /**
      * 输出到<code>StringBuilder</code>。
-     * 
+     *
      * @param buffer <code>StringBuilder</code>对象
      * @param caption 标题
      * @param value 值

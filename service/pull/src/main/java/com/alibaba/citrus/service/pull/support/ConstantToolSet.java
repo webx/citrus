@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,7 +33,7 @@ import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionP
  * 此类既可以以tool-set的方式使用，也可以作为普通的pull tool使用，例如
  * <code>$myconstant.MY_CONSTANT</code>。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public class ConstantToolSet extends ConstantTool implements ToolSetFactory {

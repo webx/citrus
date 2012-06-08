@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,7 @@ import static com.alibaba.citrus.util.BasicConstant.*;
 
 /**
  * 使用整数作为key的hash表。
- * 
+ *
  * @author Michael Zhou
  */
 public class IntHashMap<T> {
@@ -49,7 +49,7 @@ public class IntHashMap<T> {
 
     /**
      * 创建一个hash表，使用指定的初始容量和默认的负载系数<code>0.75</code>。
-     * 
+     *
      * @param initialCapacity hash表的初始容量
      * @throws IllegalArgumentException 如果初始容量小于或等于<code>0</code>
      */
@@ -59,7 +59,7 @@ public class IntHashMap<T> {
 
     /**
      * 创建一个hash表，使用默认的指定的初始容量和指定的负载系数。
-     * 
+     *
      * @param initialCapacity hash表的初始容量
      * @param loadFactor 负载系数
      * @throws IllegalArgumentException 如果初始容量小于或等于<code>0</code>，或负载系数不是正数
@@ -92,7 +92,7 @@ public class IntHashMap<T> {
 
     /**
      * 取得当前hash表中元素的个数。
-     * 
+     *
      * @return 元素个数
      */
     public int size() {
@@ -101,7 +101,7 @@ public class IntHashMap<T> {
 
     /**
      * 测试hash表是否为空。
-     * 
+     *
      * @return 如果为空，则返回<code>true</code>
      */
     public boolean isEmpty() {
@@ -110,7 +110,7 @@ public class IntHashMap<T> {
 
     /**
      * 查看hash表中是否存在指定的key。
-     * 
+     *
      * @param key 要搜索的key
      * @return 如果找到，则返回<code>true</code>
      */
@@ -130,7 +130,7 @@ public class IntHashMap<T> {
 
     /**
      * 查看hash表中是否存在指定的值。
-     * 
+     *
      * @param value 要搜索的值
      * @return 如果找到，则返回<code>true</code>
      */
@@ -152,7 +152,7 @@ public class IntHashMap<T> {
 
     /**
      * 从hash表中取得和指定key对应的值。
-     * 
+     *
      * @param key 要查找的key
      * @return key所对应的值，如果没找到，则返回<code>null</code>
      */
@@ -172,7 +172,7 @@ public class IntHashMap<T> {
 
     /**
      * 将key和指定对象相关联，并保存在hash表中。
-     * 
+     *
      * @param key 对象的key
      * @param value 对象（值）
      * @return 如果指定key已经存在，则返回key所对应的原先的值
@@ -209,7 +209,7 @@ public class IntHashMap<T> {
 
     /**
      * 从hash表中删除一个值。
-     * 
+     *
      * @param key 要删除的值所对应的key
      * @return 如果指定key已经存在，则返回key所对应的原先的值
      */
@@ -273,7 +273,7 @@ public class IntHashMap<T> {
 
     /**
      * 取得字符串表示。
-     * 
+     *
      * @return 字符串表示
      */
     @Override
@@ -331,7 +331,7 @@ public class IntHashMap<T> {
 
     /**
      * 取得hash表的容量。
-     * 
+     *
      * @return hash表的容量
      */
     protected int getCapacity() {
@@ -340,7 +340,7 @@ public class IntHashMap<T> {
 
     /**
      * 取得hash表的阈值。
-     * 
+     *
      * @return hash表的阈值
      */
     protected int getThreshold() {

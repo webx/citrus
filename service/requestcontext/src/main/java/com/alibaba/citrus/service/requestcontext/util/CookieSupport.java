@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,7 +38,7 @@ import com.alibaba.citrus.service.requestcontext.util.tomcat.ServerCookie;
 
 /**
  * 扩展原cookie，使之支持HttpOnly cookie。
- * 
+ *
  * @author Michael Zhou
  */
 public class CookieSupport extends Cookie {
@@ -182,7 +182,7 @@ public class CookieSupport extends Cookie {
 
     /**
      * 取得cookie header的值。
-     * 
+     *
      * @throws IllegalArgumentException 假如cookie value中包含非法值
      */
     public String getCookieHeaderValue() throws IllegalArgumentException {

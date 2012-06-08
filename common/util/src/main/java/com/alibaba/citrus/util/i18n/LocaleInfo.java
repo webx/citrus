@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,7 +38,7 @@ import com.alibaba.citrus.util.StringUtil;
  * 即使charset不合法，本类也不会报错。请使用<code>LocaleUtil.isCharsetSupported()</code>
  * 方法来判断charset的合法性。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public final class LocaleInfo implements Cloneable, Externalizable {
@@ -48,7 +48,7 @@ public final class LocaleInfo implements Cloneable, Externalizable {
 
     /**
      * 解析并创建locale信息。
-     * 
+     *
      * @param name locale信息的字符串，包含locale和charset信息，以“:”分隔
      * @return locale信息
      */
@@ -80,7 +80,7 @@ public final class LocaleInfo implements Cloneable, Externalizable {
 
     /**
      * 创建locale信息。
-     * 
+     *
      * @param locale 区域信息
      */
     public LocaleInfo(Locale locale) {
@@ -89,7 +89,7 @@ public final class LocaleInfo implements Cloneable, Externalizable {
 
     /**
      * 创建locale信息。
-     * 
+     *
      * @param locale 区域信息
      * @param charset 编码字符集
      */
@@ -99,7 +99,7 @@ public final class LocaleInfo implements Cloneable, Externalizable {
 
     /**
      * 创建locale信息。
-     * 
+     *
      * @param locale 区域信息
      * @param charset 编码字符集
      * @param fallbackLocaleInfo 上一级locale信息，如果未提供locale和charset，则从上一级中取得。
@@ -131,7 +131,7 @@ public final class LocaleInfo implements Cloneable, Externalizable {
 
     /**
      * 取得区域。
-     * 
+     *
      * @return 区域
      */
     public Locale getLocale() {
@@ -140,7 +140,7 @@ public final class LocaleInfo implements Cloneable, Externalizable {
 
     /**
      * 取得编码字符集。
-     * 
+     *
      * @return 编码字符集
      */
     public Charset getCharset() {
@@ -167,7 +167,7 @@ public final class LocaleInfo implements Cloneable, Externalizable {
 
     /**
      * 比较对象。
-     * 
+     *
      * @param o 被比较的对象
      * @return 如果对象等效，则返回<code>true</code>
      */

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -62,7 +62,7 @@ public class ParserRequestContextImpl extends AbstractRequestContextWrapper impl
 
     /**
      * 包装一个<code>RequestContext</code>对象。
-     * 
+     *
      * @param wrappedContext 被包装的<code>RequestContext</code>
      */
     public ParserRequestContextImpl(RequestContext wrappedContext) {
@@ -200,7 +200,7 @@ public class ParserRequestContextImpl extends AbstractRequestContextWrapper impl
 
     /**
      * 设置upload service。
-     * 
+     *
      * @param upload <code>UploadService</code>对象
      */
     public void setUploadService(UploadService upload) {
@@ -230,7 +230,7 @@ public class ParserRequestContextImpl extends AbstractRequestContextWrapper impl
 
     /**
      * 取得所有query参数。第一次执行此方法时，将会解析request，从中取得所有的参数。
-     * 
+     *
      * @return <code>ParameterParser</code>实例
      */
     public ParameterParser getParameters() {
@@ -243,7 +243,7 @@ public class ParserRequestContextImpl extends AbstractRequestContextWrapper impl
 
     /**
      * 取得所有cookie。第一次执行此方法时，将会解析request，从中取得所有cookies。
-     * 
+     *
      * @return <code>CookieParser</code>实例
      */
     public CookieParser getCookies() {
@@ -256,7 +256,7 @@ public class ParserRequestContextImpl extends AbstractRequestContextWrapper impl
 
     /**
      * 将指定的字符串根据<code>getCaseFolding()</code>的设置，转换成指定大小写形式。
-     * 
+     *
      * @param str 要转换的字符串
      * @return 转换后的字符串
      */

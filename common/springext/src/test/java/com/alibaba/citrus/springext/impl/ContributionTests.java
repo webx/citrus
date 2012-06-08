@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -149,21 +149,21 @@ public class ContributionTests {
         String ns_cp1 = "<xsd:schema.+xmlns:cp1=\"http://www\\.alibaba\\.com/schema/my/cp1\"";
         String ns_cp2 = "<xsd:schema.+xmlns:cp2ns=\"http://www\\.alibaba\\.com/schema/my/cp2\"";
 
-        String any_cp1 = "<xsd:choice>" // 
-                + " <xsd:element ref=\"cp1:test1\"/>" //  
-                + " <xsd:element ref=\"cp1:test2\"/>" // 
-                + " <xsd:element ref=\"cp1:object1\"/>" // 
+        String any_cp1 = "<xsd:choice>" //
+                + " <xsd:element ref=\"cp1:test1\"/>" //
+                + " <xsd:element ref=\"cp1:test2\"/>" //
+                + " <xsd:element ref=\"cp1:object1\"/>" //
                 + " </xsd:choice>";
 
-        String any_cp1_optional = "<xsd:choice minOccurs=\"0\" maxOccurs=\"unbounded\">" // 
-                + " <xsd:element ref=\"cp1:test1\"/>" //  
-                + " <xsd:element ref=\"cp1:test2\"/>" // 
-                + " <xsd:element ref=\"cp1:object1\"/>" // 
+        String any_cp1_optional = "<xsd:choice minOccurs=\"0\" maxOccurs=\"unbounded\">" //
+                + " <xsd:element ref=\"cp1:test1\"/>" //
+                + " <xsd:element ref=\"cp1:test2\"/>" //
+                + " <xsd:element ref=\"cp1:object1\"/>" //
                 + " </xsd:choice>";
 
-        String any_cp2_optional = "<xsd:choice minOccurs=\"0\" maxOccurs=\"unbounded\">" // 
-                + " <xsd:element ref=\"cp2ns:test3\"/>" //  
-                + " <xsd:element ref=\"cp2ns:test4\"/>" // 
+        String any_cp2_optional = "<xsd:choice minOccurs=\"0\" maxOccurs=\"unbounded\">" //
+                + " <xsd:element ref=\"cp2ns:test3\"/>" //
+                + " <xsd:element ref=\"cp2ns:test4\"/>" //
                 + " </xsd:choice>";
 
         switch (caseNo) {

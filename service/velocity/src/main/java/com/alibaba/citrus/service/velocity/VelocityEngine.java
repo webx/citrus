@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,7 +32,7 @@ import com.alibaba.citrus.service.template.TemplateException;
  * Velocity模板引擎既可以插入到<code>TemplateService</code>中，也可以单独使用。它提供了一组velocity原生的方法
  * <code>mergeTemplate()</code>以及作为<code>TemplateService</code>插件的方法。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public interface VelocityEngine extends TemplateEngine {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ import java.util.Map;
  * <li>如果两个<code>Map.Entry</code>相同(<code>e1.equals(e2) == true</code>), 则它们的
  * <code>hashCode()</code>也相等</li>
  * </ul>
- * 
+ *
  * @author Michael Zhou
  */
 public class DefaultMapEntry<K, V> implements Map.Entry<K, V> {
@@ -40,7 +40,7 @@ public class DefaultMapEntry<K, V> implements Map.Entry<K, V> {
 
     /**
      * 创建一个<code>Map.Entry</code>.
-     * 
+     *
      * @param key <code>Map.Entry</code>的key
      * @param value <code>Map.Entry</code>的value
      */
@@ -51,7 +51,7 @@ public class DefaultMapEntry<K, V> implements Map.Entry<K, V> {
 
     /**
      * 取得key.
-     * 
+     *
      * @return <code>Map.Entry</code>的key
      */
     public K getKey() {
@@ -60,7 +60,7 @@ public class DefaultMapEntry<K, V> implements Map.Entry<K, V> {
 
     /**
      * 取得value.
-     * 
+     *
      * @return <code>Map.Entry</code>的value
      */
     public V getValue() {
@@ -69,7 +69,7 @@ public class DefaultMapEntry<K, V> implements Map.Entry<K, V> {
 
     /**
      * 设置value的值.
-     * 
+     *
      * @param value 新的value值
      * @return 老的value值
      */
@@ -83,7 +83,7 @@ public class DefaultMapEntry<K, V> implements Map.Entry<K, V> {
 
     /**
      * 判断两个对象是否相同.
-     * 
+     *
      * @param o 要比较的对象
      * @return 如果相同, 则返回<code>true</code>
      */
@@ -109,7 +109,7 @@ public class DefaultMapEntry<K, V> implements Map.Entry<K, V> {
     /**
      * 取得<code>Map.Entry</code>的hash值. 如果两个<code>Map.Entry</code>相同,
      * 则它们的hash值也相同.
-     * 
+     *
      * @return hash值
      */
     @Override
@@ -119,7 +119,7 @@ public class DefaultMapEntry<K, V> implements Map.Entry<K, V> {
 
     /**
      * 将<code>Map.Entry</code>转换成字符串.
-     * 
+     *
      * @return 字符串形式的<code>Map.Entry</code>
      */
     @Override

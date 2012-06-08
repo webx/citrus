@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,7 @@ package com.alibaba.citrus.service.moduleloader;
 
 /**
  * 代表执行action event时产生的异常。
- * 
+ *
  * @author Michael Zhou
  */
 public class ActionEventException extends RuntimeException {
@@ -34,7 +34,7 @@ public class ActionEventException extends RuntimeException {
 
     /**
      * 创建一个异常。
-     * 
+     *
      * @param message 异常信息
      */
     public ActionEventException(String message) {
@@ -43,7 +43,7 @@ public class ActionEventException extends RuntimeException {
 
     /**
      * 创建一个异常。
-     * 
+     *
      * @param message 异常信息
      * @param cause 异常原因
      */
@@ -53,7 +53,7 @@ public class ActionEventException extends RuntimeException {
 
     /**
      * 创建一个异常。
-     * 
+     *
      * @param cause 异常原因
      */
     public ActionEventException(Throwable cause) {

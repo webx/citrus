@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 用来创建安全日志对象的工厂。
- * 
+ *
  * @author Michael Zhou
  */
 public class SecurityLogger extends ConfigurableLogger {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,7 @@ package com.alibaba.citrus.turbine;
 
 /**
  * 仅供框架内部使用。
- * 
+ *
  * @author Michael Zhou
  */
 public interface TurbineRunDataInternal extends TurbineRunData, Navigator, ControlParameters {
@@ -50,7 +50,7 @@ public interface TurbineRunDataInternal extends TurbineRunData, Navigator, Contr
 
     /**
      * 弹出当前的context，恢复上一个context。
-     * 
+     *
      * @throws IllegalStateException 如果pop和push不配对，则抛错
      */
     Context popContext() throws IllegalStateException;

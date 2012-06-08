@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,7 +33,7 @@ import com.alibaba.citrus.service.requestcontext.RequestContext;
  * <li><code>response.setLocale()</code></li>
  * <li><code>response.setCharacterEncoding()</code>。</li>
  * </ul>
- * 
+ *
  * @author Michael Zhou
  */
 public interface SetLocaleRequestContext extends RequestContext {
@@ -55,7 +55,7 @@ public interface SetLocaleRequestContext extends RequestContext {
 
     /**
      * 取得content type。
-     * 
+     *
      * @return content type，包括charset的定义
      */
     String getResponseContentType();
@@ -67,7 +67,7 @@ public interface SetLocaleRequestContext extends RequestContext {
      * 如果<code>appendCharset</code>为<code>false</code>，则content
      * type中将不包含charset标记。
      * </p>
-     * 
+     *
      * @param contentType content type
      * @param appendCharset 输出字符集
      */
@@ -75,7 +75,7 @@ public interface SetLocaleRequestContext extends RequestContext {
 
     /**
      * 设置response输出字符集。注意，此方法必须在第一次<code>getWriter</code>之前执行。
-     * 
+     *
      * @param charset 输出字符集，如果charset为<code>null</code>
      *            ，则从contentType中删除charset标记
      */

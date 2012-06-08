@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -60,7 +60,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 /**
  * 代表一个configuration point的实现，并处理configuration point
  * namespace下的elements及attributes。
- * 
+ *
  * @author Michael Zhou
  */
 public class ConfigurationPointImpl extends NamespaceHandlerSupport implements ConfigurationPoint, NamespaceHandler {

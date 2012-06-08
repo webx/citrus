@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,7 @@ package com.alibaba.citrus.service.configuration;
 
 /**
  * 如果beans实现了这个接口，就可以了解到当前是否以“生产模式”运行。
- * 
+ *
  * @author Michael Zhou
  */
 public interface ProductionModeAware {

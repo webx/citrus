@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * 用<code>MatchResult</code>来替换字符串中的变量。通常变量以<code>'$'</code>开始，例如：
  * <code>$1</code>，<code>$2</code>等，但<code>MatchResultSubstitution</code>类支持对多个
  * <code>MatchResult</code>变量进行替换，分别对应不同的前缀。
- * 
+ *
  * @author Michael Zhou
  */
 public class MatchResultSubstitution extends Substitution {

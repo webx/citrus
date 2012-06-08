@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,13 +23,13 @@ import com.alibaba.citrus.service.requestcontext.session.SessionStore.StoreConte
 
 /**
  * 将attributes map转换成字符串值或反之。
- * 
+ *
  * @author Michael Zhou
  */
 public interface SessionEncoder {
     /**
      * 将对象编码成字符串。
-     * 
+     *
      * @throws SessionEncoderException 如果编码失败
      */
     String encode(Map<String, Object> attrs, StoreContext storeContext) throws SessionEncoderException;
@@ -39,7 +39,7 @@ public interface SessionEncoder {
      * <p>
      * 如果有多个encoders存在，当前encoder解码失败抛出异常以后，系统会去尝试用其它encoders解码
      * </p>
-     * 
+     *
      * @throws SessionEncoderException 如果解码失败
      */
     Map<String, Object> decode(String encodedValue, StoreContext storeContext) throws SessionEncoderException;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,7 @@ import com.alibaba.citrus.service.requestcontext.RequestContext;
 
 /**
  * 被<code>RequestContext</code>支持的<code>HttpServletRequestWrapper</code>。
- * 
+ *
  * @author Michael Zhou
  */
 public abstract class AbstractRequestWrapper extends HttpServletRequestWrapper {
@@ -35,7 +35,7 @@ public abstract class AbstractRequestWrapper extends HttpServletRequestWrapper {
 
     /**
      * 创建一个request wrapper。
-     * 
+     *
      * @param context request context
      * @param request request
      */
@@ -47,7 +47,7 @@ public abstract class AbstractRequestWrapper extends HttpServletRequestWrapper {
 
     /**
      * 取得当前request所处的servlet context环境。
-     * 
+     *
      * @return <code>ServletContext</code>对象
      */
     protected ServletContext getServletContext() {
@@ -56,7 +56,7 @@ public abstract class AbstractRequestWrapper extends HttpServletRequestWrapper {
 
     /**
      * 取得支持它们的<code>RequestContext</code>。
-     * 
+     *
      * @return <code>RequestContext</code>实例
      */
     protected RequestContext getRequestContext() {
@@ -65,7 +65,7 @@ public abstract class AbstractRequestWrapper extends HttpServletRequestWrapper {
 
     /**
      * 取得字符串表示。
-     * 
+     *
      * @return 字符串表示
      */
     @Override

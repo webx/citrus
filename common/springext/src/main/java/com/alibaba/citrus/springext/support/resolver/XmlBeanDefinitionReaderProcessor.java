@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,7 +40,7 @@ import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
 
 /**
  * 用来处理<code>XmlBeanDefinitionReader</code>，添加configuration point的功能。
- * 
+ *
  * @author Michael Zhou
  */
 public class XmlBeanDefinitionReaderProcessor {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -88,7 +88,7 @@ public class XsltFilterTests extends AbstractResourceLoadingTests {
 
     /**
      * 规格化字符串, 把"\r\n"和"\r"换成"\n", 便于字符串比较.
-     * 
+     *
      * @param str 字符串.
      * @return 规格化后的字符串.
      */

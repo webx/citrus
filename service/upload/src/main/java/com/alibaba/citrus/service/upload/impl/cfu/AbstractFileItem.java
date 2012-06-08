@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,22 +15,6 @@
  * limitations under the License.
  */
 
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.alibaba.citrus.service.upload.impl.cfu;
 
 import java.io.BufferedInputStream;
@@ -65,13 +49,13 @@ import com.alibaba.citrus.util.StringUtil;
  * <code>content-type</code>头部指定的<code>charset</code>值来决定其字符集编码。例如，下面的
  * <code>multipart/form-data</code>请求片段指定了myparam field值的字符集编码为
  * <code>UTF-8</code>：
- * 
+ *
  * <pre>
  * ----HttpUnit-part0-aSgQ2M
  * Content-Disposition: form-data; name=&quot;myparam&quot;
  * Content-Type: text/plain; charset=UTF-8
  * </pre>
- * 
+ *
  * 然而，除了单元测试所用的<code>httpunit/servletunit</code>以外，几乎没有浏览器会在这里指定
  * <code>content-type</code>以及 <code>charset</code>。因此原类的
  * <code>getString()</code>总是得不到解码正确的字符串。</li>
@@ -99,7 +83,7 @@ import com.alibaba.citrus.util.StringUtil;
  * <li>改进write()方法，当文件目录不存在时，创建之。</li>
  * <li>改进toString()方法，使之返回文件名，这种形式是为了方便页面引用<code>FileItem</code>对象。</li>
  * </ul>
- * 
+ *
  * @author Michael Zhou
  */
 public abstract class AbstractFileItem implements FileItem, FileItemHeadersSupport {
@@ -187,7 +171,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
 
     /**
      * Constructs a new <code>DiskFileItem</code> instance.
-     * 
+     *
      * @param fieldName The name of the form field.
      * @param contentType The content type passed by the browser or
      *            <code>null</code> if not specified.
@@ -236,7 +220,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
     /**
      * Returns an {@link java.io.InputStream InputStream} that can be used to
      * retrieve the contents of the file.
-     * 
+     *
      * @return An {@link java.io.InputStream InputStream} that can be used to
      *         retrieve the contents of the file.
      * @throws IOException if an error occurs.
@@ -255,7 +239,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
     /**
      * Returns the content type passed by the agent or <code>null</code> if not
      * defined.
-     * 
+     *
      * @return The content type passed by the agent or <code>null</code> if not
      *         defined.
      */
@@ -279,7 +263,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
 
     /**
      * Returns the original filename in the client's filesystem.
-     * 
+     *
      * @return The original filename in the client's filesystem.
      */
     public String getName() {
@@ -291,7 +275,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
     /**
      * Provides a hint as to whether or not the file contents will be read from
      * memory.
-     * 
+     *
      * @return <code>true</code> if the file contents will be read from memory;
      *         <code>false</code> otherwise.
      */
@@ -304,7 +288,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
 
     /**
      * Returns the size of the file.
-     * 
+     *
      * @return The size of the file, in bytes.
      */
     public long getSize() {
@@ -323,7 +307,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
      * Returns the contents of the file as an array of bytes. If the contents of
      * the file were not yet cached in memory, they will be loaded from the disk
      * storage and cached.
-     * 
+     *
      * @return The contents of the file as an array of bytes.
      */
     public byte[] get() {
@@ -359,7 +343,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
      * Returns the contents of the file as a String, using the specified
      * encoding. This method uses {@link #get()} to retrieve the contents of the
      * file.
-     * 
+     *
      * @param charset The charset to use.
      * @return The contents of the file, as a string.
      * @throws UnsupportedEncodingException if the requested character encoding
@@ -378,7 +362,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
      * 对于文件，使用固定的<code>ISO-8859-1</code>字符集编码。如果想以其它编码来读取文件文本，可使用{@link
      * getString(charset)} 方法。
      * </p>
-     * 
+     *
      * @return 字段值或文件文本
      */
     public String getString() {
@@ -418,7 +402,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
      * is invoked for a particular item. This is because, in the event that the
      * method renames a temporary file, that file will no longer be available to
      * copy or rename again at a later time.
-     * 
+     *
      * @param file The <code>File</code> into which the uploaded item should be
      *            stored.
      * @throws Exception if an error occurs.
@@ -499,7 +483,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
     /**
      * Returns the name of the field in the multipart form corresponding to this
      * file item.
-     * 
+     *
      * @return The name of the form field.
      * @see #setFieldName(java.lang.String)
      */
@@ -509,7 +493,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
 
     /**
      * Sets the field name used to reference this file item.
-     * 
+     *
      * @param fieldName The name of the form field.
      * @see #getFieldName()
      */
@@ -520,7 +504,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
     /**
      * Determines whether or not a <code>FileItem</code> instance represents a
      * simple form field.
-     * 
+     *
      * @return <code>true</code> if the instance represents a simple form field;
      *         <code>false</code> if it represents an uploaded file.
      * @see #setFormField(boolean)
@@ -532,7 +516,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
     /**
      * Specifies whether or not a <code>FileItem</code> instance represents a
      * simple form field.
-     * 
+     *
      * @param state <code>true</code> if the instance represents a simple form
      *            field; <code>false</code> if it represents an uploaded file.
      * @see #isFormField()
@@ -544,7 +528,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
     /**
      * Returns an {@link java.io.OutputStream OutputStream} that can be used for
      * storing the contents of the file.
-     * 
+     *
      * @return An {@link java.io.OutputStream OutputStream} that can be used for
      *         storing the contensts of the file.
      * @throws IOException if an error occurs.
@@ -574,7 +558,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
      * {@link java.io.File#renameTo(java.io.File)} to move the file to new
      * location without copying the data, if the source and destination
      * locations reside within the same logical volume.
-     * 
+     *
      * @return The data file, or <code>null</code> if the data is stored in
      *         memory.
      */
@@ -588,7 +572,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
 
     /**
      * Returns a string representation of this object.
-     * 
+     *
      * @return a string representation of this object.
      */
     @Override
@@ -600,7 +584,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
 
     /**
      * Writes the state of this object during serialization.
-     * 
+     *
      * @param out The stream to which the state should be written.
      * @throws IOException if an error occurs.
      */
@@ -619,7 +603,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
 
     /**
      * Reads the state of this object during deserialization.
-     * 
+     *
      * @param in The stream from which the state should be read.
      * @throws IOException if an error occurs.
      * @throws ClassNotFoundException if class cannot be found.
@@ -644,7 +628,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
 
     /**
      * Returns the file item headers.
-     * 
+     *
      * @return The file items headers.
      */
     public FileItemHeaders getHeaders() {
@@ -653,7 +637,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
 
     /**
      * Sets the file item headers.
-     * 
+     *
      * @param pHeaders The file items headers.
      */
     public void setHeaders(FileItemHeaders pHeaders) {

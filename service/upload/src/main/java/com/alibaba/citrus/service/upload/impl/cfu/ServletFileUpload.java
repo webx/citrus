@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,7 +40,7 @@ import org.apache.commons.fileupload.RequestContext;
  * <li>使用新的<code>ServletRequestContext</code>,以便在处理字符集编码时，和servlet规范相容。详见
  * {@link ServletRequestContext}。</li>
  * </ul>
- * 
+ *
  * @author Michael Zhou
  */
 public class ServletFileUpload extends org.apache.commons.fileupload.servlet.ServletFileUpload {

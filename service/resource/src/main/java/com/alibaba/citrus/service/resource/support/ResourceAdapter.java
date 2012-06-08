@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ import org.springframework.util.StringUtils;
 
 /**
  * 将一个resource loading service装载的资源转换成spring resource的适配器。
- * 
+ *
  * @author Michael Zhou
  */
 public class ResourceAdapter extends AbstractResource implements ContextResource {

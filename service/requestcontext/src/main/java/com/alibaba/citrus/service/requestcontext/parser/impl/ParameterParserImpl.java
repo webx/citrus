@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -260,7 +260,7 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
 
     /**
      * 取得指定名称的<code>FileItem</code>对象，如果不存在，则返回<code>null</code>。
-     * 
+     *
      * @param key 参数名
      * @return <code>FileItem</code>对象
      */
@@ -272,7 +272,7 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
 
     /**
      * 取得指定名称的<code>FileItem</code>对象，如果不存在，则返回<code>null</code>。
-     * 
+     *
      * @param key 参数名
      * @return <code>FileItem</code>对象的数组
      */
@@ -284,7 +284,7 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
 
     /**
      * 添加<code>FileItem</code>。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -301,7 +301,7 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
 
     /**
      * 添加参数名/参数值。
-     * 
+     *
      * @param key 参数名
      * @param value 参数值
      */
@@ -325,7 +325,7 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
      * 要执行此方法，须将<code>UploadService.automatic</code>配置参数设置成<code>false</code>。
      * 此方法覆盖了service的默认设置，适合于在action或servlet中手工执行。
      * </p>
-     * 
+     *
      * @throws UploadException 如果解析时出错
      */
     public void parseUpload() throws UploadException {
@@ -339,7 +339,7 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
      * 要执行此方法，须将<code>UploadService.automatic</code>配置参数设置成<code>false</code>。
      * 此方法覆盖了service的默认设置，适合于在action或servlet中手工执行。
      * </p>
-     * 
+     *
      * @param sizeThreshold 文件放在内存中的阈值，小于此值的文件被保存在内存中。如果此值小于0，则使用预设的值
      * @param sizeMax HTTP请求的最大尺寸，超过此尺寸的请求将被抛弃。
      * @param repositoryPath 暂存上载文件的绝对路径
@@ -367,7 +367,7 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
      * <p>
      * 如果未指定，默认返回<code>ISO-8859-1</code>。
      * </p>
-     * 
+     *
      * @return 编码字符集
      */
     @Override
@@ -379,7 +379,7 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
 
     /**
      * 将parameters重新组装成query string。
-     * 
+     *
      * @return query string，如果没有参数，则返回<code>null</code>
      */
     public String toQueryString() {

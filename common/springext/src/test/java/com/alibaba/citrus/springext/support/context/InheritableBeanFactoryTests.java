@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,7 +46,7 @@ import com.meterware.servletunit.ServletRunner;
  * <li>this context中被置入了同名的dependencies。</li>
  * <li>利用autowire注入对象，应该被注入parent中的对象。</li>
  * </ul>
- * 
+ *
  * @author Michael Zhou
  */
 public class InheritableBeanFactoryTests {

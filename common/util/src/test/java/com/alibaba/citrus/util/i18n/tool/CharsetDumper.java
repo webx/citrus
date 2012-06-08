@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +28,7 @@ import java.nio.charset.CharsetEncoder;
 
 /**
  * 将charset倒到一个文件中，以便用第三方工具转换编码。
- * 
+ *
  * @author Michael Zhou
  */
 public class CharsetDumper extends CharsetTool {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,7 @@ import org.dom4j.Document;
 
 /**
  * 用来过滤doc的过滤器，可以改变输出的所输出的XML文件。
- * 
+ *
  * @author Michael Zhou
  */
 public interface DocumentFilter {

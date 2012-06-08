@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,7 @@ import java.lang.reflect.Type;
  * 一个<code>DataResolver</code>可以取得指定类型或指定annotation所定义的数据。
  * <code>DataResolver</code>被用来将适当的数据注入到方法的参数、对象的property中。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public interface DataResolverService {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,7 @@ import com.alibaba.citrus.util.StringUtil;
 
 /**
  * 补充<code>Type</code>中的功能。
- * 
+ *
  * @author Michael Zhou
  */
 public class TypeUtil {
@@ -64,7 +64,7 @@ public class TypeUtil {
 
     /**
      * 取得类型名称的descriptor。这里的类型名称为<code>Class.getName()</code>的返回值。 例如：
-     * 
+     *
      * <pre>
      *  TypeUtil.getDescriptorFromClassName(int.class.getName())         = &quot;I&quot;  // int
      *  TypeUtil.getDescriptorFromClassName(int[].class.getName())       = &quot;[I&quot;  // int[]

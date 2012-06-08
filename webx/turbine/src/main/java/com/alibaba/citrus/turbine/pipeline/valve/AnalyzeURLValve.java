@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,7 +46,7 @@ import com.alibaba.citrus.webx.WebxComponent;
  * <li>取得servletPath + pathInfo - componentPath作为target。</li>
  * <li>使用MappingRuleService，将target的后缀转换成统一的内部后缀。例如：将jhtml转换成jsp。</li>
  * </ol>
- * 
+ *
  * @author Michael Zhou
  */
 public class AnalyzeURLValve extends AbstractValve {

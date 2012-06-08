@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +26,7 @@ import com.alibaba.citrus.test.TestUtil;
 
 /**
  * 支持<code>TestUtil.getTestName()</code>，以便在测试中取得当前测试的名称。
- * 
+ *
  * @author Michael Zhou
  */
 public class TestNameAware extends BlockJUnit4ClassRunner {

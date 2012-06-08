@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,7 +36,7 @@ import com.alibaba.citrus.util.StringEscapeUtil;
 
 /**
  * 这个类将URIBroker中，和URL的结构没有直接关系的一些基础特性分离出来，使代码更清晰。
- * 
+ *
  * @author Michael Zhou
  */
 public abstract class URIBrokerFeatures implements Renderable {
@@ -293,10 +293,10 @@ public abstract class URIBrokerFeatures implements Renderable {
      * 此方法和<code>render()</code>具有相同的副作用，假如<code>autoReset == true</code>
      * ，那么所有状态自动复位。可应用于以下场景（velocity）：
      * </p>
-     * 
+     *
      * <pre>
      * #set ($sub_uri = $uri.addPath("xxx/yyy").fork())
-     * 
+     *
      * #foreach (...)
      *    &lt;a href="$sub_uri.addQueryData(...)"&gt;...&lt;/a&gt;
      * #end

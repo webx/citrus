@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,12 +26,12 @@ import com.alibaba.citrus.util.internal.Entities;
 
 /**
  * 字符串转义工具类，能将字符串转换成适应 Java、Java Script、HTML、XML、和SQL语句的形式。
- * 
+ *
  * @author Michael Zhou
  */
 public class StringEscapeUtil {
     // ==========================================================================
-    // Java和JavaScript。 
+    // Java和JavaScript。
     // ==========================================================================
 
     /**
@@ -46,7 +46,7 @@ public class StringEscapeUtil {
      * 例如：字符串：<code>He didn't say, "Stop!"</code>被转换成
      * <code>He didn't say, \"Stop!\"</code>
      * </p>
-     * 
+     *
      * @param str 要转义的字符串
      * @return 转义后的字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
@@ -66,7 +66,7 @@ public class StringEscapeUtil {
      * 例如：字符串：<code>He didn't say, "Stop!"</code>被转换成
      * <code>He didn't say, \"Stop!\"</code>
      * </p>
-     * 
+     *
      * @param str 要转义的字符串
      * @param strict 是否以严格的方式编码字符串
      * @return 转义后的字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
@@ -87,7 +87,7 @@ public class StringEscapeUtil {
      * 例如：字符串：<code>He didn't say, "Stop!"</code>被转换成
      * <code>He didn't say, \"Stop!\"</code>
      * </p>
-     * 
+     *
      * @param str 要转义的字符串
      * @param out 输出流
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
@@ -109,7 +109,7 @@ public class StringEscapeUtil {
      * 例如：字符串：<code>He didn't say, "Stop!"</code>被转换成
      * <code>He didn't say, \"Stop!\"</code>
      * </p>
-     * 
+     *
      * @param str 要转义的字符串
      * @param out 输出流
      * @param strict 是否以严格的方式编码字符串
@@ -132,7 +132,7 @@ public class StringEscapeUtil {
      * 例如：字符串：<code>He didn't say, "Stop!"</code>被转换成
      * <code>He didn\'t say, \"Stop!\"</code>
      * </p>
-     * 
+     *
      * @param str 要转义的字符串
      * @return 转义后的字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
@@ -152,7 +152,7 @@ public class StringEscapeUtil {
      * 例如：字符串：<code>He didn't say, "Stop!"</code>被转换成
      * <code>He didn\'t say, \"Stop!\"</code>
      * </p>
-     * 
+     *
      * @param str 要转义的字符串
      * @param strict 是否以严格的方式编码字符串
      * @return 转义后的字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
@@ -173,7 +173,7 @@ public class StringEscapeUtil {
      * 例如：字符串：<code>He didn't say, "Stop!"</code>被转换成
      * <code>He didn\'t say, \"Stop!\"</code>
      * </p>
-     * 
+     *
      * @param str 要转义的字符串
      * @param out 输出流
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
@@ -195,7 +195,7 @@ public class StringEscapeUtil {
      * 例如：字符串：<code>He didn't say, "Stop!"</code>被转换成
      * <code>He didn\'t say, \"Stop!\"</code>
      * </p>
-     * 
+     *
      * @param str 要转义的字符串
      * @param out 输出流
      * @param strict 是否以严格的方式编码字符串
@@ -208,7 +208,7 @@ public class StringEscapeUtil {
 
     /**
      * 按Java或JavaScript的规则对字符串进行转义。
-     * 
+     *
      * @param str 要转义的字符串
      * @param javascript 是否对单引号和slash进行转义
      * @param strict 是否以严格的方式编码字符串
@@ -234,7 +234,7 @@ public class StringEscapeUtil {
 
     /**
      * 按Java或JavaScript的规则对字符串进行转义。
-     * 
+     *
      * @param str 要转义的字符串
      * @param javascript 是否对单引号和slash进行转义
      * @param out 输出流
@@ -357,7 +357,7 @@ public class StringEscapeUtil {
      * <p>
      * 如果转义符不能被识别，它将被保留不变。
      * </p>
-     * 
+     *
      * @param str 不包含转义字符的字符串
      * @return 恢复成未转义的字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
@@ -373,7 +373,7 @@ public class StringEscapeUtil {
      * <p>
      * 如果转义符不能被识别，它将被保留不变。
      * </p>
-     * 
+     *
      * @param str 包含转义字符的字符串
      * @param out 输出流
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
@@ -391,7 +391,7 @@ public class StringEscapeUtil {
      * <p>
      * 如果转义符不能被识别，它将被保留不变。
      * </p>
-     * 
+     *
      * @param str 包含转义字符的字符串
      * @return 恢复成未转义的字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
@@ -407,7 +407,7 @@ public class StringEscapeUtil {
      * <p>
      * 如果转义符不能被识别，它将被保留不变。
      * </p>
-     * 
+     *
      * @param str 包含转义字符的字符串
      * @param out 输出流
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
@@ -425,7 +425,7 @@ public class StringEscapeUtil {
      * <p>
      * 如果转义符不能被识别，它将被保留不变。
      * </p>
-     * 
+     *
      * @param str 包含转义字符的字符串
      * @return 不包含转义字符的字符串
      */
@@ -455,7 +455,7 @@ public class StringEscapeUtil {
      * <p>
      * 如果转义符不能被识别，它将被保留不变。
      * </p>
-     * 
+     *
      * @param str 包含转义字符的字符串
      * @param out 输出流
      * @return 如果字符串没有变化，则返回<code>false</code>
@@ -592,7 +592,7 @@ public class StringEscapeUtil {
     }
 
     // ==========================================================================
-    // HTML和XML。 
+    // HTML和XML。
     // ==========================================================================
 
     /**
@@ -605,7 +605,7 @@ public class StringEscapeUtil {
      * <p>
      * 支持所有HTML 4.0 entities。
      * </p>
-     * 
+     *
      * @param str 要转义的字符串
      * @return 用实体编码转义的字符串，如果原字串为<code>null</code>，则返回<code>null</code>
      * @see <a
@@ -635,7 +635,7 @@ public class StringEscapeUtil {
      * <p>
      * 支持所有HTML 4.0 entities。
      * </p>
-     * 
+     *
      * @param str 要转义的字符串
      * @param out 输出流
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
@@ -668,7 +668,7 @@ public class StringEscapeUtil {
      * 只转换4种基本的XML实体：<code>gt</code>、<code>lt</code>、<code>quot</code>和
      * <code>amp</code>。 不支持DTD或外部实体。
      * </p>
-     * 
+     *
      * @param str 要转义的字符串
      * @return 用实体编码转义的字符串，如果原字串为<code>null</code>，则返回<code>null</code>
      */
@@ -687,7 +687,7 @@ public class StringEscapeUtil {
      * 只转换4种基本的XML实体：<code>gt</code>、<code>lt</code>、<code>quot</code>和
      * <code>amp</code>。 不支持DTD或外部实体。
      * </p>
-     * 
+     *
      * @param str 要转义的字符串
      * @param out 输出流
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
@@ -699,7 +699,7 @@ public class StringEscapeUtil {
 
     /**
      * 根据指定的规则，将字符串中的部分字符转换成实体编码。
-     * 
+     *
      * @param entities 实体集合
      * @param str 要转义的字符串
      * @return 用实体编码转义的字符串，如果原字串为<code>null</code>，则返回<code>null</code>
@@ -724,7 +724,7 @@ public class StringEscapeUtil {
 
     /**
      * 根据指定的规则，将字符串中的部分字符转换成实体编码。
-     * 
+     *
      * @param entities 实体集合
      * @param str 要转义的字符串
      * @param out 输出流
@@ -744,7 +744,7 @@ public class StringEscapeUtil {
      * <p>
      * 如果实体不能被识别，它将被保留不变。
      * </p>
-     * 
+     *
      * @param str 不包含转义字符的字符串
      * @return 恢复成未转义的字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
@@ -761,7 +761,7 @@ public class StringEscapeUtil {
      * <p>
      * 如果实体不能被识别，它将被保留不变。
      * </p>
-     * 
+     *
      * @param str 包含转义字符的字符串
      * @param out 输出流
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
@@ -779,7 +779,7 @@ public class StringEscapeUtil {
      * <p>
      * 如果实体不能被识别，它将被保留不变。
      * </p>
-     * 
+     *
      * @param str 不包含转义字符的字符串
      * @return 恢复成未转义的字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
@@ -795,7 +795,7 @@ public class StringEscapeUtil {
      * <p>
      * 如果实体不能被识别，它将被保留不变。
      * </p>
-     * 
+     *
      * @param str 不包含转义字符的字符串
      * @param out 输出流
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
@@ -807,7 +807,7 @@ public class StringEscapeUtil {
 
     /**
      * 按指定的规则对字符串进行反向转义。
-     * 
+     *
      * @param entities 实体集合
      * @param str 不包含转义字符的字符串
      * @return 恢复成未转义的字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
@@ -835,7 +835,7 @@ public class StringEscapeUtil {
      * <p>
      * 如果实体不能被识别，它将被保留不变。
      * </p>
-     * 
+     *
      * @param entities 实体集合
      * @param str 不包含转义字符的字符串
      * @param out 输出流
@@ -848,7 +848,7 @@ public class StringEscapeUtil {
 
     /**
      * 将字符串中的部分字符转换成实体编码。
-     * 
+     *
      * @param entities 实体集合
      * @param str 要转义的字符串
      * @param out 字符输出流，不能为<code>null</code>
@@ -896,7 +896,7 @@ public class StringEscapeUtil {
      * <p>
      * 未定义的实体将保留不变。
      * </p>
-     * 
+     *
      * @param entities 实体集合，如果为<code>null</code>，则只转换<code>&amp;#number</code>
      *            实体。
      * @param str 包含转义字符的字符串
@@ -997,24 +997,24 @@ public class StringEscapeUtil {
     }
 
     // ==========================================================================
-    // SQL语句。 
+    // SQL语句。
     // ==========================================================================
 
     /**
      * 按SQL语句的规则对字符串进行转义。
      * <p>
      * 例如：
-     * 
+     *
      * <pre>
      * statement.executeQuery(&quot;SELECT * FROM MOVIES WHERE TITLE='&quot; + StringEscapeUtil.escapeSql(&quot;McHale's Navy&quot;) + &quot;'&quot;);
      * </pre>
-     * 
+     *
      * </p>
      * <p>
      * 目前，此方法只将单引号转换成两个单引号：<code>"McHale's Navy"</code>转换成<code>"McHale''s
      * Navy"</code>。不处理字符串中包含的<code>%</code>和<code>_</code>字符。
      * </p>
-     * 
+     *
      * @param str 要转义的字符串
      * @return 转义后的字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      * @see <a href="http://www.jguru.com/faq/view.jsp?EID=8881">faq</a>
@@ -1027,17 +1027,17 @@ public class StringEscapeUtil {
      * 按SQL语句的规则对字符串进行转义。
      * <p>
      * 例如：
-     * 
+     *
      * <pre>
      * statement.executeQuery(&quot;SELECT * FROM MOVIES WHERE TITLE='&quot; + StringEscapeUtil.escapeSql(&quot;McHale's Navy&quot;) + &quot;'&quot;);
      * </pre>
-     * 
+     *
      * </p>
      * <p>
      * 目前，此方法只将单引号转换成两个单引号：<code>"McHale's Navy"</code>转换成<code>"McHale''s
      * Navy"</code>。不处理字符串中包含的<code>%</code>和<code>_</code>字符。
      * </p>
-     * 
+     *
      * @param str 要转义的字符串
      * @param out 输出流
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
@@ -1057,8 +1057,8 @@ public class StringEscapeUtil {
     }
 
     // ==========================================================================
-    // URL/URI encoding/decoding。 
-    // 根据RFC2396：http://www.ietf.org/rfc/rfc2396.txt 
+    // URL/URI encoding/decoding。
+    // 根据RFC2396：http://www.ietf.org/rfc/rfc2396.txt
     // ==========================================================================
 
     /** "Alpha" characters from RFC 2396. */
@@ -1133,7 +1133,7 @@ public class StringEscapeUtil {
      * <p>
      * 除了RFC2396中的<code>unreserved</code>字符之外的所有字符，都将被转换成URL编码<code>%xx</code>。
      * 根据RFC2396，<code>unreserved</code>的定义如下：
-     * 
+     *
      * <pre>
      * &lt;![CDATA
      *  unreserved  = alphanum | mark
@@ -1141,12 +1141,12 @@ public class StringEscapeUtil {
      *  mark        = &quot;-&quot; | &quot;_&quot; | &quot;.&quot; | &quot;!&quot; | &quot;&tilde;&quot; | &quot;*&quot; | &quot;'&quot; | &quot;(&quot; | &quot;)&quot;
      * ]]&gt;
      * </pre>
-     * 
+     *
      * </p>
      * <p>
      * 警告：该方法使用当前线程默认的字符编码来编码URL，因此该方法在不同的上下文中可能会产生不同的结果。
      * </p>
-     * 
+     *
      * @param str 要编码的字符串，可以是<code>null</code>
      * @return URL编码后的字符串
      */
@@ -1163,7 +1163,7 @@ public class StringEscapeUtil {
      * <p>
      * 除了RFC2396中的<code>unreserved</code>字符之外的所有字符，都将被转换成URL编码<code>%xx</code>。
      * 根据RFC2396，<code>unreserved</code>的定义如下：
-     * 
+     *
      * <pre>
      * &lt;![CDATA
      *  unreserved  = alphanum | mark
@@ -1171,12 +1171,12 @@ public class StringEscapeUtil {
      *  mark        = &quot;-&quot; | &quot;_&quot; | &quot;.&quot; | &quot;!&quot; | &quot;&tilde;&quot; | &quot;*&quot; | &quot;'&quot; | &quot;(&quot; | &quot;)&quot;
      * ]]&gt;
      * </pre>
-     * 
+     *
      * </p>
      * <p>
      * 该方法使用指定的字符编码来编码URL。
      * </p>
-     * 
+     *
      * @param str 要编码的字符串，可以是<code>null</code>
      * @param encoding 输出字符编码，如果为<code>null</code>，则使用系统默认编码
      * @return URL编码后的字符串
@@ -1192,7 +1192,7 @@ public class StringEscapeUtil {
      * 如果指定参数<code>strict</code>为<code>true</code>，则按严格的方式编码URL。 除了RFC2396中的
      * <code>unreserved</code>字符之外的所有字符，都将被转换成URL编码<code>%xx</code>。 根据RFC2396，
      * <code>unreserved</code>的定义如下：
-     * 
+     *
      * <pre>
      * &lt;![CDATA
      *  unreserved  = alphanum | mark
@@ -1200,25 +1200,25 @@ public class StringEscapeUtil {
      *  mark        = &quot;-&quot; | &quot;_&quot; | &quot;.&quot; | &quot;!&quot; | &quot;&tilde;&quot; | &quot;*&quot; | &quot;'&quot; | &quot;(&quot; | &quot;)&quot;
      * ]]&gt;
      * </pre>
-     * 
+     *
      * </p>
      * <p>
      * 如果指定参数<code>strict</code>为<code>false</code>，则使用宽松的方式编码URL。
      * 除了控制字符、空白字符以及RFC2396中的<code>reserved</code>字符之外的所有字符，都将被保留不变。
      * 根据RFC2396，只有控制字符、空白字符以及符合下列<code>reserved</code>定义的字符才被转换成
      * <code>%xx</code>格式：
-     * 
+     *
      * <pre>
      * &lt;![CDATA
      *  reserved      = &quot;;&quot; | &quot;/&quot; | &quot;?&quot; | &quot;:&quot; | &quot;@&quot; | &quot;&amp;&quot; | &quot;=&quot; | &quot;+&quot; | &quot;$&quot; | &quot;,&quot;
      * ]]&gt;
      * </pre>
-     * 
+     *
      * </p>
      * <p>
      * 该方法使用指定的字符编码来编码URL。
      * </p>
-     * 
+     *
      * @param str 要编码的字符串，可以是<code>null</code>
      * @param encoding 输出字符编码，如果为<code>null</code>，则使用当前线程默认的编码
      * @param strict 是否以严格的方式编码URL
@@ -1234,7 +1234,7 @@ public class StringEscapeUtil {
      * <p>
      * 除了RFC2396中的<code>unreserved</code>字符之外的所有字符，都将被转换成URL编码<code>%xx</code>。
      * 根据RFC2396，<code>unreserved</code>的定义如下：
-     * 
+     *
      * <pre>
      * &lt;![CDATA
      *  unreserved  = alphanum | mark
@@ -1242,12 +1242,12 @@ public class StringEscapeUtil {
      *  mark        = &quot;-&quot; | &quot;_&quot; | &quot;.&quot; | &quot;!&quot; | &quot;&tilde;&quot; | &quot;*&quot; | &quot;'&quot; | &quot;(&quot; | &quot;)&quot;
      * ]]&gt;
      * </pre>
-     * 
+     *
      * </p>
      * <p>
      * 该方法使用指定的字符编码来编码URL。
      * </p>
-     * 
+     *
      * @param str 要编码的字符串，可以是<code>null</code>
      * @param encoding 输出字符编码，如果为<code>null</code>，则使用系统默认编码
      * @param out 输出到指定字符流
@@ -1265,7 +1265,7 @@ public class StringEscapeUtil {
      * 如果指定参数<code>strict</code>为<code>true</code>，则按严格的方式编码URL。 除了RFC2396中的
      * <code>unreserved</code>字符之外的所有字符，都将被转换成URL编码<code>%xx</code>。 根据RFC2396，
      * <code>unreserved</code>的定义如下：
-     * 
+     *
      * <pre>
      * &lt;![CDATA
      *  unreserved  = alphanum | mark
@@ -1273,25 +1273,25 @@ public class StringEscapeUtil {
      *  mark        = &quot;-&quot; | &quot;_&quot; | &quot;.&quot; | &quot;!&quot; | &quot;&tilde;&quot; | &quot;*&quot; | &quot;'&quot; | &quot;(&quot; | &quot;)&quot;
      * ]]&gt;
      * </pre>
-     * 
+     *
      * </p>
      * <p>
      * 如果指定参数<code>strict</code>为<code>false</code>，则使用宽松的方式编码URL。
      * 除了控制字符、空白字符以及RFC2396中的<code>reserved</code>字符之外的所有字符，都将被保留不变。
      * 根据RFC2396，只有控制字符、空白字符以及符合下列<code>reserved</code>定义的字符才被转换成
      * <code>%xx</code>格式：
-     * 
+     *
      * <pre>
      * &lt;![CDATA
      *  reserved      = &quot;;&quot; | &quot;/&quot; | &quot;?&quot; | &quot;:&quot; | &quot;@&quot; | &quot;&amp;&quot; | &quot;=&quot; | &quot;+&quot; | &quot;$&quot; | &quot;,&quot;
      * ]]&gt;
      * </pre>
-     * 
+     *
      * </p>
      * <p>
      * 该方法使用指定的字符编码来编码URL。
      * </p>
-     * 
+     *
      * @param str 要编码的字符串，可以是<code>null</code>
      * @param encoding 输出字符编码，如果为<code>null</code>，则使用系统默认编码
      * @param out 输出到指定字符流
@@ -1306,7 +1306,7 @@ public class StringEscapeUtil {
 
     /**
      * 将指定字符串编码成<code>application/x-www-form-urlencoded</code>格式。
-     * 
+     *
      * @param str 要编码的字符串，可以是<code>null</code>
      * @param encoding 输出字符编码，如果为<code>null</code>，则使用系统默认编码
      * @param strict 是否以严格的方式编码URL
@@ -1336,7 +1336,7 @@ public class StringEscapeUtil {
 
     /**
      * 将指定字符串编码成<code>application/x-www-form-urlencoded</code>格式。
-     * 
+     *
      * @param str 要编码的字符串，可以是<code>null</code>
      * @param encoding 输出字符编码，如果为<code>null</code>，则使用系统默认编码
      * @param strict 是否以严格的方式编码URL
@@ -1402,7 +1402,7 @@ public class StringEscapeUtil {
 
     /**
      * 判断指定字符是否是“安全”的，这个字符将不被转换成URL编码。
-     * 
+     *
      * @param ch 要判断的字符
      * @param strict 是否以严格的方式编码
      * @return 如果是“安全”的，则返回<code>true</code>
@@ -1420,7 +1420,7 @@ public class StringEscapeUtil {
      * <p>
      * 警告：该方法使用系统字符编码来解码URL，因此该方法在不同的系统中可能会产生不同的结果。
      * </p>
-     * 
+     *
      * @param str 要解码的字符串，可以是<code>null</code>
      * @return URL解码后的字符串
      */
@@ -1434,7 +1434,7 @@ public class StringEscapeUtil {
 
     /**
      * 解码<code>application/x-www-form-urlencoded</code>格式的字符串。
-     * 
+     *
      * @param str 要解码的字符串，可以是<code>null</code>
      * @param encoding 输出字符编码，如果为<code>null</code>，则使用系统默认编码
      * @return URL解码后的字符串
@@ -1446,7 +1446,7 @@ public class StringEscapeUtil {
 
     /**
      * 解码<code>application/x-www-form-urlencoded</code>格式的字符串。
-     * 
+     *
      * @param str 要解码的字符串，可以是<code>null</code>
      * @param encoding 输出字符编码，如果为<code>null</code>，则使用系统默认编码
      * @param out 输出流
@@ -1460,7 +1460,7 @@ public class StringEscapeUtil {
 
     /**
      * 解码<code>application/x-www-form-urlencoded</code>格式的字符串。
-     * 
+     *
      * @param str 要解码的字符串，可以是<code>null</code>
      * @param encoding 输出字符编码，如果为<code>null</code>，则使用系统默认编码
      * @return URL解码后的字符串
@@ -1488,7 +1488,7 @@ public class StringEscapeUtil {
 
     /**
      * 解码<code>application/x-www-form-urlencoded</code>格式的字符串。
-     * 
+     *
      * @param str 要解码的字符串，可以是<code>null</code>
      * @param encoding 输出字符编码，如果为<code>null</code>，则使用系统默认编码
      * @param out 输出流

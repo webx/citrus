@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ import com.alibaba.citrus.service.form.support.AbstractMultiValuesValidator;
  * Message可使用<code>${allMessages}</code>取得子validator的message。
  * 子validator的message可使用<code>${valueIndex}</code>取得当前索引值。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public class AllOfValuesValidator extends AbstractMultiValuesValidator {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -162,7 +162,7 @@ public class SessionImpl implements HttpSession {
 
     /**
      * 取得创建该session的request context。
-     * 
+     *
      * @return request context
      */
     public SessionRequestContext getSessionRequestContext() {
@@ -171,7 +171,7 @@ public class SessionImpl implements HttpSession {
 
     /**
      * 取得当前的model。
-     * 
+     *
      * @return model对象
      */
     public SessionModel getSessionModel() {
@@ -180,7 +180,7 @@ public class SessionImpl implements HttpSession {
 
     /**
      * 取得session ID。
-     * 
+     *
      * @return session ID
      */
     public String getId() {
@@ -189,7 +189,7 @@ public class SessionImpl implements HttpSession {
 
     /**
      * 取得session的创建时间。
-     * 
+     *
      * @return 创建时间戮
      * @throws IllegalStateException 如果session已经invalidated
      */
@@ -200,7 +200,7 @@ public class SessionImpl implements HttpSession {
 
     /**
      * 取得最近访问时间。
-     * 
+     *
      * @return 最近访问时间戮
      * @throws IllegalStateException 如果session已经invalidated
      */
@@ -211,7 +211,7 @@ public class SessionImpl implements HttpSession {
 
     /**
      * 取得session的最大不活动期限，超过此时间，session就会失效。
-     * 
+     *
      * @return 不活动期限的秒数
      */
     public int getMaxInactiveInterval() {
@@ -221,7 +221,7 @@ public class SessionImpl implements HttpSession {
 
     /**
      * 设置session的最大不活动期限，超过此时间，session就会失效。
-     * 
+     *
      * @param maxInactiveInterval 不活动期限的秒数
      */
     public void setMaxInactiveInterval(int maxInactiveInterval) {
@@ -231,7 +231,7 @@ public class SessionImpl implements HttpSession {
 
     /**
      * 取得当前session所属的servlet context。
-     * 
+     *
      * @return <code>ServletContext</code>对象
      */
     public ServletContext getServletContext() {
@@ -240,7 +240,7 @@ public class SessionImpl implements HttpSession {
 
     /**
      * 取得指定名称的attribute值。
-     * 
+     *
      * @param name attribute名称
      * @return attribute的值
      * @throws IllegalStateException 如果session已经invalidated
@@ -252,7 +252,7 @@ public class SessionImpl implements HttpSession {
 
     /**
      * 取得所有attributes的名称。
-     * 
+     *
      * @return attribute名称列表
      * @throws IllegalStateException 如果session已经invalidated
      */
@@ -304,7 +304,7 @@ public class SessionImpl implements HttpSession {
 
     /**
      * 设置指定名称的attribute值。
-     * 
+     *
      * @param name attribute名称
      * @param value attribute的值
      * @throws IllegalStateException 如果session已经invalidated
@@ -318,7 +318,7 @@ public class SessionImpl implements HttpSession {
 
     /**
      * 删除一个attribute。
-     * 
+     *
      * @param name 要删除的attribute名称
      * @throws IllegalStateException 如果session已经invalidated
      */
@@ -330,7 +330,7 @@ public class SessionImpl implements HttpSession {
 
     /**
      * 使一个session作废。
-     * 
+     *
      * @throws IllegalStateException 如果session已经invalidated
      */
     public void invalidate() {
@@ -343,7 +343,7 @@ public class SessionImpl implements HttpSession {
 
     /**
      * 清除一个session。
-     * 
+     *
      * @throws IllegalStateException 如果session已经invalidated
      */
     public void clear() {
@@ -360,7 +360,7 @@ public class SessionImpl implements HttpSession {
 
     /**
      * 当前session是否为新的？
-     * 
+     *
      * @return 如果是新的，则返回<code>true</code>
      * @throws IllegalStateException 如果session已经invalidated
      */
@@ -371,7 +371,7 @@ public class SessionImpl implements HttpSession {
 
     /**
      * 确保model已经被取得，即session已被初始化。
-     * 
+     *
      * @param methodName 当前正要执行的方法
      */
     protected void assertModel(String methodName) {
@@ -383,7 +383,7 @@ public class SessionImpl implements HttpSession {
 
     /**
      * 确保session处于valid状态。
-     * 
+     *
      * @param methodName 当前正要执行的方法
      */
     protected void assertValid(String methodName) {

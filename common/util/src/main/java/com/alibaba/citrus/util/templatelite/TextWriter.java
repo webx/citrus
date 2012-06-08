@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 一个将template的内容输出到<code>Appendable</code>的visitor。
- * 
+ *
  * @author Michael Zhou
  */
 public abstract class TextWriter<A extends Appendable> implements VisitorInvocationErrorHandler {

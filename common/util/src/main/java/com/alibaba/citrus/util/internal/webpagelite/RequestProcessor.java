@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,7 +38,7 @@ import com.alibaba.citrus.util.templatelite.TextWriter;
 
 /**
  * 一个简单的、利用templatelite.<code>Template</code>模板生成WEB页面及相关资源的工具类。
- * 
+ *
  * @author Michael Zhou
  */
 public abstract class RequestProcessor<RC extends RequestContext> implements PageComponentRegistry {

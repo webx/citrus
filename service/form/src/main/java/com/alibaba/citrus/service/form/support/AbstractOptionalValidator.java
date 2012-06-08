@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,7 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 /**
  * 抽象的<code>Validator</code>实现，这个类的子类将忽略值为空的情形。
- * 
+ *
  * @author Michael Zhou
  */
 public abstract class AbstractOptionalValidator extends AbstractValidator {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
  * <li>支持默认的log，但可以通过<code>setLogName()</code>方法来改变。通常是通过配置文件来设置该值的。</li>
  * <li>提供<code>log(level, ...)</code>方法，可以输出指定level的日志。</li>
  * </ul>
- * 
+ *
  * @author Michael Zhou
  */
 public abstract class ConfigurableLogger {

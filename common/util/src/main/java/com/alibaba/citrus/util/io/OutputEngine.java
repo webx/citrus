@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,21 +25,21 @@ import java.io.OutputStream;
  * <p>
  * <code>OutputEngine</code>有什么用？举例说明。 <code>GZIPInputStream</code>是对压缩流进行解压缩：
  * </p>
- * 
+ *
  * <pre>
  * read 原始数据 &lt;- decompress &lt;- compressed data stream
  * </pre>
  * <p>
  * <code>GZIPOutputStream</code>是对输出流进行压缩：
  * </p>
- * 
+ *
  * <pre>
  * write 原始数据 -&gt; compress -&gt; compressed data stream
  * </pre>
  * <p>
  * 但是JDK中不存在这样一个流：
  * </p>
- * 
+ *
  * <pre>
  * read compressed data &lt;- compress &lt;- 原始数据流
  * </pre>
@@ -57,7 +57,7 @@ import java.io.OutputStream;
  * href="http://www.ibm.com/developerworks/cn/java/j-io2/index.shtml">彻底转变流，第 2
  * 部分：优化 Java 内部 I/O</a>
  * </ul>
- * 
+ *
  * @author Michael Zhou
  */
 public interface OutputEngine {
@@ -71,7 +71,7 @@ public interface OutputEngine {
     /**
      * 初始化输出引擎, 通常<code>OutputEngine</code>的实现会将一个
      * <code>FilterOutputStream</code>连接到指定的输出流中.
-     * 
+     *
      * @param out 输出到指定的输出流
      * @throws IOException 输入输出异常
      */
@@ -80,14 +80,14 @@ public interface OutputEngine {
     /**
      * 执行一次输出引擎. 此操作在<code>OutputEngine</code>的生命期中会被执行多次,
      * 每次都将少量数据写入到初始化时指定的输出流.
-     * 
+     *
      * @throws IOException 输入输出异常
      */
     void execute() throws IOException;
 
     /**
      * 扫尾工作. 当所有的输出都完成以后, 此方法被调用.
-     * 
+     *
      * @throws IOException 输入输出异常
      */
     void close() throws IOException;
@@ -98,7 +98,7 @@ public interface OutputEngine {
     interface OutputStreamFactory {
         /**
          * 创建输出流, 通常返回一个<code>FilterOutputStream</code>连接到指定的输出流中.
-         * 
+         *
          * @param out 输出到指定的输出流
          * @return 输出流
          * @throws IOException 输入输出异常

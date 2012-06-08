@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,7 +29,7 @@ import com.alibaba.citrus.expr.support.ExpressionSupport;
 
 /**
  * 代表一个jexl表达式。
- * 
+ *
  * @author Michael Zhou
  */
 public class JexlExpression extends ExpressionSupport {
@@ -38,7 +38,7 @@ public class JexlExpression extends ExpressionSupport {
 
     /**
      * 创建一个Jexl表达式。
-     * 
+     *
      * @param expr jexl表达式对象
      */
     public JexlExpression(Expression expr) {
@@ -47,7 +47,7 @@ public class JexlExpression extends ExpressionSupport {
 
     /**
      * 取得表达式字符串表示。
-     * 
+     *
      * @return 表达式字符串表示
      */
     public String getExpressionText() {
@@ -56,7 +56,7 @@ public class JexlExpression extends ExpressionSupport {
 
     /**
      * 在指定的上下文中计算表达式。
-     * 
+     *
      * @param context <code>ExpressionContext</code>上下文
      * @return 表达式的计算结果
      */

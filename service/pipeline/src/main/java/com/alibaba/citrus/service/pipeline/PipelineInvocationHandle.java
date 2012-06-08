@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,13 +19,13 @@ package com.alibaba.citrus.service.pipeline;
 
 /**
  * 代表一次pipeline的执行。
- * 
+ *
  * @author Michael Zhou
  */
 public interface PipelineInvocationHandle extends PipelineStates {
     /**
      * 执行pipeline。
-     * 
+     *
      * @throws IllegalStateException 被中断的pipeline无法再次invoke，否则抛此异常。
      */
     void invoke() throws IllegalStateException, PipelineException;

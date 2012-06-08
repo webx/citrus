@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,7 +39,7 @@ import com.alibaba.citrus.webx.util.WebxUtil;
 
 /**
  * 显示基本的系统信息。
- * 
+ *
  * @author Michael Zhou
  */
 public class SystemInfoComponent extends PageComponent implements ProductionModeAware {
@@ -76,33 +76,33 @@ public class SystemInfoComponent extends PageComponent implements ProductionMode
 
             // Java info
             keyValues.put("Java", ArrayUtil.arrayToMap(new Object[][] { //
-                    { "Vendor", SystemUtil.getJavaInfo().getVendor() }, // 
-                            { "Version", SystemUtil.getJavaInfo().getVersion() }, // 
+                    { "Vendor", SystemUtil.getJavaInfo().getVendor() }, //
+                            { "Version", SystemUtil.getJavaInfo().getVersion() }, //
                     }, String.class, String.class));
 
             keyValues.put("Java Runtime", ArrayUtil.arrayToMap(new Object[][] { //
-                    { "Name", SystemUtil.getJavaRuntimeInfo().getName() }, // 
-                            { "Version", SystemUtil.getJavaRuntimeInfo().getVersion() }, // 
-                            { "Home", SystemUtil.getJavaRuntimeInfo().getHomeDir() }, // 
+                    { "Name", SystemUtil.getJavaRuntimeInfo().getName() }, //
+                            { "Version", SystemUtil.getJavaRuntimeInfo().getVersion() }, //
+                            { "Home", SystemUtil.getJavaRuntimeInfo().getHomeDir() }, //
                     }, String.class, String.class));
 
             keyValues.put("Java Spec.", ArrayUtil.arrayToMap(new Object[][] { //
-                    { "Name", SystemUtil.getJavaSpecInfo().getName() }, // 
-                            { "Vendor", SystemUtil.getJavaSpecInfo().getVendor() }, // 
-                            { "Version", SystemUtil.getJavaSpecInfo().getVersion() }, // 
+                    { "Name", SystemUtil.getJavaSpecInfo().getName() }, //
+                            { "Vendor", SystemUtil.getJavaSpecInfo().getVendor() }, //
+                            { "Version", SystemUtil.getJavaSpecInfo().getVersion() }, //
                     }, String.class, String.class));
 
             keyValues.put("JVM", ArrayUtil.arrayToMap(new Object[][] { //
-                    { "Name", SystemUtil.getJvmInfo().getName() }, // 
-                            { "Vendor", SystemUtil.getJvmInfo().getVendor() }, // 
-                            { "Version", SystemUtil.getJvmInfo().getVersion() }, // 
-                            { "Info", SystemUtil.getJvmInfo().getInfo() }, // 
+                    { "Name", SystemUtil.getJvmInfo().getName() }, //
+                            { "Vendor", SystemUtil.getJvmInfo().getVendor() }, //
+                            { "Version", SystemUtil.getJvmInfo().getVersion() }, //
+                            { "Info", SystemUtil.getJvmInfo().getInfo() }, //
                     }, String.class, String.class));
 
             keyValues.put("JVM Spec.", ArrayUtil.arrayToMap(new Object[][] { //
-                    { "Name", SystemUtil.getJvmSpecInfo().getName() }, // 
-                            { "Vendor", SystemUtil.getJvmSpecInfo().getVendor() }, // 
-                            { "Version", SystemUtil.getJvmSpecInfo().getVersion() }, // 
+                    { "Name", SystemUtil.getJvmSpecInfo().getName() }, //
+                            { "Vendor", SystemUtil.getJvmSpecInfo().getVendor() }, //
+                            { "Version", SystemUtil.getJvmSpecInfo().getVersion() }, //
                     }, String.class, String.class));
 
             // OS info

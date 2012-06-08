@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,7 +29,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 实现了<code>RequestContext</code>接口，包含request、response和servletContext的信息。
- * 
+ *
  * @author Michael Zhou
  */
 public class SimpleRequestContext implements RequestContext {
@@ -39,7 +39,7 @@ public class SimpleRequestContext implements RequestContext {
 
     /**
      * 创建一个新的<code>RequestContext</code>对象。
-     * 
+     *
      * @param servletContext 当前请求所在的<code>ServletContext</code>
      * @param request <code>HttpServletRequest</code>对象
      * @param response <code>HttpServletResponse</code>对象
@@ -52,7 +52,7 @@ public class SimpleRequestContext implements RequestContext {
 
     /**
      * 取得被包装的context。
-     * 
+     *
      * @return 被包装的<code>RequestContext</code>对象
      */
     public RequestContext getWrappedRequestContext() {
@@ -61,7 +61,7 @@ public class SimpleRequestContext implements RequestContext {
 
     /**
      * 取得servletContext对象。
-     * 
+     *
      * @return <code>ServletContext</code>对象
      */
     public ServletContext getServletContext() {
@@ -70,7 +70,7 @@ public class SimpleRequestContext implements RequestContext {
 
     /**
      * 取得request对象。
-     * 
+     *
      * @return <code>HttpServletRequest</code>对象
      */
     public HttpServletRequest getRequest() {
@@ -79,7 +79,7 @@ public class SimpleRequestContext implements RequestContext {
 
     /**
      * 取得response对象。
-     * 
+     *
      * @return <code>HttpServletResponse</code>对象
      */
     public HttpServletResponse getResponse() {
@@ -100,7 +100,7 @@ public class SimpleRequestContext implements RequestContext {
 
     /**
      * 显示当前<code>RequestContext</code>的内容。
-     * 
+     *
      * @return 字符串表示
      */
     @Override

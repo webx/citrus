@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,7 +39,7 @@ import java.util.List;
  * <li>{@link WildcardTypeInfo}和{@link WildcardType}对应。</li>
  * <li>{@link ArrayTypeInfo}和{@link GenericArrayType}以及代表数组的{@link Class}对应。</li>
  * </ul>
- * 
+ *
  * @author Michael Zhou
  */
 public interface TypeInfo {
@@ -256,14 +256,14 @@ public interface TypeInfo {
 
     /**
      * 取得所有的接口，如果当前类是接口的话，包括当前类。
-     * 
+     *
      * @see #getSupertypes()
      */
     List<TypeInfo> getInterfaces();
 
     /**
      * 取得所有的基类，从当前类向上推，如果当前类不是接口的话，包括当前类。
-     * 
+     *
      * @see #getSupertypes()
      */
     List<TypeInfo> getSuperclasses();
@@ -363,15 +363,15 @@ public interface TypeInfo {
      * <p>
      * 如果<code>includeBaseType==false</code>，那么解析类型变量时，将不会取得其baseType。 例如：
      * </p>
-     * 
+     *
      * <pre>
      * class MyClass&lt;A&gt; {
      *     List&lt;A&gt; listA;
      * }
-     * 
+     *
      * interface Collection&lt;E&gt; extends Iterable&lt;E&gt; {
      * }
-     * 
+     *
      * interface Iterable&lt;T&gt; {
      * }
      * </pre>

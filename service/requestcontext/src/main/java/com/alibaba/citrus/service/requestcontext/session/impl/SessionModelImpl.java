@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 代表一个session本身的信息。该对象是可序列化的。
- * 
+ *
  * @author Michael Zhou
  */
 public class SessionModelImpl implements SessionModel {
@@ -84,7 +84,7 @@ public class SessionModelImpl implements SessionModel {
 
     /**
      * 取得session ID。
-     * 
+     *
      * @return session ID
      */
     public String getSessionID() {
@@ -93,7 +93,7 @@ public class SessionModelImpl implements SessionModel {
 
     /**
      * 取得session的创建时间。
-     * 
+     *
      * @return 创建时间戮
      */
     public long getCreationTime() {
@@ -102,7 +102,7 @@ public class SessionModelImpl implements SessionModel {
 
     /**
      * 取得最近访问时间。
-     * 
+     *
      * @return 最近访问时间戮
      */
     public long getLastAccessedTime() {
@@ -111,7 +111,7 @@ public class SessionModelImpl implements SessionModel {
 
     /**
      * 取得session的最大不活动期限，超过此时间，session就会失效。
-     * 
+     *
      * @return 不活动期限的秒数
      */
     public int getMaxInactiveInterval() {
@@ -120,7 +120,7 @@ public class SessionModelImpl implements SessionModel {
 
     /**
      * 设置session的最大不活动期限，超过此时间，session就会失效。
-     * 
+     *
      * @param maxInactiveInterval 不活动期限的秒数
      */
     public void setMaxInactiveInterval(int maxInactiveInterval) {
@@ -129,7 +129,7 @@ public class SessionModelImpl implements SessionModel {
 
     /**
      * 判断session有没有过期。
-     * 
+     *
      * @return 如果过期了，则返回<code>true</code>
      */
     public boolean isExpired() {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,7 @@ import com.alibaba.citrus.service.form.configuration.FormConfig;
  * <p>
  * 注意：form对象不是线程安全的，不能被多线程共享。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public interface Form {

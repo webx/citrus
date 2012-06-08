@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +23,7 @@ import static com.alibaba.citrus.util.StringUtil.*;
 /**
  * 代表一个替换。替换字符串中的变量。通常变量以<code>'$'</code>开始，例如： <code>$1</code>，<code>$2</code>
  * 等，但<code>Substitution</code>类可支持对多种不同前缀的变量进行替换。
- * 
+ *
  * @author Michael Zhou
  */
 public abstract class Substitution {

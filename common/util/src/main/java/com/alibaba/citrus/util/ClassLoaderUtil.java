@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -60,18 +60,18 @@ import com.alibaba.citrus.util.io.StreamUtil;
  * 因为ClassLoaderUtil调用<code>Thread.currentThead().getContextClassLoader()</code>
  * 取得了servlet引擎的<code>ClassLoader</code>， 从而找到了这个资源文件。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public class ClassLoaderUtil {
 
     // ==========================================================================
-    // 取得context class loader的方法。 
+    // 取得context class loader的方法。
     // ==========================================================================
 
     /**
      * 取得当前线程的<code>ClassLoader</code>。这个功能需要JDK1.2或更高版本的JDK的支持。
-     * 
+     *
      * @return 当前线程的<code>ClassLoader</code>
      */
     public static ClassLoader getContextClassLoader() {
@@ -79,13 +79,13 @@ public class ClassLoaderUtil {
     }
 
     // ==========================================================================
-    // 装入类的方法。 
+    // 装入类的方法。
     // ==========================================================================
 
     /**
      * 从当前线程的<code>ClassLoader</code>装入类。对于JDK1.2以下，则相当于
      * <code>Class.forName</code>。
-     * 
+     *
      * @param className 要装入的类名
      * @return 已装入的类
      * @throws ClassNotFoundException 如果类没找到
@@ -96,7 +96,7 @@ public class ClassLoaderUtil {
 
     /**
      * 从指定的调用者的<code>ClassLoader</code>装入类。
-     * 
+     *
      * @param className 要装入的类名
      * @param referrer 调用者类，如果为<code>null</code>，则该方法相当于
      *            <code>Class.forName</code>
@@ -114,7 +114,7 @@ public class ClassLoaderUtil {
     /**
      * 从指定的<code>ClassLoader</code>中装入类。如果未指定<code>ClassLoader</code>， 则从装载
      * <code>ClassLoaderUtil</code>的<code>ClassLoader</code>中装入。
-     * 
+     *
      * @param className 要装入的类名
      * @param classLoader 从指定的<code>ClassLoader</code>中装入类，如果为<code>null</code>
      *            ，表示从<code>ClassLoaderUtil</code>所在的class loader中装载
@@ -139,7 +139,7 @@ public class ClassLoaderUtil {
      * 搜索方法是在class loader中查找<code>META-INF/services/serviceId</code>
      * 文件，并将其内容作为service类名。
      * </p>
-     * 
+     *
      * @param serviceId 服务名
      * @return service class
      * @throws ClassNotFoundException 如果service class找不到，或装载service文件失败
@@ -154,7 +154,7 @@ public class ClassLoaderUtil {
      * 搜索方法是在class loader中查找<code>META-INF/services/serviceId</code>
      * 文件，并将其内容作为service类名。
      * </p>
-     * 
+     *
      * @param serviceId 服务名
      * @param referrer 调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
      *            的class loader中找。
@@ -174,7 +174,7 @@ public class ClassLoaderUtil {
      * 搜索方法是在class loader中查找<code>META-INF/services/serviceId</code>
      * 文件，并将其内容作为service类名。
      * </p>
-     * 
+     *
      * @param serviceId 服务名
      * @param classLoader 在指定classLoader中查找，如果为<code>null</code>，表示在
      *            <code>ClassLoaderUtil</code>的class loader中找。
@@ -212,7 +212,7 @@ public class ClassLoaderUtil {
      * 搜索service的方法是在class loader中查找<code>META-INF/services/serviceId</code>
      * 文件，并将其内容作为service类名。
      * </p>
-     * 
+     *
      * @param className 要装入的类名
      * @param serviceId 服务名
      * @return service class
@@ -228,7 +228,7 @@ public class ClassLoaderUtil {
      * 搜索service的方法是在class loader中查找<code>META-INF/services/serviceId</code>
      * 文件，并将其内容作为service类名。
      * </p>
-     * 
+     *
      * @param className 要装入的类名
      * @param serviceId 服务名
      * @param referrer 调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
@@ -250,7 +250,7 @@ public class ClassLoaderUtil {
      * 搜索service的方法是在class loader中查找<code>META-INF/services/serviceId</code>
      * 文件，并将其内容作为service类名。
      * </p>
-     * 
+     *
      * @param className 要装入的类名
      * @param serviceId 服务名
      * @param classLoader 在指定classLoader中查找，如果为<code>null</code>，表示在
@@ -274,7 +274,7 @@ public class ClassLoaderUtil {
 
     /**
      * 取得调用者的class loader。
-     * 
+     *
      * @param referrer 调用者类
      * @return 调用者的class loader，如果referrer为<code>null</code>，则返回
      *         <code>null</code>
@@ -296,12 +296,12 @@ public class ClassLoaderUtil {
     }
 
     // ==========================================================================
-    // 装入并实例化类的方法。 
+    // 装入并实例化类的方法。
     // ==========================================================================
 
     /**
      * 从当前线程的<code>ClassLoader</code>装入类并实例化之。
-     * 
+     *
      * @param className 要实例化的类名
      * @return 指定类名的实例
      * @throws ClassNotFoundException 如果类没找到
@@ -313,7 +313,7 @@ public class ClassLoaderUtil {
 
     /**
      * 从指定的调用者的<code>ClassLoader</code>装入类并实例化之。
-     * 
+     *
      * @param className 要实例化的类名
      * @param referrer 调用者类，如果为<code>null</code>，则从<code>ClassLoaderUtil</code>
      *            所在的class loader装载
@@ -329,7 +329,7 @@ public class ClassLoaderUtil {
     /**
      * 从指定的<code>ClassLoader</code>中装入类并实例化之。如果未指定<code>ClassLoader</code>， 则从装载
      * <code>ClassLoaderUtil</code>的<code>ClassLoader</code>中装入。
-     * 
+     *
      * @param className 要实例化的类名
      * @param classLoader 从指定的<code>ClassLoader</code>中装入类，如果为<code>null</code>
      *            ，表示从<code>ClassLoaderUtil</code>所在的class loader中装载
@@ -344,7 +344,7 @@ public class ClassLoaderUtil {
 
     /**
      * 创建指定类的实例。
-     * 
+     *
      * @param clazz 要创建实例的类
      * @return 指定类的实例
      * @throws ClassInstantiationException 如果实例化失败
@@ -371,7 +371,7 @@ public class ClassLoaderUtil {
      * 搜索service的方法是在class loader中查找<code>META-INF/services/serviceId</code>
      * 文件，并将其内容作为service类名。
      * </p>
-     * 
+     *
      * @param serviceId 服务名
      * @return 实例类
      * @throws ClassNotFoundException 如果service class找不到，或装载service文件失败
@@ -388,7 +388,7 @@ public class ClassLoaderUtil {
      * 搜索service的方法是在class loader中查找<code>META-INF/services/serviceId</code>
      * 文件，并将其内容作为service类名。
      * </p>
-     * 
+     *
      * @param serviceId 服务名
      * @param referrer 调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
      *            的class loader中找。
@@ -407,7 +407,7 @@ public class ClassLoaderUtil {
      * 搜索service的方法是在class loader中查找<code>META-INF/services/serviceId</code>
      * 文件，并将其内容作为service类名。
      * </p>
-     * 
+     *
      * @param serviceId 服务名
      * @param classLoader 在指定classLoader中查找，如果为<code>null</code>，表示在
      *            <code>ClassLoaderUtil</code>的class loader中找。
@@ -426,7 +426,7 @@ public class ClassLoaderUtil {
      * 搜索service的方法是在class loader中查找<code>META-INF/services/serviceId</code>
      * 文件，并将其内容作为service类名。
      * </p>
-     * 
+     *
      * @param className 要装入的类名
      * @param serviceId 服务名
      * @return 实例类
@@ -444,7 +444,7 @@ public class ClassLoaderUtil {
      * 搜索service的方法是在class loader中查找<code>META-INF/services/serviceId</code>
      * 文件，并将其内容作为service类名。
      * </p>
-     * 
+     *
      * @param className 要装入的类名
      * @param serviceId 服务名
      * @param referrer 调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
@@ -464,7 +464,7 @@ public class ClassLoaderUtil {
      * 搜索service的方法是在class loader中查找<code>META-INF/services/serviceId</code>
      * 文件，并将其内容作为service类名。
      * </p>
-     * 
+     *
      * @param className 要装入的类名
      * @param serviceId 服务名
      * @param classLoader 在指定classLoader中查找，如果为<code>null</code>，表示在
@@ -479,7 +479,7 @@ public class ClassLoaderUtil {
     }
 
     // ==========================================================================
-    // 装入和查找资源文件的方法。 
+    // 装入和查找资源文件的方法。
     // ==========================================================================
 
     /**
@@ -489,7 +489,7 @@ public class ClassLoaderUtil {
      * <li>在装入自己的<code>ClassLoader</code>中查找。</li>
      * <li>通过<code>ClassLoader.getSystemResource</code>方法查找。</li>
      * </ol>
-     * 
+     *
      * @param resourceName 要查找的资源名，就是以&quot;/&quot;分隔的标识符字符串
      * @return resource的URL数组，如果没找到，则返回空数组。数组中保证不包含重复的URL。
      */
@@ -517,7 +517,7 @@ public class ClassLoaderUtil {
 
     /**
      * 从指定调用者所属的<code>ClassLoader</code>取得所有resource URL。
-     * 
+     *
      * @param resourceName 要查找的资源名，就是以&quot;/&quot;分隔的标识符字符串
      * @param referrer 调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
      *            的class loader中找
@@ -537,7 +537,7 @@ public class ClassLoaderUtil {
      * 从指定的<code>ClassLoader</code>中取得所有resource URL。如果未指定
      * <code>ClassLoader</code>， 则从装载<code>ClassLoaderUtil</code>的
      * <code>ClassLoader</code>中取得所有resource URL。
-     * 
+     *
      * @param resourceName 要查找的资源名，就是以&quot;/&quot;分隔的标识符字符串
      * @param classLoader 从指定的<code>ClassLoader</code>中查找
      * @return resource的URL数组，如果没找到，则返回空数组。数组中保证不包含重复的URL。
@@ -553,7 +553,7 @@ public class ClassLoaderUtil {
 
     /**
      * 在指定class loader中查找指定名称的resource，把所有找到的resource的URL放入指定的集合中。
-     * 
+     *
      * @param urlSet 存放resource URL的集合
      * @param resourceName 资源名
      * @param classLoader 类装入器
@@ -590,7 +590,7 @@ public class ClassLoaderUtil {
 
     /**
      * 去除URL列表中的重复项。
-     * 
+     *
      * @param urls URL列表
      * @return 不重复的URL数组，如果urls为<code>null</code>，则返回空数组
      */
@@ -623,7 +623,7 @@ public class ClassLoaderUtil {
      * <li>在装入自己的<code>ClassLoader</code>中查找。</li>
      * <li>通过<code>ClassLoader.getSystemResource</code>方法查找。</li>
      * </ol>
-     * 
+     *
      * @param resourceName 要查找的资源名，就是以&quot;/&quot;分隔的标识符字符串
      * @return resource的URL
      */
@@ -664,7 +664,7 @@ public class ClassLoaderUtil {
 
     /**
      * 从指定调用者所属的<code>ClassLoader</code>取得resource URL。
-     * 
+     *
      * @param resourceName 要查找的资源名，就是以&quot;/&quot;分隔的标识符字符串
      * @param referrer 调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
      *            的class loader中找。
@@ -683,7 +683,7 @@ public class ClassLoaderUtil {
 
     /**
      * 从指定的<code>ClassLoader</code>取得resource URL。
-     * 
+     *
      * @param resourceName 要查找的资源名，就是以&quot;/&quot;分隔的标识符字符串
      * @param classLoader 在指定classLoader中查找，如果为<code>null</code>，表示在
      *            <code>ClassLoaderUtil</code>的class loader中找。
@@ -701,7 +701,7 @@ public class ClassLoaderUtil {
     /**
      * 从<code>ClassLoader</code>取得resource的输入流。 相当于
      * <code>getResource(resourceName).openStream()</code>。
-     * 
+     *
      * @param resourceName 要查找的资源名，就是以"/"分隔的标识符字符串
      * @return resource的输入流
      */
@@ -723,7 +723,7 @@ public class ClassLoaderUtil {
      * 从<code>ClassLoader</code>取得resource的输入流。 相当于
      * <code>getResource(resourceName,
      * referrer).openStream()</code>。
-     * 
+     *
      * @param resourceName 要查找的资源名，就是以"/"分隔的标识符字符串
      * @param referrer 调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
      *            的class loader中找。
@@ -747,7 +747,7 @@ public class ClassLoaderUtil {
      * 从<code>ClassLoader</code>取得resource的输入流。 相当于
      * <code>getResource(resourceName,
      * classLoader).openStream()</code>。
-     * 
+     *
      * @param resourceName 要查找的资源名，就是以"/"分隔的标识符字符串
      * @param classLoader 在指定classLoader中查找，如果为<code>null</code>，表示在
      *            <code>ClassLoaderUtil</code>的class loader中找。
@@ -768,14 +768,14 @@ public class ClassLoaderUtil {
     }
 
     // ==========================================================================
-    // 查找class的位置。 
+    // 查找class的位置。
     //
-    // 类似于UNIX的which方法。 
+    // 类似于UNIX的which方法。
     // ==========================================================================
 
     /**
      * 从当前线程的<code>ClassLoader</code>中查找指定名称的类。
-     * 
+     *
      * @param className 要查找的类名
      * @return URL数组，列举了系统中所有可找到的同名类，如果未找到，则返回一个空数组
      */
@@ -785,7 +785,7 @@ public class ClassLoaderUtil {
 
     /**
      * 从当前线程的<code>ClassLoader</code>中查找指定名称的类。
-     * 
+     *
      * @param className 要查找的类名
      * @param referrer 调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
      *            的class loader中找。
@@ -797,7 +797,7 @@ public class ClassLoaderUtil {
 
     /**
      * 从当前线程的<code>ClassLoader</code>中查找指定名称的类。
-     * 
+     *
      * @param className 要查找的类名
      * @param classLoader 在指定classLoader中查找，如果为<code>null</code>，表示在
      *            <code>ClassLoaderUtil</code>的class loader中找。
@@ -809,7 +809,7 @@ public class ClassLoaderUtil {
 
     /**
      * 从当前线程的<code>ClassLoader</code>中查找指定名称的类。
-     * 
+     *
      * @param className 要查找的类名
      * @return 类文件的URL，如果未找到，则返回<code>null</code>
      */
@@ -819,7 +819,7 @@ public class ClassLoaderUtil {
 
     /**
      * 从当前线程的<code>ClassLoader</code>中查找指定名称的类。
-     * 
+     *
      * @param className 要查找的类名
      * @param referrer 调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
      *            的class loader中找。
@@ -831,7 +831,7 @@ public class ClassLoaderUtil {
 
     /**
      * 从当前线程的<code>ClassLoader</code>中查找指定名称的类。
-     * 
+     *
      * @param className 要查找的类名
      * @param classLoader 在指定classLoader中查找，如果为<code>null</code>，表示在
      *            <code>ClassLoaderUtil</code>的class loader中找。

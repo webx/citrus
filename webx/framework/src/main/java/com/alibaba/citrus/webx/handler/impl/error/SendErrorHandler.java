@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +23,7 @@ import com.alibaba.citrus.webx.util.ErrorHandlerHelper;
 
 /**
  * 将错误通过sendError转发给servlet engine，由web.xml中定义的错误页面来处理之。
- * 
+ *
  * @author Michael Zhou
  */
 public class SendErrorHandler implements RequestHandler {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,7 +22,7 @@ import com.alibaba.citrus.service.form.support.AbstractValidatorDefinitionParser
 
 /**
  * 检查输入值的字符串长度。
- * 
+ *
  * @author Michael Zhou
  */
 public class StringLengthValidator extends AbstractOptionalValidator {

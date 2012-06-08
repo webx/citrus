@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,12 +31,12 @@ import java.util.Map;
  * <p>
  * 本工具类是对JDK <code>Arrays</code>的补充。
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public class ArrayUtil {
     // ==========================================================================
-    // 取得数组长度。 
+    // 取得数组长度。
     // ==========================================================================
 
     /**
@@ -44,7 +44,7 @@ public class ArrayUtil {
      * <p>
      * 此方法比<code>Array.getLength()</code>要快得多。
      * </p>
-     * 
+     *
      * @param array 要检查的数组
      * @return 如果为空，或者非数组，则返回<code>0</code>。
      */
@@ -79,20 +79,20 @@ public class ArrayUtil {
     }
 
     // ==========================================================================
-    // 判空函数。                                                                  
-    //  
-    // 判断一个数组是否为null或包含0个元素。                                       
+    // 判空函数。
+    //
+    // 判断一个数组是否为null或包含0个元素。
     // ==========================================================================
 
     /**
      * 检查数组是否为<code>null</code>或空数组<code>[]</code>。
-     * 
+     *
      * <pre>
      * ArrayUtil.isEmptyArray(null)              = true
      * ArrayUtil.isEmptyArray(new int[0])        = true
      * ArrayUtil.isEmptyArray(new int[10])       = false
      * </pre>
-     * 
+     *
      * @param array 要检查的数组
      * @return 如果为空, 则返回<code>true</code>
      */
@@ -101,21 +101,21 @@ public class ArrayUtil {
     }
 
     // ==========================================================================
-    // 默认值函数。 
-    //  
+    // 默认值函数。
+    //
     // 当数组为空时，取得默认数组值。
     // 注：判断数组为null时，可用更通用的ObjectUtil.defaultIfNull。
     // ==========================================================================
 
     /**
      * 如果数组是<code>null</code>或空数组<code>[]</code>，则返回指定数组默认值。
-     * 
+     *
      * <pre>
      * ArrayUtil.defaultIfEmpty(null, defaultArray)           = defaultArray
      * ArrayUtil.defaultIfEmpty(new String[0], defaultArray)  = 数组本身
      * ArrayUtil.defaultIfEmpty(new String[10], defaultArray) = 数组本身
      * </pre>
-     * 
+     *
      * @param array 要转换的数组
      * @param defaultArray 默认数组
      * @return 数组本身或默认数组
@@ -125,7 +125,7 @@ public class ArrayUtil {
     }
 
     // ==========================================================================
-    // 将数组转换成集合类。                                                        
+    // 将数组转换成集合类。
     // ==========================================================================
 
     /**
@@ -139,7 +139,7 @@ public class ArrayUtil {
      * <code>CollectionUtil.createLinkedList(asIterable(componentType, array))</code>
      * 来进一步将 <code>Iterable</code>转换成指定类型的 <code>List</code>对象。
      * </p>
-     * 
+     *
      * @param componentType <code>Iterable</code>元素的类型，必须和数组类型兼容。例如对于
      *            <code>int[]</code>数组， <code>componentType</code>必须为
      *            <code>Integer.class</code>。
@@ -278,14 +278,14 @@ public class ArrayUtil {
 
     /**
      * 将数组转换成<code>Map</code>。数组的元素必须是元素个数多于2的子数组。
-     * 
+     *
      * <pre>
      * Map colorMap = ArrayUtil.toMap(new String[][] {{
      *     {"RED", 0xFF0000},
      *     {"GREEN", 0x00FF00},
      *     {"BLUE", 0x0000FF}}, String.class, Integer.class);
      * </pre>
-     * 
+     *
      * @param keyValueArray 要转换的数组
      * @param keyType key的类型，数组元素<code>keyValueArray[n][0]</code>的类型必须与之兼容
      * @param valueType value的类型，数组元素<code>keyValueArray[n][1]</code>的类型必须与之兼容
@@ -297,14 +297,14 @@ public class ArrayUtil {
 
     /**
      * 将数组转换成<code>Map</code>。数组的元素必须是元素个数多于2的子数组。
-     * 
+     *
      * <pre>
      * Map colorMap = ArrayUtil.toMap(new String[][] {{
      *     {"RED", 0xFF0000},
      *     {"GREEN", 0x00FF00},
      *     {"BLUE", 0x0000FF}}, String.class, Integer.class, map);
      * </pre>
-     * 
+     *
      * @param keyValueArray 要转换的数组
      * @param keyType key的类型，数组元素<code>keyValueArray[n][0]</code>的类型必须与之兼容
      * @param valueType value的类型，数组元素<code>keyValueArray[n][1]</code>的类型必须与之兼容
@@ -339,12 +339,12 @@ public class ArrayUtil {
     }
 
     // ==========================================================================
-    // 比较数组的长度。                                                            
+    // 比较数组的长度。
     // ==========================================================================
 
     /**
      * 判断两个数组是否具有相同的长度。如果数组为<code>null</code>则被看作长度为<code>0</code>。
-     * 
+     *
      * @param array1 数组1
      * @param array2 数组2
      * @return 如果两个数组长度相同，则返回<code>true</code>
@@ -358,7 +358,7 @@ public class ArrayUtil {
 
     /**
      * 判断两个数组是否具有相同的长度。如果数组为<code>null</code>则被看作长度为<code>0</code>。
-     * 
+     *
      * @param array1 数组1
      * @param array2 数组2
      * @return 如果两个数组长度相同，则返回<code>true</code>
@@ -372,7 +372,7 @@ public class ArrayUtil {
 
     /**
      * 判断两个数组是否具有相同的长度。如果数组为<code>null</code>则被看作长度为<code>0</code>。
-     * 
+     *
      * @param array1 数组1
      * @param array2 数组2
      * @return 如果两个数组长度相同，则返回<code>true</code>
@@ -386,7 +386,7 @@ public class ArrayUtil {
 
     /**
      * 判断两个数组是否具有相同的长度。如果数组为<code>null</code>则被看作长度为<code>0</code>。
-     * 
+     *
      * @param array1 数组1
      * @param array2 数组2
      * @return 如果两个数组长度相同，则返回<code>true</code>
@@ -400,7 +400,7 @@ public class ArrayUtil {
 
     /**
      * 判断两个数组是否具有相同的长度。如果数组为<code>null</code>则被看作长度为<code>0</code>。
-     * 
+     *
      * @param array1 数组1
      * @param array2 数组2
      * @return 如果两个数组长度相同，则返回<code>true</code>
@@ -414,7 +414,7 @@ public class ArrayUtil {
 
     /**
      * 判断两个数组是否具有相同的长度。如果数组为<code>null</code>则被看作长度为<code>0</code>。
-     * 
+     *
      * @param array1 数组1
      * @param array2 数组2
      * @return 如果两个数组长度相同，则返回<code>true</code>
@@ -428,7 +428,7 @@ public class ArrayUtil {
 
     /**
      * 判断两个数组是否具有相同的长度。如果数组为<code>null</code>则被看作长度为<code>0</code>。
-     * 
+     *
      * @param array1 数组1
      * @param array2 数组2
      * @return 如果两个数组长度相同，则返回<code>true</code>
@@ -442,7 +442,7 @@ public class ArrayUtil {
 
     /**
      * 判断两个数组是否具有相同的长度。如果数组为<code>null</code>则被看作长度为<code>0</code>。
-     * 
+     *
      * @param array1 数组1
      * @param array2 数组2
      * @return 如果两个数组长度相同，则返回<code>true</code>
@@ -456,7 +456,7 @@ public class ArrayUtil {
 
     /**
      * 判断两个数组是否具有相同的长度。如果数组为<code>null</code>则被看作长度为<code>0</code>。
-     * 
+     *
      * @param array1 数组1
      * @param array2 数组2
      * @return 如果两个数组长度相同，则返回<code>true</code>
@@ -469,12 +469,12 @@ public class ArrayUtil {
     }
 
     // ==========================================================================
-    // 反转数组的元素顺序。                                                        
+    // 反转数组的元素顺序。
     // ==========================================================================
 
     /**
      * 反转数组的元素顺序。如果数组为<code>null</code>，则什么也不做。
-     * 
+     *
      * @param array 要反转的数组
      */
     public static void arrayReverse(Object[] array) {
@@ -493,7 +493,7 @@ public class ArrayUtil {
 
     /**
      * 反转数组的元素顺序。如果数组为<code>null</code>，则什么也不做。
-     * 
+     *
      * @param array 要反转的数组
      */
     public static void arrayReverse(long[] array) {
@@ -512,7 +512,7 @@ public class ArrayUtil {
 
     /**
      * 反转数组的元素顺序。如果数组为<code>null</code>，则什么也不做。
-     * 
+     *
      * @param array 要反转的数组
      */
     public static void arrayReverse(int[] array) {
@@ -531,7 +531,7 @@ public class ArrayUtil {
 
     /**
      * 反转数组的元素顺序。如果数组为<code>null</code>，则什么也不做。
-     * 
+     *
      * @param array 要反转的数组
      */
     public static void arrayReverse(short[] array) {
@@ -550,7 +550,7 @@ public class ArrayUtil {
 
     /**
      * 反转数组的元素顺序。如果数组为<code>null</code>，则什么也不做。
-     * 
+     *
      * @param array 要反转的数组
      */
     public static void arrayReverse(byte[] array) {
@@ -569,7 +569,7 @@ public class ArrayUtil {
 
     /**
      * 反转数组的元素顺序。如果数组为<code>null</code>，则什么也不做。
-     * 
+     *
      * @param array 要反转的数组
      */
     public static void arrayReverse(double[] array) {
@@ -588,7 +588,7 @@ public class ArrayUtil {
 
     /**
      * 反转数组的元素顺序。如果数组为<code>null</code>，则什么也不做。
-     * 
+     *
      * @param array 要反转的数组
      */
     public static void arrayReverse(float[] array) {
@@ -607,7 +607,7 @@ public class ArrayUtil {
 
     /**
      * 反转数组的元素顺序。如果数组为<code>null</code>，则什么也不做。
-     * 
+     *
      * @param array 要反转的数组
      */
     public static void arrayReverse(boolean[] array) {
@@ -626,7 +626,7 @@ public class ArrayUtil {
 
     /**
      * 反转数组的元素顺序。如果数组为<code>null</code>，则什么也不做。
-     * 
+     *
      * @param array 要反转的数组
      */
     public static void arrayReverse(char[] array) {
@@ -644,9 +644,9 @@ public class ArrayUtil {
     }
 
     // ==========================================================================
-    // 在数组中查找一个元素或一个元素序列。                                        
-    //  
-    // 类型：Object[]                                                              
+    // 在数组中查找一个元素或一个元素序列。
+    //
+    // 类型：Object[]
     // ==========================================================================
 
     /**
@@ -654,7 +654,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param objectToFind 要查找的元素
      * @return 该元素在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -668,7 +668,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 该元素序列在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -685,7 +685,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param objectToFind 要查找的元素
      * @param startIndex 起始索引
@@ -725,7 +725,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -789,7 +789,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param objectToFind 要查找的元素
      * @return 该元素在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -803,7 +803,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 该元素序列在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -820,7 +820,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param objectToFind 要查找的元素
      * @param startIndex 起始索引
@@ -862,7 +862,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -924,7 +924,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param objectToFind 要查找的元素
      * @return 如果找到则返回<code>true</code>
@@ -938,7 +938,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 如果找到则返回<code>true</code>
@@ -948,9 +948,9 @@ public class ArrayUtil {
     }
 
     // ==========================================================================
-    // 在数组中查找一个元素或一个元素序列。                                        
-    //  
-    // 类型：long[]                                                                
+    // 在数组中查找一个元素或一个元素序列。
+    //
+    // 类型：long[]
     // ==========================================================================
 
     /**
@@ -958,7 +958,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param longToFind 要查找的元素
      * @return 该元素在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -972,7 +972,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 该元素序列在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -989,7 +989,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param longToFind 要查找的元素
      * @param startIndex 起始索引
@@ -1021,7 +1021,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -1085,7 +1085,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param longToFind 要查找的元素
      * @return 该元素在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -1099,7 +1099,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 该元素序列在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -1116,7 +1116,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param longToFind 要查找的元素
      * @param startIndex 起始索引
@@ -1150,7 +1150,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -1212,7 +1212,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param longToFind 要查找的元素
      * @return 如果找到则返回<code>true</code>
@@ -1226,7 +1226,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 如果找到则返回<code>true</code>
@@ -1236,9 +1236,9 @@ public class ArrayUtil {
     }
 
     // ==========================================================================
-    // 在数组中查找一个元素或一个元素序列。                                        
-    //  
-    // 类型：int[]                                                                 
+    // 在数组中查找一个元素或一个元素序列。
+    //
+    // 类型：int[]
     // ==========================================================================
 
     /**
@@ -1246,7 +1246,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param intToFind 要查找的元素
      * @return 该元素在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -1260,7 +1260,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 该元素序列在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -1277,7 +1277,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param intToFind 要查找的元素
      * @param startIndex 起始索引
@@ -1309,7 +1309,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -1373,7 +1373,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param intToFind 要查找的元素
      * @return 该元素在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -1387,7 +1387,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 该元素序列在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -1404,7 +1404,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param intToFind 要查找的元素
      * @param startIndex 起始索引
@@ -1438,7 +1438,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -1500,7 +1500,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param intToFind 要查找的元素
      * @return 如果找到则返回<code>true</code>
@@ -1514,7 +1514,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 如果找到则返回<code>true</code>
@@ -1524,9 +1524,9 @@ public class ArrayUtil {
     }
 
     // ==========================================================================
-    // 在数组中查找一个元素或一个元素序列。                                        
-    //  
-    // 类型：short[]                                                               
+    // 在数组中查找一个元素或一个元素序列。
+    //
+    // 类型：short[]
     // ==========================================================================
 
     /**
@@ -1534,7 +1534,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param shortToFind 要查找的元素
      * @return 该元素在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -1548,7 +1548,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 该元素序列在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -1565,7 +1565,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param shortToFind 要查找的元素
      * @param startIndex 起始索引
@@ -1597,7 +1597,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -1661,7 +1661,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param shortToFind 要查找的元素
      * @return 该元素在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -1675,7 +1675,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 该元素序列在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -1692,7 +1692,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param shortToFind 要查找的元素
      * @param startIndex 起始索引
@@ -1726,7 +1726,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -1788,7 +1788,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param shortToFind 要查找的元素
      * @return 如果找到则返回<code>true</code>
@@ -1802,7 +1802,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 如果找到则返回<code>true</code>
@@ -1812,9 +1812,9 @@ public class ArrayUtil {
     }
 
     // ==========================================================================
-    // 在数组中查找一个元素或一个元素序列。                                        
-    //  
-    // 类型：byte[]                                                                
+    // 在数组中查找一个元素或一个元素序列。
+    //
+    // 类型：byte[]
     // ==========================================================================
 
     /**
@@ -1822,7 +1822,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param byteToFind 要查找的元素
      * @return 该元素在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -1836,7 +1836,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 该元素序列在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -1853,7 +1853,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param byteToFind 要查找的元素
      * @param startIndex 起始索引
@@ -1885,7 +1885,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -1949,7 +1949,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param byteToFind 要查找的元素
      * @return 该元素在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -1963,7 +1963,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 该元素序列在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -1980,7 +1980,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param byteToFind 要查找的元素
      * @param startIndex 起始索引
@@ -2014,7 +2014,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -2076,7 +2076,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param byteToFind 要查找的元素
      * @return 如果找到则返回<code>true</code>
@@ -2090,7 +2090,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 如果找到则返回<code>true</code>
@@ -2100,9 +2100,9 @@ public class ArrayUtil {
     }
 
     // ==========================================================================
-    // 在数组中查找一个元素或一个元素序列。                                        
-    //  
-    // 类型：double[]                                                              
+    // 在数组中查找一个元素或一个元素序列。
+    //
+    // 类型：double[]
     // ==========================================================================
 
     /**
@@ -2110,7 +2110,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param doubleToFind 要查找的元素
      * @return 该元素在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -2124,7 +2124,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param doubleToFind 要查找的元素
      * @param tolerance 误差
@@ -2139,7 +2139,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 该元素序列在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -2153,7 +2153,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param tolerance 误差
@@ -2171,7 +2171,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param doubleToFind 要查找的元素
      * @param startIndex 起始索引
@@ -2189,7 +2189,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param doubleToFind 要查找的元素
      * @param startIndex 起始索引
@@ -2225,7 +2225,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -2243,7 +2243,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -2309,7 +2309,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param doubleToFind 要查找的元素
      * @return 该元素在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -2323,7 +2323,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param doubleToFind 要查找的元素
      * @param tolerance 误差
@@ -2338,7 +2338,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 该元素序列在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -2352,7 +2352,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param tolerance 误差
@@ -2370,7 +2370,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param doubleToFind 要查找的元素
      * @param startIndex 起始索引
@@ -2388,7 +2388,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param doubleToFind 要查找的元素
      * @param startIndex 起始索引
@@ -2426,7 +2426,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -2444,7 +2444,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -2508,7 +2508,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param doubleToFind 要查找的元素
      * @return 如果找到则返回<code>true</code>
@@ -2522,7 +2522,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param doubleToFind 要查找的元素
      * @param tolerance 误差
@@ -2537,7 +2537,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 如果找到则返回<code>true</code>
@@ -2551,7 +2551,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param tolerance 误差
@@ -2562,9 +2562,9 @@ public class ArrayUtil {
     }
 
     // ==========================================================================
-    // 在数组中查找一个元素或一个元素序列。                                        
-    //  
-    // 类型：float[]                                                               
+    // 在数组中查找一个元素或一个元素序列。
+    //
+    // 类型：float[]
     // ==========================================================================
 
     /**
@@ -2572,7 +2572,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param floatToFind 要查找的元素
      * @return 该元素在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -2586,7 +2586,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param floatToFind 要查找的元素
      * @param tolerance 误差
@@ -2601,7 +2601,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 该元素序列在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -2615,7 +2615,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param tolerance 误差
@@ -2633,7 +2633,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param floatToFind 要查找的元素
      * @param startIndex 起始索引
@@ -2651,7 +2651,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param floatToFind 要查找的元素
      * @param startIndex 起始索引
@@ -2687,7 +2687,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -2705,7 +2705,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -2771,7 +2771,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param floatToFind 要查找的元素
      * @return 该元素在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -2785,7 +2785,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param floatToFind 要查找的元素
      * @param tolerance 误差
@@ -2800,7 +2800,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 该元素序列在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -2814,7 +2814,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param tolerance 误差
@@ -2832,7 +2832,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param floatToFind 要查找的元素
      * @param startIndex 起始索引
@@ -2850,7 +2850,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param floatToFind 要查找的元素
      * @param startIndex 起始索引
@@ -2888,7 +2888,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -2906,7 +2906,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -2970,7 +2970,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param floatToFind 要查找的元素
      * @return 如果找到则返回<code>true</code>
@@ -2984,7 +2984,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param floatToFind 要查找的元素
      * @param tolerance 误差
@@ -2999,7 +2999,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 如果找到则返回<code>true</code>
@@ -3013,7 +3013,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param tolerance 误差
@@ -3024,9 +3024,9 @@ public class ArrayUtil {
     }
 
     // ==========================================================================
-    // 在数组中查找一个元素或一个元素序列。                                        
-    //  
-    // 类型：boolean[]                                                             
+    // 在数组中查找一个元素或一个元素序列。
+    //
+    // 类型：boolean[]
     // ==========================================================================
 
     /**
@@ -3034,7 +3034,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param booleanToFind 要查找的元素
      * @return 该元素在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -3048,7 +3048,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 该元素序列在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -3065,7 +3065,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param booleanToFind 要查找的元素
      * @param startIndex 起始索引
@@ -3097,7 +3097,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -3161,7 +3161,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param booleanToFind 要查找的元素
      * @return 该元素在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -3175,7 +3175,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 该元素序列在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -3192,7 +3192,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param booleanToFind 要查找的元素
      * @param startIndex 起始索引
@@ -3226,7 +3226,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -3288,7 +3288,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param booleanToFind 要查找的元素
      * @return 如果找到则返回<code>true</code>
@@ -3302,7 +3302,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 如果找到则返回<code>true</code>
@@ -3312,9 +3312,9 @@ public class ArrayUtil {
     }
 
     // ==========================================================================
-    // 在数组中查找一个元素或一个元素序列。                                        
-    //  
-    // 类型：char[]                                                                
+    // 在数组中查找一个元素或一个元素序列。
+    //
+    // 类型：char[]
     // ==========================================================================
 
     /**
@@ -3322,7 +3322,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param charToFind 要查找的元素
      * @return 该元素在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -3336,7 +3336,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 该元素序列在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -3353,7 +3353,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param charToFind 要查找的元素
      * @param startIndex 起始索引
@@ -3385,7 +3385,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则看作<code>0</code>，超出数组长度的起始索引则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -3449,7 +3449,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param charToFind 要查找的元素
      * @return 该元素在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -3463,7 +3463,7 @@ public class ArrayUtil {
      * <p>
      * 如果未找到或数组为<code>null</code>则返回<code>-1</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 该元素序列在数组中的序号，如果数组为<code>null</code>或未找到，则返回<code>-1</code>。
@@ -3480,7 +3480,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param charToFind 要查找的元素
      * @param startIndex 起始索引
@@ -3514,7 +3514,7 @@ public class ArrayUtil {
      * <p>
      * 起始索引小于<code>0</code>则返回<code>-1</code>，超出数组长度的起始索引则从数组末尾开始找。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @param startIndex 起始索引
@@ -3576,7 +3576,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param charToFind 要查找的元素
      * @return 如果找到则返回<code>true</code>
@@ -3590,7 +3590,7 @@ public class ArrayUtil {
      * <p>
      * 如果数组为<code>null</code>则返回<code>false</code>。
      * </p>
-     * 
+     *
      * @param array 要扫描的数组
      * @param arrayToFind 要查找的元素序列
      * @return 如果找到则返回<code>true</code>

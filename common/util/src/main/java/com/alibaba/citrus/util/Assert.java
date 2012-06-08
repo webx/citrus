@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,37 +31,37 @@ import static com.alibaba.citrus.util.Assert.ExceptionType.*;
  * <li>应避免过于复杂的assertion条件，而占用过多的运行时间。除非Assertion失败。</li>
  * <li>Assertion的出错信息不是给最终用户看的，因此没必要写得过于详细，更没必要考虑国际化的问题，以至于浪费CPU的时间。
  * 例如下面的语句是要避免的：
- * 
+ *
  * <pre>
  * assertTrue(type instanceof MyType, &quot;Unsupported type: &quot; + type);
  * </pre>
- * 
+ *
  * 可以替换成：
- * 
+ *
  * <pre>
  * assertTrue(type instanceof MyType, &quot;Unsupported type: %s&quot;, type);
  * </pre>
- * 
+ *
  * 这样，当assertion顺利通过时，不会占用CPU时间。</li>
  * </ul>
  * <p>
  * 此外，部分方法具有返回值，以方便编程，例如：
  * </p>
- * 
+ *
  * <pre>
  * void foo(String param) {
  *     bar(assertNotNull(param));
  * }
- * 
+ *
  * int bar(String param) {
  *     if (true) {
  *         ...
  *     }
- *     
- *     return unreachableCode(); 
+ *
+ *     return unreachableCode();
  * }
  * </pre>
- * 
+ *
  * @author Michael Zhou
  */
 public final class Assert {

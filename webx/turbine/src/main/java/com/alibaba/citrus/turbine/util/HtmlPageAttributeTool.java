@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -88,7 +88,7 @@ import com.alibaba.citrus.util.StringUtil;
  * $page.setTitle("My page title")<br>
  * $page.setHttpEquiv("refresh","5; URL=http://localhost/nextpage.html")</code>
  * </p>
- * 
+ *
  * @author <a href="mailto:quintonm@bellsouth.net">Quinton McCombs</a>
  * @author <a href="mailto:seade@backstagetech.com.au">Scott Eade</a>
  * @version $Id: HtmlPageAttributeTool.java 705 2004-03-17 14:29:38Z baobao $
@@ -121,7 +121,7 @@ public class HtmlPageAttributeTool {
      * Set the title in the page. This returns an empty String so that the
      * template doesn't complain about getting a null return value. Subsequent
      * calls to this method will replace the current title.
-     * 
+     *
      * @param title A String with the title.
      * @return a <code>HtmlPageAttributes</code> (self).
      */
@@ -133,7 +133,7 @@ public class HtmlPageAttributeTool {
     /**
      * Get the title in the page. This returns an empty String if empty so that
      * the template doesn't complain about getting a null return value.
-     * 
+     *
      * @return A String with the title.
      */
     public String getTitle() {
@@ -146,7 +146,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Adds an attribute to the BODY tag.
-     * 
+     *
      * @param name A String.
      * @param value A String.
      * @return a <code>HtmlPageAttributes</code> (self).
@@ -161,7 +161,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Adds an attribute to the BODY tag.
-     * 
+     *
      * @param name A String.
      * @param value A String.
      * @return a <code>HtmlPageAttributes</code> (self).
@@ -173,7 +173,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Returns the map of body attributes
-     * 
+     *
      * @return the map
      */
     public Map<String, String> getBodyAttributes() {
@@ -182,7 +182,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Adds a script reference
-     * 
+     *
      * @param scriptURL
      * @return a <code>HtmlPageAttributes</code> (self).
      */
@@ -193,7 +193,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Adds a script reference
-     * 
+     *
      * @param scriptURL
      * @return a <code>HtmlPageAttributes</code> (self).
      * @deprecated Use addScript instead
@@ -206,7 +206,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Returns a collection of script URLs
-     * 
+     *
      * @return list of String objects constainings URLs of javascript files to
      *         include
      */
@@ -216,7 +216,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Adds a style sheet reference
-     * 
+     *
      * @param styleSheetURL URL of the style sheet
      * @return a <code>HtmlPageAttributes</code> (self).
      */
@@ -227,7 +227,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Adds a style sheet reference
-     * 
+     *
      * @param styleSheetURL URL of the style sheet
      * @param media name of the media
      * @param title title of the stylesheet
@@ -246,7 +246,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Adds a style sheet reference
-     * 
+     *
      * @param styleSheetURL
      * @return a <code>HtmlPageAttributes</code> (self).
      * @deprecated use addStyleSheet instead
@@ -260,7 +260,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Adds a style sheet reference
-     * 
+     *
      * @param styleSheetURL
      * @param media name of the media
      * @return a <code>HtmlPageAttributes</code> (self).
@@ -275,7 +275,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Returns a collection of script URLs
-     * 
+     *
      * @return list StyleSheet objects (inner class)
      */
     public List<StyleSheet> getStyleSheets() {
@@ -284,7 +284,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Adds a STYLE element to the HEAD of the page with the provided content.
-     * 
+     *
      * @param styleText The contents of the <code>style</code> tag.
      * @return a <code>HtmlPageAttributes</code> (self).
      * @deprecated use addStyle instead
@@ -297,7 +297,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Adds a STYLE element to the HEAD of the page with the provided content.
-     * 
+     *
      * @param styleText The contents of the <code>style</code> tag.
      * @return a <code>HtmlPageAttributes</code> (self).
      */
@@ -308,7 +308,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Returns a collection of styles
-     * 
+     *
      * @return list of String objects containing the contents of style tags
      */
     public List<String> getStyles() {
@@ -317,7 +317,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Set a keywords META tag in the HEAD of the page.
-     * 
+     *
      * @param keywords A String.
      * @return a <code>HtmlPageAttributes</code> (self).
      */
@@ -331,7 +331,7 @@ public class HtmlPageAttributeTool {
      * <code>setHttpEquiv("refresh", "5; URL=http://localhost/nextpage.html")</code>
      * <br>
      * <code>setHttpEquiv("Expires", "Tue, 20 Aug 1996 14:25:27 GMT")</code>
-     * 
+     *
      * @param httpEquiv The value to use for the http-equiv attribute.
      * @param content The text for the content attribute of the meta tag.
      * @return a <code>HtmlPageAttributes</code> (self).
@@ -343,7 +343,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Add a description META tag to the HEAD of the page.
-     * 
+     *
      * @param description A String.
      * @return a <code>HtmlPageAttributes</code> (self).
      */
@@ -354,7 +354,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Set the background image for the BODY tag.
-     * 
+     *
      * @param url A String.
      * @return a <code>HtmlPageAttributes</code> (self).
      */
@@ -366,7 +366,7 @@ public class HtmlPageAttributeTool {
     /**
      * Set the background color for the BODY tag. You can use either color names
      * or color values (e.g. "white" or "#ffffff" or "ffffff").
-     * 
+     *
      * @param color A String.
      * @return a <code>HtmlPageAttributes</code> (self).
      */
@@ -378,7 +378,7 @@ public class HtmlPageAttributeTool {
     /**
      * Set the text color for the BODY tag. You can use either color names or
      * color values (e.g. "white" or "#ffffff" or "ffffff").
-     * 
+     *
      * @param color A String.
      * @return a <code>HtmlPageAttributes</code> (self).
      */
@@ -390,7 +390,7 @@ public class HtmlPageAttributeTool {
     /**
      * Set the link color for the BODY tag. You can use either color names or
      * color values (e.g. "white" or "#ffffff" or "ffffff").
-     * 
+     *
      * @param color A String.
      * @return a <code>HtmlPageAttributes</code> (self).
      */
@@ -401,7 +401,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Set the visited link color for the BODY tag.
-     * 
+     *
      * @param color A String.
      * @return a <code>HtmlPageAttributes</code> (self).
      */
@@ -412,7 +412,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Set the active link color for the BODY tag.
-     * 
+     *
      * @param color A String.
      * @return a <code>HtmlPageAttributes</code> (self).
      */
@@ -423,7 +423,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Gets the map of http equiv tags
-     * 
+     *
      * @return Map of http equiv names to the contents
      */
     public Map<String, String> getHttpEquivs() {
@@ -432,7 +432,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * Gets the map of meta tags
-     * 
+     *
      * @return Map of http equiv names to the contents
      */
     public Map<String, String> getMetaTags() {
@@ -441,7 +441,7 @@ public class HtmlPageAttributeTool {
 
     /**
      * A dummy toString method that returns an empty string.
-     * 
+     *
      * @return An empty String ("").
      */
     @Override
@@ -460,7 +460,7 @@ public class HtmlPageAttributeTool {
 
         /**
          * Constructor requiring the URL to be set
-         * 
+         *
          * @param url URL of the external style sheet
          */
         public StyleSheet(String url) {
@@ -469,7 +469,7 @@ public class HtmlPageAttributeTool {
 
         /**
          * Gets the content type of the style sheet
-         * 
+         *
          * @return content type
          */
         public String getType() {
@@ -478,7 +478,7 @@ public class HtmlPageAttributeTool {
 
         /**
          * Sets the content type of the style sheet
-         * 
+         *
          * @param type content type
          */
         public void setType(String type) {
@@ -494,7 +494,7 @@ public class HtmlPageAttributeTool {
 
         /**
          * Sets the URL of the external style sheet
-         * 
+         *
          * @param url The URL of the stylesheet
          */
         private void setUrl(String url) {
@@ -503,7 +503,7 @@ public class HtmlPageAttributeTool {
 
         /**
          * Gets the title of the style sheet
-         * 
+         *
          * @return title
          */
         public String getTitle() {
@@ -512,7 +512,7 @@ public class HtmlPageAttributeTool {
 
         /**
          * Sets the title of the stylesheet
-         * 
+         *
          * @param title
          */
         public void setTitle(String title) {
@@ -521,7 +521,7 @@ public class HtmlPageAttributeTool {
 
         /**
          * Gets the media for which the stylesheet should be applied.
-         * 
+         *
          * @return name of the media
          */
         public String getMedia() {
@@ -530,7 +530,7 @@ public class HtmlPageAttributeTool {
 
         /**
          * Sets the media for which the stylesheet should be applied.
-         * 
+         *
          * @param media name of the media
          */
         public void setMedia(String media) {

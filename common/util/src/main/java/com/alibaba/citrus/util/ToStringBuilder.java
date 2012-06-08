@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,7 +33,7 @@ import com.alibaba.citrus.util.internal.IndentableStringBuilder;
 
 /**
  * 方便实现<code>toString()</code>方法。
- * 
+ *
  * @author Michael Zhou
  */
 public class ToStringBuilder {
@@ -400,7 +400,7 @@ public class ToStringBuilder {
 
     /**
      * 可用来创建一个结构的builder，例如：map，collection等。
-     * 
+     *
      * @author Michael Zhou
      */
     public static interface StructureBuilder {

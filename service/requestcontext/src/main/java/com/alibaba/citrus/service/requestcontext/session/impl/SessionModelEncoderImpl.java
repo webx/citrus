@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,7 +33,7 @@ import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionP
 
 /**
  * <code>SessionModelEncoder</code>的默认实现：将model内容保存成字符串。
- * 
+ *
  * @author Michael Zhou
  */
 public class SessionModelEncoderImpl implements SessionModelEncoder {

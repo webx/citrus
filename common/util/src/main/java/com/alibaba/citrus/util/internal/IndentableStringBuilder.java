@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 /**
  * 支持分级缩进的string builder。
- * 
+ *
  * @author Michael Zhou
  */
 public class IndentableStringBuilder extends NormalizableStringBuilder<IndentableStringBuilder> {
@@ -331,7 +331,7 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
 
 /**
  * 将CR/LF/CRLF统一成LF的string builder。
- * 
+ *
  * @author Michael Zhou
  */
 abstract class NormalizableStringBuilder<B extends NormalizableStringBuilder<B>> implements Appendable {

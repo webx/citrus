@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 基于文本的邮件内容，例如纯文本和HTML。
- * 
+ *
  * @author Michael Zhou
  */
 public class TextContent extends AbstractContent {

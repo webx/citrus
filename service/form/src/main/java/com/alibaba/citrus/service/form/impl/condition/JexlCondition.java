@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -44,7 +44,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * JEXL语法参见：<a href="http://commons.apache.org/jexl/reference/syntax.html">JEXL
  * Reference</a>
  * </p>
- * 
+ *
  * @author Michael Zhou
  */
 public class JexlCondition extends AbstractCondition {

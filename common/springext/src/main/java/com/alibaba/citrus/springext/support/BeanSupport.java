@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,7 +29,7 @@ import org.springframework.beans.factory.InitializingBean;
  * <li>实现了spring的初始化、销毁等生命期方法。</li>
  * <li>可取得在spring中注册的bean name。</li>
  * </ul>
- * 
+ *
  * @author Michael Zhou
  */
 public abstract class BeanSupport implements InitializingBean, DisposableBean, BeanNameAware {

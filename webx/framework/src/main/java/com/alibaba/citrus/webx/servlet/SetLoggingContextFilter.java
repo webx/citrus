@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ import com.alibaba.citrus.webx.util.SetLoggingContextHelper;
  * <p>
  * 建议在log4j的配置文件中，设置如下pattern layout：
  * </p>
- * 
+ *
  * <pre>
  * &lt;layout class="org.apache.log4j.PatternLayout"&gt;
  *     &lt;param name="ConversionPattern" value="%-4r [%d{yyyy-MM-dd HH:mm:ss}] - %X{remoteAddr} %X{requestURI} %X{referrer} %X{userAgent} %X{cookie.名称} - %m%n" /&gt;
@@ -40,13 +40,13 @@ import com.alibaba.citrus.webx.util.SetLoggingContextHelper;
  * <p>
  * 下面是logback版本：
  * </p>
- * 
+ *
  * <pre>
  * &lt;layout class="ch.qos.logback.classic.PatternLayout"&gt;
  *     &lt;pattern&gt;%-4r [%d{yyyy-MM-dd HH:mm:ss}] - %X{remoteAddr} %X{requestURI} %X{referrer} %X{userAgent} %X{cookie.名称} - %m%n&lt;/pattern&gt;
  * &lt;/layout&gt;
  * </pre>
- * 
+ *
  * @see com.alibaba.citrus.webx.util.SetLoggingContextHelper
  * @author Michael Zhou
  */

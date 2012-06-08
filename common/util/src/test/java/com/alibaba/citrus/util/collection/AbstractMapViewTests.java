@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,7 +32,7 @@ import org.junit.Test;
 /**
  * 测试<code>Map.entrySet()</code>, <code>Map.keySet()</code>,
  * <code>Map.values()</code> 返回的collection view对象.
- * 
+ *
  * @author Michael Zhou
  */
 public abstract class AbstractMapViewTests extends AbstractTests {
@@ -400,7 +400,7 @@ public abstract class AbstractMapViewTests extends AbstractTests {
     /**
      * 从<code>Map</code>中取得view. 可能是<code>Map.entrySet()</code>,
      * <code>Map.keySet()</code> 和<code>Map.values()</code>等方法返回的结果.
-     * 
+     *
      * @param map 被测试的view所属的<code>Map</code>
      * @return view
      */
@@ -410,14 +410,14 @@ public abstract class AbstractMapViewTests extends AbstractTests {
      * 创建一个可以和当前测试的view相比较的对象. 对于<code>Map.values()</code>返回的
      * <code>Collection</code>对象, 没有定义<code>equals</code> 和
      * <code>hashCode</code>方法, 所以不可比较. 这种情况返回<code>null</code>即可.
-     * 
+     *
      * @return <code>Collection</code>对象
      */
     protected abstract Collection<?> createCollectionToCompareWith();
 
     /**
      * 创建一个和View中存放的对象可比较的对象.
-     * 
+     *
      * @param key key
      * @param value value
      * @return 对象

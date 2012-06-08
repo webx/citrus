@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,27 +37,27 @@ import java.util.Set;
  * <li>不同于<code>HashMap</code>, 集合中元素的顺序是确定的</li>
  * <li>和<code>ArrayHashMap</code>一样, 没有进行任何<code>synchronized</code>操作</li>
  * </ul>
- * 
+ *
  * @author Michael Zhou
  * @see ArrayHashMap
  */
 public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable, Serializable {
     // ==========================================================================
-    // 常量                                                                      
+    // 常量
     // ==========================================================================
 
     /** 表示内部hash表的值. */
     private static final Object PRESENT = new Object();
 
     // ==========================================================================
-    // 成员变量                                                                  
+    // 成员变量
     // ==========================================================================
 
     /** 内部的hash表. */
     protected transient ArrayHashMap<E, Object> map;
 
     // ==========================================================================
-    // 构造函数                                                                   
+    // 构造函数
     // ==========================================================================
 
     /**
@@ -69,7 +69,7 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
 
     /**
      * 创建一个空的集合. 使用指定的初始阈值和默认的负载系数(0.75).
-     * 
+     *
      * @param initialCapacity 初始容量.
      */
     public ArrayHashSet(int initialCapacity) {
@@ -78,7 +78,7 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
 
     /**
      * 创建一个空的集合. 使用指定的初始容量和负载系数.
-     * 
+     *
      * @param initialCapacity 初始容量
      * @param loadFactor 负载系数.
      */
@@ -88,7 +88,7 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
 
     /**
      * 创建一个空的集合, 并复制指定的<code>Collection</code>的所有项到这个集合中. 使用默认的负载系数(0.75).
-     * 
+     *
      * @param collection 要复制的<code>Collection</code>
      */
     public ArrayHashSet(Collection<? extends E> collection) {
@@ -97,12 +97,12 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
     }
 
     // ==========================================================================
-    // 实现Set接口的方法                                                          
+    // 实现Set接口的方法
     // ==========================================================================
 
     /**
      * 返回集合中entry的个数.
-     * 
+     *
      * @return 集合中的entry数.
      */
     @Override
@@ -112,7 +112,7 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
 
     /**
      * 判断是否为空的集合.
-     * 
+     *
      * @return 如果为空(<code>size() == 0</code>), 则返回<code>true</code>.
      */
     @Override
@@ -122,7 +122,7 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
 
     /**
      * 如果集合中包含指定值, 则返回<code>true</code>.
-     * 
+     *
      * @param object 测试指定值是否存在.
      * @return 如果指定值存在, 则返回<code>true</code>.
      */
@@ -133,7 +133,7 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
 
     /**
      * 将指定的值加入到集合中.
-     * 
+     *
      * @param object 要加入的值
      * @return 如果集合中已经存在此值, 则返回<code>false</code>. 否则返回<code>true</code>.
      */
@@ -144,7 +144,7 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
 
     /**
      * 将指定值从集合中删除(如果该值存在的话).
-     * 
+     *
      * @param object 要被删除的值
      * @return 如果被删除的值原来不存在, 则返回<code>false</code>, 否则返回<code>true</code>
      */
@@ -163,7 +163,7 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
 
     /**
      * 取得集合中所有项的遍历器.
-     * 
+     *
      * @return 集合中所有项的遍历器
      */
     @Override
@@ -172,12 +172,12 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
     }
 
     // ==========================================================================
-    // 复制方法(Clonable接口)                                                     
+    // 复制方法(Clonable接口)
     // ==========================================================================
 
     /**
      * &quot;浅&quot;拷贝集合, 集合中的对象本身并不被复制.
-     * 
+     *
      * @return 被复制的集合.
      */
     @Override
@@ -195,7 +195,7 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
     }
 
     // ==========================================================================
-    // 序列化                                                                     
+    // 序列化
     // ==========================================================================
 
     /** 序列化版本号. */
@@ -203,7 +203,7 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
 
     /**
      * 从输入流中重建集合(也就是反序列化).
-     * 
+     *
      * @param is 输入流
      * @exception IOException 输入流异常
      * @exception ClassNotFoundException 类未找到
@@ -228,7 +228,7 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
 
     /**
      * 将集合的状态保存到输出流中(也就是序列化).
-     * 
+     *
      * @param os 输出流
      * @exception IOException 输出流异常
      */

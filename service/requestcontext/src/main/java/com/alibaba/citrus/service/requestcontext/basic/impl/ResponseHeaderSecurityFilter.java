@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,7 +47,7 @@ import com.alibaba.citrus.util.StringEscapeUtil;
 
 /**
  * 过滤header中的crlf，将status message用HTML entities转义，限制cookie的总大小。
- * 
+ *
  * @author Michael Zhou
  */
 public class ResponseHeaderSecurityFilter implements RequestContextLifecycleInterceptor, HeaderNameInterceptor,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -621,7 +621,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
 
     @Test
     public void setQuery_clearQuery() {
-        // hasQuery        
+        // hasQuery
         broker.clearQuery();
 
         // setQuery

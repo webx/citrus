@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,7 +36,7 @@ import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionP
 
 /**
  * 创建一个简单bean的tool factory。
- * 
+ *
  * @author Michael Zhou
  */
 public class BeanTool extends BeanSupport implements ToolFactory, ApplicationContextAware {
