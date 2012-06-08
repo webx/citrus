@@ -4,3 +4,7 @@ target
 .project
 .classpath
 .svn
+
+/out
+/.idea/workspace.xml
+/citrus.iws

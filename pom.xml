@@ -572,7 +572,7 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.6</source>
+                    <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
             </plugin>

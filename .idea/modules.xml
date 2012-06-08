@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/common/expr/citrus-common-expr.iml" filepath="$PROJECT_DIR$/common/expr/citrus-common-expr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/generictype/citrus-common-generictype.iml" filepath="$PROJECT_DIR$/common/generictype/citrus-common-generictype.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/hessian/citrus-common-hessian.iml" filepath="$PROJECT_DIR$/common/hessian/citrus-common-hessian.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/logconfig/citrus-common-logconfig.iml" filepath="$PROJECT_DIR$/common/logconfig/citrus-common-logconfig.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/springext/citrus-common-springext.iml" filepath="$PROJECT_DIR$/common/springext/citrus-common-springext.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/util/citrus-common-util.iml" filepath="$PROJECT_DIR$/common/util/citrus-common-util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/citrus-parent.iml" filepath="$PROJECT_DIR$/citrus-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/base/citrus-service-base.iml" filepath="$PROJECT_DIR$/service/base/citrus-service-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/configuration/citrus-service-configuration.iml" filepath="$PROJECT_DIR$/service/configuration/citrus-service-configuration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/dataresolver/citrus-service-dataresolver.iml" filepath="$PROJECT_DIR$/service/dataresolver/citrus-service-dataresolver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/form/citrus-service-form.iml" filepath="$PROJECT_DIR$/service/form/citrus-service-form.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/freemarker/citrus-service-freemarker.iml" filepath="$PROJECT_DIR$/service/freemarker/citrus-service-freemarker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/jsp/citrus-service-jsp.iml" filepath="$PROJECT_DIR$/service/jsp/citrus-service-jsp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/mail/citrus-service-mail.iml" filepath="$PROJECT_DIR$/service/mail/citrus-service-mail.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/mappingrule/citrus-service-mappingrule.iml" filepath="$PROJECT_DIR$/service/mappingrule/citrus-service-mappingrule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/moduleloader/citrus-service-moduleloader.iml" filepath="$PROJECT_DIR$/service/moduleloader/citrus-service-moduleloader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/pipeline/citrus-service-pipeline.iml" filepath="$PROJECT_DIR$/service/pipeline/citrus-service-pipeline.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/pull/citrus-service-pull.iml" filepath="$PROJECT_DIR$/service/pull/citrus-service-pull.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/requestcontext/citrus-service-requestcontext.iml" filepath="$PROJECT_DIR$/service/requestcontext/citrus-service-requestcontext.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/resource/citrus-service-resource.iml" filepath="$PROJECT_DIR$/service/resource/citrus-service-resource.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/template/citrus-service-template.iml" filepath="$PROJECT_DIR$/service/template/citrus-service-template.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/upload/citrus-service-upload.iml" filepath="$PROJECT_DIR$/service/upload/citrus-service-upload.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/uribroker/citrus-service-uribroker.iml" filepath="$PROJECT_DIR$/service/uribroker/citrus-service-uribroker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/velocity/citrus-service-velocity.iml" filepath="$PROJECT_DIR$/service/velocity/citrus-service-velocity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dist/test/citrus-test-all.iml" filepath="$PROJECT_DIR$/dist/test/citrus-test-all.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/util/citrus-test-util.iml" filepath="$PROJECT_DIR$/test/util/citrus-test-util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/webx/citrus-test-webx.iml" filepath="$PROJECT_DIR$/test/webx/citrus-test-webx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dist/webx/citrus-webx-all.iml" filepath="$PROJECT_DIR$/dist/webx/citrus-webx-all.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webx/dev/citrus-webx-dev.iml" filepath="$PROJECT_DIR$/webx/dev/citrus-webx-dev.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webx/framework/citrus-webx-framework.iml" filepath="$PROJECT_DIR$/webx/framework/citrus-webx-framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webx/turbine/citrus-webx-turbine.iml" filepath="$PROJECT_DIR$/webx/turbine/citrus-webx-turbine.iml" />
+    </modules>
+  </component>
+</project>
+
