@@ -1,21 +1,4 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
- * All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
  * Copyright (c) 2001-2004 Caucho Technology, Inc.  All rights reserved.
  *
  * The Apache Software License, Version 1.1
@@ -74,7 +57,7 @@ import java.lang.reflect.Method;
 public class EnumDeserializer extends AbstractDeserializer {
   private Class _enumType;
   private Method _valueOf;
-  
+
   public EnumDeserializer(Class cl)
   {
     // hessian/33b[34], hessian/3bb[78]
@@ -92,17 +75,17 @@ public class EnumDeserializer extends AbstractDeserializer {
       throw new RuntimeException(e);
     }
   }
-  
+
   public Class getType()
   {
     return _enumType;
   }
-  
+
   public Object readMap(AbstractHessianInput in)
     throws IOException
   {
     String name = null;
-    
+
     while (! in.isEnd()) {
       String key = in.readString();
 
@@ -115,12 +98,12 @@ public class EnumDeserializer extends AbstractDeserializer {
     in.readMapEnd();
 
     Object obj = create(name);
-    
+
     in.addRef(obj);
 
     return obj;
   }
-  
+
   @Override
   public Object readObject(AbstractHessianInput in, Object []fields)
     throws IOException

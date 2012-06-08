@@ -1,21 +1,4 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
- * All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
  * Copyright (c) 2001-2004 Caucho Technology, Inc.  All rights reserved.
  *
  * The Apache Software License, Version 1.1
@@ -76,7 +59,7 @@ import com.alibaba.citrus.hessian.HessianException;
 public class SqlDateDeserializer extends AbstractDeserializer {
   private Class _cl;
   private Constructor _constructor;
-  
+
   public SqlDateDeserializer(Class cl)
   {
     try {
@@ -86,19 +69,19 @@ public class SqlDateDeserializer extends AbstractDeserializer {
       throw new HessianException(e);
     }
   }
-  
+
   public Class getType()
   {
     return _cl;
   }
-  
+
   public Object readMap(AbstractHessianInput in)
     throws IOException
   {
     int ref = in.addRef(null);
-    
+
     long initValue = Long.MIN_VALUE;
-    
+
     while (! in.isEnd()) {
       String key = in.readString();
 
@@ -116,15 +99,15 @@ public class SqlDateDeserializer extends AbstractDeserializer {
 
     return value;
   }
-  
+
   public Object readObject(AbstractHessianInput in,
                            Object []fields)
     throws IOException
   {
     String []fieldNames = (String []) fields;
-    
+
     int ref = in.addRef(null);
-    
+
     long initValue = Long.MIN_VALUE;
 
     for (int i = 0; i < fieldNames.length; i++) {

@@ -1,21 +1,4 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
- * All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
  * Copyright (c) 2001-2008 Caucho Technology, Inc.  All rights reserved.
  *
  * The Apache Software License, Version 1.1
@@ -106,7 +89,7 @@ public class UnsafeDeserializer extends AbstractMapDeserializer {
       _readResolve.setAccessible(true);
     }
   }
-  
+
   public static boolean isEnabled()
   {
     return _isEnabled;
@@ -139,7 +122,7 @@ public class UnsafeDeserializer extends AbstractMapDeserializer {
       throw new IOExceptionWrapper(_type.getName() + ":" + e.getMessage(), e);
     }
   }
-  
+
   @Override
   public Object []createFields(int len)
   {
@@ -149,10 +132,10 @@ public class UnsafeDeserializer extends AbstractMapDeserializer {
   public Object createField(String name)
   {
     Object reader = _fieldMap.get(name);
-    
+
     if (reader == null)
       reader = NullFieldDeserializer.DESER;
-    
+
     return reader;
   }
 
@@ -279,7 +262,7 @@ public class UnsafeDeserializer extends AbstractMapDeserializer {
 
       for (String fieldName : fieldNames) {
         FieldDeserializer reader = _fieldMap.get(fieldName);
-        
+
         if (reader != null)
           reader.deserialize(in, obj);
         else
@@ -403,7 +386,7 @@ public class UnsafeDeserializer extends AbstractMapDeserializer {
     abstract void deserialize(AbstractHessianInput in, Object obj)
       throws IOException;
   }
-  
+
   static class NullFieldDeserializer extends FieldDeserializer {
     static NullFieldDeserializer DESER = new NullFieldDeserializer();
     void deserialize(AbstractHessianInput in, Object obj)
@@ -429,7 +412,7 @@ public class UnsafeDeserializer extends AbstractMapDeserializer {
       throws IOException
     {
       Object value = null;
-      
+
       try {
         value = in.readObject(_field.getType());
 
@@ -456,7 +439,7 @@ public class UnsafeDeserializer extends AbstractMapDeserializer {
       throws IOException
     {
       boolean value = false;
-      
+
       try {
         value = in.readBoolean();
 
@@ -483,7 +466,7 @@ public class UnsafeDeserializer extends AbstractMapDeserializer {
       throws IOException
     {
       int value = 0;
-      
+
       try {
         value = in.readInt();
 
@@ -510,12 +493,12 @@ public class UnsafeDeserializer extends AbstractMapDeserializer {
       throws IOException
     {
       String value = null;
-      
+
       try {
         value = in.readString();
-        
+
         char ch;
-        
+
         if (value != null && value.length() > 0)
           ch = value.charAt(0);
         else
@@ -544,7 +527,7 @@ public class UnsafeDeserializer extends AbstractMapDeserializer {
       throws IOException
     {
       int value = 0;
-      
+
       try {
         value = in.readInt();
 
@@ -571,7 +554,7 @@ public class UnsafeDeserializer extends AbstractMapDeserializer {
       throws IOException
     {
       int value = 0;
-      
+
       try {
         value = in.readInt();
 
@@ -598,7 +581,7 @@ public class UnsafeDeserializer extends AbstractMapDeserializer {
       throws IOException
     {
       long value = 0;
-      
+
       try {
         value = in.readLong();
 
@@ -624,7 +607,7 @@ public class UnsafeDeserializer extends AbstractMapDeserializer {
       throws IOException
     {
       double value = 0;
-      
+
       try {
         value = in.readDouble();
 
@@ -650,7 +633,7 @@ public class UnsafeDeserializer extends AbstractMapDeserializer {
       throws IOException
     {
       double value = 0;
-      
+
       try {
         value = in.readDouble();
 
@@ -677,7 +660,7 @@ public class UnsafeDeserializer extends AbstractMapDeserializer {
       throws IOException
     {
       String value = null;
-      
+
       try {
         value = in.readString();
 

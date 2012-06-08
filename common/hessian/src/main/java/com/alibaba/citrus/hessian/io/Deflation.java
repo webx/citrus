@@ -1,21 +1,4 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
- * All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
  * Copyright (c) 2001-2004 Caucho Technology, Inc.  All rights reserved.
  *
  * The Apache Software License, Version 1.1
@@ -81,11 +64,11 @@ public class Deflation extends HessianEnvelope {
     throws IOException
   {
     OutputStream os = new DeflateOutputStream(out);
-    
+
     Hessian2Output filterOut = new Hessian2Output(os);
 
     filterOut.setCloseStreamOnClose(true);
-    
+
     return filterOut;
   }
 
@@ -109,37 +92,37 @@ public class Deflation extends HessianEnvelope {
     InputStream is = new DeflateInputStream(in);
 
     Hessian2Input filter = new Hessian2Input(is);
-    
+
     filter.setCloseStreamOnClose(true);
-    
+
     return filter;
   }
-  
+
   static class DeflateOutputStream extends OutputStream {
     private Hessian2Output _out;
     private OutputStream _bodyOut;
     private DeflaterOutputStream _deflateOut;
-    
+
     DeflateOutputStream(Hessian2Output out)
       throws IOException
     {
       _out = out;
 
       _out.startEnvelope(Deflation.class.getName());
-    
+
       _out.writeInt(0);
 
       _bodyOut = _out.getBytesOutputStream();
-    
+
       _deflateOut = new DeflaterOutputStream(_bodyOut);
     }
-    
+
     public void write(int ch)
       throws IOException
     {
       _deflateOut.write(ch);
     }
-    
+
     public void write(byte []buffer, int offset, int length)
       throws IOException
     {
@@ -159,18 +142,18 @@ public class Deflation extends HessianEnvelope {
 	out.writeInt(0);
 
         out.completeEnvelope();
-          
+
 	out.close();
       }
     }
   }
-  
+
   static class DeflateInputStream extends InputStream {
     private Hessian2Input _in;
-    
+
     private InputStream _bodyIn;
     private InflaterInputStream _inflateIn;
-    
+
     DeflateInputStream(Hessian2Input in)
       throws IOException
     {
@@ -180,18 +163,18 @@ public class Deflation extends HessianEnvelope {
 
       if (len != 0)
         throw new IOException("expected no headers");
-      
+
       _bodyIn = _in.readInputStream();
 
       _inflateIn = new InflaterInputStream(_bodyIn);
     }
-    
+
     public int read()
       throws IOException
     {
       return _inflateIn.read();
     }
-    
+
     public int read(byte []buffer, int offset, int length)
       throws IOException
     {

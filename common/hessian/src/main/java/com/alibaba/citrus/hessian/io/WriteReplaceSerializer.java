@@ -1,21 +1,4 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
- * All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
  * Copyright (c) 2001-2008 Caucho Technology, Inc.  All rights reserved.
  *
  * The Apache Software License, Version 1.1
@@ -89,13 +72,13 @@ public class WriteReplaceSerializer extends AbstractSerializer
   private Object _writeReplaceFactory;
   private Method _writeReplace;
   private Serializer _baseSerializer;
-  
+
   public WriteReplaceSerializer(Class<?> cl,
 				ClassLoader loader,
 				Serializer baseSerializer)
   {
     introspectWriteReplace(cl, loader);
-    
+
     _baseSerializer = baseSerializer;
   }
 
@@ -118,7 +101,7 @@ public class WriteReplaceSerializer extends AbstractSerializer
     } catch (Exception e) {
       log.log(Level.FINER, e.toString(), e);
     }
-      
+
     _writeReplace = getWriteReplace(cl);
     if (_writeReplace != null)
       _writeReplace.setAccessible(true);
@@ -148,7 +131,7 @@ public class WriteReplaceSerializer extends AbstractSerializer
   {
     for (; cl != null; cl = cl.getSuperclass()) {
       Method []methods = cl.getDeclaredMethods();
-      
+
       for (int i = 0; i < methods.length; i++) {
 	Method method = methods[i];
 
@@ -160,28 +143,28 @@ public class WriteReplaceSerializer extends AbstractSerializer
 
     return null;
   }
-  
+
   public void writeObject(Object obj, AbstractHessianOutput out)
     throws IOException
   {
     int ref = out.getRef(obj);
-    
+
     if (ref >= 0) {
       out.writeRef(ref);
-      
+
       return;
     }
-    
+
     try {
       Object repl;
 
       repl = writeReplace(obj);
 
       if (obj == repl) {
-        if (log.isLoggable(Level.FINE)) { 
+        if (log.isLoggable(Level.FINE)) {
           log.fine(this + ": Hessian writeReplace error.  The writeReplace method (" + _writeReplace + ") must not return the same object: " + obj);
         }
-        
+
         _baseSerializer.writeObject(obj, out);
         return;
       }
@@ -195,7 +178,7 @@ public class WriteReplaceSerializer extends AbstractSerializer
       throw new RuntimeException(e);
     }
   }
-  
+
   @Override
   protected Object writeReplace(Object obj)
   {

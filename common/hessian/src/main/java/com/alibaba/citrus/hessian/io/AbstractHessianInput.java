@@ -1,21 +1,4 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
- * All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
  * Copyright (c) 2001-2004 Caucho Technology, Inc.  All rights reserved.
  *
  * The Apache Software License, Version 1.1
@@ -86,7 +69,7 @@ import java.io.Reader;
 abstract public class AbstractHessianInput {
   private HessianRemoteResolver resolver;
   private byte []_buffer;
-  
+
   /**
    * Initialize the Hessian stream with the underlying input stream.
    */
@@ -204,7 +187,7 @@ abstract public class AbstractHessianInput {
    */
   abstract public Object readReply(Class expectedClass)
     throws Throwable;
-  
+
   /**
    * Starts reading the reply
    *
@@ -324,7 +307,7 @@ abstract public class AbstractHessianInput {
   {
     throw new UnsupportedOperationException(getClass().getSimpleName());
   }
-  
+
   /**
    * Starts reading a string.  All the characters must be read before
    * calling the next method.  The actual characters will be read with
@@ -381,8 +364,8 @@ abstract public class AbstractHessianInput {
       is.close();
     }
   }
-    
-	   
+
+
 
   /**
    * Reads a byte array.
@@ -453,25 +436,25 @@ abstract public class AbstractHessianInput {
    * Reads the start of a list
    */
   abstract public int readListStart()
-    throws IOException;    
+    throws IOException;
 
   /**
    * Reads the length of a list.
    */
   abstract public int readLength()
-    throws IOException;    
+    throws IOException;
 
   /**
    * Reads the start of a map
    */
   abstract public int readMapStart()
-    throws IOException;    
+    throws IOException;
 
   /**
    * Reads an object type.
    */
   abstract public String readType()
-    throws IOException;    
+    throws IOException;
 
   /**
    * Returns true if the data has ended.
@@ -496,7 +479,7 @@ abstract public class AbstractHessianInput {
    */
   abstract public void readListEnd()
     throws IOException;
-  
+
   public void close()
     throws IOException
   {

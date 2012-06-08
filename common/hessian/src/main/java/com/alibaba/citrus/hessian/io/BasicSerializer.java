@@ -1,21 +1,4 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
- * All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
  * Copyright (c) 2001-2004 Caucho Technology, Inc.  All rights reserved.
  *
  * The Apache Software License, Version 1.1
@@ -88,7 +71,7 @@ public class BasicSerializer extends AbstractSerializer
   public static final int DATE = STRING + 1;
   public static final int NUMBER = DATE + 1;
   public static final int OBJECT = NUMBER + 1;
-  
+
   public static final int BOOLEAN_ARRAY = OBJECT + 1;
   public static final int BYTE_ARRAY = BOOLEAN_ARRAY + 1;
   public static final int SHORT_ARRAY = BYTE_ARRAY + 1;
@@ -99,7 +82,7 @@ public class BasicSerializer extends AbstractSerializer
   public static final int CHARACTER_ARRAY = DOUBLE_ARRAY + 1;
   public static final int STRING_ARRAY = CHARACTER_ARRAY + 1;
   public static final int OBJECT_ARRAY = STRING_ARRAY + 1;
-  
+
   public static final int BYTE_HANDLE = OBJECT_ARRAY + 1;
   public static final int SHORT_HANDLE = BYTE_HANDLE + 1;
   public static final int FLOAT_HANDLE = SHORT_HANDLE + 1;
@@ -133,7 +116,7 @@ public class BasicSerializer extends AbstractSerializer
       return this;
     }
   }
-  
+
   public void writeObject(Object obj, AbstractHessianOutput out)
     throws IOException
   {
@@ -141,7 +124,7 @@ public class BasicSerializer extends AbstractSerializer
     case BOOLEAN:
       out.writeBoolean(((Boolean) obj).booleanValue());
       break;
-      
+
     case BYTE:
     case SHORT:
     case INTEGER:
@@ -156,25 +139,25 @@ public class BasicSerializer extends AbstractSerializer
     case DOUBLE:
       out.writeDouble(((Number) obj).doubleValue());
       break;
-      
+
     case CHARACTER:
     case CHARACTER_OBJECT:
       out.writeString(String.valueOf(obj));
       break;
-      
+
     case STRING:
       out.writeString((String) obj);
       break;
-      
+
     case DATE:
       out.writeUTCDate(((Date) obj).getTime());
       break;
-      
+
     case BOOLEAN_ARRAY:
     {
       if (out.addRef(obj))
         return;
-      
+
       boolean []data = (boolean []) obj;
       boolean hasEnd = out.writeListBegin(data.length, "[boolean");
       for (int i = 0; i < data.length; i++)
@@ -182,7 +165,7 @@ public class BasicSerializer extends AbstractSerializer
 
       if (hasEnd)
 	out.writeListEnd();
-      
+
       break;
     }
 
@@ -197,10 +180,10 @@ public class BasicSerializer extends AbstractSerializer
     {
       if (out.addRef(obj))
         return;
-      
+
       short []data = (short []) obj;
       boolean hasEnd = out.writeListBegin(data.length, "[short");
-      
+
       for (int i = 0; i < data.length; i++)
         out.writeInt(data[i]);
 
@@ -213,17 +196,17 @@ public class BasicSerializer extends AbstractSerializer
     {
       if (out.addRef(obj))
         return;
-      
+
       int []data = (int []) obj;
-      
+
       boolean hasEnd = out.writeListBegin(data.length, "[int");
-      
+
       for (int i = 0; i < data.length; i++)
         out.writeInt(data[i]);
 
       if (hasEnd)
 	out.writeListEnd();
-      
+
       break;
     }
 
@@ -231,11 +214,11 @@ public class BasicSerializer extends AbstractSerializer
     {
       if (out.addRef(obj))
         return;
-      
+
       long []data = (long []) obj;
-      
+
       boolean hasEnd = out.writeListBegin(data.length, "[long");
-      
+
       for (int i = 0; i < data.length; i++)
         out.writeLong(data[i]);
 
@@ -248,11 +231,11 @@ public class BasicSerializer extends AbstractSerializer
     {
       if (out.addRef(obj))
         return;
-      
+
       float []data = (float []) obj;
-      
+
       boolean hasEnd = out.writeListBegin(data.length, "[float");
-      
+
       for (int i = 0; i < data.length; i++)
         out.writeDouble(data[i]);
 
@@ -265,10 +248,10 @@ public class BasicSerializer extends AbstractSerializer
     {
       if (out.addRef(obj))
         return;
-      
+
       double []data = (double []) obj;
       boolean hasEnd = out.writeListBegin(data.length, "[double");
-      
+
       for (int i = 0; i < data.length; i++)
         out.writeDouble(data[i]);
 
@@ -281,11 +264,11 @@ public class BasicSerializer extends AbstractSerializer
     {
       if (out.addRef(obj))
         return;
-      
+
       String []data = (String []) obj;
-      
+
       boolean hasEnd = out.writeListBegin(data.length, "[string");
-      
+
       for (int i = 0; i < data.length; i++) {
         out.writeString(data[i]);
       }
@@ -306,11 +289,11 @@ public class BasicSerializer extends AbstractSerializer
     {
       if (out.addRef(obj))
         return;
-      
+
       Object []data = (Object []) obj;
-      
+
       boolean hasEnd = out.writeListBegin(data.length, "[object");
-      
+
       for (int i = 0; i < data.length; i++) {
         out.writeObject(data[i]);
       }
@@ -319,11 +302,11 @@ public class BasicSerializer extends AbstractSerializer
 	out.writeListEnd();
       break;
     }
-    
+
     case NULL:
       out.writeNull();
       break;
-    
+
     case OBJECT:
       ObjectHandleSerializer.SER.writeObject(obj, out);
       break;

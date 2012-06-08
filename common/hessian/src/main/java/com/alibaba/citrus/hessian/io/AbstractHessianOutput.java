@@ -1,21 +1,4 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
- * All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
  * Copyright (c) 2001-2008 Caucho Technology, Inc.  All rights reserved.
  *
  * The Apache Software License, Version 1.1
@@ -85,7 +68,7 @@ import java.io.OutputStream;
 abstract public class AbstractHessianOutput {
   // serializer factory
   private SerializerFactory _defaultSerializerFactory;
-  
+
   // serializer factory
   protected SerializerFactory _serializerFactory;
 
@@ -109,7 +92,7 @@ abstract public class AbstractHessianOutput {
     if (_serializerFactory == _defaultSerializerFactory) {
       _serializerFactory = new SerializerFactory();
     }
-    
+
     return _serializerFactory;
   }
 
@@ -128,7 +111,7 @@ abstract public class AbstractHessianOutput {
 
     return factory;
   }
-  
+
   /**
    * Initialize the output with a new underlying stream.
    */
@@ -143,12 +126,12 @@ abstract public class AbstractHessianOutput {
     throws IOException
   {
     int length = args != null ? args.length : 0;
-    
+
     startCall(method, length);
-    
+
     for (int i = 0; i < length; i++)
       writeObject(args[i]);
-    
+
     completeCall();
   }
 
@@ -360,13 +343,13 @@ abstract public class AbstractHessianOutput {
    */
   abstract public void writeBytes(byte []buffer, int offset, int length)
     throws IOException;
-  
+
   /**
    * Writes a byte buffer to the stream.
    */
   abstract public void writeByteBufferStart()
     throws IOException;
-  
+
   /**
    * Writes a byte buffer to the stream.
    *
@@ -380,7 +363,7 @@ abstract public class AbstractHessianOutput {
 					   int offset,
 					   int length)
     throws IOException;
-  
+
   /**
    * Writes the last chunk of a byte buffer to the stream.
    *
@@ -407,7 +390,7 @@ abstract public class AbstractHessianOutput {
       _byteBuffer = new byte[1024];
 
     byte []buffer = _byteBuffer;
-    
+
     int len;
     while ((len = is.read(buffer, 0, buffer.length)) > 0) {
       if (len < buffer.length) {
@@ -423,7 +406,7 @@ abstract public class AbstractHessianOutput {
 
       writeByteBufferPart(buffer, 0, len);
     }
-    
+
     writeByteBufferEnd(buffer, 0, 0);
   }
 
@@ -548,7 +531,7 @@ abstract public class AbstractHessianOutput {
     throws IOException
   {
     writeMapBegin(type);
-    
+
     return -2;
   }
 
@@ -567,7 +550,7 @@ abstract public class AbstractHessianOutput {
     throws IOException
   {
   }
-  
+
   public void writeReply(Object o)
     throws IOException
   {
@@ -575,18 +558,18 @@ abstract public class AbstractHessianOutput {
     writeObject(o);
     completeReply();
   }
-  
-  
+
+
   public void startReply()
     throws IOException
   {
   }
-  
+
   public void completeReply()
     throws IOException
   {
   }
-  
+
   public void writeFault(String code, String message, Object detail)
     throws IOException
   {

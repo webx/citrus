@@ -1,21 +1,4 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
- * All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
  * Copyright (c) 2001-2008 Caucho Technology, Inc.  All rights reserved.
  *
  * The Apache Software License, Version 1.1
@@ -95,7 +78,7 @@ public class HessianOutput extends AbstractHessianOutput {
   // map of references
   private IdentityHashMap _refs;
   private int _version = 1;
-  
+
   /**
    * Creates a new Hessian output stream, initialized with an
    * underlying output stream.
@@ -142,12 +125,12 @@ public class HessianOutput extends AbstractHessianOutput {
     throws IOException
   {
     int length = args != null ? args.length : 0;
-    
+
     startCall(method, length);
-    
+
     for (int i = 0; i < length; i++)
       writeObject(args[i]);
-    
+
     completeCall();
   }
 
@@ -270,7 +253,7 @@ public class HessianOutput extends AbstractHessianOutput {
     throws IOException
   {
     int len = name.length();
-    
+
     os.write('H');
     os.write(len >> 8);
     os.write(len);
@@ -306,7 +289,7 @@ public class HessianOutput extends AbstractHessianOutput {
     os.write('r');
     os.write(1);
     os.write(0);
-    
+
     os.write('f');
     writeString("code");
     writeString(code);
@@ -319,7 +302,7 @@ public class HessianOutput extends AbstractHessianOutput {
       writeObject(detail);
     }
     os.write('z');
-    
+
     os.write('z');
   }
 
@@ -504,7 +487,7 @@ public class HessianOutput extends AbstractHessianOutput {
     throws IOException
   {
     long bits = Double.doubleToLongBits(value);
-    
+
     os.write('D');
     os.write((byte) (bits >> 56));
     os.write((byte) (bits >> 48));
@@ -580,7 +563,7 @@ public class HessianOutput extends AbstractHessianOutput {
     else {
       int length = value.length();
       int offset = 0;
-      
+
       while (length > 0x8000) {
         int sublen = 0x8000;
 
@@ -589,7 +572,7 @@ public class HessianOutput extends AbstractHessianOutput {
 
 	if (0xd800 <= tail && tail <= 0xdbff)
 	  sublen--;
-        
+
         os.write('s');
         os.write(sublen >> 8);
         os.write(sublen);
@@ -639,7 +622,7 @@ public class HessianOutput extends AbstractHessianOutput {
 
 	if (0xd800 <= tail && tail <= 0xdbff)
 	  sublen--;
-        
+
         os.write('s');
         os.write(sublen >> 8);
         os.write(sublen);
@@ -682,7 +665,7 @@ public class HessianOutput extends AbstractHessianOutput {
     else
       writeBytes(buffer, 0, buffer.length);
   }
-  
+
   /**
    * Writes a byte array to the stream.
    * The array will be written with the following syntax:
@@ -708,7 +691,7 @@ public class HessianOutput extends AbstractHessianOutput {
     else {
       while (length > 0x8000) {
         int sublen = 0x8000;
-        
+
         os.write('b');
         os.write(sublen >> 8);
         os.write(sublen);
@@ -725,7 +708,7 @@ public class HessianOutput extends AbstractHessianOutput {
       os.write(buffer, offset, length);
     }
   }
-  
+
   /**
    * Writes a byte buffer to the stream.
    *
@@ -736,7 +719,7 @@ public class HessianOutput extends AbstractHessianOutput {
     throws IOException
   {
   }
-  
+
   /**
    * Writes a byte buffer to the stream.
    *
@@ -763,7 +746,7 @@ public class HessianOutput extends AbstractHessianOutput {
       offset += sublen;
     }
   }
-  
+
   /**
    * Writes a byte buffer to the stream.
    *
@@ -824,27 +807,27 @@ public class HessianOutput extends AbstractHessianOutput {
 
     if (ref != null) {
       int value = ref.intValue();
-      
+
       writeRef(value);
       return true;
     }
     else {
       _refs.put(object, new Integer(_refs.size()));
-      
+
       return false;
     }
   }
-  
+
   @Override
   public int getRef(Object obj)
   {
     Integer value;
-    
+
     if (_refs == null)
       return -1;
-    
+
     value = (Integer) _refs.get(obj);
-    
+
     if (value == null)
       return -1;
     else
@@ -885,7 +868,7 @@ public class HessianOutput extends AbstractHessianOutput {
 
     if (value != null) {
       _refs.put(newRef, value);
-      
+
       return true;
     }
     else
@@ -923,7 +906,7 @@ public class HessianOutput extends AbstractHessianOutput {
   {
     printString(v, 0, v.length());
   }
-  
+
   /**
    * Prints a string to the stream, encoded as UTF-8
    *
@@ -948,7 +931,7 @@ public class HessianOutput extends AbstractHessianOutput {
       }
     }
   }
-  
+
   /**
    * Prints a string to the stream, encoded as UTF-8
    *

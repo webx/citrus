@@ -1,21 +1,4 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
- * All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
  * Copyright (c) 2001-2004 Caucho Technology, Inc.  All rights reserved.
  *
  * The Apache Software License, Version 1.1
@@ -76,24 +59,24 @@ public class ClassDeserializer extends AbstractMapDeserializer {
     = new HashMap<String,Class>();
 
   private ClassLoader _loader;
-  
+
   public ClassDeserializer(ClassLoader loader)
   {
     _loader = loader;
   }
-  
+
   public Class getType()
   {
     return Class.class;
   }
-  
+
   public Object readMap(AbstractHessianInput in)
     throws IOException
   {
     int ref = in.addRef(null);
-    
+
     String name = null;
-    
+
     while (! in.isEnd()) {
       String key = in.readString();
 
@@ -102,7 +85,7 @@ public class ClassDeserializer extends AbstractMapDeserializer {
       else
 	in.readObject();
     }
-      
+
     in.readMapEnd();
 
     Object value = create(name);
@@ -111,16 +94,16 @@ public class ClassDeserializer extends AbstractMapDeserializer {
 
     return value;
   }
-  
+
   public Object readObject(AbstractHessianInput in, Object []fields)
     throws IOException
   {
     String []fieldNames = (String []) fields;
-      
+
     int ref = in.addRef(null);
-    
+
     String name = null;
-    
+
     for (int i = 0; i < fieldNames.length; i++) {
       if ("name".equals(fieldNames[i]))
         name = in.readString();

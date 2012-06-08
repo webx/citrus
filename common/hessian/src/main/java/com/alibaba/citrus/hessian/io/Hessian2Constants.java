@@ -1,21 +1,4 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
- * All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
  * Copyright (c) 2001-2008 Caucho Technology, Inc.  All rights reserved.
  *
  * The Apache Software License, Version 1.1
@@ -78,7 +61,7 @@ public interface Hessian2Constants
 
   public static final int BC_DATE = 0x4a; // 64-bit millisecond UTC date
   public static final int BC_DATE_MINUTE = 0x4b; // 32-bit minute UTC date
-  
+
   public static final int BC_DOUBLE = 'D'; // IEEE 64-bit double
 
   public static final int BC_DOUBLE_ZERO = 0x5b;
@@ -86,11 +69,11 @@ public interface Hessian2Constants
   public static final int BC_DOUBLE_BYTE = 0x5d;
   public static final int BC_DOUBLE_SHORT = 0x5e;
   public static final int BC_DOUBLE_MILL = 0x5f;
-  
+
   public static final int BC_FALSE = 'F'; // boolean false
-  
+
   public static final int BC_INT = 'I'; // 32-bit int
-  
+
   public static final int INT_DIRECT_MIN = -0x10;
   public static final int INT_DIRECT_MAX = 0x2f;
   public static final int BC_INT_ZERO = 0x90;
@@ -98,7 +81,7 @@ public interface Hessian2Constants
   public static final int INT_BYTE_MIN = -0x800;
   public static final int INT_BYTE_MAX = 0x7ff;
   public static final int BC_INT_BYTE_ZERO = 0xc8;
-  
+
   public static final int BC_END = 'Z';
 
   public static final int INT_SHORT_MIN = -0x40000;
@@ -126,30 +109,30 @@ public interface Hessian2Constants
   public static final int LONG_SHORT_MIN = -0x40000;
   public static final int LONG_SHORT_MAX = 0x3ffff;
   public static final int BC_LONG_SHORT_ZERO = 0x3c;
-  
+
   public static final int BC_LONG_INT = 0x59;
-  
+
   public static final int BC_MAP = 'M';
   public static final int BC_MAP_UNTYPED = 'H';
-  
+
   public static final int BC_NULL = 'N';
-  
+
   public static final int BC_OBJECT = 'O';
   public static final int BC_OBJECT_DEF = 'C';
-  
+
   public static final int BC_OBJECT_DIRECT = 0x60;
   public static final int OBJECT_DIRECT_MAX = 0x0f;
-  
+
   public static final int BC_REF = 0x51;
 
   public static final int BC_STRING = 'S'; // final string
   public static final int BC_STRING_CHUNK = 'R'; // non-final string
-  
+
   public static final int BC_STRING_DIRECT = 0x00;
   public static final int STRING_DIRECT_MAX = 0x1f;
   public static final int BC_STRING_SHORT = 0x30;
   public static final int STRING_SHORT_MAX = 0x3ff;
-  
+
   public static final int BC_TRUE = 'T';
 
   public static final int P_PACKET_CHUNK = 0x4f;

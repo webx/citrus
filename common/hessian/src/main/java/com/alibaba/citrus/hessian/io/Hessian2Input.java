@@ -1,21 +1,4 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
- * All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
  * Copyright (c) 2001-2008 Caucho Technology, Inc.  All rights reserved.
  *
  * The Apache Software License, Version 1.1
@@ -94,32 +77,32 @@ public class Hessian2Input
 {
   private static final Logger log
     = Logger.getLogger(Hessian2Input.class.getName());
-  
+
   private static final int END_OF_DATA = -2;
 
   private static Field _detailMessageField;
 
   private static final int SIZE = 256;
   private static final int GAP = 16;
-  
+
   // standard, unmodified factory for deserializing objects
   protected SerializerFactory _defaultSerializerFactory;
   // factory for deserializing objects in the input stream
   protected SerializerFactory _serializerFactory;
 
   private static boolean _isCloseStreamOnClose;
-  
+
   protected ArrayList<Object> _refs
     = new ArrayList<Object>();
   protected ArrayList<ObjectDefinition> _classDefs
     = new ArrayList<ObjectDefinition>();
   protected ArrayList<String> _types
     = new ArrayList<String>();
-  
+
   // the underlying input stream
   private InputStream _is;
   private final byte []_buffer = new byte[SIZE];
-  
+
   // a peek character
   private int _offset;
   private int _length;
@@ -129,12 +112,12 @@ public class Hessian2Input
   private Throwable _replyFault;
 
   private StringBuffer _sbuf = new StringBuffer();
-  
+
   // true if this is the last chunk
   private boolean _isLastChunk;
   // the chunk length
   private int _chunkLength;
-  
+
   /**
    * Creates a new Hessian input stream, initialized with an
    * underlying input stream.
@@ -164,7 +147,7 @@ public class Hessian2Input
     if (_serializerFactory == _defaultSerializerFactory) {
       _serializerFactory = new SerializerFactory();
     }
-    
+
     return _serializerFactory;
   }
 
@@ -221,7 +204,7 @@ public class Hessian2Input
     throws IOException
   {
     int tag = read();
-    
+
     if (tag != 'C')
       throw error("expected hessian call ('C') at " + codeName(tag));
 
@@ -249,7 +232,7 @@ public class Hessian2Input
 
       tag = read();
     }
-    
+
     if (tag != 'E')
       throw error("expected hessian Envelope ('E') at " + codeName(tag));
 
@@ -269,7 +252,7 @@ public class Hessian2Input
     throws IOException
   {
     int tag = read();
-    
+
     if (tag != 'Z')
       error("expected end of envelope at " + codeName(tag));
   }
@@ -369,7 +352,7 @@ public class Hessian2Input
     else {
       StringBuilder sb = new StringBuilder();
       sb.append((char) tag);
-      
+
       try {
 	int ch;
 
@@ -379,7 +362,7 @@ public class Hessian2Input
       } catch (IOException e) {
 	log.log(Level.FINE, e.toString(), e);
       }
-      
+
       throw error("expected hessian reply at " + codeName(tag) + "\n"
 		  + sb);
     }
@@ -398,7 +381,7 @@ public class Hessian2Input
     throws Throwable
   {
     // XXX: for variable length (?)
-    
+
     readReply(Object.class);
   }
 
@@ -413,20 +396,20 @@ public class Hessian2Input
 
     if (detail instanceof Throwable) {
       _replyFault = (Throwable) detail;
-      
+
       if (message != null && _detailMessageField != null) {
 	try {
 	  _detailMessageField.set(_replyFault, message);
 	} catch (Throwable e) {
 	}
       }
-	
+
       return _replyFault;
     }
 
     else {
       String code = (String) fault.get("code");
-        
+
       _replyFault = new HessianServiceException(message, code, detail);
 
       return _replyFault;
@@ -460,7 +443,7 @@ public class Hessian2Input
     throws IOException
   {
     int tag = read();
-    
+
     if (tag != 'Z')
       error("expected end of reply at " + codeName(tag));
   }
@@ -514,7 +497,7 @@ public class Hessian2Input
     throws IOException
   {
     int tag = read();
-    
+
     if (tag != 'Z')
       error("expected end of message at " + codeName(tag));
   }
@@ -533,7 +516,7 @@ public class Hessian2Input
 
     switch (tag) {
     case 'N': return;
-      
+
     default:
       throw expect("null", tag);
     }
@@ -561,12 +544,12 @@ public class Hessian2Input
     case 0x84: case 0x85: case 0x86: case 0x87:
     case 0x88: case 0x89: case 0x8a: case 0x8b:
     case 0x8c: case 0x8d: case 0x8e: case 0x8f:
-      
+
     case 0x90: case 0x91: case 0x92: case 0x93:
     case 0x94: case 0x95: case 0x96: case 0x97:
     case 0x98: case 0x99: case 0x9a: case 0x9b:
     case 0x9c: case 0x9d: case 0x9e: case 0x9f:
-      
+
     case 0xa0: case 0xa1: case 0xa2: case 0xa3:
     case 0xa4: case 0xa5: case 0xa6: case 0xa7:
     case 0xa8: case 0xa9: case 0xaa: case 0xab:
@@ -579,9 +562,9 @@ public class Hessian2Input
       return tag != BC_INT_ZERO;
 
       // INT_BYTE = 0
-    case 0xc8: 
+    case 0xc8:
       return read() != 0;
-      
+
       // INT_BYTE != 0
     case 0xc0: case 0xc1: case 0xc2: case 0xc3:
     case 0xc4: case 0xc5: case 0xc6: case 0xc7:
@@ -591,22 +574,22 @@ public class Hessian2Input
       return true;
 
       // INT_SHORT = 0
-    case 0xd4: 
+    case 0xd4:
       return (256 * read() + read()) != 0;
-      
+
       // INT_SHORT != 0
     case 0xd0: case 0xd1: case 0xd2: case 0xd3:
     case 0xd5: case 0xd6: case 0xd7:
       read();
       read();
       return true;
-      
+
     case 'I': return
 	parseInt() != 0;
-      
+
     case 0xd8: case 0xd9: case 0xda: case 0xdb:
     case 0xdc: case 0xdd: case 0xde: case 0xdf:
-      
+
     case 0xe0: case 0xe1: case 0xe2: case 0xe3:
     case 0xe4: case 0xe5: case 0xe6: case 0xe7:
     case 0xe8: case 0xe9: case 0xea: case 0xeb:
@@ -614,9 +597,9 @@ public class Hessian2Input
       return tag != BC_LONG_ZERO;
 
       // LONG_BYTE = 0
-    case 0xf8: 
+    case 0xf8:
       return read() != 0;
-      
+
       // LONG_BYTE != 0
     case 0xf0: case 0xf1: case 0xf2: case 0xf3:
     case 0xf4: case 0xf5: case 0xf6: case 0xf7:
@@ -626,9 +609,9 @@ public class Hessian2Input
       return true;
 
       // INT_SHORT = 0
-    case 0x3c: 
+    case 0x3c:
       return (256 * read() + read()) != 0;
-      
+
       // INT_SHORT != 0
     case 0x38: case 0x39: case 0x3a: case 0x3b:
     case 0x3d: case 0x3e: case 0x3f:
@@ -641,35 +624,35 @@ public class Hessian2Input
 	      + 0x10000L * read()
 	      + 0x100 * read()
 	      + read()) != 0;
-      
+
     case 'L':
       return parseLong() != 0;
 
     case BC_DOUBLE_ZERO:
       return false;
-      
+
     case BC_DOUBLE_ONE:
       return true;
-      
+
     case BC_DOUBLE_BYTE:
       return read() != 0;
-      
+
     case BC_DOUBLE_SHORT:
       return (0x100 * read() + read()) != 0;
-      
+
     case BC_DOUBLE_MILL:
       {
 	int mills = parseInt();
 
 	return mills != 0;
       }
-      
+
     case 'D':
       return parseDouble() != 0.0;
-      
+
     case 'N':
       return false;
-      
+
     default:
       throw expect("boolean", tag);
     }
@@ -704,10 +687,10 @@ public class Hessian2Input
     switch (tag) {
     case 'N':
       return 0;
-      
+
     case 'F':
       return 0;
-      
+
     case 'T':
       return 1;
 
@@ -716,17 +699,17 @@ public class Hessian2Input
     case 0x84: case 0x85: case 0x86: case 0x87:
     case 0x88: case 0x89: case 0x8a: case 0x8b:
     case 0x8c: case 0x8d: case 0x8e: case 0x8f:
-      
+
     case 0x90: case 0x91: case 0x92: case 0x93:
     case 0x94: case 0x95: case 0x96: case 0x97:
     case 0x98: case 0x99: case 0x9a: case 0x9b:
     case 0x9c: case 0x9d: case 0x9e: case 0x9f:
-      
+
     case 0xa0: case 0xa1: case 0xa2: case 0xa3:
     case 0xa4: case 0xa5: case 0xa6: case 0xa7:
     case 0xa8: case 0xa9: case 0xaa: case 0xab:
     case 0xac: case 0xad: case 0xae: case 0xaf:
-      
+
     case 0xb0: case 0xb1: case 0xb2: case 0xb3:
     case 0xb4: case 0xb5: case 0xb6: case 0xb7:
     case 0xb8: case 0xb9: case 0xba: case 0xbb:
@@ -739,7 +722,7 @@ public class Hessian2Input
     case 0xc8: case 0xc9: case 0xca: case 0xcb:
     case 0xcc: case 0xcd: case 0xce: case 0xcf:
       return ((tag - BC_INT_BYTE_ZERO) << 8) + read();
-      
+
       /* short int */
     case 0xd0: case 0xd1: case 0xd2: case 0xd3:
     case 0xd4: case 0xd5: case 0xd6: case 0xd7:
@@ -755,7 +738,7 @@ public class Hessian2Input
       // direct long
     case 0xd8: case 0xd9: case 0xda: case 0xdb:
     case 0xdc: case 0xdd: case 0xde: case 0xdf:
-      
+
     case 0xe0: case 0xe1: case 0xe2: case 0xe3:
     case 0xe4: case 0xe5: case 0xe6: case 0xe7:
     case 0xe8: case 0xe9: case 0xea: case 0xeb:
@@ -768,7 +751,7 @@ public class Hessian2Input
     case 0xf8: case 0xf9: case 0xfa: case 0xfb:
     case 0xfc: case 0xfd: case 0xfe: case 0xff:
       return ((tag - BC_LONG_BYTE_ZERO) << 8) + read();
-      
+
       /* short long */
     case 0x38: case 0x39: case 0x3a: case 0x3b:
     case 0x3c: case 0x3d: case 0x3e: case 0x3f:
@@ -801,7 +784,7 @@ public class Hessian2Input
 
     case 'D':
       return (int) parseDouble();
-      
+
     default:
       throw expect("integer", tag);
     }
@@ -822,10 +805,10 @@ public class Hessian2Input
     switch (tag) {
     case 'N':
       return 0;
-      
+
     case 'F':
       return 0;
-      
+
     case 'T':
       return 1;
 
@@ -834,17 +817,17 @@ public class Hessian2Input
     case 0x84: case 0x85: case 0x86: case 0x87:
     case 0x88: case 0x89: case 0x8a: case 0x8b:
     case 0x8c: case 0x8d: case 0x8e: case 0x8f:
-      
+
     case 0x90: case 0x91: case 0x92: case 0x93:
     case 0x94: case 0x95: case 0x96: case 0x97:
     case 0x98: case 0x99: case 0x9a: case 0x9b:
     case 0x9c: case 0x9d: case 0x9e: case 0x9f:
-      
+
     case 0xa0: case 0xa1: case 0xa2: case 0xa3:
     case 0xa4: case 0xa5: case 0xa6: case 0xa7:
     case 0xa8: case 0xa9: case 0xaa: case 0xab:
     case 0xac: case 0xad: case 0xae: case 0xaf:
-      
+
     case 0xb0: case 0xb1: case 0xb2: case 0xb3:
     case 0xb4: case 0xb5: case 0xb6: case 0xb7:
     case 0xb8: case 0xb9: case 0xba: case 0xbb:
@@ -857,7 +840,7 @@ public class Hessian2Input
     case 0xc8: case 0xc9: case 0xca: case 0xcb:
     case 0xcc: case 0xcd: case 0xce: case 0xcf:
       return ((tag - BC_INT_BYTE_ZERO) << 8) + read();
-      
+
       /* short int */
     case 0xd0: case 0xd1: case 0xd2: case 0xd3:
     case 0xd4: case 0xd5: case 0xd6: case 0xd7:
@@ -879,7 +862,7 @@ public class Hessian2Input
       // direct long
     case 0xd8: case 0xd9: case 0xda: case 0xdb:
     case 0xdc: case 0xdd: case 0xde: case 0xdf:
-      
+
     case 0xe0: case 0xe1: case 0xe2: case 0xe3:
     case 0xe4: case 0xe5: case 0xe6: case 0xe7:
     case 0xe8: case 0xe9: case 0xea: case 0xeb:
@@ -892,7 +875,7 @@ public class Hessian2Input
     case 0xf8: case 0xf9: case 0xfa: case 0xfb:
     case 0xfc: case 0xfd: case 0xfe: case 0xff:
       return ((tag - BC_LONG_BYTE_ZERO) << 8) + read();
-      
+
       /* short long */
     case 0x38: case 0x39: case 0x3a: case 0x3b:
     case 0x3c: case 0x3d: case 0x3e: case 0x3f:
@@ -916,7 +899,7 @@ public class Hessian2Input
 
     case 'D':
       return (long) parseDouble();
-      
+
     default:
       throw expect("long", tag);
     }
@@ -950,10 +933,10 @@ public class Hessian2Input
     switch (tag) {
     case 'N':
       return 0;
-      
+
     case 'F':
       return 0;
-      
+
     case 'T':
       return 1;
 
@@ -962,17 +945,17 @@ public class Hessian2Input
     case 0x84: case 0x85: case 0x86: case 0x87:
     case 0x88: case 0x89: case 0x8a: case 0x8b:
     case 0x8c: case 0x8d: case 0x8e: case 0x8f:
-      
+
     case 0x90: case 0x91: case 0x92: case 0x93:
     case 0x94: case 0x95: case 0x96: case 0x97:
     case 0x98: case 0x99: case 0x9a: case 0x9b:
     case 0x9c: case 0x9d: case 0x9e: case 0x9f:
-      
+
     case 0xa0: case 0xa1: case 0xa2: case 0xa3:
     case 0xa4: case 0xa5: case 0xa6: case 0xa7:
     case 0xa8: case 0xa9: case 0xaa: case 0xab:
     case 0xac: case 0xad: case 0xae: case 0xaf:
-      
+
     case 0xb0: case 0xb1: case 0xb2: case 0xb3:
     case 0xb4: case 0xb5: case 0xb6: case 0xb7:
     case 0xb8: case 0xb9: case 0xba: case 0xbb:
@@ -985,7 +968,7 @@ public class Hessian2Input
     case 0xc8: case 0xc9: case 0xca: case 0xcb:
     case 0xcc: case 0xcd: case 0xce: case 0xcf:
       return ((tag - BC_INT_BYTE_ZERO) << 8) + read();
-      
+
       /* short int */
     case 0xd0: case 0xd1: case 0xd2: case 0xd3:
     case 0xd4: case 0xd5: case 0xd6: case 0xd7:
@@ -998,7 +981,7 @@ public class Hessian2Input
       // direct long
     case 0xd8: case 0xd9: case 0xda: case 0xdb:
     case 0xdc: case 0xdd: case 0xde: case 0xdf:
-      
+
     case 0xe0: case 0xe1: case 0xe2: case 0xe3:
     case 0xe4: case 0xe5: case 0xe6: case 0xe7:
     case 0xe8: case 0xe9: case 0xea: case 0xeb:
@@ -1011,7 +994,7 @@ public class Hessian2Input
     case 0xf8: case 0xf9: case 0xfa: case 0xfb:
     case 0xfc: case 0xfd: case 0xfe: case 0xff:
       return ((tag - BC_LONG_BYTE_ZERO) << 8) + read();
-      
+
       /* short long */
     case 0x38: case 0x39: case 0x3a: case 0x3b:
     case 0x3c: case 0x3d: case 0x3e: case 0x3f:
@@ -1038,10 +1021,10 @@ public class Hessian2Input
 
 	return 0.001 * mills;
       }
-      
+
     case 'D':
       return parseDouble();
-      
+
     default:
       throw expect("double", tag);
     }
@@ -1087,7 +1070,7 @@ public class Hessian2Input
       _chunkLength = 0;
       return -1;
     }
-    
+
     int tag = read();
 
     switch (tag) {
@@ -1108,7 +1091,7 @@ public class Hessian2Input
         _chunkLength = END_OF_DATA;
 
       return value;
-      
+
     default:
       throw expect("char", tag);
     }
@@ -1132,7 +1115,7 @@ public class Hessian2Input
       switch (tag) {
       case 'N':
         return -1;
-      
+
       case 'S':
       case BC_STRING_CHUNK:
         _isLastChunk = tag == 'S';
@@ -1151,7 +1134,7 @@ public class Hessian2Input
 	_isLastChunk = true;
 	_chunkLength = tag - 0x00;
 	break;
-	
+
       case 0x30: case 0x31: case 0x32: case 0x33:
 	_isLastChunk = true;
 	_chunkLength = (tag - 0x30) * 256 + read();
@@ -1204,13 +1187,13 @@ public class Hessian2Input
 	  _isLastChunk = true;
 	  _chunkLength = (tag - 0x30) * 256 + read();
 	  break;
-      
+
 	default:
           throw expect("string", tag);
         }
       }
     }
-    
+
     if (readLength == 0)
       return -1;
     else if (_chunkLength > 0 || ! _isLastChunk)
@@ -1246,17 +1229,17 @@ public class Hessian2Input
     case 0x84: case 0x85: case 0x86: case 0x87:
     case 0x88: case 0x89: case 0x8a: case 0x8b:
     case 0x8c: case 0x8d: case 0x8e: case 0x8f:
-      
+
     case 0x90: case 0x91: case 0x92: case 0x93:
     case 0x94: case 0x95: case 0x96: case 0x97:
     case 0x98: case 0x99: case 0x9a: case 0x9b:
     case 0x9c: case 0x9d: case 0x9e: case 0x9f:
-      
+
     case 0xa0: case 0xa1: case 0xa2: case 0xa3:
     case 0xa4: case 0xa5: case 0xa6: case 0xa7:
     case 0xa8: case 0xa9: case 0xaa: case 0xab:
     case 0xac: case 0xad: case 0xae: case 0xaf:
-      
+
     case 0xb0: case 0xb1: case 0xb2: case 0xb3:
     case 0xb4: case 0xb5: case 0xb6: case 0xb7:
     case 0xb8: case 0xb9: case 0xba: case 0xbb:
@@ -1269,7 +1252,7 @@ public class Hessian2Input
     case 0xc8: case 0xc9: case 0xca: case 0xcb:
     case 0xcc: case 0xcd: case 0xce: case 0xcf:
       return String.valueOf(((tag - BC_INT_BYTE_ZERO) << 8) + read());
-      
+
       /* short int */
     case 0xd0: case 0xd1: case 0xd2: case 0xd3:
     case 0xd4: case 0xd5: case 0xd6: case 0xd7:
@@ -1283,7 +1266,7 @@ public class Hessian2Input
       // direct long
     case 0xd8: case 0xd9: case 0xda: case 0xdb:
     case 0xdc: case 0xdd: case 0xde: case 0xdf:
-      
+
     case 0xe0: case 0xe1: case 0xe2: case 0xe3:
     case 0xe4: case 0xe5: case 0xe6: case 0xe7:
     case 0xe8: case 0xe9: case 0xea: case 0xeb:
@@ -1296,7 +1279,7 @@ public class Hessian2Input
     case 0xf8: case 0xf9: case 0xfa: case 0xfb:
     case 0xfc: case 0xfd: case 0xfe: case 0xff:
       return String.valueOf(((tag - BC_LONG_BYTE_ZERO) << 8) + read());
-      
+
       /* short long */
     case 0x38: case 0x39: case 0x3a: case 0x3b:
     case 0x3c: case 0x3d: case 0x3e: case 0x3f:
@@ -1326,7 +1309,7 @@ public class Hessian2Input
 
 	return String.valueOf(0.001 * mills);
       }
-      
+
     case 'D':
       return String.valueOf(parseDouble());
 
@@ -1425,13 +1408,13 @@ public class Hessian2Input
 
 	  if (sublen <= 0)
 	    break;
-	  
+
 	  offset += sublen;
 	}
 
 	return buffer;
       }
-      
+
     case 0x34: case 0x35: case 0x36: case 0x37:
       {
 	_isLastChunk = true;
@@ -1445,13 +1428,13 @@ public class Hessian2Input
 
 	  if (sublen <= 0)
 	    break;
-	  
+
 	  offset += sublen;
 	}
 
 	return buffer;
       }
-      
+
     default:
       throw expect("bytes", tag);
     }
@@ -1474,7 +1457,7 @@ public class Hessian2Input
       _chunkLength = 0;
       return -1;
     }
-    
+
     int tag = read();
 
     switch (tag) {
@@ -1514,7 +1497,7 @@ public class Hessian2Input
 
 	return value;
       }
-      
+
     case 0x34: case 0x35: case 0x36: case 0x37:
       {
 	_isLastChunk = true;
@@ -1529,7 +1512,7 @@ public class Hessian2Input
 
 	return value;
       }
-      
+
     default:
       throw expect("binary", tag);
     }
@@ -1553,7 +1536,7 @@ public class Hessian2Input
       switch (tag) {
       case 'N':
         return -1;
-      
+
       case 'B':
       case BC_BINARY_CHUNK:
         _isLastChunk = tag == 'B';
@@ -1569,14 +1552,14 @@ public class Hessian2Input
 	_chunkLength = tag - 0x20;
 	break;
       }
-      
+
     case 0x34: case 0x35: case 0x36: case 0x37:
       {
 	_isLastChunk = true;
 	_chunkLength = (tag - 0x34) * 256 + read();
 	break;
       }
-      
+
       default:
         throw expect("binary", tag);
       }
@@ -1606,13 +1589,13 @@ public class Hessian2Input
           _isLastChunk = tag == 'B';
           _chunkLength = (read() << 8) + read();
           break;
-      
+
         default:
           throw expect("binary", tag);
         }
       }
     }
-    
+
     if (readLength == 0)
       return -1;
     else if (_chunkLength > 0 || ! _isLastChunk)
@@ -1634,7 +1617,7 @@ public class Hessian2Input
     int code = read();
     for (; code > 0 && code != 'Z'; code = read()) {
       _offset--;
-      
+
       Object key = readObject();
       Object value = readObject();
 
@@ -1656,7 +1639,7 @@ public class Hessian2Input
   {
     if (cl == null || cl == Object.class)
       return readObject();
-    
+
     int tag = _offset < _length ? (_buffer[_offset++] & 0xff) : read();
 
     switch (tag) {
@@ -1728,7 +1711,7 @@ public class Hessian2Input
     case BC_LIST_VARIABLE:
       {
 	String type = readType();
-      
+
 	Deserializer reader;
 	reader = findSerializerFactory().getListDeserializer(type, cl);
 
@@ -1741,7 +1724,7 @@ public class Hessian2Input
       {
 	String type = readType();
 	int length = readInt();
-      
+
 	Deserializer reader;
 	reader = findSerializerFactory().getListDeserializer(type, cl);
 
@@ -1756,7 +1739,7 @@ public class Hessian2Input
 	int length = tag - 0x70;
 
 	String type = readType();
-      
+
 	Deserializer reader;
 	reader = findSerializerFactory().getListDeserializer(type, cl);
 
@@ -1778,7 +1761,7 @@ public class Hessian2Input
     case BC_LIST_FIXED_UNTYPED:
       {
 	int length = readInt();
-      
+
 	Deserializer reader;
 	reader = findSerializerFactory().getListDeserializer(null, cl);
 
@@ -1791,7 +1774,7 @@ public class Hessian2Input
     case 0x7c: case 0x7d: case 0x7e: case 0x7f:
       {
 	int length = tag - 0x78;
-      
+
 	Deserializer reader;
 	reader = findSerializerFactory().getListDeserializer(null, cl);
 
@@ -1816,7 +1799,7 @@ public class Hessian2Input
     Object value = findSerializerFactory().getDeserializer(cl).readObject(this);
     return value;
   }
-  
+
   /**
    * Reads an arbitrary object from the input stream when the type
    * is unknown.
@@ -1829,10 +1812,10 @@ public class Hessian2Input
     switch (tag) {
     case 'N':
       return null;
-      
+
     case 'T':
       return Boolean.valueOf(true);
-      
+
     case 'F':
       return Boolean.valueOf(false);
 
@@ -1841,17 +1824,17 @@ public class Hessian2Input
     case 0x84: case 0x85: case 0x86: case 0x87:
     case 0x88: case 0x89: case 0x8a: case 0x8b:
     case 0x8c: case 0x8d: case 0x8e: case 0x8f:
-      
+
     case 0x90: case 0x91: case 0x92: case 0x93:
     case 0x94: case 0x95: case 0x96: case 0x97:
     case 0x98: case 0x99: case 0x9a: case 0x9b:
     case 0x9c: case 0x9d: case 0x9e: case 0x9f:
-      
+
     case 0xa0: case 0xa1: case 0xa2: case 0xa3:
     case 0xa4: case 0xa5: case 0xa6: case 0xa7:
     case 0xa8: case 0xa9: case 0xaa: case 0xab:
     case 0xac: case 0xad: case 0xae: case 0xaf:
-      
+
     case 0xb0: case 0xb1: case 0xb2: case 0xb3:
     case 0xb4: case 0xb5: case 0xb6: case 0xb7:
     case 0xb8: case 0xb9: case 0xba: case 0xbb:
@@ -1864,20 +1847,20 @@ public class Hessian2Input
     case 0xc8: case 0xc9: case 0xca: case 0xcb:
     case 0xcc: case 0xcd: case 0xce: case 0xcf:
       return Integer.valueOf(((tag - BC_INT_BYTE_ZERO) << 8) + read());
-      
+
       /* short int */
     case 0xd0: case 0xd1: case 0xd2: case 0xd3:
     case 0xd4: case 0xd5: case 0xd6: case 0xd7:
       return Integer.valueOf(((tag - BC_INT_SHORT_ZERO) << 16)
 			     + 256 * read() + read());
-      
+
     case 'I':
       return Integer.valueOf(parseInt());
 
       // direct long
     case 0xd8: case 0xd9: case 0xda: case 0xdb:
     case 0xdc: case 0xdd: case 0xde: case 0xdf:
-      
+
     case 0xe0: case 0xe1: case 0xe2: case 0xe3:
     case 0xe4: case 0xe5: case 0xe6: case 0xe7:
     case 0xe8: case 0xe9: case 0xea: case 0xeb:
@@ -1890,15 +1873,15 @@ public class Hessian2Input
     case 0xf8: case 0xf9: case 0xfa: case 0xfb:
     case 0xfc: case 0xfd: case 0xfe: case 0xff:
       return Long.valueOf(((tag - BC_LONG_BYTE_ZERO) << 8) + read());
-      
+
       /* short long */
     case 0x38: case 0x39: case 0x3a: case 0x3b:
     case 0x3c: case 0x3d: case 0x3e: case 0x3f:
       return Long.valueOf(((tag - BC_LONG_SHORT_ZERO) << 16) + 256 * read() + read());
-      
+
     case BC_LONG_INT:
       return Long.valueOf(parseInt());
-    
+
     case 'L':
       return Long.valueOf(parseLong());
 
@@ -1913,7 +1896,7 @@ public class Hessian2Input
 
     case BC_DOUBLE_SHORT:
       return Double.valueOf((short) (256 * read() + read()));
-      
+
     case BC_DOUBLE_MILL:
       {
 	int mills = parseInt();
@@ -1923,10 +1906,10 @@ public class Hessian2Input
 
     case 'D':
       return Double.valueOf(parseDouble());
-    
+
     case BC_DATE:
       return new Date(parseLong());
-    
+
     case BC_DATE_MINUTE:
       return new Date(parseInt() * 60000L);
 
@@ -1938,7 +1921,7 @@ public class Hessian2Input
 
 	int data;
 	_sbuf.setLength(0);
-      
+
 	while ((data = parseChar()) >= 0)
 	  _sbuf.append((char) data);
 
@@ -1960,7 +1943,7 @@ public class Hessian2Input
 
 	int data;
 	_sbuf.setLength(0);
-      
+
 	while ((data = parseChar()) >= 0)
 	  _sbuf.append((char) data);
 
@@ -1989,7 +1972,7 @@ public class Hessian2Input
 
 	int data;
 	ByteArrayOutputStream bos = new ByteArrayOutputStream();
-      
+
 	while ((data = parseByte()) >= 0)
 	  bos.write(data);
 
@@ -2012,7 +1995,7 @@ public class Hessian2Input
 
 	return data;
       }
-      
+
     case 0x34: case 0x35: case 0x36: case 0x37:
       {
 	_isLastChunk = true;
@@ -2049,7 +2032,7 @@ public class Hessian2Input
 
 	Deserializer reader;
 	reader = findSerializerFactory().getListDeserializer(type, null);
-      
+
 	return reader.readLengthList(this, length);
       }
 
@@ -2060,7 +2043,7 @@ public class Hessian2Input
 
 	Deserializer reader;
 	reader = findSerializerFactory().getListDeserializer(null, null);
-      
+
 	return reader.readLengthList(this, length);
       }
 
@@ -2074,7 +2057,7 @@ public class Hessian2Input
 
 	Deserializer reader;
 	reader = findSerializerFactory().getListDeserializer(type, null);
-      
+
 	return reader.readLengthList(this, length);
       }
 
@@ -2087,7 +2070,7 @@ public class Hessian2Input
 
 	Deserializer reader;
 	reader = findSerializerFactory().getListDeserializer(null, null);
-      
+
 	return reader.readLengthList(this, length);
       }
 
@@ -2120,7 +2103,7 @@ public class Hessian2Input
 	if (_classDefs.size() <= ref)
 	  throw error("No classes defined at reference '"
 		      + Integer.toHexString(tag) + "'");
-	
+
 	ObjectDefinition def = _classDefs.get(ref);
 
 	return readObjectInstance(null, def);
@@ -2167,19 +2150,19 @@ public class Hessian2Input
     int len = readInt();
 
     SerializerFactory factory = findSerializerFactory();
-    
+
     Deserializer reader = factory.getObjectDeserializer(type, null);
-    
+
     Object []fields = reader.createFields(len);
     String []fieldNames = new String[len];
-    
+
     for (int i = 0; i < len; i++) {
       String name = readString();
-      
+
       fields[i] = reader.createField(name);
       fieldNames[i] = name;
     }
-    
+
     ObjectDefinition def
       = new ObjectDefinition(type, reader, fields, fieldNames);
 
@@ -2195,10 +2178,10 @@ public class Hessian2Input
     Object []fields = def.getFields();
 
     SerializerFactory factory = findSerializerFactory();
-    
+
     if (cl != reader.getType() && cl != null) {
       reader = factory.getObjectDeserializer(type, cl);
-      
+
       return reader.readObject(this, def.getFieldNames());
     }
     else {
@@ -2312,7 +2295,7 @@ public class Hessian2Input
   {
     if (_refs == null)
       _refs = new ArrayList();
-    
+
     _refs.add(ref);
 
     return _refs.size() - 1;
@@ -2325,7 +2308,7 @@ public class Hessian2Input
   {
     _refs.set(i, ref);
   }
-  
+
   /**
    * Resets the references for streaming.
    */
@@ -2333,11 +2316,11 @@ public class Hessian2Input
   {
     _refs.clear();
   }
-  
+
   public void reset()
   {
     resetReferences();
-    
+
     _classDefs.clear();
     _types.clear();
   }
@@ -2346,7 +2329,7 @@ public class Hessian2Input
   {
     int offset = _offset;
     _offset = 0;
-    
+
     int length = _length;
     _length = 0;
 
@@ -2421,7 +2404,7 @@ public class Hessian2Input
 
 	if (_types.size() <= ref)
 	  throw new IndexOutOfBoundsException("type ref #" + ref + " is greater than the number of valid types (" + _types.size() + ")");
-	
+
 	return (String) _types.get(ref);
       }
     }
@@ -2451,10 +2434,10 @@ public class Hessian2Input
     throws IOException
   {
     int offset = _offset;
-    
+
     if (offset + 3 < _length) {
       byte []buffer = _buffer;
-      
+
       int b32 = buffer[offset + 0] & 0xff;
       int b24 = buffer[offset + 1] & 0xff;
       int b16 = buffer[offset + 2] & 0xff;
@@ -2502,7 +2485,7 @@ public class Hessian2Input
 	    + (b16 << 8)
 	    + b8);
   }
-  
+
   /**
    * Parses a 64-bit double value from the stream.
    *
@@ -2514,7 +2497,7 @@ public class Hessian2Input
     throws IOException
   {
     long bits = parseLong();
-  
+
     return Double.longBitsToDouble(bits);
   }
 
@@ -2523,7 +2506,7 @@ public class Hessian2Input
   {
     throw new UnsupportedOperationException();
   }
-  
+
   /**
    * Reads a character from the underlying stream.
    */
@@ -2542,13 +2525,13 @@ public class Hessian2Input
 
         _chunkLength = (read() << 8) + read();
         break;
-        
+
       case 'S':
         _isLastChunk = true;
 
         _chunkLength = (read() << 8) + read();
         break;
-	
+
       case 0x00: case 0x01: case 0x02: case 0x03:
       case 0x04: case 0x05: case 0x06: case 0x07:
       case 0x08: case 0x09: case 0x0a: case 0x0b:
@@ -2561,7 +2544,7 @@ public class Hessian2Input
 	_isLastChunk = true;
 	_chunkLength = code - 0x00;
 	break;
-	
+
       case 0x30: case 0x31: case 0x32: case 0x33:
 	_isLastChunk = true;
 	_chunkLength = (code - 0x30) * 256 + read();
@@ -2604,7 +2587,7 @@ public class Hessian2Input
     else
       throw error("bad utf-8 encoding at " + codeName(ch));
   }
-  
+
   /**
    * Reads a byte from the underlying stream.
    */
@@ -2624,7 +2607,7 @@ public class Hessian2Input
 
         _chunkLength = (read() << 8) + read();
         break;
-        
+
       case 'B':
         _isLastChunk = true;
 
@@ -2685,14 +2668,14 @@ public class Hessian2Input
       _isLastChunk = true;
       _chunkLength = (tag - 0x34) * 256 + read();
       break;
-      
+
     default:
       throw expect("binary", tag);
     }
-    
+
     return new ReadInputStream();
   }
-  
+
   /**
    * Reads bytes from the underlying stream.
    */
@@ -2714,7 +2697,7 @@ public class Hessian2Input
 
           _chunkLength = (read() << 8) + read();
           break;
-        
+
         case BC_BINARY:
           _isLastChunk = true;
 
@@ -2728,7 +2711,7 @@ public class Hessian2Input
 	  _isLastChunk = true;
 	  _chunkLength = code - 0x20;
 	  break;
-	  
+
 	case 0x34: case 0x35: case 0x36: case 0x37:
 	  _isLastChunk = true;
 	  _chunkLength = (code - 0x34) * 256 + read();
@@ -2745,14 +2728,14 @@ public class Hessian2Input
 
       if (_length <= _offset && ! readBuffer())
 	return -1;
-      
+
       if (_length - _offset < sublen)
 	sublen = _length - _offset;
 
       System.arraycopy(_buffer, _offset, buffer, offset, sublen);
 
       _offset += sublen;
-      
+
       offset += sublen;
       readLength += sublen;
       length -= sublen;
@@ -2779,7 +2762,7 @@ public class Hessian2Input
   {
     if (_offset <= 0)
       throw new IllegalStateException();
-    
+
     _offset--;
   }
 
@@ -2789,20 +2772,20 @@ public class Hessian2Input
     byte []buffer = _buffer;
     int offset = _offset;
     int length = _length;
-    
+
     if (offset < length) {
       System.arraycopy(buffer, offset, buffer, 0, length - offset);
       offset = length - offset;
     }
     else
       offset = 0;
-    
+
     int len = _is.read(buffer, offset, SIZE - offset);
 
     if (len <= 0) {
       _length = offset;
       _offset = 0;
-      
+
       return offset > 0;
     }
 
@@ -2829,7 +2812,7 @@ public class Hessian2Input
 	int offset = _offset;
 	String context
 	  = buildDebugContext(_buffer, 0, _length, offset);
-	  
+
 	Object obj = readObject();
 
 	if (obj != null) {
@@ -2843,18 +2826,18 @@ public class Hessian2Input
 		       + " at 0x" + Integer.toHexString(ch & 0xff) + " null");
       } catch (Exception e) {
 	log.log(Level.FINE, e.toString(), e);
-	
+
 	return error("expected " + expect
 		     + " at 0x" + Integer.toHexString(ch & 0xff));
       }
     }
   }
-  
+
   private String buildDebugContext(byte []buffer, int offset, int length,
                                    int errorOffset)
   {
     StringBuilder sb = new StringBuilder();
-    
+
     sb.append("[");
     for (int i = 0; i < errorOffset; i++) {
       int ch = buffer[offset + i];
@@ -2868,19 +2851,19 @@ public class Hessian2Input
       addDebugChar(sb, ch);
     }
     sb.append("]");
-    
+
     return sb.toString();
   }
-  
+
   private void addDebugChar(StringBuilder sb, int ch)
-  {    
+  {
     if (ch >= 0x20 && ch < 0x7f) {
       sb.append((char) ch);
     }
     else if (ch == '\n')
       sb.append((char) ch);
     else
-      sb.append(String.format("\\x%02x", ch & 0xff));    
+      sb.append(String.format("\\x%02x", ch & 0xff));
   }
 
   protected String codeName(int ch)
@@ -2890,7 +2873,7 @@ public class Hessian2Input
     else
       return "0x" + Integer.toHexString(ch & 0xff) + " (" + (char) + ch + ")";
   }
-  
+
   protected IOException error(String message)
   {
     if (_method != null)
@@ -2908,10 +2891,10 @@ public class Hessian2Input
     if (_isCloseStreamOnClose && is != null)
       is.close();
   }
-  
+
   class ReadInputStream extends InputStream {
     boolean _isClosed = false;
-	
+
     public int read()
       throws IOException
     {
@@ -2924,7 +2907,7 @@ public class Hessian2Input
 
       return ch;
     }
-	
+
     public int read(byte []buffer, int offset, int length)
       throws IOException
     {
@@ -2977,7 +2960,7 @@ public class Hessian2Input
     {
       return _fields;
     }
-    
+
     String []getFieldNames()
     {
       return _fieldNames;

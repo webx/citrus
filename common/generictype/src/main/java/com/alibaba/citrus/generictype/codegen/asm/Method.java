@@ -1,20 +1,3 @@
-/*
- * Copyright 2010 Alibaba Group Holding Limited.
- * All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 /***
  * ASM: a very small and fast Java bytecode manipulation framework
  * Copyright (c) 2000-2007 INRIA, France Telecom
@@ -44,6 +27,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 package com.alibaba.citrus.generictype.codegen.asm;
 
 import java.util.HashMap;
@@ -51,7 +35,7 @@ import java.util.Map;
 
 /**
  * A named method descriptor.
- * 
+ *
  * @author Juozas Baliuka
  * @author Chris Nokleberg
  * @author Eric Bruneton
@@ -89,7 +73,7 @@ public class Method {
 
     /**
      * Creates a new {@link Method}.
-     * 
+     *
      * @param name the method's name.
      * @param desc the method's descriptor.
      */
@@ -100,7 +84,7 @@ public class Method {
 
     /**
      * Creates a new {@link Method}.
-     * 
+     *
      * @param name the method's name.
      * @param returnType the method's return type.
      * @param argumentTypes the method's argument types.
@@ -112,7 +96,7 @@ public class Method {
     /**
      * Returns a {@link Method} corresponding to the given Java method
      * declaration.
-     * 
+     *
      * @param method a Java method declaration, without argument names, of the
      *            form "returnType name (argumentType1, ...
      *            argumentTypeN)", where the types are in plain Java (e.g. "
@@ -131,7 +115,7 @@ public class Method {
     /**
      * Returns a {@link Method} corresponding to the given Java method
      * declaration.
-     * 
+     *
      * @param method a Java method declaration, without argument names, of the
      *            form "returnType name (argumentType1, ...
      *            argumentTypeN)", where the types are in plain Java (e.g. "
@@ -208,7 +192,7 @@ public class Method {
 
     /**
      * Returns the name of the method described by this object.
-     * 
+     *
      * @return the name of the method described by this object.
      */
     public String getName() {
@@ -217,7 +201,7 @@ public class Method {
 
     /**
      * Returns the descriptor of the method described by this object.
-     * 
+     *
      * @return the descriptor of the method described by this object.
      */
     public String getDescriptor() {
@@ -226,7 +210,7 @@ public class Method {
 
     /**
      * Returns the return type of the method described by this object.
-     * 
+     *
      * @return the return type of the method described by this object.
      */
     public Type getReturnType() {
@@ -235,7 +219,7 @@ public class Method {
 
     /**
      * Returns the argument types of the method described by this object.
-     * 
+     *
      * @return the argument types of the method described by this object.
      */
     public Type[] getArgumentTypes() {

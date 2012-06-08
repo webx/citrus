@@ -1,21 +1,4 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
- * All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
  * Copyright (c) 2001-2008 Caucho Technology, Inc.  All rights reserved.
  *
  * The Apache Software License, Version 1.1
@@ -80,7 +63,7 @@ public class BeanDeserializer extends AbstractMapDeserializer {
   private Method _readResolve;
   private Constructor _constructor;
   private Object []_constructorArgs;
-  
+
   public BeanDeserializer(Class cl)
   {
     _type = cl;
@@ -90,7 +73,7 @@ public class BeanDeserializer extends AbstractMapDeserializer {
 
     Constructor []constructors = cl.getConstructors();
     int bestLength = Integer.MAX_VALUE;
-    
+
     for (int i = 0; i < constructors.length; i++) {
       if (constructors[i].getParameterTypes().length < bestLength) {
         _constructor = constructors[i];
@@ -112,7 +95,7 @@ public class BeanDeserializer extends AbstractMapDeserializer {
   {
     return _type;
   }
-    
+
   public Object readMap(AbstractHessianInput in)
     throws IOException
   {
@@ -126,7 +109,7 @@ public class BeanDeserializer extends AbstractMapDeserializer {
       throw new IOExceptionWrapper(e);
     }
   }
-    
+
   public Object readMap(AbstractHessianInput in, Object obj)
     throws IOException
   {
@@ -135,19 +118,19 @@ public class BeanDeserializer extends AbstractMapDeserializer {
 
       while (! in.isEnd()) {
         Object key = in.readObject();
-        
+
         Method method = (Method) _methodMap.get(key);
 
         if (method != null) {
           Object value = in.readObject(method.getParameterTypes()[0]);
-	  
+
           method.invoke(obj, new Object[] {value });
         }
         else {
           Object value = in.readObject();
         }
       }
-      
+
       in.readMapEnd();
 
       Object resolve = resolve(obj);
@@ -188,7 +171,7 @@ public class BeanDeserializer extends AbstractMapDeserializer {
   {
     for (; cl != null; cl = cl.getSuperclass()) {
       Method []methods = cl.getDeclaredMethods();
-      
+
       for (int i = 0; i < methods.length; i++) {
 	Method method = methods[i];
 
@@ -207,10 +190,10 @@ public class BeanDeserializer extends AbstractMapDeserializer {
   protected HashMap getMethodMap(Class cl)
   {
     HashMap methodMap = new HashMap();
-    
+
     for (; cl != null; cl = cl.getSuperclass()) {
       Method []methods = cl.getDeclaredMethods();
-      
+
       for (int i = 0; i < methods.length; i++) {
 	Method method = methods[i];
 
@@ -238,7 +221,7 @@ public class BeanDeserializer extends AbstractMapDeserializer {
 	} catch (Throwable e) {
 	  e.printStackTrace();
 	}
-    
+
 	name = name.substring(3);
 
 	int j = 0;
@@ -264,13 +247,13 @@ public class BeanDeserializer extends AbstractMapDeserializer {
   private Method findGetter(Method []methods, String setterName, Class arg)
   {
     String getterName = "get" + setterName.substring(3);
-    
+
     for (int i = 0; i < methods.length; i++) {
       Method method = methods[i];
 
       if (! method.getName().equals(getterName))
 	continue;
-      
+
       if (! method.getReturnType().equals(arg))
 	continue;
 

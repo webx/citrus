@@ -1,21 +1,4 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
- * All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
  * Copyright (c) 2001-2008 Caucho Technology, Inc.  All rights reserved.
  *
  * The Apache Software License, Version 1.1
@@ -92,7 +75,7 @@ public class JavaSerializer extends AbstractSerializer
 
   private Object _writeReplaceFactory;
   private Method _writeReplace;
-  
+
   public JavaSerializer(Class<?> cl)
   {
     introspect(cl);
@@ -105,7 +88,7 @@ public class JavaSerializer extends AbstractSerializer
     synchronized (_serializerMap) {
       SoftReference<JavaSerializer> baseRef
         = _serializerMap.get(cl);
-      
+
       JavaSerializer base = baseRef != null ? baseRef.get() : null;
 
       if (base == null) {
@@ -125,7 +108,7 @@ public class JavaSerializer extends AbstractSerializer
 
     ArrayList<Field> primitiveFields = new ArrayList<Field>();
     ArrayList<Field> compoundFields = new ArrayList<Field>();
-    
+
     for (; cl != null; cl = cl.getSuperclass()) {
       Field []fields = cl.getDeclaredFields();
       for (int i = 0; i < fields.length; i++) {
@@ -168,7 +151,7 @@ public class JavaSerializer extends AbstractSerializer
   {
     for (; cl != null; cl = cl.getSuperclass()) {
       Method []methods = cl.getDeclaredMethods();
-      
+
       for (int i = 0; i < methods.length; i++) {
 	Method method = methods[i];
 
@@ -197,14 +180,14 @@ public class JavaSerializer extends AbstractSerializer
 
     return null;
   }
-  
+
   public void writeObject(Object obj, AbstractHessianOutput out)
     throws IOException
   {
     if (out.addRef(obj)) {
       return;
     }
-    
+
     Class<?> cl = obj.getClass();
 
     try {
@@ -245,7 +228,7 @@ public class JavaSerializer extends AbstractSerializer
       writeInstance(obj, out);
     }
   }
-  
+
   protected void writeObject10(Object obj, AbstractHessianOutput out)
     throws IOException
   {
@@ -253,25 +236,25 @@ public class JavaSerializer extends AbstractSerializer
       Field field = _fields[i];
 
       out.writeString(field.getName());
-	
+
       _fieldSerializers[i].serialize(out, obj, field);
     }
-      
+
     out.writeMapEnd();
   }
-  
+
   private void writeDefinition20(AbstractHessianOutput out)
     throws IOException
   {
     out.writeClassFieldLength(_fields.length);
-	
+
     for (int i = 0; i < _fields.length; i++) {
       Field field = _fields[i];
-      
+
       out.writeString(field.getName());
     }
   }
-  
+
   public void writeInstance(Object obj, AbstractHessianOutput out)
     throws IOException
   {
@@ -327,12 +310,12 @@ public class JavaSerializer extends AbstractSerializer
 
   static class FieldSerializer {
     static final FieldSerializer SER = new FieldSerializer();
-    
+
     void serialize(AbstractHessianOutput out, Object obj, Field field)
       throws IOException
     {
       Object value = null;
-	
+
       try {
 	value = field.get(obj);
       } catch (IllegalAccessException e) {
@@ -357,12 +340,12 @@ public class JavaSerializer extends AbstractSerializer
 
   static class BooleanFieldSerializer extends FieldSerializer {
     static final FieldSerializer SER = new BooleanFieldSerializer();
-    
+
     void serialize(AbstractHessianOutput out, Object obj, Field field)
       throws IOException
     {
       boolean value = false;
-	
+
       try {
 	value = field.getBoolean(obj);
       } catch (IllegalAccessException e) {
@@ -375,12 +358,12 @@ public class JavaSerializer extends AbstractSerializer
 
   static class IntFieldSerializer extends FieldSerializer {
     static final FieldSerializer SER = new IntFieldSerializer();
-    
+
     void serialize(AbstractHessianOutput out, Object obj, Field field)
       throws IOException
     {
       int value = 0;
-	
+
       try {
 	value = field.getInt(obj);
       } catch (IllegalAccessException e) {
@@ -393,12 +376,12 @@ public class JavaSerializer extends AbstractSerializer
 
   static class LongFieldSerializer extends FieldSerializer {
     static final FieldSerializer SER = new LongFieldSerializer();
-    
+
     void serialize(AbstractHessianOutput out, Object obj, Field field)
       throws IOException
     {
       long value = 0;
-	
+
       try {
 	value = field.getLong(obj);
       } catch (IllegalAccessException e) {
@@ -411,12 +394,12 @@ public class JavaSerializer extends AbstractSerializer
 
   static class DoubleFieldSerializer extends FieldSerializer {
     static final FieldSerializer SER = new DoubleFieldSerializer();
-    
+
     void serialize(AbstractHessianOutput out, Object obj, Field field)
       throws IOException
     {
       double value = 0;
-	
+
       try {
 	value = field.getDouble(obj);
       } catch (IllegalAccessException e) {
@@ -429,12 +412,12 @@ public class JavaSerializer extends AbstractSerializer
 
   static class StringFieldSerializer extends FieldSerializer {
     static final FieldSerializer SER = new StringFieldSerializer();
-    
+
     void serialize(AbstractHessianOutput out, Object obj, Field field)
       throws IOException
     {
       String value = null;
-	
+
       try {
 	value = (String) field.get(obj);
       } catch (IllegalAccessException e) {

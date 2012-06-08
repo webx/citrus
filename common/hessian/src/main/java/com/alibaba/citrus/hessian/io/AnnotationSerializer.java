@@ -1,21 +1,4 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
- * All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
  * Copyright (c) 2001-2008 Caucho Technology, Inc.  All rights reserved.
  *
  * The Apache Software License, Version 1.1
@@ -91,14 +74,14 @@ public class AnnotationSerializer extends AbstractSerializer
   private Class _annType;
   private Method []_methods;
   private MethodSerializer []_methodSerializers;
-  
+
   public AnnotationSerializer(Class annType)
-  { 
+  {
     if (! Annotation.class.isAssignableFrom(annType)) {
       throw new IllegalStateException(annType.getName() + " is invalid because it is not a java.lang.annotation.Annotation");
     }
   }
-  
+
   public void writeObject(Object obj, AbstractHessianOutput out)
     throws IOException
   {
@@ -107,7 +90,7 @@ public class AnnotationSerializer extends AbstractSerializer
     }
 
     init(((Annotation) obj).annotationType());
-    
+
     int ref = out.writeObjectBegin(_annType.getName());
 
     if (ref < -1) {
@@ -122,7 +105,7 @@ public class AnnotationSerializer extends AbstractSerializer
       writeInstance(obj, out);
     }
   }
-  
+
   protected void writeObject10(Object obj, AbstractHessianOutput out)
     throws IOException
   {
@@ -130,25 +113,25 @@ public class AnnotationSerializer extends AbstractSerializer
       Method method = _methods[i];
 
       out.writeString(method.getName());
-	
+
       _methodSerializers[i].serialize(out, obj, method);
     }
-      
+
     out.writeMapEnd();
   }
-  
+
   private void writeDefinition20(AbstractHessianOutput out)
     throws IOException
   {
     out.writeClassFieldLength(_methods.length);
-	
+
     for (int i = 0; i < _methods.length; i++) {
       Method method = _methods[i];
-      
+
       out.writeString(method.getName());
     }
   }
-  
+
   public void writeInstance(Object obj, AbstractHessianOutput out)
     throws IOException
   {
@@ -167,9 +150,9 @@ public class AnnotationSerializer extends AbstractSerializer
 	return;
 
       _annType = cl;
-      
+
       ArrayList methods = new ArrayList();
-    
+
       for (Method method : _annType.getDeclaredMethods()) {
 	if (method.getName().equals("hashCode")
 	    || method.getName().equals("toString")
@@ -203,7 +186,7 @@ public class AnnotationSerializer extends AbstractSerializer
   {
     if (cl == null)
       return null;
-    
+
     if (Annotation.class.equals(cl.getSuperclass()))
       return cl;
 
@@ -213,7 +196,7 @@ public class AnnotationSerializer extends AbstractSerializer
       for (Class iface : ifaces) {
 	if (iface.equals(Annotation.class))
 	  return cl;
-	
+
 	Class annType = getAnnotationType(iface);
 
 	if (annType != null)
@@ -223,7 +206,7 @@ public class AnnotationSerializer extends AbstractSerializer
 
     return getAnnotationType(cl.getSuperclass());
   }
-  
+
   private static MethodSerializer getMethodSerializer(Class type)
   {
     if (int.class.equals(type)
@@ -265,12 +248,12 @@ public class AnnotationSerializer extends AbstractSerializer
 
   static class MethodSerializer {
     static final MethodSerializer SER = new MethodSerializer();
-    
+
     void serialize(AbstractHessianOutput out, Object obj, Method method)
       throws IOException
     {
       Object value = null;
-	
+
       try {
 	value = method.invoke(obj);
       } catch (InvocationTargetException e) {
@@ -289,12 +272,12 @@ public class AnnotationSerializer extends AbstractSerializer
 
   static class BooleanMethodSerializer extends MethodSerializer {
     static final MethodSerializer SER = new BooleanMethodSerializer();
-    
+
     void serialize(AbstractHessianOutput out, Object obj, Method method)
       throws IOException
     {
       boolean value = false;
-	
+
       try {
 	value = (Boolean) method.invoke(obj);
       } catch (InvocationTargetException e) {
@@ -309,12 +292,12 @@ public class AnnotationSerializer extends AbstractSerializer
 
   static class IntMethodSerializer extends MethodSerializer {
     static final MethodSerializer SER = new IntMethodSerializer();
-    
+
     void serialize(AbstractHessianOutput out, Object obj, Method method)
       throws IOException
     {
       int value = 0;
-	
+
       try {
 	value = (Integer) method.invoke(obj);
       } catch (InvocationTargetException e) {
@@ -329,12 +312,12 @@ public class AnnotationSerializer extends AbstractSerializer
 
   static class LongMethodSerializer extends MethodSerializer {
     static final MethodSerializer SER = new LongMethodSerializer();
-    
+
     void serialize(AbstractHessianOutput out, Object obj, Method method)
       throws IOException
     {
       long value = 0;
-	
+
       try {
 	value = (Long) method.invoke(obj);
       } catch (InvocationTargetException e) {
@@ -349,12 +332,12 @@ public class AnnotationSerializer extends AbstractSerializer
 
   static class DoubleMethodSerializer extends MethodSerializer {
     static final MethodSerializer SER = new DoubleMethodSerializer();
-    
+
     void serialize(AbstractHessianOutput out, Object obj, Method method)
       throws IOException
     {
       double value = 0;
-	
+
       try {
 	value = (Double) method.invoke(obj);
       } catch (InvocationTargetException e) {
@@ -369,12 +352,12 @@ public class AnnotationSerializer extends AbstractSerializer
 
   static class StringMethodSerializer extends MethodSerializer {
     static final MethodSerializer SER = new StringMethodSerializer();
-    
+
     void serialize(AbstractHessianOutput out, Object obj, Method method)
       throws IOException
     {
       String value = null;
-	
+
       try {
 	value = (String) method.invoke(obj);
       } catch (InvocationTargetException e) {

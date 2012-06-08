@@ -1,21 +1,4 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
- * All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
  *  Licensed to the Apache Software Foundation (ASF) under one or more
  *  contributor license agreements.  See the NOTICE file distributed with
  *  this work for additional information regarding copyright ownership.
@@ -31,6 +14,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
 package com.alibaba.citrus.service.requestcontext.util.tomcat;
 
 import java.text.DateFormat;
@@ -170,7 +154,7 @@ public class ServerCookie {
             // XXX RFC2965 not referenced in Servlet Spec
             // Set-Cookie2 is not supported by Netscape 4, 6, IE 3, 5
             // Set-Cookie2 is supported by Lynx and Opera
-            // Need to check on later IE and FF releases but for now... 
+            // Need to check on later IE and FF releases but for now...
             // RFC2109
             return "Set-Cookie";
             // return "Set-Cookie2";
@@ -264,7 +248,7 @@ public class ServerCookie {
 
     /**
      * Quotes values using rules that vary depending on Cookie version.
-     * 
+     *
      * @param version
      * @param buf
      * @param value
@@ -308,7 +292,7 @@ public class ServerCookie {
 
     /**
      * Escapes any double quotes in the given string.
-     * 
+     *
      * @param s the input string
      * @param beginIndex start index inclusive
      * @param endIndex exclusive

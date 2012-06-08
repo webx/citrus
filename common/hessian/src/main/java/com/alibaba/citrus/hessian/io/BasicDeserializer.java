@@ -1,21 +1,4 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
- * All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
  * Copyright (c) 2001-2008 Caucho Technology, Inc.  All rights reserved.
  *
  * The Apache Software License, Version 1.1
@@ -87,7 +70,7 @@ public class BasicDeserializer extends AbstractDeserializer {
   public static final int DATE = BasicSerializer.DATE;
   public static final int NUMBER = BasicSerializer.NUMBER;
   public static final int OBJECT = BasicSerializer.OBJECT;
-  
+
   public static final int BOOLEAN_ARRAY = BasicSerializer.BOOLEAN_ARRAY;
   public static final int BYTE_ARRAY = BasicSerializer.BYTE_ARRAY;
   public static final int SHORT_ARRAY = BasicSerializer.SHORT_ARRAY;
@@ -162,7 +145,7 @@ public class BasicDeserializer extends AbstractDeserializer {
       throw new UnsupportedOperationException();
     }
   }
-  
+
   public Object readObject(AbstractHessianInput in)
     throws IOException
   {
@@ -170,18 +153,18 @@ public class BasicDeserializer extends AbstractDeserializer {
     case NULL:
       // hessian/3490
       in.readObject();
-      
+
       return null;
-      
+
     case BOOLEAN:
       return Boolean.valueOf(in.readBoolean());
-      
+
     case BYTE:
       return Byte.valueOf((byte) in.readInt());
-      
+
     case SHORT:
       return Short.valueOf((short) in.readInt());
-      
+
     case INTEGER:
       return Integer.valueOf(in.readInt());
 
@@ -193,13 +176,13 @@ public class BasicDeserializer extends AbstractDeserializer {
 
     case DOUBLE:
       return Double.valueOf(in.readDouble());
-      
+
     case STRING:
       return in.readString();
-      
+
     case OBJECT:
       return in.readObject();
-      
+
     case CHARACTER:
       {
 	String s = in.readString();
@@ -208,7 +191,7 @@ public class BasicDeserializer extends AbstractDeserializer {
 	else
 	  return Character.valueOf(s.charAt(0));
       }
-      
+
     case CHARACTER_OBJECT:
       {
 	String s = in.readString();
@@ -217,10 +200,10 @@ public class BasicDeserializer extends AbstractDeserializer {
 	else
 	  return Character.valueOf(s.charAt(0));
       }
-      
+
     case DATE:
       return new Date(in.readUTCDate());
-      
+
     case NUMBER:
       return in.readObject();
 
@@ -276,7 +259,7 @@ public class BasicDeserializer extends AbstractDeserializer {
       throw new UnsupportedOperationException();
     }
   }
-  
+
   public Object readList(AbstractHessianInput in, int length)
     throws IOException
   {
@@ -289,7 +272,7 @@ public class BasicDeserializer extends AbstractDeserializer {
 
         for (int i = 0; i < data.length; i++)
           data[i] = in.readBoolean();
-	
+
         in.readEnd();
 
         return data;
@@ -299,29 +282,29 @@ public class BasicDeserializer extends AbstractDeserializer {
 
         while (! in.isEnd())
           list.add(Boolean.valueOf(in.readBoolean()));
-	
+
         in.readEnd();
 
         boolean []data = new boolean[list.size()];
-        
+
         in.addRef(data);
-        
+
         for (int i = 0; i < data.length; i++)
           data[i] = ((Boolean) list.get(i)).booleanValue();
 
         return data;
       }
     }
-    
+
     case SHORT_ARRAY: {
       if (length >= 0) {
         short []data = new short[length];
 
         in.addRef(data);
-        
+
         for (int i = 0; i < data.length; i++)
           data[i] = (short) in.readInt();
-	
+
         in.readEnd();
 
         return data;
@@ -339,22 +322,22 @@ public class BasicDeserializer extends AbstractDeserializer {
           data[i] = ((Short) list.get(i)).shortValue();
 
         in.addRef(data);
-        
+
         return data;
       }
     }
-    
+
     case INTEGER_ARRAY: {
       if (length >= 0) {
         int []data = new int[length];
 
         in.addRef(data);
-        
+
         for (int i = 0; i < data.length; i++)
           data[i] = in.readInt();
 
         in.readEnd();
-	
+
         return data;
       }
       else {
@@ -365,17 +348,17 @@ public class BasicDeserializer extends AbstractDeserializer {
 
 
         in.readEnd();
-	
+
         int []data = new int[list.size()];
         for (int i = 0; i < data.length; i++)
           data[i] = ((Integer) list.get(i)).intValue();
-        
+
         in.addRef(data);
 
         return data;
       }
     }
-    
+
     case LONG_ARRAY: {
       if (length >= 0) {
         long []data = new long[length];
@@ -396,17 +379,17 @@ public class BasicDeserializer extends AbstractDeserializer {
           list.add(Long.valueOf(in.readLong()));
 
         in.readEnd();
-        
+
         long []data = new long[list.size()];
         for (int i = 0; i < data.length; i++)
           data[i] = ((Long) list.get(i)).longValue();
-        
+
         in.addRef(data);
 
         return data;
       }
     }
-    
+
     case FLOAT_ARRAY: {
       if (length >= 0) {
         float []data = new float[length];
@@ -426,17 +409,17 @@ public class BasicDeserializer extends AbstractDeserializer {
           list.add(new Float(in.readDouble()));
 
         in.readEnd();
-        
+
         float []data = new float[list.size()];
         for (int i = 0; i < data.length; i++)
           data[i] = ((Float) list.get(i)).floatValue();
-        
+
         in.addRef(data);
 
         return data;
       }
     }
-    
+
     case DOUBLE_ARRAY: {
       if (length >= 0) {
         double []data = new double[length];
@@ -456,7 +439,7 @@ public class BasicDeserializer extends AbstractDeserializer {
           list.add(new Double(in.readDouble()));
 
         in.readEnd();
-        
+
         double []data = new double[list.size()];
         in.addRef(data);
         for (int i = 0; i < data.length; i++)
@@ -465,7 +448,7 @@ public class BasicDeserializer extends AbstractDeserializer {
         return data;
       }
     }
-    
+
     case STRING_ARRAY: {
       if (length >= 0) {
         String []data = new String[length];
@@ -485,7 +468,7 @@ public class BasicDeserializer extends AbstractDeserializer {
           list.add(in.readString());
 
         in.readEnd();
-        
+
         String []data = new String[list.size()];
         in.addRef(data);
         for (int i = 0; i < data.length; i++)
@@ -494,7 +477,7 @@ public class BasicDeserializer extends AbstractDeserializer {
         return data;
       }
     }
-    
+
     case OBJECT_ARRAY: {
       if (length >= 0) {
         Object []data = new Object[length];
@@ -509,14 +492,14 @@ public class BasicDeserializer extends AbstractDeserializer {
       }
       else {
         ArrayList list = new ArrayList();
-        
+
         in.addRef(list); // XXX: potential issues here
 
         while (! in.isEnd())
           list.add(in.readObject());
 
         in.readEnd();
-        
+
         Object []data = new Object[list.size()];
         for (int i = 0; i < data.length; i++)
           data[i] = (Object) list.get(i);
@@ -524,12 +507,12 @@ public class BasicDeserializer extends AbstractDeserializer {
         return data;
       }
     }
-    
+
     default:
       throw new UnsupportedOperationException(String.valueOf(this));
     }
   }
-  
+
   public Object readLengthList(AbstractHessianInput in, int length)
     throws IOException
   {
@@ -544,40 +527,40 @@ public class BasicDeserializer extends AbstractDeserializer {
 
       return data;
     }
-    
+
     case SHORT_ARRAY: {
       short []data = new short[length];
 
       in.addRef(data);
-        
+
       for (int i = 0; i < data.length; i++)
 	data[i] = (short) in.readInt();
 
       return data;
     }
-    
+
     case INTEGER_ARRAY: {
       int []data = new int[length];
 
       in.addRef(data);
-        
+
       for (int i = 0; i < data.length; i++)
 	data[i] = in.readInt();
 
       return data;
     }
-    
+
     case LONG_ARRAY: {
       long []data = new long[length];
 
       in.addRef(data);
-        
+
       for (int i = 0; i < data.length; i++)
 	data[i] = in.readLong();
 
       return data;
     }
-    
+
     case FLOAT_ARRAY: {
       float []data = new float[length];
       in.addRef(data);
@@ -587,7 +570,7 @@ public class BasicDeserializer extends AbstractDeserializer {
 
       return data;
     }
-    
+
     case DOUBLE_ARRAY: {
       double []data = new double[length];
       in.addRef(data);
@@ -597,7 +580,7 @@ public class BasicDeserializer extends AbstractDeserializer {
 
       return data;
     }
-    
+
     case STRING_ARRAY: {
       String []data = new String[length];
       in.addRef(data);
@@ -607,7 +590,7 @@ public class BasicDeserializer extends AbstractDeserializer {
 
       return data;
     }
-    
+
     case OBJECT_ARRAY: {
       Object []data = new Object[length];
       in.addRef(data);
@@ -617,7 +600,7 @@ public class BasicDeserializer extends AbstractDeserializer {
 
       return data;
     }
-    
+
     default:
       throw new UnsupportedOperationException(String.valueOf(this));
     }

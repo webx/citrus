@@ -1,21 +1,4 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
- * All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
  * Copyright (c) 2001-2004 Caucho Technology, Inc.  All rights reserved.
  *
  * The Apache Software License, Version 1.1
@@ -68,11 +51,11 @@ package com.alibaba.citrus.hessian.io;
 import java.io.IOException;
 
 /**
- * Deserializing an object. 
+ * Deserializing an object.
  */
 public class AbstractDeserializer implements Deserializer {
   public static final NullDeserializer NULL = new NullDeserializer();
-  
+
   public Class<?> getType()
   {
     return Object.class;
@@ -95,19 +78,19 @@ public class AbstractDeserializer implements Deserializer {
     else
       throw error(className + ": unexpected null value");
   }
-  
+
   public Object readList(AbstractHessianInput in, int length)
     throws IOException
   {
     throw new UnsupportedOperationException(String.valueOf(this));
   }
-  
+
   public Object readLengthList(AbstractHessianInput in, int length)
     throws IOException
   {
     throw new UnsupportedOperationException(String.valueOf(this));
   }
-  
+
   public Object readMap(AbstractHessianInput in)
     throws IOException
   {
@@ -120,7 +103,7 @@ public class AbstractDeserializer implements Deserializer {
     else
       throw error(className + ": unexpected null value");
   }
-  
+
   /**
    * Creates the field array for a class. The default
    * implementation returns a String[] array.
@@ -132,7 +115,7 @@ public class AbstractDeserializer implements Deserializer {
   {
     return new String[len];
   }
-  
+
   /**
    * Creates a field value class. The default
    * implementation returns the String.
@@ -144,18 +127,18 @@ public class AbstractDeserializer implements Deserializer {
   {
     return name;
   }
-  
+
   public Object readObject(AbstractHessianInput in,
                            String []fieldNames)
     throws IOException
   {
     return readObject(in, (Object []) fieldNames);
   }
-  
+
   /**
    * Reads an object instance from the input stream
    */
-  public Object readObject(AbstractHessianInput in, 
+  public Object readObject(AbstractHessianInput in,
                            Object []fields)
     throws IOException
   {

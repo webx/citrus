@@ -1,21 +1,4 @@
 /*
- * Copyright 2010 Alibaba Group Holding Limited.
- * All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
  * Copyright (c) 2001-2004 Caucho Technology, Inc.  All rights reserved.
  *
  * The Apache Software License, Version 1.1
@@ -79,24 +62,24 @@ import java.util.logging.*;
 public class BeanSerializer extends AbstractSerializer {
   private static final Logger log
     = Logger.getLogger(BeanSerializer.class.getName());
-  
+
   private static final Object []NULL_ARGS = new Object[0];
   private Method []_methods;
   private String []_names;
 
   private Object _writeReplaceFactory;
   private Method _writeReplace;
-  
+
   public BeanSerializer(Class<?> cl, ClassLoader loader)
   {
     introspectWriteReplace(cl, loader);
 
     ArrayList<Method> primitiveMethods = new ArrayList<Method>();
     ArrayList compoundMethods = new ArrayList();
-    
+
     for (; cl != null; cl = cl.getSuperclass()) {
       Method []methods = cl.getDeclaredMethods();
-      
+
       for (int i = 0; i < methods.length; i++) {
 	Method method = methods[i];
 
@@ -141,7 +124,7 @@ public class BeanSerializer extends AbstractSerializer {
     methodList.toArray(_methods);
 
     _names = new String[_methods.length];
-    
+
     for (int i = 0; i < _methods.length; i++) {
       String name = _methods[i].getName();
 
@@ -181,7 +164,7 @@ public class BeanSerializer extends AbstractSerializer {
     } catch (Exception e) {
       log.log(Level.FINER, e.toString(), e);
     }
-      
+
     _writeReplace = getWriteReplace(cl);
   }
 
@@ -192,7 +175,7 @@ public class BeanSerializer extends AbstractSerializer {
   {
     for (; cl != null; cl = cl.getSuperclass()) {
       Method []methods = cl.getDeclaredMethods();
-      
+
       for (int i = 0; i < methods.length; i++) {
 	Method method = methods[i];
 
@@ -221,15 +204,15 @@ public class BeanSerializer extends AbstractSerializer {
 
     return null;
   }
-  
+
   public void writeObject(Object obj, AbstractHessianOutput out)
     throws IOException
   {
     if (out.addRef(obj))
       return;
-    
+
     Class cl = obj.getClass();
-    
+
     try {
       if (_writeReplace != null) {
 	Object repl;
@@ -255,7 +238,7 @@ public class BeanSerializer extends AbstractSerializer {
 
     if (ref < -1) {
       // Hessian 1.1 uses a map
-      
+
       for (int i = 0; i < _methods.length; i++) {
 	Method method = _methods[i];
 	Object value = null;
@@ -267,19 +250,19 @@ public class BeanSerializer extends AbstractSerializer {
 	}
 
 	out.writeString(_names[i]);
-	
+
 	out.writeObject(value);
       }
-      
+
       out.writeMapEnd();
     }
     else {
       if (ref == -1) {
 	out.writeInt(_names.length);
-	
+
 	for (int i = 0; i < _names.length; i++)
 	  out.writeString(_names[i]);
-	
+
 	out.writeObjectBegin(cl.getName());
       }
 
@@ -292,7 +275,7 @@ public class BeanSerializer extends AbstractSerializer {
 	} catch (Exception e) {
 	  log.log(Level.FINER, e.toString(), e);
 	}
-	
+
 	out.writeObject(value);
       }
     }
@@ -304,13 +287,13 @@ public class BeanSerializer extends AbstractSerializer {
   private Method findSetter(Method []methods, String getterName, Class arg)
   {
     String setterName = "set" + getterName.substring(3);
-    
+
     for (int i = 0; i < methods.length; i++) {
       Method method = methods[i];
 
       if (! method.getName().equals(setterName))
 	continue;
-      
+
       if (! method.getReturnType().equals(void.class))
 	continue;
 
