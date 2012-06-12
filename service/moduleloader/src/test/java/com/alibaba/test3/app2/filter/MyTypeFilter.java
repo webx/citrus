@@ -30,7 +30,8 @@ import org.springframework.core.type.filter.TypeFilter;
  * @author youqun.zhangyq
  */
 public class MyTypeFilter implements TypeFilter {
-    public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory) throws IOException {
+    public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory)
+            throws IOException {
         ClassMetadata classMetadata = metadataReader.getClassMetadata();
 
         if (classMetadata.getClassName().indexOf("Second") != -1) {

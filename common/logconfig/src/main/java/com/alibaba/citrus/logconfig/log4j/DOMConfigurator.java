@@ -46,9 +46,7 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
         propsField = field;
     }
 
-    /**
-     * 创建新对象。
-     */
+    /** 创建新对象。 */
     public DOMConfigurator() {
         this(null);
     }
@@ -75,7 +73,7 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
      * 使用XML文件配置log4j。
      *
      * @param filename 配置文件名
-     * @param props 可在配置文件中被引用的属性
+     * @param props    可在配置文件中被引用的属性
      */
     public static void configure(String filename, Properties props) {
         new DOMConfigurator(props).doConfigure(filename, LogManager.getLoggerRepository());
@@ -93,7 +91,7 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
     /**
      * 使用XML文件配置log4j。
      *
-     * @param url 配置文件的URL
+     * @param url   配置文件的URL
      * @param props 可在配置文件中被引用的属性
      */
     public static void configure(URL url, Properties props) {
@@ -113,7 +111,7 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
      * 使用XML文件配置log4j。
      *
      * @param element 配置文件名的DOM element
-     * @param props 可在配置文件中被引用的属性
+     * @param props   可在配置文件中被引用的属性
      */
     public static void configure(Element element, Properties props) {
         new DOMConfigurator(props).doConfigure(element, LogManager.getLoggerRepository());
@@ -132,7 +130,7 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
      * 使用XML文件配置log4j，同时监控文件的更改。
      *
      * @param filename 配置文件名
-     * @param props 可在配置文件中被引用的属性
+     * @param props    可在配置文件中被引用的属性
      */
     public static void configureAndWatch(String filename, Properties props) {
         configureAndWatch(filename, props, FileWatchdog.DEFAULT_DELAY);
@@ -157,7 +155,7 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
      * 则从文件中读取log4j配置。
      *
      * @param filename 配置文件名
-     * @param props 可在配置文件中被引用的属性
+     * @param props    可在配置文件中被引用的属性
      * @param interval 监控线程检查间隔（ms）
      */
     public static void configureAndWatch(String filename, Properties props, long interval) {
@@ -181,9 +179,7 @@ public class DOMConfigurator extends org.apache.log4j.xml.DOMConfigurator {
         }
     }
 
-    /**
-     * 监控线程。
-     */
+    /** 监控线程。 */
     private static class XMLWatchdog extends FileWatchdog {
         private Properties props;
 

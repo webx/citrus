@@ -43,7 +43,7 @@ import com.alibaba.citrus.util.StringUtil;
  */
 public final class LocaleInfo implements Cloneable, Externalizable {
     private static final long serialVersionUID = 3257847675461251635L;
-    private Locale locale;
+    private Locale  locale;
     private Charset charset;
 
     /**
@@ -70,9 +70,7 @@ public final class LocaleInfo implements Cloneable, Externalizable {
         return new LocaleInfo(locale, charset);
     }
 
-    /**
-     * 创建系统默认的locale信息。
-     */
+    /** 创建系统默认的locale信息。 */
     public LocaleInfo() {
         this.locale = assertNotNull(Locale.getDefault(), "system locale");
         this.charset = assertNotNull(Charset.defaultCharset(), "system charset");
@@ -90,7 +88,7 @@ public final class LocaleInfo implements Cloneable, Externalizable {
     /**
      * 创建locale信息。
      *
-     * @param locale 区域信息
+     * @param locale  区域信息
      * @param charset 编码字符集
      */
     public LocaleInfo(Locale locale, String charset) {
@@ -100,8 +98,8 @@ public final class LocaleInfo implements Cloneable, Externalizable {
     /**
      * 创建locale信息。
      *
-     * @param locale 区域信息
-     * @param charset 编码字符集
+     * @param locale             区域信息
+     * @param charset            编码字符集
      * @param fallbackLocaleInfo 上一级locale信息，如果未提供locale和charset，则从上一级中取得。
      */
     LocaleInfo(Locale locale, String charset, LocaleInfo fallbackLocaleInfo) {
@@ -147,16 +145,12 @@ public final class LocaleInfo implements Cloneable, Externalizable {
         return charset;
     }
 
-    /**
-     * 判断charset是否被支持。
-     */
+    /** 判断charset是否被支持。 */
     public boolean isCharsetSupported() {
         return !(charset instanceof UnknownCharset);
     }
 
-    /**
-     * 判断charset是否被支持。
-     */
+    /** 判断charset是否被支持。 */
     public LocaleInfo assertCharsetSupported() throws UnsupportedCharsetException {
         if (charset instanceof UnknownCharset) {
             throw new UnsupportedCharsetException(charset.name());
@@ -221,9 +215,7 @@ public final class LocaleInfo implements Cloneable, Externalizable {
         return locale + ":" + charset;
     }
 
-    /**
-     * 代表一个不能识别的charset。
-     */
+    /** 代表一个不能识别的charset。 */
     static class UnknownCharset extends Charset {
         public UnknownCharset(String name) {
             super(assertNotNull(name, "charset name"), null);

@@ -30,9 +30,7 @@ import com.alibaba.citrus.service.form.support.AbstractCompositeValidatorDefinit
  * @author Michael Zhou
  */
 public class AllOfValidator extends AbstractCompositeValidator {
-    /**
-     * 不需要配置message，因为它的message是由子validator提供的。
-     */
+    /** 不需要配置message，因为它的message是由子validator提供的。 */
     @Override
     protected boolean requiresMessage() {
         return false;

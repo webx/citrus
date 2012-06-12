@@ -22,18 +22,11 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.web.context.request.RequestScope;
 
 import com.alibaba.citrus.service.requestcontext.RequestContextChainingService;
 import com.alibaba.citrus.service.uribroker.impl.URIBrokerServiceImpl;
@@ -41,12 +34,17 @@ import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import com.meterware.servletunit.InvocationContext;
 import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.web.context.request.RequestScope;
 
 public abstract class AbstractURIBrokerServiceTests {
-    protected static ApplicationContext factory;
-    protected RequestContextChainingService requestContexts;
-    protected HttpServletRequest request;
-    protected URIBrokerServiceImpl service;
+    protected static ApplicationContext            factory;
+    protected        RequestContextChainingService requestContexts;
+    protected        HttpServletRequest            request;
+    protected        URIBrokerServiceImpl          service;
 
     @BeforeClass
     public static void initFactory() {
@@ -57,7 +55,7 @@ public abstract class AbstractURIBrokerServiceTests {
 
     protected final static ApplicationContext createContext(String configLocation, ApplicationContext parent) {
         XmlApplicationContext factory = new XmlApplicationContext(new FileSystemResource(new File(srcdir,
-                configLocation)), parent);
+                                                                                                  configLocation)), parent);
         factory.getBeanFactory().registerScope("request", new RequestScope());
         return factory;
     }
@@ -74,7 +72,7 @@ public abstract class AbstractURIBrokerServiceTests {
 
         this.requestContexts = (RequestContextChainingService) factory.getBean("requestContexts");
         this.request = this.requestContexts.getRequestContext(config.getServletContext(), request, response)
-                .getRequest();
+                                           .getRequest();
 
         assertNotNull(request);
     }
@@ -87,20 +85,18 @@ public abstract class AbstractURIBrokerServiceTests {
         assertSame(service, factory.getBean("uris"));
     }
 
-    /**
-     * 不做任何事的servlet。
-     */
+    /** 不做任何事的servlet。 */
     public static class NoopServlet extends HttpServlet {
         private static final long serialVersionUID = 3034658026956449398L;
 
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-                IOException {
+                                                                                              IOException {
         }
 
         @Override
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-                IOException {
+                                                                                               IOException {
             doGet(request, response);
         }
     }

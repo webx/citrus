@@ -32,50 +32,50 @@ import com.alibaba.citrus.util.io.StreamUtil;
  * @author Michael Zhou
  */
 public class Utils {
-    private static final ArrayUtil ARRAY_UTIL = new ArrayUtil();
-    private static final ClassLoaderUtil CLASS_LOADER_UTIL = new ClassLoaderUtil();
-    private static final ClassUtil CLASS_UTIL = new ClassUtil();
-    private static final ExceptionUtil EXCEPTION_UTIL = new ExceptionUtil();
-    private static final FileUtil FILE_UTIL = new FileUtil();
-    private static final LocaleUtil LOCALE_UTIL = new LocaleUtil();
-    private static final MessageUtil MESSAGE_UTIL = new MessageUtil();
-    private static final ObjectUtil OBJECT_UTIL = new ObjectUtil();
-    private static final StreamUtil STREAM_UTIL = new StreamUtil();
+    private static final ArrayUtil        ARRAY_UTIL         = new ArrayUtil();
+    private static final ClassLoaderUtil  CLASS_LOADER_UTIL  = new ClassLoaderUtil();
+    private static final ClassUtil        CLASS_UTIL         = new ClassUtil();
+    private static final ExceptionUtil    EXCEPTION_UTIL     = new ExceptionUtil();
+    private static final FileUtil         FILE_UTIL          = new FileUtil();
+    private static final LocaleUtil       LOCALE_UTIL        = new LocaleUtil();
+    private static final MessageUtil      MESSAGE_UTIL       = new MessageUtil();
+    private static final ObjectUtil       OBJECT_UTIL        = new ObjectUtil();
+    private static final StreamUtil       STREAM_UTIL        = new StreamUtil();
     private static final StringEscapeUtil STRING_ESCAPE_UTIL = new StringEscapeUtil();
-    private static final StringUtil STRING_UTIL = new StringUtil();
-    private static final SystemUtil SYSTEM_UTIL = new SystemUtil();
-    private static final Object MATH_UTIL = createMixin(Math.class);
-    private static final Object MIXIN_UTILS = createMixin( //
-            ArrayUtil.class, //
-            ClassLoaderUtil.class, //
-            ClassUtil.class, //
-            ExceptionUtil.class, //
-            FileUtil.class, //
-            LocaleUtil.class, //
-            MessageUtil.class, //
-            ObjectUtil.class, //
-            StreamUtil.class, //
-            StringEscapeUtil.class, //
-            StringUtil.class, //
-            SystemUtil.class, //
-            Math.class);
+    private static final StringUtil       STRING_UTIL        = new StringUtil();
+    private static final SystemUtil       SYSTEM_UTIL        = new SystemUtil();
+    private static final Object           MATH_UTIL          = createMixin(Math.class);
+    private static final Object           MIXIN_UTILS        = createMixin( //
+                                                                            ArrayUtil.class, //
+                                                                            ClassLoaderUtil.class, //
+                                                                            ClassUtil.class, //
+                                                                            ExceptionUtil.class, //
+                                                                            FileUtil.class, //
+                                                                            LocaleUtil.class, //
+                                                                            MessageUtil.class, //
+                                                                            ObjectUtil.class, //
+                                                                            StreamUtil.class, //
+                                                                            StringEscapeUtil.class, //
+                                                                            StringUtil.class, //
+                                                                            SystemUtil.class, //
+                                                                            Math.class);
 
     private static final Map<String, Object> ALL_UTILS = Collections.unmodifiableMap(arrayToMap(new Object[][] { //
-            { "arrayUtil", ARRAY_UTIL }, //
-                    { "classLoaderUtil", CLASS_LOADER_UTIL }, //
-                    { "classUtil", CLASS_UTIL }, //
-                    { "exceptionUtil", EXCEPTION_UTIL }, //
-                    { "fileUtil", FILE_UTIL }, //
-                    { "localeUtil", LOCALE_UTIL }, //
-                    { "messageUtil", MESSAGE_UTIL }, //
-                    { "objectUtil", OBJECT_UTIL }, //
-                    { "streamUtil", STREAM_UTIL }, //
-                    { "stringEscapeUtil", STRING_ESCAPE_UTIL }, //
-                    { "stringUtil", STRING_UTIL }, //
-                    { "systemUtil", SYSTEM_UTIL }, //
-                    { "mathUtil", MATH_UTIL }, //
-                    { "utils", MIXIN_UTILS } //
-            }, String.class, Object.class));
+                                                                                                                 { "arrayUtil", ARRAY_UTIL }, //
+                                                                                                                 { "classLoaderUtil", CLASS_LOADER_UTIL }, //
+                                                                                                                 { "classUtil", CLASS_UTIL }, //
+                                                                                                                 { "exceptionUtil", EXCEPTION_UTIL }, //
+                                                                                                                 { "fileUtil", FILE_UTIL }, //
+                                                                                                                 { "localeUtil", LOCALE_UTIL }, //
+                                                                                                                 { "messageUtil", MESSAGE_UTIL }, //
+                                                                                                                 { "objectUtil", OBJECT_UTIL }, //
+                                                                                                                 { "streamUtil", STREAM_UTIL }, //
+                                                                                                                 { "stringEscapeUtil", STRING_ESCAPE_UTIL }, //
+                                                                                                                 { "stringUtil", STRING_UTIL }, //
+                                                                                                                 { "systemUtil", SYSTEM_UTIL }, //
+                                                                                                                 { "mathUtil", MATH_UTIL }, //
+                                                                                                                 { "utils", MIXIN_UTILS } //
+    }, String.class, Object.class));
 
     private static Object createMixin(Class<?>... classes) {
         StaticFunctionDelegatorBuilder builder = new StaticFunctionDelegatorBuilder();

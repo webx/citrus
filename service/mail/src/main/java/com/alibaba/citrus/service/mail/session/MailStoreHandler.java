@@ -29,9 +29,7 @@ import com.alibaba.citrus.service.mail.MailException;
  * @author Michael Zhou
  */
 public interface MailStoreHandler {
-    /**
-     * 预处理连接。
-     */
+    /** 预处理连接。 */
     void prepareConnection(Store store) throws MailException, MessagingException;
 
     /**
@@ -40,8 +38,6 @@ public interface MailStoreHandler {
      */
     int getMessageCount(int messageCount) throws MailException;
 
-    /**
-     * 处理一个邮件。返回<code>true</code>代表删除邮件。
-     */
+    /** 处理一个邮件。返回<code>true</code>代表删除邮件。 */
     boolean processMessage(Message message) throws MailException, MessagingException;
 }

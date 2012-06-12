@@ -22,17 +22,15 @@ import static com.alibaba.citrus.util.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.meterware.servletunit.ServletRunner;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
-
-import com.meterware.servletunit.ServletRunner;
 
 public class XmlWebApplicationContextTests extends AbstractBeanFactoryTests {
     private static XmlWebApplicationContext factory;
@@ -42,7 +40,7 @@ public class XmlWebApplicationContextTests extends AbstractBeanFactoryTests {
         factory = new XmlWebApplicationContext();
         factory.setConfigLocation("beans.xml");
         factory.setServletContext(new ServletRunner(new File(srcdir, "WEB-INF/web.xml"), "").newClient()
-                .newInvocation("http://localhost/servlet").getServlet().getServletConfig().getServletContext());
+                                                                                            .newInvocation("http://localhost/servlet").getServlet().getServletConfig().getServletContext());
         factory.refresh();
     }
 
@@ -63,14 +61,13 @@ public class XmlWebApplicationContextTests extends AbstractBeanFactoryTests {
 
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-                IOException {
+                                                                                              IOException {
         }
 
         @Override
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-                IOException {
+                                                                                               IOException {
             doGet(request, response);
         }
     }
-
 }

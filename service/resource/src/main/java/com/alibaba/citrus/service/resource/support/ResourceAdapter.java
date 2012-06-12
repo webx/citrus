@@ -35,10 +35,10 @@ import org.springframework.util.StringUtils;
  * @author Michael Zhou
  */
 public class ResourceAdapter extends AbstractResource implements ContextResource {
-    private final ResourceLoadingSupport loader;
-    private final String location;
+    private final ResourceLoadingSupport                       loader;
+    private final String                                       location;
     private final com.alibaba.citrus.service.resource.Resource resource;
-    private final String description;
+    private final String                                       description;
 
     public ResourceAdapter(String location, com.alibaba.citrus.service.resource.Resource resource) {
         this(location, resource, null);

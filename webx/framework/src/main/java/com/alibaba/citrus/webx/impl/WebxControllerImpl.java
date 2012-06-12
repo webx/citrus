@@ -17,12 +17,11 @@
 
 package com.alibaba.citrus.webx.impl;
 
-import org.springframework.beans.BeansException;
-
 import com.alibaba.citrus.service.pipeline.Pipeline;
 import com.alibaba.citrus.service.pipeline.PipelineInvocationHandle;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.webx.support.AbstractWebxController;
+import org.springframework.beans.BeansException;
 
 public class WebxControllerImpl extends AbstractWebxController {
     private Pipeline pipeline;

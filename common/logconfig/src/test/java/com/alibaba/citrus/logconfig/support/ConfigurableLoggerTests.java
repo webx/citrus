@@ -21,13 +21,12 @@ import static com.alibaba.citrus.logconfig.support.ConfigurableLogger.Level.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.alibaba.citrus.logconfig.AbstractLogConfiguratorTests;
 import com.alibaba.citrus.logconfig.LogConfigurator;
 import com.alibaba.citrus.logconfig.support.ConfigurableLogger.Level;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ConfigurableLoggerTests extends AbstractLogConfiguratorTests {
     @Test

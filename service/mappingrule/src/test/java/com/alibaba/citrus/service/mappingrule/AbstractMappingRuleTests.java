@@ -77,5 +77,4 @@ public abstract class AbstractMappingRuleTests extends AbstractMappingRuleServic
     protected abstract String getMappedName_forCacheTest();
 
     protected abstract boolean isProductionModeSensible();
-
 }

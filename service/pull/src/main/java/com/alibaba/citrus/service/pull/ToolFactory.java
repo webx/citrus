@@ -32,9 +32,7 @@ package com.alibaba.citrus.service.pull;
  * @author Michael Zhou
  */
 public interface ToolFactory {
-    /**
-     * Factory所创建的tool是不是singleton？
-     */
+    /** Factory所创建的tool是不是singleton？ */
     boolean isSingleton();
 
     /**

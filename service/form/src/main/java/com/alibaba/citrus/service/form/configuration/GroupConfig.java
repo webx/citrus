@@ -28,59 +28,37 @@ import java.util.List;
  * @author Michael Zhou
  */
 public interface GroupConfig {
-    /**
-     * 取得group所属的form config。
-     */
+    /** 取得group所属的form config。 */
     FormConfig getFormConfig();
 
-    /**
-     * 取得group name。
-     */
+    /** 取得group name。 */
     String getName();
 
-    /**
-     * 取得parent group。
-     */
+    /** 取得parent group。 */
     String getParentGroup();
 
-    /**
-     * 取得group key。
-     */
+    /** 取得group key。 */
     String getKey();
 
-    /**
-     * 取得默认的trimming选项。
-     */
+    /** 取得默认的trimming选项。 */
     boolean isTrimmingByDefault();
 
-    /**
-     * Group是否必须从post请求中取得数据。
-     */
+    /** Group是否必须从post请求中取得数据。 */
     boolean isPostOnly();
 
-    /**
-     * 取得所有field config的列表。
-     */
+    /** 取得所有field config的列表。 */
     List<FieldConfig> getFieldConfigList();
 
-    /**
-     * 取得指定名称的field config。名称大小写不敏感。 如果未找到，则返回<code>null</code>。
-     */
+    /** 取得指定名称的field config。名称大小写不敏感。 如果未找到，则返回<code>null</code>。 */
     FieldConfig getFieldConfig(String fieldName);
 
-    /**
-     * 取得指定key对应的field config。如果未找到，则返回<code>null</code>。
-     */
+    /** 取得指定key对应的field config。如果未找到，则返回<code>null</code>。 */
     FieldConfig getFieldConfigByKey(String fieldKey);
 
-    /**
-     * 取得所有的imports。
-     */
+    /** 取得所有的imports。 */
     List<Import> getImports();
 
-    /**
-     * 代表import其它group中的field的信息。
-     */
+    /** 代表import其它group中的field的信息。 */
     interface Import {
         String getGroupName();
 

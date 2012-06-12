@@ -19,7 +19,7 @@ package com.alibaba.citrus.generictype.introspect;
 
 /**
  * 代表一个简单的property。常见的形式是： </p> *
- *
+ * <p/>
  * <pre>
  * public String getName();
  *
@@ -33,13 +33,9 @@ package com.alibaba.citrus.generictype.introspect;
  * @author Michael Zhou
  */
 public interface SimplePropertyInfo extends PropertyInfo {
-    /**
-     * 取得property的值。
-     */
+    /** 取得property的值。 */
     Object getValue(Object object);
 
-    /**
-     * 设置property的值。
-     */
+    /** 设置property的值。 */
     void setValue(Object object, Object value);
 }

@@ -27,11 +27,11 @@ import java.io.StringWriter;
 import org.junit.Before;
 
 public abstract class AbstractRequestProcessorTests {
-    protected String contentType;
+    protected String                contentType;
     protected ByteArrayOutputStream baos;
-    protected StringWriter sw;
-    protected String redirectUrl;
-    protected String resourceNotFound;
+    protected StringWriter          sw;
+    protected String                redirectUrl;
+    protected String                resourceNotFound;
 
     @Before
     public void initStream() {

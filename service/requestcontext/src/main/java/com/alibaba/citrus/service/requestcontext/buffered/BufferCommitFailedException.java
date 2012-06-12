@@ -27,9 +27,7 @@ import com.alibaba.citrus.service.requestcontext.RequestContextException;
 public class BufferCommitFailedException extends RequestContextException {
     private static final long serialVersionUID = 4884236978077840652L;
 
-    /**
-     * 创建一个异常。
-     */
+    /** 创建一个异常。 */
     public BufferCommitFailedException() {
         super();
     }
@@ -47,7 +45,7 @@ public class BufferCommitFailedException extends RequestContextException {
      * 创建一个异常。
      *
      * @param message 异常信息
-     * @param cause 异常原因
+     * @param cause   异常原因
      */
     public BufferCommitFailedException(String message, Throwable cause) {
         super(message, cause);

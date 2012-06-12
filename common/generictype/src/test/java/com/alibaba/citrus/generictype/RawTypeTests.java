@@ -27,14 +27,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import com.alibaba.citrus.test.runner.Prototyped;
 import com.alibaba.citrus.test.runner.Prototyped.Prototypes;
 import com.alibaba.citrus.test.runner.Prototyped.TestData;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * 测试{@link RawTypeInfo}。
@@ -44,16 +43,16 @@ import com.alibaba.citrus.test.runner.Prototyped.TestName;
 @RunWith(Prototyped.class)
 public class RawTypeTests extends BaseTypeTests implements Cloneable {
     private transient RawTypeInfo typeInfo;
-    private Class<?> clazz; // rawClass
-    private boolean generic; // 是不是generic？
-    private String name; // 名称
-    private String simpleName; // 简称
-    private Class<?> wrapper; // 包装类
-    private boolean isInterface; // 是否为接口
-    private String params; // 参数表toString
-    private String toString; // toString结果
-    private String[] supertypes; // 父类、接口
-    private String[] args; // actual args
+    private           Class<?>    clazz; // rawClass
+    private           boolean     generic; // 是不是generic？
+    private           String      name; // 名称
+    private           String      simpleName; // 简称
+    private           Class<?>    wrapper; // 包装类
+    private           boolean     isInterface; // 是否为接口
+    private           String      params; // 参数表toString
+    private           String      toString; // toString结果
+    private           String[]    supertypes; // 父类、接口
+    private           String[]    args; // actual args
 
     @Before
     public void init() {
@@ -83,8 +82,8 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
         prototype.params = "[]";
         prototype.toString = "String";
         prototype.supertypes = new String[] { "String", "CharSequence", "Comparable<T=String>", "Serializable",
-                "Object" };
-        prototype.args = new String[] {};
+                                              "Object" };
+        prototype.args = new String[] { };
 
         // -----------------
         prototype = data.newPrototype();
@@ -97,7 +96,7 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
         prototype.params = "[]";
         prototype.toString = "Short";
         prototype.supertypes = new String[] { "Short", "Number", "Comparable<T=Short>", "Serializable", "Object" };
-        prototype.args = new String[] {};
+        prototype.args = new String[] { };
 
         // -----------------
         prototype = data.newPrototype();
@@ -110,7 +109,7 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
         prototype.params = "[]";
         prototype.toString = "Externalizable";
         prototype.supertypes = new String[] { "Externalizable", "Serializable", "Object" };
-        prototype.args = new String[] {};
+        prototype.args = new String[] { };
 
         // =========================
         // generic类、接口
@@ -151,7 +150,7 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
         prototype.params = "[E]";
         prototype.toString = "ArrayList<E>";
         prototype.supertypes = new String[] { "ArrayList<E>", "AbstractList<E=E>", "AbstractCollection<E=E>",
-                "Cloneable", "Collection<E=E>", "Iterable<T=E>", "List<E=E>", "RandomAccess", "Serializable", "Object" };
+                                              "Cloneable", "Collection<E=E>", "Iterable<T=E>", "List<E=E>", "RandomAccess", "Serializable", "Object" };
         prototype.args = new String[] { "Object" };
 
         // -----------------
@@ -182,7 +181,7 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
         prototype.params = "[]";
         prototype.toString = "boolean";
         prototype.supertypes = new String[] { "boolean" };
-        prototype.args = new String[] {};
+        prototype.args = new String[] { };
 
         // -----------------
         prototype = data.newPrototype();
@@ -195,7 +194,7 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
         prototype.params = "[]";
         prototype.toString = "byte";
         prototype.supertypes = new String[] { "byte" };
-        prototype.args = new String[] {};
+        prototype.args = new String[] { };
 
         // -----------------
         prototype = data.newPrototype();
@@ -208,7 +207,7 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
         prototype.params = "[]";
         prototype.toString = "char";
         prototype.supertypes = new String[] { "char" };
-        prototype.args = new String[] {};
+        prototype.args = new String[] { };
 
         // -----------------
         prototype = data.newPrototype();
@@ -221,7 +220,7 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
         prototype.params = "[]";
         prototype.toString = "double";
         prototype.supertypes = new String[] { "double" };
-        prototype.args = new String[] {};
+        prototype.args = new String[] { };
 
         // -----------------
         prototype = data.newPrototype();
@@ -234,7 +233,7 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
         prototype.params = "[]";
         prototype.toString = "float";
         prototype.supertypes = new String[] { "float" };
-        prototype.args = new String[] {};
+        prototype.args = new String[] { };
 
         // -----------------
         prototype = data.newPrototype();
@@ -247,7 +246,7 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
         prototype.params = "[]";
         prototype.toString = "int";
         prototype.supertypes = new String[] { "int" };
-        prototype.args = new String[] {};
+        prototype.args = new String[] { };
 
         // -----------------
         prototype = data.newPrototype();
@@ -260,7 +259,7 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
         prototype.params = "[]";
         prototype.toString = "long";
         prototype.supertypes = new String[] { "long" };
-        prototype.args = new String[] {};
+        prototype.args = new String[] { };
 
         // -----------------
         prototype = data.newPrototype();
@@ -273,7 +272,7 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
         prototype.params = "[]";
         prototype.toString = "short";
         prototype.supertypes = new String[] { "short" };
-        prototype.args = new String[] {};
+        prototype.args = new String[] { };
 
         // =========================
         // void和Void
@@ -288,7 +287,7 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
         prototype.params = "[]";
         prototype.toString = "void";
         prototype.supertypes = new String[] { "void" };
-        prototype.args = new String[] {};
+        prototype.args = new String[] { };
 
         // -----------------
         prototype = data.newPrototype();
@@ -301,7 +300,7 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
         prototype.params = "[]";
         prototype.toString = "Void";
         prototype.supertypes = new String[] { "Void", "Object" };
-        prototype.args = new String[] {};
+        prototype.args = new String[] { };
 
         return data;
     }
@@ -315,17 +314,13 @@ public class RawTypeTests extends BaseTypeTests implements Cloneable {
         // 2. class cache中的class被创建以后，weak ref随之被释放，导致同一个class多次被初始化。
     }
 
-    /**
-     * from {@link GenericDeclarationInfo}。
-     */
+    /** from {@link GenericDeclarationInfo}。 */
     @Test
     public void isGeneric() {
         assertEquals(generic, typeInfo.isGeneric());
     }
 
-    /**
-     * from {@link GenericDeclarationInfo}。
-     */
+    /** from {@link GenericDeclarationInfo}。 */
     @Test
     public void getTypeParameters() {
         assertEquals(params, typeInfo.getTypeParameters().toString());

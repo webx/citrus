@@ -23,18 +23,17 @@ import static org.junit.Assert.*;
 import java.util.Collections;
 import java.util.Map;
 
+import com.alibaba.citrus.service.pull.RuntimeToolSetFactory;
+import com.alibaba.citrus.service.pull.ToolFactory;
+import com.alibaba.citrus.service.pull.ToolSetFactory;
+import com.alibaba.citrus.test.TestEnvStatic;
+import com.alibaba.citrus.test.runner.TestNameAware;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
-
-import com.alibaba.citrus.service.pull.RuntimeToolSetFactory;
-import com.alibaba.citrus.service.pull.ToolFactory;
-import com.alibaba.citrus.service.pull.ToolSetFactory;
-import com.alibaba.citrus.test.TestEnvStatic;
-import com.alibaba.citrus.test.runner.TestNameAware;
 
 @RunWith(TestNameAware.class)
 public abstract class AbstractPullServiceTests {
@@ -97,16 +96,12 @@ public abstract class AbstractPullServiceTests {
         });
     }
 
-    /**
-     * 创建<code>ToolFactory</code>。
-     */
+    /** 创建<code>ToolFactory</code>。 */
     protected final ToolFactory newToolFactory(boolean isSingleton, Object object) {
         return new ToolFactoryImpl(isSingleton, object, null);
     }
 
-    /**
-     * 创建<code>ToolSetFactory</code>。
-     */
+    /** 创建<code>ToolSetFactory</code>。 */
     protected final ToolSetFactory newToolSetFactory(boolean isSingleton, boolean isToolFactory, Object object,
                                                      Object... namesAndObjects) {
         Map<String, Object> tools = createLinkedHashMap();
@@ -125,9 +120,7 @@ public abstract class AbstractPullServiceTests {
         }
     }
 
-    /**
-     * 创建<code>RuntimeToolSetFactory</code>。
-     */
+    /** 创建<code>RuntimeToolSetFactory</code>。 */
     protected final RuntimeToolSetFactory newRuntimeToolSetFactory(boolean isSingleton, boolean isToolFactory,
                                                                    Object object, Object... namesAndObjects) {
         Map<String, Object> tools = createLinkedHashMap();
@@ -177,14 +170,14 @@ public abstract class AbstractPullServiceTests {
     }
 
     private static class BaseFactory {
-        private final boolean singleton;
-        private final Object tool;
+        private final boolean             singleton;
+        private final Object              tool;
         private final Map<String, Object> tools;
 
         public BaseFactory(boolean singleton, Object tool, Map<String, Object> tools) {
             this.singleton = singleton;
             this.tool = tool;
-            this.tools = tools == null ? Collections.<String, Object> emptyMap() : tools;
+            this.tools = tools == null ? Collections.<String, Object>emptyMap() : tools;
         }
 
         public boolean isSingleton() {

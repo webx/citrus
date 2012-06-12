@@ -52,9 +52,7 @@ public abstract class BaseTypeTests {
         return ((ParameterizedType) getReturnType(ownerType, methodName)).getActualTypeArguments()[0];
     }
 
-    /**
-     * 取得指定名称的method或指定参数个数的constructor。
-     */
+    /** 取得指定名称的method或指定参数个数的constructor。 */
     protected static GenericDeclaration getMethodOrConstructor(Class<?> ownerType, String methodName,
                                                                Class<?>[] paramTypes) throws NoSuchMethodException {
         if (methodName != null) {
@@ -120,7 +118,7 @@ public abstract class BaseTypeTests {
         if (isEmptyArray(expectedSupertypes)) {
             StringBuilder buf = new StringBuilder("\n");
 
-            for (Iterator<TypeInfo> i = supertypes.iterator(); i.hasNext();) {
+            for (Iterator<TypeInfo> i = supertypes.iterator(); i.hasNext(); ) {
                 buf.append("\"").append(i.next()).append("\"");
 
                 if (i.hasNext()) {
@@ -147,7 +145,7 @@ public abstract class BaseTypeTests {
             }
 
             assertTrue(String.format("%s is not assignable from %s", supertype, type), supertype.getRawType()
-                    .isAssignableFrom(type.getRawType()));
+                                                                                                .isAssignableFrom(type.getRawType()));
 
             // 测试getSupertype()
             assertSame(supertype, type.getSupertype(supertype.getRawType()));

@@ -21,11 +21,7 @@ import static com.alibaba.citrus.service.requestcontext.util.RequestContextUtil.
 import static com.alibaba.citrus.util.Assert.*;
 
 import java.io.IOException;
-
 import javax.servlet.http.HttpSession;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.buffered.BufferedRequestContext;
@@ -39,6 +35,8 @@ import com.alibaba.citrus.service.requestcontext.rundata.User;
 import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextWrapper;
 import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.util.io.ByteArray;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <code>RunData</code>的实现类。
@@ -47,11 +45,11 @@ import com.alibaba.citrus.util.io.ByteArray;
  */
 public class RunDataImpl extends AbstractRequestContextWrapper implements RunData {
     private final static Logger log = LoggerFactory.getLogger(RunData.class);
-    private final BufferedRequestContext bufferedRequestContext;
+    private final BufferedRequestContext   bufferedRequestContext;
     private final LazyCommitRequestContext lazyCommitRequestContext;
-    private final SetLocaleRequestContext setLocaleRequestContext;
-    private final ParserRequestContext parserRequestContext;
-    private User user;
+    private final SetLocaleRequestContext  setLocaleRequestContext;
+    private final ParserRequestContext     parserRequestContext;
+    private       User                     user;
 
     public RunDataImpl(RequestContext wrappedContext) {
         super(wrappedContext);
@@ -83,7 +81,7 @@ public class RunDataImpl extends AbstractRequestContextWrapper implements RunDat
 
     protected LazyCommitRequestContext getLazyCommitRequestContext() {
         return assertNotNull(lazyCommitRequestContext,
-                "Could not find LazyCommitRequestContext in request context chain");
+                             "Could not find LazyCommitRequestContext in request context chain");
     }
 
     protected SetLocaleRequestContext getSetLocaleRequestContext() {
@@ -181,9 +179,7 @@ public class RunDataImpl extends AbstractRequestContextWrapper implements RunDat
         return buffer.toString();
     }
 
-    /**
-     * 检查请求的类型是否为post。
-     */
+    /** 检查请求的类型是否为post。 */
     public boolean isPostRequest() {
         return "post".equalsIgnoreCase(getRequest().getMethod());
     }
@@ -223,7 +219,7 @@ public class RunDataImpl extends AbstractRequestContextWrapper implements RunDat
     /**
      * 将指定对象绑定到当前请求中。当请求结束时，所有的attributes将被抛弃。
      *
-     * @param key 对象的key
+     * @param key    对象的key
      * @param object 和key相对应的对象
      */
     public void setAttribute(String key, Object object) {
@@ -265,16 +261,14 @@ public class RunDataImpl extends AbstractRequestContextWrapper implements RunDat
      * type中将不包含charset标记。
      * </p>
      *
-     * @param contentType content type
+     * @param contentType   content type
      * @param appendCharset 输出字符集
      */
     public void setContentType(String contentType, boolean appendCharset) {
         getSetLocaleRequestContext().setResponseContentType(contentType, appendCharset);
     }
 
-    /**
-     * 取得response的输出字符集。
-     */
+    /** 取得response的输出字符集。 */
     public String getCharacterEncoding() {
         return getResponse().getCharacterEncoding();
     }
@@ -283,7 +277,7 @@ public class RunDataImpl extends AbstractRequestContextWrapper implements RunDat
      * 设置response输出字符集。注意，此方法必须在第一次<code>getWriter</code>之前执行。
      *
      * @param charset 输出字符集，如果charset为<code>null</code>
-     *            ，则从contentType中删除charset标记
+     *                ，则从contentType中删除charset标记
      */
     public void setCharacterEncoding(String charset) {
         getSetLocaleRequestContext().setResponseCharacterEncoding(charset);
@@ -302,7 +296,7 @@ public class RunDataImpl extends AbstractRequestContextWrapper implements RunDat
      * 设置重定向URI。
      *
      * @param location 重定向的URI
-     * @throws IOException 输入输出失败
+     * @throws IOException           输入输出失败
      * @throws IllegalStateException 如果response已经committed
      */
     public void setRedirectLocation(String location) throws IOException {
@@ -358,7 +352,7 @@ public class RunDataImpl extends AbstractRequestContextWrapper implements RunDat
      *
      * @param buffering 是否buffer内容
      * @throws IllegalStateException <code>getOutputStream</code>或
-     *             <code>getWriter</code>方法已经被执行
+     *                               <code>getWriter</code>方法已经被执行
      */
     public void setBuffering(boolean buffering) {
         getBufferedRequestContext().setBuffering(buffering);
@@ -368,7 +362,7 @@ public class RunDataImpl extends AbstractRequestContextWrapper implements RunDat
      * 创建新的buffer，保存老的buffer。
      *
      * @throws IllegalStateException 如果不在buffer模式，或<code>getWriter</code>及
-     *             <code>getOutputStream</code>方法从未被调用
+     *                               <code>getOutputStream</code>方法从未被调用
      */
     public void pushBuffer() {
         getBufferedRequestContext().pushBuffer();
@@ -379,7 +373,7 @@ public class RunDataImpl extends AbstractRequestContextWrapper implements RunDat
      *
      * @return 最近的buffer内容
      * @throws IllegalStateException 如果不在buffer模式，或<code>getWriter</code>
-     *             方法曾被调用，或<code>getOutputStream</code>方法从未被调用
+     *                               方法曾被调用，或<code>getOutputStream</code>方法从未被调用
      */
     public ByteArray popByteBuffer() {
         return getBufferedRequestContext().popByteBuffer();
@@ -390,7 +384,7 @@ public class RunDataImpl extends AbstractRequestContextWrapper implements RunDat
      *
      * @return 最近的buffer内容
      * @throws IllegalStateException 如果不在buffer模式，或<code>getOutputStream</code>
-     *             方法曾被调用，或<code>getWriter</code>方法从未被调用
+     *                               方法曾被调用，或<code>getWriter</code>方法从未被调用
      */
     public String popCharBuffer() {
         return getBufferedRequestContext().popCharBuffer();

@@ -29,8 +29,8 @@ public class WebxUtil {
 
     public static WebxComponent getCurrentComponent(HttpServletRequest request) {
         return assertNotNull((WebxComponent) request.getAttribute(CURRENT_WEBX_COMPONENT_KEY),
-                "No WebxComponent bound in request.  "
-                        + "Make sure WebxFrameworkFilter run or set WebxComponent explicitly by calling WebxUtil");
+                             "No WebxComponent bound in request.  "
+                             + "Make sure WebxFrameworkFilter run or set WebxComponent explicitly by calling WebxUtil");
     }
 
     public static void setCurrentComponent(HttpServletRequest request, WebxComponent component) {
@@ -41,9 +41,7 @@ public class WebxUtil {
         }
     }
 
-    /**
-     * 取得webx version。 版本号是通过META-INF/MANIFEST.MF中的信息取得的。
-     */
+    /** 取得webx version。 版本号是通过META-INF/MANIFEST.MF中的信息取得的。 */
     public static String getWebxVersion() {
         Package pkg = WebxUtil.class.getPackage();
         String version = null;

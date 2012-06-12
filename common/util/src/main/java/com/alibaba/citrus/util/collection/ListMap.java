@@ -31,14 +31,14 @@ import java.util.Map;
  * <p>
  * 通过key访问:
  * </p>
- *
+ * <p/>
  * <pre>
  * Object value1 = listMap.get(&quot;key1&quot;);
  * </pre>
  * <p>
  * 通过整数index, 取得key和value:
  * </p>
- *
+ * <p/>
  * <pre>
  * Object value2 = listMap.get(2);
  * Object key2 = listMap.getKey(2);
@@ -46,7 +46,7 @@ import java.util.Map;
  * <p>
  * 通过整数index, 删除一项, 并返回被删除的项:
  * </p>
- *
+ * <p/>
  * <pre>
  * Map.Entry removedEntry = listMap.remove(3);
  * </pre>

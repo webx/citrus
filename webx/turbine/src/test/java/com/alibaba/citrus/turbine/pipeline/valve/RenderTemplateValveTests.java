@@ -21,13 +21,12 @@ import static com.alibaba.citrus.service.requestcontext.util.RequestContextUtil.
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pipeline.PipelineException;
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import com.alibaba.citrus.service.requestcontext.buffered.BufferedRequestContext;
 import com.alibaba.citrus.service.template.TemplateNotFoundException;
 import com.alibaba.citrus.turbine.TurbineConstant;
+import org.junit.Test;
 
 public class RenderTemplateValveTests extends AbstractValveTests {
     @Test

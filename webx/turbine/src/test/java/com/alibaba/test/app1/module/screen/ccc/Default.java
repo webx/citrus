@@ -17,10 +17,9 @@
 
 package com.alibaba.test.app1.module.screen.ccc;
 
+import com.alibaba.test.module.screen.AbstractModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.alibaba.test.module.screen.AbstractModule;
 
 public class Default extends AbstractModule {
     private final Logger log = LoggerFactory.getLogger(getClass());

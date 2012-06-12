@@ -21,11 +21,11 @@ import static com.alibaba.citrus.service.form.support.NumberSupport.Type.*;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
+import com.alibaba.citrus.service.form.support.AbstractNumberValidator;
 import org.junit.Test;
 
-import com.alibaba.citrus.service.form.support.AbstractNumberValidator;
-
-public abstract class AbstractNumberValidatorTests<V extends AbstractNumberValidator> extends AbstractValidatorTests<V> {
+public abstract class AbstractNumberValidatorTests<V extends AbstractNumberValidator>
+        extends AbstractValidatorTests<V> {
     @Test
     public void init_numberType() throws Exception {
         AbstractNumberValidator v = newValidatorFor_AbstractNumberValidatorTests();
@@ -53,9 +53,7 @@ public abstract class AbstractNumberValidatorTests<V extends AbstractNumberValid
         return v;
     }
 
-    /**
-     * 预处理实例，以便通过<code>AbstractNumberValidatorTests</code>中的测试。
-     */
+    /** 预处理实例，以便通过<code>AbstractNumberValidatorTests</code>中的测试。 */
     protected void initFor_AbstractNumberValidatorTests(V validator) {
     }
 }

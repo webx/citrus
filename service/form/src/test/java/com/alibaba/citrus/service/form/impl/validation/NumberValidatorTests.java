@@ -22,10 +22,9 @@ import static com.alibaba.citrus.service.form.support.NumberSupport.Type.*;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.form.support.NumberSupport;
 import com.alibaba.citrus.service.form.support.NumberSupport.Type;
+import org.junit.Test;
 
 public class NumberValidatorTests extends AbstractNumberValidatorTests<NumberValidator> {
     @Override

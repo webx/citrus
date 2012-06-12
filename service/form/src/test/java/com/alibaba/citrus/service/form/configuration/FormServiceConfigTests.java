@@ -20,15 +20,14 @@ package com.alibaba.citrus.service.form.configuration;
 import static com.alibaba.citrus.util.BasicConstant.*;
 import static org.junit.Assert.*;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.configuration.support.PropertyEditorRegistrarsSupport;
 import com.alibaba.citrus.service.form.AbstractFormServiceTests;
 import com.alibaba.citrus.service.form.configuration.FormConfig.FieldKeyFormat;
 import com.alibaba.citrus.service.form.impl.configuration.FieldConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.FormConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.GroupConfigImpl;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  * 测试form service配置及功能。
@@ -36,7 +35,7 @@ import com.alibaba.citrus.service.form.impl.configuration.GroupConfigImpl;
  * @author Michael Zhou
  */
 public class FormServiceConfigTests extends AbstractFormServiceTests {
-    private FormConfigImpl formConfig;
+    private FormConfigImpl  formConfig;
     private GroupConfigImpl groupConfig;
     private FieldConfigImpl fieldConfig;
 

@@ -23,8 +23,6 @@ package com.alibaba.citrus.service.pipeline;
  * @author Michael Zhou
  */
 public interface Condition {
-    /**
-     * 如满足条件，则返回<code>true</code>。
-     */
+    /** 如满足条件，则返回<code>true</code>。 */
     boolean isSatisfied(PipelineStates pipelineStates);
 }

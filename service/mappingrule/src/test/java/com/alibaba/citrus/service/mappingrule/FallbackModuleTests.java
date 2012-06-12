@@ -55,7 +55,7 @@ public class FallbackModuleTests extends AbstractMappingRuleTests {
         result = mappingRules.getMappedName("fallback.module", "nonexistPackage1/nonexistPackage2/nonexistModule.vm");
         assertEquals("MyDefaultModule", result);
         assertSame(result,
-                mappingRules.getMappedName("fallback.module", "nonexistPackage1/nonexistPackage2/nonexistModule.vm")); // 由于cache存在，所以第二次应立即返回
+                   mappingRules.getMappedName("fallback.module", "nonexistPackage1/nonexistPackage2/nonexistModule.vm")); // 由于cache存在，所以第二次应立即返回
     }
 
     @Test
@@ -76,13 +76,13 @@ public class FallbackModuleTests extends AbstractMappingRuleTests {
         result = mappingRules.getMappedName("fallback.module.nodefault", "aaa/nonexistPackage/nonexistModule.vm");
         assertEquals("aaa.Default", result);
         assertSame(result,
-                mappingRules.getMappedName("fallback.module.nodefault", "aaa/nonexistPackage/nonexistModule.vm")); // 由于cache存在，所以第二次应立即返回
+                   mappingRules.getMappedName("fallback.module.nodefault", "aaa/nonexistPackage/nonexistModule.vm")); // 由于cache存在，所以第二次应立即返回
 
         // Fallback to default - failed - so return the original string(normalized)
         result = mappingRules.getMappedName("fallback.module.nodefault",
-                "nonexistPackage1/nonexistPackage2/nonexistModule.vm");
+                                            "nonexistPackage1/nonexistPackage2/nonexistModule.vm");
         assertEquals("nonexistPackage1.nonexistPackage2.NonexistModule", result);
         assertSame(result, mappingRules.getMappedName("fallback.module.nodefault",
-                "nonexistPackage1/nonexistPackage2/nonexistModule.vm")); // 由于cache存在，所以第二次应立即返回
+                                                      "nonexistPackage1/nonexistPackage2/nonexistModule.vm")); // 由于cache存在，所以第二次应立即返回
     }
 }

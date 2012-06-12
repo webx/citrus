@@ -25,9 +25,7 @@ package com.alibaba.citrus.service.mappingrule;
 public class MappingRuleException extends RuntimeException {
     private static final long serialVersionUID = 3760561988245338425L;
 
-    /**
-     * 创建一个异常。
-     */
+    /** 创建一个异常。 */
     public MappingRuleException() {
         super();
     }
@@ -45,7 +43,7 @@ public class MappingRuleException extends RuntimeException {
      * 创建一个异常。
      *
      * @param message 异常信息
-     * @param cause 异常原因
+     * @param cause   异常原因
      */
     public MappingRuleException(String message, Throwable cause) {
         super(message, cause);

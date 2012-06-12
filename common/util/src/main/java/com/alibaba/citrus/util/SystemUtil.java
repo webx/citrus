@@ -39,13 +39,13 @@ import com.alibaba.citrus.util.i18n.LocaleUtil;
  * @author Michael Zhou
  */
 public class SystemUtil {
-    private static final JvmSpecInfo JVM_SPEC_INFO = new JvmSpecInfo();
-    private static final JvmInfo JVM_INFO = new JvmInfo();
-    private static final JavaSpecInfo JAVA_SPEC_INFO = new JavaSpecInfo();
-    private static final JavaInfo JAVA_INFO = new JavaInfo();
-    private static final OsInfo OS_INFO = new OsInfo();
-    private static final UserInfo USER_INFO = new UserInfo();
-    private static final HostInfo HOST_INFO = new HostInfo();
+    private static final JvmSpecInfo     JVM_SPEC_INFO     = new JvmSpecInfo();
+    private static final JvmInfo         JVM_INFO          = new JvmInfo();
+    private static final JavaSpecInfo    JAVA_SPEC_INFO    = new JavaSpecInfo();
+    private static final JavaInfo        JAVA_INFO         = new JavaInfo();
+    private static final OsInfo          OS_INFO           = new OsInfo();
+    private static final UserInfo        USER_INFO         = new UserInfo();
+    private static final HostInfo        HOST_INFO         = new HostInfo();
     private static final JavaRuntimeInfo JAVA_RUNTIME_INFO = new JavaRuntimeInfo();
 
     /**
@@ -120,17 +120,13 @@ public class SystemUtil {
         return HOST_INFO;
     }
 
-    /**
-     * 代表Java Virutal Machine Specification的信息。
-     */
+    /** 代表Java Virutal Machine Specification的信息。 */
     public static final class JvmSpecInfo {
-        private final String JAVA_VM_SPECIFICATION_NAME = getSystemProperty("java.vm.specification.name", false);
+        private final String JAVA_VM_SPECIFICATION_NAME    = getSystemProperty("java.vm.specification.name", false);
         private final String JAVA_VM_SPECIFICATION_VERSION = getSystemProperty("java.vm.specification.version", false);
-        private final String JAVA_VM_SPECIFICATION_VENDOR = getSystemProperty("java.vm.specification.vendor", false);
+        private final String JAVA_VM_SPECIFICATION_VENDOR  = getSystemProperty("java.vm.specification.vendor", false);
 
-        /**
-         * 防止从外界创建此对象。
-         */
+        /** 防止从外界创建此对象。 */
         private JvmSpecInfo() {
         }
 
@@ -190,18 +186,14 @@ public class SystemUtil {
         }
     }
 
-    /**
-     * 代表Java Virtual Machine Implementation的信息。
-     */
+    /** 代表Java Virtual Machine Implementation的信息。 */
     public static final class JvmInfo {
-        private final String JAVA_VM_NAME = getSystemProperty("java.vm.name", false);
+        private final String JAVA_VM_NAME    = getSystemProperty("java.vm.name", false);
         private final String JAVA_VM_VERSION = getSystemProperty("java.vm.version", false);
-        private final String JAVA_VM_VENDOR = getSystemProperty("java.vm.vendor", false);
-        private final String JAVA_VM_INFO = getSystemProperty("java.vm.info", false);
+        private final String JAVA_VM_VENDOR  = getSystemProperty("java.vm.vendor", false);
+        private final String JAVA_VM_INFO    = getSystemProperty("java.vm.info", false);
 
-        /**
-         * 防止从外界创建此对象。
-         */
+        /** 防止从外界创建此对象。 */
         private JvmInfo() {
         }
 
@@ -275,17 +267,13 @@ public class SystemUtil {
         }
     }
 
-    /**
-     * 代表Java Specification的信息。
-     */
+    /** 代表Java Specification的信息。 */
     public static final class JavaSpecInfo {
-        private final String JAVA_SPECIFICATION_NAME = getSystemProperty("java.specification.name", false);
+        private final String JAVA_SPECIFICATION_NAME    = getSystemProperty("java.specification.name", false);
         private final String JAVA_SPECIFICATION_VERSION = getSystemProperty("java.specification.version", false);
-        private final String JAVA_SPECIFICATION_VENDOR = getSystemProperty("java.specification.vendor", false);
+        private final String JAVA_SPECIFICATION_VENDOR  = getSystemProperty("java.specification.vendor", false);
 
-        /**
-         * 防止从外界创建此对象。
-         */
+        /** 防止从外界创建此对象。 */
         private JavaSpecInfo() {
         }
 
@@ -345,24 +333,20 @@ public class SystemUtil {
         }
     }
 
-    /**
-     * 代表Java Implementation的信息。
-     */
+    /** 代表Java Implementation的信息。 */
     public static final class JavaInfo {
-        private final String JAVA_VERSION = getSystemProperty("java.version", false);
-        private final float JAVA_VERSION_FLOAT = getJavaVersionAsFloat();
-        private final int JAVA_VERSION_INT = getJavaVersionAsInt();
-        private final String JAVA_VENDOR = getSystemProperty("java.vendor", false);
-        private final String JAVA_VENDOR_URL = getSystemProperty("java.vendor.url", false);
-        private final boolean IS_JAVA_1_1 = getJavaVersionMatches("1.1");
-        private final boolean IS_JAVA_1_2 = getJavaVersionMatches("1.2");
-        private final boolean IS_JAVA_1_3 = getJavaVersionMatches("1.3");
-        private final boolean IS_JAVA_1_4 = getJavaVersionMatches("1.4");
-        private final boolean IS_JAVA_1_5 = getJavaVersionMatches("1.5");
+        private final String  JAVA_VERSION       = getSystemProperty("java.version", false);
+        private final float   JAVA_VERSION_FLOAT = getJavaVersionAsFloat();
+        private final int     JAVA_VERSION_INT   = getJavaVersionAsInt();
+        private final String  JAVA_VENDOR        = getSystemProperty("java.vendor", false);
+        private final String  JAVA_VENDOR_URL    = getSystemProperty("java.vendor.url", false);
+        private final boolean IS_JAVA_1_1        = getJavaVersionMatches("1.1");
+        private final boolean IS_JAVA_1_2        = getJavaVersionMatches("1.2");
+        private final boolean IS_JAVA_1_3        = getJavaVersionMatches("1.3");
+        private final boolean IS_JAVA_1_4        = getJavaVersionMatches("1.4");
+        private final boolean IS_JAVA_1_5        = getJavaVersionMatches("1.5");
 
-        /**
-         * 防止从外界创建此对象。
-         */
+        /** 防止从外界创建此对象。 */
         private JavaInfo() {
         }
 
@@ -611,22 +595,18 @@ public class SystemUtil {
         }
     }
 
-    /**
-     * 代表当前运行的JRE的信息。
-     */
+    /** 代表当前运行的JRE的信息。 */
     public static final class JavaRuntimeInfo {
-        private final String JAVA_RUNTIME_NAME = getSystemProperty("java.runtime.name", false);
+        private final String JAVA_RUNTIME_NAME    = getSystemProperty("java.runtime.name", false);
         private final String JAVA_RUNTIME_VERSION = getSystemProperty("java.runtime.version", false);
-        private final String JAVA_HOME = getSystemProperty("java.home", false);
-        private final String JAVA_EXT_DIRS = getSystemProperty("java.ext.dirs", false);
-        private final String JAVA_ENDORSED_DIRS = getSystemProperty("java.endorsed.dirs", false);
-        private final String JAVA_CLASS_PATH = getSystemProperty("java.class.path", false);
-        private final String JAVA_CLASS_VERSION = getSystemProperty("java.class.version", false);
-        private final String JAVA_LIBRARY_PATH = getSystemProperty("java.library.path", false);
+        private final String JAVA_HOME            = getSystemProperty("java.home", false);
+        private final String JAVA_EXT_DIRS        = getSystemProperty("java.ext.dirs", false);
+        private final String JAVA_ENDORSED_DIRS   = getSystemProperty("java.endorsed.dirs", false);
+        private final String JAVA_CLASS_PATH      = getSystemProperty("java.class.path", false);
+        private final String JAVA_CLASS_VERSION   = getSystemProperty("java.class.version", false);
+        private final String JAVA_LIBRARY_PATH    = getSystemProperty("java.library.path", false);
 
-        /**
-         * 防止从外界创建此对象。
-         */
+        /** 防止从外界创建此对象。 */
         private JavaRuntimeInfo() {
         }
 
@@ -797,39 +777,35 @@ public class SystemUtil {
         }
     }
 
-    /**
-     * 代表当前OS的信息。
-     */
+    /** 代表当前OS的信息。 */
     public static final class OsInfo {
-        private final String OS_VERSION = getSystemProperty("os.version", false);
-        private final String OS_ARCH = getSystemProperty("os.arch", false);
-        private final String OS_NAME = getSystemProperty("os.name", false);
-        private final boolean IS_OS_AIX = getOSMatches("AIX");
-        private final boolean IS_OS_HP_UX = getOSMatches("HP-UX");
-        private final boolean IS_OS_IRIX = getOSMatches("Irix");
-        private final boolean IS_OS_LINUX = getOSMatches("Linux") || getOSMatches("LINUX");
-        private final boolean IS_OS_MAC = getOSMatches("Mac");
-        private final boolean IS_OS_MAC_OSX = getOSMatches("Mac OS X");
-        private final boolean IS_OS_OS2 = getOSMatches("OS/2");
-        private final boolean IS_OS_SOLARIS = getOSMatches("Solaris");
-        private final boolean IS_OS_SUN_OS = getOSMatches("SunOS");
-        private final boolean IS_OS_WINDOWS = getOSMatches("Windows");
+        private final String  OS_VERSION         = getSystemProperty("os.version", false);
+        private final String  OS_ARCH            = getSystemProperty("os.arch", false);
+        private final String  OS_NAME            = getSystemProperty("os.name", false);
+        private final boolean IS_OS_AIX          = getOSMatches("AIX");
+        private final boolean IS_OS_HP_UX        = getOSMatches("HP-UX");
+        private final boolean IS_OS_IRIX         = getOSMatches("Irix");
+        private final boolean IS_OS_LINUX        = getOSMatches("Linux") || getOSMatches("LINUX");
+        private final boolean IS_OS_MAC          = getOSMatches("Mac");
+        private final boolean IS_OS_MAC_OSX      = getOSMatches("Mac OS X");
+        private final boolean IS_OS_OS2          = getOSMatches("OS/2");
+        private final boolean IS_OS_SOLARIS      = getOSMatches("Solaris");
+        private final boolean IS_OS_SUN_OS       = getOSMatches("SunOS");
+        private final boolean IS_OS_WINDOWS      = getOSMatches("Windows");
         private final boolean IS_OS_WINDOWS_2000 = getOSMatches("Windows", "5.0");
-        private final boolean IS_OS_WINDOWS_95 = getOSMatches("Windows 9", "4.0");
-        private final boolean IS_OS_WINDOWS_98 = getOSMatches("Windows 9", "4.1");
-        private final boolean IS_OS_WINDOWS_ME = getOSMatches("Windows", "4.9");
-        private final boolean IS_OS_WINDOWS_NT = getOSMatches("Windows NT");
-        private final boolean IS_OS_WINDOWS_XP = getOSMatches("Windows", "5.1");
+        private final boolean IS_OS_WINDOWS_95   = getOSMatches("Windows 9", "4.0");
+        private final boolean IS_OS_WINDOWS_98   = getOSMatches("Windows 9", "4.1");
+        private final boolean IS_OS_WINDOWS_ME   = getOSMatches("Windows", "4.9");
+        private final boolean IS_OS_WINDOWS_NT   = getOSMatches("Windows NT");
+        private final boolean IS_OS_WINDOWS_XP   = getOSMatches("Windows", "5.1");
 
         // 由于改变file.encoding属性并不会改变系统字符编码，为了保持一致，通过LocaleUtil取系统默认编码。
-        private final String FILE_ENCODING = LocaleUtil.getSystem().getCharset().name();
+        private final String FILE_ENCODING  = LocaleUtil.getSystem().getCharset().name();
         private final String FILE_SEPARATOR = getSystemProperty("file.separator", false);
         private final String LINE_SEPARATOR = getSystemProperty("line.separator", false);
         private final String PATH_SEPARATOR = getSystemProperty("path.separator", false);
 
-        /**
-         * 防止从外界创建此对象。
-         */
+        /** 防止从外界创建此对象。 */
         private OsInfo() {
         }
 
@@ -1081,7 +1057,7 @@ public class SystemUtil {
         /**
          * 匹配OS名称。
          *
-         * @param osNamePrefix OS名称前缀
+         * @param osNamePrefix    OS名称前缀
          * @param osVersionPrefix OS版本前缀
          * @return 如果匹配，则返回<code>true</code>
          */
@@ -1166,21 +1142,17 @@ public class SystemUtil {
         }
     }
 
-    /**
-     * 代表当前用户的信息。
-     */
+    /** 代表当前用户的信息。 */
     public static final class UserInfo {
-        private final String USER_NAME = getSystemProperty("user.name", false);
-        private final String USER_HOME = getSystemProperty("user.home", false);
-        private final String USER_DIR = getSystemProperty("user.dir", false);
-        private final String USER_LANGUAGE = getSystemProperty("user.language", false);
-        private final String USER_COUNTRY = getSystemProperty("user.country", false) == null ? getSystemProperty(
+        private final String USER_NAME      = getSystemProperty("user.name", false);
+        private final String USER_HOME      = getSystemProperty("user.home", false);
+        private final String USER_DIR       = getSystemProperty("user.dir", false);
+        private final String USER_LANGUAGE  = getSystemProperty("user.language", false);
+        private final String USER_COUNTRY   = getSystemProperty("user.country", false) == null ? getSystemProperty(
                 "user.region", false) : getSystemProperty("user.country", false);
         private final String JAVA_IO_TMPDIR = getSystemProperty("java.io.tmpdir", false);
 
-        /**
-         * 防止从外界创建此对象。
-         */
+        /** 防止从外界创建此对象。 */
         private UserInfo() {
         }
 
@@ -1283,16 +1255,12 @@ public class SystemUtil {
         }
     }
 
-    /**
-     * 代表当前主机的信息。
-     */
+    /** 代表当前主机的信息。 */
     public static final class HostInfo {
         private final String HOST_NAME;
         private final String HOST_ADDRESS;
 
-        /**
-         * 防止从外界创建此对象。
-         */
+        /** 防止从外界创建此对象。 */
         private HostInfo() {
             String hostName;
             String hostAddress;
@@ -1351,9 +1319,7 @@ public class SystemUtil {
         }
     }
 
-    /**
-     * 将系统信息输出到指定<code>PrintWriter</code>中。
-     */
+    /** 将系统信息输出到指定<code>PrintWriter</code>中。 */
     public static final void dumpSystemInfo() {
         dumpSystemInfo(new PrintWriter(System.out));
     }
@@ -1388,7 +1354,7 @@ public class SystemUtil {
      * 取得系统属性，如果因为Java安全的限制而失败，则将错误打在<code>System.err</code>中，然后返回
      * <code>null</code>。
      *
-     * @param name 属性名
+     * @param name  属性名
      * @param quiet 安静模式，不将出错信息打在<code>System.err</code>中
      * @return 属性值或<code>null</code>
      */
@@ -1398,7 +1364,7 @@ public class SystemUtil {
         } catch (SecurityException e) {
             if (!quiet) {
                 System.err.println("Caught a SecurityException reading the system property '" + name
-                        + "'; the SystemUtil property value will default to null.");
+                                   + "'; the SystemUtil property value will default to null.");
             }
 
             return null;
@@ -1408,9 +1374,9 @@ public class SystemUtil {
     /**
      * 输出到<code>StringBuilder</code>。
      *
-     * @param buffer <code>StringBuilder</code>对象
+     * @param buffer  <code>StringBuilder</code>对象
      * @param caption 标题
-     * @param value 值
+     * @param value   值
      */
     private static void append(StringBuilder buffer, String caption, String value) {
         buffer.append(caption).append(defaultIfNull(StringEscapeUtil.escapeJava(value), "[n/a]")).append("\n");

@@ -33,9 +33,9 @@ import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 
 public class UrisVisitor extends AbstractFallbackVisitor<ExplorerVisitor> {
     private final URIBrokerService uris;
-    private URIBroker uri;
-    private boolean exposed;
-    private String name;
+    private       URIBroker        uri;
+    private       boolean          exposed;
+    private       String           name;
 
     public UrisVisitor(RequestHandlerContext context, ExplorerVisitor v, URIBrokerService uris) {
         super(context, v);

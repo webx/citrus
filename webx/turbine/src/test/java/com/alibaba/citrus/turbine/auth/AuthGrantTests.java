@@ -21,11 +21,10 @@ import static org.junit.Assert.*;
 
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.turbine.auth.impl.AuthGrant;
 import com.alibaba.citrus.turbine.auth.impl.AuthPattern;
+import org.junit.Before;
+import org.junit.Test;
 
 public class AuthGrantTests {
     private AuthGrant grant;
@@ -147,7 +146,7 @@ public class AuthGrantTests {
         assertFalse(grant.isUserMatched("baobao"));
 
         // * except anonymous
-        grant.setUsers(new String[] { new String("*") /* new instance */});
+        grant.setUsers(new String[] { new String("*") /* new instance */ });
         assertFalse(grant.isUserMatched(null));
         assertTrue(grant.isUserMatched("baobao"));
         assertTrue(grant.isUserMatched("anonymous")); // 注意：用户名允许使用anonymous，但不代表真正的匿名用户
@@ -156,7 +155,7 @@ public class AuthGrantTests {
         grant.setUsers(new String[] { new String("*") /* new instance */, new String("anonymous") /*
                                                                                                    * new
                                                                                                    * instance
-                                                                                                   */});
+                                                                                                   */ });
         assertTrue(grant.isUserMatched(null));
         assertTrue(grant.isUserMatched("baobao"));
         assertTrue(grant.isUserMatched("anonymous")); // 注意：用户名允许使用anonymous，但不代表真正的匿名用户
@@ -175,7 +174,7 @@ public class AuthGrantTests {
         assertFalse(grant.areRolesMatched(new String[] { "admin" }));
 
         // * except anonymous
-        grant.setRoles(new String[] { new String("*") /* new instance */});
+        grant.setRoles(new String[] { new String("*") /* new instance */ });
         assertFalse(grant.areRolesMatched(new String[0]));
         assertFalse(grant.areRolesMatched(new String[] { null }));
         assertTrue(grant.areRolesMatched(new String[] { "admin" }));

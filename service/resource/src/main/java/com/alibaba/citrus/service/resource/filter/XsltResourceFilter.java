@@ -26,16 +26,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Set;
-
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.alibaba.citrus.service.resource.Resource;
 import com.alibaba.citrus.service.resource.ResourceFilter;
@@ -48,6 +44,8 @@ import com.alibaba.citrus.service.resource.support.ByteArrayResource;
 import com.alibaba.citrus.service.resource.support.FileResource;
 import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.util.io.StreamUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 将xml resource变换格式的filter。
@@ -57,9 +55,9 @@ import com.alibaba.citrus.util.io.StreamUtil;
 public class XsltResourceFilter implements ResourceFilter {
     private static final Logger log = LoggerFactory.getLogger(XsltResourceFilter.class);
     private ResourceLoadingService resourceLoadingService;
-    private String xslt;
-    private String saveTo;
-    private File saveToDir;
+    private String                 xslt;
+    private String                 saveTo;
+    private File                   saveToDir;
     private boolean failIfNotFound = true;
 
     public void setXslt(String xslt) {
@@ -87,7 +85,6 @@ public class XsltResourceFilter implements ResourceFilter {
 
         if (saveTo == null) {
             return null;
-
         }
 
         File dir;
@@ -127,7 +124,7 @@ public class XsltResourceFilter implements ResourceFilter {
 
         if (xsltRes == null && failIfNotFound) {
             throw new ResourceNotFoundException("Could not find XSLT file for " + this + ", resourceName="
-                    + filterMatchResult.getResourceName());
+                                                + filterMatchResult.getResourceName());
         }
 
         Resource resource = chain.doFilter(filterMatchResult, options);
@@ -141,9 +138,7 @@ public class XsltResourceFilter implements ResourceFilter {
         return resource;
     }
 
-    /**
-     * 用XSLT转换XML资源。
-     */
+    /** 用XSLT转换XML资源。 */
     private Resource transformDocument(Resource xmlRes, String xmlResName, Resource xsltRes, String xsltResName)
             throws ResourceNotFoundException {
         log.debug("Applying XSLT \"{}\" to resource \"{}\"", xsltResName, xmlResName);
@@ -162,13 +157,11 @@ public class XsltResourceFilter implements ResourceFilter {
             return new ByteArrayResource(baos.toByteArray());
         } catch (Exception e) {
             throw new ResourceNotFoundException("Could not apply XSLT \"" + xsltResName + "\" to resource \""
-                    + xmlResName + "\"", e);
+                                                + xmlResName + "\"", e);
         }
     }
 
-    /**
-     * 将资源保存到目录中。
-     */
+    /** 将资源保存到目录中。 */
     private Resource saveToDir(Resource resource, String resourceName) {
         File fileToSave = new File(saveToDir, resourceName);
         File parentDir = fileToSave.getParentFile();

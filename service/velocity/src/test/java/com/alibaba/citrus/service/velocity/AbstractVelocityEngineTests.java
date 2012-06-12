@@ -28,20 +28,19 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
+import com.alibaba.citrus.service.resource.support.context.ResourceLoadingXmlApplicationContext;
+import com.alibaba.citrus.service.template.TemplateService;
+import com.alibaba.citrus.service.velocity.VelocityEngineTests.MyProxy;
+import com.alibaba.citrus.service.velocity.impl.VelocityEngineImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.ContextResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 
-import com.alibaba.citrus.service.resource.support.context.ResourceLoadingXmlApplicationContext;
-import com.alibaba.citrus.service.template.TemplateService;
-import com.alibaba.citrus.service.velocity.VelocityEngineTests.MyProxy;
-import com.alibaba.citrus.service.velocity.impl.VelocityEngineImpl;
-
 public abstract class AbstractVelocityEngineTests {
     protected static ApplicationContext factory;
-    protected TemplateService templateService;
-    protected VelocityEngineImpl velocityEngine;
+    protected        TemplateService    templateService;
+    protected        VelocityEngineImpl velocityEngine;
 
     protected static ApplicationContext createFactory(String configFile) {
         return createFactory(configFile, true);
@@ -74,23 +73,24 @@ public abstract class AbstractVelocityEngineTests {
 
     private static Resource getResourceProxy(ClassLoader loader, final Resource resource) {
         return (Resource) Proxy.newProxyInstance(loader, new Class<?>[] { Resource.class, MyProxy.class },
-                new InvocationHandler() {
-                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                        if ("getInstance".equals(method.getName()) && isEmptyArray(args)) {
-                            return resource;
-                        }
+                                                 new InvocationHandler() {
+                                                     public Object invoke(Object proxy, Method method, Object[] args)
+                                                             throws Throwable {
+                                                         if ("getInstance".equals(method.getName()) && isEmptyArray(args)) {
+                                                             return resource;
+                                                         }
 
-                        if ("equals".equals(method.getName()) && arrayLength(args) == 1 && args[0] instanceof MyProxy) {
-                            args[0] = ((MyProxy) args[0]).getInstance();
-                        }
+                                                         if ("equals".equals(method.getName()) && arrayLength(args) == 1 && args[0] instanceof MyProxy) {
+                                                             args[0] = ((MyProxy) args[0]).getInstance();
+                                                         }
 
-                        try {
-                            return method.invoke(resource, args);
-                        } catch (InvocationTargetException e) {
-                            throw e.getCause();
-                        }
-                    }
-                });
+                                                         try {
+                                                             return method.invoke(resource, args);
+                                                         } catch (InvocationTargetException e) {
+                                                             throw e.getCause();
+                                                         }
+                                                     }
+                                                 });
     }
 
     protected void getEngine(String id, ApplicationContext factory) {

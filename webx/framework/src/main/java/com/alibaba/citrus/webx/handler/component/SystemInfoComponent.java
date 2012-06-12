@@ -25,8 +25,6 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.core.SpringVersion;
-
 import com.alibaba.citrus.service.configuration.ProductionModeAware;
 import com.alibaba.citrus.util.ArrayUtil;
 import com.alibaba.citrus.util.HumanReadableSize;
@@ -36,6 +34,7 @@ import com.alibaba.citrus.util.internal.webpagelite.PageComponentRegistry;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 import com.alibaba.citrus.webx.handler.support.AbstractVisitor;
 import com.alibaba.citrus.webx.util.WebxUtil;
+import org.springframework.core.SpringVersion;
 
 /**
  * 显示基本的系统信息。
@@ -44,7 +43,7 @@ import com.alibaba.citrus.webx.util.WebxUtil;
  */
 public class SystemInfoComponent extends PageComponent implements ProductionModeAware {
     private final KeyValuesComponent keyValuesComponent;
-    private boolean productionMode;
+    private       boolean            productionMode;
 
     public SystemInfoComponent(PageComponentRegistry registry, String componentPath,
                                KeyValuesComponent keyValuesComponent) {
@@ -76,38 +75,38 @@ public class SystemInfoComponent extends PageComponent implements ProductionMode
 
             // Java info
             keyValues.put("Java", ArrayUtil.arrayToMap(new Object[][] { //
-                    { "Vendor", SystemUtil.getJavaInfo().getVendor() }, //
-                            { "Version", SystemUtil.getJavaInfo().getVersion() }, //
-                    }, String.class, String.class));
+                                                                        { "Vendor", SystemUtil.getJavaInfo().getVendor() }, //
+                                                                        { "Version", SystemUtil.getJavaInfo().getVersion() }, //
+            }, String.class, String.class));
 
             keyValues.put("Java Runtime", ArrayUtil.arrayToMap(new Object[][] { //
-                    { "Name", SystemUtil.getJavaRuntimeInfo().getName() }, //
-                            { "Version", SystemUtil.getJavaRuntimeInfo().getVersion() }, //
-                            { "Home", SystemUtil.getJavaRuntimeInfo().getHomeDir() }, //
-                    }, String.class, String.class));
+                                                                                { "Name", SystemUtil.getJavaRuntimeInfo().getName() }, //
+                                                                                { "Version", SystemUtil.getJavaRuntimeInfo().getVersion() }, //
+                                                                                { "Home", SystemUtil.getJavaRuntimeInfo().getHomeDir() }, //
+            }, String.class, String.class));
 
             keyValues.put("Java Spec.", ArrayUtil.arrayToMap(new Object[][] { //
-                    { "Name", SystemUtil.getJavaSpecInfo().getName() }, //
-                            { "Vendor", SystemUtil.getJavaSpecInfo().getVendor() }, //
-                            { "Version", SystemUtil.getJavaSpecInfo().getVersion() }, //
-                    }, String.class, String.class));
+                                                                              { "Name", SystemUtil.getJavaSpecInfo().getName() }, //
+                                                                              { "Vendor", SystemUtil.getJavaSpecInfo().getVendor() }, //
+                                                                              { "Version", SystemUtil.getJavaSpecInfo().getVersion() }, //
+            }, String.class, String.class));
 
             keyValues.put("JVM", ArrayUtil.arrayToMap(new Object[][] { //
-                    { "Name", SystemUtil.getJvmInfo().getName() }, //
-                            { "Vendor", SystemUtil.getJvmInfo().getVendor() }, //
-                            { "Version", SystemUtil.getJvmInfo().getVersion() }, //
-                            { "Info", SystemUtil.getJvmInfo().getInfo() }, //
-                    }, String.class, String.class));
+                                                                       { "Name", SystemUtil.getJvmInfo().getName() }, //
+                                                                       { "Vendor", SystemUtil.getJvmInfo().getVendor() }, //
+                                                                       { "Version", SystemUtil.getJvmInfo().getVersion() }, //
+                                                                       { "Info", SystemUtil.getJvmInfo().getInfo() }, //
+            }, String.class, String.class));
 
             keyValues.put("JVM Spec.", ArrayUtil.arrayToMap(new Object[][] { //
-                    { "Name", SystemUtil.getJvmSpecInfo().getName() }, //
-                            { "Vendor", SystemUtil.getJvmSpecInfo().getVendor() }, //
-                            { "Version", SystemUtil.getJvmSpecInfo().getVersion() }, //
-                    }, String.class, String.class));
+                                                                             { "Name", SystemUtil.getJvmSpecInfo().getName() }, //
+                                                                             { "Vendor", SystemUtil.getJvmSpecInfo().getVendor() }, //
+                                                                             { "Version", SystemUtil.getJvmSpecInfo().getVersion() }, //
+            }, String.class, String.class));
 
             // OS info
             keyValues.put("OS", String.format("%s %s %s", SystemUtil.getOsInfo().getName(), SystemUtil.getOsInfo()
-                    .getArch(), SystemUtil.getOsInfo().getVersion()));
+                                                                                                      .getArch(), SystemUtil.getOsInfo().getVersion()));
 
             keyValues.put("File Encoding", SystemUtil.getOsInfo().getFileEncoding());
             keyValues.put("Host Name", SystemUtil.getHostInfo().getName());
@@ -117,13 +116,13 @@ public class SystemInfoComponent extends PageComponent implements ProductionMode
             try {
                 Map<String, List<String>> networkAddresses = createTreeMap();
 
-                for (Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces(); e.hasMoreElements();) {
+                for (Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces(); e.hasMoreElements(); ) {
                     NetworkInterface networkInterface = e.nextElement();
 
                     String name = networkInterface.getDisplayName();
                     List<String> addresses = createLinkedList();
 
-                    for (Enumeration<InetAddress> e2 = networkInterface.getInetAddresses(); e2.hasMoreElements();) {
+                    for (Enumeration<InetAddress> e2 = networkInterface.getInetAddresses(); e2.hasMoreElements(); ) {
                         addresses.add(e2.nextElement().getHostAddress());
                     }
 

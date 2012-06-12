@@ -19,13 +19,12 @@ package com.alibaba.citrus.service.pull.support;
 
 import static org.junit.Assert.*;
 
+import com.alibaba.citrus.service.pull.AbstractPullServiceConfigTests;
+import com.alibaba.citrus.service.pull.PullService;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
-
-import com.alibaba.citrus.service.pull.AbstractPullServiceConfigTests;
-import com.alibaba.citrus.service.pull.PullService;
 
 public class BeanToolTests extends AbstractPullServiceConfigTests {
     private static ApplicationContext staticFactory;

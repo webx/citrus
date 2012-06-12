@@ -20,12 +20,11 @@ package com.alibaba.citrus.turbine.dataresolver;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-import org.springframework.beans.TypeMismatchException;
-
 import com.alibaba.citrus.service.moduleloader.ActionEventException;
 import com.alibaba.test2.module.action.params.MyAction;
 import com.alibaba.test2.module.action.params.MyAction.MyData;
+import org.junit.Test;
+import org.springframework.beans.TypeMismatchException;
 
 public class ParametersResolverTests extends AbstractDataResolverTests {
     @Test

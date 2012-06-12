@@ -28,11 +28,10 @@ import java.io.StringReader;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.util.io.OutputEngine.OutputStreamFactory;
+import org.junit.Before;
+import org.junit.Test;
 
 public class OutputEngineTests {
     private String charData;

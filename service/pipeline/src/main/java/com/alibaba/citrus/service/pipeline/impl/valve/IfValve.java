@@ -19,10 +19,6 @@ package com.alibaba.citrus.service.pipeline.impl.valve;
 
 import static com.alibaba.citrus.util.Assert.*;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.pipeline.Condition;
 import com.alibaba.citrus.service.pipeline.Pipeline;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
@@ -30,6 +26,9 @@ import com.alibaba.citrus.service.pipeline.support.AbstractValve;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 代表一个单重条件选择。
@@ -38,7 +37,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  */
 public class IfValve extends AbstractValve {
     private Condition condition;
-    private Pipeline block;
+    private Pipeline  block;
 
     public Condition getCondition() {
         return condition;

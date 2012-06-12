@@ -21,31 +21,29 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
-
 import javax.servlet.http.HttpSession;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 import com.alibaba.citrus.service.requestcontext.session.SessionRequestContext;
 import com.alibaba.citrus.test.runner.Prototyped;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 @RunWith(Prototyped.class)
 public abstract class AbstractSingleValueEncoderTests extends AbstractRequestContextsTests<SessionRequestContext>
         implements Cloneable {
     protected HttpSession session;
-    protected String beanName;
-    protected String attrName;
-    protected String cookieName;
-    protected Object value1;
-    protected String value1Encoded;
-    protected Object value2;
-    protected String value2Encoded;
-    protected Object value3;
-    protected String value3Encoded;
+    protected String      beanName;
+    protected String      attrName;
+    protected String      cookieName;
+    protected Object      value1;
+    protected String      value1Encoded;
+    protected Object      value2;
+    protected String      value2Encoded;
+    protected Object      value3;
+    protected String      value3Encoded;
 
     @BeforeClass
     public static void initFactory() {
@@ -126,7 +124,7 @@ public abstract class AbstractSingleValueEncoderTests extends AbstractRequestCon
 
         assertEquals(1, newCookies.length);
         assertThat(newCookies[0],
-                containsAll(cookieName + "=; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/; HttpOnly"));
+                   containsAll(cookieName + "=; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/; HttpOnly"));
 
         // request 4 - re-add attrs
         invokeNoopServlet("/servlet");
@@ -187,6 +185,6 @@ public abstract class AbstractSingleValueEncoderTests extends AbstractRequestCon
 
         assertThat(newCookies[0], containsAll("JSESSIONID=; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/; HttpOnly"));
         assertThat(newCookies[1],
-                containsAll(cookieName + "=; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/; HttpOnly"));
+                   containsAll(cookieName + "=; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/; HttpOnly"));
     }
 }

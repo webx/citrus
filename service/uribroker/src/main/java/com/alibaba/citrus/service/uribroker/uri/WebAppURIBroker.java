@@ -28,9 +28,7 @@ public abstract class WebAppURIBroker extends URIBroker {
     protected static final int CONTEXT_PATH_INDEX = PATH_INDEX;
     protected boolean hasContextPath;
 
-    /**
-     * 将request中的运行时信息填充到uri broker中。
-     */
+    /** 将request中的运行时信息填充到uri broker中。 */
     @Override
     protected void populateWithRequest(HttpServletRequest request) {
         super.populateWithRequest(request);
@@ -40,9 +38,7 @@ public abstract class WebAppURIBroker extends URIBroker {
         }
     }
 
-    /**
-     * 取得context path。
-     */
+    /** 取得context path。 */
     public String getContextPath() {
         if (hasContextPath) {
             return getPathSegmentAsString(CONTEXT_PATH_INDEX);
@@ -51,9 +47,7 @@ public abstract class WebAppURIBroker extends URIBroker {
         }
     }
 
-    /**
-     * 设置context path。
-     */
+    /** 设置context path。 */
     public WebAppURIBroker setContextPath(String contextPath) {
         setPathSegment(CONTEXT_PATH_INDEX, contextPath);
         hasContextPath = true;

@@ -25,9 +25,11 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
+import com.alibaba.citrus.service.pull.impl.PullServiceImpl;
+import com.alibaba.citrus.service.pull.support.BeanTool;
+import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,17 +39,13 @@ import org.junit.runners.Parameterized.Parameters;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 
-import com.alibaba.citrus.service.pull.impl.PullServiceImpl;
-import com.alibaba.citrus.service.pull.support.BeanTool;
-import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
-
 @RunWith(Parameterized.class)
 public class PullServiceSkipValidationTests {
-    private final boolean skipValidation;
-    private ApplicationContext factory;
-    private PullServiceImpl pullService;
-    private Map<String, Object> tools;
-    private Map<String, Object> prePulledTools;
+    private final boolean             skipValidation;
+    private       ApplicationContext  factory;
+    private       PullServiceImpl     pullService;
+    private       Map<String, Object> tools;
+    private       Map<String, Object> prePulledTools;
 
     public PullServiceSkipValidationTests(boolean skipValidation) {
         this.skipValidation = skipValidation;

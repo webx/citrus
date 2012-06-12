@@ -35,10 +35,10 @@ import com.alibaba.citrus.generictype.TypeInfo;
  */
 public class FieldImpl implements FieldInfo {
     private final static int MODIFIERS_MASK = PRIVATE | PUBLIC | PROTECTED | STATIC;
-    private final int modifiers;
-    private final Field field;
+    private final int           modifiers;
+    private final Field         field;
     private final ClassTypeInfo declaringType;
-    private final TypeInfo type;
+    private final TypeInfo      type;
 
     FieldImpl(Field field, ClassTypeInfo declaringType, TypeInfo type) {
         this.field = assertNotNull(field, "field");

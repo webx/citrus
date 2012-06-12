@@ -31,14 +31,10 @@ import java.lang.reflect.Type;
  * @author Michael Zhou
  */
 public interface DataResolverService {
-    /**
-     * 取得指定generic类型、指定annotations的参数或property的数据解析器。
-     */
+    /** 取得指定generic类型、指定annotations的参数或property的数据解析器。 */
     DataResolver getDataResolver(Type type, Annotation[] annotations, Object... extraInfo)
             throws DataResolverNotFoundException;
 
-    /**
-     * 取得指定方法的参数类型的数据解析器。
-     */
+    /** 取得指定方法的参数类型的数据解析器。 */
     DataResolver[] getParameterResolvers(Method method, Object... extraInfo) throws DataResolverNotFoundException;
 }

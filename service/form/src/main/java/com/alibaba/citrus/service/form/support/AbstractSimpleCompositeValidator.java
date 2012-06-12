@@ -57,17 +57,13 @@ public abstract class AbstractSimpleCompositeValidator extends AbstractComposite
         }
     }
 
-    /**
-     * 取得唯一的validator。
-     */
+    /** 取得唯一的validator。 */
     public Validator getValidator() {
         assertInitialized();
         return getValidators().get(0);
     }
 
-    /**
-     * 用子validator验证，并取得其错误信息。
-     */
+    /** 用子validator验证，并取得其错误信息。 */
     protected final boolean doValidate(Context context) {
         Validator validator = getValidator();
         Context newContext = newContext(context, validator);

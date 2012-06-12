@@ -29,7 +29,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.Part;
@@ -39,9 +38,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.mail.builder.InvalidAddressException;
 import com.alibaba.citrus.service.mail.builder.MailAddressType;
 import com.alibaba.citrus.service.mail.builder.MailBuilder;
@@ -50,6 +46,8 @@ import com.alibaba.citrus.service.mail.builder.content.AbstractContent;
 import com.alibaba.citrus.service.mail.builder.content.MultipartContent;
 import com.alibaba.citrus.service.mail.util.MailUtil;
 import com.alibaba.citrus.util.io.ByteArrayOutputStream;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * 测试手工装配mail builder。
@@ -157,7 +155,7 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
             assertThat(
                     e,
                     exception(UnsupportedEncodingException.class, "Invalid charset", "invalid_charset",
-                            "specified at mail (id=\"myid\")"));
+                              "specified at mail (id=\"myid\")"));
         }
     }
 
@@ -168,16 +166,16 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
 
         // render as UTF-8
         assertThat(save(builder.getMessageAsString(rawSession)), containsAll( //
-                "=?UTF-8?Q?=E6=88=91=E7=88=B1=E5=8C=97=E4=BA=AC?=", //
-                "=?UTF-8?Q?=E6=95=8F=E6=84=9F=E8=AF=8D_I?=", //
-                "=?UTF-8?Q?_love_the_?=", //
-                "=?UTF-8?Q?preserved_keywords.?="));
+                                                                              "=?UTF-8?Q?=E6=88=91=E7=88=B1=E5=8C=97=E4=BA=AC?=", //
+                                                                              "=?UTF-8?Q?=E6=95=8F=E6=84=9F=E8=AF=8D_I?=", //
+                                                                              "=?UTF-8?Q?_love_the_?=", //
+                                                                              "=?UTF-8?Q?preserved_keywords.?="));
 
         // render as GBK
         builder.setCharacterEncoding("GBK");
         assertThat(save(builder.getMessageAsString(rawSession)), containsAll( //
-                "=?GBK?Q?=CE=D2=B0=AE=B1=B1=BE=A9=C3=F4=B8=D0=B4=CA_I_love_the_?=", //
-                "=?GBK?Q?preserved_keywords.?="));
+                                                                              "=?GBK?Q?=CE=D2=B0=AE=B1=B1=BE=A9=C3=F4=B8=D0=B4=CA_I_love_the_?=", //
+                                                                              "=?GBK?Q?preserved_keywords.?="));
     }
 
     @Test
@@ -188,7 +186,7 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
         assertTrue(sentDate.getTime() - System.currentTimeMillis() < 1000);
 
         assertThat(save(builder.getMessageAsString(rawSession)), containsAll( //
-                newDateFormat().format(sentDate)));
+                                                                              newDateFormat().format(sentDate)));
     }
 
     @Test
@@ -197,7 +195,7 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
         assertEquals(0, builder.getSentDate().getTime());
 
         assertThat(save(builder.getMessageAsString(rawSession)), containsAll( //
-                newDateFormat().format(new Date(0))));
+                                                                              newDateFormat().format(new Date(0))));
     }
 
     @Test
@@ -290,8 +288,8 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
 
         for (MailAddressType addrType : MailAddressType.values()) {
             assertAddresses(builder, addrType, //
-                    "=?UTF-8?B?576O5Zu9?= <us@earth.com>", //
-                    "=?UTF-8?B?5Lit5Zu9?= <china@earth.com>");
+                            "=?UTF-8?B?576O5Zu9?= <us@earth.com>", //
+                            "=?UTF-8?B?5Lit5Zu9?= <china@earth.com>");
         }
     }
 
@@ -407,9 +405,9 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
         String eml = save(MailUtil.toString(message));
 
         assertThat(eml, containsAllRegex( //
-                "Subject:\\s*" + REGEX_EOL, //
-                "Content-Type: text/plain; charset=us-ascii" + REGEX_EOL, //
-                REGEX_EOL + REGEX_EOL + "$"));
+                                          "Subject:\\s*" + REGEX_EOL, //
+                                          "Content-Type: text/plain; charset=us-ascii" + REGEX_EOL, //
+                                          REGEX_EOL + REGEX_EOL + "$"));
     }
 
     @Test
@@ -417,9 +415,9 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
         String eml = save(builder.getMessageAsString(rawSession));
 
         assertThat(eml, containsAllRegex( //
-                "Subject:\\s*" + REGEX_EOL, //
-                "Content-Type: text/plain; charset=us-ascii" + REGEX_EOL, //
-                REGEX_EOL + REGEX_EOL + "$"));
+                                          "Subject:\\s*" + REGEX_EOL, //
+                                          "Content-Type: text/plain; charset=us-ascii" + REGEX_EOL, //
+                                          REGEX_EOL + REGEX_EOL + "$"));
     }
 
     @Test
@@ -439,9 +437,9 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
         String eml = save(builder.getMessageAsString(rawSession));
 
         assertThat(eml, containsAllRegex( //
-                "Subject:\\s*" + REGEX_EOL, //
-                "Content-Type: text/plain; charset=us-ascii" + REGEX_EOL, //
-                "hello, world"));
+                                          "Subject:\\s*" + REGEX_EOL, //
+                                          "Content-Type: text/plain; charset=us-ascii" + REGEX_EOL, //
+                                          "hello, world"));
     }
 
     @Test
@@ -452,9 +450,9 @@ public class MailBuilderTests extends AbstractMailBuilderTests {
         String eml = save(new String(baos.toByteArray().toByteArray()));
 
         assertThat(eml, containsAllRegex( //
-                "Subject:\\s*" + REGEX_EOL, //
-                "Content-Type: text/plain; charset=us-ascii" + REGEX_EOL, //
-                REGEX_EOL + REGEX_EOL + "$"));
+                                          "Subject:\\s*" + REGEX_EOL, //
+                                          "Content-Type: text/plain; charset=us-ascii" + REGEX_EOL, //
+                                          REGEX_EOL + REGEX_EOL + "$"));
     }
 
     @Test

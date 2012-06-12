@@ -29,7 +29,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class MappedTemplateContextTests {
-    private Map<String, Object> map;
+    private Map<String, Object>   map;
     private MappedTemplateContext context;
 
     @Before

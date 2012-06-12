@@ -38,10 +38,10 @@ public class CharsetDumper extends CharsetTool {
         dumper.dump("gbk.txt");
     }
 
-    private Charset charset;
+    private Charset        charset;
     private CharsetEncoder encoder;
-    private int startChar;
-    private int endChar;
+    private int            startChar;
+    private int            endChar;
 
     public CharsetDumper() {
         this("GBK", 0x4E00, 0xFA30);

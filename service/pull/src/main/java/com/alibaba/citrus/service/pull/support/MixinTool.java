@@ -25,15 +25,14 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import com.alibaba.citrus.service.pull.ToolFactory;
+import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
+import com.alibaba.citrus.util.internal.StaticFunctionDelegatorBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.ResourceLoader;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.service.pull.ToolFactory;
-import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
-import com.alibaba.citrus.util.internal.StaticFunctionDelegatorBuilder;
 
 /**
  * 或者创建一组utils类的mixin。
@@ -41,8 +40,8 @@ import com.alibaba.citrus.util.internal.StaticFunctionDelegatorBuilder;
  * @author Michael Zhou
  */
 public class MixinTool implements ToolFactory, ResourceLoaderAware {
-    private ClassLoader classLoader;
-    private Class<?>[] mixinClasses;
+    private ClassLoader  classLoader;
+    private Class<?>[]   mixinClasses;
     private MethodInfo[] mixinMethods;
 
     public void setResourceLoader(ResourceLoader resourceLoader) {
@@ -123,8 +122,8 @@ public class MixinTool implements ToolFactory, ResourceLoaderAware {
 
     public static final class MethodInfo {
         private Class<?> containingClass;
-        private String methodName;
-        private String rename;
+        private String   methodName;
+        private String   rename;
 
         public MethodInfo(Class<?> containingClass, String methodName, String rename) {
             this.containingClass = containingClass;

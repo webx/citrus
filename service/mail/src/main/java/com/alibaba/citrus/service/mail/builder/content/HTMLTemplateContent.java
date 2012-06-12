@@ -27,7 +27,6 @@ import java.text.MessageFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
-
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.URLDataSource;
@@ -38,10 +37,6 @@ import javax.mail.internet.ContentType;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 
-import org.springframework.context.ResourceLoaderAware;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
-
 import com.alibaba.citrus.service.mail.builder.MailBuilderException;
 import com.alibaba.citrus.service.mail.support.ResourceDataSource;
 import com.alibaba.citrus.service.mail.util.MailUtil;
@@ -49,6 +44,9 @@ import com.alibaba.citrus.service.template.TemplateContext;
 import com.alibaba.citrus.util.FileUtil;
 import com.alibaba.citrus.util.SystemUtil;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.springframework.context.ResourceLoaderAware;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 
 /**
  * 用模板生成的HTML的内容。
@@ -57,47 +55,35 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  */
 public class HTMLTemplateContent extends TemplateContent implements ResourceLoaderAware {
     private ResourceLoader resourceLoader;
-    private Map<String, String> inlineResourceMap = createHashMap();
-    private Map<String, InlineResource> inlineResources = createHashMap();
+    private Map<String, String>         inlineResourceMap = createHashMap();
+    private Map<String, InlineResource> inlineResources   = createHashMap();
 
-    /**
-     * 创建一个<code>HTMLTemplateContent</code>。
-     */
+    /** 创建一个<code>HTMLTemplateContent</code>。 */
     public HTMLTemplateContent() {
     }
 
-    /**
-     * 创建一个<code>HTMLTemplateContent</code>。
-     */
+    /** 创建一个<code>HTMLTemplateContent</code>。 */
     public HTMLTemplateContent(String templateName) {
         setTemplate(templateName);
     }
 
-    /**
-     * 创建一个<code>HTMLTemplateContent</code>。
-     */
+    /** 创建一个<code>HTMLTemplateContent</code>。 */
     public HTMLTemplateContent(String templateName, String contentType) {
         setTemplate(templateName);
         setContentType(contentType);
     }
 
-    /**
-     * 取得用来装载资源的<code>ResourceLoader</code>。
-     */
+    /** 取得用来装载资源的<code>ResourceLoader</code>。 */
     public ResourceLoader getResourceLoader() {
         return resourceLoader;
     }
 
-    /**
-     * 设置用来装载资源的<code>ResourceLoader</code>。
-     */
+    /** 设置用来装载资源的<code>ResourceLoader</code>。 */
     public void setResourceLoader(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
     }
 
-    /**
-     * 设置一组内置资源的tool。
-     */
+    /** 设置一组内置资源的tool。 */
     public void setInlineResources(Map<String, String> resourceMap) {
         if (resourceMap != null) {
             inlineResourceMap.clear();
@@ -121,9 +107,7 @@ public class HTMLTemplateContent extends TemplateContent implements ResourceLoad
         inlineResourceMap.put(id, prefix);
     }
 
-    /**
-     * 渲染邮件内容。
-     */
+    /** 渲染邮件内容。 */
     public void render(Part mailPart) throws MessagingException {
         // 设置内联资源的helper对象, 以便模板产生resource的引用.
         inlineResources.clear();
@@ -157,9 +141,7 @@ public class HTMLTemplateContent extends TemplateContent implements ResourceLoad
         }
     }
 
-    /**
-     * 渲染HTML内容。
-     */
+    /** 渲染HTML内容。 */
     private void renderHTMLContent(Part mailPart, String text) throws MessagingException {
         String contentType = getContentType();
         ContentType contentTypeObject = MailUtil.getContentType(contentType, getMailBuilder().getCharacterEncoding());
@@ -197,9 +179,7 @@ public class HTMLTemplateContent extends TemplateContent implements ResourceLoad
         multipart.addBodyPart(bodyPart);
     }
 
-    /**
-     * 组装templateContext中的内容。
-     */
+    /** 组装templateContext中的内容。 */
     @Override
     protected void populateTemplateContext(TemplateContext templateContext) {
         for (Map.Entry<String, String> entry : inlineResourceMap.entrySet()) {
@@ -210,9 +190,7 @@ public class HTMLTemplateContent extends TemplateContent implements ResourceLoad
         }
     }
 
-    /**
-     * 深度复制一个content。
-     */
+    /** 深度复制一个content。 */
     @Override
     protected void copyTo(AbstractContent copy) {
         super.copyTo(copy);
@@ -241,13 +219,11 @@ public class HTMLTemplateContent extends TemplateContent implements ResourceLoad
         mb.append("inlineResources", inlineResourceMap);
     }
 
-    /**
-     * 记录在模板中使用到的所有内联资源的信息。
-     */
+    /** 记录在模板中使用到的所有内联资源的信息。 */
     private static class InlineResource {
         private static MessageFormat formatter = new MessageFormat("{0,time,yyyyMMdd.HHmmss}.{1}@{2}");
-        private static int count = 0;
-        private static String hostname = SystemUtil.getHostInfo().getName();
+        private static int           count     = 0;
+        private static String        hostname  = SystemUtil.getHostInfo().getName();
         private String resourceName;
         private String contentId;
         private String filename;
@@ -279,9 +255,7 @@ public class HTMLTemplateContent extends TemplateContent implements ResourceLoad
             return contentId;
         }
 
-        /**
-         * 取得唯一的文件名。
-         */
+        /** 取得唯一的文件名。 */
         public String getUniqueFilename(Set<String> fileNames) {
             String name = filename;
             int dotIndex = filename.lastIndexOf(".");
@@ -300,9 +274,7 @@ public class HTMLTemplateContent extends TemplateContent implements ResourceLoad
         }
     }
 
-    /**
-     * 在模板中嵌入内置的资源的辅助类。
-     */
+    /** 在模板中嵌入内置的资源的辅助类。 */
     public class InlineResourceHelper {
         private String prefix;
 

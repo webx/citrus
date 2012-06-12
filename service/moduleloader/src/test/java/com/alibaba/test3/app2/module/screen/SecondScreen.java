@@ -19,9 +19,8 @@ package com.alibaba.test3.app2.module.screen;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.test3.app2.Reloadable;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class SecondScreen implements Reloadable {
     @Autowired

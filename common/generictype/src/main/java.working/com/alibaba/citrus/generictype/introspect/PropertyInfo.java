@@ -25,7 +25,7 @@ import com.alibaba.citrus.generictype.TypeInfo;
  * <p>
  * Property不是一个Java语言的元素，而是一种规范和约定。常见的形式是：
  * </p>
- *
+ * <p/>
  * <pre>
  * public String getName();
  *
@@ -44,33 +44,21 @@ public interface PropertyInfo {
      */
     String getName();
 
-    /**
-     * 取得当前property所在的类型。
-     */
+    /** 取得当前property所在的类型。 */
     TypeInfo getDeclaringType();
 
-    /**
-     * 取得property的类型。
-     */
+    /** 取得property的类型。 */
     TypeInfo getType();
 
-    /**
-     * 判断property是否可读。
-     */
+    /** 判断property是否可读。 */
     boolean isReadable();
 
-    /**
-     * 判断property是否可写。
-     */
+    /** 判断property是否可写。 */
     boolean isWritable();
 
-    /**
-     * 取得用来读取property的方法。
-     */
+    /** 取得用来读取property的方法。 */
     MethodInfo getReadMethod();
 
-    /**
-     * 取得用来修改property的方法。
-     */
+    /** 取得用来修改property的方法。 */
     MethodInfo getWriteMethod();
 }

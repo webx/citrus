@@ -27,11 +27,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import com.alibaba.citrus.util.i18n.LocaleUtil.Notifier;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.alibaba.citrus.util.i18n.LocaleUtil.Notifier;
 
 /**
  * 测试<code>LocaleUtil</code>。
@@ -116,37 +115,37 @@ public class LocaleUtilTests {
         assertBundleNames("", "zh", null, null, LocaleUtil.calculateBundleNames("", new Locale("zh")));
         assertBundleNames("", "zh", "zh_CN", null, LocaleUtil.calculateBundleNames("", new Locale("zh", "CN")));
         assertBundleNames("", "zh", "zh_CN", "zh_CN_variant",
-                LocaleUtil.calculateBundleNames("", new Locale("zh", "CN", "variant")));
+                          LocaleUtil.calculateBundleNames("", new Locale("zh", "CN", "variant")));
 
         // hello.jsp
         assertBundleNames("hello.jsp", null, null, null, LocaleUtil.calculateBundleNames("hello.jsp", null));
         assertBundleNames("hello.jsp", null, null, null, LocaleUtil.calculateBundleNames("hello.jsp", new Locale("")));
         assertBundleNames("hello.jsp", "hello_zh.jsp", null, null,
-                LocaleUtil.calculateBundleNames("hello.jsp", new Locale("zh")));
+                          LocaleUtil.calculateBundleNames("hello.jsp", new Locale("zh")));
         assertBundleNames("hello.jsp", "hello_zh.jsp", "hello_zh_CN.jsp", null,
-                LocaleUtil.calculateBundleNames("hello.jsp", new Locale("zh", "CN")));
+                          LocaleUtil.calculateBundleNames("hello.jsp", new Locale("zh", "CN")));
         assertBundleNames("hello.jsp", "hello_zh.jsp", "hello_zh_CN.jsp", "hello_zh_CN_variant.jsp",
-                LocaleUtil.calculateBundleNames("hello.jsp", new Locale("zh", "CN", "variant")));
+                          LocaleUtil.calculateBundleNames("hello.jsp", new Locale("zh", "CN", "variant")));
 
         // hello.
         assertBundleNames("hello", null, null, null, LocaleUtil.calculateBundleNames("hello.", null));
         assertBundleNames("hello", null, null, null, LocaleUtil.calculateBundleNames("hello.", new Locale("")));
         assertBundleNames("hello", "hello_zh", null, null, LocaleUtil.calculateBundleNames("hello.", new Locale("zh")));
         assertBundleNames("hello", "hello_zh", "hello_zh_CN", null,
-                LocaleUtil.calculateBundleNames("hello.", new Locale("zh", "CN")));
+                          LocaleUtil.calculateBundleNames("hello.", new Locale("zh", "CN")));
         assertBundleNames("hello", "hello_zh", "hello_zh_CN", "hello_zh_CN_variant",
-                LocaleUtil.calculateBundleNames("hello.", new Locale("zh", "CN", "variant")));
+                          LocaleUtil.calculateBundleNames("hello.", new Locale("zh", "CN", "variant")));
 
         // hello.world
         assertBundleNames("hello.world", null, null, null, LocaleUtil.calculateBundleNames("hello.world", null));
         assertBundleNames("hello.world", null, null, null,
-                LocaleUtil.calculateBundleNames("hello.world", new Locale(""), true));
+                          LocaleUtil.calculateBundleNames("hello.world", new Locale(""), true));
         assertBundleNames("hello.world", "hello.world_zh", null, null,
-                LocaleUtil.calculateBundleNames("hello.world", new Locale("zh"), true));
+                          LocaleUtil.calculateBundleNames("hello.world", new Locale("zh"), true));
         assertBundleNames("hello.world", "hello.world_zh", "hello.world_zh_CN", null,
-                LocaleUtil.calculateBundleNames("hello.world", new Locale("zh", "CN"), true));
+                          LocaleUtil.calculateBundleNames("hello.world", new Locale("zh", "CN"), true));
         assertBundleNames("hello.world", "hello.world_zh", "hello.world_zh_CN", "hello.world_zh_CN_variant",
-                LocaleUtil.calculateBundleNames("hello.world", new Locale("zh", "CN", "variant"), true));
+                          LocaleUtil.calculateBundleNames("hello.world", new Locale("zh", "CN", "variant"), true));
     }
 
     private void assertBundleNames(String name1, String name2, String name3, String name4, List<String> names) {

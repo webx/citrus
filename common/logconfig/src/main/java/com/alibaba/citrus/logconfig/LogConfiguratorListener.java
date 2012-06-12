@@ -24,7 +24,6 @@ import java.net.URL;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -36,8 +35,8 @@ import javax.servlet.ServletContextListener;
  */
 public class LogConfiguratorListener implements ServletContextListener {
     private static final String LOG_CONFIGURATION = "logConfiguration";
-    private static final String LOG_SYSTEM = "logSystem";
-    private static final String LOG_PREFIX = "log";
+    private static final String LOG_SYSTEM        = "logSystem";
+    private static final String LOG_PREFIX        = "log";
 
     private LogConfigurator[] logConfigurators;
 
@@ -74,8 +73,8 @@ public class LogConfiguratorListener implements ServletContextListener {
             if (logConfigurationResource == null) {
                 servletContext
                         .log(String
-                                .format("Could not find %s configuration file \"%s\" in webapp context.  Using default configurations.",
-                                        logSystem, logConfiguration));
+                                     .format("Could not find %s configuration file \"%s\" in webapp context.  Using default configurations.",
+                                             logSystem, logConfiguration));
 
                 logConfigurator.configureDefault();
             } else {
@@ -88,9 +87,7 @@ public class LogConfiguratorListener implements ServletContextListener {
         }
     }
 
-    /**
-     * 子类可覆盖，并创建自己的placeholders。
-     */
+    /** 子类可覆盖，并创建自己的placeholders。 */
     protected void initProperties(Map<String, String> props) {
     }
 
@@ -125,13 +122,11 @@ public class LogConfiguratorListener implements ServletContextListener {
         }
     }
 
-    /**
-     * 取得所有以log开头的init params。
-     */
+    /** 取得所有以log开头的init params。 */
     private Map<String, String> getLogInitParams(ServletContext servletContext) {
         Map<String, String> params = new HashMap<String, String>();
 
-        for (Enumeration<?> i = servletContext.getInitParameterNames(); i.hasMoreElements();) {
+        for (Enumeration<?> i = servletContext.getInitParameterNames(); i.hasMoreElements(); ) {
             String name = (String) i.nextElement();
 
             if (name != null && name.startsWith(LOG_PREFIX)) {

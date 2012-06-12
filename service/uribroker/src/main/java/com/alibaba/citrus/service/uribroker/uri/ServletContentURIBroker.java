@@ -22,7 +22,7 @@ package com.alibaba.citrus.service.uribroker.uri;
  * <p>
  * 一个Servlet风格的Content URI包括如下几个部分：
  * </p>
- *
+ * <p/>
  * <pre>
  * URI         = SERVER_INFO + PATH + "?" + QUERY_DATA + "#" + REFERENCE
  * SERVER_INFO = scheme://loginUser:loginPassword@serverName:serverPort
@@ -33,7 +33,7 @@ package com.alibaba.citrus.service.uribroker.uri;
  * <p>
  * 例如：
  * </p>
- *
+ * <p/>
  * <pre>
  * http://user:pass@myserver.com:8080/mycontext/view.html?id=1#top
  * </pre>
@@ -42,14 +42,12 @@ package com.alibaba.citrus.service.uribroker.uri;
  * @author dux.fangl
  */
 public class ServletContentURIBroker extends WebAppURIBroker {
-    protected static final int PREFIX_PATH_INDEX = CONTEXT_PATH_INDEX + 1;
+    protected static final int PREFIX_PATH_INDEX  = CONTEXT_PATH_INDEX + 1;
     protected static final int CONTENT_PATH_INDEX = PREFIX_PATH_INDEX + 1;
     private boolean hasPrefixPath;
     private boolean hasContentPath;
 
-    /**
-     * 取得prefix path。
-     */
+    /** 取得prefix path。 */
     public String getPrefixPath() {
         if (hasPrefixPath) {
             return getPathSegmentAsString(PREFIX_PATH_INDEX);
@@ -58,18 +56,14 @@ public class ServletContentURIBroker extends WebAppURIBroker {
         }
     }
 
-    /**
-     * 设置prefix path。
-     */
+    /** 设置prefix path。 */
     public ServletContentURIBroker setPrefixPath(String prefixPath) {
         setPathSegment(PREFIX_PATH_INDEX, prefixPath);
         hasPrefixPath = true;
         return this;
     }
 
-    /**
-     * 取得content path。
-     */
+    /** 取得content path。 */
     public String getContentPath() {
         if (hasContentPath) {
             return getPathSegmentAsString(CONTENT_PATH_INDEX);
@@ -78,18 +72,14 @@ public class ServletContentURIBroker extends WebAppURIBroker {
         }
     }
 
-    /**
-     * 设置content path。
-     */
+    /** 设置content path。 */
     public ServletContentURIBroker setContentPath(String contentPath) {
         setPathSegment(CONTENT_PATH_INDEX, contentPath);
         hasContentPath = true;
         return this;
     }
 
-    /**
-     * 设置content path。
-     */
+    /** 设置content path。 */
     public ServletContentURIBroker getURI(String uri) {
         return setContentPath(setUriAndGetPath(uri));
     }

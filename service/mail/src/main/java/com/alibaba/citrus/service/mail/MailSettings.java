@@ -23,8 +23,6 @@ package com.alibaba.citrus.service.mail;
  * @author Michael Zhou
  */
 public interface MailSettings {
-    /**
-     * 取得指定类型的服务。 如果未指定该类服务，则使用默认ID从容器中取得服务。
-     */
+    /** 取得指定类型的服务。 如果未指定该类服务，则使用默认ID从容器中取得服务。 */
     <T> T getService(Class<T> serviceType, String defaultServiceId);
 }

@@ -21,7 +21,6 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
 import java.util.Queue;
-
 import javax.crypto.Cipher;
 
 import org.junit.Test;
@@ -79,6 +78,6 @@ public abstract class AbstractEncrypterTests<T extends AbstractJceEncrypter> {
         long duration = System.currentTimeMillis() - start;
 
         System.out
-                .printf("%s: Encrypt-decrypt text %d times take %,d ms%n", getClass().getSimpleName(), loop, duration);
+              .printf("%s: Encrypt-decrypt text %d times take %,d ms%n", getClass().getSimpleName(), loop, duration);
     }
 }

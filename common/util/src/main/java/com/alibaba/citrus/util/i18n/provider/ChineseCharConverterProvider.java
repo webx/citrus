@@ -46,9 +46,7 @@ public abstract class ChineseCharConverterProvider implements CharConverterProvi
         };
     }
 
-    /**
-     * 装载编码表。
-     */
+    /** 装载编码表。 */
     protected final char[] loadCodeTable() {
         if (codeTable == null) {
             InputStream istream = getClass().getResourceAsStream(getCodeTableName() + ".ctable");

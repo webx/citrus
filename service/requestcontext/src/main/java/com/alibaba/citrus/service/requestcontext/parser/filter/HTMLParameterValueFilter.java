@@ -23,7 +23,6 @@ import static com.alibaba.citrus.util.ObjectUtil.*;
 
 import java.util.Map;
 import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.citrus.service.requestcontext.parser.ParameterValueFilter;
@@ -35,15 +34,15 @@ import com.alibaba.citrus.springext.support.BeanSupport;
  * @author Michael Zhou
  */
 public class HTMLParameterValueFilter extends BeanSupport implements ParameterValueFilter {
-    private HTMLInputFilter filter;
+    private HTMLInputFilter          filter;
     private Map<String, Set<String>> allowed;
-    private String[] deniedTags;
-    private String[] selfClosingTags;
-    private String[] needClosingTags;
-    private String[] allowedProtocols;
-    private String[] protocolAtts;
-    private String[] removeBlanks;
-    private String[] allowedEntities;
+    private String[]                 deniedTags;
+    private String[]                 selfClosingTags;
+    private String[]                 needClosingTags;
+    private String[]                 allowedProtocols;
+    private String[]                 protocolAtts;
+    private String[]                 removeBlanks;
+    private String[]                 allowedEntities;
 
     @Override
     protected void init() {
@@ -57,7 +56,7 @@ public class HTMLParameterValueFilter extends BeanSupport implements ParameterVa
         allowedEntities = defaultIfNull(allowedEntities, EMPTY_STRING_ARRAY);
 
         filter = new HTMLInputFilter(allowed, deniedTags, selfClosingTags, needClosingTags, allowedProtocols,
-                protocolAtts, removeBlanks, allowedEntities);
+                                     protocolAtts, removeBlanks, allowedEntities);
     }
 
     public boolean isFiltering(HttpServletRequest request) {

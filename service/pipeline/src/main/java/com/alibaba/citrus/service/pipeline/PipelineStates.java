@@ -24,29 +24,19 @@ package com.alibaba.citrus.service.pipeline;
  * @author Michael Zhou
  */
 public interface PipelineStates {
-    /**
-     * 取得当前正在执行的pipeline的嵌套层次。注意，该号码从<code>1</code>开始计数。
-     */
+    /** 取得当前正在执行的pipeline的嵌套层次。注意，该号码从<code>1</code>开始计数。 */
     int level();
 
-    /**
-     * 取得当前正在执行的valve的索引号。注意，该号码从<code>1</code>开始计数。
-     */
+    /** 取得当前正在执行的valve的索引号。注意，该号码从<code>1</code>开始计数。 */
     int index();
 
-    /**
-     * 查找label，并返回与当前pipeline相隔的层数。
-     */
+    /** 查找label，并返回与当前pipeline相隔的层数。 */
     int findLabel(String label);
 
-    /**
-     * 检查pipeline将是否被中断。
-     */
+    /** 检查pipeline将是否被中断。 */
     boolean isBroken();
 
-    /**
-     * 检查pipeline将是否已执行完成。
-     */
+    /** 检查pipeline将是否已执行完成。 */
     boolean isFinished();
 
     /**

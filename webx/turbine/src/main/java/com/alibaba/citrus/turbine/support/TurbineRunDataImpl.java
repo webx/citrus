@@ -20,8 +20,8 @@ package com.alibaba.citrus.turbine.support;
 import static com.alibaba.citrus.service.requestcontext.util.RequestContextUtil.*;
 import static com.alibaba.citrus.service.uribroker.uri.URIBroker.URIType.*;
 import static com.alibaba.citrus.util.ArrayUtil.*;
-import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.Assert.ExceptionType.*;
+import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
@@ -30,12 +30,8 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.NoSuchBeanDefinitionException;
-import org.springframework.context.ApplicationContext;
 
 import com.alibaba.citrus.service.pull.PullService;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
@@ -52,37 +48,35 @@ import com.alibaba.citrus.turbine.uribroker.uri.TurbineURIBroker;
 import com.alibaba.citrus.webx.WebxComponent;
 import com.alibaba.citrus.webx.WebxException;
 import com.alibaba.citrus.webx.util.WebxUtil;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.context.ApplicationContext;
 
-/**
- * 实现<code>TurbineRunData</code>接口。
- */
+/** 实现<code>TurbineRunData</code>接口。 */
 public class TurbineRunDataImpl implements TurbineRunDataInternal {
-    private final RequestContext topRequestContext;
+    private final RequestContext           topRequestContext;
     private final LazyCommitRequestContext lazyCommitRequestContext;
-    private final ParserRequestContext parserRequestContext;
-    private WebxComponent currentComponent;
-    private String target;
-    private String redirectTarget;
-    private String action;
-    private String actionEvent;
-    private URIBroker redirectURI;
+    private final ParserRequestContext     parserRequestContext;
+    private       WebxComponent            currentComponent;
+    private       String                   target;
+    private       String                   redirectTarget;
+    private       String                   action;
+    private       String                   actionEvent;
+    private       URIBroker                redirectURI;
     private final Map<String, PullService> pullServices;
-    private final Map<String, Context> contexts;
-    private boolean layoutEnabled;
-    private String layoutTemplateOverride;
-    private final Parameters forwardParameters = new ForwardParametersImpl();
-    private final ModuleTraces moduleTraces = new ModuleTraces();
+    private final Map<String, Context>     contexts;
+    private       boolean                  layoutEnabled;
+    private       String                   layoutTemplateOverride;
+    private final Parameters   forwardParameters = new ForwardParametersImpl();
+    private final ModuleTraces moduleTraces      = new ModuleTraces();
 
     public TurbineRunDataImpl(HttpServletRequest request) {
         this(request, null);
     }
 
-    /**
-     * 创建一个turbine rundata，使用指定的context。 这种形式用于创建error pipeline的rundata对象。
-     */
+    /** 创建一个turbine rundata，使用指定的context。 这种形式用于创建error pipeline的rundata对象。 */
     public TurbineRunDataImpl(HttpServletRequest request, Context context) {
         this.topRequestContext = assertNotNull(RequestContextUtil.getRequestContext(request),
-                "no request context defined in request attributes");
+                                               "no request context defined in request attributes");
         this.lazyCommitRequestContext = findRequestContext(topRequestContext, LazyCommitRequestContext.class);
         this.parserRequestContext = findRequestContext(topRequestContext, ParserRequestContext.class);
         this.pullServices = createHashMap();
@@ -145,7 +139,7 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
                 component = getCurrentComponent();
             } else {
                 component = assertNotNull(getCurrentComponent().getWebxComponents().getComponent(componentName),
-                        "could not find webx component: %s", componentName);
+                                          "could not find webx component: %s", componentName);
             }
 
             ApplicationContext context = component.getApplicationContext();
@@ -234,9 +228,7 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
         }
     }
 
-    /**
-     * 设置用于重定向的uri broker。该uri会在下一次检查isRedirected()时被设置到response中。
-     */
+    /** 设置用于重定向的uri broker。该uri会在下一次检查isRedirected()时被设置到response中。 */
     private void setRedirectLocation(URIBroker uri) {
         this.redirectURI = uri;
     }
@@ -332,9 +324,7 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
         }
     }
 
-    /**
-     * 取得明确指定的layout模板。
-     */
+    /** 取得明确指定的layout模板。 */
     public String getLayoutTemplateOverride() {
         return layoutTemplateOverride;
     }
@@ -357,9 +347,7 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
         return new RedirectParametersImpl(uriName, uri);
     }
 
-    /**
-     * 进行外部重定向，指定一个完整的URL location。
-     */
+    /** 进行外部重定向，指定一个完整的URL location。 */
     public void redirectToLocation(String location) {
         setRedirectLocation(location);
     }
@@ -383,7 +371,7 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
     }
 
     private class RedirectParametersImpl implements RedirectParameters {
-        private final String uriName;
+        private final String    uriName;
         private final URIBroker uri;
 
         public RedirectParametersImpl(String uriName, URIBroker uri) {
@@ -416,19 +404,15 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
         }
     }
 
-    /**
-     * 代表module的调用栈。
-     */
+    /** 代表module的调用栈。 */
     private class ModuleTraces extends LinkedList<ModuleTrace> {
         private static final long serialVersionUID = 8167955929944105578L;
     }
 
-    /**
-     * 代表一个module调用的信息。
-     */
+    /** 代表一个module调用的信息。 */
     private class ModuleTrace {
         private final Context context;
-        private String template;
+        private       String  template;
 
         public ModuleTrace(Context context, String template) {
             this.context = assertNotNull(context, "context");

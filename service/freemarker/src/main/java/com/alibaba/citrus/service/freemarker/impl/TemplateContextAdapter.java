@@ -18,7 +18,6 @@
 package com.alibaba.citrus.service.freemarker.impl;
 
 import com.alibaba.citrus.service.template.TemplateContext;
-
 import freemarker.template.ObjectWrapper;
 import freemarker.template.SimpleHash;
 

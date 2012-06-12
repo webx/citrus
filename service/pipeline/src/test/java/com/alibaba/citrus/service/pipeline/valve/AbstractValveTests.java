@@ -21,16 +21,15 @@ import static com.alibaba.citrus.generictype.TypeInfoUtil.*;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-
 import com.alibaba.citrus.service.pipeline.AbstractPipelineTests;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.Valve;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 public abstract class AbstractValveTests<V extends Valve> extends AbstractPipelineTests {
-    protected Class<V> valveClass;
-    protected V valve;
+    protected Class<V>        valveClass;
+    protected V               valve;
     protected PipelineContext pipelineContext;
 
     @BeforeClass

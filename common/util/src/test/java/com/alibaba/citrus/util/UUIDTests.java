@@ -27,9 +27,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class UUIDTests {
-    private final int loop = 10000;
+    private final int loop        = 10000;
     private final int concurrency = 20;
-    private UUID uuid;
+    private UUID   uuid;
     private String instanceId;
 
     @Before
@@ -102,7 +102,7 @@ public class UUIDTests {
         long duration = System.currentTimeMillis() - start;
 
         System.out.printf("%s: requests=%d, concurrency=%d%n", uuid.getClass().getSimpleName(), concurrency * loop,
-                concurrency);
+                          concurrency);
 
         System.out.printf("  Total time: %,d ms.%n", duration);
         System.out.printf("Average time: %,2.2f \u03BCs.%n", (double) duration / concurrency / loop * 1000);

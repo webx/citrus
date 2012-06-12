@@ -29,11 +29,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
-
 import com.alibaba.citrus.service.AbstractService;
 import com.alibaba.citrus.service.pull.PullContext;
 import com.alibaba.citrus.service.pull.PullException;
@@ -45,19 +40,23 @@ import com.alibaba.citrus.service.pull.ToolSetFactory;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.CollectionBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 public class PullServiceImpl extends AbstractService<PullService> implements PullService, ApplicationContextAware {
     private final static String DEFAULT_BEAN_NAME = "pullService";
 
-    private final static int SINGLETON = 0x1;
-    private final static int TOOL_FACTORY = 0x2;
-    private final static int TOOL_SET_FACTORY = 0x4;
+    private final static int SINGLETON                = 0x1;
+    private final static int TOOL_FACTORY             = 0x2;
+    private final static int TOOL_SET_FACTORY         = 0x4;
     private final static int RUNTIME_TOOL_SET_FACTORY = 0x8;
 
     private final static AtomicInteger contextKeyCounter = new AtomicInteger();
     private ApplicationContext beanFactory;
-    private PullService parent;
-    private String contextKey;
+    private PullService        parent;
+    private String             contextKey;
 
     // toolName -> factory，包含所有类型的factories，初始化后即清除。
     // 可能包含：
@@ -105,13 +104,11 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
 
         getLogger().info(
                 "Initialized pull service [key={}] "
-                        + "with {} pre-pulled tools, {} pre-queued tools and {} runtime tools", new Object[] { //
-                contextKey, prePulledTools.size(), tools.size() + toolsInSet.size(), toolsRuntime.size() });
+                + "with {} pre-pulled tools, {} pre-queued tools and {} runtime tools", new Object[] { //
+                                                                                                       contextKey, prePulledTools.size(), tools.size() + toolsInSet.size(), toolsRuntime.size() });
     }
 
-    /**
-     * 初始化parent pull service。
-     */
+    /** 初始化parent pull service。 */
     private void initParent() {
         if (parent != null || beanFactory == null || beanFactory.getParent() == null) {
             return;
@@ -134,17 +131,13 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
         }
     }
 
-    /**
-     * 创建一个在整个JVM中不重复的contextKey。
-     */
+    /** 创建一个在整个JVM中不重复的contextKey。 */
     private void initContextKey() {
         int i = contextKeyCounter.getAndIncrement();
         contextKey = "PullService." + getBeanName() + (i > 0 ? "." + i : EMPTY_STRING);
     }
 
-    /**
-     * 初始化所有tool factories。
-     */
+    /** 初始化所有tool factories。 */
     private void initToolFactories() {
         tools = createHashMap();
         toolsInSet = createHashMap();
@@ -199,7 +192,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
                                         tool = encode(((ToolSetFactory) factory).createTool(nameInSet));
                                     } catch (Exception ex) {
                                         throw new PullException("Could not create tool: \"" + name + "." + nameInSet
-                                                + "\"", ex);
+                                                                + "\"", ex);
                                     }
 
                                     ToolName toolName = new ToolName(name, nameInSet, false);
@@ -238,7 +231,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
 
                                     toolNames.add(toolName);
                                     toolsInSet.put(nameInSet, new ToolSetInfo<ToolSetFactory>(name,
-                                            (ToolSetFactory) factory, null));
+                                                                                              (ToolSetFactory) factory, null));
 
                                     getLogger().debug("Pre-queued tool: {}", toolName);
                                 }
@@ -318,7 +311,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
         }
 
         assertTrue(type != 0, "unknown pull tool factory type: %s", factory == null ? null : factory.getClass()
-                .getName());
+                                                                                                    .getName());
 
         return type;
     }
@@ -353,7 +346,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
 
     static class ToolSetInfo<F> {
         private final String toolSetName;
-        private final F factory;
+        private final F      factory;
         private final Object tool;
 
         public ToolSetInfo(String toolSetName, F factory, Object tool) {
@@ -376,13 +369,13 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
     }
 
     private class PullContextImpl implements PullContext {
-        private final PullContext parentContext;
-        private final Map<String, Object> pulledTools;
-        private final Map<String, RuntimeToolSetFactory> toolsRuntime;
+        private final PullContext                                     parentContext;
+        private final Map<String, Object>                             pulledTools;
+        private final Map<String, RuntimeToolSetFactory>              toolsRuntime;
         private final Map<String, ToolSetInfo<RuntimeToolSetFactory>> toolsInRuntimeSet;
-        private final Set<ToolName> toolNames;
-        private Set<String> toolNamesIncludingParent;
-        private Map<String, Object> toolsIncludingParent;
+        private final Set<ToolName>                                   toolNames;
+        private       Set<String>                                     toolNamesIncludingParent;
+        private       Map<String, Object>                             toolsIncludingParent;
 
         private PullContextImpl() {
             if (parent == null) {
@@ -466,12 +459,12 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
                     tool = toolSetInfo.getFactory().createTool(name);
                 } catch (Exception ex) {
                     throw new PullException("Could not create tool: \"" + toolSetInfo.getToolSetName() + "." + name
-                            + "\"", ex);
+                                            + "\"", ex);
                 }
 
                 if (getLogger().isDebugEnabled()) {
                     getLogger().debug("Pulled tool: {}.{} = {}",
-                            new Object[] { toolSetInfo.getToolSetName(), name, tool });
+                                      new Object[] { toolSetInfo.getToolSetName(), name, tool });
                 }
 
                 return encode(tool);
@@ -489,12 +482,12 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
                     tool = runtimeToolSetInfo.getFactory().createTool(runtimeToolSetInfo.getTool(), name);
                 } catch (Exception ex) {
                     throw new PullException("Could not create tool: \"" + runtimeToolSetInfo.getToolSetName() + "."
-                            + name + "\"", ex);
+                                            + name + "\"", ex);
                 }
 
                 if (getLogger().isDebugEnabled()) {
                     getLogger().debug("Pulled tool: {}.{} = {}",
-                            new Object[] { runtimeToolSetInfo.getToolSetName(), name, tool });
+                                      new Object[] { runtimeToolSetInfo.getToolSetName(), name, tool });
                 }
 
                 return encode(tool);
@@ -508,7 +501,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
                 return;
             }
 
-            for (Iterator<Map.Entry<String, RuntimeToolSetFactory>> i = toolsRuntime.entrySet().iterator(); i.hasNext();) {
+            for (Iterator<Map.Entry<String, RuntimeToolSetFactory>> i = toolsRuntime.entrySet().iterator(); i.hasNext(); ) {
                 Map.Entry<String, RuntimeToolSetFactory> entry = i.next();
 
                 i.remove();
@@ -530,7 +523,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
                     for (String nameInSet : names) {
                         if (nameInSet != null) {
                             toolsInRuntimeSet.put(nameInSet, new ToolSetInfo<RuntimeToolSetFactory>(toolSetName,
-                                    factory, tool));
+                                                                                                    factory, tool));
                             toolNames.add(new ToolName(toolSetName, nameInSet, false));
                             count++;
                         }
@@ -632,7 +625,7 @@ public class PullServiceImpl extends AbstractService<PullService> implements Pul
             MapBuilder mb = new MapBuilder();
 
             mb.append("prePulledTools", new MapBuilder().appendAll(prePulledTools).setSortKeys(true)
-                    .setPrintCount(true));
+                                                        .setPrintCount(true));
             mb.append("pulledTools", new MapBuilder().appendAll(pulledTools).setSortKeys(true).setPrintCount(true));
 
             ToStringBuilder sb = new ToStringBuilder().append("PullContext").append(mb);

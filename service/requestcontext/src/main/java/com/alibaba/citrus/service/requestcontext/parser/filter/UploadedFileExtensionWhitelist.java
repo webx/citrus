@@ -24,16 +24,15 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.fileupload.FileItem;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.logconfig.support.SecurityLogger;
 import com.alibaba.citrus.service.requestcontext.parser.UploadedFileFilter;
 import com.alibaba.citrus.springext.support.BeanSupport;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import com.alibaba.citrus.util.FileUtil;
+import org.apache.commons.fileupload.FileItem;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 根据文件名后缀过滤上传文件。

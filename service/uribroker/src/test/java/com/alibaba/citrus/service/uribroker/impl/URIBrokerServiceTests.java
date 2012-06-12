@@ -23,10 +23,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.junit.Test;
 
 import com.alibaba.citrus.service.uribroker.AbstractURIBrokerServiceTests;
 import com.alibaba.citrus.service.uribroker.impl.URIBrokerServiceImpl.URIBrokerInfo;
@@ -34,6 +31,7 @@ import com.alibaba.citrus.service.uribroker.uri.ContentURIBroker;
 import com.alibaba.citrus.service.uribroker.uri.GenericURIBroker;
 import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 import com.alibaba.citrus.springext.util.ProxyTargetFactory;
+import org.junit.Test;
 
 public class URIBrokerServiceTests extends AbstractURIBrokerServiceTests {
     @Test
@@ -49,7 +47,7 @@ public class URIBrokerServiceTests extends AbstractURIBrokerServiceTests {
             fail();
         } catch (IllegalArgumentException e) {
             assertThat(e, exception("expects a proxy delegating to a real object, but got an object of type "
-                    + mockRequest.getClass().getName()));
+                                    + mockRequest.getClass().getName()));
         }
 
         // 正常request proxy
@@ -90,9 +88,9 @@ public class URIBrokerServiceTests extends AbstractURIBrokerServiceTests {
     public void getNames() {
         List<String> names = service.getNames();
         assertArrayEquals(new String[] { "link", "link2", "link3", "link4", "linkCharset", "linkWithInterceptor",
-                "linkWithPathInterceptor", "clink", "clink2", "clink3", "clink4", "servletLink", "servletLink2",
-                "servletLink3", "scontentLink", "scontentLink2", "scontentLink3", "classicLink", "classicLink2",
-                "classicLink3", "mylink", "randomized" }, names.toArray(new String[0]));
+                                         "linkWithPathInterceptor", "clink", "clink2", "clink3", "clink4", "servletLink", "servletLink2",
+                                         "servletLink3", "scontentLink", "scontentLink2", "scontentLink3", "classicLink", "classicLink2",
+                                         "classicLink3", "mylink", "randomized" }, names.toArray(new String[0]));
 
         try {
             names.add(null); // unmodifiable
@@ -175,7 +173,7 @@ public class URIBrokerServiceTests extends AbstractURIBrokerServiceTests {
     public void init_duplicatedBrokerName() throws Exception {
         service = new URIBrokerServiceImpl(null);
         service.setBrokers(new URIBrokerInfo[] { new URIBrokerInfo("name1", null, true, new GenericURIBroker()),
-                new URIBrokerInfo("name1", null, true, new ContentURIBroker()) });
+                                                 new URIBrokerInfo("name1", null, true, new ContentURIBroker()) });
 
         try {
             service.afterPropertiesSet();
@@ -189,10 +187,10 @@ public class URIBrokerServiceTests extends AbstractURIBrokerServiceTests {
     public void init_cyclicDepends() throws Exception {
         service = new URIBrokerServiceImpl(null);
         service.setBrokers(new URIBrokerInfo[] { //
-        new URIBrokerInfo("b4", "b1", true, new GenericURIBroker()), //
-                new URIBrokerInfo("b1", "b2", true, new GenericURIBroker()), //
-                new URIBrokerInfo("b2", "b3", true, new GenericURIBroker()), //
-                new URIBrokerInfo("b3", "b1", true, new GenericURIBroker()), //
+                                                 new URIBrokerInfo("b4", "b1", true, new GenericURIBroker()), //
+                                                 new URIBrokerInfo("b1", "b2", true, new GenericURIBroker()), //
+                                                 new URIBrokerInfo("b2", "b3", true, new GenericURIBroker()), //
+                                                 new URIBrokerInfo("b3", "b1", true, new GenericURIBroker()), //
         });
 
         try {
@@ -207,7 +205,7 @@ public class URIBrokerServiceTests extends AbstractURIBrokerServiceTests {
     public void init_parentNotExists() throws Exception {
         service = new URIBrokerServiceImpl(null);
         service.setBrokers(new URIBrokerInfo[] { //
-        new URIBrokerInfo("b4", "b1", true, new GenericURIBroker()), //
+                                                 new URIBrokerInfo("b4", "b1", true, new GenericURIBroker()), //
         });
 
         try {
@@ -222,8 +220,8 @@ public class URIBrokerServiceTests extends AbstractURIBrokerServiceTests {
     public void init_parentNotSuperclass() throws Exception {
         service = new URIBrokerServiceImpl(null);
         service.setBrokers(new URIBrokerInfo[] { //
-        new URIBrokerInfo("b4", "b1", true, new GenericURIBroker()), //
-                new URIBrokerInfo("b1", null, true, new ContentURIBroker()), //
+                                                 new URIBrokerInfo("b4", "b1", true, new GenericURIBroker()), //
+                                                 new URIBrokerInfo("b1", null, true, new ContentURIBroker()), //
         });
 
         // 可继承非super class
@@ -258,7 +256,7 @@ public class URIBrokerServiceTests extends AbstractURIBrokerServiceTests {
         String s = service.dump();
         assertThat(s, containsRegex("^  \\(GenericURIBroker\\)\\s+link\\s+= http://localhost/"));
         assertThat(s,
-                containsRegex("\\* \\(GenericURIBroker\\)\\s+link2\\s+= http://myuser2:mypass2@myservername2:1234"
-                        + "/aaa/a1/bbb/ccc/ddd\\?aaa=1111&bbb=2222&ccc=3333#myreference2"));
+                   containsRegex("\\* \\(GenericURIBroker\\)\\s+link2\\s+= http://myuser2:mypass2@myservername2:1234"
+                                 + "/aaa/a1/bbb/ccc/ddd\\?aaa=1111&bbb=2222&ccc=3333#myreference2"));
     }
 }

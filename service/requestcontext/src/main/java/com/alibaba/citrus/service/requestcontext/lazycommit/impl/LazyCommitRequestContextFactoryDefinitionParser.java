@@ -20,5 +20,5 @@ package com.alibaba.citrus.service.requestcontext.lazycommit.impl;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 public class LazyCommitRequestContextFactoryDefinitionParser extends
-        AbstractSingleBeanDefinitionParser<LazyCommitRequestContextFactoryImpl> {
+                                                             AbstractSingleBeanDefinitionParser<LazyCommitRequestContextFactoryImpl> {
 }

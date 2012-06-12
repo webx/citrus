@@ -175,8 +175,8 @@ public class ResourceLoadingServiceTraceTests extends AbstractResourceLoadingTes
     public void getResource_noLoaders() throws Exception {
         // 匹配，但没有loaders
         assertTrace(null,
-                "/my/resource/testres.txt", //
-                "\"/my/resource/testres.txt\" matched resource [pattern=\"/my/resource\"], at \"resources.xml\", beanName=\"resourceLoadingService\"");
+                    "/my/resource/testres.txt", //
+                    "\"/my/resource/testres.txt\" matched resource [pattern=\"/my/resource\"], at \"resources.xml\", beanName=\"resourceLoadingService\"");
     }
 
     private void assertTrace(Boolean result, String resourceName, String... elements) {

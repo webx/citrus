@@ -19,6 +19,7 @@ package com.alibaba.citrus.springext.support.resolver;
 
 import static com.alibaba.citrus.util.Assert.*;
 
+import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,8 +37,6 @@ import org.springframework.core.io.ResourceLoader;
 import org.w3c.dom.Element;
 import org.xml.sax.EntityResolver;
 
-import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
-
 /**
  * 用来处理<code>XmlBeanDefinitionReader</code>，添加configuration point的功能。
  *
@@ -45,9 +44,9 @@ import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
  */
 public class XmlBeanDefinitionReaderProcessor {
     private final static String PROPERTY_SKIP_VALIDATION = "skipValidation";
-    private final static Logger log = LoggerFactory.getLogger(XmlBeanDefinitionReaderProcessor.class);
+    private final static Logger log                      = LoggerFactory.getLogger(XmlBeanDefinitionReaderProcessor.class);
     private final XmlBeanDefinitionReader reader;
-    private final boolean skipValidation;
+    private final boolean                 skipValidation;
 
     public XmlBeanDefinitionReaderProcessor(XmlBeanDefinitionReader reader) {
         this(reader, Boolean.getBoolean(PROPERTY_SKIP_VALIDATION));
@@ -88,7 +87,7 @@ public class XmlBeanDefinitionReaderProcessor {
         // new resolvers
         EntityResolver entityResolver = new SchemaEntityResolver(defaultEntityResolver, cps, sps);
         NamespaceHandlerResolver namespaceHandlerResolver = new ConfigurationPointNamespaceHandlerResolver(cps,
-                defaultNamespaceHanderResolver);
+                                                                                                           defaultNamespaceHanderResolver);
 
         reader.setEntityResolver(entityResolver);
         reader.setNamespaceHandlerResolver(namespaceHandlerResolver);

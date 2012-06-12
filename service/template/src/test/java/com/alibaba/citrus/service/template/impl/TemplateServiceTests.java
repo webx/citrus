@@ -27,6 +27,11 @@ import java.io.StringWriter;
 import java.util.Locale;
 import java.util.Map;
 
+import com.alibaba.citrus.service.template.TemplateEngine;
+import com.alibaba.citrus.service.template.TemplateNotFoundException;
+import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
+import com.alibaba.citrus.util.i18n.LocaleUtil;
+import com.alibaba.citrus.util.io.ByteArrayOutputStream;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -34,15 +39,9 @@ import org.springframework.beans.FatalBeanException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 
-import com.alibaba.citrus.service.template.TemplateEngine;
-import com.alibaba.citrus.service.template.TemplateNotFoundException;
-import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
-import com.alibaba.citrus.util.i18n.LocaleUtil;
-import com.alibaba.citrus.util.io.ByteArrayOutputStream;
-
 public class TemplateServiceTests {
-    private static ApplicationContext factory;
-    private TemplateServiceImpl templateService;
+    private static ApplicationContext  factory;
+    private        TemplateServiceImpl templateService;
 
     @BeforeClass
     public static void initContext() {
@@ -183,7 +182,7 @@ public class TemplateServiceTests {
             assertThat(
                     e,
                     exception(IllegalArgumentException.class,
-                            "TemplateEngine \"notDefinied\" not defined.  Defined names: [myEngine]"));
+                              "TemplateEngine \"notDefinied\" not defined.  Defined names: [myEngine]"));
         }
     }
 

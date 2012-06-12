@@ -33,7 +33,7 @@ public abstract class AbstractModuleMappingRule extends AbstractMappingRule {
     public static final String MODULE_NAME_SEPARATOR = ".";
 
     private ModuleLoaderService moduleLoaderService;
-    private String moduleType;
+    private String              moduleType;
 
     public ModuleLoaderService getModuleLoaderService() {
         return moduleLoaderService;

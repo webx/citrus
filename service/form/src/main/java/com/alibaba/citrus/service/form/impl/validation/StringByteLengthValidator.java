@@ -33,9 +33,7 @@ import com.alibaba.citrus.util.i18n.LocaleUtil;
 public class StringByteLengthValidator extends StringLengthValidator {
     private String charset;
 
-    /**
-     * 计算指定charset的bytes数。
-     */
+    /** 计算指定charset的bytes数。 */
     public String getCharset() {
         if (charset == null) {
             return LocaleUtil.getContext().getCharset().name();
@@ -44,9 +42,7 @@ public class StringByteLengthValidator extends StringLengthValidator {
         }
     }
 
-    /**
-     * 计算指定charset的bytes数。
-     */
+    /** 计算指定charset的bytes数。 */
     public void setCharset(String charset) {
         this.charset = trimToNull(charset);
     }

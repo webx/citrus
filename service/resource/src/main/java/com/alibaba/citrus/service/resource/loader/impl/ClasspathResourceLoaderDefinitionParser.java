@@ -17,12 +17,11 @@
 
 package com.alibaba.citrus.service.resource.loader.impl;
 
+import com.alibaba.citrus.service.resource.loader.ClasspathResourceLoader;
+import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.service.resource.loader.ClasspathResourceLoader;
-import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 /**
  * 用来解析classpath-loader。
@@ -30,7 +29,7 @@ import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionP
  * @author Michael Zhou
  */
 public class ClasspathResourceLoaderDefinitionParser extends
-        AbstractSingleBeanDefinitionParser<ClasspathResourceLoader> {
+                                                     AbstractSingleBeanDefinitionParser<ClasspathResourceLoader> {
     @Override
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
     }

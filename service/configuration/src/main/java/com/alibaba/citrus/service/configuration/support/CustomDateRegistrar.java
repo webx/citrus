@@ -22,15 +22,14 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import com.alibaba.citrus.util.i18n.LocaleUtil;
 import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.beans.PropertyEditorRegistry;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 
-import com.alibaba.citrus.util.i18n.LocaleUtil;
-
 public class CustomDateRegistrar implements PropertyEditorRegistrar {
-    private String format;
-    private Locale locale;
+    private String   format;
+    private Locale   locale;
     private TimeZone timeZone;
 
     public String getFormat() {

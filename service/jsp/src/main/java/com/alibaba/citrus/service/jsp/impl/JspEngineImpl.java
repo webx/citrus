@@ -26,17 +26,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.net.URL;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.context.ResourceLoaderAware;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 
 import com.alibaba.citrus.service.AbstractService;
 import com.alibaba.citrus.service.jsp.JspEngine;
@@ -45,6 +39,10 @@ import com.alibaba.citrus.service.template.TemplateException;
 import com.alibaba.citrus.service.template.TemplateNotFoundException;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.ResourceLoaderAware;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 
 /**
  * Jsp模板引擎的实现。
@@ -52,13 +50,13 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public class JspEngineImpl extends AbstractService<JspEngine> implements JspEngine, ResourceLoaderAware,
-        InitializingBean {
-    private final ServletContext servletContext;
-    private final HttpServletRequest request;
+                                                                         InitializingBean {
+    private final ServletContext      servletContext;
+    private final HttpServletRequest  request;
     private final HttpServletResponse response;
-    private ResourceLoader resourceLoader;
-    private String contextRoot;
-    private String path;
+    private       ResourceLoader      resourceLoader;
+    private       String              contextRoot;
+    private       String              path;
 
     /**
      * 创建jsp引擎。
@@ -139,9 +137,7 @@ public class JspEngineImpl extends AbstractService<JspEngine> implements JspEngi
         return new String[] { "jsp", "jspx" };
     }
 
-    /**
-     * 判定模板是否存在。
-     */
+    /** 判定模板是否存在。 */
     public boolean exists(String templateName) {
         return getPathWithinServletContextInternal(templateName) != null;
     }
@@ -150,7 +146,7 @@ public class JspEngineImpl extends AbstractService<JspEngine> implements JspEngi
      * 渲染模板，并以字符串的形式取得渲染的结果。
      *
      * @param template 模板名
-     * @param context template context
+     * @param context  template context
      * @return 模板渲然的结果字符串
      * @throws TemplateException 渲染失败
      */
@@ -180,19 +176,15 @@ public class JspEngineImpl extends AbstractService<JspEngine> implements JspEngi
         return "";
     }
 
-    /**
-     * 渲染模板，并将渲染的结果送到字节输出流中。
-     */
+    /** 渲染模板，并将渲染的结果送到字节输出流中。 */
     public void writeTo(String templateName, TemplateContext context, OutputStream ostream) throws TemplateException,
-            IOException {
+                                                                                                   IOException {
         getText(templateName, context);
     }
 
-    /**
-     * 渲染模板，并将渲染的结果送到字符输出流中。
-     */
+    /** 渲染模板，并将渲染的结果送到字符输出流中。 */
     public void writeTo(String templateName, TemplateContext context, Writer writer) throws TemplateException,
-            IOException {
+                                                                                            IOException {
         getText(templateName, context);
     }
 

@@ -22,10 +22,6 @@ import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.pipeline.Pipeline;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.PipelineInvocationHandle;
@@ -33,6 +29,9 @@ import com.alibaba.citrus.service.pipeline.TooManyLoopsException;
 import com.alibaba.citrus.service.pipeline.support.AbstractValve;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
 import com.alibaba.citrus.util.ToStringBuilder;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 用来反复执行同一个子pipeline。
@@ -40,11 +39,11 @@ import com.alibaba.citrus.util.ToStringBuilder;
  * @author Michael Zhou
  */
 public class LoopValve extends AbstractValve {
-    private final static int DEFAULT_MAX_LOOP = 10;
+    private final static int    DEFAULT_MAX_LOOP          = 10;
     private final static String DEFAULT_LOOP_COUNTER_NAME = "loopCount";
     private Pipeline loopBody;
-    private Integer maxLoopCount;
-    private String loopCounterName;
+    private Integer  maxLoopCount;
+    private String   loopCounterName;
 
     public Pipeline getLoopBody() {
         return loopBody;

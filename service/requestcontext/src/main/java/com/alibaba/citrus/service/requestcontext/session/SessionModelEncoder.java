@@ -23,9 +23,7 @@ package com.alibaba.citrus.service.requestcontext.session;
  * @author Michael Zhou
  */
 public interface SessionModelEncoder {
-    /**
-     * 将session model转换成store中可存储的对象。
-     */
+    /** 将session model转换成store中可存储的对象。 */
     Object encode(SessionModel model);
 
     /**

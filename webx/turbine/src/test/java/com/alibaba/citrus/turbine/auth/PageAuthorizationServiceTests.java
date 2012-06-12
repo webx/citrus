@@ -21,13 +21,12 @@ import static com.alibaba.citrus.turbine.auth.impl.PageAuthorizationServiceImpl.
 import static com.alibaba.citrus.util.StringUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.turbine.auth.impl.AuthGrant;
 import com.alibaba.citrus.turbine.auth.impl.AuthMatch;
 import com.alibaba.citrus.turbine.auth.impl.PageAuthorizationServiceImpl;
 import com.alibaba.citrus.turbine.auth.impl.PageAuthorizationServiceImpl.PageAuthorizationResult;
+import org.junit.Before;
+import org.junit.Test;
 
 public class PageAuthorizationServiceTests {
     protected static final String[] ADMIN_ROLE = new String[] { "admin" };
@@ -45,11 +44,11 @@ public class PageAuthorizationServiceTests {
                 match("/admin", grant("baobao", null, "read,write", null)), //
                 match("/user/profile", grant(null, "admin", "*", null)), //
                 match("/user/public", //
-                        // grants
-                        grant(null, "*", "action", null), //
-                        grant("*", null, "read", null), //
-                        grant("anonymous", null, null, "write"), // 这句将被下面一行覆盖
-                        grant("anonymous", null, "write", null)), //
+                      // grants
+                      grant(null, "*", "action", null), //
+                      grant("*", null, "read", null), //
+                      grant("anonymous", null, null, "write"), // 这句将被下面一行覆盖
+                      grant("anonymous", null, "write", null)), //
                 match("/**/*.vm", grant(null, "*", "*", null)) //
         });
     }
@@ -92,18 +91,14 @@ public class PageAuthorizationServiceTests {
         assertAuth(GRANT_NOT_MATCH, "/user", "baobao", null, "read", "write", "other");
     }
 
-    /**
-     * target不匹配。
-     */
+    /** target不匹配。 */
     @Test
     public void targetNotMatch() {
         assertAuth(TARGET_NOT_MATCH, "/", "baobao", null, (String[]) null);
         assertAuth(TARGET_NOT_MATCH, "/notMatch", "baobao", null, (String[]) null);
     }
 
-    /**
-     * 最长的匹配优先授权，相同的匹配以后面的为准。
-     */
+    /** 最长的匹配优先授权，相同的匹配以后面的为准。 */
     @Test
     public void priority() {
         // allow=read,write, actions=read
@@ -116,27 +111,21 @@ public class PageAuthorizationServiceTests {
         assertAuth(DENIED, "/user", null, ADMIN_ROLE, "write");
     }
 
-    /**
-     * target匹配，但用户未匹配。
-     */
+    /** target匹配，但用户未匹配。 */
     @Test
     public void userNotMatch() {
         assertAuth(GRANT_NOT_MATCH, "/user", "other", null, "read");
         assertAuth(GRANT_NOT_MATCH, "/user", "other", null, "write");
     }
 
-    /**
-     * target匹配、用户匹配，但action不匹配。
-     */
+    /** target匹配、用户匹配，但action不匹配。 */
     @Test
     public void actionNotMatch() {
         // allow=read,write, action=otherAction
         assertAuth(GRANT_NOT_MATCH, "/user", "baobao", null, "otherAction");
     }
 
-    /**
-     * 匹配role。
-     */
+    /** 匹配role。 */
     @Test
     public void role() {
         // allow=*, action=read
@@ -149,9 +138,7 @@ public class PageAuthorizationServiceTests {
         assertAuth(GRANT_NOT_MATCH, "/user/profile/abc", "other", null, "write");
     }
 
-    /**
-     * 相对路径。
-     */
+    /** 相对路径。 */
     @Test
     public void relativeTarget() {
         // allow=*
@@ -161,9 +148,7 @@ public class PageAuthorizationServiceTests {
         assertAuth(GRANT_NOT_MATCH, "/user/world.vm", "other", null, "write");
     }
 
-    /**
-     * 匿名访问。
-     */
+    /** 匿名访问。 */
     @Test
     public void anonymous() {
         // role=*不包括空role

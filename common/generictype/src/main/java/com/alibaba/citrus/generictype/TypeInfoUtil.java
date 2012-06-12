@@ -29,8 +29,8 @@ import java.util.Map;
  * @author Michael Zhou
  */
 public class TypeInfoUtil {
-    public final static TypeInfo TYPE_VAR_MAP_KEY = factory.getType(Map.class.getTypeParameters()[0]);
-    public final static TypeInfo TYPE_VAR_MAP_VALUE = factory.getType(Map.class.getTypeParameters()[1]);
+    public final static TypeInfo TYPE_VAR_MAP_KEY          = factory.getType(Map.class.getTypeParameters()[0]);
+    public final static TypeInfo TYPE_VAR_MAP_VALUE        = factory.getType(Map.class.getTypeParameters()[1]);
     public final static TypeInfo TYPE_VAR_ITERABLE_ELEMENT = factory.getType(Iterable.class.getTypeParameters()[0]);
     public final static TypeInfo TYPE_VAR_ITERATOR_ELEMENT = factory.getType(Iterator.class.getTypeParameters()[0]);
 
@@ -53,16 +53,12 @@ public class TypeInfoUtil {
         return param.resolve(context);
     }
 
-    /**
-     * 取得{@link Map}的key类型。
-     */
+    /** 取得{@link Map}的key类型。 */
     public static TypeInfo resolveMapKey(Class<?> mapClass) {
         return resolveMapKey(factory.getClassType(mapClass));
     }
 
-    /**
-     * 取得{@link Map}的key类型。
-     */
+    /** 取得{@link Map}的key类型。 */
     public static TypeInfo resolveMapKey(TypeInfo mapType) {
         assertTrue(
                 mapType != null && mapType instanceof ClassTypeInfo && Map.class.isAssignableFrom(mapType.getRawType()),
@@ -71,16 +67,12 @@ public class TypeInfoUtil {
         return TYPE_VAR_MAP_KEY.resolve((ClassTypeInfo) mapType);
     }
 
-    /**
-     * 取得{@link Map}的value类型。
-     */
+    /** 取得{@link Map}的value类型。 */
     public static TypeInfo resolveMapValue(Class<?> mapClass) {
         return resolveMapValue(factory.getClassType(mapClass));
     }
 
-    /**
-     * 取得{@link Map}的value类型。
-     */
+    /** 取得{@link Map}的value类型。 */
     public static TypeInfo resolveMapValue(TypeInfo mapType) {
         assertTrue(
                 mapType != null && mapType instanceof ClassTypeInfo && Map.class.isAssignableFrom(mapType.getRawType()),
@@ -89,38 +81,30 @@ public class TypeInfoUtil {
         return TYPE_VAR_MAP_VALUE.resolve((ClassTypeInfo) mapType);
     }
 
-    /**
-     * 取得{@link Iterable}的element类型。
-     */
+    /** 取得{@link Iterable}的element类型。 */
     public static TypeInfo resolveIterableElement(Class<?> iterableClass) {
         return resolveIterableElement(factory.getClassType(iterableClass));
     }
 
-    /**
-     * 取得{@link Iterable}的element类型。
-     */
+    /** 取得{@link Iterable}的element类型。 */
     public static TypeInfo resolveIterableElement(TypeInfo iterableType) {
         assertTrue(
                 iterableType != null && iterableType instanceof ClassTypeInfo
-                        && Iterable.class.isAssignableFrom(iterableType.getRawType()), "iterableType: %s", iterableType);
+                && Iterable.class.isAssignableFrom(iterableType.getRawType()), "iterableType: %s", iterableType);
 
         return TYPE_VAR_ITERABLE_ELEMENT.resolve((ClassTypeInfo) iterableType);
     }
 
-    /**
-     * 取得{@link Iterator}的element类型。
-     */
+    /** 取得{@link Iterator}的element类型。 */
     public static TypeInfo resolveIteratorElement(Class<?> iteratorClass) {
         return resolveIteratorElement(factory.getClassType(iteratorClass));
     }
 
-    /**
-     * 取得{@link Iterator}的element类型。
-     */
+    /** 取得{@link Iterator}的element类型。 */
     public static TypeInfo resolveIteratorElement(TypeInfo iteratorType) {
         assertTrue(
                 iteratorType != null && iteratorType instanceof ClassTypeInfo
-                        && Iterator.class.isAssignableFrom(iteratorType.getRawType()), "iteratorType: %s", iteratorType);
+                && Iterator.class.isAssignableFrom(iteratorType.getRawType()), "iteratorType: %s", iteratorType);
 
         return TYPE_VAR_ITERATOR_ELEMENT.resolve((ClassTypeInfo) iteratorType);
     }

@@ -25,14 +25,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import com.alibaba.citrus.test.runner.Prototyped;
 import com.alibaba.citrus.test.runner.Prototyped.Prototypes;
 import com.alibaba.citrus.test.runner.Prototyped.TestData;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * 测试{@link TypeVariableInfo}。
@@ -41,23 +40,23 @@ import com.alibaba.citrus.test.runner.Prototyped.TestName;
  */
 @RunWith(Prototyped.class)
 public class TypeVariableTests extends BaseTypeTests implements Cloneable {
-    private transient TypeVariableInfo typeInfo;
+    private transient TypeVariableInfo       typeInfo;
     private transient GenericDeclarationInfo decl; // generic declaration
-    private Class<?> ownerType; // 变量所在的类
-    private String methodName; // 变量的方法名
-    private String baseType; //baseType.toString()
-    private String upperBounds; // upper bounds toString
-    private Class<?> rawType; // rawClass
-    private String name; // 名称
-    private boolean isInterface; // 是否为接口
-    private TypeInfo primitiveWrapper; // 原子包装类
-    private TypeInfo componentType; // 数组成员类型
-    private TypeInfo directComponentType; // 数组直接成员类型
-    private String toString; // toString结果
-    private String[] supertypes; // 父类、接口
-    private GenericDeclarationInfo context; // resolve context
-    private TypeInfo resolvedType; // resolve result;
-    private TypeInfo resolvedTypeDefault; // 当context为null时，resolve result
+    private           Class<?>               ownerType; // 变量所在的类
+    private           String                 methodName; // 变量的方法名
+    private           String                 baseType; //baseType.toString()
+    private           String                 upperBounds; // upper bounds toString
+    private           Class<?>               rawType; // rawClass
+    private           String                 name; // 名称
+    private           boolean                isInterface; // 是否为接口
+    private           TypeInfo               primitiveWrapper; // 原子包装类
+    private           TypeInfo               componentType; // 数组成员类型
+    private           TypeInfo               directComponentType; // 数组直接成员类型
+    private           String                 toString; // toString结果
+    private           String[]               supertypes; // 父类、接口
+    private           GenericDeclarationInfo context; // resolve context
+    private           TypeInfo               resolvedType; // resolve result;
+    private           TypeInfo               resolvedTypeDefault; // 当context为null时，resolve result
 
     @Before
     public void init() {
@@ -245,9 +244,7 @@ public class TypeVariableTests extends BaseTypeTests implements Cloneable {
         return data;
     }
 
-    /**
-     * {@link TypeVariableInfo}功能。
-     */
+    /** {@link TypeVariableInfo}功能。 */
     @Test
     public void bounds() {
         assertEquals(baseType, typeInfo.getBaseType().toString());
@@ -255,9 +252,7 @@ public class TypeVariableTests extends BaseTypeTests implements Cloneable {
         assertEquals("[]", typeInfo.getLowerBounds().toString());
     }
 
-    /**
-     * {@link TypeVariableInfo}功能。
-     */
+    /** {@link TypeVariableInfo}功能。 */
     @Test
     public void getGenericDeclaration() {
         assertEquals(decl, typeInfo.getGenericDeclaration());

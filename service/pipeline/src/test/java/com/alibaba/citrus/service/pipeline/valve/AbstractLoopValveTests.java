@@ -20,8 +20,6 @@ package com.alibaba.citrus.service.pipeline.valve;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pipeline.Pipeline;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.PipelineException;
@@ -29,6 +27,7 @@ import com.alibaba.citrus.service.pipeline.TooManyLoopsException;
 import com.alibaba.citrus.service.pipeline.Valve;
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import com.alibaba.citrus.service.pipeline.impl.valve.LoopValve;
+import org.junit.Test;
 
 public class AbstractLoopValveTests<V extends LoopValve> extends AbstractValveTests<V> {
     @Test
@@ -114,16 +113,16 @@ public class AbstractLoopValveTests<V extends LoopValve> extends AbstractValveTe
         }
 
         assertLog("1-1", //
-                "2-1-loop-0", "2-2-loop-0", "2-3-loop-0", //
-                "2-1-loop-1", "2-2-loop-1", "2-3-loop-1", //
-                "2-1-loop-2", "2-2-loop-2", "2-3-loop-2", //
-                "2-1-loop-3", "2-2-loop-3", "2-3-loop-3", //
-                "2-1-loop-4", "2-2-loop-4", "2-3-loop-4", //
-                "2-1-loop-5", "2-2-loop-5", "2-3-loop-5", //
-                "2-1-loop-6", "2-2-loop-6", "2-3-loop-6", //
-                "2-1-loop-7", "2-2-loop-7", "2-3-loop-7", //
-                "2-1-loop-8", "2-2-loop-8", "2-3-loop-8", //
-                "2-1-loop-9", "2-2-loop-9", "2-3-loop-9" //
+                  "2-1-loop-0", "2-2-loop-0", "2-3-loop-0", //
+                  "2-1-loop-1", "2-2-loop-1", "2-3-loop-1", //
+                  "2-1-loop-2", "2-2-loop-2", "2-3-loop-2", //
+                  "2-1-loop-3", "2-2-loop-3", "2-3-loop-3", //
+                  "2-1-loop-4", "2-2-loop-4", "2-3-loop-4", //
+                  "2-1-loop-5", "2-2-loop-5", "2-3-loop-5", //
+                  "2-1-loop-6", "2-2-loop-6", "2-3-loop-6", //
+                  "2-1-loop-7", "2-2-loop-7", "2-3-loop-7", //
+                  "2-1-loop-8", "2-2-loop-8", "2-3-loop-8", //
+                  "2-1-loop-9", "2-2-loop-9", "2-3-loop-9" //
         );
 
         // set maxLoopCount = 1
@@ -138,7 +137,7 @@ public class AbstractLoopValveTests<V extends LoopValve> extends AbstractValveTe
         }
 
         assertLog("1-1", //
-                "2-1-loop-0", "2-2-loop-0", "2-3-loop-0");
+                  "2-1-loop-0", "2-2-loop-0", "2-3-loop-0");
     }
 
     @Test
@@ -172,9 +171,9 @@ public class AbstractLoopValveTests<V extends LoopValve> extends AbstractValveTe
         counter[0] = 2;
         assertInvoke(pipeline, false);
         assertLog("1-1", //
-                "2-1-loop-0", "2-2-loop-0", "2-3-loop-0", //
-                "2-1-loop-1", "2-2-loop-1", /* broken *///
-                "1-3");
+                  "2-1-loop-0", "2-2-loop-0", "2-3-loop-0", //
+                  "2-1-loop-1", "2-2-loop-1", /* broken *///
+                  "1-3");
 
         // break levels=1, loops=3
         counter[0] = 3;
@@ -182,9 +181,9 @@ public class AbstractLoopValveTests<V extends LoopValve> extends AbstractValveTe
 
         assertInvoke(pipeline, true);
         assertLog("1-1", //
-                "2-1-loop-0", "2-2-loop-0", "2-3-loop-0", //
-                "2-1-loop-1", "2-2-loop-1", "2-3-loop-1", //
-                "2-1-loop-2", "2-2-loop-2" /* broken *///
+                  "2-1-loop-0", "2-2-loop-0", "2-3-loop-0", //
+                  "2-1-loop-1", "2-2-loop-1", "2-3-loop-1", //
+                  "2-1-loop-2", "2-2-loop-2" /* broken *///
         );
 
         // break levels=1, loops=20, maxLoopCount=unlimited
@@ -194,26 +193,26 @@ public class AbstractLoopValveTests<V extends LoopValve> extends AbstractValveTe
 
         assertInvoke(pipeline, true);
         assertLog("1-1", //
-                "2-1-loop-0", "2-2-loop-0", "2-3-loop-0", //
-                "2-1-loop-1", "2-2-loop-1", "2-3-loop-1", //
-                "2-1-loop-2", "2-2-loop-2", "2-3-loop-2", //
-                "2-1-loop-3", "2-2-loop-3", "2-3-loop-3", //
-                "2-1-loop-4", "2-2-loop-4", "2-3-loop-4", //
-                "2-1-loop-5", "2-2-loop-5", "2-3-loop-5", //
-                "2-1-loop-6", "2-2-loop-6", "2-3-loop-6", //
-                "2-1-loop-7", "2-2-loop-7", "2-3-loop-7", //
-                "2-1-loop-8", "2-2-loop-8", "2-3-loop-8", //
-                "2-1-loop-9", "2-2-loop-9", "2-3-loop-9", //
-                "2-1-loop-10", "2-2-loop-10", "2-3-loop-10", //
-                "2-1-loop-11", "2-2-loop-11", "2-3-loop-11", //
-                "2-1-loop-12", "2-2-loop-12", "2-3-loop-12", //
-                "2-1-loop-13", "2-2-loop-13", "2-3-loop-13", //
-                "2-1-loop-14", "2-2-loop-14", "2-3-loop-14", //
-                "2-1-loop-15", "2-2-loop-15", "2-3-loop-15", //
-                "2-1-loop-16", "2-2-loop-16", "2-3-loop-16", //
-                "2-1-loop-17", "2-2-loop-17", "2-3-loop-17", //
-                "2-1-loop-18", "2-2-loop-18", "2-3-loop-18", //
-                "2-1-loop-19", "2-2-loop-19" /* broken *///
+                  "2-1-loop-0", "2-2-loop-0", "2-3-loop-0", //
+                  "2-1-loop-1", "2-2-loop-1", "2-3-loop-1", //
+                  "2-1-loop-2", "2-2-loop-2", "2-3-loop-2", //
+                  "2-1-loop-3", "2-2-loop-3", "2-3-loop-3", //
+                  "2-1-loop-4", "2-2-loop-4", "2-3-loop-4", //
+                  "2-1-loop-5", "2-2-loop-5", "2-3-loop-5", //
+                  "2-1-loop-6", "2-2-loop-6", "2-3-loop-6", //
+                  "2-1-loop-7", "2-2-loop-7", "2-3-loop-7", //
+                  "2-1-loop-8", "2-2-loop-8", "2-3-loop-8", //
+                  "2-1-loop-9", "2-2-loop-9", "2-3-loop-9", //
+                  "2-1-loop-10", "2-2-loop-10", "2-3-loop-10", //
+                  "2-1-loop-11", "2-2-loop-11", "2-3-loop-11", //
+                  "2-1-loop-12", "2-2-loop-12", "2-3-loop-12", //
+                  "2-1-loop-13", "2-2-loop-13", "2-3-loop-13", //
+                  "2-1-loop-14", "2-2-loop-14", "2-3-loop-14", //
+                  "2-1-loop-15", "2-2-loop-15", "2-3-loop-15", //
+                  "2-1-loop-16", "2-2-loop-16", "2-3-loop-16", //
+                  "2-1-loop-17", "2-2-loop-17", "2-3-loop-17", //
+                  "2-1-loop-18", "2-2-loop-18", "2-3-loop-18", //
+                  "2-1-loop-19", "2-2-loop-19" /* broken *///
         );
     }
 }

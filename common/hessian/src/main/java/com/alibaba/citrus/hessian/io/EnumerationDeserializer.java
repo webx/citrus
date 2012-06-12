@@ -51,34 +51,32 @@ package com.alibaba.citrus.hessian.io;
 import java.io.IOException;
 import java.util.Vector;
 
-/**
- * Deserializing a JDK 1.2 Collection.
- */
+/** Deserializing a JDK 1.2 Collection. */
 public class EnumerationDeserializer extends AbstractListDeserializer {
-  private static EnumerationDeserializer _deserializer;
+    private static EnumerationDeserializer _deserializer;
 
-  public static EnumerationDeserializer create()
-  {
-    if (_deserializer == null)
-      _deserializer = new EnumerationDeserializer();
+    public static EnumerationDeserializer create() {
+        if (_deserializer == null) {
+            _deserializer = new EnumerationDeserializer();
+        }
 
-    return _deserializer;
-  }
+        return _deserializer;
+    }
 
-  public Object readList(AbstractHessianInput in, int length)
-    throws IOException
-  {
-    Vector list = new Vector();
+    public Object readList(AbstractHessianInput in, int length)
+            throws IOException {
+        Vector list = new Vector();
 
-    in.addRef(list);
+        in.addRef(list);
 
-    while (! in.isEnd())
-      list.add(in.readObject());
+        while (!in.isEnd()) {
+            list.add(in.readObject());
+        }
 
-    in.readEnd();
+        in.readEnd();
 
-    return list.elements();
-  }
+        return list.elements();
+    }
 }
 
 

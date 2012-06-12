@@ -20,18 +20,17 @@ package com.alibaba.citrus.turbine.dataresolver;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
+import com.alibaba.citrus.service.form.Field;
+import com.alibaba.citrus.service.moduleloader.ActionEventException;
+import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import org.junit.Test;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.context.ApplicationContext;
 
-import com.alibaba.citrus.service.form.Field;
-import com.alibaba.citrus.service.moduleloader.ActionEventException;
-import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
-
 public class FormFieldResolverTests extends AbstractDataResolverTests {
-    private Field field;
+    private Field    field;
     private String[] value1;
-    private Integer value2;
+    private Integer  value2;
 
     @Test
     public void getField() throws Exception {

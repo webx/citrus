@@ -24,7 +24,6 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
@@ -45,7 +44,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public class SingleValuedCookieStoreImpl extends AbstractCookieStore implements ExactMatchesOnlySessionStore {
-    private String[] attrNames;
+    private String[]              attrNames;
     private SessionValueEncoder[] encoders;
 
     public void initAttributeNames(String[] attrNames) {
@@ -132,9 +131,7 @@ public class SingleValuedCookieStoreImpl extends AbstractCookieStore implements 
         writeCookie(storeContext.getSessionRequestContext().getResponse(), getName(), cookieState);
     }
 
-    /**
-     * 取得cookie store的状态。
-     */
+    /** 取得cookie store的状态。 */
     private State getState(StoreContext storeContext) {
         State state = (State) storeContext.getState();
 
@@ -147,9 +144,7 @@ public class SingleValuedCookieStoreImpl extends AbstractCookieStore implements 
         return state;
     }
 
-    /**
-     * 确保cookie被装载。
-     */
+    /** 确保cookie被装载。 */
     private void ensureCookieLoading(State state, HttpServletRequest request, StoreContext storeContext) {
         if (state.cookieLoaded) {
             return;
@@ -165,9 +160,7 @@ public class SingleValuedCookieStoreImpl extends AbstractCookieStore implements 
         state.attributes = decodeCookieValue(state.requestCookieValue, storeContext);
     }
 
-    /**
-     * 读取cookies。
-     */
+    /** 读取cookies。 */
     private String readCookie(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
 
@@ -186,7 +179,7 @@ public class SingleValuedCookieStoreImpl extends AbstractCookieStore implements 
 
                 if (log.isDebugEnabled()) {
                     log.debug("[{}] Loading cookie: {}[length={}]={}", new Object[] { getStoreName(), getName(),
-                            cookie.getValue().length(), cookie.getValue() });
+                                                                                      cookie.getValue().length(), cookie.getValue() });
                 }
 
                 break;
@@ -258,13 +251,11 @@ public class SingleValuedCookieStoreImpl extends AbstractCookieStore implements 
         mb.append("encoders", encoders);
     }
 
-    /**
-     * 存放cookie的状态。
-     */
+    /** 存放cookie的状态。 */
     private class State {
-        private boolean cookieLoaded;
-        private boolean cookieCommitted;
-        private String requestCookieValue;
+        private boolean             cookieLoaded;
+        private boolean             cookieCommitted;
+        private String              requestCookieValue;
         private Map<String, Object> attributes;
     }
 }

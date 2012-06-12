@@ -25,15 +25,13 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpSession;
-
-import org.hamcrest.Matcher;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 import com.alibaba.citrus.service.requestcontext.util.CookieSupport;
+import org.hamcrest.Matcher;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  * 测试cookie store。
@@ -42,7 +40,7 @@ import com.alibaba.citrus.service.requestcontext.util.CookieSupport;
  */
 public class CookieStoreTests extends AbstractRequestContextsTests<SessionRequestContext> {
     private HttpSession session;
-    private boolean noSession;
+    private boolean     noSession;
 
     @BeforeClass
     public static void initFactory() {

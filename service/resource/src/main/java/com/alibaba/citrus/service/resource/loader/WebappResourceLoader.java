@@ -24,10 +24,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Set;
-
 import javax.servlet.ServletContext;
-
-import org.springframework.web.context.ServletContextAware;
 
 import com.alibaba.citrus.service.resource.Resource;
 import com.alibaba.citrus.service.resource.ResourceLister;
@@ -37,6 +34,7 @@ import com.alibaba.citrus.service.resource.ResourceLoadingOption;
 import com.alibaba.citrus.service.resource.ResourceLoadingService;
 import com.alibaba.citrus.service.resource.ResourceMatchResult;
 import com.alibaba.citrus.service.resource.support.URLResource;
+import org.springframework.web.context.ServletContextAware;
 
 /**
  * 用来装载webapp下的资源。
@@ -54,9 +52,7 @@ public class WebappResourceLoader implements ResourceLister, ServletContextAware
         this.servletContext = servletContext;
     }
 
-    /**
-     * 初始化loader，并设定loader所在的<code>ResourceLoadingService</code>的实例。
-     */
+    /** 初始化loader，并设定loader所在的<code>ResourceLoadingService</code>的实例。 */
     public void init(ResourceLoadingService resourceLoadingService) {
     }
 

@@ -19,9 +19,8 @@ package com.alibaba.citrus.turbine.pipeline.valve;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
+import org.junit.Test;
 
 public class PerformTemplateScreenValveTests extends AbstractValveTests {
     @Test

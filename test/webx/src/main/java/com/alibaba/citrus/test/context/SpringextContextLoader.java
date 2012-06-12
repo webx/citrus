@@ -17,11 +17,10 @@
 
 package com.alibaba.citrus.test.context;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.util.StringUtils;
-
 import com.alibaba.citrus.service.resource.support.context.ResourceLoadingXmlApplicationContext;
 import com.alibaba.citrus.springext.support.context.AbstractXmlApplicationContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.util.StringUtils;
 
 /**
  * 用来创建基于springext的context。
@@ -32,11 +31,11 @@ public class SpringextContextLoader extends AbstractContextLoader {
     public final ApplicationContext loadContext(String... locations) throws Exception {
         if (log.isDebugEnabled()) {
             log.debug("Loading ApplicationContext for locations [" + StringUtils.arrayToCommaDelimitedString(locations)
-                    + "].");
+                      + "].");
         }
 
         ResourceLoadingXmlApplicationContext context = new ResourceLoadingXmlApplicationContext(locations,
-                testResourceLoader, false);
+                                                                                                testResourceLoader, false);
 
         prepareContext(context);
         context.refresh();

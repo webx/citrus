@@ -24,13 +24,9 @@ package com.alibaba.citrus.service.resource;
  * @author Michael Zhou
  */
 public interface ResourceMatchResult {
-    /**
-     * 取得已经匹配的名称。
-     */
+    /** 取得已经匹配的名称。 */
     String getResourceName();
 
-    /**
-     * 将匹配部分替换成指定字符串。
-     */
+    /** 将匹配部分替换成指定字符串。 */
     String substitute(String substitution);
 }

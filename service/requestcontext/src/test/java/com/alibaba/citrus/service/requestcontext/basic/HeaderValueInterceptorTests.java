@@ -21,9 +21,8 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.util.StringUtil;
+import org.junit.Test;
 
 public class HeaderValueInterceptorTests extends AbstractBasicResponseTests {
     @Test

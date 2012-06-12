@@ -20,16 +20,14 @@ package com.alibaba.citrus.turbine.pipeline.valve;
 import static com.alibaba.citrus.turbine.util.TurbineUtil.*;
 
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.support.AbstractValve;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.util.Utils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 预备turbine运行所需要的一些内容。

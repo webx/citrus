@@ -25,11 +25,6 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.support.AbstractValve;
 import com.alibaba.citrus.service.requestcontext.parser.ParameterParser;
@@ -39,6 +34,10 @@ import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.turbine.TurbineRunDataInternal;
 import com.alibaba.citrus.turbine.util.ControlTool;
 import com.alibaba.citrus.util.regex.Substitution;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 直接渲染control。
@@ -59,16 +58,12 @@ public class ExportControlValve extends AbstractValve {
     private String templateName;
     private String moduleName;
 
-    /**
-     * 在pull serivce中的<code>ControlTool</code>的名称。
-     */
+    /** 在pull serivce中的<code>ControlTool</code>的名称。 */
     public void setControlTool(String controlToolName) {
         this.controlToolName = trimToNull(controlToolName);
     }
 
-    /**
-     * 用来处理control内容的target。
-     */
+    /** 用来处理control内容的target。 */
     public void setControlExporterTarget(String controlExporterTarget) {
         this.controlExporterTarget = trimToNull(controlExporterTarget);
     }
@@ -84,16 +79,12 @@ public class ExportControlValve extends AbstractValve {
         this.substName = trimToNull(substName);
     }
 
-    /**
-     * 设置control template名称，可以包含<code>$1</code>、<code>$2</code>这样的替换符。
-     */
+    /** 设置control template名称，可以包含<code>$1</code>、<code>$2</code>这样的替换符。 */
     public void setTemplate(String templateName) {
         this.templateName = trimToNull(templateName);
     }
 
-    /**
-     * 设置control module名称，可以包含<code>$1</code>、<code>$2</code>这样的替换符。
-     */
+    /** 设置control module名称，可以包含<code>$1</code>、<code>$2</code>这样的替换符。 */
     public void setModule(String moduleName) {
         this.moduleName = trimToNull(moduleName);
     }
@@ -132,7 +123,7 @@ public class ExportControlValve extends AbstractValve {
 
     private Substitution getSubstitution(PipelineContext pipelineContext) {
         return assertNotNull((Substitution) pipelineContext.getAttribute(substName),
-                "no Substitution exists in pipelineContext: name=%s", substName);
+                             "no Substitution exists in pipelineContext: name=%s", substName);
     }
 
     private ControlTool getControlTool(Context context, String template, String module, TurbineRunData rundata) {
@@ -177,7 +168,7 @@ public class ExportControlValve extends AbstractValve {
         @Override
         protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
             attributesToProperties(element, builder, "controlTool", "controlExporterTarget", "subst", "template",
-                    "module");
+                                   "module");
         }
     }
 }

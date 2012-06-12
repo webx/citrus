@@ -26,7 +26,7 @@ import com.alibaba.citrus.util.internal.StringUtil;
 
 /**
  * 代表一个<code>PropertyPath</code>，其格式为：
- *
+ * <p/>
  * <pre>
  * ( &quot;.&quot;? propertyName | [index] | [key] )
  *     ( &quot;.&quot; propertyName  | [index] | [key] )*
@@ -44,16 +44,12 @@ import com.alibaba.citrus.util.internal.StringUtil;
 public class PropertyPath {
     private final Node[] nodes;
 
-    /**
-     * 创建一个<code>PropertyPath</code>结构。
-     */
+    /** 创建一个<code>PropertyPath</code>结构。 */
     private PropertyPath(List<Node> nodes) {
         this.nodes = nodes.toArray(new Node[nodes.size()]);
     }
 
-    /**
-     * 解析字符串并生成<code>PropertyPath</code>结构。
-     */
+    /** 解析字符串并生成<code>PropertyPath</code>结构。 */
     public static PropertyPath parse(String propertyPath) {
         Parser parser = new Parser(propertyPath);
 
@@ -62,23 +58,17 @@ public class PropertyPath {
         return new PropertyPath(parser.nodes);
     }
 
-    /**
-     * 解析<code>PropertyPath</code>字符串，并访问指定visitor。
-     */
+    /** 解析<code>PropertyPath</code>字符串，并访问指定visitor。 */
     public static void parse(String propertyPath, Visitor visitor) {
         new Parser(propertyPath, visitor).parse();
     }
 
-    /**
-     * 取得所有结点。
-     */
+    /** 取得所有结点。 */
     public Node[] getNodes() {
         return nodes.clone();
     }
 
-    /**
-     * 访问visitor。
-     */
+    /** 访问visitor。 */
     public void accept(Visitor visitor) {
         int length = nodes.length;
         Node node = null;
@@ -108,9 +98,7 @@ public class PropertyPath {
         }
     }
 
-    /**
-     * 转换成字符串。
-     */
+    /** 转换成字符串。 */
     @Override
     public String toString() {
         StringBuilder buf = new StringBuilder();
@@ -126,51 +114,35 @@ public class PropertyPath {
         return buf.toString();
     }
 
-    /**
-     * 用来访问<code>PropertyPath</code>的visitor。
-     */
+    /** 用来访问<code>PropertyPath</code>的visitor。 */
     public static interface Visitor {
-        /**
-         * 访问property[index]。
-         */
+        /** 访问property[index]。 */
         boolean visitIndexedProperty(String propertyName, int index, String displayName, boolean last);
 
-        /**
-         * 访问property[key]。
-         */
+        /** 访问property[key]。 */
         boolean visitMappedProperty(String propertyName, String key, String displayName, boolean last);
 
-        /**
-         * 访问property。
-         */
+        /** 访问property。 */
         void visitSimpleProperty(String propertyName, String displayName, boolean last);
 
-        /**
-         * 访问[index]。
-         */
+        /** 访问[index]。 */
         void visitIndex(int index, String displayName, boolean last);
 
-        /**
-         * 访问[key]。
-         */
+        /** 访问[key]。 */
         void visitKey(String key, String displayName, boolean last);
     }
 
-    /**
-     * 代表<code>PropertyPath</code>中的一个结点。
-     */
+    /** 代表<code>PropertyPath</code>中的一个结点。 */
     public static interface Node {
         boolean accept(Visitor visitor, Node lookAhead);
 
         void accept(Visitor visitor);
     }
 
-    /**
-     * 代表<code>PropertyPath</code>中的一个property name结点。
-     */
+    /** 代表<code>PropertyPath</code>中的一个property name结点。 */
     public static final class PropertyName implements Node {
-        private final String propertyName;
-        private final String displayName;
+        private final String  propertyName;
+        private final String  displayName;
         private final boolean last;
 
         public PropertyName(String propertyName, String displayName, boolean last) {
@@ -211,12 +183,10 @@ public class PropertyPath {
         }
     }
 
-    /**
-     * 代表<code>PropertyPath</code>中的一个indexed key结点。
-     */
+    /** 代表<code>PropertyPath</code>中的一个indexed key结点。 */
     public static final class Index implements Node {
-        private final int index;
-        private final String displayName;
+        private final int     index;
+        private final String  displayName;
         private final boolean last;
 
         public Index(int index, String displayName, boolean last) {
@@ -247,12 +217,10 @@ public class PropertyPath {
         }
     }
 
-    /**
-     * 代表<code>PropertyPath</code>中的一个mapped key结点。
-     */
+    /** 代表<code>PropertyPath</code>中的一个mapped key结点。 */
     public static final class Key implements Node {
-        private final String key;
-        private final String displayName;
+        private final String  key;
+        private final String  displayName;
         private final boolean last;
 
         public Key(String key, String displayName, boolean last) {
@@ -283,23 +251,21 @@ public class PropertyPath {
         }
     }
 
-    /**
-     * <code>PropertyPath</code>词法分析器。
-     */
+    /** <code>PropertyPath</code>词法分析器。 */
     private abstract static class Tokenizer {
-        private final static char EOF = '\0';
-        private final static int KEY_STATE_NORMAL = 0;
-        private final static int KEY_STATE_ESCAPE = 1;
-        private final static int KEY_STATE_UNICODE = 2;
+        private final static char EOF               = '\0';
+        private final static int  KEY_STATE_NORMAL  = 0;
+        private final static int  KEY_STATE_ESCAPE  = 1;
+        private final static int  KEY_STATE_UNICODE = 2;
         protected final String propertyPath;
-        private final int lastIndex;
+        private final   int    lastIndex;
 
         // Parser的状态
-        private int i = -1;
-        private char ch = EOF;
+        private int    i            = -1;
+        private char   ch           = EOF;
         private String propertyName = null;
-        private int index = -1;
-        private String key = null;
+        private int    index        = -1;
+        private String key          = null;
 
         public Tokenizer(String propertyPath) {
             this.propertyPath = propertyPath;
@@ -514,17 +480,15 @@ public class PropertyPath {
         }
     }
 
-    /**
-     * <code>PropertyPath</code>解析器。
-     */
+    /** <code>PropertyPath</code>解析器。 */
     private static class Parser extends Tokenizer implements Visitor {
         private final List<Node> nodes;
-        private final Visitor visitor;
-        private String lastPropertyName = null;
+        private final Visitor    visitor;
+        private String lastPropertyName        = null;
         private String lastPropertyDisplayName = null;
-        private int lastIndex = -1;
-        private String lastKey = null;
-        private String lastKeyDisplayName = null;
+        private int    lastIndex               = -1;
+        private String lastKey                 = null;
+        private String lastKeyDisplayName      = null;
 
         public Parser(String propertyPath) {
             this(propertyPath, null);
@@ -617,37 +581,27 @@ public class PropertyPath {
             lastKeyDisplayName = null;
         }
 
-        /**
-         * 访问property[index]。
-         */
+        /** 访问property[index]。 */
         public boolean visitIndexedProperty(String propertyName, int index, String displayName, boolean last) {
             return false;
         }
 
-        /**
-         * 访问property[key]。
-         */
+        /** 访问property[key]。 */
         public boolean visitMappedProperty(String propertyName, String key, String displayName, boolean last) {
             return false;
         }
 
-        /**
-         * 访问property。
-         */
+        /** 访问property。 */
         public void visitSimpleProperty(String propertyName, String displayName, boolean last) {
             nodes.add(new PropertyName(propertyName, displayName, last));
         }
 
-        /**
-         * 访问[index]。
-         */
+        /** 访问[index]。 */
         public void visitIndex(int index, String displayName, boolean last) {
             nodes.add(new Index(index, displayName, last));
         }
 
-        /**
-         * 访问[key]。
-         */
+        /** 访问[key]。 */
         public void visitKey(String key, String displayName, boolean last) {
             nodes.add(new Key(key, displayName, last));
         }

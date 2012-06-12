@@ -98,9 +98,7 @@ public class IndexedPropertiesFinder extends AbstractPropertiesFinder {
         return new IndexedPropertyImpl(propName, declaringType, type, readMethod, writMethod);
     }
 
-    /**
-     * 代表一个带索引的属性信息。
-     */
+    /** 代表一个带索引的属性信息。 */
     private static class IndexedPropertyImpl extends AbstractPropertyInfo implements IndexedPropertyInfo {
         private IndexedPropertyImpl(String name, TypeInfo declaringType, TypeInfo type, MethodInfo readMethod,
                                     MethodInfo writeMethod) {

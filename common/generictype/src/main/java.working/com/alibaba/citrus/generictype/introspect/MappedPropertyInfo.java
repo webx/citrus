@@ -19,7 +19,7 @@ package com.alibaba.citrus.generictype.introspect;
 
 /**
  * 代表一个带字符串键值映射的property。常见的形式是： </p>
- *
+ * <p/>
  * <pre>
  * public String getElement(String key);
  *
@@ -33,13 +33,9 @@ package com.alibaba.citrus.generictype.introspect;
  * @author Michael Zhou
  */
 public interface MappedPropertyInfo extends PropertyInfo {
-    /**
-     * 取得property的值。
-     */
+    /** 取得property的值。 */
     Object getValue(Object object, String key);
 
-    /**
-     * 设置property的值。
-     */
+    /** 设置property的值。 */
     void setValue(Object object, String key, Object value);
 }

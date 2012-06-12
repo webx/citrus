@@ -49,12 +49,12 @@ public class ExceptionComponent extends PageComponent {
 
     @SuppressWarnings("unused")
     private class ExceptionVisitor extends AbstractVisitor {
-        private final List<Throwable> exceptions;
-        private Throwable exception;
-        private int exceptionId;
-        private boolean defaultOpen;
-        private StackTraceElement stackTraceElement;
-        private String location;
+        private final List<Throwable>   exceptions;
+        private       Throwable         exception;
+        private       int               exceptionId;
+        private       boolean           defaultOpen;
+        private       StackTraceElement stackTraceElement;
+        private       String            location;
         private boolean firstException = true;
 
         public ExceptionVisitor(RequestHandlerContext context, Throwable exception) {
@@ -63,7 +63,7 @@ public class ExceptionComponent extends PageComponent {
         }
 
         public void visitException(Template exceptionTemplate) {
-            for (Iterator<Throwable> i = exceptions.iterator(); i.hasNext();) {
+            for (Iterator<Throwable> i = exceptions.iterator(); i.hasNext(); ) {
                 this.exception = i.next();
                 this.exceptionId++;
                 this.defaultOpen = !i.hasNext();

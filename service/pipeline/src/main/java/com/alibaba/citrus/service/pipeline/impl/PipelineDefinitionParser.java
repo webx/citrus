@@ -22,17 +22,16 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 
 import java.util.List;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.pipeline.Pipeline;
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractNamedProxyBeanDefinitionParser;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 public class PipelineDefinitionParser extends AbstractNamedProxyBeanDefinitionParser implements ContributionAware {
     private ConfigurationPoint valvesConfigurationPoint;
@@ -64,7 +63,7 @@ public class PipelineDefinitionParser extends AbstractNamedProxyBeanDefinitionPa
 
                 for (Element subElement : subElements(element)) {
                     Object valve = parseConfigurationPointBean(subElement, valvesConfigurationPoint, parserContext,
-                            builder);
+                                                               builder);
 
                     if (valve != null) {
                         valves.add(valve);

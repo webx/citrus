@@ -20,10 +20,9 @@ package com.alibaba.citrus.turbine.util;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
+import com.alibaba.citrus.turbine.Context;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.alibaba.citrus.turbine.Context;
 
 public class ControlToolExportAllTests extends AbstractPullToolTests<ControlTool> {
     @Override

@@ -21,19 +21,16 @@ import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.Enumeration;
-
 import javax.servlet.http.HttpServletRequest;
 
 public class ActionEventUtil {
-    private static final String EVENT_PATTERN = "eventSubmitDo";
-    private static final int EVENT_PATTERN_LENGTH = EVENT_PATTERN.length();
+    private static final String EVENT_PATTERN         = "eventSubmitDo";
+    private static final int    EVENT_PATTERN_LENGTH  = EVENT_PATTERN.length();
     private static final String IMAGE_BUTTON_SUFFIX_1 = ".x";
     private static final String IMAGE_BUTTON_SUFFIX_2 = ".y";
-    static final String ACTION_EVENT_KEY = "_action_event_submit_do_";
+    static final         String ACTION_EVENT_KEY      = "_action_event_submit_do_";
 
-    /**
-     * 取得key=eventSubmit_doXyz, value不为空的参数。
-     */
+    /** 取得key=eventSubmit_doXyz, value不为空的参数。 */
     public static String getEventName(HttpServletRequest request) {
         Object savedEvent = request.getAttribute(ACTION_EVENT_KEY);
 
@@ -69,8 +66,8 @@ public class ActionEventUtil {
             String paramKey = toCamelCase(originalKey);
 
             if (paramKey.length() > EVENT_PATTERN_LENGTH && paramKey.startsWith(EVENT_PATTERN)
-                    && Character.isUpperCase(paramKey.charAt(EVENT_PATTERN_LENGTH))
-                    && !isBlank(request.getParameter(originalKey))) {
+                && Character.isUpperCase(paramKey.charAt(EVENT_PATTERN_LENGTH))
+                && !isBlank(request.getParameter(originalKey))) {
                 int startIndex = EVENT_PATTERN_LENGTH;
                 int endIndex = paramKey.length();
 

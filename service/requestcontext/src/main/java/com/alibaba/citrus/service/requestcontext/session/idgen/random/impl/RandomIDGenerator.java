@@ -23,11 +23,10 @@ import static com.alibaba.citrus.util.ObjectUtil.*;
 import java.security.SecureRandom;
 import java.util.Random;
 
-import org.apache.commons.codec.binary.Base64;
-
 import com.alibaba.citrus.service.requestcontext.session.SessionIDGenerator;
 import com.alibaba.citrus.springext.support.BeanSupport;
 import com.alibaba.citrus.util.ToStringBuilder;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  * 用随机数生成session ID的机制。
@@ -36,7 +35,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
  */
 public class RandomIDGenerator extends BeanSupport implements SessionIDGenerator {
     private Integer length;
-    private Random rnd;
+    private Random  rnd;
 
     public int getLength() {
         return length;

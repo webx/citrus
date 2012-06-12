@@ -23,16 +23,15 @@ import static org.junit.Assert.*;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
-
 import com.alibaba.citrus.util.collection.ArrayHashMapTests.Constructors;
 import com.alibaba.citrus.util.collection.ArrayHashMapTests.ListMapBasic;
 import com.alibaba.citrus.util.collection.ArrayHashMapTests.ListMapEntryList;
 import com.alibaba.citrus.util.collection.ArrayHashMapTests.ListMapKeyList;
 import com.alibaba.citrus.util.collection.ArrayHashMapTests.ListMapValueList;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * 测试<code>ArrayHashMap</code>类.
@@ -41,7 +40,7 @@ import com.alibaba.citrus.util.collection.ArrayHashMapTests.ListMapValueList;
  */
 @RunWith(Suite.class)
 @SuiteClasses({ Constructors.class, ListMapBasic.class, ListMapEntryList.class, ListMapKeyList.class,
-        ListMapValueList.class })
+                ListMapValueList.class })
 public class ArrayHashMapTests {
     private static int getThreshold(ArrayHashMap<Object, Object> map) {
         return map.getThreshold();
@@ -118,9 +117,7 @@ public class ArrayHashMapTests {
     public static class Constructors {
         private ArrayHashMap<Object, Object> map;
 
-        /**
-         * 测试构造函数(initialCapacity, loadFactor).
-         */
+        /** 测试构造函数(initialCapacity, loadFactor). */
         @Test
         public void constructor1() {
             assertConstructorException(-1, .75f);
@@ -140,9 +137,7 @@ public class ArrayHashMapTests {
             assertParameters(32, 16);
         }
 
-        /**
-         * 测试构造函数(initialCapacity).
-         */
+        /** 测试构造函数(initialCapacity). */
         @Test
         public void constructor2() {
             assertConstructorException(-1);
@@ -151,18 +146,14 @@ public class ArrayHashMapTests {
             assertParameters(0, 1);
         }
 
-        /**
-         * 测试构造函数(无参数).
-         */
+        /** 测试构造函数(无参数). */
         @Test
         public void constructor3() {
             map = new ArrayHashMap<Object, Object>();
             assertParameters(12, 16);
         }
 
-        /**
-         * 测试构造函数(Map).
-         */
+        /** 测试构造函数(Map). */
         @Test
         public void constructor4() {
             Map<Object, Object> anotherMap = createHashMap();
@@ -183,7 +174,7 @@ public class ArrayHashMapTests {
          * 测试内部参数: threshold和capacity.
          *
          * @param expectedThreshold 期望的阈值
-         * @param expectedCapacity 期望的容量
+         * @param expectedCapacity  期望的容量
          */
         private void assertParameters(int expectedThreshold, int expectedCapacity) {
             assertEquals(expectedThreshold, getThreshold(map));
@@ -194,7 +185,7 @@ public class ArrayHashMapTests {
          * 测试并试图得到Exception.
          *
          * @param initialCapacity 初始容量
-         * @param loadFactor 负载系数
+         * @param loadFactor      负载系数
          */
         private void assertConstructorException(int initialCapacity, float loadFactor) {
             try {

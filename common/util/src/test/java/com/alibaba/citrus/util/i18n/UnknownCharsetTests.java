@@ -20,9 +20,8 @@ package com.alibaba.citrus.util.i18n;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.util.i18n.LocaleInfo.UnknownCharset;
+import org.junit.Test;
 
 public class UnknownCharsetTests {
     private UnknownCharset charset;

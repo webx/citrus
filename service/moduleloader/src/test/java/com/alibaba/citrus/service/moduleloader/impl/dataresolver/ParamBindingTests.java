@@ -21,11 +21,6 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import org.hamcrest.Matcher;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-
 import com.alibaba.citrus.service.moduleloader.AbstractModuleLoaderTests;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import com.alibaba.citrus.service.moduleloader.UnadaptableModuleException;
@@ -33,6 +28,10 @@ import com.alibaba.citrus.service.moduleloader.impl.adapter.ActionEventAdapter;
 import com.alibaba.citrus.service.moduleloader.impl.adapter.DataBindingAdapter;
 import com.alibaba.test2.module.action.MyParameterizedAction;
 import com.alibaba.test2.module.screen.MyParameterizedScreen;
+import org.hamcrest.Matcher;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
 
 public class ParamBindingTests extends AbstractModuleLoaderTests {
     @BeforeClass
@@ -59,8 +58,8 @@ public class ParamBindingTests extends AbstractModuleLoaderTests {
             fail();
         } catch (UnadaptableModuleException e) {
             assertThat(e, exception("Could not adapt object to module: type=screen, name=MyParameterizedScreen, class="
-                    + MyParameterizedScreen.class.getName()
-                    + ": method execute has 2 parameters, but no DataResolvers defined."));
+                                    + MyParameterizedScreen.class.getName()
+                                    + ": method execute has 2 parameters, but no DataResolvers defined."));
         }
 
         // action.doMyEvent(无参数) - 正常执行
@@ -73,12 +72,12 @@ public class ParamBindingTests extends AbstractModuleLoaderTests {
             fail();
         } catch (UnadaptableModuleException e) {
             Matcher<Throwable> case1 = exception("Could not adapt object to module: type=action, name=MyParameterizedAction, class="
-                    + MyParameterizedAction.class.getName()
-                    + ": method doMyEvent has 2 parameters, but no DataResolvers defined.");
+                                                 + MyParameterizedAction.class.getName()
+                                                 + ": method doMyEvent has 2 parameters, but no DataResolvers defined.");
 
             Matcher<Throwable> case2 = exception("Could not adapt object to module: type=action, name=MyParameterizedAction, class="
-                    + MyParameterizedAction.class.getName()
-                    + ": method doMyEventPrimitive has 2 parameters, but no DataResolvers defined.");
+                                                 + MyParameterizedAction.class.getName()
+                                                 + ": method doMyEventPrimitive has 2 parameters, but no DataResolvers defined.");
 
             @SuppressWarnings("unchecked")
             Matcher<Throwable> any = anyOf(case1, case2);
@@ -185,7 +184,7 @@ public class ParamBindingTests extends AbstractModuleLoaderTests {
 
         // action.execute(@skip) - 被skip后，不执行。
         DataBindingAdapter dbAdapter = (DataBindingAdapter) moduleLoaderService.getModule("action",
-                "mySkippableAction2");
+                                                                                          "mySkippableAction2");
         dbAdapter.execute();
 
         assertEquals(null /* 不是"result is null" */, request.getAttribute("actionLog"));

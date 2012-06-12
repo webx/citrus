@@ -139,7 +139,7 @@ public class ExceptionUtilTests {
 
         // wrong class
         assertEquals(RuntimeException.class,
-                ExceptionUtil.toRuntimeException(new Exception(), PrivateRuntimeException.class).getClass());
+                     ExceptionUtil.toRuntimeException(new Exception(), PrivateRuntimeException.class).getClass());
 
         IllegalArgumentException iae = new IllegalArgumentException();
         IOException ioe = new IOException();

@@ -21,11 +21,10 @@ import static org.junit.Assert.*;
 
 import javax.servlet.http.HttpSession;
 
+import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 
 public class SessionRequestContextTests extends AbstractRequestContextsTests<SessionRequestContext> {
     private HttpSession session;

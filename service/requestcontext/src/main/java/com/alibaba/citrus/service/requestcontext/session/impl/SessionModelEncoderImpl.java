@@ -23,13 +23,12 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.text.MessageFormat;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.alibaba.citrus.service.requestcontext.session.SessionModel;
 import com.alibaba.citrus.service.requestcontext.session.SessionModel.Factory;
 import com.alibaba.citrus.service.requestcontext.session.SessionModelEncoder;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <code>SessionModelEncoder</code>的默认实现：将model内容保存成字符串。
@@ -37,14 +36,14 @@ import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionP
  * @author Michael Zhou
  */
 public class SessionModelEncoderImpl implements SessionModelEncoder {
-    private static final Logger log = LoggerFactory.getLogger(SessionModelEncoderImpl.class);
+    private static final Logger log     = LoggerFactory.getLogger(SessionModelEncoderImpl.class);
     private static final String pattern = "'{'id:\"{0}\",ct:{1,number,#},ac:{2,number,#},mx:{3,number,#}'}'";
 
     public Object encode(SessionModel model) {
         Object[] args = { defaultIfNull(model.getSessionID(), EMPTY_STRING), //
-                model.getCreationTime(), //
-                model.getLastAccessedTime(), //
-                model.getMaxInactiveInterval() //
+                          model.getCreationTime(), //
+                          model.getLastAccessedTime(), //
+                          model.getMaxInactiveInterval() //
         };
 
         String data = new MessageFormat(pattern).format(args);

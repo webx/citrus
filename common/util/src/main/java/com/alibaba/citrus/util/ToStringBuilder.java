@@ -37,11 +37,11 @@ import com.alibaba.citrus.util.internal.IndentableStringBuilder;
  * @author Michael Zhou
  */
 public class ToStringBuilder {
-    private static final String NULL_STR = "<null>";
-    private static final int ARRAY_ITEMS_PER_LINE = 10;
+    private static final String NULL_STR             = "<null>";
+    private static final int    ARRAY_ITEMS_PER_LINE = 10;
     private final IndentableStringBuilder out;
-    private final Formatter formatter;
-    private boolean printDescription;
+    private final Formatter               formatter;
+    private       boolean                 printDescription;
 
     public ToStringBuilder() {
         this(-1);
@@ -52,55 +52,41 @@ public class ToStringBuilder {
         this.formatter = new Formatter(out);
     }
 
-    /**
-     * 清除所有数据。
-     */
+    /** 清除所有数据。 */
     public void clear() {
         out.clear();
         printDescription = false;
     }
 
-    /**
-     * 取得底层indentable string builder。
-     */
+    /** 取得底层indentable string builder。 */
     public IndentableStringBuilder out() {
         return out;
     }
 
-    /**
-     * 打印数组时，是否打印出描述。
-     */
+    /** 打印数组时，是否打印出描述。 */
     public boolean isPrintDescription() {
         return printDescription;
     }
 
-    /**
-     * 打印数组时，是否打印出描述。
-     */
+    /** 打印数组时，是否打印出描述。 */
     public ToStringBuilder setPrintDescription(boolean printDescription) {
         this.printDescription = printDescription;
         return this;
     }
 
-    /**
-     * 创建一级缩进。
-     */
+    /** 创建一级缩进。 */
     public ToStringBuilder start() {
         out.start();
         return this;
     }
 
-    /**
-     * 创建一级缩进。
-     */
+    /** 创建一级缩进。 */
     public ToStringBuilder start(String beginQuote, String endQuote) {
         out.start(beginQuote, endQuote);
         return this;
     }
 
-    /**
-     * 结束一级缩进。注意，输出结果之前，须至少调用一次end()，以确保最后的换行可以被输出。
-     */
+    /** 结束一级缩进。注意，输出结果之前，须至少调用一次end()，以确保最后的换行可以被输出。 */
     public ToStringBuilder end() {
         out.end();
         return this;
@@ -407,9 +393,7 @@ public class ToStringBuilder {
         ToStringBuilder appendTo(ToStringBuilder toStringBuilder);
     }
 
-    /**
-     * 创建一系列key/value值对。
-     */
+    /** 创建一系列key/value值对。 */
     public static class MapBuilder implements StructureBuilder {
         private final Map<String, Object> map = createLinkedHashMap();
         private boolean sortKeys;
@@ -518,9 +502,7 @@ public class ToStringBuilder {
         }
     }
 
-    /**
-     * 创建值的列表。
-     */
+    /** 创建值的列表。 */
     public static class CollectionBuilder implements StructureBuilder {
         private final List<Object> list = createLinkedList();
         private boolean sort;
@@ -607,7 +589,7 @@ public class ToStringBuilder {
             if (oneLine) {
                 toStringBuilder.append("[");
 
-                for (Iterator<Object> i = list.iterator(); i.hasNext();) {
+                for (Iterator<Object> i = list.iterator(); i.hasNext(); ) {
                     toStringBuilder.append(i.next());
 
                     if (i.hasNext()) {

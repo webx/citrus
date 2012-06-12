@@ -30,7 +30,7 @@ import java.util.NoSuchElementException;
  */
 public class ResourceTrace implements Iterable<ResourceTraceElement> {
     private final ResourceTraceElement[] elements;
-    private final Resource resource;
+    private final Resource               resource;
 
     public ResourceTrace(Collection<ResourceTraceElement> elements, Resource resource) {
         this.elements = elements == null ? new ResourceTraceElement[0] : elements

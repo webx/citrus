@@ -33,6 +33,17 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 
+import com.alibaba.citrus.springext.ConfigurationPoint;
+import com.alibaba.citrus.springext.ConfigurationPointException;
+import com.alibaba.citrus.springext.ConfigurationPoints;
+import com.alibaba.citrus.springext.Contribution;
+import com.alibaba.citrus.springext.ContributionAware;
+import com.alibaba.citrus.springext.ContributionType;
+import com.alibaba.citrus.springext.Schema;
+import com.alibaba.citrus.springext.VersionableSchemas;
+import com.alibaba.citrus.springext.support.parser.DefaultElementDefinitionParser;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -45,18 +56,6 @@ import org.springframework.core.io.InputStreamSource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.util.ClassUtils;
 
-import com.alibaba.citrus.springext.ConfigurationPoint;
-import com.alibaba.citrus.springext.ConfigurationPointException;
-import com.alibaba.citrus.springext.ConfigurationPoints;
-import com.alibaba.citrus.springext.Contribution;
-import com.alibaba.citrus.springext.ContributionAware;
-import com.alibaba.citrus.springext.ContributionType;
-import com.alibaba.citrus.springext.Schema;
-import com.alibaba.citrus.springext.VersionableSchemas;
-import com.alibaba.citrus.springext.support.parser.DefaultElementDefinitionParser;
-import com.alibaba.citrus.util.ToStringBuilder;
-import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
-
 /**
  * 代表一个configuration point的实现，并处理configuration point
  * namespace下的elements及attributes。
@@ -65,16 +64,16 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  */
 public class ConfigurationPointImpl extends NamespaceHandlerSupport implements ConfigurationPoint, NamespaceHandler {
     private final static Logger log = LoggerFactory.getLogger(ConfigurationPoint.class);
-    private final ConfigurationPoints cps;
-    private final ConfigurationPointSettings settings;
-    private final String name;
-    private final String namespaceUri;
-    private final String defaultElementName;
-    private final String preferredNsPrefix;
-    private final String contributionLocationPrefix;
+    private final ConfigurationPoints                cps;
+    private final ConfigurationPointSettings         settings;
+    private final String                             name;
+    private final String                             namespaceUri;
+    private final String                             defaultElementName;
+    private final String                             preferredNsPrefix;
+    private final String                             contributionLocationPrefix;
     private final Map<ContributionKey, Contribution> contributions;
-    private VersionableSchemas schemas;
-    private boolean initialized;
+    private       VersionableSchemas                 schemas;
+    private       boolean                            initialized;
 
     ConfigurationPointImpl(ConfigurationPoints cps, ConfigurationPointSettings settings, String name,
                            String namespaceUri, String defaultElementName, String preferredNsPrefix) {
@@ -160,9 +159,9 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
             if (getDefaultElementName() != null && isEquals(contribName, getDefaultElementName())) {
                 throw new FatalBeanException(
                         "Contribution has a same name as the default element name for configuration point: contributionType="
-                                + contribType + ", contribuitionClass=" + contribClassName + ", contributionName="
-                                + contribName + ", configurationPoint=" + getName() + ", namespaceUri="
-                                + getNamespaceUri());
+                        + contribType + ", contribuitionClass=" + contribClassName + ", contributionName="
+                        + contribName + ", configurationPoint=" + getName() + ", namespaceUri="
+                        + getNamespaceUri());
             }
 
             sortedMappings.put(contribName, contribClassName);
@@ -172,7 +171,7 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
 
             if (existContrib != null) {
                 throw new ConfigurationPointException("Duplicated contributions from locations: " + contribLocation
-                        + "\n" + "     " + existContrib + "\n and " + contrib);
+                                                      + "\n" + "     " + existContrib + "\n and " + contrib);
             }
 
             register(contrib);
@@ -227,9 +226,9 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
 
         if (implementationClassName == null) {
             throw new FatalBeanException("Contribution class not defined: contributionType=" + contrib.getType()
-                    + ", contributionName=" + contrib.getName() + ", configurationPoint="
-                    + contrib.getConfigurationPoint().getName() + ", namespaceUri="
-                    + contrib.getConfigurationPoint().getNamespaceUri());
+                                         + ", contributionName=" + contrib.getName() + ", configurationPoint="
+                                         + contrib.getConfigurationPoint().getName() + ", namespaceUri="
+                                         + contrib.getConfigurationPoint().getNamespaceUri());
         }
 
         Class<?> implementationClass;
@@ -238,17 +237,17 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
             implementationClass = ClassUtils.forName(implementationClassName, settings.classLoader);
         } catch (ClassNotFoundException e) {
             throw new FatalBeanException("Contribution class not found: contributionType=" + contrib.getType()
-                    + ", contribuitionClass=" + implementationClassName + ", contributionName=" + contrib.getName()
-                    + ", configurationPoint=" + contrib.getConfigurationPoint().getName() + ", namespaceUri="
-                    + contrib.getConfigurationPoint().getNamespaceUri(), e);
+                                         + ", contribuitionClass=" + implementationClassName + ", contributionName=" + contrib.getName()
+                                         + ", configurationPoint=" + contrib.getConfigurationPoint().getName() + ", namespaceUri="
+                                         + contrib.getConfigurationPoint().getNamespaceUri(), e);
         }
 
         if (!contrib.getType().getContributionInterface().isAssignableFrom(implementationClass)) {
             throw new FatalBeanException("Contribution class does not implement the "
-                    + contrib.getType().getContributionInterface().getSimpleName() + " interface:  contributionType="
-                    + contrib.getType() + ", contribuitionClass=" + implementationClassName + ", contributionName="
-                    + contrib.getName() + ", configurationPoint=" + contrib.getConfigurationPoint().getName()
-                    + ", namespaceUri=" + contrib.getConfigurationPoint().getNamespaceUri());
+                                         + contrib.getType().getContributionInterface().getSimpleName() + " interface:  contributionType="
+                                         + contrib.getType() + ", contribuitionClass=" + implementationClassName + ", contributionName="
+                                         + contrib.getName() + ", configurationPoint=" + contrib.getConfigurationPoint().getName()
+                                         + ", namespaceUri=" + contrib.getConfigurationPoint().getNamespaceUri());
         }
 
         return BeanUtils.instantiateClass(implementationClass);
@@ -295,7 +294,7 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
             ConfigurationPointSchemaSource schemaSource = new ConfigurationPointSchemaSource(this, version);
 
             schemas[i++] = new SchemaImpl(schemaName, version, namespaceUri, preferredNsPrefix, getDescription(),
-                    schemaSource);
+                                          schemaSource);
         }
 
         return schemas;
@@ -310,7 +309,7 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
         ToStringBuilder buf = new ToStringBuilder();
 
         buf.format("ConfigurationPoint[%s=%s, loaded contributions from %s.*]", name, namespaceUri,
-                contributionLocationPrefix);
+                   contributionLocationPrefix);
 
         MapBuilder mb = new MapBuilder();
 
@@ -323,12 +322,10 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
         return buf.toString();
     }
 
-    /**
-     * 用来生成configuration point schema的内容。
-     */
+    /** 用来生成configuration point schema的内容。 */
     private static class ConfigurationPointSchemaSource implements InputStreamSource {
         private final ConfigurationPoint configurationPoint;
-        private final String version;
+        private final String             version;
 
         public ConfigurationPointSchemaSource(ConfigurationPoint configurationPoint, String version) {
             this.configurationPoint = configurationPoint;

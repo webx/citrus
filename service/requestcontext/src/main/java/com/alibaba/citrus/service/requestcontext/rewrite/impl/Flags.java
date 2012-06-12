@@ -43,9 +43,7 @@ public class Flags {
         return flags;
     }
 
-    /**
-     * 检查flags，如果存在，则返回<code>true</code>。
-     */
+    /** 检查flags，如果存在，则返回<code>true</code>。 */
     protected boolean hasFlags(String... names) {
         assertTrue(!isEmptyArray(names), "names");
 
@@ -63,9 +61,7 @@ public class Flags {
         return false;
     }
 
-    /**
-     * 如果flag不存在，则返回<code>null</code>。如果flag无值，则返回空字符串。否则返回值。
-     */
+    /** 如果flag不存在，则返回<code>null</code>。如果flag无值，则返回空字符串。否则返回值。 */
     protected String getFlagValue(String... names) {
         assertTrue(!isEmptyArray(names), "names");
 

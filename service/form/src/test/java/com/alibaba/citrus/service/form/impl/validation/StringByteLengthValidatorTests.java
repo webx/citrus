@@ -22,11 +22,10 @@ import static org.junit.Assert.*;
 
 import java.util.Locale;
 
+import com.alibaba.citrus.util.i18n.LocaleUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.alibaba.citrus.util.i18n.LocaleUtil;
 
 public class StringByteLengthValidatorTests extends AbstractValidatorTests<StringByteLengthValidator> {
     @Override

@@ -21,13 +21,12 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.ConfigurationPointException;
 import com.alibaba.citrus.test.TestEnvStatic;
 import com.alibaba.citrus.test.runner.TestNameAware;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 @RunWith(TestNameAware.class)
 public class ConfigurationPointsTests {
@@ -137,7 +136,7 @@ public class ConfigurationPointsTests {
             assertThat(
                     e,
                     exception("Naming Convention Violation", "http://www.alibaba.com/test8/cp1", "end with", "dir/cp1",
-                            "TEST-INF/test8/cps"));
+                              "TEST-INF/test8/cps"));
         }
     }
 

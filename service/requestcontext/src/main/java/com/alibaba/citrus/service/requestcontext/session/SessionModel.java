@@ -53,9 +53,7 @@ public interface SessionModel {
      */
     boolean isExpired();
 
-    /**
-     * 用来创建session model实例的工厂。
-     */
+    /** 用来创建session model实例的工厂。 */
     interface Factory {
         SessionModel newInstance(String sessionID, long creationTime, long lastAccessedTime, int maxInactiveInterval);
     }

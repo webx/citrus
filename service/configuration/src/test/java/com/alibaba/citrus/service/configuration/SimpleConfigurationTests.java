@@ -23,17 +23,16 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
+import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 
-import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
-
 public class SimpleConfigurationTests {
     private static ApplicationContext factory;
-    private Configuration conf;
+    private        Configuration      conf;
 
     @BeforeClass
     public static void initFactory() throws Exception {

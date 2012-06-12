@@ -36,19 +36,15 @@ import com.alibaba.citrus.service.form.impl.ValidatorContextImpl;
  * @author Michael Zhou
  */
 public abstract class AbstractCompositeValidator extends AbstractValidator {
-    private final List<Validator> validators = createLinkedList();
+    private final List<Validator> validators    = createLinkedList();
     private final List<Validator> validatorList = unmodifiableList(validators);
 
-    /**
-     * 取得子validators。
-     */
+    /** 取得子validators。 */
     public List<Validator> getValidators() {
         return validatorList;
     }
 
-    /**
-     * 设置子validators。
-     */
+    /** 设置子validators。 */
     public void setValidators(List<Validator> validators) {
         this.validators.clear();
 
@@ -74,30 +70,24 @@ public abstract class AbstractCompositeValidator extends AbstractValidator {
         }
     }
 
-    /**
-     * 深度复制validators。
-     */
+    /** 深度复制validators。 */
     @Override
     public Validator clone() {
         AbstractCompositeValidator copy = (AbstractCompositeValidator) super.clone();
 
-        for (ListIterator<Validator> i = copy.validators.listIterator(); i.hasNext();) {
+        for (ListIterator<Validator> i = copy.validators.listIterator(); i.hasNext(); ) {
             i.set(i.next().clone());
         }
 
         return copy;
     }
 
-    /**
-     * 创建一个和指定validator相关的context。
-     */
+    /** 创建一个和指定validator相关的context。 */
     protected final Context newContext(Context context, Validator validator) {
         return newContext(context, validator, context.getValue());
     }
 
-    /**
-     * 创建一个和指定validator相关的context，使用指定的value。
-     */
+    /** 创建一个和指定validator相关的context，使用指定的value。 */
     protected final Context newContext(Context context, Validator validator, Object value) {
         MessageContext expressionContext = MessageContextFactory.newInstance(context.getField(), validator);
         expressionContext.copyLocalContext(context.getMessageContext());

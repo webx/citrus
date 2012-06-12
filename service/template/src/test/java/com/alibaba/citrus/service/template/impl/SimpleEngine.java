@@ -36,7 +36,7 @@ import com.alibaba.citrus.util.FileUtil;
 import com.alibaba.citrus.util.io.ByteArrayInputStream;
 
 public class SimpleEngine implements TemplateEngine {
-    private String basedir;
+    private String   basedir;
     private String[] exts;
 
     public void setBasedir(String basedir) {
@@ -60,12 +60,12 @@ public class SimpleEngine implements TemplateEngine {
     }
 
     public void writeTo(String templateName, TemplateContext context, OutputStream ostream) throws TemplateException,
-            IOException {
+                                                                                                   IOException {
         io(getInputStream(templateName), ostream, true, true);
     }
 
     public void writeTo(String templateName, TemplateContext context, Writer writer) throws TemplateException,
-            IOException {
+                                                                                            IOException {
         io(new InputStreamReader(getInputStream(templateName)), writer, true, true);
     }
 
@@ -73,9 +73,7 @@ public class SimpleEngine implements TemplateEngine {
         return new File(srcdir, "templates/" + trimToEmpty(basedir) + "/" + templateName);
     }
 
-    /**
-     * 返回相对路径的字节流。
-     */
+    /** 返回相对路径的字节流。 */
     private InputStream getInputStream(String templateName) throws IOException {
         File templateFile = getTemplateFile(templateName).getCanonicalFile();
 

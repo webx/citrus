@@ -24,11 +24,6 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
 
-import org.springframework.beans.factory.config.RuntimeBeanReference;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.pipeline.Valve;
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import com.alibaba.citrus.service.pipeline.impl.condition.JexlCondition;
@@ -36,6 +31,10 @@ import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
+import org.springframework.beans.factory.config.RuntimeBeanReference;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * Valve解析器的基类。
@@ -52,9 +51,7 @@ public abstract class AbstractValveDefinitionParser<V extends Valve> extends Abs
         conditionsConfigurationPoint = getSiblingConfigurationPoint("services/pipeline/conditions", contrib);
     }
 
-    /**
-     * 取得pipeline bean。
-     */
+    /** 取得pipeline bean。 */
     protected final Object parsePipeline(Element element, ParserContext parserContext) {
         return parsePipeline(element, null, parserContext);
     }
@@ -88,7 +85,7 @@ public abstract class AbstractValveDefinitionParser<V extends Valve> extends Abs
 
         for (Element subElement : subElements(element)) {
             Object valve = parseConfigurationPointBean(subElement, valvesConfigurationPoint, parserContext,
-                    pipelineBuilder);
+                                                       pipelineBuilder);
 
             if (valve != null) {
                 valves.add(valve);
@@ -100,9 +97,7 @@ public abstract class AbstractValveDefinitionParser<V extends Valve> extends Abs
         return pipelineBuilder.getBeanDefinition();
     }
 
-    /**
-     * 取得condition bean。
-     */
+    /** 取得condition bean。 */
     protected final Object parseCondition(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         // 先试从test attribute中创建jexl condition
         String jexl = trimToNull(element.getAttribute("test"));
@@ -116,7 +111,7 @@ public abstract class AbstractValveDefinitionParser<V extends Valve> extends Abs
         // 再试从condition element中取得condition
         for (Element subElement : subElements(element)) {
             Object condition = parseConfigurationPointBean(subElement, conditionsConfigurationPoint, parserContext,
-                    builder);
+                                                           builder);
 
             if (condition != null) {
                 return condition;

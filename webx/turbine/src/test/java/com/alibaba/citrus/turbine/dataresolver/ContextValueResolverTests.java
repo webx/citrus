@@ -20,17 +20,16 @@ package com.alibaba.citrus.turbine.dataresolver;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.moduleloader.Module;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunDataInternal;
 import com.alibaba.citrus.turbine.support.MappedContext;
 import com.alibaba.citrus.turbine.util.TurbineUtil;
+import org.junit.Test;
 
 public class ContextValueResolverTests extends AbstractDataResolverTests {
     private TurbineRunDataInternal rundata;
-    private Module module;
+    private Module                 module;
 
     @Test
     public void getInt() throws Exception {

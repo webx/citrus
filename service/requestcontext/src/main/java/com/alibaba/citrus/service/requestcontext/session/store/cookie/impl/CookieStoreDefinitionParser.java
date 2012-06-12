@@ -22,19 +22,17 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 
 import java.util.List;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 import com.alibaba.citrus.springext.util.SpringExtUtil;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 public class CookieStoreDefinitionParser extends AbstractSingleBeanDefinitionParser<CookieStoreImpl> implements
-        ContributionAware {
+                                                                                                     ContributionAware {
     private ConfigurationPoint encodersConfigurationPoint;
 
     public void setContribution(Contribution contrib) {

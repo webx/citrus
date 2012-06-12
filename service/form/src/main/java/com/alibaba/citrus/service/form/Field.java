@@ -29,19 +29,13 @@ import com.alibaba.citrus.service.requestcontext.util.ValueList;
  * @author Michael Zhou
  */
 public interface Field extends ValueList, CustomErrors {
-    /**
-     * 取得field的配置信息。
-     */
+    /** 取得field的配置信息。 */
     FieldConfig getFieldConfig();
 
-    /**
-     * 取得包含此field的group。
-     */
+    /** 取得包含此field的group。 */
     Group getGroup();
 
-    /**
-     * 判定field是否通过验证。
-     */
+    /** 判定field是否通过验证。 */
     boolean isValid();
 
     /**
@@ -72,54 +66,34 @@ public interface Field extends ValueList, CustomErrors {
      */
     String getAttachmentKey();
 
-    /**
-     * 取得出错信息。
-     */
+    /** 取得出错信息。 */
     String getMessage();
 
-    /**
-     * 取得field name，相当于<code>getFieldConfig().getName()</code>。
-     */
+    /** 取得field name，相当于<code>getFieldConfig().getName()</code>。 */
     String getName();
 
-    /**
-     * 取得参数值，如果指定名称的参数不存在，则返回<code>""</code>。
-     */
+    /** 取得参数值，如果指定名称的参数不存在，则返回<code>""</code>。 */
     String getStringValue();
 
-    /**
-     * 取得用来显示field的名称，相当于<code>getFieldConfig().getDisplayName()</code>。
-     */
+    /** 取得用来显示field的名称，相当于<code>getFieldConfig().getDisplayName()</code>。 */
     String getDisplayName();
 
-    /**
-     * 取得默认值，相当于<code>getFieldConfig().getDefaultValue()</code>。
-     */
+    /** 取得默认值，相当于<code>getFieldConfig().getDefaultValue()</code>。 */
     String getDefaultValue();
 
-    /**
-     * 取得默认值，相当于<code>getFieldConfig().getDefaultValues()</code>。
-     */
+    /** 取得默认值，相当于<code>getFieldConfig().getDefaultValues()</code>。 */
     String[] getDefaultValues();
 
-    /**
-     * 添加参数名/参数值。
-     */
+    /** 添加参数名/参数值。 */
     void addValue(Object value);
 
-    /**
-     * 设置附件。
-     */
+    /** 设置附件。 */
     Object getAttachment();
 
-    /**
-     * 设置编码后的附件。
-     */
+    /** 设置编码后的附件。 */
     String getAttachmentEncoded();
 
-    /**
-     * 是否包含附件？
-     */
+    /** 是否包含附件？ */
     boolean hasAttachment();
 
     /**
@@ -130,8 +104,6 @@ public interface Field extends ValueList, CustomErrors {
      */
     void setAttachment(Object attachment);
 
-    /**
-     * 清除附件。
-     */
+    /** 清除附件。 */
     void clearAttachment();
 }

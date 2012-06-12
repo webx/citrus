@@ -27,10 +27,9 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.alibaba.citrus.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.alibaba.citrus.util.StringUtil;
 
 /**
  * HTML filtering utility for protecting against XSS (Cross Site Scripting).
@@ -55,7 +54,7 @@ import com.alibaba.citrus.util.StringUtil;
  * A note on naming conventions: instance variables are prefixed with a "v";
  * global constants are in all caps.
  * </p>
- *
+ * <p/>
  * <pre>
  * Sample use:
  * String input = ...
@@ -93,9 +92,7 @@ public class HTMLInputFilter {
      */
     protected static final boolean ALWAYS_MAKE_TAGS = true;
 
-    /**
-     * flag determing whether comments are allowed in input String.
-     */
+    /** flag determing whether comments are allowed in input String. */
     protected static final boolean STRIP_COMMENTS = false;
 
     /** regex flag union representing /si modifiers in php * */
@@ -319,7 +316,6 @@ final class FilterRunner {
             s = regexReplace("^>", "", s);
             s = regexReplace("<([^>]*?)(?=<|$)", "<$1>", s);
             s = regexReplace("(^|>)([^<]*?)(?=>)", "$1<$2", s);
-
         } else {
             //
             // escape stray brackets
@@ -356,7 +352,7 @@ final class FilterRunner {
         if (isHtml) {
             // these get tallied in processTag
             // (remember to reset before subsequent calls to filter method)
-            for (Iterator i = vTagCounts.keySet().iterator(); i.hasNext();) {
+            for (Iterator i = vTagCounts.keySet().iterator(); i.hasNext(); ) {
                 String key = (String) i.next();
                 for (int ii = 0; ii < ((Integer) vTagCounts.get(key)).intValue(); ii++) {
                     s += "</" + key + ">";
@@ -367,12 +363,12 @@ final class FilterRunner {
         return s;
     }
 
-    private final static Pattern processTagPatternEnding = Pattern.compile("^/([a-z0-9]+)",
-            HTMLInputFilter.REGEX_FLAGS_SI);
+    private final static Pattern processTagPatternEnding   = Pattern.compile("^/([a-z0-9]+)",
+                                                                             HTMLInputFilter.REGEX_FLAGS_SI);
     private final static Pattern processTagPatternStarting = Pattern.compile("^([a-z0-9]+)(.*?)(/?)$",
-            HTMLInputFilter.REGEX_FLAGS_SI);
-    private final static Pattern processTagPatternComment = Pattern.compile("^!--(.*)--$",
-            HTMLInputFilter.REGEX_FLAGS_SI);
+                                                                             HTMLInputFilter.REGEX_FLAGS_SI);
+    private final static Pattern processTagPatternComment  = Pattern.compile("^!--(.*)--$",
+                                                                             HTMLInputFilter.REGEX_FLAGS_SI);
 
     protected String processTag(String s, boolean isHtml) {
         // ending tags
@@ -550,7 +546,7 @@ final class FilterRunner {
     }
 
     protected String processRemoveBlanks(String s) {
-        for (Iterator i = filter.vRemoveBlanks.iterator(); i.hasNext();) {
+        for (Iterator i = filter.vRemoveBlanks.iterator(); i.hasNext(); ) {
             String tag = (String) i.next();
 
             s = regexReplace("<" + tag + "(\\s[^>]*)?></" + tag + ">", "", s);
@@ -614,9 +610,7 @@ final class FilterRunner {
         return matcher.appendReplacement(buf, quoteReplacement(replacement));
     }
 
-    /**
-     * 从JDK5中<code>Matcher.quoteReplacement()</code>复制过来，确保JDK1.4的兼容性。
-     */
+    /** 从JDK5中<code>Matcher.quoteReplacement()</code>复制过来，确保JDK1.4的兼容性。 */
     private String quoteReplacement(String s) {
         if (s.indexOf('\\') == -1 && s.indexOf('$') == -1) {
             return s;

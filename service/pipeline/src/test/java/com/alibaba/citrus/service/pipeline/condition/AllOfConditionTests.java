@@ -19,9 +19,8 @@ package com.alibaba.citrus.service.pipeline.condition;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pipeline.impl.condition.AllOf;
+import org.junit.Test;
 
 public class AllOfConditionTests extends AbstractCompositeConditionTests<AllOf> {
     @Test

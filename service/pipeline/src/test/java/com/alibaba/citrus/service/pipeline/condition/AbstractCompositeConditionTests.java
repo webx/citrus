@@ -19,13 +19,12 @@ package com.alibaba.citrus.service.pipeline.condition;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pipeline.Condition;
 import com.alibaba.citrus.service.pipeline.support.AbstractCompositeCondition;
+import org.junit.Test;
 
 public abstract class AbstractCompositeConditionTests<C extends AbstractCompositeCondition> extends
-        AbstractConditionTests<C> {
+                                                                                            AbstractConditionTests<C> {
     @Test
     public void setConditions_() {
         // init value
@@ -36,7 +35,7 @@ public abstract class AbstractCompositeConditionTests<C extends AbstractComposit
         assertArrayEquals(new Condition[0], condition.getConditions());
 
         // set empty
-        condition.setConditions(new Condition[] {});
+        condition.setConditions(new Condition[] { });
         assertArrayEquals(new Condition[0], condition.getConditions());
     }
 

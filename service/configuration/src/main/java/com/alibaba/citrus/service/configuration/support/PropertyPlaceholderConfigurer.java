@@ -41,7 +41,7 @@ import org.springframework.util.StringUtils;
  * <p>
  * 此外，该类自身的location也可以包含placeholder且支持默认值，例如：
  * </p>
- *
+ * <p/>
  * <pre>
  * &lt;services:property-placeholder location="${props:default.properties}" /&gt;
  * </pre>
@@ -52,12 +52,13 @@ import org.springframework.util.StringUtils;
  * @author Michael Zhou
  */
 public class PropertyPlaceholderConfigurer extends
-        org.springframework.beans.factory.config.PropertyPlaceholderConfigurer implements ResourceLoaderAware,
-        InitializingBean {
+                                           org.springframework.beans.factory.config.PropertyPlaceholderConfigurer
+        implements ResourceLoaderAware,
+                   InitializingBean {
     private static final String PLACEHOLDER_PREFIX = "${";
     private static final String PLACEHOLDER_SUFFIX = "}";
     private ResourceLoader loader;
-    private String locationNames;
+    private String         locationNames;
 
     public PropertyPlaceholderConfigurer() {
         setIgnoreUnresolvablePlaceholders(true); // 默认值
@@ -97,7 +98,7 @@ public class PropertyPlaceholderConfigurer extends
     private String resolveSystemPropertyPlaceholders(String text) {
         StringBuilder buf = new StringBuilder(text);
 
-        for (int startIndex = buf.indexOf(PLACEHOLDER_PREFIX); startIndex >= 0;) {
+        for (int startIndex = buf.indexOf(PLACEHOLDER_PREFIX); startIndex >= 0; ) {
             int endIndex = buf.indexOf(PLACEHOLDER_SUFFIX, startIndex + PLACEHOLDER_PREFIX.length());
 
             if (endIndex != -1) {
@@ -112,11 +113,11 @@ public class PropertyPlaceholderConfigurer extends
                         nextIndex = startIndex + value.length();
                     } else {
                         System.err.println("Could not resolve placeholder '" + placeholder + "' in [" + text
-                                + "] as system property: neither system property nor environment variable found");
+                                           + "] as system property: neither system property nor environment variable found");
                     }
                 } catch (Throwable ex) {
                     System.err.println("Could not resolve placeholder '" + placeholder + "' in [" + text
-                            + "] as system property: " + ex);
+                                       + "] as system property: " + ex);
                 }
 
                 startIndex = buf.indexOf(PLACEHOLDER_PREFIX, nextIndex);

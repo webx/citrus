@@ -35,7 +35,7 @@ import org.junit.runners.Parameterized.Parameters;
 public class RegexpStressTests {
     private String[] exps;
     private String[] data;
-    private int matchedCount;
+    private int      matchedCount;
 
     public RegexpStressTests(String[] exps, String[] data, int matchedCount) {
         this.exps = exps;
@@ -48,17 +48,17 @@ public class RegexpStressTests {
         List<Object[]> list = createLinkedList();
 
         String[] data = new String[] { "control.setTemplate(aaa)", "screen_placeholder",
-                "stringEscapeUtil.escape($abc)", "csrfToken.getHiddenField()",
-                "sdfasdfasldkfjqwpoieruqpweiorjalkfjasd;klfjasdpoifuqwpioerjkjdsfsladfjpqoieadsfkasdfdaksfj;asdkfa;sdwr" };
+                                       "stringEscapeUtil.escape($abc)", "csrfToken.getHiddenField()",
+                                       "sdfasdfasldkfjqwpoieruqpweiorjalkfjasd;klfjasdpoifuqwpioerjkjdsfsladfjpqoieadsfkasdfdaksfj;asdkfa;sdwr" };
 
         add(list, new String[] { "^control\\.", "^screen_placeholder", "^stringEscapeUtil\\.escape",
-                "^csrfToken\\.(get)?hiddenField", "dsfsladf\\w+qo.*ds" }, data, 5);
+                                 "^csrfToken\\.(get)?hiddenField", "dsfsladf\\w+qo.*ds" }, data, 5);
 
         add(list, new String[] { "(^control\\.)" + //
-                "|(^screen_placeholder)" + //
-                "|(^stringEscapeUtil\\.escape)" + //
-                "|(^csrfToken\\.(get)?hiddenField)" + //
-                "|(dsfsladf\\w+qo.*ds)" }, data, 5);
+                                 "|(^screen_placeholder)" + //
+                                 "|(^stringEscapeUtil\\.escape)" + //
+                                 "|(^csrfToken\\.(get)?hiddenField)" + //
+                                 "|(dsfsladf\\w+qo.*ds)" }, data, 5);
 
         return list;
     }
@@ -121,7 +121,7 @@ public class RegexpStressTests {
 
             for (int i = 0; i < patterns.length; i++) {
                 patterns[i] = new Perl5Compiler().compile(exps[i], Perl5Compiler.CASE_INSENSITIVE_MASK
-                        | Perl5Compiler.READ_ONLY_MASK);
+                                                                   | Perl5Compiler.READ_ONLY_MASK);
             }
         }
 

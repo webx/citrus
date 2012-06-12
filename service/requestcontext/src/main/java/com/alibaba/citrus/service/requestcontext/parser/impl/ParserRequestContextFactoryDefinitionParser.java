@@ -24,24 +24,24 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.upload.UploadService;
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import com.alibaba.citrus.springext.util.SpringExtUtil;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 public class ParserRequestContextFactoryDefinitionParser extends
-        AbstractSingleBeanDefinitionParser<ParserRequestContextFactoryImpl> implements ContributionAware {
+                                                         AbstractSingleBeanDefinitionParser<ParserRequestContextFactoryImpl>
+        implements ContributionAware {
     private ConfigurationPoint parserFiltersConfigurationPoint;
 
     public void setContribution(Contribution contrib) {
         parserFiltersConfigurationPoint = getSiblingConfigurationPoint("services/request-contexts/parser/filters",
-                contrib);
+                                                                       contrib);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class ParserRequestContextFactoryDefinitionParser extends
 
         // other settings
         attributesToProperties(element, builder, "converterQuiet", "caseFolding", "autoUpload", "unescapeParameters",
-                "useServletEngineParser", "useBodyEncodingForURI", "URIEncoding", "trimming", "htmlFieldSuffix");
+                               "useServletEngineParser", "useBodyEncodingForURI", "URIEncoding", "trimming", "htmlFieldSuffix");
 
         // upload service
         String uploadServiceName = trimToNull(element.getAttribute("uploadServiceRef"));

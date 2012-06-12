@@ -24,6 +24,8 @@ import static org.junit.Assert.*;
 import java.beans.PropertyEditor;
 import java.io.File;
 
+import com.alibaba.citrus.service.configuration.support.PropertyEditorRegistrarsSupport;
+import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.PropertyEditorRegistrar;
@@ -34,12 +36,9 @@ import org.springframework.beans.propertyeditors.CustomNumberEditor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 
-import com.alibaba.citrus.service.configuration.support.PropertyEditorRegistrarsSupport;
-import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
-
 public class PropertyEditorRegistrarsTests {
-    private static ApplicationContext factory;
-    private PropertyEditorRegistrarsSupport registrars;
+    private static ApplicationContext              factory;
+    private        PropertyEditorRegistrarsSupport registrars;
 
     @BeforeClass
     public static void initFactory() throws Exception {

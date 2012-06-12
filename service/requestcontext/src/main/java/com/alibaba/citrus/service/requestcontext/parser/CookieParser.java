@@ -27,11 +27,9 @@ package com.alibaba.citrus.service.requestcontext.parser;
  */
 public interface CookieParser extends ValueParser {
     int AGE_SESSION = -1;
-    int AGE_DELETE = 0;
+    int AGE_DELETE  = 0;
 
-    /**
-     * 设置session cookie。
-     */
+    /** 设置session cookie。 */
     void setCookie(String name, String value);
 
     /**
@@ -40,8 +38,6 @@ public interface CookieParser extends ValueParser {
      */
     void setCookie(String name, String value, int seconds_age);
 
-    /**
-     * Remove a previously set cookie from the client machine.
-     */
+    /** Remove a previously set cookie from the client machine. */
     void removeCookie(String name);
 }

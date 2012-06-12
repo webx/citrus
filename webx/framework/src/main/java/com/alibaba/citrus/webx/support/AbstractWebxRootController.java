@@ -34,19 +34,11 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Pattern;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 import com.alibaba.citrus.service.pipeline.Pipeline;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
@@ -76,6 +68,12 @@ import com.alibaba.citrus.webx.util.ErrorHandlerHelper;
 import com.alibaba.citrus.webx.util.ErrorHandlerHelper.ExceptionCodeMapping;
 import com.alibaba.citrus.webx.util.RequestURIFilter;
 import com.alibaba.citrus.webx.util.WebxUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 public abstract class AbstractWebxRootController implements WebxRootController, PassThruSupportable {
     protected final Logger log = LoggerFactory.getLogger(getClass());
@@ -89,10 +87,10 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
     /** Error页面的前缀。 */
     private static final String ERROR_PREFIX = "error";
 
-    private WebxComponents components;
+    private WebxComponents                components;
     private InternalRequestHandlerMapping internalHandlerMapping;
     private RequestContextChainingService requestContexts;
-    private RequestURIFilter passthruFilter;
+    private RequestURIFilter              passthruFilter;
 
     public WebxComponents getComponents() {
         return components;
@@ -110,16 +108,12 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
         this.passthruFilter = passthru;
     }
 
-    /**
-     * 此方法在创建controller时被调用。
-     */
+    /** 此方法在创建controller时被调用。 */
     public void init(WebxComponents components) {
         this.components = components;
     }
 
-    /**
-     * 此方法在创建或刷新WebApplicationContext时被调用。
-     */
+    /** 此方法在创建或刷新WebApplicationContext时被调用。 */
     public void onRefreshContext() throws BeansException {
         initWebxConfiguration();
         initInternalRequestHandler();
@@ -130,7 +124,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
         WebxConfiguration webxConfiguration = getWebxConfiguration();
 
         log.debug("Initializing Webx root context in {} mode, according to <webx-configuration>",
-                webxConfiguration.isProductionMode() ? "production" : "development");
+                  webxConfiguration.isProductionMode() ? "production" : "development");
     }
 
     private void initInternalRequestHandler() {
@@ -215,7 +209,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
                 // 2. ee和e无关，这个表明是errorHandler自身出现错误。对于这种情况，需要记录日志。
                 if (!getCauses(ee).contains(e)) {
                     log.error("Another exception occurred while handling exception " + e.getClass().getSimpleName()
-                            + ": " + e.getMessage(), ee);
+                              + ": " + e.getMessage(), ee);
                 }
 
                 clearBuffer(requestContext, response);
@@ -243,9 +237,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
         }
     }
 
-    /**
-     * 放弃控制，将控制权返回给servlet engine。
-     */
+    /** 放弃控制，将控制权返回给servlet engine。 */
     private void giveUpControl(RequestContext requestContext, FilterChain chain) throws IOException, ServletException {
         // 1. 关闭buffering
         BufferedRequestContext brc = findRequestContext(requestContext, BufferedRequestContext.class);
@@ -269,9 +261,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
         chain.doFilter(requestContext.getRequest(), requestContext.getResponse());
     }
 
-    /**
-     * 检查request，如果返回<code>true</code>，则进一步处理请求，否则立即结束请求。
-     */
+    /** 检查request，如果返回<code>true</code>，则进一步处理请求，否则立即结束请求。 */
     protected boolean checkRequest(RequestContext requestContext) {
         LazyCommitRequestContext lcrc = findRequestContext(requestContext, LazyCommitRequestContext.class);
 
@@ -282,14 +272,10 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
         }
     }
 
-    /**
-     * 处理请求。
-     */
+    /** 处理请求。 */
     protected abstract boolean handleRequest(RequestContext requestContext) throws Exception;
 
-    /**
-     * 清除buffer。
-     */
+    /** 清除buffer。 */
     private void clearBuffer(RequestContext requestContext, HttpServletResponse response) {
         // 有可能是在创建requestContext时出错，此时requestContext为空。
         if (requestContext != null) {
@@ -301,9 +287,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
         }
     }
 
-    /**
-     * 取得request context对象。
-     */
+    /** 取得request context对象。 */
     private RequestContext getRequestContext(HttpServletRequest request, HttpServletResponse response) {
         RequestContext requestContext = RequestContextUtil.getRequestContext(request);
 
@@ -316,9 +300,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
         return requestContext;
     }
 
-    /**
-     * 提交request context。
-     */
+    /** 提交request context。 */
     private void commitRequestContext(RequestContext requestContext) {
         if (this == requestContext.getRequest().getAttribute(REQUEST_CONTEXT_OWNER_KEY)) {
             requestContext.getRequest().removeAttribute(REQUEST_CONTEXT_OWNER_KEY);
@@ -326,9 +308,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
         }
     }
 
-    /**
-     * 代表webx内部请求的相关信息。
-     */
+    /** 代表webx内部请求的相关信息。 */
     private class InternalRequestHandlerContext extends RequestHandlerContext {
         private final RequestHandler handler;
 
@@ -336,7 +316,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
                                              String internalBaseURL, String baseURL, String resourceName,
                                              RequestHandler handler) {
             super(request, response, AbstractWebxRootController.this.getServletContext(), internalBaseURL, baseURL,
-                    resourceName);
+                  resourceName);
             this.handler = handler;
         }
 
@@ -351,15 +331,13 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
         }
     }
 
-    /**
-     * 用来处理webx内部请求的mapping。
-     */
+    /** 用来处理webx内部请求的mapping。 */
     private class InternalRequestHandlerMapping implements RequestHandlerMapping, ErrorHandlerMapping {
         private final Pattern homepagePattern = Pattern.compile("(^|\\?|&)home(=|&|$)");
-        private final boolean productionMode;
-        private String internalPathPrefix;
-        private RequestHandler mainHandler;
-        private RequestHandler errorHandler;
+        private final boolean        productionMode;
+        private       String         internalPathPrefix;
+        private       RequestHandler mainHandler;
+        private       RequestHandler errorHandler;
         private Map<String, RequestHandler> internalHandlers = emptyMap();
 
         public InternalRequestHandlerMapping() {
@@ -377,7 +355,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
 
             if (isEmpty(internalPathPrefix)) {
                 throw new IllegalArgumentException("Invalid internalPathPrefix: "
-                        + getWebxConfiguration().getInternalPathPrefix());
+                                                   + getWebxConfiguration().getInternalPathPrefix());
             }
 
             // 创建并初始化errorHandler
@@ -431,7 +409,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
 
                 if (isEmpty(qs) || !homepagePattern.matcher(qs).find()) {
                     return new InternalRequestHandlerContext(request, response, internalBaseURL, internalBaseURL, path,
-                            mainHandler);
+                                                             mainHandler);
                 }
             }
 
@@ -443,7 +421,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
                 if (errorHandler != null && !productionMode && startsWithElement(path, ERROR_PREFIX)) {
                     path = removeStartElement(path, ERROR_PREFIX);
                     return new InternalRequestHandlerContext(request, response, internalBaseURL, internalBaseURL + "/"
-                            + ERROR_PREFIX, path, errorHandler);
+                                                                                                 + ERROR_PREFIX, path, errorHandler);
                 }
 
                 // internalHandlers中注册的前缀
@@ -455,14 +433,14 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
                         path = removeStartElement(path, prefix);
 
                         return new InternalRequestHandlerContext(request, response, internalBaseURL, internalBaseURL
-                                + "/" + prefix, path, handler);
+                                                                                                     + "/" + prefix, path, handler);
                     }
                 }
 
                 // 默认由main page来处理
                 if (mainHandler != null) {
                     return new InternalRequestHandlerContext(request, response, internalBaseURL, internalBaseURL, path,
-                            mainHandler);
+                                                             mainHandler);
                 }
 
                 // 如果未匹配
@@ -483,12 +461,10 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
             String internalBaseURL = getBaseURL(request) + internalPathPrefix;
 
             return new InternalRequestHandlerContext(request, response, internalBaseURL, internalBaseURL + "/"
-                    + ERROR_PREFIX, "", errorHandler);
+                                                                                         + ERROR_PREFIX, "", errorHandler);
         }
 
-        /**
-         * 相当于正则表达式：<code>^element/|^element$</code>。
-         */
+        /** 相当于正则表达式：<code>^element/|^element$</code>。 */
         private boolean startsWithElement(String path, String element) {
             if (path.equals(element)) {
                 return true;
@@ -501,9 +477,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
             return false;
         }
 
-        /**
-         * 除去开头的<code>^element/|^element$</code>。
-         */
+        /** 除去开头的<code>^element/|^element$</code>。 */
         private String removeStartElement(String path, String element) {
             if (path.equals(element)) {
                 return EMPTY_STRING;
@@ -560,7 +534,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
                         } catch (ClassCastException e) {
                             // 如果有一个handler出错，也不退出。
                             log.error("Declared internal request handler must implement InternalRequestHandler: "
-                                    + name + "=" + handlerClass, e);
+                                      + name + "=" + handlerClass, e);
                         }
                     } catch (Exception e) {
                         // 如果有一个handler出错，也不退出。
@@ -571,15 +545,13 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
 
             if (log.isDebugEnabled()) {
                 log.debug(new ToStringBuilder().append("loading internal request handlers:").append(handlers)
-                        .toString());
+                                               .toString());
             }
 
             return handlers;
         }
 
-        /**
-         * Exception和statusCode的映射。
-         */
+        /** Exception和statusCode的映射。 */
         private final ExceptionCodeMapping exceptionCodeMapping = new ExceptionCodeMapping() {
             public int getExceptionCode(Throwable exception) {
                 if (exception instanceof ResourceNotFoundException) {

@@ -37,14 +37,14 @@ import com.alibaba.citrus.service.requestcontext.RequestContext;
  * @author Michael Zhou
  */
 public interface SetLocaleRequestContext extends RequestContext {
-    String INPUT_CHARSET_PARAM_DEFAULT = "_input_charset";
+    String INPUT_CHARSET_PARAM_DEFAULT  = "_input_charset";
     String OUTPUT_CHARSET_PARAM_DEFAULT = "_output_charset";
 
     /** 用来保存locale的session key的名称。 */
     String SESSION_KEY_DEFAULT = "_lang";
 
     /** 用来设置locale的parameter key的名称。 */
-    String PARAMETER_KEY_DEFAULT = "_lang";
+    String PARAMETER_KEY_DEFAULT          = "_lang";
     String PARAMETER_SET_TO_DEFAULT_VALUE = "default";
 
     /** 默认的locale。 */
@@ -68,7 +68,7 @@ public interface SetLocaleRequestContext extends RequestContext {
      * type中将不包含charset标记。
      * </p>
      *
-     * @param contentType content type
+     * @param contentType   content type
      * @param appendCharset 输出字符集
      */
     void setResponseContentType(String contentType, boolean appendCharset);
@@ -77,7 +77,7 @@ public interface SetLocaleRequestContext extends RequestContext {
      * 设置response输出字符集。注意，此方法必须在第一次<code>getWriter</code>之前执行。
      *
      * @param charset 输出字符集，如果charset为<code>null</code>
-     *            ，则从contentType中删除charset标记
+     *                ，则从contentType中删除charset标记
      */
     void setResponseCharacterEncoding(String charset);
 }

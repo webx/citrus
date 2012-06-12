@@ -20,10 +20,6 @@ package com.alibaba.citrus.service.form.support;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
-import org.springframework.context.MessageSource;
-import org.springframework.context.MessageSourceAware;
-import org.springframework.context.NoSuchMessageException;
-
 import com.alibaba.citrus.expr.Expression;
 import com.alibaba.citrus.expr.ExpressionContext;
 import com.alibaba.citrus.expr.ExpressionFactory;
@@ -37,6 +33,9 @@ import com.alibaba.citrus.springext.support.BeanSupport;
 import com.alibaba.citrus.util.ObjectUtil;
 import com.alibaba.citrus.util.StringEscapeUtil;
 import com.alibaba.citrus.util.i18n.LocaleUtil;
+import org.springframework.context.MessageSource;
+import org.springframework.context.MessageSourceAware;
+import org.springframework.context.NoSuchMessageException;
 
 /**
  * 抽象的<code>Validator</code>实现。
@@ -45,9 +44,9 @@ import com.alibaba.citrus.util.i18n.LocaleUtil;
  */
 public abstract class AbstractValidator extends BeanSupport implements Validator, MessageSourceAware {
     protected static final ExpressionFactory EXPRESSION_FACTORY = new CompositeExpressionFactory();
-    private String id;
-    private String messageCode;
-    private Message message;
+    private String        id;
+    private String        messageCode;
+    private Message       message;
     private MessageSource messageSource;
 
     public void setMessageSource(MessageSource messageSource) {
@@ -64,9 +63,7 @@ public abstract class AbstractValidator extends BeanSupport implements Validator
         return true;
     }
 
-    /**
-     * 当GroupConfig被初始化完成以后被调用，此时可取得同组中其它的fields。
-     */
+    /** 当GroupConfig被初始化完成以后被调用，此时可取得同组中其它的fields。 */
     public void init(FieldConfig fieldConfig) throws Exception {
         if (requiresMessage()) {
             boolean hasMessage = false;
@@ -78,7 +75,7 @@ public abstract class AbstractValidator extends BeanSupport implements Validator
 
                 // form.groupName.fieldName.validatorId
                 messageCode = formConfig.getMessageCodePrefix() + groupConfig.getName() + "." + fieldConfig.getName()
-                        + "." + id;
+                              + "." + id;
 
                 hasMessage = getMessageFromMessageSource() != null;
             }
@@ -99,23 +96,17 @@ public abstract class AbstractValidator extends BeanSupport implements Validator
         }
     }
 
-    /**
-     * 取得validator的ID，通过该ID可以找到指定的validator。
-     */
+    /** 取得validator的ID，通过该ID可以找到指定的validator。 */
     public String getId() {
         return id == null ? getBeanName() : id;
     }
 
-    /**
-     * 设置validator的ID，通过该ID可以找到指定的validator。
-     */
+    /** 设置validator的ID，通过该ID可以找到指定的validator。 */
     public void setId(String id) {
         this.id = trimToNull(id);
     }
 
-    /**
-     * 取得出错信息。
-     */
+    /** 取得出错信息。 */
     public final String getMessage(Context context) {
         // 首先，假如message已经被设置，则直接返回。
         // 例如all-of-validator就会设置这个message。
@@ -143,16 +134,12 @@ public abstract class AbstractValidator extends BeanSupport implements Validator
         return result;
     }
 
-    /**
-     * 设置出错信息。
-     */
+    /** 设置出错信息。 */
     public void setMessage(String message) {
         this.message = new Message(message);
     }
 
-    /**
-     * 生成副本。
-     */
+    /** 生成副本。 */
     @Override
     public Validator clone() {
         try {
@@ -162,20 +149,16 @@ public abstract class AbstractValidator extends BeanSupport implements Validator
         }
     }
 
-    /**
-     * 代表一个message表达式。
-     */
+    /** 代表一个message表达式。 */
     protected static class Message implements Cloneable {
-        private String message;
+        private String     message;
         private Expression messageExpression;
 
         public Message(String message) {
             this.message = trimToNull(message);
         }
 
-        /**
-         * 编译表达式。
-         */
+        /** 编译表达式。 */
         public void compile() {
             assertNotNull(message, "message");
 
@@ -183,13 +166,11 @@ public abstract class AbstractValidator extends BeanSupport implements Validator
                 messageExpression = EXPRESSION_FACTORY.createExpression(message);
             } catch (ExpressionParseException e) {
                 throw new IllegalArgumentException("Invalid message for validator " + getClass().getSimpleName()
-                        + ": \"" + StringEscapeUtil.escapeJava(message) + "\"");
+                                                   + ": \"" + StringEscapeUtil.escapeJava(message) + "\"");
             }
         }
 
-        /**
-         * 取得出错信息。
-         */
+        /** 取得出错信息。 */
         public String getMessageString(ExpressionContext context) {
             return ObjectUtil.toString(messageExpression.evaluate(context), "");
         }

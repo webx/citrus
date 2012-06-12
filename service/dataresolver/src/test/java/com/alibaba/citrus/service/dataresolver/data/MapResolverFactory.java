@@ -45,7 +45,7 @@ public class MapResolverFactory implements DataResolverFactory {
     }
 
     private class MapResolver implements DataResolver, ContextAwareResolver {
-        private final String key;
+        private final String              key;
         private final DataResolverContext context;
 
         public MapResolver(String key, DataResolverContext context) {

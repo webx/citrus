@@ -19,11 +19,10 @@ package com.alibaba.citrus.webx.pipeline;
 
 import static org.junit.Assert.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.Valve;
 import com.alibaba.citrus.service.requestcontext.rundata.RunData;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class TestExceptionValve implements Valve {
     public final static ThreadLocal<ValveRunner> runnerHolder = new ThreadLocal<ValveRunner>();

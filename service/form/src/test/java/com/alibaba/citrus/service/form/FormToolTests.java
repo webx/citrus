@@ -24,16 +24,15 @@ import static org.junit.Assert.*;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.apache.ecs.xhtml.input;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.form.support.FormTool;
 import com.alibaba.citrus.service.form.support.FormTool.FieldHelper;
 import com.alibaba.citrus.service.form.support.FormTool.GroupHelper;
 import com.alibaba.citrus.service.form.support.FormTool.GroupInstanceHelper;
 import com.alibaba.citrus.service.pull.PullService;
+import org.apache.ecs.xhtml.input;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FormToolTests extends AbstractFormServiceTests {
     private FormTool tool;
@@ -59,10 +58,10 @@ public class FormToolTests extends AbstractFormServiceTests {
 
     private void submitForm() throws Exception {
         invokePost(new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "aa" }, // group1.default.field1
-                { "_fm.g.1.f", "bb" }, // group1.1.field1
-                { "_fm.gr._0.f", "cc" }, // group2.default.field1
-                { "_fm.gr._0.fi", "dd" }, // group2.default.field2
+                                    { "_fm.g._0.f", "aa" }, // group1.default.field1
+                                    { "_fm.g.1.f", "bb" }, // group1.1.field1
+                                    { "_fm.gr._0.f", "cc" }, // group2.default.field1
+                                    { "_fm.gr._0.fi", "dd" }, // group2.default.field2
         });
     }
 
@@ -70,8 +69,8 @@ public class FormToolTests extends AbstractFormServiceTests {
     public void tool_toString() {
         assertEquals("FormTool[no FormService]", new FormTool().toString());
         assertEquals("form1:FormService {\n" //
-                + "  FormConfig[groups: 3]\n" //
-                + "}", tool.toString());
+                     + "  FormConfig[groups: 3]\n" //
+                     + "}", tool.toString());
     }
 
     @Test
@@ -121,9 +120,9 @@ public class FormToolTests extends AbstractFormServiceTests {
         // getGroups
         Iterator<GroupInstanceHelper> i = tool.getGroups();
         Set<String> results = createHashSet( //
-                "Group[name: group1._0, fields: 2, validated: true, valid: false]", //
-                "Group[name: group1.1, fields: 2, validated: true, valid: false]", //
-                "Group[name: group2._0, fields: 2, validated: true, valid: true]");
+                                             "Group[name: group1._0, fields: 2, validated: true, valid: false]", //
+                                             "Group[name: group1.1, fields: 2, validated: true, valid: false]", //
+                                             "Group[name: group2._0, fields: 2, validated: true, valid: true]");
 
         assertNotNull(results.remove(i.next().toString()));
         assertNotNull(results.remove(i.next().toString()));
@@ -133,8 +132,8 @@ public class FormToolTests extends AbstractFormServiceTests {
         // getGroups(name)
         i = tool.getGroups("group1");
         results = createHashSet( //
-                "Group[name: group1._0, fields: 2, validated: true, valid: false]", //
-                "Group[name: group1.1, fields: 2, validated: true, valid: false]");
+                                 "Group[name: group1._0, fields: 2, validated: true, valid: false]", //
+                                 "Group[name: group1.1, fields: 2, validated: true, valid: false]");
 
         assertNotNull(results.remove(i.next().toString()));
         assertNotNull(results.remove(i.next().toString()));
@@ -148,7 +147,7 @@ public class FormToolTests extends AbstractFormServiceTests {
 
         // 验证失败：false
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "aaa" }, // group1.field1
+                                           { "_fm.g._0.f", "aaa" }, // group1.field1
         };
 
         invokePost(args);
@@ -156,8 +155,8 @@ public class FormToolTests extends AbstractFormServiceTests {
 
         // 验证成功：true
         args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "aaa" }, // group1.field1
-                { "_fm.g._0.fi", "bbb" }, // group1.field2
+                                { "_fm.g._0.f", "aaa" }, // group1.field1
+                                { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
 
         invokePost(args);
@@ -169,7 +168,7 @@ public class FormToolTests extends AbstractFormServiceTests {
         // new form
         GroupInstanceHelper group = tool.get("group1").getDefaultInstance();
         assertEquals("Field[group: group1._0, name: field1, values: [default1], valid: true]", group.get("field1")
-                .toString());
+                                                                                                    .toString());
         assertEquals("Field[group: group1._0, name: field2, values: [], valid: true]", group.get("field2").toString());
         assertEquals(null, group.get("notExist"));
 
@@ -194,7 +193,7 @@ public class FormToolTests extends AbstractFormServiceTests {
         GroupInstanceHelper group = tool.get("group1").getDefaultInstance();
         Iterator<FieldHelper> i = group.getFields();
         Set<String> results = createHashSet("Field[group: group1._0, name: field1, values: [default1], valid: true]", //
-                "Field[group: group1._0, name: field2, values: [], valid: true]");
+                                            "Field[group: group1._0, name: field2, values: [], valid: true]");
 
         assertNotNull(results.remove(i.next().toString()));
         assertNotNull(results.remove(i.next().toString()));
@@ -287,7 +286,7 @@ public class FormToolTests extends AbstractFormServiceTests {
         // absent hidden field
         input hiddenTag = field.getAbsentHiddenField("defaultValue");
         assertThat(hiddenTag.toString(),
-                containsAll("<input", "name='_fm.g._0.f.absent'", "type='hidden'", "value='defaultValue'", "/>"));
+                   containsAll("<input", "name='_fm.g._0.f.absent'", "type='hidden'", "value='defaultValue'", "/>"));
     }
 
     @Test
@@ -302,7 +301,7 @@ public class FormToolTests extends AbstractFormServiceTests {
 
         input attachmentTag = field.getAttachmentHiddenField();
         assertThat(attachmentTag.toString(),
-                containsAll("<input", "name='_fm.g._0.f.attach'", "type='hidden'", "value=''", "/>"));
+                   containsAll("<input", "name='_fm.g._0.f.attach'", "type='hidden'", "value=''", "/>"));
 
         // with attachment
         field.setAttachment("attachedObject");
@@ -315,7 +314,7 @@ public class FormToolTests extends AbstractFormServiceTests {
         assertThat(
                 attachmentTag.toString(),
                 containsAll("<input", "name='_fm.g._0.f.attach'", "type='hidden'",
-                        "value='eNpb85aBtYSBL7GkJDE5IzXFPykrNbkEAFOhB7Y%3D'", "/>"));
+                            "value='eNpb85aBtYSBL7GkJDE5IzXFPykrNbkEAFOhB7Y%3D'", "/>"));
 
         // clear attachment
         field.clearAttachment();
@@ -365,7 +364,7 @@ public class FormToolTests extends AbstractFormServiceTests {
 
     public static class MyClass {
         private String property1;
-        private int field2;
+        private int    field2;
 
         public String getProperty1() {
             return property1;

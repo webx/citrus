@@ -32,10 +32,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
-
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.session.ExactMatchesOnlySessionStore;
 import com.alibaba.citrus.service.requestcontext.session.SessionConfig;
@@ -53,21 +49,20 @@ import com.alibaba.citrus.service.requestcontext.session.idgen.uuid.impl.UUIDGen
 import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextFactory;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 
-/**
- * 用来创建和初始化<code>SessionRequestContext</code>的工厂。
- */
+/** 用来创建和初始化<code>SessionRequestContext</code>的工厂。 */
 public class SessionRequestContextFactoryImpl extends AbstractRequestContextFactory<SessionRequestContext> {
-    private final static Logger log = LoggerFactory.getLogger(SessionRequestContext.class);
-    private final ConfigImpl config = new ConfigImpl();
+    private final static Logger     log    = LoggerFactory.getLogger(SessionRequestContext.class);
+    private final        ConfigImpl config = new ConfigImpl();
 
     public SessionConfig getConfig() {
         return config;
     }
 
-    /**
-     * 初始化factory。
-     */
+    /** 初始化factory。 */
     @Override
     protected void init() throws Exception {
         config.init();
@@ -89,9 +84,7 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
         return new SessionRequestContextImpl(wrappedContext, config);
     }
 
-    /**
-     * 本类提供了可扩展的session机制。
-     */
+    /** 本类提供了可扩展的session机制。 */
     public String[] getFeatures() {
         return new String[] { "session" };
     }
@@ -112,15 +105,15 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
     // 实现SessionConfig。
     @SuppressWarnings("unused")
     private static class ConfigImpl implements SessionConfig {
-        private final IdConfigImpl id = new IdConfigImpl();
-        private final StoresConfigImpl stores = new StoresConfigImpl();
+        private final IdConfigImpl            id            = new IdConfigImpl();
+        private final StoresConfigImpl        stores        = new StoresConfigImpl();
         private final StoreMappingsConfigImpl storeMappings = new StoreMappingsConfigImpl();
-        private Integer maxInactiveInterval;
-        private Long forceExpirationPeriod;
-        private String modelKey;
-        private Boolean keepInTouch;
+        private Integer               maxInactiveInterval;
+        private Long                  forceExpirationPeriod;
+        private String                modelKey;
+        private Boolean               keepInTouch;
         private SessionModelEncoder[] sessionModelEncoders;
-        private SessionInterceptor[] sessionInterceptors;
+        private SessionInterceptor[]  sessionInterceptors;
 
         public int getMaxInactiveInterval() {
             return maxInactiveInterval;
@@ -201,7 +194,7 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
 
                     if (exactMatchedAttrNames == null) {
                         throw new IllegalArgumentException("Session store " + storeName
-                                + " only support exact matches to attribute names");
+                                                           + " only support exact matches to attribute names");
                     }
 
                     ((ExactMatchesOnlySessionStore) store).initAttributeNames(exactMatchedAttrNames);
@@ -226,9 +219,9 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
             MapBuilder mb = new MapBuilder();
 
             mb.append("maxInactiveInterval", String.format("%,d seconds (%,3.2f hours)", maxInactiveInterval,
-                    (double) maxInactiveInterval / 3600));
+                                                           (double) maxInactiveInterval / 3600));
             mb.append("forceExpirationPeriod", String.format("%,d seconds (%,3.2f hours)", forceExpirationPeriod,
-                    (double) forceExpirationPeriod / 3600));
+                                                             (double) forceExpirationPeriod / 3600));
             mb.append("modelKey", modelKey);
             mb.append("keepInTouch", keepInTouch);
             mb.append("idConfig", id);
@@ -242,10 +235,10 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
 
     @SuppressWarnings("unused")
     private static class IdConfigImpl implements IdConfig {
-        private final CookieConfigImpl cookie = new CookieConfigImpl();
+        private final CookieConfigImpl    cookie    = new CookieConfigImpl();
         private final UrlEncodeConfigImpl urlEncode = new UrlEncodeConfigImpl();
-        private Boolean cookieEnabled;
-        private Boolean urlEncodeEnabled;
+        private Boolean            cookieEnabled;
+        private Boolean            urlEncodeEnabled;
         private SessionIDGenerator generator;
 
         public boolean isCookieEnabled() {
@@ -316,9 +309,9 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
 
     @SuppressWarnings("unused")
     private static class CookieConfigImpl implements CookieConfig {
-        private String name;
-        private String domain;
-        private String path;
+        private String  name;
+        private String  domain;
+        private String  path;
         private Integer maxAge;
         private Boolean httpOnly;
         private Boolean secure;
@@ -463,8 +456,8 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
 
     @SuppressWarnings("unused")
     private static class StoreMappingsConfigImpl implements StoreMappingsConfig {
-        private AttributePattern[] patterns;
-        private String defaultStore;
+        private AttributePattern[]  patterns;
+        private String              defaultStore;
         private Map<String, String> attributeMatchCache;
 
         public void setPatterns(AttributePattern[] patterns) {
@@ -482,7 +475,7 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
                 if (pattern.isDefaultPattern()) {
                     if (defaultStore != null) {
                         throw new IllegalArgumentException("More than one stores mapped to *: " + defaultStore
-                                + " and " + pattern.getStoreName());
+                                                           + " and " + pattern.getStoreName());
                     }
 
                     defaultStore = pattern.getStoreName();
@@ -577,21 +570,17 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
         }
     }
 
-    /**
-     * 代表一个attribute的匹配。
-     */
+    /** 代表一个attribute的匹配。 */
     private static class AttributeMatch implements Comparable<AttributeMatch> {
         private final AttributePattern pattern;
-        private final int matchLength;
+        private final int              matchLength;
 
         public AttributeMatch(AttributePattern pattern, int matchLength) {
             this.pattern = pattern;
             this.matchLength = matchLength;
         }
 
-        /**
-         * 先比较匹配长度，较长的优先。其次比较匹配的类型，精确匹配比正则表达式匹配优先。
-         */
+        /** 先比较匹配长度，较长的优先。其次比较匹配的类型，精确匹配比正则表达式匹配优先。 */
         public int compareTo(AttributeMatch o) {
             int result = o.matchLength - matchLength;
 
@@ -611,37 +600,29 @@ public class SessionRequestContextFactoryImpl extends AbstractRequestContextFact
         }
     }
 
-    /**
-     * 代表一个pattern的信息。
-     */
+    /** 代表一个pattern的信息。 */
     static class AttributePattern {
-        public final String patternName;
-        public final String storeName;
+        public final String  patternName;
+        public final String  storeName;
         public final Pattern pattern;
 
-        /**
-         * 创建默认匹配，匹配所有attribute names。
-         */
+        /** 创建默认匹配，匹配所有attribute names。 */
         public static AttributePattern getDefaultPattern(String storeName) {
             return new AttributePattern(storeName, null, null);
         }
 
-        /**
-         * 创建精确匹配，匹配名称完全相同的attribute names。
-         */
+        /** 创建精确匹配，匹配名称完全相同的attribute names。 */
         public static AttributePattern getExactPattern(String storeName, String attrName) {
             return new AttributePattern(storeName, attrName, null);
         }
 
-        /**
-         * 创建正则表达式匹配。
-         */
+        /** 创建正则表达式匹配。 */
         public static AttributePattern getRegexPattern(String storeName, String regexName) {
             try {
                 return new AttributePattern(storeName, regexName, Pattern.compile(regexName));
             } catch (Exception e) {
                 throw new IllegalArgumentException(String.format("Invalid regex pattern %s for store %s", regexName,
-                        storeName));
+                                                                 storeName));
             }
         }
 

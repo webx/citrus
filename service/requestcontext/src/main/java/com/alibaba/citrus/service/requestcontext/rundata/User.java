@@ -50,7 +50,7 @@ public interface User {
      * 将指定对象绑定到用户对象中。当用户被保存时（例如保存在HTTP session中），所有的attributes也将被保存。
      * 当用户对象被恢复时，所有的attributes也将被恢复。
      *
-     * @param key 对象的key
+     * @param key    对象的key
      * @param object 和key相对应的对象
      */
     void setAttribute(String key, Object object);

@@ -24,16 +24,15 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.form.Validator;
 import com.alibaba.citrus.service.form.configuration.FieldConfig;
 import com.alibaba.citrus.service.form.impl.validation.AbstractValidatorTests;
 import com.alibaba.citrus.service.form.impl.validation.MyValidator;
 import com.alibaba.citrus.service.form.support.AbstractCompositeValidator;
+import org.junit.Test;
 
 public abstract class AbstractCompositeValidatorTests<V extends AbstractCompositeValidator> extends
-        AbstractValidatorTests<V> {
+                                                                                            AbstractValidatorTests<V> {
     @Test
     public void init_setValidators() {
         V v = newValidatorFor_AbstractCompositeValidatorTests();
@@ -111,9 +110,7 @@ public abstract class AbstractCompositeValidatorTests<V extends AbstractComposit
         return v;
     }
 
-    /**
-     * 预处理实例，以便通过<code>AbstractCompositeValidatorTests</code>中的测试。
-     */
+    /** 预处理实例，以便通过<code>AbstractCompositeValidatorTests</code>中的测试。 */
     protected void initFor_AbstractCompositeValidatorTests(V validator) {
         validator.setMessage("test");
     }

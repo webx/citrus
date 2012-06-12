@@ -22,9 +22,8 @@ import static org.junit.Assert.*;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.generictype.introspect.PropertyInfo;
+import org.junit.Test;
 
 /**
  * 测试<code>ArrayAnalyzer</code>。

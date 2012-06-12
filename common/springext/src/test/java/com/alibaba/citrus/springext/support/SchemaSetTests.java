@@ -32,22 +32,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.citrus.springext.Schema;
+import com.alibaba.citrus.springext.Schemas;
+import com.alibaba.citrus.springext.impl.SchemaImpl;
 import org.dom4j.Element;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.io.InputStreamSource;
 
-import com.alibaba.citrus.springext.Schema;
-import com.alibaba.citrus.springext.Schemas;
-import com.alibaba.citrus.springext.impl.SchemaImpl;
-
 public class SchemaSetTests {
-    private Schema s1;
-    private Schema s2;
-    private Schema s3;
-    private Schema s4;
-    private Schemas schemas1;
-    private Schemas schemas2;
+    private Schema    s1;
+    private Schema    s2;
+    private Schema    s3;
+    private Schema    s4;
+    private Schemas   schemas1;
+    private Schemas   schemas2;
     private SchemaSet set1;
 
     @Before
@@ -154,13 +153,13 @@ public class SchemaSetTests {
         assertEquals(str, set1.toString());
     }
 
-    private Schema all;
-    private Schema x;
-    private Schema y;
-    private Schema z;
-    private Schema a;
-    private Schema b;
-    private Schemas schemas;
+    private Schema    all;
+    private Schema    x;
+    private Schema    y;
+    private Schema    z;
+    private Schema    a;
+    private Schema    b;
+    private Schemas   schemas;
     private SchemaSet set2;
 
     @Before
@@ -200,7 +199,7 @@ public class SchemaSetTests {
         // a   ->
         // b   ->
         assertArrayEquals(new String[] { "test", "testa", "testb", "testx", "testy", "testz" },
-                getElements(set2, "all"));
+                          getElements(set2, "all"));
 
         assertArrayEquals(new String[] { "testa", "testx", "testz" }, getElements(set2, "x"));
         assertArrayEquals(new String[] { "testb", "testy", "testz" }, getElements(set2, "y"));

@@ -18,8 +18,8 @@
 package com.alibaba.citrus.util.templatelite;
 
 import static com.alibaba.citrus.util.ArrayUtil.*;
-import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.Assert.ExceptionType.*;
+import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.ExceptionUtil.*;
 
 import java.io.IOException;
@@ -43,30 +43,22 @@ public abstract class TextWriter<A extends Appendable> implements VisitorInvocat
         setOut(out);
     }
 
-    /**
-     * 访问纯文本。
-     */
+    /** 访问纯文本。 */
     public final void visitText(String text) throws IOException {
         out().append(text);
     }
 
-    /**
-     * 取得用于输出的<code>Appendable</code>实例。
-     */
+    /** 取得用于输出的<code>Appendable</code>实例。 */
     public final A out() {
         return assertNotNull(out, ILLEGAL_STATE, "setOut() not called yet");
     }
 
-    /**
-     * 设置用于输出的<code>Appendable</code>实例。
-     */
+    /** 设置用于输出的<code>Appendable</code>实例。 */
     public final void setOut(A out) {
         this.out = out;
     }
 
-    /**
-     * 默认打印异常信息。
-     */
+    /** 默认打印异常信息。 */
     public void handleInvocationError(String desc, Throwable e) throws Exception {
         log.debug("Error rendering " + desc, e);
 

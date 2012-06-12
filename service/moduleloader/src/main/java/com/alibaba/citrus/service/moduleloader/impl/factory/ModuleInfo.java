@@ -28,8 +28,8 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  */
 class ModuleInfo {
     private final ModuleKey key;
-    private final String beanName;
-    private final String source;
+    private final String    beanName;
+    private final String    source;
 
     public ModuleInfo(ModuleKey key, String beanName, String source) {
         this.key = key;

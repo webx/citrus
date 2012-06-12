@@ -26,6 +26,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.citrus.service.mappingrule.impl.MappingRuleServiceImpl;
+import com.alibaba.citrus.service.mappingrule.impl.rule.DirectModuleMappingRule;
+import com.alibaba.citrus.service.mappingrule.impl.rule.FallbackModuleMappingRule;
+import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,17 +39,12 @@ import org.junit.runners.Parameterized.Parameters;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 
-import com.alibaba.citrus.service.mappingrule.impl.MappingRuleServiceImpl;
-import com.alibaba.citrus.service.mappingrule.impl.rule.DirectModuleMappingRule;
-import com.alibaba.citrus.service.mappingrule.impl.rule.FallbackModuleMappingRule;
-import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
-
 @RunWith(Parameterized.class)
 public class MappingRuleServiceSkipValidationTests {
-    private final boolean skipValidation;
-    private ApplicationContext factory;
-    private MappingRuleServiceImpl mappingRuleService;
-    private Map<String, MappingRule> rules;
+    private final boolean                  skipValidation;
+    private       ApplicationContext       factory;
+    private       MappingRuleServiceImpl   mappingRuleService;
+    private       Map<String, MappingRule> rules;
 
     public MappingRuleServiceSkipValidationTests(boolean skipValidation) {
         this.skipValidation = skipValidation;

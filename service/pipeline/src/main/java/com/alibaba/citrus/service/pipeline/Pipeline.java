@@ -23,9 +23,7 @@ package com.alibaba.citrus.service.pipeline;
  * @author Michael Zhou
  */
 public interface Pipeline {
-    /**
-     * 特殊的label，用来中断整个pipeline的执行。
-     */
+    /** 特殊的label，用来中断整个pipeline的执行。 */
     String TOP_LABEL = "#TOP";
 
     /**
@@ -36,13 +34,9 @@ public interface Pipeline {
      */
     String getLabel();
 
-    /**
-     * 创建一次新的执行。
-     */
+    /** 创建一次新的执行。 */
     PipelineInvocationHandle newInvocation();
 
-    /**
-     * 创建一次新的执行，并将此次执行看作另一个执行的子过程。
-     */
+    /** 创建一次新的执行，并将此次执行看作另一个执行的子过程。 */
     PipelineInvocationHandle newInvocation(PipelineContext parentContext);
 }

@@ -50,9 +50,9 @@ public class KeyValuesComponent extends PageComponent {
     @SuppressWarnings("unused")
     private class KeyValuesVisitor extends AbstractVisitor {
         private final Map<String, ?> keyValues;
-        private String key;
-        private Object values;
-        private Object value;
+        private       String         key;
+        private       Object         values;
+        private       Object         value;
 
         public KeyValuesVisitor(RequestHandlerContext context, Map<String, ?> keyValues) {
             super(context, KeyValuesComponent.this);
@@ -126,7 +126,7 @@ public class KeyValuesComponent extends PageComponent {
         }
 
         public void visitValueItem(Template valueItemTemplate, Template entryItemTemplate) {
-            for (Iterator<?> i = ((Collection<?>) values).iterator(); i.hasNext();) {
+            for (Iterator<?> i = ((Collection<?>) values).iterator(); i.hasNext(); ) {
                 value = i.next();
 
                 if (value instanceof Map.Entry<?, ?>) {

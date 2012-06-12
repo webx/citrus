@@ -25,7 +25,7 @@ import org.springframework.web.servlet.FrameworkServlet;
  * @author Michael Zhou
  */
 public final class WebxConstant {
-    public final static String WEBX_CONFIGURATION_LOCATION = "/WEB-INF/webx.xml";
+    public final static String WEBX_CONFIGURATION_LOCATION                   = "/WEB-INF/webx.xml";
     public final static String WEBX_COMPONENT_CONFIGURATION_LOCATION_PATTERN = "/WEB-INF/webx-*.xml";
 
     /**

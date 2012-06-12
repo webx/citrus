@@ -32,7 +32,6 @@ import java.net.URI;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -42,13 +41,6 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 import javax.servlet.http.HttpSession;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.web.context.request.RequestContextHolder;
 
 import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import com.alibaba.citrus.test.runner.TestNameAware;
@@ -63,6 +55,12 @@ import com.meterware.servletunit.InvocationContext;
 import com.meterware.servletunit.PatchedServletRunner;
 import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.web.context.request.RequestContextHolder;
 
 /**
  * 用来测试RequestContextChainingService及相关类的基类。
@@ -73,37 +71,33 @@ import com.meterware.servletunit.ServletUnitClient;
 public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
     @SuppressWarnings("unchecked")
     protected final Class<RC> requestContextInterface = (Class<RC>) resolveParameter(getClass(),
-            AbstractRequestContextsTests.class, 0).getRawType();
+                                                                                     AbstractRequestContextsTests.class, 0).getRawType();
 
     // container
     protected static BeanFactory factory;
 
     // web client
     protected ServletUnitClient client;
-    protected WebResponse clientResponse;
+    protected WebResponse       clientResponse;
 
     // servlet request/response
-    protected InvocationContext invocationContext;
-    protected HttpServletRequest request;
+    protected InvocationContext   invocationContext;
+    protected HttpServletRequest  request;
     protected HttpServletResponse response;
-    protected ServletConfig config;
+    protected ServletConfig       config;
 
     // request contexts
     protected RequestContextChainingService requestContexts;
-    protected RC requestContext;
-    protected HttpServletRequest newRequest;
-    protected HttpServletResponse newResponse;
+    protected RC                            requestContext;
+    protected HttpServletRequest            newRequest;
+    protected HttpServletResponse           newResponse;
 
-    /**
-     * 创建beanFactory。
-     */
+    /** 创建beanFactory。 */
     protected final static void createBeanFactory(String configLocation) {
         factory = new XmlApplicationContext(new FileSystemResource(new File(srcdir, configLocation)));
     }
 
-    /**
-     * 创建web client，注册servlets。
-     */
+    /** 创建web client，注册servlets。 */
     @Before
     public final void prepareWebClient() throws Exception {
         // Servlet container
@@ -126,9 +120,7 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
         RequestContextHolder.resetRequestAttributes();
     }
 
-    /**
-     * 调用noop servlet，取得request/response。
-     */
+    /** 调用noop servlet，取得request/response。 */
     protected final void invokeNoopServlet(String uri) throws Exception {
         if (uri != null && uri.startsWith("http")) {
             uri = URI.create(uri).normalize().toString(); // full uri
@@ -139,9 +131,7 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
         invokeNoopServlet(new GetMethodWebRequest(uri));
     }
 
-    /**
-     * 调用noop servlet，取得request/response。
-     */
+    /** 调用noop servlet，取得request/response。 */
     protected final void invokeNoopServlet(WebRequest req) throws Exception {
         invocationContext = client.newInvocation(req);
         request = new MyHttpRequest(invocationContext.getRequest(), req.getURL().toExternalForm());
@@ -149,9 +139,7 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
         config = invocationContext.getServlet().getServletConfig();
     }
 
-    /**
-     * 调用readfile servlet，取得request/response。
-     */
+    /** 调用readfile servlet，取得request/response。 */
     protected final void invokeReadFileServlet(String htmlfile) throws Exception {
         String uri = URI.create("http://www.taobao.com/readfile" + "?file=" + htmlfile).normalize().toString();
 
@@ -164,15 +152,15 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
         WebRequest request = form.getRequest();
 
         request.setParameter("myparam", new String[] { "hello",
-                "&#20013;&#21326;&#20154;&#27665;&#20849;&#21644;&#22269;" });
+                                                       "&#20013;&#21326;&#20154;&#27665;&#20849;&#21644;&#22269;" });
 
         try {
             request.setParameter("myfile", new UploadFileSpec[] { //
-                    new UploadFileSpec(new File(srcdir, "smallfile.txt")), //
-                            new UploadFileSpec(new File(srcdir, "smallfile_.JPG")), //
-                            new UploadFileSpec(new File(srcdir, "smallfile.gif")), //
-                            new UploadFileSpec(new File(srcdir, "smallfile")), //
-                    });
+                                                                  new UploadFileSpec(new File(srcdir, "smallfile.txt")), //
+                                                                  new UploadFileSpec(new File(srcdir, "smallfile_.JPG")), //
+                                                                  new UploadFileSpec(new File(srcdir, "smallfile.gif")), //
+                                                                  new UploadFileSpec(new File(srcdir, "smallfile")), //
+            });
         } catch (IllegalRequestParameterException e) {
         }
 
@@ -190,16 +178,12 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
         this.config = invocationContext.getServlet().getServletConfig();
     }
 
-    /**
-     * 取得request context。
-     */
+    /** 取得request context。 */
     protected final void initRequestContext() throws Exception {
         initRequestContext(null);
     }
 
-    /**
-     * 取得request context。
-     */
+    /** 取得request context。 */
     protected final void initRequestContext(String beanName) throws Exception {
         if (beanName == null) {
             beanName = getDefaultBeanName();
@@ -224,16 +208,12 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
     protected void afterInitRequestContext() throws Exception {
     }
 
-    /**
-     * 将服务端response提交到client。
-     */
+    /** 将服务端response提交到client。 */
     protected final void commitToClient() throws Exception {
         clientResponse = client.getResponse(invocationContext);
     }
 
-    /**
-     * 从request context interface中取得默认bean名称。
-     */
+    /** 从request context interface中取得默认bean名称。 */
     protected String getDefaultBeanName() {
         String name = requestContextInterface.getSimpleName();
         Matcher matcher = Pattern.compile("(\\w+)RequestContext").matcher(name);
@@ -243,46 +223,42 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
         return com.alibaba.citrus.util.StringUtil.toCamelCase(matcher.group(1));
     }
 
-    /**
-     * 不做任何事的servlet。
-     */
+    /** 不做任何事的servlet。 */
     public static class NoopServlet extends HttpServlet {
         private static final long serialVersionUID = 3034658026956449398L;
 
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-                IOException {
+                                                                                              IOException {
         }
 
         @Override
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-                IOException {
+                                                                                               IOException {
             doGet(request, response);
         }
     }
 
-    /**
-     * 返回文件内容的servlet。
-     */
+    /** 返回文件内容的servlet。 */
     public static class ReadFileServlet extends HttpServlet {
         private static final long serialVersionUID = 3689913963685360948L;
 
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-                IOException {
+                                                                                              IOException {
             response.setContentType("text/html; charset=UTF-8");
 
             PrintWriter out = response.getWriter();
 
             String html = StreamUtil.readText(new FileInputStream(new File(srcdir, request.getParameter("file"))),
-                    "GBK", true);
+                                              "GBK", true);
 
             out.println(html);
         }
 
         @Override
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-                IOException {
+                                                                                               IOException {
             doGet(request, response);
         }
     }
@@ -295,7 +271,7 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
         private String charset;
         private String overrideQueryString;
         private String server = "www.taobao.com";
-        private int port = 80;
+        private int    port   = 80;
         private boolean sessionCreated;
 
         public MyHttpRequest(HttpServletRequest request, String uri) {
@@ -329,9 +305,7 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
             this.charset = charset;
         }
 
-        /**
-         * 默认实现总是返回localhost，只好覆盖此方法。
-         */
+        /** 默认实现总是返回localhost，只好覆盖此方法。 */
         @Override
         public String getServerName() {
             return server;
@@ -341,9 +315,7 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
             this.server = server;
         }
 
-        /**
-         * 默认实现总是返回0，只好覆盖此方法。
-         */
+        /** 默认实现总是返回0，只好覆盖此方法。 */
         @Override
         public int getServerPort() {
             return port;
@@ -353,9 +325,7 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
             this.port = port;
         }
 
-        /**
-         * 监视getSession方法的调用。
-         */
+        /** 监视getSession方法的调用。 */
         public boolean isSessionCreated() {
             return sessionCreated;
         }
@@ -376,9 +346,7 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
         }
     }
 
-    /**
-     * 由于httpunit目前未实现commit以后抛IllegalStateException，所以只能将response包装一下。
-     */
+    /** 由于httpunit目前未实现commit以后抛IllegalStateException，所以只能将response包装一下。 */
     public static class MyHttpResponse extends HttpServletResponseWrapper {
         private boolean committed;
 

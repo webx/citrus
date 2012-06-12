@@ -17,12 +17,11 @@
 
 package com.alibaba.citrus.service.resource.support.context;
 
+import com.alibaba.citrus.service.resource.support.ResourceLoadingSupport;
+import com.alibaba.citrus.springext.support.context.AbstractXmlApplicationContext;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
-
-import com.alibaba.citrus.service.resource.support.ResourceLoadingSupport;
-import com.alibaba.citrus.springext.support.context.AbstractXmlApplicationContext;
 
 /**
  * 从resource loading service中装载配置文件<code>ApplicationContext</code>实现。
@@ -33,24 +32,18 @@ import com.alibaba.citrus.springext.support.context.AbstractXmlApplicationContex
 public class ResourceLoadingXmlApplicationContext extends AbstractXmlApplicationContext {
     private Resource configResource;
 
-    /**
-     * 从一个现成的<code>Resource</code>中创建spring容器，并初始化。
-     */
+    /** 从一个现成的<code>Resource</code>中创建spring容器，并初始化。 */
     public ResourceLoadingXmlApplicationContext(Resource resource) throws BeansException {
         this(resource, null);
     }
 
-    /**
-     * 从一个现成的<code>Resource</code>中创建spring容器，并初始化。
-     */
+    /** 从一个现成的<code>Resource</code>中创建spring容器，并初始化。 */
     public ResourceLoadingXmlApplicationContext(Resource resource, ApplicationContext parentContext)
             throws BeansException {
         this(resource, parentContext, true);
     }
 
-    /**
-     * 从一个现成的<code>Resource</code>中创建spring容器，并初始化。
-     */
+    /** 从一个现成的<code>Resource</code>中创建spring容器，并初始化。 */
     public ResourceLoadingXmlApplicationContext(Resource resource, ApplicationContext parentContext, boolean refresh)
             throws BeansException {
         super(parentContext);

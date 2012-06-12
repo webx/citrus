@@ -21,7 +21,7 @@ import java.util.List;
 
 public class MyData {
     private List<String> field1;
-    private int field2;
+    private int          field2;
 
     public List<String> getField1() {
         return field1;

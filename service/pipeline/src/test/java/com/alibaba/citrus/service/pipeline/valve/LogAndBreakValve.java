@@ -22,7 +22,7 @@ import com.alibaba.citrus.service.pipeline.Valve;
 
 public class LogAndBreakValve implements Valve {
     private final String label;
-    private final int breakLevels;
+    private final int    breakLevels;
 
     public LogAndBreakValve() {
         this(0);

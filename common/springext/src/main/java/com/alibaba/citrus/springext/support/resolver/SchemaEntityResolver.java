@@ -19,20 +19,19 @@ package com.alibaba.citrus.springext.support.resolver;
 
 import java.io.IOException;
 
+import com.alibaba.citrus.springext.Schema;
+import com.alibaba.citrus.springext.Schemas;
+import com.alibaba.citrus.springext.support.SchemaSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import com.alibaba.citrus.springext.Schema;
-import com.alibaba.citrus.springext.Schemas;
-import com.alibaba.citrus.springext.support.SchemaSet;
-
 public class SchemaEntityResolver implements EntityResolver {
     private final static Logger log = LoggerFactory.getLogger(SchemaEntityResolver.class);
     private final EntityResolver defaultEntityResolver;
-    private final SchemaSet schemas;
+    private final SchemaSet      schemas;
 
     public SchemaEntityResolver(EntityResolver defaultEntityResolver, Schemas... schemasList) {
         this.defaultEntityResolver = defaultEntityResolver;

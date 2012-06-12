@@ -21,14 +21,7 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
 import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 
 import com.alibaba.citrus.service.moduleloader.AbstractModuleLoaderTests;
 import com.alibaba.citrus.service.moduleloader.Module;
@@ -38,6 +31,11 @@ import com.alibaba.citrus.service.moduleloader.impl.adapter.ActionEventAdapter;
 import com.alibaba.citrus.service.moduleloader.impl.adapter.DataBindingAdapter;
 import com.alibaba.citrus.service.requestcontext.rundata.RunData;
 import com.alibaba.test.app1.module.screens.MyScreen;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanCreationException;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 
 public class ClassModuleFactoryTests extends AbstractModuleLoaderTests {
     @BeforeClass
@@ -54,8 +52,8 @@ public class ClassModuleFactoryTests extends AbstractModuleLoaderTests {
             assertThat(
                     e,
                     exception(IllegalArgumentException.class,
-                            "Specificly-defined module could not be found in search-packages or search-classes",
-                            "screens.NotFound", "services-class-modules-wrong.xml"));
+                              "Specificly-defined module could not be found in search-packages or search-classes",
+                              "screens.NotFound", "services-class-modules-wrong.xml"));
         }
     }
 
@@ -70,11 +68,11 @@ public class ClassModuleFactoryTests extends AbstractModuleLoaderTests {
         // names
         Set<String> names = moduleLoaderService.getModuleNames("action");
         assertArrayEquals(new String[] { "myprod.MyAction", "myprod.MyActionFailure", "myprod.MyActionNoRunData" },
-                names.toArray(new String[names.size()]));
+                          names.toArray(new String[names.size()]));
 
         names = moduleLoaderService.getModuleNames("control");
         assertArrayEquals(new String[] { "InvalidControl", "myprod.MyControl" },
-                names.toArray(new String[names.size()]));
+                          names.toArray(new String[names.size()]));
 
         names = moduleLoaderService.getModuleNames("screens");
         assertArrayEquals(new String[] { "MyScreen" }, names.toArray(new String[names.size()]));
@@ -117,11 +115,11 @@ public class ClassModuleFactoryTests extends AbstractModuleLoaderTests {
         // names
         Set<String> names = moduleLoaderService.getModuleNames("action");
         assertArrayEquals(new String[] { "app1.myprod.MyAction", "app1.myprod.MyActionFailure",
-                "app1.myprod.MyActionNoRunData" }, names.toArray(new String[names.size()]));
+                                         "app1.myprod.MyActionNoRunData" }, names.toArray(new String[names.size()]));
 
         names = moduleLoaderService.getModuleNames("control");
         assertArrayEquals(new String[] { "app1.InvalidControl", "app1.myprod.MyControl" },
-                names.toArray(new String[names.size()]));
+                          names.toArray(new String[names.size()]));
 
         names = moduleLoaderService.getModuleNames("screens");
         assertArrayEquals(new String[] { "app1.MyScreen" }, names.toArray(new String[names.size()]));
@@ -155,11 +153,11 @@ public class ClassModuleFactoryTests extends AbstractModuleLoaderTests {
         // names
         Set<String> names = moduleLoaderService.getModuleNames("action");
         assertArrayEquals(new String[] { "myprod.MyAction", "myprod.MyActionFailure", "myprod.MyActionNoRunData" },
-                names.toArray(new String[names.size()]));
+                          names.toArray(new String[names.size()]));
 
         names = moduleLoaderService.getModuleNames("control");
         assertArrayEquals(new String[] { "app1.InvalidControl", "app1.myprod.MyControl" },
-                names.toArray(new String[names.size()]));
+                          names.toArray(new String[names.size()]));
 
         names = moduleLoaderService.getModuleNames("screen");
         assertArrayEquals(new String[] { "MyScreen" }, names.toArray(new String[names.size()]));
@@ -243,7 +241,7 @@ public class ClassModuleFactoryTests extends AbstractModuleLoaderTests {
 
         names = moduleLoaderService.getModuleNames("screens");
         assertArrayEquals(new String[] { "app1.AbstractScreen", "app1.MyScreen" },
-                names.toArray(new String[names.size()]));
+                          names.toArray(new String[names.size()]));
 
         try {
             moduleLoaderService.getModule("screens", "app1.AbstractScreen");
@@ -274,11 +272,11 @@ public class ClassModuleFactoryTests extends AbstractModuleLoaderTests {
         // names
         Set<String> names = moduleLoaderService.getModuleNames("action");
         assertArrayEquals(new String[] { "app2.FirstAction", "app2.ThirdAction" },
-                names.toArray(new String[names.size()]));
+                          names.toArray(new String[names.size()]));
 
         names = moduleLoaderService.getModuleNames("screen");
         assertArrayEquals(new String[] { "app2.FirstScreen", "app2.ThirdScreen" },
-                names.toArray(new String[names.size()]));
+                          names.toArray(new String[names.size()]));
 
         // modules
         Module module = moduleLoaderService.getModule("action", "/app2/firstAction");
@@ -306,7 +304,7 @@ public class ClassModuleFactoryTests extends AbstractModuleLoaderTests {
 
         names = moduleLoaderService.getModuleNames("screen");
         assertArrayEquals(new String[] { "app2.FirstScreen", "app2.SecondScreen" },
-                names.toArray(new String[names.size()]));
+                          names.toArray(new String[names.size()]));
 
         // modules
         Module module = moduleLoaderService.getModule("action", "/app2/secondAction");

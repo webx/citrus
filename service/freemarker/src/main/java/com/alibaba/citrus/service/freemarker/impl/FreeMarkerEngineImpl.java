@@ -27,9 +27,6 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Locale;
 
-import org.springframework.context.ResourceLoaderAware;
-import org.springframework.core.io.ResourceLoader;
-
 import com.alibaba.citrus.service.AbstractService;
 import com.alibaba.citrus.service.configuration.ProductionModeAware;
 import com.alibaba.citrus.service.freemarker.FreeMarkerEngine;
@@ -37,10 +34,11 @@ import com.alibaba.citrus.service.freemarker.impl.log.LoggerHacker;
 import com.alibaba.citrus.service.template.TemplateContext;
 import com.alibaba.citrus.service.template.TemplateException;
 import com.alibaba.citrus.util.i18n.LocaleUtil;
-
 import freemarker.core.Environment;
 import freemarker.core.ParseException;
 import freemarker.template.Template;
+import org.springframework.context.ResourceLoaderAware;
+import org.springframework.core.io.ResourceLoader;
 
 /**
  * FreeMarker模板引擎。
@@ -48,7 +46,7 @@ import freemarker.template.Template;
  * @author Michael Zhou
  */
 public class FreeMarkerEngineImpl extends AbstractService<FreeMarkerEngine> implements FreeMarkerEngine,
-        ResourceLoaderAware, ProductionModeAware {
+                                                                                       ResourceLoaderAware, ProductionModeAware {
     private final FreeMarkerConfigurationImpl configuration = new FreeMarkerConfigurationImpl(getLogger());
 
     // 初始化slf4j日志。
@@ -77,9 +75,7 @@ public class FreeMarkerEngineImpl extends AbstractService<FreeMarkerEngine> impl
         configuration.setProductionMode(productionMode);
     }
 
-    /**
-     * 初始化engine。
-     */
+    /** 初始化engine。 */
     @Override
     protected void init() {
         configuration.init();
@@ -97,9 +93,7 @@ public class FreeMarkerEngineImpl extends AbstractService<FreeMarkerEngine> impl
         return new String[] { "ftl" };
     }
 
-    /**
-     * 判定模板是否存在。
-     */
+    /** 判定模板是否存在。 */
     public boolean exists(String templateName) {
         try {
             return configuration.getTemplateLoader().findTemplateSource(templateName) != null;
@@ -108,33 +102,27 @@ public class FreeMarkerEngineImpl extends AbstractService<FreeMarkerEngine> impl
         }
     }
 
-    /**
-     * 渲染模板，并以字符串的形式取得渲染的结果。
-     */
+    /** 渲染模板，并以字符串的形式取得渲染的结果。 */
     public String getText(String templateName, TemplateContext context) throws TemplateException, IOException {
         StringWriter out = new StringWriter();
         render(templateName, context, out, null, null, null);
         return out.toString();
     }
 
-    /**
-     * 渲染模板，并将渲染的结果送到字节输出流中。
-     */
+    /** 渲染模板，并将渲染的结果送到字节输出流中。 */
     public void writeTo(String templateName, TemplateContext context, OutputStream ostream) throws TemplateException,
-            IOException {
+                                                                                                   IOException {
         render(templateName, context, null, ostream, null, null);
     }
 
-    /**
-     * 渲染模板，并将渲染的结果送到字符输出流中。
-     */
+    /** 渲染模板，并将渲染的结果送到字符输出流中。 */
     public void writeTo(String templateName, TemplateContext context, Writer writer) throws TemplateException,
-            IOException {
+                                                                                            IOException {
         render(templateName, context, writer, null, null, null);
     }
 
     public String mergeTemplate(String templateName, Object context, String inputCharset) throws TemplateException,
-            IOException {
+                                                                                                 IOException {
         StringWriter out = new StringWriter();
         render(templateName, context, out, null, inputCharset, null);
         return out.toString();
@@ -150,9 +138,7 @@ public class FreeMarkerEngineImpl extends AbstractService<FreeMarkerEngine> impl
         render(templateName, context, out, null, inputCharset, null);
     }
 
-    /**
-     * 渲染模板到指定输出流。
-     */
+    /** 渲染模板到指定输出流。 */
     private void render(String templateName, Object context, Writer writer, OutputStream ostream, String inputCharset,
                         String outputCharset) throws TemplateException, IOException {
         Locale locale = LocaleUtil.getContext().getLocale();

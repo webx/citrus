@@ -21,9 +21,9 @@ import static com.alibaba.citrus.springext.util.DomUtil.*;
 
 import com.alibaba.citrus.service.uribroker.support.AbstractURIBrokerDefinitionParser;
 import com.alibaba.citrus.service.uribroker.uri.ServletContentURIBroker;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 
-public class ServletContentURIBrokerDefinitionParser extends AbstractURIBrokerDefinitionParser<ServletContentURIBroker> {
+public class ServletContentURIBrokerDefinitionParser
+        extends AbstractURIBrokerDefinitionParser<ServletContentURIBroker> {
     @Override
     protected ElementSelector getSimplePropertiesSelector() {
         return or(name("contextPath"), name("prefixPath"), name("contentPath"));

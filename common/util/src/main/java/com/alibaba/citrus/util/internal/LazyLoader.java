@@ -49,9 +49,7 @@ public abstract class LazyLoader<T, C> {
 
     public abstract boolean testInstance();
 
-    /**
-     * 调用loader装载对象。
-     */
+    /** 调用loader装载对象。 */
     protected final T load(C context) {
         try {
             return loader.load(context);
@@ -64,9 +62,7 @@ public abstract class LazyLoader<T, C> {
         }
     }
 
-    /**
-     * 用来创建对象实例。
-     */
+    /** 用来创建对象实例。 */
     public static interface Loader<T, C> {
         T load(C context);
     }
@@ -75,9 +71,7 @@ public abstract class LazyLoader<T, C> {
         T handle(RuntimeException e, C context);
     }
 
-    /**
-     * 取得默认的方案。
-     */
+    /** 取得默认的方案。 */
     public static <T, C> LazyLoader<T, C> getDefault(Loader<T, C> loader) {
         return getDoubleCheckedLockingLazyLoader(loader);
     }
@@ -190,12 +184,10 @@ public abstract class LazyLoader<T, C> {
         };
     }
 
-    /**
-     * 转换成字符串表示。
-     */
+    /** 转换成字符串表示。 */
     @Override
     public String toString() {
         return String.format("LazyLoader(%s%s)", getSimpleClassName(loader.getClass()), testInstance() ? ", loaded"
-                : EMPTY_STRING);
+                                                                                                       : EMPTY_STRING);
     }
 }

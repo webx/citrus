@@ -25,7 +25,7 @@ import com.alibaba.citrus.service.dataresolver.DataResolverContext;
 import com.alibaba.citrus.util.ToStringBuilder;
 
 abstract class AbstractDataResolver implements DataResolver {
-    private final String desc;
+    private final   String              desc;
     protected final DataResolverContext context;
 
     public AbstractDataResolver(String desc, DataResolverContext context) {

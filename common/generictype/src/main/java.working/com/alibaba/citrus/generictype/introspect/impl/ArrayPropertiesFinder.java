@@ -39,9 +39,7 @@ public class ArrayPropertiesFinder extends SinglePropertyFinder {
         return null;
     }
 
-    /**
-     * 代表一个数组的属性信息。
-     */
+    /** 代表一个数组的属性信息。 */
     private static class ArrayPropertyImpl extends AbstractPropertyInfo implements IndexedPropertyInfo {
         private ArrayPropertyImpl(TypeInfo declaringType) {
             super(null, declaringType, declaringType.getDirectComponentType(), null, null);

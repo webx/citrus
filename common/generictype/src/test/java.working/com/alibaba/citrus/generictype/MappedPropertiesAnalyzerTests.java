@@ -23,9 +23,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.generictype.introspect.PropertyInfo;
+import org.junit.Test;
 
 /**
  * 测试<code>MappedPropertiesAnalyzer</code>。
@@ -33,9 +32,7 @@ import com.alibaba.citrus.generictype.introspect.PropertyInfo;
  * @author Michael Zhou
  */
 public class MappedPropertiesAnalyzerTests extends AbstractPropertiesAnalyzerTests {
-    /**
-     * 测试不同的访问控制。
-     */
+    /** 测试不同的访问控制。 */
     @Test
     public void accessible() {
         @SuppressWarnings("unused")
@@ -80,13 +77,11 @@ public class MappedPropertiesAnalyzerTests extends AbstractPropertiesAnalyzerTes
 
         assertEquals(1, pubStrs.size());
         assertPropertyInfo(pubStrs.get(0), MyClass.class, "publicString", String.class, false,
-                "getPublicString(Ljava/lang/String;)Ljava/lang/String;",
-                "setPublicString(Ljava/lang/String;Ljava/lang/String;)V");
+                           "getPublicString(Ljava/lang/String;)Ljava/lang/String;",
+                           "setPublicString(Ljava/lang/String;Ljava/lang/String;)V");
     }
 
-    /**
-     * 测试不同的方法形态。
-     */
+    /** 测试不同的方法形态。 */
     @Test
     public void signatures() {
         @SuppressWarnings("unused")
@@ -173,39 +168,39 @@ public class MappedPropertiesAnalyzerTests extends AbstractPropertiesAnalyzerTes
         pis = props.get("withReturn");
         assertEquals(1, pis.size());
         assertPropertyInfo(pis.get(0), MyClass.class, "withReturn", int.class, false, null,
-                "setWithReturn(Ljava/lang/String;I)Ljava/lang/String;");
+                           "setWithReturn(Ljava/lang/String;I)Ljava/lang/String;");
 
         assertNull(props.get("with2Params"));
 
         pis = props.get("normal");
         assertEquals(1, pis.size());
         assertPropertyInfo(pis.get(0), MyClass.class, "normal", String.class, false,
-                "getNormal(Ljava/lang/String;)Ljava/lang/String;", "setNormal(Ljava/lang/String;Ljava/lang/String;)V");
+                           "getNormal(Ljava/lang/String;)Ljava/lang/String;", "setNormal(Ljava/lang/String;Ljava/lang/String;)V");
 
         pis = props.get("URL");
         assertEquals(1, pis.size());
         assertPropertyInfo(pis.get(0), MyClass.class, "URL", URL.class, false,
-                "getURL(Ljava/lang/String;)Ljava/net/URL;", null);
+                           "getURL(Ljava/lang/String;)Ljava/net/URL;", null);
 
         pis = props.get("url");
         assertEquals(1, pis.size());
         assertPropertyInfo(pis.get(0), MyClass.class, "url", URL.class, false,
-                "getUrl(Ljava/lang/String;)Ljava/net/URL;", null);
+                           "getUrl(Ljava/lang/String;)Ljava/net/URL;", null);
 
         pis = props.get("class");
         assertEquals(1, pis.size());
         assertPropertyInfo(pis.get(0), MyClass.class, "class", String.class, false, null,
-                "setClass(Ljava/lang/String;Ljava/lang/String;)V");
+                           "setClass(Ljava/lang/String;Ljava/lang/String;)V");
 
         pis = props.get("boolean");
         assertEquals(1, pis.size());
         assertPropertyInfo(pis.get(0), MyClass.class, "boolean", boolean.class, false,
-                "getBoolean(Ljava/lang/String;)Z", null);
+                           "getBoolean(Ljava/lang/String;)Z", null);
 
         pis = props.get("list");
         assertEquals(1, pis.size());
         assertPropertyInfo(pis.get(0), MyClass.class, "list", List.class, true,
-                "getList(Ljava/lang/String;)Ljava/util/List;", "setList(Ljava/lang/String;Ljava/util/List;)V");
+                           "getList(Ljava/lang/String;)Ljava/util/List;", "setList(Ljava/lang/String;Ljava/util/List;)V");
     }
 
     @Override

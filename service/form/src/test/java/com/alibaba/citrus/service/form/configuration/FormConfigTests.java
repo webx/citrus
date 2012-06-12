@@ -23,11 +23,6 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.beans.PropertyEditorRegistrar;
-import org.springframework.beans.SimpleTypeConverter;
-
 import com.alibaba.citrus.service.configuration.support.PropertyEditorRegistrarsSupport;
 import com.alibaba.citrus.service.form.FormService;
 import com.alibaba.citrus.service.form.configuration.FormConfig.FieldKeyFormat;
@@ -36,9 +31,13 @@ import com.alibaba.citrus.service.form.impl.configuration.FieldConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.FormConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.GroupConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.GroupConfigImpl.ImportImpl;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.PropertyEditorRegistrar;
+import org.springframework.beans.SimpleTypeConverter;
 
 public class FormConfigTests extends AbstractConfigTests {
-    private FormConfigImpl formConfig;
+    private FormConfigImpl  formConfig;
     private GroupConfigImpl group1;
     private GroupConfigImpl group2;
     private GroupConfigImpl group3;

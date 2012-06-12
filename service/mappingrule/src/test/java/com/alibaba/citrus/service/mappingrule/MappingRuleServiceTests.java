@@ -22,10 +22,9 @@ import static junit.framework.Assert.*;
 
 import java.util.Map;
 
+import com.alibaba.citrus.service.mappingrule.support.AbstractMappingRule;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
-
-import com.alibaba.citrus.service.mappingrule.support.AbstractMappingRule;
 
 public class MappingRuleServiceTests extends AbstractMappingRuleServiceTests {
     @Test
@@ -49,9 +48,7 @@ public class MappingRuleServiceTests extends AbstractMappingRuleServiceTests {
         assertEquals("test.ext1", mappingRules.getMappedName("extension1", "test"));
     }
 
-    /**
-     * 测试异常操作，包括不存在的rule，输入空名称等
-     */
+    /** 测试异常操作，包括不存在的rule，输入空名称等 */
     @Test
     public void testExceptionOperation() {
         String msg = "";

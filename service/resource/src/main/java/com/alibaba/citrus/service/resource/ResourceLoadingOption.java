@@ -17,12 +17,8 @@
 
 package com.alibaba.citrus.service.resource;
 
-/**
- * 定义了查找resource时的参数。
- */
+/** 定义了查找resource时的参数。 */
 public enum ResourceLoadingOption {
-    /**
-     * 假如指定了这个选项，则表明所查找的resource是用来“被创建”的，因此不必存在。 例如，为了创建新文件、新目录而查找资源。
-     */
+    /** 假如指定了这个选项，则表明所查找的resource是用来“被创建”的，因此不必存在。 例如，为了创建新文件、新目录而查找资源。 */
     FOR_CREATE;
 }

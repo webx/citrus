@@ -34,8 +34,6 @@ public interface ResourceLoader {
      */
     void init(ResourceLoadingService resourceLoadingService);
 
-    /**
-     * 查找指定名称的资源，如果未找到，则返回<code>null</code>。
-     */
+    /** 查找指定名称的资源，如果未找到，则返回<code>null</code>。 */
     Resource getResource(ResourceLoaderContext context, Set<ResourceLoadingOption> options);
 }

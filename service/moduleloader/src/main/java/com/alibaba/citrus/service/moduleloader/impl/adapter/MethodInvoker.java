@@ -23,17 +23,15 @@ import static com.alibaba.citrus.util.ExceptionUtil.*;
 
 import java.lang.reflect.InvocationTargetException;
 
-import net.sf.cglib.reflect.FastMethod;
-
-import org.slf4j.Logger;
-
 import com.alibaba.citrus.service.dataresolver.DataResolver;
 import com.alibaba.citrus.service.moduleloader.SkipModuleExecutionException;
+import net.sf.cglib.reflect.FastMethod;
+import org.slf4j.Logger;
 
 class MethodInvoker {
-    private final FastMethod fastMethod;
+    private final FastMethod     fastMethod;
     private final DataResolver[] resolvers;
-    private final boolean skippable;
+    private final boolean        skippable;
 
     public MethodInvoker(FastMethod fastMethod, DataResolver[] resolvers, boolean skippable) {
         this.fastMethod = assertNotNull(fastMethod, "fastMethod");

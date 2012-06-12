@@ -34,8 +34,8 @@ import org.junit.Test;
  * @author Michael Zhou
  */
 public class IntHashMapTests {
-    private IntHashMap<String> map1;
-    private IntHashMap<String> map2;
+    private IntHashMap<String>  map1;
+    private IntHashMap<String>  map2;
     private IntHashMap<Integer> map3;
 
     @Before
@@ -192,9 +192,7 @@ public class IntHashMapTests {
         }
     }
 
-    /**
-     * 测试当hash表中的项数超过阈值时的表现.
-     */
+    /** 测试当hash表中的项数超过阈值时的表现. */
     @Test
     public void resize() {
         // 取得初始容量和阈值.
@@ -236,9 +234,7 @@ public class IntHashMapTests {
         assertEquals(expectedList, list);
     }
 
-    /**
-     * 将map.toString()的结果重新排序后输出.
-     */
+    /** 将map.toString()的结果重新排序后输出. */
     private List<String> parseToString(IntHashMap<?> map) {
         List<String> list = createArrayList();
         String str = map.toString();

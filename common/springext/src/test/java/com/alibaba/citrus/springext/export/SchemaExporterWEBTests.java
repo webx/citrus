@@ -25,7 +25,6 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -34,21 +33,20 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.util.io.StreamUtil;
 import com.meterware.httpunit.WebResponse;
 import com.meterware.httpunit.javascript.JavaScript;
 import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
+import org.junit.Before;
+import org.junit.Test;
 
 public class SchemaExporterWEBTests {
     // web client
     protected ServletUnitClient client;
-    protected WebResponse clientResponse;
-    protected int clientResponseCode;
-    protected String clientResponseContent;
+    protected WebResponse       clientResponse;
+    protected int               clientResponseCode;
+    protected String            clientResponseContent;
 
     @Before
     public void init() throws Exception {
@@ -67,9 +65,7 @@ public class SchemaExporterWEBTests {
         JavaScript.setThrowExceptionsOnError(false);
     }
 
-    /**
-     * 调用servlet，取得request/response。
-     */
+    /** 调用servlet，取得request/response。 */
     protected final void invokeServlet(String uri) throws Exception {
         if (uri != null && uri.startsWith("http")) {
             uri = URI.create(uri).normalize().toString(); // full uri
@@ -90,7 +86,7 @@ public class SchemaExporterWEBTests {
         assertEquals(200, clientResponseCode);
         assertEquals("text/html", clientResponse.getContentType());
         assertThat(clientResponseContent,
-                containsAll("/schema/services.xsd", "/www.springframework.org/schema/beans/spring-beans.xsd"));
+                   containsAll("/schema/services.xsd", "/www.springframework.org/schema/beans/spring-beans.xsd"));
 
         // schema/services - redirect to services/
         invokeServlet("/schema/services");
@@ -104,7 +100,7 @@ public class SchemaExporterWEBTests {
         assertEquals(200, clientResponseCode);
         assertEquals("text/html", clientResponse.getContentType());
         assertThat(clientResponseContent,
-                containsAll("/schema/services/container.xsd", "/schema/services/tools/dateformat.xsd"));
+                   containsAll("/schema/services/container.xsd", "/schema/services/tools/dateformat.xsd"));
 
         // schema/services.xsd - schema page
         invokeServlet("/schema/services.xsd");
@@ -112,7 +108,7 @@ public class SchemaExporterWEBTests {
         assertEquals(200, clientResponseCode);
         assertEquals("text/xml", clientResponse.getContentType());
         assertThat(clientResponseContent,
-                containsAll("targetNamespace=\"" + "http://www.alibaba.com/schema/services\""));
+                   containsAll("targetNamespace=\"" + "http://www.alibaba.com/schema/services\""));
 
         // schema/file.gif - resource page
         invokeServlet("/schema/file.gif");
@@ -131,7 +127,7 @@ public class SchemaExporterWEBTests {
         }
 
         public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
-                ServletException {
+                                                                                                         ServletException {
             if (!((HttpServletRequest) request).getRequestURI().endsWith("scriptaculous.js")) {
                 chain.doFilter(request, response);
             }

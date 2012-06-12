@@ -23,19 +23,18 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.FileSystemResource;
-
 import com.alibaba.citrus.service.mappingrule.MappingRuleService;
 import com.alibaba.citrus.service.uribroker.URIBrokerService;
 import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import com.alibaba.citrus.turbine.uribroker.uri.TurbineURIBroker;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.FileSystemResource;
 
 public class TurbineURIBrokerTests {
-    private TurbineURIBroker broker;
+    private TurbineURIBroker   broker;
     private MappingRuleService mappingRuleService;
     private MappingRuleService mappingRuleService2;
 
@@ -322,7 +321,7 @@ public class TurbineURIBrokerTests {
     @Test
     public void config_withMappings() {
         ApplicationContext factory = new XmlApplicationContext(new FileSystemResource(new File(srcdir,
-                "services-uris.xml")));
+                                                                                               "services-uris.xml")));
 
         URIBrokerService uris = (URIBrokerService) factory.getBean("uris");
 
@@ -332,18 +331,18 @@ public class TurbineURIBrokerTests {
         TurbineURIBroker link2 = (TurbineURIBroker) uris.getURIBroker("link2");
         assertSame(factory.getBean("mappingRuleService"), link2.getMappingRuleService());
         assertEquals("http://taobao.com/mycontext/myservlet/mycomponent/my_target.htm?action=myAction",
-                link2.toString());
+                     link2.toString());
 
         TurbineURIBroker link3 = (TurbineURIBroker) uris.getURIBroker("link3");
         assertSame(factory.getBean("mapping2"), link3.getMappingRuleService());
         assertEquals("http://taobao.com/mycontext/myservlet/mycomponent/myTarget.vhtml?myaction=myAction",
-                link3.toString());
+                     link3.toString());
     }
 
     @Test
     public void config_withoutMappings() {
         ApplicationContext factory = new XmlApplicationContext(new FileSystemResource(new File(srcdir,
-                "services-uris-no-mappings.xml")));
+                                                                                               "services-uris-no-mappings.xml")));
 
         URIBrokerService uris = (URIBrokerService) factory.getBean("uris");
 
@@ -357,6 +356,6 @@ public class TurbineURIBrokerTests {
         TurbineURIBroker link3 = (TurbineURIBroker) uris.getURIBroker("link3");
         assertNull(link3.getMappingRuleService());
         assertEquals("http://taobao.com/mycontext/myservlet/mycomponent/myTarget.vm?myaction=myAction",
-                link3.toString());
+                     link3.toString());
     }
 }

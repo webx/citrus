@@ -20,7 +20,7 @@ package com.alibaba.citrus.util.internal;
 import org.junit.Before;
 
 public class NormalizableStringBuilderTests extends
-        AbstractNormalizableStringBuilderTests<NormalizableStringBuilderImpl> {
+                                            AbstractNormalizableStringBuilderTests<NormalizableStringBuilderImpl> {
     @Before
     public void init() {
         buf = new NormalizableStringBuilderImpl();

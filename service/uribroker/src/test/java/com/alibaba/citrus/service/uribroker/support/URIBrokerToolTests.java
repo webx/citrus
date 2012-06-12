@@ -21,13 +21,12 @@ import static org.junit.Assert.*;
 
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-
 import com.alibaba.citrus.service.pull.PullService;
 import com.alibaba.citrus.service.uribroker.AbstractURIBrokerServiceTests;
 import com.alibaba.citrus.service.uribroker.uri.URIBroker;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
 
 public class URIBrokerToolTests extends AbstractURIBrokerServiceTests {
     private PullService pull;
@@ -78,7 +77,7 @@ public class URIBrokerToolTests extends AbstractURIBrokerServiceTests {
 
         // 查看渲染结果，很明显，request已经被注入
         assertEquals("http://myuser2:mypass2@myservername2:1234/aaa/a1/bbb/ccc/ddd"
-                + "?aaa=1111&bbb=2222&ccc=3333#myreference2", u1.toString());
+                     + "?aaa=1111&bbb=2222&ccc=3333#myreference2", u1.toString());
 
         assertEquals("http://localhost/", u2.toString());
 

@@ -20,17 +20,12 @@ package com.alibaba.citrus.turbine.util;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static org.easymock.EasyMock.*;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.*;
 
 import java.lang.reflect.Method;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 import com.alibaba.citrus.service.mappingrule.MappingRuleService;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
@@ -41,6 +36,9 @@ import com.alibaba.citrus.turbine.support.AbstractContext;
 import com.alibaba.citrus.turbine.util.ControlTool.ControlParameters;
 import com.alibaba.citrus.webx.WebxComponents;
 import com.alibaba.test.app1.module.control.MyControlChangingTemplate;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ControlToolTests extends AbstractPullToolTests<ControlTool> {
     @Override
@@ -79,7 +77,7 @@ public class ControlToolTests extends AbstractPullToolTests<ControlTool> {
 
         if (!"moduleLoaderService".equals(missingName)) {
             getAccessibleField(ControlTool.class, "moduleLoaderService").set(tool,
-                    createMock(ModuleLoaderService.class));
+                                                                             createMock(ModuleLoaderService.class));
         }
 
         if (!"mappingRuleService".equals(missingName)) {
@@ -96,7 +94,7 @@ public class ControlToolTests extends AbstractPullToolTests<ControlTool> {
 
         if (!"bufferedRequestContext".equals(missingName)) {
             getAccessibleField(ControlTool.class, "bufferedRequestContext").set(tool,
-                    createMock(BufferedRequestContext.class));
+                                                                                createMock(BufferedRequestContext.class));
         }
 
         try {
@@ -141,7 +139,7 @@ public class ControlToolTests extends AbstractPullToolTests<ControlTool> {
             fail();
         } catch (IllegalStateException e) {
             assertThat(e, exception("Bean instance of " + ControlTool.class.getName()
-                    + " has not been initialized yet."));
+                                    + " has not been initialized yet."));
         }
     }
 
@@ -328,7 +326,7 @@ public class ControlToolTests extends AbstractPullToolTests<ControlTool> {
 
         if (exports != null) {
             getAccessibleField(controlParameters.getClass(), "exportVars").set(controlParameters,
-                    createHashSet(exports));
+                                                                               createHashSet(exports));
         }
 
         return (Context) method.invoke(tool, controlParameters, component);

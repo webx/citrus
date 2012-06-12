@@ -22,19 +22,17 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 
 import java.util.List;
 
+import com.alibaba.citrus.springext.ConfigurationPoint;
+import com.alibaba.citrus.springext.Contribution;
+import com.alibaba.citrus.springext.ContributionAware;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-import com.alibaba.citrus.springext.ConfigurationPoint;
-import com.alibaba.citrus.springext.Contribution;
-import com.alibaba.citrus.springext.ContributionAware;
-
-/**
- * 用来创建组合式validator的parser基类。
- */
+/** 用来创建组合式validator的parser基类。 */
 public abstract class AbstractCompositeValidatorDefinitionParser<V extends AbstractCompositeValidator> extends
-        AbstractValidatorDefinitionParser<V> implements ContributionAware {
+                                                                                                       AbstractValidatorDefinitionParser<V>
+        implements ContributionAware {
     private ConfigurationPoint validatorConfigurationPoint;
 
     public void setContribution(Contribution contrib) {
@@ -49,7 +47,7 @@ public abstract class AbstractCompositeValidatorDefinitionParser<V extends Abstr
 
         for (Element subElement : subElements(element)) {
             Object validator = parseConfigurationPointBean(subElement, validatorConfigurationPoint, parserContext,
-                    builder);
+                                                           builder);
 
             if (validator != null) {
                 validators.add(validator);

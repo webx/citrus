@@ -21,7 +21,6 @@ import static com.alibaba.citrus.springext.util.DomUtil.*;
 
 import com.alibaba.citrus.service.uribroker.support.AbstractURIBrokerDefinitionParser;
 import com.alibaba.citrus.service.uribroker.uri.ContentURIBroker;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 
 public class ContentURIBrokerDefinitionParser extends AbstractURIBrokerDefinitionParser<ContentURIBroker> {
     @Override

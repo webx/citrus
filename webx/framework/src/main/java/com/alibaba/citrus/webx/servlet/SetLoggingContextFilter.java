@@ -18,7 +18,6 @@
 package com.alibaba.citrus.webx.servlet;
 
 import java.io.IOException;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +30,7 @@ import com.alibaba.citrus.webx.util.SetLoggingContextHelper;
  * <p>
  * 建议在log4j的配置文件中，设置如下pattern layout：
  * </p>
- *
+ * <p/>
  * <pre>
  * &lt;layout class="org.apache.log4j.PatternLayout"&gt;
  *     &lt;param name="ConversionPattern" value="%-4r [%d{yyyy-MM-dd HH:mm:ss}] - %X{remoteAddr} %X{requestURI} %X{referrer} %X{userAgent} %X{cookie.名称} - %m%n" /&gt;
@@ -40,15 +39,15 @@ import com.alibaba.citrus.webx.util.SetLoggingContextHelper;
  * <p>
  * 下面是logback版本：
  * </p>
- *
+ * <p/>
  * <pre>
  * &lt;layout class="ch.qos.logback.classic.PatternLayout"&gt;
  *     &lt;pattern&gt;%-4r [%d{yyyy-MM-dd HH:mm:ss}] - %X{remoteAddr} %X{requestURI} %X{referrer} %X{userAgent} %X{cookie.名称} - %m%n&lt;/pattern&gt;
  * &lt;/layout&gt;
  * </pre>
  *
- * @see com.alibaba.citrus.webx.util.SetLoggingContextHelper
  * @author Michael Zhou
+ * @see com.alibaba.citrus.webx.util.SetLoggingContextHelper
  */
 public class SetLoggingContextFilter extends FilterBean {
     @Override

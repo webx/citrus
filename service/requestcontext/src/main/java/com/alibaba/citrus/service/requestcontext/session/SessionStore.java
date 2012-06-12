@@ -18,7 +18,6 @@
 package com.alibaba.citrus.service.requestcontext.session;
 
 import java.util.Map;
-
 import javax.servlet.http.HttpSession;
 
 /**
@@ -27,15 +26,13 @@ import javax.servlet.http.HttpSession;
  * @author Michael Zhou
  */
 public interface SessionStore {
-    /**
-     * 初始化SessionStore。
-     */
+    /** 初始化SessionStore。 */
     void init(String storeName, SessionConfig sessionConfig) throws Exception;
 
     /**
      * 取得指定session的所有attribute名称。
      *
-     * @param sessionID 要装载的session ID
+     * @param sessionID    要装载的session ID
      * @param storeContext 用来取得request信息，并存放store当前的状态
      * @return attributes的列表
      */
@@ -44,8 +41,8 @@ public interface SessionStore {
     /**
      * 装载指定session的某个attribute。
      *
-     * @param attrName 要装载的attribute名称
-     * @param sessionID 要存取的session ID
+     * @param attrName     要装载的attribute名称
+     * @param sessionID    要存取的session ID
      * @param storeContext 用来取得request信息，并存放store当前的状态
      * @return attribute的值（如果存在的话）
      */
@@ -54,7 +51,7 @@ public interface SessionStore {
     /**
      * 丢弃指定session ID的所有内容。
      *
-     * @param sessionID 要丢弃的session ID
+     * @param sessionID    要丢弃的session ID
      * @param storeContext 用来取得request信息，并存放store当前的状态
      */
     void invaldiate(String sessionID, StoreContext storeContext);
@@ -63,14 +60,12 @@ public interface SessionStore {
      * 保存指定session的attributes。
      *
      * @param modifiedAttrs 要保存的attrs，如果值为<code>null</code>表示删除
-     * @param sessionID 要保存的sessionID
-     * @param storeContext 用来取得request信息，并存放store当前的状态
+     * @param sessionID     要保存的sessionID
+     * @param storeContext  用来取得request信息，并存放store当前的状态
      */
     void commit(Map<String, Object> modifiedAttrs, String sessionID, StoreContext storeContext);
 
-    /**
-     * 帮助store取得当前request的信息，并存放它们自己的当前状态。
-     */
+    /** 帮助store取得当前request的信息，并存放它们自己的当前状态。 */
     interface StoreContext {
         /**
          * 取得store的request scope状态数据。

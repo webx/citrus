@@ -18,12 +18,10 @@
 package com.alibaba.citrus.service.form;
 
 import java.util.Collection;
-
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.TypeConverter;
-
 import com.alibaba.citrus.service.form.configuration.FormConfig;
+import org.springframework.beans.TypeConverter;
 
 /**
  * 代表一个用户提交的form信息。
@@ -34,64 +32,40 @@ import com.alibaba.citrus.service.form.configuration.FormConfig;
  * @author Michael Zhou
  */
 public interface Form {
-    /**
-     * 取得form的配置信息。
-     */
+    /** 取得form的配置信息。 */
     FormConfig getFormConfig();
 
-    /**
-     * 取得用于转换类型的converter。
-     */
+    /** 取得用于转换类型的converter。 */
     TypeConverter getTypeConverter();
 
-    /**
-     * 是否强制为只接受post表单。
-     */
+    /** 是否强制为只接受post表单。 */
     boolean isForcePostOnly();
 
-    /**
-     * 判定form是否通过验证。
-     */
+    /** 判定form是否通过验证。 */
     boolean isValid();
 
-    /**
-     * 初始化form，将form恢复成“未验证”状态。随后，调用者可以重新设置值并手工验证表单。
-     */
+    /** 初始化form，将form恢复成“未验证”状态。随后，调用者可以重新设置值并手工验证表单。 */
     void init();
 
-    /**
-     * 用request初始化form。假如request为<code>null</code>，则将form设置成“未验证”状态，否则，验证表单。
-     */
+    /** 用request初始化form。假如request为<code>null</code>，则将form设置成“未验证”状态，否则，验证表单。 */
     void init(HttpServletRequest request);
 
-    /**
-     * 验证（或重新验证）当前的所有group instance。
-     */
+    /** 验证（或重新验证）当前的所有group instance。 */
     void validate();
 
-    /**
-     * 取得代表form的key。
-     */
+    /** 取得代表form的key。 */
     String getKey();
 
-    /**
-     * 取得所有group的列表。
-     */
+    /** 取得所有group的列表。 */
     Collection<Group> getGroups();
 
-    /**
-     * 取得所有指定名称的group的列表。group名称大小写不敏感。
-     */
+    /** 取得所有指定名称的group的列表。group名称大小写不敏感。 */
     Collection<Group> getGroups(String groupName);
 
-    /**
-     * 取得默认的group instance。如果该group instance不存在，则创建之。Group名称大小写不敏感。
-     */
+    /** 取得默认的group instance。如果该group instance不存在，则创建之。Group名称大小写不敏感。 */
     Group getGroup(String groupName);
 
-    /**
-     * 取得group instance。如果该group instance不存在，则创建之。Group名称大小写不敏感。
-     */
+    /** 取得group instance。如果该group instance不存在，则创建之。Group名称大小写不敏感。 */
     Group getGroup(String groupName, String instanceKey);
 
     /**

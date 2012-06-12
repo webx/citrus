@@ -23,11 +23,10 @@ import static org.junit.Assert.*;
 
 import java.util.Map;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.test.TestEnvStatic;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class SpringPluggableSchemaTests {
     private static SpringPluggableSchemas sps;
@@ -81,6 +80,6 @@ public class SpringPluggableSchemaTests {
         assertThat(uris.size(), greaterThan(0));
 
         assertEquals("www.springframework.org/schema/beans/spring-beans.xsd",
-                uris.get("http://www.springframework.org/schema/beans/spring-beans.xsd"));
+                     uris.get("http://www.springframework.org/schema/beans/spring-beans.xsd"));
     }
 }

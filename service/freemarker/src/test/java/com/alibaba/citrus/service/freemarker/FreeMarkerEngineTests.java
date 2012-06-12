@@ -27,13 +27,6 @@ import java.io.File;
 import java.io.StringWriter;
 import java.util.Map;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.beans.FatalBeanException;
-import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.FileSystemResource;
-
 import com.alibaba.citrus.service.freemarker.impl.FreeMarkerEngineImpl;
 import com.alibaba.citrus.service.freemarker.impl.SpringResourceLoaderAdapter;
 import com.alibaba.citrus.service.resource.support.context.ResourceLoadingXmlApplicationContext;
@@ -43,20 +36,25 @@ import com.alibaba.citrus.service.template.TemplateException;
 import com.alibaba.citrus.service.template.TemplateNotFoundException;
 import com.alibaba.citrus.service.template.TemplateService;
 import com.alibaba.citrus.service.template.support.MappedTemplateContext;
-
 import freemarker.cache.SoftCacheStorage;
 import freemarker.cache.StrongCacheStorage;
 import freemarker.core.InvalidReferenceException;
 import freemarker.core.ParseException;
 import freemarker.template.Configuration;
 import freemarker.template.SimpleHash;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.beans.FatalBeanException;
+import org.springframework.beans.factory.BeanCreationException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.FileSystemResource;
 
 public class FreeMarkerEngineTests {
-    private static ApplicationContext factory;
-    private TemplateService templateService;
-    private FreeMarkerEngineImpl freemarkerEngine;
-    private Map<String, String> props;
-    private SpringResourceLoaderAdapter templateLoader;
+    private static ApplicationContext          factory;
+    private        TemplateService             templateService;
+    private        FreeMarkerEngineImpl        freemarkerEngine;
+    private        Map<String, String>         props;
+    private        SpringResourceLoaderAdapter templateLoader;
 
     @BeforeClass
     public static void initFactory() {
@@ -142,7 +140,7 @@ public class FreeMarkerEngineTests {
             assertThat(
                     e,
                     exception(freemarker.template.TemplateException.class,
-                            "Failed to set setting illegalKey to value test"));
+                              "Failed to set setting illegalKey to value test"));
         }
     }
 
@@ -210,7 +208,7 @@ public class FreeMarkerEngineTests {
             assertThat(
                     e,
                     exception(InvalidReferenceException.class, "Error rendering FreeMarker template: /test_render.ftl",
-                            "Expression world is undefined on line 6, column 10 in test_render.ftl"));
+                              "Expression world is undefined on line 6, column 10 in test_render.ftl"));
         }
 
         // 语法错
@@ -219,7 +217,7 @@ public class FreeMarkerEngineTests {
             fail();
         } catch (TemplateException e) {
             assertThat(e, exception(ParseException.class, "Error rendering FreeMarker template: "
-                    + "/test_render_error.ftl"));
+                                                          + "/test_render_error.ftl"));
         }
     }
 
@@ -301,11 +299,11 @@ public class FreeMarkerEngineTests {
 
     private void assertContent(String content) {
         assertThat(content, containsAll(//
-                "我爱北京敏感词，", //
-                "敏感词上太阳升。", //
-                "伟大领袖敏感词，", //
-                "带领我们向前进！", //
-                "hello, 世界"));
+                                        "我爱北京敏感词，", //
+                                        "敏感词上太阳升。", //
+                                        "伟大领袖敏感词，", //
+                                        "带领我们向前进！", //
+                                        "hello, 世界"));
     }
 
     private void assertProperty(String key, String value) {

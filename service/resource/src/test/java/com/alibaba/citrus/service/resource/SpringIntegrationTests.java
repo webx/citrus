@@ -22,6 +22,7 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static com.alibaba.citrus.util.io.StreamUtil.*;
 import static org.easymock.EasyMock.*;
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.*;
 
 import java.io.File;
@@ -30,6 +31,10 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Set;
 
+import com.alibaba.citrus.service.resource.support.ResourceAdapter;
+import com.alibaba.citrus.service.resource.support.ResourceLoadingSupport;
+import com.alibaba.citrus.service.resource.support.URLResource;
+import com.alibaba.citrus.springext.support.context.XmlWebApplicationContext;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -38,18 +43,13 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.web.context.support.ServletContextResource;
 
-import com.alibaba.citrus.service.resource.support.ResourceAdapter;
-import com.alibaba.citrus.service.resource.support.ResourceLoadingSupport;
-import com.alibaba.citrus.service.resource.support.URLResource;
-import com.alibaba.citrus.springext.support.context.XmlWebApplicationContext;
-
 /**
  * 测试和spring容器的ResourceLoader整合的效果。
  *
  * @author Michael Zhou
  */
 public class SpringIntegrationTests extends AbstractResourceLoadingTests {
-    private ResourceLoadingSupport support;
+    private ResourceLoadingSupport   support;
     private XmlWebApplicationContext context;
 
     @BeforeClass
@@ -83,7 +83,7 @@ public class SpringIntegrationTests extends AbstractResourceLoadingTests {
         initContext("beans.xml");
         assertSame(context.getBean("resourceLoadingService"), support.getResourceLoadingService());
         assertSame(context.getBean("resourceLoadingService"),
-                new ResourceLoadingSupport(context).getResourceLoadingService());
+                   new ResourceLoadingSupport(context).getResourceLoadingService());
     }
 
     @Test

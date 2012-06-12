@@ -28,9 +28,7 @@ import com.alibaba.citrus.util.internal.StringUtil;
  */
 public class PropertyUtil {
 
-    /**
-     * 取得指定名称的property，支持嵌套的property。
-     */
+    /** 取得指定名称的property，支持嵌套的property。 */
     public static Object getProperty(Object object, String propertyPath, TypeConverter converter) {
         assertNotNull(object, "object");
 
@@ -41,14 +39,12 @@ public class PropertyUtil {
         return eval.getValue();
     }
 
-    /**
-     * 对property取值的对象。
-     */
+    /** 对property取值的对象。 */
     private static class PropertyEvaluater implements PropertyPath.Visitor {
-        private final String propertyPath;
-        private final TypeConverter converter;
-        private TypeIntrospectionInfo classInfo;
-        private Object value;
+        private final String                propertyPath;
+        private final TypeConverter         converter;
+        private       TypeIntrospectionInfo classInfo;
+        private       Object                value;
 
         public PropertyEvaluater(String propertyPath, TypeConverter converter, Object value) {
             this.propertyPath = propertyPath;
@@ -146,7 +142,7 @@ public class PropertyUtil {
 
         private void throwFailure(String propertyPath, String displayName) {
             throw new PropertyEvaluationFailureException(String.format("Could not evaluate property \"%s\": \"%s\"",
-                    StringUtil.escapeJava(propertyPath), StringUtil.escapeJava(displayName)));
+                                                                       StringUtil.escapeJava(propertyPath), StringUtil.escapeJava(displayName)));
         }
     }
 }

@@ -33,7 +33,7 @@ import org.springframework.context.support.AbstractApplicationContext;
  */
 class GetApplicationListeners {
     private final AbstractApplicationContext context;
-    private final Method getApplicationListenersMethod;
+    private final Method                     getApplicationListenersMethod;
 
     public GetApplicationListeners(AbstractApplicationContext context) {
         this.context = context;
@@ -49,7 +49,7 @@ class GetApplicationListeners {
         }
 
         getApplicationListenersMethod = assertNotNull(method,
-                "Could not call method: context.getApplicationListeners()");
+                                                      "Could not call method: context.getApplicationListeners()");
     }
 
     public Collection<ApplicationListener> invoke() {

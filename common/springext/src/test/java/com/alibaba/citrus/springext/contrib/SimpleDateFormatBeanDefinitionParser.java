@@ -19,11 +19,10 @@ package com.alibaba.citrus.springext.contrib;
 
 import java.text.SimpleDateFormat;
 
+import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.util.StringUtils;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
 
 public class SimpleDateFormatBeanDefinitionParser extends AbstractNamedBeanDefinitionParser<SimpleDateFormat> {
     @Override

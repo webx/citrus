@@ -20,11 +20,10 @@ package com.alibaba.citrus.turbine.pipeline.valve;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.moduleloader.ModuleNotFoundException;
 import com.alibaba.citrus.service.pipeline.PipelineException;
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
+import org.junit.Test;
 
 public class PerformScreenValveTests extends AbstractValveTests {
     @Test

@@ -29,7 +29,7 @@ import com.alibaba.citrus.generictype.introspect.Introspector;
  * <p>
  * Visitor中的方法调用顺序如下：
  * </p>
- *
+ * <p/>
  * <pre>
  * visit
  * ( visitType

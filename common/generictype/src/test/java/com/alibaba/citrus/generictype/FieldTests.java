@@ -24,14 +24,13 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import com.alibaba.citrus.test.runner.Prototyped;
 import com.alibaba.citrus.test.runner.Prototyped.Prototypes;
 import com.alibaba.citrus.test.runner.Prototyped.TestData;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * 测试{@link FieldInfo}。
@@ -41,15 +40,15 @@ import com.alibaba.citrus.test.runner.Prototyped.TestName;
 @RunWith(Prototyped.class)
 public class FieldTests extends BaseTypeTests implements Cloneable {
     private transient FieldInfo field;
-    private Class<?> topType; // 字段所在类的子类
-    private Class<?> declaringType; // 字段所在类
-    private String fieldName; // 字段名
-    private int modifiers; // 限定符
-    private String type; // 字段类型
-    private String toString; // toString结果
-    private String resolved; // resolve的结果
-    private boolean resolveChanged; // 如果为false，代表resolve返回this
-    private String getFieldFromClassTypeInfo; // ClassTypeInfo.getField的结果
+    private           Class<?>  topType; // 字段所在类的子类
+    private           Class<?>  declaringType; // 字段所在类
+    private           String    fieldName; // 字段名
+    private           int       modifiers; // 限定符
+    private           String    type; // 字段类型
+    private           String    toString; // toString结果
+    private           String    resolved; // resolve的结果
+    private           boolean   resolveChanged; // 如果为false，代表resolve返回this
+    private           String    getFieldFromClassTypeInfo; // ClassTypeInfo.getField的结果
 
     @Before
     public void init() throws Exception {
@@ -69,14 +68,14 @@ public class FieldTests extends BaseTypeTests implements Cloneable {
         public final Number a = 1;
         protected int b;
         Object c;
-        private String d;
+        private String  d;
         private List<T> e;
     }
 
     @SuppressWarnings("unused")
     private static class TestClass<S extends Number> extends TestClassBase<S> {
-        public String a;
-        private static int d;
+        public         String a;
+        private static int    d;
     }
 
     @Prototypes

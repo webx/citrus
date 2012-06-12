@@ -20,12 +20,11 @@ package com.alibaba.citrus.turbine.util;
 import static com.alibaba.citrus.generictype.TypeInfoUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-
 import com.alibaba.citrus.service.pull.PullService;
 import com.alibaba.citrus.turbine.AbstractWebxTests;
 import com.alibaba.citrus.webx.config.WebxConfiguration;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 public abstract class AbstractPullToolTests<T> extends AbstractWebxTests {
     protected T tool;

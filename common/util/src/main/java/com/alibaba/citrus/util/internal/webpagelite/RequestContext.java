@@ -24,8 +24,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 
-import com.alibaba.citrus.util.Assert.ExceptionType;
-
 /**
  * 代表一个request/response context。
  * <p>
@@ -33,10 +31,10 @@ import com.alibaba.citrus.util.Assert.ExceptionType;
  * </p>
  */
 public abstract class RequestContext {
-    private final String baseURL;
-    private final String resourceName;
-    private PrintWriter writer;
-    private OutputStream stream;
+    private final String       baseURL;
+    private final String       resourceName;
+    private       PrintWriter  writer;
+    private       OutputStream stream;
 
     public RequestContext(String baseURL, String resourceName) {
         if (!baseURL.endsWith("/")) {
@@ -51,23 +49,17 @@ public abstract class RequestContext {
         this.resourceName = resourceName;
     }
 
-    /**
-     * 取得URL中所请求的资源名称。
-     */
+    /** 取得URL中所请求的资源名称。 */
     public final String getResourceName() {
         return resourceName;
     }
 
-    /**
-     * 取得基准URL。
-     */
+    /** 取得基准URL。 */
     public final String getBaseURL() {
         return baseURL;
     }
 
-    /**
-     * 取得指定资源名称所对应的URL。
-     */
+    /** 取得指定资源名称所对应的URL。 */
     public final String getResourceURL(String resourceName) {
         return normalizeURI(baseURL + resourceName);
     }
@@ -76,15 +68,13 @@ public abstract class RequestContext {
      * 取得已经取得过的writer。
      *
      * @throws IllegalStateException 如果<code>getWriter(contentType)</code>
-     *             还没有被调用过。
+     *                               还没有被调用过。
      */
     public final PrintWriter getWriter() {
         return assertNotNull(writer, ExceptionType.ILLEGAL_STATE, "call getWriter(contentType) first");
     }
 
-    /**
-     * 取得用来输出文本页面的<code>Writer</code>。
-     */
+    /** 取得用来输出文本页面的<code>Writer</code>。 */
     public final PrintWriter getWriter(String contentType) throws IOException {
         if (writer == null) {
             writer = doGetWriter(contentType);
@@ -99,15 +89,13 @@ public abstract class RequestContext {
      * 取得已经取得过的stream。
      *
      * @throws IllegalStateException 如果<code>getOutputStream(contentType)</code>
-     *             还没有被调用过。
+     *                               还没有被调用过。
      */
     public final OutputStream getOutputStream() {
         return assertNotNull(stream, ExceptionType.ILLEGAL_STATE, "call getOutputStream(contentType) first");
     }
 
-    /**
-     * 取得用来输出二进制内容的<code>OutputStream</code>。
-     */
+    /** 取得用来输出二进制内容的<code>OutputStream</code>。 */
     public final OutputStream getOutputStream(String contentType) throws IOException {
         if (stream == null) {
             stream = doGetOutputStream(contentType);
@@ -118,14 +106,10 @@ public abstract class RequestContext {
 
     protected abstract OutputStream doGetOutputStream(String contentType) throws IOException;
 
-    /**
-     * 资源未找到。
-     */
+    /** 资源未找到。 */
     public abstract void resourceNotFound(String resourceName) throws IOException;
 
-    /**
-     * 重定向页面。
-     */
+    /** 重定向页面。 */
     public abstract void redirectTo(String location) throws IOException;
 
     @Override

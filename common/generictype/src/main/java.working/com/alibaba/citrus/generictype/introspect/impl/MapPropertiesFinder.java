@@ -49,9 +49,7 @@ public class MapPropertiesFinder extends SinglePropertyFinder {
         return null;
     }
 
-    /**
-     * 代表一个map的属性信息。
-     */
+    /** 代表一个map的属性信息。 */
     private static class MapPropertyImpl extends AbstractPropertyInfo implements IndexedPropertyInfo {
         private MapPropertyImpl(TypeInfo declaringType, TypeInfo type, MethodInfo readMethod, MethodInfo writeMethod) {
             super(null, declaringType, type, readMethod, writeMethod);

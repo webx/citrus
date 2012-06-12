@@ -25,13 +25,6 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.core.io.FileSystemResource;
-
 import com.alibaba.citrus.service.requestcontext.session.encrypter.impl.AesEncrypter;
 import com.alibaba.citrus.service.requestcontext.session.serializer.impl.HessianSerializer;
 import com.alibaba.citrus.service.requestcontext.session.serializer.impl.JavaSerializer;
@@ -40,6 +33,12 @@ import com.alibaba.citrus.test.runner.Prototyped;
 import com.alibaba.citrus.test.runner.Prototyped.Prototypes;
 import com.alibaba.citrus.test.runner.Prototyped.TestData;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.core.io.FileSystemResource;
 
 /**
  * 测试session encoder。
@@ -48,13 +47,13 @@ import com.alibaba.citrus.test.runner.Prototyped.TestName;
  */
 @RunWith(Prototyped.class)
 public class SessionEncoderTests implements Cloneable {
-    private static BeanFactory factory;
-    private String beanName;
-    private Class<?> serializerType;
-    private Class<?> encrypterType;
-    private String toString;
-    private AbstractSerializationEncoder encoder;
-    private boolean skipEncoding;
+    private static BeanFactory                  factory;
+    private        String                       beanName;
+    private        Class<?>                     serializerType;
+    private        Class<?>                     encrypterType;
+    private        String                       toString;
+    private        AbstractSerializationEncoder encoder;
+    private        boolean                      skipEncoding;
 
     @BeforeClass
     public static void initFactory() {

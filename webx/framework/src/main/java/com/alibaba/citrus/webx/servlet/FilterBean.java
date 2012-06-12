@@ -26,7 +26,6 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
 import java.util.Set;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -64,20 +63,16 @@ import org.springframework.web.servlet.HttpServletBean;
  * @see HttpServletBean
  */
 public abstract class FilterBean implements Filter {
-    protected final Logger log = LoggerFactory.getLogger(getClass());
-    private final Set<String> requiredProperties = createHashSet();
+    protected final Logger      log                = LoggerFactory.getLogger(getClass());
+    private final   Set<String> requiredProperties = createHashSet();
     private FilterConfig filterConfig;
 
-    /**
-     * 添加一个必选配置项。
-     */
+    /** 添加一个必选配置项。 */
     protected final void addRequiredProperty(String name) {
         this.requiredProperties.add(name);
     }
 
-    /**
-     * 初始化filter。
-     */
+    /** 初始化filter。 */
     public final void init(FilterConfig filterConfig) throws ServletException {
         this.filterConfig = filterConfig;
 
@@ -101,7 +96,7 @@ public abstract class FilterBean implements Filter {
         }
 
         logInBothServletAndLoggingSystem(getClass().getSimpleName() + " - " + getFilterName()
-                + ": initialization completed");
+                                         + ": initialization completed");
     }
 
     protected final void logInBothServletAndLoggingSystem(String msg) {
@@ -109,47 +104,35 @@ public abstract class FilterBean implements Filter {
         log.info(msg);
     }
 
-    /**
-     * 初始化<code>BeanWrapper</code>。
-     */
+    /** 初始化<code>BeanWrapper</code>。 */
     protected void initBeanWrapper(BeanWrapper bw) throws BeansException {
     }
 
-    /**
-     * 初始化Filter。
-     */
+    /** 初始化Filter。 */
     protected void init() throws Exception {
     }
 
-    /**
-     * 清理filter。
-     */
+    /** 清理filter。 */
     public void destroy() {
     }
 
-    /**
-     * 取得filter的配置。
-     */
+    /** 取得filter的配置。 */
     public final FilterConfig getFilterConfig() {
         return filterConfig;
     }
 
-    /**
-     * 取得定义在web.xml中的filter名字。
-     */
+    /** 取得定义在web.xml中的filter名字。 */
     public final String getFilterName() {
         return filterConfig == null ? null : filterConfig.getFilterName();
     }
 
-    /**
-     * 取得当前webapp的context。
-     */
+    /** 取得当前webapp的context。 */
     public final ServletContext getServletContext() {
         return filterConfig == null ? null : filterConfig.getServletContext();
     }
 
     public final void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
-            ServletException {
+                                                                                                           ServletException {
         if (request instanceof HttpServletRequest && response instanceof HttpServletResponse) {
             HttpServletRequest httpRequest = (HttpServletRequest) request;
             HttpServletResponse httpResponse = (HttpServletResponse) response;
@@ -169,7 +152,7 @@ public abstract class FilterBean implements Filter {
             }
         } else {
             log.debug("Skipped filtering due to the unknown request/response types: {}, {}", request.getClass()
-                    .getName(), response.getClass().getName());
+                                                                                                    .getName(), response.getClass().getName());
 
             chain.doFilter(request, response);
         }
@@ -178,16 +161,14 @@ public abstract class FilterBean implements Filter {
     protected abstract void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException;
 
-    /**
-     * 从filter config中取得所有的init-params。
-     */
+    /** 从filter config中取得所有的init-params。 */
     private static class FilterConfigPropertyValues extends MutablePropertyValues {
         private static final long serialVersionUID = -5359131251714023794L;
 
         public FilterConfigPropertyValues(FilterConfig config, Set<String> requiredProperties) throws ServletException {
             Set<String> missingProps = createTreeSet(requiredProperties);
 
-            for (Enumeration<?> e = config.getInitParameterNames(); e.hasMoreElements();) {
+            for (Enumeration<?> e = config.getInitParameterNames(); e.hasMoreElements(); ) {
                 String key = (String) e.nextElement();
                 String value = config.getInitParameter(key);
 
@@ -196,17 +177,15 @@ public abstract class FilterBean implements Filter {
             }
 
             assertTrue(missingProps.isEmpty(), "Initialization for filter %s failed.  "
-                    + "The following required properties were missing: %s", config.getFilterName(), missingProps);
+                                               + "The following required properties were missing: %s", config.getFilterName(), missingProps);
         }
     }
 
-    /**
-     * 不返回response body的response实现。
-     */
+    /** 不返回response body的response实现。 */
     private static class NoBodyResponse extends HttpServletResponseWrapper {
         private NoBodyOutputStream noBody = new NoBodyOutputStream();
         private PrintWriter writer;
-        private boolean didSetContentLength;
+        private boolean     didSetContentLength;
 
         public NoBodyResponse(HttpServletResponse response) {
             super(response);
@@ -239,9 +218,7 @@ public abstract class FilterBean implements Filter {
         }
     }
 
-    /**
-     * 不返回response body的servlet output stream实现。
-     */
+    /** 不返回response body的servlet output stream实现。 */
     private static class NoBodyOutputStream extends ServletOutputStream {
         private int contentLength;
 

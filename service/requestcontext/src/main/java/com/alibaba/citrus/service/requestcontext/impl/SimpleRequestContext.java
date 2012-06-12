@@ -33,16 +33,16 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public class SimpleRequestContext implements RequestContext {
-    private final ServletContext servletContext;
-    private final HttpServletRequest request;
+    private final ServletContext      servletContext;
+    private final HttpServletRequest  request;
     private final HttpServletResponse response;
 
     /**
      * 创建一个新的<code>RequestContext</code>对象。
      *
      * @param servletContext 当前请求所在的<code>ServletContext</code>
-     * @param request <code>HttpServletRequest</code>对象
-     * @param response <code>HttpServletResponse</code>对象
+     * @param request        <code>HttpServletRequest</code>对象
+     * @param response       <code>HttpServletResponse</code>对象
      */
     public SimpleRequestContext(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response) {
         this.servletContext = assertNotNull(servletContext, "servletContext");
@@ -86,15 +86,11 @@ public class SimpleRequestContext implements RequestContext {
         return response;
     }
 
-    /**
-     * 开始一个请求。
-     */
+    /** 开始一个请求。 */
     public void prepare() {
     }
 
-    /**
-     * 结束一个请求。
-     */
+    /** 结束一个请求。 */
     public void commit() {
     }
 

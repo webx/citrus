@@ -36,39 +36,27 @@ import com.alibaba.citrus.service.mail.session.MailTransportHandler;
  * @author Michael Zhou
  */
 public abstract class DefaultMailTransportHandler implements MailTransportHandler {
-    /**
-     * 预处理连接。
-     */
+    /** 预处理连接。 */
     public void prepareConnection(Transport transport) throws MailException, MessagingException {
     }
 
-    /**
-     * 预处理邮件。
-     */
+    /** 预处理邮件。 */
     public void prepareMessage(MailBuilder builder) throws MailException {
     }
 
-    /**
-     * 处理邮件。
-     */
+    /** 处理邮件。 */
     public void processMessage(Message message) throws MailException, MessagingException {
     }
 
-    /**
-     * 如果邮件被发送成功。
-     */
+    /** 如果邮件被发送成功。 */
     public void messageDelivered(TransportEvent transportEvent) {
     }
 
-    /**
-     * 如果邮件未发送成功。
-     */
+    /** 如果邮件未发送成功。 */
     public void messageNotDelivered(TransportEvent transportEvent) {
     }
 
-    /**
-     * 如果邮件部分发送成功。
-     */
+    /** 如果邮件部分发送成功。 */
     public void messagePartiallyDelivered(TransportEvent transportEvent) {
     }
 }

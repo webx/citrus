@@ -34,12 +34,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 
-import org.springframework.core.io.InputStreamSource;
-
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.Schemas;
 import com.alibaba.citrus.springext.impl.SchemaImpl;
 import com.alibaba.citrus.util.ToStringBuilder;
+import org.springframework.core.io.InputStreamSource;
 
 /**
  * 将一组<code>Schemas</code>整合在一起的集合。
@@ -47,7 +46,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
  * @author Michael Zhou
  */
 public class SchemaSet implements Schemas {
-    private final Map<String, Schema> nameToSchemas = createHashMap();
+    private final Map<String, Schema> nameToSchemas             = createHashMap();
     private final Map<String, Schema> nameToSchemasUnmodifiable = unmodifiableMap(nameToSchemas);
     private final SortedSet<String> names;
 
@@ -142,7 +141,7 @@ public class SchemaSet implements Schemas {
         };
 
         addSchema(new SchemaImpl(schema.getName(), schema.getVersion(), schema.getTargetNamespace(),
-                schema.getPreferredNsPrefix(), schema.getSourceDescription(), sourceWithoutIncludes));
+                                 schema.getPreferredNsPrefix(), schema.getSourceDescription(), sourceWithoutIncludes));
     }
 
     private Schema setSchemaWithIncludes(final Schema schema, final Map<String, Schema> allIncludes) {
@@ -153,7 +152,7 @@ public class SchemaSet implements Schemas {
         };
 
         Schema newSchema = new SchemaImpl(schema.getName(), schema.getVersion(), schema.getTargetNamespace(),
-                schema.getPreferredNsPrefix(), schema.getSourceDescription(), sourceWithModifiedIncludes);
+                                          schema.getPreferredNsPrefix(), schema.getSourceDescription(), sourceWithModifiedIncludes);
 
         addSchema(newSchema);
 
@@ -182,31 +181,23 @@ public class SchemaSet implements Schemas {
         includes.put(schema.getName(), schema);
     }
 
-    /**
-     * 查找include schema，如未找到，抛异常。
-     */
+    /** 查找include schema，如未找到，抛异常。 */
     private Schema findIncludedSchema(String include, String fromSchema) {
         return assertNotNull(findSchema(include), "Could not include schema \"%s\" in %s", include, fromSchema);
     }
 
-    /**
-     * 添加一个schema。
-     */
+    /** 添加一个schema。 */
     public void addSchema(Schema schema) {
         nameToSchemas.put(schema.getName(), schema);
         names.add(schema.getName());
     }
 
-    /**
-     * 取得名称和schema的映射表。
-     */
+    /** 取得名称和schema的映射表。 */
     public Map<String, Schema> getNamedMappings() {
         return nameToSchemasUnmodifiable;
     }
 
-    /**
-     * 查找systemId对应的schema，如未找到，则返回<code>null</code>。
-     */
+    /** 查找systemId对应的schema，如未找到，则返回<code>null</code>。 */
     public Schema findSchema(String systemId) {
         systemId = assertNotNull(trimToNull(systemId), "systemId").replaceAll("\\\\", "/");
 

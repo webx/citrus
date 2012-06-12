@@ -59,10 +59,10 @@ public class MappedValuesEncoderTests extends AbstractSingleValueEncoderTests {
         prototype.cookieName = "mapped-encrypted-cookie";
         prototype.value1 = newMap("hello", "你好", "world", "世界");
         prototype.value1Encoded = "iAgfpRQ1Tos2bm%2B7FoZNjf1HlHmXefwxOg3Nzcg"
-                + "QVVe0GT6V0xchmppCBj05e6b%2F490%2Fd65pNOA42zHQFCrxiQ%3D%3D"; // aes encrypted and base64, compressed
+                                  + "QVVe0GT6V0xchmppCBj05e6b%2F490%2Fd65pNOA42zHQFCrxiQ%3D%3D"; // aes encrypted and base64, compressed
         prototype.value2 = newMap("hello", "你好", "world", "中国");
         prototype.value2Encoded = "iAgfpRQ1Tos2bm%2B7FoZNjf1HlHmXefwxOg3Nzcg"
-                + "QVVeSAPjeZF%2BIKFJXcNDIYcQfN3Ii4GGpJMWRzZwn6hY%2B1A%3D%3D"; // aes encrypted and base64, compressed
+                                  + "QVVeSAPjeZF%2BIKFJXcNDIYcQfN3Ii4GGpJMWRzZwn6hY%2B1A%3D%3D"; // aes encrypted and base64, compressed
         prototype.value3 = newMap("hello", "world");
         prototype.value3Encoded = "O9RZVE9yM6vCHt0WEvkl94t%2BUqtklT5fF3QoFNrH77o%3D"; // aes encrypted and base64, compressed
 

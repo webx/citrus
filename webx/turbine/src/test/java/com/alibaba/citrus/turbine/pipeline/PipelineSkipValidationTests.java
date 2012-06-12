@@ -23,6 +23,12 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 import java.util.List;
 
+import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
+import com.alibaba.citrus.turbine.AbstractWebxTests;
+import com.alibaba.citrus.turbine.pipeline.valve.AnalyzeURLValve;
+import com.alibaba.citrus.turbine.pipeline.valve.ExportControlValve;
+import com.alibaba.citrus.turbine.pipeline.valve.GetResourceValve;
+import com.alibaba.citrus.turbine.pipeline.valve.HandleExceptionValve;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,17 +36,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
-import com.alibaba.citrus.turbine.AbstractWebxTests;
-import com.alibaba.citrus.turbine.pipeline.valve.AnalyzeURLValve;
-import com.alibaba.citrus.turbine.pipeline.valve.ExportControlValve;
-import com.alibaba.citrus.turbine.pipeline.valve.GetResourceValve;
-import com.alibaba.citrus.turbine.pipeline.valve.HandleExceptionValve;
-
 @RunWith(Parameterized.class)
 public class PipelineSkipValidationTests extends AbstractWebxTests {
-    private final boolean skipValidation;
-    private PipelineImpl pipeline;
+    private final boolean      skipValidation;
+    private       PipelineImpl pipeline;
 
     public PipelineSkipValidationTests(boolean skipValidation) {
         this.skipValidation = skipValidation;

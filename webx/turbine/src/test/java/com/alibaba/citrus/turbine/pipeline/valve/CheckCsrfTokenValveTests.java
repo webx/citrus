@@ -22,15 +22,14 @@ import static org.junit.Assert.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.PipelineException;
 import com.alibaba.citrus.service.pipeline.Valve;
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import com.alibaba.citrus.turbine.util.CsrfToken;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class CheckCsrfTokenValveTests extends AbstractValveTests {
     @Before

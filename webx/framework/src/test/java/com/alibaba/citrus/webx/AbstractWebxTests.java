@@ -27,7 +27,6 @@ import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -38,9 +37,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
-
-import org.junit.After;
-import org.junit.Before;
 
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.requestcontext.rundata.RunData;
@@ -59,13 +55,15 @@ import com.meterware.servletunit.InvocationContext;
 import com.meterware.servletunit.PatchedServletRunner;
 import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
+import org.junit.After;
+import org.junit.Before;
 
 public abstract class AbstractWebxTests {
     // web client
     protected ServletUnitClient client;
-    protected WebResponse clientResponse;
-    protected int clientResponseCode;
-    protected String clientResponseContent;
+    protected WebResponse       clientResponse;
+    protected int               clientResponseCode;
+    protected String            clientResponseContent;
 
     protected final void prepareWebClient(String webXmlName) throws Exception {
         // Servlet container
@@ -83,9 +81,7 @@ public abstract class AbstractWebxTests {
         JavaScript.setThrowExceptionsOnError(false);
     }
 
-    /**
-     * 调用servlet，取得request/response。
-     */
+    /** 调用servlet，取得request/response。 */
     protected final void invokeServlet(String uri) throws Exception {
         if (uri != null && uri.startsWith("http")) {
             uri = URI.create(uri).normalize().toString(); // full uri
@@ -113,17 +109,13 @@ public abstract class AbstractWebxTests {
         TestExceptionValve.runnerHolder.remove();
     }
 
-    /**
-     * 设置<code>WebxDispatcherServlet.internalHandlerMapping.errorHandler</code>。
-     */
+    /** 设置<code>WebxDispatcherServlet.internalHandlerMapping.errorHandler</code>。 */
     protected void setErrorHandler(AbstractWebxRootController controller, RequestHandler handler) throws Exception {
         Object o1 = getFieldValue(controller, "internalHandlerMapping", null);
         getAccessibleField(o1.getClass(), "errorHandler").set(o1, handler);
     }
 
-    /**
-     * 简化的error page handler。
-     */
+    /** 简化的error page handler。 */
     protected static class SimpleValveRunner implements ValveRunner {
         public void run(RunData rundata, PipelineContext pipelineContext) throws Exception {
             rundata.setContentType("text/plain");
@@ -131,9 +123,7 @@ public abstract class AbstractWebxTests {
         }
     }
 
-    /**
-     * 简化的error page handler。
-     */
+    /** 简化的error page handler。 */
     public static class TestErrorHandler implements RequestHandler {
         public void handleRequest(RequestHandlerContext ctx) throws Exception {
             HttpServletResponse response = ctx.getResponse();
@@ -177,9 +167,7 @@ public abstract class AbstractWebxTests {
         }
     }
 
-    /**
-     * 由于httpunit getQueryString()实现得有问题， 所以只能将request包装一下。
-     */
+    /** 由于httpunit getQueryString()实现得有问题， 所以只能将request包装一下。 */
     public static class MyHttpRequest extends HttpServletRequestWrapper {
         private String overrideQueryString;
 
@@ -210,7 +198,7 @@ public abstract class AbstractWebxTests {
         }
 
         public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
-                ServletException {
+                                                                                                         ServletException {
             if (!((HttpServletRequest) request).getRequestURI().endsWith("scriptaculous.js")) {
                 chain.doFilter(request, response);
             }

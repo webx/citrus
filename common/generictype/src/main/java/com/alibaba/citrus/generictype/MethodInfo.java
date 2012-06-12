@@ -29,24 +29,16 @@ import com.alibaba.citrus.generictype.codegen.MethodSignature;
  * @author Michael Zhou
  */
 public interface MethodInfo extends GenericDeclarationInfo {
-    /**
-     * 是否为构造函数？
-     */
+    /** 是否为构造函数？ */
     boolean isConstructor();
 
-    /**
-     * 取得方法，如果不是方法，则返回<code>null</code>。
-     */
+    /** 取得方法，如果不是方法，则返回<code>null</code>。 */
     Method getMethod();
 
-    /**
-     * 取得构造函数，如果不是构造函数，则返回<code>null</code>。
-     */
+    /** 取得构造函数，如果不是构造函数，则返回<code>null</code>。 */
     Constructor<?> getConstructor();
 
-    /**
-     * 取得当前方法所在的类型。
-     */
+    /** 取得当前方法所在的类型。 */
     TypeInfo getDeclaringType();
 
     /**
@@ -57,29 +49,19 @@ public interface MethodInfo extends GenericDeclarationInfo {
      */
     MethodSignature getSignature();
 
-    /**
-     * 取得方法或构造函数的访问修饰符。
-     */
+    /** 取得方法或构造函数的访问修饰符。 */
     int getModifiers();
 
-    /**
-     * 取得返回类型。
-     */
+    /** 取得返回类型。 */
     TypeInfo getReturnType();
 
-    /**
-     * 取得方法的名称，对于构造函数，则返回<code>&lt;init&gt;</code>。
-     */
+    /** 取得方法的名称，对于构造函数，则返回<code>&lt;init&gt;</code>。 */
     String getName();
 
-    /**
-     * 取得参数类型表。
-     */
+    /** 取得参数类型表。 */
     List<TypeInfo> getParameterTypes();
 
-    /**
-     * 取得异常类型表。
-     */
+    /** 取得异常类型表。 */
     List<TypeInfo> getExceptionTypes();
 
     /**

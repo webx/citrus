@@ -23,15 +23,14 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.alibaba.citrus.service.requestcontext.session.SessionConfig;
 import com.alibaba.citrus.service.requestcontext.session.SessionConfig.CookieConfig;
 import com.alibaba.citrus.service.requestcontext.util.CookieSupport;
 import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 抽象的cookie store实现。
@@ -40,15 +39,15 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  */
 public abstract class AbstractCookieStore implements CookieStore {
     protected final Logger log = LoggerFactory.getLogger(getClass());
-    private String storeName;
+    private String       storeName;
     private CookieConfig idCookieConfig;
-    private String name;
-    private String domain;
-    private String path;
-    private Integer maxAge;
-    private Boolean httpOnly;
-    private Boolean secure;
-    private Boolean survivesInInvalidating;
+    private String       name;
+    private String       domain;
+    private String       path;
+    private Integer      maxAge;
+    private Boolean      httpOnly;
+    private Boolean      secure;
+    private Boolean      survivesInInvalidating;
 
     public String getStoreName() {
         return storeName;
@@ -114,9 +113,7 @@ public abstract class AbstractCookieStore implements CookieStore {
         this.survivesInInvalidating = survivesInInvalidating;
     }
 
-    /**
-     * 初始化cookie store。
-     */
+    /** 初始化cookie store。 */
     public final void init(String storeName, SessionConfig sessionConfig) throws Exception {
         this.idCookieConfig = assertNotNull(sessionConfig, "sessionConfig").getId().getCookie();
         this.storeName = storeName;
@@ -140,15 +137,11 @@ public abstract class AbstractCookieStore implements CookieStore {
         init();
     }
 
-    /**
-     * 初始化cookie store。
-     */
+    /** 初始化cookie store。 */
     protected void init() throws Exception {
     }
 
-    /**
-     * 向response中写入cookie。
-     */
+    /** 向response中写入cookie。 */
     protected void writeCookie(HttpServletResponse response, String cookieName, String cookieValue) {
         CookieSupport cookie = new CookieSupport(cookieName, cookieValue);
 

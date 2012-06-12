@@ -23,8 +23,6 @@ package com.alibaba.citrus.service.moduleloader;
  * @author Michael Zhou
  */
 public interface ModuleAdapterFactory {
-    /**
-     * 将对象转换成module接口。
-     */
+    /** 将对象转换成module接口。 */
     Module adapt(String type, String name, Object moduleObject) throws ModuleLoaderException;
 }

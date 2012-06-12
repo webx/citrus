@@ -19,10 +19,9 @@ package com.alibaba.citrus.turbine.auth;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.turbine.auth.impl.AuthGrant;
 import com.alibaba.citrus.turbine.auth.impl.AuthMatch;
+import org.junit.Test;
 
 public class AuthMatchTests {
     private AuthMatch match;

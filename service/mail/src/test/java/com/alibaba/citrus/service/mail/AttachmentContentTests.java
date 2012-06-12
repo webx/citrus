@@ -24,19 +24,17 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.net.URL;
-
 import javax.activation.DataSource;
 import javax.activation.URLDataSource;
 import javax.mail.Message;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import com.alibaba.citrus.service.mail.builder.MailBuilder;
 import com.alibaba.citrus.service.mail.builder.MailBuilderException;
 import com.alibaba.citrus.service.mail.builder.content.AttachmentContent;
 import com.alibaba.citrus.service.mail.builder.content.TextContent;
 import com.alibaba.citrus.service.mail.support.ResourceDataSource;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * 测试附件。
@@ -250,7 +248,7 @@ public class AttachmentContentTests extends AbstractMailBuilderTests {
             fail();
         } catch (MailBuilderException e) {
             assertThat(e, exception("No fileName was specified with "
-                    + "DataSource[Resource[testfile.txt, loaded by ResourceLoadingService]]"));
+                                    + "DataSource[Resource[testfile.txt, loaded by ResourceLoadingService]]"));
         }
 
         // DS: text, no name, name specified
@@ -545,7 +543,7 @@ public class AttachmentContentTests extends AbstractMailBuilderTests {
         assertThat(eml, containsRegex("Content-Type: image/gif"));
         assertThat(eml, containsRegex("Content-Transfer-Encoding: base64" + REGEX_EOL));
         assertThat(eml, containsRegex("Content-Disposition: attachment;\\s*" + //
-                re("filename=\"=?UTF-8?B?5oiR55qE5Zu+54mHLmdpZg==?=\"")));
+                                      re("filename=\"=?UTF-8?B?5oiR55qE5Zu+54mHLmdpZg==?=\"")));
     }
 
     private void assert_Mail_我爱北京敏感词() throws Exception {

@@ -22,19 +22,18 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import com.alibaba.citrus.service.form.Field;
+import com.alibaba.citrus.service.moduleloader.ActionEventException;
+import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import org.junit.Test;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.context.ApplicationContext;
 
-import com.alibaba.citrus.service.form.Field;
-import com.alibaba.citrus.service.moduleloader.ActionEventException;
-import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
-
 public class FormFieldsResolverTests extends AbstractDataResolverTests {
-    private Field[] fieldArray;
+    private Field[]     fieldArray;
     private List<Field> fieldList;
-    private int[] dataArray;
-    private List<Long> dataList;
+    private int[]       dataArray;
+    private List<Long>  dataList;
 
     @Test
     public void getFields() throws Exception {
@@ -46,12 +45,12 @@ public class FormFieldsResolverTests extends AbstractDataResolverTests {
 
         // GET, invalid
         execute("action", "form.fields.myAction", "doGetFields", "_fm.m.aaa.f=&_fm.m.aaa.fi=" //
-                + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
+                                                                 + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
         assertNull(newRequest.getAttribute("actionLog"));
 
         // GET, valid
         execute("action", "form.fields.myAction", "doGetFields", "_fm.m.aaa.f=a&_fm.m.aaa.f=b&_fm.m.aaa.fi=1" //
-                + "&_fm.m.bbb.f=c&_fm.m.bbb.f=d&_fm.m.bbb.fi=2");
+                                                                 + "&_fm.m.bbb.f=c&_fm.m.bbb.f=d&_fm.m.bbb.fi=2");
         fieldArray = (Field[]) newRequest.getAttribute("actionLog");
         assertNotNull(fieldArray);
         assertEquals(2, fieldArray.length);
@@ -60,7 +59,7 @@ public class FormFieldsResolverTests extends AbstractDataResolverTests {
 
         // GET, invalid, but screen不支持skip
         execute("screen", "form.fields.myScreen", "doGetFields", "_fm.m.aaa.f=&_fm.m.aaa.fi=" //
-                + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
+                                                                 + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
         fieldArray = (Field[]) newRequest.getAttribute("screenLog");
         assertNotNull(fieldArray);
         assertEquals(2, fieldArray.length);
@@ -77,7 +76,7 @@ public class FormFieldsResolverTests extends AbstractDataResolverTests {
 
         // GET, invalid
         execute("action", "form.fields.myAction", "doGetFieldsDontSkipAction", "_fm.m.aaa.f=&_fm.m.aaa.fi=" //
-                + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
+                                                                               + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
         fieldList = (List<Field>) newRequest.getAttribute("actionLog");
         assertNotNull(fieldList);
         assertEquals(2, fieldList.size());
@@ -89,7 +88,7 @@ public class FormFieldsResolverTests extends AbstractDataResolverTests {
         // GET, valid
         execute("action", "form.fields.myAction", "doGetFieldsDontSkipAction",
                 "_fm.m.aaa.f=a&_fm.m.aaa.f=b&_fm.m.aaa.fi=1" //
-                        + "&_fm.m.bbb.f=c&_fm.m.bbb.f=d&_fm.m.bbb.fi=2");
+                + "&_fm.m.bbb.f=c&_fm.m.bbb.f=d&_fm.m.bbb.fi=2");
         fieldList = (List<Field>) newRequest.getAttribute("actionLog");
         assertNotNull(fieldList);
         assertEquals(2, fieldList.size());
@@ -105,26 +104,26 @@ public class FormFieldsResolverTests extends AbstractDataResolverTests {
 
         // GET, invalid
         execute("action", "form.fields.myAction", "doGetFieldsBeans", "_fm.m.aaa.f=&_fm.m.aaa.fi=" //
-                + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
+                                                                      + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
         assertNull(newRequest.getAttribute("actionLog"));
 
         // GET, valid
         execute("action", "form.fields.myAction", "doGetFieldsBeans", "_fm.m.aaa.f=11&_fm.m.aaa.f=12&_fm.m.aaa.fi=1" //
-                + "&_fm.m.bbb.f=21&_fm.m.bbb.f=22&_fm.m.bbb.fi=2");
+                                                                      + "&_fm.m.bbb.f=21&_fm.m.bbb.f=22&_fm.m.bbb.fi=2");
         dataArray = (int[]) newRequest.getAttribute("actionLog");
         assertNotNull(dataArray);
         assertArrayEquals(new int[] { 11, 21 }, dataArray);
 
         // GET, valid，多值
         execute("action", "form.fields.myAction", "doGetFieldsBeans2", "_fm.m.aaa.f=11&_fm.m.aaa.f=12&_fm.m.aaa.fi=1" //
-                + "&_fm.m.bbb.f=21&_fm.m.bbb.f=22&_fm.m.bbb.fi=2");
+                                                                       + "&_fm.m.bbb.f=21&_fm.m.bbb.f=22&_fm.m.bbb.fi=2");
         int[][] dataArray2 = (int[][]) newRequest.getAttribute("actionLog");
         assertNotNull(dataArray2);
         assertArrayEquals(new int[][] { { 11, 12 }, { 21, 22 } }, dataArray2);
 
         // GET, invalid, but screen不支持skip
         execute("screen", "form.fields.myScreenGetFieldsBeans", "doGetFieldsBeans", "_fm.m.aaa.f=&_fm.m.aaa.fi=" //
-                + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
+                                                                                    + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
         dataArray = (int[]) newRequest.getAttribute("screenLog");
         assertNull(dataArray);
     }
@@ -136,14 +135,14 @@ public class FormFieldsResolverTests extends AbstractDataResolverTests {
 
         // GET, invalid
         execute("action", "form.fields.myAction", "doGetFieldsBeansDontSkipAction", "_fm.m.aaa.f=&_fm.m.aaa.fi=" //
-                + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
+                                                                                    + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
         dataList = (List<Long>) newRequest.getAttribute("actionLog");
         assertNull(dataList);
 
         // GET, valid
         execute("action", "form.fields.myAction", "doGetFieldsBeansDontSkipAction",
                 "_fm.m.aaa.f=11&_fm.m.aaa.f=12&_fm.m.aaa.fi=1" //
-                        + "&_fm.m.bbb.f=21&_fm.m.bbb.f=22&_fm.m.bbb.fi=2");
+                + "&_fm.m.bbb.f=21&_fm.m.bbb.f=22&_fm.m.bbb.fi=2");
         dataList = (List<Long>) newRequest.getAttribute("actionLog");
         assertNotNull(dataList);
         assertArrayEquals(new Object[] { 11L, 21L }, dataList.toArray());
@@ -151,7 +150,7 @@ public class FormFieldsResolverTests extends AbstractDataResolverTests {
         // GET, valid，多值
         execute("action", "form.fields.myAction", "doGetFieldsBeansDontSkipAction2",
                 "_fm.m.aaa.f=11&_fm.m.aaa.f=12&_fm.m.aaa.fi=1" //
-                        + "&_fm.m.bbb.f=21&_fm.m.bbb.f=22&_fm.m.bbb.fi=2");
+                + "&_fm.m.bbb.f=21&_fm.m.bbb.f=22&_fm.m.bbb.fi=2");
         List<Long[]> dataList2 = (List<Long[]>) newRequest.getAttribute("actionLog");
         assertNotNull(dataList2);
         assertArrayEquals(new Long[][] { { 11L, 12L }, { 21L, 22L } }, dataList2.toArray(new Long[0][]));
@@ -163,7 +162,7 @@ public class FormFieldsResolverTests extends AbstractDataResolverTests {
 
         // GET, valid
         execute("action", "form.fields.myAction", "doGetFieldsBeans", "_fm.m.aaa.f=aa&_fm.m.aaa.f=12&_fm.m.aaa.fi=abc" //
-                + "&_fm.m.bbb.f=21&_fm.m.bbb.f=22&_fm.m.bbb.fi=def");
+                                                                      + "&_fm.m.bbb.f=21&_fm.m.bbb.f=22&_fm.m.bbb.fi=def");
         dataArray = (int[]) newRequest.getAttribute("actionLog");
         assertNotNull(dataArray);
         assertArrayEquals(new int[] { 0, 21 }, dataArray);
@@ -185,7 +184,7 @@ public class FormFieldsResolverTests extends AbstractDataResolverTests {
         try {
             execute("action", "form.fields.myAction", "doGetFieldsBeans",
                     "_fm.m.aaa.f=aa&_fm.m.aaa.f=12&_fm.m.aaa.fi=abc" //
-                            + "&_fm.m.bbb.f=21&_fm.m.bbb.f=22&_fm.m.bbb.fi=def");
+                    + "&_fm.m.bbb.f=21&_fm.m.bbb.f=22&_fm.m.bbb.fi=def");
             fail();
         } catch (ActionEventException e) {
             assertThat(e, exception(TypeMismatchException.class, "java.lang.String", "java.lang.Integer", "aa"));

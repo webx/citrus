@@ -53,89 +53,85 @@ import java.lang.reflect.Constructor;
 
 import com.alibaba.citrus.hessian.HessianException;
 
-/**
- * Deserializing a string valued object
- */
+/** Deserializing a string valued object */
 public class SqlDateDeserializer extends AbstractDeserializer {
-  private Class _cl;
-  private Constructor _constructor;
+    private Class       _cl;
+    private Constructor _constructor;
 
-  public SqlDateDeserializer(Class cl)
-  {
-    try {
-      _cl = cl;
-      _constructor = cl.getConstructor(new Class[] { long.class });
-    } catch (NoSuchMethodException e) {
-      throw new HessianException(e);
-    }
-  }
-
-  public Class getType()
-  {
-    return _cl;
-  }
-
-  public Object readMap(AbstractHessianInput in)
-    throws IOException
-  {
-    int ref = in.addRef(null);
-
-    long initValue = Long.MIN_VALUE;
-
-    while (! in.isEnd()) {
-      String key = in.readString();
-
-      if (key.equals("value"))
-	initValue = in.readUTCDate();
-      else
-	in.readString();
+    public SqlDateDeserializer(Class cl) {
+        try {
+            _cl = cl;
+            _constructor = cl.getConstructor(new Class[] { long.class });
+        } catch (NoSuchMethodException e) {
+            throw new HessianException(e);
+        }
     }
 
-    in.readMapEnd();
-
-    Object value = create(initValue);
-
-    in.setRef(ref, value);
-
-    return value;
-  }
-
-  public Object readObject(AbstractHessianInput in,
-                           Object []fields)
-    throws IOException
-  {
-    String []fieldNames = (String []) fields;
-
-    int ref = in.addRef(null);
-
-    long initValue = Long.MIN_VALUE;
-
-    for (int i = 0; i < fieldNames.length; i++) {
-      String key = fieldNames[i];
-
-      if (key.equals("value"))
-	initValue = in.readUTCDate();
-      else
-	in.readObject();
+    public Class getType() {
+        return _cl;
     }
 
-    Object value = create(initValue);
+    public Object readMap(AbstractHessianInput in)
+            throws IOException {
+        int ref = in.addRef(null);
 
-    in.setRef(ref, value);
+        long initValue = Long.MIN_VALUE;
 
-    return value;
-  }
+        while (!in.isEnd()) {
+            String key = in.readString();
 
-  private Object create(long initValue)
-    throws IOException
-  {
-    if (initValue == Long.MIN_VALUE)
-      throw new IOException(_cl.getName() + " expects name.");
+            if (key.equals("value")) {
+                initValue = in.readUTCDate();
+            } else {
+                in.readString();
+            }
+        }
 
-    try {
-      return _constructor.newInstance(new Object[] { new Long(initValue) });
-    } catch (Exception e) {
-      throw new IOExceptionWrapper(e);
+        in.readMapEnd();
+
+        Object value = create(initValue);
+
+        in.setRef(ref, value);
+
+        return value;
     }
-  }
+
+    public Object readObject(AbstractHessianInput in,
+                             Object[] fields)
+            throws IOException {
+        String[] fieldNames = (String[]) fields;
+
+        int ref = in.addRef(null);
+
+        long initValue = Long.MIN_VALUE;
+
+        for (int i = 0; i < fieldNames.length; i++) {
+            String key = fieldNames[i];
+
+            if (key.equals("value")) {
+                initValue = in.readUTCDate();
+            } else {
+                in.readObject();
+            }
+        }
+
+        Object value = create(initValue);
+
+        in.setRef(ref, value);
+
+        return value;
+    }
+
+    private Object create(long initValue)
+            throws IOException {
+        if (initValue == Long.MIN_VALUE) {
+            throw new IOException(_cl.getName() + " expects name.");
+        }
+
+        try {
+            return _constructor.newInstance(new Object[] { new Long(initValue) });
+        } catch (Exception e) {
+            throw new IOExceptionWrapper(e);
+        }
+    }
 }

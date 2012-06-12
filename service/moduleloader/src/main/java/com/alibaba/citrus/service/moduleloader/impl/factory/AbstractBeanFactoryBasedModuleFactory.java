@@ -24,12 +24,11 @@ import static java.util.Collections.*;
 import java.util.Map;
 import java.util.Set;
 
+import com.alibaba.citrus.service.moduleloader.ModuleFactory;
+import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.InitializingBean;
-
-import com.alibaba.citrus.service.moduleloader.ModuleFactory;
-import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
 
 /**
  * 通过查找beans来创建相应的modules的工厂。
@@ -37,7 +36,7 @@ import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
  * @author Michael Zhou
  */
 abstract class AbstractBeanFactoryBasedModuleFactory implements InitializingBean, BeanFactoryAware, ModuleFactory {
-    private BeanFactory beans;
+    private BeanFactory                          beans;
     private Map<String, Map<String, ModuleInfo>> modules;
 
     public void setBeanFactory(BeanFactory beanFactory) {

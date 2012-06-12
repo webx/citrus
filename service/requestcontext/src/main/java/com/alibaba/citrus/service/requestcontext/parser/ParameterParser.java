@@ -17,10 +17,9 @@
 
 package com.alibaba.citrus.service.requestcontext.parser;
 
-import org.apache.commons.fileupload.FileItem;
-
 import com.alibaba.citrus.service.upload.UploadException;
 import com.alibaba.citrus.service.upload.UploadParameters;
+import org.apache.commons.fileupload.FileItem;
 
 /**
  * <code>ParameterParser</code>是用来解析HTTP请求中GET或POST的参数的接口。
@@ -47,7 +46,7 @@ public interface ParameterParser extends ValueParser {
     /**
      * 添加<code>FileItem</code>。
      *
-     * @param name 参数名
+     * @param name  参数名
      * @param value 参数值
      */
     void add(String name, FileItem value);
@@ -72,8 +71,8 @@ public interface ParameterParser extends ValueParser {
      * 此方法覆盖了service的默认设置，适合于在action或servlet中手工执行。
      * </p>
      *
-     * @param sizeThreshold 文件放在内存中的阈值，小于此值的文件被保存在内存中。如果此值小于0，则使用预设的值
-     * @param sizeMax HTTP请求的最大尺寸，超过此尺寸的请求将被抛弃。
+     * @param sizeThreshold  文件放在内存中的阈值，小于此值的文件被保存在内存中。如果此值小于0，则使用预设的值
+     * @param sizeMax        HTTP请求的最大尺寸，超过此尺寸的请求将被抛弃。
      * @param repositoryPath 暂存上载文件的绝对路径
      * @throws UploadException 如果解析时出错
      */

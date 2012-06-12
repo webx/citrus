@@ -44,7 +44,7 @@ public class SearchLocalizedTemplatesStrategy implements TemplateSearchingStrate
 
     public boolean findTemplate(TemplateMatcher matcher) {
         List<String> localizedTemplateNames = calculateBundleNames(matcher.getTemplateNameWithoutExtension(),
-                getCurrentLocale(), true);
+                                                                   getCurrentLocale(), true);
 
         for (String name : localizedTemplateNames) {
             matcher.setTemplateNameWithoutExtension(name);

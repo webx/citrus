@@ -19,9 +19,8 @@ package com.alibaba.citrus.service.requestcontext.session.idgen.random.impl;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.requestcontext.session.idgen.AbstractIDGeneratorTests;
+import org.junit.Test;
 
 public class RandomSessionIDGeneratorTests extends AbstractIDGeneratorTests<RandomIDGenerator> {
     @Test

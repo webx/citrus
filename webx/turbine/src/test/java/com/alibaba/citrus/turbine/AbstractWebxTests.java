@@ -26,15 +26,11 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.junit.After;
-import org.springframework.context.ApplicationContext;
 
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.RequestContextChainingService;
@@ -52,13 +48,15 @@ import com.meterware.servletunit.InvocationContext;
 import com.meterware.servletunit.PatchedServletRunner;
 import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
+import org.junit.After;
+import org.springframework.context.ApplicationContext;
 
 public abstract class AbstractWebxTests {
     // web client
     protected static ServletUnitClient client;
 
     // controller/component
-    protected static WebxComponent component;
+    protected static WebxComponent  component;
     protected static WebxController controller;
 
     // container
@@ -68,15 +66,15 @@ public abstract class AbstractWebxTests {
     protected static ServletContext context;
 
     // servlet request/response
-    protected InvocationContext invocationContext;
-    protected HttpServletRequest request;
+    protected InvocationContext   invocationContext;
+    protected HttpServletRequest  request;
     protected HttpServletResponse response;
 
     // request contexts
     protected RequestContextChainingService requestContexts;
-    protected TurbineRunDataInternal rundata;
-    protected HttpServletRequest newRequest;
-    protected HttpServletResponse newResponse;
+    protected TurbineRunDataInternal        rundata;
+    protected HttpServletRequest            newRequest;
+    protected HttpServletResponse           newResponse;
 
     @After
     public void clearClient() {
@@ -101,7 +99,7 @@ public abstract class AbstractWebxTests {
 
         // Filter
         WebxFrameworkFilter filter = (WebxFrameworkFilter) client.newInvocation("http://www.taobao.com/" + app)
-                .getFilter();
+                                                                 .getFilter();
         context = filter.getWebxComponents().getParentApplicationContext().getServletContext();
 
         // Webx Controller
@@ -115,9 +113,7 @@ public abstract class AbstractWebxTests {
         assertNotNull(factory);
     }
 
-    /**
-     * 调用servlet，取得request/response。
-     */
+    /** 调用servlet，取得request/response。 */
     protected final void getInvocationContext(String uri) throws Exception {
         getInvocationContext(uri, null);
     }
@@ -144,9 +140,7 @@ public abstract class AbstractWebxTests {
         void process(WebRequest wr);
     }
 
-    /**
-     * 取得request context。
-     */
+    /** 取得request context。 */
     protected final void initRequestContext() {
         requestContexts = (RequestContextChainingService) factory.getBean("requestContexts");
 

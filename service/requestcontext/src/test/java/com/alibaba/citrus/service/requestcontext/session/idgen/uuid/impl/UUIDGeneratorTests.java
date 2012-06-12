@@ -20,10 +20,9 @@ package com.alibaba.citrus.service.requestcontext.session.idgen.uuid.impl;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
+import com.alibaba.citrus.service.requestcontext.session.idgen.AbstractIDGeneratorTests;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.alibaba.citrus.service.requestcontext.session.idgen.AbstractIDGeneratorTests;
 
 public class UUIDGeneratorTests extends AbstractIDGeneratorTests<UUIDGenerator> {
     private String instanceId;

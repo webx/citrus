@@ -22,7 +22,6 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URL;
-
 import javax.servlet.http.HttpServletResponse;
 
 import com.meterware.httpunit.FrameSelector;

@@ -29,8 +29,6 @@ package com.alibaba.citrus.webx.handler;
  * @author Michael Zhou
  */
 public interface RequestHandler {
-    /**
-     * 处理请求。
-     */
+    /** 处理请求。 */
     void handleRequest(RequestHandlerContext context) throws Exception;
 }

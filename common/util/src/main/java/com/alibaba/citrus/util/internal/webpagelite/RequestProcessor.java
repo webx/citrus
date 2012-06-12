@@ -71,28 +71,22 @@ public abstract class RequestProcessor<RC extends RequestContext> implements Pag
         contentTypes.put("ico", "image/x-icon");
     }
 
-    /**
-     * 注册一个组件。
-     */
+    /** 注册一个组件。 */
     public void register(String componentPath, PageComponent component) {
         assertNotNull(componentPath, "componentPath is null");
         assertTrue(componentPath.length() == 0 || !componentPath.startsWith("/") && componentPath.endsWith("/"),
-                "invalid componentPath: %s", componentPath);
+                   "invalid componentPath: %s", componentPath);
         assertTrue(!components.containsKey(componentPath), "duplicated component: %s", componentPath);
 
         components.put(componentPath, component);
     }
 
-    /**
-     * 取得所有的componentPaths。
-     */
+    /** 取得所有的componentPaths。 */
     public String[] getComponentPaths() {
         return components.keySet().toArray(new String[components.size()]);
     }
 
-    /**
-     * 取得指定名称的组件。
-     */
+    /** 取得指定名称的组件。 */
     public <PC extends PageComponent> PC getComponent(String componentPath, Class<PC> componentClass) {
         componentPath = PageComponent.normalizeComponentPath(componentPath);
 
@@ -107,9 +101,7 @@ public abstract class RequestProcessor<RC extends RequestContext> implements Pag
         }
     }
 
-    /**
-     * 处理请求。
-     */
+    /** 处理请求。 */
     public final void processRequest(final RC request) throws IOException {
         final String resourceName = request.getResourceName();
 
@@ -176,7 +168,7 @@ public abstract class RequestProcessor<RC extends RequestContext> implements Pag
         // 2. 或者，lastModified > ifModifiedSince
         // 执行runner
         if (lastModified < 0 || servletRequest == null
-                || !"get".equalsIgnoreCase(servletRequest.getRequest().getMethod())) {
+            || !"get".equalsIgnoreCase(servletRequest.getRequest().getMethod())) {
             runner.run();
         } else {
             long ifModifiedSince = servletRequest.getRequest().getDateHeader("If-Modified-Since");
@@ -193,9 +185,7 @@ public abstract class RequestProcessor<RC extends RequestContext> implements Pag
         }
     }
 
-    /**
-     * 判断资源是否存在。
-     */
+    /** 判断资源是否存在。 */
     protected abstract boolean resourceExists(String resourceName);
 
     /**
@@ -222,7 +212,7 @@ public abstract class RequestProcessor<RC extends RequestContext> implements Pag
         Set<String> visitedPackages = createHashSet();
 
         for (Class<?> processorClass = getClass(); processorClass != null
-                && RequestProcessor.class.isAssignableFrom(processorClass); processorClass = processorClass
+                                                   && RequestProcessor.class.isAssignableFrom(processorClass); processorClass = processorClass
                 .getSuperclass()) {
             String processorPackage = processorClass.getPackage().getName();
 
@@ -261,14 +251,10 @@ public abstract class RequestProcessor<RC extends RequestContext> implements Pag
         return true;
     }
 
-    /**
-     * 渲染页面。
-     */
+    /** 渲染页面。 */
     protected abstract void renderPage(RC request, String resourceName) throws IOException;
 
-    /**
-     * 渲染css、js之类的资源文件，或者资源文件模板。
-     */
+    /** 渲染css、js之类的资源文件，或者资源文件模板。 */
     private void renderResource(final RC request, URL resource, boolean template) throws IOException {
         String resourceName = request.getResourceName();
         int extIndex = resourceName.indexOf(".", resourceName.lastIndexOf("/") + 1);
@@ -293,9 +279,7 @@ public abstract class RequestProcessor<RC extends RequestContext> implements Pag
         }
     }
 
-    /**
-     * 取得所有component的资源文件。
-     */
+    /** 取得所有component的资源文件。 */
     protected List<String> getComponentResources(String ext) {
         List<String> names = createLinkedList();
 

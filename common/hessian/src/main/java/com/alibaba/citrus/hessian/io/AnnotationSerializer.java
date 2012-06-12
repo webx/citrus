@@ -49,347 +49,326 @@
 package com.alibaba.citrus.hessian.io;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.alibaba.citrus.hessian.HessianException;
 
-/**
- * Serializing a Java annotation
- */
-public class AnnotationSerializer extends AbstractSerializer
-{
-  private static final Logger log
-    = Logger.getLogger(AnnotationSerializer.class.getName());
+/** Serializing a Java annotation */
+public class AnnotationSerializer extends AbstractSerializer {
+    private static final Logger log
+            = Logger.getLogger(AnnotationSerializer.class.getName());
 
-  private static Object []NULL_ARGS = new Object[0];
+    private static Object[] NULL_ARGS = new Object[0];
 
-  private Class _annType;
-  private Method []_methods;
-  private MethodSerializer []_methodSerializers;
+    private Class              _annType;
+    private Method[]           _methods;
+    private MethodSerializer[] _methodSerializers;
 
-  public AnnotationSerializer(Class annType)
-  {
-    if (! Annotation.class.isAssignableFrom(annType)) {
-      throw new IllegalStateException(annType.getName() + " is invalid because it is not a java.lang.annotation.Annotation");
-    }
-  }
-
-  public void writeObject(Object obj, AbstractHessianOutput out)
-    throws IOException
-  {
-    if (out.addRef(obj)) {
-      return;
+    public AnnotationSerializer(Class annType) {
+        if (!Annotation.class.isAssignableFrom(annType)) {
+            throw new IllegalStateException(annType.getName() + " is invalid because it is not a java.lang.annotation.Annotation");
+        }
     }
 
-    init(((Annotation) obj).annotationType());
+    public void writeObject(Object obj, AbstractHessianOutput out)
+            throws IOException {
+        if (out.addRef(obj)) {
+            return;
+        }
 
-    int ref = out.writeObjectBegin(_annType.getName());
+        init(((Annotation) obj).annotationType());
 
-    if (ref < -1) {
-      writeObject10(obj, out);
-    }
-    else {
-      if (ref == -1) {
-	writeDefinition20(out);
-	out.writeObjectBegin(_annType.getName());
-      }
+        int ref = out.writeObjectBegin(_annType.getName());
 
-      writeInstance(obj, out);
-    }
-  }
+        if (ref < -1) {
+            writeObject10(obj, out);
+        } else {
+            if (ref == -1) {
+                writeDefinition20(out);
+                out.writeObjectBegin(_annType.getName());
+            }
 
-  protected void writeObject10(Object obj, AbstractHessianOutput out)
-    throws IOException
-  {
-    for (int i = 0; i < _methods.length; i++) {
-      Method method = _methods[i];
-
-      out.writeString(method.getName());
-
-      _methodSerializers[i].serialize(out, obj, method);
+            writeInstance(obj, out);
+        }
     }
 
-    out.writeMapEnd();
-  }
+    protected void writeObject10(Object obj, AbstractHessianOutput out)
+            throws IOException {
+        for (int i = 0; i < _methods.length; i++) {
+            Method method = _methods[i];
 
-  private void writeDefinition20(AbstractHessianOutput out)
-    throws IOException
-  {
-    out.writeClassFieldLength(_methods.length);
+            out.writeString(method.getName());
 
-    for (int i = 0; i < _methods.length; i++) {
-      Method method = _methods[i];
+            _methodSerializers[i].serialize(out, obj, method);
+        }
 
-      out.writeString(method.getName());
-    }
-  }
-
-  public void writeInstance(Object obj, AbstractHessianOutput out)
-    throws IOException
-  {
-    for (int i = 0; i < _methods.length; i++) {
-      Method method = _methods[i];
-
-      _methodSerializers[i].serialize(out, obj, method);
-    }
-  }
-
-
-  private void init(Class cl)
-  {
-    synchronized (this) {
-      if (_annType != null)
-	return;
-
-      _annType = cl;
-
-      ArrayList methods = new ArrayList();
-
-      for (Method method : _annType.getDeclaredMethods()) {
-	if (method.getName().equals("hashCode")
-	    || method.getName().equals("toString")
-	    || method.getName().equals("annotationType")) {
-	  continue;
-	}
-
-	if (method.getParameterTypes().length != 0)
-	  continue;
-
-	methods.add(method);
-
-	method.setAccessible(true);
-      }
-
-      if (_annType == null)
-	throw new IllegalStateException(cl.getName() + " is invalid because it does not have a valid annotationType()");
-
-      _methods = new Method[methods.size()];
-      methods.toArray(_methods);
-
-      _methodSerializers = new MethodSerializer[_methods.length];
-
-      for (int i = 0; i < _methods.length; i++) {
-	_methodSerializers[i] = getMethodSerializer(_methods[i].getReturnType());
-      }
-    }
-  }
-
-  private Class getAnnotationType(Class cl)
-  {
-    if (cl == null)
-      return null;
-
-    if (Annotation.class.equals(cl.getSuperclass()))
-      return cl;
-
-    Class ifaces[] = cl.getInterfaces();
-
-    if (ifaces != null) {
-      for (Class iface : ifaces) {
-	if (iface.equals(Annotation.class))
-	  return cl;
-
-	Class annType = getAnnotationType(iface);
-
-	if (annType != null)
-	  return annType;
-      }
+        out.writeMapEnd();
     }
 
-    return getAnnotationType(cl.getSuperclass());
-  }
+    private void writeDefinition20(AbstractHessianOutput out)
+            throws IOException {
+        out.writeClassFieldLength(_methods.length);
 
-  private static MethodSerializer getMethodSerializer(Class type)
-  {
-    if (int.class.equals(type)
-        || byte.class.equals(type)
-        || short.class.equals(type)
-        || int.class.equals(type)) {
-      return IntMethodSerializer.SER;
+        for (int i = 0; i < _methods.length; i++) {
+            Method method = _methods[i];
+
+            out.writeString(method.getName());
+        }
     }
-    else if (long.class.equals(type)) {
-      return LongMethodSerializer.SER;
+
+    public void writeInstance(Object obj, AbstractHessianOutput out)
+            throws IOException {
+        for (int i = 0; i < _methods.length; i++) {
+            Method method = _methods[i];
+
+            _methodSerializers[i].serialize(out, obj, method);
+        }
     }
-    else if (double.class.equals(type) ||
-        float.class.equals(type)) {
-      return DoubleMethodSerializer.SER;
+
+    private void init(Class cl) {
+        synchronized (this) {
+            if (_annType != null) {
+                return;
+            }
+
+            _annType = cl;
+
+            ArrayList methods = new ArrayList();
+
+            for (Method method : _annType.getDeclaredMethods()) {
+                if (method.getName().equals("hashCode")
+                    || method.getName().equals("toString")
+                    || method.getName().equals("annotationType")) {
+                    continue;
+                }
+
+                if (method.getParameterTypes().length != 0) {
+                    continue;
+                }
+
+                methods.add(method);
+
+                method.setAccessible(true);
+            }
+
+            if (_annType == null) {
+                throw new IllegalStateException(cl.getName() + " is invalid because it does not have a valid annotationType()");
+            }
+
+            _methods = new Method[methods.size()];
+            methods.toArray(_methods);
+
+            _methodSerializers = new MethodSerializer[_methods.length];
+
+            for (int i = 0; i < _methods.length; i++) {
+                _methodSerializers[i] = getMethodSerializer(_methods[i].getReturnType());
+            }
+        }
     }
-    else if (boolean.class.equals(type)) {
-      return BooleanMethodSerializer.SER;
+
+    private Class getAnnotationType(Class cl) {
+        if (cl == null) {
+            return null;
+        }
+
+        if (Annotation.class.equals(cl.getSuperclass())) {
+            return cl;
+        }
+
+        Class ifaces[] = cl.getInterfaces();
+
+        if (ifaces != null) {
+            for (Class iface : ifaces) {
+                if (iface.equals(Annotation.class)) {
+                    return cl;
+                }
+
+                Class annType = getAnnotationType(iface);
+
+                if (annType != null) {
+                    return annType;
+                }
+            }
+        }
+
+        return getAnnotationType(cl.getSuperclass());
     }
-    else if (String.class.equals(type)) {
-      return StringMethodSerializer.SER;
+
+    private static MethodSerializer getMethodSerializer(Class type) {
+        if (int.class.equals(type)
+            || byte.class.equals(type)
+            || short.class.equals(type)
+            || int.class.equals(type)) {
+            return IntMethodSerializer.SER;
+        } else if (long.class.equals(type)) {
+            return LongMethodSerializer.SER;
+        } else if (double.class.equals(type) ||
+                   float.class.equals(type)) {
+            return DoubleMethodSerializer.SER;
+        } else if (boolean.class.equals(type)) {
+            return BooleanMethodSerializer.SER;
+        } else if (String.class.equals(type)) {
+            return StringMethodSerializer.SER;
+        } else if (java.util.Date.class.equals(type)
+                   || java.sql.Date.class.equals(type)
+                   || java.sql.Timestamp.class.equals(type)
+                   || java.sql.Time.class.equals(type)) {
+            return DateMethodSerializer.SER;
+        } else {
+            return MethodSerializer.SER;
+        }
     }
-    else if (java.util.Date.class.equals(type)
-             || java.sql.Date.class.equals(type)
-             || java.sql.Timestamp.class.equals(type)
-             || java.sql.Time.class.equals(type)) {
-      return DateMethodSerializer.SER;
+
+    static HessianException error(Method method, Throwable cause) {
+        String msg = (method.getDeclaringClass().getSimpleName()
+                      + "." + method.getName() + "(): " + cause);
+
+        throw new HessianMethodSerializationException(msg, cause);
     }
-    else
-      return MethodSerializer.SER;
-  }
 
-  static HessianException error(Method method, Throwable cause)
-  {
-    String msg = (method.getDeclaringClass().getSimpleName()
-		  + "." + method.getName() + "(): " + cause);
+    static class MethodSerializer {
+        static final MethodSerializer SER = new MethodSerializer();
 
-    throw new HessianMethodSerializationException(msg, cause);
-  }
+        void serialize(AbstractHessianOutput out, Object obj, Method method)
+                throws IOException {
+            Object value = null;
 
-  static class MethodSerializer {
-    static final MethodSerializer SER = new MethodSerializer();
+            try {
+                value = method.invoke(obj);
+            } catch (InvocationTargetException e) {
+                throw error(method, e.getCause());
+            } catch (IllegalAccessException e) {
+                log.log(Level.FINE, e.toString(), e);
+            }
 
-    void serialize(AbstractHessianOutput out, Object obj, Method method)
-      throws IOException
-    {
-      Object value = null;
-
-      try {
-	value = method.invoke(obj);
-      } catch (InvocationTargetException e) {
-	throw error(method, e.getCause());
-      } catch (IllegalAccessException e) {
-	log.log(Level.FINE, e.toString(), e);
-      }
-
-      try {
-	out.writeObject(value);
-      } catch (Exception e) {
-	throw error(method, e);
-      }
+            try {
+                out.writeObject(value);
+            } catch (Exception e) {
+                throw error(method, e);
+            }
+        }
     }
-  }
 
-  static class BooleanMethodSerializer extends MethodSerializer {
-    static final MethodSerializer SER = new BooleanMethodSerializer();
+    static class BooleanMethodSerializer extends MethodSerializer {
+        static final MethodSerializer SER = new BooleanMethodSerializer();
 
-    void serialize(AbstractHessianOutput out, Object obj, Method method)
-      throws IOException
-    {
-      boolean value = false;
+        void serialize(AbstractHessianOutput out, Object obj, Method method)
+                throws IOException {
+            boolean value = false;
 
-      try {
-	value = (Boolean) method.invoke(obj);
-      } catch (InvocationTargetException e) {
-	throw error(method, e.getCause());
-      } catch (IllegalAccessException e) {
-	log.log(Level.FINE, e.toString(), e);
-      }
+            try {
+                value = (Boolean) method.invoke(obj);
+            } catch (InvocationTargetException e) {
+                throw error(method, e.getCause());
+            } catch (IllegalAccessException e) {
+                log.log(Level.FINE, e.toString(), e);
+            }
 
-      out.writeBoolean(value);
+            out.writeBoolean(value);
+        }
     }
-  }
 
-  static class IntMethodSerializer extends MethodSerializer {
-    static final MethodSerializer SER = new IntMethodSerializer();
+    static class IntMethodSerializer extends MethodSerializer {
+        static final MethodSerializer SER = new IntMethodSerializer();
 
-    void serialize(AbstractHessianOutput out, Object obj, Method method)
-      throws IOException
-    {
-      int value = 0;
+        void serialize(AbstractHessianOutput out, Object obj, Method method)
+                throws IOException {
+            int value = 0;
 
-      try {
-	value = (Integer) method.invoke(obj);
-      } catch (InvocationTargetException e) {
-	throw error(method, e.getCause());
-      } catch (IllegalAccessException e) {
-	log.log(Level.FINE, e.toString(), e);
-      }
+            try {
+                value = (Integer) method.invoke(obj);
+            } catch (InvocationTargetException e) {
+                throw error(method, e.getCause());
+            } catch (IllegalAccessException e) {
+                log.log(Level.FINE, e.toString(), e);
+            }
 
-      out.writeInt(value);
+            out.writeInt(value);
+        }
     }
-  }
 
-  static class LongMethodSerializer extends MethodSerializer {
-    static final MethodSerializer SER = new LongMethodSerializer();
+    static class LongMethodSerializer extends MethodSerializer {
+        static final MethodSerializer SER = new LongMethodSerializer();
 
-    void serialize(AbstractHessianOutput out, Object obj, Method method)
-      throws IOException
-    {
-      long value = 0;
+        void serialize(AbstractHessianOutput out, Object obj, Method method)
+                throws IOException {
+            long value = 0;
 
-      try {
-	value = (Long) method.invoke(obj);
-      } catch (InvocationTargetException e) {
-	throw error(method, e.getCause());
-      } catch (IllegalAccessException e) {
-	log.log(Level.FINE, e.toString(), e);
-      }
+            try {
+                value = (Long) method.invoke(obj);
+            } catch (InvocationTargetException e) {
+                throw error(method, e.getCause());
+            } catch (IllegalAccessException e) {
+                log.log(Level.FINE, e.toString(), e);
+            }
 
-      out.writeLong(value);
+            out.writeLong(value);
+        }
     }
-  }
 
-  static class DoubleMethodSerializer extends MethodSerializer {
-    static final MethodSerializer SER = new DoubleMethodSerializer();
+    static class DoubleMethodSerializer extends MethodSerializer {
+        static final MethodSerializer SER = new DoubleMethodSerializer();
 
-    void serialize(AbstractHessianOutput out, Object obj, Method method)
-      throws IOException
-    {
-      double value = 0;
+        void serialize(AbstractHessianOutput out, Object obj, Method method)
+                throws IOException {
+            double value = 0;
 
-      try {
-	value = (Double) method.invoke(obj);
-      } catch (InvocationTargetException e) {
-	throw error(method, e.getCause());
-      } catch (IllegalAccessException e) {
-	log.log(Level.FINE, e.toString(), e);
-      }
+            try {
+                value = (Double) method.invoke(obj);
+            } catch (InvocationTargetException e) {
+                throw error(method, e.getCause());
+            } catch (IllegalAccessException e) {
+                log.log(Level.FINE, e.toString(), e);
+            }
 
-      out.writeDouble(value);
+            out.writeDouble(value);
+        }
     }
-  }
 
-  static class StringMethodSerializer extends MethodSerializer {
-    static final MethodSerializer SER = new StringMethodSerializer();
+    static class StringMethodSerializer extends MethodSerializer {
+        static final MethodSerializer SER = new StringMethodSerializer();
 
-    void serialize(AbstractHessianOutput out, Object obj, Method method)
-      throws IOException
-    {
-      String value = null;
+        void serialize(AbstractHessianOutput out, Object obj, Method method)
+                throws IOException {
+            String value = null;
 
-      try {
-	value = (String) method.invoke(obj);
-      } catch (InvocationTargetException e) {
-	throw error(method, e.getCause());
-      } catch (IllegalAccessException e) {
-	log.log(Level.FINE, e.toString(), e);
-      }
+            try {
+                value = (String) method.invoke(obj);
+            } catch (InvocationTargetException e) {
+                throw error(method, e.getCause());
+            } catch (IllegalAccessException e) {
+                log.log(Level.FINE, e.toString(), e);
+            }
 
-      out.writeString(value);
+            out.writeString(value);
+        }
     }
-  }
 
-  static class DateMethodSerializer extends MethodSerializer {
-    static final MethodSerializer SER = new DateMethodSerializer();
+    static class DateMethodSerializer extends MethodSerializer {
+        static final MethodSerializer SER = new DateMethodSerializer();
 
-    void serialize(AbstractHessianOutput out, Object obj, Method method)
-      throws IOException
-    {
-      java.util.Date value = null;
+        void serialize(AbstractHessianOutput out, Object obj, Method method)
+                throws IOException {
+            java.util.Date value = null;
 
-      try {
-        value = (java.util.Date) method.invoke(obj);
-      } catch (InvocationTargetException e) {
-	throw error(method, e.getCause());
-      } catch (IllegalAccessException e) {
-        log.log(Level.FINE, e.toString(), e);
-      }
+            try {
+                value = (java.util.Date) method.invoke(obj);
+            } catch (InvocationTargetException e) {
+                throw error(method, e.getCause());
+            } catch (IllegalAccessException e) {
+                log.log(Level.FINE, e.toString(), e);
+            }
 
-      if (value == null)
-        out.writeNull();
-      else
-        out.writeUTCDate(value.getTime());
+            if (value == null) {
+                out.writeNull();
+            } else {
+                out.writeUTCDate(value.getTime());
+            }
+        }
     }
-  }
 }

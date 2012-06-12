@@ -19,10 +19,9 @@ package com.alibaba.citrus.service.velocity.impl;
 
 import java.io.IOException;
 
-import org.springframework.core.io.Resource;
-
 import com.alibaba.citrus.service.velocity.VelocityConfiguration;
 import com.alibaba.citrus.service.velocity.VelocityPlugin;
+import org.springframework.core.io.Resource;
 
 public class PluginDelegator implements VelocityPlugin {
     public final static ThreadLocal<VelocityPlugin> pluginHolder = new ThreadLocal<VelocityPlugin>();

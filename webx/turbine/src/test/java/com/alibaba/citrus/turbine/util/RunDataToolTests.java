@@ -19,9 +19,8 @@ package com.alibaba.citrus.turbine.util;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.turbine.TurbineRunData;
+import org.junit.Test;
 
 public class RunDataToolTests extends AbstractPullToolTests<TurbineRunData> {
     @Override

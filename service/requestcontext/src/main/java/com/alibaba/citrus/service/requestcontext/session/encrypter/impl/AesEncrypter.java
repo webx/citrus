@@ -24,18 +24,17 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
+import com.alibaba.citrus.service.requestcontext.session.encrypter.AbstractJceEncrypter;
+import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-import com.alibaba.citrus.service.requestcontext.session.encrypter.AbstractJceEncrypter;
-import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
-
 public class AesEncrypter extends AbstractJceEncrypter {
-    public final static String ALG_NAME = "AES";
-    public final static int DEFAULT_KEY_SIZE = 128;
-    private String key;
-    private int keySize;
+    public final static String ALG_NAME         = "AES";
+    public final static int    DEFAULT_KEY_SIZE = 128;
+    private String        key;
+    private int           keySize;
     private SecretKeySpec keySpec;
 
     public String getKey() {

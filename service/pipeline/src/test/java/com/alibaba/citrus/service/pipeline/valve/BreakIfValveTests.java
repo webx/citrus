@@ -21,14 +21,13 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
-import org.easymock.EasyMock;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pipeline.Condition;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.impl.condition.JexlCondition;
 import com.alibaba.citrus.service.pipeline.impl.valve.BreakIfValve;
+import org.easymock.EasyMock;
+import org.junit.Before;
+import org.junit.Test;
 
 public class BreakIfValveTests extends AbstractBreakValveTests<BreakIfValve> {
     private Condition condition;
@@ -65,7 +64,7 @@ public class BreakIfValveTests extends AbstractBreakValveTests<BreakIfValve> {
         valve.setCondition(condition);
         valve.afterPropertiesSet();
 
-        expect(condition.isSatisfied(EasyMock.<PipelineContext> anyObject())).andReturn(true);
+        expect(condition.isSatisfied(EasyMock.<PipelineContext>anyObject())).andReturn(true);
         replay(condition);
 
         assertInvoke(pipeline, true);
@@ -78,7 +77,7 @@ public class BreakIfValveTests extends AbstractBreakValveTests<BreakIfValve> {
         valve.setCondition(condition);
         valve.afterPropertiesSet();
 
-        expect(condition.isSatisfied(org.easymock.EasyMock.<PipelineContext> anyObject())).andReturn(false);
+        expect(condition.isSatisfied(org.easymock.EasyMock.<PipelineContext>anyObject())).andReturn(false);
         replay(condition);
 
         assertInvoke(pipeline, false);
@@ -107,26 +106,26 @@ public class BreakIfValveTests extends AbstractBreakValveTests<BreakIfValve> {
         pipeline = getPipelineImplFromFactory("break-if-simple");
         assertInvoke(pipeline, false);
         assertLog("1-1" /* loop */, //
-                "2-1-loop-0" /* break-if */, "2-3-loop-0", //
-                "2-1-loop-1" /* break-if */, "2-3-loop-1", //
-                "2-1-loop-2" /* break-if */, //
-                "1-3");
+                  "2-1-loop-0" /* break-if */, "2-3-loop-0", //
+                  "2-1-loop-1" /* break-if */, "2-3-loop-1", //
+                  "2-1-loop-2" /* break-if */, //
+                  "1-3");
 
         // break-if levels=1
         pipeline = getPipelineImplFromFactory("break-if-levels");
         assertInvoke(pipeline, true);
         assertLog("1-1" /* loop */, //
-                "2-1-loop-0" /* break-if */, "2-3-loop-0", //
-                "2-1-loop-1" /* break-if */, "2-3-loop-1", //
-                "2-1-loop-2" /* break-if *///
+                  "2-1-loop-0" /* break-if */, "2-3-loop-0", //
+                  "2-1-loop-1" /* break-if */, "2-3-loop-1", //
+                  "2-1-loop-2" /* break-if *///
         );
 
         // break-if tolabel(levels=0), with condition tag
         pipeline = getPipelineImplFromFactory("break-if-tolabel");
         assertInvoke(pipeline, false);
         assertLog("1-1" /* loop */, //
-                "2-1-loop-0" /* break-if */, "2-3-loop-0", //
-                "2-1-loop-1" /* break-if */, //
-                "1-3");
+                  "2-1-loop-0" /* break-if */, "2-3-loop-0", //
+                  "2-1-loop-1" /* break-if */, //
+                  "1-3");
     }
 }

@@ -33,35 +33,29 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
  */
 public class Randomize implements URIBrokerPathInterceptor {
     private final static String DEFAULT_CHARS = "0123456789abcdefghijklmnopqrstuvwxyz";
-    private final static String DEFAULT_KEY = "r";
-    private final static long DEFAULT_RANGE = 100000;
-    private final Random random = new Random();
+    private final static String DEFAULT_KEY   = "r";
+    private final static long   DEFAULT_RANGE = 100000;
+    private final        Random random        = new Random();
     private boolean initialized;
-    private String path;
+    private String  path;
     private Pattern pathPattern;
-    private char[] chars;
-    private int radix;
-    private double factor;
-    private String key;
+    private char[]  chars;
+    private int     radix;
+    private double  factor;
+    private String  key;
 
-    /**
-     * 设置随机数的query ID。
-     */
+    /** 设置随机数的query ID。 */
     public void setKey(String key) {
         this.key = defaultIfNull(trimToNull(key), DEFAULT_KEY);
     }
 
-    /**
-     * 设置随机生成的字符范围。
-     */
+    /** 设置随机生成的字符范围。 */
     public void setChars(String chars) {
         this.chars = defaultIfNull(trimToNull(chars), DEFAULT_CHARS).toCharArray();
         this.radix = this.chars.length;
     }
 
-    /**
-     * 设置随机数范围。
-     */
+    /** 设置随机数范围。 */
     public void setRange(long range) {
         if (range == 0L) {
             range = DEFAULT_RANGE;
@@ -70,9 +64,7 @@ public class Randomize implements URIBrokerPathInterceptor {
         this.factor = Math.abs(range / (double) Long.MAX_VALUE);
     }
 
-    /**
-     * 设置匹配的路径正则表达式，只有匹配指定path的结果才会生成随机数。
-     */
+    /** 设置匹配的路径正则表达式，只有匹配指定path的结果才会生成随机数。 */
     public void setPath(String path) {
         this.path = trimToNull(path);
     }
@@ -114,16 +106,12 @@ public class Randomize implements URIBrokerPathInterceptor {
         return path;
     }
 
-    /**
-     * 随机数生成器。
-     */
+    /** 随机数生成器。 */
     protected final long random() {
         return (long) (Math.abs(random.nextLong()) * factor);
     }
 
-    /**
-     * 把输入的随机数变成字符串
-     */
+    /** 把输入的随机数变成字符串 */
     protected final String longToString(long longValue) {
         if (longValue == 0) {
             return String.valueOf(chars[0]);

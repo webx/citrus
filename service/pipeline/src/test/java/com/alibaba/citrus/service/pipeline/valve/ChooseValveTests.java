@@ -21,15 +21,14 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pipeline.Condition;
 import com.alibaba.citrus.service.pipeline.Pipeline;
 import com.alibaba.citrus.service.pipeline.PipelineException;
 import com.alibaba.citrus.service.pipeline.PipelineInvocationHandle;
 import com.alibaba.citrus.service.pipeline.impl.condition.JexlCondition;
 import com.alibaba.citrus.service.pipeline.impl.valve.ChooseValve;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ChooseValveTests extends AbstractValveTests<ChooseValve> {
     private Condition condition;
@@ -136,7 +135,7 @@ public class ChooseValveTests extends AbstractValveTests<ChooseValve> {
         // with content
         valve.setWhenConditions(new Condition[] { new JexlCondition("1==2"), new JexlCondition("2!=3") });
         valve.setWhenBlocks(new Pipeline[] { createPipeline(new LogValve(), new LogValve()),
-                createPipeline(new LogValve(), new LogValve(), new LogValve()) });
+                                             createPipeline(new LogValve(), new LogValve(), new LogValve()) });
         valve.setOtherwiseBlock(createPipeline(new LogValve()));
 
         str = "";
@@ -193,8 +192,8 @@ public class ChooseValveTests extends AbstractValveTests<ChooseValve> {
 
         assertInvoke(pipeline, false);
         assertLog("1-1" /* choose */, //
-                /* otherwise */"2-1", //
-                "1-3");
+                  /* otherwise */"2-1", //
+                  "1-3");
     }
 
     @Test
@@ -204,7 +203,7 @@ public class ChooseValveTests extends AbstractValveTests<ChooseValve> {
         valve.setWhenConditions(new Condition[] { new JexlCondition("1==2"), new JexlCondition("2!=3") });
 
         valve.setWhenBlocks(new Pipeline[] { createPipeline(new LogValve(), new LogValve()),
-                createPipeline(new LogValve(), new LogValve(), new LogValve()) });
+                                             createPipeline(new LogValve(), new LogValve(), new LogValve()) });
 
         valve.setOtherwiseBlock(createPipeline(new LogValve()));
 
@@ -212,10 +211,10 @@ public class ChooseValveTests extends AbstractValveTests<ChooseValve> {
 
         assertInvoke(pipeline, false);
         assertLog("1-1" /* choose */, //
-                /* when 1==2 *///
-                /* when 2!=3 */"2-1", "2-2", "2-3", //
-                /* otherwise *///
-                "1-3");
+                  /* when 1==2 *///
+                  /* when 2!=3 */"2-1", "2-2", "2-3", //
+                  /* otherwise *///
+                  "1-3");
     }
 
     @Test
@@ -225,7 +224,7 @@ public class ChooseValveTests extends AbstractValveTests<ChooseValve> {
         valve.setWhenConditions(new Condition[] { new JexlCondition("1==2"), new JexlCondition("2==3") });
 
         valve.setWhenBlocks(new Pipeline[] { createPipeline(new LogValve(), new LogValve()),
-                createPipeline(new LogValve(), new LogValve(), new LogValve()) });
+                                             createPipeline(new LogValve(), new LogValve(), new LogValve()) });
 
         valve.setOtherwiseBlock(createPipeline(new LogValve()));
 
@@ -233,10 +232,10 @@ public class ChooseValveTests extends AbstractValveTests<ChooseValve> {
 
         assertInvoke(pipeline, false);
         assertLog("1-1" /* choose */, //
-                /* when 1==2 *///
-                /* when 2==3 *///
-                /* otherwise */"2-1", //
-                "1-3");
+                  /* when 1==2 *///
+                  /* when 2==3 *///
+                  /* otherwise */"2-1", //
+                  "1-3");
     }
 
     @Test
@@ -250,25 +249,25 @@ public class ChooseValveTests extends AbstractValveTests<ChooseValve> {
         pipeline = getPipelineImplFromFactory("choose-otherwise-only");
         assertInvoke(pipeline, false);
         assertLog("1-1", /* choose *///
-                /* otherwise */"2-1", //
-                "1-3");
+                  /* otherwise */"2-1", //
+                  "1-3");
 
         // when satisfied, with label
         pipeline = getPipelineImplFromFactory("choose-when-satisfied");
         assertInvoke(pipeline, false);
         assertLog("1-1", /* choose *///
-                /* when 1==2 *///
-                /* when 2!=3 */"2-1" /* break */, //
-                "1-3");
+                  /* when 1==2 *///
+                  /* when 2!=3 */"2-1" /* break */, //
+                  "1-3");
 
         // when not satisfied, with label
         pipeline = getPipelineImplFromFactory("choose-when-not-satisfied");
         assertInvoke(pipeline, false);
         assertLog("1-1", /* choose *///
-                /* when 1==2 *///
-                /* when 2==3 *///
-                /* otherwise */"2-1", "2-2" /* break */, //
-                "1-3");
+                  /* when 1==2 *///
+                  /* when 2==3 *///
+                  /* otherwise */"2-1", "2-2" /* break */, //
+                  "1-3");
 
         // pipeline reference
         pipeline = getPipelineImplFromFactory("choose-ref");
@@ -277,25 +276,25 @@ public class ChooseValveTests extends AbstractValveTests<ChooseValve> {
         handle.setAttribute("value", 1);
         handle.invoke();
         assertLog("1-1", /* choose *///
-                /* when value==1 */"2-1", //
-                /* when value==2 *///
-                /* otherwise *///
-                "1-3");
+                  /* when value==1 */"2-1", //
+                  /* when value==2 *///
+                  /* otherwise *///
+                  "1-3");
 
         handle.setAttribute("value", 2);
         handle.invoke();
         assertLog("1-1", /* choose *///
-                /* when value==1 *///
-                /* when value==2 */"2-1", "2-2", //
-                /* otherwise *///
-                "1-3");
+                  /* when value==1 *///
+                  /* when value==2 */"2-1", "2-2", //
+                  /* otherwise *///
+                  "1-3");
 
         handle.setAttribute("value", 3);
         handle.invoke();
         assertLog("1-1", /* choose *///
-                /* when value==1 *///
-                /* when value==2 *///
-                /* otherwise */"2-1", "2-2", "2-3", //
-                "1-3");
+                  /* when value==1 *///
+                  /* when value==2 *///
+                  /* otherwise */"2-1", "2-2", "2-3", //
+                  "1-3");
     }
 }

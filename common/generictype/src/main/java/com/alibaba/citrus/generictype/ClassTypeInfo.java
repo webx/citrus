@@ -45,9 +45,7 @@ public interface ClassTypeInfo extends TypeInfo, GenericDeclarationInfo {
      */
     ClassTypeInfo resolve(GenericDeclarationInfo context, boolean includeBaseType);
 
-    /**
-     * 取得指定名称的字段。
-     */
+    /** 取得指定名称的字段。 */
     FieldInfo getField(String name);
 
     /**
@@ -58,13 +56,9 @@ public interface ClassTypeInfo extends TypeInfo, GenericDeclarationInfo {
      */
     FieldInfo getField(ClassTypeInfo declaringType, String name);
 
-    /**
-     * 取得指定参数表对应的构造函数。
-     */
+    /** 取得指定参数表对应的构造函数。 */
     MethodInfo getConstructor(Class<?>... paramTypes);
 
-    /**
-     * 取得指定名称和参数表对应的方法。
-     */
+    /** 取得指定名称和参数表对应的方法。 */
     MethodInfo getMethod(String methodName, Class<?>... paramTypes);
 }

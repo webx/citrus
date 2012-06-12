@@ -35,5 +35,4 @@ public class ConfigurationPointException extends RuntimeException {
     public ConfigurationPointException(Throwable cause) {
         super(cause);
     }
-
 }

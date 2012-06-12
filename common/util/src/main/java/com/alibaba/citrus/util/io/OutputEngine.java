@@ -25,21 +25,21 @@ import java.io.OutputStream;
  * <p>
  * <code>OutputEngine</code>有什么用？举例说明。 <code>GZIPInputStream</code>是对压缩流进行解压缩：
  * </p>
- *
+ * <p/>
  * <pre>
  * read 原始数据 &lt;- decompress &lt;- compressed data stream
  * </pre>
  * <p>
  * <code>GZIPOutputStream</code>是对输出流进行压缩：
  * </p>
- *
+ * <p/>
  * <pre>
  * write 原始数据 -&gt; compress -&gt; compressed data stream
  * </pre>
  * <p>
  * 但是JDK中不存在这样一个流：
  * </p>
- *
+ * <p/>
  * <pre>
  * read compressed data &lt;- compress &lt;- 原始数据流
  * </pre>
@@ -92,9 +92,7 @@ public interface OutputEngine {
      */
     void close() throws IOException;
 
-    /**
-     * 创建输出流的工厂.
-     */
+    /** 创建输出流的工厂. */
     interface OutputStreamFactory {
         /**
          * 创建输出流, 通常返回一个<code>FilterOutputStream</code>连接到指定的输出流中.

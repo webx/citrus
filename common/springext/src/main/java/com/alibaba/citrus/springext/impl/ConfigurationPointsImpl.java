@@ -30,10 +30,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.core.io.support.PropertiesLoaderUtils;
-
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.ConfigurationPointException;
 import com.alibaba.citrus.springext.ConfigurationPoints;
@@ -41,6 +37,9 @@ import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 /**
  * 解析configuration point namespace。
@@ -48,16 +47,16 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public class ConfigurationPointsImpl implements ConfigurationPoints {
-    private final static Logger log = LoggerFactory.getLogger(ConfigurationPoints.class);
-    private final static String NAMESPACE_URI_KEY = "namespaceUri";
+    private final static Logger log                 = LoggerFactory.getLogger(ConfigurationPoints.class);
+    private final static String NAMESPACE_URI_KEY   = "namespaceUri";
     private final static String DEFAULT_ELEMENT_KEY = "defaultElement";
     private final static String PREFERRED_NS_PREFIX = "nsPrefix";
-    private final ConfigurationPointSettings settings;
-    private final String configurationPointsLocation;
+    private final ConfigurationPointSettings      settings;
+    private final String                          configurationPointsLocation;
     private final Map<String, ConfigurationPoint> namespaceUriToConfigurationPoints; // namespaceUri => configurationPoint
     private final Map<String, ConfigurationPoint> nameToConfigurationPoints; // name => configurationPoint
-    private final Collection<ConfigurationPoint> configurationPoints;
-    private boolean initialized;
+    private final Collection<ConfigurationPoint>  configurationPoints;
+    private       boolean                         initialized;
 
     public ConfigurationPointsImpl() {
         this(null, null);
@@ -69,7 +68,7 @@ public class ConfigurationPointsImpl implements ConfigurationPoints {
 
     public ConfigurationPointsImpl(ClassLoader classLoader, String configurationPointsLocation) {
         this.configurationPointsLocation = defaultIfEmpty(configurationPointsLocation,
-                DEFAULT_CONFIGURATION_POINTS_LOCATION);
+                                                          DEFAULT_CONFIGURATION_POINTS_LOCATION);
         this.settings = new ConfigurationPointSettings(classLoader, this.configurationPointsLocation);
         this.namespaceUriToConfigurationPoints = createHashMap();
         this.nameToConfigurationPoints = createTreeMap();
@@ -94,7 +93,7 @@ public class ConfigurationPointsImpl implements ConfigurationPoints {
             mappings = PropertiesLoaderUtils.loadAllProperties(configurationPointsLocation, settings.classLoader);
         } catch (IOException e) {
             throw new ConfigurationPointException("Unable to load Configuration Points from "
-                    + configurationPointsLocation, e);
+                                                  + configurationPointsLocation, e);
         }
 
         for (Entry<Object, Object> entry : mappings.entrySet()) {
@@ -104,14 +103,14 @@ public class ConfigurationPointsImpl implements ConfigurationPoints {
 
             if (!namespaceUri.endsWith(name)) {
                 throw new ConfigurationPointException("Naming Convention Violation: namespace URI [" + namespaceUri
-                        + "] of configuration point should end with its name [" + name
-                        + "].  This configuration point is located at " + configurationPointsLocation + ".");
+                                                      + "] of configuration point should end with its name [" + name
+                                                      + "].  This configuration point is located at " + configurationPointsLocation + ".");
             }
 
             String defaultElementName = params.get(DEFAULT_ELEMENT_KEY);
             String preferredNsPrefix = params.get(PREFERRED_NS_PREFIX);
             ConfigurationPoint cp = new ConfigurationPointImpl(this, settings, name, namespaceUri, defaultElementName,
-                    preferredNsPrefix);
+                                                               preferredNsPrefix);
 
             namespaceUriToConfigurationPoints.put(namespaceUri, cp);
             nameToConfigurationPoints.put(name, cp);
@@ -121,7 +120,7 @@ public class ConfigurationPointsImpl implements ConfigurationPoints {
             ToStringBuilder buf = new ToStringBuilder();
 
             buf.format("Loaded configuration points at %s, %d configuration points found.",
-                    configurationPointsLocation, nameToConfigurationPoints.size());
+                       configurationPointsLocation, nameToConfigurationPoints.size());
 
             MapBuilder mb = new MapBuilder().setSortKeys(true).setPrintCount(true);
 
@@ -238,7 +237,7 @@ public class ConfigurationPointsImpl implements ConfigurationPoints {
             ToStringBuilder buf = new ToStringBuilder();
 
             buf.format("ConfigurationPoints[%d cps, loaded from %s]", configurationPoints.size(),
-                    configurationPointsLocation);
+                       configurationPointsLocation);
 
             if (!configurationPoints.isEmpty()) {
                 buf.appendCollection(configurationPoints);

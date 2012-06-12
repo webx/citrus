@@ -23,12 +23,6 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.beans.factory.BeanCreationException;
-
 import com.alibaba.citrus.service.requestcontext.basic.BasicRequestContext;
 import com.alibaba.citrus.service.requestcontext.buffered.BufferedRequestContext;
 import com.alibaba.citrus.service.requestcontext.lazycommit.LazyCommitRequestContext;
@@ -40,6 +34,11 @@ import com.alibaba.citrus.service.requestcontext.session.SessionRequestContext;
 import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextFactory;
 import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextWrapper;
 import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.beans.factory.BeanCreationException;
 
 /**
  * 测试<code>RequestContextChainingService</code>。

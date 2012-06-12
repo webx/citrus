@@ -21,10 +21,6 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.beans.SimpleTypeConverter;
-
 import com.alibaba.citrus.expr.ExpressionParseException;
 import com.alibaba.citrus.service.form.Field;
 import com.alibaba.citrus.service.form.Form;
@@ -32,12 +28,15 @@ import com.alibaba.citrus.service.form.Group;
 import com.alibaba.citrus.service.form.MessageContext;
 import com.alibaba.citrus.service.form.Validator.Context;
 import com.alibaba.citrus.service.form.impl.MessageContextFactory;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.SimpleTypeConverter;
 
 public class JexlConditionTests {
-    private Context ctx;
-    private Field field;
-    private Group group;
-    private Form form;
+    private Context        ctx;
+    private Field          field;
+    private Group          group;
+    private Form           form;
     private MessageContext mctx;
 
     @Before

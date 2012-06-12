@@ -32,13 +32,13 @@ import java.util.regex.Pattern;
  * @author Michael Zhou
  */
 public class HumanReadableSize {
-    private final static Long ONE = 1L;
-    private final static Long ONE_KILO = 1024L;
-    private final static Long ONE_MEGA = 1024 * 1024L;
-    private final static Long ONE_GIGA = 1024 * 1024 * 1024L;
-    private final static Long ONE_TERA = 1024 * 1024 * 1024 * 1024L;
+    private final static Long              ONE        = 1L;
+    private final static Long              ONE_KILO   = 1024L;
+    private final static Long              ONE_MEGA   = 1024 * 1024L;
+    private final static Long              ONE_GIGA   = 1024 * 1024 * 1024L;
+    private final static Long              ONE_TERA   = 1024 * 1024 * 1024 * 1024L;
     private final static Map<String, Long> UNIT_NAMES = createHashMap();
-    private final static Pattern REGEXP = Pattern.compile("(\\d+(\\.\\d+)?)\\s*(K|M|G|T)?", Pattern.CASE_INSENSITIVE);
+    private final static Pattern           REGEXP     = Pattern.compile("(\\d+(\\.\\d+)?)\\s*(K|M|G|T)?", Pattern.CASE_INSENSITIVE);
 
     static {
         UNIT_NAMES.put("B", ONE);
@@ -125,7 +125,7 @@ public class HumanReadableSize {
         return String.valueOf(size);
     }
 
-    private final long value;
+    private final long   value;
     private final String humanReadable;
 
     public HumanReadableSize(String humanReadable) {

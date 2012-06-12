@@ -21,11 +21,10 @@ import static org.junit.Assert.*;
 
 import java.util.Date;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.expr.composite.CompositeExpressionFactory;
 import com.alibaba.citrus.expr.support.MappedExpressionContext;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * 测试<code>CompositeExpression</code>。
@@ -35,7 +34,7 @@ import com.alibaba.citrus.expr.support.MappedExpressionContext;
 public class CompositeExpressionTests {
     private ExpressionFactory factory;
     private ExpressionContext context;
-    private Date now;
+    private Date              now;
 
     @Before
     public void init() {

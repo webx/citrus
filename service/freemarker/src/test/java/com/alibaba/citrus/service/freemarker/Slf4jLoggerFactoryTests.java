@@ -20,18 +20,16 @@ package com.alibaba.citrus.service.freemarker;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
+import com.alibaba.citrus.service.freemarker.impl.FreeMarkerEngineImpl;
+import com.alibaba.citrus.test.TestEnvStatic;
+import freemarker.log.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
 
-import com.alibaba.citrus.service.freemarker.impl.FreeMarkerEngineImpl;
-import com.alibaba.citrus.test.TestEnvStatic;
-
-import freemarker.log.Logger;
-
 public class Slf4jLoggerFactoryTests {
-    private Object logFactory;
-    private Logger log;
+    private Object           logFactory;
+    private Logger           log;
     private org.slf4j.Logger slf4jLog;
 
     static {

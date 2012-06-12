@@ -35,10 +35,9 @@ import java.io.StringReader;
 import java.net.URL;
 import java.nio.charset.Charset;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.util.IllegalPathException;
 import com.alibaba.citrus.util.templatelite.Template.InputSource;
+import org.junit.Test;
 
 public class TemplateInputSourceTests extends AbstractTemplateTests {
     private InputSource inputSource;
@@ -182,7 +181,7 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
 
         // stream as input source
         inputSource = new InputSource(new ByteArrayInputStream("#@charset UTF-8\n\nhello".getBytes("UTF-8")),
-                "utf8.txt");
+                                      "utf8.txt");
         assertReader("UTF-8", null, "utf8.txt");
 
         // reader as input source
@@ -239,7 +238,7 @@ public class TemplateInputSourceTests extends AbstractTemplateTests {
                 new Template(destFile.toURI().toURL().openStream(), "temp.txt"), //
                 new Template(new InputStreamReader(destFile.toURI().toURL().openStream()), "temp.txt"), //
                 new Template(new BufferedReader(new InputStreamReader(destFile.toURI().toURL().openStream())),
-                        "temp.txt"), //
+                             "temp.txt"), //
         };
 
         boolean[] reloadable = new boolean[] { true, true, false, false, false, false };

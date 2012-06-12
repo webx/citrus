@@ -22,14 +22,13 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 
 import java.util.List;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 public class DataResolverServiceDefinitionParser extends AbstractNamedBeanDefinitionParser<DataResolverServiceImpl>
         implements ContributionAware {
@@ -37,7 +36,7 @@ public class DataResolverServiceDefinitionParser extends AbstractNamedBeanDefini
 
     public void setContribution(Contribution contrib) {
         this.dataResolverFactoriesConfigurationPoint = getSiblingConfigurationPoint("services/data-resolver/factories",
-                contrib);
+                                                                                    contrib);
     }
 
     @Override
@@ -46,7 +45,7 @@ public class DataResolverServiceDefinitionParser extends AbstractNamedBeanDefini
 
         for (Element subElement : subElements(element)) {
             Object factory = parseConfigurationPointBean(subElement, dataResolverFactoriesConfigurationPoint,
-                    parserContext, builder);
+                                                         parserContext, builder);
 
             if (factory != null) {
                 factories.add(factory);

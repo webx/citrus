@@ -40,12 +40,10 @@ import com.alibaba.citrus.generictype.introspect.PropertyInfo;
  * @author Michael Zhou
  */
 public class IntrospectorImpl extends Introspector {
-    private final TypeInfo type;
+    private final TypeInfo                        type;
     private final Map<String, List<PropertyInfo>> props;
 
-    /**
-     * 创建一个{@link Introspector}实例。
-     */
+    /** 创建一个{@link Introspector}实例。 */
     IntrospectorImpl(TypeInfo type) {
         this.type = assertNotNull(type, "type");
         this.props = new TypeScanner().scan();
@@ -53,7 +51,7 @@ public class IntrospectorImpl extends Introspector {
 
     private TypeVisitor[] getVisitors() {
         return new TypeVisitor[] { new SimplePropertiesFinder(), new IndexedPropertiesFinder(),
-                new MappedPropertiesFinder(), new ArrayPropertiesFinder(), new MapPropertiesFinder() };
+                                   new MappedPropertiesFinder(), new ArrayPropertiesFinder(), new MapPropertiesFinder() };
     }
 
     @Override
@@ -61,16 +59,12 @@ public class IntrospectorImpl extends Introspector {
         return props;
     }
 
-    /**
-     * 扫描并分析类型。
-     */
+    /** 扫描并分析类型。 */
     private class TypeScanner {
-        private final TypeVisitor[] visitors = getVisitors();
-        private final Map<MethodSignature, Method> methods = createHashMap();
+        private final TypeVisitor[]                visitors = getVisitors();
+        private final Map<MethodSignature, Method> methods  = createHashMap();
 
-        /**
-         * 分析一个类，及其基类和接口。
-         */
+        /** 分析一个类，及其基类和接口。 */
         public Map<String, List<PropertyInfo>> scan() {
             boolean first = true;
 
@@ -102,9 +96,7 @@ public class IntrospectorImpl extends Introspector {
             return unmodifiableMap(props);
         }
 
-        /**
-         * 分析一个类。
-         */
+        /** 分析一个类。 */
         private void scanType(TypeInfo type, boolean scanFields, boolean scanConstructors) {
             for (TypeVisitor visitor : visitors) {
                 visitor.visitType(type);
@@ -147,12 +139,9 @@ public class IntrospectorImpl extends Introspector {
                 }
             }
         }
-
     }
 
-    /**
-     * 代表一个Properties的映射表。
-     */
+    /** 代表一个Properties的映射表。 */
     private static class PropertiesMap extends HashMap<String, List<PropertyInfo>> {
         private static final long serialVersionUID = 3899442980552826145L;
 
@@ -198,9 +187,7 @@ public class IntrospectorImpl extends Introspector {
         }
     }
 
-    /**
-     * 创建{@link Introspector}的工厂。
-     */
+    /** 创建{@link Introspector}的工厂。 */
     public static class FactoryImpl implements Factory {
         public Introspector getInstance(TypeInfo type) {
             return new IntrospectorImpl(type);

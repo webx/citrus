@@ -22,21 +22,19 @@ import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.internal.ActionEventUtil.*;
 
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.citrus.service.moduleloader.ActionEventException;
 import com.alibaba.citrus.service.moduleloader.ActionEventNotFoundException;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class ActionEventAdapter extends AbstractDataBindingAdapter implements InitializingBean {
     private final Map<String, MethodInvoker> handlers;
-    private final MethodInvoker preHandler;
-    private final MethodInvoker postHandler;
+    private final MethodInvoker              preHandler;
+    private final MethodInvoker              postHandler;
 
     @Autowired
     private HttpServletRequest request;
@@ -55,9 +53,7 @@ public class ActionEventAdapter extends AbstractDataBindingAdapter implements In
         assertProxy(assertNotNull(request, "missing HttpServletRequest object"));
     }
 
-    /**
-     * 执行一个module。
-     */
+    /** 执行一个module。 */
     public void execute() throws ActionEventException, ActionEventNotFoundException {
         String event = getEventName(request);
         MethodInvoker handler = null;
@@ -109,7 +105,7 @@ public class ActionEventAdapter extends AbstractDataBindingAdapter implements In
                 } catch (Exception e) {
                     if (exception == null) {
                         exception = new ActionEventException("Failed to execute post-action event handler: "
-                                + postHandler, e);
+                                                             + postHandler, e);
                     }
                 }
             }

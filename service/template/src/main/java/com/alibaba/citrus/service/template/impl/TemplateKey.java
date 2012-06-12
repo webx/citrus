@@ -25,17 +25,16 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.Arrays;
 
-import com.alibaba.citrus.util.FileUtil.FileNameAndExtension;
 import com.alibaba.citrus.util.ObjectUtil;
 
 public final class TemplateKey {
-    private final String templateNameWithoutExtension;
-    private final String extension;
+    private final String   templateNameWithoutExtension;
+    private final String   extension;
     private final Object[] strategyKeys;
 
     public TemplateKey(String templateName, TemplateSearchingStrategy[] strategies) {
         templateName = assertNotNull(trimToNull(normalizeAbsolutePath(templateName)), "illegal templateName: %s",
-                templateName);
+                                     templateName);
 
         FileNameAndExtension names = getFileNameAndExtension(templateName, true);
 

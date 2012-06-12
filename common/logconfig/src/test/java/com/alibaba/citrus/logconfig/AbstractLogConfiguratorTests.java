@@ -36,12 +36,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class AbstractLogConfiguratorTests {
-    private PrintStream savedOut;
-    private PrintStream savedErr;
-    private ByteArrayOutputStream outBytes;
-    private ByteArrayOutputStream errBytes;
-    protected String out;
-    protected String err;
+    private   PrintStream           savedOut;
+    private   PrintStream           savedErr;
+    private   ByteArrayOutputStream outBytes;
+    private   ByteArrayOutputStream errBytes;
+    protected String                out;
+    protected String                err;
 
     protected final String getStdout() {
         System.out.flush();

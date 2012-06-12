@@ -28,12 +28,8 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.alibaba.citrus.service.requestcontext.session.SessionAttributeInterceptor;
 import com.alibaba.citrus.service.requestcontext.session.SessionConfig;
@@ -46,6 +42,8 @@ import com.alibaba.citrus.service.requestcontext.session.SessionStore;
 import com.alibaba.citrus.service.requestcontext.session.SessionStore.StoreContext;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 实现了<code>HttpSession</code>接口。
@@ -55,21 +53,19 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * </p>
  */
 public class SessionImpl implements HttpSession {
-    private final static Logger log = LoggerFactory.getLogger(SessionImpl.class);
-    private final HttpSessionInternal sessionInternal = new HttpSessionInternal();
-    private String sessionID;
+    private final static Logger              log             = LoggerFactory.getLogger(SessionImpl.class);
+    private final        HttpSessionInternal sessionInternal = new HttpSessionInternal();
+    private String                sessionID;
     private SessionRequestContext requestContext;
-    private String modelKey;
-    private SessionModelImpl model;
-    private boolean isNew;
-    private Map<String, SessionAttribute> attrs = createHashMap();
-    private Map<String, Object> storeStates = createHashMap();
-    private boolean invalidated = false;
-    private boolean cleared = false;
+    private String                modelKey;
+    private SessionModelImpl      model;
+    private boolean               isNew;
+    private Map<String, SessionAttribute> attrs       = createHashMap();
+    private Map<String, Object>           storeStates = createHashMap();
+    private boolean                       invalidated = false;
+    private boolean                       cleared     = false;
 
-    /**
-     * 创建一个session对象。
-     */
+    /** 创建一个session对象。 */
     public SessionImpl(String sessionID, SessionRequestContext requestContext, boolean isNew, boolean create) {
         this.sessionID = assertNotNull(sessionID, "no sessionID");
         this.requestContext = requestContext;
@@ -97,7 +93,7 @@ public class SessionImpl implements HttpSession {
 
                 // 情况2：创建新的model，并保存之。
                 log.debug("Session state was not found for sessionID \"{}\".  A new session will be created.",
-                        sessionID);
+                          sessionID);
                 isNew = true;
                 sessionInternal.invalidate();
             } else {
@@ -112,7 +108,7 @@ public class SessionImpl implements HttpSession {
                     expired = true;
 
                     log.warn("Requested session ID \"{}\" does not match the ID in session model \"{}\".  "
-                            + "Force expired the session.", sessionID, modelSessionID);
+                             + "Force expired the session.", sessionID, modelSessionID);
                 }
 
                 // Session model被返回前，会先被decode。因此，修改所返回的session model对象，并不会影响store中的对象值。
@@ -127,10 +123,10 @@ public class SessionImpl implements HttpSession {
                     if (log.isDebugEnabled()) {
                         log.debug(
                                 "Session has expired: sessionID={}, created at {}, last accessed at {}, "
-                                        + "maxInactiveInterval={}, forceExpirationPeriod={}",
+                                + "maxInactiveInterval={}, forceExpirationPeriod={}",
                                 new Object[] { modelSessionID, new Date(model.getCreationTime()),
-                                        new Date(model.getLastAccessedTime()), model.getMaxInactiveInterval(),
-                                        getSessionRequestContext().getSessionConfig().getForceExpirationPeriod() });
+                                               new Date(model.getLastAccessedTime()), model.getMaxInactiveInterval(),
+                                               getSessionRequestContext().getSessionConfig().getForceExpirationPeriod() });
                     }
 
                     isNew = true;
@@ -143,7 +139,7 @@ public class SessionImpl implements HttpSession {
                         log.trace(
                                 "Activate session: sessionID={}, last accessed at {}, maxInactiveInterval={}",
                                 new Object[] { modelSessionID, new Date(model.getLastAccessedTime()),
-                                        model.getMaxInactiveInterval() });
+                                               model.getMaxInactiveInterval() });
                     }
 
                     model.touch();
@@ -305,9 +301,9 @@ public class SessionImpl implements HttpSession {
     /**
      * 设置指定名称的attribute值。
      *
-     * @param name attribute名称
+     * @param name  attribute名称
      * @param value attribute的值
-     * @throws IllegalStateException 如果session已经invalidated
+     * @throws IllegalStateException    如果session已经invalidated
      * @throws IllegalArgumentException 如果指定的attribute名称不被支持
      */
     public void setAttribute(String name, Object value) {
@@ -351,9 +347,7 @@ public class SessionImpl implements HttpSession {
         sessionInternal.invalidate();
     }
 
-    /**
-     * 判断当前session是否非法。
-     */
+    /** 判断当前session是否非法。 */
     public boolean isInvalidated() {
         return invalidated;
     }
@@ -377,7 +371,7 @@ public class SessionImpl implements HttpSession {
     protected void assertModel(String methodName) {
         if (model == null) {
             throw new IllegalStateException("Cannot call method " + methodName
-                    + ": the session has not been initialized");
+                                            + ": the session has not been initialized");
         }
     }
 
@@ -391,22 +385,18 @@ public class SessionImpl implements HttpSession {
 
         if (invalidated) {
             throw new IllegalStateException("Cannot call method " + methodName
-                    + ": the session has already invalidated");
+                                            + ": the session has already invalidated");
         }
     }
 
-    /**
-     * 检查将要更改的attr name是否合法。
-     */
+    /** 检查将要更改的attr name是否合法。 */
     protected void assertAttributeNameForModification(String methodName, String attrName) {
         if (modelKey.equals(attrName)) {
             throw new IllegalArgumentException("Cannot call method " + methodName + " with attribute " + attrName);
         }
     }
 
-    /**
-     * 提交session的内容，删除的、新增的、修改的内容被保存。
-     */
+    /** 提交session的内容，删除的、新增的、修改的内容被保存。 */
     public void commit() {
         String[] storeNames = requestContext.getSessionConfig().getStores().getStoreNames();
         Map<String, Object[]> stores = createHashMap();
@@ -478,25 +468,19 @@ public class SessionImpl implements HttpSession {
         }
     }
 
-    /**
-     * @deprecated no replacement
-     */
+    /** @deprecated no replacement */
     @Deprecated
     public javax.servlet.http.HttpSessionContext getSessionContext() {
         throw new UnsupportedOperationException("No longer supported method: getSessionContext");
     }
 
-    /**
-     * @deprecated use getAttribute instead
-     */
+    /** @deprecated use getAttribute instead */
     @Deprecated
     public Object getValue(String name) {
         return getAttribute(name);
     }
 
-    /**
-     * @deprecated use getAttributeNames instead
-     */
+    /** @deprecated use getAttributeNames instead */
     @Deprecated
     public String[] getValueNames() {
         assertValid("getValueNames");
@@ -506,17 +490,13 @@ public class SessionImpl implements HttpSession {
         return names.toArray(new String[names.size()]);
     }
 
-    /**
-     * @deprecated use setAttribute instead
-     */
+    /** @deprecated use setAttribute instead */
     @Deprecated
     public void putValue(String name, Object value) {
         setAttribute(name, value);
     }
 
-    /**
-     * @deprecated use removeAttribute instead
-     */
+    /** @deprecated use removeAttribute instead */
     @Deprecated
     public void removeValue(String name) {
         removeAttribute(name);
@@ -572,9 +552,7 @@ public class SessionImpl implements HttpSession {
         }
     }
 
-    /**
-     * Session事件的类型。
-     */
+    /** Session事件的类型。 */
     private enum EventType {
         CREATED,
         RECREATED, // 先invalidate然后再create
@@ -582,9 +560,7 @@ public class SessionImpl implements HttpSession {
         VISITED
     }
 
-    /**
-     * 存放session store的状态。
-     */
+    /** 存放session store的状态。 */
     private class StoreContextImpl implements StoreContext {
         private String storeName;
 
@@ -617,9 +593,7 @@ public class SessionImpl implements HttpSession {
         }
     }
 
-    /**
-     * 内部使用的session对象，不会抛出<code>IllegalStateException</code>异常。
-     */
+    /** 内部使用的session对象，不会抛出<code>IllegalStateException</code>异常。 */
     private class HttpSessionInternal implements HttpSession {
         public String getId() {
             return SessionImpl.this.getId();
@@ -780,41 +754,31 @@ public class SessionImpl implements HttpSession {
             return SessionImpl.this.isNew();
         }
 
-        /**
-         * @deprecated
-         */
+        /** @deprecated  */
         @Deprecated
         public javax.servlet.http.HttpSessionContext getSessionContext() {
             return SessionImpl.this.getSessionContext();
         }
 
-        /**
-         * @deprecated
-         */
+        /** @deprecated  */
         @Deprecated
         public Object getValue(String name) {
             return SessionImpl.this.getValue(name);
         }
 
-        /**
-         * @deprecated
-         */
+        /** @deprecated  */
         @Deprecated
         public String[] getValueNames() {
             return SessionImpl.this.getValueNames();
         }
 
-        /**
-         * @deprecated
-         */
+        /** @deprecated  */
         @Deprecated
         public void putValue(String name, Object value) {
             SessionImpl.this.putValue(name, value);
         }
 
-        /**
-         * @deprecated
-         */
+        /** @deprecated  */
         @Deprecated
         public void removeValue(String name) {
             SessionImpl.this.removeValue(name);

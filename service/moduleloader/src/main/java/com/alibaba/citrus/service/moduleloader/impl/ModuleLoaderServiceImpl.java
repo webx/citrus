@@ -41,11 +41,11 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public class ModuleLoaderServiceImpl extends AbstractService<ModuleLoaderService> implements ModuleLoaderService,
-        ProductionModeAware {
-    private Map<ModuleKey, Module> moduleCache = createConcurrentHashMap();
-    private boolean productionMode = true;
-    private Boolean cacheEnabled;
-    private ModuleFactory[] factories;
+                                                                                             ProductionModeAware {
+    private Map<ModuleKey, Module> moduleCache    = createConcurrentHashMap();
+    private boolean                productionMode = true;
+    private Boolean                cacheEnabled;
+    private ModuleFactory[]        factories;
     private ModuleAdapterFactory[] adapters;
 
     public void setFactories(ModuleFactory[] factories) {
@@ -104,7 +104,8 @@ public class ModuleLoaderServiceImpl extends AbstractService<ModuleLoaderService
         return names;
     }
 
-    public Module getModule(String moduleType, String moduleName) throws ModuleLoaderException, ModuleNotFoundException {
+    public Module getModule(String moduleType, String moduleName)
+            throws ModuleLoaderException, ModuleNotFoundException {
         Module module = getModuleQuiet(moduleType, moduleName);
 
         if (module == null) {
@@ -158,7 +159,7 @@ public class ModuleLoaderServiceImpl extends AbstractService<ModuleLoaderService
         if (module == null) {
             if (moduleObject != null) {
                 throw new UnadaptableModuleException("Could not adapt object to module: type=" + moduleType + ", name="
-                        + moduleName + ", class=" + moduleObject.getClass());
+                                                     + moduleName + ", class=" + moduleObject.getClass());
             }
         }
 

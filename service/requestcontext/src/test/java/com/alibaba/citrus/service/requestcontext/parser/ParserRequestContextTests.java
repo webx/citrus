@@ -28,21 +28,17 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
+import com.alibaba.citrus.util.i18n.LocaleUtil;
 import org.apache.commons.fileupload.FileItem;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
-import com.alibaba.citrus.util.i18n.LocaleUtil;
-
-/**
- * 测试<code>ParserRequestContext</code>。
- */
+/** 测试<code>ParserRequestContext</code>。 */
 public class ParserRequestContextTests extends AbstractRequestContextsTests<ParserRequestContext> {
     @BeforeClass
     public static void initFactory() {
@@ -167,7 +163,7 @@ public class ParserRequestContextTests extends AbstractRequestContextsTests<Pars
     public void getParameterNames() {
         List<String> keys = createArrayList();
 
-        for (Enumeration<String> e = newRequest.getParameterNames(); e.hasMoreElements();) {
+        for (Enumeration<String> e = newRequest.getParameterNames(); e.hasMoreElements(); ) {
             keys.add(e.nextElement());
         }
 
@@ -218,7 +214,7 @@ public class ParserRequestContextTests extends AbstractRequestContextsTests<Pars
 
         // keySet
         assertArrayEquals(requestContext.getParameters().keySet().toArray(new String[0]),
-                paramMap.keySet().toArray(new String[0]));
+                          paramMap.keySet().toArray(new String[0]));
 
         // values
         String[][] values = new String[requestContext.getParameters().size()][];
@@ -236,7 +232,7 @@ public class ParserRequestContextTests extends AbstractRequestContextsTests<Pars
         ParameterParser params = requestContext.getParameters();
 
         assertEquals("myparam=hello&myparam=%D6%D0%BB%AA%C8%CB%C3%F1%B9%B2%BA%CD%B9%FA&submit=upload",
-                params.toQueryString());
+                     params.toQueryString());
 
         params.setStrings("array", new String[] { "11", "22", "33" });
 
@@ -327,7 +323,7 @@ public class ParserRequestContextTests extends AbstractRequestContextsTests<Pars
         assertFalse(requestContext.isUseServletEngineParser());
         assertTrue(requestContext.isUseBodyEncodingForURI());
         assertArrayEquals(new String[] { new String("中国".getBytes("GBK"), "8859_1") },
-                newRequest.getParameterValues("a"));
+                          newRequest.getParameterValues("a"));
     }
 
     @Test
@@ -342,13 +338,13 @@ public class ParserRequestContextTests extends AbstractRequestContextsTests<Pars
         // 空值
         initMockRequest("GET", "a", "GBK", null);
         initRequestContext();
-        assertArrayEquals(new String[] {}, newRequest.getParameterValues("a"));
+        assertArrayEquals(new String[] { }, newRequest.getParameterValues("a"));
         assertArrayEquals(new Object[] { "a" }, newRequest.getParameterMap().keySet().toArray());
 
         initMockRequest("GET", "a&b=&=1", "GBK", null);
         initRequestContext();
-        assertArrayEquals(new String[] {}, newRequest.getParameterValues("a"));
-        assertArrayEquals(new String[] {}, newRequest.getParameterValues("b"));
+        assertArrayEquals(new String[] { }, newRequest.getParameterValues("a"));
+        assertArrayEquals(new String[] { }, newRequest.getParameterValues("b"));
         assertArrayEquals(new Object[] { "a", "b" }, newRequest.getParameterMap().keySet().toArray());
     }
 
@@ -366,7 +362,7 @@ public class ParserRequestContextTests extends AbstractRequestContextsTests<Pars
         request = createMock(HttpServletRequest.class);
         response = createMock(HttpServletResponse.class);
 
-        request.setAttribute(org.easymock.EasyMock.<String> anyObject(), anyObject());
+        request.setAttribute(org.easymock.EasyMock.<String>anyObject(), anyObject());
         expectLastCall().anyTimes();
 
         expect(request.getLocale()).andReturn(Locale.CHINA).anyTimes();

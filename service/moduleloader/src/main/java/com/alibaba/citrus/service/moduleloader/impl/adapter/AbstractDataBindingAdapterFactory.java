@@ -20,13 +20,12 @@ package com.alibaba.citrus.service.moduleloader.impl.adapter;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-import net.sf.cglib.reflect.FastMethod;
-
 import com.alibaba.citrus.service.dataresolver.DataResolver;
 import com.alibaba.citrus.service.dataresolver.DataResolverService;
 import com.alibaba.citrus.service.moduleloader.ModuleAdapterFactory;
 import com.alibaba.citrus.service.moduleloader.ModuleInfo;
 import com.alibaba.citrus.service.moduleloader.UnadaptableModuleException;
+import net.sf.cglib.reflect.FastMethod;
 
 public abstract class AbstractDataBindingAdapterFactory implements ModuleAdapterFactory {
     private DataResolverService dataResolverService;
@@ -35,9 +34,7 @@ public abstract class AbstractDataBindingAdapterFactory implements ModuleAdapter
         this.dataResolverService = dataResolverService;
     }
 
-    /**
-     * 取得方法，如果不存在或不符合要求，则返回null。
-     */
+    /** 取得方法，如果不存在或不符合要求，则返回null。 */
     protected Method getMethod(Class<?> moduleClass, String methodName) {
         for (Method candidateMethod : moduleClass.getMethods()) {
             if (candidateMethod.getName().equals(methodName) && checkMethod(candidateMethod)) {
@@ -48,9 +45,7 @@ public abstract class AbstractDataBindingAdapterFactory implements ModuleAdapter
         return null;
     }
 
-    /**
-     * 检查方法：public或protected、非static、参数任意。
-     */
+    /** 检查方法：public或protected、非static、参数任意。 */
     protected boolean checkMethod(Method method) {
         int modifiers = method.getModifiers();
 
@@ -65,9 +60,7 @@ public abstract class AbstractDataBindingAdapterFactory implements ModuleAdapter
         return true;
     }
 
-    /**
-     * 取得method调用器。其中，moduleInfo为dataResolverFactory提供额外的信息，用来生成适当的resolver。
-     */
+    /** 取得method调用器。其中，moduleInfo为dataResolverFactory提供额外的信息，用来生成适当的resolver。 */
     protected MethodInvoker getMethodInvoker(FastMethod fastMethod, ModuleInfo moduleInfo, boolean skippable) {
         if (fastMethod == null) {
             return null;
@@ -85,7 +78,7 @@ public abstract class AbstractDataBindingAdapterFactory implements ModuleAdapter
             if (paramsCount > 0) {
                 throw new UnadaptableModuleException(String.format(
                         "Could not adapt object to module: type=%s, name=%s, class=%s: "
-                                + "method %s has %d parameters, but no DataResolvers defined.", moduleInfo.getType(),
+                        + "method %s has %d parameters, but no DataResolvers defined.", moduleInfo.getType(),
                         moduleInfo.getName(), javaMethod.getDeclaringClass().getName(), javaMethod.getName(),
                         paramsCount));
             }

@@ -23,8 +23,6 @@ import static com.alibaba.citrus.util.CollectionUtil.*;
 import java.util.List;
 import java.util.Set;
 
-import org.slf4j.Logger;
-
 import com.alibaba.citrus.service.resource.Resource;
 import com.alibaba.citrus.service.resource.ResourceFilterChain;
 import com.alibaba.citrus.service.resource.ResourceLoaderContext;
@@ -35,6 +33,7 @@ import com.alibaba.citrus.service.resource.ResourceNotFoundException;
 import com.alibaba.citrus.service.resource.ResourceTrace;
 import com.alibaba.citrus.service.resource.ResourceTraceElement;
 import com.alibaba.citrus.util.regex.MatchResultSubstitution;
+import org.slf4j.Logger;
 
 /**
  * 代表一次resource查找的过程。
@@ -42,19 +41,17 @@ import com.alibaba.citrus.util.regex.MatchResultSubstitution;
  * @author Michael Zhou
  */
 class ResourceLoaderContextImpl extends AbstractResourceLoadingContext<Resource> implements ResourceLoaderContext,
-        ResourceFilterChain {
+                                                                                            ResourceFilterChain {
     // 不变量
-    private final String configLocation;
-    private final String beanName;
+    private final String                  configLocation;
+    private final String                  beanName;
     private final ResourceFilterMapping[] filterMappings;
-    private final BestFiltersMatcher filtersMatcher;
+    private final BestFiltersMatcher      filtersMatcher;
 
     // 变量
     private List<ResourceTraceElement> trace;
 
-    /**
-     * 创建一个context。
-     */
+    /** 创建一个context。 */
     public ResourceLoaderContextImpl(String resourceName, Set<ResourceLoadingOption> options,
                                      ResourceFilterMapping[] filterMappings, ResourceMapping[] mappings,
                                      ResourceLoadingService parent, Logger log, String configLocation, String beanName) {
@@ -66,9 +63,7 @@ class ResourceLoaderContextImpl extends AbstractResourceLoadingContext<Resource>
         this.filtersMatcher = new BestFiltersMatcher();
     }
 
-    /**
-     * 开始一个查找过程。
-     */
+    /** 开始一个查找过程。 */
     public Resource getResource() throws ResourceNotFoundException {
         if (filtersMatcher.matches(resourceName)) {
             ResourceFilterMapping filterMapping = filtersMatcher.bestMatchPettern;
@@ -77,7 +72,7 @@ class ResourceLoaderContextImpl extends AbstractResourceLoadingContext<Resource>
             lastSubstitution = new MatchResultSubstitution(filtersMatcher.bestMatchResult);
 
             log.debug("Resource \"{}\" matched resource-filters pattern: \"{}\"", resourceName,
-                    filterMapping.getPatternName());
+                      filterMapping.getPatternName());
 
             ResourceFilterChain root = this; // as ResourceFilterChain
             ResourceMatchResult matchResult = this; // as ResourceMatchResult
@@ -89,9 +84,7 @@ class ResourceLoaderContextImpl extends AbstractResourceLoadingContext<Resource>
         }
     }
 
-    /**
-     * 跟踪一个查找过过程。
-     */
+    /** 跟踪一个查找过过程。 */
     public ResourceTrace getTrace() throws ResourceNotFoundException {
         trace = createLinkedList();
 
@@ -106,17 +99,13 @@ class ResourceLoaderContextImpl extends AbstractResourceLoadingContext<Resource>
         return new ResourceTrace(trace, resource);
     }
 
-    /**
-     * 实现<code>ResourceFilterChain.doFilter()</code>，代表filter链的终结点。
-     */
+    /** 实现<code>ResourceFilterChain.doFilter()</code>，代表filter链的终结点。 */
     public Resource doFilter(ResourceMatchResult filterMatchResult, Set<ResourceLoadingOption> options)
             throws ResourceNotFoundException {
         return doLoad(filterMatchResult.getResourceName(), options);
     }
 
-    /**
-     * Trace mode：记录resource name的变迁。
-     */
+    /** Trace mode：记录resource name的变迁。 */
     @Override
     protected void visitMapping(ResourceMapping mapping) {
         if (trace != null) {
@@ -125,9 +114,7 @@ class ResourceLoaderContextImpl extends AbstractResourceLoadingContext<Resource>
         }
     }
 
-    /**
-     * 取得parent的resource。假如在trace mode中，则同时添加parent的trace信息。
-     */
+    /** 取得parent的resource。假如在trace mode中，则同时添加parent的trace信息。 */
     @Override
     protected Resource loadParentResource(String resourceName, Set<ResourceLoadingOption> options)
             throws ResourceNotFoundException {
@@ -150,17 +137,13 @@ class ResourceLoaderContextImpl extends AbstractResourceLoadingContext<Resource>
         return null;
     }
 
-    /**
-     * 调用mapping取得资源。
-     */
+    /** 调用mapping取得资源。 */
     @Override
     protected Resource loadMappedResource(ResourceLoaderMapping mapping, Set<ResourceLoadingOption> options) {
         return mapping.getResource(this, options);
     }
 
-    /**
-     * 实现<code>ResourceLoaderContext.getResource()</code>。
-     */
+    /** 实现<code>ResourceLoaderContext.getResource()</code>。 */
     public Resource getResource(String newResourceName, Set<ResourceLoadingOption> newOptions) {
         return loadContextResource(newResourceName, newOptions);
     }
@@ -170,9 +153,7 @@ class ResourceLoaderContextImpl extends AbstractResourceLoadingContext<Resource>
         return "ResourceLoaderContext[" + resourceName + "]";
     }
 
-    /**
-     * 找出最匹配的&lt;resource-filters&gt;。
-     */
+    /** 找出最匹配的&lt;resource-filters&gt;。 */
     private class BestFiltersMatcher extends BestMatcher<ResourceFilterMapping> {
         private int i;
 

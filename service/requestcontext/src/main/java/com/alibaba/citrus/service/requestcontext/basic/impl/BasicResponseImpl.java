@@ -22,7 +22,6 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.io.IOException;
 import java.net.URI;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,7 +51,7 @@ import com.alibaba.citrus.util.StringEscapeUtil;
  * @author Michael Zhou
  */
 public class BasicResponseImpl extends AbstractResponseWrapper {
-    private static final String LOCATION_HEADER = "Location";
+    private static final String LOCATION_HEADER   = "Location";
     private static final String SET_COOKIE_HEADER = "Set-Cookie";
     private final Object[] interceptors;
 
@@ -177,7 +176,7 @@ public class BasicResponseImpl extends AbstractResponseWrapper {
 
         if (newValue == null) {
             throw new ResponseHeaderRejectedException("HTTP header rejected: " + StringEscapeUtil.escapeJava(name)
-                    + "=" + StringEscapeUtil.escapeJava(value));
+                                                      + "=" + StringEscapeUtil.escapeJava(value));
         }
 
         return newValue;
@@ -214,7 +213,7 @@ public class BasicResponseImpl extends AbstractResponseWrapper {
 
         if (newCookie == null) {
             throw new CookieRejectedException("Cookie rejected: " + StringEscapeUtil.escapeJava(cookie.getName()) + "="
-                    + StringEscapeUtil.escapeJava(cookie.getValue()));
+                                              + StringEscapeUtil.escapeJava(cookie.getValue()));
         }
 
         return newCookie;
@@ -230,7 +229,7 @@ public class BasicResponseImpl extends AbstractResponseWrapper {
         for (Object interceptor : interceptors) {
             if (interceptor instanceof CookieHeaderValueInterceptor) {
                 newValue = ((CookieHeaderValueInterceptor) interceptor).checkCookieHeaderValue(name, newValue,
-                        setHeader);
+                                                                                               setHeader);
 
                 if (newValue == null) {
                     break;
@@ -310,7 +309,7 @@ public class BasicResponseImpl extends AbstractResponseWrapper {
 
         if (newLocation == null) {
             throw new RedirectLocationRejectedException("Redirect location rejected: "
-                    + StringEscapeUtil.escapeJava(location));
+                                                        + StringEscapeUtil.escapeJava(location));
         }
 
         return newLocation;

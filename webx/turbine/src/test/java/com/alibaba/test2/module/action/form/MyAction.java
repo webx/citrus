@@ -19,10 +19,9 @@ package com.alibaba.test2.module.action.form;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.service.form.Form;
 import com.alibaba.citrus.turbine.dataresolver.FormData;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class MyAction {
     @Autowired

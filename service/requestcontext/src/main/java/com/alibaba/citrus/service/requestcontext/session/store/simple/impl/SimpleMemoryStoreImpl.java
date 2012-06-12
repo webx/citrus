@@ -35,22 +35,16 @@ import com.alibaba.citrus.service.requestcontext.session.SessionStore;
 public class SimpleMemoryStoreImpl implements SessionStore {
     private final ConcurrentMap<String, Map<String, Object>> sessions = createConcurrentHashMap();
 
-    /**
-     * 初始化SessionStore。
-     */
+    /** 初始化SessionStore。 */
     public void init(String storeName, SessionConfig sessionConfig) {
     }
 
-    /**
-     * 取得指定session ID的所有值。
-     */
+    /** 取得指定session ID的所有值。 */
     public Map<String, Object> getSession(String sessionID) {
         return sessions.get(sessionID);
     }
 
-    /**
-     * 取得指定session的所有attribute名称。
-     */
+    /** 取得指定session的所有attribute名称。 */
     public Iterable<String> getAttributeNames(String sessionID, StoreContext storeContext) {
         Map<String, Object> sessionData = sessions.get(sessionID);
 
@@ -61,9 +55,7 @@ public class SimpleMemoryStoreImpl implements SessionStore {
         }
     }
 
-    /**
-     * 装载指定session的某个attribute。
-     */
+    /** 装载指定session的某个attribute。 */
     public Object loadAttribute(String attrName, String sessionID, StoreContext storeContext) {
         Map<String, Object> sessionData = sessions.get(sessionID);
 
@@ -74,16 +66,12 @@ public class SimpleMemoryStoreImpl implements SessionStore {
         }
     }
 
-    /**
-     * 丢弃指定session ID的所有内容。
-     */
+    /** 丢弃指定session ID的所有内容。 */
     public void invaldiate(String sessionID, StoreContext storeContext) {
         sessions.remove(sessionID);
     }
 
-    /**
-     * 保存指定session的attributes。attrs为<code>null</code>表示删除。
-     */
+    /** 保存指定session的attributes。attrs为<code>null</code>表示删除。 */
     public void commit(Map<String, Object> modifiedAttrs, String sessionID, StoreContext storeContext) {
         Map<String, Object> sessionData = null;
 

@@ -30,9 +30,7 @@ import com.alibaba.citrus.service.mail.session.MailStoreHandler;
  * @author Michael Zhou
  */
 public class DefaultMailStoreHandler implements MailStoreHandler {
-    /**
-     * 预处理连接。
-     */
+    /** 预处理连接。 */
     public void prepareConnection(Store store) throws MailException, MessagingException {
     }
 
@@ -44,9 +42,7 @@ public class DefaultMailStoreHandler implements MailStoreHandler {
         return messageCount;
     }
 
-    /**
-     * 处理一个邮件。返回<code>true</code>代表删除邮件。
-     */
+    /** 处理一个邮件。返回<code>true</code>代表删除邮件。 */
     public boolean processMessage(Message message) throws MailException, MessagingException {
         return false;
     }

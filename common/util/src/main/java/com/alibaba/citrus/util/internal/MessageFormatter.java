@@ -40,23 +40,17 @@ import com.alibaba.citrus.util.StringUtil;
 public class MessageFormatter<T> {
     private final Map<Locale, Reference<ResourceBundle>> bundles;
 
-    /**
-     * 创建一个<code>MessageFormatter</code>实例。
-     */
+    /** 创建一个<code>MessageFormatter</code>实例。 */
     public MessageFormatter() {
         this.bundles = createConcurrentHashMap();
     }
 
-    /**
-     * 取得<code>ResourceBundle</code>的名称，默认和类名相同。
-     */
+    /** 取得<code>ResourceBundle</code>的名称，默认和类名相同。 */
     protected String getBundleName() {
         return getClass().getName();
     }
 
-    /**
-     * 取得指定locale的<code>ResourceBundle</code>。
-     */
+    /** 取得指定locale的<code>ResourceBundle</code>。 */
     private ResourceBundle getBundle(Locale locale) {
         if (locale == null) {
             locale = getDefaultLocale();
@@ -77,16 +71,12 @@ public class MessageFormatter<T> {
         return bundle;
     }
 
-    /**
-     * 取得指定在enum中所标注的、系统默认locale的消息串，并格式化之。
-     */
+    /** 取得指定在enum中所标注的、系统默认locale的消息串，并格式化之。 */
     public String format(T key, Object... args) {
         return format(key, null, args);
     }
 
-    /**
-     * 取得指定在enum中所标注的、指定locale的消息串，并格式化之。
-     */
+    /** 取得指定在enum中所标注的、指定locale的消息串，并格式化之。 */
     public String format(T key, Locale locale, Object... args) {
         ResourceBundle bundle = getBundle(locale);
         String strKey = String.valueOf(key);
@@ -123,9 +113,7 @@ public class MessageFormatter<T> {
         }
     }
 
-    /**
-     * 预处理参数，使之更好地被显示。
-     */
+    /** 预处理参数，使之更好地被显示。 */
     protected final Object preprocess(Object o) {
         if (o == null) {
             return EMPTY_STRING;
@@ -160,9 +148,7 @@ public class MessageFormatter<T> {
         }
     }
 
-    /**
-     * 给子类预留接口，以便处理未知类型。
-     */
+    /** 给子类预留接口，以便处理未知类型。 */
     protected Object preprocessObject(Object o) {
         return o;
     }
@@ -192,7 +178,7 @@ public class MessageFormatter<T> {
     private Object preprocess(Constructor<?> method) {
         try {
             return preprocessMethodOrConstructor(method.getModifiers(), null, method.getDeclaringClass(), null,
-                    method.getParameterTypes(), method.getExceptionTypes());
+                                                 method.getParameterTypes(), method.getExceptionTypes());
         } catch (Exception e) {
             return "<" + e + ">";
         }
@@ -201,8 +187,8 @@ public class MessageFormatter<T> {
     private Object preprocess(Method method) {
         try {
             return preprocessMethodOrConstructor(method.getModifiers(), method.getReturnType(),
-                    method.getDeclaringClass(), method.getName(), method.getParameterTypes(),
-                    method.getExceptionTypes());
+                                                 method.getDeclaringClass(), method.getName(), method.getParameterTypes(),
+                                                 method.getExceptionTypes());
         } catch (Exception e) {
             return "<" + e + ">";
         }
@@ -254,9 +240,7 @@ public class MessageFormatter<T> {
         return sb.toString();
     }
 
-    /**
-     * 取得默认的locale。
-     */
+    /** 取得默认的locale。 */
     private static Locale getDefaultLocale() {
         Locale locale = null;
 
@@ -273,9 +257,7 @@ public class MessageFormatter<T> {
 
     private static ThreadLocal<Locale> defaultLocale;
 
-    /**
-     * 这个方法是给单元测试预留的，外面的程序不可用。
-     */
+    /** 这个方法是给单元测试预留的，外面的程序不可用。 */
     static void setDefaultLocale(Locale locale) {
         if (defaultLocale == null) {
             defaultLocale = new ThreadLocal<Locale>();

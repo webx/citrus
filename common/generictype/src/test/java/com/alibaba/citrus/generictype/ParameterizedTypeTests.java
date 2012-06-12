@@ -25,14 +25,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import com.alibaba.citrus.test.runner.Prototyped;
 import com.alibaba.citrus.test.runner.Prototyped.Prototypes;
 import com.alibaba.citrus.test.runner.Prototyped.TestData;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * 测试{@link ParameterizedTypeInfo}。
@@ -41,20 +40,20 @@ import com.alibaba.citrus.test.runner.Prototyped.TestName;
  */
 @RunWith(Prototyped.class)
 public class ParameterizedTypeTests extends BaseTypeTests implements Cloneable {
-    private transient ParameterizedTypeInfo typeInfo;
-    private Class<?> ownerType; // 变量所在的类
-    private String methodName; // 变量的方法名
-    private Class<?> clazz; // rawClass
-    private String name; // 名称
-    private String simpleName; // 简称
-    private boolean isInterface; // 是否为接口
-    private String toString; // toString结果
-    private String[] supertypes; // 父类、接口
-    private GenericDeclarationInfo context; // resolve参数
-    private String params; // 参数表toString
-    private String[] args; // actual args
-    private String[] resolvedArgs; // resolve结果
-    private boolean resolveChanged; // 如果为false，表示resolve方法返回this
+    private transient ParameterizedTypeInfo  typeInfo;
+    private           Class<?>               ownerType; // 变量所在的类
+    private           String                 methodName; // 变量的方法名
+    private           Class<?>               clazz; // rawClass
+    private           String                 name; // 名称
+    private           String                 simpleName; // 简称
+    private           boolean                isInterface; // 是否为接口
+    private           String                 toString; // toString结果
+    private           String[]               supertypes; // 父类、接口
+    private           GenericDeclarationInfo context; // resolve参数
+    private           String                 params; // 参数表toString
+    private           String[]               args; // actual args
+    private           String[]               resolvedArgs; // resolve结果
+    private           boolean                resolveChanged; // 如果为false，表示resolve方法返回this
 
     @Before
     public void init() {
@@ -139,7 +138,7 @@ public class ParameterizedTypeTests extends BaseTypeTests implements Cloneable {
         prototype.isInterface = false;
         prototype.toString = "ArrayList<E=A>";
         prototype.supertypes = new String[] { "ArrayList<E=A>", "AbstractList<E=E>", "AbstractCollection<E=E>",
-                "Cloneable", "Collection<E=E>", "Iterable<T=E>", "List<E=E>", "RandomAccess", "Serializable", "Object" };
+                                              "Cloneable", "Collection<E=E>", "Iterable<T=E>", "List<E=E>", "RandomAccess", "Serializable", "Object" };
         prototype.context = null;
         prototype.params = "[E]";
         prototype.args = new String[] { "A" };
@@ -190,7 +189,7 @@ public class ParameterizedTypeTests extends BaseTypeTests implements Cloneable {
         prototype.isInterface = true;
         prototype.toString = "List<E=? extends Class<T=?>>";
         prototype.supertypes = new String[] { "List<E=? extends Class<T=?>>", "Collection<E=E>", "Iterable<T=E>",
-                "Object" };
+                                              "Object" };
         prototype.context = null;
         prototype.params = "[E]";
         prototype.args = new String[] { "? extends Class<T=?>" };
@@ -257,7 +256,7 @@ public class ParameterizedTypeTests extends BaseTypeTests implements Cloneable {
         prototype.isInterface = true;
         prototype.toString = "List<E=Map<K=String, V=Integer>>";
         prototype.supertypes = new String[] { "List<E=Map<K=String, V=Integer>>", "Collection<E=E>", "Iterable<T=E>",
-                "Object" };
+                                              "Object" };
         prototype.context = null;
         prototype.params = "[E]";
         prototype.args = new String[] { "Map<K=String, V=Integer>" };
@@ -273,7 +272,7 @@ public class ParameterizedTypeTests extends BaseTypeTests implements Cloneable {
         prototype.isInterface = true;
         prototype.toString = "List<E=Map<K=A, V=List<E=? extends A>>>";
         prototype.supertypes = new String[] { "List<E=Map<K=A, V=List<E=? extends A>>>", "Collection<E=E>",
-                "Iterable<T=E>", "Object" };
+                                              "Iterable<T=E>", "Object" };
         prototype.context = factory.getClassType(StringClass.class);
         prototype.params = "[E]";
         prototype.args = new String[] { "Map<K=A, V=List<E=? extends A>>" };
@@ -292,7 +291,7 @@ public class ParameterizedTypeTests extends BaseTypeTests implements Cloneable {
         prototype.isInterface = true;
         prototype.toString = "List<E=Map<K=String, V=Integer>[][]>";
         prototype.supertypes = new String[] { "List<E=Map<K=String, V=Integer>[][]>", "Collection<E=E>",
-                "Iterable<T=E>", "Object" };
+                                              "Iterable<T=E>", "Object" };
         prototype.context = null;
         prototype.params = "[E]";
         prototype.args = new String[] { "Map<K=String, V=Integer>[][]" };
@@ -332,17 +331,13 @@ public class ParameterizedTypeTests extends BaseTypeTests implements Cloneable {
         return data;
     }
 
-    /**
-     * from {@link GenericDeclarationInfo}。
-     */
+    /** from {@link GenericDeclarationInfo}。 */
     @Test
     public void isGeneric() {
         assertTrue(typeInfo.isGeneric());
     }
 
-    /**
-     * from {@link GenericDeclarationInfo}。
-     */
+    /** from {@link GenericDeclarationInfo}。 */
     @Test
     public void getTypeParameters() {
         assertEquals(params, typeInfo.getTypeParameters().toString());

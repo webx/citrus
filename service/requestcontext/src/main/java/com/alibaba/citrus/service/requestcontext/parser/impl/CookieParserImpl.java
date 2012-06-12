@@ -22,12 +22,11 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import javax.servlet.http.Cookie;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.alibaba.citrus.service.requestcontext.parser.AbstractValueParser;
 import com.alibaba.citrus.service.requestcontext.parser.CookieParser;
 import com.alibaba.citrus.service.requestcontext.parser.ParserRequestContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <code>CookieParser</code>是用来解析和添加HTTP请求中的cookies的接口。
@@ -40,9 +39,7 @@ import com.alibaba.citrus.service.requestcontext.parser.ParserRequestContext;
 public class CookieParserImpl extends AbstractValueParser implements CookieParser {
     private final static Logger log = LoggerFactory.getLogger(CookieParser.class);
 
-    /**
-     * 从request中创建新的cookies。
-     */
+    /** 从request中创建新的cookies。 */
     public CookieParserImpl(ParserRequestContext requestContext) {
         super(requestContext);
 
@@ -121,9 +118,7 @@ public class CookieParserImpl extends AbstractValueParser implements CookieParse
         return defaultIfEmpty(requestContext.getRequest().getContextPath(), "/");
     }
 
-    /**
-     * Remove a previously set cookie from the client machine.
-     */
+    /** Remove a previously set cookie from the client machine. */
     public void removeCookie(String name) {
         setCookie(name, " ", AGE_DELETE);
     }

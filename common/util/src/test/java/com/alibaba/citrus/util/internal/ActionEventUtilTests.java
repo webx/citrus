@@ -23,7 +23,6 @@ import static org.junit.Assert.*;
 
 import java.util.Enumeration;
 import java.util.Vector;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.easymock.Capture;

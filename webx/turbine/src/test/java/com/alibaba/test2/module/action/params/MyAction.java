@@ -18,12 +18,10 @@
 package com.alibaba.test2.module.action.params;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.turbine.dataresolver.Params;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class MyAction {
     @Autowired
@@ -39,7 +37,7 @@ public class MyAction {
 
     public static class MyData {
         private List<String> names;
-        private int value;
+        private int          value;
 
         public List<String> getNames() {
             return names;

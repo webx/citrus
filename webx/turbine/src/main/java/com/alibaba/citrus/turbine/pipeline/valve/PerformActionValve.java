@@ -22,8 +22,6 @@ import static com.alibaba.citrus.turbine.util.TurbineUtil.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
@@ -32,6 +30,7 @@ import com.alibaba.citrus.service.pipeline.support.AbstractValve;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.util.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 执行action module，通常用来处理用户提交的表单。

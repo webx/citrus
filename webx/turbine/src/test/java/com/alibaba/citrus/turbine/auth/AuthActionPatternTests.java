@@ -19,10 +19,9 @@ package com.alibaba.citrus.turbine.auth;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.turbine.auth.impl.AuthActionPattern;
 import com.alibaba.citrus.turbine.auth.impl.AuthPattern;
+import org.junit.Test;
 
 public class AuthActionPatternTests {
     private AuthActionPattern pattern;

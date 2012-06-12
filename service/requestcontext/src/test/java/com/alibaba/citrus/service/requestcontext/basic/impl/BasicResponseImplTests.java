@@ -63,29 +63,29 @@ public class BasicResponseImplTests {
     @Test
     public void normalizeLocation_absLocation_normalized() {
         assertEquals("http://localhost:8080/test?x=1",
-                normalizeLocation("http://localhost:8080//a/../test?x=1", request("")));
+                     normalizeLocation("http://localhost:8080//a/../test?x=1", request("")));
     }
 
     @Test
     public void normalizeLocation_relLocation_normalized() {
         // relative path: http://localhost:8080/a/../bb?x=1
         assertEquals("http://localhost:8080/bb?x=1",
-                normalizeLocation("a/../bb?x=1", request("http://localhost:8080/test")));
+                     normalizeLocation("a/../bb?x=1", request("http://localhost:8080/test")));
 
         // relative path: http://localhost:8080/test/a/../bb?x=1
         assertEquals("http://localhost:8080/test/bb?x=1",
-                normalizeLocation("a/../bb?x=1", request("http://localhost:8080/test/")));
+                     normalizeLocation("a/../bb?x=1", request("http://localhost:8080/test/")));
 
         // absolute path: http://localhost:8080/a/../bb?x=1
         assertEquals("http://localhost:8080/bb?x=1",
-                normalizeLocation("/a/../bb?x=1", request("http://localhost:8080/test/")));
+                     normalizeLocation("/a/../bb?x=1", request("http://localhost:8080/test/")));
 
         // relative path: http://localhost:8080/test/a/../../bb?x=1
         assertEquals("http://localhost:8080/bb?x=1",
-                normalizeLocation("a/../../bb?x=1", request("http://localhost:8080/test/")));
+                     normalizeLocation("a/../../bb?x=1", request("http://localhost:8080/test/")));
 
         // relative path: http://localhost:8080/a/../../bb?x=1
         assertEquals("http://localhost:8080/../bb?x=1",
-                normalizeLocation("a/../../bb?x=1", request("http://localhost:8080/test")));
+                     normalizeLocation("a/../../bb?x=1", request("http://localhost:8080/test")));
     }
 }

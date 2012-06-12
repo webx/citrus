@@ -29,7 +29,7 @@ public class Slf4jLoggerFactory implements LoggerFactory {
     public Slf4jLoggerFactory() {
         try {
             factoryImpl = (PublicLoggerFactory) Thread.currentThread().getContextClassLoader()
-                    .loadClass(IMPL_CLASS_NAME).newInstance();
+                                                      .loadClass(IMPL_CLASS_NAME).newInstance();
         } catch (Exception e) {
             throw new RuntimeException("Could not create Slf4jLoggerFactory", e);
         }

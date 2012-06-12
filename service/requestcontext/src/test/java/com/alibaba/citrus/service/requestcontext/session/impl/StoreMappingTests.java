@@ -26,16 +26,15 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.BeanWrapperImpl;
-
 import com.alibaba.citrus.service.requestcontext.session.SessionConfig.StoreMappingsConfig;
 import com.alibaba.citrus.service.requestcontext.session.SessionConfig.StoresConfig;
 import com.alibaba.citrus.service.requestcontext.session.SessionStore;
 import com.alibaba.citrus.service.requestcontext.session.impl.SessionRequestContextFactoryImpl.AttributePattern;
 import com.alibaba.citrus.test.TestEnvStatic;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeanWrapperImpl;
 
 /**
  * 测试store mapping的逻辑。
@@ -43,8 +42,8 @@ import com.alibaba.citrus.test.TestEnvStatic;
  * @author Michael Zhou
  */
 public class StoreMappingTests {
-    private StoresConfig stores;
-    private StoreMappingsConfig mappings;
+    private StoresConfig           stores;
+    private StoreMappingsConfig    mappings;
     private List<AttributePattern> patterns;
 
     {
@@ -80,7 +79,7 @@ public class StoreMappingTests {
             fail();
         } catch (InvocationTargetException e) {
             assertThat(e,
-                    exception(IllegalArgumentException.class, "Undefined Session Store", "match=\"*\"", "store=\"s0\""));
+                       exception(IllegalArgumentException.class, "Undefined Session Store", "match=\"*\"", "store=\"s0\""));
         }
     }
 

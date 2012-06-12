@@ -54,7 +54,7 @@ public interface UploadService extends UploadConfiguration {
      * </p>
      *
      * @param request HTTP请求
-     * @param params upload参数
+     * @param params  upload参数
      * @return <code>FileItem</code>的列表，按其输入的顺序罗列
      * @throws UploadException 如果解析时出错
      */

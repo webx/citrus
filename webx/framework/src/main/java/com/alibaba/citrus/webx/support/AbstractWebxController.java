@@ -19,13 +19,12 @@ package com.alibaba.citrus.webx.support;
 
 import javax.servlet.ServletContext;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
-
 import com.alibaba.citrus.webx.WebxComponent;
 import com.alibaba.citrus.webx.WebxController;
 import com.alibaba.citrus.webx.config.WebxConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 
 public abstract class AbstractWebxController implements WebxController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
@@ -43,16 +42,12 @@ public abstract class AbstractWebxController implements WebxController {
         return getComponent().getApplicationContext().getServletContext();
     }
 
-    /**
-     * 此方法在创建controller时被调用。
-     */
+    /** 此方法在创建controller时被调用。 */
     public void init(WebxComponent component) {
         this.component = component;
     }
 
-    /**
-     * 此方法在创建或刷新WebApplicationContext时被调用。
-     */
+    /** 此方法在创建或刷新WebApplicationContext时被调用。 */
     public void onRefreshContext() throws BeansException {
         initWebxConfiguration();
     }

@@ -22,6 +22,7 @@ import static org.junit.Assert.*;
 
 import java.util.Iterator;
 
+import com.alibaba.citrus.service.velocity.impl.CloneableEventCartridge;
 import org.apache.commons.collections.ExtendedProperties;
 import org.apache.velocity.app.event.EventCartridge;
 import org.apache.velocity.app.event.EventHandler;
@@ -35,12 +36,10 @@ import org.apache.velocity.util.RuntimeServicesAware;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.alibaba.citrus.service.velocity.impl.CloneableEventCartridge;
-
 public class CloneableEventCartridgeTests {
-    private RuntimeServices rsvc;
+    private RuntimeServices         rsvc;
     private CloneableEventCartridge eventCartridge;
-    private MyHandler handler;
+    private MyHandler               handler;
 
     @Before
     public void init() throws Exception {
@@ -97,8 +96,8 @@ public class CloneableEventCartridgeTests {
             assertThat(
                     e,
                     exception("EventHandler which implements ContextAware "
-                            + "should also implements FastCloneable or Cloneable: "
-                            + ContextAwareButNotCloneable.class.getName()));
+                              + "should also implements FastCloneable or Cloneable: "
+                              + ContextAwareButNotCloneable.class.getName()));
         }
 
         // context aware and fast cloneable
@@ -201,7 +200,7 @@ public class CloneableEventCartridgeTests {
     }
 
     public static class MyLocalHandler implements ReferenceInsertionEventHandler, MethodExceptionEventHandler,
-            ContextAware, Cloneable {
+                                                  ContextAware, Cloneable {
         private Context context;
 
         public void setContext(Context context) {

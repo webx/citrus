@@ -21,7 +21,6 @@ import static com.alibaba.citrus.test.TestEnvStatic.*;
 import static org.junit.Assert.*;
 
 import java.io.File;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,14 +35,14 @@ import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
 
 public abstract class AbstractJspEngineTests {
-    protected ServletContext servletContext;
-    protected HttpServletRequest request;
-    protected HttpServletResponse response;
-    protected ServletUnitClient client;
-    protected InvocationContext ic;
+    protected ServletContext           servletContext;
+    protected HttpServletRequest       request;
+    protected HttpServletResponse      response;
+    protected ServletUnitClient        client;
+    protected InvocationContext        ic;
     protected XmlWebApplicationContext factory;
-    protected TemplateService templateService;
-    protected JspEngineImpl engine;
+    protected TemplateService          templateService;
+    protected JspEngineImpl            engine;
 
     protected void initServlet(String webXml) throws Exception {
         ServletRunner runner = new ServletRunner(new File(srcdir, webXml), "");

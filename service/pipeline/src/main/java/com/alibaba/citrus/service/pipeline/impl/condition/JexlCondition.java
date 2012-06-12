@@ -20,12 +20,6 @@ package com.alibaba.citrus.service.pipeline.impl.condition;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
-import org.springframework.beans.SimpleTypeConverter;
-import org.springframework.beans.TypeMismatchException;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.expr.Expression;
 import com.alibaba.citrus.expr.ExpressionContext;
 import com.alibaba.citrus.expr.ExpressionFactory;
@@ -36,6 +30,11 @@ import com.alibaba.citrus.service.pipeline.PipelineStates;
 import com.alibaba.citrus.service.pipeline.support.AbstractCondition;
 import com.alibaba.citrus.service.pipeline.support.AbstractConditionDefinitionParser;
 import com.alibaba.citrus.util.StringEscapeUtil;
+import org.springframework.beans.SimpleTypeConverter;
+import org.springframework.beans.TypeMismatchException;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 用jexl表达式来计算的condition。
@@ -48,7 +47,7 @@ import com.alibaba.citrus.util.StringEscapeUtil;
  */
 public class JexlCondition extends AbstractCondition {
     protected static final ExpressionFactory EXPRESSION_FACTORY = new JexlExpressionFactory();
-    private String expressionString;
+    private String     expressionString;
     private Expression expression;
 
     public JexlCondition() {
@@ -96,7 +95,7 @@ public class JexlCondition extends AbstractCondition {
             } catch (TypeMismatchException e) {
                 throw new PipelineException(
                         "Failed to evaluating expression for JexlCondition into a boolean value: \""
-                                + getEscapedExpression(expressionString) + "\"", e);
+                        + getEscapedExpression(expressionString) + "\"", e);
             }
         }
     }

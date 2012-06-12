@@ -25,13 +25,12 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.beans.factory.support.RootBeanDefinition;
-
 import com.alibaba.citrus.dev.handler.impl.ExplorerHandler.ExplorerVisitor;
 import com.alibaba.citrus.dev.handler.util.BeanDefinitionReverseEngine;
 import com.alibaba.citrus.dev.handler.util.Element;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.beans.factory.support.RootBeanDefinition;
 
 public class BeansVisitor extends AbstractFallbackVisitor<ExplorerVisitor> {
     private final DefaultListableBeanFactory factory;
@@ -68,12 +67,10 @@ public class BeansVisitor extends AbstractFallbackVisitor<ExplorerVisitor> {
 
     private RootBeanDefinition getBeanDefinition(String name) throws Exception {
         return (RootBeanDefinition) getAccessibleMethod(factory.getClass(), "getMergedLocalBeanDefinition",
-                new Class<?>[] { String.class }).invoke(factory, name);
+                                                        new Class<?>[] { String.class }).invoke(factory, name);
     }
 
-    /**
-     * 将bean names排序。先按bean name的复杂度排序，再按字母顺序排序。
-     */
+    /** 将bean names排序。先按bean name的复杂度排序，再按字母顺序排序。 */
     private String[] getSortedBeanNames() {
         String[] names = factory.getBeanDefinitionNames();
         BeanName[] beanNames = new BeanName[names.length];
@@ -96,7 +93,7 @@ public class BeansVisitor extends AbstractFallbackVisitor<ExplorerVisitor> {
     }
 
     static class BeanName implements Comparable<BeanName> {
-        String beanName;
+        String   beanName;
         String[] components;
 
         public int compareTo(BeanName o) {

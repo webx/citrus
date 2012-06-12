@@ -36,9 +36,7 @@ import com.alibaba.citrus.util.internal.Entities;
  * @author Michael Zhou
  */
 public class ExceptionUtil {
-    /**
-     * 检查异常是否由指定类型的异常引起。
-     */
+    /** 检查异常是否由指定类型的异常引起。 */
     public static boolean causedBy(Throwable t, Class<? extends Throwable> causeType) {
         assertNotNull(causeType, "causeType");
 
@@ -51,9 +49,7 @@ public class ExceptionUtil {
         return t != null && causeType.isInstance(t);
     }
 
-    /**
-     * 取得最根本的异常。
-     */
+    /** 取得最根本的异常。 */
     public static Throwable getRootCause(Throwable t) {
         List<Throwable> causes = getCauses(t, true);
 
@@ -64,16 +60,12 @@ public class ExceptionUtil {
         }
     }
 
-    /**
-     * 取得包括当前异常在内的所有的causes异常，按出现的顺序排列。
-     */
+    /** 取得包括当前异常在内的所有的causes异常，按出现的顺序排列。 */
     public static List<Throwable> getCauses(Throwable t) {
         return getCauses(t, false);
     }
 
-    /**
-     * 取得包括当前异常在内的所有的causes异常，按出现的顺序排列。
-     */
+    /** 取得包括当前异常在内的所有的causes异常，按出现的顺序排列。 */
     public static List<Throwable> getCauses(Throwable t, boolean reversed) {
         LinkedList<Throwable> causes = createLinkedList();
 
@@ -88,16 +80,12 @@ public class ExceptionUtil {
         return causes;
     }
 
-    /**
-     * 将异常转换成<code>RuntimeException</code>。
-     */
+    /** 将异常转换成<code>RuntimeException</code>。 */
     public static RuntimeException toRuntimeException(Exception e) {
         return toRuntimeException(e, null);
     }
 
-    /**
-     * 将异常转换成<code>RuntimeException</code>。
-     */
+    /** 将异常转换成<code>RuntimeException</code>。 */
     public static RuntimeException toRuntimeException(Exception e,
                                                       Class<? extends RuntimeException> runtimeExceptionClass) {
         if (e == null) {
@@ -122,9 +110,7 @@ public class ExceptionUtil {
         }
     }
 
-    /**
-     * 抛出Throwable，但不需要声明<code>throws Throwable</code>。
-     */
+    /** 抛出Throwable，但不需要声明<code>throws Throwable</code>。 */
     public static void throwExceptionOrError(Throwable t) throws Exception {
         if (t instanceof Exception) {
             throw (Exception) t;
@@ -135,9 +121,7 @@ public class ExceptionUtil {
         }
     }
 
-    /**
-     * 抛出Throwable，但不需要声明<code>throws Throwable</code>。
-     */
+    /** 抛出Throwable，但不需要声明<code>throws Throwable</code>。 */
     public static void throwRuntimeExceptionOrError(Throwable t) {
         if (t instanceof Error) {
             throw (Error) t;

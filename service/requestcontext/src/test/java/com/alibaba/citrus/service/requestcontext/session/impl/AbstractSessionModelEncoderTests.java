@@ -19,14 +19,13 @@ package com.alibaba.citrus.service.requestcontext.session.impl;
 
 import static org.easymock.EasyMock.*;
 
-import org.junit.Before;
-
 import com.alibaba.citrus.service.requestcontext.session.SessionModel;
 import com.alibaba.citrus.test.TestEnvStatic;
+import org.junit.Before;
 
 public abstract class AbstractSessionModelEncoderTests {
     protected SessionModel.Factory factory;
-    protected SessionModel model;
+    protected SessionModel         model;
 
     {
         TestEnvStatic.init();

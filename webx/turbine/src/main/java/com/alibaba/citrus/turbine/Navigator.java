@@ -25,36 +25,24 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
  * @author Michael Zhou
  */
 public interface Navigator {
-    /**
-     * 进行内部重定向，指定一个target名称。
-     */
+    /** 进行内部重定向，指定一个target名称。 */
     Parameters forwardTo(String target);
 
-    /**
-     * 进行外部重定向，指定一个uri broker的名称。
-     */
+    /** 进行外部重定向，指定一个uri broker的名称。 */
     RedirectParameters redirectTo(String uriName);
 
-    /**
-     * 进行外部重定向，指定一个完整的URL location。
-     */
+    /** 进行外部重定向，指定一个完整的URL location。 */
     void redirectToLocation(String location);
 
-    /**
-     * 重定向的参数。
-     */
+    /** 重定向的参数。 */
     interface Parameters {
         Parameters withParameter(String name, String... values);
 
-        /**
-         * 对于redirectTo()语句，结束并立即发出redirect。
-         */
+        /** 对于redirectTo()语句，结束并立即发出redirect。 */
         void end();
     }
 
-    /**
-     * 外部重定向的参数。
-     */
+    /** 外部重定向的参数。 */
     interface RedirectParameters extends Parameters {
         RedirectParameters withTarget(String target);
 

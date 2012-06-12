@@ -20,11 +20,10 @@ package com.alibaba.citrus.webx.handler;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
+import com.alibaba.citrus.webx.AbstractWebxTests;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.alibaba.citrus.webx.AbstractWebxTests;
 
 public class InfoHandlerTests extends AbstractWebxTests {
     @Before
@@ -48,7 +47,7 @@ public class InfoHandlerTests extends AbstractWebxTests {
 
         // 包含application home
         assertThat(clientResponseContent,
-                containsString("images/home2.gif\" alt=\"Application Home\" /> Application Home</a>"));
+                   containsString("images/home2.gif\" alt=\"Application Home\" /> Application Home</a>"));
 
         // 包含title
         assertThat(clientResponseContent, containsString("<title>Request Info</title>"));
@@ -65,7 +64,7 @@ public class InfoHandlerTests extends AbstractWebxTests {
 
         // 包含application home
         assertThat(clientResponseContent,
-                containsString("images/home2.gif\" alt=\"Application Home\" /> Application Home</a>"));
+                   containsString("images/home2.gif\" alt=\"Application Home\" /> Application Home</a>"));
 
         // 包含title
         assertThat(clientResponseContent, containsString("<title>Environment Variables</title>"));
@@ -82,7 +81,7 @@ public class InfoHandlerTests extends AbstractWebxTests {
 
         // 包含application home
         assertThat(clientResponseContent,
-                containsString("images/home2.gif\" alt=\"Application Home\" /> Application Home</a>"));
+                   containsString("images/home2.gif\" alt=\"Application Home\" /> Application Home</a>"));
 
         // 包含title
         assertThat(clientResponseContent, containsString("<title>System Properties</title>"));
@@ -99,7 +98,7 @@ public class InfoHandlerTests extends AbstractWebxTests {
 
         // 包含application home
         assertThat(clientResponseContent,
-                containsString("images/home2.gif\" alt=\"Application Home\" /> Application Home</a>"));
+                   containsString("images/home2.gif\" alt=\"Application Home\" /> Application Home</a>"));
 
         // 包含title
         assertThat(clientResponseContent, containsString("<title>System Info</title>"));

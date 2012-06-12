@@ -25,15 +25,14 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.Iterator;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.VersionableSchemas;
 import com.alibaba.citrus.test.TestEnvStatic;
 import com.alibaba.citrus.test.runner.TestNameAware;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 @RunWith(TestNameAware.class)
 public class SchemasTests {
@@ -71,7 +70,7 @@ public class SchemasTests {
         assertThat(
                 content,
                 containsAll("xmlns=\"http://www.alibaba.com/test1/cp1\"",
-                        "targetNamespace=\"http://www.alibaba.com/test1/cp1\"", "elementFormDefault=\"qualified\""));
+                            "targetNamespace=\"http://www.alibaba.com/test1/cp1\"", "elementFormDefault=\"qualified\""));
     }
 
     @Test
@@ -96,7 +95,7 @@ public class SchemasTests {
         assertThat(
                 content,
                 containsAll("xmlns=\"http://www.alibaba.com/test6/cp1\"",
-                        "targetNamespace=\"http://www.alibaba.com/test6/cp1\"", "elementFormDefault=\"qualified\""));
+                            "targetNamespace=\"http://www.alibaba.com/test6/cp1\"", "elementFormDefault=\"qualified\""));
     }
 
     @Test
@@ -112,7 +111,7 @@ public class SchemasTests {
         System.out.println(str);
 
         assertEquals("Schemas[dir-cp1.xsd, targetNamespace=http://www.alibaba.com/test7/dir/cp1, 0 versioned schemas]",
-                str);
+                     str);
 
         String content = schemas.getMainSchema().getText();
 
@@ -122,7 +121,7 @@ public class SchemasTests {
         assertThat(
                 content,
                 containsAll("xmlns=\"http://www.alibaba.com/test7/dir/cp1\"",
-                        "targetNamespace=\"http://www.alibaba.com/test7/dir/cp1\"", "elementFormDefault=\"qualified\""));
+                            "targetNamespace=\"http://www.alibaba.com/test7/dir/cp1\"", "elementFormDefault=\"qualified\""));
     }
 
     @Test
@@ -188,11 +187,11 @@ public class SchemasTests {
         assertThat(
                 content,
                 containsAll("xmlns=\"http://www.alibaba.com/my/services\"",
-                        "targetNamespace=\"http://www.alibaba.com/my/services\"", "elementFormDefault=\"qualified\""));
+                            "targetNamespace=\"http://www.alibaba.com/my/services\"", "elementFormDefault=\"qualified\""));
         assertThat(
                 content,
                 containsAll("<xsd:include", "schemaLocation=\"my/services/service1.xsd\"",
-                        "schemaLocation=\"my/services/service2.xsd\"", "schemaLocation=\"my/services/service3.xsd\""));
+                            "schemaLocation=\"my/services/service2.xsd\"", "schemaLocation=\"my/services/service3.xsd\""));
 
         // cp - version 1.0 schema
         content = schemas.getVersionedSchema("1.0").getText();
@@ -203,11 +202,11 @@ public class SchemasTests {
         assertThat(
                 content,
                 containsAll("xmlns=\"http://www.alibaba.com/my/services\"",
-                        "targetNamespace=\"http://www.alibaba.com/my/services\"", "elementFormDefault=\"qualified\""));
+                            "targetNamespace=\"http://www.alibaba.com/my/services\"", "elementFormDefault=\"qualified\""));
         assertThat(
                 content,
                 containsAll("<xsd:include", "schemaLocation=\"my/services/service1-1.0.xsd\"",
-                        "schemaLocation=\"my/services/service2.xsd\"", "schemaLocation=\"my/services/service3.xsd\""));
+                            "schemaLocation=\"my/services/service2.xsd\"", "schemaLocation=\"my/services/service3.xsd\""));
 
         // cp - version 2.0 schema
         content = schemas.getVersionedSchema("2.0").getText();
@@ -218,12 +217,12 @@ public class SchemasTests {
         assertThat(
                 content,
                 containsAll("xmlns=\"http://www.alibaba.com/my/services\"",
-                        "targetNamespace=\"http://www.alibaba.com/my/services\"", "elementFormDefault=\"qualified\""));
+                            "targetNamespace=\"http://www.alibaba.com/my/services\"", "elementFormDefault=\"qualified\""));
         assertThat(
                 content,
                 containsAll("<xsd:include", "schemaLocation=\"my/services/service1.xsd\"",
-                        "schemaLocation=\"my/services/service2-2.0.xsd\"",
-                        "schemaLocation=\"my/services/service3.xsd\""));
+                            "schemaLocation=\"my/services/service2-2.0.xsd\"",
+                            "schemaLocation=\"my/services/service3.xsd\""));
     }
 
     @Test
@@ -244,8 +243,8 @@ public class SchemasTests {
         assertThat(
                 str,
                 containsAll("Schemas[my/services/service1.xsd, 1 versioned schemas]",
-                        "version 1.0: Schema[name=my/services/service1-1.0.xsd, version=1.0, source=",
-                        "my/services/service1-1.0.xsd]"));
+                            "version 1.0: Schema[name=my/services/service1-1.0.xsd, version=1.0, source=",
+                            "my/services/service1-1.0.xsd]"));
 
         // contrib1 - main schema to string
         String content = schemas.getMainSchema().getText();
@@ -266,8 +265,8 @@ public class SchemasTests {
         assertThat(
                 str,
                 containsAll("Schemas[my/services/service2.xsd, 1 versioned schemas]",
-                        "version 2.0: Schema[name=my/services/service2-2.0.xsd, version=2.0, source=",
-                        "my/services/service2-2.0.xsd]"));
+                            "version 2.0: Schema[name=my/services/service2-2.0.xsd, version=2.0, source=",
+                            "my/services/service2-2.0.xsd]"));
 
         // contrib2 - main schema to string
         content = schemas.getMainSchema().getText();
@@ -306,19 +305,19 @@ public class SchemasTests {
         Contribution myservice_abc_xyz = cp.getContribution("myservice-abc-xyz", BEAN_DEFINITION_DECORATOR);
 
         assertThat(myservice.getSchemas().toString(),
-                containsAll("Schemas[my/services/myservice.xsd, 0 versioned schemas]"));
+                   containsAll("Schemas[my/services/myservice.xsd, 0 versioned schemas]"));
 
         assertThat(
                 myservice_abc.getSchemas().toString(),
                 containsAll("Schemas[missing main schema, 1 versioned schemas]",
-                        "version 1.0: Schema[name=my/services/myservice-abc-1.0.xsd, version=1.0, source=",
-                        "my/services/myservice-abc-1.0.xsd]"));
+                            "version 1.0: Schema[name=my/services/myservice-abc-1.0.xsd, version=1.0, source=",
+                            "my/services/myservice-abc-1.0.xsd]"));
 
         assertThat(
                 myservice_abc_xyz.getSchemas().toString(),
                 containsAll("Schemas[my/services/myservice-abc-xyz.xsd, 1 versioned schemas]",
-                        "version 2.0: Schema[name=my/services/myservice-abc-xyz-2.0.xsd, version=2.0, source=",
-                        "my/services/myservice-abc-xyz-2.0.xsd]"));
+                            "version 2.0: Schema[name=my/services/myservice-abc-xyz-2.0.xsd, version=2.0, source=",
+                            "my/services/myservice-abc-xyz-2.0.xsd]"));
     }
 
     private void createConfigurationPoints(String location) {

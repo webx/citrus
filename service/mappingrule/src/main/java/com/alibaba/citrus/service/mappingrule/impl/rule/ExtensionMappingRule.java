@@ -26,14 +26,12 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.Map;
 
+import com.alibaba.citrus.service.mappingrule.support.AbstractMappingRule;
+import com.alibaba.citrus.service.mappingrule.support.AbstractMappingRuleDefinitionParser;
+import com.alibaba.citrus.util.StringUtil;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.service.mappingrule.support.AbstractMappingRule;
-import com.alibaba.citrus.service.mappingrule.support.AbstractMappingRuleDefinitionParser;
-import com.alibaba.citrus.util.FileUtil.FileNameAndExtension;
-import com.alibaba.citrus.util.StringUtil;
 
 /**
  * 转换文件名后缀的映射规则。

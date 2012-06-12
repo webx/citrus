@@ -20,11 +20,10 @@ package com.alibaba.citrus.service.requestcontext.rewrite;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 import com.alibaba.citrus.service.requestcontext.rewrite.impl.RewriteRule;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class RewriteRequestContextTests extends AbstractRequestContextsTests<RewriteRequestContext> {
     @BeforeClass
@@ -72,7 +71,6 @@ public class RewriteRequestContextTests extends AbstractRequestContextsTests<Rew
 
         assertEquals("/servlet/test.htm", newRequest.getRequestURI());
         assertEquals("http://www.taobao.com/servlet/test.htm", newRequest.getRequestURL().toString());
-
     }
 
     @Test
@@ -107,7 +105,7 @@ public class RewriteRequestContextTests extends AbstractRequestContextsTests<Rew
         assertEquals("http://www.taobao.com/servlet/test2/hello.htm?a=1", clientResponse.getURL().toString());
         assertEquals(302, clientResponse.getResponseCode());
         assertEquals("http://www.taobao.com:8080/servlet/test2/new_hello.htm",
-                clientResponse.getHeaderField("location"));
+                     clientResponse.getHeaderField("location"));
     }
 
     @Test
@@ -119,7 +117,7 @@ public class RewriteRequestContextTests extends AbstractRequestContextsTests<Rew
         assertEquals("http://www.taobao.com/servlet/test2.4/hello.htm?a=1", clientResponse.getURL().toString());
         assertEquals(302, clientResponse.getResponseCode());
         assertEquals("http://www.taobao.com/servlet/test2.4/new_hello.htm?a=1",
-                clientResponse.getHeaderField("location"));
+                     clientResponse.getHeaderField("location"));
     }
 
     @Test

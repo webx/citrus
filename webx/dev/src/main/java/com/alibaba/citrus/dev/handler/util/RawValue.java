@@ -22,7 +22,7 @@ import static com.alibaba.citrus.util.ObjectUtil.*;
 
 public class RawValue extends StyledValue {
     private final Class<?> rawType;
-    private final String rawToString;
+    private final String   rawToString;
 
     public RawValue(Class<?> rawType, String rawToString) {
         super(rawToString);

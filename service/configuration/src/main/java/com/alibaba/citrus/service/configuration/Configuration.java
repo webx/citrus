@@ -23,8 +23,6 @@ package com.alibaba.citrus.service.configuration;
  * @author Michael Zhou
  */
 public interface Configuration {
-    /**
-     * 生产模式。默认为<code>false</code>，即开发者模式。
-     */
+    /** 生产模式。默认为<code>false</code>，即开发者模式。 */
     boolean isProductionMode();
 }

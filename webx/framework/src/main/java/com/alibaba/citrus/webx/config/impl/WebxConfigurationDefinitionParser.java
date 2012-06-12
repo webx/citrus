@@ -24,15 +24,13 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.configuration.support.AbstractConfigurationDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 import com.alibaba.citrus.webx.config.impl.WebxConfigurationImpl.ComponentConfigImpl;
 import com.alibaba.citrus.webx.config.impl.WebxConfigurationImpl.ComponentsConfigImpl;
 import com.alibaba.citrus.webx.impl.WebxControllerImpl;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 用来解析webx configuration的parser。
@@ -49,22 +47,22 @@ public class WebxConfigurationDefinitionParser extends AbstractConfigurationDefi
 
         if (componentsElement != null) {
             attributesToProperties(componentsElement, components, "autoDiscoverComponents",
-                    "componentConfigurationLocationPattern", "defaultControllerClass", "defaultComponent");
+                                   "componentConfigurationLocationPattern", "defaultControllerClass", "defaultComponent");
 
             // root controller
             Element rootControllerElement = theOnlySubElement(componentsElement,
-                    and(sameNs(element), name("rootController")));
+                                                              and(sameNs(element), name("rootController")));
 
             if (rootControllerElement != null) {
                 components.addPropertyValue("rootController",
-                        parseBean(rootControllerElement, parserContext, components.getRawBeanDefinition()));
+                                            parseBean(rootControllerElement, parserContext, components.getRawBeanDefinition()));
             }
 
             // components
             Map<Object, Object> specifiedComponents = createManagedMap(element, parserContext);
 
             for (Element componentElement : subElements(componentsElement,
-                    and(sameNs(componentsElement), name("component")))) {
+                                                        and(sameNs(componentsElement), name("component")))) {
                 String name = assertNotNull(trimToNull(componentElement.getAttribute("name")), "no component name");
 
                 BeanDefinitionBuilder componentBuilder = BeanDefinitionBuilder
@@ -74,13 +72,13 @@ public class WebxConfigurationDefinitionParser extends AbstractConfigurationDefi
 
                 // controller
                 Element controllerElement = theOnlySubElement(componentElement,
-                        and(sameNs(componentElement), name("controller")));
+                                                              and(sameNs(componentElement), name("controller")));
                 Object controllerBD;
 
                 if (controllerElement == null) {
                     // default controller
                     controllerBD = BeanDefinitionBuilder.genericBeanDefinition(WebxControllerImpl.class)
-                            .getBeanDefinition();
+                                                        .getBeanDefinition();
                 } else {
                     // specified controller
                     controllerBD = parseBean(controllerElement, parserContext, components.getRawBeanDefinition());

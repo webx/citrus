@@ -56,9 +56,7 @@ public abstract class AbstractTypeVisitor implements TypeVisitor {
     public void visitEnd() {
     }
 
-    /**
-     * 取得当前正在被访问的类型。
-     */
+    /** 取得当前正在被访问的类型。 */
     protected final TypeInfo getType() {
         return type;
     }

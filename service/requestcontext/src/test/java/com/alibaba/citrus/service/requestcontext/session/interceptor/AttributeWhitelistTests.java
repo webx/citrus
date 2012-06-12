@@ -23,13 +23,12 @@ import static org.junit.Assert.*;
 
 import java.util.Map;
 
+import com.alibaba.citrus.logconfig.support.SecurityLogger;
+import com.alibaba.citrus.service.requestcontext.session.SessionConfig;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
-
-import com.alibaba.citrus.logconfig.support.SecurityLogger;
-import com.alibaba.citrus.service.requestcontext.session.SessionConfig;
 
 public class AttributeWhitelistTests extends AbstractSessionListenerTests {
     private Logger log;

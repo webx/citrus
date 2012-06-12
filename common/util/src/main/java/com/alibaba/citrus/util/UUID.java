@@ -39,8 +39,8 @@ import com.alibaba.citrus.util.io.ByteArrayOutputStream;
  * @author Michael Zhou
  */
 public class UUID {
-    private boolean noCase;
-    private String instanceId;
+    private boolean       noCase;
+    private String        instanceId;
     private AtomicInteger counter;
 
     public UUID() {
@@ -62,9 +62,7 @@ public class UUID {
         this.noCase = noCase;
     }
 
-    /**
-     * 取得local host的地址，如果有可能，取得物理MAC地址。
-     */
+    /** 取得local host的地址，如果有可能，取得物理MAC地址。 */
     private static byte[] getLocalHostAddress() {
         Method getHardwareAddress;
 
@@ -95,9 +93,7 @@ public class UUID {
         return addr;
     }
 
-    /**
-     * 取得当前时间，加上随机数。
-     */
+    /** 取得当前时间，加上随机数。 */
     private byte[] getRandomizedTime() {
         long jvmId = System.currentTimeMillis();
         long random = new SecureRandom().nextLong();
@@ -118,6 +114,6 @@ public class UUID {
     public String nextID() {
         // MACHINE_ID + JVM_ID + 当前时间 + counter
         return instanceId + "-" + StringUtil.longToString(System.currentTimeMillis(), noCase) + "-"
-                + StringUtil.longToString(counter.getAndIncrement(), noCase);
+               + StringUtil.longToString(counter.getAndIncrement(), noCase);
     }
 }

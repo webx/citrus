@@ -27,15 +27,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import com.alibaba.citrus.service.resource.support.context.ResourceLoadingXmlApplicationContext;
+import com.alibaba.citrus.util.ClassUtil;
+import com.alibaba.citrus.util.io.StreamUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-
-import com.alibaba.citrus.service.resource.support.context.ResourceLoadingXmlApplicationContext;
-import com.alibaba.citrus.util.ClassUtil;
-import com.alibaba.citrus.util.io.StreamUtil;
 
 /**
  * ContextLoader的基类。
@@ -43,12 +42,10 @@ import com.alibaba.citrus.util.io.StreamUtil;
  * @author Michael Zhou
  */
 public abstract class AbstractContextLoader extends org.springframework.test.context.support.AbstractContextLoader {
-    protected final Logger log = LoggerFactory.getLogger(getClass());
+    protected final        Logger             log                = LoggerFactory.getLogger(getClass());
     protected final static ApplicationContext testResourceLoader = getTestResourceLoader();
 
-    /**
-     * 取得可装载测试环境的资源的resource loader。
-     */
+    /** 取得可装载测试环境的资源的resource loader。 */
     private static ApplicationContext getTestResourceLoader() {
         try {
             System.setProperty("test.srcdir", srcdir.getAbsolutePath());
@@ -69,7 +66,7 @@ public abstract class AbstractContextLoader extends org.springframework.test.con
         assertNotNull(clazz, "Class must not be null");
 
         String location = "/" + toCamelCase(clazz.getSimpleName())
-                + assertNotNull(trimToNull(getResourceSuffix()), "Resource suffix must not be empty");
+                          + assertNotNull(trimToNull(getResourceSuffix()), "Resource suffix must not be empty");
 
         if (isGenerateContextConfigurations()) {
             File configLocation = new File(srcdir, location);
@@ -98,9 +95,7 @@ public abstract class AbstractContextLoader extends org.springframework.test.con
         return locations;
     }
 
-    /**
-     * 如果默认的配置文件不存在，是否生成样本？
-     */
+    /** 如果默认的配置文件不存在，是否生成样本？ */
     protected boolean isGenerateContextConfigurations() {
         return true;
     }

@@ -21,15 +21,13 @@ import static com.alibaba.citrus.springext.util.DomUtil.*;
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
+import com.alibaba.citrus.service.configuration.Configuration;
+import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.service.configuration.Configuration;
-import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 
 /**
  * 用来解析configuration的parser。

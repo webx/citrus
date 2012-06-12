@@ -22,9 +22,6 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.mail.builder.MailBuilder;
 import com.alibaba.citrus.service.mail.builder.MailContent;
 import com.alibaba.citrus.service.mail.builder.Multipart;
@@ -38,6 +35,8 @@ import com.alibaba.citrus.service.mail.builder.content.TextTemplateContent;
 import com.alibaba.citrus.service.pull.PullService;
 import com.alibaba.citrus.service.template.TemplateService;
 import com.alibaba.citrus.util.StringUtil;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * 把各种content整合在一起测试。
@@ -46,7 +45,7 @@ import com.alibaba.citrus.util.StringUtil;
  */
 public class IntegrationMailBuilderTests extends AbstractMailBuilderTests {
     private TemplateService templateService;
-    private PullService pullService;
+    private PullService     pullService;
 
     @Before
     public void initSuper() {

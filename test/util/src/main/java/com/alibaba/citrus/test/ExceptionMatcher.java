@@ -34,9 +34,9 @@ import org.hamcrest.Matcher;
  * @author Michael Zhou
  */
 public class ExceptionMatcher<T extends Throwable> extends BaseMatcher<T> {
-    private final Matcher<?> exceptionMatcher;
-    private final Matcher<?> causeExceptionMatcher;
-    private final Matcher<?> messageMatcher;
+    private final Matcher<?>                 exceptionMatcher;
+    private final Matcher<?>                 causeExceptionMatcher;
+    private final Matcher<?>                 messageMatcher;
     private final Class<? extends Throwable> cause;
 
     public ExceptionMatcher(String... snippets) {

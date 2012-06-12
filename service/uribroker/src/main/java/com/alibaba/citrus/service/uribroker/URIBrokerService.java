@@ -29,28 +29,18 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
  * @author dux.fangl
  */
 public interface URIBrokerService {
-    /**
-     * 取得所有URI broker名称.
-     */
+    /** 取得所有URI broker名称. */
     List<String> getNames();
 
-    /**
-     * 取得所有被导出的URI broker名称.
-     */
+    /** 取得所有被导出的URI broker名称. */
     List<String> getExposedNames();
 
-    /**
-     * 取得指定名称的URI broker.
-     */
+    /** 取得指定名称的URI broker. */
     URIBroker getURIBroker(String name);
 
-    /**
-     * 列出所有的URI brokers.
-     */
+    /** 列出所有的URI brokers. */
     String dump();
 
-    /**
-     * 列出所有的URI brokers.
-     */
+    /** 列出所有的URI brokers. */
     void dump(Writer writer);
 }

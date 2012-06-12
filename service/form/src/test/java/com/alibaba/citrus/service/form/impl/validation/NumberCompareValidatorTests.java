@@ -49,7 +49,7 @@ public class NumberCompareValidatorTests extends AbstractNumberValidatorTests<Nu
             assertThat(
                     e,
                     exception("One of the following attributes should be set:",
-                            "[equalTo, notEqualTo, lessThan, greaterThan, lessThanOrEqualTo, greaterThanOrEqualTo]"));
+                              "[equalTo, notEqualTo, lessThan, greaterThan, lessThanOrEqualTo, greaterThanOrEqualTo]"));
         }
     }
 

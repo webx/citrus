@@ -23,10 +23,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.test.TestUtil;
 import com.alibaba.citrus.util.internal.webpagelite.simple.SimpleComponent;
+import org.junit.Test;
 
 public class PageComponentTests extends AbstractRequestProcessorTests {
     @Test
@@ -42,7 +41,7 @@ public class PageComponentTests extends AbstractRequestProcessorTests {
 
         // 注意排序
         assertArrayEquals(new String[] { "simple/", "x/b/c/", "x/b/d/", "x/b/", "x/c/", "a/" },
-                processor.getComponentPaths());
+                          processor.getComponentPaths());
     }
 
     @Test
@@ -137,7 +136,7 @@ public class PageComponentTests extends AbstractRequestProcessorTests {
 
         List<String> js = processor.getComponentResources(".js");
 
-        assertArrayEquals(new Object[] {}, js.toArray());
+        assertArrayEquals(new Object[] { }, js.toArray());
     }
 
     private static class MyProcessor extends RequestProcessor<MyRequest> {

@@ -21,12 +21,7 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
 import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.beans.BeansException;
 
 import com.alibaba.citrus.service.moduleloader.AbstractModuleLoaderTests;
 import com.alibaba.citrus.service.moduleloader.Module;
@@ -34,6 +29,9 @@ import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import com.alibaba.citrus.service.moduleloader.impl.adapter.ActionEventAdapter;
 import com.alibaba.citrus.service.moduleloader.impl.adapter.DataBindingAdapter;
 import com.alibaba.citrus.service.requestcontext.rundata.RunData;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.beans.BeansException;
 
 public class ScriptModuleFactoryTests extends AbstractModuleLoaderTests {
     @BeforeClass
@@ -50,8 +48,8 @@ public class ScriptModuleFactoryTests extends AbstractModuleLoaderTests {
             assertThat(
                     e,
                     exception(IllegalArgumentException.class,
-                            "Specificly-defined module could not be found in search-folders or search-files",
-                            "app1/Failure.groovy", "services-script-modules-wrong.xml"));
+                              "Specificly-defined module could not be found in search-folders or search-files",
+                              "app1/Failure.groovy", "services-script-modules-wrong.xml"));
         }
     }
 
@@ -117,7 +115,7 @@ public class ScriptModuleFactoryTests extends AbstractModuleLoaderTests {
 
         names = moduleLoaderService.getModuleNames("screens");
         assertArrayEquals(new String[] { "app1.AbstractScreen", "app1.MyScreen" },
-                names.toArray(new String[names.size()]));
+                          names.toArray(new String[names.size()]));
 
         // modules
         Module module = moduleLoaderService.getModule(" screens ", "app1/myScreen");

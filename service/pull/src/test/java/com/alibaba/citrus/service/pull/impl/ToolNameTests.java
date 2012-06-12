@@ -23,9 +23,8 @@ import static org.junit.Assert.*;
 
 import java.util.Set;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pull.impl.PullServiceImpl.ToolName;
+import org.junit.Test;
 
 public class ToolNameTests {
     @Test

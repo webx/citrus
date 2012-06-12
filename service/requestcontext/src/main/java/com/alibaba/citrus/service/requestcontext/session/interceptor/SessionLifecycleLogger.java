@@ -22,15 +22,14 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.logconfig.support.ConfigurableLogger.Level;
 import com.alibaba.citrus.logconfig.support.SecurityLogger;
 import com.alibaba.citrus.service.requestcontext.session.SessionConfig;
 import com.alibaba.citrus.service.requestcontext.session.SessionLifecycleListener;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 用来记录session日志生命期事件的listener。
@@ -38,9 +37,9 @@ import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionP
  * @author Michael Zhou
  */
 public class SessionLifecycleLogger implements SessionLifecycleListener {
-    private final static Level DEFAULT_LOG_LEVEL = debug;
-    private final static Level DEFAULT_VISITED_LOG_LEVEL = trace;
-    private final SecurityLogger log = new SecurityLogger();
+    private final static Level          DEFAULT_LOG_LEVEL         = debug;
+    private final static Level          DEFAULT_VISITED_LOG_LEVEL = trace;
+    private final        SecurityLogger log                       = new SecurityLogger();
     private Level logLevel;
     private Level visitLogLevel;
 

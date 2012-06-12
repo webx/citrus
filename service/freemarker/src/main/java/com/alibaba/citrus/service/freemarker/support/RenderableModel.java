@@ -18,7 +18,6 @@
 package com.alibaba.citrus.service.freemarker.support;
 
 import com.alibaba.citrus.service.template.Renderable;
-
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.ext.beans.StringModel;
 

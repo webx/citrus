@@ -44,12 +44,12 @@ import com.alibaba.citrus.generictype.codegen.MethodSignature;
 class MethodImpl extends AbstractGenericDeclarationInfo implements MethodInfo {
     private final static int MODIFIERS_MASK = PRIVATE | PUBLIC | PROTECTED | STATIC;
     private final MethodSignature signature;
-    private final int modifiers;
-    private ClassTypeInfo declaringType;
-    private TypeInfo returnType;
-    private List<TypeInfo> parameterTypes;
-    private List<TypeInfo> exceptionTypes;
-    private List<TypeInfo> effectiveExceptionTypes;
+    private final int             modifiers;
+    private       ClassTypeInfo   declaringType;
+    private       TypeInfo        returnType;
+    private       List<TypeInfo>  parameterTypes;
+    private       List<TypeInfo>  exceptionTypes;
+    private       List<TypeInfo>  effectiveExceptionTypes;
 
     MethodImpl(Method method) {
         super(method);
@@ -85,11 +85,11 @@ class MethodImpl extends AbstractGenericDeclarationInfo implements MethodInfo {
 
         for (TypeInfo exception : exceptionTypes) {
             if (RuntimeException.class.isAssignableFrom(exception.getRawType())
-                    || Error.class.isAssignableFrom(exception.getRawType())) {
+                || Error.class.isAssignableFrom(exception.getRawType())) {
                 continue;
             }
 
-            for (Iterator<TypeInfo> j = effectiveExceptions.iterator(); j.hasNext();) {
+            for (Iterator<TypeInfo> j = effectiveExceptions.iterator(); j.hasNext(); ) {
                 TypeInfo existing = j.next();
 
                 if (exception.getRawType().isAssignableFrom(existing.getRawType())) {

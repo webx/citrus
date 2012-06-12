@@ -40,9 +40,9 @@ import com.alibaba.citrus.util.ObjectUtil;
  * @author Michael Zhou
  */
 public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizationService> implements
-        PageAuthorizationService {
-    private final List<AuthMatch> matches = createLinkedList();
-    private boolean allowByDefault = false;
+                                                                                            PageAuthorizationService {
+    private final List<AuthMatch> matches        = createLinkedList();
+    private       boolean         allowByDefault = false;
 
     public void setMatches(AuthMatch[] matches) {
         this.matches.clear();
@@ -113,7 +113,7 @@ public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizat
                     getLogger().debug(
                             "Access Permitted: target=\"{}\", user=\"{}\", roles={}, action={}",
                             new Object[] { target, userName, ObjectUtil.toString(roleNames),
-                                    ObjectUtil.toString(actions) });
+                                           ObjectUtil.toString(actions) });
                 }
 
                 return ALLOWED;
@@ -126,15 +126,15 @@ public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizat
             if (getLogger().isDebugEnabled()) {
                 getLogger()
                         .debug("Access Permitted.  No matches found for request: target=\"{}\", user=\"{}\", roles={}, action={}",
-                                new Object[] { target, userName, ObjectUtil.toString(roleNames),
-                                        ObjectUtil.toString(actions) });
+                               new Object[] { target, userName, ObjectUtil.toString(roleNames),
+                                              ObjectUtil.toString(actions) });
             }
         } else {
             if (getLogger().isWarnEnabled()) {
                 getLogger()
                         .warn("Access Denied.  No matches found for request: target=\"{}\", user=\"{}\", roles={}, action={}",
-                                new Object[] { target, userName, ObjectUtil.toString(roleNames),
-                                        ObjectUtil.toString(actions) });
+                              new Object[] { target, userName, ObjectUtil.toString(roleNames),
+                                             ObjectUtil.toString(actions) });
             }
         }
 
@@ -167,8 +167,8 @@ public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizat
                             if (getLogger().isTraceEnabled()) {
                                 getLogger()
                                         .trace("Access Partially Permitted: target=\"{}\", user=\"{}\", roles={}, action=\"{}\"\n{}",
-                                                new Object[] { target, userName, ObjectUtil.toString(roleNames),
-                                                        action, match.toString(i) });
+                                               new Object[] { target, userName, ObjectUtil.toString(roleNames),
+                                                              action, match.toString(i) });
                             }
 
                             return TRUE;
@@ -177,7 +177,7 @@ public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizat
                                 getLogger().warn(
                                         "Access Denied: target=\"{}\", user=\"{}\", roles={}, action=\"{}\"\n{}",
                                         new Object[] { target, userName, ObjectUtil.toString(roleNames), action,
-                                                match.toString(i) });
+                                                       match.toString(i) });
                             }
 
                             return FALSE;
@@ -194,7 +194,7 @@ public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizat
         List<MatchResult> results = createArrayList(matches.size());
 
         // 匹配所有，注意，这里按倒序匹配，这样长度相同的匹配，以后面的为准。
-        for (ListIterator<AuthMatch> i = matches.listIterator(matches.size()); i.hasPrevious();) {
+        for (ListIterator<AuthMatch> i = matches.listIterator(matches.size()); i.hasPrevious(); ) {
             AuthMatch match = i.previous();
             Matcher matcher = match.getPattern().matcher(target);
 
@@ -228,7 +228,7 @@ public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizat
     private static class MatchResult implements Comparable<MatchResult> {
         private int matchLength = -1;
         private AuthMatch match;
-        private String target;
+        private String    target;
 
         public int compareTo(MatchResult o) {
             return o.matchLength - matchLength;
@@ -241,25 +241,16 @@ public class PageAuthorizationServiceImpl extends AbstractService<PageAuthorizat
     }
 
     public static enum PageAuthorizationResult {
-        /**
-         * 代表页面被许可访问。
-         */
+        /** 代表页面被许可访问。 */
         ALLOWED,
 
-        /**
-         * 代表页面被拒绝访问。
-         */
+        /** 代表页面被拒绝访问。 */
         DENIED,
 
-        /**
-         * 代表当前的target未匹配。
-         */
+        /** 代表当前的target未匹配。 */
         TARGET_NOT_MATCH,
 
-        /**
-         * 代表当前的grant未匹配，也就是user/roles/actions未匹配。
-         */
+        /** 代表当前的grant未匹配，也就是user/roles/actions未匹配。 */
         GRANT_NOT_MATCH
     }
-
 }

@@ -22,12 +22,11 @@ import static com.alibaba.citrus.util.CollectionUtil.*;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.alibaba.citrus.service.pull.ToolFactory;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import com.alibaba.citrus.util.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Template context tool that can be used to set various attributes of a HTML
@@ -147,7 +146,7 @@ public class HtmlPageAttributeTool {
     /**
      * Adds an attribute to the BODY tag.
      *
-     * @param name A String.
+     * @param name  A String.
      * @param value A String.
      * @return a <code>HtmlPageAttributes</code> (self).
      * @deprecated Use addBodyAttribute instead.
@@ -155,14 +154,14 @@ public class HtmlPageAttributeTool {
     @Deprecated
     public HtmlPageAttributeTool addAttribute(String name, String value) {
         log.info("Use of the addAttribute(name,value) method is deprecated.  Please use "
-                + "addBodyAttribute(name,value) instead.");
+                 + "addBodyAttribute(name,value) instead.");
         return addBodyAttribute(name, value);
     }
 
     /**
      * Adds an attribute to the BODY tag.
      *
-     * @param name A String.
+     * @param name  A String.
      * @param value A String.
      * @return a <code>HtmlPageAttributes</code> (self).
      */
@@ -229,9 +228,9 @@ public class HtmlPageAttributeTool {
      * Adds a style sheet reference
      *
      * @param styleSheetURL URL of the style sheet
-     * @param media name of the media
-     * @param title title of the stylesheet
-     * @param type content type
+     * @param media         name of the media
+     * @param title         title of the stylesheet
+     * @param type          content type
      * @return a <code>HtmlPageAttributes</code> (self).
      */
     public HtmlPageAttributeTool addStyleSheet(String styleSheetURL, String media, String title, String type) {
@@ -254,7 +253,7 @@ public class HtmlPageAttributeTool {
     @Deprecated
     public HtmlPageAttributeTool setStyleSheet(String styleSheetURL) {
         log.info("Use of the setStyleSheet(styleSheetURL) method is deprecated.  Please use "
-                + "addStyleSheet(styleSheetURL) instead.");
+                 + "addStyleSheet(styleSheetURL) instead.");
         return addStyleSheet(styleSheetURL);
     }
 
@@ -262,14 +261,14 @@ public class HtmlPageAttributeTool {
      * Adds a style sheet reference
      *
      * @param styleSheetURL
-     * @param media name of the media
+     * @param media         name of the media
      * @return a <code>HtmlPageAttributes</code> (self).
      * @deprecated use addStyleSheet instead
      */
     @Deprecated
     public HtmlPageAttributeTool setStyleSheet(String styleSheetURL, String media) {
         log.info("Use of the setStyleSheet(styleSheetURL,media) method is deprecated.  "
-                + "Please use addStyleSheet(styleSheetURL,media) instead.");
+                 + "Please use addStyleSheet(styleSheetURL,media) instead.");
         return addStyleSheet(styleSheetURL, media, null, "text/css");
     }
 
@@ -333,7 +332,7 @@ public class HtmlPageAttributeTool {
      * <code>setHttpEquiv("Expires", "Tue, 20 Aug 1996 14:25:27 GMT")</code>
      *
      * @param httpEquiv The value to use for the http-equiv attribute.
-     * @param content The text for the content attribute of the meta tag.
+     * @param content   The text for the content attribute of the meta tag.
      * @return a <code>HtmlPageAttributes</code> (self).
      */
     public HtmlPageAttributeTool setHttpEquiv(String httpEquiv, String content) {
@@ -449,9 +448,7 @@ public class HtmlPageAttributeTool {
         return "";
     }
 
-    /**
-     * Helper class to hold data about a stylesheet
-     */
+    /** Helper class to hold data about a stylesheet */
     public class StyleSheet {
         private String url;
         private String title;
@@ -485,9 +482,7 @@ public class HtmlPageAttributeTool {
             this.type = type;
         }
 
-        /**
-         * @return String representation of the URL
-         */
+        /** @return String representation of the URL */
         public String getUrl() {
             return url;
         }

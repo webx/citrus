@@ -25,10 +25,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.test.TestUtil;
 import com.alibaba.citrus.util.io.StreamUtil;
+import org.junit.Test;
 
 public class SchemaExporterCLITests extends SchemaExporterTests {
     @Override
@@ -63,18 +62,18 @@ public class SchemaExporterCLITests extends SchemaExporterTests {
         // from configuration points and contributions
         assertFile(new File(destdir, "schemas2/services.xsd"), prefix + "services/container.xsd");
         assertFile(new File(destdir, "schemas2/services/container.xsd"), prefix
-                + "www.springframework.org/schema/beans/spring-beans.xsd");
+                                                                         + "www.springframework.org/schema/beans/spring-beans.xsd");
 
         assertFile(new File(destdir, "schemas2/services-tools.xsd"), prefix + "services/tools/dateformat.xsd");
         assertFile(new File(destdir, "schemas2/services/tools/dateformat.xsd"), prefix
-                + "www.springframework.org/schema/beans/spring-beans.xsd");
+                                                                                + "www.springframework.org/schema/beans/spring-beans.xsd");
 
         // from spring，注意版本号的匹配
         assertFile(new File(destdir, "schemas2/www.springframework.org/schema/aop/spring-aop-2.5.xsd"), prefix
-                + "www.springframework.org/schema/beans/spring-beans-2.5.xsd");
+                                                                                                        + "www.springframework.org/schema/beans/spring-beans-2.5.xsd");
 
         assertFile(new File(destdir, "schemas2/www.springframework.org/schema/aop/spring-aop-2.0.xsd"), prefix
-                + "www.springframework.org/schema/beans/spring-beans-2.0.xsd");
+                                                                                                        + "www.springframework.org/schema/beans/spring-beans-2.0.xsd");
 
         // 被注释的语句只能在spring2上测试通过。在spring3中，spring-aop.xsd引用的是spring-beans-3.0.xsd
         // assertFile(new File(destdir, "schemas2/www.springframework.org/schema/aop/spring-aop.xsd"), prefix
@@ -86,7 +85,6 @@ public class SchemaExporterCLITests extends SchemaExporterTests {
 
         // from others, invalid xml doc (content is "dummy")
         assertFile(new File(destdir, "schemas2/www.alibaba.com/schema/tests.xsd"));
-
     }
 
     private void assertFile(File file, String... strs) throws IOException {

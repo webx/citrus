@@ -30,15 +30,14 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import com.alibaba.citrus.test.runner.Prototyped;
 import com.alibaba.citrus.test.runner.Prototyped.Prototypes;
 import com.alibaba.citrus.test.runner.Prototyped.TestData;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
 import com.alibaba.citrus.util.ClassUtil;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * 测试{@link MethodInfo}。
@@ -48,30 +47,30 @@ import com.alibaba.citrus.util.ClassUtil;
 @RunWith(Prototyped.class)
 public class MethodTests extends BaseTypeTests implements Cloneable {
     private transient MethodInfo method;
-    private transient boolean isConstructor; // 是否为构造函数？
-    private transient String name; // 方法名，如果是构造函数，则为<init>
-    private Class<?> ownerType; // 方法所在类的子类
-    private Class<?> declaringType; // 方法所在类
-    private String methodName; // 方法名，如果是构造函数，则为null
-    private Class<?>[] paramTypes; // 参数类型表
-    private boolean isGeneric; // 是否包含类型参数？
-    private String typeParams; // 类型参数toString
-    private String signature; // 方法签名
-    private int modifiers; // 限定符
-    private String returnType; // 返回类型
-    private String exceptionTypes; // 异常类型
-    private String effectiveExceptionTypes; // 有效异常类型
-    private String toString; // toString结果
-    private String resolved; // resolve的结果
-    private boolean resolveChanged; // 如果为false，代表resolve返回this
-    private String getMethodFromClassTypeInfo; // ClassTypeInfo.getMethod的结果
+    private transient boolean    isConstructor; // 是否为构造函数？
+    private transient String     name; // 方法名，如果是构造函数，则为<init>
+    private           Class<?>   ownerType; // 方法所在类的子类
+    private           Class<?>   declaringType; // 方法所在类
+    private           String     methodName; // 方法名，如果是构造函数，则为null
+    private           Class<?>[] paramTypes; // 参数类型表
+    private           boolean    isGeneric; // 是否包含类型参数？
+    private           String     typeParams; // 类型参数toString
+    private           String     signature; // 方法签名
+    private           int        modifiers; // 限定符
+    private           String     returnType; // 返回类型
+    private           String     exceptionTypes; // 异常类型
+    private           String     effectiveExceptionTypes; // 有效异常类型
+    private           String     toString; // toString结果
+    private           String     resolved; // resolve的结果
+    private           boolean    resolveChanged; // 如果为false，代表resolve返回this
+    private           String     getMethodFromClassTypeInfo; // ClassTypeInfo.getMethod的结果
 
     @Before
     public void init() throws Exception {
         this.declaringType = declaringType == null ? ownerType : declaringType;
         this.paramTypes = paramTypes == null ? new Class<?>[0] : paramTypes;
         this.method = (MethodInfo) factory.getGenericDeclaration(getMethodOrConstructor(ownerType, methodName,
-                paramTypes));
+                                                                                        paramTypes));
         this.isConstructor = methodName == null;
         this.name = isConstructor ? "<init>" : methodName;
         this.effectiveExceptionTypes = effectiveExceptionTypes == null ? exceptionTypes : effectiveExceptionTypes;
@@ -87,7 +86,7 @@ public class MethodTests extends BaseTypeTests implements Cloneable {
             return String.format("%s.%s", ClassUtil.getSimpleClassName(ownerType), ((Method) decl).getName());
         } else {
             return String.format("%s[%d params]", ClassUtil.getSimpleClassName(ownerType),
-                    ((Constructor<?>) decl).getParameterTypes().length);
+                                 ((Constructor<?>) decl).getParameterTypes().length);
         }
     }
 
@@ -312,7 +311,7 @@ public class MethodTests extends BaseTypeTests implements Cloneable {
         prototype.ownerType = TestClass2.class;
         prototype.declaringType = TestClass.class;
         prototype.methodName = "f";
-        prototype.paramTypes = new Class<?>[] {};
+        prototype.paramTypes = new Class<?>[] { };
         prototype.isGeneric = false;
         prototype.typeParams = "[]";
         prototype.signature = "f()Ljava/util/List;";
@@ -452,14 +451,14 @@ public class MethodTests extends BaseTypeTests implements Cloneable {
     @Test
     public void equalsHashCode() throws Exception {
         MethodInfo newMethod = (MethodInfo) factory.getGenericDeclaration(getMethodOrConstructor(ownerType, methodName,
-                paramTypes));
+                                                                                                 paramTypes));
 
         assertEquals(newMethod, method);
         assertNotSame(newMethod, method);
         assertEquals(newMethod.hashCode(), method.hashCode());
 
         newMethod = (MethodInfo) factory.getGenericDeclaration(getMethodOrConstructor(String.class, null,
-                new Class<?>[] { String.class }));
+                                                                                      new Class<?>[] { String.class }));
 
         assertThat(method, not(equalTo(newMethod)));
         assertNotSame(newMethod, method);

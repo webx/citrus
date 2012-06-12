@@ -24,10 +24,6 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.pipeline.PipelineStates;
 import com.alibaba.citrus.service.pipeline.support.AbstractConditionDefinitionParser;
 import com.alibaba.citrus.util.FileUtil;
@@ -35,6 +31,9 @@ import com.alibaba.citrus.util.ServletUtil;
 import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.util.regex.MatchResultSubstitution;
 import com.alibaba.citrus.util.regex.Substitution;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 根据servletPath + componentPath + pathInfo来判断。
@@ -44,8 +43,8 @@ import com.alibaba.citrus.util.regex.Substitution;
 public class PathCondition extends AbstractTurbineCondition {
     public final static String DEFAULT_VAR = "subst";
     private Pattern[] patterns;
-    private String[] patternStrings;
-    private String var;
+    private String[]  patternStrings;
+    private String    var;
 
     public void setName(String patterns) {
         if (patterns != null) {
@@ -95,7 +94,7 @@ public class PathCondition extends AbstractTurbineCondition {
     }
 
     protected static abstract class AbstractPathConditionDefinitionParser<T extends PathCondition> extends
-            AbstractConditionDefinitionParser<T> {
+                                                                                                   AbstractConditionDefinitionParser<T> {
         @Override
         protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
             attributesToProperties(element, builder, "name", "var");

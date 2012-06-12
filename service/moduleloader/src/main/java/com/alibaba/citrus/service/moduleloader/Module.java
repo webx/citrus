@@ -23,8 +23,6 @@ package com.alibaba.citrus.service.moduleloader;
  * @author Michael Zhou
  */
 public interface Module {
-    /**
-     * 执行模块。
-     */
+    /** 执行模块。 */
     void execute() throws Exception;
 }

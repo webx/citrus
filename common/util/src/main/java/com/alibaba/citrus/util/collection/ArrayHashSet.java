@@ -60,9 +60,7 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
     // 构造函数
     // ==========================================================================
 
-    /**
-     * 创建一个空的集合. 使用指定的默认的初始容量(16)和默认的负载系数(0.75).
-     */
+    /** 创建一个空的集合. 使用指定的默认的初始容量(16)和默认的负载系数(0.75). */
     public ArrayHashSet() {
         map = new ArrayHashMap<E, Object>();
     }
@@ -80,7 +78,7 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
      * 创建一个空的集合. 使用指定的初始容量和负载系数.
      *
      * @param initialCapacity 初始容量
-     * @param loadFactor 负载系数.
+     * @param loadFactor      负载系数.
      */
     public ArrayHashSet(int initialCapacity, float loadFactor) {
         map = new ArrayHashMap<E, Object>(initialCapacity, loadFactor);
@@ -153,9 +151,7 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
         return map.remove(object) == PRESENT;
     }
 
-    /**
-     * 清除集合中的所有对象.
-     */
+    /** 清除集合中的所有对象. */
     @Override
     public void clear() {
         map.clear();
@@ -205,8 +201,8 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
      * 从输入流中重建集合(也就是反序列化).
      *
      * @param is 输入流
-     * @exception IOException 输入流异常
-     * @exception ClassNotFoundException 类未找到
+     * @throws IOException            输入流异常
+     * @throws ClassNotFoundException 类未找到
      */
     private void readObject(ObjectInputStream is) throws IOException, ClassNotFoundException {
         is.defaultReadObject();
@@ -230,7 +226,7 @@ public class ArrayHashSet<E> extends AbstractSet<E> implements Set<E>, Cloneable
      * 将集合的状态保存到输出流中(也就是序列化).
      *
      * @param os 输出流
-     * @exception IOException 输出流异常
+     * @throws IOException 输出流异常
      */
     private void writeObject(ObjectOutputStream os) throws IOException {
         os.defaultWriteObject();

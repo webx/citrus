@@ -34,8 +34,8 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.util.ClassUtils;
 
 final class ConfigurationPointSettings {
-    public final ClassLoader classLoader;
-    public final String baseLocation;
+    public final  ClassLoader             classLoader;
+    public final  String                  baseLocation;
     private final ResourcePatternResolver resolver;
 
     ConfigurationPointSettings(ClassLoader classLoader, String configurationPointsLocation) {

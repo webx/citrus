@@ -26,7 +26,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.AddressException;
@@ -78,7 +77,7 @@ public class MailUtilTests {
 
         // javaCharset != mimeCharset
         assertEquals("=?ISO-8859-1?Q?=D6=D0=B9=FA?=",
-                MailUtil.encodeHeader(new String("中国".getBytes("GBK"), "8859_1"), "8859_1", "Q"));
+                     MailUtil.encodeHeader(new String("中国".getBytes("GBK"), "8859_1"), "8859_1", "Q"));
         assertEquals("=?euc-cn?Q?=D6=D0=B9=FA?=", MailUtil.encodeHeader("中国", "EUC_CN", "Q")); // EUC_CN即GB2312_80
         assertEquals("=?euc-cn?Q?=D6=D0=B9=FA?=", MailUtil.encodeHeader("中国", "euc-cn", "Q")); // EUC_CN即GB2312_80
 
@@ -102,7 +101,7 @@ public class MailUtilTests {
 
         // Java charset is UTF-8
         InternetAddress[] addrs = MailUtil.parse("=?GBK?B?1tDW0A==?= <zhong_zhong@msn.com>  , "
-                + "\"国国\" <guo_guo@hotmail.com>, <aa@bb.com> , cc@dd.com", "UTF-8");
+                                                 + "\"国国\" <guo_guo@hotmail.com>, <aa@bb.com> , cc@dd.com", "UTF-8");
 
         int i = 0;
         assertEquals(4, addrs.length);

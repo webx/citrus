@@ -55,34 +55,22 @@ import com.alibaba.citrus.hessian.HessianException;
  * This exception is required for MicroHessianInput.
  */
 public class HessianMethodSerializationException extends HessianException {
-  /**
-   * Zero-arg constructor.
-   */
-  public HessianMethodSerializationException()
-  {
-  }
+    /** Zero-arg constructor. */
+    public HessianMethodSerializationException() {
+    }
 
-  /**
-   * Create the exception.
-   */
-  public HessianMethodSerializationException(String message)
-  {
-    super(message);
-  }
+    /** Create the exception. */
+    public HessianMethodSerializationException(String message) {
+        super(message);
+    }
 
-  /**
-   * Create the exception.
-   */
-  public HessianMethodSerializationException(String message, Throwable cause)
-  {
-    super(message, cause);
-  }
+    /** Create the exception. */
+    public HessianMethodSerializationException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-  /**
-   * Create the exception.
-   */
-  public HessianMethodSerializationException(Throwable cause)
-  {
-    super(cause);
-  }
+    /** Create the exception. */
+    public HessianMethodSerializationException(Throwable cause) {
+        super(cause);
+    }
 }

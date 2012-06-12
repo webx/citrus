@@ -18,5 +18,5 @@
 package com.alibaba.citrus.service.moduleloader.impl.adapter;
 
 public class ActionEventAdapterFactoryDefinitionParser extends
-        AbstractDataBindingAdapterFactoryDefinitionParser<ActionEventAdapterFactory> {
+                                                       AbstractDataBindingAdapterFactoryDefinitionParser<ActionEventAdapterFactory> {
 }

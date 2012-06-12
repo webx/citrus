@@ -23,12 +23,6 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
 
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.beans.factory.config.BeanDefinitionHolder;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.moduleloader.impl.adapter.AbstractDataBindingAdapterFactoryDefinitionParser;
 import com.alibaba.citrus.service.moduleloader.impl.adapter.ActionEventAdapterFactory;
 import com.alibaba.citrus.service.moduleloader.impl.adapter.DataBindingAdapterFactory;
@@ -36,6 +30,11 @@ import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 public class ModuleLoaderServiceDefinitionParser extends AbstractNamedBeanDefinitionParser<ModuleLoaderServiceImpl>
         implements ContributionAware {
@@ -44,7 +43,7 @@ public class ModuleLoaderServiceDefinitionParser extends AbstractNamedBeanDefini
 
     public void setContribution(Contribution contrib) {
         this.moduleFactoriesConfigurationPoint = getSiblingConfigurationPoint("services/module-loader/factories",
-                contrib);
+                                                                              contrib);
         this.moduleAdaptersConfigurationPoint = getSiblingConfigurationPoint("services/module-loader/adapters", contrib);
     }
 
@@ -58,13 +57,13 @@ public class ModuleLoaderServiceDefinitionParser extends AbstractNamedBeanDefini
 
         for (Element subElement : subElements(element)) {
             BeanDefinitionHolder factory = parseConfigurationPointBean(subElement, moduleFactoriesConfigurationPoint,
-                    parserContext, builder);
+                                                                       parserContext, builder);
 
             if (factory != null) {
                 factoryList.add(factory.getBeanDefinition());
             } else {
                 BeanDefinitionHolder adapter = parseConfigurationPointBean(subElement,
-                        moduleAdaptersConfigurationPoint, parserContext, builder);
+                                                                           moduleAdaptersConfigurationPoint, parserContext, builder);
 
                 if (adapter != null) {
                     adapterList.add(adapter.getBeanDefinition());

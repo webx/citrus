@@ -17,14 +17,13 @@
 
 package com.alibaba.citrus.service.mappingrule.impl.rule;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.mappingrule.support.AbstractModuleMappingRule;
 import com.alibaba.citrus.service.mappingrule.support.AbstractModuleMappingRuleDefinitionParser;
 import com.alibaba.citrus.util.ArrayUtil;
 import com.alibaba.citrus.util.StringUtil;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 最简单模块映射规则。

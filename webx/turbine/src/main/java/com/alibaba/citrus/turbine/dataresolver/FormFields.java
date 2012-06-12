@@ -30,14 +30,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.PARAMETER })
 public @interface FormFields {
-    /**
-     * 用于标识field的名称。
-     */
+    /** 用于标识field的名称。 */
     String name();
 
-    /**
-     * 用于标识group的名称。
-     */
+    /** 用于标识group的名称。 */
     String group();
 
     /**

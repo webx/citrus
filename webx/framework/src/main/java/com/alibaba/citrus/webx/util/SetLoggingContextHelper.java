@@ -24,7 +24,6 @@ import static java.util.Collections.*;
 
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
@@ -101,18 +100,18 @@ import org.slf4j.MDC;
  * @author Michael Zhou
  */
 public class SetLoggingContextHelper {
-    public static final String MDC_METHOD = "method";
-    public static final String MDC_REQUEST_URL = "requestURL";
+    public static final String MDC_METHOD                        = "method";
+    public static final String MDC_REQUEST_URL                   = "requestURL";
     public static final String MDC_REQUEST_URL_WITH_QUERY_STRING = "requestURLWithQueryString";
-    public static final String MDC_REQUEST_URI = "requestURI";
+    public static final String MDC_REQUEST_URI                   = "requestURI";
     public static final String MDC_REQUEST_URI_WITH_QUERY_STRING = "requestURIWithQueryString";
-    public static final String MDC_QUERY_STRING = "queryString";
-    public static final String MDC_REMOTE_ADDR = "remoteAddr";
-    public static final String MDC_REMOTE_HOST = "remoteHost";
-    public static final String MDC_USER_AGENT = "userAgent";
-    public static final String MDC_REFERRER = "referrer";
-    public static final String MDC_COOKIES = "cookies";
-    public static final String MDC_COOKIE_PREFIX = "cookie.";
+    public static final String MDC_QUERY_STRING                  = "queryString";
+    public static final String MDC_REMOTE_ADDR                   = "remoteAddr";
+    public static final String MDC_REMOTE_HOST                   = "remoteHost";
+    public static final String MDC_USER_AGENT                    = "userAgent";
+    public static final String MDC_REFERRER                      = "referrer";
+    public static final String MDC_COOKIES                       = "cookies";
+    public static final String MDC_COOKIE_PREFIX                 = "cookie.";
 
     static final String FLAG_MDC_HAS_ALREADY_SET = "_mdc_request_info_has_already_been_set";
 
@@ -122,16 +121,12 @@ public class SetLoggingContextHelper {
         this.request = assertNotNull(request, "request");
     }
 
-    /**
-     * 设置request信息到mdc。
-     */
+    /** 设置request信息到mdc。 */
     public void setLoggingContext() {
         setLoggingContext(null);
     }
 
-    /**
-     * 设置request信息和其它信息（如果有的话）到mdc。
-     */
+    /** 设置request信息和其它信息（如果有的话）到mdc。 */
     public void setLoggingContext(Map<String, String> extra) {
         boolean setRequestInfo = testAndSetRequestInfo();
         boolean setExtra = extra != null && !extra.isEmpty();
@@ -240,18 +235,14 @@ public class SetLoggingContextHelper {
         }
     }
 
-    /**
-     * 设置mdc，如果value为空，则不置入。
-     */
+    /** 设置mdc，如果value为空，则不置入。 */
     private void putMDC(Map<String, String> mdc, String key, String value) {
         if (value != null) {
             mdc.put(key, value);
         }
     }
 
-    /**
-     * 取得当前MDC map的复本。
-     */
+    /** 取得当前MDC map的复本。 */
     @SuppressWarnings("unchecked")
     protected Map<String, String> getMDCCopy() {
         Map<String, String> mdc = MDC.getCopyOfContextMap();
@@ -263,16 +254,12 @@ public class SetLoggingContextHelper {
         return mdc;
     }
 
-    /**
-     * 将map中的值设置到MDC中。
-     */
+    /** 将map中的值设置到MDC中。 */
     protected void setMDC(Map<String, String> mdc) {
         MDC.setContextMap(mdc);
     }
 
-    /**
-     * 清理MDC。
-     */
+    /** 清理MDC。 */
     protected void clearMDC() {
         MDC.clear();
     }

@@ -23,12 +23,12 @@ package com.alibaba.citrus.service.resource;
  * @author Michael Zhou
  */
 public class ResourceTraceElement {
-    private final String configLocation;
-    private final String beanName;
-    private final String patternName;
-    private final String patternType;
+    private final String  configLocation;
+    private final String  beanName;
+    private final String  patternName;
+    private final String  patternType;
     private final boolean internalPattern;
-    private final String resourceName;
+    private final String  resourceName;
 
     public ResourceTraceElement(String configLocation, String beanName, String patternType, String patternName,
                                 boolean internalPattern, String resourceName) {

@@ -48,9 +48,7 @@ public class AllOfValuesValidatorTests extends AbstractSimpleCompositeValidatorT
         assertEquals("field1: [field1[0] validator]", field1.getMessage());
     }
 
-    /**
-     * 检查每个值是否分别被传递到子validator中，特别是：子validator为composite validator的情况。
-     */
+    /** 检查每个值是否分别被传递到子validator中，特别是：子validator为composite validator的情况。 */
     @Test
     public void validate_hidden_all_of_validator() throws Exception {
         request(null, new String[] { "true", "false", "true" });

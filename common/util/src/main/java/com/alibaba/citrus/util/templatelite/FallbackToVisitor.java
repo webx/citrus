@@ -20,9 +20,7 @@ package com.alibaba.citrus.util.templatelite;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
-/**
- * 调用指定visitor中的visitPlaceholder()方法。
- */
+/** 调用指定visitor中的visitPlaceholder()方法。 */
 public class FallbackToVisitor {
     private final Object visitor;
 

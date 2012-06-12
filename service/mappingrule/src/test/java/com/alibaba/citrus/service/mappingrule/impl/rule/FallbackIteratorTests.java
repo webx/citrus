@@ -25,14 +25,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import com.alibaba.citrus.service.mappingrule.MappingRuleException;
+import com.alibaba.citrus.service.mappingrule.impl.rule.FallbackModuleMappingRule.FallbackModuleIterator;
+import com.alibaba.citrus.service.mappingrule.impl.rule.FallbackTemplateMappingRule.FallbackTemplateIterator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-
-import com.alibaba.citrus.service.mappingrule.MappingRuleException;
-import com.alibaba.citrus.service.mappingrule.impl.rule.FallbackModuleMappingRule.FallbackModuleIterator;
-import com.alibaba.citrus.service.mappingrule.impl.rule.FallbackTemplateMappingRule.FallbackTemplateIterator;
 
 /**
  * 测试<code>FallbackIterator</code>。
@@ -42,8 +41,8 @@ import com.alibaba.citrus.service.mappingrule.impl.rule.FallbackTemplateMappingR
 @RunWith(Parameterized.class)
 public class FallbackIteratorTests {
     private FallbackIterator iter;
-    private String[] results;
-    private String lastName;
+    private String[]         results;
+    private String           lastName;
 
     public FallbackIteratorTests(FallbackIterator iter, String lastName, String[] results) {
         this.iter = iter;
@@ -57,65 +56,65 @@ public class FallbackIteratorTests {
 
         // module, with finalName, matchLastName=true
         add(data, new FallbackModuleIterator("aaa/bbb/myOtherModule.vm", "TemplateModule", true),
-                "MyOtherModule", //
-                "aaa.bbb.MyOtherModule", "aaa.bbb.Default", "aaa.MyOtherModule", "aaa.Default", "MyOtherModule",
-                "Default", "TemplateModule");
+            "MyOtherModule", //
+            "aaa.bbb.MyOtherModule", "aaa.bbb.Default", "aaa.MyOtherModule", "aaa.Default", "MyOtherModule",
+            "Default", "TemplateModule");
 
         // module, no finalName, matchLastName=true
         add(data, new FallbackModuleIterator("aaa/bbb/myOtherModule.vm", null, true),
-                "MyOtherModule", //
-                "aaa.bbb.MyOtherModule", "aaa.bbb.Default", "aaa.MyOtherModule", "aaa.Default", "MyOtherModule",
-                "Default");
+            "MyOtherModule", //
+            "aaa.bbb.MyOtherModule", "aaa.bbb.Default", "aaa.MyOtherModule", "aaa.Default", "MyOtherModule",
+            "Default");
 
         // module, with finalName, matchLastName=false
         add(data, new FallbackModuleIterator("aaa/bbb,myOtherModule.vm", "TemplateModule", false), "MyOtherModule", //
-                "aaa.bbb.MyOtherModule", "aaa.bbb.Default", "aaa.Default", "Default", "TemplateModule");
+            "aaa.bbb.MyOtherModule", "aaa.bbb.Default", "aaa.Default", "Default", "TemplateModule");
 
         // module, no finalName, matchLastName=false
         add(data, new FallbackModuleIterator("aaa/bbb,myOtherModule.vm", null, false), "MyOtherModule", //
-                "aaa.bbb.MyOtherModule", "aaa.bbb.Default", "aaa.Default", "Default");
+            "aaa.bbb.MyOtherModule", "aaa.bbb.Default", "aaa.Default", "Default");
 
         // template, no prefix, matchLastName=true
         add(data, new FallbackTemplateIterator("aaa,bbb,myOtherModule.vm", null, true),
-                "myOtherModule.vm", //
-                "aaa/bbb/myOtherModule.vm", "aaa/bbb/default.vm", "aaa/myOtherModule.vm", "aaa/default.vm",
-                "myOtherModule.vm", "default.vm");
+            "myOtherModule.vm", //
+            "aaa/bbb/myOtherModule.vm", "aaa/bbb/default.vm", "aaa/myOtherModule.vm", "aaa/default.vm",
+            "myOtherModule.vm", "default.vm");
 
         // template, with prefix, matchLastName=true
         add(data, new FallbackTemplateIterator("aaa,bbb/myOtherModule.vm", "screen", true),
-                "myOtherModule.vm", //
-                "screen/aaa/bbb/myOtherModule.vm", "screen/aaa/bbb/default.vm", "screen/aaa/myOtherModule.vm",
-                "screen/aaa/default.vm", "screen/myOtherModule.vm", "screen/default.vm");
+            "myOtherModule.vm", //
+            "screen/aaa/bbb/myOtherModule.vm", "screen/aaa/bbb/default.vm", "screen/aaa/myOtherModule.vm",
+            "screen/aaa/default.vm", "screen/myOtherModule.vm", "screen/default.vm");
 
         // template, no prefix, matchLastName=false
         add(data, new FallbackTemplateIterator("aaa,bbb,myOtherModule.vm", null, false), "myOtherModule.vm", //
-                "aaa/bbb/myOtherModule.vm", "aaa/bbb/default.vm", "aaa/default.vm", "default.vm");
+            "aaa/bbb/myOtherModule.vm", "aaa/bbb/default.vm", "aaa/default.vm", "default.vm");
 
         // template, with prefix, matchLastName=false
         add(data, new FallbackTemplateIterator("aaa,bbb/myOtherModule.vm", "screen", false),
-                "myOtherModule.vm", //
-                "screen/aaa/bbb/myOtherModule.vm", "screen/aaa/bbb/default.vm", "screen/aaa/default.vm",
-                "screen/default.vm");
+            "myOtherModule.vm", //
+            "screen/aaa/bbb/myOtherModule.vm", "screen/aaa/bbb/default.vm", "screen/aaa/default.vm",
+            "screen/default.vm");
 
         // template without ext, no prefix, matchLastName=true
         add(data, new FallbackTemplateIterator("aaa,bbb,myOtherModule", null, true),
-                "myOtherModule", //
-                "aaa/bbb/myOtherModule", "aaa/bbb/default", "aaa/myOtherModule", "aaa/default", "myOtherModule",
-                "default");
+            "myOtherModule", //
+            "aaa/bbb/myOtherModule", "aaa/bbb/default", "aaa/myOtherModule", "aaa/default", "myOtherModule",
+            "default");
 
         // template without ext, with prefix, matchLastName=true
         add(data, new FallbackTemplateIterator("aaa,bbb/myOtherModule", "screen", true),
-                "myOtherModule", //
-                "screen/aaa/bbb/myOtherModule", "screen/aaa/bbb/default", "screen/aaa/myOtherModule",
-                "screen/aaa/default", "screen/myOtherModule", "screen/default");
+            "myOtherModule", //
+            "screen/aaa/bbb/myOtherModule", "screen/aaa/bbb/default", "screen/aaa/myOtherModule",
+            "screen/aaa/default", "screen/myOtherModule", "screen/default");
 
         // template without ext, no prefix, matchLastName=false
         add(data, new FallbackTemplateIterator("aaa,bbb,myOtherModule", null, false), "myOtherModule", //
-                "aaa/bbb/myOtherModule", "aaa/bbb/default", "aaa/default", "default");
+            "aaa/bbb/myOtherModule", "aaa/bbb/default", "aaa/default", "default");
 
         // template without ext, with prefix, matchLastName=false
         add(data, new FallbackTemplateIterator("aaa,bbb/myOtherModule", "screen", false), "myOtherModule", //
-                "screen/aaa/bbb/myOtherModule", "screen/aaa/bbb/default", "screen/aaa/default", "screen/default");
+            "screen/aaa/bbb/myOtherModule", "screen/aaa/bbb/default", "screen/aaa/default", "screen/default");
 
         return data;
     }

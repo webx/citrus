@@ -39,9 +39,9 @@ public abstract class AbstractListMapViewTests extends AbstractTests {
     private ListMap<Object, Object> map1;
     private ListMap<Object, Object> map2;
     private ListMap<Object, Object> map3;
-    private List<?> view1;
-    private List<?> view2;
-    private List<?> view3;
+    private List<?>                 view1;
+    private List<?>                 view2;
+    private List<?>                 view3;
 
     @Before
     public void init() {
@@ -356,7 +356,7 @@ public abstract class AbstractListMapViewTests extends AbstractTests {
     /**
      * 创建一个和View中存放的对象可比较的对象.
      *
-     * @param key key
+     * @param key   key
      * @param value value
      * @return 对象
      */

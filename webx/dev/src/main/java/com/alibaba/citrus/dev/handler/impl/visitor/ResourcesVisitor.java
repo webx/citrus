@@ -39,9 +39,9 @@ import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 
 public class ResourcesVisitor extends AbstractFallbackVisitor<ExplorerVisitor> {
     private final ResourceLoadingService resourceLoadingService;
-    private final String resourceName;
-    private String title;
-    private String content;
+    private final String                 resourceName;
+    private       String                 title;
+    private       String                 content;
 
     public ResourcesVisitor(RequestHandlerContext context, ExplorerVisitor v,
                             ResourceLoadingService resourceLoadingService) {
@@ -72,7 +72,7 @@ public class ResourcesVisitor extends AbstractFallbackVisitor<ExplorerVisitor> {
     }
 
     private ResourceTraceElement traceElement;
-    private Resource result;
+    private Resource             result;
 
     public void visitTraceResource(Template traceResourceTemplate) {
         traceResourceTemplate.accept(this);
@@ -127,13 +127,13 @@ public class ResourcesVisitor extends AbstractFallbackVisitor<ExplorerVisitor> {
     }
 
     private List<String> subResourceNames;
-    private String fullSubResourceName;
-    private String relativeSubResourceName;
+    private String       fullSubResourceName;
+    private String       relativeSubResourceName;
 
     public void visitSubResources(Template subResourcesTemplate) {
         try {
             subResourceNames = createArrayList(resourceLoadingService.list(resourceName,
-                    ResourceLoadingService.FOR_CREATE));
+                                                                           ResourceLoadingService.FOR_CREATE));
         } catch (ResourceNotFoundException e) {
             subResourceNames = createArrayList();
         }

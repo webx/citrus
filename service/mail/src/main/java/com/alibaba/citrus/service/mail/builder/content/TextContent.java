@@ -38,58 +38,42 @@ public class TextContent extends AbstractContent {
     private String text;
     private String contentType;
 
-    /**
-     * 创建一个<code>TextContent</code>。
-     */
+    /** 创建一个<code>TextContent</code>。 */
     public TextContent() {
     }
 
-    /**
-     * 创建一个<code>TextContent</code>。
-     */
+    /** 创建一个<code>TextContent</code>。 */
     public TextContent(String text) {
         setText(text);
     }
 
-    /**
-     * 创建一个<code>TextContent</code>。
-     */
+    /** 创建一个<code>TextContent</code>。 */
     public TextContent(String text, String contentType) {
         setText(text);
         setContentType(contentType);
     }
 
-    /**
-     * 取得文本的内容。
-     */
+    /** 取得文本的内容。 */
     public String getText() {
         return defaultIfNull(text, EMPTY_STRING);
     }
 
-    /**
-     * 设置文本的内容。
-     */
+    /** 设置文本的内容。 */
     public void setText(String text) {
         this.text = text;
     }
 
-    /**
-     * 取得文本的content type。
-     */
+    /** 取得文本的content type。 */
     public String getContentType() {
         return defaultIfNull(this.contentType, CONTENT_TYPE_TEXT_PLAIN);
     }
 
-    /**
-     * 设置文本的content type。
-     */
+    /** 设置文本的content type。 */
     public void setContentType(String contentType) {
         this.contentType = trimToNull(contentType);
     }
 
-    /**
-     * 渲染邮件内容。
-     */
+    /** 渲染邮件内容。 */
     public void render(Part mailPart) throws MessagingException {
         String text = getText();
         String contentType = getContentType();
@@ -99,9 +83,7 @@ public class TextContent extends AbstractContent {
         mailPart.setHeader(CONTENT_TRANSFER_ENCODING, DEFAULT_TRANSFER_ENCODING);
     }
 
-    /**
-     * 创建一个同类型的content。
-     */
+    /** 创建一个同类型的content。 */
     @Override
     protected TextContent newInstance() {
         return new TextContent(text, contentType);

@@ -25,15 +25,13 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 public class FreeMarkerEngineDefinitionParser extends AbstractSingleBeanDefinitionParser<FreeMarkerEngineImpl>
         implements ContributionAware {
@@ -41,7 +39,7 @@ public class FreeMarkerEngineDefinitionParser extends AbstractSingleBeanDefiniti
 
     public void setContribution(Contribution contrib) {
         this.pluginsConfigurationPoint = getSiblingConfigurationPoint("services/template/engines/freemarker/plugins",
-                contrib);
+                                                                      contrib);
     }
 
     @Override

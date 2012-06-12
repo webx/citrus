@@ -19,14 +19,13 @@ package com.alibaba.citrus.service.resource.filter;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.resource.AbstractResourceLoadingTests;
 import com.alibaba.citrus.service.resource.Resource;
 import com.alibaba.citrus.service.resource.ResourceLoadingService;
 import com.alibaba.citrus.util.io.StreamUtil;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class XsltFilterTests extends AbstractResourceLoadingTests {
     @BeforeClass

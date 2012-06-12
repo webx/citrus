@@ -22,10 +22,9 @@ import static org.junit.Assert.*;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pull.AbstractPullServiceConfigTests;
 import com.alibaba.citrus.service.pull.PullService;
+import org.junit.Test;
 
 public class ContextExposerToolSetTests extends AbstractPullServiceConfigTests {
     @Test

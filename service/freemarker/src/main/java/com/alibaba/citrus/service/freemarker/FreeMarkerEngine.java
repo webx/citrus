@@ -30,21 +30,15 @@ import com.alibaba.citrus.service.template.TemplateException;
  * @author Michael Zhou
  */
 public interface FreeMarkerEngine extends TemplateEngine {
-    /**
-     * 渲染模板，并以字符串的形式取得渲染的结果。
-     */
+    /** 渲染模板，并以字符串的形式取得渲染的结果。 */
     String mergeTemplate(String templateName, Object context, String inputCharset) throws TemplateException,
-            IOException;
+                                                                                          IOException;
 
-    /**
-     * 渲染模板，并将渲染的结果送到字节输出流中。
-     */
+    /** 渲染模板，并将渲染的结果送到字节输出流中。 */
     void mergeTemplate(String templateName, Object context, OutputStream ostream, String inputCharset,
                        String outputCharset) throws TemplateException, IOException;
 
-    /**
-     * 渲染模板，并将渲染的结果送到字符输出流中。
-     */
+    /** 渲染模板，并将渲染的结果送到字符输出流中。 */
     void mergeTemplate(String templateName, Object context, Writer out, String inputCharset) throws TemplateException,
-            IOException;
+                                                                                                    IOException;
 }

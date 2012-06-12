@@ -23,12 +23,7 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
 
 import com.alibaba.citrus.service.requestcontext.rewrite.RewriteSubstitutionHandler;
 import com.alibaba.citrus.util.StringEscapeUtil;
@@ -36,6 +31,9 @@ import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 import com.alibaba.citrus.util.regex.MatchResultSubstitution;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * 代表一个rewrite规则。
@@ -48,12 +46,12 @@ import com.alibaba.citrus.util.regex.MatchResultSubstitution;
  */
 public class RewriteRule implements InitializingBean {
     private static final Logger log = LoggerFactory.getLogger(RewriteRule.class);
-    private String patternString;
-    private Pattern pattern;
-    private boolean negative;
-    private RewriteCondition[] conditions;
+    private String              patternString;
+    private Pattern             pattern;
+    private boolean             negative;
+    private RewriteCondition[]  conditions;
     private RewriteSubstitution substitution;
-    private Object[] handlers;
+    private Object[]            handlers;
 
     public String getPattern() {
         return patternString;
@@ -126,7 +124,7 @@ public class RewriteRule implements InitializingBean {
         if (!negative && matched) {
             if (log.isDebugEnabled()) {
                 log.debug("Testing \"{}\" with rule pattern: \"{}\", MATCHED", StringEscapeUtil.escapeJava(path),
-                        StringEscapeUtil.escapeJava(patternString));
+                          StringEscapeUtil.escapeJava(patternString));
             }
 
             return matcher.toMatchResult();
@@ -135,7 +133,7 @@ public class RewriteRule implements InitializingBean {
         if (negative && !matched) {
             if (log.isDebugEnabled()) {
                 log.debug("Testing \"{}\" with rule pattern: \"{}\", MATCHED", StringEscapeUtil.escapeJava(path),
-                        StringEscapeUtil.escapeJava(patternString));
+                          StringEscapeUtil.escapeJava(patternString));
             }
 
             return MatchResultSubstitution.EMPTY_MATCH_RESULT;
@@ -143,7 +141,7 @@ public class RewriteRule implements InitializingBean {
 
         if (log.isTraceEnabled()) {
             log.trace("Testing \"{}\" with rule pattern: \"{}\", MISMATCHED", StringEscapeUtil.escapeJava(path),
-                    StringEscapeUtil.escapeJava(patternString));
+                      StringEscapeUtil.escapeJava(patternString));
         }
 
         return null;

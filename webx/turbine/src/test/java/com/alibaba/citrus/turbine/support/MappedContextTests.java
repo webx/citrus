@@ -24,14 +24,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.citrus.turbine.Context;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.alibaba.citrus.turbine.Context;
-
 public class MappedContextTests {
     private Map<String, Object> map;
-    private MappedContext context;
+    private MappedContext       context;
 
     @Before
     public void init() {

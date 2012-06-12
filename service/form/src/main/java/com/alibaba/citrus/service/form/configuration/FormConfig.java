@@ -19,9 +19,8 @@ package com.alibaba.citrus.service.form.configuration;
 
 import java.util.List;
 
-import org.springframework.beans.PropertyEditorRegistrar;
-
 import com.alibaba.citrus.service.form.FormService;
+import org.springframework.beans.PropertyEditorRegistrar;
 
 /**
  * 代表一个form的定义信息。
@@ -37,24 +36,16 @@ public interface FormConfig {
         uncompressed
     }
 
-    /**
-     * 取得创建此form的service。
-     */
+    /** 取得创建此form的service。 */
     FormService getFormService();
 
-    /**
-     * 类型转换出错时，是否不报错，而是返回默认值。
-     */
+    /** 类型转换出错时，是否不报错，而是返回默认值。 */
     boolean isConverterQuiet();
 
-    /**
-     * Group是否默认必须从post请求中取得数据。
-     */
+    /** Group是否默认必须从post请求中取得数据。 */
     boolean isPostOnlyByDefault();
 
-    /**
-     * 取得field key的格式，可以是压缩或不压缩的。
-     */
+    /** 取得field key的格式，可以是压缩或不压缩的。 */
     FieldKeyFormat getFieldKeyFormat();
 
     /**
@@ -70,19 +61,13 @@ public interface FormConfig {
      */
     String getMessageCodePrefix();
 
-    /**
-     * 取得所有group config的列表。
-     */
+    /** 取得所有group config的列表。 */
     List<GroupConfig> getGroupConfigList();
 
-    /**
-     * 取得指定名称的group config。名称大小写不敏感。 如果未找到，则返回<code>null</code>。
-     */
+    /** 取得指定名称的group config。名称大小写不敏感。 如果未找到，则返回<code>null</code>。 */
     GroupConfig getGroupConfig(String groupName);
 
-    /**
-     * 取得和指定key相对应的group config。如果未找到，则返回<code>null</code>
-     */
+    /** 取得和指定key相对应的group config。如果未找到，则返回<code>null</code> */
     GroupConfig getGroupConfigByKey(String groupKey);
 
     /**

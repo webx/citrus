@@ -36,12 +36,10 @@ import com.alibaba.citrus.service.resource.Resource;
  * @author Michael Zhou
  */
 public class URLResource implements Resource {
-    private final URL url;
+    private final URL  url;
     private final File file;
 
-    /**
-     * 创建一个<code>URLResource</code>。
-     */
+    /** 创建一个<code>URLResource</code>。 */
     public URLResource(URL url) {
         this.url = assertNotNull(url, "url");
         this.file = toFile(url);
@@ -59,23 +57,17 @@ public class URLResource implements Resource {
         return null;
     }
 
-    /**
-     * 取得资源的<code>URL</code>。
-     */
+    /** 取得资源的<code>URL</code>。 */
     public URL getURL() {
         return url;
     }
 
-    /**
-     * 取得资源的<code>File</code>。
-     */
+    /** 取得资源的<code>File</code>。 */
     public File getFile() {
         return file;
     }
 
-    /**
-     * 取得资源的<code>InputStream</code>。
-     */
+    /** 取得资源的<code>InputStream</code>。 */
     public InputStream getInputStream() throws IOException {
         // 对文件优化
         if (file != null) {
@@ -89,9 +81,7 @@ public class URLResource implements Resource {
         }
     }
 
-    /**
-     * 判断资源是否存在。
-     */
+    /** 判断资源是否存在。 */
     public boolean exists() {
         // 对文件优化
         if (file != null) {
@@ -117,9 +107,7 @@ public class URLResource implements Resource {
         }
     }
 
-    /**
-     * 取得资源最近修改时间。
-     */
+    /** 取得资源最近修改时间。 */
     public long lastModified() {
         if (file != null) {
             return file.lastModified();
@@ -172,9 +160,7 @@ public class URLResource implements Resource {
         return true;
     }
 
-    /**
-     * 将resource转换成字符串表示。
-     */
+    /** 将resource转换成字符串表示。 */
     @Override
     public String toString() {
         StringBuilder buf = new StringBuilder();

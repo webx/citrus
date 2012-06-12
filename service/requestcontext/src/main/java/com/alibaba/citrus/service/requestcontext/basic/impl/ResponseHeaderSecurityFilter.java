@@ -23,13 +23,8 @@ import static com.alibaba.citrus.util.ObjectUtil.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
 
 import com.alibaba.citrus.logconfig.support.SecurityLogger;
 import com.alibaba.citrus.service.requestcontext.basic.CookieHeaderValueInterceptor;
@@ -44,6 +39,9 @@ import com.alibaba.citrus.service.requestcontext.util.CookieSupport;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import com.alibaba.citrus.util.HumanReadableSize;
 import com.alibaba.citrus.util.StringEscapeUtil;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 过滤header中的crlf，将status message用HTML entities转义，限制cookie的总大小。
@@ -51,14 +49,14 @@ import com.alibaba.citrus.util.StringEscapeUtil;
  * @author Michael Zhou
  */
 public class ResponseHeaderSecurityFilter implements RequestContextLifecycleInterceptor, HeaderNameInterceptor,
-        HeaderValueInterceptor, CookieInterceptor, CookieHeaderValueInterceptor, StatusMessageInterceptor,
-        RedirectLocationInterceptor {
-    public static final HumanReadableSize MAX_SET_COOKIE_SIZE_DEFAULT = new HumanReadableSize("7k");
-    private static final String COOKIE_LENGTH_ATTR = "_COOKIE_LENGTH_";
-    private static final Pattern crlf = Pattern.compile("\\r\\n|\\r|\\n");
-    private final SecurityLogger log = new SecurityLogger();
+                                                     HeaderValueInterceptor, CookieInterceptor, CookieHeaderValueInterceptor, StatusMessageInterceptor,
+                                                     RedirectLocationInterceptor {
+    public static final  HumanReadableSize MAX_SET_COOKIE_SIZE_DEFAULT = new HumanReadableSize("7k");
+    private static final String            COOKIE_LENGTH_ATTR          = "_COOKIE_LENGTH_";
+    private static final Pattern           crlf                        = Pattern.compile("\\r\\n|\\r|\\n");
+    private final        SecurityLogger    log                         = new SecurityLogger();
     private final CookieLengthAccumulator cookieLengthAccumulator;
-    private HumanReadableSize maxSetCookieSize;
+    private       HumanReadableSize       maxSetCookieSize;
 
     public ResponseHeaderSecurityFilter() {
         this(null);
@@ -81,7 +79,7 @@ public class ResponseHeaderSecurityFilter implements RequestContextLifecycleInte
 
     public HumanReadableSize getMaxSetCookieSize() {
         return maxSetCookieSize == null || maxSetCookieSize.getValue() <= 0 ? MAX_SET_COOKIE_SIZE_DEFAULT
-                : maxSetCookieSize;
+                                                                            : maxSetCookieSize;
     }
 
     public void setMaxSetCookieSize(HumanReadableSize maxSetCookieSize) {
@@ -174,9 +172,7 @@ public class ResponseHeaderSecurityFilter implements RequestContextLifecycleInte
         return false;
     }
 
-    /**
-     * 如果不包含CRLF，则返回<code>null</code>，否则除去所有CRLF，替换成空格。
-     */
+    /** 如果不包含CRLF，则返回<code>null</code>，否则除去所有CRLF，替换成空格。 */
     private String filterCRLF(String value, String logInfo) {
         if (containsCRLF(value)) {
             log.getLogger().warn("Found CRLF in {}: {}", logInfo, StringEscapeUtil.escapeJava(value));

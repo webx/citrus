@@ -33,7 +33,7 @@ import com.alibaba.citrus.generictype.WildcardTypeInfo;
  */
 class WildcardTypeImpl extends AbstractBoundedTypeInfo implements WildcardTypeInfo {
     private final List<TypeInfo> lowerBounds;
-    private final boolean unknown;
+    private final boolean        unknown;
 
     WildcardTypeImpl(TypeInfo[] upperBounds, TypeInfo[] lowerBounds) {
         super(upperBounds);
@@ -72,9 +72,7 @@ class WildcardTypeImpl extends AbstractBoundedTypeInfo implements WildcardTypeIn
         }
     }
 
-    /**
-     * 取得字符串表示。
-     */
+    /** 取得字符串表示。 */
     @Override
     public String toString() {
         StringBuilder buf = new StringBuilder();

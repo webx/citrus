@@ -21,12 +21,11 @@ import static org.junit.Assert.*;
 
 import java.util.Date;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.expr.jexl.JexlExpressionFactory;
 import com.alibaba.citrus.expr.support.MappedExpressionContext;
 import com.alibaba.citrus.util.MessageUtil;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * 测试<code>JexlExpression</code>。
@@ -36,7 +35,7 @@ import com.alibaba.citrus.util.MessageUtil;
 public class JexlExpressionTests {
     private ExpressionFactory factory;
     private ExpressionContext context;
-    private Date now;
+    private Date              now;
 
     @Before
     public void init() {

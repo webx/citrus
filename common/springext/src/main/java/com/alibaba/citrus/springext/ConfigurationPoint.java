@@ -22,53 +22,33 @@ import java.util.Collection;
 import org.springframework.beans.factory.xml.NamespaceHandler;
 
 public interface ConfigurationPoint {
-    /**
-     * 取得当前configuration point所在的所有configuration points注册表。
-     */
+    /** 取得当前configuration point所在的所有configuration points注册表。 */
     ConfigurationPoints getConfigurationPoints();
 
-    /**
-     * 取得在XML配置文件中，用来代表当前configuration point的名字空间。
-     */
+    /** 取得在XML配置文件中，用来代表当前configuration point的名字空间。 */
     String getNamespaceUri();
 
-    /**
-     * 取得spring <code>NamespaceHandler</code>对象。
-     */
+    /** 取得spring <code>NamespaceHandler</code>对象。 */
     NamespaceHandler getNamespaceHandler();
 
-    /**
-     * 取得configuration point的名称。
-     */
+    /** 取得configuration point的名称。 */
     String getName();
 
-    /**
-     * 取得默认的element名称。
-     */
+    /** 取得默认的element名称。 */
     String getDefaultElementName();
 
-    /**
-     * 取得建议的ns前缀名。
-     */
+    /** 取得建议的ns前缀名。 */
     String getPreferredNsPrefix();
 
-    /**
-     * 取得指定名称和类型的contribution。
-     */
+    /** 取得指定名称和类型的contribution。 */
     Contribution getContribution(String name, ContributionType type);
 
-    /**
-     * 取得所有的contributions。
-     */
+    /** 取得所有的contributions。 */
     Collection<Contribution> getContributions();
 
-    /**
-     * 取得schemas。
-     */
+    /** 取得schemas。 */
     VersionableSchemas getSchemas();
 
-    /**
-     * 取得描述。
-     */
+    /** 取得描述。 */
     String getDescription();
 }

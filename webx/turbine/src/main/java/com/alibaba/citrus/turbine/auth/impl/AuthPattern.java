@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
  * @author Michael Zhou
  */
 public abstract class AuthPattern {
-    private final String patternName;
+    private final String  patternName;
     private final Pattern pattern;
 
     public AuthPattern(String patternName) {

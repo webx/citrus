@@ -19,9 +19,8 @@ package com.alibaba.citrus.service.uribroker;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.uribroker.uri.ContentURIBroker;
+import org.junit.Test;
 
 public class ContentURIBrokerConfigTests extends AbstractURIBrokerServiceTests {
     private ContentURIBroker uri;

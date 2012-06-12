@@ -19,7 +19,6 @@ package com.alibaba.citrus.logconfig;
 
 import java.io.File;
 import java.lang.reflect.Field;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.http.HttpServlet;
@@ -31,8 +30,8 @@ import com.meterware.servletunit.ServletUnitServletContext;
 
 public abstract class AbstractLogConfiguratorListenerTests extends AbstractLogConfiguratorTests {
     protected final LogConfiguratorListener listener;
-    protected final ServletContext servletContext;
-    protected final ServletContextEvent event;
+    protected final ServletContext          servletContext;
+    protected final ServletContextEvent     event;
 
     public AbstractLogConfiguratorListenerTests() throws Exception {
         listener = new LogConfiguratorListener();

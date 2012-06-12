@@ -24,8 +24,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
-import org.springframework.core.MethodParameter;
-
 import com.alibaba.citrus.service.AbstractService;
 import com.alibaba.citrus.service.dataresolver.DataResolver;
 import com.alibaba.citrus.service.dataresolver.DataResolverContext;
@@ -34,6 +32,7 @@ import com.alibaba.citrus.service.dataresolver.DataResolverNotFoundException;
 import com.alibaba.citrus.service.dataresolver.DataResolverService;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.springframework.core.MethodParameter;
 
 public class DataResolverServiceImpl extends AbstractService<DataResolverService> implements DataResolverService {
     private DataResolverFactory[] factories;
@@ -133,9 +132,7 @@ public class DataResolverServiceImpl extends AbstractService<DataResolverService
         return null;
     }
 
-    /**
-     * 复制extraInfo，并追加methodParameter对象。
-     */
+    /** 复制extraInfo，并追加methodParameter对象。 */
     private Object[] getExtraInfo(Object[] extraInfo, Method method, int paramIndex) {
         Object[] result;
 

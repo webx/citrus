@@ -25,16 +25,10 @@ import static org.junit.Assert.*;
 import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
-
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.Transport;
-
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.jvnet.mock_javamail.Mailbox;
 
 import com.alibaba.citrus.service.mail.AbstractMailBuilderTests;
 import com.alibaba.citrus.service.mail.MailService;
@@ -44,11 +38,15 @@ import com.alibaba.citrus.service.mail.builder.content.TextContent;
 import com.alibaba.citrus.service.mail.impl.MailServiceImpl;
 import com.alibaba.citrus.service.mail.mock.MyMockStore;
 import com.alibaba.citrus.service.mail.mock.MyMockTransport;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.jvnet.mock_javamail.Mailbox;
 
 public abstract class AbstractMailSessionTests<T extends MailSession> extends AbstractMailBuilderTests {
-    protected static final String ALIREN = "aliren";
-    protected static final String ALIBABA_COM = "alibaba.com";
-    protected static final String ALIREN_ALIBABA_COM = "aliren@alibaba.com";
+    protected static final String ALIREN                    = "aliren";
+    protected static final String ALIBABA_COM               = "alibaba.com";
+    protected static final String ALIREN_ALIBABA_COM        = "aliren@alibaba.com";
     protected static final String MODIFIED_FROM_ALIBABA_COM = "modified_from@alibaba.com";
     protected T session;
 

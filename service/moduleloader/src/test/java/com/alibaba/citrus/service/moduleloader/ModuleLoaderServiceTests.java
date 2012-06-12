@@ -21,13 +21,12 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
+import com.alibaba.citrus.service.moduleloader.impl.ModuleLoaderServiceImpl;
+import com.alibaba.test.app1.module.control.InvalidControl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.ApplicationContext;
-
-import com.alibaba.citrus.service.moduleloader.impl.ModuleLoaderServiceImpl;
-import com.alibaba.test.app1.module.control.InvalidControl;
 
 public class ModuleLoaderServiceTests extends AbstractModuleLoaderTests {
     @BeforeClass
@@ -60,7 +59,7 @@ public class ModuleLoaderServiceTests extends AbstractModuleLoaderTests {
             assertThat(
                     e,
                     exception("Could not adapt object to module: type=control, name=InvalidControl, class=",
-                            InvalidControl.class.getName()));
+                              InvalidControl.class.getName()));
         }
 
         try {
@@ -70,7 +69,7 @@ public class ModuleLoaderServiceTests extends AbstractModuleLoaderTests {
             assertThat(
                     e,
                     exception("Could not adapt object to module: type=control, name=InvalidControl, class=",
-                            InvalidControl.class.getName()));
+                              InvalidControl.class.getName()));
         }
     }
 

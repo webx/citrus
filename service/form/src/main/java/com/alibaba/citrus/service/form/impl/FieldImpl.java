@@ -32,10 +32,6 @@ import java.util.zip.DeflaterOutputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
-import org.apache.commons.codec.binary.Base64;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.alibaba.citrus.service.form.CustomErrorNotFoundException;
 import com.alibaba.citrus.service.form.Field;
 import com.alibaba.citrus.service.form.Group;
@@ -49,6 +45,9 @@ import com.alibaba.citrus.util.ObjectUtil;
 import com.alibaba.citrus.util.StringEscapeUtil;
 import com.alibaba.citrus.util.io.ByteArrayInputStream;
 import com.alibaba.citrus.util.io.ByteArrayOutputStream;
+import org.apache.commons.codec.binary.Base64;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 代表用户所提交表单中的一个field。
@@ -60,21 +59,19 @@ import com.alibaba.citrus.util.io.ByteArrayOutputStream;
  */
 public class FieldImpl extends ValueListSupport implements Field {
     private final static Logger log = LoggerFactory.getLogger(Field.class);
-    private final FieldConfig fieldConfig;
-    private final Group group;
-    private final String fieldKey;
+    private final FieldConfig    fieldConfig;
+    private final Group          group;
+    private final String         fieldKey;
     private final MessageContext messageContext;
-    private boolean valid;
-    private String message;
-    private Attachment attachment;
+    private       boolean        valid;
+    private       String         message;
+    private       Attachment     attachment;
 
-    /**
-     * 创建一个新field。
-     */
+    /** 创建一个新field。 */
     public FieldImpl(FieldConfig fieldConfig, Group group) {
         super( //
-                assertNotNull(group, "group").getForm().getTypeConverter(), // converter
-                fieldConfig.getGroupConfig().getFormConfig().isConverterQuiet() // converter quiet
+               assertNotNull(group, "group").getForm().getTypeConverter(), // converter
+               fieldConfig.getGroupConfig().getFormConfig().isConverterQuiet() // converter quiet
         );
         this.fieldConfig = assertNotNull(fieldConfig, "fieldConfig");
         this.group = group;
@@ -82,23 +79,17 @@ public class FieldImpl extends ValueListSupport implements Field {
         this.messageContext = MessageContextFactory.newInstance(this);
     }
 
-    /**
-     * 取得field的配置信息。
-     */
+    /** 取得field的配置信息。 */
     public FieldConfig getFieldConfig() {
         return fieldConfig;
     }
 
-    /**
-     * 取得包含此field的group。
-     */
+    /** 取得包含此field的group。 */
     public Group getGroup() {
         return group;
     }
 
-    /**
-     * 判定field是否通过验证。
-     */
+    /** 判定field是否通过验证。 */
     public boolean isValid() {
         return valid;
     }
@@ -137,9 +128,7 @@ public class FieldImpl extends ValueListSupport implements Field {
         return getKey() + FORM_FIELD_ATTACHMENT_KEY;
     }
 
-    /**
-     * 取得出错信息。
-     */
+    /** 取得出错信息。 */
     public String getMessage() {
         return message;
     }
@@ -180,7 +169,7 @@ public class FieldImpl extends ValueListSupport implements Field {
 
                     if (message == null) {
                         throw new CustomErrorNotFoundException("No message specified for error ID \"" + id + "\" in "
-                                + this);
+                                                               + this);
                     }
 
                     break;
@@ -195,9 +184,7 @@ public class FieldImpl extends ValueListSupport implements Field {
         }
     }
 
-    /**
-     * 初始化field值，但不验证表单字段。其中，<code>request</code>可以是<code>null</code>。
-     */
+    /** 初始化field值，但不验证表单字段。其中，<code>request</code>可以是<code>null</code>。 */
     public void init(FormParameters request) {
         valid = true;
         attachment = null;
@@ -222,9 +209,7 @@ public class FieldImpl extends ValueListSupport implements Field {
         }
     }
 
-    /**
-     * 验证（或重新验证）字段。
-     */
+    /** 验证（或重新验证）字段。 */
     protected void validate() {
         valid = true;
 
@@ -243,52 +228,38 @@ public class FieldImpl extends ValueListSupport implements Field {
         ((GroupImpl) getGroup()).setValid(valid);
     }
 
-    /**
-     * 取得field级别的错误信息表达式的context。
-     */
+    /** 取得field级别的错误信息表达式的context。 */
     protected MessageContext getMessageContext() {
         return messageContext;
     }
 
-    /**
-     * 取得field name，相当于<code>getFieldConfig().getName()</code>。
-     */
+    /** 取得field name，相当于<code>getFieldConfig().getName()</code>。 */
     public String getName() {
         return getFieldConfig().getName();
     }
 
-    /**
-     * 取得参数值，如果指定名称的参数不存在，则返回<code>""</code>。
-     */
+    /** 取得参数值，如果指定名称的参数不存在，则返回<code>""</code>。 */
     @Override
     public String getStringValue() {
         return getStringValue(EMPTY_STRING);
     }
 
-    /**
-     * 取得用来显示field的名称，相当于<code>getFieldConfig().getDisplayName()</code>。
-     */
+    /** 取得用来显示field的名称，相当于<code>getFieldConfig().getDisplayName()</code>。 */
     public String getDisplayName() {
         return getFieldConfig().getDisplayName();
     }
 
-    /**
-     * 取得默认值，相当于<code>getFieldConfig().getDefaultValue()</code>。
-     */
+    /** 取得默认值，相当于<code>getFieldConfig().getDefaultValue()</code>。 */
     public String getDefaultValue() {
         return getFieldConfig().getDefaultValue();
     }
 
-    /**
-     * 取得默认值，相当于<code>getFieldConfig().getDefaultValues()</code>。
-     */
+    /** 取得默认值，相当于<code>getFieldConfig().getDefaultValues()</code>。 */
     public String[] getDefaultValues() {
         return getFieldConfig().getDefaultValues();
     }
 
-    /**
-     * 添加参数名/参数值。
-     */
+    /** 添加参数名/参数值。 */
     @Override
     public void addValue(Object value) {
         if (getFieldConfig().isTrimming() && value instanceof String) {
@@ -298,23 +269,17 @@ public class FieldImpl extends ValueListSupport implements Field {
         super.addValue(value);
     }
 
-    /**
-     * 设置附件。
-     */
+    /** 设置附件。 */
     public Object getAttachment() {
         return attachment == null ? null : attachment.getAttachment();
     }
 
-    /**
-     * 设置编码后的附件。
-     */
+    /** 设置编码后的附件。 */
     public String getAttachmentEncoded() {
         return attachment == null ? null : attachment.getAttachmentEncoded();
     }
 
-    /**
-     * 是否包含附件？
-     */
+    /** 是否包含附件？ */
     public boolean hasAttachment() {
         return attachment != null && attachment.getAttachment() != null;
     }
@@ -331,26 +296,20 @@ public class FieldImpl extends ValueListSupport implements Field {
         }
     }
 
-    /**
-     * 清除附件。
-     */
+    /** 清除附件。 */
     public void clearAttachment() {
         this.attachment = null;
     }
 
-    /**
-     * 转换成易于阅读的字符串。
-     */
+    /** 转换成易于阅读的字符串。 */
     @Override
     public String toString() {
         return "Field[group: " + getGroup().getGroupConfig().getName() + "." + getGroup().getInstanceKey() + ", name: "
-                + getFieldConfig().getName() + ", values: " + ObjectUtil.toString(getValues()) + ", valid: "
-                + isValid() + "]";
+               + getFieldConfig().getName() + ", values: " + ObjectUtil.toString(getValues()) + ", valid: "
+               + isValid() + "]";
     }
 
-    /**
-     * 代表一个附件。
-     */
+    /** 代表一个附件。 */
     private static class Attachment {
         private Object attachment;
         private String attachmentEncoded;

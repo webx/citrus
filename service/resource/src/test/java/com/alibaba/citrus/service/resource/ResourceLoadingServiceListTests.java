@@ -43,11 +43,11 @@ public class ResourceLoadingServiceListTests extends AbstractResourceLoadingTest
     public void list() throws Exception {
         assertResourceServiceList("/my/alias1", "", false, false);
         assertResourceServiceList("/my/alias3", "myfolder", true, true, "abc.txt", "def.txt", "test.result",
-                "test.xml", "test.xsl", "test2.xml", "testres.txt");
+                                  "test.xml", "test.xsl", "test2.xml", "testres.txt");
         assertResourceServiceList("/my/alias4", "myfolder", true, true, "abc.txt", "def.txt", "test.result",
-                "test.xml", "test.xsl", "test2.xml", "testres.txt");
+                                  "test.xml", "test.xsl", "test2.xml", "testres.txt");
         assertResourceServiceList("/my/alias5", "myfolder", true, true, "abc.txt", "def.txt", "test.result",
-                "test.xml", "test.xsl", "test2.xml", "testres.txt");
+                                  "test.xml", "test.xsl", "test2.xml", "testres.txt");
         assertResourceServiceList("/my/alias6", "", false, false);
         assertResourceServiceList("/my/alias7", "", false, false);
         assertResourceServiceList("/my/resource", "", false, false);

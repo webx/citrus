@@ -24,11 +24,6 @@ import static com.alibaba.citrus.util.BasicConstant.*;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
-import org.hamcrest.Matcher;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.form.AbstractFormServiceTests;
 import com.alibaba.citrus.service.form.Field;
 import com.alibaba.citrus.service.form.Form;
@@ -37,10 +32,15 @@ import com.alibaba.citrus.service.form.configuration.FieldConfig;
 import com.alibaba.citrus.service.form.configuration.GroupConfig;
 import com.alibaba.citrus.service.form.support.AbstractOptionalValidator;
 import com.alibaba.citrus.service.form.support.AbstractValidator;
+import org.hamcrest.Matcher;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public abstract class AbstractValidatorTests<V extends AbstractValidator> extends AbstractFormServiceTests {
-    private final Class<?> validatorClass = resolveParameter(getClass(), AbstractValidatorTests.class, 0).getRawType();;
-    protected Form form;
+    private final Class<?> validatorClass = resolveParameter(getClass(), AbstractValidatorTests.class, 0).getRawType();
+    ;
+    protected Form  form;
     protected Group group;
     protected Field field1;
     protected Field field2;
@@ -69,16 +69,14 @@ public abstract class AbstractValidatorTests<V extends AbstractValidator> extend
     public void init_noMessage() throws Exception {
         V v = newValidatorFor_AbstractValidatorTests();
         boolean requiresMessage = invokeMethod(v, "requiresMessage", EMPTY_CLASS_ARRAY, EMPTY_OBJECT_ARRAY,
-                Boolean.class);
+                                               Boolean.class);
 
         if (requiresMessage) {
             assertInitError(v, exception(IllegalArgumentException.class, "no message"));
         }
     }
 
-    /**
-     * 测试约定，field1不加required-validator。
-     */
+    /** 测试约定，field1不加required-validator。 */
     @Test
     public void validate_optional_noValue() throws Exception {
         if (newValidatorFor_AbstractValidatorTests() instanceof AbstractOptionalValidator) {
@@ -193,9 +191,7 @@ public abstract class AbstractValidatorTests<V extends AbstractValidator> extend
         return v;
     }
 
-    /**
-     * 预处理实例，以便通过<code>AbstractValidatorTests</code>中的测试。
-     */
+    /** 预处理实例，以便通过<code>AbstractValidatorTests</code>中的测试。 */
     protected void initFor_AbstractValidatorTests(V validator) {
     }
 

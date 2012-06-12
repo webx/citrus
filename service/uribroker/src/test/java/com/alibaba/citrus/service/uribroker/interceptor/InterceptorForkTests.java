@@ -21,17 +21,16 @@ import static org.junit.Assert.*;
 
 import java.util.Collections;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.uribroker.uri.GenericURIBroker;
 import com.alibaba.citrus.service.uribroker.uri.URIBroker;
+import org.junit.Test;
 
 public class InterceptorForkTests {
     @Test
     public void test() {
         URIBroker u1 = new GenericURIBroker();
         u1.setServerURI("http://localhost:8080/");
-        u1.setInterceptors(Collections.<URIBrokerInterceptor> singletonList(new MyInterceptor()));
+        u1.setInterceptors(Collections.<URIBrokerInterceptor>singletonList(new MyInterceptor()));
 
         u1 = u1.fork();
 

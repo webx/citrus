@@ -30,12 +30,12 @@ import com.alibaba.citrus.generictype.introspect.PropertyInfo;
  * @author Michael Zhou
  */
 public abstract class AbstractPropertiesFinder extends AbstractTypeVisitor implements PropertiesFinder {
-    protected static final String GET_PREFIX = "get";
-    protected static final int GET_PREFIX_LENGTH = GET_PREFIX.length();
-    protected static final String SET_PREFIX = "set";
-    protected static final int SET_PREFIX_LENGTH = SET_PREFIX.length();
-    protected static final String IS_PREFIX = "is";
-    protected static final int IS_PREFIX_LENGTH = IS_PREFIX.length();
+    protected static final String GET_PREFIX        = "get";
+    protected static final int    GET_PREFIX_LENGTH = GET_PREFIX.length();
+    protected static final String SET_PREFIX        = "set";
+    protected static final int    SET_PREFIX_LENGTH = SET_PREFIX.length();
+    protected static final String IS_PREFIX         = "is";
+    protected static final int    IS_PREFIX_LENGTH  = IS_PREFIX.length();
     private Map<String, List<PropertyInfo>> props;
 
     @Override
@@ -62,7 +62,7 @@ public abstract class AbstractPropertiesFinder extends AbstractTypeVisitor imple
 
         for (PropertyInfo propWithSameName : propsWithSameName) {
             if (prop.getClass().equals(propWithSameName.getClass())
-                    && prop.getType().equals(propWithSameName.getType())) {
+                && prop.getType().equals(propWithSameName.getType())) {
                 merged = merge(propWithSameName, prop);
                 break;
             }
@@ -73,9 +73,7 @@ public abstract class AbstractPropertiesFinder extends AbstractTypeVisitor imple
         }
     }
 
-    /**
-     * 合并两个同类型、同名的properties。 如果merge成功，则返回<code>true</code>。
-     */
+    /** 合并两个同类型、同名的properties。 如果merge成功，则返回<code>true</code>。 */
     private boolean merge(PropertyInfo target, PropertyInfo with) {
         if (target instanceof AbstractPropertyInfo) {
             AbstractPropertyInfo p = (AbstractPropertyInfo) target;

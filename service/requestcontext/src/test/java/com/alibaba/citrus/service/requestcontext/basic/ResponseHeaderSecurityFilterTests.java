@@ -22,14 +22,12 @@ import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-
 import javax.servlet.http.Cookie;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import com.alibaba.citrus.service.requestcontext.basic.impl.ResponseHeaderSecurityFilter;
 import com.alibaba.citrus.util.HumanReadableSize;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ResponseHeaderSecurityFilterTests extends AbstractBasicResponseTests {
     private ResponseHeaderSecurityFilter filter;
@@ -138,7 +136,7 @@ public class ResponseHeaderSecurityFilterTests extends AbstractBasicResponseTest
         // 正常情况下，包含crlf的location是没有机会被crlfFilter发现的，因为在此之前已经出错。
         // 但为了保障安全，仍作此测试。
         assertEquals("value1 value2 value3 ",
-                new ResponseHeaderSecurityFilter().checkRedirectLocation("value1\r\nvalue2\rvalue3\n"));
+                     new ResponseHeaderSecurityFilter().checkRedirectLocation("value1\r\nvalue2\rvalue3\n"));
     }
 
     @Test

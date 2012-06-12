@@ -23,11 +23,10 @@ import static org.junit.Assert.*;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.util.ToStringBuilder.CollectionBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * 测试<code>ToStringBuilder</code>。
@@ -36,7 +35,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  */
 public class ToStringBuilderTests {
     private ToStringBuilder buf;
-    private String result;
+    private String          result;
 
     @Before
     public void init() {

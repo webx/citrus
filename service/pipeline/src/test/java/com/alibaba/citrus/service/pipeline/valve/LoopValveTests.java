@@ -20,11 +20,10 @@ package com.alibaba.citrus.service.pipeline.valve;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pipeline.Pipeline;
 import com.alibaba.citrus.service.pipeline.TooManyLoopsException;
 import com.alibaba.citrus.service.pipeline.impl.valve.LoopValve;
+import org.junit.Test;
 
 public class LoopValveTests extends AbstractLoopValveTests<LoopValve> {
     @Test
@@ -85,8 +84,8 @@ public class LoopValveTests extends AbstractLoopValveTests<LoopValve> {
         }
 
         assertLog("1-1" /* 1-2 <loop/> */, //
-                "2-1-loop-0", "2-2-loop-0", "2-3-loop-0", //
-                "2-1-loop-1", "2-2-loop-1", "2-3-loop-1" //
+                  "2-1-loop-0", "2-2-loop-0", "2-3-loop-0", //
+                  "2-1-loop-1", "2-2-loop-1", "2-3-loop-1" //
         );
 
         // pipeline reference
@@ -100,8 +99,8 @@ public class LoopValveTests extends AbstractLoopValveTests<LoopValve> {
         }
 
         assertLog("1-1" /* 1-2 <loop/> */, //
-                "2-1-loop-0", //
-                "2-1-loop-1" //
+                  "2-1-loop-0", //
+                  "2-1-loop-1" //
         );
     }
 }

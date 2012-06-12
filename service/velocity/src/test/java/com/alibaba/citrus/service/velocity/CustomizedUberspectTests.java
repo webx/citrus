@@ -22,13 +22,12 @@ import static org.junit.Assert.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.alibaba.citrus.service.velocity.impl.CustomizedUberspectImpl;
 import org.apache.velocity.util.introspection.Info;
 import org.apache.velocity.util.introspection.Uberspect;
 import org.apache.velocity.util.introspection.VelPropertyGet;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.alibaba.citrus.service.velocity.impl.CustomizedUberspectImpl;
 
 public class CustomizedUberspectTests {
     private Uberspect uberspect;

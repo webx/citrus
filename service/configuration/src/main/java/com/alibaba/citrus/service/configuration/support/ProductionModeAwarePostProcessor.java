@@ -19,11 +19,10 @@ package com.alibaba.citrus.service.configuration.support;
 
 import static com.alibaba.citrus.util.Assert.*;
 
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.BeanPostProcessor;
-
 import com.alibaba.citrus.service.configuration.Configuration;
 import com.alibaba.citrus.service.configuration.ProductionModeAware;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 
 /**
  * 用来支持<code>ProductionModeSensible</code>的post processor。

@@ -23,7 +23,6 @@ import static com.alibaba.citrus.util.ServletUtil.*;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,9 +33,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author Michael Zhou
  */
 public class ServletRequestContext extends RequestContext {
-    private final HttpServletRequest request;
+    private final HttpServletRequest  request;
     private final HttpServletResponse response;
-    private final ServletContext servletContext;
+    private final ServletContext      servletContext;
 
     public ServletRequestContext(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) {
         super(getServletBaseURL(request), getServletResourcePath(request));
@@ -84,17 +83,13 @@ public class ServletRequestContext extends RequestContext {
         response.sendRedirect(location);
     }
 
-    /**
-     * 当请求的资源找不到时，方法被调用。子类可以修改此行为。
-     */
+    /** 当请求的资源找不到时，方法被调用。子类可以修改此行为。 */
     @Override
     public void resourceNotFound(String resourceName) throws IOException {
         response.sendError(HttpServletResponse.SC_NOT_FOUND, "Resource Not Found: " + resourceName);
     }
 
-    /**
-     * 取得servlet request context。
-     */
+    /** 取得servlet request context。 */
     public static ServletRequestContext getServletRequestContext(RequestContext request) {
         if (request instanceof ServletRequestContext) {
             return (ServletRequestContext) request;
@@ -103,9 +98,7 @@ public class ServletRequestContext extends RequestContext {
         }
     }
 
-    /**
-     * 设置http headers，禁用cache。
-     */
+    /** 设置http headers，禁用cache。 */
     public static void disableCache(RequestContext request) {
         if (getServletRequestContext(request) != null) {
             HttpServletResponse response = getServletRequestContext(request).getResponse();

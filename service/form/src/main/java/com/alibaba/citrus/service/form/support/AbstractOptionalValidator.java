@@ -25,9 +25,7 @@ import static com.alibaba.citrus.util.StringUtil.*;
  * @author Michael Zhou
  */
 public abstract class AbstractOptionalValidator extends AbstractValidator {
-    /**
-     * 验证一个字段。
-     */
+    /** 验证一个字段。 */
     public boolean validate(Context context) {
         String value = context.getValueAsType(String.class);
 
@@ -39,8 +37,6 @@ public abstract class AbstractOptionalValidator extends AbstractValidator {
         return validate(context, value);
     }
 
-    /**
-     * 验证一个字段。
-     */
+    /** 验证一个字段。 */
     protected abstract boolean validate(Context context, String value);
 }

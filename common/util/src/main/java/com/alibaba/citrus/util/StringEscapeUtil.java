@@ -67,7 +67,7 @@ public class StringEscapeUtil {
      * <code>He didn't say, \"Stop!\"</code>
      * </p>
      *
-     * @param str 要转义的字符串
+     * @param str    要转义的字符串
      * @param strict 是否以严格的方式编码字符串
      * @return 转义后的字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
@@ -91,7 +91,7 @@ public class StringEscapeUtil {
      * @param str 要转义的字符串
      * @param out 输出流
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
-     * @throws IOException 如果输出失败
+     * @throws IOException              如果输出失败
      */
     public static void escapeJava(String str, Appendable out) throws IOException {
         escapeJavaStyleString(str, false, out, false);
@@ -110,11 +110,11 @@ public class StringEscapeUtil {
      * <code>He didn't say, \"Stop!\"</code>
      * </p>
      *
-     * @param str 要转义的字符串
-     * @param out 输出流
+     * @param str    要转义的字符串
+     * @param out    输出流
      * @param strict 是否以严格的方式编码字符串
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
-     * @throws IOException 如果输出失败
+     * @throws IOException              如果输出失败
      */
     public static void escapeJava(String str, Appendable out, boolean strict) throws IOException {
         escapeJavaStyleString(str, false, out, strict);
@@ -153,7 +153,7 @@ public class StringEscapeUtil {
      * <code>He didn\'t say, \"Stop!\"</code>
      * </p>
      *
-     * @param str 要转义的字符串
+     * @param str    要转义的字符串
      * @param strict 是否以严格的方式编码字符串
      * @return 转义后的字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
@@ -177,7 +177,7 @@ public class StringEscapeUtil {
      * @param str 要转义的字符串
      * @param out 输出流
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
-     * @throws IOException 如果输出失败
+     * @throws IOException              如果输出失败
      */
     public static void escapeJavaScript(String str, Appendable out) throws IOException {
         escapeJavaStyleString(str, true, out, false);
@@ -196,11 +196,11 @@ public class StringEscapeUtil {
      * <code>He didn\'t say, \"Stop!\"</code>
      * </p>
      *
-     * @param str 要转义的字符串
-     * @param out 输出流
+     * @param str    要转义的字符串
+     * @param out    输出流
      * @param strict 是否以严格的方式编码字符串
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
-     * @throws IOException 如果输出失败
+     * @throws IOException              如果输出失败
      */
     public static void escapeJavaScript(String str, Appendable out, boolean strict) throws IOException {
         escapeJavaStyleString(str, true, out, strict);
@@ -209,9 +209,9 @@ public class StringEscapeUtil {
     /**
      * 按Java或JavaScript的规则对字符串进行转义。
      *
-     * @param str 要转义的字符串
+     * @param str        要转义的字符串
      * @param javascript 是否对单引号和slash进行转义
-     * @param strict 是否以严格的方式编码字符串
+     * @param strict     是否以严格的方式编码字符串
      * @return 转义后的字符串
      */
     private static String escapeJavaStyleString(String str, boolean javascript, boolean strict) {
@@ -235,10 +235,10 @@ public class StringEscapeUtil {
     /**
      * 按Java或JavaScript的规则对字符串进行转义。
      *
-     * @param str 要转义的字符串
+     * @param str        要转义的字符串
      * @param javascript 是否对单引号和slash进行转义
-     * @param out 输出流
-     * @param strict 是否以严格的方式编码字符串
+     * @param out        输出流
+     * @param strict     是否以严格的方式编码字符串
      * @return 如果字符串没有变化，则返回<code>false</code>
      */
     private static boolean escapeJavaStyleString(String str, boolean javascript, Appendable out, boolean strict)
@@ -377,7 +377,7 @@ public class StringEscapeUtil {
      * @param str 包含转义字符的字符串
      * @param out 输出流
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
-     * @throws IOException 如果输出失败
+     * @throws IOException              如果输出失败
      */
     public static void unescapeJava(String str, Appendable out) throws IOException {
         unescapeJavaStyleString(str, out);
@@ -411,7 +411,7 @@ public class StringEscapeUtil {
      * @param str 包含转义字符的字符串
      * @param out 输出流
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
-     * @throws IOException 如果输出失败
+     * @throws IOException              如果输出失败
      */
     public static void unescapeJavaScript(String str, Appendable out) throws IOException {
         unescapeJavaStyleString(str, out);
@@ -460,7 +460,7 @@ public class StringEscapeUtil {
      * @param out 输出流
      * @return 如果字符串没有变化，则返回<code>false</code>
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
-     * @throws IOException 如果输出失败
+     * @throws IOException              如果输出失败
      */
     private static boolean unescapeJavaStyleString(String str, Appendable out) throws IOException {
         boolean needToChange = false;
@@ -639,7 +639,7 @@ public class StringEscapeUtil {
      * @param str 要转义的字符串
      * @param out 输出流
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
-     * @throws IOException 如果输出失败
+     * @throws IOException              如果输出失败
      * @see <a
      *      href="http://hotwired.lycos.com/webmonkey/reference/special_characters/">ISO
      *      Entities</a>
@@ -691,7 +691,7 @@ public class StringEscapeUtil {
      * @param str 要转义的字符串
      * @param out 输出流
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
-     * @throws IOException 如果输出失败
+     * @throws IOException              如果输出失败
      */
     public static void escapeXml(String str, Appendable out) throws IOException {
         escapeEntities(Entities.XML, str, out);
@@ -701,7 +701,7 @@ public class StringEscapeUtil {
      * 根据指定的规则，将字符串中的部分字符转换成实体编码。
      *
      * @param entities 实体集合
-     * @param str 要转义的字符串
+     * @param str      要转义的字符串
      * @return 用实体编码转义的字符串，如果原字串为<code>null</code>，则返回<code>null</code>
      */
     public static String escapeEntities(Entities entities, String str) {
@@ -726,10 +726,10 @@ public class StringEscapeUtil {
      * 根据指定的规则，将字符串中的部分字符转换成实体编码。
      *
      * @param entities 实体集合
-     * @param str 要转义的字符串
-     * @param out 输出流
+     * @param str      要转义的字符串
+     * @param out      输出流
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
-     * @throws IOException 如果输出失败
+     * @throws IOException              如果输出失败
      */
     public static void escapeEntities(Entities entities, String str, Appendable out) throws IOException {
         escapeEntitiesInternal(entities, str, out);
@@ -765,7 +765,7 @@ public class StringEscapeUtil {
      * @param str 包含转义字符的字符串
      * @param out 输出流
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
-     * @throws IOException 如果输出失败
+     * @throws IOException              如果输出失败
      */
     public static void unescapeHtml(String str, Appendable out) throws IOException {
         unescapeEntities(Entities.HTML40, str, out);
@@ -799,7 +799,7 @@ public class StringEscapeUtil {
      * @param str 不包含转义字符的字符串
      * @param out 输出流
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
-     * @throws IOException 如果输出失败
+     * @throws IOException              如果输出失败
      */
     public static void unescapeXml(String str, Appendable out) throws IOException {
         unescapeEntities(Entities.XML, str, out);
@@ -809,7 +809,7 @@ public class StringEscapeUtil {
      * 按指定的规则对字符串进行反向转义。
      *
      * @param entities 实体集合
-     * @param str 不包含转义字符的字符串
+     * @param str      不包含转义字符的字符串
      * @return 恢复成未转义的字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String unescapeEntities(Entities entities, String str) {
@@ -837,10 +837,10 @@ public class StringEscapeUtil {
      * </p>
      *
      * @param entities 实体集合
-     * @param str 不包含转义字符的字符串
-     * @param out 输出流
+     * @param str      不包含转义字符的字符串
+     * @param out      输出流
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
-     * @throws IOException 如果输出失败
+     * @throws IOException              如果输出失败
      */
     public static void unescapeEntities(Entities entities, String str, Appendable out) throws IOException {
         unescapeEntitiesInternal(entities, str, out);
@@ -850,12 +850,12 @@ public class StringEscapeUtil {
      * 将字符串中的部分字符转换成实体编码。
      *
      * @param entities 实体集合
-     * @param str 要转义的字符串
-     * @param out 字符输出流，不能为<code>null</code>
+     * @param str      要转义的字符串
+     * @param out      字符输出流，不能为<code>null</code>
      * @return 如果字符串没有变化，则返回<code>false</code>
      * @throws IllegalArgumentException 如果<code>entities</code>或输出流为
-     *             <code>null</code>
-     * @throws IOException 如果输出失败
+     *                                  <code>null</code>
+     * @throws IOException              如果输出失败
      */
     private static boolean escapeEntitiesInternal(Entities entities, String str, Appendable out) throws IOException {
         boolean needToChange = false;
@@ -898,12 +898,12 @@ public class StringEscapeUtil {
      * </p>
      *
      * @param entities 实体集合，如果为<code>null</code>，则只转换<code>&amp;#number</code>
-     *            实体。
-     * @param str 包含转义字符的字符串
-     * @param out 字符输出流，不能为<code>null</code>
+     *                 实体。
+     * @param str      包含转义字符的字符串
+     * @param out      字符输出流，不能为<code>null</code>
      * @return 如果字符串没有变化，则返回<code>false</code>
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
-     * @throws IOException 如果输出失败
+     * @throws IOException              如果输出失败
      */
     private static boolean unescapeEntitiesInternal(Entities entities, String str, Appendable out) throws IOException {
         boolean needToChange = false;
@@ -1004,11 +1004,11 @@ public class StringEscapeUtil {
      * 按SQL语句的规则对字符串进行转义。
      * <p>
      * 例如：
-     *
+     * <p/>
      * <pre>
      * statement.executeQuery(&quot;SELECT * FROM MOVIES WHERE TITLE='&quot; + StringEscapeUtil.escapeSql(&quot;McHale's Navy&quot;) + &quot;'&quot;);
      * </pre>
-     *
+     * <p/>
      * </p>
      * <p>
      * 目前，此方法只将单引号转换成两个单引号：<code>"McHale's Navy"</code>转换成<code>"McHale''s
@@ -1027,11 +1027,11 @@ public class StringEscapeUtil {
      * 按SQL语句的规则对字符串进行转义。
      * <p>
      * 例如：
-     *
+     * <p/>
      * <pre>
      * statement.executeQuery(&quot;SELECT * FROM MOVIES WHERE TITLE='&quot; + StringEscapeUtil.escapeSql(&quot;McHale's Navy&quot;) + &quot;'&quot;);
      * </pre>
-     *
+     * <p/>
      * </p>
      * <p>
      * 目前，此方法只将单引号转换成两个单引号：<code>"McHale's Navy"</code>转换成<code>"McHale''s
@@ -1041,7 +1041,7 @@ public class StringEscapeUtil {
      * @param str 要转义的字符串
      * @param out 输出流
      * @throws IllegalArgumentException 如果输出流为<code>null</code>
-     * @throws IOException 如果输出失败
+     * @throws IOException              如果输出失败
      * @see <a href="http://www.jguru.com/faq/view.jsp?EID=8881">faq</a>
      */
     public static void escapeSql(String str, Appendable out) throws IOException {
@@ -1126,14 +1126,14 @@ public class StringEscapeUtil {
 
     /** 将一个数字转换成16进制的转换表。 */
     private static char[] HEXADECIMAL = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
-            'F' };
+                                          'F' };
 
     /**
      * 将指定字符串编码成<code>application/x-www-form-urlencoded</code>格式。
      * <p>
      * 除了RFC2396中的<code>unreserved</code>字符之外的所有字符，都将被转换成URL编码<code>%xx</code>。
      * 根据RFC2396，<code>unreserved</code>的定义如下：
-     *
+     * <p/>
      * <pre>
      * &lt;![CDATA
      *  unreserved  = alphanum | mark
@@ -1141,7 +1141,7 @@ public class StringEscapeUtil {
      *  mark        = &quot;-&quot; | &quot;_&quot; | &quot;.&quot; | &quot;!&quot; | &quot;&tilde;&quot; | &quot;*&quot; | &quot;'&quot; | &quot;(&quot; | &quot;)&quot;
      * ]]&gt;
      * </pre>
-     *
+     * <p/>
      * </p>
      * <p>
      * 警告：该方法使用当前线程默认的字符编码来编码URL，因此该方法在不同的上下文中可能会产生不同的结果。
@@ -1163,7 +1163,7 @@ public class StringEscapeUtil {
      * <p>
      * 除了RFC2396中的<code>unreserved</code>字符之外的所有字符，都将被转换成URL编码<code>%xx</code>。
      * 根据RFC2396，<code>unreserved</code>的定义如下：
-     *
+     * <p/>
      * <pre>
      * &lt;![CDATA
      *  unreserved  = alphanum | mark
@@ -1171,13 +1171,13 @@ public class StringEscapeUtil {
      *  mark        = &quot;-&quot; | &quot;_&quot; | &quot;.&quot; | &quot;!&quot; | &quot;&tilde;&quot; | &quot;*&quot; | &quot;'&quot; | &quot;(&quot; | &quot;)&quot;
      * ]]&gt;
      * </pre>
-     *
+     * <p/>
      * </p>
      * <p>
      * 该方法使用指定的字符编码来编码URL。
      * </p>
      *
-     * @param str 要编码的字符串，可以是<code>null</code>
+     * @param str      要编码的字符串，可以是<code>null</code>
      * @param encoding 输出字符编码，如果为<code>null</code>，则使用系统默认编码
      * @return URL编码后的字符串
      * @throws UnsupportedEncodingException 如果指定的<code>encoding</code>为非法的
@@ -1192,7 +1192,7 @@ public class StringEscapeUtil {
      * 如果指定参数<code>strict</code>为<code>true</code>，则按严格的方式编码URL。 除了RFC2396中的
      * <code>unreserved</code>字符之外的所有字符，都将被转换成URL编码<code>%xx</code>。 根据RFC2396，
      * <code>unreserved</code>的定义如下：
-     *
+     * <p/>
      * <pre>
      * &lt;![CDATA
      *  unreserved  = alphanum | mark
@@ -1200,28 +1200,28 @@ public class StringEscapeUtil {
      *  mark        = &quot;-&quot; | &quot;_&quot; | &quot;.&quot; | &quot;!&quot; | &quot;&tilde;&quot; | &quot;*&quot; | &quot;'&quot; | &quot;(&quot; | &quot;)&quot;
      * ]]&gt;
      * </pre>
-     *
+     * <p/>
      * </p>
      * <p>
      * 如果指定参数<code>strict</code>为<code>false</code>，则使用宽松的方式编码URL。
      * 除了控制字符、空白字符以及RFC2396中的<code>reserved</code>字符之外的所有字符，都将被保留不变。
      * 根据RFC2396，只有控制字符、空白字符以及符合下列<code>reserved</code>定义的字符才被转换成
      * <code>%xx</code>格式：
-     *
+     * <p/>
      * <pre>
      * &lt;![CDATA
      *  reserved      = &quot;;&quot; | &quot;/&quot; | &quot;?&quot; | &quot;:&quot; | &quot;@&quot; | &quot;&amp;&quot; | &quot;=&quot; | &quot;+&quot; | &quot;$&quot; | &quot;,&quot;
      * ]]&gt;
      * </pre>
-     *
+     * <p/>
      * </p>
      * <p>
      * 该方法使用指定的字符编码来编码URL。
      * </p>
      *
-     * @param str 要编码的字符串，可以是<code>null</code>
+     * @param str      要编码的字符串，可以是<code>null</code>
      * @param encoding 输出字符编码，如果为<code>null</code>，则使用当前线程默认的编码
-     * @param strict 是否以严格的方式编码URL
+     * @param strict   是否以严格的方式编码URL
      * @return URL编码后的字符串
      * @throws UnsupportedEncodingException 如果指定的<code>encoding</code>为非法的
      */
@@ -1234,7 +1234,7 @@ public class StringEscapeUtil {
      * <p>
      * 除了RFC2396中的<code>unreserved</code>字符之外的所有字符，都将被转换成URL编码<code>%xx</code>。
      * 根据RFC2396，<code>unreserved</code>的定义如下：
-     *
+     * <p/>
      * <pre>
      * &lt;![CDATA
      *  unreserved  = alphanum | mark
@@ -1242,18 +1242,18 @@ public class StringEscapeUtil {
      *  mark        = &quot;-&quot; | &quot;_&quot; | &quot;.&quot; | &quot;!&quot; | &quot;&tilde;&quot; | &quot;*&quot; | &quot;'&quot; | &quot;(&quot; | &quot;)&quot;
      * ]]&gt;
      * </pre>
-     *
+     * <p/>
      * </p>
      * <p>
      * 该方法使用指定的字符编码来编码URL。
      * </p>
      *
-     * @param str 要编码的字符串，可以是<code>null</code>
+     * @param str      要编码的字符串，可以是<code>null</code>
      * @param encoding 输出字符编码，如果为<code>null</code>，则使用系统默认编码
-     * @param out 输出到指定字符流
-     * @throws IOException 如果输出到<code>out</code>失败
+     * @param out      输出到指定字符流
+     * @throws IOException                  如果输出到<code>out</code>失败
      * @throws UnsupportedEncodingException 如果指定的<code>encoding</code>为非法的
-     * @throws IllegalArgumentException <code>out</code>为<code>null</code>
+     * @throws IllegalArgumentException     <code>out</code>为<code>null</code>
      */
     public static void escapeURL(String str, String encoding, Appendable out) throws IOException {
         escapeURLInternal(str, encoding, out, true);
@@ -1265,7 +1265,7 @@ public class StringEscapeUtil {
      * 如果指定参数<code>strict</code>为<code>true</code>，则按严格的方式编码URL。 除了RFC2396中的
      * <code>unreserved</code>字符之外的所有字符，都将被转换成URL编码<code>%xx</code>。 根据RFC2396，
      * <code>unreserved</code>的定义如下：
-     *
+     * <p/>
      * <pre>
      * &lt;![CDATA
      *  unreserved  = alphanum | mark
@@ -1273,32 +1273,32 @@ public class StringEscapeUtil {
      *  mark        = &quot;-&quot; | &quot;_&quot; | &quot;.&quot; | &quot;!&quot; | &quot;&tilde;&quot; | &quot;*&quot; | &quot;'&quot; | &quot;(&quot; | &quot;)&quot;
      * ]]&gt;
      * </pre>
-     *
+     * <p/>
      * </p>
      * <p>
      * 如果指定参数<code>strict</code>为<code>false</code>，则使用宽松的方式编码URL。
      * 除了控制字符、空白字符以及RFC2396中的<code>reserved</code>字符之外的所有字符，都将被保留不变。
      * 根据RFC2396，只有控制字符、空白字符以及符合下列<code>reserved</code>定义的字符才被转换成
      * <code>%xx</code>格式：
-     *
+     * <p/>
      * <pre>
      * &lt;![CDATA
      *  reserved      = &quot;;&quot; | &quot;/&quot; | &quot;?&quot; | &quot;:&quot; | &quot;@&quot; | &quot;&amp;&quot; | &quot;=&quot; | &quot;+&quot; | &quot;$&quot; | &quot;,&quot;
      * ]]&gt;
      * </pre>
-     *
+     * <p/>
      * </p>
      * <p>
      * 该方法使用指定的字符编码来编码URL。
      * </p>
      *
-     * @param str 要编码的字符串，可以是<code>null</code>
+     * @param str      要编码的字符串，可以是<code>null</code>
      * @param encoding 输出字符编码，如果为<code>null</code>，则使用系统默认编码
-     * @param out 输出到指定字符流
-     * @param strict 是否以严格的方式编码URL
-     * @throws IOException 如果输出到<code>out</code>失败
+     * @param out      输出到指定字符流
+     * @param strict   是否以严格的方式编码URL
+     * @throws IOException                  如果输出到<code>out</code>失败
      * @throws UnsupportedEncodingException 如果指定的<code>encoding</code>为非法的
-     * @throws IllegalArgumentException <code>out</code>为<code>null</code>
+     * @throws IllegalArgumentException     <code>out</code>为<code>null</code>
      */
     public static void escapeURL(String str, String encoding, Appendable out, boolean strict) throws IOException {
         escapeURLInternal(str, encoding, out, strict);
@@ -1307,9 +1307,9 @@ public class StringEscapeUtil {
     /**
      * 将指定字符串编码成<code>application/x-www-form-urlencoded</code>格式。
      *
-     * @param str 要编码的字符串，可以是<code>null</code>
+     * @param str      要编码的字符串，可以是<code>null</code>
      * @param encoding 输出字符编码，如果为<code>null</code>，则使用系统默认编码
-     * @param strict 是否以严格的方式编码URL
+     * @param strict   是否以严格的方式编码URL
      * @return URL编码后的字符串
      * @throws UnsupportedEncodingException 如果指定的<code>encoding</code>为非法的
      */
@@ -1337,14 +1337,14 @@ public class StringEscapeUtil {
     /**
      * 将指定字符串编码成<code>application/x-www-form-urlencoded</code>格式。
      *
-     * @param str 要编码的字符串，可以是<code>null</code>
+     * @param str      要编码的字符串，可以是<code>null</code>
      * @param encoding 输出字符编码，如果为<code>null</code>，则使用系统默认编码
-     * @param strict 是否以严格的方式编码URL
-     * @param out 输出流
+     * @param strict   是否以严格的方式编码URL
+     * @param out      输出流
      * @return 如果字符串被改变，则返回<code>true</code>
-     * @throws IOException 如果输出到<code>out</code>失败
+     * @throws IOException                  如果输出到<code>out</code>失败
      * @throws UnsupportedEncodingException 如果指定的<code>encoding</code>为非法的
-     * @throws IllegalArgumentException <code>out</code>为<code>null</code>
+     * @throws IllegalArgumentException     <code>out</code>为<code>null</code>
      */
     private static boolean escapeURLInternal(String str, String encoding, Appendable out, boolean strict)
             throws IOException {
@@ -1403,7 +1403,7 @@ public class StringEscapeUtil {
     /**
      * 判断指定字符是否是“安全”的，这个字符将不被转换成URL编码。
      *
-     * @param ch 要判断的字符
+     * @param ch     要判断的字符
      * @param strict 是否以严格的方式编码
      * @return 如果是“安全”的，则返回<code>true</code>
      */
@@ -1435,7 +1435,7 @@ public class StringEscapeUtil {
     /**
      * 解码<code>application/x-www-form-urlencoded</code>格式的字符串。
      *
-     * @param str 要解码的字符串，可以是<code>null</code>
+     * @param str      要解码的字符串，可以是<code>null</code>
      * @param encoding 输出字符编码，如果为<code>null</code>，则使用系统默认编码
      * @return URL解码后的字符串
      * @throws UnsupportedEncodingException 如果指定的<code>encoding</code>为非法的
@@ -1447,12 +1447,12 @@ public class StringEscapeUtil {
     /**
      * 解码<code>application/x-www-form-urlencoded</code>格式的字符串。
      *
-     * @param str 要解码的字符串，可以是<code>null</code>
+     * @param str      要解码的字符串，可以是<code>null</code>
      * @param encoding 输出字符编码，如果为<code>null</code>，则使用系统默认编码
-     * @param out 输出流
-     * @throws IOException 如果输出到<code>out</code>失败
+     * @param out      输出流
+     * @throws IOException                  如果输出到<code>out</code>失败
      * @throws UnsupportedEncodingException 如果指定的<code>encoding</code>为非法的
-     * @throws IllegalArgumentException <code>out</code>为<code>null</code>
+     * @throws IllegalArgumentException     <code>out</code>为<code>null</code>
      */
     public static void unescapeURL(String str, String encoding, Appendable out) throws IOException {
         unescapeURLInternal(str, encoding, out);
@@ -1461,7 +1461,7 @@ public class StringEscapeUtil {
     /**
      * 解码<code>application/x-www-form-urlencoded</code>格式的字符串。
      *
-     * @param str 要解码的字符串，可以是<code>null</code>
+     * @param str      要解码的字符串，可以是<code>null</code>
      * @param encoding 输出字符编码，如果为<code>null</code>，则使用系统默认编码
      * @return URL解码后的字符串
      * @throws UnsupportedEncodingException 如果指定的<code>encoding</code>为非法的
@@ -1489,13 +1489,13 @@ public class StringEscapeUtil {
     /**
      * 解码<code>application/x-www-form-urlencoded</code>格式的字符串。
      *
-     * @param str 要解码的字符串，可以是<code>null</code>
+     * @param str      要解码的字符串，可以是<code>null</code>
      * @param encoding 输出字符编码，如果为<code>null</code>，则使用系统默认编码
-     * @param out 输出流
+     * @param out      输出流
      * @return 如果字符串被改变，则返回<code>true</code>
-     * @throws IOException 如果输出到<code>out</code>失败
+     * @throws IOException                  如果输出到<code>out</code>失败
      * @throws UnsupportedEncodingException 如果指定的<code>encoding</code>为非法的
-     * @throws IllegalArgumentException <code>out</code>为<code>null</code>
+     * @throws IllegalArgumentException     <code>out</code>为<code>null</code>
      */
     private static boolean unescapeURLInternal(String str, String encoding, Appendable out) throws IOException {
         if (encoding == null) {

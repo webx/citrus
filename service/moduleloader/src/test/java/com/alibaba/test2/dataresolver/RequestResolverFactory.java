@@ -20,11 +20,10 @@ package com.alibaba.test2.dataresolver;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.service.dataresolver.DataResolver;
 import com.alibaba.citrus.service.dataresolver.DataResolverContext;
 import com.alibaba.citrus.service.dataresolver.DataResolverFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class RequestResolverFactory implements DataResolverFactory {
     @Autowired

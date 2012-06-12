@@ -36,12 +36,12 @@ import java.util.Map;
  */
 public class DefaultMapEntry<K, V> implements Map.Entry<K, V> {
     private final K key;
-    private V value;
+    private       V value;
 
     /**
      * 创建一个<code>Map.Entry</code>.
      *
-     * @param key <code>Map.Entry</code>的key
+     * @param key   <code>Map.Entry</code>的key
      * @param value <code>Map.Entry</code>的value
      */
     public DefaultMapEntry(K key, V value) {

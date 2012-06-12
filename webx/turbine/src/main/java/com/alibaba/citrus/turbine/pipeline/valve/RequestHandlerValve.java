@@ -23,16 +23,15 @@ import static com.alibaba.citrus.util.Assert.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.alibaba.citrus.service.pipeline.PipelineContext;
+import com.alibaba.citrus.service.pipeline.support.AbstractValve;
+import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
+import com.alibaba.citrus.turbine.TurbineRunData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.web.HttpRequestHandler;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.service.pipeline.PipelineContext;
-import com.alibaba.citrus.service.pipeline.support.AbstractValve;
-import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
-import com.alibaba.citrus.turbine.TurbineRunData;
 
 /**
  * 调用Spring MVC的<code>HttpRequestHandler</code>。

@@ -23,13 +23,9 @@ package com.alibaba.citrus.turbine;
  * @author Michael Zhou
  */
 public interface ControlParameters {
-    /**
-     * 取得control模板。
-     */
+    /** 取得control模板。 */
     String getControlTemplate();
 
-    /**
-     * 设置control模板。假如之前已经指定了control模板，则覆盖之。
-     */
+    /** 设置control模板。假如之前已经指定了control模板，则覆盖之。 */
     void setControlTemplate(String template);
 }

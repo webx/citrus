@@ -159,9 +159,7 @@ class RawTypeImpl extends AbstractGenericDeclarationInfo implements RawTypeInfo 
         return TypeInfoFactory.getMethod(this, methodName, paramTypes);
     }
 
-    /**
-     * 取得字符串表示。
-     */
+    /** 取得字符串表示。 */
     @Override
     public String toString() {
         StringBuilder buf = new StringBuilder();
@@ -172,9 +170,7 @@ class RawTypeImpl extends AbstractGenericDeclarationInfo implements RawTypeInfo 
         return buf.toString();
     }
 
-    /**
-     * 父类、接口的信息。
-     */
+    /** 父类、接口的信息。 */
     private static class Supertypes {
         private final List<TypeInfo> supertypes;
         private final List<TypeInfo> interfaces;
@@ -257,21 +253,17 @@ class RawTypeImpl extends AbstractGenericDeclarationInfo implements RawTypeInfo 
         }
     }
 
-    /**
-     * 创建supertypes的装载器。
-     */
+    /** 创建supertypes的装载器。 */
     private class SupertypesLoader implements Loader<Supertypes, Object> {
         public Supertypes load(Object context) {
             return new Supertypes(RawTypeImpl.this);
         }
     }
 
-    /**
-     * 一个简单的接口队列，用来遍历所有接口。
-     */
+    /** 一个简单的接口队列，用来遍历所有接口。 */
     private static class InterfaceQueue {
-        private final LinkedList<Type> queue = createLinkedList();
-        private final Set<Class<?>> visited = createHashSet();
+        private final LinkedList<Type> queue   = createLinkedList();
+        private final Set<Class<?>>    visited = createHashSet();
 
         public void push(Type[] types) {
             for (Type type : types) {

@@ -26,14 +26,10 @@ import static com.alibaba.citrus.util.StringUtil.*;
  * @author Michael Zhou
  */
 public interface RequestContextInfo<R extends RequestContext> {
-    /**
-     * 取得当前factory将生成的request context接口。
-     */
+    /** 取得当前factory将生成的request context接口。 */
     Class<R> getRequestContextInterface();
 
-    /**
-     * 取得用于生成proxy类的接口。
-     */
+    /** 取得用于生成proxy类的接口。 */
     Class<? extends R> getRequestContextProxyInterface();
 
     /**
@@ -43,14 +39,10 @@ public interface RequestContextInfo<R extends RequestContext> {
      */
     String[] getFeatures();
 
-    /**
-     * 指出当前request context必须排在哪些features之前或之后。
-     */
+    /** 指出当前request context必须排在哪些features之前或之后。 */
     FeatureOrder[] featureOrders();
 
-    /**
-     * 代表request context feature的顺序。
-     */
+    /** 代表request context feature的顺序。 */
     abstract class FeatureOrder {
         public final String feature;
 
@@ -59,9 +51,7 @@ public interface RequestContextInfo<R extends RequestContext> {
         }
     }
 
-    /**
-     * 表示当前request context应该排在提供指定feature的request context之前。
-     */
+    /** 表示当前request context应该排在提供指定feature的request context之前。 */
     class BeforeFeature extends FeatureOrder {
         public BeforeFeature(String feature) {
             super(feature);
@@ -73,9 +63,7 @@ public interface RequestContextInfo<R extends RequestContext> {
         }
     }
 
-    /**
-     * 表示当前request context应该排在提供指定feature的request context之后。
-     */
+    /** 表示当前request context应该排在提供指定feature的request context之后。 */
     class AfterFeature extends FeatureOrder {
         public AfterFeature(String feature) {
             super(feature);
@@ -87,9 +75,7 @@ public interface RequestContextInfo<R extends RequestContext> {
         }
     }
 
-    /**
-     * 表示当前request context前面必须有提供指定feature的request context存在。
-     */
+    /** 表示当前request context前面必须有提供指定feature的request context存在。 */
     class RequiresFeature extends AfterFeature {
         public RequiresFeature(String feature) {
             super(feature);

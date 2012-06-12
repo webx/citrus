@@ -18,7 +18,6 @@
 package com.alibaba.citrus.service.requestcontext.rundata;
 
 import java.io.IOException;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -121,9 +120,7 @@ public interface RunData extends RequestContext {
      */
     String getRequestURL(boolean withQueryString);
 
-    /**
-     * 检查请求的类型是否为post。
-     */
+    /** 检查请求的类型是否为post。 */
     boolean isPostRequest();
 
     // ===================================================
@@ -155,7 +152,7 @@ public interface RunData extends RequestContext {
     /**
      * 将指定对象绑定到当前请求中。当请求结束时，所有的attributes将被抛弃。
      *
-     * @param key 对象的key
+     * @param key    对象的key
      * @param object 和key相对应的对象
      */
     void setAttribute(String key, Object object);
@@ -187,21 +184,19 @@ public interface RunData extends RequestContext {
      * type中将不包含charset标记。
      * </p>
      *
-     * @param contentType content type
+     * @param contentType   content type
      * @param appendCharset 输出字符集
      */
     void setContentType(String contentType, boolean appendCharset);
 
-    /**
-     * 取得response的输出字符集。
-     */
+    /** 取得response的输出字符集。 */
     String getCharacterEncoding();
 
     /**
      * 设置response输出字符集。注意，此方法必须在第一次<code>getWriter</code>之前执行。
      *
      * @param charset 输出字符集，如果charset为<code>null</code>
-     *            ，则从contentType中删除charset标记
+     *                ，则从contentType中删除charset标记
      */
     void setCharacterEncoding(String charset);
 
@@ -216,7 +211,7 @@ public interface RunData extends RequestContext {
      * 设置重定向URI。
      *
      * @param location 重定向的URI
-     * @throws IOException 输入输出失败
+     * @throws IOException           输入输出失败
      * @throws IllegalStateException 如果response已经committed
      */
     void setRedirectLocation(String location) throws IOException;
@@ -262,7 +257,7 @@ public interface RunData extends RequestContext {
      *
      * @param buffering 是否buffer内容
      * @throws IllegalStateException <code>getOutputStream</code>或
-     *             <code>getWriter</code>方法已经被执行
+     *                               <code>getWriter</code>方法已经被执行
      */
     void setBuffering(boolean buffering);
 
@@ -270,7 +265,7 @@ public interface RunData extends RequestContext {
      * 创建新的buffer，保存老的buffer。
      *
      * @throws IllegalStateException 如果不在buffer模式，或<code>getWriter</code>及
-     *             <code>getOutputStream</code>方法从未被调用
+     *                               <code>getOutputStream</code>方法从未被调用
      */
     void pushBuffer();
 
@@ -279,7 +274,7 @@ public interface RunData extends RequestContext {
      *
      * @return 最近的buffer内容
      * @throws IllegalStateException 如果不在buffer模式，或<code>getWriter</code>
-     *             方法曾被调用，或<code>getOutputStream</code>方法从未被调用
+     *                               方法曾被调用，或<code>getOutputStream</code>方法从未被调用
      */
     ByteArray popByteBuffer();
 
@@ -288,7 +283,7 @@ public interface RunData extends RequestContext {
      *
      * @return 最近的buffer内容
      * @throws IllegalStateException 如果不在buffer模式，或<code>getOutputStream</code>
-     *             方法曾被调用，或<code>getWriter</code>方法从未被调用
+     *                               方法曾被调用，或<code>getWriter</code>方法从未被调用
      */
     String popCharBuffer();
 

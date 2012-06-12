@@ -25,28 +25,18 @@ import java.util.Set;
  * @author Michael Zhou
  */
 public interface Context {
-    /**
-     * 添加一个值。
-     */
+    /** 添加一个值。 */
     void put(String key, Object value);
 
-    /**
-     * 取得指定值。
-     */
+    /** 取得指定值。 */
     Object get(String key);
 
-    /**
-     * 删除一个值。
-     */
+    /** 删除一个值。 */
     void remove(String key);
 
-    /**
-     * 判断是否包含指定的键。
-     */
+    /** 判断是否包含指定的键。 */
     boolean containsKey(String key);
 
-    /**
-     * 取得所有key的集合。
-     */
+    /** 取得所有key的集合。 */
     Set<String> keySet();
 }

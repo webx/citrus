@@ -21,16 +21,15 @@ import static com.alibaba.citrus.test.TestEnvStatic.*;
 
 import java.io.File;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.FileSystemResource;
-
 import com.alibaba.citrus.service.dataresolver.impl.DataResolverServiceImpl;
 import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import com.alibaba.citrus.test.TestEnvStatic;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.FileSystemResource;
 
 public abstract class AbstractDataResolverTests {
-    protected static ApplicationContext factory;
-    protected DataResolverService resolverServices;
+    protected static ApplicationContext  factory;
+    protected        DataResolverService resolverServices;
 
     static {
         TestEnvStatic.init();

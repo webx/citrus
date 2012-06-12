@@ -28,9 +28,7 @@ import com.alibaba.citrus.util.StringUtil;
  * @author Michael Zhou
  */
 public abstract class AbstractConfig<T> extends GenericBeanSupport<T> {
-    /**
-     * 取得忽略大小写的名称。
-     */
+    /** 取得忽略大小写的名称。 */
     protected String caseInsensitiveName(String name) {
         assertNotNull(name, "name");
         return StringUtil.toLowerCase(name);

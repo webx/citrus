@@ -1266,11 +1266,11 @@ public class StringUtilTests {
         }
 
         long l = 0 //
-                + 62L //
-                + 10 * 256L //
-                + 2 * 256 * 256L //
-                + 1 * 256 * 256 * 256L //
-                + 0 * 256 * 256 * 256 * 256L;
+                 + 62L //
+                 + 10 * 256L //
+                 + 2 * 256 * 256L //
+                 + 1 * 256 * 256 * 256L //
+                 + 0 * 256 * 256 * 256 * 256L;
 
         assertEquals("cIx81", StringUtil.longToString(l));
         assertEquals("IJG2A", StringUtil.longToString(l, true));
@@ -1279,7 +1279,7 @@ public class StringUtilTests {
     @Test
     public void bytesToString() {
         assertEquals("0", StringUtil.bytesToString(null));
-        assertEquals("0", StringUtil.bytesToString(new byte[] {}));
+        assertEquals("0", StringUtil.bytesToString(new byte[] { }));
         assertEquals("0", StringUtil.bytesToString(new byte[] { 0, 0, 0, 0, 0, 0 }));
         assertEquals("1", StringUtil.bytesToString(new byte[] { 0, 0, 0, 0, 0, 1 }));
         assertEquals("GWO823H", StringUtil.bytesToString(new byte[] { 1, 0, 0, 0, 0, 0 }));

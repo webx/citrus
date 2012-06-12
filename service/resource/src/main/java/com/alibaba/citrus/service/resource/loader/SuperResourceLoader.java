@@ -43,22 +43,16 @@ public class SuperResourceLoader implements ResourceLister {
         this.newResourceName = trimToNull(resourceName);
     }
 
-    /**
-     * 初始化loader，并设定loader所在的<code>ResourceLoadingService</code>的实例。
-     */
+    /** 初始化loader，并设定loader所在的<code>ResourceLoadingService</code>的实例。 */
     public void init(ResourceLoadingService resourceLoadingService) {
     }
 
-    /**
-     * 查找指定名称的资源。
-     */
+    /** 查找指定名称的资源。 */
     public Resource getResource(ResourceLoaderContext context, Set<ResourceLoadingOption> options) {
         return context.getResource(getNewResourceName(context), options);
     }
 
-    /**
-     * 查找目录列表。
-     */
+    /** 查找目录列表。 */
     public String[] list(ResourceListerContext context, Set<ResourceLoadingOption> options) {
         return context.list(getNewResourceName(context), options);
     }

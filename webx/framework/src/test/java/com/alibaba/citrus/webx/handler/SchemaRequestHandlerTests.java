@@ -20,12 +20,11 @@ package com.alibaba.citrus.webx.handler;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.springext.export.SchemaExporterWEB;
 import com.alibaba.citrus.util.io.StreamUtil;
 import com.alibaba.citrus.webx.AbstractWebxTests;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * 测试/internal/Webx/Schema。
@@ -46,7 +45,7 @@ public class SchemaRequestHandlerTests extends AbstractWebxTests {
         assertEquals(200, clientResponseCode);
         assertEquals("text/html", clientResponse.getContentType());
         assertThat(clientResponseContent,
-                containsAll("/Webx/Schema/services.xsd", "/www.springframework.org/schema/beans/spring-beans.xsd"));
+                   containsAll("/Webx/Schema/services.xsd", "/www.springframework.org/schema/beans/spring-beans.xsd"));
 
         // schema/services - redirect to services/
         invokeServlet("/internal/Webx/Schema/services");
@@ -60,7 +59,7 @@ public class SchemaRequestHandlerTests extends AbstractWebxTests {
         assertEquals(200, clientResponseCode);
         assertEquals("text/html", clientResponse.getContentType());
         assertThat(clientResponseContent,
-                containsAll("/Webx/Schema/services/pipeline.xsd", "/Webx/Schema/services/request-contexts.xsd"));
+                   containsAll("/Webx/Schema/services/pipeline.xsd", "/Webx/Schema/services/request-contexts.xsd"));
 
         // schema/services.xsd - schema page
         invokeServlet("/internal/Webx/Schema/services.xsd");
@@ -68,7 +67,7 @@ public class SchemaRequestHandlerTests extends AbstractWebxTests {
         assertEquals(200, clientResponseCode);
         assertEquals("text/xml", clientResponse.getContentType());
         assertThat(clientResponseContent,
-                containsAll("targetNamespace=\"" + "http://www.alibaba.com/schema/services\""));
+                   containsAll("targetNamespace=\"" + "http://www.alibaba.com/schema/services\""));
 
         // schema/file.gif - resource page
         invokeServlet("/internal/Webx/Schema/file.gif");
@@ -78,7 +77,7 @@ public class SchemaRequestHandlerTests extends AbstractWebxTests {
 
         byte[] content = StreamUtil.readBytes(clientResponse.getInputStream(), true).toByteArray();
         byte[] fileContent = StreamUtil.readBytes(SchemaExporterWEB.class.getResource("file.gif").openStream(), true)
-                .toByteArray();
+                                       .toByteArray();
 
         assertArrayEquals(fileContent, content);
     }

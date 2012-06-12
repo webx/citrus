@@ -17,8 +17,8 @@
 
 package com.alibaba.citrus.service.form.impl.configuration;
 
-import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.Assert.ExceptionType.*;
+import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static java.util.Collections.*;
@@ -37,91 +37,69 @@ import com.alibaba.citrus.service.form.configuration.GroupConfig;
  * @author Michael Zhou
  */
 public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements GroupConfig {
-    private FormConfig formConfig;
-    private String parentGroup;
-    private String name;
-    private String key;
+    private FormConfig                   formConfig;
+    private String                       parentGroup;
+    private String                       name;
+    private String                       key;
     private Map<String, FieldConfigImpl> fields; // field name to fieldConfig
     private Map<String, FieldConfigImpl> fieldsByKey; // field key to fieldConfig
-    private List<Import> imports; // imported groups
-    private List<Import> importList; // unmodifiable imported groups
-    private List<FieldConfig> fieldList; // unmodifiable field list
-    private Boolean trimmingByDefault;
-    private Boolean postOnly;
+    private List<Import>                 imports; // imported groups
+    private List<Import>                 importList; // unmodifiable imported groups
+    private List<FieldConfig>            fieldList; // unmodifiable field list
+    private Boolean                      trimmingByDefault;
+    private Boolean                      postOnly;
 
-    /**
-     * 取得group所属的form config。
-     */
+    /** 取得group所属的form config。 */
     public FormConfig getFormConfig() {
         return formConfig;
     }
 
-    /**
-     * 设置group所属的form config。
-     */
+    /** 设置group所属的form config。 */
     public void setFormConfig(FormConfig formConfig) {
         this.formConfig = formConfig;
     }
 
-    /**
-     * 取得group name。
-     */
+    /** 取得group name。 */
     public String getName() {
         return name;
     }
 
-    /**
-     * 设置group name。
-     */
+    /** 设置group name。 */
     public void setName(String name) {
         this.name = trimToNull(name);
     }
 
-    /**
-     * 取得group key。
-     */
+    /** 取得group key。 */
     public String getKey() {
         return key;
     }
 
-    /**
-     * 设置group key。
-     */
+    /** 设置group key。 */
     public void setKey(String key) {
         this.key = trimToNull(key);
     }
 
-    /**
-     * 取得parent group。
-     */
+    /** 取得parent group。 */
     public String getParentGroup() {
         return parentGroup;
     }
 
-    /**
-     * 设置parent group，所有parent group中的内容都会被加入到当前group中。
-     */
+    /** 设置parent group，所有parent group中的内容都会被加入到当前group中。 */
     public void setParentGroup(String parentGroup) {
         this.parentGroup = trimToNull(parentGroup);
     }
 
-    /**
-     * 取得默认的trimming选项。
-     */
+    /** 取得默认的trimming选项。 */
     public boolean isTrimmingByDefault() {
         return trimmingByDefault == null ? true : trimmingByDefault.booleanValue();
     }
 
-    /**
-     * 设置默认的trimming选项。
-     */
+    /** 设置默认的trimming选项。 */
     public void setTrimmingByDefault(boolean trimmingByDefault) {
         this.trimmingByDefault = trimmingByDefault;
     }
 
-    /**
-     * Group是否必须从post请求中取得数据。
-     */
+    /** Group是否必须从post请求中取得数据。 */
     public boolean isPostOnly() {
         if (postOnly == null) {
             return formConfig == null ? true : formConfig.isPostOnlyByDefault();
@@ -130,16 +108,12 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
         }
     }
 
-    /**
-     * 设置group是否必须从post请求中取得数据。
-     */
+    /** 设置group是否必须从post请求中取得数据。 */
     public void setPostOnly(boolean postOnly) {
         this.postOnly = postOnly;
     }
 
-    /**
-     * 取得所有field config的列表。
-     */
+    /** 取得所有field config的列表。 */
     public List<FieldConfig> getFieldConfigList() {
         if (fieldList == null) {
             return emptyList();
@@ -148,9 +122,7 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
         }
     }
 
-    /**
-     * 取得指定名称的field config。名称大小写不敏感。 如果未找到，则返回<code>null</code>。
-     */
+    /** 取得指定名称的field config。名称大小写不敏感。 如果未找到，则返回<code>null</code>。 */
     public FieldConfig getFieldConfig(String fieldName) {
         if (fields == null) {
             return null;
@@ -159,16 +131,12 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
         }
     }
 
-    /**
-     * 取得指定key对应的field config。如果未找到，则返回<code>null</code>。
-     */
+    /** 取得指定key对应的field config。如果未找到，则返回<code>null</code>。 */
     public FieldConfig getFieldConfigByKey(String fieldKey) {
         return assertNotNull(fieldsByKey, ILLEGAL_STATE, "fieldsByKey not inited").get(fieldKey);
     }
 
-    /**
-     * 设置一组field configs。
-     */
+    /** 设置一组field configs。 */
     public void setFieldConfigImplList(List<FieldConfigImpl> fieldConfigList) {
         if (fieldConfigList != null) {
             fields = createLinkedHashMap();
@@ -179,9 +147,7 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
         }
     }
 
-    /**
-     * 添加一个field config。
-     */
+    /** 添加一个field config。 */
     private void addFieldConfig(FieldConfigImpl fieldConfig, boolean checkDuplicate) {
         if (fields == null) {
             fields = createLinkedHashMap();
@@ -191,15 +157,13 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
 
         if (checkDuplicate) {
             assertTrue(!fields.containsKey(fieldName), "Duplicated field name: \"%s.%s\"", getName(),
-                    fieldConfig.getName());
+                       fieldConfig.getName());
         }
 
         fields.put(fieldName, fieldConfig);
     }
 
-    /**
-     * 取得所有的imports。
-     */
+    /** 取得所有的imports。 */
     public List<Import> getImports() {
         if (importList == null) {
             return emptyList();
@@ -208,9 +172,7 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
         }
     }
 
-    /**
-     * 引进其它group的字段。如果fieldName为null，则引进整个group（同extends）。
-     */
+    /** 引进其它group的字段。如果fieldName为null，则引进整个group（同extends）。 */
     public void setImports(List<Import> imports) {
         if (imports != null) {
             this.imports = createArrayList(imports);
@@ -218,9 +180,7 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
         }
     }
 
-    /**
-     * 扩展当前group，将指定group中的内容复制到当前group中。
-     */
+    /** 扩展当前group，将指定group中的内容复制到当前group中。 */
     void extendsFrom(GroupConfigImpl parentGroupConfig) {
         if (trimmingByDefault == null && parentGroupConfig.trimmingByDefault != null) {
             trimmingByDefault = parentGroupConfig.trimmingByDefault;
@@ -233,16 +193,12 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
         extendsOrImports(parentGroupConfig, null, false);
     }
 
-    /**
-     * 将指定group中的内容复制到当前group中。
-     */
+    /** 将指定group中的内容复制到当前group中。 */
     void importsFrom(GroupConfigImpl srcGroupConfig, String fieldName) {
         extendsOrImports(srcGroupConfig, fieldName, true);
     }
 
-    /**
-     * 扩展或引入fields。
-     */
+    /** 扩展或引入fields。 */
     private void extendsOrImports(GroupConfigImpl srcGroupConfig, String fieldName, boolean checkDuplicate) {
         if (fieldName == null) {
             // merge/import all
@@ -257,9 +213,7 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
         }
     }
 
-    /**
-     * 合并field。
-     */
+    /** 合并field。 */
     private void mergeField(FieldConfigImpl srcFieldConfig, boolean checkDuplicate) {
         FieldConfigImpl copy = (FieldConfigImpl) getFieldConfig(srcFieldConfig.getName());
 
@@ -333,17 +287,13 @@ public class GroupConfigImpl extends AbstractConfig<GroupConfig> implements Grou
         }
     }
 
-    /**
-     * 转换成易于阅读的字符串。
-     */
+    /** 转换成易于阅读的字符串。 */
     @Override
     public String toString() {
         return "GroupConfig[name: " + getName() + ", fields: " + getFieldConfigList().size() + "]";
     }
 
-    /**
-     * 代表import其它group中的field的信息。
-     */
+    /** 代表import其它group中的field的信息。 */
     public static final class ImportImpl implements Import {
         private final String groupName;
         private final String fieldName;

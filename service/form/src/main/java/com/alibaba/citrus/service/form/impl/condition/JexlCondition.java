@@ -20,11 +20,6 @@ package com.alibaba.citrus.service.form.impl.condition;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
-import org.springframework.beans.TypeConverter;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.expr.Expression;
 import com.alibaba.citrus.expr.ExpressionContext;
 import com.alibaba.citrus.expr.ExpressionFactory;
@@ -37,6 +32,10 @@ import com.alibaba.citrus.service.form.support.AbstractConditionDefinitionParser
 import com.alibaba.citrus.util.StringEscapeUtil;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.springframework.beans.TypeConverter;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 用jexl表达式来计算条件。
@@ -49,7 +48,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  */
 public class JexlCondition extends AbstractCondition {
     protected static final ExpressionFactory EXPRESSION_FACTORY = new JexlExpressionFactory();
-    private String conditionString;
+    private String     conditionString;
     private Expression condition;
 
     public JexlCondition(String condition) {
@@ -64,7 +63,7 @@ public class JexlCondition extends AbstractCondition {
             condition = EXPRESSION_FACTORY.createExpression(conditionString);
         } catch (ExpressionParseException e) {
             throw new IllegalArgumentException("Invalid if condition: \""
-                    + StringEscapeUtil.escapeJava(conditionString) + "\"", e);
+                                               + StringEscapeUtil.escapeJava(conditionString) + "\"", e);
         }
     }
 

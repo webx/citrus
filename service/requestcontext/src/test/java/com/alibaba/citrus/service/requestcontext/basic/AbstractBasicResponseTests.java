@@ -27,10 +27,10 @@ import com.alibaba.citrus.service.requestcontext.basic.impl.BasicResponseImpl;
 import com.alibaba.citrus.test.TestEnvStatic;
 
 public abstract class AbstractBasicResponseTests {
-    protected RequestContext requestContextMock;
-    protected HttpServletRequest requestMock;
+    protected RequestContext      requestContextMock;
+    protected HttpServletRequest  requestMock;
     protected HttpServletResponse responseMock;
-    protected BasicResponseImpl response;
+    protected BasicResponseImpl   response;
 
     static {
         TestEnvStatic.init();

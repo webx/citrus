@@ -19,12 +19,11 @@ package com.alibaba.citrus.service.moduleloader.impl.adapter;
 
 import static org.junit.Assert.*;
 
+import com.alibaba.citrus.service.AbstractWebTests;
+import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.alibaba.citrus.service.AbstractWebTests;
-import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 
 public class DataBindingTests extends AbstractWebTests {
     private ModuleLoaderService moduleLoader;
@@ -66,5 +65,4 @@ public class DataBindingTests extends AbstractWebTests {
 
         assertEquals(s, adapter.toString());
     }
-
 }

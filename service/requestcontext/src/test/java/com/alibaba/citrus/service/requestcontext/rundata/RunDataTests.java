@@ -23,17 +23,14 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
+import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
+import com.meterware.httpunit.HttpUnitUtils;
 import org.apache.commons.fileupload.FileItem;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
-import com.meterware.httpunit.HttpUnitUtils;
-
-/**
- * 测试<code>RunData</code>。
- */
+/** 测试<code>RunData</code>。 */
 public class RunDataTests extends AbstractRequestContextsTests<RunData> {
     @BeforeClass
     public static void initFactory() {

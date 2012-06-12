@@ -39,11 +39,11 @@ import java.io.Writer;
  */
 public class ReaderOutputEngine implements OutputEngine {
     private static final int DEFAULT_BUFFER_SIZE = 8192;
-    private Reader reader;
-    private String encoding;
+    private Reader              reader;
+    private String              encoding;
     private OutputStreamFactory factory;
-    private char[] buffer;
-    private Writer writer;
+    private char[]              buffer;
+    private Writer              writer;
 
     public ReaderOutputEngine(Reader reader) {
         this(reader, null, null, DEFAULT_BUFFER_SIZE);

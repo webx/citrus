@@ -22,19 +22,18 @@ import static java.util.Collections.*;
 
 import java.util.Map;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-
 import com.alibaba.citrus.service.AbstractService;
 import com.alibaba.citrus.service.mappingrule.MappingRule;
 import com.alibaba.citrus.service.mappingrule.MappingRuleNotFoundException;
 import com.alibaba.citrus.service.mappingrule.MappingRuleService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 public class MappingRuleServiceImpl extends AbstractService<MappingRuleService> implements MappingRuleService,
-        ApplicationContextAware {
+                                                                                           ApplicationContextAware {
     private final static String DEFAULT_BEAN_NAME = "mappingRuleService";
-    private ApplicationContext factory;
-    private MappingRuleService parent;
+    private ApplicationContext       factory;
+    private MappingRuleService       parent;
     private Map<String, MappingRule> rules;
 
     public void setApplicationContext(ApplicationContext factory) {

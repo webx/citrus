@@ -38,21 +38,19 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.scripting.config.LangNamespaceUtils;
 import org.w3c.dom.Element;
 
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
-
 /**
  * 解析script-modules。
  *
  * @author Michael Zhou
  */
 public class ScriptModuleFactoryDefinitionParser extends AbstractModuleFactoryDefinitionParser<ScriptModuleFactory> {
-    private static final String LANG_URI = "http://www.springframework.org/schema/lang";
+    private static final String LANG_URI                = "http://www.springframework.org/schema/lang";
     private static final String SCRIPT_SOURCE_ATTRIBUTE = "script-source";
 
     @Override
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         Map<String, ParsingModuleInfo> scripts = parseSpecificBeans(element, parserContext,
-                builder.getRawBeanDefinition(), ns(LANG_URI));
+                                                                    builder.getRawBeanDefinition(), ns(LANG_URI));
 
         ElementSelector searchFolders = and(sameNs(element), name("search-folders"));
         ElementSelector searchFiles = and(sameNs(element), name("search-files"));
@@ -67,7 +65,7 @@ public class ScriptModuleFactoryDefinitionParser extends AbstractModuleFactoryDe
 
             if (searchFolders.accept(subElement)) {
                 String folderName = assertNotNull(normalizePathName(subElement.getAttribute("folders")),
-                        "no folder name provided for search-folders");
+                                                  "no folder name provided for search-folders");
 
                 // 取prefix
                 prefix = getPrefix(folderName);
@@ -87,10 +85,10 @@ public class ScriptModuleFactoryDefinitionParser extends AbstractModuleFactoryDe
                 scriptResourceName = folderName + "/**/*.*";
 
                 log.trace("Searching in folders: {}, moduleType={}, language={}", new Object[] { folderName, typeName,
-                        language == null ? "auto" : language });
+                                                                                                 language == null ? "auto" : language });
             } else if (searchFiles.accept(subElement)) {
                 String fileName = assertNotNull(normalizePathName(subElement.getAttribute("files")),
-                        "no script file name provided for search-files");
+                                                "no script file name provided for search-files");
 
                 // fileName不以/结尾
                 assertTrue(!fileName.endsWith("/"), "invalid script file name: %s", fileName);
@@ -122,14 +120,14 @@ public class ScriptModuleFactoryDefinitionParser extends AbstractModuleFactoryDe
 
                 // 扫描scripts
                 ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(parserContext
-                        .getReaderContext().getResourceLoader());
+                                                                                                   .getReaderContext().getResourceLoader());
                 int found = 0;
 
                 try {
                     Resource[] resources = resolver.getResources(scriptResourceName.replace('?', '*'));
                     BeanDefinitionDefaults defaults = getBeanDefinitionDefaults(subElement, parserContext);
                     ParsingModuleMatcher matcher = new ParsingModuleMatcher(scripts, scriptNamePattern, typeName,
-                            moduleName) {
+                                                                            moduleName) {
                         @Override
                         protected String getName(String name, String itemName) {
                             String ext = getExt(itemName);
@@ -154,7 +152,7 @@ public class ScriptModuleFactoryDefinitionParser extends AbstractModuleFactoryDe
 
                             if (matcher.doMatch(resourceName)) {
                                 BeanDefinition scriptBean = createScriptBean(subElement, parserContext, resourceName,
-                                        language, defaults);
+                                                                             language, defaults);
                                 String beanName = matcher.generateBeanName(resourceName, parserContext.getRegistry());
 
                                 parserContext.getRegistry().registerBeanDefinition(beanName, scriptBean);
@@ -164,7 +162,7 @@ public class ScriptModuleFactoryDefinitionParser extends AbstractModuleFactoryDe
                     }
                 } catch (IOException e) {
                     parserContext.getReaderContext().error("Failed to scan resources: " + scriptResourceName,
-                            subElement, e);
+                                                           subElement, e);
                     return;
                 }
 
@@ -192,7 +190,7 @@ public class ScriptModuleFactoryDefinitionParser extends AbstractModuleFactoryDe
         LangNamespaceUtils.registerScriptFactoryPostProcessorIfNecessary(parserContext.getRegistry());
 
         BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(getScriptFactoryClassName(resource,
-                language));
+                                                                                                              language));
         builder.getRawBeanDefinition().setSource(parserContext.extractSource(element));
         builder.addConstructorArgValue(resource);
 
@@ -248,7 +246,7 @@ public class ScriptModuleFactoryDefinitionParser extends AbstractModuleFactoryDe
     @Override
     protected String parseItemName(ParserContext parserContext, Element element, BeanDefinition bd) {
         String resourceName = assertNotNull(trimToNull(element.getAttribute(SCRIPT_SOURCE_ATTRIBUTE)),
-                "Missing Attribute: %s", SCRIPT_SOURCE_ATTRIBUTE);
+                                            "Missing Attribute: %s", SCRIPT_SOURCE_ATTRIBUTE);
 
         Resource resource = parserContext.getReaderContext().getResourceLoader().getResource(resourceName);
 

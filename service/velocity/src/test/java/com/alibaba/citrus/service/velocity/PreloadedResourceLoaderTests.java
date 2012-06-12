@@ -26,6 +26,9 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.util.Map;
 
+import com.alibaba.citrus.service.resource.support.context.ResourceLoadingXmlApplicationContext;
+import com.alibaba.citrus.service.velocity.impl.PreloadedResourceLoader;
+import com.alibaba.citrus.service.velocity.impl.Slf4jLogChute;
 import org.apache.commons.collections.ExtendedProperties;
 import org.apache.velocity.Template;
 import org.apache.velocity.runtime.RuntimeInstance;
@@ -39,14 +42,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 
-import com.alibaba.citrus.service.resource.support.context.ResourceLoadingXmlApplicationContext;
-import com.alibaba.citrus.service.velocity.impl.PreloadedResourceLoader;
-import com.alibaba.citrus.service.velocity.impl.Slf4jLogChute;
-
 public class PreloadedResourceLoaderTests extends AbstractResourceLoaderTests {
     private final Logger log = LoggerFactory.getLogger(getClass());
-    private static ApplicationContext factory;
-    private PreloadedResourceLoader velocityLoader;
+    private static ApplicationContext      factory;
+    private        PreloadedResourceLoader velocityLoader;
 
     @BeforeClass
     public static void initFactory() {

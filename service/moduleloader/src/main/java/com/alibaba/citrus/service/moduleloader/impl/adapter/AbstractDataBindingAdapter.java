@@ -19,10 +19,9 @@ package com.alibaba.citrus.service.moduleloader.impl.adapter;
 
 import static com.alibaba.citrus.util.Assert.*;
 
+import com.alibaba.citrus.service.moduleloader.Module;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.alibaba.citrus.service.moduleloader.Module;
 
 public abstract class AbstractDataBindingAdapter implements Module {
     protected final Logger log;

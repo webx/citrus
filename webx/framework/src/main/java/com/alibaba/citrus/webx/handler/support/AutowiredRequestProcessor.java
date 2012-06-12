@@ -19,17 +19,16 @@ package com.alibaba.citrus.webx.handler.support;
 
 import static com.alibaba.citrus.util.StringUtil.*;
 
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-
 import com.alibaba.citrus.util.internal.webpagelite.PageComponent;
 import com.alibaba.citrus.util.internal.webpagelite.RequestProcessor;
 import com.alibaba.citrus.webx.handler.RequestHandler;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 import com.alibaba.citrus.webx.handler.RequestHandlerNameAware;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 /**
  * 为所有的components提供注入spring beans的功能。
@@ -37,9 +36,9 @@ import com.alibaba.citrus.webx.handler.RequestHandlerNameAware;
  * @author Michael Zhou
  */
 public abstract class AutowiredRequestProcessor extends RequestProcessor<RequestHandlerContext> implements
-        RequestHandler, RequestHandlerNameAware, ApplicationContextAware, InitializingBean {
+                                                                                                RequestHandler, RequestHandlerNameAware, ApplicationContextAware, InitializingBean {
     private ApplicationContext context;
-    private String handlerName;
+    private String             handlerName;
 
     public ApplicationContext getApplicationContext() {
         return context;
@@ -55,7 +54,7 @@ public abstract class AutowiredRequestProcessor extends RequestProcessor<Request
             PageComponent pc = getComponent(path, PageComponent.class);
 
             getApplicationContext().getAutowireCapableBeanFactory().autowireBeanProperties(pc,
-                    AbstractBeanDefinition.AUTOWIRE_NO, false);
+                                                                                           AbstractBeanDefinition.AUTOWIRE_NO, false);
 
             getApplicationContext().getAutowireCapableBeanFactory().initializeBean(pc, path);
         }

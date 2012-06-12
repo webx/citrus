@@ -29,6 +29,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.alibaba.citrus.service.moduleloader.impl.ModuleKey;
+import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
+import com.alibaba.citrus.springext.util.SpringExtUtil;
+import com.alibaba.citrus.util.regex.MatchResultSubstitution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -43,18 +47,10 @@ import org.springframework.core.type.classreading.MetadataReaderFactory;
 import org.springframework.core.type.filter.TypeFilter;
 import org.w3c.dom.Element;
 
-import com.alibaba.citrus.service.moduleloader.impl.ModuleKey;
-import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
-import com.alibaba.citrus.springext.util.SpringExtUtil;
-import com.alibaba.citrus.util.regex.MatchResultSubstitution;
-
 public abstract class AbstractModuleFactoryDefinitionParser<T> extends AbstractNamedBeanDefinitionParser<T> {
     protected final Logger log = LoggerFactory.getLogger(getBeanClass(null));
 
-    /**
-     * 解析明确定义的beans，这些beans将覆盖自动搜索而得的module脚本。
-     */
+    /** 解析明确定义的beans，这些beans将覆盖自动搜索而得的module脚本。 */
     protected final Map<String, ParsingModuleInfo> parseSpecificBeans(Element element, ParserContext parserContext,
                                                                       AbstractBeanDefinition containingBd,
                                                                       ElementSelector beanSelector) {
@@ -138,15 +134,13 @@ public abstract class AbstractModuleFactoryDefinitionParser<T> extends AbstractN
         builder.addPropertyValue("modules", moduleList);
     }
 
-    /**
-     * 处理每一个匹配。
-     */
+    /** 处理每一个匹配。 */
     protected static class ParsingModuleMatcher {
         private final Map<String, ParsingModuleInfo> items;
-        private final Pattern itemPattern;
-        private final String typeName;
-        private final String moduleName;
-        private List<TypeFilter> includeFilters;
+        private final Pattern                        itemPattern;
+        private final String                         typeName;
+        private final String                         moduleName;
+        private       List<TypeFilter>               includeFilters;
 
         public ParsingModuleMatcher(Map<String, ParsingModuleInfo> items, Pattern itemPattern, String typeName,
                                     String moduleName) {
@@ -196,7 +190,6 @@ public abstract class AbstractModuleFactoryDefinitionParser<T> extends AbstractN
             }
 
             return this.match(itemName, matcher);
-
         }
 
         protected final boolean doMatch(String itemName) {
@@ -262,13 +255,11 @@ public abstract class AbstractModuleFactoryDefinitionParser<T> extends AbstractN
         }
     }
 
-    /**
-     * 代表一个module的解析时信息。
-     */
+    /** 代表一个module的解析时信息。 */
     protected static class ParsingModuleInfo {
         final BeanDefinition bd;
-        final String itemName;
-        String beanName;
+        final String         itemName;
+        String    beanName;
         ModuleKey key;
 
         public ParsingModuleInfo(String moduleType, String moduleName, String itemName) {

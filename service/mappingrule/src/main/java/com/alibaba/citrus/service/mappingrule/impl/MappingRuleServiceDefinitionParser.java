@@ -23,16 +23,15 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.Map;
 
+import com.alibaba.citrus.springext.ConfigurationPoint;
+import com.alibaba.citrus.springext.Contribution;
+import com.alibaba.citrus.springext.ContributionAware;
+import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.springext.ConfigurationPoint;
-import com.alibaba.citrus.springext.Contribution;
-import com.alibaba.citrus.springext.ContributionAware;
-import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
 
 public class MappingRuleServiceDefinitionParser extends AbstractNamedBeanDefinitionParser<MappingRuleServiceImpl>
         implements ContributionAware {
@@ -50,7 +49,7 @@ public class MappingRuleServiceDefinitionParser extends AbstractNamedBeanDefinit
 
         for (Element subElement : subElements(element)) {
             BeanDefinitionHolder rule = parseConfigurationPointBean(subElement, mappingRulesConfigurationPoint,
-                    parserContext, builder);
+                                                                    parserContext, builder);
 
             String name = trimToNull(subElement.getAttribute("id"));
 

@@ -35,9 +35,7 @@ public class PaginatorTests {
         pg = new Paginator(10);
     }
 
-    /**
-     * 测试无限多项。
-     */
+    /** 测试无限多项。 */
     @Test
     public void unknownItems() {
         assertEquals(Paginator.UNKNOWN_ITEMS, pg.getItems());
@@ -104,9 +102,7 @@ public class PaginatorTests {
         assertFalse(pg.isDisabledPage(12));
     }
 
-    /**
-     * 测试有限多项。
-     */
+    /** 测试有限多项。 */
     @Test
     public void limitedItems() {
         pg.setItems(123);

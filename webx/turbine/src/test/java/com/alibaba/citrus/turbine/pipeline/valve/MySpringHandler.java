@@ -18,7 +18,6 @@
 package com.alibaba.citrus.turbine.pipeline.valve;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +26,7 @@ import org.springframework.web.HttpRequestHandler;
 
 public class MySpringHandler implements HttpRequestHandler {
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-            IOException {
+                                                                                               IOException {
         request.setAttribute("test", "hello");
     }
 }

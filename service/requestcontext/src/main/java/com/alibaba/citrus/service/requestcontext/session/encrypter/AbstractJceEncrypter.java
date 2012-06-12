@@ -19,16 +19,15 @@ package com.alibaba.citrus.service.requestcontext.session.encrypter;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
-
 import javax.crypto.Cipher;
 
 import com.alibaba.citrus.service.requestcontext.session.encoder.SessionEncoderException;
 import com.alibaba.citrus.springext.support.BeanSupport;
 
 public abstract class AbstractJceEncrypter extends BeanSupport implements Encrypter {
-    public static final int DEFAULT_POOL_SIZE = 256;
-    private final Queue<Cipher> eciphers = new ConcurrentLinkedQueue<Cipher>();
-    private final Queue<Cipher> dciphers = new ConcurrentLinkedQueue<Cipher>();
+    public static final int           DEFAULT_POOL_SIZE = 256;
+    private final       Queue<Cipher> eciphers          = new ConcurrentLinkedQueue<Cipher>();
+    private final       Queue<Cipher> dciphers          = new ConcurrentLinkedQueue<Cipher>();
     private int poolSize;
 
     public int getPoolSize() {

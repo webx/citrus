@@ -37,10 +37,10 @@ import com.alibaba.citrus.util.internal.LazyLoader.Loader;
  * @author Michael Zhou
  */
 class ArrayTypeImpl implements ArrayTypeInfo {
-    private final Class<?> rawType;
-    private final TypeInfo componentType;
-    private final TypeInfo directComponentType;
-    private final int dimension;
+    private final Class<?>                       rawType;
+    private final TypeInfo                       componentType;
+    private final TypeInfo                       directComponentType;
+    private final int                            dimension;
     private final LazyLoader<Supertypes, Object> supertypesLoader;
 
     ArrayTypeImpl(TypeInfo componentType, TypeInfo directComponentType, int dimension, Class<?> rawType) {
@@ -131,17 +131,13 @@ class ArrayTypeImpl implements ArrayTypeInfo {
         }
     }
 
-    /**
-     * 取得hash值。
-     */
+    /** 取得hash值。 */
     @Override
     public int hashCode() {
         return getClass().hashCode() ^ componentType.hashCode() ^ dimension;
     }
 
-    /**
-     * 判断两个对象是否相同。
-     */
+    /** 判断两个对象是否相同。 */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -157,9 +153,7 @@ class ArrayTypeImpl implements ArrayTypeInfo {
         return dimension == otherType.dimension && componentType.equals(otherType.componentType);
     }
 
-    /**
-     * 取得字符串表示。
-     */
+    /** 取得字符串表示。 */
     @Override
     public String toString() {
         StringBuilder buf = new StringBuilder();
@@ -173,14 +167,12 @@ class ArrayTypeImpl implements ArrayTypeInfo {
         return buf.toString();
     }
 
-    /**
-     * 父类、接口的信息。
-     */
+    /** 父类、接口的信息。 */
     private static class Supertypes {
-        private static final TypeInfo[] ARRAY_SUPERTYPES;
-        private final List<TypeInfo> supertypes;
-        private final List<TypeInfo> interfaces;
-        private final List<TypeInfo> superclasses;
+        private static final TypeInfo[]     ARRAY_SUPERTYPES;
+        private final        List<TypeInfo> supertypes;
+        private final        List<TypeInfo> interfaces;
+        private final        List<TypeInfo> superclasses;
 
         static {
             TypeInfo[] interfaces = factory.getTypes(Object[].class.getInterfaces());
@@ -232,9 +224,7 @@ class ArrayTypeImpl implements ArrayTypeInfo {
         }
     }
 
-    /**
-     * 创建supertypes的装载器。
-     */
+    /** 创建supertypes的装载器。 */
     private class SupertypesLoader implements Loader<Supertypes, Object> {
         public Supertypes load(Object context) {
             return new Supertypes(ArrayTypeImpl.this);

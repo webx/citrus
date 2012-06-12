@@ -24,10 +24,7 @@ import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.ObjectUtil.*;
 
 import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.citrus.service.mappingrule.MappingRuleService;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
@@ -39,6 +36,7 @@ import com.alibaba.citrus.service.template.TemplateService;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunDataInternal;
 import com.alibaba.citrus.turbine.support.ContextAdapter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 渲染模板。

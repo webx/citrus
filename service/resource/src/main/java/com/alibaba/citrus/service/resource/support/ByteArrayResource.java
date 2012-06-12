@@ -35,19 +35,15 @@ import com.alibaba.citrus.util.ToStringBuilder;
  */
 public class ByteArrayResource implements Resource {
     private final byte[] bytes;
-    private final int offset;
-    private final int length;
+    private final int    offset;
+    private final int    length;
 
-    /**
-     * 创建一个<code>ByteArrayResource</code>。
-     */
+    /** 创建一个<code>ByteArrayResource</code>。 */
     public ByteArrayResource(byte[] bytes) {
         this(assertNotNull(bytes, "bytes"), 0, bytes.length);
     }
 
-    /**
-     * 创建一个<code>ByteArrayResource</code>。
-     */
+    /** 创建一个<code>ByteArrayResource</code>。 */
     public ByteArrayResource(byte[] bytes, int offset, int length) {
         this.bytes = assertNotNull(bytes, "bytes");
 
@@ -59,30 +55,22 @@ public class ByteArrayResource implements Resource {
         this.length = length;
     }
 
-    /**
-     * 取得资源的<code>URL</code>。
-     */
+    /** 取得资源的<code>URL</code>。 */
     public URL getURL() {
         return null;
     }
 
-    /**
-     * 取得资源的<code>File</code>。
-     */
+    /** 取得资源的<code>File</code>。 */
     public File getFile() {
         return null;
     }
 
-    /**
-     * 取得资源的<code>InputStream</code>。
-     */
+    /** 取得资源的<code>InputStream</code>。 */
     public InputStream getInputStream() throws IOException {
         return new ByteArrayInputStream(bytes, offset, length);
     }
 
-    /**
-     * 判断资源是否存在。
-     */
+    /** 判断资源是否存在。 */
     public boolean exists() {
         return bytes != null;
     }
@@ -144,9 +132,7 @@ public class ByteArrayResource implements Resource {
         return true;
     }
 
-    /**
-     * 将resource转换成字符串表示。
-     */
+    /** 将resource转换成字符串表示。 */
     @Override
     public String toString() {
         ToStringBuilder buf = new ToStringBuilder();

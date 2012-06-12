@@ -28,6 +28,12 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
+import com.alibaba.citrus.service.requestcontext.support.ValueListSupport;
+import com.alibaba.citrus.service.requestcontext.util.ValueList;
+import com.alibaba.citrus.service.upload.support.StringFileItemEditor;
+import com.alibaba.citrus.util.ObjectUtil;
+import com.alibaba.citrus.util.StringUtil;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 import org.slf4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
@@ -35,13 +41,6 @@ import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.SimpleTypeConverter;
 import org.springframework.beans.TypeConverter;
 import org.springframework.core.MethodParameter;
-
-import com.alibaba.citrus.service.requestcontext.support.ValueListSupport;
-import com.alibaba.citrus.service.requestcontext.util.ValueList;
-import com.alibaba.citrus.service.upload.support.StringFileItemEditor;
-import com.alibaba.citrus.util.ObjectUtil;
-import com.alibaba.citrus.util.StringUtil;
-import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 代表一个解析器的基类，用来取得HTTP请求中的参数和cookies。
@@ -51,7 +50,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  */
 public abstract class AbstractValueParser implements ValueParser {
     protected final SimpleTypeConverter converter;
-    protected final Map<String, Object> parameters = createLinkedHashMap();
+    protected final Map<String, Object> parameters    = createLinkedHashMap();
     protected final Map<String, String> parameterKeys = createLinkedHashMap();
     protected final ParserRequestContext requestContext;
 
@@ -137,7 +136,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
      *
-     * @param key 参数名
+     * @param key          参数名
      * @param defaultValue 默认值
      * @return 参数值
      */
@@ -160,7 +159,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
      *
-     * @param key 参数名
+     * @param key          参数名
      * @param defaultValue 默认值
      * @return 参数值
      */
@@ -195,7 +194,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
      *
-     * @param key 参数名
+     * @param key          参数名
      * @param defaultValue 默认值
      * @return 参数值
      */
@@ -218,7 +217,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
      *
-     * @param key 参数名
+     * @param key          参数名
      * @param defaultValue 默认值
      * @return 参数值
      */
@@ -241,7 +240,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
      *
-     * @param key 参数名
+     * @param key          参数名
      * @param defaultValue 默认值
      * @return 参数值
      */
@@ -264,7 +263,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
      *
-     * @param key 参数名
+     * @param key          参数名
      * @param defaultValue 默认值
      * @return 参数值
      */
@@ -287,7 +286,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回指定默认值。
      *
-     * @param key 参数名
+     * @param key          参数名
      * @param defaultValue 默认值
      * @return 参数值的数组
      */
@@ -310,7 +309,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
      *
-     * @param key 参数名
+     * @param key          参数名
      * @param defaultValue 默认值
      * @return 参数值
      */
@@ -333,7 +332,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回指定默认值。
      *
-     * @param key 参数名
+     * @param key          参数名
      * @param defaultValue 默认值
      * @return 参数值的数组
      */
@@ -356,7 +355,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
      *
-     * @param key 参数名
+     * @param key          参数名
      * @param defaultValue 默认值
      * @return 参数值
      */
@@ -379,7 +378,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 取得参数值，如果指定名称的参数不存在，则返回指定默认值。
      *
-     * @param key 参数名
+     * @param key          参数名
      * @param defaultValue 默认值
      * @return 参数值
      */
@@ -402,7 +401,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回指定默认值。
      *
-     * @param key 参数名
+     * @param key          参数名
      * @param defaultValue 默认值
      * @return 参数值的数组
      */
@@ -425,7 +424,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 取得日期。字符串将使用指定的<code>DateFormat</code>来解析。如果不存在，则返回<code>null</code>。
      *
-     * @param key 参数名
+     * @param key    参数名
      * @param format <code>DateFormat</code>对象
      * @return <code>java.util.Date</code>对象
      */
@@ -437,8 +436,8 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 取得日期。字符串将使用指定的<code>DateFormat</code>来解析。如果不存在，则返回默认值。
      *
-     * @param key 参数名
-     * @param format <code>DateFormat</code>对象
+     * @param key          参数名
+     * @param format       <code>DateFormat</code>对象
      * @param defaultValue 默认值
      * @return <code>java.util.Date</code>对象
      */
@@ -461,7 +460,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 取得指定参数的值。如果参数不存在，则返回默认值。
      *
-     * @param key 参数名
+     * @param key          参数名
      * @param defaultValue 默认值
      * @return 参数值
      */
@@ -484,7 +483,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 取得指定参数的所有值。如果参数不存在，则返回指定默认值。
      *
-     * @param key 参数名
+     * @param key          参数名
      * @param defaultValue 默认值
      * @return 参数值的数组
      */
@@ -493,23 +492,17 @@ public abstract class AbstractValueParser implements ValueParser {
         return container == null ? defaultValue : container.getValues(defaultValue);
     }
 
-    /**
-     * 取得指定类型的对象。
-     */
+    /** 取得指定类型的对象。 */
     public <T> T getObjectOfType(String key, Class<T> type) {
         return getObjectOfType(key, type, null, null);
     }
 
-    /**
-     * 取得指定类型的对象。
-     */
+    /** 取得指定类型的对象。 */
     public <T> T getObjectOfType(String key, Class<T> type, MethodParameter methodParameter, Object[] defaultValues) {
         return getObjectOfType(key, type, false, methodParameter, defaultValues);
     }
 
-    /**
-     * 取得指定类型的对象。
-     */
+    /** 取得指定类型的对象。 */
     <T> T getObjectOfType(String key, Class<T> type, boolean isPrimitive, MethodParameter methodParameter,
                           Object[] defaultValues) {
         ValueList container = getValueList(key, false);
@@ -552,7 +545,7 @@ public abstract class AbstractValueParser implements ValueParser {
                 bean.setPropertyValue(propertyName, value);
             } else {
                 getLogger().debug("No writable property \"{}\" found in type {}", propertyName,
-                        object.getClass().getName());
+                                  object.getClass().getName());
             }
         }
     }
@@ -564,7 +557,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 添加参数名/参数值。
      *
-     * @param key 参数名
+     * @param key   参数名
      * @param value 参数值
      */
     public void add(String key, boolean value) {
@@ -574,7 +567,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 添加参数名/参数值。
      *
-     * @param key 参数名
+     * @param key   参数名
      * @param value 参数值
      */
     public void add(String key, byte value) {
@@ -584,7 +577,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 添加参数名/参数值。
      *
-     * @param key 参数名
+     * @param key   参数名
      * @param value 参数值
      */
     public void add(String key, char value) {
@@ -594,7 +587,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 添加参数名/参数值。
      *
-     * @param key 参数名
+     * @param key   参数名
      * @param value 参数值
      */
     public void add(String key, double value) {
@@ -604,7 +597,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 添加参数名/参数值。
      *
-     * @param key 参数名
+     * @param key   参数名
      * @param value 参数值
      */
     public void add(String key, float value) {
@@ -614,7 +607,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 添加参数名/参数值。
      *
-     * @param key 参数名
+     * @param key   参数名
      * @param value 参数值
      */
     public void add(String key, int value) {
@@ -624,7 +617,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 添加参数名/参数值。
      *
-     * @param key 参数名
+     * @param key   参数名
      * @param value 参数值
      */
     public void add(String key, long value) {
@@ -634,7 +627,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 添加参数名/参数值。
      *
-     * @param key 参数名
+     * @param key   参数名
      * @param value 参数值
      */
     public void add(String key, short value) {
@@ -644,7 +637,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 添加参数名/参数值。
      *
-     * @param key 参数名
+     * @param key   参数名
      * @param value 参数值
      */
     public void add(String key, Object value) {
@@ -654,7 +647,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 设置参数值。和<code>add</code>方法不同，此方法将覆盖原有的值。
      *
-     * @param key 参数名
+     * @param key   参数名
      * @param value 参数值
      */
     public void setString(String key, String value) {
@@ -664,7 +657,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 设置参数值。和<code>add</code>方法不同，此方法将覆盖原有的值。
      *
-     * @param key 参数名
+     * @param key    参数名
      * @param values 参数值的数组
      */
     public void setStrings(String key, String[] values) {
@@ -674,7 +667,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 设置参数值。和<code>add</code>方法不同，此方法将覆盖原有的值。
      *
-     * @param key 参数名
+     * @param key   参数名
      * @param value 参数值
      */
     public void setObject(String key, Object value) {
@@ -684,7 +677,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 设置参数值。和<code>add</code>方法不同，此方法将覆盖原有的值。
      *
-     * @param key 参数名
+     * @param key    参数名
      * @param values 参数值
      */
     public void setObjects(String key, Object[] values) {
@@ -706,9 +699,7 @@ public abstract class AbstractValueParser implements ValueParser {
         return parameters.remove(key);
     }
 
-    /**
-     * 清除所有值。
-     */
+    /** 清除所有值。 */
     public void clear() {
         parameterKeys.clear();
         parameters.clear();
@@ -736,7 +727,7 @@ public abstract class AbstractValueParser implements ValueParser {
     /**
      * 取得指定参数的值的列表。
      *
-     * @param key 参数名
+     * @param key    参数名
      * @param create 如果参数不存在，是否创建之
      * @return 参数值的列表，如果参数不存在，且<code>create==false</code>，则返回<code>null</code>
      */

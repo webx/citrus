@@ -20,10 +20,9 @@ package com.alibaba.citrus.turbine.pipeline.valve;
 import static com.alibaba.citrus.turbine.util.TurbineUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import com.alibaba.citrus.turbine.TurbineRunData;
+import org.junit.Test;
 
 public class PerformActionValveTests extends AbstractValveTests {
     @Test

@@ -24,7 +24,7 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
  * <p>
  * 一个Turbine风格的content URI包括如下几个部分：
  * </p>
- *
+ * <p/>
  * <pre>
  * URI         = SERVER_INFO + PATH + "?" + QUERY_DATA + "#" + REFERENCE
  * SERVER_INFO = scheme://loginUser:loginPassword@serverName:serverPort
@@ -36,7 +36,7 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
  * <p>
  * 例如：
  * </p>
- *
+ * <p/>
  * <pre>
  * http://user:pass@myserver.com:8080/mycontext/myservlet/mycomponent/myContent.jpg
  * </pre>
@@ -45,14 +45,12 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
  */
 
 public class TurbineContentURIBroker extends WebxURIBroker {
-    protected static final int PREFIX_PATH_INDEX = COMPONENT_PATH_INDEX + 1;
+    protected static final int PREFIX_PATH_INDEX  = COMPONENT_PATH_INDEX + 1;
     protected static final int CONTENT_PATH_INDEX = COMPONENT_PATH_INDEX + 2;
     private boolean hasPrefixPath;
     private boolean hasContentPath;
 
-    /**
-     * 取得prefix path。
-     */
+    /** 取得prefix path。 */
     public String getPrefixPath() {
         if (hasPrefixPath) {
             return getPathSegmentAsString(PREFIX_PATH_INDEX);
@@ -61,18 +59,14 @@ public class TurbineContentURIBroker extends WebxURIBroker {
         }
     }
 
-    /**
-     * 设置prefix path。
-     */
+    /** 设置prefix path。 */
     public TurbineContentURIBroker setPrefixPath(String prefixPath) {
         setPathSegment(PREFIX_PATH_INDEX, prefixPath);
         hasPrefixPath = true;
         return this;
     }
 
-    /**
-     * 取得content path。
-     */
+    /** 取得content path。 */
     public String getContentPath() {
         if (hasContentPath) {
             return getPathSegmentAsString(CONTENT_PATH_INDEX);
@@ -81,18 +75,14 @@ public class TurbineContentURIBroker extends WebxURIBroker {
         }
     }
 
-    /**
-     * 设置content path。
-     */
+    /** 设置content path。 */
     public TurbineContentURIBroker setContentPath(String contentPath) {
         setPathSegment(CONTENT_PATH_INDEX, contentPath);
         hasContentPath = true;
         return this;
     }
 
-    /**
-     * 设置content path。
-     */
+    /** 设置content path。 */
     public TurbineContentURIBroker getURI(String uri) {
         return setContentPath(setUriAndGetPath(uri));
     }

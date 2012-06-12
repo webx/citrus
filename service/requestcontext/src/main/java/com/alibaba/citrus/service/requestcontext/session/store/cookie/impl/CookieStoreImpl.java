@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
@@ -52,17 +51,17 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public class CookieStoreImpl extends AbstractCookieStore {
-    private static final String NAME_PATTERN_SUFFIX = "(\\d+)";
-    private static final Integer MAX_LENGTH_DEFAULT = (int) (4096 - 200);
-    private static final Integer MAX_COUNT_DEFAULT = 5;
-    private static final Boolean CHECKSUM_DEFAULT = false;
-    private static final String CHECKSUM_SEPARATOR = "|";
-    private static final int CHECKSUM_LENGTH = 15;
-    private Pattern namePattern;
-    private Integer maxLength;
-    private Integer maxCount;
-    private Boolean checksum;
-    private String checksumName;
+    private static final String  NAME_PATTERN_SUFFIX = "(\\d+)";
+    private static final Integer MAX_LENGTH_DEFAULT  = (int) (4096 - 200);
+    private static final Integer MAX_COUNT_DEFAULT   = 5;
+    private static final Boolean CHECKSUM_DEFAULT    = false;
+    private static final String  CHECKSUM_SEPARATOR  = "|";
+    private static final int     CHECKSUM_LENGTH     = 15;
+    private Pattern          namePattern;
+    private Integer          maxLength;
+    private Integer          maxCount;
+    private Boolean          checksum;
+    private String           checksumName;
     private SessionEncoder[] encoders;
 
     public void setMaxLength(int maxLength) {
@@ -181,8 +180,8 @@ public class CookieStoreImpl extends AbstractCookieStore {
 
         if (cookieState.length() > maxLength * maxCount) {
             log.warn("Cookie store full! length {} exceeds the max length: {} * {}.\n"
-                    + " All session attributes will be LOST!",
-                    new Object[] { cookieState.length(), maxLength, maxCount });
+                     + " All session attributes will be LOST!",
+                     new Object[] { cookieState.length(), maxLength, maxCount });
         } else {
             StringBuilder checksumBuf = null;
 
@@ -224,9 +223,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
         }
     }
 
-    /**
-     * 取得cookie store的状态。
-     */
+    /** 取得cookie store的状态。 */
     private State getState(StoreContext storeContext) {
         State state = (State) storeContext.getState();
 
@@ -239,9 +236,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
         return state;
     }
 
-    /**
-     * 确保cookie被装载。
-     */
+    /** 确保cookie被装载。 */
     private void ensureCookieLoading(State state, HttpServletRequest request, StoreContext storeContext) {
         if (state.cookieLoaded) {
             return;
@@ -265,9 +260,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
         state.attributes = decodeCookieValue(state.mergedCookieValue, storeContext);
     }
 
-    /**
-     * 读取cookies。
-     */
+    /** 读取cookies。 */
     private CookiesInfo readCookies(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
 
@@ -317,7 +310,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
                 }
             } else {
                 buf.format("\n %s[expected cookies=%d]=%s", checksumName, cookiesInfo.checksumList.length,
-                        ObjectUtil.toString(cookiesInfo.checksumList));
+                           ObjectUtil.toString(cookiesInfo.checksumList));
             }
 
             for (CookieInfo cookieInfo : cookiesInfo.cookieList) {
@@ -336,9 +329,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
         return cookiesInfo;
     }
 
-    /**
-     * 检查cookies。
-     */
+    /** 检查cookies。 */
     private boolean validateCookies(List<CookieInfo> cookieList, String[] checksumList) {
         int checksumListSize = 0;
         int index = 0;
@@ -355,7 +346,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
             if (index < checksumListSize) {
                 if (!cookieInfo.value.startsWith(checksumList[index])) {
                     log.warn("{} does not match the checksum.  "
-                            + "Expected prefix: {}[length={}], actually: {}[length={}]", new Object[] {
+                             + "Expected prefix: {}[length={}], actually: {}[length={}]", new Object[] {
                             cookieInfo.name, checksumList[index], checksumList[index].length(), cookieInfo.value,
                             cookieInfo.value.length() });
 
@@ -368,7 +359,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
 
         if (checksumList != null && index != checksumListSize) {
             log.warn("Number of cookies {}* does not match checksum.  Expected cookies: {}" + ", actually: {}",
-                    new Object[] { getName(), checksumListSize, index });
+                     new Object[] { getName(), checksumListSize, index });
 
             return false;
         }
@@ -376,9 +367,7 @@ public class CookieStoreImpl extends AbstractCookieStore {
         return true;
     }
 
-    /**
-     * 检查和合并cookies。
-     */
+    /** 检查和合并cookies。 */
     private String mergeCookies(List<CookieInfo> cookieList, String[] checksumList) {
         StringBuilder buf = new StringBuilder();
         int index = 0;
@@ -465,36 +454,30 @@ public class CookieStoreImpl extends AbstractCookieStore {
         mb.append("encoders", encoders);
     }
 
-    /**
-     * 用来保存所有cookies的信息。
-     */
+    /** 用来保存所有cookies的信息。 */
     private static class CookiesInfo {
         private Map<String, CookieInfo> requestCookies;
-        private List<CookieInfo> cookieList;
-        private String[] checksumList;
-        private boolean hasChecksum;
+        private List<CookieInfo>        cookieList;
+        private String[]                checksumList;
+        private boolean                 hasChecksum;
     }
 
-    /**
-     * 存放cookie的状态。
-     */
+    /** 存放cookie的状态。 */
     private class State {
-        private boolean cookieLoaded;
-        private boolean cookieCommitted;
-        private boolean hasChecksum;
+        private boolean                 cookieLoaded;
+        private boolean                 cookieCommitted;
+        private boolean                 hasChecksum;
         private Map<String, CookieInfo> requestCookies;
-        private String mergedCookieValue;
-        private Map<String, Object> attributes;
+        private String                  mergedCookieValue;
+        private Map<String, Object>     attributes;
 
         @SuppressWarnings("unused")
         private boolean checksumValid; // used by testcase
     }
 
-    /**
-     * 保存一个cookie的信息。
-     */
+    /** 保存一个cookie的信息。 */
     private static class CookieInfo implements Comparable<CookieInfo> {
-        public final int index;
+        public final int    index;
         public final String name;
         public final String value;
 

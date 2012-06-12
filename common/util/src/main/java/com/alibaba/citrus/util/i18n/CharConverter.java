@@ -39,9 +39,7 @@ public abstract class CharConverter {
     // 私有变量
     private static final Map<String, CharConverter> converters = createConcurrentHashMap();
 
-    /**
-     * 取得一个指定名称的转换器。
-     */
+    /** 取得一个指定名称的转换器。 */
     public static final CharConverter getInstance(String name) {
         CharConverter converter = converters.get(name);
 
@@ -52,10 +50,10 @@ public abstract class CharConverter {
                 provider = (CharConverterProvider) ClassLoaderUtil.newServiceInstance("char.converter." + name);
             } catch (ClassInstantiationException e) {
                 throw new IllegalArgumentException("Failed to load char converter provider: " + name + ": "
-                        + e.getMessage());
+                                                   + e.getMessage());
             } catch (ClassNotFoundException e) {
                 throw new IllegalArgumentException("Failed to load char converter provider: " + name + ": "
-                        + e.getMessage());
+                                                   + e.getMessage());
             }
 
             converter = provider.createCharConverter();
@@ -65,21 +63,15 @@ public abstract class CharConverter {
         return converter;
     }
 
-    /**
-     * 转换一个字符。
-     */
+    /** 转换一个字符。 */
     public abstract char convert(char ch);
 
-    /**
-     * 转换一个字符串。
-     */
+    /** 转换一个字符串。 */
     public String convert(CharSequence chars) {
         return convert(chars, 0, chars.length());
     }
 
-    /**
-     * 转换一个字符串。
-     */
+    /** 转换一个字符串。 */
     public String convert(CharSequence chars, int offset, int count) {
         if (offset < 0) {
             throw new StringIndexOutOfBoundsException(offset);
@@ -104,9 +96,7 @@ public abstract class CharConverter {
         return buffer.toString();
     }
 
-    /**
-     * 转换一个字符数组，将结果写入原数组。
-     */
+    /** 转换一个字符数组，将结果写入原数组。 */
     public void convert(char[] chars) {
         convert(chars, 0, chars.length);
     }

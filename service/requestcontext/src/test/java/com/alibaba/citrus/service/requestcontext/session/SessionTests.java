@@ -34,27 +34,23 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
 import javax.servlet.http.HttpSession;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.beans.factory.BeanCreationException;
 
 import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 import com.alibaba.citrus.service.requestcontext.session.impl.SessionImpl;
 import com.alibaba.citrus.service.requestcontext.session.impl.SessionModelImpl;
 import com.alibaba.citrus.service.requestcontext.session.store.simple.impl.SimpleMemoryStoreImpl;
 import com.alibaba.citrus.service.requestcontext.util.CookieSupport;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.beans.factory.BeanCreationException;
 
-/**
- * 测试<code>Session</code>。
- */
+/** 测试<code>Session</code>。 */
 public class SessionTests extends AbstractRequestContextsTests<SessionRequestContext> {
-    private long currentTime;
+    private long        currentTime;
     private HttpSession session;
-    private String sessionID;
-    private long lastCreationTime;
+    private String      sessionID;
+    private long        lastCreationTime;
 
     @BeforeClass
     public static void initFactory() {
@@ -84,7 +80,7 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
             assertThat(
                     e,
                     exception(IllegalArgumentException.class, "No storage configured for session model",
-                            "key=SESSION_MODEL"));
+                              "key=SESSION_MODEL"));
         }
     }
 
@@ -147,7 +143,7 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
             assertThat(
                     e,
                     exception(IllegalArgumentException.class,
-                            "Session store exact1 only support exact matches to attribute names"));
+                              "Session store exact1 only support exact matches to attribute names"));
         }
 
         try {
@@ -157,13 +153,13 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
             assertThat(
                     e,
                     exception(IllegalArgumentException.class,
-                            "Session store exact2 only support exact matches to attribute names"));
+                              "Session store exact2 only support exact matches to attribute names"));
         }
 
         initRequestContext("session_exact_match_only");
 
         MyExactMatchesOnlySessionStore store = (MyExactMatchesOnlySessionStore) requestContext.getSessionConfig()
-                .getStores().getStore("exact3");
+                                                                                              .getStores().getStore("exact3");
 
         assertArrayEquals(new String[] { "a", "b", "SESSION_MODEL" }, store.attrNames);
     }
@@ -196,7 +192,7 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
         assertEquals(0, session.getMaxInactiveInterval());
 
         // session.getAttributeNames
-        assertEnumeration(new Object[] {}, session.getAttributeNames());
+        assertEnumeration(new Object[] { }, session.getAttributeNames());
 
         // session.setAttribute/getAttribute
         session.setAttribute("count", 0);
@@ -257,7 +253,7 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
         session.removeAttribute("count");
 
         // session.getAttributeNames
-        assertEnumeration(new Object[] {}, session.getAttributeNames());
+        assertEnumeration(new Object[] { }, session.getAttributeNames());
 
         // request.getRequestedSessionId
         assertEquals(sessionID, newRequest.getRequestedSessionId());
@@ -346,7 +342,7 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
         assertEquals(1, session.getMaxInactiveInterval());
 
         // session.getAttributeNames
-        assertEnumeration(new Object[] {}, session.getAttributeNames());
+        assertEnumeration(new Object[] { }, session.getAttributeNames());
 
         // session.setAttribute/getAttribute
         session.setAttribute("count", 0);
@@ -422,7 +418,7 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
         session.removeAttribute("count");
 
         // session.getAttributeNames
-        assertEnumeration(new Object[] {}, session.getAttributeNames());
+        assertEnumeration(new Object[] { }, session.getAttributeNames());
 
         // request.getRequestedSessionId
         assertEquals(sessionID, newRequest.getRequestedSessionId());
@@ -474,7 +470,7 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
         assertEquals(0, session.getMaxInactiveInterval());
 
         // session.getAttributeNames
-        assertEnumeration(new Object[] {}, session.getAttributeNames());
+        assertEnumeration(new Object[] { }, session.getAttributeNames());
 
         // session.setAttribute/getAttribute
         session.setAttribute("count", 0);
@@ -497,9 +493,9 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
 
         // response.encodeURL/encodeRedirectURL: unchanged for urlEncodeEnabled=false
         assertEquals("http://localhost/servlet/;JSESSIONID=" + sessionID,
-                newResponse.encodeURL("http://localhost/servlet/"));
+                     newResponse.encodeURL("http://localhost/servlet/"));
         assertEquals("http://localhost/servlet/;JSESSIONID=" + sessionID,
-                newResponse.encodeRedirectURL("http://localhost/servlet/"));
+                     newResponse.encodeRedirectURL("http://localhost/servlet/"));
 
         requestContexts.commitRequestContext(requestContext);
         commitToClient();
@@ -537,7 +533,7 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
         session.removeAttribute("count");
 
         // session.getAttributeNames
-        assertEnumeration(new Object[] {}, session.getAttributeNames());
+        assertEnumeration(new Object[] { }, session.getAttributeNames());
 
         // request.getRequestedSessionId
         assertEquals(sessionID, newRequest.getRequestedSessionId());
@@ -553,9 +549,9 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
 
         // response.encodeURL/encodeRedirectURL: unchanged for urlEncodeEnabled=false
         assertEquals("http://localhost/servlet/;JSESSIONID=" + sessionID,
-                newResponse.encodeURL("http://localhost/servlet/"));
+                     newResponse.encodeURL("http://localhost/servlet/"));
         assertEquals("http://localhost/servlet/;JSESSIONID=" + sessionID,
-                newResponse.encodeRedirectURL("http://localhost/servlet/"));
+                     newResponse.encodeRedirectURL("http://localhost/servlet/"));
 
         requestContexts.commitRequestContext(requestContext);
         commitToClient();
@@ -892,7 +888,7 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
             assertThat(
                     e,
                     exception(IllegalStateException.class, "Cannot call method", methodName,
-                            "the session has already invalidated"));
+                              "the session has already invalidated"));
         }
     }
 
@@ -904,7 +900,7 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
         initRequestContext("session_models");
 
         SimpleMemoryStoreImpl sms = (SimpleMemoryStoreImpl) requestContext.getSessionConfig().getStores()
-                .getStore("s10");
+                                                                          .getStore("s10");
 
         assertEquals(true, session.isNew());
         sessionID = session.getId();

@@ -20,17 +20,16 @@ package com.alibaba.citrus.turbine.dataresolver;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-import org.springframework.beans.TypeMismatchException;
-import org.springframework.context.ApplicationContext;
-
 import com.alibaba.citrus.service.form.Group;
 import com.alibaba.citrus.service.moduleloader.ActionEventException;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import com.alibaba.test2.module.action.form.MyData;
+import org.junit.Test;
+import org.springframework.beans.TypeMismatchException;
+import org.springframework.context.ApplicationContext;
 
 public class FormGroupResolverTests extends AbstractDataResolverTests {
-    private Group group;
+    private Group  group;
     private MyData data;
 
     @Test

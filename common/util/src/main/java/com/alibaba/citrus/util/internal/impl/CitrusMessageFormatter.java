@@ -34,26 +34,22 @@ import com.alibaba.citrus.util.internal.MessageFormatter;
  * @author Michael Zhou
  */
 public class CitrusMessageFormatter<T> extends MessageFormatter<T> {
-    final static String PREFIX = "com.alibaba.citrus.";
-    final static String SUFFIX = "Messages";
+    final static String PREFIX     = "com.alibaba.citrus.";
+    final static String SUFFIX     = "Messages";
     final static String RB_PACKAGE = "com.alibaba.citrus.messages.";
     private final String bundleName;
 
-    /**
-     * 创建一个<code>CitrusMessageFormatter</code>实例。
-     */
+    /** 创建一个<code>CitrusMessageFormatter</code>实例。 */
     public CitrusMessageFormatter() {
         String name = getClass().getName();
 
         assertTrue(name.startsWith(PREFIX) && name.endsWith(SUFFIX), "Unsupported Message class: ", name);
 
         this.bundleName = RB_PACKAGE
-                + name.substring(PREFIX.length(), name.length() - SUFFIX.length()).replace('.', '_');
+                          + name.substring(PREFIX.length(), name.length() - SUFFIX.length()).replace('.', '_');
     }
 
-    /**
-     * 取得<code>ResourceBundle</code>的名称，默认和类名相同。
-     */
+    /** 取得<code>ResourceBundle</code>的名称，默认和类名相同。 */
     @Override
     protected String getBundleName() {
         return bundleName;

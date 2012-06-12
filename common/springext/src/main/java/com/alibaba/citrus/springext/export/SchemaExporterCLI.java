@@ -24,10 +24,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-import org.springframework.core.io.ResourceLoader;
-
 import com.alibaba.citrus.logconfig.LogConfigurator;
 import com.alibaba.citrus.springext.Schemas;
+import org.springframework.core.io.ResourceLoader;
 
 /**
  * 在命令行上调用<code>SchemaExporter</code>，可以把schema输出到文件中。

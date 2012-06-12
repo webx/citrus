@@ -53,7 +53,7 @@ public class CodeTableMaker extends CharsetTool {
 
         try {
             out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(destfile),
-                    ChineseCharConverterProvider.CODE_TABLE_CHARSET));
+                                                            ChineseCharConverterProvider.CODE_TABLE_CHARSET));
 
             for (int i = 0; i < table.length; i++) {
                 char ch = table[i];

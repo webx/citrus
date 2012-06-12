@@ -21,7 +21,6 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.io.IOException;
 import java.io.OutputStream;
-
 import javax.activation.DataSource;
 
 /**

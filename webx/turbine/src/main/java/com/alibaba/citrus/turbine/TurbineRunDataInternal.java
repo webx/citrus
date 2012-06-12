@@ -33,19 +33,13 @@ public interface TurbineRunDataInternal extends TurbineRunData, Navigator, Contr
 
     Context getContext();
 
-    /**
-     * 取得当前的context。
-     */
+    /** 取得当前的context。 */
     Context getCurrentContext();
 
-    /**
-     * 修改当前的context。
-     */
+    /** 修改当前的context。 */
     void pushContext(Context context);
 
-    /**
-     * 修改当前的context。
-     */
+    /** 修改当前的context。 */
     void pushContext(Context context, String template);
 
     /**
@@ -55,8 +49,6 @@ public interface TurbineRunDataInternal extends TurbineRunData, Navigator, Contr
      */
     Context popContext() throws IllegalStateException;
 
-    /**
-     * 取得明确指定的layout模板。
-     */
+    /** 取得明确指定的layout模板。 */
     String getLayoutTemplateOverride();
 }

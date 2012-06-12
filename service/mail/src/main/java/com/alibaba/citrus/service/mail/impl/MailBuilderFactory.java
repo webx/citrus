@@ -19,11 +19,10 @@ package com.alibaba.citrus.service.mail.impl;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.FactoryBean;
-
 import com.alibaba.citrus.service.mail.builder.MailAddressType;
 import com.alibaba.citrus.service.mail.builder.MailBuilder;
 import com.alibaba.citrus.service.mail.builder.MailContent;
+import org.springframework.beans.factory.FactoryBean;
 
 public class MailBuilderFactory implements FactoryBean {
     private final MailBuilder builder = new MailBuilder();

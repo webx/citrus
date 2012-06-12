@@ -21,15 +21,14 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
-import org.easymock.EasyMock;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pipeline.Condition;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.PipelineInvocationHandle;
 import com.alibaba.citrus.service.pipeline.impl.condition.JexlCondition;
 import com.alibaba.citrus.service.pipeline.impl.valve.IfValve;
+import org.easymock.EasyMock;
+import org.junit.Before;
+import org.junit.Test;
 
 public class IfValveTests extends AbstractValveTests<IfValve> {
     private Condition condition;
@@ -117,13 +116,13 @@ public class IfValveTests extends AbstractValveTests<IfValve> {
         valve.setBlock(createPipeline(new LogValve(), new LogValve(), new LogValve()));
         valve.afterPropertiesSet();
 
-        expect(condition.isSatisfied(EasyMock.<PipelineContext> anyObject())).andReturn(true);
+        expect(condition.isSatisfied(EasyMock.<PipelineContext>anyObject())).andReturn(true);
         replay(condition);
 
         assertInvoke(pipeline, false);
         assertLog("1-1" /* if */, //
-                "2-1", "2-2", "2-3", //
-                "1-3");
+                  "2-1", "2-2", "2-3", //
+                  "1-3");
     }
 
     @Test
@@ -133,12 +132,12 @@ public class IfValveTests extends AbstractValveTests<IfValve> {
         valve.setBlock(createPipeline(new LogValve(), new LogValve(), new LogValve()));
         valve.afterPropertiesSet();
 
-        expect(condition.isSatisfied(EasyMock.<PipelineContext> anyObject())).andReturn(false);
+        expect(condition.isSatisfied(EasyMock.<PipelineContext>anyObject())).andReturn(false);
         replay(condition);
 
         assertInvoke(pipeline, false);
         assertLog("1-1" /* if */, //
-                "1-3");
+                  "1-3");
     }
 
     @Test
@@ -152,24 +151,24 @@ public class IfValveTests extends AbstractValveTests<IfValve> {
         pipeline = getPipelineImplFromFactory("if-satisfied");
         assertInvoke(pipeline, false);
         assertLog("1-1" /* if */, //
-                "2-1", "2-2", "2-3", //
-                "1-3");
+                  "2-1", "2-2", "2-3", //
+                  "1-3");
 
         // not satisfied
         pipeline = getPipelineImplFromFactory("if-not-satisfied");
         assertInvoke(pipeline, false);
         assertLog("1-1" /* if */, //
-                "1-3");
+                  "1-3");
 
         pipeline = getPipelineImplFromFactory("if-condition-label");
         assertInvoke(pipeline, false);
         assertLog("1-1" /* if-block1 */, //
-                /* loop *///
-                "3-1-loop-0" /* if loopCount==2 */, "3-3-loop-0", //
-                "3-1-loop-1" /* if loopCount==2 */, "3-3-loop-1", //
-                "3-1-loop-2" /* if loopCount==2 */, //
-                /* 4-1 break to if-block1 *///
-                "1-3");
+                  /* loop *///
+                  "3-1-loop-0" /* if loopCount==2 */, "3-3-loop-0", //
+                  "3-1-loop-1" /* if loopCount==2 */, "3-3-loop-1", //
+                  "3-1-loop-2" /* if loopCount==2 */, //
+                  /* 4-1 break to if-block1 *///
+                  "1-3");
 
         // pipeline reference
         pipeline = getPipelineImplFromFactory("if-ref");
@@ -177,7 +176,7 @@ public class IfValveTests extends AbstractValveTests<IfValve> {
         handle.setAttribute("value", 1);
         handle.invoke();
         assertLog("1-1", //
-                /* if value==1 */"2-1", //
-                "1-3");
+                  /* if value==1 */"2-1", //
+                  "1-3");
     }
 }

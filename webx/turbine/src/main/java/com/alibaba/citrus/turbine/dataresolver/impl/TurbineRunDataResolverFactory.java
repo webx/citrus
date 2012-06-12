@@ -27,12 +27,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.dataresolver.DataResolver;
 import com.alibaba.citrus.service.dataresolver.DataResolverContext;
 import com.alibaba.citrus.service.dataresolver.DataResolverFactory;
@@ -46,6 +40,11 @@ import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunDataInternal;
 import com.alibaba.citrus.turbine.dataresolver.ContextValue;
 import com.alibaba.citrus.turbine.util.TurbineUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 取得和<code>TurbineRunData</code>相关的对象。
@@ -65,16 +64,16 @@ import com.alibaba.citrus.turbine.util.TurbineUtil;
  * @author Michael Zhou
  */
 public class TurbineRunDataResolverFactory implements DataResolverFactory {
-    private final static Logger log = LoggerFactory.getLogger(TurbineRunDataResolverFactory.class);
-    private final static int index_TurbineRunData = 0;
-    private final static int index_HttpServletRequest = 1;
-    private final static int index_HttpServletResponse = 2;
-    private final static int index_HttpSession = 3;
-    private final static int index_ServletContext = 4;
-    private final static int index_Parameters = 5;
-    private final static int index_Cookies = 6;
-    private final static int index_Context = 7;
-    private final static int index_RequestContext = 8;
+    private final static Logger log                       = LoggerFactory.getLogger(TurbineRunDataResolverFactory.class);
+    private final static int    index_TurbineRunData      = 0;
+    private final static int    index_HttpServletRequest  = 1;
+    private final static int    index_HttpServletResponse = 2;
+    private final static int    index_HttpSession         = 3;
+    private final static int    index_ServletContext      = 4;
+    private final static int    index_Parameters          = 5;
+    private final static int    index_Cookies             = 6;
+    private final static int    index_Context             = 7;
+    private final static int    index_RequestContext      = 8;
 
     private final HttpServletRequest request;
 
@@ -143,7 +142,7 @@ public class TurbineRunDataResolverFactory implements DataResolverFactory {
 
             if (contextValueAnnotation != null) {
                 String name = assertNotNull(trimToNull(contextValueAnnotation.value()), "missing @%s's name: %s",
-                        ContextValue.class.getSimpleName(), context);
+                                            ContextValue.class.getSimpleName(), context);
 
                 return new ContextValueResolver(context, name);
             }
@@ -224,7 +223,7 @@ public class TurbineRunDataResolverFactory implements DataResolverFactory {
                             .getTypeInfo().getRawType();
 
                     return RequestContextUtil.findRequestContext(getTurbineRunData().getRequestContext(),
-                            requestContextType);
+                                                                 requestContextType);
 
                 default:
                     unreachableCode();
@@ -263,7 +262,7 @@ public class TurbineRunDataResolverFactory implements DataResolverFactory {
 
             if (value != null && !paramType.isInstance(value)) {
                 log.warn("Failed to convert context value of type [" + value.getClass().getSimpleName()
-                        + "] to parameter type [" + paramType.getName() + "]");
+                         + "] to parameter type [" + paramType.getName() + "]");
 
                 value = null;
             }

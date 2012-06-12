@@ -21,17 +21,15 @@ import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.webx.util.ErrorHandlerHelper.ExceptionCodeMapping;
 import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ErrorHandlerHelperTests {
     private HttpServletRequest request;

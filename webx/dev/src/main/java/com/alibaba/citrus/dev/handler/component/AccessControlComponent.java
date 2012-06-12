@@ -82,8 +82,8 @@ public class AccessControlComponent extends PageComponent {
                 return true;
             } else {
                 // 总是接受当前主机中任意一块网卡的任意ip
-                for (Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces(); e.hasMoreElements();) {
-                    for (Enumeration<InetAddress> f = e.nextElement().getInetAddresses(); f.hasMoreElements();) {
+                for (Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces(); e.hasMoreElements(); ) {
+                    for (Enumeration<InetAddress> f = e.nextElement().getInetAddresses(); f.hasMoreElements(); ) {
                         if (addr.equals(f.nextElement())) {
                             return true;
                         }

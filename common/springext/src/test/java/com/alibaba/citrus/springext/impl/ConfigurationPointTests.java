@@ -25,24 +25,23 @@ import static org.junit.Assert.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.FatalBeanException;
-
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.test.TestEnvStatic;
 import com.alibaba.citrus.test.runner.TestNameAware;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.FatalBeanException;
 
 @RunWith(TestNameAware.class)
 public class ConfigurationPointTests {
-    private static final Method instantiateContributionImplementationMethod;
-    private ConfigurationPointsImpl cps;
+    private static final Method                  instantiateContributionImplementationMethod;
+    private              ConfigurationPointsImpl cps;
 
     static {
         TestEnvStatic.init();
         instantiateContributionImplementationMethod = getAccessibleMethod(ConfigurationPointImpl.class,
-                "instantiateContributionImplementation", new Class<?>[] { Contribution.class });
+                                                                          "instantiateContributionImplementation", new Class<?>[] { Contribution.class });
     }
 
     private Object instantiateContributionImplementation(ConfigurationPoint cp, Contribution contrib) throws Exception {
@@ -77,7 +76,7 @@ public class ConfigurationPointTests {
             assertThat(
                     e,
                     exception("not defined", "contributionType=BEAN_DEFINITION_PARSER", "contributionName=no-class",
-                            "configurationPoint=cp1", "namespaceUri=http://www.alibaba.com/test2/cp1"));
+                              "configurationPoint=cp1", "namespaceUri=http://www.alibaba.com/test2/cp1"));
         }
     }
 
@@ -96,8 +95,8 @@ public class ConfigurationPointTests {
             assertThat(
                     e,
                     exception(ClassNotFoundException.class, "not found", "contributionType=BEAN_DEFINITION_PARSER",
-                            "contribuitionClass=com.alibaba.NotExistClass", "contributionName=not-exist-class",
-                            "configurationPoint=cp1", "namespaceUri=http://www.alibaba.com/test2/cp1"));
+                              "contribuitionClass=com.alibaba.NotExistClass", "contributionName=not-exist-class",
+                              "configurationPoint=cp1", "namespaceUri=http://www.alibaba.com/test2/cp1"));
         }
     }
 
@@ -116,9 +115,9 @@ public class ConfigurationPointTests {
             assertThat(
                     e,
                     exception("Contribution class does not implement the BeanDefinitionParser interface",
-                            "contributionType=BEAN_DEFINITION_PARSER", "contribuitionClass=java.lang.String",
-                            "contributionName=wrong-class", "configurationPoint=cp1",
-                            "namespaceUri=http://www.alibaba.com/test2/cp1"));
+                              "contributionType=BEAN_DEFINITION_PARSER", "contribuitionClass=java.lang.String",
+                              "contributionName=wrong-class", "configurationPoint=cp1",
+                              "namespaceUri=http://www.alibaba.com/test2/cp1"));
         }
     }
 
@@ -137,9 +136,9 @@ public class ConfigurationPointTests {
             assertThat(
                     e,
                     exception("Contribution class does not implement the BeanDefinitionDecorator interface",
-                            "contributionType=BEAN_DEFINITION_DECORATOR", "contribuitionClass=java.lang.String",
-                            "contributionName=wrong-class", "configurationPoint=cp1",
-                            "namespaceUri=http://www.alibaba.com/test2/cp1"));
+                              "contributionType=BEAN_DEFINITION_DECORATOR", "contribuitionClass=java.lang.String",
+                              "contributionName=wrong-class", "configurationPoint=cp1",
+                              "namespaceUri=http://www.alibaba.com/test2/cp1"));
         }
     }
 
@@ -158,9 +157,9 @@ public class ConfigurationPointTests {
             assertThat(
                     e,
                     exception("Contribution class does not implement the BeanDefinitionDecorator interface",
-                            "contributionType=BEAN_DEFINITION_DECORATOR_FOR_ATTRIBUTE",
-                            "contribuitionClass=java.lang.String", "contributionName=wrong-class",
-                            "configurationPoint=cp1", "namespaceUri=http://www.alibaba.com/test2/cp1"));
+                              "contributionType=BEAN_DEFINITION_DECORATOR_FOR_ATTRIBUTE",
+                              "contribuitionClass=java.lang.String", "contributionName=wrong-class",
+                              "configurationPoint=cp1", "namespaceUri=http://www.alibaba.com/test2/cp1"));
         }
     }
 
@@ -197,12 +196,12 @@ public class ConfigurationPointTests {
         assertThat(cp.getContribution("my1", BEAN_DEFINITION_PARSER).toString(), containsString(strs[i++]));
         assertThat(cp.getContribution("my1", BEAN_DEFINITION_DECORATOR).toString(), containsString(strs[i++]));
         assertThat(cp.getContribution("my1", BEAN_DEFINITION_DECORATOR_FOR_ATTRIBUTE).toString(),
-                containsString(strs[i++]));
+                   containsString(strs[i++]));
 
         assertThat(cp.getContribution("my2", BEAN_DEFINITION_PARSER).toString(), containsString(strs[i++]));
         assertThat(cp.getContribution("my2", BEAN_DEFINITION_DECORATOR).toString(), containsString(strs[i++]));
         assertThat(cp.getContribution("my2", BEAN_DEFINITION_DECORATOR_FOR_ATTRIBUTE).toString(),
-                containsString(strs[i++]));
+                   containsString(strs[i++]));
 
         assertEquals(null, cp.getContribution("my3", BEAN_DEFINITION_PARSER));
 
@@ -273,10 +272,10 @@ public class ConfigurationPointTests {
             assertThat(
                     e,
                     exception("Contribution has a same name as the default element name for configuration point",
-                            "contributionType=BEAN_DEFINITION_PARSER",
-                            "contribuitionClass=com.alibaba.citrus.springext.contrib.MyBeanDefinitionParser",
-                            "contributionName=mybean", "configurationPoint=cp1",
-                            "namespaceUri=http://www.alibaba.com/test10/cp1"));
+                              "contributionType=BEAN_DEFINITION_PARSER",
+                              "contribuitionClass=com.alibaba.citrus.springext.contrib.MyBeanDefinitionParser",
+                              "contributionName=mybean", "configurationPoint=cp1",
+                              "namespaceUri=http://www.alibaba.com/test10/cp1"));
         }
     }
 

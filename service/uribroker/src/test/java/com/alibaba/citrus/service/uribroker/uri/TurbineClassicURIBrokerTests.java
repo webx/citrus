@@ -57,7 +57,7 @@ public class TurbineClassicURIBrokerTests extends AbstractURIBrokerFeaturesTests
         assertEquals("/template/user,adduser/screen/myscreen/action/myaction/a/1/b/2", broker.getPathInfo());
         assertEquals("/myapp/myservlet/template/user,adduser/screen/myscreen/action/myaction/a/1/b/2", broker.getPath());
         assertEquals("http:///myapp/myservlet/template/user%2Cadduser/screen/myscreen/action/myaction/a/1/b/2",
-                broker.toString());
+                     broker.toString());
     }
 
     @Override

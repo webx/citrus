@@ -23,14 +23,13 @@ import static org.junit.Assert.*;
 
 import java.util.Set;
 
+import com.alibaba.citrus.service.requestcontext.session.SessionIDGenerator;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.InitializingBean;
 
-import com.alibaba.citrus.service.requestcontext.session.SessionIDGenerator;
-
 public abstract class AbstractIDGeneratorTests<G extends SessionIDGenerator> {
-    private final int loop = 10000;
+    private final int loop        = 10000;
     private final int concurrency = 20;
     protected G idgen;
 
@@ -74,7 +73,7 @@ public abstract class AbstractIDGeneratorTests<G extends SessionIDGenerator> {
         long duration = System.currentTimeMillis() - start;
 
         System.out.printf("%s: requests=%d, concurrency=%d%n", idgen.getClass().getSimpleName(), concurrency * loop,
-                concurrency);
+                          concurrency);
 
         System.out.printf("  Total time: %,d ms.%n", duration);
         System.out.printf("Average time: %,2.2f \u03BCs.%n", (double) duration / concurrency / loop * 1000);

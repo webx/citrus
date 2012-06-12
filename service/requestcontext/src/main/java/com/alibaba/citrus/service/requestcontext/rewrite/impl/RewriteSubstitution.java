@@ -24,12 +24,7 @@ import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.regex.MatchResult;
-
 import javax.servlet.http.HttpServletResponse;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
 
 import com.alibaba.citrus.service.requestcontext.parser.ParameterParser;
 import com.alibaba.citrus.util.ArrayUtil;
@@ -39,12 +34,15 @@ import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 import com.alibaba.citrus.util.regex.MatchResultSubstitution;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 
 public class RewriteSubstitution implements InitializingBean {
     private static final Logger log = LoggerFactory.getLogger(RewriteSubstitution.class);
-    private String uri;
+    private String            uri;
     private SubstitutionFlags flags;
-    private Parameter[] parameters;
+    private Parameter[]       parameters;
 
     public void setUri(String uri) {
         this.uri = StringUtil.trimToNull(uri);
@@ -89,13 +87,13 @@ public class RewriteSubstitution implements InitializingBean {
             MatchResult ruleMatchResult = resultSubs.getMatch();
 
             subsPath = path.substring(0, ruleMatchResult.start()) // before match
-                    + subsPath // match
-                    + path.substring(ruleMatchResult.end()); // after match
+                       + subsPath // match
+                       + path.substring(ruleMatchResult.end()); // after match
         }
 
         if (log.isDebugEnabled()) {
             log.debug("Rewriting \"{}\" to \"{}\"", StringEscapeUtil.escapeJava(path),
-                    StringEscapeUtil.escapeJava(subsPath));
+                      StringEscapeUtil.escapeJava(subsPath));
         }
 
         return subsPath;
@@ -110,7 +108,7 @@ public class RewriteSubstitution implements InitializingBean {
                 parameterSubstituted = true;
 
                 log.debug("All parameters have been cleared.  To prevent from clearing the parameters, "
-                        + "just specify \"QSA\" or \"qsappend\"(query string append) flag to the substitution");
+                          + "just specify \"QSA\" or \"qsappend\"(query string append) flag to the substitution");
             }
         }
 
@@ -130,7 +128,7 @@ public class RewriteSubstitution implements InitializingBean {
 
                     if (log.isDebugEnabled()) {
                         log.debug("Set parameter: \"{}\"=\"{}\"", StringEscapeUtil.escapeJava(key),
-                                ObjectUtil.toString(values));
+                                  ObjectUtil.toString(values));
                     }
                 }
 
@@ -160,9 +158,7 @@ public class RewriteSubstitution implements InitializingBean {
         return new ToStringBuilder().append("Substitution").append(mb).toString();
     }
 
-    /**
-     * 代表substitution的标志位。
-     */
+    /** 代表substitution的标志位。 */
     public static class SubstitutionFlags extends Flags {
         public SubstitutionFlags() {
             super();
@@ -172,23 +168,17 @@ public class RewriteSubstitution implements InitializingBean {
             super(flags);
         }
 
-        /**
-         * 标志位：保留所有GET、POST、UPLOAD所得的参数。
-         */
+        /** 标志位：保留所有GET、POST、UPLOAD所得的参数。 */
         public boolean hasQSA() {
             return hasFlags("QSA", "qsappend");
         }
 
-        /**
-         * 标志位：如果一个规则被匹配，则继续处理其后继规则；如果该规则不被匹配，则其后继规则将被跳过。
-         */
+        /** 标志位：如果一个规则被匹配，则继续处理其后继规则；如果该规则不被匹配，则其后继规则将被跳过。 */
         public boolean hasC() {
             return hasFlags("C", "chain");
         }
 
-        /**
-         * 标志位：如果一个规则被匹配，并指明该参数，则立即结束。
-         */
+        /** 标志位：如果一个规则被匹配，并指明该参数，则立即结束。 */
         public boolean hasL() {
             return hasFlags("L", "last");
         }
@@ -219,7 +209,7 @@ public class RewriteSubstitution implements InitializingBean {
     }
 
     public static class Parameter implements InitializingBean {
-        private String key;
+        private String   key;
         private String[] values;
 
         public void setKey(String key) {

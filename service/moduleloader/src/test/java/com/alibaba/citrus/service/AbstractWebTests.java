@@ -24,15 +24,10 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.net.URI;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.junit.BeforeClass;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.FileSystemResource;
 
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.RequestContextChainingService;
@@ -41,25 +36,28 @@ import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import com.meterware.servletunit.InvocationContext;
 import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
+import org.junit.BeforeClass;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.FileSystemResource;
 
 public abstract class AbstractWebTests {
-    private static ApplicationContext root;
-    private static ApplicationContext devContext;
-    private static ApplicationContext prodContext;
+    private static   ApplicationContext root;
+    private static   ApplicationContext devContext;
+    private static   ApplicationContext prodContext;
     protected static ApplicationContext factory;
 
     // httpunit objects
-    protected static ServletUnitClient client;
-    protected static ServletConfig config;
-    protected InvocationContext invocationContext;
-    protected HttpServletRequest request;
-    protected HttpServletResponse response;
+    protected static ServletUnitClient   client;
+    protected static ServletConfig       config;
+    protected        InvocationContext   invocationContext;
+    protected        HttpServletRequest  request;
+    protected        HttpServletResponse response;
 
     // request context objects
     protected RequestContextChainingService requestContexts;
-    protected RunData rundata;
-    protected HttpServletRequest newRequest;
-    protected HttpServletResponse newResponse;
+    protected RunData                       rundata;
+    protected HttpServletRequest            newRequest;
+    protected HttpServletResponse           newResponse;
 
     @BeforeClass
     public static void initParentFactory() {

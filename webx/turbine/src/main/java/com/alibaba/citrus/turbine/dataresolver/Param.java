@@ -55,13 +55,9 @@ public @interface Param {
      */
     String name() default "";
 
-    /**
-     * 指定参数的默认值。
-     */
+    /** 指定参数的默认值。 */
     String defaultValue() default "";
 
-    /**
-     * 指定参数的默认值数组。
-     */
-    String[] defaultValues() default {};
+    /** 指定参数的默认值数组。 */
+    String[] defaultValues() default { };
 }

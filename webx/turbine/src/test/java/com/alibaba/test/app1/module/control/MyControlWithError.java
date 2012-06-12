@@ -19,10 +19,9 @@ package com.alibaba.test.app1.module.control;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.turbine.TurbineRunDataInternal;
 import com.alibaba.citrus.turbine.util.TurbineUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class MyControlWithError {
     @Autowired

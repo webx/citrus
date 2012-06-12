@@ -36,9 +36,7 @@ public class ObjectUtil {
     // 判空函数。
     // ==========================================================================
 
-    /**
-     * 是否为<code>null</code>、空字符串、或空数组。
-     */
+    /** 是否为<code>null</code>、空字符串、或空数组。 */
     public static boolean isEmptyObject(Object object) {
         if (object == null) {
             return true;
@@ -59,7 +57,7 @@ public class ObjectUtil {
 
     /**
      * 如果对象为<code>null</code>，则返回指定默认对象，否则返回对象本身。
-     *
+     * <p/>
      * <pre>
      * ObjectUtil.defaultIfNull(null, null)      = null
      * ObjectUtil.defaultIfNull(null, "")        = ""
@@ -68,7 +66,7 @@ public class ObjectUtil {
      * ObjectUtil.defaultIfNull(Boolean.TRUE, *) = Boolean.TRUE
      * </pre>
      *
-     * @param object 要测试的对象
+     * @param object       要测试的对象
      * @param defaultValue 默认值
      * @return 对象本身或默认对象
      */
@@ -86,7 +84,7 @@ public class ObjectUtil {
      * 比较两个对象是否完全相等。
      * <p>
      * 此方法可以正确地比较多维数组。
-     *
+     * <p/>
      * <pre>
      * ObjectUtil.equals(null, null)                  = true
      * ObjectUtil.equals(null, "")                    = false
@@ -97,7 +95,7 @@ public class ObjectUtil {
      * ObjectUtil.equals(Boolean.TRUE, Boolean.TRUE)  = true
      * ObjectUtil.equals(Boolean.TRUE, Boolean.FALSE) = false
      * </pre>
-     *
+     * <p/>
      * </p>
      *
      * @param object1 对象1
@@ -217,7 +215,7 @@ public class ObjectUtil {
     /**
      * 取得对象自身的identity，如同对象没有覆盖<code>toString()</code>方法时，
      * <code>Object.toString()</code>的原始输出。
-     *
+     * <p/>
      * <pre>
      * ObjectUtil.identityToString(null)          = null
      * ObjectUtil.identityToString("")            = "java.lang.String@1e23"
@@ -240,7 +238,7 @@ public class ObjectUtil {
     /**
      * 取得对象自身的identity，如同对象没有覆盖<code>toString()</code>方法时，
      * <code>Object.toString()</code>的原始输出。
-     *
+     * <p/>
      * <pre>
      * ObjectUtil.identityToString(null, "NULL")            = "NULL"
      * ObjectUtil.identityToString("", "NULL")              = "java.lang.String@1e23"
@@ -249,7 +247,7 @@ public class ObjectUtil {
      * ObjectUtil.identityToString(new Object[0], "NULL")   = "java.lang.Object[]@7fa"
      * </pre>
      *
-     * @param object 对象
+     * @param object  对象
      * @param nullStr 如果对象为<code>null</code>，则返回该字符串
      * @return 对象的identity，如果对象是<code>null</code>，则返回指定字符串
      */
@@ -264,7 +262,7 @@ public class ObjectUtil {
     /**
      * 将对象自身的identity——如同对象没有覆盖<code>toString()</code>方法时，
      * <code>Object.toString()</code>的原始输出——追加到<code>Appendable</code>中。
-     *
+     * <p/>
      * <pre>
      * ObjectUtil.appendIdentityToString(buf, null)          = null
      * ObjectUtil.appendIdentityToString(buf, Boolean.TRUE)  = buf.append("java.lang.Boolean@7fa")
@@ -301,7 +299,7 @@ public class ObjectUtil {
     /**
      * 取得对象的<code>toString()</code>的值，如果对象为<code>null</code>，则返回空字符串
      * <code>""</code>。
-     *
+     * <p/>
      * <pre>
      * ObjectUtil.toString(null)         = ""
      * ObjectUtil.toString("")           = ""
@@ -319,7 +317,7 @@ public class ObjectUtil {
 
     /**
      * 取得对象的<code>toString()</code>的值，如果对象为<code>null</code>，则返回指定字符串。
-     *
+     * <p/>
      * <pre>
      * ObjectUtil.toString(null, null)           = null
      * ObjectUtil.toString(null, "null")         = "null"
@@ -329,7 +327,7 @@ public class ObjectUtil {
      * ObjectUtil.toString([1, 2, 3], "null")    = "[1, 2, 3]"
      * </pre>
      *
-     * @param object 对象
+     * @param object  对象
      * @param nullStr 如果对象为<code>null</code>，则返回该字符串
      * @return 对象的<code>toString()</code>的返回值，或指定字符串
      */

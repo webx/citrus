@@ -24,13 +24,12 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.mappingrule.support.AbstractTemplateMappingRule;
 import com.alibaba.citrus.service.mappingrule.support.AbstractTemplateMappingRuleDefinitionParser;
 import com.alibaba.citrus.util.StringUtil;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 向上搜索的模板映射规则。
@@ -54,7 +53,7 @@ import com.alibaba.citrus.util.StringUtil;
  * @author Michael Zhou
  */
 public class FallbackTemplateMappingRule extends AbstractTemplateMappingRule {
-    public static final String DEFAULT_NAME = "default";
+    public static final String  DEFAULT_NAME            = "default";
     public static final boolean DEFAULT_MATCH_LAST_NAME = false;
 
     private boolean matchLastName;
@@ -139,7 +138,7 @@ public class FallbackTemplateMappingRule extends AbstractTemplateMappingRule {
     }
 
     public static class DefinitionParser extends
-            AbstractTemplateMappingRuleDefinitionParser<FallbackTemplateMappingRule> {
+                                         AbstractTemplateMappingRuleDefinitionParser<FallbackTemplateMappingRule> {
         @Override
         protected void doParseTemplateMappingRule(Element element, ParserContext parserContext,
                                                   BeanDefinitionBuilder builder) {

@@ -23,8 +23,6 @@ import static com.alibaba.citrus.util.Assert.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.service.mappingrule.MappingRuleService;
 import com.alibaba.citrus.service.moduleloader.Module;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
@@ -36,6 +34,7 @@ import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.webx.WebxException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 执行screen。
@@ -68,9 +67,7 @@ public class PerformScreenValve extends AbstractValve {
         pipelineContext.invokeNext();
     }
 
-    /**
-     * 设置content type。
-     */
+    /** 设置content type。 */
     protected void setContentType(TurbineRunData rundata) {
         // 设置content type，不需要设置charset，因为SetLocaleRequestContext已经设置了charset。
         // 避免覆盖别人设置的contentType。
@@ -79,9 +76,7 @@ public class PerformScreenValve extends AbstractValve {
         }
     }
 
-    /**
-     * 执行screen模块。
-     */
+    /** 执行screen模块。 */
     protected void performScreenModule(TurbineRunData rundata) {
         String target = assertNotNull(rundata.getTarget(), "Target was not specified");
 
@@ -110,16 +105,12 @@ public class PerformScreenValve extends AbstractValve {
         }
     }
 
-    /**
-     * 如果返回<code>true</code>，那么当模块找不到时，会抛异常。子类可以覆盖此方法，以改变行为。
-     */
+    /** 如果返回<code>true</code>，那么当模块找不到时，会抛异常。子类可以覆盖此方法，以改变行为。 */
     protected boolean isScreenModuleRequired() {
         return true;
     }
 
-    /**
-     * 根据target取得screen模块名。子类可以修改映射规则。
-     */
+    /** 根据target取得screen模块名。子类可以修改映射规则。 */
     protected String getModuleName(String target) {
         return mappingRuleService.getMappedName(SCREEN_MODULE_NO_TEMPLATE, target);
     }

@@ -20,22 +20,22 @@ package com.alibaba.citrus.turbine.util;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.easymock.EasyMock.*;
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
 import com.alibaba.citrus.turbine.util.CsrfToken.DefaultGenerator;
 import com.alibaba.citrus.util.StringUtil;
 import com.meterware.httpunit.WebRequest;
+import org.junit.Before;
+import org.junit.Test;
 
 public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
     private HttpServletRequest request;
-    private HttpSession session;
+    private HttpSession        session;
 
     @Before
     public void initMock() {
@@ -108,7 +108,7 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
 
         assertNotNull(token);
         assertTrue(StringUtil.containsOnly(token,
-                "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray()));
+                                           "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray()));
     }
 
     @Test
@@ -120,7 +120,7 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
 
         assertNotNull(token);
         assertThat(tool.getHiddenField(true).toString(),
-                containsString("<input name='_csrf_token' type='hidden' value='"));
+                   containsString("<input name='_csrf_token' type='hidden' value='"));
         assertThat(tool.getLongLiveHiddenField().toString(), containsString(token));
         assertEquals("_csrf_token", CsrfToken.getKey());
 
@@ -138,7 +138,7 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
         assertEquals(token, tool.getLongLiveToken());
 
         assertThat(tool.getHiddenField(true).toString(),
-                containsString("<input name='_csrf_token' type='hidden' value='"));
+                   containsString("<input name='_csrf_token' type='hidden' value='"));
         assertThat(tool.getLongLiveHiddenField().toString(), containsString(token));
         assertEquals("_csrf_token", CsrfToken.getKey());
 
@@ -147,7 +147,7 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
 
         assertNotNull(token2);
         assertThat(tool.getHiddenField(false).toString(),
-                containsString("<input name='_csrf_token' type='hidden' value='"));
+                   containsString("<input name='_csrf_token' type='hidden' value='"));
         assertThat(tool.getUniqueHiddenField().toString(), containsString(token2));
         assertEquals("_csrf_token", CsrfToken.getKey());
         assertEquals(token2, newRequest.getSession().getAttribute("_csrf_token"));
@@ -162,7 +162,7 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
         assertEquals(token, tool.getLongLiveToken());
 
         assertThat(tool.getHiddenField(true).toString(),
-                containsString("<input name='_csrf_token' type='hidden' value='"));
+                   containsString("<input name='_csrf_token' type='hidden' value='"));
         assertThat(tool.getLongLiveHiddenField().toString(), containsString(token));
         assertEquals("_csrf_token", CsrfToken.getKey());
 
@@ -195,7 +195,7 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
         assertFalse(token.equals(token3)); // token由id和时间共同生成，因此即使id不变，token也改变
         assertNotNull(token3);
         assertThat(tool.getHiddenField(true).toString(),
-                containsString("<input name='_csrf_token' type='hidden' value='"));
+                   containsString("<input name='_csrf_token' type='hidden' value='"));
         assertThat(tool.getLongLiveHiddenField().toString(), containsString(token3));
         assertEquals("_csrf_token", CsrfToken.getKey());
 
@@ -210,7 +210,7 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
 
         assertNotNull(token);
         assertThat(tool.getUniqueHiddenField().toString(),
-                containsString("<input name='_csrf_token' type='hidden' value='"));
+                   containsString("<input name='_csrf_token' type='hidden' value='"));
         assertThat(tool.getUniqueHiddenField().toString(), containsString(token));
         assertEquals("_csrf_token", CsrfToken.getKey());
 
@@ -229,7 +229,7 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
 
         assertNotNull(token2);
         assertThat(tool.getUniqueHiddenField().toString(),
-                containsString("<input name='_csrf_token' type='hidden' value='"));
+                   containsString("<input name='_csrf_token' type='hidden' value='"));
         assertThat(tool.getUniqueHiddenField().toString(), containsString(token2));
         assertEquals("_csrf_token", CsrfToken.getKey());
 
@@ -251,7 +251,7 @@ public class CsrfTokenTests extends AbstractPullToolTests<CsrfToken> {
 
             assertNotNull(token_i);
             assertThat(tool.getUniqueHiddenField().toString(),
-                    containsString("<input name='_csrf_token' type='hidden' value='"));
+                       containsString("<input name='_csrf_token' type='hidden' value='"));
             assertThat(tool.getUniqueHiddenField().toString(), containsString(token_i));
             assertEquals("_csrf_token", CsrfToken.getKey());
 

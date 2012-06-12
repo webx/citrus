@@ -20,9 +20,8 @@ package com.alibaba.citrus.service.mail;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.mail.builder.content.TextContent;
+import org.junit.Test;
 
 /**
  * 测试纯文本的content。
@@ -39,9 +38,9 @@ public class TextContentTests extends AbstractMailBuilderTests {
         assertEquals("text/plain", content.getContentType()); // default content type
 
         assertThat(getMessageAsText(), containsAllRegex( //
-                "Content-Type: text/plain; charset=UTF-8" + REGEX_EOL, //
-                "Content-Transfer-Encoding: 8bit" + REGEX_EOL, //
-                REGEX_EOL + REGEX_EOL + "$"));
+                                                         "Content-Type: text/plain; charset=UTF-8" + REGEX_EOL, //
+                                                         "Content-Transfer-Encoding: 8bit" + REGEX_EOL, //
+                                                         REGEX_EOL + REGEX_EOL + "$"));
     }
 
     @Test
@@ -51,9 +50,9 @@ public class TextContentTests extends AbstractMailBuilderTests {
         assertEquals("text/plain", content.getContentType()); // default content type
 
         assertThat(getMessageAsText(), containsAllRegex( //
-                "Content-Type: text/plain; charset=UTF-8" + REGEX_EOL, //
-                "Content-Transfer-Encoding: 8bit" + REGEX_EOL, //
-                "hello, world$"));
+                                                         "Content-Type: text/plain; charset=UTF-8" + REGEX_EOL, //
+                                                         "Content-Transfer-Encoding: 8bit" + REGEX_EOL, //
+                                                         "hello, world$"));
     }
 
     @Test
@@ -63,9 +62,9 @@ public class TextContentTests extends AbstractMailBuilderTests {
         assertEquals("text/html", content.getContentType());
 
         assertThat(getMessageAsText(), containsAllRegex( //
-                "Content-Type: text/html; charset=UTF-8" + REGEX_EOL, //
-                "Content-Transfer-Encoding: 8bit" + REGEX_EOL, //
-                "hello, world$"));
+                                                         "Content-Type: text/html; charset=UTF-8" + REGEX_EOL, //
+                                                         "Content-Transfer-Encoding: 8bit" + REGEX_EOL, //
+                                                         "hello, world$"));
     }
 
     @Test

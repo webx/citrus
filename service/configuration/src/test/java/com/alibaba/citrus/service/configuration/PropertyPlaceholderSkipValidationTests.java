@@ -25,6 +25,9 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
+import com.alibaba.citrus.service.configuration.support.PropertyPlaceholderConfigurer;
+import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
+import com.alibaba.citrus.springext.util.SpringExtUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,16 +37,12 @@ import org.junit.runners.Parameterized.Parameters;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 
-import com.alibaba.citrus.service.configuration.support.PropertyPlaceholderConfigurer;
-import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
-import com.alibaba.citrus.springext.util.SpringExtUtil;
-
 @RunWith(Parameterized.class)
 public class PropertyPlaceholderSkipValidationTests {
-    private final boolean skipValidation;
-    private ApplicationContext factory;
-    private Configuration conf;
-    private PropertyPlaceholderConfigurer propertyPlaceholderConfigurer;
+    private final boolean                       skipValidation;
+    private       ApplicationContext            factory;
+    private       Configuration                 conf;
+    private       PropertyPlaceholderConfigurer propertyPlaceholderConfigurer;
 
     public PropertyPlaceholderSkipValidationTests(boolean skipValidation) {
         this.skipValidation = skipValidation;
@@ -73,7 +72,7 @@ public class PropertyPlaceholderSkipValidationTests {
     @Test
     public void defaultValue() {
         assertEquals(true,
-                getFieldValue(propertyPlaceholderConfigurer, "ignoreUnresolvablePlaceholders", Boolean.class));
+                     getFieldValue(propertyPlaceholderConfigurer, "ignoreUnresolvablePlaceholders", Boolean.class));
 
         // ${productionMode:false}
         assertEquals(false, conf.isProductionMode());

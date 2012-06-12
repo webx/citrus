@@ -34,7 +34,7 @@ import com.alibaba.citrus.generictype.TypeInfo;
  */
 abstract class AbstractBoundedTypeInfo implements BoundedTypeInfo {
     private final static List<TypeInfo> EMPTY_BOUNDS = emptyList();
-    private final TypeInfo baseType;
+    private final TypeInfo       baseType;
     private final List<TypeInfo> upperBounds;
 
     AbstractBoundedTypeInfo(TypeInfo[] upperBounds) {
@@ -104,17 +104,13 @@ abstract class AbstractBoundedTypeInfo implements BoundedTypeInfo {
         return EMPTY_BOUNDS;
     }
 
-    /**
-     * 取得hash值。
-     */
+    /** 取得hash值。 */
     @Override
     public int hashCode() {
         return getClass().hashCode() ^ upperBounds.hashCode() ^ getLowerBounds().hashCode();
     }
 
-    /**
-     * 判断两个对象是否相同。
-     */
+    /** 判断两个对象是否相同。 */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -130,9 +126,7 @@ abstract class AbstractBoundedTypeInfo implements BoundedTypeInfo {
         return upperBounds.equals(otherType.upperBounds) && getLowerBounds().equals(otherType.getLowerBounds());
     }
 
-    /**
-     * 转换成字符串。
-     */
+    /** 转换成字符串。 */
     @Override
     public abstract String toString();
 }

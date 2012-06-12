@@ -27,7 +27,7 @@ import org.w3c.dom.Element;
  * @author Michael Zhou
  */
 public abstract class AbstractSingleBeanDefinitionParser<T> extends
-        org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser {
+                                                            org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser {
     @Override
     protected final Class<?> getBeanClass(Element element) {
         return resolveParameter(getClass(), AbstractSingleBeanDefinitionParser.class, 0).getRawType();

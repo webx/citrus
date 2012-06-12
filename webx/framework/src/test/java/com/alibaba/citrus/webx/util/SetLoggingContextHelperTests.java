@@ -25,7 +25,6 @@ import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.util.Map;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,8 +32,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class SetLoggingContextHelperTests {
-    private HttpServletRequest request;
-    private Map<String, String> mdc;
+    private HttpServletRequest      request;
+    private Map<String, String>     mdc;
     private SetLoggingContextHelper helper1;
     private SetLoggingContextHelper helper2;
 
@@ -60,7 +59,7 @@ public class SetLoggingContextHelperTests {
         expect(request.getHeader("Referer")).andReturn("http://othersite/");
 
         Cookie[] cookies = withCookies ? new Cookie[] { new Cookie("z", "1"), new Cookie("y", "2"),
-                new Cookie("x", "3") } : null;
+                                                        new Cookie("x", "3") } : null;
 
         expect(request.getCookies()).andReturn(cookies);
     }

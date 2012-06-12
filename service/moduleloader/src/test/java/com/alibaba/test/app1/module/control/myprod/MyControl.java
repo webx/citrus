@@ -17,9 +17,8 @@
 
 package com.alibaba.test.app1.module.control.myprod;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.service.requestcontext.rundata.RunData;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class MyControl {
     @Autowired

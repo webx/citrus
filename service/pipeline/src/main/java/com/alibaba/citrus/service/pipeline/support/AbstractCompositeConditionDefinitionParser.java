@@ -22,13 +22,12 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 
 import java.util.List;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * <code>AbstractCompositeCondition</code>解析器的基类。
@@ -36,7 +35,8 @@ import com.alibaba.citrus.springext.ContributionAware;
  * @author Michael Zhou
  */
 public class AbstractCompositeConditionDefinitionParser<C extends AbstractCompositeCondition> extends
-        AbstractConditionDefinitionParser<C> implements ContributionAware {
+                                                                                              AbstractConditionDefinitionParser<C>
+        implements ContributionAware {
     private ConfigurationPoint conditionConfigurationPoint;
 
     public void setContribution(Contribution contrib) {
@@ -51,7 +51,7 @@ public class AbstractCompositeConditionDefinitionParser<C extends AbstractCompos
 
         for (Element subElement : subElements(element)) {
             Object condition = parseConfigurationPointBean(subElement, conditionConfigurationPoint, parserContext,
-                    builder);
+                                                           builder);
 
             if (condition != null) {
                 conditions.add(condition);

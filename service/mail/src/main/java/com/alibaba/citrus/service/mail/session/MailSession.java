@@ -24,7 +24,6 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.Map;
 import java.util.Properties;
-
 import javax.mail.Session;
 
 import com.alibaba.citrus.service.mail.MailException;
@@ -44,23 +43,19 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 public abstract class MailSession {
     private final Properties props = new Properties();
     private MailService mailService;
-    private Session session;
-    private String host;
-    private int port;
-    private String user;
-    private String password;
-    private boolean debug;
-    private boolean defaultSession;
+    private Session     session;
+    private String      host;
+    private int         port;
+    private String      user;
+    private String      password;
+    private boolean     debug;
+    private boolean     defaultSession;
 
-    /**
-     * 创建一个mail session。
-     */
+    /** 创建一个mail session。 */
     public MailSession() {
     }
 
-    /**
-     * 复制一个mail session。
-     */
+    /** 复制一个mail session。 */
     public MailSession(MailSession session, Properties overrideProps) {
         this.mailService = session.mailService;
         this.session = session.getSession(); // 注意，此方法是synchronized。
@@ -84,93 +79,67 @@ public abstract class MailSession {
         }
     }
 
-    /**
-     * 取得创建该session的mail service。
-     */
+    /** 取得创建该session的mail service。 */
     public MailService getMailService() {
         return mailService;
     }
 
-    /**
-     * 设置mail service。
-     */
+    /** 设置mail service。 */
     public void setMailService(MailService mailService) {
         this.mailService = mailService;
     }
 
-    /**
-     * 取得mail server的服务器名或IP地址。
-     */
+    /** 取得mail server的服务器名或IP地址。 */
     public String getHost() {
         return host;
     }
 
-    /**
-     * 设置mail server的服务器名或IP地址。
-     */
+    /** 设置mail server的服务器名或IP地址。 */
     public void setHost(String host) {
         this.host = trimToNull(host);
     }
 
-    /**
-     * 取得mail server的服务器端口。
-     */
+    /** 取得mail server的服务器端口。 */
     public int getPort() {
         return port > 0 ? port : -1;
     }
 
-    /**
-     * 设置mail server的服务器端口。
-     */
+    /** 设置mail server的服务器端口。 */
     public void setPort(int port) {
         this.port = port;
     }
 
-    /**
-     * 判断是否需要验证。
-     */
+    /** 判断是否需要验证。 */
     public boolean useAuth() {
         return user != null;
     }
 
-    /**
-     * 取得mail server的验证用户。
-     */
+    /** 取得mail server的验证用户。 */
     public String getUser() {
         return user;
     }
 
-    /**
-     * 设置mail server的验证用户。
-     */
+    /** 设置mail server的验证用户。 */
     public void setUser(String user) {
         this.user = trimToNull(user);
     }
 
-    /**
-     * 取得mail server的验证密码。
-     */
+    /** 取得mail server的验证密码。 */
     public String getPassword() {
         return password;
     }
 
-    /**
-     * 设置mail server的验证密码。
-     */
+    /** 设置mail server的验证密码。 */
     public void setPassword(String password) {
         this.password = trimToNull(password);
     }
 
-    /**
-     * 是否是debug模式。在此模式下，javamail会打印出具体的信息。
-     */
+    /** 是否是debug模式。在此模式下，javamail会打印出具体的信息。 */
     public boolean isDebug() {
         return debug;
     }
 
-    /**
-     * 设置debug模式。在此模式下，javamail会打印出具体的信息。
-     */
+    /** 设置debug模式。在此模式下，javamail会打印出具体的信息。 */
     public void setDebug(boolean debug) {
         this.debug = debug;
     }
@@ -195,9 +164,7 @@ public abstract class MailSession {
         this.defaultSession = defaultSession;
     }
 
-    /**
-     * 批量设置属性。
-     */
+    /** 批量设置属性。 */
     public void setProperties(Map<String, String> props) {
         if (props != null) {
             this.props.clear();
@@ -211,16 +178,12 @@ public abstract class MailSession {
         }
     }
 
-    /**
-     * 设置session的属性，如果值被改变了，则清除session。
-     */
+    /** 设置session的属性，如果值被改变了，则清除session。 */
     public void setProperty(String key, String value) {
         setProperty(key, value, null);
     }
 
-    /**
-     * 设置session的属性，如果值被改变了，则清除session。
-     */
+    /** 设置session的属性，如果值被改变了，则清除session。 */
     protected final void setProperty(String key, String value, String defaultValue) {
         String currentValue = props.getProperty(key, defaultValue);
 
@@ -230,9 +193,7 @@ public abstract class MailSession {
         }
     }
 
-    /**
-     * 取得session properties。
-     */
+    /** 取得session properties。 */
     protected Properties getSessionProperties() {
         setProperty(MAIL_DEBUG, String.valueOf(isDebug()), "false");
         return props;
@@ -255,19 +216,13 @@ public abstract class MailSession {
         return session;
     }
 
-    /**
-     * 判断是否已经连接上。
-     */
+    /** 判断是否已经连接上。 */
     protected abstract boolean isConnected();
 
-    /**
-     * 连接mail服务器。
-     */
+    /** 连接mail服务器。 */
     protected abstract void connect() throws MailException;
 
-    /**
-     * 关闭mail服务器的连接。
-     */
+    /** 关闭mail服务器的连接。 */
     protected abstract void close() throws MailException;
 
     @Override

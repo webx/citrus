@@ -25,18 +25,17 @@ import static com.alibaba.citrus.util.CollectionUtil.*;
 
 import java.util.Map;
 
-import org.springframework.beans.TypeConverter;
-import org.springframework.beans.factory.config.BeanDefinitionHolder;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.requestcontext.session.valueencoder.AbstractSessionValueEncoder;
 import com.alibaba.citrus.service.requestcontext.util.QueryStringParser;
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
+import org.springframework.beans.TypeConverter;
+import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 将一个<code>Map</code>编码成字符串，或反之。支持加密。
@@ -55,9 +54,7 @@ public class MappedValuesEncoder extends AbstractSessionValueEncoder {
         return false;
     }
 
-    /**
-     * 复杂值压缩，取得的字符串较短。
-     */
+    /** 复杂值压缩，取得的字符串较短。 */
     @Override
     protected boolean doCompress() {
         return true;
@@ -101,12 +98,12 @@ public class MappedValuesEncoder extends AbstractSessionValueEncoder {
     }
 
     public static class DefinitionParser extends AbstractSingleBeanDefinitionParser<MappedValuesEncoder> implements
-            ContributionAware {
+                                                                                                         ContributionAware {
         private ConfigurationPoint encrypterConfigurationPoint;
 
         public void setContribution(Contribution contrib) {
             this.encrypterConfigurationPoint = getSiblingConfigurationPoint("services/request-contexts/session/"
-                    + "encrypters", contrib);
+                                                                            + "encrypters", contrib);
         }
 
         @Override
@@ -117,7 +114,7 @@ public class MappedValuesEncoder extends AbstractSessionValueEncoder {
 
             for (Element subElement : subElements(element)) {
                 BeanDefinitionHolder encrypter = parseConfigurationPointBean(subElement, encrypterConfigurationPoint,
-                        parserContext, builder);
+                                                                             parserContext, builder);
 
                 if (encrypter != null) {
                     builder.addPropertyValue("encrypter", encrypter);

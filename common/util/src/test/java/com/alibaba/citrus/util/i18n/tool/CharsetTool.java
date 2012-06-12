@@ -31,13 +31,13 @@ import com.alibaba.citrus.util.MessageUtil;
  * @author Michael Zhou
  */
 public abstract class CharsetTool {
-    protected static final int MIN_CHAR = 128;
-    protected static final int MAX_CHAR = 65536;
-    protected static final String BLOCK_HEAD = "+ {0} - {1} ({2} chars)";
-    protected static final String SEP_CHAR = ";";
+    protected static final int     MIN_CHAR       = 128;
+    protected static final int     MAX_CHAR       = 65536;
+    protected static final String  BLOCK_HEAD     = "+ {0} - {1} ({2} chars)";
+    protected static final String  SEP_CHAR       = ";";
     protected static final Charset OUTPUT_CHARSET = Charset.forName("GB18030");
-    protected static final String NEW_LINE = "\r\n";
-    protected static final int LINE_LENGTH = 20;
+    protected static final String  NEW_LINE       = "\r\n";
+    protected static final int     LINE_LENGTH    = 20;
     protected static final File srcdir;
     protected static final File destdir;
 

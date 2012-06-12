@@ -46,9 +46,7 @@ public class DefaultMapEntryTests {
         entry2 = map.entrySet().iterator().next();
     }
 
-    /**
-     * 测试equals方法.
-     */
+    /** 测试equals方法. */
     @Test
     public void equals_() {
         DefaultMapEntry<String, Object> e1 = new DefaultMapEntry<String, Object>(null, null);
@@ -62,9 +60,7 @@ public class DefaultMapEntryTests {
         assertFalse(e1.equals(""));
     }
 
-    /**
-     * 测试hashCode方法.
-     */
+    /** 测试hashCode方法. */
     @Test
     public void hashCode_() {
         assertEquals(entry1.hashCode(), new DefaultMapEntry<String, Object>(null, null).hashCode());
@@ -72,9 +68,7 @@ public class DefaultMapEntryTests {
         assertEquals(entry2.hashCode(), new DefaultMapEntry<String, Object>("hello", "baobao").hashCode());
     }
 
-    /**
-     * 测试toString方法.
-     */
+    /** 测试toString方法. */
     @Test
     public void toString_() {
         assertEquals(entry1.toString(), new DefaultMapEntry<String, Object>(null, null).toString());
@@ -82,9 +76,7 @@ public class DefaultMapEntryTests {
         assertEquals(entry2.toString(), new DefaultMapEntry<String, Object>("hello", "baobao").toString());
     }
 
-    /**
-     * 测试setValue方法.
-     */
+    /** 测试setValue方法. */
     @Test
     public void setValue() {
         DefaultMapEntry<String, Object> entry = new DefaultMapEntry<String, Object>(null, null);

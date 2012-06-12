@@ -26,9 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
-
 import com.alibaba.citrus.service.AbstractService;
 import com.alibaba.citrus.service.mail.MailNotFoundException;
 import com.alibaba.citrus.service.mail.MailService;
@@ -39,6 +36,8 @@ import com.alibaba.citrus.service.mail.session.MailStore;
 import com.alibaba.citrus.service.mail.session.MailTransport;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 
 /**
  * 生成和发送e-mail的服务。
@@ -46,10 +45,10 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public class MailServiceImpl extends AbstractService<MailService> implements MailService, BeanFactoryAware {
-    private final List<Object> importedServices = createLinkedList();
-    private final Map<String, MailBuilder> mails = createHashMap();
-    private final Map<String, MailStore> mailStores = createHashMap();
-    private final Map<String, MailTransport> mailTransports = createHashMap();
+    private final List<Object>               importedServices = createLinkedList();
+    private final Map<String, MailBuilder>   mails            = createHashMap();
+    private final Map<String, MailStore>     mailStores       = createHashMap();
+    private final Map<String, MailTransport> mailTransports   = createHashMap();
     private BeanFactory factory;
 
     public void setBeanFactory(BeanFactory factory) {
@@ -124,7 +123,7 @@ public class MailServiceImpl extends AbstractService<MailService> implements Mai
                 for (MailTransport transport : mailTransports.values()) {
                     if (transport.isDefault()) {
                         assertTrue(!this.mailTransports.containsKey(DEFAULT_MAIL_SESSION_ID),
-                                "more than 1 default transports");
+                                   "more than 1 default transports");
                         this.mailTransports.put(DEFAULT_MAIL_SESSION_ID, transport);
                     }
                 }
@@ -137,9 +136,7 @@ public class MailServiceImpl extends AbstractService<MailService> implements Mai
         }
     }
 
-    /**
-     * 取得指定类型的服务。 如果未指定该类服务，则使用默认ID从容器中取得服务。
-     */
+    /** 取得指定类型的服务。 如果未指定该类服务，则使用默认ID从容器中取得服务。 */
     public <T> T getService(Class<T> serviceType, String defaultServiceId) {
         assertNotNull(serviceType, "serviceType");
 
@@ -156,9 +153,7 @@ public class MailServiceImpl extends AbstractService<MailService> implements Mai
         return null;
     }
 
-    /**
-     * 取得指定名称的mail builder。
-     */
+    /** 取得指定名称的mail builder。 */
     public MailBuilder getMailBuilder(String id) throws MailNotFoundException {
         id = assertNotNull(trimToNull(id), "no mail id");
 
@@ -172,30 +167,22 @@ public class MailServiceImpl extends AbstractService<MailService> implements Mai
         return builder.clone();
     }
 
-    /**
-     * 取得默认的mail store。
-     */
+    /** 取得默认的mail store。 */
     public MailStore getMailStore() throws MailStoreNotFoundException {
         return getMailStore(DEFAULT_MAIL_SESSION_ID, null);
     }
 
-    /**
-     * 取得默认的mail store。
-     */
+    /** 取得默认的mail store。 */
     public MailStore getMailStore(Properties overrideProps) throws MailStoreNotFoundException {
         return getMailStore(DEFAULT_MAIL_SESSION_ID, overrideProps);
     }
 
-    /**
-     * 取得指定名称的mail store。
-     */
+    /** 取得指定名称的mail store。 */
     public MailStore getMailStore(String id) throws MailStoreNotFoundException {
         return getMailStore(id, null);
     }
 
-    /**
-     * 取得指定名称的mail store。
-     */
+    /** 取得指定名称的mail store。 */
     public MailStore getMailStore(String id, Properties overrideProps) throws MailStoreNotFoundException {
         id = assertNotNull(trimToNull(id), "no mailStore id");
 
@@ -209,30 +196,22 @@ public class MailServiceImpl extends AbstractService<MailService> implements Mai
         return new MailStore(store, overrideProps);
     }
 
-    /**
-     * 取得默认的mail transport。
-     */
+    /** 取得默认的mail transport。 */
     public MailTransport getMailTransport() throws MailTransportNotFoundException {
         return getMailTransport(DEFAULT_MAIL_SESSION_ID, null);
     }
 
-    /**
-     * 取得默认的mail transport。
-     */
+    /** 取得默认的mail transport。 */
     public MailTransport getMailTransport(Properties overrideProps) throws MailTransportNotFoundException {
         return getMailTransport(DEFAULT_MAIL_SESSION_ID, overrideProps);
     }
 
-    /**
-     * 取得指定名称的mail transport。
-     */
+    /** 取得指定名称的mail transport。 */
     public MailTransport getMailTransport(String id) throws MailTransportNotFoundException {
         return getMailTransport(id, null);
     }
 
-    /**
-     * 取得指定名称的mail transport。
-     */
+    /** 取得指定名称的mail transport。 */
     public MailTransport getMailTransport(String id, Properties overrideProps) throws MailTransportNotFoundException {
         id = assertNotNull(trimToNull(id), "no mailTransport id");
 

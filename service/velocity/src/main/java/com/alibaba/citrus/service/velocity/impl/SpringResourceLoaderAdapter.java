@@ -32,18 +32,16 @@ import org.springframework.core.io.ResourceLoader;
  */
 public class SpringResourceLoaderAdapter extends AbstractResourceLoader {
     public static final String SPRING_RESOURCE_LOADER_KEY = "_spring_resource_loader";
-    private String path;
+    private String         path;
     private ResourceLoader springLoader;
 
-    /**
-     * 初始化resource loader.
-     */
+    /** 初始化resource loader. */
     @Override
     public void init(ExtendedProperties configuration) {
         rsvc.getLog().info(getLogID() + " : initialization starting.");
 
         springLoader = assertNotNull((ResourceLoader) rsvc.getApplicationAttribute(SPRING_RESOURCE_LOADER_KEY),
-                SPRING_RESOURCE_LOADER_KEY);
+                                     SPRING_RESOURCE_LOADER_KEY);
 
         path = normalizeAbsolutePath(configuration.getString("path"), true);
 
@@ -55,17 +53,13 @@ public class SpringResourceLoaderAdapter extends AbstractResourceLoader {
         rsvc.getLog().info(getLogID() + " : initialization complete.");
     }
 
-    /**
-     * 取得资源。
-     */
+    /** 取得资源。 */
     @Override
     protected Resource getResource(String templateName) {
         return springLoader.getResource(path + normalizeTemplateName(templateName));
     }
 
-    /**
-     * 取得用于日志记录的ID。
-     */
+    /** 取得用于日志记录的ID。 */
     @Override
     protected String getLogID() {
         return getClass().getSimpleName();

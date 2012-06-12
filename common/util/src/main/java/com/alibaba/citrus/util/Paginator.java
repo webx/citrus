@@ -29,7 +29,7 @@ import java.io.Serializable;
  * </p>
  * <p>
  * 使用方法如下:
- *
+ * <p/>
  * <pre>
  * <![CDATA[
  *
@@ -83,7 +83,7 @@ import java.io.Serializable;
  *
  * ]]>
  * </pre>
- *
+ * <p/>
  * </p>
  */
 public class Paginator implements Serializable, Cloneable {
@@ -103,9 +103,7 @@ public class Paginator implements Serializable, Cloneable {
     private int items; // 总共项数
     private int itemsPerPage; // 每页项数。
 
-    /**
-     * 创建一个分页器，初始项数为无限大<code>UNKNOWN_ITEMS</code>，默认每页显示<code>10</code>项。
-     */
+    /** 创建一个分页器，初始项数为无限大<code>UNKNOWN_ITEMS</code>，默认每页显示<code>10</code>项。 */
     public Paginator() {
         this(0);
     }
@@ -123,7 +121,7 @@ public class Paginator implements Serializable, Cloneable {
      * 创建一个分页器，初始项数为无限大<code>UNKNOWN_ITEMS</code>，指定每页项数。
      *
      * @param itemsPerPage 每页项数。
-     * @param items 总项数
+     * @param items        总项数
      */
     public Paginator(int itemsPerPage, int items) {
         this.items = items >= 0 ? items : 0;
@@ -437,7 +435,7 @@ public class Paginator implements Serializable, Cloneable {
 
         sb.append(" of ").append(getPages()).append(",\n");
         sb.append("    Showing items ").append(getBeginIndex()).append(" to ").append(getEndIndex()).append(" (total ")
-                .append(getItems()).append(" items), ");
+          .append(getItems()).append(" items), ");
         sb.append("offset=").append(getOffset()).append(", length=").append(getLength());
 
         return sb.toString();

@@ -23,12 +23,11 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
+import com.alibaba.citrus.service.resource.AbstractResourceLoadingTests;
+import com.alibaba.citrus.service.resource.ResourceLoadingService;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.alibaba.citrus.service.resource.AbstractResourceLoadingTests;
-import com.alibaba.citrus.service.resource.ResourceLoadingService;
 
 public class FileLoaderIntegratingTests extends AbstractResourceLoadingTests {
     @BeforeClass
@@ -46,8 +45,8 @@ public class FileLoaderIntegratingTests extends AbstractResourceLoadingTests {
         // basedir=.., no path specified
         assertResourceServiceList("/defaultPath/test.txt", "test.txt", true, false);
         assertResourceServiceList("/defaultPath/", "", true, true, "WEB-INF/", "appcontext/", "beans.xml", "filter/",
-                "loader/", "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml",
-                "test.txt");
+                                  "loader/", "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml",
+                                  "test.txt");
     }
 
     @Test
@@ -55,7 +54,7 @@ public class FileLoaderIntegratingTests extends AbstractResourceLoadingTests {
         // no basedir specified
         assertResourceServiceList("/defaultBasedir/file-loader.xml", "loader/file-loader.xml", true, false);
         assertResourceServiceList("/defaultBasedir", "loader", true, true, "classpath-loader.xml", "file-loader.xml",
-                "super-loader-parent.xml", "super-loader.xml", "webapp-loader.xml");
+                                  "super-loader-parent.xml", "super-loader.xml", "webapp-loader.xml");
     }
 
     @Test
@@ -63,8 +62,8 @@ public class FileLoaderIntegratingTests extends AbstractResourceLoadingTests {
         // basedir=absolute srcdir
         assertResourceServiceList("/absBasedir/test.txt", "test.txt", true, false);
         assertResourceServiceList("/absBasedir/", "", true, true, "WEB-INF/", "appcontext/", "beans.xml", "filter/",
-                "loader/", "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml",
-                "test.txt");
+                                  "loader/", "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml",
+                                  "test.txt");
     }
 
     @Test
@@ -87,24 +86,24 @@ public class FileLoaderIntegratingTests extends AbstractResourceLoadingTests {
     public void misc() throws Exception {
         // 从resource.xml所在的目录，查找相对路径
         assertEquals(new File(srcdir, "/WEB-INF/aaa/bbb/abc.txt"),
-                resourceLoadingService.getResourceAsFile("/file/resource/abc.txt"));
+                     resourceLoadingService.getResourceAsFile("/file/resource/abc.txt"));
 
         // 从指定的basedir目录，查找相对路径
         assertEquals(new File(srcdir, "/myfolder/testres.txt"),
-                resourceLoadingService.getResourceAsFile("/file/resource/testres.txt"));
+                     resourceLoadingService.getResourceAsFile("/file/resource/testres.txt"));
 
         // 从指定的绝对路径查找
         assertEquals(new File(srcdir, "/WEB-INF/aaa/bbb/abc.txt"),
-                resourceLoadingService.getResourceAsFile("/file/resource/WEB-INF/aaa/bbb/abc.txt"));
+                     resourceLoadingService.getResourceAsFile("/file/resource/WEB-INF/aaa/bbb/abc.txt"));
 
         // 从默认的path查找
         assertEquals(new File(srcdir, "/myfolder/testres.txt"),
-                resourceLoadingService.getResourceAsFile("/file/resource2/myfolder/testres.txt"));
+                     resourceLoadingService.getResourceAsFile("/file/resource2/myfolder/testres.txt"));
     }
 
     @Test
     public void substitution() throws Exception {
         assertEquals(new File(srcdir, "/myfolder/aaa/bbb/ccc.jsp"),
-                resourceLoadingService.getResourceAsFile("/my/substitution/aaa/bbb/ccc.jhtml", FOR_CREATE));
+                     resourceLoadingService.getResourceAsFile("/my/substitution/aaa/bbb/ccc.jhtml", FOR_CREATE));
     }
 }

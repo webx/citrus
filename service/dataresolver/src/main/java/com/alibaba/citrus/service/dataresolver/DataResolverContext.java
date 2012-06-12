@@ -28,9 +28,9 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 public class DataResolverContext {
     public final static Annotation[] EMPTY_ANNOTATIONS = new Annotation[0];
-    private final TypeInfo type;
+    private final TypeInfo     type;
     private final Annotation[] annotations;
-    private final Object[] extraInfo;
+    private final Object[]     extraInfo;
 
     public DataResolverContext(Type type, Annotation[] annotations, Object[] extraInfo) {
         this.type = TypeInfo.factory.getType(type);

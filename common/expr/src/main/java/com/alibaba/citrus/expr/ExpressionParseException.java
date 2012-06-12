@@ -25,9 +25,7 @@ package com.alibaba.citrus.expr;
 public class ExpressionParseException extends Exception {
     private static final long serialVersionUID = 3905519419391424825L;
 
-    /**
-     * 创建一个异常。
-     */
+    /** 创建一个异常。 */
     public ExpressionParseException() {
         super();
     }
@@ -45,7 +43,7 @@ public class ExpressionParseException extends Exception {
      * 创建一个异常。
      *
      * @param message 异常信息
-     * @param cause 异常原因
+     * @param cause   异常原因
      */
     public ExpressionParseException(String message, Throwable cause) {
         super(message, cause);

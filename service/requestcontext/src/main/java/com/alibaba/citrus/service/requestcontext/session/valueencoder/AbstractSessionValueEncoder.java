@@ -28,12 +28,6 @@ import java.util.zip.DeflaterOutputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
-import org.apache.commons.codec.binary.Base64;
-import org.springframework.beans.PropertyEditorRegistrar;
-import org.springframework.beans.PropertyEditorRegistry;
-import org.springframework.beans.SimpleTypeConverter;
-import org.springframework.beans.TypeConverter;
-
 import com.alibaba.citrus.service.configuration.support.PropertyEditorRegistrarsSupport;
 import com.alibaba.citrus.service.requestcontext.session.SessionStore.StoreContext;
 import com.alibaba.citrus.service.requestcontext.session.encoder.SessionEncoderException;
@@ -41,6 +35,11 @@ import com.alibaba.citrus.service.requestcontext.session.encrypter.Encrypter;
 import com.alibaba.citrus.springext.support.BeanSupport;
 import com.alibaba.citrus.util.StringEscapeUtil;
 import com.alibaba.citrus.util.io.StreamUtil;
+import org.apache.commons.codec.binary.Base64;
+import org.springframework.beans.PropertyEditorRegistrar;
+import org.springframework.beans.PropertyEditorRegistry;
+import org.springframework.beans.SimpleTypeConverter;
+import org.springframework.beans.TypeConverter;
 
 /**
  * <code>SessionEncoder</code>针对非串行化场景的抽象编码实现，加密，base64来编码、解码。
@@ -49,10 +48,10 @@ import com.alibaba.citrus.util.io.StreamUtil;
  * @author Michael Zhou
  */
 public abstract class AbstractSessionValueEncoder extends BeanSupport implements SessionValueEncoder {
-    private static final String DEFAULT_CHARSET = "UTF-8";
-    private PropertyEditorRegistrarsSupport propertyEditorRegistrars = new PropertyEditorRegistrarsSupport();
+    private static final String                          DEFAULT_CHARSET          = "UTF-8";
+    private              PropertyEditorRegistrarsSupport propertyEditorRegistrars = new PropertyEditorRegistrarsSupport();
     protected Encrypter encrypter;
-    private String charset;
+    private   String    charset;
 
     public void setPropertyEditorRegistrars(PropertyEditorRegistrar[] registrars) {
         propertyEditorRegistrars.setPropertyEditorRegistrars(registrars);
@@ -105,7 +104,7 @@ public abstract class AbstractSessionValueEncoder extends BeanSupport implements
             // 如果提供了encrypter，则解密并解压缩之
             if (encrypter != null) {
                 encodedValue = new String(decompress(encrypter.decrypt(Base64.decodeBase64(encodedValue
-                        .getBytes("8859_1")))), "UTF-8");
+                                                                                                   .getBytes("8859_1")))), "UTF-8");
             }
 
             return decodeValue(encodedValue);

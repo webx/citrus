@@ -24,13 +24,12 @@ import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static org.springframework.beans.factory.xml.AbstractBeanDefinitionParser.*;
 
+import com.alibaba.citrus.springext.util.SpringExtUtil;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.springext.util.SpringExtUtil;
 
 class NamedBeanDefinitionParserMixin {
     private final DefaultNameBDParser parser;
@@ -39,9 +38,7 @@ class NamedBeanDefinitionParserMixin {
         this.parser = assertNotNull(parser, "parser");
     }
 
-    /**
-     * 从id attribute中取得bean name，假如未指定，则从<code>getDefaultName()</code>中取得默认名。
-     */
+    /** 从id attribute中取得bean name，假如未指定，则从<code>getDefaultName()</code>中取得默认名。 */
     String resolveId(Element element, AbstractBeanDefinition definition, ParserContext parserContext) {
         String id = trimToNull(element.getAttribute(ID_ATTRIBUTE));
 
@@ -53,9 +50,7 @@ class NamedBeanDefinitionParserMixin {
         return id;
     }
 
-    /**
-     * 假如当前bean name为默认名，则同时注册默认的aliases。
-     */
+    /** 假如当前bean name为默认名，则同时注册默认的aliases。 */
     protected void registerBeanDefinition(BeanDefinitionHolder definition, BeanDefinitionRegistry registry) {
         BeanDefinitionHolder newHolder = definition;
 
@@ -64,7 +59,7 @@ class NamedBeanDefinitionParserMixin {
 
             if (!isEmptyArray(defaultAliases)) {
                 newHolder = new BeanDefinitionHolder(definition.getBeanDefinition(), definition.getBeanName(),
-                        defaultAliases);
+                                                     defaultAliases);
             }
         }
 

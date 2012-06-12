@@ -18,7 +18,7 @@
 package com.alibaba.citrus.dev.handler.util;
 
 public class Attribute {
-    private final String key;
+    private final String      key;
     private final StyledValue value;
 
     public Attribute(String key, StyledValue value) {

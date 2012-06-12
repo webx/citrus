@@ -20,14 +20,13 @@ package com.alibaba.citrus.service.pipeline;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import com.alibaba.citrus.service.pipeline.valve.LogAndBreakValve;
 import com.alibaba.citrus.service.pipeline.valve.LogAndInvokeSubValve;
 import com.alibaba.citrus.service.pipeline.valve.LogAndReturnValve;
 import com.alibaba.citrus.service.pipeline.valve.LogValve;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * 测试pipeline本身的功能，不包括配置。
@@ -292,7 +291,7 @@ public class PipelineTests extends AbstractPipelineTests {
             fail();
         } catch (PipelineException e) {
             assertThat(e,
-                    exception(IllegalStateException.class, "Valve[#3/3, level 1] has already been invoked: LogValve"));
+                       exception(IllegalStateException.class, "Valve[#3/3, level 1] has already been invoked: LogValve"));
         }
 
         assertLog("1-1", "1-2", "1-3");
@@ -383,7 +382,7 @@ public class PipelineTests extends AbstractPipelineTests {
             assertThat(
                     e,
                     exception(IllegalArgumentException.class, "Failed to invoke Valve[#2/3, level 3]",
-                            "invalid break levels: 3, should be in range of [0, 3)"));
+                              "invalid break levels: 3, should be in range of [0, 3)"));
         }
 
         // break levels=-1
@@ -396,7 +395,7 @@ public class PipelineTests extends AbstractPipelineTests {
             assertThat(
                     e,
                     exception(IllegalArgumentException.class, "Failed to invoke Valve[#2/3, level 3]",
-                            "invalid break levels: -1, should be in range of [0, 3)"));
+                              "invalid break levels: -1, should be in range of [0, 3)"));
         }
     }
 
@@ -457,7 +456,7 @@ public class PipelineTests extends AbstractPipelineTests {
             fail();
         } catch (LabelNotDefinedException e) {
             assertThat(e, exception("Could not find pipeline or sub-pipeline with label \"mylabel\" "
-                    + "in the pipeline invocation stack"));
+                                    + "in the pipeline invocation stack"));
         }
     }
 

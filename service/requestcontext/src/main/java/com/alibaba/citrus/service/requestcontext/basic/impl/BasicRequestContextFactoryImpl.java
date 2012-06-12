@@ -43,16 +43,12 @@ public class BasicRequestContextFactoryImpl extends AbstractRequestContextFactor
         return new BasicRequestContextImpl(wrappedContext, interceptors);
     }
 
-    /**
-     * 本类提供了拦截headers的功能。
-     */
+    /** 本类提供了拦截headers的功能。 */
     public String[] getFeatures() {
         return new String[] { "headerInterceptors" };
     }
 
-    /**
-     * 本类提供了基础性的安全机制，因此应该把它放在最前面。
-     */
+    /** 本类提供了基础性的安全机制，因此应该把它放在最前面。 */
     public FeatureOrder[] featureOrders() {
         return new FeatureOrder[] { new BeforeFeature("*") };
     }

@@ -32,7 +32,7 @@ import com.alibaba.citrus.webx.handler.RequestHandlerContext;
  * @author Michael Zhou
  */
 public abstract class AbstractVisitor extends TextWriter<PrintWriter> {
-    private final PageComponent component;
+    private final   PageComponent         component;
     protected final RequestHandlerContext context;
 
     /**
@@ -69,16 +69,12 @@ public abstract class AbstractVisitor extends TextWriter<PrintWriter> {
         this.component = null;
     }
 
-    /**
-     * 取得相对于当前页面的URL。
-     */
+    /** 取得相对于当前页面的URL。 */
     public void visitUrl(String relativeUrl) {
         out().append(context.getResourceURL(relativeUrl));
     }
 
-    /**
-     * 取得相对于当前component的URL。
-     */
+    /** 取得相对于当前component的URL。 */
     public void visitComponentUrl(String relativeUrl) {
         assertNotNull(component, "no component");
         out().append(component.getComponentURL(context, relativeUrl));

@@ -64,13 +64,13 @@ public class TestUtilTests {
     @Test
     public void exception_describe() {
         assertEquals("An exception that is (not null and an instance of java.lang.Throwable)\n"
-                + "  and its cause exception is (not null and an instance of java.lang.IllegalArgumentException)\n"
-                + "  and its message is (a string containing \"no argument\" and a string containing \"test\")",
-                exception(IllegalArgumentException.class, "no argument", "test").toString());
+                     + "  and its cause exception is (not null and an instance of java.lang.IllegalArgumentException)\n"
+                     + "  and its message is (a string containing \"no argument\" and a string containing \"test\")",
+                     exception(IllegalArgumentException.class, "no argument", "test").toString());
 
         assertEquals("An exception that is (not null and an instance of java.lang.Throwable)\n"
-                + "  and its cause exception is (not null and an instance of java.lang.IllegalArgumentException)",
-                exception(IllegalArgumentException.class).toString());
+                     + "  and its cause exception is (not null and an instance of java.lang.IllegalArgumentException)",
+                     exception(IllegalArgumentException.class).toString());
 
         assertEquals("An exception that is (not null and an instance of java.lang.Throwable)", exception().toString());
     }

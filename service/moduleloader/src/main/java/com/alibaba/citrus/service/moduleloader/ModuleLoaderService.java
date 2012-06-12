@@ -28,19 +28,13 @@ import java.util.Set;
  * @author Michael Zhou
  */
 public interface ModuleLoaderService {
-    /**
-     * 取得当前factory所支持的所有module类型。
-     */
+    /** 取得当前factory所支持的所有module类型。 */
     Set<String> getModuleTypes();
 
-    /**
-     * 取得指定module类型的所有module名称。
-     */
+    /** 取得指定module类型的所有module名称。 */
     Set<String> getModuleNames(String moduleType);
 
-    /**
-     * 取得指定名称和类型的module实例。
-     */
+    /** 取得指定名称和类型的module实例。 */
     Module getModule(String moduleType, String moduleName) throws ModuleLoaderException, ModuleNotFoundException;
 
     /**

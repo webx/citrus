@@ -25,11 +25,10 @@ import java.io.StringWriter;
 import java.util.Formatter;
 import java.util.Locale;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.util.i18n.LocaleUtil;
 import com.alibaba.citrus.util.internal.Entities;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * 测试<code>StringEscapeUtil</code>。
@@ -79,7 +78,7 @@ public class StringEscapeUtilTests {
 
         assertEscapeJava("He didn't say, \\\"stop!\\\"", "He didn't say, \"stop!\"", false);
         assertEscapeJava("non-breaking space", "This space is non-breaking:" + "\u00A0",
-                "This space is non-breaking:\u00a0", false);
+                         "This space is non-breaking:\u00a0", false);
         assertEscapeJava("\uABCD\u1234\u012C", "\uABCD\u1234\u012C", false);
 
         // 对slash的escape
@@ -119,7 +118,7 @@ public class StringEscapeUtilTests {
 
         assertEscapeJava("He didn't say, \\\"stop!\\\"", "He didn't say, \"stop!\"", true);
         assertEscapeJava("non-breaking space", "This space is non-breaking:" + "\u00A0",
-                "This space is non-breaking:\u00a0", true);
+                         "This space is non-breaking:\u00a0", true);
         assertEscapeJava("\\uABCD\\u1234\\u012C", "\uABCD\u1234\u012C", true);
 
         // 不需要escape的字符串，应该返回原字符串，以提高效率
@@ -194,8 +193,8 @@ public class StringEscapeUtilTests {
         String actual = StringEscapeUtil.unescapeJava(original);
 
         assertEquals("unescape(String) failed" + (message == null ? "" : ": " + message) + ": expected '"
-                + StringEscapeUtil.escapeJava(expected) // we escape this so we can see it in the error message
-                + "' actual '" + StringEscapeUtil.escapeJava(actual) + "'", expected, actual);
+                     + StringEscapeUtil.escapeJava(expected) // we escape this so we can see it in the error message
+                     + "' actual '" + StringEscapeUtil.escapeJava(actual) + "'", expected, actual);
 
         // 如果actual和original相等的话，它们应该是同一个对象
         if (original != null && original.equals(actual)) {
@@ -238,7 +237,7 @@ public class StringEscapeUtilTests {
         assertEquals("\u00EF", StringEscapeUtil.escapeJavaScript("\u00ef", false));
         assertEquals("\\u0001", StringEscapeUtil.escapeJavaScript("\u0001", false));
         assertEquals("Should use capitalized unicode hex", "\\u001A",
-                StringEscapeUtil.escapeJavaScript("\u001a", false));
+                     StringEscapeUtil.escapeJavaScript("\u001a", false));
 
         // strict
         assertEquals("\\u1234", StringEscapeUtil.escapeJavaScript("\u1234", true));
@@ -251,7 +250,7 @@ public class StringEscapeUtilTests {
     /* ==================================================================== */
     /* 测试HTML和XML。 */
     /* ==================================================================== */
-    private String[][] HTML_ESCAPES = {
+    private String[][] HTML_ESCAPES   = {
             { "no escaping", "plain text", "plain text" },
             { "no escaping", "plain text", "plain text" },
             { "empty string", "", "" },
@@ -262,7 +261,7 @@ public class StringEscapeUtilTests {
             { "first character only", "&lt; less than", "< less than" },
             { "apostrophe", "Huntington&#39;s chorea", "Huntington's chorea" },
             { "languages", "English,Fran&ccedil;ais,\u65E5\u672C\u8A9E (nihongo)",
-                    "English,Fran\u00E7ais,\u65E5\u672C\u8A9E (nihongo)" },
+              "English,Fran\u00E7ais,\u65E5\u672C\u8A9E (nihongo)" },
             { "8-bit ascii doesn't number-escape", "~\u007F", "\u007E\u007F" },
             { "8-bit ascii does number-escape", "\u0080\u009F", "\u0080\u009F" },
             { "funny chars pass through OK", "Fran&ccedil;ais", "Fran\u00E7ais" }, { "nbsp", "&nbsp;", "\u00A0" },
@@ -281,7 +280,7 @@ public class StringEscapeUtilTests {
             { "first character only", "&lt; less than", "< less than" },
             { "apostrophe", "Huntington&#39;s chorea", "Huntington's chorea" },
             { "languages", "English,Fran&ccedil;ais,\u65E5\u672C\u8A9E (nihongo)",
-                    "English,Fran\u00E7ais,\u65E5\u672C\u8A9E (nihongo)" },
+              "English,Fran\u00E7ais,\u65E5\u672C\u8A9E (nihongo)" },
             { "8-bit ascii doesn't number-escape", "~\u007F", "\u007E\u007F" },
             { "8-bit ascii does number-escape", "\u0080\u009F", "\u0080\u009F" },
             { "funny chars pass through OK", "Fran&ccedil;ais", "Fran\u00E7ais" }, { "nbsp", "&nbsp;", "\u00A0" },
@@ -486,7 +485,7 @@ public class StringEscapeUtilTests {
     @Test
     public void testUnEscapeNullEntities() {
         assertEquals("中华人民共和国",
-                StringEscapeUtil.unescapeEntities(null, "&#20013;&#21326;&#20154;&#27665;&#20849;&#21644;&#22269;"));
+                     StringEscapeUtil.unescapeEntities(null, "&#20013;&#21326;&#20154;&#27665;&#20849;&#21644;&#22269;"));
         assertEquals("&amp;&lt;", StringEscapeUtil.unescapeEntities(null, "&amp;&lt;"));
     }
 
@@ -743,7 +742,7 @@ public class StringEscapeUtilTests {
 
         LocaleUtil.setContext(Locale.US, "8859_1");
         assertEquals("\u00D6\u00D0\u00BB\u00AA\u00C8\u00CB\u00C3\u00F1\u00B9\u00B2\u00BA\u00CD\u00B9\u00FA",
-                StringEscapeUtil.unescapeURL("%D6%D0%BB%AA%C8%CB%C3%F1%B9%B2%BA%CD%B9%FA"));
+                     StringEscapeUtil.unescapeURL("%D6%D0%BB%AA%C8%CB%C3%F1%B9%B2%BA%CD%B9%FA"));
 
         LocaleUtil.resetContext();
     }

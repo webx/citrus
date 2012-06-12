@@ -26,14 +26,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
-import org.springframework.core.CollectionFactory;
-import org.springframework.core.MethodParameter;
-
 import com.alibaba.citrus.service.form.Field;
 import com.alibaba.citrus.service.form.Form;
 import com.alibaba.citrus.service.form.Group;
@@ -43,6 +35,13 @@ import com.alibaba.citrus.service.form.configuration.FieldConfig;
 import com.alibaba.citrus.service.form.configuration.GroupConfig;
 import com.alibaba.citrus.util.ObjectUtil;
 import com.alibaba.citrus.util.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.core.CollectionFactory;
+import org.springframework.core.MethodParameter;
 
 /**
  * 代表用户所提交表单中的一组字段。
@@ -55,18 +54,16 @@ import com.alibaba.citrus.util.StringUtil;
 public class GroupImpl implements Group {
     protected static final Logger log = LoggerFactory.getLogger(Group.class);
     private final GroupConfig groupConfig;
-    private final Form form;
-    private final String groupKey;
-    private final String instanceKey;
-    private final Map<String, Field> fields = createLinkedHashMap();
-    private final Collection<Field> fieldList = Collections.unmodifiableCollection(fields.values());
+    private final Form        form;
+    private final String      groupKey;
+    private final String      instanceKey;
+    private final Map<String, Field> fields    = createLinkedHashMap();
+    private final Collection<Field>  fieldList = Collections.unmodifiableCollection(fields.values());
     private final MessageContext messageContext;
-    private boolean validated;
-    private boolean valid;
+    private       boolean        validated;
+    private       boolean        valid;
 
-    /**
-     * 创建一个新group。
-     */
+    /** 创建一个新group。 */
     public GroupImpl(GroupConfig groupConfig, Form form, String instanceKey) {
         this.groupConfig = groupConfig;
         this.form = form;
@@ -75,23 +72,17 @@ public class GroupImpl implements Group {
         this.messageContext = MessageContextFactory.newInstance(this);
     }
 
-    /**
-     * 取得group的配置信息。
-     */
+    /** 取得group的配置信息。 */
     public GroupConfig getGroupConfig() {
         return groupConfig;
     }
 
-    /**
-     * 取得包含此group的form。
-     */
+    /** 取得包含此group的form。 */
     public Form getForm() {
         return form;
     }
 
-    /**
-     * 取得group name，相当于<code>getGroupConfig().getName()</code>
-     */
+    /** 取得group name，相当于<code>getGroupConfig().getName()</code> */
     public String getName() {
         return getGroupConfig().getName();
     }
@@ -107,16 +98,12 @@ public class GroupImpl implements Group {
         return groupKey;
     }
 
-    /**
-     * 取得标识当前group的instance key。
-     */
+    /** 取得标识当前group的instance key。 */
     public String getInstanceKey() {
         return instanceKey;
     }
 
-    /**
-     * 判定group是否通过验证。
-     */
+    /** 判定group是否通过验证。 */
     public boolean isValid() {
         return valid;
     }
@@ -143,9 +130,7 @@ public class GroupImpl implements Group {
         return validated;
     }
 
-    /**
-     * 初始化group。
-     */
+    /** 初始化group。 */
     public void init() {
         init(null);
     }
@@ -189,23 +174,17 @@ public class GroupImpl implements Group {
         }
     }
 
-    /**
-     * 取得所有fields的列表。
-     */
+    /** 取得所有fields的列表。 */
     public Collection<Field> getFields() {
         return fieldList;
     }
 
-    /**
-     * 取得指定名称的field。field名称（大小写不敏感）
-     */
+    /** 取得指定名称的field。field名称（大小写不敏感） */
     public Field getField(String fieldName) {
         return fields.get(StringUtil.toLowerCase(fieldName));
     }
 
-    /**
-     * 取得group级别的错误信息表达式的context。
-     */
+    /** 取得group级别的错误信息表达式的context。 */
     protected MessageContext getMessageContext() {
         return messageContext;
     }
@@ -223,7 +202,7 @@ public class GroupImpl implements Group {
 
         if (log.isDebugEnabled()) {
             log.debug("Mapping properties to fields: group=\"{}\", object={}", getName(),
-                    ObjectUtil.identityToString(object));
+                      ObjectUtil.identityToString(object));
         }
 
         BeanWrapper bean = new BeanWrapperImpl(object);
@@ -271,7 +250,7 @@ public class GroupImpl implements Group {
         if (isValid()) {
             if (log.isDebugEnabled()) {
                 log.debug("Set validated properties of group \"" + getName() + "\" to object "
-                        + ObjectUtil.identityToString(object));
+                          + ObjectUtil.identityToString(object));
             }
 
             BeanWrapper bean = new BeanWrapperImpl(object);
@@ -295,13 +274,11 @@ public class GroupImpl implements Group {
         }
     }
 
-    /**
-     * 转换成易于阅读的字符串。
-     */
+    /** 转换成易于阅读的字符串。 */
     @Override
     public String toString() {
         return "Group[name: " + getName() + "." + getInstanceKey() + ", fields: "
-                + getGroupConfig().getFieldConfigList().size() + ", validated: " + isValidated() + ", valid: "
-                + isValid() + "]";
+               + getGroupConfig().getFieldConfigList().size() + ", validated: " + isValidated() + ", valid: "
+               + isValid() + "]";
     }
 }

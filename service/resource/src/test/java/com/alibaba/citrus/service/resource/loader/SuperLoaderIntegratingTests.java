@@ -22,15 +22,14 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
+import com.alibaba.citrus.service.resource.AbstractResourceLoadingTests;
+import com.alibaba.citrus.service.resource.ResourceLoadingService;
+import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.FileSystemResource;
-
-import com.alibaba.citrus.service.resource.AbstractResourceLoadingTests;
-import com.alibaba.citrus.service.resource.ResourceLoadingService;
-import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 
 public class SuperLoaderIntegratingTests extends AbstractResourceLoadingTests {
     @BeforeClass
@@ -48,17 +47,17 @@ public class SuperLoaderIntegratingTests extends AbstractResourceLoadingTests {
     public void noName() throws Exception {
         assertResourceServiceList("/no_name/webroot/test.txt", "test.txt", true, false);
         assertResourceServiceList("/no_name/webroot", "", true, true, "WEB-INF/", "appcontext/", "beans.xml",
-                "filter/", "loader/", "logback.xml", "myfolder/", "resources-root.xml",
-                "resources-skip-validation.xml", "test.txt");
+                                  "filter/", "loader/", "logback.xml", "myfolder/", "resources-root.xml",
+                                  "resources-skip-validation.xml", "test.txt");
         assertResourceServiceList("/no_name", "loader", true, true, "classpath-loader.xml", "file-loader.xml",
-                "super-loader-parent.xml", "super-loader.xml", "webapp-loader.xml");
+                                  "super-loader-parent.xml", "super-loader.xml", "webapp-loader.xml");
     }
 
     @Test
     public void withName() throws Exception {
         assertResourceServiceList("/with_name/test.txt", "test.txt", true, false);
         assertResourceServiceList("/with_name", "loader", true, true, "classpath-loader.xml", "file-loader.xml",
-                "super-loader-parent.xml", "super-loader.xml", "webapp-loader.xml");
+                                  "super-loader-parent.xml", "super-loader.xml", "webapp-loader.xml");
     }
 
     @Test
@@ -68,8 +67,8 @@ public class SuperLoaderIntegratingTests extends AbstractResourceLoadingTests {
         // resourceName == superLoader's resourceName
         assertResourceServiceList("/webroot/test.txt", "test.txt", true, false);
         assertResourceServiceList("/webroot/", "", true, true, "WEB-INF/", "appcontext/", "beans.xml", "filter/",
-                "loader/", "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml",
-                "test.txt");
+                                  "loader/", "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml",
+                                  "test.txt");
     }
 
     @Test
@@ -79,7 +78,7 @@ public class SuperLoaderIntegratingTests extends AbstractResourceLoadingTests {
         // 默认映射“/”
         assertResourceServiceList("/test.txt", "test.txt", true, false);
         assertResourceServiceList("/", "", true, true, "WEB-INF/", "appcontext/", "beans.xml", "filter/", "loader/",
-                "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml", "test.txt");
+                                  "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml", "test.txt");
 
         resourceLoadingService = (ResourceLoadingService) factory.getBean("defaultName1");
 
@@ -90,7 +89,7 @@ public class SuperLoaderIntegratingTests extends AbstractResourceLoadingTests {
     @Test
     public void noParent() throws Exception {
         ApplicationContext factory = new XmlApplicationContext(new FileSystemResource(new File(srcdir,
-                "loader/super-loader.xml")));
+                                                                                               "loader/super-loader.xml")));
 
         resourceLoadingService = (ResourceLoadingService) factory.getBean("resourceLoadingService");
         assertResourceServiceList("/no_name/webroot/test.txt", "test.txt", false, false);
@@ -112,18 +111,18 @@ public class SuperLoaderIntegratingTests extends AbstractResourceLoadingTests {
 
         // abc.txt存在于parent的路径/aaa/bbb上，也存在于/myfolder上
         assertEquals(new File(srcdir, "/WEB-INF/aaa/bbb/abc.txt"),
-                resourceLoadingService.getResourceAsFile("/WEB-INF/aaa/bbb/abc.txt"));
+                     resourceLoadingService.getResourceAsFile("/WEB-INF/aaa/bbb/abc.txt"));
 
         // def.txt只存在于/myfolder上
         assertEquals(new File(srcdir, "/myfolder/def.txt"),
-                resourceLoadingService.getResourceAsFile("/WEB-INF/aaa/bbb/def.txt"));
+                     resourceLoadingService.getResourceAsFile("/WEB-INF/aaa/bbb/def.txt"));
 
         // abc.txt存在于parent的路径/aaa/bbb上，也存在于/myfolder上
         assertEquals(new File(srcdir, "/WEB-INF/aaa/bbb/abc.txt"),
-                resourceLoadingService.getResourceAsFile("/WEB-INF2/aaa/bbb/abc.txt"));
+                     resourceLoadingService.getResourceAsFile("/WEB-INF2/aaa/bbb/abc.txt"));
 
         // def.txt只存在于/myfolder上
         assertEquals(new File(srcdir, "/myfolder/def.txt"),
-                resourceLoadingService.getResourceAsFile("/WEB-INF2/aaa/bbb/def.txt"));
+                     resourceLoadingService.getResourceAsFile("/WEB-INF2/aaa/bbb/def.txt"));
     }
 }

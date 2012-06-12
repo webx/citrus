@@ -199,9 +199,7 @@ public interface TypeInfo {
      */
     String getSimpleName();
 
-    /**
-     * 判断当前类型是否为原子类型，例如：<code>int</code>、<code>boolean</code>等。
-     */
+    /** 判断当前类型是否为原子类型，例如：<code>int</code>、<code>boolean</code>等。 */
     boolean isPrimitive();
 
     /**
@@ -216,9 +214,7 @@ public interface TypeInfo {
      */
     boolean isArray();
 
-    /**
-     * 判断当前类型是否为接口。
-     */
+    /** 判断当前类型是否为接口。 */
     boolean isInterface();
 
     /**
@@ -249,9 +245,7 @@ public interface TypeInfo {
      */
     TypeInfo getDirectComponentType();
 
-    /**
-     * 返回数组的维度，如果不是数组，则返回<code>0</code>。
-     */
+    /** 返回数组的维度，如果不是数组，则返回<code>0</code>。 */
     int getDimension();
 
     /**
@@ -363,7 +357,7 @@ public interface TypeInfo {
      * <p>
      * 如果<code>includeBaseType==false</code>，那么解析类型变量时，将不会取得其baseType。 例如：
      * </p>
-     *
+     * <p/>
      * <pre>
      * class MyClass&lt;A&gt; {
      *     List&lt;A&gt; listA;
@@ -386,13 +380,9 @@ public interface TypeInfo {
      */
     TypeInfo resolve(GenericDeclarationInfo context, boolean includeBaseType);
 
-    /**
-     * 用来创建<code>TypeInfo</code>的工厂。
-     */
+    /** 用来创建<code>TypeInfo</code>的工厂。 */
     abstract class Factory {
-        /**
-         * 取得指定{@link Type}对应的{@link TypeInfo}对象。
-         */
+        /** 取得指定{@link Type}对应的{@link TypeInfo}对象。 */
         public abstract TypeInfo getType(Type type);
 
         /**
@@ -424,9 +414,7 @@ public interface TypeInfo {
             return (ClassTypeInfo) getType(type);
         }
 
-        /**
-         * 取得一组{@link TypeInfo}对象。
-         */
+        /** 取得一组{@link TypeInfo}对象。 */
         public abstract TypeInfo[] getTypes(Type[] types);
 
         /**
@@ -437,33 +425,23 @@ public interface TypeInfo {
          */
         public abstract GenericDeclarationInfo getGenericDeclaration(GenericDeclaration declaration);
 
-        /**
-         * 创建一个参数化类型。
-         */
+        /** 创建一个参数化类型。 */
         public abstract ParameterizedTypeInfo getParameterizedType(TypeInfo type, TypeInfo... args);
 
-        /**
-         * 创建一个参数化类型。
-         */
+        /** 创建一个参数化类型。 */
         public final ParameterizedTypeInfo getParameterizedType(TypeInfo type, Type... args) {
             return getParameterizedType(type, getTypes(args));
         }
 
-        /**
-         * 创建一个参数化类型。
-         */
+        /** 创建一个参数化类型。 */
         public final ParameterizedTypeInfo getParameterizedType(Class<?> type, Type... args) {
             return getParameterizedType(getType(type), getTypes(args));
         }
 
-        /**
-         * 创建一个数组类型。
-         */
+        /** 创建一个数组类型。 */
         public abstract ArrayTypeInfo getArrayType(TypeInfo componentType, int dimension);
 
-        /**
-         * 创建一个数组类型。
-         */
+        /** 创建一个数组类型。 */
         public final ArrayTypeInfo getArrayType(Class<?> componentType, int dimension) {
             return getArrayType(getType(componentType), dimension);
         }
@@ -479,9 +457,7 @@ public interface TypeInfo {
             return (MethodInfo) getGenericDeclaration(method);
         }
 
-        /**
-         * 以指定类型作为上下文，取得指定{@link Method}对应的{@link MethodInfo}对象。
-         */
+        /** 以指定类型作为上下文，取得指定{@link Method}对应的{@link MethodInfo}对象。 */
         public final MethodInfo getMethod(Method method, TypeInfo type) {
             MethodInfo result = getMethod(method);
 
@@ -489,7 +465,7 @@ public interface TypeInfo {
                 Class<?> rawType = type.getRawType();
 
                 assertTrue(method.getDeclaringClass().isAssignableFrom(rawType),
-                        "method \"%s\" does not belong to type \"%s\"", method, type);
+                           "method \"%s\" does not belong to type \"%s\"", method, type);
 
                 if (type instanceof ClassTypeInfo) {
                     result = result.resolve((ClassTypeInfo) type, false);
@@ -510,9 +486,7 @@ public interface TypeInfo {
             return (MethodInfo) getGenericDeclaration(constructor);
         }
 
-        /**
-         * 以指定类型作为上下文，取得指定{@link Constructor}对应的{@link MethodInfo}对象。
-         */
+        /** 以指定类型作为上下文，取得指定{@link Constructor}对应的{@link MethodInfo}对象。 */
         public final MethodInfo getConstructor(Constructor<?> constructor, TypeInfo type) {
             MethodInfo result = getConstructor(constructor);
 
@@ -520,7 +494,7 @@ public interface TypeInfo {
                 Class<?> rawType = type.getRawType();
 
                 assertTrue(constructor.getDeclaringClass().equals(rawType),
-                        "constructor \"%s\" does not belong to type \"%s\"", constructor, type);
+                           "constructor \"%s\" does not belong to type \"%s\"", constructor, type);
 
                 if (type instanceof ClassTypeInfo) {
                     result = result.resolve((ClassTypeInfo) type, false);
@@ -530,14 +504,10 @@ public interface TypeInfo {
             return result;
         }
 
-        /**
-         * 取得指定{@link Field}对应的{@link FieldInfo}对象。
-         */
+        /** 取得指定{@link Field}对应的{@link FieldInfo}对象。 */
         public abstract FieldInfo getField(Field field);
 
-        /**
-         * 以指定类型作为上下文，取得指定{@link Field}对应的{@link FieldInfo}对象。
-         */
+        /** 以指定类型作为上下文，取得指定{@link Field}对应的{@link FieldInfo}对象。 */
         public final FieldInfo getField(Field field, TypeInfo type) {
             FieldInfo result = getField(field);
 
@@ -545,7 +515,7 @@ public interface TypeInfo {
                 Class<?> rawType = type.getRawType();
 
                 assertTrue(field.getDeclaringClass().isAssignableFrom(rawType),
-                        "field \"%s\" does not belong to type \"%s\"", field, type);
+                           "field \"%s\" does not belong to type \"%s\"", field, type);
 
                 if (type instanceof ClassTypeInfo) {
                     result = result.resolve((ClassTypeInfo) type, false);
@@ -555,9 +525,7 @@ public interface TypeInfo {
             return result;
         }
 
-        /**
-         * 创建factory，但避免在compile时刻依赖impl package。
-         */
+        /** 创建factory，但避免在compile时刻依赖impl package。 */
         private static Factory newFactory() {
             String factoryImplName = Factory.class.getPackage().getName() + ".impl.TypeInfoFactory";
             Factory factoryImpl = null;

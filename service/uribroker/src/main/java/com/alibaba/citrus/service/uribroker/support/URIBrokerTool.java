@@ -22,14 +22,13 @@ import static com.alibaba.citrus.util.CollectionUtil.*;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.service.pull.ToolFactory;
 import com.alibaba.citrus.service.pull.ToolSetFactory;
 import com.alibaba.citrus.service.uribroker.URIBrokerService;
 import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 取得所有<code>URIBroker</code>的pull tool。
@@ -44,50 +43,36 @@ public class URIBrokerTool implements ToolFactory, ToolSetFactory, InitializingB
         this.brokers = brokers;
     }
 
-    /**
-     * 初始化pull tool。
-     */
+    /** 初始化pull tool。 */
     public void afterPropertiesSet() throws Exception {
         assertNotNull(brokers, "no URIBrokerService");
     }
 
-    /**
-     * 每个请求都会创建新的实例。
-     */
+    /** 每个请求都会创建新的实例。 */
     public boolean isSingleton() {
         return false;
     }
 
-    /**
-     * 取得所有exposed URI broker的名称。
-     */
+    /** 取得所有exposed URI broker的名称。 */
     public Iterable<String> getToolNames() {
         return brokers.getExposedNames();
     }
 
-    /**
-     * 取得一个对象，可以从中取得所有的brokers。
-     */
+    /** 取得一个对象，可以从中取得所有的brokers。 */
     public Object createTool() throws Exception {
         return new Helper();
     }
 
-    /**
-     * 取得指定名称的broker。
-     */
+    /** 取得指定名称的broker。 */
     public Object createTool(String name) throws Exception {
         return brokers.getURIBroker(name);
     }
 
-    /**
-     * 这是一个辅助类，每个请求都会创建一次。
-     */
+    /** 这是一个辅助类，每个请求都会创建一次。 */
     public class Helper {
         private Map<String, URIBroker> cache = createHashMap();
 
-        /**
-         * 便于模板使用的方法：取得指定名称的broker。
-         */
+        /** 便于模板使用的方法：取得指定名称的broker。 */
         public URIBroker get(String name) {
             URIBroker broker = cache.get(name);
 

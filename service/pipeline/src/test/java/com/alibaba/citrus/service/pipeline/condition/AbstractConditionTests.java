@@ -20,16 +20,15 @@ package com.alibaba.citrus.service.pipeline.condition;
 import static com.alibaba.citrus.generictype.TypeInfoUtil.*;
 import static org.easymock.EasyMock.*;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-
 import com.alibaba.citrus.service.pipeline.AbstractPipelineTests;
 import com.alibaba.citrus.service.pipeline.Condition;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 public abstract class AbstractConditionTests<C extends Condition> extends AbstractPipelineTests {
-    protected Class<C> conditionClass;
-    protected C condition;
+    protected Class<C>        conditionClass;
+    protected C               condition;
     protected PipelineContext pipelineContext;
 
     @BeforeClass

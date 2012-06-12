@@ -28,9 +28,7 @@ import com.alibaba.citrus.expr.support.ExpressionSupport;
 public class ConstantExpression extends ExpressionSupport {
     private Object value;
 
-    /**
-     * 创建一个常量表达式。
-     */
+    /** 创建一个常量表达式。 */
     public ConstantExpression() {
     }
 

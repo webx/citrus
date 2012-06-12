@@ -26,15 +26,13 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.util.Collection;
 import java.util.List;
 
+import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
-
 public class PageAuthorizationServiceDefinitionParser extends
-        AbstractNamedBeanDefinitionParser<PageAuthorizationServiceImpl> {
+                                                      AbstractNamedBeanDefinitionParser<PageAuthorizationServiceImpl> {
 
     @Override
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {

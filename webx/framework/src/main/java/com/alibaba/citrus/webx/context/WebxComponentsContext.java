@@ -17,12 +17,11 @@
 
 package com.alibaba.citrus.webx.context;
 
-import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.Assert.ExceptionType.*;
-
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import static com.alibaba.citrus.util.Assert.*;
 
 import com.alibaba.citrus.webx.WebxComponents;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 
 /**
  * 用来初始化<code>WebxComponents</code>。
@@ -40,9 +39,7 @@ public class WebxComponentsContext extends WebxApplicationContext {
         this.componentsLoader = loader;
     }
 
-    /**
-     * 取得所有的components。
-     */
+    /** 取得所有的components。 */
     public WebxComponents getWebxComponents() {
         return getLoader().getWebxComponents();
     }
@@ -59,9 +56,7 @@ public class WebxComponentsContext extends WebxApplicationContext {
         getLoader().finishRefresh();
     }
 
-    /**
-     * 在创建子容器时，给parent一个设置子context的机会。
-     */
+    /** 在创建子容器时，给parent一个设置子context的机会。 */
     protected void setupComponentContext(WebxComponentContext componentContext) {
     }
 }

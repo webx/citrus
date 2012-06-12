@@ -22,17 +22,11 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.junit.After;
-import org.junit.Before;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.FileSystemResource;
 
 import com.alibaba.citrus.service.form.impl.FormServiceImpl;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
@@ -47,26 +41,30 @@ import com.meterware.httpunit.protocol.UploadFileSpec;
 import com.meterware.servletunit.InvocationContext;
 import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
+import org.junit.After;
+import org.junit.Before;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.FileSystemResource;
 
 public abstract class AbstractFormServiceTests {
     protected static ApplicationContext factory;
-    protected FormServiceImpl formService;
+    protected        FormServiceImpl    formService;
 
     // web client
     protected ServletUnitClient client;
-    protected WebResponse clientResponse;
+    protected WebResponse       clientResponse;
 
     // servlet request/response
-    protected InvocationContext invocationContext;
-    protected HttpServletRequest request;
+    protected InvocationContext   invocationContext;
+    protected HttpServletRequest  request;
     protected HttpServletResponse response;
-    protected ServletConfig config;
+    protected ServletConfig       config;
 
     // request contexts
     protected RequestContextChainingService requestContexts;
-    protected RequestContext rc;
-    protected HttpServletRequest newRequest;
-    protected HttpServletResponse newResponse;
+    protected RequestContext                rc;
+    protected HttpServletRequest            newRequest;
+    protected HttpServletResponse           newResponse;
 
     protected final void getFormService(String name) {
         getFormService(name, factory);
@@ -190,12 +188,12 @@ public abstract class AbstractFormServiceTests {
 
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-                IOException {
+                                                                                              IOException {
         }
 
         @Override
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-                IOException {
+                                                                                               IOException {
             doGet(request, response);
         }
     }

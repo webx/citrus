@@ -22,15 +22,14 @@ import static org.junit.Assert.*;
 
 import java.util.Locale;
 
+import com.alibaba.citrus.util.i18n.LocaleUtil;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanCreationException;
 
-import com.alibaba.citrus.util.i18n.LocaleUtil;
-
 public class MessageSourceTests extends AbstractFormServiceTests {
-    private Form form;
+    private Form  form;
     private Group group;
     private Field field1;
     private Field field2;
@@ -63,8 +62,8 @@ public class MessageSourceTests extends AbstractFormServiceTests {
         init("form1");
 
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "" }, // group1.field1
-                { "_fm.g._0.fi", "" }, // group1.field2
+                                           { "_fm.g._0.f", "" }, // group1.field1
+                                           { "_fm.g._0.fi", "" }, // group1.field2
         };
 
         // zh_CN
@@ -107,8 +106,8 @@ public class MessageSourceTests extends AbstractFormServiceTests {
         init("form2");
 
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "" }, // group1.field1
-                { "_fm.g._0.fi", "" }, // group1.field2
+                                           { "_fm.g._0.f", "" }, // group1.field1
+                                           { "_fm.g._0.fi", "" }, // group1.field2
         };
 
         // zh_CN

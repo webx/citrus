@@ -25,15 +25,6 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.FileSystemResource;
-
 import com.alibaba.citrus.logconfig.support.ConfigurableLogger.Level;
 import com.alibaba.citrus.service.requestcontext.impl.RequestContextChainingServiceImpl;
 import com.alibaba.citrus.service.requestcontext.locale.impl.SetLocaleRequestContextFactoryImpl;
@@ -49,12 +40,20 @@ import com.alibaba.citrus.service.requestcontext.session.interceptor.SessionLife
 import com.alibaba.citrus.service.requestcontext.session.store.cookie.impl.CookieStoreImpl;
 import com.alibaba.citrus.service.requestcontext.session.store.cookie.impl.SingleValuedCookieStoreImpl;
 import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.FileSystemResource;
 
 @RunWith(Parameterized.class)
 public class RequestContextSkipValidationTests {
-    private final boolean skipValidation;
-    private ApplicationContext factory;
-    private RequestContextChainingServiceImpl service;
+    private final boolean                           skipValidation;
+    private       ApplicationContext                factory;
+    private       RequestContextChainingServiceImpl service;
 
     public RequestContextSkipValidationTests(boolean skipValidation) {
         this.skipValidation = skipValidation;

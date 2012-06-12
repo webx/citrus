@@ -30,10 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-
 import com.alibaba.citrus.service.pull.PullContext;
 import com.alibaba.citrus.service.pull.PullException;
 import com.alibaba.citrus.service.pull.PullService;
@@ -43,27 +39,30 @@ import com.alibaba.citrus.service.pull.ToolNameAware;
 import com.alibaba.citrus.service.pull.ToolSetFactory;
 import com.alibaba.citrus.service.pull.impl.PullServiceImpl.ToolName;
 import com.alibaba.citrus.service.pull.impl.PullServiceImpl.ToolSetInfo;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
 
 public class PullServiceTests extends AbstractPullServiceTests {
     private PullContext context;
-    private String[] staticToolNames;
-    private String[] allNames;
-    private String[] allValues;
-    private String[] allNamesWithParent;
-    private String[] allValuesWithParent;
+    private String[]    staticToolNames;
+    private String[]    allNames;
+    private String[]    allValues;
+    private String[]    allNamesWithParent;
+    private String[]    allValuesWithParent;
 
     // service instance vars
-    private Map<String, ToolFactory> tools;
+    private Map<String, ToolFactory>                 tools;
     private Map<String, ToolSetInfo<ToolSetFactory>> toolsInSet;
-    private Map<String, RuntimeToolSetFactory> toolsRuntime;
-    private Map<String, Object> prePulledTools;
-    private Set<ToolName> toolNames;
+    private Map<String, RuntimeToolSetFactory>       toolsRuntime;
+    private Map<String, Object>                      prePulledTools;
+    private Set<ToolName>                            toolNames;
 
     // context instance vars
-    private Map<String, Object> context_pulledTools;
-    private Map<String, RuntimeToolSetFactory> context_toolsRuntime;
+    private Map<String, Object>                             context_pulledTools;
+    private Map<String, RuntimeToolSetFactory>              context_toolsRuntime;
     private Map<String, ToolSetInfo<RuntimeToolSetFactory>> context_toolsInRuntimeSet;
-    private Set<ToolName> context_toolNames;
+    private Set<ToolName>                                   context_toolNames;
 
     @Before
     public void init() {
@@ -117,17 +116,17 @@ public class PullServiceTests extends AbstractPullServiceTests {
         service.setToolFactories(factories);
 
         staticToolNames = new String[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o",
-                "p", "prototype.1", "prototype.2", "prototypes.3", "prototypes.4", "runtime.3", "runtime.4",
-                "singleton.1", "singleton.2", "singletons.3", "singletons.4" };
+                                         "p", "prototype.1", "prototype.2", "prototypes.3", "prototypes.4", "runtime.3", "runtime.4",
+                                         "singleton.1", "singleton.2", "singletons.3", "singletons.4" };
 
         // all names and values including runtime tools
         allNames = new String[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
-                "prototype.1", "prototype.2", "prototypes.3", "prototypes.4", "q", "r", "runtime.3", "runtime.4", "s",
-                "singleton.1", "singleton.2", "singletons.3", "singletons.4", "t", "u", "v", "w", "x" };
+                                  "prototype.1", "prototype.2", "prototypes.3", "prototypes.4", "q", "r", "runtime.3", "runtime.4", "s",
+                                  "singleton.1", "singleton.2", "singletons.3", "singletons.4", "t", "u", "v", "w", "x" };
 
         allValues = new String[] { "1", "2", "3", null, "5", "6", "7", null, "9", "10", "11", null, "13", "14", "15",
-                null, "prototype.1", null, "prototypes.3", null, "17", "18", "runtime.3", null, "19", "singleton.1",
-                null, "singletons.3", null, null, "21", "22", "23", null };
+                                   null, "prototype.1", null, "prototypes.3", null, "17", "18", "runtime.3", null, "19", "singleton.1",
+                                   null, "singletons.3", null, null, "21", "22", "23", null };
     }
 
     @SuppressWarnings("unchecked")
@@ -195,14 +194,14 @@ public class PullServiceTests extends AbstractPullServiceTests {
 
         // all names and values including runtime tools and parent's tools
         allNamesWithParent = new String[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o",
-                "p", "prototype.1", "prototype.2", "prototype.3", "prototypes.3", "prototypes.4", "prototypes.5", "q",
-                "r", "runtime.3", "runtime.4", "runtime.5", "s", "singleton.1", "singleton.2", "singleton.3",
-                "singletons.3", "singletons.4", "singletons.5", "t", "u", "v", "w", "x", "z1", "z2", "z3" };
+                                            "p", "prototype.1", "prototype.2", "prototype.3", "prototypes.3", "prototypes.4", "prototypes.5", "q",
+                                            "r", "runtime.3", "runtime.4", "runtime.5", "s", "singleton.1", "singleton.2", "singleton.3",
+                                            "singletons.3", "singletons.4", "singletons.5", "t", "u", "v", "w", "x", "z1", "z2", "z3" };
 
         allValuesWithParent = new String[] { "1", "2", "3", null, "5", "6", "7", null, "9", "10", "11", null, "13",
-                "14", "15", null, "prototype.1", null, "prototype.3", "prototypes.3", null, "prototypes.5", "17", "18",
-                "runtime.3", null, "runtime.5", "19", "singleton.1", null, "singleton.3", "singletons.3", null,
-                "singletons.5", null, "21", "22", "23", null, "11", "22", "33" };
+                                             "14", "15", null, "prototype.1", null, "prototype.3", "prototypes.3", null, "prototypes.5", "17", "18",
+                                             "runtime.3", null, "runtime.5", "19", "singleton.1", null, "singleton.3", "singletons.3", null,
+                                             "singletons.5", null, "21", "22", "23", null, "11", "22", "33" };
     }
 
     @Test
@@ -262,7 +261,7 @@ public class PullServiceTests extends AbstractPullServiceTests {
         }
 
         expect(parentContext.containsBean(beanName)).andReturn(true).anyTimes();
-        expect(parentContext.containsBean(org.easymock.EasyMock.<String> anyObject())).andReturn(false).anyTimes();
+        expect(parentContext.containsBean(org.easymock.EasyMock.<String>anyObject())).andReturn(false).anyTimes();
         expect(parentContext.getBean(beanName)).andReturn(parent).anyTimes();
 
         replay(parentContext, thisContext);
@@ -337,14 +336,14 @@ public class PullServiceTests extends AbstractPullServiceTests {
 
         // prePulledTools - pre-pulled singletons
         assertArrayEquals(new Object[] { "a", "b", "c", "d", "e", "f", "g", "h", "singleton.1", "singleton.2",
-                "singletons.3", "singletons.4" }, prePulledTools.keySet().toArray());
+                                         "singletons.3", "singletons.4" }, prePulledTools.keySet().toArray());
 
         assertArrayEquals(new Object[] { "1", "2", "3", NULL_PLACEHOLDER, "5", "6", "7", NULL_PLACEHOLDER,
-                "singleton.1", NULL_PLACEHOLDER, "singletons.3", NULL_PLACEHOLDER }, prePulledTools.values().toArray());
+                                         "singleton.1", NULL_PLACEHOLDER, "singletons.3", NULL_PLACEHOLDER }, prePulledTools.values().toArray());
 
         // tools - non-singleton tools only
         assertArrayEquals(new Object[] { "prototype.1", "prototype.2", "prototypes.3", "prototypes.4", "runtime.3",
-                "runtime.4" }, tools.keySet().toArray());
+                                         "runtime.4" }, tools.keySet().toArray());
 
         values = createArrayList();
 
@@ -353,7 +352,7 @@ public class PullServiceTests extends AbstractPullServiceTests {
         }
 
         assertArrayEquals(new Object[] { "prototype.1", null, "prototypes.3", null, "runtime.3", null },
-                values.toArray());
+                          values.toArray());
 
         // toolsInSet - non-singleton tools in set only
         assertArrayEquals(new Object[] { "i", "j", "k", "l", "m", "n", "o", "p" }, toolsInSet.keySet().toArray());
@@ -368,7 +367,7 @@ public class PullServiceTests extends AbstractPullServiceTests {
 
         // toolsRuntime - runtime tool sets only
         assertArrayEquals(new Object[] { "runtime.1", "runtime.2", "runtime.3", "runtime.4" }, toolsRuntime.keySet()
-                .toArray());
+                                                                                                           .toArray());
 
         assertEquals(toolNames.size(), tools.size() + toolsInSet.size() + prePulledTools.size());
     }
@@ -713,7 +712,7 @@ public class PullServiceTests extends AbstractPullServiceTests {
             fail();
         } catch (PullException e) {
             assertThat(e,
-                    exception(IllegalArgumentException.class, "Could not create tool: \"mysingleton\"", "my error"));
+                       exception(IllegalArgumentException.class, "Could not create tool: \"mysingleton\"", "my error"));
         }
 
         try {
@@ -723,7 +722,7 @@ public class PullServiceTests extends AbstractPullServiceTests {
             assertThat(
                     e,
                     exception(IllegalArgumentException.class, "Could not create tool: \"mysingletonSet.subname\"",
-                            "my error"));
+                              "my error"));
         }
 
         // non-singleton
@@ -734,7 +733,7 @@ public class PullServiceTests extends AbstractPullServiceTests {
             fail();
         } catch (PullException e) {
             assertThat(e,
-                    exception(IllegalArgumentException.class, "Could not create tool: \"myprototype\"", "my error"));
+                       exception(IllegalArgumentException.class, "Could not create tool: \"myprototype\"", "my error"));
         }
 
         createPullService("myprototypeSet", new ExceptionToolSetFactory(false, "my error"));
@@ -746,7 +745,7 @@ public class PullServiceTests extends AbstractPullServiceTests {
             assertThat(
                     e,
                     exception(IllegalArgumentException.class, "Could not create tool: \"myprototypeSet.subname\"",
-                            "my error"));
+                              "my error"));
         }
 
         // runtime
@@ -759,7 +758,7 @@ public class PullServiceTests extends AbstractPullServiceTests {
             assertThat(
                     e,
                     exception(IllegalArgumentException.class, "Could not create tool: \"myruntime.subname\"",
-                            "my error"));
+                              "my error"));
         }
 
         // runtime - failure on createTool()
@@ -772,7 +771,7 @@ public class PullServiceTests extends AbstractPullServiceTests {
             assertThat(
                     e,
                     exception(IllegalArgumentException.class, "Could not create runtime tool-set: \"myruntime\"",
-                            "my error"));
+                              "my error"));
         }
     }
 
@@ -1139,7 +1138,7 @@ public class PullServiceTests extends AbstractPullServiceTests {
 
     private static class ExceptionBaseFactory {
         private boolean singleton;
-        private String msg;
+        private String  msg;
         private boolean failOnCreatingToolSet;
 
         public ExceptionBaseFactory(boolean singleton, String msg) {

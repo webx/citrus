@@ -32,9 +32,7 @@ import org.slf4j.LoggerFactory;
 public abstract class ConfigurableLogger {
     private Logger log;
 
-    /**
-     * 假如没有设置<code>logName</code>，那么就把日志输出到这个默认的logger中。
-     */
+    /** 假如没有设置<code>logName</code>，那么就把日志输出到这个默认的logger中。 */
     protected abstract Logger getDefaultLogger();
 
     public final Logger getLogger() {
@@ -128,9 +126,7 @@ public abstract class ConfigurableLogger {
         return getClass().getSimpleName() + "[" + getLogger().getName() + "]";
     }
 
-    /**
-     * 日志的级别。
-     */
+    /** 日志的级别。 */
     public static enum Level {
         trace,
         debug,

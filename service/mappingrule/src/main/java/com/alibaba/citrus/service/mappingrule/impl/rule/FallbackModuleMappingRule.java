@@ -23,15 +23,14 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.mappingrule.MappingRuleException;
 import com.alibaba.citrus.service.mappingrule.support.AbstractModuleMappingRule;
 import com.alibaba.citrus.service.mappingrule.support.AbstractModuleMappingRuleDefinitionParser;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
 import com.alibaba.citrus.util.StringUtil;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 向上搜索的模块映射规则。
@@ -62,10 +61,10 @@ import com.alibaba.citrus.util.StringUtil;
  * @author Michael Zhou
  */
 public class FallbackModuleMappingRule extends AbstractModuleMappingRule {
-    public static final String DEFAULT_NAME = "Default";
+    public static final String  DEFAULT_NAME            = "Default";
     public static final boolean DEFAULT_MATCH_LAST_NAME = false;
 
-    private String defaultName;
+    private String  defaultName;
     private boolean matchLastName;
 
     public void setDefaultName(String defaultName) {

@@ -34,9 +34,6 @@ import java.lang.reflect.WildcardType;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.alibaba.citrus.generictype.ArrayTypeInfo;
 import com.alibaba.citrus.generictype.BoundedTypeInfo;
 import com.alibaba.citrus.generictype.ClassTypeInfo;
@@ -51,6 +48,8 @@ import com.alibaba.citrus.generictype.TypeInfo;
 import com.alibaba.citrus.generictype.TypeVariableInfo;
 import com.alibaba.citrus.generictype.WildcardTypeInfo;
 import com.alibaba.citrus.util.ClassUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 用来创建{@link TypeInfo}的工厂。
@@ -58,36 +57,28 @@ import com.alibaba.citrus.util.ClassUtil;
  * @author Michael Zhou
  */
 public class TypeInfoFactory extends TypeInfo.Factory {
-    private final Map<Class<?>, TypeInfo> classCache = createConcurrentHashMap(); // XXX! use weak ref instead
-    private static Logger log = LoggerFactory.getLogger(TypeInfo.class);
+    private final  Map<Class<?>, TypeInfo> classCache = createConcurrentHashMap(); // XXX! use weak ref instead
+    private static Logger                  log        = LoggerFactory.getLogger(TypeInfo.class);
 
-    /**
-     * 取得指定{@link Type}对应的{@link TypeInfo}对象。
-     */
+    /** 取得指定{@link Type}对应的{@link TypeInfo}对象。 */
     @Override
     public final TypeInfo getType(Type type) {
         return buildType(type, null);
     }
 
-    /**
-     * 取得一组{@link TypeInfo}对象。
-     */
+    /** 取得一组{@link TypeInfo}对象。 */
     @Override
     public final TypeInfo[] getTypes(Type[] types) {
         return buildTypes(types, null);
     }
 
-    /**
-     * 取得指定{@link GenericDeclaration}对应的{@link GenericDeclarationInfo}对象。
-     */
+    /** 取得指定{@link GenericDeclaration}对应的{@link GenericDeclarationInfo}对象。 */
     @Override
     public final GenericDeclarationInfo getGenericDeclaration(GenericDeclaration declaration) {
         return buildGenericDeclaration(declaration, null);
     }
 
-    /**
-     * 取得指定{@link Field}对应的{@link FieldInfo}对象。
-     */
+    /** 取得指定{@link Field}对应的{@link FieldInfo}对象。 */
     @Override
     public final FieldInfo getField(Field field) {
         ClassTypeInfo declaringType = getClassType(field.getDeclaringClass());
@@ -96,9 +87,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
         return new FieldImpl(field, declaringType, type);
     }
 
-    /**
-     * 创建一个参数化类型。
-     */
+    /** 创建一个参数化类型。 */
     @Override
     public final ParameterizedTypeInfo getParameterizedType(TypeInfo type, TypeInfo... args) {
         assertTrue(type instanceof RawTypeInfo, "type should be RawTypeInfo");
@@ -110,13 +99,11 @@ public class TypeInfoFactory extends TypeInfo.Factory {
         return parameterizedType;
     }
 
-    /**
-     * 创建一个数组类型。
-     */
+    /** 创建一个数组类型。 */
     @Override
     public final ArrayTypeInfo getArrayType(TypeInfo componentType, int dimension) {
         assertTrue(componentType instanceof RawTypeInfo || componentType instanceof ParameterizedTypeInfo
-                || componentType instanceof TypeVariableInfo, "unsupported componentType: %s", componentType);
+                   || componentType instanceof TypeVariableInfo, "unsupported componentType: %s", componentType);
         assertTrue(dimension > 0, "dimension");
 
         ArrayTypeInfo arrayType;
@@ -138,9 +125,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
         return arrayType;
     }
 
-    /**
-     * 从<code>java.lang.reflect.Type</code>创建<code>TypeInfo</code>。
-     */
+    /** 从<code>java.lang.reflect.Type</code>创建<code>TypeInfo</code>。 */
     private TypeInfo buildType(Type type, BuildingCache buildingCache) {
         assertNotNull(type, "type");
 
@@ -167,9 +152,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
         return null;
     }
 
-    /**
-     * 创建一组<code>TypeInfo</code>。
-     */
+    /** 创建一组<code>TypeInfo</code>。 */
     private TypeInfo[] buildTypes(Type[] types, BuildingCache buildingCache) {
         if (isEmptyArray(types)) {
             return new TypeInfo[0];
@@ -209,9 +192,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
         }
     }
 
-    /**
-     * 从非数组<code>Class<?></code>中创建<code>RawTypeInfo</code>。
-     */
+    /** 从非数组<code>Class<?></code>中创建<code>RawTypeInfo</code>。 */
     private RawTypeInfo buildRawType(Class<?> type, BuildingCache buildingCache) {
         RawTypeImpl rawType;
 
@@ -239,9 +220,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
         return rawType;
     }
 
-    /**
-     * 创建type parameters，如果有的话
-     */
+    /** 创建type parameters，如果有的话 */
     private TypeVariableInfo[] buildTypeVariables(GenericDeclaration declaration, GenericDeclarationInfo declInfo,
                                                   BuildingCache buildingCache) {
         TypeVariable<?>[] params = declaration.getTypeParameters();
@@ -262,9 +241,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
         return vars;
     }
 
-    /**
-     * 从数组<code>Class<?></code>中创建<code>ArrayTypeInfo</code>。
-     */
+    /** 从数组<code>Class<?></code>中创建<code>ArrayTypeInfo</code>。 */
     private ArrayTypeInfo buildArrayType(Class<?> type, BuildingCache buildingCache) {
         ArrayTypeImpl arrayType = (ArrayTypeImpl) getFromClassCache(type);
 
@@ -293,16 +270,14 @@ public class TypeInfoFactory extends TypeInfo.Factory {
         return arrayType;
     }
 
-    /**
-     * 从数组<code>GenericArrayType</code>中创建<code>ArrayTypeInfo</code>。
-     */
+    /** 从数组<code>GenericArrayType</code>中创建<code>ArrayTypeInfo</code>。 */
     private ArrayTypeInfo buildArrayType(GenericArrayType type, BuildingCache buildingCache) {
         int dimension = 0;
         Type component = type;
         Type directComponent = null;
 
         // GenericArrayType的成员类型，只可能是三种：Class，TypeVariable和GenericArrayType
-        for (;;) {
+        for (; ; ) {
             if (component instanceof Class<?>) {
                 if (((Class<?>) component).isArray()) {
                     component = ((Class<?>) component).getComponentType();
@@ -324,14 +299,12 @@ public class TypeInfoFactory extends TypeInfo.Factory {
 
         TypeInfo componentType = buildType(component, buildingCache);
         TypeInfo directComponentType = component.equals(directComponent) ? componentType : buildType(directComponent,
-                buildingCache);
+                                                                                                     buildingCache);
 
         return new ArrayTypeImpl(componentType, directComponentType, dimension, null);
     }
 
-    /**
-     * 从<code>ParameterizedType</code>中创建<code>ParameterizedTypeInfo</code>。
-     */
+    /** 从<code>ParameterizedType</code>中创建<code>ParameterizedTypeInfo</code>。 */
     private ParameterizedTypeInfo buildParameterizedType(ParameterizedType type, BuildingCache buildingCache) {
         if (buildingCache == null) {
             buildingCache = new BuildingCache();
@@ -367,9 +340,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
         return parameterizedTypeInfo;
     }
 
-    /**
-     * 从<code>TypeVariable</code>中创建<code>TypeVariableInfo</code>。
-     */
+    /** 从<code>TypeVariable</code>中创建<code>TypeVariableInfo</code>。 */
     private TypeVariableInfo buildTypeVariable(TypeVariable<?> type, BuildingCache buildingCache) {
         if (buildingCache == null) {
             buildingCache = new BuildingCache();
@@ -382,9 +353,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
         return new TypeVariableImpl(name, declaration, upperBounds);
     }
 
-    /**
-     * 从<code>WildcardType</code>中创建<code>WildcardTypeInfo</code>。
-     */
+    /** 从<code>WildcardType</code>中创建<code>WildcardTypeInfo</code>。 */
     private WildcardTypeInfo buildWildcardType(WildcardType type, BuildingCache buildingCache) {
         if (buildingCache == null) {
             buildingCache = new BuildingCache();
@@ -408,7 +377,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
             buildingCache.setGenericDeclaration(method, methodInfo);
 
             buildMethodOrConstructor(methodInfo, method.getGenericReturnType(), method.getGenericParameterTypes(),
-                    method.getGenericExceptionTypes(), method.getDeclaringClass(), buildingCache);
+                                     method.getGenericExceptionTypes(), method.getDeclaringClass(), buildingCache);
         }
 
         return methodInfo;
@@ -426,7 +395,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
             buildingCache.setGenericDeclaration(constructor, methodInfo);
 
             buildMethodOrConstructor(methodInfo, null, constructor.getGenericParameterTypes(),
-                    constructor.getGenericExceptionTypes(), constructor.getDeclaringClass(), buildingCache);
+                                     constructor.getGenericExceptionTypes(), constructor.getDeclaringClass(), buildingCache);
         }
 
         return methodInfo;
@@ -451,9 +420,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
         classCache.put(type, typeInfo);
     }
 
-    /**
-     * 缓存{@link ParameterizedTypeInfo}、{@link Method}和{@link Constructor}。
-     */
+    /** 缓存{@link ParameterizedTypeInfo}、{@link Method}和{@link Constructor}。 */
     private static class BuildingCache extends HashMap<Object, GenericDeclarationInfo> {
         private static final long serialVersionUID = -2169655543193524884L;
 
@@ -482,9 +449,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
         }
     }
 
-    /**
-     * 在super类型中查找等同于指定类的类型。
-     */
+    /** 在super类型中查找等同于指定类的类型。 */
     static TypeInfo findSupertype(TypeInfo type, Class<?> equivalentClass) {
         for (TypeInfo supertype : type.getSupertypes()) {
             if (supertype.getRawType().equals(equivalentClass)) {
@@ -495,9 +460,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
         return null;
     }
 
-    /**
-     * 在context中查找类型变量对应的实际类型。
-     */
+    /** 在context中查找类型变量对应的实际类型。 */
     static TypeInfo resolveTypeVariable(TypeVariableInfo var, GenericDeclarationInfo context, boolean includeBaseType) {
         GenericDeclarationInfo declaration = assertNotNull(var, "var").getGenericDeclaration();
         TypeInfo result = null;
@@ -508,7 +471,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
         // supertypes中查找和declaration匹配的type
         if (declaration instanceof ClassTypeInfo && context instanceof ClassTypeInfo) {
             TypeInfo declarationEquivalent = findSupertype((ClassTypeInfo) context,
-                    ((ClassTypeInfo) declaration).getRawType());
+                                                           ((ClassTypeInfo) declaration).getRawType());
 
             if (declarationEquivalent != null) {
                 if (!includeBaseType && declarationEquivalent instanceof RawTypeInfo) {
@@ -517,7 +480,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
                     TypeInfo declarationResolved = declarationEquivalent.resolve(context, includeBaseType);
 
                     assertTrue(declarationResolved instanceof GenericDeclarationInfo,
-                            "Unexpected declarationResolved: %s", declarationResolved);
+                               "Unexpected declarationResolved: %s", declarationResolved);
 
                     result = ((GenericDeclarationInfo) declarationResolved).getActualTypeArgument(var.getName());
                 }
@@ -560,9 +523,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
         return type;
     }
 
-    /**
-     * 取得类型中的方法。
-     */
+    /** 取得类型中的方法。 */
     static MethodInfo getMethod(ClassTypeInfo type, String methodName, Class<?>... paramTypes) {
         Class<?> rawType = assertNotNull(type, "type").getRawType();
 
@@ -592,9 +553,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
         return factory.getMethod(method, type);
     }
 
-    /**
-     * 取得类型中的构造函数。
-     */
+    /** 取得类型中的构造函数。 */
     static MethodInfo getConstructor(ClassTypeInfo type, Class<?>... paramTypes) {
         Class<?> rawType = assertNotNull(type, "type").getRawType();
 
@@ -614,9 +573,7 @@ public class TypeInfoFactory extends TypeInfo.Factory {
         return factory.getConstructor(constructor, type);
     }
 
-    /**
-     * 取得类型中的字段。
-     */
+    /** 取得类型中的字段。 */
     static FieldInfo getField(ClassTypeInfo type, ClassTypeInfo declaringType, String name) {
         Field field = null;
 

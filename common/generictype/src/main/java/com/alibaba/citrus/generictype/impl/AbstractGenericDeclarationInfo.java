@@ -34,8 +34,8 @@ import com.alibaba.citrus.generictype.TypeVariableInfo;
  * @author Michael Zhou
  */
 abstract class AbstractGenericDeclarationInfo implements GenericDeclarationInfo {
-    protected final GenericDeclaration declaration;
-    private List<TypeVariableInfo> parameters;
+    protected final GenericDeclaration     declaration;
+    private         List<TypeVariableInfo> parameters;
 
     AbstractGenericDeclarationInfo(GenericDeclaration declaration) {
         this.declaration = assertNotNull(declaration, "declaration");
@@ -74,17 +74,13 @@ abstract class AbstractGenericDeclarationInfo implements GenericDeclarationInfo 
         return null;
     }
 
-    /**
-     * 取得hash值。
-     */
+    /** 取得hash值。 */
     @Override
     public int hashCode() {
         return getClass().hashCode() ^ declaration.hashCode();
     }
 
-    /**
-     * 判断两个对象是否相同。
-     */
+    /** 判断两个对象是否相同。 */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -100,15 +96,11 @@ abstract class AbstractGenericDeclarationInfo implements GenericDeclarationInfo 
         return declaration.equals(otherDecl.declaration);
     }
 
-    /**
-     * 转换成字符串。
-     */
+    /** 转换成字符串。 */
     @Override
     public abstract String toString();
 
-    /**
-     * 取得参数表的字符串表示。
-     */
+    /** 取得参数表的字符串表示。 */
     protected int appendTypeParameters(StringBuilder buf) {
         int length = buf.length();
 

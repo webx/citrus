@@ -17,12 +17,11 @@
 
 package com.alibaba.test.app1.module.screens;
 
+import com.alibaba.citrus.service.requestcontext.rundata.RunData;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.alibaba.citrus.service.requestcontext.rundata.RunData;
-
 public class MyScreen extends AbstractScreen {
-    private String name;
+    private String  name;
     @Autowired
     private RunData rundata;
 

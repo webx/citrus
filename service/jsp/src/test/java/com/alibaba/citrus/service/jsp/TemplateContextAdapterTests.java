@@ -26,20 +26,18 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import com.alibaba.citrus.service.jsp.impl.TemplateContextAdapter;
 import com.alibaba.citrus.service.template.TemplateContext;
 import com.alibaba.citrus.service.template.support.MappedTemplateContext;
+import org.junit.Before;
+import org.junit.Test;
 
 public class TemplateContextAdapterTests {
-    private HttpServletRequest request;
-    private TemplateContext context;
+    private HttpServletRequest     request;
+    private TemplateContext        context;
     private TemplateContextAdapter adapter;
 
     @Before
@@ -109,7 +107,7 @@ public class TemplateContextAdapterTests {
     public void getAttributeNames() {
         List<String> keys = createArrayList();
 
-        for (Enumeration<String> e = adapter.getAttributeNames(); e.hasMoreElements();) {
+        for (Enumeration<String> e = adapter.getAttributeNames(); e.hasMoreElements(); ) {
             keys.add(e.nextElement());
         }
 

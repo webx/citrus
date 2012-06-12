@@ -21,14 +21,13 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
-import org.easymock.EasyMock;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pipeline.Condition;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.impl.condition.JexlCondition;
 import com.alibaba.citrus.service.pipeline.impl.valve.BreakUnlessValve;
+import org.easymock.EasyMock;
+import org.junit.Before;
+import org.junit.Test;
 
 public class BreakUnlessTests extends AbstractBreakValveTests<BreakUnlessValve> {
     private Condition condition;
@@ -65,7 +64,7 @@ public class BreakUnlessTests extends AbstractBreakValveTests<BreakUnlessValve> 
         valve.setCondition(condition);
         valve.afterPropertiesSet();
 
-        expect(condition.isSatisfied(EasyMock.<PipelineContext> anyObject())).andReturn(true);
+        expect(condition.isSatisfied(EasyMock.<PipelineContext>anyObject())).andReturn(true);
         replay(condition);
 
         assertInvoke(pipeline, false);
@@ -78,7 +77,7 @@ public class BreakUnlessTests extends AbstractBreakValveTests<BreakUnlessValve> 
         valve.setCondition(condition);
         valve.afterPropertiesSet();
 
-        expect(condition.isSatisfied(org.easymock.EasyMock.<PipelineContext> anyObject())).andReturn(false);
+        expect(condition.isSatisfied(org.easymock.EasyMock.<PipelineContext>anyObject())).andReturn(false);
         replay(condition);
 
         assertInvoke(pipeline, true);
@@ -107,26 +106,26 @@ public class BreakUnlessTests extends AbstractBreakValveTests<BreakUnlessValve> 
         pipeline = getPipelineImplFromFactory("break-unless-simple");
         assertInvoke(pipeline, false);
         assertLog("1-1" /* loop */, //
-                "2-1-loop-0" /* break-unless */, "2-3-loop-0", //
-                "2-1-loop-1" /* break-unless */, "2-3-loop-1", //
-                "2-1-loop-2" /* break-unless */, //
-                "1-3");
+                  "2-1-loop-0" /* break-unless */, "2-3-loop-0", //
+                  "2-1-loop-1" /* break-unless */, "2-3-loop-1", //
+                  "2-1-loop-2" /* break-unless */, //
+                  "1-3");
 
         // break-unless levels=1
         pipeline = getPipelineImplFromFactory("break-unless-levels");
         assertInvoke(pipeline, true);
         assertLog("1-1" /* loop */, //
-                "2-1-loop-0" /* break-unless */, "2-3-loop-0", //
-                "2-1-loop-1" /* break-unless */, "2-3-loop-1", //
-                "2-1-loop-2" /* break-unless *///
+                  "2-1-loop-0" /* break-unless */, "2-3-loop-0", //
+                  "2-1-loop-1" /* break-unless */, "2-3-loop-1", //
+                  "2-1-loop-2" /* break-unless *///
         );
 
         // break-unless tolabel(levels=0), with condition tag
         pipeline = getPipelineImplFromFactory("break-unless-tolabel");
         assertInvoke(pipeline, false);
         assertLog("1-1" /* loop */, //
-                "2-1-loop-0" /* break-unless */, "2-3-loop-0", //
-                "2-1-loop-1" /* break-unless */, //
-                "1-3");
+                  "2-1-loop-0" /* break-unless */, "2-3-loop-0", //
+                  "2-1-loop-1" /* break-unless */, //
+                  "1-3");
     }
 }

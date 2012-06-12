@@ -27,9 +27,7 @@ import com.alibaba.citrus.service.requestcontext.RequestContextException;
 public class LazyCommitFailedException extends RequestContextException {
     private static final long serialVersionUID = -7855934887908937875L;
 
-    /**
-     * 创建一个异常。
-     */
+    /** 创建一个异常。 */
     public LazyCommitFailedException() {
         super();
     }
@@ -47,7 +45,7 @@ public class LazyCommitFailedException extends RequestContextException {
      * 创建一个异常。
      *
      * @param message 异常信息
-     * @param cause 异常原因
+     * @param cause   异常原因
      */
     public LazyCommitFailedException(String message, Throwable cause) {
         super(message, cause);

@@ -35,7 +35,7 @@ import com.alibaba.citrus.util.StringUtil;
 public class NumberSupport implements Comparable<NumberSupport> {
     private String stringValue;
     private Number numberValue;
-    private Type numberType;
+    private Type   numberType;
 
     public NumberSupport() {
     }
@@ -107,9 +107,7 @@ public class NumberSupport implements Comparable<NumberSupport> {
         return numberValue == null ? stringValue : numberValue.toString();
     }
 
-    /**
-     * 数字的类型。
-     */
+    /** 数字的类型。 */
     public static enum Type {
         INT {
             @Override

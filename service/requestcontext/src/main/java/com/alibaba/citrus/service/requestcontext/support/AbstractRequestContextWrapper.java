@@ -36,10 +36,10 @@ import com.alibaba.citrus.util.ToStringBuilder;
  * @author Michael Zhou
  */
 public abstract class AbstractRequestContextWrapper implements RequestContext {
-    private final RequestContext wrappedContext;
-    private final ServletContext servletContext;
-    private HttpServletRequest request;
-    private HttpServletResponse response;
+    private final RequestContext      wrappedContext;
+    private final ServletContext      servletContext;
+    private       HttpServletRequest  request;
+    private       HttpServletResponse response;
 
     /**
      * 包装一个<code>RequestContext</code>对象。
@@ -107,9 +107,7 @@ public abstract class AbstractRequestContextWrapper implements RequestContext {
         this.response = response;
     }
 
-    /**
-     * 开始一个请求。
-     */
+    /** 开始一个请求。 */
     public void prepare() {
     }
 
@@ -131,9 +129,7 @@ public abstract class AbstractRequestContextWrapper implements RequestContext {
         return new ToStringBuilder().append(thisToString()).start().append(getWrappedRequestContext()).end().toString();
     }
 
-    /**
-     * 显示当前<code>RequestContext</code>对象本身的信息。
-     */
+    /** 显示当前<code>RequestContext</code>对象本身的信息。 */
     protected String thisToString() {
         return super.toString();
     }

@@ -19,12 +19,7 @@ package com.alibaba.citrus.service.upload.impl;
 
 import java.io.File;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUpload;
-import org.apache.commons.fileupload.FileUploadException;
 
 import com.alibaba.citrus.service.AbstractService;
 import com.alibaba.citrus.service.upload.UploadException;
@@ -34,6 +29,9 @@ import com.alibaba.citrus.service.upload.UploadSizeLimitExceededException;
 import com.alibaba.citrus.service.upload.impl.cfu.DiskFileItemFactory;
 import com.alibaba.citrus.service.upload.impl.cfu.ServletFileUpload;
 import com.alibaba.citrus.util.HumanReadableSize;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUpload;
+import org.apache.commons.fileupload.FileUploadException;
 
 /**
  * 这个service可以处理<code>multipart/form-data</code>格式的HTTP
@@ -131,11 +129,11 @@ public class UploadServiceImpl extends AbstractService<UploadService> implements
      * 此方法覆盖了service的默认设置，适合于在action或servlet中手工执行。
      * </p>
      *
-     * @param request HTTP请求
-     * @param sizeThreshold 文件放在内存中的阈值，小于此值的文件被保存在内存中。如果此值小于0，则使用预设的值
-     * @param sizeMax HTTP请求的最大尺寸，超过此尺寸的请求将被抛弃。
+     * @param request        HTTP请求
+     * @param sizeThreshold  文件放在内存中的阈值，小于此值的文件被保存在内存中。如果此值小于0，则使用预设的值
+     * @param sizeMax        HTTP请求的最大尺寸，超过此尺寸的请求将被抛弃。
      * @param repositoryPath 暂存上载文件的绝对路径
-     * @param charset 用来解析HTTP header的编码字符集
+     * @param charset        用来解析HTTP header的编码字符集
      * @return <code>FileItem</code>的列表，按其输入的顺序罗列
      * @throws UploadException 如果解析时出错
      */
@@ -165,9 +163,7 @@ public class UploadServiceImpl extends AbstractService<UploadService> implements
         return fileItems.toArray(new FileItem[fileItems.size()]);
     }
 
-    /**
-     * 根据参数创建<code>FileUpload</code>对象。
-     */
+    /** 根据参数创建<code>FileUpload</code>对象。 */
     private ServletFileUpload getFileUpload(UploadParameters params, boolean applyDefaultValues) {
         if (applyDefaultValues) {
             params.applyDefaultValues();

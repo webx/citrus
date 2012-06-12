@@ -29,33 +29,25 @@ import java.util.regex.Pattern;
  * @author Michael Zhou
  */
 public abstract class AbstractRegexpValidator extends AbstractOptionalValidator {
-    private String patternString;
+    private String  patternString;
     private Pattern pattern;
 
-    /**
-     * 取得regexp。
-     */
+    /** 取得regexp。 */
     public String getPattern() {
         return patternString;
     }
 
-    /**
-     * 设置regexp。
-     */
+    /** 设置regexp。 */
     protected void setPattern(String pattern) {
         this.patternString = trimToNull(pattern);
     }
 
-    /**
-     * 取得匹配或不匹配。
-     */
+    /** 取得匹配或不匹配。 */
     public boolean getNot() {
         return patternString == null ? false : patternString.startsWith("!");
     }
 
-    /**
-     * 检查配置参数的合法性。
-     */
+    /** 检查配置参数的合法性。 */
     @Override
     protected void init() throws Exception {
         super.init();
@@ -70,9 +62,7 @@ public abstract class AbstractRegexpValidator extends AbstractOptionalValidator 
         pattern = Pattern.compile(regexp);
     }
 
-    /**
-     * 验证一个字段。
-     */
+    /** 验证一个字段。 */
     @Override
     protected boolean validate(Context context, String value) {
         Matcher matcher = pattern.matcher(value);

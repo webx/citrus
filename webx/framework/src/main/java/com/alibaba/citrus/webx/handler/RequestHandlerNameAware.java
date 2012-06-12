@@ -18,8 +18,6 @@
 package com.alibaba.citrus.webx.handler;
 
 public interface RequestHandlerNameAware {
-    /**
-     * 设置handler的名称。
-     */
+    /** 设置handler的名称。 */
     void setName(String handlerName);
 }

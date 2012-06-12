@@ -25,9 +25,7 @@ import java.util.Set;
  * @author Michael Zhou
  */
 public interface ResourceFilterChain {
-    /**
-     * 查找指定名称的资源。
-     */
+    /** 查找指定名称的资源。 */
     Resource doFilter(ResourceMatchResult filterMatchResult, Set<ResourceLoadingOption> options)
             throws ResourceNotFoundException;
 }

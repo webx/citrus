@@ -35,7 +35,7 @@ public class LogConfiguratorListenerTests extends AbstractLogConfiguratorListene
         assertThat(out, containsString("Initializing logback system"));
 
         assertThat(err, containsString("INFO: configuring \"logback\" using "
-                + new File("src/test/config/WEB-INF/logback.xml").toURI().toURL().toExternalForm()));
+                                       + new File("src/test/config/WEB-INF/logback.xml").toURI().toURL().toExternalForm()));
 
         assertThat(err, containsString("- with property localAddress = "));
         assertThat(err, containsString("- with property localHost = "));
@@ -44,7 +44,7 @@ public class LogConfiguratorListenerTests extends AbstractLogConfiguratorListene
         assertThat(err, containsString("- with property loggingCharset = UTF-8")); // overrided by init-param
         assertThat(err, containsString("- with property loggingLevel = ERROR")); // overrided by init-param
         assertThat(err, containsString("- with property loggingRoot = " + System.getProperty("user.home")
-                + File.separator + "logs"));
+                                       + File.separator + "logs"));
 
         assertThat(err, not(containsString("- with property other"))); // excluded from init-params
     }

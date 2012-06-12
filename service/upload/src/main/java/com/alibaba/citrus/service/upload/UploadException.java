@@ -25,9 +25,7 @@ package com.alibaba.citrus.service.upload;
 public class UploadException extends RuntimeException {
     private static final long serialVersionUID = -5016622320749497155L;
 
-    /**
-     * 创建一个异常。
-     */
+    /** 创建一个异常。 */
     public UploadException() {
         super();
     }
@@ -45,7 +43,7 @@ public class UploadException extends RuntimeException {
      * 创建一个异常。
      *
      * @param message 异常信息
-     * @param cause 异常原因
+     * @param cause   异常原因
      */
     public UploadException(String message, Throwable cause) {
         super(message, cause);

@@ -55,10 +55,10 @@ import org.springframework.beans.factory.xml.BeanDefinitionParserDelegate;
  */
 public class BeanDefinitionReverseEngine {
     private final AbstractBeanDefinition bd;
-    private final String name;
-    private final String[] aliases;
-    private final Element beanElement;
-    private final boolean innerBean;
+    private final String                 name;
+    private final String[]               aliases;
+    private final Element                beanElement;
+    private final boolean                innerBean;
 
     public BeanDefinitionReverseEngine(AbstractBeanDefinition bd, String name, String[] aliases) {
         this(bd, name, aliases, null);
@@ -285,7 +285,7 @@ public class BeanDefinitionReverseEngine {
         // idref
         if (value instanceof RuntimeBeanNameReference) {
             element.newSubElement("idref").addAttribute("bean",
-                    new RefValue(((RuntimeBeanNameReference) value).getBeanName()));
+                                                        new RefValue(((RuntimeBeanNameReference) value).getBeanName()));
             return;
         }
 
@@ -307,7 +307,7 @@ public class BeanDefinitionReverseEngine {
                 new BeanDefinitionReverseEngine((AbstractBeanDefinition) innerBd, innerName, innerAliases, element);
             } else {
                 element.newSubElement("bean").addAttribute("unknownBeanDefinitionType",
-                        new ClassValue(innerBd.getClass().getName()));
+                                                           new ClassValue(innerBd.getClass().getName()));
             }
 
             return;
@@ -370,21 +370,21 @@ public class BeanDefinitionReverseEngine {
         // typed string
         if (value instanceof TypedStringValue) {
             simpleValue(element, new TextValue(((TypedStringValue) value).getValue()),
-                    ((TypedStringValue) value).getTargetTypeName(), supportValueAttribute, containerElement,
-                    typeAttrName);
+                        ((TypedStringValue) value).getTargetTypeName(), supportValueAttribute, containerElement,
+                        typeAttrName);
             return;
         }
 
         // simple raw data
         if (value instanceof String || getPrimitiveType(value.getClass()) != null) {
             simpleValue(element, new TextValue(value.toString()), null, supportValueAttribute, containerElement,
-                    typeAttrName);
+                        typeAttrName);
             return;
         }
 
         // raw data
         simpleValue(element, new RawValue(value.getClass(), value.toString()), null, supportValueAttribute,
-                containerElement, typeAttrName);
+                    containerElement, typeAttrName);
     }
 
     private void mapEntryKeyValue(Element entryElement, Object keyOrValue, String refAttrName, String valueAttrName,

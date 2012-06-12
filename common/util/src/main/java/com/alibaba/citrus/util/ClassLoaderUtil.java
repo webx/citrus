@@ -98,8 +98,8 @@ public class ClassLoaderUtil {
      * 从指定的调用者的<code>ClassLoader</code>装入类。
      *
      * @param className 要装入的类名
-     * @param referrer 调用者类，如果为<code>null</code>，则该方法相当于
-     *            <code>Class.forName</code>
+     * @param referrer  调用者类，如果为<code>null</code>，则该方法相当于
+     *                  <code>Class.forName</code>
      * @return 已装入的类
      * @throws ClassNotFoundException 如果类没找到
      */
@@ -115,9 +115,9 @@ public class ClassLoaderUtil {
      * 从指定的<code>ClassLoader</code>中装入类。如果未指定<code>ClassLoader</code>， 则从装载
      * <code>ClassLoaderUtil</code>的<code>ClassLoader</code>中装入。
      *
-     * @param className 要装入的类名
+     * @param className   要装入的类名
      * @param classLoader 从指定的<code>ClassLoader</code>中装入类，如果为<code>null</code>
-     *            ，表示从<code>ClassLoaderUtil</code>所在的class loader中装载
+     *                    ，表示从<code>ClassLoaderUtil</code>所在的class loader中装载
      * @return 已装入的类
      * @throws ClassNotFoundException 如果类没找到
      */
@@ -156,8 +156,8 @@ public class ClassLoaderUtil {
      * </p>
      *
      * @param serviceId 服务名
-     * @param referrer 调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
-     *            的class loader中找。
+     * @param referrer  调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
+     *                  的class loader中找。
      * @return service class
      * @throws ClassNotFoundException 如果service class找不到，或装载service文件失败
      */
@@ -175,9 +175,9 @@ public class ClassLoaderUtil {
      * 文件，并将其内容作为service类名。
      * </p>
      *
-     * @param serviceId 服务名
+     * @param serviceId   服务名
      * @param classLoader 在指定classLoader中查找，如果为<code>null</code>，表示在
-     *            <code>ClassLoaderUtil</code>的class loader中找。
+     *                    <code>ClassLoaderUtil</code>的class loader中找。
      * @return service class
      * @throws ClassNotFoundException 如果service class找不到，或装载service文件失败
      */
@@ -231,8 +231,8 @@ public class ClassLoaderUtil {
      *
      * @param className 要装入的类名
      * @param serviceId 服务名
-     * @param referrer 调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
-     *            的class loader中找。
+     * @param referrer  调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
+     *                  的class loader中找。
      * @return service class
      * @throws ClassNotFoundException 如果service class找不到，或装载service文件失败
      */
@@ -251,10 +251,10 @@ public class ClassLoaderUtil {
      * 文件，并将其内容作为service类名。
      * </p>
      *
-     * @param className 要装入的类名
-     * @param serviceId 服务名
+     * @param className   要装入的类名
+     * @param serviceId   服务名
      * @param classLoader 在指定classLoader中查找，如果为<code>null</code>，表示在
-     *            <code>ClassLoaderUtil</code>的class loader中找。
+     *                    <code>ClassLoaderUtil</code>的class loader中找。
      * @return service class
      * @throws ClassNotFoundException 如果service class找不到，或装载service文件失败
      */
@@ -304,7 +304,7 @@ public class ClassLoaderUtil {
      *
      * @param className 要实例化的类名
      * @return 指定类名的实例
-     * @throws ClassNotFoundException 如果类没找到
+     * @throws ClassNotFoundException      如果类没找到
      * @throws ClassInstantiationException 如果实例化失败
      */
     public static Object newInstance(String className) throws ClassNotFoundException, ClassInstantiationException {
@@ -315,14 +315,14 @@ public class ClassLoaderUtil {
      * 从指定的调用者的<code>ClassLoader</code>装入类并实例化之。
      *
      * @param className 要实例化的类名
-     * @param referrer 调用者类，如果为<code>null</code>，则从<code>ClassLoaderUtil</code>
-     *            所在的class loader装载
+     * @param referrer  调用者类，如果为<code>null</code>，则从<code>ClassLoaderUtil</code>
+     *                  所在的class loader装载
      * @return 指定类名的实例
-     * @throws ClassNotFoundException 如果类没找到
+     * @throws ClassNotFoundException      如果类没找到
      * @throws ClassInstantiationException 如果实例化失败
      */
     public static Object newInstance(String className, Class<?> referrer) throws ClassNotFoundException,
-            ClassInstantiationException {
+                                                                                 ClassInstantiationException {
         return newInstance(loadClass(className, referrer));
     }
 
@@ -330,15 +330,15 @@ public class ClassLoaderUtil {
      * 从指定的<code>ClassLoader</code>中装入类并实例化之。如果未指定<code>ClassLoader</code>， 则从装载
      * <code>ClassLoaderUtil</code>的<code>ClassLoader</code>中装入。
      *
-     * @param className 要实例化的类名
+     * @param className   要实例化的类名
      * @param classLoader 从指定的<code>ClassLoader</code>中装入类，如果为<code>null</code>
-     *            ，表示从<code>ClassLoaderUtil</code>所在的class loader中装载
+     *                    ，表示从<code>ClassLoaderUtil</code>所在的class loader中装载
      * @return 指定类名的实例
-     * @throws ClassNotFoundException 如果类没找到
+     * @throws ClassNotFoundException      如果类没找到
      * @throws ClassInstantiationException 如果实例化失败
      */
     public static Object newInstance(String className, ClassLoader classLoader) throws ClassNotFoundException,
-            ClassInstantiationException {
+                                                                                       ClassInstantiationException {
         return newInstance(loadClass(className, classLoader));
     }
 
@@ -374,11 +374,11 @@ public class ClassLoaderUtil {
      *
      * @param serviceId 服务名
      * @return 实例类
-     * @throws ClassNotFoundException 如果service class找不到，或装载service文件失败
+     * @throws ClassNotFoundException      如果service class找不到，或装载service文件失败
      * @throws ClassInstantiationException 如果实例化失败
      */
     public static Object newServiceInstance(String serviceId) throws ClassNotFoundException,
-            ClassInstantiationException {
+                                                                     ClassInstantiationException {
         return newInstance(loadServiceClass(serviceId));
     }
 
@@ -390,14 +390,14 @@ public class ClassLoaderUtil {
      * </p>
      *
      * @param serviceId 服务名
-     * @param referrer 调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
-     *            的class loader中找。
+     * @param referrer  调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
+     *                  的class loader中找。
      * @return 实例类
-     * @throws ClassNotFoundException 如果service class找不到，或装载service文件失败
+     * @throws ClassNotFoundException      如果service class找不到，或装载service文件失败
      * @throws ClassInstantiationException 如果实例化失败
      */
     public static Object newServiceInstance(String serviceId, Class<?> referrer) throws ClassNotFoundException,
-            ClassInstantiationException {
+                                                                                        ClassInstantiationException {
         return newInstance(loadServiceClass(serviceId, referrer));
     }
 
@@ -408,15 +408,15 @@ public class ClassLoaderUtil {
      * 文件，并将其内容作为service类名。
      * </p>
      *
-     * @param serviceId 服务名
+     * @param serviceId   服务名
      * @param classLoader 在指定classLoader中查找，如果为<code>null</code>，表示在
-     *            <code>ClassLoaderUtil</code>的class loader中找。
+     *                    <code>ClassLoaderUtil</code>的class loader中找。
      * @return 实例类
-     * @throws ClassNotFoundException 如果service class找不到，或装载service文件失败
+     * @throws ClassNotFoundException      如果service class找不到，或装载service文件失败
      * @throws ClassInstantiationException 如果实例化失败
      */
     public static Object newServiceInstance(String serviceId, ClassLoader classLoader) throws ClassNotFoundException,
-            ClassInstantiationException {
+                                                                                              ClassInstantiationException {
         return newInstance(loadServiceClass(serviceId, classLoader));
     }
 
@@ -430,11 +430,11 @@ public class ClassLoaderUtil {
      * @param className 要装入的类名
      * @param serviceId 服务名
      * @return 实例类
-     * @throws ClassNotFoundException 如果service class找不到，或装载service文件失败
+     * @throws ClassNotFoundException      如果service class找不到，或装载service文件失败
      * @throws ClassInstantiationException 如果实例化失败
      */
     public static Object newServiceInstance(String className, String serviceId) throws ClassNotFoundException,
-            ClassInstantiationException {
+                                                                                       ClassInstantiationException {
         return newInstance(loadServiceClass(className, serviceId));
     }
 
@@ -447,10 +447,10 @@ public class ClassLoaderUtil {
      *
      * @param className 要装入的类名
      * @param serviceId 服务名
-     * @param referrer 调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
-     *            的class loader中找。
+     * @param referrer  调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
+     *                  的class loader中找。
      * @return 实例类
-     * @throws ClassNotFoundException 如果service class找不到，或装载service文件失败
+     * @throws ClassNotFoundException      如果service class找不到，或装载service文件失败
      * @throws ClassInstantiationException 如果实例化失败
      */
     public static Object newServiceInstance(String className, String serviceId, Class<?> referrer)
@@ -465,12 +465,12 @@ public class ClassLoaderUtil {
      * 文件，并将其内容作为service类名。
      * </p>
      *
-     * @param className 要装入的类名
-     * @param serviceId 服务名
+     * @param className   要装入的类名
+     * @param serviceId   服务名
      * @param classLoader 在指定classLoader中查找，如果为<code>null</code>，表示在
-     *            <code>ClassLoaderUtil</code>的class loader中找。
+     *                    <code>ClassLoaderUtil</code>的class loader中找。
      * @return 实例类
-     * @throws ClassNotFoundException 如果service class找不到，或装载service文件失败
+     * @throws ClassNotFoundException      如果service class找不到，或装载service文件失败
      * @throws ClassInstantiationException 如果实例化失败
      */
     public static Object newServiceInstance(String className, String serviceId, ClassLoader classLoader)
@@ -519,8 +519,8 @@ public class ClassLoaderUtil {
      * 从指定调用者所属的<code>ClassLoader</code>取得所有resource URL。
      *
      * @param resourceName 要查找的资源名，就是以&quot;/&quot;分隔的标识符字符串
-     * @param referrer 调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
-     *            的class loader中找
+     * @param referrer     调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
+     *                     的class loader中找
      * @return resource的URL数组，如果没找到，则返回空数组。数组中保证不包含重复的URL。
      */
     public static URL[] getResources(String resourceName, Class<?> referrer) {
@@ -539,7 +539,7 @@ public class ClassLoaderUtil {
      * <code>ClassLoader</code>中取得所有resource URL。
      *
      * @param resourceName 要查找的资源名，就是以&quot;/&quot;分隔的标识符字符串
-     * @param classLoader 从指定的<code>ClassLoader</code>中查找
+     * @param classLoader  从指定的<code>ClassLoader</code>中查找
      * @return resource的URL数组，如果没找到，则返回空数组。数组中保证不包含重复的URL。
      */
     public static URL[] getResources(String resourceName, ClassLoader classLoader) {
@@ -554,9 +554,9 @@ public class ClassLoaderUtil {
     /**
      * 在指定class loader中查找指定名称的resource，把所有找到的resource的URL放入指定的集合中。
      *
-     * @param urlSet 存放resource URL的集合
-     * @param resourceName 资源名
-     * @param classLoader 类装入器
+     * @param urlSet         存放resource URL的集合
+     * @param resourceName   资源名
+     * @param classLoader    类装入器
      * @param sysClassLoader 是否用system class loader装载资源
      * @return 如果找到，则返回<code>true</code>
      */
@@ -601,7 +601,7 @@ public class ClassLoaderUtil {
 
         Set<URL> urlSet = createHashSet();
 
-        for (Iterator<URL> i = urls.iterator(); i.hasNext();) {
+        for (Iterator<URL> i = urls.iterator(); i.hasNext(); ) {
             URL url = i.next();
 
             if (urlSet.contains(url)) {
@@ -666,8 +666,8 @@ public class ClassLoaderUtil {
      * 从指定调用者所属的<code>ClassLoader</code>取得resource URL。
      *
      * @param resourceName 要查找的资源名，就是以&quot;/&quot;分隔的标识符字符串
-     * @param referrer 调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
-     *            的class loader中找。
+     * @param referrer     调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
+     *                     的class loader中找。
      * @return resource URL，如果没找到，则返回<code>null</code>
      */
     public static URL getResource(String resourceName, Class<?> referrer) {
@@ -685,8 +685,8 @@ public class ClassLoaderUtil {
      * 从指定的<code>ClassLoader</code>取得resource URL。
      *
      * @param resourceName 要查找的资源名，就是以&quot;/&quot;分隔的标识符字符串
-     * @param classLoader 在指定classLoader中查找，如果为<code>null</code>，表示在
-     *            <code>ClassLoaderUtil</code>的class loader中找。
+     * @param classLoader  在指定classLoader中查找，如果为<code>null</code>，表示在
+     *                     <code>ClassLoaderUtil</code>的class loader中找。
      * @return resource URL，如果没找到，则返回<code>null</code>
      */
     public static URL getResource(String resourceName, ClassLoader classLoader) {
@@ -725,8 +725,8 @@ public class ClassLoaderUtil {
      * referrer).openStream()</code>。
      *
      * @param resourceName 要查找的资源名，就是以"/"分隔的标识符字符串
-     * @param referrer 调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
-     *            的class loader中找。
+     * @param referrer     调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
+     *                     的class loader中找。
      * @return resource的输入流
      */
     public static InputStream getResourceAsStream(String resourceName, Class<?> referrer) {
@@ -749,8 +749,8 @@ public class ClassLoaderUtil {
      * classLoader).openStream()</code>。
      *
      * @param resourceName 要查找的资源名，就是以"/"分隔的标识符字符串
-     * @param classLoader 在指定classLoader中查找，如果为<code>null</code>，表示在
-     *            <code>ClassLoaderUtil</code>的class loader中找。
+     * @param classLoader  在指定classLoader中查找，如果为<code>null</code>，表示在
+     *                     <code>ClassLoaderUtil</code>的class loader中找。
      * @return resource的输入流
      */
     public static InputStream getResourceAsStream(String resourceName, ClassLoader classLoader) {
@@ -787,8 +787,8 @@ public class ClassLoaderUtil {
      * 从当前线程的<code>ClassLoader</code>中查找指定名称的类。
      *
      * @param className 要查找的类名
-     * @param referrer 调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
-     *            的class loader中找。
+     * @param referrer  调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
+     *                  的class loader中找。
      * @return URL数组，列举了系统中所有可找到的同名类，如果未找到，则返回一个空数组
      */
     public static URL[] whichClasses(String className, Class<?> referrer) {
@@ -798,9 +798,9 @@ public class ClassLoaderUtil {
     /**
      * 从当前线程的<code>ClassLoader</code>中查找指定名称的类。
      *
-     * @param className 要查找的类名
+     * @param className   要查找的类名
      * @param classLoader 在指定classLoader中查找，如果为<code>null</code>，表示在
-     *            <code>ClassLoaderUtil</code>的class loader中找。
+     *                    <code>ClassLoaderUtil</code>的class loader中找。
      * @return URL数组，列举了系统中所有可找到的同名类，如果未找到，则返回一个空数组
      */
     public static URL[] whichClasses(String className, ClassLoader classLoader) {
@@ -821,8 +821,8 @@ public class ClassLoaderUtil {
      * 从当前线程的<code>ClassLoader</code>中查找指定名称的类。
      *
      * @param className 要查找的类名
-     * @param referrer 调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
-     *            的class loader中找。
+     * @param referrer  调用者类，如果为<code>null</code>，表示在<code>ClassLoaderUtil</code>
+     *                  的class loader中找。
      * @return 类文件的URL，如果未找到，则返回<code>null</code>
      */
     public static URL whichClass(String className, Class<?> referrer) {
@@ -832,9 +832,9 @@ public class ClassLoaderUtil {
     /**
      * 从当前线程的<code>ClassLoader</code>中查找指定名称的类。
      *
-     * @param className 要查找的类名
+     * @param className   要查找的类名
      * @param classLoader 在指定classLoader中查找，如果为<code>null</code>，表示在
-     *            <code>ClassLoaderUtil</code>的class loader中找。
+     *                    <code>ClassLoaderUtil</code>的class loader中找。
      * @return 类文件的URL，如果未找到，则返回<code>null</code>
      */
     public static URL whichClass(String className, ClassLoader classLoader) {

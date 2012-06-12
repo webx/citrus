@@ -19,10 +19,9 @@ package com.alibaba.citrus.turbine.util;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.service.pull.ToolFactory;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class TurbineRunDataTool implements ToolFactory {
     @Autowired

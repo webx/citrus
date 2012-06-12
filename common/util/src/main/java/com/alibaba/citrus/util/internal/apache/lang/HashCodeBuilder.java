@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.alibaba.citrus.util.internal.apache.lang;
 
 /**
@@ -39,7 +40,7 @@ package com.alibaba.citrus.util.internal.apache.lang;
  * <p>
  * To use this class write code as follows:
  * </p>
- *
+ * <p/>
  * <pre>
  * public class Person {
  *   String name;
@@ -68,14 +69,10 @@ package com.alibaba.citrus.util.internal.apache.lang;
  * @author Pete Gieser
  */
 public class HashCodeBuilder {
-    /**
-     * Constant to use in building the hashCode.
-     */
+    /** Constant to use in building the hashCode. */
     private final int iConstant;
 
-    /**
-     * Running total of the hashCode.
-     */
+    /** Running total of the hashCode. */
     private int iTotal = 0;
 
     /**
@@ -98,10 +95,10 @@ public class HashCodeBuilder {
      * Prime numbers are preferred, especially for the multiplier.
      * </p>
      *
-     * @param initialNonZeroOddNumber a non-zero, odd number used as the initial
-     *            value
+     * @param initialNonZeroOddNumber    a non-zero, odd number used as the initial
+     *                                   value
      * @param multiplierNonZeroOddNumber a non-zero, odd number used as the
-     *            multiplier
+     *                                   multiplier
      * @throws IllegalArgumentException if the number is zero or even
      */
     public HashCodeBuilder(int initialNonZeroOddNumber, int multiplierNonZeroOddNumber) {
@@ -364,12 +361,10 @@ public class HashCodeBuilder {
     public HashCodeBuilder append(Object object) {
         if (object == null) {
             iTotal = iTotal * iConstant;
-
         } else {
             if (object.getClass().isArray() == false) {
                 // the simple case, not an array, just the element
                 iTotal = iTotal * iConstant + object.hashCode();
-
             } else {
                 // 'Switch' on type of array, to dispatch to the correct handler
                 // This handles multi dimensional arrays
@@ -473,5 +468,4 @@ public class HashCodeBuilder {
     public int toHashCode() {
         return iTotal;
     }
-
 }

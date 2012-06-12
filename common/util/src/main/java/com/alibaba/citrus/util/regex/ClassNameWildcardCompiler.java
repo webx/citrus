@@ -46,43 +46,39 @@ public class ClassNameWildcardCompiler {
     public static final int MATCH_PREFIX = 0x1000;
 
     // 私有常量
-    private static final char ESCAPE_CHAR = '\\';
-    private static final char DOT = '.';
-    private static final char UNDERSCORE = '_';
-    private static final char DOLLAR = '$';
-    private static final char STAR = '*';
-    private static final char QUESTION = '?';
-    private static final String REGEX_MATCH_PREFIX = "^";
-    private static final String REGEX_WORD_BOUNDARY = "\\b";
-    private static final String REGEX_DOT = "\\.";
-    private static final String REGEX_DOT_NO_DUP = "\\.(?!\\.)";
-    private static final String REGEX_CLASS_NAME_CHAR = "[\\w\\$]";
+    private static final char   ESCAPE_CHAR                  = '\\';
+    private static final char   DOT                          = '.';
+    private static final char   UNDERSCORE                   = '_';
+    private static final char   DOLLAR                       = '$';
+    private static final char   STAR                         = '*';
+    private static final char   QUESTION                     = '?';
+    private static final String REGEX_MATCH_PREFIX           = "^";
+    private static final String REGEX_WORD_BOUNDARY          = "\\b";
+    private static final String REGEX_DOT                    = "\\.";
+    private static final String REGEX_DOT_NO_DUP             = "\\.(?!\\.)";
+    private static final String REGEX_CLASS_NAME_CHAR        = "[\\w\\$]";
     private static final String REGEX_CLASS_NAME_SINGLE_CHAR = "(" + REGEX_CLASS_NAME_CHAR + ")";
-    private static final String REGEX_CLASS_NAME = "(" + REGEX_CLASS_NAME_CHAR + "*)";
-    private static final String REGEX_CLASS_NAME_FULL = "(" + REGEX_CLASS_NAME_CHAR + "+(?:" + REGEX_DOT_NO_DUP
-            + REGEX_CLASS_NAME_CHAR + "*)*(?=" + REGEX_DOT + "|$)|)" + REGEX_DOT + "?";
+    private static final String REGEX_CLASS_NAME             = "(" + REGEX_CLASS_NAME_CHAR + "*)";
+    private static final String REGEX_CLASS_NAME_FULL        = "(" + REGEX_CLASS_NAME_CHAR + "+(?:" + REGEX_DOT_NO_DUP
+                                                               + REGEX_CLASS_NAME_CHAR + "*)*(?=" + REGEX_DOT + "|$)|)" + REGEX_DOT + "?";
 
     // 上一个token的状态
-    private static final int LAST_TOKEN_START = 0;
-    private static final int LAST_TOKEN_DOT = 1;
-    private static final int LAST_TOKEN_CLASS_NAME = 2;
-    private static final int LAST_TOKEN_STAR = 3;
+    private static final int LAST_TOKEN_START       = 0;
+    private static final int LAST_TOKEN_DOT         = 1;
+    private static final int LAST_TOKEN_CLASS_NAME  = 2;
+    private static final int LAST_TOKEN_STAR        = 3;
     private static final int LAST_TOKEN_DOUBLE_STAR = 4;
-    private static final int LAST_TOKEN_QUESTION = 5;
+    private static final int LAST_TOKEN_QUESTION    = 5;
 
     private ClassNameWildcardCompiler() {
     }
 
-    /**
-     * 将包含通配符的类名, 编译成正则表达式.
-     */
+    /** 将包含通配符的类名, 编译成正则表达式. */
     public static Pattern compileClassName(String pattern) throws PatternSyntaxException {
         return compileClassName(pattern, 0);
     }
 
-    /**
-     * 将包含通配符的类名, 编译成正则表达式.
-     */
+    /** 将包含通配符的类名, 编译成正则表达式. */
     public static Pattern compileClassName(String pattern, int options) throws PatternSyntaxException {
         return Pattern.compile(classNameToRegex(pattern, options), options);
     }
@@ -118,9 +114,7 @@ public class ClassNameWildcardCompiler {
         return relevant;
     }
 
-    /**
-     * 将包含通配符的类名, 编译成正则表达式.
-     */
+    /** 将包含通配符的类名, 编译成正则表达式. */
     public static String classNameToRegex(String pattern, int options) throws PatternSyntaxException {
         pattern = assertNotNull(normalizeClassName(pattern), "pattern");
 

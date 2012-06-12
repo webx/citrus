@@ -19,13 +19,12 @@ package com.alibaba.citrus.turbine.pipeline.valve;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.Valve;
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.turbine.pipeline.valve.PageAuthorizationValve.Callback;
+import org.junit.Test;
 
 public class PageAuthorizationValveTests extends AbstractValveTests {
     @Override
@@ -176,12 +175,12 @@ public class PageAuthorizationValveTests extends AbstractValveTests {
     }
 
     private static class Status {
-        boolean myValveInvoked;
-        String user;
+        boolean  myValveInvoked;
+        String   user;
         String[] roles;
         String[] actions;
-        boolean allowed;
-        boolean denied;
+        boolean  allowed;
+        boolean  denied;
     }
 
     public static class MyValve implements Valve {

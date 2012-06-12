@@ -24,23 +24,21 @@ import static org.junit.Assert.*;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.core.MethodParameter;
 
 import com.alibaba.citrus.service.dataresolver.data.Action;
 import com.alibaba.citrus.service.dataresolver.data.ContextAwareResolver;
 import com.alibaba.citrus.service.dataresolver.data.DerivedAction;
 import com.alibaba.citrus.service.dataresolver.data.Param;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.core.MethodParameter;
 
 public class DataResolverServiceTests extends AbstractDataResolverTests {
-    private DataResolver resolver;
+    private DataResolver       resolver;
     private HttpServletRequest request;
-    private Param param;
+    private Param              param;
 
     @BeforeClass
     public static void initFactory() throws Exception {
@@ -128,7 +126,7 @@ public class DataResolverServiceTests extends AbstractDataResolverTests {
         String str = "";
         str += "MethodParameter {\n";
         str += "  method     = public void " + actionClass.getName()
-                + ".execute(javax.servlet.http.HttpServletRequest,java.lang.String)\n";
+               + ".execute(javax.servlet.http.HttpServletRequest,java.lang.String)\n";
         str += "  paramIndex = 0\n";
         str += "}";
 
@@ -141,12 +139,11 @@ public class DataResolverServiceTests extends AbstractDataResolverTests {
         str = "";
         str += "MethodParameter {\n";
         str += "  method     = public void " + actionClass.getName()
-                + ".execute(javax.servlet.http.HttpServletRequest,java.lang.String)\n";
+               + ".execute(javax.servlet.http.HttpServletRequest,java.lang.String)\n";
         str += "  paramIndex = 1\n";
         str += "}";
 
         assertEquals(str, param1.toString());
-
     }
 
     @Test

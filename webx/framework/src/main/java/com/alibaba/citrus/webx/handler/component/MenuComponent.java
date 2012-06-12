@@ -25,14 +25,13 @@ import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.util.internal.webpagelite.PageComponent;
 import com.alibaba.citrus.util.internal.webpagelite.PageComponentRegistry;
 import com.alibaba.citrus.util.templatelite.Template;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 import com.alibaba.citrus.webx.handler.RequestHandlerMapping;
 import com.alibaba.citrus.webx.handler.support.AbstractVisitor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 用来显示可用handler菜单的组件。
@@ -72,7 +71,7 @@ public class MenuComponent extends PageComponent {
     @SuppressWarnings("unused")
     private class MenuVisitor extends AbstractVisitor {
         private final String selection;
-        private final Entry rootEntry;
+        private final Entry  rootEntry;
 
         public MenuVisitor(RequestHandlerContext context, Entry rootEntry, String selection) {
             super(context, MenuComponent.this);
@@ -156,15 +155,13 @@ public class MenuComponent extends PageComponent {
 
     @SuppressWarnings("unused")
     private static class Entry {
-        private final String path;
-        private final String name;
-        private final boolean category;
-        private final boolean root;
-        private Map<String, Entry> subEntries;
+        private final String             path;
+        private final String             name;
+        private final boolean            category;
+        private final boolean            root;
+        private       Map<String, Entry> subEntries;
 
-        /**
-         * 创建特殊的root entry。
-         */
+        /** 创建特殊的root entry。 */
         private Entry() {
             this.path = "";
             this.name = "";

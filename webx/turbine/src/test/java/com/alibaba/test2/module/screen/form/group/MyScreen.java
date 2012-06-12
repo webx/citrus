@@ -19,10 +19,9 @@ package com.alibaba.test2.module.screen.form.group;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.service.form.Group;
 import com.alibaba.citrus.turbine.dataresolver.FormGroup;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class MyScreen {
     @Autowired

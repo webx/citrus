@@ -23,14 +23,12 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.lang.annotation.Annotation;
-
 import javax.servlet.http.HttpServletRequest;
 
+import com.alibaba.citrus.service.dataresolver.data.Param;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.alibaba.citrus.service.dataresolver.data.Param;
 
 public class DataResolverContextTests {
     private Annotation a1;
@@ -54,7 +52,7 @@ public class DataResolverContextTests {
         o3 = false; // boolean
 
         context = new DataResolverContext(HttpServletRequest.class, new Annotation[] { a1, a2, a3 }, new Object[] { o1,
-                o2, o3 });
+                                                                                                                    o2, o3 });
     }
 
     @Test

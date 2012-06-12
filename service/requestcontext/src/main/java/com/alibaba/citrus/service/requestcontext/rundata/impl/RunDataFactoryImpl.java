@@ -26,19 +26,15 @@ public class RunDataFactoryImpl extends AbstractRequestContextFactory<RunData> {
         return new RunDataImpl(wrappedContext);
     }
 
-    /**
-     * RunData本身不提供新功能。
-     */
+    /** RunData本身不提供新功能。 */
     public String[] getFeatures() {
         return null;
     }
 
-    /**
-     * RunData必须排在所有request context之后，并且依赖某几种request context。
-     */
+    /** RunData必须排在所有request context之后，并且依赖某几种request context。 */
     public FeatureOrder[] featureOrders() {
         return new FeatureOrder[] { new AfterFeature("*"), new AfterFeature("lazyCommitContent"),
-                new AfterFeature("lazyCommitHeaders"), new AfterFeature("setLocaleAndCharset"),
-                new AfterFeature("parseRequest") };
+                                    new AfterFeature("lazyCommitHeaders"), new AfterFeature("setLocaleAndCharset"),
+                                    new AfterFeature("parseRequest") };
     }
 }

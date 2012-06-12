@@ -24,16 +24,9 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.util.Map;
-
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.WebApplicationContext;
 
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.util.CollectionUtil;
@@ -45,10 +38,15 @@ import com.alibaba.citrus.webx.support.AbstractWebxController;
 import com.alibaba.citrus.webx.util.RequestURIFilter;
 import com.alibaba.citrus.webx.util.WebxUtil;
 import com.meterware.servletunit.PatchedServletRunner;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.WebApplicationContext;
 
 public class WebxFrameworkFilterTests extends AbstractWebxTests {
     private WebxFrameworkFilter filter;
-    private WebxComponents components;
+    private WebxComponents      components;
 
     @Before
     public void init() throws Exception {
@@ -257,7 +255,7 @@ public class WebxFrameworkFilterTests extends AbstractWebxTests {
         private ComponentsAware componentsAware;
 
         public static void resetAttributes() {
-            log.set(CollectionUtil.<String, Object> createHashMap());
+            log.set(CollectionUtil.<String, Object>createHashMap());
         }
 
         public static Object getAttribute(String key) {

@@ -30,17 +30,15 @@ import javax.servlet.http.HttpServletResponse;
  * @author Michael Zhou
  */
 public interface RequestContextChainingService {
-    /**
-     * 取得所有的request context的信息。
-     */
+    /** 取得所有的request context的信息。 */
     RequestContextInfo<?>[] getRequestContextInfos();
 
     /**
      * 取得<code>RequestContext</code>串。
      *
      * @param servletContext <code>ServletContext</code>对象
-     * @param request <code>HttpServletRequest</code>对象
-     * @param response <code>HttpServletResponse</code>对象
+     * @param request        <code>HttpServletRequest</code>对象
+     * @param response       <code>HttpServletResponse</code>对象
      * @return request context
      */
     RequestContext getRequestContext(ServletContext servletContext, HttpServletRequest request,

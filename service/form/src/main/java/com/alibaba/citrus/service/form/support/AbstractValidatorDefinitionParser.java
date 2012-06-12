@@ -20,11 +20,10 @@ package com.alibaba.citrus.service.form.support;
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
+import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 /**
  * Validator解析器的基类，用于设置message信息。
@@ -32,7 +31,7 @@ import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionP
  * @author Michael Zhou
  */
 public abstract class AbstractValidatorDefinitionParser<V extends AbstractValidator> extends
-        AbstractSingleBeanDefinitionParser<V> {
+                                                                                     AbstractSingleBeanDefinitionParser<V> {
     @Override
     protected final void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         // parse id

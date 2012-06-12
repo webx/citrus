@@ -19,11 +19,10 @@ package com.alibaba.citrus.service.requestcontext.session.idgen.random.impl;
 
 import static com.alibaba.citrus.util.StringUtil.*;
 
+import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 public class RandomIDGeneratorDefinitionParser extends AbstractSingleBeanDefinitionParser<RandomIDGenerator> {
     @Override

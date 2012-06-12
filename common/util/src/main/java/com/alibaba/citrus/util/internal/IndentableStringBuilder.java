@@ -31,12 +31,12 @@ import java.util.ArrayList;
  */
 public class IndentableStringBuilder extends NormalizableStringBuilder<IndentableStringBuilder> {
     private final IndentStack indents = new IndentStack();
-    private final int defaultIndent;
-    private int indentLevel;
-    private int quoteLevel;
-    private boolean lazyAppendNewLine; // 推迟输出换行，推迟到下一个字符被输出前
-    private boolean lazyStartHangingIndent; // 推迟启动缩进，推迟到下一个换行后或下一个start()。其效果为悬挂缩进
-    private int hangingIndent;
+    private final int     defaultIndent;
+    private       int     indentLevel;
+    private       int     quoteLevel;
+    private       boolean lazyAppendNewLine; // 推迟输出换行，推迟到下一个字符被输出前
+    private       boolean lazyStartHangingIndent; // 推迟启动缩进，推迟到下一个换行后或下一个start()。其效果为悬挂缩进
+    private       int     hangingIndent;
 
     public IndentableStringBuilder() {
         this(-1);
@@ -58,9 +58,7 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
         hangingIndent = 0;
     }
 
-    /**
-     * 此处收到的字符中，所有 CR/LF/CRLF 均已被规格化成统一的LF了。
-     */
+    /** 此处收到的字符中，所有 CR/LF/CRLF 均已被规格化成统一的LF了。 */
     @Override
     protected void visit(char c) {
         boolean newLine = endsWithNewLine();
@@ -116,30 +114,22 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
         }
     }
 
-    /**
-     * 创建一级缩进。
-     */
+    /** 创建一级缩进。 */
     public IndentableStringBuilder start() {
         return start(null, null, -1);
     }
 
-    /**
-     * 创建一级缩进。
-     */
+    /** 创建一级缩进。 */
     public IndentableStringBuilder start(int indent) {
         return start(null, null, indent);
     }
 
-    /**
-     * 创建一级缩进，使用指定的前后括弧。
-     */
+    /** 创建一级缩进，使用指定的前后括弧。 */
     public IndentableStringBuilder start(String beginQuote, String endQuote) {
         return start(beginQuote, endQuote, -1);
     }
 
-    /**
-     * 创建一级缩进，使用指定的前后括弧。
-     */
+    /** 创建一级缩进，使用指定的前后括弧。 */
     public IndentableStringBuilder start(String beginQuote, String endQuote, int indent) {
         doStartHanglingIndentIfRequired();
         indents.pushIndent(beginQuote, endQuote, indent);
@@ -147,16 +137,12 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
         return this;
     }
 
-    /**
-     * 从下一个换行或start()开始悬挂缩进。
-     */
+    /** 从下一个换行或start()开始悬挂缩进。 */
     public IndentableStringBuilder startHangingIndent() {
         return startHangingIndent(0);
     }
 
-    /**
-     * 从下一个换行或start()开始悬挂缩进。
-     */
+    /** 从下一个换行或start()开始悬挂缩进。 */
     public IndentableStringBuilder startHangingIndent(int indentOffset) {
         doStartHanglingIndentIfRequired();
 
@@ -171,9 +157,7 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
         return this;
     }
 
-    /**
-     * 确保悬挂缩进（如果有的话）已经启动。
-     */
+    /** 确保悬挂缩进（如果有的话）已经启动。 */
     private void doStartHanglingIndentIfRequired() {
         if (lazyStartHangingIndent) {
             lazyStartHangingIndent = false;
@@ -181,9 +165,7 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
         }
     }
 
-    /**
-     * 结束一级缩进。注意，输出结果之前，须至少调用一次end()，以确保最后的换行可以被输出。
-     */
+    /** 结束一级缩进。注意，输出结果之前，须至少调用一次end()，以确保最后的换行可以被输出。 */
     public IndentableStringBuilder end() {
         flush();
 
@@ -229,16 +211,12 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
         return this;
     }
 
-    /**
-     * 取得当前缩进的数量。
-     */
+    /** 取得当前缩进的数量。 */
     public int currentIndent() {
         return indents.getCurrentIndent();
     }
 
-    /**
-     * 如果indent未指定，则取得默认indent。
-     */
+    /** 如果indent未指定，则取得默认indent。 */
     private int defaultIndent(int indent) {
         return indent <= 0 ? defaultIndent : indent;
     }
@@ -251,12 +229,10 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
         }
     }
 
-    /**
-     * 存放缩进信息的栈。
-     */
+    /** 存放缩进信息的栈。 */
     private class IndentStack extends ArrayList<Object> {
         private static final long serialVersionUID = -876139304840511103L;
-        private static final int entrySize = 4;
+        private static final int  entrySize        = 4;
 
         public String getBeginQuote(int indentLevel) {
             if (indentLevel < 0 || indentLevel >= depth()) {
@@ -282,9 +258,7 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
             return (Integer) super.get(indentLevel * entrySize + 2);
         }
 
-        /**
-         * 如果当前level依附于后一个level，则返回false。
-         */
+        /** 如果当前level依附于后一个level，则返回false。 */
         public boolean independent(int indentLevel) {
             if (indentLevel < 0 || indentLevel >= depth() - 1) {
                 return true;
@@ -335,13 +309,13 @@ public class IndentableStringBuilder extends NormalizableStringBuilder<Indentabl
  * @author Michael Zhou
  */
 abstract class NormalizableStringBuilder<B extends NormalizableStringBuilder<B>> implements Appendable {
-    protected final static char CR = '\r';
-    protected final static char LF = '\n';
-    private final static char NONE = '\0';
-    private final StringBuilder out = new StringBuilder();
+    protected final static char          CR   = '\r';
+    protected final static char          LF   = '\n';
+    private final static   char          NONE = '\0';
+    private final          StringBuilder out  = new StringBuilder();
     private final String newLine;
-    private int newLineStartIndex = 0;
-    private char readAheadBuffer = '\0';
+    private int  newLineStartIndex = 0;
+    private char readAheadBuffer   = '\0';
 
     public NormalizableStringBuilder() {
         this(null);
@@ -351,39 +325,29 @@ abstract class NormalizableStringBuilder<B extends NormalizableStringBuilder<B>>
         this.newLine = defaultIfNull(newLine, String.valueOf(LF));
     }
 
-    /**
-     * 清除所有内容。
-     */
+    /** 清除所有内容。 */
     public void clear() {
         out.setLength(0);
         newLineStartIndex = 0;
         readAheadBuffer = '\0';
     }
 
-    /**
-     * 取得buffer中内容的长度。
-     */
+    /** 取得buffer中内容的长度。 */
     public final int length() {
         return out.length();
     }
 
-    /**
-     * 取得当前行的长度。
-     */
+    /** 取得当前行的长度。 */
     public final int lineLength() {
         return out.length() - newLineStartIndex;
     }
 
-    /**
-     * <code>Appendable</code>接口方法。
-     */
+    /** <code>Appendable</code>接口方法。 */
     public final B append(CharSequence csq) {
         return append(csq, 0, csq.length());
     }
 
-    /**
-     * <code>Appendable</code>接口方法。
-     */
+    /** <code>Appendable</code>接口方法。 */
     public final B append(CharSequence csq, int start, int end) {
         for (int i = start; i < end; i++) {
             append(csq.charAt(i));
@@ -392,9 +356,7 @@ abstract class NormalizableStringBuilder<B extends NormalizableStringBuilder<B>>
         return thisObject();
     }
 
-    /**
-     * <code>Appendable</code>接口方法。
-     */
+    /** <code>Appendable</code>接口方法。 */
     public final B append(char c) {
         // 将 CR|LF|CRLF 转化成统一的 LF
         switch (readAheadBuffer) {
@@ -446,21 +408,15 @@ abstract class NormalizableStringBuilder<B extends NormalizableStringBuilder<B>>
         return thisObject();
     }
 
-    /**
-     * 子类覆盖此方法，以便接收所有字符。其中，所有 CR/LF/CRLF 均已被规格化成统一的LF了。
-     */
+    /** 子类覆盖此方法，以便接收所有字符。其中，所有 CR/LF/CRLF 均已被规格化成统一的LF了。 */
     protected abstract void visit(char c);
 
-    /**
-     * 子类通过此方法向内部buffer中添加内容。
-     */
+    /** 子类通过此方法向内部buffer中添加内容。 */
     protected final void appendInternal(String s) {
         out.append(s);
     }
 
-    /**
-     * 子类通过此方法向内部buffer中添加内容。
-     */
+    /** 子类通过此方法向内部buffer中添加内容。 */
     protected final void appendInternal(char c) {
         out.append(c);
     }
@@ -476,9 +432,7 @@ abstract class NormalizableStringBuilder<B extends NormalizableStringBuilder<B>>
         newLineStartIndex = out.length();
     }
 
-    /**
-     * 判断buf是否以指定字符串结尾。
-     */
+    /** 判断buf是否以指定字符串结尾。 */
     public final boolean endsWith(String testStr) {
         if (testStr == null) {
             return false;
@@ -502,9 +456,7 @@ abstract class NormalizableStringBuilder<B extends NormalizableStringBuilder<B>>
         return true;
     }
 
-    /**
-     * 判断out是否以换行结尾，或者是空buffer。
-     */
+    /** 判断out是否以换行结尾，或者是空buffer。 */
     public final boolean endsWithNewLine() {
         return out.length() == 0 || endsWith(newLine);
     }
@@ -515,9 +467,7 @@ abstract class NormalizableStringBuilder<B extends NormalizableStringBuilder<B>>
         return buf;
     }
 
-    /**
-     * 确保最后一个换行被输出。
-     */
+    /** 确保最后一个换行被输出。 */
     public final void flush() {
         if (readAheadBuffer == CR) {
             readAheadBuffer = NONE;

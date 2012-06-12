@@ -17,38 +17,25 @@
 
 package com.alibaba.citrus.webx;
 
+import com.alibaba.citrus.webx.config.WebxConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.alibaba.citrus.webx.config.WebxConfiguration;
-
 public interface WebxComponent {
-    /**
-     * 取得当前component所属的components集合。
-     */
+    /** 取得当前component所属的components集合。 */
     WebxComponents getWebxComponents();
 
-    /**
-     * 取得所有component的名称。
-     */
+    /** 取得所有component的名称。 */
     String getName();
 
-    /**
-     * 取得指定component的component path。如果是默认component，则返回空字符串。
-     */
+    /** 取得指定component的component path。如果是默认component，则返回空字符串。 */
     String getComponentPath();
 
-    /**
-     * 取得webx configuration设置。
-     */
+    /** 取得webx configuration设置。 */
     WebxConfiguration getWebxConfiguration();
 
-    /**
-     * 取得用来处理当前component请求的controller。
-     */
+    /** 取得用来处理当前component请求的controller。 */
     WebxController getWebxController();
 
-    /**
-     * 取得当前component对应的application context容器。
-     */
+    /** 取得当前component对应的application context容器。 */
     WebApplicationContext getApplicationContext();
 }

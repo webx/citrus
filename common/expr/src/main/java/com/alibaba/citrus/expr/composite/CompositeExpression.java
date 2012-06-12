@@ -29,13 +29,13 @@ import com.alibaba.citrus.expr.support.ExpressionSupport;
  * @author Michael Zhou
  */
 public class CompositeExpression extends ExpressionSupport {
-    private String expr;
+    private String       expr;
     private Expression[] expressions;
 
     /**
      * 创建一个组合的表达式。
      *
-     * @param expr 表达式字符串
+     * @param expr        表达式字符串
      * @param expressions 表达式列表
      */
     public CompositeExpression(String expr, List<Expression> expressions) {

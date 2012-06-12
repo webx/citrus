@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.alibaba.citrus.util.internal.apache.lang;
 
 import java.util.Arrays;
@@ -775,9 +776,7 @@ public class EqualsBuilderTests extends TestCase {
         assertTrue(new EqualsBuilder().append(y, x).isEquals());
     }
 
-    /**
-     * Test from http://issues.apache.org/bugzilla/show_bug.cgi?id=33067
-     */
+    /** Test from http://issues.apache.org/bugzilla/show_bug.cgi?id=33067 */
     public void testNpeForNullElement() {
         Object[] x1 = new Object[] { new Integer(1), null, new Integer(3) };
         Object[] x2 = new Object[] { new Integer(1), new Integer(2), new Integer(3) };

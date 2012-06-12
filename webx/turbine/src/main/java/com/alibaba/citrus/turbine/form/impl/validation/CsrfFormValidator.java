@@ -22,13 +22,12 @@ import static com.alibaba.citrus.util.Assert.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.form.support.AbstractValidator;
 import com.alibaba.citrus.service.form.support.AbstractValidatorDefinitionParser;
 import com.alibaba.citrus.turbine.util.CsrfToken;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 在表单里加上该validator，可用来确保csrf token被提交。

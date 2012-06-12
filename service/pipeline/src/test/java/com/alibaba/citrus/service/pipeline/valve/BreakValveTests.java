@@ -19,9 +19,8 @@ package com.alibaba.citrus.service.pipeline.valve;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pipeline.impl.valve.BreakValve;
+import org.junit.Test;
 
 public class BreakValveTests extends AbstractBreakValveTests<BreakValve> {
     @Test
@@ -46,12 +45,12 @@ public class BreakValveTests extends AbstractBreakValveTests<BreakValve> {
         pipeline = getPipelineImplFromFactory("break-levels");
         assertInvoke(pipeline, false);
         assertLog("1-1", "1-2", "2-1", "2-2", //
-                "3-1" /* 3-2 <break levels=1/> */, "1-3");
+                  "3-1" /* 3-2 <break levels=1/> */, "1-3");
 
         // break levels
         pipeline = getPipelineImplFromFactory("break-up-to-label");
         assertInvoke(pipeline, false);
         assertLog("1-1", "1-2", "2-1", "2-2", //
-                "3-1" /* 3-2 <break levels=1/> */, "1-3");
+                  "3-1" /* 3-2 <break levels=1/> */, "1-3");
     }
 }

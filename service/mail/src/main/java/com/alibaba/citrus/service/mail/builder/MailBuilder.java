@@ -32,7 +32,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -43,7 +42,6 @@ import javax.mail.internet.MimeUtility;
 
 import com.alibaba.citrus.service.mail.MailService;
 import com.alibaba.citrus.service.mail.util.MailUtil;
-import com.alibaba.citrus.util.Assert.ExceptionType;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
@@ -56,15 +54,15 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public class MailBuilder implements Cloneable {
-    private MailService mailService;
-    private final Set<InternetAddress>[] addresses;
-    private final Map<String, Object> attributes;
-    private String id;
-    private String charset;
-    private String subject;
-    private Date sentDate;
-    private MailContent content;
-    private transient Session session;
+    private           MailService            mailService;
+    private final     Set<InternetAddress>[] addresses;
+    private final     Map<String, Object>    attributes;
+    private           String                 id;
+    private           String                 charset;
+    private           String                 subject;
+    private           Date                   sentDate;
+    private           MailContent            content;
+    private transient Session                session;
 
     @SuppressWarnings("unchecked")
     public MailBuilder() {
@@ -72,9 +70,7 @@ public class MailBuilder implements Cloneable {
         this.attributes = createHashMap();
     }
 
-    /**
-     * 深度复制一个mail builder。
-     */
+    /** 深度复制一个mail builder。 */
     @Override
     public MailBuilder clone() {
         MailBuilder copy = new MailBuilder();
@@ -102,30 +98,22 @@ public class MailBuilder implements Cloneable {
         return copy;
     }
 
-    /**
-     * 取得此mail builder所属的service。
-     */
+    /** 取得此mail builder所属的service。 */
     public MailService getMailService() {
         return mailService;
     }
 
-    /**
-     * 设置此mail builder所属的service。
-     */
+    /** 设置此mail builder所属的service。 */
     public void setMailService(MailService mailService) {
         this.mailService = mailService;
     }
 
-    /**
-     * 取得mail builder的ID。
-     */
+    /** 取得mail builder的ID。 */
     public String getId() {
         return id;
     }
 
-    /**
-     * 设置mail builder的ID。
-     */
+    /** 设置mail builder的ID。 */
     public void setId(String id) {
         this.id = trimToNull(id);
     }
@@ -140,30 +128,22 @@ public class MailBuilder implements Cloneable {
         return assertNotNull(session, ExceptionType.ILLEGAL_STATE, "Not in build time");
     }
 
-    /**
-     * 取得邮件的主题。
-     */
+    /** 取得邮件的主题。 */
     public String getSubject() {
         return subject;
     }
 
-    /**
-     * 设置邮件的主题。
-     */
+    /** 设置邮件的主题。 */
     public void setSubject(String subject) {
         this.subject = trimToNull(subject);
     }
 
-    /**
-     * 取得生成邮件时使用的编码字符集。如果未指定，则返回默认字符集<code>UTF-8</code>。
-     */
+    /** 取得生成邮件时使用的编码字符集。如果未指定，则返回默认字符集<code>UTF-8</code>。 */
     public String getCharacterEncoding() {
         return getDefaultCharsetIfNull(charset);
     }
 
-    /**
-     * 设置生成邮件时使用的编码字符集。
-     */
+    /** 设置生成邮件时使用的编码字符集。 */
     public void setCharacterEncoding(String javaCharset) {
         javaCharset = trimToNull(javaCharset);
 
@@ -196,9 +176,7 @@ public class MailBuilder implements Cloneable {
         return defaultIfNull(charset, DEFAULT_CHARSET);
     }
 
-    /**
-     * 取得指定类型的所有地址。如果未设置该类型的地址，则返回空数组。
-     */
+    /** 取得指定类型的所有地址。如果未设置该类型的地址，则返回空数组。 */
     public InternetAddress[] getAddresses(MailAddressType addrType) {
         Set<InternetAddress> addrSet = getAddressSet(addrType, false);
 
@@ -209,9 +187,7 @@ public class MailBuilder implements Cloneable {
         }
     }
 
-    /**
-     * 添加邮件地址。
-     */
+    /** 添加邮件地址。 */
     public void addAddress(MailAddressType addrType, String addrList) throws InvalidAddressException {
         if (isEmpty(addrList)) {
             return;
@@ -247,9 +223,7 @@ public class MailBuilder implements Cloneable {
         addAddress(addrType, addr);
     }
 
-    /**
-     * 取得邮件内容。
-     */
+    /** 取得邮件内容。 */
     public MailContent getContent() {
         return content;
     }
@@ -267,9 +241,7 @@ public class MailBuilder implements Cloneable {
         return findContent(trimToNull(id), content);
     }
 
-    /**
-     * 设置邮件内容。
-     */
+    /** 设置邮件内容。 */
     public void setContent(MailContent content) {
         MailContent oldContent = this.content;
 
@@ -281,9 +253,7 @@ public class MailBuilder implements Cloneable {
         }
     }
 
-    /**
-     * 取得发信日期，如果未设置，则取得当前时间。
-     */
+    /** 取得发信日期，如果未设置，则取得当前时间。 */
     public Date getSentDate() {
         if (sentDate == null) {
             sentDate = new Date();
@@ -292,30 +262,22 @@ public class MailBuilder implements Cloneable {
         return sentDate;
     }
 
-    /**
-     * 设置发信日期。
-     */
+    /** 设置发信日期。 */
     public void setSentDate(Date sentDate) {
         this.sentDate = sentDate;
     }
 
-    /**
-     * 取得绑定的对象。
-     */
+    /** 取得绑定的对象。 */
     public Object getAttribute(String key) {
         return attributes.get(key);
     }
 
-    /**
-     * 取得attributes的key集合。
-     */
+    /** 取得attributes的key集合。 */
     public Set<String> getAttributeKeys() {
         return attributes.keySet();
     }
 
-    /**
-     * 绑定指定的对象。
-     */
+    /** 绑定指定的对象。 */
     public void setAttribute(String key, Object object) {
         if (object == null) {
             attributes.remove(key);
@@ -324,16 +286,12 @@ public class MailBuilder implements Cloneable {
         }
     }
 
-    /**
-     * 批量绑定对象。
-     */
+    /** 批量绑定对象。 */
     public void setAttributes(Map<String, Object> attrs) {
         attributes.putAll(attrs);
     }
 
-    /**
-     * 转换成javamail邮件对象。
-     */
+    /** 转换成javamail邮件对象。 */
     public MimeMessage getMessage(Session session) throws MailBuilderException {
         this.session = assertNotNull(session, "session");
 
@@ -376,9 +334,7 @@ public class MailBuilder implements Cloneable {
         return message;
     }
 
-    /**
-     * 将javamail邮件对象转换成文本形式，其格式为标准的<code>.eml</code>格式。
-     */
+    /** 将javamail邮件对象转换成文本形式，其格式为标准的<code>.eml</code>格式。 */
     public String getMessageAsString(Session session) throws MailBuilderException {
         Message message = getMessage(session);
 
@@ -392,9 +348,7 @@ public class MailBuilder implements Cloneable {
         }
     }
 
-    /**
-     * 将javamail邮件对象输出到指定流中。
-     */
+    /** 将javamail邮件对象输出到指定流中。 */
     public void writeTo(OutputStream ostream, Session session) throws MailBuilderException, IOException {
         Message message = getMessage(session);
 
@@ -427,9 +381,7 @@ public class MailBuilder implements Cloneable {
         return addrSet;
     }
 
-    /**
-     * 递归查找指定ID的content。
-     */
+    /** 递归查找指定ID的content。 */
     private MailContent findContent(String id, MailContent content) {
         MailContent result = null;
 

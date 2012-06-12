@@ -33,7 +33,7 @@ public abstract class AbstractTemplateMappingRule extends AbstractMappingRule {
     public static final String TEMPLATE_NAME_SEPARATOR = "/";
 
     private TemplateService templateService;
-    private String templatePrefix;
+    private String          templatePrefix;
 
     public TemplateService getTemplateService() {
         return templateService;

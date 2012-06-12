@@ -35,16 +35,16 @@ import com.alibaba.citrus.util.StringUtil;
  */
 abstract class FallbackIterator implements Iterator<String> {
     private static final int STATE_SPECIFIC_NAME = 0;
-    private static final int STATE_DEFAULT_NAME = 1;
-    private static final int STATE_FINAL_NAME = 2;
-    private final String name;
+    private static final int STATE_DEFAULT_NAME  = 1;
+    private static final int STATE_FINAL_NAME    = 2;
+    private final String       name;
     private final List<String> names;
-    private final String defaultLastName;
-    private final String finalName;
-    private final boolean matchLastName;
-    private String lastName;
-    private String fullName;
-    private int state;
+    private final String       defaultLastName;
+    private final String       finalName;
+    private final boolean      matchLastName;
+    private       String       lastName;
+    private       String       fullName;
+    private       int          state;
 
     public FallbackIterator(String name, String defaultLastName, String finalName, boolean matchLastName) {
         String[] parts = StringUtil.split(trimToNull(name), AbstractMappingRule.NAME_SEPARATOR);
@@ -155,25 +155,17 @@ abstract class FallbackIterator implements Iterator<String> {
         throw new UnsupportedOperationException();
     }
 
-    /**
-     * @return the names
-     */
+    /** @return the names */
     public List<String> getNames() {
         return names;
     }
 
-    /**
-     * 非法名称，抛出异常。
-     */
+    /** 非法名称，抛出异常。 */
     protected abstract void invalidName(String name);
 
-    /**
-     * 处理最后一个名字。
-     */
+    /** 处理最后一个名字。 */
     protected abstract String normalizeLastName(String lastName);
 
-    /**
-     * 生成名字。
-     */
+    /** 生成名字。 */
     protected abstract String generateFullName(List<String> names);
 }

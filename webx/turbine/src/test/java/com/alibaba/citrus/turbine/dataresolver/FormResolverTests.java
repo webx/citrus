@@ -20,11 +20,10 @@ package com.alibaba.citrus.turbine.dataresolver;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.dataresolver.DataResolverContext;
 import com.alibaba.citrus.service.form.Form;
 import com.alibaba.citrus.turbine.dataresolver.impl.FormResolverFactory;
+import org.junit.Test;
 
 public class FormResolverTests extends AbstractDataResolverTests {
     private Form form;

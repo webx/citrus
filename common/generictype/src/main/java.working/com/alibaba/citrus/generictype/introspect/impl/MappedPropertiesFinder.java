@@ -98,9 +98,7 @@ public class MappedPropertiesFinder extends AbstractPropertiesFinder {
         return new MappedPropertyImpl(propName, declaringType, type, readMethod, writMethod);
     }
 
-    /**
-     * 代表一个带key的属性信息。
-     */
+    /** 代表一个带key的属性信息。 */
     private static class MappedPropertyImpl extends AbstractPropertyInfo implements MappedPropertyInfo {
         private MappedPropertyImpl(String name, TypeInfo declaringType, TypeInfo type, MethodInfo readMethod,
                                    MethodInfo writeMethod) {

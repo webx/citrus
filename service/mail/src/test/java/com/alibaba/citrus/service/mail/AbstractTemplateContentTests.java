@@ -20,14 +20,13 @@ package com.alibaba.citrus.service.mail;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.mail.builder.MailBuilderException;
 import com.alibaba.citrus.service.mail.builder.content.TemplateContent;
 import com.alibaba.citrus.service.pull.PullService;
 import com.alibaba.citrus.service.template.TemplateNotFoundException;
 import com.alibaba.citrus.service.template.TemplateService;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * 模板content测试基类。
@@ -35,9 +34,9 @@ import com.alibaba.citrus.service.template.TemplateService;
  * @author Michael Zhou
  */
 public abstract class AbstractTemplateContentTests<TC extends TemplateContent> extends AbstractMailBuilderTests {
-    protected TC content;
+    protected TC              content;
     protected TemplateService templateService;
-    protected PullService pullService;
+    protected PullService     pullService;
 
     @Before
     public final void initSuper() {
@@ -115,7 +114,7 @@ public abstract class AbstractTemplateContentTests<TC extends TemplateContent> e
             assertThat(
                     e,
                     exception(TemplateNotFoundException.class, "Failed to render template: notExist.vm",
-                            "Could not find template \"/notExist.vm\""));
+                              "Could not find template \"/notExist.vm\""));
         }
     }
 

@@ -22,18 +22,16 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.pipeline.Pipeline;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.PipelineInvocationHandle;
 import com.alibaba.citrus.service.pipeline.support.AbstractValve;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 支持try-catch-finally结构。
@@ -45,7 +43,7 @@ public class TryCatchFinallyValve extends AbstractValve {
     private Pipeline tryPipeline;
     private Pipeline catchPipeline;
     private Pipeline finallyPipeline;
-    private String exceptionName;
+    private String   exceptionName;
 
     public Pipeline getTry() {
         return tryPipeline;

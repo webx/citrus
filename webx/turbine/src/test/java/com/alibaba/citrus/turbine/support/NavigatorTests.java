@@ -20,14 +20,13 @@ package com.alibaba.citrus.turbine.support;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.requestcontext.lazycommit.LazyCommitRequestContext;
 import com.alibaba.citrus.service.uribroker.URIBrokerService;
 import com.alibaba.citrus.turbine.AbstractWebxTests;
 import com.alibaba.citrus.turbine.uribroker.uri.TurbineURIBroker;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class NavigatorTests extends AbstractWebxTests {
     private URIBrokerService uris;
@@ -52,7 +51,7 @@ public class NavigatorTests extends AbstractWebxTests {
         assertTrue(rundata.getParameters().isEmpty());
 
         rundata.forwardTo("hello").withParameter("aaa", "111").withParameter("bbb", "222", "333")
-                .withParameter("ccc", (String) null).withParameter("ddd", (String[]) null);
+               .withParameter("ccc", (String) null).withParameter("ddd", (String[]) null);
 
         assertTrue(rundata.isRedirected());
         assertEquals("hello", rundata.getRedirectTarget());
@@ -123,7 +122,7 @@ public class NavigatorTests extends AbstractWebxTests {
     @Test
     public void redirect_then_getRedirectLocation() {
         rundata.redirectTo("link1").withParameter("aaa", "111").withParameter("bbb", "222", "333")
-                .withParameter("ccc", (String) null).withParameter("ddd", (String[]) null);
+               .withParameter("ccc", (String) null).withParameter("ddd", (String[]) null);
 
         // getRedirectLocation会触发commit redirect uri
         assertEquals("http://www.taobao.com/?aaa=111&bbb=222&bbb=333&ccc=&ddd=", rundata.getRedirectLocation());
@@ -132,7 +131,7 @@ public class NavigatorTests extends AbstractWebxTests {
     @Test
     public void redirect_end() {
         rundata.redirectTo("link1").withParameter("aaa", "111").withParameter("bbb", "222", "333")
-                .withParameter("ccc", (String) null).withParameter("ddd", (String[]) null).end();
+               .withParameter("ccc", (String) null).withParameter("ddd", (String[]) null).end();
 
         // getRedirectLocation会触发commit redirect uri
         assertEquals("http://www.taobao.com/?aaa=111&bbb=222&bbb=333&ccc=&ddd=", getRedirectLocationRaw());

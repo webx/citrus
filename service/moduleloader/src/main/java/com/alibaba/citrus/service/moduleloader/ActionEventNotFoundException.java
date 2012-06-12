@@ -25,9 +25,7 @@ package com.alibaba.citrus.service.moduleloader;
 public class ActionEventNotFoundException extends ActionEventException {
     private static final long serialVersionUID = 3834874663401961264L;
 
-    /**
-     * 创建一个异常。
-     */
+    /** 创建一个异常。 */
     public ActionEventNotFoundException() {
         super();
     }
@@ -45,7 +43,7 @@ public class ActionEventNotFoundException extends ActionEventException {
      * 创建一个异常。
      *
      * @param message 异常信息
-     * @param cause 异常原因
+     * @param cause   异常原因
      */
     public ActionEventNotFoundException(String message, Throwable cause) {
         super(message, cause);

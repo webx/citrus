@@ -17,13 +17,12 @@
 
 package com.alibaba.citrus.springext.support.parser;
 
+import com.alibaba.citrus.springext.support.parser.NamedBeanDefinitionParserMixin.DefaultNameBDParser;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.springext.support.parser.NamedBeanDefinitionParserMixin.DefaultNameBDParser;
 
 /**
  * 定义一个bean definition，如果未指定id，则使用<code>getDefaultName()</code>所返回的默认名称。
@@ -34,7 +33,7 @@ import com.alibaba.citrus.springext.support.parser.NamedBeanDefinitionParserMixi
  * @author Michael Zhou
  */
 public abstract class AbstractNamedBeanDefinitionParser<T> extends AbstractSingleBeanDefinitionParser<T> implements
-        DefaultNameBDParser {
+                                                                                                         DefaultNameBDParser {
     private final NamedBeanDefinitionParserMixin mixin = new NamedBeanDefinitionParserMixin(this);
 
     /**
@@ -45,17 +44,13 @@ public abstract class AbstractNamedBeanDefinitionParser<T> extends AbstractSingl
      */
     protected abstract String getDefaultName();
 
-    /**
-     * 从id attribute中取得bean name，假如未指定，则从<code>getDefaultName()</code>中取得默认名。
-     */
+    /** 从id attribute中取得bean name，假如未指定，则从<code>getDefaultName()</code>中取得默认名。 */
     @Override
     protected final String resolveId(Element element, AbstractBeanDefinition definition, ParserContext parserContext) {
         return mixin.resolveId(element, definition, parserContext);
     }
 
-    /**
-     * 假如当前bean name为默认名，则同时注册默认的aliases。
-     */
+    /** 假如当前bean name为默认名，则同时注册默认的aliases。 */
     @Override
     protected void registerBeanDefinition(BeanDefinitionHolder definition, BeanDefinitionRegistry registry) {
         mixin.registerBeanDefinition(definition, registry);

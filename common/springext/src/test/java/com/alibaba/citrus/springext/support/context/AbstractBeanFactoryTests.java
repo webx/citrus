@@ -34,7 +34,7 @@ import org.springframework.context.support.AbstractApplicationContext;
 
 public abstract class AbstractBeanFactoryTests {
     private SimpleDateFormat format;
-    private Object anyBean;
+    private Object           anyBean;
 
     protected abstract BeanFactory getFactory();
 

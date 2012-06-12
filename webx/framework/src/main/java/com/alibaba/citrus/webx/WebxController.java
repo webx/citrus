@@ -17,9 +17,8 @@
 
 package com.alibaba.citrus.webx;
 
-import org.springframework.beans.BeansException;
-
 import com.alibaba.citrus.service.requestcontext.RequestContext;
+import org.springframework.beans.BeansException;
 
 /**
  * 用来处理对特定<code>WebxComponent</code>的请求的控制器。

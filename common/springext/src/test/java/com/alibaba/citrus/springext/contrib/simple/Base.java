@@ -22,11 +22,10 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 
 import java.util.List;
 
+import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
 
 public class Base {
     private Object[] objects;

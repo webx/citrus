@@ -38,12 +38,12 @@ import java.io.OutputStream;
 public class OutputEngineInputStream extends InputStream {
     private static final int DEFAULT_INITIAL_BUFFER_SIZE = 8192;
     private OutputEngine engine;
-    private byte[] buffer;
-    private int index;
-    private int limit;
-    private int capacity;
-    private boolean closed;
-    private boolean eof;
+    private byte[]       buffer;
+    private int          index;
+    private int          limit;
+    private int          capacity;
+    private boolean      closed;
+    private boolean      eof;
 
     public OutputEngineInputStream(OutputEngine engine) throws IOException {
         this(engine, DEFAULT_INITIAL_BUFFER_SIZE);

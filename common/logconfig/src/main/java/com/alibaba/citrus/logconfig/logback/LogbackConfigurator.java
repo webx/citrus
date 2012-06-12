@@ -20,14 +20,12 @@ package com.alibaba.citrus.logconfig.logback;
 import java.net.URL;
 import java.util.Map;
 
-import org.slf4j.ILoggerFactory;
-import org.slf4j.LoggerFactory;
-
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.joran.JoranConfigurator;
 import ch.qos.logback.core.LogbackException;
-
 import com.alibaba.citrus.logconfig.LogConfigurator;
+import org.slf4j.ILoggerFactory;
+import org.slf4j.LoggerFactory;
 
 public class LogbackConfigurator extends LogConfigurator {
     @Override
@@ -44,7 +42,7 @@ public class LogbackConfigurator extends LogConfigurator {
         if (!(lcObject instanceof LoggerContext)) {
             throw new LogbackException(
                     "Expected LOGBACK binding with SLF4J, but another log system has taken the place: "
-                            + lcObject.getClass().getSimpleName());
+                    + lcObject.getClass().getSimpleName());
         }
 
         LoggerContext lc = (LoggerContext) lcObject;

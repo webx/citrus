@@ -35,9 +35,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 public abstract class MessageContext implements ExpressionContext {
     protected final Map<Object, Object> thisContext = createHashMap();
 
-    /**
-     * 取得指定值。
-     */
+    /** 取得指定值。 */
     public Object get(String key) {
         Object value = thisContext.get(key);
 
@@ -54,9 +52,7 @@ public abstract class MessageContext implements ExpressionContext {
         return decorate(value);
     }
 
-    /**
-     * 假如是数组，转换成更易操作的<code>List</code>。
-     */
+    /** 假如是数组，转换成更易操作的<code>List</code>。 */
     protected Object decorate(Object value) {
         if (value != null && value.getClass().isArray()) {
             int length = Array.getLength(value);
@@ -72,9 +68,7 @@ public abstract class MessageContext implements ExpressionContext {
         return value;
     }
 
-    /**
-     * 添加一个值。
-     */
+    /** 添加一个值。 */
     public void put(String key, Object value) {
         if (value == null) {
             thisContext.remove(key);
@@ -89,18 +83,14 @@ public abstract class MessageContext implements ExpressionContext {
         }
     }
 
-    /**
-     * 批量添加值。
-     */
+    /** 批量添加值。 */
     public void putAll(Map<?, ?> values) {
         if (values != null) {
             thisContext.putAll(values);
         }
     }
 
-    /**
-     * 从另一个<code>MessageContext</code>中，复制所有本地context，但不覆盖。
-     */
+    /** 从另一个<code>MessageContext</code>中，复制所有本地context，但不覆盖。 */
     public void copyLocalContext(MessageContext src) {
         for (Map.Entry<Object, Object> entry : src.thisContext.entrySet()) {
             Object key = entry.getKey();
@@ -111,14 +101,10 @@ public abstract class MessageContext implements ExpressionContext {
         }
     }
 
-    /**
-     * 取得指定值。
-     */
+    /** 取得指定值。 */
     protected abstract Object internalGet(String key);
 
-    /**
-     * 取得parent context。
-     */
+    /** 取得parent context。 */
     public abstract ExpressionContext getParentContext();
 
     @Override

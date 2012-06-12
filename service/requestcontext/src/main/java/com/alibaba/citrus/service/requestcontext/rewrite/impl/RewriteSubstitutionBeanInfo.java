@@ -37,7 +37,7 @@ public class RewriteSubstitutionBeanInfo extends SimpleBeanInfo {
 
         try {
             descriptors = createLinkedList(Introspector.getBeanInfo(RewriteSubstitution.class.getSuperclass())
-                    .getPropertyDescriptors());
+                                                       .getPropertyDescriptors());
 
             descriptors.add(new PropertyDescriptor("uri", RewriteSubstitution.class, null, "setUri"));
             descriptors.add(new PropertyDescriptor("flags", RewriteSubstitution.class, null, "setFlags"));

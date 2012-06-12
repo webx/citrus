@@ -25,9 +25,8 @@ import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.Locale;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.util.SystemUtil.UserInfo;
+import org.junit.Test;
 
 /**
  * 测试<code>Utils</code>类。

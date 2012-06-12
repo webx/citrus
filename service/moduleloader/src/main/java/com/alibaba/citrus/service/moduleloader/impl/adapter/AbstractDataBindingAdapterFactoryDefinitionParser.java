@@ -20,15 +20,14 @@ package com.alibaba.citrus.service.moduleloader.impl.adapter;
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
+import com.alibaba.citrus.service.dataresolver.DataResolverService;
+import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-import com.alibaba.citrus.service.dataresolver.DataResolverService;
-import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
-
 public class AbstractDataBindingAdapterFactoryDefinitionParser<F extends AbstractDataBindingAdapterFactory> extends
-        AbstractSingleBeanDefinitionParser<F> {
+                                                                                                            AbstractSingleBeanDefinitionParser<F> {
     @Override
     protected final void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         initAdapterBeanDefinition(element, builder);
@@ -38,9 +37,7 @@ public class AbstractDataBindingAdapterFactoryDefinitionParser<F extends Abstrac
     protected void doParseFactory(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
     }
 
-    /**
-     * 初始化adapter BD，可选注入dataResolverService。
-     */
+    /** 初始化adapter BD，可选注入dataResolverService。 */
     public static void initAdapterBeanDefinition(Element element, BeanDefinitionBuilder builder) {
         String dataResolverRef = null;
 

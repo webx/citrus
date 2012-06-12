@@ -35,75 +35,57 @@ import com.alibaba.citrus.service.form.configuration.GroupConfig;
  * @author Michael Zhou
  */
 public class FieldConfigImpl extends AbstractConfig<FieldConfig> implements FieldConfig {
-    private GroupConfig groupConfig;
-    private String name;
-    private String key;
-    private String displayName;
-    private String[] defaultValues;
-    private Boolean trimming;
-    private String propertyName;
+    private GroupConfig     groupConfig;
+    private String          name;
+    private String          key;
+    private String          displayName;
+    private String[]        defaultValues;
+    private Boolean         trimming;
+    private String          propertyName;
     private List<Validator> validators;
     private List<Validator> validatorList;
 
-    /**
-     * 取得field所属的group config。
-     */
+    /** 取得field所属的group config。 */
     public GroupConfig getGroupConfig() {
         return groupConfig;
     }
 
-    /**
-     * 设置field所属的group config。
-     */
+    /** 设置field所属的group config。 */
     public void setGroupConfig(GroupConfig groupConfig) {
         this.groupConfig = groupConfig;
     }
 
-    /**
-     * 取得field name。
-     */
+    /** 取得field name。 */
     public String getName() {
         return name;
     }
 
-    /**
-     * 设置field name。
-     */
+    /** 设置field name。 */
     public void setName(String name) {
         this.name = trimToNull(name);
     }
 
-    /**
-     * 取得field key。
-     */
+    /** 取得field key。 */
     public String getKey() {
         return key;
     }
 
-    /**
-     * 设置field key。
-     */
+    /** 设置field key。 */
     public void setKey(String key) {
         this.key = trimToNull(key);
     }
 
-    /**
-     * 取得用来显示field的名称。
-     */
+    /** 取得用来显示field的名称。 */
     public String getDisplayName() {
         return displayName == null ? getName() : displayName;
     }
 
-    /**
-     * 设置用来显示field的名称。
-     */
+    /** 设置用来显示field的名称。 */
     public void setDisplayName(String displayName) {
         this.displayName = trimToNull(displayName);
     }
 
-    /**
-     * 取得trimming选项。
-     */
+    /** 取得trimming选项。 */
     public boolean isTrimming() {
         if (trimming == null) {
             return groupConfig == null ? true : getGroupConfig().isTrimmingByDefault();
@@ -112,30 +94,22 @@ public class FieldConfigImpl extends AbstractConfig<FieldConfig> implements Fiel
         }
     }
 
-    /**
-     * 设置trimming选项。
-     */
+    /** 设置trimming选项。 */
     public void setTrimming(boolean trimming) {
         this.trimming = trimming;
     }
 
-    /**
-     * 取得bean property名称。
-     */
+    /** 取得bean property名称。 */
     public String getPropertyName() {
         return propertyName == null ? getName() : propertyName;
     }
 
-    /**
-     * 设置bean property名称。
-     */
+    /** 设置bean property名称。 */
     public void setPropertyName(String propertyName) {
         this.propertyName = trimToNull(propertyName);
     }
 
-    /**
-     * 取得单个默认值。
-     */
+    /** 取得单个默认值。 */
     public String getDefaultValue() {
         if (!isEmptyArray(defaultValues)) {
             return defaultValues[0];
@@ -144,9 +118,7 @@ public class FieldConfigImpl extends AbstractConfig<FieldConfig> implements Fiel
         }
     }
 
-    /**
-     * 取得一组默认值。
-     */
+    /** 取得一组默认值。 */
     public String[] getDefaultValues() {
         if (!isEmptyArray(defaultValues)) {
             return defaultValues.clone();
@@ -155,18 +127,14 @@ public class FieldConfigImpl extends AbstractConfig<FieldConfig> implements Fiel
         }
     }
 
-    /**
-     * 设置默认值。
-     */
+    /** 设置默认值。 */
     public void setDefaultValues(String[] defaultValues) {
         if (!isEmptyArray(defaultValues)) {
             this.defaultValues = defaultValues.clone();
         }
     }
 
-    /**
-     * 取得validator列表。
-     */
+    /** 取得validator列表。 */
     public List<Validator> getValidators() {
         if (validatorList == null) {
             return emptyList();
@@ -175,9 +143,7 @@ public class FieldConfigImpl extends AbstractConfig<FieldConfig> implements Fiel
         }
     }
 
-    /**
-     * 设置一组validator。
-     */
+    /** 设置一组validator。 */
     public void setValidators(List<Validator> validators) {
         if (validators != null) {
             initValidatorList();
@@ -190,9 +156,7 @@ public class FieldConfigImpl extends AbstractConfig<FieldConfig> implements Fiel
         validatorList = unmodifiableList(validators);
     }
 
-    /**
-     * 将指定field中的内容复制到当前field中。
-     */
+    /** 将指定field中的内容复制到当前field中。 */
     void mergeWith(FieldConfigImpl src) {
         if (name == null) {
             setName(src.name);
@@ -223,13 +187,11 @@ public class FieldConfigImpl extends AbstractConfig<FieldConfig> implements Fiel
         }
     }
 
-    /**
-     * 转换成易于阅读的字符串。
-     */
+    /** 转换成易于阅读的字符串。 */
     @Override
     public String toString() {
         String groupName = groupConfig == null ? null : groupConfig.getName();
         return "FieldConfig[group: " + groupName + ", name: " + getName() + ", validators: " + getValidators().size()
-                + "]";
+               + "]";
     }
 }

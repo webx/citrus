@@ -29,7 +29,7 @@ import com.alibaba.citrus.generictype.TypeVariableInfo;
  * @author Michael Zhou
  */
 class TypeVariableImpl extends AbstractBoundedTypeInfo implements TypeVariableInfo {
-    private final String name;
+    private final String                 name;
     private final GenericDeclarationInfo declaration;
 
     TypeVariableImpl(String name, GenericDeclarationInfo declaration, TypeInfo[] upperBounds) {
@@ -65,17 +65,13 @@ class TypeVariableImpl extends AbstractBoundedTypeInfo implements TypeVariableIn
         return TypeInfoFactory.resolveTypeVariable(this, context, includeBaseType);
     }
 
-    /**
-     * 取得hash值。
-     */
+    /** 取得hash值。 */
     @Override
     public int hashCode() {
         return getClass().hashCode() ^ name.hashCode() ^ declaration.hashCode();
     }
 
-    /**
-     * 判断两个对象是否相同。
-     */
+    /** 判断两个对象是否相同。 */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -91,9 +87,7 @@ class TypeVariableImpl extends AbstractBoundedTypeInfo implements TypeVariableIn
         return name.equals(otherType.name) && declaration.equals(otherType.declaration);
     }
 
-    /**
-     * 取得字符串表示。
-     */
+    /** 取得字符串表示。 */
     @Override
     public String toString() {
         return name;

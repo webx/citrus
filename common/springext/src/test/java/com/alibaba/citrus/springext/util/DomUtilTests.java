@@ -23,7 +23,6 @@ import static org.junit.Assert.*;
 
 import java.io.StringWriter;
 import java.util.List;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -78,9 +77,9 @@ public class DomUtilTests {
 
         // all elements
         assertElements(subElements(root), "ns1Tag@ns1", "ns2Tag@ns2",
-                "beans@http://www.springframework.org/schema/beans", "noNsTag@null");
+                       "beans@http://www.springframework.org/schema/beans", "noNsTag@null");
         assertElements(subElements(root, null), "ns1Tag@ns1", "ns2Tag@ns2",
-                "beans@http://www.springframework.org/schema/beans", "noNsTag@null");
+                       "beans@http://www.springframework.org/schema/beans", "noNsTag@null");
 
         // ns==root.ns
         assertElements(subElements(root, sameNs(root)), "ns1Tag@ns1");
@@ -108,7 +107,7 @@ public class DomUtilTests {
 
         // 反向选择：not
         assertElements(subElements(root, not(sameNs(root))), "ns2Tag@ns2",
-                "beans@http://www.springframework.org/schema/beans", "noNsTag@null");
+                       "beans@http://www.springframework.org/schema/beans", "noNsTag@null");
 
         // 接受或报错
         try {

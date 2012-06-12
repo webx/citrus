@@ -36,13 +36,11 @@ public class IntHashMap<T> {
 
     // 私有变量
     private Entry<T>[] table;
-    private int count;
-    private int threshold;
-    private float loadFactor;
+    private int        count;
+    private int        threshold;
+    private float      loadFactor;
 
-    /**
-     * 创建一个hash表，使用默认的初始容量<code>16</code>和默认的负载系数<code>0.75</code>。
-     */
+    /** 创建一个hash表，使用默认的初始容量<code>16</code>和默认的负载系数<code>0.75</code>。 */
     public IntHashMap() {
         this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);
     }
@@ -61,7 +59,7 @@ public class IntHashMap<T> {
      * 创建一个hash表，使用默认的指定的初始容量和指定的负载系数。
      *
      * @param initialCapacity hash表的初始容量
-     * @param loadFactor 负载系数
+     * @param loadFactor      负载系数
      * @throws IllegalArgumentException 如果初始容量小于或等于<code>0</code>，或负载系数不是正数
      */
     @SuppressWarnings("unchecked")
@@ -139,7 +137,7 @@ public class IntHashMap<T> {
 
         boolean valueIsNull = value == null;
 
-        for (int i = tab.length; i-- > 0;) {
+        for (int i = tab.length; i-- > 0; ) {
             for (Entry<T> e = tab[i]; e != null; e = e.next) {
                 if (valueIsNull ? e.value == null : value.equals(e.value)) {
                     return true;
@@ -173,7 +171,7 @@ public class IntHashMap<T> {
     /**
      * 将key和指定对象相关联，并保存在hash表中。
      *
-     * @param key 对象的key
+     * @param key   对象的key
      * @param value 对象（值）
      * @return 如果指定key已经存在，则返回key所对应的原先的值
      */
@@ -238,13 +236,11 @@ public class IntHashMap<T> {
         return null;
     }
 
-    /**
-     * 清除hash表。
-     */
+    /** 清除hash表。 */
     public void clear() {
         Entry<T>[] tab = table;
 
-        for (int index = tab.length; --index >= 0;) {
+        for (int index = tab.length; --index >= 0; ) {
             tab[index] = null;
         }
 
@@ -300,9 +296,7 @@ public class IntHashMap<T> {
         return buffer.toString();
     }
 
-    /**
-     * 重构hash表，倍增其容量。
-     */
+    /** 重构hash表，倍增其容量。 */
     protected void rehash() {
         int oldCapacity = table.length;
         Entry<T>[] oldMap = table;
@@ -315,8 +309,8 @@ public class IntHashMap<T> {
         threshold = (int) (newCapacity * loadFactor);
         table = newMap;
 
-        for (int i = oldCapacity; i-- > 0;) {
-            for (Entry<T> old = oldMap[i]; old != null;) {
+        for (int i = oldCapacity; i-- > 0; ) {
+            for (Entry<T> old = oldMap[i]; old != null; ) {
                 Entry<T> e = old;
 
                 old = old.next;
@@ -347,13 +341,11 @@ public class IntHashMap<T> {
         return threshold;
     }
 
-    /**
-     * 代表hash表中的一个元素的类。
-     */
+    /** 代表hash表中的一个元素的类。 */
     protected static class Entry<T> {
-        protected int hash;
-        protected int key;
-        protected T value;
+        protected int      hash;
+        protected int      key;
+        protected T        value;
         protected Entry<T> next;
 
         protected Entry(int hash, int key, T value, Entry<T> next) {

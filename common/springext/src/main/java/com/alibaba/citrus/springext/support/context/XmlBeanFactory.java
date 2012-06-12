@@ -17,13 +17,12 @@
 
 package com.alibaba.citrus.springext.support.context;
 
+import com.alibaba.citrus.springext.support.resolver.XmlBeanDefinitionReaderProcessor;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.core.io.Resource;
-
-import com.alibaba.citrus.springext.support.resolver.XmlBeanDefinitionReaderProcessor;
 
 /**
  * 从XML配置文件中装配的<code>BeanFactory</code>的基类，派生于

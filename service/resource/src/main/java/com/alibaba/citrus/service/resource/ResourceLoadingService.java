@@ -35,49 +35,31 @@ import java.util.Set;
  * @author Michael Zhou
  */
 public interface ResourceLoadingService {
-    /**
-     * 常用选项：<code>FOR_CREATE</code>。
-     */
+    /** 常用选项：<code>FOR_CREATE</code>。 */
     Set<ResourceLoadingOption> FOR_CREATE = unmodifiableSet(EnumSet.of(ResourceLoadingOption.FOR_CREATE));
 
-    /**
-     * 取得parent装载服务。
-     */
+    /** 取得parent装载服务。 */
     ResourceLoadingService getParent();
 
-    /**
-     * 查找指定名称的资源。
-     */
+    /** 查找指定名称的资源。 */
     URL getResourceAsURL(String resourceName) throws ResourceNotFoundException;
 
-    /**
-     * 查找指定名称的资源。
-     */
+    /** 查找指定名称的资源。 */
     File getResourceAsFile(String resourceName) throws ResourceNotFoundException;
 
-    /**
-     * 查找指定名称的资源。
-     */
+    /** 查找指定名称的资源。 */
     File getResourceAsFile(String resourceName, Set<ResourceLoadingOption> options) throws ResourceNotFoundException;
 
-    /**
-     * 查找指定名称的资源。
-     */
+    /** 查找指定名称的资源。 */
     InputStream getResourceAsStream(String resourceName) throws ResourceNotFoundException, IOException;
 
-    /**
-     * 查找指定名称的资源。
-     */
+    /** 查找指定名称的资源。 */
     Resource getResource(String resourceName) throws ResourceNotFoundException;
 
-    /**
-     * 查找指定名称的资源。
-     */
+    /** 查找指定名称的资源。 */
     Resource getResource(String resourceName, Set<ResourceLoadingOption> options) throws ResourceNotFoundException;
 
-    /**
-     * 判断指定名称的资源是否存在。如果存在，则返回<code>true</code>。
-     */
+    /** 判断指定名称的资源是否存在。如果存在，则返回<code>true</code>。 */
     boolean exists(String resourceName);
 
     /**
@@ -102,28 +84,18 @@ public interface ResourceLoadingService {
      */
     ResourceTrace trace(String resourceName, Set<ResourceLoadingOption> options);
 
-    /**
-     * 罗列出指定资源的子目录或文件名。目录名以<code>/</code>结尾。如果目录不存在，则返回<code>null</code>。
-     */
+    /** 罗列出指定资源的子目录或文件名。目录名以<code>/</code>结尾。如果目录不存在，则返回<code>null</code>。 */
     String[] list(String resourceName) throws ResourceNotFoundException;
 
-    /**
-     * 罗列出指定资源的子目录或文件名。目录名以<code>/</code>结尾。如果目录不存在，则返回<code>null</code>。
-     */
+    /** 罗列出指定资源的子目录或文件名。目录名以<code>/</code>结尾。如果目录不存在，则返回<code>null</code>。 */
     String[] list(String resourceName, Set<ResourceLoadingOption> options) throws ResourceNotFoundException;
 
-    /**
-     * 罗列出指定资源的子目录或文件资源。如果目录不存在，则返回<code>null</code>。
-     */
+    /** 罗列出指定资源的子目录或文件资源。如果目录不存在，则返回<code>null</code>。 */
     Resource[] listResources(String resourceName) throws ResourceNotFoundException;
 
-    /**
-     * 罗列出指定资源的子目录或文件资源。如果目录不存在，则返回<code>null</code>。
-     */
+    /** 罗列出指定资源的子目录或文件资源。如果目录不存在，则返回<code>null</code>。 */
     Resource[] listResources(String resourceName, Set<ResourceLoadingOption> options) throws ResourceNotFoundException;
 
-    /**
-     * 取得所有的patterns名称。
-     */
+    /** 取得所有的patterns名称。 */
     String[] getPatterns(boolean includeParent);
 }

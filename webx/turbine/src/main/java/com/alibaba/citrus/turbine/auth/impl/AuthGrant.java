@@ -45,7 +45,7 @@ public class AuthGrant {
     private String[] users;
     private String[] roles;
     private Set<AuthPattern> allowedActions = createLinkedHashSet();
-    private Set<AuthPattern> deniedActions = createLinkedHashSet();
+    private Set<AuthPattern> deniedActions  = createLinkedHashSet();
 
     public String[] getUsers() {
         return users;

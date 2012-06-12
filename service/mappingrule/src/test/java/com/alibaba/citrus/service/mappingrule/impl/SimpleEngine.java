@@ -48,12 +48,12 @@ public class SimpleEngine implements TemplateEngine {
     }
 
     public void writeTo(String templateName, TemplateContext context, OutputStream ostream) throws TemplateException,
-            IOException {
+                                                                                                   IOException {
         throw new UnsupportedOperationException();
     }
 
     public void writeTo(String templateName, TemplateContext context, Writer writer) throws TemplateException,
-            IOException {
+                                                                                            IOException {
         throw new UnsupportedOperationException();
     }
 }

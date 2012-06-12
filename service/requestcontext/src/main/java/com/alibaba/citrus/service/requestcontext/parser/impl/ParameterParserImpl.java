@@ -25,13 +25,8 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
-
-import org.apache.commons.fileupload.FileItem;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.alibaba.citrus.service.requestcontext.parser.AbstractValueParser;
 import com.alibaba.citrus.service.requestcontext.parser.ParameterParser;
@@ -47,21 +42,20 @@ import com.alibaba.citrus.service.upload.UploadService;
 import com.alibaba.citrus.service.upload.UploadSizeLimitExceededException;
 import com.alibaba.citrus.util.StringEscapeUtil;
 import com.alibaba.citrus.util.StringUtil;
+import org.apache.commons.fileupload.FileItem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/**
- * 用来解析HTTP请求中GET或POST的参数的接口<code>ParameterParser</code>的默认实现。
- */
+/** 用来解析HTTP请求中GET或POST的参数的接口<code>ParameterParser</code>的默认实现。 */
 public class ParameterParserImpl extends AbstractValueParser implements ParameterParser {
     private final static Logger log = LoggerFactory.getLogger(ParameterParser.class);
-    private final UploadService upload;
-    private final boolean trimming;
-    private boolean uploadProcessed;
+    private final UploadService           upload;
+    private final boolean                 trimming;
+    private       boolean                 uploadProcessed;
     private final ParameterParserFilter[] filters;
-    private final String htmlFieldSuffix;
+    private final String                  htmlFieldSuffix;
 
-    /**
-     * 从request中创建新的parameters，如果是multipart-form，则自动解析之。
-     */
+    /** 从request中创建新的parameters，如果是multipart-form，则自动解析之。 */
     public ParameterParserImpl(ParserRequestContext requestContext, UploadService upload, boolean trimming,
                                ParameterParserFilter[] filters, String htmlFieldSuffix) {
         super(requestContext);
@@ -120,7 +114,7 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
             // 为了使应用对服务器的配置依赖较少，对所有非POST/PUT请求（一般是GET请求）进行手工解码，而不依赖于servlet engine的解码机制，
             // 除非你设置了useServletEngineParser=true。
             if (requestContext.isUseServletEngineParser() || "post".equalsIgnoreCase(method)
-                    || "put".equalsIgnoreCase(method)) {
+                || "put".equalsIgnoreCase(method)) {
                 parseByServletEngine(wrappedRequest);
             } else {
                 parseQueryString(requestContext, wrappedRequest);
@@ -135,9 +129,7 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
         return log;
     }
 
-    /**
-     * 用servlet engine来解析参数。
-     */
+    /** 用servlet engine来解析参数。 */
     private void parseByServletEngine(HttpServletRequest wrappedRequest) {
         @SuppressWarnings("unchecked")
         Map<String, String[]> parameters = wrappedRequest.getParameterMap();
@@ -154,15 +146,13 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
         }
     }
 
-    /**
-     * 自己解析query string。
-     */
+    /** 自己解析query string。 */
     private void parseQueryString(ParserRequestContext requestContext, HttpServletRequest wrappedRequest) {
         // 当useBodyEncodingForURI=true时，用request.setCharacterEncoding()所指定的值来解码，否则使用URIEncoding，默认为UTF-8。
         // useBodyEncodingForURI默认值就是true。
         // 该行为和tomcat的风格一致。（不过tomcat默认是8859_1，这个没关系）
         String charset = requestContext.isUseBodyEncodingForURI() ? wrappedRequest.getCharacterEncoding()
-                : requestContext.getURIEncoding();
+                                                                  : requestContext.getURIEncoding();
 
         QueryStringParser parser = new QueryStringParser(charset, DEFAULT_CHARSET_ENCODING) {
             @Override
@@ -285,7 +275,7 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
     /**
      * 添加<code>FileItem</code>。
      *
-     * @param key 参数名
+     * @param key   参数名
      * @param value 参数值
      */
     public void add(String key, FileItem value) {
@@ -302,7 +292,7 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
     /**
      * 添加参数名/参数值。
      *
-     * @param key 参数名
+     * @param key   参数名
      * @param value 参数值
      */
     @Override
@@ -340,8 +330,8 @@ public class ParameterParserImpl extends AbstractValueParser implements Paramete
      * 此方法覆盖了service的默认设置，适合于在action或servlet中手工执行。
      * </p>
      *
-     * @param sizeThreshold 文件放在内存中的阈值，小于此值的文件被保存在内存中。如果此值小于0，则使用预设的值
-     * @param sizeMax HTTP请求的最大尺寸，超过此尺寸的请求将被抛弃。
+     * @param sizeThreshold  文件放在内存中的阈值，小于此值的文件被保存在内存中。如果此值小于0，则使用预设的值
+     * @param sizeMax        HTTP请求的最大尺寸，超过此尺寸的请求将被抛弃。
      * @param repositoryPath 暂存上载文件的绝对路径
      * @throws UploadException 如果解析时出错
      */

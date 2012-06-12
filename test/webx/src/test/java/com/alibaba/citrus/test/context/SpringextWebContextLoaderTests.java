@@ -22,15 +22,14 @@ import static org.junit.Assert.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.citrus.test.util.ServletTestContainer;
+import com.meterware.httpunit.PostMethodWebRequest;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import com.alibaba.citrus.test.util.ServletTestContainer;
-import com.meterware.httpunit.PostMethodWebRequest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = SpringextContextLoader.class)

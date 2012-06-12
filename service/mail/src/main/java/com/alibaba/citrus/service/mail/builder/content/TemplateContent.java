@@ -41,57 +41,43 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public abstract class TemplateContent extends AbstractContent {
-    private TemplateService templateService;
-    private PullService pullService;
-    private String templateName;
-    private String contentType;
+    private           TemplateService templateService;
+    private           PullService     pullService;
+    private           String          templateName;
+    private           String          contentType;
     private transient TemplateContext templateContext;
 
-    /**
-     * 取得template服务。
-     */
+    /** 取得template服务。 */
     public TemplateService getTemplateService() {
         return assertNotNull(getService(TemplateService.class, "templateService", templateService), "templateService");
     }
 
-    /**
-     * 设置template服务。
-     */
+    /** 设置template服务。 */
     public void setTemplateService(TemplateService templateService) {
         this.templateService = templateService;
     }
 
-    /**
-     * 取得pull服务。
-     */
+    /** 取得pull服务。 */
     public PullService getPullService() {
         return getService(PullService.class, "pullService", pullService);
     }
 
-    /**
-     * 设置pull服务。
-     */
+    /** 设置pull服务。 */
     public void setPullService(PullService pullService) {
         this.pullService = pullService;
     }
 
-    /**
-     * 取得模板的名称。
-     */
+    /** 取得模板的名称。 */
     public String getTemplateName() {
         return templateName;
     }
 
-    /**
-     * 设置模板的名称。
-     */
+    /** 设置模板的名称。 */
     public void setTemplate(String templateName) {
         this.templateName = trimToNull(templateName);
     }
 
-    /**
-     * 取得文本的content type。
-     */
+    /** 取得文本的content type。 */
     public String getContentType() {
         return defaultIfNull(contentType, getDefaultContentType());
     }
@@ -100,16 +86,12 @@ public abstract class TemplateContent extends AbstractContent {
         return CONTENT_TYPE_TEXT_PLAIN;
     }
 
-    /**
-     * 设置文本的content type。
-     */
+    /** 设置文本的content type。 */
     public void setContentType(String contentType) {
         this.contentType = trimToNull(contentType);
     }
 
-    /**
-     * 渲染模板。
-     */
+    /** 渲染模板。 */
     protected final String renderTemplate() throws MailBuilderException {
         try {
             return getTemplateService().getText(templateName, getTemplateContext());
@@ -120,9 +102,7 @@ public abstract class TemplateContent extends AbstractContent {
         }
     }
 
-    /**
-     * 取得template context。
-     */
+    /** 取得template context。 */
     private TemplateContext getTemplateContext() {
         if (templateContext == null) {
             PullService pullService = getPullService();
@@ -140,15 +120,11 @@ public abstract class TemplateContent extends AbstractContent {
         return templateContext;
     }
 
-    /**
-     * 给子类一个机会来初始化context。
-     */
+    /** 给子类一个机会来初始化context。 */
     protected void populateTemplateContext(TemplateContext templateContext) {
     }
 
-    /**
-     * 深度复制一个content。
-     */
+    /** 深度复制一个content。 */
     @Override
     protected void copyTo(AbstractContent copy) {
         TemplateContent copyContent = (TemplateContent) copy;
@@ -165,9 +141,7 @@ public abstract class TemplateContent extends AbstractContent {
         mb.append("templateName", templateName);
     }
 
-    /**
-     * 将mail builder适配到<code>TemplateContext</code>。
-     */
+    /** 将mail builder适配到<code>TemplateContext</code>。 */
     private static class TemplateContextAdapter implements TemplateContext {
         private final MailBuilder builder;
         private final PullContext pullContext;

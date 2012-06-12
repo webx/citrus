@@ -26,10 +26,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.alibaba.citrus.service.pull.ToolFactory;
+import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
+import com.alibaba.citrus.util.ClassLoaderUtil;
+import com.alibaba.citrus.util.ServiceNotFoundException;
+import com.alibaba.citrus.util.StringUtil;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.ecs.html.Input;
 import org.slf4j.Logger;
@@ -38,12 +42,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.service.pull.ToolFactory;
-import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
-import com.alibaba.citrus.util.ClassLoaderUtil;
-import com.alibaba.citrus.util.ServiceNotFoundException;
-import com.alibaba.citrus.util.StringUtil;
 
 /**
  * 用于生成一个唯一的ID，来防止CSRF攻击（Cross Site Request Forgery）。 此外，还可以用来防止重复提交同一张表单。
@@ -61,10 +59,11 @@ import com.alibaba.citrus.util.StringUtil;
  * @author Michael Zhou
  */
 public class CsrfToken {
-    public static final String DEFAULT_TOKEN_KEY = "_csrf_token";
-    public static final int DEFAULT_MAX_TOKENS = 8;
-    public static final String CSRF_TOKEN_SEPARATOR = "/";
-    private static final AtomicInteger counter = new AtomicInteger();;
+    public static final  String        DEFAULT_TOKEN_KEY    = "_csrf_token";
+    public static final  int           DEFAULT_MAX_TOKENS   = 8;
+    public static final  String        CSRF_TOKEN_SEPARATOR = "/";
+    private static final AtomicInteger counter              = new AtomicInteger();
+    ;
     private static final ThreadLocal<Configuration> contextTokenConfigurationHolder = new ThreadLocal<Configuration>();
     private final HttpServletRequest request;
 
@@ -110,9 +109,7 @@ public class CsrfToken {
         contextTokenConfigurationHolder.remove();
     }
 
-    /**
-     * 创建包含csrf token的hidden field。 所生成的token会保持有效，直到session过期。
-     */
+    /** 创建包含csrf token的hidden field。 所生成的token会保持有效，直到session过期。 */
     public Input getHiddenField() {
         return getLongLiveHiddenField();
     }
@@ -137,9 +134,7 @@ public class CsrfToken {
         return new Input("hidden", getKey(), getLongLiveToken());
     }
 
-    /**
-     * 创建csrf token，所生成的token只能被使用一次。
-     */
+    /** 创建csrf token，所生成的token只能被使用一次。 */
     public String getUniqueToken() {
         HttpSession session = request.getSession();
         String key = getKey();
@@ -168,9 +163,7 @@ public class CsrfToken {
         return tokenOfRequest;
     }
 
-    /**
-     * 取得长效token。和<code>uniqueToken</code> 不同，长效token的寿命和session相同。
-     */
+    /** 取得长效token。和<code>uniqueToken</code> 不同，长效token的寿命和session相同。 */
     public String getLongLiveToken() {
         return getLongLiveTokenInSession(request.getSession());
     }
@@ -200,9 +193,7 @@ public class CsrfToken {
         }
     }
 
-    /**
-     * 检查token，如果token存在，则返回<code>true</code>。
-     */
+    /** 检查token，如果token存在，则返回<code>true</code>。 */
     public static boolean check(HttpServletRequest request) {
         String key = getKey();
         String fromRequest = trimToNull(request.getParameter(key));
@@ -212,7 +203,7 @@ public class CsrfToken {
 
     private static class Configuration {
         private final String tokenKey;
-        private final int maxTokens;
+        private final int    maxTokens;
 
         public Configuration(String tokenKey, int maxTokens) {
             this.tokenKey = trimToNull(tokenKey);
@@ -235,9 +226,7 @@ public class CsrfToken {
         }
     }
 
-    /**
-     * pull tool factory。
-     */
+    /** pull tool factory。 */
     public static class Factory implements ToolFactory {
         private HttpServletRequest request;
 
@@ -255,14 +244,14 @@ public class CsrfToken {
         }
     }
 
-    private static Logger log = LoggerFactory.getLogger(CsrfToken.class);
-    private static final Generator generator = new DefaultGenerator();
+    private static       Logger    log               = LoggerFactory.getLogger(CsrfToken.class);
+    private static final Generator generator         = new DefaultGenerator();
     private static final Generator generatorOverride = getGeneratorOverride();
 
     private static Generator getGeneratorOverride() {
         try {
             return Generator.class.cast(ClassLoaderUtil.newServiceInstance("csrfTokenGeneratorOverride",
-                    CsrfToken.class));
+                                                                           CsrfToken.class));
         } catch (ServiceNotFoundException e) {
             // ignore
         } catch (Exception e) {
@@ -276,9 +265,7 @@ public class CsrfToken {
         return generatorOverride != null ? generatorOverride : generator;
     }
 
-    /**
-     * 允许其它模块override生成token的算法。
-     */
+    /** 允许其它模块override生成token的算法。 */
     public interface Generator {
         String generateUniqueToken();
 

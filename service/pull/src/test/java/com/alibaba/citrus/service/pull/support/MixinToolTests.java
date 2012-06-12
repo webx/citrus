@@ -22,10 +22,9 @@ import static org.junit.Assert.*;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pull.AbstractPullServiceConfigTests;
 import com.alibaba.citrus.service.pull.PullService;
+import org.junit.Test;
 
 public class MixinToolTests extends AbstractPullServiceConfigTests {
     private Map<String, Object> tools;
@@ -45,7 +44,7 @@ public class MixinToolTests extends AbstractPullServiceConfigTests {
 
         Method stringEscapeUtil_escapeHtml = mixin.getClass().getMethod("escapeHtml", String.class);
         Method stringEscapeUtil_escapeHtml_appendable = mixin.getClass().getMethod("escapeHtml", String.class,
-                Appendable.class);
+                                                                                   Appendable.class);
 
         assertTrue((Boolean) stringUtil_isEmpty.invoke(mixin, ""));
         assertFalse((Boolean) stringUtil_isEmpty.invoke(mixin, "test"));
@@ -71,6 +70,5 @@ public class MixinToolTests extends AbstractPullServiceConfigTests {
             fail();
         } catch (NoSuchMethodException e) {
         }
-
     }
 }

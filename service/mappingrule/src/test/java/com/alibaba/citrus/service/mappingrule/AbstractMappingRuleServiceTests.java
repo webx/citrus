@@ -21,17 +21,16 @@ import static com.alibaba.citrus.test.TestEnvStatic.*;
 
 import java.io.File;
 
+import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 
-import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
-
 public abstract class AbstractMappingRuleServiceTests {
     protected static ApplicationContext factory;
-    protected MappingRuleService mappingRules;
+    protected        MappingRuleService mappingRules;
 
     protected final static XmlApplicationContext createBeanFactory(String configLocation) throws Exception {
         return createBeanFactory(configLocation, null);
@@ -57,5 +56,4 @@ public abstract class AbstractMappingRuleServiceTests {
         System.clearProperty("productionMode");
         System.clearProperty("cacheEnabled");
     }
-
 }

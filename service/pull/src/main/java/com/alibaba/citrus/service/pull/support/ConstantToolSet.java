@@ -20,12 +20,11 @@ package com.alibaba.citrus.service.pull.support;
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
+import com.alibaba.citrus.service.pull.ToolSetFactory;
+import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.service.pull.ToolSetFactory;
-import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 /**
  * 在模板中使用constant的tool。

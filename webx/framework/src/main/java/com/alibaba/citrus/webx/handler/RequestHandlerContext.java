@@ -20,15 +20,13 @@ package com.alibaba.citrus.webx.handler;
 import static com.alibaba.citrus.util.ServletUtil.*;
 
 import java.io.IOException;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-
 import com.alibaba.citrus.util.internal.webpagelite.ServletRequestContext;
 import com.alibaba.citrus.webx.ResourceNotFoundException;
+import org.slf4j.Logger;
 
 /**
  * 这个类提供给<code>RequestHandler</code>相关的上下文信息，使<code>RequestHandler</code>和
@@ -39,9 +37,7 @@ import com.alibaba.citrus.webx.ResourceNotFoundException;
 public abstract class RequestHandlerContext extends ServletRequestContext {
     private final String internalBaseURL;
 
-    /**
-     * 创建context。
-     */
+    /** 创建context。 */
     public RequestHandlerContext(HttpServletRequest request, HttpServletResponse response,
                                  ServletContext servletContext, String internalBaseURL, String baseURL,
                                  String resourceName) {
@@ -49,27 +45,19 @@ public abstract class RequestHandlerContext extends ServletRequestContext {
         this.internalBaseURL = internalBaseURL + '/';
     }
 
-    /**
-     * 取得当前调用的<code>RequestHandler</code>对象。
-     */
+    /** 取得当前调用的<code>RequestHandler</code>对象。 */
     public abstract RequestHandler getRequestHandler();
 
-    /**
-     * 取得logger。
-     */
+    /** 取得logger。 */
     public abstract Logger getLogger();
 
-    /**
-     * 当请求的资源找不到时，方法被调用。子类可以修改此行为。
-     */
+    /** 当请求的资源找不到时，方法被调用。子类可以修改此行为。 */
     @Override
     public void resourceNotFound(String resourceName) throws IOException {
         throw new ResourceNotFoundException("Resource Not Found: " + resourceName);
     }
 
-    /**
-     * 取得相对于internal目录的URL。
-     */
+    /** 取得相对于internal目录的URL。 */
 
     public final String getInternalResourceURL(String resourceName) {
         return normalizeURI(internalBaseURL + resourceName);

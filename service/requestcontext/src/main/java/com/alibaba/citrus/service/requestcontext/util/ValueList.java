@@ -204,7 +204,7 @@ public interface ValueList {
     /**
      * 取得日期。字符串将使用指定的<code>DateFormat</code>来解析。如果不存在，则返回默认值。
      *
-     * @param format <code>DateFormat</code>对象
+     * @param format       <code>DateFormat</code>对象
      * @param defaultValue 默认值
      * @return <code>java.util.Date</code>对象
      */
@@ -284,14 +284,10 @@ public interface ValueList {
      */
     Object[] getValues(Object[] defaultValues);
 
-    /**
-     * 取得指定类型的值。
-     */
+    /** 取得指定类型的值。 */
     <T> T getValueOfType(Class<T> type, MethodParameter methodParameter, Object[] defaultValues);
 
-    /**
-     * 取得指定类型的值。
-     */
+    /** 取得指定类型的值。 */
     <T> T getValueOfType(Class<T> type, boolean isPrimitive, MethodParameter methodParameter, Object[] defaultValues);
 
     // =============================================================

@@ -27,13 +27,11 @@ import com.alibaba.citrus.generictype.GenericDeclarationInfo;
 import com.alibaba.citrus.generictype.TypeInfo;
 import com.alibaba.citrus.generictype.WildcardTypeInfo;
 
-/**
- * 用来包装unknown wildcard类型的包装器，返回对应<code>TypeVariable</code>的upper bounds。
- */
+/** 用来包装unknown wildcard类型的包装器，返回对应<code>TypeVariable</code>的upper bounds。 */
 class UnknownWildcardTypeImpl implements WildcardTypeInfo {
     private final WildcardTypeInfo wildcard;
-    private final List<TypeInfo> upperBounds;
-    private final TypeInfo baseType;
+    private final List<TypeInfo>   upperBounds;
+    private final TypeInfo         baseType;
 
     UnknownWildcardTypeImpl(WildcardTypeInfo wildcard, TypeInfo[] upperBounds) {
         if (wildcard instanceof UnknownWildcardTypeImpl) {
@@ -129,18 +127,14 @@ class UnknownWildcardTypeImpl implements WildcardTypeInfo {
         return wildcard.getLowerBounds();
     }
 
-    /**
-     * 取得hash值。
-     */
+    /** 取得hash值。 */
     @Override
     public int hashCode() {
         return wildcard.hashCode();
         //return getClass().hashCode() ^ getUpperBounds().hashCode() ^ getLowerBounds().hashCode();
     }
 
-    /**
-     * 判断两个对象是否相同。
-     */
+    /** 判断两个对象是否相同。 */
     @Override
     public boolean equals(Object other) {
         return wildcard.equals(other);
@@ -158,9 +152,7 @@ class UnknownWildcardTypeImpl implements WildcardTypeInfo {
         //                    && getLowerBounds().equals(otherType.getLowerBounds());
     }
 
-    /**
-     * 取得字符串表示。
-     */
+    /** 取得字符串表示。 */
     @Override
     public String toString() {
         return wildcard.toString();

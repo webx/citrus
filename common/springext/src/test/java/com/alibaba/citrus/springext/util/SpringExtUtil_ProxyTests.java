@@ -28,8 +28,8 @@ import org.junit.Test;
 
 public class SpringExtUtil_ProxyTests {
     private MyProxyTargetFactory factory;
-    private MyInterfaceImpl actualObject;
-    private MyInterface proxy;
+    private MyInterfaceImpl      actualObject;
+    private MyInterface          proxy;
 
     @Before
     public void init() {
@@ -76,7 +76,7 @@ public class SpringExtUtil_ProxyTests {
         assertSame(createProxy(MyInterface.class, factory).getClass(), proxyClass);
         assertSame(createProxy(MyInterface.class, new MyProxyTargetFactory(actualObject)).getClass(), proxyClass);
         assertSame(createProxy(MyInterface.class, new MyProxyTargetFactory(new MyInterfaceImpl("world"))).getClass(),
-                proxyClass);
+                   proxyClass);
 
         // 对于不同的interface，则返回不同的class
         assertNotSame(createProxy(List.class, factory).getClass(), proxyClass);
@@ -120,7 +120,7 @@ public class SpringExtUtil_ProxyTests {
 
         // not equivalent factory
         assertHashCodeAndEquals(createProxy(MyInterface.class, new MyProxyTargetFactory(new MyInterfaceImpl("world"))),
-                false);
+                                false);
     }
 
     private void assertHashCodeAndEquals(Object other, boolean equals) {
@@ -144,13 +144,12 @@ public class SpringExtUtil_ProxyTests {
             fail();
         } catch (IllegalArgumentException e) {
             assertThat(e, exception("expects a proxy delegating to a real object, but got an object of type "
-                    + MyInterfaceImpl.class.getName()));
+                                    + MyInterfaceImpl.class.getName()));
         }
 
         // proxy
         assertSame(factory, assertProxy(factory)); // 只要实现了ProxyTargetFactory接口，就认可
         assertSame(proxy, assertProxy(proxy));
-
     }
 
     @Test

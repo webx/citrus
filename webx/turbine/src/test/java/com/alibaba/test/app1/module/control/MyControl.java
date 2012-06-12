@@ -21,9 +21,8 @@ import static com.alibaba.citrus.turbine.util.TurbineUtil.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.turbine.TurbineRunDataInternal;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class MyControl {
     @Autowired

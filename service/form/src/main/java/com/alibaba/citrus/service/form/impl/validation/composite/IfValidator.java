@@ -22,10 +22,6 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.form.Condition;
 import com.alibaba.citrus.service.form.impl.condition.JexlCondition;
 import com.alibaba.citrus.service.form.support.AbstractCompositeValidatorDefinitionParser;
@@ -33,6 +29,9 @@ import com.alibaba.citrus.service.form.support.AbstractSimpleCompositeValidator;
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 用于条件判断的validator。
@@ -62,7 +61,7 @@ public class IfValidator extends AbstractSimpleCompositeValidator {
     }
 
     public static class DefinitionParser extends AbstractCompositeValidatorDefinitionParser<IfValidator> implements
-            ContributionAware {
+                                                                                                         ContributionAware {
         private ConfigurationPoint conditionConfigurationPoint;
 
         @Override
@@ -88,7 +87,7 @@ public class IfValidator extends AbstractSimpleCompositeValidator {
 
             for (Element subElement : subElements(element)) {
                 Object condition = parseConfigurationPointBean(subElement, conditionConfigurationPoint, parserContext,
-                        builder);
+                                                               builder);
 
                 if (condition != null) {
                     builder.addPropertyValue("condition", condition);

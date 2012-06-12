@@ -25,15 +25,10 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.net.URI;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.web.context.support.GenericWebApplicationContext;
 
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.RequestContextChainingService;
@@ -47,22 +42,25 @@ import com.meterware.httpunit.protocol.UploadFileSpec;
 import com.meterware.servletunit.InvocationContext;
 import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.web.context.support.GenericWebApplicationContext;
 
 public abstract class AbstractWebTests {
     protected static ApplicationContext factory;
 
     // httpunit objects
-    protected static ServletUnitClient client;
-    protected static ServletConfig config;
-    protected InvocationContext invocationContext;
-    protected HttpServletRequest request;
-    protected HttpServletResponse response;
+    protected static ServletUnitClient   client;
+    protected static ServletConfig       config;
+    protected        InvocationContext   invocationContext;
+    protected        HttpServletRequest  request;
+    protected        HttpServletResponse response;
 
     // request context objects
     protected RequestContextChainingService requestContexts;
-    protected RunData rundata;
-    protected HttpServletRequest newRequest;
-    protected HttpServletResponse newResponse;
+    protected RunData                       rundata;
+    protected HttpServletRequest            newRequest;
+    protected HttpServletResponse           newResponse;
 
     protected static ApplicationContext createContext(String name) {
         return new XmlApplicationContext(new FileSystemResource(new File(srcdir, name)), null);

@@ -34,44 +34,32 @@ import com.alibaba.citrus.service.resource.Resource;
 public class InputStreamResource implements Resource {
     private final InputStream stream;
 
-    /**
-     * 创建一个<code>InputStreamResource</code>。
-     */
+    /** 创建一个<code>InputStreamResource</code>。 */
     public InputStreamResource(InputStream stream) {
         this.stream = assertNotNull(stream, "stream");
     }
 
-    /**
-     * 取得资源的<code>URL</code>。
-     */
+    /** 取得资源的<code>URL</code>。 */
     public URL getURL() {
         return null;
     }
 
-    /**
-     * 取得资源的<code>File</code>。
-     */
+    /** 取得资源的<code>File</code>。 */
     public File getFile() {
         return null;
     }
 
-    /**
-     * 取得资源的<code>InputStream</code>。
-     */
+    /** 取得资源的<code>InputStream</code>。 */
     public InputStream getInputStream() throws IOException {
         return stream;
     }
 
-    /**
-     * 判断资源是否存在。
-     */
+    /** 判断资源是否存在。 */
     public boolean exists() {
         return stream != null;
     }
 
-    /**
-     * 取得资源最近修改时间。
-     */
+    /** 取得资源最近修改时间。 */
     public long lastModified() {
         return 0;
     }
@@ -111,9 +99,7 @@ public class InputStreamResource implements Resource {
         return true;
     }
 
-    /**
-     * 将resource转换成字符串表示。
-     */
+    /** 将resource转换成字符串表示。 */
     @Override
     public String toString() {
         StringBuilder buf = new StringBuilder();

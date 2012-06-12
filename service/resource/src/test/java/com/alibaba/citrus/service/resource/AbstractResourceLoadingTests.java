@@ -33,15 +33,11 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.FileSystemResource;
 
 import com.alibaba.citrus.service.resource.support.ResourceLoadingSupport;
 import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
@@ -49,10 +45,12 @@ import com.alibaba.citrus.springext.support.context.XmlWebApplicationContext;
 import com.meterware.servletunit.InvocationContext;
 import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.FileSystemResource;
 
 public abstract class AbstractResourceLoadingTests {
     protected static ServletUnitClient client;
-    protected static ServletContext servletContext;
+    protected static ServletContext    servletContext;
     protected final static ThreadLocal<URL> nextGetResourceURL = new ThreadLocal<URL>();
 
     protected static ApplicationContext parentFactory;
@@ -195,15 +193,13 @@ public abstract class AbstractResourceLoadingTests {
         }
     }
 
-    /**
-     * 除去ignore文件。
-     */
+    /** 除去ignore文件。 */
     private String[] filter(String[] names) {
         Arrays.sort(names);
 
         List<String> list = createLinkedList(names);
 
-        for (Iterator<String> i = list.iterator(); i.hasNext();) {
+        for (Iterator<String> i = list.iterator(); i.hasNext(); ) {
             String name = i.next();
 
             if (name.startsWith(".") || "CVS".equals(name)) {
@@ -214,9 +210,7 @@ public abstract class AbstractResourceLoadingTests {
         return list.toArray(new String[list.size()]);
     }
 
-    /**
-     * 除去ignore文件。
-     */
+    /** 除去ignore文件。 */
     private String[] filter(Resource[] resources) {
         Arrays.sort(resources, new Comparator<Resource>() {
             public int compare(Resource o1, Resource o2) {
@@ -254,9 +248,7 @@ public abstract class AbstractResourceLoadingTests {
         private static final long serialVersionUID = 5198015331020551722L;
     }
 
-    /**
-     * httpunit未实现getResourcePaths方法。
-     */
+    /** httpunit未实现getResourcePaths方法。 */
     public static class ServletContextWrapper implements ServletContext {
         private final ServletContext servletContext;
 

@@ -39,8 +39,8 @@ import java.util.TimeZone;
  * </p>
  */
 public class ServerCookie {
-    private static final String OLD_COOKIE_PATTERN = "EEE, dd-MMM-yyyy HH:mm:ss z";
-    private static final ThreadLocal<DateFormat> OLD_COOKIE_FORMAT = new ThreadLocal<DateFormat>() {
+    private static final String                  OLD_COOKIE_PATTERN = "EEE, dd-MMM-yyyy HH:mm:ss z";
+    private static final ThreadLocal<DateFormat> OLD_COOKIE_FORMAT  = new ThreadLocal<DateFormat>() {
         @Override
         protected DateFormat initialValue() {
             DateFormat df = new SimpleDateFormat(OLD_COOKIE_PATTERN, Locale.US);
@@ -51,15 +51,11 @@ public class ServerCookie {
 
     private static final String ancientDate = OLD_COOKIE_FORMAT.get().format(new Date(10000));
 
-    /**
-     * If set to true, we parse cookies according to the servlet spec,
-     */
+    /** If set to true, we parse cookies according to the servlet spec, */
     public static final boolean STRICT_SERVLET_COMPLIANCE = Boolean.valueOf(
             System.getProperty("org.apache.catalina.STRICT_SERVLET_COMPLIANCE", "false")).booleanValue();
 
-    /**
-     * If set to false, we don't use the IE6/7 Max-Age/Expires work around
-     */
+    /** If set to false, we don't use the IE6/7 Max-Age/Expires work around */
     public static final boolean ALWAYS_ADD_EXPIRES = Boolean.valueOf(
             System.getProperty("org.apache.tomcat.util.http.ServerCookie.ALWAYS_ADD_EXPIRES", "true")).booleanValue();
 
@@ -73,8 +69,8 @@ public class ServerCookie {
 
     // -------------------- utils --------------------
 
-    private static final String tspecials = ",; ";
-    private static final String tspecials2 = "()<>@,;:\\\"/[]?={} \t";
+    private static final String tspecials         = ",; ";
+    private static final String tspecials2        = "()<>@,;:\\\"/[]?={} \t";
     private static final String tspecials2NoSlash = "()<>@,;:\\\"[]?={} \t";
 
     /*
@@ -144,9 +140,7 @@ public class ServerCookie {
 
     // -------------------- Cookie parsing tools
 
-    /**
-     * Return the header name to set the cookie, based on cookie version.
-     */
+    /** Return the header name to set the cookie, based on cookie version. */
     public static String getCookieHeaderName(int version) {
         // TODO Re-enable logging when RFC2965 is implemented
         // log( (version==1) ? "Set-Cookie2" : "Set-Cookie");
@@ -293,9 +287,9 @@ public class ServerCookie {
     /**
      * Escapes any double quotes in the given string.
      *
-     * @param s the input string
+     * @param s          the input string
      * @param beginIndex start index inclusive
-     * @param endIndex exclusive
+     * @param endIndex   exclusive
      * @return The (possibly) escaped string
      */
     private static String escapeDoubleQuotes(String s, int beginIndex, int endIndex) {

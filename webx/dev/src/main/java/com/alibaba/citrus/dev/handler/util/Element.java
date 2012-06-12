@@ -30,8 +30,8 @@ public class Element {
     private final String id;
     private final String name;
     private final String ns;
-    final List<Element> subElements = createLinkedList();
-    private final Map<String, Attribute> attrs = createArrayHashMap();
+    final         List<Element>          subElements = createLinkedList();
+    private final Map<String, Attribute> attrs       = createArrayHashMap();
     private StyledValue text;
 
     public Element(String name) {

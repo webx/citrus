@@ -19,9 +19,8 @@ package com.alibaba.citrus.service.uribroker;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.uribroker.uri.TurbineClassicURIBroker;
+import org.junit.Test;
 
 public class TurbineClassicURIBrokerConfigTests extends AbstractURIBrokerServiceTests {
     private TurbineClassicURIBroker uri;
@@ -36,7 +35,7 @@ public class TurbineClassicURIBrokerConfigTests extends AbstractURIBrokerService
     public void classicLink2() {
         uri = (TurbineClassicURIBroker) service.getURIBroker("classicLink2");
         assertEquals("http://localhost/mycontext2/myservlet2/template/a%2Cb%2CC"
-                + "/screen/a.B/action/a.b.C/aaa/111/bbb/222/ccc/333", uri.render());
+                     + "/screen/a.B/action/a.b.C/aaa/111/bbb/222/ccc/333", uri.render());
     }
 
     @Test
@@ -77,6 +76,6 @@ public class TurbineClassicURIBrokerConfigTests extends AbstractURIBrokerService
         uri.setPage("product/ViewItem");
         uri.setAction("product.ProductAction");
         assertEquals("http://www.alibaba.com/myapp/turbine/template/product%2CViewItem/action/product.ProductAction",
-                uri.render());
+                     uri.render());
     }
 }

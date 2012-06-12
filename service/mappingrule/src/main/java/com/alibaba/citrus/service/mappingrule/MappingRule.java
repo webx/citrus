@@ -23,8 +23,6 @@ package com.alibaba.citrus.service.mappingrule;
  * @author Michael Zhou
  */
 public interface MappingRule {
-    /**
-     * 将指定名称映射成指定类型的名称。如果映射不成功，则返回<code>null</code>。
-     */
+    /** 将指定名称映射成指定类型的名称。如果映射不成功，则返回<code>null</code>。 */
     String getMappedName(String name);
 }

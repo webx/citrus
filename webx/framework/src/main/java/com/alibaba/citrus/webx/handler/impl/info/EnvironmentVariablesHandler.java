@@ -29,9 +29,10 @@ import com.alibaba.citrus.webx.handler.support.LayoutRequestProcessor;
  * @author Michael Zhou
  */
 public class EnvironmentVariablesHandler extends LayoutRequestProcessor {
-    private final KeyValuesComponent keyValuesComponent = new KeyValuesComponent(this, "keyValues");
+    private final KeyValuesComponent            keyValuesComponent            = new KeyValuesComponent(this, "keyValues");
     private final EnvironmentVariablesComponent environmentVariablesComponent = new EnvironmentVariablesComponent(this,
-            "env", keyValuesComponent);;
+                                                                                                                  "env", keyValuesComponent);
+    ;
 
     @Override
     protected String getTitle(Object bodyVisitor) {
@@ -53,5 +54,4 @@ public class EnvironmentVariablesHandler extends LayoutRequestProcessor {
             environmentVariablesComponent.visitTemplate(context);
         }
     }
-
 }

@@ -30,7 +30,7 @@ import com.alibaba.citrus.webx.handler.support.LayoutRequestProcessor;
  */
 public class RequestInfoHandler extends LayoutRequestProcessor {
     private final KeyValuesComponent keyValuesComponent = new KeyValuesComponent(this, "keyValues");
-    private final RequestComponent requestComponent = new RequestComponent(this, "request", keyValuesComponent);
+    private final RequestComponent   requestComponent   = new RequestComponent(this, "request", keyValuesComponent);
 
     @Override
     protected String getTitle(Object bodyVisitor) {
@@ -52,5 +52,4 @@ public class RequestInfoHandler extends LayoutRequestProcessor {
             requestComponent.visitTemplate(context);
         }
     }
-
 }

@@ -27,27 +27,25 @@ import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
 
+import com.alibaba.citrus.service.dataresolver.DataResolverContext;
+import com.alibaba.citrus.service.dataresolver.DataResolverException;
+import com.alibaba.citrus.turbine.dataresolver.FormGroup;
+import com.alibaba.citrus.turbine.dataresolver.Param;
+import com.alibaba.citrus.turbine.dataresolver.Params;
 import net.sf.cglib.reflect.FastConstructor;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.alibaba.citrus.service.dataresolver.DataResolverContext;
-import com.alibaba.citrus.service.dataresolver.DataResolverException;
-import com.alibaba.citrus.turbine.dataresolver.FormGroup;
-import com.alibaba.citrus.turbine.dataresolver.Param;
-import com.alibaba.citrus.turbine.dataresolver.Params;
-
 @RunWith(Parameterized.class)
 public class DataResolverUtilTests {
-    private final Class<Annotation> annotationType;
-    private final int index;
-    private final boolean hasOptionalArgs;
-    private final Object result;
-    private DataResolverContext context;
+    private final Class<Annotation>   annotationType;
+    private final int                 index;
+    private final boolean             hasOptionalArgs;
+    private final Object              result;
+    private       DataResolverContext context;
 
     @SuppressWarnings("unchecked")
     public DataResolverUtilTests(Class<? extends Annotation> annotationType, int index, boolean hasOptionalArgs,
@@ -90,11 +88,11 @@ public class DataResolverUtilTests {
 
         add(data, FormGroup.class, 1, true, new IllegalArgumentException(
                 "use @FormGroup(name=\"mygroupname\") instead of @FormGroup(value=\"mygroupname\"): "
-                        + "DataResolverContext"));
+                + "DataResolverContext"));
 
         add(data, FormGroup.class, 2, true, new IllegalArgumentException(
                 "use @FormGroup(name=\"mygroupname\") instead of @FormGroup(value=\"mygroupname\"): "
-                        + "DataResolverContext"));
+                + "DataResolverContext"));
 
         add(data, FormGroup.class, 3, true, "mygroupname");
 
@@ -209,7 +207,7 @@ public class DataResolverUtilTests {
             assertThat(
                     e,
                     exception(IOException.class,
-                            "Failed to create instance of class " + MyDataFailedConstructor.class.getName()));
+                              "Failed to create instance of class " + MyDataFailedConstructor.class.getName()));
         }
     }
 

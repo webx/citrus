@@ -206,7 +206,7 @@ public class ClassUtilTests {
             // class name
             assertEquals(result, ClassUtil.getSimpleClassName(object.getClass().getName(), proccessInnerClass));
             assertEquals(result,
-                    ClassUtil.getSimpleClassName("  " + object.getClass().getName() + "  ", proccessInnerClass)); // trim
+                         ClassUtil.getSimpleClassName("  " + object.getClass().getName() + "  ", proccessInnerClass)); // trim
         }
     }
 
@@ -243,12 +243,12 @@ public class ClassUtilTests {
         // no modifiers, returnType, className, exceptionTypes
         assertMethod("void ClassUtilTests.MyClass.func()", m1, false, true, true, true);
         assertMethod("int ClassUtilTests.MyClass.func(String, long[]) throws IOException, RuntimeException", m2, false,
-                true, true, true);
+                     true, true, true);
 
         // no modifiers, no returnType, className, exceptionTypes
         assertMethod("ClassUtilTests.MyClass.func()", m1, false, false, true, true);
         assertMethod("ClassUtilTests.MyClass.func(String, long[]) throws IOException, RuntimeException", m2, false,
-                false, true, true);
+                     false, true, true);
 
         // no modifiers, no returnType, no className, exceptionTypes
         assertMethod("func()", m1, false, false, false, true);
@@ -267,7 +267,7 @@ public class ClassUtilTests {
     private void assertMethod(String str, Method method, boolean withModifiers, boolean withReturnType,
                               boolean withClassName, boolean withExceptionType) {
         assertEquals(str, ClassUtil.getSimpleMethodSignature(method, withModifiers, withReturnType, withClassName,
-                withExceptionType));
+                                                             withExceptionType));
     }
 
     @Test
@@ -361,7 +361,7 @@ public class ClassUtilTests {
 
         // 内联类
         assertEquals("com/alibaba/citrus/util/ClassUtilTests$Inner.class",
-                ClassUtil.getResourceNameForObjectClass(new Inner()));
+                     ClassUtil.getResourceNameForObjectClass(new Inner()));
     }
 
     @Test
@@ -374,7 +374,7 @@ public class ClassUtilTests {
 
         // 内联类
         assertEquals("com/alibaba/citrus/util/ClassUtilTests$Inner.class",
-                ClassUtil.getResourceNameForClass(Inner.class));
+                     ClassUtil.getResourceNameForClass(Inner.class));
     }
 
     @Test
@@ -387,7 +387,7 @@ public class ClassUtilTests {
 
         // 内联类
         assertEquals("com/alibaba/citrus/util/ClassUtilTests$Inner.class",
-                ClassUtil.getResourceNameForClass(Inner.class.getName()));
+                     ClassUtil.getResourceNameForClass(Inner.class.getName()));
     }
 
     @Test
@@ -564,7 +564,7 @@ public class ClassUtilTests {
         Class<?>[] array2 = new Class<?>[] { Object.class, Object.class };
         Class<?>[] array1 = new Class<?>[] { Object.class };
         Class<?>[] array1s = new Class<?>[] { String.class };
-        Class<?>[] array0 = new Class<?>[] {};
+        Class<?>[] array0 = new Class<?>[] { };
 
         assertFalse(ClassUtil.isAssignable(array2, array1));
         assertFalse(ClassUtil.isAssignable(array2, null));
@@ -755,7 +755,7 @@ public class ClassUtilTests {
     public void locateClass() {
         assertThat(ClassUtil.locateClass(Logger.class), containsRegex("slf4j-api-\\S+\\.jar$"));
         assertThat(ClassUtil.locateClass(ClassUtilTests.class.getName()),
-                containsAllRegex("^file:", "target/test-classes/$"));
+                   containsAllRegex("^file:", "target/test-classes/$"));
     }
 
     private static class Inner {

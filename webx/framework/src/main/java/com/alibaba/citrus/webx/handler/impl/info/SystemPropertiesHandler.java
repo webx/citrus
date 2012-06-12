@@ -29,9 +29,9 @@ import com.alibaba.citrus.webx.handler.support.LayoutRequestProcessor;
  * @author Michael Zhou
  */
 public class SystemPropertiesHandler extends LayoutRequestProcessor {
-    private final KeyValuesComponent keyValuesComponent = new KeyValuesComponent(this, "keyValues");
+    private final KeyValuesComponent        keyValuesComponent        = new KeyValuesComponent(this, "keyValues");
     private final SystemPropertiesComponent systemPropertiesComponent = new SystemPropertiesComponent(this, "sysprops",
-            keyValuesComponent);
+                                                                                                      keyValuesComponent);
 
     @Override
     protected String getTitle(Object bodyVisitor) {

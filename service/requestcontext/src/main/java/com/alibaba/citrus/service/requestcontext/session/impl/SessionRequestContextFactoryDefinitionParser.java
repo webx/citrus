@@ -25,21 +25,20 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.citrus.service.requestcontext.session.impl.SessionRequestContextFactoryImpl.AttributePattern;
+import com.alibaba.citrus.springext.ConfigurationPoint;
+import com.alibaba.citrus.springext.Contribution;
+import com.alibaba.citrus.springext.ContributionAware;
+import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-import com.alibaba.citrus.service.requestcontext.session.impl.SessionRequestContextFactoryImpl.AttributePattern;
-import com.alibaba.citrus.springext.ConfigurationPoint;
-import com.alibaba.citrus.springext.Contribution;
-import com.alibaba.citrus.springext.ContributionAware;
-import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
-
 public class SessionRequestContextFactoryDefinitionParser extends
-        AbstractSingleBeanDefinitionParser<SessionRequestContextFactoryImpl> implements ContributionAware {
+                                                          AbstractSingleBeanDefinitionParser<SessionRequestContextFactoryImpl>
+        implements ContributionAware {
     private ConfigurationPoint generatorsConfigurationPoint;
     private ConfigurationPoint storesConfigurationPoint;
     private ConfigurationPoint sessionModelEncodersConfigurationPoint;
@@ -93,7 +92,7 @@ public class SessionRequestContextFactoryDefinitionParser extends
                 attributesToProperties(subElement, "config.id.urlEncode.", builder);
             } else if (!hasGenerator) {
                 Object generator = parseConfigurationPointBean(subElement, generatorsConfigurationPoint, parserContext,
-                        builder);
+                                                               builder);
 
                 if (generator != null) {
                     builder.addPropertyValue("config.id.generator", generator);
@@ -108,7 +107,7 @@ public class SessionRequestContextFactoryDefinitionParser extends
 
         for (Element subElement : subElements(element)) {
             BeanDefinitionHolder store = parseConfigurationPointBean(subElement, storesConfigurationPoint,
-                    parserContext, builder);
+                                                                     parserContext, builder);
             storeMap.put(store.getBeanName(), store);
         }
 
@@ -160,7 +159,7 @@ public class SessionRequestContextFactoryDefinitionParser extends
 
         for (Element subElement : subElements(element)) {
             encoders.add(parseConfigurationPointBean(subElement, sessionModelEncodersConfigurationPoint, parserContext,
-                    builder));
+                                                     builder));
         }
 
         builder.addPropertyValue("config.sessionModelEncoders", encoders);
@@ -171,7 +170,7 @@ public class SessionRequestContextFactoryDefinitionParser extends
 
         for (Element subElement : subElements(element)) {
             interceptors.add(parseConfigurationPointBean(subElement, sessionInterceptorsConfigurationPoint,
-                    parserContext, builder));
+                                                         parserContext, builder));
         }
 
         builder.addPropertyValue("config.sessionInterceptors", interceptors);

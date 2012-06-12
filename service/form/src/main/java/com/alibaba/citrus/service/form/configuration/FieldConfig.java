@@ -30,48 +30,30 @@ import com.alibaba.citrus.service.form.Validator;
  * @author Michael Zhou
  */
 public interface FieldConfig {
-    /**
-     * 取得field所属的group config。
-     */
+    /** 取得field所属的group config。 */
     GroupConfig getGroupConfig();
 
-    /**
-     * 取得field name。
-     */
+    /** 取得field name。 */
     String getName();
 
-    /**
-     * 取得field key。
-     */
+    /** 取得field key。 */
     String getKey();
 
-    /**
-     * 取得用来显示field的名称。
-     */
+    /** 取得用来显示field的名称。 */
     String getDisplayName();
 
-    /**
-     * 取得trimming选项。
-     */
+    /** 取得trimming选项。 */
     boolean isTrimming();
 
-    /**
-     * 取得bean property名称。
-     */
+    /** 取得bean property名称。 */
     String getPropertyName();
 
-    /**
-     * 取得单个默认值。
-     */
+    /** 取得单个默认值。 */
     String getDefaultValue();
 
-    /**
-     * 取得一组默认值。
-     */
+    /** 取得一组默认值。 */
     String[] getDefaultValues();
 
-    /**
-     * 取得validator列表。
-     */
+    /** 取得validator列表。 */
     List<Validator> getValidators();
 }

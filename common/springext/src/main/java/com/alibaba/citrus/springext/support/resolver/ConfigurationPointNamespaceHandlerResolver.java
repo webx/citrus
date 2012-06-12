@@ -19,14 +19,13 @@ package com.alibaba.citrus.springext.support.resolver;
 
 import static com.alibaba.citrus.util.Assert.*;
 
+import com.alibaba.citrus.springext.ConfigurationPoint;
+import com.alibaba.citrus.springext.ConfigurationPoints;
 import org.springframework.beans.factory.xml.NamespaceHandler;
 import org.springframework.beans.factory.xml.NamespaceHandlerResolver;
 
-import com.alibaba.citrus.springext.ConfigurationPoint;
-import com.alibaba.citrus.springext.ConfigurationPoints;
-
 public class ConfigurationPointNamespaceHandlerResolver implements NamespaceHandlerResolver {
-    private final ConfigurationPoints cps;
+    private final ConfigurationPoints      cps;
     private final NamespaceHandlerResolver defaultResolver;
 
     public ConfigurationPointNamespaceHandlerResolver(ConfigurationPoints cps, NamespaceHandlerResolver defaultResolver) {

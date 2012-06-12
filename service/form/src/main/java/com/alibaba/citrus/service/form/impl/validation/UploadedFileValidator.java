@@ -24,12 +24,11 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
 
-import org.apache.commons.fileupload.FileItem;
-
 import com.alibaba.citrus.service.form.support.AbstractValidator;
 import com.alibaba.citrus.service.form.support.AbstractValidatorDefinitionParser;
 import com.alibaba.citrus.util.FileUtil;
 import com.alibaba.citrus.util.HumanReadableSize;
+import org.apache.commons.fileupload.FileItem;
 
 /**
  * 验证上传文件的validator。
@@ -42,30 +41,22 @@ public class UploadedFileValidator extends AbstractValidator {
     private HumanReadableSize minSize = new HumanReadableSize(-1);
     private HumanReadableSize maxSize = new HumanReadableSize(-1);
 
-    /**
-     * 取得上传文件的contentTypes。
-     */
+    /** 取得上传文件的contentTypes。 */
     public String[] getContentType() {
         return contentTypes;
     }
 
-    /**
-     * 设置上传文件的contentType。
-     */
+    /** 设置上传文件的contentType。 */
     public void setContentType(String[] contentTypes) {
         this.contentTypes = normalizeStrings(contentTypes, 0);
     }
 
-    /**
-     * 取得上传文件的文件名后缀。
-     */
+    /** 取得上传文件的文件名后缀。 */
     public String[] getExtension() {
         return extensions;
     }
 
-    /**
-     * 设置上传文件的文件名后缀。
-     */
+    /** 设置上传文件的文件名后缀。 */
     public void setExtension(String[] extensions) {
         this.extensions = normalizeStrings(extensions, 1);
     }
@@ -110,9 +101,7 @@ public class UploadedFileValidator extends AbstractValidator {
         this.maxSize = assertNotNull(maxSize, "maxSize");
     }
 
-    /**
-     * 验证一个字段。
-     */
+    /** 验证一个字段。 */
     public boolean validate(Context context) {
         long minSize = this.minSize.getValue();
         long maxSize = this.maxSize.getValue();

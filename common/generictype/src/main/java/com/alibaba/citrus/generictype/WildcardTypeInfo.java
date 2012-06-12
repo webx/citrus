@@ -36,7 +36,7 @@ public interface WildcardTypeInfo extends BoundedTypeInfo {
      * <li>另一种是“bounded wildcard”，例如：
      * <code>Collection&lt;? extends Number&gt;</code>。</li>
      * </ol>
-     * <p>
+     * <p/>
      * 对于unknown wildcard，尽管JDK提供的API，仍然返回其upper bound为<code>Object</code>
      * ，然而其事实上的upper bound取决于对应的<code>TypeVariable</code>的upper bound。
      */

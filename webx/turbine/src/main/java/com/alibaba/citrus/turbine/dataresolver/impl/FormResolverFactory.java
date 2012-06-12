@@ -27,14 +27,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import net.sf.cglib.reflect.FastConstructor;
-
-import org.springframework.beans.TypeMismatchException;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.springframework.core.MethodParameter;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.dataresolver.DataResolver;
 import com.alibaba.citrus.service.dataresolver.DataResolverContext;
 import com.alibaba.citrus.service.dataresolver.DataResolverFactory;
@@ -51,6 +43,12 @@ import com.alibaba.citrus.turbine.dataresolver.FormField;
 import com.alibaba.citrus.turbine.dataresolver.FormFields;
 import com.alibaba.citrus.turbine.dataresolver.FormGroup;
 import com.alibaba.citrus.turbine.dataresolver.FormGroups;
+import net.sf.cglib.reflect.FastConstructor;
+import org.springframework.beans.TypeMismatchException;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.springframework.core.MethodParameter;
+import org.w3c.dom.Element;
 
 public class FormResolverFactory implements DataResolverFactory {
     private final FormService formService;
@@ -108,9 +106,7 @@ public class FormResolverFactory implements DataResolverFactory {
         return form.getFormConfig().isConverterQuiet();
     }
 
-    /**
-     * 检验form中的所有groups均被检验，并通过所有验证。
-     */
+    /** 检验form中的所有groups均被检验，并通过所有验证。 */
     private boolean isValidatedAndValid(Form form) {
         if (!form.isValid() || form.getGroups().isEmpty()) {
             return false;
@@ -148,8 +144,8 @@ public class FormResolverFactory implements DataResolverFactory {
     }
 
     private class GroupResolver extends AbstractFormResolver {
-        private final String groupName;
-        private final String groupInstanceKey;
+        private final String          groupName;
+        private final String          groupInstanceKey;
         private final FastConstructor fc;
 
         public GroupResolver(DataResolverContext context, Class<?> paramType, FormGroup groupAnnotation) {
@@ -161,7 +157,7 @@ public class FormResolverFactory implements DataResolverFactory {
             // name()或value() - 确保group存在
             groupName = getGroupConfig(
                     getAnnotationNameOrValue(FormGroup.class, groupAnnotation, context, groupInstanceKey != null
-                            || skipIfInvalid == false)).getName();
+                                                                                        || skipIfInvalid == false)).getName();
 
             // 假如是pojo，则取得constructor。
             if (!paramType.isAssignableFrom(Group.class)) {
@@ -228,7 +224,7 @@ public class FormResolverFactory implements DataResolverFactory {
                 if (valid) {
                     try {
                         return field.getValueOfType(context.getTypeInfo().getRawType(),
-                                context.getExtraObject(MethodParameter.class), null);
+                                                    context.getExtraObject(MethodParameter.class), null);
                     } catch (TypeMismatchException e) {
                         if (!isConverterQuiet(form)) {
                             throw e;
@@ -242,8 +238,8 @@ public class FormResolverFactory implements DataResolverFactory {
     }
 
     private class GroupsResolver extends AbstractFormResolver {
-        private final String groupName;
-        private final Class<?> componentType;
+        private final String          groupName;
+        private final Class<?>        componentType;
         private final FastConstructor fc;
 
         public GroupsResolver(DataResolverContext context, Class<?> paramType, FormGroups groupsAnnotation) {
@@ -267,7 +263,7 @@ public class FormResolverFactory implements DataResolverFactory {
 
             // component类型可以是Group或任意类，但不能是Object。
             assertTrue(componentType != null && !Object.class.equals(componentType), "Invalid paramType: %s",
-                    context.getTypeInfo());
+                       context.getTypeInfo());
 
             if (!componentType.isAssignableFrom(Group.class)) {
                 fc = getFastConstructor(componentType);
@@ -287,7 +283,7 @@ public class FormResolverFactory implements DataResolverFactory {
 
                 try {
                     result = form.getTypeConverter().convertIfNecessary(groups, context.getTypeInfo().getRawType(),
-                            context.getExtraObject(MethodParameter.class));
+                                                                        context.getExtraObject(MethodParameter.class));
                 } catch (TypeMismatchException e) {
                     if (!isConverterQuiet(form)) {
                         throw e;
@@ -316,7 +312,7 @@ public class FormResolverFactory implements DataResolverFactory {
 
                 try {
                     return form.getTypeConverter().convertIfNecessary(results, context.getTypeInfo().getRawType(),
-                            context.getExtraObject(MethodParameter.class));
+                                                                      context.getExtraObject(MethodParameter.class));
                 } catch (TypeMismatchException e) {
                     if (!isConverterQuiet(form)) {
                         throw e;
@@ -329,8 +325,8 @@ public class FormResolverFactory implements DataResolverFactory {
     }
 
     private class FieldsResolver extends AbstractFormResolver {
-        private final String groupName;
-        private final String fieldName;
+        private final String   groupName;
+        private final String   fieldName;
         private final Class<?> componentType;
 
         public FieldsResolver(DataResolverContext context, Class<?> paramType, FormFields fieldsAnnotation) {
@@ -355,7 +351,7 @@ public class FormResolverFactory implements DataResolverFactory {
 
             // component类型可以是Field或任意类，但不能是Object。
             assertTrue(componentType != null && !Object.class.equals(componentType), "Invalid paramType: %s",
-                    context.getTypeInfo());
+                       context.getTypeInfo());
         }
 
         public Object resolve() {
@@ -376,7 +372,7 @@ public class FormResolverFactory implements DataResolverFactory {
 
                 try {
                     result = form.getTypeConverter().convertIfNecessary(fields, context.getTypeInfo().getRawType(),
-                            context.getExtraObject(MethodParameter.class));
+                                                                        context.getExtraObject(MethodParameter.class));
                 } catch (TypeMismatchException e) {
                     if (!isConverterQuiet(form)) {
                         throw e;
@@ -399,7 +395,7 @@ public class FormResolverFactory implements DataResolverFactory {
                 for (int i = 0; i < results.length; i++) {
                     try {
                         results[i] = fields.get(i).getValueOfType(componentType,
-                                context.getExtraObject(MethodParameter.class), null);
+                                                                  context.getExtraObject(MethodParameter.class), null);
                     } catch (TypeMismatchException e) {
                         if (!isConverterQuiet(form)) {
                             throw e;
@@ -411,7 +407,7 @@ public class FormResolverFactory implements DataResolverFactory {
 
                 try {
                     return form.getTypeConverter().convertIfNecessary(results, context.getTypeInfo().getRawType(),
-                            context.getExtraObject(MethodParameter.class));
+                                                                      context.getExtraObject(MethodParameter.class));
                 } catch (TypeMismatchException e) {
                     if (!isConverterQuiet(form)) {
                         throw e;
@@ -440,14 +436,14 @@ public class FormResolverFactory implements DataResolverFactory {
         protected final GroupConfig getGroupConfig(String groupName) {
             groupName = assertNotNull(trimToNull(groupName), "group name is empty");
             return assertNotNull(formService.getFormConfig().getGroupConfig(groupName),
-                    "group \"%s\" does not defined", groupName);
+                                 "group \"%s\" does not defined", groupName);
         }
 
         protected final FieldConfig getFieldConfig(String groupName, String fieldName) {
             GroupConfig groupConfig = getGroupConfig(groupName);
             fieldName = assertNotNull(trimToNull(fieldName), "field name is empty");
             return assertNotNull(groupConfig.getFieldConfig(fieldName), "field \"%s.%s\" does not defined",
-                    groupConfig.getName(), fieldName);
+                                 groupConfig.getName(), fieldName);
         }
     }
 

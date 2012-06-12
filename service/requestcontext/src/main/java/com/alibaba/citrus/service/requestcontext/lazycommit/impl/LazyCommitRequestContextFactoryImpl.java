@@ -37,9 +37,7 @@ public class LazyCommitRequestContextFactoryImpl extends AbstractRequestContextF
         return new LazyCommitRequestContextImpl(wrappedContext);
     }
 
-    /**
-     * 本类提供了延迟提交headers的功能。
-     */
+    /** 本类提供了延迟提交headers的功能。 */
     public String[] getFeatures() {
         return new String[] { "lazyCommitHeaders" };
     }

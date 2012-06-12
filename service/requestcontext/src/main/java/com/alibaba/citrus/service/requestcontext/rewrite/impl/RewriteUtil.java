@@ -18,7 +18,6 @@
 package com.alibaba.citrus.service.requestcontext.rewrite.impl;
 
 import java.util.regex.MatchResult;
-
 import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.citrus.service.requestcontext.parser.ParserRequestContext;
@@ -67,7 +66,8 @@ public class RewriteUtil {
         StringBuffer charBuffer = new StringBuffer();
         StringBuffer varNameBuffer = new StringBuffer();
 
-        MAIN_LOOP: for (int i = 0; i < length;) {
+        MAIN_LOOP:
+        for (int i = 0; i < length; ) {
             char ch = expr.charAt(i);
 
             switch (ch) {
@@ -178,7 +178,7 @@ public class RewriteUtil {
         else if ("QUERY_STRING".equals(varName)) {
             if ("post".equalsIgnoreCase(request.getMethod())) {
                 ParserRequestContext parserRequestContext = RequestContextUtil.findRequestContext(request,
-                        ParserRequestContext.class);
+                                                                                                  ParserRequestContext.class);
 
                 result = parserRequestContext.getParameters().toQueryString();
             } else {
@@ -188,7 +188,7 @@ public class RewriteUtil {
         //
         else if (varName.startsWith("QUERY:")) {
             ParserRequestContext parserRequestContext = RequestContextUtil.findRequestContext(request,
-                    ParserRequestContext.class);
+                                                                                              ParserRequestContext.class);
 
             result = parserRequestContext.getParameters().getString(varName.substring("QUERY:".length()).trim());
         }

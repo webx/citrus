@@ -24,6 +24,7 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
+import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -31,14 +32,12 @@ import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 
-import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
-
 public class MyConfigurationTests {
     private static ApplicationContext globalFactory;
     private static ApplicationContext factory;
-    private MyConfiguration globalConf;
-    private MyConfiguration conf1;
-    private MyConfiguration conf2;
+    private        MyConfiguration    globalConf;
+    private        MyConfiguration    conf1;
+    private        MyConfiguration    conf2;
 
     @BeforeClass
     public static void initFactory() throws Exception {
@@ -46,7 +45,7 @@ public class MyConfigurationTests {
                 new File(srcdir, "my-configuration-global.xml")));
 
         factory = new XmlApplicationContext(new FileSystemResource(new File(srcdir, "my-configuration.xml")),
-                globalFactory);
+                                            globalFactory);
     }
 
     @Before
@@ -64,11 +63,11 @@ public class MyConfigurationTests {
     public void wrong_disable_productionMode() {
         try {
             new XmlApplicationContext(new FileSystemResource(new File(srcdir, "my-configuration-wrong.xml")),
-                    globalFactory);
+                                      globalFactory);
             fail();
         } catch (BeanCreationException e) {
             assertThat(e,
-                    exception(IllegalArgumentException.class, "productionMode cannot be disabled at App's Context"));
+                       exception(IllegalArgumentException.class, "productionMode cannot be disabled at App's Context"));
         }
     }
 

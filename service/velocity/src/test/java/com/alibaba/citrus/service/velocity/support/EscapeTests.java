@@ -25,14 +25,6 @@ import java.lang.reflect.Method;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.velocity.app.event.ReferenceInsertionEventHandler;
-import org.apache.velocity.exception.ParseErrorException;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-
 import com.alibaba.citrus.service.template.TemplateContext;
 import com.alibaba.citrus.service.template.TemplateException;
 import com.alibaba.citrus.service.template.support.MappedTemplateContext;
@@ -43,6 +35,13 @@ import com.alibaba.citrus.service.velocity.support.EscapeSupport.EscapeType;
 import com.alibaba.citrus.test.TestUtil;
 import com.alibaba.citrus.util.StringEscapeUtil;
 import com.alibaba.citrus.util.i18n.LocaleUtil;
+import org.apache.velocity.app.event.ReferenceInsertionEventHandler;
+import org.apache.velocity.exception.ParseErrorException;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
 
 public class EscapeTests extends AbstractVelocityEngineTests {
     @BeforeClass
@@ -84,7 +83,7 @@ public class EscapeTests extends AbstractVelocityEngineTests {
 
     private String normalizeReference(String ref) throws Exception {
         Method method = TestUtil.getAccessibleMethod(EscapeSupport.class, "normalizeReference",
-                new Class<?>[] { String.class });
+                                                     new Class<?>[] { String.class });
 
         return (String) method.invoke(null, ref);
     }
@@ -102,8 +101,8 @@ public class EscapeTests extends AbstractVelocityEngineTests {
             assertThat(
                     e,
                     exception(ParseErrorException.class,
-                            "Error rendering Velocity template: /escape/test_escape_wrong_args_0.vm",
-                            "Invalid args for #escape.  Expected 1 and only 1 string arg."));
+                              "Error rendering Velocity template: /escape/test_escape_wrong_args_0.vm",
+                              "Invalid args for #escape.  Expected 1 and only 1 string arg."));
         }
 
         try {
@@ -113,8 +112,8 @@ public class EscapeTests extends AbstractVelocityEngineTests {
             assertThat(
                     e,
                     exception(ParseErrorException.class,
-                            "Error rendering Velocity template: /escape/test_escape_wrong_args_1.vm",
-                            "Invalid args for #noescape.  Expected 0 args."));
+                              "Error rendering Velocity template: /escape/test_escape_wrong_args_1.vm",
+                              "Invalid args for #noescape.  Expected 0 args."));
         }
 
         try {
@@ -124,8 +123,8 @@ public class EscapeTests extends AbstractVelocityEngineTests {
             assertThat(
                     e,
                     exception(ParseErrorException.class,
-                            "Error rendering Velocity template: /escape/test_escape_wrong_args_2.vm",
-                            "Invalid args for #escape.  Expected 1 and only 1 string arg."));
+                              "Error rendering Velocity template: /escape/test_escape_wrong_args_2.vm",
+                              "Invalid args for #escape.  Expected 1 and only 1 string arg."));
         }
 
         try {
@@ -135,9 +134,9 @@ public class EscapeTests extends AbstractVelocityEngineTests {
             assertThat(
                     e,
                     exception(ParseErrorException.class,
-                            "Error rendering Velocity template: /escape/test_escape_wrong_type.vm",
-                            "Invalid escape type: unknown at /escape/test_escape_wrong_type.vm",
-                            "Available escape types: [noescape, java, javascript, html, xml, url, sql]"));
+                              "Error rendering Velocity template: /escape/test_escape_wrong_type.vm",
+                              "Invalid escape type: unknown at /escape/test_escape_wrong_type.vm",
+                              "Available escape types: [noescape, java, javascript, html, xml, url, sql]"));
         }
     }
 
@@ -326,7 +325,7 @@ public class EscapeTests extends AbstractVelocityEngineTests {
         assertFalse(velocityEngine.getConfiguration().isProductionMode());
 
         EscapeSupport escapeSupport = (EscapeSupport) getFieldValue(velocityEngine.getConfiguration(), "plugins",
-                Object[].class)[0];
+                                                                    Object[].class)[0];
 
         assertFalse(getFieldValue(escapeSupport, "cacheReferences", Boolean.class));
 
@@ -350,7 +349,7 @@ public class EscapeTests extends AbstractVelocityEngineTests {
         assertTrue(velocityEngine.getConfiguration().isProductionMode());
 
         EscapeSupport escapeSupport = (EscapeSupport) getFieldValue(velocityEngine.getConfiguration(), "plugins",
-                Object[].class)[0];
+                                                                    Object[].class)[0];
 
         assertTrue(getFieldValue(escapeSupport, "cacheReferences", Boolean.class));
 
@@ -405,9 +404,7 @@ public class EscapeTests extends AbstractVelocityEngineTests {
         assertThat(content, containsString("2. Hello &lt;World /&gt;"));
     }
 
-    /**
-     * 测试noescape时，直接返回value object，而不是对其执行toString方法。
-     */
+    /** 测试noescape时，直接返回value object，而不是对其执行toString方法。 */
     @Test
     public void escape_object_noescape() throws Exception {
         getEngine("with_rules_for_object", factory);

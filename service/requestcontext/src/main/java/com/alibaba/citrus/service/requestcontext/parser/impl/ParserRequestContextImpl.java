@@ -26,10 +26,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.PropertyEditorRegistrar;
 
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.parser.CookieParser;
@@ -40,25 +37,24 @@ import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextW
 import com.alibaba.citrus.service.requestcontext.support.AbstractRequestWrapper;
 import com.alibaba.citrus.service.upload.UploadService;
 import com.alibaba.citrus.util.StringUtil;
+import org.springframework.beans.PropertyEditorRegistrar;
 
-/**
- * 自动解析request parameters和cookie parameters，并透明地处理upload请求的request context实现。
- */
+/** 自动解析request parameters和cookie parameters，并透明地处理upload请求的request context实现。 */
 public class ParserRequestContextImpl extends AbstractRequestContextWrapper implements ParserRequestContext {
     private PropertyEditorRegistrar propertyEditorRegistrar;
-    private boolean converterQuiet;
-    private String caseFolding;
-    private boolean autoUpload;
-    private boolean unescapeParameters;
-    private boolean useServletEngineParser;
-    private boolean useBodyEncodingForURI;
-    private String uriEncoding;
-    private boolean trimming;
-    private UploadService upload;
-    private ParameterParser parameters;
+    private boolean                 converterQuiet;
+    private String                  caseFolding;
+    private boolean                 autoUpload;
+    private boolean                 unescapeParameters;
+    private boolean                 useServletEngineParser;
+    private boolean                 useBodyEncodingForURI;
+    private String                  uriEncoding;
+    private boolean                 trimming;
+    private UploadService           upload;
+    private ParameterParser         parameters;
     private ParameterParserFilter[] filters;
-    private String htmlFieldSuffix;
-    private CookieParser cookies;
+    private String                  htmlFieldSuffix;
+    private CookieParser            cookies;
 
     /**
      * 包装一个<code>RequestContext</code>对象。
@@ -70,100 +66,72 @@ public class ParserRequestContextImpl extends AbstractRequestContextWrapper impl
         setRequest(new RequestWrapper(wrappedContext.getRequest()));
     }
 
-    /**
-     * 取得用来转换参数类型的propertyEditor注册器。
-     */
+    /** 取得用来转换参数类型的propertyEditor注册器。 */
     public PropertyEditorRegistrar getPropertyEditorRegistrar() {
         return propertyEditorRegistrar;
     }
 
-    /**
-     * 设置用来转换参数类型的propertyEditor注册器。
-     */
+    /** 设置用来转换参数类型的propertyEditor注册器。 */
     public void setPropertyEditorRegistrar(PropertyEditorRegistrar propertyEditorRegistrar) {
         this.propertyEditorRegistrar = propertyEditorRegistrar;
     }
 
-    /**
-     * 类型转换出错时，是否不报错，而是返回默认值。
-     */
+    /** 类型转换出错时，是否不报错，而是返回默认值。 */
     public boolean isConverterQuiet() {
         return converterQuiet;
     }
 
-    /**
-     * 设置类型转换出错时，是否不报错，而是返回默认值。
-     */
+    /** 设置类型转换出错时，是否不报错，而是返回默认值。 */
     public void setConverterQuiet(boolean converterQuiet) {
         this.converterQuiet = converterQuiet;
     }
 
-    /**
-     * 是否自动执行Upload。
-     */
+    /** 是否自动执行Upload。 */
     public boolean isAutoUpload() {
         return autoUpload;
     }
 
-    /**
-     * 是否自动执行Upload。
-     */
+    /** 是否自动执行Upload。 */
     public void setAutoUpload(boolean autoUpload) {
         this.autoUpload = autoUpload;
     }
 
-    /**
-     * 按照指定的风格转换parameters和cookies的名称，默认为“小写加下划线”。
-     */
+    /** 按照指定的风格转换parameters和cookies的名称，默认为“小写加下划线”。 */
     public String getCaseFolding() {
         return caseFolding;
     }
 
-    /**
-     * 按照指定的风格转换parameters和cookies的名称，默认为“小写加下划线”。
-     */
+    /** 按照指定的风格转换parameters和cookies的名称，默认为“小写加下划线”。 */
     public void setCaseFolding(String folding) {
         this.caseFolding = folding;
     }
 
-    /**
-     * 是否对参数进行HTML entities解码，默认为<code>false</code>。
-     */
+    /** 是否对参数进行HTML entities解码，默认为<code>false</code>。 */
     public boolean isUnescapeParameters() {
         return unescapeParameters;
     }
 
-    /**
-     * 是否对参数进行HTML entities解码，默认为<code>false</code>。
-     */
+    /** 是否对参数进行HTML entities解码，默认为<code>false</code>。 */
     public void setUnescapeParameters(boolean unescapeParameters) {
         this.unescapeParameters = unescapeParameters;
     }
 
-    /**
-     * 是否使用servlet引擎的parser，默认为<code>false</code>。
-     */
+    /** 是否使用servlet引擎的parser，默认为<code>false</code>。 */
     public void setUseServletEngineParser(boolean useServletEngineParser) {
         this.useServletEngineParser = useServletEngineParser;
     }
 
-    /**
-     * 是否使用servlet引擎的parser，默认为<code>false</code>。
-     */
+    /** 是否使用servlet引擎的parser，默认为<code>false</code>。 */
     public boolean isUseServletEngineParser() {
         return useServletEngineParser;
     }
 
-    /**
-     * 是否以request.setCharacterEncoding所指定的编码来解析query，默认为<code>true</code>。
-     */
+    /** 是否以request.setCharacterEncoding所指定的编码来解析query，默认为<code>true</code>。 */
     public boolean isUseBodyEncodingForURI() {
         return useBodyEncodingForURI;
     }
 
-    /**
-     * 是否以request.setCharacterEncoding所指定的编码来解析query，默认为<code>true</code>。
-     */
+    /** 是否以request.setCharacterEncoding所指定的编码来解析query，默认为<code>true</code>。 */
     public void setUseBodyEncodingForURI(boolean useBodyEncodingForURI) {
         this.useBodyEncodingForURI = useBodyEncodingForURI;
     }
@@ -184,16 +152,12 @@ public class ParserRequestContextImpl extends AbstractRequestContextWrapper impl
         this.uriEncoding = uriEncoding;
     }
 
-    /**
-     * 是否对输入参数进行trimming。默认为<code>true</code>。
-     */
+    /** 是否对输入参数进行trimming。默认为<code>true</code>。 */
     public boolean isTrimming() {
         return trimming;
     }
 
-    /**
-     * 是否对输入参数进行trimming。默认为<code>true</code>。
-     */
+    /** 是否对输入参数进行trimming。默认为<code>true</code>。 */
     public void setTrimming(boolean trimming) {
         this.trimming = trimming;
     }
@@ -207,23 +171,17 @@ public class ParserRequestContextImpl extends AbstractRequestContextWrapper impl
         this.upload = upload;
     }
 
-    /**
-     * 设置用于过滤参数的filters。
-     */
+    /** 设置用于过滤参数的filters。 */
     public void setParameterParserFilters(ParameterParserFilter[] filters) {
         this.filters = filters;
     }
 
-    /**
-     * 取得代表HTML字段的后缀。
-     */
+    /** 取得代表HTML字段的后缀。 */
     public String getHtmlFieldSuffix() {
         return htmlFieldSuffix;
     }
 
-    /**
-     * 设置代表HTML字段的后缀。
-     */
+    /** 设置代表HTML字段的后缀。 */
     public void setHtmlFieldSuffix(String htmlFieldSuffix) {
         this.htmlFieldSuffix = htmlFieldSuffix;
     }
@@ -278,9 +236,7 @@ public class ParserRequestContextImpl extends AbstractRequestContextWrapper impl
         return str;
     }
 
-    /**
-     * 包装request。
-     */
+    /** 包装request。 */
     private class RequestWrapper extends AbstractRequestWrapper {
         private final ParameterMap parameterMap = new ParameterMap();
 
@@ -325,9 +281,7 @@ public class ParserRequestContextImpl extends AbstractRequestContextWrapper impl
         }
     }
 
-    /**
-     * 一个以ParameterParser为基础的map。
-     */
+    /** 一个以ParameterParser为基础的map。 */
     private class ParameterMap extends AbstractMap<String, String[]> {
         private final ParameterEntrySet entrySet = new ParameterEntrySet();
 

@@ -22,15 +22,14 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.FileSystemResource;
-
 import com.alibaba.citrus.service.uribroker.URIBrokerService;
 import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import com.alibaba.citrus.turbine.uribroker.uri.TurbineContentURIBroker;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.FileSystemResource;
 
 public class TurbineContentURIBrokerTests {
     private TurbineContentURIBroker broker;
@@ -227,7 +226,7 @@ public class TurbineContentURIBrokerTests {
     @Test
     public void config() {
         ApplicationContext factory = new XmlApplicationContext(new FileSystemResource(new File(srcdir,
-                "services-uris.xml")));
+                                                                                               "services-uris.xml")));
 
         URIBrokerService uris = (URIBrokerService) factory.getBean("uris");
 

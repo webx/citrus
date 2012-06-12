@@ -36,8 +36,8 @@ import com.alibaba.citrus.util.templatelite.TextWriter;
  * @author Michael Zhou
  */
 public class SchemaExporterWEB extends SchemaExporter {
-    private final Template listTemplate = new Template(getClass().getResource("list.htm"));
-    private final RequestProcessor<RequestContext> processor = new RequestProcessor<RequestContext>() {
+    private final Template                         listTemplate = new Template(getClass().getResource("list.htm"));
+    private final RequestProcessor<RequestContext> processor    = new RequestProcessor<RequestContext>() {
         @Override
         protected boolean resourceExists(String resourceName) {
             return getEntry(resourceName) != null;
@@ -70,36 +70,26 @@ public class SchemaExporterWEB extends SchemaExporter {
     }
 
     public interface MenuProvider {
-        /**
-         * 由子类在list页面中插入菜单。
-         */
+        /** 由子类在list页面中插入菜单。 */
         void renderMenuHead(RequestContext request) throws Exception;
 
-        /**
-         * 由子类在list页面中插入菜单。
-         */
+        /** 由子类在list页面中插入菜单。 */
         void renderMenu(RequestContext request) throws Exception;
     }
 
-    /**
-     * 处理请求。
-     */
+    /** 处理请求。 */
     public void processRequest(RequestContext request) throws IOException {
         processor.processRequest(request);
     }
 
-    /**
-     * 渲染列表页面。
-     */
+    /** 渲染列表页面。 */
     private void renderListPage(final RequestContext request, final Entry rootEntry) throws IOException {
         PrintWriter out = request.getWriter("text/html; charset=UTF-8");
         listTemplate.accept(new ListPageVisitor(out, request, rootEntry, "text/html; charset=UTF-8"));
         out.flush();
     }
 
-    /**
-     * 渲染schema文件页面。
-     */
+    /** 渲染schema文件页面。 */
     private void renderContentPage(RequestContext request, Entry entry) throws IOException {
         PrintWriter out = request.getWriter("text/xml; charset=UTF-8");
         writeTo(out, entry, "UTF-8", request.getResourceURL("/"));
@@ -109,8 +99,8 @@ public class SchemaExporterWEB extends SchemaExporter {
     @SuppressWarnings("unused")
     private class AbstractEntryVisitor extends TextWriter<PrintWriter> {
         protected final RequestContext request;
-        protected final String lastEntryPath;
-        protected final Entry entry;
+        protected final String         lastEntryPath;
+        protected final Entry          entry;
 
         public AbstractEntryVisitor(PrintWriter out, RequestContext request, Entry entry, String lastEntryPath) {
             super(out);

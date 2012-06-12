@@ -29,18 +29,10 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.StringReader;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.fileupload.FileItem;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.core.io.FileSystemResource;
 
 import com.alibaba.citrus.service.upload.impl.cfu.DiskFileItem;
 import com.alibaba.citrus.springext.support.context.XmlBeanFactory;
@@ -53,6 +45,12 @@ import com.meterware.servletunit.InvocationContext;
 import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
 import com.meterware.servletunit.UploadServletRunner;
+import org.apache.commons.fileupload.FileItem;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.core.io.FileSystemResource;
 
 /**
  * 测试<code>UploadService</code>。
@@ -60,11 +58,11 @@ import com.meterware.servletunit.UploadServletRunner;
  * @author Michael Zhou
  */
 public class UploadServiceTests {
-    private static File 中文文件名;
-    private static BeanFactory factory;
-    private UploadService upload;
-    private ServletUnitClient client;
-    private HttpServletRequest request;
+    private static File               中文文件名;
+    private static BeanFactory        factory;
+    private        UploadService      upload;
+    private        ServletUnitClient  client;
+    private        HttpServletRequest request;
 
     @BeforeClass
     public static void initFactory() throws Exception {
@@ -111,7 +109,7 @@ public class UploadServiceTests {
             request.selectFile("myfile_中文", nonAsciiFile);
         } else {
             fail("Could not find non-ascii filename: " + nonAsciiFile.getAbsolutePath()
-                    + ".  Please make sure the OS charset is correctly set.");
+                 + ".  Please make sure the OS charset is correctly set.");
         }
 
         InvocationContext invocationContext = client.newInvocation(request);
@@ -335,7 +333,7 @@ public class UploadServiceTests {
 
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-                IOException {
+                                                                                              IOException {
             response.setContentType("text/html; charset=UTF-8");
 
             PrintWriter out = response.getWriter();
@@ -347,7 +345,7 @@ public class UploadServiceTests {
 
         @Override
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-                IOException {
+                                                                                               IOException {
             doGet(request, response);
         }
     }

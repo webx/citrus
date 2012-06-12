@@ -28,6 +28,9 @@ import static java.lang.reflect.Modifier.*;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+import com.alibaba.citrus.util.ClassLoaderUtil;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 import net.sf.cglib.asm.Type;
 import net.sf.cglib.core.DefaultNamingPolicy;
 import net.sf.cglib.core.Predicate;
@@ -40,13 +43,8 @@ import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 import net.sf.cglib.reflect.FastClass;
 import net.sf.cglib.reflect.FastMethod;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.alibaba.citrus.util.ClassLoaderUtil;
-import com.alibaba.citrus.util.ToStringBuilder;
-import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 将一组静态方法组合成一个对象。
@@ -54,11 +52,11 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public class StaticFunctionDelegatorBuilder {
-    private final static int PUBLIC_STATIC_MODIFIERS = PUBLIC | STATIC;
-    private final static Logger log = LoggerFactory.getLogger(StaticFunctionDelegatorBuilder.class);
-    private final Map<Signature, Method> methods = createHashMap();
+    private final static int                    PUBLIC_STATIC_MODIFIERS = PUBLIC | STATIC;
+    private final static Logger                 log                     = LoggerFactory.getLogger(StaticFunctionDelegatorBuilder.class);
+    private final        Map<Signature, Method> methods                 = createHashMap();
     private ClassLoader classLoader;
-    private Class<?> mixinInterface;
+    private Class<?>    mixinInterface;
 
     public ClassLoader getClassLoader() {
         return classLoader == null ? ClassLoaderUtil.getContextClassLoader() : classLoader;
@@ -91,7 +89,7 @@ public class StaticFunctionDelegatorBuilder {
 
         if (methods.containsKey(sig)) {
             throw new IllegalArgumentException("Duplicated method signature: " + sig + "\n  method: "
-                    + methods.get(sig));
+                                               + methods.get(sig));
         }
 
         methods.put(sig, method);
@@ -151,7 +149,7 @@ public class StaticFunctionDelegatorBuilder {
                 @Override
                 public String getClassName(String prefix, String source, Object key, Predicate names) {
                     return super.getClassName(EMPTY_STRING, getSimpleClassName(StaticFunctionDelegatorBuilder.class),
-                            key, names);
+                                              key, names);
                 }
             });
 

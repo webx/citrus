@@ -19,10 +19,9 @@ package com.alibaba.citrus.webx.context;
 
 import static com.alibaba.citrus.util.Assert.*;
 
+import com.alibaba.citrus.webx.WebxComponent;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.web.context.WebApplicationContext;
-
-import com.alibaba.citrus.webx.WebxComponent;
 
 /**
  * 和<code>WebxComponent</code>对应的context类。

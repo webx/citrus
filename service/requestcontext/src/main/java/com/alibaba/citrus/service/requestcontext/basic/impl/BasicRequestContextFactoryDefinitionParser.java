@@ -22,17 +22,17 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 
 import java.util.List;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 public class BasicRequestContextFactoryDefinitionParser extends
-        AbstractSingleBeanDefinitionParser<BasicRequestContextFactoryImpl> implements ContributionAware {
+                                                        AbstractSingleBeanDefinitionParser<BasicRequestContextFactoryImpl>
+        implements ContributionAware {
     private ConfigurationPoint interceptorsConfigurationPoint;
 
     public void setContribution(Contribution contrib) {
@@ -54,7 +54,7 @@ public class BasicRequestContextFactoryDefinitionParser extends
 
         for (Element subElement : subElements(element)) {
             interceptors.add(parseConfigurationPointBean(subElement, interceptorsConfigurationPoint, parserContext,
-                    builder));
+                                                         builder));
         }
 
         builder.addPropertyValue("interceptors", interceptors);

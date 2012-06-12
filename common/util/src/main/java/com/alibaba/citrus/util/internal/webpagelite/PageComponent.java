@@ -32,13 +32,11 @@ import com.alibaba.citrus.util.templatelite.Template;
  */
 public abstract class PageComponent {
     private final PageComponentRegistry registry;
-    private final String componentPath;
-    private final String componentName;
-    private final Template template;
+    private final String                componentPath;
+    private final String                componentName;
+    private final Template              template;
 
-    /**
-     * 创建并注册页面组件。
-     */
+    /** 创建并注册页面组件。 */
     public PageComponent(PageComponentRegistry registry, String componentPath) {
         this.registry = assertNotNull(registry, "pageComponentRegistry");
         this.componentPath = componentPath = normalizeComponentPath(componentPath);
@@ -60,14 +58,12 @@ public abstract class PageComponent {
         this.componentName = name.toString();
 
         URL templateResource = assertNotNull(getClass().getResource(name + ".htm"),
-                "Could not find template for page component class: %s", className);
+                                             "Could not find template for page component class: %s", className);
 
         template = new Template(templateResource);
     }
 
-    /**
-     * 规格化componentPath。
-     */
+    /** 规格化componentPath。 */
     static String normalizeComponentPath(String componentPath) {
         // 去除开始的/，确保以/结尾，除非是空路径
         componentPath = normalizeURI(componentPath).replaceAll("^/|/$", "") + "/";
@@ -95,9 +91,7 @@ public abstract class PageComponent {
         return template;
     }
 
-    /**
-     * 生成component资源的URL，供visitor调用。
-     */
+    /** 生成component资源的URL，供visitor调用。 */
     public String getComponentURL(RequestContext request, String relativeUrl) {
         return request.getResourceURL(getComponentPath() + relativeUrl);
     }

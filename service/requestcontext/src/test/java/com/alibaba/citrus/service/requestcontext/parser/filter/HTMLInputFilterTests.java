@@ -167,7 +167,7 @@ public class HTMLInputFilterTests {
         t("<a href=\"java\tscript:foo\">bar</a>", "<a href=\"#foo\">bar</a>", "<a href=\"#foo\">bar</a>");
         t("<a href=\"java\nscript:foo\">bar</a>", "<a href=\"#foo\">bar</a>", "<a href=\"#foo\">bar</a>");
         t("<a href=\"java" + HTMLInputFilter.chr(1) + "script:foo\">bar</a>", "<a href=\"#foo\">bar</a>",
-                "<a href=\"#foo\">bar</a>");
+          "<a href=\"#foo\">bar</a>");
         t("<a href=\"jscript:foo\">bar</a>", "<a href=\"#foo\">bar</a>", "<a href=\"#foo\">bar</a>");
         t("<a href=\"vbscript:foo\">bar</a>", "<a href=\"#foo\">bar</a>", "<a href=\"#foo\">bar</a>");
         t("<a href=\"view-source:foo\">bar</a>", "<a href=\"#foo\">bar</a>", "<a href=\"#foo\">bar</a>");

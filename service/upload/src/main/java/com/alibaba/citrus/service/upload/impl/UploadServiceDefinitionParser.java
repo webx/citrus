@@ -20,19 +20,18 @@ package com.alibaba.citrus.service.upload.impl;
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
+import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
+import com.alibaba.citrus.util.StringUtil;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
-import com.alibaba.citrus.util.StringUtil;
 
 public class UploadServiceDefinitionParser extends AbstractNamedBeanDefinitionParser<UploadServiceImpl> {
     @Override
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         parseBeanDefinitionAttributes(element, parserContext, builder);
         attributesToProperties(element, builder, "repository", "sizeMax", "fileSizeMax", "sizeThreshold",
-                "keepFormFieldInMemory");
+                               "keepFormFieldInMemory");
 
         String fileNameKey = trimToNull(element.getAttribute("fileNameKey"));
 

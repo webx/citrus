@@ -32,9 +32,7 @@ import java.util.List;
  * @author Michael Zhou
  */
 public interface GenericDeclarationInfo {
-    /**
-     * 判断当前声明是否为generic声明，亦即，是否包含类型变量如：<code>List&lt;E&gt;</code>。
-     */
+    /** 判断当前声明是否为generic声明，亦即，是否包含类型变量如：<code>List&lt;E&gt;</code>。 */
     boolean isGeneric();
 
     /**

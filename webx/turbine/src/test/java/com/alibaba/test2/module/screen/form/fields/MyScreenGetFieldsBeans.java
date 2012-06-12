@@ -19,9 +19,8 @@ package com.alibaba.test2.module.screen.form.fields;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.turbine.dataresolver.FormFields;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class MyScreenGetFieldsBeans {
     @Autowired

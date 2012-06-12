@@ -61,7 +61,7 @@ public class BufferedRequestContextImpl extends AbstractRequestContextWrapper im
      *
      * @param buffering 是否buffer内容
      * @throws IllegalStateException <code>getOutputStream</code>或
-     *             <code>getWriter</code>方法已经被执行
+     *                               <code>getWriter</code>方法已经被执行
      */
     public void setBuffering(boolean buffering) {
         getBufferedResponse().setBuffering(buffering);
@@ -71,7 +71,7 @@ public class BufferedRequestContextImpl extends AbstractRequestContextWrapper im
      * 创建新的buffer，保存老的buffer。
      *
      * @throws IllegalStateException 如果不在buffer模式，或<code>getWriter</code>及
-     *             <code>getOutputStream</code>方法从未被调用
+     *                               <code>getOutputStream</code>方法从未被调用
      */
     public void pushBuffer() {
         getBufferedResponse().pushBuffer();
@@ -82,7 +82,7 @@ public class BufferedRequestContextImpl extends AbstractRequestContextWrapper im
      *
      * @return 最近的buffer内容
      * @throws IllegalStateException 如果不在buffer模式，或<code>getWriter</code>
-     *             方法曾被调用，或 <code>getOutputStream</code>方法从未被调用
+     *                               方法曾被调用，或 <code>getOutputStream</code>方法从未被调用
      */
     public ByteArray popByteBuffer() {
         return getBufferedResponse().popByteBuffer();
@@ -93,7 +93,7 @@ public class BufferedRequestContextImpl extends AbstractRequestContextWrapper im
      *
      * @return 最近的buffer内容
      * @throws IllegalStateException 如果不在buffer模式，或<code>getOutputStream</code>
-     *             方法曾被调用，或<code>getWriter</code>方法从未被调用
+     *                               方法曾被调用，或<code>getWriter</code>方法从未被调用
      */
     public String popCharBuffer() {
         return getBufferedResponse().popCharBuffer();
@@ -107,7 +107,7 @@ public class BufferedRequestContextImpl extends AbstractRequestContextWrapper im
      * </p>
      *
      * @throws BufferCommitFailedException 如果提交失败
-     * @throws IllegalStateException 如果buffer栈中不止一个buffer
+     * @throws IllegalStateException       如果buffer栈中不止一个buffer
      */
     @Override
     public void commit() throws BufferCommitFailedException {

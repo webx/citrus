@@ -23,9 +23,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.generictype.introspect.PropertyInfo;
+import org.junit.Test;
 
 /**
  * 测试<code>IndexedPropertiesAnalyzer</code>。
@@ -33,9 +32,7 @@ import com.alibaba.citrus.generictype.introspect.PropertyInfo;
  * @author Michael Zhou
  */
 public class IndexedPropertiesAnalyzerTests extends AbstractPropertiesAnalyzerTests {
-    /**
-     * 测试不同的访问控制。
-     */
+    /** 测试不同的访问控制。 */
     @Test
     public void accessible() {
         @SuppressWarnings("unused")
@@ -80,12 +77,10 @@ public class IndexedPropertiesAnalyzerTests extends AbstractPropertiesAnalyzerTe
 
         assertEquals(1, pubStrs.size());
         assertPropertyInfo(pubStrs.get(0), MyClass.class, "publicString", String.class, false,
-                "getPublicString(I)Ljava/lang/String;", "setPublicString(ILjava/lang/String;)V");
+                           "getPublicString(I)Ljava/lang/String;", "setPublicString(ILjava/lang/String;)V");
     }
 
-    /**
-     * 测试不同的方法形态。
-     */
+    /** 测试不同的方法形态。 */
     @Test
     public void signatures() {
         @SuppressWarnings("unused")
@@ -172,14 +167,14 @@ public class IndexedPropertiesAnalyzerTests extends AbstractPropertiesAnalyzerTe
         pis = props.get("withReturn");
         assertEquals(1, pis.size());
         assertPropertyInfo(pis.get(0), MyClass.class, "withReturn", int.class, false, null,
-                "setWithReturn(II)Ljava/lang/String;");
+                           "setWithReturn(II)Ljava/lang/String;");
 
         assertNull(props.get("with2Params"));
 
         pis = props.get("normal");
         assertEquals(1, pis.size());
         assertPropertyInfo(pis.get(0), MyClass.class, "normal", String.class, false, "getNormal(I)Ljava/lang/String;",
-                "setNormal(ILjava/lang/String;)V");
+                           "setNormal(ILjava/lang/String;)V");
 
         pis = props.get("URL");
         assertEquals(1, pis.size());
@@ -192,7 +187,7 @@ public class IndexedPropertiesAnalyzerTests extends AbstractPropertiesAnalyzerTe
         pis = props.get("class");
         assertEquals(1, pis.size());
         assertPropertyInfo(pis.get(0), MyClass.class, "class", String.class, false, null,
-                "setClass(ILjava/lang/String;)V");
+                           "setClass(ILjava/lang/String;)V");
 
         pis = props.get("boolean");
         assertEquals(1, pis.size());
@@ -201,7 +196,7 @@ public class IndexedPropertiesAnalyzerTests extends AbstractPropertiesAnalyzerTe
         pis = props.get("list");
         assertEquals(1, pis.size());
         assertPropertyInfo(pis.get(0), MyClass.class, "list", List.class, true, "getList(I)Ljava/util/List;",
-                "setList(ILjava/util/List;)V");
+                           "setList(ILjava/util/List;)V");
     }
 
     @Override

@@ -58,5 +58,4 @@ public class ResourceAlias extends ResourceMapping {
 
         return new ToStringBuilder().append(getClass().getSimpleName()).append(mb).toString();
     }
-
 }

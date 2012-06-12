@@ -31,12 +31,17 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.Set;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
+import com.alibaba.citrus.springext.ResourceLoadingExtendable;
+import com.alibaba.citrus.test.runner.Prototyped;
+import com.alibaba.citrus.test.runner.Prototyped.Prototypes;
+import com.alibaba.citrus.test.runner.Prototyped.TestData;
+import com.alibaba.citrus.test.runner.Prototyped.TestName;
+import com.meterware.servletunit.ServletRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,18 +51,11 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
-import com.alibaba.citrus.springext.ResourceLoadingExtendable;
-import com.alibaba.citrus.test.runner.Prototyped;
-import com.alibaba.citrus.test.runner.Prototyped.Prototypes;
-import com.alibaba.citrus.test.runner.Prototyped.TestData;
-import com.alibaba.citrus.test.runner.Prototyped.TestName;
-import com.meterware.servletunit.ServletRunner;
-
 @RunWith(Prototyped.class)
 public class ResourceLoadingExtendableTests implements Cloneable {
     private ResourceLoadingExtendable context;
-    private Resource resource1;
-    private boolean defaultServletResource;
+    private Resource                  resource1;
+    private boolean                   defaultServletResource;
 
     @Prototypes
     public static TestData<ResourceLoadingExtendableTests> data() throws Exception {
@@ -74,8 +72,8 @@ public class ResourceLoadingExtendableTests implements Cloneable {
         XmlWebApplicationContext factory = new XmlWebApplicationContext();
         factory.setConfigLocation("beans.xml");
         factory.setServletContext(new ServletContextWrapper(new ServletRunner(new File(srcdir, "WEB-INF/web.xml"), "")
-                .newClient().newInvocation("http://localhost/servlet").getServlet().getServletConfig()
-                .getServletContext()));
+                                                                    .newClient().newInvocation("http://localhost/servlet").getServlet().getServletConfig()
+                                                                    .getServletContext()));
         factory.refresh();
         prototype.context = factory;
         prototype.defaultServletResource = true;
@@ -222,9 +220,7 @@ public class ResourceLoadingExtendableTests implements Cloneable {
         }
     }
 
-    /**
-     * httpunit未实现getResourcePaths方法。
-     */
+    /** httpunit未实现getResourcePaths方法。 */
     public static class ServletContextWrapper implements ServletContext {
         private final ServletContext servletContext;
 

@@ -26,10 +26,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
+import freemarker.cache.TemplateLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-
-import freemarker.cache.TemplateLoader;
 
 /**
  * 能让freemarker模板系统使用spring resource loader装载模板的适配器.
@@ -38,7 +37,7 @@ import freemarker.cache.TemplateLoader;
  */
 public class SpringResourceLoaderAdapter implements TemplateLoader {
     private final ResourceLoader springLoader;
-    private final String path;
+    private final String         path;
 
     public SpringResourceLoaderAdapter(ResourceLoader springLoader, String path) {
         this.springLoader = assertNotNull(springLoader, "spring resource loader");
@@ -92,9 +91,7 @@ public class SpringResourceLoaderAdapter implements TemplateLoader {
         return (TemplateSource) assertNotNull(templateSource, "templateSource");
     }
 
-    /**
-     * 规格化模板名。
-     */
+    /** 规格化模板名。 */
     private String normalizeTemplateName(String templateName) {
         templateName = assertNotNull(trimToNull(templateName), "templateName");
 
@@ -105,12 +102,10 @@ public class SpringResourceLoaderAdapter implements TemplateLoader {
         return templateName;
     }
 
-    /**
-     * 保存resource已经打开的流，以便关闭。
-     */
+    /** 保存resource已经打开的流，以便关闭。 */
     public static class TemplateSource {
-        private final Resource resource;
-        private InputStream istream;
+        private final Resource    resource;
+        private       InputStream istream;
 
         public TemplateSource(Resource resource) {
             this.resource = assertNotNull(resource, "resource");

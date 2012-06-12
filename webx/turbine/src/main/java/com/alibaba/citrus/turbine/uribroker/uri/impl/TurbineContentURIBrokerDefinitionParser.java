@@ -20,13 +20,13 @@ package com.alibaba.citrus.turbine.uribroker.uri.impl;
 import static com.alibaba.citrus.springext.util.DomUtil.*;
 
 import com.alibaba.citrus.service.uribroker.support.AbstractURIBrokerDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 import com.alibaba.citrus.turbine.uribroker.uri.TurbineContentURIBroker;
 
-public class TurbineContentURIBrokerDefinitionParser extends AbstractURIBrokerDefinitionParser<TurbineContentURIBroker> {
+public class TurbineContentURIBrokerDefinitionParser
+        extends AbstractURIBrokerDefinitionParser<TurbineContentURIBroker> {
     @Override
     protected ElementSelector getSimplePropertiesSelector() {
         return or(name("contextPath"), name("servletPath"), name("componentPath"), name("prefixPath"),
-                name("contentPath"));
+                  name("contentPath"));
     }
 }

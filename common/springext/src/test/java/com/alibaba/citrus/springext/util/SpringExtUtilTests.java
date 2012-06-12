@@ -31,9 +31,15 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
+import com.alibaba.citrus.springext.ConfigurationPoint;
+import com.alibaba.citrus.springext.Contribution;
+import com.alibaba.citrus.springext.impl.ConfigurationPointImpl;
+import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
+import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
+import com.alibaba.citrus.springext.support.context.XmlBeanFactory;
+import com.alibaba.citrus.springext.util.SpringExtUtil.ConstructorArg;
 import org.hamcrest.Matcher;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -55,18 +61,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 
-import com.alibaba.citrus.springext.ConfigurationPoint;
-import com.alibaba.citrus.springext.Contribution;
-import com.alibaba.citrus.springext.impl.ConfigurationPointImpl;
-import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
-import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
-import com.alibaba.citrus.springext.support.context.XmlBeanFactory;
-import com.alibaba.citrus.springext.util.SpringExtUtil.ConstructorArg;
-
 public class SpringExtUtilTests {
-    private static BeanFactory factory;
-    private ConfigurationPointsImpl cps;
-    private HttpServletRequest request;
+    private static BeanFactory             factory;
+    private        ConfigurationPointsImpl cps;
+    private        HttpServletRequest      request;
 
     @BeforeClass
     public static void initFactory() {
@@ -80,9 +78,9 @@ public class SpringExtUtilTests {
         class Bean implements BeanNameAware, ApplicationContextAware, InitializingBean {
             @Autowired
             private com.alibaba.citrus.springext.support.context.MyClass myClass;
-            private String beanName;
-            private ApplicationContext context;
-            private boolean inited;
+            private String                                               beanName;
+            private ApplicationContext                                   context;
+            private boolean                                              inited;
 
             public void setBeanName(String name) {
                 this.beanName = name;
@@ -100,7 +98,7 @@ public class SpringExtUtilTests {
         Bean bean = new Bean();
 
         assertSame(bean,
-                SpringExtUtil.autowireAndInitialize(bean, context, AutowireCapableBeanFactory.AUTOWIRE_NO, "myname"));
+                   SpringExtUtil.autowireAndInitialize(bean, context, AutowireCapableBeanFactory.AUTOWIRE_NO, "myname"));
 
         assertNotNull(bean.myClass);
         assertEquals("myname", bean.beanName);
@@ -121,7 +119,7 @@ public class SpringExtUtilTests {
         List<Object> list = createArrayList(container.values());
 
         // 包含一个str, 一个dateformat，两个date
-        for (Iterator<Object> i = list.iterator(); i.hasNext();) {
+        for (Iterator<Object> i = list.iterator(); i.hasNext(); ) {
             Object o = i.next();
 
             if (o instanceof String) {
@@ -187,21 +185,21 @@ public class SpringExtUtilTests {
         // newName在container中尚不存在，直接返回。
         assertEquals("newName", SpringExtUtil.generateBeanName("newName", (BeanDefinitionRegistry) factory));
         assertEquals("newName",
-                SpringExtUtil.generateBeanName("newName", (BeanDefinitionRegistry) factory, null, false));
+                     SpringExtUtil.generateBeanName("newName", (BeanDefinitionRegistry) factory, null, false));
 
         // testName和testName#0已经在container中存在，故返回testName#1。
         assertEquals("testName#1", SpringExtUtil.generateBeanName("testName", (BeanDefinitionRegistry) factory));
         assertEquals("testName#1",
-                SpringExtUtil.generateBeanName("testName", (BeanDefinitionRegistry) factory, null, false));
+                     SpringExtUtil.generateBeanName("testName", (BeanDefinitionRegistry) factory, null, false));
     }
 
     @Test
     public void generateInnerBeanName() throws Exception {
         assertTrue(SpringExtUtil.generateBeanName("newName", (BeanDefinitionRegistry) factory,
-                BeanDefinitionBuilder.genericBeanDefinition().getBeanDefinition(), true).matches("newName#[a-z0-9]+"));
+                                                  BeanDefinitionBuilder.genericBeanDefinition().getBeanDefinition(), true).matches("newName#[a-z0-9]+"));
 
         assertTrue(SpringExtUtil.generateBeanName("testName", (BeanDefinitionRegistry) factory,
-                BeanDefinitionBuilder.genericBeanDefinition().getBeanDefinition(), true).matches("testName#[a-z0-9]+"));
+                                                  BeanDefinitionBuilder.genericBeanDefinition().getBeanDefinition(), true).matches("testName#[a-z0-9]+"));
     }
 
     private void createConfigurationPoints(String location) {
@@ -267,7 +265,7 @@ public class SpringExtUtilTests {
             fail();
         } catch (IllegalArgumentException e) {
             assertThat(e, exception("could not get object of " + HttpServletRequest.class.getName()
-                    + ": no Application Context"));
+                                    + ": no Application Context"));
         }
 
         // not ApplicationContext or ConfigurableBeanFactory, optional
@@ -312,7 +310,7 @@ public class SpringExtUtilTests {
 
             @SuppressWarnings("unchecked")
             Matcher<Throwable> m = anyOf(exception(NoSuchBeanDefinitionException.class, "HttpServletRequest"),
-                    exception(NoSuchBeanDefinitionException.class, "MyObject"));
+                                         exception(NoSuchBeanDefinitionException.class, "MyObject"));
 
             assertThat(e, m);
         }
@@ -358,7 +356,7 @@ public class SpringExtUtilTests {
         SpringExtUtil.addConstructorArg(builder, required, 0, HttpServletRequest.class, MyObject.class);
 
         builder.addConstructorArgValue(SpringExtUtil.createConstructorArg(MyClass.class, required, 1,
-                HttpServletRequest.class, MyObject.class));
+                                                                          HttpServletRequest.class, MyObject.class));
 
         // register bean
         context.registerBeanDefinition("myClass", builder.getBeanDefinition());
@@ -483,7 +481,7 @@ public class SpringExtUtilTests {
 
     public static class MyClass {
         private HttpServletRequest request;
-        private MyObject object;
+        private MyObject           object;
 
         public MyClass() {
         }

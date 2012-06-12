@@ -25,7 +25,6 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Map;
-
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletContext;
@@ -33,19 +32,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.citrus.test.TestEnvStatic;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeansException;
 
-import com.alibaba.citrus.test.TestEnvStatic;
-
 public class FilterBeanTests {
-    private FilterBeanImpl filter;
-    private HttpServletRequest request;
+    private FilterBeanImpl      filter;
+    private HttpServletRequest  request;
     private HttpServletResponse response;
-    private ServletContext context;
-    private FilterConfig config;
+    private ServletContext      context;
+    private FilterConfig        config;
     private Map<String, String> initParams;
 
     private boolean inited;
@@ -129,8 +127,8 @@ public class FilterBeanTests {
             assertThat(
                     e,
                     exception(IllegalArgumentException.class, "Failed to set bean properties on filter: myFilter",
-                            "Initialization for filter myFilter failed.  ",
-                            "The following required properties were missing: [bbb, ccc]"));
+                              "Initialization for filter myFilter failed.  ",
+                              "The following required properties were missing: [bbb, ccc]"));
         }
     }
 
@@ -165,9 +163,9 @@ public class FilterBeanTests {
 
     public class FilterBeanImpl extends FilterBean {
         private String aaa;
-        private int bbb;
+        private int    bbb;
         private MyEnum ccc;
-        private Long ddd;
+        private Long   ddd;
 
         public void setAaa(String aaa) {
             this.aaa = aaa;

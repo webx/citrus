@@ -22,10 +22,9 @@ import static org.junit.Assert.*;
 
 import javax.servlet.http.Cookie;
 
+import com.alibaba.citrus.service.requestcontext.util.CookieSupport;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.alibaba.citrus.service.requestcontext.util.CookieSupport;
 
 public class CookieInterceptorTests extends AbstractBasicResponseTests {
     private Cookie cookie;

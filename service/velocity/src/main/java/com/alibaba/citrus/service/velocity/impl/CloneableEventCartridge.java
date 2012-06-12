@@ -17,22 +17,21 @@
 
 package com.alibaba.citrus.service.velocity.impl;
 
-import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.Assert.ExceptionType.*;
+import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 
 import java.lang.reflect.Method;
 import java.util.List;
 
+import com.alibaba.citrus.service.template.TemplateException;
+import com.alibaba.citrus.service.velocity.FastCloneable;
 import org.apache.velocity.app.event.EventCartridge;
 import org.apache.velocity.app.event.EventHandler;
 import org.apache.velocity.runtime.RuntimeServices;
 import org.apache.velocity.util.ContextAware;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.alibaba.citrus.service.template.TemplateException;
-import com.alibaba.citrus.service.velocity.FastCloneable;
 
 /**
  * 扩展<code>EventCartridge</code>，增加如下功能：
@@ -44,9 +43,9 @@ import com.alibaba.citrus.service.velocity.FastCloneable;
  * @author Michael Zhou
  */
 public class CloneableEventCartridge extends EventCartridge {
-    private final static Logger log = LoggerFactory.getLogger(CloneableEventCartridge.class);
-    private final static Method cloneMethod = getCloneMethod();
-    private final List<EventHandler> allHandlers = createLinkedList();
+    private final static Logger             log         = LoggerFactory.getLogger(CloneableEventCartridge.class);
+    private final static Method             cloneMethod = getCloneMethod();
+    private final        List<EventHandler> allHandlers = createLinkedList();
     private boolean initialized;
     private boolean needsClone = false;
 
@@ -65,9 +64,7 @@ public class CloneableEventCartridge extends EventCartridge {
         return method;
     }
 
-    /**
-     * 在系统启动时初始化一次。
-     */
+    /** 在系统启动时初始化一次。 */
     public void initOnce(RuntimeServices rs) throws Exception {
         if (!initialized) {
             super.initialize(rs);
@@ -93,11 +90,11 @@ public class CloneableEventCartridge extends EventCartridge {
                 if (!(ev instanceof FastCloneable)) {
                     if (ev instanceof Cloneable) {
                         log.warn("EventHandler which implements ContextAware and Cloneable "
-                                + "may slow down the velocity rendering process: {}", ev.getClass().getName());
+                                 + "may slow down the velocity rendering process: {}", ev.getClass().getName());
                     } else {
                         throw new IllegalArgumentException(
                                 "EventHandler which implements ContextAware should also implements FastCloneable or Cloneable: "
-                                        + ev.getClass().getName());
+                                + ev.getClass().getName());
                     }
                 }
             }
@@ -121,7 +118,7 @@ public class CloneableEventCartridge extends EventCartridge {
                             ev = (EventHandler) cloneMethod.invoke(ev);
                         } catch (Exception e) {
                             throw new TemplateException("Could not clone a ContextAware event handler: "
-                                    + ev.getClass().getName(), e);
+                                                        + ev.getClass().getName(), e);
                         }
                     }
                 }

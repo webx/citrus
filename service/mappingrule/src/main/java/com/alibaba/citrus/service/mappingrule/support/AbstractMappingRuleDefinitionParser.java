@@ -19,14 +19,13 @@ package com.alibaba.citrus.service.mappingrule.support;
 
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 
+import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
-
 public abstract class AbstractMappingRuleDefinitionParser<M extends AbstractMappingRule> extends
-        AbstractSingleBeanDefinitionParser<M> {
+                                                                                         AbstractSingleBeanDefinitionParser<M> {
     @Override
     protected final void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         attributesToProperties(element, builder, "cacheEnabled");

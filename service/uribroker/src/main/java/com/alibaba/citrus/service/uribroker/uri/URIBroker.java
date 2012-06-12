@@ -34,7 +34,6 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.citrus.service.requestcontext.util.QueryStringParser;
@@ -47,7 +46,7 @@ import com.alibaba.citrus.util.StringUtil;
  * <p>
  * 一个URI包括如下几个部分：
  * </p>
- *
+ * <p/>
  * <pre>
  * URI         = SERVER_INFO + PATH + &quot;?&quot; + QUERY_DATA + &quot;#&quot; + REFERENCE
  * SERVER_INFO = scheme://loginUser:loginPassword@serverName:serverPort
@@ -58,7 +57,7 @@ import com.alibaba.citrus.util.StringUtil;
  * <p>
  * 例如：
  * </p>
- *
+ * <p/>
  * <pre>
  * http://user:pass@myserver.com:8080/view?id=1#top
  * </pre>
@@ -71,9 +70,7 @@ import com.alibaba.citrus.util.StringUtil;
  * @author dux.fangl
  */
 public abstract class URIBroker extends URIBrokerFeatures {
-    /**
-     * 代表URI的类型。
-     */
+    /** 代表URI的类型。 */
     public static enum URIType {
         /** 自动选择URI的类型。 */
         auto,
@@ -88,88 +85,70 @@ public abstract class URIBroker extends URIBrokerFeatures {
         relative
     }
 
-    public static final String SERVER_SCHEME_HTTP = "http";
-    public static final String SERVER_SCHEME_HTTPS = "https";
-    public static final Integer SERVER_PORT_HTTP = 80;
-    public static final Integer SERVER_PORT_HTTPS = 443;
+    public static final String  SERVER_SCHEME_HTTP  = "http";
+    public static final String  SERVER_SCHEME_HTTPS = "https";
+    public static final Integer SERVER_PORT_HTTP    = 80;
+    public static final Integer SERVER_PORT_HTTPS   = 443;
 
     protected static final int PATH_INDEX = 0;
 
-    private static final Pattern pathPattern = Pattern.compile("(^/*|/+)(^[^/]+|[^/]*)");
-    private final int[] pathSegmentIndexes = new int[getPathSegmentCount()];
+    private static final Pattern pathPattern        = Pattern.compile("(^/*|/+)(^[^/]+|[^/]*)");
+    private final        int[]   pathSegmentIndexes = new int[getPathSegmentCount()];
     private URIType type;
-    private URI baseURI;
-    private String serverScheme;
-    private String serverName;
+    private URI     baseURI;
+    private String  serverScheme;
+    private String  serverName;
     private int serverPort = -1;
     private String loginUser;
     private String loginPassword;
     private String reference;
-    private final List<String> path = createLinkedList();
+    private final List<String>        path  = createLinkedList();
     private final Map<String, Object> query = createLinkedHashMap();
 
-    /**
-     * 取得URI类型。
-     */
+    /** 取得URI类型。 */
     public URIType getURIType() {
         return type;
     }
 
-    /**
-     * 设置URI类型。
-     */
+    /** 设置URI类型。 */
     public URIBroker setURIType(URIType type) {
         this.type = type;
         return this;
     }
 
-    /**
-     * 设置成自动URI类型。
-     */
+    /** 设置成自动URI类型。 */
     public URIBroker autoURI() {
         return setURIType(URIType.auto);
     }
 
-    /**
-     * 设置成完整URI类型。
-     */
+    /** 设置成完整URI类型。 */
     public URIBroker fullURI() {
         return setURIType(URIType.full);
     }
 
-    /**
-     * 设置成绝对URI类型。
-     */
+    /** 设置成绝对URI类型。 */
     public URIBroker absoluteURI() {
         return setURIType(URIType.absolute);
     }
 
-    /**
-     * 设置成相对URI类型。
-     */
+    /** 设置成相对URI类型。 */
     public URIBroker relativeURI() {
         return setURIType(URIType.relative);
     }
 
-    /**
-     * 取得baseURI，当<code>URIType==absolute/relative</code>时，用来生成以此为基准的URI。
-     */
+    /** 取得baseURI，当<code>URIType==absolute/relative</code>时，用来生成以此为基准的URI。 */
     public String getBaseURI() {
         return baseURI == null ? null : baseURI.toString();
     }
 
-    /**
-     * 设置baseURI，当<code>URIType==absolute/relative</code>时，用来生成以此为基准的URI。
-     */
+    /** 设置baseURI，当<code>URIType==absolute/relative</code>时，用来生成以此为基准的URI。 */
     public URIBroker setBaseURI(String baseURI) {
         baseURI = trimToNull(baseURI);
         this.baseURI = baseURI == null ? null : URI.create(baseURI).normalize();
         return this;
     }
 
-    /**
-     * 取得不包含query和reference的serverURI。
-     */
+    /** 取得不包含query和reference的serverURI。 */
     public String getServerURI() {
         processInterceptors();
 
@@ -179,9 +158,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
         return buf.toString();
     }
 
-    /**
-     * 设置现成的uri。
-     */
+    /** 设置现成的uri。 */
     public final URIBroker setServerURI(String uriString) {
         URL uri;
 
@@ -230,118 +207,88 @@ public abstract class URIBroker extends URIBrokerFeatures {
     protected void setServerURI(URL uri) {
     }
 
-    /**
-     * 取得URI scheme。
-     */
+    /** 取得URI scheme。 */
     public String getServerScheme() {
         return serverScheme;
     }
 
-    /**
-     * 设置URI scheme，只能是http和https。
-     */
+    /** 设置URI scheme，只能是http和https。 */
     public URIBroker setServerScheme(String serverScheme) {
         this.serverScheme = trim(serverScheme);
         renderer.clearServerBuffer();
         return this;
     }
 
-    /**
-     * 取得服务器名。
-     */
+    /** 取得服务器名。 */
     public String getServerName() {
         return serverName;
     }
 
-    /**
-     * 设置服务器名。
-     */
+    /** 设置服务器名。 */
     public URIBroker setServerName(String serverName) {
         this.serverName = trim(serverName);
         renderer.clearServerBuffer();
         return this;
     }
 
-    /**
-     * 取得服务器端口。
-     */
+    /** 取得服务器端口。 */
     public int getServerPort() {
         return serverPort;
     }
 
-    /**
-     * 设置服务器端口。注意默认的80端口和443端口分别在http和https时不做输出。
-     */
+    /** 设置服务器端口。注意默认的80端口和443端口分别在http和https时不做输出。 */
     public URIBroker setServerPort(int serverPort) {
         this.serverPort = serverPort <= 0 ? -1 : serverPort;
         renderer.clearServerBuffer();
         return this;
     }
 
-    /**
-     * 取得登录用户。
-     */
+    /** 取得登录用户。 */
     public String getLoginUser() {
         return loginUser;
     }
 
-    /**
-     * 设置登录用户。
-     */
+    /** 设置登录用户。 */
     public URIBroker setLoginUser(String loginUser) {
         this.loginUser = trim(loginUser);
         renderer.clearServerBuffer();
         return this;
     }
 
-    /**
-     * 取得登录密码。
-     */
+    /** 取得登录密码。 */
     public String getLoginPassword() {
         return loginPassword;
     }
 
-    /**
-     * 设置登录密码。
-     */
+    /** 设置登录密码。 */
     public URIBroker setLoginPassword(String loginPassword) {
         this.loginPassword = trim(loginPassword);
         renderer.clearServerBuffer();
         return this;
     }
 
-    /**
-     * 取得reference引用。
-     */
+    /** 取得reference引用。 */
     public String getReference() {
         return reference;
     }
 
-    /**
-     * 设置reference引用。
-     */
+    /** 设置reference引用。 */
     public URIBroker setReference(String reference) {
         this.reference = trim(reference);
         return this;
     }
 
-    /**
-     * 取得URL的path部分。
-     */
+    /** 取得URL的path部分。 */
     public String getPath() {
         return getAllPathSegmentsAsString(PATH_INDEX);
     }
 
-    /**
-     * 取得URI path列表。
-     */
+    /** 取得URI path列表。 */
     public List<String> getPathElements() {
         return getAllPathSegments(PATH_INDEX);
     }
 
-    /**
-     * 取得当前URI path分成几段。
-     */
+    /** 取得当前URI path分成几段。 */
     protected abstract int getPathSegmentCount();
 
     protected final List<String> getAllPathSegments(int segment) {
@@ -496,20 +443,16 @@ public abstract class URIBroker extends URIBrokerFeatures {
     private void assertSegment(int segment) {
         if (segment < 0 || segment >= pathSegmentIndexes.length) {
             throw new IllegalArgumentException("segment index " + segment + " out of bound [0, "
-                    + pathSegmentIndexes.length + ")");
+                                               + pathSegmentIndexes.length + ")");
         }
     }
 
-    /**
-     * 取得URI query表。
-     */
+    /** 取得URI query表。 */
     public Map<String, Object/* String or String[] */> getQuery() {
         return query;
     }
 
-    /**
-     * 设置一组query。
-     */
+    /** 设置一组query。 */
     public void setQuery(Map<String, Object> query) {
         getQuery().clear();
 
@@ -522,9 +465,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
         renderer.clearQueryBuffer();
     }
 
-    /**
-     * 删除所有的query。
-     */
+    /** 删除所有的query。 */
     public URIBroker clearQuery() {
         if (query != null) {
             query.clear();
@@ -535,9 +476,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
         return this;
     }
 
-    /**
-     * 取得指定id对应的query值。
-     */
+    /** 取得指定id对应的query值。 */
     public String getQueryData(String id) {
         Object value = getQuery().get(id);
 
@@ -554,9 +493,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
         return null;
     }
 
-    /**
-     * 设置query。
-     */
+    /** 设置query。 */
     public URIBroker setQueryData(String id, Object values) {
         id = assertNotNull(trimToNull(id), "empty query id");
 
@@ -592,9 +529,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
         return this;
     }
 
-    /**
-     * 添加query。
-     */
+    /** 添加query。 */
     public URIBroker addQueryData(String id, Object value) {
         id = assertNotNull(trimToNull(id), "empty query id");
 
@@ -630,9 +565,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
         return this;
     }
 
-    /**
-     * 删除指定的query。
-     */
+    /** 删除指定的query。 */
     public URIBroker removeQueryData(String id) {
         if (query != null) {
             query.remove(trimToNull(id));
@@ -643,9 +576,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
         return this;
     }
 
-    /**
-     * 返回不带参数的uri路径，并将参数部分添加到query中、设置ref（如果有的话）。
-     */
+    /** 返回不带参数的uri路径，并将参数部分添加到query中、设置ref（如果有的话）。 */
     protected final String setUriAndGetPath(String uri) {
         if (uri != null) {
             int i = uri.indexOf("?");
@@ -751,9 +682,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
         setQuery(parent.getQuery());
     }
 
-    /**
-     * 将request中的运行时信息填充到uri broker中。
-     */
+    /** 将request中的运行时信息填充到uri broker中。 */
     @Override
     protected void populateWithRequest(HttpServletRequest request) {
         // scheme、serverName和serverPort必须一起设。
@@ -810,7 +739,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
                     int port = getEffectiveServerPort(scheme, getServerPort());
 
                     if (isEquals(scheme, baseURI.serverScheme) && isEquals(getServerName(), baseURI.serverName)
-                            && port == baseURI.serverPort) {
+                        && port == baseURI.serverPort) {
                         renderServer = false;
                     }
                 }
@@ -891,9 +820,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
         }
     }
 
-    /**
-     * 从request或指定URI中创建并规格化baseURI。
-     */
+    /** 从request或指定URI中创建并规格化baseURI。 */
     private BaseURI createBaseURI() {
         BaseURI result = null;
 
@@ -918,9 +845,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
         return result;
     }
 
-    /**
-     * 将path转换成相对于base的相对路径。
-     */
+    /** 将path转换成相对于base的相对路径。 */
     private String getRelativePath(String base, String path) {
         // 去除base中最后一段路径，例如：
         //  /sub/dir/index.html -> /sub/dir
@@ -974,9 +899,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
         return relativePath.toString();
     }
 
-    /**
-     * 渲染URI服务器信息。
-     */
+    /** 渲染URI服务器信息。 */
     @Override
     protected final void renderServer(StringBuilder buf) {
         // scheme://
@@ -1042,9 +965,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
         return isDefaultPort;
     }
 
-    /**
-     * 渲染URI path。
-     */
+    /** 渲染URI path。 */
     @Override
     protected final void renderPath(StringBuilder buf) {
         for (String path : URIBroker.this.path) {
@@ -1052,15 +973,13 @@ public abstract class URIBroker extends URIBrokerFeatures {
         }
     }
 
-    /**
-     * 渲染URI query string。
-     */
+    /** 渲染URI query string。 */
     @Override
     protected final void renderQuery(StringBuilder buf) {
         if (!getQuery().isEmpty()) {
             buf.append("?");
 
-            for (Iterator<Map.Entry<String, Object>> i = getQuery().entrySet().iterator(); i.hasNext();) {
+            for (Iterator<Map.Entry<String, Object>> i = getQuery().entrySet().iterator(); i.hasNext(); ) {
                 Map.Entry<String, Object> entry = i.next();
                 String id = escapeURL(entry.getKey());
                 Object value = entry.getValue();
@@ -1089,7 +1008,7 @@ public abstract class URIBroker extends URIBrokerFeatures {
     private class BaseURI {
         String serverScheme;
         String serverName;
-        int serverPort;
+        int    serverPort;
         String path;
     }
 

@@ -22,17 +22,16 @@ import static org.junit.Assert.*;
 
 import java.util.Collection;
 
+import com.alibaba.citrus.test.runner.Prototyped;
+import com.alibaba.citrus.test.runner.Prototyped.Prototypes;
+import com.alibaba.citrus.test.runner.Prototyped.TestData;
+import com.alibaba.citrus.test.runner.Prototyped.TestName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.alibaba.citrus.test.runner.Prototyped;
-import com.alibaba.citrus.test.runner.Prototyped.Prototypes;
-import com.alibaba.citrus.test.runner.Prototyped.TestData;
-import com.alibaba.citrus.test.runner.Prototyped.TestName;
 
 /**
  * 原型化单元测试示例。
@@ -46,24 +45,20 @@ import com.alibaba.citrus.test.runner.Prototyped.TestName;
 public class PrototypedTests implements Cloneable {
     private final static Logger log = LoggerFactory.getLogger(PrototypedTests.class);
     private String p1;
-    private int[] p2;
+    private int[]  p2;
     private Object p3;
 
     static {
         TestEnvStatic.init();
     }
 
-    /**
-     * 这是一个特殊的方法，会根据参数自动设置测试的名称。
-     */
+    /** 这是一个特殊的方法，会根据参数自动设置测试的名称。 */
     @TestName
     public String testName() {
         return p1;
     }
 
-    /**
-     * 取得测试原型的集合。
-     */
+    /** 取得测试原型的集合。 */
     @Prototypes
     public static Collection<PrototypedTests> data() {
         TestData<PrototypedTests> data = getInstance(PrototypedTests.class);

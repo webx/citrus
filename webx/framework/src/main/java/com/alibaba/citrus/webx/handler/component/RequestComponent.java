@@ -22,7 +22,6 @@ import static com.alibaba.citrus.util.CollectionUtil.*;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -47,7 +46,7 @@ public class RequestComponent extends PageComponent {
     @SuppressWarnings("unused")
     private class RequestVisitor extends AbstractVisitor {
         private final HttpServletRequest request;
-        private final ServletContext servletContext;
+        private final ServletContext     servletContext;
 
         public RequestVisitor(RequestHandlerContext context) {
             super(context, RequestComponent.this);

@@ -48,10 +48,9 @@
 
 package com.alibaba.citrus.burlap.io;
 
-/**
- * Interface for any burlap remote object.
- */
+/** Interface for any burlap remote object. */
 public interface BurlapRemoteObject {
-  public String getBurlapType();
-  public String getBurlapURL();
+    public String getBurlapType();
+
+    public String getBurlapURL();
 }

@@ -18,7 +18,6 @@
 package com.alibaba.test.app1.module.control;
 
 import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;

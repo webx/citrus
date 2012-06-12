@@ -39,7 +39,7 @@ public class ResourceLoadingXmlApplicationContextTests {
     @BeforeClass
     public static void initParentContext() throws Exception {
         parentContext = new ResourceLoadingXmlApplicationContext(new FileSystemResource(new File(srcdir,
-                "appcontext/services-parent.xml")));
+                                                                                                 "appcontext/services-parent.xml")));
     }
 
     protected static ApplicationContext createContext(String... configLocations) {

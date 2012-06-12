@@ -22,16 +22,14 @@ import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.util.List;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.basic.impl.BasicRequestContextImpl;
+import org.junit.Before;
+import org.junit.Test;
 
 public class RequestContextLifecycleInterceptorTests extends AbstractBasicResponseTests {
     private List<Integer> prepares;

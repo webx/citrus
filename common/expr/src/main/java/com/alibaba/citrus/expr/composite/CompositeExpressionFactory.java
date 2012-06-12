@@ -34,9 +34,7 @@ import com.alibaba.citrus.expr.jexl.JexlExpressionFactory;
 public class CompositeExpressionFactory implements ExpressionFactory {
     private ExpressionFactory factory;
 
-    /**
-     * 创建一个组合表达式的工厂，默认使用<code>JexlExpressionFactory</code>来解析子表达式。
-     */
+    /** 创建一个组合表达式的工厂，默认使用<code>JexlExpressionFactory</code>来解析子表达式。 */
     public CompositeExpressionFactory() {
         this.factory = new JexlExpressionFactory();
     }
@@ -91,7 +89,8 @@ public class CompositeExpressionFactory implements ExpressionFactory {
         StringBuffer chars = new StringBuffer();
         StringBuffer exprBuff = new StringBuffer();
 
-        MAIN: while (i < length) {
+        MAIN:
+        while (i < length) {
             ch = expr.charAt(i);
 
             switch (ch) {
@@ -124,7 +123,8 @@ public class CompositeExpressionFactory implements ExpressionFactory {
                                                     exprBuff.append(ch);
                                                     ++i;
 
-                                                    DOUBLE_QUOTE: while (i < length) {
+                                                    DOUBLE_QUOTE:
+                                                    while (i < length) {
                                                         ch = expr.charAt(i);
 
                                                         switch (ch) {
@@ -154,7 +154,8 @@ public class CompositeExpressionFactory implements ExpressionFactory {
                                                     exprBuff.append(ch);
                                                     ++i;
 
-                                                    SINGLE_QUOTE: while (i < length) {
+                                                    SINGLE_QUOTE:
+                                                    while (i < length) {
                                                         ch = expr.charAt(i);
 
                                                         switch (ch) {

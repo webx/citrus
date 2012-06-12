@@ -22,15 +22,14 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 
 import java.util.List;
 
+import com.alibaba.citrus.service.uribroker.support.AbstractURIBrokerDefinitionParser;
+import com.alibaba.citrus.service.uribroker.uri.GenericServletURIBroker;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-import com.alibaba.citrus.service.uribroker.support.AbstractURIBrokerDefinitionParser;
-import com.alibaba.citrus.service.uribroker.uri.GenericServletURIBroker;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
-
-public class GenericServletURIBrokerDefinitionParser extends AbstractURIBrokerDefinitionParser<GenericServletURIBroker> {
+public class GenericServletURIBrokerDefinitionParser
+        extends AbstractURIBrokerDefinitionParser<GenericServletURIBroker> {
     @Override
     protected ElementSelector getSimplePropertiesSelector() {
         return or(name("contextPath"), name("servletPath"));

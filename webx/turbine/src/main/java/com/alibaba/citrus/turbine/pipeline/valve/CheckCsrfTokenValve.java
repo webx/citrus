@@ -23,14 +23,8 @@ import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
 
 import com.alibaba.citrus.logconfig.support.SecurityLogger;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
@@ -40,6 +34,10 @@ import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.turbine.util.CsrfToken;
 import com.alibaba.citrus.turbine.util.CsrfTokenCheckException;
 import com.alibaba.citrus.util.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 用来检查<code>CsrfToken</code>的valve，用来防止csrf攻击和重复提交同一表单。
@@ -53,7 +51,7 @@ public class CheckCsrfTokenValve extends AbstractValve {
     private HttpServletRequest request;
 
     private String tokenKey;
-    private int maxTokens;
+    private int    maxTokens;
     private String expiredPage;
 
     public String getTokenKey() {
@@ -93,9 +91,7 @@ public class CheckCsrfTokenValve extends AbstractValve {
         tokenKey = defaultIfNull(tokenKey, CsrfToken.DEFAULT_TOKEN_KEY);
     }
 
-    /**
-     * 如果csrf不符，则重定向到出错页面。
-     */
+    /** 如果csrf不符，则重定向到出错页面。 */
     public void invoke(PipelineContext pipelineContext) throws Exception {
         TurbineRunData rundata = getTurbineRunData(request);
 
@@ -132,7 +128,7 @@ public class CheckCsrfTokenValve extends AbstractValve {
 
     private void requestExpired(TurbineRunData rundata, String tokenFromRequest, List<String> tokensInSession) {
         log.getLogger().warn("CsrfToken \"{}\" does not match: requested token is {}, but the session tokens are {}.",
-                new Object[] { tokenKey, tokenFromRequest, tokensInSession });
+                             new Object[] { tokenKey, tokenFromRequest, tokensInSession });
 
         // 有两种处理方法，1. 显示expiredPage；2. 抛出异常。
         if (expiredPage != null) {

@@ -23,8 +23,6 @@ package com.alibaba.citrus.service.requestcontext.rewrite;
  * @author Michael Zhou
  */
 public interface RewriteSubstitutionHandler {
-    /**
-     * 处理程序有机会可以修改path和参数。
-     */
+    /** 处理程序有机会可以修改path和参数。 */
     void postSubstitution(RewriteSubstitutionContext context);
 }

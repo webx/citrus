@@ -28,30 +28,22 @@ package com.alibaba.citrus.service.uribroker;
 public class URIBrokerServiceException extends RuntimeException {
     private static final long serialVersionUID = 3257566204763058484L;
 
-    /**
-     * 创建一个异常。
-     */
+    /** 创建一个异常。 */
     public URIBrokerServiceException() {
         super();
     }
 
-    /**
-     * 创建一个异常。
-     */
+    /** 创建一个异常。 */
     public URIBrokerServiceException(String message) {
         super(message);
     }
 
-    /**
-     * 创建一个异常。
-     */
+    /** 创建一个异常。 */
     public URIBrokerServiceException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    /**
-     * 创建一个异常。
-     */
+    /** 创建一个异常。 */
     public URIBrokerServiceException(Throwable cause) {
         super(cause);
     }

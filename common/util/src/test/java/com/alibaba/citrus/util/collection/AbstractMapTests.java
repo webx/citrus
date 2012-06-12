@@ -370,9 +370,7 @@ public abstract class AbstractMapTests extends AbstractTests {
         }
     }
 
-    /**
-     * 测试当hash表中的项数超过阈值时的表现.
-     */
+    /** 测试当hash表中的项数超过阈值时的表现. */
     @Test
     public void resize() {
         int capacity = 0;

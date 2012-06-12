@@ -144,9 +144,7 @@ public class TestUtil {
         return className.trim().replace('.', '/');
     }
 
-    /**
-     * 取得field，并设置为可访问。
-     */
+    /** 取得field，并设置为可访问。 */
     public static Field getAccessibleField(Class<?> targetType, String fieldName) {
         assertNotNull("missing targetType", targetType);
 
@@ -169,9 +167,7 @@ public class TestUtil {
         return field;
     }
 
-    /**
-     * 取得method，并设置为可访问。
-     */
+    /** 取得method，并设置为可访问。 */
     public static Method getAccessibleMethod(Class<?> targetType, String methodName, Class<?>[] argTypes) {
         assertNotNull("missing targetType", targetType);
 
@@ -194,16 +190,12 @@ public class TestUtil {
         return method;
     }
 
-    /**
-     * 取得field值，即使private也可以。
-     */
+    /** 取得field值，即使private也可以。 */
     public static <T> T getFieldValue(Object target, String fieldName, Class<T> fieldType) {
         return getFieldValue(target, null, fieldName, fieldType);
     }
 
-    /**
-     * 取得field值，即使private也可以。
-     */
+    /** 取得field值，即使private也可以。 */
     @SuppressWarnings("unchecked")
     public static <T> T getFieldValue(Object target, Class<?> targetType, String fieldName, Class<T> fieldType) {
         if (targetType == null && target != null) {
@@ -227,22 +219,19 @@ public class TestUtil {
         }
     }
 
-    /**
-     * 执行方法，即使private也没关系。
-     */
+    /** 执行方法，即使private也没关系。 */
     public static <T> T invokeMethod(Object target, String methodName, Class<?>[] argTypes, Object[] args,
                                      Class<T> returnType) throws IllegalArgumentException, IllegalAccessException,
-            InvocationTargetException {
+                                                                 InvocationTargetException {
         return invokeMethod(target, null, methodName, argTypes, args, returnType);
     }
 
-    /**
-     * 执行方法，即使private也没关系。
-     */
+    /** 执行方法，即使private也没关系。 */
     @SuppressWarnings("unchecked")
     public static <T> T invokeMethod(Object target, Class<?> targetType, String methodName, Class<?>[] argTypes,
                                      Object[] args, Class<T> returnType) throws IllegalArgumentException,
-            IllegalAccessException, InvocationTargetException {
+                                                                                IllegalAccessException,
+                                                                                InvocationTargetException {
         if (targetType == null && target != null) {
             targetType = target.getClass();
         }

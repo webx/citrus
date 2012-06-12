@@ -29,18 +29,12 @@ import java.util.List;
  * @author Michael Zhou
  */
 public interface BoundedTypeInfo extends TypeInfo {
-    /**
-     * 取得基类型。
-     */
+    /** 取得基类型。 */
     TypeInfo getBaseType();
 
-    /**
-     * 取得上界（基类和接口）。
-     */
+    /** 取得上界（基类和接口）。 */
     List<TypeInfo> getUpperBounds();
 
-    /**
-     * 取得下界（子类和子接口）。
-     */
+    /** 取得下界（子类和子接口）。 */
     List<TypeInfo> getLowerBounds();
 }

@@ -19,12 +19,11 @@ package com.alibaba.citrus.service.resource.impl;
 
 import java.util.Set;
 
-import org.slf4j.Logger;
-
 import com.alibaba.citrus.service.resource.ResourceListerContext;
 import com.alibaba.citrus.service.resource.ResourceLoadingOption;
 import com.alibaba.citrus.service.resource.ResourceLoadingService;
 import com.alibaba.citrus.service.resource.ResourceNotFoundException;
+import org.slf4j.Logger;
 
 /**
  * 代表一次resource列表的查找的过程。
@@ -32,32 +31,24 @@ import com.alibaba.citrus.service.resource.ResourceNotFoundException;
  * @author Michael Zhou
  */
 public class ResourceListerContextImpl extends AbstractResourceLoadingContext<String[]> implements
-        ResourceListerContext {
-    /**
-     * 创建一个context。
-     */
+                                                                                        ResourceListerContext {
+    /** 创建一个context。 */
     public ResourceListerContextImpl(String resourceName, Set<ResourceLoadingOption> options,
                                      ResourceMapping[] mappings, ResourceLoadingService parent, Logger log) {
         super(resourceName, options, mappings, parent, log);
     }
 
-    /**
-     * 开始一个查找过程。
-     */
+    /** 开始一个查找过程。 */
     public String[] list() throws ResourceNotFoundException {
         return doLoad(resourceName, options);
     }
 
-    /**
-     * 回调函数：访问某个mapping。
-     */
+    /** 回调函数：访问某个mapping。 */
     @Override
     protected void visitMapping(ResourceMapping mapping) {
     }
 
-    /**
-     * 调用parent resource loading service取得资源。
-     */
+    /** 调用parent resource loading service取得资源。 */
     @Override
     protected String[] loadParentResource(String resourceName, Set<ResourceLoadingOption> options)
             throws ResourceNotFoundException {
@@ -68,17 +59,13 @@ public class ResourceListerContextImpl extends AbstractResourceLoadingContext<St
         return null;
     }
 
-    /**
-     * 调用mapping取得资源。
-     */
+    /** 调用mapping取得资源。 */
     @Override
     protected String[] loadMappedResource(ResourceLoaderMapping mapping, Set<ResourceLoadingOption> options) {
         return mapping.list(this, options);
     }
 
-    /**
-     * 实现<code>ResourceListerContext.list()</code>。
-     */
+    /** 实现<code>ResourceListerContext.list()</code>。 */
     public String[] list(String newResourceName, Set<ResourceLoadingOption> newOptions) {
         return loadContextResource(newResourceName, newOptions);
     }

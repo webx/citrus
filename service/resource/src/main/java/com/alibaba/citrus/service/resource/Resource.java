@@ -32,14 +32,10 @@ import java.net.URL;
  * @author Michael Zhou
  */
 public interface Resource {
-    /**
-     * 取得资源的<code>URL</code>。如果资源不能被表示成<code>URL</code>，则返回<code>null</code>。
-     */
+    /** 取得资源的<code>URL</code>。如果资源不能被表示成<code>URL</code>，则返回<code>null</code>。 */
     URL getURL();
 
-    /**
-     * 取得资源的<code>File</code>。如果资源不能被表示成<code>File</code>，则返回<code>null</code>。
-     */
+    /** 取得资源的<code>File</code>。如果资源不能被表示成<code>File</code>，则返回<code>null</code>。 */
     File getFile();
 
     /**
@@ -55,18 +51,12 @@ public interface Resource {
      */
     boolean exists();
 
-    /**
-     * 取得资源最近修改时间（ms）。如果不支持，则返回<code>0</code>。
-     */
+    /** 取得资源最近修改时间（ms）。如果不支持，则返回<code>0</code>。 */
     long lastModified();
 
-    /**
-     * 资源应该实现该方法。
-     */
+    /** 资源应该实现该方法。 */
     int hashCode();
 
-    /**
-     * 资源应该实现该方法。
-     */
+    /** 资源应该实现该方法。 */
     boolean equals(Object other);
 }

@@ -24,17 +24,15 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import net.sf.cglib.reflect.FastClass;
-import net.sf.cglib.reflect.FastMethod;
-
-import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-
 import com.alibaba.citrus.service.dataresolver.DataResolverService;
 import com.alibaba.citrus.service.moduleloader.Module;
 import com.alibaba.citrus.service.moduleloader.ModuleInfo;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
+import net.sf.cglib.reflect.FastClass;
+import net.sf.cglib.reflect.FastMethod;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 /**
  * 以事件的方式调用action的方法。
@@ -47,8 +45,8 @@ import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
  */
 public class ActionEventAdapterFactory extends AbstractDataBindingAdapterFactory implements ApplicationContextAware {
     private static final String DEFAULT_EVENT = "perform";
-    private static final String PRE_HANDLER = "beforeExecution";
-    private static final String POST_HANDLER = "afterExecution";
+    private static final String PRE_HANDLER   = "beforeExecution";
+    private static final String POST_HANDLER  = "afterExecution";
     private ApplicationContext context;
 
     public void setApplicationContext(ApplicationContext context) {
@@ -80,7 +78,7 @@ public class ActionEventAdapterFactory extends AbstractDataBindingAdapterFactory
         FastMethod postHanlder = getFastMethod(fc, POST_HANDLER);
 
         ActionEventAdapter adapter = new ActionEventAdapter(moduleObject, fastHandlers, getMethodInvoker(preHandler,
-                moduleInfo, false), getMethodInvoker(postHanlder, moduleInfo, false));
+                                                                                                         moduleInfo, false), getMethodInvoker(postHanlder, moduleInfo, false));
 
         try {
             // 注入并初始化adapter（不是注入moduleObject，后者取决于factory的设置）
@@ -92,9 +90,7 @@ public class ActionEventAdapterFactory extends AbstractDataBindingAdapterFactory
         return adapter;
     }
 
-    /**
-     * 取得事件处理方法。
-     */
+    /** 取得事件处理方法。 */
     private Map<String, Method> getEventHandlers(Class<?> moduleClass) {
         Map<String, Method> handlers = null;
 
@@ -104,7 +100,7 @@ public class ActionEventAdapterFactory extends AbstractDataBindingAdapterFactory
 
                 // doXyz()
                 if (methodName.length() > 2 && methodName.startsWith("do")
-                        && Character.isUpperCase(methodName.charAt(2))) {
+                    && Character.isUpperCase(methodName.charAt(2))) {
                     String eventName = toCamelCase(methodName.substring(2));
 
                     // default handler: doPerform()
@@ -124,9 +120,7 @@ public class ActionEventAdapterFactory extends AbstractDataBindingAdapterFactory
         return handlers;
     }
 
-    /**
-     * 取得方法，如果不存在或不符合要求，则返回null。
-     */
+    /** 取得方法，如果不存在或不符合要求，则返回null。 */
     private FastMethod getFastMethod(FastClass fc, String methodName) {
         Method method = getMethod(fc.getJavaClass(), methodName);
 

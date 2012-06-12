@@ -32,6 +32,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.TimeZone;
 
+import com.alibaba.citrus.service.form.configuration.GroupConfig;
 import org.apache.commons.fileupload.FileItem;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,16 +42,14 @@ import org.junit.runners.Parameterized.Parameters;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.context.ApplicationContext;
 
-import com.alibaba.citrus.service.form.configuration.GroupConfig;
-
 @RunWith(Parameterized.class)
 public class GroupTests extends AbstractFormServiceTests {
     private final ApplicationContext factory;
-    private final boolean withParserRequestContext;
-    private Form form;
-    private Group group;
-    private Field field1;
-    private Field field2;
+    private final boolean            withParserRequestContext;
+    private       Form               form;
+    private       Group              group;
+    private       Field              field1;
+    private       Field              field2;
 
     public GroupTests(ApplicationContext factory, boolean withParserRequestContext) {
         this.factory = factory;
@@ -64,7 +63,7 @@ public class GroupTests extends AbstractFormServiceTests {
         ApplicationContext noParserRequestContextOrUpload = createContext("services-form.xml", false);
 
         return Arrays.asList(new Object[][] { { withParserRequestContextAndUpload, true },
-                { noParserRequestContextOrUpload, false } });
+                                              { noParserRequestContextOrUpload, false } });
     }
 
     @Before
@@ -117,17 +116,15 @@ public class GroupTests extends AbstractFormServiceTests {
         assertEquals("111", group.getInstanceKey());
     }
 
-    /**
-     * 确保validator可以读到后面的field值。
-     */
+    /** 确保validator可以读到后面的field值。 */
     @Test
     public void validate_multiFields() throws Exception {
         getFormService("form2", factory);
 
         // field1 failed to validate
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "aaa" }, // group1.field1
-                { "_fm.g._0.fi", "bbb" }, // group1.field2
+                                           { "_fm.g._0.f", "aaa" }, // group1.field1
+                                           { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
 
         invokePost(factory, args);
@@ -142,8 +139,8 @@ public class GroupTests extends AbstractFormServiceTests {
 
         // succeeded in validating
         args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "value1" }, // group1.field1
-                { "_fm.g._0.fi", "value2" }, // group1.field2
+                                { "_fm.g._0.f", "value1" }, // group1.field1
+                                { "_fm.g._0.fi", "value2" }, // group1.field2
         };
 
         invokePost(factory, args);
@@ -164,8 +161,8 @@ public class GroupTests extends AbstractFormServiceTests {
 
         // with data
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "aaa" }, // group1.field1
-                { "_fm.g._0.fi", "bbb" }, // group1.field2
+                                           { "_fm.g._0.f", "aaa" }, // group1.field1
+                                           { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
 
         invokePost(factory, args);
@@ -182,7 +179,7 @@ public class GroupTests extends AbstractFormServiceTests {
     @Test
     public void getFields() throws Exception {
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "aaa" }, // group1.field1
+                                           { "_fm.g._0.f", "aaa" }, // group1.field1
         };
 
         invokePost(factory, args);
@@ -220,9 +217,7 @@ public class GroupTests extends AbstractFormServiceTests {
         assertEquals(null, field2.getValue());
     }
 
-    /**
-     * isValidated == true，不允许执行mapTo。
-     */
+    /** isValidated == true，不允许执行mapTo。 */
     @Test
     public void mapTo_isValidated() throws Exception {
         group.validate();
@@ -308,8 +303,8 @@ public class GroupTests extends AbstractFormServiceTests {
     @Test
     public void setProperties_null() throws Exception {
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "aaa" }, // group1.field1
-                { "_fm.g._0.fi", "bbb" }, // group1.field2
+                                           { "_fm.g._0.f", "aaa" }, // group1.field1
+                                           { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
 
         invokePost(factory, args);
@@ -346,8 +341,8 @@ public class GroupTests extends AbstractFormServiceTests {
     @Test
     public void setProperties_invalid() throws Exception {
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "aaa" }, // group1.field1
-                { "_fm.g._0.fi", "" }, // group1.field2
+                                           { "_fm.g._0.f", "aaa" }, // group1.field1
+                                           { "_fm.g._0.fi", "" }, // group1.field2
         };
 
         invokePost(factory, args);
@@ -373,8 +368,8 @@ public class GroupTests extends AbstractFormServiceTests {
     @Test
     public void setProperties_simpleValue() throws Exception {
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "234" }, // group1.field1
-                { "_fm.g._0.fi", "bbb" }, // group1.field2
+                                           { "_fm.g._0.f", "234" }, // group1.field1
+                                           { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
 
         invokePost(factory, args);
@@ -399,7 +394,7 @@ public class GroupTests extends AbstractFormServiceTests {
         getFormService("form3", factory);
 
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "illegal" }, // group1.field1
+                                           { "_fm.g._0.f", "illegal" }, // group1.field1
         };
 
         invokePost(factory, args);
@@ -421,7 +416,7 @@ public class GroupTests extends AbstractFormServiceTests {
         getFormService("form4", factory);
 
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "illegal" }, // group1.field1
+                                           { "_fm.g._0.f", "illegal" }, // group1.field1
         };
 
         invokePost(factory, args);
@@ -443,8 +438,8 @@ public class GroupTests extends AbstractFormServiceTests {
     @Test
     public void setProperties_stringArray() throws Exception {
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "aaa" }, // group1.field1
-                { "_fm.g._0.fi", new String[] { "bbb", "ccc", "ddd" } }, // group1.field2
+                                           { "_fm.g._0.f", "aaa" }, // group1.field1
+                                           { "_fm.g._0.fi", new String[] { "bbb", "ccc", "ddd" } }, // group1.field2
         };
 
         invokePost(factory, args);
@@ -467,8 +462,8 @@ public class GroupTests extends AbstractFormServiceTests {
     @Test
     public void setProperties_customType() throws Exception {
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "aaa" }, // group1.field1
-                { "_fm.g._0.fi", "bbb" }, // group1.field2
+                                           { "_fm.g._0.f", "aaa" }, // group1.field1
+                                           { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
 
         invokePost(factory, args);
@@ -491,7 +486,7 @@ public class GroupTests extends AbstractFormServiceTests {
     @Test
     public void setProperties_noValues() throws Exception {
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.gro._0.f", "aaa" }, // group3.field1
+                                           { "_fm.gro._0.f", "aaa" }, // group3.field1
         };
 
         invokePost(factory, args);
@@ -514,8 +509,8 @@ public class GroupTests extends AbstractFormServiceTests {
     @Test
     public void setProperties_fileItem() throws Exception {
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "aaa" }, // group1.field1
-                { "_fm.g._0.fi", new File(srcdir, "data/file1.txt") }, // group1.field2
+                                           { "_fm.g._0.f", "aaa" }, // group1.field1
+                                           { "_fm.g._0.fi", new File(srcdir, "data/file1.txt") }, // group1.field2
         };
 
         invokePostMime(factory, args);
@@ -575,8 +570,8 @@ public class GroupTests extends AbstractFormServiceTests {
     @Test
     public void setProperties_date() throws Exception {
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "1989-6-4" }, // group1.field1
-                { "_fm.g._0.fi", "bbb" }, // group1.field2
+                                           { "_fm.g._0.f", "1989-6-4" }, // group1.field1
+                                           { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
 
         invokePost(factory, args);
@@ -601,8 +596,8 @@ public class GroupTests extends AbstractFormServiceTests {
     @Test
     public void toString_() throws Exception {
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "aaa" }, // group1.default.field1
-                { "_fm.g.11.f", "aaa" }, // group1.11.field1
+                                           { "_fm.g._0.f", "aaa" }, // group1.default.field1
+                                           { "_fm.g.11.f", "aaa" }, // group1.11.field1
         };
 
         invokePost(factory, args);

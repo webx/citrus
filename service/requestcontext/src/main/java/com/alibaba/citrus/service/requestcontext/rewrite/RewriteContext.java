@@ -17,8 +17,6 @@
 
 package com.alibaba.citrus.service.requestcontext.rewrite;
 
-/**
- * 代表一个rewrite上下文信息。
- */
+/** 代表一个rewrite上下文信息。 */
 public interface RewriteContext {
 }

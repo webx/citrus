@@ -23,28 +23,27 @@ import static org.junit.Assert.*;
 
 import java.lang.reflect.Method;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pull.RuntimeToolSetFactory;
 import com.alibaba.citrus.service.pull.ToolFactory;
 import com.alibaba.citrus.service.pull.ToolSetFactory;
+import org.junit.Test;
 
 public class PullServiceBasicTests extends AbstractPullServiceTests {
-    private final static int SINGLETON = 0x1;
-    private final static int TOOL_FACTORY = 0x2;
-    private final static int TOOL_SET_FACTORY = 0x4;
+    private final static int SINGLETON                = 0x1;
+    private final static int TOOL_FACTORY             = 0x2;
+    private final static int TOOL_SET_FACTORY         = 0x4;
     private final static int RUNTIME_TOOL_SET_FACTORY = 0x8;
 
-    private ToolFactory singleton_toolFactory = newToolFactory(true, null);
-    private ToolSetFactory singleton_toolSetFactory = newToolSetFactory(true, false, null);
-    private ToolSetFactory singleton_toolSetFactory2 = newToolSetFactory(true, true, null);
-    private RuntimeToolSetFactory singleton_runtimeToolSetFactory = newRuntimeToolSetFactory(true, false, null);
+    private ToolFactory           singleton_toolFactory            = newToolFactory(true, null);
+    private ToolSetFactory        singleton_toolSetFactory         = newToolSetFactory(true, false, null);
+    private ToolSetFactory        singleton_toolSetFactory2        = newToolSetFactory(true, true, null);
+    private RuntimeToolSetFactory singleton_runtimeToolSetFactory  = newRuntimeToolSetFactory(true, false, null);
     private RuntimeToolSetFactory singleton_runtimeToolSetFactory2 = newRuntimeToolSetFactory(true, true, null);
 
-    private ToolFactory nonSingleton_toolFactory = newToolFactory(false, null);
-    private ToolSetFactory nonSingleton_toolSetFactory = newToolSetFactory(false, false, null);
-    private ToolSetFactory nonSingleton_toolSetFactory2 = newToolSetFactory(false, true, null);
-    private RuntimeToolSetFactory nonSingleton_runtimeToolSetFactory = newRuntimeToolSetFactory(false, false, null);
+    private ToolFactory           nonSingleton_toolFactory            = newToolFactory(false, null);
+    private ToolSetFactory        nonSingleton_toolSetFactory         = newToolSetFactory(false, false, null);
+    private ToolSetFactory        nonSingleton_toolSetFactory2        = newToolSetFactory(false, true, null);
+    private RuntimeToolSetFactory nonSingleton_runtimeToolSetFactory  = newRuntimeToolSetFactory(false, false, null);
     private RuntimeToolSetFactory nonSingleton_runtimeToolSetFactory2 = newRuntimeToolSetFactory(false, true, null);
 
     @Test

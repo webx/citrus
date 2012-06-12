@@ -20,12 +20,11 @@ package com.alibaba.citrus.service.requestcontext.basic;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
+import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
+import com.alibaba.citrus.service.requestcontext.basic.impl.ResponseHeaderSecurityFilter;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
-import com.alibaba.citrus.service.requestcontext.basic.impl.ResponseHeaderSecurityFilter;
 
 public class BasicRequestContextTests extends AbstractRequestContextsTests<BasicRequestContext> {
     private Object[] interceptors;

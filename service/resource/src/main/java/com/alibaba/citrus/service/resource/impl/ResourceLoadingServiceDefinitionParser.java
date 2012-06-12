@@ -25,17 +25,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
+import com.alibaba.citrus.springext.ConfigurationPoint;
+import com.alibaba.citrus.springext.Contribution;
+import com.alibaba.citrus.springext.ContributionAware;
+import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.springext.ConfigurationPoint;
-import com.alibaba.citrus.springext.Contribution;
-import com.alibaba.citrus.springext.ContributionAware;
-import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 
 /**
  * 用来解析resource-loading服务。
@@ -43,7 +41,8 @@ import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
  * @author Michael Zhou
  */
 public class ResourceLoadingServiceDefinitionParser extends
-        AbstractNamedBeanDefinitionParser<ResourceLoadingServiceImpl> implements ContributionAware {
+                                                    AbstractNamedBeanDefinitionParser<ResourceLoadingServiceImpl>
+        implements ContributionAware {
     private ConfigurationPoint loadersConfigurationPoint;
     private ConfigurationPoint filtersConfigurationPoint;
 
@@ -113,7 +112,7 @@ public class ResourceLoadingServiceDefinitionParser extends
 
         for (Element subElement : subElements(element)) {
             loaders.add(parseConfigurationPointBean(subElement, loadersConfigurationPoint, parserContext,
-                    resourceMapping));
+                                                    resourceMapping));
         }
 
         resourceMapping.addPropertyValue("loaders", loaders);
@@ -140,7 +139,7 @@ public class ResourceLoadingServiceDefinitionParser extends
 
         for (Element subElement : subElements(element)) {
             filters.add(parseConfigurationPointBean(subElement, filtersConfigurationPoint, parserContext,
-                    resourceFilterMapping));
+                                                    resourceFilterMapping));
         }
 
         resourceFilterMapping.addPropertyValue("filters", filters);

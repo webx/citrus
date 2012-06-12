@@ -25,7 +25,6 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.Date;
 import java.util.Properties;
-
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -48,73 +47,55 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public class MailTransport extends MailSession {
-    private String transportProtocol;
-    private String popBeforeSmtpId;
+    private String               transportProtocol;
+    private String               popBeforeSmtpId;
     private MailTransportHandler handler;
-    private Transport transport;
+    private Transport            transport;
 
-    /**
-     * 创建一个mail transport。
-     */
+    /** 创建一个mail transport。 */
     public MailTransport() {
     }
 
-    /**
-     * 复制一个mail transport。
-     */
+    /** 复制一个mail transport。 */
     public MailTransport(MailTransport transport, Properties overrideProps) {
         super(transport, overrideProps);
         this.transportProtocol = transport.transportProtocol;
         this.popBeforeSmtpId = transport.popBeforeSmtpId;
     }
 
-    /**
-     * 取得mail transport的协议。
-     */
+    /** 取得mail transport的协议。 */
     public String getProtocol() {
         return defaultIfNull(transportProtocol, DEFAULT_MAIL_TRANSPORT_PROTOCOL);
     }
 
-    /**
-     * 设置mail transport的协议。
-     */
+    /** 设置mail transport的协议。 */
     public void setProtocol(String protocol) {
         this.transportProtocol = trimToNull(protocol);
     }
 
-    /**
-     * 取得pop before smtp的store ID。
-     */
+    /** 取得pop before smtp的store ID。 */
     public String getPopBeforeSmtp() {
         return popBeforeSmtpId;
     }
 
-    /**
-     * 设置pop before smtp的store ID。
-     */
+    /** 设置pop before smtp的store ID。 */
     public void setPopBeforeSmtp(String popBeforeSmtpId) {
         this.popBeforeSmtpId = trimToNull(popBeforeSmtpId);
     }
 
-    /**
-     * 取得session properties。
-     */
+    /** 取得session properties。 */
     @Override
     protected Properties getSessionProperties() {
         setProperty(SMTP_AUTH, String.valueOf(useAuth()), "false");
         return super.getSessionProperties();
     }
 
-    /**
-     * 取得发送e-mail的处理程序。
-     */
+    /** 取得发送e-mail的处理程序。 */
     public MailTransportHandler getHandler() {
         return handler;
     }
 
-    /**
-     * 设置发送e-mail的处理程序。
-     */
+    /** 设置发送e-mail的处理程序。 */
     public void setHandler(MailTransportHandler newHandler) {
         if (this.handler != null && this.transport != null) {
             this.transport.removeTransportListener(this.handler);
@@ -129,17 +110,13 @@ public class MailTransport extends MailSession {
         }
     }
 
-    /**
-     * 判断是否已经连接上。
-     */
+    /** 判断是否已经连接上。 */
     @Override
     public boolean isConnected() {
         return transport != null && transport.isConnected();
     }
 
-    /**
-     * 连接mail服务器。
-     */
+    /** 连接mail服务器。 */
     @Override
     public void connect() throws MailException {
         if (!isConnected()) {
@@ -162,9 +139,7 @@ public class MailTransport extends MailSession {
         }
     }
 
-    /**
-     * 关闭mail服务器的连接。
-     */
+    /** 关闭mail服务器的连接。 */
     @Override
     public void close() throws MailException {
         if (transport != null) {
@@ -178,16 +153,12 @@ public class MailTransport extends MailSession {
         }
     }
 
-    /**
-     * 发送一个email。
-     */
+    /** 发送一个email。 */
     public void send(String mailId) throws MailException {
         send(mailId, null);
     }
 
-    /**
-     * 发送一个email。
-     */
+    /** 发送一个email。 */
     public void send(String mailId, MailTransportHandler handler) throws MailException {
         MailService service = getMailService();
 
@@ -200,16 +171,12 @@ public class MailTransport extends MailSession {
         send(builder, handler);
     }
 
-    /**
-     * 发送一个email。
-     */
+    /** 发送一个email。 */
     public void send(MailBuilder builder) throws MailException {
         send(builder, null);
     }
 
-    /**
-     * 发送一个email。
-     */
+    /** 发送一个email。 */
     public void send(MailBuilder builder, MailTransportHandler handler) throws MailException {
         setHandler(handler);
 
@@ -220,16 +187,12 @@ public class MailTransport extends MailSession {
         send(builder.getMessage(getSession()), getHandler());
     }
 
-    /**
-     * 发送一个email。
-     */
+    /** 发送一个email。 */
     public void send(Message message) throws MailException {
         send(message, null);
     }
 
-    /**
-     * 发送一个email。
-     */
+    /** 发送一个email。 */
     public void send(Message message, MailTransportHandler handler) throws MailException {
         boolean autoClose = false;
 
@@ -265,20 +228,18 @@ public class MailTransport extends MailSession {
         }
     }
 
-    /**
-     * 有一些服务器要求在连smtp之前，到pop3服务器上去验证。
-     */
+    /** 有一些服务器要求在连smtp之前，到pop3服务器上去验证。 */
     private void connectPopBeforeSmtp() throws MailException {
         if (popBeforeSmtpId != null) {
             MailService service = getMailService();
 
             if (service == null) {
                 throw new MailStoreNotFoundException("Could not find mail store \"" + popBeforeSmtpId
-                        + "\": mail service is not set");
+                                                     + "\": mail service is not set");
             }
 
             MailStore popBeforeSmtpStore = assertNotNull(service.getMailStore(popBeforeSmtpId),
-                    "popBeforeSmtpStore: %s", popBeforeSmtpId);
+                                                         "popBeforeSmtpStore: %s", popBeforeSmtpId);
 
             try {
                 popBeforeSmtpStore.connect();

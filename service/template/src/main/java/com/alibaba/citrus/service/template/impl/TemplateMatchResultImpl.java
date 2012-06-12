@@ -20,7 +20,7 @@ package com.alibaba.citrus.service.template.impl;
 import com.alibaba.citrus.service.template.TemplateEngine;
 
 public class TemplateMatchResultImpl implements TemplateMatchResult {
-    private final String templateName;
+    private final String         templateName;
     private final TemplateEngine engine;
 
     public TemplateMatchResultImpl(String templateName, TemplateEngine engine) {

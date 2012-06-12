@@ -259,7 +259,7 @@ public class ArrayUtilTests {
         // keyValue is null
         try {
             ArrayUtil.arrayToMap(new Object[][] { { "RED", 0xFF0000, null }, null, { "BLUE", 0x0000FF } },
-                    String.class, Integer.class, null);
+                                 String.class, Integer.class, null);
             fail();
         } catch (IllegalArgumentException e) {
             assertThat(e, exception("Array element 1 is not an array of 2 elements"));
@@ -268,7 +268,7 @@ public class ArrayUtilTests {
         // keyValue is not object[2]
         try {
             ArrayUtil.arrayToMap(new Object[][] { { "RED", 0xFF0000, null }, { "GREEN", 0x00FF00 }, { "BLUE" } },
-                    String.class, Integer.class, null);
+                                 String.class, Integer.class, null);
             fail();
         } catch (IllegalArgumentException e) {
             assertThat(e, exception("Array element 2 is not an array of 2 elements"));
@@ -533,9 +533,9 @@ public class ArrayUtilTests {
         assertEquals(-1, ArrayUtil.arrayIndexOf(new String[] { "a", "b", "c" }, null));
         assertEquals(0, ArrayUtil.arrayIndexOf(new String[0], new String[0]));
         assertEquals(0,
-                ArrayUtil.arrayIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" }, new String[] { "a" }));
+                     ArrayUtil.arrayIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" }, new String[] { "a" }));
         assertEquals(2,
-                ArrayUtil.arrayIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" }, new String[] { "b" }));
+                     ArrayUtil.arrayIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" }, new String[] { "b" }));
         assertEquals(1, ArrayUtil.arrayIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" }, new String[] {
                 "a", "b" }));
         assertEquals(0, ArrayUtil.arrayIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" }, new String[0]));
@@ -545,19 +545,19 @@ public class ArrayUtilTests {
         assertEquals(-1, ArrayUtil.arrayIndexOf(new String[] { "a", "b", "c" }, null, 0));
         assertEquals(0, ArrayUtil.arrayIndexOf(new String[0], new String[0], 0));
         assertEquals(0, ArrayUtil.arrayIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" },
-                new String[] { "a" }, 0));
+                                               new String[] { "a" }, 0));
         assertEquals(2, ArrayUtil.arrayIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" },
-                new String[] { "b" }, 0));
+                                               new String[] { "b" }, 0));
         assertEquals(1, ArrayUtil.arrayIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" }, new String[] {
                 "a", "b" }, 0));
         assertEquals(5, ArrayUtil.arrayIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" },
-                new String[] { "b" }, 3));
+                                               new String[] { "b" }, 3));
         assertEquals(-1, ArrayUtil.arrayIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" },
-                new String[] { "b" }, 9));
+                                                new String[] { "b" }, 9));
         assertEquals(2, ArrayUtil.arrayIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" },
-                new String[] { "b" }, -1));
+                                               new String[] { "b" }, -1));
         assertEquals(2,
-                ArrayUtil.arrayIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" }, new String[0], 2));
+                     ArrayUtil.arrayIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" }, new String[0], 2));
         assertEquals(3, ArrayUtil.arrayIndexOf(new String[] { "a", "b", "c" }, new String[0], 9));
     }
 
@@ -590,39 +590,39 @@ public class ArrayUtilTests {
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new String[] { "a", "b", "c" }, null));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new String[0], new String[] { "a" }));
         assertEquals(7, ArrayUtil.arrayLastIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" },
-                new String[] { "a" }));
+                                                   new String[] { "a" }));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" },
-                new String[] { "b" }));
+                                                   new String[] { "b" }));
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" }, new String[] { "b",
-                        "a" }));
+                                                                                                                   "a" }));
 
         assertEquals(8,
-                ArrayUtil.arrayLastIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" }, new String[] {}));
+                     ArrayUtil.arrayLastIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" }, new String[] { }));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(null, new String[] { "a" }, 0));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new String[] { "a", "b", "c" }, null, 0));
         assertEquals(7, ArrayUtil.arrayLastIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" },
-                new String[] { "a" }, 8));
+                                                   new String[] { "a" }, 8));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" },
-                new String[] { "b" }, 8));
+                                                   new String[] { "b" }, 8));
         assertEquals(
                 4,
                 ArrayUtil.arrayLastIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" }, new String[] { "a",
-                        "b" }, 8));
+                                                                                                                   "b" }, 8));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" },
-                new String[] { "b" }, 9));
+                                                   new String[] { "b" }, 9));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" },
-                new String[] { "b" }, -1));
+                                                    new String[] { "b" }, -1));
         assertEquals(0, ArrayUtil.arrayLastIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" },
-                new String[] { "a" }, 0));
+                                                   new String[] { "a" }, 0));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" },
-                new String[] { "b" }, 0));
+                                                    new String[] { "b" }, 0));
 
         assertEquals(0,
-                ArrayUtil.arrayLastIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" }, new String[] {}, 0));
+                     ArrayUtil.arrayLastIndexOf(new String[] { "a", "a", "b", "a", "a", "b", "a", "a" }, new String[] { }, 0));
     }
 
     @Test
@@ -719,9 +719,9 @@ public class ArrayUtilTests {
         assertEquals(7, ArrayUtil.arrayLastIndexOf(new long[] { 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L }, new long[] { 1L }));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new long[] { 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L }, new long[] { 2L }));
         assertEquals(5,
-                ArrayUtil.arrayLastIndexOf(new long[] { 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L }, new long[] { 2L, 1L }));
+                     ArrayUtil.arrayLastIndexOf(new long[] { 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L }, new long[] { 2L, 1L }));
 
-        assertEquals(8, ArrayUtil.arrayLastIndexOf(new long[] { 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L }, new long[] {}));
+        assertEquals(8, ArrayUtil.arrayLastIndexOf(new long[] { 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L }, new long[] { }));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayLastIndexOf((long[]) null, new long[] { 1L }, 0));
@@ -729,15 +729,15 @@ public class ArrayUtilTests {
         assertEquals(7, ArrayUtil.arrayLastIndexOf(new long[] { 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L }, new long[] { 1L }, 8));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new long[] { 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L }, new long[] { 2L }, 8));
         assertEquals(4,
-                ArrayUtil.arrayLastIndexOf(new long[] { 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L }, new long[] { 1L, 2L }, 8));
+                     ArrayUtil.arrayLastIndexOf(new long[] { 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L }, new long[] { 1L, 2L }, 8));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new long[] { 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L }, new long[] { 2L }, 9));
         assertEquals(-1,
-                ArrayUtil.arrayLastIndexOf(new long[] { 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L }, new long[] { 2L }, -1));
+                     ArrayUtil.arrayLastIndexOf(new long[] { 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L }, new long[] { 2L }, -1));
         assertEquals(0, ArrayUtil.arrayLastIndexOf(new long[] { 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L }, new long[] { 1L }, 0));
         assertEquals(-1,
-                ArrayUtil.arrayLastIndexOf(new long[] { 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L }, new long[] { 2L }, 0));
+                     ArrayUtil.arrayLastIndexOf(new long[] { 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L }, new long[] { 2L }, 0));
 
-        assertEquals(0, ArrayUtil.arrayLastIndexOf(new long[] { 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L }, new long[] {}, 0));
+        assertEquals(0, ArrayUtil.arrayLastIndexOf(new long[] { 1L, 1L, 2L, 1L, 1L, 2L, 1L, 1L }, new long[] { }, 0));
     }
 
     @Test
@@ -834,7 +834,7 @@ public class ArrayUtilTests {
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new int[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new int[] { 2 }));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new int[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new int[] { 2, 1 }));
 
-        assertEquals(8, ArrayUtil.arrayLastIndexOf(new int[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new int[] {}));
+        assertEquals(8, ArrayUtil.arrayLastIndexOf(new int[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new int[] { }));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayLastIndexOf((int[]) null, new int[] { 1 }, 0));
@@ -847,7 +847,7 @@ public class ArrayUtilTests {
         assertEquals(0, ArrayUtil.arrayLastIndexOf(new int[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new int[] { 1 }, 0));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new int[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new int[] { 2 }, 0));
 
-        assertEquals(0, ArrayUtil.arrayLastIndexOf(new int[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new int[] {}, 0));
+        assertEquals(0, ArrayUtil.arrayLastIndexOf(new int[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new int[] { }, 0));
     }
 
     @Test
@@ -881,11 +881,11 @@ public class ArrayUtilTests {
         assertEquals(
                 0,
                 ArrayUtil.arrayIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1, (short) 2,
-                        (short) 1, (short) 1 }, (short) 1));
+                                                     (short) 1, (short) 1 }, (short) 1));
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1, (short) 2,
-                        (short) 1, (short) 1 }, (short) 2));
+                                                     (short) 1, (short) 1 }, (short) 2));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayIndexOf((short[]) null, (short) 1, 0));
@@ -893,19 +893,19 @@ public class ArrayUtilTests {
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1, (short) 2,
-                        (short) 1, (short) 1 }, (short) 2, 0));
+                                                     (short) 1, (short) 1 }, (short) 2, 0));
         assertEquals(
                 5,
                 ArrayUtil.arrayIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1, (short) 2,
-                        (short) 1, (short) 1 }, (short) 2, 3));
+                                                     (short) 1, (short) 1 }, (short) 2, 3));
         assertEquals(
                 -1,
                 ArrayUtil.arrayIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1, (short) 2,
-                        (short) 1, (short) 1 }, (short) 2, 9));
+                                                     (short) 1, (short) 1 }, (short) 2, 9));
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1, (short) 2,
-                        (short) 1, (short) 1 }, (short) 2, -1));
+                                                     (short) 1, (short) 1 }, (short) 2, -1));
     }
 
     @Test
@@ -917,19 +917,19 @@ public class ArrayUtilTests {
         assertEquals(
                 0,
                 ArrayUtil.arrayIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1, (short) 2,
-                        (short) 1, (short) 1 }, new short[] { (short) 1 }));
+                                                     (short) 1, (short) 1 }, new short[] { (short) 1 }));
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1, (short) 2,
-                        (short) 1, (short) 1 }, new short[] { (short) 2 }));
+                                                     (short) 1, (short) 1 }, new short[] { (short) 2 }));
         assertEquals(
                 1,
                 ArrayUtil.arrayIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1, (short) 2,
-                        (short) 1, (short) 1 }, new short[] { (short) 1, (short) 2 }));
+                                                     (short) 1, (short) 1 }, new short[] { (short) 1, (short) 2 }));
         assertEquals(
                 0,
                 ArrayUtil.arrayIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1, (short) 2,
-                        (short) 1, (short) 1 }, new short[0]));
+                                                     (short) 1, (short) 1 }, new short[0]));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayIndexOf((short[]) null, new short[] { (short) 1 }, 0));
@@ -938,31 +938,31 @@ public class ArrayUtilTests {
         assertEquals(
                 0,
                 ArrayUtil.arrayIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1, (short) 2,
-                        (short) 1, (short) 1 }, new short[] { (short) 1 }, 0));
+                                                     (short) 1, (short) 1 }, new short[] { (short) 1 }, 0));
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1, (short) 2,
-                        (short) 1, (short) 1 }, new short[] { (short) 2 }, 0));
+                                                     (short) 1, (short) 1 }, new short[] { (short) 2 }, 0));
         assertEquals(
                 1,
                 ArrayUtil.arrayIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1, (short) 2,
-                        (short) 1, (short) 1 }, new short[] { (short) 1, (short) 2 }, 0));
+                                                     (short) 1, (short) 1 }, new short[] { (short) 1, (short) 2 }, 0));
         assertEquals(
                 5,
                 ArrayUtil.arrayIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1, (short) 2,
-                        (short) 1, (short) 1 }, new short[] { (short) 2 }, 3));
+                                                     (short) 1, (short) 1 }, new short[] { (short) 2 }, 3));
         assertEquals(
                 -1,
                 ArrayUtil.arrayIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1, (short) 2,
-                        (short) 1, (short) 1 }, new short[] { (short) 2 }, 9));
+                                                     (short) 1, (short) 1 }, new short[] { (short) 2 }, 9));
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1, (short) 2,
-                        (short) 1, (short) 1 }, new short[] { (short) 2 }, -1));
+                                                     (short) 1, (short) 1 }, new short[] { (short) 2 }, -1));
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1, (short) 2,
-                        (short) 1, (short) 1 }, new short[0], 2));
+                                                     (short) 1, (short) 1 }, new short[0], 2));
         assertEquals(3, ArrayUtil.arrayIndexOf(new short[] { (short) 1, (short) 2, (short) 3 }, new short[0], 9));
     }
 
@@ -974,11 +974,11 @@ public class ArrayUtilTests {
         assertEquals(
                 7,
                 ArrayUtil.arrayLastIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1,
-                        (short) 2, (short) 1, (short) 1 }, (short) 1));
+                                                         (short) 2, (short) 1, (short) 1 }, (short) 1));
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1,
-                        (short) 2, (short) 1, (short) 1 }, (short) 2));
+                                                         (short) 2, (short) 1, (short) 1 }, (short) 2));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayLastIndexOf((short[]) null, (short) 1, 0));
@@ -986,27 +986,27 @@ public class ArrayUtilTests {
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1,
-                        (short) 2, (short) 1, (short) 1 }, (short) 2, 8));
+                                                         (short) 2, (short) 1, (short) 1 }, (short) 2, 8));
         assertEquals(
                 2,
                 ArrayUtil.arrayLastIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1,
-                        (short) 2, (short) 1, (short) 1 }, (short) 2, 4));
+                                                         (short) 2, (short) 1, (short) 1 }, (short) 2, 4));
         assertEquals(
                 -1,
                 ArrayUtil.arrayLastIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1,
-                        (short) 2, (short) 1, (short) 1 }, (short) 2, 0));
+                                                         (short) 2, (short) 1, (short) 1 }, (short) 2, 0));
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1,
-                        (short) 2, (short) 1, (short) 1 }, (short) 2, 9));
+                                                         (short) 2, (short) 1, (short) 1 }, (short) 2, 9));
         assertEquals(
                 -1,
                 ArrayUtil.arrayLastIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1,
-                        (short) 2, (short) 1, (short) 1 }, (short) 2, -1));
+                                                         (short) 2, (short) 1, (short) 1 }, (short) 2, -1));
         assertEquals(
                 0,
                 ArrayUtil.arrayLastIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1,
-                        (short) 2, (short) 1, (short) 1 }, (short) 1, 0));
+                                                         (short) 2, (short) 1, (short) 1 }, (short) 1, 0));
     }
 
     @Test
@@ -1018,20 +1018,20 @@ public class ArrayUtilTests {
         assertEquals(
                 7,
                 ArrayUtil.arrayLastIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1,
-                        (short) 2, (short) 1, (short) 1 }, new short[] { (short) 1 }));
+                                                         (short) 2, (short) 1, (short) 1 }, new short[] { (short) 1 }));
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1,
-                        (short) 2, (short) 1, (short) 1 }, new short[] { (short) 2 }));
+                                                         (short) 2, (short) 1, (short) 1 }, new short[] { (short) 2 }));
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1,
-                        (short) 2, (short) 1, (short) 1 }, new short[] { (short) 2, (short) 1 }));
+                                                         (short) 2, (short) 1, (short) 1 }, new short[] { (short) 2, (short) 1 }));
 
         assertEquals(
                 8,
                 ArrayUtil.arrayLastIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1,
-                        (short) 2, (short) 1, (short) 1 }, new short[] {}));
+                                                         (short) 2, (short) 1, (short) 1 }, new short[] { }));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayLastIndexOf((short[]) null, new short[] { (short) 1 }, 0));
@@ -1039,36 +1039,36 @@ public class ArrayUtilTests {
         assertEquals(
                 7,
                 ArrayUtil.arrayLastIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1,
-                        (short) 2, (short) 1, (short) 1 }, new short[] { (short) 1 }, 8));
+                                                         (short) 2, (short) 1, (short) 1 }, new short[] { (short) 1 }, 8));
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1,
-                        (short) 2, (short) 1, (short) 1 }, new short[] { (short) 2 }, 8));
+                                                         (short) 2, (short) 1, (short) 1 }, new short[] { (short) 2 }, 8));
         assertEquals(
                 4,
                 ArrayUtil.arrayLastIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1,
-                        (short) 2, (short) 1, (short) 1 }, new short[] { (short) 1, (short) 2 }, 8));
+                                                         (short) 2, (short) 1, (short) 1 }, new short[] { (short) 1, (short) 2 }, 8));
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1,
-                        (short) 2, (short) 1, (short) 1 }, new short[] { (short) 2 }, 9));
+                                                         (short) 2, (short) 1, (short) 1 }, new short[] { (short) 2 }, 9));
         assertEquals(
                 -1,
                 ArrayUtil.arrayLastIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1,
-                        (short) 2, (short) 1, (short) 1 }, new short[] { (short) 2 }, -1));
+                                                         (short) 2, (short) 1, (short) 1 }, new short[] { (short) 2 }, -1));
         assertEquals(
                 0,
                 ArrayUtil.arrayLastIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1,
-                        (short) 2, (short) 1, (short) 1 }, new short[] { (short) 1 }, 0));
+                                                         (short) 2, (short) 1, (short) 1 }, new short[] { (short) 1 }, 0));
         assertEquals(
                 -1,
                 ArrayUtil.arrayLastIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1,
-                        (short) 2, (short) 1, (short) 1 }, new short[] { (short) 2 }, 0));
+                                                         (short) 2, (short) 1, (short) 1 }, new short[] { (short) 2 }, 0));
 
         assertEquals(
                 0,
                 ArrayUtil.arrayLastIndexOf(new short[] { (short) 1, (short) 1, (short) 2, (short) 1, (short) 1,
-                        (short) 2, (short) 1, (short) 1 }, new short[] {}, 0));
+                                                         (short) 2, (short) 1, (short) 1 }, new short[] { }, 0));
     }
 
     @Test
@@ -1087,7 +1087,7 @@ public class ArrayUtilTests {
         assertTrue(ArrayUtil.arrayContains(new short[] { (short) 1, (short) 2, (short) 3 }, new short[0]));
         assertTrue(ArrayUtil.arrayContains(new short[] { (short) 1, (short) 2, (short) 3 }, new short[] { (short) 1 }));
         assertFalse(ArrayUtil
-                .arrayContains(new short[] { (short) 1, (short) 2, (short) 3 }, new short[] { (short) 26 }));
+                            .arrayContains(new short[] { (short) 1, (short) 2, (short) 3 }, new short[] { (short) 26 }));
     }
 
     // ==========================================================================
@@ -1103,11 +1103,11 @@ public class ArrayUtilTests {
         assertEquals(
                 0,
                 ArrayUtil.arrayIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, (byte) 1));
+                                                    (byte) 1, (byte) 1 }, (byte) 1));
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, (byte) 2));
+                                                    (byte) 1, (byte) 1 }, (byte) 2));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayIndexOf((byte[]) null, (byte) 1, 0));
@@ -1115,19 +1115,19 @@ public class ArrayUtilTests {
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, (byte) 2, 0));
+                                                    (byte) 1, (byte) 1 }, (byte) 2, 0));
         assertEquals(
                 5,
                 ArrayUtil.arrayIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, (byte) 2, 3));
+                                                    (byte) 1, (byte) 1 }, (byte) 2, 3));
         assertEquals(
                 -1,
                 ArrayUtil.arrayIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, (byte) 2, 9));
+                                                    (byte) 1, (byte) 1 }, (byte) 2, 9));
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, (byte) 2, -1));
+                                                    (byte) 1, (byte) 1 }, (byte) 2, -1));
     }
 
     @Test
@@ -1139,19 +1139,19 @@ public class ArrayUtilTests {
         assertEquals(
                 0,
                 ArrayUtil.arrayIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] { (byte) 1 }));
+                                                    (byte) 1, (byte) 1 }, new byte[] { (byte) 1 }));
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] { (byte) 2 }));
+                                                    (byte) 1, (byte) 1 }, new byte[] { (byte) 2 }));
         assertEquals(
                 1,
                 ArrayUtil.arrayIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] { (byte) 1, (byte) 2 }));
+                                                    (byte) 1, (byte) 1 }, new byte[] { (byte) 1, (byte) 2 }));
         assertEquals(
                 0,
                 ArrayUtil.arrayIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[0]));
+                                                    (byte) 1, (byte) 1 }, new byte[0]));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayIndexOf((byte[]) null, new byte[] { (byte) 1 }, 0));
@@ -1160,31 +1160,31 @@ public class ArrayUtilTests {
         assertEquals(
                 0,
                 ArrayUtil.arrayIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] { (byte) 1 }, 0));
+                                                    (byte) 1, (byte) 1 }, new byte[] { (byte) 1 }, 0));
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] { (byte) 2 }, 0));
+                                                    (byte) 1, (byte) 1 }, new byte[] { (byte) 2 }, 0));
         assertEquals(
                 1,
                 ArrayUtil.arrayIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] { (byte) 1, (byte) 2 }, 0));
+                                                    (byte) 1, (byte) 1 }, new byte[] { (byte) 1, (byte) 2 }, 0));
         assertEquals(
                 5,
                 ArrayUtil.arrayIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] { (byte) 2 }, 3));
+                                                    (byte) 1, (byte) 1 }, new byte[] { (byte) 2 }, 3));
         assertEquals(
                 -1,
                 ArrayUtil.arrayIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] { (byte) 2 }, 9));
+                                                    (byte) 1, (byte) 1 }, new byte[] { (byte) 2 }, 9));
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] { (byte) 2 }, -1));
+                                                    (byte) 1, (byte) 1 }, new byte[] { (byte) 2 }, -1));
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[0], 2));
+                                                    (byte) 1, (byte) 1 }, new byte[0], 2));
         assertEquals(3, ArrayUtil.arrayIndexOf(new byte[] { (byte) 1, (byte) 2, (byte) 3 }, new byte[0], 9));
     }
 
@@ -1196,11 +1196,11 @@ public class ArrayUtilTests {
         assertEquals(
                 7,
                 ArrayUtil.arrayLastIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, (byte) 1));
+                                                        (byte) 1, (byte) 1 }, (byte) 1));
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, (byte) 2));
+                                                        (byte) 1, (byte) 1 }, (byte) 2));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayLastIndexOf((byte[]) null, (byte) 1, 0));
@@ -1208,27 +1208,27 @@ public class ArrayUtilTests {
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, (byte) 2, 8));
+                                                        (byte) 1, (byte) 1 }, (byte) 2, 8));
         assertEquals(
                 2,
                 ArrayUtil.arrayLastIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, (byte) 2, 4));
+                                                        (byte) 1, (byte) 1 }, (byte) 2, 4));
         assertEquals(
                 -1,
                 ArrayUtil.arrayLastIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, (byte) 2, 0));
+                                                        (byte) 1, (byte) 1 }, (byte) 2, 0));
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, (byte) 2, 9));
+                                                        (byte) 1, (byte) 1 }, (byte) 2, 9));
         assertEquals(
                 -1,
                 ArrayUtil.arrayLastIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, (byte) 2, -1));
+                                                        (byte) 1, (byte) 1 }, (byte) 2, -1));
         assertEquals(
                 0,
                 ArrayUtil.arrayLastIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, (byte) 1, 0));
+                                                        (byte) 1, (byte) 1 }, (byte) 1, 0));
     }
 
     @Test
@@ -1240,20 +1240,20 @@ public class ArrayUtilTests {
         assertEquals(
                 7,
                 ArrayUtil.arrayLastIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] { (byte) 1 }));
+                                                        (byte) 1, (byte) 1 }, new byte[] { (byte) 1 }));
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] { (byte) 2 }));
+                                                        (byte) 1, (byte) 1 }, new byte[] { (byte) 2 }));
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] { (byte) 2, (byte) 1 }));
+                                                        (byte) 1, (byte) 1 }, new byte[] { (byte) 2, (byte) 1 }));
 
         assertEquals(
                 8,
                 ArrayUtil.arrayLastIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] {}));
+                                                        (byte) 1, (byte) 1 }, new byte[] { }));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayLastIndexOf((byte[]) null, new byte[] { (byte) 1 }, 0));
@@ -1261,36 +1261,36 @@ public class ArrayUtilTests {
         assertEquals(
                 7,
                 ArrayUtil.arrayLastIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] { (byte) 1 }, 8));
+                                                        (byte) 1, (byte) 1 }, new byte[] { (byte) 1 }, 8));
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] { (byte) 2 }, 8));
+                                                        (byte) 1, (byte) 1 }, new byte[] { (byte) 2 }, 8));
         assertEquals(
                 4,
                 ArrayUtil.arrayLastIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] { (byte) 1, (byte) 2 }, 8));
+                                                        (byte) 1, (byte) 1 }, new byte[] { (byte) 1, (byte) 2 }, 8));
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] { (byte) 2 }, 9));
+                                                        (byte) 1, (byte) 1 }, new byte[] { (byte) 2 }, 9));
         assertEquals(
                 -1,
                 ArrayUtil.arrayLastIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] { (byte) 2 }, -1));
+                                                        (byte) 1, (byte) 1 }, new byte[] { (byte) 2 }, -1));
         assertEquals(
                 0,
                 ArrayUtil.arrayLastIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] { (byte) 1 }, 0));
+                                                        (byte) 1, (byte) 1 }, new byte[] { (byte) 1 }, 0));
         assertEquals(
                 -1,
                 ArrayUtil.arrayLastIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] { (byte) 2 }, 0));
+                                                        (byte) 1, (byte) 1 }, new byte[] { (byte) 2 }, 0));
 
         assertEquals(
                 0,
                 ArrayUtil.arrayLastIndexOf(new byte[] { (byte) 1, (byte) 1, (byte) 2, (byte) 1, (byte) 1, (byte) 2,
-                        (byte) 1, (byte) 1 }, new byte[] {}, 0));
+                                                        (byte) 1, (byte) 1 }, new byte[] { }, 0));
     }
 
     @Test
@@ -1382,32 +1382,32 @@ public class ArrayUtilTests {
         assertEquals(-1, ArrayUtil.arrayIndexOf(new double[] { 1.1, 2.1, 3.1 }, null, 0.2));
         assertEquals(0, ArrayUtil.arrayIndexOf(new double[0], new double[0], 0.2));
         assertEquals(0, ArrayUtil.arrayIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 },
-                new double[] { 1 }, 0.2));
+                                               new double[] { 1 }, 0.2));
         assertEquals(2, ArrayUtil.arrayIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 },
-                new double[] { 2 }, 0.2));
+                                               new double[] { 2 }, 0.2));
         assertEquals(1, ArrayUtil.arrayIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 }, new double[] {
                 1, 2 }, 0.2));
         assertEquals(0,
-                ArrayUtil.arrayIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 }, new double[0], 0.2));
+                     ArrayUtil.arrayIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 }, new double[0], 0.2));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayIndexOf((double[]) null, new double[] { 1 }, 0, 0.2));
         assertEquals(-1, ArrayUtil.arrayIndexOf(new double[] { 1, 2, 3 }, null, 0, 0.2));
         assertEquals(0, ArrayUtil.arrayIndexOf(new double[0], new double[0], 0, 0.2));
         assertEquals(0, ArrayUtil.arrayIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 },
-                new double[] { 1 }, 0, 0.2));
+                                               new double[] { 1 }, 0, 0.2));
         assertEquals(2, ArrayUtil.arrayIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 },
-                new double[] { 2 }, 0, 0.2));
+                                               new double[] { 2 }, 0, 0.2));
         assertEquals(1, ArrayUtil.arrayIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 }, new double[] {
                 1, 2 }, 0, 0.2));
         assertEquals(5, ArrayUtil.arrayIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 },
-                new double[] { 2 }, 3, 0.2));
+                                               new double[] { 2 }, 3, 0.2));
         assertEquals(-1, ArrayUtil.arrayIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 },
-                new double[] { 2 }, 9, 0.2));
+                                                new double[] { 2 }, 9, 0.2));
         assertEquals(2, ArrayUtil.arrayIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 },
-                new double[] { 2 }, -1, 0.2));
+                                               new double[] { 2 }, -1, 0.2));
         assertEquals(2,
-                ArrayUtil.arrayIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 }, new double[0], 2, 0.2));
+                     ArrayUtil.arrayIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 }, new double[0], 2, 0.2));
         assertEquals(3, ArrayUtil.arrayIndexOf(new double[] { 1.1, 2.1, 3.1 }, new double[0], 9, 0.2));
     }
 
@@ -1446,7 +1446,7 @@ public class ArrayUtilTests {
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 }, 2, 0, 0.2));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 }, 2, 9, 0.2));
         assertEquals(-1,
-                ArrayUtil.arrayLastIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 }, 2, -1, 0.2));
+                     ArrayUtil.arrayLastIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 }, 2, -1, 0.2));
         assertEquals(0, ArrayUtil.arrayLastIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 }, 1, 0, 0.2));
     }
 
@@ -1460,7 +1460,7 @@ public class ArrayUtilTests {
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new double[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new double[] { 2 }));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new double[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new double[] { 2, 1 }));
 
-        assertEquals(8, ArrayUtil.arrayLastIndexOf(new double[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new double[] {}));
+        assertEquals(8, ArrayUtil.arrayLastIndexOf(new double[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new double[] { }));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayLastIndexOf((double[]) null, new double[] { 1 }, 0));
@@ -1473,7 +1473,7 @@ public class ArrayUtilTests {
         assertEquals(0, ArrayUtil.arrayLastIndexOf(new double[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new double[] { 1 }, 0));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new double[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new double[] { 2 }, 0));
 
-        assertEquals(0, ArrayUtil.arrayLastIndexOf(new double[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new double[] {}, 0));
+        assertEquals(0, ArrayUtil.arrayLastIndexOf(new double[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new double[] { }, 0));
     }
 
     @Test
@@ -1483,35 +1483,35 @@ public class ArrayUtilTests {
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new double[] { 1.1, 2.1, 3.1 }, null, 0.2));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new double[0], new double[] { 1 }, 0.2));
         assertEquals(7, ArrayUtil.arrayLastIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 },
-                new double[] { 1 }, 0.2));
+                                                   new double[] { 1 }, 0.2));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 },
-                new double[] { 2 }, 0.2));
+                                                   new double[] { 2 }, 0.2));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 },
-                new double[] { 2, 1 }, 0.2));
+                                                   new double[] { 2, 1 }, 0.2));
 
         assertEquals(8, ArrayUtil.arrayLastIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 },
-                new double[] {}, 0.2));
+                                                   new double[] { }, 0.2));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayLastIndexOf((double[]) null, new double[] { 1 }, 0, 0.2));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new double[] { 1.1, 2.1, 3.1 }, null, 0, 0.2));
         assertEquals(7, ArrayUtil.arrayLastIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 },
-                new double[] { 1 }, 8, 0.2));
+                                                   new double[] { 1 }, 8, 0.2));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 },
-                new double[] { 2 }, 8, 0.2));
+                                                   new double[] { 2 }, 8, 0.2));
         assertEquals(4, ArrayUtil.arrayLastIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 },
-                new double[] { 1, 2 }, 8, 0.2));
+                                                   new double[] { 1, 2 }, 8, 0.2));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 },
-                new double[] { 2 }, 9, 0.2));
+                                                   new double[] { 2 }, 9, 0.2));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 },
-                new double[] { 2 }, -1, 0.2));
+                                                    new double[] { 2 }, -1, 0.2));
         assertEquals(0, ArrayUtil.arrayLastIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 },
-                new double[] { 1 }, 0, 0.2));
+                                                   new double[] { 1 }, 0, 0.2));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 },
-                new double[] { 2 }, 0, 0.2));
+                                                    new double[] { 2 }, 0, 0.2));
 
         assertEquals(0, ArrayUtil.arrayLastIndexOf(new double[] { 1.1, 1.1, 2.1, 1.1, 1.1, 2.1, 1.1, 1.1 },
-                new double[] {}, 0, 0.2));
+                                                   new double[] { }, 0, 0.2));
     }
 
     @Test
@@ -1584,13 +1584,13 @@ public class ArrayUtilTests {
         assertEquals(-1, ArrayUtil.arrayIndexOf((float[]) null, 1, 0, 0.2F));
         assertEquals(-1, ArrayUtil.arrayIndexOf(new float[0], 1, 0, 0.2F));
         assertEquals(2,
-                ArrayUtil.arrayIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 2, 0, 0.2F));
+                     ArrayUtil.arrayIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 2, 0, 0.2F));
         assertEquals(5,
-                ArrayUtil.arrayIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 2, 3, 0.2F));
+                     ArrayUtil.arrayIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 2, 3, 0.2F));
         assertEquals(-1,
-                ArrayUtil.arrayIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 2, 9, 0.2F));
+                     ArrayUtil.arrayIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 2, 9, 0.2F));
         assertEquals(2,
-                ArrayUtil.arrayIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 2, -1, 0.2F));
+                     ArrayUtil.arrayIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 2, -1, 0.2F));
     }
 
     @Test
@@ -1625,36 +1625,36 @@ public class ArrayUtilTests {
         assertEquals(-1, ArrayUtil.arrayIndexOf(new float[] { 1.1F, 2.1F, 3.1F }, null, 0.2F));
         assertEquals(0, ArrayUtil.arrayIndexOf(new float[0], new float[0], 0.2F));
         assertEquals(0, ArrayUtil.arrayIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F },
-                new float[] { 1 }, 0.2F));
+                                               new float[] { 1 }, 0.2F));
         assertEquals(2, ArrayUtil.arrayIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F },
-                new float[] { 2 }, 0.2F));
+                                               new float[] { 2 }, 0.2F));
         assertEquals(
                 1,
                 ArrayUtil.arrayIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, new float[] { 1,
-                        2 }, 0.2F));
+                                                                                                                     2 }, 0.2F));
         assertEquals(0, ArrayUtil.arrayIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F },
-                new float[0], 0.2F));
+                                               new float[0], 0.2F));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayIndexOf((float[]) null, new float[] { 1 }, 0, 0.2F));
         assertEquals(-1, ArrayUtil.arrayIndexOf(new float[] { 1.1F, 2.1F, 3.1F }, null, 0, 0.2F));
         assertEquals(0, ArrayUtil.arrayIndexOf(new float[0], new float[0], 0, 0.2F));
         assertEquals(0, ArrayUtil.arrayIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F },
-                new float[] { 1 }, 0, 0.2F));
+                                               new float[] { 1 }, 0, 0.2F));
         assertEquals(2, ArrayUtil.arrayIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F },
-                new float[] { 2 }, 0, 0.2F));
+                                               new float[] { 2 }, 0, 0.2F));
         assertEquals(
                 1,
                 ArrayUtil.arrayIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, new float[] { 1,
-                        2 }, 0, 0.2F));
+                                                                                                                     2 }, 0, 0.2F));
         assertEquals(5, ArrayUtil.arrayIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F },
-                new float[] { 2 }, 3, 0.2F));
+                                               new float[] { 2 }, 3, 0.2F));
         assertEquals(-1, ArrayUtil.arrayIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F },
-                new float[] { 2 }, 9, 0.2F));
+                                                new float[] { 2 }, 9, 0.2F));
         assertEquals(2, ArrayUtil.arrayIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F },
-                new float[] { 2 }, -1, 0.2F));
+                                               new float[] { 2 }, -1, 0.2F));
         assertEquals(2, ArrayUtil.arrayIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F },
-                new float[0], 2, 0.2F));
+                                               new float[0], 2, 0.2F));
         assertEquals(3, ArrayUtil.arrayIndexOf(new float[] { 1.1F, 2.1F, 3.1F }, new float[0], 9, 0.2F));
     }
 
@@ -1683,25 +1683,25 @@ public class ArrayUtilTests {
         assertEquals(-1, ArrayUtil.arrayLastIndexOf((float[]) null, 1, 0.2F));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new float[0], 1, 0.2F));
         assertEquals(7,
-                ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 1, 0.2F));
+                     ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 1, 0.2F));
         assertEquals(5,
-                ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 2, 0.2F));
+                     ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 2, 0.2F));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayLastIndexOf((float[]) null, 1, 0, 0.2F));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new float[0], 1, 0, 0.2F));
         assertEquals(5,
-                ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 2, 8, 0.2F));
+                     ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 2, 8, 0.2F));
         assertEquals(2,
-                ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 2, 4, 0.2F));
+                     ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 2, 4, 0.2F));
         assertEquals(-1,
-                ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 2, 0, 0.2F));
+                     ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 2, 0, 0.2F));
         assertEquals(5,
-                ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 2, 9, 0.2F));
+                     ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 2, 9, 0.2F));
         assertEquals(-1,
-                ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 2, -1, 0.2F));
+                     ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 2, -1, 0.2F));
         assertEquals(0,
-                ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 1, 0, 0.2F));
+                     ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, 1, 0, 0.2F));
     }
 
     @Test
@@ -1714,7 +1714,7 @@ public class ArrayUtilTests {
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new float[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new float[] { 2 }));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new float[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new float[] { 2, 1 }));
 
-        assertEquals(8, ArrayUtil.arrayLastIndexOf(new float[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new float[] {}));
+        assertEquals(8, ArrayUtil.arrayLastIndexOf(new float[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new float[] { }));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayLastIndexOf((float[]) null, new float[] { 1 }, 0));
@@ -1727,7 +1727,7 @@ public class ArrayUtilTests {
         assertEquals(0, ArrayUtil.arrayLastIndexOf(new float[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new float[] { 1 }, 0));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new float[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new float[] { 2 }, 0));
 
-        assertEquals(0, ArrayUtil.arrayLastIndexOf(new float[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new float[] {}, 0));
+        assertEquals(0, ArrayUtil.arrayLastIndexOf(new float[] { 1, 1, 2, 1, 1, 2, 1, 1 }, new float[] { }, 0));
     }
 
     @Test
@@ -1737,39 +1737,39 @@ public class ArrayUtilTests {
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 2.1F, 3.1F }, null, 0.2F));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new float[0], new float[] { 1 }, 0.2F));
         assertEquals(7, ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F },
-                new float[] { 1 }, 0.2F));
+                                                   new float[] { 1 }, 0.2F));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F },
-                new float[] { 2 }, 0.2F));
+                                                   new float[] { 2 }, 0.2F));
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, new float[] {
                         2, 1 }, 0.2F));
 
         assertEquals(8, ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F },
-                new float[] {}, 0.2F));
+                                                   new float[] { }, 0.2F));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayLastIndexOf((float[]) null, new float[] { 1 }, 0, 0.2F));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 2.1F, 3.1F }, null, 0, 0.2F));
         assertEquals(7, ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F },
-                new float[] { 1 }, 8, 0.2F));
+                                                   new float[] { 1 }, 8, 0.2F));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F },
-                new float[] { 2 }, 8, 0.2F));
+                                                   new float[] { 2 }, 8, 0.2F));
         assertEquals(
                 4,
                 ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F }, new float[] {
                         1, 2 }, 8, 0.2F));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F },
-                new float[] { 2 }, 9, 0.2F));
+                                                   new float[] { 2 }, 9, 0.2F));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F },
-                new float[] { 2 }, -1, 0.2F));
+                                                    new float[] { 2 }, -1, 0.2F));
         assertEquals(0, ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F },
-                new float[] { 1 }, 0, 0.2F));
+                                                   new float[] { 1 }, 0, 0.2F));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F },
-                new float[] { 2 }, 0, 0.2F));
+                                                    new float[] { 2 }, 0, 0.2F));
 
         assertEquals(0, ArrayUtil.arrayLastIndexOf(new float[] { 1.1F, 1.1F, 2.1F, 1.1F, 1.1F, 2.1F, 1.1F, 1.1F },
-                new float[] {}, 0, 0.2F));
+                                                   new float[] { }, 0, 0.2F));
     }
 
     @Test
@@ -1819,21 +1819,21 @@ public class ArrayUtilTests {
         assertEquals(-1, ArrayUtil.arrayIndexOf((boolean[]) null, true));
         assertEquals(-1, ArrayUtil.arrayIndexOf(new boolean[0], true));
         assertEquals(0,
-                ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true }, true));
+                     ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true }, true));
         assertEquals(2,
-                ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true }, false));
+                     ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true }, false));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayIndexOf((boolean[]) null, true, 0));
         assertEquals(-1, ArrayUtil.arrayIndexOf(new boolean[0], true, 0));
         assertEquals(2,
-                ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true }, false, 0));
+                     ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true }, false, 0));
         assertEquals(5,
-                ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true }, false, 3));
+                     ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true }, false, 3));
         assertEquals(-1,
-                ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true }, false, 9));
+                     ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true }, false, 9));
         assertEquals(2,
-                ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true }, false, -1));
+                     ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true }, false, -1));
     }
 
     @Test
@@ -1843,32 +1843,32 @@ public class ArrayUtilTests {
         assertEquals(-1, ArrayUtil.arrayIndexOf(new boolean[] { true, true, true }, null));
         assertEquals(0, ArrayUtil.arrayIndexOf(new boolean[0], new boolean[0]));
         assertEquals(0, ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] { true }));
+                                               new boolean[] { true }));
         assertEquals(2, ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] { false }));
+                                               new boolean[] { false }));
         assertEquals(1, ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] { true, false }));
+                                               new boolean[] { true, false }));
         assertEquals(0, ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[0]));
+                                               new boolean[0]));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayIndexOf((boolean[]) null, new boolean[] { true }, 0));
         assertEquals(-1, ArrayUtil.arrayIndexOf(new boolean[] { true, true, true }, null, 0));
         assertEquals(0, ArrayUtil.arrayIndexOf(new boolean[0], new boolean[0], 0));
         assertEquals(0, ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] { true }, 0));
+                                               new boolean[] { true }, 0));
         assertEquals(2, ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] { false }, 0));
+                                               new boolean[] { false }, 0));
         assertEquals(1, ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] { true, false }, 0));
+                                               new boolean[] { true, false }, 0));
         assertEquals(5, ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] { false }, 3));
+                                               new boolean[] { false }, 3));
         assertEquals(-1, ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] { false }, 9));
+                                                new boolean[] { false }, 9));
         assertEquals(2, ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] { false }, -1));
+                                               new boolean[] { false }, -1));
         assertEquals(2, ArrayUtil.arrayIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[0], 2));
+                                               new boolean[0], 2));
         assertEquals(3, ArrayUtil.arrayIndexOf(new boolean[] { true, true, true }, new boolean[0], 9));
     }
 
@@ -1878,25 +1878,25 @@ public class ArrayUtilTests {
         assertEquals(-1, ArrayUtil.arrayLastIndexOf((boolean[]) null, true));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new boolean[0], true));
         assertEquals(7,
-                ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true }, true));
+                     ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true }, true));
         assertEquals(5,
-                ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true }, false));
+                     ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true }, false));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayLastIndexOf((boolean[]) null, true, 0));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new boolean[0], true, 0));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                false, 8));
+                                                   false, 8));
         assertEquals(2, ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                false, 4));
+                                                   false, 4));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                false, 0));
+                                                    false, 0));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                false, 9));
+                                                   false, 9));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                false, -1));
+                                                    false, -1));
         assertEquals(0,
-                ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true }, true, 0));
+                     ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true }, true, 0));
     }
 
     @Test
@@ -1906,35 +1906,35 @@ public class ArrayUtilTests {
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, true }, null));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new boolean[0], new boolean[] { true }));
         assertEquals(7, ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] { true }));
+                                                   new boolean[] { true }));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] { false }));
+                                                   new boolean[] { false }));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] { false, true }));
+                                                   new boolean[] { false, true }));
 
         assertEquals(8, ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] {}));
+                                                   new boolean[] { }));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayLastIndexOf((boolean[]) null, new boolean[] { true }, 0));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, true }, null, 0));
         assertEquals(7, ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] { true }, 8));
+                                                   new boolean[] { true }, 8));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] { false }, 8));
+                                                   new boolean[] { false }, 8));
         assertEquals(4, ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] { true, false }, 8));
+                                                   new boolean[] { true, false }, 8));
         assertEquals(5, ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] { false }, 9));
+                                                   new boolean[] { false }, 9));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] { false }, -1));
+                                                    new boolean[] { false }, -1));
         assertEquals(0, ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] { true }, 0));
+                                                   new boolean[] { true }, 0));
         assertEquals(-1, ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] { false }, 0));
+                                                    new boolean[] { false }, 0));
 
         assertEquals(0, ArrayUtil.arrayLastIndexOf(new boolean[] { true, true, false, true, true, false, true, true },
-                new boolean[] {}, 0));
+                                                   new boolean[] { }, 0));
     }
 
     @Test
@@ -1968,11 +1968,11 @@ public class ArrayUtilTests {
         assertEquals(
                 0,
                 ArrayUtil.arrayIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, (char) 1));
+                                                    (char) 1, (char) 1 }, (char) 1));
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, (char) 2));
+                                                    (char) 1, (char) 1 }, (char) 2));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayIndexOf((char[]) null, (char) 1, 0));
@@ -1980,19 +1980,19 @@ public class ArrayUtilTests {
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, (char) 2, 0));
+                                                    (char) 1, (char) 1 }, (char) 2, 0));
         assertEquals(
                 5,
                 ArrayUtil.arrayIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, (char) 2, 3));
+                                                    (char) 1, (char) 1 }, (char) 2, 3));
         assertEquals(
                 -1,
                 ArrayUtil.arrayIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, (char) 2, 9));
+                                                    (char) 1, (char) 1 }, (char) 2, 9));
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, (char) 2, -1));
+                                                    (char) 1, (char) 1 }, (char) 2, -1));
     }
 
     @Test
@@ -2004,19 +2004,19 @@ public class ArrayUtilTests {
         assertEquals(
                 0,
                 ArrayUtil.arrayIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] { (char) 1 }));
+                                                    (char) 1, (char) 1 }, new char[] { (char) 1 }));
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] { (char) 2 }));
+                                                    (char) 1, (char) 1 }, new char[] { (char) 2 }));
         assertEquals(
                 1,
                 ArrayUtil.arrayIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] { (char) 1, (char) 2 }));
+                                                    (char) 1, (char) 1 }, new char[] { (char) 1, (char) 2 }));
         assertEquals(
                 0,
                 ArrayUtil.arrayIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[0]));
+                                                    (char) 1, (char) 1 }, new char[0]));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayIndexOf((char[]) null, new char[] { (char) 1 }, 0));
@@ -2025,31 +2025,31 @@ public class ArrayUtilTests {
         assertEquals(
                 0,
                 ArrayUtil.arrayIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] { (char) 1 }, 0));
+                                                    (char) 1, (char) 1 }, new char[] { (char) 1 }, 0));
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] { (char) 2 }, 0));
+                                                    (char) 1, (char) 1 }, new char[] { (char) 2 }, 0));
         assertEquals(
                 1,
                 ArrayUtil.arrayIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] { (char) 1, (char) 2 }, 0));
+                                                    (char) 1, (char) 1 }, new char[] { (char) 1, (char) 2 }, 0));
         assertEquals(
                 5,
                 ArrayUtil.arrayIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] { (char) 2 }, 3));
+                                                    (char) 1, (char) 1 }, new char[] { (char) 2 }, 3));
         assertEquals(
                 -1,
                 ArrayUtil.arrayIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] { (char) 2 }, 9));
+                                                    (char) 1, (char) 1 }, new char[] { (char) 2 }, 9));
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] { (char) 2 }, -1));
+                                                    (char) 1, (char) 1 }, new char[] { (char) 2 }, -1));
         assertEquals(
                 2,
                 ArrayUtil.arrayIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[0], 2));
+                                                    (char) 1, (char) 1 }, new char[0], 2));
         assertEquals(3, ArrayUtil.arrayIndexOf(new char[] { (char) 1, (char) 2, (char) 3 }, new char[0], 9));
     }
 
@@ -2061,11 +2061,11 @@ public class ArrayUtilTests {
         assertEquals(
                 7,
                 ArrayUtil.arrayLastIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, (char) 1));
+                                                        (char) 1, (char) 1 }, (char) 1));
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, (char) 2));
+                                                        (char) 1, (char) 1 }, (char) 2));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayLastIndexOf((char[]) null, (char) 1, 0));
@@ -2073,27 +2073,27 @@ public class ArrayUtilTests {
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, (char) 2, 8));
+                                                        (char) 1, (char) 1 }, (char) 2, 8));
         assertEquals(
                 2,
                 ArrayUtil.arrayLastIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, (char) 2, 4));
+                                                        (char) 1, (char) 1 }, (char) 2, 4));
         assertEquals(
                 -1,
                 ArrayUtil.arrayLastIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, (char) 2, 0));
+                                                        (char) 1, (char) 1 }, (char) 2, 0));
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, (char) 2, 9));
+                                                        (char) 1, (char) 1 }, (char) 2, 9));
         assertEquals(
                 -1,
                 ArrayUtil.arrayLastIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, (char) 2, -1));
+                                                        (char) 1, (char) 1 }, (char) 2, -1));
         assertEquals(
                 0,
                 ArrayUtil.arrayLastIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, (char) 1, 0));
+                                                        (char) 1, (char) 1 }, (char) 1, 0));
     }
 
     @Test
@@ -2105,20 +2105,20 @@ public class ArrayUtilTests {
         assertEquals(
                 7,
                 ArrayUtil.arrayLastIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] { (char) 1 }));
+                                                        (char) 1, (char) 1 }, new char[] { (char) 1 }));
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] { (char) 2 }));
+                                                        (char) 1, (char) 1 }, new char[] { (char) 2 }));
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] { (char) 2, (char) 1 }));
+                                                        (char) 1, (char) 1 }, new char[] { (char) 2, (char) 1 }));
 
         assertEquals(
                 8,
                 ArrayUtil.arrayLastIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] {}));
+                                                        (char) 1, (char) 1 }, new char[] { }));
 
         // 形式2
         assertEquals(-1, ArrayUtil.arrayLastIndexOf((char[]) null, new char[] { (char) 1 }, 0));
@@ -2126,36 +2126,36 @@ public class ArrayUtilTests {
         assertEquals(
                 7,
                 ArrayUtil.arrayLastIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] { (char) 1 }, 8));
+                                                        (char) 1, (char) 1 }, new char[] { (char) 1 }, 8));
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] { (char) 2 }, 8));
+                                                        (char) 1, (char) 1 }, new char[] { (char) 2 }, 8));
         assertEquals(
                 4,
                 ArrayUtil.arrayLastIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] { (char) 1, (char) 2 }, 8));
+                                                        (char) 1, (char) 1 }, new char[] { (char) 1, (char) 2 }, 8));
         assertEquals(
                 5,
                 ArrayUtil.arrayLastIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] { (char) 2 }, 9));
+                                                        (char) 1, (char) 1 }, new char[] { (char) 2 }, 9));
         assertEquals(
                 -1,
                 ArrayUtil.arrayLastIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] { (char) 2 }, -1));
+                                                        (char) 1, (char) 1 }, new char[] { (char) 2 }, -1));
         assertEquals(
                 0,
                 ArrayUtil.arrayLastIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] { (char) 1 }, 0));
+                                                        (char) 1, (char) 1 }, new char[] { (char) 1 }, 0));
         assertEquals(
                 -1,
                 ArrayUtil.arrayLastIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] { (char) 2 }, 0));
+                                                        (char) 1, (char) 1 }, new char[] { (char) 2 }, 0));
 
         assertEquals(
                 0,
                 ArrayUtil.arrayLastIndexOf(new char[] { (char) 1, (char) 1, (char) 2, (char) 1, (char) 1, (char) 2,
-                        (char) 1, (char) 1 }, new char[] {}, 0));
+                                                        (char) 1, (char) 1 }, new char[] { }, 0));
     }
 
     @Test

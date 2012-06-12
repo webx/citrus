@@ -34,14 +34,15 @@ import com.alibaba.citrus.webx.util.ErrorHandlerHelper;
  * @author Michael Zhou
  */
 public class DetailedErrorHandler extends LayoutRequestProcessor {
-    private final KeyValuesComponent keyValuesComponent = new KeyValuesComponent(this, "keyValues");
-    private final ExceptionComponent exceptionComponent = new ExceptionComponent(this, "exception");
-    private final RequestComponent requestComponent = new RequestComponent(this, "request", keyValuesComponent);
-    private final SystemPropertiesComponent systemPropertiesComponent = new SystemPropertiesComponent(this, "sysprops",
-            keyValuesComponent);
+    private final KeyValuesComponent            keyValuesComponent            = new KeyValuesComponent(this, "keyValues");
+    private final ExceptionComponent            exceptionComponent            = new ExceptionComponent(this, "exception");
+    private final RequestComponent              requestComponent              = new RequestComponent(this, "request", keyValuesComponent);
+    private final SystemPropertiesComponent     systemPropertiesComponent     = new SystemPropertiesComponent(this, "sysprops",
+                                                                                                              keyValuesComponent);
     private final EnvironmentVariablesComponent environmentVariablesComponent = new EnvironmentVariablesComponent(this,
-            "env", keyValuesComponent);
-    private final SystemInfoComponent systemInfoComponent = new SystemInfoComponent(this, "sysinfo", keyValuesComponent);;
+                                                                                                                  "env", keyValuesComponent);
+    private final SystemInfoComponent           systemInfoComponent           = new SystemInfoComponent(this, "sysinfo", keyValuesComponent);
+    ;
 
     @Override
     protected Object getBodyVisitor(RequestHandlerContext context) {
@@ -65,7 +66,7 @@ public class DetailedErrorHandler extends LayoutRequestProcessor {
     @SuppressWarnings("unused")
     private class DetailedErrorPageVisitor extends AbstractVisitor {
         private final ErrorHandlerHelper helper;
-        private String componentResource;
+        private       String             componentResource;
 
         public DetailedErrorPageVisitor(RequestHandlerContext context, ErrorHandlerHelper helper) {
             super(context);

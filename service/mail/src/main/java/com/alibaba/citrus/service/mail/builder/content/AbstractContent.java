@@ -31,20 +31,16 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public abstract class AbstractContent implements MailContent {
-    private String id;
+    private String      id;
     private MailBuilder builder;
     private MailContent parentContent;
 
-    /**
-     * 取得content的唯一ID，此ID在整个mail builder所包含的content中是唯一的。
-     */
+    /** 取得content的唯一ID，此ID在整个mail builder所包含的content中是唯一的。 */
     public String getId() {
         return id;
     }
 
-    /**
-     * 设置content的唯一ID，此ID在整个mail builder所包含的content中是唯一的。
-     */
+    /** 设置content的唯一ID，此ID在整个mail builder所包含的content中是唯一的。 */
     public void setId(String id) {
         this.id = id;
     }
@@ -57,9 +53,7 @@ public abstract class AbstractContent implements MailContent {
         return getMailBuilder(true);
     }
 
-    /**
-     * 取得此content所属的mail builder。
-     */
+    /** 取得此content所属的mail builder。 */
     protected final MailBuilder getMailBuilder(boolean required) {
         if (builder != null) {
             return builder;
@@ -76,30 +70,22 @@ public abstract class AbstractContent implements MailContent {
         return null;
     }
 
-    /**
-     * 设置mail builder。
-     */
+    /** 设置mail builder。 */
     public void setMailBuilder(MailBuilder builder) {
         this.builder = builder;
     }
 
-    /**
-     * 取得包容此内容的父内容。
-     */
+    /** 取得包容此内容的父内容。 */
     public MailContent getParentContent() {
         return parentContent;
     }
 
-    /**
-     * 设置包容此内容的父内容。
-     */
+    /** 设置包容此内容的父内容。 */
     public void setParentContent(MailContent parentContent) {
         this.parentContent = parentContent;
     }
 
-    /**
-     * 深度复制一个content。
-     */
+    /** 深度复制一个content。 */
     @Override
     public final AbstractContent clone() {
         String className = getClass().getSimpleName();
@@ -114,14 +100,10 @@ public abstract class AbstractContent implements MailContent {
         return copy;
     }
 
-    /**
-     * 创建一个同类型的content。
-     */
+    /** 创建一个同类型的content。 */
     protected abstract AbstractContent newInstance();
 
-    /**
-     * 深度复制一个content。
-     */
+    /** 深度复制一个content。 */
     protected void copyTo(AbstractContent copy) {
     }
 

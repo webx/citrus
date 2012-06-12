@@ -21,14 +21,13 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.form.Validator;
 import com.alibaba.citrus.service.form.impl.validation.MyValidator;
 import com.alibaba.citrus.service.form.support.AbstractSimpleCompositeValidator;
+import org.junit.Test;
 
 public abstract class AbstractSimpleCompositeValidatorTests<V extends AbstractSimpleCompositeValidator> extends
-        AbstractCompositeValidatorTests<V> {
+                                                                                                        AbstractCompositeValidatorTests<V> {
     @Test
     public void init_hiddenAllOfValidator() throws Exception {
         // 2 validators
@@ -71,9 +70,7 @@ public abstract class AbstractSimpleCompositeValidatorTests<V extends AbstractSi
         return v;
     }
 
-    /**
-     * 预处理实例，以便通过<code>AbstractSimpleCompositeValidatorTests</code>中的测试。
-     */
+    /** 预处理实例，以便通过<code>AbstractSimpleCompositeValidatorTests</code>中的测试。 */
     protected void initFor_AbstractSimpleCompositeValidatorTests(V validator) {
     }
 }

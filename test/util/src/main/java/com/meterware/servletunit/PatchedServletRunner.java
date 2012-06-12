@@ -26,15 +26,13 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.util.Dictionary;
-
 import javax.servlet.http.HttpSession;
-
-import org.xml.sax.EntityResolver;
-import org.xml.sax.SAXException;
 
 import com.meterware.httpunit.FrameSelector;
 import com.meterware.httpunit.HttpUnitUtils;
 import com.meterware.httpunit.WebRequest;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.SAXException;
 
 /**
  * 解决如下问题：
@@ -58,7 +56,7 @@ public class PatchedServletRunner extends ServletRunner {
                     .getParentFile().getParentFile(), contextPath));
 
             Method completeInitialization = getAccessibleMethod(getClass(), "completeInitialization",
-                    new Class<?>[] { String.class });
+                                                                new Class<?>[] { String.class });
             completeInitialization.invoke(this, contextPath);
         } catch (RuntimeException e) {
             throw e;
@@ -110,12 +108,12 @@ public class PatchedServletRunner extends ServletRunner {
                                                        WebRequest request, Dictionary clientHeaders, byte[] messageBody)
                         throws IOException, MalformedURLException {
                     return new PatchedInvocationContextImpl(client, PatchedServletRunner.this, targetFrame, request,
-                            clientHeaders, messageBody);
+                                                            clientHeaders, messageBody);
                 }
 
                 public HttpSession getSession(String sessionId, boolean create) {
                     ServletUnitContext _context = getFieldValue(PatchedServletRunner.this, "_context",
-                            ServletUnitContext.class);
+                                                                ServletUnitContext.class);
 
                     return _context.getValidSession(sessionId, null, create);
                 }

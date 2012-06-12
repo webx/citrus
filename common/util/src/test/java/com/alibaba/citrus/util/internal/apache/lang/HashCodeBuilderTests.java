@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.alibaba.citrus.util.internal.apache.lang;
 
 import junit.framework.TestCase;
@@ -31,7 +32,6 @@ public class HashCodeBuilderTests extends TestCase {
     public void testConstructorEx1() {
         try {
             new HashCodeBuilder(0, 0);
-
         } catch (IllegalArgumentException ex) {
             return;
         }
@@ -41,7 +41,6 @@ public class HashCodeBuilderTests extends TestCase {
     public void testConstructorEx2() {
         try {
             new HashCodeBuilder(2, 2);
-
         } catch (IllegalArgumentException ex) {
             return;
         }
@@ -79,8 +78,8 @@ public class HashCodeBuilderTests extends TestCase {
     public void testSuper() {
         Object obj = new Object();
         assertEquals(17 * 37 + 19 * 41 + obj.hashCode(),
-                new HashCodeBuilder(17, 37).appendSuper(new HashCodeBuilder(19, 41).append(obj).toHashCode())
-                        .toHashCode());
+                     new HashCodeBuilder(17, 37).appendSuper(new HashCodeBuilder(19, 41).append(obj).toHashCode())
+                                                .toHashCode());
     }
 
     public void testObject() {
@@ -93,7 +92,7 @@ public class HashCodeBuilderTests extends TestCase {
     public void testLong() {
         assertEquals(17 * 37, new HashCodeBuilder(17, 37).append(0L).toHashCode());
         assertEquals(17 * 37 + (int) (123456789L ^ 123456789L >> 32), new HashCodeBuilder(17, 37).append(123456789L)
-                .toHashCode());
+                                                                                                 .toHashCode());
     }
 
     public void testInt() {
@@ -143,7 +142,7 @@ public class HashCodeBuilderTests extends TestCase {
         assertEquals((17 * 37 + obj[0].hashCode()) * 37, new HashCodeBuilder(17, 37).append(obj).toHashCode());
         obj[1] = new Object();
         assertEquals((17 * 37 + obj[0].hashCode()) * 37 + obj[1].hashCode(), new HashCodeBuilder(17, 37).append(obj)
-                .toHashCode());
+                                                                                                        .toHashCode());
     }
 
     public void testObjectArrayAsObject() {
@@ -153,7 +152,7 @@ public class HashCodeBuilderTests extends TestCase {
         assertEquals((17 * 37 + obj[0].hashCode()) * 37, new HashCodeBuilder(17, 37).append((Object) obj).toHashCode());
         obj[1] = new Object();
         assertEquals((17 * 37 + obj[0].hashCode()) * 37 + obj[1].hashCode(),
-                new HashCodeBuilder(17, 37).append((Object) obj).toHashCode());
+                     new HashCodeBuilder(17, 37).append((Object) obj).toHashCode());
     }
 
     public void testLongArray() {

@@ -25,12 +25,11 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.net.URL;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.resource.Resource;
 import com.alibaba.citrus.service.resource.ResourceLister;
 import com.alibaba.citrus.service.resource.loader.FileResourceLoader.SearchPath;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class FileLoaderTests extends AbstractResourceLoaderTests<FileResourceLoader> {
     @Test
@@ -52,7 +51,7 @@ public class FileLoaderTests extends AbstractResourceLoaderTests<FileResourceLoa
             assertThat(
                     e,
                     exception("Could not get basedir for search path: ", "relpath=abc, basedir=null.  ",
-                            "Please set basedir explictly at file-loader or use absolute path instead"));
+                              "Please set basedir explictly at file-loader or use absolute path instead"));
         }
     }
 
@@ -84,7 +83,7 @@ public class FileLoaderTests extends AbstractResourceLoaderTests<FileResourceLoa
             assertThat(
                     e,
                     exception("Could not get basedir for search path: ", "relpath=/, basedir=null.  ",
-                            "Please set basedir explictly at file-loader or use absolute path instead"));
+                              "Please set basedir explictly at file-loader or use absolute path instead"));
         }
 
         // basedir
@@ -103,9 +102,9 @@ public class FileLoaderTests extends AbstractResourceLoaderTests<FileResourceLoa
     @Test
     public void basedir_noConfigURL() throws Exception {
         createLoader(srcdir.getAbsolutePath(), // srcdir
-                null, //
-                new SearchPath("WEB-INF", true), // srcdir/WEB-INF
-                new SearchPath(new File(srcdir, "aaa").getAbsolutePath(), false)); // srcdir/aaa
+                     null, //
+                     new SearchPath("WEB-INF", true), // srcdir/WEB-INF
+                     new SearchPath(new File(srcdir, "aaa").getAbsolutePath(), false)); // srcdir/aaa
 
         assertEquals(2, loader.getPaths().length);
         assertThat(loader.getPaths()[0].toString(), containsAll("relpath=WEB-INF, basedir=", "config"));
@@ -115,9 +114,9 @@ public class FileLoaderTests extends AbstractResourceLoaderTests<FileResourceLoa
     @Test
     public void basedir_abs() throws Exception {
         createLoader(srcdir.getAbsolutePath(), // srcdir
-                new File(srcdir, "aaa/config.xml").toURI().toURL(), // srcdir/aaa
-                new SearchPath("WEB-INF", true), // srcdir/WEB-INF
-                new SearchPath(new File(srcdir, "aaa").getAbsolutePath(), false)); // srcdir/aaa
+                     new File(srcdir, "aaa/config.xml").toURI().toURL(), // srcdir/aaa
+                     new SearchPath("WEB-INF", true), // srcdir/WEB-INF
+                     new SearchPath(new File(srcdir, "aaa").getAbsolutePath(), false)); // srcdir/aaa
 
         assertEquals(2, loader.getPaths().length);
         assertThat(loader.getPaths()[0].toString(), containsAll("relpath=WEB-INF, basedir=", "config"));
@@ -127,9 +126,9 @@ public class FileLoaderTests extends AbstractResourceLoaderTests<FileResourceLoa
     @Test
     public void basedir_rel() throws Exception {
         createLoader("..", // srcdir/aaa/..
-                new File(srcdir, "aaa/config.xml").toURI().toURL(), // srcdir/aaa
-                new SearchPath("WEB-INF", true), // srcdir/WEB-INF
-                new SearchPath(new File(srcdir, "aaa").getAbsolutePath(), false)); // srcdir/aaa
+                     new File(srcdir, "aaa/config.xml").toURI().toURL(), // srcdir/aaa
+                     new SearchPath("WEB-INF", true), // srcdir/WEB-INF
+                     new SearchPath(new File(srcdir, "aaa").getAbsolutePath(), false)); // srcdir/aaa
 
         assertEquals(2, loader.getPaths().length);
         assertThat(loader.getPaths()[0].toString(), containsAll("relpath=WEB-INF, basedir=", "config"));
@@ -139,9 +138,9 @@ public class FileLoaderTests extends AbstractResourceLoaderTests<FileResourceLoa
     @Test
     public void basedir_configURLonly() throws Exception {
         createLoader(null, //
-                new File(srcdir, "aaa/config.xml").toURI().toURL(), // basedir=srcdir/aaa
-                new SearchPath("../WEB-INF", true), // srcdir/aaa/../WEB-INF
-                new SearchPath(new File(srcdir, "aaa/bbb").getAbsolutePath(), false)); // srcdir/aaa/bbb
+                     new File(srcdir, "aaa/config.xml").toURI().toURL(), // basedir=srcdir/aaa
+                     new SearchPath("../WEB-INF", true), // srcdir/aaa/../WEB-INF
+                     new SearchPath(new File(srcdir, "aaa/bbb").getAbsolutePath(), false)); // srcdir/aaa/bbb
 
         assertEquals(2, loader.getPaths().length);
         assertThat(loader.getPaths()[0].toString(), containsAll("relpath=../WEB-INF, basedir=", "config/aaa"));
@@ -151,8 +150,8 @@ public class FileLoaderTests extends AbstractResourceLoaderTests<FileResourceLoa
     @Test
     public void search() throws Exception {
         createLoader(srcdir.getAbsolutePath(), null, //
-                new SearchPath("WEB-INF", true), // srcdir/WEB-INF
-                new SearchPath(new File(srcdir, "WEB-INF/aaa").getAbsolutePath(), false)); // srcdir/aaa
+                     new SearchPath("WEB-INF", true), // srcdir/WEB-INF
+                     new SearchPath(new File(srcdir, "WEB-INF/aaa").getAbsolutePath(), false)); // srcdir/aaa
 
         // getResource
         assertResourceLoader("/myapp/", "WEB-INF", true); // dir
@@ -168,8 +167,8 @@ public class FileLoaderTests extends AbstractResourceLoaderTests<FileResourceLoa
     @Test
     public void search2() throws Exception {
         createLoader(null, new File(srcdir, "aaa/config.xml").toURI().toURL(), // basedir=srcdir/aaa
-                new SearchPath("../WEB-INF", true), // srcdir/aaa/../WEB-INF
-                new SearchPath(new File(srcdir, "WEB-INF/aaa/bbb").getAbsolutePath(), false)); // srcdir/aaa/bbb
+                     new SearchPath("../WEB-INF", true), // srcdir/aaa/../WEB-INF
+                     new SearchPath(new File(srcdir, "WEB-INF/aaa/bbb").getAbsolutePath(), false)); // srcdir/aaa/bbb
 
         // getResource
         assertResourceLoader("/myapp/", "WEB-INF", true); // dir
@@ -200,9 +199,9 @@ public class FileLoaderTests extends AbstractResourceLoaderTests<FileResourceLoa
     @Test
     public void search4() throws Exception {
         createLoader(srcdir.getAbsolutePath(), null, //
-                new SearchPath("WEB-INF", true), // srcdir/WEB-INF
-                new SearchPath(new File(srcdir, "WEB-INF/aaa").getAbsolutePath(), false), // srcdir/WEB-INF/aaa
-                new SearchPath(new File(srcdir, "WEB-INF/aaa/ccc").getAbsolutePath(), false)); // srcdir/WEB-INF/aaa/ccc
+                     new SearchPath("WEB-INF", true), // srcdir/WEB-INF
+                     new SearchPath(new File(srcdir, "WEB-INF/aaa").getAbsolutePath(), false), // srcdir/WEB-INF/aaa
+                     new SearchPath(new File(srcdir, "WEB-INF/aaa/ccc").getAbsolutePath(), false)); // srcdir/WEB-INF/aaa/ccc
 
         // getResource
         //----------------------------------------------------------------------------------
@@ -234,11 +233,11 @@ public class FileLoaderTests extends AbstractResourceLoaderTests<FileResourceLoa
     @Test
     public void _toString() {
         createLoader(srcdir.getAbsolutePath(), null, //
-                new SearchPath("WEB-INF", true), // srcdir/WEB-INF
-                new SearchPath(new File(srcdir, "aaa").getAbsolutePath(), false)); // srcdir/aaa
+                     new SearchPath("WEB-INF", true), // srcdir/WEB-INF
+                     new SearchPath(new File(srcdir, "aaa").getAbsolutePath(), false)); // srcdir/aaa
 
         assertThat(loader.toString(),
-                containsAll("FileResourceLoader [", "relpath=WEB-INF, basedir=", "abspath=", "config/aaa", "]"));
+                   containsAll("FileResourceLoader [", "relpath=WEB-INF, basedir=", "abspath=", "config/aaa", "]"));
     }
 
     private void createLoader(String basedir, URL configURL, SearchPath... paths) {

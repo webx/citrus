@@ -29,7 +29,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FieldTests extends AbstractFormServiceTests {
-    private Form form;
+    private Form  form;
     private Group group;
     private Field field1;
     private Field field2;
@@ -130,8 +130,8 @@ public class FieldTests extends AbstractFormServiceTests {
         assertEquals(null, field2.getValue()); // no default value
 
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "aaa" }, // group1.field1
-                { "_fm.g._0.fi", "bbb" }, // group1.field2
+                                           { "_fm.g._0.f", "aaa" }, // group1.field1
+                                           { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
 
         invokePost(args);
@@ -155,8 +155,8 @@ public class FieldTests extends AbstractFormServiceTests {
         assertEquals(null, field2.getValue()); // no default value
 
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", new String[] { "aaa", "bbb" } }, // group1.field1
-                { "_fm.g._0.fi", "bbb" }, // group1.field2
+                                           { "_fm.g._0.f", new String[] { "aaa", "bbb" } }, // group1.field1
+                                           { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
 
         invokePost(args);
@@ -203,8 +203,8 @@ public class FieldTests extends AbstractFormServiceTests {
     @Test
     public void getAttachment() throws Exception {
         String code = "eNpb85aBtbiIwTg5P1cvMSczKTEpUS85s6SotFivOLWoLDM5VS8tvyh"
-                + "Xzy0zNSclJLW4pFjFt9I%2FKSs1uSTiZmR4h%2Fan%2F0wMTJ4MjJk%2BDI"
-                + "zFJQxCPlmJZYn6OYl56frBJUWZeenWFQUMDAzVJQwsJUDtAPRsJsw%3D";
+                      + "Xzy0zNSclJLW4pFjFt9I%2FKSs1uSTiZmR4h%2Fan%2F0wMTJ4MjJk%2BDI"
+                      + "zFJQxCPlmJZYn6OYl56frBJUWZeenWFQUMDAzVJQwsJUDtAPRsJsw%3D";
 
         MyObject obj = new MyObject();
         obj.i = 123;
@@ -229,9 +229,9 @@ public class FieldTests extends AbstractFormServiceTests {
 
         // 通过form携带attachment
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", new String[] { "aaa", "bbb" } }, // group1.field1
-                { "_fm.g._0.f.attach", code }, // group1.field1.attach
-                { "_fm.g._0.fi", "bbb" }, // group1.field2
+                                           { "_fm.g._0.f", new String[] { "aaa", "bbb" } }, // group1.field1
+                                           { "_fm.g._0.f.attach", code }, // group1.field1.attach
+                                           { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
 
         invokePost(args);
@@ -256,9 +256,9 @@ public class FieldTests extends AbstractFormServiceTests {
 
         // 解码Failure
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", new String[] { "aaa", "bbb" } }, // group1.field1
-                { "_fm.g._0.f.attach", code }, // group1.field1.attach
-                { "_fm.g._0.fi", "bbb" }, // group1.field2
+                                           { "_fm.g._0.f", new String[] { "aaa", "bbb" } }, // group1.field1
+                                           { "_fm.g._0.f.attach", code }, // group1.field1.attach
+                                           { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
 
         invokePost(args);
@@ -275,9 +275,9 @@ public class FieldTests extends AbstractFormServiceTests {
     @Test
     public void getAttachment_failureDecoding() throws Exception {
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", new String[] { "aaa", "bbb" } }, // group1.field1
-                { "_fm.g._0.f.attach", "wrong format" }, // group1.field1.attach
-                { "_fm.g._0.fi", "bbb" }, // group1.field2
+                                           { "_fm.g._0.f", new String[] { "aaa", "bbb" } }, // group1.field1
+                                           { "_fm.g._0.f.attach", "wrong format" }, // group1.field1.attach
+                                           { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
 
         invokePost(args);
@@ -294,8 +294,8 @@ public class FieldTests extends AbstractFormServiceTests {
     @Test
     public void isValid() throws Exception {
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "aaa" }, // group1.field1
-                { "_fm.g._0.fi", "" }, // group1.field2
+                                           { "_fm.g._0.f", "aaa" }, // group1.field1
+                                           { "_fm.g._0.fi", "" }, // group1.field2
         };
 
         invokePost(args);
@@ -312,8 +312,8 @@ public class FieldTests extends AbstractFormServiceTests {
     @Test
     public void getMessage_invalidField() throws Exception {
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "" }, // group1.field1
-                { "_fm.g._0.fi", "" }, // group1.field2
+                                           { "_fm.g._0.f", "" }, // group1.field1
+                                           { "_fm.g._0.fi", "" }, // group1.field2
         };
 
         invokePost(args);
@@ -334,8 +334,8 @@ public class FieldTests extends AbstractFormServiceTests {
     @Test
     public void getMessage_validField() throws Exception {
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "aaa" }, // group1.field1
-                { "_fm.g._0.fi", "bbb" }, // group1.field2
+                                           { "_fm.g._0.f", "aaa" }, // group1.field1
+                                           { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
 
         invokePost(args);
@@ -363,7 +363,7 @@ public class FieldTests extends AbstractFormServiceTests {
             fail();
         } catch (CustomErrorNotFoundException e) {
             assertThat(e, exception("Specified error ID \"notExistErrorId\" was not found "
-                    + "in Field[group: group3._0, name: field2, values: [bbb], valid: true]"));
+                                    + "in Field[group: group3._0, name: field2, values: [bbb], valid: true]"));
         }
 
         // setMessage
@@ -401,14 +401,14 @@ public class FieldTests extends AbstractFormServiceTests {
             fail();
         } catch (CustomErrorNotFoundException e) {
             assertThat(e, exception("No message specified for error ID \"err4\" "
-                    + "in Field[group: group3._0, name: field2, values: [bbb], valid: false]"));
+                                    + "in Field[group: group3._0, name: field2, values: [bbb], valid: false]"));
         }
     }
 
     private void initForSetMessage() throws Exception {
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.gro._0.f", "aaa" }, // group3.field1
-                { "_fm.gro._0.fi", "bbb" }, // group3.field2
+                                           { "_fm.gro._0.f", "aaa" }, // group3.field1
+                                           { "_fm.gro._0.fi", "bbb" }, // group3.field2
         };
 
         invokePost(args);
@@ -425,8 +425,8 @@ public class FieldTests extends AbstractFormServiceTests {
     @Test
     public void validate_withAbsentKey() throws Exception {
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f.absent", "aaa" }, // group1.field1
-                { "_fm.g._0.fi", "bbb" }, // group1.field2
+                                           { "_fm.g._0.f.absent", "aaa" }, // group1.field1
+                                           { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
 
         invokePost(args);
@@ -448,7 +448,7 @@ public class FieldTests extends AbstractFormServiceTests {
 
     public static class MyObject implements Serializable {
         private static final long serialVersionUID = 6402246577765479167L;
-        private int i;
+        private int    i;
         private String s;
 
         @Override

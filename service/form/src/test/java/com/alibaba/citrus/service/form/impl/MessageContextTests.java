@@ -23,17 +23,16 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.form.AbstractFormServiceTests;
 import com.alibaba.citrus.service.form.MessageContext;
 import com.alibaba.citrus.service.form.impl.validation.MyValidator;
 import com.alibaba.citrus.util.StringUtil;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class MessageContextTests extends AbstractFormServiceTests {
-    private FormImpl form;
+    private FormImpl  form;
     private GroupImpl group;
     private FieldImpl field1;
     private FieldImpl field2;

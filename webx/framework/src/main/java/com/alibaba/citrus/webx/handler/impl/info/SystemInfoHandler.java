@@ -29,7 +29,7 @@ import com.alibaba.citrus.webx.handler.support.LayoutRequestProcessor;
  * @author Michael Zhou
  */
 public class SystemInfoHandler extends LayoutRequestProcessor {
-    private final KeyValuesComponent keyValuesComponent = new KeyValuesComponent(this, "keyValues");
+    private final KeyValuesComponent  keyValuesComponent  = new KeyValuesComponent(this, "keyValues");
     private final SystemInfoComponent systemInfoComponent = new SystemInfoComponent(this, "sysinfo", keyValuesComponent);
 
     @Override

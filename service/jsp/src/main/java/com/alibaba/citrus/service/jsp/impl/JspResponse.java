@@ -18,7 +18,6 @@
 package com.alibaba.citrus.service.jsp.impl;
 
 import java.util.Locale;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 

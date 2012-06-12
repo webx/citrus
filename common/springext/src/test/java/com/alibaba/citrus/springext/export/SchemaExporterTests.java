@@ -21,14 +21,13 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
+import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
+import com.alibaba.citrus.test.TestEnvStatic;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
-import com.alibaba.citrus.test.TestEnvStatic;
-
 public class SchemaExporterTests {
-    protected SchemaExporter exporter;
+    protected SchemaExporter          exporter;
     protected ConfigurationPointsImpl cps;
 
     static {

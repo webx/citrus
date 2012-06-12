@@ -34,12 +34,10 @@ import org.springframework.beans.factory.InitializingBean;
  */
 public abstract class BeanSupport implements InitializingBean, DisposableBean, BeanNameAware {
     private Class<?> beanInterface;
-    private String beanName;
-    private boolean initialized;
+    private String   beanName;
+    private boolean  initialized;
 
-    /**
-     * 取得bean接口。
-     */
+    /** 取得bean接口。 */
     public final Class<?> getBeanInterface() {
         if (beanInterface == null) {
             beanInterface = resolveBeanInterface();
@@ -52,38 +50,28 @@ public abstract class BeanSupport implements InitializingBean, DisposableBean, B
         return getClass();
     }
 
-    /**
-     * 是否已经初始化。
-     */
+    /** 是否已经初始化。 */
     public boolean isInitialized() {
         return initialized;
     }
 
-    /**
-     * 检查服务已经被初始化，若否，则抛出<code>IllegalStateException</code>异常。
-     */
+    /** 检查服务已经被初始化，若否，则抛出<code>IllegalStateException</code>异常。 */
     public void assertInitialized() {
         if (!initialized) {
             throw new IllegalStateException(String.format("Bean instance of %s has not been initialized yet.",
-                    getBeanInterface().getName()));
+                                                          getBeanInterface().getName()));
         }
     }
 
-    /**
-     * 初始化前执行。
-     */
+    /** 初始化前执行。 */
     protected void preInit() throws Exception {
     }
 
-    /**
-     * 初始化bean。
-     */
+    /** 初始化bean。 */
     protected void init() throws Exception {
     }
 
-    /**
-     * 初始化后执行。
-     */
+    /** 初始化后执行。 */
     protected void postInit() throws Exception {
     }
 
@@ -94,21 +82,15 @@ public abstract class BeanSupport implements InitializingBean, DisposableBean, B
         postInit();
     }
 
-    /**
-     * 销毁bean。
-     */
+    /** 销毁bean。 */
     protected void dispose() {
     }
 
-    /**
-     * 销毁前执行。
-     */
+    /** 销毁前执行。 */
     protected void preDispose() {
     }
 
-    /**
-     * 销毁后执行。
-     */
+    /** 销毁后执行。 */
     protected void postDispose() {
     }
 
@@ -119,38 +101,28 @@ public abstract class BeanSupport implements InitializingBean, DisposableBean, B
         postDispose();
     }
 
-    /**
-     * 取得spring容器中的bean名称，仅用于调试。
-     */
+    /** 取得spring容器中的bean名称，仅用于调试。 */
     public String getBeanName() {
         return beanName;
     }
 
-    /**
-     * 设置spring容器中的bean名称，仅用于调试。
-     */
+    /** 设置spring容器中的bean名称，仅用于调试。 */
     public void setBeanName(String beanName) {
         this.beanName = beanName;
     }
 
-    /**
-     * 转换成字符串。
-     */
+    /** 转换成字符串。 */
     @Override
     public String toString() {
         return getBeanDescription();
     }
 
-    /**
-     * 取得bean的描述：<code>beanName + ":" + beanInterfaceName</code>。
-     */
+    /** 取得bean的描述：<code>beanName + ":" + beanInterfaceName</code>。 */
     protected String getBeanDescription() {
         return getBeanDescription(true);
     }
 
-    /**
-     * 取得bean的描述：<code>beanName + ":" + beanInterfaceName</code>。
-     */
+    /** 取得bean的描述：<code>beanName + ":" + beanInterfaceName</code>。 */
     protected String getBeanDescription(boolean simpleName) {
         String interfaceDesc = simpleName ? getBeanInterface().getSimpleName() : getBeanInterface().getName();
         return beanName == null || beanName.contains("(inner bean)") ? interfaceDesc : beanName + ":" + interfaceDesc;

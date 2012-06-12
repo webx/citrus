@@ -24,20 +24,18 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.lang.reflect.Proxy;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
+import com.alibaba.citrus.springext.util.ProxyTargetFactory;
+import com.meterware.servletunit.ServletRunner;
 import org.junit.Test;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.core.io.ResourceLoader;
-
-import com.alibaba.citrus.springext.util.ProxyTargetFactory;
-import com.meterware.servletunit.ServletRunner;
 
 /**
  * 确保singleton proxy可以工作。设计以下情形：
@@ -55,7 +53,7 @@ public class InheritableBeanFactoryTests {
 
     private void initContext(boolean withMockRequest) throws Exception {
         ServletContext servletContext = new ServletRunner(new File(srcdir, "WEB-INF/web.xml"), "").newClient()
-                .newInvocation("http://localhost/servlet").getServlet().getServletConfig().getServletContext();
+                                                                                                  .newInvocation("http://localhost/servlet").getServlet().getServletConfig().getServletContext();
 
         // parent context，如果withMockRequest，则注册并覆盖原有的request
         parentContext = new XmlWebApplicationContext();
@@ -71,9 +69,7 @@ public class InheritableBeanFactoryTests {
         thisContext.refresh();
     }
 
-    /**
-     * 如果parent context中被置入mock request，那么取得并注入到autowire对象中。
-     */
+    /** 如果parent context中被置入mock request，那么取得并注入到autowire对象中。 */
     @Test
     public void request1() throws Exception {
         initContext(true);
@@ -82,9 +78,7 @@ public class InheritableBeanFactoryTests {
         assertSame(thisContext, obj.resourceLoader); // 确保非ProxyTargetFactory接口的对象不受影响
     }
 
-    /**
-     * 如果parent context中没有置入mock request，那么autowire试图取得request失败。
-     */
+    /** 如果parent context中没有置入mock request，那么autowire试图取得request失败。 */
     @Test
     public void request2() throws Exception {
         try {

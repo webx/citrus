@@ -26,20 +26,10 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.util.Set;
-
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.request.RequestContextListener;
 
 import com.alibaba.citrus.service.requestcontext.buffered.BufferedRequestContext;
 import com.alibaba.citrus.service.requestcontext.lazycommit.LazyCommitRequestContext;
@@ -51,13 +41,19 @@ import com.alibaba.citrus.service.requestcontext.session.SessionRequestContext;
 import com.alibaba.citrus.springext.support.context.XmlWebApplicationContext;
 import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 import com.meterware.servletunit.ServletRunner;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.request.RequestContextListener;
 
-/**
- * 测试全局的request context相关的对象。
- */
+/** 测试全局的request context相关的对象。 */
 public class GlobalRequestObjectsTests extends AbstractRequestContextsTests<RequestContext> {
     private static XmlWebApplicationContext subFactory;
-    private static WebGlobals globals;
+    private static WebGlobals               globals;
     private static RequestContextListener listener = new RequestContextListener();
 
     @BeforeClass
@@ -69,14 +65,14 @@ public class GlobalRequestObjectsTests extends AbstractRequestContextsTests<Requ
         subFactory = new XmlWebApplicationContext();
         subFactory.setConfigLocation("empty.xml");
         subFactory.setServletContext(new ServletRunner(new File(srcdir, "WEB-INF/web.xml"), "").newClient()
-                .newInvocation("http://localhost/servlet").getServlet().getServletConfig().getServletContext());
+                                                                                               .newInvocation("http://localhost/servlet").getServlet().getServletConfig().getServletContext());
         subFactory.setParent((ApplicationContext) factory);
         subFactory.refresh();
 
         // init global before request，parent context中的singleton proxy将被注入
         globals = new WebGlobals();
         subFactory.getAutowireCapableBeanFactory().autowireBeanProperties(globals,
-                AutowireCapableBeanFactory.AUTOWIRE_BY_TYPE, false);
+                                                                          AutowireCapableBeanFactory.AUTOWIRE_BY_TYPE, false);
 
         // listener
         listener = new RequestContextListener();
@@ -151,7 +147,7 @@ public class GlobalRequestObjectsTests extends AbstractRequestContextsTests<Requ
             assertThat(
                     obj.toString(),
                     containsAll(globals.getInterfaces()[i++].getSimpleName() + "[", "No thread-bound request found",
-                            "]"));
+                                "]"));
 
             try {
                 ((ProxyTargetFactory) obj).getObject();
@@ -329,13 +325,13 @@ public class GlobalRequestObjectsTests extends AbstractRequestContextsTests<Requ
         private RunData rundataRC;
 
         private final Class<?>[] interfaces = new Class<?>[] { HttpServletRequest.class, HttpServletResponse.class,
-                HttpSession.class, BufferedRequestContext.class, LazyCommitRequestContext.class,
-                SetLocaleRequestContext.class, ParserRequestContext.class, RewriteRequestContext.class,
-                SessionRequestContext.class, RunData.class };
+                                                               HttpSession.class, BufferedRequestContext.class, LazyCommitRequestContext.class,
+                                                               SetLocaleRequestContext.class, ParserRequestContext.class, RewriteRequestContext.class,
+                                                               SessionRequestContext.class, RunData.class };
 
         public Object[] getObjects() {
             return new Object[] { request, response, session, bufferedRC, lazyCommitRC, setLocaleRC, parserRC,
-                    rewriteRC, sessionRC, rundataRC };
+                                  rewriteRC, sessionRC, rundataRC };
         }
 
         public Class<?>[] getInterfaces() {

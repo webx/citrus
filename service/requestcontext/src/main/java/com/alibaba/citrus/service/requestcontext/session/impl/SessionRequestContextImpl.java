@@ -22,9 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.session.SessionConfig;
 import com.alibaba.citrus.service.requestcontext.session.SessionConfig.CookieConfig;
@@ -34,23 +31,21 @@ import com.alibaba.citrus.service.requestcontext.support.AbstractRequestWrapper;
 import com.alibaba.citrus.service.requestcontext.support.AbstractResponseWrapper;
 import com.alibaba.citrus.service.requestcontext.util.CookieSupport;
 import com.alibaba.citrus.util.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/**
- * 支持session的<code>HttpRequestContext</code>实现。
- */
+/** 支持session的<code>HttpRequestContext</code>实现。 */
 public class SessionRequestContextImpl extends AbstractRequestContextWrapper implements SessionRequestContext {
     private final static Logger log = LoggerFactory.getLogger(SessionRequestContext.class);
     private SessionConfig sessionConfig;
-    private boolean requestedSessionIDParsed;
-    private String requestedSessionID;
-    private boolean requestedSessionIDFromCookie;
-    private boolean requestedSessionIDFromURL;
-    private SessionImpl session;
-    private boolean sessionReturned;
+    private boolean       requestedSessionIDParsed;
+    private String        requestedSessionID;
+    private boolean       requestedSessionIDFromCookie;
+    private boolean       requestedSessionIDFromURL;
+    private SessionImpl   session;
+    private boolean       sessionReturned;
 
-    /**
-     * 构造函数。
-     */
+    /** 构造函数。 */
     public SessionRequestContextImpl(RequestContext wrappedContext, SessionConfig sessionConfig) {
         super(wrappedContext);
         this.sessionConfig = sessionConfig;
@@ -127,9 +122,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
         return session != null && session.getId().equals(requestedSessionID);
     }
 
-    /**
-     * 确保session ID已经从request中被解析出来了。
-     */
+    /** 确保session ID已经从request中被解析出来了。 */
     private void ensureRequestedSessionID() {
         if (!requestedSessionIDParsed) {
             if (sessionConfig.getId().isCookieEnabled()) {
@@ -144,23 +137,17 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
         }
     }
 
-    /**
-     * 将session ID编码到Cookie中去。
-     */
+    /** 将session ID编码到Cookie中去。 */
     public void encodeSessionIDIntoCookie() {
         writeSessionIDCookie(session.getId());
     }
 
-    /**
-     * 将session ID从Cookie中删除。
-     */
+    /** 将session ID从Cookie中删除。 */
     public void clearSessionIDFromCookie() {
         writeSessionIDCookie("");
     }
 
-    /**
-     * 写cookie。
-     */
+    /** 写cookie。 */
     private void writeSessionIDCookie(String cookieValue) {
         CookieConfig cookieConfig = sessionConfig.getId().getCookie();
         CookieSupport cookie = new CookieSupport(cookieConfig.getName(), cookieValue);
@@ -241,8 +228,8 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
                 keyBeginIndex++;
 
                 if (urlLength - keyBeginIndex <= keyNameLength
-                        || !url.regionMatches(keyBeginIndex, keyName, 0, keyNameLength)
-                        || url.charAt(keyBeginIndex + keyNameLength) != '=') {
+                    || !url.regionMatches(keyBeginIndex, keyName, 0, keyNameLength)
+                    || url.charAt(keyBeginIndex + keyNameLength) != '=') {
                     continue;
                 }
 
@@ -281,12 +268,12 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
         int keyNameLength = keyName.length();
 
         for (int keyBeginIndex = uri.indexOf(';'); keyBeginIndex >= 0; keyBeginIndex = uri.indexOf(';',
-                keyBeginIndex + 1)) {
+                                                                                                   keyBeginIndex + 1)) {
             keyBeginIndex++;
 
             if (uriLength - keyBeginIndex <= keyNameLength
-                    || !uri.regionMatches(keyBeginIndex, keyName, 0, keyNameLength)
-                    || uri.charAt(keyBeginIndex + keyNameLength) != '=') {
+                || !uri.regionMatches(keyBeginIndex, keyName, 0, keyNameLength)
+                || uri.charAt(keyBeginIndex + keyNameLength) != '=') {
                 continue;
             }
 
@@ -359,16 +346,12 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
         return session;
     }
 
-    /**
-     * 开始一个请求。
-     */
+    /** 开始一个请求。 */
     @Override
     public void prepare() {
     }
 
-    /**
-     * 结束一个请求。
-     */
+    /** 结束一个请求。 */
     @Override
     public void commit() {
         if (!sessionReturned) {
@@ -383,9 +366,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
         session.commit();
     }
 
-    /**
-     * 支持session的<code>HttpServletRequestWrapper</code>。
-     */
+    /** 支持session的<code>HttpServletRequestWrapper</code>。 */
     private class SessionRequestWrapper extends AbstractRequestWrapper {
         /**
          * 构造函数。
@@ -458,9 +439,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
             return SessionRequestContextImpl.this.getSession(create);
         }
 
-        /**
-         * @deprecated use isRequestedSessionIdFromURL instead
-         */
+        /** @deprecated use isRequestedSessionIdFromURL instead */
         @Override
         @Deprecated
         public boolean isRequestedSessionIdFromUrl() {
@@ -468,9 +447,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
         }
     }
 
-    /**
-     * 支持session的<code>HttpServletResponseWrapper</code>。
-     */
+    /** 支持session的<code>HttpServletResponseWrapper</code>。 */
     private class SessionResponseWrapper extends AbstractResponseWrapper {
         /**
          * 构造函数。
@@ -511,18 +488,14 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
             return url;
         }
 
-        /**
-         * @deprecated use encodeURL instead
-         */
+        /** @deprecated use encodeURL instead */
         @Override
         @Deprecated
         public String encodeUrl(String url) {
             return encodeURL(url);
         }
 
-        /**
-         * @deprecated use encodeRedirectURL instead
-         */
+        /** @deprecated use encodeRedirectURL instead */
         @Override
         @Deprecated
         public String encodeRedirectUrl(String url) {

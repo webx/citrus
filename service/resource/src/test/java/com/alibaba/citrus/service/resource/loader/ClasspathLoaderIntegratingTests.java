@@ -24,14 +24,13 @@ import static org.junit.Assert.*;
 import java.net.URL;
 import java.net.URLClassLoader;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.resource.AbstractResourceLoadingTests;
 import com.alibaba.citrus.service.resource.ResourceLoadingService;
 import com.alibaba.citrus.service.resource.ResourceNotFoundException;
 import com.alibaba.citrus.springext.support.context.XmlWebApplicationContext;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class ClasspathLoaderIntegratingTests extends AbstractResourceLoadingTests {
     @BeforeClass
@@ -59,6 +58,5 @@ public class ClasspathLoaderIntegratingTests extends AbstractResourceLoadingTest
             fail();
         } catch (ResourceNotFoundException e) {
         }
-
     }
 }

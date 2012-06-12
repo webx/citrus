@@ -23,8 +23,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.parser.CookieParser;
 import com.alibaba.citrus.service.requestcontext.parser.ParameterParser;
@@ -33,6 +31,7 @@ import com.alibaba.citrus.service.requestcontext.rundata.RunData;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.Navigator;
 import com.alibaba.citrus.turbine.TurbineRunData;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class MyAction {
     @Autowired

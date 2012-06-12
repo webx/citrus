@@ -20,13 +20,11 @@ package com.alibaba.citrus.service.jsp;
 import static org.easymock.EasyMock.*;
 
 import java.util.Locale;
-
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.citrus.service.jsp.impl.JspResponse;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.alibaba.citrus.service.jsp.impl.JspResponse;
 
 public class JspResponseTests {
     private HttpServletResponse response;

@@ -19,18 +19,17 @@ package com.alibaba.citrus.service.form;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.form.support.FormTool;
 import com.alibaba.citrus.service.form.support.FormTool.FieldHelper;
 import com.alibaba.citrus.service.form.support.FormTool.GroupInstanceHelper;
 import com.alibaba.citrus.service.pull.PullService;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class UncompressedFieldKeyTests extends AbstractFormServiceTests {
-    private Form form;
-    private Group group;
+    private Form     form;
+    private Group    group;
     private FormTool tool;
 
     @BeforeClass
@@ -47,14 +46,12 @@ public class UncompressedFieldKeyTests extends AbstractFormServiceTests {
         assertNotNull(tool);
     }
 
-    /**
-     * FieldKeyFormat=compressed，同时支持压缩、不压缩混合格式的key，大小写不敏感。
-     */
+    /** FieldKeyFormat=compressed，同时支持压缩、不压缩混合格式的key，大小写不敏感。 */
     @Test
     public void compress_uncompress_hybrid() throws Exception {
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.grOup1._0.f", "aaa" }, // group1.field1
-                { "_fm.group1._0.field2", "bbb" }, // group1.field2
+                                           { "_fm.grOup1._0.f", "aaa" }, // group1.field1
+                                           { "_fm.group1._0.field2", "bbb" }, // group1.field2
         };
 
         invokePost(args);
@@ -70,17 +67,15 @@ public class UncompressedFieldKeyTests extends AbstractFormServiceTests {
         assertEquals("bbb", group.getField("field2").getStringValue());
     }
 
-    /**
-     * FieldKeyFormat=uncompressed，不支持压缩，只支持不压缩格式的key，大小写不敏感。
-     */
+    /** FieldKeyFormat=uncompressed，不支持压缩，只支持不压缩格式的key，大小写不敏感。 */
     @Test
     public void uncompress_only_1() throws Exception {
         getFormService("form5");
 
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.grOup1._0.fieLd1", "aaa" }, // group1.field1
-                { "_fm.group1._0.field2.absent", "ccc" }, // group1.field2
-                { "_fm.group1._0.Field2.attach", "eNpb85aBtYSBOTEpGQAUSAM8" }, // group1.field2
+                                           { "_fm.grOup1._0.fieLd1", "aaa" }, // group1.field1
+                                           { "_fm.group1._0.field2.absent", "ccc" }, // group1.field2
+                                           { "_fm.group1._0.Field2.attach", "eNpb85aBtYSBOTEpGQAUSAM8" }, // group1.field2
         };
 
         invokePost(args);
@@ -102,8 +97,8 @@ public class UncompressedFieldKeyTests extends AbstractFormServiceTests {
         getFormService("form5");
 
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.grOup1._0.f", "aaa" }, // group1.field1
-                { "_fm.group1._0.field2", "bbb" }, // group1.field2
+                                           { "_fm.grOup1._0.f", "aaa" }, // group1.field1
+                                           { "_fm.group1._0.field2", "bbb" }, // group1.field2
         };
 
         invokePost(args);

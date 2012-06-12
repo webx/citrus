@@ -19,15 +19,14 @@ package com.alibaba.citrus.service.configuration.impl;
 
 import static com.alibaba.citrus.service.configuration.support.PropertyEditorRegistrarsSupport.*;
 
+import com.alibaba.citrus.service.configuration.support.PropertyEditorRegistrarsSupport;
+import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-import com.alibaba.citrus.service.configuration.support.PropertyEditorRegistrarsSupport;
-import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
-
 public class PropertyEditorRegistrarsDefinitionParser extends
-        AbstractNamedBeanDefinitionParser<PropertyEditorRegistrarsSupport> {
+                                                      AbstractNamedBeanDefinitionParser<PropertyEditorRegistrarsSupport> {
     @Override
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         builder.addPropertyValue("propertyEditorRegistrars", parseRegistrars(element, parserContext, builder));

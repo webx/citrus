@@ -23,13 +23,7 @@ import static java.util.Collections.*;
 import static org.junit.Assert.*;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
 
 import com.alibaba.citrus.service.pull.PullService;
 import com.alibaba.citrus.service.uribroker.impl.URIBrokerServiceImpl;
@@ -39,6 +33,10 @@ import com.alibaba.citrus.service.uribroker.uri.GenericURIBroker;
 import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 import com.alibaba.citrus.service.uribroker.uri.URIBroker.URIType;
 import com.alibaba.citrus.util.i18n.LocaleUtil;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
 
 /**
  * 测试uribroker的配置。
@@ -79,7 +77,7 @@ public class URIBrokerConfigTests extends AbstractURIBrokerServiceTests {
 
         assertEquals("http://localhost/", uri.render());
         assertEquals("http://user:pass@www.alibaba.com/aa/bb",
-                uri.setServerURI("http://user:pass@www.alibaba.com/aa/bb").render());
+                     uri.setServerURI("http://user:pass@www.alibaba.com/aa/bb").render());
         assertEquals("http://www.alibaba.com/", uri.setServerName("www.alibaba.com").render());
         assertEquals("http://localhost:8080/", uri.setServerPort(8080).render());
         assertEquals("http://localhost/", uri.setServerPort(80).render());
@@ -100,10 +98,10 @@ public class URIBrokerConfigTests extends AbstractURIBrokerServiceTests {
         assertEquals(URIType.relative, uri.getURIType());
 
         assertEquals("http://myuser2:mypass2@myservername2:1234/aaa/a1/bbb/ccc/ddd?"
-                + "aaa=1111&bbb=2222&ccc=3333#myreference2", uri.render());
+                     + "aaa=1111&bbb=2222&ccc=3333#myreference2", uri.render());
 
         assertEquals("http://myuser2:mypass2@myservername2:1234/aaa/a1/bbb/ccc/ddd?"
-                + "aaa=1111&bbb=2222&ccc=3333#myreference2", uri.toString());
+                     + "aaa=1111&bbb=2222&ccc=3333#myreference2", uri.toString());
     }
 
     @Test
@@ -192,7 +190,7 @@ public class URIBrokerConfigTests extends AbstractURIBrokerServiceTests {
             } else {
                 assertEquals("http:///", uri.render());
                 assertEquals("http://www.alibaba.com:9999/", uri.setServerName("www.alibaba.com").setServerPort(9999)
-                        .render());
+                                                                .render());
             }
         }
     }

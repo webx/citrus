@@ -20,14 +20,12 @@ package com.alibaba.citrus.service.requestcontext.lazycommit;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 
 /**
  * 测试<code>LazyCommitRequestContext</code>。

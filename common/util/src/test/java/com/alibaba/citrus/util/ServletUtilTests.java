@@ -24,7 +24,6 @@ import static org.junit.Assert.*;
 
 import java.util.Collection;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Before;
@@ -35,15 +34,15 @@ import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
 public class ServletUtilTests implements Cloneable {
-    private HttpServletRequest request;
-    private final boolean isPrefixServletMapping;
-    private final String servletPath;
-    private final String pathInfo;
-    private final String resourcePath;
-    private final String baseURL;
-    private final String servletResourcePath;
-    private final String servletBaseURL;
-    private final String fullURL;
+    private       HttpServletRequest request;
+    private final boolean            isPrefixServletMapping;
+    private final String             servletPath;
+    private final String             pathInfo;
+    private final String             resourcePath;
+    private final String             baseURL;
+    private final String             servletResourcePath;
+    private final String             servletBaseURL;
+    private final String             fullURL;
 
     public ServletUtilTests(boolean isPrefixServletMapping, String servletPath, String pathInfo, String resourcePath,
                             String baseURL, String servletResourcePath, String servletBaseURL, String fullURL) {
@@ -63,66 +62,66 @@ public class ServletUtilTests implements Cloneable {
 
         // 前缀映射，pathInfo不为空
         add(data, true, "/turbine", "/aaa/bbb", //
-                "/turbine/aaa/bbb", "http://localhost:8080/myapp", //
-                "/aaa/bbb", "http://localhost:8080/myapp/turbine", //
-                "http://localhost:8080/myapp/turbine/aaa/bbb");
+            "/turbine/aaa/bbb", "http://localhost:8080/myapp", //
+            "/aaa/bbb", "http://localhost:8080/myapp/turbine", //
+            "http://localhost:8080/myapp/turbine/aaa/bbb");
 
         add(data, true, "/hello.world", "/turbine", //
-                "/hello.world/turbine", "http://localhost:8080/myapp", //
-                "/turbine", "http://localhost:8080/myapp/hello.world", //
-                "http://localhost:8080/myapp/hello.world/turbine");
+            "/hello.world/turbine", "http://localhost:8080/myapp", //
+            "/turbine", "http://localhost:8080/myapp/hello.world", //
+            "http://localhost:8080/myapp/hello.world/turbine");
 
         add(data, true, " hello.world ", " turbine/ ", //
-                "/hello.world/turbine/", "http://localhost:8080/myapp", //
-                "/turbine/", "http://localhost:8080/myapp/hello.world", //
-                "http://localhost:8080/myapp/hello.world/turbine/");
+            "/hello.world/turbine/", "http://localhost:8080/myapp", //
+            "/turbine/", "http://localhost:8080/myapp/hello.world", //
+            "http://localhost:8080/myapp/hello.world/turbine/");
 
         add(data, true, null, " / ", //
-                "/", "http://localhost:8080/myapp", //
-                "/", "http://localhost:8080/myapp", //
-                "http://localhost:8080/myapp/");
+            "/", "http://localhost:8080/myapp", //
+            "/", "http://localhost:8080/myapp", //
+            "http://localhost:8080/myapp/");
 
         // 前缀映射，但pathInfo为空
         add(data, true, "/turbine", null, //
-                "/turbine", "http://localhost:8080/myapp", //
-                "", "http://localhost:8080/myapp/turbine", //
-                "http://localhost:8080/myapp/turbine");
+            "/turbine", "http://localhost:8080/myapp", //
+            "", "http://localhost:8080/myapp/turbine", //
+            "http://localhost:8080/myapp/turbine");
 
         add(data, true, "/turbine", "", //
-                "/turbine", "http://localhost:8080/myapp", //
-                "", "http://localhost:8080/myapp/turbine", //
-                "http://localhost:8080/myapp/turbine");
+            "/turbine", "http://localhost:8080/myapp", //
+            "", "http://localhost:8080/myapp/turbine", //
+            "http://localhost:8080/myapp/turbine");
 
         add(data, true, "/hello.world/turbine", null, //
-                "/hello.world/turbine", "http://localhost:8080/myapp", //
-                "", "http://localhost:8080/myapp/hello.world/turbine", //
-                "http://localhost:8080/myapp/hello.world/turbine");
+            "/hello.world/turbine", "http://localhost:8080/myapp", //
+            "", "http://localhost:8080/myapp/hello.world/turbine", //
+            "http://localhost:8080/myapp/hello.world/turbine");
 
         add(data, true, "/hello.world/turbine", "", //
-                "/hello.world/turbine", "http://localhost:8080/myapp", //
-                "", "http://localhost:8080/myapp/hello.world/turbine", //
-                "http://localhost:8080/myapp/hello.world/turbine");
+            "/hello.world/turbine", "http://localhost:8080/myapp", //
+            "", "http://localhost:8080/myapp/hello.world/turbine", //
+            "http://localhost:8080/myapp/hello.world/turbine");
 
         add(data, true, "  hello.world/turbine/ ", " ", //
-                "/hello.world/turbine/", "http://localhost:8080/myapp", //
-                "", "http://localhost:8080/myapp/hello.world/turbine", //
-                "http://localhost:8080/myapp/hello.world/turbine/");
+            "/hello.world/turbine/", "http://localhost:8080/myapp", //
+            "", "http://localhost:8080/myapp/hello.world/turbine", //
+            "http://localhost:8080/myapp/hello.world/turbine/");
 
         // 后缀映射
         add(data, false, "/aaa/bbb.htm", null, //
-                "/aaa/bbb.htm", "http://localhost:8080/myapp", //
-                "/aaa/bbb.htm", "http://localhost:8080/myapp", //
-                "http://localhost:8080/myapp/aaa/bbb.htm");
+            "/aaa/bbb.htm", "http://localhost:8080/myapp", //
+            "/aaa/bbb.htm", "http://localhost:8080/myapp", //
+            "http://localhost:8080/myapp/aaa/bbb.htm");
 
         add(data, false, "/aaa/bbb.htm", "", //
-                "/aaa/bbb.htm", "http://localhost:8080/myapp", //
-                "/aaa/bbb.htm", "http://localhost:8080/myapp", //
-                "http://localhost:8080/myapp/aaa/bbb.htm");
+            "/aaa/bbb.htm", "http://localhost:8080/myapp", //
+            "/aaa/bbb.htm", "http://localhost:8080/myapp", //
+            "http://localhost:8080/myapp/aaa/bbb.htm");
 
         add(data, false, " aaa/bbb.htm ", " ", //
-                "/aaa/bbb.htm", "http://localhost:8080/myapp", //
-                "/aaa/bbb.htm", "http://localhost:8080/myapp", //
-                "http://localhost:8080/myapp/aaa/bbb.htm");
+            "/aaa/bbb.htm", "http://localhost:8080/myapp", //
+            "/aaa/bbb.htm", "http://localhost:8080/myapp", //
+            "http://localhost:8080/myapp/aaa/bbb.htm");
 
         return data;
     }

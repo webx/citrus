@@ -23,23 +23,20 @@ import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.config.RuntimeBeanReference;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
 
 import com.alibaba.citrus.service.uribroker.impl.URIBrokerServiceImpl.URIBrokerInfo;
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
+import org.springframework.beans.factory.config.RuntimeBeanReference;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 public class URIBrokerServiceDefinitionParser extends AbstractNamedBeanDefinitionParser<URIBrokerServiceImpl> implements
-        ContributionAware {
+                                                                                                              ContributionAware {
     private ConfigurationPoint uriBrokersConfigurationPoint;
 
     public void setContribution(Contribution contrib) {
@@ -71,7 +68,7 @@ public class URIBrokerServiceDefinitionParser extends AbstractNamedBeanDefinitio
 
         for (Element subElement : subElements(element)) {
             Object broker = parseConfigurationPointBean(subElement, uriBrokersConfigurationPoint, parserContext,
-                    builder);
+                                                        builder);
 
             if (broker != null) {
                 BeanDefinitionBuilder infoBuilder = BeanDefinitionBuilder.genericBeanDefinition(URIBrokerInfo.class);

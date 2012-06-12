@@ -45,10 +45,10 @@ public class DiskFileItemFactory extends org.apache.commons.fileupload.disk.Disk
 
         if (isFormField && (sizeThreshold == 0 || keepFormFieldInMemory)) {
             return new InMemoryFormFieldItem(fieldName, contentType, isFormField, fileName, sizeThreshold,
-                    keepFormFieldInMemory, getRepository());
+                                             keepFormFieldInMemory, getRepository());
         } else {
             return new DiskFileItem(fieldName, contentType, isFormField, fileName, sizeThreshold,
-                    keepFormFieldInMemory, getRepository());
+                                    keepFormFieldInMemory, getRepository());
         }
     }
 }

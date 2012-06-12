@@ -21,6 +21,8 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static org.springframework.beans.factory.config.BeanDefinition.*;
 
+import com.alibaba.citrus.springext.support.parser.NamedBeanDefinitionParserMixin.DefaultNameBDParser;
+import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -35,16 +37,13 @@ import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.ResourceLoader;
 import org.w3c.dom.Element;
 
-import com.alibaba.citrus.springext.support.parser.NamedBeanDefinitionParserMixin.DefaultNameBDParser;
-import com.alibaba.citrus.springext.util.ProxyTargetFactory;
-
 /**
  * 用来创建proxy的parser。
  *
  * @author Michael Zhou
  */
 public abstract class AbstractNamedProxyBeanDefinitionParser extends AbstractBeanDefinitionParser implements
-        DefaultNameBDParser {
+                                                                                                  DefaultNameBDParser {
     private final NamedBeanDefinitionParserMixin mixin = new NamedBeanDefinitionParserMixin(this);
 
     /**
@@ -55,17 +54,13 @@ public abstract class AbstractNamedProxyBeanDefinitionParser extends AbstractBea
      */
     protected abstract String getDefaultName();
 
-    /**
-     * 从id attribute中取得bean name，假如未指定，则从<code>getDefaultName()</code>中取得默认名。
-     */
+    /** 从id attribute中取得bean name，假如未指定，则从<code>getDefaultName()</code>中取得默认名。 */
     @Override
     protected String resolveId(Element element, AbstractBeanDefinition definition, ParserContext parserContext) {
         return mixin.resolveId(element, definition, parserContext);
     }
 
-    /**
-     * 假如当前bean name为默认名，则同时注册默认的aliases。
-     */
+    /** 假如当前bean name为默认名，则同时注册默认的aliases。 */
     @Override
     protected void registerBeanDefinition(BeanDefinitionHolder definition, BeanDefinitionRegistry registry) {
         mixin.registerBeanDefinition(definition, registry);
@@ -86,7 +81,7 @@ public abstract class AbstractNamedProxyBeanDefinitionParser extends AbstractBea
 
         // 取得真实的bean，注意，由于设置了containingBean=proxyBean，这个bean不会被注册到registry
         ParserContext realBeanParserContext = new ParserContext(parserContext.getReaderContext(),
-                parserContext.getDelegate(), proxyBuilder.getRawBeanDefinition());
+                                                                parserContext.getDelegate(), proxyBuilder.getRawBeanDefinition());
 
         AbstractBeanDefinition realBd = (AbstractBeanDefinition) realParser.parse(element, realBeanParserContext);
 
@@ -124,10 +119,10 @@ public abstract class AbstractNamedProxyBeanDefinitionParser extends AbstractBea
     protected abstract AbstractBeanDefinitionParser getRealObjectParser();
 
     public static class ProxyFactoryBean implements FactoryBean, BeanFactoryAware, ResourceLoaderAware {
-        private final Class<?> targetBeanType;
-        private final String targetBeanName;
-        private BeanFactory factory;
-        private ClassLoader loader;
+        private final Class<?>    targetBeanType;
+        private final String      targetBeanName;
+        private       BeanFactory factory;
+        private       ClassLoader loader;
 
         public ProxyFactoryBean(Class<?> targetBeanType, String targetBeanName) {
             this.targetBeanType = targetBeanType;
@@ -156,7 +151,7 @@ public abstract class AbstractNamedProxyBeanDefinitionParser extends AbstractBea
     }
 
     private static class ProxyTargetFactoryImpl implements ProxyTargetFactory {
-        private final String targetBeanName;
+        private final String      targetBeanName;
         private final BeanFactory factory;
 
         public ProxyTargetFactoryImpl(String targetBeanName, BeanFactory factory) {

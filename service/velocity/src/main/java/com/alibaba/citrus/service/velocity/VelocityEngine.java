@@ -21,10 +21,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 
-import org.apache.velocity.context.Context;
-
 import com.alibaba.citrus.service.template.TemplateEngine;
 import com.alibaba.citrus.service.template.TemplateException;
+import org.apache.velocity.context.Context;
 
 /**
  * Velocity模板引擎。
@@ -36,20 +35,14 @@ import com.alibaba.citrus.service.template.TemplateException;
  * @author Michael Zhou
  */
 public interface VelocityEngine extends TemplateEngine {
-    /**
-     * 渲染模板，并以字符串的形式取得渲染的结果。
-     */
+    /** 渲染模板，并以字符串的形式取得渲染的结果。 */
     String mergeTemplate(String template, Context context, String inputEncoding) throws TemplateException, IOException;
 
-    /**
-     * 渲染模板，并将渲染的结果送到字节输出流中。
-     */
+    /** 渲染模板，并将渲染的结果送到字节输出流中。 */
     void mergeTemplate(String template, Context context, OutputStream ostream, String inputEncoding,
                        String outputEncoding) throws TemplateException, IOException;
 
-    /**
-     * 渲染模板，并将渲染的结果送到字符输出流中。
-     */
+    /** 渲染模板，并将渲染的结果送到字符输出流中。 */
     void mergeTemplate(String template, Context context, Writer writer, String inputEncoding) throws TemplateException,
-            IOException;
+                                                                                                     IOException;
 }

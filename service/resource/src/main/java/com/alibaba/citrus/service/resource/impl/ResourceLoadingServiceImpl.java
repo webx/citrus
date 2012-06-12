@@ -28,10 +28,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-
 import com.alibaba.citrus.service.AbstractService;
 import com.alibaba.citrus.service.resource.Resource;
 import com.alibaba.citrus.service.resource.ResourceLoadingOption;
@@ -40,6 +36,9 @@ import com.alibaba.citrus.service.resource.ResourceNotFoundException;
 import com.alibaba.citrus.service.resource.ResourceTrace;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 /**
  * 实现<code>ResourceLoadingService</code>。
@@ -47,15 +46,15 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public class ResourceLoadingServiceImpl extends AbstractService<ResourceLoadingService> implements
-        ResourceLoadingService, ApplicationContextAware {
-    public final static String DEFAULT_NAME = "resourceLoadingService";
+                                                                                        ResourceLoadingService, ApplicationContextAware {
+    public final static  String     DEFAULT_NAME         = "resourceLoadingService";
     private final static Resource[] EMPTY_RESOURCE_ARRAY = new Resource[0];
 
-    private ApplicationContext factory;
-    private ResourceLoadingService parent;
-    private ResourceMapping[] resourceMappings;
+    private ApplicationContext      factory;
+    private ResourceLoadingService  parent;
+    private ResourceMapping[]       resourceMappings;
     private ResourceFilterMapping[] filterMappings;
-    private String configLocation;
+    private String                  configLocation;
 
     public void setApplicationContext(ApplicationContext factory) throws BeansException {
         this.factory = factory;
@@ -116,67 +115,51 @@ public class ResourceLoadingServiceImpl extends AbstractService<ResourceLoadingS
         }
     }
 
-    /**
-     * 查找指定名称的资源。
-     */
+    /** 查找指定名称的资源。 */
     public URL getResourceAsURL(String resourceName) throws ResourceNotFoundException {
         return checkResource(getResource(resourceName).getURL(), resourceName, URL.class);
     }
 
-    /**
-     * 查找指定名称的资源。
-     */
+    /** 查找指定名称的资源。 */
     public File getResourceAsFile(String resourceName) throws ResourceNotFoundException {
         return checkResource(getResource(resourceName).getFile(), resourceName, File.class);
     }
 
-    /**
-     * 查找指定名称的资源。
-     */
+    /** 查找指定名称的资源。 */
     public File getResourceAsFile(String resourceName, Set<ResourceLoadingOption> options)
             throws ResourceNotFoundException {
         return checkResource(getResource(resourceName, options).getFile(), resourceName, File.class);
     }
 
-    /**
-     * 查找指定名称的资源。
-     */
+    /** 查找指定名称的资源。 */
     public InputStream getResourceAsStream(String resourceName) throws ResourceNotFoundException, IOException {
         return checkResource(getResource(resourceName).getInputStream(), resourceName, InputStream.class);
     }
 
-    /**
-     * 判断非空。
-     */
+    /** 判断非空。 */
     private <T> T checkResource(T resource, String resourceName, Class<T> type) throws ResourceNotFoundException {
         if (resource == null) {
             throw new ResourceNotFoundException(String.format("Could not get %s of resource \"%s\"",
-                    type.getSimpleName(), resourceName));
+                                                              type.getSimpleName(), resourceName));
         }
 
         return resource;
     }
 
-    /**
-     * 查找指定名称的资源。
-     */
+    /** 查找指定名称的资源。 */
     public Resource getResource(String resourceName) throws ResourceNotFoundException {
         return getResource(resourceName, null);
     }
 
-    /**
-     * 查找指定名称的资源。
-     */
+    /** 查找指定名称的资源。 */
     public Resource getResource(String resourceName, Set<ResourceLoadingOption> options)
             throws ResourceNotFoundException {
         assertInitialized();
         return new ResourceLoaderContextImpl(resourceName, options, filterMappings, resourceMappings, getParent(),
-                getLogger(), configLocation, getBeanName()).getResource();
+                                             getLogger(), configLocation, getBeanName()).getResource();
     }
 
-    /**
-     * 判断指定名称的资源是否存在。如果存在，则返回<code>true</code>。
-     */
+    /** 判断指定名称的资源是否存在。如果存在，则返回<code>true</code>。 */
     public boolean exists(String resourceName) {
         try {
             getResource(resourceName);
@@ -186,47 +169,35 @@ public class ResourceLoadingServiceImpl extends AbstractService<ResourceLoadingS
         }
     }
 
-    /**
-     * 跟踪并获取搜索资源的路径。
-     */
+    /** 跟踪并获取搜索资源的路径。 */
     public ResourceTrace trace(String resourceName) {
         return trace(resourceName, FOR_CREATE);
     }
 
-    /**
-     * 跟踪并获取搜索资源的路径。
-     */
+    /** 跟踪并获取搜索资源的路径。 */
     public ResourceTrace trace(String resourceName, Set<ResourceLoadingOption> options) {
         assertInitialized();
         return new ResourceLoaderContextImpl(resourceName, options, filterMappings, resourceMappings, getParent(),
-                getLogger(), configLocation, getBeanName()).getTrace();
+                                             getLogger(), configLocation, getBeanName()).getTrace();
     }
 
-    /**
-     * 罗列出指定资源的子目录或文件名。如果不存在，则返回空数组。
-     */
+    /** 罗列出指定资源的子目录或文件名。如果不存在，则返回空数组。 */
     public String[] list(String resourceName) throws ResourceNotFoundException {
         return list(resourceName, null);
     }
 
-    /**
-     * 罗列出指定资源的子目录或文件名。如果不存在，则返回空数组。
-     */
+    /** 罗列出指定资源的子目录或文件名。如果不存在，则返回空数组。 */
     public String[] list(String resourceName, Set<ResourceLoadingOption> options) throws ResourceNotFoundException {
         assertInitialized();
         return new ResourceListerContextImpl(resourceName, options, resourceMappings, getParent(), getLogger()).list();
     }
 
-    /**
-     * 罗列出指定资源的子目录或文件资源。如果不存在，则返回空数组。
-     */
+    /** 罗列出指定资源的子目录或文件资源。如果不存在，则返回空数组。 */
     public Resource[] listResources(String resourceName) throws ResourceNotFoundException {
         return listResources(resourceName, null);
     }
 
-    /**
-     * 罗列出指定资源的子目录或文件资源。如果不存在，则返回空数组。
-     */
+    /** 罗列出指定资源的子目录或文件资源。如果不存在，则返回空数组。 */
     public Resource[] listResources(String resourceName, Set<ResourceLoadingOption> options)
             throws ResourceNotFoundException {
         String[] names = list(resourceName, options);
@@ -250,9 +221,7 @@ public class ResourceLoadingServiceImpl extends AbstractService<ResourceLoadingS
         return resources.toArray(new Resource[resources.size()]);
     }
 
-    /**
-     * 取得所有的patterns名称。
-     */
+    /** 取得所有的patterns名称。 */
     public String[] getPatterns(boolean includeParent) {
         Set<String> patterns = createLinkedHashSet();
 

@@ -33,9 +33,20 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.servlet.ServletContext;
 
+import com.alibaba.citrus.springext.util.SpringExtUtil;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import com.alibaba.citrus.webx.WebxComponent;
+import com.alibaba.citrus.webx.WebxComponents;
+import com.alibaba.citrus.webx.WebxController;
+import com.alibaba.citrus.webx.WebxRootController;
+import com.alibaba.citrus.webx.config.WebxConfiguration;
+import com.alibaba.citrus.webx.config.WebxConfiguration.ComponentConfig;
+import com.alibaba.citrus.webx.config.WebxConfiguration.ComponentsConfig;
+import com.alibaba.citrus.webx.config.impl.WebxConfigurationImpl;
+import com.alibaba.citrus.webx.config.impl.WebxConfigurationImpl.ComponentsConfigImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -61,19 +72,6 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.ServletContextResourcePatternResolver;
 
-import com.alibaba.citrus.springext.util.SpringExtUtil;
-import com.alibaba.citrus.util.ToStringBuilder;
-import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
-import com.alibaba.citrus.webx.WebxComponent;
-import com.alibaba.citrus.webx.WebxComponents;
-import com.alibaba.citrus.webx.WebxController;
-import com.alibaba.citrus.webx.WebxRootController;
-import com.alibaba.citrus.webx.config.WebxConfiguration;
-import com.alibaba.citrus.webx.config.WebxConfiguration.ComponentConfig;
-import com.alibaba.citrus.webx.config.WebxConfiguration.ComponentsConfig;
-import com.alibaba.citrus.webx.config.impl.WebxConfigurationImpl;
-import com.alibaba.citrus.webx.config.impl.WebxConfigurationImpl.ComponentsConfigImpl;
-
 /**
  * 用来装载webx components的装载器。
  *
@@ -81,28 +79,22 @@ import com.alibaba.citrus.webx.config.impl.WebxConfigurationImpl.ComponentsConfi
  */
 public class WebxComponentsLoader extends ContextLoader {
     private final static Logger log = LoggerFactory.getLogger(WebxComponentsLoader.class);
-    private String webxConfigurationName;
-    private ServletContext servletContext;
+    private String                webxConfigurationName;
+    private ServletContext        servletContext;
     private WebApplicationContext componentsContext;
-    private WebxComponentsImpl components;
+    private WebxComponentsImpl    components;
 
-    /**
-     * 取得context中<code>WebxConfiguration</code>的名称。
-     */
+    /** 取得context中<code>WebxConfiguration</code>的名称。 */
     public String getWebxConfigurationName() {
         return webxConfigurationName == null ? "webxConfiguration" : webxConfigurationName;
     }
 
-    /**
-     * 设置context中<code>WebxConfiguration</code>的名称。
-     */
+    /** 设置context中<code>WebxConfiguration</code>的名称。 */
     public void setWebxConfigurationName(String webxConfigurationName) {
         this.webxConfigurationName = trimToNull(webxConfigurationName);
     }
 
-    /**
-     * 取得在servlet context中保存component context的key。
-     */
+    /** 取得在servlet context中保存component context的key。 */
     public String getComponentContextAttributeName(String componentName) {
         return COMPONENT_CONTEXT_PREFIX + componentName;
     }
@@ -111,16 +103,14 @@ public class WebxComponentsLoader extends ContextLoader {
         return servletContext;
     }
 
-    /**
-     * 取得components。
-     */
+    /** 取得components。 */
     public WebxComponents getWebxComponents() {
         return components;
     }
 
     @Override
     public WebApplicationContext initWebApplicationContext(ServletContext servletContext) throws IllegalStateException,
-            BeansException {
+                                                                                                 BeansException {
         this.servletContext = servletContext;
         init();
 
@@ -140,7 +130,7 @@ public class WebxComponentsLoader extends ContextLoader {
                 return ClassUtils.forName(contextClassName);
             } catch (ClassNotFoundException ex) {
                 throw new ApplicationContextException("Failed to load custom context class [" + contextClassName + "]",
-                        ex);
+                                                      ex);
             }
         } else {
             return getDefaultContextClass();
@@ -157,9 +147,7 @@ public class WebxComponentsLoader extends ContextLoader {
         return WebxComponentsContext.class;
     }
 
-    /**
-     * 在componentsContext.refresh()之前被调用。
-     */
+    /** 在componentsContext.refresh()之前被调用。 */
     @Override
     protected void customizeContext(ServletContext servletContext, ConfigurableWebApplicationContext componentsContext) {
         this.componentsContext = componentsContext;
@@ -215,9 +203,7 @@ public class WebxComponentsLoader extends ContextLoader {
         }
     }
 
-    /**
-     * 初始化所有components。
-     */
+    /** 初始化所有components。 */
     public void finishRefresh() {
         components.getWebxRootController().onFinishedProcessContext();
 
@@ -239,9 +225,7 @@ public class WebxComponentsLoader extends ContextLoader {
         log.info(msg);
     }
 
-    /**
-     * 初始化components。
-     */
+    /** 初始化components。 */
     private WebxComponentsImpl createComponents(WebxConfiguration parentConfiguration,
                                                 ConfigurableListableBeanFactory beanFactory) {
         ComponentsConfig componentsConfig = getComponentsConfig(parentConfiguration);
@@ -267,7 +251,7 @@ public class WebxComponentsLoader extends ContextLoader {
 
         // 创建并将components对象置入resolvable dependencies，以便注入到需要的bean中
         WebxComponentsImpl components = new WebxComponentsImpl(componentsContext,
-                componentsConfig.getDefaultComponent(), rootController, parentConfiguration);
+                                                               componentsConfig.getDefaultComponent(), rootController, parentConfiguration);
 
         beanFactory.registerResolvableDependency(WebxComponents.class, components);
 
@@ -288,8 +272,8 @@ public class WebxComponentsLoader extends ContextLoader {
             }
 
             WebxComponentImpl component = new WebxComponentImpl(components, componentName, componentPath,
-                    componentName.equals(componentsConfig.getDefaultComponent()), controller,
-                    getWebxConfigurationName());
+                                                                componentName.equals(componentsConfig.getDefaultComponent()), controller,
+                                                                getWebxConfigurationName());
 
             components.addComponent(component);
 
@@ -318,12 +302,10 @@ public class WebxComponentsLoader extends ContextLoader {
         getServletContext().setAttribute(attrName, wcc);
 
         log.debug("Published WebApplicationContext of component {} as ServletContext attribute with name [{}]",
-                componentName, attrName);
+                  componentName, attrName);
     }
 
-    /**
-     * 查找component名称。
-     */
+    /** 查找component名称。 */
     private Map<String, String> findComponents(ComponentsConfig componentsConfig, ServletContext servletContext) {
         String locationPattern = componentsConfig.getComponentConfigurationLocationPattern();
         String[] prefixAndPattern = checkComponentConfigurationLocationPattern(locationPattern);
@@ -348,7 +330,7 @@ public class WebxComponentsLoader extends ContextLoader {
 
                         if (componentName != null) {
                             componentNamesAndLocations.put(componentName,
-                                    prefix + pathPattern.replace("*", componentName));
+                                                           prefix + pathPattern.replace("*", componentName));
                         }
                     }
                 }
@@ -398,12 +380,10 @@ public class WebxComponentsLoader extends ContextLoader {
         }
 
         throw new IllegalArgumentException("Invalid componentConfigurationLocationPattern: "
-                + componentConfigurationLocationPattern);
+                                           + componentConfigurationLocationPattern);
     }
 
-    /**
-     * 从parent configuration中取得components配置。
-     */
+    /** 从parent configuration中取得components配置。 */
     private ComponentsConfig getComponentsConfig(WebxConfiguration parentConfiguration) {
         ComponentsConfig componentsConfig = assertNotNull(parentConfiguration, "parentConfiguration")
                 .getComponentsConfig();
@@ -416,9 +396,7 @@ public class WebxComponentsLoader extends ContextLoader {
         return componentsConfig;
     }
 
-    /**
-     * 从parent context中取得<code>WebxConfiguration</code>。
-     */
+    /** 从parent context中取得<code>WebxConfiguration</code>。 */
     private WebxConfiguration getParentConfiguration() {
         try {
             return (WebxConfiguration) componentsContext.getBean(getWebxConfigurationName());
@@ -440,12 +418,12 @@ public class WebxComponentsLoader extends ContextLoader {
     }
 
     private static class WebxComponentsImpl implements WebxComponents, ApplicationListener {
-        private final WebxConfiguration parentConfiguration;
-        private final WebApplicationContext parentContext;
+        private final WebxConfiguration          parentConfiguration;
+        private final WebApplicationContext      parentContext;
         private final Map<String, WebxComponent> components;
-        private final RootComponent rootComponent;
-        private final String defaultComponentName;
-        private final WebxRootController rootController;
+        private final RootComponent              rootComponent;
+        private final String                     defaultComponentName;
+        private final WebxRootController         rootController;
 
         public WebxComponentsImpl(WebApplicationContext parentContext, String defaultComponentName,
                                   WebxRootController rootController, WebxConfiguration parentConfiguration) {
@@ -536,7 +514,7 @@ public class WebxComponentsLoader extends ContextLoader {
             if (event instanceof ContextRefreshedEvent) {
                 // autowire and init root controller
                 autowireAndInitialize(rootController, getParentApplicationContext(),
-                        AbstractBeanDefinition.AUTOWIRE_AUTODETECT, "webxRootController");
+                                      AbstractBeanDefinition.AUTOWIRE_AUTODETECT, "webxRootController");
 
                 rootController.onRefreshContext();
             }
@@ -554,9 +532,7 @@ public class WebxComponentsLoader extends ContextLoader {
             return new ToStringBuilder().append("WebxComponents").append(mb).toString();
         }
 
-        /**
-         * 这是一个特殊的component实现，对应于root context。
-         */
+        /** 这是一个特殊的component实现，对应于root context。 */
         private class RootComponent implements WebxComponent {
             public WebxComponents getWebxComponents() {
                 return WebxComponentsImpl.this;
@@ -591,12 +567,12 @@ public class WebxComponentsLoader extends ContextLoader {
     }
 
     private static class WebxComponentImpl implements WebxComponent, ApplicationListener {
-        private final WebxComponents components;
-        private final String name;
-        private final String componentPath;
-        private final WebxController controller;
-        private final String webxConfigurationName;
-        private WebApplicationContext context;
+        private final WebxComponents        components;
+        private final String                name;
+        private final String                componentPath;
+        private final WebxController        controller;
+        private final String                webxConfigurationName;
+        private       WebApplicationContext context;
 
         public WebxComponentImpl(WebxComponents components, String name, String path, boolean defaultComponent,
                                  WebxController controller, String webxConfigurationName) {
@@ -652,7 +628,7 @@ public class WebxComponentsLoader extends ContextLoader {
             if (event instanceof ContextRefreshedEvent) {
                 // autowire and init controller
                 autowireAndInitialize(controller, getApplicationContext(), AbstractBeanDefinition.AUTOWIRE_AUTODETECT,
-                        "webxController." + getName());
+                                      "webxController." + getName());
 
                 controller.onRefreshContext();
             }

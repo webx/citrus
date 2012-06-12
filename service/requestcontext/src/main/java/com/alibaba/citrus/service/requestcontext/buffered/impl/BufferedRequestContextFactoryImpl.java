@@ -37,16 +37,12 @@ public class BufferedRequestContextFactoryImpl extends AbstractRequestContextFac
         return new BufferedRequestContextImpl(wrappedContext);
     }
 
-    /**
-     * 本类提供了延迟提交content的功能。
-     */
+    /** 本类提供了延迟提交content的功能。 */
     public String[] getFeatures() {
         return new String[] { "lazyCommitContent" };
     }
 
-    /**
-     * 本类不依赖其它features。
-     */
+    /** 本类不依赖其它features。 */
     public FeatureOrder[] featureOrders() {
         return null;
     }

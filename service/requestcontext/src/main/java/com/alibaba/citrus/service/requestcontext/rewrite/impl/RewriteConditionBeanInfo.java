@@ -37,7 +37,7 @@ public class RewriteConditionBeanInfo extends SimpleBeanInfo {
 
         try {
             descriptors = createLinkedList(Introspector.getBeanInfo(RewriteCondition.class.getSuperclass())
-                    .getPropertyDescriptors());
+                                                       .getPropertyDescriptors());
 
             descriptors.add(new PropertyDescriptor("test", RewriteCondition.class, null, "setTest"));
             descriptors.add(new PropertyDescriptor("pattern", RewriteCondition.class, null, "setPattern"));

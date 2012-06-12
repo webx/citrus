@@ -17,15 +17,12 @@
 
 package com.alibaba.citrus.turbine.pipeline.valve;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.Valve;
 import com.alibaba.citrus.service.requestcontext.rundata.RunData;
+import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * @author dux.fangl
- */
+/** @author dux.fangl */
 public class MyValve implements Valve {
     @Autowired
     private RunData rundata;

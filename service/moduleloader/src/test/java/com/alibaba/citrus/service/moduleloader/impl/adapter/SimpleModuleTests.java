@@ -20,15 +20,14 @@ package com.alibaba.citrus.service.moduleloader.impl.adapter;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.beans.factory.BeanCreationException;
-
 import com.alibaba.citrus.service.AbstractWebTests;
 import com.alibaba.citrus.service.moduleloader.Module;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.beans.factory.BeanCreationException;
 
 public class SimpleModuleTests extends AbstractWebTests {
     private ModuleLoaderService moduleLoader;

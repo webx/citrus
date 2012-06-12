@@ -35,34 +35,26 @@ import com.alibaba.citrus.util.StringUtil;
  * @author Michael Zhou
  */
 public class StringCompareValidator extends AbstractOptionalValidator {
-    private String fieldName;
+    private String          fieldName;
     private CompareOperator op;
-    private boolean ignoreCase;
+    private boolean         ignoreCase;
 
-    /**
-     * 取得要比较的field名称。
-     */
+    /** 取得要比较的field名称。 */
     public String getFieldName() {
         return fieldName;
     }
 
-    /**
-     * 取得比较操作的类型。
-     */
+    /** 取得比较操作的类型。 */
     public CompareOperator getOp() {
         return op;
     }
 
-    /**
-     * 设置等于操作。
-     */
+    /** 设置等于操作。 */
     public void setEqualTo(String fieldName) {
         setFieldName(equalTo, fieldName);
     }
 
-    /**
-     * 设置不等于操作。
-     */
+    /** 设置不等于操作。 */
     public void setNotEqualTo(String fieldName) {
         setFieldName(notEqualTo, fieldName);
     }
@@ -72,9 +64,7 @@ public class StringCompareValidator extends AbstractOptionalValidator {
         this.fieldName = trimToNull(fieldName);
     }
 
-    /**
-     * 设置忽略大小写。
-     */
+    /** 设置忽略大小写。 */
     public void setIgnoreCase(boolean ignoreCase) {
         this.ignoreCase = ignoreCase;
     }
@@ -91,15 +81,13 @@ public class StringCompareValidator extends AbstractOptionalValidator {
 
         if (fieldName == null || op == null) {
             throw new IllegalArgumentException("One of the following attributes should be set: "
-                    + asList(equalTo, notEqualTo));
+                                               + asList(equalTo, notEqualTo));
         }
 
         assertNotNull(fieldConfig.getGroupConfig().getFieldConfig(fieldName), "Field %s not exists", fieldName);
     }
 
-    /**
-     * 验证一个字段。
-     */
+    /** 验证一个字段。 */
     @Override
     protected boolean validate(Context context, String value) {
         Field fieldToCompare = assertNotNull(context.getField(fieldName), "field not found");

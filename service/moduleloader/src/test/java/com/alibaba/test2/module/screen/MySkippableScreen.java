@@ -19,9 +19,8 @@ package com.alibaba.test2.module.screen;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.test2.dataresolver.Skip;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class MySkippableScreen {
     @Autowired

@@ -20,10 +20,9 @@ package com.alibaba.citrus.service.requestcontext.session.encrypter.impl;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
+import com.alibaba.citrus.service.requestcontext.session.encrypter.AbstractEncrypterTests;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.alibaba.citrus.service.requestcontext.session.encrypter.AbstractEncrypterTests;
 
 public class AesEncrypterTests extends AbstractEncrypterTests<AesEncrypter> {
     @Before

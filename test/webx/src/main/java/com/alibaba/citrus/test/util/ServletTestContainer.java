@@ -28,7 +28,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.util.Locale;
 import java.util.Map;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -38,12 +37,6 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.w3c.dom.Element;
 
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.RequestContextChainingService;
@@ -55,6 +48,11 @@ import com.meterware.servletunit.InvocationContext;
 import com.meterware.servletunit.PatchedServletRunner;
 import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.w3c.dom.Element;
 
 /**
  * 创建用于测试的servlet容器，支持request contexts机制。
@@ -62,16 +60,16 @@ import com.meterware.servletunit.ServletUnitClient;
  * @author Michael Zhou
  */
 public class ServletTestContainer {
-    protected final ServletRunner servletRunner;
+    protected final ServletRunner     servletRunner;
     protected final ServletUnitClient client;
 
-    private InvocationContext invocationContext;
-    private HttpServletRequest rawRequest;
+    private InvocationContext   invocationContext;
+    private HttpServletRequest  rawRequest;
     private HttpServletResponse rawResponse;
-    private ServletContext servletContext;
+    private ServletContext      servletContext;
 
     private RequestContextChainingService requestContexts;
-    private RequestContext requestContext;
+    private RequestContext                requestContext;
 
     private WebResponse clientResponse;
 
@@ -160,9 +158,7 @@ public class ServletTestContainer {
         }
     }
 
-    /**
-     * 将服务端response提交到client。
-     */
+    /** 将服务端response提交到client。 */
     public void commit() {
         try {
             if (requestContexts != null && requestContext != null) {
@@ -187,15 +183,13 @@ public class ServletTestContainer {
         requestContext = null;
     }
 
-    /**
-     * 不做任何事的servlet。
-     */
+    /** 不做任何事的servlet。 */
     public static class NoopServlet extends HttpServlet {
         private static final long serialVersionUID = 3034658026956449398L;
 
         @Override
         protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-                IOException {
+                                                                                                IOException {
         }
     }
 
@@ -207,7 +201,7 @@ public class ServletTestContainer {
         private String charset;
         private String overrideQueryString;
         private String server = "www.test.com";
-        private int port = 80;
+        private int    port   = 80;
         private boolean sessionCreated;
 
         public MyHttpRequest(HttpServletRequest request, String uri) {
@@ -241,9 +235,7 @@ public class ServletTestContainer {
             this.charset = charset;
         }
 
-        /**
-         * 默认实现总是返回localhost，只好覆盖此方法。
-         */
+        /** 默认实现总是返回localhost，只好覆盖此方法。 */
         @Override
         public String getServerName() {
             return server;
@@ -253,9 +245,7 @@ public class ServletTestContainer {
             this.server = server;
         }
 
-        /**
-         * 默认实现总是返回0，只好覆盖此方法。
-         */
+        /** 默认实现总是返回0，只好覆盖此方法。 */
         @Override
         public int getServerPort() {
             return port;
@@ -265,9 +255,7 @@ public class ServletTestContainer {
             this.port = port;
         }
 
-        /**
-         * 监视getSession方法的调用。
-         */
+        /** 监视getSession方法的调用。 */
         public boolean isSessionCreated() {
             return sessionCreated;
         }
@@ -288,9 +276,7 @@ public class ServletTestContainer {
         }
     }
 
-    /**
-     * 由于httpunit目前未实现commit以后抛IllegalStateException，所以只能将response包装一下。
-     */
+    /** 由于httpunit目前未实现commit以后抛IllegalStateException，所以只能将response包装一下。 */
     public static class MyHttpResponse extends HttpServletResponseWrapper {
         private boolean committed;
 

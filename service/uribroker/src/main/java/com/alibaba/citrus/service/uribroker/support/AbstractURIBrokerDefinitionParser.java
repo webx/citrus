@@ -26,16 +26,14 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * <code>URIBroker</code>解析器的基类。
@@ -69,7 +67,7 @@ public class AbstractURIBrokerDefinitionParser<U extends URIBroker> extends Abst
         ElementSelector simplePropertiesSelector = and(
                 sameNs(element),
                 or(name("serverURI"), name("serverScheme"), name("loginUser"), name("loginPassword"),
-                        name("serverName"), name("serverPort"), name("reference"), getSimplePropertiesSelector()));
+                   name("serverName"), name("serverPort"), name("reference"), getSimplePropertiesSelector()));
 
         ElementSelector querySelector = and(sameNs(element), name("query"));
 
@@ -95,7 +93,7 @@ public class AbstractURIBrokerDefinitionParser<U extends URIBroker> extends Abst
             // interceptors
             else {
                 Object interceptor = parseConfigurationPointBean(subElement, uriBrokerInterceptorsConfigurationPoint,
-                        parserContext, builder);
+                                                                 parserContext, builder);
 
                 if (interceptor != null) {
                     interceptors.add(interceptor);

@@ -30,16 +30,12 @@ import com.alibaba.citrus.service.form.support.NumberSupport.Type;
 public abstract class AbstractNumberValidator extends AbstractOptionalValidator {
     private Type numberType = INT;
 
-    /**
-     * 取得数字的类型。
-     */
+    /** 取得数字的类型。 */
     public Type getNumberType() {
         return numberType;
     }
 
-    /**
-     * 设置数字的类型。
-     */
+    /** 设置数字的类型。 */
     public void setNumberType(Type numberType) {
         this.numberType = assertNotNull(numberType, "numberType");
     }

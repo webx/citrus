@@ -19,7 +19,8 @@ package com.alibaba.citrus.service.configuration.impl;
 
 import com.alibaba.citrus.service.configuration.support.AbstractConfigurationDefinitionParser;
 
-public class SimpleConfigurationDefinitionParser extends AbstractConfigurationDefinitionParser<SimpleConfigurationImpl> {
+public class SimpleConfigurationDefinitionParser
+        extends AbstractConfigurationDefinitionParser<SimpleConfigurationImpl> {
     @Override
     protected String getDefaultName() {
         return SimpleConfigurationImpl.DEFAULT_NAME;

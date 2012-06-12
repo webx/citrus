@@ -27,7 +27,6 @@ import static javax.mail.internet.MimeUtility.*;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -45,17 +44,13 @@ import com.alibaba.citrus.util.io.ByteArrayOutputStream;
  * @author Michael Zhou
  */
 public class MailUtil {
-    /**
-     * 如果指定<code>javaCharset</code>为空白，则返回默认charset，否则返回原值。
-     */
+    /** 如果指定<code>javaCharset</code>为空白，则返回默认charset，否则返回原值。 */
     public static String getJavaCharset(String javaCharset) {
         javaCharset = trimToNull(javaCharset);
         return defaultIfNull(javaCharset, DEFAULT_CHARSET);
     }
 
-    /**
-     * 将javamail邮件对象转换成文本形式，其格式为标准的<code>.eml</code>格式。
-     */
+    /** 将javamail邮件对象转换成文本形式，其格式为标准的<code>.eml</code>格式。 */
     public static String toString(Message message) throws MessagingException {
         try {
             return toString(message, null);
@@ -65,11 +60,9 @@ public class MailUtil {
         }
     }
 
-    /**
-     * 将javamail邮件对象转换成文本形式，其格式为标准的<code>.eml</code>格式。
-     */
+    /** 将javamail邮件对象转换成文本形式，其格式为标准的<code>.eml</code>格式。 */
     public static String toString(Message message, String javaCharset) throws MessagingException,
-            UnsupportedEncodingException {
+                                                                              UnsupportedEncodingException {
         ByteArrayOutputStream ostream = new ByteArrayOutputStream();
 
         try {
@@ -131,7 +124,7 @@ public class MailUtil {
      * </p>
      */
     public static InternetAddress[] parse(String addrList, String javaCharset) throws AddressException,
-            UnsupportedEncodingException {
+                                                                                      UnsupportedEncodingException {
         return parse(addrList, javaCharset, false);
     }
 
@@ -147,7 +140,7 @@ public class MailUtil {
      * </p>
      */
     public static InternetAddress[] parse(String addrList, String javaCharset, boolean strict) throws AddressException,
-            UnsupportedEncodingException {
+                                                                                                      UnsupportedEncodingException {
         InternetAddress[] addrs = InternetAddress.parse(defaultIfNull(addrList, EMPTY_STRING), strict);
 
         if (!isEmptyArray(addrs)) {
@@ -166,9 +159,7 @@ public class MailUtil {
         return addrs;
     }
 
-    /**
-     * 取得<code>ContentType</code>对象。
-     */
+    /** 取得<code>ContentType</code>对象。 */
     public static ContentType getContentType(String contentType, String javaCharset) throws ParseException {
         assertNotNull(contentType, "contentType");
 

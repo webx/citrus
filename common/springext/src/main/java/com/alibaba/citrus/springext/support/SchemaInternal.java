@@ -20,8 +20,6 @@ package com.alibaba.citrus.springext.support;
 import com.alibaba.citrus.springext.Schema;
 
 public interface SchemaInternal extends Schema {
-    /**
-     * 修改schema的elements。这个值只能由schemaSet来设置。
-     */
+    /** 修改schema的elements。这个值只能由schemaSet来设置。 */
     void setElements(String[] elements);
 }

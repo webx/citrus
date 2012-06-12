@@ -23,14 +23,13 @@ import static org.junit.Assert.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.beans.factory.BeanCreationException;
-
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import com.alibaba.citrus.service.requestcontext.lazycommit.LazyCommitRequestContext;
 import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
 import com.alibaba.citrus.webx.util.ErrorHandlerHelper;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.factory.BeanCreationException;
 
 public class HandleExceptionValveTests extends AbstractValveTests {
     @Before

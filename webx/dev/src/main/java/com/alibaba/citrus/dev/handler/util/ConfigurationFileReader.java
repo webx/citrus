@@ -30,18 +30,17 @@ import java.net.URL;
 import java.util.List;
 import java.util.Set;
 
+import com.alibaba.citrus.dev.handler.util.DomUtil.ElementFilter;
 import org.dom4j.Namespace;
 import org.dom4j.QName;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
-import com.alibaba.citrus.dev.handler.util.DomUtil.ElementFilter;
-
 public class ConfigurationFileReader {
     private final ConfigurationFile[] configurationFiles;
-    private final String baseURL;
-    private final ResourceLoader loader;
+    private final String              baseURL;
+    private final ResourceLoader      loader;
 
     public ConfigurationFileReader(ResourceLoader loader, String[] configLocations) throws IOException {
         this.loader = assertNotNull(loader);
@@ -123,7 +122,7 @@ public class ConfigurationFileReader {
                 public org.dom4j.Element filter(org.dom4j.Element e) throws Exception {
                     // 删除schemaLocation
                     org.dom4j.Attribute attr = e.attribute(new QName("schemaLocation", new Namespace("xsi",
-                            "http://www.w3.org/2001/XMLSchema-instance")));
+                                                                                                     "http://www.w3.org/2001/XMLSchema-instance")));
 
                     if (attr != null) {
                         e.remove(attr);
@@ -131,7 +130,7 @@ public class ConfigurationFileReader {
 
                     // 导入beans:import，并删除element
                     if ("http://www.springframework.org/schema/beans".equals(e.getNamespaceURI())
-                            && "import".equals(e.getName())) {
+                        && "import".equals(e.getName())) {
                         String importedResourceName = trimToNull(e.attributeValue("resource"));
 
                         if (importedResourceName != null) {
@@ -162,8 +161,8 @@ public class ConfigurationFileReader {
         }
 
         return new ConfigurationFile(namedResource.name, url,
-                importedConfigurationFiles.toArray(new ConfigurationFile[importedConfigurationFiles.size()]),
-                rootElement);
+                                     importedConfigurationFiles.toArray(new ConfigurationFile[importedConfigurationFiles.size()]),
+                                     rootElement);
     }
 
     public ConfigurationFile[] toConfigurationFiles() {
@@ -171,7 +170,7 @@ public class ConfigurationFileReader {
     }
 
     private static class NamedResource {
-        private final String name;
+        private final String   name;
         private final Resource resource;
 
         public NamedResource(String name, Resource resource) {

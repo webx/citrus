@@ -19,10 +19,6 @@ package com.alibaba.citrus.service.form.impl;
 
 import java.util.Map;
 
-import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
-import org.springframework.beans.BeansException;
-
 import com.alibaba.citrus.expr.ExpressionContext;
 import com.alibaba.citrus.service.form.Field;
 import com.alibaba.citrus.service.form.Form;
@@ -32,6 +28,9 @@ import com.alibaba.citrus.service.form.Validator;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 import com.alibaba.citrus.util.Utils;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.beans.BeansException;
 
 public class MessageContextFactory {
     /**
@@ -136,7 +135,7 @@ public class MessageContextFactory {
                 if (fieldWrapper == null) {
                     fieldWrapper = new BeanWrapperImpl(field);
                     field.getGroup().getForm().getFormConfig().getPropertyEditorRegistrar()
-                            .registerCustomEditors(fieldWrapper);
+                         .registerCustomEditors(fieldWrapper);
                 }
 
                 // 在field实例中查找property
@@ -182,7 +181,7 @@ public class MessageContextFactory {
                 if (validatorWrapper == null) {
                     validatorWrapper = new BeanWrapperImpl(validator);
                     field.getGroup().getForm().getFormConfig().getPropertyEditorRegistrar()
-                            .registerCustomEditors(validatorWrapper);
+                         .registerCustomEditors(validatorWrapper);
                 }
 
                 // 在validator object中查找property

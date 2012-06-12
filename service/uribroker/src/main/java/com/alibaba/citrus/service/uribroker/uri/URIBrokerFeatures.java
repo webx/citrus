@@ -18,8 +18,8 @@
 package com.alibaba.citrus.service.uribroker.uri;
 
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
-import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.Assert.ExceptionType.*;
+import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
@@ -27,7 +27,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.citrus.service.template.Renderable;
@@ -41,31 +40,25 @@ import com.alibaba.citrus.util.StringEscapeUtil;
  */
 public abstract class URIBrokerFeatures implements Renderable {
     protected final Renderer renderer = new Renderer();
-    private Boolean requestAware;
-    private HttpServletRequest request;
-    private URIBroker parent;
-    private boolean initialized;
-    private String charset;
-    private boolean autoReset;
+    private Boolean                            requestAware;
+    private HttpServletRequest                 request;
+    private URIBroker                          parent;
+    private boolean                            initialized;
+    private String                             charset;
+    private boolean                            autoReset;
     private Map<URIBrokerInterceptor, Integer> interceptors;
 
-    /**
-     * 设置运行时信息。由Spring自动装入。
-     */
+    /** 设置运行时信息。由Spring自动装入。 */
     public void setRequest(HttpServletRequest request) {
         this.request = request;
     }
 
-    /**
-     * 是否自动从request中填充值。
-     */
+    /** 是否自动从request中填充值。 */
     public boolean isRequestAware() {
         return requestAware == null ? false : requestAware;
     }
 
-    /**
-     * 设置是否自动从request中填充值。
-     */
+    /** 设置是否自动从request中填充值。 */
     public void setRequestAware(boolean requestAware) {
         this.requestAware = requestAware;
     }
@@ -76,9 +69,7 @@ public abstract class URIBrokerFeatures implements Renderable {
         }
     }
 
-    /**
-     * 取得parent URI broker。
-     */
+    /** 取得parent URI broker。 */
     public URIBroker getParent() {
         return parent;
     }
@@ -107,9 +98,7 @@ public abstract class URIBrokerFeatures implements Renderable {
         return charset;
     }
 
-    /**
-     * 设置URL encoding的编码字符集。
-     */
+    /** 设置URL encoding的编码字符集。 */
     public void setCharset(String charset) {
         this.charset = trimToNull(charset);
     }
@@ -125,16 +114,12 @@ public abstract class URIBrokerFeatures implements Renderable {
         return autoReset;
     }
 
-    /**
-     * 是否有interceptor？
-     */
+    /** 是否有interceptor？ */
     public boolean hasInterceptors() {
         return interceptors != null && !interceptors.isEmpty();
     }
 
-    /**
-     * 取得所有的interceptors及其状态。
-     */
+    /** 取得所有的interceptors及其状态。 */
     protected Map<URIBrokerInterceptor, Integer> getInterceptorStates() {
         if (interceptors == null) {
             interceptors = createLinkedHashMap();
@@ -143,16 +128,12 @@ public abstract class URIBrokerFeatures implements Renderable {
         return interceptors;
     }
 
-    /**
-     * 取得所有的interceptors。
-     */
+    /** 取得所有的interceptors。 */
     public Collection<URIBrokerInterceptor> getInterceptors() {
         return getInterceptorStates().keySet();
     }
 
-    /**
-     * 取得所有的interceptors。
-     */
+    /** 取得所有的interceptors。 */
     public void setInterceptors(Collection<URIBrokerInterceptor> interceptors) {
         clearInterceptors();
 
@@ -161,25 +142,19 @@ public abstract class URIBrokerFeatures implements Renderable {
         }
     }
 
-    /**
-     * 添加一个interceptor。
-     */
+    /** 添加一个interceptor。 */
     public void addInterceptor(URIBrokerInterceptor interceptor) {
         getInterceptorStates().put(assertNotNull(interceptor, "interceptor"), null);
     }
 
-    /**
-     * 清除interceptors。
-     */
+    /** 清除interceptors。 */
     public void clearInterceptors() {
         if (interceptors != null) {
             interceptors.clear();
         }
     }
 
-    /**
-     * 初始化URI broker，将当前broker与parent合并。
-     */
+    /** 初始化URI broker，将当前broker与parent合并。 */
     public final void init() {
         if (initialized) {
             return;
@@ -213,14 +188,10 @@ public abstract class URIBrokerFeatures implements Renderable {
         renderer.prerender();
     }
 
-    /**
-     * 复制parent broker中的值作为默认值，但不覆盖当前broker中已有的值。
-     */
+    /** 复制parent broker中的值作为默认值，但不覆盖当前broker中已有的值。 */
     protected abstract void initDefaults(URIBroker parent);
 
-    /**
-     * 复位到parent的状态。
-     */
+    /** 复位到parent的状态。 */
     public final void reset() {
         URIBroker parent = this.parent;
 
@@ -265,9 +236,7 @@ public abstract class URIBrokerFeatures implements Renderable {
      */
     protected abstract void copyFrom(URIBroker parent);
 
-    /**
-     * 将request中的运行时信息填充到uri broker中。
-     */
+    /** 将request中的运行时信息填充到uri broker中。 */
     protected abstract void populateWithRequest(HttpServletRequest request);
 
     /**
@@ -293,7 +262,7 @@ public abstract class URIBrokerFeatures implements Renderable {
      * 此方法和<code>render()</code>具有相同的副作用，假如<code>autoReset == true</code>
      * ，那么所有状态自动复位。可应用于以下场景（velocity）：
      * </p>
-     *
+     * <p/>
      * <pre>
      * #set ($sub_uri = $uri.addPath("xxx/yyy").fork())
      *
@@ -306,9 +275,7 @@ public abstract class URIBrokerFeatures implements Renderable {
         return fork(true);
     }
 
-    /**
-     * 以当前URI broker为模板, 创建一个新的URI broker。
-     */
+    /** 以当前URI broker为模板, 创建一个新的URI broker。 */
     public final URIBroker fork(boolean autoReset) {
         URIBroker parentBroker;
         URIBroker broker = null;
@@ -337,9 +304,7 @@ public abstract class URIBrokerFeatures implements Renderable {
         return broker;
     }
 
-    /**
-     * 创建一个新的空白broker。
-     */
+    /** 创建一个新的空白broker。 */
     protected final URIBroker newInstanceInternal() {
         URIBroker instance = assertNotNull(newInstance(), "%s.newInstance() returns null", getClass().getName());
 
@@ -351,14 +316,10 @@ public abstract class URIBrokerFeatures implements Renderable {
         return instance;
     }
 
-    /**
-     * 创建新的实例。
-     */
+    /** 创建新的实例。 */
     protected abstract URIBroker newInstance();
 
-    /**
-     * 按顺序执行所有interceptors。
-     */
+    /** 按顺序执行所有interceptors。 */
     protected void processInterceptors() {
         if (hasInterceptors()) {
             for (Map.Entry<URIBrokerInterceptor, Integer> entry : getInterceptorStates().entrySet()) {
@@ -370,9 +331,7 @@ public abstract class URIBrokerFeatures implements Renderable {
         }
     }
 
-    /**
-     * 渲染uri。
-     */
+    /** 渲染uri。 */
     public final String render() {
         return render(autoReset);
     }
@@ -401,9 +360,7 @@ public abstract class URIBrokerFeatures implements Renderable {
 
     protected abstract void renderQuery(StringBuilder buf);
 
-    /**
-     * 工具方法：进行URL编码，使用uribroker中指定的charset。
-     */
+    /** 工具方法：进行URL编码，使用uribroker中指定的charset。 */
     protected final String escapeURL(String str) {
         String charset = trimToNull(getCharset());
 
@@ -414,9 +371,7 @@ public abstract class URIBrokerFeatures implements Renderable {
         }
     }
 
-    /**
-     * 将parent map中的值插入到当前map的前面。
-     */
+    /** 将parent map中的值插入到当前map的前面。 */
     protected final <K, V> void mergeLinkedHashMap(Map<K, V> parentMap, Map<K, V> thisMap) {
         assertNotNull(thisMap, "thisMap");
 
@@ -431,9 +386,7 @@ public abstract class URIBrokerFeatures implements Renderable {
         thisMap.putAll(thisMapCopy);
     }
 
-    /**
-     * 取得URI字符串，但不reset。
-     */
+    /** 取得URI字符串，但不reset。 */
     @Override
     public String toString() {
         return render(false);
@@ -450,8 +403,8 @@ public abstract class URIBrokerFeatures implements Renderable {
      */
     public final class Renderer {
         protected final StringBuilder serverBuffer = new StringBuilder();
-        protected final StringBuilder pathBuffer = new StringBuilder();
-        protected final StringBuilder queryBuffer = new StringBuilder();
+        protected final StringBuilder pathBuffer   = new StringBuilder();
+        protected final StringBuilder queryBuffer  = new StringBuilder();
 
         public boolean isServerRendered() {
             return serverBuffer.length() > 0;

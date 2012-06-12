@@ -20,10 +20,9 @@ package com.alibaba.citrus.service.form.impl.validation.composite;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.form.Validator;
 import com.alibaba.citrus.service.form.impl.validation.MyValidator;
+import org.junit.Test;
 
 public class ChooseValidatorTests extends AbstractCompositeValidatorTests<ChooseValidator> {
     @Override
@@ -56,7 +55,7 @@ public class ChooseValidatorTests extends AbstractCompositeValidatorTests<Choose
 
         v = newValidator();
         v.setValidators(createValidatorList(new ChooseValidator.When(), new ChooseValidator.Otherwise(),
-                new ChooseValidator.When()));
+                                            new ChooseValidator.When()));
 
         try {
             v.afterPropertiesSet();
@@ -78,12 +77,12 @@ public class ChooseValidatorTests extends AbstractCompositeValidatorTests<Choose
         // right validators
         v = newValidator();
         v.setValidators(createValidatorList(new ChooseValidator.When(), new ChooseValidator.When(),
-                new ChooseValidator.When()));
+                                            new ChooseValidator.When()));
         v.afterPropertiesSet();
 
         v = newValidator();
         v.setValidators(createValidatorList(new ChooseValidator.When(), new ChooseValidator.When(),
-                new ChooseValidator.Otherwise()));
+                                            new ChooseValidator.Otherwise()));
         v.afterPropertiesSet();
     }
 

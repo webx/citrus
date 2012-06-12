@@ -18,7 +18,6 @@
 package com.alibaba.citrus.service.uribroker.uri;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.citrus.util.ServletUtil;
@@ -28,7 +27,7 @@ import com.alibaba.citrus.util.ServletUtil;
  * <p>
  * 一个Servlet风格的URI包括如下几个部分：
  * </p>
- *
+ * <p/>
  * <pre>
  * URI         = SERVER_INFO + PATH + "?" + QUERY_DATA + "#" + REFERENCE
  * SERVER_INFO = scheme://loginUser:loginPassword@serverName:serverPort
@@ -39,7 +38,7 @@ import com.alibaba.citrus.util.ServletUtil;
  * <p>
  * 例如：
  * </p>
- *
+ * <p/>
  * <pre>
  * http://user:pass@myserver.com:8080/mycontext/myservlet/view?id=1#top
  * </pre>
@@ -53,12 +52,10 @@ import com.alibaba.citrus.util.ServletUtil;
  */
 public abstract class ServletURIBroker extends WebAppURIBroker {
     protected static final int SERVLET_PATH_INDEX = CONTEXT_PATH_INDEX + 1;
-    protected static final int PATH_INFO_INDEX = SERVLET_PATH_INDEX + 1;
+    protected static final int PATH_INFO_INDEX    = SERVLET_PATH_INDEX + 1;
     private boolean hasServletPath;
 
-    /**
-     * 将request中的运行时信息填充到uri broker中。
-     */
+    /** 将request中的运行时信息填充到uri broker中。 */
     @Override
     protected void populateWithRequest(HttpServletRequest request) {
         boolean savedHasContextPath = hasContextPath; // 该值可能被populateWithRequest()改变
@@ -74,9 +71,7 @@ public abstract class ServletURIBroker extends WebAppURIBroker {
         }
     }
 
-    /**
-     * 取得servlet path。
-     */
+    /** 取得servlet path。 */
     public String getServletPath() {
         if (hasServletPath) {
             return getPathSegmentAsString(SERVLET_PATH_INDEX);
@@ -85,18 +80,14 @@ public abstract class ServletURIBroker extends WebAppURIBroker {
         }
     }
 
-    /**
-     * 设置servlet path。
-     */
+    /** 设置servlet path。 */
     public ServletURIBroker setServletPath(String servletPath) {
         setPathSegment(SERVLET_PATH_INDEX, servletPath);
         hasServletPath = true;
         return this;
     }
 
-    /**
-     * 取得script名, 就是contextPath加servletName.
-     */
+    /** 取得script名, 就是contextPath加servletName. */
     public String getScriptName() {
         if (hasContextPath) {
             return getContextPath() + getServletPath();
@@ -105,16 +96,12 @@ public abstract class ServletURIBroker extends WebAppURIBroker {
         }
     }
 
-    /**
-     * 取得path info。
-     */
+    /** 取得path info。 */
     public String getPathInfo() {
         return getAllPathSegmentsAsString(PATH_INFO_INDEX);
     }
 
-    /**
-     * 取得一组path info。
-     */
+    /** 取得一组path info。 */
     public List<String> getPathInfoElements() {
         return getAllPathSegments(PATH_INFO_INDEX);
     }

@@ -20,18 +20,12 @@ package com.alibaba.citrus.service.requestcontext.session;
 import javax.servlet.http.HttpSession;
 
 public interface SessionLifecycleListener extends SessionInterceptor {
-    /**
-     * 当session第一次被创建以后，被调用。
-     */
+    /** 当session第一次被创建以后，被调用。 */
     void sessionCreated(HttpSession session);
 
-    /**
-     * 当session被作废后以后，被调用。
-     */
+    /** 当session被作废后以后，被调用。 */
     void sessionInvalidated(HttpSession session);
 
-    /**
-     * 当session被访问的时候，被调用。
-     */
+    /** 当session被访问的时候，被调用。 */
     void sessionVisited(HttpSession session);
 }

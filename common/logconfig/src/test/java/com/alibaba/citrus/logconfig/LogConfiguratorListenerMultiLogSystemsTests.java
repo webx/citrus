@@ -41,10 +41,10 @@ public class LogConfiguratorListenerMultiLogSystemsTests extends AbstractLogConf
         assertThat(out, containsString("Initializing logback system"));
 
         assertThat(err, containsString("INFO: configuring \"logback\" using "
-                + new File("src/test/config/WEB-INF/logback.xml").toURI().toURL().toExternalForm()));
+                                       + new File("src/test/config/WEB-INF/logback.xml").toURI().toURL().toExternalForm()));
 
         assertThat(err, containsString("INFO: configuring \"log4j\" using "
-                + new File("src/test/config/WEB-INF/log4j.xml").toURI().toURL().toExternalForm()));
+                                       + new File("src/test/config/WEB-INF/log4j.xml").toURI().toURL().toExternalForm()));
     }
 
     @SuppressWarnings("unused")

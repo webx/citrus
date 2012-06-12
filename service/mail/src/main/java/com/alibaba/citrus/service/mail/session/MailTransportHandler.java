@@ -35,18 +35,12 @@ import com.alibaba.citrus.service.mail.builder.MailBuilder;
  * @author Michael Zhou
  */
 public interface MailTransportHandler extends TransportListener {
-    /**
-     * 预处理连接。
-     */
+    /** 预处理连接。 */
     void prepareConnection(Transport transport) throws MailException, MessagingException;
 
-    /**
-     * 预处理邮件。
-     */
+    /** 预处理邮件。 */
     void prepareMessage(MailBuilder builder) throws MailException;
 
-    /**
-     * 处理邮件。
-     */
+    /** 处理邮件。 */
     void processMessage(Message message) throws MailException, MessagingException;
 }

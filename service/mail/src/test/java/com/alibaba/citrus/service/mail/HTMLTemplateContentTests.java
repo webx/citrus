@@ -25,11 +25,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.mail.builder.MailBuilderException;
 import com.alibaba.citrus.service.mail.builder.content.HTMLTemplateContent;
 import com.alibaba.citrus.util.StringUtil;
+import org.junit.Test;
 
 /**
  * 测试基于模板的html content。

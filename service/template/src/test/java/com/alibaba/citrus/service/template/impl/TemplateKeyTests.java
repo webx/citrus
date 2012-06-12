@@ -21,6 +21,7 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static com.alibaba.citrus.util.ArrayUtil.*;
 import static org.easymock.EasyMock.*;
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -68,7 +69,7 @@ public class TemplateKeyTests {
     @Test
     public void strategyKeys() {
         key = newTemplateKey("a.vm");
-        assertArrayEquals(new Object[] {}, key.getStrategyKeys());
+        assertArrayEquals(new Object[] { }, key.getStrategyKeys());
 
         key = newTemplateKey("a.vm", 1, null, 3);
         assertArrayEquals(new Object[] { 1, null, 3 }, key.getStrategyKeys());
@@ -118,7 +119,7 @@ public class TemplateKeyTests {
 
         for (int i = 0; i < objects.length; i++) {
             strategies[i] = createMock(TemplateSearchingStrategy.class);
-            expect(strategies[i].getKey(org.easymock.EasyMock.<String> anyObject())).andReturn(objects[i]);
+            expect(strategies[i].getKey(org.easymock.EasyMock.<String>anyObject())).andReturn(objects[i]);
             replay(strategies[i]);
         }
 

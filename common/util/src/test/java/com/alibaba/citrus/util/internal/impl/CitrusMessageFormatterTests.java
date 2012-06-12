@@ -19,11 +19,10 @@ package com.alibaba.citrus.util.internal.impl;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.WrongPrefixMessages;
 import com.alibaba.citrus.util.internal.MessageFormatterTests;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * 测试<code>CitrusMessageFormatter</code>。

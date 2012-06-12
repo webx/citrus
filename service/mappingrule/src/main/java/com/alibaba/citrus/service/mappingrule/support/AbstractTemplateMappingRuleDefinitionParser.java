@@ -26,14 +26,14 @@ import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
 public abstract class AbstractTemplateMappingRuleDefinitionParser<M extends AbstractTemplateMappingRule> extends
-        AbstractMappingRuleDefinitionParser<M> {
+                                                                                                         AbstractMappingRuleDefinitionParser<M> {
 
     @Override
     protected final void doParseMappingRule(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         attributesToProperties(element, builder, "templatePrefix");
 
         builder.addPropertyReference("templateService",
-                defaultIfNull(trimToNull(element.getAttribute("templateServiceRef")), "templateService"));
+                                     defaultIfNull(trimToNull(element.getAttribute("templateServiceRef")), "templateService"));
 
         doParseTemplateMappingRule(element, parserContext, builder);
     }

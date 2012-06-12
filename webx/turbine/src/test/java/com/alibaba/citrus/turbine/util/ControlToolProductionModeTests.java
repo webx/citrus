@@ -21,11 +21,10 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
+import com.alibaba.citrus.webx.config.WebxConfiguration;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.alibaba.citrus.webx.config.WebxConfiguration;
 
 public class ControlToolProductionModeTests extends AbstractPullToolTests<ControlTool> {
     @BeforeClass

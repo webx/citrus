@@ -22,14 +22,13 @@ import static com.alibaba.citrus.util.BasicConstant.*;
 import java.net.URL;
 import java.util.Set;
 
-import org.springframework.context.ResourceLoaderAware;
-
 import com.alibaba.citrus.service.resource.Resource;
 import com.alibaba.citrus.service.resource.ResourceLoader;
 import com.alibaba.citrus.service.resource.ResourceLoaderContext;
 import com.alibaba.citrus.service.resource.ResourceLoadingOption;
 import com.alibaba.citrus.service.resource.ResourceLoadingService;
 import com.alibaba.citrus.service.resource.support.URLResource;
+import org.springframework.context.ResourceLoaderAware;
 
 /**
  * 从classloader中装载资源。
@@ -51,9 +50,7 @@ public class ClasspathResourceLoader implements ResourceLoader, ResourceLoaderAw
         this.cl = springLoader.getClassLoader();
     }
 
-    /**
-     * 初始化loader，并设定loader所在的<code>ResourceLoadingService</code>的实例。
-     */
+    /** 初始化loader，并设定loader所在的<code>ResourceLoadingService</code>的实例。 */
     public void init(ResourceLoadingService resourceLoadingService) {
         if (cl == null) {
             cl = getClass().getClassLoader();

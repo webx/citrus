@@ -25,22 +25,22 @@ import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.util.CollectionUtil;
 
 public class ExecutionLog {
-    private final static ThreadLocal<List<String>> log = new ThreadLocal<List<String>>();
-    public static String counterName = "loopCount";
+    private final static ThreadLocal<List<String>> log         = new ThreadLocal<List<String>>();
+    public static        String                    counterName = "loopCount";
 
     static {
         reset();
     }
 
     public static void reset() {
-        log.set(CollectionUtil.<String> createLinkedList());
+        log.set(CollectionUtil.<String>createLinkedList());
     }
 
     public static void add(PipelineContext pipelineContext) {
         if (pipelineContext.getAttribute(counterName) != null) {
             log.get().add(
                     String.format("%d-%d-loop-%d", pipelineContext.level(), pipelineContext.index(),
-                            pipelineContext.getAttribute(counterName)));
+                                  pipelineContext.getAttribute(counterName)));
         } else {
             log.get().add(String.format("%d-%d", pipelineContext.level(), pipelineContext.index()));
         }

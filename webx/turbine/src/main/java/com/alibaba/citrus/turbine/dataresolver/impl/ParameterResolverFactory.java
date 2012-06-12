@@ -21,12 +21,6 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.ArrayUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.StringUtil.*;
-import net.sf.cglib.reflect.FastConstructor;
-
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.springframework.core.MethodParameter;
-import org.w3c.dom.Element;
 
 import com.alibaba.citrus.service.dataresolver.DataResolver;
 import com.alibaba.citrus.service.dataresolver.DataResolverContext;
@@ -36,6 +30,11 @@ import com.alibaba.citrus.service.requestcontext.parser.ParserRequestContext;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import com.alibaba.citrus.turbine.dataresolver.Param;
 import com.alibaba.citrus.turbine.dataresolver.Params;
+import net.sf.cglib.reflect.FastConstructor;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.springframework.core.MethodParameter;
+import org.w3c.dom.Element;
 
 /**
  * 取得用户提交的参数。
@@ -60,7 +59,7 @@ public class ParameterResolverFactory implements DataResolverFactory {
         if (paramAnnotation != null) {
             String[] defaultValues = getDefaultValues(paramAnnotation, context);
             String paramName = DataResolverUtil.getAnnotationNameOrValue(Param.class, paramAnnotation, context,
-                    !isEmptyArray(defaultValues));
+                                                                         !isEmptyArray(defaultValues));
 
             return new ParameterResolver(context, defaultValues, paramName);
         }
@@ -85,18 +84,16 @@ public class ParameterResolverFactory implements DataResolverFactory {
         } else {
             // 避免defaultValue和defaultValues同时出现。
             assertTrue(isEmptyArray(param.defaultValues()),
-                    "use @Param(... defaultValue=\"...\") or @Param(... defaultValues={...}): %s", context);
+                       "use @Param(... defaultValue=\"...\") or @Param(... defaultValues={...}): %s", context);
 
             return new String[] { defaultValue };
         }
     }
 
-    /**
-     * 用来解析单个参数的resolver。
-     */
+    /** 用来解析单个参数的resolver。 */
     private class ParameterResolver extends AbstractDataResolver {
         private final String[] defaultValues;
-        private final String paramName;
+        private final String   paramName;
 
         private ParameterResolver(DataResolverContext context, String[] defaultValues, String paramName) {
             super("ParameterResolver", context);
@@ -113,9 +110,7 @@ public class ParameterResolverFactory implements DataResolverFactory {
         }
     }
 
-    /**
-     * 用来将多个参数注入bean中的resolver。
-     */
+    /** 用来将多个参数注入bean中的resolver。 */
     private class ParametersResolver extends AbstractDataResolver {
         private final FastConstructor fc;
 

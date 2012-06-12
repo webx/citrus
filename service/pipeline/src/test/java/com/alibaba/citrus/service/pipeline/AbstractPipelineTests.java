@@ -22,18 +22,17 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
-import org.junit.Before;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.core.io.FileSystemResource;
-
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import com.alibaba.citrus.service.pipeline.valve.ExecutionLog;
 import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import com.alibaba.citrus.test.TestEnvStatic;
+import org.junit.Before;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.core.io.FileSystemResource;
 
 public abstract class AbstractPipelineTests {
-    protected static BeanFactory factory;
-    protected PipelineImpl pipeline;
+    protected static BeanFactory  factory;
+    protected        PipelineImpl pipeline;
 
     static {
         TestEnvStatic.init();

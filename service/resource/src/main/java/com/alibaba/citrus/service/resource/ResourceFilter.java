@@ -34,9 +34,7 @@ public interface ResourceFilter {
      */
     void init(ResourceLoadingService resourceLoadingService);
 
-    /**
-     * 查找指定名称的资源。
-     */
+    /** 查找指定名称的资源。 */
     Resource doFilter(ResourceMatchResult filterMatchResult, Set<ResourceLoadingOption> options,
                       ResourceFilterChain chain) throws ResourceNotFoundException;
 }

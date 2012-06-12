@@ -24,7 +24,7 @@ import java.util.List;
  * <p>
  * 一个Servlet风格的URI包括如下几个部分：
  * </p>
- *
+ * <p/>
  * <pre>
  * URI         = SERVER_INFO + PATH + "?" + QUERY_DATA + "#" + REFERENCE
  * SERVER_INFO = scheme://loginUser:loginPassword@serverName:serverPort
@@ -36,7 +36,7 @@ import java.util.List;
  * <p>
  * 例如：
  * </p>
- *
+ * <p/>
  * <pre>
  * http://user:pass@myserver.com:8080/mycontext/myservlet/view?id=1#top
  * </pre>
@@ -44,9 +44,7 @@ import java.util.List;
  * @author Michael Zhou
  */
 public class GenericServletURIBroker extends ServletURIBroker {
-    /**
-     * 设置一组path info。
-     */
+    /** 设置一组path info。 */
     public void setPathInfoElements(List<String> path) {
         clearPathSegment(PATH_INFO_INDEX);
 
@@ -57,17 +55,13 @@ public class GenericServletURIBroker extends ServletURIBroker {
         }
     }
 
-    /**
-     * 添加path info。
-     */
+    /** 添加path info。 */
     public ServletURIBroker addPathInfo(String path) {
         addPathSegment(PATH_INFO_INDEX, path);
         return this;
     }
 
-    /**
-     * 清除所有path info。
-     */
+    /** 清除所有path info。 */
     public ServletURIBroker clearPathInfo() {
         clearPathSegment(PATH_INFO_INDEX);
         return this;

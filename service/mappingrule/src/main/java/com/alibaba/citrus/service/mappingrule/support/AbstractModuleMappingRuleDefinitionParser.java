@@ -26,13 +26,13 @@ import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
 public abstract class AbstractModuleMappingRuleDefinitionParser<M extends AbstractModuleMappingRule> extends
-        AbstractMappingRuleDefinitionParser<M> {
+                                                                                                     AbstractMappingRuleDefinitionParser<M> {
     @Override
     protected final void doParseMappingRule(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         attributesToProperties(element, builder, "moduleType");
 
         builder.addPropertyReference("moduleLoaderService",
-                defaultIfNull(trimToNull(element.getAttribute("moduleLoaderServiceRef")), "moduleLoaderService"));
+                                     defaultIfNull(trimToNull(element.getAttribute("moduleLoaderServiceRef")), "moduleLoaderService"));
 
         doParseModuleMappingRule(element, parserContext, builder);
     }

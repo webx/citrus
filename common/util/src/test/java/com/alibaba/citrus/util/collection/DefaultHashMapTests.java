@@ -23,16 +23,15 @@ import static org.junit.Assert.*;
 import java.util.Collection;
 import java.util.Map;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
-
 import com.alibaba.citrus.util.collection.DefaultHashMapTests.Constructors;
 import com.alibaba.citrus.util.collection.DefaultHashMapTests.MapBasic;
 import com.alibaba.citrus.util.collection.DefaultHashMapTests.MapEntrySet;
 import com.alibaba.citrus.util.collection.DefaultHashMapTests.MapKeySet;
 import com.alibaba.citrus.util.collection.DefaultHashMapTests.MapValues;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * 测试<code>DefaultHashMap</code>类.
@@ -142,9 +141,7 @@ public class DefaultHashMapTests {
     public static class Constructors {
         private DefaultHashMap<Object, Object> map;
 
-        /**
-         * 测试构造函数(initialCapacity, loadFactor).
-         */
+        /** 测试构造函数(initialCapacity, loadFactor). */
         @Test
         public void constructor1() {
             assertConstructorException(-1, .75f);
@@ -164,9 +161,7 @@ public class DefaultHashMapTests {
             assertParameters(32, 16);
         }
 
-        /**
-         * 测试构造函数(initialCapacity).
-         */
+        /** 测试构造函数(initialCapacity). */
         @Test
         public void constructor2() {
             assertConstructorException(-1);
@@ -175,18 +170,14 @@ public class DefaultHashMapTests {
             assertParameters(0, 1);
         }
 
-        /**
-         * 测试构造函数(无参数).
-         */
+        /** 测试构造函数(无参数). */
         @Test
         public void constructor3() {
             map = new DefaultHashMap<Object, Object>();
             assertParameters(12, 16);
         }
 
-        /**
-         * 测试构造函数(Map).
-         */
+        /** 测试构造函数(Map). */
         @Test
         public void constructor4() {
             Map<Object, Object> anotherMap = new java.util.HashMap<Object, Object>();
@@ -207,7 +198,7 @@ public class DefaultHashMapTests {
          * 测试内部参数: threshold和capacity.
          *
          * @param expectedThreshold 期望的阈值
-         * @param expectedCapacity 期望的容量
+         * @param expectedCapacity  期望的容量
          */
         private void assertParameters(int expectedThreshold, int expectedCapacity) {
             assertEquals(expectedThreshold, getThreshold(map));
@@ -218,7 +209,7 @@ public class DefaultHashMapTests {
          * 测试并试图得到Exception.
          *
          * @param initialCapacity 初始容量
-         * @param loadFactor 负载系数
+         * @param loadFactor      负载系数
          */
         private void assertConstructorException(int initialCapacity, float loadFactor) {
             try {

@@ -18,6 +18,7 @@
 package com.alibaba.citrus.service.freemarker.impl.log;
 
 import static com.alibaba.citrus.util.Assert.*;
+
 import freemarker.log.Logger;
 import freemarker.log.PublicLoggerFactory;
 

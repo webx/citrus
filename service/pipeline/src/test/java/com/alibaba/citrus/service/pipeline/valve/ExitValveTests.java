@@ -19,9 +19,8 @@ package com.alibaba.citrus.service.pipeline.valve;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pipeline.impl.valve.ExitValve;
+import org.junit.Test;
 
 public class ExitValveTests extends AbstractValveTests<ExitValve> {
     @Test
@@ -35,6 +34,6 @@ public class ExitValveTests extends AbstractValveTests<ExitValve> {
         pipeline = getPipelineImplFromFactory("exit-whole-pipeline");
         assertInvoke(pipeline, true);
         assertLog("1-1", "1-2", "2-1", "2-2", //
-                "3-1" /* 3-2 <exit/> */);
+                  "3-1" /* 3-2 <exit/> */);
     }
 }

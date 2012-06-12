@@ -37,10 +37,10 @@ import java.io.OutputStream;
  */
 public class InputStreamOutputEngine implements OutputEngine {
     private static final int DEFAULT_BUFFER_SIZE = 8192;
-    private InputStream in;
+    private InputStream         in;
     private OutputStreamFactory factory;
-    private byte[] buffer;
-    private OutputStream out;
+    private byte[]              buffer;
+    private OutputStream        out;
 
     public InputStreamOutputEngine(InputStream in, OutputStreamFactory factory) {
         this(in, factory, DEFAULT_BUFFER_SIZE);

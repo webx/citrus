@@ -24,14 +24,13 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.lang.reflect.Method;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.webx.AbstractWebxTests;
 import com.alibaba.citrus.webx.WebxComponent;
 import com.alibaba.citrus.webx.WebxComponents;
 import com.meterware.servletunit.PatchedServletRunner;
 import com.meterware.servletunit.ServletRunner;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * 测试从classpath中装载配置文件。
@@ -40,7 +39,7 @@ import com.meterware.servletunit.ServletRunner;
  */
 public class WebxClasspathTests extends AbstractWebxTests {
     private WebxFrameworkFilter filter;
-    private WebxComponents components;
+    private WebxComponents      components;
 
     @Before
     public void init() throws Exception {
@@ -67,7 +66,7 @@ public class WebxClasspathTests extends AbstractWebxTests {
             fail();
         } catch (IllegalArgumentException e) {
             assertThat(e,
-                    exception("Invalid componentConfigurationLocationPattern: classpath*:META-INF/mycomponent.xml"));
+                       exception("Invalid componentConfigurationLocationPattern: classpath*:META-INF/mycomponent.xml"));
         }
     }
 
@@ -81,10 +80,10 @@ public class WebxClasspathTests extends AbstractWebxTests {
         Method m = getAccessibleMethod(a.getApplicationContext().getClass(), "getConfigLocations", null);
 
         assertArrayEquals(new String[] { "classpath:META-INF/mycomponent/a.xml" },
-                String[].class.cast(m.invoke(a.getApplicationContext())));
+                          String[].class.cast(m.invoke(a.getApplicationContext())));
 
         assertArrayEquals(new String[] { "classpath:META-INF/mycomponent/b.xml" },
-                String[].class.cast(m.invoke(b.getApplicationContext())));
+                          String[].class.cast(m.invoke(b.getApplicationContext())));
 
         assertEquals("hello", a.getApplicationContext().getBean("s1"));
         assertEquals("world", b.getApplicationContext().getBean("s2"));

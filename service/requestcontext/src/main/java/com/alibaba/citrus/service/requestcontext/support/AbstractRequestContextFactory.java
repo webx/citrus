@@ -19,14 +19,13 @@ package com.alibaba.citrus.service.requestcontext.support;
 
 import static com.alibaba.citrus.generictype.TypeInfoUtil.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.RequestContextFactory;
 import com.alibaba.citrus.springext.support.BeanSupport;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <code>RequestContextFactory</code>接口的基本实现。
@@ -34,7 +33,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public abstract class AbstractRequestContextFactory<R extends RequestContext> extends BeanSupport implements
-        RequestContextFactory<R> {
+                                                                                                  RequestContextFactory<R> {
     protected final Logger log = LoggerFactory.getLogger(getClass());
     private final Class<R> requestContextInterface;
 
@@ -44,9 +43,7 @@ public abstract class AbstractRequestContextFactory<R extends RequestContext> ex
                 .getRawType();
     }
 
-    /**
-     * 取得当前factory将生成的request context接口。
-     */
+    /** 取得当前factory将生成的request context接口。 */
     public final Class<R> getRequestContextInterface() {
         return requestContextInterface;
     }
@@ -55,9 +52,7 @@ public abstract class AbstractRequestContextFactory<R extends RequestContext> ex
         return requestContextInterface;
     }
 
-    /**
-     * 初始化完成后打印日志。
-     */
+    /** 初始化完成后打印日志。 */
     @Override
     protected void postInit() {
         log.debug("Initialized {}", this);

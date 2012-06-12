@@ -38,7 +38,8 @@ public class CharsetComparator extends CharsetTool {
         new CharsetComparator().compare(table1, "Word", table2, "Fjds", "word_fj_compare.txt");
     }
 
-    public void compare(char[] table1, String name1, char[] table2, String name2, String resultfile) throws IOException {
+    public void compare(char[] table1, String name1, char[] table2, String name2, String resultfile)
+            throws IOException {
         File destfile = getFile(resultfile);
 
         System.out.println(MessageUtil.formatMessage("Compare {0} and {1}", name1, name2));
@@ -69,7 +70,7 @@ public class CharsetComparator extends CharsetTool {
                 }
 
                 out.println(MessageUtil.formatMessage("{0}({1}) - {4}({2}) - {5}({3})", new Object[] { hex(i),
-                        new Character((char) i), aDesc, bDesc, name1, name2 }));
+                                                                                                       new Character((char) i), aDesc, bDesc, name1, name2 }));
             }
         }
 

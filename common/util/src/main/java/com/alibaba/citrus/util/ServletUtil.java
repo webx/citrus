@@ -23,7 +23,6 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -188,9 +187,7 @@ public class ServletUtil {
         return buf.toString();
     }
 
-    /**
-     * 规格化URI。
-     */
+    /** 规格化URI。 */
     public static String normalizeURI(String uri) {
         return URI.create(trimToEmpty(uri)).normalize().toString();
     }

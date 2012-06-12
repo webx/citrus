@@ -33,6 +33,12 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import com.alibaba.citrus.springext.DocumentFilter;
+import com.alibaba.citrus.springext.Schema;
+import com.alibaba.citrus.springext.Schemas;
+import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
+import com.alibaba.citrus.springext.support.SchemaSet;
+import com.alibaba.citrus.springext.support.resolver.SpringPluggableSchemas;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
@@ -42,13 +48,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ResourceLoader;
 
-import com.alibaba.citrus.springext.DocumentFilter;
-import com.alibaba.citrus.springext.Schema;
-import com.alibaba.citrus.springext.Schemas;
-import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
-import com.alibaba.citrus.springext.support.SchemaSet;
-import com.alibaba.citrus.springext.support.resolver.SpringPluggableSchemas;
-
 /**
  * 装载和分析schemas，并输出到任意输出流。
  *
@@ -56,8 +55,8 @@ import com.alibaba.citrus.springext.support.resolver.SpringPluggableSchemas;
  */
 public class SchemaExporter {
     protected final Logger log = LoggerFactory.getLogger(getClass());
-    private final Entries entries;
-    private final SchemaSet schemas;
+    private final Entries                  entries;
+    private final SchemaSet                schemas;
     private final Map<String, Set<Schema>> nsToSchemas;
 
     public SchemaExporter() {
@@ -66,7 +65,7 @@ public class SchemaExporter {
 
     public SchemaExporter(ResourceLoader resourceLoader) {
         this(new ConfigurationPointsImpl(resourceLoader == null ? null : resourceLoader.getClassLoader()),
-                new SpringPluggableSchemas(resourceLoader));
+             new SpringPluggableSchemas(resourceLoader));
     }
 
     public SchemaExporter(Schemas... schemasList) {
@@ -122,20 +121,16 @@ public class SchemaExporter {
         writeText(entry.getSchema().getText(charset, filter), out, true);
     }
 
-    /**
-     * 代表一个schema文件结点。
-     */
+    /** 代表一个schema文件结点。 */
     public static final class Entry {
-        private final String path;
-        private final String name;
-        private final boolean directory;
-        private final boolean root;
-        private final Schema schema;
+        private final String             path;
+        private final String             name;
+        private final boolean            directory;
+        private final boolean            root;
+        private final Schema             schema;
         private final Map<String, Entry> subEntries;
 
-        /**
-         * 创建特殊的root entry。
-         */
+        /** 创建特殊的root entry。 */
         private Entry() {
             this.path = "";
             this.name = "";
@@ -216,10 +211,10 @@ public class SchemaExporter {
             return hasNs;
         }
 
-        private final static String PREFIX_ITEM = "+---";
-        private final static String PREFIX_LAST_ITEM = "\\---";
+        private final static String PREFIX_ITEM             = "+---";
+        private final static String PREFIX_LAST_ITEM        = "\\---";
         private final static String INDENT_BEFORE_LAST_ITEM = "|   ";
-        private final static String INDENT_AFTER_LAST_ITEM = "    ";
+        private final static String INDENT_AFTER_LAST_ITEM  = "    ";
 
         public String tree() {
             StringWriter sw = new StringWriter();
@@ -244,7 +239,7 @@ public class SchemaExporter {
         private void tree(Appendable buf, String prefix, String indent) throws IOException {
             buf.append(prefix).append(getName()).append("\n");
 
-            for (Iterator<Entry> i = subEntries.values().iterator(); i.hasNext();) {
+            for (Iterator<Entry> i = subEntries.values().iterator(); i.hasNext(); ) {
                 Entry subEntry = i.next();
                 String subPrefix;
                 String subIndent;
@@ -261,9 +256,7 @@ public class SchemaExporter {
             }
         }
 
-        /**
-         * Files sort by name without extension, then directories.
-         */
+        /** Files sort by name without extension, then directories. */
         private String getSortKey() {
             String name = getName();
 
@@ -324,9 +317,7 @@ public class SchemaExporter {
         }
     }
 
-    /**
-     * 在所有可识别的URI上，加上指定前缀。
-     */
+    /** 在所有可识别的URI上，加上指定前缀。 */
     private class AddPrefixFilter implements DocumentFilter {
         private final String prefix;
 
@@ -351,7 +342,7 @@ public class SchemaExporter {
                     QName importName = DocumentHelper.createQName("import", xsd);
 
                     // for each <xsd:include>
-                    for (Iterator<?> i = root.elementIterator(includeName); i.hasNext();) {
+                    for (Iterator<?> i = root.elementIterator(includeName); i.hasNext(); ) {
                         Element includeElement = (Element) i.next();
                         String schemaLocation = trimToNull(includeElement.attributeValue("schemaLocation"));
 
@@ -365,7 +356,7 @@ public class SchemaExporter {
                     }
 
                     // for each <xsd:import>
-                    for (Iterator<?> i = root.elementIterator(importName); i.hasNext();) {
+                    for (Iterator<?> i = root.elementIterator(importName); i.hasNext(); ) {
                         Element importElement = (Element) i.next();
                         String schemaLocation = importElement.attributeValue("schemaLocation");
                         String namespace = trimToNull(importElement.attributeValue("namespace"));
@@ -420,9 +411,7 @@ public class SchemaExporter {
             return null;
         }
 
-        /**
-         * 对于spring-aop-2.5.xsd取得-2.5.xsd。
-         */
+        /** 对于spring-aop-2.5.xsd取得-2.5.xsd。 */
         private String getVersionedExtension(String systemId) {
             if (systemId != null) {
                 int dashIndex = systemId.lastIndexOf("-");

@@ -23,14 +23,13 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import com.alibaba.citrus.test.runner.Prototyped;
 import com.alibaba.citrus.test.runner.Prototyped.Prototypes;
 import com.alibaba.citrus.test.runner.Prototyped.TestData;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * 测试{@link WildcardTypeInfo}。
@@ -40,21 +39,21 @@ import com.alibaba.citrus.test.runner.Prototyped.TestName;
 @RunWith(Prototyped.class)
 public class WildcardTypeTests extends BaseTypeTests implements Cloneable {
     private transient WildcardTypeInfo typeInfo;
-    private Class<?> ownerType; // ?所在的类
-    private String methodName; // ?所在的方法名
-    private String baseType; // baseType.toString()
-    private String upperBounds; // upper bounds toString
-    private String lowerBounds; // lower bounds toString
-    private Class<?> rawType; // rawClass
-    private String name; // 名称
-    private boolean array; // 是不是array？
-    private int dimension; // 数组维度
-    private TypeInfo componentType; // 数组元素类型
-    private TypeInfo directComponentType; // 数组直接成员类型
-    private String toString; // toString结果
-    private String[] supertypes; // 父类、接口
-    private String resolved; // resolve结果
-    private ClassTypeInfo context; // resolve context
+    private           Class<?>         ownerType; // ?所在的类
+    private           String           methodName; // ?所在的方法名
+    private           String           baseType; // baseType.toString()
+    private           String           upperBounds; // upper bounds toString
+    private           String           lowerBounds; // lower bounds toString
+    private           Class<?>         rawType; // rawClass
+    private           String           name; // 名称
+    private           boolean          array; // 是不是array？
+    private           int              dimension; // 数组维度
+    private           TypeInfo         componentType; // 数组元素类型
+    private           TypeInfo         directComponentType; // 数组直接成员类型
+    private           String           toString; // toString结果
+    private           String[]         supertypes; // 父类、接口
+    private           String           resolved; // resolve结果
+    private           ClassTypeInfo    context; // resolve context
 
     @Before
     public void init() {
@@ -266,7 +265,7 @@ public class WildcardTypeTests extends BaseTypeTests implements Cloneable {
         prototype.directComponentType = factory.getType(int[].class);
         prototype.toString = "? extends int[][]";
         prototype.supertypes = new String[] { "int[][]", "Cloneable[]", "Serializable[]", "Object[]", "Cloneable",
-                "Serializable", "Object" };
+                                              "Serializable", "Object" };
         prototype.resolved = null;
         prototype.context = null;
 
@@ -285,7 +284,7 @@ public class WildcardTypeTests extends BaseTypeTests implements Cloneable {
         prototype.directComponentType = factory.getType(getReturnType(TestClass.class, "case7_component"));
         prototype.toString = "? extends List<E=String>[]";
         prototype.supertypes = new String[] { "List<E=String>[]", "Collection<E=E>[]", "Iterable<T=E>[]", "Object[]",
-                "Cloneable", "Serializable", "Object" };
+                                              "Cloneable", "Serializable", "Object" };
         prototype.resolved = null;
         prototype.context = null;
 
@@ -304,7 +303,7 @@ public class WildcardTypeTests extends BaseTypeTests implements Cloneable {
         prototype.directComponentType = factory.getType(getReturnType(TestClass.class, "case7_1_component"));
         prototype.toString = "? extends List<E=String>[][]";
         prototype.supertypes = new String[] { "List<E=String>[][]", "Collection<E=E>[][]", "Iterable<T=E>[][]",
-                "Object[][]", "Cloneable[]", "Serializable[]", "Object[]", "Cloneable", "Serializable", "Object" };
+                                              "Object[][]", "Cloneable[]", "Serializable[]", "Object[]", "Cloneable", "Serializable", "Object" };
         prototype.resolved = null;
         prototype.context = null;
 
@@ -400,7 +399,7 @@ public class WildcardTypeTests extends BaseTypeTests implements Cloneable {
                 factory.getType(prototype.ownerType.getTypeParameters()[0]), 1);
         prototype.toString = "? extends T[][]";
         prototype.supertypes = new String[] { "Number[][]", "Serializable[][]", "Object[][]", "Cloneable[]",
-                "Serializable[]", "Object[]", "Cloneable", "Serializable", "Object" };
+                                              "Serializable[]", "Object[]", "Cloneable", "Serializable", "Object" };
         prototype.resolved = "Integer[][]";
         prototype.context = factory.getParameterizedType(TestClass.class, Integer.class);
 
@@ -427,9 +426,7 @@ public class WildcardTypeTests extends BaseTypeTests implements Cloneable {
         return data;
     }
 
-    /**
-     * {@link TypeVariableInfo}功能。
-     */
+    /** {@link TypeVariableInfo}功能。 */
     @Test
     public void bounds() {
         assertEquals(baseType, typeInfo.getBaseType().toString());

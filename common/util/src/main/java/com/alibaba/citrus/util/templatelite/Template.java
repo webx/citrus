@@ -18,8 +18,8 @@
 package com.alibaba.citrus.util.templatelite;
 
 import static com.alibaba.citrus.util.ArrayUtil.*;
-import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.Assert.ExceptionType.*;
+import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringEscapeUtil.*;
@@ -48,11 +48,10 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.sf.cglib.reflect.FastClass;
-
 import com.alibaba.citrus.util.FileUtil;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import net.sf.cglib.reflect.FastClass;
 
 /**
  * 一个简易的模板。
@@ -65,91 +64,91 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * <p>
  * 参数必须定义在模板或子模板的开头，在所有的内容开始之前。
  * </p>
- *
+ * <p/>
  * <pre>
  * #@charset UTF-8
  * </pre>
- *
+ * <p/>
  * </dd>
  * <dt>注释</dt>
  * <dd>
  * <p>
  * 注释可以写在任何地方。如果一个注释从行首开始，或者注释之前没有任何可见字符，则整行将被忽略。
  * </p>
- *
+ * <p/>
  * <pre>
  * ## comment
  * </pre>
- *
+ * <p/>
  * </dd>
  * <dt>替换变量（placeholder）</dt>
  * <dd>
  * <p>
  * 最简单的写法：
  * </p>
- *
+ * <p/>
  * <pre>
  * ${placeholder}
  * </pre>
- *
+ * <p/>
  * <p>
  * 包含一个或多个参数：
  * </p>
- *
+ * <p/>
  * <pre>
  * ${placeholder: param, param}
  * </pre>
- *
+ * <p/>
  * <p>
  * 可引用一个或多个子模板作为参数。所引用的子模板将从当前子模板或者上级子模板中查找。
  * </p>
- *
+ * <p/>
  * <pre>
  * ${placeholder: #subtpl, #subtpl}
  * </pre>
- *
+ * <p/>
  * <p>
  * 也可引用多级子模板作为参数。
  * </p>
- *
+ * <p/>
  * <pre>
  * ${placeholder: #tpl1.subtpl2.suptpl3}
  * </pre>
- *
+ * <p/>
  * <p>
  * 使用.*可达到引用一组模板的作用。
  * </p>
- *
+ * <p/>
  * <pre>
  * ${placeholder: #tpl1.*}
  * </pre>
- *
+ * <p/>
  * </dd>
  * <dt>包含子模板</dt>
  * <dd>
  * <p>
  * 直接包含一个子模板，不调用visitor。
  * </p>
- *
+ * <p/>
  * <pre>
  * $#{subtpl}
  * </pre>
- *
+ * <p/>
  * <p>
  * 也可包含多级子模板。
  * </p>
- *
+ * <p/>
  * <pre>
  * $#{tpl.subtpl1.subtpl2}
  * </pre>
- *
+ * <p/>
  * </dd>
  * <dt>定义子模板</dt>
  * <dd>
  * <p>
  * 子模板必须位于模板或其它子模板的末尾。从最后一行内容到子模板之间的空行将被忽略。子模板可以包含其它子模板。
  * </p>
- *
+ * <p/>
  * <pre>
  * #subtpl
  * #@trimming on
@@ -157,42 +156,42 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * content
  * #end
  * </pre>
- *
+ * <p/>
  * </dd>
  * <dt>导入子模板</dt>
  * <dd>
  * <p>
  * 导入外部文件，作为子模板。这种方法所产生的子模板，和直接定义子模板的效果完全相同。但将子模板定义在外部文件中，有利于整理并缩短模板的长度。
  * </p>
- *
+ * <p/>
  * <pre>
  * #subtpl(relative_file_name)
  * </pre>
- *
+ * <p/>
  * <p>
  * 或者：
  * </p>
- *
+ * <p/>
  * <pre>
  * #subtpl("relative_file_name")
  * </pre>
- *
+ * <p/>
  * </dd>
  * </dl>
  *
  * @author Michael Zhou
  */
 public final class Template {
-    private final static int MAX_REDIRECT_DEPTH = 10;
-    private final static Node[] EMPTY_NODES = new Node[0];
+    private final static int                   MAX_REDIRECT_DEPTH  = 10;
+    private final static Node[]                EMPTY_NODES         = new Node[0];
     private final static Map<String, Template> predefinedTemplates = createHashMap();
-    private final String name;
-    final InputSource source;
-    final Location location;
-    final Template ref;
-    Node[] nodes;
+    private final String      name;
+    final         InputSource source;
+    final         Location    location;
+    final         Template    ref;
+    Node[]                nodes;
     Map<String, Template> subtemplates;
-    Map<String, String> params;
+    Map<String, String>   params;
 
     static {
         // 预定义模板，可供任何模板中直接使用，例如：$#{SPACE}可强制插入空格。
@@ -200,37 +199,27 @@ public final class Template {
         predefineTemplate("BR", "\n");
     }
 
-    /**
-     * 从File中创建template。
-     */
+    /** 从File中创建template。 */
     public Template(File source) {
         this(new InputSource(source, null), null);
     }
 
-    /**
-     * 从URL中创建template。
-     */
+    /** 从URL中创建template。 */
     public Template(URL source) {
         this(new InputSource(source, null), null);
     }
 
-    /**
-     * 从输入流中创建template。
-     */
+    /** 从输入流中创建template。 */
     public Template(InputStream stream, String systemId) {
         this(new InputSource(stream, systemId), null);
     }
 
-    /**
-     * 从输入流中创建template。
-     */
+    /** 从输入流中创建template。 */
     public Template(Reader reader, String systemId) {
         this(new InputSource(reader, systemId), null);
     }
 
-    /**
-     * 内部构造函数：创建主模板。
-     */
+    /** 内部构造函数：创建主模板。 */
     private Template(InputSource source, String name) {
         this.name = trimToNull(name);
         this.source = assertNotNull(source, "source");
@@ -240,9 +229,7 @@ public final class Template {
         source.reloadIfNecessary(this);
     }
 
-    /**
-     * 内部构造函数：创建子模板。
-     */
+    /** 内部构造函数：创建子模板。 */
     private Template(String name, Node[] nodes, Map<String, String> params, Map<String, Template> subtemplates,
                      Location location) {
         this.name = trimToNull(name);
@@ -253,9 +240,7 @@ public final class Template {
         update(nodes, params, subtemplates);
     }
 
-    /**
-     * 内部构造函数：创建template ref。
-     */
+    /** 内部构造函数：创建template ref。 */
     private Template(Template ref) {
         this.ref = assertNotNull(ref, "template ref");
         this.name = null;
@@ -305,18 +290,14 @@ public final class Template {
         }
     }
 
-    /**
-     * 将模板渲染成文本。
-     */
+    /** 将模板渲染成文本。 */
     public String renderToString(TextWriter<? super StringBuilder> writer) {
         writer.setOut(new StringBuilder());
         accept(writer);
         return writer.out().toString();
     }
 
-    /**
-     * 渲染模板。
-     */
+    /** 渲染模板。 */
     public void accept(Object visitor) throws TemplateRuntimeException {
         if (ref == null) {
             if (source != null) {
@@ -333,24 +314,18 @@ public final class Template {
         }
     }
 
-    /**
-     * 调用visitTemplateName(Template)方法，如果方法不存在，则直接调用被引用的template。
-     */
+    /** 调用visitTemplateName(Template)方法，如果方法不存在，则直接调用被引用的template。 */
     private void invokeVisitor(Object visitor, Template templateRef) throws TemplateRuntimeException {
         invokeVisitor(visitor, templateRef, 0);
     }
 
-    /**
-     * 根据node类型，访问visitor相应的方法。
-     */
+    /** 根据node类型，访问visitor相应的方法。 */
     private void invokeVisitor(Object visitor, Node node) throws TemplateRuntimeException {
         assertNotRef();
         invokeVisitor(visitor, node, 0);
     }
 
-    /**
-     * 根据node类型，访问visitor相应的方法。
-     */
+    /** 根据node类型，访问visitor相应的方法。 */
     private void invokeVisitor(Object visitor, Object node, int redirectDepth) throws TemplateRuntimeException {
         // 对$#{includeTemplate}直接调用template
         if (node instanceof IncludeTemplate) {
@@ -422,7 +397,7 @@ public final class Template {
 
                     if (visitor instanceof FallbackVisitor) {
                         processed = ((FallbackVisitor) visitor).visitPlaceholder(placeholder.name,
-                                toPlaceholderParameterValues(placeholder, new Object[placeholderParamCount]));
+                                                                                 toPlaceholderParameterValues(placeholder, new Object[placeholderParamCount]));
                     }
 
                     if (!processed) {
@@ -450,7 +425,7 @@ public final class Template {
                 if (newVisitor != null && visitor != newVisitor) {
                     if (redirectDepth >= MAX_REDIRECT_DEPTH) {
                         throw new TemplateRuntimeException("Redirection out of control (depth>" + MAX_REDIRECT_DEPTH
-                                + ") in " + method);
+                                                           + ") in " + method);
                     }
 
                     invokeVisitor(newVisitor, node, redirectDepth + 1);
@@ -463,9 +438,7 @@ public final class Template {
         }
     }
 
-    /**
-     * 查找visitText方法。
-     */
+    /** 查找visitText方法。 */
     private Method findVisitTextMethod(Class<?> visitorClass, String methodName) throws NoSuchMethodException {
         Method method = null;
 
@@ -489,9 +462,7 @@ public final class Template {
         return method;
     }
 
-    /**
-     * 查找visitTemplate方法。
-     */
+    /** 查找visitTemplate方法。 */
     private Method findVisitTemplateMethod(Class<?> visitorClass, String methodName) throws NoSuchMethodException {
         Method method = null;
 
@@ -511,9 +482,7 @@ public final class Template {
         return method;
     }
 
-    /**
-     * 查找visitPlaceholder方法。
-     */
+    /** 查找visitPlaceholder方法。 */
     private Method findVisitPlaceholderMethod(Class<?> visitorClass, String methodName,
                                               PlaceholderParameter[] placeholderParams) throws NoSuchMethodException {
         Method[] methods = visitorClass.getMethods();
@@ -557,14 +526,14 @@ public final class Template {
                     case 1:
                         // 如果placeholder参数全为String，可调用visitXyz(String[])
                         if (placeholderParamStringCount == placeholderParamCount
-                                && methodParamTypes[0].equals(String[].class)) {
+                            && methodParamTypes[0].equals(String[].class)) {
                             paramTypeMatches = true;
                             indexWeight = 50;
                         }
 
                         // 如果placeholder参数全为Template，可调用visitXyz(Template[])
                         if (placeholderParamTemplateCount == placeholderParamCount
-                                && methodParamTypes[0].equals(Template[].class)) {
+                            && methodParamTypes[0].equals(Template[].class)) {
                             paramTypeMatches = true;
                             indexWeight = 50;
                         }
@@ -592,7 +561,7 @@ public final class Template {
                                     }
                                 } else {
                                     if (!methodParamTypes[i].equals(String.class)
-                                            && !methodParamTypes[i].equals(Template.class)) {
+                                        && !methodParamTypes[i].equals(Template.class)) {
                                         paramTypeMatches = false;
                                         break;
                                     }
@@ -699,15 +668,13 @@ public final class Template {
 
     private static void predefineTemplate(String name, String text) {
         Template template = new Template(name, new Node[] { new Text(text, new Location(null, 1, 1)) },
-                Collections.<String, String> emptyMap(), Collections.<String, Template> emptyMap(), new Location(null,
-                        1, 1));
+                                         Collections.<String, String>emptyMap(), Collections.<String, Template>emptyMap(), new Location(null,
+                                                                                                                                        1, 1));
 
         predefinedTemplates.put(name, template);
     }
 
-    /**
-     * 代表一个结点。
-     */
+    /** 代表一个结点。 */
     static abstract class Node {
         final Location location;
 
@@ -718,9 +685,7 @@ public final class Template {
         public abstract String desc();
     }
 
-    /**
-     * 代表一个文本结点。
-     */
+    /** 代表一个文本结点。 */
     static class Text extends Node {
         final String text;
 
@@ -748,9 +713,7 @@ public final class Template {
         }
     }
 
-    /**
-     * 代表一个<code>${var}</code>结点。
-     */
+    /** 代表一个<code>${var}</code>结点。 */
     static class Placeholder extends Node {
         private final static PlaceholderParameter[] EMPTY_PARAMS = new PlaceholderParameter[0];
         final String name;
@@ -795,8 +758,8 @@ public final class Template {
     }
 
     static class PlaceholderParameter {
-        private final String value;
-        private Template templateReference;
+        private final String   value;
+        private       Template templateReference;
 
         public PlaceholderParameter(String value) {
             this.value = value;
@@ -824,9 +787,7 @@ public final class Template {
         }
     }
 
-    /**
-     * 代表一个<code>$#{template}</code>结点。
-     */
+    /** 代表一个<code>$#{template}</code>结点。 */
     static class IncludeTemplate extends Node {
         final String templateName;
         Template includedTemplate;
@@ -849,8 +810,8 @@ public final class Template {
 
     static class Location {
         final String systemId;
-        final int lineNumber;
-        final int columnNumber;
+        final int    lineNumber;
+        final int    columnNumber;
 
         public Location(String systemId, int lineNumber, int columnNumber) {
             this.systemId = trimToNull(systemId);
@@ -884,40 +845,38 @@ public final class Template {
         }
     }
 
-    /**
-     * 解析器
-     */
+    /** 解析器 */
     private static class Parser {
         private final static Pattern DIRECTIVE_PATTERN = Pattern.compile("\\\\(\\$|\\$#|#|#@|\\\\)" // group 1
-                + "|(\\s*##)" // group 2
-                + "|\\$\\{\\s*([A-Za-z]\\w*)(\\s*:([^\\}]*))?\\s*\\}" // group 3, 4, 5
-                + "|\\$#\\{\\s*([A-Za-z][\\.\\w]*)\\s*\\}" // group 6
-                + "|(\\s*)#([A-Za-z]\\w*)(\\s*\\(\\s*(.*)\\s*\\))?(\\s*(##.*)?)" // group 7, 8, 9, 10, 11, 12
-                + "|(\\s*)#@\\s*([A-Za-z]\\w*)(\\s+(.*?))?(##.*)?$" // group 11, 12, 13, 14, 15
+                                                                         + "|(\\s*##)" // group 2
+                                                                         + "|\\$\\{\\s*([A-Za-z]\\w*)(\\s*:([^\\}]*))?\\s*\\}" // group 3, 4, 5
+                                                                         + "|\\$#\\{\\s*([A-Za-z][\\.\\w]*)\\s*\\}" // group 6
+                                                                         + "|(\\s*)#([A-Za-z]\\w*)(\\s*\\(\\s*(.*)\\s*\\))?(\\s*(##.*)?)" // group 7, 8, 9, 10, 11, 12
+                                                                         + "|(\\s*)#@\\s*([A-Za-z]\\w*)(\\s+(.*?))?(##.*)?$" // group 11, 12, 13, 14, 15
         );
 
         private final static Set<String> KEYWORDS = createTreeSet("text", "placeholder", "template", "end");
 
-        private final static int INDEX_OF_ESCAPE = 1;
-        private final static int INDEX_OF_COMMENT = 2;
-        private final static int INDEX_OF_PLACEHOLDER = 3;
+        private final static int INDEX_OF_ESCAPE             = 1;
+        private final static int INDEX_OF_COMMENT            = 2;
+        private final static int INDEX_OF_PLACEHOLDER        = 3;
         private final static int INDEX_OF_PLACEHOLDER_PARAMS = 5;
-        private final static int INDEX_OF_INCLUDE_TEMPLATE = 6;
+        private final static int INDEX_OF_INCLUDE_TEMPLATE   = 6;
         private final static int INDEX_OF_SUBTEMPLATE_PREFIX = 7;
-        private final static int INDEX_OF_SUBTEMPLATE = 8;
-        private final static int INDEX_OF_IMPORT_FILE = 9;
-        private final static int INDEX_OF_IMPORT_FILE_NAME = 10;
+        private final static int INDEX_OF_SUBTEMPLATE        = 8;
+        private final static int INDEX_OF_IMPORT_FILE        = 9;
+        private final static int INDEX_OF_IMPORT_FILE_NAME   = 10;
         private final static int INDEX_OF_SUBTEMPLATE_SUFFIX = 11;
-        private final static int INDEX_OF_PARAM_PREFIX = 13;
-        private final static int INDEX_OF_PARAM = 14;
-        private final static int INDEX_OF_PARAM_VALUE = 16;
+        private final static int INDEX_OF_PARAM_PREFIX       = 13;
+        private final static int INDEX_OF_PARAM              = 14;
+        private final static int INDEX_OF_PARAM_VALUE        = 16;
 
-        private final InputSource source;
+        private final InputSource    source;
         private final BufferedReader reader;
-        private final String systemId;
+        private final String         systemId;
         private final ParsingTemplateStack stack = new ParsingTemplateStack();
         private final TextBuffer buf;
-        private String currentLine;
+        private       String     currentLine;
         private int lineNumber = 1;
 
         public Parser(Reader reader, String systemId, InputSource source) {
@@ -970,8 +929,8 @@ public final class Template {
                         // #@前面只允许有空白（只允许从行首开始定义），否则报错。
                         if (matcher.start() > 0) {
                             throw new TemplateParseException("#@" + name
-                                    + " should start at new line, which is now at "
-                                    + Location.toString(systemId, lineNumber, matcher.end(INDEX_OF_PARAM_PREFIX) + 1));
+                                                             + " should start at new line, which is now at "
+                                                             + Location.toString(systemId, lineNumber, matcher.end(INDEX_OF_PARAM_PREFIX) + 1));
                         }
 
                         String value = trimToEmpty(matcher.group(INDEX_OF_PARAM_VALUE));
@@ -1012,19 +971,19 @@ public final class Template {
                         // #前面只允许有空白（只允许从行首开始定义），否则报错。
                         if (matcher.start() > 0) {
                             throw new TemplateParseException("#"
-                                    + name
-                                    + " should start at new line, which is now at "
-                                    + Location.toString(systemId, lineNumber,
-                                            matcher.end(INDEX_OF_SUBTEMPLATE_PREFIX) + 1));
+                                                             + name
+                                                             + " should start at new line, which is now at "
+                                                             + Location.toString(systemId, lineNumber,
+                                                                                 matcher.end(INDEX_OF_SUBTEMPLATE_PREFIX) + 1));
                         }
 
                         // #xxx必须独占一行
                         if (matcher.end(INDEX_OF_SUBTEMPLATE_SUFFIX) < currentLine.length()) {
                             throw new TemplateParseException("Invalid content followed after #"
-                                    + name
-                                    + " at "
-                                    + Location.toString(systemId, lineNumber,
-                                            matcher.end(INDEX_OF_SUBTEMPLATE_SUFFIX) + 1));
+                                                             + name
+                                                             + " at "
+                                                             + Location.toString(systemId, lineNumber,
+                                                                                 matcher.end(INDEX_OF_SUBTEMPLATE_SUFFIX) + 1));
                         }
 
                         pushTextNode();
@@ -1034,15 +993,15 @@ public final class Template {
                             // #end后跟()
                             if (matcher.group(INDEX_OF_IMPORT_FILE) != null) {
                                 throw new TemplateParseException("Invalid character '(' after #end tag at "
-                                        + Location.toString(systemId, lineNumber, matcher.start(INDEX_OF_IMPORT_FILE)
-                                                + matcher.group(INDEX_OF_IMPORT_FILE).indexOf("(") + 1));
+                                                                 + Location.toString(systemId, lineNumber, matcher.start(INDEX_OF_IMPORT_FILE)
+                                                                                                           + matcher.group(INDEX_OF_IMPORT_FILE).indexOf("(") + 1));
                             }
 
                             // #end没有对应的#template
                             else if (stack.size() <= 1) {
                                 throw new TemplateParseException("Unmatched #end tag at "
-                                        + Location.toString(systemId, lineNumber,
-                                                matcher.end(INDEX_OF_SUBTEMPLATE_PREFIX) + 1));
+                                                                 + Location.toString(systemId, lineNumber,
+                                                                                     matcher.end(INDEX_OF_SUBTEMPLATE_PREFIX) + 1));
                             }
 
                             // #end
@@ -1067,7 +1026,7 @@ public final class Template {
 
                                 if (importedFileName == null) {
                                     throw new TemplateParseException("Import file name is not specified at "
-                                            + Location.toString(systemId, lineNumber, importedFileColumnNumber));
+                                                                     + Location.toString(systemId, lineNumber, importedFileColumnNumber));
                                 }
 
                                 InputSource importedSource = null;
@@ -1081,8 +1040,8 @@ public final class Template {
 
                                 if (importedSource == null || e != null) {
                                     throw new TemplateParseException("Could not import template file \""
-                                            + importedFileName + "\" at "
-                                            + Location.toString(systemId, lineNumber, importedFileColumnNumber), e);
+                                                                     + importedFileName + "\" at "
+                                                                     + Location.toString(systemId, lineNumber, importedFileColumnNumber), e);
                                 }
 
                                 Template importedTemplate;
@@ -1091,8 +1050,8 @@ public final class Template {
                                     importedTemplate = new Template(importedSource, name);
                                 } catch (Exception ee) {
                                     throw new TemplateParseException("Could not import template file \""
-                                            + importedFileName + "\" at "
-                                            + Location.toString(systemId, lineNumber, importedFileColumnNumber), ee);
+                                                                     + importedFileName + "\" at "
+                                                                     + Location.toString(systemId, lineNumber, importedFileColumnNumber), ee);
                                 }
 
                                 stack.peek().addSubTemplate(importedTemplate);
@@ -1101,7 +1060,7 @@ public final class Template {
                             // 开始一个新模板
                             else {
                                 stack.push(new ParsingTemplate(name, systemId, lineNumber, columnNumber,
-                                        stack.peek().params));
+                                                               stack.peek().params));
                             }
                         }
 
@@ -1247,10 +1206,10 @@ public final class Template {
                                 parentName = EMPTY_STRING;
                             } else {
                                 String parentTemplateName = templateName.substring(0,
-                                        templateName.length() - ".*".length());
+                                                                                   templateName.length() - ".*".length());
 
                                 Template parentTemplate = findTemplate(parentTemplateName, templateStack,
-                                        ((Placeholder) node).location, "Referenced");
+                                                                       ((Placeholder) node).location, "Referenced");
 
                                 subtemplates = parentTemplate.subtemplates;
                                 parentName = parentTemplateName + ".";
@@ -1258,13 +1217,13 @@ public final class Template {
 
                             for (Template template : subtemplates.values()) {
                                 PlaceholderParameter newParam = new PlaceholderParameter("#" + parentName
-                                        + template.getName());
+                                                                                         + template.getName());
                                 newParam.templateReference = new Template(template); // create template ref
                                 expandedParameters.add(newParam);
                             }
                         } else {
                             param.templateReference = new Template(findTemplate(templateName, templateStack,
-                                    ((Placeholder) node).location, "Referenced")); // create template ref
+                                                                                ((Placeholder) node).location, "Referenced")); // create template ref
 
                             expandedParameters.add(param);
                         }
@@ -1305,15 +1264,13 @@ public final class Template {
 
             if (template == null) {
                 throw new TemplateParseException(messagePrefix + " template " + templateName
-                        + " is not found in the context around " + location);
+                                                 + " is not found in the context around " + location);
             }
 
             return template;
         }
 
-        /**
-         * 除去template结尾的换行。
-         */
+        /** 除去template结尾的换行。 */
         private void chomp(LinkedList<Node> nodes) {
             if (!nodes.isEmpty() && nodes.getLast() instanceof Text) {
                 Text node = (Text) nodes.getLast();
@@ -1331,9 +1288,7 @@ public final class Template {
             }
         }
 
-        /**
-         * 去除每行的首尾空白，去除模板首尾的空白和换行符。
-         */
+        /** 去除每行的首尾空白，去除模板首尾的空白和换行符。 */
         private boolean trimIfNeccessary(LinkedList<Node> nodes, Map<String, String> params) {
             boolean trimming = getBoolean(params.get("trimming"), false, "on", "yes", "true");
 
@@ -1369,7 +1324,7 @@ public final class Template {
             boolean startOfLine = true;
             boolean endOfLine;
 
-            for (ListIterator<Node> i = nodes.listIterator(); i.hasNext();) {
+            for (ListIterator<Node> i = nodes.listIterator(); i.hasNext(); ) {
                 Node node = i.next();
                 endOfLine = !i.hasNext();
 
@@ -1414,9 +1369,7 @@ public final class Template {
             return true;
         }
 
-        /**
-         * 将多个空白变成一个空白；如果多个空白中包含换行符，则转换成一个换行符。
-         */
+        /** 将多个空白变成一个空白；如果多个空白中包含换行符，则转换成一个换行符。 */
         private boolean collapseWhitespacesIfNeccessary(LinkedList<Node> nodes, Map<String, String> params) {
             boolean collapseWhitespaces = getBoolean(params.get("whitespace"), false, "collapse");
 
@@ -1424,7 +1377,7 @@ public final class Template {
                 return false;
             }
 
-            for (ListIterator<Node> i = nodes.listIterator(); i.hasNext();) {
+            for (ListIterator<Node> i = nodes.listIterator(); i.hasNext(); ) {
                 Node node = i.next();
 
                 if (node instanceof Text) {
@@ -1477,13 +1430,11 @@ public final class Template {
         }
     }
 
-    /**
-     * 保存纯文本内容，并记录第一个非空字符的行列号。
-     */
+    /** 保存纯文本内容，并记录第一个非空字符的行列号。 */
     private static class TextBuffer {
         private final StringBuilder buf = new StringBuilder();
         private final String systemId;
-        private int lineNumber = -1;
+        private int lineNumber   = -1;
         private int columnNumber = -1;
 
         public TextBuffer(String systemId) {
@@ -1542,8 +1493,8 @@ public final class Template {
 
                 if (duplicatedTemplate != null) {
                     throw new TemplateParseException("Duplicated template name #" + pt.name + " at "
-                            + Location.toString(pt.systemId, pt.lineNumber, pt.columnNumber)
-                            + ".  Another template with the same name is located in " + duplicatedTemplate.location);
+                                                     + Location.toString(pt.systemId, pt.lineNumber, pt.columnNumber)
+                                                     + ".  Another template with the same name is located in " + duplicatedTemplate.location);
                 }
             }
 
@@ -1574,11 +1525,11 @@ public final class Template {
 
     private static class ParsingTemplate {
         private final String systemId;
-        private final int lineNumber;
-        private final int columnNumber;
+        private final int    lineNumber;
+        private final int    columnNumber;
         private final String name;
-        private final LinkedList<Node> nodes = createLinkedList();
-        private final Map<String, String> params = createTreeMap();
+        private final LinkedList<Node>      nodes        = createLinkedList();
+        private final Map<String, String>   params       = createTreeMap();
         private final Map<String, Template> subtemplates = createArrayHashMap();
 
         public ParsingTemplate(String name, String systemId, int lineNumber, int columnNumber,
@@ -1625,7 +1576,7 @@ public final class Template {
         public void addParam(String name, String value, int lineNumber, int columnNumber) {
             if (!subtemplates.isEmpty() || hasNonEmptyNode()) {
                 throw new TemplateParseException("Invalid #@" + name + " here at "
-                        + Location.toString(systemId, lineNumber, columnNumber));
+                                                 + Location.toString(systemId, lineNumber, columnNumber));
             }
 
             params.put(name, trimToEmpty(value));
@@ -1674,13 +1625,11 @@ public final class Template {
         }
     }
 
-    /**
-     * 保存文件来源，必要时重装模板。
-     */
+    /** 保存文件来源，必要时重装模板。 */
     static class InputSource {
         private final static Pattern CHARSET_DETECTIVE_PATTERN = Pattern.compile("^(\\s*##)" // comment
-                + "|^(\\s*)#@\\s*(\\w+)\\s+(.*?)\\s*(##.*)?$" // charset或其它参数
-                + "|^\\s*$" // empty line
+                                                                                 + "|^(\\s*)#@\\s*(\\w+)\\s+(.*?)\\s*(##.*)?$" // charset或其它参数
+                                                                                 + "|^\\s*$" // empty line
         );
 
         private long lastModified = 0;
@@ -1756,9 +1705,7 @@ public final class Template {
             }
         }
 
-        /**
-         * 根据指定的相对于当前source的路径，取得input source。
-         */
+        /** 根据指定的相对于当前source的路径，取得input source。 */
         InputSource getRelative(String relativePath) throws Exception {
             relativePath = trimToNull(relativePath);
 
@@ -1815,9 +1762,7 @@ public final class Template {
             return reader;
         }
 
-        /**
-         * 读取输入流的前几行，查找<code>#@charset</code>参数。如果未找到，则返回指定默认值。
-         */
+        /** 读取输入流的前几行，查找<code>#@charset</code>参数。如果未找到，则返回指定默认值。 */
         static String detectCharset(BufferedInputStream istream, String defaultCharset) throws IOException {
             int readlimit = 1024 * 4;
             istream.mark(readlimit);

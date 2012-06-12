@@ -21,7 +21,6 @@ import static com.alibaba.citrus.service.requestcontext.util.RequestContextUtil.
 import static com.alibaba.citrus.util.CollectionUtil.*;
 
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.citrus.service.requestcontext.parser.ParserRequestContext;
@@ -29,7 +28,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
 
 final class FormParameters {
     private final Map<String, FormParameter> params = createLinkedHashMap();
-    private final HttpServletRequest request;
+    private final HttpServletRequest   request;
     private final ParserRequestContext prc;
 
     public FormParameters(HttpServletRequest request) {
@@ -76,9 +75,7 @@ final class FormParameters {
         return new ToStringBuilder().append("FormParameters").append(params.values()).toString();
     }
 
-    /**
-     * 代表一个表单参数的信息。
-     */
+    /** 代表一个表单参数的信息。 */
     final static class FormParameter {
         public final String groupKey;
         public final String fieldKey;

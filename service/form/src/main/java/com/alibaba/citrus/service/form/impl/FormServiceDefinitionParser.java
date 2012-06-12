@@ -24,13 +24,7 @@ import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.config.RuntimeBeanReference;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
 
 import com.alibaba.citrus.service.form.impl.configuration.FieldConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.FormConfigImpl;
@@ -40,11 +34,14 @@ import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 import com.alibaba.citrus.util.StringUtil;
+import org.springframework.beans.factory.config.RuntimeBeanReference;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 public class FormServiceDefinitionParser extends AbstractNamedBeanDefinitionParser<FormServiceImpl> implements
-        ContributionAware {
+                                                                                                    ContributionAware {
     private ConfigurationPoint validatorConfigurationPoint;
 
     public void setContribution(Contribution contrib) {
@@ -77,7 +74,7 @@ public class FormServiceDefinitionParser extends AbstractNamedBeanDefinitionPars
 
         // registrars
         formConfigBuilder.addPropertyValue("propertyEditorRegistrars",
-                parseRegistrars(element, parserContext, formConfigBuilder));
+                                           parseRegistrars(element, parserContext, formConfigBuilder));
 
         // groups
         List<Object> groups = createManagedList(element, parserContext);
@@ -148,7 +145,7 @@ public class FormServiceDefinitionParser extends AbstractNamedBeanDefinitionPars
 
         for (Element subElement : subElements(element)) {
             Object validator = parseConfigurationPointBean(subElement, validatorConfigurationPoint, parserContext,
-                    fieldConfigBuilder);
+                                                           fieldConfigBuilder);
 
             if (validator != null) {
                 validators.add(validator);

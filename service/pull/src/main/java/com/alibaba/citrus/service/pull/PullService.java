@@ -19,17 +19,11 @@ package com.alibaba.citrus.service.pull;
 
 import java.util.Map;
 
-/**
- * <code>PullService</code>提供了一个自动组装template context的机制。
- */
+/** <code>PullService</code>提供了一个自动组装template context的机制。 */
 public interface PullService {
-    /**
-     * 取得context，通过该context可取得所有的tools。
-     */
+    /** 取得context，通过该context可取得所有的tools。 */
     PullContext getContext();
 
-    /**
-     * 取得所有的tools。
-     */
+    /** 取得所有的tools。 */
     Map<String, Object> getTools();
 }

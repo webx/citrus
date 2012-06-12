@@ -27,7 +27,7 @@ import java.util.List;
  * <p>
  * 一个URI包括如下几个部分：
  * </p>
- *
+ * <p/>
  * <pre>
  * URI         = SERVER_INFO + PATH + &quot;?&quot; + QUERY_DATA + &quot;#&quot; + REFERENCE
  * SERVER_INFO = scheme://loginUser:loginPassword@serverName:serverPort
@@ -38,7 +38,7 @@ import java.util.List;
  * <p>
  * 例如：
  * </p>
- *
+ * <p/>
  * <pre>
  * http://user:pass@myserver.com:8080/view?id=1#top
  * </pre>
@@ -51,9 +51,7 @@ public class GenericURIBroker extends URIBroker {
         setPathElements(singletonList(uri.getPath()));
     }
 
-    /**
-     * 设置一组path。
-     */
+    /** 设置一组path。 */
     public void setPathElements(List<String> path) {
         clearPathSegment(PATH_INDEX);
 
@@ -64,17 +62,13 @@ public class GenericURIBroker extends URIBroker {
         }
     }
 
-    /**
-     * 添加path。
-     */
+    /** 添加path。 */
     public GenericURIBroker addPath(String path) {
         addPathSegment(PATH_INDEX, path);
         return this;
     }
 
-    /**
-     * 清除所有path。
-     */
+    /** 清除所有path。 */
     public GenericURIBroker clearPath() {
         clearPathSegment(PATH_INDEX);
         return this;
@@ -105,9 +99,7 @@ public class GenericURIBroker extends URIBroker {
         }
     }
 
-    /**
-     * 取得当前URI path分成几段。
-     */
+    /** 取得当前URI path分成几段。 */
     @Override
     protected int getPathSegmentCount() {
         return 1;

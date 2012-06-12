@@ -110,10 +110,10 @@ public class TabsComponent extends PageComponent {
     }
 
     public static class TabItem {
-        private final String escapedDesc;
-        private String href;
-        private String onclick;
-        private boolean selected;
+        private final String  escapedDesc;
+        private       String  href;
+        private       String  onclick;
+        private       boolean selected;
         private final List<TabItem> subtabs = createLinkedList();
 
         public TabItem(String desc) {

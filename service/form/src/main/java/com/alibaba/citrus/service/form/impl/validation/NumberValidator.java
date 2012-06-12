@@ -33,86 +33,62 @@ import com.alibaba.citrus.service.form.support.NumberSupport;
 public class NumberValidator extends AbstractNumberValidator {
     private NumberSupport[] operands = new NumberSupport[CompareOperator.values().length];
 
-    /**
-     * 取得限定值：等于。
-     */
+    /** 取得限定值：等于。 */
     public String getEqualTo() {
         return getOperandString(equalTo);
     }
 
-    /**
-     * 设置限定值：等于。
-     */
+    /** 设置限定值：等于。 */
     public void setEqualTo(String value) {
         setOperand(equalTo, value);
     }
 
-    /**
-     * 取得限定值：不等于。
-     */
+    /** 取得限定值：不等于。 */
     public String getNotEqualTo() {
         return getOperandString(notEqualTo);
     }
 
-    /**
-     * 设置限定值：不等于。
-     */
+    /** 设置限定值：不等于。 */
     public void setNotEqualTo(String value) {
         setOperand(notEqualTo, value);
     }
 
-    /**
-     * 取得限定值：小于。
-     */
+    /** 取得限定值：小于。 */
     public String getLessThan() {
         return getOperandString(lessThan);
     }
 
-    /**
-     * 设置限定值：小于。
-     */
+    /** 设置限定值：小于。 */
     public void setLessThan(String value) {
         setOperand(lessThan, value);
     }
 
-    /**
-     * 取得限定值：大于。
-     */
+    /** 取得限定值：大于。 */
     public String getGreaterThan() {
         return getOperandString(greaterThan);
     }
 
-    /**
-     * 设置限定值：大于。
-     */
+    /** 设置限定值：大于。 */
     public void setGreaterThan(String value) {
         setOperand(greaterThan, value);
     }
 
-    /**
-     * 取得限定值：小于等于。
-     */
+    /** 取得限定值：小于等于。 */
     public String getLessThanOrEqualTo() {
         return getOperandString(lessThanOrEqualTo);
     }
 
-    /**
-     * 设置限定值：小于等于。
-     */
+    /** 设置限定值：小于等于。 */
     public void setLessThanOrEqualTo(String value) {
         setOperand(lessThanOrEqualTo, value);
     }
 
-    /**
-     * 取得限定值：大于等于。
-     */
+    /** 取得限定值：大于等于。 */
     public String getGreaterThanOrEqualTo() {
         return getOperandString(greaterThanOrEqualTo);
     }
 
-    /**
-     * 设置限定值：大于等于。
-     */
+    /** 设置限定值：大于等于。 */
     public void setGreaterThanOrEqualTo(String value) {
         setOperand(greaterThanOrEqualTo, value);
     }
@@ -143,9 +119,7 @@ public class NumberValidator extends AbstractNumberValidator {
         }
     }
 
-    /**
-     * 验证一个字段。
-     */
+    /** 验证一个字段。 */
     @Override
     protected boolean validate(Context context, String value) {
         NumberSupport numberValue = new NumberSupport(getNumberType(), value);

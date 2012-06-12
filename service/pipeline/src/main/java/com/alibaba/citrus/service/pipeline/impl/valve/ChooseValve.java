@@ -23,18 +23,16 @@ import static com.alibaba.citrus.util.Assert.*;
 
 import java.util.List;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.pipeline.Condition;
 import com.alibaba.citrus.service.pipeline.Pipeline;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.support.AbstractValve;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 代表一个多重条件选择。
@@ -43,8 +41,8 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  */
 public class ChooseValve extends AbstractValve {
     private Condition[] whenConditions;
-    private Pipeline[] whenBlocks;
-    private Pipeline otherwiseBlock;
+    private Pipeline[]  whenBlocks;
+    private Pipeline    otherwiseBlock;
 
     public Condition[] getWhenConditions() {
         return whenConditions;
@@ -81,8 +79,8 @@ public class ChooseValve extends AbstractValve {
         }
 
         assertTrue(whenConditions.length == whenBlocks.length,
-                "conditions and blocks not match: %d conditions and %d blocks", whenConditions.length,
-                whenBlocks.length);
+                   "conditions and blocks not match: %d conditions and %d blocks", whenConditions.length,
+                   whenBlocks.length);
 
         for (int i = 0; i < whenConditions.length; i++) {
             assertNotNull(whenConditions[i], "when[%d].condition == null", i);

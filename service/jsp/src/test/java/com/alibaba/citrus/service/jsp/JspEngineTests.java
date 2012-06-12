@@ -32,7 +32,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.Set;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
@@ -40,10 +39,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.junit.Test;
-import org.springframework.beans.FatalBeanException;
-import org.springframework.core.io.ResourceLoader;
 
 import com.alibaba.citrus.service.jsp.impl.JspEngineImpl;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
@@ -53,6 +48,9 @@ import com.alibaba.citrus.service.template.TemplateNotFoundException;
 import com.alibaba.citrus.service.template.support.MappedTemplateContext;
 import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 import com.meterware.httpunit.WebResponse;
+import org.junit.Test;
+import org.springframework.beans.FatalBeanException;
+import org.springframework.core.io.ResourceLoader;
 
 public class JspEngineTests extends AbstractJspEngineTests {
     @Test
@@ -89,7 +87,7 @@ public class JspEngineTests extends AbstractJspEngineTests {
             fail();
         } catch (IllegalArgumentException e) {
             assertThat(e, exception("expects a proxy delegating to a real object, but got an object of type "
-                    + request.getClass().getName()));
+                                    + request.getClass().getName()));
         }
 
         // response not a proxy
@@ -98,13 +96,12 @@ public class JspEngineTests extends AbstractJspEngineTests {
             fail();
         } catch (IllegalArgumentException e) {
             assertThat(e, exception("expects a proxy delegating to a real object, but got an object of type "
-                    + response.getClass().getName()));
-
+                                    + response.getClass().getName()));
         }
 
         // no resource loader
         JspEngineImpl engine = new JspEngineImpl(servletContext, createMock(MockRequestProxy.class),
-                createMock(MockResponseProxy.class));
+                                                 createMock(MockResponseProxy.class));
 
         try {
             engine.afterPropertiesSet();
@@ -115,7 +112,7 @@ public class JspEngineTests extends AbstractJspEngineTests {
 
         // ok
         engine = new JspEngineImpl(servletContext, createMock(MockRequestProxy.class),
-                createMock(MockResponseProxy.class));
+                                   createMock(MockResponseProxy.class));
 
         engine.setResourceLoader(createMock(ResourceLoader.class));
 
@@ -283,9 +280,7 @@ public class JspEngineTests extends AbstractJspEngineTests {
             this.supportGetResourceOfRoot = supportGetResourceOfRoot;
         }
 
-        /**
-         * 判断当resource不存在时，返回null。
-         */
+        /** 判断当resource不存在时，返回null。 */
         public URL getResource(String path) throws MalformedURLException {
             if (("/".equals(path) || isEmpty(path)) && !supportGetResourceOfRoot) {
                 return null;
@@ -414,15 +409,13 @@ public class JspEngineTests extends AbstractJspEngineTests {
         }
     }
 
-    /**
-     * 由于jasper不支持jspx，故做一个假的servlet仅用于测试。在新版的tomcat中，将自动支持jspx。
-     */
+    /** 由于jasper不支持jspx，故做一个假的servlet仅用于测试。在新版的tomcat中，将自动支持jspx。 */
     public static class FakeJspxServlet extends HttpServlet {
         private static final long serialVersionUID = 780039704847320821L;
 
         @Override
         protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-                IOException {
+                                                                                                IOException {
             String jspx = (String) request.getAttribute("javax.servlet.include.servlet_path");
 
             if (jspx.endsWith(".jspx")) {

@@ -20,15 +20,14 @@ package com.alibaba.citrus.service.requestcontext.locale;
 import static com.alibaba.citrus.service.requestcontext.locale.SetLocaleRequestContext.*;
 import static org.junit.Assert.*;
 
+import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
+import com.alibaba.citrus.util.i18n.LocaleUtil;
+import com.meterware.httpunit.HttpUnitUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.i18n.LocaleContextHolder;
-
-import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
-import com.alibaba.citrus.util.i18n.LocaleUtil;
-import com.meterware.httpunit.HttpUnitUtils;
 
 /**
  * 测试<code>SetLocaleRequestContext</code>。

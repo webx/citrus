@@ -17,9 +17,8 @@
 
 package com.alibaba.citrus.service.velocity.support;
 
-import org.apache.velocity.app.event.ReferenceInsertionEventHandler;
-
 import com.alibaba.citrus.service.template.Renderable;
+import org.apache.velocity.app.event.ReferenceInsertionEventHandler;
 
 /**
  * 渲染<code>Renderable</code>的event handler。

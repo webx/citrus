@@ -25,29 +25,19 @@ import java.lang.reflect.Field;
  * @author Michael Zhou
  */
 public interface FieldInfo {
-    /**
-     * 取得字段。
-     */
+    /** 取得字段。 */
     Field getField();
 
-    /**
-     * 取得字段所在的类型。
-     */
+    /** 取得字段所在的类型。 */
     TypeInfo getDeclaringType();
 
-    /**
-     * 取得字段的访问修饰符。
-     */
+    /** 取得字段的访问修饰符。 */
     int getModifiers();
 
-    /**
-     * 取得字段类型。
-     */
+    /** 取得字段类型。 */
     TypeInfo getType();
 
-    /**
-     * 取得字段的名称。
-     */
+    /** 取得字段的名称。 */
     String getName();
 
     /**

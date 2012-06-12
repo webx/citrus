@@ -21,24 +21,23 @@ import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
-import static freemarker.core.Configurable.*;
+import static freemarker.core.Configurable.OUTPUT_ENCODING_KEY;
+import static freemarker.core.Configurable.TEMPLATE_EXCEPTION_HANDLER_KEY;
 import static freemarker.template.Configuration.*;
 
 import java.util.Map;
 import java.util.Set;
-
-import org.slf4j.Logger;
-import org.springframework.core.io.ResourceLoader;
 
 import com.alibaba.citrus.service.freemarker.FreeMarkerConfiguration;
 import com.alibaba.citrus.service.freemarker.FreeMarkerPlugin;
 import com.alibaba.citrus.service.freemarker.support.DefaultBeansWrapper;
 import com.alibaba.citrus.service.template.TemplateException;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
-
 import freemarker.cache.StrongCacheStorage;
 import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
+import org.slf4j.Logger;
+import org.springframework.core.io.ResourceLoader;
 
 /**
  * 代表一组freemarker engine的配置。
@@ -47,32 +46,26 @@ import freemarker.template.Configuration;
  */
 public class FreeMarkerConfigurationImpl implements FreeMarkerConfiguration {
     private final Logger log;
-    private final Configuration configuration = new Configuration();
-    private final Map<String, String> properties = createHashMap();
-    private boolean productionMode = true;
-    private ResourceLoader loader;
-    private TemplateLoader templateLoader;
-    private String path;
-    private String charset;
+    private final Configuration       configuration  = new Configuration();
+    private final Map<String, String> properties     = createHashMap();
+    private       boolean             productionMode = true;
+    private ResourceLoader     loader;
+    private TemplateLoader     templateLoader;
+    private String             path;
+    private String             charset;
     private FreeMarkerPlugin[] plugins;
 
-    /**
-     * 创建一个freemarker配置。
-     */
+    /** 创建一个freemarker配置。 */
     public FreeMarkerConfigurationImpl(Logger log) {
         this.log = assertNotNull(log, "log");
     }
 
-    /**
-     * 取得用于装载模板的loader。
-     */
+    /** 取得用于装载模板的loader。 */
     public TemplateLoader getTemplateLoader() {
         return templateLoader;
     }
 
-    /**
-     * 取得freemarker的配置。
-     */
+    /** 取得freemarker的配置。 */
     public Configuration getConfiguration() {
         return configuration;
     }
@@ -85,9 +78,7 @@ public class FreeMarkerConfigurationImpl implements FreeMarkerConfiguration {
         return loader;
     }
 
-    /**
-     * 设置resource loader。
-     */
+    /** 设置resource loader。 */
     public void setResourceLoader(ResourceLoader loader) {
         this.loader = loader;
     }
@@ -96,45 +87,33 @@ public class FreeMarkerConfigurationImpl implements FreeMarkerConfiguration {
         return productionMode;
     }
 
-    /**
-     * 设置生产模式。默认为<code>true</code>。
-     */
+    /** 设置生产模式。默认为<code>true</code>。 */
     public void setProductionMode(boolean productionMode) {
         this.productionMode = productionMode;
     }
 
-    /**
-     * 设置搜索模板的根目录。默认为<code>/templates</code>。
-     */
+    /** 设置搜索模板的根目录。默认为<code>/templates</code>。 */
     public void setPath(String path) {
         this.path = trimToNull(path);
     }
 
-    /**
-     * 设置模板的字符集编码。
-     */
+    /** 设置模板的字符集编码。 */
     public void setTemplateEncoding(String charset) {
         this.charset = trimToNull(charset);
     }
 
-    /**
-     * 设置高级配置。
-     */
+    /** 设置高级配置。 */
     public void setAdvancedProperties(Map<String, String> configuration) {
         this.properties.clear();
         this.properties.putAll(configuration);
     }
 
-    /**
-     * 设置plugins。
-     */
+    /** 设置plugins。 */
     public void setPlugins(FreeMarkerPlugin[] plugins) {
         this.plugins = plugins;
     }
 
-    /**
-     * 初始化configuration。
-     */
+    /** 初始化configuration。 */
     public void init() {
         removeReservedProperties();
 
@@ -143,9 +122,7 @@ public class FreeMarkerConfigurationImpl implements FreeMarkerConfiguration {
         initWrapper();
     }
 
-    /**
-     * 删除保留的properties，这些properties用户不能修改。
-     */
+    /** 删除保留的properties，这些properties用户不能修改。 */
     private void removeReservedProperties() {
         Set<String> keysToRemove = createHashSet();
 
@@ -213,9 +190,7 @@ public class FreeMarkerConfigurationImpl implements FreeMarkerConfiguration {
         configuration.setObjectWrapper(new DefaultBeansWrapper(configuration.getObjectWrapper()));
     }
 
-    /**
-     * 设置默认值。如果值已存在，则不覆盖。
-     */
+    /** 设置默认值。如果值已存在，则不覆盖。 */
     private void setDefaultProperty(String key, String value) {
         if (properties.get(key) == null) {
             properties.put(key, value);

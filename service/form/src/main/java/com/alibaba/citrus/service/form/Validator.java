@@ -25,68 +25,42 @@ import com.alibaba.citrus.service.form.configuration.FieldConfig;
  * @author Michael Zhou
  */
 public interface Validator extends Cloneable {
-    /**
-     * 当GroupConfig被初始化完成以后被调用，此时可取得同组中其它的fields。
-     */
+    /** 当GroupConfig被初始化完成以后被调用，此时可取得同组中其它的fields。 */
     void init(FieldConfig fieldConfig) throws Exception;
 
-    /**
-     * 取得validator的ID，通过该ID可以找到指定的validator。
-     */
+    /** 取得validator的ID，通过该ID可以找到指定的validator。 */
     String getId();
 
-    /**
-     * 取得出错信息。
-     */
+    /** 取得出错信息。 */
     String getMessage(Context context);
 
-    /**
-     * 验证一个字段。
-     */
+    /** 验证一个字段。 */
     boolean validate(Context context);
 
-    /**
-     * 生成副本。
-     */
+    /** 生成副本。 */
     Validator clone();
 
-    /**
-     * 携带着validator验证所必须的上下文信息。
-     */
+    /** 携带着validator验证所必须的上下文信息。 */
     interface Context {
-        /**
-         * 取得当前field。
-         */
+        /** 取得当前field。 */
         Field getField();
 
-        /**
-         * 取得指定名称的field。
-         */
+        /** 取得指定名称的field。 */
         Field getField(String fieldName);
 
-        /**
-         * 取得值。
-         */
+        /** 取得值。 */
         Object getValue();
 
-        /**
-         * 取得指定类型的值。
-         */
+        /** 取得指定类型的值。 */
         <T> T getValueAsType(Class<T> type);
 
-        /**
-         * 取得错误信息。
-         */
+        /** 取得错误信息。 */
         String getMessage();
 
-        /**
-         * 设置错误信息。
-         */
+        /** 设置错误信息。 */
         void setMessage(String message);
 
-        /**
-         * 取得用来计算表达式的上下文对象。
-         */
+        /** 取得用来计算表达式的上下文对象。 */
         MessageContext getMessageContext();
     }
 }

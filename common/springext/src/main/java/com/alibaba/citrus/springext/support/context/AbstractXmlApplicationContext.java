@@ -22,16 +22,15 @@ import static org.springframework.context.annotation.AnnotationConfigUtils.*;
 import java.io.IOException;
 import java.util.Collection;
 
+import com.alibaba.citrus.springext.ResourceLoadingExtendable;
+import com.alibaba.citrus.springext.ResourceLoadingExtender;
+import com.alibaba.citrus.springext.support.resolver.XmlBeanDefinitionReaderProcessor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
-
-import com.alibaba.citrus.springext.ResourceLoadingExtendable;
-import com.alibaba.citrus.springext.ResourceLoadingExtender;
-import com.alibaba.citrus.springext.support.resolver.XmlBeanDefinitionReaderProcessor;
 
 /**
  * 从XML配置文件中装配的<code>ApplicationContext</code>的基类，派生于
@@ -54,7 +53,8 @@ import com.alibaba.citrus.springext.support.resolver.XmlBeanDefinitionReaderProc
  * @author Michael Zhou
  */
 public abstract class AbstractXmlApplicationContext extends
-        org.springframework.context.support.AbstractXmlApplicationContext implements ResourceLoadingExtendable {
+                                                    org.springframework.context.support.AbstractXmlApplicationContext
+        implements ResourceLoadingExtendable {
     private ResourceLoadingExtender resourceLoadingExtender;
     private boolean parentResolvableDependenciesAccessible = true;
 
@@ -66,9 +66,7 @@ public abstract class AbstractXmlApplicationContext extends
         super(parent);
     }
 
-    /**
-     * 是否可访问到parent context中的resolvableDependencies。 默认是可访问。
-     */
+    /** 是否可访问到parent context中的resolvableDependencies。 默认是可访问。 */
     public boolean isParentResolvableDependenciesAccessible() {
         return parentResolvableDependenciesAccessible;
     }
@@ -96,9 +94,7 @@ public abstract class AbstractXmlApplicationContext extends
         new XmlBeanDefinitionReaderProcessor(beanDefinitionReader).addConfigurationPointsSupport();
     }
 
-    /**
-     * 打开annotation注入。
-     */
+    /** 打开annotation注入。 */
     @Override
     protected void customizeBeanFactory(DefaultListableBeanFactory beanFactory) {
         super.customizeBeanFactory(beanFactory);
@@ -114,9 +110,7 @@ public abstract class AbstractXmlApplicationContext extends
         }
     }
 
-    /**
-     * 扩展<code>ResourceLoader</code>机制，实现自定义的资源装载。
-     */
+    /** 扩展<code>ResourceLoader</code>机制，实现自定义的资源装载。 */
     @Override
     protected Resource getResourceByPath(String path) {
         Resource resource = null;
@@ -132,9 +126,7 @@ public abstract class AbstractXmlApplicationContext extends
         return resource;
     }
 
-    /**
-     * 扩展<code>ResourcePatternResolver</code>机制，实现自定义的资源装载。
-     */
+    /** 扩展<code>ResourcePatternResolver</code>机制，实现自定义的资源装载。 */
     @Override
     protected ResourcePatternResolver getResourcePatternResolver() {
         final ResourcePatternResolver defaultResolver = super.getResourcePatternResolver();

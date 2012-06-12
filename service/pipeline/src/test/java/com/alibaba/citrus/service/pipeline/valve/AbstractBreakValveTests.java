@@ -19,9 +19,8 @@ package com.alibaba.citrus.service.pipeline.valve;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pipeline.impl.valve.BreakValve;
+import org.junit.Test;
 
 public class AbstractBreakValveTests<V extends BreakValve> extends AbstractValveTests<V> {
     @Test

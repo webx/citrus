@@ -22,24 +22,22 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.util.Map;
-
 import javax.servlet.http.HttpServletResponse;
-
-import org.junit.Test;
-import org.springframework.beans.FatalBeanException;
-import org.springframework.beans.factory.parsing.BeanDefinitionParsingException;
-import org.springframework.context.ApplicationContext;
 
 import com.alibaba.citrus.service.pull.support.ConstantTool;
 import com.alibaba.citrus.service.pull.support.ConstantToolSet;
 import com.alibaba.citrus.service.pull.tool.SimpleTool;
 import com.alibaba.citrus.service.pull.tool.SimpleToolSet;
 import com.alibaba.citrus.util.Utils;
+import org.junit.Test;
+import org.springframework.beans.FatalBeanException;
+import org.springframework.beans.factory.parsing.BeanDefinitionParsingException;
+import org.springframework.context.ApplicationContext;
 
 public class PullServiceConfigTests extends AbstractPullServiceConfigTests {
-    private static final int constantCount;
-    private static final int utilCount;
-    private Map<String, Object> tools;
+    private static final int                 constantCount;
+    private static final int                 utilCount;
+    private              Map<String, Object> tools;
 
     static {
         ConstantToolSet myconst = new ConstantToolSet();

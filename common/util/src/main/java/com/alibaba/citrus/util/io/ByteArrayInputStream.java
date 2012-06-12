@@ -36,9 +36,9 @@ import java.io.InputStream;
 public class ByteArrayInputStream extends InputStream {
     // buffer from which to read
     private byte[] buffer;
-    private int index;
-    private int limit;
-    private int mark;
+    private int    index;
+    private int    limit;
+    private int    mark;
 
     // is the stream closed?
     private boolean closed;

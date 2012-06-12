@@ -34,17 +34,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.context.Context;
-import org.apache.velocity.exception.MethodInvocationException;
-import org.apache.velocity.exception.ParseErrorException;
-import org.apache.velocity.util.introspection.UberspectImpl;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.beans.FatalBeanException;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.ResourcePatternResolver;
-
 import com.alibaba.citrus.service.template.Renderable;
 import com.alibaba.citrus.service.template.TemplateContext;
 import com.alibaba.citrus.service.template.TemplateException;
@@ -58,6 +47,16 @@ import com.alibaba.citrus.service.velocity.impl.SpringResourceLoaderAdapter;
 import com.alibaba.citrus.service.velocity.impl.VelocityEngineImpl;
 import com.alibaba.citrus.service.velocity.impl.VelocityEngineImpl.RuntimeServicesExposer;
 import com.alibaba.citrus.service.velocity.support.RenderableHandler;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.context.Context;
+import org.apache.velocity.exception.MethodInvocationException;
+import org.apache.velocity.exception.ParseErrorException;
+import org.apache.velocity.util.introspection.UberspectImpl;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.beans.FatalBeanException;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.ResourcePatternResolver;
 
 public class VelocityEngineTests extends AbstractVelocityEngineTests {
     @BeforeClass
@@ -175,7 +174,7 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
         Map<String, Resource> resources = getProperty("preloaded.resource.loader.resources");
         assertEquals(1, resources.size());
         assertEquals(new File(srcdir, "templates_with_macros/VM_global_library.vm"),
-                resources.get("globalVMs/VM_global_library.vm").getFile());
+                     resources.get("globalVMs/VM_global_library.vm").getFile());
 
         // 试以macro来渲染模板
         String content = velocityEngine.mergeTemplate("test_macros.vm", new VelocityContext(), null);
@@ -189,7 +188,7 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
         // 指定macros，但VM_global_library.vm不存在
         assertProperty("resource.loader", "spring"); // 由于preloaded resources不存在，故不包含preloaded
         assertProperty("velocimacro.library", new String[] { "macros/hello.vm", "macros/inner/hello.vm",
-                "macros/world.vm", "test2.vm" }, true);
+                                                             "macros/world.vm", "test2.vm" }, true);
 
         // 所有macros文件都是从ResourceLoadingService中装载的，可取得templateName，不需要preload
         Map<String, Resource> resources = getProperty("preloaded.resource.loader.resources");
@@ -207,7 +206,7 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
         // 指定macros，但VM_global_library.vm不存在
         assertProperty("resource.loader", new String[] { "spring", "preloaded" });
         assertProperty("velocimacro.library", new String[] { "globalVMs/globalVM.vm", "globalVMs/hello.vm",
-                "globalVMs/hello.vm1", "globalVMs/world.vm", }, true);
+                                                             "globalVMs/hello.vm1", "globalVMs/world.vm", }, true);
 
         // 检查preloaded resources
         Map<String, Resource> resources = getProperty("preloaded.resource.loader.resources");
@@ -252,7 +251,7 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
         assertNull(getProperty("runtime.log.logsystem.class"));
         assertProperty("preloaded.resource.loader.resources", "{}");
         assertProperty("eventhandler.referenceinsertion.class",
-                VelocityEngineImpl.RuntimeServicesExposer.class.getName()); // runtime services exposer for event cartridge
+                       VelocityEngineImpl.RuntimeServicesExposer.class.getName()); // runtime services exposer for event cartridge
         assertProperty("velocimacro.library.autoreload", "false");
         assertProperty("runtime.references.strict", "true");
 
@@ -339,7 +338,7 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
             public Resource[] getMacros() throws IOException {
                 ResourcePatternResolver resolver = (ResourcePatternResolver) configuration.getResourceLoader();
                 String pattern = "classpath:" + PluginDelegator.class.getPackage().getName().replace('.', '/')
-                        + "/*.vm";
+                                 + "/*.vm";
                 Resource[] resources = resolver.getResources(pattern);
 
                 return resources;
@@ -355,7 +354,7 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
         // Plugin提供了macros
         assertProperty("resource.loader", new String[] { "spring", "preloaded" });
         assertProperty("velocimacro.library",
-                new String[] { "globalVMs/plugin_macro1.vm", "globalVMs/plugin_macro2.vm" }, true);
+                       new String[] { "globalVMs/plugin_macro1.vm", "globalVMs/plugin_macro2.vm" }, true);
 
         // 存在preloaded resources
         Map<String, Resource> resources = getProperty("preloaded.resource.loader.resources");
@@ -423,7 +422,7 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
             assertThat(
                     e,
                     exception(MethodInvocationException.class, "Error rendering Velocity template: /test_render.vm",
-                            "Parameter 'world' not defined at /test_render.vm"));
+                              "Parameter 'world' not defined at /test_render.vm"));
         }
 
         // 语法错
@@ -432,7 +431,7 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
             fail();
         } catch (TemplateException e) {
             assertThat(e,
-                    exception(ParseErrorException.class, "Error rendering Velocity template: /test_render_error.vm"));
+                       exception(ParseErrorException.class, "Error rendering Velocity template: /test_render_error.vm"));
         }
     }
 
@@ -529,11 +528,11 @@ public class VelocityEngineTests extends AbstractVelocityEngineTests {
 
     private void assertContent(String content) {
         assertThat(content, containsAll(//
-                "我爱北京敏感词，", //
-                "敏感词上太阳升。", //
-                "伟大领袖敏感词，", //
-                "带领我们向前进！", //
-                "hello, 世界"));
+                                        "我爱北京敏感词，", //
+                                        "敏感词上太阳升。", //
+                                        "伟大领袖敏感词，", //
+                                        "带领我们向前进！", //
+                                        "hello, 世界"));
     }
 
     @SuppressWarnings("unchecked")

@@ -23,24 +23,23 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
 
+import com.alibaba.citrus.springext.ConfigurationPoint;
+import com.alibaba.citrus.springext.Contribution;
+import com.alibaba.citrus.springext.ContributionAware;
+import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-import com.alibaba.citrus.springext.ConfigurationPoint;
-import com.alibaba.citrus.springext.Contribution;
-import com.alibaba.citrus.springext.ContributionAware;
-import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
-
 public class RewriteRequestContextFactoryDefinitionParser extends
-        AbstractSingleBeanDefinitionParser<RewriteRequestContextFactoryImpl> implements ContributionAware {
+                                                          AbstractSingleBeanDefinitionParser<RewriteRequestContextFactoryImpl>
+        implements ContributionAware {
     private ConfigurationPoint rewriteHandlersConfigurationPoint;
 
     public void setContribution(Contribution contrib) {
         rewriteHandlersConfigurationPoint = getSiblingConfigurationPoint("services/request-contexts/rewrite/handlers",
-                contrib);
+                                                                         contrib);
     }
 
     @Override
@@ -55,9 +54,7 @@ public class RewriteRequestContextFactoryDefinitionParser extends
         builder.addPropertyValue("rules", rules);
     }
 
-    /**
-     * 解析rule。
-     */
+    /** 解析rule。 */
     private BeanDefinition parseRule(Element ruleElement, ParserContext parserContext) {
         BeanDefinitionBuilder ruleBuilder = BeanDefinitionBuilder.genericBeanDefinition(RewriteRule.class);
 
@@ -95,9 +92,7 @@ public class RewriteRequestContextFactoryDefinitionParser extends
         return ruleBuilder.getBeanDefinition();
     }
 
-    /**
-     * 解析rule/condition。
-     */
+    /** 解析rule/condition。 */
     private BeanDefinition parseCondition(Element conditionElement, ParserContext parserContext) {
         BeanDefinitionBuilder conditionBuilder = BeanDefinitionBuilder.genericBeanDefinition(RewriteCondition.class);
 
@@ -106,9 +101,7 @@ public class RewriteRequestContextFactoryDefinitionParser extends
         return conditionBuilder.getBeanDefinition();
     }
 
-    /**
-     * 解析rule/substitution。
-     */
+    /** 解析rule/substitution。 */
     private BeanDefinition parseSubstitution(Element substitutionElement, ParserContext parserContext) {
         BeanDefinitionBuilder substitutionBuilder = BeanDefinitionBuilder
                 .genericBeanDefinition(RewriteSubstitution.class);
@@ -128,9 +121,7 @@ public class RewriteRequestContextFactoryDefinitionParser extends
         return substitutionBuilder.getBeanDefinition();
     }
 
-    /**
-     * 解析rule/substitution/parameter。
-     */
+    /** 解析rule/substitution/parameter。 */
     private BeanDefinition parseParameter(Element parameterElement, ParserContext parserContext) {
         BeanDefinitionBuilder parameterBuilder = BeanDefinitionBuilder
                 .genericBeanDefinition(RewriteSubstitution.Parameter.class);
@@ -152,16 +143,14 @@ public class RewriteRequestContextFactoryDefinitionParser extends
         return parameterBuilder.getBeanDefinition();
     }
 
-    /**
-     * 解析rule/handlers。
-     */
+    /** 解析rule/handlers。 */
     private List<Object> parseHandlers(Element handlersElement, ParserContext parserContext,
                                        BeanDefinitionBuilder ruleBuilder) {
         List<Object> handlers = createManagedList(handlersElement, parserContext);
 
         for (Element subElement : subElements(handlersElement)) {
             handlers.add(parseConfigurationPointBean(subElement, rewriteHandlersConfigurationPoint, parserContext,
-                    ruleBuilder));
+                                                     ruleBuilder));
         }
 
         return handlers;

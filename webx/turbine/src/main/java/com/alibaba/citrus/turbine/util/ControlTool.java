@@ -35,17 +35,7 @@ import java.util.Formatter;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.springframework.context.ApplicationContext;
-import org.w3c.dom.Element;
 
 import com.alibaba.citrus.service.configuration.ProductionModeAware;
 import com.alibaba.citrus.service.mappingrule.MappingRuleService;
@@ -64,6 +54,14 @@ import com.alibaba.citrus.turbine.support.MappedContext;
 import com.alibaba.citrus.util.ExceptionUtil;
 import com.alibaba.citrus.webx.WebxComponents;
 import com.alibaba.citrus.webx.WebxException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.springframework.context.ApplicationContext;
+import org.w3c.dom.Element;
 
 /**
  * 设置和显示一个control module的tool。
@@ -137,7 +135,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
      * 这些参数将被保存在一个一次性的<code>Map</code>中，当render成功以后，该map就被丢弃，以便再次调用该control。
      * </p>
      *
-     * @param name 属性名
+     * @param name  属性名
      * @param value 对象
      * @return <code>ControlTool</code>本身，以方便模板中的操作
      */
@@ -149,9 +147,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
         return this;
     }
 
-    /**
-     * 当screen结束时，导出指定名称的变量，使调用者可以访问。
-     */
+    /** 当screen结束时，导出指定名称的变量，使调用者可以访问。 */
     public ControlTool export(String... vars) {
         ControlParameters params = getControlParameters();
 
@@ -189,13 +185,13 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
 
             // controlTool支持跨component调用，现在取得指定component下的service。
             ModuleLoaderService moduleLoaderService = getService("moduleLoaderService", componentName,
-                    this.moduleLoaderService, ModuleLoaderService.class);
+                                                                 this.moduleLoaderService, ModuleLoaderService.class);
 
             MappingRuleService mappingRuleService = getService("mappingRuleService", componentName,
-                    this.mappingRuleService, MappingRuleService.class);
+                                                               this.mappingRuleService, MappingRuleService.class);
 
             TemplateService templateService = getService("templateService", componentName, this.templateService,
-                    TemplateService.class);
+                                                         TemplateService.class);
 
             // 取得实际的template/module名称
             String templateName = null;
@@ -249,7 +245,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
 
                     if (!isEquals(templateOverriden, templateName)) {
                         log.debug("Control template has been changed by module: " + templateName + " -> "
-                                + templateOverriden);
+                                  + templateOverriden);
 
                         templateName = templateOverriden;
                     }
@@ -294,9 +290,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
         return content;
     }
 
-    /**
-     * 假如template或module的名称前有诸如“componentName:”前缀，则返回此componentName，否则返回null。
-     */
+    /** 假如template或module的名称前有诸如“componentName:”前缀，则返回此componentName，否则返回null。 */
     private String parseComponentName(String name) {
         int index = name == null ? -1 : name.indexOf(":");
 
@@ -307,9 +301,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
         return null;
     }
 
-    /**
-     * 取得不包含“componentName:”前缀的template或module的名称。
-     */
+    /** 取得不包含“componentName:”前缀的template或module的名称。 */
     private String parseLocalName(String name) {
         int index = name == null ? -1 : name.indexOf(":");
 
@@ -326,13 +318,13 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
         }
 
         ApplicationContext context = assertNotNull(this.components.getComponent(componentName),
-                "invalid prefix \"%s:\", component does not exist", componentName).getApplicationContext();
+                                                   "invalid prefix \"%s:\", component does not exist", componentName).getApplicationContext();
 
         try {
             return serviceType.cast(context.getBean(name, serviceType));
         } catch (BeansException e) {
             throw new IllegalArgumentException(String.format("Could not get service: \"%s:%s\"", componentName,
-                    serviceType.getSimpleName()), e);
+                                                             serviceType.getSimpleName()), e);
         }
     }
 
@@ -341,7 +333,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
         TurbineRunDataInternal rundata = (TurbineRunDataInternal) TurbineUtil.getTurbineRunData(this.request);
         Context screenContext = rundata.getContext(componentName);
         final Context callerContext = rundata.getCurrentContext();
-        final Set<String> exportVars = params.exportVars == null ? Collections.<String> emptySet() : params.exportVars;
+        final Set<String> exportVars = params.exportVars == null ? Collections.<String>emptySet() : params.exportVars;
 
         // create control context
         MappedContext context = new MappedContext(screenContext) {
@@ -374,9 +366,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
         return context;
     }
 
-    /**
-     * 取得栈顶的control参数。
-     */
+    /** 取得栈顶的control参数。 */
     protected ControlParameters getControlParameters() {
         if (controlParameterStack.isEmpty()) {
             controlParameterStack.addFirst(new ControlParameters());
@@ -385,13 +375,11 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
         return controlParameterStack.getFirst();
     }
 
-    /**
-     * 代表一次control的调用参数。
-     */
+    /** 代表一次control的调用参数。 */
     protected static class ControlParameters extends HashMap<String, Object> {
         private static final long serialVersionUID = 3256721796996084529L;
-        private String module;
-        private String template;
+        private String      module;
+        private String      template;
         private Set<String> exportVars;
 
         public ControlParameters() {
@@ -399,29 +387,17 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
         }
     }
 
-    /**
-     * 打印异常的详细程度。
-     */
+    /** 打印异常的详细程度。 */
     public static enum ErrorDetailLevel {
-        /**
-         * 抛出异常。
-         */
+        /** 抛出异常。 */
         throwException,
-        /**
-         * 不输出任何错误内容。
-         */
+        /** 不输出任何错误内容。 */
         quiet,
-        /**
-         * 只输出异常信息。
-         */
+        /** 只输出异常信息。 */
         messageOnly,
-        /**
-         * 输出异常的详细信息。
-         */
+        /** 输出异常的详细信息。 */
         stackTrace,
-        /**
-         * 将异常打印在HTML注释中。
-         */
+        /** 将异常打印在HTML注释中。 */
         comment;
 
         private final ErrorHandler handler = new DefaultErrorHandler(this);
@@ -431,9 +407,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
         }
     }
 
-    /**
-     * 用来处理control执行过程中的异常。
-     */
+    /** 用来处理control执行过程中的异常。 */
     public static interface ErrorHandler {
         String handleException(String controlTarget, Exception e);
     }
@@ -445,7 +419,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
     }
 
     public static class DefaultErrorHandler implements ErrorHandler {
-        private String errorTagClass;
+        private String           errorTagClass;
         private ErrorDetailLevel detailLevel;
 
         public DefaultErrorHandler() {
@@ -539,7 +513,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
 
                 if (errorHandlerElement != null) {
                     builder.addPropertyValue("errorHandler",
-                            parseBean(errorHandlerElement, parserContext, builder.getRawBeanDefinition()));
+                                             parseBean(errorHandlerElement, parserContext, builder.getRawBeanDefinition()));
                 }
             }
 
@@ -551,12 +525,10 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
         }
     }
 
-    /**
-     * pull tool factory。
-     */
+    /** pull tool factory。 */
     public static class Factory extends ControlToolConfiguration implements ToolFactory, ProductionModeAware {
         private ErrorDetailLevel errorDetailLevel;
-        private ErrorHandler errorHandler;
+        private ErrorHandler     errorHandler;
         private boolean productionMode = true;
         private boolean exportAll;
 
@@ -592,7 +564,7 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
             }
 
             tool.init(components, moduleLoaderService, mappingRuleService, templateService, request,
-                    bufferedRequestContext);
+                      bufferedRequestContext);
 
             tool.exportAll = exportAll;
             tool.afterPropertiesSet();
@@ -603,13 +575,13 @@ public class ControlTool extends ControlToolConfiguration implements Renderable 
 }
 
 class ControlToolConfiguration extends BeanSupport {
-    protected WebxComponents components;
-    protected ModuleLoaderService moduleLoaderService;
-    protected MappingRuleService mappingRuleService;
-    protected TemplateService templateService;
-    protected HttpServletRequest request;
+    protected WebxComponents         components;
+    protected ModuleLoaderService    moduleLoaderService;
+    protected MappingRuleService     mappingRuleService;
+    protected TemplateService        templateService;
+    protected HttpServletRequest     request;
     protected BufferedRequestContext bufferedRequestContext;
-    protected boolean exportAll;
+    protected boolean                exportAll;
 
     @Autowired
     protected void init(WebxComponents components, ModuleLoaderService moduleLoaderService,

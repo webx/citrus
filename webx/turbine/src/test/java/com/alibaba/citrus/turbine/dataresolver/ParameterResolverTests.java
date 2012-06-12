@@ -26,16 +26,15 @@ import java.beans.PropertyEditor;
 import java.io.File;
 import java.util.List;
 
+import com.alibaba.citrus.service.dataresolver.DataResolverContext;
+import com.alibaba.citrus.service.moduleloader.ActionEventException;
+import com.alibaba.citrus.turbine.dataresolver.impl.ParameterResolverFactory;
 import org.apache.commons.fileupload.FileItem;
 import org.junit.Test;
 import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.beans.PropertyEditorRegistry;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.propertyeditors.CustomNumberEditor;
-
-import com.alibaba.citrus.service.dataresolver.DataResolverContext;
-import com.alibaba.citrus.service.moduleloader.ActionEventException;
-import com.alibaba.citrus.turbine.dataresolver.impl.ParameterResolverFactory;
 
 public class ParameterResolverTests extends AbstractDataResolverTests {
     @Test
@@ -75,7 +74,7 @@ public class ParameterResolverTests extends AbstractDataResolverTests {
             assertThat(
                     e,
                     exception(TypeMismatchException.class, "Failed to convert value of type ", "java.lang.String",
-                            " to required type ", "java.lang.Integer", "wrong"));
+                              " to required type ", "java.lang.Integer", "wrong"));
         }
     }
 
@@ -101,7 +100,7 @@ public class ParameterResolverTests extends AbstractDataResolverTests {
     public void getIntArray() throws Exception {
         // default value
         execute("action", "param.myAction", "doGetIntArray", "aaa=");
-        assertArrayEquals(new int[] {}, (int[]) request.getAttribute("actionLog"));
+        assertArrayEquals(new int[] { }, (int[]) request.getAttribute("actionLog"));
 
         // single value
         execute("action", "param.myAction", "doGetIntArray", "aaa=111");
@@ -167,7 +166,7 @@ public class ParameterResolverTests extends AbstractDataResolverTests {
     public void getIntegerArray() throws Exception {
         // default value
         execute("action", "param.myAction", "doGetIntegerArray", "aaa=");
-        assertArrayEquals(new Integer[] {}, (Integer[]) request.getAttribute("actionLog"));
+        assertArrayEquals(new Integer[] { }, (Integer[]) request.getAttribute("actionLog"));
 
         // single value
         execute("action", "param.myAction", "doGetIntegerArray", "aaa=111");
@@ -329,7 +328,7 @@ public class ParameterResolverTests extends AbstractDataResolverTests {
     @Test
     public void getFileItemAsString() throws Exception {
         getInvocationContext("/app1", "myFile", new File(srcdir, "test.txt"), "eventSubmit_doGetFileItemAsString",
-                "yes");
+                             "yes");
         initRequestContext();
 
         moduleLoaderService.getModule("action", "param.myAction").execute();
@@ -342,8 +341,8 @@ public class ParameterResolverTests extends AbstractDataResolverTests {
     @Test
     public void getFileItemAsList() throws Exception {
         getInvocationContext("/app1", "myFile",
-                new File[] { new File(srcdir, "test.txt"), new File(srcdir, "test.txt") },
-                "eventSubmit_doGetFileItemList", "yes");
+                             new File[] { new File(srcdir, "test.txt"), new File(srcdir, "test.txt") },
+                             "eventSubmit_doGetFileItemList", "yes");
 
         initRequestContext();
 

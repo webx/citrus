@@ -22,9 +22,8 @@ import static org.junit.Assert.*;
 
 import java.net.URL;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.logconfig.log4j.Log4jConfigurator;
+import org.junit.Test;
 
 public class Log4jConfiguratorTests extends AbstractLogConfiguratorTests {
     @Test

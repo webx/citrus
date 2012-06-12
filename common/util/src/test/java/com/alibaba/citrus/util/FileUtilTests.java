@@ -20,9 +20,8 @@ package com.alibaba.citrus.util;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.util.FileUtil.FileNameAndExtension;
+import org.junit.Test;
 
 public class FileUtilTests {
     @Test
@@ -461,16 +460,16 @@ public class FileUtilTests {
         assertExts("aa/bb/", null, FileUtil.getFileNameAndExtension("aa/bb/", true), "aa/bb/");
 
         assertExts("/aaa/bbb/ccc", "jsp", FileUtil.getFileNameAndExtension("/aaa/bbb/ccc.jsp", true),
-                "/aaa/bbb/ccc.jsp");
+                   "/aaa/bbb/ccc.jsp");
         assertExts("/aaa/bbb/ccc", "jsp", FileUtil.getFileNameAndExtension("/aaa/bbb/ccc.Jsp", true),
-                "/aaa/bbb/ccc.jsp");
+                   "/aaa/bbb/ccc.jsp");
         assertExts("/aaa/bbb/ccc", "vm", FileUtil.getFileNameAndExtension("/aaa/bbb/ccc.vm", true), "/aaa/bbb/ccc.vm");
         assertExts("/aaa/bbb/ccc", null, FileUtil.getFileNameAndExtension("/aaa/bbb/ccc.", true), "/aaa/bbb/ccc");
         assertExts("/aaa/bbb/ccc", null, FileUtil.getFileNameAndExtension("/aaa/bbb/ccc", true), "/aaa/bbb/ccc");
         assertExts("/aaa/bbb/ccc", "abc", FileUtil.getFileNameAndExtension("/aaa/bbb/ccc.ABC", true),
-                "/aaa/bbb/ccc.abc");
+                   "/aaa/bbb/ccc.abc");
         assertExts("/aaa/bbb.bak/ccc", null, FileUtil.getFileNameAndExtension("/aaa/bbb.bak/ccc", true),
-                "/aaa/bbb.bak/ccc");
+                   "/aaa/bbb.bak/ccc");
         assertExts("/aaa/bbb/ccc/", null, FileUtil.getFileNameAndExtension("/aaa/bbb/ccc/", true), "/aaa/bbb/ccc/");
     }
 
@@ -517,10 +516,10 @@ public class FileUtilTests {
 
         // form2: http://server/...
         assertEquals("http://www.taobao.com:8080/aa/bb/xx/yy",
-                FileUtil.resolve("http://www.taobao.com:8080/aa/bb/cc", "xx/yy"));
+                     FileUtil.resolve("http://www.taobao.com:8080/aa/bb/cc", "xx/yy"));
 
         assertEquals("http://www.taobao.com:8080/aa/xx/yy",
-                FileUtil.resolve("http://www.taobao.com:8080/aa/bb/cc", "../xx/yy"));
+                     FileUtil.resolve("http://www.taobao.com:8080/aa/bb/cc", "../xx/yy"));
 
         try {
             FileUtil.resolve("http://www.taobao.com:8080/aa/bb/cc", "../../../xx/yy");
@@ -531,10 +530,10 @@ public class FileUtilTests {
 
         // form3: jar:url!/...
         assertEquals("jar:http://www.taobao.com:8080/my.jar!/aa/bb/xx/yy",
-                FileUtil.resolve("jar:http://www.taobao.com:8080/my.jar!/aa/bb/cc", "xx/yy"));
+                     FileUtil.resolve("jar:http://www.taobao.com:8080/my.jar!/aa/bb/cc", "xx/yy"));
 
         assertEquals("jar:http://www.taobao.com:8080/my.jar!/aa/xx/yy",
-                FileUtil.resolve("jar:http://www.taobao.com:8080/my.jar!/aa/bb/cc", "../xx/yy"));
+                     FileUtil.resolve("jar:http://www.taobao.com:8080/my.jar!/aa/bb/cc", "../xx/yy"));
 
         try {
             FileUtil.resolve("zip:http://www.taobao.com:8080/my.jar!/aa/bb/cc", "../../../xx/yy");
@@ -592,10 +591,10 @@ public class FileUtilTests {
 
         // form2: HTTP://server/...
         assertEquals("HTTP://www.taobao.com:8080/aa/bb/xx/yy",
-                FileUtil.resolve("HTTP://www.taobao.com:8080/aa/bb/cc", "xx/yy"));
+                     FileUtil.resolve("HTTP://www.taobao.com:8080/aa/bb/cc", "xx/yy"));
 
         assertEquals("HTTP://www.taobao.com:8080/aa/xx/yy",
-                FileUtil.resolve("HTTP://www.taobao.com:8080/aa/bb/cc", "../xx/yy"));
+                     FileUtil.resolve("HTTP://www.taobao.com:8080/aa/bb/cc", "../xx/yy"));
 
         try {
             FileUtil.resolve("HTTP://www.taobao.com:8080/aa/bb/cc", "../../../xx/yy");
@@ -606,10 +605,10 @@ public class FileUtilTests {
 
         // form3: JAR:url!/...
         assertEquals("JAR:HTTP://www.taobao.com:8080/my.jar!/aa/bb/xx/yy",
-                FileUtil.resolve("JAR:HTTP://www.taobao.com:8080/my.jar!/aa/bb/cc", "xx/yy"));
+                     FileUtil.resolve("JAR:HTTP://www.taobao.com:8080/my.jar!/aa/bb/cc", "xx/yy"));
 
         assertEquals("JAR:HTTP://www.taobao.com:8080/my.jar!/aa/xx/yy",
-                FileUtil.resolve("JAR:HTTP://www.taobao.com:8080/my.jar!/aa/bb/cc", "../xx/yy"));
+                     FileUtil.resolve("JAR:HTTP://www.taobao.com:8080/my.jar!/aa/bb/cc", "../xx/yy"));
 
         try {
             FileUtil.resolve("zip:HTTP://www.taobao.com:8080/my.jar!/aa/bb/cc", "../../../xx/yy");

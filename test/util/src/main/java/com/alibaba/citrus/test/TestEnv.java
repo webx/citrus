@@ -96,7 +96,6 @@ public class TestEnv {
             System.out.println("+-----------------------------------------------------------------------------");
 
             setupLogback(logConfigFile);
-
         } catch (Exception e) {
             params.initFailure = e;
         }
@@ -104,9 +103,7 @@ public class TestEnv {
         return this;
     }
 
-    /**
-     * 初始化basedir, srcdir和destdir等。
-     */
+    /** 初始化basedir, srcdir和destdir等。 */
     private void setupDirectories() throws IOException {
         Params params = getParams();
 
@@ -128,9 +125,7 @@ public class TestEnv {
         System.out.println("| Set destination dir to:   " + destdir);
     }
 
-    /**
-     * 初始化logback.xml，可用${basedir}, ${srcdir}, ${destdir}。
-     */
+    /** 初始化logback.xml，可用${basedir}, ${srcdir}, ${destdir}。 */
     private void setupLogback(URL logConfigFile) throws IOException {
         if (logConfigFile == null) {
             return;
@@ -229,15 +224,13 @@ public class TestEnv {
         return new Params();
     }
 
-    /**
-     * 初始化参数。
-     */
+    /** 初始化参数。 */
     protected class Params {
-        public String basedirParam = ".";
-        public String srcdirParam = "src/test/config/";
-        public String destdirParam = "target/test/";
-        public String logbackConfigParam = "logback.xml"; // 相对于srcdir
-        public Exception initFailure = null;
-        public boolean inited = false;
+        public String    basedirParam       = ".";
+        public String    srcdirParam        = "src/test/config/";
+        public String    destdirParam       = "target/test/";
+        public String    logbackConfigParam = "logback.xml"; // 相对于srcdir
+        public Exception initFailure        = null;
+        public boolean   inited             = false;
     }
 }

@@ -21,11 +21,10 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.form.Condition;
 import com.alibaba.citrus.service.form.Validator;
 import com.alibaba.citrus.service.form.impl.validation.MyValidator;
+import org.junit.Test;
 
 public class IfValidatorTests extends AbstractSimpleCompositeValidatorTests<IfValidator> {
     @Override

@@ -18,13 +18,11 @@
 package com.alibaba.test2.module.action.param;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
+import com.alibaba.citrus.turbine.dataresolver.Param;
 import org.apache.commons.fileupload.FileItem;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.alibaba.citrus.turbine.dataresolver.Param;
 
 public class MyAction {
     @Autowired

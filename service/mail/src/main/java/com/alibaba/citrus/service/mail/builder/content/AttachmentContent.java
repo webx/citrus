@@ -18,15 +18,14 @@
 package com.alibaba.citrus.service.mail.builder.content;
 
 import static com.alibaba.citrus.service.mail.MailConstant.*;
-import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.Assert.ExceptionType.*;
+import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
-
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -34,10 +33,6 @@ import javax.activation.URLDataSource;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Part;
-
-import org.springframework.context.ResourceLoaderAware;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 
 import com.alibaba.citrus.service.mail.MailNotFoundException;
 import com.alibaba.citrus.service.mail.MailService;
@@ -47,6 +42,9 @@ import com.alibaba.citrus.service.mail.support.ResourceDataSource;
 import com.alibaba.citrus.service.mail.util.MailUtil;
 import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.springframework.context.ResourceLoaderAware;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 
 /**
  * 代表一个邮件的附件。
@@ -54,129 +52,95 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public class AttachmentContent extends AbstractContent implements ResourceLoaderAware {
-    private ResourceLoader resourceLoader;
+    private ResourceLoader   resourceLoader;
     private AttachmentSource source;
-    private String fileName;
+    private String           fileName;
 
-    /**
-     * 创建一个附件。
-     */
+    /** 创建一个附件。 */
     public AttachmentContent() {
     }
 
-    /**
-     * 从URL中创建一个附件。
-     */
+    /** 从URL中创建一个附件。 */
     public AttachmentContent(URL attachmentURL) {
         setURL(attachmentURL);
     }
 
-    /**
-     * 从URL中创建一个指定文件名的附件。
-     */
+    /** 从URL中创建一个指定文件名的附件。 */
     public AttachmentContent(URL attachmentURL, String fileName) {
         setURL(attachmentURL);
         setFileName(fileName);
     }
 
-    /**
-     * 从文件中创建一个附件。
-     */
+    /** 从文件中创建一个附件。 */
     public AttachmentContent(File attachmentFile) {
         setFile(attachmentFile);
     }
 
-    /**
-     * 从文件中创建一个指定文件名的附件。
-     */
+    /** 从文件中创建一个指定文件名的附件。 */
     public AttachmentContent(File attachmentFile, String fileName) {
         setFile(attachmentFile);
         setFileName(fileName);
     }
 
-    /**
-     * 从<code>DataSource</code>中创建一个附件。
-     */
+    /** 从<code>DataSource</code>中创建一个附件。 */
     public AttachmentContent(DataSource dataSource) {
         setDataSource(dataSource);
     }
 
-    /**
-     * 从<code>DataSource</code>中创建一个指定文件名的附件。
-     */
+    /** 从<code>DataSource</code>中创建一个指定文件名的附件。 */
     public AttachmentContent(DataSource dataSource, String fileName) {
         setDataSource(dataSource);
         setFileName(fileName);
     }
 
-    /**
-     * 从<code>ResourceLoader</code>中装载一个资源并创建附件。
-     */
+    /** 从<code>ResourceLoader</code>中装载一个资源并创建附件。 */
     public AttachmentContent(String resourceName) {
         setResource(resourceName);
     }
 
-    /**
-     * 从<code>ResourceLoader</code>中装载一个资源并创建指定文件名的附件。
-     */
+    /** 从<code>ResourceLoader</code>中装载一个资源并创建指定文件名的附件。 */
     public AttachmentContent(String resourceName, String fileName) {
         setResource(resourceName);
         setFileName(fileName);
     }
 
-    /**
-     * 将另一封邮件作为附件。
-     */
+    /** 将另一封邮件作为附件。 */
     public AttachmentContent(MailBuilder mailBuilder) {
         setMail(mailBuilder);
     }
 
-    /**
-     * 将另一封邮件作为附件。
-     */
+    /** 将另一封邮件作为附件。 */
     public AttachmentContent(Message mail) {
         setMail(mail);
     }
 
-    /**
-     * 以URL的内容为附件。
-     */
+    /** 以URL的内容为附件。 */
     public void setURL(URL attachmentURL) {
         setSource(new URLSource(this, attachmentURL));
     }
 
-    /**
-     * 以文件的内容为附件。
-     */
+    /** 以文件的内容为附件。 */
     public void setFile(File attachmentFile) {
         setSource(new FileSource(this, attachmentFile));
     }
 
-    /**
-     * 以数据源的内容为附件。
-     */
+    /** 以数据源的内容为附件。 */
     public void setDataSource(DataSource dataSource) {
         setSource(new DsSource(this, dataSource));
     }
 
-    /**
-     * 以resource loader装载的资源内容为附件。
-     */
+    /** 以resource loader装载的资源内容为附件。 */
     public void setResource(String resourceName) {
         setSource(new ResourceSource(this, resourceName));
         source.containingContent = this;
     }
 
-    /**
-     * 取得用来装载资源的<code>ResourceLoader</code>。
-     */
+    /** 取得用来装载资源的<code>ResourceLoader</code>。 */
     public ResourceLoader getResourceLoader() {
         return resourceLoader;
     }
 
-    /**
-     * 设置用来装载资源的<code>ResourceLoader</code>。
-     */
+    /** 设置用来装载资源的<code>ResourceLoader</code>。 */
     public void setResourceLoader(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
     }
@@ -191,23 +155,17 @@ public class AttachmentContent extends AbstractContent implements ResourceLoader
         this.fileName = trimToNull(fileName);
     }
 
-    /**
-     * 以另一个邮件体为附件。
-     */
+    /** 以另一个邮件体为附件。 */
     public void setMail(MailBuilder mailBuilder) {
         setSource(new MailBuilderSource(this, mailBuilder));
     }
 
-    /**
-     * 以另一个邮件体为附件。
-     */
+    /** 以另一个邮件体为附件。 */
     public void setMail(Message mail) {
         setSource(new MailSource(this, mail));
     }
 
-    /**
-     * 以mail service中取得的另一个邮件体为附件。
-     */
+    /** 以mail service中取得的另一个邮件体为附件。 */
     public void setMail(String attachmentRefId) {
         setSource(new MailRefSource(this, attachmentRefId));
     }
@@ -217,25 +175,19 @@ public class AttachmentContent extends AbstractContent implements ResourceLoader
         this.source = assertNotNull(source, "source");
     }
 
-    /**
-     * 渲染邮件内容。
-     */
+    /** 渲染邮件内容。 */
     public void render(Part mailPart) throws MessagingException {
         assertNotNull(source, "No attachment source was specified");
         source.render(mailPart, fileName);
     }
 
-    /**
-     * 创建一个同类型的content。
-     */
+    /** 创建一个同类型的content。 */
     @Override
     protected AttachmentContent newInstance() {
         return new AttachmentContent();
     }
 
-    /**
-     * 深度复制一个content。
-     */
+    /** 深度复制一个content。 */
     @Override
     protected void copyTo(AbstractContent copy) {
         AttachmentContent copyContent = (AttachmentContent) copy;
@@ -255,9 +207,7 @@ public class AttachmentContent extends AbstractContent implements ResourceLoader
         mb.append("fileName", fileName);
     }
 
-    /**
-     * 代表一个附件的类型。
-     */
+    /** 代表一个附件的类型。 */
     private abstract static class AttachmentSource implements Cloneable {
         protected transient AttachmentContent containingContent;
 
@@ -280,9 +230,7 @@ public class AttachmentContent extends AbstractContent implements ResourceLoader
 
         protected abstract void render(Part mailPart, String fileName);
 
-        /**
-         * 渲染data source。
-         */
+        /** 渲染data source。 */
         protected final void render(Part mailPart, String fileName, DataSource source) throws MailBuilderException {
             try {
                 mailPart.setDataHandler(new DataHandler(source));
@@ -303,9 +251,7 @@ public class AttachmentContent extends AbstractContent implements ResourceLoader
             }
         }
 
-        /**
-         * 以另一个邮件作为附件。
-         */
+        /** 以另一个邮件作为附件。 */
         protected final void render(Part mailPart, Message mail) throws MailBuilderException {
             try {
                 mailPart.setContent(mail, CONTENT_TYPE_MESSAGE);
@@ -445,7 +391,7 @@ public class AttachmentContent extends AbstractContent implements ResourceLoader
 
             if (resourceLoader == null) {
                 throw new MailBuilderException("Could not find resource \"" + resourceName
-                        + "\": no resourceLoader specified");
+                                               + "\": no resourceLoader specified");
             }
 
             Resource resource = resourceLoader.getResource(resourceName);

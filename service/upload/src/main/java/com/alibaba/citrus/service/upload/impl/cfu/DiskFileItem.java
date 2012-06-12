@@ -27,9 +27,7 @@ public class DiskFileItem extends AbstractFileItem {
         super(fieldName, contentType, isFormField, fileName, sizeThreshold, keepFormFieldInMemory, repository);
     }
 
-    /**
-     * Removes the file contents from the temporary storage.
-     */
+    /** Removes the file contents from the temporary storage. */
     @Override
     protected void finalize() {
         File outputFile = dfos.getFile();

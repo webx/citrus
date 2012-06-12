@@ -19,14 +19,13 @@ package com.alibaba.citrus.test;
 
 import static org.junit.Assert.*;
 
+import com.alibaba.citrus.test.runner.TestNameAware;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.alibaba.citrus.test.runner.TestNameAware;
 
 @RunWith(TestNameAware.class)
 public class TestNameAwareTests {

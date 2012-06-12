@@ -18,7 +18,6 @@
 package com.alibaba.citrus.springext.export;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +40,8 @@ public class SchemaExporterServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         exporter.processRequest(new ServletRequestContext(request, response, getServletContext()));
     }
 }

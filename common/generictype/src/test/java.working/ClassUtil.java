@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 
@@ -54,14 +53,12 @@ public class ClassUtil {
         PRIMITIVES.put("void", new PrimitiveInfo<Void>(void.class, "V", Void.class, null));
     }
 
-    /**
-     * 代表一个primitive类型的信息。
-     */
+    /** 代表一个primitive类型的信息。 */
     private static class PrimitiveInfo<T> {
         final Class<T> type;
-        final String typeCode;
+        final String   typeCode;
         final Class<T> wrapperType;
-        final String unwrapMethod;
+        final String   unwrapMethod;
 
         public PrimitiveInfo(Class<T> type, String typeCode, Class<T> wrapperType, String unwrapMethod) {
             this.type = type;
@@ -75,12 +72,12 @@ public class ClassUtil {
      * 取得primitive类。
      * <p>
      * 例如：
-     *
+     * <p/>
      * <pre>
      * ClassUtil.getPrimitiveType(&quot;int&quot;) = int.class;
      * ClassUtil.getPrimitiveType(&quot;long&quot;) = long.class;
      * </pre>
-     *
+     * <p/>
      * </p>
      */
     public static Class<?> getPrimitiveType(String name) {
@@ -97,14 +94,14 @@ public class ClassUtil {
      * 取得primitive类型的wrapper。如果不是primitive，则原样返回。
      * <p>
      * 例如：
-     *
+     * <p/>
      * <pre>
      * ClassUtil.getPrimitiveWrapperType(int.class) = Integer.class;
      * ClassUtil.getPrimitiveWrapperType(int[].class) = int[].class;
      * ClassUtil.getPrimitiveWrapperType(int[][].class) = int[][].class;
      * ClassUtil.getPrimitiveWrapperType(String[][].class) = String[][].class;
      * </pre>
-     *
+     * <p/>
      * </p>
      */
     @SuppressWarnings("unchecked")
@@ -116,12 +113,10 @@ public class ClassUtil {
         return type;
     }
 
-    /**
-     * 代表Array的信息。
-     */
+    /** 代表Array的信息。 */
     public static final class ArrayInfo {
         public final Class<?> componentType;
-        public final int dimension;
+        public final int      dimension;
 
         private ArrayInfo(Class<?> componentType, int dimension) {
             this.componentType = componentType;
@@ -129,9 +124,7 @@ public class ClassUtil {
         }
     }
 
-    /**
-     * 取得数组的维度，非数组则返回<code>0</code>。
-     */
+    /** 取得数组的维度，非数组则返回<code>0</code>。 */
     public static ArrayInfo getArrayInfo(Class<?> arrayType) {
         assertNotNull(arrayType, "arrayType");
 
@@ -145,9 +138,7 @@ public class ClassUtil {
         return new ArrayInfo(arrayType, dimension);
     }
 
-    /**
-     * 取得指定component类型和维度的数组类。
-     */
+    /** 取得指定component类型和维度的数组类。 */
     public static Class<?> getArrayType(Class<?> componentType, int dimension) {
         assertTrue(dimension >= 0, "dimension");
 
@@ -162,12 +153,12 @@ public class ClassUtil {
      * 取得JVM内部的类名。
      * <p>
      * 例如：
-     *
+     * <p/>
      * <pre>
      *  ClassUtil.getJVMClassName(&quot;int[]&quot;) = &quot;[I&quot;
      *  ClassUtil.getJVMClassName(&quot;java.lang.Integer[][]&quot;) = &quot;[[Ljava.lang.Integer;&quot;
      * </pre>
-     *
+     * <p/>
      * </p>
      * <p>
      * 该方法所返回的类名可用于 <code>Class.forName</code> 操作。
@@ -181,7 +172,7 @@ public class ClassUtil {
      * 取得JVM内部的数组类名。
      * <p>
      * 例如：
-     *
+     * <p/>
      * <pre>
      *  ClassUtil.getJVMClassName(&quot;int&quot;, 1) = &quot;[I&quot;  // int[]
      *  ClassUtil.getJVMClassName(&quot;java.lang.Integer&quot;, 2) = &quot;[[Ljava.lang.Integer;&quot; // Integer[][]
@@ -189,7 +180,7 @@ public class ClassUtil {
      *  ClassUtil.getJVMClassName(&quot;int[]&quot;, 1) = &quot;[[I&quot;  // int[][]
      *  ClassUtil.getJVMClassName(&quot;java.lang.Integer[]&quot;, 1) = &quot;[[Ljava.lang.Integer;&quot; // Integer[][]
      * </pre>
-     *
+     * <p/>
      * </p>
      * <p>
      * 该方法所返回的类名可用于 <code>Class.forName</code> 操作。
@@ -264,16 +255,12 @@ public class ClassUtil {
         return className.substring(className.lastIndexOf(".") + 1);
     }
 
-    /**
-     * 判断方法是不是<code>String toString()</code>方法。
-     */
+    /** 判断方法是不是<code>String toString()</code>方法。 */
     public static boolean isToString(Method method) {
         return isToString(new MethodSignature(method));
     }
 
-    /**
-     * 判断方法是不是<code>String toString()</code>方法。
-     */
+    /** 判断方法是不是<code>String toString()</code>方法。 */
     public static boolean isToString(MethodSignature method) {
         if (!"toString".equals(method.getName())) {
             return false;
@@ -368,9 +355,7 @@ public class ClassUtil {
         return new Supertypes(clazz);
     }
 
-    /**
-     * 遍历所有父类和接口。
-     */
+    /** 遍历所有父类和接口。 */
     private static class Supertypes implements Iterable<Class<?>> {
         private Class<?> clazz;
 
@@ -383,9 +368,7 @@ public class ClassUtil {
         }
     }
 
-    /**
-     * 遍历所有父类和接口的遍历器。
-     */
+    /** 遍历所有父类和接口的遍历器。 */
     private static class SupertypeIterator implements Iterator<Class<?>> {
         private static enum State {
             CLASSES,
@@ -394,11 +377,11 @@ public class ClassUtil {
             END
         }
 
-        private final Set<Class<?>> processedInterfaces = createHashSet();
-        private final LinkedList<Class<?>> interfaceQueue = createLinkedList();
+        private final Set<Class<?>>        processedInterfaces = createHashSet();
+        private final LinkedList<Class<?>> interfaceQueue      = createLinkedList();
 
-        private Class<?> clazz;
-        private int dimension;
+        private Class<?>           clazz;
+        private int                dimension;
         private Iterator<Class<?>> componentTypes;
 
         private State state;
@@ -519,21 +502,16 @@ public class ClassUtil {
                 }
             }
         }
-
     }
 
-    /**
-     * 取得类名对应的资源名。
-     */
+    /** 取得类名对应的资源名。 */
     public static String getResourceNameOfClass(Class<?> clazz) {
         String className = clazz == null ? null : clazz.getName();
 
         return getResourceNameOfClass(className);
     }
 
-    /**
-     * 取得类名对应的资源名。
-     */
+    /** 取得类名对应的资源名。 */
     public static String getResourceNameOfClass(String className) {
         if (className == null) {
             return null;
@@ -552,7 +530,7 @@ public class ClassUtil {
             throws IncompatibleMethodSignatureException {
         class Tuple implements Comparable<Tuple> {
             public final MethodSignature signature;
-            public final Class<?> declaringClass;
+            public final Class<?>        declaringClass;
 
             public Tuple(MethodSignature signature, Class<?> declaringClass) {
                 this.signature = signature;
@@ -599,16 +577,12 @@ public class ClassUtil {
         return signatures;
     }
 
-    /**
-     * 调用构造函数创建对象。
-     */
+    /** 调用构造函数创建对象。 */
     public static <T> T newInstance(Class<T> clazz) {
         return newInstance(clazz, null, null);
     }
 
-    /**
-     * 调用构造函数创建对象。
-     */
+    /** 调用构造函数创建对象。 */
     public static <T> T newInstance(Class<T> clazz, Class<?>[] paramTypes, Object[] paramValues) {
         try {
             if (ArrayUtil.isEmpty(paramTypes)) {

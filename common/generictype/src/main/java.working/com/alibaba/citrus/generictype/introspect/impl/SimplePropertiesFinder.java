@@ -107,9 +107,7 @@ public class SimplePropertiesFinder extends AbstractPropertiesFinder {
         return new SimplePropertyImpl(propName, declaringType, type, readMethod, writMethod);
     }
 
-    /**
-     * 代表一个简单的属性信息。
-     */
+    /** 代表一个简单的属性信息。 */
     private static class SimplePropertyImpl extends AbstractPropertyInfo implements SimplePropertyInfo {
         private SimplePropertyImpl(String name, TypeInfo declaringType, TypeInfo type, MethodInfo readMethod,
                                    MethodInfo writeMethod) {

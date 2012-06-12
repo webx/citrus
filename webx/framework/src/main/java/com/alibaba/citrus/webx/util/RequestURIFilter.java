@@ -24,7 +24,6 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
 import java.util.regex.Pattern;
-
 import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.citrus.util.ToStringBuilder;
@@ -36,7 +35,7 @@ import com.alibaba.citrus.util.regex.PathNameWildcardCompiler;
  * @author Michael Zhou
  */
 public class RequestURIFilter {
-    private final String[] uris;
+    private final String[]  uris;
     private final Pattern[] patterns;
 
     public RequestURIFilter(String uris) {

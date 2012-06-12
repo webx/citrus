@@ -31,12 +31,11 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Set;
 
+import com.alibaba.citrus.service.resource.impl.ResourceLoadingServiceImpl;
+import com.alibaba.citrus.service.resource.support.InputStreamResource;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.alibaba.citrus.service.resource.impl.ResourceLoadingServiceImpl;
-import com.alibaba.citrus.service.resource.support.InputStreamResource;
 
 public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
     @BeforeClass
@@ -62,7 +61,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
             fail();
         } catch (IllegalStateException e) {
             assertThat(e, exception("Bean instance of " + ResourceLoadingService.class.getName()
-                    + " has not been initialized yet"));
+                                    + " has not been initialized yet"));
         }
     }
 
@@ -120,7 +119,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
         // /myfolder/testres.txt 映射到<super-loader name="/webroot">
         // 和<resource-alias name="/webroot">等效
         assertEquals(new File(srcdir, "/myfolder/testres.txt"),
-                resourceLoadingService.getResourceAsFile("/myfolder/testres.txt"));
+                     resourceLoadingService.getResourceAsFile("/myfolder/testres.txt"));
     }
 
     @Test
@@ -137,7 +136,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
     public void getResource_parent_defaultMapping() throws Exception {
         // 当前resource loader中没找到，到parent中找，匹配/
         assertEquals(new File(srcdir, "/myfolder/testres.txt"),
-                resourceLoadingService.getResourceAsFile("/myfolder/testres.txt"));
+                     resourceLoadingService.getResourceAsFile("/myfolder/testres.txt"));
     }
 
     @Test
@@ -148,7 +147,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
             fail();
         } catch (ResourceNotFoundException e) {
             assertResourceNotFoundException(e, "/my/alias1/testres.txt", "/not/found/testres.txt",
-                    "/webroot/not/found/testres.txt");
+                                            "/webroot/not/found/testres.txt");
         }
     }
 
@@ -156,21 +155,21 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
     public void getResource_alias_foundInParent() throws Exception {
         // Alias被匹配，从default resource loader中找到资源
         assertEquals(new File(srcdir, "/myfolder/testres.txt"),
-                resourceLoadingService.getResourceAsFile("/my/alias3/testres.txt"));
+                     resourceLoadingService.getResourceAsFile("/my/alias3/testres.txt"));
     }
 
     @Test
     public void getResource_internal_found() throws Exception {
         // Alias被匹配，internal mapping被找到
         assertEquals(new File(srcdir, "/myfolder/testres.txt"),
-                resourceLoadingService.getResourceAsFile("/my/alias4/testres.txt"));
+                     resourceLoadingService.getResourceAsFile("/my/alias4/testres.txt"));
 
         assertEquals(new File(srcdir, "/myfolder/testres.txt"),
-                resourceLoadingService.getParent().getResourceAsFile("/myfolder/testres.txt"));
+                     resourceLoadingService.getParent().getResourceAsFile("/myfolder/testres.txt"));
 
         // super-loader被匹配，internal mapping被找到
         assertEquals(new File(srcdir, "/myfolder/testres.txt"),
-                resourceLoadingService.getResourceAsFile("/my/alias5/testres.txt"));
+                     resourceLoadingService.getResourceAsFile("/my/alias5/testres.txt"));
     }
 
     @Test
@@ -181,7 +180,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
             fail();
         } catch (ResourceNotFoundException e) {
             assertResourceNotFoundException(e, "/my/internal/resource/testres.txt",
-                    "/webroot/my/internal/resource/testres.txt");
+                                            "/webroot/my/internal/resource/testres.txt");
         }
 
         try {
@@ -197,7 +196,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
             fail();
         } catch (ResourceNotFoundException e) {
             assertResourceNotFoundException(e, "/my/alias6/testres.txt", "/webroot/myfolder/testres.txt",
-                    "/webroot/webroot/myfolder/testres.txt");
+                                            "/webroot/webroot/myfolder/testres.txt");
         }
 
         // super-loader映射到parent internal mapping，这样是不行的
@@ -221,39 +220,37 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
         }
     }
 
-    /**
-     * 无论resourceName是否以/开始，都可以匹配相应的资源。
-     */
+    /** 无论resourceName是否以/开始，都可以匹配相应的资源。 */
     @Test
     public void getResource_relativeResourceName() throws Exception {
         // resource.xml中为相对路径：pattern="relative/resource"
         assertEquals(new File(srcdir, "/WEB-INF/aaa/bbb/abc.txt"),
-                resourceLoadingService.getResourceAsFile("/relative/resource/abc.txt"));
+                     resourceLoadingService.getResourceAsFile("/relative/resource/abc.txt"));
         assertEquals(new File(srcdir, "/WEB-INF/aaa/bbb/abc.txt"),
-                resourceLoadingService.getResourceAsFile("relative/resource/abc.txt"));
+                     resourceLoadingService.getResourceAsFile("relative/resource/abc.txt"));
         assertEquals(new File(srcdir, "/WEB-INF/aaa/bbb/abc.txt"),
-                resourceLoadingService.getResourceAsFile("aaa/../relative/resource/abc.txt"));
+                     resourceLoadingService.getResourceAsFile("aaa/../relative/resource/abc.txt"));
 
         // aaa/(relative/resource)/abc.txt => aaa/(aaa/bbb)/abc.txt
         assertEquals(new File(srcdir, "/WEB-INF/aaa/aaa/bbb/abc.txt"),
-                resourceLoadingService.getResourceAsFile("aaa/relative/resource/abc.txt", FOR_CREATE));
+                     resourceLoadingService.getResourceAsFile("aaa/relative/resource/abc.txt", FOR_CREATE));
 
         // resource.xml中为绝对路径：pattern="/absolute/resource"
         assertEquals(new File(srcdir, "/WEB-INF/aaa/bbb/abc.txt"),
-                resourceLoadingService.getResourceAsFile("/absolute/resource/abc.txt"));
+                     resourceLoadingService.getResourceAsFile("/absolute/resource/abc.txt"));
         assertEquals(new File(srcdir, "/WEB-INF/aaa/bbb/abc.txt"),
-                resourceLoadingService.getResourceAsFile("absolute/resource/abc.txt"));
+                     resourceLoadingService.getResourceAsFile("absolute/resource/abc.txt"));
 
         try {
             resourceLoadingService.getResourceAsFile("aaa/absolute/resource/abc.txt");
             fail();
         } catch (ResourceNotFoundException e) {
             assertResourceNotFoundException(e, "aaa/absolute/resource/abc.txt",
-                    "/webroot/aaa/absolute/resource/abc.txt");
+                                            "/webroot/aaa/absolute/resource/abc.txt");
         }
 
         assertEquals(new File(srcdir, "/WEB-INF/aaa/bbb/abc.txt"),
-                resourceLoadingService.getResourceAsFile("aaa/../absolute/resource/abc.txt"));
+                     resourceLoadingService.getResourceAsFile("aaa/../absolute/resource/abc.txt"));
     }
 
     @Test
@@ -343,7 +340,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
         assertEquals(testresContent, readText(resource.getInputStream(), null, true));
 
         assertEquals(testresContent,
-                readText(resourceLoadingService.getResourceAsStream("/myfolder/testres.txt"), null, true));
+                     readText(resourceLoadingService.getResourceAsStream("/myfolder/testres.txt"), null, true));
 
         // Stream不存在
         resource = resourceLoadingService.getResource("/asStream/java/lang/String.class");
@@ -372,35 +369,35 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
     @Test
     public void getPatterns_noParent() {
         assertArrayEquals(new String[] {//
-                "/my/alias1", //
-                        "/my/alias2", //
-                        "/my/alias3", //
-                        "/my/alias4", //
-                        "/my/alias5", //
-                        "/my/alias6", //
-                        "/my/alias7", //
-                        "/my/resource", //
-                        "relative/resource", //
-                        "/absolute/resource", //
-                }, resourceLoadingService.getPatterns(false));
+                                        "/my/alias1", //
+                                        "/my/alias2", //
+                                        "/my/alias3", //
+                                        "/my/alias4", //
+                                        "/my/alias5", //
+                                        "/my/alias6", //
+                                        "/my/alias7", //
+                                        "/my/resource", //
+                                        "relative/resource", //
+                                        "/absolute/resource", //
+        }, resourceLoadingService.getPatterns(false));
     }
 
     @Test
     public void getPatterns_withParent() {
         assertArrayEquals(new String[] {//
-                "/my/alias1", //
-                        "/my/alias2", //
-                        "/my/alias3", //
-                        "/my/alias4", //
-                        "/my/alias5", //
-                        "/my/alias6", //
-                        "/my/alias7", //
-                        "/my/resource", //
-                        "relative/resource", //
-                        "/absolute/resource", //
-                        "/classpath", // parent
-                        "/", // parent
-                }, resourceLoadingService.getPatterns(true));
+                                        "/my/alias1", //
+                                        "/my/alias2", //
+                                        "/my/alias3", //
+                                        "/my/alias4", //
+                                        "/my/alias5", //
+                                        "/my/alias6", //
+                                        "/my/alias7", //
+                                        "/my/resource", //
+                                        "relative/resource", //
+                                        "/absolute/resource", //
+                                        "/classpath", // parent
+                                        "/", // parent
+        }, resourceLoadingService.getPatterns(true));
     }
 
     /**
@@ -439,9 +436,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
         assertThat(e, nullValue());
     }
 
-    /**
-     * 除去resource URL的filter。
-     */
+    /** 除去resource URL的filter。 */
     public static class NoURLFilter implements ResourceFilter {
         public void init(ResourceLoadingService resourceLoadingService) {
         }
@@ -459,9 +454,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
         }
     }
 
-    /**
-     * 除去resource Stream的filter。
-     */
+    /** 除去resource Stream的filter。 */
     public static class NoStreamFilter implements ResourceFilter {
         public void init(ResourceLoadingService resourceLoadingService) {
         }

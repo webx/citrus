@@ -30,8 +30,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.util.IllegalPathException;
 import com.alibaba.citrus.util.io.ByteArrayInputStream;
 import com.alibaba.citrus.util.io.StreamUtil;
@@ -40,6 +38,7 @@ import com.alibaba.citrus.util.templatelite.Template.Node;
 import com.alibaba.citrus.util.templatelite.Template.Placeholder;
 import com.alibaba.citrus.util.templatelite.Template.PlaceholderParameter;
 import com.alibaba.citrus.util.templatelite.Template.Text;
+import org.junit.Test;
 
 public class TemplateParserTests extends AbstractTemplateTests {
     @Test
@@ -96,7 +95,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         Placeholder placeholder = (Placeholder) template.nodes[0];
 
         assertPlaceholder(placeholder, "for", "Line 1 Column 1", new String[] { "#aaa", "#bbb.ccc", "ccc" },
-                "#aaa, #bbb.ccc, ccc");
+                          "#aaa, #bbb.ccc, ccc");
 
         PlaceholderParameter param;
         int i = 0;
@@ -127,7 +126,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
         // 子模板的顺序和模板文件中的一致
         assertPlaceholder(placeholder, "for", "Line 3 Column 1", new String[] { "#aaa.d", "#aaa.c", "#aaa.b", "ccc" },
-                "#aaa.*, ccc");
+                          "#aaa.*, ccc");
 
         PlaceholderParameter param;
         int i = 0;
@@ -228,7 +227,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError,
-                exception("Referenced template notexist is not found in the context around test.txt: Line 1 Column 3"));
+                   exception("Referenced template notexist is not found in the context around test.txt: Line 1 Column 3"));
 
         // ${xxx: #a.b.c}模板未找到
         s = "";
@@ -236,7 +235,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError,
-                exception("Referenced template a.b.c is not found in the context around test.txt: Line 1 Column 3"));
+                   exception("Referenced template a.b.c is not found in the context around test.txt: Line 1 Column 3"));
 
         s = "";
         s += "  ${xxx: #a.b.c}\n";
@@ -247,7 +246,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError,
-                exception("Referenced template a.b.c is not found in the context around test.txt: Line 1 Column 3"));
+                   exception("Referenced template a.b.c is not found in the context around test.txt: Line 1 Column 3"));
 
         // ${xxx: #a.b.*}模板未找到
         s = "";
@@ -255,7 +254,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError,
-                exception("Referenced template a.b is not found in the context around test.txt: Line 1 Column 3"));
+                   exception("Referenced template a.b is not found in the context around test.txt: Line 1 Column 3"));
 
         s = "";
         s += "  ${xxx: #a.b.*}\n";
@@ -264,7 +263,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError,
-                exception("Referenced template a.b is not found in the context around test.txt: Line 1 Column 3"));
+                   exception("Referenced template a.b is not found in the context around test.txt: Line 1 Column 3"));
     }
 
     @Test
@@ -392,7 +391,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError, exception("Duplicated template name #abc at test.txt: Line 3 Column 3.  "
-                + "Another template with the same name is located in test.txt: Line 1 Column 2"));
+                                         + "Another template with the same name is located in test.txt: Line 1 Column 2"));
 
         // keyword
         s = "";
@@ -453,7 +452,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
         assertEquals("level1.level2.aaa", include.templateName);
         assertTemplateRef(template.getSubTemplate("level1").getSubTemplate("level2").getSubTemplate("aaa"),
-                include.includedTemplate);
+                          include.includedTemplate);
     }
 
     @Test
@@ -476,7 +475,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError,
-                exception("Included template notexist is not found in the context around test.txt: Line 1 Column 3"));
+                   exception("Included template notexist is not found in the context around test.txt: Line 1 Column 3"));
 
         // $#{abc}模板未找到（嵌套）
         s = "";
@@ -488,14 +487,14 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError,
-                exception("Included template abc is not found in the context around test.txt: Line 3 Column 12"));
+                   exception("Included template abc is not found in the context around test.txt: Line 3 Column 12"));
 
         // $#{a.b.c}模板未找到（子模板）
         s = "$#{a.b.c}\n";
 
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError,
-                exception("Included template a.b.c is not found in the context around test.txt: Line 1 Column 1"));
+                   exception("Included template a.b.c is not found in the context around test.txt: Line 1 Column 1"));
 
         s = "$#{a.b.c}\n";
         s += "#a\n";
@@ -505,7 +504,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
         loadTemplateFailure(s.getBytes(), "test.txt");
         assertThat(parseError,
-                exception("Included template a.b.c is not found in the context around test.txt: Line 1 Column 1"));
+                   exception("Included template a.b.c is not found in the context around test.txt: Line 1 Column 1"));
     }
 
     @Test
@@ -833,19 +832,19 @@ public class TemplateParserTests extends AbstractTemplateTests {
 
         int i = 0;
         assertText("<html>\n" //
-                + "<head>\n" //
-                + "<title>", template.nodes[i++]);
+                   + "<head>\n" //
+                   + "<title>", template.nodes[i++]);
 
         assertPlaceholder(template.nodes[i++], "title", "Line 7 Column 12", new String[] { "我的标题" }, "我的标题");
 
         assertText("</title>\n" //
-                + "</head>\n" //
-                + "<body>\n", template.nodes[i++]);
+                   + "</head>\n" //
+                   + "<body>\n", template.nodes[i++]);
 
         assertIncludeTemplate(template.nodes[i++], "itemlist", "Line 10 Column 5", template.getSubTemplate("itemlist"));
 
         assertText("\n</body>\n" //
-                + "</html>", template.nodes[i++]);
+                   + "</html>", template.nodes[i++]);
 
         // -------------------------------
         Template itemlist = template.getSubTemplate("itemlist");
@@ -853,7 +852,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         i = 0;
         assertText("<ul>\n", itemlist.nodes[i++]);
         assertPlaceholder(itemlist.nodes[i++], "item", "Line 18 Column 5",
-                new String[] { "#dateItem", "#datetimeItem" }, "#dateItem, #datetimeItem");
+                          new String[] { "#dateItem", "#datetimeItem" }, "#dateItem, #datetimeItem");
         assertText("\n</ul>", itemlist.nodes[i++]);
 
         // -------------------------------
@@ -870,7 +869,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         i = 0;
         assertText("<li> ", datetimeItem.nodes[i++]);
         assertPlaceholder(datetimeItem.nodes[i++], "date", "Line 26 Column 10", new String[] { "yyyy-MM-dd", "HH:mm" },
-                "yyyy-MM-dd,HH:mm");
+                          "yyyy-MM-dd,HH:mm");
         assertText(" </li>", datetimeItem.nodes[i++]);
     }
 
@@ -898,7 +897,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         assertTemplate(subTemplate, "abc", 1, 0, 1, null);
 
         assertText("  hello,\n" //
-                + "world", subTemplate.nodes[0]); // no trimming
+                   + "world", subTemplate.nodes[0]); // no trimming
 
         assertLocation(subTemplate.nodes[0].location, "Line 2 Column 3");
     }
@@ -918,7 +917,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
         assertTemplate(subTemplate, "abc", 1, 0, 1, null);
 
         assertText("  hello,\n" //
-                + "world", subTemplate.nodes[0]); // no trimming
+                   + "world", subTemplate.nodes[0]); // no trimming
 
         assertLocation(subTemplate.nodes[0].location, "Line 2 Column 3");
     }
@@ -933,7 +932,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
             assertThat(
                     e,
                     exception(FileNotFoundException.class, "Could not import template file \"notfound.txt\" at ",
-                            "Line 5 Column 6"));
+                              "Line 5 Column 6"));
         }
     }
 
@@ -955,7 +954,7 @@ public class TemplateParserTests extends AbstractTemplateTests {
             assertThat(
                     e,
                     exception(IllegalPathException.class,
-                            "Could not import template file \"" + importedFile + "\" at ", "Line 3 Column 6"));
+                              "Could not import template file \"" + importedFile + "\" at ", "Line 3 Column 6"));
         }
     }
 

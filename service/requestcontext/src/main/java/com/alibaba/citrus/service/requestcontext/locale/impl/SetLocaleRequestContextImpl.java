@@ -23,13 +23,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.locale.SetLocaleRequestContext;
@@ -38,6 +34,8 @@ import com.alibaba.citrus.service.requestcontext.support.AbstractRequestWrapper;
 import com.alibaba.citrus.service.requestcontext.support.AbstractResponseWrapper;
 import com.alibaba.citrus.util.i18n.LocaleInfo;
 import com.alibaba.citrus.util.i18n.LocaleUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <code>SetLocaleRequestContext</code>的实现。
@@ -48,11 +46,11 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
     private final static Logger log = LoggerFactory.getLogger(SetLocaleRequestContext.class);
     private Pattern inputCharsetPattern;
     private Pattern outputCharsetPattern;
-    private Locale defaultLocale;
-    private String defaultCharset;
-    private String sessionKey;
-    private String paramKey;
-    private Locale locale;
+    private Locale  defaultLocale;
+    private String  defaultCharset;
+    private String  sessionKey;
+    private String  paramKey;
+    private Locale  locale;
 
     /**
      * 包装一个<code>RequestContext</code>对象。
@@ -106,7 +104,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
      * type中将不包含charset标记。
      * </p>
      *
-     * @param contentType content type
+     * @param contentType   content type
      * @param appendCharset 输出字符集
      */
     public void setResponseContentType(String contentType, boolean appendCharset) {
@@ -117,15 +115,13 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
      * 设置response输出字符集。注意，此方法必须在第一次<code>getWriter</code>之前执行。
      *
      * @param charset 输出字符集，如果charset为<code>null</code>
-     *            ，则从contentType中删除charset标记
+     *                ，则从contentType中删除charset标记
      */
     public void setResponseCharacterEncoding(String charset) {
         ((ResponseWrapper) getResponse()).setCharacterEncoding(charset);
     }
 
-    /**
-     * 设置locale。
-     */
+    /** 设置locale。 */
     @Override
     public void prepare() {
         // 首先从session中取得input charset，并设置到request中，以便进一步解析request parameters。
@@ -244,7 +240,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
             locale = LocaleInfo.parse(localeName);
 
             if (!LocaleUtil.isLocaleSupported(locale.getLocale())
-                    || !LocaleUtil.isCharsetSupported(locale.getCharset().name())) {
+                || !LocaleUtil.isCharsetSupported(locale.getCharset().name())) {
                 log.warn("Invalid locale " + locale + " from session");
 
                 locale = new LocaleInfo(defaultLocale, defaultCharset);
@@ -267,7 +263,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
             locale = LocaleInfo.parse(localeName);
 
             if (!LocaleUtil.isLocaleSupported(locale.getLocale())
-                    || !LocaleUtil.isCharsetSupported(locale.getCharset().name())) {
+                || !LocaleUtil.isCharsetSupported(locale.getCharset().name())) {
                 log.warn("Invalid locale " + locale + " from request parameters");
 
                 locale = new LocaleInfo(defaultLocale, defaultCharset);
@@ -277,9 +273,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
         return locale;
     }
 
-    /**
-     * 包装request。
-     */
+    /** 包装request。 */
     private class RequestWrapper extends AbstractRequestWrapper {
         public RequestWrapper(HttpServletRequest request) {
             super(SetLocaleRequestContextImpl.this, request);
@@ -291,9 +285,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
         }
     }
 
-    /**
-     * 包装response。
-     */
+    /** 包装response。 */
     private class ResponseWrapper extends AbstractResponseWrapper {
         private String contentType;
         private String charset;
@@ -331,7 +323,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
          * type中将不包含charset标记。
          * </p>
          *
-         * @param contentType content type
+         * @param contentType   content type
          * @param appendCharset 输出字符集
          */
         public void setContentType(String contentType, boolean appendCharset) {
@@ -350,9 +342,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
             setCharacterEncoding(appendCharset ? charset : null);
         }
 
-        /**
-         * 取得response的输出字符集。
-         */
+        /** 取得response的输出字符集。 */
         @Override
         public String getCharacterEncoding() {
             return super.getCharacterEncoding();
@@ -362,7 +352,7 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
          * 设置response输出字符集。注意，此方法必须在第一次<code>getWriter</code>之前执行。
          *
          * @param charset 输出字符集，如果charset为<code>null</code>
-         *            ，则从contentType中删除charset标记
+         *                ，则从contentType中删除charset标记
          */
         @Override
         public void setCharacterEncoding(String charset) {

@@ -35,10 +35,10 @@ import com.alibaba.citrus.util.i18n.LocaleUtil;
  * @author Michael Zhou
  */
 public class QueryStringParser {
-    private final String charset;
+    private final String        charset;
     private final StringBuilder queryStringBuffer;
     private String equalSign = "=";
-    private String andSign = "&";
+    private String andSign   = "&";
 
     public QueryStringParser() {
         this(null, null);
@@ -67,17 +67,13 @@ public class QueryStringParser {
         return andSign;
     }
 
-    /**
-     * 设置用来替代“=”的字符。
-     */
+    /** 设置用来替代“=”的字符。 */
     public QueryStringParser setEqualSign(String equalSign) {
         this.equalSign = defaultIfNull(equalSign, "=");
         return this;
     }
 
-    /**
-     * 设置用来替代“&”的字符。
-     */
+    /** 设置用来替代“&”的字符。 */
     public QueryStringParser setAndSign(String andSign) {
         this.andSign = defaultIfNull(andSign, "&");
         return null;
@@ -114,9 +110,7 @@ public class QueryStringParser {
         return queryString.length() == 0 ? null : queryString;
     }
 
-    /**
-     * 解析query string。
-     */
+    /** 解析query string。 */
     public void parse(String queryString) {
         queryString = trimToNull(queryString);
 
@@ -139,7 +133,7 @@ public class QueryStringParser {
 
     protected void add(String key, String value) {
         unsupportedOperation("You should extend class " + getClass().getSimpleName()
-                + " and override method add(String, String)");
+                             + " and override method add(String, String)");
     }
 
     private void addKeyValue(String keyValue) {

@@ -121,7 +121,6 @@ public class IndentableStringBuilderTests extends AbstractNormalizableStringBuil
                     buf.end();
 
                     buf.append("kkk");
-
                 }
                 buf.end();
 
@@ -132,9 +131,9 @@ public class IndentableStringBuilderTests extends AbstractNormalizableStringBuil
         buf.end();
 
         assertEquals("aaa {\n" + "  [\n" + "    [[\n" + "      bbb\n" + "    ]]\n" + "    ccc\n" + "  ]\n" + "  [[[\n"
-                + "    ddd\n" + "      eee\n" + "      fff\n" + "        hhh\n" + "        iii\n" + "      jjj\n"
-                + "      value = lll\n" + "              mmm\n" + "      kkk\n" + "    ggg\n" + "  ]]]\n" + "}",
-                buf.toString());
+                     + "    ddd\n" + "      eee\n" + "      fff\n" + "        hhh\n" + "        iii\n" + "      jjj\n"
+                     + "      value = lll\n" + "              mmm\n" + "      kkk\n" + "    ggg\n" + "  ]]]\n" + "}",
+                     buf.toString());
     }
 
     @Test
@@ -218,6 +217,6 @@ public class IndentableStringBuilderTests extends AbstractNormalizableStringBuil
         buf.end();
 
         assertEquals("{\n" + "  a = values {\n" + "        value 1\n" + "        value 2\n" + "      }\n" + "}",
-                buf.toString());
+                     buf.toString());
     }
 }

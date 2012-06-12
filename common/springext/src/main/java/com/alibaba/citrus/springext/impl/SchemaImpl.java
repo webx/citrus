@@ -30,6 +30,11 @@ import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 
+import com.alibaba.citrus.springext.ConfigurationPointException;
+import com.alibaba.citrus.springext.DocumentFilter;
+import com.alibaba.citrus.springext.Schema;
+import com.alibaba.citrus.springext.support.SchemaInternal;
+import com.alibaba.citrus.springext.support.SchemaUtil;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -41,43 +46,31 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.InputStreamSource;
 
-import com.alibaba.citrus.springext.ConfigurationPointException;
-import com.alibaba.citrus.springext.DocumentFilter;
-import com.alibaba.citrus.springext.Schema;
-import com.alibaba.citrus.springext.support.SchemaInternal;
-import com.alibaba.citrus.springext.support.SchemaUtil;
-
 public class SchemaImpl implements SchemaInternal {
     private final static Logger log = LoggerFactory.getLogger(Schema.class);
-    private final String name;
-    private final String version;
-    private final String sourceDesc;
+    private final String            name;
+    private final String            version;
+    private final String            sourceDesc;
     private final InputStreamSource source;
-    private String targetNamespace;
-    private String preferredNsPrefix;
-    private String[] includes;
-    private String[] elements;
-    private boolean parsed;
-    private boolean parsingTargetNamespace;
+    private       String            targetNamespace;
+    private       String            preferredNsPrefix;
+    private       String[]          includes;
+    private       String[]          elements;
+    private       boolean           parsed;
+    private       boolean           parsingTargetNamespace;
 
-    /**
-     * 创建 configuration point 的 main schema 和 versioned schema。
-     */
+    /** 创建 configuration point 的 main schema 和 versioned schema。 */
     public SchemaImpl(String name, String version, String targetNamespace, String preferredNsPrefix, String sourceDesc,
                       InputStreamSource source) {
         this(name, version, targetNamespace, preferredNsPrefix, false, sourceDesc, source);
     }
 
-    /**
-     * 创建 contribution 的 main schema 和 versioned schema。
-     */
+    /** 创建 contribution 的 main schema 和 versioned schema。 */
     public SchemaImpl(String name, String version, String sourceDesc, InputStreamSource source) {
         this(name, version, null, null, false, sourceDesc, source);
     }
 
-    /**
-     * 创建spring.schemas中定义的schema。
-     */
+    /** 创建spring.schemas中定义的schema。 */
     public SchemaImpl(String name, String version, boolean parsingTargetNamespace, String sourceDesc,
                       InputStreamSource source) {
         this(name, version, null, null, parsingTargetNamespace, sourceDesc, source);
@@ -134,9 +127,7 @@ public class SchemaImpl implements SchemaInternal {
         return elements == null ? EMPTY_STRING_ARRAY : elements;
     }
 
-    /**
-     * 由schemaSet来设置。
-     */
+    /** 由schemaSet来设置。 */
     public void setElements(String[] elements) {
         this.elements = elements;
     }
@@ -161,7 +152,7 @@ public class SchemaImpl implements SchemaInternal {
             return null;
         } catch (IOException e) {
             throw new ConfigurationPointException("Failed to read text of schema file: " + name + ", source=" + source,
-                    e);
+                                                  e);
         }
     }
 
@@ -196,7 +187,7 @@ public class SchemaImpl implements SchemaInternal {
             throw e;
         } catch (Exception e) {
             throw new ConfigurationPointException("Failed to read text of schema file: " + name + ", source=" + source,
-                    e);
+                                                  e);
         }
 
         return content;
@@ -244,7 +235,7 @@ public class SchemaImpl implements SchemaInternal {
         List<String> includeNames = createLinkedList();
 
         // for each <xsd:include>
-        for (Iterator<?> i = root.elementIterator(includeName); i.hasNext();) {
+        for (Iterator<?> i = root.elementIterator(includeName); i.hasNext(); ) {
             Element includeElement = (Element) i.next();
             String schemaLocation = trimToNull(includeElement.attributeValue("schemaLocation"));
 
@@ -261,7 +252,7 @@ public class SchemaImpl implements SchemaInternal {
             List<String> elementNames = createLinkedList();
 
             // for each <xsd:element>
-            for (Iterator<?> i = root.elementIterator(elementName); i.hasNext();) {
+            for (Iterator<?> i = root.elementIterator(elementName); i.hasNext(); ) {
                 Element elementElement = (Element) i.next();
                 String name = trimToNull(elementElement.attributeValue("name"));
 
@@ -280,7 +271,7 @@ public class SchemaImpl implements SchemaInternal {
             return String.format("Schema[name=%s, version=%s, source=%s]", name, version, source);
         } else {
             return String.format("Schema[name=%s, version=%s, targetNamespace=%s, source=%s]", name, version,
-                    targetNamespace, source);
+                                 targetNamespace, source);
         }
     }
 }

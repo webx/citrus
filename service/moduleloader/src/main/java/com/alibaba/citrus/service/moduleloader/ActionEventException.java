@@ -25,9 +25,7 @@ package com.alibaba.citrus.service.moduleloader;
 public class ActionEventException extends RuntimeException {
     private static final long serialVersionUID = 3258133565630658361L;
 
-    /**
-     * 创建一个异常。
-     */
+    /** 创建一个异常。 */
     public ActionEventException() {
         super();
     }
@@ -45,7 +43,7 @@ public class ActionEventException extends RuntimeException {
      * 创建一个异常。
      *
      * @param message 异常信息
-     * @param cause 异常原因
+     * @param cause   异常原因
      */
     public ActionEventException(String message, Throwable cause) {
         super(message, cause);

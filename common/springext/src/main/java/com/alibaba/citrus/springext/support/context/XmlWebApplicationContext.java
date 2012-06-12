@@ -22,15 +22,14 @@ import static org.springframework.context.annotation.AnnotationConfigUtils.*;
 import java.io.IOException;
 import java.util.Collection;
 
+import com.alibaba.citrus.springext.ResourceLoadingExtendable;
+import com.alibaba.citrus.springext.ResourceLoadingExtender;
+import com.alibaba.citrus.springext.support.resolver.XmlBeanDefinitionReaderProcessor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
-
-import com.alibaba.citrus.springext.ResourceLoadingExtendable;
-import com.alibaba.citrus.springext.ResourceLoadingExtender;
-import com.alibaba.citrus.springext.support.resolver.XmlBeanDefinitionReaderProcessor;
 
 /**
  * 从XML配置文件中装配的，用于WEB环境的<code>ApplicationContext</code>实现类，派生于
@@ -59,9 +58,7 @@ public class XmlWebApplicationContext extends org.springframework.web.context.su
     private ResourceLoadingExtender resourceLoadingExtender;
     private boolean parentResolvableDependenciesAccessible = true;
 
-    /**
-     * 是否可访问到parent context中的resolvableDependencies。 默认是可访问。
-     */
+    /** 是否可访问到parent context中的resolvableDependencies。 默认是可访问。 */
     public boolean isParentResolvableDependenciesAccessible() {
         return parentResolvableDependenciesAccessible;
     }
@@ -89,9 +86,7 @@ public class XmlWebApplicationContext extends org.springframework.web.context.su
         new XmlBeanDefinitionReaderProcessor(beanDefinitionReader).addConfigurationPointsSupport();
     }
 
-    /**
-     * 打开annotation注入。
-     */
+    /** 打开annotation注入。 */
     @Override
     protected void customizeBeanFactory(DefaultListableBeanFactory beanFactory) {
         super.customizeBeanFactory(beanFactory);
@@ -107,9 +102,7 @@ public class XmlWebApplicationContext extends org.springframework.web.context.su
         }
     }
 
-    /**
-     * 扩展<code>ResourceLoader</code>机制，实现自定义的资源装载。
-     */
+    /** 扩展<code>ResourceLoader</code>机制，实现自定义的资源装载。 */
     @Override
     protected Resource getResourceByPath(String path) {
         Resource resource = null;
@@ -125,9 +118,7 @@ public class XmlWebApplicationContext extends org.springframework.web.context.su
         return resource;
     }
 
-    /**
-     * 扩展<code>ResourcePatternResolver</code>机制，实现自定义的资源装载。
-     */
+    /** 扩展<code>ResourcePatternResolver</code>机制，实现自定义的资源装载。 */
     @Override
     protected ResourcePatternResolver getResourcePatternResolver() {
         final ResourcePatternResolver defaultResolver = super.getResourcePatternResolver();

@@ -19,12 +19,11 @@ package com.alibaba.citrus.service.moduleloader.impl.adapter;
 
 import java.lang.reflect.Method;
 
-import net.sf.cglib.reflect.FastClass;
-import net.sf.cglib.reflect.FastMethod;
-
 import com.alibaba.citrus.service.dataresolver.DataResolverService;
 import com.alibaba.citrus.service.moduleloader.Module;
 import com.alibaba.citrus.service.moduleloader.ModuleInfo;
+import net.sf.cglib.reflect.FastClass;
+import net.sf.cglib.reflect.FastMethod;
 
 /**
  * 调用<code>execute()</code>方法，不要求实现<code>Module</code>接口。

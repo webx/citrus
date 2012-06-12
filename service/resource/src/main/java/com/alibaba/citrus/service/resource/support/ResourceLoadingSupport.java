@@ -29,6 +29,9 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Set;
 
+import com.alibaba.citrus.service.resource.ResourceLoadingService;
+import com.alibaba.citrus.service.resource.ResourceNotFoundException;
+import com.alibaba.citrus.springext.ResourceLoadingExtender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -43,10 +46,6 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.util.StringUtils;
 
-import com.alibaba.citrus.service.resource.ResourceLoadingService;
-import com.alibaba.citrus.service.resource.ResourceNotFoundException;
-import com.alibaba.citrus.springext.ResourceLoadingExtender;
-
 /**
  * 将<code>ResourceLoadingService</code>整合到Spring <code>ApplicationContext</code>
  * 中。
@@ -55,12 +54,12 @@ import com.alibaba.citrus.springext.ResourceLoadingExtender;
  */
 public class ResourceLoadingSupport implements ResourceLoadingExtender, ApplicationListener {
     private final static Logger log = LoggerFactory.getLogger(ResourceLoadingSupport.class);
-    private final ApplicationContext factory;
-    private final String resourceLoadingServiceName;
+    private final ApplicationContext      factory;
+    private final String                  resourceLoadingServiceName;
     private final ResourcePatternResolver resolver;
-    private ResourceLoadingService resourceLoadingService;
+    private       ResourceLoadingService  resourceLoadingService;
     private boolean contextRefreshed = false;
-    private boolean complained = false;
+    private boolean complained       = false;
 
     /**
      * 创建<code>ResourceLoadingSupport</code>，并指定
@@ -78,13 +77,11 @@ public class ResourceLoadingSupport implements ResourceLoadingExtender, Applicat
     public ResourceLoadingSupport(ApplicationContext factory, String resourceLoadingServiceName) {
         this.factory = assertNotNull(factory, "beanFactory");
         this.resourceLoadingServiceName = defaultIfNull(trimToNull(resourceLoadingServiceName),
-                "resourceLoadingService");
+                                                        "resourceLoadingService");
         this.resolver = new ResourceLoadingServicePatternResolver();
     }
 
-    /**
-     * 当applicatioon context被refresh后，调用此方法初始化。
-     */
+    /** 当applicatioon context被refresh后，调用此方法初始化。 */
     public void onApplicationEvent(ApplicationEvent event) {
         if (event instanceof ContextRefreshedEvent) {
             contextRefreshed = true;
@@ -92,9 +89,7 @@ public class ResourceLoadingSupport implements ResourceLoadingExtender, Applicat
         }
     }
 
-    /**
-     * 取得<code>ResourceLoadingService</code>，如果还未初始化或不存在，则返回<code>null</code>。
-     */
+    /** 取得<code>ResourceLoadingService</code>，如果还未初始化或不存在，则返回<code>null</code>。 */
     public ResourceLoadingService getResourceLoadingService() {
         if (contextRefreshed) {
             return resourceLoadingService;
@@ -156,16 +151,12 @@ public class ResourceLoadingSupport implements ResourceLoadingExtender, Applicat
         return new ResourceAdapter(path, resource, this);
     }
 
-    /**
-     * 取得用来解析resource pattern的解析器。
-     */
+    /** 取得用来解析resource pattern的解析器。 */
     public ResourcePatternResolver getResourcePatternResolver() {
         return resolver;
     }
 
-    /**
-     * 用<code>ResourceLoadingService</code>来解析resource pattern。
-     */
+    /** 用<code>ResourceLoadingService</code>来解析resource pattern。 */
     private class ResourceLoadingServicePatternResolver extends PathMatchingResourcePatternResolver {
         public ResourceLoadingServicePatternResolver() {
             super(factory);
@@ -214,8 +205,8 @@ public class ResourceLoadingSupport implements ResourceLoadingExtender, Applicat
                 String currPath = dir + name;
 
                 if (currPath.endsWith("/")
-                        && (dirDepthNotFixed || StringUtils.countOccurrencesOf(currPath, "/") <= StringUtils
-                                .countOccurrencesOf(fullPattern, "/"))) {
+                    && (dirDepthNotFixed || StringUtils.countOccurrencesOf(currPath, "/") <= StringUtils
+                        .countOccurrencesOf(fullPattern, "/"))) {
                     findMatchingResources(resourceLoadingService, fullPattern, currPath, result);
                 }
 
@@ -230,13 +221,11 @@ public class ResourceLoadingSupport implements ResourceLoadingExtender, Applicat
         }
     }
 
-    /**
-     * 一个特殊的resource：代表资源未找到。
-     */
+    /** 一个特殊的resource：代表资源未找到。 */
     private static class NonExistResource extends AbstractResource implements ContextResource {
-        private final String location;
+        private final String      location;
         private final IOException ioe;
-        private final String description;
+        private final String      description;
 
         public NonExistResource(String location, ResourceNotFoundException e) {
             this.location = location;

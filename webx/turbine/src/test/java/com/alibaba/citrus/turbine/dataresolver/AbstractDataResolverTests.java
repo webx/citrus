@@ -20,13 +20,12 @@ package com.alibaba.citrus.turbine.dataresolver;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import com.alibaba.citrus.turbine.AbstractWebTests;
 import com.alibaba.citrus.turbine.TurbineRunDataInternal;
 import com.alibaba.citrus.turbine.util.TurbineUtil;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 public abstract class AbstractDataResolverTests extends AbstractWebTests {
     protected ModuleLoaderService moduleLoaderService;

@@ -23,10 +23,9 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
+import com.alibaba.citrus.util.HumanReadableSize;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.alibaba.citrus.util.HumanReadableSize;
 
 public class UploadedFileValidatorTests extends AbstractValidatorTests<UploadedFileValidator> {
     private File txt_size3;
@@ -71,7 +70,7 @@ public class UploadedFileValidatorTests extends AbstractValidatorTests<UploadedF
         v.setContentType(null);
         assertArrayEquals(null, v.getContentType());
 
-        v.setContentType(new String[] {});
+        v.setContentType(new String[] { });
         assertArrayEquals(null, v.getContentType());
 
         v.setContentType(new String[] { " ", null });
@@ -113,9 +112,7 @@ public class UploadedFileValidatorTests extends AbstractValidatorTests<UploadedF
         assertEquals(456, v.getMaxSize().getValue());
     }
 
-    /**
-     * 无fileItems，也通过。如果不允许这种情况，则用required-validator来确保fileItems存在。
-     */
+    /** 无fileItems，也通过。如果不允许这种情况，则用required-validator来确保fileItems存在。 */
     @Test
     public void validate_noFileItems() throws Exception {
         requestWithUpload("");
@@ -123,9 +120,7 @@ public class UploadedFileValidatorTests extends AbstractValidatorTests<UploadedF
         assertEquals(null, field10.getMessage());
     }
 
-    /**
-     * 无参数。
-     */
+    /** 无参数。 */
     @Test
     public void validate_defaultConfig() throws Exception {
         requestWithUpload(txt_size3);
@@ -133,9 +128,7 @@ public class UploadedFileValidatorTests extends AbstractValidatorTests<UploadedF
         assertEquals(null, field1.getMessage());
     }
 
-    /**
-     * minSize=4
-     */
+    /** minSize=4 */
     @Test
     public void validate_minSize() throws Exception {
         requestWithUpload("", new File[] { txt_size3, txt_size10 }); // size=3,10
@@ -151,9 +144,7 @@ public class UploadedFileValidatorTests extends AbstractValidatorTests<UploadedF
         assertEquals(null, field2.getMessage());
     }
 
-    /**
-     * maxSize=4
-     */
+    /** maxSize=4 */
     @Test
     public void validate_maxSize() throws Exception {
         requestWithUpload("", "", new File[] { txt_size4, txt_size10 }); // size=4,10
@@ -169,9 +160,7 @@ public class UploadedFileValidatorTests extends AbstractValidatorTests<UploadedF
         assertEquals(null, field3.getMessage());
     }
 
-    /**
-     * minSize=4, maxSize=9
-     */
+    /** minSize=4, maxSize=9 */
     @Test
     public void validate_minSize_maxSize() throws Exception {
         requestWithUpload("", "", "", new File[] { txt_size4, txt_size10 }); // size=4,10
@@ -187,9 +176,7 @@ public class UploadedFileValidatorTests extends AbstractValidatorTests<UploadedF
         assertEquals(null, field4.getMessage());
     }
 
-    /**
-     * contentType=image/gif
-     */
+    /** contentType=image/gif */
     @Test
     public void validate_contentType() throws Exception {
         requestWithUpload("", "", "", "", new File[] { txt_size3, gif_size4 });
@@ -205,9 +192,7 @@ public class UploadedFileValidatorTests extends AbstractValidatorTests<UploadedF
         assertEquals(null, field5.getMessage());
     }
 
-    /**
-     * contentType=image/gif, text/plain
-     */
+    /** contentType=image/gif, text/plain */
     @Test
     public void validate_contentTypes() throws Exception {
         requestWithUpload("", "", "", "", "", new File[] { txt_size3, gif_size4 });
@@ -219,9 +204,7 @@ public class UploadedFileValidatorTests extends AbstractValidatorTests<UploadedF
         assertEquals("field6 should be of content type [image/gif, text/plain]", field6.getMessage());
     }
 
-    /**
-     * contentType=image/*, minSize=4, maxSize=9
-     */
+    /** contentType=image/*, minSize=4, maxSize=9 */
     @Test
     public void validate_minSize_maxSize_contentTypes() throws Exception {
         requestWithUpload("", "", "", "", "", "", new File[] { gif_size4, jpg_size0 });
@@ -237,9 +220,7 @@ public class UploadedFileValidatorTests extends AbstractValidatorTests<UploadedF
         assertEquals(null, field7.getMessage());
     }
 
-    /**
-     * minSize=0, maxSize=0
-     */
+    /** minSize=0, maxSize=0 */
     @Test
     public void validate_forceEmptyFile() throws Exception {
         requestWithUpload("", "", "", "", "", "", "", jpg_size0);

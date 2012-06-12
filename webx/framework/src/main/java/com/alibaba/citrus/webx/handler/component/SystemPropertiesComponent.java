@@ -37,7 +37,7 @@ import com.alibaba.citrus.webx.handler.support.AbstractVisitor;
  */
 public class SystemPropertiesComponent extends PageComponent {
     private final static Set<String> PATH_LIKE_KEYS = createHashSet("java.class.path", "java.endorsed.dirs",
-            "java.ext.dirs", "java.library.path", "sun.boot.class.path", "sun.boot.library.path");
+                                                                    "java.ext.dirs", "java.library.path", "sun.boot.class.path", "sun.boot.library.path");
 
     private final KeyValuesComponent keyValuesComponent;
 

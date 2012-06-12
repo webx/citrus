@@ -25,11 +25,6 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.mappingrule.MappingRuleService;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.support.AbstractValve;
@@ -39,6 +34,10 @@ import com.alibaba.citrus.util.ServletUtil;
 import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.util.internal.ActionEventUtil;
 import com.alibaba.citrus.webx.WebxComponent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 根据URL的内容来设置rundata。根据以下规则：
@@ -64,9 +63,7 @@ public class AnalyzeURLValve extends AbstractValve {
     private String homepage;
     private String actionParam;
 
-    /**
-     * 设置在URL query中代表action的参数名。
-     */
+    /** 设置在URL query中代表action的参数名。 */
     public void setActionParam(String actionParam) {
         this.actionParam = trimToNull(actionParam);
     }
@@ -107,7 +104,7 @@ public class AnalyzeURLValve extends AbstractValve {
 
         if (lastSlashIndex >= 0) {
             pathInfo = pathInfo.substring(0, lastSlashIndex) + "/"
-                    + StringUtil.toCamelCase(pathInfo.substring(lastSlashIndex + 1));
+                       + StringUtil.toCamelCase(pathInfo.substring(lastSlashIndex + 1));
         } else {
             pathInfo = StringUtil.toCamelCase(pathInfo);
         }

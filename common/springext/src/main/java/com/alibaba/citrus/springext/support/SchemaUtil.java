@@ -35,6 +35,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.alibaba.citrus.springext.ConfigurationPoint;
+import com.alibaba.citrus.springext.ConfigurationPointException;
+import com.alibaba.citrus.springext.ConfigurationPoints;
+import com.alibaba.citrus.springext.Contribution;
+import com.alibaba.citrus.springext.Schema;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -46,12 +51,6 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
-import com.alibaba.citrus.springext.ConfigurationPoint;
-import com.alibaba.citrus.springext.ConfigurationPointException;
-import com.alibaba.citrus.springext.ConfigurationPoints;
-import com.alibaba.citrus.springext.Contribution;
-import com.alibaba.citrus.springext.Schema;
-
 /**
  * 处理schema和xml的工具。
  *
@@ -61,16 +60,14 @@ public class SchemaUtil {
     private static final String SPRINGEXT_BASE_URI = "http://www.alibaba.com/schema/springext/base";
     private static final String SPRINGEXT_BASE_XSD = "http://www.alibaba.com/schema/springext/springext-base.xsd";
 
-    private final static Namespace XSD = DocumentHelper.createNamespace("xsd", W3C_XML_SCHEMA_NS_URI);
-    private final static QName XSD_ANY = DocumentHelper.createQName("any", XSD);
-    private final static QName XSD_IMPORT = DocumentHelper.createQName("import", XSD);
-    private final static QName XSD_CHOICE = DocumentHelper.createQName("choice", XSD);
-    private final static QName XSD_ELEMENT = DocumentHelper.createQName("element", XSD);
-    private final static QName XSD_INCLUDE = DocumentHelper.createQName("include", XSD);
+    private final static Namespace XSD         = DocumentHelper.createNamespace("xsd", W3C_XML_SCHEMA_NS_URI);
+    private final static QName     XSD_ANY     = DocumentHelper.createQName("any", XSD);
+    private final static QName     XSD_IMPORT  = DocumentHelper.createQName("import", XSD);
+    private final static QName     XSD_CHOICE  = DocumentHelper.createQName("choice", XSD);
+    private final static QName     XSD_ELEMENT = DocumentHelper.createQName("element", XSD);
+    private final static QName     XSD_INCLUDE = DocumentHelper.createQName("include", XSD);
 
-    /**
-     * 读取dom。
-     */
+    /** 读取dom。 */
     public static Document readDocument(InputStream istream, String systemId, boolean close) throws DocumentException {
         SAXReader reader = new SAXReader(false);
         Document doc = null;
@@ -89,35 +86,27 @@ public class SchemaUtil {
         return doc;
     }
 
-    /**
-     * 输出DOM。
-     */
+    /** 输出DOM。 */
     public static String getDocumentText(Document doc, String charset) throws IOException {
         StringWriter writer = new StringWriter();
         writeDocument(doc, writer, charset);
         return writer.toString();
     }
 
-    /**
-     * 输出DOM。
-     */
+    /** 输出DOM。 */
     public static byte[] getDocumentContent(Document doc, String charset) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         writeDocument(doc, baos, null);
         return baos.toByteArray();
     }
 
-    /**
-     * 输出DOM。
-     */
+    /** 输出DOM。 */
     public static void writeDocument(Document doc, OutputStream stream, String charset) throws IOException {
         charset = defaultIfEmpty(trimToNull(charset), "UTF-8");
         writeDocument(doc, new OutputStreamWriter(stream, charset), charset);
     }
 
-    /**
-     * 输出DOM。
-     */
+    /** 输出DOM。 */
     public static void writeDocument(Document doc, Writer writer, String charset) throws IOException {
         charset = defaultIfEmpty(trimToNull(charset), "UTF-8");
 
@@ -137,13 +126,11 @@ public class SchemaUtil {
             return getDocumentContent(createConfigurationPointSchema(configurationPoint, version), null);
         } catch (Exception e) {
             throw new ConfigurationPointException("Could not generate XML Schema for configuration point "
-                    + configurationPoint.getName(), e);
+                                                  + configurationPoint.getName(), e);
         }
     }
 
-    /**
-     * 将所有contributions的schema汇总成一个schema。
-     */
+    /** 将所有contributions的schema汇总成一个schema。 */
     private static Document createConfigurationPointSchema(ConfigurationPoint configurationPoint, String version) {
         Document doc = createDocument();
 
@@ -204,14 +191,14 @@ public class SchemaUtil {
     /**
      * 取得contribution schema的内容，将其中引用其它configuration
      * point的element修改成具体的element名称。例如，将如下定义：
-     *
+     * <p/>
      * <pre>
      * &lt;xsd:any namespace="http://www.alibaba.com/schema/services/template/engines" /&gt;
      * </pre>
      * <p>
      * 修改成：
      * </p>
-     *
+     * <p/>
      * <pre>
      * &lt;xsd:choose xmlns:tpl-engines="http://www.alibaba.com/schema/services/template/engines"&gt;
      *   &lt;xsd:element ref="tpl-engines:velocity-engine" /&gt;
@@ -219,7 +206,7 @@ public class SchemaUtil {
      *   &lt;xsd:element ref="tpl-engines:jsp-engine" /&gt;
      * &lt;/xsd:choose&gt;
      * </pre>
-     * <p>
+     * <p/>
      */
     public static byte[] getContributionSchemaContent(InputStream istream, String systemId, boolean close,
                                                       ConfigurationPoints cps, ConfigurationPoint thisCp)
@@ -232,10 +219,10 @@ public class SchemaUtil {
     }
 
     private static class ContributionSchemaTransformer {
-        private final Document doc;
+        private final Document            doc;
         private final ConfigurationPoints cps;
-        private final ConfigurationPoint thisCp;
-        private Element root;
+        private final ConfigurationPoint  thisCp;
+        private       Element             root;
         private Map<String, ConfigurationPoint> importings = createHashMap();
 
         public ContributionSchemaTransformer(Document doc, ConfigurationPoints cps, ConfigurationPoint thisCp) {
@@ -352,9 +339,7 @@ public class SchemaUtil {
         }
     }
 
-    /**
-     * 修改schema，除去所有的includes。
-     */
+    /** 修改schema，除去所有的includes。 */
     public static byte[] getSchemaContentWithoutIncludes(Schema schema) throws IOException {
         Document doc = schema.getDocument();
         Element root = doc.getRootElement();
@@ -362,7 +347,7 @@ public class SchemaUtil {
         // <xsd:schema>
         if (W3C_XML_SCHEMA_NS_URI.equals(root.getNamespaceURI()) && "schema".equals(root.getName())) {
             // for each <xsd:include>
-            for (Iterator<?> i = root.elementIterator(XSD_INCLUDE); i.hasNext();) {
+            for (Iterator<?> i = root.elementIterator(XSD_INCLUDE); i.hasNext(); ) {
                 i.next();
                 i.remove();
             }
@@ -371,9 +356,7 @@ public class SchemaUtil {
         return getDocumentContent(doc, null);
     }
 
-    /**
-     * 修改schema，添加间接依赖的includes。
-     */
+    /** 修改schema，添加间接依赖的includes。 */
     public static byte[] getSchemaContentWithIndirectIncludes(Schema schema, Map<String, Schema> includes)
             throws IOException {
         Document doc = schema.getDocument();
@@ -387,7 +370,7 @@ public class SchemaUtil {
             QName includeName = DocumentHelper.createQName("include", xsd);
 
             // for each <xsd:include>
-            for (Iterator<?> i = root.elementIterator(includeName); i.hasNext();) {
+            for (Iterator<?> i = root.elementIterator(includeName); i.hasNext(); ) {
                 i.next();
                 i.remove();
             }

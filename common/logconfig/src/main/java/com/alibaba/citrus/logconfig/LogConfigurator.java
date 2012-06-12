@@ -40,18 +40,18 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class LogConfigurator {
     private static final String PROVIDERS_PATTERN = "META-INF/logconfig.providers";
-    private static final String LOGGING_LEVEL = "loggingLevel";
-    private static final String LOGGING_CHARSET = "loggingCharset";
-    private static final String LOGGING_ROOT = "loggingRoot";
-    private static final String LOCAL_HOST = "localHost";
-    private static final String LOCAL_ADDRESS = "localAddress";
+    private static final String LOGGING_LEVEL     = "loggingLevel";
+    private static final String LOGGING_CHARSET   = "loggingCharset";
+    private static final String LOGGING_ROOT      = "loggingRoot";
+    private static final String LOCAL_HOST        = "localHost";
+    private static final String LOCAL_ADDRESS     = "localAddress";
     private String logSystem;
 
     /**
      * 用指定的配置文件来配置log system。
-     * <p>
+     * <p/>
      * 注意，即使配置过程失败，也不会抛出任何异常，只是打印错误信息。日志系统的失败不应该影响应用系统。
-     * <p>
+     * <p/>
      */
     public final void configure(URL configFile) {
         configure(configFile, null);
@@ -59,9 +59,9 @@ public abstract class LogConfigurator {
 
     /**
      * 用指定的配置文件和properties来配置log system。
-     * <p>
+     * <p/>
      * 注意，即使配置过程失败，也不会抛出任何异常，只是打印错误信息。日志系统的失败不应该影响应用系统。
-     * <p>
+     * <p/>
      */
     public final void configure(URL configFile, Map<String, String> props) {
         StringBuilder buf = new StringBuilder();
@@ -120,16 +120,12 @@ public abstract class LogConfigurator {
         configure(configFile, getDefaultProperties(debug));
     }
 
-    /**
-     * 取得当前configurator对应的log system的名称，例如：<code>logback</code>。
-     */
+    /** 取得当前configurator对应的log system的名称，例如：<code>logback</code>。 */
     public final String getLogSystem() {
         return logSystem;
     }
 
-    /**
-     * 取得默认的配置文件URL。
-     */
+    /** 取得默认的配置文件URL。 */
     public final URL getDefaultConfigFile() {
         return getClass().getClassLoader().getResource(
                 getClass().getPackage().getName().replace('.', '/') + "/" + getDefaultConfigFileName());
@@ -248,26 +244,18 @@ public abstract class LogConfigurator {
     protected void setDefaultProperties(Map<String, String> props) {
     }
 
-    /**
-     * 配置对应的log system，由子类实现。
-     */
+    /** 配置对应的log system，由子类实现。 */
     protected abstract void doConfigure(URL configFile, Map<String, String> props) throws Exception;
 
-    /**
-     * 关闭和清理log system，由子类实现。
-     */
+    /** 关闭和清理log system，由子类实现。 */
     public abstract void shutdown();
 
-    /**
-     * 取得指定的日志系统配置器。假如未指定日志系统的名称，则试着从slf4j中自动取得当前可用的日志系统。
-     */
+    /** 取得指定的日志系统配置器。假如未指定日志系统的名称，则试着从slf4j中自动取得当前可用的日志系统。 */
     public static LogConfigurator getConfigurator() {
         return getConfigurator((String) null);
     }
 
-    /**
-     * 取得指定的日志系统配置器。假如未指定日志系统的名称，则试着从slf4j中自动取得当前可用的日志系统。
-     */
+    /** 取得指定的日志系统配置器。假如未指定日志系统的名称，则试着从slf4j中自动取得当前可用的日志系统。 */
     public static LogConfigurator getConfigurator(String logSystem) {
         LogConfigurator[] configurators = getConfigurators(logSystem);
 
@@ -278,9 +266,7 @@ public abstract class LogConfigurator {
         }
     }
 
-    /**
-     * 取得指定的日志系统配置器。假如未指定日志系统的名称，则试着从slf4j中自动取得当前可用的日志系统。
-     */
+    /** 取得指定的日志系统配置器。假如未指定日志系统的名称，则试着从slf4j中自动取得当前可用的日志系统。 */
     public static LogConfigurator[] getConfigurators(String... logSystems) {
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
         Map<String, String> providers = getProviders(PROVIDERS_PATTERN, cl);
@@ -337,7 +323,7 @@ public abstract class LogConfigurator {
 
             if (providerClassName == null) {
                 throw new IllegalArgumentException("Could not find LogConfigurator for \"" + logSystem
-                        + "\" by searching in " + PROVIDERS_PATTERN);
+                                                   + "\" by searching in " + PROVIDERS_PATTERN);
             }
 
             Class<?> providerClass;
@@ -350,7 +336,7 @@ public abstract class LogConfigurator {
 
             if (!LogConfigurator.class.isAssignableFrom(providerClass)) {
                 throw new IllegalArgumentException(logSystem + " class " + providerClassName
-                        + " is not a sub-class of " + LogConfigurator.class.getName());
+                                                   + " is not a sub-class of " + LogConfigurator.class.getName());
             }
 
             LogConfigurator configurator;
@@ -359,7 +345,7 @@ public abstract class LogConfigurator {
                 configurator = (LogConfigurator) providerClass.newInstance();
             } catch (Throwable e) {
                 throw new IllegalArgumentException("Could not create instance of class " + providerClassName + " for "
-                        + logSystem, e);
+                                                   + logSystem, e);
             }
 
             configurator.logSystem = logSystem;

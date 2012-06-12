@@ -41,7 +41,7 @@ public class RecoveryValve implements Valve {
     public void invoke(PipelineContext pipelineContext) throws Exception {
         ExecutionLog.add(pipelineContext);
         assertThat((Exception) pipelineContext.getAttribute(name),
-                exception(IllegalArgumentException.class, "something wrong"));
+                   exception(IllegalArgumentException.class, "something wrong"));
 
         pipelineContext.invokeNext();
     }

@@ -31,9 +31,7 @@ import org.springframework.core.io.Resource;
  * @author Michael Zhou
  */
 public abstract class AbstractResourceLoader extends org.apache.velocity.runtime.resource.loader.ResourceLoader {
-    /**
-     * 取得输入流。
-     */
+    /** 取得输入流。 */
     @Override
     public final InputStream getResourceStream(String templateName) throws ResourceNotFoundException {
         Resource resource = getResource(templateName);
@@ -50,9 +48,7 @@ public abstract class AbstractResourceLoader extends org.apache.velocity.runtime
         throw new ResourceNotFoundException(getLogID() + " Error: could not find template: " + templateName, exception);
     }
 
-    /**
-     * 判断资源是否被改变。
-     */
+    /** 判断资源是否被改变。 */
     @Override
     public final boolean isSourceModified(org.apache.velocity.runtime.resource.Resource templateResource) {
         Resource resource = getResource(templateResource.getName());
@@ -79,9 +75,7 @@ public abstract class AbstractResourceLoader extends org.apache.velocity.runtime
         return lastModified != templateResource.getLastModified();
     }
 
-    /**
-     * 取得最近被修改的时间。
-     */
+    /** 取得最近被修改的时间。 */
     @Override
     public final long getLastModified(org.apache.velocity.runtime.resource.Resource templateResource) {
         Resource resource = getResource(templateResource.getName());
@@ -96,9 +90,7 @@ public abstract class AbstractResourceLoader extends org.apache.velocity.runtime
         return 0;
     }
 
-    /**
-     * 规格化模板名。
-     */
+    /** 规格化模板名。 */
     protected final String normalizeTemplateName(String templateName) {
         if (isEmpty(templateName)) {
             throw new ResourceNotFoundException("Need to specify a template name!");
@@ -111,23 +103,17 @@ public abstract class AbstractResourceLoader extends org.apache.velocity.runtime
         return templateName;
     }
 
-    /**
-     * 取得资源。
-     */
+    /** 取得资源。 */
     protected abstract Resource getResource(String templateName);
 
-    /**
-     * 优化判断逻辑，尽量避免取得resource stream。
-     */
+    /** 优化判断逻辑，尽量避免取得resource stream。 */
     @Override
     public boolean resourceExists(String resourceName) {
         Resource resource = getResource(resourceName);
         return resource != null && resource.exists();
     }
 
-    /**
-     * 取得用于日志记录的ID。
-     */
+    /** 取得用于日志记录的ID。 */
     protected abstract String getLogID();
 
     protected abstract String getDesc();

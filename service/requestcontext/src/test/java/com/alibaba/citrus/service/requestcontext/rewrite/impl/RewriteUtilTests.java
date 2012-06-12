@@ -22,11 +22,10 @@ import static org.junit.Assert.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 import com.alibaba.citrus.service.requestcontext.rewrite.RewriteRequestContext;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class RewriteUtilTests extends AbstractRequestContextsTests<RewriteRequestContext> {
     @BeforeClass

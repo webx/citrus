@@ -30,19 +30,13 @@ import com.alibaba.citrus.service.form.configuration.GroupConfig;
  * @author Michael Zhou
  */
 public interface Group {
-    /**
-     * 取得group的配置信息。
-     */
+    /** 取得group的配置信息。 */
     GroupConfig getGroupConfig();
 
-    /**
-     * 取得包含此group的form。
-     */
+    /** 取得包含此group的form。 */
     Form getForm();
 
-    /**
-     * 取得group name，相当于<code>getGroupConfig().getName()</code>
-     */
+    /** 取得group name，相当于<code>getGroupConfig().getName()</code> */
     String getName();
 
     /**
@@ -54,14 +48,10 @@ public interface Group {
      */
     String getKey();
 
-    /**
-     * 取得标识当前group的instance key。
-     */
+    /** 取得标识当前group的instance key。 */
     String getInstanceKey();
 
-    /**
-     * 判定group是否通过验证。
-     */
+    /** 判定group是否通过验证。 */
     boolean isValid();
 
     /**
@@ -73,9 +63,7 @@ public interface Group {
      */
     boolean isValidated();
 
-    /**
-     * 初始化group。
-     */
+    /** 初始化group。 */
     void init();
 
     /**
@@ -86,14 +74,10 @@ public interface Group {
      */
     void validate();
 
-    /**
-     * 取得所有fields的列表。
-     */
+    /** 取得所有fields的列表。 */
     Collection<Field> getFields();
 
-    /**
-     * 取得指定名称的field。field名称（大小写不敏感）
-     */
+    /** 取得指定名称的field。field名称（大小写不敏感） */
     Field getField(String fieldName);
 
     /**

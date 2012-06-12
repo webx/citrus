@@ -28,12 +28,8 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.io.IOException;
 import java.util.regex.MatchResult;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.parser.ParameterParser;
@@ -47,25 +43,25 @@ import com.alibaba.citrus.util.FileUtil;
 import com.alibaba.citrus.util.ServletUtil;
 import com.alibaba.citrus.util.StringEscapeUtil;
 import com.alibaba.citrus.util.regex.MatchResultSubstitution;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/**
- * 重写URL及参数的request context，类似于apache的mod_rewrite模块。
- */
+/** 重写URL及参数的request context，类似于apache的mod_rewrite模块。 */
 public class RewriteRequestContextImpl extends AbstractRequestContextWrapper implements RewriteRequestContext {
-    private final static Logger log = LoggerFactory.getLogger(RewriteRequestContext.class);
-    public static final String SERVER_SCHEME_HTTP = "http";
-    public static final String SERVER_SCHEME_HTTPS = "https";
-    public static final int SERVER_PORT_HTTP = 80;
-    public static final int SERVER_PORT_HTTPS = 443;
-    private final RewriteRule[] rules;
-    private ParserRequestContext parserRequestContext;
-    private HttpServletRequest wrappedRequest;
+    private final static Logger log                 = LoggerFactory.getLogger(RewriteRequestContext.class);
+    public static final  String SERVER_SCHEME_HTTP  = "http";
+    public static final  String SERVER_SCHEME_HTTPS = "https";
+    public static final  int    SERVER_PORT_HTTP    = 80;
+    public static final  int    SERVER_PORT_HTTPS   = 443;
+    private final RewriteRule[]        rules;
+    private       ParserRequestContext parserRequestContext;
+    private       HttpServletRequest   wrappedRequest;
 
     /**
      * 包装一个<code>RequestContext</code>对象。
      *
      * @param wrappedContext 被包装的<code>RequestContext</code>
-     * @param rewriteConfig rewrite的配置文件信息
+     * @param rewriteConfig  rewrite的配置文件信息
      */
     public RewriteRequestContextImpl(RequestContext wrappedContext, RewriteRule[] rules) {
         super(wrappedContext);
@@ -74,15 +70,13 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
 
         // 取得parser request context，以便修改参数
         this.parserRequestContext = assertNotNull(findRequestContext(wrappedContext, ParserRequestContext.class),
-                "Could not find ParserRequestContext in request context chain");
+                                                  "Could not find ParserRequestContext in request context chain");
 
         // 保存上一层的request对象，以便取得原来的servletPath、pathInfo之类的信息
         this.wrappedRequest = wrappedContext.getRequest();
     }
 
-    /**
-     * 开始一个请求。
-     */
+    /** 开始一个请求。 */
     @Override
     public void prepare() {
         if (rules == null) {
@@ -91,7 +85,7 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
 
         // 取得servletPath+pathInfo，忽略contextPath
         String originalPath = wrappedRequest.getServletPath()
-                + defaultIfNull(wrappedRequest.getPathInfo(), EMPTY_STRING);
+                              + defaultIfNull(wrappedRequest.getPathInfo(), EMPTY_STRING);
         String path = originalPath;
         boolean parameterSubstituted = false;
 
@@ -166,11 +160,11 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
 
                     // http和80
                     isDefaultPort |= SERVER_SCHEME_HTTP.equals(request.getScheme())
-                            && request.getServerPort() == SERVER_PORT_HTTP;
+                                     && request.getServerPort() == SERVER_PORT_HTTP;
 
                     // https和443
                     isDefaultPort |= SERVER_SCHEME_HTTPS.equals(request.getScheme())
-                            && request.getServerPort() == SERVER_PORT_HTTPS;
+                                     && request.getServerPort() == SERVER_PORT_HTTPS;
 
                     if (!isDefaultPort) {
                         uri.append(":");
@@ -226,7 +220,7 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
 
                 if (log.isTraceEnabled()) {
                     log.trace("Processing post-substitution event for \"{}\" with handler: {}",
-                            StringEscapeUtil.escapeJava(path), handler);
+                              StringEscapeUtil.escapeJava(path), handler);
                 }
 
                 ((RewriteSubstitutionHandler) handler).postSubstitution(context);
@@ -237,7 +231,7 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
                 if (newPath != null && !isEquals(path, newPath)) {
                     if (log.isDebugEnabled()) {
                         log.debug("Rewriting \"{}\" to \"{}\"", StringEscapeUtil.escapeJava(path),
-                                StringEscapeUtil.escapeJava(newPath));
+                                  StringEscapeUtil.escapeJava(newPath));
                     }
                 }
 
@@ -248,12 +242,10 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
         return path;
     }
 
-    /**
-     * 实现<code>RewriteSubstitutionContext</code>。
-     */
+    /** 实现<code>RewriteSubstitutionContext</code>。 */
     private class RewriteSubstitutionContextImpl implements RewriteSubstitutionContext {
-        private String path;
-        private ParserRequestContext parser;
+        private String                  path;
+        private ParserRequestContext    parser;
         private MatchResultSubstitution resultSubs;
 
         public RewriteSubstitutionContextImpl(String path, ParserRequestContext parser,
@@ -284,13 +276,11 @@ public class RewriteRequestContextImpl extends AbstractRequestContextWrapper imp
         }
     }
 
-    /**
-     * 包装request。
-     */
+    /** 包装request。 */
     private class RequestWrapper extends AbstractRequestWrapper {
-        private String path;
+        private       String  path;
         private final boolean prefixMapping;
-        private final String originalServletPath;
+        private final String  originalServletPath;
 
         public RequestWrapper(HttpServletRequest request) {
             super(RewriteRequestContextImpl.this, request);

@@ -33,6 +33,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import com.alibaba.citrus.service.velocity.VelocityConfiguration;
+import com.alibaba.citrus.service.velocity.VelocityPlugin;
+import com.alibaba.citrus.service.velocity.support.RenderableHandler;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 import org.apache.commons.collections.ExtendedProperties;
 import org.apache.velocity.app.event.EventHandler;
 import org.slf4j.Logger;
@@ -43,11 +47,6 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.util.StringUtils;
 
-import com.alibaba.citrus.service.velocity.VelocityConfiguration;
-import com.alibaba.citrus.service.velocity.VelocityPlugin;
-import com.alibaba.citrus.service.velocity.support.RenderableHandler;
-import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
-
 /**
  * 代表一组velocity engine的配置。
  *
@@ -55,17 +54,17 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  */
 public class VelocityConfigurationImpl implements VelocityConfiguration {
     private final Logger log;
-    private final ExtendedProperties properties = new ExtendedProperties();
-    private final Map<String, Resource> preloadedResources = createHashMap();
-    private final CloneableEventCartridge eventCartridge = new CloneableEventCartridge();
-    private Object[] plugins;
+    private final ExtendedProperties      properties         = new ExtendedProperties();
+    private final Map<String, Resource>   preloadedResources = createHashMap();
+    private final CloneableEventCartridge eventCartridge     = new CloneableEventCartridge();
+    private Object[]       plugins;
     private ResourceLoader loader;
     private boolean productionMode = true;
 
     // resource loader
     private String path;
-    private boolean cacheEnabled = true;
-    private int modificationCheckInterval = 2;
+    private boolean cacheEnabled              = true;
+    private int     modificationCheckInterval = 2;
 
     // strict ref
     private boolean strictReference = true;
@@ -76,9 +75,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
     // global macros
     private String[] macros;
 
-    /**
-     * 创建一个velocity配置。
-     */
+    /** 创建一个velocity配置。 */
     public VelocityConfigurationImpl(Logger log) {
         this.log = assertNotNull(log, "log");
     }
@@ -95,9 +92,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
         return loader;
     }
 
-    /**
-     * 设置resource loader。
-     */
+    /** 设置resource loader。 */
     public void setResourceLoader(ResourceLoader loader) {
         this.loader = loader;
     }
@@ -106,65 +101,47 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
         return productionMode;
     }
 
-    /**
-     * 设置生产模式。默认为<code>true</code>。
-     */
+    /** 设置生产模式。默认为<code>true</code>。 */
     public void setProductionMode(boolean productionMode) {
         this.productionMode = productionMode;
     }
 
-    /**
-     * 设置搜索模板的根目录。默认为<code>/templates</code>。
-     */
+    /** 设置搜索模板的根目录。默认为<code>/templates</code>。 */
     public void setPath(String path) {
         this.path = trimToNull(path);
     }
 
-    /**
-     * 是否开启模板缓存。在生产模式下，该模式将被强行开启。
-     */
+    /** 是否开启模板缓存。在生产模式下，该模式将被强行开启。 */
     public void setCacheEnabled(boolean cacheEnabled) {
         this.cacheEnabled = cacheEnabled;
     }
 
-    /**
-     * 设置检查模板被修改的间隔（秒）。默认为2秒。
-     */
+    /** 设置检查模板被修改的间隔（秒）。默认为2秒。 */
     public void setModificationCheckInterval(int modificationCheckInterval) {
         this.modificationCheckInterval = modificationCheckInterval;
     }
 
-    /**
-     * 设置strict reference模式。默认为<code>true</code>。
-     */
+    /** 设置strict reference模式。默认为<code>true</code>。 */
     public void setStrictReference(boolean strictReference) {
         this.strictReference = strictReference;
     }
 
-    /**
-     * 设置模板的字符集编码。
-     */
+    /** 设置模板的字符集编码。 */
     public void setTemplateEncoding(String charset) {
         this.charset = trimToNull(charset);
     }
 
-    /**
-     * 设置全局宏的名称，可包含通配符。
-     */
+    /** 设置全局宏的名称，可包含通配符。 */
     public void setGlobalMacros(String[] macros) {
         this.macros = macros;
     }
 
-    /**
-     * 设置plugins。
-     */
+    /** 设置plugins。 */
     public void setPlugins(Object[] plugins) {
         this.plugins = plugins;
     }
 
-    /**
-     * 设置高级配置。
-     */
+    /** 设置高级配置。 */
     public void setAdvancedProperties(Map<String, Object> configuration) {
         this.properties.clear();
 
@@ -173,9 +150,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
         }
     }
 
-    /**
-     * 初始化configuration。
-     */
+    /** 初始化configuration。 */
     public void init() throws Exception {
         assertNotNull(loader, "resourceLoader");
 
@@ -193,16 +168,14 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
         assertTrue(eventCartridge.addEventHandler(handler), "Unknown event handler type: %s", handler.getClass());
     }
 
-    /**
-     * 删除保留的properties，这些properties用户不能修改。
-     */
+    /** 删除保留的properties，这些properties用户不能修改。 */
     private void removeReservedProperties() {
         Set<String> keysToRemove = createHashSet();
 
         // Remove resource loader settings
         keysToRemove.add(RESOURCE_LOADER);
 
-        for (Iterator<?> i = properties.getKeys(); i.hasNext();) {
+        for (Iterator<?> i = properties.getKeys(); i.hasNext(); ) {
             Object key = i.next();
 
             if (key instanceof String && ((String) key).contains(RESOURCE_LOADER)) {
@@ -219,11 +192,11 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
         keysToRemove.add(VM_LIBRARY);
 
         // Remove event handlers: 仅移除eventhandler.xxx.class，保留其它参数
-        for (Iterator<?> i = properties.getKeys(); i.hasNext();) {
+        for (Iterator<?> i = properties.getKeys(); i.hasNext(); ) {
             Object key = i.next();
 
             if (key instanceof String && ((String) key).startsWith("eventhandler.")
-                    && ((String) key).endsWith(".class")) {
+                && ((String) key).endsWith(".class")) {
                 keysToRemove.add((String) key);
             }
         }
@@ -242,9 +215,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
         }
     }
 
-    /**
-     * 初始化plugins。
-     */
+    /** 初始化plugins。 */
     private void initPlugins() throws Exception {
         if (plugins != null) {
             for (Object plugin : plugins) {
@@ -295,16 +266,12 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
         }
     }
 
-    /**
-     * 初始化日志系统。
-     */
+    /** 初始化日志系统。 */
     private void initLogger() {
         properties.setProperty(RUNTIME_LOG_LOGSYSTEM, new Slf4jLogChute(log));
     }
 
-    /**
-     * 查找所有全局macros。
-     */
+    /** 查找所有全局macros。 */
     private void initMacros() throws Exception {
         ResourcePatternResolver resolver;
 
@@ -405,7 +372,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
 
         // 防止加入重复的resource对象
         for (int i = 1; preloadedResources.containsKey(templateName)
-                && !resource.equals(preloadedResources.get(templateName)); i++) {
+                        && !resource.equals(preloadedResources.get(templateName)); i++) {
             templateName = templateNameBase + i;
         }
 
@@ -440,9 +407,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
         }
     }
 
-    /**
-     * 初始化杂项。
-     */
+    /** 初始化杂项。 */
     private void initMiscs() {
         if (charset == null) {
             charset = DEFAULT_CHARSET;
@@ -468,9 +433,7 @@ public class VelocityConfigurationImpl implements VelocityConfiguration {
         properties.setProperty(RUNTIME_REFERENCES_STRICT, String.valueOf(strictReference));
     }
 
-    /**
-     * 设置默认值。如果值已存在，则不覆盖。
-     */
+    /** 设置默认值。如果值已存在，则不覆盖。 */
     private void setDefaultProperty(String key, Object value) {
         if (!properties.containsKey(key)) {
             properties.setProperty(key, value);

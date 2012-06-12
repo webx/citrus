@@ -23,12 +23,11 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
+import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.FatalBeanException;
 import org.springframework.core.io.FileSystemResource;
-
-import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 
 /**
  * 测试<code>AbstractNamedBeanDefinitionParser</code>。
@@ -43,9 +42,7 @@ public class NamedBeanDefinitionParserTests {
         factory = new XmlApplicationContext(new FileSystemResource(new File(srcdir, "my-beans.xml")));
     }
 
-    /**
-     * 未指定id，且<code>getDefaultName()</code>返回空。
-     */
+    /** 未指定id，且<code>getDefaultName()</code>返回空。 */
     @Test
     public void noDefaultName_And_NoIdSpecified() {
         try {
@@ -56,9 +53,7 @@ public class NamedBeanDefinitionParserTests {
         }
     }
 
-    /**
-     * 指定id，且<code>getDefaultName()</code>返回空。
-     */
+    /** 指定id，且<code>getDefaultName()</code>返回空。 */
     @Test
     public void noDefaultName() {
         MyBean myBean = (MyBean) factory.getBean("noDefaultName");

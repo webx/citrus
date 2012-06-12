@@ -26,9 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Michael Zhou
  */
 public interface RequestHandlerMapping {
-    /**
-     * 取得所有可用的request handler的名称。
-     */
+    /** 取得所有可用的request handler的名称。 */
     String[] getRequestHandlerNames();
 
     /**

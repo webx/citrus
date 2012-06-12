@@ -20,11 +20,6 @@ package com.alibaba.citrus.service.requestcontext.session.encoder.impl;
 import static com.alibaba.citrus.springext.util.DomUtil.*;
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 
-import org.springframework.beans.factory.config.BeanDefinitionHolder;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.requestcontext.session.encoder.AbstractSerializationEncoder;
 import com.alibaba.citrus.service.requestcontext.session.encrypter.Encrypter;
 import com.alibaba.citrus.service.requestcontext.session.serializer.Serializer;
@@ -32,6 +27,10 @@ import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
+import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 通过<code>Serializer</code>提供的序列化机制来编码对象，以及解码字符串。
@@ -60,30 +59,30 @@ public class SerializationEncoder extends AbstractSerializationEncoder {
     }
 
     public static class DefinitionParser extends AbstractSingleBeanDefinitionParser<SerializationEncoder> implements
-            ContributionAware {
+                                                                                                          ContributionAware {
         private ConfigurationPoint serializerConfigurationPoint;
         private ConfigurationPoint encrypterConfigurationPoint;
 
         public void setContribution(Contribution contrib) {
             this.serializerConfigurationPoint = getSiblingConfigurationPoint("services/request-contexts/session/"
-                    + "serializers", contrib);
+                                                                             + "serializers", contrib);
 
             this.encrypterConfigurationPoint = getSiblingConfigurationPoint("services/request-contexts/session/"
-                    + "encrypters", contrib);
+                                                                            + "encrypters", contrib);
         }
 
         @Override
         protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
             for (Element subElement : subElements(element)) {
                 BeanDefinitionHolder serializer = parseConfigurationPointBean(subElement, serializerConfigurationPoint,
-                        parserContext, builder);
+                                                                              parserContext, builder);
 
                 if (serializer != null) {
                     builder.addPropertyValue("serializer", serializer);
                 }
 
                 BeanDefinitionHolder encrypter = parseConfigurationPointBean(subElement, encrypterConfigurationPoint,
-                        parserContext, builder);
+                                                                             parserContext, builder);
 
                 if (encrypter != null) {
                     builder.addPropertyValue("encrypter", encrypter);

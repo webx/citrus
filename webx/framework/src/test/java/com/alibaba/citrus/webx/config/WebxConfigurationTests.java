@@ -25,12 +25,6 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.FileSystemResource;
-
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import com.alibaba.citrus.util.CollectionUtil;
@@ -40,11 +34,16 @@ import com.alibaba.citrus.webx.config.impl.WebxConfigurationImpl.ComponentsConfi
 import com.alibaba.citrus.webx.impl.WebxControllerImpl;
 import com.alibaba.citrus.webx.support.AbstractWebxController;
 import com.alibaba.citrus.webx.support.AbstractWebxRootController;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.FileSystemResource;
 
 public class WebxConfigurationTests {
-    private static ApplicationContext factory;
-    private WebxConfiguration conf;
-    private ComponentsConfigImpl config;
+    private static ApplicationContext   factory;
+    private        WebxConfiguration    conf;
+    private        ComponentsConfigImpl config;
 
     @BeforeClass
     public static void initFactory() throws Exception {
@@ -135,7 +134,7 @@ public class WebxConfigurationTests {
         assertEquals(String.class, config.getDefaultControllerClass());
 
         // getComponents
-        config.setComponents(CollectionUtil.<String, ComponentConfig> createHashMap());
+        config.setComponents(CollectionUtil.<String, ComponentConfig>createHashMap());
         assertNotNull(config.getComponents());
     }
 

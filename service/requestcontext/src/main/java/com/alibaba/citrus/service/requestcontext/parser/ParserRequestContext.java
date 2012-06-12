@@ -17,9 +17,8 @@
 
 package com.alibaba.citrus.service.requestcontext.parser;
 
-import org.springframework.beans.PropertyEditorRegistrar;
-
 import com.alibaba.citrus.service.requestcontext.RequestContext;
+import org.springframework.beans.PropertyEditorRegistrar;
 
 /**
  * 自动解析request parameters和cookie parameters，并透明地处理upload请求的request context实现。
@@ -51,39 +50,25 @@ public interface ParserRequestContext extends RequestContext {
     /** 在parameters中表示upload文件尺寸超过限制值，请求被忽略。 */
     String UPLOAD_SIZE_LIMIT_EXCEEDED = "upload_size_limit_exceeded";
 
-    /**
-     * 取得用来转换参数类型的propertyEditor注册器。
-     */
+    /** 取得用来转换参数类型的propertyEditor注册器。 */
     PropertyEditorRegistrar getPropertyEditorRegistrar();
 
-    /**
-     * 类型转换出错时，是否不报错，而是返回默认值。
-     */
+    /** 类型转换出错时，是否不报错，而是返回默认值。 */
     boolean isConverterQuiet();
 
-    /**
-     * 是否自动执行Upload。
-     */
+    /** 是否自动执行Upload。 */
     boolean isAutoUpload();
 
-    /**
-     * 取得代表HTML字段的后缀。
-     */
+    /** 取得代表HTML字段的后缀。 */
     String getHtmlFieldSuffix();
 
-    /**
-     * 按照指定的风格转换parameters和cookies的名称，默认为“小写加下划线”。
-     */
+    /** 按照指定的风格转换parameters和cookies的名称，默认为“小写加下划线”。 */
     String getCaseFolding();
 
-    /**
-     * 是否对参数进行HTML entities解码，默认为<code>true</code>。
-     */
+    /** 是否对参数进行HTML entities解码，默认为<code>true</code>。 */
     boolean isUnescapeParameters();
 
-    /**
-     * 是否使用servlet引擎的parser，默认为<code>false</code>。
-     */
+    /** 是否使用servlet引擎的parser，默认为<code>false</code>。 */
     boolean isUseServletEngineParser();
 
     /**
@@ -100,9 +85,7 @@ public interface ParserRequestContext extends RequestContext {
      */
     String getURIEncoding();
 
-    /**
-     * 是否对输入参数进行trimming。默认为<code>true</code>。
-     */
+    /** 是否对输入参数进行trimming。默认为<code>true</code>。 */
     boolean isTrimming();
 
     /**

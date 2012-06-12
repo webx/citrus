@@ -25,14 +25,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import com.alibaba.citrus.test.runner.Prototyped;
 import com.alibaba.citrus.test.runner.Prototyped.Prototypes;
 import com.alibaba.citrus.test.runner.Prototyped.TestData;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * 测试{@link ArrayTypeInfo}。
@@ -41,20 +40,20 @@ import com.alibaba.citrus.test.runner.Prototyped.TestName;
  */
 @RunWith(Prototyped.class)
 public class ArrayTypeTests extends BaseTypeTests implements Cloneable {
-    private transient ArrayTypeInfo typeInfo;
-    private Class<?> ownerType; // 变量所在的类
-    private String methodName; // 变量的方法名
-    private String name; // 名称
-    private String simpleName; // 简称
-    private Class<?> clazz; // rawType
-    private int dimension; // 数组维度
-    private TypeInfo componentType; // 数组元素类型
-    private TypeInfo directComponentType; // 数组直接元素类型
-    private String toString; // toString结果
-    private String[] supertypes; // 父类、接口
-    private GenericDeclarationInfo context; // resolve context
-    private TypeInfo resolvedType; // resolve result;
-    private boolean resolveChanged; // 如果为false，代表resolve返回this
+    private transient ArrayTypeInfo          typeInfo;
+    private           Class<?>               ownerType; // 变量所在的类
+    private           String                 methodName; // 变量的方法名
+    private           String                 name; // 名称
+    private           String                 simpleName; // 简称
+    private           Class<?>               clazz; // rawType
+    private           int                    dimension; // 数组维度
+    private           TypeInfo               componentType; // 数组元素类型
+    private           TypeInfo               directComponentType; // 数组直接元素类型
+    private           String                 toString; // toString结果
+    private           String[]               supertypes; // 父类、接口
+    private           GenericDeclarationInfo context; // resolve context
+    private           TypeInfo               resolvedType; // resolve result;
+    private           boolean                resolveChanged; // 如果为false，代表resolve返回this
 
     @Before
     public void init() {
@@ -121,7 +120,7 @@ public class ArrayTypeTests extends BaseTypeTests implements Cloneable {
         prototype.directComponentType = factory.getType(String.class);
         prototype.toString = "String[]";
         prototype.supertypes = new String[] { "String[]", "Serializable[]", "Comparable<T=String>[]", "CharSequence[]",
-                "Object[]", "Cloneable", "Serializable", "Object" };
+                                              "Object[]", "Cloneable", "Serializable", "Object" };
         prototype.context = null;
         prototype.resolvedType = factory.getType(String[].class);
 
@@ -137,8 +136,8 @@ public class ArrayTypeTests extends BaseTypeTests implements Cloneable {
         prototype.directComponentType = factory.getType(String[].class);
         prototype.toString = "String[][]";
         prototype.supertypes = new String[] { "String[][]", "Serializable[][]", "Comparable<T=String>[][]",
-                "CharSequence[][]", "Object[][]", "Cloneable[]", "Serializable[]", "Object[]", "Cloneable",
-                "Serializable", "Object" };
+                                              "CharSequence[][]", "Object[][]", "Cloneable[]", "Serializable[]", "Object[]", "Cloneable",
+                                              "Serializable", "Object" };
         prototype.context = null;
         prototype.resolvedType = factory.getType(String[][].class);
 
@@ -169,7 +168,7 @@ public class ArrayTypeTests extends BaseTypeTests implements Cloneable {
         prototype.directComponentType = factory.getType(int[].class);
         prototype.toString = "int[][]";
         prototype.supertypes = new String[] { "int[][]", "Cloneable[]", "Serializable[]", "Object[]", "Cloneable",
-                "Serializable", "Object" };
+                                              "Serializable", "Object" };
         prototype.context = null;
         prototype.resolvedType = factory.getType(int[][].class);
 
@@ -187,7 +186,7 @@ public class ArrayTypeTests extends BaseTypeTests implements Cloneable {
         prototype.directComponentType = factory.getType(getReturnType(TestClass.class, "c_component"));
         prototype.toString = "List<E=String>[]";
         prototype.supertypes = new String[] { "List<E=String>[]", "Collection<E=E>[]", "Iterable<T=E>[]", "Object[]",
-                "Cloneable", "Serializable", "Object" };
+                                              "Cloneable", "Serializable", "Object" };
         prototype.context = null;
         prototype.resolvedType = factory.getType(getReturnType(TestClass.class, "c"));
 
@@ -203,7 +202,7 @@ public class ArrayTypeTests extends BaseTypeTests implements Cloneable {
         prototype.directComponentType = factory.getType(getReturnType(TestClass.class, "d_direct_component"));
         prototype.toString = "Map<K=String, V=Integer>[][]";
         prototype.supertypes = new String[] { "Map<K=String, V=Integer>[][]", "Object[][]", "Cloneable[]",
-                "Serializable[]", "Object[]", "Cloneable", "Serializable", "Object" };
+                                              "Serializable[]", "Object[]", "Cloneable", "Serializable", "Object" };
         prototype.context = null;
         prototype.resolvedType = factory.getType(getReturnType(TestClass.class, "d"));
 
@@ -219,10 +218,10 @@ public class ArrayTypeTests extends BaseTypeTests implements Cloneable {
         prototype.directComponentType = factory.getType(getReturnType(TestClass.class, "e_direct_component"));
         prototype.toString = "ArrayList<E=String>[][][]";
         prototype.supertypes = new String[] { "ArrayList<E=String>[][][]", "AbstractList<E=E>[][][]",
-                "AbstractCollection<E=E>[][][]", "List<E=E>[][][]", "RandomAccess[][][]", "Cloneable[][][]",
-                "Serializable[][][]", "Collection<E=E>[][][]", "Iterable<T=E>[][][]", "Object[][][]", "Cloneable[][]",
-                "Serializable[][]", "Object[][]", "Cloneable[]", "Serializable[]", "Object[]", "Cloneable",
-                "Serializable", "Object" };
+                                              "AbstractCollection<E=E>[][][]", "List<E=E>[][][]", "RandomAccess[][][]", "Cloneable[][][]",
+                                              "Serializable[][][]", "Collection<E=E>[][][]", "Iterable<T=E>[][][]", "Object[][][]", "Cloneable[][]",
+                                              "Serializable[][]", "Object[][]", "Cloneable[]", "Serializable[]", "Object[]", "Cloneable",
+                                              "Serializable", "Object" };
         prototype.context = null;
         prototype.resolvedType = factory.getType(getReturnType(TestClass.class, "e"));
 
@@ -243,7 +242,7 @@ public class ArrayTypeTests extends BaseTypeTests implements Cloneable {
         prototype.directComponentType = factory.getType(TestClass.class.getTypeParameters()[0]);
         prototype.toString = "A[]";
         prototype.supertypes = new String[] { "Number[]", "Serializable[]", "Object[]", "Cloneable", "Serializable",
-                "Object" };
+                                              "Object" };
         prototype.context = factory.getClassType(TestClass.class);
         prototype.resolvedType = factory.getType(Number[].class);
         prototype.resolveChanged = true;
@@ -260,7 +259,7 @@ public class ArrayTypeTests extends BaseTypeTests implements Cloneable {
         prototype.directComponentType = factory.getType(getReturnType(TestClass.class, "f"));
         prototype.toString = "A[][]";
         prototype.supertypes = new String[] { "Number[][]", "Serializable[][]", "Object[][]", "Cloneable[]",
-                "Serializable[]", "Object[]", "Cloneable", "Serializable", "Object" };
+                                              "Serializable[]", "Object[]", "Cloneable", "Serializable", "Object" };
         prototype.context = factory.getClassType(TestClass.class);
         prototype.resolvedType = factory.getType(Number[][].class);
         prototype.resolveChanged = true;
@@ -278,7 +277,7 @@ public class ArrayTypeTests extends BaseTypeTests implements Cloneable {
         prototype.directComponentType = factory.getType(TestClass.class.getTypeParameters()[0]);
         prototype.toString = "A[]";
         prototype.supertypes = new String[] { "Number[]", "Serializable[]", "Object[]", "Cloneable", "Serializable",
-                "Object" };
+                                              "Object" };
         prototype.context = factory.getParameterizedType(TestClass.class, Integer.class);
         prototype.resolvedType = factory.getType(Integer[].class);
         prototype.resolveChanged = true;
@@ -295,7 +294,7 @@ public class ArrayTypeTests extends BaseTypeTests implements Cloneable {
         prototype.directComponentType = factory.getType(getReturnType(TestClass.class, "f"));
         prototype.toString = "A[][]";
         prototype.supertypes = new String[] { "Number[][]", "Serializable[][]", "Object[][]", "Cloneable[]",
-                "Serializable[]", "Object[]", "Cloneable", "Serializable", "Object" };
+                                              "Serializable[]", "Object[]", "Cloneable", "Serializable", "Object" };
         prototype.context = factory.getParameterizedType(TestClass.class, Integer.class);
         prototype.resolvedType = factory.getType(Integer[][].class);
         prototype.resolveChanged = true;
@@ -313,7 +312,7 @@ public class ArrayTypeTests extends BaseTypeTests implements Cloneable {
         prototype.directComponentType = factory.getType(getReturnType(TestClass.class, "g_component"));
         prototype.toString = "List<E=A>[]";
         prototype.supertypes = new String[] { "List<E=A>[]", "Collection<E=E>[]", "Iterable<T=E>[]", "Object[]",
-                "Cloneable", "Serializable", "Object" };
+                                              "Cloneable", "Serializable", "Object" };
         prototype.context = factory.getParameterizedType(TestClass.class, Integer.class);
         prototype.resolvedType = factory.getArrayType(factory.getParameterizedType(List.class, Integer.class), 1);
         prototype.resolveChanged = true;
@@ -330,7 +329,7 @@ public class ArrayTypeTests extends BaseTypeTests implements Cloneable {
         prototype.directComponentType = factory.getType(getReturnType(TestClass.class, "g"));
         prototype.toString = "List<E=A>[][]";
         prototype.supertypes = new String[] { "List<E=A>[][]", "Collection<E=E>[][]", "Iterable<T=E>[][]",
-                "Object[][]", "Cloneable[]", "Serializable[]", "Object[]", "Cloneable", "Serializable", "Object" };
+                                              "Object[][]", "Cloneable[]", "Serializable[]", "Object[]", "Cloneable", "Serializable", "Object" };
         prototype.context = factory.getParameterizedType(TestClass.class, Integer.class);
         prototype.resolvedType = factory.getArrayType(factory.getParameterizedType(List.class, Integer.class), 2);
         prototype.resolveChanged = true;

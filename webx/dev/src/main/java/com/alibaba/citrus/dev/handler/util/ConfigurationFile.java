@@ -23,10 +23,10 @@ import static com.alibaba.citrus.util.ObjectUtil.*;
 import java.net.URL;
 
 public class ConfigurationFile {
-    private final String name;
-    private final URL url;
+    private final String              name;
+    private final URL                 url;
     private final ConfigurationFile[] importedFiles;
-    private final Element rootElement;
+    private final Element             rootElement;
 
     public ConfigurationFile(String name, URL url, ConfigurationFile[] importedFiles, Element rootElement) {
         this.name = assertNotNull(name, "name");

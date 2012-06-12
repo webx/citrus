@@ -37,49 +37,37 @@ import com.alibaba.citrus.service.form.support.AbstractValidatorDefinitionParser
 public class DateValidator extends AbstractOptionalValidator {
     private final static String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
     private String dateFormatStr;
-    private Date minDate;
+    private Date   minDate;
     private String minDateStr;
-    private Date maxDate;
+    private Date   maxDate;
     private String maxDateStr;
 
-    /**
-     * 取日期格式，参见<code>SimpleDateFormat</code>的注释。
-     */
+    /** 取日期格式，参见<code>SimpleDateFormat</code>的注释。 */
     public String getFormat() {
         return dateFormatStr;
     }
 
-    /**
-     * 设置日期格式，参见<code>SimpleDateFormat</code>的注释。
-     */
+    /** 设置日期格式，参见<code>SimpleDateFormat</code>的注释。 */
     public void setFormat(String formatStr) {
         this.dateFormatStr = trimToNull(formatStr);
     }
 
-    /**
-     * 取最小日期，字符串形式，格式符合setDateFormat()设置。
-     */
+    /** 取最小日期，字符串形式，格式符合setDateFormat()设置。 */
     public String getMinDate() {
         return minDateStr;
     }
 
-    /**
-     * 设置最小日期，字符串形式，格式符合setDateFormat()设置。
-     */
+    /** 设置最小日期，字符串形式，格式符合setDateFormat()设置。 */
     public void setMinDate(String minDate) {
         this.minDateStr = trimToNull(minDate);
     }
 
-    /**
-     * 取最小日期，字符串形式，格式符合setDateFormat()设置。
-     */
+    /** 取最小日期，字符串形式，格式符合setDateFormat()设置。 */
     public String getMaxDate() {
         return maxDateStr;
     }
 
-    /**
-     * 设置最大日期，字符串形式，格式符合setDateFormat()设置。
-     */
+    /** 设置最大日期，字符串形式，格式符合setDateFormat()设置。 */
     public void setMaxDate(String maxDate) {
         this.maxDateStr = trimToNull(maxDate);
     }

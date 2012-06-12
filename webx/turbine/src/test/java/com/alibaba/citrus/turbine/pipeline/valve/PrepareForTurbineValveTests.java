@@ -22,9 +22,6 @@ import static org.junit.Assert.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.PipelineException;
 import com.alibaba.citrus.service.pipeline.Valve;
@@ -34,6 +31,8 @@ import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.turbine.TurbineRunDataInternal;
 import com.alibaba.citrus.turbine.util.TurbineUtil;
 import com.alibaba.citrus.webx.util.WebxUtil;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class PrepareForTurbineValveTests extends AbstractValveTests {
     @Test

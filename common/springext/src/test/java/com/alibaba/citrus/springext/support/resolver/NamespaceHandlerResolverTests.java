@@ -20,17 +20,16 @@ package com.alibaba.citrus.springext.support.resolver;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
+import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
+import com.alibaba.citrus.test.TestEnvStatic;
 import org.junit.Test;
 import org.springframework.beans.factory.xml.DefaultNamespaceHandlerResolver;
 import org.springframework.beans.factory.xml.NamespaceHandler;
 import org.springframework.beans.factory.xml.NamespaceHandlerResolver;
 import org.springframework.context.config.ContextNamespaceHandler;
 
-import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
-import com.alibaba.citrus.test.TestEnvStatic;
-
 public class NamespaceHandlerResolverTests {
-    private ConfigurationPointsImpl cps;
+    private ConfigurationPointsImpl  cps;
     private NamespaceHandlerResolver resolver;
 
     static {

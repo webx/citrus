@@ -21,11 +21,10 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.expr.ExpressionParseException;
 import com.alibaba.citrus.service.pipeline.PipelineException;
 import com.alibaba.citrus.service.pipeline.impl.condition.JexlCondition;
+import org.junit.Test;
 
 public class JexlConditionTests extends AbstractConditionTests<JexlCondition> {
     @Test
@@ -135,8 +134,8 @@ public class JexlConditionTests extends AbstractConditionTests<JexlCondition> {
             assertThat(
                     e,
                     exception(IllegalArgumentException.class,
-                            "Failed to evaluating expression for JexlCondition into a boolean value: \"strValue2\"",
-                            "Invalid boolean value [hello]"));
+                              "Failed to evaluating expression for JexlCondition into a boolean value: \"strValue2\"",
+                              "Invalid boolean value [hello]"));
         }
 
         // set attribute

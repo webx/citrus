@@ -22,17 +22,15 @@ import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.lang.reflect.Field;
-
 import javax.servlet.http.HttpSession;
-
-import org.junit.BeforeClass;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.alibaba.citrus.logconfig.support.SecurityLogger;
 import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 import com.alibaba.citrus.service.requestcontext.session.SessionConfig;
 import com.alibaba.citrus.service.requestcontext.session.SessionRequestContext;
+import org.junit.BeforeClass;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class AbstractSessionListenerTests extends AbstractRequestContextsTests<SessionRequestContext> {
     protected HttpSession session;
@@ -42,10 +40,9 @@ public abstract class AbstractSessionListenerTests extends AbstractRequestContex
         createBeanFactory("services-session-interceptors.xml");
     }
 
-    /**
-     * 替换log。
-     */
-    protected final void replaceLogger(Logger log, String logField, String originalLogName, int index) throws Exception {
+    /** 替换log。 */
+    protected final void replaceLogger(Logger log, String logField, String originalLogName, int index)
+            throws Exception {
         invokeNoopServlet("/servlet");
         initRequestContext();
 

@@ -17,14 +17,13 @@
 
 package com.alibaba.citrus.service.mappingrule.impl.rule;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.mappingrule.support.AbstractTemplateMappingRule;
 import com.alibaba.citrus.service.mappingrule.support.AbstractTemplateMappingRuleDefinitionParser;
 import com.alibaba.citrus.util.ArrayUtil;
 import com.alibaba.citrus.util.StringUtil;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 最简单模板映射规则,不查询templateService，只拼装路径。
@@ -64,7 +63,8 @@ public class DirectTemplateMappingRule extends AbstractTemplateMappingRule {
         return firstTemplateName;
     }
 
-    public static class DefinitionParser extends AbstractTemplateMappingRuleDefinitionParser<DirectTemplateMappingRule> {
+    public static class DefinitionParser
+            extends AbstractTemplateMappingRuleDefinitionParser<DirectTemplateMappingRule> {
         @Override
         protected void doParseTemplateMappingRule(Element element, ParserContext parserContext,
                                                   BeanDefinitionBuilder builder) {

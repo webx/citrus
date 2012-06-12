@@ -25,8 +25,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.dataresolver.DataResolverContext;
 import com.alibaba.citrus.service.requestcontext.parser.CookieParser;
 import com.alibaba.citrus.service.requestcontext.parser.ParameterParser;
@@ -36,6 +34,7 @@ import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.turbine.dataresolver.impl.TurbineRunDataResolverFactory;
 import com.alibaba.citrus.turbine.support.MappedContext;
+import org.junit.Test;
 
 public class TurbineRunDataResolverTests extends AbstractDataResolverTests {
     @Test

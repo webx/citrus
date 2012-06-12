@@ -39,16 +39,14 @@ import com.alibaba.citrus.util.ToStringBuilder;
  */
 public class FormServiceImpl extends AbstractService<FormService> implements FormService {
     private final HttpServletRequest request;
-    private FormConfigImpl formConfig;
-    private String requestKey;
+    private       FormConfigImpl     formConfig;
+    private       String             requestKey;
 
     public FormServiceImpl(HttpServletRequest request) {
         this.request = assertProxy(assertNotNull(request, "request"));
     }
 
-    /**
-     * 取得form config。
-     */
+    /** 取得form config。 */
     public FormConfig getFormConfig() {
         return formConfig;
     }
@@ -57,29 +55,23 @@ public class FormServiceImpl extends AbstractService<FormService> implements For
         this.formConfig = formConfig;
     }
 
-    /**
-     * 初始化service。
-     */
+    /** 初始化service。 */
     @Override
     protected void init() {
         // 确保不同的formService取得不同的form实例。
         requestKey = "_FormService_" + defaultIfEmpty(getBeanName(), getClass().getName()) + "_"
-                + identityHashCode(this);
+                     + identityHashCode(this);
 
         assertNotNull(formConfig, "formConfig");
         formConfig.setFormService(this);
     }
 
-    /**
-     * 从request中取得当前请求的form或创建新的form。
-     */
+    /** 从request中取得当前请求的form或创建新的form。 */
     public Form getForm() {
         return getForm(false);
     }
 
-    /**
-     * 从request中取得当前请求的form或创建新的form。
-     */
+    /** 从request中取得当前请求的form或创建新的form。 */
     public Form getForm(boolean forcePostOnly) {
         Object form = assertNotNull(request, "Could not getForm: request is null").getAttribute(requestKey);
 

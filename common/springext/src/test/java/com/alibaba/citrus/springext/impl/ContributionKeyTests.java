@@ -26,10 +26,9 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import com.alibaba.citrus.test.runner.TestNameAware;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import com.alibaba.citrus.test.runner.TestNameAware;
 
 @RunWith(TestNameAware.class)
 public class ContributionKeyTests {
@@ -65,22 +64,22 @@ public class ContributionKeyTests {
     @Test
     public void hashCodeAndEquals() {
         assertHashCodeAndEquals(new ContributionKey("myname", BEAN_DEFINITION_PARSER), new ContributionKey("myname",
-                BEAN_DEFINITION_PARSER), true);
+                                                                                                           BEAN_DEFINITION_PARSER), true);
 
         assertHashCodeAndEquals(new ContributionKey("myname", BEAN_DEFINITION_DECORATOR), new ContributionKey("myname",
-                BEAN_DEFINITION_DECORATOR), true);
+                                                                                                              BEAN_DEFINITION_DECORATOR), true);
 
         assertHashCodeAndEquals(new ContributionKey("myname", BEAN_DEFINITION_DECORATOR_FOR_ATTRIBUTE),
-                new ContributionKey("myname", BEAN_DEFINITION_DECORATOR_FOR_ATTRIBUTE), true);
+                                new ContributionKey("myname", BEAN_DEFINITION_DECORATOR_FOR_ATTRIBUTE), true);
 
         assertHashCodeAndEquals(new ContributionKey("myname", BEAN_DEFINITION_PARSER), new ContributionKey("myname",
-                BEAN_DEFINITION_DECORATOR), false);
+                                                                                                           BEAN_DEFINITION_DECORATOR), false);
 
         assertHashCodeAndEquals(new ContributionKey("myname", BEAN_DEFINITION_DECORATOR), new ContributionKey("myname",
-                BEAN_DEFINITION_DECORATOR_FOR_ATTRIBUTE), false);
+                                                                                                              BEAN_DEFINITION_DECORATOR_FOR_ATTRIBUTE), false);
 
         assertHashCodeAndEquals(new ContributionKey("myname", BEAN_DEFINITION_DECORATOR_FOR_ATTRIBUTE),
-                new ContributionKey("myname", BEAN_DEFINITION_PARSER), false);
+                                new ContributionKey("myname", BEAN_DEFINITION_PARSER), false);
     }
 
     private void assertHashCodeAndEquals(ContributionKey key1, ContributionKey key2, boolean equals) {
@@ -134,10 +133,10 @@ public class ContributionKeyTests {
     @Test
     public void toString_() {
         assertEquals("ContributionKey[myname, BEAN_DEFINITION_PARSER]", new ContributionKey("myname",
-                BEAN_DEFINITION_PARSER).toString());
+                                                                                            BEAN_DEFINITION_PARSER).toString());
         assertEquals("ContributionKey[myname, BEAN_DEFINITION_DECORATOR]", new ContributionKey("myname",
-                BEAN_DEFINITION_DECORATOR).toString());
+                                                                                               BEAN_DEFINITION_DECORATOR).toString());
         assertEquals("ContributionKey[myname, BEAN_DEFINITION_DECORATOR_FOR_ATTRIBUTE]", new ContributionKey("myname",
-                BEAN_DEFINITION_DECORATOR_FOR_ATTRIBUTE).toString());
+                                                                                                             BEAN_DEFINITION_DECORATOR_FOR_ATTRIBUTE).toString());
     }
 }

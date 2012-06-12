@@ -27,7 +27,7 @@ import com.alibaba.citrus.springext.ContributionType;
  * @author Michael Zhou
  */
 class ContributionKey implements Comparable<ContributionKey> {
-    private final String name;
+    private final String           name;
     private final ContributionType type;
 
     public ContributionKey(String name, ContributionType type) {

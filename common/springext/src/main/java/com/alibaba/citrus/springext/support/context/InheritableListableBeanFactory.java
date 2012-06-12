@@ -22,14 +22,13 @@ import static java.util.Collections.*;
 import java.lang.reflect.Field;
 import java.util.Map;
 
+import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-
-import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 
 /**
  * 这个类扩展了<code>DefaultListableBeanFactory</code>，改进了如下问题：
@@ -76,21 +75,19 @@ class InheritableListableBeanFactory extends DefaultListableBeanFactory {
                 return (Map<Class<?>, Object>) field.get(parentBeanFactory);
             } catch (Exception e) {
                 logger.warn("Failed to get value of DefaultListableBeanFactory.resolvableDependencies, "
-                        + "autowiring of singleton proxy may function wrong", e);
+                            + "autowiring of singleton proxy may function wrong", e);
             }
         }
 
         return null;
     }
 
-    /**
-     * 避免重复注册parent中已有的对象，但可以覆盖当前context中的对象。
-     */
+    /** 避免重复注册parent中已有的对象，但可以覆盖当前context中的对象。 */
     @Override
     @SuppressWarnings("rawtypes")
     public void registerResolvableDependency(Class dependencyType, Object autowiredValue) {
         if (parentResolvableDependencies == null
-                || !(parentResolvableDependencies.get(dependencyType) instanceof ProxyTargetFactory)) {
+            || !(parentResolvableDependencies.get(dependencyType) instanceof ProxyTargetFactory)) {
             super.registerResolvableDependency(dependencyType, autowiredValue);
         }
     }

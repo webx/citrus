@@ -35,24 +35,16 @@ public interface TemplateEngine {
      */
     String[] getDefaultExtensions();
 
-    /**
-     * 判定模板是否存在。
-     */
+    /** 判定模板是否存在。 */
     boolean exists(String templateName);
 
-    /**
-     * 渲染模板，并以字符串的形式取得渲染的结果。
-     */
+    /** 渲染模板，并以字符串的形式取得渲染的结果。 */
     String getText(String templateName, TemplateContext context) throws TemplateException, IOException;
 
-    /**
-     * 渲染模板，并将渲染的结果送到字节输出流中。
-     */
+    /** 渲染模板，并将渲染的结果送到字节输出流中。 */
     void writeTo(String templateName, TemplateContext context, OutputStream ostream) throws TemplateException,
-            IOException;
+                                                                                            IOException;
 
-    /**
-     * 渲染模板，并将渲染的结果送到字符输出流中。
-     */
+    /** 渲染模板，并将渲染的结果送到字符输出流中。 */
     void writeTo(String templateName, TemplateContext context, Writer writer) throws TemplateException, IOException;
 }

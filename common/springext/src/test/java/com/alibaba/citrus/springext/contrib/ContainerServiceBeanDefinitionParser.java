@@ -23,18 +23,17 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.alibaba.citrus.springext.ConfigurationPoint;
+import com.alibaba.citrus.springext.Contribution;
+import com.alibaba.citrus.springext.ContributionAware;
+import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-import com.alibaba.citrus.springext.ConfigurationPoint;
-import com.alibaba.citrus.springext.Contribution;
-import com.alibaba.citrus.springext.ContributionAware;
-import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
-
 public class ContainerServiceBeanDefinitionParser extends AbstractNamedBeanDefinitionParser<TreeMap<?, ?>> implements
-        ContributionAware {
+                                                                                                           ContributionAware {
     private ConfigurationPoint toolsConfigurationPoint;
 
     public void setContribution(Contribution contrib) {
@@ -49,7 +48,7 @@ public class ContainerServiceBeanDefinitionParser extends AbstractNamedBeanDefin
 
         for (Element subElement : subElements(element)) {
             BeanDefinitionHolder bean = parseConfigurationPointBean(subElement, toolsConfigurationPoint, parserContext,
-                    builder);
+                                                                    builder);
             map.put(bean.getBeanName(), bean);
         }
 

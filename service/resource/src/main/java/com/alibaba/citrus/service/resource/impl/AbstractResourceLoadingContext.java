@@ -29,14 +29,13 @@ import java.util.Set;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 
-import org.slf4j.Logger;
-
 import com.alibaba.citrus.service.resource.ResourceLoadingOption;
 import com.alibaba.citrus.service.resource.ResourceLoadingService;
 import com.alibaba.citrus.service.resource.ResourceMatchResult;
 import com.alibaba.citrus.service.resource.ResourceNotFoundException;
 import com.alibaba.citrus.util.Assert;
 import com.alibaba.citrus.util.regex.MatchResultSubstitution;
+import org.slf4j.Logger;
 
 /**
  * 查找和装载resource的逻辑。
@@ -47,23 +46,21 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
     private final static Set<ResourceLoadingOption> EMPTY_OPTIONS = emptySet();
 
     // 不变量
-    protected final Logger log;
-    protected final ResourceLoadingService parent;
-    private final String originalResourceName;
-    private final Set<ResourceLoadingOption> originalOptions;
-    private final ResourceMapping[] mappings;
-    private final BestResourcesMatcher resourcesMatcher;
+    protected final Logger                     log;
+    protected final ResourceLoadingService     parent;
+    private final   String                     originalResourceName;
+    private final   Set<ResourceLoadingOption> originalOptions;
+    private final   ResourceMapping[]          mappings;
+    private final   BestResourcesMatcher       resourcesMatcher;
 
     // 变量
-    private List<ResourceMapping> visitedMappings;
-    protected String resourceName; // 当前正在匹配的resourceName
+    private   List<ResourceMapping>      visitedMappings;
+    protected String                     resourceName; // 当前正在匹配的resourceName
     protected Set<ResourceLoadingOption> options; // 当前正在使用的options
-    protected ResourcePattern lastMatchedPattern; // 最近的匹配
-    protected MatchResultSubstitution lastSubstitution; // 和最近的匹配对应的替换工具
+    protected ResourcePattern            lastMatchedPattern; // 最近的匹配
+    protected MatchResultSubstitution    lastSubstitution; // 和最近的匹配对应的替换工具
 
-    /**
-     * 创建一个context。
-     */
+    /** 创建一个context。 */
     public AbstractResourceLoadingContext(String resourceName, Set<ResourceLoadingOption> options,
                                           ResourceMapping[] mappings, ResourceLoadingService parent, Logger log) {
         // 不变量
@@ -79,24 +76,18 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
         this.options = originalOptions;
     }
 
-    /**
-     * 实现<code>ResourceMatchResult.getResourceName()</code>。
-     */
+    /** 实现<code>ResourceMatchResult.getResourceName()</code>。 */
     public String getResourceName() {
         return resourceName;
     }
 
-    /**
-     * 实现<code>ResourceMatchResult.substitute()</code>。
-     */
+    /** 实现<code>ResourceMatchResult.substitute()</code>。 */
     public String substitute(String substitution) {
         return resourceName.substring(0, lastSubstitution.getMatch().start())
-                + lastSubstitution.substitute(substitution) + resourceName.substring(lastSubstitution.getMatch().end());
+               + lastSubstitution.substitute(substitution) + resourceName.substring(lastSubstitution.getMatch().end());
     }
 
-    /**
-     * 寻找资源的真实逻辑，被filter chain调用，或被getResource直接调用（假如没有filter），或被list调用。
-     */
+    /** 寻找资源的真实逻辑，被filter chain调用，或被getResource直接调用（假如没有filter），或被list调用。 */
     protected R doLoad(String newResourceName, Set<ResourceLoadingOption> newOptions) throws ResourceNotFoundException {
         resourceName = newResourceName;
         options = newOptions;
@@ -115,7 +106,7 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
             if (lastMatchedPattern instanceof ResourceAlias) {
                 if (parent != null) {
                     log.trace("Resource \"{}\" not found.  Trying to find it in super ResourceLoadingService",
-                            resourceName);
+                              resourceName);
 
                     try {
                         resource = loadParentResource(resourceName, options);
@@ -145,7 +136,7 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
         else {
             if (parent != null) {
                 log.trace("Resource \"{}\" not found.  " + "Trying to find it in super ResourceLoadingService",
-                        resourceName);
+                          resourceName);
 
                 // 直接抛出异常，因为送给parent的resourceName并未改变，没必要创建重复的异常信息
                 resource = loadParentResource(resourceName, options);
@@ -155,7 +146,7 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
         if (resource == null) {
             logResourceNotFound(originalResourceName);
             throw new ResourceNotFoundException(String.format("Could not find resource \"%s\"", originalResourceName),
-                    chainingException);
+                                                chainingException);
         }
 
         log.debug("Found resource \"{}\": {}", originalResourceName, resource);
@@ -163,9 +154,7 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
         return resource;
     }
 
-    /**
-     * 查找最佳匹配的&lt;resource&gt;或&lt;resource-alias&gt;。
-     */
+    /** 查找最佳匹配的&lt;resource&gt;或&lt;resource-alias&gt;。 */
     private boolean findBestMatch() throws ResourceNotFoundException {
         if (resourcesMatcher.matches(resourceName)) {
             ResourceMapping resourceMapping = resourcesMatcher.bestMatchPettern;
@@ -182,8 +171,8 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
 
                 if (log.isDebugEnabled()) {
                     log.debug("Resource \"{}\" matched resource-alias pattern: \"{}\".  "
-                            + "Use a new resourceName: \"{}\"", new Object[] { resourceName, alias.getPatternName(),
-                            newResourceName });
+                              + "Use a new resourceName: \"{}\"", new Object[] { resourceName, alias.getPatternName(),
+                                                                                 newResourceName });
                 }
 
                 visitMapping(alias);
@@ -218,20 +207,14 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
         return false;
     }
 
-    /**
-     * 回调函数：访问某个mapping。
-     */
+    /** 回调函数：访问某个mapping。 */
     protected abstract void visitMapping(ResourceMapping mapping);
 
-    /**
-     * 调用parent resource loading service取得资源。
-     */
+    /** 调用parent resource loading service取得资源。 */
     protected abstract R loadParentResource(String resourceName, Set<ResourceLoadingOption> options)
             throws ResourceNotFoundException;
 
-    /**
-     * 调用mapping取得资源。
-     */
+    /** 调用mapping取得资源。 */
     protected abstract R loadMappedResource(ResourceLoaderMapping mapping, Set<ResourceLoadingOption> options);
 
     /**
@@ -240,7 +223,7 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
      */
     protected final R loadContextResource(String newResourceName, Set<ResourceLoadingOption> newOptions) {
         assertTrue(!visitedMappings.isEmpty(), Assert.ExceptionType.ILLEGAL_STATE,
-                "getResource() can only be called within a ResourceLoader");
+                   "getResource() can only be called within a ResourceLoader");
 
         try {
             // 如果当前resourceName和新的resourceName相同，则直接调用parent service
@@ -254,7 +237,7 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
             } else {
                 // 用新的名称装载资源
                 log.trace("Trying to find resource \"{}\" using a new resourceName: \"{}\"", resourceName,
-                        newResourceName);
+                          newResourceName);
 
                 return doLoad(newResourceName, newOptions);
             }
@@ -274,11 +257,11 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
      * </p>
      */
     protected static abstract class BestMatcher<P extends ResourcePattern> {
-        protected String resourceName;
-        protected P bestMatchPettern;
+        protected String      resourceName;
+        protected P           bestMatchPettern;
         protected MatchResult bestMatchResult;
-        private int bestMatchRelevancy;
-        private int bestMatchLength;
+        private   int         bestMatchRelevancy;
+        private   int         bestMatchLength;
 
         protected abstract void init();
 
@@ -316,9 +299,7 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
         }
     }
 
-    /**
-     * 找出最匹配的&lt;resource&gt;或&lt;resource-alias&gt;。
-     */
+    /** 找出最匹配的&lt;resource&gt;或&lt;resource-alias&gt;。 */
     private class BestResourcesMatcher extends BestMatcher<ResourceMapping> {
         private int i;
 

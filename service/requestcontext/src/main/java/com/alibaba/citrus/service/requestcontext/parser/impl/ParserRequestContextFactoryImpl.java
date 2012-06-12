@@ -22,8 +22,6 @@ import static com.alibaba.citrus.util.ArrayUtil.*;
 import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
-import org.springframework.beans.PropertyEditorRegistrar;
-
 import com.alibaba.citrus.service.configuration.support.PropertyEditorRegistrarsSupport;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.parser.ParameterParserFilter;
@@ -31,6 +29,7 @@ import com.alibaba.citrus.service.requestcontext.parser.ParserRequestContext;
 import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextFactory;
 import com.alibaba.citrus.service.upload.UploadService;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.springframework.beans.PropertyEditorRegistrar;
 
 /**
  * 创建<code>ParserRequestContext</code>的工厂。
@@ -38,28 +37,28 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public class ParserRequestContextFactoryImpl extends AbstractRequestContextFactory<ParserRequestContext> {
-    private final static boolean CONVERTER_QUIET_DEFAULT = true;
-    private final static String URL_CASE_FOLDING_DEFAULT = URL_CASE_FOLDING_LOWER_WITH_UNDERSCORES;
-    private final static boolean AUTO_UPLOAD_DEFAULT = true;
-    private final static boolean UNESCAPE_PARAMETERS_DEFAULT = true;
+    private final static boolean CONVERTER_QUIET_DEFAULT           = true;
+    private final static String  URL_CASE_FOLDING_DEFAULT          = URL_CASE_FOLDING_LOWER_WITH_UNDERSCORES;
+    private final static boolean AUTO_UPLOAD_DEFAULT               = true;
+    private final static boolean UNESCAPE_PARAMETERS_DEFAULT       = true;
     private final static boolean USE_SERVLET_ENGINE_PARSER_DEFAULT = false;
     private final static boolean USE_BODY_ENCODING_FOR_URI_DEFAULT = true;
-    private final static String URI_ENCODING_DEFAULT = "UTF-8";
-    private final static boolean TRIMMING_DEFAULT = true;
-    private final static String HTML_FIELD_SUFFIX_DEFAULT = ".~html";
+    private final static String  URI_ENCODING_DEFAULT              = "UTF-8";
+    private final static boolean TRIMMING_DEFAULT                  = true;
+    private final static String  HTML_FIELD_SUFFIX_DEFAULT         = ".~html";
 
     private PropertyEditorRegistrarsSupport propertyEditorRegistrars = new PropertyEditorRegistrarsSupport();
-    private Boolean converterQuiet;
-    private String caseFolding;
-    private Boolean autoUpload;
-    private Boolean unescapeParameters;
-    private Boolean useServletEngineParser;
-    private Boolean useBodyEncodingForURI;
-    private String uriEncoding;
-    private Boolean trimming;
+    private Boolean                 converterQuiet;
+    private String                  caseFolding;
+    private Boolean                 autoUpload;
+    private Boolean                 unescapeParameters;
+    private Boolean                 useServletEngineParser;
+    private Boolean                 useBodyEncodingForURI;
+    private String                  uriEncoding;
+    private Boolean                 trimming;
     private ParameterParserFilter[] filters;
-    private String htmlFieldSuffix;
-    private UploadService uploadService;
+    private String                  htmlFieldSuffix;
+    private UploadService           uploadService;
 
     public void setPropertyEditorRegistrars(PropertyEditorRegistrar[] registrars) {
         propertyEditorRegistrars.setPropertyEditorRegistrars(registrars);
@@ -171,16 +170,12 @@ public class ParserRequestContextFactoryImpl extends AbstractRequestContextFacto
         return requestContext;
     }
 
-    /**
-     * 本类提供了解析参数和cookie的功能。
-     */
+    /** 本类提供了解析参数和cookie的功能。 */
     public String[] getFeatures() {
         return new String[] { "parseRequest" };
     }
 
-    /**
-     * 本类不依赖其它features。
-     */
+    /** 本类不依赖其它features。 */
     public FeatureOrder[] featureOrders() {
         return null;
     }

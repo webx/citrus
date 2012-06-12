@@ -20,14 +20,11 @@ package com.alibaba.citrus.dev.handler.impl;
 import static com.alibaba.citrus.dev.handler.util.ReflectionUtil.*;
 import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
+import static com.alibaba.citrus.util.StringUtil.join;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.beans.factory.NoSuchBeanDefinitionException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.AbstractApplicationContext;
 
 import com.alibaba.citrus.dev.handler.component.AccessControlComponent;
 import com.alibaba.citrus.dev.handler.component.DomComponent;
@@ -40,11 +37,14 @@ import com.alibaba.citrus.webx.WebxComponents;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 import com.alibaba.citrus.webx.handler.support.AbstractVisitor;
 import com.alibaba.citrus.webx.handler.support.LayoutRequestProcessor;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.AbstractApplicationContext;
 
 public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
-    protected final TabsComponent tabsComponent = new TabsComponent(this, "tabs");
-    protected final DomComponent domComponent = new DomComponent(this, "dom");
-    protected final AccessControlComponent aclComponent = new AccessControlComponent(this, "acl");
+    protected final TabsComponent          tabsComponent = new TabsComponent(this, "tabs");
+    protected final DomComponent           domComponent  = new DomComponent(this, "dom");
+    protected final AccessControlComponent aclComponent  = new AccessControlComponent(this, "acl");
 
     @Autowired
     private WebxComponents components;
@@ -103,11 +103,11 @@ public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
     protected abstract String getDefaultFunction();
 
     protected abstract class AbstractExplorerVisitor extends AbstractVisitor {
-        protected final String currentFunctionName;
-        protected final String currentContextName;
-        protected final WebxComponent currentComponent;
+        protected final String                     currentFunctionName;
+        protected final String                     currentContextName;
+        protected final WebxComponent              currentComponent;
         protected final AbstractApplicationContext appcontext;
-        protected final String[] configLocations;
+        protected final String[]                   configLocations;
 
         public AbstractExplorerVisitor(RequestHandlerContext context) {
             super(context);
@@ -136,7 +136,7 @@ public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
             try {
                 locations = normalizeConfigLocations(String[].class.cast(getAccessibleMethod(
                         this.appcontext.getClass(), "getConfigLocations", EMPTY_CLASS_ARRAY).invoke(this.appcontext,
-                        EMPTY_OBJECT_ARRAY)));
+                                                                                                    EMPTY_OBJECT_ARRAY)));
             } catch (Exception e) {
                 locations = EMPTY_STRING_ARRAY;
             }
@@ -237,7 +237,7 @@ public abstract class AbstractExplorerHandler extends LayoutRequestProcessor {
 
                 if (index >= 0) {
                     location = location.substring(0, index + 1)
-                            + FileUtil.normalizeAbsolutePath(location.substring(index + 1));
+                               + FileUtil.normalizeAbsolutePath(location.substring(index + 1));
                 } else {
                     location = FileUtil.normalizeAbsolutePath(location);
                 }

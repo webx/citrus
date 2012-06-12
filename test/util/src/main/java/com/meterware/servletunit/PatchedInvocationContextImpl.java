@@ -33,7 +33,7 @@ public class PatchedInvocationContextImpl extends InvocationContextImpl {
     @SuppressWarnings("rawtypes")
     PatchedInvocationContextImpl(ServletUnitClient client, ServletRunner runner, FrameSelector frame,
                                  WebRequest request, Dictionary clientHeaders, byte[] messageBody) throws IOException,
-            MalformedURLException {
+                                                                                                          MalformedURLException {
         super(client, runner, frame, request, clientHeaders, messageBody);
     }
 
@@ -47,11 +47,11 @@ public class PatchedInvocationContextImpl extends InvocationContextImpl {
 
             if (newWebResponse) {
                 _webResponse.set(this, new PatchedServletUnitWebResponse( //
-                        getFieldValue(this, "_client", ServletUnitClient.class), //
-                        getFieldValue(this, "_frame", FrameSelector.class), //
-                        getFieldValue(this, "_effectiveURL", URL.class), //
-                        getResponse(), getFieldValue(this, "_client", ServletUnitClient.class)
-                                .getExceptionsThrownOnErrorStatus()));
+                                                                          getFieldValue(this, "_client", ServletUnitClient.class), //
+                                                                          getFieldValue(this, "_frame", FrameSelector.class), //
+                                                                          getFieldValue(this, "_effectiveURL", URL.class), //
+                                                                          getResponse(), getFieldValue(this, "_client", ServletUnitClient.class)
+                        .getExceptionsThrownOnErrorStatus()));
             }
 
             return (WebResponse) _webResponse.get(this);

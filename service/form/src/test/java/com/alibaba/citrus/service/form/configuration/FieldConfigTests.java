@@ -22,22 +22,21 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.form.Validator;
 import com.alibaba.citrus.service.form.impl.configuration.FieldConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.FormConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.GroupConfigImpl;
+import org.junit.Before;
+import org.junit.Test;
 
 public class FieldConfigTests extends AbstractConfigTests {
-    private FormConfigImpl form;
+    private FormConfigImpl  form;
     private GroupConfigImpl group;
     private FieldConfigImpl field;
-    private Validator v1;
-    private Validator v2;
-    private Validator v3;
-    private Validator v4;
+    private Validator       v1;
+    private Validator       v2;
+    private Validator       v3;
+    private Validator       v4;
 
     @Before
     public void init() throws Exception {

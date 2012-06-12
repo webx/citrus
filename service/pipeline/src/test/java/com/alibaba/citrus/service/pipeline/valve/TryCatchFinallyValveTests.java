@@ -20,10 +20,9 @@ package com.alibaba.citrus.service.pipeline.valve;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pipeline.PipelineException;
 import com.alibaba.citrus.service.pipeline.impl.valve.TryCatchFinallyValve;
+import org.junit.Test;
 
 public class TryCatchFinallyValveTests extends AbstractValveTests<TryCatchFinallyValve> {
     @Test
@@ -166,7 +165,7 @@ public class TryCatchFinallyValveTests extends AbstractValveTests<TryCatchFinall
         }
 
         assertLog("1-1" /* 1-2 tryCatchFinally */, //
-                "2-1", "2-2" /* exception */);
+                  "2-1", "2-2" /* exception */);
     }
 
     @Test
@@ -185,8 +184,8 @@ public class TryCatchFinallyValveTests extends AbstractValveTests<TryCatchFinall
         }
 
         assertLog("1-1" /* 1-2 tryCatchFinally */, //
-                /* try */"2-1", "2-2" /* exception */, //
-                /* finally */"2-1", "2-2", "2-3");
+                  /* try */"2-1", "2-2" /* exception */, //
+                  /* finally */"2-1", "2-2", "2-3");
     }
 
     @Test
@@ -199,9 +198,9 @@ public class TryCatchFinallyValveTests extends AbstractValveTests<TryCatchFinall
 
         assertInvoke(pipeline, false);
         assertLog("1-1" /* 1-2 tryCatchFinally */, //
-                /* try */"2-1", "2-2" /* exception */, //
-                /* catch */"2-1", "2-2", "2-3", //
-                "1-3");
+                  /* try */"2-1", "2-2" /* exception */, //
+                  /* catch */"2-1", "2-2", "2-3", //
+                  "1-3");
     }
 
     @Test
@@ -220,8 +219,8 @@ public class TryCatchFinallyValveTests extends AbstractValveTests<TryCatchFinall
         }
 
         assertLog("1-1" /* 1-2 tryCatchFinally */, //
-                /* try */"2-1", "2-2" /* exception */, //
-                /* catch */"2-1", "2-2" //
+                  /* try */"2-1", "2-2" /* exception */, //
+                  /* catch */"2-1", "2-2" //
         );
     }
 
@@ -236,9 +235,9 @@ public class TryCatchFinallyValveTests extends AbstractValveTests<TryCatchFinall
 
         assertInvoke(pipeline, false);
         assertLog("1-1" /* 1-2 tryCatchFinally */, //
-                /* try */"2-1", "2-2" /* exception */, //
-                /* catch */"2-1", "2-2", "2-3", //
-                "1-3");
+                  /* try */"2-1", "2-2" /* exception */, //
+                  /* catch */"2-1", "2-2", "2-3", //
+                  "1-3");
     }
 
     @Test
@@ -252,10 +251,10 @@ public class TryCatchFinallyValveTests extends AbstractValveTests<TryCatchFinall
 
         assertInvoke(pipeline, false);
         assertLog("1-1" /* 1-2 tryCatchFinally */, //
-                /* try */"2-1", "2-2" /* exception */, //
-                /* catch */"2-1", "2-2", "2-3", //
-                /* finally */"2-1", "2-2", "2-3", //
-                "1-3");
+                  /* try */"2-1", "2-2" /* exception */, //
+                  /* catch */"2-1", "2-2", "2-3", //
+                  /* finally */"2-1", "2-2", "2-3", //
+                  "1-3");
     }
 
     @Test
@@ -276,34 +275,34 @@ public class TryCatchFinallyValveTests extends AbstractValveTests<TryCatchFinall
         }
 
         assertLog("1-1" /* 1-2 tryCatchFinally */, //
-                "2-1", "2-2" /* exception */);
+                  "2-1", "2-2" /* exception */);
 
         // try-catch
         pipeline = getPipelineImplFromFactory("tcf-try-catch");
 
         assertInvoke(pipeline, false);
         assertLog("1-1" /* 1-2 tryCatchFinally */, //
-                /* try */"2-1", "2-2" /* exception */, //
-                /* catch */"2-1", "2-2", "2-3", //
-                "1-3");
+                  /* try */"2-1", "2-2" /* exception */, //
+                  /* catch */"2-1", "2-2", "2-3", //
+                  "1-3");
 
         // try-catch-finally, using customized exceptionName, using label
         pipeline = getPipelineImplFromFactory("tcf-try-catch-finally");
 
         assertInvoke(pipeline, false);
         assertLog("1-1" /* 1-2 tryCatchFinally */, //
-                /* try */"2-1", "2-2" /* exception */, //
-                /* catch */"2-1", "2-2", "2-3", //
-                /* finally */"2-1" /* 2-2 break */, //
-                "1-3");
+                  /* try */"2-1", "2-2" /* exception */, //
+                  /* catch */"2-1", "2-2", "2-3", //
+                  /* finally */"2-1" /* 2-2 break */, //
+                  "1-3");
 
         // broken try
         pipeline = getPipelineImplFromFactory("tcf-broken-try");
 
         assertInvoke(pipeline, true);
         assertLog("1-1" /* 1-2 tryCatchFinally */, //
-                /* try */"2-1" /* 2-2 break to top */, //
-                /* finally */"2-1", "2-2" //
+                  /* try */"2-1" /* 2-2 break to top */, //
+                  /* finally */"2-1", "2-2" //
         );
 
         // pipeline reference
@@ -311,9 +310,9 @@ public class TryCatchFinallyValveTests extends AbstractValveTests<TryCatchFinall
 
         assertInvoke(pipeline, false);
         assertLog("1-1" /* 1-2 tryCatchFinally */, //
-                /* try */"2-1", "2-2"/* exception */, //
-                /* catch */"2-1", //
-                /* finally */"2-1", "2-2", "2-3", //
-                "1-3");
+                  /* try */"2-1", "2-2"/* exception */, //
+                  /* catch */"2-1", //
+                  /* finally */"2-1", "2-2", "2-3", //
+                  "1-3");
     }
 }

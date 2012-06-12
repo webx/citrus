@@ -43,113 +43,71 @@ import java.lang.reflect.Method;
 @SuppressWarnings("all")
 public class Type {
 
-    /**
-     * The sort of the <tt>void</tt> type. See {@link #getSort getSort}.
-     */
+    /** The sort of the <tt>void</tt> type. See {@link #getSort getSort}. */
     public static final int VOID = 0;
 
-    /**
-     * The sort of the <tt>boolean</tt> type. See {@link #getSort getSort}.
-     */
+    /** The sort of the <tt>boolean</tt> type. See {@link #getSort getSort}. */
     public static final int BOOLEAN = 1;
 
-    /**
-     * The sort of the <tt>char</tt> type. See {@link #getSort getSort}.
-     */
+    /** The sort of the <tt>char</tt> type. See {@link #getSort getSort}. */
     public static final int CHAR = 2;
 
-    /**
-     * The sort of the <tt>byte</tt> type. See {@link #getSort getSort}.
-     */
+    /** The sort of the <tt>byte</tt> type. See {@link #getSort getSort}. */
     public static final int BYTE = 3;
 
-    /**
-     * The sort of the <tt>short</tt> type. See {@link #getSort getSort}.
-     */
+    /** The sort of the <tt>short</tt> type. See {@link #getSort getSort}. */
     public static final int SHORT = 4;
 
-    /**
-     * The sort of the <tt>int</tt> type. See {@link #getSort getSort}.
-     */
+    /** The sort of the <tt>int</tt> type. See {@link #getSort getSort}. */
     public static final int INT = 5;
 
-    /**
-     * The sort of the <tt>float</tt> type. See {@link #getSort getSort}.
-     */
+    /** The sort of the <tt>float</tt> type. See {@link #getSort getSort}. */
     public static final int FLOAT = 6;
 
-    /**
-     * The sort of the <tt>long</tt> type. See {@link #getSort getSort}.
-     */
+    /** The sort of the <tt>long</tt> type. See {@link #getSort getSort}. */
     public static final int LONG = 7;
 
-    /**
-     * The sort of the <tt>double</tt> type. See {@link #getSort getSort}.
-     */
+    /** The sort of the <tt>double</tt> type. See {@link #getSort getSort}. */
     public static final int DOUBLE = 8;
 
-    /**
-     * The sort of array reference types. See {@link #getSort getSort}.
-     */
+    /** The sort of array reference types. See {@link #getSort getSort}. */
     public static final int ARRAY = 9;
 
-    /**
-     * The sort of object reference type. See {@link #getSort getSort}.
-     */
+    /** The sort of object reference type. See {@link #getSort getSort}. */
     public static final int OBJECT = 10;
 
-    /**
-     * The <tt>void</tt> type.
-     */
+    /** The <tt>void</tt> type. */
     public static final Type VOID_TYPE = new Type(VOID);
 
-    /**
-     * The <tt>boolean</tt> type.
-     */
+    /** The <tt>boolean</tt> type. */
     public static final Type BOOLEAN_TYPE = new Type(BOOLEAN);
 
-    /**
-     * The <tt>char</tt> type.
-     */
+    /** The <tt>char</tt> type. */
     public static final Type CHAR_TYPE = new Type(CHAR);
 
-    /**
-     * The <tt>byte</tt> type.
-     */
+    /** The <tt>byte</tt> type. */
     public static final Type BYTE_TYPE = new Type(BYTE);
 
-    /**
-     * The <tt>short</tt> type.
-     */
+    /** The <tt>short</tt> type. */
     public static final Type SHORT_TYPE = new Type(SHORT);
 
-    /**
-     * The <tt>int</tt> type.
-     */
+    /** The <tt>int</tt> type. */
     public static final Type INT_TYPE = new Type(INT);
 
-    /**
-     * The <tt>float</tt> type.
-     */
+    /** The <tt>float</tt> type. */
     public static final Type FLOAT_TYPE = new Type(FLOAT);
 
-    /**
-     * The <tt>long</tt> type.
-     */
+    /** The <tt>long</tt> type. */
     public static final Type LONG_TYPE = new Type(LONG);
 
-    /**
-     * The <tt>double</tt> type.
-     */
+    /** The <tt>double</tt> type. */
     public static final Type DOUBLE_TYPE = new Type(DOUBLE);
 
     // ------------------------------------------------------------------------
     // Fields
     // ------------------------------------------------------------------------
 
-    /**
-     * The sort of this Java type.
-     */
+    /** The sort of this Java type. */
     private final int sort;
 
     /**
@@ -187,9 +145,9 @@ public class Type {
      * Constructs a reference type.
      *
      * @param sort the sort of the reference type to be constructed.
-     * @param buf a buffer containing the descriptor of the previous type.
-     * @param off the offset of this descriptor in the previous buffer.
-     * @param len the length of this descriptor.
+     * @param buf  a buffer containing the descriptor of the previous type.
+     * @param off  the offset of this descriptor in the previous buffer.
+     * @param len  the length of this descriptor.
      */
     private Type(final int sort, final char[] buf, final int off, final int len) {
         this.sort = sort;
@@ -243,7 +201,7 @@ public class Type {
                 return DOUBLE_TYPE;
             } else if (c == Float.TYPE) {
                 return FLOAT_TYPE;
-            } else /* if (c == Long.TYPE) */{
+            } else /* if (c == Long.TYPE) */ {
                 return LONG_TYPE;
             }
         } else {
@@ -368,7 +326,7 @@ public class Type {
                     }
                 }
                 return new Type(ARRAY, buf, off, len + 1);
-                // case 'L':
+            // case 'L':
             default:
                 len = 1;
                 while (buf[off + len] != ';') {
@@ -449,7 +407,7 @@ public class Type {
                     b.append("[]");
                 }
                 return b.toString();
-                // case OBJECT:
+            // case OBJECT:
             default:
                 return new String(buf, off, len).replace('/', '.');
         }
@@ -486,7 +444,7 @@ public class Type {
      * Returns the descriptor corresponding to the given argument and return
      * types.
      *
-     * @param returnType the return type of the method.
+     * @param returnType    the return type of the method.
      * @param argumentTypes the argument types of the method.
      * @return the descriptor corresponding to the given argument and return
      *         types.
@@ -540,7 +498,7 @@ public class Type {
             case ARRAY:
                 buf.append(this.buf, off, len);
                 return;
-                // case OBJECT:
+            // case OBJECT:
             default:
                 buf.append('L');
                 buf.append(this.buf, off, len);
@@ -615,7 +573,7 @@ public class Type {
      * Appends the descriptor of the given class to the given string buffer.
      *
      * @param buf the string buffer to which the descriptor must be appended.
-     * @param c the class whose descriptor must be computed.
+     * @param c   the class whose descriptor must be computed.
      */
     private static void getDescriptor(final StringBuilder buf, final Class c) {
         Class d = c;
@@ -638,7 +596,7 @@ public class Type {
                     car = 'D';
                 } else if (d == Float.TYPE) {
                     car = 'F';
-                } else /* if (d == Long.TYPE) */{
+                } else /* if (d == Long.TYPE) */ {
                     car = 'J';
                 }
                 buf.append(car);
@@ -678,8 +636,8 @@ public class Type {
      * Returns a JVM instruction opcode adapted to this Java type.
      *
      * @param opcode a JVM instruction opcode. This opcode must be one of ILOAD,
-     *            ISTORE, IALOAD, IASTORE, IADD, ISUB, IMUL, IDIV, IREM, INEG,
-     *            ISHL, ISHR, IUSHR, IAND, IOR, IXOR and IRETURN.
+     *               ISTORE, IALOAD, IASTORE, IADD, ISUB, IMUL, IDIV, IREM, INEG,
+     *               ISHL, ISHR, IUSHR, IAND, IOR, IXOR and IRETURN.
      * @return an opcode that is similar to the given opcode, but adapted to
      *         this Java type. For example, if this type is <tt>float</tt> and
      *         <tt>opcode</tt> is IRETURN, this method returns FRETURN.
@@ -702,8 +660,8 @@ public class Type {
                     return opcode + 1;
                 case DOUBLE:
                     return opcode + 3;
-                    // case ARRAY:
-                    // case OBJECT:
+                // case ARRAY:
+                // case OBJECT:
                 default:
                     return opcode + 4;
             }
@@ -723,8 +681,8 @@ public class Type {
                     return opcode + 1;
                 case DOUBLE:
                     return opcode + 3;
-                    // case ARRAY:
-                    // case OBJECT:
+                // case ARRAY:
+                // case OBJECT:
                 default:
                     return opcode + 4;
             }

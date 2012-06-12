@@ -40,8 +40,8 @@ public class ByteArrayOutputStream extends OutputStream {
 
     // internal buffer
     private byte[] buffer;
-    private int index;
-    private int capacity;
+    private int    index;
+    private int    capacity;
 
     // is the stream closed?
     private boolean closed;

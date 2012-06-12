@@ -21,10 +21,9 @@ import static com.alibaba.citrus.turbine.util.TurbineUtil.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.service.moduleloader.Module;
 import com.alibaba.citrus.turbine.TurbineRunData;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class AbstractModule implements Module {
     @Autowired

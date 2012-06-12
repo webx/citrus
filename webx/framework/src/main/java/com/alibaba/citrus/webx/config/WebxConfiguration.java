@@ -31,14 +31,10 @@ import com.alibaba.citrus.webx.WebxRootController;
  * @author Michael Zhou
  */
 public interface WebxConfiguration extends Configuration {
-    /**
-     * 内部链接URL的前缀。内部链接用来显示错误信息、开发者信息。
-     */
+    /** 内部链接URL的前缀。内部链接用来显示错误信息、开发者信息。 */
     String getInternalPathPrefix();
 
-    /**
-     * Pipeline服务。
-     */
+    /** Pipeline服务。 */
     Pipeline getPipeline();
 
     /**
@@ -49,19 +45,13 @@ public interface WebxConfiguration extends Configuration {
      */
     Pipeline getExceptionPipeline();
 
-    /**
-     * Request contexts服务。
-     */
+    /** Request contexts服务。 */
     RequestContextChainingService getRequestContexts();
 
-    /**
-     * 取得一组关于components的配置。
-     */
+    /** 取得一组关于components的配置。 */
     ComponentsConfig getComponentsConfig();
 
-    /**
-     * 代表一组关于components的配置。
-     */
+    /** 代表一组关于components的配置。 */
     interface ComponentsConfig {
         Boolean isAutoDiscoverComponents();
 

@@ -31,30 +31,22 @@ import com.alibaba.citrus.service.mail.util.MailUtil;
  * @author Michael Zhou
  */
 public class TextTemplateContent extends TemplateContent {
-    /**
-     * 创建一个<code>TextTemplateContent</code>。
-     */
+    /** 创建一个<code>TextTemplateContent</code>。 */
     public TextTemplateContent() {
     }
 
-    /**
-     * 创建一个<code>TextTemplateContent</code>。
-     */
+    /** 创建一个<code>TextTemplateContent</code>。 */
     public TextTemplateContent(String templateName) {
         setTemplate(templateName);
     }
 
-    /**
-     * 创建一个<code>TextTemplateContent</code>。
-     */
+    /** 创建一个<code>TextTemplateContent</code>。 */
     public TextTemplateContent(String templateName, String contentType) {
         setTemplate(templateName);
         setContentType(contentType);
     }
 
-    /**
-     * 渲染邮件内容。
-     */
+    /** 渲染邮件内容。 */
     public void render(Part mailPart) throws MessagingException {
         String text = renderTemplate();
         String contentType = getContentType();

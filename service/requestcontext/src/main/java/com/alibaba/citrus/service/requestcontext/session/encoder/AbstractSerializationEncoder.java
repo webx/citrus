@@ -31,14 +31,13 @@ import java.util.zip.DeflaterOutputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
-import org.apache.commons.codec.binary.Base64;
-
 import com.alibaba.citrus.service.requestcontext.session.SessionStore.StoreContext;
 import com.alibaba.citrus.service.requestcontext.session.encrypter.Encrypter;
 import com.alibaba.citrus.service.requestcontext.session.serializer.Serializer;
 import com.alibaba.citrus.service.requestcontext.session.serializer.impl.HessianSerializer;
 import com.alibaba.citrus.springext.support.BeanSupport;
 import com.alibaba.citrus.util.io.ByteArrayOutputStream;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  * 通过<code>Serializer</code>提供的序列化机制来编码对象，以及解码字符串。
@@ -60,7 +59,7 @@ import com.alibaba.citrus.util.io.ByteArrayOutputStream;
  */
 public abstract class AbstractSerializationEncoder extends BeanSupport implements SessionEncoder {
     protected Serializer serializer;
-    protected Encrypter encrypter;
+    protected Encrypter  encrypter;
 
     @Override
     protected void init() throws Exception {
@@ -69,9 +68,7 @@ public abstract class AbstractSerializationEncoder extends BeanSupport implement
         }
     }
 
-    /**
-     * 编码。
-     */
+    /** 编码。 */
     public String encode(Map<String, Object> attrs, StoreContext storeContext) throws SessionEncoderException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
@@ -108,9 +105,7 @@ public abstract class AbstractSerializationEncoder extends BeanSupport implement
         }
     }
 
-    /**
-     * 加密。
-     */
+    /** 加密。 */
     private byte[] encrypt(byte[] plaintext) throws SessionEncoderException {
         if (encrypter != null) {
             return encrypter.encrypt(plaintext);
@@ -119,9 +114,7 @@ public abstract class AbstractSerializationEncoder extends BeanSupport implement
         return plaintext;
     }
 
-    /**
-     * 解码。
-     */
+    /** 解码。 */
     public Map<String, Object> decode(String encodedValue, StoreContext storeContext) throws SessionEncoderException {
         // 1. base64解码
         byte[] cryptotext = null;
@@ -166,9 +159,7 @@ public abstract class AbstractSerializationEncoder extends BeanSupport implement
         }
     }
 
-    /**
-     * 解密。
-     */
+    /** 解密。 */
     private byte[] decrypt(byte[] cryptotext) throws SessionEncoderException {
         if (encrypter != null) {
             return encrypter.decrypt(cryptotext);
@@ -180,6 +171,6 @@ public abstract class AbstractSerializationEncoder extends BeanSupport implement
     @Override
     public String toString() {
         return getClass().getSimpleName() + "[" + serializer + ", " + (encrypter == null ? "no encrypter" : encrypter)
-                + "]";
+               + "]";
     }
 }

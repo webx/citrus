@@ -21,21 +21,16 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static org.easymock.EasyMock.*;
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.*;
 
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.mail.MessagingException;
 import javax.mail.Part;
 import javax.mail.internet.InternetAddress;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.beans.FatalBeanException;
-import org.springframework.beans.factory.BeanFactory;
 
 import com.alibaba.citrus.service.mail.builder.MailAddressType;
 import com.alibaba.citrus.service.mail.builder.MailBuilder;
@@ -50,6 +45,10 @@ import com.alibaba.citrus.service.mail.builder.content.TextTemplateContent;
 import com.alibaba.citrus.service.mail.impl.MailServiceImpl;
 import com.alibaba.citrus.service.mail.session.MailStore;
 import com.alibaba.citrus.service.mail.session.MailTransport;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.FatalBeanException;
+import org.springframework.beans.factory.BeanFactory;
 
 /**
  * 测试mail service及其配置。
@@ -447,9 +446,9 @@ public class MailServiceTests extends AbstractMailBuilderTests {
 
         // no content and javamail default charset
         assertThat(save(builder.getMessageAsString(rawSession)), containsAllRegex( //
-                "Content-Type: text/plain; charset=us-ascii" + REGEX_EOL, //
-                "Content-Transfer-Encoding: 7bit" + REGEX_EOL, //
-                REGEX_EOL + REGEX_EOL + "$"));
+                                                                                   "Content-Type: text/plain; charset=us-ascii" + REGEX_EOL, //
+                                                                                   "Content-Transfer-Encoding: 7bit" + REGEX_EOL, //
+                                                                                   REGEX_EOL + REGEX_EOL + "$"));
     }
 
     @Test
@@ -495,9 +494,9 @@ public class MailServiceTests extends AbstractMailBuilderTests {
         assertThat(eml, containsRegex(re("From: =?euc-cn?B?ztK1xLXY1rc=?= <from@alibaba.com>") + REGEX_EOL));
         assertThat(eml, containsRegex(re("Reply-To: =?euc-cn?B?ztK1xLXY1rc=?= <reply-to@alibaba.com>") + REGEX_EOL));
         assertThat(eml, containsRegex(re("To: =?euc-cn?B?ztK1xLXY1rc=?= <to@alibaba.com>,") + "\\s+"
-                + re("=?euc-cn?B?ztK1xLXY1rc=?= <to2@alibaba.com>") + REGEX_EOL));
+                                      + re("=?euc-cn?B?ztK1xLXY1rc=?= <to2@alibaba.com>") + REGEX_EOL));
         assertThat(eml, containsRegex(re("Cc: =?euc-cn?B?ztK1xLXY1rc=?= <cc@alibaba.com>,") + "\\s+"
-                + re("=?euc-cn?B?ztK1xLXY1rc=?= <cc2@alibaba.com>") + REGEX_EOL));
+                                      + re("=?euc-cn?B?ztK1xLXY1rc=?= <cc2@alibaba.com>") + REGEX_EOL));
         assertThat(eml, containsRegex(re("Bcc: =?euc-cn?B?ztK1xLXY1rc=?= <bcc@alibaba.com>") + REGEX_EOL));
         assertThat(eml, containsRegex(re("Subject: =?euc-cn?Q?=CE=D2=B5=C4=B1=EA=CC=E2_My_Subject?=") + REGEX_EOL));
         assertThat(eml, containsRegex("Content-Type: text/plain; charset=us-ascii" + REGEX_EOL));
@@ -571,7 +570,7 @@ public class MailServiceTests extends AbstractMailBuilderTests {
         assertThat(eml, containsRegex("Content-Type: text/plain")); // 文本附件的编码是取决于系统的，不一定是GBK
         assertThat(eml, containsRegex("Content-Transfer-Encoding: quoted-printable" + REGEX_EOL));
         assertThat(eml, containsRegex(re("Content-Disposition: attachment; filename=\"=?GBK?B?ztK1xM7EvP4udHh0?=\"")
-                + REGEX_EOL));
+                                      + REGEX_EOL));
         assertThat(eml, containsRegex(REGEX_EOL + REGEX_EOL + "hello=B1=A6=B1=A6$"));
     }
 
@@ -748,7 +747,7 @@ public class MailServiceTests extends AbstractMailBuilderTests {
         // part 2
         assertThat(eml, containsRegex("Content-Type: text/plain; charset=GBK"));
         assertThat(eml, containsRegex("Content-Transfer-Encoding: quoted-printable" + REGEX_EOL //
-                + re("Content-Disposition: attachment; filename=\"=?GBK?B?ztK1xM7EvP4udHh0?=\"") + REGEX_EOL));
+                                      + re("Content-Disposition: attachment; filename=\"=?GBK?B?ztK1xM7EvP4udHh0?=\"") + REGEX_EOL));
         assertThat(eml, containsRegex(REGEX_EOL + REGEX_EOL + "hello=B1=A6=B1=A6" + REGEX_EOL));
 
         // part 3
@@ -829,7 +828,7 @@ public class MailServiceTests extends AbstractMailBuilderTests {
         // part 2: text attachment
         assertThat(eml, containsRegex("Content-Type: text/plain; charset=GBK"));
         assertThat(eml, containsRegex("Content-Transfer-Encoding: quoted-printable" + REGEX_EOL //
-                + re("Content-Disposition: attachment; filename=\"=?GBK?B?ztK1xM7EvP4udHh0?=\"") + REGEX_EOL));
+                                      + re("Content-Disposition: attachment; filename=\"=?GBK?B?ztK1xM7EvP4udHh0?=\"") + REGEX_EOL));
         assertThat(eml, containsRegex(REGEX_EOL + REGEX_EOL + "hello=B1=A6=B1=A6" + REGEX_EOL));
 
         // part 3: gif attachment

@@ -26,16 +26,15 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.util.internal.webpagelite.AbstractRequestProcessorTests;
 import com.alibaba.citrus.util.internal.webpagelite.RequestContext;
 import com.alibaba.citrus.util.internal.webpagelite.RequestProcessor;
+import org.junit.Before;
+import org.junit.Test;
 
 public class RequestProcessorTests extends AbstractRequestProcessorTests {
     private Map<String, String> textResources;
-    private MyProcessor page;
+    private MyProcessor         page;
 
     @Before
     public void init() {

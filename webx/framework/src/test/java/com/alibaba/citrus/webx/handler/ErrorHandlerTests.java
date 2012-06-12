@@ -20,10 +20,6 @@ package com.alibaba.citrus.webx.handler;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.requestcontext.rundata.RunData;
 import com.alibaba.citrus.webx.AbstractWebxTests;
@@ -31,6 +27,9 @@ import com.alibaba.citrus.webx.ResourceNotFoundException;
 import com.alibaba.citrus.webx.pipeline.TestExceptionValve;
 import com.alibaba.citrus.webx.pipeline.TestValve;
 import com.alibaba.citrus.webx.pipeline.ValveRunner;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ErrorHandlerTests extends AbstractWebxTests {
     @Before
@@ -61,7 +60,7 @@ public class ErrorHandlerTests extends AbstractWebxTests {
         assertEquals(404, clientResponseCode);
         assertEquals("text/html", clientResponse.getContentType());
         assertThat(clientResponseContent,
-                containsAll("NOT_FOUND", "/app1/test.htm", ResourceNotFoundException.class.getName(), "not found!"));
+                   containsAll("NOT_FOUND", "/app1/test.htm", ResourceNotFoundException.class.getName(), "not found!"));
     }
 
     @Test

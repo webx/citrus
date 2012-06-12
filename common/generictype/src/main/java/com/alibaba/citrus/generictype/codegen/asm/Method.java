@@ -43,19 +43,13 @@ import java.util.Map;
 @SuppressWarnings("all")
 public class Method {
 
-    /**
-     * The method name.
-     */
+    /** The method name. */
     private final String name;
 
-    /**
-     * The method descriptor.
-     */
+    /** The method descriptor. */
     private final String desc;
 
-    /**
-     * Maps primitive Java type names to their descriptors.
-     */
+    /** Maps primitive Java type names to their descriptors. */
     private static final Map DESCRIPTORS;
 
     static {
@@ -85,8 +79,8 @@ public class Method {
     /**
      * Creates a new {@link Method}.
      *
-     * @param name the method's name.
-     * @param returnType the method's return type.
+     * @param name          the method's name.
+     * @param returnType    the method's return type.
      * @param argumentTypes the method's argument types.
      */
     public Method(final String name, final Type returnType, final Type[] argumentTypes) {
@@ -98,15 +92,15 @@ public class Method {
      * declaration.
      *
      * @param method a Java method declaration, without argument names, of the
-     *            form "returnType name (argumentType1, ...
-     *            argumentTypeN)", where the types are in plain Java (e.g. "
-     *            int", "float", "java.util.List", ...). Classes of the
-     *            java.lang package can be specified by their unqualified name;
-     *            all other classes names must be fully qualified.
+     *               form "returnType name (argumentType1, ...
+     *               argumentTypeN)", where the types are in plain Java (e.g. "
+     *               int", "float", "java.util.List", ...). Classes of the
+     *               java.lang package can be specified by their unqualified name;
+     *               all other classes names must be fully qualified.
      * @return a {@link Method} corresponding to the given Java method
      *         declaration.
      * @throws IllegalArgumentException if <code>method</code> could not get
-     *             parsed.
+     *                                  parsed.
      */
     public static Method getMethod(final String method) throws IllegalArgumentException {
         return getMethod(method, false);
@@ -116,21 +110,21 @@ public class Method {
      * Returns a {@link Method} corresponding to the given Java method
      * declaration.
      *
-     * @param method a Java method declaration, without argument names, of the
-     *            form "returnType name (argumentType1, ...
-     *            argumentTypeN)", where the types are in plain Java (e.g. "
-     *            int", "float", "java.util.List", ...). Classes of the
-     *            java.lang package may be specified by their unqualified name,
-     *            depending on the defaultPackage argument; all other classes
-     *            names must be fully qualified.
+     * @param method         a Java method declaration, without argument names, of the
+     *                       form "returnType name (argumentType1, ...
+     *                       argumentTypeN)", where the types are in plain Java (e.g. "
+     *                       int", "float", "java.util.List", ...). Classes of the
+     *                       java.lang package may be specified by their unqualified name,
+     *                       depending on the defaultPackage argument; all other classes
+     *                       names must be fully qualified.
      * @param defaultPackage true if unqualified class names belong to the
-     *            default package, or false if they correspond to java.lang
-     *            classes. For instance "Object" means "Object" if this option
-     *            is true, or "java.lang.Object" otherwise.
+     *                       default package, or false if they correspond to java.lang
+     *                       classes. For instance "Object" means "Object" if this option
+     *                       is true, or "java.lang.Object" otherwise.
      * @return a {@link Method} corresponding to the given Java method
      *         declaration.
      * @throws IllegalArgumentException if <code>method</code> could not get
-     *             parsed.
+     *                                  parsed.
      */
     public static Method getMethod(final String method, final boolean defaultPackage) throws IllegalArgumentException {
         int space = method.indexOf(' ');

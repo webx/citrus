@@ -26,22 +26,20 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 import java.util.Locale;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 import com.alibaba.citrus.service.uribroker.interceptor.URIBrokerInterceptor;
 import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 import com.alibaba.citrus.util.i18n.LocaleUtil;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public abstract class AbstractURIBrokerFeaturesTests<B extends URIBroker> {
     protected final Class<?> brokerClass = resolveParameter(getClass(), AbstractURIBrokerFeaturesTests.class, 0)
             .getRawType();
-    protected HttpServletRequest request;
-    protected B broker;
+    protected HttpServletRequest   request;
+    protected B                    broker;
     protected URIBrokerInterceptor i1;
     protected URIBrokerInterceptor i2;
     protected URIBrokerInterceptor i3;
@@ -222,9 +220,7 @@ public abstract class AbstractURIBrokerFeaturesTests<B extends URIBroker> {
         assertTrue(broker.getInterceptors().isEmpty());
     }
 
-    /**
-     * init broker，broker的内容为空。
-     */
+    /** init broker，broker的内容为空。 */
     @Test
     public final void init_broker_nonOverride() {
         B parent = newInstance();
@@ -238,9 +234,7 @@ public abstract class AbstractURIBrokerFeaturesTests<B extends URIBroker> {
         assertParentBroker(broker);
     }
 
-    /**
-     * init broker，broker有内容。
-     */
+    /** init broker，broker有内容。 */
     @Test
     public final void init_broker_override() {
         B parent = newInstance();
@@ -313,7 +307,7 @@ public abstract class AbstractURIBrokerFeaturesTests<B extends URIBroker> {
             fail();
         } catch (IllegalArgumentException e) {
             assertThat(e,
-                    exception(className + ".newInstance() returns wrong type: " + GenericURIBroker.class.getName()));
+                       exception(className + ".newInstance() returns wrong type: " + GenericURIBroker.class.getName()));
         }
 
         // right type
@@ -442,7 +436,7 @@ public abstract class AbstractURIBrokerFeaturesTests<B extends URIBroker> {
     protected final HttpServletRequest getMockRequest(String scheme, String serverName, int serverPort,
                                                       String contextPath, String servletPath, String pathInfo) {
         HttpServletRequest request = getMockRequest_noReplay(scheme, serverName, serverPort, contextPath, servletPath,
-                pathInfo);
+                                                             pathInfo);
         replay(request);
         return request;
     }

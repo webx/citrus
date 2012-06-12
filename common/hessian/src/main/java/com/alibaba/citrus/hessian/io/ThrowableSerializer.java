@@ -50,22 +50,18 @@ package com.alibaba.citrus.hessian.io;
 
 import java.io.IOException;
 
-/**
- * Serializing an object for known object types.
- */
+/** Serializing an object for known object types. */
 public class ThrowableSerializer extends JavaSerializer {
-  public ThrowableSerializer(Class cl, ClassLoader loader)
-  {
-    super(cl);
-  }
+    public ThrowableSerializer(Class cl, ClassLoader loader) {
+        super(cl);
+    }
 
-  public void writeObject(Object obj, AbstractHessianOutput out)
-    throws IOException
-  {
-    Throwable e = (Throwable) obj;
+    public void writeObject(Object obj, AbstractHessianOutput out)
+            throws IOException {
+        Throwable e = (Throwable) obj;
 
-    e.getStackTrace();
+        e.getStackTrace();
 
-    super.writeObject(obj, out);
-  }
+        super.writeObject(obj, out);
+    }
 }

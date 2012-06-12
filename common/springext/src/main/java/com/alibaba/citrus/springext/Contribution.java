@@ -18,33 +18,21 @@
 package com.alibaba.citrus.springext;
 
 public interface Contribution {
-    /**
-     * 取得configuration point。
-     */
+    /** 取得configuration point。 */
     ConfigurationPoint getConfigurationPoint();
 
-    /**
-     * 取得contribution的名称。
-     */
+    /** 取得contribution的名称。 */
     String getName();
 
-    /**
-     * 取得contribution的类型。
-     */
+    /** 取得contribution的类型。 */
     ContributionType getType();
 
-    /**
-     * 取得contribution的实现类名称。
-     */
+    /** 取得contribution的实现类名称。 */
     String getImplementationClassName();
 
-    /**
-     * 取得schemas。
-     */
+    /** 取得schemas。 */
     VersionableSchemas getSchemas();
 
-    /**
-     * 取得描述。
-     */
+    /** 取得描述。 */
     String getDescription();
 }

@@ -36,24 +36,16 @@ public interface UploadConfiguration {
     /** 默认值：将文件放在内存中的阈值，小于此值的文件被保存在内存中。 */
     int SIZE_THRESHOLD_DEFAULT = 10240;
 
-    /**
-     * 取得暂存文件的目录。
-     */
+    /** 取得暂存文件的目录。 */
     File getRepository();
 
-    /**
-     * 取得HTTP请求的最大尺寸，超过此尺寸的请求将被抛弃。单位：字节，值<code>-1</code>表示没有限制。
-     */
+    /** 取得HTTP请求的最大尺寸，超过此尺寸的请求将被抛弃。单位：字节，值<code>-1</code>表示没有限制。 */
     HumanReadableSize getSizeMax();
 
-    /**
-     * 取得单个文件允许的最大尺寸，超过此尺寸的文件将被抛弃。单位：字节，值<code>-1</code>表示没有限制。
-     */
+    /** 取得单个文件允许的最大尺寸，超过此尺寸的文件将被抛弃。单位：字节，值<code>-1</code>表示没有限制。 */
     HumanReadableSize getFileSizeMax();
 
-    /**
-     * 取得将文件放在内存中的阈值，小于此值的文件被保存在内存中。单位：字节。
-     */
+    /** 取得将文件放在内存中的阈值，小于此值的文件被保存在内存中。单位：字节。 */
     HumanReadableSize getSizeThreshold();
 
     /**

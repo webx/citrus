@@ -17,10 +17,9 @@
 
 package com.alibaba.citrus.service.freemarker;
 
-import org.springframework.core.io.ResourceLoader;
-
 import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
+import org.springframework.core.io.ResourceLoader;
 
 /**
  * 代表freemarker的配置。

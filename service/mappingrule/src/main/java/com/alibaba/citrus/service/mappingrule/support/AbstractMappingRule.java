@@ -22,13 +22,12 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.alibaba.citrus.service.configuration.ProductionModeAware;
 import com.alibaba.citrus.service.mappingrule.MappingRule;
 import com.alibaba.citrus.service.mappingrule.MappingRuleException;
 import com.alibaba.citrus.springext.support.BeanSupport;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class AbstractMappingRule extends BeanSupport implements MappingRule, ProductionModeAware {
     /** 被转换的名称的分隔符。 */
@@ -120,21 +119,15 @@ public abstract class AbstractMappingRule extends BeanSupport implements Mapping
         return mappedName;
     }
 
-    /**
-     * 将指定名称映射成指定类型的名称。如果映射失败，则返回<code>null</code>。
-     */
+    /** 将指定名称映射成指定类型的名称。如果映射失败，则返回<code>null</code>。 */
     protected abstract String doMapping(String name);
 
-    /**
-     * 抛出异常，表示要转换的名称非法或转换失败。
-     */
+    /** 抛出异常，表示要转换的名称非法或转换失败。 */
     protected static String throwInvalidNameException(String name) {
         return throwInvalidNameException(name, null);
     }
 
-    /**
-     * 抛出异常，表示要转换的名称非法或转换失败。
-     */
+    /** 抛出异常，表示要转换的名称非法或转换失败。 */
     protected static String throwInvalidNameException(String name, Exception e) {
         throw new MappingRuleException("Failed to do mapping for name \"" + name + "\"", e);
     }

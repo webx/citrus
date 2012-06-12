@@ -28,11 +28,6 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.FileSystemResource;
-
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionType;
@@ -48,6 +43,10 @@ import com.alibaba.citrus.springext.support.SchemaUtil;
 import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import com.alibaba.citrus.test.TestEnvStatic;
 import com.alibaba.citrus.test.runner.TestNameAware;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.FileSystemResource;
 
 @RunWith(TestNameAware.class)
 public class ContributionTests {
@@ -72,14 +71,14 @@ public class ContributionTests {
         // cp1:my1, MyBeanDefinitionParser
         contrib = i.next();
         MyBeanDefinitionParser c1 = getContributionImplementation(cp, BEAN_DEFINITION_PARSER, "my1",
-                MyBeanDefinitionParser.class);
+                                                                  MyBeanDefinitionParser.class);
 
         assertNotNull(c1);
 
         // cp1:my1, MyBeanDefinitionDecorator
         contrib = i.next();
         MyBeanDefinitionDecorator c2 = getContributionImplementation(cp, BEAN_DEFINITION_DECORATOR, "my1",
-                MyBeanDefinitionDecorator.class);
+                                                                     MyBeanDefinitionDecorator.class);
 
         assertNotNull(c2);
         assertSame(cp, contrib.getConfigurationPoint());
@@ -87,7 +86,7 @@ public class ContributionTests {
         // cp1:my1, MyBeanDefinitionDecorator
         contrib = i.next();
         MyBeanDefinitionDecorator c3 = getContributionImplementation(cp, BEAN_DEFINITION_DECORATOR_FOR_ATTRIBUTE,
-                "my1", MyBeanDefinitionDecorator.class);
+                                                                     "my1", MyBeanDefinitionDecorator.class);
 
         assertNotNull(c3);
         assertSame(cp, contrib.getConfigurationPoint());
@@ -95,7 +94,7 @@ public class ContributionTests {
         // cp1:my2, MyBeanDefinitionParser2
         contrib = i.next();
         MyBeanDefinitionParser2 c4 = getContributionImplementation(cp, BEAN_DEFINITION_PARSER, "my2",
-                MyBeanDefinitionParser2.class);
+                                                                   MyBeanDefinitionParser2.class);
 
         assertSame(contrib, c4.getContribution());
         assertSame(cp, contrib.getConfigurationPoint());
@@ -103,7 +102,7 @@ public class ContributionTests {
         // cp1:my2, MyBeanDefinitionDecorator2
         contrib = i.next();
         MyBeanDefinitionDecorator2 c5 = getContributionImplementation(cp, BEAN_DEFINITION_DECORATOR, "my2",
-                MyBeanDefinitionDecorator2.class);
+                                                                      MyBeanDefinitionDecorator2.class);
 
         assertSame(contrib, c5.getContribution());
         assertSame(cp, contrib.getConfigurationPoint());
@@ -111,7 +110,7 @@ public class ContributionTests {
         // cp1:my2, MyBeanDefinitionDecorator2
         contrib = i.next();
         MyBeanDefinitionDecorator2 c6 = getContributionImplementation(cp, BEAN_DEFINITION_DECORATOR_FOR_ATTRIBUTE,
-                "my2", MyBeanDefinitionDecorator2.class);
+                                                                      "my2", MyBeanDefinitionDecorator2.class);
 
         assertSame(contrib, c6.getContribution());
         assertSame(cp, contrib.getConfigurationPoint());
@@ -150,21 +149,21 @@ public class ContributionTests {
         String ns_cp2 = "<xsd:schema.+xmlns:cp2ns=\"http://www\\.alibaba\\.com/schema/my/cp2\"";
 
         String any_cp1 = "<xsd:choice>" //
-                + " <xsd:element ref=\"cp1:test1\"/>" //
-                + " <xsd:element ref=\"cp1:test2\"/>" //
-                + " <xsd:element ref=\"cp1:object1\"/>" //
-                + " </xsd:choice>";
+                         + " <xsd:element ref=\"cp1:test1\"/>" //
+                         + " <xsd:element ref=\"cp1:test2\"/>" //
+                         + " <xsd:element ref=\"cp1:object1\"/>" //
+                         + " </xsd:choice>";
 
         String any_cp1_optional = "<xsd:choice minOccurs=\"0\" maxOccurs=\"unbounded\">" //
-                + " <xsd:element ref=\"cp1:test1\"/>" //
-                + " <xsd:element ref=\"cp1:test2\"/>" //
-                + " <xsd:element ref=\"cp1:object1\"/>" //
-                + " </xsd:choice>";
+                                  + " <xsd:element ref=\"cp1:test1\"/>" //
+                                  + " <xsd:element ref=\"cp1:test2\"/>" //
+                                  + " <xsd:element ref=\"cp1:object1\"/>" //
+                                  + " </xsd:choice>";
 
         String any_cp2_optional = "<xsd:choice minOccurs=\"0\" maxOccurs=\"unbounded\">" //
-                + " <xsd:element ref=\"cp2ns:test3\"/>" //
-                + " <xsd:element ref=\"cp2ns:test4\"/>" //
-                + " </xsd:choice>";
+                                  + " <xsd:element ref=\"cp2ns:test3\"/>" //
+                                  + " <xsd:element ref=\"cp2ns:test4\"/>" //
+                                  + " </xsd:choice>";
 
         switch (caseNo) {
             case 1:
@@ -214,7 +213,7 @@ public class ContributionTests {
     @Test
     public void parse_import_each_other() throws Exception {
         ApplicationContext ctx = new XmlApplicationContext(new FileSystemResource(new File(srcdir,
-                "test-import-each-other.xml")));
+                                                                                           "test-import-each-other.xml")));
 
         Test1 test1 = new Test1(new Test3(new Test1()), new Test4(new Test2()));
         Test3 test3 = new Test3(new Test1());

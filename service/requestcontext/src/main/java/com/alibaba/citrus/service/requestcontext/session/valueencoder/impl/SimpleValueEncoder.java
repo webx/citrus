@@ -21,16 +21,15 @@ import static com.alibaba.citrus.service.configuration.support.PropertyEditorReg
 import static com.alibaba.citrus.springext.util.DomUtil.*;
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 
-import org.springframework.beans.factory.config.BeanDefinitionHolder;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.requestcontext.session.valueencoder.AbstractSessionValueEncoder;
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
+import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 将一个简单类型编码成字符串，或反之。支持加密。
@@ -49,9 +48,7 @@ public class SimpleValueEncoder extends AbstractSessionValueEncoder {
         return true;
     }
 
-    /**
-     * 简单值不压缩，取得的字符串较短。
-     */
+    /** 简单值不压缩，取得的字符串较短。 */
     @Override
     protected boolean doCompress() {
         return false;
@@ -68,12 +65,12 @@ public class SimpleValueEncoder extends AbstractSessionValueEncoder {
     }
 
     public static class DefinitionParser extends AbstractSingleBeanDefinitionParser<SimpleValueEncoder> implements
-            ContributionAware {
+                                                                                                        ContributionAware {
         private ConfigurationPoint encrypterConfigurationPoint;
 
         public void setContribution(Contribution contrib) {
             this.encrypterConfigurationPoint = getSiblingConfigurationPoint("services/request-contexts/session/"
-                    + "encrypters", contrib);
+                                                                            + "encrypters", contrib);
         }
 
         @Override
@@ -84,7 +81,7 @@ public class SimpleValueEncoder extends AbstractSessionValueEncoder {
 
             for (Element subElement : subElements(element)) {
                 BeanDefinitionHolder encrypter = parseConfigurationPointBean(subElement, encrypterConfigurationPoint,
-                        parserContext, builder);
+                                                                             parserContext, builder);
 
                 if (encrypter != null) {
                     builder.addPropertyValue("encrypter", encrypter);

@@ -151,14 +151,14 @@ public class ClassLoaderUtilTests {
 
         try {
             assertEquals(MyService.class,
-                    ClassLoaderUtil.loadServiceClass("com.alibaba.citrus.util.MyService", getClass().getClassLoader()));
+                         ClassLoaderUtil.loadServiceClass("com.alibaba.citrus.util.MyService", getClass().getClassLoader()));
             fail("expected ServiceNotFoundException");
         } catch (ServiceNotFoundException e) {
         }
 
         try {
             assertEquals(MyService.class,
-                    ClassLoaderUtil.loadServiceClass("com.alibaba.citrus.util.MyService", (ClassLoader) null));
+                         ClassLoaderUtil.loadServiceClass("com.alibaba.citrus.util.MyService", (ClassLoader) null));
             fail("expected ServiceNotFoundException");
         } catch (ServiceNotFoundException e) {
         }
@@ -248,13 +248,13 @@ public class ClassLoaderUtilTests {
         }
 
         assertEquals(MyService.class,
-                ClassLoaderUtil.loadServiceClass("myservice", "myservice", getClass().getClassLoader()));
+                     ClassLoaderUtil.loadServiceClass("myservice", "myservice", getClass().getClassLoader()));
         assertEquals(MyService.class, ClassLoaderUtil.loadServiceClass("myservice", "myservice", (ClassLoader) null));
 
         assertEquals(MyService.class, ClassLoaderUtil.loadServiceClass("com.alibaba.citrus.util.MyService",
-                "com.alibaba.citrus.util.MyService", getClass().getClassLoader()));
+                                                                       "com.alibaba.citrus.util.MyService", getClass().getClassLoader()));
         assertEquals(MyService.class, ClassLoaderUtil.loadServiceClass("com.alibaba.citrus.util.MyService",
-                "com.alibaba.citrus.util.MyService", (ClassLoader) null));
+                                                                       "com.alibaba.citrus.util.MyService", (ClassLoader) null));
 
         assertEquals(MyService.class, ClassLoaderUtil.loadServiceClass("com.alibaba.citrus.util.MyService", "abc"));
         assertEquals(MyService.class, ClassLoaderUtil.loadServiceClass("abc", "myservice"));
@@ -407,14 +407,14 @@ public class ClassLoaderUtilTests {
 
         try {
             assertEquals(MyService.class, ClassLoaderUtil.newServiceInstance("com.alibaba.citrus.util.MyService",
-                    getClass().getClassLoader()));
+                                                                             getClass().getClassLoader()));
             fail("expected ServiceNotFoundException");
         } catch (ServiceNotFoundException e) {
         }
 
         try {
             assertEquals(MyService.class,
-                    ClassLoaderUtil.newServiceInstance("com.alibaba.citrus.util.MyService", (ClassLoader) null));
+                         ClassLoaderUtil.newServiceInstance("com.alibaba.citrus.util.MyService", (ClassLoader) null));
             fail("expected ServiceNotFoundException");
         } catch (ServiceNotFoundException e) {
         }
@@ -522,14 +522,14 @@ public class ClassLoaderUtilTests {
         }
 
         assertInstance(MyService.class,
-                ClassLoaderUtil.newServiceInstance("myservice", "myservice", getClass().getClassLoader()));
+                       ClassLoaderUtil.newServiceInstance("myservice", "myservice", getClass().getClassLoader()));
         assertInstance(MyService.class,
-                ClassLoaderUtil.newServiceInstance("myservice", "myservice", (ClassLoader) null));
+                       ClassLoaderUtil.newServiceInstance("myservice", "myservice", (ClassLoader) null));
 
         assertInstance(MyService.class, ClassLoaderUtil.newServiceInstance("com.alibaba.citrus.util.MyService",
-                "com.alibaba.citrus.util.MyService", getClass().getClassLoader()));
+                                                                           "com.alibaba.citrus.util.MyService", getClass().getClassLoader()));
         assertInstance(MyService.class, ClassLoaderUtil.newServiceInstance("com.alibaba.citrus.util.MyService",
-                "com.alibaba.citrus.util.MyService", (ClassLoader) null));
+                                                                           "com.alibaba.citrus.util.MyService", (ClassLoader) null));
 
         assertInstance(MyService.class, ClassLoaderUtil.newServiceInstance("com.alibaba.citrus.util.MyService", "abc"));
         assertInstance(MyService.class, ClassLoaderUtil.newServiceInstance("abc", "myservice"));

@@ -19,14 +19,13 @@ package com.alibaba.citrus.service.requestcontext.locale.impl;
 
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 
+import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
-
 public class SetLocaleRequestContextFactoryDefinitionParser extends
-        AbstractSingleBeanDefinitionParser<SetLocaleRequestContextFactoryImpl> {
+                                                            AbstractSingleBeanDefinitionParser<SetLocaleRequestContextFactoryImpl> {
     @Override
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         attributesToProperties(element, builder);

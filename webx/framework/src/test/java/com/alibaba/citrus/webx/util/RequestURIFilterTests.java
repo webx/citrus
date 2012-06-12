@@ -22,7 +22,6 @@ import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.util.regex.Pattern;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Test;
@@ -95,8 +94,8 @@ public class RequestURIFilterTests {
 
         filter = new RequestURIFilter("/aa , *.jpg");
         assertEquals("FilterOf [\n" + //
-                "  [1/2] /aa\n" + //
-                "  [2/2] *.jpg\n" + //
-                "]", filter.toString());
+                     "  [1/2] /aa\n" + //
+                     "  [2/2] *.jpg\n" + //
+                     "]", filter.toString());
     }
 }

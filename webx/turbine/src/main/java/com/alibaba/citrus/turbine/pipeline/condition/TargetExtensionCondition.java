@@ -23,17 +23,14 @@ import static com.alibaba.citrus.util.FileUtil.*;
 
 import java.util.Set;
 
+import com.alibaba.citrus.service.pipeline.PipelineStates;
+import com.alibaba.citrus.service.pipeline.support.AbstractConditionDefinitionParser;
+import com.alibaba.citrus.util.StringUtil;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-import com.alibaba.citrus.service.pipeline.PipelineStates;
-import com.alibaba.citrus.service.pipeline.support.AbstractConditionDefinitionParser;
-import com.alibaba.citrus.util.StringUtil;
-
-/**
- * 根据target后缀来判断。
- */
+/** 根据target后缀来判断。 */
 public class TargetExtensionCondition extends AbstractTurbineCondition {
     private final Set<String> extensions = createHashSet();
 
@@ -69,5 +66,4 @@ public class TargetExtensionCondition extends AbstractTurbineCondition {
             attributesToProperties(element, builder, "extension");
         }
     }
-
 }

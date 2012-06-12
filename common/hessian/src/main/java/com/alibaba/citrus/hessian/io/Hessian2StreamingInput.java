@@ -50,227 +50,215 @@ package com.alibaba.citrus.hessian.io;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import java.util.logging.*;
+/** Input stream for Hessian 2 streaming requests using WebSocket. */
+public class Hessian2StreamingInput {
+    private static final Logger log
+            = Logger.getLogger(Hessian2StreamingInput.class.getName());
 
-/**
- * Input stream for Hessian 2 streaming requests using WebSocket.
- */
-public class Hessian2StreamingInput
-{
-  private static final Logger log
-    = Logger.getLogger(Hessian2StreamingInput.class.getName());
+    private StreamingInputStream _is;
+    private Hessian2Input        _in;
 
-  private StreamingInputStream _is;
-  private Hessian2Input _in;
-
-  /**
-   * Creates a new Hessian input stream, initialized with an
-   * underlying input stream.
-   *
-   * @param is the underlying output stream.
-   */
-  public Hessian2StreamingInput(InputStream is)
-  {
-    _is = new StreamingInputStream(is);
-    _in = new Hessian2Input(_is);
-  }
-
-  public void setSerializerFactory(SerializerFactory factory)
-  {
-    _in.setSerializerFactory(factory);
-  }
-
-  public boolean isDataAvailable()
-  {
-    StreamingInputStream is = _is;
-
-    return is != null && is.isDataAvailable();
-  }
-
-  public Hessian2Input startPacket()
-    throws IOException
-  {
-    if (_is.startPacket()) {
-      _in.resetReferences();
-      _in.resetBuffer(); // XXX:
-      return _in;
-    }
-    else
-      return null;
-  }
-
-  public void endPacket()
-    throws IOException
-  {
-    _is.endPacket();
-    _in.resetBuffer(); // XXX:
-  }
-
-  public Hessian2Input getHessianInput()
-  {
-    return _in;
-  }
-
-  /**
-   * Read the next object
-   */
-  public Object readObject()
-    throws IOException
-  {
-    _is.startPacket();
-
-    Object obj = _in.readStreamingObject();
-
-    _is.endPacket();
-
-    return obj;
-  }
-
-  /**
-   * Close the output.
-   */
-  public void close()
-    throws IOException
-  {
-    _in.close();
-  }
-
-  static class StreamingInputStream extends InputStream {
-    private InputStream _is;
-
-    private int _length;
-    private boolean _isPacketEnd;
-
-    StreamingInputStream(InputStream is)
-    {
-      _is = is;
+    /**
+     * Creates a new Hessian input stream, initialized with an
+     * underlying input stream.
+     *
+     * @param is the underlying output stream.
+     */
+    public Hessian2StreamingInput(InputStream is) {
+        _is = new StreamingInputStream(is);
+        _in = new Hessian2Input(_is);
     }
 
-    public boolean isDataAvailable()
-    {
-      try {
-	return _is != null && _is.available() > 0;
-      } catch (IOException e) {
-	log.log(Level.FINER, e.toString(), e);
-
-	return true;
-      }
+    public void setSerializerFactory(SerializerFactory factory) {
+        _in.setSerializerFactory(factory);
     }
 
-    public boolean startPacket()
-      throws IOException
-    {
-      // skip zero-length packets
-      do {
-	_isPacketEnd = false;
-      } while ((_length = readChunkLength(_is)) == 0);
+    public boolean isDataAvailable() {
+        StreamingInputStream is = _is;
 
-      return _length > 0;
+        return is != null && is.isDataAvailable();
+    }
+
+    public Hessian2Input startPacket()
+            throws IOException {
+        if (_is.startPacket()) {
+            _in.resetReferences();
+            _in.resetBuffer(); // XXX:
+            return _in;
+        } else {
+            return null;
+        }
     }
 
     public void endPacket()
-      throws IOException
-    {
-      while (! _isPacketEnd) {
-	if (_length <= 0)
-	  _length = readChunkLength(_is);
-
-	if (_length > 0)
-	  _is.skip(_length);
-      }
+            throws IOException {
+        _is.endPacket();
+        _in.resetBuffer(); // XXX:
     }
 
-    public int read()
-      throws IOException
-    {
-      if (_isPacketEnd)
-	throw new IllegalStateException();
-
-      InputStream is = _is;
-
-      if (_length == 0) {
-	_length = readChunkLength(is);
-
-	if (_length <= 0)
-	  return -1;
-      }
-
-      _length--;
-
-      return is.read();
+    public Hessian2Input getHessianInput() {
+        return _in;
     }
 
-    public int read(byte []buffer, int offset, int length)
-      throws IOException
-    {
-      if (_isPacketEnd)
-	throw new IllegalStateException();
+    /** Read the next object */
+    public Object readObject()
+            throws IOException {
+        _is.startPacket();
 
-      InputStream is = _is;
+        Object obj = _in.readStreamingObject();
 
-      if (_length <= 0) {
-	_length = readChunkLength(is);
+        _is.endPacket();
 
-	if (_length <= 0)
-	  return -1;
-      }
-
-      int sublen = _length;
-      if (length < sublen)
-	sublen = length;
-
-      sublen = is.read(buffer, offset, sublen);
-
-      if (sublen < 0)
-	return -1;
-
-      _length -= sublen;
-
-      return sublen;
+        return obj;
     }
 
-    private int readChunkLength(InputStream is)
-      throws IOException
-    {
-      if (_isPacketEnd)
-	return -1;
-
-      int length = 0;
-
-      int code = is.read();
-
-      if (code < 0) {
-        _isPacketEnd = true;
-        return -1;
-      }
-      else if ((code & 0x80) != 0x80) {
-	int len = 256;
-	StringBuilder sb = new StringBuilder();
-	int ch;
-
-	while ((len-- > 0 && is.available() > 0 && (ch = is.read()) >= 0))
-	  sb.append((char) ch);
-
-        throw new IllegalStateException("WebSocket binary must begin with a 0x80 packet at 0x" + Integer.toHexString(code)
-                                        + " ("+ (char) code + ")"
-					+ " context[" + sb + "]");
-      }
-
-      while ((code = is.read()) >= 0) {
-	length = (length << 7) + (code & 0x7f);
-
-	if ((code & 0x80) == 0) {
-	  if (length == 0)
-	    _isPacketEnd = true;
-
-	  return length;
-	}
-      }
-
-      _isPacketEnd = true;
-
-      return -1;
+    /** Close the output. */
+    public void close()
+            throws IOException {
+        _in.close();
     }
-  }
+
+    static class StreamingInputStream extends InputStream {
+        private InputStream _is;
+
+        private int     _length;
+        private boolean _isPacketEnd;
+
+        StreamingInputStream(InputStream is) {
+            _is = is;
+        }
+
+        public boolean isDataAvailable() {
+            try {
+                return _is != null && _is.available() > 0;
+            } catch (IOException e) {
+                log.log(Level.FINER, e.toString(), e);
+
+                return true;
+            }
+        }
+
+        public boolean startPacket()
+                throws IOException {
+            // skip zero-length packets
+            do {
+                _isPacketEnd = false;
+            } while ((_length = readChunkLength(_is)) == 0);
+
+            return _length > 0;
+        }
+
+        public void endPacket()
+                throws IOException {
+            while (!_isPacketEnd) {
+                if (_length <= 0) {
+                    _length = readChunkLength(_is);
+                }
+
+                if (_length > 0) {
+                    _is.skip(_length);
+                }
+            }
+        }
+
+        public int read()
+                throws IOException {
+            if (_isPacketEnd) {
+                throw new IllegalStateException();
+            }
+
+            InputStream is = _is;
+
+            if (_length == 0) {
+                _length = readChunkLength(is);
+
+                if (_length <= 0) {
+                    return -1;
+                }
+            }
+
+            _length--;
+
+            return is.read();
+        }
+
+        public int read(byte[] buffer, int offset, int length)
+                throws IOException {
+            if (_isPacketEnd) {
+                throw new IllegalStateException();
+            }
+
+            InputStream is = _is;
+
+            if (_length <= 0) {
+                _length = readChunkLength(is);
+
+                if (_length <= 0) {
+                    return -1;
+                }
+            }
+
+            int sublen = _length;
+            if (length < sublen) {
+                sublen = length;
+            }
+
+            sublen = is.read(buffer, offset, sublen);
+
+            if (sublen < 0) {
+                return -1;
+            }
+
+            _length -= sublen;
+
+            return sublen;
+        }
+
+        private int readChunkLength(InputStream is)
+                throws IOException {
+            if (_isPacketEnd) {
+                return -1;
+            }
+
+            int length = 0;
+
+            int code = is.read();
+
+            if (code < 0) {
+                _isPacketEnd = true;
+                return -1;
+            } else if ((code & 0x80) != 0x80) {
+                int len = 256;
+                StringBuilder sb = new StringBuilder();
+                int ch;
+
+                while ((len-- > 0 && is.available() > 0 && (ch = is.read()) >= 0)) {
+                    sb.append((char) ch);
+                }
+
+                throw new IllegalStateException("WebSocket binary must begin with a 0x80 packet at 0x" + Integer.toHexString(code)
+                                                + " (" + (char) code + ")"
+                                                + " context[" + sb + "]");
+            }
+
+            while ((code = is.read()) >= 0) {
+                length = (length << 7) + (code & 0x7f);
+
+                if ((code & 0x80) == 0) {
+                    if (length == 0) {
+                        _isPacketEnd = true;
+                    }
+
+                    return length;
+                }
+            }
+
+            _isPacketEnd = true;
+
+            return -1;
+        }
+    }
 }

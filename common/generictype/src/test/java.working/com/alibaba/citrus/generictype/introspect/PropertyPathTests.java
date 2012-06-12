@@ -23,9 +23,8 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.generictype.introspect.PropertyPath.Visitor;
+import org.junit.Test;
 
 /**
  * 测试<code>PropertyPath</code>。
@@ -146,9 +145,9 @@ public class PropertyPathTests {
         PropertyPath.parse(propPath, visitor);
 
         assertArrayEquals(new String[] { "abc[abc]", "abc", "[abc]", "[123]", "def[1234].last", "def", "[1234].last" },
-                visitor.getResults());
+                          visitor.getResults());
         assertArrayEquals(new String[] { "abc['abc']", "abc", "abc['abc']", "abc['abc'][123]",
-                "abc['abc'][123].def[1234]", "abc['abc'][123].def", "abc['abc'][123].def[1234]" }, visitor
+                                         "abc['abc'][123].def[1234]", "abc['abc'][123].def", "abc['abc'][123].def[1234]" }, visitor
                 .getDisplayNames());
 
         // success=true
@@ -170,7 +169,7 @@ public class PropertyPathTests {
 
         assertArrayEquals(new String[] { "abc[abc]", "abc", "[abc]", "[123]", "def.last" }, visitor.getResults());
         assertArrayEquals(new String[] { " abc [ 'abc' ]", " abc", " abc [ 'abc' ]", " abc [ 'abc' ] [ 123 ]",
-                " abc [ 'abc' ] [ 123 ] . def" }, visitor.getDisplayNames());
+                                         " abc [ 'abc' ] [ 123 ] . def" }, visitor.getDisplayNames());
 
         // success=true
         visitor = new MyVisitor();
@@ -179,7 +178,7 @@ public class PropertyPathTests {
 
         assertArrayEquals(new String[] { "abc[abc]", "[123]", "def.last" }, visitor.getResults());
         assertArrayEquals(new String[] { " abc [ 'abc' ]", " abc [ 'abc' ] [ 123 ]", " abc [ 'abc' ] [ 123 ] . def" },
-                visitor.getDisplayNames());
+                          visitor.getDisplayNames());
     }
 
     @Test
@@ -194,9 +193,9 @@ public class PropertyPathTests {
         path.accept(visitor);
 
         assertArrayEquals(new String[] { "abc[abc]", "abc", "[abc]", "[123]", "def[1234].last", "def", "[1234].last" },
-                visitor.getResults());
+                          visitor.getResults());
         assertArrayEquals(new String[] { "abc['abc']", "abc", "abc['abc']", "abc['abc'][123]",
-                "abc['abc'][123].def[1234]", "abc['abc'][123].def", "abc['abc'][123].def[1234]" }, visitor
+                                         "abc['abc'][123].def[1234]", "abc['abc'][123].def", "abc['abc'][123].def[1234]" }, visitor
                 .getDisplayNames());
 
         // success=true
@@ -219,7 +218,7 @@ public class PropertyPathTests {
 
         assertArrayEquals(new String[] { "abc[abc]", "abc", "[abc]", "[123]", "def.last" }, visitor.getResults());
         assertArrayEquals(new String[] { " abc [ 'abc' ]", " abc", " abc [ 'abc' ]", " abc [ 'abc' ] [ 123 ]",
-                " abc [ 'abc' ] [ 123 ] . def" }, visitor.getDisplayNames());
+                                         " abc [ 'abc' ] [ 123 ] . def" }, visitor.getDisplayNames());
 
         // success=true
         visitor = new MyVisitor();
@@ -228,11 +227,11 @@ public class PropertyPathTests {
 
         assertArrayEquals(new String[] { "abc[abc]", "[123]", "def.last" }, visitor.getResults());
         assertArrayEquals(new String[] { " abc [ 'abc' ]", " abc [ 'abc' ] [ 123 ]", " abc [ 'abc' ] [ 123 ] . def" },
-                visitor.getDisplayNames());
+                          visitor.getDisplayNames());
     }
 
     private class MyVisitor implements Visitor {
-        private List<String> results = createLinkedList();
+        private List<String> results      = createLinkedList();
         private List<String> displayNames = createLinkedList();
         private boolean success;
 

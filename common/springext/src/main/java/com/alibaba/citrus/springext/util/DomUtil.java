@@ -24,10 +24,10 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import static org.springframework.beans.factory.xml.BeanDefinitionParserDelegate.*;
 
 import java.util.List;
-
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import com.alibaba.citrus.util.Assert;
 import org.dom4j.io.DOMReader;
 import org.dom4j.io.SAXWriter;
 import org.w3c.dom.Document;
@@ -39,17 +39,13 @@ import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
 
-import com.alibaba.citrus.util.Assert;
-
 /**
  * 方便操作dom的工具。
  *
  * @author Michael Zhou
  */
 public class DomUtil {
-    /**
-     * 将W3C element转换成DOM4j element。
-     */
+    /** 将W3C element转换成DOM4j element。 */
     public static org.dom4j.Element convertElement(Element element) {
         Document doc;
 
@@ -69,9 +65,7 @@ public class DomUtil {
         return dom4jDoc.getRootElement();
     }
 
-    /**
-     * 将W3C element转换成SAX事件。
-     */
+    /** 将W3C element转换成SAX事件。 */
     public static void convertElement(Element element, ContentHandler contentHandler) throws SAXException {
         SAXWriter writer = new SAXWriter(contentHandler);
 
@@ -86,16 +80,12 @@ public class DomUtil {
         writer.write(convertElement(element));
     }
 
-    /**
-     * 取得所有子elements。
-     */
+    /** 取得所有子elements。 */
     public static List<Element> subElements(Element element) {
         return subElements(element, null);
     }
 
-    /**
-     * 取得所有子elements，如果未指定selector，则返回所有elements。
-     */
+    /** 取得所有子elements，如果未指定selector，则返回所有elements。 */
     public static List<Element> subElements(Element element, ElementSelector selector) {
         NodeList nodes = element.getChildNodes();
         List<Element> subElements = createArrayList(nodes.getLength());
@@ -131,30 +121,22 @@ public class DomUtil {
         }
     }
 
-    /**
-     * Element选择器。
-     */
+    /** Element选择器。 */
     public static interface ElementSelector {
         boolean accept(Element element);
     }
 
-    /**
-     * 过滤出指定namespace下的elements。
-     */
+    /** 过滤出指定namespace下的elements。 */
     public static ElementSelector sameNs(Element element) {
         return ns(assertNotNull(element, "element").getNamespaceURI());
     }
 
-    /**
-     * 过滤出默认namespace，即beans名字空间下的elements。
-     */
+    /** 过滤出默认namespace，即beans名字空间下的elements。 */
     public static ElementSelector beansNs() {
         return ns(BEANS_NAMESPACE_URI);
     }
 
-    /**
-     * 匹配任意element。
-     */
+    /** 匹配任意element。 */
     public static ElementSelector any() {
         return new ElementSelector() {
             public boolean accept(Element element) {
@@ -168,9 +150,7 @@ public class DomUtil {
         };
     }
 
-    /**
-     * 不匹配任意element。
-     */
+    /** 不匹配任意element。 */
     public static ElementSelector none() {
         return new ElementSelector() {
             public boolean accept(Element element) {
@@ -184,9 +164,7 @@ public class DomUtil {
         };
     }
 
-    /**
-     * 过滤出指定namespace下的elements。
-     */
+    /** 过滤出指定namespace下的elements。 */
     public static ElementSelector ns(String nsUri) {
         final String trimmedNsUri = trimToNull(nsUri);
 
@@ -202,9 +180,7 @@ public class DomUtil {
         };
     }
 
-    /**
-     * 过滤指定名称的elements。
-     */
+    /** 过滤指定名称的elements。 */
     public static ElementSelector name(String name) {
         final String trimmedName = assertNotNull(trimToNull(name), "elementName");
 
@@ -221,9 +197,7 @@ public class DomUtil {
         };
     }
 
-    /**
-     * 符合任意一个selector条件，即接受之。
-     */
+    /** 符合任意一个selector条件，即接受之。 */
     public static ElementSelector or(final ElementSelector... selectors) {
         return new ElementSelector() {
             public boolean accept(Element element) {
@@ -247,9 +221,7 @@ public class DomUtil {
         };
     }
 
-    /**
-     * 符合所有selector条件，才接受之。
-     */
+    /** 符合所有selector条件，才接受之。 */
     public static ElementSelector and(final ElementSelector... selectors) {
         return new ElementSelector() {
             public boolean accept(Element element) {
@@ -271,9 +243,7 @@ public class DomUtil {
         };
     }
 
-    /**
-     * 不符合selector条件，才接受之。
-     */
+    /** 不符合selector条件，才接受之。 */
     public static ElementSelector not(final ElementSelector selector) {
         assertNotNull(selector, "selector");
         return new ElementSelector() {
@@ -288,16 +258,12 @@ public class DomUtil {
         };
     }
 
-    /**
-     * 抛出异常，通常和or子句配合。
-     */
+    /** 抛出异常，通常和or子句配合。 */
     public static ElementSelector error() {
         return error(null, null);
     }
 
-    /**
-     * 抛出异常，通常和or子句配合。
-     */
+    /** 抛出异常，通常和or子句配合。 */
     public static ElementSelector error(final Assert.ExceptionType type, final String message) {
         return new ElementSelector() {
             public boolean accept(Element element) {

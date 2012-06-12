@@ -19,11 +19,10 @@ package com.alibaba.citrus.service.jsp.impl;
 
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 
+import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 public class JspEngineDefinitionParser extends AbstractSingleBeanDefinitionParser<JspEngineImpl> {
     @Override

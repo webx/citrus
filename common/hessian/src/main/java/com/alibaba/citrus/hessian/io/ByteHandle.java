@@ -48,36 +48,28 @@
 
 package com.alibaba.citrus.hessian.io;
 
-import java.net.URL;
 import java.io.Serializable;
 
-/**
- * Handle for Java Byte objects.
- */
+/** Handle for Java Byte objects. */
 public class ByteHandle implements Serializable {
-  private byte _value;
+    private byte _value;
 
-  private ByteHandle()
-  {
-  }
+    private ByteHandle() {
+    }
 
-  public ByteHandle(byte value)
-  {
-    _value = value;
-  }
+    public ByteHandle(byte value) {
+        _value = value;
+    }
 
-  public byte getValue()
-  {
-    return _value;
-  }
+    public byte getValue() {
+        return _value;
+    }
 
-  public Object readResolve()
-  {
-    return new Byte(_value);
-  }
+    public Object readResolve() {
+        return new Byte(_value);
+    }
 
-  public String toString()
-  {
-    return getClass().getSimpleName() + "[" + _value + "]";
-  }
+    public String toString() {
+        return getClass().getSimpleName() + "[" + _value + "]";
+    }
 }

@@ -48,9 +48,9 @@ import java.util.Set;
  * <li>支持值为<code>null</code>的key和value</li>
  * <li>没有进行任何<code>synchronized</code>操作, 因而不是线程安全的. 但可以通过以下操作实现线程安全:</li>
  * </ul>
- *
+ * <p/>
  * <pre style="margin-left:48.0">
- *  Map m = Collections.synchronizedMap(new DefaultHashMap(...));
+ * Map m = Collections.synchronizedMap(new DefaultHashMap(...));
  * </pre>
  * <ul>
  * <li>不保证hash表中的entry的顺序</li>
@@ -121,9 +121,7 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
     // 构造函数
     // ==========================================================================
 
-    /**
-     * 创建一个空的hash表. 使用指定的默认的初始容量(16)和默认的负载系数(0.75).
-     */
+    /** 创建一个空的hash表. 使用指定的默认的初始容量(16)和默认的负载系数(0.75). */
     public DefaultHashMap() {
         this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);
     }
@@ -141,7 +139,7 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
      * 创建一个空的hash表. 使用指定的初始容量和负载系数.
      *
      * @param initialCapacity 初始容量
-     * @param loadFactor 负载系数.
+     * @param loadFactor      负载系数.
      */
     @SuppressWarnings("unchecked")
     public DefaultHashMap(int initialCapacity, float loadFactor) {
@@ -236,7 +234,7 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
     /**
      * 将指定的value和key关联. 如果已经有value和此key相关联, 则取代之, 并 返回被取代的value.
      *
-     * @param key 要关联的key
+     * @param key   要关联的key
      * @param value 要和key关联的value
      * @return 如果已经存在和此key相关联的value, 则返回此value. 否则返回<code>null</code>. 返回
      *         <code>null</code>也可能是因为被取代的这个value值为<code>null</code>.
@@ -316,9 +314,7 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
         return entry == null ? null : entry.getValue();
     }
 
-    /**
-     * 清除hash表中的所有entry.
-     */
+    /** 清除hash表中的所有entry. */
     @Override
     public void clear() {
         modCount++;
@@ -399,9 +395,7 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
     // 内部类
     // ==========================================================================
 
-    /**
-     * <code>Map.Entry</code>的实现.
-     */
+    /** <code>Map.Entry</code>的实现. */
     protected static class Entry<K, V> extends DefaultMapEntry<K, V> {
         /** key的hash值. */
         protected final int hash;
@@ -423,22 +417,16 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
             hash = h;
         }
 
-        /**
-         * 当<code>put(key, value)</code>方法被调用时, 如果entry已经存在将被覆盖时, 此方法被调用.
-         */
+        /** 当<code>put(key, value)</code>方法被调用时, 如果entry已经存在将被覆盖时, 此方法被调用. */
         protected void onAccess() {
         }
 
-        /**
-         * 当entry将被删除时, 此方法被调用.
-         */
+        /** 当entry将被删除时, 此方法被调用. */
         protected void onRemove() {
         }
     }
 
-    /**
-     * 遍历器.
-     */
+    /** 遍历器. */
     private abstract class HashIterator<E> implements Iterator<E> {
         /** 当前entry. */
         private Entry<K, V> current;
@@ -452,9 +440,7 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
         /** 当前位置索引. */
         private int index;
 
-        /**
-         * 创建一个遍历器.
-         */
+        /** 创建一个遍历器. */
         protected HashIterator() {
             expectedModCount = modCount;
 
@@ -482,9 +468,7 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
             return next != null;
         }
 
-        /**
-         * 删除一个当前entry. 执行前必须先执行<code>next()</code>方法.
-         */
+        /** 删除一个当前entry. 执行前必须先执行<code>next()</code>方法. */
         public void remove() {
             if (current == null) {
                 throw new IllegalStateException();
@@ -527,9 +511,7 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
             return current = entry;
         }
 
-        /**
-         * 检查是否同时被修改.
-         */
+        /** 检查是否同时被修改. */
         private void checkForComodification() {
             if (modCount != expectedModCount) {
                 throw new ConcurrentModificationException();
@@ -537,9 +519,7 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
         }
     }
 
-    /**
-     * 取得hash表的key的遍历器.
-     */
+    /** 取得hash表的key的遍历器. */
     private class KeyIterator extends HashIterator<K> {
         /**
          * 取得下一个key.
@@ -551,9 +531,7 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
         }
     }
 
-    /**
-     * 取得hash表的value的遍历器.
-     */
+    /** 取得hash表的value的遍历器. */
     private class ValueIterator extends HashIterator<V> {
         /**
          * 取得下一个value.
@@ -565,9 +543,7 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
         }
     }
 
-    /**
-     * 取得hash表的entry的遍历器.
-     */
+    /** 取得hash表的entry的遍历器. */
     private class EntryIterator extends HashIterator<Map.Entry<K, V>> {
         /**
          * 取得下一个entry.
@@ -579,9 +555,7 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
         }
     }
 
-    /**
-     * key的集合视图.
-     */
+    /** key的集合视图. */
     private class KeySet extends AbstractSet<K> {
         /**
          * 取得key的遍历器.
@@ -625,18 +599,14 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
             return DefaultHashMap.this.removeEntryForKey(o) != null;
         }
 
-        /**
-         * 清除所有entry.
-         */
+        /** 清除所有entry. */
         @Override
         public void clear() {
             DefaultHashMap.this.clear();
         }
     }
 
-    /**
-     * value的集合视图.
-     */
+    /** value的集合视图. */
     private class Values extends AbstractCollection<V> {
         /**
          * 取得value的遍历器.
@@ -669,18 +639,14 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
             return containsValue(o);
         }
 
-        /**
-         * 清除所有entry.
-         */
+        /** 清除所有entry. */
         @Override
         public void clear() {
             DefaultHashMap.this.clear();
         }
     }
 
-    /**
-     * entry的集合视图.
-     */
+    /** entry的集合视图. */
     private class EntrySet extends AbstractSet<Map.Entry<K, V>> {
         /**
          * 取得entry的遍历器.
@@ -731,9 +697,7 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
             return size;
         }
 
-        /**
-         * 清除所有entry.
-         */
+        /** 清除所有entry. */
         @Override
         public void clear() {
             DefaultHashMap.this.clear();
@@ -751,8 +715,8 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
      * 从输入流中重建hash表(也就是反序列化).
      *
      * @param is 输入流
-     * @exception IOException 输入流异常
-     * @exception ClassNotFoundException 类未找到
+     * @throws IOException            输入流异常
+     * @throws ClassNotFoundException 类未找到
      */
     @SuppressWarnings("unchecked")
     private void readObject(java.io.ObjectInputStream is) throws IOException, ClassNotFoundException {
@@ -783,7 +747,7 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
      * 将hash表的状态保存到输出流中(也就是&quot;序列化&quot;).
      *
      * @param os 输出流
-     * @exception IOException 输出流异常
+     * @throws IOException 输出流异常
      */
     private void writeObject(java.io.ObjectOutputStream os) throws IOException {
         // 输出threshold, loadfactor, 和其它隐藏的对象.
@@ -867,7 +831,7 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
      * <code>put</code>, <code>new HashMap(Map)</code>, <code>clone</code>, 和
      * <code>readObject</code>方法的行为.
      *
-     * @param key hash表的key
+     * @param key   hash表的key
      * @param value hash表的value
      */
     protected void addEntry(K key, V value) {
@@ -882,7 +846,7 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
      * 此方法被构造函数或&quot;伪构造函数&quot;(clone, readObject)调用, 功能同put方法,
      * 但不会调用resize或改变modCount计数.
      *
-     * @param key 要关联的key
+     * @param key   要关联的key
      * @param value 要和key关联的value
      */
     private void putForCreate(K key, V value) {
@@ -1039,7 +1003,7 @@ public class DefaultHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V>
     /**
      * 返回索引值, 根据指定的hash值和数组的长度.
      *
-     * @param hash hash值
+     * @param hash   hash值
      * @param length 数组的长度, 必然是2的整数次幂
      * @return hash值在数组中的序号
      */

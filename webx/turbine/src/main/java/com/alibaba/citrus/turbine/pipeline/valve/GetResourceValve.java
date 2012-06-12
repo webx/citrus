@@ -27,16 +27,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URLConnection;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.springframework.context.ResourceLoaderAware;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
-import org.w3c.dom.Element;
 
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.PipelineException;
@@ -47,6 +38,13 @@ import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.util.ServletUtil;
 import com.alibaba.citrus.util.io.StreamUtil;
 import com.alibaba.citrus.util.regex.Substitution;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.springframework.context.ResourceLoaderAware;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.w3c.dom.Element;
 
 /**
  * 从resource loader中装载资源，并直接显示的valve。
@@ -83,9 +81,7 @@ public class GetResourceValve extends AbstractValve implements ResourceLoaderAwa
         this.substName = trimToNull(substName);
     }
 
-    /**
-     * 设置resource名称，可以包含<code>$1</code>、<code>$2</code>这样的替换符。
-     */
+    /** 设置resource名称，可以包含<code>$1</code>、<code>$2</code>这样的替换符。 */
     public void setName(String resourceName) {
         this.resourceName = trimToNull(resourceName);
     }

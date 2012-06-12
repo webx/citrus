@@ -23,18 +23,12 @@ package com.alibaba.citrus.util.internal.webpagelite;
  * @author Michael Zhou
  */
 public interface PageComponentRegistry {
-    /**
-     * 注册组件。
-     */
+    /** 注册组件。 */
     void register(String componentPath, PageComponent component);
 
-    /**
-     * 取得所有的componentPaths。
-     */
+    /** 取得所有的componentPaths。 */
     String[] getComponentPaths();
 
-    /**
-     * 取得指定名称的组件。
-     */
+    /** 取得指定名称的组件。 */
     <PC extends PageComponent> PC getComponent(String componentPath, Class<PC> componentClass);
 }

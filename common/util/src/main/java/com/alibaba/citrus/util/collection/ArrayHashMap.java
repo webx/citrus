@@ -65,9 +65,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     // 构造函数
     // ==========================================================================
 
-    /**
-     * 创建一个空的hash表. 使用指定的默认的初始容量(16)和默认的负载系数(0.75).
-     */
+    /** 创建一个空的hash表. 使用指定的默认的初始容量(16)和默认的负载系数(0.75). */
     public ArrayHashMap() {
         super();
     }
@@ -85,7 +83,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
      * 创建一个空的hash表. 使用指定的初始容量和负载系数.
      *
      * @param initialCapacity 初始容量
-     * @param loadFactor 负载系数.
+     * @param loadFactor      负载系数.
      */
     public ArrayHashMap(int initialCapacity, float loadFactor) {
         super(initialCapacity, loadFactor);
@@ -124,9 +122,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         return false;
     }
 
-    /**
-     * 清除hash表中的所有entry.
-     */
+    /** 清除hash表中的所有entry. */
     @Override
     public void clear() {
         super.clear();
@@ -197,9 +193,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     // 内部类
     // ==========================================================================
 
-    /**
-     * <code>Map.Entry</code>的实现.
-     */
+    /** <code>Map.Entry</code>的实现. */
     protected class Entry extends DefaultHashMap.Entry<K, V> {
         /** Entry在列表中的索引值. */
         protected int index;
@@ -216,9 +210,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
             super(h, k, v, n);
         }
 
-        /**
-         * 当entry将被删除时, 更新后续的entry的索引值.
-         */
+        /** 当entry将被删除时, 更新后续的entry的索引值. */
         @Override
         protected void onRemove() {
             int numMoved = size - index;
@@ -235,9 +227,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
     }
 
-    /**
-     * 遍历器.
-     */
+    /** 遍历器. */
     private abstract class ArrayHashIterator<E> implements ListIterator<E> {
         /** 最近返回的entry. */
         private Entry lastReturned;
@@ -316,9 +306,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
             return cursor - 1;
         }
 
-        /**
-         * 删除一个当前entry. 执行前必须先执行<code>next()</code>或<code>previous()</code>方法.
-         */
+        /** 删除一个当前entry. 执行前必须先执行<code>next()</code>或<code>previous()</code>方法. */
         public void remove() {
             if (lastReturned == null) {
                 throw new IllegalStateException();
@@ -385,9 +373,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
             lastReturned.setValue(o);
         }
 
-        /**
-         * 检查是否同时被修改.
-         */
+        /** 检查是否同时被修改. */
         private void checkForComodification() {
             if (modCount != expectedModCount) {
                 throw new ConcurrentModificationException();
@@ -395,9 +381,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
     }
 
-    /**
-     * 取得hash表的key的遍历器.
-     */
+    /** 取得hash表的key的遍历器. */
     private class KeyIterator extends ArrayHashIterator<K> {
         /**
          * 创建一个list iterator.
@@ -427,9 +411,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
     }
 
-    /**
-     * 取得hash表的value的遍历器.
-     */
+    /** 取得hash表的value的遍历器. */
     private class ValueIterator extends ArrayHashIterator<V> {
         /**
          * 创建一个list iterator.
@@ -469,9 +451,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
     }
 
-    /**
-     * 取得hash表的entry的遍历器.
-     */
+    /** 取得hash表的entry的遍历器. */
     private class EntryIterator extends ArrayHashIterator<Map.Entry<K, V>> {
         /**
          * 创建一个list iterator.
@@ -501,9 +481,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
     }
 
-    /**
-     * 列表视图.
-     */
+    /** 列表视图. */
     private abstract class ArrayHashList<E> extends AbstractList<E> {
         /**
          * 返回hash表中entry的个数.
@@ -525,9 +503,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
             return size == 0;
         }
 
-        /**
-         * 清除所有entry.
-         */
+        /** 清除所有entry. */
         @Override
         public void clear() {
             ArrayHashMap.this.clear();
@@ -545,9 +521,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
     }
 
-    /**
-     * entry的列表视图.
-     */
+    /** entry的列表视图. */
     private class EntryList extends ArrayHashList<Map.Entry<K, V>> {
         /**
          * 判断entry列表中是否包含指定对象.
@@ -644,9 +618,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
     }
 
-    /**
-     * key的列表视图.
-     */
+    /** key的列表视图. */
     private class KeyList extends ArrayHashList<K> {
         /**
          * 判断key列表中是否包含指定对象.
@@ -741,9 +713,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
         }
     }
 
-    /**
-     * value的列表视图.
-     */
+    /** value的列表视图. */
     private class ValueList extends ArrayHashList<V> {
         /**
          * 判断value列表中是否包含指定对象.
@@ -842,9 +812,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     // 内部方法
     // ==========================================================================
 
-    /**
-     * 初始化时hash表.
-     */
+    /** 初始化时hash表. */
     @Override
     @SuppressWarnings("unchecked")
     protected void onInit() {
@@ -854,7 +822,7 @@ public class ArrayHashMap<K, V> extends DefaultHashMap<K, V> implements ListMap<
     /**
      * 此方法覆盖了父类的方法. 向表中增加一个entry, 同时将entry记录到order列表中.
      *
-     * @param key hash表的key
+     * @param key   hash表的key
      * @param value hash表的value
      */
     @Override

@@ -26,9 +26,7 @@ import com.alibaba.citrus.service.form.support.AbstractValidatorDefinitionParser
  * @author Michael Zhou
  */
 public class RegexpValidator extends AbstractRegexpValidator {
-    /**
-     * 设置regexp。
-     */
+    /** 设置regexp。 */
     @Override
     public void setPattern(String pattern) {
         super.setPattern(pattern);

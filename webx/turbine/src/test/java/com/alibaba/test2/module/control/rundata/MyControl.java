@@ -19,9 +19,8 @@ package com.alibaba.test2.module.control.rundata;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.turbine.Context;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class MyControl {
     @Autowired

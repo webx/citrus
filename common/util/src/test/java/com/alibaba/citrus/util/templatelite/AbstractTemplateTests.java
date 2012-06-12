@@ -36,9 +36,9 @@ import com.alibaba.citrus.util.templatelite.Template.Location;
 
 public abstract class AbstractTemplateTests {
     protected final File srcdir = new File(TestEnvStatic.srcdir, "templates");
-    protected String source;
-    protected Template template;
-    protected TemplateParseException parseError;
+    protected String                   source;
+    protected Template                 template;
+    protected TemplateParseException   parseError;
     protected TemplateRuntimeException runtimeError;
 
     protected void loadTemplateFailure(byte[] content, String systemId) {

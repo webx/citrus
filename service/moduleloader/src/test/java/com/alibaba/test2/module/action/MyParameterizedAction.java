@@ -21,9 +21,8 @@ import static org.junit.Assert.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.test2.dataresolver.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class MyParameterizedAction {
     @Autowired

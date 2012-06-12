@@ -30,6 +30,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.alibaba.citrus.test.TestUtil;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
@@ -39,8 +40,6 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
-
-import com.alibaba.citrus.test.TestUtil;
 
 /**
  * 类似{@link Parameterized}，作了如下改进和变化：
@@ -54,25 +53,19 @@ import com.alibaba.citrus.test.TestUtil;
  * </p>
  */
 public class Prototyped extends Suite {
-    /**
-     * 系统将通过标记此注释的方法，取得测试的名称。
-     */
+    /** 系统将通过标记此注释的方法，取得测试的名称。 */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
     public static @interface TestName {
     }
 
-    /**
-     * 系统将通过标记此注释的方法，取得测试的数据。
-     */
+    /** 系统将通过标记此注释的方法，取得测试的数据。 */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
     public static @interface Prototypes {
     }
 
-    /**
-     * 用来简化Prototyped测试。
-     */
+    /** 用来简化Prototyped测试。 */
     public static class TestData<T> extends LinkedList<T> {
         private static final long serialVersionUID = 2818372350747718688L;
         private final Class<T> prototypeClass;
@@ -102,7 +95,7 @@ public class Prototyped extends Suite {
 
     private static class TestClassRunnerForPrototypes extends BlockJUnit4ClassRunner {
         private final Object fPrototype;
-        private final int fPrototypeNumber;
+        private final int    fPrototypeNumber;
 
         TestClassRunnerForPrototypes(Class<?> type, Object prototype, int i) throws InitializationError {
             super(type);
@@ -141,14 +134,14 @@ public class Prototyped extends Suite {
                 int modifiers = each.getMethod().getModifiers();
 
                 if (!Modifier.isStatic(modifiers) && Modifier.isPublic(modifiers)
-                        && String.class.equals(each.getMethod().getReturnType())
-                        && each.getMethod().getParameterTypes().length == 0) {
+                    && String.class.equals(each.getMethod().getReturnType())
+                    && each.getMethod().getParameterTypes().length == 0) {
                     String name = null;
 
                     try {
                         name = (String) each.invokeExplosively(fPrototype);
                         assertNotNull(String.format("%s.%s() returned null", getTestClass().getName(), each.getName()),
-                                name);
+                                      name);
                         return String.format("[%s] %s", fPrototypeNumber, name);
                     } catch (Error e) {
                         throw e;
@@ -194,9 +187,7 @@ public class Prototyped extends Suite {
         }
     }
 
-    /**
-     * Only called reflectively. Do not use programmatically.
-     */
+    /** Only called reflectively. Do not use programmatically. */
     public Prototyped(Class<?> klass) throws Throwable {
         super(klass, getRunners(klass));
     }
@@ -222,7 +213,7 @@ public class Prototyped extends Suite {
             for (final Object each : results) {
                 if (!klass.isInstance(each)) {
                     throw new Exception(String.format("%s.%s() must return a Collection of test object.",
-                            klass.getName(), method.getName()));
+                                                      klass.getName(), method.getName()));
                 }
             }
 
@@ -243,7 +234,7 @@ public class Prototyped extends Suite {
             int modifiers = each.getMethod().getModifiers();
             if (!Modifier.isStatic(modifiers) || !Modifier.isPublic(modifiers)) {
                 throw new Exception(String.format("%s.%s() should be public static method: ", testClass.getName(),
-                        each.getName()));
+                                                  each.getName()));
             }
         }
 

@@ -23,13 +23,12 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
+import com.alibaba.citrus.springext.support.context.XmlBeanFactory;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.core.io.FileSystemResource;
-
-import com.alibaba.citrus.springext.support.context.XmlBeanFactory;
 
 /**
  * 测试<code>BeanSupport</code>基类。
@@ -37,8 +36,8 @@ import com.alibaba.citrus.springext.support.context.XmlBeanFactory;
  * @author Michael Zhou
  */
 public class BeanSupportTests {
-    protected static BeanFactory factory;
-    protected MyServiceImpl myService;
+    protected static BeanFactory   factory;
+    protected        MyServiceImpl myService;
 
     @BeforeClass
     public static void initFactory() {

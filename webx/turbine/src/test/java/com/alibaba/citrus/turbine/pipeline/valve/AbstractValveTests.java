@@ -17,11 +17,10 @@
 
 package com.alibaba.citrus.turbine.pipeline.valve;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import com.alibaba.citrus.turbine.AbstractWebxTests;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 public abstract class AbstractValveTests extends AbstractWebxTests {
     protected PipelineImpl pipeline;

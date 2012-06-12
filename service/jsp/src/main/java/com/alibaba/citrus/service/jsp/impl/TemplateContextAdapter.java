@@ -23,7 +23,6 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
@@ -42,9 +41,7 @@ public class TemplateContextAdapter extends HttpServletRequestWrapper {
         this.context = assertNotNull(context, "templateContext");
     }
 
-    /**
-     * 取得被适配的<code>TemplateContext</code>对象。
-     */
+    /** 取得被适配的<code>TemplateContext</code>对象。 */
     public TemplateContext getTemplateContext() {
         return context;
     }
@@ -111,12 +108,10 @@ public class TemplateContextAdapter extends HttpServletRequestWrapper {
         return "TemplateContextAdapter[" + context + "]";
     }
 
-    /**
-     * 将一个集合和一个<code>Enumeration</code>结合的<code>Enumeration</code>。
-     */
+    /** 将一个集合和一个<code>Enumeration</code>结合的<code>Enumeration</code>。 */
     private static class AttributeNamesEnumeration implements Enumeration<String> {
-        private final Set<String> set;
-        private final Iterator<String> iterator;
+        private final Set<String>         set;
+        private final Iterator<String>    iterator;
         private final Enumeration<String> enumeration; // 可以为null
         private String next = null;
 

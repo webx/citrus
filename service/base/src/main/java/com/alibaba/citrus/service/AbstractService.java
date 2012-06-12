@@ -17,10 +17,9 @@
 
 package com.alibaba.citrus.service;
 
+import com.alibaba.citrus.springext.support.GenericBeanSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.alibaba.citrus.springext.support.GenericBeanSupport;
 
 /**
  * 作为service的基类，方便service的实现。
@@ -41,9 +40,7 @@ public abstract class AbstractService<S> extends GenericBeanSupport<S> {
         return log;
     }
 
-    /**
-     * 创建一个logger。
-     */
+    /** 创建一个logger。 */
     protected Logger createLogger() {
         return LoggerFactory.getLogger(getBeanInterface());
     }

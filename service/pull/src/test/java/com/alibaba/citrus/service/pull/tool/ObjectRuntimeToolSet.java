@@ -21,10 +21,9 @@ import static java.util.Collections.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.service.pull.RuntimeToolSetFactory;
 import com.alibaba.citrus.service.pull.ToolFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 根据request中的id参数设置tool name。

@@ -23,11 +23,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.BitSet;
 
+import com.alibaba.citrus.springext.support.SchemaUtil;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Namespace;
-
-import com.alibaba.citrus.springext.support.SchemaUtil;
 
 public class DomUtil {
     private final static BitSet bs;
@@ -79,9 +78,7 @@ public class DomUtil {
         return name;
     }
 
-    /**
-     * 读取xml文件，转换成dom。
-     */
+    /** 读取xml文件，转换成dom。 */
     public static Element readDocument(String name, URL url, ElementFilter filter) throws Exception, IOException {
         Document doc = SchemaUtil.readDocument(url.openStream(), name, true);
         org.dom4j.Element dom4jRootElement = doc.getRootElement();

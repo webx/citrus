@@ -19,14 +19,13 @@ package com.alibaba.citrus.service.velocity.impl;
 
 import java.io.Reader;
 
+import com.alibaba.citrus.service.velocity.impl.parser.ASTStringLiteralEnhanced;
+import com.alibaba.citrus.service.velocity.impl.parser.SimpleNodeUtil;
 import org.apache.velocity.runtime.RuntimeInstance;
 import org.apache.velocity.runtime.parser.ParseException;
 import org.apache.velocity.runtime.parser.node.ASTStringLiteral;
 import org.apache.velocity.runtime.parser.node.Node;
 import org.apache.velocity.runtime.parser.node.SimpleNode;
-
-import com.alibaba.citrus.service.velocity.impl.parser.ASTStringLiteralEnhanced;
-import com.alibaba.citrus.service.velocity.impl.parser.SimpleNodeUtil;
 
 /**
  * 扩展了velocity的<code>RuntimeInstance</code>类，实现一个功能，使
@@ -35,7 +34,7 @@ import com.alibaba.citrus.service.velocity.impl.parser.SimpleNodeUtil;
  * <p>
  * <code>EscapeSupport</code>可以根据引用的位置，来决定是否要对结果进行escape转义。下面的velocity语句将不会被转义：
  * </p>
- *
+ * <p/>
  * <pre>
  * #set ($value = "hello, $name")
  * </pre>
@@ -51,7 +50,7 @@ import com.alibaba.citrus.service.velocity.impl.parser.SimpleNodeUtil;
  * @author Michael Zhou
  */
 public class VelocityRuntimeInstance extends RuntimeInstance {
-    private static final String INTERPOLATION_HACK_KEY = "runtime.interpolate.string.literals.hack";
+    private static final String  INTERPOLATION_HACK_KEY     = "runtime.interpolate.string.literals.hack";
     private static final Boolean INTERPOLATION_HACK_DEFAULT = true;
     private boolean interpolationHack;
 

@@ -23,11 +23,10 @@ import static org.junit.Assert.*;
 import javax.mail.MessagingException;
 import javax.mail.Part;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.mail.builder.content.AbstractContent;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * 测试<code>AbstractContent</code>的基本功能。

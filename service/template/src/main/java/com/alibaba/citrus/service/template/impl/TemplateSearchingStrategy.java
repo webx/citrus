@@ -23,9 +23,7 @@ package com.alibaba.citrus.service.template.impl;
  * @author Michael Zhou
  */
 public interface TemplateSearchingStrategy {
-    /**
-     * 取得用来缓存模板搜索结果的key。
-     */
+    /** 取得用来缓存模板搜索结果的key。 */
     Object getKey(String templateName);
 
     /**

@@ -27,7 +27,7 @@ import java.util.Map;
  * <p>
  * 一个Turbine传统风格的URI包括如下几个部分：
  * </p>
- *
+ * <p/>
  * <pre>
  * URI              = SERVER_INFO + PATH + "?" + QUERY_DATA + "#" + REFERENCE
  * SERVER_INFO      = scheme://loginUser:loginPassword@serverName:serverPort
@@ -39,7 +39,7 @@ import java.util.Map;
  * <p>
  * 例如：
  * </p>
- *
+ * <p/>
  * <pre>
  * http://user:pass@myserver.com:8080/mycontext/turbine/template/product,ViewItem?id=1#top
  * </pre>
@@ -48,17 +48,15 @@ import java.util.Map;
  * @author dux.fangl
  */
 public class TurbineClassicURIBroker extends ServletURIBroker {
-    private static final int TEMPLATE_INDEX = PATH_INFO_INDEX;
-    private static final int SCREEN_INDEX = PATH_INFO_INDEX + 1;
-    private static final int ACTION_INDEX = PATH_INFO_INDEX + 2;
+    private static final int TEMPLATE_INDEX        = PATH_INFO_INDEX;
+    private static final int SCREEN_INDEX          = PATH_INFO_INDEX + 1;
+    private static final int ACTION_INDEX          = PATH_INFO_INDEX + 2;
     private static final int PATH_INFO_PARAM_INDEX = PATH_INFO_INDEX + 3;
     private boolean hasTemplate;
     private boolean hasScreen;
     private boolean hasAction;
 
-    /**
-     * 取得page。
-     */
+    /** 取得page。 */
     public String getPage() {
         if (hasTemplate) {
             return getPathSegment(TEMPLATE_INDEX).get(1);
@@ -67,18 +65,14 @@ public class TurbineClassicURIBroker extends ServletURIBroker {
         }
     }
 
-    /**
-     * 设置page。
-     */
+    /** 设置page。 */
     public TurbineClassicURIBroker setPage(String page) {
         setPathInfo(TEMPLATE_INDEX, "template", page, false);
         hasTemplate = true;
         return this;
     }
 
-    /**
-     * 取得screen。
-     */
+    /** 取得screen。 */
     public String getScreen() {
         if (hasScreen) {
             return getPathSegment(SCREEN_INDEX).get(1);
@@ -87,18 +81,14 @@ public class TurbineClassicURIBroker extends ServletURIBroker {
         }
     }
 
-    /**
-     * 设置screen。
-     */
+    /** 设置screen。 */
     public TurbineClassicURIBroker setScreen(String screen) {
         setPathInfo(SCREEN_INDEX, "screen", screen, false);
         hasScreen = true;
         return this;
     }
 
-    /**
-     * 取得action。
-     */
+    /** 取得action。 */
     public String getAction() {
         if (hasAction) {
             return getPathSegment(ACTION_INDEX).get(1);
@@ -107,26 +97,20 @@ public class TurbineClassicURIBroker extends ServletURIBroker {
         }
     }
 
-    /**
-     * 设置action。
-     */
+    /** 设置action。 */
     public TurbineClassicURIBroker setAction(String action) {
         setPathInfo(ACTION_INDEX, "action", action, false);
         hasAction = true;
         return this;
     }
 
-    /**
-     * 添加pathInfo.
-     */
+    /** 添加pathInfo. */
     public TurbineClassicURIBroker addPathInfo(String id, Object value) {
         setPathInfo(PATH_INFO_PARAM_INDEX, id, value, true);
         return this;
     }
 
-    /**
-     * 添加一批pathInfo。
-     */
+    /** 添加一批pathInfo。 */
     public void setPathInfoParams(Map<String, Object> values) {
         clearPathInfoParams();
 
@@ -137,9 +121,7 @@ public class TurbineClassicURIBroker extends ServletURIBroker {
         }
     }
 
-    /**
-     * 删除所有的pathInfo。
-     */
+    /** 删除所有的pathInfo。 */
     public TurbineClassicURIBroker clearPathInfoParams() {
         clearPathSegment(PATH_INFO_PARAM_INDEX);
         return this;
@@ -188,7 +170,7 @@ public class TurbineClassicURIBroker extends ServletURIBroker {
             }
 
             setPathSegment(PATH_INFO_PARAM_INDEX, parent.getPathSegment(PATH_INFO_PARAM_INDEX),
-                    getPathSegment(PATH_INFO_PARAM_INDEX));
+                           getPathSegment(PATH_INFO_PARAM_INDEX));
         }
     }
 

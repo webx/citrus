@@ -25,24 +25,22 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
 
 import com.alibaba.citrus.util.StringEscapeUtil;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 import com.alibaba.citrus.util.regex.MatchResultSubstitution;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 
 public class RewriteCondition implements InitializingBean {
     private static final Logger log = LoggerFactory.getLogger(RewriteCondition.class);
-    private String testString;
-    private String patternString;
-    private Pattern pattern;
-    private boolean negative;
+    private String         testString;
+    private String         patternString;
+    private Pattern        pattern;
+    private boolean        negative;
     private ConditionFlags flags;
 
     public void setTest(String testString) {
@@ -90,14 +88,14 @@ public class RewriteCondition implements InitializingBean {
     public MatchResult match(MatchResult ruleMatchResult, MatchResult conditionMatchResult, HttpServletRequest request) {
         if (log.isTraceEnabled()) {
             log.trace("Testing condition: testString=\"{}\", pattern=\"{}\"", StringEscapeUtil.escapeJava(testString),
-                    StringEscapeUtil.escapeJava(patternString));
+                      StringEscapeUtil.escapeJava(patternString));
         }
 
         String subsTestString = getSubstitutedTestString(testString, ruleMatchResult, conditionMatchResult, request);
 
         if (log.isTraceEnabled()) {
             log.trace("Expanded testString: original=\"{}\", expanded=\"{}\"", StringEscapeUtil.escapeJava(testString),
-                    StringEscapeUtil.escapeJava(subsTestString));
+                      StringEscapeUtil.escapeJava(subsTestString));
         }
 
         Matcher matcher = pattern.matcher(subsTestString);
@@ -106,7 +104,7 @@ public class RewriteCondition implements InitializingBean {
         if (!negative && matched) {
             if (log.isDebugEnabled()) {
                 log.debug("Testing \"{}\" with condition pattern: \"{}\", MATCHED",
-                        StringEscapeUtil.escapeJava(subsTestString), StringEscapeUtil.escapeJava(patternString));
+                          StringEscapeUtil.escapeJava(subsTestString), StringEscapeUtil.escapeJava(patternString));
             }
 
             return matcher.toMatchResult();
@@ -115,7 +113,7 @@ public class RewriteCondition implements InitializingBean {
         if (negative && !matched) {
             if (log.isDebugEnabled()) {
                 log.debug("Testing \"{}\" with condition pattern: \"{}\", MATCHED",
-                        StringEscapeUtil.escapeJava(subsTestString), StringEscapeUtil.escapeJava(patternString));
+                          StringEscapeUtil.escapeJava(subsTestString), StringEscapeUtil.escapeJava(patternString));
             }
 
             return MatchResultSubstitution.EMPTY_MATCH_RESULT;
@@ -123,7 +121,7 @@ public class RewriteCondition implements InitializingBean {
 
         if (log.isTraceEnabled()) {
             log.trace("Testing \"{}\" with condition pattern: \"{}\", MISMATCHED",
-                    StringEscapeUtil.escapeJava(subsTestString), StringEscapeUtil.escapeJava(patternString));
+                      StringEscapeUtil.escapeJava(subsTestString), StringEscapeUtil.escapeJava(patternString));
         }
 
         return null;
@@ -143,9 +141,7 @@ public class RewriteCondition implements InitializingBean {
         return new ToStringBuilder().append("Condition").append(mb).toString();
     }
 
-    /**
-     * 代表condition的标志位。
-     */
+    /** 代表condition的标志位。 */
     public static class ConditionFlags extends Flags {
         public ConditionFlags() {
             super();
@@ -155,9 +151,7 @@ public class RewriteCondition implements InitializingBean {
             super(flags);
         }
 
-        /**
-         * 标志位：和下一个condition呈“或”的关系。
-         */
+        /** 标志位：和下一个condition呈“或”的关系。 */
         public boolean hasOR() {
             return hasFlags("OR", "ornext");
         }

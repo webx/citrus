@@ -25,10 +25,9 @@ import java.util.Map;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.util.internal.LazyLoader.ExceptionHandler;
 import com.alibaba.citrus.util.internal.LazyLoader.Loader;
+import org.junit.Test;
 
 /**
  * 测试<code>LazyLoader</code>。
@@ -36,12 +35,12 @@ import com.alibaba.citrus.util.internal.LazyLoader.Loader;
  * @author Michael Zhou
  */
 public class LazyLoaderTests {
-    private final static int CONCURRENCY = 100;
-    private final static int LOOP = 1000;
+    private final static int CONCURRENCY      = 100;
+    private final static int LOOP             = 1000;
     private final static int PERFORMANCE_LOOP = 100000;
 
     private LazyLoader<Resource, Object> lazyLoader;
-    private Throwable failed;
+    private Throwable                    failed;
 
     @Test
     public void performance() throws Exception {
@@ -60,7 +59,7 @@ public class LazyLoaderTests {
             for (int j = 1; j < sum.length; j++) {
                 if (i != j) {
                     System.out.printf("  %s is %.2f times faster than %s\n", sum[i].name, sum[j].totalTime
-                            / (double) sum[i].totalTime, sum[j].name);
+                                                                                          / (double) sum[i].totalTime, sum[j].name);
                 }
             }
         }
@@ -116,7 +115,7 @@ public class LazyLoaderTests {
         long totalTime = System.currentTimeMillis() - start[0];
 
         System.out.printf("%s performance test, concurrency %,d, loop %,d, takes %,d ms\n", loaderType, concurrency,
-                loop, totalTime);
+                          loop, totalTime);
         System.out.printf("Creator thread: %s\n", lazyLoader.getInstance().creator);
         System.out.println("------------------------------------");
 
@@ -241,9 +240,7 @@ public class LazyLoaderTests {
         exception_test(LoaderType.DCL_LOADER);
     }
 
-    /**
-     * 测试exception handler。
-     */
+    /** 测试exception handler。 */
     private void exception_test(final LoaderType loaderType) throws InterruptedException {
         LazyLoader<Object, Object> loader;
 
@@ -305,17 +302,13 @@ public class LazyLoaderTests {
         assertEquals("LazyLoader(LazyLoaderTests.ResourceLoader, loaded)", lazyLoader.toString());
     }
 
-    /**
-     * 测试资源类。
-     */
+    /** 测试资源类。 */
     private static class Resource {
         public Object innerObject;
         public String creator;
     }
 
-    /**
-     * Loader类型。
-     */
+    /** Loader类型。 */
     private static enum LoaderType {
         SYNC_LOADER {
             @Override
@@ -343,9 +336,7 @@ public class LazyLoaderTests {
         protected abstract <T> LazyLoader<T, Object> getLoader(Loader<T, Object> loader);
     }
 
-    /**
-     * 实际的loader。
-     */
+    /** 实际的loader。 */
     private static class ResourceLoader implements Loader<Resource, Object> {
         public Resource load(Object context) {
             Resource r = new Resource();
@@ -357,12 +348,10 @@ public class LazyLoaderTests {
         }
     }
 
-    /**
-     * 性能数据。
-     */
+    /** 性能数据。 */
     private static class PerformanceResult implements Comparable<PerformanceResult> {
         public final String name;
-        public final long totalTime;
+        public final long   totalTime;
 
         public PerformanceResult(LoaderType loader, long totalTime) {
             this.name = loader.name();

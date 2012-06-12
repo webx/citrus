@@ -35,9 +35,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public class MatchResultSubstitution extends Substitution {
-    /**
-     * 代表一个成功但无内容的匹配结果。
-     */
+    /** 代表一个成功但无内容的匹配结果。 */
     public static final MatchResult EMPTY_MATCH_RESULT = createEmptyMatchResult();
 
     private final MatchResult[] results;
@@ -50,23 +48,17 @@ public class MatchResultSubstitution extends Substitution {
         return matcher.toMatchResult();
     }
 
-    /**
-     * 创建一个替换。替换所有<code>$num</code>所代表的变量。
-     */
+    /** 创建一个替换。替换所有<code>$num</code>所代表的变量。 */
     public MatchResultSubstitution() {
         this("$", EMPTY_MATCH_RESULT);
     }
 
-    /**
-     * 创建一个替换。替换所有<code>$num</code>所代表的变量。
-     */
+    /** 创建一个替换。替换所有<code>$num</code>所代表的变量。 */
     public MatchResultSubstitution(MatchResult result) {
         this("$", result);
     }
 
-    /**
-     * 设置新匹配。
-     */
+    /** 设置新匹配。 */
     public void setMatchResult(MatchResult result) {
         if (results.length != 1) {
             new IllegalArgumentException("expected " + this.results.length + " MatchResults");
@@ -75,9 +67,7 @@ public class MatchResultSubstitution extends Substitution {
         results[0] = result;
     }
 
-    /**
-     * 设置新匹配。
-     */
+    /** 设置新匹配。 */
     public void setMatchResults(MatchResult... results) {
         assertTrue(!isEmptyArray(results), "results");
 
@@ -90,9 +80,7 @@ public class MatchResultSubstitution extends Substitution {
         }
     }
 
-    /**
-     * 创建一个替换。将所有指定前缀所代表的变量替换成相应<code>MatchResult.group(num)</code>的值。
-     */
+    /** 创建一个替换。将所有指定前缀所代表的变量替换成相应<code>MatchResult.group(num)</code>的值。 */
     public MatchResultSubstitution(String replacementPrefixes, MatchResult... results) {
         super(replacementPrefixes);
         this.results = new MatchResult[this.replacementPrefixes.length()];
@@ -100,16 +88,12 @@ public class MatchResultSubstitution extends Substitution {
         setMatchResults(results);
     }
 
-    /**
-     * 取得匹配。
-     */
+    /** 取得匹配。 */
     public MatchResult getMatch() {
         return getMatch(0);
     }
 
-    /**
-     * 取得匹配。
-     */
+    /** 取得匹配。 */
     public MatchResult getMatch(int index) {
         return results[index];
     }

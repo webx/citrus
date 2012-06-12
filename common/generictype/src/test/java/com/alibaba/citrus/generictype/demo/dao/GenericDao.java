@@ -32,7 +32,7 @@ import com.alibaba.citrus.generictype.TypeInfo;
  */
 public class GenericDao<DO extends DataObject<PK>, PK extends Object & Serializable> {
     private final ClassTypeInfo daoType;
-    private final TypeInfo doType;
+    private final TypeInfo      doType;
 
     public GenericDao() {
         this.daoType = factory.getClassType(getClass());

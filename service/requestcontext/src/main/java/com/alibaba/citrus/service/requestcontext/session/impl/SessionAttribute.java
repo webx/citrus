@@ -28,14 +28,14 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public class SessionAttribute {
-    private String storeName;
+    private String       storeName;
     private SessionStore store;
     private StoreContext storeContext;
-    private SessionImpl session;
-    private String name;
-    private Object value;
-    private boolean loaded;
-    private boolean modified;
+    private SessionImpl  session;
+    private String       name;
+    private Object       value;
+    private boolean      loaded;
+    private boolean      modified;
 
     /**
      * 创建一个attribute。
@@ -135,5 +135,4 @@ public class SessionAttribute {
 
         return new ToStringBuilder().append("SessionAttribute").append(mb).toString();
     }
-
 }

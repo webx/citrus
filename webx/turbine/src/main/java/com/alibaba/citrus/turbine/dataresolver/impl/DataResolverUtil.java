@@ -25,11 +25,10 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 
-import net.sf.cglib.reflect.FastClass;
-import net.sf.cglib.reflect.FastConstructor;
-
 import com.alibaba.citrus.service.dataresolver.DataResolverContext;
 import com.alibaba.citrus.service.dataresolver.DataResolverException;
+import net.sf.cglib.reflect.FastClass;
+import net.sf.cglib.reflect.FastConstructor;
 
 public class DataResolverUtil {
     static <A extends Annotation> String getAnnotationNameOrValue(Class<A> annotationType, A annotation,
@@ -46,7 +45,7 @@ public class DataResolverUtil {
             // 例如：@Param("name")
             // 和：  @Param(name="name", defaultValue="123")
             assertTrue(!hasOptionalArgs, "use @%s(name=\"%s\") instead of @%s(value=\"%s\"): %s", typeName, name,
-                    typeName, name, context);
+                       typeName, name, context);
         }
 
         return name;
@@ -57,7 +56,7 @@ public class DataResolverUtil {
             return (String) annotation.getClass().getMethod(name).invoke(annotation);
         } catch (Exception e) {
             throw new IllegalArgumentException(String.format("could not get value: @%s.%s()",
-                    annotationType.getSimpleName(), name), e);
+                                                             annotationType.getSimpleName(), name), e);
         }
     }
 
@@ -65,7 +64,7 @@ public class DataResolverUtil {
         int mod = beanType.getModifiers();
 
         assertTrue(!Modifier.isAbstract(mod) && Modifier.isPublic(mod),
-                "Class to set properties should be public and concrete: %s", beanType.getName());
+                   "Class to set properties should be public and concrete: %s", beanType.getName());
 
         Constructor<?> constructor;
 
@@ -73,7 +72,7 @@ public class DataResolverUtil {
             constructor = beanType.getConstructor();
         } catch (Exception e) {
             throw new IllegalArgumentException(String.format("Class to set properties has no default constructor: %s",
-                    beanType.getName()));
+                                                             beanType.getName()));
         }
 
         return FastClass.create(beanType).getConstructor(constructor);
@@ -84,7 +83,7 @@ public class DataResolverUtil {
             return assertNotNull(fc, "fastConstructor==null").newInstance();
         } catch (InvocationTargetException e) {
             throw new DataResolverException("Failed to create instance of class " + fc.getDeclaringClass().getName(),
-                    e.getCause());
+                                            e.getCause());
         }
     }
 }

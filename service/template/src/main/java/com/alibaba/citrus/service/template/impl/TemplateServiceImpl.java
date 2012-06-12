@@ -43,15 +43,15 @@ import com.alibaba.citrus.service.template.TemplateService;
  * @author Michael Zhou
  */
 public class TemplateServiceImpl extends AbstractService<TemplateService> implements TemplateService,
-        ProductionModeAware {
+                                                                                     ProductionModeAware {
     private Map<String, TemplateEngine> engines; // engineName -> engine
     private Map<String, TemplateEngine> engineMappings; // ext -> engine
-    private Map<String, String> engineNameMappings; // ext -> engineName
-    private String defaultExtension;
-    private boolean searchExtensions;
-    private boolean searchLocalizedTemplates;
+    private Map<String, String>         engineNameMappings; // ext -> engineName
+    private String                      defaultExtension;
+    private boolean                     searchExtensions;
+    private boolean                     searchLocalizedTemplates;
     private TemplateSearchingStrategy[] strategies;
-    private Boolean cacheEnabled;
+    private Boolean                     cacheEnabled;
     private boolean productionMode = true;
     private Map<TemplateKey, TemplateMatchResult> matchedTemplates;
 
@@ -91,9 +91,7 @@ public class TemplateServiceImpl extends AbstractService<TemplateService> implem
         this.productionMode = productionMode;
     }
 
-    /**
-     * 初始化service。
-     */
+    /** 初始化service。 */
     @Override
     protected void init() {
         if (engines == null) {
@@ -123,7 +121,7 @@ public class TemplateServiceImpl extends AbstractService<TemplateService> implem
 
                 assertTrue(!isEmpty(ext) && !ext.startsWith("."), "Invalid extension: %s", ext);
                 assertTrue(engines.containsKey(engineName), "TemplateEngine \"%s\" not defined.  Defined names: %s",
-                        engineName, engines.keySet());
+                           engineName, engines.keySet());
 
                 remappedNames.add(engineName);
                 engineMappings.put(ext, engines.get(engineName));
@@ -174,16 +172,12 @@ public class TemplateServiceImpl extends AbstractService<TemplateService> implem
         strategies = strategyList.toArray(new TemplateSearchingStrategy[strategyList.size()]);
     }
 
-    /**
-     * 取得指定模板名后缀对应的engine。
-     */
+    /** 取得指定模板名后缀对应的engine。 */
     public TemplateEngine getEngineOfName(String engineName) {
         return engines.get(engineName);
     }
 
-    /**
-     * 取得指定模板名后缀对应的engine。
-     */
+    /** 取得指定模板名后缀对应的engine。 */
     public TemplateEngine getTemplateEngine(String extension) {
         if (extension == null) {
             return null; // prevent treemap from throwing npe
@@ -192,16 +186,12 @@ public class TemplateServiceImpl extends AbstractService<TemplateService> implem
         return engineMappings.get(extension);
     }
 
-    /**
-     * 取得所有被登记的文件名后缀。
-     */
+    /** 取得所有被登记的文件名后缀。 */
     public String[] getSupportedExtensions() {
         return engineMappings.keySet().toArray(new String[engineMappings.size()]);
     }
 
-    /**
-     * 判断模板是否存在。
-     */
+    /** 判断模板是否存在。 */
     public boolean exists(String templateName) {
         try {
             findTemplate(templateName);
@@ -211,9 +201,7 @@ public class TemplateServiceImpl extends AbstractService<TemplateService> implem
         }
     }
 
-    /**
-     * 渲染模板，并以字符串的形式取得渲染的结果。
-     */
+    /** 渲染模板，并以字符串的形式取得渲染的结果。 */
     public String getText(String templateName, TemplateContext context) throws TemplateException, IOException {
         TemplateMatchResult result = findTemplate(templateName);
         TemplateEngine engine = assertNotNull(result.getEngine(), "templateEngine");
@@ -221,31 +209,25 @@ public class TemplateServiceImpl extends AbstractService<TemplateService> implem
         return engine.getText(result.getTemplateName(), context);
     }
 
-    /**
-     * 渲染模板，并将渲染的结果送到字节输出流中。
-     */
+    /** 渲染模板，并将渲染的结果送到字节输出流中。 */
     public void writeTo(String templateName, TemplateContext context, OutputStream ostream) throws TemplateException,
-            IOException {
+                                                                                                   IOException {
         TemplateMatchResult result = findTemplate(templateName);
         TemplateEngine engine = assertNotNull(result.getEngine(), "templateEngine");
 
         engine.writeTo(result.getTemplateName(), context, ostream);
     }
 
-    /**
-     * 渲染模板，并将渲染的结果送到字符输出流中。
-     */
+    /** 渲染模板，并将渲染的结果送到字符输出流中。 */
     public void writeTo(String templateName, TemplateContext context, Writer writer) throws TemplateException,
-            IOException {
+                                                                                            IOException {
         TemplateMatchResult result = findTemplate(templateName);
         TemplateEngine engine = assertNotNull(result.getEngine(), "templateEngine");
 
         engine.writeTo(result.getTemplateName(), context, writer);
     }
 
-    /**
-     * 查找指定名称的模板。
-     */
+    /** 查找指定名称的模板。 */
     TemplateMatchResult findTemplate(String templateName) {
         assertInitialized();
 
@@ -307,9 +289,7 @@ public class TemplateServiceImpl extends AbstractService<TemplateService> implem
         return result;
     }
 
-    /**
-     * 查找模板的最终strategy结点。
-     */
+    /** 查找模板的最终strategy结点。 */
     private boolean findTemplateInTemplateEngine(TemplateMatcher matcher) {
         TemplateEngine engine = getTemplateEngine(matcher.getExtension());
 

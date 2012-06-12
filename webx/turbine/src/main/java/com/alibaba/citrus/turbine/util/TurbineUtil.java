@@ -28,12 +28,10 @@ import com.alibaba.citrus.turbine.TurbineRunDataInternal;
 import com.alibaba.citrus.turbine.support.TurbineRunDataImpl;
 
 public class TurbineUtil {
-    private final static String TURBINE_RUNDATA_KEY = "_webx3_turbine_rundata_";
+    private final static String TURBINE_RUNDATA_KEY         = "_webx3_turbine_rundata_";
     private final static String TURBINE_RUNDATA_CONTEXT_KEY = "_webx3_turbine_rundata_context";
 
-    /**
-     * 从request中取得rundata，假如不存在，则创建之。
-     */
+    /** 从request中取得rundata，假如不存在，则创建之。 */
     public static TurbineRunData getTurbineRunData(HttpServletRequest request) {
         return getTurbineRunData(request, false);
     }
@@ -51,9 +49,7 @@ public class TurbineUtil {
         return assertNotNull(rundata, "TurbineRunData not found in request attributes");
     }
 
-    /**
-     * 从requestContext中取得rundata。
-     */
+    /** 从requestContext中取得rundata。 */
     public static TurbineRunData getTurbineRunData(RequestContext requestContext) {
         return getTurbineRunData(requestContext.getRequest());
     }
@@ -61,13 +57,11 @@ public class TurbineUtil {
     public static void saveTurbineRunDataContext(TurbineRunData rundata) {
         if (rundata instanceof TurbineRunDataInternal) {
             rundata.getRequest().setAttribute(TURBINE_RUNDATA_CONTEXT_KEY,
-                    ((TurbineRunDataInternal) rundata).getContext());
+                                              ((TurbineRunDataInternal) rundata).getContext());
         }
     }
 
-    /**
-     * 从request中清除turbine rundata。
-     */
+    /** 从request中清除turbine rundata。 */
     public static void cleanupTurbineRunData(HttpServletRequest request, boolean clearContext) {
         request.removeAttribute(TURBINE_RUNDATA_KEY);
 

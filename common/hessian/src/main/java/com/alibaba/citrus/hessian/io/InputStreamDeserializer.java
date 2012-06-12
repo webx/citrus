@@ -49,22 +49,17 @@
 package com.alibaba.citrus.hessian.io;
 
 import java.io.IOException;
-import java.io.InputStream;
 
-/**
- * Serializing a stream object.
- */
+/** Serializing a stream object. */
 public class InputStreamDeserializer extends AbstractDeserializer {
-  public static final InputStreamDeserializer DESER
-    = new InputStreamDeserializer();
+    public static final InputStreamDeserializer DESER
+            = new InputStreamDeserializer();
 
-  public InputStreamDeserializer()
-  {
-  }
+    public InputStreamDeserializer() {
+    }
 
-  public Object readObject(AbstractHessianInput in)
-    throws IOException
-  {
-    return in.readInputStream();
-  }
+    public Object readObject(AbstractHessianInput in)
+            throws IOException {
+        return in.readInputStream();
+    }
 }

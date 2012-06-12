@@ -25,16 +25,15 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.util.List;
 
+import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import org.junit.Test;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 
-import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
-
 public class PropertyPlaceholderTests {
     private ApplicationContext factory;
-    private Configuration conf;
+    private Configuration      conf;
 
     @Test
     public void defaultValue() {

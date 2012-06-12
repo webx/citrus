@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.alibaba.citrus.util.internal.apache.lang;
 
 /**
@@ -44,7 +45,7 @@ package com.alibaba.citrus.util.internal.apache.lang;
  * <p>
  * Typical use for the code is as follows:
  * </p>
- *
+ * <p/>
  * <pre>
  * public boolean equals(Object obj) {
  *     if (obj instanceof MyClass == false) {
@@ -66,9 +67,7 @@ package com.alibaba.citrus.util.internal.apache.lang;
  * @author Arun Mammen Thomas
  */
 public class EqualsBuilder {
-    /**
-     * If the fields tested are equals. The default value is <code>true</code>.
-     */
+    /** If the fields tested are equals. The default value is <code>true</code>. */
     private boolean isEquals = true;
 
     /**

@@ -22,10 +22,9 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.util.StringEscapeUtil;
 import com.alibaba.citrus.util.Utils;
+import org.junit.Test;
 
 public class UtilToolSetTests {
     @Test

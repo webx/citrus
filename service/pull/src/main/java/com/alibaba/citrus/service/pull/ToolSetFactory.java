@@ -30,13 +30,11 @@ package com.alibaba.citrus.service.pull;
  * <code>createTool(name)</code> 方法至多被调用一次。</li>
  * </ul>
  *
- * @see ToolFactory
  * @author Michael Zhou
+ * @see ToolFactory
  */
 public interface ToolSetFactory {
-    /**
-     * Factory所创建的tool是不是singleton？
-     */
+    /** Factory所创建的tool是不是singleton？ */
     boolean isSingleton();
 
     /**

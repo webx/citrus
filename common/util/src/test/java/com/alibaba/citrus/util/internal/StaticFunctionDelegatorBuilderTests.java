@@ -29,12 +29,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.util.ArrayUtil;
 import com.alibaba.citrus.util.ObjectUtil;
 import com.alibaba.citrus.util.StringEscapeUtil;
 import com.alibaba.citrus.util.StringUtil;
+import org.junit.Test;
 
 public class StaticFunctionDelegatorBuilderTests {
     private StaticFunctionDelegatorBuilder builder;
@@ -79,7 +78,7 @@ public class StaticFunctionDelegatorBuilderTests {
             assertThat(
                     e,
                     exception("Duplicated method signature: func2(I)Ljava/lang/String;",
-                            "StaticFunctionDelegatorBuilderTests$Util2.func2(int)"));
+                              "StaticFunctionDelegatorBuilderTests$Util2.func2(int)"));
         }
 
         Object util = builder.toObject();
@@ -251,5 +250,4 @@ public class StaticFunctionDelegatorBuilderTests {
 
         System.out.println(abs.invoke(util, "abcd"));
     }
-
 }

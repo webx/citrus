@@ -37,15 +37,15 @@ import com.alibaba.citrus.util.i18n.LocaleUtil;
  * @author Michael Zhou
  */
 public class SetLocaleRequestContextFactoryImpl extends AbstractRequestContextFactory<SetLocaleRequestContext> {
-    private String inputCharsetParam;
+    private String  inputCharsetParam;
     private Pattern inputCharsetPattern;
-    private String outputCharsetParam;
+    private String  outputCharsetParam;
     private Pattern outputCharsetPattern;
-    private String defaultLocaleName;
-    private Locale defaultLocale;
-    private String defaultCharset;
-    private String sessionKey;
-    private String paramKey;
+    private String  defaultLocaleName;
+    private Locale  defaultLocale;
+    private String  defaultCharset;
+    private String  sessionKey;
+    private String  paramKey;
 
     public void setInputCharsetParam(String inputCharsetParam) {
         this.inputCharsetParam = trimToNull(inputCharsetParam);
@@ -111,9 +111,7 @@ public class SetLocaleRequestContextFactoryImpl extends AbstractRequestContextFa
         return requestContext;
     }
 
-    /**
-     * 本类提供了设置多语言环境的功能。
-     */
+    /** 本类提供了设置多语言环境的功能。 */
     public String[] getFeatures() {
         return new String[] { "setLocaleAndCharset" };
     }

@@ -19,7 +19,6 @@ package com.meterware.servletunit;
 
 import java.io.File;
 import java.net.MalformedURLException;
-
 import javax.servlet.ServletContext;
 
 import org.w3c.dom.Document;
@@ -33,7 +32,7 @@ public class PatchedWebApplication extends WebApplication {
     }
 
     public PatchedWebApplication(Document document, File file, String contextPath) throws MalformedURLException,
-            SAXException {
+                                                                                          SAXException {
         super(document, file, contextPath);
     }
 

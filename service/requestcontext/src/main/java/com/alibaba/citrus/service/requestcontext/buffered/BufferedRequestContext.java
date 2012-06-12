@@ -43,7 +43,7 @@ public interface BufferedRequestContext extends RequestContext {
      *
      * @param buffering 是否buffer内容
      * @throws IllegalStateException <code>getOutputStream</code>或
-     *             <code>getWriter</code>方法已经被执行
+     *                               <code>getWriter</code>方法已经被执行
      */
     void setBuffering(boolean buffering);
 
@@ -51,7 +51,7 @@ public interface BufferedRequestContext extends RequestContext {
      * 创建新的buffer，保存老的buffer。
      *
      * @throws IllegalStateException 如果不在buffer模式，或<code>getWriter</code>及
-     *             <code>getOutputStream</code>方法从未被调用
+     *                               <code>getOutputStream</code>方法从未被调用
      */
     void pushBuffer();
 
@@ -60,7 +60,7 @@ public interface BufferedRequestContext extends RequestContext {
      *
      * @return 最近的buffer内容
      * @throws IllegalStateException 如果不在buffer模式，或<code>getWriter</code>
-     *             方法曾被调用，或 <code>getOutputStream</code>方法从未被调用
+     *                               方法曾被调用，或 <code>getOutputStream</code>方法从未被调用
      */
     ByteArray popByteBuffer();
 
@@ -69,7 +69,7 @@ public interface BufferedRequestContext extends RequestContext {
      *
      * @return 最近的buffer内容
      * @throws IllegalStateException 如果不在buffer模式，或<code>getOutputStream</code>
-     *             方法曾被调用，或<code>getWriter</code>方法从未被调用
+     *                               方法曾被调用，或<code>getWriter</code>方法从未被调用
      */
     String popCharBuffer();
 }

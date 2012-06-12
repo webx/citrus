@@ -19,11 +19,10 @@ package com.alibaba.test2.module.action.form.field;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.alibaba.citrus.service.form.CustomErrors;
 import com.alibaba.citrus.service.form.Field;
 import com.alibaba.citrus.turbine.dataresolver.FormField;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class MyAction {
     @Autowired
@@ -34,7 +33,7 @@ public class MyAction {
     }
 
     public void doGetFieldDontSkipAction(@FormField(name = "field1", group = "myGroup1", skipIfInvalid = false)//
-    CustomErrors field) { // 注入custom errors应该也可以，其实就是field。
+                                                 CustomErrors field) { // 注入custom errors应该也可以，其实就是field。
         setAttribute(field);
     }
 

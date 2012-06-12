@@ -29,23 +29,17 @@ import static com.alibaba.citrus.util.StringUtil.*;
 public abstract class Substitution {
     protected final String replacementPrefixes;
 
-    /**
-     * 创建一个替换，以<code>'$'</code>为变量前缀。
-     */
+    /** 创建一个替换，以<code>'$'</code>为变量前缀。 */
     public Substitution() {
         this("$");
     }
 
-    /**
-     * 创建一个替换，以指定字符为变量前缀。
-     */
+    /** 创建一个替换，以指定字符为变量前缀。 */
     public Substitution(String replacementPrefixes) {
         this.replacementPrefixes = assertNotNull(trimToNull(replacementPrefixes), "replacementPrefixes");
     }
 
-    /**
-     * 替换字符串中的变量。
-     */
+    /** 替换字符串中的变量。 */
     public final String substitute(String input) {
         if (input == null) {
             return null;
@@ -58,14 +52,12 @@ public abstract class Substitution {
         return buf.toString();
     }
 
-    /**
-     * 替换字符串中的变量。
-     */
+    /** 替换字符串中的变量。 */
     public final void substitute(StringBuilder buf, String input) {
         int length = input.length();
         int index;
 
-        for (int i = 0; i < length;) {
+        for (int i = 0; i < length; ) {
             char ch = input.charAt(i);
 
             if (ch == '\\') {
@@ -115,8 +107,6 @@ public abstract class Substitution {
         }
     }
 
-    /**
-     * 子类覆盖此方法，以提供指定类型、指定group序号的的replacement结果。
-     */
+    /** 子类覆盖此方法，以提供指定类型、指定group序号的的replacement结果。 */
     protected abstract String group(int index, int groupNumber);
 }

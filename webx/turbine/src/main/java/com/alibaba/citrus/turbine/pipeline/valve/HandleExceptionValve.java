@@ -27,18 +27,16 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
 import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
 
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.support.AbstractValve;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import com.alibaba.citrus.turbine.TurbineRunDataInternal;
 import com.alibaba.citrus.webx.util.ErrorHandlerHelper;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 在<code>&lt;pipeline id=&quot;exceptionPipeline&quot;&gt;</code>中，处理异常的valve。
@@ -48,9 +46,9 @@ import com.alibaba.citrus.webx.util.ErrorHandlerHelper;
 public class HandleExceptionValve extends AbstractValve {
     private static final String HELPER_NAME_DEFAULT = "error";
     private final HttpServletRequest request;
-    private String defaultPage;
-    private ExceptionHandler[] exceptionHandlers;
-    private String helperName;
+    private       String             defaultPage;
+    private       ExceptionHandler[] exceptionHandlers;
+    private       String             helperName;
 
     public HandleExceptionValve(HttpServletRequest request) {
         this.request = assertNotNull(assertProxy(request), "no request");
@@ -126,7 +124,8 @@ public class HandleExceptionValve extends AbstractValve {
 
             // 从最根本的exception cause开始反向追溯，例如：t1 caused by t2 caused by t3，
             // 那么，检查顺序为t3, t2, t1。
-            CAUSES: for (Throwable cause : getCauses(exception, true)) {
+            CAUSES:
+            for (Throwable cause : getCauses(exception, true)) {
                 // 对于每个异常，查找匹配的exception handlers。
                 // 所有handlers已经排序，较特殊的异常在前，假设T1 extends T2，那么T1在T2之前。
                 for (ExceptionHandler exceptionHandler : exceptionHandlers) {
@@ -156,8 +155,8 @@ public class HandleExceptionValve extends AbstractValve {
 
     public static class ExceptionHandler {
         private final Class<? extends Throwable> exceptionType;
-        private final int statusCode;
-        private final String page;
+        private final int                        statusCode;
+        private final String                     page;
 
         public ExceptionHandler(Class<? extends Throwable> exceptionType, int statusCode, String page) {
             this.exceptionType = assertNotNull(exceptionType, "no exception type");

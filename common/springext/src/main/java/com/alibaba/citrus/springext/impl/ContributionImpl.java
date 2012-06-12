@@ -33,11 +33,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.dom4j.DocumentException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.core.io.InputStreamSource;
-
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.ConfigurationPointException;
 import com.alibaba.citrus.springext.ConfigurationPoints;
@@ -46,6 +41,10 @@ import com.alibaba.citrus.springext.ContributionType;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.VersionableSchemas;
 import com.alibaba.citrus.util.ToStringBuilder;
+import org.dom4j.DocumentException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.io.InputStreamSource;
 
 /**
  * 实现<code>Contribution</code>接口。
@@ -54,11 +53,11 @@ import com.alibaba.citrus.util.ToStringBuilder;
  */
 public class ContributionImpl implements Contribution {
     private final static Logger log = LoggerFactory.getLogger(Contribution.class);
-    private final ConfigurationPoint configurationPoint;
+    private final ConfigurationPoint         configurationPoint;
     private final ConfigurationPointSettings settings;
-    private final ContributionKey key;
-    private final String implementationClassName;
-    private VersionableSchemas schemas;
+    private final ContributionKey            key;
+    private final String                     implementationClassName;
+    private       VersionableSchemas         schemas;
 
     ContributionImpl(ConfigurationPointImpl cp, ConfigurationPointSettings settings, ContributionType type,
                      String name, String contributionClassName) {
@@ -117,7 +116,7 @@ public class ContributionImpl implements Contribution {
             return null; // no schema found
         } else {
             return new SchemaImpl(schemaName, null, getDescription(), new ContributionSchemaSource(resource,
-                    getConfigurationPoint().getConfigurationPoints(), getConfigurationPoint()));
+                                                                                                   getConfigurationPoint().getConfigurationPoints(), getConfigurationPoint()));
         }
     }
 
@@ -137,7 +136,7 @@ public class ContributionImpl implements Contribution {
 
         List<Schema> schemas = createLinkedList();
 
-        for (Iterator<URL> i = resources.iterator(); i.hasNext();) {
+        for (Iterator<URL> i = resources.iterator(); i.hasNext(); ) {
             URL url = i.next();
             String path = url.getPath();
             Matcher matcher = pattern.matcher(path);
@@ -148,8 +147,8 @@ public class ContributionImpl implements Contribution {
 
                 if (checkVersion(schemaVersion)) {
                     schemas.add(new SchemaImpl(schemaName, schemaVersion, getDescription(),
-                            new ContributionSchemaSource(url, getConfigurationPoint().getConfigurationPoints(),
-                                    getConfigurationPoint())));
+                                               new ContributionSchemaSource(url, getConfigurationPoint().getConfigurationPoints(),
+                                                                            getConfigurationPoint())));
                 } else {
                     i.remove();
                 }
@@ -193,13 +192,11 @@ public class ContributionImpl implements Contribution {
         return true;
     }
 
-    /**
-     * 用于生成或取得contribution schema的内容。
-     */
+    /** 用于生成或取得contribution schema的内容。 */
     private static class ContributionSchemaSource implements InputStreamSource {
-        private final URL url;
+        private final URL                 url;
         private final ConfigurationPoints cps;
-        private final ConfigurationPoint thisCp;
+        private final ConfigurationPoint  thisCp;
 
         public ContributionSchemaSource(URL url, ConfigurationPoints cps, ConfigurationPoint thisCp) {
             this.url = assertNotNull(url, "no schema URL");
@@ -216,7 +213,7 @@ public class ContributionImpl implements Contribution {
         public InputStream getInputStream() throws IOException {
             try {
                 return new ByteArrayInputStream(getContributionSchemaContent(getOriginalInputStream(),
-                        url.toExternalForm(), true, cps, thisCp));
+                                                                             url.toExternalForm(), true, cps, thisCp));
             } catch (DocumentException e) {
                 return getOriginalInputStream();
             }
@@ -243,7 +240,7 @@ public class ContributionImpl implements Contribution {
         ToStringBuilder buf = new ToStringBuilder();
 
         buf.format("Contribution[toConfigurationPoint=%s, name=%s, type=%s, class=%s]",
-                getConfigurationPoint().getName(), getName(), getType(), implementationClassName).start();
+                   getConfigurationPoint().getName(), getName(), getType(), implementationClassName).start();
 
         buf.append(getSchemas());
 

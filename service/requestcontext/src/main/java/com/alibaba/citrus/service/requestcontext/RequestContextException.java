@@ -25,9 +25,7 @@ package com.alibaba.citrus.service.requestcontext;
 public class RequestContextException extends RuntimeException {
     private static final long serialVersionUID = 8129627799406228080L;
 
-    /**
-     * 创建一个异常。
-     */
+    /** 创建一个异常。 */
     public RequestContextException() {
         super();
     }
@@ -45,7 +43,7 @@ public class RequestContextException extends RuntimeException {
      * 创建一个异常。
      *
      * @param message 异常信息
-     * @param cause 异常原因
+     * @param cause   异常原因
      */
     public RequestContextException(String message, Throwable cause) {
         super(message, cause);

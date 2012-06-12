@@ -22,20 +22,18 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import static org.springframework.web.context.support.WebApplicationContextUtils.*;
 
 import java.io.IOException;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.context.WebApplicationContext;
-
 import com.alibaba.citrus.webx.WebxComponents;
 import com.alibaba.citrus.webx.WebxRootController;
 import com.alibaba.citrus.webx.context.WebxComponentsContext;
 import com.alibaba.citrus.webx.util.RequestURIFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.context.WebApplicationContext;
 
 /**
  * 初始化spring容器的filter。
@@ -44,28 +42,22 @@ import com.alibaba.citrus.webx.util.RequestURIFilter;
  */
 public class WebxFrameworkFilter extends FilterBean {
     private final Logger log = LoggerFactory.getLogger(getClass());
-    private String parentContextAttribute;
-    private WebxComponents components;
+    private String           parentContextAttribute;
+    private WebxComponents   components;
     private RequestURIFilter excludeFilter;
     private RequestURIFilter passthruFilter;
 
-    /**
-     * 用于在servletContext中保存parent context的attribute key。
-     */
+    /** 用于在servletContext中保存parent context的attribute key。 */
     public final String getParentContextAttribute() {
         return parentContextAttribute;
     }
 
-    /**
-     * 设置用于在servletContext中保存parent context的attribute key。
-     */
+    /** 设置用于在servletContext中保存parent context的attribute key。 */
     public final void setParentContextAttribute(String parentContextAttribute) {
         this.parentContextAttribute = trimToNull(parentContextAttribute);
     }
 
-    /**
-     * 设置要排除掉的URL。
-     */
+    /** 设置要排除掉的URL。 */
     public void setExcludes(String excludes) {
         excludeFilter = new RequestURIFilter(excludes);
     }
@@ -78,16 +70,12 @@ public class WebxFrameworkFilter extends FilterBean {
         passthruFilter = new RequestURIFilter(passthru);
     }
 
-    /**
-     * 取得所有components的信息。
-     */
+    /** 取得所有components的信息。 */
     public WebxComponents getWebxComponents() {
         return components;
     }
 
-    /**
-     * 初始化filter。
-     */
+    /** 初始化filter。 */
     @Override
     protected final void init() throws Exception {
         WebApplicationContext parentContext = findParentContext();
@@ -104,7 +92,7 @@ public class WebxFrameworkFilter extends FilterBean {
             } else {
                 log.warn(
                         "You have specified Passthru Filter in /WEB-INF/web.xml.  "
-                                + "It will not take effect because the implementation of WebxRootController ({}) does not support this feature.",
+                        + "It will not take effect because the implementation of WebxRootController ({}) does not support this feature.",
                         rootController.getClass().getName());
             }
         }
@@ -127,7 +115,7 @@ public class WebxFrameworkFilter extends FilterBean {
         } else {
             parentContext = getWebApplicationContext(getServletContext(), parentContextAttribute);
             assertNotNull(parentContext, "No WebApplicationContext \"%s\" found: not registered?",
-                    parentContextAttribute);
+                          parentContextAttribute);
         }
 
         return parentContext;

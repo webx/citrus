@@ -50,16 +50,11 @@ package com.alibaba.citrus.hessian.io;
 
 import java.io.IOException;
 
-/**
- * Looks up remote objects.  The default just returns a HessianRemote object.
- */
+/** Looks up remote objects.  The default just returns a HessianRemote object. */
 public class AbstractHessianResolver implements HessianRemoteResolver {
-  /**
-   * Looks up a proxy object.
-   */
-  public Object lookup(String type, String url)
-    throws IOException
-  {
-    return new HessianRemote(type, url);
-  }
+    /** Looks up a proxy object. */
+    public Object lookup(String type, String url)
+            throws IOException {
+        return new HessianRemote(type, url);
+    }
 }

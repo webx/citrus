@@ -25,18 +25,12 @@ import com.alibaba.citrus.service.form.configuration.FormConfig;
  * @author Michael Zhou
  */
 public interface FormService {
-    /**
-     * 取得form的定义。
-     */
+    /** 取得form的定义。 */
     FormConfig getFormConfig();
 
-    /**
-     * 从request中取得当前请求的form或创建新的form。
-     */
+    /** 从request中取得当前请求的form或创建新的form。 */
     Form getForm();
 
-    /**
-     * 从request中取得当前请求的form或创建新的form。
-     */
+    /** 从request中取得当前请求的form或创建新的form。 */
     Form getForm(boolean forcePostOnly);
 }

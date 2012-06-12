@@ -21,16 +21,14 @@ import static com.alibaba.citrus.util.BasicConstant.*;
 import static java.util.Collections.*;
 
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.citrus.service.configuration.ProductionModeAware;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.support.AbstractValve;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
 import com.alibaba.citrus.webx.util.SetLoggingContextHelper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 设置或清除logging MDC的valve。
@@ -42,7 +40,7 @@ public class SetLoggingContextValve extends AbstractValve implements ProductionM
 
     @Autowired
     private HttpServletRequest request;
-    private Boolean productionMode;
+    private Boolean            productionMode;
 
     public void setProductionMode(boolean productionMode) {
         this.productionMode = productionMode;

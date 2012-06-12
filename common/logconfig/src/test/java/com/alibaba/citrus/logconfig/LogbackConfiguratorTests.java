@@ -22,9 +22,8 @@ import static org.junit.Assert.*;
 
 import java.net.URL;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.logconfig.logback.LogbackConfigurator;
+import org.junit.Test;
 
 public class LogbackConfiguratorTests extends AbstractLogConfiguratorTests {
     @Test
@@ -61,7 +60,7 @@ public class LogbackConfiguratorTests extends AbstractLogConfiguratorTests {
         assertThat(err, containsString("WARN: Failed to configure logback using "));
         assertThat(err, containsString("logback-default.xml"));
         assertThat(err, containsString("LogbackException: Expected LOGBACK binding with SLF4J, "
-                + "but another log system has taken the place: Log4jLoggerFactory"));
+                                       + "but another log system has taken the place: Log4jLoggerFactory"));
     }
 
     @SuppressWarnings("unused")

@@ -19,14 +19,13 @@ package com.alibaba.citrus.service.uribroker.impl.interceptor;
 
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.uribroker.interceptor.Randomize;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 一个生成随机URL Query Data的PathHandler Bean解析类
@@ -34,7 +33,7 @@ import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionPa
  * @author dux.fangl
  */
 public class RandomizeHandlerDefinitionParser extends AbstractNamedBeanDefinitionParser<Randomize> implements
-        ContributionAware {
+                                                                                                   ContributionAware {
 
     @Override
     protected String getDefaultName() {

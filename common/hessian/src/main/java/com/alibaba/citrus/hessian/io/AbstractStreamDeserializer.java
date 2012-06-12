@@ -50,51 +50,47 @@ package com.alibaba.citrus.hessian.io;
 
 import java.io.IOException;
 
-/**
- * Deserializing a byte stream
- */
+/** Deserializing a byte stream */
 abstract public class AbstractStreamDeserializer extends AbstractDeserializer {
-  abstract public Class getType();
+    abstract public Class getType();
 
-  /**
-   * Reads the Hessian 1.0 style map.
-   */
-  public Object readMap(AbstractHessianInput in)
-    throws IOException
-  {
-    Object value = null;
+    /** Reads the Hessian 1.0 style map. */
+    public Object readMap(AbstractHessianInput in)
+            throws IOException {
+        Object value = null;
 
-    while (! in.isEnd()) {
-      String key = in.readString();
+        while (!in.isEnd()) {
+            String key = in.readString();
 
-      if (key.equals("value"))
-        value = readStreamValue(in);
-      else
-	in.readObject();
+            if (key.equals("value")) {
+                value = readStreamValue(in);
+            } else {
+                in.readObject();
+            }
+        }
+
+        in.readMapEnd();
+
+        return value;
     }
 
-    in.readMapEnd();
+    public Object readObject(AbstractHessianInput in, Object[] fields)
+            throws IOException {
+        String[] fieldNames = (String[]) fields;
 
-    return value;
-  }
+        Object value = null;
 
-  public Object readObject(AbstractHessianInput in, Object []fields)
-    throws IOException
-  {
-    String []fieldNames = (String []) fields;
+        for (int i = 0; i < fieldNames.length; i++) {
+            if ("value".equals(fieldNames[i])) {
+                value = readStreamValue(in);
+            } else {
+                in.readObject();
+            }
+        }
 
-    Object value = null;
-
-    for (int i = 0; i < fieldNames.length; i++) {
-      if ("value".equals(fieldNames[i]))
-        value = readStreamValue(in);
-      else
-	in.readObject();
+        return value;
     }
 
-    return value;
-  }
-
-  abstract protected Object readStreamValue(AbstractHessianInput in)
-    throws IOException;
+    abstract protected Object readStreamValue(AbstractHessianInput in)
+            throws IOException;
 }

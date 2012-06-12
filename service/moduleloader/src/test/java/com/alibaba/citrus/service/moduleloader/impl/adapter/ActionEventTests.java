@@ -23,6 +23,11 @@ import static org.junit.Assert.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.alibaba.citrus.service.AbstractWebTests;
+import com.alibaba.citrus.service.moduleloader.ActionEventException;
+import com.alibaba.citrus.service.moduleloader.ActionEventNotFoundException;
+import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
+import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,12 +35,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationContext;
-
-import com.alibaba.citrus.service.AbstractWebTests;
-import com.alibaba.citrus.service.moduleloader.ActionEventException;
-import com.alibaba.citrus.service.moduleloader.ActionEventNotFoundException;
-import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
-import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 
 public class ActionEventTests extends AbstractWebTests {
     private ModuleLoaderService moduleLoader;
@@ -52,9 +51,7 @@ public class ActionEventTests extends AbstractWebTests {
         assertNotNull(moduleLoader);
     }
 
-    /**
-     * 当指定了defaultLazyInit=false（默认值）时，module创建的失败会在context初始化的时候抛出。
-     */
+    /** 当指定了defaultLazyInit=false（默认值）时，module创建的失败会在context初始化的时候抛出。 */
     @Test
     public void actionEvent_eagerInitFailure() {
         try {
@@ -65,9 +62,7 @@ public class ActionEventTests extends AbstractWebTests {
         }
     }
 
-    /**
-     * 当指定了defaultLazyInit=true时，module创建的失败会在取得module时抛出。
-     */
+    /** 当指定了defaultLazyInit=true时，module创建的失败会在取得module时抛出。 */
     @Test
     public void actionEvent_noRequest() {
         // 创建不包含request-contexts对象的spring container
@@ -81,7 +76,7 @@ public class ActionEventTests extends AbstractWebTests {
             assertThat(
                     e,
                     exception(NoSuchBeanDefinitionException.class, "Failed to configure module adapter",
-                            "HttpServletRequest"));
+                              "HttpServletRequest"));
         }
     }
 
@@ -104,8 +99,8 @@ public class ActionEventTests extends AbstractWebTests {
             assertThat(
                     e,
                     exception(IllegalArgumentException.class, "Failed to configure module adapter",
-                            "expects a proxy delegating to a real object, but got an object of type "
-                                    + request.getClass().getName()));
+                              "expects a proxy delegating to a real object, but got an object of type "
+                              + request.getClass().getName()));
         }
     }
 
@@ -189,7 +184,7 @@ public class ActionEventTests extends AbstractWebTests {
         initRequestContext();
 
         ActionEventAdapter actionEvent = (ActionEventAdapter) moduleLoader.getModule("action",
-                "class.myprod.MyActionFailure");
+                                                                                     "class.myprod.MyActionFailure");
 
         try {
             actionEvent.execute();

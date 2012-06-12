@@ -22,6 +22,7 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
+import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,10 +32,8 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 
-import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
-
 public class SkipValidationDefaultValueTests {
-    private static ApplicationContext appContext;
+    private static ApplicationContext         appContext;
     private static DefaultListableBeanFactory factory;
 
     @BeforeClass

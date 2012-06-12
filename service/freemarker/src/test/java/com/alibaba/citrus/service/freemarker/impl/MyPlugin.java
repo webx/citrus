@@ -19,7 +19,6 @@ package com.alibaba.citrus.service.freemarker.impl;
 
 import com.alibaba.citrus.service.freemarker.FreeMarkerConfiguration;
 import com.alibaba.citrus.service.freemarker.FreeMarkerPlugin;
-
 import freemarker.template.Configuration;
 
 public class MyPlugin implements FreeMarkerPlugin {

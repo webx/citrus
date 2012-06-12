@@ -20,12 +20,11 @@ package com.alibaba.citrus.turbine.support;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
+import com.alibaba.citrus.turbine.AbstractWebxTests;
+import com.alibaba.citrus.turbine.Context;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.alibaba.citrus.turbine.AbstractWebxTests;
-import com.alibaba.citrus.turbine.Context;
 
 public class TurbineRunDataTests extends AbstractWebxTests {
     @BeforeClass

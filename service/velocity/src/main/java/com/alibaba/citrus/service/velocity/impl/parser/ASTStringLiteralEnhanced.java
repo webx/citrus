@@ -28,7 +28,7 @@ import org.apache.velocity.runtime.parser.node.ASTStringLiteral;
 
 public class ASTStringLiteralEnhanced extends ASTStringLiteral {
     private static final Field[] fields;
-    private boolean interpolate;
+    private              boolean interpolate;
 
     static {
         List<Field> fieldList = createLinkedList();

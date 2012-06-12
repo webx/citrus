@@ -17,13 +17,12 @@
 
 package com.alibaba.citrus.springext.support.context;
 
+import com.alibaba.citrus.springext.ResourceLoadingExtender;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
-import com.alibaba.citrus.springext.ResourceLoadingExtender;
-
 public class MyResourceLoadingExtender implements ResourceLoadingExtender {
-    private Resource resource;
+    private Resource                resource;
     private ResourcePatternResolver resolver;
 
     public void setResource(Resource resource) {

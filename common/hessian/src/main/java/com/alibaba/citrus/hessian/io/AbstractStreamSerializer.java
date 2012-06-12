@@ -48,72 +48,59 @@
 
 package com.alibaba.citrus.hessian.io;
 
-import java.io.InputStream;
 import java.io.IOException;
-import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.InputStream;
 
-/**
- * Serializing an object containing a byte stream.
- */
-abstract public class AbstractStreamSerializer extends AbstractSerializer
-{
-  /**
-   * Writes the object to the output stream.
-   */
-  public void writeObject(Object obj, AbstractHessianOutput out)
-    throws IOException
-  {
-    if (out.addRef(obj)) {
-      return;
+/** Serializing an object containing a byte stream. */
+abstract public class AbstractStreamSerializer extends AbstractSerializer {
+    /** Writes the object to the output stream. */
+    public void writeObject(Object obj, AbstractHessianOutput out)
+            throws IOException {
+        if (out.addRef(obj)) {
+            return;
+        }
+
+        int ref = out.writeObjectBegin(getClassName(obj));
+
+        if (ref < -1) {
+            out.writeString("value");
+
+            InputStream is = getInputStream(obj);
+            try {
+                out.writeByteStream(is);
+            } finally {
+                is.close();
+            }
+
+            out.writeMapEnd();
+        } else {
+            if (ref == -1) {
+                out.writeClassFieldLength(1);
+                out.writeString("value");
+
+                out.writeObjectBegin(getClassName(obj));
+            }
+
+            InputStream is = getInputStream(obj);
+
+            try {
+                if (is != null) {
+                    out.writeByteStream(is);
+                } else {
+                    out.writeNull();
+                }
+            } finally {
+                if (is != null) {
+                    is.close();
+                }
+            }
+        }
     }
 
-    int ref = out.writeObjectBegin(getClassName(obj));
-
-    if (ref < -1) {
-      out.writeString("value");
-
-      InputStream is = getInputStream(obj);
-      try {
-	out.writeByteStream(is);
-      } finally {
-	is.close();
-      }
-
-      out.writeMapEnd();
+    protected String getClassName(Object obj) {
+        return obj.getClass().getName();
     }
-    else {
-      if (ref == -1) {
-	out.writeClassFieldLength(1);
-	out.writeString("value");
 
-	out.writeObjectBegin(getClassName(obj));
-      }
-
-      InputStream is = getInputStream(obj);
-
-      try {
-	if (is != null)
-	  out.writeByteStream(is);
-	else
-	  out.writeNull();
-      } finally {
-	if (is != null)
-	  is.close();
-      }
-    }
-  }
-
-  protected String getClassName(Object obj)
-  {
-    return obj.getClass().getName();
-  }
-
-  abstract protected InputStream getInputStream(Object obj)
-    throws IOException;
+    abstract protected InputStream getInputStream(Object obj)
+            throws IOException;
 }

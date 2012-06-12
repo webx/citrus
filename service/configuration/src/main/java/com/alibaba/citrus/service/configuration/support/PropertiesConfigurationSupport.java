@@ -24,14 +24,13 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.util.Map;
 import java.util.Set;
 
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-
 import com.alibaba.citrus.service.AbstractService;
 import com.alibaba.citrus.service.configuration.Configuration;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 /**
  * 基于properties的configuration实现。
@@ -39,10 +38,10 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public abstract class PropertiesConfigurationSupport<C extends Configuration> extends AbstractService<C> implements
-        Configuration, ApplicationContextAware {
+                                                                                                         Configuration, ApplicationContextAware {
     private final Map<String, Object> props = createHashMap();
     private PropertiesConfigurationSupport<C> parent;
-    private ApplicationContext factory;
+    private ApplicationContext                factory;
 
     public PropertiesConfigurationSupport() {
         this(null);
@@ -70,7 +69,7 @@ public abstract class PropertiesConfigurationSupport<C extends Configuration> ex
 
             if (parent.isProductionMode()) {
                 assertTrue(productionMode == null || productionMode.booleanValue(),
-                        "productionMode cannot be disabled at App's Context");
+                           "productionMode cannot be disabled at App's Context");
             }
         }
 

@@ -28,13 +28,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.SimpleTypeConverter;
-import org.springframework.beans.TypeConverter;
 
 import com.alibaba.citrus.service.form.Form;
 import com.alibaba.citrus.service.form.Group;
@@ -44,6 +38,10 @@ import com.alibaba.citrus.service.form.configuration.FormConfig;
 import com.alibaba.citrus.service.form.configuration.GroupConfig;
 import com.alibaba.citrus.service.form.impl.FormParameters.FormParameter;
 import com.alibaba.citrus.util.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.SimpleTypeConverter;
+import org.springframework.beans.TypeConverter;
 
 /**
  * 代表一个用户提交的form信息。
@@ -56,17 +54,15 @@ import com.alibaba.citrus.util.StringUtil;
 public class FormImpl implements Form {
     protected static final Logger log = LoggerFactory.getLogger(Form.class);
     private final FormConfig formConfig;
-    private final String formKey;
-    private final boolean forcePostOnly;
-    private final Map<String, Group> groups = createLinkedHashMap();
-    private final Collection<Group> groupList = Collections.unmodifiableCollection(groups.values());
-    private final MessageContext messageContext;
-    private boolean valid;
-    private SimpleTypeConverter typeConverter;
+    private final String     formKey;
+    private final boolean    forcePostOnly;
+    private final Map<String, Group> groups    = createLinkedHashMap();
+    private final Collection<Group>  groupList = Collections.unmodifiableCollection(groups.values());
+    private final MessageContext      messageContext;
+    private       boolean             valid;
+    private       SimpleTypeConverter typeConverter;
 
-    /**
-     * 创建一个新form。
-     */
+    /** 创建一个新form。 */
     public FormImpl(FormConfig formConfig, String formKey, boolean forcePostOnly) {
         this.formConfig = formConfig;
         this.formKey = formKey;
@@ -74,16 +70,12 @@ public class FormImpl implements Form {
         this.forcePostOnly = forcePostOnly;
     }
 
-    /**
-     * 取得form的配置信息。
-     */
+    /** 取得form的配置信息。 */
     public FormConfig getFormConfig() {
         return formConfig;
     }
 
-    /**
-     * 取得用于转换类型的converter。
-     */
+    /** 取得用于转换类型的converter。 */
     public TypeConverter getTypeConverter() {
         if (typeConverter == null) {
             typeConverter = new SimpleTypeConverter();
@@ -93,37 +85,27 @@ public class FormImpl implements Form {
         return typeConverter;
     }
 
-    /**
-     * 是否强制为只接受post表单。
-     */
+    /** 是否强制为只接受post表单。 */
     public boolean isForcePostOnly() {
         return forcePostOnly;
     }
 
-    /**
-     * 判定form是否通过验证。
-     */
+    /** 判定form是否通过验证。 */
     public boolean isValid() {
         return valid;
     }
 
-    /**
-     * 设置form的合法性。该值将被叠加到当前的状态中：<code>this.valid &= valid</code>
-     */
+    /** 设置form的合法性。该值将被叠加到当前的状态中：<code>this.valid &= valid</code> */
     protected void setValid(boolean valid) {
         this.valid &= valid;
     }
 
-    /**
-     * 初始化form，将form恢复成“未验证”状态。随后，调用者可以重新设置值并手工验证表单。
-     */
+    /** 初始化form，将form恢复成“未验证”状态。随后，调用者可以重新设置值并手工验证表单。 */
     public void init() {
         init(null);
     }
 
-    /**
-     * 用request初始化form。假如request为<code>null</code>，则将form设置成“未验证”状态，否则，验证表单。
-     */
+    /** 用request初始化form。假如request为<code>null</code>，则将form设置成“未验证”状态，否则，验证表单。 */
     public void init(HttpServletRequest request) {
         valid = true;
 
@@ -165,7 +147,7 @@ public class FormImpl implements Form {
                             log.debug("No group associated with parameter: {}", key);
                             continue;
                         } else if ((forcePostOnly || groupConfig.isPostOnly())
-                                && !"post".equalsIgnoreCase(request.getMethod())) {
+                                   && !"post".equalsIgnoreCase(request.getMethod())) {
                             log.warn("Group {} can only read from POST request: {}", groupConfig.getName(), key);
                             ignoredGroups.add(groupInstanceKey);
                             setValid(false);
@@ -230,7 +212,7 @@ public class FormImpl implements Form {
         }
 
         String normalizedKey = FORM_KEY_PREFIX + FIELD_KEY_SEPARATOR + groupKey + FIELD_KEY_SEPARATOR + instanceKey
-                + FIELD_KEY_SEPARATOR + fieldKey;
+                               + FIELD_KEY_SEPARATOR + fieldKey;
 
         if (additionalInfo != null) {
             normalizedKey += FIELD_KEY_SEPARATOR + additionalInfo;
@@ -239,16 +221,12 @@ public class FormImpl implements Form {
         return new FormParameter(groupKey, fieldKey, instanceKey, additionalInfo, paramKey, normalizedKey);
     }
 
-    /**
-     * 取得group instance的key，用来索引所有group instance。
-     */
+    /** 取得group instance的key，用来索引所有group instance。 */
     private String getGroupInstanceKey(String groupKey, String instanceKey) {
         return groupKey + FIELD_KEY_SEPARATOR + instanceKey;
     }
 
-    /**
-     * 验证（或重新验证）当前的所有group instance。
-     */
+    /** 验证（或重新验证）当前的所有group instance。 */
     public void validate() {
         valid = true;
 
@@ -257,23 +235,17 @@ public class FormImpl implements Form {
         }
     }
 
-    /**
-     * 取得代表form的key。
-     */
+    /** 取得代表form的key。 */
     public String getKey() {
         return formKey;
     }
 
-    /**
-     * 取得所有group的列表。
-     */
+    /** 取得所有group的列表。 */
     public Collection<Group> getGroups() {
         return groupList;
     }
 
-    /**
-     * 取得所有指定名称的group的列表。group名称大小写不敏感。
-     */
+    /** 取得所有指定名称的group的列表。group名称大小写不敏感。 */
     public Collection<Group> getGroups(String groupName) {
         List<Group> resultGroups = createArrayList(groups.size());
 
@@ -286,16 +258,12 @@ public class FormImpl implements Form {
         return resultGroups;
     }
 
-    /**
-     * 取得默认的group instance。如果该group instance不存在，则创建之。Group名称大小写不敏感。
-     */
+    /** 取得默认的group instance。如果该group instance不存在，则创建之。Group名称大小写不敏感。 */
     public Group getGroup(String groupName) {
         return getGroup(groupName, null, true);
     }
 
-    /**
-     * 取得group instance。如果该group instance不存在，则创建之。Group名称大小写不敏感。
-     */
+    /** 取得group instance。如果该group instance不存在，则创建之。Group名称大小写不敏感。 */
     public Group getGroup(String groupName, String instanceKey) {
         return getGroup(groupName, instanceKey, true);
     }
@@ -325,19 +293,15 @@ public class FormImpl implements Form {
         return group;
     }
 
-    /**
-     * 取得form级别的错误信息表达式的context，包含常用小工具和所有系统属性。
-     */
+    /** 取得form级别的错误信息表达式的context，包含常用小工具和所有系统属性。 */
     protected MessageContext getMessageContext() {
         return messageContext;
     }
 
-    /**
-     * 转换成易于阅读的字符串。
-     */
+    /** 转换成易于阅读的字符串。 */
     @Override
     public String toString() {
         return "Form[groups: " + getFormConfig().getGroupConfigList().size() + ", group instances: "
-                + getGroups().size() + ", valid: " + isValid() + "]";
+               + getGroups().size() + ", valid: " + isValid() + "]";
     }
 }

@@ -20,16 +20,14 @@ package com.alibaba.citrus.service.freemarker;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.freemarker.impl.TemplateContextAdapter;
 import com.alibaba.citrus.service.template.TemplateContext;
 import com.alibaba.citrus.service.template.support.MappedTemplateContext;
-
 import freemarker.template.SimpleNumber;
 import freemarker.template.TemplateModel;
 import freemarker.template.TemplateModelException;
+import org.junit.Before;
+import org.junit.Test;
 
 public class TemplateContextAdapterTests {
     private TemplateContext ctx;

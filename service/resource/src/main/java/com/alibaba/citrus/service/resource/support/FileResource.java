@@ -37,16 +37,12 @@ import com.alibaba.citrus.service.resource.Resource;
 public class FileResource implements Resource {
     private final File file;
 
-    /**
-     * 创建一个<code>FileResource</code>。
-     */
+    /** 创建一个<code>FileResource</code>。 */
     public FileResource(File file) {
         this.file = assertNotNull(file, "file");
     }
 
-    /**
-     * 取得资源的<code>URL</code>。
-     */
+    /** 取得资源的<code>URL</code>。 */
     public URL getURL() {
         try {
             return file.toURI().toURL();
@@ -55,16 +51,12 @@ public class FileResource implements Resource {
         }
     }
 
-    /**
-     * 取得资源的<code>File</code>。
-     */
+    /** 取得资源的<code>File</code>。 */
     public File getFile() {
         return file;
     }
 
-    /**
-     * 取得资源的<code>InputStream</code>。
-     */
+    /** 取得资源的<code>InputStream</code>。 */
     public InputStream getInputStream() throws IOException {
         try {
             return new FileInputStream(file);
@@ -73,16 +65,12 @@ public class FileResource implements Resource {
         }
     }
 
-    /**
-     * 判断资源是否存在。
-     */
+    /** 判断资源是否存在。 */
     public boolean exists() {
         return file.exists();
     }
 
-    /**
-     * 取得资源最近修改时间。
-     */
+    /** 取得资源最近修改时间。 */
     public long lastModified() {
         return file.lastModified();
     }
@@ -122,9 +110,7 @@ public class FileResource implements Resource {
         return true;
     }
 
-    /**
-     * 将resource转换成字符串表示。
-     */
+    /** 将resource转换成字符串表示。 */
     @Override
     public String toString() {
         StringBuilder buf = new StringBuilder();

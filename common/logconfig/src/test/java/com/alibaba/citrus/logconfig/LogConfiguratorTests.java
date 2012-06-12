@@ -24,9 +24,8 @@ import java.io.File;
 import java.nio.charset.Charset;
 import java.util.Map;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.logconfig.spi.AbstractLogConfigurator;
+import org.junit.Test;
 
 public class LogConfiguratorTests extends AbstractLogConfiguratorTests {
     @Test
@@ -36,19 +35,19 @@ public class LogConfiguratorTests extends AbstractLogConfiguratorTests {
 
         // provider not found
         assertGetConfiguratorFailure(null, "notexist", "Could not find LogConfigurator for \"notexist\" "
-                + "by searching in META-INF/logconfig.providers");
+                                                       + "by searching in META-INF/logconfig.providers");
 
         // provider class not found
         assertGetConfiguratorFailure(null, "cnf", ClassNotFoundException.class,
-                "Could not find LogConfigurator for cnf");
+                                     "Could not find LogConfigurator for cnf");
 
         // provider class is not LogConfigurator
         assertGetConfiguratorFailure(null, "string", "string class java.lang.String is not a sub-class of "
-                + LogConfigurator.class.getName());
+                                                     + LogConfigurator.class.getName());
 
         // fail to create instance
         assertGetConfiguratorFailure(null, "abstract", InstantiationException.class,
-                "Could not create instance of class " + AbstractLogConfigurator.class.getName() + " for abstract");
+                                     "Could not create instance of class " + AbstractLogConfigurator.class.getName() + " for abstract");
     }
 
     private void assertGetConfiguratorFailure(String envLogSystem, String logSystem, String... strs) throws Exception {
@@ -92,7 +91,7 @@ public class LogConfiguratorTests extends AbstractLogConfiguratorTests {
 
         // getConfigurators("log4j", "logback") - 多个参数
         invokeInLoader("log4j", "getConfigurators", new String[] { "log4j", "logback" }, new String[] { "log4j",
-                "logback" });
+                                                                                                        "logback" });
 
         // getConfigurators(null, "  ") - 空参数 - 默认值
         invokeInLoader("log4j", "getConfigurators", new String[] { null, "  " }, new String[] { "log4j", "log4j" });
@@ -141,7 +140,7 @@ public class LogConfiguratorTests extends AbstractLogConfiguratorTests {
         assertThat(err, containsString("- with property localHost = "));
         assertThat(err, containsString("- with property localAddress = "));
         assertThat(err, containsString("- with property loggingRoot = " + System.getProperty("user.home")
-                + File.separator + "logs"));
+                                       + File.separator + "logs"));
         assertThat(err, not(containsString("- with property " + sysPropKey))); // do not list system props
 
         invokeInLoader(null, "configureDefault", "ok", false);
@@ -153,7 +152,7 @@ public class LogConfiguratorTests extends AbstractLogConfiguratorTests {
         assertThat(err, containsString("- with property localHost = "));
         assertThat(err, containsString("- with property localAddress = "));
         assertThat(err, containsString("- with property loggingRoot = " + System.getProperty("user.home")
-                + File.separator + "logs"));
+                                       + File.separator + "logs"));
         assertThat(err, not(containsString("- with property " + sysPropKey))); // do not list system props
     }
 

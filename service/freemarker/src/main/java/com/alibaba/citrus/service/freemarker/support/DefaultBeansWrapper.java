@@ -20,7 +20,6 @@ package com.alibaba.citrus.service.freemarker.support;
 import com.alibaba.citrus.service.freemarker.impl.TemplateContextAdapter;
 import com.alibaba.citrus.service.template.Renderable;
 import com.alibaba.citrus.service.template.TemplateContext;
-
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.ObjectWrapper;
 import freemarker.template.TemplateModel;

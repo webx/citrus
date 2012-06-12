@@ -39,8 +39,6 @@ public interface VelocityPlugin {
      */
     void init(VelocityConfiguration configuration) throws Exception;
 
-    /**
-     * Plugin可以提供额外的macros。
-     */
+    /** Plugin可以提供额外的macros。 */
     Resource[] getMacros() throws IOException;
 }

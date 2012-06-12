@@ -23,8 +23,6 @@ package com.alibaba.citrus.service.requestcontext.session;
  * @author Michael Zhou
  */
 public interface ExactMatchesOnlySessionStore extends SessionStore {
-    /**
-     * 设置所有精确匹配的attribute名称。
-     */
+    /** 设置所有精确匹配的attribute名称。 */
     void initAttributeNames(String[] attrNames);
 }

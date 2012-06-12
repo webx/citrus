@@ -23,15 +23,13 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
 
+import com.alibaba.citrus.service.velocity.support.EscapeSupport;
+import com.alibaba.citrus.service.velocity.support.EscapeSupport.EscapeRule;
+import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.service.velocity.support.EscapeSupport;
-import com.alibaba.citrus.service.velocity.support.EscapeSupport.EscapeRule;
-import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 
 public class EscapeSupportDefinitionParser extends AbstractSingleBeanDefinitionParser<EscapeSupport> {
     @Override
@@ -46,7 +44,7 @@ public class EscapeSupportDefinitionParser extends AbstractSingleBeanDefinitionP
         for (Element subElement : subElements(element)) {
             if (escapeSelector.accept(subElement)) {
                 rules.add(parseEscape(subElement, parserContext, builder.getRawBeanDefinition(),
-                        trimToNull(subElement.getAttribute("type"))));
+                                      trimToNull(subElement.getAttribute("type"))));
             } else if (noescapeSelector.accept(subElement)) {
                 rules.add(parseEscape(subElement, parserContext, builder.getRawBeanDefinition(), "noescape"));
             }

@@ -31,6 +31,12 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
+import com.alibaba.citrus.service.AbstractService;
+import com.alibaba.citrus.service.configuration.ProductionModeAware;
+import com.alibaba.citrus.service.template.TemplateContext;
+import com.alibaba.citrus.service.template.TemplateException;
+import com.alibaba.citrus.service.template.TemplateNotFoundException;
+import com.alibaba.citrus.service.velocity.VelocityEngine;
 import org.apache.velocity.Template;
 import org.apache.velocity.app.event.EventCartridge;
 import org.apache.velocity.app.event.ReferenceInsertionEventHandler;
@@ -45,23 +51,16 @@ import org.apache.velocity.util.RuntimeServicesAware;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.ResourceLoader;
 
-import com.alibaba.citrus.service.AbstractService;
-import com.alibaba.citrus.service.configuration.ProductionModeAware;
-import com.alibaba.citrus.service.template.TemplateContext;
-import com.alibaba.citrus.service.template.TemplateException;
-import com.alibaba.citrus.service.template.TemplateNotFoundException;
-import com.alibaba.citrus.service.velocity.VelocityEngine;
-
 /**
  * Velocity模板引擎服务。
  *
  * @author Michael Zhou
  */
 public class VelocityEngineImpl extends AbstractService<VelocityEngine> implements VelocityEngine, ResourceLoaderAware,
-        ProductionModeAware {
-    private final static String RUNTIME_SERVICES_KEY = "_runtime_services";
-    private final VelocityRuntimeInstance ri = new VelocityRuntimeInstance();
-    private final VelocityConfigurationImpl configuration = new VelocityConfigurationImpl(getLogger());
+                                                                                   ProductionModeAware {
+    private final static String                    RUNTIME_SERVICES_KEY = "_runtime_services";
+    private final        VelocityRuntimeInstance   ri                   = new VelocityRuntimeInstance();
+    private final        VelocityConfigurationImpl configuration        = new VelocityConfigurationImpl(getLogger());
 
     public RuntimeServices getRuntimeServices() {
         return ri;
@@ -79,9 +78,7 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
         configuration.setProductionMode(productionMode);
     }
 
-    /**
-     * 初始化engine。
-     */
+    /** 初始化engine。 */
     @Override
     protected void init() throws Exception {
         configuration.init();
@@ -110,49 +107,37 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
         return new String[] { "vm" };
     }
 
-    /**
-     * 判定模板是否存在。
-     */
+    /** 判定模板是否存在。 */
     public boolean exists(String templateName) {
         return ri.getLoaderNameForResource(templateName) != null;
     }
 
-    /**
-     * 渲染模板，并以字符串的形式取得渲染的结果。
-     */
+    /** 渲染模板，并以字符串的形式取得渲染的结果。 */
     public String getText(String templateName, TemplateContext context) throws TemplateException, IOException {
         return mergeTemplate(templateName, new TemplateContextAdapter(context), null);
     }
 
-    /**
-     * 渲染模板，并将渲染的结果送到字节输出流中。
-     */
+    /** 渲染模板，并将渲染的结果送到字节输出流中。 */
     public void writeTo(String templateName, TemplateContext context, OutputStream ostream) throws TemplateException,
-            IOException {
+                                                                                                   IOException {
         mergeTemplate(templateName, new TemplateContextAdapter(context), ostream, null, null);
     }
 
-    /**
-     * 渲染模板，并将渲染的结果送到字符输出流中。
-     */
+    /** 渲染模板，并将渲染的结果送到字符输出流中。 */
     public void writeTo(String templateName, TemplateContext context, Writer writer) throws TemplateException,
-            IOException {
+                                                                                            IOException {
         mergeTemplate(templateName, new TemplateContextAdapter(context), writer, null);
     }
 
-    /**
-     * 渲染模板，并以字符串的形式取得渲染的结果。
-     */
+    /** 渲染模板，并以字符串的形式取得渲染的结果。 */
     public String mergeTemplate(String templateName, Context context, String inputEncoding) throws TemplateException,
-            IOException {
+                                                                                                   IOException {
         StringWriter writer = new StringWriter();
         mergeTemplate(templateName, context, writer, inputEncoding);
         return writer.toString();
     }
 
-    /**
-     * 渲染模板，并将渲染的结果送到字节输出流中。
-     */
+    /** 渲染模板，并将渲染的结果送到字节输出流中。 */
     public void mergeTemplate(String templateName, Context context, OutputStream ostream, String inputEncoding,
                               String outputEncoding) throws TemplateException, IOException {
         if (isEmpty(outputEncoding)) {
@@ -171,9 +156,7 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
         writer.flush(); // 确保内容被刷新到stream中。
     }
 
-    /**
-     * 渲染模板，并将渲染的结果送到字符输出流中。
-     */
+    /** 渲染模板，并将渲染的结果送到字符输出流中。 */
     public void mergeTemplate(String templateName, Context context, Writer writer, String inputEncoding)
             throws TemplateException, IOException {
         if (isEmpty(inputEncoding)) {
@@ -189,9 +172,7 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
         }
     }
 
-    /**
-     * Copied from org.apache.velocity.app.VelocityEngine。
-     */
+    /** Copied from org.apache.velocity.app.VelocityEngine。 */
     private boolean mergeTemplate(String templateName, String encoding, Context context, Writer writer)
             throws ResourceNotFoundException, ParseErrorException, MethodInvocationException, Exception {
         Template template = ri.getTemplate(templateName, encoding);
@@ -231,9 +212,7 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
     private String defaultInputEncoding;
     private String defaultOutpuEncoding;
 
-    /**
-     * 取得解析模板时的默认编码字符集。
-     */
+    /** 取得解析模板时的默认编码字符集。 */
     protected String getDefaultInputEncoding() {
         if (defaultInputEncoding == null) {
             defaultInputEncoding = defaultIfNull(trimToNull((String) ri.getProperty(INPUT_ENCODING)), DEFAULT_CHARSET);
@@ -242,9 +221,7 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
         return defaultInputEncoding;
     }
 
-    /**
-     * 取得输出模板时的默认编码字符集。
-     */
+    /** 取得输出模板时的默认编码字符集。 */
     protected String getDefaultOutputEncoding() {
         if (defaultOutpuEncoding == null) {
             defaultOutpuEncoding = defaultIfNull(trimToNull((String) ri.getProperty(OUTPUT_ENCODING)), DEFAULT_CHARSET);
@@ -253,9 +230,7 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
         return defaultOutpuEncoding;
     }
 
-    /**
-     * 处理异常，显示额外的信息。
-     */
+    /** 处理异常，显示额外的信息。 */
     private final void error(String templateName, Throwable e) throws TemplateException {
         String err = "Error rendering Velocity template: " + templateName;
 
@@ -272,9 +247,7 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
         throw new TemplateException(err, e);
     }
 
-    /**
-     * 一个hack，用来取得runtime services实例。
-     */
+    /** 一个hack，用来取得runtime services实例。 */
     public static class RuntimeServicesExposer implements ReferenceInsertionEventHandler, RuntimeServicesAware {
         public Object referenceInsert(String reference, Object value) {
             return value;
@@ -285,9 +258,7 @@ public class VelocityEngineImpl extends AbstractService<VelocityEngine> implemen
         }
     }
 
-    /**
-     * 包装任意<code>Context</code>，使之支持EventCartridge。
-     */
+    /** 包装任意<code>Context</code>，使之支持EventCartridge。 */
     private static class EventContext extends AbstractContext {
         private final Context context;
 

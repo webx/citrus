@@ -29,9 +29,9 @@ import org.junit.Test;
  */
 public class AssertTests {
     private static final String DEFAULT_HEADER = "[Assertion";
-    private static final String MESSAGE = "test message %d";
-    private static final String MESSAGE_1 = "test message 1";
-    private static final Object OBJECT = new Object();
+    private static final String MESSAGE        = "test message %d";
+    private static final String MESSAGE_1      = "test message 1";
+    private static final Object OBJECT         = new Object();
 
     @Test
     public void _assertNotNull() {

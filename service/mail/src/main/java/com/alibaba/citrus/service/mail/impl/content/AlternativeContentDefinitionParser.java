@@ -20,5 +20,5 @@ package com.alibaba.citrus.service.mail.impl.content;
 import com.alibaba.citrus.service.mail.builder.content.AlternativeMultipartContent;
 
 public class AlternativeContentDefinitionParser extends
-        AbstractMultipartContentDefinitionParser<AlternativeMultipartContent> {
+                                                AbstractMultipartContentDefinitionParser<AlternativeMultipartContent> {
 }

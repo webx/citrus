@@ -28,17 +28,16 @@ import java.net.URL;
 import java.util.jar.JarOutputStream;
 import java.util.zip.ZipEntry;
 
+import com.alibaba.citrus.service.resource.Resource;
 import org.junit.BeforeClass;
 
-import com.alibaba.citrus.service.resource.Resource;
-
 public abstract class AbstractResourceTests {
-    protected static File existsFile;
-    protected static File notExistsFile;
-    protected static File directory;
-    protected static File jarFile;
-    protected static URL jarURL;
-    protected Resource resource;
+    protected static File     existsFile;
+    protected static File     notExistsFile;
+    protected static File     directory;
+    protected static File     jarFile;
+    protected static URL      jarURL;
+    protected        Resource resource;
 
     @BeforeClass
     public static void init() throws Exception {

@@ -26,16 +26,12 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.NoSuchProviderException;
 import javax.mail.Transport;
 import javax.mail.event.TransportEvent;
 import javax.mail.internet.InternetAddress;
-
-import org.junit.Test;
-import org.jvnet.mock_javamail.Mailbox;
 
 import com.alibaba.citrus.service.mail.MailException;
 import com.alibaba.citrus.service.mail.MailNotFoundException;
@@ -45,6 +41,8 @@ import com.alibaba.citrus.service.mail.builder.MailBuilder;
 import com.alibaba.citrus.service.mail.mock.MyMockStore;
 import com.alibaba.citrus.service.mail.mock.MyMockTransport;
 import com.alibaba.citrus.service.mail.support.DefaultMailTransportHandler;
+import org.junit.Test;
+import org.jvnet.mock_javamail.Mailbox;
 
 public class MailTransportTests extends AbstractMailSessionTests<MailTransport> {
     @Test
@@ -464,7 +462,7 @@ public class MailTransportTests extends AbstractMailSessionTests<MailTransport> 
 
     private static final class MyHandler extends DefaultMailTransportHandler {
         private final MailBuilder builder;
-        private String state;
+        private       String      state;
 
         private MyHandler(MailBuilder builder) {
             this.builder = builder;

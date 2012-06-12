@@ -24,10 +24,9 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextWrapper;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextWrapper;
 
 public class RequestContextWrapperTests {
     private RequestContext context;

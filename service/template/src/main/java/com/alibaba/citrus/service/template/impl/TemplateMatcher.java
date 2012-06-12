@@ -25,12 +25,12 @@ import com.alibaba.citrus.service.template.TemplateEngine;
  * @author Michael Zhou
  */
 public abstract class TemplateMatcher implements TemplateMatchResult {
-    private final String originalTemplateName;
-    private final String originalTemplateNameWithoutExtension;
-    private final String originalExtension;
-    private String templateNameWithoutExtension;
-    private String extension;
-    private TemplateEngine engine;
+    private final String         originalTemplateName;
+    private final String         originalTemplateNameWithoutExtension;
+    private final String         originalExtension;
+    private       String         templateNameWithoutExtension;
+    private       String         extension;
+    private       TemplateEngine engine;
 
     public TemplateMatcher(TemplateKey key) {
         this.originalTemplateName = key.getTemplateName();

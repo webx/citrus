@@ -20,10 +20,9 @@ package com.alibaba.citrus.service.requestcontext.session.impl;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
+import com.alibaba.citrus.service.requestcontext.session.SessionModel;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.alibaba.citrus.service.requestcontext.session.SessionModel;
 
 public class SessionModelEncoderTests extends AbstractSessionModelEncoderTests {
     private SessionModelEncoderImpl encoder;
@@ -46,9 +45,9 @@ public class SessionModelEncoderTests extends AbstractSessionModelEncoderTests {
     public void decode() {
         // test1
         SessionModel.Factory mockFactory = createMockFactory("myId", 1111111111111111111L, 2222222222222222222L,
-                333333333);
+                                                             333333333);
         assertSame(model,
-                encoder.decode("{id:\"myId\",ct:1111111111111111111,ac:2222222222222222222,mx:333333333}", mockFactory));
+                   encoder.decode("{id:\"myId\",ct:1111111111111111111,ac:2222222222222222222,mx:333333333}", mockFactory));
         verify(mockFactory);
 
         // test2

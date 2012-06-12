@@ -20,8 +20,11 @@ package com.alibaba.citrus.service.pull.support;
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.StringUtil.*;
-import net.sf.cglib.reflect.FastClass;
 
+import com.alibaba.citrus.service.pull.ToolFactory;
+import com.alibaba.citrus.springext.support.BeanSupport;
+import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
+import net.sf.cglib.reflect.FastClass;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -29,10 +32,6 @@ import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.service.pull.ToolFactory;
-import com.alibaba.citrus.springext.support.BeanSupport;
-import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 /**
  * 创建一个简单bean的tool factory。
@@ -43,8 +42,8 @@ public class BeanTool extends BeanSupport implements ToolFactory, ApplicationCon
     protected final static boolean DEFAULT_SINGLETON = true;
     private ApplicationContext beanFactory;
     private boolean singleton = DEFAULT_SINGLETON;
-    private Class<?> beanClass;
-    private boolean autowire;
+    private Class<?>  beanClass;
+    private boolean   autowire;
     private FastClass fc;
 
     public boolean isSingleton() {

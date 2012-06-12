@@ -22,16 +22,15 @@ import static org.junit.Assert.*;
 
 import java.net.URL;
 
+import com.alibaba.citrus.service.resource.AbstractResourceLoadingTests;
+import com.alibaba.citrus.service.resource.ResourceLoadingService;
+import com.alibaba.citrus.service.resource.ResourceNotFoundException;
+import com.alibaba.citrus.util.io.StreamUtil;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-
-import com.alibaba.citrus.service.resource.AbstractResourceLoadingTests;
-import com.alibaba.citrus.service.resource.ResourceLoadingService;
-import com.alibaba.citrus.service.resource.ResourceNotFoundException;
-import com.alibaba.citrus.util.io.StreamUtil;
 
 public class WebappLoaderIntegratingTests extends AbstractResourceLoadingTests {
     @BeforeClass
@@ -47,8 +46,8 @@ public class WebappLoaderIntegratingTests extends AbstractResourceLoadingTests {
     @Test
     public void getResource() throws Exception {
         assertResourceServiceList("/webroot", "", true, true, "WEB-INF/", "appcontext/", "beans.xml", "filter/",
-                "loader/", "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml",
-                "test.txt");
+                                  "loader/", "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml",
+                                  "test.txt");
         assertResourceServiceList("/webroot/test.txt", "test.txt", true, false);
         assertResourceServiceList("/webroot/WEB-INF/", "WEB-INF", true, true, "aaa/", "resources.xml", "web.xml");
         assertResourceServiceList("/webroot/WEB-INF/web.xml", "WEB-INF/web.xml", true, false);
@@ -80,8 +79,8 @@ public class WebappLoaderIntegratingTests extends AbstractResourceLoadingTests {
 
     public static class FactoryBeanUsingResource implements FactoryBean, InitializingBean {
         private Class<?> type;
-        private URL location;
-        private String text;
+        private URL      location;
+        private String   text;
 
         public void setLocation(URL location) {
             this.location = location;

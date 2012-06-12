@@ -20,22 +20,20 @@ package com.alibaba.citrus.service.requestcontext.session;
 import static org.junit.Assert.*;
 
 import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
+import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
+import com.alibaba.citrus.service.requestcontext.util.CookieSupport;
+import com.alibaba.citrus.util.CollectionUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
-import com.alibaba.citrus.service.requestcontext.util.CookieSupport;
-import com.alibaba.citrus.util.CollectionUtil;
-
 public class SessionInterceptorTests extends AbstractRequestContextsTests<SessionRequestContext> {
     private HttpSession session;
-    private String sessionId;
-    private final static ThreadLocal<List<String>> lifecycleActions = new ThreadLocal<List<String>>();
+    private String      sessionId;
+    private final static ThreadLocal<List<String>> lifecycleActions   = new ThreadLocal<List<String>>();
     private final static ThreadLocal<List<String>> sessionAttrsAccess = new ThreadLocal<List<String>>();
     private static SessionConfig config1;
     private static SessionConfig config2;
@@ -50,8 +48,8 @@ public class SessionInterceptorTests extends AbstractRequestContextsTests<Sessio
 
     @Before
     public void initLog() {
-        lifecycleActions.set(CollectionUtil.<String> createLinkedList());
-        sessionAttrsAccess.set(CollectionUtil.<String> createLinkedList());
+        lifecycleActions.set(CollectionUtil.<String>createLinkedList());
+        sessionAttrsAccess.set(CollectionUtil.<String>createLinkedList());
     }
 
     @After
@@ -228,7 +226,7 @@ public class SessionInterceptorTests extends AbstractRequestContextsTests<Sessio
         assertEquals("read written value2", session.getAttribute("test2"));
 
         assertAccess("read SESSION_MODEL=sessionModel", "write SESSION_MODEL=sessionModel", "read test1=null",
-                "write test2=value2", "read test2=written value2");
+                     "write test2=value2", "read test2=written value2");
 
         requestContexts.commitRequestContext(requestContext);
         commitToClient();

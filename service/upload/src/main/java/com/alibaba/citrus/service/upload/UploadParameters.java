@@ -29,11 +29,11 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 public class UploadParameters implements UploadConfiguration {
     private File repository;
-    private HumanReadableSize sizeMax = new HumanReadableSize(SIZE_MAX_DEFAULT);
-    private HumanReadableSize fileSizeMax = new HumanReadableSize(FILE_SIZE_MAX_DEFAULT);
+    private HumanReadableSize sizeMax       = new HumanReadableSize(SIZE_MAX_DEFAULT);
+    private HumanReadableSize fileSizeMax   = new HumanReadableSize(FILE_SIZE_MAX_DEFAULT);
     private HumanReadableSize sizeThreshold = new HumanReadableSize(SIZE_THRESHOLD_DEFAULT);
     private boolean keepFormFieldInMemory;
-    private String fileNameKey[];
+    private String  fileNameKey[];
 
     public File getRepository() {
         return repository;
@@ -95,9 +95,7 @@ public class UploadParameters implements UploadConfiguration {
         this.fileNameKey = fileNameKey;
     }
 
-    /**
-     * 设置默认值。
-     */
+    /** 设置默认值。 */
     public void applyDefaultValues() {
         if (sizeThreshold.getValue() == 0) {
             keepFormFieldInMemory = true;
@@ -109,7 +107,7 @@ public class UploadParameters implements UploadConfiguration {
 
         if (!repository.exists() && !repository.mkdirs()) {
             throw new IllegalArgumentException("Could not create repository directory for file uploading: "
-                    + repository);
+                                               + repository);
         }
 
         if (isEmptyArray(fileNameKey)) {

@@ -30,11 +30,11 @@ import com.alibaba.citrus.util.internal.StringUtil;
  * @author Michael Zhou
  */
 public abstract class AbstractPropertyInfo implements PropertyInfo {
-    private final String name;
-    private final TypeInfo declaringType;
-    private final TypeInfo type;
-    protected MethodInfo readMethod;
-    protected MethodInfo writeMethod;
+    private final String     name;
+    private final TypeInfo   declaringType;
+    private final TypeInfo   type;
+    protected     MethodInfo readMethod;
+    protected     MethodInfo writeMethod;
 
     protected AbstractPropertyInfo(String name, TypeInfo declaringType, TypeInfo type, MethodInfo readMethod,
                                    MethodInfo writeMethod) {
@@ -73,18 +73,14 @@ public abstract class AbstractPropertyInfo implements PropertyInfo {
         return writeMethod;
     }
 
-    /**
-     * 检查对象的类型，确保其为{@link getDeclaringType()}的子类。
-     */
+    /** 检查对象的类型，确保其为{@link getDeclaringType()}的子类。 */
     protected final Object checkType(Object object) {
         assertTrue(getDeclaringType().getRawType().isInstance(object));
 
         return object;
     }
 
-    /**
-     * 比较两个property信息是否全等。
-     */
+    /** 比较两个property信息是否全等。 */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -107,9 +103,7 @@ public abstract class AbstractPropertyInfo implements PropertyInfo {
         return equals.isEquals();
     }
 
-    /**
-     * 计算hash值。
-     */
+    /** 计算hash值。 */
     @Override
     public int hashCode() {
         HashCodeBuilder hash = new HashCodeBuilder();
@@ -123,9 +117,7 @@ public abstract class AbstractPropertyInfo implements PropertyInfo {
         return hash.toHashCode();
     }
 
-    /**
-     * 转换成字符串。
-     */
+    /** 转换成字符串。 */
     @Override
     public String toString() {
         StringBuilder buf = new StringBuilder();

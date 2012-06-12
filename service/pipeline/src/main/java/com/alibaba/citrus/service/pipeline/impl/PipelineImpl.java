@@ -17,16 +17,14 @@
 
 package com.alibaba.citrus.service.pipeline.impl;
 
-import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.Assert.ExceptionType.*;
+import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.Map;
-
-import org.slf4j.Logger;
 
 import com.alibaba.citrus.service.AbstractService;
 import com.alibaba.citrus.service.pipeline.LabelNotDefinedException;
@@ -36,6 +34,7 @@ import com.alibaba.citrus.service.pipeline.PipelineException;
 import com.alibaba.citrus.service.pipeline.PipelineInvocationHandle;
 import com.alibaba.citrus.service.pipeline.Valve;
 import com.alibaba.citrus.util.ToStringBuilder;
+import org.slf4j.Logger;
 
 /**
  * 对<code>Pipeline</code>的实现。
@@ -44,7 +43,7 @@ import com.alibaba.citrus.util.ToStringBuilder;
  */
 public class PipelineImpl extends AbstractService<Pipeline> implements Pipeline {
     private Valve[] valves;
-    private String label;
+    private String  label;
 
     public Valve[] getValves() {
         return valves;
@@ -86,16 +85,14 @@ public class PipelineImpl extends AbstractService<Pipeline> implements Pipeline 
         return new ToStringBuilder().append(getBeanDescription()).append(valves).toString();
     }
 
-    /**
-     * 实现<code>PipelineContext</code>。
-     */
+    /** 实现<code>PipelineContext</code>。 */
     private final class PipelineContextImpl implements PipelineContext, PipelineInvocationHandle {
         private final Logger log = getLogger();
         private final PipelineContext parentContext;
-        private final int level;
-        private int executedIndex = -1;
+        private final int             level;
+        private int executedIndex  = -1;
         private int executingIndex = -1;
-        private boolean broken;
+        private boolean             broken;
         private Map<String, Object> attributes;
 
         public PipelineContextImpl(PipelineContext parentContext) {
@@ -128,7 +125,7 @@ public class PipelineImpl extends AbstractService<Pipeline> implements Pipeline 
                 return parentContext.findLabel(label) + 1;
             } else {
                 throw new LabelNotDefinedException("Could not find pipeline or sub-pipeline with label \"" + label
-                        + "\" in the pipeline invocation stack");
+                                                   + "\" in the pipeline invocation stack");
             }
         }
 
@@ -144,7 +141,7 @@ public class PipelineImpl extends AbstractService<Pipeline> implements Pipeline 
 
                 if (executingIndex <= executedIndex) {
                     throw new IllegalStateException(descCurrentValve() + " has already been invoked: "
-                            + valves[executingIndex]);
+                                                    + valves[executingIndex]);
                 }
 
                 executedIndex++;
@@ -171,7 +168,7 @@ public class PipelineImpl extends AbstractService<Pipeline> implements Pipeline 
                     if (executedIndex < valves.length && executedIndex == executingIndex) {
                         if (log.isTraceEnabled()) {
                             log.trace("{} execution was interrupted by {}: {}", new Object[] { descCurrentPipeline(),
-                                    descCurrentValve(), valve });
+                                                                                               descCurrentValve(), valve });
                         }
                     }
                 } else {
@@ -186,7 +183,7 @@ public class PipelineImpl extends AbstractService<Pipeline> implements Pipeline 
 
         public void breakPipeline(int levels) {
             assertTrue(levels >= 0 && levels < level, "invalid break levels: %d, should be in range of [0, %d)",
-                    levels, level);
+                       levels, level);
 
             broken = true;
 

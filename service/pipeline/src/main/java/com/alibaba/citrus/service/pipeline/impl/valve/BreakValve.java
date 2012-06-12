@@ -20,13 +20,12 @@ package com.alibaba.citrus.service.pipeline.impl.valve;
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.support.AbstractValve;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 用来中断当前pipeline。
@@ -38,7 +37,7 @@ import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser
  * @author Michael Zhou
  */
 public class BreakValve extends AbstractValve {
-    private int levels;
+    private int    levels;
     private String toLabel;
 
     public int getLevels() {

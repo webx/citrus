@@ -24,14 +24,13 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.logconfig.support.SecurityLogger;
 import com.alibaba.citrus.service.requestcontext.session.SessionConfig;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import com.alibaba.citrus.util.ClassUtil;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 用来控制session attributes的使用。
@@ -85,7 +84,7 @@ public class SessionAttributeWhitelist extends AbstractSessionAttributeAccessCon
     @Override
     protected Object readInvalidAttribute(String name, Object value) {
         log.getLogger().warn("Attribute to read is not in whitelist: name={}, type={}", name,
-                value == null ? "unknwon" : value.getClass().getName());
+                             value == null ? "unknwon" : value.getClass().getName());
 
         return value;
     }
@@ -93,7 +92,7 @@ public class SessionAttributeWhitelist extends AbstractSessionAttributeAccessCon
     @Override
     protected Object writeInvalidAttribute(String name, Object value) {
         log.getLogger().warn("Attribute to write is not in whitelist: name={}, type={}", name,
-                value == null ? "unknwon" : value.getClass().getName());
+                             value == null ? "unknwon" : value.getClass().getName());
 
         return value;
     }

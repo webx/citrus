@@ -29,48 +29,30 @@ import com.alibaba.citrus.service.mail.session.MailTransport;
  * @author Michael Zhou
  */
 public interface MailService extends MailSettings {
-    /**
-     * 取得指定名称的mail builder。
-     */
+    /** 取得指定名称的mail builder。 */
     MailBuilder getMailBuilder(String id) throws MailNotFoundException;
 
-    /**
-     * 取得默认的mail store。
-     */
+    /** 取得默认的mail store。 */
     MailStore getMailStore() throws MailStoreNotFoundException;
 
-    /**
-     * 取得默认的mail store。
-     */
+    /** 取得默认的mail store。 */
     MailStore getMailStore(Properties overrideProps) throws MailStoreNotFoundException;
 
-    /**
-     * 取得指定名称的mail store。
-     */
+    /** 取得指定名称的mail store。 */
     MailStore getMailStore(String id) throws MailStoreNotFoundException;
 
-    /**
-     * 取得指定名称的mail store。
-     */
+    /** 取得指定名称的mail store。 */
     MailStore getMailStore(String id, Properties overrideProps) throws MailStoreNotFoundException;
 
-    /**
-     * 取得默认的mail transport。
-     */
+    /** 取得默认的mail transport。 */
     MailTransport getMailTransport() throws MailTransportNotFoundException;
 
-    /**
-     * 取得默认的mail transport。
-     */
+    /** 取得默认的mail transport。 */
     MailTransport getMailTransport(Properties overrideProps) throws MailTransportNotFoundException;
 
-    /**
-     * 取得指定名称的mail transport。
-     */
+    /** 取得指定名称的mail transport。 */
     MailTransport getMailTransport(String id) throws MailTransportNotFoundException;
 
-    /**
-     * 取得指定名称的mail transport。
-     */
+    /** 取得指定名称的mail transport。 */
     MailTransport getMailTransport(String id, Properties overrideProps) throws MailTransportNotFoundException;
 }

@@ -27,9 +27,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.alibaba.citrus.service.resource.Resource;
 import com.alibaba.citrus.service.resource.ResourceLister;
 import com.alibaba.citrus.service.resource.ResourceListerContext;
@@ -39,6 +36,8 @@ import com.alibaba.citrus.service.resource.ResourceLoadingService;
 import com.alibaba.citrus.service.resource.ResourceMatchResult;
 import com.alibaba.citrus.service.resource.support.FileResource;
 import com.alibaba.citrus.util.ToStringBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 用来装载文件系统中的资源。
@@ -47,8 +46,8 @@ import com.alibaba.citrus.util.ToStringBuilder;
  */
 public class FileResourceLoader implements ResourceLister {
     private final static Logger log = LoggerFactory.getLogger(FileResourceLoader.class);
-    private String basedir;
-    private String configFileBasedir;
+    private String       basedir;
+    private String       configFileBasedir;
     private SearchPath[] paths;
 
     /**
@@ -61,9 +60,7 @@ public class FileResourceLoader implements ResourceLister {
         return basedir;
     }
 
-    /**
-     * 设置basedir。
-     */
+    /** 设置basedir。 */
     public void setBasedir(String basedir) {
         this.basedir = trimToNull(basedir);
     }
@@ -81,9 +78,7 @@ public class FileResourceLoader implements ResourceLister {
         return configFileBasedir;
     }
 
-    /**
-     * 设置file-loader所在的配置文件的URL。
-     */
+    /** 设置file-loader所在的配置文件的URL。 */
     public void setConfigFileURL(URL configFileURL) {
         if (configFileURL != null) {
             File configFile = null;
@@ -108,9 +103,7 @@ public class FileResourceLoader implements ResourceLister {
         this.paths = paths;
     }
 
-    /**
-     * 初始化loader，并设定loader所在的<code>ResourceLoadingService</code>的实例。
-     */
+    /** 初始化loader，并设定loader所在的<code>ResourceLoadingService</code>的实例。 */
     public void init(ResourceLoadingService resourceLoadingService) {
         // 设置basedir：
         // 1. 如果没有指定basedir，则将当前配置文件所在目录看做basedir
@@ -138,9 +131,7 @@ public class FileResourceLoader implements ResourceLister {
         }
     }
 
-    /**
-     * 查找文件资源。
-     */
+    /** 查找文件资源。 */
     public Resource getResource(ResourceLoaderContext context, Set<ResourceLoadingOption> options) {
         File file = find(context, options);
 
@@ -151,9 +142,7 @@ public class FileResourceLoader implements ResourceLister {
         }
     }
 
-    /**
-     * 查找目录列表。
-     */
+    /** 查找目录列表。 */
     public String[] list(ResourceListerContext context, Set<ResourceLoadingOption> options) {
         File file = find(context, options);
         File[] files = file == null ? null : file.listFiles();
@@ -175,9 +164,7 @@ public class FileResourceLoader implements ResourceLister {
         }
     }
 
-    /**
-     * 查找文件。
-     */
+    /** 查找文件。 */
     private File find(ResourceMatchResult context, Set<ResourceLoadingOption> options) {
         File file = null;
 
@@ -229,9 +216,9 @@ public class FileResourceLoader implements ResourceLister {
      * </p>
      */
     public static class SearchPath {
-        private final String path;
+        private final String  path;
         private final boolean relative;
-        private String basedir;
+        private       String  basedir;
 
         public SearchPath(String path, boolean relative) {
             this.path = assertNotNull(trimToNull(normalizePath(path)), "path");
@@ -241,13 +228,11 @@ public class FileResourceLoader implements ResourceLister {
         public void init(String basedir) {
             if (relative) {
                 this.basedir = assertNotNull(basedir, "Could not get basedir for search path: %s.  "
-                        + "Please set basedir explictly at file-loader or use absolute path instead", this);
+                                                      + "Please set basedir explictly at file-loader or use absolute path instead", this);
             }
         }
 
-        /**
-         * 取得匹配的路径。
-         */
+        /** 取得匹配的路径。 */
         public File getPath(ResourceMatchResult context) {
             String realPath = context.substitute(path);
 

@@ -25,14 +25,10 @@ import java.util.Set;
  * @author Michael Zhou
  */
 public interface ModuleFactory {
-    /**
-     * 取得当前factory所支持的所有module类型。
-     */
+    /** 取得当前factory所支持的所有module类型。 */
     Set<String> getModuleTypes();
 
-    /**
-     * 取得指定module类型的所有module名称。
-     */
+    /** 取得指定module类型的所有module名称。 */
     Set<String> getModuleNames(String moduleType);
 
     /**

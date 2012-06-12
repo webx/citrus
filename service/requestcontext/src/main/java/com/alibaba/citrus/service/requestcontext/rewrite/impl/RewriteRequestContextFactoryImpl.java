@@ -24,9 +24,7 @@ import com.alibaba.citrus.service.requestcontext.rewrite.RewriteRequestContext;
 import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextFactory;
 import com.alibaba.citrus.util.ToStringBuilder.CollectionBuilder;
 
-/**
- * 创建<code>RewriteRequestContext</code>的工厂。
- */
+/** 创建<code>RewriteRequestContext</code>的工厂。 */
 public class RewriteRequestContextFactoryImpl extends AbstractRequestContextFactory<RewriteRequestContext> {
     private RewriteRule[] rules;
 
@@ -38,9 +36,7 @@ public class RewriteRequestContextFactoryImpl extends AbstractRequestContextFact
         return new RewriteRequestContextImpl(wrappedContext, rules);
     }
 
-    /**
-     * 本类提供了重写request参数和URL的功能。
-     */
+    /** 本类提供了重写request参数和URL的功能。 */
     public String[] getFeatures() {
         return new String[] { "rewrite" };
     }

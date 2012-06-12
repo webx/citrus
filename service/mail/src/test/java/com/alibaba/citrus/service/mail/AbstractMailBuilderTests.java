@@ -30,15 +30,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.URL;
 import java.util.Set;
-
 import javax.mail.Session;
-
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.core.io.FileSystemResource;
 
 import com.alibaba.citrus.service.mail.builder.MailBuilder;
 import com.alibaba.citrus.service.mail.builder.MailContent;
@@ -53,6 +45,12 @@ import com.alibaba.citrus.service.resource.ResourceNotFoundException;
 import com.alibaba.citrus.service.resource.support.ResourceLoadingSupport;
 import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import com.alibaba.citrus.test.runner.TestNameAware;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.io.FileSystemResource;
 
 /**
  * 和mail builder相关的测试基类。
@@ -61,15 +59,15 @@ import com.alibaba.citrus.test.runner.TestNameAware;
  */
 @RunWith(TestNameAware.class)
 public abstract class AbstractMailBuilderTests {
-    protected final static String REGEX_EOL = "(\\r|\\n|\\r\\n)";
+    protected final static String REGEX_EOL                             = "(\\r|\\n|\\r\\n)";
     protected static final String 我爱北京敏感词_I_LOVE_THE_PRESERVED_KEYWORDS = "我爱北京敏感词 I love the preserved keywords.";
-    protected static final String 中国_CHINA_EARTH_COM = "中国 <china@earth.com>";
-    protected static final String 美国_CHINA_EARTH_COM = "美国 <us@earth.com>";
-    protected final Logger log = LoggerFactory.getLogger(getClass());
+    protected static final String 中国_CHINA_EARTH_COM                    = "中国 <china@earth.com>";
+    protected static final String 美国_CHINA_EARTH_COM                    = "美国 <us@earth.com>";
+    protected final        Logger log                                   = LoggerFactory.getLogger(getClass());
     protected static XmlApplicationContext factory;
-    protected MailServiceImpl mailService;
-    protected Session rawSession;
-    protected MailBuilder builder;
+    protected        MailServiceImpl       mailService;
+    protected        Session               rawSession;
+    protected        MailBuilder           builder;
 
     @BeforeClass
     public static void initFactory() {
@@ -89,9 +87,7 @@ public abstract class AbstractMailBuilderTests {
         builder = new MailBuilder();
     }
 
-    /**
-     * 取得mail的文本格式。
-     */
+    /** 取得mail的文本格式。 */
     protected final String getMessageAsText() throws Exception {
         MailBuilder builderCopy = builder.clone();
 
@@ -143,9 +139,7 @@ public abstract class AbstractMailBuilderTests {
         }
     }
 
-    /**
-     * 除去resource URL的filter。
-     */
+    /** 除去resource URL的filter。 */
     public static class NoURLFilter implements ResourceFilter {
         public void init(ResourceLoadingService resourceLoadingService) {
         }

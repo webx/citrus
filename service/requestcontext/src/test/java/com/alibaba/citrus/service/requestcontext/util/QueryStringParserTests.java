@@ -26,13 +26,12 @@ import java.net.URLEncoder;
 import java.util.Locale;
 import java.util.Map;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.util.i18n.LocaleUtil;
+import org.junit.Test;
 
 public class QueryStringParserTests {
     private QueryStringParser parser;
-    private MapMock map;
+    private MapMock           map;
 
     @Test
     public void charset() {
@@ -149,13 +148,11 @@ public class QueryStringParserTests {
             fail();
         } catch (UnsupportedOperationException e) {
             assertThat(e,
-                    exception("You should extend class QueryStringParser and override method add(String, String)"));
+                       exception("You should extend class QueryStringParser and override method add(String, String)"));
         }
     }
 
-    /**
-     * 相当于在IE地址栏中直接输入中文，没有URL encoding
-     */
+    /** 相当于在IE地址栏中直接输入中文，没有URL encoding */
     @Test
     public void parseRawBytes() throws Exception {
         assertParse(reencode("中=国", "UTF-8"), "UTF-8", "中", "国");
@@ -163,9 +160,7 @@ public class QueryStringParserTests {
         assertParse(reencode("name=中华民国", "UTF-8"), "UTF-8", "name", "中华民国");
     }
 
-    /**
-     * 相当于在Firefox地址栏中直接输入中文，有URL encoding
-     */
+    /** 相当于在Firefox地址栏中直接输入中文，有URL encoding */
     @Test
     public void parseURLEncoded() throws Exception {
         assertParse(urlencode("中=国", "UTF-8"), "UTF-8", "中", "国");
@@ -173,9 +168,7 @@ public class QueryStringParserTests {
         assertParse(urlencode("name=Justin\u00b7Bieber", "GBK"), "GBK", "name", "Justin\u00b7Bieber");
     }
 
-    /**
-     * 直接是unicode字符。
-     */
+    /** 直接是unicode字符。 */
     @Test
     public void parseUnicode() throws Exception {
         assertParse("中=" + reencode("国", "UTF-8"), "UTF-8", "中", "国");

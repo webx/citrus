@@ -91,7 +91,7 @@ public class TypeInfoFactoryTests {
         ParameterizedTypeInfo type1 = factory.getParameterizedType(List.class, String.class);
         ParameterizedTypeInfo type2 = factory.getParameterizedType(factory.getClassType(List.class), String.class);
         ParameterizedTypeInfo type3 = factory.getParameterizedType(factory.getClassType(List.class),
-                factory.getClassType(String.class));
+                                                                   factory.getClassType(String.class));
 
         assertEquals(type1, type2);
         assertEquals(type2, type3);
@@ -103,12 +103,9 @@ public class TypeInfoFactoryTests {
         ArrayTypeInfo ati2 = factory.getArrayType(factory.getType(String.class), 2);
 
         assertSame(ati1, ati2);
-
     }
 
-    /**
-     * 递归创建types的情形。
-     */
+    /** 递归创建types的情形。 */
     @Test
     public void recursiveType() {
         RawTypeInfo layout = (RawTypeInfo) factory.getType(Layout.class);
@@ -180,7 +177,7 @@ public class TypeInfoFactoryTests {
         long duration = System.currentTimeMillis() - start;
         System.out.println("===========================");
         System.out.printf("Total %,d classes in %,d ms, avg. %,.3f ms.\n", classes.size(), duration, (double) duration
-                / classes.size());
+                                                                                                     / classes.size());
     }
 
     private List<Class<?>> getClasses(File jarFile) throws Exception {
@@ -188,7 +185,7 @@ public class TypeInfoFactoryTests {
         List<Class<?>> classes = new LinkedList<Class<?>>();
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
 
-        for (Enumeration<JarEntry> i = jar.entries(); i.hasMoreElements();) {
+        for (Enumeration<JarEntry> i = jar.entries(); i.hasMoreElements(); ) {
             JarEntry entry = i.nextElement();
             String name = entry.getName();
 

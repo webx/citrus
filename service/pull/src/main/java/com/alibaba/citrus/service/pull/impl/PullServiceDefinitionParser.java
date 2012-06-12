@@ -26,6 +26,11 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import com.alibaba.citrus.springext.ConfigurationPoint;
+import com.alibaba.citrus.springext.Contribution;
+import com.alibaba.citrus.springext.ContributionAware;
+import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
+import com.alibaba.citrus.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -35,17 +40,11 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-import com.alibaba.citrus.springext.ConfigurationPoint;
-import com.alibaba.citrus.springext.Contribution;
-import com.alibaba.citrus.springext.ContributionAware;
-import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
-import com.alibaba.citrus.util.StringUtil;
-
 public class PullServiceDefinitionParser extends AbstractNamedBeanDefinitionParser<PullServiceImpl> implements
-        ContributionAware {
-    private final static Logger log = LoggerFactory.getLogger(PullServiceDefinitionParser.class);
-    private final static Pattern ID_PATTERN = Pattern.compile("\\w+");
-    private final static String[] CLASS_NAME_SUFFIXES = { "Tool", "ToolFactory", "ToolSet", "ToolSetFactory" };
+                                                                                                    ContributionAware {
+    private final static Logger   log                   = LoggerFactory.getLogger(PullServiceDefinitionParser.class);
+    private final static Pattern  ID_PATTERN            = Pattern.compile("\\w+");
+    private final static String[] CLASS_NAME_SUFFIXES   = { "Tool", "ToolFactory", "ToolSet", "ToolSetFactory" };
     private final static String[] ELEMENT_NAME_SUFFIXES = { "-tool", "-tool-factory", "-tool-set", "-tool-set-factory" };
     private ConfigurationPoint pullToolsConfigurationPoint;
 
@@ -78,7 +77,7 @@ public class PullServiceDefinitionParser extends AbstractNamedBeanDefinitionPars
     private void doParseTool(Element element, ParserContext parserContext, BeanDefinitionBuilder builder,
                              Map<Object, Object> factories) {
         BeanDefinitionHolder bean = parseConfigurationPointBean(element, pullToolsConfigurationPoint, parserContext,
-                builder);
+                                                                builder);
 
         if (bean == null) {
             return;

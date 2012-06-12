@@ -19,9 +19,8 @@ package com.alibaba.citrus.logconfig.support;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.logconfig.AbstractLogConfiguratorTests;
+import org.junit.Test;
 
 public class SecurityLoggerTests extends AbstractLogConfiguratorTests {
     @Test

@@ -25,8 +25,6 @@ import org.springframework.core.io.support.ResourcePatternResolver;
  * @author Michael Zhou
  */
 public interface ResourceLoadingExtendable extends ResourcePatternResolver {
-    /**
-     * 设置扩展机制。
-     */
+    /** 设置扩展机制。 */
     void setResourceLoadingExtender(ResourceLoadingExtender resourceLoadingExtender);
 }

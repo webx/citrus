@@ -36,7 +36,7 @@ import com.alibaba.citrus.webx.handler.support.AutowiredRequestProcessor;
  */
 public class SchemaExporterHandler extends AutowiredRequestProcessor {
     private final MenuComponent menuComponent = new MenuComponent(this, "menu");
-    private final Template headTemplate = new Template(getClass().getResource("head.htm"));
+    private final Template      headTemplate  = new Template(getClass().getResource("head.htm"));
 
     private final SchemaExporterWEB exporter = new SchemaExporterWEB(new MenuProvider() {
         public void renderMenuHead(RequestContext request) throws Exception {

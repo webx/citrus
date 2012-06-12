@@ -31,7 +31,7 @@ public enum ContributionType {
     BEAN_DEFINITION_DECORATOR_FOR_ATTRIBUTE(BeanDefinitionDecorator.class, ".bean-definition-decorators-for-attribute");
 
     private final Class<?> contributionInterface;
-    private final String contributionsLocationSuffix;
+    private final String   contributionsLocationSuffix;
 
     private ContributionType(Class<?> contributionInterface, String contributionsLocationPattern) {
         this.contributionsLocationSuffix = contributionsLocationPattern;

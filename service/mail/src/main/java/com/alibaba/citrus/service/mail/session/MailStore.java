@@ -22,7 +22,6 @@ import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.Properties;
-
 import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
@@ -42,81 +41,61 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public class MailStore extends MailSession {
-    private String storeProtocol;
-    private String storeFolder;
+    private String           storeProtocol;
+    private String           storeFolder;
     private MailStoreHandler handler;
-    private Store store;
+    private Store            store;
 
-    /**
-     * 创建一个mail store。
-     */
+    /** 创建一个mail store。 */
     public MailStore() {
     }
 
-    /**
-     * 复制一个mail store。
-     */
+    /** 复制一个mail store。 */
     public MailStore(MailStore store, Properties overrideProps) {
         super(store, overrideProps);
         this.storeProtocol = store.storeProtocol;
         this.storeFolder = store.storeFolder;
     }
 
-    /**
-     * 取得mail store的协议。
-     */
+    /** 取得mail store的协议。 */
     public String getProtocol() {
         return defaultIfNull(storeProtocol, DEFAULT_MAIL_STORE_PROTOCOL);
     }
 
-    /**
-     * 设置mail store的协议。
-     */
+    /** 设置mail store的协议。 */
     public void setProtocol(String protocol) {
         this.storeProtocol = trimToNull(protocol);
     }
 
-    /**
-     * 取得mail store的文件夹。
-     */
+    /** 取得mail store的文件夹。 */
     public String getFolder() {
         return defaultIfNull(storeFolder, DEFAULT_MAIL_STORE_FOLDER);
     }
 
-    /**
-     * 设置mail store的文件夹。
-     */
+    /** 设置mail store的文件夹。 */
     public void setFolder(String folder) {
         this.storeFolder = trimToNull(folder);
     }
 
-    /**
-     * 取得接收e-mail的处理程序。
-     */
+    /** 取得接收e-mail的处理程序。 */
     public MailStoreHandler getHandler() {
         return handler;
     }
 
-    /**
-     * 设置接收e-mail的处理程序。
-     */
+    /** 设置接收e-mail的处理程序。 */
     public void setHandler(MailStoreHandler newHandler) {
         if (newHandler != null) {
             this.handler = newHandler;
         }
     }
 
-    /**
-     * 判断是否已经连接上。
-     */
+    /** 判断是否已经连接上。 */
     @Override
     public boolean isConnected() {
         return store != null && store.isConnected();
     }
 
-    /**
-     * 连接mail服务器。
-     */
+    /** 连接mail服务器。 */
     @Override
     public void connect() throws MailException {
         if (!isConnected()) {
@@ -137,9 +116,7 @@ public class MailStore extends MailSession {
         }
     }
 
-    /**
-     * 关闭mail服务器的连接。
-     */
+    /** 关闭mail服务器的连接。 */
     @Override
     public void close() {
         if (store != null) {
@@ -152,16 +129,12 @@ public class MailStore extends MailSession {
         }
     }
 
-    /**
-     * 接收邮件。
-     */
+    /** 接收邮件。 */
     public void receive() throws MailException {
         receive(null);
     }
 
-    /**
-     * 接收邮件。
-     */
+    /** 接收邮件。 */
     public void receive(MailStoreHandler handler) throws MailException {
         Folder inbox = null;
         boolean autoClose = false;

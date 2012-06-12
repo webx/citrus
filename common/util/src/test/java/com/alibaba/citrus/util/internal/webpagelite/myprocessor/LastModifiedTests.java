@@ -29,15 +29,11 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import com.alibaba.citrus.util.internal.webpagelite.RequestProcessor;
 import com.alibaba.citrus.util.internal.webpagelite.ServletRequestContext;
@@ -45,16 +41,18 @@ import com.meterware.httpunit.WebResponse;
 import com.meterware.servletunit.InvocationContext;
 import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
+import org.junit.Before;
+import org.junit.Test;
 
 public class LastModifiedTests {
-    private SimpleDateFormat fmt;
-    private ServletUnitClient client;
-    private InvocationContext invocationContext;
-    private HttpServletRequest request;
+    private SimpleDateFormat    fmt;
+    private ServletUnitClient   client;
+    private InvocationContext   invocationContext;
+    private HttpServletRequest  request;
     private HttpServletResponse response;
-    private ServletContext servletContext;
+    private ServletContext      servletContext;
     private Map<String, String> textResources;
-    private MyProcessor page;
+    private MyProcessor         page;
 
     @Before
     public void init() throws Exception {
@@ -95,12 +93,12 @@ public class LastModifiedTests {
         page.processRequest(getRequestContext("/dummy.txt"));
 
         assertEquals(new File(getClass().getResource("dummy.txt").toURI()).lastModified() / 1000 * 1000,
-                getResponseLastModified());
+                     getResponseLastModified());
 
         page.processRequest(getRequestContext("/prototype.js"));
 
         assertEquals(new File(RequestProcessor.class.getResource("prototype.js").toURI()).lastModified() / 1000 * 1000,
-                getResponseLastModified());
+                     getResponseLastModified());
     }
 
     @Test

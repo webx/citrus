@@ -32,16 +32,12 @@ import com.alibaba.citrus.generictype.TypeInfo;
 public abstract class Introspector {
     private final static Factory factory = newFactory();
 
-    /**
-     * 取得类型对应的{@link Introspector}。
-     */
+    /** 取得类型对应的{@link Introspector}。 */
     public static Introspector getInstance(TypeInfo type) {
         return factory.getInstance(type);
     }
 
-    /**
-     * 取得所有的properties信息。
-     */
+    /** 取得所有的properties信息。 */
     public abstract Map<String, List<PropertyInfo>> getProperties();
 
     /**
@@ -126,16 +122,12 @@ public abstract class Introspector {
         return null;
     }
 
-    /**
-     * 用于创建{@link Introspector}。
-     */
+    /** 用于创建{@link Introspector}。 */
     protected static interface Factory {
         Introspector getInstance(TypeInfo type);
     }
 
-    /**
-     * 创建factory，但避免在compile时刻依赖impl package。
-     */
+    /** 创建factory，但避免在compile时刻依赖impl package。 */
     private static Factory newFactory() {
         String factoryImplName = Factory.class.getPackage().getName() + ".impl.IntrospectorImpl$FactoryImpl";
         Factory factoryImpl = null;

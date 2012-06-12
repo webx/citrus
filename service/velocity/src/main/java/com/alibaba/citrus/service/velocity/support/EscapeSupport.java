@@ -31,6 +31,13 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.alibaba.citrus.service.configuration.ProductionModeAware;
+import com.alibaba.citrus.service.velocity.FastCloneable;
+import com.alibaba.citrus.service.velocity.VelocityConfiguration;
+import com.alibaba.citrus.service.velocity.VelocityPlugin;
+import com.alibaba.citrus.util.StringEscapeUtil;
+import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 import org.apache.velocity.app.event.ReferenceInsertionEventHandler;
 import org.apache.velocity.context.Context;
 import org.apache.velocity.context.InternalContextAdapter;
@@ -49,22 +56,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
-import com.alibaba.citrus.service.configuration.ProductionModeAware;
-import com.alibaba.citrus.service.velocity.FastCloneable;
-import com.alibaba.citrus.service.velocity.VelocityConfiguration;
-import com.alibaba.citrus.service.velocity.VelocityPlugin;
-import com.alibaba.citrus.util.StringEscapeUtil;
-import com.alibaba.citrus.util.ToStringBuilder;
-import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
-
 public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHandler, ContextAware, FastCloneable,
-        ProductionModeAware {
-    private final static Logger log = LoggerFactory.getLogger(EscapeSupport.class);
+                                      ProductionModeAware {
+    private final static Logger log             = LoggerFactory.getLogger(EscapeSupport.class);
     private final static String ESCAPE_TYPE_KEY = "_ESCAPE_SUPPORT_TYPE_";
     private ResourceLoader loader;
-    private EscapeType defaultEscape;
-    private EscapeRule[] escapeRules;
-    private boolean cacheReferences;
+    private EscapeType     defaultEscape;
+    private EscapeRule[]   escapeRules;
+    private boolean        cacheReferences;
     private Map<String, EscapeType> referenceCache = createConcurrentHashMap();
     private transient Context context;
 
@@ -171,7 +170,7 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
 
                     if (log.isDebugEnabled()) {
                         log.debug("{} matched {} for reference {}", new Object[] { escapeType, matchedPattern,
-                                reference });
+                                                                                   reference });
                     }
 
                     break;
@@ -189,7 +188,7 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
 
     private static boolean renderWithEscape(EscapeType escapeType, InternalContextAdapter context, Writer writer,
                                             Node node) throws IOException, ResourceNotFoundException,
-            ParseErrorException, MethodInvocationException {
+                                                              ParseErrorException, MethodInvocationException {
         EscapeType savedEscapeType = setEscapeType(escapeType, context);
 
         try {
@@ -298,7 +297,7 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
         };
 
         private static final Map<String, EscapeType> namedTypes = createHashMap();
-        private static final ArrayList<String> names = createArrayList();
+        private static final ArrayList<String>       names      = createArrayList();
         private final String name;
 
         static {
@@ -344,9 +343,7 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
         }
     }
 
-    /**
-     * Escape directive。
-     */
+    /** Escape directive。 */
     public static class Escape extends Directive {
         @Override
         public String getName() {
@@ -364,14 +361,16 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
 
             if (node.jjtGetNumChildren() != 2) {
                 throw new TemplateInitException("Invalid args for #" + getName()
-                        + ".  Expected 1 and only 1 string arg.", context.getCurrentTemplateName(), node.getColumn(),
-                        node.getLine());
+                                                + ".  Expected 1 and only 1 string arg.", context.getCurrentTemplateName(), node.getColumn(),
+                                                node.getLine());
             }
         }
 
         @Override
         public boolean render(InternalContextAdapter context, Writer writer, Node node) throws IOException,
-                ResourceNotFoundException, ParseErrorException, MethodInvocationException {
+                                                                                               ResourceNotFoundException,
+                                                                                               ParseErrorException,
+                                                                                               MethodInvocationException {
             Node escapeTypeNode = node.jjtGetChild(0);
             Object escapeTypeObject = escapeTypeNode.value(context);
             String escapeTypeString = escapeTypeObject == null ? null : escapeTypeObject.toString();
@@ -379,19 +378,17 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
 
             if (escapeType == null) {
                 throw new ParseErrorException("Invalid escape type: "
-                        + escapeTypeObject
-                        + " at "
-                        + new Info(escapeTypeNode.getTemplateName(), escapeTypeNode.getColumn(),
-                                escapeTypeNode.getLine()) + ".  Available escape types: " + EscapeType.getNames());
+                                              + escapeTypeObject
+                                              + " at "
+                                              + new Info(escapeTypeNode.getTemplateName(), escapeTypeNode.getColumn(),
+                                                         escapeTypeNode.getLine()) + ".  Available escape types: " + EscapeType.getNames());
             }
 
             return renderWithEscape(escapeType, context, writer, node.jjtGetChild(1));
         }
     }
 
-    /**
-     * Noescape directive。
-     */
+    /** Noescape directive。 */
     public static class Noescape extends Directive {
         @Override
         public String getName() {
@@ -409,19 +406,21 @@ public class EscapeSupport implements VelocityPlugin, ReferenceInsertionEventHan
 
             if (node.jjtGetNumChildren() != 1) {
                 throw new TemplateInitException("Invalid args for #" + getName() + ".  Expected 0 args.",
-                        context.getCurrentTemplateName(), node.getColumn(), node.getLine());
+                                                context.getCurrentTemplateName(), node.getColumn(), node.getLine());
             }
         }
 
         @Override
         public boolean render(InternalContextAdapter context, Writer writer, Node node) throws IOException,
-                ResourceNotFoundException, ParseErrorException, MethodInvocationException {
+                                                                                               ResourceNotFoundException,
+                                                                                               ParseErrorException,
+                                                                                               MethodInvocationException {
             return renderWithEscape(EscapeType.NO_ESCAPE, context, writer, node.jjtGetChild(0));
         }
     }
 
     public static class EscapeRule {
-        private final Pattern pattern;
+        private final Pattern    pattern;
         private final EscapeType escape;
 
         public EscapeRule(String escapeType, String[] patterns) {

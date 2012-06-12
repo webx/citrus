@@ -46,10 +46,10 @@ import com.alibaba.citrus.util.internal.LazyLoader.Loader;
  * @author Michael Zhou
  */
 class ParameterizedTypeImpl implements ParameterizedTypeInfo {
-    private final RawTypeInfo rawType;
+    private final RawTypeInfo                    rawType;
     private final LazyLoader<Supertypes, Object> supertypesLoader;
-    private List<TypeInfo> actualTypeArguments;
-    private boolean resolved;
+    private       List<TypeInfo>                 actualTypeArguments;
+    private       boolean                        resolved;
 
     ParameterizedTypeImpl(RawTypeInfo rawType) {
         assertTrue(rawType != null && getTypeParameters(rawType).length > 0, "rawType");
@@ -65,7 +65,7 @@ class ParameterizedTypeImpl implements ParameterizedTypeInfo {
         int expectedParams = getTypeParameters(rawType).length;
 
         assertTrue(actualArgs == expectedParams, "actual arguments length not match: expected %d, actual %d",
-                expectedParams, actualArgs);
+                   expectedParams, actualArgs);
 
         // 检查参数类型是否匹配
         for (int i = 0; i < actualTypeArguments.length; i++) {
@@ -80,9 +80,7 @@ class ParameterizedTypeImpl implements ParameterizedTypeInfo {
         return rawType.getRawType().getTypeParameters(); // 避免调用rawType.getTypeParameters()以免递归
     }
 
-    /**
-     * 检查类型<code>argClass</code>是不是<code>var</code>的bounds的子类。
-     */
+    /** 检查类型<code>argClass</code>是不是<code>var</code>的bounds的子类。 */
     private static void checkBounds(TypeVariable<?> var, Type type, Class<?> argClass, boolean array) {
         if (type == null) {
             type = var;
@@ -92,9 +90,9 @@ class ParameterizedTypeImpl implements ParameterizedTypeInfo {
             Class<?> superclass = (Class<?>) type;
 
             assertTrue(superclass.isAssignableFrom(argClass),
-                    array ? "actual argument of parameter %s should be array of sub-class of %s, but was array of %s"
-                            : "actual argument of parameter %s should be sub-class of %s, but was %s", var, superclass,
-                    argClass);
+                       array ? "actual argument of parameter %s should be array of sub-class of %s, but was array of %s"
+                             : "actual argument of parameter %s should be sub-class of %s, but was %s", var, superclass,
+                       argClass);
 
             return;
         }
@@ -218,7 +216,7 @@ class ParameterizedTypeImpl implements ParameterizedTypeInfo {
             }
 
             ParameterizedTypeImpl result = changed ? (ParameterizedTypeImpl) factory.getParameterizedType(rawType,
-                    resolvedArgs) : this;
+                                                                                                          resolvedArgs) : this;
 
             if (resolved) {
                 result.resolved = resolved;
@@ -264,17 +262,13 @@ class ParameterizedTypeImpl implements ParameterizedTypeInfo {
         return TypeInfoFactory.getMethod(this, methodName, paramTypes);
     }
 
-    /**
-     * 取得hash值。
-     */
+    /** 取得hash值。 */
     @Override
     public int hashCode() {
         return getClass().hashCode() ^ rawType.hashCode() ^ actualTypeArguments.hashCode();
     }
 
-    /**
-     * 判断两个对象是否相同。
-     */
+    /** 判断两个对象是否相同。 */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -290,9 +284,7 @@ class ParameterizedTypeImpl implements ParameterizedTypeInfo {
         return rawType.equals(otherType.rawType) && actualTypeArguments.equals(otherType.actualTypeArguments);
     }
 
-    /**
-     * 取得字符串表示。
-     */
+    /** 取得字符串表示。 */
     @Override
     public String toString() {
         StringBuilder buf = new StringBuilder();
@@ -313,9 +305,7 @@ class ParameterizedTypeImpl implements ParameterizedTypeInfo {
         return buf.toString();
     }
 
-    /**
-     * 父类、接口的信息。
-     */
+    /** 父类、接口的信息。 */
     private static class Supertypes {
         private final List<TypeInfo> supertypes;
         private final List<TypeInfo> interfaces;
@@ -365,9 +355,7 @@ class ParameterizedTypeImpl implements ParameterizedTypeInfo {
         }
     }
 
-    /**
-     * 创建supertypes的装载器。
-     */
+    /** 创建supertypes的装载器。 */
     private class SupertypesLoader implements Loader<Supertypes, Object> {
         public Supertypes load(Object context) {
             return new Supertypes(ParameterizedTypeImpl.this);

@@ -50,7 +50,7 @@ public class ClassUtil {
      * <p>
      * 类似<code>object.getClass().getName()</code>，但不同的是，该方法用更友好的方式显示数组类型。 例如：
      * </p>
-     *
+     * <p/>
      * <pre>
      *  int[].class.getName() = "[I"
      *  ClassUtil.getFriendlyClassName(int[].class) = "int[]"
@@ -83,7 +83,7 @@ public class ClassUtil {
      * <p>
      * 类似<code>clazz.getName()</code>，但不同的是，该方法用更友好的方式显示数组类型。 例如：
      * </p>
-     *
+     * <p/>
      * <pre>
      *  int[].class.getName() = "[I"
      *  ClassUtil.getFriendlyClassName(int[].class) = "int[]"
@@ -117,7 +117,7 @@ public class ClassUtil {
      * <code>className</code> 必须是从 <code>clazz.getName()</code>
      * 所返回的合法类名。该方法用更友好的方式显示数组类型。 例如：
      * </p>
-     *
+     * <p/>
      * <pre>
      *  int[].class.getName() = "[I"
      *  ClassUtil.getFriendlyClassName(int[].class) = "int[]"
@@ -142,7 +142,7 @@ public class ClassUtil {
     /**
      * 将Java类名转换成友好类名。
      *
-     * @param javaClassName Java类名
+     * @param javaClassName     Java类名
      * @param processInnerClass 是否将内联类分隔符 <code>'$'</code> 转换成 <code>'.'</code>
      * @return 友好的类名。如果参数非法或空，则返回<code>null</code>。
      */
@@ -236,7 +236,7 @@ public class ClassUtil {
      * 取得指定对象所属的类的简单类名，不包括package名。
      * <p>
      * 此方法可以正确显示数组和内联类的名称。 例如：
-     *
+     * <p/>
      * <pre>
      *  ClassUtil.getSimpleClassNameForObject(Boolean.TRUE) = "Boolean"
      *  ClassUtil.getSimpleClassNameForObject(new Boolean[10]) = "Boolean[]"
@@ -261,7 +261,7 @@ public class ClassUtil {
      * 取得指定对象所属的类的简单类名，不包括package名。
      * <p>
      * 此方法可以正确显示数组和内联类的名称。 例如：
-     *
+     * <p/>
      * <pre>
      *  ClassUtil.getSimpleClassNameForObject(Boolean.TRUE) = "Boolean"
      *  ClassUtil.getSimpleClassNameForObject(new Boolean[10]) = "Boolean[]"
@@ -286,7 +286,7 @@ public class ClassUtil {
      * 取得简单类名，不包括package名。
      * <p>
      * 此方法可以正确显示数组和内联类的名称。 例如：
-     *
+     * <p/>
      * <pre>
      *  ClassUtil.getSimpleClassName(Boolean.class) = "Boolean"
      *  ClassUtil.getSimpleClassName(Boolean[].class) = "Boolean[]"
@@ -312,7 +312,7 @@ public class ClassUtil {
      * 取得简单类名，不包括package名。
      * <p>
      * 此方法可以正确显示数组和内联类的名称。 例如：
-     *
+     * <p/>
      * <pre>
      *  ClassUtil.getSimpleClassName(Boolean.class) = "Boolean"
      *  ClassUtil.getSimpleClassName(Boolean[].class) = "Boolean[]"
@@ -338,7 +338,7 @@ public class ClassUtil {
      * 取得类名，不包括package名。
      * <p>
      * 此方法可以正确显示数组和内联类的名称。 例如：
-     *
+     * <p/>
      * <pre>
      *  ClassUtil.getSimpleClassName(Boolean.class.getName()) = "Boolean"
      *  ClassUtil.getSimpleClassName(Boolean[].class.getName()) = "Boolean[]"
@@ -360,7 +360,7 @@ public class ClassUtil {
      * 取得类名，不包括package名。
      * <p>
      * 此方法可以正确显示数组和内联类的名称。 例如：
-     *
+     * <p/>
      * <pre>
      *  ClassUtil.getSimpleClassName(Boolean.class.getName()) = "Boolean"
      *  ClassUtil.getSimpleClassName(Boolean[].class.getName()) = "Boolean[]"
@@ -400,16 +400,12 @@ public class ClassUtil {
         }
     }
 
-    /**
-     * 取得简洁的method描述。
-     */
+    /** 取得简洁的method描述。 */
     public static String getSimpleMethodSignature(Method method) {
         return getSimpleMethodSignature(method, false, false, false, false);
     }
 
-    /**
-     * 取得简洁的method描述。
-     */
+    /** 取得简洁的method描述。 */
     public static String getSimpleMethodSignature(Method method, boolean withModifiers, boolean withReturnType,
                                                   boolean withClassName, boolean withExceptionType) {
         if (method == null) {
@@ -540,7 +536,7 @@ public class ClassUtil {
      * <p>
      * 例如：
      * </p>
-     *
+     * <p/>
      * <pre>
      * ClassUtil.getResourceNameForObjectClass(&quot;This is a string&quot;) = &quot;java/lang/String.class&quot;
      * </pre>
@@ -561,7 +557,7 @@ public class ClassUtil {
      * <p>
      * 例如：
      * </p>
-     *
+     * <p/>
      * <pre>
      * ClassUtil.getResourceNameForClass(String.class) = &quot;java/lang/String.class&quot;
      * </pre>
@@ -582,7 +578,7 @@ public class ClassUtil {
      * <p>
      * 例如：
      * </p>
-     *
+     * <p/>
      * <pre>
      * ClassUtil.getResourceNameForClass(&quot;java.lang.String&quot;) = &quot;java/lang/String.class&quot;
      * </pre>
@@ -667,7 +663,7 @@ public class ClassUtil {
      * 取得指定维数的 <code>Array</code>类.
      *
      * @param componentType 数组的基类
-     * @param dimension 维数，如果小于 <code>0</code> 则看作 <code>0</code>
+     * @param dimension     维数，如果小于 <code>0</code> 则看作 <code>0</code>
      * @return 如果维数为0, 则返回基类本身, 否则返回数组类，如果数组的基类为 <code>null</code> ，则返回
      *         <code>null</code>
      */
@@ -698,12 +694,12 @@ public class ClassUtil {
      * 取得primitive类。
      * <p>
      * 例如：
-     *
+     * <p/>
      * <pre>
      * ClassUtil.getPrimitiveType(&quot;int&quot;) = int.class;
      * ClassUtil.getPrimitiveType(&quot;long&quot;) = long.class;
      * </pre>
-     *
+     * <p/>
      * </p>
      */
     public static Class<?> getPrimitiveType(String name) {
@@ -720,12 +716,12 @@ public class ClassUtil {
      * 取得primitive类。
      * <p>
      * 例如：
-     *
+     * <p/>
      * <pre>
      * ClassUtil.getPrimitiveType(Integer.class) = int.class;
      * ClassUtil.getPrimitiveType(Long.class) = long.class;
      * </pre>
-     *
+     * <p/>
      * </p>
      */
     public static Class<?> getPrimitiveType(Class<?> type) {
@@ -736,14 +732,14 @@ public class ClassUtil {
      * 取得primitive类型的wrapper。如果不是primitive，则原样返回。
      * <p>
      * 例如：
-     *
+     * <p/>
      * <pre>
      * ClassUtil.getPrimitiveWrapperType(int.class) = Integer.class;
      * ClassUtil.getPrimitiveWrapperType(int[].class) = int[].class;
      * ClassUtil.getPrimitiveWrapperType(int[][].class) = int[][].class;
      * ClassUtil.getPrimitiveWrapperType(String[][].class) = String[][].class;
      * </pre>
-     *
+     * <p/>
      * </p>
      */
     @SuppressWarnings("unchecked")
@@ -759,13 +755,13 @@ public class ClassUtil {
      * 取得primitive类型的默认值。如果不是primitive，则返回<code>null</code>。
      * <p>
      * 例如：
-     *
+     * <p/>
      * <pre>
      * ClassUtil.getPrimitiveDefaultValue(int.class) = 0;
      * ClassUtil.getPrimitiveDefaultValue(boolean.class) = false;
      * ClassUtil.getPrimitiveDefaultValue(char.class) = '\0';
      * </pre>
-     *
+     * <p/>
      * </p>
      */
     @SuppressWarnings("unchecked")
@@ -801,16 +797,14 @@ public class ClassUtil {
         PRIMITIVES.put(wrapperType.getName(), info);
     }
 
-    /**
-     * 代表一个primitive类型的信息。
-     */
+    /** 代表一个primitive类型的信息。 */
     @SuppressWarnings("unused")
     private static class PrimitiveInfo<T> {
         final Class<T> type;
-        final String typeCode;
+        final String   typeCode;
         final Class<T> wrapperType;
-        final String unwrapMethod;
-        final T defaultValue;
+        final String   unwrapMethod;
+        final T        defaultValue;
 
         public PrimitiveInfo(Class<T> type, String typeCode, Class<T> wrapperType, String unwrapMethod, T defaultValue) {
             this.type = type;
@@ -856,7 +850,7 @@ public class ClassUtil {
      * </ol>
      * </p>
      *
-     * @param classes 目标类型列表，如果是 <code>null</code> 总是返回 <code>false</code>
+     * @param classes     目标类型列表，如果是 <code>null</code> 总是返回 <code>false</code>
      * @param fromClasses 参数类型列表， <code>null</code> 表示可赋值给任意非原子类型
      * @return 如果可以被赋值，则返回 <code>true</code>
      */
@@ -912,7 +906,7 @@ public class ClassUtil {
      * </ol>
      * </p>
      *
-     * @param clazz 目标类型，如果是 <code>null</code> 总是返回 <code>false</code>
+     * @param clazz     目标类型，如果是 <code>null</code> 总是返回 <code>false</code>
      * @param fromClass 参数类型， <code>null</code> 表示可赋值给任意非原子类型
      * @return 如果可以被赋值，则返回 <code>null</code>
      */
@@ -963,11 +957,11 @@ public class ClassUtil {
 
         // float可以接受：float, long, int, byte, short, char
         assignmentTable.put(float.class,
-                assignableSet(float.class, long.class, int.class, byte.class, short.class, char.class));
+                            assignableSet(float.class, long.class, int.class, byte.class, short.class, char.class));
 
         // double可以接受：double, float, long, int, byte, short, char
         assignmentTable.put(double.class,
-                assignableSet(double.class, float.class, long.class, int.class, byte.class, short.class, char.class));
+                            assignableSet(double.class, float.class, long.class, int.class, byte.class, short.class, char.class));
 
         assertTrue(assignmentTable.size() == 8);
     }
@@ -987,23 +981,17 @@ public class ClassUtil {
     // 定位class的位置。
     // ==========================================================================
 
-    /**
-     * 在class loader中查找class的位置。
-     */
+    /** 在class loader中查找class的位置。 */
     public static String locateClass(Class<?> clazz) {
         return locateClass(clazz.getName(), clazz.getClassLoader());
     }
 
-    /**
-     * 在class loader中查找class的位置。
-     */
+    /** 在class loader中查找class的位置。 */
     public static String locateClass(String className) {
         return locateClass(className, null);
     }
 
-    /**
-     * 在class loader中查找class的位置。
-     */
+    /** 在class loader中查找class的位置。 */
     public static String locateClass(String className, ClassLoader loader) {
         className = assertNotNull(trimToNull(className), "className");
 

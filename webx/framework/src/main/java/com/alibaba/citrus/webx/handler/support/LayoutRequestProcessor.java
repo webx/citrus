@@ -33,9 +33,9 @@ import com.alibaba.citrus.webx.handler.component.MenuComponent;
  * @author Michael Zhou
  */
 public abstract class LayoutRequestProcessor extends AutowiredRequestProcessor {
-    private final Template layoutTemplate = new Template(LayoutRequestProcessor.class.getResource("layout.htm"));
-    protected final Template bodyTemplate = new Template(getClass().getResource(getTemplateName()));
-    protected final MenuComponent menuComponent = new MenuComponent(this, "menu");
+    private final   Template        layoutTemplate  = new Template(LayoutRequestProcessor.class.getResource("layout.htm"));
+    protected final Template        bodyTemplate    = new Template(getClass().getResource(getTemplateName()));
+    protected final MenuComponent   menuComponent   = new MenuComponent(this, "menu");
     protected final FooterComponent footerComponent = new FooterComponent(this, "footer");
 
     @Override
@@ -59,17 +59,21 @@ public abstract class LayoutRequestProcessor extends AutowiredRequestProcessor {
 
     protected String[] getStyleSheets() {
         return null;
-    };
+    }
+
+    ;
 
     protected String[] getJavaScripts() {
         return null;
-    };
+    }
+
+    ;
 
     @SuppressWarnings("unused")
     private class LayoutVisitor extends AbstractVisitor {
         private final Object bodyVisitor;
         private final String contentTypeAndCharset;
-        private String componentResource;
+        private       String componentResource;
 
         public LayoutVisitor(RequestHandlerContext context, String contentTypeAndCharset) throws IOException {
             super(context, contentTypeAndCharset);

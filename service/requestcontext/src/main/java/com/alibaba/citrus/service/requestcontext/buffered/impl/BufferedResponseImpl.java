@@ -30,12 +30,8 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.EmptyStackException;
 import java.util.LinkedList;
-
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.support.AbstractResponseWrapper;
@@ -43,6 +39,8 @@ import com.alibaba.citrus.util.io.ByteArray;
 import com.alibaba.citrus.util.io.ByteArrayInputStream;
 import com.alibaba.citrus.util.io.ByteArrayOutputStream;
 import com.alibaba.citrus.util.io.StreamUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 包裹<code>HttpServletResponse</code>，使之输出到内存中。
@@ -50,20 +48,20 @@ import com.alibaba.citrus.util.io.StreamUtil;
  * @author Michael Zhou
  */
 public class BufferedResponseImpl extends AbstractResponseWrapper {
-    private static final Logger log = LoggerFactory.getLogger(BufferedResponseImpl.class);
-    private boolean buffering = true;
+    private static final Logger  log       = LoggerFactory.getLogger(BufferedResponseImpl.class);
+    private              boolean buffering = true;
     private Stack<ByteArrayOutputStream> bytesStack;
-    private Stack<StringWriter> charsStack;
-    private ServletOutputStream stream;
-    private PrintWriter streamAdapter;
-    private PrintWriter writer;
-    private ServletOutputStream writerAdapter;
+    private Stack<StringWriter>          charsStack;
+    private ServletOutputStream          stream;
+    private PrintWriter                  streamAdapter;
+    private PrintWriter                  writer;
+    private ServletOutputStream          writerAdapter;
 
     /**
      * 创建一个<code>BufferedResponseImpl</code>。
      *
      * @param requestContext response所在的request context
-     * @param response 原始的response
+     * @param response       原始的response
      */
     public BufferedResponseImpl(RequestContext requestContext, HttpServletResponse response) {
         super(requestContext, response);
@@ -235,7 +233,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
      *
      * @param buffering 是否buffer内容
      * @throws IllegalStateException <code>getOutputStream</code>或
-     *             <code>getWriter</code>方法已经被执行
+     *                               <code>getWriter</code>方法已经被执行
      */
     public void setBuffering(boolean buffering) {
         if (stream == null && writer == null) {
@@ -255,7 +253,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
      * 创建新的buffer，保存老的buffer。
      *
      * @throws IllegalStateException 如果不在buffer模式，或<code>getWriter</code>
-     *             方法曾被调用，或<code>getOutputStream</code>方法从未被调用
+     *                               方法曾被调用，或<code>getOutputStream</code>方法从未被调用
      */
     public void pushBuffer() {
         if (!buffering) {
@@ -327,7 +325,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
      *
      * @return 最近的buffer内容，如果<code>getWriter</code>方法从未被调用，则返回空的字符串
      * @throws IllegalStateException 如果不在buffer模式，或<code>getOutputStream</code>
-     *             方法曾被调用
+     *                               方法曾被调用
      */
     public String popCharBuffer() {
         if (!buffering) {
@@ -365,7 +363,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
      * 方法，则该方法不做任何事情。
      * </p>
      *
-     * @throws IOException 如果输入输出失败
+     * @throws IOException           如果输入输出失败
      * @throws IllegalStateException 如果不是在buffer模式，或buffer栈中不止一个buffer
      */
     public void commitBuffer() throws IOException {
@@ -410,9 +408,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
         }
     }
 
-    /**
-     * 冲洗buffer adapter，确保adapter中的信息被写入buffer中。
-     */
+    /** 冲洗buffer adapter，确保adapter中的信息被写入buffer中。 */
     private void flushBufferAdapter() {
         if (streamAdapter != null) {
             streamAdapter.flush();
@@ -466,9 +462,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
         }
     }
 
-    /**
-     * 代表一个将内容保存在内存中的<code>ServletOutputStream</code>。
-     */
+    /** 代表一个将内容保存在内存中的<code>ServletOutputStream</code>。 */
     private static class BufferedServletOutputStream extends ServletOutputStream {
         private ByteArrayOutputStream bytes;
 
@@ -507,9 +501,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
         }
     }
 
-    /**
-     * 代表一个将内容保存在内存中的<code>PrintWriter</code>。
-     */
+    /** 代表一个将内容保存在内存中的<code>PrintWriter</code>。 */
     private static class BufferedServletWriter extends PrintWriter {
         public BufferedServletWriter(StringWriter chars) {
             super(chars);
@@ -520,9 +512,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
         }
     }
 
-    /**
-     * 将<code>Writer</code>适配到<code>ServletOutputStream</code>。
-     */
+    /** 将<code>Writer</code>适配到<code>ServletOutputStream</code>。 */
     private static class WriterOutputStream extends ServletOutputStream {
         private ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         private Writer writer;
@@ -554,7 +544,7 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
 
             if (bytes.getLength() > 0) {
                 ByteArrayInputStream inputBytes = new ByteArrayInputStream(bytes.getRawBytes(), bytes.getOffset(),
-                        bytes.getLength());
+                                                                           bytes.getLength());
                 InputStreamReader reader = new InputStreamReader(inputBytes, charset);
 
                 StreamUtil.io(reader, writer, true, false);

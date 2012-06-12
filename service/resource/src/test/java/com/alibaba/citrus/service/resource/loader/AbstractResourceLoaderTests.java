@@ -66,8 +66,8 @@ public abstract class AbstractResourceLoaderTests<L extends ResourceLoader> exte
     protected abstract String getPrefix();
 
     public class MyContext implements ResourceLoaderContext, ResourceListerContext {
-        private String name;
-        private Pattern pattern;
+        private String                  name;
+        private Pattern                 pattern;
         private MatchResultSubstitution subs;
 
         public MyContext(String name) {
@@ -87,7 +87,7 @@ public abstract class AbstractResourceLoaderTests<L extends ResourceLoader> exte
 
         public String substitute(String substitution) {
             return name.substring(0, subs.getMatch().start()) + subs.substitute(substitution)
-                    + name.substring(subs.getMatch().end());
+                   + name.substring(subs.getMatch().end());
         }
 
         public Resource getResource(String newResourceName, Set<ResourceLoadingOption> options) {

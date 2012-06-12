@@ -31,6 +31,11 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.alibaba.citrus.springext.ConfigurationPointException;
+import com.alibaba.citrus.springext.Schema;
+import com.alibaba.citrus.springext.Schemas;
+import com.alibaba.citrus.springext.impl.SchemaImpl;
+import com.alibaba.citrus.util.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.xml.PluggableSchemaResolver;
@@ -40,25 +45,19 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.UrlResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
-import com.alibaba.citrus.springext.ConfigurationPointException;
-import com.alibaba.citrus.springext.Schema;
-import com.alibaba.citrus.springext.Schemas;
-import com.alibaba.citrus.springext.impl.SchemaImpl;
-import com.alibaba.citrus.util.ToStringBuilder;
-
 /**
  * 将Spring所支持的<code>META-INF/spring.schemas</code>中定义的schemas移到本地服务器。
  *
  * @author Michael Zhou
  */
 public class SpringPluggableSchemas implements Schemas {
-    private final static Logger log = LoggerFactory.getLogger(SpringPluggableSchemas.class);
-    private final static String SCHEMA_MAPPINGS_LOCATION = PluggableSchemaResolver.DEFAULT_SCHEMA_MAPPINGS_LOCATION;
-    private final static Pattern SCHEMA_VERSION_PATTERN = Pattern.compile("-((\\d+)(.\\d+)*)\\.xsd$");
-    private final ResourceLoader resourceLoader;
+    private final static Logger  log                      = LoggerFactory.getLogger(SpringPluggableSchemas.class);
+    private final static String  SCHEMA_MAPPINGS_LOCATION = PluggableSchemaResolver.DEFAULT_SCHEMA_MAPPINGS_LOCATION;
+    private final static Pattern SCHEMA_VERSION_PATTERN   = Pattern.compile("-((\\d+)(.\\d+)*)\\.xsd$");
+    private final ResourceLoader      resourceLoader;
     private final Map<String, Schema> nameToSchemaMappings;
     private final Map<String, String> uriToNameMappings;
-    private boolean initialized;
+    private       boolean             initialized;
 
     public SpringPluggableSchemas() {
         this(null);
@@ -97,10 +96,10 @@ public class SpringPluggableSchemas implements Schemas {
 
         try {
             uriToClasspathLocationMappings = PropertiesLoaderUtils.loadAllProperties(SCHEMA_MAPPINGS_LOCATION,
-                    resourceLoader.getClassLoader());
+                                                                                     resourceLoader.getClassLoader());
         } catch (IOException e) {
             throw new ConfigurationPointException("Unable to load Spring schema mappings from "
-                    + SCHEMA_MAPPINGS_LOCATION, e);
+                                                  + SCHEMA_MAPPINGS_LOCATION, e);
         }
 
         String desc = "SpringSchema[" + SCHEMA_MAPPINGS_LOCATION + "]";
@@ -128,7 +127,7 @@ public class SpringPluggableSchemas implements Schemas {
             ToStringBuilder buf = new ToStringBuilder();
 
             buf.format("Loaded Spring schema mappings at %s, %d schemas found.", SCHEMA_MAPPINGS_LOCATION,
-                    uriToNameMappings.size()).appendMap(uriToNameMappings);
+                       uriToNameMappings.size()).appendMap(uriToNameMappings);
 
             log.debug(buf.toString());
         }
@@ -145,7 +144,7 @@ public class SpringPluggableSchemas implements Schemas {
             resource = resourceLoader.getResource(classpathLocation).getURL();
         } catch (Exception e) {
             log.warn("Could not find schema {} for URI: {},\n  {}",
-                    new String[] { classpathLocation, uri, e.getMessage() });
+                     new String[] { classpathLocation, uri, e.getMessage() });
 
             return null;
         }

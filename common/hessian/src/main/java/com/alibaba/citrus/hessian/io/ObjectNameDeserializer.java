@@ -48,30 +48,25 @@
 
 package com.alibaba.citrus.hessian.io;
 
-import java.io.IOException;
 import javax.management.ObjectName;
 
 import com.alibaba.citrus.hessian.HessianException;
 
-/**
- * Deserializing an ObjectName
- */
+/** Deserializing an ObjectName */
 public class ObjectNameDeserializer extends AbstractStringValueDeserializer {
-  @Override
-  public Class getType()
-  {
-    return ObjectName.class;
-  }
-
-  @Override
-  protected Object create(String value)
-  {
-    try {
-      return new ObjectName(value);
-    } catch (RuntimeException e) {
-      throw e;
-    } catch (Exception e) {
-      throw new HessianException(e);
+    @Override
+    public Class getType() {
+        return ObjectName.class;
     }
-  }
+
+    @Override
+    protected Object create(String value) {
+        try {
+            return new ObjectName(value);
+        } catch (RuntimeException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new HessianException(e);
+        }
+    }
 }

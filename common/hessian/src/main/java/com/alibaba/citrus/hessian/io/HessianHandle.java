@@ -48,8 +48,6 @@
 
 package com.alibaba.citrus.hessian.io;
 
-/**
- * Marks a type as a handle
- */
+/** Marks a type as a handle */
 public interface HessianHandle {
 }

@@ -26,15 +26,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
+import com.alibaba.citrus.service.resource.loader.FileResourceLoader;
+import com.alibaba.citrus.service.resource.loader.FileResourceLoader.SearchPath;
+import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.service.resource.loader.FileResourceLoader;
-import com.alibaba.citrus.service.resource.loader.FileResourceLoader.SearchPath;
-import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 
 /**
  * 用来解析file-loader。

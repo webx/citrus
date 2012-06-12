@@ -25,7 +25,7 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
  * <p>
  * 一个Webx风格的URI包括如下几个部分：
  * </p>
- *
+ * <p/>
  * <pre>
  * URI         = SERVER_INFO + PATH + "?" + QUERY_DATA + "#" + REFERENCE
  * SERVER_INFO = scheme://loginUser:loginPassword@serverName:serverPort
@@ -37,7 +37,7 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
  * <p>
  * 例如：
  * </p>
- *
+ * <p/>
  * <pre>
  * http://user:pass@myserver.com:8080/mycontext/myservlet/mycomponent/content.htm
  * </pre>

@@ -39,9 +39,9 @@ public abstract class AbstractMapViewTests extends AbstractTests {
     private Map<Object, Object> map1;
     private Map<Object, Object> map2;
     private Map<Object, Object> map3;
-    private Collection<?> view1;
-    private Collection<?> view2;
-    private Collection<?> view3;
+    private Collection<?>       view1;
+    private Collection<?>       view2;
+    private Collection<?>       view3;
 
     @Before
     public void init() {
@@ -242,7 +242,7 @@ public abstract class AbstractMapViewTests extends AbstractTests {
             Object entry = i.next();
 
             assertTrue(isEqual(newItem("aaa", "111"), entry) || isEqual(newItem("bbb", "222"), entry)
-                    || isEqual(newItem("ccc", "333"), entry));
+                       || isEqual(newItem("ccc", "333"), entry));
         }
 
         assertEquals(3, count);
@@ -418,7 +418,7 @@ public abstract class AbstractMapViewTests extends AbstractTests {
     /**
      * 创建一个和View中存放的对象可比较的对象.
      *
-     * @param key key
+     * @param key   key
      * @param value value
      * @return 对象
      */

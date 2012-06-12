@@ -23,13 +23,9 @@ package com.alibaba.citrus.service.mail.builder;
  * @author Michael Zhou
  */
 public interface Multipart {
-    /**
-     * 添加一个内容部分。
-     */
+    /** 添加一个内容部分。 */
     void addContent(MailContent content);
 
-    /**
-     * 取得所有的子contents。
-     */
+    /** 取得所有的子contents。 */
     MailContent[] getContents();
 }

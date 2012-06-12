@@ -23,9 +23,8 @@ import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.form.support.NumberSupport.Type;
+import org.junit.Test;
 
 public class NumberSupportTests {
     @Test
@@ -94,7 +93,7 @@ public class NumberSupportTests {
         assertParse(FLOAT, "123.456", 123.456F);
         assertParse(DOUBLE, "123456789123456789.123456789", 123456789123456789.123456789D);
         assertParse(BIG_DECIMAL, "123456789123456789123456789123456789123456789.123456789123456789123456789",
-                new BigDecimal("123456789123456789123456789123456789123456789.123456789123456789123456789"));
+                    new BigDecimal("123456789123456789123456789123456789123456789.123456789123456789123456789"));
     }
 
     private void assertParse(Type type, String value, Number result) {

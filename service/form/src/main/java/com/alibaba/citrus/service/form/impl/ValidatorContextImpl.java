@@ -30,9 +30,9 @@ import com.alibaba.citrus.service.form.Validator;
  */
 public class ValidatorContextImpl implements Validator.Context {
     private final MessageContext expressionContext;
-    private final Field field;
-    private String message;
-    private Object value;
+    private final Field          field;
+    private       String         message;
+    private       Object         value;
 
     public ValidatorContextImpl(MessageContext expressionContext, Field field) {
         this(expressionContext, field, null);

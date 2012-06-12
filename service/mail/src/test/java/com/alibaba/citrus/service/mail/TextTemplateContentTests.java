@@ -20,9 +20,8 @@ package com.alibaba.citrus.service.mail;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.mail.builder.content.TextTemplateContent;
+import org.junit.Test;
 
 /**
  * 测试基于模板的文本content。

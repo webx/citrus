@@ -33,14 +33,12 @@ public class MultiValuesCountValidatorTests extends AbstractValidatorTests<Multi
         assertEquals(true, field1.isValid());
         assertEquals(null, field1.getMessage());
 
-        request((Object) new String[] {});
+        request((Object) new String[] { });
         assertEquals(true, field1.isValid());
         assertEquals(null, field1.getMessage());
     }
 
-    /**
-     * minCount=2
-     */
+    /** minCount=2 */
     @Test
     public void validator_minCount() throws Exception {
         request(null, new String[] { "a", "b", "c" });
@@ -55,14 +53,12 @@ public class MultiValuesCountValidatorTests extends AbstractValidatorTests<Multi
         assertEquals(false, field2.isValid());
         assertEquals("field2 should have values count between 2 and -1", field2.getMessage());
 
-        request(null, new String[] {});
+        request(null, new String[] { });
         assertEquals(false, field2.isValid());
         assertEquals("field2 should have values count between 2 and -1", field2.getMessage());
     }
 
-    /**
-     * maxCount=3
-     */
+    /** maxCount=3 */
     @Test
     public void validator_maxCount() throws Exception {
         request(null, null, new String[] { "a", "b", "c", "d" });
@@ -81,14 +77,12 @@ public class MultiValuesCountValidatorTests extends AbstractValidatorTests<Multi
         assertEquals(true, field3.isValid());
         assertEquals(null, field3.getMessage());
 
-        request(null, null, new String[] {});
+        request(null, null, new String[] { });
         assertEquals(true, field3.isValid());
         assertEquals(null, field3.getMessage());
     }
 
-    /**
-     * minCount=2, maxCount=3
-     */
+    /** minCount=2, maxCount=3 */
     @Test
     public void validator_min_maxCount() throws Exception {
         request(null, null, null, new String[] { "a", "b", "c", "d" });
@@ -107,14 +101,12 @@ public class MultiValuesCountValidatorTests extends AbstractValidatorTests<Multi
         assertEquals(false, field4.isValid());
         assertEquals("field4 should have values count between 2 and 3", field4.getMessage());
 
-        request(null, null, null, new String[] {});
+        request(null, null, null, new String[] { });
         assertEquals(false, field4.isValid());
         assertEquals("field4 should have values count between 2 and 3", field4.getMessage());
     }
 
-    /**
-     * minCount=0, maxCount=0
-     */
+    /** minCount=0, maxCount=0 */
     @Test
     public void validator_forceNoValues() throws Exception {
         request(null, null, null, null, new String[] { "a", "b", "c", "d" });
@@ -133,7 +125,7 @@ public class MultiValuesCountValidatorTests extends AbstractValidatorTests<Multi
         assertEquals(false, field5.isValid());
         assertEquals("field5 should have values count between 0 and 0", field5.getMessage());
 
-        request(null, null, null, null, new String[] {});
+        request(null, null, null, null, new String[] { });
         assertEquals(true, field5.isValid());
         assertEquals(null, field5.getMessage());
     }

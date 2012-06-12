@@ -24,19 +24,18 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.junit.Test;
-import org.springframework.beans.TypeMismatchException;
-import org.springframework.context.ApplicationContext;
-
 import com.alibaba.citrus.service.form.Group;
 import com.alibaba.citrus.service.moduleloader.ActionEventException;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import com.alibaba.test2.module.action.form.MyData;
+import org.junit.Test;
+import org.springframework.beans.TypeMismatchException;
+import org.springframework.context.ApplicationContext;
 
 public class FormGroupsResolverTests extends AbstractDataResolverTests {
-    private Group[] groupArray;
-    private List<Group> groupList;
-    private MyData[] dataArray;
+    private Group[]            groupArray;
+    private List<Group>        groupList;
+    private MyData[]           dataArray;
     private Collection<MyData> dataList;
 
     @Test
@@ -59,12 +58,12 @@ public class FormGroupsResolverTests extends AbstractDataResolverTests {
 
         // GET, invalid
         execute("action", "form.groups.myAction", "doGetGroups", "_fm.m.aaa.f=&_fm.m.aaa.fi=" //
-                + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
+                                                                 + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
         assertNull(newRequest.getAttribute("actionLog"));
 
         // GET, valid
         execute("action", "form.groups.myAction", "doGetGroups", "_fm.m.aaa.f=a&_fm.m.aaa.f=b&_fm.m.aaa.fi=1" //
-                + "&_fm.m.bbb.f=c&_fm.m.bbb.f=d&_fm.m.bbb.fi=2");
+                                                                 + "&_fm.m.bbb.f=c&_fm.m.bbb.f=d&_fm.m.bbb.fi=2");
         groupArray = (Group[]) newRequest.getAttribute("actionLog");
         assertNotNull(groupArray);
         assertEquals(2, groupArray.length);
@@ -75,7 +74,7 @@ public class FormGroupsResolverTests extends AbstractDataResolverTests {
 
         // GET, invalid, but screen不支持skip
         execute("screen", "form.groups.myScreen", "doGetGroups", "_fm.m.aaa.f=&_fm.m.aaa.fi=" //
-                + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
+                                                                 + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
         groupArray = (Group[]) newRequest.getAttribute("screenLog");
         assertNotNull(groupArray);
         assertEquals(2, groupArray.length);
@@ -92,7 +91,7 @@ public class FormGroupsResolverTests extends AbstractDataResolverTests {
 
         // GET, invalid
         execute("action", "form.groups.myAction", "doGetGroupsDontSkipAction", "_fm.m.aaa.f=&_fm.m.aaa.fi=" //
-                + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
+                                                                               + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
         groupList = (List<Group>) newRequest.getAttribute("actionLog");
         assertNotNull(groupList);
         assertEquals(2, groupList.size());
@@ -104,7 +103,7 @@ public class FormGroupsResolverTests extends AbstractDataResolverTests {
         // GET, valid
         execute("action", "form.groups.myAction", "doGetGroupsDontSkipAction",
                 "_fm.m.aaa.f=a&_fm.m.aaa.f=b&_fm.m.aaa.fi=1" //
-                        + "&_fm.m.bbb.f=c&_fm.m.bbb.f=d&_fm.m.bbb.fi=2");
+                + "&_fm.m.bbb.f=c&_fm.m.bbb.f=d&_fm.m.bbb.fi=2");
         groupList = (List<Group>) newRequest.getAttribute("actionLog");
         assertNotNull(groupList);
         assertEquals(2, groupList.size());
@@ -120,12 +119,12 @@ public class FormGroupsResolverTests extends AbstractDataResolverTests {
 
         // GET, invalid
         execute("action", "form.groups.myAction", "doGetGroupsBeans", "_fm.m.aaa.f=&_fm.m.aaa.fi=" //
-                + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
+                                                                      + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
         assertNull(newRequest.getAttribute("actionLog"));
 
         // GET, valid
         execute("action", "form.groups.myAction", "doGetGroupsBeans", "_fm.m.aaa.f=a&_fm.m.aaa.f=b&_fm.m.aaa.fi=1" //
-                + "&_fm.m.bbb.f=c&_fm.m.bbb.f=d&_fm.m.bbb.fi=2");
+                                                                      + "&_fm.m.bbb.f=c&_fm.m.bbb.f=d&_fm.m.bbb.fi=2");
         dataArray = (MyData[]) newRequest.getAttribute("actionLog");
         assertNotNull(dataArray);
         assertEquals(2, dataArray.length);
@@ -136,7 +135,7 @@ public class FormGroupsResolverTests extends AbstractDataResolverTests {
 
         // GET, invalid, but screen不支持skip
         execute("screen", "form.groups.myScreenGetGroupsBeans", "doGetGroupsBeans", "_fm.m.aaa.f=&_fm.m.aaa.fi=" //
-                + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
+                                                                                    + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
         dataArray = (MyData[]) newRequest.getAttribute("screenLog");
         assertNull(dataArray);
     }
@@ -148,14 +147,14 @@ public class FormGroupsResolverTests extends AbstractDataResolverTests {
 
         // GET, invalid
         execute("action", "form.groups.myAction", "doGetGroupsBeansDontSkipAction", "_fm.m.aaa.f=&_fm.m.aaa.fi=" //
-                + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
+                                                                                    + "&_fm.m.bbb.f=&_fm.m.bbb.fi=");
         dataList = (List<MyData>) newRequest.getAttribute("actionLog");
         assertNull(dataList);
 
         // GET, valid
         execute("action", "form.groups.myAction", "doGetGroupsBeansDontSkipAction",
                 "_fm.m.aaa.f=a&_fm.m.aaa.f=b&_fm.m.aaa.fi=1" //
-                        + "&_fm.m.bbb.f=c&_fm.m.bbb.f=d&_fm.m.bbb.fi=2");
+                + "&_fm.m.bbb.f=c&_fm.m.bbb.f=d&_fm.m.bbb.fi=2");
         dataList = (Collection<MyData>) newRequest.getAttribute("actionLog");
         assertNotNull(dataList);
         assertEquals(2, dataList.size());
@@ -176,7 +175,7 @@ public class FormGroupsResolverTests extends AbstractDataResolverTests {
 
         // GET, valid
         execute("action", "form.groups.myAction", "doGetGroupsBeans", "_fm.m.aaa.f=a&_fm.m.aaa.f=b&_fm.m.aaa.fi=abc" //
-                + "&_fm.m.bbb.f=c&_fm.m.bbb.f=d&_fm.m.bbb.fi=def");
+                                                                      + "&_fm.m.bbb.f=c&_fm.m.bbb.f=d&_fm.m.bbb.fi=def");
         dataArray = (MyData[]) newRequest.getAttribute("actionLog");
         assertNotNull(dataArray);
         assertEquals(2, dataArray.length);
@@ -202,7 +201,7 @@ public class FormGroupsResolverTests extends AbstractDataResolverTests {
         try {
             execute("action", "form.groups.myAction", "doGetGroupsBeans",
                     "_fm.m.aaa.f=a&_fm.m.aaa.f=b&_fm.m.aaa.fi=abc" //
-                            + "&_fm.m.bbb.f=c&_fm.m.bbb.f=d&_fm.m.bbb.fi=def");
+                    + "&_fm.m.bbb.f=c&_fm.m.bbb.f=d&_fm.m.bbb.fi=def");
             fail();
         } catch (ActionEventException e) {
             assertThat(e, exception(TypeMismatchException.class, "java.lang.String", "java.lang.Integer", "abc"));

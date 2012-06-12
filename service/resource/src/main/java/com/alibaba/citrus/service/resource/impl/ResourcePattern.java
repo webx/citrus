@@ -33,9 +33,9 @@ import com.alibaba.citrus.service.resource.ResourceLoadingService;
  */
 abstract class ResourcePattern {
     private ResourceLoadingService resourceLoadingService;
-    private String patternName;
-    private Pattern pattern;
-    private int relevancy;
+    private String                 patternName;
+    private Pattern                pattern;
+    private int                    relevancy;
 
     public ResourceLoadingService getResourceLoadingService() {
         return resourceLoadingService;
@@ -63,9 +63,7 @@ abstract class ResourcePattern {
         return !patternName.startsWith("/");
     }
 
-    /**
-     * 初始化loader，并设定loader所在的<code>ResourceLoadingService</code>的实例。
-     */
+    /** 初始化loader，并设定loader所在的<code>ResourceLoadingService</code>的实例。 */
     public final void init(ResourceLoadingService resourceLoadingService) {
         this.pattern = compilePathName(patternName);
         this.relevancy = getPathNameRelevancy(patternName);

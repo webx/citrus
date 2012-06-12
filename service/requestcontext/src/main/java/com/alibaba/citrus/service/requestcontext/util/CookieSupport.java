@@ -24,17 +24,14 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.citrus.service.requestcontext.util.tomcat.ServerCookie;
 import net.sf.cglib.reflect.FastClass;
 import net.sf.cglib.reflect.FastMethod;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.alibaba.citrus.service.requestcontext.util.tomcat.ServerCookie;
 
 /**
  * 扩展原cookie，使之支持HttpOnly cookie。
@@ -42,27 +39,21 @@ import com.alibaba.citrus.service.requestcontext.util.tomcat.ServerCookie;
  * @author Michael Zhou
  */
 public class CookieSupport extends Cookie {
-    private final static Logger log = LoggerFactory.getLogger(CookieSupport.class);
+    private final static Logger     log               = LoggerFactory.getLogger(CookieSupport.class);
     private final static FastMethod getHttpOnlyMethod = getHttpOnlyMethod();
     private boolean httpOnly;
 
-    /**
-     * 创建一个cookie。
-     */
+    /** 创建一个cookie。 */
     public CookieSupport(String name, String value) {
         super(assertNotNull(trimToNull(name), "cookieName"), value);
     }
 
-    /**
-     * 复制一个cookie。
-     */
+    /** 复制一个cookie。 */
     public CookieSupport(Cookie cookie) {
         this(cookie, null);
     }
 
-    /**
-     * 复制一个cookie，修改cookie的名称。
-     */
+    /** 复制一个cookie，修改cookie的名称。 */
     public CookieSupport(Cookie cookie, String name) {
         super(assertNotNull(getCookieName(cookie, name), "cookieName"), cookie.getValue());
 
@@ -99,9 +90,7 @@ public class CookieSupport extends Cookie {
         }
     }
 
-    /**
-     * 对于servlet spec 3.0，已经支持<code>isHttpOnly</code>方法。
-     */
+    /** 对于servlet spec 3.0，已经支持<code>isHttpOnly</code>方法。 */
     private static FastMethod getHttpOnlyMethod() {
         Method m = null;
 
@@ -134,23 +123,17 @@ public class CookieSupport extends Cookie {
         return name;
     }
 
-    /**
-     * 是否生成IE6支持的HttpOnly标记。
-     */
+    /** 是否生成IE6支持的HttpOnly标记。 */
     public boolean isHttpOnly() {
         return httpOnly;
     }
 
-    /**
-     * 是否生成IE6支持的HttpOnly标记。
-     */
+    /** 是否生成IE6支持的HttpOnly标记。 */
     public boolean getHttpOnly() {
         return httpOnly;
     }
 
-    /**
-     * 是否生成IE6支持的HttpOnly标记。
-     */
+    /** 是否生成IE6支持的HttpOnly标记。 */
     public void setHttpOnly(boolean httpOnly) {
         this.httpOnly = httpOnly;
     }
@@ -166,16 +149,12 @@ public class CookieSupport extends Cookie {
         super.setDomain(domain); // 根据RFC2109，确保以“.”为前缀
     }
 
-    /**
-     * 将cookie添加到response中。
-     */
+    /** 将cookie添加到response中。 */
     public void addCookie(HttpServletResponse response) {
         response.addHeader(getCookieHeaderName(), getCookieHeaderValue());
     }
 
-    /**
-     * 取得cookie header的名称。
-     */
+    /** 取得cookie header的名称。 */
     public String getCookieHeaderName() {
         return ServerCookie.getCookieHeaderName(getVersion());
     }

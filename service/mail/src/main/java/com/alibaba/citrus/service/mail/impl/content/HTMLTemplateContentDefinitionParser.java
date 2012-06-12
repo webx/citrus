@@ -22,13 +22,11 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 
 import java.util.Map;
 
+import com.alibaba.citrus.service.mail.builder.content.HTMLTemplateContent;
+import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.service.mail.builder.content.HTMLTemplateContent;
-import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
 
 public class HTMLTemplateContentDefinitionParser extends AbstractSingleBeanDefinitionParser<HTMLTemplateContent> {
     @Override

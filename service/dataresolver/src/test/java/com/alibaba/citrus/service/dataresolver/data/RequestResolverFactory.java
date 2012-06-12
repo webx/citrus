@@ -40,7 +40,7 @@ public class RequestResolverFactory implements DataResolverFactory {
     }
 
     private class RequestResolver implements DataResolver, ContextAwareResolver {
-        private final HttpServletRequest request;
+        private final HttpServletRequest  request;
         private final DataResolverContext context;
 
         public RequestResolver(HttpServletRequest request, DataResolverContext context) {

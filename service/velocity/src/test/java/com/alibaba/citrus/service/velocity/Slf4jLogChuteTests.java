@@ -21,14 +21,13 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.apache.velocity.runtime.log.LogChute.*;
 import static org.junit.Assert.*;
 
+import com.alibaba.citrus.service.velocity.impl.Slf4jLogChute;
+import com.alibaba.citrus.test.TestEnvStatic;
 import org.apache.velocity.runtime.log.LogChute;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.alibaba.citrus.service.velocity.impl.Slf4jLogChute;
-import com.alibaba.citrus.test.TestEnvStatic;
 
 public class Slf4jLogChuteTests {
     private final Logger log = LoggerFactory.getLogger(getClass());

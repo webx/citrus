@@ -60,10 +60,10 @@ public class DomComponent extends PageComponent {
 
     @SuppressWarnings("unused")
     private class ElementsVisitor extends AbstractVisitor {
-        private final Iterable<Element> elements;
+        private final Iterable<Element>  elements;
         private final ControlBarCallback controlBarCallback;
-        private Element element;
-        private Attribute attr;
+        private       Element            element;
+        private       Attribute          attr;
 
         public ElementsVisitor(RequestHandlerContext context, Iterable<Element> elements,
                                ControlBarCallback controlBarCallback) {
@@ -170,7 +170,7 @@ public class DomComponent extends PageComponent {
     @SuppressWarnings("unused")
     private class StyledValueVisitor extends FallbackTextWriter<PrintWriter> {
         private final StyledValue value;
-        private boolean withSep;
+        private       boolean     withSep;
 
         public StyledValueVisitor(StyledValue value, PrintWriter out) {
             super(out);

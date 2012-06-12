@@ -20,7 +20,6 @@ package com.alibaba.citrus.service.mail.builder.content;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 
 import java.util.List;
-
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.Part;
@@ -35,12 +34,10 @@ import com.alibaba.citrus.util.ToStringBuilder;
  * @author Michael Zhou
  */
 public abstract class MultipartContent extends AbstractContent implements
-        com.alibaba.citrus.service.mail.builder.Multipart {
+                                                               com.alibaba.citrus.service.mail.builder.Multipart {
     private final List<MailContent> contents = createLinkedList();
 
-    /**
-     * 批量添加contents。
-     */
+    /** 批量添加contents。 */
     public void setContents(MailContent[] contents) {
         if (contents != null) {
             this.contents.clear();
@@ -51,9 +48,7 @@ public abstract class MultipartContent extends AbstractContent implements
         }
     }
 
-    /**
-     * 添加一个内容部分。
-     */
+    /** 添加一个内容部分。 */
     public void addContent(MailContent content) {
         if (content != null) {
             content.setParentContent(this);
@@ -61,16 +56,12 @@ public abstract class MultipartContent extends AbstractContent implements
         }
     }
 
-    /**
-     * 取得所有的子contents。
-     */
+    /** 取得所有的子contents。 */
     public MailContent[] getContents() {
         return contents.toArray(new MailContent[contents.size()]);
     }
 
-    /**
-     * 渲染邮件内容。
-     */
+    /** 渲染邮件内容。 */
     public void render(Part mailPart) throws MessagingException {
         Multipart multipart = getMultipart();
 
@@ -87,14 +78,10 @@ public abstract class MultipartContent extends AbstractContent implements
         mailPart.setContent(multipart);
     }
 
-    /**
-     * 取得<code>Multipart</code>的实现。
-     */
+    /** 取得<code>Multipart</code>的实现。 */
     protected abstract Multipart getMultipart();
 
-    /**
-     * 深度复制一个content。
-     */
+    /** 深度复制一个content。 */
     @Override
     protected void copyTo(AbstractContent copy) {
         for (MailContent content : contents) {

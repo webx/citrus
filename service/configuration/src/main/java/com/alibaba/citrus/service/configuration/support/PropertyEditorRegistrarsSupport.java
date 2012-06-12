@@ -25,14 +25,12 @@ import static java.util.Collections.*;
 import java.util.Iterator;
 import java.util.List;
 
+import com.alibaba.citrus.util.ToStringBuilder;
 import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.beans.PropertyEditorRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
-import com.alibaba.citrus.util.ToStringBuilder;
 
 /**
  * 代表一个property editor registrar的集合，然而它本身也是一个
@@ -63,32 +61,24 @@ public class PropertyEditorRegistrarsSupport implements PropertyEditorRegistrar,
         this.propertyEditorRegistrars = createArrayList(propertyEditorRegistrars);
     }
 
-    /**
-     * 在registry中注册自定义的<code>PropertyEditor</code>。
-     */
+    /** 在registry中注册自定义的<code>PropertyEditor</code>。 */
     public void registerCustomEditors(PropertyEditorRegistry registry) {
         for (PropertyEditorRegistrar registrar : getPropertyEditorRegistrars()) {
             registrar.registerCustomEditors(registry);
         }
     }
 
-    /**
-     * 查看有几个registrars。
-     */
+    /** 查看有几个registrars。 */
     public int size() {
         return propertyEditorRegistrars.size();
     }
 
-    /**
-     * 遍历registrars。
-     */
+    /** 遍历registrars。 */
     public Iterator<PropertyEditorRegistrar> iterator() {
         return propertyEditorRegistrars.iterator();
     }
 
-    /**
-     * 解析element下的所有registrars。
-     */
+    /** 解析element下的所有registrars。 */
     public static Object parseRegistrars(Element parentElement, ParserContext parserContext,
                                          BeanDefinitionBuilder containingBeanDefBuilder) {
         ElementSelector registrarSelector = and(sameNs(parentElement), name("property-editor-registrar"));

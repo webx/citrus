@@ -31,7 +31,7 @@ import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 
 public class ConfigurationsVisitor extends AbstractFallbackVisitor<ExplorerVisitor> {
     private final ConfigurationFile[] configurationFiles;
-    private ConfigurationFile configurationFile;
+    private       ConfigurationFile   configurationFile;
 
     public ConfigurationsVisitor(RequestHandlerContext context, ExplorerVisitor v,
                                  ConfigurationFile[] configurationFiles) {
@@ -70,10 +70,10 @@ public class ConfigurationsVisitor extends AbstractFallbackVisitor<ExplorerVisit
 
     public void visitConfigurationContent(final Template controlBarTemplate) {
         getFallbackVisitor().getDomComponent().visitTemplate(context,
-                singletonList(configurationFile.getRootElement()), new ControlBarCallback() {
-                    public void renderControlBar() {
-                        controlBarTemplate.accept(ConfigurationsVisitor.this);
-                    }
-                });
+                                                             singletonList(configurationFile.getRootElement()), new ControlBarCallback() {
+            public void renderControlBar() {
+                controlBarTemplate.accept(ConfigurationsVisitor.this);
+            }
+        });
     }
 }

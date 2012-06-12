@@ -25,6 +25,13 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
+import com.alibaba.citrus.service.resource.filter.XsltResourceFilter;
+import com.alibaba.citrus.service.resource.impl.ResourceAlias;
+import com.alibaba.citrus.service.resource.impl.ResourceFilterMapping;
+import com.alibaba.citrus.service.resource.impl.ResourceLoaderMapping;
+import com.alibaba.citrus.service.resource.impl.ResourceLoadingServiceImpl;
+import com.alibaba.citrus.service.resource.loader.FileResourceLoader;
+import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,19 +41,11 @@ import org.junit.runners.Parameterized.Parameters;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 
-import com.alibaba.citrus.service.resource.filter.XsltResourceFilter;
-import com.alibaba.citrus.service.resource.impl.ResourceAlias;
-import com.alibaba.citrus.service.resource.impl.ResourceFilterMapping;
-import com.alibaba.citrus.service.resource.impl.ResourceLoaderMapping;
-import com.alibaba.citrus.service.resource.impl.ResourceLoadingServiceImpl;
-import com.alibaba.citrus.service.resource.loader.FileResourceLoader;
-import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
-
 @RunWith(Parameterized.class)
 public class ResourceLoadingServiceSkipValidationTests {
-    private final boolean skipValidation;
-    private ApplicationContext factory;
-    private ResourceLoadingServiceImpl resourceLoadingService;
+    private final boolean                    skipValidation;
+    private       ApplicationContext         factory;
+    private       ResourceLoadingServiceImpl resourceLoadingService;
 
     public ResourceLoadingServiceSkipValidationTests(boolean skipValidation) {
         this.skipValidation = skipValidation;

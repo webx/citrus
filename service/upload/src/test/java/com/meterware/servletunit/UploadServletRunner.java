@@ -22,14 +22,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.util.Dictionary;
-
 import javax.servlet.http.HttpSession;
-
-import org.xml.sax.EntityResolver;
-import org.xml.sax.SAXException;
 
 import com.meterware.httpunit.FrameSelector;
 import com.meterware.httpunit.WebRequest;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.SAXException;
 
 /**
  * 对<code>ServletRunner</code>的hack，支持对request content的过滤。
@@ -74,7 +72,7 @@ public class UploadServletRunner extends ServletRunner {
                                                    WebRequest request, Dictionary clientHeaders, byte[] messageBody)
                     throws IOException, MalformedURLException {
                 return new InvocationContextImpl(client, UploadServletRunner.this, targetFrame, request, clientHeaders,
-                        filter(request, messageBody));
+                                                 filter(request, messageBody));
             }
 
             public HttpSession getSession(String sessionId, boolean create) {

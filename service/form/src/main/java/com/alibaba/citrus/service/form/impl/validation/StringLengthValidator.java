@@ -29,30 +29,22 @@ public class StringLengthValidator extends AbstractOptionalValidator {
     private int minLength = 0;
     private int maxLength = -1;
 
-    /**
-     * 取得最短长度。
-     */
+    /** 取得最短长度。 */
     public int getMinLength() {
         return minLength;
     }
 
-    /**
-     * 设置最短长度。
-     */
+    /** 设置最短长度。 */
     public void setMinLength(int minLength) {
         this.minLength = minLength;
     }
 
-    /**
-     * 取得最大长度。
-     */
+    /** 取得最大长度。 */
     public int getMaxLength() {
         return maxLength;
     }
 
-    /**
-     * 设置最大长度。
-     */
+    /** 设置最大长度。 */
     public void setMaxLength(int maxLength) {
         this.maxLength = maxLength;
     }

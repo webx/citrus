@@ -22,15 +22,14 @@ import static org.junit.Assert.*;
 
 import java.util.Iterator;
 
-import org.apache.velocity.app.event.ReferenceInsertionEventHandler;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.template.Renderable;
 import com.alibaba.citrus.service.template.TemplateContext;
 import com.alibaba.citrus.service.template.support.MappedTemplateContext;
 import com.alibaba.citrus.service.velocity.AbstractVelocityEngineTests;
 import com.alibaba.citrus.service.velocity.VelocityEngineTests.MyRenderable;
+import org.apache.velocity.app.event.ReferenceInsertionEventHandler;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class RenderableTests extends AbstractVelocityEngineTests {
     @BeforeClass

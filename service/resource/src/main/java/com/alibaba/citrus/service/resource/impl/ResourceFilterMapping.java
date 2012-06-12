@@ -21,9 +21,6 @@ import static com.alibaba.citrus.util.ArrayUtil.*;
 
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.alibaba.citrus.service.resource.Resource;
 import com.alibaba.citrus.service.resource.ResourceFilter;
 import com.alibaba.citrus.service.resource.ResourceFilterChain;
@@ -32,6 +29,8 @@ import com.alibaba.citrus.service.resource.ResourceMatchResult;
 import com.alibaba.citrus.service.resource.ResourceNotFoundException;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ResourceFilterMapping extends ResourcePattern {
     private final static Logger log = LoggerFactory.getLogger(ResourceFilterMapping.class);
@@ -61,9 +60,7 @@ public class ResourceFilterMapping extends ResourcePattern {
         }
     }
 
-    /**
-     * 取得用于执行filter的链。
-     */
+    /** 取得用于执行filter的链。 */
     public ResourceFilterChain getResourceFilterChain(final ResourceFilterChain root) {
         if (isEmptyArray(filters)) {
             return root;

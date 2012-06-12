@@ -117,8 +117,8 @@ public class SubstitutionTests {
         r2 = getMatchResult("a=(\\d+)&b=(\\d+)", "a=1&b=2&c=3");
 
         assertEquals("$1, $x, .taobao.com/test.htm, taobao, test.htm, $3, %1, %x, a=1&b=2, 1, 2, %3",
-                new MatchResultSubstitution("$%", r1, r2)
-                        .substitute("\\$1, $x, $0, $1, $2, $3, \\%1, %x, %0, %1, %2, %3"));
+                     new MatchResultSubstitution("$%", r1, r2)
+                             .substitute("\\$1, $x, $0, $1, $2, $3, \\%1, %x, %0, %1, %2, %3"));
     }
 
     @Test

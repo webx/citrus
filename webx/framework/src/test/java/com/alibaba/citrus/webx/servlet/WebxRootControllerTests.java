@@ -25,14 +25,7 @@ import static org.junit.Assert.*;
 
 import java.lang.reflect.Method;
 import java.util.Map;
-
 import javax.servlet.ServletException;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.web.context.WebApplicationContext;
 
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.requestcontext.rundata.RunData;
@@ -47,9 +40,14 @@ import com.alibaba.citrus.webx.pipeline.TestValve;
 import com.alibaba.citrus.webx.pipeline.ValveRunner;
 import com.alibaba.citrus.webx.util.ErrorHandlerHelper;
 import com.meterware.httpunit.HeadMethodWebRequest;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.web.context.WebApplicationContext;
 
 public class WebxRootControllerTests extends AbstractWebxTests {
-    private WebxFrameworkFilter filter;
+    private WebxFrameworkFilter    filter;
     private WebxRootControllerImpl controller;
 
     @Before
@@ -88,7 +86,7 @@ public class WebxRootControllerTests extends AbstractWebxTests {
         assertThat(
                 clientResponseContent,
                 containsAll("<pre>", "</pre>", ResourceNotFoundException.class.getName(),
-                        "Resource Not Found: notexist"));
+                            "Resource Not Found: notexist"));
     }
 
     @Test
@@ -118,11 +116,11 @@ public class WebxRootControllerTests extends AbstractWebxTests {
         }
 
         Holder holder = autowireAndInitialize(new Holder(), context, AbstractBeanDefinition.AUTOWIRE_AUTODETECT,
-                "holder");
+                                              "holder");
 
         assertArrayEquals(new String[] { "Webx/Info/Environment+Variables", "Webx/Info/System+Properties",
-                "Webx/Info/Request+Info", "Webx/Info/System+Info", "Webx/Schema" },
-                holder.mapping.getRequestHandlerNames());
+                                         "Webx/Info/Request+Info", "Webx/Info/System+Info", "Webx/Schema" },
+                          holder.mapping.getRequestHandlerNames());
     }
 
     @Test
@@ -153,7 +151,7 @@ public class WebxRootControllerTests extends AbstractWebxTests {
         assertEquals(500, clientResponseCode);
         assertEquals("text/html", clientResponse.getContentType());
         assertThat(clientResponseContent,
-                containsAll("<pre>", "</pre>", IllegalStateException.class.getName(), "wrong!"));
+                   containsAll("<pre>", "</pre>", IllegalStateException.class.getName(), "wrong!"));
     }
 
     @Test
@@ -169,7 +167,7 @@ public class WebxRootControllerTests extends AbstractWebxTests {
         assertEquals(404, clientResponseCode);
         assertEquals("text/html", clientResponse.getContentType());
         assertThat(clientResponseContent,
-                containsAll("<pre>", "</pre>", ResourceNotFoundException.class.getName(), "not found!"));
+                   containsAll("<pre>", "</pre>", ResourceNotFoundException.class.getName(), "not found!"));
     }
 
     @Test
@@ -185,7 +183,7 @@ public class WebxRootControllerTests extends AbstractWebxTests {
         assertEquals(400, clientResponseCode);
         assertEquals("text/html", clientResponse.getContentType());
         assertThat(clientResponseContent,
-                containsAll("<pre>", "</pre>", BadRequestException.class.getName(), "bad request!"));
+                   containsAll("<pre>", "</pre>", BadRequestException.class.getName(), "bad request!"));
     }
 
     @Test
@@ -263,7 +261,7 @@ public class WebxRootControllerTests extends AbstractWebxTests {
 
         Object internalHandlerMapping = getFieldValue(controller, "internalHandlerMapping", null); // of inner type InternalHandlerMapping
         Method loadInternalHandlers = getAccessibleMethod(internalHandlerMapping.getClass(), "loadInternalHandlers",
-                new Class<?>[] { String.class });
+                                                          new Class<?>[] { String.class });
 
         return (Map<String, RequestHandler>) loadInternalHandlers.invoke(internalHandlerMapping, location);
     }

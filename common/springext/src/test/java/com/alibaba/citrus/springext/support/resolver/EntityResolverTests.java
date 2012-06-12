@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 
+import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
+import com.alibaba.citrus.test.TestEnvStatic;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.xml.ResourceEntityResolver;
@@ -33,13 +35,10 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
-import com.alibaba.citrus.test.TestEnvStatic;
-
 public class EntityResolverTests {
     private ConfigurationPointsImpl cps;
-    private SpringPluggableSchemas sps;
-    private SchemaEntityResolver resolver;
+    private SpringPluggableSchemas  sps;
+    private SchemaEntityResolver    resolver;
 
     static {
         TestEnvStatic.init();
@@ -62,35 +61,35 @@ public class EntityResolverTests {
     @Test
     public void resolveDefault_springSchemas() throws SAXException, IOException {
         InputSource source = resolver.resolveEntity(null,
-                "http://www.springframework.org/schema/beans/spring-beans-2.5.xsd");
+                                                    "http://www.springframework.org/schema/beans/spring-beans-2.5.xsd");
 
         String str = getContent(source);
 
         assertThat(
                 str,
                 containsAll("xmlns=\"http://www.springframework.org/schema/beans\"",
-                        "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"",
-                        "targetNamespace=\"http://www.springframework.org/schema/beans\""));
+                            "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"",
+                            "targetNamespace=\"http://www.springframework.org/schema/beans\""));
     }
 
     @Test
     public void resolve_springSchemas_withShortName() throws SAXException, IOException {
         InputSource source = resolver.resolveEntity(null,
-                "http://any.domain.com/any/prefix/www.springframework.org/schema/beans/spring-beans-2.5.xsd");
+                                                    "http://any.domain.com/any/prefix/www.springframework.org/schema/beans/spring-beans-2.5.xsd");
 
         String str = getContent(source);
 
         assertThat(
                 str,
                 containsAll("xmlns=\"http://www.springframework.org/schema/beans\"",
-                        "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"",
-                        "targetNamespace=\"http://www.springframework.org/schema/beans\""));
+                            "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"",
+                            "targetNamespace=\"http://www.springframework.org/schema/beans\""));
     }
 
     @Test
     public void resolve_otherSchemas_withShortName() throws SAXException, IOException {
         InputSource source = resolver.resolveEntity(null,
-                "http://any.domain.com/any/prefix/www.alibaba.com/schema/tests.xsd");
+                                                    "http://any.domain.com/any/prefix/www.alibaba.com/schema/tests.xsd");
 
         String str = getContent(source);
 
@@ -113,9 +112,9 @@ public class EntityResolverTests {
         assertThat(
                 str,
                 containsAll("xmlns=\"http://www.alibaba.com/schema/services\"",
-                        "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"",
-                        "targetNamespace=\"http://www.alibaba.com/schema/services\"",
-                        "schemaLocation=\"services/container.xsd\""));
+                            "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"",
+                            "targetNamespace=\"http://www.alibaba.com/schema/services\"",
+                            "schemaLocation=\"services/container.xsd\""));
 
         assertThat(str, not(containsString("xsd:element")));
     }
@@ -129,10 +128,10 @@ public class EntityResolverTests {
         assertThat(
                 str,
                 containsAll("xmlns=\"http://www.alibaba.com/schema/services/tools\"",
-                        "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"",
-                        "targetNamespace=\"http://www.alibaba.com/schema/services/tools\"",
-                        "schemaLocation=\"services/tools/dateformat.xsd\"",
-                        "xsd:element name=\"tool\" type=\"springext:referenceableBeanType\""));
+                            "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"",
+                            "targetNamespace=\"http://www.alibaba.com/schema/services/tools\"",
+                            "schemaLocation=\"services/tools/dateformat.xsd\"",
+                            "xsd:element name=\"tool\" type=\"springext:referenceableBeanType\""));
     }
 
     @Test
@@ -144,9 +143,9 @@ public class EntityResolverTests {
         assertThat(
                 str,
                 containsAll("xmlns=\"http://www.alibaba.com/schema/services\"",
-                        "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"",
-                        "targetNamespace=\"http://www.alibaba.com/schema/services\"",
-                        "schemaLocation=\"services/container.xsd\""));
+                            "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"",
+                            "targetNamespace=\"http://www.alibaba.com/schema/services\"",
+                            "schemaLocation=\"services/container.xsd\""));
     }
 
     private String getContent(InputSource source) throws IOException {

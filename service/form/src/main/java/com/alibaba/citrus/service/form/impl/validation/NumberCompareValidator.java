@@ -35,61 +35,45 @@ import com.alibaba.citrus.service.form.support.NumberSupport;
  * @author Michael Zhou
  */
 public class NumberCompareValidator extends AbstractNumberValidator {
-    private String fieldName;
+    private String          fieldName;
     private CompareOperator op;
 
-    /**
-     * 取得要比较的field名称。
-     */
+    /** 取得要比较的field名称。 */
     public String getFieldName() {
         return fieldName;
     }
 
-    /**
-     * 取得比较操作的类型。
-     */
+    /** 取得比较操作的类型。 */
     public CompareOperator getOp() {
         return op;
     }
 
-    /**
-     * 设置等于操作。
-     */
+    /** 设置等于操作。 */
     public void setEqualTo(String fieldName) {
         setFieldName(equalTo, fieldName);
     }
 
-    /**
-     * 设置不等于操作。
-     */
+    /** 设置不等于操作。 */
     public void setNotEqualTo(String fieldName) {
         setFieldName(notEqualTo, fieldName);
     }
 
-    /**
-     * 设置小于操作。
-     */
+    /** 设置小于操作。 */
     public void setLessThan(String fieldName) {
         setFieldName(lessThan, fieldName);
     }
 
-    /**
-     * 设置大于操作。
-     */
+    /** 设置大于操作。 */
     public void setGreaterThan(String fieldName) {
         setFieldName(greaterThan, fieldName);
     }
 
-    /**
-     * 设置小于等于操作。
-     */
+    /** 设置小于等于操作。 */
     public void setLessThanOrEqualTo(String fieldName) {
         setFieldName(lessThanOrEqualTo, fieldName);
     }
 
-    /**
-     * 设置大于等于操作。
-     */
+    /** 设置大于等于操作。 */
     public void setGreaterThanOrEqualTo(String fieldName) {
         setFieldName(greaterThanOrEqualTo, fieldName);
     }
@@ -111,15 +95,13 @@ public class NumberCompareValidator extends AbstractNumberValidator {
 
         if (fieldName == null || op == null) {
             throw new IllegalArgumentException("One of the following attributes should be set: "
-                    + asList(CompareOperator.values()));
+                                               + asList(CompareOperator.values()));
         }
 
         assertNotNull(fieldConfig.getGroupConfig().getFieldConfig(fieldName), "Field %s not exists", fieldName);
     }
 
-    /**
-     * 验证一个字段。
-     */
+    /** 验证一个字段。 */
     @Override
     protected boolean validate(Context context, String value) {
         Field fieldToCompare = assertNotNull(context.getField(fieldName), "field not found");

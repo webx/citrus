@@ -25,12 +25,11 @@ import com.alibaba.citrus.service.freemarker.FreeMarkerEngine;
 import com.alibaba.citrus.util.ExceptionUtil;
 import com.alibaba.citrus.util.io.ByteArray;
 import com.alibaba.citrus.util.io.StreamUtil;
-
 import freemarker.log.Logger;
 
 public class LoggerHacker {
-    private final static org.slf4j.Logger slf4jLog = org.slf4j.LoggerFactory.getLogger(FreeMarkerEngine.class);
-    private final static int SLF4J_INDEX = 2;
+    private final static org.slf4j.Logger slf4jLog    = org.slf4j.LoggerFactory.getLogger(FreeMarkerEngine.class);
+    private final static int              SLF4J_INDEX = 2;
 
     /**
      * XXX Hack! FreeMarker的日志系统是封闭的，只支持有限的logger类型，不支持slf4j。
@@ -69,13 +68,13 @@ public class LoggerHacker {
     private static void definePublicLoggerFactory(ClassLoader loader, String className) {
         try {
             Method defineClassMethod = ClassLoader.class.getDeclaredMethod("defineClass", String.class, byte[].class,
-                    int.class, int.class);
+                                                                           int.class, int.class);
 
             defineClassMethod.setAccessible(true);
 
             ByteArray ba = StreamUtil.readBytes(
                     LoggerHacker.class.getClassLoader().getResource(className.replace('.', '/') + ".class")
-                            .openStream(), true);
+                                      .openStream(), true);
 
             try {
                 defineClassMethod.invoke(loader, className, ba.getRawBytes(), ba.getOffset(), ba.getLength());

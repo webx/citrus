@@ -25,10 +25,6 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.util.Iterator;
 import java.util.List;
 
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.form.Condition;
 import com.alibaba.citrus.service.form.Validator;
 import com.alibaba.citrus.service.form.impl.condition.JexlCondition;
@@ -38,7 +34,9 @@ import com.alibaba.citrus.service.form.support.AbstractSimpleCompositeValidator;
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 支持多条件分支的validator。
@@ -57,14 +55,14 @@ public class ChooseValidator extends AbstractCompositeValidator {
 
         assertTrue(!validators.isEmpty(), "no validators");
 
-        for (Iterator<Validator> i = validators.iterator(); i.hasNext();) {
+        for (Iterator<Validator> i = validators.iterator(); i.hasNext(); ) {
             Validator validator = i.next();
 
             if (i.hasNext()) {
                 assertTrue(validator instanceof When, "expected <when>");
             } else {
                 assertTrue(validator instanceof When || validator instanceof Otherwise,
-                        "expected <when> or <otherwise>");
+                           "expected <when> or <otherwise>");
             }
         }
     }
@@ -130,7 +128,7 @@ public class ChooseValidator extends AbstractCompositeValidator {
     }
 
     public static class DefinitionParser extends AbstractCompositeValidatorDefinitionParser<ChooseValidator> implements
-            ContributionAware {
+                                                                                                             ContributionAware {
         private ConfigurationPoint conditionConfigurationPoint;
 
         @Override
@@ -170,7 +168,7 @@ public class ChooseValidator extends AbstractCompositeValidator {
 
             for (Element subElement : subElements(element)) {
                 Object condition = parseConfigurationPointBean(subElement, conditionConfigurationPoint, parserContext,
-                        whenBuilder);
+                                                               whenBuilder);
 
                 if (condition != null) {
                     whenBuilder.addPropertyValue("condition", condition);

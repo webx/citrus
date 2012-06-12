@@ -24,6 +24,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import com.alibaba.citrus.test.TestEnvStatic;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -34,8 +35,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.xml.ResourceEntityResolver;
 import org.springframework.core.io.DefaultResourceLoader;
 
-import com.alibaba.citrus.test.TestEnvStatic;
-
 /**
  * 测试springext-base.xsd中的类型。
  *
@@ -43,10 +42,10 @@ import com.alibaba.citrus.test.TestEnvStatic;
  */
 public class SchemaTypeTests {
     private static final String SCHEMA_LANGUAGE_ATTRIBUTE = "http://java.sun.com/xml/jaxp/properties/schemaLanguage";
-    private static final String XSD_SCHEMA_LANGUAGE = "http://www.w3.org/2001/XMLSchema";
+    private static final String XSD_SCHEMA_LANGUAGE       = "http://www.w3.org/2001/XMLSchema";
     private static SpringPluggableSchemas sps;
-    private static SchemaEntityResolver resolver;
-    private SAXReader reader;
+    private static SchemaEntityResolver   resolver;
+    private        SAXReader              reader;
 
     static {
         TestEnvStatic.init();
@@ -111,13 +110,13 @@ public class SchemaTypeTests {
         StringBuilder buf = new StringBuilder();
 
         buf.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                + "<beans xmlns=\"http://www.springframework.org/schema/beans\"\n"
-                + "       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
-                + "       xmlns:types=\"http://www.alibaba.com/schema/springext/base-types\"\n"
-                + "xsi:schemaLocation=\"http://www.springframework.org/schema/beans\n"
-                + "    http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd\n"
-                + "    http://www.alibaba.com/schema/springext/base-types\n"
-                + "    http://localhost:8080/schema/www.alibaba.com/schema/springext-base-types.xsd\">\n");
+                   + "<beans xmlns=\"http://www.springframework.org/schema/beans\"\n"
+                   + "       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
+                   + "       xmlns:types=\"http://www.alibaba.com/schema/springext/base-types\"\n"
+                   + "xsi:schemaLocation=\"http://www.springframework.org/schema/beans\n"
+                   + "    http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd\n"
+                   + "    http://www.alibaba.com/schema/springext/base-types\n"
+                   + "    http://localhost:8080/schema/www.alibaba.com/schema/springext-base-types.xsd\">\n");
 
         buf.append(content);
 

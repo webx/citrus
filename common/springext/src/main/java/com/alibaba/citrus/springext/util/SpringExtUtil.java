@@ -32,6 +32,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.alibaba.citrus.springext.ConfigurationPoint;
+import com.alibaba.citrus.springext.Contribution;
+import com.alibaba.citrus.util.Assert;
 import net.sf.cglib.core.DefaultNamingPolicy;
 import net.sf.cglib.core.Predicate;
 import net.sf.cglib.proxy.Callback;
@@ -39,7 +42,6 @@ import net.sf.cglib.proxy.CallbackFilter;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -69,11 +71,6 @@ import org.springframework.util.ObjectUtils;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
-
-import com.alibaba.citrus.springext.ConfigurationPoint;
-import com.alibaba.citrus.springext.Contribution;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
-import com.alibaba.citrus.util.Assert;
 
 public class SpringExtUtil {
     private static final Logger log = LoggerFactory.getLogger(SpringExtUtil.class);
@@ -119,9 +116,7 @@ public class SpringExtUtil {
         return siblingCp;
     }
 
-    /**
-     * 创建<code>ManagedList</code>，避免type safety警告。
-     */
+    /** 创建<code>ManagedList</code>，避免type safety警告。 */
     @SuppressWarnings("unchecked")
     public static List<Object> createManagedList(Element element, ParserContext parserContext) {
         ManagedList list = new ManagedList();
@@ -131,9 +126,7 @@ public class SpringExtUtil {
         return list;
     }
 
-    /**
-     * 创建<code>ManagedMap</code>，避免type safety警告。
-     */
+    /** 创建<code>ManagedMap</code>，避免type safety警告。 */
     @SuppressWarnings("unchecked")
     public static Map<Object, Object> createManagedMap(Element element, ParserContext parserContext) {
         ManagedMap map = new ManagedMap();
@@ -143,9 +136,7 @@ public class SpringExtUtil {
         return map;
     }
 
-    /**
-     * 创建<code>ManagedSet</code>，避免type safety警告。
-     */
+    /** 创建<code>ManagedSet</code>，避免type safety警告。 */
     @SuppressWarnings("unchecked")
     public static Set<Object> createManagedSet(Element element, ParserContext parserContext) {
         ManagedSet set = new ManagedSet();
@@ -155,23 +146,17 @@ public class SpringExtUtil {
         return set;
     }
 
-    /**
-     * 将子element的值设入properties。
-     */
+    /** 将子element的值设入properties。 */
     public static void subElementsToProperties(Element element, BeanDefinitionBuilder builder) {
         subElementsToProperties(element, null, builder, null);
     }
 
-    /**
-     * 将子element的值设入properties。
-     */
+    /** 将子element的值设入properties。 */
     public static void subElementsToProperties(Element element, BeanDefinitionBuilder builder, ElementSelector selector) {
         subElementsToProperties(element, null, builder, selector);
     }
 
-    /**
-     * 将子element的值设入properties。
-     */
+    /** 将子element的值设入properties。 */
     public static void subElementsToProperties(Element element, String propertyPrefix, BeanDefinitionBuilder builder,
                                                ElementSelector selector) {
         for (Element subElement : subElements(element, selector)) {
@@ -179,16 +164,12 @@ public class SpringExtUtil {
         }
     }
 
-    /**
-     * 将一个element的值设入property。
-     */
+    /** 将一个element的值设入property。 */
     public static void elementToProperty(Element element, BeanDefinitionBuilder builder) {
         elementToProperty(element, null, builder);
     }
 
-    /**
-     * 将一个element的值设入property。
-     */
+    /** 将一个element的值设入property。 */
     public static void elementToProperty(Element element, String propertyPrefix, BeanDefinitionBuilder builder) {
         String propName = element.getLocalName();
 
@@ -199,16 +180,12 @@ public class SpringExtUtil {
         builder.addPropertyValue(propName, trimToNull(element.getTextContent()));
     }
 
-    /**
-     * 将attribute的值设入properties。
-     */
+    /** 将attribute的值设入properties。 */
     public static void attributesToProperties(Element element, BeanDefinitionBuilder builder, String... attrNames) {
         attributesToProperties(element, null, builder, attrNames);
     }
 
-    /**
-     * 将attribute的值设入properties。
-     */
+    /** 将attribute的值设入properties。 */
     public static void attributesToProperties(Element element, String propertyPrefix, BeanDefinitionBuilder builder,
                                               String... attrNames) {
         NamedNodeMap attrs = element.getAttributes();
@@ -229,9 +206,7 @@ public class SpringExtUtil {
         }
     }
 
-    /**
-     * 将一个attribute的值设入properties。
-     */
+    /** 将一个attribute的值设入properties。 */
     public static void attributeToProperty(Attr attr, String propertyPrefix, BeanDefinitionBuilder builder) {
         String propName = attr.getNodeName();
 
@@ -242,9 +217,7 @@ public class SpringExtUtil {
         builder.addPropertyValue(propName, trimToNull(attr.getNodeValue()));
     }
 
-    /**
-     * 解析beans:bean的attributes。
-     */
+    /** 解析beans:bean的attributes。 */
     public static void parseBeanDefinitionAttributes(Element element, ParserContext parserContext,
                                                      BeanDefinitionBuilder builder) {
         parserContext.getDelegate().parseBeanDefinitionAttributes(element, null, null, builder.getRawBeanDefinition());
@@ -279,18 +252,14 @@ public class SpringExtUtil {
         return null;
     }
 
-    /**
-     * 解析bean element。
-     */
+    /** 解析bean element。 */
     public static Object parseBean(Element element, ParserContext parserContext,
                                    BeanDefinitionBuilder containingBeanBuilder) {
         return parseBean(element, parserContext,
-                containingBeanBuilder == null ? null : containingBeanBuilder.getRawBeanDefinition());
+                         containingBeanBuilder == null ? null : containingBeanBuilder.getRawBeanDefinition());
     }
 
-    /**
-     * 解析bean element。
-     */
+    /** 解析bean element。 */
     public static Object parseBean(Element element, ParserContext parserContext, BeanDefinition containingBean) {
         BeanDefinitionParserDelegate delegate = parserContext.getDelegate();
         String refName = trimToNull(element.getAttribute("ref"));
@@ -315,9 +284,7 @@ public class SpringExtUtil {
         }
     }
 
-    /**
-     * 取得对象的beanName。如不支持，则返回<code>null</code>。
-     */
+    /** 取得对象的beanName。如不支持，则返回<code>null</code>。 */
     public static String getBeanName(Object bean) {
         if (bean instanceof BeanDefinitionHolder) {
             return ((BeanDefinitionHolder) bean).getBeanName();
@@ -358,7 +325,7 @@ public class SpringExtUtil {
 
         if (isInnerBean) {
             name = baseName + BeanDefinitionReaderUtils.GENERATED_BEAN_NAME_SEPARATOR
-                    + ObjectUtils.getIdentityHexString(definition);
+                   + ObjectUtils.getIdentityHexString(definition);
         } else {
             name = baseName;
 
@@ -370,12 +337,10 @@ public class SpringExtUtil {
         return name;
     }
 
-    /**
-     * 添加一个constructor参数。
-     */
+    /** 添加一个constructor参数。 */
     public static void addConstructorArg(BeanDefinitionBuilder builder, boolean required, Class<?> argType) {
         builder.addConstructorArgValue(createConstructorArg(builder.getRawBeanDefinition().getBeanClass(), required,
-                argType));
+                                                            argType));
     }
 
     /**
@@ -387,7 +352,7 @@ public class SpringExtUtil {
     public static void addConstructorArg(BeanDefinitionBuilder builder, boolean required, int argIndex,
                                          Class<?>... argTypes) {
         builder.addConstructorArgValue(createConstructorArg(builder.getRawBeanDefinition().getBeanClass(), required,
-                argIndex, argTypes));
+                                                            argIndex, argTypes));
     }
 
     /**
@@ -454,9 +419,7 @@ public class SpringExtUtil {
         return builder.getBeanDefinition();
     }
 
-    /**
-     * 添加一个bean引用，支持optional选项。
-     */
+    /** 添加一个bean引用，支持optional选项。 */
     public static void addPropertyRef(BeanDefinitionBuilder builder, String propertyName, String beanName,
                                       Class<?> beanType, boolean required) {
         if (required) {
@@ -483,7 +446,7 @@ public class SpringExtUtil {
     }
 
     private final static DefaultInterceptor defaultInterceptor = new DefaultInterceptor();
-    private final static ProxiedFilter proxiedFilter = new ProxiedFilter();
+    private final static ProxiedFilter      proxiedFilter      = new ProxiedFilter();
 
     /**
      * 创建指定interface的proxy，当proxy的方法被调用时，proxy将会从factory中取得实际对象，
@@ -531,16 +494,14 @@ public class SpringExtUtil {
     public static <T> T assertProxy(T object) {
         if (object != null) {
             assertTrue(object instanceof ProxyTargetFactory,
-                    "expects a proxy delegating to a real object, but got an object of type %s", object.getClass()
-                            .getName());
+                       "expects a proxy delegating to a real object, but got an object of type %s", object.getClass()
+                                                                                                          .getName());
         }
 
         return object;
     }
 
-    /**
-     * 取得proxy所指向的真实对象。
-     */
+    /** 取得proxy所指向的真实对象。 */
     @SuppressWarnings("unchecked")
     public static <T> T getProxyTarget(T object) {
         if (object instanceof ProxyTargetFactory) {
@@ -548,7 +509,7 @@ public class SpringExtUtil {
                 return (T) ((ProxyTargetFactory) object).getObject();
             } catch (Exception e) {
                 log.warn("Could not get proxied object from ProxyTargetFactory: {} {}", e.getClass().getSimpleName(),
-                        e.getMessage());
+                         e.getMessage());
                 return null;
             }
         } else {
@@ -557,11 +518,11 @@ public class SpringExtUtil {
     }
 
     public static class ConstructorArg implements FactoryBean, BeanFactoryAware {
-        private final Constructor<?> constructor;
-        private final Class<?> argType;
-        private final int argIndex;
-        private final boolean required;
-        private ConfigurableListableBeanFactory context;
+        private final Constructor<?>                  constructor;
+        private final Class<?>                        argType;
+        private final int                             argIndex;
+        private final boolean                         required;
+        private       ConfigurableListableBeanFactory context;
 
         public ConstructorArg(Constructor<?> constructor, Class<?> argType, int argIndex, boolean required) {
             this.constructor = constructor;
@@ -595,7 +556,7 @@ public class SpringExtUtil {
         public Object getObject() {
             if (required && context == null) {
                 throw new IllegalArgumentException("could not get object of " + argType.getName()
-                        + ": no Application Context");
+                                                   + ": no Application Context");
             }
 
             Object object = null;
@@ -610,9 +571,9 @@ public class SpringExtUtil {
     }
 
     public static class OptionalPropertyRef implements FactoryBean, BeanFactoryAware {
-        private final String beanName;
-        private final Class<?> beanType;
-        private BeanFactory context;
+        private final String      beanName;
+        private final Class<?>    beanType;
+        private       BeanFactory context;
 
         public OptionalPropertyRef(String beanName, Class<?> beanType) {
             this.beanName = beanName;
@@ -646,9 +607,7 @@ public class SpringExtUtil {
         }
     }
 
-    /**
-     * 携带id的bean ref。
-     */
+    /** 携带id的bean ref。 */
     private static class NamedBeanReference extends RuntimeBeanReference {
         private final String id;
 
@@ -671,11 +630,9 @@ public class SpringExtUtil {
         }
     }
 
-    /**
-     * 服务于createProxy()方法，Proxy的基类。
-     */
+    /** 服务于createProxy()方法，Proxy的基类。 */
     public static class AbstractProxy implements ProxyTargetFactory {
-        private final Class<?> intfs;
+        private final Class<?>           intfs;
         private final ProxyTargetFactory factory;
 
         public AbstractProxy(Class<?> intfs, ProxyTargetFactory factory) {
@@ -734,18 +691,14 @@ public class SpringExtUtil {
         }
     }
 
-    /**
-     * 服务于createProxy()方法，将调用转发给proxy对象本身。
-     */
+    /** 服务于createProxy()方法，将调用转发给proxy对象本身。 */
     private static final class DefaultInterceptor implements MethodInterceptor {
         public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
             return proxy.invokeSuper(obj, args);
         }
     }
 
-    /**
-     * 服务于createProxy()方法，将调用委托给ProxyTargetFactory所返回的对象。
-     */
+    /** 服务于createProxy()方法，将调用委托给ProxyTargetFactory所返回的对象。 */
     private static final class ProxiedInterceptor implements MethodInterceptor {
         private final ProxyTargetFactory factory;
 
@@ -765,7 +718,7 @@ public class SpringExtUtil {
     private static final class ProxiedFilter implements CallbackFilter {
         public int accept(Method method) {
             if (isEqualsMethod(method) || isHashCodeMethod(method) || isToStringMethod(method)
-                    || isProxyTargetFactoryMethod(method)) {
+                || isProxyTargetFactoryMethod(method)) {
                 return 0; // invoke super
             } else {
                 return 1; // invoke proxied object
@@ -777,9 +730,7 @@ public class SpringExtUtil {
         }
     }
 
-    /**
-     * 服务于createProxy()方法，返回以interface name作为前缀的proxy class name。
-     */
+    /** 服务于createProxy()方法，返回以interface name作为前缀的proxy class name。 */
     private static final class ProxiedNamingPolicy extends DefaultNamingPolicy {
         private final Class<?> intfs;
 

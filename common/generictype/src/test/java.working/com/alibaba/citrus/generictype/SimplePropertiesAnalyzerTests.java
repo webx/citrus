@@ -23,9 +23,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.generictype.introspect.PropertyInfo;
+import org.junit.Test;
 
 /**
  * 测试<code>SimplePropertiesAnalyzer</code>。
@@ -33,9 +32,7 @@ import com.alibaba.citrus.generictype.introspect.PropertyInfo;
  * @author Michael Zhou
  */
 public class SimplePropertiesAnalyzerTests extends AbstractPropertiesAnalyzerTests {
-    /**
-     * 测试不同的访问控制。
-     */
+    /** 测试不同的访问控制。 */
     @Test
     public void accessible() {
         @SuppressWarnings("unused")
@@ -80,12 +77,10 @@ public class SimplePropertiesAnalyzerTests extends AbstractPropertiesAnalyzerTes
 
         assertEquals(1, pubStrs.size());
         assertPropertyInfo(pubStrs.get(0), MyClass.class, "publicString", String.class, false,
-                "getPublicString()Ljava/lang/String;", "setPublicString(Ljava/lang/String;)V");
+                           "getPublicString()Ljava/lang/String;", "setPublicString(Ljava/lang/String;)V");
     }
 
-    /**
-     * 测试不同的方法形态。
-     */
+    /** 测试不同的方法形态。 */
     @Test
     public void signatures() {
         @SuppressWarnings("unused")
@@ -172,14 +167,14 @@ public class SimplePropertiesAnalyzerTests extends AbstractPropertiesAnalyzerTes
         pis = props.get("withReturn");
         assertEquals(1, pis.size());
         assertPropertyInfo(pis.get(0), MyClass.class, "withReturn", int.class, false, null,
-                "setWithReturn(I)Ljava/lang/String;");
+                           "setWithReturn(I)Ljava/lang/String;");
 
         assertNull(props.get("with2Params"));
 
         pis = props.get("normal");
         assertEquals(2, pis.size());
         assertPropertyInfo(pis.get(0), MyClass.class, "normal", String.class, false, "getNormal()Ljava/lang/String;",
-                "setNormal(Ljava/lang/String;)V");
+                           "setNormal(Ljava/lang/String;)V");
         assertPropertyInfo(pis.get(1), MyClass.class, "normal", boolean.class, false, "isNormal()Z", null);
 
         pis = props.get("URL");
@@ -193,18 +188,18 @@ public class SimplePropertiesAnalyzerTests extends AbstractPropertiesAnalyzerTes
         pis = props.get("class");
         assertEquals(2, pis.size());
         assertPropertyInfo(pis.get(0), MyClass.class, "class", String.class, false, null,
-                "setClass(Ljava/lang/String;)V");
+                           "setClass(Ljava/lang/String;)V");
         assertPropertyInfo(pis.get(1), Object.class, "class", Class.class, true, "getClass()Ljava/lang/Class;", null);
 
         pis = props.get("boolean");
         assertEquals(1, pis.size());
         assertPropertyInfo(pis.get(0), MyClass.class, "boolean", boolean.class, false, new String[] { "isBoolean()Z",
-                "getBoolean()Z" }, null);
+                                                                                                      "getBoolean()Z" }, null);
 
         pis = props.get("list");
         assertEquals(1, pis.size());
         assertPropertyInfo(pis.get(0), MyClass.class, "list", List.class, true, "getList()Ljava/util/List;",
-                "setList(Ljava/util/List;)V");
+                           "setList(Ljava/util/List;)V");
     }
 
     @Override

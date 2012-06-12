@@ -25,6 +25,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.alibaba.citrus.service.requestcontext.RequestContext;
+import com.alibaba.citrus.service.requestcontext.RequestContextChainingService;
+import com.alibaba.citrus.service.requestcontext.RequestContextInfo;
+import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
+import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -33,12 +38,6 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import com.alibaba.citrus.service.requestcontext.RequestContext;
-import com.alibaba.citrus.service.requestcontext.RequestContextChainingService;
-import com.alibaba.citrus.service.requestcontext.RequestContextInfo;
-import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
-import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 
 /**
  * 创建全局的request context对象，以及request、response对象。
@@ -67,14 +66,14 @@ public class RequestContextBeanFactoryPostProcessor implements BeanFactoryPostPr
 
         // 创建全局的session实例。
         register(beanFactory, HttpSession.class,
-                createProxy(HttpSession.class, beanFactory.getBeanClassLoader(), new SessionProxyTargetFactory()));
+                 createProxy(HttpSession.class, beanFactory.getBeanClassLoader(), new SessionProxyTargetFactory()));
 
         // 创建全局的response实例。
         register(
                 beanFactory,
                 ServletResponse.class,
                 createProxy(HttpServletResponse.class, beanFactory.getBeanClassLoader(),
-                        new ResponseProxyTargetFactory()));
+                            new ResponseProxyTargetFactory()));
 
         // 取得requestContexts时会激活requestContexts的初始化。
         // 由于request/response/session已经被注册，因此已经可被注入到requestContexts的子对象中。
@@ -92,7 +91,7 @@ public class RequestContextBeanFactoryPostProcessor implements BeanFactoryPostPr
                         beanFactory,
                         requestContextInterface,
                         createProxy(requestContextProxyInterface, beanFactory.getBeanClassLoader(),
-                                new RequestContextProxyTargetFactory(requestContextProxyInterface)));
+                                    new RequestContextProxyTargetFactory(requestContextProxyInterface)));
             }
         }
     }
@@ -164,7 +163,7 @@ public class RequestContextBeanFactoryPostProcessor implements BeanFactoryPostPr
 
             if (requestContext == null) {
                 throw new IllegalStateException("Current request does not support request context: "
-                        + requestContextInterface.getName());
+                                                + requestContextInterface.getName());
             }
 
             return requestContext;

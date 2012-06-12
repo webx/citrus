@@ -48,49 +48,36 @@
 
 package com.alibaba.citrus.hessian.io;
 
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.HashMap;
+import java.util.logging.Logger;
 
-import java.util.logging.*;
+/** Serializing an object for known object types. */
+public class RemoteDeserializer extends JavaDeserializer {
+    private static final Logger log
+            = Logger.getLogger(RemoteDeserializer.class.getName());
 
-/**
- * Serializing an object for known object types.
- */
-public class RemoteDeserializer extends  JavaDeserializer {
-  private static final Logger log
-    = Logger.getLogger(RemoteDeserializer.class.getName());
+    public static final Deserializer DESER = new RemoteDeserializer();
 
-  public static final Deserializer DESER = new RemoteDeserializer();
-
-  public RemoteDeserializer()
-  {
-    super(HessianRemote.class);
-  }
-
-  @Override
-  public boolean isReadResolve()
-  {
-    return true;
-  }
-
-  @Override
-  protected Object resolve(AbstractHessianInput in, Object obj)
-    throws Exception
-  {
-    HessianRemote remote = (HessianRemote) obj;
-    HessianRemoteResolver resolver = in.getRemoteResolver();
-
-    if (resolver != null) {
-      Object proxy = resolver.lookup(remote.getType(), remote.getURL());
-
-      return proxy;
+    public RemoteDeserializer() {
+        super(HessianRemote.class);
     }
-    else
-      return remote;
-  }
+
+    @Override
+    public boolean isReadResolve() {
+        return true;
+    }
+
+    @Override
+    protected Object resolve(AbstractHessianInput in, Object obj)
+            throws Exception {
+        HessianRemote remote = (HessianRemote) obj;
+        HessianRemoteResolver resolver = in.getRemoteResolver();
+
+        if (resolver != null) {
+            Object proxy = resolver.lookup(remote.getType(), remote.getURL());
+
+            return proxy;
+        } else {
+            return remote;
+        }
+    }
 }

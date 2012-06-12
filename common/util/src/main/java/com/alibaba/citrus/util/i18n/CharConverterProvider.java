@@ -23,8 +23,6 @@ package com.alibaba.citrus.util.i18n;
  * @author Michael Zhou
  */
 public interface CharConverterProvider {
-    /**
-     * 创建一个新的converter。
-     */
+    /** 创建一个新的converter。 */
     CharConverter createCharConverter();
 }

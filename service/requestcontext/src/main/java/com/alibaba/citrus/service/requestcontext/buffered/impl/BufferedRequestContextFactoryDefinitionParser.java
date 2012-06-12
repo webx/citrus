@@ -20,5 +20,5 @@ package com.alibaba.citrus.service.requestcontext.buffered.impl;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 
 public class BufferedRequestContextFactoryDefinitionParser extends
-        AbstractSingleBeanDefinitionParser<BufferedRequestContextFactoryImpl> {
+                                                           AbstractSingleBeanDefinitionParser<BufferedRequestContextFactoryImpl> {
 }

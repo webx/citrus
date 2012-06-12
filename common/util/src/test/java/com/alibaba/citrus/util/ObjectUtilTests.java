@@ -192,7 +192,7 @@ public class ObjectUtilTests {
         assertTrue(ObjectUtil.identityToString(new Object[0][]).startsWith("java.lang.Object[][]@"));
 
         assertEquals(System.identityHashCode(Boolean.TRUE), Integer.parseInt(ObjectUtil.identityToString(Boolean.TRUE)
-                .substring("java.lang.Boolean@".length()), 16));
+                                                                                       .substring("java.lang.Boolean@".length()), 16));
     }
 
     @Test
@@ -221,14 +221,14 @@ public class ObjectUtilTests {
 
         assertEquals("null", ObjectUtil.appendIdentityToString(new StringBuilder(), null).toString());
         assertTrue(ObjectUtil.appendIdentityToString(new StringBuilder(), "").toString()
-                .startsWith("java.lang.String@"));
+                             .startsWith("java.lang.String@"));
         assertTrue(ObjectUtil.appendIdentityToString(new StringBuilder(), Boolean.TRUE).toString()
-                .startsWith("java.lang.Boolean@"));
+                             .startsWith("java.lang.Boolean@"));
         assertTrue(ObjectUtil.appendIdentityToString(new StringBuilder(), new int[0]).toString().startsWith("int[]@"));
         assertTrue(ObjectUtil.appendIdentityToString(new StringBuilder(), new Object[0]).toString()
-                .startsWith("java.lang.Object[]@"));
+                             .startsWith("java.lang.Object[]@"));
         assertTrue(ObjectUtil.appendIdentityToString(new StringBuilder(), new Object[0][]).toString()
-                .startsWith("java.lang.Object[][]@"));
+                             .startsWith("java.lang.Object[][]@"));
 
         StringBuilder buffer = new StringBuilder();
         StringBuilder buffer1 = ObjectUtil.appendIdentityToString(buffer, Boolean.TRUE);
@@ -260,15 +260,15 @@ public class ObjectUtilTests {
         assertEquals(
                 "[[1, 2, 3], [1, 2, 3], [1, 2, 3], [1, 2, 3], [1.0, 2.0, 3.0], [1.0, 2.0, 3.0], [true, false, true], [a, b, c]]",
                 ObjectUtil.toString(new Object[] { //
-                        new int[] { 1, 2, 3 }, //
-                                new long[] { 1, 2, 3 }, //
-                                new short[] { 1, 2, 3 }, //
-                                new byte[] { 1, 2, 3 }, //
-                                new double[] { 1, 2, 3 }, //
-                                new float[] { 1, 2, 3 }, //
-                                new boolean[] { true, false, true }, //
-                                new char[] { 'a', 'b', 'c' }, //
-                        }));
+                                                   new int[] { 1, 2, 3 }, //
+                                                   new long[] { 1, 2, 3 }, //
+                                                   new short[] { 1, 2, 3 }, //
+                                                   new byte[] { 1, 2, 3 }, //
+                                                   new double[] { 1, 2, 3 }, //
+                                                   new float[] { 1, 2, 3 }, //
+                                                   new boolean[] { true, false, true }, //
+                                                   new char[] { 'a', 'b', 'c' }, //
+                }));
     }
 
     @Test

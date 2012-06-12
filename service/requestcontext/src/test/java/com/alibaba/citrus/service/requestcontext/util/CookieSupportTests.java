@@ -26,11 +26,10 @@ import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * 测试<code>CookieSupport</code>。
@@ -38,7 +37,7 @@ import com.alibaba.citrus.service.requestcontext.RequestContext;
  * @author Michael Zhou
  */
 public class CookieSupportTests extends AbstractRequestContextsTests<RequestContext> {
-    private DateFormat fmt;
+    private DateFormat    fmt;
     private CookieSupport cookie;
 
     @Before
@@ -105,7 +104,7 @@ public class CookieSupportTests extends AbstractRequestContextsTests<RequestCont
         cookie = new CookieSupport("my\"name\"", "my\nvalu\te");
 
         assertEquals("Set-Cookie: Control character in cookie value, consider BASE64 encoding your value",
-                cookie.toString());
+                     cookie.toString());
 
         // escape错误
         cookie = new CookieSupport("myname", "\"my value\\");
@@ -285,11 +284,11 @@ public class CookieSupportTests extends AbstractRequestContextsTests<RequestCont
         cookie.setHttpOnly(true);
 
         assertEquals("myname=myvalue; Domain=.www.sina.com.cn; Expires=Thu, 01-Jan-1970 00:00:10 GMT; "
-                + "Path=/aa/bb; Secure; HttpOnly", cookie.getCookieHeaderValue());
+                     + "Path=/aa/bb; Secure; HttpOnly", cookie.getCookieHeaderValue());
 
         // test copy constructor
         assertEquals("myname=myvalue; Domain=.www.sina.com.cn; Expires=Thu, 01-Jan-1970 00:00:10 GMT; "
-                + "Path=/aa/bb; Secure; HttpOnly", new CookieSupport(cookie).getCookieHeaderValue());
+                     + "Path=/aa/bb; Secure; HttpOnly", new CookieSupport(cookie).getCookieHeaderValue());
     }
 
     @Test
@@ -305,13 +304,13 @@ public class CookieSupportTests extends AbstractRequestContextsTests<RequestCont
         cookie.setHttpOnly(true);
 
         assertEquals("myname=myvalue; Version=1; Comment=\"hello! comment!\"; "
-                + "Domain=.www.sina.com.cn; Max-Age=0; Expires=Thu, 01-Jan-1970 00:00:10 GMT; "
-                + "Path=/aa/bb; Secure; HttpOnly", cookie.getCookieHeaderValue());
+                     + "Domain=.www.sina.com.cn; Max-Age=0; Expires=Thu, 01-Jan-1970 00:00:10 GMT; "
+                     + "Path=/aa/bb; Secure; HttpOnly", cookie.getCookieHeaderValue());
 
         // test copy constructor
         assertEquals("myname=myvalue; Version=1; Comment=\"hello! comment!\"; "
-                + "Domain=.www.sina.com.cn; Max-Age=0; Expires=Thu, 01-Jan-1970 00:00:10 GMT; "
-                + "Path=/aa/bb; Secure; HttpOnly", new CookieSupport(cookie).getCookieHeaderValue());
+                     + "Domain=.www.sina.com.cn; Max-Age=0; Expires=Thu, 01-Jan-1970 00:00:10 GMT; "
+                     + "Path=/aa/bb; Secure; HttpOnly", new CookieSupport(cookie).getCookieHeaderValue());
     }
 
     @Test
@@ -335,7 +334,7 @@ public class CookieSupportTests extends AbstractRequestContextsTests<RequestCont
 
         commitToClient();
 
-        assertArrayEquals(new String[] {}, clientResponse.getHeaderFields("set-cookie"));
+        assertArrayEquals(new String[] { }, clientResponse.getHeaderFields("set-cookie"));
     }
 
     private void assertCookie(String value, CookieSupport cookie) {

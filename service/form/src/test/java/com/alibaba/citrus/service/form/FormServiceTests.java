@@ -23,13 +23,12 @@ import static org.junit.Assert.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.alibaba.citrus.service.form.impl.FormServiceImpl;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
-
-import com.alibaba.citrus.service.form.impl.FormServiceImpl;
 
 /**
  * 测试form service配置及功能。
@@ -37,7 +36,7 @@ import com.alibaba.citrus.service.form.impl.FormServiceImpl;
  * @author Michael Zhou
  */
 public class FormServiceTests extends AbstractFormServiceTests {
-    private Form form;
+    private Form  form;
     private Group group;
 
     @BeforeClass
@@ -98,8 +97,8 @@ public class FormServiceTests extends AbstractFormServiceTests {
     @Test
     public void getForm_notPostOnly() throws Exception {
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "aaa" }, // group1.field1
-                { "_fm.g._0.fi", "bbb" }, // group1.field2
+                                           { "_fm.g._0.f", "aaa" }, // group1.field1
+                                           { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
 
         // 四种组合：GET/POST, getForm()/getForm(false)
@@ -131,8 +130,8 @@ public class FormServiceTests extends AbstractFormServiceTests {
     @Test
     public void getForm_forcePostOnly() throws Exception {
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.g._0.f", "aaa" }, // group1.field1
-                { "_fm.g._0.fi", "bbb" }, // group1.field2
+                                           { "_fm.g._0.f", "aaa" }, // group1.field1
+                                           { "_fm.g._0.fi", "bbb" }, // group1.field2
         };
 
         // GET
@@ -160,8 +159,8 @@ public class FormServiceTests extends AbstractFormServiceTests {
     @Test
     public void getForm_postOnly() throws Exception {
         Object[][] args = new Object[][] { { "sumbit", "提交" }, //
-                { "_fm.gr._0.f", "aaa" }, // group2.field1
-                { "_fm.gr._0.fi", "bbb" }, // group2.field2
+                                           { "_fm.gr._0.f", "aaa" }, // group2.field1
+                                           { "_fm.gr._0.fi", "bbb" }, // group2.field2
         };
 
         // GET

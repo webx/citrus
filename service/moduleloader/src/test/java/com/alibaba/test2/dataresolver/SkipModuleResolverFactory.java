@@ -33,7 +33,7 @@ public class SkipModuleResolverFactory implements DataResolverFactory {
             return new DataResolver() {
                 public Object resolve() {
                     throw new SkipModuleExecutionException("skipped " + context.getExtraObject(ModuleInfo.class),
-                            trimToNull(skip.value()));
+                                                           trimToNull(skip.value()));
                 }
             };
         }

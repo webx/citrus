@@ -20,9 +20,8 @@ package com.alibaba.citrus.service.moduleloader;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.moduleloader.impl.ModuleKey;
+import org.junit.Test;
 
 public class ModuleKeyTests {
     private ModuleKey key;

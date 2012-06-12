@@ -21,12 +21,11 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
+import com.alibaba.citrus.webx.AbstractWebxTests;
+import com.alibaba.citrus.webx.util.WebxUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.alibaba.citrus.webx.AbstractWebxTests;
-import com.alibaba.citrus.webx.util.WebxUtil;
 
 public class MainHandlerTests extends AbstractWebxTests {
     @Before
@@ -71,9 +70,7 @@ public class MainHandlerTests extends AbstractWebxTests {
         assertThat(clientResponseContent, containsAll("<html><head><title></title></head><body></body></html>"));
     }
 
-    /**
-     * 在开发模式下，访问/或/internal，都将显示main internal page。
-     */
+    /** 在开发模式下，访问/或/internal，都将显示main internal page。 */
     @Test
     public void internalRequest_main() throws Exception {
         assertMainInternalPage("");
@@ -82,9 +79,7 @@ public class MainHandlerTests extends AbstractWebxTests {
         assertMainInternalPage("/internal/");
     }
 
-    /**
-     * 在开发模式下，访问/?home，则显示原来的homepage。
-     */
+    /** 在开发模式下，访问/?home，则显示原来的homepage。 */
     @Test
     public void internalRequest_homepage() throws Exception {
         // 以下为home参数的几种形态，是用正则表达式匹配的
@@ -121,6 +116,6 @@ public class MainHandlerTests extends AbstractWebxTests {
 
         // 包含application home
         assertThat(clientResponseContent,
-                containsString("images/home2.gif\" alt=\"Application Home\" /> Application Home</a>"));
+                   containsString("images/home2.gif\" alt=\"Application Home\" /> Application Home</a>"));
     }
 }

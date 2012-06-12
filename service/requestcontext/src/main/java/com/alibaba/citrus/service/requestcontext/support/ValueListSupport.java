@@ -30,17 +30,16 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.fileupload.FileItem;
-import org.springframework.beans.TypeConverter;
-import org.springframework.beans.TypeMismatchException;
-import org.springframework.core.CollectionFactory;
-import org.springframework.core.MethodParameter;
-
 import com.alibaba.citrus.service.requestcontext.util.ValueList;
 import com.alibaba.citrus.util.ArrayUtil;
 import com.alibaba.citrus.util.ClassUtil;
 import com.alibaba.citrus.util.ObjectUtil;
 import com.alibaba.citrus.util.ToStringBuilder;
+import org.apache.commons.fileupload.FileItem;
+import org.springframework.beans.TypeConverter;
+import org.springframework.beans.TypeMismatchException;
+import org.springframework.core.CollectionFactory;
+import org.springframework.core.MethodParameter;
 
 /**
  * 代表一个值的列表。
@@ -276,7 +275,7 @@ public class ValueListSupport implements ValueList {
     /**
      * 取得日期。字符串将使用指定的<code>DateFormat</code>来解析。如果不存在，则返回默认值。
      *
-     * @param format <code>DateFormat</code>对象
+     * @param format       <code>DateFormat</code>对象
      * @param defaultValue 默认值
      * @return <code>java.util.Date</code>对象
      */
@@ -425,16 +424,12 @@ public class ValueListSupport implements ValueList {
         return isEmptyArray(values) ? defaultValues : values;
     }
 
-    /**
-     * 取得指定类型的值。
-     */
+    /** 取得指定类型的值。 */
     public <T> T getValueOfType(Class<T> type, MethodParameter methodParameter, Object[] defaultValues) {
         return getValueOfType(type, false, methodParameter, defaultValues);
     }
 
-    /**
-     * 取得指定类型的值。
-     */
+    /** 取得指定类型的值。 */
     public <T> T getValueOfType(Class<T> type, boolean isPrimitive, MethodParameter methodParameter,
                                 Object[] defaultValues) {
         // 处理默认值，如为空，转换为空数组。
@@ -659,9 +654,7 @@ public class ValueListSupport implements ValueList {
         return values.size();
     }
 
-    /**
-     * 清除所有值。
-     */
+    /** 清除所有值。 */
     protected void clear() {
         values.clear();
     }

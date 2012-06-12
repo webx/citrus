@@ -23,11 +23,10 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
+import com.alibaba.citrus.service.resource.ResourceLister;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.alibaba.citrus.service.resource.ResourceLister;
 
 public class WebappLoaderTests extends AbstractResourceLoaderTests<WebappResourceLoader> {
     @BeforeClass
@@ -68,7 +67,7 @@ public class WebappLoaderTests extends AbstractResourceLoaderTests<WebappResourc
     @Test
     public void list() throws Exception {
         assertResourceLister("/webroot", "", true, "WEB-INF/", "appcontext/", "beans.xml", "filter/", "loader/",
-                "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml", "test.txt");
+                             "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml", "test.txt");
         assertResourceLister("/webroot/test.txt", null, false);
         assertResourceLister("/webroot/WEB-INF/", "WEB-INF", true, "aaa/", "resources.xml", "web.xml");
         assertResourceLister("/webroot/WEB-INF/web.xml", null, false);

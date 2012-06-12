@@ -36,10 +36,10 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  */
 public class SessionModelImpl implements SessionModel {
     private transient SessionConfig sessionConfig;
-    private String sessionID;
-    private long creationTime;
-    private long lastAccessedTime;
-    private int maxInactiveInterval;
+    private           String        sessionID;
+    private           long          creationTime;
+    private           long          lastAccessedTime;
+    private           int           maxInactiveInterval;
 
     public SessionModelImpl(SessionImpl session) {
         setSession(session);
@@ -74,9 +74,7 @@ public class SessionModelImpl implements SessionModel {
         this.maxInactiveInterval = sessionConfig.getMaxInactiveInterval();
     }
 
-    /**
-     * 设置model所在的session。
-     */
+    /** 设置model所在的session。 */
     public void setSession(SessionImpl session) {
         this.sessionConfig = session.getSessionRequestContext().getSessionConfig();
         this.sessionID = session.getId();
@@ -158,9 +156,7 @@ public class SessionModelImpl implements SessionModel {
         return false;
     }
 
-    /**
-     * 更新session的访问时间。
-     */
+    /** 更新session的访问时间。 */
     public void touch() {
         lastAccessedTime = System.currentTimeMillis();
     }

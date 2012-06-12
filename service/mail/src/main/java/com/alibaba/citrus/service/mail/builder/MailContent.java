@@ -26,33 +26,21 @@ import javax.mail.Part;
  * @author Michael Zhou
  */
 public interface MailContent extends Cloneable {
-    /**
-     * 取得content的唯一ID，此ID在整个mail builder所包含的content中是唯一的。
-     */
+    /** 取得content的唯一ID，此ID在整个mail builder所包含的content中是唯一的。 */
     String getId();
 
-    /**
-     * 深度复制一个content。
-     */
+    /** 深度复制一个content。 */
     MailContent clone();
 
-    /**
-     * 取得content所属的mail builder。
-     */
+    /** 取得content所属的mail builder。 */
     MailBuilder getMailBuilder();
 
-    /**
-     * 设置content所属的mail builder。
-     */
+    /** 设置content所属的mail builder。 */
     void setMailBuilder(MailBuilder builder);
 
-    /**
-     * 设置包容此内容的父内容。
-     */
+    /** 设置包容此内容的父内容。 */
     void setParentContent(MailContent parentContent);
 
-    /**
-     * 渲染邮件内容。
-     */
+    /** 渲染邮件内容。 */
     void render(Part mailPart) throws MessagingException;
 }

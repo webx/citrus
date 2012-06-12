@@ -21,15 +21,14 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.template.TemplateContext;
 import com.alibaba.citrus.service.template.support.MappedTemplateContext;
 import com.alibaba.citrus.service.velocity.impl.TemplateContextAdapter;
+import org.junit.Before;
+import org.junit.Test;
 
 public class TemplateContextAdapaterTests {
-    private TemplateContext context;
+    private TemplateContext        context;
     private TemplateContextAdapter adapter;
 
     @Before

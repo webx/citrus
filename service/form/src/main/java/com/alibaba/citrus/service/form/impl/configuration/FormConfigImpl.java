@@ -19,8 +19,8 @@ package com.alibaba.citrus.service.form.impl.configuration;
 
 import static com.alibaba.citrus.service.form.FormConstant.*;
 import static com.alibaba.citrus.util.ArrayUtil.*;
-import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.Assert.ExceptionType.*;
+import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static java.util.Collections.*;
@@ -31,13 +31,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.springframework.beans.PropertyEditorRegistrar;
-
 import com.alibaba.citrus.service.configuration.support.PropertyEditorRegistrarsSupport;
 import com.alibaba.citrus.service.form.FormService;
 import com.alibaba.citrus.service.form.configuration.FormConfig;
 import com.alibaba.citrus.service.form.configuration.GroupConfig;
 import com.alibaba.citrus.service.form.configuration.GroupConfig.Import;
+import org.springframework.beans.PropertyEditorRegistrar;
 
 /**
  * 实现<code>FormConfig</code>。
@@ -45,76 +44,58 @@ import com.alibaba.citrus.service.form.configuration.GroupConfig.Import;
  * @author Michael Zhou
  */
 public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormConfig {
-    private FormService formService;
-    private FormService[] importFormServices;
+    private FormService                  formService;
+    private FormService[]                importFormServices;
     private Map<String, GroupConfigImpl> groups; // group name to groupConfig
     private Map<String, GroupConfigImpl> groupsByKey; // group key to groupConfig
-    private List<GroupConfig> groupList; // unmodifiable group list
+    private List<GroupConfig>            groupList; // unmodifiable group list
     private PropertyEditorRegistrarsSupport propertyEditorRegistrars = new PropertyEditorRegistrarsSupport();
-    private Boolean converterQuiet;
-    private Boolean postOnlyByDefault;
+    private Boolean        converterQuiet;
+    private Boolean        postOnlyByDefault;
     private FieldKeyFormat fieldKeyFormat;
-    private String messageCodePrefix;
+    private String         messageCodePrefix;
 
-    /**
-     * 取得创建此form的service。
-     */
+    /** 取得创建此form的service。 */
     public FormService getFormService() {
         return formService;
     }
 
-    /**
-     * 设置创建此form的service。
-     */
+    /** 设置创建此form的service。 */
     public void setFormService(FormService formService) {
         this.formService = assertNotNull(formService, "formService");
     }
 
-    /**
-     * 设置要导入的form。
-     */
+    /** 设置要导入的form。 */
     public void setImports(FormService[] importFromServices) {
         this.importFormServices = importFromServices;
     }
 
-    /**
-     * 类型转换出错时，是否不报错，而是返回默认值。
-     */
+    /** 类型转换出错时，是否不报错，而是返回默认值。 */
     public boolean isConverterQuiet() {
         return converterQuiet == null ? true : converterQuiet.booleanValue();
     }
 
-    /**
-     * 设置类型转换出错时，是否不报错，而是返回默认值。
-     */
+    /** 设置类型转换出错时，是否不报错，而是返回默认值。 */
     public void setConverterQuiet(boolean converterQuiet) {
         this.converterQuiet = converterQuiet;
     }
 
-    /**
-     * Group是否默认必须从post请求中取得数据。
-     */
+    /** Group是否默认必须从post请求中取得数据。 */
     public boolean isPostOnlyByDefault() {
         return postOnlyByDefault == null ? true : postOnlyByDefault.booleanValue();
     }
 
-    /**
-     * 设置group是否默认必须从post请求中取得数据。
-     */
+    /** 设置group是否默认必须从post请求中取得数据。 */
     public void setPostOnlyByDefault(boolean postOnlyByDefault) {
         this.postOnlyByDefault = postOnlyByDefault;
     }
 
-    /**
-     * 取得field key的格式，可以是压缩或不压缩的。
-     */
+    /** 取得field key的格式，可以是压缩或不压缩的。 */
     public FieldKeyFormat getFieldKeyFormat() {
         return fieldKeyFormat == null ? FieldKeyFormat.compressed : fieldKeyFormat;
     }
 
-    /**
-     * 设置field key的格式，可以是压缩或不压缩的。
-     */
+    /** 设置field key的格式，可以是压缩或不压缩的。 */
     public void setFieldKeyFormat(FieldKeyFormat fieldKeyFormat) {
         this.fieldKeyFormat = fieldKeyFormat;
     }
@@ -134,9 +115,7 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
         return messageCodePrefix == null ? FORM_MESSAGE_CODE_PREFIX : messageCodePrefix;
     }
 
-    /**
-     * 设置message code的前缀。
-     */
+    /** 设置message code的前缀。 */
     public void setMessageCodePrefix(String messageCodePrefix) {
         this.messageCodePrefix = normalizeMessageCodePrefix(messageCodePrefix);
     }
@@ -151,9 +130,7 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
         return messageCodePrefix;
     }
 
-    /**
-     * 取得所有group config的列表。
-     */
+    /** 取得所有group config的列表。 */
     public List<GroupConfig> getGroupConfigList() {
         if (groupList == null) {
             return emptyList();
@@ -162,9 +139,7 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
         }
     }
 
-    /**
-     * 取得指定名称的group config。名称大小写不敏感。 如果未找到，则返回<code>null</code>。
-     */
+    /** 取得指定名称的group config。名称大小写不敏感。 如果未找到，则返回<code>null</code>。 */
     public GroupConfig getGroupConfig(String groupName) {
         if (groups == null) {
             return null;
@@ -173,16 +148,12 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
         }
     }
 
-    /**
-     * 取得和指定key相对应的group config。如果未找到，则返回<code>null</code>
-     */
+    /** 取得和指定key相对应的group config。如果未找到，则返回<code>null</code> */
     public GroupConfig getGroupConfigByKey(String groupKey) {
         return assertNotNull(groupsByKey, ILLEGAL_STATE, "groupsByKey not inited").get(groupKey);
     }
 
-    /**
-     * 设置group configs。
-     */
+    /** 设置group configs。 */
     public void setGroupConfigImplList(List<GroupConfigImpl> groupConfigList) {
         groups = null;
         addGroupConfigImplList(groupConfigList, false);
@@ -230,9 +201,7 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
         propertyEditorRegistrars.setPropertyEditorRegistrars(registrars);
     }
 
-    /**
-     * 初始化form config。
-     */
+    /** 初始化form config。 */
     @Override
     protected void init() throws Exception {
         // 处理form import。
@@ -308,9 +277,7 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
         }
     }
 
-    /**
-     * 处理group之间的继承关系，将parent group和imports中的内容展开到子group中。
-     */
+    /** 处理group之间的继承关系，将parent group和imports中的内容展开到子group中。 */
     private void processGroup(GroupConfigImpl groupConfig, Set<GroupConfigImpl> processedGroups,
                               GroupStack processingGroups) throws Exception {
         if (!processedGroups.contains(groupConfig)) {
@@ -344,7 +311,7 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
                 // 处理imports
                 for (Import impot : groupConfig.getImports()) {
                     copyFields(groupConfig, impot.getGroupName(), impot.getFieldName(), false, processedGroups,
-                            processingGroups);
+                               processingGroups);
                 }
 
                 processingGroups.pop();
@@ -358,7 +325,7 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
     private void copyFields(GroupConfigImpl targetGroup, String srcGroupName, String srcFieldName, boolean isExtends,
                             Set<GroupConfigImpl> processedGroups, GroupStack processingGroups) throws Exception {
         GroupConfigImpl srcGroup = (GroupConfigImpl) assertNotNull(getGroupConfig(srcGroupName),
-                "Parent or imported group name \"%s\" not found", srcGroupName);
+                                                                   "Parent or imported group name \"%s\" not found", srcGroupName);
 
         // 递归处理parentGroup和imported Groups。
         processGroup(srcGroup, processedGroups, processingGroups);
@@ -371,17 +338,13 @@ public class FormConfigImpl extends AbstractConfig<FormConfig> implements FormCo
         }
     }
 
-    /**
-     * 转换成易于阅读的字符串。
-     */
+    /** 转换成易于阅读的字符串。 */
     @Override
     public String toString() {
         return "FormConfig[groups: " + getGroupConfigList().size() + "]";
     }
 
-    /**
-     * 用来防止group递归继承。
-     */
+    /** 用来防止group递归继承。 */
     private static class GroupStack implements Iterable<GroupConfigImpl> {
         private final LinkedList<GroupConfigImpl> groups = createLinkedList();
 

@@ -25,20 +25,19 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import com.alibaba.citrus.service.resource.support.ResourceLoadingSupport;
+import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 
-import com.alibaba.citrus.service.resource.support.ResourceLoadingSupport;
-import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
-
 public class ResourceDataSourceTests {
     private static XmlApplicationContext factory;
-    private Resource resource;
-    private Resource resourceNotExist;
-    private ResourceDataSource rds;
+    private        Resource              resource;
+    private        Resource              resourceNotExist;
+    private        ResourceDataSource    rds;
 
     @BeforeClass
     public static void initFactory() {

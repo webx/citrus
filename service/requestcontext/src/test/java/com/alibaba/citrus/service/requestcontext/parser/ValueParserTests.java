@@ -31,6 +31,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -40,8 +41,6 @@ import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.beans.PropertyEditorRegistry;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.propertyeditors.CustomNumberEditor;
-
-import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 
 /**
  * 测试ValueParser类。
@@ -104,9 +103,9 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
 
         // 测试数组默认值
         parser.add("bbb", null);
-        assertAnyArrayEquals(new boolean[] {}, parser.getObjectOfType("bbb", boolean[].class));
+        assertAnyArrayEquals(new boolean[] { }, parser.getObjectOfType("bbb", boolean[].class));
         assertAnyArrayEquals(new boolean[] { true, true, false },
-                parser.getObjectOfType("bbb", boolean[].class, null, new Boolean[] { true, true, false }));
+                             parser.getObjectOfType("bbb", boolean[].class, null, new Boolean[] { true, true, false }));
 
         // 测试非法值
         parser.add("ccc", "illegal");
@@ -138,9 +137,9 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
 
         // 测试数组默认值
         parser.add("bbb", null);
-        assertArrayEquals(new byte[] {}, parser.getObjectOfType("bbb", byte[].class));
+        assertArrayEquals(new byte[] { }, parser.getObjectOfType("bbb", byte[].class));
         assertArrayEquals(new byte[] { 33, 44 },
-                parser.getObjectOfType("bbb", byte[].class, null, new Byte[] { 33, 44 }));
+                          parser.getObjectOfType("bbb", byte[].class, null, new Byte[] { 33, 44 }));
 
         // 测试非法值
         parser.add("ccc", "illegal");
@@ -188,9 +187,9 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
 
         // 测试数组默认值
         parser.add("bbb", null);
-        assertArrayEquals(new char[] {}, parser.getObjectOfType("bbb", char[].class));
+        assertArrayEquals(new char[] { }, parser.getObjectOfType("bbb", char[].class));
         assertArrayEquals(new char[] { 'a', 'b' },
-                parser.getObjectOfType("bbb", char[].class, null, new Character[] { 'a', 'b' }));
+                          parser.getObjectOfType("bbb", char[].class, null, new Character[] { 'a', 'b' }));
 
         // 测试非法值
         parser.add("ccc", "illegal");
@@ -225,9 +224,9 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
 
         // 测试数组默认值
         parser.add("bbb", null);
-        assertAnyArrayEquals(new double[] {}, parser.getObjectOfType("bbb", double[].class));
+        assertAnyArrayEquals(new double[] { }, parser.getObjectOfType("bbb", double[].class));
         assertAnyArrayEquals(new double[] { 11D, 22D },
-                parser.getObjectOfType("bbb", double[].class, null, new Double[] { 11D, 22D }));
+                             parser.getObjectOfType("bbb", double[].class, null, new Double[] { 11D, 22D }));
 
         // 测试非法值
         parser.add("ccc", "illegal");
@@ -262,9 +261,9 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
 
         // 测试数组默认值
         parser.add("bbb", null);
-        assertAnyArrayEquals(new float[] {}, parser.getObjectOfType("bbb", float[].class));
+        assertAnyArrayEquals(new float[] { }, parser.getObjectOfType("bbb", float[].class));
         assertAnyArrayEquals(new float[] { 11F, 22F },
-                parser.getObjectOfType("bbb", float[].class, null, new Float[] { 11F, 22F }));
+                             parser.getObjectOfType("bbb", float[].class, null, new Float[] { 11F, 22F }));
 
         // 测试非法值
         parser.add("ccc", "illegal");
@@ -296,7 +295,7 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
 
         // 测试数组默认值
         parser.add("bbb", null);
-        assertArrayEquals(new int[] {}, parser.getInts("bbb"));
+        assertArrayEquals(new int[] { }, parser.getInts("bbb"));
         assertArrayEquals(new int[] { 3, 4 }, parser.getInts("bbb", new int[] { 3, 4 }));
 
         // 测试非法值
@@ -329,7 +328,7 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
 
         // 测试数组默认值
         parser.add("bbb", null);
-        assertArrayEquals(new long[] {}, parser.getLongs("bbb"));
+        assertArrayEquals(new long[] { }, parser.getLongs("bbb"));
         assertArrayEquals(new long[] { 1, 2 }, parser.getLongs("bbb", new long[] { 1, 2 }));
 
         // 测试非法值
@@ -362,9 +361,9 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
 
         // 测试数组默认值
         parser.add("bbb", null);
-        assertAnyArrayEquals(new short[] {}, parser.getObjectOfType("bbb", short[].class, null, null));
+        assertAnyArrayEquals(new short[] { }, parser.getObjectOfType("bbb", short[].class, null, null));
         assertAnyArrayEquals(new short[] { 1, 2 },
-                parser.getObjectOfType("bbb", short[].class, null, new Short[] { 1, 2 }));
+                             parser.getObjectOfType("bbb", short[].class, null, new Short[] { 1, 2 }));
 
         // 测试非法值
         parser.add("ccc", "illegal");
@@ -397,7 +396,7 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
 
         // 测试数组默认值
         parser.add("bbb", null);
-        assertArrayEquals(new String[] {}, parser.getStrings("bbb"));
+        assertArrayEquals(new String[] { }, parser.getStrings("bbb"));
         assertArrayEquals(new String[] { "aa", "bb" }, parser.getStrings("bbb", new String[] { "aa", "bb" }));
 
         // 特殊情况
@@ -436,7 +435,7 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
         assertEquals("333", parser.getObject("bbb", "333"));
 
         // 测试数组默认值
-        assertArrayEquals(new Object[] {}, parser.getObjects("bbb"));
+        assertArrayEquals(new Object[] { }, parser.getObjects("bbb"));
         assertArrayEquals(new Object[] { 111 }, parser.getObjects("bbb", new Object[] { 111 }));
     }
 
@@ -458,7 +457,7 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
 
         // 测试数组默认值
         parser.add("bbb", null);
-        assertArrayEquals(new int[] {}, parser.getObjectOfType("bbb", int[].class));
+        assertArrayEquals(new int[] { }, parser.getObjectOfType("bbb", int[].class));
         assertArrayEquals(new int[] { 3, 4 }, parser.getObjectOfType("bbb", int[].class, null, new Integer[] { 3, 4 }));
 
         // 测试非法值
@@ -657,7 +656,7 @@ public class ValueParserTests extends AbstractRequestContextsTests<ParserRequest
 
     public static class MyRegistrar implements PropertyEditorRegistrar {
         private final static String[] NUMBERS = { "zero", "one", "two", "three", "four", "five", "six", "seven",
-                "eight", "nine", "ten" };
+                                                  "eight", "nine", "ten" };
 
         public void registerCustomEditors(PropertyEditorRegistry registry) {
             PropertyEditor editor = new CustomNumberEditor(Long.class, true) {

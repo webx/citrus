@@ -83,7 +83,7 @@ public class ExplorerHandler extends AbstractExplorerHandler {
 
         public Object visitConfigurations(Template configurationsTemplate) throws IOException {
             return new ConfigurationsVisitor(context, this,
-                    new ConfigurationFileReader(appcontext, configLocations).toConfigurationFiles());
+                                             new ConfigurationFileReader(appcontext, configLocations).toConfigurationFiles());
         }
 
         public Object visitResolvableDependencies(Template resolvableDepsTemplate) {
@@ -92,7 +92,7 @@ public class ExplorerHandler extends AbstractExplorerHandler {
 
         public Object visitResources(Template resourcesTemplate) {
             return new ResourcesVisitor(context, this, getService("resourceLoadingService",
-                    ResourceLoadingService.class));
+                                                                  ResourceLoadingService.class));
         }
 
         public Object visitUris(Template urisTemplate) {

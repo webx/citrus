@@ -18,11 +18,7 @@
 package com.alibaba.citrus.service.requestcontext.lazycommit.impl;
 
 import java.io.IOException;
-
 import javax.servlet.http.HttpServletResponse;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.lazycommit.LazyCommitFailedException;
@@ -30,6 +26,8 @@ import com.alibaba.citrus.service.requestcontext.lazycommit.LazyCommitRequestCon
 import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextWrapper;
 import com.alibaba.citrus.service.requestcontext.support.AbstractResponseWrapper;
 import com.alibaba.citrus.util.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 延迟提交response的实现。
@@ -39,10 +37,10 @@ import com.alibaba.citrus.util.StringUtil;
 public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper implements LazyCommitRequestContext {
     private final static Logger log = LoggerFactory.getLogger(LazyCommitRequestContext.class);
     private SendError sendError;
-    private String sendRedirect;
-    private boolean setLocation;
-    private boolean bufferFlushed;
-    private int status;
+    private String    sendRedirect;
+    private boolean   setLocation;
+    private boolean   bufferFlushed;
+    private int       status;
 
     /**
      * 包装一个<code>RequestContext</code>对象。
@@ -131,9 +129,7 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
         }
     }
 
-    /**
-     * 包装response。
-     */
+    /** 包装response。 */
     private class ResponseWrapper extends AbstractResponseWrapper {
         public ResponseWrapper(HttpServletResponse response) {
             super(LazyCommitRequestContextImpl.this, response);
@@ -155,7 +151,7 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
          * 设置重定向URI。
          *
          * @param location 重定向的URI
-         * @throws IOException 输入输出失败
+         * @throws IOException           输入输出失败
          * @throws IllegalStateException 如果response已经committed
          */
         @Override
@@ -224,11 +220,9 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
         }
     }
 
-    /**
-     * 保存sendError的信息。
-     */
+    /** 保存sendError的信息。 */
     private class SendError {
-        public final int status;
+        public final int    status;
         public final String message;
 
         public SendError(int status, String message) {

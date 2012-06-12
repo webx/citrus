@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import com.alibaba.citrus.util.regex.ClassNameWildcardCompiler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.FatalBeanException;
 import org.springframework.beans.factory.FactoryBean;
@@ -47,9 +48,6 @@ import org.springframework.core.type.filter.RegexPatternTypeFilter;
 import org.springframework.core.type.filter.TypeFilter;
 import org.w3c.dom.Element;
 
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
-import com.alibaba.citrus.util.regex.ClassNameWildcardCompiler;
-
 /**
  * 解析class-modules。
  *
@@ -59,7 +57,7 @@ public class ClassModuleFactoryDefinitionParser extends AbstractModuleFactoryDef
     @Override
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         Map<String, ParsingModuleInfo> classes = parseSpecificBeans(element, parserContext,
-                builder.getRawBeanDefinition(), and(beansNs(), name("bean")));
+                                                                    builder.getRawBeanDefinition(), and(beansNs(), name("bean")));
 
         ElementSelector searchPackages = and(sameNs(element), name("search-packages"));
         ElementSelector searchClasses = and(sameNs(element), name("search-classes"));
@@ -73,7 +71,7 @@ public class ClassModuleFactoryDefinitionParser extends AbstractModuleFactoryDef
 
             if (searchPackages.accept(subElement)) {
                 String packageName = assertNotNull(normalizeClassName(subElement.getAttribute("packages")),
-                        "no package name provided for search-packages");
+                                                   "no package name provided for search-packages");
 
                 classNamePattern = compileClassName(packageName, MATCH_PREFIX);
                 typeName = assertNotNull(trimToNull(subElement.getAttribute("type")), "no type name provided");
@@ -82,7 +80,7 @@ public class ClassModuleFactoryDefinitionParser extends AbstractModuleFactoryDef
                 log.trace("Searching in packages: {}, moduleType={}", packageName, typeName);
             } else if (searchClasses.accept(subElement)) {
                 String className = assertNotNull(normalizeClassName(subElement.getAttribute("classes")),
-                        "no class name provided for search-classes");
+                                                 "no class name provided for search-classes");
 
                 classNamePattern = compileClassName(className, MATCH_PREFIX);
                 typeName = assertNotNull(trimToNull(subElement.getAttribute("type")), "no type name provided");
@@ -96,11 +94,11 @@ public class ClassModuleFactoryDefinitionParser extends AbstractModuleFactoryDef
                 }
 
                 log.trace("Searching for classes: {}, moduleType={}, moduleName={}", new Object[] { className,
-                        typeName, moduleName });
+                                                                                                    typeName, moduleName });
             }
 
             boolean includeAbstractClasses = "true".equalsIgnoreCase(trimToNull(subElement
-                    .getAttribute("includeAbstractClasses")));
+                                                                                        .getAttribute("includeAbstractClasses")));
 
             if (classResourceName != null) {
                 // 处理所有的include/exclude filters
@@ -111,7 +109,7 @@ public class ClassModuleFactoryDefinitionParser extends AbstractModuleFactoryDef
                 parseTypeFilters(subElement, classLoader, includes, excludes);
 
                 ModuleTypeFilter filter = new ModuleTypeFilter(classes, classNamePattern, typeName, moduleName,
-                        includes);
+                                                               includes);
 
                 // 事实上，只有一个顶级的include filter，其它的include filter被这一个moduleTypeFilter所调用。
                 scanner.addIncludeFilter(filter);
@@ -151,9 +149,7 @@ public class ClassModuleFactoryDefinitionParser extends AbstractModuleFactoryDef
         return "classModuleFactory";
     }
 
-    /**
-     * 解析<code>TypeFilter</code>s。
-     */
+    /** 解析<code>TypeFilter</code>s。 */
     private void parseTypeFilters(Element element, ClassLoader classLoader, List<TypeFilter> includes,
                                   List<TypeFilter> excludes) {
         ElementSelector includeSelector = and(sameNs(element), name("include-filter"));
@@ -176,13 +172,11 @@ public class ClassModuleFactoryDefinitionParser extends AbstractModuleFactoryDef
         }
     }
 
-    /**
-     * 创建指定的TypeFilter。
-     */
+    /** 创建指定的TypeFilter。 */
     private TypeFilter createTypeFilter(Element element, ClassLoader classLoader) {
         String filterType = defaultIfNull(trimToNull(element.getAttribute("type")), "wildcard");
         String expression = assertNotNull(trimToNull(element.getAttribute("expression")), "expression for %s"
-                + filterType);
+                                                                                          + filterType);
 
         try {
             if ("assignable".equals(filterType)) {
@@ -191,12 +185,12 @@ public class ClassModuleFactoryDefinitionParser extends AbstractModuleFactoryDef
                 return new AspectJTypeFilter(expression, classLoader);
             } else if ("wildcard".equals(filterType)) {
                 return new RegexPatternTypeFilter(ClassNameWildcardCompiler.compileClassName(expression,
-                        ClassNameWildcardCompiler.MATCH_PREFIX));
+                                                                                             ClassNameWildcardCompiler.MATCH_PREFIX));
             } else if ("custom".equals(filterType)) {
                 Class<?> filterClass = classLoader.loadClass(expression);
 
                 assertTrue(TypeFilter.class.isAssignableFrom(filterClass), "Class is not assignable to TypeFilter: %s",
-                        expression);
+                           expression);
 
                 return (TypeFilter) BeanUtils.instantiateClass(filterClass);
             } else {
@@ -238,7 +232,7 @@ public class ClassModuleFactoryDefinitionParser extends AbstractModuleFactoryDef
             // 非concrete，但指定了includeAbstractClasses=true
             beanDefinition.setBeanClassName(NonInstantiatableClassFactoryBean.class.getName());
             beanDefinition.getConstructorArgumentValues().addIndexedArgumentValue(0,
-                    beanDefinition.getMetadata().getClassName(), Class.class.getName());
+                                                                                  beanDefinition.getMetadata().getClassName(), Class.class.getName());
 
             return true;
         }

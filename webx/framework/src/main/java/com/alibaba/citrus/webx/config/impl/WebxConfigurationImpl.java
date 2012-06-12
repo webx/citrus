@@ -37,7 +37,7 @@ import com.alibaba.citrus.webx.impl.WebxRootControllerImpl;
  * @author Michael Zhou
  */
 public class WebxConfigurationImpl extends PropertiesConfigurationSupport<WebxConfiguration> implements
-        WebxConfiguration {
+                                                                                             WebxConfiguration {
     public final static String DEFAULT_NAME = "webxConfiguration";
 
     public WebxConfigurationImpl() {
@@ -53,9 +53,7 @@ public class WebxConfigurationImpl extends PropertiesConfigurationSupport<WebxCo
         return DEFAULT_NAME;
     }
 
-    /**
-     * 内部链接URL的前缀。内部链接用来显示错误信息、开发者信息。
-     */
+    /** 内部链接URL的前缀。内部链接用来显示错误信息、开发者信息。 */
     public String getInternalPathPrefix() {
         return getProperty("internalPathPrefix", "internal");
     }
@@ -64,9 +62,7 @@ public class WebxConfigurationImpl extends PropertiesConfigurationSupport<WebxCo
         setProperty("internalPathPrefix", internalPathPrefix);
     }
 
-    /**
-     * Request contexts服务。
-     */
+    /** Request contexts服务。 */
     public RequestContextChainingService getRequestContexts() {
         return getBean("requestContexts", "requestContexts", RequestContextChainingService.class);
     }
@@ -75,9 +71,7 @@ public class WebxConfigurationImpl extends PropertiesConfigurationSupport<WebxCo
         setProperty("requestContexts", beanName);
     }
 
-    /**
-     * Pipeline服务。
-     */
+    /** Pipeline服务。 */
     public Pipeline getPipeline() {
         return getBean("pipeline", "pipeline", Pipeline.class, false);
     }
@@ -100,9 +94,7 @@ public class WebxConfigurationImpl extends PropertiesConfigurationSupport<WebxCo
         setProperty("exceptionPipeline", beanName);
     }
 
-    /**
-     * 取得一组关于components的配置。
-     */
+    /** 取得一组关于components的配置。 */
     public ComponentsConfig getComponentsConfig() {
         return getProperty("componentsConfig", null);
     }
@@ -112,13 +104,13 @@ public class WebxConfigurationImpl extends PropertiesConfigurationSupport<WebxCo
     }
 
     public static class ComponentsConfigImpl implements ComponentsConfig {
-        private Boolean autoDiscoverComponents;
-        private String componentConfigurationLocationPattern;
-        private Class<?> defaultControllerClass;
-        private Class<?> rootControllerClass;
-        private String defaultComponent;
+        private Boolean                      autoDiscoverComponents;
+        private String                       componentConfigurationLocationPattern;
+        private Class<?>                     defaultControllerClass;
+        private Class<?>                     rootControllerClass;
+        private String                       defaultComponent;
         private Map<String, ComponentConfig> components;
-        private WebxRootController rootController;
+        private WebxRootController           rootController;
 
         public Boolean isAutoDiscoverComponents() {
             return autoDiscoverComponents == null ? true : autoDiscoverComponents;
@@ -130,7 +122,7 @@ public class WebxConfigurationImpl extends PropertiesConfigurationSupport<WebxCo
 
         public String getComponentConfigurationLocationPattern() {
             return componentConfigurationLocationPattern == null ? "/WEB-INF/webx-*.xml"
-                    : componentConfigurationLocationPattern;
+                                                                 : componentConfigurationLocationPattern;
         }
 
         public void setComponentConfigurationLocationPattern(String componentConfigurationLocationPattern) {
@@ -162,7 +154,7 @@ public class WebxConfigurationImpl extends PropertiesConfigurationSupport<WebxCo
         }
 
         public Map<String, ComponentConfig> getComponents() {
-            return components == null ? Collections.<String, ComponentConfig> emptyMap() : components;
+            return components == null ? Collections.<String, ComponentConfig>emptyMap() : components;
         }
 
         public void setComponents(Map<String, ComponentConfig> components) {
@@ -179,8 +171,8 @@ public class WebxConfigurationImpl extends PropertiesConfigurationSupport<WebxCo
     }
 
     public static class ComponentConfigImpl implements ComponentConfig {
-        private String name;
-        private String path;
+        private String         name;
+        private String         path;
         private WebxController controller;
 
         public String getName() {

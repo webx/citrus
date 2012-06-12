@@ -23,17 +23,16 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.form.configuration.GroupConfig.Import;
 import com.alibaba.citrus.service.form.impl.configuration.FieldConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.FormConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.GroupConfigImpl;
 import com.alibaba.citrus.service.form.impl.configuration.GroupConfigImpl.ImportImpl;
+import org.junit.Before;
+import org.junit.Test;
 
 public class GroupConfigTests extends AbstractConfigTests {
-    private FormConfigImpl formConfig;
+    private FormConfigImpl  formConfig;
     private GroupConfigImpl group;
     private GroupConfigImpl group1;
     private GroupConfigImpl group2;

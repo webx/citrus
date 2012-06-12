@@ -25,17 +25,16 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.util.Comparator;
 import java.util.Map;
 
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-
 import com.alibaba.citrus.dev.handler.impl.ExplorerHandler.ExplorerVisitor;
 import com.alibaba.citrus.util.ClassUtil;
 import com.alibaba.citrus.util.templatelite.Template;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 
 public class ResolvableDepsVisitor extends AbstractFallbackVisitor<ExplorerVisitor> {
     private final Map<Class<?>, Object> resolvableDependencies;
-    private Class<?> type;
-    private Object value;
+    private       Class<?>              type;
+    private       Object                value;
     private int id = 1000;
 
     public ResolvableDepsVisitor(RequestHandlerContext context, ExplorerVisitor v) {

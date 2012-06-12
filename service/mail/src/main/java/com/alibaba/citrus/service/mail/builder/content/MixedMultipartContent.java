@@ -28,9 +28,7 @@ import javax.mail.internet.MimeMultipart;
  * @author Michael Zhou
  */
 public class MixedMultipartContent extends MultipartContent {
-    /**
-     * 取得<code>Multipart</code>的实现。
-     */
+    /** 取得<code>Multipart</code>的实现。 */
     @Override
     protected Multipart getMultipart() {
         return new MimeMultipart(CONTENT_TYPE_MULTIPART_SUBTYPE_MIXED);

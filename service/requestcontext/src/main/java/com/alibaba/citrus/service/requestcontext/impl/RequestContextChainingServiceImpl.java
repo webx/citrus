@@ -25,15 +25,9 @@ import static com.alibaba.citrus.util.ObjectUtil.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.alibaba.citrus.service.AbstractService;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
@@ -47,6 +41,10 @@ import com.alibaba.citrus.service.requestcontext.RequestContextInfo.FeatureOrder
 import com.alibaba.citrus.service.requestcontext.RequestContextInfo.RequiresFeature;
 import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
 import com.alibaba.citrus.util.ToStringBuilder;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
  * 将<code>RequestContext</code>对象串联起来的service。
@@ -55,10 +53,10 @@ import com.alibaba.citrus.util.ToStringBuilder;
  * </p>
  */
 public class RequestContextChainingServiceImpl extends AbstractService<RequestContextChainingService> implements
-        RequestContextChainingService {
+                                                                                                      RequestContextChainingService {
     private List<RequestContextFactory<?>> factories;
-    private boolean sort;
-    private boolean threadContextInheritable;
+    private boolean                        sort;
+    private boolean                        threadContextInheritable;
 
     public void setFactories(List<RequestContextFactory<?>> factories) {
         this.factories = createArrayList(assertNotNull(factories, "factories"));
@@ -116,9 +114,7 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
         getLogger().debug("Initialized {}", this);
     }
 
-    /**
-     * 对factories进行排序，以便符合各自的限定。
-     */
+    /** 对factories进行排序，以便符合各自的限定。 */
     private void sort(int index, RequestContextFactory<?> f, Map<Integer, RequestContextFactory<?>> result,
                       Set<Integer> processing) {
         if (!processing.contains(index)) {
@@ -133,9 +129,7 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
         }
     }
 
-    /**
-     * 取得所有在f之前的factories。
-     */
+    /** 取得所有在f之前的factories。 */
     private Map<Integer, RequestContextFactory<?>> getFactoriesBefore(RequestContextFactory<?> f) {
         Map<Integer, RequestContextFactory<?>> allBefore = createLinkedHashMap();
 
@@ -227,9 +221,7 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
         return false;
     }
 
-    /**
-     * 取得所有的request context的信息。
-     */
+    /** 取得所有的request context的信息。 */
     public RequestContextInfo<?>[] getRequestContextInfos() {
         return factories.toArray(new RequestContextInfo<?>[factories.size()]);
     }
@@ -238,8 +230,8 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
      * 取得<code>RequestContext</code>串。
      *
      * @param servletContext <code>ServletContext</code>对象
-     * @param request <code>HttpServletRequest</code>对象
-     * @param response <code>HttpServletResponse</code>对象
+     * @param request        <code>HttpServletRequest</code>对象
+     * @param response       <code>HttpServletResponse</code>对象
      * @return request context
      */
     public RequestContext getRequestContext(ServletContext servletContext, HttpServletRequest request,
@@ -330,7 +322,7 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
 
         for (RequestContextFactory<?> factory : factories) {
             buf.format("  %s with features %s, ordering %s\n", factory.getRequestContextInterface().getSimpleName(),
-                    asList(factory.getFeatures()), asList(factory.featureOrders()));
+                       asList(factory.getFeatures()), asList(factory.featureOrders()));
         }
 
         return buf.end().toString();

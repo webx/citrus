@@ -69,7 +69,7 @@ public class MessageFormatterTests {
     public void specialFormat_exception() {
         assertEquals("hello IllegalArgumentException", msgs.format(MyMessages.b, new IllegalArgumentException()));
         assertEquals("hello IllegalArgumentException - error",
-                msgs.format(MyMessages.b, new IllegalArgumentException("error")));
+                     msgs.format(MyMessages.b, new IllegalArgumentException("error")));
     }
 
     @Test
@@ -97,9 +97,9 @@ public class MessageFormatterTests {
     @Test
     public void specialFormat_method() throws Exception {
         assertEquals("hello boolean String.startsWith(String, int)",
-                msgs.format(MyMessages.b, String.class.getMethod("startsWith", String.class, int.class)));
+                     msgs.format(MyMessages.b, String.class.getMethod("startsWith", String.class, int.class)));
 
         assertEquals("hello FileInputStream(String) throws FileNotFoundException",
-                msgs.format(MyMessages.b, FileInputStream.class.getConstructor(String.class)));
+                     msgs.format(MyMessages.b, FileInputStream.class.getConstructor(String.class)));
     }
 }

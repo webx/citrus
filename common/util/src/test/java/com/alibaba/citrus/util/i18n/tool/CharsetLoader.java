@@ -76,7 +76,7 @@ public class CharsetLoader extends CharsetTool {
                         String str = strs[j];
 
                         if (str.length() != 1 || str.charAt(0) == '?' || str.charAt(0) == 0xFFFD
-                                || str.charAt(0) == 0x25A1) {
+                            || str.charAt(0) == 0x25A1) {
                             if (!blockErrorNotified) {
                                 blockErrorNotified = true;
                                 System.out.flush();

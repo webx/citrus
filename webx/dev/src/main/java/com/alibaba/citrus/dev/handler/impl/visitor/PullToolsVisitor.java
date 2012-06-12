@@ -39,8 +39,8 @@ import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 
 public class PullToolsVisitor extends AbstractFallbackVisitor<ExplorerVisitor> {
     private final PullService tools;
-    private final Entry rootEntry;
-    private Entry entry;
+    private final Entry       rootEntry;
+    private       Entry       entry;
 
     public PullToolsVisitor(RequestHandlerContext context, ExplorerVisitor v, PullService tools) {
         super(context, v);
@@ -108,7 +108,7 @@ public class PullToolsVisitor extends AbstractFallbackVisitor<ExplorerVisitor> {
     }
 
     public void visitTool(Template toolTemplate) {
-        for (Iterator<Entry> i = entry.subEntries.values().iterator(); i.hasNext();) {
+        for (Iterator<Entry> i = entry.subEntries.values().iterator(); i.hasNext(); ) {
             entry = i.next();
             toolTemplate.accept(this);
         }
@@ -191,7 +191,7 @@ public class PullToolsVisitor extends AbstractFallbackVisitor<ExplorerVisitor> {
         private final String name;
         private final Map<String, Entry> subEntries = createLinkedHashMap();
 
-        private Object value;
+        private Object  value;
         private boolean parentEntry;
 
         public Entry(String name) {

@@ -25,13 +25,6 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.config.BeanDefinitionHolder;
-import org.springframework.beans.factory.config.RuntimeBeanReference;
-import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.service.mail.builder.MailAddressType;
 import com.alibaba.citrus.service.mail.session.MailStore;
 import com.alibaba.citrus.service.mail.session.MailTransport;
@@ -39,10 +32,15 @@ import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
+import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.config.RuntimeBeanReference;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 public class MailServiceDefinitionParser extends AbstractNamedBeanDefinitionParser<MailServiceImpl> implements
-        ContributionAware {
+                                                                                                    ContributionAware {
     private ConfigurationPoint contentsConfigurationPoint;
 
     public void setContribution(Contribution contrib) {
@@ -117,7 +115,7 @@ public class MailServiceDefinitionParser extends AbstractNamedBeanDefinitionPars
 
         for (MailAddressType addrType : MailAddressType.values()) {
             addrs.put(addrType.name(),
-                    getAddresses(element, parserContext, and(sameNs(element), name(addrType.getTagName()))));
+                      getAddresses(element, parserContext, and(sameNs(element), name(addrType.getTagName()))));
         }
 
         builder.addPropertyValue("addresses", addrs);
@@ -134,7 +132,7 @@ public class MailServiceDefinitionParser extends AbstractNamedBeanDefinitionPars
 
         if (contentElement != null) {
             builder.addPropertyValue("content",
-                    parseConfigurationPointBean(contentElement, contentsConfigurationPoint, parserContext, builder));
+                                     parseConfigurationPointBean(contentElement, contentsConfigurationPoint, parserContext, builder));
         }
 
         return getBeanDefinitionHolder(element, builder);

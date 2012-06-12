@@ -28,9 +28,9 @@ package com.alibaba.citrus.service.pull;
  * 该类型的对象的性能不如<code>ToolSetFactory</code>，请尽量使用后者。
  * </p>
  *
+ * @author Michael Zhou
  * @see ToolFactory
  * @see ToolSetFactory
- * @author Michael Zhou
  */
 public interface RuntimeToolSetFactory {
     /**

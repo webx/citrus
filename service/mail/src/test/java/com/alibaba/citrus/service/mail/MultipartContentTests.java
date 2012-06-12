@@ -20,10 +20,6 @@ package com.alibaba.citrus.service.mail;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import com.alibaba.citrus.service.mail.builder.MailContent;
 import com.alibaba.citrus.service.mail.builder.content.AlternativeMultipartContent;
 import com.alibaba.citrus.service.mail.builder.content.MixedMultipartContent;
@@ -33,6 +29,9 @@ import com.alibaba.citrus.test.runner.Prototyped;
 import com.alibaba.citrus.test.runner.Prototyped.Prototypes;
 import com.alibaba.citrus.test.runner.Prototyped.TestData;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * 测试两个multipart content的功能。
@@ -41,12 +40,12 @@ import com.alibaba.citrus.test.runner.Prototyped.TestName;
  */
 @RunWith(Prototyped.class)
 public class MultipartContentTests extends AbstractMailBuilderTests implements Cloneable {
-    private TextContent content1;
-    private TextContent content2;
-    private Class<?> multipartClass;
-    private String multipartClassName;
+    private TextContent      content1;
+    private TextContent      content2;
+    private Class<?>         multipartClass;
+    private String           multipartClassName;
     private MultipartContent multipart;
-    private String multipartContentType;
+    private String           multipartContentType;
 
     @Before
     public void init() throws Exception {
@@ -110,12 +109,12 @@ public class MultipartContentTests extends AbstractMailBuilderTests implements C
     @Test
     public void render() throws Exception {
         assertThat(getMessageAsText(), containsAllRegex( //
-                "Content-Type: " + multipartContentType + ";\\s+boundary=\"--.+\"" + REGEX_EOL, //
-                "Content-Type: text/plain; charset=UTF-8" + REGEX_EOL, //
-                "Content-Transfer-Encoding: 8bit" + REGEX_EOL, //
-                "Content-Type: text/html; charset=UTF-8" + REGEX_EOL, //
-                "content1" + REGEX_EOL, //
-                "content2" + REGEX_EOL));
+                                                         "Content-Type: " + multipartContentType + ";\\s+boundary=\"--.+\"" + REGEX_EOL, //
+                                                         "Content-Type: text/plain; charset=UTF-8" + REGEX_EOL, //
+                                                         "Content-Transfer-Encoding: 8bit" + REGEX_EOL, //
+                                                         "Content-Type: text/html; charset=UTF-8" + REGEX_EOL, //
+                                                         "content1" + REGEX_EOL, //
+                                                         "content2" + REGEX_EOL));
     }
 
     @Test
@@ -135,5 +134,4 @@ public class MultipartContentTests extends AbstractMailBuilderTests implements C
 
         assertEquals(result, multipart.toString());
     }
-
 }

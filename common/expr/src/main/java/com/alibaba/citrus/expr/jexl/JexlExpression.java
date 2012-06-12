@@ -19,13 +19,12 @@ package com.alibaba.citrus.expr.jexl;
 
 import static com.alibaba.citrus.util.Assert.*;
 
+import com.alibaba.citrus.expr.ExpressionContext;
+import com.alibaba.citrus.expr.support.ExpressionSupport;
 import org.apache.commons.jexl2.Expression;
 import org.apache.commons.jexl2.JexlContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.alibaba.citrus.expr.ExpressionContext;
-import com.alibaba.citrus.expr.support.ExpressionSupport;
 
 /**
  * 代表一个jexl表达式。
@@ -81,9 +80,7 @@ public class JexlExpression extends ExpressionSupport {
         }
     }
 
-    /**
-     * 将<code>ExpressionContext</code>适配到<code>JexlContext</code>。
-     */
+    /** 将<code>ExpressionContext</code>适配到<code>JexlContext</code>。 */
     private static class JexlContextAdapter implements JexlContext {
         private ExpressionContext expressionContext;
 

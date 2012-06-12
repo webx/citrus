@@ -48,20 +48,15 @@
 
 package com.alibaba.citrus.hessian.io;
 
-import com.alibaba.citrus.burlap.io.BurlapRemoteObject;
-
 import java.io.IOException;
 
-/**
- * Serializing a remote object.
- */
+/** Serializing a remote object. */
 public class RemoteSerializer extends AbstractSerializer {
-  public void writeObject(Object obj, AbstractHessianOutput out)
-    throws IOException
-  {
-    HessianRemoteObject remoteObject = (HessianRemoteObject) obj;
+    public void writeObject(Object obj, AbstractHessianOutput out)
+            throws IOException {
+        HessianRemoteObject remoteObject = (HessianRemoteObject) obj;
 
-    out.writeObject(new HessianRemote(remoteObject.getHessianType(),
-                                      remoteObject.getHessianURL()));
-  }
+        out.writeObject(new HessianRemote(remoteObject.getHessianType(),
+                                          remoteObject.getHessianURL()));
+    }
 }

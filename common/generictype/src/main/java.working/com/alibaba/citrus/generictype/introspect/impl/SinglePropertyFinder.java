@@ -42,8 +42,6 @@ public abstract class SinglePropertyFinder extends AbstractTypeVisitor implement
         }
     }
 
-    /**
-     * 根据类型创建一个{@link PropertyInfo}实例，如果类型不支持，则返回<code>null</code>。
-     */
+    /** 根据类型创建一个{@link PropertyInfo}实例，如果类型不支持，则返回<code>null</code>。 */
     protected abstract PropertyInfo createPropertyInfo(TypeInfo type);
 }

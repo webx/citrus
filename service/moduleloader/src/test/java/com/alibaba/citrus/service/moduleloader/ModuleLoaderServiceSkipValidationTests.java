@@ -25,6 +25,9 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
+import com.alibaba.citrus.service.moduleloader.impl.ModuleLoaderServiceImpl;
+import com.alibaba.citrus.service.moduleloader.impl.factory.ClassModuleFactory;
+import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,15 +37,11 @@ import org.junit.runners.Parameterized.Parameters;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 
-import com.alibaba.citrus.service.moduleloader.impl.ModuleLoaderServiceImpl;
-import com.alibaba.citrus.service.moduleloader.impl.factory.ClassModuleFactory;
-import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
-
 @RunWith(Parameterized.class)
 public class ModuleLoaderServiceSkipValidationTests {
-    private final boolean skipValidation;
-    private ApplicationContext factory;
-    private ModuleLoaderServiceImpl moduleLoaderService;
+    private final boolean                 skipValidation;
+    private       ApplicationContext      factory;
+    private       ModuleLoaderServiceImpl moduleLoaderService;
 
     public ModuleLoaderServiceSkipValidationTests(boolean skipValidation) {
         this.skipValidation = skipValidation;

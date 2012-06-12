@@ -21,15 +21,14 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pipeline.Condition;
 import com.alibaba.citrus.service.pipeline.Pipeline;
 import com.alibaba.citrus.service.pipeline.TooManyLoopsException;
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import com.alibaba.citrus.service.pipeline.impl.condition.JexlCondition;
 import com.alibaba.citrus.service.pipeline.impl.valve.WhileLoopValve;
+import org.junit.Before;
+import org.junit.Test;
 
 public class WhileLoopValveTests extends AbstractLoopValveTests<WhileLoopValve> {
     private Condition condition;
@@ -115,10 +114,10 @@ public class WhileLoopValveTests extends AbstractLoopValveTests<WhileLoopValve> 
 
         assertInvoke(pipeline, false);
         assertLog("1-1", //
-                "2-1-loop-0", "2-2-loop-0", "2-3-loop-0", //
-                "2-1-loop-1", "2-2-loop-1", "2-3-loop-1", //
-                "2-1-loop-2", "2-2-loop-2", "2-3-loop-2", //
-                "1-3");
+                  "2-1-loop-0", "2-2-loop-0", "2-3-loop-0", //
+                  "2-1-loop-1", "2-2-loop-1", "2-3-loop-1", //
+                  "2-1-loop-2", "2-2-loop-2", "2-3-loop-2", //
+                  "1-3");
 
         // set maxLoopCount = 1
         valve.setMaxLoopCount(1);
@@ -131,7 +130,7 @@ public class WhileLoopValveTests extends AbstractLoopValveTests<WhileLoopValve> 
         }
 
         assertLog("1-1", //
-                "2-1-loop-0", "2-2-loop-0", "2-3-loop-0");
+                  "2-1-loop-0", "2-2-loop-0", "2-3-loop-0");
     }
 
     @Test
@@ -142,10 +141,10 @@ public class WhileLoopValveTests extends AbstractLoopValveTests<WhileLoopValve> 
 
         assertInvoke(pipeline, false);
         assertLog("1-1", //
-                "2-1-loop-0", "2-2-loop-0", "2-3-loop-0", //
-                "2-1-loop-1", "2-2-loop-1", "2-3-loop-1", //
-                "2-1-loop-2", "2-2-loop-2", "2-3-loop-2", //
-                "1-3");
+                  "2-1-loop-0", "2-2-loop-0", "2-3-loop-0", //
+                  "2-1-loop-1", "2-2-loop-1", "2-3-loop-1", //
+                  "2-1-loop-2", "2-2-loop-2", "2-3-loop-2", //
+                  "1-3");
 
         // break
         pipeline = getPipelineImplFromFactory("while-loop-break-to-label");
@@ -153,12 +152,12 @@ public class WhileLoopValveTests extends AbstractLoopValveTests<WhileLoopValve> 
 
         assertInvoke(pipeline, false);
         assertLog("1-1", //
-                "2-1-loop-0" /* break-unless */, "2-3-loop-0", //
-                "2-1-loop-1" /* break-unless */, "2-3-loop-1", //
-                "2-1-loop-2" /* break-unless */, "2-3-loop-2", //
-                "2-1-loop-3" /* break-unless */, "2-3-loop-3", //
-                "2-1-loop-4", /* break *///
-                "1-3");
+                  "2-1-loop-0" /* break-unless */, "2-3-loop-0", //
+                  "2-1-loop-1" /* break-unless */, "2-3-loop-1", //
+                  "2-1-loop-2" /* break-unless */, "2-3-loop-2", //
+                  "2-1-loop-3" /* break-unless */, "2-3-loop-3", //
+                  "2-1-loop-4", /* break *///
+                  "1-3");
 
         // loop with maxLoopCount=2
         pipeline = getPipelineImplFromFactory("while-loop-max-loop-count");
@@ -171,16 +170,16 @@ public class WhileLoopValveTests extends AbstractLoopValveTests<WhileLoopValve> 
         }
 
         assertLog("1-1" /* 1-2 <loop/> */, //
-                "2-1-loop-0", "2-2-loop-0", "2-3-loop-0", //
-                "2-1-loop-1", "2-2-loop-1", "2-3-loop-1" //
+                  "2-1-loop-0", "2-2-loop-0", "2-3-loop-0", //
+                  "2-1-loop-1", "2-2-loop-1", "2-3-loop-1" //
         );
 
         // pipeline reference
         pipeline = getPipelineImplFromFactory("while-ref");
         assertInvoke(pipeline, false);
         assertLog("1-1", //
-                "2-1-loop-0", "2-2-loop-0", //
-                "2-1-loop-1", "2-2-loop-1", //
-                "1-3");
+                  "2-1-loop-0", "2-2-loop-0", //
+                  "2-1-loop-1", "2-2-loop-1", //
+                  "1-3");
     }
 }

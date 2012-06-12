@@ -27,15 +27,13 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.junit.Test;
 
 import com.alibaba.citrus.service.uribroker.interceptor.URIBrokerPathInterceptor;
 import com.alibaba.citrus.service.uribroker.uri.URIBroker.URIType;
 import com.alibaba.citrus.springext.util.ProxyTargetFactory;
 import com.alibaba.citrus.util.i18n.LocaleUtil;
+import org.junit.Test;
 
 public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<GenericURIBroker> {
     @Override
@@ -91,7 +89,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
         assertEquals("/aa/bb", broker.getPath());
         assertEquals("/aa/bb", broker.getPath());
         assertArrayEquals(new String[] { "aa", "bb" },
-                broker.getPathElements().toArray(new String[broker.getPathElements().size()]));
+                          broker.getPathElements().toArray(new String[broker.getPathElements().size()]));
 
         assertEquals(2, broker.getQuery().size());
         Iterator<Map.Entry<String, Object>> i = broker.getQuery().entrySet().iterator();
@@ -114,7 +112,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
 
         assertEquals("/aa/bb/cc/dd", broker.getPath());
         assertArrayEquals(new String[] { "aa", "bb", "cc", "dd" },
-                broker.getPathElements().toArray(new String[broker.getPathElements().size()]));
+                          broker.getPathElements().toArray(new String[broker.getPathElements().size()]));
 
         assertEquals(3, broker.getQuery().size());
         Iterator<Map.Entry<String, Object>> i = broker.getQuery().entrySet().iterator();
@@ -1076,7 +1074,7 @@ public class GenericURIBrokerTests extends AbstractURIBrokerFeaturesTests<Generi
 
     private HttpServletRequest getMockRequest_withRequestURI(String scheme, String serverName, int port) {
         HttpServletRequest request = getMockRequest_noReplay(scheme, serverName, port, "/hello", "/world/index.html",
-                null);
+                                                             null);
 
         expect(request.getRequestURI()).andReturn("/hello/world/index.html?a=1&b=2").anyTimes();
         replay(request);

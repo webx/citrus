@@ -23,12 +23,11 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.Writer;
 
+import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
+import com.alibaba.citrus.util.io.ByteArray;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
-import com.alibaba.citrus.util.io.ByteArray;
 
 /**
  * 测试<code>BufferedRequestContext</code>。
@@ -121,9 +120,7 @@ public class BufferedRequestContextTests extends AbstractRequestContextsTests<Bu
         assertEquals("abc", chars);
     }
 
-    /**
-     * 先getWriter，再getOutputStream，此时将创建一个适配器。
-     */
+    /** 先getWriter，再getOutputStream，此时将创建一个适配器。 */
     @Test
     public void writeBytesAndReadChars() throws Exception {
         @SuppressWarnings("unused")
@@ -160,9 +157,7 @@ public class BufferedRequestContextTests extends AbstractRequestContextsTests<Bu
         assertEquals("abc", chars);
     }
 
-    /**
-     * 先getOutputStream，再getWriter，此时将创建一个适配器。
-     */
+    /** 先getOutputStream，再getWriter，此时将创建一个适配器。 */
     @Test
     public void writeCharsAndReadBytes() throws Exception {
         @SuppressWarnings("unused")

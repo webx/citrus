@@ -30,8 +30,8 @@ import com.alibaba.citrus.webx.util.WebxUtil;
  * @author Michael Zhou
  */
 public class MainHandler extends LayoutRequestProcessor {
-    private final KeyValuesComponent keyValuesComponent = new KeyValuesComponent(this, "keyValues");
-    private final SystemInfoComponent sysinfoComponent = new SystemInfoComponent(this, "sysinfo", keyValuesComponent);
+    private final KeyValuesComponent  keyValuesComponent = new KeyValuesComponent(this, "keyValues");
+    private final SystemInfoComponent sysinfoComponent   = new SystemInfoComponent(this, "sysinfo", keyValuesComponent);
 
     @Override
     protected String getTitle(Object bodyVisitor) {

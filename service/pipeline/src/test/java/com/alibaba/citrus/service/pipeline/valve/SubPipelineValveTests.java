@@ -20,9 +20,8 @@ package com.alibaba.citrus.service.pipeline.valve;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pipeline.impl.valve.SubPipelineValve;
+import org.junit.Test;
 
 public class SubPipelineValveTests extends AbstractValveTests<SubPipelineValve> {
     @Test
@@ -84,8 +83,8 @@ public class SubPipelineValveTests extends AbstractValveTests<SubPipelineValve> 
 
         assertInvoke(pipeline, false);
         assertLog("1-1" /* sub-pipeline */, //
-                "2-1", "2-2", "2-3", //
-                "1-3");
+                  "2-1", "2-2", "2-3", //
+                  "1-3");
     }
 
     @Test
@@ -99,15 +98,15 @@ public class SubPipelineValveTests extends AbstractValveTests<SubPipelineValve> 
         pipeline = getPipelineImplFromFactory("sub-pipelines");
         assertInvoke(pipeline, false);
         assertLog("1-1" /* sub-pipeline */, //
-                "2-1" /* sub-pipeline */, //
-                "3-1" /* break to label1 */, //
-                "1-3");
+                  "2-1" /* sub-pipeline */, //
+                  "3-1" /* break to label1 */, //
+                  "1-3");
 
         // pipeline reference
         pipeline = getPipelineImplFromFactory("sub-pipeline-ref");
         assertInvoke(pipeline, false);
         assertLog("1-1" /* sub-pipeline */, //
-                "2-1", //
-                "1-3");
+                  "2-1", //
+                  "1-3");
     }
 }

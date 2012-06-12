@@ -48,70 +48,64 @@
 
 package com.alibaba.citrus.hessian.io;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import java.util.logging.*;
-
-import com.alibaba.citrus.hessian.HessianException;
-
-/**
- * Proxy for a java annotation for known object types.
- */
+/** Proxy for a java annotation for known object types. */
 public class AnnotationInvocationHandler implements InvocationHandler {
-  private Class _annType;
-  private HashMap<String,Object> _valueMap;
+    private Class                   _annType;
+    private HashMap<String, Object> _valueMap;
 
-  public AnnotationInvocationHandler(Class annType,
-				     HashMap<String,Object> valueMap)
-  {
-    _annType = annType;
-    _valueMap = valueMap;
-  }
-
-  public Object invoke(Object proxy, Method method, Object []args)
-    throws Throwable
-  {
-    String name = method.getName();
-
-    if (args != null && args.length != 0)
-      return null;
-
-    if (name.equals("annotationType"))
-      return _annType;
-    else if (name.equals("toString"))
-      return toString();
-
-    return _valueMap.get(method.getName());
-  }
-
-  public String toString()
-  {
-    StringBuilder sb = new StringBuilder();
-
-    sb.append("@");
-    sb.append(_annType.getName());
-    sb.append("[");
-
-    boolean isFirst = true;
-    for (Map.Entry entry : _valueMap.entrySet()) {
-      if (! isFirst)
-	sb.append(", ");
-      isFirst = false;
-
-      sb.append(entry.getKey());
-      sb.append("=");
-
-      if (entry.getValue() instanceof String)
-	sb.append('"').append(entry.getValue()).append('"');
-      else
-	sb.append(entry.getValue());
+    public AnnotationInvocationHandler(Class annType,
+                                       HashMap<String, Object> valueMap) {
+        _annType = annType;
+        _valueMap = valueMap;
     }
-    sb.append("]");
 
-    return sb.toString();
-  }
+    public Object invoke(Object proxy, Method method, Object[] args)
+            throws Throwable {
+        String name = method.getName();
+
+        if (args != null && args.length != 0) {
+            return null;
+        }
+
+        if (name.equals("annotationType")) {
+            return _annType;
+        } else if (name.equals("toString")) {
+            return toString();
+        }
+
+        return _valueMap.get(method.getName());
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("@");
+        sb.append(_annType.getName());
+        sb.append("[");
+
+        boolean isFirst = true;
+        for (Map.Entry entry : _valueMap.entrySet()) {
+            if (!isFirst) {
+                sb.append(", ");
+            }
+            isFirst = false;
+
+            sb.append(entry.getKey());
+            sb.append("=");
+
+            if (entry.getValue() instanceof String) {
+                sb.append('"').append(entry.getValue()).append('"');
+            } else {
+                sb.append(entry.getValue());
+            }
+        }
+        sb.append("]");
+
+        return sb.toString();
+    }
 }

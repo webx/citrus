@@ -25,9 +25,7 @@ package com.alibaba.citrus.service.upload;
 public class UploadSizeLimitExceededException extends UploadException {
     private static final long serialVersionUID = 3835158363137716276L;
 
-    /**
-     * 创建一个异常。
-     */
+    /** 创建一个异常。 */
     public UploadSizeLimitExceededException() {
         super();
     }
@@ -45,7 +43,7 @@ public class UploadSizeLimitExceededException extends UploadException {
      * 创建一个异常。
      *
      * @param message 异常信息
-     * @param cause 异常原因
+     * @param cause   异常原因
      */
     public UploadSizeLimitExceededException(String message, Throwable cause) {
         super(message, cause);

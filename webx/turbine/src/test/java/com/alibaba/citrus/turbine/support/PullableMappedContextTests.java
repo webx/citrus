@@ -26,11 +26,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.alibaba.citrus.service.pull.PullContext;
 import com.alibaba.citrus.turbine.Context;
+import org.junit.Before;
+import org.junit.Test;
 
 public class PullableMappedContextTests {
     private Context parent;
@@ -46,7 +45,7 @@ public class PullableMappedContextTests {
         Set<String> names = createHashSet(Arrays.asList("pull1", "pull2"));
         expect(pullContext.getToolNames()).andReturn(names).anyTimes();
 
-        expect(pullContext.pull(org.easymock.EasyMock.<String> anyObject())).andReturn(null).anyTimes();
+        expect(pullContext.pull(org.easymock.EasyMock.<String>anyObject())).andReturn(null).anyTimes();
 
         replay(pullContext);
 

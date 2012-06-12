@@ -23,20 +23,18 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 import java.util.Properties;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.NoSuchProviderException;
 import javax.mail.Store;
 import javax.mail.internet.AddressException;
 
-import org.junit.Test;
-import org.jvnet.mock_javamail.Mailbox;
-
 import com.alibaba.citrus.service.mail.MailException;
 import com.alibaba.citrus.service.mail.MailService;
 import com.alibaba.citrus.service.mail.mock.MyMockStore;
 import com.alibaba.citrus.service.mail.support.DefaultMailStoreHandler;
+import org.junit.Test;
+import org.jvnet.mock_javamail.Mailbox;
 
 public class MailStoreTests extends AbstractMailSessionTests<MailStore> {
     @Test
@@ -336,8 +334,8 @@ public class MailStoreTests extends AbstractMailSessionTests<MailStore> {
 
     public static class MyHandler extends DefaultMailStoreHandler {
         private final List<Message> msgs = createArrayList();
-        private int messageCount;
-        private final int receiveMax;
+        private       int     messageCount;
+        private final int     receiveMax;
         private final boolean delete;
 
         private MyHandler() {

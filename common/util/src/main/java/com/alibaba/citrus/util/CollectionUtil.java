@@ -46,23 +46,17 @@ import com.alibaba.citrus.util.collection.ArrayHashSet;
  * @author Michael Zhou
  */
 public final class CollectionUtil {
-    /**
-     * 创建一个<code>ArrayList</code>。
-     */
+    /** 创建一个<code>ArrayList</code>。 */
     public static <T> ArrayList<T> createArrayList() {
         return new ArrayList<T>();
     }
 
-    /**
-     * 创建一个<code>ArrayList</code>。
-     */
+    /** 创建一个<code>ArrayList</code>。 */
     public static <T> ArrayList<T> createArrayList(int initialCapacity) {
         return new ArrayList<T>(initialCapacity);
     }
 
-    /**
-     * 创建一个<code>ArrayList</code>。
-     */
+    /** 创建一个<code>ArrayList</code>。 */
     public static <T> ArrayList<T> createArrayList(Iterable<? extends T> c) {
         ArrayList<T> list;
 
@@ -79,9 +73,7 @@ public final class CollectionUtil {
         return list;
     }
 
-    /**
-     * 创建一个<code>ArrayList</code>。
-     */
+    /** 创建一个<code>ArrayList</code>。 */
     public static <T, V extends T> ArrayList<T> createArrayList(V... args) {
         if (args == null || args.length == 0) {
             return new ArrayList<T>();
@@ -96,16 +88,12 @@ public final class CollectionUtil {
         }
     }
 
-    /**
-     * 创建一个<code>LinkedList</code>。
-     */
+    /** 创建一个<code>LinkedList</code>。 */
     public static <T> LinkedList<T> createLinkedList() {
         return new LinkedList<T>();
     }
 
-    /**
-     * 创建一个<code>LinkedList</code>。
-     */
+    /** 创建一个<code>LinkedList</code>。 */
     public static <T> LinkedList<T> createLinkedList(Iterable<? extends T> c) {
         LinkedList<T> list = new LinkedList<T>();
 
@@ -114,9 +102,7 @@ public final class CollectionUtil {
         return list;
     }
 
-    /**
-     * 创建一个<code>LinkedList</code>。
-     */
+    /** 创建一个<code>LinkedList</code>。 */
     public static <T, V extends T> LinkedList<T> createLinkedList(V... args) {
         LinkedList<T> list = new LinkedList<T>();
 
@@ -144,79 +130,57 @@ public final class CollectionUtil {
         }
     }
 
-    /**
-     * 创建一个<code>HashMap</code>。
-     */
+    /** 创建一个<code>HashMap</code>。 */
     public static <K, V> HashMap<K, V> createHashMap() {
         return new HashMap<K, V>();
     }
 
-    /**
-     * 创建一个<code>HashMap</code>。
-     */
+    /** 创建一个<code>HashMap</code>。 */
     public static <K, V> HashMap<K, V> createHashMap(int initialCapacity) {
         return new HashMap<K, V>(initialCapacity);
     }
 
-    /**
-     * 创建一个<code>ArrayHashMap</code>。
-     */
+    /** 创建一个<code>ArrayHashMap</code>。 */
     public static <K, V> ArrayHashMap<K, V> createArrayHashMap() {
         return new ArrayHashMap<K, V>();
     }
 
-    /**
-     * 创建一个<code>ArrayHashMap</code>。
-     */
+    /** 创建一个<code>ArrayHashMap</code>。 */
     public static <K, V> ArrayHashMap<K, V> createArrayHashMap(int initialCapacity) {
         return new ArrayHashMap<K, V>(initialCapacity);
     }
 
-    /**
-     * 创建一个<code>LinkedHashMap</code>。
-     */
+    /** 创建一个<code>LinkedHashMap</code>。 */
     public static <K, V> LinkedHashMap<K, V> createLinkedHashMap() {
         return new LinkedHashMap<K, V>();
     }
 
-    /**
-     * 创建一个<code>LinkedHashMap</code>。
-     */
+    /** 创建一个<code>LinkedHashMap</code>。 */
     public static <K, V> LinkedHashMap<K, V> createLinkedHashMap(int initialCapacity) {
         return new LinkedHashMap<K, V>(initialCapacity);
     }
 
-    /**
-     * 创建一个<code>TreeMap</code>。
-     */
+    /** 创建一个<code>TreeMap</code>。 */
     public static <K, V> TreeMap<K, V> createTreeMap() {
         return new TreeMap<K, V>();
     }
 
-    /**
-     * 创建一个<code>TreeMap</code>。
-     */
+    /** 创建一个<code>TreeMap</code>。 */
     public static <K, V> TreeMap<K, V> createTreeMap(Comparator<? super K> comparator) {
         return new TreeMap<K, V>(comparator);
     }
 
-    /**
-     * 创建一个<code>ConcurrentHashMap</code>。
-     */
+    /** 创建一个<code>ConcurrentHashMap</code>。 */
     public static <K, V> ConcurrentHashMap<K, V> createConcurrentHashMap() {
         return new ConcurrentHashMap<K, V>();
     }
 
-    /**
-     * 创建一个<code>HashSet</code>。
-     */
+    /** 创建一个<code>HashSet</code>。 */
     public static <T> HashSet<T> createHashSet() {
         return new HashSet<T>();
     }
 
-    /**
-     * 创建一个<code>HashSet</code>。
-     */
+    /** 创建一个<code>HashSet</code>。 */
     public static <T, V extends T> HashSet<T> createHashSet(V... args) {
         if (args == null || args.length == 0) {
             return new HashSet<T>();
@@ -231,9 +195,7 @@ public final class CollectionUtil {
         }
     }
 
-    /**
-     * 创建一个<code>HashSet</code>。
-     */
+    /** 创建一个<code>HashSet</code>。 */
     public static <T> HashSet<T> createHashSet(Iterable<? extends T> c) {
         HashSet<T> set;
 
@@ -247,16 +209,12 @@ public final class CollectionUtil {
         return set;
     }
 
-    /**
-     * 创建一个<code>ArrayHashSet</code>。
-     */
+    /** 创建一个<code>ArrayHashSet</code>。 */
     public static <T> ArrayHashSet<T> createArrayHashSet() {
         return new ArrayHashSet<T>();
     }
 
-    /**
-     * 创建一个<code>ArrayHashSet</code>。
-     */
+    /** 创建一个<code>ArrayHashSet</code>。 */
     public static <T, V extends T> ArrayHashSet<T> createArrayHashSet(V... args) {
         if (args == null || args.length == 0) {
             return new ArrayHashSet<T>();
@@ -271,9 +229,7 @@ public final class CollectionUtil {
         }
     }
 
-    /**
-     * 创建一个<code>ArrayHashSet</code>。
-     */
+    /** 创建一个<code>ArrayHashSet</code>。 */
     public static <T> ArrayHashSet<T> createArrayHashSet(Iterable<? extends T> c) {
         ArrayHashSet<T> set;
 
@@ -287,16 +243,12 @@ public final class CollectionUtil {
         return set;
     }
 
-    /**
-     * 创建一个<code>LinkedHashSet</code>。
-     */
+    /** 创建一个<code>LinkedHashSet</code>。 */
     public static <T> LinkedHashSet<T> createLinkedHashSet() {
         return new LinkedHashSet<T>();
     }
 
-    /**
-     * 创建一个<code>LinkedHashSet</code>。
-     */
+    /** 创建一个<code>LinkedHashSet</code>。 */
     public static <T, V extends T> LinkedHashSet<T> createLinkedHashSet(V... args) {
         if (args == null || args.length == 0) {
             return new LinkedHashSet<T>();
@@ -311,9 +263,7 @@ public final class CollectionUtil {
         }
     }
 
-    /**
-     * 创建一个<code>LinkedHashSet</code>。
-     */
+    /** 创建一个<code>LinkedHashSet</code>。 */
     public static <T> LinkedHashSet<T> createLinkedHashSet(Iterable<? extends T> c) {
         LinkedHashSet<T> set;
 
@@ -327,38 +277,28 @@ public final class CollectionUtil {
         return set;
     }
 
-    /**
-     * 创建一个<code>TreeSet</code>。
-     */
+    /** 创建一个<code>TreeSet</code>。 */
     public static <T> TreeSet<T> createTreeSet() {
         return new TreeSet<T>();
     }
 
-    /**
-     * 创建一个<code>TreeSet</code>。
-     */
+    /** 创建一个<code>TreeSet</code>。 */
     @SuppressWarnings("unchecked")
     public static <T, V extends T> TreeSet<T> createTreeSet(V... args) {
         return (TreeSet<T>) createTreeSet(null, args);
     }
 
-    /**
-     * 创建一个<code>TreeSet</code>。
-     */
+    /** 创建一个<code>TreeSet</code>。 */
     public static <T> TreeSet<T> createTreeSet(Iterable<? extends T> c) {
         return createTreeSet(null, c);
     }
 
-    /**
-     * 创建一个<code>TreeSet</code>。
-     */
+    /** 创建一个<code>TreeSet</code>。 */
     public static <T> TreeSet<T> createTreeSet(Comparator<? super T> comparator) {
         return new TreeSet<T>(comparator);
     }
 
-    /**
-     * 创建一个<code>TreeSet</code>。
-     */
+    /** 创建一个<code>TreeSet</code>。 */
     public static <T, V extends T> TreeSet<T> createTreeSet(Comparator<? super T> comparator, V... args) {
         TreeSet<T> set = new TreeSet<T>(comparator);
 
@@ -371,9 +311,7 @@ public final class CollectionUtil {
         return set;
     }
 
-    /**
-     * 创建一个<code>TreeSet</code>。
-     */
+    /** 创建一个<code>TreeSet</code>。 */
     public static <T> TreeSet<T> createTreeSet(Comparator<? super T> comparator, Iterable<? extends T> c) {
         TreeSet<T> set = new TreeSet<T>(comparator);
 
@@ -382,9 +320,7 @@ public final class CollectionUtil {
         return set;
     }
 
-    /**
-     * 将列表中的对象连接成字符串。
-     */
+    /** 将列表中的对象连接成字符串。 */
     public static String join(Iterable<?> objs, String sep) {
         StringBuilder buf = new StringBuilder();
 
@@ -393,9 +329,7 @@ public final class CollectionUtil {
         return buf.toString();
     }
 
-    /**
-     * 将列表中的对象连接起来。
-     */
+    /** 将列表中的对象连接起来。 */
     public static void join(StringBuilder buf, Iterable<?> objs, String sep) {
         try {
             join((Appendable) buf, objs, sep);
@@ -404,9 +338,7 @@ public final class CollectionUtil {
         }
     }
 
-    /**
-     * 将列表中的对象连接起来。
-     */
+    /** 将列表中的对象连接起来。 */
     public static void join(Appendable buf, Iterable<?> objs, String sep) throws IOException {
         if (objs == null) {
             return;
@@ -416,7 +348,7 @@ public final class CollectionUtil {
             sep = EMPTY_STRING;
         }
 
-        for (Iterator<?> i = objs.iterator(); i.hasNext();) {
+        for (Iterator<?> i = objs.iterator(); i.hasNext(); ) {
             buf.append(String.valueOf(i.next()));
 
             if (i.hasNext()) {

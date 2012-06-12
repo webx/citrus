@@ -38,10 +38,9 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.junit.Test;
-
 import com.alibaba.citrus.util.collection.ArrayHashMap;
 import com.alibaba.citrus.util.collection.ArrayHashSet;
+import org.junit.Test;
 
 /**
  * 测试<code>CollectionUtil</code>类。
@@ -413,13 +412,13 @@ public class CollectionUtilTests {
     public void createTreeSet_iterable_comparator() {
         // collection
         Set<Integer> set = createTreeSet(new DescendentComparator<Integer>(),
-                Arrays.asList(11, 22, 33, 44, 55, 66, 77, 88, 99, 100));
+                                         Arrays.asList(11, 22, 33, 44, 55, 66, 77, 88, 99, 100));
         assertTrue(set instanceof TreeSet<?>);
         assertArrayEquals(new Object[] { 100, 99, 88, 77, 66, 55, 44, 33, 22, 11 }, set.toArray());
 
         // iterable
         set = createTreeSet(new DescendentComparator<Integer>(), new SimpleIterable<Integer>(11, 22, 33, 44, 55, 66,
-                77, 88, 99, 100));
+                                                                                             77, 88, 99, 100));
         assertTrue(set instanceof TreeSet<?>);
         assertArrayEquals(new Object[] { 100, 99, 88, 77, 66, 55, 44, 33, 22, 11 }, set.toArray());
     }

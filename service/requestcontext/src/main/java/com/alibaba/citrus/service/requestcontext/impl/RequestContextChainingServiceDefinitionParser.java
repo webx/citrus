@@ -24,6 +24,10 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
 
+import com.alibaba.citrus.springext.ConfigurationPoint;
+import com.alibaba.citrus.springext.Contribution;
+import com.alibaba.citrus.springext.ContributionAware;
+import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -32,13 +36,9 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-import com.alibaba.citrus.springext.ConfigurationPoint;
-import com.alibaba.citrus.springext.Contribution;
-import com.alibaba.citrus.springext.ContributionAware;
-import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
-
 public class RequestContextChainingServiceDefinitionParser extends
-        AbstractNamedBeanDefinitionParser<RequestContextChainingServiceImpl> implements ContributionAware {
+                                                           AbstractNamedBeanDefinitionParser<RequestContextChainingServiceImpl>
+        implements ContributionAware {
     private ConfigurationPoint requestContextsConfigurationPoint;
 
     public void setContribution(Contribution contrib) {
@@ -55,7 +55,7 @@ public class RequestContextChainingServiceDefinitionParser extends
 
         for (Element subElement : subElements(element)) {
             factoryList.add(parseConfigurationPointBean(subElement, requestContextsConfigurationPoint, parserContext,
-                    builder));
+                                                        builder));
         }
 
         builder.addPropertyValue("factories", factoryList);
@@ -67,14 +67,12 @@ public class RequestContextChainingServiceDefinitionParser extends
 
         // 如果request contexts被注册（顶级bean），则同时注册BeanFactoryPostProcessor
         if (RequestContextChainingServiceImpl.class.getName().equals(definition.getBeanDefinition().getBeanClassName())
-                && !definition.getBeanDefinition().isLazyInit()) {
+            && !definition.getBeanDefinition().isLazyInit()) {
             registerBeanFactoryPostProcessor(definition.getBeanName(), registry);
         }
     }
 
-    /**
-     * 创建BeanFactoryPostProcessor。
-     */
+    /** 创建BeanFactoryPostProcessor。 */
     private void registerBeanFactoryPostProcessor(String requestContextsName, BeanDefinitionRegistry registry) {
         BeanDefinitionBuilder builder = BeanDefinitionBuilder
                 .genericBeanDefinition(RequestContextBeanFactoryPostProcessor.class);

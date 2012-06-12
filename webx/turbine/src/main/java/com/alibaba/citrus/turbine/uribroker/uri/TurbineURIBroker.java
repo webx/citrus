@@ -30,7 +30,7 @@ import com.alibaba.citrus.util.StringUtil;
  * <p>
  * 一个Turbine风格的URI包括如下几个部分：
  * </p>
- *
+ * <p/>
  * <pre>
  * URI         = SERVER_INFO + PATH + "?" + QUERY_DATA + "#" + REFERENCE
  * SERVER_INFO = scheme://loginUser:loginPassword@serverName:serverPort
@@ -42,7 +42,7 @@ import com.alibaba.citrus.util.StringUtil;
  * <p>
  * 例如：
  * </p>
- *
+ * <p/>
  * <pre>
  * http://user:pass@myserver.com:8080/mycontext/myservlet/mycomponent/myTarget.jhtml
  * </pre>
@@ -50,16 +50,16 @@ import com.alibaba.citrus.util.StringUtil;
  * @author Michael Zhou
  */
 public class TurbineURIBroker extends WebxURIBroker {
-    protected static final int TARGET_INDEX = COMPONENT_PATH_INDEX + 1;
-    private static final boolean DEFAULT_CONVERT_TARGET_CASE = true;
-    private static final String DEFAULT_TARGET_MAPPING_RULE = EXTENSION_OUTPUT;
-    private static final String DEFAULT_ACTION_PARAM = "action";
+    protected static final int     TARGET_INDEX                = COMPONENT_PATH_INDEX + 1;
+    private static final   boolean DEFAULT_CONVERT_TARGET_CASE = true;
+    private static final   String  DEFAULT_TARGET_MAPPING_RULE = EXTENSION_OUTPUT;
+    private static final   String  DEFAULT_ACTION_PARAM        = "action";
     private MappingRuleService mappingRuleService;
-    private boolean hasTarget;
-    private String target;
-    private Boolean convertTargetCase;
-    private String targetMappingRule;
-    private String actionParam;
+    private boolean            hasTarget;
+    private String             target;
+    private Boolean            convertTargetCase;
+    private String             targetMappingRule;
+    private String             actionParam;
 
     public MappingRuleService getMappingRuleService() {
         return mappingRuleService;
@@ -100,7 +100,7 @@ public class TurbineURIBroker extends WebxURIBroker {
 
                     if (lastSlashIndex >= 0) {
                         target = target.substring(0, lastSlashIndex) + "/"
-                                + StringUtil.toLowerCaseWithUnderscores(target.substring(lastSlashIndex + 1));
+                                 + StringUtil.toLowerCaseWithUnderscores(target.substring(lastSlashIndex + 1));
                     } else {
                         target = StringUtil.toLowerCaseWithUnderscores(target);
                     }

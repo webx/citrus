@@ -21,14 +21,12 @@ import static com.alibaba.citrus.springext.util.DomUtil.*;
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
+import com.alibaba.citrus.service.mappingrule.MappingRuleService;
+import com.alibaba.citrus.service.uribroker.support.AbstractURIBrokerDefinitionParser;
+import com.alibaba.citrus.turbine.uribroker.uri.TurbineURIBroker;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
-
-import com.alibaba.citrus.service.mappingrule.MappingRuleService;
-import com.alibaba.citrus.service.uribroker.support.AbstractURIBrokerDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
-import com.alibaba.citrus.turbine.uribroker.uri.TurbineURIBroker;
 
 public class TurbineURIBrokerDefinitionParser extends AbstractURIBrokerDefinitionParser<TurbineURIBroker> {
     @Override

@@ -81,8 +81,8 @@ public class PipelineServiceTests extends AbstractPipelineTests {
 
         assertInvoke(pipeline, false);
         assertLog("1-1" /* sub-pipeline */, //
-                "2-1", "2-2", "2-3", //
-                "1-3");
+                  "2-1", "2-2", "2-3", //
+                  "1-3");
     }
 
     // 由于spring2和spring3的scope接口是不兼容的（后者基于generic type），所以用proxy来测试，确保在两种环境下均可编译。
@@ -97,21 +97,22 @@ public class PipelineServiceTests extends AbstractPipelineTests {
 
         public Object getObject() throws Exception {
             return Proxy.newProxyInstance(getClass().getClassLoader(), new Class<?>[] { Scope.class },
-                    new InvocationHandler() {
-                        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                            String name = method.getName();
-                            TestOnlyScope scope = TestOnlyScope.this;
+                                          new InvocationHandler() {
+                                              public Object invoke(Object proxy, Method method, Object[] args)
+                                                      throws Throwable {
+                                                  String name = method.getName();
+                                                  TestOnlyScope scope = TestOnlyScope.this;
 
-                            if ("get".equals(name)) {
-                                return scope.getClass().getMethod(name, String.class, ObjectFactory.class)
-                                        .invoke(scope, args);
-                            } else if ("remove".equals(name)) {
-                                return scope.getClass().getMethod(name, String.class).invoke(scope, args);
-                            } else {
-                                return null;
-                            }
-                        }
-                    });
+                                                  if ("get".equals(name)) {
+                                                      return scope.getClass().getMethod(name, String.class, ObjectFactory.class)
+                                                                  .invoke(scope, args);
+                                                  } else if ("remove".equals(name)) {
+                                                      return scope.getClass().getMethod(name, String.class).invoke(scope, args);
+                                                  } else {
+                                                      return null;
+                                                  }
+                                              }
+                                          });
         }
 
         public Object get(String name, ObjectFactory objectFactory) {

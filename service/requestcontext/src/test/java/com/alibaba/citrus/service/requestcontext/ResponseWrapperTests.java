@@ -22,13 +22,12 @@ import static org.junit.Assert.*;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.citrus.service.requestcontext.support.AbstractResponseWrapper;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.alibaba.citrus.service.requestcontext.support.AbstractResponseWrapper;
-
 public class ResponseWrapperTests {
-    private RequestContext requestContext;
+    private RequestContext      requestContext;
     private HttpServletResponse response;
 
     @Before

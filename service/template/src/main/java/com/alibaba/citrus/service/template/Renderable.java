@@ -32,8 +32,6 @@ package com.alibaba.citrus.service.template;
  * @author Michael Zhou
  */
 public interface Renderable {
-    /**
-     * 渲染对象。
-     */
+    /** 渲染对象。 */
     String render();
 }

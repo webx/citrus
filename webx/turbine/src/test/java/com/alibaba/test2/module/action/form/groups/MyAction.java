@@ -19,14 +19,12 @@ package com.alibaba.test2.module.action.form.groups;
 
 import java.util.Collection;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.citrus.service.form.Group;
 import com.alibaba.citrus.turbine.dataresolver.FormGroups;
 import com.alibaba.test2.module.action.form.MyData;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class MyAction {
     @Autowired

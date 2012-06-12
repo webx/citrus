@@ -22,10 +22,9 @@ import static com.alibaba.citrus.util.CollectionUtil.*;
 
 import java.util.Map;
 
+import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 import org.apache.commons.collections.ExtendedProperties;
 import org.springframework.core.io.Resource;
-
-import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
 /**
  * 让velocity读取预装载的资源。
@@ -36,9 +35,7 @@ public class PreloadedResourceLoader extends AbstractResourceLoader {
     public static final String PRELOADED_RESOURCES_KEY = "resources";
     private Map<String, Resource> preloadedResources;
 
-    /**
-     * 初始化resource loader.
-     */
+    /** 初始化resource loader. */
     @Override
     public void init(ExtendedProperties configuration) {
         rsvc.getLog().info(getLogID() + " : initialization starting.");
@@ -60,17 +57,13 @@ public class PreloadedResourceLoader extends AbstractResourceLoader {
         rsvc.getLog().info(getLogID() + " : initialization complete.");
     }
 
-    /**
-     * 取得用于日志记录的ID。
-     */
+    /** 取得用于日志记录的ID。 */
     @Override
     protected String getLogID() {
         return getClass().getSimpleName();
     }
 
-    /**
-     * 取得资源。
-     */
+    /** 取得资源。 */
     @Override
     protected Resource getResource(String templateName) {
         return preloadedResources.get(normalizeTemplateName(templateName));

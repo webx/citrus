@@ -25,16 +25,14 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.config.BeanDefinitionHolder;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
-
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
-import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
+import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 解析template service。
@@ -42,7 +40,7 @@ import com.alibaba.citrus.springext.util.DomUtil.ElementSelector;
  * @author Michael Zhou
  */
 public class TemplateServiceDefinitionParser extends AbstractNamedBeanDefinitionParser<TemplateServiceImpl> implements
-        ContributionAware {
+                                                                                                            ContributionAware {
     private ConfigurationPoint templateEnginesConfigurationPoint;
 
     public void setContribution(Contribution contrib) {
@@ -63,7 +61,7 @@ public class TemplateServiceDefinitionParser extends AbstractNamedBeanDefinition
             // engine
             if (engineSelector.accept(subElement)) {
                 BeanDefinitionHolder engine = parseConfigurationPointBean(subElement,
-                        templateEnginesConfigurationPoint, parserContext, builder);
+                                                                          templateEnginesConfigurationPoint, parserContext, builder);
                 engines.put(engine.getBeanName(), engine);
             }
 
@@ -83,7 +81,7 @@ public class TemplateServiceDefinitionParser extends AbstractNamedBeanDefinition
         builder.addPropertyValue("engineNameMappings", mappings);
 
         attributesToProperties(element, builder, "defaultExtension", "searchExtensions", "searchLocalizedTemplates",
-                "cacheEnabled");
+                               "cacheEnabled");
     }
 
     @Override

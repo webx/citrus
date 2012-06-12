@@ -28,12 +28,6 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.FileSystemResource;
-
 import com.alibaba.citrus.service.freemarker.impl.SpringResourceLoaderAdapter;
 import com.alibaba.citrus.service.freemarker.impl.SpringResourceLoaderAdapter.TemplateSource;
 import com.alibaba.citrus.service.resource.ResourceFilter;
@@ -45,10 +39,15 @@ import com.alibaba.citrus.service.resource.ResourceNotFoundException;
 import com.alibaba.citrus.service.resource.support.InputStreamResource;
 import com.alibaba.citrus.service.resource.support.context.ResourceLoadingXmlApplicationContext;
 import com.alibaba.citrus.util.io.StreamUtil;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.FileSystemResource;
 
 public class SpringResourceLoaderAdapterTests {
-    private static ApplicationContext factory;
-    private SpringResourceLoaderAdapter freemarkerLoader;
+    private static ApplicationContext          factory;
+    private        SpringResourceLoaderAdapter freemarkerLoader;
 
     @BeforeClass
     public static void initFactory() {
@@ -158,9 +157,7 @@ public class SpringResourceLoaderAdapterTests {
         return StreamUtil.readText(stream, null, true);
     }
 
-    /**
-     * 除去resource URL的filter。
-     */
+    /** 除去resource URL的filter。 */
     public static class NoURLFilter implements ResourceFilter {
         public void init(ResourceLoadingService resourceLoadingService) {
         }

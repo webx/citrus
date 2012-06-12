@@ -55,9 +55,7 @@ public interface RequestContext {
      */
     HttpServletResponse getResponse();
 
-    /**
-     * 开始一个请求。
-     */
+    /** 开始一个请求。 */
     void prepare();
 
     /**

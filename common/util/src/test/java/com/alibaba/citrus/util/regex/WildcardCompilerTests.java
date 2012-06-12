@@ -226,7 +226,7 @@ public class WildcardCompilerTests {
         long min = duration / 1000 / 60;
 
         return MessageFormat.format("{0,choice,0#|.1#{0,number,integer}m}" + " {1,choice,0#|.1#{1,number,integer}s}"
-                + " {2,number,integer}ms", min, secs, ms);
+                                    + " {2,number,integer}ms", min, secs, ms);
     }
 
     private boolean contains(String input, Pattern pattern, String... matches) {

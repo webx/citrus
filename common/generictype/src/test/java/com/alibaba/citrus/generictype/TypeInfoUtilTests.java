@@ -65,7 +65,7 @@ public class TypeInfoUtilTests {
     public void resolveMapKey() {
         assertEquals(factory.getType(String.class), TypeInfoUtil.resolveMapKey(StringIntegerListMap.class));
         assertEquals(factory.getType(String.class),
-                TypeInfoUtil.resolveMapKey(factory.getType(StringIntegerListMap.class)));
+                     TypeInfoUtil.resolveMapKey(factory.getType(StringIntegerListMap.class)));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -76,9 +76,9 @@ public class TypeInfoUtilTests {
     @Test
     public void resolveMapValue() {
         assertEquals(factory.getParameterizedType(List.class, Integer.class),
-                TypeInfoUtil.resolveMapValue(StringIntegerListMap.class));
+                     TypeInfoUtil.resolveMapValue(StringIntegerListMap.class));
         assertEquals(factory.getParameterizedType(List.class, Integer.class),
-                TypeInfoUtil.resolveMapValue(factory.getType(StringIntegerListMap.class)));
+                     TypeInfoUtil.resolveMapValue(factory.getType(StringIntegerListMap.class)));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -90,11 +90,11 @@ public class TypeInfoUtilTests {
     public void resolveIterableElement() {
         assertEquals(factory.getType(Number.class), TypeInfoUtil.resolveIterableElement(NumberList.class));
         assertEquals(factory.getType(Number.class),
-                TypeInfoUtil.resolveIterableElement(factory.getType(NumberList.class)));
+                     TypeInfoUtil.resolveIterableElement(factory.getType(NumberList.class)));
 
         assertEquals(factory.getType(Integer.class), TypeInfoUtil.resolveIterableElement(IntegerList.class));
         assertEquals(factory.getType(Integer.class),
-                TypeInfoUtil.resolveIterableElement(factory.getType(IntegerList.class)));
+                     TypeInfoUtil.resolveIterableElement(factory.getType(IntegerList.class)));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -106,6 +106,6 @@ public class TypeInfoUtilTests {
     public void resolveIteratorElement() {
         assertEquals(factory.getType(Integer.class), TypeInfoUtil.resolveIteratorElement(IntegerIterator.class));
         assertEquals(factory.getType(Integer.class),
-                TypeInfoUtil.resolveIteratorElement(factory.getType(IntegerIterator.class)));
+                     TypeInfoUtil.resolveIteratorElement(factory.getType(IntegerIterator.class)));
     }
 }

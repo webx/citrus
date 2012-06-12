@@ -20,11 +20,10 @@ package com.alibaba.citrus.service.requestcontext.session.interceptor;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
+import com.alibaba.citrus.service.requestcontext.util.CookieSupport;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
-
-import com.alibaba.citrus.service.requestcontext.util.CookieSupport;
 
 public class LifecycleLoggerListenerTests extends AbstractSessionListenerTests {
     private String sessionId;

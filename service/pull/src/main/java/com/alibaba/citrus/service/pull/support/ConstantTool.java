@@ -24,12 +24,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.alibaba.citrus.service.pull.ToolFactory;
 import com.alibaba.citrus.util.ObjectUtil;
 import com.alibaba.citrus.util.ToStringBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 在模板中使用constant的tool。
@@ -82,7 +81,7 @@ public class ConstantTool implements ToolFactory {
 
                 if (log.isTraceEnabled()) {
                     log.trace("Found constant: {}.{} = {}",
-                            new Object[] { constantClass.getSimpleName(), field.getName(), ObjectUtil.toString(value) });
+                              new Object[] { constantClass.getSimpleName(), field.getName(), ObjectUtil.toString(value) });
                 }
             } catch (Exception e) {
                 unexpectedException(e, "failed to get constant: %s", field.getName());
@@ -105,7 +104,7 @@ public class ConstantTool implements ToolFactory {
     @Override
     public String toString() {
         return new ToStringBuilder().append("Constant[")
-                .append(constantClass == null ? "" : constantClass.getSimpleName()).append("]").append(constants)
-                .toString();
+                                    .append(constantClass == null ? "" : constantClass.getSimpleName()).append("]").append(constants)
+                                    .toString();
     }
 }

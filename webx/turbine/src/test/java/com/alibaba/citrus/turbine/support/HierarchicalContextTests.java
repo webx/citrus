@@ -23,10 +23,9 @@ import static org.junit.Assert.*;
 import java.util.Collections;
 import java.util.List;
 
+import com.alibaba.citrus.turbine.Context;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.alibaba.citrus.turbine.Context;
 
 public class HierarchicalContextTests {
     private Context parentContext;

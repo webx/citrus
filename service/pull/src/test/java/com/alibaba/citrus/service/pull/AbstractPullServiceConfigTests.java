@@ -23,18 +23,9 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.FileSystemResource;
 
 import com.alibaba.citrus.service.pull.tool.BaseFactory;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
@@ -46,14 +37,21 @@ import com.alibaba.citrus.test.runner.TestNameAware;
 import com.meterware.servletunit.InvocationContext;
 import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.FileSystemResource;
 
 @RunWith(TestNameAware.class)
 public abstract class AbstractPullServiceConfigTests {
-    protected static ApplicationContext staticFactory;
-    protected ApplicationContext factory;
-    protected PullService pullService;
-    protected RequestContextChainingService requestContexts;
-    protected RequestContext rc;
+    protected static ApplicationContext            staticFactory;
+    protected        ApplicationContext            factory;
+    protected        PullService                   pullService;
+    protected        RequestContextChainingService requestContexts;
+    protected        RequestContext                rc;
 
     @BeforeClass
     public static final void initStaticFactory() {

@@ -31,12 +31,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.alibaba.citrus.util.ClassLoaderUtil;
 import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.util.io.StreamUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 用来处理地域和字符编码的工具类。
@@ -65,8 +64,8 @@ import com.alibaba.citrus.util.io.StreamUtil;
  * @author Michael Zhou
  */
 public class LocaleUtil {
-    private static final LocaleInfo systemLocaleInfo = new LocaleInfo();
-    private static LocaleInfo defaultLocalInfo = systemLocaleInfo;
+    private static final LocaleInfo              systemLocaleInfo        = new LocaleInfo();
+    private static       LocaleInfo              defaultLocalInfo        = systemLocaleInfo;
     private static final ThreadLocal<LocaleInfo> contextLocaleInfoHolder = new ThreadLocal<LocaleInfo>();
 
     /**
@@ -76,7 +75,7 @@ public class LocaleUtil {
      */
     public static boolean isLocaleSupported(Locale locale) {
         return locale != null && AvailableLocalesLoader.locales.AVAILABLE_LANGUAGES.contains(locale.getLanguage())
-                && AvailableLocalesLoader.locales.AVAILABLE_COUNTRIES.contains(locale.getCountry());
+               && AvailableLocalesLoader.locales.AVAILABLE_COUNTRIES.contains(locale.getCountry());
     }
 
     /**
@@ -161,7 +160,7 @@ public class LocaleUtil {
      * </p>
      *
      * @param baseName bundle的基本名
-     * @param locale 区域设置
+     * @param locale   区域设置
      * @return 所有备选的bundle名
      */
     public static List<String> calculateBundleNames(String baseName, Locale locale) {
@@ -194,7 +193,7 @@ public class LocaleUtil {
      * </p>
      *
      * @param baseName bundle的基本名
-     * @param locale 区域设置
+     * @param locale   区域设置
      * @return 所有备选的bundle名
      */
     public static List<String> calculateBundleNames(String baseName, Locale locale, boolean noext) {
@@ -316,7 +315,7 @@ public class LocaleUtil {
     /**
      * 设置默认的区域。
      *
-     * @param locale 区域
+     * @param locale  区域
      * @param charset 编码字符集
      * @return 原来的默认区域
      */
@@ -350,9 +349,7 @@ public class LocaleUtil {
         }
     }
 
-    /**
-     * 复位默认的区域设置。
-     */
+    /** 复位默认的区域设置。 */
     public static void resetDefault() {
         defaultLocalInfo = systemLocaleInfo;
 
@@ -386,7 +383,7 @@ public class LocaleUtil {
     /**
      * 设置当前thread默认的区域。
      *
-     * @param locale 区域
+     * @param locale  区域
      * @param charset 编码字符集
      * @return 原来的thread默认的区域
      */
@@ -420,9 +417,7 @@ public class LocaleUtil {
         }
     }
 
-    /**
-     * 复位当前thread的区域设置。
-     */
+    /** 复位当前thread的区域设置。 */
     public static void resetContext() {
         contextLocaleInfoHolder.remove();
 
@@ -431,7 +426,7 @@ public class LocaleUtil {
         }
     }
 
-    private static Logger log = LoggerFactory.getLogger(LocaleUtil.class);
+    private static Logger     log       = LoggerFactory.getLogger(LocaleUtil.class);
     private static Notifier[] notifiers = getNotifiers();
 
     private static Notifier[] getNotifiers() {
@@ -453,9 +448,7 @@ public class LocaleUtil {
         }
     }
 
-    /**
-     * 当default或context locale被改变时，通知监听器。
-     */
+    /** 当default或context locale被改变时，通知监听器。 */
     public interface Notifier extends EventListener {
         void defaultChanged(LocaleInfo newValue);
 
@@ -466,9 +459,7 @@ public class LocaleUtil {
         void contextReset();
     }
 
-    /**
-     * 延迟加载所有可用的国家和语言。
-     */
+    /** 延迟加载所有可用的国家和语言。 */
     private static class AvailableLocalesLoader {
         private static final AvailableLocales locales = new AvailableLocales();
     }

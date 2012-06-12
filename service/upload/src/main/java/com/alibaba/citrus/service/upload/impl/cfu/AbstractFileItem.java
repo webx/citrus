@@ -30,14 +30,13 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 
+import com.alibaba.citrus.util.StringUtil;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemHeaders;
 import org.apache.commons.fileupload.FileItemHeadersSupport;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.DeferredFileOutputStream;
-
-import com.alibaba.citrus.util.StringUtil;
 
 /**
  * 改进自<code>commons-fileupload-1.2.1</code>的同名类。
@@ -49,13 +48,13 @@ import com.alibaba.citrus.util.StringUtil;
  * <code>content-type</code>头部指定的<code>charset</code>值来决定其字符集编码。例如，下面的
  * <code>multipart/form-data</code>请求片段指定了myparam field值的字符集编码为
  * <code>UTF-8</code>：
- *
+ * <p/>
  * <pre>
  * ----HttpUnit-part0-aSgQ2M
  * Content-Disposition: form-data; name=&quot;myparam&quot;
  * Content-Type: text/plain; charset=UTF-8
  * </pre>
- *
+ * <p/>
  * 然而，除了单元测试所用的<code>httpunit/servletunit</code>以外，几乎没有浏览器会在这里指定
  * <code>content-type</code>以及 <code>charset</code>。因此原类的
  * <code>getString()</code>总是得不到解码正确的字符串。</li>
@@ -98,14 +97,10 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
 
     // ----------------------------------------------------------- Data members
 
-    /**
-     * UID used in unique file name generation.
-     */
+    /** UID used in unique file name generation. */
     private static final String UID = new java.rmi.server.UID().toString().replace(':', '_').replace('-', '_');
 
-    /**
-     * The name of the form field as provided by the browser.
-     */
+    /** The name of the form field as provided by the browser. */
     private String fieldName;
 
     /**
@@ -114,14 +109,10 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
      */
     private String contentType;
 
-    /**
-     * Whether or not this item is a simple form field.
-     */
+    /** Whether or not this item is a simple form field. */
     private boolean isFormField;
 
-    /**
-     * The original filename in the user's filesystem.
-     */
+    /** The original filename in the user's filesystem. */
     private String fileName;
 
     /**
@@ -130,41 +121,27 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
      */
     private long size = -1;
 
-    /**
-     * The threshold above which uploads will be stored on disk.
-     */
+    /** The threshold above which uploads will be stored on disk. */
     private int sizeThreshold;
 
     private boolean keepFormFieldInMemory;
 
-    /**
-     * The directory in which uploaded files will be stored, if stored on disk.
-     */
+    /** The directory in which uploaded files will be stored, if stored on disk. */
     private File repository;
 
-    /**
-     * Cached contents of the file.
-     */
+    /** Cached contents of the file. */
     private byte[] cachedContent;
 
-    /**
-     * Output stream for this item.
-     */
+    /** Output stream for this item. */
     protected transient DeferredFileOutputStream dfos;
 
-    /**
-     * File to allow for serialization of the content of this item.
-     */
+    /** File to allow for serialization of the content of this item. */
     private File dfosFile;
 
-    /**
-     * The file items headers.
-     */
+    /** The file items headers. */
     private FileItemHeaders headers;
 
-    /**
-     * 用于解码字段值的字符集编码。
-     */
+    /** 用于解码字段值的字符集编码。 */
     private String charset;
 
     // ----------------------------------------------------------- Constructors
@@ -172,20 +149,20 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
     /**
      * Constructs a new <code>DiskFileItem</code> instance.
      *
-     * @param fieldName The name of the form field.
-     * @param contentType The content type passed by the browser or
-     *            <code>null</code> if not specified.
-     * @param isFormField Whether or not this item is a plain form field, as
-     *            opposed to a file upload.
-     * @param fileName The original filename in the user's filesystem, or
-     *            <code>null</code> if not specified.
+     * @param fieldName     The name of the form field.
+     * @param contentType   The content type passed by the browser or
+     *                      <code>null</code> if not specified.
+     * @param isFormField   Whether or not this item is a plain form field, as
+     *                      opposed to a file upload.
+     * @param fileName      The original filename in the user's filesystem, or
+     *                      <code>null</code> if not specified.
      * @param sizeThreshold The threshold, in bytes, below which items will be
-     *            retained in memory and above which they will be stored as a
-     *            file.
+     *                      retained in memory and above which they will be stored as a
+     *                      file.
+     * @param repository    The data repository, which is the directory in which
+     *                      files will be created, should the item size exceed the
+     *                      threshold.
      * @para keepFormFieldInMemory
-     * @param repository The data repository, which is the directory in which
-     *            files will be created, should the item size exceed the
-     *            threshold.
      */
     public AbstractFileItem(String fieldName, String contentType, boolean isFormField, String fileName,
                             int sizeThreshold, boolean keepFormFieldInMemory, File repository) {
@@ -247,16 +224,12 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
         return contentType;
     }
 
-    /**
-     * 取得当前field的字符集编码。
-     */
+    /** 取得当前field的字符集编码。 */
     public String getCharset() {
         return charset;
     }
 
-    /**
-     * 设置当前field的字符集编码。
-     */
+    /** 设置当前field的字符集编码。 */
     public void setCharset(String charset) {
         this.charset = charset;
     }
@@ -347,7 +320,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
      * @param charset The charset to use.
      * @return The contents of the file, as a string.
      * @throws UnsupportedEncodingException if the requested character encoding
-     *             is not available.
+     *                                      is not available.
      */
     public String getString(final String charset) throws UnsupportedEncodingException {
         return new String(get(), charset);
@@ -393,18 +366,18 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
      * is not concerned with whether or not the item is stored in memory, or on
      * disk in a temporary location. They just want to write the uploaded item
      * to a file.
-     * <p>
+     * <p/>
      * This implementation first attempts to rename the uploaded item to the
      * specified destination file, if the item was originally written to disk.
      * Otherwise, the data will be copied to the specified file.
-     * <p>
+     * <p/>
      * This method is only guaranteed to work <em>once</em>, the first time it
      * is invoked for a particular item. This is because, in the event that the
      * method renames a temporary file, that file will no longer be available to
      * copy or rename again at a later time.
      *
      * @param file The <code>File</code> into which the uploaded item should be
-     *            stored.
+     *             stored.
      * @throws Exception if an error occurs.
      */
     public void write(File file) throws Exception {
@@ -518,7 +491,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
      * simple form field.
      *
      * @param state <code>true</code> if the instance represents a simple form
-     *            field; <code>false</code> if it represents an uploaded file.
+     *              field; <code>false</code> if it represents an uploaded file.
      * @see #isFormField()
      */
     public void setFormField(boolean state) {
@@ -605,7 +578,7 @@ public abstract class AbstractFileItem implements FileItem, FileItemHeadersSuppo
      * Reads the state of this object during deserialization.
      *
      * @param in The stream from which the state should be read.
-     * @throws IOException if an error occurs.
+     * @throws IOException            if an error occurs.
      * @throws ClassNotFoundException if class cannot be found.
      */
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {

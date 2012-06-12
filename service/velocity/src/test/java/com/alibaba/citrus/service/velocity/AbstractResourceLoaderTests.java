@@ -37,9 +37,7 @@ public abstract class AbstractResourceLoaderTests {
         return StreamUtil.readText(stream, null, true);
     }
 
-    /**
-     * 除去resource URL的filter。
-     */
+    /** 除去resource URL的filter。 */
     public static class NoURLFilter implements ResourceFilter {
         public void init(ResourceLoadingService resourceLoadingService) {
         }
