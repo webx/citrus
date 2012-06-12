@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+            xmlns:beans="http://www.springframework.org/schema/beans"
+            xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
 
     <xsd:import namespace="http://www.springframework.org/schema/beans"
-        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+                schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
 
     <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
-        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+                schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
 
     <xsd:element name="parser" type="ParserRequestContextType">
         <xsd:annotation>
@@ -22,7 +22,7 @@
             <xsd:extension base="beans:identifiedType">
                 <xsd:sequence>
                     <xsd:element name="property-editor-registrar"
-                        type="springext:referenceableBeanType" minOccurs="0" maxOccurs="unbounded">
+                                 type="springext:referenceableBeanType" minOccurs="0" maxOccurs="unbounded">
                         <xsd:annotation>
                             <xsd:documentation><![CDATA[
     代表一个property editor registrar，可用来自定义property或parameter类型转换的方法。
@@ -38,7 +38,7 @@
                     </xsd:element>
                 </xsd:sequence>
                 <xsd:attribute name="converterQuiet" type="springext:booleanOrPlaceholder"
-                    default="true">
+                               default="true">
                     <xsd:annotation>
                         <xsd:documentation><![CDATA[
     类型转换出错时，是否不报错，而是返回默认值。
@@ -63,7 +63,7 @@
                 </xsd:attribute>
 
                 <xsd:attribute name="autoUpload" type="springext:booleanOrPlaceholder"
-                    default="true">
+                               default="true">
                     <xsd:annotation>
                         <xsd:documentation><![CDATA[
     是否自动解析Upload请求（enctype="multipart/form-data"）。默认为true。
@@ -72,7 +72,7 @@
                 </xsd:attribute>
 
                 <xsd:attribute name="unescapeParameters" type="springext:booleanOrPlaceholder"
-                    default="true">
+                               default="true">
                     <xsd:annotation>
                         <xsd:documentation><![CDATA[
     是否对参数进行HTML entities解码。默认为true。
@@ -89,7 +89,7 @@
                 </xsd:attribute>
 
                 <xsd:attribute name="useServletEngineParser" type="springext:booleanOrPlaceholder"
-                    default="false">
+                               default="false">
                     <xsd:annotation>
                         <xsd:documentation><![CDATA[
     是否使用servlet引擎的parser，默认为false。
@@ -98,7 +98,7 @@
                 </xsd:attribute>
 
                 <xsd:attribute name="useBodyEncodingForURI" type="springext:booleanOrPlaceholder"
-                    default="true">
+                               default="true">
                     <xsd:annotation>
                         <xsd:documentation><![CDATA[
     以request.setCharacterEncoding(charset)所设置的编码来解码query。
@@ -139,8 +139,8 @@
     <xsd:complexType name="ParserRequestContextFiltersType">
         <xsd:sequence>
             <xsd:any
-                namespace="http://www.alibaba.com/schema/services/request-contexts/parser/filters"
-                minOccurs="0" maxOccurs="unbounded" />
+                    namespace="http://www.alibaba.com/schema/services/request-contexts/parser/filters"
+                    minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
     </xsd:complexType>
 

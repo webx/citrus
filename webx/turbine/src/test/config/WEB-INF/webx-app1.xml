@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:services="http://www.alibaba.com/schema/services"
-    xmlns:dr-factories="http://www.alibaba.com/schema/services/data-resolver/factories"
-    xmlns:pull-tools="http://www.alibaba.com/schema/services/pull/factories"
-    xmlns:mapping-rules="http://www.alibaba.com/schema/services/mapping-rules"
-    xmlns:adapters="http://www.alibaba.com/schema/services/module-loader/adapters"
-    xmlns:factories="http://www.alibaba.com/schema/services/module-loader/factories"
-    xmlns:conditions="http://www.alibaba.com/schema/services/pipeline/conditions"
-    xmlns:valves="http://www.alibaba.com/schema/services/pipeline/valves"
-    xmlns:request-contexts="http://www.alibaba.com/schema/services/request-contexts"
-    xmlns:encoders="http://www.alibaba.com/schema/services/request-contexts/session/encoders"
-    xmlns:idgens="http://www.alibaba.com/schema/services/request-contexts/session/idgens"
-    xmlns:stores="http://www.alibaba.com/schema/services/request-contexts/session/stores"
-    xmlns:filters="http://www.alibaba.com/schema/services/resource-loading/filters"
-    xmlns:loaders="http://www.alibaba.com/schema/services/resource-loading/loaders"
-    xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
-    xmlns:uris="http://www.alibaba.com/schema/services/uris"
-    xmlns:handlers="http://www.alibaba.com/schema/services/uris/handlers"
-    xmlns:base="http://www.alibaba.com/schema/springext/base"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:p="http://www.springframework.org/schema/p"
-    xsi:schemaLocation="
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns:dr-factories="http://www.alibaba.com/schema/services/data-resolver/factories"
+             xmlns:pull-tools="http://www.alibaba.com/schema/services/pull/factories"
+             xmlns:mapping-rules="http://www.alibaba.com/schema/services/mapping-rules"
+             xmlns:adapters="http://www.alibaba.com/schema/services/module-loader/adapters"
+             xmlns:factories="http://www.alibaba.com/schema/services/module-loader/factories"
+             xmlns:conditions="http://www.alibaba.com/schema/services/pipeline/conditions"
+             xmlns:valves="http://www.alibaba.com/schema/services/pipeline/valves"
+             xmlns:request-contexts="http://www.alibaba.com/schema/services/request-contexts"
+             xmlns:encoders="http://www.alibaba.com/schema/services/request-contexts/session/encoders"
+             xmlns:idgens="http://www.alibaba.com/schema/services/request-contexts/session/idgens"
+             xmlns:stores="http://www.alibaba.com/schema/services/request-contexts/session/stores"
+             xmlns:filters="http://www.alibaba.com/schema/services/resource-loading/filters"
+             xmlns:loaders="http://www.alibaba.com/schema/services/resource-loading/loaders"
+             xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
+             xmlns:uris="http://www.alibaba.com/schema/services/uris"
+             xmlns:handlers="http://www.alibaba.com/schema/services/uris/handlers"
+             xmlns:base="http://www.alibaba.com/schema/springext/base"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xsi:schemaLocation="
         http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
         http://www.alibaba.com/schema/services/data-resolver/factories http://localhost:8080/schema/services-data-resolver-factories.xsd
         http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
@@ -50,15 +50,15 @@
 
     <services:pipeline id="checkCsrfToken">
         <valves:checkCsrfToken expiredPage="error.vm" tokenKey="token" maxTokens="1"
-            logName="mySecurity" />
+                               logName="mySecurity" />
     </services:pipeline>
 
     <services:pipeline id="checkCsrfToken_manually">
         <valves:checkCsrfToken expiredPage="error.vm" tokenKey="token" maxTokens="1"
-            logName="mySecurity" />
+                               logName="mySecurity" />
         <valves:valve
-            class="com.alibaba.citrus.turbine.pipeline.valve.CheckCsrfTokenValveTests$CheckCsrfManually"
-         />
+                class="com.alibaba.citrus.turbine.pipeline.valve.CheckCsrfTokenValveTests$CheckCsrfManually"
+                />
     </services:pipeline>
 
     <services:pipeline id="performActionValveTests">
@@ -84,14 +84,14 @@
     <services:pipeline id="prepareForTurbine1">
         <valves:prepareForTurbine />
         <valves:valve
-            class="com.alibaba.citrus.turbine.pipeline.valve.PrepareForTurbineValveTests$MyErrorValve"
-         />
+                class="com.alibaba.citrus.turbine.pipeline.valve.PrepareForTurbineValveTests$MyErrorValve"
+                />
     </services:pipeline>
 
     <services:pipeline id="prepareForTurbine2">
         <valves:prepareForTurbine />
         <valves:valve
-            class="com.alibaba.citrus.turbine.pipeline.valve.PrepareForTurbineValveTests$MyValve" />
+                class="com.alibaba.citrus.turbine.pipeline.valve.PrepareForTurbineValveTests$MyValve" />
     </services:pipeline>
 
     <services:pipeline id="requestHandler">
@@ -109,31 +109,31 @@
     <services:pipeline id="handleException" lazy-init="true">
         <valves:handleException defaultPage="error.vm">
             <valves:on-exception type="java.lang.Exception" page="error_exception.vm"
-                statusCode="501" />
+                                 statusCode="501" />
 
             <valves:on-exception type="java.lang.RuntimeException" page="error_runtime_exception.vm"
-                statusCode="502" />
+                                 statusCode="502" />
 
             <valves:on-exception type="java.io.IOException" page="error_io_exception.vm"
-                statusCode="503" />
+                                 statusCode="503" />
 
             <valves:on-exception type="java.lang.IllegalArgumentException"
-                page="error_illegal_argument_exception.vm" />
+                                 page="error_illegal_argument_exception.vm" />
         </valves:handleException>
     </services:pipeline>
 
     <services:pipeline id="pageAuthValve" lazy-init="true">
         <valves:analyzeURL />
         <valves:pageAuthorization
-            callbackClass="com.alibaba.citrus.turbine.pipeline.valve.PageAuthorizationValveTests$MyCallback" />
+                callbackClass="com.alibaba.citrus.turbine.pipeline.valve.PageAuthorizationValveTests$MyCallback" />
         <valves:valve
-            class="com.alibaba.citrus.turbine.pipeline.valve.PageAuthorizationValveTests$MyValve" />
+                class="com.alibaba.citrus.turbine.pipeline.valve.PageAuthorizationValveTests$MyValve" />
     </services:pipeline>
 
     <services:module-loader id="moduleLoaderService">
         <factories:class-modules>
             <factories:search-classes type="$1" name="$2"
-                classes="com.alibaba.test.app1.module.*.**" />
+                                      classes="com.alibaba.test.app1.module.*.**" />
             <factories:search-classes type="$1" name="$2" classes="com.alibaba.test.module.*.**" />
         </factories:class-modules>
 
@@ -167,13 +167,13 @@
 
         <!-- 回归搜索模块名  -->
         <mapping-rules:fallback-module-rule id="action" moduleType="action"
-            defaultName="MyDefaultModule" />
+                                            defaultName="MyDefaultModule" />
 
         <mapping-rules:fallback-module-rule id="screen" moduleType="screen"
-            defaultName="MyDefaultModule" />
+                                            defaultName="MyDefaultModule" />
 
         <mapping-rules:fallback-module-rule id="control" moduleType="control"
-            defaultName="MyDefaultModule" />
+                                            defaultName="MyDefaultModule" />
 
         <mapping-rules:fallback-module-rule id="screen.notemplate" moduleType="screen" />
 

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+            xmlns:beans="http://www.springframework.org/schema/beans"
+            xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
 
     <xsd:import namespace="http://www.springframework.org/schema/beans"
-        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+                schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
 
     <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
-        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+                schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
 
     <xsd:element name="webx-configuration" type="WebxConfigurationType">
         <xsd:annotation>
@@ -20,7 +20,7 @@
     <xsd:complexType name="WebxConfigurationType">
         <xsd:all>
             <xsd:element name="productionMode" type="springext:booleanOrPlaceholder" default="true"
-                minOccurs="0">
+                         minOccurs="0">
                 <xsd:annotation>
                     <xsd:documentation><![CDATA[
     生产模式。默认为true。
@@ -29,7 +29,7 @@
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="internalPathPrefix" type="xsd:string" default="internal"
-                minOccurs="0">
+                         minOccurs="0">
                 <xsd:annotation>
                     <xsd:documentation><![CDATA[
     内部链接URL的前缀。内部链接用来显示错误信息、开发者信息。
@@ -37,7 +37,7 @@
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="requestContextsRef" type="xsd:string" default="requestContexts"
-                minOccurs="0">
+                         minOccurs="0">
                 <xsd:annotation>
                     <xsd:documentation><![CDATA[
     RequestContexts服务的引用。
@@ -67,13 +67,13 @@
     <xsd:complexType name="WebxComponentsType">
         <xsd:sequence>
             <xsd:element name="component" minOccurs="0" maxOccurs="unbounded"
-                type="WebxComponentType" />
+                         type="WebxComponentType" />
             <xsd:element name="rootController" type="springext:referenceableBeanType" minOccurs="0"
-             />
+                    />
         </xsd:sequence>
         <xsd:attribute name="autoDiscoverComponents" type="springext:booleanOrPlaceholder" />
         <xsd:attribute name="componentConfigurationLocationPattern" type="xsd:string"
-            default="/WEB-INF/webx-*.xml" />
+                       default="/WEB-INF/webx-*.xml" />
         <xsd:attribute name="defaultControllerClass" type="xsd:string" />
         <xsd:attribute name="defaultComponent" type="xsd:string" />
     </xsd:complexType>

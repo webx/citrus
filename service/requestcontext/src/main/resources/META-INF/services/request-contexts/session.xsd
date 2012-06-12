@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+            xmlns:beans="http://www.springframework.org/schema/beans"
+            xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
 
     <xsd:import namespace="http://www.springframework.org/schema/beans"
-        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+                schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
 
     <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
-        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+                schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
 
     <xsd:element name="session" type="SessionRequestContextType">
         <xsd:annotation>
@@ -29,7 +29,7 @@
                         </xsd:annotation>
                     </xsd:element>
                     <xsd:element name="stores" type="SessionRequestContextSessionStoresType"
-                        minOccurs="0">
+                                 minOccurs="0">
                         <xsd:annotation>
                             <xsd:documentation><![CDATA[
     Session Store的设置。
@@ -37,7 +37,7 @@
                         </xsd:annotation>
                     </xsd:element>
                     <xsd:element name="store-mappings"
-                        type="SessionRequestContextSessionStoreMappingsType" minOccurs="0">
+                                 type="SessionRequestContextSessionStoreMappingsType" minOccurs="0">
                         <xsd:annotation>
                             <xsd:documentation><![CDATA[
     将session attributes映射到session store的设置。
@@ -45,7 +45,7 @@
                         </xsd:annotation>
                     </xsd:element>
                     <xsd:element name="session-model-encoders"
-                        type="SessionRequestContextSessionModelEncodersType" minOccurs="0">
+                                 type="SessionRequestContextSessionModelEncodersType" minOccurs="0">
                         <xsd:annotation>
                             <xsd:documentation><![CDATA[
     将session model转换为store中可存储的对象，或者将store中取得的对象转换回session model。
@@ -53,7 +53,7 @@
                         </xsd:annotation>
                     </xsd:element>
                     <xsd:element name="interceptors"
-                        type="SessionRequestContextSessionInterceptorsType" minOccurs="0">
+                                 type="SessionRequestContextSessionInterceptorsType" minOccurs="0">
                         <xsd:annotation>
                             <xsd:documentation><![CDATA[
     用来监听session行为的interceptors。
@@ -84,7 +84,7 @@
                     </xsd:annotation>
                 </xsd:attribute>
                 <xsd:attribute name="keepInTouch" type="springext:booleanOrPlaceholder"
-                    default="false">
+                               default="false">
                     <xsd:annotation>
                         <xsd:documentation><![CDATA[
     是否每次请求都touch session。如果设为false，只在session值有改变时touch。
@@ -134,7 +134,7 @@
                         </xsd:annotation>
                     </xsd:attribute>
                     <xsd:attribute name="httpOnly" type="springext:booleanOrPlaceholder"
-                        default="true">
+                                   default="true">
                         <xsd:annotation>
                             <xsd:documentation><![CDATA[
     在session ID cookie上设置httpOnly标记。在IE6及更新版本中，可以缓解XSS攻击的危险。默认为true。
@@ -142,7 +142,7 @@
                         </xsd:annotation>
                     </xsd:attribute>
                     <xsd:attribute name="secure" type="springext:booleanOrPlaceholder"
-                        default="false">
+                                   default="false">
                         <xsd:annotation>
                             <xsd:documentation><![CDATA[
     在session ID cookie上设置secure标记。这样，只有在https请求中才可访问该cookie。默认为false。
@@ -168,8 +168,8 @@
                 </xsd:complexType>
             </xsd:element>
             <xsd:any
-                namespace="http://www.alibaba.com/schema/services/request-contexts/session/idgens"
-                minOccurs="0" />
+                    namespace="http://www.alibaba.com/schema/services/request-contexts/session/idgens"
+                    minOccurs="0" />
         </xsd:sequence>
         <xsd:attribute name="cookieEnabled" type="springext:booleanOrPlaceholder" default="true">
             <xsd:annotation>
@@ -190,8 +190,8 @@
     <xsd:complexType name="SessionRequestContextSessionStoresType">
         <xsd:choice minOccurs="0" maxOccurs="unbounded">
             <xsd:any
-                namespace="http://www.alibaba.com/schema/services/request-contexts/session/stores"
-             />
+                    namespace="http://www.alibaba.com/schema/services/request-contexts/session/stores"
+                    />
         </xsd:choice>
     </xsd:complexType>
 
@@ -225,16 +225,16 @@
     <xsd:complexType name="SessionRequestContextSessionModelEncodersType">
         <xsd:sequence>
             <xsd:any
-                namespace="http://www.alibaba.com/schema/services/request-contexts/session/model-encoders"
-                minOccurs="0" maxOccurs="unbounded" />
+                    namespace="http://www.alibaba.com/schema/services/request-contexts/session/model-encoders"
+                    minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
     </xsd:complexType>
 
     <xsd:complexType name="SessionRequestContextSessionInterceptorsType">
         <xsd:sequence>
             <xsd:any
-                namespace="http://www.alibaba.com/schema/services/request-contexts/session/interceptors"
-                minOccurs="0" maxOccurs="unbounded" />
+                    namespace="http://www.alibaba.com/schema/services/request-contexts/session/interceptors"
+                    minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
     </xsd:complexType>
 

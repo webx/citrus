@@ -2,7 +2,7 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 
     <xsd:include
-        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/services/uris/uris-base.xsd" />
+            schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/services/uris/uris-base.xsd" />
 
     <xsd:element name="servlet-uri" type="ServletURIBrokerType">
         <xsd:annotation>
@@ -16,7 +16,7 @@
  PATH_INFO   = /pathInfo
  QUERY_DATA  = queryKey1=value1&queryKey2=value2
  REFERENCE   = reference
- 
+
     例如：
 
  http://user:pass@myserver.com:8080/mycontext/myservlet/view?id=1#top

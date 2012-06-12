@@ -48,26 +48,26 @@
 }
 
 .hl-annotation {
-    color:grey;
-    font-style:italic;
+    color: grey;
+    font-style: italic;
 }
 
 .hl-keyword {
-    color:#973074;
+    color: #973074;
     font-weight: bolder;
 }
 
 .hl-variable {
-    color:#0000c0;
+    color: #0000c0;
 }
 
 .hl-tag-prefix {
-    color:#9999cc;
+    color: #9999cc;
     font-weight: bolder;
 }
 
 .hl-tag {
-    color:#000096;
+    color: #000096;
 }
 
 .hl-attribute {

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:services="http://www.alibaba.com/schema/services"
-    xmlns="http://www.alibaba.com/schema/services/mapping-rules"
-    xmlns:factories="http://www.alibaba.com/schema/services/module-loader/factories"
-    xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
-    xmlns:request-contexts="http://www.alibaba.com/schema/services/request-contexts"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:p="http://www.springframework.org/schema/p"
-    xsi:schemaLocation="
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns="http://www.alibaba.com/schema/services/mapping-rules"
+             xmlns:factories="http://www.alibaba.com/schema/services/module-loader/factories"
+             xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
+             xmlns:request-contexts="http://www.alibaba.com/schema/services/request-contexts"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xsi:schemaLocation="
                http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
                http://www.alibaba.com/schema/services/mapping-rules http://localhost:8080/schema/services-mapping-rules.xsd
                http://www.alibaba.com/schema/services/module-loader/factories http://localhost:8080/schema/services-module-loader-factories.xsd
@@ -31,9 +31,9 @@
     <!-- 装载template -->
     <services:template searchExtensions="true" searchLocalizedTemplates="true">
         <engines:template-engine id="myEngine1"
-            class="com.alibaba.citrus.service.mappingrule.impl.SimpleEngine" p:extensions="vm" />
+                                 class="com.alibaba.citrus.service.mappingrule.impl.SimpleEngine" p:extensions="vm" />
         <engines:template-engine id="myEngine2"
-            class="com.alibaba.citrus.service.mappingrule.impl.SimpleEngine" p:extensions="jsp" />
+                                 class="com.alibaba.citrus.service.mappingrule.impl.SimpleEngine" p:extensions="jsp" />
     </services:template>
 
     <!-- 配置mapping -->
@@ -52,7 +52,7 @@
         <fallback-template-rule id="fallback.template" templatePrefix="myprefix" />
         <fallback-template-rule id="fallback.template.searchExts" templatePrefix="myprefix" />
         <fallback-template-rule id="fallback.template.searchExts.local"
-            templatePrefix="myprefix.locale" />
+                                templatePrefix="myprefix.locale" />
 
         <!-- 后缀扩展映射 -->
         <extension-rule id="extension">
@@ -98,13 +98,13 @@
         <direct-module-rule id="direct.module" cacheEnabled="${cacheEnabled:false}" />
 
         <direct-template-rule id="direct.template" cacheEnabled="${cacheEnabled:false}"
-            templatePrefix="myprefix" />
+                              templatePrefix="myprefix" />
 
         <fallback-module-rule id="fallback.module" cacheEnabled="${cacheEnabled:false}"
-            moduleType="screen" moduleLoaderServiceRef="moduleLoaderService" />
+                              moduleType="screen" moduleLoaderServiceRef="moduleLoaderService" />
 
         <fallback-template-rule id="fallback.template" cacheEnabled="${cacheEnabled:false}"
-            templatePrefix="myprefix" templateServiceRef="templateService" />
+                                templatePrefix="myprefix" templateServiceRef="templateService" />
 
         <extension-rule id="extension" cacheEnabled="${cacheEnabled:false}">
             <mapping extension="" to="jsp" />

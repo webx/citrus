@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:services="http://www.alibaba.com/schema/services"
-    xmlns="http://www.alibaba.com/schema/services/pull/factories"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:util="http://www.springframework.org/schema/util"
-    xmlns:p="http://www.springframework.org/schema/p"
-    xsi:schemaLocation="
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns="http://www.alibaba.com/schema/services/pull/factories"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:util="http://www.springframework.org/schema/util"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xsi:schemaLocation="
         http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
         http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
         http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
@@ -16,15 +16,15 @@
         <constants id="myconst" constantClass="javax.servlet.http.HttpServletResponse" />
 
         <constants id="myconst2" constantClass="javax.servlet.http.HttpServletResponse"
-            exposed="false" />
+                   exposed="false" />
 
         <utils />
 
         <factory id="object1" class="com.alibaba.citrus.service.pull.tool.ObjectTool"
-            p:singleton="false" />
+                 p:singleton="false" />
 
         <factory id="object2" class="com.alibaba.citrus.service.pull.tool.ObjectToolSet"
-            p:singleton="false" p:id="inset1" />
+                 p:singleton="false" p:id="inset1" />
 
         <factory id="object3" class="com.alibaba.citrus.service.pull.tool.ObjectRuntimeToolSet" />
 
@@ -54,13 +54,13 @@
     <services:request-contexts />
 
     <util:map id="mymap" xmlns="http://www.springframework.org/schema/beans"
-        map-class="java.util.LinkedHashMap" value-type="java.lang.Integer">
+              map-class="java.util.LinkedHashMap" value-type="java.lang.Integer">
         <entry key="a" value="111" />
         <entry key="b" value="222" />
     </util:map>
 
     <util:list id="mylist" xmlns="http://www.springframework.org/schema/beans"
-        value-type="java.lang.Integer">
+               value-type="java.lang.Integer">
         <value>333</value>
         <value>444</value>
         <value>555</value>

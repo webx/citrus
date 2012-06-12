@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:base="http://www.alibaba.com/schema/services/form/validators/base"
-    elementFormDefault="qualified">
+            xmlns:beans="http://www.springframework.org/schema/beans"
+            xmlns:base="http://www.alibaba.com/schema/services/form/validators/base"
+            elementFormDefault="qualified">
 
     <xsd:import namespace="http://www.springframework.org/schema/beans"
-        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+                schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
 
     <xsd:element name="choose" type="ChooseValidatorType">
         <xsd:annotation>
@@ -18,7 +18,7 @@
     <xsd:complexType name="ChooseValidatorType">
         <xsd:sequence>
             <xsd:element name="when" type="ChooseValidatorWhenType" minOccurs="1"
-                maxOccurs="unbounded" />
+                         maxOccurs="unbounded" />
             <xsd:element name="otherwise" type="ChooseValidatorOtherwiseType" minOccurs="0" />
         </xsd:sequence>
         <xsd:attribute name="id" type="xsd:string" />
@@ -27,9 +27,9 @@
     <xsd:complexType name="ChooseValidatorWhenType">
         <xsd:sequence>
             <xsd:any namespace="http://www.alibaba.com/schema/services/form/conditions"
-                minOccurs="0" />
+                     minOccurs="0" />
             <xsd:any namespace="http://www.alibaba.com/schema/services/form/validators"
-                minOccurs="1" maxOccurs="unbounded" />
+                     minOccurs="1" maxOccurs="unbounded" />
         </xsd:sequence>
         <xsd:attribute name="test" type="xsd:string" />
     </xsd:complexType>
@@ -37,7 +37,7 @@
     <xsd:complexType name="ChooseValidatorOtherwiseType">
         <xsd:sequence>
             <xsd:any namespace="http://www.alibaba.com/schema/services/form/validators"
-                minOccurs="1" maxOccurs="unbounded" />
+                     minOccurs="1" maxOccurs="unbounded" />
         </xsd:sequence>
     </xsd:complexType>
 

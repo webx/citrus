@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:services="http://www.alibaba.com/schema/services"
-    xmlns:filters="http://www.alibaba.com/schema/services/resource-loading/filters"
-    xmlns:loaders="http://www.alibaba.com/schema/services/resource-loading/loaders"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:p="http://www.springframework.org/schema/p"
-    xsi:schemaLocation="
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns:filters="http://www.alibaba.com/schema/services/resource-loading/filters"
+             xmlns:loaders="http://www.alibaba.com/schema/services/resource-loading/loaders"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xsi:schemaLocation="
                http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
                http://www.alibaba.com/schema/services/resource-loading/filters http://localhost:8080/schema/services-resource-loading-filters.xsd
                http://www.alibaba.com/schema/services/resource-loading/loaders http://localhost:8080/schema/services-resource-loading-loaders.xsd
@@ -14,7 +14,7 @@
 
     <services:resource-loading id="resourceLoadingService_1" />
     <services:resource-loading id="myResourceLoadingService"
-        parentRef="myParentResourceLoadingService" />
+                               parentRef="myParentResourceLoadingService" />
     <services:resource-loading id="resourceLoadingService_2" />
 
     <services:resource-loading>
@@ -67,15 +67,15 @@
         <services:resource-alias pattern="/asURL" name="/classpath" />
         <services:resource-filters pattern="/asURL">
             <filters:filter
-                class="com.alibaba.citrus.service.resource.ResourceLoadingServiceTests$NoURLFilter"
-             />
+                    class="com.alibaba.citrus.service.resource.ResourceLoadingServiceTests$NoURLFilter"
+                    />
         </services:resource-filters>
 
         <services:resource-alias pattern="/asStream" name="/classpath" />
         <services:resource-filters pattern="/asStream">
             <filters:filter
-                class="com.alibaba.citrus.service.resource.ResourceLoadingServiceTests$NoStreamFilter"
-             />
+                    class="com.alibaba.citrus.service.resource.ResourceLoadingServiceTests$NoStreamFilter"
+                    />
         </services:resource-filters>
 
     </services:resource-loading>

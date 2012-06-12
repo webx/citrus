@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:services="http://www.alibaba.com/schema/services"
-    xmlns:filters="http://www.alibaba.com/schema/services/resource-loading/filters"
-    xmlns:plugins="http://www.alibaba.com/schema/services/template/engines/freemarker/plugins"
-    xmlns:request-contexts="http://www.alibaba.com/schema/services/request-contexts"
-    xmlns:loaders="http://www.alibaba.com/schema/services/resource-loading/loaders"
-    xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:p="http://www.springframework.org/schema/p"
-    xsi:schemaLocation="
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns:filters="http://www.alibaba.com/schema/services/resource-loading/filters"
+             xmlns:plugins="http://www.alibaba.com/schema/services/template/engines/freemarker/plugins"
+             xmlns:request-contexts="http://www.alibaba.com/schema/services/request-contexts"
+             xmlns:loaders="http://www.alibaba.com/schema/services/resource-loading/loaders"
+             xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xsi:schemaLocation="
                http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
                http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
                http://www.alibaba.com/schema/services/resource-loading/loaders http://localhost:8080/schema/services-resource-loading-loaders.xsd
@@ -62,9 +62,9 @@
         <engines:freemarker-engine>
             <engines:plugins>
                 <plugins:plugin class="com.alibaba.citrus.service.freemarker.impl.MyPlugin"
-                    p:charset="GBK" />
+                                p:charset="GBK" />
                 <plugins:plugin class="com.alibaba.citrus.service.freemarker.impl.MyPlugin"
-                    p:booleanFormat="y,n" />
+                                p:booleanFormat="y,n" />
             </engines:plugins>
         </engines:freemarker-engine>
     </services:template>
@@ -75,8 +75,8 @@
         </services:resource>
         <services:resource-filters pattern="/templates/test2.ftl">
             <filters:filter
-                class="com.alibaba.citrus.service.freemarker.SpringResourceLoaderAdapterTests$NoURLFilter"
-             />
+                    class="com.alibaba.citrus.service.freemarker.SpringResourceLoaderAdapterTests$NoURLFilter"
+                    />
         </services:resource-filters>
     </services:resource-loading>
 

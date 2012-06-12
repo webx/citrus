@@ -27,11 +27,11 @@ a {
     text-decoration: none;
 }
 
-a:link,a:visited {
+a:link, a:visited {
 
 }
 
-a:hover,a:active {
+a:hover, a:active {
     font-weight: bold
 }
 
@@ -40,12 +40,12 @@ a:hover,a:active {
     background-color: inherit;
 }
 
-li.file,li.directory {
+li.file, li.directory {
     list-style: none;
     white-space: nowrap;
 }
 
-li.file img,li.directory img {
+li.file img, li.directory img {
     margin: 2px;
 }
 
@@ -60,7 +60,7 @@ div.control-bar span {
     padding: 10px;
 }
 
-.code,.xml-template {
+.code, .xml-template {
     font-family: Consolas, "Courier New", Courier, monospace;
     font-size: small;
 }

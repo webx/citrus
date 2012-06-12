@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:springext="http://www.alibaba.com/schema/springext/base"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+            xmlns:springext="http://www.alibaba.com/schema/springext/base"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 
     <xsd:import namespace="http://www.springframework.org/schema/beans"
-        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+                schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
 
     <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
-        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+                schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
 
     <xsd:element name="fallback-module-rule" type="FallbackModuleRuleType">
         <xsd:annotation>
@@ -27,7 +27,7 @@
     "about.Default"
     "Default"
     "DefaultScreen"（即配置文件中指定的默认module名）
-    
+
     注意，如果上例中DefaultScreen不存在或未指定默认值，则返回最初的结果： about.directions.Driving。
             ]]></xsd:documentation>
         </xsd:annotation>

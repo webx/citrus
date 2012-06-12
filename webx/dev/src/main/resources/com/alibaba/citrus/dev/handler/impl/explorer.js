@@ -10,10 +10,10 @@ function setQuery(resourceName, submit) {
 }
 
 function registerResolvableDepValueHandle() {
-    var handleClick = function(event) {
+    var handleClick = function (event) {
         var imgObj = $(event.target.id);
         var imgSrc = imgObj.src;
-        var content  = event.target.id.gsub(/^handle-/, 'resolvable-deps-value-');
+        var content = event.target.id.gsub(/^handle-/, 'resolvable-deps-value-');
         var index = imgSrc.lastIndexOf('/') + 1;
         var file = imgSrc.substring(index);
         var prefix = imgSrc.substring(0, index);
@@ -27,16 +27,16 @@ function registerResolvableDepValueHandle() {
         }
     };
 
-    $$('img.webx-resolvable-deps-value-handle').each( function(e) {
+    $$('img.webx-resolvable-deps-value-handle').each(function (e) {
         e.observe('click', handleClick);
     });
 }
 
 function registerConfigurationFileContentHandle() {
-    var handleClick = function(event) {
+    var handleClick = function (event) {
         var imgObj = $(event.target.id + '-img');
         var imgSrc = imgObj.src;
-        var content  = event.target.id.gsub(/^handle-/, 'configuration-file-content-');
+        var content = event.target.id.gsub(/^handle-/, 'configuration-file-content-');
         var index = imgSrc.lastIndexOf('/') + 1;
         var file = imgSrc.substring(index);
         var prefix = imgSrc.substring(0, index);
@@ -50,16 +50,16 @@ function registerConfigurationFileContentHandle() {
         }
     };
 
-    $$('a.handle-configuration-file-content').each( function(e) {
+    $$('a.handle-configuration-file-content').each(function (e) {
         e.observe('click', handleClick);
     });
 }
 
 function registerPullToolValueHandle() {
-    var handleClick = function(event) {
+    var handleClick = function (event) {
         var imgObj = $(event.target.id + '-img');
         var imgSrc = imgObj.src;
-        var content  = event.target.id.gsub(/^handle-/, 'pull-tool-value-');
+        var content = event.target.id.gsub(/^handle-/, 'pull-tool-value-');
         var index = imgSrc.lastIndexOf('/') + 1;
         var file = imgSrc.substring(index);
         var prefix = imgSrc.substring(0, index);
@@ -73,25 +73,25 @@ function registerPullToolValueHandle() {
         }
     };
 
-    $$('a.webx-pull-tool').each( function(e) {
+    $$('a.webx-pull-tool').each(function (e) {
         e.observe('click', handleClick);
     });
 }
 
-document.observe("dom:loaded", function() {
-    $$('.webx-resolvable-deps-value').each( function(e) {
+document.observe("dom:loaded", function () {
+    $$('.webx-resolvable-deps-value').each(function (e) {
         e.hide();
     });
 
     registerResolvableDepValueHandle();
 
-    $$('.configuration-file-content').each( function(e) {
+    $$('.configuration-file-content').each(function (e) {
         e.hide();
     });
 
     registerConfigurationFileContentHandle();
 
-    $$('.pull-tool-value').each( function(e) {
+    $$('.pull-tool-value').each(function (e) {
         e.hide();
     });
 

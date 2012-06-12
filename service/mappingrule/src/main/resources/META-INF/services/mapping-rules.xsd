@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:springext="http://www.alibaba.com/schema/springext/base"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+            xmlns:springext="http://www.alibaba.com/schema/springext/base"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 
     <xsd:import namespace="http://www.springframework.org/schema/beans"
-        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+                schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
 
     <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
-        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+                schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
 
     <xsd:element name="mapping-rules" type="MappingRuleServiceType">
         <xsd:annotation>
@@ -20,7 +20,7 @@
     <xsd:complexType name="MappingRuleServiceType">
         <xsd:sequence>
             <xsd:any maxOccurs="unbounded" minOccurs="0"
-                namespace="http://www.alibaba.com/schema/services/mapping-rules" />
+                     namespace="http://www.alibaba.com/schema/services/mapping-rules" />
         </xsd:sequence>
         <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
         <xsd:attribute name="parentRef" type="xsd:string" />
@@ -36,7 +36,7 @@
             <xsd:extension base="AbstractRuleType">
                 <xsd:choice minOccurs="0" maxOccurs="1">
                     <xsd:element name="moduleLoaderService" type="springext:referenceableBeanType"
-                        minOccurs="0" maxOccurs="1" />
+                                 minOccurs="0" maxOccurs="1" />
                 </xsd:choice>
                 <xsd:attribute name="moduleType" type="xsd:string" use="required" />
             </xsd:extension>
@@ -48,7 +48,7 @@
             <xsd:extension base="AbstractRuleType">
                 <xsd:choice minOccurs="0" maxOccurs="1">
                     <xsd:element name="templateService" type="springext:referenceableBeanType"
-                        minOccurs="0" maxOccurs="1" />
+                                 minOccurs="0" maxOccurs="1" />
                 </xsd:choice>
                 <xsd:attribute name="templatePrefix" type="xsd:string" />
             </xsd:extension>

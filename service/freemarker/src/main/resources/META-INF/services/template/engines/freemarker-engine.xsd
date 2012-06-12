@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns:beans="http://www.springframework.org/schema/beans" elementFormDefault="qualified">
+            xmlns:beans="http://www.springframework.org/schema/beans" elementFormDefault="qualified">
 
     <xsd:import namespace="http://www.springframework.org/schema/beans"
-        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+                schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
 
     <xsd:element name="freemarker-engine" type="FreeMarkerTemplateEngineType">
         <xsd:annotation>
@@ -25,7 +25,7 @@
                         </xsd:annotation>
                     </xsd:element>
                     <xsd:element name="advanced-properties" type="FreeMarkerPropertiesType"
-                        minOccurs="0">
+                                 minOccurs="0">
                         <xsd:annotation>
                             <xsd:documentation><![CDATA[
     FreeMarker高级设置，参见freemarker文档：
@@ -44,8 +44,8 @@
     <xsd:complexType name="FreeMarkerPluginsType">
         <xsd:sequence>
             <xsd:any
-                namespace="http://www.alibaba.com/schema/services/template/engines/freemarker/plugins"
-                minOccurs="0" maxOccurs="unbounded" />
+                    namespace="http://www.alibaba.com/schema/services/template/engines/freemarker/plugins"
+                    minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
     </xsd:complexType>
 

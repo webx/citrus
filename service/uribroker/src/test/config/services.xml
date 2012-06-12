@@ -1,11 +1,11 @@
 <beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:services="http://www.alibaba.com/schema/services"
-    xmlns:pull-tools="http://www.alibaba.com/schema/services/pull/factories"
-    xmlns:uris="http://www.alibaba.com/schema/services/uris"
-    xmlns:interceptors="http://www.alibaba.com/schema/services/uris/interceptors"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:p="http://www.springframework.org/schema/p"
-    xsi:schemaLocation="
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns:pull-tools="http://www.alibaba.com/schema/services/pull/factories"
+             xmlns:uris="http://www.alibaba.com/schema/services/uris"
+             xmlns:interceptors="http://www.alibaba.com/schema/services/uris/interceptors"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xsi:schemaLocation="
         http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
         http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
         http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
@@ -50,14 +50,14 @@
 
         <uris:uri id="linkWithInterceptor" exposed="true">
             <interceptors:interceptor
-                class="com.alibaba.citrus.service.uribroker.interceptor.MyInterceptor" p:path="abc" />
+                    class="com.alibaba.citrus.service.uribroker.interceptor.MyInterceptor" p:path="abc" />
             <interceptors:randomize />
         </uris:uri>
 
         <uris:uri id="linkWithPathInterceptor">
             <interceptors:interceptor
-                class="com.alibaba.citrus.service.uribroker.interceptor.MyPathInterceptor"
-                p:path="abc/def" />
+                    class="com.alibaba.citrus.service.uribroker.interceptor.MyPathInterceptor"
+                    p:path="abc/def" />
         </uris:uri>
 
         <!-- ContentURIBroker -->
@@ -157,7 +157,7 @@
 
         <!-- 任意bean -->
         <uris:uri-bean id="mybean" class="com.alibaba.citrus.service.uribroker.uri.GenericURIBroker"
-            exposed="true" extends="mybeanBase" p:serverScheme="https" />
+                       exposed="true" extends="mybeanBase" p:serverScheme="https" />
     </services:uris>
 
     <services:pull>

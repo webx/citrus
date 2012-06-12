@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:services="http://www.alibaba.com/schema/services"
-    xmlns:uris="http://www.alibaba.com/schema/services/uris"
-    xmlns:mapping-rules="http://www.alibaba.com/schema/services/mapping-rules"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:p="http://www.springframework.org/schema/p"
-    xsi:schemaLocation="
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns:uris="http://www.alibaba.com/schema/services/uris"
+             xmlns:mapping-rules="http://www.alibaba.com/schema/services/mapping-rules"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xsi:schemaLocation="
                http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
                http://www.alibaba.com/schema/services/mapping-rules http://localhost:8080/schema/services-mapping-rules.xsd
                http://www.alibaba.com/schema/services/uris http://localhost:8080/schema/services-uris.xsd
@@ -27,7 +27,7 @@
         </uris:turbine-uri>
 
         <uris:turbine-uri id="link3" extends="link2" actionParam="myaction"
-            convertTargetCase="false" targetMappingRule="mymapper" mappingRuleServiceRef="mapping2" />
+                          convertTargetCase="false" targetMappingRule="mymapper" mappingRuleServiceRef="mapping2" />
 
         <uris:turbine-content-uri id="tclink4" extends="link1">
             <uris:contextPath>mycontext</uris:contextPath>
@@ -54,7 +54,7 @@
     </services:mapping-rules>
 
     <services:mapping-rules id="mapping2"
-        xmlns="http://www.alibaba.com/schema/services/mapping-rules">
+                            xmlns="http://www.alibaba.com/schema/services/mapping-rules">
         <extension-rule id="mymapper">
             <mapping extension="vm" to="vhtml" />
         </extension-rule>

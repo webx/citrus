@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:p="http://www.springframework.org/schema/p"
-    xmlns:services="http://www.alibaba.com/schema/services"
-    xmlns="http://www.alibaba.com/schema/services/request-contexts"
-    xmlns:encoders="http://www.alibaba.com/schema/services/request-contexts/session/encoders"
-    xmlns:value-encoders="http://www.alibaba.com/schema/services/request-contexts/session/value-encoders"
-    xmlns:stores="http://www.alibaba.com/schema/services/request-contexts/session/stores"
-    xmlns:idgens="http://www.alibaba.com/schema/services/request-contexts/session/idgens"
-    xmlns:session-encrypters="http://www.alibaba.com/schema/services/request-contexts/session/encrypters"
-    xsi:schemaLocation="
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns="http://www.alibaba.com/schema/services/request-contexts"
+             xmlns:encoders="http://www.alibaba.com/schema/services/request-contexts/session/encoders"
+             xmlns:value-encoders="http://www.alibaba.com/schema/services/request-contexts/session/value-encoders"
+             xmlns:stores="http://www.alibaba.com/schema/services/request-contexts/session/stores"
+             xmlns:idgens="http://www.alibaba.com/schema/services/request-contexts/session/idgens"
+             xmlns:session-encrypters="http://www.alibaba.com/schema/services/request-contexts/session/encrypters"
+             xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
         http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
         http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
@@ -24,7 +24,7 @@
 
     <services:property-editor-registrars id="dateRegistrar">
         <services:property-editor-registrar
-            class="com.alibaba.citrus.service.configuration.support.CustomDateRegistrar" />
+                class="com.alibaba.citrus.service.configuration.support.CustomDateRegistrar" />
     </services:property-editor-registrars>
 
     <services:request-contexts id="simple_default">

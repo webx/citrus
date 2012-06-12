@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+            xmlns:beans="http://www.springframework.org/schema/beans"
+            xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
 
     <xsd:import namespace="http://www.springframework.org/schema/beans"
-        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+                schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
 
     <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
-        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+                schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
 
     <xsd:element name="velocity-engine" type="VelocityTemplateEngineType">
         <xsd:annotation>
@@ -36,7 +36,7 @@
                         </xsd:annotation>
                     </xsd:element>
                     <xsd:element name="advanced-properties" type="VelocityPropertiesType"
-                        minOccurs="0">
+                                 minOccurs="0">
                         <xsd:annotation>
                             <xsd:documentation><![CDATA[
     Velocity高级设置，参见velocity文档：
@@ -49,11 +49,11 @@
                 <xsd:attribute name="path" type="xsd:string" default="/templates" />
                 <xsd:attribute name="templateEncoding" type="xsd:string" default="UTF-8" />
                 <xsd:attribute name="cacheEnabled" type="springext:booleanOrPlaceholder"
-                    default="true" />
+                               default="true" />
                 <xsd:attribute name="modificationCheckInterval"
-                    type="springext:integerOrPlaceholder" default="2" />
+                               type="springext:integerOrPlaceholder" default="2" />
                 <xsd:attribute name="strictReference" type="springext:booleanOrPlaceholder"
-                    default="true" />
+                               default="true" />
             </xsd:extension>
         </xsd:complexContent>
     </xsd:complexType>
@@ -67,8 +67,8 @@
     <xsd:complexType name="VelocityPluginsType">
         <xsd:sequence>
             <xsd:any
-                namespace="http://www.alibaba.com/schema/services/template/engines/velocity/plugins"
-                minOccurs="0" maxOccurs="unbounded" />
+                    namespace="http://www.alibaba.com/schema/services/template/engines/velocity/plugins"
+                    minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
     </xsd:complexType>
 

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:services="http://www.alibaba.com/schema/services"
-    xmlns="http://www.alibaba.com/schema/services/mapping-rules"
-    xmlns:factories="http://www.alibaba.com/schema/services/module-loader/factories"
-    xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
-    xmlns:request-contexts="http://www.alibaba.com/schema/services/request-contexts"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:p="http://www.springframework.org/schema/p"
-    xsi:schemaLocation="
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns="http://www.alibaba.com/schema/services/mapping-rules"
+             xmlns:factories="http://www.alibaba.com/schema/services/module-loader/factories"
+             xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
+             xmlns:request-contexts="http://www.alibaba.com/schema/services/request-contexts"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xsi:schemaLocation="
         http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
         http://www.alibaba.com/schema/services/mapping-rules http://localhost:8080/schema/services-mapping-rules.xsd
         http://www.alibaba.com/schema/services/module-loader/factories http://localhost:8080/schema/services-module-loader-factories.xsd
@@ -28,9 +28,9 @@
 
     <services:template searchExtensions="true" searchLocalizedTemplates="true">
         <engines:template-engine id="myEngine1"
-            class="com.alibaba.citrus.service.mappingrule.impl.SimpleEngine" p:extensions="vm" />
+                                 class="com.alibaba.citrus.service.mappingrule.impl.SimpleEngine" p:extensions="vm" />
         <engines:template-engine id="myEngine2"
-            class="com.alibaba.citrus.service.mappingrule.impl.SimpleEngine" p:extensions="jsp" />
+                                 class="com.alibaba.citrus.service.mappingrule.impl.SimpleEngine" p:extensions="jsp" />
     </services:template>
 
     <services:mapping-rules>

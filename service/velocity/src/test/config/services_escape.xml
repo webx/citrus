@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:services="http://www.alibaba.com/schema/services"
-    xmlns:filters="http://www.alibaba.com/schema/services/resource-loading/filters"
-    xmlns:loaders="http://www.alibaba.com/schema/services/resource-loading/loaders"
-    xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
-    xmlns:plugins="http://www.alibaba.com/schema/services/template/engines/velocity/plugins"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:p="http://www.springframework.org/schema/p"
-    xsi:schemaLocation="
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns:filters="http://www.alibaba.com/schema/services/resource-loading/filters"
+             xmlns:loaders="http://www.alibaba.com/schema/services/resource-loading/loaders"
+             xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
+             xmlns:plugins="http://www.alibaba.com/schema/services/template/engines/velocity/plugins"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xsi:schemaLocation="
                http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
                http://www.alibaba.com/schema/services/resource-loading/filters http://localhost:8080/schema/services-resource-loading-filters.xsd
                http://www.alibaba.com/schema/services/resource-loading/loaders http://localhost:8080/schema/services-resource-loading-loaders.xsd
@@ -41,7 +41,7 @@
     <services:template id="with_rules" lazy-init="true">
         <engines:velocity-engine templateEncoding="GBK">
             <engines:plugins
-                xmlns="http://www.alibaba.com/schema/services/template/engines/velocity/plugins">
+                    xmlns="http://www.alibaba.com/schema/services/template/engines/velocity/plugins">
                 <escape-support defaultEscape="html">
                     <noescape>
                         <if-matches pattern="^control\." />
@@ -59,15 +59,15 @@
     <services:template id="with_rules_for_object" lazy-init="true">
         <engines:velocity-engine templateEncoding="GBK">
             <engines:plugins
-                xmlns="http://www.alibaba.com/schema/services/template/engines/velocity/plugins">
+                    xmlns="http://www.alibaba.com/schema/services/template/engines/velocity/plugins">
                 <escape-support defaultEscape="html">
                     <noescape>
                         <if-matches pattern="^myref" />
                     </noescape>
                 </escape-support>
                 <plugin
-                    class="com.alibaba.citrus.service.velocity.support.EscapeTests$Renderable2Handler"
-                 />
+                        class="com.alibaba.citrus.service.velocity.support.EscapeTests$Renderable2Handler"
+                        />
             </engines:plugins>
         </engines:velocity-engine>
     </services:template>

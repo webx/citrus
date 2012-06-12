@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://www.alibaba.com/schema/services"
-    xmlns:services="http://www.alibaba.com/schema/services"
-    xmlns:pull-tools="http://www.alibaba.com/schema/services/pull/factories"
-    xmlns:contents="http://www.alibaba.com/schema/services/mails/contents"
-    xmlns:loaders="http://www.alibaba.com/schema/services/resource-loading/loaders"
-    xmlns:filters="http://www.alibaba.com/schema/services/resource-loading/filters"
-    xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:p="http://www.springframework.org/schema/p"
-    xsi:schemaLocation="
+             xmlns="http://www.alibaba.com/schema/services"
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns:pull-tools="http://www.alibaba.com/schema/services/pull/factories"
+             xmlns:contents="http://www.alibaba.com/schema/services/mails/contents"
+             xmlns:loaders="http://www.alibaba.com/schema/services/resource-loading/loaders"
+             xmlns:filters="http://www.alibaba.com/schema/services/resource-loading/filters"
+             xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xsi:schemaLocation="
                http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
                http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
                http://www.alibaba.com/schema/services/mails/contents http://localhost:8080/schema/services-mails-contents.xsd
@@ -44,18 +44,18 @@
 
     <mails>
         <mail-store id="mystore_default" debug="true" default="true" user="aliren"
-            host="alibaba.com" />
+                    host="alibaba.com" />
 
         <mail-store id="mystore" host="myhost" user="myname" password="mypass" folder="INBOX2"
-            port="110" protocol="pop3">
+                    port="110" protocol="pop3">
             <property name="mail.pop3.connectiontimeout">30000</property>
         </mail-store>
 
         <mail-transport id="mytransport_default" debug="true" default="true" host="alibaba.com"
-            popBeforeSmtp="mystore" />
+                        popBeforeSmtp="mystore" />
 
         <mail-transport id="mytransport" host="myhost" user="myname" password="mypass" port="25"
-            protocol="smtp">
+                        protocol="smtp">
             <property name="mail.smtp.connectiontimeout" value="30000" />
         </mail-transport>
 
@@ -69,7 +69,7 @@
             <cc><![CDATA["我的地址" <cc2@alibaba.com>]]></cc>
             <bcc><![CDATA["我的地址" <bcc@alibaba.com>]]></bcc>
             <reply-to><![CDATA["我的地址" <reply-to@alibaba.com>]]></reply-to>
-            <subject> 我的标题 My Subject </subject>
+            <subject>我的标题 My Subject</subject>
             <contents:content class="com.alibaba.citrus.service.mail.MailServiceTests$MyContent">
                 <beans:property name="object" value="test" />
             </contents:content>
@@ -107,7 +107,7 @@
         </mail>
         <mail id="textTemplateContent_ftl" charset="GBK">
             <contents:text-template-content template="mail/mytemplate.ftl" contentType="text/html"
-             />
+                    />
         </mail>
 
         <!-- HTMLTemplateContent -->
@@ -171,7 +171,7 @@
 
     <pull>
         <pull-tools:constants id="myconst"
-            constantClass="com.alibaba.citrus.service.mail.MailConstant" />
+                              constantClass="com.alibaba.citrus.service.mail.MailConstant" />
         <pull-tools:utils />
     </pull>
 
@@ -189,7 +189,7 @@
         <resource-alias pattern="/asStream" name="/" />
         <resource-filters pattern="/asStream">
             <filters:filter
-                class="com.alibaba.citrus.service.mail.AbstractMailBuilderTests$NoURLFilter" />
+                    class="com.alibaba.citrus.service.mail.AbstractMailBuilderTests$NoURLFilter" />
         </resource-filters>
 
     </resource-loading>

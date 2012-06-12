@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:services="http://www.alibaba.com/schema/services"
-    xmlns:dr-factories="http://www.alibaba.com/schema/services/data-resolver/factories"
-    xmlns:ml-adapters="http://www.alibaba.com/schema/services/module-loader/adapters"
-    xmlns:ml-factories="http://www.alibaba.com/schema/services/module-loader/factories"
-    xmlns:util="http://www.springframework.org/schema/util"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:p="http://www.springframework.org/schema/p"
-    xsi:schemaLocation="
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns:dr-factories="http://www.alibaba.com/schema/services/data-resolver/factories"
+             xmlns:ml-adapters="http://www.alibaba.com/schema/services/module-loader/adapters"
+             xmlns:ml-factories="http://www.alibaba.com/schema/services/module-loader/factories"
+             xmlns:util="http://www.springframework.org/schema/util"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xsi:schemaLocation="
         http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
         http://www.alibaba.com/schema/services/data-resolver/factories http://localhost:8080/schema/services-data-resolver-factories.xsd
         http://www.alibaba.com/schema/services/module-loader/adapters http://localhost:8080/schema/services-module-loader-adapters.xsd
@@ -27,7 +27,7 @@
     </services:module-loader>
 
     <services:data-resolver id="myResolvers"
-        xmlns="http://www.alibaba.com/schema/services/data-resolver/factories">
+                            xmlns="http://www.alibaba.com/schema/services/data-resolver/factories">
         <factory class="com.alibaba.test2.dataresolver.MapResolverFactory">
             <beans:constructor-arg>
                 <util:map>

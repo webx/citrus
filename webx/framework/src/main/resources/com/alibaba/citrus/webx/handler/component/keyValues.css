@@ -19,22 +19,22 @@ td.item-key {
 }
 
 td.item-key .item-count {
-    color:grey;
-    font-size:smaller;
+    color: grey;
+    font-size: smaller;
 }
 
 td.item-value ul {
-    margin:0;
-    padding:0;
-    list-style:none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 td.item-value .item-entry-key {
-    color:dark;
-    font-size:smaller;
-    font-weight:bold;
+    color: dark;
+    font-size: smaller;
+    font-weight: bold;
 }
 
 td.item-value .item-entry-value {
-    display:inline;
+    display: inline;
 }

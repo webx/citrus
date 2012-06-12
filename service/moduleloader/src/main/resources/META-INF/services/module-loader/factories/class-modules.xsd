@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns:springext="http://www.alibaba.com/schema/springext/base"
-    xmlns:beans="http://www.springframework.org/schema/beans" elementFormDefault="qualified">
+            xmlns:springext="http://www.alibaba.com/schema/springext/base"
+            xmlns:beans="http://www.springframework.org/schema/beans" elementFormDefault="qualified">
 
     <xsd:import namespace="http://www.springframework.org/schema/beans"
-        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+                schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
 
     <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
-        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+                schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
 
     <xsd:include
-        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/services/module-loader/factories/factories-base.xsd" />
+            schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/services/module-loader/factories/factories-base.xsd" />
 
     <xsd:element name="class-modules" type="ClassModuleFactoryType">
         <xsd:annotation>
@@ -68,7 +68,7 @@
     <xsd:group name="ClassModuleFactoryClassFiltersGroup">
         <xsd:sequence>
             <xsd:element name="include-filter" type="ClassModuleFactoryFilterType" minOccurs="0"
-                maxOccurs="unbounded">
+                         maxOccurs="unbounded">
                 <xsd:annotation>
                     <xsd:documentation><![CDATA[
     仅包含符合条件的类。
@@ -76,7 +76,7 @@
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="exclude-filter" type="ClassModuleFactoryFilterType" minOccurs="0"
-                maxOccurs="unbounded">
+                         maxOccurs="unbounded">
                 <xsd:annotation>
                     <xsd:documentation><![CDATA[
     排除符合条件的类。
@@ -91,7 +91,7 @@
             <xsd:annotation>
                 <xsd:documentation><![CDATA[
     指定module classes过滤器的类型。
-    
+
     "wildcard"   - 指定类名的通配符，匹配的将被包含或排除。（默认为wildcard）
     "assignable" - 指定基类或接口，其子类或实现类将被包含或排除。
     "aspectj"    - 指定AspectJ type expression，匹配的类型将被包含或排除。

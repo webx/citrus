@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    targetNamespace="http://www.alibaba.com/schema/springext/base"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+            targetNamespace="http://www.alibaba.com/schema/springext/base"
+            xmlns:beans="http://www.springframework.org/schema/beans"
+            xmlns="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
 
     <xsd:import namespace="http://www.springframework.org/schema/beans"
-        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+                schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
 
     <xsd:attributeGroup name="identifiedTypeAttributeSubset">
         <xsd:annotation>

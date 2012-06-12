@@ -4,7 +4,7 @@
  * Resolvable Deps.
  */
 #webx-resolvable-deps {
-    font-family: Consolas,"Courier New",Courier,monospace;
+    font-family: Consolas, "Courier New", Courier, monospace;
 }
 
 #webx-resolvable-deps ol {
@@ -30,7 +30,7 @@
  * Configurations.
  */
 #webx-configurations .configuration-file-name {
-    font-family: Consolas,"Courier New",Courier,monospace;
+    font-family: Consolas, "Courier New", Courier, monospace;
 }
 
 /**
@@ -76,19 +76,19 @@
  * Pull Tools.
  */
 #webx-pull-tools .webx-pull-tool {
-    color:#000096;
+    color: #000096;
     font-weight: bolder;
 }
 
 #webx-pull-tools .webx-pull-tool-set {
-    color:grey;
+    color: grey;
     font-style: italic;
     font-weight: bolder;
 }
 
 #webx-pull-tools li pre {
     border: 1px solid grey;
-    margin: 0 0 0.5em 0 ;
+    margin: 0 0 0.5em 0;
     padding: 0.5em;
 }
 
@@ -116,7 +116,7 @@
  * Common.
  */
 .hl-tag {
-    color:#000096;
+    color: #000096;
 }
 
 .hl-attribute {

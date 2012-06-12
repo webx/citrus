@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+            xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
 
     <xsd:import namespace="http://www.springframework.org/schema/beans"
-        schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+                schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
 
     <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
-        schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+                schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
 
     <xsd:element name="page-authorization" type="PageAuthorizationType">
         <xsd:annotation>
@@ -19,7 +19,7 @@
     <xsd:complexType name="PageAuthorizationType">
         <xsd:sequence>
             <xsd:element name="match" minOccurs="0" maxOccurs="unbounded"
-                type="PageAuthorizationMatchType" />
+                         type="PageAuthorizationMatchType" />
         </xsd:sequence>
         <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
         <xsd:attribute name="default" default="deny">
@@ -35,7 +35,7 @@
     <xsd:complexType name="PageAuthorizationMatchType">
         <xsd:sequence>
             <xsd:element name="grant" minOccurs="0" maxOccurs="unbounded"
-                type="PageAuthorizationGrantType" />
+                         type="PageAuthorizationGrantType" />
         </xsd:sequence>
         <xsd:attribute name="target" type="xsd:string" use="required" />
     </xsd:complexType>

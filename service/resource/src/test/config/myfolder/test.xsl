@@ -3,13 +3,13 @@
     <xsl:output indent="no" method="xml" encoding="GB2312" />
     <xsl:template match="persons">
         <greetings>
-            <xsl:apply-templates/>
+            <xsl:apply-templates />
         </greetings>
     </xsl:template>
     <xsl:template match="person">
         <hello>
             <xsl:attribute name="name">
-                <xsl:value-of select="@name"/>
+                <xsl:value-of select="@name" />
             </xsl:attribute>
         </hello>
     </xsl:template>
