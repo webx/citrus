@@ -44,13 +44,14 @@ import org.slf4j.LoggerFactory;
  */
 public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper implements SetLocaleRequestContext {
     private final static Logger log = LoggerFactory.getLogger(SetLocaleRequestContext.class);
-    private Pattern inputCharsetPattern;
-    private Pattern outputCharsetPattern;
-    private Locale  defaultLocale;
-    private String  defaultCharset;
-    private String  sessionKey;
-    private String  paramKey;
-    private Locale  locale;
+    private Pattern              inputCharsetPattern;
+    private Pattern              outputCharsetPattern;
+    private SetLocaleOverrider[] overriders;
+    private Locale               defaultLocale;
+    private String               defaultCharset;
+    private String               sessionKey;
+    private String               paramKey;
+    private Locale               locale;
 
     /**
      * 包装一个<code>RequestContext</code>对象。
@@ -69,6 +70,10 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
 
     public void setOutputCharsetPattern(Pattern outputCharsetPattern) {
         this.outputCharsetPattern = outputCharsetPattern;
+    }
+
+    public void setOverriders(SetLocaleOverrider[] overriders) {
+        this.overriders = overriders;
     }
 
     public void setDefaultLocale(Locale defaultLocale) {
@@ -121,33 +126,115 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
         ((ResponseWrapper) getResponse()).setCharacterEncoding(charset);
     }
 
-    /** 设置locale。 */
+    /** 设置locale、输入charset、输出charset。 */
     @Override
     public void prepare() {
-        // 首先从session中取得input charset，并设置到request中，以便进一步解析request parameters。
-        LocaleInfo locale = getLocaleFromSession();
+        // 首先从session中取得localeInfo，如果不存在，则取得默认值。
+        LocaleInfo localeInfo = getLocaleInfoFromSessionOrGetTheDefaultValue();
 
-        try {
-            // 试图从queryString中取得inputCharset
-            String queryString = getRequest().getQueryString();
-            String inputCharset = locale.getCharset().name();
+        // 匹配request uri
+        SetLocaleOverrider overrider = getMatchedOverrider();
 
-            if (queryString != null) {
-                Matcher matcher = inputCharsetPattern.matcher(queryString);
+        // 将input charset设置到request中，以便进一步解析request parameters。
+        setInputCharsetToRequest(localeInfo.getCharset().name(), overrider);
 
-                if (matcher.find()) {
-                    String charset = null;
+        // 现在已经可以安全地调用getParameter()方法，以解析参数了，因为input charset已经被设置。
+        // 从parameter中取locale信息，如果存在，则设置到cookie中。
+        if (PARAMETER_SET_TO_DEFAULT_VALUE.equalsIgnoreCase(getRequest().getParameter(paramKey))) {
+            localeInfo = resetLocaleInfoInSession();
+        } else {
+            String outputCharset = getOutputCharsetFromQueryString();
 
-                    if (matcher.groupCount() >= 2) {
-                        charset = matcher.group(2);
-                    }
+            if (outputCharset == null) {
+                outputCharset = getOutputCharsetOverridden(overrider);
+            }
 
-                    if (LocaleUtil.isCharsetSupported(charset)) {
-                        inputCharset = charset;
-                    } else {
-                        log.warn("Specified input charset is not supported: " + charset);
-                    }
+            // 如果parameter中指明了locale，则取得并保存之
+            LocaleInfo paramLocale = getLocaleInfoFromParameter();
+
+            if (paramLocale != null) {
+                getRequest().getSession().setAttribute(sessionKey, paramLocale.toString());
+
+                // 用parameter中的locale信息覆盖session中的localeInfo信息。
+                localeInfo = paramLocale;
+            }
+
+            if (outputCharset != null) {
+                localeInfo = new LocaleInfo(localeInfo.getLocale(), outputCharset);
+            }
+        }
+
+        // 设置用于输出的locale信息。
+        getResponse().setLocale(localeInfo.getLocale());
+        setResponseCharacterEncoding(localeInfo.getCharset().name());
+        log.debug("Set OUTPUT locale:charset to " + localeInfo);
+
+        // 设置thread context中的locale信息。
+        LocaleUtil.setContext(localeInfo.getLocale(), localeInfo.getCharset().name());
+        log.debug("Set THREAD CONTEXT locale:charset to " + localeInfo);
+
+        this.locale = localeInfo.getLocale();
+    }
+
+    /** 找出request uri匹配的overrider。 */
+    private SetLocaleOverrider getMatchedOverrider() {
+        if (overriders != null) {
+            String uri = getRequest().getRequestURI();
+
+            for (SetLocaleOverrider overrider : overriders) {
+                if (overrider.getRequestUriPattern().matcher(uri).find()) {
+                    return overrider;
                 }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * 从当前请求的session中取得用户的locale设置。如果session未设置，则取默认值。
+     *
+     * @return 当前session中的locale设置或默认值
+     */
+    private LocaleInfo getLocaleInfoFromSessionOrGetTheDefaultValue() {
+        HttpSession session = getRequest().getSession(false); // 如果session不存在，也不用创建。
+        String localeName = session == null ? null : (String) getRequest().getSession().getAttribute(sessionKey);
+        LocaleInfo localeInfo;
+
+        if (isEmpty(localeName)) {
+            localeInfo = new LocaleInfo(defaultLocale, defaultCharset);
+        } else {
+            localeInfo = LocaleInfo.parse(localeName);
+
+            if (!LocaleUtil.isLocaleSupported(localeInfo.getLocale())
+                || !LocaleUtil.isCharsetSupported(localeInfo.getCharset().name())) {
+                log.warn("Invalid locale " + localeInfo + " from session");
+
+                localeInfo = new LocaleInfo(defaultLocale, defaultCharset);
+            }
+        }
+
+        return localeInfo;
+    }
+
+    /**
+     * 设置input charset。
+     * 假如query string中指定了input charset，则采用之。
+     * 否则使用参数所指定的值作为input charset。
+     *
+     * @param inputCharset 默认input charset，或是从session中所取得的input charset
+     * @param overrider    如果有，则从中取得input charset
+     */
+    private void setInputCharsetToRequest(String inputCharset, SetLocaleOverrider overrider) {
+        try {
+            String charset = getInputCharsetFromQueryString();
+
+            if (charset == null) {
+                charset = getInputCharsetOverridden(overrider);
+            }
+
+            if (charset != null) {
+                inputCharset = charset;
             }
 
             getRequest().setCharacterEncoding(inputCharset);
@@ -157,97 +244,118 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
             try {
                 getRequest().setCharacterEncoding(CHARSET_DEFAULT);
 
-                log.warn("Unknown charset " + locale.getCharset() + ".  Set INPUT charset to " + CHARSET_DEFAULT);
+                log.warn("Unknown charset {}.  Set INPUT charset to {}", inputCharset, CHARSET_DEFAULT);
             } catch (UnsupportedEncodingException ee) {
-                log.error("Failed to set INPUT charset to " + locale.getCharset());
+                log.error("Failed to set INPUT charset to {}", CHARSET_DEFAULT);
             }
         }
+    }
 
-        // 从parameter中取locale信息，如果存在，则设置到cookie中。
-        if (PARAMETER_SET_TO_DEFAULT_VALUE.equalsIgnoreCase(getRequest().getParameter(paramKey))) {
-            HttpSession session = getRequest().getSession(false); // 如果session不存在，也不用创建
+    /** 试图从queryString中取得inputCharset。 */
+    private String getInputCharsetFromQueryString() {
+        String inputCharsetQS = null;
+        String queryString = getRequest().getQueryString();
 
-            if (session != null) {
-                session.removeAttribute(sessionKey);
-            }
+        if (queryString != null) {
+            Matcher matcher = inputCharsetPattern.matcher(queryString);
 
-            locale = new LocaleInfo(defaultLocale, defaultCharset);
+            if (matcher.find()) {
+                String charset = null;
 
-            log.debug("Reset OUTPUT locale:charset to " + locale);
-        } else {
-            // 试图从queryString中取得outputCharset
-            String queryString = getRequest().getQueryString();
-            String outputCharset = null;
+                if (matcher.groupCount() >= 2) {
+                    charset = matcher.group(2);
+                }
 
-            if (queryString != null) {
-                Matcher matcher = outputCharsetPattern.matcher(queryString);
-
-                if (matcher.find()) {
-                    String charset = null;
-
-                    if (matcher.groupCount() >= 2) {
-                        charset = matcher.group(2);
-                    }
-
-                    if (LocaleUtil.isCharsetSupported(charset)) {
-                        outputCharset = charset;
-                    } else {
-                        log.warn("Specified output charset is not supported: " + charset);
-                    }
+                if (LocaleUtil.isCharsetSupported(charset)) {
+                    inputCharsetQS = charset;
+                } else {
+                    log.warn("Specified input charset is not supported: " + charset);
                 }
             }
+        }
 
-            // 如果parameter中指明了locale，则取得并保存之
-            LocaleInfo paramLocale = getLocaleFromParameter();
+        return inputCharsetQS;
+    }
 
-            if (paramLocale != null) {
-                getRequest().getSession().setAttribute(sessionKey, paramLocale.toString());
+    private String getInputCharsetOverridden(SetLocaleOverrider overrider) {
+        String inputCharsetOverridden = null;
 
-                // 用parameter中的locale信息覆盖cookie的信息。
-                locale = paramLocale;
-            }
+        if (overrider != null) {
+            String charset = overrider.getInputCharset();
 
-            if (outputCharset != null) {
-                locale = new LocaleInfo(locale.getLocale(), outputCharset);
+            if (charset != null) {
+                if (LocaleUtil.isCharsetSupported(charset)) {
+                    inputCharsetOverridden = charset;
+                } else {
+                    log.warn("Specified overridden input charset is not supported: " + charset);
+                }
             }
         }
 
-        // 设置用于输出的locale信息。
-        getResponse().setLocale(locale.getLocale());
-        setResponseCharacterEncoding(locale.getCharset().name());
-        log.debug("Set OUTPUT locale:charset to " + locale);
-
-        // 设置thread context中的locale信息。
-        LocaleUtil.setContext(locale.getLocale(), locale.getCharset().name());
-        log.debug("Set THREAD CONTEXT locale:charset to " + locale);
-
-        this.locale = locale.getLocale();
+        return inputCharsetOverridden;
     }
 
     /**
-     * 从当前请求的session中取得用户的locale设置。如果session未设置，则取默认值。
+     * 恢复session中所保存的localeInfo信息。
      *
-     * @return 当前session中的locale设置
+     * @return 默认的localeInfo
      */
-    private LocaleInfo getLocaleFromSession() {
-        HttpSession session = getRequest().getSession(false); // 如果session不存在，也不用创建。
-        String localeName = session == null ? null : (String) getRequest().getSession().getAttribute(sessionKey);
-        LocaleInfo locale = null;
+    private LocaleInfo resetLocaleInfoInSession() {
+        HttpSession session = getRequest().getSession(false); // 如果session不存在，也不用创建
 
-        if (isEmpty(localeName)) {
-            locale = new LocaleInfo(defaultLocale, defaultCharset);
-        } else {
-            locale = LocaleInfo.parse(localeName);
+        if (session != null) {
+            session.removeAttribute(sessionKey);
+        }
 
-            if (!LocaleUtil.isLocaleSupported(locale.getLocale())
-                || !LocaleUtil.isCharsetSupported(locale.getCharset().name())) {
-                log.warn("Invalid locale " + locale + " from session");
+        LocaleInfo localeInfo = new LocaleInfo(defaultLocale, defaultCharset);
 
-                locale = new LocaleInfo(defaultLocale, defaultCharset);
+        log.debug("Reset OUTPUT locale:charset to " + localeInfo);
+
+        return localeInfo;
+    }
+
+    /** 试图从queryString中取得outputCharset。 */
+    private String getOutputCharsetFromQueryString() {
+        String queryString = getRequest().getQueryString();
+        String outputCharsetQS = null;
+
+        if (queryString != null) {
+            Matcher matcher = outputCharsetPattern.matcher(queryString);
+
+            if (matcher.find()) {
+                String charset = null;
+
+                if (matcher.groupCount() >= 2) {
+                    charset = matcher.group(2);
+                }
+
+                if (LocaleUtil.isCharsetSupported(charset)) {
+                    outputCharsetQS = charset;
+                } else {
+                    log.warn("Specified output charset is not supported: " + charset);
+                }
             }
         }
 
-        return locale;
+        return outputCharsetQS;
+    }
+
+    private String getOutputCharsetOverridden(SetLocaleOverrider overrider) {
+        String outputCharsetOverridden = null;
+
+        if (overrider != null) {
+            String charset = overrider.getOutputCharset();
+
+            if (charset != null) {
+                if (LocaleUtil.isCharsetSupported(charset)) {
+                    outputCharsetOverridden = charset;
+                } else {
+                    log.warn("Specified overridden output charset is not supported: " + charset);
+                }
+            }
+        }
+
+        return outputCharsetOverridden;
     }
 
     /**
@@ -255,22 +363,22 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
      *
      * @return 当前request parameters中的locale设置
      */
-    private LocaleInfo getLocaleFromParameter() {
+    private LocaleInfo getLocaleInfoFromParameter() {
         String localeName = getRequest().getParameter(paramKey);
-        LocaleInfo locale = null;
+        LocaleInfo localeInfo = null;
 
         if (!isEmpty(localeName)) {
-            locale = LocaleInfo.parse(localeName);
+            localeInfo = LocaleInfo.parse(localeName);
 
-            if (!LocaleUtil.isLocaleSupported(locale.getLocale())
-                || !LocaleUtil.isCharsetSupported(locale.getCharset().name())) {
-                log.warn("Invalid locale " + locale + " from request parameters");
+            if (!LocaleUtil.isLocaleSupported(localeInfo.getLocale())
+                || !LocaleUtil.isCharsetSupported(localeInfo.getCharset().name())) {
+                log.warn("Invalid locale " + localeInfo + " from request parameters");
 
-                locale = new LocaleInfo(defaultLocale, defaultCharset);
+                localeInfo = new LocaleInfo(defaultLocale, defaultCharset);
             }
         }
 
-        return locale;
+        return localeInfo;
     }
 
     /** 包装request。 */

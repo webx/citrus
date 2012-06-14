@@ -20,12 +20,8 @@ package com.alibaba.citrus.service.requestcontext.locale;
 import static com.alibaba.citrus.service.requestcontext.locale.SetLocaleRequestContext.*;
 import static org.junit.Assert.*;
 
-import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 import com.alibaba.citrus.util.i18n.LocaleUtil;
 import com.meterware.httpunit.HttpUnitUtils;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.i18n.LocaleContextHolder;
 
@@ -34,28 +30,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
  *
  * @author Michael Zhou
  */
-public class SetLocaleRequestContextTests extends AbstractRequestContextsTests<SetLocaleRequestContext> {
-    private boolean useSession;
-
-    @BeforeClass
-    public static void initFactory() {
-        createBeanFactory("services-locale.xml");
-    }
-
-    @Before
-    public void init() throws Exception {
-        invokeReadFileServlet("form.html");
-        initRequestContext();
-    }
-
-    @After
-    public void dispose() {
-        // 确保session没有启动
-        if (!useSession) {
-            assertFalse("sessionCreated", ((MyHttpRequest) request).isSessionCreated());
-        }
-    }
-
+public class SetLocaleRequestContextTests extends AbstractSetLocaleRequestContextTests {
     @Test
     public void setContentTypeThenSetCharset() throws Exception {
         // 默认为utf8

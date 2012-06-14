@@ -16,6 +16,11 @@
     <xsd:complexType name="SetLocaleRequestContextType">
         <xsd:complexContent>
             <xsd:extension base="beans:identifiedType">
+                <xsd:sequence>
+                    <xsd:element name="override" type="SetLocaleRequestContextOverrideType" minOccurs="0"
+                                 maxOccurs="unbounded" />
+                </xsd:sequence>
+
                 <xsd:attribute name="inputCharsetParam" type="xsd:string" default="_input_charset">
                     <xsd:annotation>
                         <xsd:documentation><![CDATA[
@@ -70,6 +75,12 @@
             </xsd:extension>
         </xsd:complexContent>
 
+    </xsd:complexType>
+
+    <xsd:complexType name="SetLocaleRequestContextOverrideType">
+        <xsd:attribute name="uri" type="xsd:string" />
+        <xsd:attribute name="inputCharset" type="xsd:string" use="optional" />
+        <xsd:attribute name="outputCharset" type="xsd:string" use="optional" />
     </xsd:complexType>
 
 </xsd:schema>

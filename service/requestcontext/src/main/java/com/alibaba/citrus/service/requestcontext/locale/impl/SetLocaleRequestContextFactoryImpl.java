@@ -37,15 +37,16 @@ import com.alibaba.citrus.util.i18n.LocaleUtil;
  * @author Michael Zhou
  */
 public class SetLocaleRequestContextFactoryImpl extends AbstractRequestContextFactory<SetLocaleRequestContext> {
-    private String  inputCharsetParam;
-    private Pattern inputCharsetPattern;
-    private String  outputCharsetParam;
-    private Pattern outputCharsetPattern;
-    private String  defaultLocaleName;
-    private Locale  defaultLocale;
-    private String  defaultCharset;
-    private String  sessionKey;
-    private String  paramKey;
+    private String               inputCharsetParam;
+    private Pattern              inputCharsetPattern;
+    private String               outputCharsetParam;
+    private Pattern              outputCharsetPattern;
+    private SetLocaleOverrider[] overriders;
+    private String               defaultLocaleName;
+    private Locale               defaultLocale;
+    private String               defaultCharset;
+    private String               sessionKey;
+    private String               paramKey;
 
     public void setInputCharsetParam(String inputCharsetParam) {
         this.inputCharsetParam = trimToNull(inputCharsetParam);
@@ -53,6 +54,10 @@ public class SetLocaleRequestContextFactoryImpl extends AbstractRequestContextFa
 
     public void setOutputCharsetParam(String outputCharsetParam) {
         this.outputCharsetParam = trimToNull(outputCharsetParam);
+    }
+
+    public void setOverriders(SetLocaleOverrider[] overriders) {
+        this.overriders = overriders;
     }
 
     public void setDefaultLocale(String defaultLocaleName) {
@@ -103,6 +108,7 @@ public class SetLocaleRequestContextFactoryImpl extends AbstractRequestContextFa
 
         requestContext.setInputCharsetPattern(inputCharsetPattern);
         requestContext.setOutputCharsetPattern(outputCharsetPattern);
+        requestContext.setOverriders(overriders);
         requestContext.setDefaultLocale(defaultLocale);
         requestContext.setDefaultCharset(defaultCharset);
         requestContext.setSessionKey(sessionKey);

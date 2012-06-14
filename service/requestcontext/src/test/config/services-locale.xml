@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:beans="http://www.springframework.org/schema/beans"
-             xmlns:p="http://www.springframework.org/schema/p"
              xmlns:services="http://www.alibaba.com/schema/services"
              xmlns="http://www.alibaba.com/schema/services/request-contexts"
              xsi:schemaLocation="
@@ -18,6 +17,13 @@
     <services:request-contexts id="setLocale_all">
         <set-locale inputCharsetParam="_input_charset" outputCharsetParam="_output_charset"
                     paramKey="_lang" sessionKey="_lang" defaultLocale="zh_CN" defaultCharset="UTF-8" />
+    </services:request-contexts>
+
+    <services:request-contexts id="setLocale_override">
+        <set-locale defaultLocale="zh_CN" defaultCharset="GBK">
+            <override uri="*.js" inputCharset="ISO-8859-1" outputCharset="ISO-8859-1" />
+            <override uri="*.json" inputCharset="UTF-8" outputCharset="UTF-8" />
+        </set-locale>
     </services:request-contexts>
 
 </beans:beans>

@@ -142,10 +142,10 @@
 
 * 改进：让webx同时支持spring2/3。
  （修改了一处代码，使resource loading机制可在spring3下运行；修改了若干单元测试，使它们在spring3下可以通过测试。）
-  
+
   虽然webx仍以spring 2.5.6.SEC02编译，但只需要将项目的pom.xml中的spring依赖改成3.0.6.RELEASE就可以工作。
   如希望以spring3来编译webx，只需要指定参数：mvn ... -Pspring3 即可。这样编译所生成的citrus-webx-all包将依赖于spring 3。
-  
+
   注意：spring3和spring2的代码是不完全兼容的。在spring2上编译的代码，未必能直接在spring3上运行，反之亦然。
   下面的命令确保webx同时兼容于spring的两个版本。
   mvn clean install           -- 在spring2中编译并测试
@@ -157,7 +157,7 @@
   -DdevelopmentMode.allowedHosts=192.168.1.*
 
 * 改进：增加MDC: %X{productionMode}，在日志中自动显示当前的生产模式或开发模式。
-  
+
 * 新增功能：将webx当作filter使用，filter chain的下游可以使用webx所提供的request contexts功能。配置方法如下（WEB-INF/web.xml）：
 
     <filter>
@@ -232,5 +232,11 @@
 * 改进form/velocity service测试，使之可以在非(locale=CHINA, charset=GBK)的情况下测试通过。
 * bugfix: number-validator设置限定范围以后，当用户输入非法数字时，validator抛出异常。
 * 改进form，对于field.getKey()，同时支持压缩格式（_fm.g._0.f）和非压缩格式（_fm.group._0.field），大小写不敏感。这样可以方便测试。
-  如果<form fieldKeyFormat="uncompressed">参数被明确指定，那么所有输出的字段名全为非压缩的，并且不支持压缩格式。 
+  如果<form fieldKeyFormat="uncompressed">参数被明确指定，那么所有输出的字段名全为非压缩的，并且不支持压缩格式。
 * 删除暂时没用的asm/codegen子模块，并将少量依赖到的类移到generictype子模块中。
+* SetLocaleRequestContext中增加功能：可根据request uri，自动设置与默认值不同的input/output charset
+
+  <set-locale>
+    <override uri="*.json" inputCharset="UTF-8" outputCharset="UTF-8" />
+  </set-locale>
+

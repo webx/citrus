@@ -17,7 +17,10 @@
 
 package com.alibaba.citrus.service.requestcontext.locale.impl;
 
+import static com.alibaba.citrus.springext.util.DomUtil.*;
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
+
+import java.util.List;
 
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -29,5 +32,22 @@ public class SetLocaleRequestContextFactoryDefinitionParser extends
     @Override
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         attributesToProperties(element, builder);
+
+        List<Object> overriders = createManagedList(element, parserContext);
+        ElementSelector overriderSelector = and(sameNs(element), name("override"));
+
+        for (Element subElement : subElements(element, overriderSelector)) {
+            overriders.add(parseOverrider(subElement, parserContext));
+        }
+
+        builder.addPropertyValue("overriders", overriders);
+    }
+
+    private Object parseOverrider(Element element, ParserContext parserContext) {
+        BeanDefinitionBuilder overriderBuilder = BeanDefinitionBuilder.genericBeanDefinition(SetLocaleOverrider.class);
+
+        attributesToProperties(element, overriderBuilder, "uri", "inputCharset", "outputCharset");
+
+        return overriderBuilder.getBeanDefinition();
     }
 }
