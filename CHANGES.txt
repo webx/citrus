@@ -240,3 +240,14 @@
     <override uri="*.json" inputCharset="UTF-8" outputCharset="UTF-8" />
   </set-locale>
 
+-- Changes in 3.1.0
+
+* 升级到spring 3.1.1
+
+* 修改代码，使之和spring 3.1.x兼容
+  + com.alibaba.citrus.springext.support.resolver.XmlBeanDefinitionReaderProcessor
+  + com.alibaba.citrus.test.context.SpringextContextLoader
+  + com.alibaba.citrus.service.resource.SpringIntegrationTests：反映Resource.getFilename()的改变
+
+* 增加检测代码，以防止webx3.1.x和spring 3.1.1之前的版本一起使用。
+

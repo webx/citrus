@@ -162,12 +162,8 @@ public class SpringIntegrationTests extends AbstractResourceLoadingTests {
             assertThat(e, exception("Resource Not Found [/classpath/not/exist]"));
         }
 
-        try {
-            resource.getFilename();
-            fail();
-        } catch (IllegalStateException e) {
-            assertThat(e, exception("NonExistResource[/classpath/not/exist]"));
-        }
+        // since spring 3.1.1
+        assertNull(resource.getFilename());
 
         try {
             resource.getInputStream();

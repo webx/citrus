@@ -17,6 +17,7 @@
 
 package com.alibaba.citrus.springext.support.resolver;
 
+import static com.alibaba.citrus.springext.util.ClassCompatibilityAssert.*;
 import static com.alibaba.citrus.util.Assert.*;
 
 import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
@@ -32,6 +33,7 @@ import org.springframework.beans.factory.xml.NamespaceHandlerResolver;
 import org.springframework.beans.factory.xml.ResourceEntityResolver;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.beans.factory.xml.XmlReaderContext;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 import org.w3c.dom.Element;
@@ -47,6 +49,10 @@ public class XmlBeanDefinitionReaderProcessor {
     private final static Logger log                      = LoggerFactory.getLogger(XmlBeanDefinitionReaderProcessor.class);
     private final XmlBeanDefinitionReader reader;
     private final boolean                 skipValidation;
+
+    static {
+        assertSpring3_1_x();
+    }
 
     public XmlBeanDefinitionReaderProcessor(XmlBeanDefinitionReader reader) {
         this(reader, Boolean.getBoolean(PROPERTY_SKIP_VALIDATION));
@@ -82,12 +88,12 @@ public class XmlBeanDefinitionReaderProcessor {
 
         // default resolvers
         EntityResolver defaultEntityResolver = new ResourceEntityResolver(resourceLoader);
-        NamespaceHandlerResolver defaultNamespaceHanderResolver = new DefaultNamespaceHandlerResolver(classLoader);
+        NamespaceHandlerResolver defaultNamespaceHandlerResolver = new DefaultNamespaceHandlerResolver(classLoader);
 
         // new resolvers
         EntityResolver entityResolver = new SchemaEntityResolver(defaultEntityResolver, cps, sps);
         NamespaceHandlerResolver namespaceHandlerResolver = new ConfigurationPointNamespaceHandlerResolver(cps,
-                                                                                                           defaultNamespaceHanderResolver);
+                                                                                                           defaultNamespaceHandlerResolver);
 
         reader.setEntityResolver(entityResolver);
         reader.setNamespaceHandlerResolver(namespaceHandlerResolver);
@@ -99,17 +105,29 @@ public class XmlBeanDefinitionReaderProcessor {
      * 时和原来不同。本类继承了spring的原有类，但对缺失的默认值提供明确的值。
      */
     public static class DocumentReaderSkippingValidation extends DefaultBeanDefinitionDocumentReader {
+        private Environment environment;
+
+        public Environment getEnvironment() {
+            return environment;
+        }
+
         @Override
-        protected BeanDefinitionParserDelegate createHelper(XmlReaderContext readerContext, Element root) {
-            BeanDefinitionParserDelegate delegate = new BeanDefinitionParserDelegateSkippingValidation(readerContext);
-            delegate.initDefaults(root);
+        public void setEnvironment(Environment environment) {
+            this.environment = environment;
+            super.setEnvironment(environment);
+        }
+
+        @Override
+        protected BeanDefinitionParserDelegate createHelper(XmlReaderContext readerContext, Element root, BeanDefinitionParserDelegate parentDelegate) {
+            BeanDefinitionParserDelegate delegate = new BeanDefinitionParserDelegateSkippingValidation(readerContext, getEnvironment());
+            delegate.initDefaults(root, parentDelegate);
             return delegate;
         }
     }
 
     private static class BeanDefinitionParserDelegateSkippingValidation extends BeanDefinitionParserDelegate {
-        public BeanDefinitionParserDelegateSkippingValidation(XmlReaderContext readerContext) {
-            super(readerContext);
+        public BeanDefinitionParserDelegateSkippingValidation(XmlReaderContext readerContext, Environment environment) {
+            super(readerContext, environment);
         }
 
         @Override
