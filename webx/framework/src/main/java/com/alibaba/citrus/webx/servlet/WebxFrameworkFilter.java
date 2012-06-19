@@ -18,6 +18,7 @@
 package com.alibaba.citrus.webx.servlet;
 
 import static com.alibaba.citrus.util.Assert.*;
+import static com.alibaba.citrus.util.FileUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static org.springframework.web.context.support.WebApplicationContextUtils.*;
 
@@ -29,6 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.citrus.webx.WebxComponents;
 import com.alibaba.citrus.webx.WebxRootController;
+import com.alibaba.citrus.webx.config.WebxConfiguration;
 import com.alibaba.citrus.webx.context.WebxComponentsContext;
 import com.alibaba.citrus.webx.util.RequestURIFilter;
 import org.slf4j.Logger;
@@ -46,6 +48,7 @@ public class WebxFrameworkFilter extends FilterBean {
     private WebxComponents   components;
     private RequestURIFilter excludeFilter;
     private RequestURIFilter passthruFilter;
+    private String           internalPathPrefix;
 
     /** 用于在servletContext中保存parent context的attribute key。 */
     public final String getParentContextAttribute() {
@@ -82,6 +85,13 @@ public class WebxFrameworkFilter extends FilterBean {
 
         if (parentContext instanceof WebxComponentsContext) {
             components = ((WebxComponentsContext) parentContext).getWebxComponents();
+
+            WebxConfiguration configuration = components.getParentWebxConfiguration();
+
+            if (configuration != null) {
+                internalPathPrefix = configuration.getInternalPathPrefix();
+                internalPathPrefix = normalizeAbsolutePath(internalPathPrefix, true); // 规格化成/internal
+            }
         }
 
         WebxRootController rootController = components.getWebxRootController();
@@ -127,9 +137,7 @@ public class WebxFrameworkFilter extends FilterBean {
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        // 如果指定了excludes，并且当前requestURI匹配任何一个exclude pattern，
-        // 则立即放弃控制，将控制还给servlet engine。
-        if (excludeFilter != null && excludeFilter.matches(request)) {
+        if (isExcluded(request)) {
             chain.doFilter(request, response);
             return;
         }
@@ -143,5 +151,36 @@ public class WebxFrameworkFilter extends FilterBean {
         } catch (Exception e) {
             throw new ServletException(e);
         }
+    }
+
+    boolean isExcluded(HttpServletRequest request) {
+        // 如果指定了excludes，并且当前requestURI匹配任何一个exclude pattern，
+        // 则立即放弃控制，将控制还给servlet engine。
+        // 但对于internal path，不应该被排除掉，否则internal页面会无法正常显示。
+        if (excludeFilter != null && excludeFilter.matches(request)) {
+            if (!isInternalRequest(request)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean isInternalRequest(HttpServletRequest request) {
+        if (internalPathPrefix == null) {
+            return false;
+        }
+
+        String path = request.getRequestURI();
+
+        if (path.equals(internalPathPrefix)) {
+            return true;
+        }
+
+        if (path.startsWith(internalPathPrefix) && path.charAt(internalPathPrefix.length()) == '/') {
+            return true;
+        }
+
+        return false;
     }
 }
