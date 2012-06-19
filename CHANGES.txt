@@ -240,6 +240,8 @@
     <override uri="*.json" inputCharset="UTF-8" outputCharset="UTF-8" />
   </set-locale>
 
+* bugfix: WebxFrameworkFilter中使用excludes排除.css,.js以后，在开发模式下直接访问webx的开发模式首页时出现页面混乱，因为internal里面的css和js也被过滤掉了。
+
 -- Changes in 3.1.0
 
 * 升级到spring 3.1.1

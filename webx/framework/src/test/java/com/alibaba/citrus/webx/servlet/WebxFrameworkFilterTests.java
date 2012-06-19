@@ -72,9 +72,16 @@ public class WebxFrameworkFilterTests extends AbstractWebxTests {
         assertExcluded(true, "/cc/aa/bb/test.jpg");
 
         assertExcluded(false, "/cc/aa/bb/test.htm");
+
+        // 对于internal路径，虽然匹配excludes但也不排除
+        assertExcluded(true, "/internal/test.jpg", true);
     }
 
     private void assertExcluded(boolean excluded, String requestURI) throws Exception {
+        assertExcluded(excluded, requestURI, false);
+    }
+
+    private void assertExcluded(boolean excluded, String requestURI, boolean internal) throws Exception {
         RequestURIFilter excludes = getFieldValue(filter, "excludeFilter", RequestURIFilter.class);
 
         HttpServletRequest request = createMock(HttpServletRequest.class);
@@ -83,16 +90,21 @@ public class WebxFrameworkFilterTests extends AbstractWebxTests {
 
         expect(request.getRequestURI()).andReturn(requestURI).anyTimes();
 
-        if (excluded) {
+        if (excluded && !internal) {
             filterChain.doFilter(request, response);
         }
 
         replay(request, response, filterChain);
 
-        assertEquals(excluded, excludes.matches(request));
+        if (internal) {
+            assertFalse(filter.isExcluded(request));
+        } else {
+            assertEquals(excluded, excludes.matches(request));
+        }
 
-        if (excluded) {
+        if (excluded && !internal) {
             filter.doFilter(request, response, filterChain); // 对excluded request调用doFilter，应该立即返回
+            assertTrue(filter.isExcluded(request));
         }
 
         verify(request, response, filterChain);
