@@ -34,7 +34,7 @@ public class ClassCompatibilityAssert {
         try {
             cl.loadClass("org.springframework.core.env.Environment");
         } catch (ClassNotFoundException e) {
-            fail("Unsupported Spring version: %s, required Spring 3.1.x or later", SpringVersion.getVersion());
+            fail("Unsupported Spring version: %s, requires Spring 3.1.x or later", SpringVersion.getVersion());
         }
     }
 }
