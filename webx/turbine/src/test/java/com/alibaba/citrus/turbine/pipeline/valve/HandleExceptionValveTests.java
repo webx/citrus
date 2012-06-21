@@ -52,13 +52,13 @@ public class HandleExceptionValveTests extends AbstractValveTests {
         HandleExceptionValve.ExceptionHandler handler;
 
         try {
-            new HandleExceptionValve.ExceptionHandler(null, -1, null);
+            new HandleExceptionValve.ExceptionHandler(null, -1, null, null, null);
             fail();
         } catch (IllegalArgumentException e) {
             assertThat(e, exception("no exception type"));
         }
 
-        handler = new HandleExceptionValve.ExceptionHandler(Exception.class, -10, "  ");
+        handler = new HandleExceptionValve.ExceptionHandler(Exception.class, -10, "  ", null, null);
 
         assertEquals(Exception.class, handler.getExceptionType());
         assertEquals(-1, handler.getStatusCode());
@@ -169,5 +169,19 @@ public class HandleExceptionValveTests extends AbstractValveTests {
 
         assertEquals(500, helper.getStatusCode());
         assertEquals("INTERNAL_SERVER_ERROR", helper.getMessage());
+    }
+
+    @Test
+    public void logging() {
+        pipeline = (PipelineImpl) factory.getBean("handleException_logging");
+
+        ErrorHandlerHelper.getInstance(newRequest).init("app1", new Exception(), null);
+        pipeline.newInvocation().invoke();
+
+        ErrorHandlerHelper.getInstance(newRequest).init("app1", new IOException(), null);
+        pipeline.newInvocation().invoke();
+
+        ErrorHandlerHelper.getInstance(newRequest).init("app1", new IllegalArgumentException(), null);
+        pipeline.newInvocation().invoke();
     }
 }

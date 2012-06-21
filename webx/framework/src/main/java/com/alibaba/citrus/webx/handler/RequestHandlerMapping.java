@@ -35,5 +35,5 @@ public interface RequestHandlerMapping {
      * 如果返回<code>null</code>代表无对应的<code>RequestHandler</code>。
      * </p>
      */
-    RequestHandlerContext getRequestHandler(HttpServletRequest request, HttpServletResponse response);
+    RequestHandlerContext getRequestHandlerContext(HttpServletRequest request, HttpServletResponse response);
 }

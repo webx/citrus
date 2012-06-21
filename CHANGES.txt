@@ -242,3 +242,26 @@
 
 * bugfix: WebxFrameworkFilter中使用excludes排除.css,.js以后，在开发模式下直接访问webx的开发模式首页时出现页面混乱，因为internal里面的css和js也被过滤掉了。
 
+* bugfix: ScriptModuleFactory搜索到*.class时会报错。
+
+* 改进异常处理：当使用pipeline-exception.xml来处理异常时（生产模式），可以指定：
+    1. 日志名称（loggerName和defaultLoggerName）；
+    2. 日志的详略（logging和defaultLogging，可选值detailed, brief, disabled）。
+
+    <services:pipeline xmlns="http://www.alibaba.com/schema/services/pipeline/valves">
+        <handleException defaultPage="error.vm"
+                         defaultLogging="detailed"
+                         defaultLoggerName="my.logger">
+
+            <on-exception type="com.alibaba.citrus.service.template.TemplateNotFoundException"
+                          statusCode="404"
+                          logging="brief" />
+
+            <on-exception type="com.alibaba.citrus.service.moduleloader.ModuleNotFoundException"
+                          statusCode="404"
+                          logging="brief"
+                          loggerName="my.logger2" />
+
+        </handleException>
+    </services:pipeline>
+

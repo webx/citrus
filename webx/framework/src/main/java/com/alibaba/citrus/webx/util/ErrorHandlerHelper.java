@@ -20,12 +20,16 @@ package com.alibaba.citrus.webx.util;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.ExceptionUtil.*;
+import static com.alibaba.citrus.util.StringUtil.*;
+import static com.alibaba.citrus.webx.util.ErrorHandlerHelper.LoggingDetail.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
 
 /**
  * 方便存取request中的错误信息的工具类。
@@ -213,6 +217,45 @@ public class ErrorHandlerHelper {
         return messages;
     }
 
+    public void logError(Logger log) {
+        logError(log, null);
+    }
+
+    public void logError(Logger log, LoggingDetail detail) {
+        Throwable e = getException();
+
+        if (e == null) {
+            return;
+        }
+
+        if (detail == null) {
+            detail = detailed;
+        }
+
+        switch (detail) {
+            case detailed:
+                // 打印详细异常信息
+                log.error("Error occurred while process request " + getRequestURI(), getException());
+                break;
+
+            case brief:
+                // 打印root cause的message
+                Throwable rootCause = getRootCause(getException());
+                String message = rootCause.getClass().getSimpleName();
+
+                if (!isBlank(rootCause.getMessage())) {
+                    message += ": " + rootCause.getMessage();
+                }
+
+                log.error(message);
+
+                break;
+
+            default:
+                break;
+        }
+    }
+
     @Override
     public String toString() {
         return getStatusCode() + " " + getMessage();
@@ -222,5 +265,11 @@ public class ErrorHandlerHelper {
     public static interface ExceptionCodeMapping {
         /** 取得status code。如果不确定，则返回<code>0</code>或<code>-1</code>。 */
         int getExceptionCode(Throwable exception);
+    }
+
+    public static enum LoggingDetail {
+        detailed,
+        brief,
+        disabled
     }
 }

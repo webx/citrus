@@ -150,7 +150,7 @@ public class ScriptModuleFactoryDefinitionParser extends AbstractModuleFactoryDe
 
                             String resourceName = uri.normalize().toString();
 
-                            if (matcher.doMatch(resourceName)) {
+                            if (!resourceName.endsWith(".class") && matcher.doMatch(resourceName)) {
                                 BeanDefinition scriptBean = createScriptBean(subElement, parserContext, resourceName,
                                                                              language, defaults);
                                 String beanName = matcher.generateBeanName(resourceName, parserContext.getRegistry());

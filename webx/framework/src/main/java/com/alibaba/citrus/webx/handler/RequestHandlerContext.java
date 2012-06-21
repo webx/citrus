@@ -26,7 +26,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.citrus.util.internal.webpagelite.ServletRequestContext;
 import com.alibaba.citrus.webx.ResourceNotFoundException;
-import org.slf4j.Logger;
 
 /**
  * 这个类提供给<code>RequestHandler</code>相关的上下文信息，使<code>RequestHandler</code>和
@@ -45,11 +44,12 @@ public abstract class RequestHandlerContext extends ServletRequestContext {
         this.internalBaseURL = internalBaseURL + '/';
     }
 
-    /** 取得当前调用的<code>RequestHandler</code>对象。 */
-    public abstract RequestHandler getRequestHandler();
+    public final void handleRequest() throws Exception {
+        getRequestHandler().handleRequest(this);
+    }
 
-    /** 取得logger。 */
-    public abstract Logger getLogger();
+    /** 取得当前调用的<code>RequestHandler</code>对象。 */
+    protected abstract RequestHandler getRequestHandler();
 
     /** 当请求的资源找不到时，方法被调用。子类可以修改此行为。 */
     @Override

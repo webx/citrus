@@ -27,6 +27,8 @@ import com.alibaba.citrus.webx.handler.component.SystemPropertiesComponent;
 import com.alibaba.citrus.webx.handler.support.AbstractVisitor;
 import com.alibaba.citrus.webx.handler.support.LayoutRequestProcessor;
 import com.alibaba.citrus.webx.util.ErrorHandlerHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 用来显示详细出错页面及相关资源的handler。
@@ -34,19 +36,21 @@ import com.alibaba.citrus.webx.util.ErrorHandlerHelper;
  * @author Michael Zhou
  */
 public class DetailedErrorHandler extends LayoutRequestProcessor {
-    private final KeyValuesComponent            keyValuesComponent            = new KeyValuesComponent(this, "keyValues");
-    private final ExceptionComponent            exceptionComponent            = new ExceptionComponent(this, "exception");
-    private final RequestComponent              requestComponent              = new RequestComponent(this, "request", keyValuesComponent);
-    private final SystemPropertiesComponent     systemPropertiesComponent     = new SystemPropertiesComponent(this, "sysprops",
-                                                                                                              keyValuesComponent);
-    private final EnvironmentVariablesComponent environmentVariablesComponent = new EnvironmentVariablesComponent(this,
-                                                                                                                  "env", keyValuesComponent);
-    private final SystemInfoComponent           systemInfoComponent           = new SystemInfoComponent(this, "sysinfo", keyValuesComponent);
-    ;
+    private final static Logger                        log                           = LoggerFactory.getLogger(DetailedErrorHandler.class);
+    private final        KeyValuesComponent            keyValuesComponent            = new KeyValuesComponent(this, "keyValues");
+    private final        ExceptionComponent            exceptionComponent            = new ExceptionComponent(this, "exception");
+    private final        RequestComponent              requestComponent              = new RequestComponent(this, "request", keyValuesComponent);
+    private final        SystemPropertiesComponent     systemPropertiesComponent     = new SystemPropertiesComponent(this, "sysprops", keyValuesComponent);
+    private final        EnvironmentVariablesComponent environmentVariablesComponent = new EnvironmentVariablesComponent(this, "env", keyValuesComponent);
+    private final        SystemInfoComponent           systemInfoComponent           = new SystemInfoComponent(this, "sysinfo", keyValuesComponent);
 
     @Override
     protected Object getBodyVisitor(RequestHandlerContext context) {
-        return new DetailedErrorPageVisitor(context, ErrorHandlerHelper.getInstance(context.getRequest()));
+        ErrorHandlerHelper helper = ErrorHandlerHelper.getInstance(context.getRequest());
+
+        helper.logError(log);
+
+        return new DetailedErrorPageVisitor(context, helper);
     }
 
     @Override
