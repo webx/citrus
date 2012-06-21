@@ -235,25 +235,29 @@ public class ErrorHandlerHelper {
         switch (detail) {
             case detailed:
                 // 打印详细异常信息
-                log.error("Error occurred while process request " + getRequestURI(), getException());
+                log.error("Failed to process request " + getRequestURI() + ", the root cause was " + getRootCauseMessage(), getException());
                 break;
 
             case brief:
                 // 打印root cause的message
-                Throwable rootCause = getRootCause(getException());
-                String message = rootCause.getClass().getSimpleName();
-
-                if (!isBlank(rootCause.getMessage())) {
-                    message += ": " + rootCause.getMessage();
-                }
-
-                log.error(message);
+                log.error(getRootCauseMessage());
 
                 break;
 
             default:
                 break;
         }
+    }
+
+    private String getRootCauseMessage() {
+        Throwable rootCause = getRootCause(getException());
+        String message = rootCause.getClass().getSimpleName();
+
+        if (!isBlank(rootCause.getMessage())) {
+            message += ": " + rootCause.getMessage();
+        }
+
+        return message;
     }
 
     @Override

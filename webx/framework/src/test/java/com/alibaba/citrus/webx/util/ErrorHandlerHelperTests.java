@@ -195,7 +195,7 @@ public class ErrorHandlerHelperTests {
         helper.init("myServlet", e, null);
 
         reset(log);
-        log.error("Error occurred while process request /app1", e);
+        log.error("Failed to process request /app1, the root cause was IOException: ioe", e);
         replay(log);
         helper.logError(log);
         verify(log);
@@ -215,14 +215,14 @@ public class ErrorHandlerHelperTests {
         helper.init("myServlet", e, null);
 
         reset(log);
-        log.error("Error occurred while process request /app1", e);
+        log.error("Failed to process request /app1, the root cause was IllegalArgumentException: iae", e);
         replay(log);
         helper.logError(log, null);
         verify(log);
 
         // detailed
         reset(log);
-        log.error("Error occurred while process request /app1", e);
+        log.error("Failed to process request /app1, the root cause was IllegalArgumentException: iae", e);
         replay(log);
         helper.logError(log, detailed);
         verify(log);
