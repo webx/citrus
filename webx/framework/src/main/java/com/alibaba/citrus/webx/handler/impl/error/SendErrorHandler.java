@@ -20,6 +20,8 @@ package com.alibaba.citrus.webx.handler.impl.error;
 import com.alibaba.citrus.webx.handler.RequestHandler;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
 import com.alibaba.citrus.webx.util.ErrorHandlerHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 将错误通过sendError转发给servlet engine，由web.xml中定义的错误页面来处理之。
@@ -27,10 +29,14 @@ import com.alibaba.citrus.webx.util.ErrorHandlerHelper;
  * @author Michael Zhou
  */
 public class SendErrorHandler implements RequestHandler {
+    private final static Logger log = LoggerFactory.getLogger(SendErrorHandler.class);
+
     public void handleRequest(RequestHandlerContext context) throws Exception {
         ErrorHandlerHelper helper = ErrorHandlerHelper.getInstance(context.getRequest());
 
         helper.setServletErrorAttributes();
+        helper.logError(log);
+
         context.getResponse().sendError(helper.getStatusCode());
     }
 }

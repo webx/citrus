@@ -24,6 +24,7 @@ import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.ExceptionUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
+import static com.alibaba.citrus.webx.util.ErrorHandlerHelper.LoggingDetail.*;
 
 import java.util.List;
 import java.util.Set;
@@ -34,6 +35,9 @@ import com.alibaba.citrus.service.pipeline.support.AbstractValve;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import com.alibaba.citrus.turbine.TurbineRunDataInternal;
 import com.alibaba.citrus.webx.util.ErrorHandlerHelper;
+import com.alibaba.citrus.webx.util.ErrorHandlerHelper.LoggingDetail;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
@@ -44,11 +48,14 @@ import org.w3c.dom.Element;
  * @author Michael Zhou
  */
 public class HandleExceptionValve extends AbstractValve {
-    private static final String HELPER_NAME_DEFAULT = "error";
+    private final static Logger log                 = LoggerFactory.getLogger(HandleExceptionValve.class);
+    private final static String HELPER_NAME_DEFAULT = "error";
     private final HttpServletRequest request;
     private       String             defaultPage;
     private       ExceptionHandler[] exceptionHandlers;
     private       String             helperName;
+    private       LoggingDetail      defaultLoggingDetail;
+    private       Logger             defaultLogger;
 
     public HandleExceptionValve(HttpServletRequest request) {
         this.request = assertNotNull(assertProxy(request), "no request");
@@ -56,6 +63,18 @@ public class HandleExceptionValve extends AbstractValve {
 
     public void setDefaultPage(String defaultPage) {
         this.defaultPage = trimToNull(defaultPage);
+    }
+
+    public void setDefaultLogging(LoggingDetail defaultLoggingDetail) {
+        this.defaultLoggingDetail = defaultLoggingDetail;
+    }
+
+    public void setDefaultLoggerName(String defaultLoggerName) {
+        defaultLoggerName = trimToNull(defaultLoggerName);
+
+        if (defaultLoggerName != null) {
+            this.defaultLogger = LoggerFactory.getLogger(defaultLoggerName);
+        }
     }
 
     public void setExceptionHandlers(ExceptionHandler[] exceptionHandlers) {
@@ -72,6 +91,19 @@ public class HandleExceptionValve extends AbstractValve {
 
         if (exceptionHandlers == null) {
             exceptionHandlers = new ExceptionHandler[0];
+        }
+
+        if (defaultLoggingDetail == null) {
+            defaultLoggingDetail = detailed;
+        }
+
+        if (defaultLogger == null) {
+            defaultLogger = log;
+        }
+
+        // 用default值初始化exception handlers
+        for (ExceptionHandler handler : exceptionHandlers) {
+            handler.init(defaultLoggingDetail, defaultLogger);
         }
 
         // 按exception排序，将子类排在前
@@ -121,6 +153,8 @@ public class HandleExceptionValve extends AbstractValve {
         if (exception != null) {
             int statusCode = -1;
             String target = null;
+            LoggingDetail loggingDetail = defaultLoggingDetail;
+            Logger logger = defaultLogger;
 
             // 从最根本的exception cause开始反向追溯，例如：t1 caused by t2 caused by t3，
             // 那么，检查顺序为t3, t2, t1。
@@ -132,6 +166,8 @@ public class HandleExceptionValve extends AbstractValve {
                     if (exceptionHandler.getExceptionType().isInstance(cause)) {
                         statusCode = exceptionHandler.getStatusCode();
                         target = exceptionHandler.getPage();
+                        loggingDetail = exceptionHandler.getLoggingDetail();
+                        logger = exceptionHandler.getLogger();
                         break CAUSES;
                     }
                 }
@@ -142,6 +178,10 @@ public class HandleExceptionValve extends AbstractValve {
                 helper.setStatusCode(statusCode); // 更新request attributes
             }
 
+            // 打印日志
+            helper.logError(logger, loggingDetail);
+
+            // 设定错误页面target
             if (target == null) {
                 target = defaultPage;
             }
@@ -157,11 +197,30 @@ public class HandleExceptionValve extends AbstractValve {
         private final Class<? extends Throwable> exceptionType;
         private final int                        statusCode;
         private final String                     page;
+        private       LoggingDetail              loggingDetail;
+        private       Logger                     logger;
 
-        public ExceptionHandler(Class<? extends Throwable> exceptionType, int statusCode, String page) {
+        public ExceptionHandler(Class<? extends Throwable> exceptionType, int statusCode, String page, LoggingDetail loggingDetail, String loggerName) {
             this.exceptionType = assertNotNull(exceptionType, "no exception type");
             this.statusCode = statusCode <= 0 ? -1 : statusCode;
             this.page = trimToNull(page);
+            this.loggingDetail = loggingDetail;
+
+            loggerName = trimToNull(loggerName);
+
+            if (loggerName != null) {
+                this.logger = LoggerFactory.getLogger(loggerName);
+            }
+        }
+
+        private void init(LoggingDetail defaultLoggingDetail, Logger defaultLogger) {
+            if (logger == null) {
+                logger = defaultLogger;
+            }
+
+            if (loggingDetail == null) {
+                loggingDetail = defaultLoggingDetail;
+            }
         }
 
         public Class<? extends Throwable> getExceptionType() {
@@ -176,6 +235,14 @@ public class HandleExceptionValve extends AbstractValve {
             return page;
         }
 
+        public LoggingDetail getLoggingDetail() {
+            return loggingDetail;
+        }
+
+        public Logger getLogger() {
+            return logger;
+        }
+
         @Override
         public String toString() {
             StringBuilder buf = new StringBuilder();
@@ -183,12 +250,14 @@ public class HandleExceptionValve extends AbstractValve {
             buf.append("on ").append(exceptionType.getName());
 
             if (page != null) {
-                buf.append(" go ").append(page);
+                buf.append(", go to page ").append(page);
             }
 
             if (statusCode > 0) {
-                buf.append(" status code is ").append(statusCode);
+                buf.append(", with status code ").append(statusCode);
             }
+
+            buf.append(", with ").append(loggingDetail).append(" logging");
 
             return buf.toString();
         }
@@ -197,7 +266,7 @@ public class HandleExceptionValve extends AbstractValve {
     public static class DefinitionParser extends AbstractSingleBeanDefinitionParser<HandleExceptionValve> {
         @Override
         protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
-            attributesToProperties(element, builder, "defaultPage", "helperName");
+            attributesToProperties(element, builder, "defaultPage", "defaultLogging", "defaultLoggerName", "helperName");
 
             addConstructorArg(builder, true, HttpServletRequest.class);
 
@@ -224,6 +293,8 @@ public class HandleExceptionValve extends AbstractValve {
             }
 
             onExceptionBuilder.addConstructorArgValue(onExceptionElement.getAttribute("page"));
+            onExceptionBuilder.addConstructorArgValue(trimToNull(onExceptionElement.getAttribute("logging")));
+            onExceptionBuilder.addConstructorArgValue(onExceptionElement.getAttribute("loggerName"));
 
             return onExceptionBuilder.getBeanDefinition();
         }

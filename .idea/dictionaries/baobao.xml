@@ -4,9 +4,12 @@
       <w>baobao</w>
       <w>csrf</w>
       <w>dataresolver</w>
+      <w>lcrc</w>
+      <w>passthru</w>
       <w>rundata</w>
       <w>springext</w>
       <w>springframework</w>
+      <w>thru</w>
       <w>uribroker</w>
     </words>
   </dictionary>

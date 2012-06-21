@@ -17,6 +17,8 @@
 
 package com.alibaba.citrus.webx.util;
 
+import static com.alibaba.citrus.webx.util.ErrorHandlerHelper.LoggingDetail.*;
+import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
@@ -30,10 +32,12 @@ import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
 
 public class ErrorHandlerHelperTests {
     private HttpServletRequest request;
     private ErrorHandlerHelper helper;
+    private Logger             log;
 
     @Before
     public void init() throws Exception {
@@ -43,6 +47,7 @@ public class ErrorHandlerHelperTests {
 
         request = client.newInvocation("http://localhost/app1").getRequest();
         helper = ErrorHandlerHelper.getInstance(request);
+        log = createMock(Logger.class);
     }
 
     @Test
@@ -175,6 +180,76 @@ public class ErrorHandlerHelperTests {
         assertEquals("NOT_FOUND", request.getAttribute("javax.servlet.error.message"));
         assertEquals("/app1", request.getAttribute("javax.servlet.error.request_uri"));
         assertEquals("myServlet", request.getAttribute("javax.servlet.error.servlet_name"));
+    }
+
+    @Test
+    public void logError() {
+        // no exception
+        reset(log);
+        replay(log);
+        helper.logError(log);
+        verify(log);
+
+        // with exception
+        Exception e = new IOException("ioe");
+        helper.init("myServlet", e, null);
+
+        reset(log);
+        log.error("Error occurred while process request /app1", e);
+        replay(log);
+        helper.logError(log);
+        verify(log);
+    }
+
+    @Test
+    public void logError2() {
+        // no exception
+        reset(log);
+        replay(log);
+        helper.logError(log, null);
+        verify(log);
+
+        // with exception, default logging detail
+        Exception e = new IOException("ioe");
+        e.initCause(new IllegalArgumentException("iae"));
+        helper.init("myServlet", e, null);
+
+        reset(log);
+        log.error("Error occurred while process request /app1", e);
+        replay(log);
+        helper.logError(log, null);
+        verify(log);
+
+        // detailed
+        reset(log);
+        log.error("Error occurred while process request /app1", e);
+        replay(log);
+        helper.logError(log, detailed);
+        verify(log);
+
+        // brief
+        reset(log);
+        log.error("IllegalArgumentException: iae");
+        replay(log);
+        helper.logError(log, brief);
+        verify(log);
+
+        // brief - exception without message
+        e = new IOException("ioe");
+        e.initCause(new IllegalArgumentException());
+        helper.init("myServlet", e, null);
+
+        reset(log);
+        log.error("IllegalArgumentException");
+        replay(log);
+        helper.logError(log, brief);
+        verify(log);
+
+        // disabled logging
+        reset(log);
+        replay(log);
+        helper.logError(log, disabled);
+        verify(log);
     }
 
     @Test

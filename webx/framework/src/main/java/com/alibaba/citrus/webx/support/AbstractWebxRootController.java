@@ -147,94 +147,125 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
         try {
             requestContext = assertNotNull(getRequestContext(request, response), "could not get requestContext");
 
-            if (checkRequest(requestContext)) {
-                request = requestContext.getRequest();
-                response = requestContext.getResponse();
+            // 如果请求已经结束，则不执行进一步的处理。例如，当requestContext已经被重定向了，则立即结束请求的处理。
+            if (isRequestFinished(requestContext)) {
+                return;
+            }
 
-                RequestHandlerContext ctx = internalHandlerMapping.getRequestHandler(request, response);
+            // 请求未结束，则继续处理...
+            request = requestContext.getRequest();
+            response = requestContext.getResponse();
 
-                if (ctx == null) {
-                    // 如果定义了passthru filter，则判断request是否被passthru，
-                    // 对于需要被passthru的request不执行handleRequest，而直接返回。
-                    // 该功能适用于仅将webx视作普通的filter，而filter chain的接下来的部分将可使用webx所提供的request contexts。
-                    boolean requestProcessed = false;
+            // 如果是一个内部请求，则执行内部请求
+            if (handleInternalRequest(request, response)) {
+                return;
+            }
 
-                    if (passthruFilter == null || !passthruFilter.matches(request)) {
-                        requestProcessed = handleRequest(requestContext);
-                    }
-
-                    if (!requestProcessed) {
-                        giveUpControl(requestContext, chain);
-                    }
-                } else {
-                    ctx.getRequestHandler().handleRequest(ctx);
-                }
+            // 如果不是内部的请求，并且没有被passthru，则执行handleRequest
+            if (isRequestPassedThru(request) || !handleRequest(requestContext)) {
+                // 如果请求被passthru，或者handleRequest返回false（即pipeline放弃请求），
+                // 则调用filter chain，将控制交还给servlet engine。
+                giveUpControl(requestContext, chain);
             }
         } catch (Throwable e) {
-            // 处理异常e的过程：
-            //
-            // 1. 首先调用errorHandler处理异常e，errorHandler将生成友好的错误页面。
-            //    errorHandler也负责记录日志 ─ 如果必要的话。
-            // 2. Handler可以直接把异常抛回来，这样servlet engine就会接管这个异常。通常是显示web.xml中指定的错误页面。
-            //    这种情况下，errorHandler还是要负责记录日志。
-            // 3. 假如不幸errorHandler本身遇到异常，则servlet engine就会接管这个异常。通常是显示web.xml中指定的错误页面。
-            //    这种情况下，新老异常都会被记录到日志中。
-            try {
-                try {
-                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                } catch (Exception ee) {
-                    // ignore this exception
-                }
-
-                clearBuffer(requestContext, response);
-
-                // 取得并执行errorHandler
-                RequestHandlerContext ctx = internalHandlerMapping.getRequestHandler(request, response, e);
-
-                assertNotNull(ctx, "Could not get exception handler for exception: %s", e);
-
-                // 记录日志
-                ctx.getLogger().error("Error occurred while process request " + request.getRequestURI(), e);
-
-                try {
-                    // 对于error处理过程，设置component为特殊的root component。
-                    WebxUtil.setCurrentComponent(request, components.getComponent(null));
-                    ctx.getRequestHandler().handleRequest(ctx);
-                } finally {
-                    WebxUtil.setCurrentComponent(request, null);
-                }
-            } catch (Throwable ee) {
-                // 有两种情况：
-                // 1. ee causedBy e，这个表明是errorHandler特意将异常重新抛出，转交给servlet engine来处理
-                // 2. ee和e无关，这个表明是errorHandler自身出现错误。对于这种情况，需要记录日志。
-                if (!getCauses(ee).contains(e)) {
-                    log.error("Another exception occurred while handling exception " + e.getClass().getSimpleName()
-                              + ": " + e.getMessage(), ee);
-                }
-
-                clearBuffer(requestContext, response);
-
-                if (e instanceof ServletException) {
-                    throw (ServletException) e;
-                } else if (e instanceof IOException) {
-                    throw (IOException) e;
-                } else if (e instanceof RuntimeException) {
-                    throw (RuntimeException) e;
-                } else if (e instanceof Error) {
-                    throw (Error) e;
-                } else {
-                    throw new ServletException(e);
-                }
-            }
+            handleException(requestContext, e);
         } finally {
-            if (requestContext != null) {
-                try {
-                    commitRequestContext(requestContext);
-                } catch (Exception e) {
-                    log.error("Exception occurred while commit rundata", e);
-                }
+            commitRequest(requestContext);
+        }
+    }
+
+    /**
+     * 执行内部请求。
+     *
+     * @return 如果是内部请求，并且被执行了，则返回<code>true</code>。
+     */
+    private boolean handleInternalRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        RequestHandlerContext internalRequestHandlerContext = internalHandlerMapping.getRequestHandlerContext(request, response);
+
+        if (internalRequestHandlerContext == null) {
+            return false;
+        }
+
+        // 如果是一个内部请求，则执行内部请求
+        internalRequestHandlerContext.handleRequest();
+
+        return true;
+    }
+
+    /**
+     * 处理异常e的过程：
+     * <p/>
+     * 1. 首先调用errorHandler处理异常e，errorHandler将生成友好的错误页面。
+     * errorHandler也负责记录日志 ─ 如果必要的话。
+     * <p/>
+     * 2. Handler可以直接把异常抛回来，这样servlet engine就会接管这个异常。通常是显示web.xml中指定的错误页面。
+     * 这种情况下，errorHandler还是要负责记录日志。
+     * <p/>
+     * 3. 假如不幸errorHandler本身遇到异常，则servlet engine就会接管这个异常。通常是显示web.xml中指定的错误页面。
+     * 这种情况下，新老异常都会被记录到日志中。
+     */
+    private void handleException(RequestContext requestContext, Throwable e) throws ServletException, IOException {
+        HttpServletRequest request = requestContext.getRequest();
+        HttpServletResponse response = requestContext.getResponse();
+
+        try {
+            try {
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            } catch (Exception ee) {
+                // ignore this exception
+            }
+
+            clearBuffer(requestContext, response);
+
+            // 取得并执行errorHandler
+            RequestHandlerContext errorRequestHandlerContext = internalHandlerMapping.getRequestHandlerContextForError(request, response, e);
+
+            assertNotNull(errorRequestHandlerContext, "Could not get exception handler for exception: %s", e);
+
+            try {
+                // 对于error处理过程，设置component为特殊的root component。
+                WebxUtil.setCurrentComponent(request, components.getComponent(null));
+
+                // error handler要负责记录日志，可以通过ErrorHandlerHelper.logError()来做。
+                errorRequestHandlerContext.handleRequest();
+            } finally {
+                WebxUtil.setCurrentComponent(request, null);
+            }
+        } catch (Throwable ee) {
+            // 有两种情况：
+            // 1. ee causedBy e，这个表明是errorHandler特意将异常重新抛出，转交给servlet engine来处理
+            // 2. ee和e无关，这个表明是errorHandler自身出现错误。对于这种情况，需要记录日志。
+            if (!getCauses(ee).contains(e)) {
+                Throwable rootCause = getRootCause(e);
+                String originalExceptionMessage = rootCause.getClass().getSimpleName() + ": " + rootCause.getMessage();
+
+                log.error("Failed to handle an error caused by " + originalExceptionMessage, ee);
+                log.error("Full stack trace of the error " + originalExceptionMessage, e);
+            }
+
+            clearBuffer(requestContext, response);
+
+            if (e instanceof ServletException) {
+                throw (ServletException) e;
+            } else if (e instanceof IOException) {
+                throw (IOException) e;
+            } else if (e instanceof RuntimeException) {
+                throw (RuntimeException) e;
+            } else if (e instanceof Error) {
+                throw (Error) e;
+            } else {
+                throw new ServletException(e);
             }
         }
+    }
+
+    /**
+     * 如果定义了passthru filter，则判断request是否被passthru，
+     * 对于需要被passthru的request，不执行handleRequest，而是立即把控制交还给filter chain。
+     * 该功能适用于仅将webx视作普通的filter，而filter chain的接下来的部分将可使用webx所提供的request contexts。
+     */
+    private boolean isRequestPassedThru(HttpServletRequest request) {
+        return passthruFilter != null && passthruFilter.matches(request);
     }
 
     /** 放弃控制，将控制权返回给servlet engine。 */
@@ -261,14 +292,26 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
         chain.doFilter(requestContext.getRequest(), requestContext.getResponse());
     }
 
-    /** 检查request，如果返回<code>true</code>，则进一步处理请求，否则立即结束请求。 */
-    protected boolean checkRequest(RequestContext requestContext) {
+    /** 判断请求是否已经结束。如果请求被重定向了，则表示请求已经结束。 */
+    protected boolean isRequestFinished(RequestContext requestContext) {
         LazyCommitRequestContext lcrc = findRequestContext(requestContext, LazyCommitRequestContext.class);
 
-        if (lcrc != null) {
-            return !lcrc.isRedirected();
-        } else {
-            return true;
+        return lcrc != null && lcrc.isRedirected();
+    }
+
+    /** 提交request。 */
+    private void commitRequest(RequestContext requestContext) {
+        if (requestContext == null) {
+            return;
+        }
+
+        try {
+            if (this == requestContext.getRequest().getAttribute(REQUEST_CONTEXT_OWNER_KEY)) {
+                requestContext.getRequest().removeAttribute(REQUEST_CONTEXT_OWNER_KEY);
+                requestContexts.commitRequestContext(requestContext);
+            }
+        } catch (Exception e) {
+            log.error("Exception occurred while commit rundata", e);
         }
     }
 
@@ -300,14 +343,6 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
         return requestContext;
     }
 
-    /** 提交request context。 */
-    private void commitRequestContext(RequestContext requestContext) {
-        if (this == requestContext.getRequest().getAttribute(REQUEST_CONTEXT_OWNER_KEY)) {
-            requestContext.getRequest().removeAttribute(REQUEST_CONTEXT_OWNER_KEY);
-            requestContexts.commitRequestContext(requestContext);
-        }
-    }
-
     /** 代表webx内部请求的相关信息。 */
     private class InternalRequestHandlerContext extends RequestHandlerContext {
         private final RequestHandler handler;
@@ -323,11 +358,6 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
         @Override
         public RequestHandler getRequestHandler() {
             return handler;
-        }
-
-        @Override
-        public Logger getLogger() {
-            return log;
         }
     }
 
@@ -397,7 +427,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
             return internalHandlers.keySet().toArray(new String[internalHandlers.size()]);
         }
 
-        public RequestHandlerContext getRequestHandler(HttpServletRequest request, HttpServletResponse response) {
+        public RequestHandlerContext getRequestHandlerContext(HttpServletRequest request, HttpServletResponse response) {
             String baseURL = getBaseURL(request);
             String path = getResourcePath(request).replace(' ', '+'); // 将空白换成+，因为internalHandlers的key不会包含空白。
             String internalBaseURL = baseURL + internalPathPrefix;
@@ -450,8 +480,8 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
             return null;
         }
 
-        public RequestHandlerContext getRequestHandler(HttpServletRequest request, HttpServletResponse response,
-                                                       Throwable exception) {
+        public RequestHandlerContext getRequestHandlerContextForError(HttpServletRequest request, HttpServletResponse response,
+                                                                      Throwable exception) {
             // servletName == ""
             ErrorHandlerHelper helper = ErrorHandlerHelper.getInstance(request);
 

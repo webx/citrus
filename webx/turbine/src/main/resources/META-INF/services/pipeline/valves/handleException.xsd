@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:beans="http://www.springframework.org/schema/beans"
             xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
 
     <xsd:import namespace="http://www.springframework.org/schema/beans"
@@ -23,6 +22,8 @@
                          minOccurs="0" maxOccurs="unbounded" />
         </xsd:sequence>
         <xsd:attribute name="defaultPage" type="xsd:string" use="required" />
+        <xsd:attribute name="defaultLogging" type="HandleExceptionValveOnExceptionLoggingType" default="detailed" />
+        <xsd:attribute name="defaultLoggerName" type="xsd:string" />
         <xsd:attribute name="helperName" type="xsd:string" default="error" />
     </xsd:complexType>
 
@@ -30,6 +31,16 @@
         <xsd:attribute name="type" type="xsd:string" use="required" />
         <xsd:attribute name="page" type="xsd:string" />
         <xsd:attribute name="statusCode" type="springext:integerOrPlaceholder" />
+        <xsd:attribute name="logging" type="HandleExceptionValveOnExceptionLoggingType" />
+        <xsd:attribute name="loggerName" type="xsd:string" />
     </xsd:complexType>
+
+    <xsd:simpleType name="HandleExceptionValveOnExceptionLoggingType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="detailed" />
+            <xsd:enumeration value="brief" />
+            <xsd:enumeration value="disabled" />
+        </xsd:restriction>
+    </xsd:simpleType>
 
 </xsd:schema>

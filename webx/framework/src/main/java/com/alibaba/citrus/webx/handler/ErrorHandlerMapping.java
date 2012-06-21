@@ -32,6 +32,6 @@ public interface ErrorHandlerMapping {
      * 如果返回<code>null</code>代表无对应的<code>RequestHandler</code>。
      * </p>
      */
-    RequestHandlerContext getRequestHandler(HttpServletRequest request, HttpServletResponse response,
-                                            Throwable exception);
+    RequestHandlerContext getRequestHandlerContextForError(HttpServletRequest request, HttpServletResponse response,
+                                                           Throwable exception);
 }
