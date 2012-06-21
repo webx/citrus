@@ -236,10 +236,11 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
             // 1. ee causedBy e，这个表明是errorHandler特意将异常重新抛出，转交给servlet engine来处理
             // 2. ee和e无关，这个表明是errorHandler自身出现错误。对于这种情况，需要记录日志。
             if (!getCauses(ee).contains(e)) {
-                String originalExceptionMessage = e.getClass().getSimpleName() + ": " + e.getMessage();
+                Throwable rootCause = getRootCause(e);
+                String originalExceptionMessage = rootCause.getClass().getSimpleName() + ": " + rootCause.getMessage();
 
-                log.error("Another exception occurred while handling exception " + originalExceptionMessage, ee);
-                log.error("The original exception is " + originalExceptionMessage, e);
+                log.error("Failed to handle an error caused by " + originalExceptionMessage, ee);
+                log.error("Full stack trace of the error " + originalExceptionMessage, e);
             }
 
             clearBuffer(requestContext, response);
