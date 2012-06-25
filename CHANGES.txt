@@ -265,6 +265,8 @@
         </handleException>
     </services:pipeline>
 
+-- Changes in 3.0.9
+
 -- Changes in 3.1.0
 
 * 升级到spring 3.1.1
@@ -275,4 +277,6 @@
   + com.alibaba.citrus.service.resource.SpringIntegrationTests：反映Resource.getFilename()的改变
 
 * 增加检测代码，以防止webx3.1.x和spring 3.1.1之前的版本一起使用。
+
+-- Changes in 3.1.1
 
