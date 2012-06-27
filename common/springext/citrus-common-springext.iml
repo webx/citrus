@@ -16,24 +16,25 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:servlet-api:2.5" level="project" />
     <orderEntry type="module" module-name="citrus-common-generictype" />
     <orderEntry type="module" module-name="citrus-common-util" />
-    <orderEntry type="library" name="Maven: cglib:cglib-nodep:2.2" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.1" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.6.1" level="project" />
+    <orderEntry type="library" name="Maven: cglib:cglib-nodep:2.2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.6" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.6.6" level="project" />
     <orderEntry type="module" module-name="citrus-common-logconfig" />
     <orderEntry type="module" module-name="citrus-test-util" scope="TEST" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: ch.qos.logback:logback-classic:0.9.24" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: ch.qos.logback:logback-core:0.9.24" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.8.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-library:1.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: ch.qos.logback:logback-classic:1.0.6" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: ch.qos.logback:logback-core:1.0.6" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.10" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-library:1.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: httpunit:httpunit:1.7" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: rhino:js:1.7R1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: nekohtml:nekohtml:1.9.6" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: xerces:xercesImpl:2.9.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: rhino:js:1.7R2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: nekohtml:nekohtml:1.9.6.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: xerces:xercesImpl:2.10.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: xml-apis:xml-apis:1.4.01" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: xalan:xalan:2.7.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: xalan:serializer:2.7.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.easymock:easymockclassextension:3.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.easymock:easymock:3.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.easymock:easymockclassextension:3.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.easymock:easymock:3.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.objenesis:objenesis:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-core:3.1.1.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-asm:3.1.1.RELEASE" level="project" />
