@@ -6,7 +6,6 @@
              xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
              xmlns:plugins="http://www.alibaba.com/schema/services/template/engines/velocity/plugins"
              xmlns:beans="http://www.springframework.org/schema/beans"
-             xmlns:p="http://www.springframework.org/schema/p"
              xsi:schemaLocation="
                http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
                http://www.alibaba.com/schema/services/resource-loading/filters http://localhost:8080/schema/services-resource-loading-filters.xsd
@@ -98,8 +97,7 @@
     <services:template id="with_handlers" lazy-init="true">
         <engines:velocity-engine>
             <engines:plugins>
-                <plugins:plugin class="org.apache.velocity.app.event.implement.EscapeHtmlReference"
-                        />
+                <plugins:plugin class="org.apache.velocity.app.event.implement.EscapeHtmlReference" />
             </engines:plugins>
             <engines:advanced-properties>
                 <engines:property name="eventhandler.escape.html.match" value="/world\./" />
@@ -139,9 +137,7 @@
             <loaders:file-loader />
         </services:resource>
         <services:resource-filters pattern="/templates/test2.vm">
-            <filters:filter
-                    class="com.alibaba.citrus.service.velocity.AbstractResourceLoaderTests$NoURLFilter"
-                    />
+            <filters:filter class="com.alibaba.citrus.service.velocity.AbstractResourceLoaderTests$NoURLFilter" />
         </services:resource-filters>
     </services:resource-loading>
 
