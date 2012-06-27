@@ -56,7 +56,6 @@
     <orderEntry type="module" module-name="citrus-service-mappingrule" />
     <orderEntry type="module" module-name="citrus-service-template" />
     <orderEntry type="module" module-name="citrus-service-uribroker" />
-    <orderEntry type="library" name="Maven: oro:oro:2.0.8" level="project" />
     <orderEntry type="module" module-name="citrus-service-jsp" />
     <orderEntry type="module" module-name="citrus-service-velocity" />
     <orderEntry type="library" name="Maven: org.apache.velocity:velocity:1.7" level="project" />

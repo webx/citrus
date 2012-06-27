@@ -74,7 +74,6 @@
     <orderEntry type="module" module-name="citrus-service-freemarker" />
     <orderEntry type="library" name="Maven: org.freemarker:freemarker:2.3.19" level="project" />
     <orderEntry type="module" module-name="citrus-service-uribroker" />
-    <orderEntry type="library" name="Maven: oro:oro:2.0.8" level="project" />
     <orderEntry type="module" module-name="citrus-service-mail" />
     <orderEntry type="module" module-name="citrus-webx-framework" />
     <orderEntry type="module" module-name="citrus-webx-turbine" />

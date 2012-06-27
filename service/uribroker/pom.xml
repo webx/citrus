@@ -49,9 +49,5 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>citrus-service-configuration</artifactId>
         </dependency>
-        <dependency>
-            <groupId>oro</groupId>
-            <artifactId>oro</artifactId>
-        </dependency>
     </dependencies>
 </project>

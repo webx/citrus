@@ -77,7 +77,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.objenesis:objenesis:1.2" level="project" />
     <orderEntry type="module" module-name="citrus-service-mappingrule" />
     <orderEntry type="module" module-name="citrus-service-uribroker" />
-    <orderEntry type="library" name="Maven: oro:oro:2.0.8" level="project" />
     <orderEntry type="module" module-name="citrus-test-webx" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:3.1.1.RELEASE" level="project" />
   </component>
