@@ -133,4 +133,16 @@ public class FallbackModuleMappingRule extends AbstractModuleMappingRule {
             attributesToProperties(element, builder, "defaultName", "matchLastName");
         }
     }
+
+    
+    public String getDefaultName() {
+        return defaultName;
+    }
+
+    
+    public boolean isMatchLastName() {
+        return matchLastName;
+    }
+    
+    
 }
