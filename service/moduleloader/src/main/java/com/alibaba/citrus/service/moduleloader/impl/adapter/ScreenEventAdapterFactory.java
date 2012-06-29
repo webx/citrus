@@ -11,6 +11,7 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.autowireAndInitial
 import static com.alibaba.citrus.util.CollectionUtil.createHashMap;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Map;
 
 import net.sf.cglib.reflect.FastClass;
@@ -81,6 +82,26 @@ public class ScreenEventAdapterFactory extends AbstractDataBindingAdapterFactory
             }
         }
         return handlers;
+    }
+    
+    /**为了防止类似wait方法出现 */
+    protected boolean checkMethod(Method method) {
+        int modifiers = method.getModifiers();
+
+        if (Modifier.isStatic(modifiers) || Modifier.isFinal(modifiers) || Modifier.isNative(modifiers)) {
+            return false;
+        }
+        
+        String methodName = method.getName();
+        if("toString".equals(methodName) || "equals".equals(methodName)){
+        	return false;
+        }
+
+        if (Modifier.isPublic(modifiers) || Modifier.isProtected(modifiers)) {
+            return true;
+        }
+
+        return false;
     }
 
     @Override

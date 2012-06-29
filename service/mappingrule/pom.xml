@@ -31,5 +31,9 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>citrus-service-moduleloader</artifactId>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
     </dependencies>
 </project>

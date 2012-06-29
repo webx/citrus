@@ -9,6 +9,7 @@ package com.alibaba.citrus.service.mappingrule.impl.rule;
 
 import static com.alibaba.citrus.springext.util.SpringExtUtil.attributesToProperties;
 import static com.alibaba.citrus.util.StringUtil.substring;
+import static org.springframework.util.StringUtils.uncapitalize;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -63,14 +64,18 @@ public class RestFullModuleMappingRule extends FallbackModuleMappingRule {
     @Autowired
     private HttpServletRequest request;
 
-    @Override
+    public void setRestFulPrior(boolean restFulPrior) {
+		this.restFulPrior = restFulPrior;
+	}
+
+	@Override
     public String doMapping(String name) {
         FallbackIterator iter = new FallbackModuleIterator(name, getDefaultName(), isMatchLastName());
 
         String moduleName = null;
         String firstModuleName = iter.getNext(); // 保存第一个精确的匹配，万一找不到，就返回这个值
 
-        if (restFulPrior) {
+        if (!restFulPrior) {
             // 策略1
             moduleName = getFallBackMapName(iter);
             if (moduleName != null) {
@@ -109,8 +114,8 @@ public class RestFullModuleMappingRule extends FallbackModuleMappingRule {
         if (firstModuleName != null) {
             int lastSeparatorPos = firstModuleName.indexOf(EXTENSION_SEPARATOR);
             if (lastSeparatorPos > 0) {
-                String methodName = substring(firstModuleName, lastSeparatorPos);
-                String moduleName = substring(firstModuleName, 0, lastSeparatorPos - 1);
+                String methodName = uncapitalize(substring(firstModuleName, lastSeparatorPos+1));
+                String moduleName = substring(firstModuleName, 0, lastSeparatorPos);
                 if (checkRequestModuleExist(getModuleLoaderService().getModuleQuiet(getModuleType(), moduleName),
                                             methodName)) {
                     return moduleName;
@@ -149,7 +154,7 @@ public class RestFullModuleMappingRule extends FallbackModuleMappingRule {
         return null;
     }
 
-    public static class DefinitionParser extends AbstractModuleMappingRuleDefinitionParser<FallbackModuleMappingRule> {
+    public static class DefinitionParser extends AbstractModuleMappingRuleDefinitionParser<RestFullModuleMappingRule> {
 
         @Override
         protected void doParseModuleMappingRule(Element element, ParserContext parserContext,
