@@ -21,10 +21,13 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.core.annotation.AnnotationUtils;
 
 import com.alibaba.citrus.service.moduleloader.Module;
 import com.alibaba.citrus.service.moduleloader.ModuleInfo;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
+import static com.alibaba.citrus.service.moduleloader.constant.ModuleConstant.DEFAULT_EXECUTE_METHOD;
+import com.alibaba.citrus.service.moduleloader.bind.annotation.RequestMapping;
 import com.alibaba.citrus.util.StringUtil;
 
 /**
@@ -34,80 +37,87 @@ import com.alibaba.citrus.util.StringUtil;
  */
 public class ScreenEventAdapterFactory extends AbstractDataBindingAdapterFactory implements ApplicationContextAware {
 
-    private ApplicationContext context;
+	private ApplicationContext context;
 
-    @Override
-    public Module adapt(String type, String name, Object moduleObject) throws ModuleLoaderException {
-        if (StringUtil.indexOf(type, "screen") == -1) {
-            return null;
-        }
-        Class<?> moduleClass = moduleObject.getClass();
-        Map<String, Method> handlers = getEventHandlers(moduleClass);
+	@Override
+	public Module adapt(String type, String name, Object moduleObject) throws ModuleLoaderException {
+		if (StringUtil.indexOf(type, "screen") == -1) {
+			return null;
+		}
+		Class<?> moduleClass = moduleObject.getClass();
+		Map<String, Method> handlers = getEventHandlers(moduleClass);
 
-        if (handlers == null) {
-            return null;
-        }
+		if (handlers == null) {
+			return null;
+		}
 
-        ModuleInfo moduleInfo = new ModuleInfo(type, name);
-        FastClass fc = FastClass.create(moduleClass);
-        Map<String, MethodInvoker> fastHandlers = createHashMap(handlers.size());
+		ModuleInfo moduleInfo = new ModuleInfo(type, name);
+		FastClass fc = FastClass.create(moduleClass);
+		Map<String, MethodInvoker> fastHandlers = createHashMap(handlers.size());
 
-        for (Map.Entry<String, Method> entry : handlers.entrySet()) {
-            FastMethod fm = fc.getMethod(entry.getValue());
-            fastHandlers.put(entry.getKey(), getMethodInvoker(fm, moduleInfo, false));
-        }
-        ScreenEventAdapter adapter = new ScreenEventAdapter(moduleObject, fastHandlers);
-        try {
-            // 注入并初始化adapter（不是注入moduleObject，后者取决于factory的设置）
-            autowireAndInitialize(adapter, context, AbstractBeanDefinition.AUTOWIRE_AUTODETECT, type + "." + name);
-        } catch (Exception e) {
-            throw new ModuleLoaderException("Failed to configure module adapter", e);
-        }
+		for (Map.Entry<String, Method> entry : handlers.entrySet()) {
+			FastMethod fm = fc.getMethod(entry.getValue());
+			fastHandlers.put(entry.getKey(),getMethodInvoker(fm, moduleInfo, false));
+		}
+		ScreenEventAdapter adapter = new ScreenEventAdapter(moduleObject,fastHandlers);
+		try {
+			// 注入并初始化adapter（不是注入moduleObject，后者取决于factory的设置）
+			autowireAndInitialize(adapter, context,AbstractBeanDefinition.AUTOWIRE_AUTODETECT, type + "." + name);
+		} catch (Exception e) {
+			throw new ModuleLoaderException(
+					"Failed to configure module adapter", e);
+		}
 
-        return adapter;
-    }
+		return adapter;
+	}
 
-    private Map<String, Method> getEventHandlers(Class<?> moduleClass) {
-        Map<String, Method> handlers = null;
+	private Map<String, Method> getEventHandlers(Class<?> moduleClass) {
+		Map<String, Method> handlers = null;
 
-        for (Method method : moduleClass.getMethods()) {
-            if (checkMethod(method)) {
-                String methodName = method.getName();
+		for (Method method : moduleClass.getMethods()) {
+			if (checkMethod(method)) {
+				String methodName = method.getName();
 
-                if (handlers == null) {
-                    handlers = createHashMap();
-                }
+				if (handlers == null) {
+					handlers = createHashMap();
+				}
 
-                handlers.put(methodName, method);
-            }
-        }
-        return handlers;
-    }
-    
-    /**为了防止类似wait方法出现 */
-    protected boolean checkMethod(Method method) {
-        int modifiers = method.getModifiers();
+				handlers.put(methodName, method);
+			}
+		}
+		return handlers;
+	}
 
-        if (Modifier.isStatic(modifiers) || Modifier.isFinal(modifiers) || Modifier.isNative(modifiers)) {
-            return false;
-        }
-        
-        String methodName = method.getName();
-        if("toString".equals(methodName) || "equals".equals(methodName)){
-        	return false;
-        }
+	/**
+	 * 只有包含Annotaion <code>RequestMapping</code> 或者 execute方法才可以认为允许的方法
+	 */
+	protected boolean checkMethod(Method method) {
 
-        if (Modifier.isPublic(modifiers) || Modifier.isProtected(modifiers)) {
-            return true;
-        }
+		if (isAnnotationHandlerMethod(method)) {
+			return true;
+		} else if (isExecuteMethod(method)) {
+			return true;
+		}
+		return false;
+	}
 
-        return false;
-    }
+	private boolean isAnnotationHandlerMethod(Method method) {
+		return AnnotationUtils.findAnnotation(method, RequestMapping.class) != null;
+	}
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.context = applicationContext;
+	private boolean isExecuteMethod(Method method) {
+		String methodName = method.getName();
+		if (DEFAULT_EXECUTE_METHOD.equals(methodName) && Modifier.isPublic(method.getModifiers())) {
+			return true;
+		}
+		return false;
+	}
 
-    }
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext)
+			throws BeansException {
+		this.context = applicationContext;
+
+	}
 
 }

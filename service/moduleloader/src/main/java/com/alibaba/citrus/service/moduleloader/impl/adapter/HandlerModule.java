@@ -12,11 +12,11 @@ import java.util.Map;
 import com.alibaba.citrus.service.moduleloader.Module;
 
 /**
- * 类HandleModule.java的实现描述：TODO 类实现描述
- * 
  * @author qianchao 2012-6-29 上午11:31:30
  */
 public interface HandlerModule extends Module {
 
     Map<String, MethodInvoker> getHandlers();
+    
+    MethodInvoker getExecuteHandler();
 }

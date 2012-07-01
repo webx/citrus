@@ -83,6 +83,15 @@
             <mapping extension="vm" to="vhtml" />
         </extension-rule>
     </services:mapping-rules>
+    
+    <services:mapping-rules id="restful1" lazy-init="true">
+    	<restful-module-rule id="screen" moduleType="screen" />
+    </services:mapping-rules>
+    
+    <services:mapping-rules id="restful2" lazy-init="true">
+    	<restful-module-rule id="screen" moduleType="screen" restFulPrior="true" />
+    </services:mapping-rules>
+    
 
     <!-- 空的配置，用于测试异常操作 -->
     <services:mapping-rules id="nullMapping" />

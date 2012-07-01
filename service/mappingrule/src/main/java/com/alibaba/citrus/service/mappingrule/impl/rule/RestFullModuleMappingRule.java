@@ -9,7 +9,10 @@ package com.alibaba.citrus.service.mappingrule.impl.rule;
 
 import static com.alibaba.citrus.springext.util.SpringExtUtil.attributesToProperties;
 import static com.alibaba.citrus.util.StringUtil.substring;
+import static com.alibaba.citrus.service.moduleloader.constant.ModuleConstant.DEFAULT_EXECUTE_METHOD;
+import static com.alibaba.citrus.service.moduleloader.constant.ModuleConstant.EVENT_HANDLER_METHOD;
 import static org.springframework.util.StringUtils.uncapitalize;
+import static org.springframework.util.StringUtils.capitalize;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,7 +25,6 @@ import com.alibaba.citrus.service.mappingrule.MappingRuleException;
 import com.alibaba.citrus.service.mappingrule.support.AbstractModuleMappingRuleDefinitionParser;
 import com.alibaba.citrus.service.moduleloader.Module;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
-import com.alibaba.citrus.service.moduleloader.constant.ModuleConstant;
 import com.alibaba.citrus.service.moduleloader.impl.adapter.HandlerModule;
 
 /**
@@ -91,7 +93,7 @@ public class RestFullModuleMappingRule extends FallbackModuleMappingRule {
             // 策略2
             moduleName = iter.next();
             try {
-                if (getModuleLoaderService().getModuleQuiet(getModuleType(), moduleName) != null) {
+                if (checkRequestModuleExist(getModuleLoaderService().getModuleQuiet(getModuleType(), moduleName),DEFAULT_EXECUTE_METHOD)) {
                     return moduleName;
                 } // else 继续查找
             } catch (ModuleLoaderException e) {
@@ -110,32 +112,44 @@ public class RestFullModuleMappingRule extends FallbackModuleMappingRule {
         return firstModuleName;
     }
 
-    private String getRestFullMapName(String firstModuleName) {
-        if (firstModuleName != null) {
-            int lastSeparatorPos = firstModuleName.indexOf(EXTENSION_SEPARATOR);
+    private String getRestFullMapName(String fullModuleName) {
+        if (fullModuleName != null) {
+            int lastSeparatorPos = fullModuleName.lastIndexOf(EXTENSION_SEPARATOR);
             if (lastSeparatorPos > 0) {
-                String methodName = uncapitalize(substring(firstModuleName, lastSeparatorPos+1));
-                String moduleName = substring(firstModuleName, 0, lastSeparatorPos);
-                if (checkRequestModuleExist(getModuleLoaderService().getModuleQuiet(getModuleType(), moduleName),
-                                            methodName)) {
+                String methodName = uncapitalize(substring(fullModuleName, lastSeparatorPos+1));
+                String moduleName = capitalizeModuleName(substring(fullModuleName, 0, lastSeparatorPos));
+                if (checkRequestModuleExist(getModuleLoaderService().getModuleQuiet(getModuleType(), moduleName),methodName)) {
                     return moduleName;
                 }
             }
         }
         return null;
     }
+    
+    private String capitalizeModuleName(String rawModuleName){
+    	int lastSeparatorPos = rawModuleName.lastIndexOf(EXTENSION_SEPARATOR);
+    	if(lastSeparatorPos>0){
+    		String prefix = substring(rawModuleName,0,lastSeparatorPos);
+    		String last = capitalize(substring(rawModuleName,lastSeparatorPos+1));
+    		return prefix+EXTENSION_SEPARATOR+last;
+    	}
+    	return rawModuleName;
+    }
 
     private boolean checkRequestModuleExist(Module module, String methodName) {
         if (module instanceof HandlerModule) {
             HandlerModule handlerModule = (HandlerModule) module;
             if (handlerModule.getHandlers().containsKey(methodName)) {
-                request.setAttribute(ModuleConstant.EVENT_HANDLER_METHOD, methodName);
+                request.setAttribute(EVENT_HANDLER_METHOD, methodName);
                 return true;
             }
         }
         return false;
     }
 
+    /**
+     * 递归判断Module是否含有execute方法
+     */
     private String getFallBackMapName(FallbackIterator iter) {
         String moduleName = null;
         while (iter.hasNext()) {
@@ -144,7 +158,7 @@ public class RestFullModuleMappingRule extends FallbackModuleMappingRule {
             log.debug("Looking for module: " + moduleName);
 
             try {
-                if (getModuleLoaderService().getModuleQuiet(getModuleType(), moduleName) != null) {
+            	if(checkRequestModuleExist(getModuleLoaderService().getModuleQuiet(getModuleType(), moduleName),DEFAULT_EXECUTE_METHOD)){
                     return moduleName;
                 } // else 继续查找
             } catch (ModuleLoaderException e) {

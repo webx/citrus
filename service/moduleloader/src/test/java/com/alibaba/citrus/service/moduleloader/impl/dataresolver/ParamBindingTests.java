@@ -17,21 +17,25 @@
 
 package com.alibaba.citrus.service.moduleloader.impl.dataresolver;
 
-import static com.alibaba.citrus.test.TestUtil.*;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static com.alibaba.citrus.test.TestUtil.exception;
+import static org.hamcrest.Matchers.anyOf;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
+
+import org.hamcrest.Matcher;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
 
 import com.alibaba.citrus.service.moduleloader.AbstractModuleLoaderTests;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import com.alibaba.citrus.service.moduleloader.UnadaptableModuleException;
 import com.alibaba.citrus.service.moduleloader.impl.adapter.ActionEventAdapter;
 import com.alibaba.citrus.service.moduleloader.impl.adapter.DataBindingAdapter;
+import com.alibaba.citrus.service.moduleloader.impl.adapter.ScreenEventAdapter;
 import com.alibaba.test2.module.action.MyParameterizedAction;
 import com.alibaba.test2.module.screen.MyParameterizedScreen;
-import org.hamcrest.Matcher;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
 
 public class ParamBindingTests extends AbstractModuleLoaderTests {
     @BeforeClass
@@ -49,7 +53,7 @@ public class ParamBindingTests extends AbstractModuleLoaderTests {
         initRequestContext(factory);
 
         // screen.execute(无参数) - 正常执行
-        DataBindingAdapter dbAdapter = (DataBindingAdapter) moduleLoaderService.getModule("screen", "myScreen");
+        ScreenEventAdapter dbAdapter = (ScreenEventAdapter) moduleLoaderService.getModule("screen", "myScreen");
         dbAdapter.execute();
 
         // screen.execute(带参数)
@@ -88,7 +92,7 @@ public class ParamBindingTests extends AbstractModuleLoaderTests {
 
     @Test
     public void withDataResolver_default_adapters() throws Exception {
-        assertWithDataResolver(factory);
+    	assertWithDataResolverDefault(factory);
     }
 
     @Test
@@ -101,6 +105,45 @@ public class ParamBindingTests extends AbstractModuleLoaderTests {
         assertWithDataResolver(createContext(
                 "dataresolver/services-with-dataresolver-defined-adapters-default-resolver-ref.xml", false));
     }
+    
+    private void assertWithDataResolverDefault(ApplicationContext factory) throws Exception {
+        moduleLoaderService = (ModuleLoaderService) factory.getBean("moduleLoaderService");
+
+        getInvocationContext("/app1?event_submit_do_my_event=yes");
+        initRequestContext(factory);
+
+        // screen.execute(无参数)
+        ScreenEventAdapter dbAdapter = (ScreenEventAdapter) moduleLoaderService.getModule("screen", "myScreen");
+        dbAdapter.execute();
+        assertEquals("MyScreen.execute()", request.getAttribute("screenLog"));
+
+        // screen.execute(带参数)
+        dbAdapter = (ScreenEventAdapter) moduleLoaderService.getModule("screen", "myParameterizedScreen");
+        dbAdapter.execute();
+        assertEquals("MyParameterizedScreen.execute(request, 111)", request.getAttribute("screenLog"));
+        commonAssertWithDataResolver(factory);
+    }
+
+	private void commonAssertWithDataResolver(ApplicationContext factory)
+			throws Exception {
+		// action.doMyEvent(无参数) - 正常执行
+        ActionEventAdapter aeAdapter = (ActionEventAdapter) moduleLoaderService.getModule("action", "myAction");
+        aeAdapter.execute();
+        assertEquals("MyAction.doMyEvent()", request.getAttribute("actionLog"));
+
+        // action.doMyEvent(带参数)
+        aeAdapter = (ActionEventAdapter) moduleLoaderService.getModule("action", "myParameterizedAction");
+        aeAdapter.execute();
+        assertEquals("MyParameterizedAction.doMyEvent(request, 222)", request.getAttribute("actionLog"));
+
+        // action.doMyEvent(带primitive参数)
+        getInvocationContext("/app1?event_submit_do_my_event_primitive=yes");
+        initRequestContext(factory);
+
+        aeAdapter = (ActionEventAdapter) moduleLoaderService.getModule("action", "myParameterizedAction");
+        aeAdapter.execute();
+        assertEquals("MyParameterizedAction.doMyEventPrimitive(request, 0)", request.getAttribute("actionLog"));
+	}
 
     private void assertWithDataResolver(ApplicationContext factory) throws Exception {
         moduleLoaderService = (ModuleLoaderService) factory.getBean("moduleLoaderService");
@@ -118,23 +161,7 @@ public class ParamBindingTests extends AbstractModuleLoaderTests {
         dbAdapter.execute();
         assertEquals("MyParameterizedScreen.execute(request, 111)", request.getAttribute("screenLog"));
 
-        // action.doMyEvent(无参数) - 正常执行
-        ActionEventAdapter aeAdapter = (ActionEventAdapter) moduleLoaderService.getModule("action", "myAction");
-        aeAdapter.execute();
-        assertEquals("MyAction.doMyEvent()", request.getAttribute("actionLog"));
-
-        // action.doMyEvent(带参数)
-        aeAdapter = (ActionEventAdapter) moduleLoaderService.getModule("action", "myParameterizedAction");
-        aeAdapter.execute();
-        assertEquals("MyParameterizedAction.doMyEvent(request, 222)", request.getAttribute("actionLog"));
-
-        // action.doMyEvent(带primitive参数)
-        getInvocationContext("/app1?event_submit_do_my_event_primitive=yes");
-        initRequestContext(factory);
-
-        aeAdapter = (ActionEventAdapter) moduleLoaderService.getModule("action", "myParameterizedAction");
-        aeAdapter.execute();
-        assertEquals("MyParameterizedAction.doMyEventPrimitive(request, 0)", request.getAttribute("actionLog"));
+        commonAssertWithDataResolver(factory);
     }
 
     @Test
@@ -145,14 +172,14 @@ public class ParamBindingTests extends AbstractModuleLoaderTests {
         initRequestContext(factory);
 
         // screen.execute(@skip) - 不会真的skip，只是参数为null
-        DataBindingAdapter dbAdapter = (DataBindingAdapter) moduleLoaderService
+        ScreenEventAdapter dbAdapter = (ScreenEventAdapter) moduleLoaderService
                 .getModule("screen", "mySkippableScreen");
         dbAdapter.execute();
 
         assertEquals("result is haha", request.getAttribute("screenLog"));
 
         // screen.execute(@skip primitive type) - 不会真的skip，只是参数为false
-        dbAdapter = (DataBindingAdapter) moduleLoaderService.getModule("screen", "mySkippableScreen2");
+        dbAdapter = (ScreenEventAdapter) moduleLoaderService.getModule("screen", "mySkippableScreen2");
         dbAdapter.execute();
 
         assertEquals("result is false", request.getAttribute("screenLog"));

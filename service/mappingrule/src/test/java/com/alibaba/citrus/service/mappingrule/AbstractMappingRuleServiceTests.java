@@ -18,13 +18,17 @@
 package com.alibaba.citrus.service.mappingrule;
 
 import static com.alibaba.citrus.test.TestEnvStatic.*;
+import static org.easymock.EasyMock.createMock;
 
 import java.io.File;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 
@@ -44,6 +48,15 @@ public abstract class AbstractMappingRuleServiceTests {
     @BeforeClass
     public static void initFactory() throws Exception {
         factory = createBeanFactory("services.xml");
+        registerRequestBean(factory);
+    }
+    
+    protected static void registerRequestBean(ApplicationContext factory){
+    	HttpServletRequest request = createMock(HttpServletRequest.class);
+
+        // 注册mock request
+        ((ConfigurableListableBeanFactory) factory.getAutowireCapableBeanFactory()).registerResolvableDependency(
+                HttpServletRequest.class, request);
     }
 
     @Before

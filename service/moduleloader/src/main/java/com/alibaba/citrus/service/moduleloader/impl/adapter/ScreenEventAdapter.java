@@ -15,7 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.alibaba.citrus.service.moduleloader.constant.ModuleConstant;
+import static com.alibaba.citrus.service.moduleloader.constant.ModuleConstant.EVENT_HANDLER_METHOD;
+import static com.alibaba.citrus.service.moduleloader.constant.ModuleConstant.DEFAULT_EXECUTE_METHOD;;
 
 /**
  * 类ScreenEventAdapter.java的实现描述：TODO 类实现描述
@@ -36,9 +37,9 @@ public class ScreenEventAdapter extends AbstractDataBindingAdapter implements Ha
 
     @Override
     public void execute() throws Exception {
-        String methodName = (String) request.getAttribute(ModuleConstant.EVENT_HANDLER_METHOD);
+        String methodName = (String) request.getAttribute(EVENT_HANDLER_METHOD);
         if (methodName == null) {
-            methodName = "execute";
+            methodName = DEFAULT_EXECUTE_METHOD;
         }
         MethodInvoker mi = handlers.get(methodName);
         if (mi != null) {
@@ -50,5 +51,10 @@ public class ScreenEventAdapter extends AbstractDataBindingAdapter implements Ha
     public Map<String, MethodInvoker> getHandlers() {
         return handlers;
     }
+
+	@Override
+	public MethodInvoker getExecuteHandler() {
+		return handlers.get(DEFAULT_EXECUTE_METHOD);
+	}
 
 }

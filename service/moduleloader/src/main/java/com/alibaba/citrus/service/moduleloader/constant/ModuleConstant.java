@@ -14,5 +14,8 @@ public class ModuleConstant {
 
     // 用于暂时存放event handler的key
     public static final String EVENT_HANDLER_METHOD = "EVENT_HANDLER_METHOD";
+    
+    // 默认 execute method 的名字
+    public static final String DEFAULT_EXECUTE_METHOD="execute";
 
 }
