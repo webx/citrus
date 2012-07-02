@@ -27,6 +27,8 @@ public abstract class AbstractMappingRuleTests extends AbstractMappingRuleServic
     public void cacheAuto_productionMode() throws Exception {
         System.setProperty("productionMode", "true");
         ApplicationContext factory = createBeanFactory("services.xml");
+        registerRequestBean(factory);
+        
         mappingRules = (MappingRuleService) factory.getBean("mappingRules");
 
         String result = getMappedName_forCacheTest();
@@ -43,6 +45,7 @@ public abstract class AbstractMappingRuleTests extends AbstractMappingRuleServic
     public void cacheAuto_devMode() throws Exception {
         System.setProperty("productionMode", "false");
         ApplicationContext factory = createBeanFactory("services.xml");
+        registerRequestBean(factory);
         mappingRules = (MappingRuleService) factory.getBean("mappingRules");
 
         String result = getMappedName_forCacheTest();
@@ -55,7 +58,9 @@ public abstract class AbstractMappingRuleTests extends AbstractMappingRuleServic
         System.setProperty("productionMode", "false");
         System.setProperty("cacheEnabled", "true");
         ApplicationContext factory = createBeanFactory("services.xml");
+        registerRequestBean(factory);
         mappingRules = (MappingRuleService) factory.getBean("cache");
+        
 
         String result = getMappedName_forCacheTest();
         assertNotNull(result);
@@ -67,6 +72,7 @@ public abstract class AbstractMappingRuleTests extends AbstractMappingRuleServic
         System.setProperty("productionMode", "true");
         System.setProperty("cacheEnabled", "false");
         ApplicationContext factory = createBeanFactory("services.xml");
+        registerRequestBean(factory);
         mappingRules = (MappingRuleService) factory.getBean("cache");
 
         String result = getMappedName_forCacheTest();

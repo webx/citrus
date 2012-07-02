@@ -29,6 +29,7 @@ import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import com.alibaba.citrus.service.moduleloader.UnadaptableModuleException;
 import com.alibaba.citrus.service.moduleloader.impl.adapter.ActionEventAdapter;
 import com.alibaba.citrus.service.moduleloader.impl.adapter.DataBindingAdapter;
+import com.alibaba.citrus.service.moduleloader.impl.adapter.ScreenEventAdapter;
 import com.alibaba.citrus.service.requestcontext.rundata.RunData;
 import com.alibaba.test.app1.module.screens.MyScreen;
 import org.junit.BeforeClass;
@@ -287,7 +288,7 @@ public class ClassModuleFactoryTests extends AbstractModuleLoaderTests {
         module = moduleLoaderService.getModule(" screen ", "app2.ThirdScreen");
 
         assertNotNull(module);
-        assertEquals(DataBindingAdapter.class, module.getClass());
+        assertEquals(ScreenEventAdapter.class, module.getClass());
     }
 
     @Test
@@ -315,6 +316,6 @@ public class ClassModuleFactoryTests extends AbstractModuleLoaderTests {
         module = moduleLoaderService.getModule(" screen ", "app2.FirstScreen");
 
         assertNotNull(module);
-        assertEquals(DataBindingAdapter.class, module.getClass());
+        assertEquals(ScreenEventAdapter.class, module.getClass());
     }
 }

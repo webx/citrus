@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:beans="http://www.springframework.org/schema/beans"
+            xmlns:springext="http://www.alibaba.com/schema/springext/base"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+                schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+                schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="restful-module-rule" type="RestFulModuleRuleType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+在兼容FallbackModuleMappingRule的基础上，增加类似RestFul风格实现：
+
+兼容策略有两种:
+
+（默认）：先根据FallbackModuleMappingRule的策略查找对应MapName，然后才根据RestFul风格去查找对应MapName
+例如：将模板名："about/directions/driving.vm"映射到screen module，将顺次搜索以下module：
+
+"about.directions.Driving"
+"about.directions.Default"
+"about.Default"
+"Default"
+"DefaultScreen"（即配置文件中指定的默认module名）
+"about.Directions"意味着Directions类里含有driving方法
+混杂查找策略
+例如：将模板名："about/directions/driving.vm"映射到screen module，将顺次搜索以下module：
+
+"about.directions.Driving"
+"about.Directions"意味着Directions类里含有driving方法
+"about.directions.Default"
+"about.Default"
+"Default"
+"DefaultScreen"（即配置文件中指定的默认module名）
+注意，无论上述哪种策略，如果上例中DefaultScreen不存在或未指定默认值，则返回最初的结果： about.directions.Driving。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="RestFulModuleRuleType">
+        <xsd:attribute name="id" type="xsd:string" use="required" />
+        <xsd:attribute name="moduleType" type="xsd:string" use="required" />
+        <xsd:attribute name="defaultName" type="xsd:string" />
+        <xsd:attribute name="matchLastName" type="springext:booleanOrPlaceholder" />
+        <xsd:attribute name="moduleLoaderServiceRef" type="xsd:string" />
+        <xsd:attribute name="cacheEnabled" type="springext:booleanOrPlaceholder" />
+        <xsd:attribute name="restFulPrior" type="springext:booleanOrPlaceholder" default="false"/>
+    </xsd:complexType>
+
+</xsd:schema>
