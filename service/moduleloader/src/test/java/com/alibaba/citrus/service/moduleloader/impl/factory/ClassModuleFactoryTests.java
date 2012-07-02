@@ -17,24 +17,11 @@
 
 package com.alibaba.citrus.service.moduleloader.impl.factory;
 
-import static com.alibaba.citrus.test.TestUtil.exception;
-import static com.alibaba.citrus.test.TestUtil.getFieldValue;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
+import static com.alibaba.citrus.test.TestUtil.*;
+import static org.junit.Assert.*;
 
 import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 
 import com.alibaba.citrus.service.moduleloader.AbstractModuleLoaderTests;
 import com.alibaba.citrus.service.moduleloader.Module;
@@ -45,6 +32,11 @@ import com.alibaba.citrus.service.moduleloader.impl.adapter.DataBindingAdapter;
 import com.alibaba.citrus.service.moduleloader.impl.adapter.ScreenEventAdapter;
 import com.alibaba.citrus.service.requestcontext.rundata.RunData;
 import com.alibaba.test.app1.module.screens.MyScreen;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanCreationException;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 
 public class ClassModuleFactoryTests extends AbstractModuleLoaderTests {
     @BeforeClass

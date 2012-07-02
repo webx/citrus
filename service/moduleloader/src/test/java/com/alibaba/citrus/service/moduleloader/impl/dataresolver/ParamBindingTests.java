@@ -17,16 +17,9 @@
 
 package com.alibaba.citrus.service.moduleloader.impl.dataresolver;
 
-import static com.alibaba.citrus.test.TestUtil.exception;
-import static org.hamcrest.Matchers.anyOf;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
-
-import org.hamcrest.Matcher;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
+import static com.alibaba.citrus.test.TestUtil.*;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
 
 import com.alibaba.citrus.service.moduleloader.AbstractModuleLoaderTests;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
@@ -36,6 +29,10 @@ import com.alibaba.citrus.service.moduleloader.impl.adapter.DataBindingAdapter;
 import com.alibaba.citrus.service.moduleloader.impl.adapter.ScreenEventAdapter;
 import com.alibaba.test2.module.action.MyParameterizedAction;
 import com.alibaba.test2.module.screen.MyParameterizedScreen;
+import org.hamcrest.Matcher;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
 
 public class ParamBindingTests extends AbstractModuleLoaderTests {
     @BeforeClass
@@ -92,7 +89,7 @@ public class ParamBindingTests extends AbstractModuleLoaderTests {
 
     @Test
     public void withDataResolver_default_adapters() throws Exception {
-    	assertWithDataResolverDefault(factory);
+        assertWithDataResolverDefault(factory);
     }
 
     @Test
@@ -105,7 +102,7 @@ public class ParamBindingTests extends AbstractModuleLoaderTests {
         assertWithDataResolver(createContext(
                 "dataresolver/services-with-dataresolver-defined-adapters-default-resolver-ref.xml", false));
     }
-    
+
     private void assertWithDataResolverDefault(ApplicationContext factory) throws Exception {
         moduleLoaderService = (ModuleLoaderService) factory.getBean("moduleLoaderService");
 
@@ -124,9 +121,9 @@ public class ParamBindingTests extends AbstractModuleLoaderTests {
         commonAssertWithDataResolver(factory);
     }
 
-	private void commonAssertWithDataResolver(ApplicationContext factory)
-			throws Exception {
-		// action.doMyEvent(无参数) - 正常执行
+    private void commonAssertWithDataResolver(ApplicationContext factory)
+            throws Exception {
+        // action.doMyEvent(无参数) - 正常执行
         ActionEventAdapter aeAdapter = (ActionEventAdapter) moduleLoaderService.getModule("action", "myAction");
         aeAdapter.execute();
         assertEquals("MyAction.doMyEvent()", request.getAttribute("actionLog"));
@@ -143,7 +140,7 @@ public class ParamBindingTests extends AbstractModuleLoaderTests {
         aeAdapter = (ActionEventAdapter) moduleLoaderService.getModule("action", "myParameterizedAction");
         aeAdapter.execute();
         assertEquals("MyParameterizedAction.doMyEventPrimitive(request, 0)", request.getAttribute("actionLog"));
-	}
+    }
 
     private void assertWithDataResolver(ApplicationContext factory) throws Exception {
         moduleLoaderService = (ModuleLoaderService) factory.getBean("moduleLoaderService");

@@ -17,21 +17,11 @@
 
 package com.alibaba.citrus.service.moduleloader.impl;
 
-import static com.alibaba.citrus.springext.util.DomUtil.subElements;
-import static com.alibaba.citrus.springext.util.SpringExtUtil.attributesToProperties;
-import static com.alibaba.citrus.springext.util.SpringExtUtil.createManagedList;
-import static com.alibaba.citrus.springext.util.SpringExtUtil.getSiblingConfigurationPoint;
-import static com.alibaba.citrus.springext.util.SpringExtUtil.parseBeanDefinitionAttributes;
-import static com.alibaba.citrus.springext.util.SpringExtUtil.parseConfigurationPointBean;
-import static com.alibaba.citrus.util.StringUtil.trimToNull;
+import static com.alibaba.citrus.springext.util.DomUtil.*;
+import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
+import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
-
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.beans.factory.config.BeanDefinitionHolder;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
 
 import com.alibaba.citrus.service.moduleloader.impl.adapter.AbstractDataBindingAdapterFactoryDefinitionParser;
 import com.alibaba.citrus.service.moduleloader.impl.adapter.ActionEventAdapterFactory;
@@ -41,8 +31,14 @@ import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
-public class ModuleLoaderServiceDefinitionParser extends AbstractNamedBeanDefinitionParser<ModuleLoaderServiceImpl> implements ContributionAware {
+public class ModuleLoaderServiceDefinitionParser extends AbstractNamedBeanDefinitionParser<ModuleLoaderServiceImpl>
+        implements ContributionAware {
 
     private ConfigurationPoint moduleFactoriesConfigurationPoint;
     private ConfigurationPoint moduleAdaptersConfigurationPoint;
