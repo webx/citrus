@@ -55,7 +55,7 @@ public class VelocityRuntimeInstance extends RuntimeInstance {
     private boolean interpolationHack;
 
     @Override
-    public synchronized void init() throws Exception {
+    public synchronized void init() {
         super.init();
         interpolationHack = getConfiguration().getBoolean(INTERPOLATION_HACK_KEY, INTERPOLATION_HACK_DEFAULT);
     }

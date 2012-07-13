@@ -137,10 +137,7 @@ public class FreeMarkerEngineTests {
             fail();
         } catch (BeanCreationException e) {
             assertThat(e, exception(TemplateException.class, "invalid key and value: illegalKey = test"));
-            assertThat(
-                    e,
-                    exception(freemarker.template.TemplateException.class,
-                              "Failed to set setting illegalKey to value test"));
+            assertThat(e, exception(freemarker.template.TemplateException.class, "Failed to set setting \"illegalKey\" to value \"test\""));
         }
     }
 
