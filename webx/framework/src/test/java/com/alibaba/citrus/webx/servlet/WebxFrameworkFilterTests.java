@@ -88,7 +88,8 @@ public class WebxFrameworkFilterTests extends AbstractWebxTests {
         HttpServletResponse response = createMock(HttpServletResponse.class);
         FilterChain filterChain = createMock(FilterChain.class);
 
-        expect(request.getRequestURI()).andReturn(requestURI).anyTimes();
+        expect(request.getServletPath()).andReturn(requestURI).anyTimes();
+        expect(request.getPathInfo()).andReturn(null).anyTimes();
 
         if (excluded && !internal) {
             filterChain.doFilter(request, response);
@@ -99,7 +100,7 @@ public class WebxFrameworkFilterTests extends AbstractWebxTests {
         if (internal) {
             assertFalse(filter.isExcluded(request));
         } else {
-            assertEquals(excluded, excludes.matches(request));
+            assertEquals(excluded, excludes.matches(requestURI));
         }
 
         if (excluded && !internal) {

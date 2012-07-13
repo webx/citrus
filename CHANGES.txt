@@ -300,4 +300,12 @@
   groovy 1.8.6
   cglib 2.2.2
   xml-apis 1.4.01
- 
+
+* Bugfix: WebxFrameworkFilter中的excludes/passthru参数、SetLocaleRequestContext的overrider中，错误地使用了requestURI。
+  正确的方式应该是requestURI除去contextPath，因为应用配置不应该依赖于contextPath。
+
+  ！！注意：现有的web应用如果不是默认web应用（即contextPath非空），并且web.xml中对WebxFrameworkFilter配置了excludes/passthru参数的，
+  必须修改参数，使之不包含contextPath。
+
+* 改进：WebxFrameworkFilter中的excludes/passthru参数，如果pattern以!开始，代表排除。
+  例如：excludes=*.jpg, !/upload/*.jpg，意味着除了/upload目录下的以外，所有的jpg图片都将从servlet容器中装载，而不是从webx框架中装载。

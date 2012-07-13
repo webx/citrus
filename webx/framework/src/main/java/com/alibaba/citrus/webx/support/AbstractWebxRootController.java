@@ -265,7 +265,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
      * 该功能适用于仅将webx视作普通的filter，而filter chain的接下来的部分将可使用webx所提供的request contexts。
      */
     private boolean isRequestPassedThru(HttpServletRequest request) {
-        return passthruFilter != null && passthruFilter.matches(request);
+        return passthruFilter != null && passthruFilter.matches(getResourcePath(request));
     }
 
     /** 放弃控制，将控制权返回给servlet engine。 */

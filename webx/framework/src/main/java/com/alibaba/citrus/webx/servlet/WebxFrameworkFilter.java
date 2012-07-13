@@ -19,6 +19,7 @@ package com.alibaba.citrus.webx.servlet;
 
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.FileUtil.*;
+import static com.alibaba.citrus.util.ServletUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static org.springframework.web.context.support.WebApplicationContextUtils.*;
 
@@ -154,11 +155,13 @@ public class WebxFrameworkFilter extends FilterBean {
     }
 
     boolean isExcluded(HttpServletRequest request) {
+        String path = getResourcePath(request);
+
         // 如果指定了excludes，并且当前requestURI匹配任何一个exclude pattern，
         // 则立即放弃控制，将控制还给servlet engine。
         // 但对于internal path，不应该被排除掉，否则internal页面会无法正常显示。
-        if (excludeFilter != null && excludeFilter.matches(request)) {
-            if (!isInternalRequest(request)) {
+        if (excludeFilter != null && excludeFilter.matches(path)) {
+            if (!isInternalRequest(path)) {
                 return true;
             }
         }
@@ -166,12 +169,10 @@ public class WebxFrameworkFilter extends FilterBean {
         return false;
     }
 
-    private boolean isInternalRequest(HttpServletRequest request) {
+    private boolean isInternalRequest(String path) {
         if (internalPathPrefix == null) {
             return false;
         }
-
-        String path = request.getRequestURI();
 
         if (path.equals(internalPathPrefix)) {
             return true;
