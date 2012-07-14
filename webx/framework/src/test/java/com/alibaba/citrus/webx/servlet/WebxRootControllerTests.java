@@ -52,9 +52,10 @@ public class WebxRootControllerTests extends AbstractWebxTests {
 
     @Before
     public void init() throws Exception {
-        prepareWebClient(null);
+        // 特别测试当有/contextPath存在时，passthru参数正确工作
+        prepareWebClient(null, "/myapps");
 
-        filter = (WebxFrameworkFilter) client.newInvocation("http://www.taobao.com/app1").getFilter();
+        filter = (WebxFrameworkFilter) client.newInvocation("http://www.taobao.com/myapps/app1").getFilter();
         controller = (WebxRootControllerImpl) filter.getWebxComponents().getWebxRootController();
 
         setErrorHandler(controller, new TestErrorHandler());
@@ -63,13 +64,13 @@ public class WebxRootControllerTests extends AbstractWebxTests {
     @Test
     public void passthru() throws Exception {
         // passthru
-        invokeServlet("/app1/plaintext.txt");
+        invokeServlet("/myapps/app1/plaintext.txt");
 
         assertEquals(200, clientResponseCode);
         assertEquals("hello, app1", clientResponseContent); // text from plain text file
 
         // 普通request
-        invokeServlet("/app1/plaintext2.txt");
+        invokeServlet("/myapps/app1/plaintext2.txt");
 
         assertEquals(200, clientResponseCode);
         assertEquals("hello!", clientResponseContent.trim()); // text from valve
@@ -78,7 +79,7 @@ public class WebxRootControllerTests extends AbstractWebxTests {
     @Test
     public void internalRequest_illegal() throws Exception {
         // internal
-        invokeServlet("/internal/notexist");
+        invokeServlet("/myapps/internal/notexist");
 
         // 由main handler接手，然后抛出异常
         assertEquals(404, clientResponseCode);
@@ -91,7 +92,7 @@ public class WebxRootControllerTests extends AbstractWebxTests {
 
     @Test
     public void internalRequest_error() throws Exception {
-        invokeServlet("/internal/error");
+        invokeServlet("/myapps/internal/error");
 
         assertEquals(200, clientResponseCode);
         assertEquals("text/html", clientResponse.getContentType());
@@ -100,7 +101,7 @@ public class WebxRootControllerTests extends AbstractWebxTests {
 
     @Test
     public void nonInternalRequest() throws Exception {
-        invokeServlet("/app1/internal.htm");
+        invokeServlet("/myapps/app1/internal.htm");
 
         assertEquals(200, clientResponseCode);
         assertThat(clientResponseContent, containsAll("hello!"));
@@ -131,7 +132,7 @@ public class WebxRootControllerTests extends AbstractWebxTests {
             }
         });
 
-        invokeServlet("/app1/plaintext.txt");
+        invokeServlet("/myapps/app1/plaintext.txt");
 
         assertEquals(200, clientResponseCode);
         assertEquals("text/plain", clientResponse.getContentType());
@@ -146,7 +147,7 @@ public class WebxRootControllerTests extends AbstractWebxTests {
             }
         });
 
-        invokeServlet("/app1/test.htm");
+        invokeServlet("/myapps/app1/test.htm");
 
         assertEquals(500, clientResponseCode);
         assertEquals("text/html", clientResponse.getContentType());
@@ -162,7 +163,7 @@ public class WebxRootControllerTests extends AbstractWebxTests {
             }
         });
 
-        invokeServlet("/app1/test.htm");
+        invokeServlet("/myapps/app1/test.htm");
 
         assertEquals(404, clientResponseCode);
         assertEquals("text/html", clientResponse.getContentType());
@@ -178,7 +179,7 @@ public class WebxRootControllerTests extends AbstractWebxTests {
             }
         });
 
-        invokeServlet("/app1/test.htm");
+        invokeServlet("/myapps/app1/test.htm");
 
         assertEquals(400, clientResponseCode);
         assertEquals("text/html", clientResponse.getContentType());
@@ -201,7 +202,7 @@ public class WebxRootControllerTests extends AbstractWebxTests {
         });
 
         try {
-            invokeServlet("/app1/test.htm");
+            invokeServlet("/myapps/app1/test.htm");
             fail();
         } catch (ServletException e) {
             // 真正的servlet engine在这里会显示web.xml中的错误页面，而测试时只会接收异常。
@@ -225,7 +226,7 @@ public class WebxRootControllerTests extends AbstractWebxTests {
         });
 
         try {
-            invokeServlet("/app1/test.htm");
+            invokeServlet("/myapps/app1/test.htm");
             fail();
         } catch (ServletException e) {
             // 真正的servlet engine在这里会显示web.xml中的错误页面，而测试时只会接收异常。
@@ -235,7 +236,7 @@ public class WebxRootControllerTests extends AbstractWebxTests {
 
     @Test
     public void head() throws Exception {
-        clientResponse = client.getResponse(new HeadMethodWebRequest("http://localhost/app1/internal.htm"));
+        clientResponse = client.getResponse(new HeadMethodWebRequest("http://localhost/myapps/app1/internal.htm"));
         clientResponseCode = clientResponse.getResponseCode();
         clientResponseContent = clientResponse.getText();
 
