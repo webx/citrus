@@ -66,11 +66,15 @@ public abstract class AbstractWebxTests {
     protected String            clientResponseContent;
 
     protected final void prepareWebClient(String webXmlName) throws Exception {
+        prepareWebClient(webXmlName, "");
+    }
+
+    protected final void prepareWebClient(String webXmlName, String contextPath) throws Exception {
         // Servlet container
         File webInf = new File(srcdir, "WEB-INF");
         File webXml = new File(webInf, defaultIfEmpty(webXmlName, "web.xml"));
 
-        ServletRunner servletRunner = new PatchedServletRunner(webXml, "");
+        ServletRunner servletRunner = new PatchedServletRunner(webXml, contextPath);
 
         // Servlet client
         client = servletRunner.newClient();

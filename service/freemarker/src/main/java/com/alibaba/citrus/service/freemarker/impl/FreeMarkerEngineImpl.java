@@ -30,12 +30,12 @@ import java.util.Locale;
 import com.alibaba.citrus.service.AbstractService;
 import com.alibaba.citrus.service.configuration.ProductionModeAware;
 import com.alibaba.citrus.service.freemarker.FreeMarkerEngine;
-import com.alibaba.citrus.service.freemarker.impl.log.LoggerHacker;
 import com.alibaba.citrus.service.template.TemplateContext;
 import com.alibaba.citrus.service.template.TemplateException;
 import com.alibaba.citrus.util.i18n.LocaleUtil;
 import freemarker.core.Environment;
 import freemarker.core.ParseException;
+import freemarker.log.Logger;
 import freemarker.template.Template;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.ResourceLoader;
@@ -45,22 +45,17 @@ import org.springframework.core.io.ResourceLoader;
  *
  * @author Michael Zhou
  */
-public class FreeMarkerEngineImpl extends AbstractService<FreeMarkerEngine> implements FreeMarkerEngine,
-                                                                                       ResourceLoaderAware, ProductionModeAware {
+public class FreeMarkerEngineImpl extends AbstractService<FreeMarkerEngine>
+        implements FreeMarkerEngine, ResourceLoaderAware, ProductionModeAware {
     private final FreeMarkerConfigurationImpl configuration = new FreeMarkerConfigurationImpl(getLogger());
 
     // 初始化slf4j日志。
     static {
-        String prefix = FreeMarkerEngine.class.getName();
-        int index = prefix.indexOf("freemarker");
-
-        if (index < 0) {
-            index = prefix.length();
+        try {
+            Logger.selectLoggerLibrary(Logger.LIBRARY_SLF4J);
+            Logger.setCategoryPrefix("");
+        } catch (Throwable ee) {
         }
-
-        prefix = prefix.substring(0, index);
-
-        LoggerHacker.hackLogger(prefix);
     }
 
     public FreeMarkerConfigurationImpl getConfiguration() {

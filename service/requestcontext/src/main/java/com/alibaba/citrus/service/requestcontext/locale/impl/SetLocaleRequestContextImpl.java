@@ -17,6 +17,7 @@
 
 package com.alibaba.citrus.service.requestcontext.locale.impl;
 
+import static com.alibaba.citrus.util.ServletUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.io.UnsupportedEncodingException;
@@ -178,11 +179,11 @@ public class SetLocaleRequestContextImpl extends AbstractRequestContextWrapper i
 
     /** 找出request uri匹配的overrider。 */
     private SetLocaleOverrider getMatchedOverrider() {
-        if (overriders != null) {
-            String uri = getRequest().getRequestURI();
+        if (overriders != null && overriders.length > 0) {
+            String path = getResourcePath(getRequest());
 
             for (SetLocaleOverrider overrider : overriders) {
-                if (overrider.getRequestUriPattern().matcher(uri).find()) {
+                if (overrider.getRequestUriPattern().matcher(path).find()) {
                     return overrider;
                 }
             }

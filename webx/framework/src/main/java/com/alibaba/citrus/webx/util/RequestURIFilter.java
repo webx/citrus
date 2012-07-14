@@ -24,49 +24,65 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.List;
 import java.util.regex.Pattern;
-import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.regex.PathNameWildcardCompiler;
 
 /**
- * 用来匹配和过滤<code>request.getRequestURI()</code>。
+ * 用来匹配和过滤指定路径。
  *
  * @author Michael Zhou
  */
 public class RequestURIFilter {
+    public static final String EXCLUDE_PREFIX = "!";
     private final String[]  uris;
+    private final boolean[] excludes;
     private final Pattern[] patterns;
 
     public RequestURIFilter(String uris) {
         List<String> names = createLinkedList();
+        List<Boolean> excludes = createLinkedList();
         List<Pattern> patterns = createLinkedList();
 
         for (String uri : split(defaultIfNull(uris, EMPTY_STRING), ", \r\n")) {
             uri = trimToNull(uri);
 
             if (uri != null) {
-                names.add(uri);
-                patterns.add(PathNameWildcardCompiler.compilePathName(uri));
+                String fullUri = uri;
+                boolean exclude = uri.startsWith(EXCLUDE_PREFIX);
+
+                if (exclude) {
+                    uri = trimToNull(uri.substring(EXCLUDE_PREFIX.length()));
+                }
+
+                if (uri != null) {
+                    names.add(fullUri);
+                    excludes.add(exclude);
+                    patterns.add(PathNameWildcardCompiler.compilePathName(uri));
+                }
             }
         }
 
         if (!patterns.isEmpty()) {
             this.uris = names.toArray(new String[names.size()]);
             this.patterns = patterns.toArray(new Pattern[patterns.size()]);
+            this.excludes = new boolean[excludes.size()];
+
+            for (int i = 0; i < excludes.size(); i++) {
+                this.excludes[i] = excludes.get(i);
+            }
         } else {
             this.uris = EMPTY_STRING_ARRAY;
+            this.excludes = EMPTY_BOOLEAN_ARRAY;
             this.patterns = null;
         }
     }
 
-    public boolean matches(HttpServletRequest request) {
+    public boolean matches(String path) {
         if (patterns != null) {
-            String requestURI = request.getRequestURI();
-
-            for (Pattern pattern : patterns) {
-                if (pattern.matcher(requestURI).find()) {
-                    return true;
+            for (int i = patterns.length - 1; i >= 0; i--) {
+                if (patterns[i].matcher(path).find()) {
+                    return !excludes[i];
                 }
             }
         }

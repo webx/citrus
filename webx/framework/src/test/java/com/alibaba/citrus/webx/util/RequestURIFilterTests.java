@@ -18,11 +18,9 @@
 package com.alibaba.citrus.webx.util;
 
 import static com.alibaba.citrus.test.TestUtil.*;
-import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
 import java.util.regex.Pattern;
-import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Test;
 
@@ -53,6 +51,9 @@ public class RequestURIFilterTests {
 
         patterns = getPatterns("/aa\r\n*.jpg");
         assertEquals(2, patterns.length);
+
+        patterns = getPatterns("/aa  *.jpg !/aa/*.jpg");
+        assertEquals(3, patterns.length);
     }
 
     private Pattern[] getPatterns(String s) {
@@ -76,15 +77,17 @@ public class RequestURIFilterTests {
         assertMatches(false, "/cc/aa/bb/test.htm");
     }
 
-    private void assertMatches(boolean matches, String requestURI) throws Exception {
-        HttpServletRequest request = createMock(HttpServletRequest.class);
+    @Test
+    public void matches_withExcludes() throws Exception {
+        filter = new RequestURIFilter("/path, *.jpg, !/path/*.jpg");
 
-        expect(request.getRequestURI()).andReturn(requestURI).anyTimes();
-        replay(request);
+        assertMatches(true, "/path/test");
+        assertMatches(true, "/test.jpg");
+        assertMatches(false, "/path/test.jpg");
+    }
 
-        assertEquals(matches, filter.matches(request));
-
-        verify(request);
+    private void assertMatches(boolean matches, String path) throws Exception {
+        assertEquals(matches, filter.matches(path));
     }
 
     @Test
@@ -92,10 +95,11 @@ public class RequestURIFilterTests {
         filter = new RequestURIFilter(null);
         assertEquals("FilterOf[]", filter.toString());
 
-        filter = new RequestURIFilter("/aa , *.jpg");
+        filter = new RequestURIFilter("/aa , *.jpg, !/aa/*.jpg");
         assertEquals("FilterOf [\n" + //
-                     "  [1/2] /aa\n" + //
-                     "  [2/2] *.jpg\n" + //
+                     "  [1/3] /aa\n" + //
+                     "  [2/3] *.jpg\n" + //
+                     "  [3/3] !/aa/*.jpg\n" + //
                      "]", filter.toString());
     }
 }

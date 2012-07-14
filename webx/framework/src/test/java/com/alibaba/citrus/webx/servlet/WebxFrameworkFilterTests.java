@@ -52,9 +52,9 @@ public class WebxFrameworkFilterTests extends AbstractWebxTests {
     public void init() throws Exception {
         MyController.resetAttributes();
 
-        prepareWebClient(null);
+        prepareWebClient(null, "/myapps");
 
-        filter = (WebxFrameworkFilter) client.newInvocation("http://www.taobao.com/app1").getFilter();
+        filter = (WebxFrameworkFilter) client.newInvocation("http://www.taobao.com/myapps/app1").getFilter();
         assertNotNull(filter);
 
         components = filter.getWebxComponents();
@@ -88,7 +88,9 @@ public class WebxFrameworkFilterTests extends AbstractWebxTests {
         HttpServletResponse response = createMock(HttpServletResponse.class);
         FilterChain filterChain = createMock(FilterChain.class);
 
-        expect(request.getRequestURI()).andReturn(requestURI).anyTimes();
+        // 不会调用getContextPath和getRequestURI
+        expect(request.getServletPath()).andReturn(requestURI).anyTimes();
+        expect(request.getPathInfo()).andReturn(null).anyTimes();
 
         if (excluded && !internal) {
             filterChain.doFilter(request, response);
@@ -99,7 +101,7 @@ public class WebxFrameworkFilterTests extends AbstractWebxTests {
         if (internal) {
             assertFalse(filter.isExcluded(request));
         } else {
-            assertEquals(excluded, excludes.matches(request));
+            assertEquals(excluded, excludes.matches(requestURI));
         }
 
         if (excluded && !internal) {
@@ -171,7 +173,7 @@ public class WebxFrameworkFilterTests extends AbstractWebxTests {
 
     @Test
     public void readResource_app4_defaultComponent() throws Exception {
-        invokeServlet("/plaintext.txt");
+        invokeServlet("/myapps/plaintext.txt");
 
         assertEquals(200, clientResponseCode);
         assertThat(clientResponseContent, containsAll("hello, app4"));
@@ -183,7 +185,7 @@ public class WebxFrameworkFilterTests extends AbstractWebxTests {
 
     @Test
     public void readResource_app5() throws Exception {
-        invokeServlet("/my/app5/plaintext.txt");
+        invokeServlet("/myapps/my/app5/plaintext.txt");
 
         assertEquals(200, clientResponseCode);
         assertThat(clientResponseContent, containsAll("hello, app5"));
