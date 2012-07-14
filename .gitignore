@@ -10,4 +10,4 @@ target
 /.idea/workspace.xml
 /.idea/modules.xml
 /.idea/libraries/Maven*.xml
-/citrus.iws
+/*.iws
