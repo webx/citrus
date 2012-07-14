@@ -138,9 +138,14 @@ public class WebxFrameworkFilter extends FilterBean {
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        if (isExcluded(request)) {
+        String path = getResourcePath(request);
+
+        if (isExcluded(path)) {
+            log.debug("Excluded request: {}", path);
             chain.doFilter(request, response);
             return;
+        } else {
+            log.debug("Accepted and started to process request: {}", path);
         }
 
         try {
@@ -154,9 +159,7 @@ public class WebxFrameworkFilter extends FilterBean {
         }
     }
 
-    boolean isExcluded(HttpServletRequest request) {
-        String path = getResourcePath(request);
-
+    boolean isExcluded(String path) {
         // 如果指定了excludes，并且当前requestURI匹配任何一个exclude pattern，
         // 则立即放弃控制，将控制还给servlet engine。
         // 但对于internal path，不应该被排除掉，否则internal页面会无法正常显示。
