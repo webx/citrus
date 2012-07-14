@@ -19,6 +19,7 @@ package com.alibaba.citrus.webx.servlet;
 
 import static com.alibaba.citrus.test.TestEnvStatic.*;
 import static com.alibaba.citrus.test.TestUtil.*;
+import static com.alibaba.citrus.util.ServletUtil.*;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
@@ -99,14 +100,14 @@ public class WebxFrameworkFilterTests extends AbstractWebxTests {
         replay(request, response, filterChain);
 
         if (internal) {
-            assertFalse(filter.isExcluded(request));
+            assertFalse(filter.isExcluded(getResourcePath(request)));
         } else {
             assertEquals(excluded, excludes.matches(requestURI));
         }
 
         if (excluded && !internal) {
             filter.doFilter(request, response, filterChain); // 对excluded request调用doFilter，应该立即返回
-            assertTrue(filter.isExcluded(request));
+            assertTrue(filter.isExcluded(getResourcePath(request)));
         }
 
         verify(request, response, filterChain);
