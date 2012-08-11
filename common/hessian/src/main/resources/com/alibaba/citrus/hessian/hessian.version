@@ -1,3 +1,27 @@
 Hessian 4.0.7
 
-Downloaded and port from http://hessian.caucho.com/
+Downloaded and ported from http://hessian.caucho.com/
+
+CHANGES:
+========
+
+--- a/common/hessian/src/main/java/com/alibaba/citrus/hessian/io/ContextSerializerFactory.java
++++ b/common/hessian/src/main/java/com/alibaba/citrus/hessian/io/ContextSerializerFactory.java
+@@ -266,7 +266,7 @@ public class ContextSerializerFactory {
+         HashMap<Class, Class> classMap;
+
+         classMap = new HashMap<Class, Class>();
+-        initSerializerFiles("META-INF/hessian/serializers",
++        initSerializerFiles("META-INF/citrus/hessian/serializers",
+                             _serializerFiles,
+                             classMap,
+                             Serializer.class);
+@@ -286,7 +286,7 @@ public class ContextSerializerFactory {
+         }
+
+         classMap = new HashMap<Class, Class>();
+-        initSerializerFiles("META-INF/hessian/deserializers",
++        initSerializerFiles("META-INF/citrus/hessian/deserializers",
+                             _deserializerFiles,
+                             classMap,
+                             Deserializer.class);

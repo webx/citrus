@@ -41,3 +41,5 @@
   例如：excludes=*.jpg, !/upload/*.jpg，意味着除了/upload目录下的以外，所有的jpg图片都将从servlet容器中装载，而不是从webx框架中装载。
 
 * 改进：由于freemarker升级以后已经支持slf4j，所以删除FreemarkerEngine中的Slf4jLoggerFactory，以及不太稳定的LoggerHack类。
+
+* Bugfix: 移植的hessian无法运行于resin服务器。
