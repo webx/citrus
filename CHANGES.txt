@@ -267,3 +267,36 @@
 
 -- Changes in 3.0.9
 
+* 升级依赖的jar包：
+
+  slf4j 1.6.6
+  logback 1.0.6
+  log4j 1.2.17
+  junit 4.10
+  rhino-js 1.7R2
+  nekohtml 1.9.6.2
+  xerces 2.10.0
+  easymock 3.1
+  jasper 6.0.35
+  jexl 2.1.1
+  velocity 1.7
+  freemarker 2.3.19
+  commons-fileupload 1.2.2
+  commons-io 2.3
+  commons-codec 1.6
+  groovy 1.8.6
+  cglib 2.2.2
+  xml-apis 1.4.01
+
+* Bugfix: WebxFrameworkFilter中的excludes/passthru参数、SetLocaleRequestContext的overrider中，错误地使用了requestURI。
+  正确的方式应该是requestURI除去contextPath，因为应用配置不应该依赖于contextPath。
+
+  ！！注意：现有的web应用如果不是默认web应用（即contextPath非空），并且web.xml中对WebxFrameworkFilter配置了excludes/passthru参数的，
+  必须修改参数，使之不包含contextPath。
+
+* 改进：WebxFrameworkFilter中的excludes/passthru参数，如果pattern以!开始，代表排除。
+  例如：excludes=*.jpg, !/upload/*.jpg，意味着除了/upload目录下的以外，所有的jpg图片都将从servlet容器中装载，而不是从webx框架中装载。
+
+* 改进：由于freemarker升级以后已经支持slf4j，所以删除FreemarkerEngine中的Slf4jLoggerFactory，以及不太稳定的LoggerHack类。
+
+* Bugfix: 移植的hessian无法运行于resin服务器。
