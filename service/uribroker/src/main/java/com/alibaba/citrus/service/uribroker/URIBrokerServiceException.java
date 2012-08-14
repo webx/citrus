@@ -21,9 +21,6 @@ package com.alibaba.citrus.service.uribroker;
  * 代表URIBrokerService的异常。
  *
  * @author Michael Zhou
- * @author dux.fangl
- * @version $Id: URIBrokerServiceException.java 1291 2005-03-04 03:23:30Z baobao
- *          $
  */
 public class URIBrokerServiceException extends RuntimeException {
     private static final long serialVersionUID = 3257566204763058484L;

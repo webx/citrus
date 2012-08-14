@@ -67,7 +67,6 @@ import com.alibaba.citrus.util.StringUtil;
  * </p>
  *
  * @author Michael Zhou
- * @author dux.fangl
  */
 public abstract class URIBroker extends URIBrokerFeatures {
     /** 代表URI的类型。 */

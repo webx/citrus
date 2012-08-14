@@ -39,7 +39,6 @@ package com.alibaba.citrus.service.uribroker.uri;
  * </pre>
  *
  * @author Michael Zhou
- * @author dux.fangl
  */
 public class ContentURIBroker extends URIBroker {
     protected static final int PREFIX_PATH_INDEX  = PATH_INDEX;

@@ -40,7 +40,6 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
  * URI Broker服务的实现。
  *
  * @author Michael Zhou
- * @author dux.fangl
  */
 public class URIBrokerServiceImpl extends AbstractService<URIBrokerService> implements URIBrokerService {
     private final HttpServletRequest     request;

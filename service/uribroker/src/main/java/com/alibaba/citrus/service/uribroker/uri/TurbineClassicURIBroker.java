@@ -45,7 +45,6 @@ import java.util.Map;
  * </pre>
  *
  * @author Michael Zhou
- * @author dux.fangl
  */
 public class TurbineClassicURIBroker extends ServletURIBroker {
     private static final int TEMPLATE_INDEX        = PATH_INFO_INDEX;

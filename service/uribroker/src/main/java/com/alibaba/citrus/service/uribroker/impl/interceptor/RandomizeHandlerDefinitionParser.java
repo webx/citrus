@@ -30,7 +30,7 @@ import org.w3c.dom.Element;
 /**
  * 一个生成随机URL Query Data的PathHandler Bean解析类
  *
- * @author dux.fangl
+ * @author Michael Zhou
  */
 public class RandomizeHandlerDefinitionParser extends AbstractNamedBeanDefinitionParser<Randomize> implements
                                                                                                    ContributionAware {

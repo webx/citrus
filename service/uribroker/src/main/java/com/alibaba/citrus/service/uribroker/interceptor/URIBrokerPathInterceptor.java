@@ -23,7 +23,6 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
  * 在运行时对URI Broker的path进行处理
  *
  * @author Michael Zhou
- * @author dux.fangl
  */
 public interface URIBrokerPathInterceptor extends URIBrokerInterceptor {
     /**

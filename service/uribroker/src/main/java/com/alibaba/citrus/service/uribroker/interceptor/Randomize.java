@@ -29,7 +29,6 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
  * 在URL中生成随机元素，以防止浏览器缓存页面。
  *
  * @author Michael Zhou
- * @author dux.fangl
  */
 public class Randomize implements URIBrokerPathInterceptor {
     private final static String DEFAULT_CHARS = "0123456789abcdefghijklmnopqrstuvwxyz";

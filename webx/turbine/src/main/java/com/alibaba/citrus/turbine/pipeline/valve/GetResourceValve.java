@@ -50,7 +50,6 @@ import org.w3c.dom.Element;
  * 从resource loader中装载资源，并直接显示的valve。
  *
  * @author Michael Zhou
- * @author dux.fangl
  */
 public class GetResourceValve extends AbstractValve implements ResourceLoaderAware {
     private static final String DEFAULT_SUBSTITUTION_NAME = "subst";
