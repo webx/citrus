@@ -21,6 +21,7 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
 import com.alibaba.citrus.service.AbstractWebTests;
+import com.alibaba.citrus.service.moduleloader.ModuleEvent;
 import com.alibaba.citrus.service.moduleloader.ModuleEventException;
 import com.alibaba.citrus.service.moduleloader.ModuleEventNotFoundException;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
@@ -42,6 +43,16 @@ public class ScreenEventTests extends AbstractWebTests {
     public void init() {
         moduleLoader = (ModuleLoaderService) factory.getBean("moduleLoaderService_eventScreen");
         assertNotNull(moduleLoader);
+    }
+
+    @Test
+    public void isModuleEvent() throws Exception {
+        getInvocationContext("/app1");
+        initRequestContext();
+
+        ScreenEventAdapter screenEvent = (ScreenEventAdapter) moduleLoader.getModule("screen", "MyEventScreenWithDefaultHandler");
+
+        assertTrue(screenEvent instanceof ModuleEvent);
     }
 
     @Test

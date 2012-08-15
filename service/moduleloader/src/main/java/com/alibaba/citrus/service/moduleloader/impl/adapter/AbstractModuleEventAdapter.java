@@ -23,6 +23,7 @@ import static com.alibaba.citrus.util.Assert.*;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
+import com.alibaba.citrus.service.moduleloader.ModuleEvent;
 import com.alibaba.citrus.service.moduleloader.ModuleEventException;
 import com.alibaba.citrus.service.moduleloader.ModuleEventNotFoundException;
 import com.alibaba.citrus.util.ToStringBuilder;
@@ -30,7 +31,8 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public abstract class AbstractModuleEventAdapter extends AbstractDataBindingAdapter implements InitializingBean {
+public abstract class AbstractModuleEventAdapter extends AbstractDataBindingAdapter
+        implements InitializingBean, ModuleEvent {
     private final Map<String, MethodInvoker> handlers;
     private final MethodInvoker              preHandler;
     private final MethodInvoker              postHandler;
