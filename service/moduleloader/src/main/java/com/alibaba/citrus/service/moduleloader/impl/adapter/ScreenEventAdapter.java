@@ -15,29 +15,20 @@
  * limitations under the License.
  */
 
-package app1.module.action.myprod;
+package com.alibaba.citrus.service.moduleloader.impl.adapter;
 
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 
-import com.alibaba.citrus.service.requestcontext.rundata.RunData
-import org.springframework.beans.factory.annotation.Autowired
+import com.alibaba.citrus.util.internal.ScreenEventUtil;
 
-class MyAction {
-    @Autowired
-    RunData rundata;
-
-    public void doSomething() throws Exception {
-        rundata.setAttribute("handler", "doSomething");
+public class ScreenEventAdapter extends AbstractModuleEventAdapter {
+    public ScreenEventAdapter(Object moduleObject, Map<String, MethodInvoker> handlers, MethodInvoker preHandler, MethodInvoker postHandler) {
+        super(moduleObject, handlers, preHandler, postHandler);
     }
 
-    public void doPerform() throws Exception {
-        rundata.setAttribute("handler", "doPerform");
-    }
-
-    public void beforeExecution() {
-        rundata.setAttribute("before", "yes");
-    }
-
-    public void afterExecution() {
-        rundata.setAttribute("after", "yes");
+    @Override
+    protected String getEventName(HttpServletRequest request) {
+        return ScreenEventUtil.getEventName(request);
     }
 }

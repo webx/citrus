@@ -1,2 +1,3 @@
 action-event-adapter=com.alibaba.citrus.service.moduleloader.impl.adapter.ActionEventAdapterFactoryDefinitionParser
+screen-event-adapter=com.alibaba.citrus.service.moduleloader.impl.adapter.ScreenEventAdapterFactoryDefinitionParser
 data-binding-adapter=com.alibaba.citrus.service.moduleloader.impl.adapter.DataBindingAdapterFactoryDefinitionParser

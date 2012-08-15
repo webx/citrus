@@ -41,7 +41,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * 渲染模板。
  *
- * @author dux.fangl
  * @author Michael Zhou
  */
 public class RenderTemplateValve extends AbstractValve {

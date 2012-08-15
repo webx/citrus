@@ -26,7 +26,6 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
  * URI Broker的service 接口定义。
  *
  * @author Michael Zhou
- * @author dux.fangl
  */
 public interface URIBrokerService {
     /** 取得所有URI broker名称. */

@@ -24,8 +24,8 @@ import static org.junit.Assert.*;
 import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.citrus.service.AbstractWebTests;
-import com.alibaba.citrus.service.moduleloader.ActionEventException;
-import com.alibaba.citrus.service.moduleloader.ActionEventNotFoundException;
+import com.alibaba.citrus.service.moduleloader.ModuleEventException;
+import com.alibaba.citrus.service.moduleloader.ModuleEventNotFoundException;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import org.junit.Before;
@@ -144,8 +144,8 @@ public class ActionEventTests extends AbstractWebTests {
         try {
             actionEvent.execute();
             fail();
-        } catch (ActionEventNotFoundException e) {
-            assertThat(e, exception("Could not find handler method for action event: null"));
+        } catch (ModuleEventNotFoundException e) {
+            assertThat(e, exception("Could not find handler method for event: null"));
         }
     }
 
@@ -159,8 +159,8 @@ public class ActionEventTests extends AbstractWebTests {
         try {
             actionEvent.execute();
             fail();
-        } catch (ActionEventNotFoundException e) {
-            assertThat(e, exception("Could not find handler method for action event: xyzAbc"));
+        } catch (ModuleEventNotFoundException e) {
+            assertThat(e, exception("Could not find handler method for event: xyzAbc"));
         }
     }
 
@@ -189,7 +189,7 @@ public class ActionEventTests extends AbstractWebTests {
         try {
             actionEvent.execute();
             fail();
-        } catch (ActionEventException e) {
+        } catch (ModuleEventException e) {
             assertThat(e, exception(IllegalArgumentException.class, "failed"));
         }
     }

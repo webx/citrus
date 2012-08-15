@@ -48,7 +48,6 @@ import com.alibaba.citrus.util.ServletUtil;
  * </p>
  *
  * @author Michael Zhou
- * @author dux.fangl
  */
 public abstract class ServletURIBroker extends WebAppURIBroker {
     protected static final int SERVLET_PATH_INDEX = CONTEXT_PATH_INDEX + 1;

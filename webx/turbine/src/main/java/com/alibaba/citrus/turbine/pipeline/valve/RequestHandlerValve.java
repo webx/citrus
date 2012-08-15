@@ -37,7 +37,6 @@ import org.w3c.dom.Element;
  * 调用Spring MVC的<code>HttpRequestHandler</code>。
  *
  * @author yuming.wangym
- * @author dux.fangl
  * @author Michael Zhou
  */
 public class RequestHandlerValve extends AbstractValve {

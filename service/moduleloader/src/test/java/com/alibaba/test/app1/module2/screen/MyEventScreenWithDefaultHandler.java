@@ -15,15 +15,14 @@
  * limitations under the License.
  */
 
-package app1.module.action.myprod;
+package com.alibaba.test.app1.module2.screen;
 
+import com.alibaba.citrus.service.requestcontext.rundata.RunData;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import com.alibaba.citrus.service.requestcontext.rundata.RunData
-import org.springframework.beans.factory.annotation.Autowired
-
-class MyAction {
+public class MyEventScreenWithDefaultHandler {
     @Autowired
-    RunData rundata;
+    private RunData rundata;
 
     public void doSomething() throws Exception {
         rundata.setAttribute("handler", "doSomething");

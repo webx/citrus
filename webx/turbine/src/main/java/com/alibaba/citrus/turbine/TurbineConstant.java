@@ -21,7 +21,6 @@ package com.alibaba.citrus.turbine;
  * 经典的webx方案的常量。 添加了一些citrus用到的常量
  *
  * @author Michael Zhou
- * @author dux.fangl
  */
 public interface TurbineConstant {
     /* Turbine Scheme 模块和模板类型。 */

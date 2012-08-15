@@ -23,7 +23,6 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
  * 提供一种方法可以在运行时定制uri broker的参数。
  *
  * @author Michael Zhou
- * @author dux.fangl
  */
 public interface URIBrokerInterceptor {
     /**
