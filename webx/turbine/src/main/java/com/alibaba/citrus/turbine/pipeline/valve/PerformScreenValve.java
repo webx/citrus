@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.citrus.service.mappingrule.MappingRuleService;
 import com.alibaba.citrus.service.moduleloader.Module;
+import com.alibaba.citrus.service.moduleloader.ModuleEvent;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import com.alibaba.citrus.service.moduleloader.ModuleNotFoundException;
@@ -33,6 +34,7 @@ import com.alibaba.citrus.service.pipeline.support.AbstractValve;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.util.StringUtil;
+import com.alibaba.citrus.util.internal.ScreenEventUtil;
 import com.alibaba.citrus.webx.WebxException;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -78,30 +80,81 @@ public class PerformScreenValve extends AbstractValve {
 
     /** 执行screen模块。 */
     protected void performScreenModule(TurbineRunData rundata) {
-        String target = assertNotNull(rundata.getTarget(), "Target was not specified");
-
-        // 从target中取得screen module名称
-        String moduleName = getModuleName(target);
-
-        // 如果设置了template，则默认打开layout
-        rundata.setLayoutEnabled(true);
+        ModuleFinder finder = new ModuleFinder(rundata.getTarget());
 
         try {
-            Module module = moduleLoaderService.getModuleQuiet(SCREEN_MODULE, moduleName);
+            Module module = finder.getScreenModule();
 
             // 当指定了templateName时，可以没有的screen module，而单单渲染模板。
             // 这样就实现了page-driven，即先写模板，必要时再写一个module class与之对应。
             if (module != null) {
-                module.execute();
+                // 如果设置了template，则默认打开layout
+                rundata.setLayoutEnabled(true);
+
+                // 将event传入screen。
+                ScreenEventUtil.setEventName(rundata.getRequest(), finder.event);
+
+                try {
+                    module.execute();
+                } finally {
+                    ScreenEventUtil.setEventName(rundata.getRequest(), null);
+                }
             } else {
                 if (isScreenModuleRequired()) {
-                    throw new ModuleNotFoundException("Could not find screen module: " + moduleName);
+                    throw new ModuleNotFoundException("Could not find screen module: " + finder.moduleName);
                 }
             }
         } catch (ModuleLoaderException e) {
-            throw new WebxException("Failed to load screen module: " + moduleName, e);
+            throw new WebxException("Failed to load screen module: " + finder.moduleName, e);
         } catch (Exception e) {
-            throw new WebxException("Failed to execute screen: " + moduleName, e);
+            throw new WebxException("Failed to execute screen: " + finder.moduleName, e);
+        }
+    }
+
+    private class ModuleFinder {
+        private final String target;
+        private       String moduleName;
+        private       String eventModuleName;
+        private       String event;
+
+        public ModuleFinder(String target) {
+            this.target = assertNotNull(target, "Target was not specified");
+        }
+
+        public Module getScreenModule() throws ModuleLoaderException {
+            // 从target中取得screen module名称
+            moduleName = getModuleName(target);
+
+            Module module = moduleLoaderService.getModuleQuiet(SCREEN_MODULE, moduleName);
+
+            if (module != null) {
+                return module;
+            }
+
+            if (parseEvent()) {
+                module = moduleLoaderService.getModuleQuiet(SCREEN_MODULE, eventModuleName);
+
+                if (module instanceof ModuleEvent) {
+                    return module;
+                }
+            }
+
+            return null;
+        }
+
+        /** 尝试将target解释成moduleName/eventName。如果target=/xxx/yyy.ext，则moduleName=/Xxx，eventName=yyy。 */
+        private boolean parseEvent() {
+            int slashIndex = target.lastIndexOf("/");
+            int dotIndex = target.lastIndexOf(".");
+
+            if (slashIndex > 0) {
+                event = target.substring(slashIndex + 1, dotIndex > slashIndex ? dotIndex : target.length());
+                eventModuleName = getModuleName(target.substring(0, slashIndex));
+
+                return true;
+            }
+
+            return false;
         }
     }
 
