@@ -27,7 +27,7 @@ import java.io.File;
 import java.util.List;
 
 import com.alibaba.citrus.service.dataresolver.DataResolverContext;
-import com.alibaba.citrus.service.moduleloader.ActionEventException;
+import com.alibaba.citrus.service.moduleloader.ModuleEventException;
 import com.alibaba.citrus.turbine.dataresolver.impl.ParameterResolverFactory;
 import org.apache.commons.fileupload.FileItem;
 import org.junit.Test;
@@ -70,7 +70,7 @@ public class ParameterResolverTests extends AbstractDataResolverTests {
         try {
             execute("action", "param.myAction", "doGetInt", "aaa=wrong&aaa=222");
             fail();
-        } catch (ActionEventException e) {
+        } catch (ModuleEventException e) {
             assertThat(
                     e,
                     exception(TypeMismatchException.class, "Failed to convert value of type ", "java.lang.String",

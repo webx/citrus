@@ -21,7 +21,7 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
 import com.alibaba.citrus.service.form.Field;
-import com.alibaba.citrus.service.moduleloader.ActionEventException;
+import com.alibaba.citrus.service.moduleloader.ModuleEventException;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import org.junit.Test;
 import org.springframework.beans.TypeMismatchException;
@@ -141,7 +141,7 @@ public class FormFieldResolverTests extends AbstractDataResolverTests {
             execute("action", "form.field.myAction", "doGetFieldInstanceValueDontSkipAction",
                     "_fm.m.aaa.f=a&_fm.m.aaa.f=b&_fm.m.aaa.fi=abc");
             fail();
-        } catch (ActionEventException e) {
+        } catch (ModuleEventException e) {
             assertThat(e, exception(TypeMismatchException.class, "java.lang.String", "java.lang.Integer", "abc"));
         }
     }

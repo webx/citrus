@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import com.alibaba.citrus.service.form.Field;
-import com.alibaba.citrus.service.moduleloader.ActionEventException;
+import com.alibaba.citrus.service.moduleloader.ModuleEventException;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import org.junit.Test;
 import org.springframework.beans.TypeMismatchException;
@@ -186,7 +186,7 @@ public class FormFieldsResolverTests extends AbstractDataResolverTests {
                     "_fm.m.aaa.f=aa&_fm.m.aaa.f=12&_fm.m.aaa.fi=abc" //
                     + "&_fm.m.bbb.f=21&_fm.m.bbb.f=22&_fm.m.bbb.fi=def");
             fail();
-        } catch (ActionEventException e) {
+        } catch (ModuleEventException e) {
             assertThat(e, exception(TypeMismatchException.class, "java.lang.String", "java.lang.Integer", "aa"));
         }
     }

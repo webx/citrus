@@ -18,15 +18,15 @@
 package com.alibaba.citrus.service.moduleloader;
 
 /**
- * 代表执行action event时产生的异常。
+ * 代表module event方法未找到的异常。
  *
  * @author Michael Zhou
  */
-public class ActionEventException extends RuntimeException {
-    private static final long serialVersionUID = 3258133565630658361L;
+public class ModuleEventNotFoundException extends ModuleEventException {
+    private static final long serialVersionUID = 3834874663401961264L;
 
     /** 创建一个异常。 */
-    public ActionEventException() {
+    public ModuleEventNotFoundException() {
         super();
     }
 
@@ -35,7 +35,7 @@ public class ActionEventException extends RuntimeException {
      *
      * @param message 异常信息
      */
-    public ActionEventException(String message) {
+    public ModuleEventNotFoundException(String message) {
         super(message);
     }
 
@@ -45,7 +45,7 @@ public class ActionEventException extends RuntimeException {
      * @param message 异常信息
      * @param cause   异常原因
      */
-    public ActionEventException(String message, Throwable cause) {
+    public ModuleEventNotFoundException(String message, Throwable cause) {
         super(message, cause);
     }
 
@@ -54,7 +54,7 @@ public class ActionEventException extends RuntimeException {
      *
      * @param cause 异常原因
      */
-    public ActionEventException(Throwable cause) {
+    public ModuleEventNotFoundException(Throwable cause) {
         super(cause);
     }
 }

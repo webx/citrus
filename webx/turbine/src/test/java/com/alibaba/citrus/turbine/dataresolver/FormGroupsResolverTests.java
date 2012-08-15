@@ -25,7 +25,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.alibaba.citrus.service.form.Group;
-import com.alibaba.citrus.service.moduleloader.ActionEventException;
+import com.alibaba.citrus.service.moduleloader.ModuleEventException;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import com.alibaba.test2.module.action.form.MyData;
 import org.junit.Test;
@@ -203,7 +203,7 @@ public class FormGroupsResolverTests extends AbstractDataResolverTests {
                     "_fm.m.aaa.f=a&_fm.m.aaa.f=b&_fm.m.aaa.fi=abc" //
                     + "&_fm.m.bbb.f=c&_fm.m.bbb.f=d&_fm.m.bbb.fi=def");
             fail();
-        } catch (ActionEventException e) {
+        } catch (ModuleEventException e) {
             assertThat(e, exception(TypeMismatchException.class, "java.lang.String", "java.lang.Integer", "abc"));
         }
     }
