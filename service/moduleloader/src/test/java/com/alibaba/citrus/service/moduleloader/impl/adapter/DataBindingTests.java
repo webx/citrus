@@ -20,6 +20,7 @@ package com.alibaba.citrus.service.moduleloader.impl.adapter;
 import static org.junit.Assert.*;
 
 import com.alibaba.citrus.service.AbstractWebTests;
+import com.alibaba.citrus.service.moduleloader.ModuleEvent;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -38,6 +39,16 @@ public class DataBindingTests extends AbstractWebTests {
     public void init() {
         moduleLoader = (ModuleLoaderService) factory.getBean("moduleLoaderService");
         assertNotNull(moduleLoader);
+    }
+
+    @Test
+    public void isModuleEvent() throws Exception {
+        getInvocationContext("/app1");
+        initRequestContext();
+
+        DataBindingAdapter adapter = (DataBindingAdapter) moduleLoader.getModule("control", "class.myprod.MyControl");
+
+        assertFalse(adapter instanceof ModuleEvent);
     }
 
     @Test

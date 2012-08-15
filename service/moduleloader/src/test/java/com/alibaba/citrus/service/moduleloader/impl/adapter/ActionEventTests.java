@@ -24,6 +24,7 @@ import static org.junit.Assert.*;
 import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.citrus.service.AbstractWebTests;
+import com.alibaba.citrus.service.moduleloader.ModuleEvent;
 import com.alibaba.citrus.service.moduleloader.ModuleEventException;
 import com.alibaba.citrus.service.moduleloader.ModuleEventNotFoundException;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
@@ -102,6 +103,17 @@ public class ActionEventTests extends AbstractWebTests {
                               "expects a proxy delegating to a real object, but got an object of type "
                               + request.getClass().getName()));
         }
+    }
+
+    @Test
+    public void isModuleEvent() throws Exception {
+        getInvocationContext("/app1");
+        initRequestContext();
+
+        ActionEventAdapter actionEvent = (ActionEventAdapter) moduleLoader
+                .getModule("action", "groovy.myprod.MyAction");
+
+        assertTrue(actionEvent instanceof ModuleEvent);
     }
 
     @Test
