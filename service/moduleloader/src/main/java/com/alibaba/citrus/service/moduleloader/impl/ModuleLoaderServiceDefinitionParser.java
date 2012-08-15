@@ -81,14 +81,14 @@ public class ModuleLoaderServiceDefinitionParser extends AbstractNamedBeanDefini
         }
 
         if (includeDefaultAdapters) {
-            // default adapter: action event adapter
-            addDefaultAdapter(adapterList, ActionEventAdapterFactory.class);
+            // default adapter: data binding adapter
+            addDefaultAdapter(adapterList, DataBindingAdapterFactory.class); // 对于screen，先匹配execute，
 
             // default adapter: screen event adapter
-            addDefaultAdapter(adapterList, ScreenEventAdapterFactory.class);
+            addDefaultAdapter(adapterList, ScreenEventAdapterFactory.class); // 再匹配doXyz
 
-            // default adapter: data binding adapter
-            addDefaultAdapter(adapterList, DataBindingAdapterFactory.class);
+            // default adapter: action event adapter
+            addDefaultAdapter(adapterList, ActionEventAdapterFactory.class);
         }
 
         builder.addPropertyValue("factories", factoryList);
