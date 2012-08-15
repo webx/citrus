@@ -139,6 +139,23 @@ public class ScreenEventTests extends AbstractWebTests {
         }
     }
 
+    /** 如果execute方法和doXxx方法同时存在，execute adapter将被返回。 */
+    @Test
+    public void screen_withExecute_andEventHandler() throws Exception {
+        getInvocationContext("/app1");
+        initRequestContext();
+
+        ScreenEventUtil.setEventName(newRequest, "something");
+
+        DataBindingAdapter screenAdapter = (DataBindingAdapter) moduleLoader.getModule("screen", "MyEventScreenHybrid");
+
+        screenAdapter.execute();
+
+        assertEquals("execute", rundata.getAttribute("handler"));
+        assertEquals(null, rundata.getAttribute("before"));
+        assertEquals(null, rundata.getAttribute("after"));
+    }
+
     @Test
     public void toString_() {
         ScreenEventAdapter screenEvent = (ScreenEventAdapter) moduleLoader.getModule("screen", "MyEventScreenWithDefaultHandler");
