@@ -144,6 +144,7 @@ public class ModuleLoaderServiceTests extends AbstractModuleLoaderTests {
         assertThat(str, containsString("adapters"));
         assertThat(str, containsString("ClassModuleFactory"));
         assertThat(str, containsString("ActionEventAdapterFactory")); // 默认adapter
+        assertThat(str, containsString("ScreenEventAdapterFactory")); // 默认adapter
         assertThat(str, containsString("DataBindingAdapterFactory")); // 默认adapter
         assertThat(str, containsString("}"));
 
@@ -162,6 +163,7 @@ public class ModuleLoaderServiceTests extends AbstractModuleLoaderTests {
         assertThat(str, containsString("adapters"));
         assertThat(str, containsString("ClassModuleFactory"));
         assertThat(str, containsString("ActionEventAdapterFactory")); // 明确指定
+        assertThat(str, containsString("ScreenEventAdapterFactory")); // 明确指定
         assertThat(str, containsString("MySimpleAdapterFactory")); // 明确指定
         assertThat(str, containsString("DataBindingAdapterFactory")); // 明确指定
         assertThat(str, containsString("}"));
@@ -181,12 +183,13 @@ public class ModuleLoaderServiceTests extends AbstractModuleLoaderTests {
         assertThat(str, containsString("adapters"));
         assertThat(str, containsString("ClassModuleFactory"));
         assertThat(str, containsString("ActionEventAdapterFactory")); // 明确指定
+        assertThat(str, containsString("ScreenEventAdapterFactory")); // 明确指定
         assertThat(str, containsString("MySimpleAdapterFactory")); // 明确指定
         assertThat(str, not(containsString("DataBindingAdapterFactory"))); // 未指定
         assertThat(str, containsString("}"));
 
         ModuleAdapterFactory[] adapters = getFieldValue(moduleLoaderService, "adapters", ModuleAdapterFactory[].class);
-        assertEquals(2, adapters.length);
+        assertEquals(3, adapters.length);
     }
 
     public static class MySimpleAdapterFactory implements ModuleAdapterFactory {

@@ -31,6 +31,7 @@
             <search-packages type="$1" packages="com.alibaba.test.app1.module.*" />
         </class-modules>
         <madapters:action-event-adapter />
+        <madapters:screen-event-adapter />
         <madapters:data-binding-adapter />
         <madapters:adapter
                 class="com.alibaba.citrus.service.moduleloader.ModuleLoaderServiceTests$MySimpleAdapterFactory"
@@ -44,6 +45,7 @@
             <search-packages type="$1" packages="com.alibaba.test.app1.module.*" />
         </class-modules>
         <madapters:action-event-adapter />
+        <madapters:screen-event-adapter />
         <madapters:adapter
                 class="com.alibaba.citrus.service.moduleloader.ModuleLoaderServiceTests$MySimpleAdapterFactory"
                 />

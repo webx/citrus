@@ -6,11 +6,11 @@
              xmlns:mfactories="http://www.alibaba.com/schema/services/module-loader/factories"
              xmlns:madapters="http://www.alibaba.com/schema/services/module-loader/adapters"
              xsi:schemaLocation="
-        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
-        http://www.alibaba.com/schema/services/module-loader/factories http://localhost:8080/schema/services-module-loader-factories.xsd
-        http://www.alibaba.com/schema/services/module-loader/adapters http://localhost:8080/schema/services-module-loader-adapters.xsd
-    ">
+                 http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+                 http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+                 http://www.alibaba.com/schema/services/module-loader/factories http://localhost:8080/schema/services-module-loader-factories.xsd
+                 http://www.alibaba.com/schema/services/module-loader/adapters http://localhost:8080/schema/services-module-loader-adapters.xsd
+             ">
 
     <services:simple-configuration xmlns="http://www.alibaba.com/schema/services" />
 
@@ -22,6 +22,14 @@
         <script-modules>
             <search-files type="$1" name="groovy.$2" files="classpath:app1/module/*/**" />
         </script-modules>
+    </services:module-loader>
+
+    <services:module-loader id="moduleLoaderService_eventScreen"
+                            xmlns="http://www.alibaba.com/schema/services/module-loader/factories">
+        <class-modules>
+            <search-packages type="screen" packages="com.alibaba.test.app1.module2.screen"
+                             defaultAutowireMode="byType" />
+        </class-modules>
     </services:module-loader>
 
 </beans:beans>
