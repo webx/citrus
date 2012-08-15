@@ -148,7 +148,7 @@ public class ModuleLoaderServiceTests extends AbstractModuleLoaderTests {
         assertThat(str, containsString("}"));
 
         ModuleAdapterFactory[] adapters = getFieldValue(moduleLoaderService, "adapters", ModuleAdapterFactory[].class);
-        assertEquals(2, adapters.length);
+        assertEquals(3, adapters.length);
     }
 
     @Test
@@ -167,7 +167,7 @@ public class ModuleLoaderServiceTests extends AbstractModuleLoaderTests {
         assertThat(str, containsString("}"));
 
         ModuleAdapterFactory[] adapters = getFieldValue(moduleLoaderService, "adapters", ModuleAdapterFactory[].class);
-        assertEquals(3, adapters.length);
+        assertEquals(4, adapters.length);
     }
 
     @Test

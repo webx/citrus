@@ -26,6 +26,7 @@ import java.util.List;
 import com.alibaba.citrus.service.moduleloader.impl.adapter.AbstractDataBindingAdapterFactoryDefinitionParser;
 import com.alibaba.citrus.service.moduleloader.impl.adapter.ActionEventAdapterFactory;
 import com.alibaba.citrus.service.moduleloader.impl.adapter.DataBindingAdapterFactory;
+import com.alibaba.citrus.service.moduleloader.impl.adapter.ScreenEventAdapterFactory;
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
@@ -82,6 +83,9 @@ public class ModuleLoaderServiceDefinitionParser extends AbstractNamedBeanDefini
         if (includeDefaultAdapters) {
             // default adapter: action event adapter
             addDefaultAdapter(adapterList, ActionEventAdapterFactory.class);
+
+            // default adapter: screen event adapter
+            addDefaultAdapter(adapterList, ScreenEventAdapterFactory.class);
 
             // default adapter: data binding adapter
             addDefaultAdapter(adapterList, DataBindingAdapterFactory.class);
