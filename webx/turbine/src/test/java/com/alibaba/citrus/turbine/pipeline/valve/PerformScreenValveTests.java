@@ -23,15 +23,18 @@ import static org.junit.Assert.*;
 import com.alibaba.citrus.service.moduleloader.ModuleNotFoundException;
 import com.alibaba.citrus.service.pipeline.PipelineException;
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
+import org.junit.Before;
 import org.junit.Test;
 
 public class PerformScreenValveTests extends AbstractValveTests {
-    @Test
-    public void test_PerformScreenValveSuccess() throws Exception {
+    @Before
+    public void init() {
         pipeline = (PipelineImpl) factory.getBean("performScreenValveTests");
         assertNotNull(pipeline);
-        assertNotNull(rundata);
+    }
 
+    @Test
+    public void test_PerformScreenValveSuccess() throws Exception {
         getInvocationContext("http://localhost/app1/aaa/bbb/myOtherModule.jsp");
         initRequestContext();
         pipeline.newInvocation().invoke();
@@ -40,13 +43,6 @@ public class PerformScreenValveTests extends AbstractValveTests {
 
     @Test
     public void test_PerformScreenValveUseDefault() throws Exception {
-        pipeline = (PipelineImpl) factory.getBean("performScreenValveTests");
-        assertNotNull(pipeline);
-        assertNotNull(rundata);
-
-        //use screen module: module.screen.aaa.bbb.Default
-        //layout module: module.layout.aaa.bbb.Default
-        //layout template:template/aaa/bbb/default.vm
         getInvocationContext("http://localhost/app1/aaa/bbb/myOtherModule1.jsp");
         initRequestContext();
         pipeline.newInvocation().invoke();
@@ -55,18 +51,58 @@ public class PerformScreenValveTests extends AbstractValveTests {
 
     @Test
     public void test_PerformScreenValveError() throws Exception {
-        pipeline = (PipelineImpl) factory.getBean("performScreenValveTests");
-        assertNotNull(pipeline);
-        assertNotNull(rundata);
+        getInvocationContext("http://localhost/app1/ddd/fff/myOtherModule1.jsp");
+        initRequestContext();
 
         try {
-            //use screen module: module.screen.MyDefaultModule
-            getInvocationContext("http://localhost/app1/ddd/fff/myOtherModule1.jsp");
-            initRequestContext();
             pipeline.newInvocation().invoke();
             fail();
         } catch (PipelineException e) {
             assertThat(e, exception(ModuleNotFoundException.class, "ddd.fff.MyOtherModule1"));
+        }
+    }
+
+    @Test
+    public void event() throws Exception {
+        // no event
+        getInvocationContext("http://localhost/app1/ddd/eee/myEventScreen.jsp");
+        initRequestContext();
+        pipeline.newInvocation().invoke();
+        assertEquals("perform", rundata.getRequest().getAttribute("module.screen.ddd.eee.MyEventScreen"));
+
+        // unknown event
+        getInvocationContext("http://localhost/app1/ddd/eee/myEventScreen/unknown.jsp");
+        initRequestContext();
+        pipeline.newInvocation().invoke();
+        assertEquals("perform", rundata.getRequest().getAttribute("module.screen.ddd.eee.MyEventScreen"));
+
+        // known event
+        getInvocationContext("http://localhost/app1/ddd/eee/myEventScreen/test1.jsp");
+        initRequestContext();
+        pipeline.newInvocation().invoke();
+        assertEquals("test1", rundata.getRequest().getAttribute("module.screen.ddd.eee.MyEventScreen"));
+
+        // known event - without extension
+        getInvocationContext("http://localhost/app1/ddd/eee/myEventScreen/test1");
+        initRequestContext();
+        pipeline.newInvocation().invoke();
+        assertEquals("test1", rundata.getRequest().getAttribute("module.screen.ddd.eee.MyEventScreen"));
+
+        // myScreen是普通screen，非event module
+        getInvocationContext("http://localhost/app1/ddd/eee/myScreen.jsp");
+        initRequestContext();
+        pipeline.newInvocation().invoke();
+        assertEquals("execute", rundata.getRequest().getAttribute("module.screen.ddd.eee.MyScreen"));
+
+        // myScreen是普通screen，非event module，不可用来处理event
+        getInvocationContext("http://localhost/app1/ddd/eee/myScreen/test1.jsp");
+        initRequestContext();
+
+        try {
+            pipeline.newInvocation().invoke();
+            fail();
+        } catch (PipelineException e) {
+            assertThat(e, exception(ModuleNotFoundException.class, "ddd.eee.myScreen.Test1"));
         }
     }
 }

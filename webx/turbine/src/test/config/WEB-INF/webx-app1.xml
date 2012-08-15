@@ -7,25 +7,15 @@
              xmlns:valves="http://www.alibaba.com/schema/services/pipeline/valves"
              xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
              xmlns:beans="http://www.springframework.org/schema/beans"
-             xsi:schemaLocation="http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
-
-        http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
-        http://www.alibaba.com/schema/services/mapping-rules http://localhost:8080/schema/services-mapping-rules.xsd
-
-        http://www.alibaba.com/schema/services/module-loader/factories http://localhost:8080/schema/services-module-loader-factories.xsd
-
-        http://www.alibaba.com/schema/services/pipeline/valves http://localhost:8080/schema/services-pipeline-valves.xsd
-
-
-
-
-
-
-        http://www.alibaba.com/schema/services/template/engines http://localhost:8080/schema/services-template-engines.xsd
-
-
-
-        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd">
+             xsi:schemaLocation="
+                 http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+                 http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
+                 http://www.alibaba.com/schema/services/mapping-rules http://localhost:8080/schema/services-mapping-rules.xsd
+                 http://www.alibaba.com/schema/services/module-loader/factories http://localhost:8080/schema/services-module-loader-factories.xsd
+                 http://www.alibaba.com/schema/services/pipeline/valves http://localhost:8080/schema/services-pipeline-valves.xsd
+                 http://www.alibaba.com/schema/services/template/engines http://localhost:8080/schema/services-template-engines.xsd
+                 http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+             ">
 
     <services:webx-configuration />
 
@@ -41,9 +31,7 @@
     <services:pipeline id="checkCsrfToken_manually">
         <valves:checkCsrfToken expiredPage="error.vm" tokenKey="token" maxTokens="1"
                                logName="mySecurity" />
-        <valves:valve
-                class="com.alibaba.citrus.turbine.pipeline.valve.CheckCsrfTokenValveTests$CheckCsrfManually"
-                />
+        <valves:valve class="com.alibaba.citrus.turbine.pipeline.valve.CheckCsrfTokenValveTests$CheckCsrfManually" />
     </services:pipeline>
 
     <services:pipeline id="performActionValveTests">
@@ -68,15 +56,12 @@
 
     <services:pipeline id="prepareForTurbine1">
         <valves:prepareForTurbine />
-        <valves:valve
-                class="com.alibaba.citrus.turbine.pipeline.valve.PrepareForTurbineValveTests$MyErrorValve"
-                />
+        <valves:valve class="com.alibaba.citrus.turbine.pipeline.valve.PrepareForTurbineValveTests$MyErrorValve" />
     </services:pipeline>
 
     <services:pipeline id="prepareForTurbine2">
         <valves:prepareForTurbine />
-        <valves:valve
-                class="com.alibaba.citrus.turbine.pipeline.valve.PrepareForTurbineValveTests$MyValve" />
+        <valves:valve class="com.alibaba.citrus.turbine.pipeline.valve.PrepareForTurbineValveTests$MyValve" />
     </services:pipeline>
 
     <services:pipeline id="requestHandler">
@@ -93,15 +78,9 @@
 
     <services:pipeline id="handleException" lazy-init="true">
         <valves:handleException defaultPage="error.vm">
-            <valves:on-exception type="java.lang.Exception" page="error_exception.vm"
-                                 statusCode="501" />
-
-            <valves:on-exception type="java.lang.RuntimeException" page="error_runtime_exception.vm"
-                                 statusCode="502" />
-
-            <valves:on-exception type="java.io.IOException" page="error_io_exception.vm"
-                                 statusCode="503" />
-
+            <valves:on-exception type="java.lang.Exception" page="error_exception.vm" statusCode="501" />
+            <valves:on-exception type="java.lang.RuntimeException" page="error_runtime_exception.vm" statusCode="502" />
+            <valves:on-exception type="java.io.IOException" page="error_io_exception.vm" statusCode="503" />
             <valves:on-exception type="java.lang.IllegalArgumentException" page="error_illegal_argument_exception.vm" />
         </valves:handleException>
     </services:pipeline>
