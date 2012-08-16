@@ -36,6 +36,7 @@ import org.junit.Test;
 
 public class FormToolTests extends AbstractFormServiceTests {
     private FormTool tool;
+    private FormTool tool5;
 
     @BeforeClass
     public static void initFactory() {
@@ -46,8 +47,12 @@ public class FormToolTests extends AbstractFormServiceTests {
     public void init() throws Exception {
         getFormService("form1");
         PullService pullService = (PullService) factory.getBean("pullService");
+
         tool = (FormTool) pullService.getTools().get("form");
         assertNotNull(tool);
+
+        tool5 = (FormTool) pullService.getTools().get("tool5");
+        assertNotNull(tool5);
 
         newForm();
     }
@@ -63,6 +68,17 @@ public class FormToolTests extends AbstractFormServiceTests {
                                     { "_fm.gr._0.f", "cc" }, // group2.default.field1
                                     { "_fm.gr._0.fi", "dd" }, // group2.default.field2
         });
+    }
+
+    @Test
+    public void tool_formServiceRef() {
+        GroupInstanceHelper group1 = tool5.get("group1").getDefaultInstance();
+
+        assertNotNull(group1.get("field1"));
+        assertNotNull(group1.get("field2"));
+        assertNull(group1.get("field3"));
+
+        assertNull(tool5.get("group2").getDefaultInstance());
     }
 
     @Test
