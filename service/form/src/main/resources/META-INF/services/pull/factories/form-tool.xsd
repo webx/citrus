@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:beans="http://www.springframework.org/schema/beans"
             xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
 
     <xsd:import namespace="http://www.springframework.org/schema/beans"
@@ -13,6 +12,7 @@
 
     <xsd:complexType name="FormPullToolType">
         <xsd:attributeGroup ref="springext:identifiedTypeAttributeSubset" />
+        <xsd:attribute name="formServiceRef" type="xsd:string" use="optional" />
     </xsd:complexType>
 
 </xsd:schema>

@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/expr" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/generictype" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/hessian" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/logconfig" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/springext" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/util" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dist/test" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dist/webx" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/base" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/configuration" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/dataresolver" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/form" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/freemarker" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/mail" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/mappingrule" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/moduleloader" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/pipeline" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/pull" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/requestcontext" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/resource" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/template" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/upload" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/uribroker" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service/velocity" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/test/util" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/test/webx" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webx/dev" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webx/framework" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webx/turbine" charset="UTF-8" />
+  </component>
 </project>
 

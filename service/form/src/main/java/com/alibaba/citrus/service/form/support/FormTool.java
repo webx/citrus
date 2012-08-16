@@ -21,6 +21,7 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.ObjectUtil.*;
+import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.Iterator;
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +37,9 @@ import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionP
 import com.alibaba.citrus.util.StringEscapeUtil;
 import org.apache.ecs.xhtml.input;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 便于模板使用的pull tool。
@@ -325,5 +329,13 @@ public class FormTool implements ToolFactory {
     }
 
     public static class DefinitionParser extends AbstractSingleBeanDefinitionParser<FormTool> {
+        @Override
+        protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
+            String formServiceRef = trimToNull(element.getAttribute("formServiceRef"));
+
+            if (formServiceRef != null) {
+                builder.addPropertyReference("formService", formServiceRef);
+            }
+        }
     }
 }

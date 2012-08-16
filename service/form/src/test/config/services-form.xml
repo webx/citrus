@@ -102,6 +102,7 @@
 
     <pull>
         <pull-tools:form-tool />
+        <pull-tools:form-tool id="tool5" formServiceRef="form5" />
     </pull>
 
 </beans:beans>

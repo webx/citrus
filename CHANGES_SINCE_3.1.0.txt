@@ -47,3 +47,5 @@
 * 添加一种新的module adapter: <screen-event-adapter />，从而支持如下情形：
   当target=/xxx/yyy/zzz.htm时，调用screen.xxx.Yyy中的doZzz()方法。
   原来的方式仍然支持。
+
+* 为form-tool添加参数，使之可以指定formService的实例：<form-tool formServiceRef="xxx" />
