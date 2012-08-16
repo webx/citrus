@@ -43,3 +43,7 @@
 * 改进：由于freemarker升级以后已经支持slf4j，所以删除FreemarkerEngine中的Slf4jLoggerFactory，以及不太稳定的LoggerHack类。
 
 * Bugfix: 移植的hessian无法运行于resin服务器。
+
+* 添加一种新的module adapter: <screen-event-adapter />，从而支持如下情形：
+  当target=/xxx/yyy/zzz.htm时，调用screen.xxx.Yyy中的doZzz()方法。
+  原来的方式仍然支持。
