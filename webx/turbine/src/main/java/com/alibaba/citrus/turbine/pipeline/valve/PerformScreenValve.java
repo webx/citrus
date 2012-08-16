@@ -82,15 +82,15 @@ public class PerformScreenValve extends AbstractValve {
     protected void performScreenModule(TurbineRunData rundata) {
         ModuleFinder finder = new ModuleFinder(rundata.getTarget());
 
+        // 如果设置了template，则默认打开layout
+        rundata.setLayoutEnabled(true);
+
         try {
             Module module = finder.getScreenModule();
 
             // 当指定了templateName时，可以没有的screen module，而单单渲染模板。
             // 这样就实现了page-driven，即先写模板，必要时再写一个module class与之对应。
             if (module != null) {
-                // 如果设置了template，则默认打开layout
-                rundata.setLayoutEnabled(true);
-
                 // 将event传入screen。
                 ScreenEventUtil.setEventName(rundata.getRequest(), finder.event);
 
