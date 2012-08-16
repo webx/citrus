@@ -15,6 +15,7 @@
                http://www.alibaba.com/schema/services/template/engines http://localhost:8080/schema/services-template-engines.xsd
                http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
              ">
+
     <services:property-placeholder />
 
     <services:simple-configuration>
@@ -49,10 +50,9 @@
         <fallback-module-rule id="fallback.module.nodefault" moduleType="screen" />
 
         <!-- 回归搜索模板名 -->
-        <fallback-template-rule id="fallback.template" templatePrefix="myprefix" />
+        <fallback-template-rule id="fallback.template" templatePrefix="myprefix" matchLastName="false" />
         <fallback-template-rule id="fallback.template.searchExts" templatePrefix="myprefix" />
-        <fallback-template-rule id="fallback.template.searchExts.local"
-                                templatePrefix="myprefix.locale" />
+        <fallback-template-rule id="fallback.template.searchExts.local" templatePrefix="myprefix.locale" />
 
         <!-- 后缀扩展映射 -->
         <extension-rule id="extension">
