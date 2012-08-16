@@ -58,6 +58,10 @@ public class FallbackTemplateMappingRule extends AbstractTemplateMappingRule {
 
     private boolean matchLastName;
 
+    public void setMatchLastName(boolean matchLastName) {
+        this.matchLastName = matchLastName;
+    }
+
     @Override
     protected void initMappingRule() throws Exception {
         assertNotNull(getTemplateService(), "templateService");
