@@ -59,7 +59,19 @@ public class DataBindingTests extends AbstractWebTests {
         DataBindingAdapter adapter = (DataBindingAdapter) moduleLoader.getModule("control", "class.myprod.MyControl");
 
         adapter.execute();
+        assertEquals("execute", rundata.getAttribute("handler"));
 
+        assertNull(adapter.executeAndReturn());
+    }
+
+    @Test
+    public void executeAndReturn() throws Exception {
+        getInvocationContext("/app1");
+        initRequestContext();
+
+        DataBindingAdapter adapter = (DataBindingAdapter) moduleLoader.getModule("control", "class.myprod.MyControl2");
+
+        assertEquals("myresult", adapter.executeAndReturn());
         assertEquals("execute", rundata.getAttribute("handler"));
     }
 

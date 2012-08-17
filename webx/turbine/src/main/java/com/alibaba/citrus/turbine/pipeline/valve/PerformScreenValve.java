@@ -17,9 +17,11 @@
 
 package com.alibaba.citrus.turbine.pipeline.valve;
 
+import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.turbine.TurbineConstant.*;
 import static com.alibaba.citrus.turbine.util.TurbineUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
+import static com.alibaba.citrus.util.StringUtil.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,6 +31,7 @@ import com.alibaba.citrus.service.moduleloader.ModuleEvent;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderException;
 import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import com.alibaba.citrus.service.moduleloader.ModuleNotFoundException;
+import com.alibaba.citrus.service.moduleloader.ModuleReturningValue;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.support.AbstractValve;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
@@ -37,6 +40,9 @@ import com.alibaba.citrus.util.StringUtil;
 import com.alibaba.citrus.util.internal.ScreenEventUtil;
 import com.alibaba.citrus.webx.WebxException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 /**
  * 执行screen。
@@ -44,6 +50,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Michael Zhou
  */
 public class PerformScreenValve extends AbstractValve {
+    private static final String DEFAULT_RESULT_NAME = "screenResult";
+
     @Autowired
     private ModuleLoaderService moduleLoaderService;
 
@@ -53,8 +61,18 @@ public class PerformScreenValve extends AbstractValve {
     @Autowired
     private MappingRuleService mappingRuleService;
 
+    private String resultName;
+
     public MappingRuleService getMappingRuleService() {
         return mappingRuleService;
+    }
+
+    public String getResultName() {
+        return resultName == null ? DEFAULT_RESULT_NAME : resultName;
+    }
+
+    public void setResultName(String resultName) {
+        this.resultName = trimToNull(resultName);
     }
 
     public void invoke(PipelineContext pipelineContext) throws Exception {
@@ -63,7 +81,14 @@ public class PerformScreenValve extends AbstractValve {
         // 检查重定向标志，如果是重定向，则不需要将页面输出。
         if (!rundata.isRedirected()) {
             setContentType(rundata);
-            performScreenModule(rundata);
+
+            Object result = null;
+
+            try {
+                result = performScreenModule(rundata);
+            } finally {
+                pipelineContext.setAttribute(getResultName(), result);
+            }
         }
 
         pipelineContext.invokeNext();
@@ -79,7 +104,7 @@ public class PerformScreenValve extends AbstractValve {
     }
 
     /** 执行screen模块。 */
-    protected void performScreenModule(TurbineRunData rundata) {
+    protected Object performScreenModule(TurbineRunData rundata) {
         ModuleFinder finder = new ModuleFinder(rundata.getTarget());
 
         // 如果设置了template，则默认打开layout
@@ -95,7 +120,12 @@ public class PerformScreenValve extends AbstractValve {
                 ScreenEventUtil.setEventName(rundata.getRequest(), finder.event);
 
                 try {
-                    module.execute();
+
+                    if (module instanceof ModuleReturningValue) {
+                        return ((ModuleReturningValue) module).executeAndReturn();
+                    } else {
+                        module.execute();
+                    }
                 } finally {
                     ScreenEventUtil.setEventName(rundata.getRequest(), null);
                 }
@@ -109,6 +139,8 @@ public class PerformScreenValve extends AbstractValve {
         } catch (Exception e) {
             throw new WebxException("Failed to execute screen: " + finder.moduleName, e);
         }
+
+        return null;
     }
 
     private class ModuleFinder {
@@ -169,5 +201,9 @@ public class PerformScreenValve extends AbstractValve {
     }
 
     public static class DefinitionParser extends AbstractValveDefinitionParser<PerformScreenValve> {
+        @Override
+        protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
+            attributesToProperties(element, builder, "resultName");
+        }
     }
 }

@@ -55,6 +55,12 @@ public abstract class AbstractModuleEventAdapter extends AbstractDataBindingAdap
 
     /** 执行一个module。 */
     public void execute() throws ModuleEventException, ModuleEventNotFoundException {
+        executeAndReturn();
+    }
+
+    /** 执行一个module，并返回值。 */
+    public Object executeAndReturn() throws ModuleEventException, ModuleEventNotFoundException {
+        Object result = null;
         String event = getEventName(request);
         MethodInvoker handler = null;
 
@@ -91,7 +97,7 @@ public abstract class AbstractModuleEventAdapter extends AbstractDataBindingAdap
             log.debug("Invoking handler for event {}: {}", event, handler);
 
             try {
-                handler.invoke(moduleObject, log);
+                result = handler.invoke(moduleObject, log);
             } catch (Exception e) {
                 exception = new ModuleEventException("Failed to execute handler: " + handler, e);
             }
@@ -113,6 +119,8 @@ public abstract class AbstractModuleEventAdapter extends AbstractDataBindingAdap
         if (exception != null) {
             throw exception;
         }
+
+        return result;
     }
 
     /** 取得event名称。 */

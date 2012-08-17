@@ -15,26 +15,13 @@
  * limitations under the License.
  */
 
-package com.alibaba.test.app1.module.screen.ddd.eee;
+package com.alibaba.citrus.service.moduleloader;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-public class MyEventScreen {
-    @Autowired
-    private HttpServletRequest request;
-
-    public void doTest1() {
-        request.setAttribute("module.screen.ddd.eee.MyEventScreen", "test1");
-    }
-
-    public void doPerform() {
-        request.setAttribute("module.screen.ddd.eee.MyEventScreen", "perform");
-    }
-
-    public Object doReturnValue() {
-        request.setAttribute("module.screen.ddd.eee.MyEventScreen", "returnValue");
-        return "myresult";
-    }
+/**
+ * 代表一个模块，支持返回值。
+ *
+ * @author Michael Zhou
+ */
+public interface ModuleReturningValue extends Module {
+    Object executeAndReturn() throws Exception;
 }

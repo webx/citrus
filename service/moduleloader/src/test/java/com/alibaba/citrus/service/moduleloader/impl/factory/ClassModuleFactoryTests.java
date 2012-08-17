@@ -71,7 +71,7 @@ public class ClassModuleFactoryTests extends AbstractModuleLoaderTests {
                           names.toArray(new String[names.size()]));
 
         names = moduleLoaderService.getModuleNames("control");
-        assertArrayEquals(new String[] { "InvalidControl", "myprod.MyControl" },
+        assertArrayEquals(new String[] { "InvalidControl", "myprod.MyControl", "myprod.MyControl2" },
                           names.toArray(new String[names.size()]));
 
         names = moduleLoaderService.getModuleNames("screens");
@@ -118,7 +118,7 @@ public class ClassModuleFactoryTests extends AbstractModuleLoaderTests {
                                          "app1.myprod.MyActionNoRunData" }, names.toArray(new String[names.size()]));
 
         names = moduleLoaderService.getModuleNames("control");
-        assertArrayEquals(new String[] { "app1.InvalidControl", "app1.myprod.MyControl" },
+        assertArrayEquals(new String[] { "app1.InvalidControl", "app1.myprod.MyControl", "app1.myprod.MyControl2" },
                           names.toArray(new String[names.size()]));
 
         names = moduleLoaderService.getModuleNames("screens");
@@ -156,7 +156,7 @@ public class ClassModuleFactoryTests extends AbstractModuleLoaderTests {
                           names.toArray(new String[names.size()]));
 
         names = moduleLoaderService.getModuleNames("control");
-        assertArrayEquals(new String[] { "app1.InvalidControl", "app1.myprod.MyControl" },
+        assertArrayEquals(new String[] { "app1.InvalidControl", "app1.myprod.MyControl", "app1.myprod.MyControl2" },
                           names.toArray(new String[names.size()]));
 
         names = moduleLoaderService.getModuleNames("screen");

@@ -15,26 +15,17 @@
  * limitations under the License.
  */
 
-package com.alibaba.test.app1.module.screen.ddd.eee;
+package com.alibaba.test.app1.module.control.myprod;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.alibaba.citrus.service.requestcontext.rundata.RunData;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class MyEventScreen {
+public class MyControl2 {
     @Autowired
-    private HttpServletRequest request;
+    private RunData rundata;
 
-    public void doTest1() {
-        request.setAttribute("module.screen.ddd.eee.MyEventScreen", "test1");
-    }
-
-    public void doPerform() {
-        request.setAttribute("module.screen.ddd.eee.MyEventScreen", "perform");
-    }
-
-    public Object doReturnValue() {
-        request.setAttribute("module.screen.ddd.eee.MyEventScreen", "returnValue");
+    public String execute() {
+        rundata.setAttribute("handler", "execute");
         return "myresult";
     }
 }

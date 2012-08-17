@@ -39,7 +39,7 @@ class MethodInvoker {
         this.skippable = skippable;
     }
 
-    public void invoke(Object moduleObject, Logger log) throws Exception {
+    public Object invoke(Object moduleObject, Logger log) throws Exception {
         Object[] args = new Object[resolvers.length];
 
         for (int i = 0; i < args.length; i++) {
@@ -50,7 +50,7 @@ class MethodInvoker {
             } catch (SkipModuleExecutionException e) {
                 if (skippable) {
                     log.debug("Module execution has been skipped. Method: {}, {}", fastMethod, e.getMessage());
-                    return;
+                    return null;
                 }
 
                 value = e.getValueForNonSkippable();
@@ -67,10 +67,10 @@ class MethodInvoker {
         }
 
         try {
-            fastMethod.invoke(moduleObject, args);
+            return fastMethod.invoke(moduleObject, args);
         } catch (InvocationTargetException e) {
             throwExceptionOrError(e.getCause());
-            return;
+            return null;
         }
     }
 

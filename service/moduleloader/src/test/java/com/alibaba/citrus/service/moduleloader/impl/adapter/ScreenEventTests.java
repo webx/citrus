@@ -131,6 +131,26 @@ public class ScreenEventTests extends AbstractWebTests {
         assertEquals("doSomethingInteresting", rundata.getAttribute("handler"));
         assertEquals(null, rundata.getAttribute("before"));
         assertEquals(null, rundata.getAttribute("after"));
+
+        assertNull(screenEvent.executeAndReturn());
+    }
+
+    @Test
+    public void doReturnValue() throws Exception {
+        getInvocationContext("/app1");
+        initRequestContext();
+
+        ScreenEventUtil.setEventName(newRequest, "returnValue");
+
+        ScreenEventAdapter screenEvent = (ScreenEventAdapter) moduleLoader.getModule("screen", "MyEventScreen");
+
+        screenEvent.execute();
+
+        assertEquals("doReturnValue", rundata.getAttribute("handler"));
+        assertEquals(null, rundata.getAttribute("before"));
+        assertEquals(null, rundata.getAttribute("after"));
+
+        assertEquals("myresult", screenEvent.executeAndReturn());
     }
 
     @Test
