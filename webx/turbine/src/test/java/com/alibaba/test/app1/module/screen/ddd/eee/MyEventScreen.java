@@ -32,4 +32,9 @@ public class MyEventScreen {
     public void doPerform() {
         request.setAttribute("module.screen.ddd.eee.MyEventScreen", "perform");
     }
+
+    public Object doReturnValue() {
+        request.setAttribute("module.screen.ddd.eee.MyEventScreen", "returnValue");
+        return "myresult";
+    }
 }

@@ -49,6 +49,11 @@
         <valves:performScreen />
     </services:pipeline>
 
+    <services:pipeline id="performScreenValveTests2">
+        <valves:analyzeURL />
+        <valves:performScreen resultName="myresult" />
+    </services:pipeline>
+
     <services:pipeline id="renderTemplate">
         <valves:analyzeURL />
         <valves:renderTemplate />

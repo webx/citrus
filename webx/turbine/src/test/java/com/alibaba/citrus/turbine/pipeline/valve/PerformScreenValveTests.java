@@ -22,6 +22,7 @@ import static org.junit.Assert.*;
 
 import com.alibaba.citrus.service.moduleloader.ModuleNotFoundException;
 import com.alibaba.citrus.service.pipeline.PipelineException;
+import com.alibaba.citrus.service.pipeline.PipelineInvocationHandle;
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import org.junit.Before;
 import org.junit.Test;
@@ -104,5 +105,32 @@ public class PerformScreenValveTests extends AbstractValveTests {
         } catch (PipelineException e) {
             assertThat(e, exception(ModuleNotFoundException.class, "ddd.eee.myScreen.Test1"));
         }
+    }
+
+    @Test
+    public void result() throws Exception {
+        getInvocationContext("http://localhost/app1/ddd/eee/myEventScreen/returnValue.jsp");
+        initRequestContext();
+
+        PipelineInvocationHandle invocation = pipeline.newInvocation();
+        invocation.invoke();
+
+        assertEquals("returnValue", rundata.getRequest().getAttribute("module.screen.ddd.eee.MyEventScreen"));
+        assertEquals("myresult", invocation.getAttribute("screenResult"));
+    }
+
+    @Test
+    public void result_specifiedName() throws Exception {
+        pipeline = (PipelineImpl) factory.getBean("performScreenValveTests2");
+        assertNotNull(pipeline);
+
+        getInvocationContext("http://localhost/app1/ddd/eee/myEventScreen/returnValue.jsp");
+        initRequestContext();
+
+        PipelineInvocationHandle invocation = pipeline.newInvocation();
+        invocation.invoke();
+
+        assertEquals("returnValue", rundata.getRequest().getAttribute("module.screen.ddd.eee.MyEventScreen"));
+        assertEquals("myresult", invocation.getAttribute("myresult"));
     }
 }
