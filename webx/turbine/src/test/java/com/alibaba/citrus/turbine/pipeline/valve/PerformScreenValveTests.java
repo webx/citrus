@@ -20,12 +20,17 @@ package com.alibaba.citrus.turbine.pipeline.valve;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.alibaba.citrus.service.moduleloader.ModuleNotFoundException;
+import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.PipelineException;
 import com.alibaba.citrus.service.pipeline.PipelineInvocationHandle;
+import com.alibaba.citrus.service.pipeline.Valve;
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class PerformScreenValveTests extends AbstractValveTests {
     @Before
@@ -132,5 +137,15 @@ public class PerformScreenValveTests extends AbstractValveTests {
 
         assertEquals("returnValue", rundata.getRequest().getAttribute("module.screen.ddd.eee.MyEventScreen"));
         assertEquals("myresult", invocation.getAttribute("myresult"));
+        assertEquals("myresult", rundata.getRequest().getAttribute("screenResult"));
+    }
+
+    public static class ReadResultValve implements Valve {
+        @Autowired
+        private HttpServletRequest request;
+
+        public void invoke(PipelineContext pipelineContext) throws Exception {
+            request.setAttribute("screenResult", pipelineContext.getAttribute("myresult"));
+        }
     }
 }

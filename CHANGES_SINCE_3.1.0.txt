@@ -49,3 +49,8 @@
   原来的方式仍然支持。
 
 * 为form-tool添加参数，使之可以指定formService的实例：<form-tool formServiceRef="xxx" />
+
+* 改进<performScreen>以及screen module，使screen可以返回一个值给pipeline。此举是为了简化screen创建json的请求。
+  添加了一个可选的配置参数：<performScreen resultName="screenResult" />，若不配置该参数，则"screenResult"就是默认值。
+  当screen.execute()或screen.doEvent()返回一个值的时候，这个值被记录在pipelineContext中，
+  其它valve可以通过pipelineContext.getAttribute("screenResult")来取得该值。
