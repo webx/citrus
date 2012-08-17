@@ -34,6 +34,11 @@ public class MyAction {
         rundata.setAttribute("handler", "doSomethingInteresting");
     }
 
+    public Object doReturnValue() throws Exception {
+        rundata.setAttribute("handler", "doReturnValue");
+        return "myresult";
+    }
+
     // inner class不被包含
     public static class InnerClass {
     }

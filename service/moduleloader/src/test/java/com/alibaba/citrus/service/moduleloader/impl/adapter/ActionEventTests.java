@@ -188,6 +188,24 @@ public class ActionEventTests extends AbstractWebTests {
         assertEquals("doSomethingInteresting", rundata.getAttribute("handler"));
         assertEquals(null, rundata.getAttribute("before"));
         assertEquals(null, rundata.getAttribute("after"));
+
+        assertNull(actionEvent.executeAndReturn());
+    }
+
+    @Test
+    public void doReturnValue() throws Exception {
+        getInvocationContext("/app1?eventSubmitDoReturnValue=true");
+        initRequestContext();
+
+        ActionEventAdapter actionEvent = (ActionEventAdapter) moduleLoader.getModule("action", "class.myprod.MyAction");
+
+        actionEvent.execute();
+
+        assertEquals("doReturnValue", rundata.getAttribute("handler"));
+        assertEquals(null, rundata.getAttribute("before"));
+        assertEquals(null, rundata.getAttribute("after"));
+
+        assertEquals("myresult", actionEvent.executeAndReturn());
     }
 
     @Test

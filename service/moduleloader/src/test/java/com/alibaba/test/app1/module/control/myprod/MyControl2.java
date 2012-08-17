@@ -15,31 +15,17 @@
  * limitations under the License.
  */
 
-package com.alibaba.test.app1.module2.screen;
+package com.alibaba.test.app1.module.control.myprod;
 
 import com.alibaba.citrus.service.requestcontext.rundata.RunData;
+import org.springframework.beans.factory.annotation.Autowired;
 
-public class MyEventScreen {
+public class MyControl2 {
+    @Autowired
     private RunData rundata;
 
-    public RunData getRunData() {
-        return rundata;
-    }
-
-    public void setRunData(RunData rundata) {
-        this.rundata = rundata;
-    }
-
-    public void doSomethingInteresting() throws Exception {
-        rundata.setAttribute("handler", "doSomethingInteresting");
-    }
-
-    public Object doReturnValue() throws Exception {
-        rundata.setAttribute("handler", "doReturnValue");
+    public String execute() {
+        rundata.setAttribute("handler", "execute");
         return "myresult";
-    }
-
-    // inner class不被包含
-    public static class InnerClass {
     }
 }

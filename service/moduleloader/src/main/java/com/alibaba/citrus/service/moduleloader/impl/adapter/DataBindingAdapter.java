@@ -37,6 +37,10 @@ public class DataBindingAdapter extends AbstractDataBindingAdapter {
         executeMethod.invoke(moduleObject, log);
     }
 
+    public Object executeAndReturn() throws Exception {
+        return executeMethod.invoke(moduleObject, log);
+    }
+
     @Override
     public String toString() {
         MapBuilder mb = new MapBuilder();

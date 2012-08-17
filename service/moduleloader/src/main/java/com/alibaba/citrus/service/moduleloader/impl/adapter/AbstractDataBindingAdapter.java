@@ -19,11 +19,11 @@ package com.alibaba.citrus.service.moduleloader.impl.adapter;
 
 import static com.alibaba.citrus.util.Assert.*;
 
-import com.alibaba.citrus.service.moduleloader.Module;
+import com.alibaba.citrus.service.moduleloader.ModuleReturningValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractDataBindingAdapter implements Module {
+public abstract class AbstractDataBindingAdapter implements ModuleReturningValue {
     protected final Logger log;
     protected final Object moduleObject;
 
