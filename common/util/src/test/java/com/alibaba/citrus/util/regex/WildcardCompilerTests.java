@@ -66,6 +66,19 @@ public class WildcardCompilerTests {
         assertTrue(contains("/xxx/yyy", pattern, ""));
         assertTrue(contains("/xxx/yyyzzz", pattern, "zzz"));
 
+        // 以?结束
+        pattern = PathNameWildcardCompiler.compilePathName("/xxx/yyy?");
+
+        assertTrue(contains("/xxx/yyyz", pattern, "z"));
+        assertTrue(contains("/xxx/yyyz/", pattern, "z"));
+        assertFalse(contains("/xxx/yyyzz", pattern));
+
+        // 以?开始
+        pattern = PathNameWildcardCompiler.compilePathName("?xxx/yyy");
+
+        assertTrue(contains("/zxxx/yyy", pattern, "z"));
+        assertFalse(contains("/zzxxx/yyy", pattern));
+
         // 特殊处理
         pattern = PathNameWildcardCompiler.compilePathName("/");
 
@@ -125,6 +138,18 @@ public class WildcardCompilerTests {
 
         assertTrue(contains("xxx.yyy", pattern, ""));
         assertTrue(contains("xxx.yyyzzz", pattern, "zzz"));
+
+        // 以?结尾
+        pattern = ClassNameWildcardCompiler.compileClassName("xxx.yyy?");
+
+        assertTrue(contains("xxx.yyyz", pattern, "z"));
+        assertFalse(contains("xxx.yyyzz", pattern));
+
+        // 以?开始
+        pattern = ClassNameWildcardCompiler.compileClassName("?xxx.yyy");
+
+        assertTrue(contains("zxxx.yyy", pattern, "z"));
+        assertFalse(contains("zzxxx.yyy", pattern));
 
         pattern = ClassNameWildcardCompiler.compileClassName("");
 

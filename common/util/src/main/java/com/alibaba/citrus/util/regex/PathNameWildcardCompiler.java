@@ -67,6 +67,7 @@ public class PathNameWildcardCompiler {
     private static final String REGEX_FILE_NAME             = "(" + REGEX_FILE_NAME_CHAR + "*)";
     private static final String REGEX_FILE_PATH             = "(" + REGEX_FILE_NAME_CHAR + "+(?:" + REGEX_SLASH_NO_DUP
                                                               + REGEX_FILE_NAME_CHAR + "*)*(?=" + REGEX_SLASH + "|$)|)" + REGEX_SLASH + "?";
+    private static final String REGEX_END_OF_PATH           = "(?=" + REGEX_SLASH + "|$)" + REGEX_SLASH + "?";
 
     // 上一个token的状态
     private static final int LAST_TOKEN_START       = 0;
@@ -191,8 +192,16 @@ public class PathNameWildcardCompiler {
                     break;
 
                 case QUESTION:
+                    if (lastToken == LAST_TOKEN_START) {
+                        buf.append(REGEX_WORD_BOUNDARY).append(REGEX_FILE_NAME_SINGLE_CHAR); // 前边界
+                    } else if (i + 1 == pattern.length()) {
+                        buf.append(REGEX_FILE_NAME_SINGLE_CHAR).append(REGEX_END_OF_PATH); // 后边界
+                    } else {
+                        buf.append(REGEX_FILE_NAME_SINGLE_CHAR);
+                    }
+
                     lastToken = LAST_TOKEN_QUESTION;
-                    buf.append(REGEX_FILE_NAME_SINGLE_CHAR);
+
                     break;
 
                 default:
