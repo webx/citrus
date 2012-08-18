@@ -61,6 +61,7 @@ public class ClassNameWildcardCompiler {
     private static final String REGEX_CLASS_NAME             = "(" + REGEX_CLASS_NAME_CHAR + "*)";
     private static final String REGEX_CLASS_NAME_FULL        = "(" + REGEX_CLASS_NAME_CHAR + "+(?:" + REGEX_DOT_NO_DUP
                                                                + REGEX_CLASS_NAME_CHAR + "*)*(?=" + REGEX_DOT + "|$)|)" + REGEX_DOT + "?";
+    private static final String REGEX_END_OF_NAME            = "(?=" + REGEX_DOT + "|$)";
 
     // 上一个token的状态
     private static final int LAST_TOKEN_START       = 0;
@@ -119,12 +120,12 @@ public class ClassNameWildcardCompiler {
         pattern = assertNotNull(normalizeClassName(pattern), "pattern");
 
         int lastToken = LAST_TOKEN_START;
-        StringBuilder buffer = new StringBuilder(pattern.length() * 2);
+        StringBuilder buf = new StringBuilder(pattern.length() * 2);
 
         boolean matchPrefix = (options & MATCH_PREFIX) != 0;
 
         if (matchPrefix) {
-            buffer.append(REGEX_MATCH_PREFIX);
+            buf.append(REGEX_MATCH_PREFIX);
         }
 
         for (int i = 0; i < pattern.length(); i++) {
@@ -139,7 +140,7 @@ public class ClassNameWildcardCompiler {
 
                     // 因为**已经包括了dot, 所以不需要额外地匹配dot
                     if (lastToken != LAST_TOKEN_DOUBLE_STAR) {
-                        buffer.append(REGEX_DOT_NO_DUP);
+                        buf.append(REGEX_DOT_NO_DUP);
                     }
 
                     lastToken = LAST_TOKEN_DOT;
@@ -157,7 +158,7 @@ public class ClassNameWildcardCompiler {
                         }
 
                         lastToken = LAST_TOKEN_DOUBLE_STAR;
-                        buffer.append(REGEX_CLASS_NAME_FULL);
+                        buf.append(REGEX_CLASS_NAME_FULL);
                     } else {
                         // *前面不能是*或**
                         if (lastToken == LAST_TOKEN_STAR || lastToken == LAST_TOKEN_DOUBLE_STAR) {
@@ -165,14 +166,22 @@ public class ClassNameWildcardCompiler {
                         }
 
                         lastToken = LAST_TOKEN_STAR;
-                        buffer.append(REGEX_CLASS_NAME);
+                        buf.append(REGEX_CLASS_NAME);
                     }
 
                     break;
 
                 case QUESTION:
+                    if (lastToken == LAST_TOKEN_START) {
+                        buf.append(REGEX_WORD_BOUNDARY).append(REGEX_CLASS_NAME_SINGLE_CHAR); // 前边界
+                    } else if (i + 1 == pattern.length()) {
+                        buf.append(REGEX_CLASS_NAME_SINGLE_CHAR).append(REGEX_END_OF_NAME); // 后边界
+                    } else {
+                        buf.append(REGEX_CLASS_NAME_SINGLE_CHAR);
+                    }
+
                     lastToken = LAST_TOKEN_QUESTION;
-                    buffer.append(REGEX_CLASS_NAME_SINGLE_CHAR);
+
                     break;
 
                 default:
@@ -184,14 +193,14 @@ public class ClassNameWildcardCompiler {
                     if (Character.isLetterOrDigit(ch) || ch == UNDERSCORE) {
                         // 加上word边界, 进行整字匹配
                         if (lastToken == LAST_TOKEN_START) {
-                            buffer.append(REGEX_WORD_BOUNDARY).append(ch); // 前边界
+                            buf.append(REGEX_WORD_BOUNDARY).append(ch); // 前边界
                         } else if (i + 1 == pattern.length()) {
-                            buffer.append(ch).append(REGEX_WORD_BOUNDARY); // 后边界
+                            buf.append(ch).append(REGEX_WORD_BOUNDARY); // 后边界
                         } else {
-                            buffer.append(ch);
+                            buf.append(ch);
                         }
                     } else if (ch == DOLLAR) {
-                        buffer.append(ESCAPE_CHAR).append(DOLLAR);
+                        buf.append(ESCAPE_CHAR).append(DOLLAR);
                     } else {
                         throw new PatternSyntaxException("Syntax Error", pattern, i);
                     }
@@ -200,7 +209,7 @@ public class ClassNameWildcardCompiler {
             }
         }
 
-        return buffer.toString();
+        return buf.toString();
     }
 
     /**
