@@ -12,6 +12,7 @@ performAction=com.alibaba.citrus.turbine.pipeline.valve.PerformActionValve$Defin
 performTemplateScreen=com.alibaba.citrus.turbine.pipeline.valve.PerformTemplateScreenValve$DefinitionParser
 performScreen=com.alibaba.citrus.turbine.pipeline.valve.PerformScreenValve$DefinitionParser
 renderTemplate=com.alibaba.citrus.turbine.pipeline.valve.RenderTemplateValve$DefinitionParser
+renderResultAsJson=com.alibaba.citrus.turbine.pipeline.valve.RenderResultAsJsonValve$DefinitionParser
 exportControl=com.alibaba.citrus.turbine.pipeline.valve.ExportControlValve$DefinitionParser
 
 breakUnlessTargetRedirected=com.alibaba.citrus.turbine.pipeline.valve.BreakUnlessTargetRedirectedValve$DefinitionParser

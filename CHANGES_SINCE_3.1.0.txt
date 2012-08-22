@@ -56,3 +56,5 @@
   其它valve可以通过pipelineContext.getAttribute("screenResult")来取得该值。
 
 * Bugfix: 对于ClassNameWildcard和PathNameWildcard，当pattern以?开头或结束的时候，错误地匹配了多个字符（?的意思是有且仅有一个字符）
+
+* 新增<renderResultAsJson /> valve，用来将screen所返回的对象转换成json并输出到response。

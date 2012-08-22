@@ -50,7 +50,7 @@ import org.w3c.dom.Element;
  * @author Michael Zhou
  */
 public class PerformScreenValve extends AbstractValve {
-    private static final String DEFAULT_RESULT_NAME = "screenResult";
+    static final String DEFAULT_RESULT_NAME = "screenResult";
 
     @Autowired
     private ModuleLoaderService moduleLoaderService;
