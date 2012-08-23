@@ -55,6 +55,31 @@
         <valves:valve class="com.alibaba.citrus.turbine.pipeline.valve.PerformScreenValveTests$ReadResultValve" />
     </services:pipeline>
 
+    <services:pipeline id="renderJson" lazy-init="true">
+        <valves:analyzeURL />
+        <valves:performScreen />
+        <valves:renderResultAsJson />
+    </services:pipeline>
+
+    <services:pipeline id="renderJsonAsJs" lazy-init="true">
+        <valves:analyzeURL />
+        <valves:performScreen />
+        <valves:renderResultAsJson javascriptVariable="myresult" />
+    </services:pipeline>
+
+    <services:pipeline id="renderJson_specifiedContentType" lazy-init="true">
+        <valves:analyzeURL />
+        <valves:performScreen />
+        <valves:renderResultAsJson contentType="text/plain" />
+    </services:pipeline>
+
+    <services:pipeline id="renderJsonAsJs_specifiedContentType" lazy-init="true">
+        <valves:analyzeURL />
+        <valves:performScreen resultName="myresult" />
+        <valves:renderResultAsJson resultName="myresult"
+                                   javascriptContentType="text/js" javascriptVariable="myresult" />
+    </services:pipeline>
+
     <services:pipeline id="renderTemplate">
         <valves:analyzeURL />
         <valves:renderTemplate />

@@ -17,6 +17,10 @@
             <artifactId>servlet-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>citrus-webx-framework</artifactId>
         </dependency>
