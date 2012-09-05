@@ -315,3 +315,8 @@
 * Bugfix: 对于ClassNameWildcard和PathNameWildcard，当pattern以?开头或结束的时候，错误地匹配了多个字符（?的意思是有且仅有一个字符）
 
 * 新增<renderResultAsJson /> valve，用来将screen所返回的对象转换成json并输出到response。
+
+
+-- Changes in 3.0.10
+
+* Bugfix: 多值field中存在null空值的时候，<all-of-values>验证器不能正确取得null值，导致验证结果错误。

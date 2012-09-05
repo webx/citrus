@@ -55,4 +55,16 @@ public class AllOfValuesValidatorTests extends AbstractSimpleCompositeValidatorT
         assertEquals(false, field2.isValid());
         assertEquals("field2: [field2[1] validator]", field2.getMessage());
     }
+
+    /** 当多值中有null时。 */
+    @Test
+    public void validate_withNull() throws Exception {
+        request(null, null, (Object) new String[] { "v1", null, "v3" });
+        assertEquals(false, field3.isValid());
+        assertEquals("field3: [missing field3]", field3.getMessage());
+
+        request(null, null, (Object) new String[] { "v1", "v2", "v3" });
+        assertEquals(true, field3.isValid());
+        assertEquals(null, field3.getMessage());
+    }
 }

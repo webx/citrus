@@ -314,6 +314,11 @@
                             p:message="${displayName}[${valueIndex}] validator" />
                 </validators:all-of-values>
             </field>
+            <field name="field3">
+                <validators:all-of-values message="${displayName}: ${allMessages}">
+                    <validators:required-validator message="missing ${displayName}" />
+                </validators:all-of-values>
+            </field>
         </group>
         <group name="o">
             <field name="field1">

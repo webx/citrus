@@ -35,13 +35,17 @@ public class ValidatorContextImpl implements Validator.Context {
     private       Object         value;
 
     public ValidatorContextImpl(MessageContext expressionContext, Field field) {
-        this(expressionContext, field, null);
+        this(expressionContext, field, null, false);
     }
 
     public ValidatorContextImpl(MessageContext expressionContext, Field field, Object value) {
+        this(expressionContext, field, value, true);
+    }
+
+    private ValidatorContextImpl(MessageContext expressionContext, Field field, Object value, boolean withValue) {
         this.expressionContext = assertNotNull(expressionContext, "expressionContext");
         this.field = assertNotNull(field, "field");
-        this.value = value == null ? field.getValue() : value;
+        this.value = withValue ? value : field.getValue();
     }
 
     public MessageContext getMessageContext() {
