@@ -63,3 +63,4 @@
 -- Changes in 3.1.2
 
 * Bugfix: 多值field中存在null空值的时候，<all-of-values>验证器不能正确取得null值，导致验证结果错误。
+* 升级servlet api到3.0.1。
