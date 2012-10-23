@@ -24,24 +24,20 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import static org.junit.Assert.*;
 
 import java.io.File;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
 import com.alibaba.citrus.service.resource.support.ResourceLoadingSupport;
 import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import com.alibaba.citrus.springext.support.context.XmlWebApplicationContext;
+import com.alibaba.citrus.util.internal.OverridedMethodBuilder;
 import com.meterware.servletunit.InvocationContext;
 import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
@@ -63,7 +59,7 @@ public abstract class AbstractResourceLoadingTests {
         client = servletRunner.newClient();
 
         InvocationContext ic = client.newInvocation("http://www.taobao.com/app1");
-        servletContext = new ServletContextWrapper(ic.getServlet().getServletConfig().getServletContext());
+        servletContext = createServletContextWrapper(ic.getServlet().getServletConfig().getServletContext());
 
         assertNotNull(servletContext);
     }
@@ -248,152 +244,55 @@ public abstract class AbstractResourceLoadingTests {
         private static final long serialVersionUID = 5198015331020551722L;
     }
 
-    /** httpunit未实现getResourcePaths方法。 */
-    public static class ServletContextWrapper implements ServletContext {
-        private final ServletContext servletContext;
+    /**
+     * httpunit未实现getResourcePaths方法。
+     * 以下实现可在servlet 2.5/3.0上执行。
+     */
+    private static ServletContext createServletContextWrapper(final ServletContext servletContext) {
+        return (ServletContext) new OverridedMethodBuilder(new Class<?>[] { ServletContext.class }, servletContext, new Object() {
+            public URL getResource(String path) throws MalformedURLException {
+                URL presetResult = nextGetResourceURL.get();
 
-        public ServletContextWrapper(ServletContext servletContext) {
-            this.servletContext = servletContext;
-        }
-
-        public URL getResource(String path) throws MalformedURLException {
-            URL presetResult = nextGetResourceURL.get();
-
-            if (presetResult != null) {
-                return presetResult;
-            } else {
-                return servletContext.getResource(path);
-            }
-        }
-
-        public Set<?> getResourcePaths(String path) {
-            try {
-                URL baseURL = getResource(path);
-                File basedir = null;
-
-                if (baseURL != null) {
-                    basedir = new File(baseURL.toURI());
+                if (presetResult != null) {
+                    return presetResult;
                 } else {
-                    return null;
+                    return servletContext.getResource(path);
                 }
-
-                String[] names = basedir.list();
-
-                if (isEmptyArray(names)) {
-                    return null;
-                }
-
-                Set<String> nameSet = createHashSet();
-
-                if (!path.endsWith("/")) {
-                    path += "/";
-                }
-
-                for (String name : names) {
-                    File file = new File(basedir, name);
-                    nameSet.add(path + name + (file.isDirectory() ? "/" : ""));
-                }
-
-                return nameSet;
-            } catch (Exception e) {
-                return null;
             }
-        }
 
-        public Object getAttribute(String name) {
-            return servletContext.getAttribute(name);
-        }
+            public Set<String> getResourcePaths(String path) {
+                try {
+                    URL baseURL = servletContext.getResource(path);
+                    File basedir = null;
 
-        public Enumeration<?> getAttributeNames() {
-            return servletContext.getAttributeNames();
-        }
+                    if (baseURL != null) {
+                        basedir = new File(baseURL.toURI());
+                    } else {
+                        return null;
+                    }
 
-        public ServletContext getContext(String uripath) {
-            return servletContext.getContext(uripath);
-        }
+                    String[] names = basedir.list();
 
-        public String getContextPath() {
-            return servletContext.getContextPath();
-        }
+                    if (isEmptyArray(names)) {
+                        return null;
+                    }
 
-        public String getInitParameter(String name) {
-            return servletContext.getInitParameter(name);
-        }
+                    Set<String> nameSet = createHashSet();
 
-        public Enumeration<?> getInitParameterNames() {
-            return servletContext.getInitParameterNames();
-        }
+                    if (!path.endsWith("/")) {
+                        path += "/";
+                    }
 
-        public int getMajorVersion() {
-            return servletContext.getMajorVersion();
-        }
+                    for (String name : names) {
+                        File file = new File(basedir, name);
+                        nameSet.add(path + name + (file.isDirectory() ? "/" : ""));
+                    }
 
-        public String getMimeType(String file) {
-            return servletContext.getMimeType(file);
-        }
-
-        public int getMinorVersion() {
-            return servletContext.getMinorVersion();
-        }
-
-        public RequestDispatcher getNamedDispatcher(String name) {
-            return servletContext.getNamedDispatcher(name);
-        }
-
-        public String getRealPath(String path) {
-            return servletContext.getRealPath(path);
-        }
-
-        public RequestDispatcher getRequestDispatcher(String path) {
-            return servletContext.getRequestDispatcher(path);
-        }
-
-        public InputStream getResourceAsStream(String path) {
-            return servletContext.getResourceAsStream(path);
-        }
-
-        public String getServerInfo() {
-            return servletContext.getServerInfo();
-        }
-
-        @Deprecated
-        public Servlet getServlet(String name) throws ServletException {
-            return servletContext.getServlet(name);
-        }
-
-        public String getServletContextName() {
-            return servletContext.getServletContextName();
-        }
-
-        @Deprecated
-        public Enumeration<?> getServletNames() {
-            return servletContext.getServletNames();
-        }
-
-        @Deprecated
-        public Enumeration<?> getServlets() {
-            return servletContext.getServlets();
-        }
-
-        @Deprecated
-        public void log(Exception exception, String msg) {
-            servletContext.log(exception, msg);
-        }
-
-        public void log(String message, Throwable throwable) {
-            servletContext.log(message, throwable);
-        }
-
-        public void log(String msg) {
-            servletContext.log(msg);
-        }
-
-        public void removeAttribute(String name) {
-            servletContext.removeAttribute(name);
-        }
-
-        public void setAttribute(String name, Object object) {
-            servletContext.setAttribute(name, object);
-        }
+                    return nameSet;
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+        }).toObject();
     }
 }

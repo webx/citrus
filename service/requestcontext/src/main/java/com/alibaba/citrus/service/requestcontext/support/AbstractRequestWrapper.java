@@ -50,7 +50,7 @@ public abstract class AbstractRequestWrapper extends HttpServletRequestWrapper {
      *
      * @return <code>ServletContext</code>对象
      */
-    protected ServletContext getServletContext() {
+    public ServletContext getServletContext() {
         return getRequestContext().getServletContext();
     }
 
