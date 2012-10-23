@@ -12,10 +12,6 @@
     <name>Citrus Form Service</name>
     <dependencies>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-        </dependency>
-        <dependency>
             <groupId>ecs</groupId>
             <artifactId>ecs</artifactId>
         </dependency>

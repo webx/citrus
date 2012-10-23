@@ -21,10 +21,6 @@
             <artifactId>cglib-nodep</artifactId>
         </dependency>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-        </dependency>
-        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>citrus-test-util</artifactId>
         </dependency>
