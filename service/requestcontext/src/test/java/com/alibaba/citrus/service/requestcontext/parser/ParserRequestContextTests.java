@@ -362,6 +362,12 @@ public class ParserRequestContextTests extends AbstractRequestContextsTests<Pars
         request = createMock(HttpServletRequest.class);
         response = createMock(HttpServletResponse.class);
 
+        expect(request.getAttribute("_outer_webx3_request_context_async_")).andReturn(null);
+        expectLastCall().anyTimes();
+
+        request.removeAttribute("_outer_webx3_request_context_async_");
+        expectLastCall().anyTimes();
+
         request.setAttribute(org.easymock.EasyMock.<String>anyObject(), anyObject());
         expectLastCall().anyTimes();
 

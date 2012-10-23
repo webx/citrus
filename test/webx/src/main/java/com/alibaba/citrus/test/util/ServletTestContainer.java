@@ -41,6 +41,7 @@ import javax.servlet.http.HttpSession;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.RequestContextChainingService;
 import com.alibaba.citrus.springext.support.parser.AbstractNamedBeanDefinitionParser;
+import com.alibaba.citrus.util.internal.Servlet3Util;
 import com.meterware.httpunit.GetMethodWebRequest;
 import com.meterware.httpunit.WebRequest;
 import com.meterware.httpunit.WebResponse;
@@ -72,6 +73,10 @@ public class ServletTestContainer {
     private RequestContext                requestContext;
 
     private WebResponse clientResponse;
+
+    static {
+        Servlet3Util.setDisableServlet3Features(true); // 禁用servlet3，因为httpunit还不支持
+    }
 
     public ServletTestContainer() {
         servletRunner = new PatchedServletRunner();

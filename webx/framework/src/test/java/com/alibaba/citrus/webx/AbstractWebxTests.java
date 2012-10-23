@@ -41,6 +41,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.requestcontext.rundata.RunData;
 import com.alibaba.citrus.util.ServletUtil;
+import com.alibaba.citrus.util.internal.Servlet3Util;
 import com.alibaba.citrus.util.io.StreamUtil;
 import com.alibaba.citrus.webx.handler.RequestHandler;
 import com.alibaba.citrus.webx.handler.RequestHandlerContext;
@@ -64,6 +65,10 @@ public abstract class AbstractWebxTests {
     protected WebResponse       clientResponse;
     protected int               clientResponseCode;
     protected String            clientResponseContent;
+
+    static {
+        Servlet3Util.setDisableServlet3Features(true); // 禁用servlet3，因为httpunit还不支持
+    }
 
     protected final void prepareWebClient(String webXmlName) throws Exception {
         prepareWebClient(webXmlName, "");

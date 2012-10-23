@@ -32,6 +32,7 @@ import com.alibaba.citrus.service.form.impl.FormServiceImpl;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.RequestContextChainingService;
 import com.alibaba.citrus.service.resource.support.context.ResourceLoadingXmlApplicationContext;
+import com.alibaba.citrus.util.internal.Servlet3Util;
 import com.meterware.httpunit.GetMethodWebRequest;
 import com.meterware.httpunit.HttpUnitOptions;
 import com.meterware.httpunit.PostMethodWebRequest;
@@ -65,6 +66,10 @@ public abstract class AbstractFormServiceTests {
     protected RequestContext                rc;
     protected HttpServletRequest            newRequest;
     protected HttpServletResponse           newResponse;
+
+    static {
+        Servlet3Util.setDisableServlet3Features(true); // 禁用servlet3，因为httpunit还不支持
+    }
 
     protected final void getFormService(String name) {
         getFormService(name, factory);
