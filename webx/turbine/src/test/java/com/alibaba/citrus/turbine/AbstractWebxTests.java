@@ -37,6 +37,7 @@ import com.alibaba.citrus.service.requestcontext.RequestContextChainingService;
 import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
 import com.alibaba.citrus.turbine.util.TurbineUtil;
 import com.alibaba.citrus.util.ServletUtil;
+import com.alibaba.citrus.util.internal.Servlet3Util;
 import com.alibaba.citrus.util.io.StreamUtil;
 import com.alibaba.citrus.webx.WebxComponent;
 import com.alibaba.citrus.webx.WebxController;
@@ -75,6 +76,10 @@ public abstract class AbstractWebxTests {
     protected TurbineRunDataInternal        rundata;
     protected HttpServletRequest            newRequest;
     protected HttpServletResponse           newResponse;
+
+    static {
+        Servlet3Util.setDisableServlet3Features(true); // 禁用servlet3，因为httpunit还不支持
+    }
 
     @After
     public void clearClient() {

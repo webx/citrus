@@ -44,6 +44,7 @@ import javax.servlet.http.HttpSession;
 
 import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import com.alibaba.citrus.test.runner.TestNameAware;
+import com.alibaba.citrus.util.internal.Servlet3Util;
 import com.alibaba.citrus.util.io.StreamUtil;
 import com.meterware.httpunit.GetMethodWebRequest;
 import com.meterware.httpunit.IllegalRequestParameterException;
@@ -91,6 +92,10 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
     protected RC                            requestContext;
     protected HttpServletRequest            newRequest;
     protected HttpServletResponse           newResponse;
+
+    static {
+        Servlet3Util.setDisableServlet3Features(true); // 禁用servlet3，因为httpunit还不支持
+    }
 
     /** 创建beanFactory。 */
     protected final static void createBeanFactory(String configLocation) {

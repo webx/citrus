@@ -12,10 +12,6 @@
     <name>Development mode tools for Webx</name>
     <dependencies>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-        </dependency>
-        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>citrus-webx-turbine</artifactId>
         </dependency>

@@ -18,23 +18,13 @@
 package com.alibaba.citrus.service.jsp;
 
 import static com.alibaba.citrus.test.TestUtil.*;
-import static com.alibaba.citrus.util.StringUtil.*;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.Enumeration;
-import java.util.Set;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.Servlet;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -147,7 +137,7 @@ public class JspEngineTests extends AbstractJspEngineTests {
     public void contextRoot_getResourceOfWebXml() throws Exception {
         // getResource("/")不存在，"WEB-INF/web.xml"存在
         initServlet("webapp1/WEB-INF/web.xml");
-        ((ServletContextWrapper) servletContext).setSupportGetResourceOfRoot(false); // 使getResource("/")返回null
+        servletContext = createServletContextWrapper(false); // 使getResource("/")返回null
         initFactory();
 
         assertEquals("/mytemplates/mytemplate.jsp", engine.getPathWithinServletContext("/mytemplate.jsp"));
@@ -164,7 +154,7 @@ public class JspEngineTests extends AbstractJspEngineTests {
     public void contextRoot_failed() throws Exception {
         // getResource("/")不存在，WEB-INF/web.xml也不存在
         initServlet("webapp2/WEB-INF-2/web.xml");
-        ((ServletContextWrapper) servletContext).setSupportGetResourceOfRoot(false); // 使getResource("/")返回null
+        servletContext = createServletContextWrapper(false); // 使getResource("/")返回null
 
         try {
             initFactory();
@@ -266,147 +256,6 @@ public class JspEngineTests extends AbstractJspEngineTests {
 
     public static class MyServlet extends HttpServlet {
         private static final long serialVersionUID = -4881126944249115409L;
-    }
-
-    public static class ServletContextWrapper implements ServletContext {
-        private final ServletContext servletContext;
-        private boolean supportGetResourceOfRoot = true;
-
-        public ServletContextWrapper(ServletContext servletContext) {
-            this.servletContext = servletContext;
-        }
-
-        public void setSupportGetResourceOfRoot(boolean supportGetResourceOfRoot) {
-            this.supportGetResourceOfRoot = supportGetResourceOfRoot;
-        }
-
-        /** 判断当resource不存在时，返回null。 */
-        public URL getResource(String path) throws MalformedURLException {
-            if (("/".equals(path) || isEmpty(path)) && !supportGetResourceOfRoot) {
-                return null;
-            }
-
-            URL url = servletContext.getResource(path);
-
-            if (url.getProtocol().equals("file")) {
-                try {
-                    if (!new File(url.toURI()).exists()) {
-                        return null;
-                    }
-                } catch (URISyntaxException e) {
-                    return url;
-                }
-            }
-
-            // 除去末尾的/，配合测试
-            String urlstr = url.toExternalForm();
-
-            if (urlstr.endsWith("/")) {
-                urlstr = urlstr.substring(0, urlstr.length() - 1);
-            }
-
-            return new URL(urlstr);
-        }
-
-        public Set<?> getResourcePaths(String path) {
-            return servletContext.getResourcePaths(path);
-        }
-
-        public Object getAttribute(String name) {
-            return servletContext.getAttribute(name);
-        }
-
-        public Enumeration<?> getAttributeNames() {
-            return servletContext.getAttributeNames();
-        }
-
-        public ServletContext getContext(String uripath) {
-            return servletContext.getContext(uripath);
-        }
-
-        public String getContextPath() {
-            return servletContext.getContextPath();
-        }
-
-        public String getInitParameter(String name) {
-            return servletContext.getInitParameter(name);
-        }
-
-        public Enumeration<?> getInitParameterNames() {
-            return servletContext.getInitParameterNames();
-        }
-
-        public int getMajorVersion() {
-            return servletContext.getMajorVersion();
-        }
-
-        public String getMimeType(String file) {
-            return servletContext.getMimeType(file);
-        }
-
-        public int getMinorVersion() {
-            return servletContext.getMinorVersion();
-        }
-
-        public RequestDispatcher getNamedDispatcher(String name) {
-            return servletContext.getNamedDispatcher(name);
-        }
-
-        public String getRealPath(String path) {
-            return servletContext.getRealPath(path);
-        }
-
-        public RequestDispatcher getRequestDispatcher(String path) {
-            return servletContext.getRequestDispatcher(path);
-        }
-
-        public InputStream getResourceAsStream(String path) {
-            return servletContext.getResourceAsStream(path);
-        }
-
-        public String getServerInfo() {
-            return servletContext.getServerInfo();
-        }
-
-        @Deprecated
-        public Servlet getServlet(String name) throws ServletException {
-            return servletContext.getServlet(name);
-        }
-
-        public String getServletContextName() {
-            return servletContext.getServletContextName();
-        }
-
-        @Deprecated
-        public Enumeration<?> getServletNames() {
-            return servletContext.getServletNames();
-        }
-
-        @Deprecated
-        public Enumeration<?> getServlets() {
-            return servletContext.getServlets();
-        }
-
-        @Deprecated
-        public void log(Exception exception, String msg) {
-            servletContext.log(exception, msg);
-        }
-
-        public void log(String message, Throwable throwable) {
-            servletContext.log(message, throwable);
-        }
-
-        public void log(String msg) {
-            servletContext.log(msg);
-        }
-
-        public void removeAttribute(String name) {
-            servletContext.removeAttribute(name);
-        }
-
-        public void setAttribute(String name, Object object) {
-            servletContext.setAttribute(name, object);
-        }
     }
 
     /** 由于jasper不支持jspx，故做一个假的servlet仅用于测试。在新版的tomcat中，将自动支持jspx。 */

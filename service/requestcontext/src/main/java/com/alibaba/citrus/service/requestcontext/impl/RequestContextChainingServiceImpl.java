@@ -41,6 +41,7 @@ import com.alibaba.citrus.service.requestcontext.RequestContextInfo.FeatureOrder
 import com.alibaba.citrus.service.requestcontext.RequestContextInfo.RequiresFeature;
 import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
 import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.internal.Servlet3Util;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -52,8 +53,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * 通过它可以实现多重包装的HTTP request和response。
  * </p>
  */
-public class RequestContextChainingServiceImpl extends AbstractService<RequestContextChainingService> implements
-                                                                                                      RequestContextChainingService {
+public class RequestContextChainingServiceImpl extends AbstractService<RequestContextChainingService>
+        implements RequestContextChainingService {
     private List<RequestContextFactory<?>> factories;
     private boolean                        sort;
     private boolean                        threadContextInheritable;
@@ -238,22 +239,31 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
                                             HttpServletResponse response) {
         assertInitialized();
 
-        RequestContext requestContext = new SimpleRequestContext(servletContext, request, response);
+        // 如果已经存在处于async状态的request context已经存在，则直接取得并返回之。
+        // 这种情况出现于：当请求是从async恢复时，不需要重新创建request context。
+        RequestContext requestContext = RequestContextUtil.popRequestContextAsync(request);
 
-        // 将requestContext放入request中，以便今后只需要用request就可以取得requestContext。
-        // 及早设置setRequestContext，以便随后的prepareRequestContext就能使用。
-        RequestContextUtil.setRequestContext(requestContext);
-
-        for (RequestContextFactory<?> factory : factories) {
-            requestContext = factory.getRequestContextWrapper(requestContext);
-
-            // 调用<code>requestContext.prepare()</code>方法
-            prepareRequestContext(requestContext);
+        if (requestContext == null) {
+            requestContext = new SimpleRequestContext(servletContext, request, response);
 
             // 将requestContext放入request中，以便今后只需要用request就可以取得requestContext。
+            // 及早设置setRequestContext，以便随后的prepareRequestContext就能使用。
+            RequestContextUtil.setRequestContext(requestContext);
+
+            for (RequestContextFactory<?> factory : factories) {
+                requestContext = factory.getRequestContextWrapper(requestContext);
+
+                // 调用<code>requestContext.prepare()</code>方法
+                prepareRequestContext(requestContext);
+
+                // 将requestContext放入request中，以便今后只需要用request就可以取得requestContext。
+                RequestContextUtil.setRequestContext(requestContext);
+            }
+        } else {
             RequestContextUtil.setRequestContext(requestContext);
         }
 
+        // 无论是否是从async恢复，都需要重新设置thread的上下文环境。
         setupSpringWebEnvironment(requestContext.getRequest());
 
         return requestContext;
@@ -281,16 +291,27 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
     public void commitRequestContext(RequestContext requestContext) throws RequestContextException {
         assertInitialized();
 
-        for (RequestContext rc = requestContext; rc != null; rc = rc.getWrappedRequestContext()) {
-            if (getLogger().isTraceEnabled()) {
-                getLogger().trace("Committing request context: {}", rc.getClass().getSimpleName());
-            }
+        boolean async = Servlet3Util.isAsyncStarted(requestContext.getRequest());
 
-            rc.commit();
+        // 当async处理被启动时，不提交request context，保持其打开状态。延迟到complete时再进行关闭。
+        // 同时保留request attributes中的request context对象，以便被另一个async线程重新取得。
+        if (!async) {
+            for (RequestContext rc = requestContext; rc != null; rc = rc.getWrappedRequestContext()) {
+                if (getLogger().isTraceEnabled()) {
+                    getLogger().trace("Committing request context: {}", rc.getClass().getSimpleName());
+                }
+
+                rc.commit();
+            }
+        } else {
+            if (getLogger().isDebugEnabled()) {
+                getLogger().debug("Keep request context open for asynchronous process");
+            }
         }
 
+        RequestContextUtil.resetRequestContext(requestContext.getRequest(), async);
+
         cleanupSpringWebEnvironment(requestContext.getRequest());
-        RequestContextUtil.removeRequestContext(requestContext.getRequest());
     }
 
     private void setupSpringWebEnvironment(HttpServletRequest request) {

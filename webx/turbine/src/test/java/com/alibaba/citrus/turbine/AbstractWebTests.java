@@ -35,6 +35,7 @@ import com.alibaba.citrus.service.requestcontext.RequestContextChainingService;
 import com.alibaba.citrus.service.requestcontext.rundata.RunData;
 import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import com.alibaba.citrus.turbine.util.TurbineUtil;
+import com.alibaba.citrus.util.internal.Servlet3Util;
 import com.alibaba.citrus.webx.WebxComponent;
 import com.alibaba.citrus.webx.util.WebxUtil;
 import com.meterware.httpunit.PostMethodWebRequest;
@@ -61,6 +62,10 @@ public abstract class AbstractWebTests {
     protected RunData                       rundata;
     protected HttpServletRequest            newRequest;
     protected HttpServletResponse           newResponse;
+
+    static {
+        Servlet3Util.setDisableServlet3Features(true); // 禁用servlet3，因为httpunit还不支持
+    }
 
     protected static ApplicationContext createContext(String name) {
         return new XmlApplicationContext(new FileSystemResource(new File(srcdir, name)), null);

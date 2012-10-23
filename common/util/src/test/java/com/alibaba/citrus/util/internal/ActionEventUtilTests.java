@@ -101,7 +101,8 @@ public class ActionEventUtilTests {
                 }
             }
 
-            expect(request.getParameterNames()).andAnswer(new IAnswer<Enumeration<?>>() {
+            request.getParameterNames();
+            expectLastCall().andAnswer(new IAnswer<Enumeration<?>>() {
                 public Enumeration<?> answer() throws Throwable {
                     return keys.elements();
                 }

@@ -30,7 +30,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * @author Michael Zhou
  */
 public class RequestContextUtil {
-    private static final String REQUEST_CONTEXT_KEY = "_outer_webx3_request_context_";
+    private static final String REQUEST_CONTEXT_KEY       = "_outer_webx3_request_context_";
+    private static final String REQUEST_CONTEXT_ASYNC_KEY = "_outer_webx3_request_context_async_";
 
     /**
      * 取得和当前request相关联的<code>RequestContext</code>对象。
@@ -49,13 +50,32 @@ public class RequestContextUtil {
      */
     public static void setRequestContext(RequestContext requestContext) {
         HttpServletRequest request = requestContext.getRequest();
-
         request.setAttribute(REQUEST_CONTEXT_KEY, requestContext);
     }
 
-    /** 将<code>RequestContext</code>对象和request脱离关联。 */
-    public static void removeRequestContext(HttpServletRequest request) {
+    /** 将<code>RequestContext</code>对象和request脱离关联。假如是async异步模式，则以async方式重新关联。 */
+    public static void resetRequestContext(HttpServletRequest request, boolean async) {
+        RequestContext requestContext = (RequestContext) request.getAttribute(REQUEST_CONTEXT_KEY);
+
         request.removeAttribute(REQUEST_CONTEXT_KEY);
+        request.removeAttribute(REQUEST_CONTEXT_ASYNC_KEY);
+
+        if (requestContext != null && async) {
+            request.setAttribute(REQUEST_CONTEXT_ASYNC_KEY, requestContext);
+        }
+    }
+
+    /**
+     * 取得和当前request相关联的、处于async异步状态的<code>RequestContext</code>对象。
+     * 取得以后request context以后，立即和request解除关联。
+     *
+     * @param request 要检查的request
+     * @return <code>RequestContext</code>对象，如果没找到，则返回<code>null</code>
+     */
+    public static RequestContext popRequestContextAsync(HttpServletRequest request) {
+        RequestContext requestContext = (RequestContext) request.getAttribute(REQUEST_CONTEXT_ASYNC_KEY);
+        request.removeAttribute(REQUEST_CONTEXT_ASYNC_KEY);
+        return requestContext;
     }
 
     /**

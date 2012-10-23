@@ -34,6 +34,7 @@ import com.alibaba.citrus.springext.support.BeanSupport;
 import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
 import com.alibaba.citrus.test.runner.TestNameAware;
+import com.alibaba.citrus.util.internal.Servlet3Util;
 import com.meterware.servletunit.InvocationContext;
 import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
@@ -52,6 +53,10 @@ public abstract class AbstractPullServiceConfigTests {
     protected        PullService                   pullService;
     protected        RequestContextChainingService requestContexts;
     protected        RequestContext                rc;
+
+    static {
+        Servlet3Util.setDisableServlet3Features(true); // 禁用servlet3，因为httpunit还不支持
+    }
 
     @BeforeClass
     public static final void initStaticFactory() {

@@ -320,3 +320,7 @@
 -- Changes in 3.0.10
 
 * Bugfix: 多值field中存在null空值的时候，<all-of-values>验证器不能正确取得null值，导致验证结果错误。
+* 升级servlet api到3.0.1。
+  * 添加动态生成类的工具OverridedMethodBuilder，用来解决如下问题：
+    有些测试代码需要实现ServletContext接口，但是由于servlet3和2版本对于该接口的API不同，导致无法用一套代码同时兼容servlet3和2。用动态生成类工具就可以解决这个问题。
+* 改进request context服务，使之在async模式被启动时，不会提交response。当async线程重新取得控制时，可以重新取得原来的request context。

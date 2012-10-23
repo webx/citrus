@@ -49,7 +49,7 @@ public class StaticFunctionDelegatorBuilderTests {
 
         // specified class loader
         cl = new URLClassLoader(new URL[0]);
-        builder = new StaticFunctionDelegatorBuilder().setClassLoader(cl);
+        builder = new StaticFunctionDelegatorBuilder(cl);
         assertSame(cl, builder.getClassLoader());
     }
 

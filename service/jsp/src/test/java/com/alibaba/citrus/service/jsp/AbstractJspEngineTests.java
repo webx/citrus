@@ -18,23 +18,29 @@
 package com.alibaba.citrus.service.jsp;
 
 import static com.alibaba.citrus.test.TestEnvStatic.*;
+import static com.alibaba.citrus.util.StringUtil.*;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alibaba.citrus.service.jsp.JspEngineTests.ServletContextWrapper;
 import com.alibaba.citrus.service.jsp.impl.JspEngineImpl;
 import com.alibaba.citrus.service.resource.support.ResourceLoadingSupport;
 import com.alibaba.citrus.service.template.TemplateService;
 import com.alibaba.citrus.springext.support.context.XmlWebApplicationContext;
+import com.alibaba.citrus.util.internal.OverridedMethodBuilder;
+import com.alibaba.citrus.util.internal.Servlet3Util;
 import com.meterware.servletunit.InvocationContext;
 import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
 
 public abstract class AbstractJspEngineTests {
+    private   ServletContext           originalServletContext;
     protected ServletContext           servletContext;
     protected HttpServletRequest       request;
     protected HttpServletResponse      response;
@@ -44,12 +50,17 @@ public abstract class AbstractJspEngineTests {
     protected TemplateService          templateService;
     protected JspEngineImpl            engine;
 
+    static {
+        Servlet3Util.setDisableServlet3Features(true); // 禁用servlet3，因为httpunit还不支持
+    }
+
     protected void initServlet(String webXml) throws Exception {
         ServletRunner runner = new ServletRunner(new File(srcdir, webXml), "");
         client = runner.newClient();
         ic = client.newInvocation("http://localhost:8080/app1");
 
-        servletContext = new ServletContextWrapper(ic.getServlet().getServletConfig().getServletContext());
+        originalServletContext = ic.getServlet().getServletConfig().getServletContext();
+        servletContext = createServletContextWrapper(true);
         request = ic.getRequest();
         response = ic.getResponse();
     }
@@ -70,5 +81,37 @@ public abstract class AbstractJspEngineTests {
         engine = (JspEngineImpl) templateService.getTemplateEngine("jsp");
 
         assertNotNull(engine);
+    }
+
+    protected ServletContext createServletContextWrapper(final boolean supportGetResourceOfRoot) {
+        return (ServletContext) new OverridedMethodBuilder(new Class<?>[] { ServletContext.class }, originalServletContext, new Object() {
+            /** 判断当resource不存在时，返回null。 */
+            public URL getResource(String path) throws MalformedURLException {
+                if (("/".equals(path) || isEmpty(path)) && !supportGetResourceOfRoot) {
+                    return null;
+                }
+
+                URL url = originalServletContext.getResource(path);
+
+                if (url.getProtocol().equals("file")) {
+                    try {
+                        if (!new File(url.toURI()).exists()) {
+                            return null;
+                        }
+                    } catch (URISyntaxException e) {
+                        return url;
+                    }
+                }
+
+                // 除去末尾的/，配合测试
+                String urlstr = url.toExternalForm();
+
+                if (urlstr.endsWith("/")) {
+                    urlstr = urlstr.substring(0, urlstr.length() - 1);
+                }
+
+                return new URL(urlstr);
+            }
+        }).toObject();
     }
 }
