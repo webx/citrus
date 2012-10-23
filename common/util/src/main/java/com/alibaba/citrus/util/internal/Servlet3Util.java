@@ -33,12 +33,25 @@ import net.sf.cglib.reflect.FastMethod;
  * @author Michael Zhou
  */
 public class Servlet3Util {
-    private static boolean disableServlet3Features = false;
+    private static final boolean      servlet3;
     private static final MethodInfo[] methods;
     private static final int          request_isAsyncStarted;
     private static final int          request_getAsyncContext;
 
+    private static boolean disableServlet3Features = false;
+
     static {
+        boolean isServlet3;
+
+        try {
+            Servlet3Util.class.getClassLoader().loadClass("javax.servlet.AsyncContext");
+            isServlet3 = true;
+        } catch (ClassNotFoundException e) {
+            isServlet3 = false;
+        }
+
+        servlet3 = isServlet3;
+
         List<MethodInfo> methodList = createLinkedList();
         int count = 0;
 
@@ -49,6 +62,10 @@ public class Servlet3Util {
         request_getAsyncContext = count++;
 
         methods = methodList.toArray(new MethodInfo[methodList.size()]);
+    }
+
+    public static boolean isServlet3() {
+        return servlet3;
     }
 
     /**

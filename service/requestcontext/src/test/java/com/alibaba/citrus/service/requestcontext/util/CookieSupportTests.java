@@ -28,6 +28,7 @@ import java.util.Locale;
 
 import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
+import com.alibaba.citrus.util.internal.Servlet3Util;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -69,7 +70,9 @@ public class CookieSupportTests extends AbstractRequestContextsTests<RequestCont
     @Test
     public void getHeaderValue_invalid() {
         // 包含控制字符
-        cookie = new CookieSupport("my\"name\"", "my\nvalu\te");
+        String name = Servlet3Util.isServlet3() ? "myname" : "my\"name\""; // servlet3 cookie name不能有控制字符
+
+        cookie = new CookieSupport(name, "my\nvalu\te");
 
         try {
             cookie.getCookieHeaderValue();
@@ -101,7 +104,9 @@ public class CookieSupportTests extends AbstractRequestContextsTests<RequestCont
     @Test
     public void toString_invalid() {
         // 包含控制字符
-        cookie = new CookieSupport("my\"name\"", "my\nvalu\te");
+        String name = Servlet3Util.isServlet3() ? "myname" : "my\"name\""; // servlet3 cookie name不能有控制字符
+
+        cookie = new CookieSupport(name, "my\nvalu\te");
 
         assertEquals("Set-Cookie: Control character in cookie value, consider BASE64 encoding your value",
                      cookie.toString());
