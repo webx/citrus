@@ -73,8 +73,10 @@ public class Servlet3Util {
      * 有一种情况：当用httpunit测试时，虽然存在servlet 3.0的API包，但是由于httpunit未实现servlet 3.0而报错。
      * 在这种情况下，可强制禁用servlet 3.0，让测试通过。
      */
-    public static void setDisableServlet3Features(boolean disabled) {
+    public static boolean setDisableServlet3Features(boolean disabled) {
+        boolean originalValue = disableServlet3Features;
         disableServlet3Features = disabled;
+        return originalValue;
     }
 
     public static boolean isAsyncStarted(HttpServletRequest request) {

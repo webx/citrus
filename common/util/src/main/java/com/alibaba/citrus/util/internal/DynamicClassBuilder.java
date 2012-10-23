@@ -29,7 +29,7 @@ import net.sf.cglib.core.Signature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-class DynamicClassBuilder {
+abstract class DynamicClassBuilder {
     private final static int    PUBLIC_STATIC_MODIFIERS = PUBLIC | STATIC;
     protected final      Logger log                     = LoggerFactory.getLogger(getClass());
     private final ClassLoader classLoader;
