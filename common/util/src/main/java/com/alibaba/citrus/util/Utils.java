@@ -78,9 +78,7 @@ public class Utils {
     }, String.class, Object.class));
 
     private static Object createMixin(Class<?>... classes) {
-        StaticFunctionDelegatorBuilder builder = new StaticFunctionDelegatorBuilder();
-
-        builder.setClassLoader(Utils.class.getClassLoader());
+        StaticFunctionDelegatorBuilder builder = new StaticFunctionDelegatorBuilder(Utils.class.getClassLoader());
 
         for (Class<?> clazz : classes) {
             builder.addClass(clazz);

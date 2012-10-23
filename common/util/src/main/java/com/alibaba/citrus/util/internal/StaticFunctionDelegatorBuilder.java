@@ -21,14 +21,10 @@ import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.ClassUtil.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
-import static com.alibaba.citrus.util.ObjectUtil.*;
-import static com.alibaba.citrus.util.StringUtil.*;
-import static java.lang.reflect.Modifier.*;
 
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import com.alibaba.citrus.util.ClassLoaderUtil;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 import net.sf.cglib.asm.Type;
@@ -43,28 +39,21 @@ import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 import net.sf.cglib.reflect.FastClass;
 import net.sf.cglib.reflect.FastMethod;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 将一组静态方法组合成一个对象。
  *
  * @author Michael Zhou
  */
-public class StaticFunctionDelegatorBuilder {
-    private final static int                    PUBLIC_STATIC_MODIFIERS = PUBLIC | STATIC;
-    private final static Logger                 log                     = LoggerFactory.getLogger(StaticFunctionDelegatorBuilder.class);
-    private final        Map<Signature, Method> methods                 = createHashMap();
-    private ClassLoader classLoader;
-    private Class<?>    mixinInterface;
+public class StaticFunctionDelegatorBuilder extends DynamicClassBuilder {
+    private final Map<Signature, Method> methods = createHashMap();
+    private Class<?> mixinInterface;
 
-    public ClassLoader getClassLoader() {
-        return classLoader == null ? ClassLoaderUtil.getContextClassLoader() : classLoader;
+    public StaticFunctionDelegatorBuilder() {
     }
 
-    public StaticFunctionDelegatorBuilder setClassLoader(ClassLoader classLoader) {
-        this.classLoader = classLoader;
-        return this;
+    public StaticFunctionDelegatorBuilder(ClassLoader cl) {
+        super(cl);
     }
 
     public StaticFunctionDelegatorBuilder addClass(Class<?> utilClass) {
@@ -95,36 +84,6 @@ public class StaticFunctionDelegatorBuilder {
         methods.put(sig, method);
 
         return this;
-    }
-
-    private Signature getSignature(Method method, String rename) {
-        String name = defaultIfNull(trimToNull(rename), method.getName());
-        Type returnType = Type.getType(method.getReturnType());
-        Type[] paramTypes = Type.getArgumentTypes(method);
-
-        return new Signature(name, returnType, paramTypes);
-    }
-
-    private boolean isPublicStatic(Method method) {
-        return (method.getModifiers() & PUBLIC_STATIC_MODIFIERS) == PUBLIC_STATIC_MODIFIERS;
-    }
-
-    private boolean isEqualsMethod(Method method) {
-        if (!"equals".equals(method.getName())) {
-            return false;
-        }
-
-        Class<?>[] paramTypes = method.getParameterTypes();
-
-        return paramTypes.length == 1 && paramTypes[0] == Object.class;
-    }
-
-    private boolean isHashCodeMethod(Method method) {
-        return "hashCode".equals(method.getName()) && method.getParameterTypes().length == 0;
-    }
-
-    private boolean isToStringMethod(Method method) {
-        return "toString".equals(method.getName()) && method.getParameterTypes().length == 0;
     }
 
     public Class<?> getMixinInterface() {

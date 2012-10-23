@@ -61,9 +61,7 @@ public class MixinTool implements ToolFactory, ResourceLoaderAware {
     }
 
     public Object createTool() throws Exception {
-        StaticFunctionDelegatorBuilder builder = new StaticFunctionDelegatorBuilder();
-
-        builder.setClassLoader(classLoader);
+        StaticFunctionDelegatorBuilder builder = new StaticFunctionDelegatorBuilder(classLoader);
 
         // add classes
         if (mixinClasses != null) {
