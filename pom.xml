@@ -329,6 +329,10 @@
                         <groupId>jtidy</groupId>
                         <artifactId>jtidy</artifactId>
                     </exclusion>
+                    <exclusion>
+                        <groupId>javax.servlet</groupId>
+                        <artifactId>servlet-api</artifactId>
+                    </exclusion>
                 </exclusions>
             </dependency>
             <dependency>
