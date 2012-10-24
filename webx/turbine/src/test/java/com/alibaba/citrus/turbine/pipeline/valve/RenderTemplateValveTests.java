@@ -24,18 +24,25 @@ import static org.junit.Assert.*;
 import com.alibaba.citrus.service.pipeline.PipelineException;
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import com.alibaba.citrus.service.requestcontext.buffered.BufferedRequestContext;
+import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
 import com.alibaba.citrus.service.template.TemplateNotFoundException;
 import com.alibaba.citrus.turbine.TurbineConstant;
+import com.meterware.httpunit.WebResponse;
+import org.junit.Before;
 import org.junit.Test;
 
 public class RenderTemplateValveTests extends AbstractValveTests {
-    @Test
-    public void test_RenderTemplateValve() throws Exception {
+    @Before
+    public void init() throws Exception {
+        super.init();
+
         pipeline = (PipelineImpl) factory.getBean("renderTemplate");
         assertNotNull(pipeline);
         assertNotNull(rundata);
+    }
 
-        // screen and layout
+    @Test
+    public void render_with_layout() throws Exception {
         getInvocationContext("http://localhost/app1/aaa/bbb/myModule.vm");
         initRequestContext();
 
@@ -46,19 +53,42 @@ public class RenderTemplateValveTests extends AbstractValveTests {
 
         text = findRequestContext(newRequest, BufferedRequestContext.class).popCharBuffer();
         assertEquals("hello and layout", text);
+    }
 
-        // overridden layout
+    @Test
+    public void render_no_buffering() throws Exception {
+        getInvocationContext("http://localhost/app1/aaa/bbb/myModule.vm");
+        initRequestContext();
+
+        // 关闭buffering
+        RequestContextUtil.findRequestContext(newRequest, BufferedRequestContext.class).setBuffering(false);
+
+        rundata.setLayoutEnabled(true);
+        pipeline.newInvocation().invoke();
+        String text = (String) rundata.getContext().get(TurbineConstant.SCREEN_PLACEHOLDER_KEY);
+        assertEquals(null, text);
+
+        WebResponse webResponse = commitRequestContext();
+        assertEquals("hello", webResponse.getText());
+    }
+
+    @Test
+    public void render_override_layout() throws Exception {
         getInvocationContext("http://localhost/app1/aaa/bbb/myModule.vm");
         initRequestContext();
 
         rundata.setLayout("aaa/bbb/myOtherModule");
         pipeline.newInvocation().invoke();
-        text = (String) rundata.getContext().get(TurbineConstant.SCREEN_PLACEHOLDER_KEY);
+
+        String text = (String) rundata.getContext().get(TurbineConstant.SCREEN_PLACEHOLDER_KEY);
         assertEquals("hello", text);
 
         text = findRequestContext(newRequest, BufferedRequestContext.class).popCharBuffer();
         assertEquals("hello and layout2", text);
+    }
 
+    @Test
+    public void render_template_not_found() throws Exception {
         // template not found
         try {
             getInvocationContext("http://localhost/app1/myModule.vm");
