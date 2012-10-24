@@ -67,7 +67,7 @@ public class RenderTemplateValve extends AbstractValve {
             renderTemplate(getScreenTemplate(target), context, rundata);
 
             // layout可被禁用。
-            if (rundata.isLayoutEnabled()) {
+            if (rundata.isLayoutEnabled() && bufferedRequestContext.isBuffering()) {
                 String layoutTemplateOverride = rundata.getLayoutTemplateOverride();
 
                 if (layoutTemplateOverride != null) {

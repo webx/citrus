@@ -45,6 +45,7 @@ import com.alibaba.citrus.webx.servlet.WebxFrameworkFilter;
 import com.alibaba.citrus.webx.util.WebxUtil;
 import com.meterware.httpunit.GetMethodWebRequest;
 import com.meterware.httpunit.WebRequest;
+import com.meterware.httpunit.WebResponse;
 import com.meterware.servletunit.InvocationContext;
 import com.meterware.servletunit.PatchedServletRunner;
 import com.meterware.servletunit.ServletRunner;
@@ -163,9 +164,9 @@ public abstract class AbstractWebxTests {
         afterInitRequestContext();
     }
 
-    protected final void commitRequestContext() throws Exception {
+    protected final WebResponse commitRequestContext() throws Exception {
         requestContexts.commitRequestContext(RequestContextUtil.getRequestContext(newRequest));
-        client.getResponse(invocationContext);
+        return client.getResponse(invocationContext);
     }
 
     protected void afterInitRequestContext() {
