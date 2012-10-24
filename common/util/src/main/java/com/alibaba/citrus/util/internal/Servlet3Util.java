@@ -134,7 +134,7 @@ public class Servlet3Util {
 
             try {
                 javaMethod = declaringClass.getMethod(methodName, parameterTypes);
-                method = FastClass.create(declaringClass).getMethod(javaMethod);
+                method = FastClass.create(getClass().getClassLoader(), declaringClass).getMethod(javaMethod);
             } catch (NoSuchMethodException e) {
                 method = null;
             }

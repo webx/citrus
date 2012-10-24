@@ -66,7 +66,7 @@ public class OverridedMethodBuilder extends DynamicClassBuilder {
             overriderMethods.put(getSignature(method, null), method);
         }
 
-        FastClass fc = FastClass.create(overrider.getClass());
+        FastClass fc = FastClass.create(cl, overrider.getClass());
 
         for (Class<?> interfaceClass : interfaces) {
             assertTrue(interfaceClass.isInstance(delegatedObject), "%s is not of %s", delegatedObject, interfaceClass);
