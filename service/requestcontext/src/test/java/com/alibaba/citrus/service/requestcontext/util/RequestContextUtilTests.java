@@ -85,38 +85,11 @@ public class RequestContextUtilTests {
     }
 
     @Test
-    public void resetRequestContext() {
+    public void removeRequestContext() {
         RequestContextUtil.setRequestContext(requestContext);
         assertSame(requestContext, attrs.get("_outer_webx3_request_context_"));
-        assertSame(null, attrs.get("_outer_webx3_request_context_async_"));
 
-        RequestContextUtil.resetRequestContext(request, false);
+        RequestContextUtil.removeRequestContext(request);
         assertSame(null, attrs.get("_outer_webx3_request_context_"));
-        assertSame(null, attrs.get("_outer_webx3_request_context_async_"));
-    }
-
-    @Test
-    public void resetRequestContext_async() {
-        RequestContextUtil.setRequestContext(requestContext);
-        assertSame(requestContext, attrs.get("_outer_webx3_request_context_"));
-        assertSame(null, attrs.get("_outer_webx3_request_context_async_"));
-
-        RequestContextUtil.resetRequestContext(request, true);
-        assertSame(null, attrs.get("_outer_webx3_request_context_"));
-        assertSame(requestContext, attrs.get("_outer_webx3_request_context_async_"));
-    }
-
-    @Test
-    public void popRequestContextAsync() {
-        RequestContextUtil.setRequestContext(requestContext);
-        RequestContextUtil.resetRequestContext(request, true);
-
-        assertSame(null, attrs.get("_outer_webx3_request_context_"));
-        assertSame(requestContext, attrs.get("_outer_webx3_request_context_async_"));
-
-        assertSame(requestContext, RequestContextUtil.popRequestContextAsync(request));
-
-        assertSame(null, attrs.get("_outer_webx3_request_context_"));
-        assertSame(null, attrs.get("_outer_webx3_request_context_async_"));
     }
 }

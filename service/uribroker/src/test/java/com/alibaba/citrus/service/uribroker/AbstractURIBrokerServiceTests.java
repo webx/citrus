@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.citrus.service.requestcontext.RequestContextChainingService;
 import com.alibaba.citrus.service.uribroker.impl.URIBrokerServiceImpl;
 import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
+import com.alibaba.citrus.util.internal.Servlet3Util;
 import com.meterware.servletunit.InvocationContext;
 import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
@@ -45,6 +46,10 @@ public abstract class AbstractURIBrokerServiceTests {
     protected        RequestContextChainingService requestContexts;
     protected        HttpServletRequest            request;
     protected        URIBrokerServiceImpl          service;
+
+    static {
+        Servlet3Util.setDisableServlet3Features(true); // 禁用servlet3，因为httpunit还不支持
+    }
 
     @BeforeClass
     public static void initFactory() {

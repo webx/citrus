@@ -30,8 +30,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * @author Michael Zhou
  */
 public class RequestContextUtil {
-    private static final String REQUEST_CONTEXT_KEY       = "_outer_webx3_request_context_";
-    private static final String REQUEST_CONTEXT_ASYNC_KEY = "_outer_webx3_request_context_async_";
+    private static final String REQUEST_CONTEXT_KEY = "_outer_webx3_request_context_";
 
     /**
      * 取得和当前request相关联的<code>RequestContext</code>对象。
@@ -53,29 +52,9 @@ public class RequestContextUtil {
         request.setAttribute(REQUEST_CONTEXT_KEY, requestContext);
     }
 
-    /** 将<code>RequestContext</code>对象和request脱离关联。假如是async异步模式，则以async方式重新关联。 */
-    public static void resetRequestContext(HttpServletRequest request, boolean async) {
-        RequestContext requestContext = (RequestContext) request.getAttribute(REQUEST_CONTEXT_KEY);
-
+    /** 将<code>RequestContext</code>对象和request脱离关联。 */
+    public static void removeRequestContext(HttpServletRequest request) {
         request.removeAttribute(REQUEST_CONTEXT_KEY);
-        request.removeAttribute(REQUEST_CONTEXT_ASYNC_KEY);
-
-        if (requestContext != null && async) {
-            request.setAttribute(REQUEST_CONTEXT_ASYNC_KEY, requestContext);
-        }
-    }
-
-    /**
-     * 取得和当前request相关联的、处于async异步状态的<code>RequestContext</code>对象。
-     * 取得以后request context以后，立即和request解除关联。
-     *
-     * @param request 要检查的request
-     * @return <code>RequestContext</code>对象，如果没找到，则返回<code>null</code>
-     */
-    public static RequestContext popRequestContextAsync(HttpServletRequest request) {
-        RequestContext requestContext = (RequestContext) request.getAttribute(REQUEST_CONTEXT_ASYNC_KEY);
-        request.removeAttribute(REQUEST_CONTEXT_ASYNC_KEY);
-        return requestContext;
     }
 
     /**
@@ -85,8 +64,7 @@ public class RequestContextUtil {
      * @param requestContextInterface 要查找的类
      * @return <code>RequestContext</code>对象，如果没找到，则返回<code>null</code>
      */
-    public static <R extends RequestContext> R findRequestContext(HttpServletRequest request,
-                                                                  Class<R> requestContextInterface) {
+    public static <R extends RequestContext> R findRequestContext(HttpServletRequest request, Class<R> requestContextInterface) {
         return findRequestContext(getRequestContext(request), requestContextInterface);
     }
 
@@ -97,8 +75,7 @@ public class RequestContextUtil {
      * @param requestContextInterface 要查找的类
      * @return <code>RequestContext</code>对象，如果没找到，则返回<code>null</code>
      */
-    public static <R extends RequestContext> R findRequestContext(RequestContext requestContext,
-                                                                  Class<R> requestContextInterface) {
+    public static <R extends RequestContext> R findRequestContext(RequestContext requestContext, Class<R> requestContextInterface) {
         do {
             if (requestContextInterface.isInstance(requestContext)) {
                 break;

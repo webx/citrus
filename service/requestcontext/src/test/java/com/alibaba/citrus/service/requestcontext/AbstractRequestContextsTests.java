@@ -98,7 +98,7 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
     }
 
     /** 创建beanFactory。 */
-    protected final static void createBeanFactory(String configLocation) {
+    protected static void createBeanFactory(String configLocation) {
         factory = new XmlApplicationContext(new FileSystemResource(new File(srcdir, configLocation)));
     }
 

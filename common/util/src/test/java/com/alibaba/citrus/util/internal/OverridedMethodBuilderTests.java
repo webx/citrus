@@ -42,6 +42,10 @@ public class OverridedMethodBuilderTests {
                 return "another name";
             }
 
+            public String getFirstName(Object s) {
+                return String.valueOf(s);
+            }
+
             public void throwException2(Throwable e) throws Throwable {
                 throw e;
             }
@@ -58,12 +62,8 @@ public class OverridedMethodBuilderTests {
             assertThat(e, exception("interfaces"));
         }
 
-        try {
-            new OverridedMethodBuilder(new Class<?>[] { Serializable.class }, null, new Object());
-            fail();
-        } catch (IllegalArgumentException e) {
-            assertThat(e, exception("delegatedObject"));
-        }
+        // delegated object == null是允许的
+        new OverridedMethodBuilder(new Class<?>[] { Serializable.class }, null, new Object());
 
         try {
             new OverridedMethodBuilder(new Class<?>[] { Serializable.class }, new String(), null);
@@ -123,8 +123,31 @@ public class OverridedMethodBuilderTests {
     }
 
     @Test
+    public void invoke_without_DelegatedObject() {
+        builder = new OverridedMethodBuilder(new Class<?>[] { TestInterface.class }, null, new Object() {
+            public String getFirstName() {
+                return "another name";
+            }
+
+            public void throwException2(Throwable e) throws Throwable {
+                throw e;
+            }
+        });
+        newObject = (TestInterface) builder.toObject();
+
+        try {
+            newObject.getLastName();
+        } catch (UnsupportedOperationException e) {
+            assertThat(e, exception("getLastName()"));
+        }
+
+        assertEquals("another name", newObject.getFirstName());
+    }
+
+    @Test
     public void invokeOverridedMethod() {
         assertEquals("another name", newObject.getFirstName());
+        assertEquals("myname", newObject.getFirstName("myname")); // string parameter as an object
 
         try {
             newObject.throwException2(new IllegalArgumentException());
@@ -146,6 +169,8 @@ public class OverridedMethodBuilderTests {
 
         String getFirstName();
 
+        String getFirstName(String s);
+
         void throwException(Throwable e) throws Throwable;
 
         void throwException2(Throwable e) throws Throwable;
@@ -158,6 +183,10 @@ public class OverridedMethodBuilderTests {
 
         public String getFirstName() {
             return "Michael"; // to be overrided
+        }
+
+        public String getFirstName(String s) {
+            return null;
         }
 
         public void throwException(Throwable e) throws Throwable {

@@ -23,6 +23,7 @@ import static com.alibaba.citrus.util.CollectionUtil.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.Map;
 
 import net.sf.cglib.core.Signature;
@@ -56,31 +57,64 @@ public class OverridedMethodBuilder extends DynamicClassBuilder {
         super(cl);
 
         this.interfaces = assertNotNull(interfaces, "interfaces");
-        this.delegatedObject = assertNotNull(delegatedObject, "delegatedObject");
+        this.delegatedObject = delegatedObject; // 当delegatedObject为null时，overrider必须实现所有接口的方法。
         this.overrider = assertNotNull(overrider, "overrider");
         this.overridedMethods = createHashMap();
 
-        Map<Signature, Method> overriderMethods = createHashMap();
+        Map<String, List<Method>> overriderMethods = createHashMap();
 
         for (Method method : overrider.getClass().getMethods()) {
-            overriderMethods.put(getSignature(method, null), method);
+            String methodName = method.getName();
+            List<Method> methods = overriderMethods.get(methodName);
+
+            if (methods == null) {
+                methods = createLinkedList();
+                overriderMethods.put(methodName, methods);
+            }
+
+            methods.add(method);
         }
 
         FastClass fc = FastClass.create(cl, overrider.getClass());
 
         for (Class<?> interfaceClass : interfaces) {
-            assertTrue(interfaceClass.isInstance(delegatedObject), "%s is not of %s", delegatedObject, interfaceClass);
+            assertTrue(delegatedObject == null || interfaceClass.isInstance(delegatedObject), "%s is not of %s", delegatedObject, interfaceClass);
 
-            for (Method method : interfaceClass.getMethods()) {
-                Signature sig = getSignature(method, null);
-                Method overriderMethod = overriderMethods.get(sig);
+            for (Method interfaceMethod : interfaceClass.getMethods()) {
+                Signature sig = getSignature(interfaceMethod, null);
+                Method overriderMethod = getCompatibleOverrideMethod(overriderMethods, interfaceMethod);
 
                 if (overriderMethod != null) {
-                    log.trace("Overrided method: {}", getSimpleMethodSignature(method, false, true, true, false));
+                    log.trace("Overrided method: {}", getSimpleMethodSignature(interfaceMethod, false, true, true, false));
                     overridedMethods.put(sig, fc.getMethod(overriderMethod));
                 }
             }
         }
+    }
+
+    private Method getCompatibleOverrideMethod(Map<String, List<Method>> overriderMethods, Method interfaceMethod) {
+        List<Method> methods = overriderMethods.get(interfaceMethod.getName());
+
+        if (methods != null) {
+            for (Method overriderMethod : methods) {
+                if (overriderMethod.getParameterTypes().length != interfaceMethod.getParameterTypes().length) {
+                    continue;
+                }
+
+                boolean compatible = true;
+
+                for (int i = 0; i < overriderMethod.getParameterTypes().length; i++) {
+                    if (!overriderMethod.getParameterTypes()[i].isAssignableFrom(interfaceMethod.getParameterTypes()[i])) {
+                        compatible = false;
+                        break;
+                    }
+                }
+
+                return overriderMethod;
+            }
+        }
+
+        return null;
     }
 
     public Object toObject() {
@@ -103,6 +137,10 @@ public class OverridedMethodBuilder extends DynamicClassBuilder {
                 new MethodInterceptor() {
                     public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
                             throws Throwable {
+                        if (delegatedObject == null) {
+                            throw new UnsupportedOperationException(getSimpleMethodSignature(method));
+                        }
+
                         return proxy.invoke(delegatedObject, args);
                     }
                 },

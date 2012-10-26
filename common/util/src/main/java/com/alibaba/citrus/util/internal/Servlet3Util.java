@@ -17,6 +17,7 @@
 
 package com.alibaba.citrus.util.internal;
 
+import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 
 import java.lang.reflect.InvocationTargetException;
@@ -33,25 +34,28 @@ import net.sf.cglib.reflect.FastMethod;
  * @author Michael Zhou
  */
 public class Servlet3Util {
-    private static final boolean      servlet3;
+    public static final Enum<?> DISPATCHER_TYPE_FORWARD = getEnum("javax.servlet.DispatcherType", "FORWARD");
+    public static final Enum<?> DISPATCHER_TYPE_INCLUDE = getEnum("javax.servlet.DispatcherType", "INCLUDE");
+    public static final Enum<?> DISPATCHER_TYPE_REQUEST = getEnum("javax.servlet.DispatcherType", "REQUEST");
+    public static final Enum<?> DISPATCHER_TYPE_ASYNC   = getEnum("javax.servlet.DispatcherType", "ASYNC");
+    public static final Enum<?> DISPATCHER_TYPE_ERROR   = getEnum("javax.servlet.DispatcherType", "ERROR");
+
+    public static final Class<?> asyncContextClass  = loadClass("javax.servlet.AsyncContext");
+    public static final Class<?> asyncListenerClass = loadClass("javax.servlet.AsyncListener");
+    public static final Class<?> asyncEventClass    = loadClass("javax.servlet.AsyncEvent");
+
     private static final MethodInfo[] methods;
     private static final int          request_isAsyncStarted;
     private static final int          request_getAsyncContext;
+    private static final int          request_getDispatcherType;
+    private static final int          asyncContext_addListener;
+    private static final int          asyncEvent_getAsyncContext;
+
+    private static final boolean servlet3 = asyncContextClass != null;
 
     private static boolean disableServlet3Features = false;
 
     static {
-        boolean isServlet3;
-
-        try {
-            Servlet3Util.class.getClassLoader().loadClass("javax.servlet.AsyncContext");
-            isServlet3 = true;
-        } catch (ClassNotFoundException e) {
-            isServlet3 = false;
-        }
-
-        servlet3 = isServlet3;
-
         List<MethodInfo> methodList = createLinkedList();
         int count = 0;
 
@@ -60,6 +64,15 @@ public class Servlet3Util {
 
         methodList.add(new MethodInfo(Object.class, null, HttpServletRequest.class, "getAsyncContext"));
         request_getAsyncContext = count++;
+
+        methodList.add(new MethodInfo(Enum.class, null, HttpServletRequest.class, "getDispatcherType"));
+        request_getDispatcherType = count++;
+
+        methodList.add(new MethodInfo(null, null, asyncContextClass, "addListener", asyncListenerClass));
+        asyncContext_addListener = count++;
+
+        methodList.add(new MethodInfo(asyncContextClass, null, asyncEventClass, "getAsyncContext"));
+        asyncEvent_getAsyncContext = count++;
 
         methods = methodList.toArray(new MethodInfo[methodList.size()]);
     }
@@ -93,6 +106,39 @@ public class Servlet3Util {
         return invoke(index, request);
     }
 
+    public static Object /* AsyncContext */ getAsyncContextFromEvent(Object /* AsyncEvent */ event) {
+        return invoke(asyncEvent_getAsyncContext, event);
+    }
+
+    public static boolean isDispatcherType(HttpServletRequest request, Enum<?> type) {
+        Enum<?> dispatcherType = (Enum<?>) invoke(request_getDispatcherType, request);
+
+        if (dispatcherType == null || type == null) {
+            return false; // unsupported
+        } else {
+            return dispatcherType == type;
+        }
+    }
+
+    public static void addAsyncListener(Object /* AsyncContext */ asyncContext, Object /* AsyncListener */ listener) {
+        invoke(asyncContext_addListener, asyncContext, listener);
+    }
+
+    public static void registerAsyncListener(HttpServletRequest request, Object listenerImpl) {
+        Object /* AsyncContext */ asyncContext = getAsyncContext(request);
+        Object listener = new OverridedMethodBuilder(new Class<?>[] { asyncListenerClass }, null, listenerImpl).toObject();
+
+        invoke(asyncContext_addListener, asyncContext, listener);
+    }
+
+    private static Class<?> loadClass(String className) {
+        try {
+            return Servlet3Util.class.getClassLoader().loadClass(className);
+        } catch (ClassNotFoundException e) {
+            return null;
+        }
+    }
+
     private static Object invoke(int methodIndex, Object target, Object... args) {
         MethodInfo method = methods[methodIndex];
 
@@ -120,6 +166,25 @@ public class Servlet3Util {
         }
     }
 
+    private static Enum<?> getEnum(String className, String name) {
+        Class<?> enumClass = null;
+
+        try {
+            enumClass = Servlet3Util.class.getClassLoader().loadClass(className);
+        } catch (ClassNotFoundException e) {
+            return null;
+        }
+
+        assertTrue(Enum.class.isAssignableFrom(enumClass), "%s is not a enum class", enumClass.getName());
+
+        try {
+            return (Enum<?>) enumClass.getField(name).get(null);
+        } catch (Exception e) {
+            unexpectedException(e);
+            return null;
+        }
+    }
+
     private static class MethodInfo {
         private final FastMethod method;
         private final Object     defaultReturnValue;
@@ -130,13 +195,14 @@ public class Servlet3Util {
             this.defaultReturnValue = defaultReturnValue;
 
             Method javaMethod;
-            FastMethod method;
+            FastMethod method = null;
 
-            try {
-                javaMethod = declaringClass.getMethod(methodName, parameterTypes);
-                method = FastClass.create(getClass().getClassLoader(), declaringClass).getMethod(javaMethod);
-            } catch (NoSuchMethodException e) {
-                method = null;
+            if (declaringClass != null) {
+                try {
+                    javaMethod = declaringClass.getMethod(methodName, parameterTypes);
+                    method = FastClass.create(getClass().getClassLoader(), declaringClass).getMethod(javaMethod);
+                } catch (NoSuchMethodException e) {
+                }
             }
 
             this.method = method;

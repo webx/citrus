@@ -22,6 +22,7 @@ import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.ObjectUtil.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -239,9 +240,13 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
                                             HttpServletResponse response) {
         assertInitialized();
 
-        // 如果已经存在处于async状态的request context已经存在，则直接取得并返回之。
-        // 这种情况出现于：当请求是从async恢复时，不需要重新创建request context。
-        RequestContext requestContext = RequestContextUtil.popRequestContextAsync(request);
+        // 异步请求（dispatcherType == ASYNC）开始时，如果已经存在request context，则直接取得并返回之。
+        boolean asyncDispatcher = Servlet3Util.isDispatcherType(request, Servlet3Util.DISPATCHER_TYPE_ASYNC);
+        RequestContext requestContext = null;
+
+        if (asyncDispatcher) {
+            requestContext = RequestContextUtil.getRequestContext(request);
+        }
 
         if (requestContext == null) {
             requestContext = new SimpleRequestContext(servletContext, request, response);
@@ -259,8 +264,6 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
                 // 将requestContext放入request中，以便今后只需要用request就可以取得requestContext。
                 RequestContextUtil.setRequestContext(requestContext);
             }
-        } else {
-            RequestContextUtil.setRequestContext(requestContext);
         }
 
         // 无论是否是从async恢复，都需要重新设置thread的上下文环境。
@@ -288,30 +291,69 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
      * @param requestContext 要初始化的request context
      * @throws RequestContextException 如果失败
      */
-    public void commitRequestContext(RequestContext requestContext) throws RequestContextException {
+    public void commitRequestContext(final RequestContext requestContext) throws RequestContextException {
         assertInitialized();
 
-        boolean async = Servlet3Util.isAsyncStarted(requestContext.getRequest());
+        // 异步处理状态：
+        // - request.isAsyncStarted()    == true    - 当request.startAsync()被调用以后，且asyncContext.dispatch()及complete()未被调用前。
+        // - request.getDispatcherType() == ASYNC   - 当asyncContext.dispatch()被调用以后，从dispatcher线程返回以前。
+        //
+        // 有四种情况会执行到这里：
+        // 1. 普通请求（dispatcherType == REQUEST）结束时，request.startAsync()已被调用（isAsyncStarted == true）
+        //    此时，需要注册AsyncListener.onComplete，使request context延迟到async结束时才被提交。
+        // 2. 普通请求（dispatcherType == REQUEST）结束时，request.startAsync()未被调用或者异步已经结束（isAsyncStarted == false）
+        //    此时，立即提交request context。
+        // 3. 异步请求（dispatcherType == ASYNC）结束时，request.startAsync()再次被调用（isAsyncStarted == true）
+        //    此时，不需要在这里注册AsyncListener，而是在前一个AsyncListener.onAsyncStarted()中重置listener，使request context延迟到async结束时才被提交。
+        // 4. 异步请求（dispatcherType == ASYNC）结束时，request.startAsync()未被调用或者异步已经结束（isAsyncStarted == false）
+        //    此时不需要做什么，因为request context已经被提交。
 
-        // 当async处理被启动时，不提交request context，保持其打开状态。延迟到complete时再进行关闭。
-        // 同时保留request attributes中的request context对象，以便被另一个async线程重新取得。
-        if (!async) {
-            for (RequestContext rc = requestContext; rc != null; rc = rc.getWrappedRequestContext()) {
-                if (getLogger().isTraceEnabled()) {
-                    getLogger().trace("Committing request context: {}", rc.getClass().getSimpleName());
+        final HttpServletRequest request = requestContext.getRequest();
+        boolean asyncDispatcher = Servlet3Util.isDispatcherType(request, Servlet3Util.DISPATCHER_TYPE_ASYNC);
+        boolean asyncStarted = Servlet3Util.isAsyncStarted(request);
+
+        if (!asyncDispatcher) {
+            if (asyncStarted) {
+                // 情况1
+                if (getLogger().isDebugEnabled()) {
+                    getLogger().debug("Keep request context open for asynchronous process");
                 }
 
-                rc.commit();
-            }
-        } else {
-            if (getLogger().isDebugEnabled()) {
-                getLogger().debug("Keep request context open for asynchronous process");
+                Servlet3Util.registerAsyncListener(request, new Object() {
+                    public void onComplete(Object /* AsyncEvent */ event) throws IOException {
+                        doCommit(requestContext);
+                    }
+
+                    public void onTimeout(Object /* AsyncEvent */ event) throws IOException {
+                    }
+
+                    public void onError(Object /* AsyncEvent */ event) throws IOException {
+                    }
+
+                    public void onStartAsync(Object /* AsyncEvent */ event) throws IOException {
+                        // 在情况3时自动调用
+                        Object /* AsyncContext */ asyncContext = Servlet3Util.getAsyncContextFromEvent(event);
+                        Servlet3Util.registerAsyncListener(request, this);
+                    }
+                });
+            } else {
+                // 情况2
+                doCommit(requestContext);
             }
         }
 
-        RequestContextUtil.resetRequestContext(requestContext.getRequest(), async);
-
+        RequestContextUtil.removeRequestContext(requestContext.getRequest());
         cleanupSpringWebEnvironment(requestContext.getRequest());
+    }
+
+    private void doCommit(RequestContext requestContext) {
+        for (RequestContext rc = requestContext; rc != null; rc = rc.getWrappedRequestContext()) {
+            if (getLogger().isTraceEnabled()) {
+                getLogger().trace("Committing request context: {}", rc.getClass().getSimpleName());
+            }
+
+            rc.commit();
+        }
     }
 
     private void setupSpringWebEnvironment(HttpServletRequest request) {
