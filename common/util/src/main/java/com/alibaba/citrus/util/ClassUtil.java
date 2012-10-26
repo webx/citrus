@@ -406,6 +406,11 @@ public class ClassUtil {
     }
 
     /** 取得简洁的method描述。 */
+    public static String getSimpleMethodSignature(Method method, boolean withClassName) {
+        return getSimpleMethodSignature(method, false, false, withClassName, false);
+    }
+
+    /** 取得简洁的method描述。 */
     public static String getSimpleMethodSignature(Method method, boolean withModifiers, boolean withReturnType,
                                                   boolean withClassName, boolean withExceptionType) {
         if (method == null) {

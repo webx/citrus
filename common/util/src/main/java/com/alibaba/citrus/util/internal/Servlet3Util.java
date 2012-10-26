@@ -126,7 +126,7 @@ public class Servlet3Util {
 
     public static void registerAsyncListener(HttpServletRequest request, Object listenerImpl) {
         Object /* AsyncContext */ asyncContext = getAsyncContext(request);
-        Object listener = new OverridedMethodBuilder(new Class<?>[] { asyncListenerClass }, null, listenerImpl).toObject();
+        Object listener = new InterfaceImplementorBuilder().addInterface(asyncListenerClass).setOverrider(listenerImpl).toObject();
 
         invoke(asyncContext_addListener, asyncContext, listener);
     }

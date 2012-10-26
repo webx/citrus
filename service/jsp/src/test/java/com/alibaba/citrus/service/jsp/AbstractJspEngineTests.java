@@ -33,7 +33,7 @@ import com.alibaba.citrus.service.jsp.impl.JspEngineImpl;
 import com.alibaba.citrus.service.resource.support.ResourceLoadingSupport;
 import com.alibaba.citrus.service.template.TemplateService;
 import com.alibaba.citrus.springext.support.context.XmlWebApplicationContext;
-import com.alibaba.citrus.util.internal.OverridedMethodBuilder;
+import com.alibaba.citrus.util.internal.InterfaceImplementorBuilder;
 import com.alibaba.citrus.util.internal.Servlet3Util;
 import com.meterware.servletunit.InvocationContext;
 import com.meterware.servletunit.ServletRunner;
@@ -84,7 +84,7 @@ public abstract class AbstractJspEngineTests {
     }
 
     protected ServletContext createServletContextWrapper(final boolean supportGetResourceOfRoot) {
-        return (ServletContext) new OverridedMethodBuilder(new Class<?>[] { ServletContext.class }, originalServletContext, new Object() {
+        return (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).setBaseObject(originalServletContext).setOverrider(new Object() {
             /** 判断当resource不存在时，返回null。 */
             public URL getResource(String path) throws MalformedURLException {
                 if (("/".equals(path) || isEmpty(path)) && !supportGetResourceOfRoot) {

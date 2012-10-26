@@ -37,7 +37,7 @@ import javax.servlet.http.HttpServlet;
 import com.alibaba.citrus.service.resource.support.ResourceLoadingSupport;
 import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import com.alibaba.citrus.springext.support.context.XmlWebApplicationContext;
-import com.alibaba.citrus.util.internal.OverridedMethodBuilder;
+import com.alibaba.citrus.util.internal.InterfaceImplementorBuilder;
 import com.meterware.servletunit.InvocationContext;
 import com.meterware.servletunit.ServletRunner;
 import com.meterware.servletunit.ServletUnitClient;
@@ -249,7 +249,7 @@ public abstract class AbstractResourceLoadingTests {
      * 以下实现可在servlet 2.5/3.0上执行。
      */
     private static ServletContext createServletContextWrapper(final ServletContext servletContext) {
-        return (ServletContext) new OverridedMethodBuilder(new Class<?>[] { ServletContext.class }, servletContext, new Object() {
+        return (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).setBaseObject(servletContext).setOverrider(new Object() {
             public URL getResource(String path) throws MalformedURLException {
                 URL presetResult = nextGetResourceURL.get();
 

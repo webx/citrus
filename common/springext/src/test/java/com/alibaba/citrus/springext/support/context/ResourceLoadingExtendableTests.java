@@ -35,7 +35,7 @@ import com.alibaba.citrus.test.runner.Prototyped;
 import com.alibaba.citrus.test.runner.Prototyped.Prototypes;
 import com.alibaba.citrus.test.runner.Prototyped.TestData;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
-import com.alibaba.citrus.util.internal.OverridedMethodBuilder;
+import com.alibaba.citrus.util.internal.InterfaceImplementorBuilder;
 import com.meterware.servletunit.ServletRunner;
 import org.junit.Before;
 import org.junit.Test;
@@ -220,7 +220,7 @@ public class ResourceLoadingExtendableTests implements Cloneable {
      * 以下实现可在servlet 2.5/3.0上执行。
      */
     private static ServletContext createServletContextWrapper(final ServletContext servletContext) {
-        return (ServletContext) new OverridedMethodBuilder(new Class<?>[] { ServletContext.class }, servletContext, new Object() {
+        return (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).setBaseObject(servletContext).setOverrider(new Object() {
             public Set<String> getResourcePaths(String path) {
                 try {
                     URL baseURL = servletContext.getResource(path);

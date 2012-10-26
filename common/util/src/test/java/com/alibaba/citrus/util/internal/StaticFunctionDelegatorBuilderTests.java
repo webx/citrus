@@ -29,10 +29,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.alibaba.citrus.util.ArrayUtil;
-import com.alibaba.citrus.util.ObjectUtil;
-import com.alibaba.citrus.util.StringEscapeUtil;
-import com.alibaba.citrus.util.StringUtil;
 import org.junit.Test;
 
 public class StaticFunctionDelegatorBuilderTests {
@@ -233,21 +229,5 @@ public class StaticFunctionDelegatorBuilderTests {
         public static String func2(int i) throws IOException {
             return null;
         }
-    }
-
-    public static void main(String[] args) throws Exception {
-        StaticFunctionDelegatorBuilder builder = new StaticFunctionDelegatorBuilder();
-
-        builder.addClass(Math.class);
-        builder.addClass(StringUtil.class);
-        builder.addClass(StringEscapeUtil.class);
-        builder.addClass(ArrayUtil.class);
-        builder.addClass(ObjectUtil.class);
-
-        Object util = builder.toObject();
-
-        Method abs = util.getClass().getMethod("getLength", String.class);
-
-        System.out.println(abs.invoke(util, "abcd"));
     }
 }
