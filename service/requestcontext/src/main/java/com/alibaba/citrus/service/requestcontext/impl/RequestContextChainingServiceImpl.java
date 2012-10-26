@@ -267,9 +267,13 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
         }
 
         // 无论是否是从async恢复，都需要重新设置thread的上下文环境。
-        setupSpringWebEnvironment(requestContext.getRequest());
+        bind(requestContext.getRequest());
 
         return requestContext;
+    }
+
+    public void bind(HttpServletRequest request) {
+        setupSpringWebEnvironment(request);
     }
 
     /**
@@ -343,7 +347,11 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
         }
 
         RequestContextUtil.removeRequestContext(requestContext.getRequest());
-        cleanupSpringWebEnvironment(requestContext.getRequest());
+        unbind(requestContext.getRequest());
+    }
+
+    public void unbind(HttpServletRequest request) {
+        cleanupSpringWebEnvironment(request);
     }
 
     private void doCommit(RequestContext requestContext) {
