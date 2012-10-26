@@ -48,6 +48,7 @@ import net.sf.cglib.reflect.FastMethod;
 public class StaticFunctionDelegatorBuilder extends DynamicClassBuilder {
     private final Map<Signature, Method> methods = createHashMap();
     private Class<?> mixinInterface;
+    private Enhancer generator;
 
     public StaticFunctionDelegatorBuilder() {
     }
@@ -119,60 +120,62 @@ public class StaticFunctionDelegatorBuilder extends DynamicClassBuilder {
     }
 
     public Object toObject() {
-        final Class<?> intfs = getMixinInterface();
-        final Map<Method, FastMethod> methodMappings = getMethodMappings(intfs);
+        if (generator == null) {
+            final Class<?> intfs = getMixinInterface();
+            final Map<Method, FastMethod> methodMappings = getMethodMappings(intfs);
 
-        Enhancer generator = new Enhancer();
+            generator = new Enhancer();
 
-        generator.setClassLoader(getClassLoader());
-        generator.setSuperclass(Object.class);
-        generator.setInterfaces(new Class<?>[] { intfs });
+            generator.setClassLoader(getClassLoader());
+            generator.setSuperclass(Object.class);
+            generator.setInterfaces(new Class<?>[] { intfs });
 
-        generator.setCallbacks(new Callback[] {
-                // default callback
-                new MethodInterceptor() {
-                    public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
-                            throws Throwable {
-                        return proxy.invokeSuper(obj, args);
-                    }
-                },
-
-                // toString callback
-                new MethodInterceptor() {
-                    public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
-                            throws Throwable {
-                        MapBuilder mb = new MapBuilder().setPrintCount(true).setSortKeys(true);
-
-                        for (Map.Entry<Method, FastMethod> entry : methodMappings.entrySet()) {
-                            mb.append(
-                                    entry.getKey().getName(),
-                                    getSimpleMethodSignature(entry.getValue().getJavaMethod(), false, true, true, false));
+            generator.setCallbacks(new Callback[] {
+                    // default callback
+                    new MethodInterceptor() {
+                        public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
+                                throws Throwable {
+                            return proxy.invokeSuper(obj, args);
                         }
+                    },
 
-                        return new ToStringBuilder().append(intfs.getName()).append(mb).toString();
+                    // toString callback
+                    new MethodInterceptor() {
+                        public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
+                                throws Throwable {
+                            MapBuilder mb = new MapBuilder().setPrintCount(true).setSortKeys(true);
+
+                            for (Map.Entry<Method, FastMethod> entry : methodMappings.entrySet()) {
+                                mb.append(
+                                        entry.getKey().getName(),
+                                        getSimpleMethodSignature(entry.getValue().getJavaMethod(), false, true, true, false));
+                            }
+
+                            return new ToStringBuilder().append(intfs.getName()).append(mb).toString();
+                        }
+                    },
+
+                    // proxied callback
+                    new MethodInterceptor() {
+                        public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
+                                throws Throwable {
+                            FastMethod realMethod = assertNotNull(methodMappings.get(method), "unknown method: %s", method);
+                            return realMethod.invoke(null, args);
+                        }
+                    } });
+
+            generator.setCallbackFilter(new CallbackFilter() {
+                public int accept(Method method) {
+                    if (isEqualsMethod(method) || isHashCodeMethod(method)) {
+                        return 0; // invoke super
+                    } else if (isToStringMethod(method)) {
+                        return 1; // invoke toString
+                    } else {
+                        return 2; // invoke proxied object
                     }
-                },
-
-                // proxied callback
-                new MethodInterceptor() {
-                    public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
-                            throws Throwable {
-                        FastMethod realMethod = assertNotNull(methodMappings.get(method), "unknown method: %s", method);
-                        return realMethod.invoke(null, args);
-                    }
-                } });
-
-        generator.setCallbackFilter(new CallbackFilter() {
-            public int accept(Method method) {
-                if (isEqualsMethod(method) || isHashCodeMethod(method)) {
-                    return 0; // invoke super
-                } else if (isToStringMethod(method)) {
-                    return 1; // invoke toString
-                } else {
-                    return 2; // invoke proxied object
                 }
-            }
-        });
+            });
+        }
 
         Object obj = generator.create();
 

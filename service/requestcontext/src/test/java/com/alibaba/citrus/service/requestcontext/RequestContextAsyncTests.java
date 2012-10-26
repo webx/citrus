@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.alibaba.citrus.service.requestcontext.impl.RequestContextChainingServiceImpl;
-import com.alibaba.citrus.util.internal.OverridedMethodBuilder;
+import com.alibaba.citrus.util.internal.InterfaceImplementorBuilder;
 import com.alibaba.citrus.util.internal.Servlet3Util;
 import org.easymock.Capture;
 import org.junit.After;
@@ -59,7 +59,7 @@ public class RequestContextAsyncTests {
         // request
         attrs = createHashMap();
 
-        request = (HttpServletRequest) new OverridedMethodBuilder(new Class<?>[] { HttpServletRequest.class }, mockRequest, new Object() {
+        request = (HttpServletRequest) new InterfaceImplementorBuilder().addInterface(HttpServletRequest.class).setBaseObject(mockRequest).setOverrider(new Object() {
             public Locale getLocale() {
                 return Locale.CHINA;
             }

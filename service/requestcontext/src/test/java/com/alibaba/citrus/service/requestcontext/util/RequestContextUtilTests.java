@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.citrus.service.requestcontext.RequestContext;
-import com.alibaba.citrus.util.internal.OverridedMethodBuilder;
+import com.alibaba.citrus.util.internal.InterfaceImplementorBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,7 +44,7 @@ public class RequestContextUtilTests {
         // request
         attrs = createHashMap();
 
-        request = (HttpServletRequest) new OverridedMethodBuilder(new Class<?>[] { HttpServletRequest.class }, mockRequest, new Object() {
+        request = (HttpServletRequest) new InterfaceImplementorBuilder().addInterface(HttpServletRequest.class).setBaseObject(mockRequest).setOverrider(new Object() {
             public Object getAttribute(String name) {
                 return attrs.get(name);
             }

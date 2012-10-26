@@ -324,6 +324,12 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
                 }
 
                 Servlet3Util.registerAsyncListener(request, new Object() {
+                    private Object thisListener;
+
+                    public void setThisProxy(Object listener) {
+                        this.thisListener = listener;
+                    }
+
                     public void onComplete(Object /* AsyncEvent */ event) throws IOException {
                         doCommit(requestContext);
                     }
@@ -337,7 +343,7 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
                     public void onStartAsync(Object /* AsyncEvent */ event) throws IOException {
                         // 在情况3时自动调用
                         Object /* AsyncContext */ asyncContext = Servlet3Util.getAsyncContextFromEvent(event);
-                        Servlet3Util.registerAsyncListener(request, this);
+                        Servlet3Util.addAsyncListener(asyncContext, thisListener);
                     }
                 });
             } else {
