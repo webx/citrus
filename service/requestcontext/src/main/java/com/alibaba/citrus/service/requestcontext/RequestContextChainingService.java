@@ -51,4 +51,10 @@ public interface RequestContextChainingService {
      * @throws RequestContextException 如果失败
      */
     void commitRequestContext(RequestContext requestContext);
+
+    /** 将request绑定到线程中。 */
+    void bind(HttpServletRequest request);
+
+    /** 将request从线程中解绑。 */
+    void unbind(HttpServletRequest request);
 }
