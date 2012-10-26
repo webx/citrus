@@ -32,6 +32,7 @@ import javax.servlet.http.HttpSession;
 import com.alibaba.citrus.service.requestcontext.impl.RequestContextChainingServiceImpl;
 import com.alibaba.citrus.util.internal.OverridedMethodBuilder;
 import com.alibaba.citrus.util.internal.Servlet3Util;
+import org.easymock.Capture;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,8 +44,10 @@ public class RequestContextAsyncTests {
     private HttpServletRequest                request;
     private HttpServletResponse               response;
     private Map<String, Object>               attrs;
-    private boolean                           isAsyncStarted;
     private boolean                           originalServlet3Disabled;
+    private boolean                           isAsyncStarted;
+    private Enum<?>                           dispatcherType;
+    private Object /* AsyncContext */         asyncContext;
 
     @Before
     public void init() throws Exception {
@@ -79,6 +82,14 @@ public class RequestContextAsyncTests {
 
             public boolean isAsyncStarted() {
                 return isAsyncStarted;
+            }
+
+            public Enum<?> getDispatcherType() {
+                return dispatcherType;
+            }
+
+            public Object getAsyncContext() {
+                return asyncContext;
             }
         }).toObject();
 
@@ -136,47 +147,84 @@ public class RequestContextAsyncTests {
     }
 
     @Test
-    public void commitRequestContext() {
-        requestContext = service.getRequestContext(servletContext, request, response);
-        assertSame(requestContext, attrs.get("_outer_webx3_request_context_"));
-
-        service.commitRequestContext(requestContext);
-        assertSame(null, attrs.get("_outer_webx3_request_context_"));
-        assertSame(null, attrs.get("_outer_webx3_request_context_async_"));
-    }
-
-    @Test
-    public void commitRequestContext_async() {
+    public void getRequestContext_DispatcherAsync() {
         if (!Servlet3Util.isServlet3()) {
             return;
         }
 
-        requestContext = service.getRequestContext(servletContext, request, response);
-        assertSame(requestContext, attrs.get("_outer_webx3_request_context_"));
+        getRequestContext();
 
-        isAsyncStarted = true;
-
-        service.commitRequestContext(requestContext);
-        assertSame(null, attrs.get("_outer_webx3_request_context_"));
-        assertSame(requestContext, attrs.get("_outer_webx3_request_context_async_"));
-    }
-
-    @Test
-    public void getRequestContext_async() {
-        if (!Servlet3Util.isServlet3()) {
-            return;
-        }
-
-        requestContext = service.getRequestContext(servletContext, request, response);
-        isAsyncStarted = true;
-        service.commitRequestContext(requestContext);
-
-        assertSame(null, attrs.get("_outer_webx3_request_context_"));
-        assertSame(requestContext, attrs.get("_outer_webx3_request_context_async_"));
+        dispatcherType = Servlet3Util.DISPATCHER_TYPE_ASYNC;
 
         assertSame(requestContext, service.getRequestContext(servletContext, request, response));
-
         assertSame(requestContext, attrs.get("_outer_webx3_request_context_"));
-        assertSame(null, attrs.get("_outer_webx3_request_context_async_"));
+    }
+
+    @Test
+    public void commitRequestContext_DispatcherRequest() {
+        dispatcherType = Servlet3Util.DISPATCHER_TYPE_REQUEST;
+
+        requestContext = service.getRequestContext(servletContext, request, response);
+        assertSame(requestContext, attrs.get("_outer_webx3_request_context_"));
+
+        service.commitRequestContext(requestContext);
+        assertSame(null, attrs.get("_outer_webx3_request_context_"));
+    }
+
+    @Test
+    public void commitRequestContext_DispatcherRequest_AsyncStarted() {
+        if (!Servlet3Util.isServlet3()) {
+            return;
+        }
+
+        dispatcherType = Servlet3Util.DISPATCHER_TYPE_REQUEST;
+
+        requestContext = service.getRequestContext(servletContext, request, response);
+        assertSame(requestContext, attrs.get("_outer_webx3_request_context_"));
+
+        isAsyncStarted = true;
+        asyncContext = createMock(Servlet3Util.asyncContextClass);
+        Capture<Object> cap = new Capture<Object>();
+        Servlet3Util.addAsyncListener(asyncContext, capture(cap));
+        replay(asyncContext);
+
+        service.commitRequestContext(requestContext);
+        assertSame(null, attrs.get("_outer_webx3_request_context_"));
+
+        verify(asyncContext);
+        Object listener = cap.getValue();
+        assertTrue(Servlet3Util.asyncListenerClass.isInstance(listener)); // asyncContext.addListener(asyncListener)
+    }
+
+    @Test
+    public void commitRequestContext_DispatcherAsync() {
+        if (!Servlet3Util.isServlet3()) {
+            return;
+        }
+
+        dispatcherType = Servlet3Util.DISPATCHER_TYPE_ASYNC;
+
+        requestContext = service.getRequestContext(servletContext, request, response);
+        assertSame(requestContext, attrs.get("_outer_webx3_request_context_"));
+
+        service.commitRequestContext(requestContext);
+        assertSame(null, attrs.get("_outer_webx3_request_context_"));
+    }
+
+    @Test
+    public void commitRequestContext_DispatcherAsync_AsyncStarted() {
+        if (!Servlet3Util.isServlet3()) {
+            return;
+        }
+
+        dispatcherType = Servlet3Util.DISPATCHER_TYPE_ASYNC;
+
+        requestContext = service.getRequestContext(servletContext, request, response);
+        assertSame(requestContext, attrs.get("_outer_webx3_request_context_"));
+
+        isAsyncStarted = true;
+
+        service.commitRequestContext(requestContext);
+        assertSame(null, attrs.get("_outer_webx3_request_context_"));
     }
 }
