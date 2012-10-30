@@ -113,8 +113,7 @@ public class SetLoggingContextHelper {
     public static final String MDC_COOKIES                       = "cookies";
     public static final String MDC_COOKIE_PREFIX                 = "cookie.";
 
-    static final String FLAG_MDC_HAS_ALREADY_SET = "_mdc_request_info_has_already_been_set";
-
+    private final static ThreadLocal<Integer> mdcRequestInfoHasAlreadyBeenSet = new ThreadLocal<Integer>();
     private final HttpServletRequest request;
 
     public SetLoggingContextHelper(HttpServletRequest request) {
@@ -153,8 +152,10 @@ public class SetLoggingContextHelper {
      * </p>
      */
     public void clearLoggingContext() {
-        if (this == request.getAttribute(FLAG_MDC_HAS_ALREADY_SET)) {
-            request.removeAttribute(FLAG_MDC_HAS_ALREADY_SET);
+        Integer flag = mdcRequestInfoHasAlreadyBeenSet.get();
+
+        if (flag != null && flag.intValue() == hashCode()) {
+            mdcRequestInfoHasAlreadyBeenSet.remove();
             clearMDC();
         }
     }
@@ -207,8 +208,8 @@ public class SetLoggingContextHelper {
     }
 
     private boolean testAndSetRequestInfo() {
-        if (request.getAttribute(FLAG_MDC_HAS_ALREADY_SET) == null) {
-            request.setAttribute(FLAG_MDC_HAS_ALREADY_SET, this);
+        if (mdcRequestInfoHasAlreadyBeenSet.get() == null) {
+            mdcRequestInfoHasAlreadyBeenSet.set(hashCode());
             return true;
         }
 
@@ -218,7 +219,6 @@ public class SetLoggingContextHelper {
     /**
      * 取得当前的request URL，包括query string。
      *
-     * @param withQueryString 是否包含query string
      * @return 当前请求的request URL
      */
     private String getRequestURL(StringBuffer requestURL, String queryString) {
