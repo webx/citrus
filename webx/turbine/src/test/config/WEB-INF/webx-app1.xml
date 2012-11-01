@@ -34,6 +34,18 @@
         <valves:valve class="com.alibaba.citrus.turbine.pipeline.valve.CheckCsrfTokenValveTests$CheckCsrfManually" />
     </services:pipeline>
 
+    <services:pipeline id="setBuffering_default">
+        <valves:setBuffering />
+    </services:pipeline>
+
+    <services:pipeline id="setBuffering_enabled">
+        <valves:setBuffering enabled="true" />
+    </services:pipeline>
+
+    <services:pipeline id="setBuffering_disabled">
+        <valves:setBuffering enabled="false" />
+    </services:pipeline>
+
     <services:pipeline id="performActionValveTests">
         <valves:analyzeURL actionParam="action" />
         <valves:performAction />
