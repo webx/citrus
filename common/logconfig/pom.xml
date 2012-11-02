@@ -46,5 +46,9 @@
             <groupId>rhino</groupId>
             <artifactId>js</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>citrus-common-servlet</artifactId>
+        </dependency>
     </dependencies>
 </project>

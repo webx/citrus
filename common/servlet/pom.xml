@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>citrus-parent</artifactId>
+        <groupId>com.alibaba.citrus</groupId>
+        <version>3.1.2</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>citrus-common-servlet</artifactId>
+    <name>Citrus Servlet API Dependencies</name>
+    <profiles>
+        <profile>
+            <id>servlet2</id>
+            <activation>
+                <property>
+                    <name>servlet2</name>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>servlet3</id>
+            <activation>
+                <property>
+                    <name>!servlet2</name>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>javax.servlet-api</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+</project>
