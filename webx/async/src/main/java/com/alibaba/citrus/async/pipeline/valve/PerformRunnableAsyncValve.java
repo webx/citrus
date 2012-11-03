@@ -38,6 +38,8 @@ import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.RequestContextChainingService;
 import com.alibaba.citrus.turbine.pipeline.valve.AbstractResultConsumerValve;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -51,7 +53,8 @@ import org.w3c.dom.Element;
  * @author Michael Zhou
  */
 public class PerformRunnableAsyncValve extends AbstractResultConsumerValve {
-    final static String ASYNC_CALLBACK_KEY = "_async_callback_";
+    final static         String ASYNC_CALLBACK_KEY = "_async_callback_";
+    private final static Logger log                = LoggerFactory.getLogger(PerformRunnableAsyncValve.class);
     private long defaultTimeout;
 
     @Autowired
@@ -124,7 +127,7 @@ public class PerformRunnableAsyncValve extends AbstractResultConsumerValve {
         // 执行子pipeline，子pipeline中必须包含DoPerformRunnableValve。
         // 执行前将当前的request/response绑定到新线程中。
         final Future<?> future = executor.submit(new Callable<Object>() {
-            public Object call() throws Exception {
+            public Object call() {
                 try {
                     try {
                         rccs.bind(request);
@@ -132,6 +135,8 @@ public class PerformRunnableAsyncValve extends AbstractResultConsumerValve {
                     } finally {
                         rccs.unbind(request);
                     }
+                } catch (Throwable e) {
+                    log.error("[" + Thread.currentThread().getName() + "] Exception occurred while doing async task", e);
                 } finally {
                     try {
                         asyncContext.complete();

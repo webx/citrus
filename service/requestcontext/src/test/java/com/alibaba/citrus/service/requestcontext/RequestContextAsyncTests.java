@@ -168,7 +168,7 @@ public class RequestContextAsyncTests {
         assertSame(requestContext, attrs.get("_outer_webx3_request_context_"));
 
         service.commitRequestContext(requestContext);
-        assertSame(null, attrs.get("_outer_webx3_request_context_"));
+        assertSame(null, attrs.get("_outer_webx3_request_context_")); // request和requestContext解除绑定
     }
 
     @Test
@@ -189,7 +189,7 @@ public class RequestContextAsyncTests {
         replay(asyncContext);
 
         service.commitRequestContext(requestContext);
-        assertSame(null, attrs.get("_outer_webx3_request_context_"));
+        assertSame(requestContext, attrs.get("_outer_webx3_request_context_")); // request和requestContext仍绑定
 
         verify(asyncContext);
         Object listener = cap.getValue();
@@ -208,7 +208,7 @@ public class RequestContextAsyncTests {
         assertSame(requestContext, attrs.get("_outer_webx3_request_context_"));
 
         service.commitRequestContext(requestContext);
-        assertSame(null, attrs.get("_outer_webx3_request_context_"));
+        assertSame(requestContext, attrs.get("_outer_webx3_request_context_")); // request和requestContext仍绑定
     }
 
     @Test
@@ -225,6 +225,6 @@ public class RequestContextAsyncTests {
         isAsyncStarted = true;
 
         service.commitRequestContext(requestContext);
-        assertSame(null, attrs.get("_outer_webx3_request_context_"));
+        assertSame(requestContext, attrs.get("_outer_webx3_request_context_")); // request和requestContext仍绑定
     }
 }
