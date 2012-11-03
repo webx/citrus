@@ -25,7 +25,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.citrus.service.pipeline.PipelineContext;
-import com.alibaba.citrus.service.pipeline.Valve;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +37,7 @@ import org.w3c.dom.Element;
  *
  * @author Michael Zhou
  */
-public class RenderResultAsJsonValve implements Valve {
-    private static final String DEFAULT_RESULT_NAME             = PerformScreenValve.DEFAULT_RESULT_NAME;
+public class RenderResultAsJsonValve extends AbstractResultConsumerValve {
     private static final String DEFAULT_CONTENT_TYPE            = "application/json";
     private static final String DEFAULT_JAVASCRIPT_VARIABLE     = null;
     private static final String DEFAULT_JAVASCRIPT_CONTENT_TYPE = "application/javascript";
@@ -50,18 +48,9 @@ public class RenderResultAsJsonValve implements Valve {
     @Autowired
     private HttpServletResponse response;
 
-    private String resultName;
     private String contentType;
     private String javascriptVariable;
     private String javascriptContentType;
-
-    public String getResultName() {
-        return resultName == null ? DEFAULT_RESULT_NAME : resultName;
-    }
-
-    public void setResultName(String resultName) {
-        this.resultName = trimToNull(resultName);
-    }
 
     public String getContentType() {
         return contentType == null ? DEFAULT_CONTENT_TYPE : contentType;
@@ -100,7 +89,7 @@ public class RenderResultAsJsonValve implements Valve {
         }
 
         PrintWriter out = response.getWriter();
-        Object resultObject = pipelineContext.getAttribute(getResultName());
+        Object resultObject = getResult(pipelineContext);
         String jsonResult = JSON.toJSONString(resultObject);
 
         if (outputAsJson) {
