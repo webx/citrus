@@ -69,3 +69,12 @@
 * 改进request context服务，使之在async模式被启动时，不会提交response。当async线程重新取得控制时，可以重新取得原来的request context。
 * 改进<renderTemplate> valve，当buffering关闭时，只不过不显示layout，而不会报错。
 * 添加<setBuffering enabled="true|false" /> valve，可以在pipeline中开关buffering，以简化screen代码。
+* 添加异步执行功能，以下为pipeline片段：
+  <performScreen/>
+  <startAsync>
+      <setLoggingContext />
+      <invokeCallable />
+  </startAsync>
+
+  当screen返回runnable或callable对象时，就会启动异步操作。runnable或callable将在另一个线程中被执行。
+
