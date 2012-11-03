@@ -270,7 +270,7 @@ public class InterfaceImplementorBuilder extends DynamicClassBuilder {
             try {
                 overriderSetProxyObjectMethod.invoke(overrider, new Object[] { proxy });
             } catch (InvocationTargetException e) {
-                log.warn("Failed to call " + getSimpleMethodSignature(overriderSetProxyObjectMethod.getJavaMethod(), true), e.getTargetException());
+                throw new RuntimeException("Failed to call " + getSimpleMethodSignature(overriderSetProxyObjectMethod.getJavaMethod(), true), e.getTargetException());
             }
         }
 

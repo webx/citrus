@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns:valves="http://www.alibaba.com/schema/services/pipeline/valves"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xsi:schemaLocation="
+                 http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+                 http://www.alibaba.com/schema/services/pipeline/valves http://localhost:8080/schema/services-pipeline-valves.xsd
+                 http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+             ">
+
+    <services:request-contexts />
+
+    <beans:bean id="executor1" class="com.alibaba.citrus.async.support.FakeAsyncExecutor" primary="true" />
+    <beans:bean id="executor2" class="com.alibaba.citrus.async.support.FakeAsyncExecutor" />
+
+    <services:pipeline id="pipeline1">
+        <valves:startAsync />
+    </services:pipeline>
+
+    <services:pipeline id="pipeline2">
+        <valves:startAsync executor-ref="executor2" />
+    </services:pipeline>
+
+    <services:pipeline id="pipeline3">
+        <valves:startAsync pipeline-ref="subpipeline1" />
+    </services:pipeline>
+
+    <services:pipeline id="subpipeline1">
+        <valves:setLoggingContext />
+        <valves:invokeCallable />
+    </services:pipeline>
+
+    <services:pipeline id="pipeline4">
+        <valves:startAsync>
+            <valves:setLoggingContext />
+            <valves:invokeCallable />
+        </valves:startAsync>
+    </services:pipeline>
+
+    <services:pipeline id="pipeline5">
+        <valves:startAsync defaultTimeout="1000" />
+    </services:pipeline>
+
+    <services:pipeline id="pipeline6">
+        <valves:startAsync resultName="myresult" />
+    </services:pipeline>
+
+    <services:pipeline id="pipeline7">
+        <valves:valve class="com.alibaba.citrus.async.support.SetScreenResult" />
+        <valves:startAsync>
+            <valves:setLoggingContext />
+            <valves:invokeCallable />
+        </valves:startAsync>
+    </services:pipeline>
+
+</beans:beans>

@@ -8,6 +8,7 @@ analyzeURL=com.alibaba.citrus.turbine.pipeline.valve.AnalyzeURLValve$DefinitionP
 checkCsrfToken=com.alibaba.citrus.turbine.pipeline.valve.CheckCsrfTokenValve$DefinitionParser
 getResource=com.alibaba.citrus.turbine.pipeline.valve.GetResourceValve$DefinitionParser
 
+setBuffering=com.alibaba.citrus.turbine.pipeline.valve.SetBufferingValve$DefinitionParser
 performAction=com.alibaba.citrus.turbine.pipeline.valve.PerformActionValve$DefinitionParser
 performTemplateScreen=com.alibaba.citrus.turbine.pipeline.valve.PerformTemplateScreenValve$DefinitionParser
 performScreen=com.alibaba.citrus.turbine.pipeline.valve.PerformScreenValve$DefinitionParser

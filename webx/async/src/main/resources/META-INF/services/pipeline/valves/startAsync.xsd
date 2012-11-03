@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified">
+
+    <xsd:import namespace="http://www.springframework.org/schema/beans"
+                schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
+
+    <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
+                schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
+
+    <xsd:element name="startAsync" type="StartAsyncValveType">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    假如screen返回一个<code>Runnable</code>对象，则在另一个线程中执行之，当前valve立即返回，当前线程继续执行并很快退出。
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+
+    <xsd:complexType name="StartAsyncValveType">
+        <xsd:sequence>
+            <xsd:any namespace="http://www.alibaba.com/schema/services/pipeline/valves"
+                     minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+        <xsd:attribute name="resultName" type="xsd:string" default="screenResult" />
+        <xsd:attribute name="defaultTimeout" type="xsd:long" default="0" />
+        <xsd:attribute name="executor-ref" type="xsd:string" use="optional" />
+        <xsd:attribute name="pipeline-ref" type="xsd:string" use="optional" />
+    </xsd:complexType>
+
+</xsd:schema>

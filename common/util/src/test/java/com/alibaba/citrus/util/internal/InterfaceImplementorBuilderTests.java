@@ -155,11 +155,15 @@ public class InterfaceImplementorBuilderTests {
         assertSame(null, holder[0]);
 
         // call failed
-        sc = (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).setOverrider(new Object() {
-            public void setThisProxy(Object proxy) {
-                throw new IllegalArgumentException();
-            }
-        }).toObject();
+        try {
+            sc = (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).setOverrider(new Object() {
+                public void setThisProxy(Object proxy) {
+                    throw new IllegalArgumentException();
+                }
+            }).toObject();
+        } catch (Exception e) {
+            assertThat(e, exception(IllegalArgumentException.class, "Failed to call ", "setThisProxy(Object)"));
+        }
 
         assertSame(null, holder[0]);
     }

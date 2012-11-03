@@ -185,7 +185,7 @@ public class RequestContextAsyncTests {
         isAsyncStarted = true;
         asyncContext = createMock(Servlet3Util.asyncContextClass);
         Capture<Object> cap = new Capture<Object>();
-        Servlet3Util.addAsyncListener(asyncContext, capture(cap));
+        Servlet3Util.asyncContext_addAsyncListener(asyncContext, capture(cap));
         replay(asyncContext);
 
         service.commitRequestContext(requestContext);

@@ -43,6 +43,9 @@
                             <dependencySourceIncludes>
                                 <dependencySourceInclude>${project.groupId}:*</dependencySourceInclude>
                             </dependencySourceIncludes>
+                            <dependencySourceExcludes>
+                                <dependencySourceExclude>*:citrus-common-servlet</dependencySourceExclude>
+                            </dependencySourceExcludes>
                             <excludePackageNames>com.alibaba.citrus.hessian:com.alibaba.citrus.burlap:freemarker
                             </excludePackageNames>
                         </configuration>
@@ -64,10 +67,12 @@
                                 <includes>
                                     <include>${project.groupId}:*</include>
                                 </includes>
+                                <excludes>
+                                    <exclude>*:citrus-common-servlet</exclude>
+                                </excludes>
                             </artifactSet>
                             <transformers>
-                                <transformer
-                                        implementation="com.alibaba.citrus.maven.util.AppendingTransformer">
+                                <transformer implementation="com.alibaba.citrus.maven.util.AppendingTransformer">
                                     <patterns>
                                         <pattern>META-INF/*.bean-definition-parsers</pattern>
                                         <pattern>META-INF/*.bean-definition-decorators</pattern>
@@ -94,6 +99,21 @@
         </plugins>
     </build>
     <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>citrus-common-servlet</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>javax.servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>citrus-common-logconfig</artifactId>
@@ -202,11 +222,21 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>citrus-webx-async</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>citrus-webx-dev</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

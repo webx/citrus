@@ -21,6 +21,7 @@ import static com.alibaba.citrus.util.ArrayUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.ObjectUtil.*;
+import static com.alibaba.citrus.util.internal.Servlet3Util.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -42,7 +43,6 @@ import com.alibaba.citrus.service.requestcontext.RequestContextInfo.FeatureOrder
 import com.alibaba.citrus.service.requestcontext.RequestContextInfo.RequiresFeature;
 import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
 import com.alibaba.citrus.util.ToStringBuilder;
-import com.alibaba.citrus.util.internal.Servlet3Util;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -241,7 +241,7 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
         assertInitialized();
 
         // 异步请求（dispatcherType == ASYNC）开始时，如果已经存在request context，则直接取得并返回之。
-        boolean asyncDispatcher = Servlet3Util.isDispatcherType(request, Servlet3Util.DISPATCHER_TYPE_ASYNC);
+        boolean asyncDispatcher = request_isDispatcherType(request, DISPATCHER_TYPE_ASYNC);
         RequestContext requestContext = null;
 
         if (asyncDispatcher) {
@@ -313,8 +313,8 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
         //    此时不需要做什么，因为request context已经被提交。
 
         final HttpServletRequest request = requestContext.getRequest();
-        boolean asyncDispatcher = Servlet3Util.isDispatcherType(request, Servlet3Util.DISPATCHER_TYPE_ASYNC);
-        boolean asyncStarted = Servlet3Util.isAsyncStarted(request);
+        boolean asyncDispatcher = request_isDispatcherType(request, DISPATCHER_TYPE_ASYNC);
+        boolean asyncStarted = request_isAsyncStarted(request);
 
         if (!asyncDispatcher) {
             if (asyncStarted) {
@@ -323,7 +323,7 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
                     getLogger().debug("Keep request context open for asynchronous process");
                 }
 
-                Servlet3Util.registerAsyncListener(request, new Object() {
+                request_registerAsyncListener(request, new Object() {
                     private Object thisListener;
 
                     public void setThisProxy(Object listener) {
@@ -342,8 +342,8 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
 
                     public void onStartAsync(Object /* AsyncEvent */ event) throws IOException {
                         // 在情况3时自动调用
-                        Object /* AsyncContext */ asyncContext = Servlet3Util.getAsyncContextFromEvent(event);
-                        Servlet3Util.addAsyncListener(asyncContext, thisListener);
+                        Object /* AsyncContext */ asyncContext = asyncEvent_getAsyncContext(event);
+                        asyncContext_addAsyncListener(asyncContext, thisListener);
                     }
                 });
             } else {

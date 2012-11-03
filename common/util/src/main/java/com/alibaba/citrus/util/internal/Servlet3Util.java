@@ -92,11 +92,11 @@ public class Servlet3Util {
         return originalValue;
     }
 
-    public static boolean isAsyncStarted(HttpServletRequest request) {
+    public static boolean request_isAsyncStarted(HttpServletRequest request) {
         return (Boolean) invoke(request_isAsyncStarted, request);
     }
 
-    public static Object /* AsyncContext */ getAsyncContext(HttpServletRequest request) {
+    public static Object /* AsyncContext */ request_getAsyncContext(HttpServletRequest request) {
         int index = request_getAsyncContext;
 
         if (methods[index].isDisabled()) {
@@ -106,11 +106,7 @@ public class Servlet3Util {
         return invoke(index, request);
     }
 
-    public static Object /* AsyncContext */ getAsyncContextFromEvent(Object /* AsyncEvent */ event) {
-        return invoke(asyncEvent_getAsyncContext, event);
-    }
-
-    public static boolean isDispatcherType(HttpServletRequest request, Enum<?> type) {
+    public static boolean request_isDispatcherType(HttpServletRequest request, Enum<?> type) {
         Enum<?> dispatcherType = (Enum<?>) invoke(request_getDispatcherType, request);
 
         if (dispatcherType == null || type == null) {
@@ -120,12 +116,16 @@ public class Servlet3Util {
         }
     }
 
-    public static void addAsyncListener(Object /* AsyncContext */ asyncContext, Object /* AsyncListener */ listener) {
+    public static Object /* AsyncContext */ asyncEvent_getAsyncContext(Object /* AsyncEvent */ event) {
+        return invoke(asyncEvent_getAsyncContext, event);
+    }
+
+    public static void asyncContext_addAsyncListener(Object /* AsyncContext */ asyncContext, Object /* AsyncListener */ listener) {
         invoke(asyncContext_addListener, asyncContext, listener);
     }
 
-    public static void registerAsyncListener(HttpServletRequest request, Object listenerImpl) {
-        Object /* AsyncContext */ asyncContext = getAsyncContext(request);
+    public static void request_registerAsyncListener(HttpServletRequest request, Object listenerImpl) {
+        Object /* AsyncContext */ asyncContext = request_getAsyncContext(request);
         Object listener = new InterfaceImplementorBuilder().addInterface(asyncListenerClass).setOverrider(listenerImpl).toObject();
 
         invoke(asyncContext_addListener, asyncContext, listener);

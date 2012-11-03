@@ -68,58 +68,11 @@
                 <gpg.skip>false</gpg.skip>
             </properties>
         </profile>
-        <profile>
-            <id>servlet2</id>
-            <activation>
-                <property>
-                    <name>servlet2</name>
-                </property>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>servlet-api</artifactId>
-                </dependency>
-            </dependencies>
-            <dependencyManagement>
-                <dependencies>
-                    <dependency>
-                        <groupId>javax.servlet</groupId>
-                        <artifactId>servlet-api</artifactId>
-                        <version>2.5</version>
-                        <scope>provided</scope>
-                    </dependency>
-                </dependencies>
-            </dependencyManagement>
-        </profile>
-        <profile>
-            <id>servlet3</id>
-            <activation>
-                <property>
-                    <name>!servlet2</name>
-                </property>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>javax.servlet-api</artifactId>
-                </dependency>
-            </dependencies>
-            <dependencyManagement>
-                <dependencies>
-                    <dependency>
-                        <groupId>javax.servlet</groupId>
-                        <artifactId>javax.servlet-api</artifactId>
-                        <version>3.0.1</version>
-                        <scope>provided</scope>
-                    </dependency>
-                </dependencies>
-            </dependencyManagement>
-        </profile>
     </profiles>
     <modules>
         <module>dist/webx</module>
         <module>dist/test</module>
+        <module>common/servlet</module>
         <module>common/expr</module>
         <module>common/logconfig</module>
         <module>common/util</module>
@@ -147,6 +100,7 @@
         <module>service/mail</module>
         <module>webx/framework</module>
         <module>webx/turbine</module>
+        <module>webx/async</module>
         <module>webx/dev</module>
     </modules>
     <dependencies>
@@ -174,6 +128,11 @@
                 <artifactId>citrus-test-all</artifactId>
                 <version>${webx-version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>citrus-common-servlet</artifactId>
+                <version>${webx-version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
@@ -310,6 +269,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>citrus-webx-turbine</artifactId>
+                <version>${webx-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>citrus-webx-async</artifactId>
                 <version>${webx-version}</version>
             </dependency>
             <dependency>
@@ -602,6 +566,21 @@
                 <artifactId>spring-test</artifactId>
                 <version>${spring-version}</version>
                 <scope>test</scope>
+            </dependency>
+            <!-- ======================================== -->
+            <!-- Servlet API依赖 -->
+            <!-- ======================================== -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.0.1</version>
+                <scope>compile</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

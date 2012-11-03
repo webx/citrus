@@ -57,11 +57,16 @@ public abstract class AbstractValveDefinitionParser<V extends Valve> extends Abs
     }
 
     protected final Object parsePipeline(Element element, Element labelElement, ParserContext parserContext) {
-        return parsePipeline(element, labelElement, parserContext, null);
+        return parsePipeline(element, labelElement, parserContext, null, false);
     }
 
     protected final Object parsePipeline(Element element, Element labelElement, ParserContext parserContext,
                                          String refAttribute) {
+        return parsePipeline(element, labelElement, parserContext, refAttribute, false);
+    }
+
+    protected final Object parsePipeline(Element element, Element labelElement, ParserContext parserContext,
+                                         String refAttribute, boolean returnNullIfNoValves) {
         // pipeline可以是引用或作为inner-bean。
         // 引用pipeline支持注入不同scope的pipeline，例如：注入一个request scope的pipeline scoped proxy。
         String pipelineRef = trimToNull(element.getAttribute(defaultIfNull(trimToNull(refAttribute), "pipeline-ref")));
@@ -90,6 +95,10 @@ public abstract class AbstractValveDefinitionParser<V extends Valve> extends Abs
             if (valve != null) {
                 valves.add(valve);
             }
+        }
+
+        if (returnNullIfNoValves && valves.isEmpty()) {
+            return null;
         }
 
         pipelineBuilder.addPropertyValue("valves", valves);
