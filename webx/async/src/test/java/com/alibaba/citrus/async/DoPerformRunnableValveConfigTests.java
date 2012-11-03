@@ -19,48 +19,48 @@ package com.alibaba.citrus.async;
 
 import static org.junit.Assert.*;
 
-import com.alibaba.citrus.async.pipeline.valve.InvokeCallableValve;
-import com.alibaba.citrus.async.pipeline.valve.StartAsyncValve;
+import com.alibaba.citrus.async.pipeline.valve.DoPerformRunnableValve;
+import com.alibaba.citrus.async.pipeline.valve.PerformRunnableAsyncValve;
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class InvokeCallableValveConfigTests extends AbstractAsyncTests {
-    private StartAsyncValve     startAsyncValve;
-    private InvokeCallableValve valve;
-    private PipelineImpl        pipeline;
+public class DoPerformRunnableValveConfigTests extends AbstractAsyncTests {
+    private PerformRunnableAsyncValve performRunnableAsyncValve;
+    private DoPerformRunnableValve    valve;
+    private PipelineImpl              pipeline;
 
     @BeforeClass
     public static void initClass() {
-        defaultFactory = createApplicationContext("invokeCallableValveConfig.xml");
+        defaultFactory = createApplicationContext("doPerformRunnableValveConfig.xml");
     }
 
     @Test
     public void subPipelineNotSpecified() {
-        startAsyncValve = getValve("pipeline1", 0, StartAsyncValve.class);
-        valve = getInvokeCallableValve(0);
+        performRunnableAsyncValve = getValve("pipeline1", 0, PerformRunnableAsyncValve.class);
+        valve = getDoPerformRunnableValve(0);
 
         assertEquals("screenResult", valve.getResultName());
     }
 
     @Test
     public void resultNameNotSpecified() {
-        startAsyncValve = getValve("pipeline2", 0, StartAsyncValve.class);
-        valve = getInvokeCallableValve(1);
+        performRunnableAsyncValve = getValve("pipeline2", 0, PerformRunnableAsyncValve.class);
+        valve = getDoPerformRunnableValve(1);
 
         assertEquals("screenResult", valve.getResultName());
     }
 
     @Test
     public void resultNameSpecified() {
-        startAsyncValve = getValve("pipeline3", 0, StartAsyncValve.class);
-        valve = getInvokeCallableValve(1);
+        performRunnableAsyncValve = getValve("pipeline3", 0, PerformRunnableAsyncValve.class);
+        valve = getDoPerformRunnableValve(1);
 
         assertEquals("myresult", valve.getResultName());
     }
 
-    private InvokeCallableValve getInvokeCallableValve(int index) {
-        PipelineImpl asyncPipeline = (PipelineImpl) startAsyncValve.getAsyncPipeline();
-        return (InvokeCallableValve) asyncPipeline.getValves()[index];
+    private DoPerformRunnableValve getDoPerformRunnableValve(int index) {
+        PipelineImpl asyncPipeline = (PipelineImpl) performRunnableAsyncValve.getAsyncPipeline();
+        return (DoPerformRunnableValve) asyncPipeline.getValves()[index];
     }
 }

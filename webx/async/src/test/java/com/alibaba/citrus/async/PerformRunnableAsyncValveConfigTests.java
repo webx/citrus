@@ -20,8 +20,8 @@ package com.alibaba.citrus.async;
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.junit.Assert.*;
 
-import com.alibaba.citrus.async.pipeline.valve.InvokeCallableValve;
-import com.alibaba.citrus.async.pipeline.valve.StartAsyncValve;
+import com.alibaba.citrus.async.pipeline.valve.DoPerformRunnableValve;
+import com.alibaba.citrus.async.pipeline.valve.PerformRunnableAsyncValve;
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -30,15 +30,15 @@ import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.core.task.AsyncTaskExecutor;
 
-public class StartAsyncValveConfigTests extends AbstractAsyncTests {
-    private AsyncTaskExecutor executor1;
-    private AsyncTaskExecutor executor2;
-    private StartAsyncValve   valve;
-    private PipelineImpl      pipeline;
+public class PerformRunnableAsyncValveConfigTests extends AbstractAsyncTests {
+    private AsyncTaskExecutor         executor1;
+    private AsyncTaskExecutor         executor2;
+    private PerformRunnableAsyncValve valve;
+    private PipelineImpl              pipeline;
 
     @BeforeClass
     public static void initClass() {
-        defaultFactory = createApplicationContext("startAsyncValveConfig.xml");
+        defaultFactory = createApplicationContext("performRunnableAsyncValveConfig.xml");
     }
 
     @Before
@@ -53,7 +53,7 @@ public class StartAsyncValveConfigTests extends AbstractAsyncTests {
     @Test
     public void noExecutor() {
         try {
-            createApplicationContext("startAsyncValveConfig-noExecutor.xml");
+            createApplicationContext("performRunnableAsyncValveConfig-noExecutor.xml");
             fail();
         } catch (BeanCreationException e) {
             assertThat(e, exception(NoSuchBeanDefinitionException.class, AsyncTaskExecutor.class.getName()));
@@ -62,71 +62,71 @@ public class StartAsyncValveConfigTests extends AbstractAsyncTests {
 
     @Test
     public void autowireExecutor() {
-        valve = getValve("pipeline1", 0, StartAsyncValve.class);
+        valve = getValve("pipeline1", 0, PerformRunnableAsyncValve.class);
         assertSame(executor1, valve.getExecutor());
     }
 
     @Test
     public void specifyingExecutorRef() {
-        valve = getValve("pipeline2", 0, StartAsyncValve.class);
+        valve = getValve("pipeline2", 0, PerformRunnableAsyncValve.class);
         assertSame(executor2, valve.getExecutor());
     }
 
     @Test
     public void defaultSubPipeline() {
-        valve = getValve("pipeline1", 0, StartAsyncValve.class);
+        valve = getValve("pipeline1", 0, PerformRunnableAsyncValve.class);
 
         PipelineImpl asyncPipeline = (PipelineImpl) valve.getAsyncPipeline();
 
         assertEquals(1, asyncPipeline.getValves().length);
-        assertTrue(asyncPipeline.getValves()[0] instanceof InvokeCallableValve);
+        assertTrue(asyncPipeline.getValves()[0] instanceof DoPerformRunnableValve);
     }
 
     @Test
     public void specifyingSubPipelineRef() {
-        valve = getValve("pipeline3", 0, StartAsyncValve.class);
+        valve = getValve("pipeline3", 0, PerformRunnableAsyncValve.class);
 
         PipelineImpl asyncPipeline = (PipelineImpl) valve.getAsyncPipeline();
 
         assertSame(factory.getBean("subpipeline1"), asyncPipeline);
 
         assertEquals(2, asyncPipeline.getValves().length);
-        assertTrue(asyncPipeline.getValves()[1] instanceof InvokeCallableValve);
+        assertTrue(asyncPipeline.getValves()[1] instanceof DoPerformRunnableValve);
     }
 
     @Test
     public void inlineSubPipeline() {
-        valve = getValve("pipeline4", 0, StartAsyncValve.class);
+        valve = getValve("pipeline4", 0, PerformRunnableAsyncValve.class);
 
         PipelineImpl asyncPipeline = (PipelineImpl) valve.getAsyncPipeline();
 
         assertNotSame(factory.getBean("subpipeline1"), asyncPipeline);
 
         assertEquals(2, asyncPipeline.getValves().length);
-        assertTrue(asyncPipeline.getValves()[1] instanceof InvokeCallableValve);
+        assertTrue(asyncPipeline.getValves()[1] instanceof DoPerformRunnableValve);
     }
 
     @Test
     public void defaultTimeoutNotSpecified() {
-        valve = getValve("pipeline1", 0, StartAsyncValve.class);
+        valve = getValve("pipeline1", 0, PerformRunnableAsyncValve.class);
         assertEquals(0L, valve.getDefaultTimeout());
     }
 
     @Test
     public void defaultTimeoutSpecified() {
-        valve = getValve("pipeline5", 0, StartAsyncValve.class);
+        valve = getValve("pipeline5", 0, PerformRunnableAsyncValve.class);
         assertEquals(1000L, valve.getDefaultTimeout());
     }
 
     @Test
     public void resultNameNotSpecified() {
-        valve = getValve("pipeline1", 0, StartAsyncValve.class);
+        valve = getValve("pipeline1", 0, PerformRunnableAsyncValve.class);
         assertEquals("screenResult", valve.getResultName());
     }
 
     @Test
     public void resultNameSpecified() {
-        valve = getValve("pipeline6", 0, StartAsyncValve.class);
+        valve = getValve("pipeline6", 0, PerformRunnableAsyncValve.class);
         assertEquals("myresult", valve.getResultName());
     }
 }

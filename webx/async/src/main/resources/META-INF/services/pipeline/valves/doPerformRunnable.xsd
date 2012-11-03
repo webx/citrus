@@ -8,15 +8,15 @@
     <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
                 schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
 
-    <xsd:element name="invokeCallable" type="InvokeCallableValveType">
+    <xsd:element name="doPerformRunnable" type="DoPerformRunnableValveType">
         <xsd:annotation>
             <xsd:documentation><![CDATA[
-    调用pipeline result中的callable对象，并将其结果作为新的result，并保存在pipeline中。
+    调用pipeline result中的runnable或callable对象，并将其结果作为新的result，并保存在pipeline中。
             ]]></xsd:documentation>
         </xsd:annotation>
     </xsd:element>
 
-    <xsd:complexType name="InvokeCallableValveType">
+    <xsd:complexType name="DoPerformRunnableValveType">
         <xsd:attribute name="resultName" type="xsd:string" default="screenResult" />
     </xsd:complexType>
 

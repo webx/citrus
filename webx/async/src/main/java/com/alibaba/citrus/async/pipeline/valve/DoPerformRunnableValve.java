@@ -28,28 +28,28 @@ import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
 /**
- * 调用pipeline result中的callable对象，并将其结果作为新的result，并保存在pipeline中。
+ * 调用pipeline result中的runnable或callable对象，并将其结果作为新的result，并保存在pipeline中。
  *
  * @author Michael Zhou
  */
-public class InvokeCallableValve extends AbstractResultConsumerValve {
+public class DoPerformRunnableValve extends AbstractResultConsumerValve {
     public void invoke(PipelineContext pipelineContext) throws Exception {
         AsyncCallbackAdapter callback;
 
         try {
-            callback = (AsyncCallbackAdapter) pipelineContext.getAttribute(StartAsyncValve.ASYNC_CALLBACK_KEY);
+            callback = (AsyncCallbackAdapter) pipelineContext.getAttribute(PerformRunnableAsyncValve.ASYNC_CALLBACK_KEY);
         } catch (ClassCastException e) {
             callback = null;
         }
 
-        assertNotNull(callback, ExceptionType.ILLEGAL_STATE, "<invokieCallable> valve should be inside <startAsync>");
+        assertNotNull(callback, ExceptionType.ILLEGAL_STATE, "<doPerformRunnable> valve should be inside <performRunnableAsync>");
 
         pipelineContext.setAttribute(getResultName(), callback.call());
 
         pipelineContext.invokeNext();
     }
 
-    public static class DefinitionParser extends AbstractValveDefinitionParser<InvokeCallableValve> {
+    public static class DefinitionParser extends AbstractValveDefinitionParser<DoPerformRunnableValve> {
         @Override
         protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
             attributesToProperties(element, builder, "resultName");

@@ -9,8 +9,18 @@
                  http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
              ">
 
+    <services:request-contexts />
+
+    <beans:bean id="executor1" class="com.alibaba.citrus.async.support.FakeAsyncExecutor" />
+
     <services:pipeline id="pipeline1">
-        <valves:invokeCallable />
+        <valves:valve class="com.alibaba.citrus.async.support.SetScreenResult" />
+        <valves:performRunnableAsync>
+            <valves:setLoggingContext />
+            <valves:valve class="com.alibaba.citrus.async.support.RequestProxyTester" />
+            <valves:doPerformRunnable />
+            <valves:valve class="com.alibaba.citrus.async.support.GetScreenResult" />
+        </valves:performRunnableAsync>
     </services:pipeline>
 
 </beans:beans>
