@@ -44,6 +44,7 @@
 
     <services:pipeline id="setBuffering_disabled">
         <valves:setBuffering enabled="false" />
+        <valves:valve class="com.alibaba.citrus.turbine.pipeline.valve.SetBufferingValveTests.MyValve" />
     </services:pipeline>
 
     <services:pipeline id="performActionValveTests">
