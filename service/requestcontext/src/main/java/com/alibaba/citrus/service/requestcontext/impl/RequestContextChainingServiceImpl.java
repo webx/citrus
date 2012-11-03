@@ -352,7 +352,6 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
             }
         }
 
-        RequestContextUtil.removeRequestContext(requestContext.getRequest());
         unbind(requestContext.getRequest());
     }
 
@@ -368,6 +367,9 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
 
             rc.commit();
         }
+
+        // 将request和requestContext断开
+        RequestContextUtil.removeRequestContext(requestContext.getRequest());
     }
 
     private void setupSpringWebEnvironment(HttpServletRequest request) {
