@@ -39,7 +39,7 @@
     </services:pipeline>
 
     <services:pipeline id="pipeline5">
-        <valves:performRunnableAsync defaultTimeout="1000" />
+        <valves:performRunnableAsync defaultTimeout="1000" defaultCancelingTimeout="2000" />
     </services:pipeline>
 
     <services:pipeline id="pipeline6">

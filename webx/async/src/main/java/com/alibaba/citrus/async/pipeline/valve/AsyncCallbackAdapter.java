@@ -26,22 +26,44 @@ import com.alibaba.citrus.async.AsyncCallback;
 
 class AsyncCallbackAdapter implements Callable<Object>, AsyncCallback {
     private final long         defaultTimeout;
+    private final long         defaultCancelingTimeout;
     private final Object       runnable;
     private final AsyncContext asyncContext;
 
-    AsyncCallbackAdapter(Object runnable, AsyncContext asyncContext, long defaultTimeout) {
+    AsyncCallbackAdapter(Object runnable, AsyncContext asyncContext, long defaultTimeout, long defaultCancelingTimeout) {
         assertTrue(runnable instanceof Runnable || runnable instanceof Callable<?>, "runnable or callable");
         this.runnable = runnable;
         this.asyncContext = assertNotNull(asyncContext, "asyncContext");
         this.defaultTimeout = defaultTimeout;
+        this.defaultCancelingTimeout = defaultCancelingTimeout;
     }
 
     public long getTimeout() {
+        long timeout = -1;
+
         if (runnable instanceof AsyncCallback) {
-            return ((AsyncCallback) runnable).getTimeout();
-        } else {
-            return defaultTimeout;
+            timeout = ((AsyncCallback) runnable).getTimeout();
         }
+
+        if (timeout < 0) {
+            timeout = defaultTimeout;
+        }
+
+        return timeout;
+    }
+
+    public long getCancelingTimeout() {
+        long timeout = -1;
+
+        if (runnable instanceof AsyncCallback) {
+            timeout = ((AsyncCallback) runnable).getCancelingTimeout();
+        }
+
+        if (timeout < 0) {
+            timeout = defaultCancelingTimeout;
+        }
+
+        return timeout;
     }
 
     public AsyncContext getAsyncContext() {
