@@ -119,6 +119,18 @@ public class PerformRunnableAsyncValveConfigTests extends AbstractAsyncTests {
     }
 
     @Test
+    public void cancelingTimeoutNotSpecified() {
+        valve = getValve("pipeline1", 0, PerformRunnableAsyncValve.class);
+        assertEquals(1000L, valve.getDefaultCancelingTimeout());
+    }
+
+    @Test
+    public void cancelingTimeoutSpecified() {
+        valve = getValve("pipeline5", 0, PerformRunnableAsyncValve.class);
+        assertEquals(2000L, valve.getDefaultCancelingTimeout());
+    }
+
+    @Test
     public void resultNameNotSpecified() {
         valve = getValve("pipeline1", 0, PerformRunnableAsyncValve.class);
         assertEquals("screenResult", valve.getResultName());

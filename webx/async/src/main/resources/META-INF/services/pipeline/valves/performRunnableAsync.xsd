@@ -23,6 +23,7 @@
         </xsd:sequence>
         <xsd:attribute name="resultName" type="xsd:string" default="screenResult" />
         <xsd:attribute name="defaultTimeout" type="xsd:long" default="0" />
+        <xsd:attribute name="defaultCancelingTimeout" type="xsd:long" default="1000" />
         <xsd:attribute name="executor-ref" type="xsd:string" use="optional" />
         <xsd:attribute name="pipeline-ref" type="xsd:string" use="optional" />
     </xsd:complexType>

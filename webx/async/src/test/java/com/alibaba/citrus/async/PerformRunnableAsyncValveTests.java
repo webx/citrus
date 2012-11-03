@@ -21,6 +21,8 @@ import static com.alibaba.citrus.util.CollectionUtil.*;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -48,8 +50,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 
+@RunWith(Parameterized.class)
 public class PerformRunnableAsyncValveTests extends AbstractAsyncTests {
     private FakeAsyncExecutor             executor1;
     private PerformRunnableAsyncValve     valve;
@@ -65,6 +71,17 @@ public class PerformRunnableAsyncValveTests extends AbstractAsyncTests {
     private AsyncContext        asyncContext;
 
     private Map<String, Object> requestAttrs = createHashMap();
+
+    private boolean doExecuteTask;
+
+    public PerformRunnableAsyncValveTests(boolean doExecuteTask) {
+        this.doExecuteTask = doExecuteTask;
+    }
+
+    @Parameters
+    public static List<Object[]> data() {
+        return Arrays.asList(new Object[][] { { true }, { false } });
+    }
 
     @BeforeClass
     public static void initClass() {
@@ -161,9 +178,12 @@ public class PerformRunnableAsyncValveTests extends AbstractAsyncTests {
     @Test
     public void invoke_resultIsCallable_withTimeout() throws Exception {
         class MyCallable implements Callable<Object>, AsyncCallback {
-            @Override
             public long getTimeout() {
                 return 1000L;
+            }
+
+            public long getCancelingTimeout() {
+                return 500L;
             }
 
             public Object call() {
@@ -173,6 +193,26 @@ public class PerformRunnableAsyncValveTests extends AbstractAsyncTests {
         }
 
         invokeWithResult(new MyCallable(), "myResultObject", 1000L);
+    }
+
+    @Test
+    public void invoke_resultIsCallable_withDefaultTimeout() throws Exception {
+        class MyCallable implements Callable<Object>, AsyncCallback {
+            public long getTimeout() {
+                return -1L; // 使用默认值
+            }
+
+            public long getCancelingTimeout() {
+                return -1L; // 使用默认值
+            }
+
+            public Object call() {
+                runnableCalled = true;
+                return "myResultObject";
+            }
+        }
+
+        invokeWithResult(new MyCallable(), "myResultObject", 0L);
     }
 
     private void invokeWithResult(Object result, Object newResult, long timeout) throws Exception {
@@ -197,22 +237,28 @@ public class PerformRunnableAsyncValveTests extends AbstractAsyncTests {
         Callable<?> callable = executor1.getCallable(); // executor.submit(callable)被调用
         assertNotNull(callable);
 
-        // 在另一个线程中执行runnable，确保request被绑定到线程中（否则RequestProxyTester会报错）
-        runnableCalled = false;
-        assertNull(new SimpleAsyncTaskExecutor().submit(callable).get()); // callable总是返回null
-        assertTrue(runnableCalled); // runnable或callable被执行
-        assertEquals(newResult, GetScreenResult.get()); // doPerformRunnable以后，值被保存到result中
+        // doExecuteTask控制是否执行runnable
+        if (doExecuteTask) {
+            // 在另一个线程中执行runnable，确保request被绑定到线程中（否则RequestProxyTester会报错）
+            runnableCalled = false;
+            assertNull(new SimpleAsyncTaskExecutor().submit(callable).get()); // callable总是返回null
+            assertTrue(runnableCalled); // runnable或callable被执行
+            assertEquals(newResult, GetScreenResult.get()); // doPerformRunnable以后，值被保存到result中
 
-        verify(requestMock, asyncContext);
+            verify(requestMock, asyncContext);
+        }
 
         // onTimeout
         AsyncEvent event = createMock(AsyncEvent.class);
-
-        expect(event.getAsyncContext()).andReturn(asyncContext).once();
-
         reset(asyncContext);
-        asyncContext.complete();
-        expectLastCall().andThrow(new IllegalStateException()).once(); // 即使complete抛出异常也没有关系。
+
+        // 如果runnable已经被执行，那么event.getAsyncContext().complete()将不被执行。
+        if (!doExecuteTask) {
+            expect(event.getAsyncContext()).andReturn(asyncContext).once();
+
+            asyncContext.complete();
+            expectLastCall().andThrow(new IllegalStateException()).once(); // 即使complete抛出异常也没有关系。
+        }
 
         replay(event, asyncContext);
 

@@ -23,6 +23,9 @@ package com.alibaba.citrus.async;
  * @author Michael Zhou
  */
 public interface AsyncCallback {
-    /** 设置async超时时间，超过这个时间，请求就会被强制结束，<code>asyncContext.complete()</code>会被调用。 */
+    /** 设置async超时时间，超过这个时间，任务就会被cancel。 */
     long getTimeout();
+
+    /** 设置cancel任务的超时时间。当任务超时后，会被cancel掉。cancel以后，仍然会给出一段时间，让线程进行处理。超过这个时间，请求就会被强制结束，<code>asyncContext.complete()</code>会被调用。 */
+    long getCancelingTimeout();
 }

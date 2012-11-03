@@ -264,6 +264,8 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
                 // 将requestContext放入request中，以便今后只需要用request就可以取得requestContext。
                 RequestContextUtil.setRequestContext(requestContext);
             }
+
+            getLogger().debug("Created a new request context: {}", requestContext);
         }
 
         // 无论是否是从async恢复，都需要重新设置thread的上下文环境。
@@ -331,6 +333,7 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
                     }
 
                     public void onComplete(Object /* AsyncEvent */ event) throws IOException {
+                        getLogger().debug("Async task completed.");
                         doCommit(requestContext);
                     }
 
@@ -352,7 +355,7 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
             }
         }
 
-        unbind(requestContext.getRequest());
+        unbind(request);
     }
 
     public void unbind(HttpServletRequest request) {
@@ -360,6 +363,8 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
     }
 
     private void doCommit(RequestContext requestContext) {
+        HttpServletRequest request = requestContext.getRequest();
+
         for (RequestContext rc = requestContext; rc != null; rc = rc.getWrappedRequestContext()) {
             if (getLogger().isTraceEnabled()) {
                 getLogger().trace("Committing request context: {}", rc.getClass().getSimpleName());
@@ -369,7 +374,9 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
         }
 
         // 将request和requestContext断开
-        RequestContextUtil.removeRequestContext(requestContext.getRequest());
+        RequestContextUtil.removeRequestContext(request);
+
+        getLogger().debug("Committed request: {}", request);
     }
 
     private void setupSpringWebEnvironment(HttpServletRequest request) {

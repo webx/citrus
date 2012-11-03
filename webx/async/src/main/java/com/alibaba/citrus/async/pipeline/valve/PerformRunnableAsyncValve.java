@@ -23,7 +23,9 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import javax.servlet.AsyncContext;
 import javax.servlet.AsyncEvent;
 import javax.servlet.AsyncListener;
@@ -53,9 +55,10 @@ import org.w3c.dom.Element;
  * @author Michael Zhou
  */
 public class PerformRunnableAsyncValve extends AbstractResultConsumerValve {
-    final static         String ASYNC_CALLBACK_KEY = "_async_callback_";
-    private final static Logger log                = LoggerFactory.getLogger(PerformRunnableAsyncValve.class);
-    private long defaultTimeout;
+    final static         String ASYNC_CALLBACK_KEY      = "_async_callback_";
+    private final static Logger log                     = LoggerFactory.getLogger(PerformRunnableAsyncValve.class);
+    private              long   defaultTimeout          = 0L;
+    private              long   defaultCancelingTimeout = 1000L;
 
     @Autowired
     private RequestContextChainingService rccs;
@@ -74,6 +77,14 @@ public class PerformRunnableAsyncValve extends AbstractResultConsumerValve {
 
     public void setDefaultTimeout(long defaultTimeout) {
         this.defaultTimeout = defaultTimeout;
+    }
+
+    public long getDefaultCancelingTimeout() {
+        return defaultCancelingTimeout;
+    }
+
+    public void setDefaultCancelingTimeout(long defaultCancelingTimeout) {
+        this.defaultCancelingTimeout = defaultCancelingTimeout;
     }
 
     public AsyncTaskExecutor getExecutor() {
@@ -119,10 +130,12 @@ public class PerformRunnableAsyncValve extends AbstractResultConsumerValve {
 
         final AsyncContext asyncContext = request.startAsync(request, response);
 
-        final AsyncCallbackAdapter callback = new AsyncCallbackAdapter(resultObject, asyncContext, defaultTimeout);
+        final AsyncCallbackAdapter callback = new AsyncCallbackAdapter(resultObject, asyncContext, getDefaultTimeout(), getDefaultCancelingTimeout());
         pipelineContext.setAttribute(ASYNC_CALLBACK_KEY, callback);
 
         asyncContext.setTimeout(callback.getTimeout());
+
+        final CountDownLatch signal = new CountDownLatch(1);
 
         // 执行子pipeline，子pipeline中必须包含DoPerformRunnableValve。
         // 执行前将当前的request/response绑定到新线程中。
@@ -143,6 +156,8 @@ public class PerformRunnableAsyncValve extends AbstractResultConsumerValve {
                     } catch (IllegalStateException e) {
                         // ignore - 有可能因为超时，该异步请求已经被complete了，再次complete将会抛异常。
                     }
+
+                    signal.countDown();
                 }
 
                 return null;
@@ -155,12 +170,24 @@ public class PerformRunnableAsyncValve extends AbstractResultConsumerValve {
             }
 
             public void onTimeout(AsyncEvent event) throws IOException {
+                log.debug("Async task timed out.");
+
                 future.cancel(true);
 
                 try {
-                    event.getAsyncContext().complete();
-                } catch (IllegalStateException e) {
-                    // ignore - 有可能因为超时，该异步请求已经被complete了，再次complete将会抛异常。
+                    if (signal.await(getDefaultCancelingTimeout(), TimeUnit.MILLISECONDS)) {
+                        log.debug("Async task was cancelled");
+                    } else {
+                        log.debug("Async task is still running.  Tried to complete the task.");
+
+                        // 通知异步线程结束，过了一定时间以后，如果还没有结束，就强制complete。
+                        try {
+                            event.getAsyncContext().complete();
+                        } catch (IllegalStateException e) {
+                            // ignore - 有可能因为超时，该异步请求已经被complete了，再次complete将会抛异常。
+                        }
+                    }
+                } catch (InterruptedException e) {
                 }
             }
 
@@ -177,7 +204,7 @@ public class PerformRunnableAsyncValve extends AbstractResultConsumerValve {
     public static class DefinitionParser extends AbstractValveDefinitionParser<PerformRunnableAsyncValve> {
         @Override
         protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
-            attributesToProperties(element, builder, "resultName", "defaultTimeout");
+            attributesToProperties(element, builder, "resultName", "defaultTimeout", "defaultCancelingTimeout");
 
             // sub pipeline
             Object asyncPipeline = parsePipeline(element, null, parserContext, null, true);
