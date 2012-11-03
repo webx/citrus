@@ -114,7 +114,7 @@ public class StartAsyncValve extends AbstractResultConsumerValve {
         final HttpServletRequest request = rc.getRequest();
         HttpServletResponse response = rc.getResponse();
 
-        AsyncContext asyncContext = request.startAsync(request, response);
+        final AsyncContext asyncContext = request.startAsync(request, response);
 
         final AsyncCallbackAdapter callback = new AsyncCallbackAdapter(resultObject, asyncContext, defaultTimeout);
         pipelineContext.setAttribute(ASYNC_CALLBACK_KEY, callback);
@@ -132,6 +132,12 @@ public class StartAsyncValve extends AbstractResultConsumerValve {
                     rccs.unbind(request);
                 }
 
+                try {
+                    asyncContext.complete();
+                } catch (IllegalStateException e) {
+                    // ignore - 有可能因为超时，该异步请求已经被complete了，再次complete将会抛异常。
+                }
+
                 return null;
             }
         });
@@ -143,7 +149,12 @@ public class StartAsyncValve extends AbstractResultConsumerValve {
 
             public void onTimeout(AsyncEvent event) throws IOException {
                 future.cancel(true);
-                event.getAsyncContext().complete();
+
+                try {
+                    event.getAsyncContext().complete();
+                } catch (IllegalStateException e) {
+                    // ignore - 有可能因为超时，该异步请求已经被complete了，再次complete将会抛异常。
+                }
             }
 
             public void onError(AsyncEvent event) throws IOException {

@@ -168,6 +168,9 @@ public class StartAsyncValveTests extends AbstractAsyncTests {
         asyncContext.addListener(capture(listenerCap));
         expectLastCall().once();
 
+        asyncContext.complete(); // 当callable被执行完时，asyncContext.complete会被调用。
+        expectLastCall().andThrow(new IllegalStateException()).once(); // 即使complete抛出异常也没有关系。
+
         replay(asyncContext);
 
         pipeline.newInvocation().invoke();
@@ -192,7 +195,7 @@ public class StartAsyncValveTests extends AbstractAsyncTests {
 
         reset(asyncContext);
         asyncContext.complete();
-        expectLastCall().once();
+        expectLastCall().andThrow(new IllegalStateException()).once(); // 即使complete抛出异常也没有关系。
 
         replay(event, asyncContext);
 
