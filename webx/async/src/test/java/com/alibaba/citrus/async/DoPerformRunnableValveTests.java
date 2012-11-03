@@ -25,21 +25,21 @@ import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class InvokeCallableValveTests extends AbstractAsyncTests {
+public class DoPerformRunnableValveTests extends AbstractAsyncTests {
     @BeforeClass
     public static void initClass() {
-        defaultFactory = createApplicationContext("invokeCallableValve.xml");
+        defaultFactory = createApplicationContext("doPerformRunnableValve.xml");
     }
 
     @Test
-    public void notInStartAsync() {
+    public void notInPerformRunnableAsync() {
         PipelineImpl pipeline = getPipeline("pipeline1");
 
         try {
             pipeline.newInvocation().invoke();
             fail();
         } catch (PipelineException e) {
-            assertThat(e, exception(IllegalStateException.class, "<invokieCallable> valve should be inside <startAsync>"));
+            assertThat(e, exception(IllegalStateException.class, "<doPerformRunnable> valve should be inside <performRunnableAsync>"));
         }
     }
 }

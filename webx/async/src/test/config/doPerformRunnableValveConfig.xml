@@ -14,21 +14,21 @@
     <beans:bean id="executor1" class="com.alibaba.citrus.async.support.FakeAsyncExecutor" />
 
     <services:pipeline id="pipeline1">
-        <valves:startAsync />
+        <valves:performRunnableAsync />
     </services:pipeline>
 
     <services:pipeline id="pipeline2">
-        <valves:startAsync>
+        <valves:performRunnableAsync>
             <valves:setLoggingContext />
-            <valves:invokeCallable />
-        </valves:startAsync>
+            <valves:doPerformRunnable />
+        </valves:performRunnableAsync>
     </services:pipeline>
 
     <services:pipeline id="pipeline3">
-        <valves:startAsync>
+        <valves:performRunnableAsync>
             <valves:setLoggingContext />
-            <valves:invokeCallable resultName="myresult" />
-        </valves:startAsync>
+            <valves:doPerformRunnable resultName="myresult" />
+        </valves:performRunnableAsync>
     </services:pipeline>
 
 </beans:beans>

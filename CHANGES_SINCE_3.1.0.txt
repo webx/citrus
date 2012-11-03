@@ -71,10 +71,10 @@
 * 添加<setBuffering enabled="true|false" /> valve，可以在pipeline中开关buffering，以简化screen代码。
 * 添加异步执行功能，以下为pipeline片段：
   <performScreen/>
-  <startAsync>
+  <performRunnableAsync>
       <setLoggingContext />
-      <invokeCallable />
-  </startAsync>
+      <doPerformRunnable />
+  </performRunnableAsync>
 
   当screen返回runnable或callable对象时，就会启动异步操作。runnable或callable将在另一个线程中被执行。
 

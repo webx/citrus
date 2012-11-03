@@ -15,43 +15,43 @@
     <beans:bean id="executor2" class="com.alibaba.citrus.async.support.FakeAsyncExecutor" />
 
     <services:pipeline id="pipeline1">
-        <valves:startAsync />
+        <valves:performRunnableAsync />
     </services:pipeline>
 
     <services:pipeline id="pipeline2">
-        <valves:startAsync executor-ref="executor2" />
+        <valves:performRunnableAsync executor-ref="executor2" />
     </services:pipeline>
 
     <services:pipeline id="pipeline3">
-        <valves:startAsync pipeline-ref="subpipeline1" />
+        <valves:performRunnableAsync pipeline-ref="subpipeline1" />
     </services:pipeline>
 
     <services:pipeline id="subpipeline1">
         <valves:setLoggingContext />
-        <valves:invokeCallable />
+        <valves:doPerformRunnable />
     </services:pipeline>
 
     <services:pipeline id="pipeline4">
-        <valves:startAsync>
+        <valves:performRunnableAsync>
             <valves:setLoggingContext />
-            <valves:invokeCallable />
-        </valves:startAsync>
+            <valves:doPerformRunnable />
+        </valves:performRunnableAsync>
     </services:pipeline>
 
     <services:pipeline id="pipeline5">
-        <valves:startAsync defaultTimeout="1000" />
+        <valves:performRunnableAsync defaultTimeout="1000" />
     </services:pipeline>
 
     <services:pipeline id="pipeline6">
-        <valves:startAsync resultName="myresult" />
+        <valves:performRunnableAsync resultName="myresult" />
     </services:pipeline>
 
     <services:pipeline id="pipeline7">
         <valves:valve class="com.alibaba.citrus.async.support.SetScreenResult" />
-        <valves:startAsync>
+        <valves:performRunnableAsync>
             <valves:setLoggingContext />
-            <valves:invokeCallable />
-        </valves:startAsync>
+            <valves:doPerformRunnable />
+        </valves:performRunnableAsync>
     </services:pipeline>
 
 </beans:beans>

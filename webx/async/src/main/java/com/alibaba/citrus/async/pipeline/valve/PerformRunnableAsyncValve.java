@@ -50,7 +50,7 @@ import org.w3c.dom.Element;
  *
  * @author Michael Zhou
  */
-public class StartAsyncValve extends AbstractResultConsumerValve {
+public class PerformRunnableAsyncValve extends AbstractResultConsumerValve {
     final static String ASYNC_CALLBACK_KEY = "_async_callback_";
     private long defaultTimeout;
 
@@ -92,7 +92,7 @@ public class StartAsyncValve extends AbstractResultConsumerValve {
     @Override
     protected void init() throws Exception {
         if (asyncPipeline == null) {
-            InvokeCallableValve valve = new InvokeCallableValve();
+            DoPerformRunnableValve valve = new DoPerformRunnableValve();
             valve.afterPropertiesSet();
 
             PipelineImpl pipeline = new PipelineImpl();
@@ -121,7 +121,7 @@ public class StartAsyncValve extends AbstractResultConsumerValve {
 
         asyncContext.setTimeout(callback.getTimeout());
 
-        // 执行子pipeline，子pipeline中必须包含InvokeCallableValve。
+        // 执行子pipeline，子pipeline中必须包含DoPerformRunnableValve。
         // 执行前将当前的request/response绑定到新线程中。
         final Future<?> future = executor.submit(new Callable<Object>() {
             public Object call() throws Exception {
@@ -169,7 +169,7 @@ public class StartAsyncValve extends AbstractResultConsumerValve {
         pipelineContext.invokeNext();
     }
 
-    public static class DefinitionParser extends AbstractValveDefinitionParser<StartAsyncValve> {
+    public static class DefinitionParser extends AbstractValveDefinitionParser<PerformRunnableAsyncValve> {
         @Override
         protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
             attributesToProperties(element, builder, "resultName", "defaultTimeout");

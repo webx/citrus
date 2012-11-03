@@ -8,7 +8,7 @@
     <xsd:import namespace="http://www.alibaba.com/schema/springext/base"
                 schemaLocation="http://localhost:8080/schema/www.alibaba.com/schema/springext/springext-base.xsd" />
 
-    <xsd:element name="startAsync" type="StartAsyncValveType">
+    <xsd:element name="performRunnableAsync" type="PerformRunnableAsyncValveType">
         <xsd:annotation>
             <xsd:documentation><![CDATA[
     假如screen返回一个<code>Runnable</code>对象，则在另一个线程中执行之，当前valve立即返回，当前线程继续执行并很快退出。
@@ -16,7 +16,7 @@
         </xsd:annotation>
     </xsd:element>
 
-    <xsd:complexType name="StartAsyncValveType">
+    <xsd:complexType name="PerformRunnableAsyncValveType">
         <xsd:sequence>
             <xsd:any namespace="http://www.alibaba.com/schema/services/pipeline/valves"
                      minOccurs="0" maxOccurs="unbounded" />

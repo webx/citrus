@@ -35,7 +35,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alibaba.citrus.async.pipeline.valve.StartAsyncValve;
+import com.alibaba.citrus.async.pipeline.valve.PerformRunnableAsyncValve;
 import com.alibaba.citrus.async.support.FakeAsyncExecutor;
 import com.alibaba.citrus.async.support.GetScreenResult;
 import com.alibaba.citrus.async.support.SetScreenResult;
@@ -50,9 +50,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 
-public class StartAsyncValveTests extends AbstractAsyncTests {
+public class PerformRunnableAsyncValveTests extends AbstractAsyncTests {
     private FakeAsyncExecutor             executor1;
-    private StartAsyncValve               valve;
+    private PerformRunnableAsyncValve     valve;
     private PipelineImpl                  pipeline;
     private RequestContextChainingService rccs;
 
@@ -68,14 +68,14 @@ public class StartAsyncValveTests extends AbstractAsyncTests {
 
     @BeforeClass
     public static void initClass() {
-        defaultFactory = createApplicationContext("startAsyncValve.xml");
+        defaultFactory = createApplicationContext("performRunnableAsyncValve.xml");
     }
 
     @Before
     public void init() {
         executor1 = (FakeAsyncExecutor) factory.getBean("executor1");
         pipeline = (PipelineImpl) factory.getBean("pipeline1");
-        valve = getValve("pipeline1", 1, StartAsyncValve.class);
+        valve = getValve("pipeline1", 1, PerformRunnableAsyncValve.class);
         rccs = (RequestContextChainingService) factory.getBean("requestContexts");
 
         assertNotNull(executor1);
@@ -137,13 +137,13 @@ public class StartAsyncValveTests extends AbstractAsyncTests {
         pipeline.newInvocation().invoke();
     }
 
-    private boolean callableInvoked;
+    private boolean runnableCalled;
 
     @Test
     public void invoke_resultIsRunnable() throws Exception {
         invokeWithResult(new Runnable() {
             public void run() {
-                callableInvoked = true;
+                runnableCalled = true;
             }
         }, null, 0);
     }
@@ -152,7 +152,7 @@ public class StartAsyncValveTests extends AbstractAsyncTests {
     public void invoke_resultIsCallable() throws Exception {
         invokeWithResult(new Callable<Object>() {
             public Object call() {
-                callableInvoked = true;
+                runnableCalled = true;
                 return "myResultObject";
             }
         }, "myResultObject", 0);
@@ -167,7 +167,7 @@ public class StartAsyncValveTests extends AbstractAsyncTests {
             }
 
             public Object call() {
-                callableInvoked = true;
+                runnableCalled = true;
                 return "myResultObject";
             }
         }
@@ -185,7 +185,7 @@ public class StartAsyncValveTests extends AbstractAsyncTests {
         asyncContext.addListener(capture(listenerCap));
         expectLastCall().once();
 
-        asyncContext.complete(); // 当callable被执行完时，asyncContext.complete会被调用。
+        asyncContext.complete(); // 当runnable被执行完时，asyncContext.complete会被调用。
         expectLastCall().andThrow(new IllegalStateException()).once(); // 即使complete抛出异常也没有关系。
 
         replay(asyncContext);
@@ -197,11 +197,11 @@ public class StartAsyncValveTests extends AbstractAsyncTests {
         Callable<?> callable = executor1.getCallable(); // executor.submit(callable)被调用
         assertNotNull(callable);
 
-        // 在另一个线程中执行callable，确保request被绑定到线程中（否则RequestProxyTester会报错）
-        callableInvoked = false;
+        // 在另一个线程中执行runnable，确保request被绑定到线程中（否则RequestProxyTester会报错）
+        runnableCalled = false;
         assertNull(new SimpleAsyncTaskExecutor().submit(callable).get()); // callable总是返回null
-        assertTrue(callableInvoked); // runnable或callable被执行
-        assertEquals(newResult, GetScreenResult.get()); // invokeCallable以后，值被保存到result中
+        assertTrue(runnableCalled); // runnable或callable被执行
+        assertEquals(newResult, GetScreenResult.get()); // doPerformRunnable以后，值被保存到result中
 
         verify(requestMock, asyncContext);
 

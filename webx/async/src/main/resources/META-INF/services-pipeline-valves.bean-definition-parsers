@@ -1,2 +1,2 @@
-startAsync=com.alibaba.citrus.async.pipeline.valve.StartAsyncValve$DefinitionParser
-invokeCallable=com.alibaba.citrus.async.pipeline.valve.InvokeCallableValve$DefinitionParser
+performRunnableAsync=com.alibaba.citrus.async.pipeline.valve.PerformRunnableAsyncValve$DefinitionParser
+doPerformRunnable=com.alibaba.citrus.async.pipeline.valve.DoPerformRunnableValve$DefinitionParser
