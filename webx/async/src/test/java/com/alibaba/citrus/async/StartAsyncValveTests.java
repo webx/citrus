@@ -145,7 +145,7 @@ public class StartAsyncValveTests extends AbstractAsyncTests {
             public void run() {
                 callableInvoked = true;
             }
-        }, null);
+        }, null, 0);
     }
 
     @Test
@@ -155,13 +155,30 @@ public class StartAsyncValveTests extends AbstractAsyncTests {
                 callableInvoked = true;
                 return "myResultObject";
             }
-        }, "myResultObject");
+        }, "myResultObject", 0);
     }
 
-    private void invokeWithResult(Object result, Object newResult) throws Exception {
+    @Test
+    public void invoke_resultIsCallable_withTimeout() throws Exception {
+        class MyCallable implements Callable<Object>, AsyncCallback {
+            @Override
+            public long getTimeout() {
+                return 1000L;
+            }
+
+            public Object call() {
+                callableInvoked = true;
+                return "myResultObject";
+            }
+        }
+
+        invokeWithResult(new MyCallable(), "myResultObject", 1000L);
+    }
+
+    private void invokeWithResult(Object result, Object newResult, long timeout) throws Exception {
         SetScreenResult.set(result);
 
-        asyncContext.setTimeout(0);
+        asyncContext.setTimeout(timeout);
         expectLastCall().once();
 
         Capture<AsyncListener> listenerCap = new Capture<AsyncListener>();
