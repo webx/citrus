@@ -53,6 +53,8 @@ public class SetBufferingValve extends AbstractValve {
         } catch (IllegalStateException e) {
             log.warn("Unable to setBuffering({}): {}", enabled, e.getMessage());
         }
+
+        pipelineContext.invokeNext();
     }
 
     public static class DefinitionParser extends AbstractValveDefinitionParser<SetBufferingValve> {

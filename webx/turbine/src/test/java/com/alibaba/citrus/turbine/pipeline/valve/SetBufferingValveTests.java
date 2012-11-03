@@ -20,9 +20,15 @@ package com.alibaba.citrus.turbine.pipeline.valve;
 import static com.alibaba.citrus.service.requestcontext.util.RequestContextUtil.*;
 import static org.junit.Assert.*;
 
+import javax.servlet.http.HttpServletResponse;
+
+import com.alibaba.citrus.service.pipeline.PipelineContext;
+import com.alibaba.citrus.service.pipeline.Valve;
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import com.alibaba.citrus.service.requestcontext.buffered.BufferedRequestContext;
+import com.meterware.httpunit.WebResponse;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class SetBufferingValveTests extends AbstractValveTests {
     private BufferedRequestContext brc;
@@ -68,6 +74,9 @@ public class SetBufferingValveTests extends AbstractValveTests {
 
         pipeline.newInvocation().invoke();
         assertEquals(false, brc.isBuffering());
+
+        WebResponse webResponse = commitRequestContext();
+        assertEquals("hello", webResponse.getText());
     }
 
     @Test
@@ -84,5 +93,17 @@ public class SetBufferingValveTests extends AbstractValveTests {
 
         pipeline.newInvocation().invoke();
         assertEquals(true, brc.isBuffering()); // unchanged
+    }
+
+    public static class MyValve implements Valve {
+        @Autowired
+        private HttpServletResponse response;
+
+        @Override
+        public void invoke(PipelineContext pipelineContext) throws Exception {
+            response.getWriter().print("hello");
+            response.getWriter().flush();
+            pipelineContext.invokeNext();
+        }
     }
 }
