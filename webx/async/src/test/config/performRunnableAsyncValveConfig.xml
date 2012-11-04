@@ -43,7 +43,7 @@
     </services:pipeline>
 
     <services:pipeline id="pipeline6">
-        <valves:performRunnableAsync in="myresult" />
+        <valves:performRunnableAsync input="myresult" />
     </services:pipeline>
 
     <services:pipeline id="pipeline7">
