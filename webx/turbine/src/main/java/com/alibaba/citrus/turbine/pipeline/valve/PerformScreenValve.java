@@ -21,7 +21,6 @@ import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.turbine.TurbineConstant.*;
 import static com.alibaba.citrus.turbine.util.TurbineUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
-import static com.alibaba.citrus.util.StringUtil.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,7 +32,6 @@ import com.alibaba.citrus.service.moduleloader.ModuleLoaderService;
 import com.alibaba.citrus.service.moduleloader.ModuleNotFoundException;
 import com.alibaba.citrus.service.moduleloader.ModuleReturningValue;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
-import com.alibaba.citrus.service.pipeline.support.AbstractValve;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
 import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.citrus.util.StringUtil;
@@ -45,13 +43,11 @@ import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
 /**
- * 执行screen。
+ * 执行screen，如果有返回值的话，将返回的对象放到pipeline context中。
  *
  * @author Michael Zhou
  */
-public class PerformScreenValve extends AbstractValve {
-    static final String DEFAULT_RESULT_NAME = "screenResult";
-
+public class PerformScreenValve extends AbstractInOutValve {
     @Autowired
     private ModuleLoaderService moduleLoaderService;
 
@@ -61,18 +57,8 @@ public class PerformScreenValve extends AbstractValve {
     @Autowired
     private MappingRuleService mappingRuleService;
 
-    private String resultName;
-
     public MappingRuleService getMappingRuleService() {
         return mappingRuleService;
-    }
-
-    public String getResultName() {
-        return resultName == null ? DEFAULT_RESULT_NAME : resultName;
-    }
-
-    public void setResultName(String resultName) {
-        this.resultName = trimToNull(resultName);
     }
 
     public void invoke(PipelineContext pipelineContext) throws Exception {
@@ -87,7 +73,7 @@ public class PerformScreenValve extends AbstractValve {
             try {
                 result = performScreenModule(rundata);
             } finally {
-                pipelineContext.setAttribute(getResultName(), result);
+                setOutputValue(pipelineContext, result);
             }
         }
 
@@ -203,7 +189,7 @@ public class PerformScreenValve extends AbstractValve {
     public static class DefinitionParser extends AbstractValveDefinitionParser<PerformScreenValve> {
         @Override
         protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
-            attributesToProperties(element, builder, "resultName");
+            attributesToProperties(element, builder, "out");
         }
     }
 }

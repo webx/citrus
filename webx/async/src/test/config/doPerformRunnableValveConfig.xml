@@ -27,7 +27,7 @@
     <services:pipeline id="pipeline3">
         <valves:performRunnableAsync>
             <valves:setLoggingContext />
-            <valves:doPerformRunnable resultName="myresult" />
+            <valves:doPerformRunnable out="myresult" />
         </valves:performRunnableAsync>
     </services:pipeline>
 

@@ -133,12 +133,12 @@ public class PerformRunnableAsyncValveConfigTests extends AbstractAsyncTests {
     @Test
     public void resultNameNotSpecified() {
         valve = getValve("pipeline1", 0, PerformRunnableAsyncValve.class);
-        assertEquals("screenResult", valve.getResultName());
+        assertEquals("result", valve.getIn());
     }
 
     @Test
     public void resultNameSpecified() {
         valve = getValve("pipeline6", 0, PerformRunnableAsyncValve.class);
-        assertEquals("myresult", valve.getResultName());
+        assertEquals("myresult", valve.getIn());
     }
 }

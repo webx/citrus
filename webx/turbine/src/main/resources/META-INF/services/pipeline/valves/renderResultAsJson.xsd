@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            xmlns:beans="http://www.springframework.org/schema/beans"
-            xmlns:springext="http://www.alibaba.com/schema/springext/base" elementFormDefault="qualified">
+            elementFormDefault="qualified">
 
     <xsd:import namespace="http://www.springframework.org/schema/beans"
                 schemaLocation="http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd" />
@@ -18,7 +17,7 @@
     </xsd:element>
 
     <xsd:complexType name="RenderResultAsJsonType">
-        <xsd:attribute name="resultName" type="xsd:string" default="screenResult" />
+        <xsd:attribute name="in" type="xsd:string" default="result" />
         <xsd:attribute name="contentType" type="xsd:string" default="application/json" />
         <xsd:attribute name="javascriptVariable" type="xsd:string" use="optional" />
         <xsd:attribute name="javascriptContentType" type="xsd:string" default="application/javascript" />

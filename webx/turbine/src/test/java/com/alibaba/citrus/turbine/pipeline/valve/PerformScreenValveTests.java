@@ -121,7 +121,7 @@ public class PerformScreenValveTests extends AbstractValveTests {
         invocation.invoke();
 
         assertEquals("returnValue", rundata.getRequest().getAttribute("module.screen.ddd.eee.MyEventScreen"));
-        assertEquals("myresult", invocation.getAttribute("screenResult"));
+        assertEquals("myresult", invocation.getAttribute("result"));
     }
 
     @Test
