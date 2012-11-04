@@ -39,7 +39,7 @@ import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.RequestContextChainingService;
-import com.alibaba.citrus.turbine.pipeline.valve.AbstractInOutValve;
+import com.alibaba.citrus.turbine.pipeline.valve.AbstractInputOutputValve;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +54,7 @@ import org.w3c.dom.Element;
  *
  * @author Michael Zhou
  */
-public class PerformRunnableAsyncValve extends AbstractInOutValve {
+public class PerformRunnableAsyncValve extends AbstractInputOutputValve {
     final static         String ASYNC_CALLBACK_KEY      = "_async_callback_";
     private final static Logger log                     = LoggerFactory.getLogger(PerformRunnableAsyncValve.class);
     private              long   defaultTimeout          = 0L;
@@ -104,7 +104,7 @@ public class PerformRunnableAsyncValve extends AbstractInOutValve {
     }
 
     @Override
-    protected String getOutDefault() {
+    protected String getDefaultOutputKey() {
         return ASYNC_CALLBACK_KEY;
     }
 
@@ -214,7 +214,7 @@ public class PerformRunnableAsyncValve extends AbstractInOutValve {
     public static class DefinitionParser extends AbstractValveDefinitionParser<PerformRunnableAsyncValve> {
         @Override
         protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
-            attributesToProperties(element, builder, "in", "defaultTimeout", "defaultCancelingTimeout");
+            attributesToProperties(element, builder, "input", "defaultTimeout", "defaultCancelingTimeout");
 
             // sub pipeline
             Object asyncPipeline = parsePipeline(element, null, parserContext, null, true);

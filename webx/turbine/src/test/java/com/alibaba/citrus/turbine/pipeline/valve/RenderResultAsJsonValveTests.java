@@ -57,9 +57,10 @@ public class RenderResultAsJsonValveTests extends AbstractValveTests {
 
         WebResponse webResponse = client.getResponse(invocationContext);
 
+        // 当result==null时，不执行valve
         assertEquals(200, webResponse.getResponseCode());
-        assertEquals("application/json", webResponse.getContentType());
-        assertEquals("null", webResponse.getText());
+        assertEquals("text/html", webResponse.getContentType());
+        assertEquals("", webResponse.getText());
     }
 
     @Test
@@ -107,9 +108,10 @@ public class RenderResultAsJsonValveTests extends AbstractValveTests {
 
         WebResponse webResponse = client.getResponse(invocationContext);
 
+        // 当result==null时，不执行valve
         assertEquals(200, webResponse.getResponseCode());
-        assertEquals("application/javascript", webResponse.getContentType());
-        assertEquals("var myresult = null;", webResponse.getText());
+        assertEquals("text/html", webResponse.getContentType());
+        assertEquals("", webResponse.getText());
     }
 
     @Test
@@ -142,7 +144,7 @@ public class RenderResultAsJsonValveTests extends AbstractValveTests {
         assertEquals("var myresult = {\"age\":100,\"name\":\"michael\"};", webResponse.getText());
     }
 
-    public static class ResultCheck extends AbstractInOutValve {
+    public static class ResultCheck extends AbstractInputOutputValve {
         @Override
         public void invoke(PipelineContext pipelineContext) throws Exception {
             resultsHolder.get().add(getInputValue(pipelineContext));

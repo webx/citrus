@@ -28,86 +28,63 @@ import com.alibaba.citrus.service.pipeline.support.AbstractValve;
  *
  * @author Michael Zhou
  */
-public abstract class AbstractInOutValve extends AbstractValve {
-    protected static final String DEFAULT_ATTRIBUTE_KEY = "result";
-    private String inKey;
-    private String outKey;
+public abstract class AbstractInputOutputValve extends AbstractValve {
+    private static final String DEFAULT_INPUT_OUTPUT_KEY = "result";
+    private String inputKey;
+    private String outputKey;
 
-    public final String getIn() {
-        String key = inKey;
+    public final void setInput(String inputKey) {
+        this.inputKey = trimToNull(inputKey);
+    }
+
+    public final void setOutput(String outputKey) {
+        this.outputKey = trimToNull(outputKey);
+    }
+
+    public final String getInputKey() {
+        String key = inputKey;
 
         if (key == null) {
-            key = getInDefault();
+            key = getDefaultInputKey();
         }
 
         if (key == null) {
-            key = DEFAULT_ATTRIBUTE_KEY;
+            key = DEFAULT_INPUT_OUTPUT_KEY;
+        }
+
+        return key;
+    }
+
+    public final String getOutputKey() {
+        String key = outputKey;
+
+        if (key == null) {
+            key = getDefaultOutputKey();
+        }
+
+        if (key == null) {
+            key = DEFAULT_INPUT_OUTPUT_KEY;
         }
 
         return key;
     }
 
     /**
-     * 子类可覆盖此方法，以设置in的默认值。
+     * 子类可覆盖此方法，以设置input key的默认值。
      *
      * @return 返回<code>null</code>使用系统默认值。
      */
-    protected String getInDefault() {
+    protected String getDefaultInputKey() {
         return null;
     }
 
-    public final void setIn(String inKey) {
-        this.inKey = trimToNull(inKey);
-    }
-
-    public final String getOut() {
-        String key = outKey;
-
-        if (key == null) {
-            key = getOutDefault();
-        }
-
-        if (key == null) {
-            key = DEFAULT_ATTRIBUTE_KEY;
-        }
-
-        return key;
-    }
-
     /**
-     * 子类可覆盖此方法，以设置out的默认值。
+     * 子类可覆盖此方法，以设置output key的默认值。
      *
      * @return 返回<code>null</code>使用系统默认值。
      */
-    protected String getOutDefault() {
+    protected String getDefaultOutputKey() {
         return null;
-    }
-
-    public final void setOut(String outKey) {
-        this.outKey = trimToNull(outKey);
-    }
-
-    /** 从pipeline context中取得输入对象。 */
-    protected final Object getInputValue(PipelineContext pipelineContext) {
-        return pipelineContext.getAttribute(getIn());
-    }
-
-    /**
-     * 从pipeline context中取出输入对象。
-     * 假如对象是可被接受的，那么该对象将从context中被删除，也就是说，没有第二个人可以再次取得同一个对象。
-     *
-     * @return 如果对象存在且被<code>filterInputValue(Object)</code>所接受，则返回之；否则返回<code>null</code>。
-     */
-    protected final Object consumeInputValue(PipelineContext pipelineContext) {
-        Object value = pipelineContext.getAttribute(getIn());
-
-        if (filterInputValue(value)) {
-            pipelineContext.setAttribute(getIn(), null);
-        } else {
-            value = null;
-        }
-
-        return value;
     }
 
     /**
@@ -119,8 +96,31 @@ public abstract class AbstractInOutValve extends AbstractValve {
         return true;
     }
 
+    /** 从pipeline context中取得输入对象。 */
+    protected final Object getInputValue(PipelineContext pipelineContext) {
+        return pipelineContext.getAttribute(getInputKey());
+    }
+
+    /**
+     * 从pipeline context中取出输入对象。
+     * 假如对象是可被接受的，那么该对象将从context中被删除，也就是说，没有第二个人可以再次取得同一个对象。
+     *
+     * @return 如果对象存在且被<code>filterInputValue(Object)</code>所接受，则返回之；否则返回<code>null</code>。
+     */
+    protected final Object consumeInputValue(PipelineContext pipelineContext) {
+        Object value = pipelineContext.getAttribute(getInputKey());
+
+        if (filterInputValue(value)) {
+            pipelineContext.setAttribute(getInputKey(), null);
+        } else {
+            value = null;
+        }
+
+        return value;
+    }
+
     /** 将指定的对象放到pipeline context中，作为输出对象。 */
     protected final void setOutputValue(PipelineContext pipelineContext, Object outputValue) {
-        pipelineContext.setAttribute(getOut(), outputValue);
+        pipelineContext.setAttribute(getOutputKey(), outputValue);
     }
 }

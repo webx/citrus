@@ -18,9 +18,9 @@
 package com.alibaba.citrus.async.support;
 
 import com.alibaba.citrus.service.pipeline.PipelineContext;
-import com.alibaba.citrus.turbine.pipeline.valve.AbstractInOutValve;
+import com.alibaba.citrus.turbine.pipeline.valve.AbstractInputOutputValve;
 
-public class SetScreenResult extends AbstractInOutValve {
+public class SetScreenResult extends AbstractInputOutputValve {
     private static final ThreadLocal<Object> resultHolder = new ThreadLocal<Object>();
 
     public static void clear() {

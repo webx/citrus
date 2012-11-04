@@ -17,7 +17,7 @@
     </xsd:element>
 
     <xsd:complexType name="DoPerformRunnableValveType">
-        <xsd:attribute name="out" type="xsd:string" default="result" />
+        <xsd:attribute name="output" type="xsd:string" default="result" />
     </xsd:complexType>
 
 </xsd:schema>

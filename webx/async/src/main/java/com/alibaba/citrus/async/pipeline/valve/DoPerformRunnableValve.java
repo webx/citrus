@@ -22,7 +22,7 @@ import static com.alibaba.citrus.util.Assert.*;
 
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
-import com.alibaba.citrus.turbine.pipeline.valve.AbstractInOutValve;
+import com.alibaba.citrus.turbine.pipeline.valve.AbstractInputOutputValve;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
@@ -32,9 +32,9 @@ import org.w3c.dom.Element;
  *
  * @author Michael Zhou
  */
-public class DoPerformRunnableValve extends AbstractInOutValve {
+public class DoPerformRunnableValve extends AbstractInputOutputValve {
     @Override
-    protected String getInDefault() {
+    protected String getDefaultInputKey() {
         return PerformRunnableAsyncValve.ASYNC_CALLBACK_KEY;
     }
 
@@ -55,7 +55,7 @@ public class DoPerformRunnableValve extends AbstractInOutValve {
     public static class DefinitionParser extends AbstractValveDefinitionParser<DoPerformRunnableValve> {
         @Override
         protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
-            attributesToProperties(element, builder, "out");
+            attributesToProperties(element, builder, "output");
         }
     }
 }
