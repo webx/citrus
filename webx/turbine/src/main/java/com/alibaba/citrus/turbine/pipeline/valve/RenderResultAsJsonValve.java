@@ -37,7 +37,7 @@ import org.w3c.dom.Element;
  *
  * @author Michael Zhou
  */
-public class RenderResultAsJsonValve extends AbstractResultConsumerValve {
+public class RenderResultAsJsonValve extends AbstractInOutValve {
     private static final String DEFAULT_CONTENT_TYPE            = "application/json";
     private static final String DEFAULT_JAVASCRIPT_VARIABLE     = null;
     private static final String DEFAULT_JAVASCRIPT_CONTENT_TYPE = "application/javascript";
@@ -89,7 +89,7 @@ public class RenderResultAsJsonValve extends AbstractResultConsumerValve {
         }
 
         PrintWriter out = response.getWriter();
-        Object resultObject = getResult(pipelineContext);
+        Object resultObject = consumeInputValue(pipelineContext);
         String jsonResult = JSON.toJSONString(resultObject);
 
         if (outputAsJson) {
@@ -101,12 +101,14 @@ public class RenderResultAsJsonValve extends AbstractResultConsumerValve {
             out.print(jsonResult);
             out.print(";");
         }
+
+        pipelineContext.invokeNext();
     }
 
     public static class DefinitionParser extends AbstractValveDefinitionParser<RenderResultAsJsonValve> {
         @Override
         protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
-            attributesToProperties(element, builder, "resultName", "contentType", "javascriptVariable", "javascriptContentType");
+            attributesToProperties(element, builder, "in", "contentType", "javascriptVariable", "javascriptContentType");
         }
     }
 }

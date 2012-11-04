@@ -19,16 +19,33 @@ package com.alibaba.citrus.turbine.pipeline.valve;
 
 import static org.junit.Assert.*;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
 import com.meterware.httpunit.WebResponse;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class RenderResultAsJsonValveTests extends AbstractValveTests {
+    private static ThreadLocal<List<Object>> resultsHolder = new ThreadLocal<List<Object>>() {
+        @Override
+        protected List<Object> initialValue() {
+            return new LinkedList<Object>();
+        }
+    };
+
     @Before
     public void init() {
         pipeline = (PipelineImpl) factory.getBean("renderJson");
         assertNotNull(pipeline);
+    }
+
+    @After
+    public void destroy() {
+        resultsHolder.remove();
     }
 
     @Test
@@ -57,6 +74,12 @@ public class RenderResultAsJsonValveTests extends AbstractValveTests {
         assertEquals(200, webResponse.getResponseCode());
         assertEquals("application/json", webResponse.getContentType());
         assertEquals("{\"age\":100,\"name\":\"michael\"}", webResponse.getText());
+
+        List<Object> results = resultsHolder.get();
+
+        assertEquals(2, results.size());
+        assertTrue(results.get(0) instanceof com.alibaba.test.app1.module.screen.MyJsonScreen.MyObject);
+        assertNull(results.get(1)); // 确保运行完以后，清除result对象
     }
 
     @Test
@@ -117,5 +140,13 @@ public class RenderResultAsJsonValveTests extends AbstractValveTests {
         assertEquals(200, webResponse.getResponseCode());
         assertEquals("text/js", webResponse.getContentType());
         assertEquals("var myresult = {\"age\":100,\"name\":\"michael\"};", webResponse.getText());
+    }
+
+    public static class ResultCheck extends AbstractInOutValve {
+        @Override
+        public void invoke(PipelineContext pipelineContext) throws Exception {
+            resultsHolder.get().add(getInputValue(pipelineContext));
+            pipelineContext.invokeNext();
+        }
     }
 }
