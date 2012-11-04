@@ -22,7 +22,7 @@ import static com.alibaba.citrus.util.Assert.*;
 
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
-import com.alibaba.citrus.turbine.pipeline.valve.AbstractResultConsumerValve;
+import com.alibaba.citrus.turbine.pipeline.valve.AbstractInOutValve;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
@@ -32,19 +32,22 @@ import org.w3c.dom.Element;
  *
  * @author Michael Zhou
  */
-public class DoPerformRunnableValve extends AbstractResultConsumerValve {
+public class DoPerformRunnableValve extends AbstractInOutValve {
+    @Override
+    protected String getInDefault() {
+        return PerformRunnableAsyncValve.ASYNC_CALLBACK_KEY;
+    }
+
+    @Override
+    protected boolean filterInputValue(Object inputValue) {
+        assertTrue(inputValue instanceof AsyncCallbackAdapter, ExceptionType.ILLEGAL_STATE, "<doPerformRunnable> valve should be inside <performRunnableAsync>");
+        return true;
+    }
+
     public void invoke(PipelineContext pipelineContext) throws Exception {
-        AsyncCallbackAdapter callback;
+        AsyncCallbackAdapter callback = (AsyncCallbackAdapter) consumeInputValue(pipelineContext);
 
-        try {
-            callback = (AsyncCallbackAdapter) pipelineContext.getAttribute(PerformRunnableAsyncValve.ASYNC_CALLBACK_KEY);
-        } catch (ClassCastException e) {
-            callback = null;
-        }
-
-        assertNotNull(callback, ExceptionType.ILLEGAL_STATE, "<doPerformRunnable> valve should be inside <performRunnableAsync>");
-
-        pipelineContext.setAttribute(getResultName(), callback.call());
+        setOutputValue(pipelineContext, callback.call());
 
         pipelineContext.invokeNext();
     }
@@ -52,7 +55,7 @@ public class DoPerformRunnableValve extends AbstractResultConsumerValve {
     public static class DefinitionParser extends AbstractValveDefinitionParser<DoPerformRunnableValve> {
         @Override
         protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
-            attributesToProperties(element, builder, "resultName");
+            attributesToProperties(element, builder, "out");
         }
     }
 }

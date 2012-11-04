@@ -18,9 +18,9 @@
 package com.alibaba.citrus.async.support;
 
 import com.alibaba.citrus.service.pipeline.PipelineContext;
-import com.alibaba.citrus.turbine.pipeline.valve.AbstractResultConsumerValve;
+import com.alibaba.citrus.turbine.pipeline.valve.AbstractInOutValve;
 
-public class SetScreenResult extends AbstractResultConsumerValve {
+public class SetScreenResult extends AbstractInOutValve {
     private static final ThreadLocal<Object> resultHolder = new ThreadLocal<Object>();
 
     public static void clear() {
@@ -32,7 +32,7 @@ public class SetScreenResult extends AbstractResultConsumerValve {
     }
 
     public void invoke(PipelineContext pipelineContext) throws Exception {
-        pipelineContext.setAttribute(getResultName(), resultHolder.get());
+        setOutputValue(pipelineContext, resultHolder.get());
         pipelineContext.invokeNext();
     }
 }

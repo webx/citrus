@@ -40,7 +40,7 @@ public class DoPerformRunnableValveConfigTests extends AbstractAsyncTests {
         performRunnableAsyncValve = getValve("pipeline1", 0, PerformRunnableAsyncValve.class);
         valve = getDoPerformRunnableValve(0);
 
-        assertEquals("screenResult", valve.getResultName());
+        assertEquals("result", valve.getOut());
     }
 
     @Test
@@ -48,7 +48,7 @@ public class DoPerformRunnableValveConfigTests extends AbstractAsyncTests {
         performRunnableAsyncValve = getValve("pipeline2", 0, PerformRunnableAsyncValve.class);
         valve = getDoPerformRunnableValve(1);
 
-        assertEquals("screenResult", valve.getResultName());
+        assertEquals("result", valve.getOut());
     }
 
     @Test
@@ -56,7 +56,7 @@ public class DoPerformRunnableValveConfigTests extends AbstractAsyncTests {
         performRunnableAsyncValve = getValve("pipeline3", 0, PerformRunnableAsyncValve.class);
         valve = getDoPerformRunnableValve(1);
 
-        assertEquals("myresult", valve.getResultName());
+        assertEquals("myresult", valve.getOut());
     }
 
     private DoPerformRunnableValve getDoPerformRunnableValve(int index) {

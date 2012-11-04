@@ -101,7 +101,7 @@ public abstract class AbstractInOutValve extends AbstractValve {
     protected final Object consumeInputValue(PipelineContext pipelineContext) {
         Object value = pipelineContext.getAttribute(getIn());
 
-        if (value != null && filterInputValue(value)) {
+        if (filterInputValue(value)) {
             pipelineContext.setAttribute(getIn(), null);
         } else {
             value = null;

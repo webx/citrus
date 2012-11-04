@@ -176,6 +176,25 @@ public class InOutValveTests {
         assertSame(obj, valve.getInputValue(context)); // 然后原对象还在context中
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void consumeInputValue_required() {
+        valve = new MyInOutValve() {
+            @Override
+            protected boolean filterInputValue(Object inputValue) {
+                // 可以在这个方法里判断值required特性
+                // 即：如果值不存在或不符合要求，就抛异常
+                if (!(inputValue instanceof String)) {
+                    throw new IllegalArgumentException();
+                }
+
+                // 如果没有异常，则一定返回true
+                return true;
+            }
+        };
+
+        valve.consumeInputValue(context);
+    }
+
     @Test
     public void in_out_different() {
         valve = new MyInOutValve() {
