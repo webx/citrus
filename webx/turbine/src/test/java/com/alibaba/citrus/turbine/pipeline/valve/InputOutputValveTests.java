@@ -27,14 +27,14 @@ import com.alibaba.citrus.util.internal.InterfaceImplementorBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
-public class InOutValveTests {
-    private AbstractInOutValve valve;
-    private PipelineContext    context;
+public class InputOutputValveTests {
+    private AbstractInputOutputValve valve;
+    private PipelineContext          context;
     private Map<String, Object> attrs = createHashMap();
 
     @Before
     public void init() {
-        valve = new MyInOutValve();
+        valve = new MyInputOutputValve();
         context = (PipelineContext) new InterfaceImplementorBuilder().addInterface(PipelineContext.class).setOverrider(new Object() {
             public Object getAttribute(String key) {
                 return attrs.get(key);
@@ -47,89 +47,89 @@ public class InOutValveTests {
     }
 
     @Test
-    public void in_systemDefaultValue() {
-        assertEquals("result", valve.getIn());
+    public void input_systemDefaultValue() {
+        assertEquals("result", valve.getInputKey());
 
-        valve = new MyInOutValve() {
+        valve = new MyInputOutputValve() {
             @Override
-            protected String getInDefault() {
+            protected String getDefaultInputKey() {
                 return null; // 返回null表示使用系统默认值
             }
         };
 
-        assertEquals("result", valve.getIn());
+        assertEquals("result", valve.getInputKey());
 
         // 取消默认值
-        valve.setIn("specified");
-        assertEquals("specified", valve.getIn());
+        valve.setInput("specified");
+        assertEquals("specified", valve.getInputKey());
     }
 
     @Test
-    public void in_defaultValue() {
-        valve = new MyInOutValve() {
+    public void input_defaultValue() {
+        valve = new MyInputOutputValve() {
             @Override
-            protected String getInDefault() {
+            protected String getDefaultInputKey() {
                 return "myin";
             }
         };
 
-        assertEquals("myin", valve.getIn());
+        assertEquals("myin", valve.getInputKey());
 
         // 取消默认值
-        valve.setIn("specified");
-        assertEquals("specified", valve.getIn());
+        valve.setInput("specified");
+        assertEquals("specified", valve.getInputKey());
     }
 
     @Test
-    public void in_set() {
-        valve.setIn("  ");
-        assertEquals("result", valve.getIn());
+    public void input_set() {
+        valve.setInput("  ");
+        assertEquals("result", valve.getInputKey());
 
-        valve.setIn(" myresult ");
-        assertEquals("myresult", valve.getIn());
+        valve.setInput(" myresult ");
+        assertEquals("myresult", valve.getInputKey());
     }
 
     @Test
     public void out_systemDefaultValue() {
-        assertEquals("result", valve.getOut());
+        assertEquals("result", valve.getOutputKey());
 
-        valve = new MyInOutValve() {
+        valve = new MyInputOutputValve() {
             @Override
-            protected String getOutDefault() {
+            protected String getDefaultOutputKey() {
                 return null; // 返回null表示使用系统默认值
             }
         };
 
-        assertEquals("result", valve.getOut());
+        assertEquals("result", valve.getOutputKey());
 
         // 取消默认值
-        valve.setOut("specified");
-        assertEquals("specified", valve.getOut());
+        valve.setOutput("specified");
+        assertEquals("specified", valve.getOutputKey());
     }
 
     @Test
     public void out_defaultValue() {
-        valve = new MyInOutValve() {
+        valve = new MyInputOutputValve() {
             @Override
-            protected String getOutDefault() {
+            protected String getDefaultOutputKey() {
                 return "myout";
             }
         };
 
-        assertEquals("myout", valve.getOut());
+        assertEquals("myout", valve.getOutputKey());
 
         // 取消默认值
-        valve.setOut("specified");
-        assertEquals("specified", valve.getOut());
+        valve.setOutput("specified");
+        assertEquals("specified", valve.getOutputKey());
     }
 
     @Test
     public void out_set() {
-        valve.setOut("  ");
-        assertEquals("result", valve.getOut());
+        valve.setOutput("  ");
+        assertEquals("result", valve.getOutputKey());
 
-        valve.setOut(" myresult ");
-        assertEquals("myresult", valve.getOut());
+        valve.setOutput(" myresult ");
+        assertEquals("myresult", valve.getOutputKey());
     }
 
     @Test
@@ -154,7 +154,7 @@ public class InOutValveTests {
 
     @Test
     public void consumeInputValue_withFilter() {
-        valve = new MyInOutValve() {
+        valve = new MyInputOutputValve() {
             @Override
             protected boolean filterInputValue(Object inputValue) {
                 return inputValue instanceof String;
@@ -178,7 +178,7 @@ public class InOutValveTests {
 
     @Test(expected = IllegalArgumentException.class)
     public void consumeInputValue_required() {
-        valve = new MyInOutValve() {
+        valve = new MyInputOutputValve() {
             @Override
             protected boolean filterInputValue(Object inputValue) {
                 // 可以在这个方法里判断值required特性
@@ -196,15 +196,15 @@ public class InOutValveTests {
     }
 
     @Test
-    public void in_out_different() {
-        valve = new MyInOutValve() {
+    public void differentInputOutputKeys() {
+        valve = new MyInputOutputValve() {
             @Override
-            protected String getInDefault() {
+            protected String getDefaultInputKey() {
                 return "myin";
             }
 
             @Override
-            protected String getOutDefault() {
+            protected String getDefaultOutputKey() {
                 return "myout";
             }
         };
@@ -225,7 +225,7 @@ public class InOutValveTests {
         assertEquals("hi", valve.getInputValue(context));
     }
 
-    public static class MyInOutValve extends AbstractInOutValve {
+    public static class MyInputOutputValve extends AbstractInputOutputValve {
         public void invoke(PipelineContext pipelineContext) throws Exception {
         }
     }

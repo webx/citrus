@@ -64,7 +64,7 @@
 
     <services:pipeline id="performScreenValveTests2">
         <valves:analyzeURL />
-        <valves:performScreen out="myresult" />
+        <valves:performScreen output="myresult" />
         <valves:valve class="com.alibaba.citrus.turbine.pipeline.valve.PerformScreenValveTests$ReadResultValve" />
     </services:pipeline>
 
@@ -90,8 +90,8 @@
 
     <services:pipeline id="renderJsonAsJs_specifiedContentType" lazy-init="true">
         <valves:analyzeURL />
-        <valves:performScreen out="myresult" />
-        <valves:renderResultAsJson in="myresult"
+        <valves:performScreen output="myresult" />
+        <valves:renderResultAsJson input="myresult"
                                    javascriptContentType="text/js" javascriptVariable="myresult" />
     </services:pipeline>
 

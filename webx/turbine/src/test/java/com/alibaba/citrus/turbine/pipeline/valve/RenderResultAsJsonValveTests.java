@@ -144,7 +144,7 @@ public class RenderResultAsJsonValveTests extends AbstractValveTests {
         assertEquals("var myresult = {\"age\":100,\"name\":\"michael\"};", webResponse.getText());
     }
 
-    public static class ResultCheck extends AbstractInOutValve {
+    public static class ResultCheck extends AbstractInputOutputValve {
         @Override
         public void invoke(PipelineContext pipelineContext) throws Exception {
             resultsHolder.get().add(getInputValue(pipelineContext));

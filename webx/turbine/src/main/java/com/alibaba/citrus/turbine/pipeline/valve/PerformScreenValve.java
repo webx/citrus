@@ -47,7 +47,7 @@ import org.w3c.dom.Element;
  *
  * @author Michael Zhou
  */
-public class PerformScreenValve extends AbstractInOutValve {
+public class PerformScreenValve extends AbstractInputOutputValve {
     @Autowired
     private ModuleLoaderService moduleLoaderService;
 
@@ -189,7 +189,7 @@ public class PerformScreenValve extends AbstractInOutValve {
     public static class DefinitionParser extends AbstractValveDefinitionParser<PerformScreenValve> {
         @Override
         protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
-            attributesToProperties(element, builder, "out");
+            attributesToProperties(element, builder, "output");
         }
     }
 }
