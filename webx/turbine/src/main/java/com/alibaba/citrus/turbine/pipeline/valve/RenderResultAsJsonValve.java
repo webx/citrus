@@ -77,6 +77,12 @@ public class RenderResultAsJsonValve extends AbstractInOutValve {
     }
 
     public void invoke(PipelineContext pipelineContext) throws Exception {
+        Object resultObject = consumeInputValue(pipelineContext);
+
+        if (resultObject == null) {
+            return;
+        }
+
         String javascriptVariable = getJavascriptVariable();
         boolean outputAsJson = javascriptVariable == null;
 
@@ -89,7 +95,6 @@ public class RenderResultAsJsonValve extends AbstractInOutValve {
         }
 
         PrintWriter out = response.getWriter();
-        Object resultObject = consumeInputValue(pipelineContext);
         String jsonResult = JSON.toJSONString(resultObject);
 
         if (outputAsJson) {
