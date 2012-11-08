@@ -29,11 +29,15 @@ public class DiskFileItem extends AbstractFileItem {
 
     /** Removes the file contents from the temporary storage. */
     @Override
-    protected void finalize() {
-        File outputFile = dfos.getFile();
+    protected void finalize() throws Throwable {
+        try {
+            File outputFile = dfos.getFile();
 
-        if (outputFile != null && outputFile.exists()) {
-            outputFile.delete();
+            if (outputFile != null && outputFile.exists()) {
+                outputFile.delete();
+            }
+        } finally {
+            super.finalize();
         }
     }
 }
