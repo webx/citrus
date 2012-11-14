@@ -185,7 +185,7 @@ public class PerformRunnableAsyncValve extends AbstractInputOutputValve {
                 future.cancel(true);
 
                 try {
-                    if (signal.await(getDefaultCancelingTimeout(), TimeUnit.MILLISECONDS)) {
+                    if (signal.await(callback.getCancelingTimeout(), TimeUnit.MILLISECONDS)) {
                         log.debug("Async task was cancelled");
                     } else {
                         log.debug("Async task is still running.  Tried to complete the task.");
