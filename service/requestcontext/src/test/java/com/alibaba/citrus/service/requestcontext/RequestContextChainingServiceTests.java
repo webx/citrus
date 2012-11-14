@@ -22,6 +22,7 @@ import static com.alibaba.citrus.util.CollectionUtil.*;
 import static org.junit.Assert.*;
 
 import java.util.List;
+import javax.servlet.http.HttpServletResponseWrapper;
 
 import com.alibaba.citrus.service.requestcontext.basic.BasicRequestContext;
 import com.alibaba.citrus.service.requestcontext.buffered.BufferedRequestContext;
@@ -84,9 +85,11 @@ public class RequestContextChainingServiceTests extends AbstractRequestContextsT
 
         // 在没有任何request context factory的时候，
         //   requestContext.getRequest()就是原来的request
-        //   requestContext.getResponse()就是原来的response
+        //   requestContext.getResponse()是CommittingAwareResponse，包着原来的response
         assertSame(request, newRequest);
-        assertSame(response, newResponse);
+
+        assertTrue(newResponse instanceof HttpServletResponseWrapper);
+        assertSame(response, ((HttpServletResponseWrapper) newResponse).getResponse());
 
         // 确保可以从request中取得requestContext
         assertSame(requestContext, RequestContextUtil.getRequestContext(request));
@@ -105,7 +108,7 @@ public class RequestContextChainingServiceTests extends AbstractRequestContextsT
         expectedResult += "        MyContext[0] {\n";
         expectedResult += "          SimpleRequestContext {\n";
         expectedResult += "            request  = " + request + "\n";
-        expectedResult += "            response = " + response + "\n";
+        expectedResult += "            response = " + response + "\n"; // CommittingAwareResponse.toString()将显示原始的response内容
         expectedResult += "            webapp   = " + config.getServletContext() + "\n";
         expectedResult += "          }\n";
         expectedResult += "        }\n";

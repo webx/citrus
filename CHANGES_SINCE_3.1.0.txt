@@ -81,3 +81,4 @@
   <performScreen output="result" />
   <renderResultAsJson input="result" />
 
+* 为RequestContext增加了commitHeaders功能，这样，当buffering关掉时，确保headers能正常输出到浏览器。

@@ -45,6 +45,14 @@ public interface RequestContextChainingService {
                                      HttpServletResponse response);
 
     /**
+     * 由外到内地调用<code>requestContext.commitHeaders()</code>方法。
+     *
+     * @param requestContext 要初始化的request context
+     * @throws RequestContextException 如果失败
+     */
+    void commitHeaders(RequestContext requestContext);
+
+    /**
      * 由外到内地调用<code>requestContext.commit()</code>方法。
      *
      * @param requestContext 要初始化的request context

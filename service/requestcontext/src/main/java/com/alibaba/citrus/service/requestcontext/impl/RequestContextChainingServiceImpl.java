@@ -249,7 +249,9 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
         }
 
         if (requestContext == null) {
-            requestContext = new SimpleRequestContext(servletContext, request, response);
+            SimpleRequestContext innerReuestContext = new SimpleRequestContext(servletContext, request, response, this);
+
+            requestContext = innerReuestContext;
 
             // 将requestContext放入request中，以便今后只需要用request就可以取得requestContext。
             // 及早设置setRequestContext，以便随后的prepareRequestContext就能使用。
@@ -264,6 +266,8 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
                 // 将requestContext放入request中，以便今后只需要用request就可以取得requestContext。
                 RequestContextUtil.setRequestContext(requestContext);
             }
+
+            innerReuestContext.setTopRequestContext(requestContext);
 
             getLogger().debug("Created a new request context: {}", requestContext);
         }
@@ -289,6 +293,9 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
         }
 
         requestContext.prepare();
+    }
+
+    public void commitHeaders(RequestContext requestContext) {
     }
 
     /**

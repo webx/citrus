@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.citrus.service.requestcontext.RequestContext;
+import com.alibaba.citrus.service.requestcontext.RequestContextChainingService;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
@@ -32,10 +33,13 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  *
  * @author Michael Zhou
  */
-public class SimpleRequestContext implements RequestContext {
-    private final ServletContext      servletContext;
-    private final HttpServletRequest  request;
-    private final HttpServletResponse response;
+public class SimpleRequestContext implements RequestContext, HeaderCommitter {
+    private final    ServletContext                servletContext;
+    private final    HttpServletRequest            request;
+    private final    HttpServletResponse           response;
+    private final    RequestContextChainingService service;
+    private volatile boolean                       headersCommitted;
+    private          RequestContext                topRequestContext;
 
     /**
      * 创建一个新的<code>RequestContext</code>对象。
@@ -44,10 +48,27 @@ public class SimpleRequestContext implements RequestContext {
      * @param request        <code>HttpServletRequest</code>对象
      * @param response       <code>HttpServletResponse</code>对象
      */
-    public SimpleRequestContext(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response) {
+    public SimpleRequestContext(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, RequestContextChainingService service) {
         this.servletContext = assertNotNull(servletContext, "servletContext");
         this.request = assertNotNull(request, "request");
-        this.response = assertNotNull(response, "response");
+        this.response = new CommittingAwareResponse(assertNotNull(response, "response"), this);
+        this.service = assertNotNull(service, "service");
+    }
+
+    /** 实现内部接口：<code>HeaderCommitter</code>。 */
+    public void commitHeaders() {
+        if (headersCommitted) {
+            return;
+        }
+
+        if (topRequestContext != null) {
+            headersCommitted = true;
+            service.commitHeaders(topRequestContext);
+        }
+    }
+
+    public void setTopRequestContext(RequestContext topRequestContext) {
+        this.topRequestContext = topRequestContext;
     }
 
     /**
