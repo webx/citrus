@@ -29,7 +29,9 @@ import javax.servlet.http.HttpServletResponseWrapper;
  * @author Michael Zhou
  */
 class CommittingAwareResponse extends HttpServletResponseWrapper {
-    private final HeaderCommitter committer;
+    private final HeaderCommitter     committer;
+    private       ServletOutputStream stream;
+    private       PrintWriter         writer;
 
     public CommittingAwareResponse(HttpServletResponse response, HeaderCommitter committer) {
         super(response);
@@ -38,12 +40,20 @@ class CommittingAwareResponse extends HttpServletResponseWrapper {
 
     @Override
     public ServletOutputStream getOutputStream() throws IOException {
-        return new CommittingAwareServletOutputStream(committer, super.getOutputStream());
+        if (stream == null) {
+            stream = new CommittingAwareServletOutputStream(committer, super.getOutputStream());
+        }
+
+        return stream;
     }
 
     @Override
     public PrintWriter getWriter() throws IOException {
-        return new CommittingAwarePrintWriter(committer, super.getWriter());
+        if (writer == null) {
+            writer = new CommittingAwarePrintWriter(committer, super.getWriter());
+        }
+
+        return writer;
     }
 
     @Override
