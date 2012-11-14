@@ -34,12 +34,12 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  * @author Michael Zhou
  */
 public class SimpleRequestContext implements RequestContext, HeaderCommitter {
-    private final    ServletContext                servletContext;
-    private final    HttpServletRequest            request;
-    private final    HttpServletResponse           response;
-    private final    RequestContextChainingService service;
-    private volatile boolean                       headersCommitted;
-    private          RequestContext                topRequestContext;
+    private final ServletContext                servletContext;
+    private final HttpServletRequest            request;
+    private final HttpServletResponse           response;
+    private final RequestContextChainingService service;
+    private       boolean                       headersCommitted;
+    private       RequestContext                topRequestContext;
 
     /**
      * 创建一个新的<code>RequestContext</code>对象。
