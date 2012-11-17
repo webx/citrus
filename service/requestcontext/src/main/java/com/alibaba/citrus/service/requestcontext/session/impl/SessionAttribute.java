@@ -105,6 +105,10 @@ public class SessionAttribute {
         return modified;
     }
 
+    void setModified(boolean modified) {
+        this.modified = modified;
+    }
+
     /**
      * 取得store名称。
      *
