@@ -37,6 +37,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
+import com.alibaba.citrus.service.requestcontext.session.impl.SessionAttribute;
 import com.alibaba.citrus.service.requestcontext.session.impl.SessionImpl;
 import com.alibaba.citrus.service.requestcontext.session.impl.SessionModelImpl;
 import com.alibaba.citrus.service.requestcontext.session.store.simple.impl.SimpleMemoryStoreImpl;
@@ -162,6 +163,27 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
                                                                                               .getStores().getStore("exact3");
 
         assertArrayEquals(new String[] { "a", "b", "SESSION_MODEL" }, store.attrNames);
+    }
+
+    @Test
+    public void session_attr() throws Exception {
+        // request 1 - new request
+        invokeNoopServlet("/servlet");
+        initRequestContext();
+
+        assertEquals(true, session.isNew());
+
+        @SuppressWarnings("unchecked")
+        Map<String, SessionAttribute> attrs = getFieldValue(session, "attrs", Map.class);
+
+        session.setAttribute("count", 0);
+
+        SessionAttribute attr = attrs.get("count");
+        assertTrue(attr.isModified());
+
+        requestContexts.commitRequestContext(requestContext);
+        assertSame(attr, attrs.get("count"));
+        assertFalse(attr.isModified());  // 提交以后，modified被复位
     }
 
     @Test

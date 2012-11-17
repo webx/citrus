@@ -61,10 +61,11 @@ public class SessionImpl implements HttpSession {
     private String                modelKey;
     private SessionModelImpl      model;
     private boolean               isNew;
-    private Map<String, SessionAttribute> attrs       = createHashMap();
-    private Map<String, Object>           storeStates = createHashMap();
-    private boolean                       invalidated = false;
-    private boolean                       cleared     = false;
+    private Map<String, SessionAttribute> attrs          = createHashMap();
+    private Map<String, Object>           storeStates    = createHashMap();
+    private boolean                       invalidated    = false;
+    private boolean                       cleared        = false;
+    private Set<String>                   clearingStores = createHashSet();
 
     /** 创建一个session对象。 */
     public SessionImpl(String sessionID, SessionRequestContext requestContext, boolean isNew, boolean create) {
@@ -447,6 +448,7 @@ public class SessionImpl implements HttpSession {
                     }
 
                     storeAttrs.put(attrName, attrValue);
+                    attr.setModified(false); // 恢复modified状态，以防多余的警告信息
                 } else if (!commitHeaders) {
                     if (mayNotBeCommitted == null) {
                         mayNotBeCommitted = createLinkedHashMap();
@@ -488,25 +490,23 @@ public class SessionImpl implements HttpSession {
 
         // 对每一个store分别操作。
         for (StoreData data : mappings.values()) {
-            data.store.commit(data.attrs, getId(),
-                              new StoreContextImpl(data.storeName));
+            data.store.commit(data.attrs, getId(), new StoreContextImpl(data.storeName));
+            clearingStores.remove(data.storeName); // 如果先clear后又设值，则一会儿不需要再进行clear，故清除clearing标记
         }
 
         // 假如invalidate和clear被调用，则检查剩余的store，通知它们清除当前的数据。
         if (cleared) {
-            if (storeNames.length > mappings.size()) {
-                for (String storeName : storeNames) {
-                    if (!mappings.containsKey(storeName)) {
-                        SessionStore store = requestContext.getSessionConfig().getStores().getStore(storeName);
+            for (Iterator<String> i = clearingStores.iterator(); i.hasNext(); ) {
+                String storeName = i.next();
+                SessionStore store = requestContext.getSessionConfig().getStores().getStore(storeName);
 
-                        if (isApplicableToCommit(store, commitHeaders)) {
-                            Map<String, Object> storeAttrs = emptyMap();
-                            store.commit(storeAttrs, sessionID, new StoreContextImpl(storeName));
-                        } else if (!commitHeaders) {
-                            log.warn("Session was cleared, but the data in {}[id={}] may not be cleared, " +
-                                     "because the response has already been committed.", store.getClass().getSimpleName(), storeName);
-                        }
-                    }
+                if (isApplicableToCommit(store, commitHeaders)) {
+                    Map<String, Object> storeAttrs = emptyMap();
+                    store.commit(storeAttrs, sessionID, new StoreContextImpl(storeName));
+                    i.remove(); // 清除clearing标记，以防重复clear
+                } else if (!commitHeaders) {
+                    log.warn("Session was cleared, but the data in {}[id={}] may not be cleared, " +
+                             "because the response has already been committed.", store.getClass().getSimpleName(), storeName);
                 }
             }
         }
@@ -777,14 +777,15 @@ public class SessionImpl implements HttpSession {
         }
 
         public void invalidate() {
-            // 清除session数据
-            attrs.clear();
-            cleared = true;
-
-            // 通知所有的store过期其数据
             SessionConfig sessionConfig = requestContext.getSessionConfig();
             String[] storeNames = sessionConfig.getStores().getStoreNames();
 
+            // 清除session数据
+            attrs.clear();
+            cleared = true;
+            clearingStores.addAll(asList(storeNames));
+
+            // 通知所有的store过期其数据
             for (String storeName : storeNames) {
                 SessionStore store = sessionConfig.getStores().getStore(storeName);
 
