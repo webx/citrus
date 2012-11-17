@@ -413,6 +413,7 @@ public class SessionImpl implements HttpSession {
     public void commit(boolean commitHeaders) {
         String[] storeNames = requestContext.getSessionConfig().getStores().getStoreNames();
         Map<String, StoreData> mappings = createHashMap();
+        Map<String, StringBuilder> mayNotBeCommitted = null;
 
         // 按store对attrs进行分堆。
         boolean modified = false;
@@ -421,29 +422,60 @@ public class SessionImpl implements HttpSession {
             String attrName = entry.getKey();
             SessionAttribute attr = entry.getValue();
 
-            if (attr.isModified() && isApplicableToCommit(attr.getStore(), commitHeaders)) {
+            if (attr.isModified()) {
                 String storeName = attr.getStoreName();
                 SessionStore store = attr.getStore();
-                StoreData data = mappings.get(storeName);
 
-                if (data == null) {
-                    data = new StoreData(storeName, store);
-                    mappings.put(storeName, data);
+                if (isApplicableToCommit(store, commitHeaders)) {
+                    StoreData data = mappings.get(storeName);
+
+                    if (data == null) {
+                        data = new StoreData(storeName, store);
+                        mappings.put(storeName, data);
+                    }
+
+                    Map<String, Object> storeAttrs = data.attrs;
+                    Object attrValue = attr.getValue();
+
+                    // 特殊处理model，将其转换成store中的值。
+                    if (attrValue instanceof SessionModel) {
+                        attrValue = requestContext.getSessionConfig().getSessionModelEncoders()[0]
+                                .encode((SessionModel) attrValue);
+                    } else {
+                        // 只检查非session model对象的modified状态
+                        modified = true;
+                    }
+
+                    storeAttrs.put(attrName, attrValue);
+                } else if (!commitHeaders) {
+                    if (mayNotBeCommitted == null) {
+                        mayNotBeCommitted = createLinkedHashMap();
+                    }
+
+                    StringBuilder buf = mayNotBeCommitted.get(storeName);
+
+                    if (buf == null) {
+                        buf = new StringBuilder();
+                        mayNotBeCommitted.put(storeName, buf);
+                    }
+
+                    if (buf.length() > 0) {
+                        buf.append(", ");
+                    }
+
+                    buf.append(attrName);
                 }
+            }
+        }
 
-                Map<String, Object> storeAttrs = data.attrs;
-                Object attrValue = attr.getValue();
+        if (mayNotBeCommitted != null) {
+            for (Map.Entry<String, StringBuilder> entry : mayNotBeCommitted.entrySet()) {
+                String storeName = entry.getKey();
+                SessionStore store = requestContext.getSessionConfig().getStores().getStore(storeName);
+                String attrNames = entry.getValue().toString();
 
-                // 特殊处理model，将其转换成store中的值。
-                if (attrValue instanceof SessionModel) {
-                    attrValue = requestContext.getSessionConfig().getSessionModelEncoders()[0]
-                            .encode((SessionModel) attrValue);
-                } else {
-                    // 只检查非session model对象的modified状态
-                    modified = true;
-                }
-
-                storeAttrs.put(attrName, attrValue);
+                log.warn("The following attributes may not be saved in {}[id={}], because the response has already been committed: {}",
+                         new Object[] { store.getClass().getSimpleName(), storeName, attrNames });
             }
         }
 
@@ -470,6 +502,9 @@ public class SessionImpl implements HttpSession {
                         if (isApplicableToCommit(store, commitHeaders)) {
                             Map<String, Object> storeAttrs = emptyMap();
                             store.commit(storeAttrs, sessionID, new StoreContextImpl(storeName));
+                        } else if (!commitHeaders) {
+                            log.warn("Session was cleared, but the data in {}[id={}] may not be cleared, " +
+                                     "because the response has already been committed.", store.getClass().getSimpleName(), storeName);
                         }
                     }
                 }
