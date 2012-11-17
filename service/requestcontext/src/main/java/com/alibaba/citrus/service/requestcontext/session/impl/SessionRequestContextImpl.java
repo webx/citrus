@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.alibaba.citrus.service.requestcontext.RequestContext;
+import com.alibaba.citrus.service.requestcontext.RequestContextException;
 import com.alibaba.citrus.service.requestcontext.session.SessionConfig;
 import com.alibaba.citrus.service.requestcontext.session.SessionConfig.CookieConfig;
 import com.alibaba.citrus.service.requestcontext.session.SessionRequestContext;
@@ -346,14 +347,8 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
         return session;
     }
 
-    /** 开始一个请求。 */
     @Override
-    public void prepare() {
-    }
-
-    /** 结束一个请求。 */
-    @Override
-    public void commit() {
+    public void commitHeaders() throws RequestContextException {
         if (!sessionReturned) {
             return;
         }
@@ -363,7 +358,17 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
             clearSessionIDFromCookie();
         }
 
-        session.commit();
+        session.commit(true);
+    }
+
+    /** 结束一个请求。 */
+    @Override
+    public void commit() {
+        if (!sessionReturned) {
+            return;
+        }
+
+        session.commit(false);
     }
 
     /** 支持session的<code>HttpServletRequestWrapper</code>。 */

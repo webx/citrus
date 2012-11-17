@@ -17,14 +17,14 @@
 
 package com.alibaba.citrus.service.requestcontext.session;
 
-import com.alibaba.citrus.service.requestcontext.RequestContext;
+import com.alibaba.citrus.service.requestcontext.TwoPhaseCommitRequestContext;
 
 /**
  * 支持session的<code>RequestContext</code>实现。
  *
  * @author Michael Zhou
  */
-public interface SessionRequestContext extends RequestContext {
+public interface SessionRequestContext extends TwoPhaseCommitRequestContext {
     /**
      * 取得<code>SessionConfig</code>实例。
      *
