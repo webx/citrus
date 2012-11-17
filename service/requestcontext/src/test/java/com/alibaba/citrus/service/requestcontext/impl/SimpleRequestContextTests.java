@@ -70,12 +70,51 @@ public class SimpleRequestContextTests {
         service.commitHeaders(requestContext);
         expectLastCall().once();
         replay(service);
+
         simpleRequestContext.setTopRequestContext(requestContext);
         simpleRequestContext.commitHeaders();
+        simpleRequestContext.setHeadersCommitted(true);
+
         simpleRequestContext.commitHeaders();
         simpleRequestContext.commitHeaders();
         simpleRequestContext.commitHeaders();
         verify(service);
+    }
+
+    @Test
+    public void headersCommitted() {
+        assertEquals(false, simpleRequestContext.isHeadersCommitted());
+
+        simpleRequestContext.setHeadersCommitted(true);
+        assertEquals(true, simpleRequestContext.isHeadersCommitted());
+
+        simpleRequestContext.setHeadersCommitted(false);
+        assertEquals(false, simpleRequestContext.isHeadersCommitted());
+
+        simpleRequestContext.setCommitted(true);
+        assertEquals(true, simpleRequestContext.isHeadersCommitted());
+
+        simpleRequestContext.setCommitted(true);
+        simpleRequestContext.setHeadersCommitted(true);
+        assertEquals(true, simpleRequestContext.isHeadersCommitted());
+    }
+
+    @Test
+    public void committed() {
+        assertEquals(false, simpleRequestContext.isCommitted());
+
+        simpleRequestContext.setHeadersCommitted(true);
+        assertEquals(false, simpleRequestContext.isCommitted());
+
+        simpleRequestContext.setHeadersCommitted(false);
+        assertEquals(false, simpleRequestContext.isCommitted());
+
+        simpleRequestContext.setCommitted(true);
+        assertEquals(true, simpleRequestContext.isCommitted());
+
+        simpleRequestContext.setCommitted(true);
+        simpleRequestContext.setHeadersCommitted(true);
+        assertEquals(true, simpleRequestContext.isCommitted());
     }
 
     @Test

@@ -33,13 +33,10 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  *
  * @author Michael Zhou
  */
-public class SimpleRequestContext implements RequestContext, HeaderCommitter {
-    private final ServletContext                servletContext;
-    private final HttpServletRequest            request;
-    private final HttpServletResponse           response;
-    private final RequestContextChainingService service;
-    private       boolean                       headersCommitted;
-    private       RequestContext                topRequestContext;
+public class SimpleRequestContext extends CommitMonitor implements RequestContext, HeaderCommitter {
+    private final ServletContext      servletContext;
+    private final HttpServletRequest  request;
+    private final HttpServletResponse response;
 
     /**
      * 创建一个新的<code>RequestContext</code>对象。
@@ -49,26 +46,10 @@ public class SimpleRequestContext implements RequestContext, HeaderCommitter {
      * @param response       <code>HttpServletResponse</code>对象
      */
     public SimpleRequestContext(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, RequestContextChainingService service) {
+        super(service);
         this.servletContext = assertNotNull(servletContext, "servletContext");
         this.request = assertNotNull(request, "request");
         this.response = new CommittingAwareResponse(assertNotNull(response, "response"), this);
-        this.service = assertNotNull(service, "service");
-    }
-
-    /** 实现内部接口：<code>HeaderCommitter</code>。 */
-    public void commitHeaders() {
-        if (headersCommitted) {
-            return;
-        }
-
-        if (topRequestContext != null) {
-            headersCommitted = true;
-            service.commitHeaders(topRequestContext);
-        }
-    }
-
-    public void setTopRequestContext(RequestContext topRequestContext) {
-        this.topRequestContext = topRequestContext;
     }
 
     /**

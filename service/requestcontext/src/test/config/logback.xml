@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.out</target>
+        <encoding>${loggingCharset}</encoding>
+        <filter class="com.alibaba.citrus.logconfig.logback.LevelRangeFilter">
+            <levelMax>INFO</levelMax>
+        </filter>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{0}[%X{testName}] - %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.err</target>
+        <encoding>${loggingCharset}</encoding>
+        <filter class="com.alibaba.citrus.logconfig.logback.LevelRangeFilter">
+            <levelMin>WARN</levelMin>
+        </filter>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{0}[%X{testName}] - %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${destdir}/test.log</file>
+        <encoding>${loggingCharset}</encoding>
+        <append>false</append>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%date %level [%thread] %logger{10}[%X{testName}] [%file:%line] %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <appender name="FILE-INFO" class="ch.qos.logback.core.FileAppender">
+        <file>${destdir}/test-info.log</file>
+        <encoding>${loggingCharset}</encoding>
+        <append>false</append>
+        <filter class="com.alibaba.citrus.logconfig.logback.LevelRangeFilter">
+            <levelMin>INFO</levelMin>
+        </filter>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%date %level [%thread] %logger{10}[%X{testName}] [%file:%line] %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <appender name="FILE-ALIBABA" class="ch.qos.logback.core.FileAppender">
+        <file>${destdir}/test-alibaba.log</file>
+        <encoding>${loggingCharset}</encoding>
+        <append>false</append>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%date %level [%thread] %logger{10}[%X{testName}] [%file:%line] %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <logger name="org.apache">
+        <level value="INFO" />
+    </logger>
+
+    <logger name="com.alibaba">
+        <appender-ref ref="FILE-ALIBABA" />
+    </logger>
+
+    <logger name="com.alibaba.citrus.service.requestcontext">
+        <level value="TRACE" />
+    </logger>
+
+    <root>
+        <level value="${loggingLevel}" />
+        <appender-ref ref="STDERR" />
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+        <appender-ref ref="FILE-INFO" />
+    </root>
+</configuration>
