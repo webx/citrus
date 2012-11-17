@@ -17,13 +17,13 @@
 
 package com.alibaba.citrus.service.requestcontext.session.store.cookie;
 
-import com.alibaba.citrus.service.requestcontext.session.SessionStore;
+import com.alibaba.citrus.service.requestcontext.session.HttpHeaderSessionStore;
 
 /**
  * 基于cookie的session store实现。
  *
  * @author Michael Zhou
  */
-public interface CookieStore extends SessionStore {
+public interface CookieStore extends HttpHeaderSessionStore {
     Boolean SURVIVES_IN_INVALIDATING_DEFAULT = false;
 }

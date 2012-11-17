@@ -89,8 +89,11 @@ public class ResponseHeaderSecurityFilter implements RequestContextLifecycleInte
     public void prepare() {
     }
 
-    public void commit() {
+    public void commitHeaders() {
         cookieLengthAccumulator.reset();
+    }
+
+    public void commit() {
     }
 
     public String checkHeaderName(String name) {

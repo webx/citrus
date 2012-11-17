@@ -17,13 +17,13 @@
 
 package com.alibaba.citrus.service.requestcontext.basic;
 
-import com.alibaba.citrus.service.requestcontext.RequestContext;
+import com.alibaba.citrus.service.requestcontext.TwoPhaseCommitRequestContext;
 
 /**
  * 这是一个基础性的request context，提供了interceptor机制，主要用于构建可扩展的安全方案。
  *
  * @author Michael Zhou
  */
-public interface BasicRequestContext extends RequestContext {
+public interface BasicRequestContext extends TwoPhaseCommitRequestContext {
     Object[] getResponseHeaderInterceptors();
 }

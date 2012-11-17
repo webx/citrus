@@ -160,7 +160,7 @@ public abstract class AbstractCookieStore implements CookieStore {
         cookie.setHttpOnly(httpOnly);
         cookie.setSecure(secure);
 
-        log.debug("Set-cookie: {}", cookie);
+        log.debug("{}", cookie);
 
         cookie.addCookie(response);
     }

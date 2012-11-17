@@ -336,6 +336,16 @@ public class BasicResponseImpl extends AbstractResponseWrapper {
         }
     }
 
+    void commitHeaders() {
+        for (int i = interceptors.length - 1; i >= 0; i--) {
+            Object interceptor = interceptors[i];
+
+            if (interceptor instanceof RequestContextLifecycleInterceptor) {
+                ((RequestContextLifecycleInterceptor) interceptor).commitHeaders();
+            }
+        }
+    }
+
     void commitResponse() {
         for (int i = interceptors.length - 1; i >= 0; i--) {
             Object interceptor = interceptors[i];

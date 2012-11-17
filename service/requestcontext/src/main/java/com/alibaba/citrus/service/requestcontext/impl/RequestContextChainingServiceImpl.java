@@ -17,6 +17,7 @@
 
 package com.alibaba.citrus.service.requestcontext.impl;
 
+import static com.alibaba.citrus.service.requestcontext.util.RequestContextUtil.*;
 import static com.alibaba.citrus.util.ArrayUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
@@ -41,6 +42,7 @@ import com.alibaba.citrus.service.requestcontext.RequestContextInfo.AfterFeature
 import com.alibaba.citrus.service.requestcontext.RequestContextInfo.BeforeFeature;
 import com.alibaba.citrus.service.requestcontext.RequestContextInfo.FeatureOrder;
 import com.alibaba.citrus.service.requestcontext.RequestContextInfo.RequiresFeature;
+import com.alibaba.citrus.service.requestcontext.TwoPhaseCommitRequestContext;
 import com.alibaba.citrus.service.requestcontext.util.RequestContextUtil;
 import com.alibaba.citrus.util.ToStringBuilder;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -249,7 +251,9 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
         }
 
         if (requestContext == null) {
-            requestContext = new SimpleRequestContext(servletContext, request, response);
+            SimpleRequestContext innerReuestContext = new SimpleRequestContext(servletContext, request, response, this);
+
+            requestContext = innerReuestContext;
 
             // 将requestContext放入request中，以便今后只需要用request就可以取得requestContext。
             // 及早设置setRequestContext，以便随后的prepareRequestContext就能使用。
@@ -264,6 +268,8 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
                 // 将requestContext放入request中，以便今后只需要用request就可以取得requestContext。
                 RequestContextUtil.setRequestContext(requestContext);
             }
+
+            innerReuestContext.setTopRequestContext(requestContext);
 
             getLogger().debug("Created a new request context: {}", requestContext);
         }
@@ -314,7 +320,7 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
         // 4. 异步请求（dispatcherType == ASYNC）结束时，request.startAsync()未被调用或者异步已经结束（isAsyncStarted == false）
         //    此时不需要做什么，因为request context已经被提交。
 
-        final HttpServletRequest request = requestContext.getRequest();
+        HttpServletRequest request = requestContext.getRequest();
         boolean asyncDispatcher = request_isDispatcherType(request, DISPATCHER_TYPE_ASYNC);
         boolean asyncStarted = request_isAsyncStarted(request);
 
@@ -363,20 +369,60 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
     }
 
     private void doCommit(RequestContext requestContext) {
-        HttpServletRequest request = requestContext.getRequest();
+        CommitMonitor monitor = getCommitMonitor(requestContext);
 
-        for (RequestContext rc = requestContext; rc != null; rc = rc.getWrappedRequestContext()) {
-            if (getLogger().isTraceEnabled()) {
-                getLogger().trace("Committing request context: {}", rc.getClass().getSimpleName());
+        synchronized (monitor) {
+            if (!monitor.isCommitted()) {
+                boolean doCommitHeaders = !monitor.isHeadersCommitted();
+                monitor.setCommitted(true);
+
+                HttpServletRequest request = requestContext.getRequest();
+
+                for (RequestContext rc = requestContext; rc != null; rc = rc.getWrappedRequestContext()) {
+                    if (getLogger().isTraceEnabled()) {
+                        getLogger().trace("Committing request context: {}", rc.getClass().getSimpleName());
+                    }
+
+                    if (rc instanceof TwoPhaseCommitRequestContext && doCommitHeaders) {
+                        ((TwoPhaseCommitRequestContext) rc).commitHeaders();
+                    }
+
+                    rc.commit();
+                }
+
+                // 将request和requestContext断开
+                RequestContextUtil.removeRequestContext(request);
+
+                getLogger().debug("Committed request: {}", request);
             }
-
-            rc.commit();
         }
+    }
 
-        // 将request和requestContext断开
-        RequestContextUtil.removeRequestContext(request);
+    public void commitHeaders(RequestContext requestContext) {
+        CommitMonitor monitor = getCommitMonitor(requestContext);
 
-        getLogger().debug("Committed request: {}", request);
+        synchronized (monitor) {
+            if (!monitor.isHeadersCommitted()) {
+                monitor.setHeadersCommitted(true);
+
+                for (RequestContext rc = requestContext; rc != null; rc = rc.getWrappedRequestContext()) {
+                    if (rc instanceof TwoPhaseCommitRequestContext) {
+                        TwoPhaseCommitRequestContext tpc = (TwoPhaseCommitRequestContext) rc;
+
+                        if (getLogger().isTraceEnabled()) {
+                            getLogger().trace("Committing headers: {}", tpc.getClass().getSimpleName());
+                        }
+
+                        tpc.commitHeaders();
+                    }
+                }
+            }
+        }
+    }
+
+    private CommitMonitor getCommitMonitor(RequestContext requestContext) {
+        CommitMonitor monitor = findRequestContext(requestContext, SimpleRequestContext.class);
+        return assertNotNull(monitor, "no monitor");
     }
 
     private void setupSpringWebEnvironment(HttpServletRequest request) {

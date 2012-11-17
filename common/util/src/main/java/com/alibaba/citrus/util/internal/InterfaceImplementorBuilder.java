@@ -68,8 +68,13 @@ public class InterfaceImplementorBuilder extends DynamicClassBuilder {
         interfaces = createLinkedList();
     }
 
-    public InterfaceImplementorBuilder addInterface(Class<?> interfaceClass) {
-        this.interfaces.add(interfaceClass);
+    public InterfaceImplementorBuilder addInterface(Class<?>... interfaceClasses) {
+        if (interfaceClasses != null) {
+            for (Class<?> interfaceClass : interfaceClasses) {
+                this.interfaces.add(interfaceClass);
+            }
+        }
+
         return this;
     }
 

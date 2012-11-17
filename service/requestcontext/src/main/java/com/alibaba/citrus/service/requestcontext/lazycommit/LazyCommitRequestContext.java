@@ -17,7 +17,7 @@
 
 package com.alibaba.citrus.service.requestcontext.lazycommit;
 
-import com.alibaba.citrus.service.requestcontext.RequestContext;
+import com.alibaba.citrus.service.requestcontext.TwoPhaseCommitRequestContext;
 
 /**
  * 延迟提交response。有些方法的调用会导致response被提交，包括：
@@ -40,7 +40,7 @@ import com.alibaba.citrus.service.requestcontext.RequestContext;
  *
  * @author Michael Zhou
  */
-public interface LazyCommitRequestContext extends RequestContext {
+public interface LazyCommitRequestContext extends TwoPhaseCommitRequestContext {
     /**
      * 判断当前请求是否已出错。
      *

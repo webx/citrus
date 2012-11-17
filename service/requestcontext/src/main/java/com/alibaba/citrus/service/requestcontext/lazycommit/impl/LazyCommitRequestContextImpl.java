@@ -115,6 +115,15 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
         return status;
     }
 
+    @Override
+    public void commitHeaders() throws LazyCommitFailedException {
+        try {
+            ((ResponseWrapper) getResponse()).commitHeaders();
+        } catch (IOException e) {
+            throw new LazyCommitFailedException(e);
+        }
+    }
+
     /**
      * 结束一个请求。
      *
@@ -131,6 +140,8 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
 
     /** 包装response。 */
     private class ResponseWrapper extends AbstractResponseWrapper {
+        private boolean headersCommitted;
+
         public ResponseWrapper(HttpServletResponse response) {
             super(LazyCommitRequestContextImpl.this, response);
         }
@@ -144,6 +155,10 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
         public void sendError(int status, String message) throws IOException {
             if (sendError == null && sendRedirect == null) {
                 sendError = new SendError(status, message);
+
+                if (headersCommitted) {
+                    super.sendError(status, message);
+                }
             }
         }
 
@@ -158,6 +173,10 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
         public void sendRedirect(String location) throws IOException {
             if (sendError == null && sendRedirect == null) {
                 sendRedirect = location;
+
+                if (headersCommitted) {
+                    super.sendRedirect(location);
+                }
             }
         }
 
@@ -173,6 +192,10 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
         @Override
         public void flushBuffer() throws IOException {
             bufferFlushed = true;
+
+            if (headersCommitted) {
+                super.flushBuffer();
+            }
         }
 
         /**
@@ -183,9 +206,15 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
         @Override
         public void setStatus(int sc) {
             status = sc;
+
+            if (headersCommitted) {
+                super.setStatus(sc);
+            }
         }
 
-        private void commit() throws IOException {
+        private void commitHeaders() throws IOException {
+            headersCommitted = true;
+
             if (status > 0) {
                 log.debug("Set HTTP status to " + status);
                 super.setStatus(status);
@@ -213,7 +242,9 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
 
                 super.sendRedirect(sendRedirect);
             }
+        }
 
+        private void commit() throws IOException {
             if (bufferFlushed) {
                 super.flushBuffer();
             }

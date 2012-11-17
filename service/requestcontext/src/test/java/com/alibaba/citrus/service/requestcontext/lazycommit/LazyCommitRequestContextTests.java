@@ -67,7 +67,7 @@ public class LazyCommitRequestContextTests extends AbstractRequestContextsTests<
 
         newResponse.sendError(HttpServletResponse.SC_FORBIDDEN); // 无异常，但忽略之
 
-        requestContext.commit();
+        requestContexts.commitRequestContext(requestContext);
         assertTrue(newResponse.isCommitted());
 
         assertTrue(requestContext.isError());
@@ -94,7 +94,7 @@ public class LazyCommitRequestContextTests extends AbstractRequestContextsTests<
 
         newResponse.sendRedirect("mylocation"); // 无异常，但忽略之
 
-        requestContext.commit();
+        requestContexts.commitRequestContext(requestContext);
         assertTrue(newResponse.isCommitted());
     }
 
@@ -115,7 +115,7 @@ public class LazyCommitRequestContextTests extends AbstractRequestContextsTests<
 
         newResponse.flushBuffer(); // 重复flush是没问题的
 
-        requestContext.commit();
+        requestContexts.commitRequestContext(requestContext);
         assertTrue(newResponse.isCommitted());
     }
 

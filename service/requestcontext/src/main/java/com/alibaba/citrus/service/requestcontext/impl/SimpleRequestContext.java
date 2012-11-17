@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.citrus.service.requestcontext.RequestContext;
+import com.alibaba.citrus.service.requestcontext.RequestContextChainingService;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 
@@ -32,7 +33,7 @@ import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
  *
  * @author Michael Zhou
  */
-public class SimpleRequestContext implements RequestContext {
+public class SimpleRequestContext extends CommitMonitor implements RequestContext, HeaderCommitter {
     private final ServletContext      servletContext;
     private final HttpServletRequest  request;
     private final HttpServletResponse response;
@@ -44,10 +45,11 @@ public class SimpleRequestContext implements RequestContext {
      * @param request        <code>HttpServletRequest</code>对象
      * @param response       <code>HttpServletResponse</code>对象
      */
-    public SimpleRequestContext(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response) {
+    public SimpleRequestContext(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, RequestContextChainingService service) {
+        super(service);
         this.servletContext = assertNotNull(servletContext, "servletContext");
         this.request = assertNotNull(request, "request");
-        this.response = assertNotNull(response, "response");
+        this.response = new CommittingAwareResponse(assertNotNull(response, "response"), this);
     }
 
     /**
