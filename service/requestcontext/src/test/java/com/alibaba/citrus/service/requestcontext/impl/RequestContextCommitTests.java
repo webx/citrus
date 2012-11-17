@@ -26,6 +26,8 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -228,6 +230,76 @@ public class RequestContextCommitTests {
         service.commitRequestContext(requestContext);
 
         verify(requestContext1, requestContext2);
+    }
+
+    private CountDownLatch latch;
+
+    /** 测试多线程不会同时执行commit和commitHeaders。 */
+    @Test
+    public void synchronization() throws Exception {
+        // 用来测试执行顺序。
+        count = 0;
+
+        latch = new CountDownLatch(1);
+
+        overrider1 = new Object() {
+            public void commit() throws Exception {
+                latch.await();
+                assertEquals(2, count++);
+            }
+        };
+        overrider2 = new Object() {
+            public void commitHeaders() {
+                assertEquals(3, count++);
+            }
+
+            public void commit() {
+                assertEquals(4, count++);
+            }
+        };
+
+        List<RequestContextFactory<?>> factories = createArrayList(new RequestContextFactory<?>[] {
+                new MyRequestContextFactory(requestContext2, overrider2),
+                new MyRequestContextFactory(requestContext1, overrider1), // 先提交requestContext1，再提交requestContext2
+        });
+
+        service = new RequestContextChainingServiceImpl();
+        service.setFactories(factories);
+        service.afterPropertiesSet();
+
+        requestContext = service.getRequestContext(servletContext, request, response);
+
+        Thread t1 = new Thread(new Runnable() {
+            public void run() {
+                assertEquals(0, count++);
+                service.commitRequestContext(requestContext);
+                assertEquals(0, count++);
+            }
+        });
+        Thread t2 = new Thread(new Runnable() {
+            public void run() {
+                assertEquals(1, count++);
+                service.commitHeaders(requestContext);
+                assertEquals(5, count++);
+            }
+        });
+
+        t1.start();
+
+        // 确保thread1进入等待latch状态
+        TimeUnit.MILLISECONDS.sleep(10);
+        assertEquals(1, count);
+
+        t2.start();
+
+        // 确保thread2进入等待monitor的状态
+        TimeUnit.MILLISECONDS.sleep(10);
+        assertEquals(2, count);
+
+        latch.countDown();
+
+        t1.join();
+        t2.join();
     }
 
     private class MyRequestContextFactory extends AbstractRequestContextFactory<RequestContext> {
