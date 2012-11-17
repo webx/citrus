@@ -44,6 +44,11 @@ public class BasicRequestContextImpl extends AbstractRequestContextWrapper imple
     }
 
     @Override
+    public void commitHeaders() throws RequestContextException {
+        ((BasicResponseImpl) getResponse()).commitHeaders();
+    }
+
+    @Override
     public void commit() throws RequestContextException {
         ((BasicResponseImpl) getResponse()).commitResponse();
     }

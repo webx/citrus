@@ -33,11 +33,13 @@ import org.junit.Test;
 
 public class RequestContextLifecycleInterceptorTests extends AbstractBasicResponseTests {
     private List<Integer> prepares;
+    private List<Integer> commitHeaders;
     private List<Integer> commits;
 
     @Before
     public void init() {
         prepares = createLinkedList();
+        commitHeaders = createLinkedList();
         commits = createLinkedList();
     }
 
@@ -52,6 +54,10 @@ public class RequestContextLifecycleInterceptorTests extends AbstractBasicRespon
 
             public void prepare() {
                 prepares.add(index);
+            }
+
+            public void commitHeaders() {
+                commitHeaders.add(index);
             }
 
             public void commit() {
@@ -74,9 +80,11 @@ public class RequestContextLifecycleInterceptorTests extends AbstractBasicRespon
                 new MyInterceptor(1), new MyInterceptor(2), new MyInterceptor(3) });
 
         requestContext.prepare();
+        requestContext.commitHeaders();
         requestContext.commit();
 
         assertArrayEquals(new Integer[] { 1, 2, 3 }, prepares.toArray(new Integer[0]));
+        assertArrayEquals(new Integer[] { 3, 2, 1 }, commitHeaders.toArray(new Integer[0]));
         assertArrayEquals(new Integer[] { 3, 2, 1 }, commits.toArray(new Integer[0]));
     }
 }

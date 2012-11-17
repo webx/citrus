@@ -20,5 +20,7 @@ package com.alibaba.citrus.service.requestcontext.basic;
 public interface RequestContextLifecycleInterceptor {
     void prepare();
 
+    void commitHeaders();
+
     void commit();
 }
