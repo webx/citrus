@@ -173,7 +173,7 @@ public class SessionRequestContextImpl extends AbstractRequestContextWrapper imp
         cookie.setHttpOnly(cookieConfig.isHttpOnly());
         cookie.setSecure(cookieConfig.isSecure());
 
-        log.debug("Set-cookie: {}", cookie);
+        log.debug("{}", cookie);
 
         cookie.addCookie(getResponse());
     }
