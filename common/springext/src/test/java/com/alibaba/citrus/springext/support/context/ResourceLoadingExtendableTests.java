@@ -96,7 +96,7 @@ public class ResourceLoadingExtendableTests implements Cloneable {
 
         // resource pattern
         if (defaultServletResource) {
-            assertResources("WEB-INF/*", "web.xml"); // 用spring servlet context resolver
+            assertResources("WEB-INF/*", "web.xml", "web_withRedirect.xml"); // 用spring servlet context resolver
         } else {
             assertResources("WEB-INF/*"); // 用 class resolver，not found
         }
@@ -115,7 +115,7 @@ public class ResourceLoadingExtendableTests implements Cloneable {
 
         // resource pattern
         if (defaultServletResource) {
-            assertResources("WEB-INF/*", "web.xml"); // 用spring servlet context resolver
+            assertResources("WEB-INF/*", "web.xml", "web_withRedirect.xml"); // 用spring servlet context resolver
         } else {
             assertResources("WEB-INF/*"); // 用 class resolver，not found
         }
@@ -210,9 +210,21 @@ public class ResourceLoadingExtendableTests implements Cloneable {
 
         assertEquals(regexps.length, resources.length);
 
-        for (int i = 0; i < regexps.length; i++) {
-            assertThat(resources[i].getURL().toString(), containsRegex(regexps[i]));
+        Set<String> regexpSet = createHashSet(regexps);
+
+        for (int i = 0; i < resources.length; i++) {
+            for (int j = 0; j < regexps.length; j++) {
+                String regexp = regexps[j];
+
+                try {
+                    assertThat(resources[i].getURL().toString(), containsRegex(regexp));
+                    regexpSet.remove(regexp);
+                } catch (AssertionError e) {
+                }
+            }
         }
+
+        assertTrue(regexpSet.isEmpty());
     }
 
     /**
