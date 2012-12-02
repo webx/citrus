@@ -64,6 +64,7 @@
         </profile>
     </profiles>
     <modules>
+        <module>dist/springext</module>
         <module>dist/webx</module>
         <module>dist/test</module>
         <module>common/servlet</module>
