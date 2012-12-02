@@ -9,6 +9,7 @@
     <file url="file://$PROJECT_DIR$/common/servlet" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/common/springext" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/common/util" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dist/springext" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dist/test" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dist/webx" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/service/base" charset="UTF-8" />
