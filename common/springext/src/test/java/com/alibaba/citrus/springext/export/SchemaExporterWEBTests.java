@@ -19,12 +19,14 @@ package com.alibaba.citrus.springext.export;
 
 import static com.alibaba.citrus.test.TestEnvStatic.*;
 import static com.alibaba.citrus.test.TestUtil.*;
+import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.util.Map;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -33,7 +35,9 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import com.alibaba.citrus.springext.export.SchemaExporterServlet.RedirectToSchema;
 import com.alibaba.citrus.util.io.StreamUtil;
+import com.meterware.httpunit.GetMethodWebRequest;
 import com.meterware.httpunit.WebResponse;
 import com.meterware.httpunit.javascript.JavaScript;
 import com.meterware.servletunit.ServletRunner;
@@ -50,9 +54,13 @@ public class SchemaExporterWEBTests {
 
     @Before
     public void init() throws Exception {
+        initServletContainer("web.xml");
+    }
+
+    private void initServletContainer(String webxml) throws Exception {
         // Servlet container
         File webInf = new File(srcdir, "WEB-INF");
-        File webXml = new File(webInf, "web.xml");
+        File webXml = new File(webInf, webxml);
 
         ServletRunner servletRunner = new ServletRunner(webXml, "");
 
@@ -67,13 +75,28 @@ public class SchemaExporterWEBTests {
 
     /** 调用servlet，取得request/response。 */
     protected final void invokeServlet(String uri) throws Exception {
+        invokeServlet(uri, null);
+    }
+
+    protected final void invokeServlet(String uri, Map<String, String> params) throws Exception {
         if (uri != null && uri.startsWith("http")) {
             uri = URI.create(uri).normalize().toString(); // full uri
         } else {
             uri = URI.create("http://www.taobao.com/" + trimToEmpty(uri)).normalize().toString(); // partial uri
         }
 
-        clientResponse = client.getResponse(uri);
+        if (params == null || params.isEmpty()) {
+            clientResponse = client.getResponse(uri);
+        } else {
+            GetMethodWebRequest request = new GetMethodWebRequest(uri);
+
+            for (Map.Entry<String, String> entry : params.entrySet()) {
+                request.setParameter(entry.getKey(), entry.getValue());
+            }
+
+            clientResponse = client.getResponse(request);
+        }
+
         clientResponseCode = clientResponse.getResponseCode();
         clientResponseContent = clientResponse.getText();
     }
@@ -120,6 +143,45 @@ public class SchemaExporterWEBTests {
         byte[] fileContent = StreamUtil.readBytes(getClass().getResource("file.gif").openStream(), true).toByteArray();
 
         assertArrayEquals(fileContent, content);
+    }
+
+    @Test
+    public void redirect() throws Exception {
+        initServletContainer("web_withRedirect.xml");
+
+        RedirectToSchema servlet = (RedirectToSchema) client.newInvocation("http://localhost/").getServlet();
+        assertEquals("/schema", getFieldValue(servlet, "prefix", String.class));
+
+        Map<String, String> params;
+
+        // GET /
+        invokeServlet("/");
+        assertEquals(302, clientResponseCode);
+        assertEquals("/schema/", clientResponse.getHeaderField("Location"));
+
+        // GET /?a=1
+        params = createLinkedHashMap();
+        params.put("a", "1");
+
+        invokeServlet("/", params);
+        assertEquals(302, clientResponseCode);
+        assertEquals("/schema/?a=1", clientResponse.getHeaderField("Location"));
+
+        // GET /services?a=1
+        params = createLinkedHashMap();
+        params.put("a", "1");
+
+        invokeServlet("/services", params);
+        assertEquals(302, clientResponseCode);
+        assertEquals("/schema/services?a=1", clientResponse.getHeaderField("Location"));
+
+        // GET /schema/services/ - list page
+        invokeServlet("/schema/services/");
+
+        assertEquals(200, clientResponseCode);
+        assertEquals("text/html", clientResponse.getContentType());
+        assertThat(clientResponseContent,
+                   containsAll("/schema/services/container.xsd", "/schema/services/tools/dateformat.xsd"));
     }
 
     public static class JavaScriptFilter implements Filter {

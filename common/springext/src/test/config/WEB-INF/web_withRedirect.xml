@@ -25,6 +25,19 @@
     <servlet>
         <servlet-name>schema</servlet-name>
         <servlet-class>com.alibaba.citrus.springext.export.SchemaExporterServlet</servlet-class>
+        <init-param>
+            <param-name>prefix</param-name>
+            <param-value>schema/</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet>
+        <servlet-name>redirectToSchema</servlet-name>
+        <servlet-class>com.alibaba.citrus.springext.export.SchemaExporterServlet$RedirectToSchema</servlet-class>
+        <init-param>
+            <param-name>prefix</param-name>
+            <param-value>schema/</param-value>
+        </init-param>
     </servlet>
 
     <servlet-mapping>
@@ -35,6 +48,11 @@
     <servlet-mapping>
         <servlet-name>schema</servlet-name>
         <url-pattern>/schema/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>redirectToSchema</servlet-name>
+        <url-pattern>/*</url-pattern>
     </servlet-mapping>
 
 </web-app>
