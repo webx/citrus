@@ -57,6 +57,7 @@ public class ConfigurationPointsImpl implements ConfigurationPoints {
     private final Collection<ConfigurationPoint>  configurationPoints;
     private       boolean                         initialized;
 
+    /** 通过<code>ClasspathResourceResolver</code>来查找和创建<code>ConfigurationPoint</code>s。 */
     public ConfigurationPointsImpl() {
         this(null, null, null);
     }

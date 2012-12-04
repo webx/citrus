@@ -58,14 +58,20 @@ public class SpringPluggableSchemas implements Schemas {
     private final Map<String, String> uriToNameMappings;
     private       boolean             initialized;
 
+    /** 通过<code>ClasspathResourceResolver</code>来查找spring schemas。 */
     public SpringPluggableSchemas() {
         this(null, null);
     }
 
+    /** 通过<code>ClasspathResourceResolver</code>来查找spring schemas。 */
     public SpringPluggableSchemas(ResourceLoader resourceLoader) {
         this(resourceLoader, null);
     }
 
+    /**
+     * 通过指定的<code>ResourceResolver</code>来查找spring schemas。
+     * 适合来实现IDE plugins。
+     */
     public SpringPluggableSchemas(ResourceResolver resourceResolver) {
         this(null, resourceResolver);
     }
