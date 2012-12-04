@@ -40,8 +40,9 @@ public class ConfigurationPointTests {
 
     static {
         TestEnvStatic.init();
-        instantiateContributionImplementationMethod = getAccessibleMethod(ConfigurationPointImpl.class,
-                                                                          "instantiateContributionImplementation", new Class<?>[] { Contribution.class });
+        instantiateContributionImplementationMethod
+                = getAccessibleMethod(ConfigurationPointImpl.class,
+                                      "instantiateContributionImplementation", new Class<?>[] { Contribution.class });
     }
 
     private Object instantiateContributionImplementation(ConfigurationPoint cp, Contribution contrib) throws Exception {

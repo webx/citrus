@@ -21,33 +21,34 @@ import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static java.util.Collections.*;
-import static org.springframework.util.ResourceUtils.*;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
+import com.alibaba.citrus.springext.ResourceResolver;
+import com.alibaba.citrus.springext.support.ClasspathResourceResolver;
 import org.slf4j.Logger;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.util.ClassUtils;
 
 final class ConfigurationPointSettings {
-    public final  ClassLoader             classLoader;
-    public final  String                  baseLocation;
-    private final ResourcePatternResolver resolver;
+    public final ResourceResolver resourceResolver;
+    public final String           baseLocation;
+    public final ClassLoader      classLoader;
 
-    ConfigurationPointSettings(ClassLoader classLoader, String configurationPointsLocation) {
+    ConfigurationPointSettings(ClassLoader classLoader, String configurationPointsLocation, boolean registerContributionClass) {
         if (classLoader == null) {
             classLoader = ClassUtils.getDefaultClassLoader();
         }
 
         assertNotNull(configurationPointsLocation, "configurationPointsLocation");
 
-        this.classLoader = classLoader;
+        this.resourceResolver = new ClasspathResourceResolver(classLoader);
         this.baseLocation = configurationPointsLocation.substring(0, configurationPointsLocation.lastIndexOf("/") + 1);
-        this.resolver = new PathMatchingResourcePatternResolver(classLoader);
+
+        // 对于IDE plugin运行环境，不需要创建和注册contribution class类，因此也不需要classLoader。
+        this.classLoader = registerContributionClass ? classLoader : null;
     }
 
     URL getResource(String relativeLocation, Logger log) throws IOException {
@@ -57,7 +58,7 @@ final class ConfigurationPointSettings {
             log.trace("Trying to find resource at {}", location);
         }
 
-        Resource resource = resolver.getResource(location);
+        Resource resource = resourceResolver.getResource(location);
 
         if (resource != null) {
             return resource.getURL();
@@ -73,7 +74,7 @@ final class ConfigurationPointSettings {
             log.trace("Trying to find resources at {}", locationPattern);
         }
 
-        Resource[] resources = resolver.getResources(locationPattern);
+        Resource[] resources = resourceResolver.getResources(locationPattern);
         List<URL> urls;
 
         if (resources == null) {
@@ -90,12 +91,6 @@ final class ConfigurationPointSettings {
     }
 
     private String toAbsoluteLocation(String relativeLocationPattern) {
-        relativeLocationPattern = assertNotNull(trimToNull(relativeLocationPattern), "locationPattern");
-
-        if (relativeLocationPattern.startsWith(CLASSPATH_URL_PREFIX)) {
-            relativeLocationPattern = relativeLocationPattern.substring(CLASSPATH_URL_PREFIX.length());
-        }
-
-        return CLASSPATH_URL_PREFIX + baseLocation + relativeLocationPattern;
+        return baseLocation + assertNotNull(trimToNull(relativeLocationPattern), "locationPattern");
     }
 }
