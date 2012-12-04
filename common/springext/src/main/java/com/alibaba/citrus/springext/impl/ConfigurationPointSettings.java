@@ -37,18 +37,39 @@ final class ConfigurationPointSettings {
     public final String           baseLocation;
     public final ClassLoader      classLoader;
 
-    ConfigurationPointSettings(ClassLoader classLoader, String configurationPointsLocation, boolean registerContributionClass) {
-        if (classLoader == null) {
-            classLoader = ClassUtils.getDefaultClassLoader();
+    /**
+     * 从指定<code>ResourceResolver</code>中装载configuration points和contributions。
+     * 所有contribution classes都<em>不会</em>被创建和注册。
+     * 对于IDE plugin，此构造函数将被调用。
+     */
+    ConfigurationPointSettings(ResourceResolver resourceResolver, String configurationPointsLocation) {
+        this(null, resourceResolver, configurationPointsLocation);
+    }
+
+    /**
+     * 从class loader中装载configuration points和contributions。
+     * 所有contribution classes也会被创建和注册。
+     */
+    ConfigurationPointSettings(ClassLoader classLoader, String configurationPointsLocation) {
+        this(classLoader, null, configurationPointsLocation);
+    }
+
+    private ConfigurationPointSettings(ClassLoader classLoader, ResourceResolver resourceResolver, String configurationPointsLocation) {
+        if (resourceResolver == null) {
+            if (classLoader == null) {
+                classLoader = ClassUtils.getDefaultClassLoader();
+            }
+
+            this.classLoader = classLoader;
+            this.resourceResolver = new ClasspathResourceResolver(classLoader);
+        } else {
+            // 对于IDE plugin运行环境，不需要创建和注册contribution class类，因此也不需要classLoader。
+            this.classLoader = null;
+            this.resourceResolver = resourceResolver;
         }
 
         assertNotNull(configurationPointsLocation, "configurationPointsLocation");
-
-        this.resourceResolver = new ClasspathResourceResolver(classLoader);
         this.baseLocation = configurationPointsLocation.substring(0, configurationPointsLocation.lastIndexOf("/") + 1);
-
-        // 对于IDE plugin运行环境，不需要创建和注册contribution class类，因此也不需要classLoader。
-        this.classLoader = registerContributionClass ? classLoader : null;
     }
 
     URL getResource(String relativeLocation, Logger log) throws IOException {

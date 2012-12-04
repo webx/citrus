@@ -33,6 +33,7 @@ import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.ConfigurationPointException;
 import com.alibaba.citrus.springext.ConfigurationPoints;
 import com.alibaba.citrus.springext.Contribution;
+import com.alibaba.citrus.springext.ResourceResolver;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
@@ -57,21 +58,36 @@ public class ConfigurationPointsImpl implements ConfigurationPoints {
     private       boolean                         initialized;
 
     public ConfigurationPointsImpl() {
-        this(null, null);
+        this(null, null, null);
     }
 
     /** 通过<code>ClasspathResourceResolver</code>来查找和创建<code>ConfigurationPoint</code>s。 */
     public ConfigurationPointsImpl(ClassLoader classLoader) {
-        this(classLoader, null);
+        this(classLoader, null, null);
     }
 
     /** 通过<code>ClasspathResourceResolver</code>来查找和创建<code>ConfigurationPoint</code>s。 */
     public ConfigurationPointsImpl(ClassLoader classLoader, String configurationPointsLocation) {
+        this(classLoader, null, configurationPointsLocation);
+    }
+
+    /** 通过指定<code>ResourceResolver</code>来查找和创建<code>ConfigurationPoint</code>s。 */
+    public ConfigurationPointsImpl(ResourceResolver resourceResolver) {
+        this(null, resourceResolver, null);
+    }
+
+    private ConfigurationPointsImpl(ClassLoader classLoader, ResourceResolver resourceResolver, String configurationPointsLocation) {
         this.configurationPointsLocation = defaultIfEmpty(configurationPointsLocation, DEFAULT_CONFIGURATION_POINTS_LOCATION);
-        this.settings = new ConfigurationPointSettings(classLoader, this.configurationPointsLocation, true);
         this.namespaceUriToConfigurationPoints = createHashMap();
         this.nameToConfigurationPoints = createTreeMap();
         this.configurationPoints = unmodifiableCollection(nameToConfigurationPoints.values());// sorted by name
+
+        if (resourceResolver == null) {
+            this.settings = new ConfigurationPointSettings(classLoader, this.configurationPointsLocation);
+        } else {
+            // IDE plugin mode
+            this.settings = new ConfigurationPointSettings(resourceResolver, this.configurationPointsLocation);
+        }
     }
 
     private void ensureInit() {
