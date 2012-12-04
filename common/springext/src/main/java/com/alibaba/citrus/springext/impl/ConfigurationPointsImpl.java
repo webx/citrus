@@ -28,18 +28,17 @@ import java.net.URI;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Properties;
 
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.ConfigurationPointException;
 import com.alibaba.citrus.springext.ConfigurationPoints;
 import com.alibaba.citrus.springext.Contribution;
+import com.alibaba.citrus.springext.ResourceResolver;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 /**
  * 解析configuration point namespace。
@@ -58,21 +57,38 @@ public class ConfigurationPointsImpl implements ConfigurationPoints {
     private final Collection<ConfigurationPoint>  configurationPoints;
     private       boolean                         initialized;
 
+    /** 通过<code>ClasspathResourceResolver</code>来查找和创建<code>ConfigurationPoint</code>s。 */
     public ConfigurationPointsImpl() {
-        this(null, null);
+        this(null, null, null);
     }
 
+    /** 通过<code>ClasspathResourceResolver</code>来查找和创建<code>ConfigurationPoint</code>s。 */
     public ConfigurationPointsImpl(ClassLoader classLoader) {
-        this(classLoader, null);
+        this(classLoader, null, null);
     }
 
+    /** 通过<code>ClasspathResourceResolver</code>来查找和创建<code>ConfigurationPoint</code>s。 */
     public ConfigurationPointsImpl(ClassLoader classLoader, String configurationPointsLocation) {
-        this.configurationPointsLocation = defaultIfEmpty(configurationPointsLocation,
-                                                          DEFAULT_CONFIGURATION_POINTS_LOCATION);
-        this.settings = new ConfigurationPointSettings(classLoader, this.configurationPointsLocation);
+        this(classLoader, null, configurationPointsLocation);
+    }
+
+    /** 通过指定<code>ResourceResolver</code>来查找和创建<code>ConfigurationPoint</code>s。 */
+    public ConfigurationPointsImpl(ResourceResolver resourceResolver) {
+        this(null, resourceResolver, null);
+    }
+
+    private ConfigurationPointsImpl(ClassLoader classLoader, ResourceResolver resourceResolver, String configurationPointsLocation) {
+        this.configurationPointsLocation = defaultIfEmpty(configurationPointsLocation, DEFAULT_CONFIGURATION_POINTS_LOCATION);
         this.namespaceUriToConfigurationPoints = createHashMap();
         this.nameToConfigurationPoints = createTreeMap();
         this.configurationPoints = unmodifiableCollection(nameToConfigurationPoints.values());// sorted by name
+
+        if (resourceResolver == null) {
+            this.settings = new ConfigurationPointSettings(classLoader, this.configurationPointsLocation);
+        } else {
+            // IDE plugin mode
+            this.settings = new ConfigurationPointSettings(resourceResolver, this.configurationPointsLocation);
+        }
     }
 
     private void ensureInit() {
@@ -85,20 +101,19 @@ public class ConfigurationPointsImpl implements ConfigurationPoints {
     }
 
     private void loadConfigurationPoints() {
-        Properties mappings;
+        Map<String, String> mappings;
 
         log.trace("Trying to load configuration points at {}", configurationPointsLocation);
 
         try {
-            mappings = PropertiesLoaderUtils.loadAllProperties(configurationPointsLocation, settings.classLoader);
+            mappings = settings.resourceResolver.loadAllProperties(configurationPointsLocation);
         } catch (IOException e) {
-            throw new ConfigurationPointException("Unable to load Configuration Points from "
-                                                  + configurationPointsLocation, e);
+            throw new ConfigurationPointException("Unable to load Configuration Points from " + configurationPointsLocation, e);
         }
 
-        for (Entry<Object, Object> entry : mappings.entrySet()) {
-            String name = normalizeConfigurationPointName((String) entry.getKey());
-            Map<String, String> params = parseNamespaceUriAndParams((String) entry.getValue());
+        for (Entry<String, String> entry : mappings.entrySet()) {
+            String name = normalizeConfigurationPointName(entry.getKey());
+            Map<String, String> params = parseNamespaceUriAndParams(entry.getValue());
             String namespaceUri = assertNotNull(params.get(NAMESPACE_URI_KEY), "namespaceUri");
 
             if (!namespaceUri.endsWith(name)) {

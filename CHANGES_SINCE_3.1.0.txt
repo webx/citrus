@@ -93,3 +93,4 @@
 * 改进schema exporter servlet（由mvn springext:run来运行），
   当访问http://localhost:8080/时，自动重定向到http://localhost:8080/schema，以方便开发者。
 
+* 改进Springext以配合IDEA/Eclipse plugins。

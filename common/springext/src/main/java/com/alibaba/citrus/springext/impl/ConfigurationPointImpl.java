@@ -30,7 +30,6 @@ import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Properties;
 import java.util.Set;
 
 import com.alibaba.citrus.springext.ConfigurationPoint;
@@ -53,7 +52,6 @@ import org.springframework.beans.factory.xml.BeanDefinitionParser;
 import org.springframework.beans.factory.xml.NamespaceHandler;
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 import org.springframework.core.io.InputStreamSource;
-import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.util.ClassUtils;
 
 /**
@@ -140,21 +138,21 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
 
     private void loadContributions(ContributionType contribType) {
         String contribLocation = contributionLocationPrefix + contribType.getContributionsLocationSuffix();
-        Properties mappings;
+        Map<String, String> mappings;
 
         log.trace("Trying to load contributions at {}", contribLocation);
 
         try {
-            mappings = PropertiesLoaderUtils.loadAllProperties(contribLocation, settings.classLoader);
+            mappings = settings.resourceResolver.loadAllProperties(contribLocation);
         } catch (IOException e) {
             throw new ConfigurationPointException("Unable to load Contributions from " + contribLocation, e);
         }
 
         Map<String, String> sortedMappings = createTreeMap();
 
-        for (Entry<Object, Object> entry : mappings.entrySet()) {
-            String contribName = trimToNull((String) entry.getKey());
-            String contribClassName = trimToNull((String) entry.getValue());
+        for (Entry<String, String> entry : mappings.entrySet()) {
+            String contribName = trimToNull(entry.getKey());
+            String contribClassName = trimToNull(entry.getValue());
 
             if (getDefaultElementName() != null && isEquals(contribName, getDefaultElementName())) {
                 throw new FatalBeanException(
@@ -190,6 +188,11 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
     }
 
     private void register(Contribution contrib) {
+        // 当classLoader为null（IDE plugin）时，不创建和注册contribution class。
+        if (settings.classLoader == null) {
+            return;
+        }
+
         Object obj;
 
         try {
@@ -221,7 +224,8 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
         }
     }
 
-    private Object instantiateContributionImplementation(Contribution contrib) throws FatalBeanException {
+    private Object instantiateContributionImplementation(Contribution contrib)
+            throws FatalBeanException {
         String implementationClassName = contrib.getImplementationClassName();
 
         if (implementationClassName == null) {
