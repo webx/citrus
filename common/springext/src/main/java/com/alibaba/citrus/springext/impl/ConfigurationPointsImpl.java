@@ -57,24 +57,35 @@ public class ConfigurationPointsImpl implements ConfigurationPoints {
     private final Collection<ConfigurationPoint>  configurationPoints;
     private       boolean                         initialized;
 
-    /** 通过<code>ClasspathResourceResolver</code>来查找和创建<code>ConfigurationPoint</code>s。 */
+    /** 通过默认的<code>ClassLoader</code>来查找和创建<code>ConfigurationPoint</code>s。 */
     public ConfigurationPointsImpl() {
         this(null, null, null);
     }
 
-    /** 通过<code>ClasspathResourceResolver</code>来查找和创建<code>ConfigurationPoint</code>s。 */
+    /**
+     * 通过指定的<code>ClassLoader</code>来查找和创建<code>ConfigurationPoint</code>s。
+     * 如果未指定<code>ClassLoader</code>，则使用默认的<code>ClassLoader</code>。
+     */
     public ConfigurationPointsImpl(ClassLoader classLoader) {
-        this(classLoader, null, null);
+        this(classLoader, null);
     }
 
-    /** 通过<code>ClasspathResourceResolver</code>来查找和创建<code>ConfigurationPoint</code>s。 */
+    /**
+     * 通过指定的<code>ClassLoader</code>来查找和创建<code>ConfigurationPoint</code>s。
+     * 如果未指定<code>ClassLoader</code>，则使用默认的<code>ClassLoader</code>。
+     */
     public ConfigurationPointsImpl(ClassLoader classLoader, String configurationPointsLocation) {
         this(classLoader, null, configurationPointsLocation);
     }
 
     /** 通过指定<code>ResourceResolver</code>来查找和创建<code>ConfigurationPoint</code>s。 */
     public ConfigurationPointsImpl(ResourceResolver resourceResolver) {
-        this(null, resourceResolver, null);
+        this(resourceResolver, null);
+    }
+
+    /** 通过指定<code>ResourceResolver</code>来查找和创建<code>ConfigurationPoint</code>s。 */
+    public ConfigurationPointsImpl(ResourceResolver resourceResolver, String configurationPointsLocation) {
+        this(null, assertNotNull(resourceResolver, "no resourceResolver was specified"), configurationPointsLocation);
     }
 
     private ConfigurationPointsImpl(ClassLoader classLoader, ResourceResolver resourceResolver, String configurationPointsLocation) {

@@ -55,7 +55,7 @@ public class NamespaceHandlerResolverTests {
     }
 
     private void createConfigurationPoints(String location) {
-        cps = new ConfigurationPointsImpl(null, location);
+        cps = new ConfigurationPointsImpl((ClassLoader) null, location);
         resolver = new ConfigurationPointNamespaceHandlerResolver(cps, new DefaultNamespaceHandlerResolver());
     }
 }

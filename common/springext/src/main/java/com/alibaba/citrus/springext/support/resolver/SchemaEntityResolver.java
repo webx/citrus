@@ -21,6 +21,7 @@ import java.io.IOException;
 
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.Schemas;
+import com.alibaba.citrus.springext.impl.SpringExtSchemaSet;
 import com.alibaba.citrus.springext.support.SchemaSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,9 +34,13 @@ public class SchemaEntityResolver implements EntityResolver {
     private final EntityResolver defaultEntityResolver;
     private final SchemaSet      schemas;
 
+    public SchemaEntityResolver(EntityResolver defaultEntityResolver) {
+        this(defaultEntityResolver, new SpringExtSchemaSet());
+    }
+
     public SchemaEntityResolver(EntityResolver defaultEntityResolver, Schemas... schemasList) {
         this.defaultEntityResolver = defaultEntityResolver;
-        this.schemas = new SchemaSet(schemasList);
+        this.schemas = SchemaSet.getInstance(schemasList);
     }
 
     public EntityResolver getDefaultEntityResolver() {

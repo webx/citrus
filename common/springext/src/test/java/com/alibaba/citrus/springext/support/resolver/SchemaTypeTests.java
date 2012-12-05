@@ -24,6 +24,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import com.alibaba.citrus.springext.impl.SpringPluggableSchemas;
 import com.alibaba.citrus.test.TestEnvStatic;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;

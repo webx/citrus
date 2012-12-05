@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.alibaba.citrus.springext.support.resolver;
+package com.alibaba.citrus.springext.impl;
 
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
@@ -33,16 +33,14 @@ import com.alibaba.citrus.springext.ConfigurationPointException;
 import com.alibaba.citrus.springext.ResourceResolver;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.Schemas;
-import com.alibaba.citrus.springext.impl.SchemaImpl;
 import com.alibaba.citrus.springext.support.ClasspathResourceResolver;
 import com.alibaba.citrus.util.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.xml.PluggableSchemaResolver;
-import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.InputStreamSource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.UrlResource;
+import org.springframework.util.ClassUtils;
 
 /**
  * 将Spring所支持的<code>META-INF/spring.schemas</code>中定义的schemas移到本地服务器。
@@ -58,14 +56,17 @@ public class SpringPluggableSchemas implements Schemas {
     private final Map<String, String> uriToNameMappings;
     private       boolean             initialized;
 
-    /** 通过<code>ClasspathResourceResolver</code>来查找spring schemas。 */
+    /** 通过默认的<code>ClassLoader</code>来查找spring schemas。 */
     public SpringPluggableSchemas() {
         this(null, null);
     }
 
-    /** 通过<code>ClasspathResourceResolver</code>来查找spring schemas。 */
-    public SpringPluggableSchemas(ResourceLoader resourceLoader) {
-        this(resourceLoader, null);
+    /**
+     * 通过指定的<code>ClassLoader</code>来查找spring schemas。
+     * 如果未指定<code>ClassLoader</code>，则使用默认的<code>ClassLoader</code>。
+     */
+    public SpringPluggableSchemas(ClassLoader classLoader) {
+        this(classLoader, null);
     }
 
     /**
@@ -73,16 +74,16 @@ public class SpringPluggableSchemas implements Schemas {
      * 适合来实现IDE plugins。
      */
     public SpringPluggableSchemas(ResourceResolver resourceResolver) {
-        this(null, resourceResolver);
+        this(null, assertNotNull(resourceResolver, "no resourceResolver was specified"));
     }
 
-    private SpringPluggableSchemas(ResourceLoader resourceLoader, ResourceResolver resourceResolver) {
+    private SpringPluggableSchemas(ClassLoader classLoader, ResourceResolver resourceResolver) {
         if (resourceResolver == null) {
-            if (resourceLoader == null) {
-                resourceLoader = new DefaultResourceLoader();
+            if (classLoader == null) {
+                classLoader = ClassUtils.getDefaultClassLoader();
             }
 
-            this.resourceResolver = new ClasspathResourceResolver(resourceLoader);
+            this.resourceResolver = new ClasspathResourceResolver(classLoader);
         } else {
             // IDE plugin mode
             this.resourceResolver = resourceResolver;

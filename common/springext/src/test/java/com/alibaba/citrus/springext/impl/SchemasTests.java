@@ -321,6 +321,6 @@ public class SchemasTests {
     }
 
     private void createConfigurationPoints(String location) {
-        cps = new ConfigurationPointsImpl(null, location);
+        cps = new ConfigurationPointsImpl((ClassLoader) null, location);
     }
 }

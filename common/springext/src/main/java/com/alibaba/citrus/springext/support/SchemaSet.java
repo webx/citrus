@@ -30,6 +30,8 @@ import java.net.URI;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
@@ -45,13 +47,24 @@ import org.springframework.core.io.InputStreamSource;
  *
  * @author Michael Zhou
  */
-public class SchemaSet implements Schemas {
+public class SchemaSet implements Schemas, Iterable<Schemas> {
+    private final List<Schemas> allSchemas;
     private final Map<String, Schema> nameToSchemas             = createHashMap();
     private final Map<String, Schema> nameToSchemasUnmodifiable = unmodifiableMap(nameToSchemas);
     private final SortedSet<String> names;
 
+    public static SchemaSet getInstance(Schemas... schemasList) {
+        if (schemasList != null && schemasList.length == 1 && schemasList[0] instanceof SchemaSet) {
+            return (SchemaSet) schemasList[0];
+        } else {
+            return new SchemaSet(schemasList);
+        }
+    }
+
     public SchemaSet(Schemas... schemasList) {
         assertTrue(!isEmptyArray(schemasList), "schemasList");
+
+        allSchemas = createArrayList(schemasList);
 
         for (Schemas schemas : schemasList) {
             this.nameToSchemas.putAll(schemas.getNamedMappings());
@@ -72,6 +85,11 @@ public class SchemaSet implements Schemas {
 
         // 检查所有schema，将重复的include提到最上层
         processIncludes();
+    }
+
+    @Override
+    public Iterator<Schemas> iterator() {
+        return allSchemas.iterator();
     }
 
     /**
