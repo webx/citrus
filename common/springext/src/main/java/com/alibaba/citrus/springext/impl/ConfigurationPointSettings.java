@@ -23,13 +23,12 @@ import static com.alibaba.citrus.util.StringUtil.*;
 import static java.util.Collections.*;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 
 import com.alibaba.citrus.springext.ResourceResolver;
+import com.alibaba.citrus.springext.ResourceResolver.Resource;
 import com.alibaba.citrus.springext.support.ClasspathResourceResolver;
 import org.slf4j.Logger;
-import org.springframework.core.io.Resource;
 import org.springframework.util.ClassUtils;
 
 final class ConfigurationPointSettings {
@@ -72,43 +71,29 @@ final class ConfigurationPointSettings {
         this.baseLocation = configurationPointsLocation.substring(0, configurationPointsLocation.lastIndexOf("/") + 1);
     }
 
-    URL getResource(String relativeLocation, Logger log) throws IOException {
+    Resource getResourceFromRelativeLocation(String relativeLocation, Logger log) {
         String location = toAbsoluteLocation(relativeLocation);
 
         if (log != null) {
             log.trace("Trying to find resource at {}", location);
         }
 
-        Resource resource = resourceResolver.getResource(location);
-
-        if (resource != null) {
-            return resource.getURL();
-        } else {
-            return null;
-        }
+        return resourceResolver.getResource(location);
     }
 
-    List<URL> getResources(String relativeLocationPattern, Logger log) throws IOException {
+    List<Resource> getResourcesFromRelativeLocationPattern(String relativeLocationPattern, Logger log) {
         String locationPattern = toAbsoluteLocation(relativeLocationPattern);
 
         if (log != null) {
             log.trace("Trying to find resources at {}", locationPattern);
         }
 
-        Resource[] resources = resourceResolver.getResources(locationPattern);
-        List<URL> urls;
-
-        if (resources == null) {
-            urls = emptyList();
-        } else {
-            urls = createLinkedList();
-
-            for (Resource resource : resources) {
-                urls.add(resource.getURL());
-            }
+        try {
+            return createArrayList(resourceResolver.getResources(locationPattern));
+        } catch (IOException e) {
+            log.warn("Failed to load resources: {}: {}", relativeLocationPattern, e);
+            return emptyList();
         }
-
-        return urls;
     }
 
     private String toAbsoluteLocation(String relativeLocationPattern) {

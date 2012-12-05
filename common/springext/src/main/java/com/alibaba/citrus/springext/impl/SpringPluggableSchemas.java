@@ -23,7 +23,6 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URL;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
@@ -31,6 +30,7 @@ import java.util.regex.Pattern;
 
 import com.alibaba.citrus.springext.ConfigurationPointException;
 import com.alibaba.citrus.springext.ResourceResolver;
+import com.alibaba.citrus.springext.ResourceResolver.Resource;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.Schemas;
 import com.alibaba.citrus.springext.support.ClasspathResourceResolver;
@@ -39,7 +39,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.xml.PluggableSchemaResolver;
 import org.springframework.core.io.InputStreamSource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.util.ClassUtils;
 
 /**
@@ -152,28 +151,13 @@ public class SpringPluggableSchemas implements Schemas {
     }
 
     private InputStreamSource getResource(String classpathLocation, String uri) {
-        URL resource;
+        Resource resource = resourceResolver.getResource(classpathLocation);
 
-        try {
-            resource = resourceResolver.getResource(classpathLocation).getURL();
-        } catch (Exception e) {
-            log.warn("Could not find schema {} for URI: {},\n  {}",
-                     new String[] { classpathLocation, uri, e.getMessage() });
-
-            return null;
+        if (resource == null) {
+            log.warn("Could not find schema {} for URI: {}", classpathLocation, uri);
         }
 
-        return new UrlResource(resource) {
-            @Override
-            public String getDescription() {
-                try {
-                    return getURL().toExternalForm();
-                } catch (IOException e) {
-                    unexpectedException(e);
-                    return null;
-                }
-            }
-        };
+        return resource;
     }
 
     private String getSchemaName(String uri) {

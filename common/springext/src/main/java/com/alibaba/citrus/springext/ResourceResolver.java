@@ -18,13 +18,14 @@
 package com.alibaba.citrus.springext;
 
 import static com.alibaba.citrus.util.Assert.*;
+import static com.alibaba.citrus.util.ClassUtil.*;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.Properties;
 
-import org.springframework.core.io.Resource;
+import org.springframework.core.io.InputStreamSource;
 
 /**
  * 这个接口的目的是取得configuration point/contribution所需要的一切资源文件，例如定义文件、schema文件等。
@@ -39,10 +40,17 @@ import org.springframework.core.io.Resource;
  * @author Michael Zhou
  */
 public abstract class ResourceResolver {
-    /** 取得指定位置的一个资源。 */
+    /**
+     * 取得指定位置的一个资源。
+     * 如果资源不存在，则返回<code>null</code>。
+     */
     public abstract Resource getResource(String location);
 
-    /** 找到所有符合名称的资源。支持同名资源的查找，例如，查找所有jar包中的/META-INF/spring.schemas文件。该方法还支持通配符。 */
+    /**
+     * 找到所有符合名称的资源。支持同名资源的查找，例如，查找所有jar包中的/META-INF/spring.schemas文件。该方法还支持通配符。
+     *
+     * @throws IOException 如果在寻找过程中出错
+     */
     public abstract Resource[] getResources(String locationPattern) throws IOException;
 
     /** 从<code>ResourceResolver</code>中读取所有指定名称的资源文件，将其中的<code>key=value</code>汇总成一个<code>Map</code>。 */
@@ -68,5 +76,17 @@ public abstract class ResourceResolver {
         Map<String, String> result = (Map<String, String>) props;
 
         return result;
+    }
+
+    public static abstract class Resource implements InputStreamSource {
+        public abstract String getName();
+
+        public abstract InputStream getInputStream() throws IOException;
+
+        @Override
+        public final String toString() {
+            String desc = getName();
+            return getSimpleClassName(getClass()) + (desc == null ? "" : "[" + desc + "]");
+        }
     }
 }

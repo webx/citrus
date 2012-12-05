@@ -21,13 +21,10 @@ import static com.alibaba.citrus.springext.Schema.*;
 import static com.alibaba.citrus.springext.support.SchemaUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
-import static java.util.Collections.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -38,6 +35,7 @@ import com.alibaba.citrus.springext.ConfigurationPointException;
 import com.alibaba.citrus.springext.ConfigurationPoints;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionType;
+import com.alibaba.citrus.springext.ResourceResolver.Resource;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.VersionableSchemas;
 import com.alibaba.citrus.util.ToStringBuilder;
@@ -101,44 +99,29 @@ public class ContributionImpl implements Contribution {
 
     private Schema loadMainSchema(String mainName) {
         String schemaName = mainName + "." + XML_SCHEMA_EXTENSION;
-        URL resource;
-
-        try {
-            resource = settings.getResource(schemaName, log);
-            assertNotNull(resource, schemaName);
-            log.debug("Found schema file for contribution {}: {}", mainName, resource);
-        } catch (IOException e) {
-            log.warn("Failed to load schema: {}:  {}", schemaName, e);
-            resource = null;
-        }
+        Resource resource = settings.getResourceFromRelativeLocation(schemaName, log);
 
         if (resource == null) {
             return null; // no schema found
         } else {
-            return new SchemaImpl(schemaName, null, getDescription(), new ContributionSchemaSource(resource,
-                                                                                                   getConfigurationPoint().getConfigurationPoints(), getConfigurationPoint()));
+            log.debug("Found schema file for contribution {}: {}", mainName, resource);
+            return new SchemaImpl(schemaName, null, getDescription(),
+                                  new ContributionSchemaSource(resource, getConfigurationPoint().getConfigurationPoints(), getConfigurationPoint()));
         }
     }
 
     private Schema[] loadVersionedSchemas(String mainName) {
         String schemaNamePattern = mainName + "-*." + XML_SCHEMA_EXTENSION;
         Pattern pattern = Pattern.compile("^.*(" + mainName + "-(.+)\\." + XML_SCHEMA_EXTENSION + ")$");
-        List<URL> resources;
-
-        try {
-            resources = settings.getResources(schemaNamePattern, log);
-        } catch (IOException e) {
-            log.warn("Failed to load schemas: {}:  {}", schemaNamePattern, e);
-            resources = emptyList();
-        }
+        List<Resource> resources = settings.getResourcesFromRelativeLocationPattern(schemaNamePattern, log);
 
         assertNotNull(resources, schemaNamePattern);
 
         List<Schema> schemas = createLinkedList();
 
-        for (Iterator<URL> i = resources.iterator(); i.hasNext(); ) {
-            URL url = i.next();
-            String path = url.getPath();
+        for (Iterator<Resource> i = resources.iterator(); i.hasNext(); ) {
+            Resource resource = i.next();
+            String path = resource.getName();
             Matcher matcher = pattern.matcher(path);
 
             if (matcher.matches()) {
@@ -147,13 +130,13 @@ public class ContributionImpl implements Contribution {
 
                 if (checkVersion(schemaVersion)) {
                     schemas.add(new SchemaImpl(schemaName, schemaVersion, getDescription(),
-                                               new ContributionSchemaSource(url, getConfigurationPoint().getConfigurationPoints(),
+                                               new ContributionSchemaSource(resource, getConfigurationPoint().getConfigurationPoints(),
                                                                             getConfigurationPoint())));
                 } else {
                     i.remove();
                 }
             } else {
-                throw new ConfigurationPointException("Invalid schema name: " + url);
+                throw new ConfigurationPointException("Invalid schema name: " + resource);
             }
         }
 
@@ -194,12 +177,12 @@ public class ContributionImpl implements Contribution {
 
     /** 用于生成或取得contribution schema的内容。 */
     private static class ContributionSchemaSource implements InputStreamSource {
-        private final URL                 url;
+        private final Resource            resource;
         private final ConfigurationPoints cps;
         private final ConfigurationPoint  thisCp;
 
-        public ContributionSchemaSource(URL url, ConfigurationPoints cps, ConfigurationPoint thisCp) {
-            this.url = assertNotNull(url, "no schema URL");
+        public ContributionSchemaSource(Resource resource, ConfigurationPoints cps, ConfigurationPoint thisCp) {
+            this.resource = assertNotNull(resource, "no schema resource");
             this.cps = assertNotNull(cps, "no ConfigurationPoints");
             this.thisCp = assertNotNull(thisCp, "this ConfigurationPoint");
         }
@@ -213,21 +196,19 @@ public class ContributionImpl implements Contribution {
         public InputStream getInputStream() throws IOException {
             try {
                 return new ByteArrayInputStream(getContributionSchemaContent(getOriginalInputStream(),
-                                                                             url.toExternalForm(), true, cps, thisCp));
+                                                                             resource.getName(), true, cps, thisCp));
             } catch (DocumentException e) {
                 return getOriginalInputStream();
             }
         }
 
         private InputStream getOriginalInputStream() throws IOException {
-            URLConnection connection = this.url.openConnection();
-            connection.setUseCaches(false);
-            return connection.getInputStream();
+            return resource.getInputStream();
         }
 
         @Override
         public String toString() {
-            return url.toExternalForm();
+            return resource.getName();
         }
     }
 

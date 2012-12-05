@@ -17,12 +17,13 @@
 
 package com.alibaba.citrus.springext.support;
 
+import static com.alibaba.citrus.util.Assert.*;
 import static org.springframework.core.io.support.ResourcePatternResolver.*;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import com.alibaba.citrus.springext.ResourceResolver;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
@@ -40,11 +41,51 @@ public class ClasspathResourceResolver extends ResourceResolver {
 
     @Override
     public Resource getResource(String location) {
-        return resolver.getResource(CLASSPATH_URL_PREFIX + location);
+        org.springframework.core.io.Resource springResource = resolver.getResource(CLASSPATH_URL_PREFIX + location);
+
+        if (springResource != null && springResource.exists()) {
+            return new SpringResourceAdapter(springResource);
+        } else {
+            return null;
+        }
     }
 
     @Override
     public Resource[] getResources(String locationPattern) throws IOException {
-        return resolver.getResources(CLASSPATH_ALL_URL_PREFIX + locationPattern);
+        org.springframework.core.io.Resource[] springResources = resolver.getResources(CLASSPATH_ALL_URL_PREFIX + locationPattern);
+
+        if (springResources == null) {
+            return new Resource[0];
+        } else {
+            Resource[] resources = new Resource[springResources.length];
+
+            for (int i = 0; i < springResources.length; i++) {
+                resources[i] = new SpringResourceAdapter(springResources[i]);
+            }
+
+            return resources;
+        }
+    }
+
+    private static class SpringResourceAdapter extends Resource {
+        private final org.springframework.core.io.Resource springResource;
+
+        private SpringResourceAdapter(org.springframework.core.io.Resource springResource) {
+            this.springResource = assertNotNull(springResource, "missing spring resource");
+        }
+
+        @Override
+        public String getName() {
+            try {
+                return springResource.getURL().toExternalForm();
+            } catch (IOException e) {
+                return springResource.getDescription();
+            }
+        }
+
+        @Override
+        public InputStream getInputStream() throws IOException {
+            return springResource.getInputStream();
+        }
     }
 }
