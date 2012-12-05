@@ -23,7 +23,6 @@ import java.io.IOException;
 
 import com.alibaba.citrus.springext.ResourceResolver;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
@@ -37,10 +36,6 @@ public class ClasspathResourceResolver extends ResourceResolver {
 
     public ClasspathResourceResolver(ClassLoader classLoader) {
         this.resolver = new PathMatchingResourcePatternResolver(classLoader);
-    }
-
-    public ClasspathResourceResolver(ResourceLoader resourceLoader) {
-        this.resolver = new PathMatchingResourcePatternResolver(resourceLoader);
     }
 
     @Override

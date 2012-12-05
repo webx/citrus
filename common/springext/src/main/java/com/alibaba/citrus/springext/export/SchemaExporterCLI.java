@@ -26,7 +26,6 @@ import java.io.OutputStreamWriter;
 
 import com.alibaba.citrus.logconfig.LogConfigurator;
 import com.alibaba.citrus.springext.Schemas;
-import org.springframework.core.io.ResourceLoader;
 
 /**
  * 在命令行上调用<code>SchemaExporter</code>，可以把schema输出到文件中。
@@ -69,10 +68,6 @@ public class SchemaExporterCLI extends SchemaExporter {
 
     public SchemaExporterCLI() {
         super();
-    }
-
-    public SchemaExporterCLI(ResourceLoader resourceLoader) {
-        super(resourceLoader);
     }
 
     public SchemaExporterCLI(Schemas... schemasList) {

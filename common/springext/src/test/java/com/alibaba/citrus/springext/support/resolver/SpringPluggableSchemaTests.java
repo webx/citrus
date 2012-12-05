@@ -24,6 +24,7 @@ import static org.junit.Assert.*;
 import java.util.Map;
 
 import com.alibaba.citrus.springext.Schema;
+import com.alibaba.citrus.springext.impl.SpringPluggableSchemas;
 import com.alibaba.citrus.test.TestEnvStatic;
 import org.junit.BeforeClass;
 import org.junit.Test;

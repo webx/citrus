@@ -36,7 +36,7 @@ public class SchemaExporterTests {
 
     @Before
     public void init() {
-        cps = new ConfigurationPointsImpl(null, "TEST-INF/test9/cps");
+        cps = new ConfigurationPointsImpl((ClassLoader) null, "TEST-INF/test9/cps");
         exporter = createExporter();
     }
 

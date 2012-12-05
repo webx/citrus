@@ -27,6 +27,7 @@ import java.io.InputStream;
 import java.io.Reader;
 
 import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
+import com.alibaba.citrus.springext.impl.SpringPluggableSchemas;
 import com.alibaba.citrus.test.TestEnvStatic;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,9 +47,7 @@ public class EntityResolverTests {
 
     @Before
     public void init() {
-        cps = new ConfigurationPointsImpl();
-        sps = new SpringPluggableSchemas();
-        resolver = new SchemaEntityResolver(new ResourceEntityResolver(new DefaultResourceLoader()), cps, sps);
+        resolver = new SchemaEntityResolver(new ResourceEntityResolver(new DefaultResourceLoader()));
     }
 
     @Test

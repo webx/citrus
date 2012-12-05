@@ -19,7 +19,7 @@ package com.alibaba.citrus.springext.support.resolver;
 
 import static com.alibaba.citrus.util.Assert.*;
 
-import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
+import com.alibaba.citrus.springext.impl.SpringExtSchemaSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -77,17 +77,15 @@ public class XmlBeanDefinitionReaderProcessor {
         ClassLoader classLoader = resourceLoader.getClassLoader();
 
         // schema providers
-        ConfigurationPointsImpl cps = new ConfigurationPointsImpl(classLoader);
-        SpringPluggableSchemas sps = new SpringPluggableSchemas(resourceLoader);
+        SpringExtSchemaSet schemas = new SpringExtSchemaSet(classLoader);
 
         // default resolvers
         EntityResolver defaultEntityResolver = new ResourceEntityResolver(resourceLoader);
-        NamespaceHandlerResolver defaultNamespaceHanderResolver = new DefaultNamespaceHandlerResolver(classLoader);
+        NamespaceHandlerResolver defaultNamespaceHandlerResolver = new DefaultNamespaceHandlerResolver(classLoader);
 
         // new resolvers
-        EntityResolver entityResolver = new SchemaEntityResolver(defaultEntityResolver, cps, sps);
-        NamespaceHandlerResolver namespaceHandlerResolver = new ConfigurationPointNamespaceHandlerResolver(cps,
-                                                                                                           defaultNamespaceHanderResolver);
+        EntityResolver entityResolver = new SchemaEntityResolver(defaultEntityResolver, schemas);
+        NamespaceHandlerResolver namespaceHandlerResolver = new ConfigurationPointNamespaceHandlerResolver(schemas.getConfigurationPoints(), defaultNamespaceHandlerResolver);
 
         reader.setEntityResolver(entityResolver);
         reader.setNamespaceHandlerResolver(namespaceHandlerResolver);

@@ -36,9 +36,8 @@ import java.util.Set;
 import com.alibaba.citrus.springext.DocumentFilter;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.Schemas;
-import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
+import com.alibaba.citrus.springext.impl.SpringExtSchemaSet;
 import com.alibaba.citrus.springext.support.SchemaSet;
-import com.alibaba.citrus.springext.support.resolver.SpringPluggableSchemas;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
@@ -46,7 +45,6 @@ import org.dom4j.Namespace;
 import org.dom4j.QName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.ResourceLoader;
 
 /**
  * 装载和分析schemas，并输出到任意输出流。
@@ -60,17 +58,12 @@ public class SchemaExporter {
     private final Map<String, Set<Schema>> nsToSchemas;
 
     public SchemaExporter() {
-        this((ResourceLoader) null);
-    }
-
-    public SchemaExporter(ResourceLoader resourceLoader) {
-        this(new ConfigurationPointsImpl(resourceLoader == null ? null : resourceLoader.getClassLoader()),
-             new SpringPluggableSchemas(resourceLoader));
+        this(new SpringExtSchemaSet());
     }
 
     public SchemaExporter(Schemas... schemasList) {
         this.entries = new Entries();
-        this.schemas = new SchemaSet(schemasList);
+        this.schemas = SchemaSet.getInstance(schemasList);
         this.nsToSchemas = createHashMap();
 
         // 将所有相同namespace的schema放在一起，并按名称倒排序，即按：beans.xsd、beans-2.5.xsd、beans-2.0.xsd 顺序。
