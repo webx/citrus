@@ -19,7 +19,6 @@
         <option name="JD_DO_NOT_WRAP_ONE_LINE_COMMENTS" value="true" />
         <option name="JD_KEEP_EMPTY_RETURN" value="false" />
         <JSCodeStyleSettings>
-          <option name="SPACE_AFTER_PROPERTY_COLON" value="true" />
           <option name="ALIGN_OBJECT_PROPERTIES" value="1" />
         </JSCodeStyleSettings>
         <XML>
