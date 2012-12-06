@@ -40,6 +40,8 @@ import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.Schemas;
 import com.alibaba.citrus.springext.impl.SchemaImpl;
 import com.alibaba.citrus.util.ToStringBuilder;
+import com.alibaba.citrus.util.internal.LazyLoader;
+import com.alibaba.citrus.util.internal.LazyLoader.Loader;
 import org.springframework.core.io.InputStreamSource;
 
 /**
@@ -52,6 +54,36 @@ public class SchemaSet implements Schemas, Iterable<Schemas> {
     private final Map<String, Schema> nameToSchemas             = createHashMap();
     private final Map<String, Schema> nameToSchemasUnmodifiable = unmodifiableMap(nameToSchemas);
     private final SortedSet<String> names;
+
+    // 延迟加载namespace mappings，仅当有需要时再做。
+    // 将所有相同namespace的schema放在一起，并按名称倒排序，即按：beans.xsd、beans-2.5.xsd、beans-2.0.xsd 顺序。
+    private final LazyLoader<Map<String, Set<Schema>>, Object> nsToSchemas = LazyLoader.getDefault(new Loader<Map<String, Set<Schema>>, Object>() {
+        public Map<String, Set<Schema>> load(Object context) {
+            Map<String, Set<Schema>> nsToSchemasMappings = createHashMap();
+
+            for (Schema schema : nameToSchemas.values()) {
+                String namespace = schema.getTargetNamespace();
+
+                if (namespace != null) {
+                    Set<Schema> nsSchemas = nsToSchemasMappings.get(namespace);
+
+                    if (nsSchemas == null) {
+                        nsSchemas = createTreeSet(new Comparator<Schema>() {
+                            public int compare(Schema o1, Schema o2) {
+                                return o2.getName().compareTo(o1.getName());
+                            }
+                        });
+
+                        nsToSchemasMappings.put(namespace, nsSchemas);
+                    }
+
+                    nsSchemas.add(schema);
+                }
+            }
+
+            return unmodifiableMap(nsToSchemasMappings);
+        }
+    });
 
     public static SchemaSet getInstance(Schemas... schemasList) {
         if (schemasList != null && schemasList.length == 1 && schemasList[0] instanceof SchemaSet) {
@@ -213,6 +245,11 @@ public class SchemaSet implements Schemas, Iterable<Schemas> {
     /** 取得名称和schema的映射表。 */
     public Map<String, Schema> getNamedMappings() {
         return nameToSchemasUnmodifiable;
+    }
+
+    /** 取得namespace和schema的映射表。 */
+    public Map<String, Set<Schema>> getNamespaceMappings() {
+        return nsToSchemas.getInstance();
     }
 
     /** 查找systemId对应的schema，如未找到，则返回<code>null</code>。 */

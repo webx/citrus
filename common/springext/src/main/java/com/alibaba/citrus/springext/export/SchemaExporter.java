@@ -27,7 +27,6 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -53,9 +52,8 @@ import org.slf4j.LoggerFactory;
  */
 public class SchemaExporter {
     protected final Logger log = LoggerFactory.getLogger(getClass());
-    private final Entries                  entries;
-    private final SchemaSet                schemas;
-    private final Map<String, Set<Schema>> nsToSchemas;
+    private final Entries   entries;
+    private final SchemaSet schemas;
 
     public SchemaExporter() {
         this(new SpringExtSchemaSet());
@@ -64,29 +62,9 @@ public class SchemaExporter {
     public SchemaExporter(Schemas... schemasList) {
         this.entries = new Entries();
         this.schemas = SchemaSet.getInstance(schemasList);
-        this.nsToSchemas = createHashMap();
 
-        // 将所有相同namespace的schema放在一起，并按名称倒排序，即按：beans.xsd、beans-2.5.xsd、beans-2.0.xsd 顺序。
         for (Schema schema : schemas.getNamedMappings().values()) {
             this.entries.put(schema.getName(), new Entry(schema.getName(), schema));
-
-            String namespace = schema.getTargetNamespace();
-
-            if (namespace != null) {
-                Set<Schema> nsSchemas = nsToSchemas.get(namespace);
-
-                if (nsSchemas == null) {
-                    nsSchemas = createTreeSet(new Comparator<Schema>() {
-                        public int compare(Schema o1, Schema o2) {
-                            return o2.getName().compareTo(o1.getName());
-                        }
-                    });
-
-                    nsToSchemas.put(namespace, nsSchemas);
-                }
-
-                nsSchemas.add(schema);
-            }
         }
     }
 
@@ -382,7 +360,7 @@ public class SchemaExporter {
 
             // 再根据namespace判断
             if (namespace != null) {
-                Set<Schema> nsSchemas = nsToSchemas.get(namespace);
+                Set<Schema> nsSchemas = schemas.getNamespaceMappings().get(namespace);
 
                 if (nsSchemas != null && !nsSchemas.isEmpty()) {
                     // 首先，在所有相同ns的schema中查找版本相同的schema。
