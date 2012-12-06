@@ -9,6 +9,7 @@ target
 /out
 /.idea/workspace.xml
 /.idea/modules.xml
+/.idea/compiler.xml
 /.idea/libraries/Maven*.xml
 /.idea/artifacts/*.xml
 /*.iws
