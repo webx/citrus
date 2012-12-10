@@ -22,9 +22,6 @@ import static com.alibaba.citrus.springext.support.SchemaUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -32,17 +29,14 @@ import java.util.regex.Pattern;
 
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.ConfigurationPointException;
-import com.alibaba.citrus.springext.ConfigurationPoints;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionType;
 import com.alibaba.citrus.springext.ResourceResolver.Resource;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.VersionableSchemas;
 import com.alibaba.citrus.util.ToStringBuilder;
-import org.dom4j.DocumentException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.InputStreamSource;
 
 /**
  * 实现<code>Contribution</code>接口。
@@ -105,8 +99,9 @@ public class ContributionImpl implements Contribution {
             return null; // no schema found
         } else {
             log.debug("Found schema file for contribution {}: {}", mainName, resource);
-            return new SchemaImpl(schemaName, null, getDescription(),
-                                  new ContributionSchemaSource(resource, getConfigurationPoint().getConfigurationPoints(), getConfigurationPoint()));
+            return SchemaImpl.createForContribution(
+                    schemaName, null, getDescription(), resource,
+                    getContributionSchemaTransformer(getConfigurationPoint().getConfigurationPoints(), getConfigurationPoint()));
         }
     }
 
@@ -129,9 +124,9 @@ public class ContributionImpl implements Contribution {
                 String schemaVersion = matcher.group(2);
 
                 if (checkVersion(schemaVersion)) {
-                    schemas.add(new SchemaImpl(schemaName, schemaVersion, getDescription(),
-                                               new ContributionSchemaSource(resource, getConfigurationPoint().getConfigurationPoints(),
-                                                                            getConfigurationPoint())));
+                    schemas.add(SchemaImpl.createForContribution(
+                            schemaName, schemaVersion, getDescription(), resource,
+                            getContributionSchemaTransformer(getConfigurationPoint().getConfigurationPoints(), getConfigurationPoint())));
                 } else {
                     i.remove();
                 }
@@ -173,43 +168,6 @@ public class ContributionImpl implements Contribution {
         }
 
         return true;
-    }
-
-    /** 用于生成或取得contribution schema的内容。 */
-    private static class ContributionSchemaSource implements InputStreamSource {
-        private final Resource            resource;
-        private final ConfigurationPoints cps;
-        private final ConfigurationPoint  thisCp;
-
-        public ContributionSchemaSource(Resource resource, ConfigurationPoints cps, ConfigurationPoint thisCp) {
-            this.resource = assertNotNull(resource, "no schema resource");
-            this.cps = assertNotNull(cps, "no ConfigurationPoints");
-            this.thisCp = assertNotNull(thisCp, "this ConfigurationPoint");
-        }
-
-        /**
-         * 读取contribution schema，必要时处理和改进其内容。
-         * <p>
-         * 但假如schema读取失败，则只返回原始的schema流。
-         * </p>
-         */
-        public InputStream getInputStream() throws IOException {
-            try {
-                return new ByteArrayInputStream(getContributionSchemaContent(getOriginalInputStream(),
-                                                                             resource.getName(), true, cps, thisCp));
-            } catch (DocumentException e) {
-                return getOriginalInputStream();
-            }
-        }
-
-        private InputStream getOriginalInputStream() throws IOException {
-            return resource.getInputStream();
-        }
-
-        @Override
-        public String toString() {
-            return resource.getName();
-        }
     }
 
     public String getDescription() {

@@ -17,11 +17,11 @@
 
 package com.alibaba.citrus.springext.export;
 
+import static com.alibaba.citrus.springext.support.SchemaUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static com.alibaba.citrus.util.io.StreamUtil.*;
-import static javax.xml.XMLConstants.*;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -30,18 +30,12 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
-import com.alibaba.citrus.springext.DocumentFilter;
 import com.alibaba.citrus.springext.Schema;
+import com.alibaba.citrus.springext.Schema.Transformer;
 import com.alibaba.citrus.springext.Schemas;
 import com.alibaba.citrus.springext.impl.SpringExtSchemaSet;
 import com.alibaba.citrus.springext.support.SchemaSet;
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-import org.dom4j.Namespace;
-import org.dom4j.QName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -85,11 +79,11 @@ public class SchemaExporter {
     }
 
     public void writeTo(Writer out, Entry entry, String charset, String uriPrefix) throws IOException {
-        writeTo(out, entry, charset, uriPrefix == null ? null : new AddPrefixFilter(uriPrefix));
+        writeTo(out, entry, charset, uriPrefix == null ? null : getAddPrefixTransformer(schemas, uriPrefix));
     }
 
-    private void writeTo(Writer out, Entry entry, String charset, DocumentFilter filter) throws IOException {
-        writeText(entry.getSchema().getText(charset, filter), out, true);
+    private void writeTo(Writer out, Entry entry, String charset, Transformer transformer) throws IOException {
+        writeText(entry.getSchema().getText(charset, transformer), out, true);
     }
 
     /** 代表一个schema文件结点。 */
@@ -285,115 +279,6 @@ public class SchemaExporter {
             log.trace("Added entry: {}", entry.getPath());
 
             return old;
-        }
-    }
-
-    /** 在所有可识别的URI上，加上指定前缀。 */
-    private class AddPrefixFilter implements DocumentFilter {
-        private final String prefix;
-
-        public AddPrefixFilter(String prefix) {
-            if (prefix != null) {
-                if (!prefix.endsWith("/")) {
-                    prefix += "/";
-                }
-            }
-
-            this.prefix = prefix;
-        }
-
-        public Document filter(Document doc, String systemId) {
-            if (prefix != null) {
-                Element root = doc.getRootElement();
-
-                // <xsd:schema>
-                if (W3C_XML_SCHEMA_NS_URI.equals(root.getNamespaceURI()) && "schema".equals(root.getName())) {
-                    Namespace xsd = DocumentHelper.createNamespace("xsd", W3C_XML_SCHEMA_NS_URI);
-                    QName includeName = DocumentHelper.createQName("include", xsd);
-                    QName importName = DocumentHelper.createQName("import", xsd);
-
-                    // for each <xsd:include>
-                    for (Iterator<?> i = root.elementIterator(includeName); i.hasNext(); ) {
-                        Element includeElement = (Element) i.next();
-                        String schemaLocation = trimToNull(includeElement.attributeValue("schemaLocation"));
-
-                        if (schemaLocation != null) {
-                            schemaLocation = getNewSchemaLocation(schemaLocation, null, systemId);
-
-                            if (schemaLocation != null) {
-                                includeElement.addAttribute("schemaLocation", schemaLocation);
-                            }
-                        }
-                    }
-
-                    // for each <xsd:import>
-                    for (Iterator<?> i = root.elementIterator(importName); i.hasNext(); ) {
-                        Element importElement = (Element) i.next();
-                        String schemaLocation = importElement.attributeValue("schemaLocation");
-                        String namespace = trimToNull(importElement.attributeValue("namespace"));
-
-                        if (schemaLocation != null || namespace != null) {
-                            schemaLocation = getNewSchemaLocation(schemaLocation, namespace, systemId);
-
-                            if (schemaLocation != null) {
-                                importElement.addAttribute("schemaLocation", schemaLocation);
-                            }
-                        }
-                    }
-                }
-            }
-
-            return doc;
-        }
-
-        private String getNewSchemaLocation(String schemaLocation, String namespace, String systemId) {
-            // 根据指定的schemaLocation判断
-            if (schemaLocation != null) {
-                Schema schema = schemas.findSchema(schemaLocation);
-
-                if (schema != null) {
-                    return prefix + schema.getName();
-                } else {
-                    return schemaLocation; // 返回原本的location，但可能是错误的！
-                }
-            }
-
-            // 再根据namespace判断
-            if (namespace != null) {
-                Set<Schema> nsSchemas = schemas.getNamespaceMappings().get(namespace);
-
-                if (nsSchemas != null && !nsSchemas.isEmpty()) {
-                    // 首先，在所有相同ns的schema中查找版本相同的schema。
-                    String versionedExtension = getVersionedExtension(systemId);
-
-                    if (versionedExtension != null) {
-                        for (Schema schema : nsSchemas) {
-                            if (schema.getName().endsWith(versionedExtension)) {
-                                return prefix + schema.getName();
-                            }
-                        }
-                    }
-
-                    // 其次，选择第一个默认的schema，其顺序是：beans.xsd、beans-2.5.xsd、beans-2.0.xsd
-                    return prefix + nsSchemas.iterator().next().getName();
-                }
-            }
-
-            return null;
-        }
-
-        /** 对于spring-aop-2.5.xsd取得-2.5.xsd。 */
-        private String getVersionedExtension(String systemId) {
-            if (systemId != null) {
-                int dashIndex = systemId.lastIndexOf("-");
-                int slashIndex = systemId.lastIndexOf("/");
-
-                if (dashIndex > slashIndex) {
-                    return systemId.substring(dashIndex);
-                }
-            }
-
-            return null;
         }
     }
 }

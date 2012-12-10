@@ -17,7 +17,6 @@
 
 package com.alibaba.citrus.springext;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 import org.dom4j.Document;
@@ -41,7 +40,7 @@ public interface Schema {
 
     String getSourceDescription();
 
-    InputStream getInputStream() throws IOException;
+    InputStream getInputStream();
 
     /**
      * 取得dom文档。
@@ -52,9 +51,20 @@ public interface Schema {
      */
     Document getDocument();
 
-    String getText() throws IOException;
+    String getText();
 
-    String getText(String charset) throws IOException;
+    String getText(String charset);
 
-    String getText(String charset, DocumentFilter filter) throws IOException;
+    String getText(String charset, Transformer transformer);
+
+    void transform(Transformer transformer);
+
+    void transform(Transformer transformer, boolean doNow);
+
+    /** 修改schema的elements。这个值只能由schemaSet来设置。 */
+    void setElements(String[] elements);
+
+    interface Transformer {
+        void transform(Document document, String systemId);
+    }
 }

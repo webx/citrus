@@ -24,9 +24,7 @@ import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -43,6 +41,7 @@ import com.alibaba.citrus.springext.VersionableSchemas;
 import com.alibaba.citrus.springext.support.parser.DefaultElementDefinitionParser;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
+import org.dom4j.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -51,7 +50,6 @@ import org.springframework.beans.factory.xml.BeanDefinitionDecorator;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
 import org.springframework.beans.factory.xml.NamespaceHandler;
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
-import org.springframework.core.io.InputStreamSource;
 import org.springframework.util.ClassUtils;
 
 /**
@@ -275,9 +273,10 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
 
     private Schema loadMainSchema(String mainName) {
         String schemaName = mainName + "." + XML_SCHEMA_EXTENSION;
-        ConfigurationPointSchemaSource schemaSource = new ConfigurationPointSchemaSource(this, null);
+        Document schemaSource = createConfigurationPointSchema(this, null);
 
-        return new SchemaImpl(schemaName, null, namespaceUri, preferredNsPrefix, getDescription(), schemaSource);
+        return SchemaImpl.createForConfigurationPoint(
+                schemaName, null, namespaceUri, preferredNsPrefix, getDescription(), schemaSource);
     }
 
     private Schema[] loadVersionedSchemas(String mainName) {
@@ -295,10 +294,10 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
         int i = 0;
         for (String version : allVersions) {
             String schemaName = mainName + "-" + version + "." + XML_SCHEMA_EXTENSION;
-            ConfigurationPointSchemaSource schemaSource = new ConfigurationPointSchemaSource(this, version);
+            Document schemaSource = createConfigurationPointSchema(this, version);
 
-            schemas[i++] = new SchemaImpl(schemaName, version, namespaceUri, preferredNsPrefix, getDescription(),
-                                          schemaSource);
+            schemas[i++] = SchemaImpl.createForConfigurationPoint(
+                    schemaName, version, namespaceUri, preferredNsPrefix, getDescription(), schemaSource);
         }
 
         return schemas;
@@ -324,25 +323,5 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
         mb.append("Schemas", getSchemas()).appendTo(buf);
 
         return buf.toString();
-    }
-
-    /** 用来生成configuration point schema的内容。 */
-    private static class ConfigurationPointSchemaSource implements InputStreamSource {
-        private final ConfigurationPoint configurationPoint;
-        private final String             version;
-
-        public ConfigurationPointSchemaSource(ConfigurationPoint configurationPoint, String version) {
-            this.configurationPoint = configurationPoint;
-            this.version = version;
-        }
-
-        public InputStream getInputStream() throws IOException {
-            return new ByteArrayInputStream(getConfigurationPointSchemaContent(configurationPoint, version));
-        }
-
-        @Override
-        public String toString() {
-            return "generated-content";
-        }
     }
 }
