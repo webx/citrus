@@ -352,3 +352,5 @@
   当访问http://localhost:8080/时，自动重定向到http://localhost:8080/schema，以方便开发者。
 
 * 改进Springext以配合IDEA/Eclipse plugins。
+  * 调整接口，使之不仅可从ClassLoader中装载资源，也可从由IDE plugins所实现的ResourceResolver接口来装载。
+  * 改进了装载schema的过程，引进Transformer接口，不仅使代码更清晰，也提高了效率。

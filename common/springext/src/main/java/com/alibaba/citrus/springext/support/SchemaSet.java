@@ -17,15 +17,13 @@
 
 package com.alibaba.citrus.springext.support;
 
+import static com.alibaba.citrus.springext.support.SchemaUtil.*;
 import static com.alibaba.citrus.util.ArrayUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static java.util.Collections.*;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Collection;
@@ -37,12 +35,11 @@ import java.util.Set;
 import java.util.SortedSet;
 
 import com.alibaba.citrus.springext.Schema;
+import com.alibaba.citrus.springext.Schema.Transformer;
 import com.alibaba.citrus.springext.Schemas;
-import com.alibaba.citrus.springext.impl.SchemaImpl;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.internal.LazyLoader;
 import com.alibaba.citrus.util.internal.LazyLoader.Loader;
-import org.springframework.core.io.InputStreamSource;
 
 /**
  * 将一组<code>Schemas</code>整合在一起的集合。
@@ -144,6 +141,13 @@ public class SchemaSet implements Schemas, Iterable<Schemas> {
      * </ul>
      */
     private void processIncludes() {
+        class SchemaIncludes {
+            Map<String, Schema> allIncludes;
+            boolean             removeAllIncludes;
+        }
+
+        Map<String, SchemaIncludes> nameToSchemaIncludes = createHashMap();
+
         // 所有包含了include的，并且被其它schema所包含的schema，其引用需要被移到最上层的schema中。
         for (Schema schema : createArrayList(nameToSchemas.values())) {
             Map<String, Schema> allIncludes = getAllIncludes(schema); // 直接或间接的所有includes，按依赖顺序排列
@@ -153,20 +157,42 @@ public class SchemaSet implements Schemas, Iterable<Schemas> {
             for (Schema includedSchema : allIncludes.values()) {
                 if (includedSchema.getIncludes().length > 0) {
                     withIndirectIncludes = true;
-                    overrideSchemaForInclude(includedSchema);
+
+                    SchemaIncludes si = nameToSchemaIncludes.get(includedSchema.getName());
+
+                    if (si == null) {
+                        si = new SchemaIncludes();
+                        nameToSchemaIncludes.put(includedSchema.getName(), si);
+                    }
+
+                    si.removeAllIncludes = true;
                 }
             }
 
             if (withIndirectIncludes) {
-                schema = setSchemaWithIncludes(schema, allIncludes);
+                SchemaIncludes si = nameToSchemaIncludes.get(schema.getName());
+
+                if (si == null) {
+                    si = new SchemaIncludes();
+                    nameToSchemaIncludes.put(schema.getName(), si);
+                }
+
+                si.allIncludes = allIncludes;
             }
 
             // 收集当前schema的所有elements
-            // 由于表中的schema对象可能被替换，所以在这里确保取得最新的schema对象。
-            Schema newSchema = nameToSchemas.get(schema.getName());
+            schema.setElements(allElements);
+        }
 
-            if (newSchema instanceof SchemaInternal) {
-                ((SchemaInternal) newSchema).setElements(allElements);
+        for (Map.Entry<String, SchemaIncludes> entry : nameToSchemaIncludes.entrySet()) {
+            Schema schema = nameToSchemas.get(entry.getKey());
+            SchemaIncludes si = entry.getValue();
+
+            // 立即执行以下所有的transformer，以防在多线程环境下出错。
+            if (si.removeAllIncludes) {
+                schema.transform(getTransformerWhoRemovesIncludes(), true);
+            } else if (si.allIncludes != null) {
+                schema.transform(getTransformerWhoAddsIndirectIncludes(si.allIncludes), true);
             }
         }
     }
@@ -181,32 +207,6 @@ public class SchemaSet implements Schemas, Iterable<Schemas> {
         }
 
         return all.toArray(new String[all.size()]);
-    }
-
-    private void overrideSchemaForInclude(final Schema schema) {
-        InputStreamSource sourceWithoutIncludes = new InputStreamSource() {
-            public InputStream getInputStream() throws IOException {
-                return new ByteArrayInputStream(SchemaUtil.getSchemaContentWithoutIncludes(schema));
-            }
-        };
-
-        addSchema(new SchemaImpl(schema.getName(), schema.getVersion(), schema.getTargetNamespace(),
-                                 schema.getPreferredNsPrefix(), schema.getSourceDescription(), sourceWithoutIncludes));
-    }
-
-    private Schema setSchemaWithIncludes(final Schema schema, final Map<String, Schema> allIncludes) {
-        InputStreamSource sourceWithModifiedIncludes = new InputStreamSource() {
-            public InputStream getInputStream() throws IOException {
-                return new ByteArrayInputStream(SchemaUtil.getSchemaContentWithIndirectIncludes(schema, allIncludes));
-            }
-        };
-
-        Schema newSchema = new SchemaImpl(schema.getName(), schema.getVersion(), schema.getTargetNamespace(),
-                                          schema.getPreferredNsPrefix(), schema.getSourceDescription(), sourceWithModifiedIncludes);
-
-        addSchema(newSchema);
-
-        return newSchema;
     }
 
     /**
@@ -269,6 +269,17 @@ public class SchemaSet implements Schemas, Iterable<Schemas> {
         }
 
         return null;
+    }
+
+    /** 对所有的schema应用转换器。 */
+    public void transformAll(Transformer transformer) {
+        if (transformer == null) {
+            transformer = getNoopTransformer();
+        }
+
+        for (Schema schema : nameToSchemas.values()) {
+            schema.transform(transformer, true);
+        }
     }
 
     @Override

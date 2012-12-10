@@ -17,6 +17,7 @@
 
 package com.alibaba.citrus.springext.support;
 
+import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static javax.xml.XMLConstants.*;
@@ -36,10 +37,10 @@ import java.util.Map;
 import java.util.Set;
 
 import com.alibaba.citrus.springext.ConfigurationPoint;
-import com.alibaba.citrus.springext.ConfigurationPointException;
 import com.alibaba.citrus.springext.ConfigurationPoints;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.Schema;
+import com.alibaba.citrus.springext.Schema.Transformer;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -79,6 +80,7 @@ public class SchemaUtil {
                 try {
                     istream.close();
                 } catch (Exception e) {
+                    // ignored
                 }
             }
         }
@@ -87,16 +89,29 @@ public class SchemaUtil {
     }
 
     /** 输出DOM。 */
-    public static String getDocumentText(Document doc, String charset) throws IOException {
+    public static String getDocumentText(Document doc, String charset) {
         StringWriter writer = new StringWriter();
-        writeDocument(doc, writer, charset);
+
+        try {
+            writeDocument(doc, writer, charset);
+        } catch (IOException e) {
+            // 不会发生
+            unexpectedException(e);
+        }
+
         return writer.toString();
     }
 
     /** 输出DOM。 */
-    public static byte[] getDocumentContent(Document doc, String charset) throws IOException {
+    public static byte[] getDocumentContent(Document doc) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        writeDocument(doc, baos, null);
+
+        try {
+            writeDocument(doc, baos, null);
+        } catch (IOException e) {
+            unexpectedException(e); // 此调用不太可能报IO错
+        }
+
         return baos.toByteArray();
     }
 
@@ -121,21 +136,12 @@ public class SchemaUtil {
         xmlWriter.flush();
     }
 
-    public static byte[] getConfigurationPointSchemaContent(ConfigurationPoint configurationPoint, String version) {
-        try {
-            return getDocumentContent(createConfigurationPointSchema(configurationPoint, version), null);
-        } catch (Exception e) {
-            throw new ConfigurationPointException("Could not generate XML Schema for configuration point "
-                                                  + configurationPoint.getName(), e);
-        }
-    }
-
     /** 将所有contributions的schema汇总成一个schema。 */
-    private static Document createConfigurationPointSchema(ConfigurationPoint configurationPoint, String version) {
+    public static Document createConfigurationPointSchema(ConfigurationPoint configurationPoint, String version) {
         Document doc = createDocument();
 
         // <xsd:schema>
-        Element schemaRoot = doc.addElement("xsd:schema");
+        Element schemaRoot = doc.addElement("xsd:schema", W3C_XML_SCHEMA_NS_URI);
 
         schemaRoot.addNamespace("xsd", W3C_XML_SCHEMA_NS_URI);
         schemaRoot.addNamespace("beans", BEANS_NAMESPACE_URI);
@@ -208,187 +214,284 @@ public class SchemaUtil {
      * </pre>
      * <p/>
      */
-    public static byte[] getContributionSchemaContent(InputStream istream, String systemId, boolean close,
-                                                      ConfigurationPoints cps, ConfigurationPoint thisCp)
-            throws DocumentException, IOException {
-        Document doc = readDocument(istream, systemId, close);
+    public static Transformer getContributionSchemaTransformer(final ConfigurationPoints cps, final ConfigurationPoint thisCp) {
+        return new Transformer() {
+            private Element root;
+            private Map<String, ConfigurationPoint> importings = createHashMap();
 
-        new ContributionSchemaTransformer(doc, cps, thisCp).transform();
+            public void transform(Document document, String systemId) {
+                root = document.getRootElement();
 
-        return getDocumentContent(doc, null);
-    }
-
-    private static class ContributionSchemaTransformer {
-        private final Document            doc;
-        private final ConfigurationPoints cps;
-        private final ConfigurationPoint  thisCp;
-        private       Element             root;
-        private Map<String, ConfigurationPoint> importings = createHashMap();
-
-        public ContributionSchemaTransformer(Document doc, ConfigurationPoints cps, ConfigurationPoint thisCp) {
-            this.doc = doc;
-            this.cps = cps;
-            this.thisCp = thisCp;
-        }
-
-        public void transform() {
-            root = doc.getRootElement();
-
-            if (!W3C_XML_SCHEMA_NS_URI.equals(root.getNamespaceURI()) || !"schema".equals(root.getName())) {
-                return;
-            }
-
-            visitElement(root);
-
-            // 避免加入重复的import
-            @SuppressWarnings("unchecked")
-            List<Element> importElements = root.elements(XSD_IMPORT);
-
-            for (Element importElement : importElements) {
-                if (importElement.attribute("namespace") != null) {
-                    importings.remove(importElement.attribute("namespace").getValue());
+                if (!W3C_XML_SCHEMA_NS_URI.equals(root.getNamespaceURI()) || !"schema".equals(root.getName())) {
+                    return;
                 }
-            }
 
-            // 加入imports，但避免加入当前schema所在的configurtion point schema
-            @SuppressWarnings("unchecked")
-            List<Element> rootElements = root.elements();
-            int importIndex = 0;
+                visitElement(root);
 
-            for (ConfigurationPoint cp : importings.values()) {
-                if (thisCp != cp) {
-                    Element importElement = DocumentHelper.createElement(XSD_IMPORT);
-                    importElement.addAttribute("namespace", cp.getNamespaceUri());
-                    importElement.addAttribute("schemaLocation", cp.getSchemas().getMainSchema().getName()); // XXX main or versioned?
+                // 避免加入重复的import
+                @SuppressWarnings("unchecked")
+                List<Element> importElements = root.elements(XSD_IMPORT);
 
-                    rootElements.add(importIndex++, importElement);
-                }
-            }
-        }
-
-        @SuppressWarnings("unchecked")
-        private void visitElement(Element element) {
-            List<Element> elements = element.elements();
-            visitElements(elements);
-        }
-
-        private void visitElements(List<Element> elements) {
-            List<Integer> indexes = createLinkedList();
-            int index = 0;
-
-            for (Element subElement : elements) {
-                if (subElement.getQName().equals(XSD_ANY) && subElement.attribute("namespace") != null) {
-                    String ns = subElement.attribute("namespace").getValue();
-                    ConfigurationPoint cp = cps.getConfigurationPointByNamespaceUri(ns);
-
-                    if (cp != null) {
-                        indexes.add(index);
-                        importings.put(ns, cp);
+                for (Element importElement : importElements) {
+                    if (importElement.attribute("namespace") != null) {
+                        importings.remove(importElement.attribute("namespace").getValue());
                     }
-                } else {
-                    visitElement(subElement);
                 }
 
-                index++;
+                // 加入imports，但避免加入当前schema所在的configurtion point schema
+                @SuppressWarnings("unchecked")
+                List<Element> rootElements = root.elements();
+                int importIndex = 0;
+
+                for (ConfigurationPoint cp : importings.values()) {
+                    if (thisCp != cp) {
+                        Element importElement = DocumentHelper.createElement(XSD_IMPORT);
+                        importElement.addAttribute("namespace", cp.getNamespaceUri());
+                        importElement.addAttribute("schemaLocation", cp.getSchemas().getMainSchema().getName()); // XXX main or versioned?
+
+                        rootElements.add(importIndex++, importElement);
+                    }
+                }
             }
 
-            for (Integer i : indexes) {
-                visitAnyElement(elements, i);
+            @SuppressWarnings("unchecked")
+            private void visitElement(Element element) {
+                List<Element> elements = element.elements();
+                visitElements(elements);
             }
-        }
 
-        private void visitAnyElement(List<Element> elements, int index) {
-            Element anyElement = elements.get(index);
-            String ns = anyElement.attribute("namespace").getValue();
-            ConfigurationPoint cp = cps.getConfigurationPointByNamespaceUri(ns);
+            private void visitElements(List<Element> elements) {
+                List<Integer> indexes = createLinkedList();
+                int index = 0;
 
-            if (cp != null) {
-                Element choiceElement = DocumentHelper.createElement(XSD_CHOICE);
-                String nsPrefix = getNamespacePrefix(cp.getPreferredNsPrefix(), ns);
+                for (Element subElement : elements) {
+                    if (subElement.getQName().equals(XSD_ANY) && subElement.attribute("namespace") != null) {
+                        String ns = subElement.attribute("namespace").getValue();
+                        ConfigurationPoint cp = cps.getConfigurationPointByNamespaceUri(ns);
 
-                // <xsd:schema xmlns:prefix="ns">
-                // 注意：必须将ns定义加在顶层element，否则低版本的xerces会报错。
-                root.addNamespace(nsPrefix, ns);
+                        if (cp != null) {
+                            indexes.add(index);
+                            importings.put(ns, cp);
+                        }
+                    } else {
+                        visitElement(subElement);
+                    }
 
-                // <xsd:choice minOccurs="?" maxOccurs="?" />
-                if (anyElement.attribute("minOccurs") != null) {
-                    choiceElement.addAttribute("minOccurs", anyElement.attribute("minOccurs").getValue());
+                    index++;
                 }
 
-                if (anyElement.attribute("maxOccurs") != null) {
-                    choiceElement.addAttribute("maxOccurs", anyElement.attribute("maxOccurs").getValue());
+                for (Integer i : indexes) {
+                    visitAnyElement(elements, i);
                 }
-
-                // <xsd:element ref="prefix:contrib" />
-                for (Contribution contrib : cp.getContributions()) {
-                    Element elementElement = DocumentHelper.createElement(XSD_ELEMENT);
-                    elementElement.addAttribute("ref", nsPrefix + ":" + contrib.getName());
-                    choiceElement.add(elementElement);
-                }
-
-                // <xsd:element ref="prefix:defaultName" />
-                if (cp.getDefaultElementName() != null) {
-                    Element elementElement = DocumentHelper.createElement(XSD_ELEMENT);
-                    elementElement.addAttribute("ref", nsPrefix + ":" + cp.getDefaultElementName());
-                    choiceElement.add(elementElement);
-                }
-
-                // 用choice取代any
-                elements.set(index, choiceElement);
             }
-        }
+
+            private void visitAnyElement(List<Element> elements, int index) {
+                Element anyElement = elements.get(index);
+                String ns = anyElement.attribute("namespace").getValue();
+                ConfigurationPoint cp = cps.getConfigurationPointByNamespaceUri(ns);
+
+                if (cp != null) {
+                    Element choiceElement = DocumentHelper.createElement(XSD_CHOICE);
+                    String nsPrefix = getNamespacePrefix(cp.getPreferredNsPrefix(), ns);
+
+                    // <xsd:schema xmlns:prefix="ns">
+                    // 注意：必须将ns定义加在顶层element，否则低版本的xerces会报错。
+                    root.addNamespace(nsPrefix, ns);
+
+                    // <xsd:choice minOccurs="?" maxOccurs="?" />
+                    if (anyElement.attribute("minOccurs") != null) {
+                        choiceElement.addAttribute("minOccurs", anyElement.attribute("minOccurs").getValue());
+                    }
+
+                    if (anyElement.attribute("maxOccurs") != null) {
+                        choiceElement.addAttribute("maxOccurs", anyElement.attribute("maxOccurs").getValue());
+                    }
+
+                    // <xsd:element ref="prefix:contrib" />
+                    for (Contribution contrib : cp.getContributions()) {
+                        Element elementElement = DocumentHelper.createElement(XSD_ELEMENT);
+                        elementElement.addAttribute("ref", nsPrefix + ":" + contrib.getName());
+                        choiceElement.add(elementElement);
+                    }
+
+                    // <xsd:element ref="prefix:defaultName" />
+                    if (cp.getDefaultElementName() != null) {
+                        Element elementElement = DocumentHelper.createElement(XSD_ELEMENT);
+                        elementElement.addAttribute("ref", nsPrefix + ":" + cp.getDefaultElementName());
+                        choiceElement.add(elementElement);
+                    }
+
+                    // 用choice取代any
+                    elements.set(index, choiceElement);
+                }
+            }
+        };
     }
 
     /** 修改schema，除去所有的includes。 */
-    public static byte[] getSchemaContentWithoutIncludes(Schema schema) throws IOException {
-        Document doc = schema.getDocument();
-        Element root = doc.getRootElement();
+    public static Transformer getTransformerWhoRemovesIncludes() {
+        return new Transformer() {
+            public void transform(Document document, String systemId) {
+                Element root = document.getRootElement();
 
-        // <xsd:schema>
-        if (W3C_XML_SCHEMA_NS_URI.equals(root.getNamespaceURI()) && "schema".equals(root.getName())) {
-            // for each <xsd:include>
-            for (Iterator<?> i = root.elementIterator(XSD_INCLUDE); i.hasNext(); ) {
-                i.next();
-                i.remove();
+                // <xsd:schema>
+                if (W3C_XML_SCHEMA_NS_URI.equals(root.getNamespaceURI()) && "schema".equals(root.getName())) {
+                    // for each <xsd:include>
+                    for (Iterator<?> i = root.elementIterator(XSD_INCLUDE); i.hasNext(); ) {
+                        i.next();
+                        i.remove();
+                    }
+                }
             }
-        }
-
-        return getDocumentContent(doc, null);
+        };
     }
 
     /** 修改schema，添加间接依赖的includes。 */
-    public static byte[] getSchemaContentWithIndirectIncludes(Schema schema, Map<String, Schema> includes)
-            throws IOException {
-        Document doc = schema.getDocument();
-        Element root = doc.getRootElement();
+    public static Transformer getTransformerWhoAddsIndirectIncludes(final Map<String, Schema> includes) {
+        return new Transformer() {
+            public void transform(Document document, String systemId) {
+                Element root = document.getRootElement();
 
-        root.addNamespace("xsd", W3C_XML_SCHEMA_NS_URI);
+                root.addNamespace("xsd", W3C_XML_SCHEMA_NS_URI);
 
-        // <xsd:schema>
-        if (W3C_XML_SCHEMA_NS_URI.equals(root.getNamespaceURI()) && "schema".equals(root.getName())) {
-            Namespace xsd = DocumentHelper.createNamespace("xsd", W3C_XML_SCHEMA_NS_URI);
-            QName includeName = DocumentHelper.createQName("include", xsd);
+                // <xsd:schema>
+                if (W3C_XML_SCHEMA_NS_URI.equals(root.getNamespaceURI()) && "schema".equals(root.getName())) {
+                    Namespace xsd = DocumentHelper.createNamespace("xsd", W3C_XML_SCHEMA_NS_URI);
+                    QName includeName = DocumentHelper.createQName("include", xsd);
 
-            // for each <xsd:include>
-            for (Iterator<?> i = root.elementIterator(includeName); i.hasNext(); ) {
-                i.next();
-                i.remove();
+                    // for each <xsd:include>
+                    for (Iterator<?> i = root.elementIterator(includeName); i.hasNext(); ) {
+                        i.next();
+                        i.remove();
+                    }
+
+                    // 添加includes
+                    @SuppressWarnings("unchecked")
+                    List<Node> nodes = root.elements();
+                    int i = 0;
+
+                    for (Schema includedSchema : includes.values()) {
+                        Element includeElement = DocumentHelper.createElement(includeName);
+                        nodes.add(i++, includeElement);
+
+                        includeElement.addAttribute("schemaLocation", includedSchema.getName());
+                    }
+                }
             }
+        };
+    }
 
-            // 添加includes
-            @SuppressWarnings("unchecked")
-            List<Node> nodes = root.elements();
-            int i = 0;
-
-            for (Schema includedSchema : includes.values()) {
-                Element includeElement = DocumentHelper.createElement("xsd:include");
-                nodes.add(i++, includeElement);
-
-                includeElement.addAttribute("schemaLocation", includedSchema.getName());
+    /** 在所有可识别的URI上，加上指定前缀。 */
+    public static Transformer getAddPrefixTransformer(final SchemaSet schemas, String prefix) {
+        if (prefix != null) {
+            if (!prefix.endsWith("/")) {
+                prefix += "/";
             }
         }
 
-        return getDocumentContent(doc, null);
+        final String normalizedPrefix = prefix;
+
+        return new Transformer() {
+            public void transform(Document document, String systemId) {
+                if (normalizedPrefix != null) {
+                    Element root = document.getRootElement();
+
+                    // <xsd:schema>
+                    if (W3C_XML_SCHEMA_NS_URI.equals(root.getNamespaceURI()) && "schema".equals(root.getName())) {
+                        Namespace xsd = DocumentHelper.createNamespace("xsd", W3C_XML_SCHEMA_NS_URI);
+                        QName includeName = DocumentHelper.createQName("include", xsd);
+                        QName importName = DocumentHelper.createQName("import", xsd);
+
+                        // for each <xsd:include>
+                        for (Iterator<?> i = root.elementIterator(includeName); i.hasNext(); ) {
+                            Element includeElement = (Element) i.next();
+                            String schemaLocation = trimToNull(includeElement.attributeValue("schemaLocation"));
+
+                            if (schemaLocation != null) {
+                                schemaLocation = getNewSchemaLocation(schemaLocation, null, systemId);
+
+                                if (schemaLocation != null) {
+                                    includeElement.addAttribute("schemaLocation", schemaLocation);
+                                }
+                            }
+                        }
+
+                        // for each <xsd:import>
+                        for (Iterator<?> i = root.elementIterator(importName); i.hasNext(); ) {
+                            Element importElement = (Element) i.next();
+                            String schemaLocation = importElement.attributeValue("schemaLocation");
+                            String namespace = trimToNull(importElement.attributeValue("namespace"));
+
+                            if (schemaLocation != null || namespace != null) {
+                                schemaLocation = getNewSchemaLocation(schemaLocation, namespace, systemId);
+
+                                if (schemaLocation != null) {
+                                    importElement.addAttribute("schemaLocation", schemaLocation);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            private String getNewSchemaLocation(String schemaLocation, String namespace, String systemId) {
+                // 根据指定的schemaLocation判断
+                if (schemaLocation != null) {
+                    Schema schema = schemas.findSchema(schemaLocation);
+
+                    if (schema != null) {
+                        return normalizedPrefix + schema.getName();
+                    } else {
+                        return schemaLocation; // 返回原本的location，但可能是错误的！
+                    }
+                }
+
+                // 再根据namespace判断
+                if (namespace != null) {
+                    Set<Schema> nsSchemas = schemas.getNamespaceMappings().get(namespace);
+
+                    if (nsSchemas != null && !nsSchemas.isEmpty()) {
+                        // 首先，在所有相同ns的schema中查找版本相同的schema。
+                        String versionedExtension = getVersionedExtension(systemId);
+
+                        if (versionedExtension != null) {
+                            for (Schema schema : nsSchemas) {
+                                if (schema.getName().endsWith(versionedExtension)) {
+                                    return normalizedPrefix + schema.getName();
+                                }
+                            }
+                        }
+
+                        // 其次，选择第一个默认的schema，其顺序是：beans.xsd、beans-2.5.xsd、beans-2.0.xsd
+                        return normalizedPrefix + nsSchemas.iterator().next().getName();
+                    }
+                }
+
+                return null;
+            }
+
+            /** 对于spring-aop-2.5.xsd取得-2.5.xsd。 */
+            private String getVersionedExtension(String systemId) {
+                if (systemId != null) {
+                    int dashIndex = systemId.lastIndexOf("-");
+                    int slashIndex = systemId.lastIndexOf("/");
+
+                    if (dashIndex > slashIndex) {
+                        return systemId.substring(dashIndex);
+                    }
+                }
+
+                return null;
+            }
+        };
+    }
+
+    public static Transformer getNoopTransformer() {
+        return new Transformer() {
+            public void transform(Document document, String systemId) {
+                // do nothing
+            }
+        };
     }
 
     public static String getNamespacePrefix(String preferredNsPrefix, String targetNamespace) {

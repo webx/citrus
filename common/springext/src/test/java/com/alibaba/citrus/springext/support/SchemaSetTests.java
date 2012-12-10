@@ -220,24 +220,19 @@ public class SchemaSetTests {
         // z   ->
         // a   ->
         // b   ->
-        Map<String, Schema> nameToSchemas = createHashMap();
-        nameToSchemas.putAll(set2.getNamedMappings());
+        Map<String, Schema> nameToSchemas = set2.getNamedMappings();
 
-        // all 被替换
-        all = assertReplaced(nameToSchemas, "schema/all.xsd", all);
+        assertEquals(6, nameToSchemas.size());
 
-        // x,y 被替换
-        x = assertReplaced(nameToSchemas, "schema/x.xsd", x);
-        y = assertReplaced(nameToSchemas, "schema/y.xsd", y);
+        assertSame(all, nameToSchemas.get("schema/all.xsd"));
+        assertSame(x, nameToSchemas.get("schema/x.xsd"));
+        assertSame(y, nameToSchemas.get("schema/y.xsd"));
 
-        // 其余不变
-        assertSame(z, nameToSchemas.remove("schema/z.xsd"));
-        assertSame(a, nameToSchemas.remove("schema/a.xsd"));
-        assertSame(b, nameToSchemas.remove("schema/b.xsd"));
+        assertSame(z, nameToSchemas.get("schema/z.xsd"));
+        assertSame(a, nameToSchemas.get("schema/a.xsd"));
+        assertSame(b, nameToSchemas.get("schema/b.xsd"));
 
-        assertTrue(nameToSchemas.isEmpty());
-
-        // 检查内容: all
+        // 检查内容: all被转换
         Iterator<Element> i = getNodes(all, "http://www.alibaba.com/schema/test", 6).iterator();
         assertEquals("schema/a.xsd", i.next().attributeValue("schemaLocation"));
         assertEquals("schema/z.xsd", i.next().attributeValue("schemaLocation"));
@@ -246,20 +241,13 @@ public class SchemaSetTests {
         assertEquals("schema/y.xsd", i.next().attributeValue("schemaLocation"));
         assertEquals("test", i.next().attributeValue("name"));
 
-        // 检查内容: x
+        // 检查内容: x被转换
         i = getNodes(x, null, 1).iterator();
         assertEquals("testx", i.next().attributeValue("name"));
 
-        // 检查内容: y
+        // 检查内容: y被转换
         i = getNodes(y, null, 1).iterator();
         assertEquals("testy", i.next().attributeValue("name"));
-    }
-
-    private Schema assertReplaced(Map<String, Schema> nameToSchemas, String name, Schema original) {
-        assertNotSame(original, nameToSchemas.get(name));
-        Schema newSchema = nameToSchemas.remove(name);
-        assertNotNull(newSchema);
-        return newSchema;
     }
 
     private List<Element> getNodes(Schema schema, String ns, int count) {
@@ -281,7 +269,7 @@ public class SchemaSetTests {
     }
 
     private Schema createSchemaFromFile(String name, final String fileName) {
-        return new SchemaImpl(name, null, true, fileName + " desc", new InputStreamSource() {
+        return SchemaImpl.create(name, null, true, fileName + " desc", new InputStreamSource() {
             public InputStream getInputStream() throws IOException {
                 return new FileInputStream(new File(srcdir, fileName));
             }

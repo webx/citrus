@@ -135,7 +135,7 @@ public class SpringPluggableSchemas implements Schemas {
             InputStreamSource source = getResource(classpathLocation, uri);
 
             if (source != null) {
-                nameToSchemaMappings.put(schemaName, new SchemaImpl(schemaName, version, true, desc, source));
+                nameToSchemaMappings.put(schemaName, SchemaImpl.create(schemaName, version, true, desc, source));
                 uriToNameMappings.put(uri, schemaName);
             }
         }
