@@ -19,6 +19,9 @@ package com.alibaba.citrus.util;
 
 import static com.alibaba.citrus.util.Assert.ExceptionType.*;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 /**
  * 断言工具，用来实现<a
  * href="http://martinfowler.com/ieeeSoftware/failFast.pdf">Fail-Fast</a>。
@@ -66,17 +69,20 @@ import static com.alibaba.citrus.util.Assert.ExceptionType.*;
  */
 public final class Assert {
     /** 确保对象不为空，否则抛出<code>IllegalArgumentException</code>。 */
-    public static <T> T assertNotNull(T object) {
+    @NotNull
+    public static <T> T assertNotNull(@Nullable T object) {
         return assertNotNull(object, null, null, (Object[]) null);
     }
 
     /** 确保对象不为空，否则抛出<code>IllegalArgumentException</code>。 */
-    public static <T> T assertNotNull(T object, String message, Object... args) {
+    @NotNull
+    public static <T> T assertNotNull(@Nullable T object, String message, Object... args) {
         return assertNotNull(object, null, message, args);
     }
 
     /** 确保对象不为空，否则抛出指定异常，默认为<code>IllegalArgumentException</code>。 */
-    public static <T> T assertNotNull(T object, ExceptionType exceptionType, String message, Object... args) {
+    @NotNull
+    public static <T> T assertNotNull(@Nullable T object, ExceptionType exceptionType, String message, Object... args) {
         if (object == null) {
             if (exceptionType == null) {
                 exceptionType = ILLEGAL_ARGUMENT;
@@ -187,7 +193,7 @@ public final class Assert {
     }
 
     /** 取得带参数的消息。 */
-    private static String getMessage(String message, Object[] args, String defaultMessage) {
+    private static String getMessage(@Nullable String message, @Nullable Object[] args, @NotNull String defaultMessage) {
         if (message == null) {
             message = defaultMessage;
         }
