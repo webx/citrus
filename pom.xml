@@ -577,6 +577,11 @@
                 <version>3.0.1</version>
                 <scope>compile</scope>
             </dependency>
+            <dependency>
+                <groupId>com.intellij</groupId>
+                <artifactId>annotations</artifactId>
+                <version>9.0.4</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>
