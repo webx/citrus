@@ -467,7 +467,7 @@ public class SpringExtUtil {
         try {
             intfs.getMethod("getObject");
             throw new IllegalArgumentException("Method name conflict: interface " + intfs.getName() + ".getObject()");
-        } catch (NoSuchMethodException e) {
+        } catch (NoSuchMethodException ignored) {
         }
 
         Enhancer generator = new Enhancer();
@@ -532,7 +532,7 @@ public class SpringExtUtil {
         }
 
         public void setBeanFactory(BeanFactory context) throws BeansException {
-            BeanFactory factory = null;
+            BeanFactory factory;
 
             if (context instanceof ApplicationContext) {
                 factory = ((ApplicationContext) context).getAutowireCapableBeanFactory();

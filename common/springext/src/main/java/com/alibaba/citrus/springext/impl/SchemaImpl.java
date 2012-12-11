@@ -43,10 +43,10 @@ public class SchemaImpl extends SchemaBase {
     private final String   version;
     private final String   sourceDesc;
     private       String   targetNamespace;
-    private       String   preferredNsPrefix;
+    private final String   preferredNsPrefix;
     private       String[] includes;
     private       String[] elements;
-    private       boolean  parsingTargetNamespace;
+    private final boolean  parsingTargetNamespace;
 
     /** 创建 configuration point 的 main schema 和 versioned schema。 */
     public static Schema createForConfigurationPoint(String name, String version, String targetNamespace, String preferredNsPrefix, String sourceDesc, Document sourceDocument) {

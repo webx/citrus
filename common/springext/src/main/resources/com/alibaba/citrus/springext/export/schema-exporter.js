@@ -85,14 +85,14 @@ function registerUpdateXmlTemplate() {
         xml += '             ">\n'.escapeHTML();
         xml += '\n';
         xml += '</beans:beans>'.escapeHTML();
-        xml += "</pre>"
+        xml += "</pre>";
 
         $('xml-template').innerHTML = xml;
     };
 
     checkboxes.each(function (e) {
         e.observe('click', updateXmlTemplate);
-    })
+    });
 
     updateXmlTemplate(null);
 }

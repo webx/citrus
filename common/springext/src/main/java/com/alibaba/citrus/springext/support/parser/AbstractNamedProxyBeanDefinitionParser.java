@@ -91,9 +91,7 @@ public abstract class AbstractNamedProxyBeanDefinitionParser extends AbstractBea
         if (scope == null || scope.equalsIgnoreCase(SCOPE_SINGLETON) || scope.equalsIgnoreCase(SCOPE_PROTOTYPE)) {
             return realBd;
         } else {
-            if (scope != null) {
-                realBd.setScope(scope);
-            }
+            realBd.setScope(scope);
 
             // 禁止autowire注入这个实际bean。
             realBd.setAutowireCandidate(false);

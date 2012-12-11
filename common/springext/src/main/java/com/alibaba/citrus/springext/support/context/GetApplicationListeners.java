@@ -44,7 +44,7 @@ class GetApplicationListeners {
             try {
                 method = clazz.getDeclaredMethod("getApplicationListeners");
                 break;
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
 

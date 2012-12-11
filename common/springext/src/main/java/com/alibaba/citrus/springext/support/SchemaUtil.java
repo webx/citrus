@@ -216,8 +216,8 @@ public class SchemaUtil {
      */
     public static Transformer getContributionSchemaTransformer(final ConfigurationPoints cps, final ConfigurationPoint thisCp) {
         return new Transformer() {
+            private final Map<String, ConfigurationPoint> importings = createHashMap();
             private Element root;
-            private Map<String, ConfigurationPoint> importings = createHashMap();
 
             public void transform(Document document, String systemId) {
                 root = document.getRootElement();
@@ -499,10 +499,8 @@ public class SchemaUtil {
             return preferredNsPrefix;
         }
 
-        String ns = targetNamespace;
-
-        if (ns != null) {
-            return ns.substring(ns.lastIndexOf("/") + 1);
+        if (targetNamespace != null) {
+            return targetNamespace.substring(targetNamespace.lastIndexOf("/") + 1);
         }
 
         return null;

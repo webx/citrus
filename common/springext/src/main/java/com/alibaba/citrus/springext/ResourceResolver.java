@@ -25,6 +25,8 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.Properties;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.core.io.InputStreamSource;
 
 /**
@@ -44,16 +46,19 @@ public abstract class ResourceResolver {
      * 取得指定位置的一个资源。
      * 如果资源不存在，则返回<code>null</code>。
      */
-    public abstract Resource getResource(String location);
+    @Nullable
+    public abstract Resource getResource(@NotNull String location);
 
     /**
      * 找到所有符合名称的资源。支持同名资源的查找，例如，查找所有jar包中的/META-INF/spring.schemas文件。该方法还支持通配符。
      *
      * @throws IOException 如果在寻找过程中出错
      */
-    public abstract Resource[] getResources(String locationPattern) throws IOException;
+    @NotNull
+    public abstract Resource[] getResources(@NotNull String locationPattern) throws IOException;
 
     /** 从<code>ResourceResolver</code>中读取所有指定名称的资源文件，将其中的<code>key=value</code>汇总成一个<code>Map</code>。 */
+    @NotNull
     public final Map<String, String> loadAllProperties(String resourceName) throws IOException {
         assertNotNull(resourceName, "Resource name must not be null");
 
