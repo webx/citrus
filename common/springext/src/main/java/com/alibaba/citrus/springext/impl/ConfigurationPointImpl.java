@@ -26,6 +26,7 @@ import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -284,9 +285,7 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
         Set<String> allVersions = createTreeSet();
 
         for (Contribution contrib : getContributions()) {
-            for (String version : contrib.getSchemas().getVersions()) {
-                allVersions.add(version);
-            }
+            Collections.addAll(allVersions, contrib.getSchemas().getVersions());
         }
 
         // 生成每个schemas。

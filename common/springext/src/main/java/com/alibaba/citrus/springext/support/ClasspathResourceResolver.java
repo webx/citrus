@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import com.alibaba.citrus.springext.ResourceResolver;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
@@ -40,7 +42,8 @@ public class ClasspathResourceResolver extends ResourceResolver {
     }
 
     @Override
-    public Resource getResource(String location) {
+    @Nullable
+    public Resource getResource(@NotNull String location) {
         org.springframework.core.io.Resource springResource = resolver.getResource(CLASSPATH_URL_PREFIX + location);
 
         if (springResource != null && springResource.exists()) {
@@ -51,7 +54,8 @@ public class ClasspathResourceResolver extends ResourceResolver {
     }
 
     @Override
-    public Resource[] getResources(String locationPattern) throws IOException {
+    @NotNull
+    public Resource[] getResources(@NotNull String locationPattern) throws IOException {
         org.springframework.core.io.Resource[] springResources = resolver.getResources(CLASSPATH_ALL_URL_PREFIX + locationPattern);
 
         if (springResources == null) {

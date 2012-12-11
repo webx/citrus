@@ -91,7 +91,10 @@ final class ConfigurationPointSettings {
         try {
             return createArrayList(resourceResolver.getResources(locationPattern));
         } catch (IOException e) {
-            log.warn("Failed to load resources: {}: {}", relativeLocationPattern, e);
+            if (log != null) {
+                log.warn("Failed to load resources: {}: {}", relativeLocationPattern, e);
+            }
+
             return emptyList();
         }
     }
