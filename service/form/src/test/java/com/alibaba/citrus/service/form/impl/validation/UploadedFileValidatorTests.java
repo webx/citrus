@@ -32,8 +32,10 @@ public class UploadedFileValidatorTests extends AbstractValidatorTests<UploadedF
     private File txt_size10;
     private File txt_size4;
     private File gif_size4;
+    private File GIF_size4_1;
     private File jpg_size0;
     private File jpg_size5;
+    private File JPG_size5_1;
     private File notype_size4;
 
     @Before
@@ -42,8 +44,10 @@ public class UploadedFileValidatorTests extends AbstractValidatorTests<UploadedF
         txt_size10 = new File(srcdir, "data/file2.txt");
         txt_size4 = new File(srcdir, "data/file3.txt");
         gif_size4 = new File(srcdir, "data/file4.gif");
+        GIF_size4_1 = new File(srcdir, "data/file4_1.GIF");
         jpg_size0 = new File(srcdir, "data/file5.jpg");
         jpg_size5 = new File(srcdir, "data/file6.jpg");
+        JPG_size5_1 = new File(srcdir, "data/file6_1.JPG");
         notype_size4 = new File(srcdir, "data/file7");
 
         assertEquals(3, txt_size3.length());
@@ -51,8 +55,10 @@ public class UploadedFileValidatorTests extends AbstractValidatorTests<UploadedF
         assertEquals(4, txt_size4.length());
 
         assertEquals(4, gif_size4.length());
+        assertEquals(4, GIF_size4_1.length());
         assertEquals(0, jpg_size0.length());
         assertEquals(5, jpg_size5.length());
+        assertEquals(5, JPG_size5_1.length());
 
         assertEquals(4, notype_size4.length());
     }
@@ -252,8 +258,18 @@ public class UploadedFileValidatorTests extends AbstractValidatorTests<UploadedF
         assertEquals(true, field9.isValid());
         assertEquals(null, field9.getMessage());
 
+        // ext=JPG
+        requestWithUpload("", "", "", "", "", "", "", "", JPG_size5_1);
+        assertEquals(true, field9.isValid());
+        assertEquals(null, field9.getMessage());
+
         // ext=gif
         requestWithUpload("", "", "", "", "", "", "", "", gif_size4);
+        assertEquals(false, field9.isValid());
+        assertEquals("field9 should be of [jpg, null]", field9.getMessage());
+
+        // ext=GIF
+        requestWithUpload("", "", "", "", "", "", "", "", GIF_size4_1);
         assertEquals(false, field9.isValid());
         assertEquals("field9 should be of [jpg, null]", field9.getMessage());
 
