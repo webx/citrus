@@ -158,7 +158,7 @@ public class UploadedFileValidator extends AbstractValidator {
                 // 未指定文件名 - 返回null
                 // 文件名没有后缀 - 返回字符串“null”
                 // 后缀被规格化为小写字母
-                String ext = FileUtil.getExtension(fileItem.getName(), "null");
+                String ext = FileUtil.getExtension(fileItem.getName(), "null", true);
 
                 if (ext == null) {
                     return false;
