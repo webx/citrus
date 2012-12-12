@@ -226,6 +226,12 @@ public class SchemaUtil {
                     return;
                 }
 
+                // 为contribution schema添加默认namespace和targetNamespace的声明。
+                // 由于contribution schema是被include到configuration point schema中的，所以这些声明不是必须的。
+                // 但是Intellij IDEA似乎不能正确学习到contribution schema的namespace，除非加上这些声明。
+                root.addNamespace("", thisCp.getNamespaceUri());
+                root.addAttribute("targetNamespace", thisCp.getNamespaceUri());
+
                 visitElement(root);
 
                 // 避免加入重复的import

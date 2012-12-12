@@ -148,6 +148,12 @@ public class ContributionTests {
         String ns_cp1 = "<xsd:schema.+xmlns:cp1=\"http://www\\.alibaba\\.com/schema/my/cp1\"";
         String ns_cp2 = "<xsd:schema.+xmlns:cp2ns=\"http://www\\.alibaba\\.com/schema/my/cp2\"";
 
+        String targetNamespace_cp1 = "<xsd:schema.+targetNamespace=\"http://www\\.alibaba\\.com/schema/my/cp1\"";
+        String defaultNamespace_cp1 = "<xsd:schema.+xmlns=\"http://www\\.alibaba\\.com/schema/my/cp1\"";
+
+        String targetNamespace_cp2 = "<xsd:schema.+targetNamespace=\"http://www\\.alibaba\\.com/schema/my/cp2\"";
+        String defaultNamespace_cp2 = "<xsd:schema.+xmlns=\"http://www\\.alibaba\\.com/schema/my/cp2\"";
+
         String any_cp1 = "<xsd:choice>" //
                          + " <xsd:element ref=\"cp1:test1\"/>" //
                          + " <xsd:element ref=\"cp1:test2\"/>" //
@@ -173,6 +179,9 @@ public class ContributionTests {
                 assertThat(text, containsRegex(ns_cp1));
                 assertThat(text, containsRegex(ns_cp2));
 
+                assertThat(text, containsRegex(targetNamespace_cp1));
+                assertThat(text, containsRegex(defaultNamespace_cp1));
+
                 assertThat(text, containsString(any_cp1_optional));
                 assertThat(text, containsString(any_cp2_optional));
                 break;
@@ -183,6 +192,9 @@ public class ContributionTests {
 
                 assertThat(text, containsRegex(ns_cp1));
                 assertThat(text, containsRegex(ns_cp2));
+
+                assertThat(text, containsRegex(targetNamespace_cp1));
+                assertThat(text, containsRegex(defaultNamespace_cp1));
 
                 assertThat(text, containsString(any_cp1_optional));
                 assertThat(text, containsString(any_cp2_optional));
@@ -195,6 +207,9 @@ public class ContributionTests {
 
                 assertThat(text, containsRegex(ns_cp1));
                 assertThat(text, not(containsRegex(ns_cp2)));
+
+                assertThat(text, containsRegex(targetNamespace_cp2));
+                assertThat(text, containsRegex(defaultNamespace_cp2));
 
                 assertThat(text, containsString(any_cp1));
                 assertThat(text, not(containsString(any_cp2_optional)));
