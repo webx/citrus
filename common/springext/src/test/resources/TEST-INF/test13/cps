@@ -1,0 +1,2 @@
+my/services = http://www.alibaba.com/my/services
+my/services/service1/plugins = http://www.alibaba.com/my/services/service1/plugins

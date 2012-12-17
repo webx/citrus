@@ -23,6 +23,7 @@ import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
+import static java.util.Collections.*;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -69,6 +70,8 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
     private final String                             preferredNsPrefix;
     private final String                             contributionLocationPrefix;
     private final Map<ContributionKey, Contribution> contributions;
+    private final Map<String, Contribution>          dependingContributions;
+    private final Collection<Contribution>           dependingContributionsUnmodifiable;
     private       VersionableSchemas                 schemas;
     private       boolean                            initialized;
 
@@ -82,6 +85,8 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
         this.preferredNsPrefix = trimToNull(preferredNsPrefix);
         this.contributionLocationPrefix = settings.baseLocation + name.replace('/', '-'); // eg. my-conf-point
         this.contributions = createTreeMap();
+        this.dependingContributions = createHashMap();
+        this.dependingContributionsUnmodifiable = unmodifiableCollection(dependingContributions.values());
     }
 
     public ConfigurationPoints getConfigurationPoints() {
@@ -114,6 +119,18 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
 
     public Collection<Contribution> getContributions() {
         return contributions.values();
+    }
+
+    @Override
+    public Collection<Contribution> getDependingContributions() {
+        return dependingContributionsUnmodifiable;
+    }
+
+    public void addDependingContribution(Contribution contribution) {
+        if (contribution != null) {
+            String key = contribution.getConfigurationPoint().getName() + "." + contribution.getName();
+            dependingContributions.put(key, contribution);
+        }
     }
 
     public void init() {

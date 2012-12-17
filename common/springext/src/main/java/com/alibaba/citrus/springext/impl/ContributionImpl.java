@@ -101,7 +101,8 @@ public class ContributionImpl implements Contribution {
             log.debug("Found schema file for contribution {}: {}", mainName, resource);
             return SchemaImpl.createForContribution(
                     schemaName, null, getDescription(), resource,
-                    getContributionSchemaTransformer(getConfigurationPoint().getConfigurationPoints(), getConfigurationPoint()));
+                    // 此方法有一个副作用，将会把当前contribution添加到它所依赖的configuration point的depending contributions列表中。
+                    getContributionSchemaTransformer(getConfigurationPoint().getConfigurationPoints(), this));
         }
     }
 
@@ -126,7 +127,8 @@ public class ContributionImpl implements Contribution {
                 if (checkVersion(schemaVersion)) {
                     schemas.add(SchemaImpl.createForContribution(
                             schemaName, schemaVersion, getDescription(), resource,
-                            getContributionSchemaTransformer(getConfigurationPoint().getConfigurationPoints(), getConfigurationPoint())));
+                            // 此方法有一个副作用，将会把当前contribution添加到它所依赖的configuration point的depending contributions列表中。
+                            getContributionSchemaTransformer(getConfigurationPoint().getConfigurationPoints(), this)));
                 } else {
                     i.remove();
                 }

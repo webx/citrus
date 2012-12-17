@@ -24,9 +24,12 @@ import static org.junit.Assert.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Collection;
 
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
+import com.alibaba.citrus.springext.ContributionType;
+import com.alibaba.citrus.springext.support.SchemaSet;
 import com.alibaba.citrus.test.TestEnvStatic;
 import com.alibaba.citrus.test.runner.TestNameAware;
 import org.junit.Test;
@@ -308,6 +311,31 @@ public class ConfigurationPointTests {
         } catch (IllegalArgumentException e) {
             assertThat(e, exception("Illegal namespace URI", ";defaultElement=mybean"));
         }
+    }
+
+    @Test
+    public void test13_getDependingContributions() {
+        createConfigurationPoints("TEST-INF/test13/cps");
+
+        ConfigurationPointImpl cp1 = (ConfigurationPointImpl) cps.getConfigurationPointByName("my/services");
+        ConfigurationPointImpl cp2 = (ConfigurationPointImpl) cps.getConfigurationPointByName("my/services/service1/plugins");
+
+        Contribution contrib1 = cp1.getContribution("service1", ContributionType.BEAN_DEFINITION_PARSER);
+
+        Collection<Contribution> dependingContributions = cp2.getDependingContributions();
+
+        // Schema解析前，并不知道依赖关系。
+        assertEquals(0, dependingContributions.size());
+
+        new SchemaSet(cps);
+
+        // Schema解析后，就知道依赖关系。
+        assertEquals(1, dependingContributions.size());
+
+        assertSame(contrib1, dependingContributions.iterator().next());
+
+        assertEquals("service1", contrib1.getName());
+        assertSame(cp1, contrib1.getConfigurationPoint());
     }
 
     private void createConfigurationPoints(String location) {

@@ -41,6 +41,7 @@ import com.alibaba.citrus.springext.ConfigurationPoints;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.Schema.Transformer;
+import com.alibaba.citrus.springext.impl.ConfigurationPointImpl;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -214,7 +215,9 @@ public class SchemaUtil {
      * </pre>
      * <p/>
      */
-    public static Transformer getContributionSchemaTransformer(final ConfigurationPoints cps, final ConfigurationPoint thisCp) {
+    public static Transformer getContributionSchemaTransformer(final ConfigurationPoints cps, final Contribution thisContrib) {
+        final ConfigurationPoint thisCp = thisContrib.getConfigurationPoint();
+
         return new Transformer() {
             private final Map<String, ConfigurationPoint> importings = createHashMap();
             private Element root;
@@ -278,6 +281,10 @@ public class SchemaUtil {
                         if (cp != null) {
                             indexes.add(index);
                             importings.put(ns, cp);
+                        }
+
+                        if (cp instanceof ConfigurationPointImpl) {
+                            ((ConfigurationPointImpl) cp).addDependingContribution(thisContrib);
                         }
                     } else {
                         visitElement(subElement);
