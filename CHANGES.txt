@@ -354,5 +354,6 @@
 * 改进Springext以配合IDEA/Eclipse plugins。
   * 调整接口，使之不仅可从ClassLoader中装载资源，也可从由IDE plugins所实现的ResourceResolver接口来装载。
   * 改进了装载schema的过程，引进Transformer接口，不仅使代码更清晰，也提高了效率。
+  * 增加方法：ConfigurationPoint.getDependingContributions()，可以取得所有引用此configuration point的contributions。
 
 * Bugfix: Form验证中，<uploaded-file-validator extension="jpg,gif" />不能验证JPG/GIF大写后缀。

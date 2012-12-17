@@ -49,6 +49,9 @@ public interface ConfigurationPoint {
     /** 取得schemas。 */
     VersionableSchemas getSchemas();
 
+    /** 取得所有依赖于当前<code>ConfigurationPoint</code>的contributions。 */
+    Collection<Contribution> getDependingContributions();
+
     /** 取得描述。 */
     String getDescription();
 }
