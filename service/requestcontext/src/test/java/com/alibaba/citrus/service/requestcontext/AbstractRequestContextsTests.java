@@ -351,8 +351,11 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
         }
     }
 
+    protected void resetCalled() {
+    }
+
     /** 由于httpunit目前未实现commit以后抛IllegalStateException，所以只能将response包装一下。 */
-    public static class MyHttpResponse extends HttpServletResponseWrapper {
+    public class MyHttpResponse extends HttpServletResponseWrapper {
         private boolean committed;
 
         public MyHttpResponse(HttpServletResponse response) {
@@ -401,6 +404,7 @@ public abstract class AbstractRequestContextsTests<RC extends RequestContext> {
         public void reset() {
             ensureNotCommited();
             super.reset();
+            resetCalled();
         }
 
         @Override

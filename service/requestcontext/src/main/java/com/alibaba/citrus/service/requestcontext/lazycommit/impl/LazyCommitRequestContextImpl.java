@@ -212,6 +212,17 @@ public class LazyCommitRequestContextImpl extends AbstractRequestContextWrapper 
             }
         }
 
+        @Override
+        public void reset() {
+            super.reset();
+
+            sendError = null;
+            sendRedirect = null;
+            setLocation = false;
+            bufferFlushed = false;
+            status = 0;
+        }
+
         private void commitHeaders() throws IOException {
             headersCommitted = true;
 

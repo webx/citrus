@@ -357,3 +357,4 @@
   * 增加方法：ConfigurationPoint.getDependingContributions()，可以取得所有引用此configuration point的contributions。
 
 * Bugfix: Form验证中，<uploaded-file-validator extension="jpg,gif" />不能验证JPG/GIF大写后缀。
+* Bugfix：当response.reset()时，LazyCommitRequestContext应清除所有的状态。
