@@ -23,6 +23,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.citrus.service.requestcontext.AbstractRequestContextsTests;
+import com.alibaba.citrus.test.TestUtil;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -136,5 +137,55 @@ public class LazyCommitRequestContextTests extends AbstractRequestContextsTests<
 
         newResponse.setStatus(302);
         assertEquals(302, requestContext.getStatus());
+    }
+
+    private boolean resetCalled;
+
+    @Override
+    protected void resetCalled() {
+        resetCalled = true;
+    }
+
+    private void assertResetCalled() {
+        assertTrue(resetCalled);
+        resetCalled = false;
+    }
+
+    @Test
+    public void reset() throws Exception {
+        // sendError
+        newResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
+        assertTrue(requestContext.isError());
+        newResponse.reset();
+        assertFalse(requestContext.isError());
+        assertResetCalled();
+
+        // sendRedirect
+        newResponse.sendRedirect("http://localhost/mylocation");
+        assertTrue(requestContext.isRedirected());
+        newResponse.reset();
+        assertFalse(requestContext.isRedirected());
+        assertResetCalled();
+
+        // setHeader:location
+        newResponse.setHeader("location", "http://localhost/mylocation");
+        assertTrue(requestContext.isRedirected());
+        newResponse.reset();
+        assertFalse(requestContext.isRedirected());
+        assertResetCalled();
+
+        // flushBuffer
+        newResponse.flushBuffer();
+        assertTrue(TestUtil.getFieldValue(requestContext, "bufferFlushed", Boolean.class));
+        newResponse.reset();
+        assertFalse(TestUtil.getFieldValue(requestContext, "bufferFlushed", Boolean.class));
+        assertResetCalled();
+
+        // setStatus
+        newResponse.setStatus(404);
+        assertEquals(404, (Object) TestUtil.getFieldValue(requestContext, "status", Integer.class));
+        newResponse.reset();
+        assertEquals(0, (Object) TestUtil.getFieldValue(requestContext, "status", Integer.class));
+        assertResetCalled();
     }
 }
