@@ -358,3 +358,4 @@
 
 * Bugfix: Form验证中，<uploaded-file-validator extension="jpg,gif" />不能验证JPG/GIF大写后缀。
 * Bugfix：当response.reset()时，LazyCommitRequestContext应清除所有的状态。
+* Bugfix: <renderResultAsJson> valve，当redirect发生时，仍然执行渲染的问题。

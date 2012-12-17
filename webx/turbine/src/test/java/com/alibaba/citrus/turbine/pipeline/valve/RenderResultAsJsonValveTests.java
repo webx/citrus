@@ -144,6 +144,22 @@ public class RenderResultAsJsonValveTests extends AbstractValveTests {
         assertEquals("var myresult = {\"age\":100,\"name\":\"michael\"};", webResponse.getText());
     }
 
+    @Test
+    public void outputAsJs_redirect() throws Exception {
+        pipeline = (PipelineImpl) factory.getBean("renderJsonAsJs");
+        getInvocationContext("http://localhost/app1/myJsonScreen/withResult");
+        initRequestContext();
+        newResponse.sendRedirect("http://localhost/newlocation");
+        pipeline.newInvocation().invoke();
+        commitRequestContext();
+
+        WebResponse webResponse = client.getResponse(invocationContext);
+
+        assertEquals(302, webResponse.getResponseCode());
+        assertEquals("http://localhost/newlocation", webResponse.getHeaderField("location"));
+        assertEquals("", webResponse.getText());
+    }
+
     public static class ResultCheck extends AbstractInputOutputValve {
         @Override
         public void invoke(PipelineContext pipelineContext) throws Exception {

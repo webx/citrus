@@ -18,6 +18,7 @@
 package com.alibaba.citrus.turbine.pipeline.valve;
 
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
+import static com.alibaba.citrus.turbine.util.TurbineUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.io.PrintWriter;
@@ -26,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
+import com.alibaba.citrus.turbine.TurbineRunData;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -77,34 +79,38 @@ public class RenderResultAsJsonValve extends AbstractInputOutputValve {
     }
 
     public void invoke(PipelineContext pipelineContext) throws Exception {
-        Object resultObject = consumeInputValue(pipelineContext);
+        TurbineRunData rundata = getTurbineRunData(request);
 
-        if (resultObject == null) {
-            return;
-        }
+        if (!rundata.isRedirected()) {
+            Object resultObject = consumeInputValue(pipelineContext);
 
-        String javascriptVariable = getJavascriptVariable();
-        boolean outputAsJson = javascriptVariable == null;
+            if (resultObject == null) {
+                return;
+            }
 
-        if (outputAsJson) {
-            // output as json
-            response.setContentType(getContentType());
-        } else {
-            // output as javascript
-            response.setContentType(getJavascriptContentType());
-        }
+            String javascriptVariable = getJavascriptVariable();
+            boolean outputAsJson = javascriptVariable == null;
 
-        PrintWriter out = response.getWriter();
-        String jsonResult = JSON.toJSONString(resultObject);
+            if (outputAsJson) {
+                // output as json
+                response.setContentType(getContentType());
+            } else {
+                // output as javascript
+                response.setContentType(getJavascriptContentType());
+            }
 
-        if (outputAsJson) {
-            out.print(jsonResult);
-        } else {
-            out.print("var ");
-            out.print(javascriptVariable);
-            out.print(" = ");
-            out.print(jsonResult);
-            out.print(";");
+            PrintWriter out = response.getWriter();
+            String jsonResult = JSON.toJSONString(resultObject);
+
+            if (outputAsJson) {
+                out.print(jsonResult);
+            } else {
+                out.print("var ");
+                out.print(javascriptVariable);
+                out.print(" = ");
+                out.print(jsonResult);
+                out.print(";");
+            }
         }
 
         pipelineContext.invokeNext();
