@@ -34,6 +34,7 @@ import com.alibaba.citrus.springext.Schemas;
 import com.alibaba.citrus.springext.SourceInfo;
 import com.alibaba.citrus.springext.support.ClasspathResourceResolver;
 import com.alibaba.citrus.springext.support.SourceInfoSupport;
+import com.alibaba.citrus.springext.support.SpringSchemasSourceInfo;
 import com.alibaba.citrus.util.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

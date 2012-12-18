@@ -41,6 +41,7 @@ import com.alibaba.citrus.springext.ResourceResolver.Resource;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.SourceInfo;
 import com.alibaba.citrus.springext.VersionableSchemas;
+import com.alibaba.citrus.springext.support.ConfigurationPointSourceInfo;
 import com.alibaba.citrus.springext.support.SourceInfoSupport;
 import com.alibaba.citrus.springext.support.parser.DefaultElementDefinitionParser;
 import com.alibaba.citrus.util.ToStringBuilder;

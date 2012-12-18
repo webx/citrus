@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-package com.alibaba.citrus.springext.impl;
+package com.alibaba.citrus.springext.support;
 
 import com.alibaba.citrus.springext.SourceInfo;
 
-public interface SpringPluggableSchemaSourceInfo extends SourceInfo<SpringSchemasSourceInfo> {
+public interface SpringSchemasSourceInfo extends SourceInfo<SourceInfo<?>> {
 }
