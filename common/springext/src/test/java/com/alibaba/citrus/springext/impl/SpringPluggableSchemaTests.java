@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.alibaba.citrus.springext.support.resolver;
+package com.alibaba.citrus.springext.impl;
 
 import static com.alibaba.citrus.test.TestUtil.*;
 import static org.hamcrest.Matchers.*;
@@ -24,10 +24,14 @@ import static org.junit.Assert.*;
 import java.util.Map;
 
 import com.alibaba.citrus.springext.Schema;
-import com.alibaba.citrus.springext.impl.SpringPluggableSchemas;
+import com.alibaba.citrus.springext.SourceInfo;
+import com.alibaba.citrus.springext.support.SpringPluggableSchemaSourceInfo;
+import com.alibaba.citrus.springext.support.SpringSchemasSourceInfo;
 import com.alibaba.citrus.test.TestEnvStatic;
+import com.alibaba.citrus.util.io.StreamUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.core.io.Resource;
 
 public class SpringPluggableSchemaTests {
     private static SpringPluggableSchemas sps;
@@ -72,6 +76,41 @@ public class SpringPluggableSchemaTests {
         assertNotNull(dummySchema);
         assertEquals(null, dummySchema.getTargetNamespace());
         assertEquals(null, dummySchema.getTargetNamespace()); // try hard
+    }
+
+    @Test
+    public void sourceInfo() throws Exception {
+        Map<String, Schema> names = sps.getNamedMappings();
+        Resource resource;
+
+        Schema beansSchema = names.get("www.springframework.org/schema/beans/spring-beans-2.5.xsd");
+        resource = assertSourceInfoAndGetResource(beansSchema, SpringPluggableSchemaSourceInfo.class);
+        assertResource("org/springframework/beans/factory/xml/spring-beans-2.5.xsd", resource);
+
+        SpringSchemasSourceInfo parent = ((SpringPluggableSchemaSourceInfo) beansSchema).getParent();
+        resource = assertSourceInfoAndGetResource(parent, SpringSchemasSourceInfo.class);
+        assertNull(parent.getParent());
+        assertTrue(resource.getURL().toExternalForm().endsWith("META-INF/spring.schemas"));
+
+        String content = StreamUtil.readText(resource.getInputStream(), "UTF-8", true);
+        assertTrue(content.contains("org/springframework/beans/factory/xml/spring-beans-2.5.xsd"));
+    }
+
+    private void assertResource(String resourceName, Resource resource) throws Exception {
+        if (resourceName == null) {
+            assertNull(resource);
+        } else {
+            assertEquals(getClass().getClassLoader().getResource(resourceName), resource.getURL());
+        }
+    }
+
+    private Resource assertSourceInfoAndGetResource(Object obj, Class<? extends SourceInfo<?>> expectedInterface) {
+        SourceInfo<?> sourceInfo = expectedInterface.cast(obj);
+
+        assertEquals(-1, sourceInfo.getLineNumber());
+
+        return sourceInfo.getSource() == null ? null
+                                              : getFieldValue(sourceInfo.getSource(), "springResource", Resource.class);
     }
 
     @Test
