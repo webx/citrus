@@ -97,6 +97,7 @@
   * 调整接口，使之不仅可从ClassLoader中装载资源，也可从由IDE plugins所实现的ResourceResolver接口来装载。
   * 改进了装载schema的过程，引进Transformer接口，不仅使代码更清晰，也提高了效率。
   * 增加方法：ConfigurationPoint.getDependingContributions()，可以取得所有引用此configuration point的contributions。
+  * 为ConfigurationPoint/Contribution/Schema/SpringPluggableSchema 增添了SourceInfo接口，以便取得原始资源文件，供IDE来编译。
 
 * Bugfix: Form验证中，<uploaded-file-validator extension="jpg,gif" />不能验证JPG/GIF大写后缀。
 * Bugfix：当response.reset()时，LazyCommitRequestContext应清除所有的状态。

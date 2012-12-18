@@ -33,7 +33,9 @@ import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionType;
 import com.alibaba.citrus.springext.ResourceResolver.Resource;
 import com.alibaba.citrus.springext.Schema;
+import com.alibaba.citrus.springext.SourceInfo;
 import com.alibaba.citrus.springext.VersionableSchemas;
+import com.alibaba.citrus.springext.support.SourceInfoSupport;
 import com.alibaba.citrus.util.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,20 +45,22 @@ import org.slf4j.LoggerFactory;
  *
  * @author Michael Zhou
  */
-public class ContributionImpl implements Contribution {
+public class ContributionImpl implements Contribution, ContributionSourceInfo {
     private final static Logger log = LoggerFactory.getLogger(Contribution.class);
-    private final ConfigurationPoint         configurationPoint;
-    private final ConfigurationPointSettings settings;
-    private final ContributionKey            key;
-    private final String                     implementationClassName;
-    private       VersionableSchemas         schemas;
+    private final ConfigurationPoint                       configurationPoint;
+    private final ConfigurationPointSettings               settings;
+    private final ContributionKey                          key;
+    private final String                                   implementationClassName;
+    private final SourceInfo<ConfigurationPointSourceInfo> sourceInfo;
+    private       VersionableSchemas                       schemas;
 
     ContributionImpl(ConfigurationPointImpl cp, ConfigurationPointSettings settings, ContributionType type,
-                     String name, String contributionClassName) {
+                     String name, String contributionClassName, SourceInfo<ConfigurationPointSourceInfo> sourceInfo) {
         this.configurationPoint = assertNotNull(cp, "configurationPoint");
         this.settings = settings;
         this.key = new ContributionKey(name, type);
         this.implementationClassName = contributionClassName; // 可能为空，但推迟到创建时再报错
+        this.sourceInfo = assertNotNull(sourceInfo, "sourceInfo");
     }
 
     public ConfigurationPoint getConfigurationPoint() {
@@ -101,6 +105,7 @@ public class ContributionImpl implements Contribution {
             log.debug("Found schema file for contribution {}: {}", mainName, resource);
             return SchemaImpl.createForContribution(
                     schemaName, null, getDescription(), resource,
+                    new SourceInfoSupport<ContributionSourceInfo>(this).setSource(resource),
                     // 此方法有一个副作用，将会把当前contribution添加到它所依赖的configuration point的depending contributions列表中。
                     getContributionSchemaTransformer(getConfigurationPoint().getConfigurationPoints(), this));
         }
@@ -127,6 +132,7 @@ public class ContributionImpl implements Contribution {
                 if (checkVersion(schemaVersion)) {
                     schemas.add(SchemaImpl.createForContribution(
                             schemaName, schemaVersion, getDescription(), resource,
+                            new SourceInfoSupport<ContributionSourceInfo>(this).setSource(resource),
                             // 此方法有一个副作用，将会把当前contribution添加到它所依赖的configuration point的depending contributions列表中。
                             getContributionSchemaTransformer(getConfigurationPoint().getConfigurationPoints(), this)));
                 } else {
@@ -174,6 +180,18 @@ public class ContributionImpl implements Contribution {
 
     public String getDescription() {
         return String.format("Contribution[%s:%s]", getConfigurationPoint().getName(), getName());
+    }
+
+    public ConfigurationPointSourceInfo getParent() {
+        return sourceInfo.getParent();
+    }
+
+    public Resource getSource() {
+        return sourceInfo.getSource();
+    }
+
+    public int getLineNumber() {
+        return sourceInfo.getLineNumber();
     }
 
     @Override

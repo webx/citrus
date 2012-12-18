@@ -17,6 +17,7 @@
 
 package com.alibaba.citrus.springext.impl;
 
+import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
@@ -28,8 +29,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.alibaba.citrus.springext.ConfigurationPointException;
+import com.alibaba.citrus.springext.ResourceResolver.Resource;
 import com.alibaba.citrus.springext.Schema;
+import com.alibaba.citrus.springext.SourceInfo;
 import com.alibaba.citrus.springext.support.SchemaUtil;
+import com.alibaba.citrus.springext.support.SourceInfoSupport;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -38,24 +42,49 @@ import org.dom4j.Namespace;
 import org.dom4j.QName;
 import org.springframework.core.io.InputStreamSource;
 
-public class SchemaImpl extends SchemaBase {
-    private final String   name;
-    private final String   version;
-    private final String   sourceDesc;
-    private       String   targetNamespace;
-    private final String   preferredNsPrefix;
-    private       String[] includes;
-    private       String[] elements;
-    private final boolean  parsingTargetNamespace;
+public class SchemaImpl<P extends SourceInfo<?>> extends SchemaBase {
+    private final String        name;
+    private final String        version;
+    private final String        sourceDesc;
+    private       String        targetNamespace;
+    private final String        preferredNsPrefix;
+    private       String[]      includes;
+    private       String[]      elements;
+    private final boolean       parsingTargetNamespace;
+    private final SourceInfo<P> sourceInfo;
 
     /** 创建 configuration point 的 main schema 和 versioned schema。 */
-    public static Schema createForConfigurationPoint(String name, String version, String targetNamespace, String preferredNsPrefix, String sourceDesc, Document sourceDocument) {
-        return new SchemaImpl(name, version, targetNamespace, preferredNsPrefix, false, sourceDesc, null, sourceDocument, false);
+    public static Schema createForConfigurationPoint(String name, String version, String targetNamespace, String preferredNsPrefix, String sourceDesc, Document sourceDocument, SourceInfo<ConfigurationPointSourceInfo> sourceInfo) {
+
+        class ConfigurationPointSchemaImpl extends SchemaImpl<ConfigurationPointSourceInfo>
+                implements ConfigurationPointSchemaSourceInfo {
+            private ConfigurationPointSchemaImpl(String name, String version, String targetNamespace, String preferredNsPrefix,
+                                                 boolean parsingTargetNamespace, String sourceDesc, InputStreamSource source,
+                                                 Document sourceDocument, boolean isInputStreamSource, SourceInfo<ConfigurationPointSourceInfo> sourceInfo) {
+                super(name, version, targetNamespace, preferredNsPrefix,
+                      parsingTargetNamespace, sourceDesc, source,
+                      sourceDocument, isInputStreamSource, sourceInfo);
+            }
+        }
+
+        return new ConfigurationPointSchemaImpl(name, version, targetNamespace, preferredNsPrefix, false, sourceDesc, null, sourceDocument, false, sourceInfo);
     }
 
     /** 创建 contribution 的 main schema 和 versioned schema。 */
-    public static Schema createForContribution(String name, String version, String sourceDesc, InputStreamSource source, Transformer transformer) {
-        SchemaImpl schema = new SchemaImpl(name, version, null, null, false, sourceDesc, source, null, true);
+    public static Schema createForContribution(String name, String version, String sourceDesc, InputStreamSource source, SourceInfo<ContributionSourceInfo> sourceInfo, Transformer transformer) {
+
+        class ContributionSchemaImpl extends SchemaImpl<ContributionSourceInfo>
+                implements ContributionSchemaSourceInfo {
+            private ContributionSchemaImpl(String name, String version, String targetNamespace, String preferredNsPrefix,
+                                           boolean parsingTargetNamespace, String sourceDesc, InputStreamSource source,
+                                           Document sourceDocument, boolean isInputStreamSource, SourceInfo<ContributionSourceInfo> sourceInfo) {
+                super(name, version, targetNamespace, preferredNsPrefix,
+                      parsingTargetNamespace, sourceDesc, source,
+                      sourceDocument, isInputStreamSource, sourceInfo);
+            }
+        }
+
+        SchemaImpl schema = new ContributionSchemaImpl(name, version, null, null, false, sourceDesc, source, null, true, sourceInfo);
 
         if (transformer != null) {
             schema.transform(transformer); // 必须延迟处理（doNow == false），否则会死循环
@@ -64,9 +93,26 @@ public class SchemaImpl extends SchemaBase {
         return schema;
     }
 
-    /** 创建一般的schema，比如spring.schemas中定义的schema。 */
+    /** 创建spring.schemas中定义的schema。 */
+    public static Schema createSpringPluggableSchema(String name, String version, boolean parsingTargetNamespace, String sourceDesc, InputStreamSource source, SourceInfo<SpringSchemasSourceInfo> sourceInfo) {
+
+        class SpringPluggableSchemaImpl extends SchemaImpl<SpringSchemasSourceInfo>
+                implements SpringPluggableSchemaSourceInfo {
+            private SpringPluggableSchemaImpl(String name, String version, String targetNamespace, String preferredNsPrefix,
+                                              boolean parsingTargetNamespace, String sourceDesc, InputStreamSource source,
+                                              Document sourceDocument, boolean isInputStreamSource, SourceInfo<SpringSchemasSourceInfo> sourceInfo) {
+                super(name, version, targetNamespace, preferredNsPrefix,
+                      parsingTargetNamespace, sourceDesc, source,
+                      sourceDocument, isInputStreamSource, sourceInfo);
+            }
+        }
+
+        return new SpringPluggableSchemaImpl(name, version, null, null, parsingTargetNamespace, sourceDesc, source, null, true, sourceInfo);
+    }
+
+    /** 创建一般的schema。 */
     public static Schema create(String name, String version, boolean parsingTargetNamespace, String sourceDesc, InputStreamSource source) {
-        return new SchemaImpl(name, version, null, null, parsingTargetNamespace, sourceDesc, source, null, true);
+        return new SchemaImpl<SourceInfo<?>>(name, version, null, null, parsingTargetNamespace, sourceDesc, source, null, true, new SourceInfoSupport<SourceInfo<?>>());
     }
 
     /**
@@ -77,7 +123,8 @@ public class SchemaImpl extends SchemaBase {
      */
     private SchemaImpl(String name, String version, String targetNamespace, String preferredNsPrefix,
                        boolean parsingTargetNamespace, String sourceDesc,
-                       InputStreamSource source, Document sourceDocument, boolean isInputStreamSource) {
+                       InputStreamSource source, Document sourceDocument, boolean isInputStreamSource,
+                       SourceInfo<P> sourceInfo) {
         super(source, sourceDocument, isInputStreamSource);
 
         this.name = name;
@@ -86,6 +133,7 @@ public class SchemaImpl extends SchemaBase {
         this.preferredNsPrefix = trimToNull(preferredNsPrefix);
         this.parsingTargetNamespace = parsingTargetNamespace;
         this.sourceDesc = sourceDesc;
+        this.sourceInfo = assertNotNull(sourceInfo, "sourceInfo");
     }
 
     public String getName() {
@@ -234,6 +282,18 @@ public class SchemaImpl extends SchemaBase {
 
             elements = elementNames.toArray(new String[elementNames.size()]);
         }
+    }
+
+    public P getParent() {
+        return sourceInfo.getParent();
+    }
+
+    public Resource getSource() {
+        return sourceInfo.getSource();
+    }
+
+    public int getLineNumber() {
+        return sourceInfo.getLineNumber();
     }
 
     @Override
