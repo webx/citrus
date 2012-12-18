@@ -19,11 +19,28 @@ package com.alibaba.citrus.webx.util;
 
 import static org.junit.Assert.*;
 
+import javax.servlet.ServletContext;
+
+import com.alibaba.citrus.webx.AbstractWebxTests;
+import com.meterware.servletunit.InvocationContext;
+import org.junit.Before;
 import org.junit.Test;
 
-public class WebxUtilTests {
+public class WebxUtilTests extends AbstractWebxTests {
+    @Before
+    public void init() throws Exception {
+        prepareWebClient(null, "/myapps");
+    }
+
     @Test
     public void getVersion() throws Exception {
         assertEquals("Unknown Version", WebxUtil.getWebxVersion());
+    }
+
+    @Test
+    public void getServletAPIVersion() throws Exception {
+        InvocationContext ic = client.newInvocation("http://localhost/myapps/test");
+        ServletContext servletContext = ic.getRequest().getSession().getServletContext();
+        assertEquals("2.4", WebxUtil.getServletApiVersion(servletContext)); // http unit version
     }
 }
