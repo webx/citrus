@@ -29,12 +29,19 @@ import java.util.Collection;
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionType;
+import com.alibaba.citrus.springext.Schema;
+import com.alibaba.citrus.springext.SourceInfo;
+import com.alibaba.citrus.springext.support.ConfigurationPointSchemaSourceInfo;
+import com.alibaba.citrus.springext.support.ConfigurationPointSourceInfo;
+import com.alibaba.citrus.springext.support.ContributionSchemaSourceInfo;
+import com.alibaba.citrus.springext.support.ContributionSourceInfo;
 import com.alibaba.citrus.springext.support.SchemaSet;
 import com.alibaba.citrus.test.TestEnvStatic;
 import com.alibaba.citrus.test.runner.TestNameAware;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.FatalBeanException;
+import org.springframework.core.io.Resource;
 
 @RunWith(TestNameAware.class)
 public class ConfigurationPointTests {
@@ -336,6 +343,63 @@ public class ConfigurationPointTests {
 
         assertEquals("service1", contrib1.getName());
         assertSame(cp1, contrib1.getConfigurationPoint());
+    }
+
+    @Test
+    public void test12_sourceInfo_configurationPoints() throws Exception {
+        createConfigurationPoints("TEST-INF/test12/cps");
+
+        Resource resource;
+
+        // configuration point
+        ConfigurationPoint cp1 = cps.getConfigurationPointByName("my/services");
+        resource = assertSourceInfoAndGetResource(cp1, ConfigurationPointSourceInfo.class, null);
+        assertResource("TEST-INF/test12/cps", resource);
+
+        // configuration point schema
+        Schema cp1Schema = cp1.getSchemas().getMainSchema();
+        resource = assertSourceInfoAndGetResource(cp1Schema, ConfigurationPointSchemaSourceInfo.class, cp1);
+        assertResource(null, resource);
+
+        Schema cp1Schema2 = cp1.getSchemas().getVersionedSchema("2.0");
+        resource = assertSourceInfoAndGetResource(cp1Schema2, ConfigurationPointSchemaSourceInfo.class, cp1);
+        assertResource(null, resource);
+
+        // contribution
+        Contribution contrib1 = cp1.getContribution("myservice", ContributionType.BEAN_DEFINITION_PARSER);
+        resource = assertSourceInfoAndGetResource(contrib1, ContributionSourceInfo.class, cp1);
+        assertResource("TEST-INF/test12/my-services.bean-definition-parsers", resource);
+
+        Contribution contrib2 = cp1.getContribution("myservice-abc-xyz", ContributionType.BEAN_DEFINITION_DECORATOR);
+        resource = assertSourceInfoAndGetResource(contrib2, ContributionSourceInfo.class, cp1);
+        assertResource("TEST-INF/test12/my-services.bean-definition-decorators", resource);
+
+        // contribution schema
+        Schema contrib1Schema = contrib1.getSchemas().getMainSchema();
+        resource = assertSourceInfoAndGetResource(contrib1Schema, ContributionSchemaSourceInfo.class, contrib1);
+        assertResource("TEST-INF/test12/my/services/myservice.xsd", resource);
+
+        Schema contrib1Schema2 = contrib2.getSchemas().getVersionedSchema("2.0");
+        resource = assertSourceInfoAndGetResource(contrib1Schema2, ContributionSchemaSourceInfo.class, contrib2);
+        assertResource("TEST-INF/test12/my/services/myservice-abc-xyz-2.0.xsd", resource);
+    }
+
+    private void assertResource(String resourceName, Resource resource) throws Exception {
+        if (resourceName == null) {
+            assertNull(resource);
+        } else {
+            assertEquals(getClass().getClassLoader().getResource(resourceName), resource.getURL());
+        }
+    }
+
+    private Resource assertSourceInfoAndGetResource(Object obj, Class<? extends SourceInfo<?>> expectedInterface, Object parent) {
+        SourceInfo<?> sourceInfo = expectedInterface.cast(obj);
+
+        assertEquals(-1, sourceInfo.getLineNumber());
+        assertSame(parent, sourceInfo.getParent());
+
+        return sourceInfo.getSource() == null ? null
+                                              : getFieldValue(sourceInfo.getSource(), "springResource", Resource.class);
     }
 
     private void createConfigurationPoints(String location) {

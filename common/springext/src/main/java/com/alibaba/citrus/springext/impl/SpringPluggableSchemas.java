@@ -21,24 +21,24 @@ import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
-import java.io.IOException;
 import java.net.URI;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.alibaba.citrus.springext.ConfigurationPointException;
 import com.alibaba.citrus.springext.ResourceResolver;
+import com.alibaba.citrus.springext.ResourceResolver.PropertyHandler;
 import com.alibaba.citrus.springext.ResourceResolver.Resource;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.Schemas;
+import com.alibaba.citrus.springext.SourceInfo;
 import com.alibaba.citrus.springext.support.ClasspathResourceResolver;
+import com.alibaba.citrus.springext.support.SourceInfoSupport;
+import com.alibaba.citrus.springext.support.SpringSchemasSourceInfo;
 import com.alibaba.citrus.util.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.xml.PluggableSchemaResolver;
-import org.springframework.core.io.InputStreamSource;
 import org.springframework.util.ClassUtils;
 
 /**
@@ -109,36 +109,41 @@ public class SpringPluggableSchemas implements Schemas {
 
         initialized = true;
 
-        Map<String, String> uriToClasspathLocationMappings;
-
         log.trace("Trying to load Spring schema mappings at {}", SCHEMA_MAPPINGS_LOCATION);
 
-        try {
-            uriToClasspathLocationMappings = resourceResolver.loadAllProperties(SCHEMA_MAPPINGS_LOCATION);
-        } catch (IOException e) {
-            throw new ConfigurationPointException("Unable to load Spring schema mappings from " + SCHEMA_MAPPINGS_LOCATION, e);
-        }
+        final String desc = "SpringSchema[" + SCHEMA_MAPPINGS_LOCATION + "]";
 
-        String desc = "SpringSchema[" + SCHEMA_MAPPINGS_LOCATION + "]";
-
-        for (Entry<String, String> entry : uriToClasspathLocationMappings.entrySet()) {
-            String uri = trimToNull(entry.getKey());
-            String classpathLocation = trimToNull(entry.getValue());
-            String schemaName = getSchemaName(uri);
-            Matcher matcher = SCHEMA_VERSION_PATTERN.matcher(schemaName);
-            String version = null;
-
-            if (matcher.find()) {
-                version = matcher.group(1);
-            }
-
-            InputStreamSource source = getResource(classpathLocation, uri);
-
-            if (source != null) {
-                nameToSchemaMappings.put(schemaName, SchemaImpl.create(schemaName, version, true, desc, source));
-                uriToNameMappings.put(uri, schemaName);
+        class SpringSchemasSourceInfoImpl extends SourceInfoSupport<SourceInfo<?>> implements SpringSchemasSourceInfo {
+            SpringSchemasSourceInfoImpl() {
             }
         }
+
+        resourceResolver.loadAllProperties(SCHEMA_MAPPINGS_LOCATION, new PropertyHandler() {
+            public void handle(String key, String value, Resource source, int lineNumber) {
+                String uri = trimToNull(key);
+                String classpathLocation = trimToNull(value);
+                String schemaName = getSchemaName(uri);
+                Matcher matcher = SCHEMA_VERSION_PATTERN.matcher(schemaName);
+                String version = null;
+
+                if (matcher.find()) {
+                    version = matcher.group(1);
+                }
+
+                SpringSchemasSourceInfoImpl pluginSourceInfo = new SpringSchemasSourceInfoImpl();
+                pluginSourceInfo.setSource(source, lineNumber);
+
+                Resource schemaSource = getResource(classpathLocation, uri);
+
+                if (schemaSource != null) {
+                    nameToSchemaMappings.put(schemaName, SchemaImpl.createSpringPluggableSchema(
+                            schemaName, version, true, desc, schemaSource,
+                            new SourceInfoSupport<SpringSchemasSourceInfo>(pluginSourceInfo).setSource(schemaSource)));
+
+                    uriToNameMappings.put(uri, schemaName);
+                }
+            }
+        });
 
         if (log.isDebugEnabled() && !uriToNameMappings.isEmpty()) {
             ToStringBuilder buf = new ToStringBuilder();
@@ -150,7 +155,7 @@ public class SpringPluggableSchemas implements Schemas {
         }
     }
 
-    private InputStreamSource getResource(String classpathLocation, String uri) {
+    private Resource getResource(String classpathLocation, String uri) {
         Resource resource = resourceResolver.getResource(classpathLocation);
 
         if (resource == null) {

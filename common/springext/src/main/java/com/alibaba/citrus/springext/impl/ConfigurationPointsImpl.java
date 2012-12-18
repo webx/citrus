@@ -23,18 +23,20 @@ import static com.alibaba.citrus.util.FileUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static java.util.Collections.*;
 
-import java.io.IOException;
 import java.net.URI;
 import java.util.Collection;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.ConfigurationPointException;
 import com.alibaba.citrus.springext.ConfigurationPoints;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ResourceResolver;
+import com.alibaba.citrus.springext.ResourceResolver.PropertyHandler;
+import com.alibaba.citrus.springext.ResourceResolver.Resource;
 import com.alibaba.citrus.springext.Schema;
+import com.alibaba.citrus.springext.SourceInfo;
+import com.alibaba.citrus.springext.support.SourceInfoSupport;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
 import org.slf4j.Logger;
@@ -112,35 +114,31 @@ public class ConfigurationPointsImpl implements ConfigurationPoints {
     }
 
     private void loadConfigurationPoints() {
-        Map<String, String> mappings;
-
         log.trace("Trying to load configuration points at {}", configurationPointsLocation);
 
-        try {
-            mappings = settings.resourceResolver.loadAllProperties(configurationPointsLocation);
-        } catch (IOException e) {
-            throw new ConfigurationPointException("Unable to load Configuration Points from " + configurationPointsLocation, e);
-        }
+        settings.resourceResolver.loadAllProperties(configurationPointsLocation, new PropertyHandler() {
+            public void handle(String key, String value, Resource source, int lineNumber) {
+                String name = normalizeConfigurationPointName(key);
+                Map<String, String> params = parseNamespaceUriAndParams(value);
+                String namespaceUri = assertNotNull(params.get(NAMESPACE_URI_KEY), "namespaceUri");
 
-        for (Entry<String, String> entry : mappings.entrySet()) {
-            String name = normalizeConfigurationPointName(entry.getKey());
-            Map<String, String> params = parseNamespaceUriAndParams(entry.getValue());
-            String namespaceUri = assertNotNull(params.get(NAMESPACE_URI_KEY), "namespaceUri");
+                if (!namespaceUri.endsWith(name)) {
+                    throw new ConfigurationPointException("Naming Convention Violation: namespace URI [" + namespaceUri
+                                                          + "] of configuration point should end with its name [" + name
+                                                          + "].  This configuration point is located at " + configurationPointsLocation + ".");
+                }
 
-            if (!namespaceUri.endsWith(name)) {
-                throw new ConfigurationPointException("Naming Convention Violation: namespace URI [" + namespaceUri
-                                                      + "] of configuration point should end with its name [" + name
-                                                      + "].  This configuration point is located at " + configurationPointsLocation + ".");
+                String defaultElementName = params.get(DEFAULT_ELEMENT_KEY);
+                String preferredNsPrefix = params.get(PREFERRED_NS_PREFIX);
+
+                ConfigurationPoint cp = new ConfigurationPointImpl(
+                        ConfigurationPointsImpl.this, settings, name, namespaceUri, defaultElementName, preferredNsPrefix,
+                        new SourceInfoSupport<SourceInfo<?>>().setSource(source, lineNumber));
+
+                namespaceUriToConfigurationPoints.put(namespaceUri, cp);
+                nameToConfigurationPoints.put(name, cp);
             }
-
-            String defaultElementName = params.get(DEFAULT_ELEMENT_KEY);
-            String preferredNsPrefix = params.get(PREFERRED_NS_PREFIX);
-            ConfigurationPoint cp = new ConfigurationPointImpl(this, settings, name, namespaceUri, defaultElementName,
-                                                               preferredNsPrefix);
-
-            namespaceUriToConfigurationPoints.put(namespaceUri, cp);
-            nameToConfigurationPoints.put(name, cp);
-        }
+        });
 
         if (log.isDebugEnabled()) {
             ToStringBuilder buf = new ToStringBuilder();

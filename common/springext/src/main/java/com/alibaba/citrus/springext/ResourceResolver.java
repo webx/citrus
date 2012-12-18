@@ -19,14 +19,18 @@ package com.alibaba.citrus.springext;
 
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.ClassUtil.*;
+import static com.alibaba.citrus.util.CollectionUtil.*;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.InputStreamSource;
 
 /**
@@ -42,6 +46,8 @@ import org.springframework.core.io.InputStreamSource;
  * @author Michael Zhou
  */
 public abstract class ResourceResolver {
+    protected final Logger log = LoggerFactory.getLogger(getClass());
+
     /**
      * 取得指定位置的一个资源。
      * 如果资源不存在，则返回<code>null</code>。
@@ -57,30 +63,46 @@ public abstract class ResourceResolver {
     @NotNull
     public abstract Resource[] getResources(@NotNull String locationPattern) throws IOException;
 
-    /** 从<code>ResourceResolver</code>中读取所有指定名称的资源文件，将其中的<code>key=value</code>汇总成一个<code>Map</code>。 */
-    @NotNull
-    public final Map<String, String> loadAllProperties(String resourceName) throws IOException {
+    /** 从<code>ResourceResolver</code>中读取所有指定名称的资源文件，对每一个key/value调用handler。 */
+    public final void loadAllProperties(String resourceName, PropertyHandler handler)
+            throws ConfigurationPointException {
         assertNotNull(resourceName, "Resource name must not be null");
+        assertNotNull(handler, "No handler provided");
 
-        Map<?, ?> props = new Properties();
+        Map<String, Resource> keyToResources = createHashMap();
 
-        for (Resource resource : getResources(resourceName)) {
-            InputStream is = null;
+        try {
+            for (Resource resource : getResources(resourceName)) {
+                Properties props = new Properties();
+                InputStream is = null;
 
-            try {
-                is = resource.getInputStream();
-                ((Properties) props).load(is);
-            } finally {
-                if (is != null) {
-                    is.close();
+                try {
+                    is = resource.getInputStream();
+                    props.load(is);
+
+                    for (Entry<Object, Object> entry : props.entrySet()) {
+                        String key = (String) entry.getKey();
+                        String value = (String) entry.getValue();
+
+                        if (keyToResources.containsKey(key)) {
+                            log.warn("Duplicated key \"{}\" in {} and {}", new Object[] { key, resource, keyToResources.get(key) });
+                        } else {
+                            keyToResources.put(key, resource);
+                            handler.handle(key, value, resource, -1); // no line number supported in this implementation
+                        }
+                    }
+                } finally {
+                    if (is != null) {
+                        try {
+                            is.close();
+                        } catch (IOException ignored) {
+                        }
+                    }
                 }
             }
+        } catch (IOException e) {
+            throw new ConfigurationPointException("Unable to load data from " + resourceName, e);
         }
-
-        @SuppressWarnings("unchecked")
-        Map<String, String> result = (Map<String, String>) props;
-
-        return result;
     }
 
     public static abstract class Resource implements InputStreamSource {
@@ -93,5 +115,9 @@ public abstract class ResourceResolver {
             String desc = getName();
             return getSimpleClassName(getClass()) + (desc == null ? "" : "[" + desc + "]");
         }
+    }
+
+    public static interface PropertyHandler {
+        void handle(String key, String value, Resource source, int lineNumber);
     }
 }

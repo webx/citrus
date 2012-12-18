@@ -25,11 +25,9 @@ import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static java.util.Collections.*;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import com.alibaba.citrus.springext.ConfigurationPoint;
@@ -38,8 +36,13 @@ import com.alibaba.citrus.springext.ConfigurationPoints;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.ContributionType;
+import com.alibaba.citrus.springext.ResourceResolver.PropertyHandler;
+import com.alibaba.citrus.springext.ResourceResolver.Resource;
 import com.alibaba.citrus.springext.Schema;
+import com.alibaba.citrus.springext.SourceInfo;
 import com.alibaba.citrus.springext.VersionableSchemas;
+import com.alibaba.citrus.springext.support.ConfigurationPointSourceInfo;
+import com.alibaba.citrus.springext.support.SourceInfoSupport;
 import com.alibaba.citrus.springext.support.parser.DefaultElementDefinitionParser;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
@@ -60,7 +63,8 @@ import org.springframework.util.ClassUtils;
  *
  * @author Michael Zhou
  */
-public class ConfigurationPointImpl extends NamespaceHandlerSupport implements ConfigurationPoint, NamespaceHandler {
+public class ConfigurationPointImpl extends NamespaceHandlerSupport
+        implements ConfigurationPoint, NamespaceHandler, ConfigurationPointSourceInfo {
     private final static Logger log = LoggerFactory.getLogger(ConfigurationPoint.class);
     private final ConfigurationPoints                cps;
     private final ConfigurationPointSettings         settings;
@@ -72,11 +76,12 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
     private final Map<ContributionKey, Contribution> contributions;
     private final Map<String, Contribution>          dependingContributions;
     private final Collection<Contribution>           dependingContributionsUnmodifiable;
+    private final SourceInfo<SourceInfo<?>>          sourceInfo;
     private       VersionableSchemas                 schemas;
     private       boolean                            initialized;
 
     ConfigurationPointImpl(ConfigurationPoints cps, ConfigurationPointSettings settings, String name,
-                           String namespaceUri, String defaultElementName, String preferredNsPrefix) {
+                           String namespaceUri, String defaultElementName, String preferredNsPrefix, SourceInfo<SourceInfo<?>> sourceInfo) {
         this.cps = cps;
         this.settings = settings;
         this.name = assertNotNull(name, "name");
@@ -87,6 +92,7 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
         this.contributions = createTreeMap();
         this.dependingContributions = createHashMap();
         this.dependingContributionsUnmodifiable = unmodifiableCollection(dependingContributions.values());
+        this.sourceInfo = assertNotNull(sourceInfo, "sourceInfo");
     }
 
     public ConfigurationPoints getConfigurationPoints() {
@@ -152,46 +158,44 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
         }
     }
 
-    private void loadContributions(ContributionType contribType) {
-        String contribLocation = contributionLocationPrefix + contribType.getContributionsLocationSuffix();
-        Map<String, String> mappings;
+    private void loadContributions(final ContributionType contribType) {
+        final String contribLocation = contributionLocationPrefix + contribType.getContributionsLocationSuffix();
 
         log.trace("Trying to load contributions at {}", contribLocation);
 
-        try {
-            mappings = settings.resourceResolver.loadAllProperties(contribLocation);
-        } catch (IOException e) {
-            throw new ConfigurationPointException("Unable to load Contributions from " + contribLocation, e);
-        }
+        final Map<String, String> sortedMappings = createTreeMap();
 
-        Map<String, String> sortedMappings = createTreeMap();
+        settings.resourceResolver.loadAllProperties(contribLocation, new PropertyHandler() {
+            public void handle(String key, String value, Resource source, int lineNumber) {
+                String contribName = trimToNull(key);
+                String contribClassName = trimToNull(value);
 
-        for (Entry<String, String> entry : mappings.entrySet()) {
-            String contribName = trimToNull(entry.getKey());
-            String contribClassName = trimToNull(entry.getValue());
+                if (getDefaultElementName() != null && isEquals(contribName, getDefaultElementName())) {
+                    throw new FatalBeanException(
+                            "Contribution has a same name as the default element name for configuration point: contributionType="
+                            + contribType + ", contribuitionClass=" + contribClassName + ", contributionName="
+                            + contribName + ", configurationPoint=" + getName() + ", namespaceUri="
+                            + getNamespaceUri());
+                }
 
-            if (getDefaultElementName() != null && isEquals(contribName, getDefaultElementName())) {
-                throw new FatalBeanException(
-                        "Contribution has a same name as the default element name for configuration point: contributionType="
-                        + contribType + ", contribuitionClass=" + contribClassName + ", contributionName="
-                        + contribName + ", configurationPoint=" + getName() + ", namespaceUri="
-                        + getNamespaceUri());
+                sortedMappings.put(contribName, contribClassName);
+
+                ContributionImpl contrib = new ContributionImpl(
+                        ConfigurationPointImpl.this, settings, contribType, contribName, contribClassName,
+                        new SourceInfoSupport<ConfigurationPointSourceInfo>(ConfigurationPointImpl.this).setSource(source, lineNumber));
+
+                Contribution existContrib = contributions.get(contrib.getKey());
+
+                if (existContrib != null) {
+                    throw new ConfigurationPointException("Duplicated contributions from locations: " + contribLocation
+                                                          + "\n" + "     " + existContrib + "\n and " + contrib);
+                }
+
+                register(contrib);
+
+                contributions.put(contrib.getKey(), contrib);
             }
-
-            sortedMappings.put(contribName, contribClassName);
-
-            ContributionImpl contrib = new ContributionImpl(this, settings, contribType, contribName, contribClassName);
-            Contribution existContrib = contributions.get(contrib.getKey());
-
-            if (existContrib != null) {
-                throw new ConfigurationPointException("Duplicated contributions from locations: " + contribLocation
-                                                      + "\n" + "     " + existContrib + "\n and " + contrib);
-            }
-
-            register(contrib);
-
-            contributions.put(contrib.getKey(), contrib);
-        }
+        });
 
         if (log.isDebugEnabled() && !sortedMappings.isEmpty()) {
             ToStringBuilder buf = new ToStringBuilder();
@@ -294,7 +298,8 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
         Document schemaSource = createConfigurationPointSchema(this, null);
 
         return SchemaImpl.createForConfigurationPoint(
-                schemaName, null, namespaceUri, preferredNsPrefix, getDescription(), schemaSource);
+                schemaName, null, namespaceUri, preferredNsPrefix, getDescription(), schemaSource,
+                new SourceInfoSupport<ConfigurationPointSourceInfo>(this));
     }
 
     private Schema[] loadVersionedSchemas(String mainName) {
@@ -313,7 +318,8 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
             Document schemaSource = createConfigurationPointSchema(this, version);
 
             schemas[i++] = SchemaImpl.createForConfigurationPoint(
-                    schemaName, version, namespaceUri, preferredNsPrefix, getDescription(), schemaSource);
+                    schemaName, version, namespaceUri, preferredNsPrefix, getDescription(), schemaSource,
+                    new SourceInfoSupport<ConfigurationPointSourceInfo>(this));
         }
 
         return schemas;
@@ -321,6 +327,18 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport implements C
 
     public String getDescription() {
         return String.format("ConfigurationPoint[%s]", name);
+    }
+
+    public SourceInfo<?> getParent() {
+        return sourceInfo.getParent();
+    }
+
+    public Resource getSource() {
+        return sourceInfo.getSource();
+    }
+
+    public int getLineNumber() {
+        return sourceInfo.getLineNumber();
     }
 
     @Override
