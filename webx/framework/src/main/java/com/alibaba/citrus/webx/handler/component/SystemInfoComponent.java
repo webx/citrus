@@ -71,6 +71,7 @@ public class SystemInfoComponent extends PageComponent implements ProductionMode
             // Webx info
             keyValues.put("Webx Version", WebxUtil.getWebxVersion());
             keyValues.put("Spring Version", SpringVersion.getVersion());
+            keyValues.put("Servlet API Version", WebxUtil.getServletApiVersion(context.getServletContext()));
             keyValues.put("Running Mode", productionMode ? "Production Mode" : "Development Mode");
 
             // Java info

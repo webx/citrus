@@ -20,6 +20,7 @@ package com.alibaba.citrus.webx.util;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.citrus.webx.WebxComponent;
@@ -55,5 +56,10 @@ public class WebxUtil {
         }
 
         return version;
+    }
+
+    /** 取得servlet API版本。 */
+    public static String getServletApiVersion(ServletContext servletContext) {
+        return servletContext.getMajorVersion() + "." + servletContext.getMinorVersion();
     }
 }
