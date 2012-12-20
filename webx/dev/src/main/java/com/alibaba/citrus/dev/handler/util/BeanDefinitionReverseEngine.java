@@ -163,7 +163,7 @@ public class BeanDefinitionReverseEngine {
             beanElement.addAttribute("depends-on", new RefValue(bd.getDependsOn()));
         }
 
-        if (bd.getScope() != null && !"singleton".equals(bd.getScope())) {
+        if (!isEmpty(bd.getScope()) && !"singleton".equals(bd.getScope())) {
             beanElement.addAttribute("scope", bd.getScope());
         }
 
