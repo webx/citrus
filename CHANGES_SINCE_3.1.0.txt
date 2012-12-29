@@ -105,3 +105,4 @@
 * Bugfix: <renderResultAsJson> valve，当redirect发生时，仍然执行渲染的问题。
 
 * 改进Navigator接口，添加了forwardTo(target, action, actionEvent)方法，使之可内部重定向到指定action。
+* Bugfix: 当requestContext初始化失败时，错误处理程序报NPE的问题。

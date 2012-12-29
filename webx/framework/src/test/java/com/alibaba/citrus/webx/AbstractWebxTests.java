@@ -39,7 +39,10 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.citrus.service.pipeline.PipelineContext;
+import com.alibaba.citrus.service.requestcontext.RequestContext;
+import com.alibaba.citrus.service.requestcontext.RequestContextFactory;
 import com.alibaba.citrus.service.requestcontext.rundata.RunData;
+import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextFactory;
 import com.alibaba.citrus.util.ServletUtil;
 import com.alibaba.citrus.util.internal.Servlet3Util;
 import com.alibaba.citrus.util.io.StreamUtil;
@@ -65,6 +68,8 @@ public abstract class AbstractWebxTests {
     protected WebResponse       clientResponse;
     protected int               clientResponseCode;
     protected String            clientResponseContent;
+
+    protected static final ThreadLocal<RequestContextFactory> requestContextFactoryHolder = new ThreadLocal<RequestContextFactory>();
 
     static {
         Servlet3Util.setDisableServlet3Features(true); // 禁用servlet3，因为httpunit还不支持
@@ -116,6 +121,7 @@ public abstract class AbstractWebxTests {
     public void dispose() {
         TestValve.runnerHolder.remove();
         TestExceptionValve.runnerHolder.remove();
+        requestContextFactoryHolder.remove();
     }
 
     /** 设置<code>WebxDispatcherServlet.internalHandlerMapping.errorHandler</code>。 */
@@ -214,6 +220,26 @@ public abstract class AbstractWebxTests {
         }
 
         public void destroy() {
+        }
+    }
+
+    public static class RequestContextTesterFactory extends AbstractRequestContextFactory<RequestContext> {
+        public RequestContext getRequestContextWrapper(RequestContext wrappedContext) {
+            RequestContextFactory<RequestContext> threadLocalFactory = requestContextFactoryHolder.get();
+
+            if (threadLocalFactory == null) {
+                return wrappedContext;
+            } else {
+                return threadLocalFactory.getRequestContextWrapper(wrappedContext);
+            }
+        }
+
+        public String[] getFeatures() {
+            return null;
+        }
+
+        public FeatureOrder[] featureOrders() {
+            return null;
         }
     }
 }

@@ -28,7 +28,9 @@ import java.util.Map;
 import javax.servlet.ServletException;
 
 import com.alibaba.citrus.service.pipeline.PipelineContext;
+import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.rundata.RunData;
+import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextFactory;
 import com.alibaba.citrus.webx.AbstractWebxTests;
 import com.alibaba.citrus.webx.BadRequestException;
 import com.alibaba.citrus.webx.ResourceNotFoundException;
@@ -74,6 +76,31 @@ public class WebxRootControllerTests extends AbstractWebxTests {
 
         assertEquals(200, clientResponseCode);
         assertEquals("hello!", clientResponseContent.trim()); // text from valve
+    }
+
+    @Test
+    public void requestContextFailed() throws Exception {
+        requestContextFactoryHolder.set(new AbstractRequestContextFactory() {
+            @Override
+            public RequestContext getRequestContextWrapper(RequestContext wrappedContext) {
+                throw new IllegalArgumentException("ouch!");
+            }
+
+            public String[] getFeatures() {
+                return null;
+            }
+
+            public FeatureOrder[] featureOrders() {
+                return null;
+            }
+        });
+
+        invokeServlet("/myapps/app1/test.htm");
+
+        assertEquals(500, clientResponseCode);
+        assertEquals("text/html", clientResponse.getContentType());
+        assertThat(clientResponseContent,
+                   containsAll("<pre>", "</pre>", IllegalArgumentException.class.getName(), "ouch!"));
     }
 
     @Test

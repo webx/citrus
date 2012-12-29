@@ -168,7 +168,7 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
                 giveUpControl(requestContext, chain);
             }
         } catch (Throwable e) {
-            handleException(requestContext, e);
+            handleException(requestContext, request, response, e);
         } finally {
             commitRequest(requestContext);
         }
@@ -204,9 +204,14 @@ public abstract class AbstractWebxRootController implements WebxRootController, 
      * 3. 假如不幸errorHandler本身遇到异常，则servlet engine就会接管这个异常。通常是显示web.xml中指定的错误页面。
      * 这种情况下，新老异常都会被记录到日志中。
      */
-    private void handleException(RequestContext requestContext, Throwable e) throws ServletException, IOException {
-        HttpServletRequest request = requestContext.getRequest();
-        HttpServletResponse response = requestContext.getResponse();
+    private void handleException(RequestContext requestContext, HttpServletRequest request, HttpServletResponse response, Throwable e)
+            throws ServletException, IOException {
+        // 当requestContext初始化失败时，requestContext可能为null。
+        // 此时直接使用原始的request/response对象。
+        if (requestContext != null) {
+            request = requestContext.getRequest();
+            response = requestContext.getResponse();
+        }
 
         try {
             try {
