@@ -196,6 +196,7 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
         if (!isEquals(target, redirectTarget)) {
             this.redirectTarget = redirectTarget;
             this.action = null;
+            this.actionEvent = null;
         }
     }
 
@@ -330,7 +331,17 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
     }
 
     public Parameters forwardTo(String target) {
+        return forwardTo(target, null, null);
+    }
+
+    public Parameters forwardTo(String target, String action, String actionEvent) {
         setRedirectTarget(target);
+
+        if (action != null || actionEvent != null) {
+            setAction(action);
+            setActionEvent(actionEvent);
+        }
+
         return forwardParameters;
     }
 

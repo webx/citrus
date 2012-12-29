@@ -28,6 +28,9 @@ public interface Navigator {
     /** 进行内部重定向，指定一个target名称。 */
     Parameters forwardTo(String target);
 
+    /** 进行内部重定向，指定一个target名称，action，actionEvent。 */
+    Parameters forwardTo(String target, String action, String actionEvent);
+
     /** 进行外部重定向，指定一个uri broker的名称。 */
     RedirectParameters redirectTo(String uriName);
 
