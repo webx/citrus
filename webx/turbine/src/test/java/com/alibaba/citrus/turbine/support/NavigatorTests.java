@@ -50,6 +50,9 @@ public class NavigatorTests extends AbstractWebxTests {
         assertFalse(rundata.isRedirected());
         assertTrue(rundata.getParameters().isEmpty());
 
+        rundata.setAction("myAction");
+        rundata.setActionEvent("myActionEvent");
+
         rundata.forwardTo("hello").withParameter("aaa", "111").withParameter("bbb", "222", "333")
                .withParameter("ccc", (String) null).withParameter("ddd", (String[]) null);
 
@@ -59,6 +62,25 @@ public class NavigatorTests extends AbstractWebxTests {
         assertArrayEquals(new String[] { "111" }, rundata.getParameters().getStrings("aaa"));
         assertArrayEquals(new String[] { "222", "333" }, rundata.getParameters().getStrings("bbb"));
         assertEquals(null, rundata.getParameters().getString("ccc"));
+
+        // action参数被清除
+        assertNull(rundata.getAction());
+        assertNull(rundata.getActionEvent());
+    }
+
+    @Test
+    public void forward_withAction() {
+        assertFalse(rundata.isRedirected());
+        assertTrue(rundata.getParameters().isEmpty());
+
+        rundata.forwardTo("hello", "newAction", "newActionEvent");
+
+        assertTrue(rundata.isRedirected());
+        assertEquals("hello", rundata.getRedirectTarget());
+        assertEquals(0, rundata.getParameters().size());
+
+        assertEquals("newAction", rundata.getAction());
+        assertEquals("newActionEvent", rundata.getActionEvent());
     }
 
     @Test

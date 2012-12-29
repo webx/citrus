@@ -59,30 +59,38 @@ public class TurbineRunDataTests extends AbstractWebxTests {
         assertNull(rundata.getRedirectTarget());
         assertNull(rundata.getTarget());
         assertNull(rundata.getAction());
+        assertNull(rundata.getActionEvent());
 
         // target=null, redirectTarget=null
         // target不变，所以action不清除
         rundata.setAction("myaction");
+        rundata.setActionEvent("myactionevent");
         rundata.setRedirectTarget(null);
         assertEquals("myaction", rundata.getAction());
 
         // target=null, redirectTarget=test
         rundata.setAction("myaction");
+        rundata.setActionEvent("myactionevent");
         rundata.setRedirectTarget("test");
         assertEquals(null, rundata.getAction());
+        assertEquals(null, rundata.getActionEvent());
 
         // target=test, redirectTarget=test
         // target不变，所以action不清除
         rundata.setAction("myaction");
+        rundata.setActionEvent("myactionevent");
         rundata.setTarget("test");
         rundata.setRedirectTarget("test");
         assertEquals("myaction", rundata.getAction());
+        assertEquals("myactionevent", rundata.getActionEvent());
 
         // target=test, redirectTarget=test
         rundata.setAction("myaction");
+        rundata.setActionEvent("myactionevent");
         rundata.setTarget("test");
         rundata.setRedirectTarget("test2");
         assertEquals(null, rundata.getAction());
+        assertEquals(null, rundata.getActionEvent());
     }
 
     @Test
