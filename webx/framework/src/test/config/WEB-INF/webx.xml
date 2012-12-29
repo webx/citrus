@@ -36,6 +36,7 @@
 
     <services:request-contexts xmlns="http://www.alibaba.com/schema/services/request-contexts">
         <rundata />
+        <request-context class="com.alibaba.citrus.webx.AbstractWebxTests.RequestContextTesterFactory" />
     </services:request-contexts>
 
     <beans:bean id="componentsAware"
