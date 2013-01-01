@@ -9,14 +9,14 @@
     ">
 
     <services:property-editor-registrars>
-        <services:property-editor-registrar
+        <property-editor-registrar
                 class="com.alibaba.citrus.service.configuration.PropertyEditorRegistrarsTests$MyRegistrar"
                 p:type="long" />
     </services:property-editor-registrars>
 
     <services:property-editor-registrars id="registrarsRef">
-        <services:property-editor-registrar ref="propertyEditorRegistrars" />
-        <services:property-editor-registrar
+        <property-editor-registrar ref="propertyEditorRegistrars" />
+        <property-editor-registrar
                 class="com.alibaba.citrus.service.configuration.PropertyEditorRegistrarsTests$MyRegistrar"
                 p:type="java.lang.Long" />
     </services:property-editor-registrars>
