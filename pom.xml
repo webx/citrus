@@ -45,7 +45,7 @@
         <java.version>1.6</java.version>
         <java.encoding>UTF-8</java.encoding>
         <webx-version>3.1.2</webx-version>
-        <spring-version>3.1.1.RELEASE</spring-version>
+        <spring-version>3.1.2.RELEASE</spring-version>
         <springext-plugin-version>1.0</springext-plugin-version>
         <maven-util-version>1.0</maven-util-version>
         <jetty-version>8.1.7.v20120910</jetty-version>
