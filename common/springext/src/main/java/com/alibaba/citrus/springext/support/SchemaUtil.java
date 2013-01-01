@@ -150,7 +150,6 @@ public class SchemaUtil {
         schemaRoot.addNamespace("", configurationPoint.getNamespaceUri());
 
         schemaRoot.addAttribute("targetNamespace", configurationPoint.getNamespaceUri());
-        schemaRoot.addAttribute("elementFormDefault", "qualified");
 
         // <xsd:include schemaLocation="contribution schema" />
         Set<String> includings = createTreeSet();
@@ -234,6 +233,15 @@ public class SchemaUtil {
                 // 但是Intellij IDEA似乎不能正确学习到contribution schema的namespace，除非加上这些声明。
                 root.addNamespace("", thisCp.getNamespaceUri());
                 root.addAttribute("targetNamespace", thisCp.getNamespaceUri());
+
+                // 将内部element/attribute设置了不需要namespace。
+                if (root.attribute("elementFormDefault") != null) {
+                    root.remove(root.attribute("elementFormDefault"));
+                }
+
+                if (root.attribute("attributeFormDefault") != null) {
+                    root.remove(root.attribute("attributeFormDefault"));
+                }
 
                 visitElement(root);
 

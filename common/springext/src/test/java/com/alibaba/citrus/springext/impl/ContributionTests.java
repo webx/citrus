@@ -138,6 +138,8 @@ public class ContributionTests {
     private void assertSchemaText(String text, int caseNo) {
         text = text.replaceAll("\\s+", " "); // 去除换行，便于检查
 
+        String elementQualified = "elementFormDefault=\"qualified\"";
+
         String import_cp1 = "<xsd:import namespace=\"http://www.alibaba.com/schema/my/cp1\"";
         String import_cp1_location = "<xsd:import namespace=\"http://www.alibaba.com/schema/my/cp1\" schemaLocation=\"my-cp1.xsd\"/>";
 
@@ -173,6 +175,8 @@ public class ContributionTests {
 
         switch (caseNo) {
             case 1:
+                assertThat(text, not(containsString(elementQualified))); // my/cp1/test1.xsd包含elementFormDefault，但被强制去除。
+
                 assertThat(text, not(containsString(import_cp1)));
                 assertThat(text, containsString(import_cp2_specificLocation));
 
@@ -187,6 +191,8 @@ public class ContributionTests {
                 break;
 
             case 2:
+                assertThat(text, not(containsString(elementQualified))); // my/cp1/test2.xsd包含elementFormDefault，但被强制去除。
+
                 assertThat(text, not(containsString(import_cp1)));
                 assertThat(text, containsString(import_cp2_location));
 

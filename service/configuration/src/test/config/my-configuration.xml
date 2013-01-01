@@ -8,16 +8,16 @@
         http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
     ">
 
-    <my-configuration id="conf1" parentRef="myConfiguration"
-                      xmlns="http://www.alibaba.com/schema/services">
+    <services:my-configuration id="conf1" parentRef="myConfiguration"
+               >
         <productionMode>true</productionMode>
         <stringValue>stringValue</stringValue>
         <myBean1Ref>myBean1</myBean1Ref>
-    </my-configuration>
+    </services:my-configuration>
 
-    <my-configuration xmlns="http://www.alibaba.com/schema/services" primary="true">
+    <services:my-configuration primary="true">
         <myBean3Ref>myBean3_haha</myBean3Ref>
-    </my-configuration>
+    </services:my-configuration>
 
     <beans:bean id="myBean2" class="com.alibaba.citrus.service.configuration.MyBean2" />
     <beans:bean id="myBean3_haha" class="com.alibaba.citrus.service.configuration.MyBean3" />

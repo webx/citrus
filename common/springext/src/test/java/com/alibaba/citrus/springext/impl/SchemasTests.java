@@ -67,10 +67,10 @@ public class SchemasTests {
         System.out.println("--");
         System.out.println(content);
 
-        assertThat(
-                content,
-                containsAll("xmlns=\"http://www.alibaba.com/test1/cp1\"",
-                            "targetNamespace=\"http://www.alibaba.com/test1/cp1\"", "elementFormDefault=\"qualified\""));
+        assertThat(content, allOf(
+                containsAll("xmlns=\"http://www.alibaba.com/test1/cp1\"", "targetNamespace=\"http://www.alibaba.com/test1/cp1\""),
+                not(containsString("elementFormDefault=\"qualified\""))
+        ));
     }
 
     @Test
@@ -92,10 +92,10 @@ public class SchemasTests {
         System.out.println("--");
         System.out.println(content);
 
-        assertThat(
-                content,
-                containsAll("xmlns=\"http://www.alibaba.com/test6/cp1\"",
-                            "targetNamespace=\"http://www.alibaba.com/test6/cp1\"", "elementFormDefault=\"qualified\""));
+        assertThat(content, allOf(
+                containsAll("xmlns=\"http://www.alibaba.com/test6/cp1\"", "targetNamespace=\"http://www.alibaba.com/test6/cp1\""),
+                not(containsString("elementFormDefault=\"qualified\""))
+        ));
     }
 
     @Test
@@ -118,10 +118,10 @@ public class SchemasTests {
         System.out.println("--");
         System.out.println(content);
 
-        assertThat(
-                content,
-                containsAll("xmlns=\"http://www.alibaba.com/test7/dir/cp1\"",
-                            "targetNamespace=\"http://www.alibaba.com/test7/dir/cp1\"", "elementFormDefault=\"qualified\""));
+        assertThat(content, allOf(
+                containsAll("xmlns=\"http://www.alibaba.com/test7/dir/cp1\"", "targetNamespace=\"http://www.alibaba.com/test7/dir/cp1\""),
+                not(containsString("elementFormDefault=\"qualified\""))
+        ));
     }
 
     @Test
@@ -184,10 +184,10 @@ public class SchemasTests {
         System.out.println("--");
         System.out.println(content);
 
-        assertThat(
-                content,
-                containsAll("xmlns=\"http://www.alibaba.com/my/services\"",
-                            "targetNamespace=\"http://www.alibaba.com/my/services\"", "elementFormDefault=\"qualified\""));
+        assertThat(content, allOf(
+                containsAll("xmlns=\"http://www.alibaba.com/my/services\"", "targetNamespace=\"http://www.alibaba.com/my/services\""),
+                not(containsString("elementFormDefault=\"qualified\""))
+        ));
         assertThat(
                 content,
                 containsAll("<xsd:include", "schemaLocation=\"my/services/service1.xsd\"",
@@ -199,10 +199,11 @@ public class SchemasTests {
         System.out.println("--");
         System.out.println(content);
 
-        assertThat(
-                content,
-                containsAll("xmlns=\"http://www.alibaba.com/my/services\"",
-                            "targetNamespace=\"http://www.alibaba.com/my/services\"", "elementFormDefault=\"qualified\""));
+        assertThat(content, allOf(
+                containsAll("xmlns=\"http://www.alibaba.com/my/services\"", "targetNamespace=\"http://www.alibaba.com/my/services\""),
+                not(containsString("elementFormDefault=\"qualified\""))
+        ));
+
         assertThat(
                 content,
                 containsAll("<xsd:include", "schemaLocation=\"my/services/service1-1.0.xsd\"",
@@ -214,10 +215,11 @@ public class SchemasTests {
         System.out.println("--");
         System.out.println(content);
 
-        assertThat(
-                content,
-                containsAll("xmlns=\"http://www.alibaba.com/my/services\"",
-                            "targetNamespace=\"http://www.alibaba.com/my/services\"", "elementFormDefault=\"qualified\""));
+        assertThat(content, allOf(
+                containsAll("xmlns=\"http://www.alibaba.com/my/services\"", "targetNamespace=\"http://www.alibaba.com/my/services\""),
+                not(containsString("elementFormDefault=\"qualified\""))
+        ));
+
         assertThat(
                 content,
                 containsAll("<xsd:include", "schemaLocation=\"my/services/service1.xsd\"",

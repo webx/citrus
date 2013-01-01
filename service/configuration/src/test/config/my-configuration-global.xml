@@ -11,12 +11,12 @@
         http://www.alibaba.com/schema/services/request-contexts/session/stores http://localhost:8080/schema/services-request-contexts-session-stores.xsd
     ">
 
-    <my-configuration xmlns="http://www.alibaba.com/schema/services">
+    <services:my-configuration>
         <productionMode>true</productionMode>
         <stringValue>globalStringValue</stringValue>
         <myBean1Ref></myBean1Ref>
         <myBean2Ref>myBean2Global</myBean2Ref>
-    </my-configuration>
+    </services:my-configuration>
 
     <beans:bean id="myBean1" class="com.alibaba.citrus.service.configuration.MyBean1" />
     <beans:bean id="myBean2Global" class="com.alibaba.citrus.service.configuration.MyBean2" />
