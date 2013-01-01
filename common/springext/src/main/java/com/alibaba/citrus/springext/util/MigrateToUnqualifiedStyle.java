@@ -20,6 +20,7 @@ import java.util.Map;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.impl.SpringExtSchemaSet;
 import com.alibaba.citrus.springext.support.SchemaUtil;
+import com.alibaba.citrus.util.FileUtil;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -74,7 +75,7 @@ public class MigrateToUnqualifiedStyle {
         try {
             doc = SchemaUtil.readDocument(new FileInputStream(source), source.getAbsolutePath(), true);
         } catch (Exception e) {
-            log.warn("Failed to read file {}: {}", source.getAbsolutePath(), e.getMessage());
+            log.warn("Failed to read file {}: {}", getRelativePath(source), e.getMessage());
             return;
         }
 
@@ -105,7 +106,7 @@ public class MigrateToUnqualifiedStyle {
 
                 writeDocument(doc, fos);
             } catch (IOException e) {
-                log.warn("Failed to write to {}: {}", tmpFile.getAbsolutePath(), e.getMessage());
+                log.warn("Failed to write to {}: {}", getRelativePath(tmpFile), e.getMessage());
                 failed = true;
             } finally {
                 if (fos != null) {
@@ -132,7 +133,7 @@ public class MigrateToUnqualifiedStyle {
                 source.renameTo(backupFile);
                 tmpFile.renameTo(source);
 
-                log.info("Converted file: {}", source.getAbsolutePath());
+                log.info("Converted file: {}", getRelativePath(source));
             }
         }
     }
@@ -159,6 +160,10 @@ public class MigrateToUnqualifiedStyle {
 
     private boolean isConfigurationPointNamespace(String namespaceURI) {
         return schemas.getConfigurationPoints().getConfigurationPointByNamespaceUri(namespaceURI) != null;
+    }
+
+    private String getRelativePath(File f) {
+        return FileUtil.getRelativePath(new File("").getAbsolutePath(), f.getAbsolutePath());
     }
 
     private class Converter {
