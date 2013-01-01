@@ -4,7 +4,6 @@
              xmlns:filters="http://www.alibaba.com/schema/services/resource-loading/filters"
              xmlns:loaders="http://www.alibaba.com/schema/services/resource-loading/loaders"
              xmlns:beans="http://www.springframework.org/schema/beans"
-             xmlns:p="http://www.springframework.org/schema/p"
              xsi:schemaLocation="
         http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
         http://www.alibaba.com/schema/services/resource-loading/filters http://localhost:8080/schema/services-resource-loading-filters.xsd
@@ -13,15 +12,15 @@
     ">
 
     <services:resource-loading>
-        <services:resource-alias pattern="/" name="/webapp" />
-        <services:resource pattern="/webapp">
+        <resource-alias pattern="/" name="/webapp" />
+        <resource pattern="/webapp">
             <loaders:file-loader>
-                <loaders:path>test</loaders:path>
+                <path>test</path>
             </loaders:file-loader>
-        </services:resource>
-        <services:resource-filters pattern="/webapp">
+        </resource>
+        <resource-filters pattern="/webapp">
             <filters:xslt-filter xslt="test.xsl" />
-        </services:resource-filters>
+        </resource-filters>
     </services:resource-loading>
 
 </beans:beans>
