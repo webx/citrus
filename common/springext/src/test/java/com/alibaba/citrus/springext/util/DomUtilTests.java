@@ -82,7 +82,8 @@ public class DomUtilTests {
                        "beans@http://www.springframework.org/schema/beans", "noNsTag@null");
 
         // ns==root.ns
-        assertElements(subElements(root, sameNs(root)), "ns1Tag@ns1");
+        // sameNs也会匹配无ns的elements，这是为了使qualified模式下的parser能解析新版webx中的unqualified elements。
+        assertElements(subElements(root, sameNs(root)), "ns1Tag@ns1", "noNsTag@null");
 
         // ns==ns2
         assertElements(subElements(root, ns("ns2")), "ns2Tag@ns2");
@@ -103,11 +104,12 @@ public class DomUtilTests {
         assertElements(subElements(root, and(ns(null), name("noNsTag"))), "noNsTag@null");
 
         // 多重选择：or
-        assertElements(subElements(root, or(sameNs(root), ns("ns2"))), "ns1Tag@ns1", "ns2Tag@ns2");
+        // sameNs也会匹配无ns的elements
+        assertElements(subElements(root, or(sameNs(root), ns("ns2"))), "ns1Tag@ns1", "ns2Tag@ns2", "noNsTag@null");
 
         // 反向选择：not
-        assertElements(subElements(root, not(sameNs(root))), "ns2Tag@ns2",
-                       "beans@http://www.springframework.org/schema/beans", "noNsTag@null");
+        // sameNs也会匹配无ns的elements
+        assertElements(subElements(root, not(sameNs(root))), "ns2Tag@ns2", "beans@http://www.springframework.org/schema/beans");
 
         // 接受或报错
         try {

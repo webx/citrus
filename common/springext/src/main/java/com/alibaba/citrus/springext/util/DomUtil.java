@@ -126,9 +126,10 @@ public class DomUtil {
         boolean accept(Element element);
     }
 
-    /** 过滤出指定namespace下的elements。 */
+    /** 过滤出指定namespace下的elements，或不存在namespace的elements（unqualified）。 */
     public static ElementSelector sameNs(Element element) {
-        return ns(assertNotNull(element, "element").getNamespaceURI());
+        String namespaceURI = assertNotNull(element, "element").getNamespaceURI();
+        return or(ns(namespaceURI), ns(null));
     }
 
     /** 过滤出默认namespace，即beans名字空间下的elements。 */
