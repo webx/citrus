@@ -44,6 +44,8 @@ public class ConvertToUnqualifiedStyle {
     private final Logger log = LoggerFactory.getLogger(getClass());
     private final File[]             sources;
     private final SpringExtSchemaSet schemas;
+    private final boolean            forceConvert;
+    private final boolean            backup;
     private       int                convertedCount;
 
     /** 必须运行在适当的classpath下，否则不能取得configuration points。 */
@@ -58,10 +60,16 @@ public class ConvertToUnqualifiedStyle {
     }
 
     public ConvertToUnqualifiedStyle(File[] sources) {
+        this(sources, false, true);
+    }
+
+    public ConvertToUnqualifiedStyle(File[] sources, boolean forceConvert, boolean backup) {
         LogConfigurator.getConfigurator().configureDefault();
 
         this.sources = sources;
         this.schemas = new SpringExtSchemaSet();
+        this.forceConvert = forceConvert;
+        this.backup = backup;
     }
 
     public void convert() {
@@ -98,7 +106,7 @@ public class ConvertToUnqualifiedStyle {
 
         boolean modified = new Converter(doc).doConvert();
 
-        if (modified) {
+        if (modified || forceConvert) {
             File dir = source.getParentFile();
             String fileName = source.getName();
             int index = fileName.lastIndexOf(".");
@@ -133,20 +141,26 @@ public class ConvertToUnqualifiedStyle {
             if (failed) {
                 tmpFile.delete();
             } else {
-                File backupFile;
+                File backupFile = null;
 
-                for (int i = 0; ; i++) {
-                    backupFile = new File(dir, fileName + ".backup" + (i == 0 ? "" : "_" + i) + ext);
+                if (backup) {
+                    for (int i = 0; ; i++) {
+                        backupFile = new File(dir, fileName + ".backup" + (i == 0 ? "" : "_" + i) + ext);
 
-                    if (!backupFile.exists()) {
-                        break;
+                        if (!backupFile.exists()) {
+                            break;
+                        }
                     }
+
+                    source.renameTo(backupFile);
+                    log.info("  ... converted, original content saved as {}", getRelativePath(backupFile));
+                } else {
+                    source.delete();
+                    log.info("  ... converted");
                 }
 
-                source.renameTo(backupFile);
                 tmpFile.renameTo(source);
 
-                log.info("  ... converted, original content saved as {}", getRelativePath(backupFile));
                 convertedCount++;
             }
         } else {
