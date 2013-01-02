@@ -20,6 +20,8 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import com.alibaba.citrus.logconfig.LogConfigurator;
+import com.alibaba.citrus.springext.ConfigurationPoint;
+import com.alibaba.citrus.springext.ContributionType;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.impl.SpringExtSchemaSet;
 import com.alibaba.citrus.springext.support.SchemaUtil;
@@ -248,7 +250,8 @@ public class ConvertToUnqualifiedStyle {
             }
 
             // 如果当前ns和context ns不同
-            else if (!isEquals(namespaceURI, getContextNamespaceURI())) {
+            else if (!isEquals(namespaceURI, getContextNamespaceURI())
+                     || isContributionElement(namespaceURI, element.getName())) {
                 try {
                     namespaceURIStack.push(namespaceURI);
                     setNamespacePrefix(element, namespaceURI);
@@ -273,6 +276,17 @@ public class ConvertToUnqualifiedStyle {
 
                 formatSchemaLocations();
             }
+        }
+
+        private boolean isContributionElement(String uri, String name) {
+            ConfigurationPoint cp = schemas.getConfigurationPoints().getConfigurationPointByNamespaceUri(uri);
+
+            if (cp != null) {
+                return name.equals(cp.getDefaultElementName()) // default element
+                       || cp.getContribution(name, ContributionType.BEAN_DEFINITION_PARSER) != null; // contribution
+            }
+
+            return false;
         }
 
         private void formatSchemaLocations() {
