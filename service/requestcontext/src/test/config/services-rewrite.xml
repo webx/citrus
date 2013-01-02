@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns:beans="http://www.springframework.org/schema/beans"
-             xmlns:p="http://www.springframework.org/schema/p"
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns:request-contexts="http://www.alibaba.com/schema/services/request-contexts"
              xmlns:rewrite-handlers="http://www.alibaba.com/schema/services/request-contexts/rewrite/handlers"
-             xmlns="http://www.alibaba.com/schema/services/request-contexts"
              xsi:schemaLocation="
-        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
-        http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
-        http://www.alibaba.com/schema/services/request-contexts/rewrite/handlers http://localhost:8080/schema/services-request-contexts-rewrite-handlers.xsd
-    ">
+                 http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+                 http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
+                 http://www.alibaba.com/schema/services/request-contexts/rewrite/handlers http://localhost:8080/schema/services-request-contexts-rewrite-handlers.xsd
+                 http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+             ">
 
     <!-- 测试rewrite request context: 缺少parser request context -->
     <services:request-contexts id="rewrite_missing_parser" sort="false" lazy-init="true">
-        <rewrite />
+        <request-contexts:rewrite />
     </services:request-contexts>
 
     <!-- 测试rewrite request context: 空rewrite规则 -->
     <services:request-contexts id="rewrite_empty" sort="false" lazy-init="true">
-        <parser />
-        <rewrite />
+        <request-contexts:parser />
+        <request-contexts:rewrite />
     </services:request-contexts>
 
     <!-- 测试rewrite request context -->
     <services:request-contexts id="rewrite" sort="false">
-        <parser />
-        <rewrite>
+        <request-contexts:parser />
+        <request-contexts:rewrite>
             <!-- 永久重定向，301 -->
             <rule pattern="/test1/hello.htm">
                 <substitution uri="/test1/new_hello.htm" flags="L,R=301" />
@@ -86,9 +85,7 @@
             <!-- Custom handlers：规格化URL -->
             <rule pattern="/test8">
                 <handlers>
-                    <rewrite-handlers:handler
-                            class="com.alibaba.citrus.service.requestcontext.rewrite.support.UrlNormalizer"
-                            />
+                    <rewrite-handlers:handler class="com.alibaba.citrus.service.requestcontext.rewrite.support.UrlNormalizer" />
                 </handlers>
             </rule>
             <rule pattern="/test_8/hello_world/index.htm">
@@ -127,7 +124,7 @@
             <rule pattern="/test7/hello.do">
                 <substitution uri="/test7/new_hello.do" flags="L,QSA" />
             </rule>
-        </rewrite>
+        </request-contexts:rewrite>
     </services:request-contexts>
 
 </beans:beans>
