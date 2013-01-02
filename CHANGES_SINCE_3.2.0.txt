@@ -1,0 +1,28 @@
+-- Changes in 3.2.0
+
+* 重要：从本版本开始，SpringExt所生成的schema和以前版本不完全兼容。差别在于，
+  以前的schema中有一个参数：elementFormDefault="qualified"，而新版本将采用unqualified值。
+  这意味着，XML配置文件被稍微地简化了。
+
+  以form service为例，原来是这样写的：
+  <services:form>
+      <services:group name="...">
+          <services:field name="...">
+              <validators:validator class="..." />
+          </services:field>
+      </services:group>
+  </services:form>
+
+  而现在，可不写内部element的namespace前缀：
+  <services:form>
+      <group name="...">
+          <field name="...">
+              <validators:validator class="..." />
+          </field>
+      </group>
+  </services:form>
+
+* DomUtil.sameNs(element)方法的定义被修改：
+  通过sameNs(element)可以选出和element具有相同namespace的elements，或者不包含namespace的elements（unqualified elements）。
+  而修改前，unqualified elements将不会被选出来。
+  这个修改的目的是使老版的webx中的bean definition parser代码（解析qualified elements）可用来解析新版webx中的unqualified elements。
