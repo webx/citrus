@@ -1,18 +1,18 @@
-<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns:services="http://www.alibaba.com/schema/services"
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:p="http://www.springframework.org/schema/p"
              xmlns:pull-tools="http://www.alibaba.com/schema/services/pull/factories"
+             xmlns:services="http://www.alibaba.com/schema/services"
              xmlns:uris="http://www.alibaba.com/schema/services/uris"
              xmlns:interceptors="http://www.alibaba.com/schema/services/uris/interceptors"
-             xmlns:beans="http://www.springframework.org/schema/beans"
-             xmlns:p="http://www.springframework.org/schema/p"
              xsi:schemaLocation="
-        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
-        http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
-        http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
-        http://www.alibaba.com/schema/services/uris http://localhost:8080/schema/services-uris.xsd
-        http://www.alibaba.com/schema/services/uris/interceptors http://localhost:8080/schema/services-uris-interceptors.xsd
-        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
-    ">
+                 http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+                 http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
+                 http://www.alibaba.com/schema/services/uris http://localhost:8080/schema/services-uris.xsd
+                 http://www.alibaba.com/schema/services/uris/interceptors http://localhost:8080/schema/services-uris-interceptors.xsd
+                 http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+             ">
 
     <services:property-placeholder />
 
@@ -21,104 +21,103 @@
         <uris:uri id="link" />
 
         <uris:uri id="link2" exposed="true" type="relative">
-            <uris:serverScheme>http</uris:serverScheme>
-            <uris:loginUser>myuser2</uris:loginUser>
-            <uris:loginPassword>mypass2</uris:loginPassword>
-            <uris:serverName>myservername2</uris:serverName>
-            <uris:serverPort>1234</uris:serverPort>
-            <uris:reference>myreference2</uris:reference>
-            <uris:path>aaa/a1</uris:path>
-            <uris:path>bbb</uris:path>
-            <uris:path>ccc/ddd</uris:path>
-            <uris:query key="aaa">1111</uris:query>
-            <uris:query key="bbb">2222</uris:query>
-            <uris:query key="ccc">3333</uris:query>
+            <serverScheme>http</serverScheme>
+            <loginUser>myuser2</loginUser>
+            <loginPassword>mypass2</loginPassword>
+            <serverName>myservername2</serverName>
+            <serverPort>1234</serverPort>
+            <reference>myreference2</reference>
+            <path>aaa/a1</path>
+            <path>bbb</path>
+            <path>ccc/ddd</path>
+            <query key="aaa">1111</query>
+            <query key="bbb">2222</query>
+            <query key="ccc">3333</query>
         </uris:uri>
         <uris:uri id="link3" extends="link2">
-            <uris:serverScheme>https</uris:serverScheme>
-            <uris:loginUser />
-            <uris:loginPassword />
-            <uris:serverName />
-            <uris:serverPort>0</uris:serverPort>
-            <uris:reference />
+            <serverScheme>https</serverScheme>
+            <loginUser />
+            <loginPassword />
+            <serverName />
+            <serverPort>0</serverPort>
+            <reference />
         </uris:uri>
         <uris:uri id="link4">
-            <uris:serverURI>http://user:pass@server:1234/a/b/c?a=1&amp;b=+&amp;c#ref</uris:serverURI>
+            <serverURI>http://user:pass@server:1234/a/b/c?a=1&amp;b=+&amp;c#ref</serverURI>
         </uris:uri>
 
         <uris:uri id="linkCharset" charset="GBK" exposed="true" />
 
         <uris:uri id="linkWithInterceptor" exposed="true">
-            <interceptors:interceptor
-                    class="com.alibaba.citrus.service.uribroker.interceptor.MyInterceptor" p:path="abc" />
+            <interceptors:interceptor class="com.alibaba.citrus.service.uribroker.interceptor.MyInterceptor"
+                                      p:path="abc" />
             <interceptors:randomize />
         </uris:uri>
 
         <uris:uri id="linkWithPathInterceptor">
-            <interceptors:interceptor
-                    class="com.alibaba.citrus.service.uribroker.interceptor.MyPathInterceptor"
-                    p:path="abc/def" />
+            <interceptors:interceptor class="com.alibaba.citrus.service.uribroker.interceptor.MyPathInterceptor"
+                                      p:path="abc/def" />
         </uris:uri>
 
         <!-- ContentURIBroker -->
         <uris:content-uri id="clink" />
         <uris:content-uri id="clink2">
-            <uris:prefixPath>myprefix2</uris:prefixPath>
-            <uris:contentPath>mycontent2</uris:contentPath>
+            <prefixPath>myprefix2</prefixPath>
+            <contentPath>mycontent2</contentPath>
         </uris:content-uri>
         <uris:content-uri id="clink3" extends="clink2">
-            <uris:contentPath />
+            <contentPath />
         </uris:content-uri>
         <uris:content-uri id="clink4" extends="link2" />
 
         <!-- ServletURIBroker -->
         <uris:servlet-uri id="servletLink" />
         <uris:servlet-uri id="servletLink2">
-            <uris:contextPath>mycontext2</uris:contextPath>
-            <uris:servletPath>myservlet2</uris:servletPath>
+            <contextPath>mycontext2</contextPath>
+            <servletPath>myservlet2</servletPath>
         </uris:servlet-uri>
         <uris:servlet-uri id="servletLink3" extends="servletLink2">
-            <uris:contextPath />
-            <uris:servletPath />
-            <uris:pathInfo>path1</uris:pathInfo>
-            <uris:pathInfo>path2</uris:pathInfo>
+            <contextPath />
+            <servletPath />
+            <pathInfo>path1</pathInfo>
+            <pathInfo>path2</pathInfo>
         </uris:servlet-uri>
 
         <!-- ServletContentURIBroker -->
         <uris:servlet-content-uri id="scontentLink" />
         <uris:servlet-content-uri id="scontentLink2">
-            <uris:contextPath>mycontext2</uris:contextPath>
-            <uris:prefixPath>myprefix2</uris:prefixPath>
-            <uris:contentPath>mycontent2</uris:contentPath>
+            <contextPath>mycontext2</contextPath>
+            <prefixPath>myprefix2</prefixPath>
+            <contentPath>mycontent2</contentPath>
         </uris:servlet-content-uri>
         <uris:servlet-content-uri id="scontentLink3" extends="scontentLink2">
-            <uris:contextPath />
-            <uris:contentPath />
+            <contextPath />
+            <contentPath />
         </uris:servlet-content-uri>
 
         <!-- TurbineClassicURIBroker -->
         <uris:turbine-classic-uri id="classicLink" />
         <uris:turbine-classic-uri id="classicLink2">
-            <uris:contextPath>mycontext2</uris:contextPath>
-            <uris:servletPath>myservlet2</uris:servletPath>
-            <uris:page>a/b/C</uris:page>
-            <uris:screen>a.B</uris:screen>
-            <uris:action>a.b.C</uris:action>
-            <uris:pathInfo key="aaa">111</uris:pathInfo>
-            <uris:pathInfo key="bbb">222</uris:pathInfo>
-            <uris:pathInfo key="ccc">333</uris:pathInfo>
+            <contextPath>mycontext2</contextPath>
+            <servletPath>myservlet2</servletPath>
+            <page>a/b/C</page>
+            <screen>a.B</screen>
+            <action>a.b.C</action>
+            <pathInfo key="aaa">111</pathInfo>
+            <pathInfo key="bbb">222</pathInfo>
+            <pathInfo key="ccc">333</pathInfo>
         </uris:turbine-classic-uri>
         <uris:turbine-classic-uri id="classicLink3" extends="classicLink2">
-            <uris:contextPath />
-            <uris:servletPath />
-            <uris:page />
-            <uris:screen />
-            <uris:action />
+            <contextPath />
+            <servletPath />
+            <page />
+            <screen />
+            <action />
         </uris:turbine-classic-uri>
 
         <!-- 替换变量 -->
         <uris:uri id="mylink">
-            <uris:serverName>${myserver}</uris:serverName>
+            <serverName>${myserver}</serverName>
         </uris:uri>
 
         <uris:uri id="randomized">
@@ -147,17 +146,20 @@
     </services:uris>
 
     <uris:uri id="standalone_uri">
-        <uris:serverURI>http://www.taobao.com/hello</uris:serverURI>
+        <serverURI>http://www.taobao.com/hello</serverURI>
     </uris:uri>
 
     <services:uris id="uri_bean">
         <uris:uri id="mybeanBase">
-            <uris:serverURI>http://myserver/aa/bb/cc</uris:serverURI>
+            <serverURI>http://myserver/aa/bb/cc</serverURI>
         </uris:uri>
 
         <!-- 任意bean -->
-        <uris:uri-bean id="mybean" class="com.alibaba.citrus.service.uribroker.uri.GenericURIBroker"
-                       exposed="true" extends="mybeanBase" p:serverScheme="https" />
+        <uris:uri-bean id="mybean"
+                       class="com.alibaba.citrus.service.uribroker.uri.GenericURIBroker"
+                       exposed="true"
+                       extends="mybeanBase"
+                       p:serverScheme="https" />
     </services:uris>
 
     <services:pull>
