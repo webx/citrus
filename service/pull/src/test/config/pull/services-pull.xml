@@ -1,34 +1,38 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns:services="http://www.alibaba.com/schema/services"
-             xmlns="http://www.alibaba.com/schema/services/pull/factories"
-             xmlns:beans="http://www.springframework.org/schema/beans"
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:util="http://www.springframework.org/schema/util"
              xmlns:p="http://www.springframework.org/schema/p"
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns:pull-factories="http://www.alibaba.com/schema/services/pull/factories"
              xsi:schemaLocation="
-        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
-        http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
-        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/util http://localhost:8080/schema/www.springframework.org/schema/util/spring-util.xsd
-    ">
+                 http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+                 http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
+                 http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+                 http://www.springframework.org/schema/util http://localhost:8080/schema/www.springframework.org/schema/util/spring-util.xsd
+             ">
 
     <services:pull>
-        <constants id="myconst" constantClass="javax.servlet.http.HttpServletResponse" />
+        <pull-factories:constants id="myconst" constantClass="javax.servlet.http.HttpServletResponse" />
 
-        <constants id="myconst2" constantClass="javax.servlet.http.HttpServletResponse"
-                   exposed="false" />
+        <pull-factories:constants id="myconst2"
+                                  constantClass="javax.servlet.http.HttpServletResponse"
+                                  exposed="false" />
 
-        <utils />
+        <pull-factories:utils />
 
-        <factory id="object1" class="com.alibaba.citrus.service.pull.tool.ObjectTool"
-                 p:singleton="false" />
+        <pull-factories:factory id="object1"
+                                class="com.alibaba.citrus.service.pull.tool.ObjectTool"
+                                p:singleton="false" />
 
-        <factory id="object2" class="com.alibaba.citrus.service.pull.tool.ObjectToolSet"
-                 p:singleton="false" p:id="inset1" />
+        <pull-factories:factory id="object2"
+                                class="com.alibaba.citrus.service.pull.tool.ObjectToolSet"
+                                p:singleton="false"
+                                p:id="inset1" />
 
-        <factory id="object3" class="com.alibaba.citrus.service.pull.tool.ObjectRuntimeToolSet" />
+        <pull-factories:factory id="object3" class="com.alibaba.citrus.service.pull.tool.ObjectRuntimeToolSet" />
 
-        <mixin id="myUtils">
+        <pull-factories:mixin id="myUtils">
             <!-- 引进class中所有public static方法 -->
             <class name="com.alibaba.citrus.util.StringUtil" />
 
@@ -42,25 +46,26 @@
                 <method name="escapeURL" renameTo="escapeUrl" />
 
             </class>
-        </mixin>
+        </pull-factories:mixin>
 
-        <context-exposer>
+        <pull-factories:context-exposer>
             <tool id="mymap" />
             <tool id="mylist2" beanName="mylist" />
-        </context-exposer>
+        </pull-factories:context-exposer>
 
     </services:pull>
 
     <services:request-contexts />
 
-    <util:map id="mymap" xmlns="http://www.springframework.org/schema/beans"
-              map-class="java.util.LinkedHashMap" value-type="java.lang.Integer">
+    <util:map xmlns="http://www.springframework.org/schema/beans"
+              id="mymap"
+              map-class="java.util.LinkedHashMap"
+              value-type="java.lang.Integer">
         <entry key="a" value="111" />
         <entry key="b" value="222" />
     </util:map>
 
-    <util:list id="mylist" xmlns="http://www.springframework.org/schema/beans"
-               value-type="java.lang.Integer">
+    <util:list xmlns="http://www.springframework.org/schema/beans" id="mylist" value-type="java.lang.Integer">
         <value>333</value>
         <value>444</value>
         <value>555</value>
