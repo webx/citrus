@@ -79,6 +79,16 @@ public class SpringPluggableSchemaTests {
     }
 
     @Test
+    public void unqualifiedStyle() {
+        Schema schema = sps.getNamedMappings().get("www.alibaba.com/schema/springext-base-types.xsd");
+        String text = schema.getText();
+
+        String elementQualified = "elementFormDefault=\"qualified\"";
+
+        assertThat(text, not(containsString(elementQualified))); // springext-base-types.xsd包含elementFormDefault，但被强制去除。
+    }
+
+    @Test
     public void sourceInfo() throws Exception {
         Map<String, Schema> names = sps.getNamedMappings();
         Resource resource;

@@ -17,6 +17,7 @@
 
 package com.alibaba.citrus.springext.impl;
 
+import static com.alibaba.citrus.springext.support.SchemaUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
@@ -96,6 +97,9 @@ public class SchemaImpl<P extends SourceInfo<?>> extends SchemaBase {
             schema.transform(transformer); // 必须延迟处理（doNow == false），否则会死循环
         }
 
+        // 强制转换成unqualified style
+        schema.transform(getUnqualifiedStyleTransformer());
+
         return schema;
     }
 
@@ -113,7 +117,12 @@ public class SchemaImpl<P extends SourceInfo<?>> extends SchemaBase {
             }
         }
 
-        return new SpringPluggableSchemaImpl(name, version, null, null, parsingTargetNamespace, sourceDesc, source, null, true, sourceInfo);
+        Schema schema = new SpringPluggableSchemaImpl(name, version, null, null, parsingTargetNamespace, sourceDesc, source, null, true, sourceInfo);
+
+        // 强制转换成unqualified style
+        schema.transform(getUnqualifiedStyleTransformer());
+
+        return schema;
     }
 
     /** 创建一般的schema。 */

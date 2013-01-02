@@ -234,15 +234,6 @@ public class SchemaUtil {
                 root.addNamespace("", thisCp.getNamespaceUri());
                 root.addAttribute("targetNamespace", thisCp.getNamespaceUri());
 
-                // 将内部element/attribute设置了不需要namespace。
-                if (root.attribute("elementFormDefault") != null) {
-                    root.remove(root.attribute("elementFormDefault"));
-                }
-
-                if (root.attribute("attributeFormDefault") != null) {
-                    root.remove(root.attribute("attributeFormDefault"));
-                }
-
                 visitElement(root);
 
                 // 避免加入重复的import
@@ -507,10 +498,27 @@ public class SchemaUtil {
         };
     }
 
+    /** 将内部element/attribute设置了不需要namespace。 */
+    public static Transformer getUnqualifiedStyleTransformer() {
+        return new Transformer() {
+            public void transform(Document document, String systemId) {
+                Element root = document.getRootElement();
+
+                if (root.attribute("elementFormDefault") != null) {
+                    root.remove(root.attribute("elementFormDefault"));
+                }
+
+                if (root.attribute("attributeFormDefault") != null) {
+                    root.remove(root.attribute("attributeFormDefault"));
+                }
+            }
+        };
+    }
+
     public static Transformer getNoopTransformer() {
         return new Transformer() {
             public void transform(Document document, String systemId) {
-                // do nothing
+                // donothing
             }
         };
     }
