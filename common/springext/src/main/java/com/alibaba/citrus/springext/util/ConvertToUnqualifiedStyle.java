@@ -122,7 +122,7 @@ public class ConvertToUnqualifiedStyle {
             boolean failed = false;
 
             try {
-                tmpFile = File.createTempFile(fileName, ext, dir);
+                tmpFile = File.createTempFile(fileName + "_tmp_", ext, dir);
                 fos = new FileOutputStream(tmpFile);
 
                 writeDocument(doc, fos);
