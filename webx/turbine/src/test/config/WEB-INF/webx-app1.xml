@@ -1,18 +1,20 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:services="http://www.alibaba.com/schema/services"
-             xmlns:pull-tools="http://www.alibaba.com/schema/services/pull/factories"
+             xmlns:dr-factories="http://www.alibaba.com/schema/services/data-resolver/factories"
              xmlns:mapping-rules="http://www.alibaba.com/schema/services/mapping-rules"
              xmlns:factories="http://www.alibaba.com/schema/services/module-loader/factories"
              xmlns:valves="http://www.alibaba.com/schema/services/pipeline/valves"
+             xmlns:pull-tools="http://www.alibaba.com/schema/services/pull/factories"
              xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
-             xmlns:beans="http://www.springframework.org/schema/beans"
              xsi:schemaLocation="
                  http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
-                 http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
+                 http://www.alibaba.com/schema/services/data-resolver/factories http://localhost:8080/schema/services-data-resolver-factories.xsd
                  http://www.alibaba.com/schema/services/mapping-rules http://localhost:8080/schema/services-mapping-rules.xsd
                  http://www.alibaba.com/schema/services/module-loader/factories http://localhost:8080/schema/services-module-loader-factories.xsd
                  http://www.alibaba.com/schema/services/pipeline/valves http://localhost:8080/schema/services-pipeline-valves.xsd
+                 http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
                  http://www.alibaba.com/schema/services/template/engines http://localhost:8080/schema/services-template-engines.xsd
                  http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
              ">
@@ -24,13 +26,11 @@
     </services:pipeline>
 
     <services:pipeline id="checkCsrfToken">
-        <valves:checkCsrfToken expiredPage="error.vm" tokenKey="token" maxTokens="1"
-                               logName="mySecurity" />
+        <valves:checkCsrfToken expiredPage="error.vm" tokenKey="token" maxTokens="1" logName="mySecurity" />
     </services:pipeline>
 
     <services:pipeline id="checkCsrfToken_manually">
-        <valves:checkCsrfToken expiredPage="error.vm" tokenKey="token" maxTokens="1"
-                               logName="mySecurity" />
+        <valves:checkCsrfToken expiredPage="error.vm" tokenKey="token" maxTokens="1" logName="mySecurity" />
         <valves:valve class="com.alibaba.citrus.turbine.pipeline.valve.CheckCsrfTokenValveTests$CheckCsrfManually" />
     </services:pipeline>
 
@@ -91,8 +91,7 @@
     <services:pipeline id="renderJsonAsJs_specifiedContentType" lazy-init="true">
         <valves:analyzeURL />
         <valves:performScreen output="myresult" />
-        <valves:renderResultAsJson input="myresult"
-                                   javascriptContentType="text/js" javascriptVariable="myresult" />
+        <valves:renderResultAsJson input="myresult" javascriptContentType="text/js" javascriptVariable="myresult" />
     </services:pipeline>
 
     <services:pipeline id="renderTemplate">
@@ -124,36 +123,34 @@
 
     <services:pipeline id="handleException" lazy-init="true">
         <valves:handleException defaultPage="error.vm">
-            <valves:on-exception type="java.lang.Exception" page="error_exception.vm" statusCode="501" />
-            <valves:on-exception type="java.lang.RuntimeException" page="error_runtime_exception.vm" statusCode="502" />
-            <valves:on-exception type="java.io.IOException" page="error_io_exception.vm" statusCode="503" />
-            <valves:on-exception type="java.lang.IllegalArgumentException" page="error_illegal_argument_exception.vm" />
+            <on-exception type="java.lang.Exception" page="error_exception.vm" statusCode="501" />
+            <on-exception type="java.lang.RuntimeException" page="error_runtime_exception.vm" statusCode="502" />
+            <on-exception type="java.io.IOException" page="error_io_exception.vm" statusCode="503" />
+            <on-exception type="java.lang.IllegalArgumentException" page="error_illegal_argument_exception.vm" />
         </valves:handleException>
     </services:pipeline>
 
     <services:pipeline id="handleException_logging" lazy-init="true">
         <valves:handleException defaultPage="error.vm" defaultLogging="brief" defaultLoggerName="my.logger">
-            <valves:on-exception type="java.io.IOException" logging="detailed" />
-            <valves:on-exception type="java.lang.IllegalArgumentException" loggerName="my.logger2" />
+            <on-exception type="java.io.IOException" logging="detailed" />
+            <on-exception type="java.lang.IllegalArgumentException" loggerName="my.logger2" />
         </valves:handleException>
     </services:pipeline>
 
     <services:pipeline id="pageAuthValve" lazy-init="true">
         <valves:analyzeURL />
-        <valves:pageAuthorization
-                callbackClass="com.alibaba.citrus.turbine.pipeline.valve.PageAuthorizationValveTests$MyCallback" />
-        <valves:valve
-                class="com.alibaba.citrus.turbine.pipeline.valve.PageAuthorizationValveTests$MyValve" />
+        <valves:pageAuthorization callbackClass="com.alibaba.citrus.turbine.pipeline.valve.PageAuthorizationValveTests$MyCallback" />
+        <valves:valve class="com.alibaba.citrus.turbine.pipeline.valve.PageAuthorizationValveTests$MyValve" />
     </services:pipeline>
 
     <services:module-loader id="moduleLoaderService">
         <factories:class-modules>
-            <factories:search-classes type="$1" name="$2" classes="com.alibaba.test.app1.module.*.**" />
-            <factories:search-classes type="$1" name="$2" classes="com.alibaba.test.module.*.**" />
+            <search-classes type="$1" name="$2" classes="com.alibaba.test.app1.module.*.**" />
+            <search-classes type="$1" name="$2" classes="com.alibaba.test.module.*.**" />
         </factories:class-modules>
 
         <factories:script-modules>
-            <factories:search-files type="$1" name="$2" files="classpath:app1/module/*/**" />
+            <search-files type="$1" name="$2" files="classpath:app1/module/*/**" />
         </factories:script-modules>
     </services:module-loader>
 
@@ -181,14 +178,11 @@
         <mapping-rules:direct-template-rule id="direct.template" templatePrefix="myscreen" />
 
         <!-- 回归搜索模块名  -->
-        <mapping-rules:fallback-module-rule id="action" moduleType="action"
-                                            defaultName="MyDefaultModule" />
+        <mapping-rules:fallback-module-rule id="action" moduleType="action" defaultName="MyDefaultModule" />
 
-        <mapping-rules:fallback-module-rule id="screen" moduleType="screen"
-                                            defaultName="MyDefaultModule" />
+        <mapping-rules:fallback-module-rule id="screen" moduleType="screen" defaultName="MyDefaultModule" />
 
-        <mapping-rules:fallback-module-rule id="control" moduleType="control"
-                                            defaultName="MyDefaultModule" />
+        <mapping-rules:fallback-module-rule id="control" moduleType="control" defaultName="MyDefaultModule" />
 
         <mapping-rules:fallback-module-rule id="screen.notemplate" moduleType="screen" />
 
@@ -204,21 +198,21 @@
 
         <!-- 后缀扩展映射 -->
         <mapping-rules:extension-rule id="extension.input">
-            <mapping-rules:mapping extension="" to="jsp" />
-            <mapping-rules:mapping extension="php" to="jsp" />
-            <mapping-rules:mapping extension="jhtml" to="jsp" />
-            <mapping-rules:mapping extension="vhtml" to="vm" />
-            <mapping-rules:mapping extension="do" to="do" />
+            <mapping extension="" to="jsp" />
+            <mapping extension="php" to="jsp" />
+            <mapping extension="jhtml" to="jsp" />
+            <mapping extension="vhtml" to="vm" />
+            <mapping extension="do" to="do" />
         </mapping-rules:extension-rule>
     </services:mapping-rules>
 
     <!-- 支持注入参数。 -->
-    <services:data-resolver xmlns="http://www.alibaba.com/schema/services/data-resolver/factories">
-        <turbine-rundata-resolver />
+    <services:data-resolver>
+        <dr-factories:turbine-rundata-resolver />
     </services:data-resolver>
 
     <!-- 页面验证 -->
-    <services:page-authorization xmlns="http://www.alibaba.com/schema/services">
+    <services:page-authorization>
         <match target="/aaa">
             <grant user="baobao">
                 <allow>*</allow>
