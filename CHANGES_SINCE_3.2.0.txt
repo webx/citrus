@@ -22,6 +22,22 @@
       </group>
   </services:form>
 
+  为了方便从旧格式迁移到新格式，可以在项目的根目录下，执行以下maven命令：
+
+  mvn springext:convert
+
+  该maven插件被定义在pom.xml中：
+
+  <build>
+      <plugins>
+          <plugin>
+              <groupId>com.alibaba.citrus.tool</groupId>
+              <artifactId>springext-maven-plugin</artifactId>
+              <version>1.1</version>
+          </plugin>
+      <plugins>
+  </build>
+
 * DomUtil.sameNs(element)方法的定义被修改：
   通过sameNs(element)可以选出和element具有相同namespace的elements，或者不包含namespace的elements（unqualified elements）。
   而修改前，unqualified elements将不会被选出来。
