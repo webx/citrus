@@ -300,7 +300,8 @@ public class ConvertToUnqualifiedStyle {
             }
 
             StringBuilder buf = new StringBuilder();
-            String leadingSpaces = "             ";
+
+            String leadingSpaces = String.format("%" + (root.getQualifiedName().length() + 2) + "s", "");
             String indent = "    ";
             String newLine = "\n";
 
