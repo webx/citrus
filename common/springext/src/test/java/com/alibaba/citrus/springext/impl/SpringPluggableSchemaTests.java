@@ -88,7 +88,7 @@ public class SpringPluggableSchemaTests {
         String elementQualified = "elementFormDefault=\"qualified\"";
 
         assertThat(textOriginal, containsString(elementQualified)); // springext-base-types.xsd包含elementFormDefault
-        assertThat(textTransformed, not(containsString(elementQualified))); // 转换后被强制去除。
+        assertThat(textTransformed, containsString(elementQualified)); // 转换后被保留。
     }
 
     @Test

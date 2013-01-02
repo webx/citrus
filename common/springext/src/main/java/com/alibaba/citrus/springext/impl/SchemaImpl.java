@@ -117,12 +117,7 @@ public class SchemaImpl<P extends SourceInfo<?>> extends SchemaBase {
             }
         }
 
-        Schema schema = new SpringPluggableSchemaImpl(name, version, null, null, parsingTargetNamespace, sourceDesc, source, null, true, sourceInfo);
-
-        // 强制转换成unqualified style
-        schema.transform(getUnqualifiedStyleTransformer());
-
-        return schema;
+        return new SpringPluggableSchemaImpl(name, version, null, null, parsingTargetNamespace, sourceDesc, source, null, true, sourceInfo);
     }
 
     /** 创建一般的schema。 */
