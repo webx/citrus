@@ -1,16 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns="http://www.alibaba.com/schema/services"
-             xmlns:pull-tools="http://www.alibaba.com/schema/services/pull/factories"
-             xmlns:validators="http://www.alibaba.com/schema/services/form/validators"
-             xmlns:beans="http://www.springframework.org/schema/beans"
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:p="http://www.springframework.org/schema/p"
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns:validators="http://www.alibaba.com/schema/services/form/validators"
+             xmlns:res-loaders="http://www.alibaba.com/schema/services/resource-loading/loaders"
              xsi:schemaLocation="http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
-        http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
-        http://www.alibaba.com/schema/services/form/validators http://localhost:8080/schema/services-form-validators.xsd
-        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd ">
+                 http://www.alibaba.com/schema/services/form/validators http://localhost:8080/schema/services-form-validators.xsd
 
-    <form id="form1">
+                 http://www.alibaba.com/schema/services/resource-loading/loaders http://localhost:8080/schema/services-resource-loading-loaders.xsd
+                 http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <services:form id="form1">
         <group name="group1">
             <field name="field1" displayName="我的字段1">
                 <!-- 有message，有id，以messageSource中的优先。 -->
@@ -21,9 +22,9 @@
                 <validators:required-validator id="required" message="required ${displayName}" />
             </field>
         </group>
-    </form>
+    </services:form>
 
-    <form id="form2" messageCodePrefix=" myform ">
+    <services:form id="form2" messageCodePrefix=" myform ">
         <group name="group1">
             <field name="field1" displayName="我的字段1">
                 <!-- 没有message，但messageSource中可以找到myform.group1.field1.required -->
@@ -34,20 +35,21 @@
                 <validators:required-validator message="required ${displayName}" />
             </field>
         </group>
-    </form>
+    </services:form>
 
-    <form id="form3" messageCodePrefix="notexist" lazy-init="true">
+    <services:form id="form3" messageCodePrefix="notexist" lazy-init="true">
         <group name="group1">
             <field name="field1">
                 <!-- 没有message，同时messageSource中也找不到notexist.group1.field1.required -->
                 <validators:required-validator id="required" />
             </field>
         </group>
-    </form>
+    </services:form>
 
-    <bean id="messageSource"
+    <bean xmlns="http://www.springframework.org/schema/beans"
+          id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
-          p:defaultEncoding="GB18030" xmlns="http://www.springframework.org/schema/beans">
+          p:defaultEncoding="GB18030">
         <property name="basenames">
             <list>
                 <value>myform</value>
@@ -55,10 +57,10 @@
         </property>
     </bean>
 
-    <resource-loading>
+    <services:resource-loading>
         <resource pattern="/">
-            <file-loader xmlns="http://www.alibaba.com/schema/services/resource-loading/loaders" />
+            <res-loaders:file-loader />
         </resource>
-    </resource-loading>
+    </services:resource-loading>
 
 </beans:beans>
