@@ -16,7 +16,10 @@ import java.io.Writer;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Set;
+import java.util.regex.Pattern;
 
+import com.alibaba.citrus.logconfig.LogConfigurator;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.impl.SpringExtSchemaSet;
 import com.alibaba.citrus.springext.support.SchemaUtil;
@@ -37,10 +40,11 @@ import org.slf4j.LoggerFactory;
  *
  * @author Michael Zhou
  */
-public class MigrateToUnqualifiedStyle {
+public class ConvertToUnqualifiedStyle {
     private final Logger log = LoggerFactory.getLogger(getClass());
-    private File[]             sources;
-    private SpringExtSchemaSet schemas;
+    private final File[]             sources;
+    private final SpringExtSchemaSet schemas;
+    private       int                convertedCount;
 
     /** 必须运行在适当的classpath下，否则不能取得configuration points。 */
     public static void main(String[] args) {
@@ -50,26 +54,33 @@ public class MigrateToUnqualifiedStyle {
             sources[i] = new File(args[i]).getAbsoluteFile();
         }
 
-        MigrateToUnqualifiedStyle m = new MigrateToUnqualifiedStyle();
-        m.setSources(sources);
-        m.convert();
+        new ConvertToUnqualifiedStyle(sources).convert();
     }
 
-    public void setSources(File[] sources) {
+    public ConvertToUnqualifiedStyle(File[] sources) {
+        LogConfigurator.getConfigurator().configureDefault();
+
         this.sources = sources;
+        this.schemas = new SpringExtSchemaSet();
     }
 
     public void convert() {
         if (!isEmptyArray(sources)) {
-            schemas = new SpringExtSchemaSet();
-
             for (File source : sources) {
                 convert(source);
             }
         }
+
+        log.info("Converted {} files.", convertedCount);
     }
 
+    private final Pattern backupFilePattern = Pattern.compile("\\.backup(_\\d+)?");
+
     private void convert(File source) {
+        if (backupFilePattern.matcher(source.getName()).find()) {
+            return; // skip backup file
+        }
+
         Document doc;
 
         try {
@@ -82,6 +93,8 @@ public class MigrateToUnqualifiedStyle {
         if (!isSpringConfigurationFile(doc)) {
             return;
         }
+
+        log.info("Converting file: {}", getRelativePath(source));
 
         boolean modified = new Converter(doc).doConvert();
 
@@ -133,8 +146,11 @@ public class MigrateToUnqualifiedStyle {
                 source.renameTo(backupFile);
                 tmpFile.renameTo(source);
 
-                log.info("Converted file: {}", getRelativePath(source));
+                log.info("  ... converted, original content saved as {}", getRelativePath(backupFile));
+                convertedCount++;
             }
+        } else {
+            log.info("  ... skipped");
         }
     }
 
@@ -257,7 +273,12 @@ public class MigrateToUnqualifiedStyle {
             for (String namespaceURI : namespaces.keySet()) {
                 if (!schemaLocations.containsKey(namespaceURI)) {
                     try {
-                        schemaLocations.put(namespaceURI, locationPrefix + schemas.getNamespaceMappings().get(namespaceURI).iterator().next().getName());
+                        Set<Schema> schemaSet = schemas.getNamespaceMappings().get(namespaceURI);
+
+                        if (schemaSet != null && schemaSet.size() > 0) {
+                            schemaLocations.put(namespaceURI, locationPrefix + schemaSet.iterator().next().getName());
+                        }
+
                         modified = true;
                     } catch (Exception ignored) {
                     }
@@ -290,10 +311,13 @@ public class MigrateToUnqualifiedStyle {
             for (Map.Entry<String, String> entry : schemaLocations.entrySet()) {
                 String uri = entry.getKey();
                 String location = entry.getValue();
+                Set<Schema> schemaSet = schemas.getNamespaceMappings().get(uri);
 
-                for (Schema schema : schemas.getNamespaceMappings().get(uri)) {
-                    if (location.endsWith(schema.getName())) {
-                        return location.substring(0, location.length() - schema.getName().length());
+                if (schemaSet != null) {
+                    for (Schema schema : schemaSet) {
+                        if (location.endsWith(schema.getName())) {
+                            return location.substring(0, location.length() - schema.getName().length());
+                        }
                     }
                 }
             }
