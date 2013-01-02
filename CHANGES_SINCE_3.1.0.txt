@@ -106,3 +106,6 @@
 
 * 改进Navigator接口，添加了forwardTo(target, action, actionEvent)方法，使之可内部重定向到指定action。
 * Bugfix: 当requestContext初始化失败时，错误处理程序报NPE的问题。
+* 升级Spring到3.1.2
+* 升级到springext-maven-plugin:1.1
+

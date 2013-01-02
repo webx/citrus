@@ -46,8 +46,8 @@
         <java.encoding>UTF-8</java.encoding>
         <webx-version>3.0.10</webx-version>
         <spring-version>3.0.7.RELEASE</spring-version>
-        <springext-plugin-version>1.0</springext-plugin-version>
-        <maven-util-version>1.0</maven-util-version>
+        <springext-plugin-version>1.1</springext-plugin-version>
+        <maven-util-version>1.1</maven-util-version>
         <jetty-version>8.1.7.v20120910</jetty-version>
         <project.build.sourceEncoding>${java.encoding}</project.build.sourceEncoding>
         <gpg.skip>true</gpg.skip>
@@ -395,6 +395,12 @@
                 <artifactId>jasper</artifactId>
                 <version>6.0.35</version>
                 <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.tomcat</groupId>
+                        <artifactId>servlet-api</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.jvnet.mock-javamail</groupId>
@@ -492,12 +498,6 @@
                 <artifactId>activation</artifactId>
                 <version>1.1</version>
                 <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>janino</groupId>
-                <artifactId>janino</artifactId>
-                <version>2.5.10</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>xml-apis</groupId>
@@ -696,7 +696,7 @@
             </plugin>
             <plugin>
                 <groupId>com.alibaba.citrus.tool</groupId>
-                <artifactId>maven-springext-plugin</artifactId>
+                <artifactId>springext-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <artifactId>maven-gpg-plugin</artifactId>
@@ -760,7 +760,7 @@
                 </plugin>
                 <plugin>
                     <groupId>com.alibaba.citrus.tool</groupId>
-                    <artifactId>maven-springext-plugin</artifactId>
+                    <artifactId>springext-maven-plugin</artifactId>
                     <version>${springext-plugin-version}</version>
                 </plugin>
                 <plugin>

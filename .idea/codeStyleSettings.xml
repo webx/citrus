@@ -22,6 +22,7 @@
           <option name="ALIGN_OBJECT_PROPERTIES" value="1" />
         </JSCodeStyleSettings>
         <XML>
+          <option name="XML_ATTRIBUTE_WRAP" value="4" />
           <option name="XML_KEEP_BLANK_LINES" value="1" />
           <option name="XML_SPACE_INSIDE_EMPTY_TAG" value="true" />
           <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
