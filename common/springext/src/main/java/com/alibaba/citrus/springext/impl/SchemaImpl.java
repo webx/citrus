@@ -30,6 +30,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.alibaba.citrus.springext.ConfigurationPointException;
+import com.alibaba.citrus.springext.ResourceResolver;
 import com.alibaba.citrus.springext.ResourceResolver.Resource;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.SourceInfo;
@@ -78,7 +79,7 @@ public class SchemaImpl<P extends SourceInfo<?>> extends SchemaBase {
     }
 
     /** 创建 contribution 的 main schema 和 versioned schema。 */
-    public static Schema createForContribution(String name, String version, String sourceDesc, InputStreamSource source, SourceInfo<ContributionSourceInfo> sourceInfo, Transformer transformer) {
+    public static Schema createForContribution(String name, String version, String sourceDesc, InputStreamSource source, SourceInfo<ContributionSourceInfo> sourceInfo, Transformer transformer, ResourceResolver resourceResolver) {
 
         class ContributionSchemaImpl extends SchemaImpl<ContributionSourceInfo>
                 implements ContributionSchemaSourceInfo {
@@ -98,7 +99,7 @@ public class SchemaImpl<P extends SourceInfo<?>> extends SchemaBase {
         }
 
         // 强制转换成unqualified style
-        schema.transform(getUnqualifiedStyleTransformer());
+        schema.transform(getUnqualifiedStyleTransformer(resourceResolver));
 
         return schema;
     }

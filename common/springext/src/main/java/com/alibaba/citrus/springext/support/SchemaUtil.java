@@ -39,6 +39,7 @@ import java.util.Set;
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.ConfigurationPoints;
 import com.alibaba.citrus.springext.Contribution;
+import com.alibaba.citrus.springext.ResourceResolver;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.Schema.Transformer;
 import com.alibaba.citrus.springext.impl.ConfigurationPointImpl;
@@ -499,20 +500,31 @@ public class SchemaUtil {
     }
 
     /** 将内部element/attribute设置了不需要namespace。 */
-    public static Transformer getUnqualifiedStyleTransformer() {
-        return new Transformer() {
-            public void transform(Document document, String systemId) {
-                Element root = document.getRootElement();
+    public static Transformer getUnqualifiedStyleTransformer(ResourceResolver resourceResolver) {
+        if (isUnqualifiedStyle(resourceResolver)) {
+            return new Transformer() {
+                public void transform(Document document, String systemId) {
+                    Element root = document.getRootElement();
 
-                if (root.attribute("elementFormDefault") != null) {
-                    root.remove(root.attribute("elementFormDefault"));
-                }
+                    if (root.attribute("elementFormDefault") != null) {
+                        root.remove(root.attribute("elementFormDefault"));
+                    }
 
-                if (root.attribute("attributeFormDefault") != null) {
-                    root.remove(root.attribute("attributeFormDefault"));
+                    if (root.attribute("attributeFormDefault") != null) {
+                        root.remove(root.attribute("attributeFormDefault"));
+                    }
                 }
-            }
-        };
+            };
+        } else {
+            return getNoopTransformer();
+        }
+    }
+
+    /** 判断是否为unqualified style。对于IDE plugins，这个判断可以让同一个plugin工作于不同的webx版本上。 */
+    private static boolean isUnqualifiedStyle(ResourceResolver resourceResolver) {
+        // 支持unqualifed style的webx包含converter类，早期的版本则没有这个类。
+        // 因此可用这个类来区分webx的版本。
+        return resourceResolver.getResource("com/alibaba/citrus/springext/util/ConvertToUnqualifiedStyle.class") != null;
     }
 
     public static Transformer getNoopTransformer() {

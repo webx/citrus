@@ -31,8 +31,6 @@ import java.util.Map;
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionType;
-import com.alibaba.citrus.springext.Schema;
-import com.alibaba.citrus.springext.SourceInfo;
 import com.alibaba.citrus.springext.contrib.MyBeanDefinitionDecorator;
 import com.alibaba.citrus.springext.contrib.MyBeanDefinitionDecorator2;
 import com.alibaba.citrus.springext.contrib.MyBeanDefinitionParser;
@@ -45,7 +43,6 @@ import com.alibaba.citrus.springext.support.SchemaUtil;
 import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import com.alibaba.citrus.test.TestEnvStatic;
 import com.alibaba.citrus.test.runner.TestNameAware;
-import com.alibaba.citrus.util.io.StreamUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
@@ -117,23 +114,6 @@ public class ContributionTests {
 
         assertSame(contrib, c6.getContribution());
         assertSame(cp, contrib.getConfigurationPoint());
-    }
-
-    @Test
-    public void unqualifiedStyle() throws Exception {
-        createConfigurationPoints(null);
-
-        ConfigurationPoint cp1 = cps.getConfigurationPointByName("my/cp1");
-        Contribution contrib1 = cp1.getContribution("test1", BEAN_DEFINITION_PARSER);
-        Schema schema1 = contrib1.getSchemas().getMainSchema();
-
-        String textTransformed = schema1.getText();
-        String textOriginal = StreamUtil.readText(((SourceInfo<?>) schema1).getSource().getInputStream(), "UTF-8", true);
-
-        String elementQualified = "elementFormDefault=\"qualified\"";
-
-        assertThat(textOriginal, containsString(elementQualified)); // my/cp1/test1.xsd包含elementFormDefault
-        assertThat(textTransformed, not(containsString(elementQualified))); // 转换后被强制去除。
     }
 
     @Test

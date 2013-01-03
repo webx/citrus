@@ -79,19 +79,6 @@ public class SpringPluggableSchemaTests {
     }
 
     @Test
-    public void unqualifiedStyle() throws Exception {
-        Schema schema = sps.getNamedMappings().get("www.alibaba.com/schema/springext-base-types.xsd");
-
-        String textTransformed = schema.getText();
-        String textOriginal = StreamUtil.readText(((SourceInfo<?>) schema).getSource().getInputStream(), "UTF-8", true);
-
-        String elementQualified = "elementFormDefault=\"qualified\"";
-
-        assertThat(textOriginal, containsString(elementQualified)); // springext-base-types.xsd包含elementFormDefault
-        assertThat(textTransformed, containsString(elementQualified)); // 转换后被保留。
-    }
-
-    @Test
     public void sourceInfo() throws Exception {
         Map<String, Schema> names = sps.getNamedMappings();
         Resource resource;

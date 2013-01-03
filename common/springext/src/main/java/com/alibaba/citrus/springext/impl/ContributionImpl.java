@@ -109,7 +109,8 @@ public class ContributionImpl implements Contribution, ContributionSourceInfo {
                     schemaName, null, getDescription(), resource,
                     new SourceInfoSupport<ContributionSourceInfo>(this).setSource(resource),
                     // 此方法有一个副作用，将会把当前contribution添加到它所依赖的configuration point的depending contributions列表中。
-                    getContributionSchemaTransformer(getConfigurationPoint().getConfigurationPoints(), this));
+                    getContributionSchemaTransformer(getConfigurationPoint().getConfigurationPoints(), this),
+                    settings.resourceResolver);
         }
     }
 
@@ -136,7 +137,8 @@ public class ContributionImpl implements Contribution, ContributionSourceInfo {
                             schemaName, schemaVersion, getDescription(), resource,
                             new SourceInfoSupport<ContributionSourceInfo>(this).setSource(resource),
                             // 此方法有一个副作用，将会把当前contribution添加到它所依赖的configuration point的depending contributions列表中。
-                            getContributionSchemaTransformer(getConfigurationPoint().getConfigurationPoints(), this)));
+                            getContributionSchemaTransformer(getConfigurationPoint().getConfigurationPoints(), this),
+                            settings.resourceResolver));
                 } else {
                     i.remove();
                 }
