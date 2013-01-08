@@ -371,26 +371,6 @@ public class ConvertToUnqualifiedStyle {
             return "http://localhost:8080/schema/";
         }
 
-        private Map<String, String> parseSchemaLocation(String value) {
-            Map<String, String> locations = createTreeMap();
-            value = trimToNull(value);
-
-            if (value != null) {
-                String[] values = value.split("\\s+");
-
-                for (int i = 0; i < values.length - 1; i += 2) {
-                    String uri = trimToNull(values[i]);
-                    String location = trimToNull(values[i + 1]);
-
-                    if (uri != null && location != null) {
-                        locations.put(uri, location);
-                    }
-                }
-            }
-
-            return locations;
-        }
-
         private Namespace getXsiNs() {
             Namespace xsi = null;
 
