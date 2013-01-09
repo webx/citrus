@@ -24,6 +24,7 @@ import com.alibaba.citrus.service.requestcontext.lazycommit.LazyCommitRequestCon
 import com.alibaba.citrus.service.uribroker.URIBrokerService;
 import com.alibaba.citrus.turbine.AbstractWebxTests;
 import com.alibaba.citrus.turbine.uribroker.uri.TurbineURIBroker;
+import com.alibaba.citrus.util.internal.ActionEventUtil;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -63,9 +64,15 @@ public class NavigatorTests extends AbstractWebxTests {
         assertArrayEquals(new String[] { "222", "333" }, rundata.getParameters().getStrings("bbb"));
         assertEquals(null, rundata.getParameters().getString("ccc"));
 
-        // action参数被清除
-        assertNull(rundata.getAction());
-        assertNull(rundata.getActionEvent());
+        // 执行重定向以后，action参数被清除
+        assertEquals(null, rundata.getTarget());
+        assertEquals("myAction", rundata.getAction());
+        assertEquals("myActionEvent", rundata.getActionEvent());
+
+        assertTrue(rundata.doRedirectTarget());
+        assertEquals("hello", rundata.getTarget());
+        assertEquals(null, rundata.getAction());
+        assertEquals(null, rundata.getActionEvent());
     }
 
     @Test
@@ -79,8 +86,18 @@ public class NavigatorTests extends AbstractWebxTests {
         assertEquals("hello", rundata.getRedirectTarget());
         assertEquals(0, rundata.getParameters().size());
 
+        // 执行重定向以后，action参数被设置成新值
+        assertEquals(null, rundata.getTarget());
+        assertEquals(null, rundata.getAction());
+        assertEquals(null, rundata.getActionEvent());
+
+        assertTrue(rundata.doRedirectTarget());
+        assertEquals("hello", rundata.getTarget());
         assertEquals("newAction", rundata.getAction());
         assertEquals("newActionEvent", rundata.getActionEvent());
+
+        // 可从request直接取得actionEvent值。
+        assertEquals("newActionEvent", ActionEventUtil.getEventName(request));
     }
 
     @Test

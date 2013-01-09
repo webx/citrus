@@ -29,6 +29,13 @@ public interface TurbineRunDataInternal extends TurbineRunData, Navigator, Contr
 
     void setActionEvent(String actionEvent);
 
+    /**
+     * 将redirect target转换成target。
+     *
+     * @return 如果转了，则返回<code>true</code>。
+     */
+    boolean doRedirectTarget();
+
     Context getContext(String componentName);
 
     Context getContext();
