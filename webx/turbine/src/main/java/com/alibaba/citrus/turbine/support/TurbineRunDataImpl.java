@@ -45,6 +45,7 @@ import com.alibaba.citrus.service.uribroker.uri.URIBroker;
 import com.alibaba.citrus.turbine.Context;
 import com.alibaba.citrus.turbine.TurbineRunDataInternal;
 import com.alibaba.citrus.turbine.uribroker.uri.TurbineURIBroker;
+import com.alibaba.citrus.util.internal.ActionEventUtil;
 import com.alibaba.citrus.webx.WebxComponent;
 import com.alibaba.citrus.webx.WebxException;
 import com.alibaba.citrus.webx.util.WebxUtil;
@@ -56,18 +57,19 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
     private final RequestContext           topRequestContext;
     private final LazyCommitRequestContext lazyCommitRequestContext;
     private final ParserRequestContext     parserRequestContext;
-    private       WebxComponent            currentComponent;
-    private       String                   target;
-    private       String                   redirectTarget;
-    private       String                   action;
-    private       String                   actionEvent;
-    private       URIBroker                redirectURI;
     private final Map<String, PullService> pullServices;
     private final Map<String, Context>     contexts;
-    private       boolean                  layoutEnabled;
-    private       String                   layoutTemplateOverride;
+
     private final Parameters   forwardParameters = new ForwardParametersImpl();
     private final ModuleTraces moduleTraces      = new ModuleTraces();
+
+    private TargetTuple targetTuple = new TargetTuple();
+    private TargetTuple redirectTargetTuple;
+
+    private WebxComponent currentComponent;
+    private boolean       layoutEnabled;
+    private String        layoutTemplateOverride;
+    private URIBroker     redirectURI;
 
     public TurbineRunDataImpl(HttpServletRequest request) {
         this(request, null);
@@ -178,42 +180,59 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
     }
 
     public String getTarget() {
-        return target;
+        return targetTuple.getTarget();
     }
 
     public void setTarget(String target) {
-        this.target = trimToNull(target);
-    }
-
-    public String getRedirectTarget() {
-        return redirectTarget;
-    }
-
-    public void setRedirectTarget(String redirectTarget) {
-        redirectTarget = trimToNull(redirectTarget);
-
-        // 如果target不相同，才需要重定向。
-        if (!isEquals(target, redirectTarget)) {
-            this.redirectTarget = redirectTarget;
-            this.action = null;
-            this.actionEvent = null;
-        }
+        targetTuple.setTarget(target);
     }
 
     public String getAction() {
-        return action;
+        return targetTuple.getAction();
     }
 
     public void setAction(String action) {
-        this.action = trimToNull(action);
+        targetTuple.setAction(action);
     }
 
     public String getActionEvent() {
-        return actionEvent;
+        return targetTuple.getActionEvent();
     }
 
     public void setActionEvent(String actionEvent) {
-        this.actionEvent = trimToNull(actionEvent);
+        targetTuple.setActionEvent(actionEvent);
+    }
+
+    public String getRedirectTarget() {
+        return redirectTargetTuple == null ? null : redirectTargetTuple.getTarget();
+    }
+
+    public void setRedirectTarget(String redirectTarget) {
+        setRedirectTargetAndAction(redirectTarget, null, null);
+    }
+
+    private void setRedirectTargetAndAction(String redirectTarget, String redirectAction, String redirectActionEvent) {
+        redirectTarget = trimToNull(redirectTarget);
+
+        // 如果target不相同，才需要重定向。
+        if (!isEquals(getTarget(), redirectTarget)) {
+            redirectTargetTuple = new TargetTuple()
+                    .setTarget(redirectTarget).setAction(redirectAction).setActionEvent(redirectActionEvent);
+        }
+    }
+
+    public boolean doRedirectTarget() {
+        if (redirectTargetTuple != null) {
+            targetTuple = redirectTargetTuple;
+            redirectTargetTuple = null;
+
+            // 设置request，以便 ActionEventAdapter 不借助rundata也可取得actionEvent值。
+            ActionEventUtil.setEventName(getRequest(), getActionEvent());
+
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public String getRedirectLocation() {
@@ -245,7 +264,7 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
 
     public boolean isRedirected() {
         commitRedirectLocation(); // 确保redirect uri broker被提交
-        return redirectTarget != null || getLazyCommitRequestContext().isRedirected();
+        return redirectTargetTuple != null || getLazyCommitRequestContext().isRedirected();
     }
 
     public Context getContext() {
@@ -331,17 +350,12 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
     }
 
     public Parameters forwardTo(String target) {
-        return forwardTo(target, null, null);
+        setRedirectTarget(target);
+        return forwardParameters;
     }
 
     public Parameters forwardTo(String target, String action, String actionEvent) {
-        setRedirectTarget(target);
-
-        if (action != null || actionEvent != null) {
-            setAction(action);
-            setActionEvent(actionEvent);
-        }
-
+        setRedirectTargetAndAction(target, action, actionEvent);
         return forwardParameters;
     }
 
@@ -440,6 +454,44 @@ public class TurbineRunDataImpl implements TurbineRunDataInternal {
 
         public void setTemplate(String template) {
             this.template = template;
+        }
+    }
+
+    private static class TargetTuple {
+        private String target;
+        private String action;
+        private String actionEvent;
+
+        public String getTarget() {
+            return target;
+        }
+
+        public TargetTuple setTarget(String target) {
+            this.target = trimToNull(target);
+            return this;
+        }
+
+        public String getAction() {
+            return action;
+        }
+
+        public TargetTuple setAction(String action) {
+            this.action = trimToNull(action);
+            return this;
+        }
+
+        public String getActionEvent() {
+            return actionEvent;
+        }
+
+        public TargetTuple setActionEvent(String actionEvent) {
+            this.actionEvent = trimToNull(actionEvent);
+            return this;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("target=%s, action=%s, actionEvent=%s", target, action, actionEvent);
         }
     }
 }

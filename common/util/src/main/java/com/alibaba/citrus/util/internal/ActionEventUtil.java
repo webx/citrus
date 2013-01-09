@@ -18,6 +18,7 @@
 package com.alibaba.citrus.util.internal;
 
 import static com.alibaba.citrus.util.BasicConstant.*;
+import static com.alibaba.citrus.util.ObjectUtil.defaultIfNull;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.util.Enumeration;
@@ -43,16 +44,19 @@ public class ActionEventUtil {
         }
 
         String event = doGetEventName(request);
+        setEventName(request, event);
 
-        if (event == null) {
+        return event;
+    }
+
+    public static void setEventName(HttpServletRequest request, String eventName) {
+        Object savedEvent = trimToNull(eventName);
+
+        if (savedEvent == null) {
             savedEvent = NULL_PLACEHOLDER;
-        } else {
-            savedEvent = event;
         }
 
         request.setAttribute(ACTION_EVENT_KEY, savedEvent);
-
-        return event;
     }
 
     private static String doGetEventName(HttpServletRequest request) {

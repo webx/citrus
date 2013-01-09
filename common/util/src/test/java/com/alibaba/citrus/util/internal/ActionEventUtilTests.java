@@ -18,9 +18,11 @@
 package com.alibaba.citrus.util.internal;
 
 import static com.alibaba.citrus.util.BasicConstant.*;
+import static java.util.Collections.*;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Vector;
 import javax.servlet.http.HttpServletRequest;
@@ -64,6 +66,28 @@ public class ActionEventUtilTests {
 
         // 不能识别的key
         assertEventName(null, "eventSubmit_dodeleteAll", "yes");
+    }
+
+    @Test
+    public void setEventName() {
+        request = createMock(HttpServletRequest.class);
+
+        // set value
+        request.setAttribute(ActionEventUtil.ACTION_EVENT_KEY, "newEvent");
+        expectLastCall().once();
+        replay(request);
+
+        ActionEventUtil.setEventName(request, "newEvent");
+        verify(request);
+
+        // set null
+        reset(request);
+        request.setAttribute(ActionEventUtil.ACTION_EVENT_KEY, NULL_PLACEHOLDER);
+        expectLastCall().once();
+        replay(request);
+
+        ActionEventUtil.setEventName(request, null);
+        verify(request);
     }
 
     private void assertEventName(String event, String... values) {
