@@ -40,16 +40,11 @@ public class BreakUnlessTargetRedirectedValve extends BreakValve {
     @Override
     public void invoke(PipelineContext pipelineContext) throws Exception {
         TurbineRunDataInternal rundata = (TurbineRunDataInternal) getTurbineRunData(request);
-        String target = rundata.getTarget();
-        String redirectTarget = rundata.getRedirectTarget();
 
-        if (!isEmpty(redirectTarget) && !isEquals(target, redirectTarget)) {
-            rundata.setTarget(redirectTarget);
-            rundata.setRedirectTarget(null);
-
-            pipelineContext.invokeNext();
+        if (rundata.doRedirectTarget()) {
+            pipelineContext.invokeNext(); // continue
         } else {
-            super.invoke(pipelineContext);
+            super.invoke(pipelineContext); // break
         }
     }
 

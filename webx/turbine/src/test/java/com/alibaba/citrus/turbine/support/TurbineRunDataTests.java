@@ -22,6 +22,7 @@ import static org.junit.Assert.*;
 
 import com.alibaba.citrus.turbine.AbstractWebxTests;
 import com.alibaba.citrus.turbine.Context;
+import com.alibaba.citrus.turbine.Navigator;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -56,41 +57,68 @@ public class TurbineRunDataTests extends AbstractWebxTests {
 
     @Test
     public void setRedirectTarget() {
-        assertNull(rundata.getRedirectTarget());
-        assertNull(rundata.getTarget());
-        assertNull(rundata.getAction());
-        assertNull(rundata.getActionEvent());
+        assertTarget(null, null, null, null);
 
         // target=null, redirectTarget=null
-        // target不变，所以action不清除
+        // target不变，重定向不发生
         rundata.setAction("myaction");
         rundata.setActionEvent("myactionevent");
         rundata.setRedirectTarget(null);
-        assertEquals("myaction", rundata.getAction());
+        assertTarget(null, "myaction", "myactionevent", null);
+
+        assertFalse(rundata.doRedirectTarget());
+        assertTarget(null, "myaction", "myactionevent", null);
 
         // target=null, redirectTarget=test
+        // 重定向发生，action被清除
         rundata.setAction("myaction");
         rundata.setActionEvent("myactionevent");
         rundata.setRedirectTarget("test");
-        assertEquals(null, rundata.getAction());
-        assertEquals(null, rundata.getActionEvent());
+        assertTarget(null, "myaction", "myactionevent", "test");
+
+        assertTrue(rundata.doRedirectTarget());
+        assertTarget("test", null, null, null);
 
         // target=test, redirectTarget=test
-        // target不变，所以action不清除
+        // target不变，重定向不发生
+        rundata.setTarget("test");
         rundata.setAction("myaction");
         rundata.setActionEvent("myactionevent");
-        rundata.setTarget("test");
         rundata.setRedirectTarget("test");
-        assertEquals("myaction", rundata.getAction());
-        assertEquals("myactionevent", rundata.getActionEvent());
+        assertTarget("test", "myaction", "myactionevent", null);
 
-        // target=test, redirectTarget=test
+        assertFalse(rundata.doRedirectTarget());
+        assertTarget("test", "myaction", "myactionevent", null);
+
+        // target=test, redirectTarget=test2
+        // 重定向发生，action被清除
+        rundata.setTarget("test");
         rundata.setAction("myaction");
         rundata.setActionEvent("myactionevent");
-        rundata.setTarget("test");
         rundata.setRedirectTarget("test2");
-        assertEquals(null, rundata.getAction());
-        assertEquals(null, rundata.getActionEvent());
+        assertTarget("test", "myaction", "myactionevent", "test2");
+
+        assertTrue(rundata.doRedirectTarget());
+        assertTarget("test2", null, null, null);
+
+        // target=test, redirectTarget=test2
+        // 重定向发生，action被设置成新的值
+        rundata.setTarget("test");
+        rundata.setAction("myaction");
+        rundata.setActionEvent("myactionevent");
+        rundata.forwardTo("test2", "newaction", "newactionevent");
+        assertTarget("test", "myaction", "myactionevent", "test2");
+
+        assertTrue(rundata.doRedirectTarget());
+        assertTarget("test2", "newaction", "newactionevent", null);
+    }
+
+    private void assertTarget(String target, String action, String actionEvent, String redirectTarget) {
+        assertEquals(target, rundata.getTarget());
+        assertEquals(action, rundata.getAction());
+        assertEquals(actionEvent, rundata.getActionEvent());
+
+        assertEquals(redirectTarget, rundata.getRedirectTarget());
     }
 
     @Test
