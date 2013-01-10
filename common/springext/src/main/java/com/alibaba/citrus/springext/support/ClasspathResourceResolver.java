@@ -20,12 +20,16 @@ package com.alibaba.citrus.springext.support;
 import static com.alibaba.citrus.util.Assert.*;
 import static org.springframework.core.io.support.ResourcePatternResolver.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
 
 import com.alibaba.citrus.springext.ResourceResolver;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
@@ -75,29 +79,74 @@ public class ClasspathResourceResolver extends ResourceResolver {
         return new SpringResourceAdapter(springResource);
     }
 
-    public static class SpringResourceAdapter extends Resource {
+    public static class SpringResourceAdapter extends Resource implements org.springframework.core.io.Resource {
         private final org.springframework.core.io.Resource springResource;
 
         private SpringResourceAdapter(org.springframework.core.io.Resource springResource) {
             this.springResource = assertNotNull(springResource, "missing spring resource");
         }
 
-        public org.springframework.core.io.Resource getSpringResource() {
+        @NotNull
+        public org.springframework.core.io.Resource getUnderlyingResource() {
             return springResource;
         }
 
         @Override
         public String getName() {
             try {
-                return springResource.getURL().toExternalForm();
+                return getUnderlyingResource().getURL().toExternalForm();
             } catch (IOException e) {
-                return springResource.getDescription();
+                return getUnderlyingResource().getDescription();
             }
         }
 
         @Override
         public InputStream getInputStream() throws IOException {
-            return springResource.getInputStream();
+            return getUnderlyingResource().getInputStream();
+        }
+
+        public String getDescription() {
+            return getUnderlyingResource().getDescription();
+        }
+
+        public URL getURL() throws IOException {
+            return getUnderlyingResource().getURL();
+        }
+
+        public long contentLength() throws IOException {
+            return getUnderlyingResource().contentLength();
+        }
+
+        public boolean isOpen() {
+            return getUnderlyingResource().isOpen();
+        }
+
+        public boolean isReadable() {
+            return getUnderlyingResource().isReadable();
+        }
+
+        public long lastModified() throws IOException {
+            return getUnderlyingResource().lastModified();
+        }
+
+        public File getFile() throws IOException {
+            return getUnderlyingResource().getFile();
+        }
+
+        public org.springframework.core.io.Resource createRelative(String relativePath) throws IOException {
+            return getUnderlyingResource().createRelative(relativePath);
+        }
+
+        public boolean exists() {
+            return getUnderlyingResource().exists();
+        }
+
+        public String getFilename() {
+            return getUnderlyingResource().getFilename();
+        }
+
+        public URI getURI() throws IOException {
+            return getUnderlyingResource().getURI();
         }
     }
 }
