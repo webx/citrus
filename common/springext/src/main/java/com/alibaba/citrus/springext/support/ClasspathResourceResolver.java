@@ -47,7 +47,7 @@ public class ClasspathResourceResolver extends ResourceResolver {
         org.springframework.core.io.Resource springResource = resolver.getResource(CLASSPATH_URL_PREFIX + location);
 
         if (springResource != null && springResource.exists()) {
-            return new SpringResourceAdapter(springResource);
+            return createResource(springResource);
         } else {
             return null;
         }
@@ -64,18 +64,26 @@ public class ClasspathResourceResolver extends ResourceResolver {
             Resource[] resources = new Resource[springResources.length];
 
             for (int i = 0; i < springResources.length; i++) {
-                resources[i] = new SpringResourceAdapter(springResources[i]);
+                resources[i] = createResource(springResources[i]);
             }
 
             return resources;
         }
     }
 
-    private static class SpringResourceAdapter extends Resource {
+    protected Resource createResource(org.springframework.core.io.Resource springResource) {
+        return new SpringResourceAdapter(springResource);
+    }
+
+    public static class SpringResourceAdapter extends Resource {
         private final org.springframework.core.io.Resource springResource;
 
         private SpringResourceAdapter(org.springframework.core.io.Resource springResource) {
             this.springResource = assertNotNull(springResource, "missing spring resource");
+        }
+
+        public org.springframework.core.io.Resource getSpringResource() {
+            return springResource;
         }
 
         @Override
