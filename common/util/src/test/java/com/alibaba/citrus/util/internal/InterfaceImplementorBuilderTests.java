@@ -250,6 +250,44 @@ public class InterfaceImplementorBuilderTests {
         }
     }
 
+    public static class MySuperClass {
+        public String sayHello() {
+            return "hello";
+        }
+    }
+
+    @Test
+    public void invokeBaseObject_withSuperclass() {
+        MyInterface1 newObject = (MyInterface1) new InterfaceImplementorBuilder().setSuperclass(MySuperClass.class).addInterface(MyInterface1.class).setBaseObject(new MyInterface1() {
+            public String getName() {
+                return "myname";
+            }
+
+            public void throwException(Throwable e) throws Throwable {
+                throw e;
+            }
+        }).setOverrider(new Object()).toObject();
+
+        assertTrue(newObject instanceof MySuperClass);
+        assertEquals("hello", ((MySuperClass) newObject).sayHello());
+
+        assertEquals("myname", newObject.getName());
+
+        try {
+            newObject.throwException(new IllegalArgumentException());
+            fail();
+        } catch (Throwable e) {
+            assertTrue(e instanceof IllegalArgumentException);
+        }
+
+        try {
+            newObject.throwException(new IOException());
+            fail();
+        } catch (Throwable e) {
+            assertTrue(e instanceof IOException);
+        }
+    }
+
     public static interface MyInterface2 {
         String getName();
 

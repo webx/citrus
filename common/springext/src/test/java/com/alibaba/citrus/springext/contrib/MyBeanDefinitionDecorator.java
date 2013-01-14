@@ -17,13 +17,53 @@
 
 package com.alibaba.citrus.springext.contrib;
 
+import com.alibaba.citrus.springext.contrib.deco.MyDecorator;
+import com.alibaba.citrus.util.internal.InterfaceImplementorBuilder;
+import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.BeanDefinitionDecorator;
 import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 public class MyBeanDefinitionDecorator implements BeanDefinitionDecorator {
     public BeanDefinitionHolder decorate(Node node, BeanDefinitionHolder definition, ParserContext parserContext) {
-        return null;
+        String interfaceName = node instanceof Element
+                               ? ((Element) node).getAttribute("interface")
+                               : ((Attr) node).getValue();
+
+        BeanDefinitionBuilder bd = BeanDefinitionBuilder.genericBeanDefinition(MyDecoratorFactory.class);
+
+        bd.addConstructorArgValue(definition.getBeanDefinition());
+        bd.addConstructorArgValue(interfaceName);
+
+        return new BeanDefinitionHolder(bd.getBeanDefinition(), definition.getBeanName(), definition.getAliases());
+    }
+
+    public static class MyDecoratorFactory implements FactoryBean<Object> {
+        private final Object   object;
+        private final Class<?> itfs;
+
+        public MyDecoratorFactory(Object object, Class<?> itfs) {
+            this.object = object;
+            this.itfs = itfs;
+        }
+
+        @Override
+        public Object getObject() throws Exception {
+            return new InterfaceImplementorBuilder().setSuperclass(object.getClass()).addInterface(itfs).setOverrider(object).toObject();
+        }
+
+        @Override
+        public Class<?> getObjectType() {
+            return MyDecorator.class;
+        }
+
+        @Override
+        public boolean isSingleton() {
+            return true;
+        }
     }
 }
