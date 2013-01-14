@@ -24,6 +24,9 @@ public interface Contribution {
     /** 取得contribution的名称。 */
     String getName();
 
+    /** 取得contribution的注解文档。 */
+    String getAnnotation();
+
     /** 取得contribution的类型。 */
     ContributionType getType();
 

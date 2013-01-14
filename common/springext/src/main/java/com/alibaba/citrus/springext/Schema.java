@@ -18,6 +18,7 @@
 package com.alibaba.citrus.springext;
 
 import java.io.InputStream;
+import java.util.Collection;
 
 import org.dom4j.Document;
 
@@ -34,7 +35,12 @@ public interface Schema {
 
     String[] getIncludes();
 
-    String[] getElements();
+    Element getElement(String elementName);
+
+    Collection<Element> getElements();
+
+    /** 修改schema的elements。这个值只能由schemaSet来设置。 */
+    void setElements(Collection<Element> elements);
 
     String getNamespacePrefix();
 
@@ -61,10 +67,16 @@ public interface Schema {
 
     void transform(Transformer transformer, boolean doNow);
 
-    /** 修改schema的elements。这个值只能由schemaSet来设置。 */
-    void setElements(String[] elements);
-
     interface Transformer {
         void transform(Document document, String systemId);
+    }
+
+    /** 代表schema中所定义的一个element的信息。 */
+    interface Element {
+        /** 取得名称。 */
+        String getName();
+
+        /** 取得文档注解。 */
+        String getAnnotation();
     }
 }

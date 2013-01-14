@@ -28,14 +28,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import com.alibaba.citrus.springext.Schema;
+import com.alibaba.citrus.springext.Schema.Element;
 import com.alibaba.citrus.springext.Schemas;
 import com.alibaba.citrus.springext.impl.SchemaImpl;
-import org.dom4j.Element;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.io.InputStreamSource;
@@ -191,6 +192,23 @@ public class SchemaSetTests {
     }
 
     @Test
+    public void getAnnotation() {
+        String annotation1 = all.getElement("test").getAnnotation();
+        String annotation2 = all.getElement("testa").getAnnotation();
+        String annotation3 = all.getElement("testb").getAnnotation();
+
+        assertEquals("line 1\n" +
+                     "line 2\n" +
+                     "line 3", annotation1);
+
+        assertEquals("line 1/a\n" +
+                     "line 2/a\n" +
+                     "line 3/a", annotation2);
+
+        assertEquals(null, annotation3);
+    }
+
+    @Test
     public void getAllElements() {
         // all -> x, y, z
         // x   -> a, z
@@ -209,7 +227,27 @@ public class SchemaSetTests {
     }
 
     private String[] getElements(Schemas schemas, String name) {
-        return schemas.getNamedMappings().get("schema/" + name + ".xsd").getElements();
+        Schema schema = schemas.getNamedMappings().get("schema/" + name + ".xsd");
+        Collection<Element> elements = schema.getElements();
+        String[] elementNames = new String[elements.size()];
+
+        int i = 0;
+        for (Element element : elements) {
+            String elementName = element.getName();
+
+            assertGetElement(schema, element, "Element[" + elementName + "]");
+
+            elementNames[i++] = elementName;
+        }
+
+        return elementNames;
+    }
+
+    private void assertGetElement(Schema schema, Element element, String toString) {
+        assertSame(element, schema.getElement(element.getName()));
+        assertSame(null, schema.getElement(null));
+        assertSame(null, schema.getElement("not exists"));
+        assertEquals(toString, element.toString());
     }
 
     @Test
@@ -233,7 +271,7 @@ public class SchemaSetTests {
         assertSame(b, nameToSchemas.get("schema/b.xsd"));
 
         // 检查内容: all被转换
-        Iterator<Element> i = getNodes(all, "http://www.alibaba.com/schema/test", 6).iterator();
+        Iterator<org.dom4j.Element> i = getNodes(all, "http://www.alibaba.com/schema/test", 6).iterator();
         assertEquals("schema/a.xsd", i.next().attributeValue("schemaLocation"));
         assertEquals("schema/z.xsd", i.next().attributeValue("schemaLocation"));
         assertEquals("schema/x.xsd", i.next().attributeValue("schemaLocation"));
@@ -250,15 +288,15 @@ public class SchemaSetTests {
         assertEquals("testy", i.next().attributeValue("name"));
     }
 
-    private List<Element> getNodes(Schema schema, String ns, int count) {
-        Element root = schema.getDocument().getRootElement();
+    private List<org.dom4j.Element> getNodes(Schema schema, String ns, int count) {
+        org.dom4j.Element root = schema.getDocument().getRootElement();
 
         assertEquals(W3C_XML_SCHEMA_NS_URI, root.getNamespaceURI());
         assertEquals("schema", root.getName());
         assertEquals(ns, root.attributeValue("targetNamespace"));
 
         @SuppressWarnings("unchecked")
-        List<Element> elements = root.elements();
+        List<org.dom4j.Element> elements = root.elements();
         assertEquals(count, elements.size());
 
         return elements;

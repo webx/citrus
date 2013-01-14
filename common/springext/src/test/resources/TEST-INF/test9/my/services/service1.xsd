@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
     <!-- service1-main -->
+    <xsd:element name="service1">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+                this
+                is
+                service1
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
 </xsd:schema>

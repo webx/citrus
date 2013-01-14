@@ -35,6 +35,7 @@ import java.util.Set;
 import java.util.SortedSet;
 
 import com.alibaba.citrus.springext.Schema;
+import com.alibaba.citrus.springext.Schema.Element;
 import com.alibaba.citrus.springext.Schema.Transformer;
 import com.alibaba.citrus.springext.Schemas;
 import com.alibaba.citrus.util.ToStringBuilder;
@@ -151,7 +152,7 @@ public class SchemaSet implements Schemas, Iterable<Schemas> {
         // 所有包含了include的，并且被其它schema所包含的schema，其引用需要被移到最上层的schema中。
         for (Schema schema : createArrayList(nameToSchemas.values())) {
             Map<String, Schema> allIncludes = getAllIncludes(schema); // 直接或间接的所有includes，按依赖顺序排列
-            String[] allElements = getAllElements(schema, allIncludes.values());
+            Map<String, Element> allElements = getAllElements(schema, allIncludes.values());
             boolean withIndirectIncludes = false;
 
             for (Schema includedSchema : allIncludes.values()) {
@@ -181,7 +182,7 @@ public class SchemaSet implements Schemas, Iterable<Schemas> {
             }
 
             // 收集当前schema的所有elements
-            schema.setElements(allElements);
+            schema.setElements(allElements.values());
         }
 
         for (Map.Entry<String, SchemaIncludes> entry : nameToSchemaIncludes.entrySet()) {
@@ -197,16 +198,20 @@ public class SchemaSet implements Schemas, Iterable<Schemas> {
         }
     }
 
-    private String[] getAllElements(Schema schema, Collection<Schema> includes) {
-        Set<String> all = createTreeSet();
+    private Map<String, Element> getAllElements(Schema schema, Collection<Schema> includes) {
+        Map<String, Element> all = createHashMap();
 
-        all.addAll(Arrays.asList(schema.getElements()));
-
-        for (Schema include : includes) {
-            all.addAll(Arrays.asList(include.getElements()));
+        for (Element element : schema.getElements()) {
+            all.put(element.getName(), element);
         }
 
-        return all.toArray(new String[all.size()]);
+        for (Schema include : includes) {
+            for (Element element : include.getElements()) {
+                all.put(element.getName(), element);
+            }
+        }
+
+        return all;
     }
 
     /**
