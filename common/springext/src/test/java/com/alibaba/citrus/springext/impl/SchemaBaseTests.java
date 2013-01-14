@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2012 Alibaba Group Holding Limited.
+ * Copyright (c) 2002-2013 Alibaba Group Holding Limited.
  * All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,6 +22,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.LinkedList;
 
 import com.alibaba.citrus.springext.ConfigurationPointException;
@@ -529,7 +530,7 @@ public class SchemaBaseTests {
         }
 
         @Override
-        public String[] getElements() {
+        public Collection<Element> getElements() {
             throw new UnsupportedOperationException();
         }
 
@@ -559,7 +560,12 @@ public class SchemaBaseTests {
         }
 
         @Override
-        public void setElements(String[] elements) {
+        public Element getElement(String elementName) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void setElements(Collection<Element> elements) {
             throw new UnsupportedOperationException();
         }
 

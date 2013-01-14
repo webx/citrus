@@ -77,6 +77,20 @@ public class ContributionImpl implements Contribution, ContributionSourceInfo {
         return key.getName();
     }
 
+    public String getAnnotation() {
+        Schema schema = getSchemas().getMainSchema();
+
+        if (schema != null) {
+            Element element = schema.getElement(getName());
+
+            if (element != null) {
+                return element.getAnnotation();
+            }
+        }
+
+        return null;
+    }
+
     ContributionKey getKey() {
         return key;
     }

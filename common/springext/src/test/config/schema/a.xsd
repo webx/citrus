@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-    <xsd:element name="testa" type="xsd:string" />
+    <xsd:element name="testa" type="xsd:string">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    line 1/a
+    line 2/a
+    line 3/a
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
 
 </xsd:schema>

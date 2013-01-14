@@ -6,6 +6,14 @@
     <xsd:include schemaLocation="schema/y.xsd" />
     <xsd:include schemaLocation="schema/z.xsd" />
 
-    <xsd:element name="test" type="xsd:string" />
+    <xsd:element name="test" type="xsd:string">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[
+    line 1
+    line 2
+    line 3
+            ]]></xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
 
 </xsd:schema>
