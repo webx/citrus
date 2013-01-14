@@ -51,6 +51,7 @@ import net.sf.cglib.reflect.FastMethod;
 public class InterfaceImplementorBuilder extends DynamicClassBuilder {
     private static final String OVERRIDER_SET_PROXY_OBJECT_METHOD_NAME = "setThisProxy";
 
+    private Class<?>                   superclass;
     private List<Class<?>>             interfaces;
     private Object                     baseObject;
     private Object                     overrider;
@@ -71,7 +72,12 @@ public class InterfaceImplementorBuilder extends DynamicClassBuilder {
     public InterfaceImplementorBuilder addInterface(Class<?>... interfaceClasses) {
         if (interfaceClasses != null) {
             for (Class<?> interfaceClass : interfaceClasses) {
-                this.interfaces.add(interfaceClass);
+                if (interfaceClass.isInterface()) {
+                    this.interfaces.add(interfaceClass);
+                } else {
+                    assertNull(superclass, "Only 1 superclass is allowed");
+                    this.superclass = interfaceClass;
+                }
             }
         }
 
@@ -218,7 +224,7 @@ public class InterfaceImplementorBuilder extends DynamicClassBuilder {
             generator = new Enhancer();
 
             generator.setClassLoader(getClassLoader());
-            generator.setSuperclass(Object.class);
+            generator.setSuperclass(superclass == null ? Object.class : superclass);
             generator.setInterfaces(interfaces.toArray(new Class<?>[interfaces.size()]));
 
             generator.setCallbacks(new Callback[] {
@@ -238,7 +244,11 @@ public class InterfaceImplementorBuilder extends DynamicClassBuilder {
                                 throw new UnsupportedOperationException(getSimpleMethodSignature(method, true));
                             }
 
-                            return proxy.invoke(baseObject, args);
+                            if (method.getDeclaringClass().isInstance(baseObject)) {
+                                return proxy.invoke(baseObject, args);
+                            } else {
+                                return proxy.invokeSuper(obj, args);
+                            }
                         }
                     },
 

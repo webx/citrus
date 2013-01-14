@@ -59,6 +59,16 @@ public class InterfaceImplementorBuilderTests {
     }
 
     @Test
+    public void superclass() {
+        try {
+            new InterfaceImplementorBuilder().addInterface(Object.class, String.class).toObject();
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertThat(e, exception("Only 1 superclass is allowed"));
+        }
+    }
+
+    @Test
     public void baseObject() {
         // no baseObject
         ServletContext sc = (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).setOverrider(new Object()).toObject();
@@ -232,6 +242,44 @@ public class InterfaceImplementorBuilderTests {
                 throw e;
             }
         }).setOverrider(new Object()).toObject();
+
+        assertEquals("myname", newObject.getName());
+
+        try {
+            newObject.throwException(new IllegalArgumentException());
+            fail();
+        } catch (Throwable e) {
+            assertTrue(e instanceof IllegalArgumentException);
+        }
+
+        try {
+            newObject.throwException(new IOException());
+            fail();
+        } catch (Throwable e) {
+            assertTrue(e instanceof IOException);
+        }
+    }
+
+    public static class MySuperClass {
+        public String sayHello() {
+            return "hello";
+        }
+    }
+
+    @Test
+    public void invokeBaseObject_withSuperclass() {
+        MyInterface1 newObject = (MyInterface1) new InterfaceImplementorBuilder().addInterface(MySuperClass.class, MyInterface1.class).setBaseObject(new MyInterface1() {
+            public String getName() {
+                return "myname";
+            }
+
+            public void throwException(Throwable e) throws Throwable {
+                throw e;
+            }
+        }).setOverrider(new Object()).toObject();
+
+        assertTrue(newObject instanceof MySuperClass);
+        assertEquals("hello", ((MySuperClass) newObject).sayHello());
 
         assertEquals("myname", newObject.getName());
 
