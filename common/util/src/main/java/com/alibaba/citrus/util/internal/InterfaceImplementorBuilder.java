@@ -69,15 +69,15 @@ public class InterfaceImplementorBuilder extends DynamicClassBuilder {
         interfaces = createLinkedList();
     }
 
+    public InterfaceImplementorBuilder setSuperclass(Class<?> superclass) {
+        this.superclass = superclass;
+        return this;
+    }
+
     public InterfaceImplementorBuilder addInterface(Class<?>... interfaceClasses) {
         if (interfaceClasses != null) {
             for (Class<?> interfaceClass : interfaceClasses) {
-                if (interfaceClass.isInterface()) {
-                    this.interfaces.add(interfaceClass);
-                } else {
-                    assertNull(superclass, "Only 1 superclass is allowed");
-                    this.superclass = interfaceClass;
-                }
+                this.interfaces.add(interfaceClass);
             }
         }
 
@@ -100,6 +100,11 @@ public class InterfaceImplementorBuilder extends DynamicClassBuilder {
     }
 
     private void init() {
+        // check superclass
+        if (superclass == null) {
+            superclass = Object.class;
+        }
+
         // check interfaces
         assertTrue(!interfaces.isEmpty(), "no interface specified");
 
@@ -224,7 +229,7 @@ public class InterfaceImplementorBuilder extends DynamicClassBuilder {
             generator = new Enhancer();
 
             generator.setClassLoader(getClassLoader());
-            generator.setSuperclass(superclass == null ? Object.class : superclass);
+            generator.setSuperclass(superclass);
             generator.setInterfaces(interfaces.toArray(new Class<?>[interfaces.size()]));
 
             generator.setCallbacks(new Callback[] {
@@ -240,15 +245,15 @@ public class InterfaceImplementorBuilder extends DynamicClassBuilder {
                     new MethodInterceptor() {
                         public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
                                 throws Throwable {
-                            if (baseObject == null) {
-                                throw new UnsupportedOperationException(getSimpleMethodSignature(method, true));
+                            if (baseObject == null || !method.getDeclaringClass().isAssignableFrom(baseObject.getClass())) {
+                                if (method.getDeclaringClass().isAssignableFrom(superclass)) {
+                                    return proxy.invokeSuper(obj, args);
+                                } else {
+                                    throw new UnsupportedOperationException(getSimpleMethodSignature(method, true));
+                                }
                             }
 
-                            if (method.getDeclaringClass().isInstance(baseObject)) {
-                                return proxy.invoke(baseObject, args);
-                            } else {
-                                return proxy.invokeSuper(obj, args);
-                            }
+                            return proxy.invoke(baseObject, args);
                         }
                     },
 
