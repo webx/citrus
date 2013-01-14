@@ -135,6 +135,21 @@ public class ContributionTests {
         assertSchemaText(test4, 4);
     }
 
+    @Test
+    public void getAnnotation() {
+        createConfigurationPoints("TEST-INF/test9/cps");
+
+        ConfigurationPoint cp = cps.getConfigurationPointByName("my/services");
+        Contribution service1 = cp.getContribution("service1", ContributionType.BEAN_DEFINITION_PARSER);
+        Contribution service2 = cp.getContribution("service2", ContributionType.BEAN_DEFINITION_PARSER);
+
+        assertEquals("this\n" +
+                     "is\n" +
+                     "service1", service1.getAnnotation());
+
+        assertEquals(null, service2.getAnnotation());
+    }
+
     private void assertSchemaText(String text, int caseNo) {
         text = text.replaceAll("\\s+", " "); // 去除换行，便于检查
 

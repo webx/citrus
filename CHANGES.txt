@@ -357,6 +357,7 @@
   * 改进了装载schema的过程，引进Transformer接口，不仅使代码更清晰，也提高了效率。
   * 增加方法：ConfigurationPoint.getDependingContributions()，可以取得所有引用此configuration point的contributions。
   * 为ConfigurationPoint/Contribution/Schema/SpringPluggableSchema 增添了SourceInfo接口，以便取得原始资源文件，供IDE来编译。
+  * 为Contribution添加了getAnnotation()方法，可以取得schema中的文档信息。
 
 * Bugfix: Form验证中，<uploaded-file-validator extension="jpg,gif" />不能验证JPG/GIF大写后缀。
 * Bugfix：当response.reset()时，LazyCommitRequestContext应清除所有的状态。

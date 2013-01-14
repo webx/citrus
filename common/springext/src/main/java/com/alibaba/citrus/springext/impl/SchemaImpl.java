@@ -22,11 +22,14 @@ import static com.alibaba.citrus.util.BasicConstant.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static com.alibaba.citrus.util.io.StreamUtil.*;
+import static java.util.Collections.*;
 import static javax.xml.XMLConstants.*;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import com.alibaba.citrus.springext.ConfigurationPointException;
 import com.alibaba.citrus.springext.ResourceResolver.Resource;
@@ -43,21 +46,21 @@ import com.alibaba.citrus.springext.support.SpringSchemasSourceInfo;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 import org.dom4j.Namespace;
 import org.dom4j.QName;
 import org.springframework.core.io.InputStreamSource;
 
 public class SchemaImpl<P extends SourceInfo<?>> extends SchemaBase {
-    private final String        name;
-    private final String        version;
-    private final String        sourceDesc;
-    private       String        targetNamespace;
-    private final String        preferredNsPrefix;
-    private       String[]      includes;
-    private       String[]      elements;
-    private final boolean       parsingTargetNamespace;
-    private final SourceInfo<P> sourceInfo;
+    private final String               name;
+    private final String               version;
+    private final String               sourceDesc;
+    private       String               targetNamespace;
+    private final String               preferredNsPrefix;
+    private       String[]             includes;
+    private final Map<String, Element> elements;
+    private final Collection<Element>  elementCollection;
+    private final boolean              parsingTargetNamespace;
+    private final SourceInfo<P>        sourceInfo;
 
     /** 创建 configuration point 的 main schema 和 versioned schema。 */
     public static Schema createForConfigurationPoint(String name, String version, String targetNamespace, String preferredNsPrefix, String sourceDesc, Document sourceDocument, SourceInfo<ConfigurationPointSourceInfo> sourceInfo) {
@@ -138,6 +141,8 @@ public class SchemaImpl<P extends SourceInfo<?>> extends SchemaBase {
         this.targetNamespace = trimToNull(targetNamespace);
         this.preferredNsPrefix = trimToNull(preferredNsPrefix);
         this.parsingTargetNamespace = parsingTargetNamespace;
+        this.elements = createTreeMap();
+        this.elementCollection = unmodifiableCollection(elements.values());
         this.sourceDesc = sourceDesc;
         this.sourceInfo = assertNotNull(sourceInfo, "sourceInfo");
     }
@@ -167,18 +172,30 @@ public class SchemaImpl<P extends SourceInfo<?>> extends SchemaBase {
         return includes == null ? EMPTY_STRING_ARRAY : includes;
     }
 
-    public String[] getElements() {
-        if (elements != null) {
-            return elements;
-        }
-
+    public Collection<Element> getElements() {
         analyze();
-        return elements == null ? EMPTY_STRING_ARRAY : elements;
+        return elementCollection;
+    }
+
+    @Override
+    public Element getElement(String elementName) {
+        if (elementName != null) {
+            analyze();
+            return elements.get(elementName);
+        } else {
+            return null;
+        }
     }
 
     /** 由schemaSet来设置。 */
-    public void setElements(String[] elements) {
-        this.elements = elements;
+    public void setElements(Collection<Element> elements) {
+        this.elements.clear();
+
+        if (elements != null) {
+            for (Element element : elements) {
+                this.elements.put(element.getName(), element);
+            }
+        }
     }
 
     public String getNamespacePrefix() {
@@ -238,7 +255,7 @@ public class SchemaImpl<P extends SourceInfo<?>> extends SchemaBase {
     @Override
     protected void doAnalyze() {
         Document doc = getDocument(); // 不可能是null
-        Element root = doc.getRootElement();
+        org.dom4j.Element root = doc.getRootElement();
 
         // return if not a schema file
         if (!W3C_XML_SCHEMA_NS_URI.equals(root.getNamespaceURI()) || !"schema".equals(root.getName())) {
@@ -261,7 +278,7 @@ public class SchemaImpl<P extends SourceInfo<?>> extends SchemaBase {
 
         // for each <xsd:include>
         for (Iterator<?> i = root.elementIterator(includeName); i.hasNext(); ) {
-            Element includeElement = (Element) i.next();
+            org.dom4j.Element includeElement = (org.dom4j.Element) i.next();
             String schemaLocation = trimToNull(includeElement.attributeValue("schemaLocation"));
 
             if (schemaLocation != null) {
@@ -272,21 +289,15 @@ public class SchemaImpl<P extends SourceInfo<?>> extends SchemaBase {
         includes = includeNames.toArray(new String[includeNames.size()]);
 
         // parse xsd:element
-        if (elements == null) {
-            QName elementName = DocumentHelper.createQName("element", xsd);
-            List<String> elementNames = createLinkedList();
+        QName elementName = DocumentHelper.createQName("element", xsd);
 
-            // for each <xsd:element>
-            for (Iterator<?> i = root.elementIterator(elementName); i.hasNext(); ) {
-                Element elementElement = (Element) i.next();
-                String name = trimToNull(elementElement.attributeValue("name"));
+        // for each <xsd:element>
+        for (Iterator<?> i = root.elementIterator(elementName); i.hasNext(); ) {
+            Element element = new ElementImpl((org.dom4j.Element) i.next());
 
-                if (name != null) {
-                    elementNames.add(name);
-                }
+            if (element.getName() != null) {
+                this.elements.put(element.getName(), element);
             }
-
-            elements = elementNames.toArray(new String[elementNames.size()]);
         }
     }
 
@@ -309,6 +320,46 @@ public class SchemaImpl<P extends SourceInfo<?>> extends SchemaBase {
         } else {
             return String.format("Schema[name=%s, version=%s, targetNamespace=%s, source=%s]", name, version,
                                  targetNamespace, super.toString());
+        }
+    }
+
+    private static class ElementImpl implements Element {
+        private final static Namespace xsd               = DocumentHelper.createNamespace("xsd", W3C_XML_SCHEMA_NS_URI);
+        private final static QName     annotationName    = DocumentHelper.createQName("annotation", xsd);
+        private final static QName     documentationName = DocumentHelper.createQName("documentation", xsd);
+        private final String name;
+        private final String annotation;
+
+        private ElementImpl(org.dom4j.Element elementElement) {
+            // name
+            String name = trimToNull(elementElement.attributeValue("name"));
+
+            // annotation/documentation
+            org.dom4j.Element annotationElement = elementElement.element(annotationName);
+            org.dom4j.Element documentationElement = annotationElement == null ? null : annotationElement.element(documentationName);
+            String documentation = documentationElement == null ? null : documentationElement.getText();
+
+            if (documentation != null) {
+                documentation = trimToNull(documentation.replaceAll("[ \\t]*[\\r|\\n|\\r\\n][ \\t]*", "\n")); // 除去每行首尾空白，保留换行符
+            }
+
+            this.name = name;
+            this.annotation = documentation;
+        }
+
+        @Override
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public String getAnnotation() {
+            return annotation;
+        }
+
+        @Override
+        public String toString() {
+            return "Element[" + name + "]";
         }
     }
 }
