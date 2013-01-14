@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xsi:schemaLocation="
+                 http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+                 http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+             ">
+
+    <beans:bean id="deco1" class="com.alibaba.citrus.springext.contrib.deco.MyDecoratableClass">
+        <services:my-deco interface="com.alibaba.citrus.springext.contrib.deco.MyDecorator" />
+    </beans:bean>
+
+    <beans:bean id="deco2"
+                class="com.alibaba.citrus.springext.contrib.deco.MyDecoratableClass"
+                services:my-attr="com.alibaba.citrus.springext.contrib.deco.MyDecorator" />
+
+</beans:beans>

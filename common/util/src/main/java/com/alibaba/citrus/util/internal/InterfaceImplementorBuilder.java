@@ -51,6 +51,7 @@ import net.sf.cglib.reflect.FastMethod;
 public class InterfaceImplementorBuilder extends DynamicClassBuilder {
     private static final String OVERRIDER_SET_PROXY_OBJECT_METHOD_NAME = "setThisProxy";
 
+    private Class<?>                   superclass;
     private List<Class<?>>             interfaces;
     private Object                     baseObject;
     private Object                     overrider;
@@ -66,6 +67,11 @@ public class InterfaceImplementorBuilder extends DynamicClassBuilder {
     public InterfaceImplementorBuilder(ClassLoader cl) {
         super(cl);
         interfaces = createLinkedList();
+    }
+
+    public InterfaceImplementorBuilder setSuperclass(Class<?> superclass) {
+        this.superclass = superclass;
+        return this;
     }
 
     public InterfaceImplementorBuilder addInterface(Class<?>... interfaceClasses) {
@@ -94,6 +100,11 @@ public class InterfaceImplementorBuilder extends DynamicClassBuilder {
     }
 
     private void init() {
+        // check superclass
+        if (superclass == null) {
+            superclass = Object.class;
+        }
+
         // check interfaces
         assertTrue(!interfaces.isEmpty(), "no interface specified");
 
@@ -218,7 +229,7 @@ public class InterfaceImplementorBuilder extends DynamicClassBuilder {
             generator = new Enhancer();
 
             generator.setClassLoader(getClassLoader());
-            generator.setSuperclass(Object.class);
+            generator.setSuperclass(superclass);
             generator.setInterfaces(interfaces.toArray(new Class<?>[interfaces.size()]));
 
             generator.setCallbacks(new Callback[] {
@@ -234,8 +245,12 @@ public class InterfaceImplementorBuilder extends DynamicClassBuilder {
                     new MethodInterceptor() {
                         public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
                                 throws Throwable {
-                            if (baseObject == null) {
-                                throw new UnsupportedOperationException(getSimpleMethodSignature(method, true));
+                            if (baseObject == null || !method.getDeclaringClass().isAssignableFrom(baseObject.getClass())) {
+                                if (method.getDeclaringClass().isAssignableFrom(superclass)) {
+                                    return proxy.invokeSuper(obj, args);
+                                } else {
+                                    throw new UnsupportedOperationException(getSimpleMethodSignature(method, true));
+                                }
                             }
 
                             return proxy.invoke(baseObject, args);
