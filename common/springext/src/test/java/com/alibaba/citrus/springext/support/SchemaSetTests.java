@@ -32,7 +32,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import com.alibaba.citrus.springext.Namespaces;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.Schema.Element;
 import com.alibaba.citrus.springext.Schemas;
@@ -42,30 +44,36 @@ import org.junit.Test;
 import org.springframework.core.io.InputStreamSource;
 
 public class SchemaSetTests {
-    private Schema    s1;
-    private Schema    s2;
-    private Schema    s3;
-    private Schema    s4;
-    private Schemas   schemas1;
-    private Schemas   schemas2;
-    private SchemaSet set1;
+    private Schema            s1;
+    private Schema            s2;
+    private Schema            s3;
+    private Schema            s4;
+    private NamespacesSchemas schemas1;
+    private Schemas           schemas2;
+    private SchemaSet         set1;
 
     @Before
     public void init_data1() {
         // create schema
-        s1 = createSchemaFromFile("b/c", "schema/z.xsd");
-        s2 = createSchemaFromFile("b/d", "schema/z.xsd");
-        s3 = createSchemaFromFile("a/b/c", "schema/z.xsd");
-        s4 = createSchemaFromFile("a/b/d", "schema/z.xsd");
+        s1 = createSchemaFromFile("b/c", "schema/ns.xsd");
+        s2 = createSchemaFromFile("b/d", "schema/ns.xsd");
+        s3 = createSchemaFromFile("a/b/c", "schema/ns.xsd");
+        s4 = createSchemaFromFile("a/b/d", "schema/ns.xsd");
 
         // mocks to Schemas
-        schemas1 = createMock(Schemas.class);
+        schemas1 = createMock(NamespacesSchemas.class);
         schemas2 = createMock(Schemas.class);
 
         Map<String, Schema> nameToSchemas1 = createHashMap();
         nameToSchemas1.put("b/c", s1);
         nameToSchemas1.put("b/d", s2);
         expect(schemas1.getNamedMappings()).andReturn(nameToSchemas1);
+
+        Set<String> namespaces1 = createHashSet();
+        namespaces1.add("http://www.alibaba.com/schema/test");
+        namespaces1.add("http://www.springframework.com/schema/p");
+        namespaces1.add("http://www.springframework.com/schema/c");
+        expect(schemas1.getAvailableNamespaces()).andReturn(namespaces1);
 
         Map<String, Schema> nameToSchemas2 = createHashMap();
         nameToSchemas2.put("a/b/c", s3);
@@ -93,6 +101,27 @@ public class SchemaSetTests {
         } catch (IllegalArgumentException e) {
             assertThat(e, exception("schemasList"));
         }
+    }
+
+    @Test
+    public void getNamespaceMappings_getAvailableNamespaces() {
+        Map<String, Set<Schema>> namespaceMappings = set1.getNamespaceMappings();
+        Set<String> namespaces = set1.getAvailableNamespaces();
+
+        assertEquals(3, namespaces.size());
+        assertEquals(3, namespaceMappings.size());
+
+        assertTrue(namespaces.contains("http://www.alibaba.com/schema/test"));
+        assertTrue(namespaces.contains("http://www.springframework.com/schema/p"));
+        assertTrue(namespaces.contains("http://www.springframework.com/schema/c"));
+
+        assertTrue(namespaceMappings.containsKey("http://www.alibaba.com/schema/test"));
+        assertTrue(namespaceMappings.containsKey("http://www.springframework.com/schema/p"));
+        assertTrue(namespaceMappings.containsKey("http://www.springframework.com/schema/c"));
+
+        assertEquals(4, namespaceMappings.get("http://www.alibaba.com/schema/test").size());
+        assertEquals(0, namespaceMappings.get("http://www.springframework.com/schema/p").size());
+        assertEquals(0, namespaceMappings.get("http://www.springframework.com/schema/c").size());
     }
 
     @Test
@@ -312,5 +341,8 @@ public class SchemaSetTests {
                 return new FileInputStream(new File(srcdir, fileName));
             }
         });
+    }
+
+    interface NamespacesSchemas extends Schemas, Namespaces {
     }
 }

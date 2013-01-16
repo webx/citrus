@@ -55,7 +55,7 @@ public class SchemaImpl<P extends SourceInfo<?>> extends SchemaBase {
     private final String               version;
     private final String               sourceDesc;
     private       String               targetNamespace;
-    private final String               preferredNsPrefix;
+    private       String               preferredNsPrefix;
     private       String[]             includes;
     private final Map<String, Element> elements;
     private final Collection<Element>  elementCollection;
@@ -103,7 +103,9 @@ public class SchemaImpl<P extends SourceInfo<?>> extends SchemaBase {
     }
 
     /** 创建spring.schemas中定义的schema。 */
-    public static Schema createSpringPluggableSchema(String name, String version, boolean parsingTargetNamespace, String sourceDesc, InputStreamSource source, SourceInfo<SpringSchemasSourceInfo> sourceInfo) {
+    public static Schema createSpringPluggableSchema(String name, String version, boolean parsingTargetNamespace, String sourceDesc,
+                                                     InputStreamSource source, SourceInfo<SpringSchemasSourceInfo> sourceInfo,
+                                                     final Map<String, Map<String, String>> toolingParameters) {
 
         class SpringPluggableSchemaImpl extends SchemaImpl<SpringSchemasSourceInfo>
                 implements SpringPluggableSchemaSourceInfo {
@@ -113,6 +115,23 @@ public class SchemaImpl<P extends SourceInfo<?>> extends SchemaBase {
                 super(name, version, targetNamespace, preferredNsPrefix,
                       parsingTargetNamespace, sourceDesc, source,
                       sourceDocument, isInputStreamSource, sourceInfo);
+            }
+
+            @Override
+            protected void doAnalyze() {
+                super.doAnalyze();
+
+                // 从spring.tooling参数表中获取preferredNsPrefix
+                String namespace = getTargetNamespace();
+
+                if (toolingParameters != null && namespace != null && toolingParameters.containsKey(namespace)) {
+                    Map<String, String> params = toolingParameters.get(getTargetNamespace());
+                    String preferredNsPrefix = trimToNull(params.get("prefix"));
+
+                    if (preferredNsPrefix != null) {
+                        setPreferredNsPrefix(preferredNsPrefix);
+                    }
+                }
             }
         }
 
@@ -165,6 +184,10 @@ public class SchemaImpl<P extends SourceInfo<?>> extends SchemaBase {
 
     public String getPreferredNsPrefix() {
         return preferredNsPrefix;
+    }
+
+    protected void setPreferredNsPrefix(String preferredNsPrefix) {
+        this.preferredNsPrefix = trimToNull(preferredNsPrefix);
     }
 
     public String[] getIncludes() {
@@ -267,7 +290,7 @@ public class SchemaImpl<P extends SourceInfo<?>> extends SchemaBase {
             Attribute attr = root.attribute("targetNamespace");
 
             if (attr != null) {
-                targetNamespace = attr.getStringValue();
+                targetNamespace = trimToNull(attr.getStringValue());
             }
         }
 

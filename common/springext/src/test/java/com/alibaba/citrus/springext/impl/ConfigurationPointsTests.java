@@ -21,6 +21,12 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.ConfigurationPointException;
 import com.alibaba.citrus.test.TestEnvStatic;
@@ -75,6 +81,16 @@ public class ConfigurationPointsTests {
 
         cp = cps.getConfigurationPointByNamespaceUri("http://www.alibaba.com/test1/cp2");
         assertThat(cp.toString(), containsString("cp2=http://www.alibaba.com/test1/cp2"));
+    }
+
+    @Test
+    public void test1_getAvailableNamespaces() {
+        createConfigurationPoints("TEST-INF/test1/cps");
+
+        String[] namespaces = cps.getAvailableNamespaces().toArray(new String[0]); // already sorted
+
+        assertArrayEquals(new String[] { "http://www.alibaba.com/test1/cp1",
+                                         "http://www.alibaba.com/test1/cp2" }, namespaces);
     }
 
     @Test

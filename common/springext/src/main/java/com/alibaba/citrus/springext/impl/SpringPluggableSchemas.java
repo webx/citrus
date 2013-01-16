@@ -20,12 +20,15 @@ package com.alibaba.citrus.springext.impl;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
+import static java.util.Collections.unmodifiableSet;
 
 import java.net.URI;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.alibaba.citrus.springext.Namespaces;
 import com.alibaba.citrus.springext.ResourceResolver;
 import com.alibaba.citrus.springext.ResourceResolver.PropertyHandler;
 import com.alibaba.citrus.springext.ResourceResolver.Resource;
@@ -38,6 +41,7 @@ import com.alibaba.citrus.springext.support.SpringSchemasSourceInfo;
 import com.alibaba.citrus.util.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.xml.DefaultNamespaceHandlerResolver;
 import org.springframework.beans.factory.xml.PluggableSchemaResolver;
 import org.springframework.util.ClassUtils;
 
@@ -46,14 +50,19 @@ import org.springframework.util.ClassUtils;
  *
  * @author Michael Zhou
  */
-public class SpringPluggableSchemas implements Schemas {
-    private final static Logger  log                      = LoggerFactory.getLogger(SpringPluggableSchemas.class);
-    private final static String  SCHEMA_MAPPINGS_LOCATION = PluggableSchemaResolver.DEFAULT_SCHEMA_MAPPINGS_LOCATION;
-    private final static Pattern SCHEMA_VERSION_PATTERN   = Pattern.compile("-((\\d+)(.\\d+)*)\\.xsd$");
-    private final ResourceResolver    resourceResolver;
-    private final Map<String, Schema> nameToSchemaMappings;
-    private final Map<String, String> uriToNameMappings;
-    private       boolean             initialized;
+public class SpringPluggableSchemas implements Schemas, Namespaces {
+    private final static Logger  log                       = LoggerFactory.getLogger(SpringPluggableSchemas.class);
+    private final static String  SCHEMA_MAPPINGS_LOCATION  = PluggableSchemaResolver.DEFAULT_SCHEMA_MAPPINGS_LOCATION;
+    private final static String  HANDLER_MAPPINGS_LOCATION = DefaultNamespaceHandlerResolver.DEFAULT_HANDLER_MAPPINGS_LOCATION;
+    private final static String  TOOLING_PARAMS_LOCATION   = "META-INF/spring.tooling";
+    private final static Pattern SCHEMA_VERSION_PATTERN    = Pattern.compile("-((\\d+)(.\\d+)*)\\.xsd$");
+    private final ResourceResolver                 resourceResolver;
+    private final Map<String, Schema>              nameToSchemaMappings;
+    private final Map<String, String>              uriToNameMappings;
+    private final Set<String>                      namespaces;
+    private final Set<String>                      namespacesUnmodified;
+    private final Map<String, Map<String, String>> toolingParameters;
+    private       boolean                          initialized;
 
     /** 通过默认的<code>ClassLoader</code>来查找spring schemas。 */
     public SpringPluggableSchemas() {
@@ -90,6 +99,15 @@ public class SpringPluggableSchemas implements Schemas {
 
         this.nameToSchemaMappings = createTreeMap();
         this.uriToNameMappings = createTreeMap();
+        this.namespaces = createTreeSet();
+        this.namespacesUnmodified = unmodifiableSet(namespaces);
+        this.toolingParameters = createHashMap();
+    }
+
+    @Override
+    public Set<String> getAvailableNamespaces() {
+        ensureInit();
+        return namespacesUnmodified;
     }
 
     public Map<String, Schema> getNamedMappings() {
@@ -100,6 +118,11 @@ public class SpringPluggableSchemas implements Schemas {
     public Map<String, String> getUriToNameMappings() {
         ensureInit();
         return uriToNameMappings;
+    }
+
+    public Map<String, String> getToolingParameters(String namespaceURI) {
+        ensureInit();
+        return toolingParameters.get(trimToNull(namespaceURI));
     }
 
     private void ensureInit() {
@@ -118,6 +141,36 @@ public class SpringPluggableSchemas implements Schemas {
             }
         }
 
+        // spring.tooling
+        resourceResolver.loadAllProperties(TOOLING_PARAMS_LOCATION, new PropertyHandler() {
+            public void handle(String key, String value, Resource source, int lineNumber) {
+                String namespaceAndParamName = trimToNull(key);
+
+                if (namespaceAndParamName != null) {
+                    int index = namespaceAndParamName.indexOf("@");
+                    String namespace = null;
+                    String paramName = null;
+
+                    if (index >= 0) {
+                        namespace = trimToNull(namespaceAndParamName.substring(0, index));
+                        paramName = trimToNull(namespaceAndParamName.substring(index + 1));
+                    }
+
+                    if (namespace != null && paramName != null) {
+                        Map<String, String> params = toolingParameters.get(namespace);
+
+                        if (params == null) {
+                            params = createHashMap();
+                            toolingParameters.put(namespace, params);
+                        }
+
+                        params.put(paramName, trimToNull(value));
+                    }
+                }
+            }
+        });
+
+        // spring.schemas
         resourceResolver.loadAllProperties(SCHEMA_MAPPINGS_LOCATION, new PropertyHandler() {
             public void handle(String key, String value, Resource source, int lineNumber) {
                 String uri = trimToNull(key);
@@ -136,11 +189,30 @@ public class SpringPluggableSchemas implements Schemas {
                 Resource schemaSource = getResource(classpathLocation, uri);
 
                 if (schemaSource != null) {
-                    nameToSchemaMappings.put(schemaName, SchemaImpl.createSpringPluggableSchema(
+                    Schema schema = SchemaImpl.createSpringPluggableSchema(
                             schemaName, version, true, desc, schemaSource,
-                            new SourceInfoSupport<SpringSchemasSourceInfo>(pluginSourceInfo).setSource(schemaSource)));
+                            new SourceInfoSupport<SpringSchemasSourceInfo>(pluginSourceInfo).setSource(schemaSource), toolingParameters);
 
+                    nameToSchemaMappings.put(schemaName, schema);
                     uriToNameMappings.put(uri, schemaName);
+
+                    String namespace = schema.getTargetNamespace();
+
+                    if (namespace != null) {
+                        namespaces.add(namespace);
+                    }
+                }
+            }
+        });
+
+        // 在spring.handlers中，有一些namespace是没有schema的（例如：http://www.springframework.org/schema/p），所以在spring.schemas中找不到。
+        // 但我们需要在这里把它引进来，以方便IDE plugins读取。
+        resourceResolver.loadAllProperties(HANDLER_MAPPINGS_LOCATION, new PropertyHandler() {
+            public void handle(String key, String value, Resource source, int lineNumber) {
+                String namespace = trimToNull(key);
+
+                if (namespace != null) {
+                    namespaces.add(namespace);
                 }
             }
         });

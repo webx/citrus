@@ -19,7 +19,7 @@ package com.alibaba.citrus.springext;
 
 import java.util.Collection;
 
-public interface ConfigurationPoints extends Schemas {
+public interface ConfigurationPoints extends Schemas, Namespaces {
     String DEFAULT_CONFIGURATION_POINTS_LOCATION = "META-INF/spring.configuration-points";
 
     Collection<ConfigurationPoint> getConfigurationPoints();

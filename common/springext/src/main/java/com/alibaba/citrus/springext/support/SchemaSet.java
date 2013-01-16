@@ -27,6 +27,7 @@ import static java.util.Collections.*;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -34,6 +35,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 
+import com.alibaba.citrus.springext.Namespaces;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.Schema.Element;
 import com.alibaba.citrus.springext.Schema.Transformer;
@@ -47,11 +49,13 @@ import com.alibaba.citrus.util.internal.LazyLoader.Loader;
  *
  * @author Michael Zhou
  */
-public class SchemaSet implements Schemas, Iterable<Schemas> {
+public class SchemaSet implements Schemas, Namespaces, Iterable<Schemas> {
     private final List<Schemas> allSchemas;
     private final Map<String, Schema> nameToSchemas             = createHashMap();
     private final Map<String, Schema> nameToSchemasUnmodifiable = unmodifiableMap(nameToSchemas);
     private final SortedSet<String> names;
+    private final SortedSet<String> namespaces;
+    private final Set<String>       namespacesUnmodifiable;
 
     // 延迟加载namespace mappings，仅当有需要时再做。
     // 将所有相同namespace的schema放在一起，并按名称倒排序，即按：beans.xsd、beans-2.5.xsd、beans-2.0.xsd 顺序。
@@ -73,9 +77,22 @@ public class SchemaSet implements Schemas, Iterable<Schemas> {
                         });
 
                         nsToSchemasMappings.put(namespace, nsSchemas);
+                        namespaces.add(namespace);
                     }
 
                     nsSchemas.add(schema);
+                }
+            }
+
+            // getAvailableNamespaces()中可能包含一些namespace，它们没有对应的schemas。需要把它们特别地找出来。
+            for (Schemas schemas : allSchemas) {
+                if (schemas instanceof Namespaces) {
+                    for (String namespace : ((Namespaces) schemas).getAvailableNamespaces()) {
+                        if (!nsToSchemasMappings.containsKey(namespace)) {
+                            nsToSchemasMappings.put(namespace, Collections.<Schema>emptySet());
+                            namespaces.add(namespace);
+                        }
+                    }
                 }
             }
 
@@ -113,6 +130,9 @@ public class SchemaSet implements Schemas, Iterable<Schemas> {
             }
         }, this.nameToSchemas.keySet());
 
+        this.namespaces = createTreeSet();
+        this.namespacesUnmodifiable = unmodifiableSet(namespaces);
+
         // 检查所有schema，将重复的include提到最上层
         processIncludes();
     }
@@ -120,6 +140,12 @@ public class SchemaSet implements Schemas, Iterable<Schemas> {
     @Override
     public Iterator<Schemas> iterator() {
         return allSchemas.iterator();
+    }
+
+    @Override
+    public Set<String> getAvailableNamespaces() {
+        nsToSchemas.getInstance(); // ensure initialized
+        return namespacesUnmodifiable;
     }
 
     /**
