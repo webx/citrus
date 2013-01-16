@@ -22,6 +22,7 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.util.Map;
+import java.util.Set;
 
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.SourceInfo;
@@ -76,6 +77,24 @@ public class SpringPluggableSchemaTests {
         assertNotNull(dummySchema);
         assertEquals(null, dummySchema.getTargetNamespace());
         assertEquals(null, dummySchema.getTargetNamespace()); // try hard
+    }
+
+    @Test
+    public void getAvailableNamespaces() {
+        Set<String> namespaces = sps.getAvailableNamespaces();
+
+        assertThat(namespaces.size(), greaterThan(0));
+        assertThat(namespaces.toString(), containsAll(
+                "http://www.springframework.org/schema/beans",
+                "http://www.springframework.org/schema/p",  // 这个ns是没有schema的。
+                "http://www.alibaba.com/schema/springext/base"));
+    }
+
+    @Test
+    public void getToolingParameters() {
+        Map<String, String> params = sps.getToolingParameters("http://www.alibaba.com/schema/springext/base-types");
+        assertEquals("sb-types", params.get("prefix"));
+        assertEquals("sb-types", sps.getNamedMappings().get("www.alibaba.com/schema/springext-base-types.xsd").getPreferredNsPrefix());
     }
 
     @Test

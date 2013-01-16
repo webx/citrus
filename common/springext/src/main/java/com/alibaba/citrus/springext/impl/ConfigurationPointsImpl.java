@@ -26,6 +26,7 @@ import static java.util.Collections.*;
 import java.net.URI;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.ConfigurationPointException;
@@ -55,6 +56,7 @@ public class ConfigurationPointsImpl implements ConfigurationPoints {
     private final ConfigurationPointSettings      settings;
     private final String                          configurationPointsLocation;
     private final Map<String, ConfigurationPoint> namespaceUriToConfigurationPoints; // namespaceUri => configurationPoint
+    private final Set<String>                     namespaces;
     private final Map<String, ConfigurationPoint> nameToConfigurationPoints; // name => configurationPoint
     private final Collection<ConfigurationPoint>  configurationPoints;
     private       boolean                         initialized;
@@ -92,7 +94,8 @@ public class ConfigurationPointsImpl implements ConfigurationPoints {
 
     private ConfigurationPointsImpl(ClassLoader classLoader, ResourceResolver resourceResolver, String configurationPointsLocation) {
         this.configurationPointsLocation = defaultIfEmpty(configurationPointsLocation, DEFAULT_CONFIGURATION_POINTS_LOCATION);
-        this.namespaceUriToConfigurationPoints = createHashMap();
+        this.namespaceUriToConfigurationPoints = createTreeMap();
+        this.namespaces = unmodifiableSet(namespaceUriToConfigurationPoints.keySet()); // sorted by ns
         this.nameToConfigurationPoints = createTreeMap();
         this.configurationPoints = unmodifiableCollection(nameToConfigurationPoints.values());// sorted by name
 
@@ -156,6 +159,11 @@ public class ConfigurationPointsImpl implements ConfigurationPoints {
 
             log.debug(buf.toString());
         }
+    }
+
+    public Set<String> getAvailableNamespaces() {
+        ensureInit();
+        return namespaces;
     }
 
     public Collection<ConfigurationPoint> getConfigurationPoints() {
