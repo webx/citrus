@@ -100,6 +100,7 @@
   * 增加方法：ConfigurationPoint.getDependingContributions()，可以取得所有引用此configuration point的contributions。
   * 为ConfigurationPoint/Contribution/Schema/SpringPluggableSchema 增添了SourceInfo接口，以便取得原始资源文件，供IDE来编译。
   * 为Contribution添加了getAnnotation()方法，可以取得schema中的文档信息。
+  * 支持读取和取得 META-INF/spring.handlers 和 META-INF/spring.tooling 信息。
 
 * Bugfix: Form验证中，<uploaded-file-validator extension="jpg,gif" />不能验证JPG/GIF大写后缀。
 * Bugfix：当response.reset()时，LazyCommitRequestContext应清除所有的状态。
