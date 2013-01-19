@@ -89,6 +89,8 @@ public class SpringExtSchemaSet extends SchemaSet {
     }
 
     public static interface TreeItem {
+        boolean hasChildren();
+
         @NotNull
         TreeItem[] getChildren();
     }
@@ -144,6 +146,11 @@ public class SpringExtSchemaSet extends SchemaSet {
 
     private static abstract class AbstractTreeItem<C extends TreeItem> implements TreeItem, ParentOf<C> {
         protected final Map<String, C> children = createTreeMap();
+
+        @Override
+        public boolean hasChildren() {
+            return !children.isEmpty();
+        }
 
         @NotNull
         public TreeItem[] getChildren() {

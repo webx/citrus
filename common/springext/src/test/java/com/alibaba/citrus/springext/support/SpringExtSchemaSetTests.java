@@ -102,6 +102,8 @@ public class SpringExtSchemaSetTests {
     @Test
     public void configurationPointItems() {
         assertEquals(3, configurationPointItems.size());
+
+        assertEquals(true, configurationPointItems.get(0).hasChildren());
         assertEquals("http://localhost/b {\n" +
                      "  b1 {\n" +
                      "    http://localhost/c {\n" +
@@ -113,8 +115,10 @@ public class SpringExtSchemaSetTests {
                      "  }\n" +
                      "}", configurationPointItems.get(0).dump());
 
+        assertEquals(false, configurationPointItems.get(1).hasChildren());
         assertEquals("http://localhost/d", configurationPointItems.get(1).dump());
 
+        assertEquals(true, configurationPointItems.get(2).hasChildren());
         assertEquals("http://localhost/e {\n" +
                      "  e1 {\n" +
                      "    http://localhost/f {\n" +
