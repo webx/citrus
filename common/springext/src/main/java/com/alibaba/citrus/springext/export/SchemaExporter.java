@@ -34,7 +34,7 @@ import java.util.Map;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.Schema.Transformer;
 import com.alibaba.citrus.springext.Schemas;
-import com.alibaba.citrus.springext.impl.SpringExtSchemaSet;
+import com.alibaba.citrus.springext.support.SpringExtSchemaSet;
 import com.alibaba.citrus.springext.support.SchemaSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

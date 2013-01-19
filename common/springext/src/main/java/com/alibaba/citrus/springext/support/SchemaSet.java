@@ -61,7 +61,7 @@ public class SchemaSet implements Schemas, Namespaces, Iterable<Schemas> {
     // 将所有相同namespace的schema放在一起，并按名称倒排序，即按：beans.xsd、beans-2.5.xsd、beans-2.0.xsd 顺序。
     private final LazyLoader<Map<String, Set<Schema>>, Object> nsToSchemas = LazyLoader.getDefault(new Loader<Map<String, Set<Schema>>, Object>() {
         public Map<String, Set<Schema>> load(Object context) {
-            Map<String, Set<Schema>> nsToSchemasMappings = createHashMap();
+            Map<String, Set<Schema>> nsToSchemasMappings = createTreeMap(); // 使用排序的map，使测试结果恒定。
 
             for (Schema schema : nameToSchemas.values()) {
                 String namespace = schema.getTargetNamespace();

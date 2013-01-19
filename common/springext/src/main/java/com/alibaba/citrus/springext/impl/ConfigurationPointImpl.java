@@ -90,7 +90,7 @@ public class ConfigurationPointImpl extends NamespaceHandlerSupport
         this.preferredNsPrefix = trimToNull(preferredNsPrefix);
         this.contributionLocationPrefix = settings.baseLocation + name.replace('/', '-'); // eg. my-conf-point
         this.contributions = createTreeMap();
-        this.dependingContributions = createHashMap();
+        this.dependingContributions = createTreeMap(); // 使用排序的map，使测试结果恒定
         this.dependingContributionsUnmodifiable = unmodifiableCollection(dependingContributions.values());
         this.sourceInfo = assertNotNull(sourceInfo, "sourceInfo");
     }
