@@ -40,7 +40,7 @@ import com.alibaba.citrus.logconfig.LogConfigurator;
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.ContributionType;
 import com.alibaba.citrus.springext.Schema;
-import com.alibaba.citrus.springext.impl.SpringExtSchemaSet;
+import com.alibaba.citrus.springext.support.SpringExtSchemaSet;
 import com.alibaba.citrus.springext.support.SchemaUtil;
 import com.alibaba.citrus.util.FileUtil;
 import org.dom4j.Attribute;

@@ -98,6 +98,7 @@
   * 调整接口，使之不仅可从ClassLoader中装载资源，也可从由IDE plugins所实现的ResourceResolver接口来装载。
   * 改进了装载schema的过程，引进Transformer接口，不仅使代码更清晰，也提高了效率。
   * 增加方法：ConfigurationPoint.getDependingContributions()，可以取得所有引用此configuration point的contributions。
+  * 从SpringExtSchemaSet中可以取得configuration point之间的依赖关系树。
   * 为ConfigurationPoint/Contribution/Schema/SpringPluggableSchema 增添了SourceInfo接口，以便取得原始资源文件，供IDE来编译。
   * 为Contribution添加了getAnnotation()方法，可以取得schema中的文档信息。
   * 支持读取和取得 META-INF/spring.handlers 和 META-INF/spring.tooling 信息。
