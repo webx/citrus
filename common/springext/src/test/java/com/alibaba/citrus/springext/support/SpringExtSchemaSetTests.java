@@ -53,24 +53,60 @@ public class SpringExtSchemaSetTests {
     }
 
     @Test
-    public void dependingContributions() {
+    public void parentConfigurationPoints() {
         // 依赖关系：
-        // a1 -> b, c
-        // b1 -> c
-        // c1 -> a, h
-        // d1 -> d
-        // e1 -> f
-        // f1 -> g
-        // f2 -> h
-        // g1
-        assertConfigurationPointDependencies("a", "c");
-        assertConfigurationPointDependencies("b", "a");
-        assertConfigurationPointDependencies("c", "a", "b");
-        assertConfigurationPointDependencies("d", "d");
-        assertConfigurationPointDependencies("e");
-        assertConfigurationPointDependencies("f", "e");
-        assertConfigurationPointDependencies("g", "f");
-        assertConfigurationPointDependencies("h", "c", "f");
+        // <a1> -> b, c
+        // <b1> -> c
+        // <c1> -> a, h
+        // <d1> -> d
+        // <e1> -> f
+        // <f1> -> g
+        // <f2> -> h
+        // <g1>
+        assertArrayEquals(new String[] { "c" }, getParentConfigurationPoints("a"));
+        assertArrayEquals(new String[] { "a" }, getParentConfigurationPoints("b"));
+        assertArrayEquals(new String[] { "a", "b" }, getParentConfigurationPoints("c"));
+        assertArrayEquals(new String[] { "d" }, getParentConfigurationPoints("d"));
+        assertArrayEquals(new String[] { }, getParentConfigurationPoints("e"));
+        assertArrayEquals(new String[] { "e" }, getParentConfigurationPoints("f"));
+        assertArrayEquals(new String[] { "f" }, getParentConfigurationPoints("g"));
+        assertArrayEquals(new String[] { "c", "f" }, getParentConfigurationPoints("h"));
+    }
+
+    @Test
+    public void configurationPointItems() {
+        assertEquals(3, configurationPointItems.size());
+
+        assertEquals(true, configurationPointItems.get(0).hasChildren());
+        assertEquals("http://localhost/b {\n" +
+                     "  b1 {\n" +
+                     "    http://localhost/c {\n" +     // a, b -> c -> a 循环引用被切断，变成 b -> c -> a
+                     "      c1 {\n" +                   // 引用两个configuration points
+                     "        http://localhost/a\n" +   // c -> a
+                     "        http://localhost/h\n" +   // c, f -> h 被两个element引用
+                     "      }\n" +
+                     "    }\n" +
+                     "  }\n" +
+                     "}", configurationPointItems.get(0).dump());
+
+        assertEquals(false, configurationPointItems.get(1).hasChildren());
+        assertEquals("http://localhost/d",              // 自己引用自己，就当没引用
+                     configurationPointItems.get(1).dump());
+
+        assertEquals(true, configurationPointItems.get(2).hasChildren());
+        assertEquals("http://localhost/e {\n" +         // e -> f
+                     "  e1 {\n" +
+                     "    http://localhost/f {\n" +     // f在不同的标签中分别引用g和h
+                     "      f1 {\n" +
+                     "        http://localhost/g\n" +
+                     "      }\n" +
+                     "\n" +
+                     "      f2 {\n" +
+                     "        http://localhost/h\n" +   // c, f -> h，h也被c引用
+                     "      }\n" +
+                     "    }\n" +
+                     "  }\n" +
+                     "}", configurationPointItems.get(2).dump());
     }
 
     @Test
@@ -99,41 +135,6 @@ public class SpringExtSchemaSetTests {
         assertTrue(found);
     }
 
-    @Test
-    public void configurationPointItems() {
-        assertEquals(3, configurationPointItems.size());
-
-        assertEquals(true, configurationPointItems.get(0).hasChildren());
-        assertEquals("http://localhost/b {\n" +
-                     "  b1 {\n" +
-                     "    http://localhost/c {\n" +
-                     "      c1 {\n" +
-                     "        http://localhost/a\n" +
-                     "        http://localhost/h\n" +
-                     "      }\n" +
-                     "    }\n" +
-                     "  }\n" +
-                     "}", configurationPointItems.get(0).dump());
-
-        assertEquals(false, configurationPointItems.get(1).hasChildren());
-        assertEquals("http://localhost/d", configurationPointItems.get(1).dump());
-
-        assertEquals(true, configurationPointItems.get(2).hasChildren());
-        assertEquals("http://localhost/e {\n" +
-                     "  e1 {\n" +
-                     "    http://localhost/f {\n" +
-                     "      f1 {\n" +
-                     "        http://localhost/g\n" +
-                     "      }\n" +
-                     "\n" +
-                     "      f2 {\n" +
-                     "        http://localhost/h\n" +
-                     "      }\n" +
-                     "    }\n" +
-                     "  }\n" +
-                     "}", configurationPointItems.get(2).dump());
-    }
-
     private <I> List<I> filter(Class<I> type, NamespaceItem[] items, boolean withSchemas) {
         List<I> list = createLinkedList();
 
@@ -146,7 +147,7 @@ public class SpringExtSchemaSetTests {
         return list;
     }
 
-    private void assertConfigurationPointDependencies(String cpName, String... dependings) {
+    private String[] getParentConfigurationPoints(String cpName) {
         ConfigurationPoint cp = schemas.getConfigurationPoints().getConfigurationPointByName(cpName);
         List<String> depList = createLinkedList();
 
@@ -154,6 +155,6 @@ public class SpringExtSchemaSetTests {
             depList.add(contribution.getConfigurationPoint().getName());
         }
 
-        assertArrayEquals(dependings, depList.toArray());
+        return depList.toArray(new String[0]);
     }
 }
