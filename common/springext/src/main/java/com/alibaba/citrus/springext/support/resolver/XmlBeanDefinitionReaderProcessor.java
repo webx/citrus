@@ -19,7 +19,7 @@ package com.alibaba.citrus.springext.support.resolver;
 
 import static com.alibaba.citrus.util.Assert.*;
 
-import com.alibaba.citrus.springext.impl.SpringExtSchemaSet;
+import com.alibaba.citrus.springext.support.SpringExtSchemaSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
