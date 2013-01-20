@@ -215,128 +215,173 @@ public class SchemaUtil {
      * </pre>
      * <p/>
      */
-    public static Transformer getContributionSchemaTransformer(final ConfigurationPoints cps, final Contribution thisContrib) {
-        final ConfigurationPoint thisCp = thisContrib.getConfigurationPoint();
+    private static abstract class AnyElementTransformer implements Transformer {
+        protected final ConfigurationPoints cps;
+        protected       Element             root;
 
-        return new Transformer() {
-            private final Map<String, ConfigurationPoint> importings = createHashMap();
-            private Element root;
+        private final Map<String, ConfigurationPoint> importings = createHashMap();
 
-            public void transform(Document document, String systemId) {
-                root = document.getRootElement();
+        protected AnyElementTransformer(ConfigurationPoints cps) {
+            this.cps = cps;
+        }
 
-                if (!W3C_XML_SCHEMA_NS_URI.equals(root.getNamespaceURI()) || !"schema".equals(root.getName())) {
-                    return;
+        public final void transform(Document document, String systemId) {
+            root = document.getRootElement();
+
+            if (!W3C_XML_SCHEMA_NS_URI.equals(root.getNamespaceURI()) || !"schema".equals(root.getName())) {
+                return;
+            }
+
+            visitRootElement();
+            visitElement(root);
+
+            // 避免加入重复的import
+            @SuppressWarnings("unchecked")
+            List<Element> importElements = root.elements(XSD_IMPORT);
+
+            for (Element importElement : importElements) {
+                if (importElement.attribute("namespace") != null) {
+                    importings.remove(importElement.attribute("namespace").getValue());
+                }
+            }
+
+            // 加入imports
+            @SuppressWarnings("unchecked")
+            List<Element> rootElements = root.elements();
+            int importIndex = 0;
+
+            for (ConfigurationPoint cp : importings.values()) {
+                if (canAddImportFor(cp)) {
+                    Element importElement = DocumentHelper.createElement(XSD_IMPORT);
+                    importElement.addAttribute("namespace", cp.getNamespaceUri());
+                    importElement.addAttribute("schemaLocation", cp.getSchemas().getMainSchema().getName()); // XXX main or versioned?
+
+                    rootElements.add(importIndex++, importElement);
+                }
+            }
+        }
+
+        protected void visitRootElement() {
+        }
+
+        protected boolean canAddImportFor(ConfigurationPoint cp) {
+            return true;
+        }
+
+        protected abstract void visitDependedConfigurationPoint(ConfigurationPoint cp);
+
+        @SuppressWarnings("unchecked")
+        private void visitElement(Element element) {
+            List<Element> elements = element.elements();
+            visitElements(elements);
+        }
+
+        private void visitElements(List<Element> elements) {
+            List<Integer> indexes = createLinkedList();
+            int index = 0;
+
+            for (Element subElement : elements) {
+                if (subElement.getQName().equals(XSD_ANY) && subElement.attribute("namespace") != null) {
+                    String ns = subElement.attribute("namespace").getValue();
+                    ConfigurationPoint cp = cps.getConfigurationPointByNamespaceUri(ns);
+
+                    if (cp != null) {
+                        indexes.add(index);
+                        importings.put(ns, cp);
+                    }
+
+                    visitDependedConfigurationPoint(cp);
+                } else {
+                    visitElement(subElement);
                 }
 
+                index++;
+            }
+
+            for (Integer i : indexes) {
+                visitAnyElement(elements, i);
+            }
+        }
+
+        private void visitAnyElement(List<Element> elements, int index) {
+            Element anyElement = elements.get(index);
+            String ns = anyElement.attribute("namespace").getValue();
+            ConfigurationPoint cp = cps.getConfigurationPointByNamespaceUri(ns);
+
+            if (cp != null) {
+                Element choiceElement = DocumentHelper.createElement(XSD_CHOICE);
+                String nsPrefix = getNamespacePrefix(cp.getPreferredNsPrefix(), ns);
+
+                // <xsd:schema xmlns:prefix="ns">
+                // 注意：必须将ns定义加在顶层element，否则低版本的xerces会报错。
+                root.addNamespace(nsPrefix, ns);
+
+                // <xsd:choice minOccurs="?" maxOccurs="?" />
+                if (anyElement.attribute("minOccurs") != null) {
+                    choiceElement.addAttribute("minOccurs", anyElement.attribute("minOccurs").getValue());
+                }
+
+                if (anyElement.attribute("maxOccurs") != null) {
+                    choiceElement.addAttribute("maxOccurs", anyElement.attribute("maxOccurs").getValue());
+                }
+
+                // <xsd:element ref="prefix:contrib" />
+                for (Contribution contrib : cp.getContributions()) {
+                    Element elementElement = DocumentHelper.createElement(XSD_ELEMENT);
+                    elementElement.addAttribute("ref", nsPrefix + ":" + contrib.getName());
+                    choiceElement.add(elementElement);
+                }
+
+                // <xsd:element ref="prefix:defaultName" />
+                if (cp.getDefaultElementName() != null) {
+                    Element elementElement = DocumentHelper.createElement(XSD_ELEMENT);
+                    elementElement.addAttribute("ref", nsPrefix + ":" + cp.getDefaultElementName());
+                    choiceElement.add(elementElement);
+                }
+
+                // 用choice取代any
+                elements.set(index, choiceElement);
+            }
+        }
+    }
+
+    public static Transformer getContributionSchemaTransformer(ConfigurationPoints cps, final Contribution thisContrib) {
+        return new AnyElementTransformer(cps) {
+            private final ConfigurationPoint thisCp = thisContrib.getConfigurationPoint();
+
+            @Override
+            protected void visitRootElement() {
                 // 为contribution schema添加默认namespace和targetNamespace的声明。
                 // 由于contribution schema是被include到configuration point schema中的，所以这些声明不是必须的。
                 // 但是Intellij IDEA似乎不能正确学习到contribution schema的namespace，除非加上这些声明。
                 root.addNamespace("", thisCp.getNamespaceUri());
                 root.addAttribute("targetNamespace", thisCp.getNamespaceUri());
-
-                visitElement(root);
-
-                // 避免加入重复的import
-                @SuppressWarnings("unchecked")
-                List<Element> importElements = root.elements(XSD_IMPORT);
-
-                for (Element importElement : importElements) {
-                    if (importElement.attribute("namespace") != null) {
-                        importings.remove(importElement.attribute("namespace").getValue());
-                    }
-                }
-
-                // 加入imports，但避免加入当前schema所在的configurtion point schema
-                @SuppressWarnings("unchecked")
-                List<Element> rootElements = root.elements();
-                int importIndex = 0;
-
-                for (ConfigurationPoint cp : importings.values()) {
-                    if (thisCp != cp) {
-                        Element importElement = DocumentHelper.createElement(XSD_IMPORT);
-                        importElement.addAttribute("namespace", cp.getNamespaceUri());
-                        importElement.addAttribute("schemaLocation", cp.getSchemas().getMainSchema().getName()); // XXX main or versioned?
-
-                        rootElements.add(importIndex++, importElement);
-                    }
-                }
             }
 
-            @SuppressWarnings("unchecked")
-            private void visitElement(Element element) {
-                List<Element> elements = element.elements();
-                visitElements(elements);
+            /** 避免import当前schema所在的configurtion point schema。 */
+            @Override
+            protected boolean canAddImportFor(ConfigurationPoint cp) {
+                return thisCp != cp;
             }
 
-            private void visitElements(List<Element> elements) {
-                List<Integer> indexes = createLinkedList();
-                int index = 0;
-
-                for (Element subElement : elements) {
-                    if (subElement.getQName().equals(XSD_ANY) && subElement.attribute("namespace") != null) {
-                        String ns = subElement.attribute("namespace").getValue();
-                        ConfigurationPoint cp = cps.getConfigurationPointByNamespaceUri(ns);
-
-                        if (cp != null) {
-                            indexes.add(index);
-                            importings.put(ns, cp);
-                        }
-
-                        if (cp instanceof ConfigurationPointImpl) {
-                            ((ConfigurationPointImpl) cp).addDependingContribution(thisContrib);
-                        }
-                    } else {
-                        visitElement(subElement);
-                    }
-
-                    index++;
-                }
-
-                for (Integer i : indexes) {
-                    visitAnyElement(elements, i);
+            @Override
+            protected void visitDependedConfigurationPoint(ConfigurationPoint cp) {
+                if (cp instanceof ConfigurationPointImpl) {
+                    ((ConfigurationPointImpl) cp).addDependingContribution(thisContrib);
                 }
             }
+        };
+    }
 
-            private void visitAnyElement(List<Element> elements, int index) {
-                Element anyElement = elements.get(index);
-                String ns = anyElement.attribute("namespace").getValue();
-                ConfigurationPoint cp = cps.getConfigurationPointByNamespaceUri(ns);
+    public static interface AnyElementVisitor {
+        void visitAnyElement(ConfigurationPoint cp);
+    }
 
-                if (cp != null) {
-                    Element choiceElement = DocumentHelper.createElement(XSD_CHOICE);
-                    String nsPrefix = getNamespacePrefix(cp.getPreferredNsPrefix(), ns);
-
-                    // <xsd:schema xmlns:prefix="ns">
-                    // 注意：必须将ns定义加在顶层element，否则低版本的xerces会报错。
-                    root.addNamespace(nsPrefix, ns);
-
-                    // <xsd:choice minOccurs="?" maxOccurs="?" />
-                    if (anyElement.attribute("minOccurs") != null) {
-                        choiceElement.addAttribute("minOccurs", anyElement.attribute("minOccurs").getValue());
-                    }
-
-                    if (anyElement.attribute("maxOccurs") != null) {
-                        choiceElement.addAttribute("maxOccurs", anyElement.attribute("maxOccurs").getValue());
-                    }
-
-                    // <xsd:element ref="prefix:contrib" />
-                    for (Contribution contrib : cp.getContributions()) {
-                        Element elementElement = DocumentHelper.createElement(XSD_ELEMENT);
-                        elementElement.addAttribute("ref", nsPrefix + ":" + contrib.getName());
-                        choiceElement.add(elementElement);
-                    }
-
-                    // <xsd:element ref="prefix:defaultName" />
-                    if (cp.getDefaultElementName() != null) {
-                        Element elementElement = DocumentHelper.createElement(XSD_ELEMENT);
-                        elementElement.addAttribute("ref", nsPrefix + ":" + cp.getDefaultElementName());
-                        choiceElement.add(elementElement);
-                    }
-
-                    // 用choice取代any
-                    elements.set(index, choiceElement);
-                }
+    public static Transformer getAnyElementTransformer(ConfigurationPoints cps, final AnyElementVisitor visitor) {
+        return new AnyElementTransformer(cps) {
+            @Override
+            protected void visitDependedConfigurationPoint(ConfigurationPoint cp) {
+                visitor.visitAnyElement(cp);
             }
         };
     }
