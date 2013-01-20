@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="http://localhost/included-schema.xsd" />
+
+    <xsd:element name="s2">
+        <xsd:complexType>
+            <xsd:group ref="InterceptorInfo" />
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

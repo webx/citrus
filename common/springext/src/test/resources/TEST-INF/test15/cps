@@ -1,0 +1,2 @@
+services = http://localhost/services
+interceptors = http://localhost/interceptors
