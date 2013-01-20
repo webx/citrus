@@ -18,16 +18,25 @@
 package com.alibaba.citrus.springext.support;
 
 import static com.alibaba.citrus.util.CollectionUtil.*;
+import static javax.xml.XMLConstants.*;
 import static org.junit.Assert.*;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
+import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.support.SpringExtSchemaSet.ConfigurationPointItem;
 import com.alibaba.citrus.springext.support.SpringExtSchemaSet.NamespaceItem;
 import com.alibaba.citrus.springext.support.SpringExtSchemaSet.SpringPluggableItem;
 import com.alibaba.citrus.test.TestEnvStatic;
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+import org.dom4j.Namespace;
+import org.dom4j.QName;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -53,7 +62,7 @@ public class SpringExtSchemaSetTests {
     }
 
     @Test
-    public void parentConfigurationPoints() {
+    public void test14_parentConfigurationPoints() {
         // 依赖关系：
         // <a1> -> b, c
         // <b1> -> c
@@ -74,7 +83,7 @@ public class SpringExtSchemaSetTests {
     }
 
     @Test
-    public void configurationPointItems() {
+    public void test14_configurationPointItems() {
         assertEquals(3, configurationPointItems.size());
 
         assertEquals(true, configurationPointItems.get(0).hasChildren());
@@ -110,7 +119,7 @@ public class SpringExtSchemaSetTests {
     }
 
     @Test
-    public void springItems() {
+    public void test14_springItems() {
         boolean found = false;
 
         for (SpringPluggableItem item : springItems) {
@@ -123,7 +132,7 @@ public class SpringExtSchemaSetTests {
     }
 
     @Test
-    public void noSchemaItems() {
+    public void test14_noSchemaItems() {
         boolean found = false;
 
         for (SpringPluggableItem item : noSchemaItems) {
@@ -156,5 +165,44 @@ public class SpringExtSchemaSetTests {
         }
 
         return depList.toArray(new String[0]);
+    }
+
+    @Test
+    public void test15_parentConfigurationPoints() {
+        // services/s1 includes included-schema.xsd
+        // services/s2 includes included-schema.xsd
+        // services/s3 no includes
+        schemas = new SpringExtSchemaSet("TEST-INF/test15/cps");
+
+        // 测试interceptors是否被s1和s2依赖
+        ConfigurationPoint interceptors = schemas.getConfigurationPoints().getConfigurationPointByName("interceptors");
+        Collection<Contribution> contributions = interceptors.getDependingContributions();
+
+        assertEquals(2, contributions.size());
+
+        for (Contribution contribution : contributions) {
+            assertEquals("services", contribution.getConfigurationPoint().getName());
+            assertTrue("s1".equals(contribution.getName()) || "s2".equals(contribution.getName()));
+        }
+
+        // 测试included-schema.xsd中的anyElement是否被替换。
+        Schema includedSchema = schemas.getNamedMappings().get("localhost/included-schema.xsd");
+        Document doc = includedSchema.getDocument();
+        Namespace xsd = DocumentHelper.createNamespace("xsd", W3C_XML_SCHEMA_NS_URI);
+        Element choice = doc.getRootElement()
+                            .element(QName.get("group", xsd))
+                            .element(QName.get("sequence", xsd))
+                            .element(QName.get("choice", xsd));
+
+        assertEquals("0", choice.attributeValue("minOccurs"));
+        assertEquals("unbounded", choice.attributeValue("maxOccurs"));
+
+        Set<String> refs = createTreeSet();
+
+        for (Object e : choice.elements()) {
+            refs.add(((Element) e).attributeValue("ref"));
+        }
+
+        assertArrayEquals(new String[] { "interceptors:i1", "interceptors:i2" }, refs.toArray());
     }
 }

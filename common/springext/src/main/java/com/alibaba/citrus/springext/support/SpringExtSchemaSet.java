@@ -21,6 +21,7 @@ import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
@@ -31,8 +32,10 @@ import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ResourceResolver;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.Schemas;
+import com.alibaba.citrus.springext.impl.ConfigurationPointImpl;
 import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
 import com.alibaba.citrus.springext.impl.SpringPluggableSchemas;
+import com.alibaba.citrus.springext.support.SchemaUtil.AnyElementVisitor;
 import com.alibaba.citrus.util.ToStringBuilder;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,22 +53,26 @@ public class SpringExtSchemaSet extends SchemaSet {
 
     /** 通过默认的<code>ClassLoader</code>来装载schemas。 */
     public SpringExtSchemaSet() {
-        super(new ConfigurationPointsImpl(), new SpringPluggableSchemas());
+        this(new ConfigurationPointsImpl(), new SpringPluggableSchemas());
     }
 
     /** 通过指定的<code>ClassLoader</code>来装载schemas。 */
     public SpringExtSchemaSet(ClassLoader classLoader) {
-        super(new ConfigurationPointsImpl(classLoader), new SpringPluggableSchemas(classLoader));
+        this(new ConfigurationPointsImpl(classLoader), new SpringPluggableSchemas(classLoader));
     }
 
     /** 通过指定的<code>ResourceResolver</code>来装载schemas（IDE plugins mode）。 */
     public SpringExtSchemaSet(ResourceResolver resourceResolver) {
-        super(new ConfigurationPointsImpl(resourceResolver), new SpringPluggableSchemas(resourceResolver));
+        this(new ConfigurationPointsImpl(resourceResolver), new SpringPluggableSchemas(resourceResolver));
     }
 
     /** for test only */
     SpringExtSchemaSet(String location) {
-        super(new ConfigurationPointsImpl((ClassLoader) null, location), new SpringPluggableSchemas());
+        this(new ConfigurationPointsImpl((ClassLoader) null, location), new SpringPluggableSchemas());
+    }
+
+    private SpringExtSchemaSet(ConfigurationPointsImpl configurationPoints, SpringPluggableSchemas springPluggableSchemas) {
+        super(configurationPoints, springPluggableSchemas);
     }
 
     public ConfigurationPoints getConfigurationPoints() {
@@ -77,6 +84,79 @@ public class SpringExtSchemaSet extends SchemaSet {
 
         unreachableCode("no ConfigurationPoints found");
         return null;
+    }
+
+    /*
+     * 处理以下情形：
+     * <p/>
+     * 一个contribution schema引用了一个spring pluggable schema。如果spring pluggable schema中包含一个anyElement，引用了另一个configuration point。
+     * 则需要将anyElement展开，并添加configuration point对于contribution的依赖。
+     */
+    private static class IncludedSchemaInfo implements Iterable<Contribution> {
+        private final Map<String, Contribution> includingContributions = createHashMap();
+        private final Schema includedSchema;
+
+        private IncludedSchemaInfo(Schema includedSchema) {
+            this.includedSchema = includedSchema;
+        }
+
+        public Schema getIncludedSchema() {
+            return includedSchema;
+        }
+
+        public Iterator<Contribution> iterator() {
+            return includingContributions.values().iterator();
+        }
+    }
+
+    private Map<String, IncludedSchemaInfo> includedSchemaInfoMap;
+
+    @Override
+    protected void foundIncludes(Schema schema, Collection<Schema> allIncludes) {
+        if (schema instanceof ContributionSchemaSourceInfo) {
+            Contribution contribution = (Contribution) ((ContributionSchemaSourceInfo) schema).getParent();
+
+            if (contribution != null) {
+                for (Schema includedSchema : allIncludes) {
+                    if (includedSchema instanceof SpringPluggableSchemaSourceInfo) {
+                        if (includedSchemaInfoMap == null) {
+                            includedSchemaInfoMap = createHashMap();
+                        }
+
+                        String includedSchemaName = includedSchema.getName();
+                        IncludedSchemaInfo includedSchemaInfo = includedSchemaInfoMap.get(includedSchemaName);
+
+                        if (includedSchemaInfo == null) {
+                            includedSchemaInfo = new IncludedSchemaInfo(includedSchema);
+                            includedSchemaInfoMap.put(includedSchemaName, includedSchemaInfo);
+                        }
+
+                        includedSchemaInfo.includingContributions.put(schema.getName(), contribution);
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void finishProcessIncludes() {
+        if (includedSchemaInfoMap != null) {
+            for (final IncludedSchemaInfo includedSchemaInfo : includedSchemaInfoMap.values()) {
+                Schema includedSchema = includedSchemaInfo.getIncludedSchema();
+
+                includedSchema.transform(SchemaUtil.getAnyElementTransformer(getConfigurationPoints(), new AnyElementVisitor() {
+                    public void visitAnyElement(ConfigurationPoint cp) {
+                        for (Contribution contribution : includedSchemaInfo) {
+                            if (cp instanceof ConfigurationPointImpl) {
+                                ((ConfigurationPointImpl) cp).addDependingContribution(contribution);
+                            }
+                        }
+                    }
+                }), true);
+            }
+        }
+
+        includedSchemaInfoMap = null;
     }
 
     /** 取得所有独立的schemas。 */

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified">
+
+    <!-- 用来测试contribution schema包含spring schema的情形 -->
+    <xsd:group name="InterceptorInfo">
+        <xsd:sequence>
+            <xsd:any namespace="http://localhost/interceptors" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+    </xsd:group>
+
+</xsd:schema>

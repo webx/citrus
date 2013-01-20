@@ -181,6 +181,8 @@ public class SchemaSet implements Schemas, Namespaces, Iterable<Schemas> {
             Map<String, Element> allElements = getAllElements(schema, allIncludes.values());
             boolean withIndirectIncludes = false;
 
+            foundIncludes(schema, allIncludes.values()); // 给子类一个机会处理includes
+
             for (Schema includedSchema : allIncludes.values()) {
                 if (includedSchema.getIncludes().length > 0) {
                     withIndirectIncludes = true;
@@ -222,6 +224,14 @@ public class SchemaSet implements Schemas, Namespaces, Iterable<Schemas> {
                 schema.transform(getTransformerWhoAddsIndirectIncludes(si.allIncludes), true);
             }
         }
+
+        finishProcessIncludes();
+    }
+
+    protected void foundIncludes(Schema schema, Collection<Schema> allIncludes) {
+    }
+
+    protected void finishProcessIncludes() {
     }
 
     private Map<String, Element> getAllElements(Schema schema, Collection<Schema> includes) {
