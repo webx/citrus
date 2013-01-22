@@ -109,3 +109,4 @@
 
 * 改进Navigator接口，添加了forwardTo(target, action, actionEvent)方法，使之可内部重定向到指定action。
 * Bugfix: 当requestContext初始化失败时，错误处理程序报NPE的问题。
+* 改进：pipeline-conditions: <path-condition>和<target-condition>支持反向pattern：如果以name="!xxx"，则表示不匹配xxx。

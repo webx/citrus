@@ -8,6 +8,7 @@
              xmlns:valves="http://www.alibaba.com/schema/services/pipeline/valves"
              xmlns:pull-tools="http://www.alibaba.com/schema/services/pull/factories"
              xmlns:engines="http://www.alibaba.com/schema/services/template/engines"
+             xmlns:c="http://www.alibaba.com/schema/services/pipeline/conditions"
              xsi:schemaLocation="
                  http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
                  http://www.alibaba.com/schema/services/data-resolver/factories http://localhost:8080/schema/services-data-resolver-factories.xsd
@@ -16,10 +17,22 @@
                  http://www.alibaba.com/schema/services/pipeline/valves http://localhost:8080/schema/services-pipeline-valves.xsd
                  http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
                  http://www.alibaba.com/schema/services/template/engines http://localhost:8080/schema/services-template-engines.xsd
+                 http://www.alibaba.com/schema/services/pipeline/conditions http://localhost:8080/schema/services-pipeline-conditions.xsd
                  http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
              ">
 
     <services:webx-configuration />
+
+    <services:pipeline id="pathCondition">
+        <valves:if>
+            <c:path-condition name="/hello(\w+)" var="v1" />
+            <valves:valve class="com.alibaba.citrus.turbine.pipeline.valve.PathConditionTests.MyClass" />
+        </valves:if>
+        <valves:if>
+            <c:path-condition name="!/hello(\w+)" var="v2" />
+            <valves:valve class="com.alibaba.citrus.turbine.pipeline.valve.PathConditionTests.MyClass" />
+        </valves:if>
+    </services:pipeline>
 
     <services:pipeline id="analyzeURL">
         <valves:analyzeURL />
