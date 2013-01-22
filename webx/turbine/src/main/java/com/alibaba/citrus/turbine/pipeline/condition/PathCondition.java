@@ -20,6 +20,7 @@ package com.alibaba.citrus.turbine.pipeline.condition;
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
+import static com.alibaba.citrus.util.regex.MatchResultSubstitution.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -43,6 +44,7 @@ import org.w3c.dom.Element;
 public class PathCondition extends AbstractTurbineCondition {
     public final static String DEFAULT_VAR = "subst";
     private Pattern[] patterns;
+    private boolean[] negativePatterns;
     private String[]  patternStrings;
     private String    var;
 
@@ -50,11 +52,21 @@ public class PathCondition extends AbstractTurbineCondition {
         if (patterns != null) {
             this.patternStrings = StringUtil.split(patterns, ", ");
             this.patterns = new Pattern[patternStrings.length];
+            this.negativePatterns = new boolean[patternStrings.length];
 
             for (int i = 0; i < patternStrings.length; i++) {
-                this.patterns[i] = Pattern.compile(patternStrings[i]);
+                compilePattern(patternStrings[i], i);
             }
         }
+    }
+
+    private void compilePattern(String patternString, int index) {
+        if (patternString.startsWith("!")) {
+            this.negativePatterns[index] = true;
+            patternString = patternString.substring(1);
+        }
+
+        this.patterns[index] = Pattern.compile(patternString);
     }
 
     public void setVar(String var) {
@@ -66,12 +78,14 @@ public class PathCondition extends AbstractTurbineCondition {
 
         for (int i = 0; i < patterns.length; i++) {
             Matcher matcher = patterns[i].matcher(path);
+            boolean matched = matcher.find();
+            boolean negative = negativePatterns[i];
 
-            if (matcher.find()) {
+            if (negative != matched) {
                 log(patternStrings[i]);
 
                 String var = defaultIfNull(this.var, DEFAULT_VAR);
-                Substitution subst = new MatchResultSubstitution(matcher);
+                Substitution subst = new MatchResultSubstitution(negative ? EMPTY_MATCH_RESULT : matcher);
 
                 states.setAttribute(var, subst);
 
