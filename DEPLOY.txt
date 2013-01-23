@@ -63,6 +63,38 @@ Maven的配置（$HOME/.m2/settings.xml）
           <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>    
       </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>sonatype-nexus-snapshots</id>
+          <name>Sonatype Snapshots</name>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+            <checksumPolicy>fail</checksumPolicy>
+          </snapshots>
+          <releases>
+            <enabled>false</enabled>
+            <updatePolicy>always</updatePolicy>
+            <checksumPolicy>fail</checksumPolicy>
+          </releases>
+          <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </pluginRepository>
+        <pluginRepository>
+          <id>sonatype-nexus-staging</id>
+          <name>Sonatype Staging</name>
+          <snapshots>
+            <enabled>false</enabled>
+            <updatePolicy>always</updatePolicy>
+            <checksumPolicy>fail</checksumPolicy>
+          </snapshots>
+          <releases>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+            <checksumPolicy>fail</checksumPolicy>
+          </releases>
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </pluginRepository>
+      </pluginRepositories>
     </profile>
   </profiles>
 
