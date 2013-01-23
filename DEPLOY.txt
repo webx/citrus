@@ -84,23 +84,18 @@ Sonatype OSS Staging 库管理：   https://oss.sonatype.org/
 
 1. 确保所有源代码提交
 2. checkout要发布的分支，例如：git checkout dev-3.0.8
-3. 编译并测试整个项目：mvn clean install
-4. 分别发布parent和dist目录下的项目：
+3. 分别发布parent和dist目录下的项目：
 
 cd citrus
-mvn clean deploy -N -Pdeployment
+mvn clean deploy -N -Pdeployment -Ddeployment.skip=false
 
-cd dist/test
-mvn clean deploy -N -Pdeployment
-
-cd ../../dist/webx
 mvn clean deploy -N -Pdeployment
 
 确保使用deployment profile，以便生成sonatype所需要的数字签名。
 
-5. 如果还需要发布其余的分支，切换到该分支，并重作2-4
-6. 在应用中测试staging库，用sonatype profile，例如在应用的目录下执行：mvn jetty:run -Psonatype
-7. 在sonatype管理界面中promote项目到central maven repository
-8. 对发布版本创建tags
-9. 删除已发布的分支
-10. 创建新的开发分支
+4. 如果还需要发布其余的分支，切换到该分支，并重作2-4
+5. 在应用中测试staging库，用sonatype profile，例如在应用的目录下执行：mvn jetty:run -Psonatype
+6. 在sonatype管理界面中promote项目到central maven repository
+7. 对发布版本创建tags
+8. 删除已发布的分支
+9. 创建新的开发分支
