@@ -20,7 +20,7 @@ package com.alibaba.citrus.springext.impl;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
-import static java.util.Collections.unmodifiableSet;
+import static java.util.Collections.*;
 
 import java.net.URI;
 import java.util.Map;
@@ -175,6 +175,11 @@ public class SpringPluggableSchemas implements Schemas, Namespaces {
             public void handle(String key, String value, Resource source, int lineNumber) {
                 String uri = trimToNull(key);
                 String classpathLocation = trimToNull(value);
+
+                if (uri == null || classpathLocation == null) {
+                    return; // invalid and ignored
+                }
+
                 String schemaName = getSchemaName(uri);
                 Matcher matcher = SCHEMA_VERSION_PATTERN.matcher(schemaName);
                 String version = null;
