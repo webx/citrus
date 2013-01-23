@@ -11,15 +11,12 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>citrus-webx-all</artifactId>
     <name>Webx All-in-one Bundle</name>
-    <properties>
-        <!-- 发布此项目 -->
-        <deployment.skip>false</deployment.skip>
-    </properties>
     <build>
         <plugins>
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <configuration>
+                    <!-- 发布此项目 -->
                     <skip>false</skip>
                 </configuration>
             </plugin>
