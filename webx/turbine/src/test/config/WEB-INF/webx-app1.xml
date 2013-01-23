@@ -26,11 +26,27 @@
     <services:pipeline id="pathCondition">
         <valves:if>
             <c:path-condition name="/hello(\w+)" var="v1" />
-            <valves:valve class="com.alibaba.citrus.turbine.pipeline.valve.PathConditionTests.MyClass" />
+            <valves:valve class="com.alibaba.citrus.turbine.pipeline.valve.PathConditionTests$MyClass" />
         </valves:if>
         <valves:if>
             <c:path-condition name="!/hello(\w+)" var="v2" />
-            <valves:valve class="com.alibaba.citrus.turbine.pipeline.valve.PathConditionTests.MyClass" />
+            <valves:valve class="com.alibaba.citrus.turbine.pipeline.valve.PathConditionTests$MyClass" />
+        </valves:if>
+    </services:pipeline>
+
+    <services:pipeline id="targetCondition">
+        <valves:analyzeURL />
+        <valves:if>
+            <c:target-condition name="^/hello(\w+)" var="v1" />
+            <valves:valve class="com.alibaba.citrus.turbine.pipeline.valve.TargetConditionTests$MyClass" />
+        </valves:if>
+        <valves:if>
+            <c:target-condition name="^/(.+)/hello(\w+)" var="v2" withComponentName="true" />
+            <valves:valve class="com.alibaba.citrus.turbine.pipeline.valve.TargetConditionTests$MyClass" />
+        </valves:if>
+        <valves:if>
+            <c:target-condition name="!^/hello(\w+)" var="v3" />
+            <valves:valve class="com.alibaba.citrus.turbine.pipeline.valve.TargetConditionTests$MyClass" />
         </valves:if>
     </services:pipeline>
 
