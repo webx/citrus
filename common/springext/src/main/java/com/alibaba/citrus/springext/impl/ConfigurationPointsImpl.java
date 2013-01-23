@@ -122,6 +122,11 @@ public class ConfigurationPointsImpl implements ConfigurationPoints {
         settings.resourceResolver.loadAllProperties(configurationPointsLocation, new PropertyHandler() {
             public void handle(String key, String value, Resource source, int lineNumber) {
                 String name = normalizeConfigurationPointName(key);
+
+                if (name == null) {
+                    return;
+                }
+
                 Map<String, String> params = parseNamespaceUriAndParams(value);
                 String namespaceUri = assertNotNull(params.get(NAMESPACE_URI_KEY), "namespaceUri");
 
@@ -173,14 +178,26 @@ public class ConfigurationPointsImpl implements ConfigurationPoints {
 
     public ConfigurationPoint getConfigurationPointByName(String name) {
         ensureInit();
-        return ensureInitConfigurationPoint((ConfigurationPointImpl) nameToConfigurationPoints
-                .get(normalizeConfigurationPointName(name)));
+        name = normalizeConfigurationPointName(name);
+
+        if (name != null) {
+            return ensureInitConfigurationPoint((ConfigurationPointImpl) nameToConfigurationPoints
+                    .get(name));
+        } else {
+            return null;
+        }
     }
 
     public ConfigurationPoint getConfigurationPointByNamespaceUri(String namespaceUri) {
         ensureInit();
-        return ensureInitConfigurationPoint((ConfigurationPointImpl) namespaceUriToConfigurationPoints
-                .get(normalizeNamespaceUri(namespaceUri)));
+        namespaceUri = normalizeNamespaceUri(namespaceUri);
+
+        if (namespaceUri != null) {
+            return ensureInitConfigurationPoint((ConfigurationPointImpl) namespaceUriToConfigurationPoints
+                    .get(namespaceUri));
+        } else {
+            return null;
+        }
     }
 
     private ConfigurationPoint ensureInitConfigurationPoint(ConfigurationPointImpl cp) {

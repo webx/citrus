@@ -40,8 +40,8 @@ import com.alibaba.citrus.logconfig.LogConfigurator;
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.ContributionType;
 import com.alibaba.citrus.springext.Schema;
-import com.alibaba.citrus.springext.support.SpringExtSchemaSet;
 import com.alibaba.citrus.springext.support.SchemaUtil;
+import com.alibaba.citrus.springext.support.SpringExtSchemaSet;
 import com.alibaba.citrus.util.FileUtil;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
@@ -101,7 +101,7 @@ public class ConvertToUnqualifiedStyle {
         log.info("Converted {} files.", convertedCount);
     }
 
-    private final Pattern backupFilePattern = Pattern.compile("\\.backup(_\\d+)?");
+    private final Pattern backupFilePattern = Pattern.compile("\\.bak$");
 
     private void convert(File source) {
         if (backupFilePattern.matcher(source.getName()).find()) {
@@ -164,7 +164,7 @@ public class ConvertToUnqualifiedStyle {
 
                 if (backup) {
                     for (int i = 0; ; i++) {
-                        backupFile = new File(dir, fileName + ".backup" + (i == 0 ? "" : "_" + i) + ext);
+                        backupFile = new File(dir, fileName + (i == 0 ? "" : "_" + i) + ext + ".bak");
 
                         if (!backupFile.exists()) {
                             break;
