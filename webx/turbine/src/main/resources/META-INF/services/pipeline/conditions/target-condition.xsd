@@ -13,6 +13,7 @@
         <xsd:complexType>
             <xsd:attribute name="name" type="xsd:string" use="required" />
             <xsd:attribute name="var" type="xsd:string" />
+            <xsd:attribute name="withComponentName" type="springext:booleanOrPlaceholder" />
         </xsd:complexType>
     </xsd:element>
 

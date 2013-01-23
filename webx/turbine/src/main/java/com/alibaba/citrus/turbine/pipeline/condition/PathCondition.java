@@ -107,8 +107,8 @@ public class PathCondition extends AbstractTurbineCondition {
     public static class DefinitionParser extends AbstractPathConditionDefinitionParser<PathCondition> {
     }
 
-    protected static abstract class AbstractPathConditionDefinitionParser<T extends PathCondition> extends
-                                                                                                   AbstractConditionDefinitionParser<T> {
+    protected static abstract class AbstractPathConditionDefinitionParser<T extends PathCondition>
+            extends AbstractConditionDefinitionParser<T> {
         @Override
         protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
             attributesToProperties(element, builder, "name", "var");
