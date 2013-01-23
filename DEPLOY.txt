@@ -121,7 +121,7 @@ Sonatype OSS Staging 库管理：   https://oss.sonatype.org/
 cd citrus
 mvn clean deploy -N -Pdeployment -Ddeployment.skip=false
 
-mvn clean deploy -N -Pdeployment
+mvn clean deploy -Pdeployment
 
 确保使用deployment profile，以便生成sonatype所需要的数字签名。
 
