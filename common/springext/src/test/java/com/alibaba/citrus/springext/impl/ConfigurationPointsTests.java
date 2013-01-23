@@ -21,12 +21,6 @@ import static com.alibaba.citrus.test.TestUtil.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.ConfigurationPointException;
 import com.alibaba.citrus.test.TestEnvStatic;
@@ -65,6 +59,8 @@ public class ConfigurationPointsTests {
     public void test1_getConfigurationPointByName() {
         createConfigurationPoints("TEST-INF/test1/cps");
 
+        assertNull(cps.getConfigurationPointByName(null)); // no NPE
+
         ConfigurationPoint cp = cps.getConfigurationPointByName("cp1");
         assertThat(cp.toString(), containsString("cp1=http://www.alibaba.com/test1/cp1"));
 
@@ -75,6 +71,9 @@ public class ConfigurationPointsTests {
     @Test
     public void test1_getConfigurationPointByNamespaceUri() {
         createConfigurationPoints("TEST-INF/test1/cps");
+
+        assertNull(cps.getConfigurationPointByNamespaceUri(null)); // no NPE
+        assertNull(cps.getConfigurationPointByNamespaceUri("http://www.alibaba.com/test1/cp3")); // invalid and ignored
 
         ConfigurationPoint cp = cps.getConfigurationPointByNamespaceUri("http://www.alibaba.com/test1/cp1");
         assertThat(cp.toString(), containsString("cp1=http://www.alibaba.com/test1/cp1"));
