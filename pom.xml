@@ -46,7 +46,7 @@
         <java.encoding>UTF-8</java.encoding>
         <webx-version>3.0.11</webx-version>
         <spring-version>3.0.7.RELEASE</spring-version>
-        <springext-plugin-version>1.1</springext-plugin-version>
+        <springext-plugin-version>1.2</springext-plugin-version>
         <maven-util-version>1.1</maven-util-version>
         <jetty-version>8.1.7.v20120910</jetty-version>
         <project.build.sourceEncoding>${java.encoding}</project.build.sourceEncoding>

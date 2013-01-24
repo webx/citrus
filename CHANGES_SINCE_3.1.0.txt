@@ -115,3 +115,5 @@
 * 改进：pipeline-conditions: <target-condition>添加参数：withComponentName="true"，此时将会以/componentName/target的组合路径来进行匹配。
 
 -- Changes in 3.1.3
+
+* 升级到springext-maven-plugin 1.2
