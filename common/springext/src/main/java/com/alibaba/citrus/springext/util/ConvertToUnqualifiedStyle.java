@@ -300,7 +300,8 @@ public class ConvertToUnqualifiedStyle {
 
             if (cp != null) {
                 return name.equals(cp.getDefaultElementName()) // default element
-                       || cp.getContribution(name, ContributionType.BEAN_DEFINITION_PARSER) != null; // contribution
+                       || cp.getContribution(name, ContributionType.BEAN_DEFINITION_PARSER) != null // contribution
+                       || cp.getContribution(name, ContributionType.BEAN_DEFINITION_DECORATOR) != null; // contribution
             }
 
             return false;
