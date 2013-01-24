@@ -113,3 +113,5 @@
 * 升级到springext-maven-plugin:1.1
 * 改进：pipeline-conditions: <path-condition>和<target-condition>支持反向pattern：如果以name="!xxx"，则表示不匹配xxx。
 * 改进：pipeline-conditions: <target-condition>添加参数：withComponentName="true"，此时将会以/componentName/target的组合路径来进行匹配。
+
+-- Changes in 3.1.3
