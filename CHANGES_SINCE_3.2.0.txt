@@ -42,3 +42,5 @@
   通过sameNs(element)可以选出和element具有相同namespace的elements，或者不包含namespace的elements（unqualified elements）。
   而修改前，unqualified elements将不会被选出来。
   这个修改的目的是使老版的webx中的bean definition parser代码（解析qualified elements）可用来解析新版webx中的unqualified elements。
+
+-- Changes in 3.2.1

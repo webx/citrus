@@ -316,7 +316,6 @@
 
 * 新增<renderResultAsJson /> valve，用来将screen所返回的对象转换成json并输出到response。
 
-
 -- Changes in 3.0.10
 
 * Bugfix: 多值field中存在null空值的时候，<all-of-values>验证器不能正确取得null值，导致验证结果错误。
@@ -366,3 +365,5 @@
 * 改进Navigator接口，添加了forwardTo(target, action, actionEvent)方法，使之可内部重定向到指定action。
 * Bugfix: 当requestContext初始化失败时，错误处理程序报NPE的问题。
 * 升级到springext-maven-plugin:1.1
+
+-- Changes in 3.0.11
