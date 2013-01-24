@@ -315,3 +315,55 @@
 * Bugfix: 对于ClassNameWildcard和PathNameWildcard，当pattern以?开头或结束的时候，错误地匹配了多个字符（?的意思是有且仅有一个字符）
 
 * 新增<renderResultAsJson /> valve，用来将screen所返回的对象转换成json并输出到response。
+
+-- Changes in 3.0.10
+
+* Bugfix: 多值field中存在null空值的时候，<all-of-values>验证器不能正确取得null值，导致验证结果错误。
+* 升级servlet api到3.0.1。
+  * 添加动态生成类的工具InterfaceImplementorBuilder，用来解决如下问题：
+    有些测试代码需要实现ServletContext接口，但是由于servlet3和2版本对于该接口的API不同，导致无法用一套代码同时兼容servlet3和2。用动态生成类工具就可以解决这个问题。
+  * 在开发模式页面中显示Servlet版本号。
+* 改进request context服务，使之在async模式被启动时，不会提交response。当async线程重新取得控制时，可以重新取得原来的request context。
+* 改进<renderTemplate> valve，当buffering关闭时，只不过不显示layout，而不会报错。
+* 添加<setBuffering enabled="true|false" /> valve，可以在pipeline中开关buffering，以简化screen代码。
+* 添加异步执行功能，以下为pipeline片段：
+  <performScreen/>
+  <performRunnableAsync>
+      <setLoggingContext />
+      <doPerformRunnable />
+  </performRunnableAsync>
+  当screen返回runnable或callable对象时，就会启动异步操作。runnable或callable将在另一个线程中被执行。
+
+* 将webx编译所需的spring版本升级为3.0.7.RELEASE，否则异步功能不能正常编译。然而该版本的webx仍然支持在spring 2.5.6.SEC02中执行，只要不使用异步功能即可。
+* 修改了参数名称，使含义更明确：
+  <performScreen output="result" />
+  <renderResultAsJson input="result" />
+
+* 为RequestContext增加了commitHeaders功能，这样，当buffering关掉时，确保headers能正常输出到浏览器。
+  * 新增了TwoPhaseCommitRequestContext接口，如有request context希望在headers提交时被调用，可从此接口派生。
+  * 改进如下RequestContext实现，使之从TwoPhaseCommitRequestContext派生：
+    * BasicRequestContext
+    * LazyCommitRequestContext
+    * SessionRequestContext
+  * 修改了RequestContextLifecycleInterceptor接口，添加了commitHeaders()方法。如有应用实现了这个接口，需要更改代码并重新编译。
+  * 改进了CookieStore，确保cookie能在response被提交前写入。
+
+* 改进schema exporter servlet（由mvn springext:run来运行），
+  当访问http://localhost:8080/时，自动重定向到http://localhost:8080/schema，以方便开发者。
+
+* 改进Springext以配合IDEA/Eclipse plugins。
+  * 调整接口，使之不仅可从ClassLoader中装载资源，也可从由IDE plugins所实现的ResourceResolver接口来装载。
+  * 改进了装载schema的过程，引进Transformer接口，不仅使代码更清晰，也提高了效率。
+  * 增加方法：ConfigurationPoint.getDependingContributions()，可以取得所有引用此configuration point的contributions。
+  * 为ConfigurationPoint/Contribution/Schema/SpringPluggableSchema 增添了SourceInfo接口，以便取得原始资源文件，供IDE来编译。
+  * 为Contribution添加了getAnnotation()方法，可以取得schema中的文档信息。
+
+* Bugfix: Form验证中，<uploaded-file-validator extension="jpg,gif" />不能验证JPG/GIF大写后缀。
+* Bugfix：当response.reset()时，LazyCommitRequestContext应清除所有的状态。
+* Bugfix: <renderResultAsJson> valve，当redirect发生时，仍然执行渲染的问题。
+
+* 改进Navigator接口，添加了forwardTo(target, action, actionEvent)方法，使之可内部重定向到指定action。
+* Bugfix: 当requestContext初始化失败时，错误处理程序报NPE的问题。
+* 升级到springext-maven-plugin:1.1
+
+-- Changes in 3.0.11
