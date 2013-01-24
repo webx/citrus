@@ -44,3 +44,5 @@
   这个修改的目的是使老版的webx中的bean definition parser代码（解析qualified elements）可用来解析新版webx中的unqualified elements。
 
 -- Changes in 3.2.1
+
+* 升级到springext-maven-plugin 1.2
