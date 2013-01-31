@@ -17,7 +17,6 @@
 
 package com.alibaba.citrus.turbine.util;
 
-import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
@@ -39,9 +38,6 @@ import org.apache.ecs.html.Input;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
 
 /**
  * 用于生成一个唯一的ID，来防止CSRF攻击（Cross Site Request Forgery）。 此外，还可以用来防止重复提交同一张表单。
@@ -220,10 +216,6 @@ public class CsrfToken {
     }
 
     public static class DefinitionParser extends AbstractSingleBeanDefinitionParser<Factory> {
-        @Override
-        protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
-            attributesToProperties(element, builder, "tokenKey");
-        }
     }
 
     /** pull tool factory。 */
