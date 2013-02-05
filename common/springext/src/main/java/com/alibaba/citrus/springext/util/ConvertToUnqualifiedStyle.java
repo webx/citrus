@@ -124,7 +124,7 @@ public class ConvertToUnqualifiedStyle {
 
         log.info("Converting file: {}", getRelativePath(source));
 
-        boolean modified = new Converter(doc, schemas).doConvert();
+        boolean modified = new Converter(doc, schemas).convert();
 
         if (modified || forceConvert) {
             File dir = source.getParentFile();
@@ -220,12 +220,12 @@ public class ConvertToUnqualifiedStyle {
         private final Map<String, Namespace> allSchemaNamespaces          = createTreeMap();
         private       boolean                modified                     = false;
 
-        private Converter(Document doc, SpringExtSchemaSet schemas) {
+        public Converter(Document doc, SpringExtSchemaSet schemas) {
             this.root = doc.getRootElement();
             this.schemas = schemas;
         }
 
-        public boolean doConvert() {
+        public boolean convert() {
             visit(root);
             return modified;
         }
