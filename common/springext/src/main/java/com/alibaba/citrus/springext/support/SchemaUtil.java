@@ -20,6 +20,7 @@ package com.alibaba.citrus.springext.support;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
+import static java.lang.Math.*;
 import static javax.xml.XMLConstants.*;
 import static org.dom4j.DocumentHelper.*;
 import static org.springframework.beans.factory.xml.BeanDefinitionParserDelegate.*;
@@ -31,6 +32,9 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Formatter;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -60,8 +64,9 @@ import org.dom4j.io.XMLWriter;
  * @author Michael Zhou
  */
 public class SchemaUtil {
-    private static final String SPRINGEXT_BASE_URI = "http://www.alibaba.com/schema/springext/base";
-    private static final String SPRINGEXT_BASE_XSD = "http://www.alibaba.com/schema/springext/springext-base.xsd";
+    public static final  String DEFAULT_LOCATION_PREFIX = "http://localhost:8080/schema/";
+    private static final String SPRINGEXT_BASE_URI      = "http://www.alibaba.com/schema/springext/base";
+    private static final String SPRINGEXT_BASE_XSD      = "http://www.alibaba.com/schema/springext/springext-base.xsd";
 
     private final static Namespace XSD         = DocumentHelper.createNamespace("xsd", W3C_XML_SCHEMA_NS_URI);
     private final static QName     XSD_ANY     = DocumentHelper.createQName("any", XSD);
@@ -610,5 +615,74 @@ public class SchemaUtil {
         }
 
         return locations;
+    }
+
+    /**
+     * 格式化schemaLocation，使之符合以下易读的格式：
+     * <pre>
+     * &lt;beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     *                 ...
+     *              xsi:schemaLocation="
+     *                  http://www.alibaba.com/schema/services                          http://localhost:8080/schema/services.xsd
+     *                  http://www.alibaba.com/schema/services/resource-loading/loaders http://localhost:8080/schema/services-resource-loading-loaders.xsd
+     *                  http://www.springframework.org/schema/beans                     http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+     *              ">
+     * </pre>
+     */
+    public static String formatSchemaLocations(Map<String, String> schemaLocations, String qualifiedRootElementName) {
+        StringBuilder buf = new StringBuilder();
+        Formatter formatter = new Formatter(buf);
+
+        try {
+            String leadingSpaces = qualifiedRootElementName.replaceAll(".", " ") + "  ";
+            String indent = "    ";
+
+            formatter.format("%n");
+
+            int maxLength = 0;
+
+            for (String ns : schemaLocations.keySet()) {
+                maxLength = max(maxLength, ns.length());
+            }
+
+            String format = leadingSpaces + indent + "%-" + maxLength + "s %s%n";
+
+            for (Map.Entry<String, String> entry : schemaLocations.entrySet()) {
+                String ns = entry.getKey();
+                String location = entry.getValue();
+
+                formatter.format(format, ns, location);
+            }
+
+            formatter.format(leadingSpaces);
+        } finally {
+            formatter.close();
+        }
+
+        return buf.toString();
+    }
+
+    public static String guessLocationPrefix(Map<String, String> schemaLocations, SchemaSet schemas) {
+        for (Map.Entry<String, String> entry : schemaLocations.entrySet()) {
+            String uri = entry.getKey();
+            String location = entry.getValue();
+            Set<Schema> schemaSet = schemas.getNamespaceMappings().get(uri);
+
+            if (schemaSet != null) {
+                for (Schema schema : schemaSet) {
+                    if (location.endsWith(schema.getName())) {
+                        String prefix = location.substring(0, location.length() - schema.getName().length());
+
+                        try {
+                            new URI(prefix); // 避免出现"http://"
+                            return prefix;
+                        } catch (URISyntaxException ignored) {
+                        }
+                    }
+                }
+            }
+        }
+
+        return DEFAULT_LOCATION_PREFIX;
     }
 }

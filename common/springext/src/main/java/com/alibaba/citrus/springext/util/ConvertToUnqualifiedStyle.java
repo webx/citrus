@@ -19,8 +19,8 @@ package com.alibaba.citrus.springext.util;
 
 import static com.alibaba.citrus.springext.support.SchemaUtil.*;
 import static com.alibaba.citrus.util.ArrayUtil.*;
+import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
-import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 
 import java.io.File;
@@ -32,6 +32,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -123,7 +124,7 @@ public class ConvertToUnqualifiedStyle {
 
         log.info("Converting file: {}", getRelativePath(source));
 
-        boolean modified = new Converter(doc).doConvert();
+        boolean modified = new Converter(doc, schemas).doConvert();
 
         if (modified || forceConvert) {
             File dir = source.getParentFile();
@@ -203,76 +204,81 @@ public class ConvertToUnqualifiedStyle {
     /** Root element是否为<code>&lt;beans:bean&gt;</code>？ */
     private boolean isSpringConfigurationFile(Document doc) {
         Element root = doc.getRootElement();
-        return "http://www.springframework.org/schema/beans".equals(root.getNamespace().getURI())
+        return "http://www.springframework.org/schema/beans".equals(root.getNamespaceURI())
                && "beans".equals(root.getName());
-    }
-
-    private boolean isConfigurationPointNamespace(String namespaceURI) {
-        return schemas.getConfigurationPoints().getConfigurationPointByNamespaceUri(namespaceURI) != null;
     }
 
     private String getRelativePath(File f) {
         return FileUtil.getRelativePath(new File("").getAbsolutePath(), f.getAbsolutePath());
     }
 
-    private class Converter {
-        private final Element root;
-        private final LinkedList<String>     namespaceURIStack = createLinkedList();
-        private final Map<String, Namespace> namespaces        = createTreeMap();
-        private       boolean                modified          = false;
+    public static class Converter {
+        private final SpringExtSchemaSet schemas;
+        private final Element            root;
+        private final LinkedList<String>     namespaceURIStack            = createLinkedList();
+        private final Map<String, Namespace> configurationPointNamespaces = createTreeMap();
+        private final Map<String, Namespace> allSchemaNamespaces          = createTreeMap();
+        private       boolean                modified                     = false;
 
-        private Converter(Document doc) {
+        private Converter(Document doc, SpringExtSchemaSet schemas) {
             this.root = doc.getRootElement();
+            this.schemas = schemas;
         }
 
         public boolean doConvert() {
-            accept(root);
+            visit(root);
             return modified;
         }
 
-        private void accept(Element element) {
-            String namespaceURI = trimToNull(element.getNamespace().getURI());
+        private void visit(Element element) {
+            String namespaceURI = trimToNull(element.getNamespaceURI());
+            List<Namespace> nsToBeRemoved = createLinkedList();
 
-            // 先删除所有的ns声明，到最后再加回去。
             for (Iterator<?> i = element.declaredNamespaces().iterator(); i.hasNext(); ) {
-                Namespace declaredNs = (Namespace) i.next();
+                Namespace ns = (Namespace) i.next();
 
-                if (isConfigurationPointNamespace(declaredNs.getURI())) {
-                    i.remove();
+                if (isConfigurationPointNamespace(ns.getURI())) {
+                    nsToBeRemoved.add(ns);
 
                     if (element != root) {
                         modified = true;
                     }
 
-                    if (!namespaces.containsKey(declaredNs.getURI())) {
-                        Namespace ns = declaredNs;
-                        String uri = ns.getURI();
-
+                    if (!configurationPointNamespaces.containsKey(ns.getURI())) {
                         if (isEmpty(ns.getPrefix())) {
                             String prefix = getNamespacePrefix(
-                                    schemas.getConfigurationPoints().getConfigurationPointByNamespaceUri(uri).getPreferredNsPrefix(), uri);
+                                    schemas.getConfigurationPoints().getConfigurationPointByNamespaceUri(ns.getURI()).getPreferredNsPrefix(), ns.getURI());
 
-                            ns = Namespace.get(prefix, uri);
+                            ns = Namespace.get(prefix, ns.getURI());
                             modified = true;
                         }
 
-                        namespaces.put(uri, ns);
+                        configurationPointNamespaces.put(ns.getURI(), ns);
+                        allSchemaNamespaces.put(ns.getURI(), ns);
+                    }
+                } else if (schemas.getNamespaceMappings().containsKey(ns.getURI())) {
+                    if (!allSchemaNamespaces.containsKey(ns.getURI())) {
+                        allSchemaNamespaces.put(ns.getURI(), ns);
                     }
                 }
             }
 
             // 如果当前没有指定ns，或不是configuration point ns
             if (!isConfigurationPointNamespace(namespaceURI)) {
-                acceptSubElements(element);
+                visitSubElements(element);
             }
 
+            // 从这里开始，ns不可能是null，并且代表一个configuration point ns。
             // 如果当前ns和context ns不同
-            else if (!isEquals(namespaceURI, getContextNamespaceURI())
+            else if (!namespaceURI.equals(getContextNamespaceURI())
                      || isContributionElement(namespaceURI, element.getName())) {
+                // 此namespaceURI应该已经在某处被定义了，所以namespaces.get(namespaceURI)不应为空。
+                Namespace ns = assertNotNull(configurationPointNamespaces.get(namespaceURI), "xmlns not defined for %s", namespaceURI);
+
                 try {
                     namespaceURIStack.push(namespaceURI);
-                    setNamespacePrefix(element, namespaceURI);
-                    acceptSubElements(element);
+                    setNamespacePrefix(element, ns.getPrefix());
+                    visitSubElements(element);
                 } finally {
                     namespaceURIStack.pop();
                 }
@@ -280,18 +286,73 @@ public class ConvertToUnqualifiedStyle {
 
             // 如果当前ns和context ns相同
             else {
-                setNamespacePrefix(element, null);
-                acceptSubElements(element);
+                removeNamespace(element);
+                visitSubElements(element);
                 modified = true;
+            }
+
+            // 先删除所有的ns声明、attributes，一会儿排序以后再加回去。
+            for (Namespace ns : nsToBeRemoved) {
+                element.remove(ns);
             }
 
             // 将所有ns加回到root element。
             if (element == root) {
-                for (Namespace ns : namespaces.values()) {
+                Map<String, Namespace> otherNamespaces = createTreeMap();
+                Map<String, Attribute> otherAttrs = createTreeMap();
+                Namespace xsi = null;
+                String schemaLocation = null;
+
+                for (Iterator<?> i = element.declaredNamespaces().iterator(); i.hasNext(); ) {
+                    Namespace ns = (Namespace) i.next();
+
+                    if ("http://www.w3.org/2001/XMLSchema-instance".equals(ns.getURI())) {
+                        xsi = ns;
+                    } else if (!allSchemaNamespaces.containsKey(ns.getURI())) {
+                        otherNamespaces.put(ns.getURI(), ns);
+                    }
+
+                    i.remove();
+                }
+
+                QName schemaLocationQName = QName.get("schemaLocation", xsi);
+
+                for (Iterator<?> i = element.attributes().iterator(); i.hasNext(); ) {
+                    Attribute attr = (Attribute) i.next();
+
+                    if (schemaLocationQName.equals(attr.getQName())) {
+                        schemaLocation = attr.getText();
+                    } else {
+                        otherAttrs.put(attr.getQualifiedName(), attr);
+                    }
+
+                    i.remove();
+                }
+
+                // xmlns:xsi
+                if (xsi == null) {
+                    xsi = DocumentHelper.createNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+                }
+
+                element.add(xsi);
+
+                // namespaces in defined schemas
+                for (Namespace ns : allSchemaNamespaces.values()) {
                     element.add(ns);
                 }
 
-                formatSchemaLocations();
+                // other xmlns attrs
+                for (Namespace ns : otherNamespaces.values()) {
+                    element.add(ns);
+                }
+
+                // schema location
+                element.addAttribute(schemaLocationQName, reformatSchemaLocations(schemaLocation));
+
+                // other attrs
+                for (Attribute attr : otherAttrs.values()) {
+                    element.add(attr);
+                }
             }
         }
 
@@ -307,107 +368,53 @@ public class ConvertToUnqualifiedStyle {
             return false;
         }
 
-        private void formatSchemaLocations() {
-            Namespace xsi = getXsiNs();
+        private boolean isConfigurationPointNamespace(String namespaceURI) {
+            return schemas.getConfigurationPoints().getConfigurationPointByNamespaceUri(namespaceURI) != null;
+        }
 
-            QName schemaLocationQName = QName.get("schemaLocation", xsi);
-            Attribute attr = root.attribute(schemaLocationQName);
-            String value = attr != null ? attr.getText() : null;
-            Map<String, String> schemaLocations = parseSchemaLocation(value);
-            String locationPrefix = getLocationPrefix(schemaLocations);
+        private String reformatSchemaLocations(String schemaLocation) {
+            Map<String, String> schemaLocations = parseSchemaLocation(schemaLocation);
+            String locationPrefix = guessLocationPrefix(schemaLocations, schemas);
 
-            for (String namespaceURI : namespaces.keySet()) {
+            // 将缺少的schema location补充完整。
+            for (String namespaceURI : allSchemaNamespaces.keySet()) {
                 if (!schemaLocations.containsKey(namespaceURI)) {
                     try {
                         Set<Schema> schemaSet = schemas.getNamespaceMappings().get(namespaceURI);
 
                         if (schemaSet != null && schemaSet.size() > 0) {
                             schemaLocations.put(namespaceURI, locationPrefix + schemaSet.iterator().next().getName());
+                            modified = true;
                         }
-
-                        modified = true;
                     } catch (Exception ignored) {
                     }
                 }
             }
 
-            StringBuilder buf = new StringBuilder();
-
-            String leadingSpaces = String.format("%" + (root.getQualifiedName().length() + 2) + "s", "");
-            String indent = "    ";
-            String newLine = "\n";
-
-            buf.append(newLine);
-
-            for (Map.Entry<String, String> entry : schemaLocations.entrySet()) {
-                buf.append(leadingSpaces).append(indent).append(entry.getKey()).append(" ").append(entry.getValue()).append(newLine);
-            }
-
-            buf.append(leadingSpaces);
-
-            value = buf.toString();
-
-            if (attr != null) {
-                root.remove(attr);
-            }
-
-            root.addAttribute(schemaLocationQName, value);
+            return formatSchemaLocations(schemaLocations, root.getQualifiedName());
         }
 
-        private String getLocationPrefix(Map<String, String> schemaLocations) {
-            for (Map.Entry<String, String> entry : schemaLocations.entrySet()) {
-                String uri = entry.getKey();
-                String location = entry.getValue();
-                Set<Schema> schemaSet = schemas.getNamespaceMappings().get(uri);
+        /** 将element的prefix改成统一的值，但不改变其namespace。 */
+        private void setNamespacePrefix(Element element, String prefix) {
+            assertNotNull(prefix, "prefix is null");
 
-                if (schemaSet != null) {
-                    for (Schema schema : schemaSet) {
-                        if (location.endsWith(schema.getName())) {
-                            return location.substring(0, location.length() - schema.getName().length());
-                        }
-                    }
-                }
-            }
-
-            return "http://localhost:8080/schema/";
-        }
-
-        private Namespace getXsiNs() {
-            Namespace xsi = null;
-
-            for (Object o : root.declaredNamespaces()) {
-                Namespace ns = (Namespace) o;
-
-                if ("http://www.w3.org/2001/XMLSchema-instance".equals(ns.getURI())) {
-                    xsi = ns;
-                    break;
-                }
-            }
-
-            if (xsi == null) {
-                xsi = DocumentHelper.createNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
-                root.add(xsi);
-            }
-
-            return xsi;
-        }
-
-        private void setNamespacePrefix(Element element, String namespaceURI) {
-            String prefix = null;
-
-            if (namespaceURI != null && namespaces.containsKey(namespaceURI)) {
-                prefix = namespaces.get(namespaceURI).getPrefix();
-            }
-
-            if (prefix == null || !prefix.equals(element.getNamespacePrefix())) {
-                element.setQName(QName.get(element.getName(), prefix, namespaceURI));
+            if (!prefix.equals(element.getNamespacePrefix())) {
+                element.setQName(QName.get(element.getName(), prefix, element.getNamespaceURI()));
                 modified = true;
             }
         }
 
-        private void acceptSubElements(Element element) {
+        /** 将element变成unqualified。 */
+        private void removeNamespace(Element element) {
+            if (!isEmpty(element.getNamespaceURI())) {
+                element.setQName(QName.get(element.getName()));
+                modified = true;
+            }
+        }
+
+        private void visitSubElements(Element element) {
             for (Object subElement : element.elements()) {
-                accept((Element) subElement);
+                visit((Element) subElement);
             }
         }
 
