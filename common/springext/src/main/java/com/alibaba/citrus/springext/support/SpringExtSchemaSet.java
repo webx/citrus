@@ -20,6 +20,7 @@ package com.alibaba.citrus.springext.support;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 
+import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -184,13 +185,15 @@ public class SpringExtSchemaSet extends SchemaSet {
     }
 
     public static interface ParentOf<C extends TreeItem> {
+        @NotNull
+        Map<String, C> getChildrenMap();
     }
 
     public static class ConfigurationPointItem extends AbstractNamespaceItem<ContributionItem> {
         private final ConfigurationPoint configurationPoint;
 
         public ConfigurationPointItem(@NotNull String namespace, @NotNull Set<Schema> schemas, @NotNull ConfigurationPoint configurationPoint) {
-            super(namespace, schemas);
+            super(ContributionItem.class, namespace, schemas);
             this.configurationPoint = configurationPoint;
         }
 
@@ -204,6 +207,7 @@ public class SpringExtSchemaSet extends SchemaSet {
         private final Contribution contribution;
 
         public ContributionItem(@NotNull Contribution contribution) {
+            super(ConfigurationPointItem.class);
             this.contribution = contribution;
         }
 
@@ -220,12 +224,17 @@ public class SpringExtSchemaSet extends SchemaSet {
 
     public static class SpringPluggableItem extends AbstractNamespaceItem<TreeItem> {
         public SpringPluggableItem(@NotNull String namespace, @NotNull Set<Schema> schemas) {
-            super(namespace, schemas);
+            super(TreeItem.class, namespace, schemas);
         }
     }
 
     private static abstract class AbstractTreeItem<C extends TreeItem> implements TreeItem, ParentOf<C> {
         protected final Map<String, C> children = createTreeMap();
+        private final Class<C> childType;
+
+        protected AbstractTreeItem(@NotNull Class<C> childType) {
+            this.childType = assertNotNull(childType, "child item type");
+        }
 
         @Override
         public boolean hasChildren() {
@@ -233,8 +242,15 @@ public class SpringExtSchemaSet extends SchemaSet {
         }
 
         @NotNull
-        public TreeItem[] getChildren() {
-            return children.values().toArray(new TreeItem[children.size()]);
+        public C[] getChildren() {
+            C[] copy = (C[]) Array.newInstance(childType, children.size());
+            return children.values().toArray(copy);
+        }
+
+        @NotNull
+        @Override
+        public Map<String, C> getChildrenMap() {
+            return children;
         }
 
         @NotNull
@@ -265,7 +281,8 @@ public class SpringExtSchemaSet extends SchemaSet {
         private final String      namespace;
         private final Set<Schema> schemas;
 
-        protected AbstractNamespaceItem(@NotNull String namespace, @NotNull Set<Schema> schemas) {
+        protected AbstractNamespaceItem(@NotNull Class<C> childType, @NotNull String namespace, @NotNull Set<Schema> schemas) {
+            super(childType);
             this.namespace = namespace;
             this.schemas = schemas;
         }
@@ -347,14 +364,14 @@ public class SpringExtSchemaSet extends SchemaSet {
         }
 
         private void buildSpringPluggableItem(@NotNull String namespace, @NotNull Set<Schema> schemas) {
-            NamespaceItem item = new SpringPluggableItem(namespace, schemas);
+            NamespaceItem item = createSpringPluggableItem(namespace, schemas);
             items.put(namespace, item);
             independentItems.put(namespace, item);
         }
 
         private void buildConfigurationPointItem(String namespace, Set<Schema> schemas, ConfigurationPointSchemaSourceInfo schema) {
             ConfigurationPoint configurationPoint = (ConfigurationPoint) schema.getParent();
-            ConfigurationPointItem item = new ConfigurationPointItem(namespace, schemas, configurationPoint);
+            ConfigurationPointItem item = createConfigurationPointItem(namespace, schemas, configurationPoint);
             items.put(namespace, item);
 
             Collection<Contribution> dependingContributions = configurationPoint.getDependingContributions();
@@ -380,18 +397,38 @@ public class SpringExtSchemaSet extends SchemaSet {
 
         private ConfigurationPointItem buildContributionItem(String namespace, ConfigurationPointItem item, Contribution contribution, ConfigurationPointItem parentItem) {
             String contributionName = contribution.getName();
-            ContributionItem parentContributionItem = parentItem.children.get(contributionName);
+            ContributionItem parentContributionItem = parentItem.getChildrenMap().get(contributionName);
 
             if (parentContributionItem == null) {
-                parentContributionItem = new ContributionItem(contribution);
-                parentItem.children.put(contributionName, parentContributionItem);
+                parentContributionItem = createContributionItem(contribution);
+                addChildItem(parentItem, contributionName, parentContributionItem);
             }
 
-            if (!parentContributionItem.children.containsKey(namespace)) {
-                parentContributionItem.children.put(namespace, item);
+            if (!parentContributionItem.getChildrenMap().containsKey(namespace)) {
+                addChildItem(parentContributionItem, namespace, item);
             }
 
             return item;
         }
+    }
+
+    /** Template method */
+    protected ConfigurationPointItem createConfigurationPointItem(@NotNull String namespace, @NotNull Set<Schema> schemas, @NotNull ConfigurationPoint configurationPoint) {
+        return new ConfigurationPointItem(namespace, schemas, configurationPoint);
+    }
+
+    /** Template method */
+    protected ContributionItem createContributionItem(Contribution contribution) {
+        return new ContributionItem(contribution);
+    }
+
+    /** Template method */
+    protected SpringPluggableItem createSpringPluggableItem(@NotNull String namespace, @NotNull Set<Schema> schemas) {
+        return new SpringPluggableItem(namespace, schemas);
+    }
+
+    /** Template method */
+    protected <C extends TreeItem> void addChildItem(@NotNull ParentOf<C> parent, @NotNull String key, @NotNull C childItem) {
+        parent.getChildrenMap().put(key, childItem);
     }
 }
