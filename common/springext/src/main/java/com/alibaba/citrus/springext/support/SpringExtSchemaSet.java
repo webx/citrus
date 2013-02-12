@@ -52,6 +52,7 @@ import org.jetbrains.annotations.NotNull;
 public class SpringExtSchemaSet extends SchemaSet {
     private NamespaceItem[] allItems;
     private NamespaceItem[] treeItems;
+    private boolean         includingAllContributions;
 
     /** 通过默认的<code>ClassLoader</code>来装载schemas。 */
     public SpringExtSchemaSet() {
@@ -163,22 +164,29 @@ public class SpringExtSchemaSet extends SchemaSet {
 
     /** 取得所有的schemas。 */
     public NamespaceItem[] getAllItems() {
-        ensureTreeBuilt();
+        ensureTreeBuilt(false);
         return allItems;
     }
 
     /** 取得所有独立的schemas。 */
     public NamespaceItem[] getIndependentItems() {
-        ensureTreeBuilt();
+        return getIndependentItems(false);
+    }
+
+    /** 取得所有独立的schemas。 */
+    public NamespaceItem[] getIndependentItems(boolean includingAllContributions) {
+        ensureTreeBuilt(includingAllContributions);
         return treeItems;
     }
 
-    private synchronized void ensureTreeBuilt() {
-        if (allItems == null || treeItems == null) {
+    private synchronized void ensureTreeBuilt(boolean includingAllContributions) {
+        if (allItems == null || treeItems == null || includingAllContributions != this.includingAllContributions) {
+            this.includingAllContributions = includingAllContributions;
+
             TreeBuilder builder = new TreeBuilder().build();
 
-            allItems = builder.getAllNamespaceItems();
-            treeItems = builder.getIndependentNamespaceItems();
+            this.allItems = builder.getAllNamespaceItems();
+            this.treeItems = builder.getIndependentNamespaceItems();
         }
     }
 
@@ -396,9 +404,11 @@ public class SpringExtSchemaSet extends SchemaSet {
             items.put(namespace, item);
 
             // build contributions
-            for (Contribution contribution : configurationPoint.getContributions()) {
-                ContributionItem contributionItem = createContributionItem(contribution);
-                addChildItem(item, contribution.getName(), contributionItem);
+            if (includingAllContributions) {
+                for (Contribution contribution : configurationPoint.getContributions()) {
+                    ContributionItem contributionItem = createContributionItem(contribution);
+                    addChildItem(item, contribution.getName(), contributionItem);
+                }
             }
 
             // build depending contributions
@@ -424,8 +434,12 @@ public class SpringExtSchemaSet extends SchemaSet {
 
         private void buildContributionItem(String namespace, ConfigurationPointItem item, Contribution contribution, ConfigurationPointItem parentItem) {
             String contributionName = contribution.getName();
-            ContributionItem parentContributionItem = assertNotNull(parentItem.getChildrenMap().get(contributionName),
-                                                                    "no contribution %s defined in configuration point %s", contributionName, parentItem.getNamespace());
+            ContributionItem parentContributionItem = parentItem.getChildrenMap().get(contributionName);
+
+            if (parentContributionItem == null) {
+                parentContributionItem = createContributionItem(contribution);
+                addChildItem(parentItem, contributionName, parentContributionItem);
+            }
 
             if (!parentContributionItem.getChildrenMap().containsKey(namespace)) {
                 addChildItem(parentContributionItem, namespace, item);

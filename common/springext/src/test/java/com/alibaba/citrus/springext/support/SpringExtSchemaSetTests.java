@@ -107,6 +107,44 @@ public class SpringExtSchemaSetTests {
     public void test14_configurationPointItems() {
         assertEquals(3, configurationPointItems.size());
 
+        assertEquals(true, configurationPointItems.get(0).hasChildren());
+        assertEquals("http://localhost/b {\n" +
+                     "  b1 {\n" +
+                     "    http://localhost/c {\n" +       // a, b -> c -> a 循环引用被切断，变成 b -> c -> a
+                     "      c1 {\n" +                     // 引用两个configuration points
+                     "        http://localhost/a\n" +     // c -> a
+                     "        http://localhost/h\n" +     // c, f -> h 被两个element引用
+                     "      }\n" +
+                     "    }\n" +
+                     "  }\n" +
+                     "}", configurationPointItems.get(0).dump());
+
+        assertEquals(false, configurationPointItems.get(1).hasChildren());
+        assertEquals("http://localhost/d",                // 自己引用自己，就当没引用
+                     configurationPointItems.get(1).dump());
+
+        assertEquals(true, configurationPointItems.get(2).hasChildren());
+        assertEquals("http://localhost/e {\n" +           // e -> f
+                     "  e1 {\n" +
+                     "    http://localhost/f {\n" +       // f在不同的标签中分别引用g和h
+                     "      f1 {\n" +
+                     "        http://localhost/g\n" +
+                     "      }\n" +
+                     "\n" +
+                     "      f2 {\n" +
+                     "        http://localhost/h\n" +     // c, f -> h，h也被c引用
+                     "      }\n" +
+                     "    }\n" +
+                     "  }\n" +
+                     "}", configurationPointItems.get(2).dump());
+    }
+
+    @Test
+    public void test14_configurationPointItems_includingAllContributions() {
+        configurationPointItems = filter(ConfigurationPointItem.class, schemas.getIndependentItems(true), true);
+
+        assertEquals(3, configurationPointItems.size());
+
         assertEquals(true, hasGrandChildren(configurationPointItems.get(0)));
         assertEquals("http://localhost/b {\n" +
                      "  b1 {\n" +
