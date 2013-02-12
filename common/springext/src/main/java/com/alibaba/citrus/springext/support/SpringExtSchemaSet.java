@@ -52,7 +52,7 @@ import org.jetbrains.annotations.NotNull;
 public class SpringExtSchemaSet extends SchemaSet {
     private NamespaceItem[] allItems;
     private NamespaceItem[] treeItems;
-    private boolean         includingAllContributions;
+    private NamespaceItem[] treeItemsWithAllContributions;
 
     /** 通过默认的<code>ClassLoader</code>来装载schemas。 */
     public SpringExtSchemaSet() {
@@ -176,17 +176,26 @@ public class SpringExtSchemaSet extends SchemaSet {
     /** 取得所有独立的schemas。 */
     public NamespaceItem[] getIndependentItems(boolean includingAllContributions) {
         ensureTreeBuilt(includingAllContributions);
-        return treeItems;
+        return includingAllContributions ? treeItemsWithAllContributions : treeItems;
     }
 
     private synchronized void ensureTreeBuilt(boolean includingAllContributions) {
-        if (allItems == null || treeItems == null || includingAllContributions != this.includingAllContributions) {
-            this.includingAllContributions = includingAllContributions;
+        if (allItems == null || (includingAllContributions ? treeItemsWithAllContributions : treeItems) == null) {
+            TreeBuilder builder = new TreeBuilder().build(includingAllContributions);
 
-            TreeBuilder builder = new TreeBuilder().build();
+            if (allItems == null) {
+                allItems = builder.getAllNamespaceItems();
+            }
 
-            this.allItems = builder.getAllNamespaceItems();
-            this.treeItems = builder.getIndependentNamespaceItems();
+            if (includingAllContributions) {
+                if (treeItemsWithAllContributions == null) {
+                    this.treeItemsWithAllContributions = builder.getIndependentNamespaceItems();
+                }
+            } else {
+                if (treeItems == null) {
+                    this.treeItems = builder.getIndependentNamespaceItems();
+                }
+            }
         }
     }
 
@@ -329,8 +338,11 @@ public class SpringExtSchemaSet extends SchemaSet {
         private final Map<String, NamespaceItem> items              = createTreeMap();
         private final Map<String, NamespaceItem> independentItems   = createTreeMap();
         private final LinkedList<String>         buildingNamespaces = createLinkedList();
+        private boolean includingAllContributions;
 
-        public TreeBuilder build() {
+        public TreeBuilder build(boolean includingAllContributions) {
+            this.includingAllContributions = includingAllContributions;
+
             for (String namespace : namespaceMappings.keySet()) {
                 buildNamespaceItemRecursively(namespace);
             }

@@ -189,6 +189,21 @@ public class SpringExtSchemaSetTests {
     }
 
     @Test
+    public void test14_with_or_without_allContributions() {
+        NamespaceItem[] itemsAll = schemas.getAllItems();
+        NamespaceItem[] items = schemas.getIndependentItems();
+        NamespaceItem[] itemsWithAllContributions = schemas.getIndependentItems(true);
+
+        // 多次调用值不变
+        assertSame(items, schemas.getIndependentItems());
+        assertSame(items, schemas.getIndependentItems(false));
+
+        assertSame(itemsWithAllContributions, schemas.getIndependentItems(true));
+
+        assertSame(itemsAll, schemas.getAllItems());
+    }
+
+    @Test
     public void test14_springItems() {
         boolean found = false;
 
