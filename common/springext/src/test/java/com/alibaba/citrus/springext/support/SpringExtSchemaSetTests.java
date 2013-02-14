@@ -22,6 +22,7 @@ import static javax.xml.XMLConstants.*;
 import static org.junit.Assert.*;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -31,6 +32,7 @@ import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.support.SpringExtSchemaSet.ConfigurationPointItem;
 import com.alibaba.citrus.springext.support.SpringExtSchemaSet.NamespaceItem;
 import com.alibaba.citrus.springext.support.SpringExtSchemaSet.SpringPluggableItem;
+import com.alibaba.citrus.springext.support.SpringExtSchemaSet.TreeItem;
 import com.alibaba.citrus.test.TestEnvStatic;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -45,6 +47,7 @@ public class SpringExtSchemaSetTests {
     private List<SpringPluggableItem>    springItems;
     private List<SpringPluggableItem>    noSchemaItems;
     private List<ConfigurationPointItem> configurationPointItems;
+    private List<ConfigurationPointItem> configurationPointAllItems;
 
     static {
         TestEnvStatic.init();
@@ -59,6 +62,7 @@ public class SpringExtSchemaSetTests {
         springItems = filter(SpringPluggableItem.class, items, true);
         noSchemaItems = filter(SpringPluggableItem.class, items, false);
         configurationPointItems = filter(ConfigurationPointItem.class, items, true);
+        configurationPointAllItems = filter(ConfigurationPointItem.class, schemas.getAllItems(), true);
     }
 
     @Test
@@ -83,39 +87,120 @@ public class SpringExtSchemaSetTests {
     }
 
     @Test
+    public void test14_configurationPointAllItems() {
+        assertEquals(8, configurationPointAllItems.size());
+
+        Iterator<ConfigurationPointItem> i = configurationPointAllItems.iterator();
+        assertEquals("http://localhost/a", i.next().getNamespace());
+        assertEquals("http://localhost/b", i.next().getNamespace());
+        assertEquals("http://localhost/c", i.next().getNamespace());
+        assertEquals("http://localhost/d", i.next().getNamespace());
+        assertEquals("http://localhost/e", i.next().getNamespace());
+        assertEquals("http://localhost/f", i.next().getNamespace());
+        assertEquals("http://localhost/g", i.next().getNamespace());
+        assertEquals("http://localhost/h", i.next().getNamespace());
+
+        assertFalse(i.hasNext());
+    }
+
+    @Test
     public void test14_configurationPointItems() {
         assertEquals(3, configurationPointItems.size());
 
         assertEquals(true, configurationPointItems.get(0).hasChildren());
         assertEquals("http://localhost/b {\n" +
                      "  b1 {\n" +
-                     "    http://localhost/c {\n" +     // a, b -> c -> a 循环引用被切断，变成 b -> c -> a
-                     "      c1 {\n" +                   // 引用两个configuration points
-                     "        http://localhost/a\n" +   // c -> a
-                     "        http://localhost/h\n" +   // c, f -> h 被两个element引用
+                     "    http://localhost/c {\n" +       // a, b -> c -> a 循环引用被切断，变成 b -> c -> a
+                     "      c1 {\n" +                     // 引用两个configuration points
+                     "        http://localhost/a\n" +     // c -> a
+                     "        http://localhost/h\n" +     // c, f -> h 被两个element引用
                      "      }\n" +
                      "    }\n" +
                      "  }\n" +
                      "}", configurationPointItems.get(0).dump());
 
         assertEquals(false, configurationPointItems.get(1).hasChildren());
-        assertEquals("http://localhost/d",              // 自己引用自己，就当没引用
+        assertEquals("http://localhost/d",                // 自己引用自己，就当没引用
                      configurationPointItems.get(1).dump());
 
         assertEquals(true, configurationPointItems.get(2).hasChildren());
-        assertEquals("http://localhost/e {\n" +         // e -> f
+        assertEquals("http://localhost/e {\n" +           // e -> f
                      "  e1 {\n" +
-                     "    http://localhost/f {\n" +     // f在不同的标签中分别引用g和h
+                     "    http://localhost/f {\n" +       // f在不同的标签中分别引用g和h
                      "      f1 {\n" +
                      "        http://localhost/g\n" +
                      "      }\n" +
                      "\n" +
                      "      f2 {\n" +
-                     "        http://localhost/h\n" +   // c, f -> h，h也被c引用
+                     "        http://localhost/h\n" +     // c, f -> h，h也被c引用
                      "      }\n" +
                      "    }\n" +
                      "  }\n" +
                      "}", configurationPointItems.get(2).dump());
+    }
+
+    @Test
+    public void test14_configurationPointItems_includingAllContributions() {
+        configurationPointItems = filter(ConfigurationPointItem.class, schemas.getIndependentItems(true), true);
+
+        assertEquals(3, configurationPointItems.size());
+
+        assertEquals(true, hasGrandChildren(configurationPointItems.get(0)));
+        assertEquals("http://localhost/b {\n" +
+                     "  b1 {\n" +
+                     "    http://localhost/c {\n" +       // a, b -> c -> a 循环引用被切断，变成 b -> c -> a
+                     "      c1 {\n" +                     // 引用两个configuration points
+                     "        http://localhost/a {\n" +   // c -> a
+                     "          a1\n" +
+                     "        }\n" +
+                     "\n" +
+                     "        http://localhost/h {\n" +   // c, f -> h 被两个element引用
+                     "          h1\n" +
+                     "        }\n" +
+                     "      }\n" +
+                     "    }\n" +
+                     "  }\n" +
+                     "}", configurationPointItems.get(0).dump());
+
+        assertEquals(false, hasGrandChildren(configurationPointItems.get(1)));
+        assertEquals("http://localhost/d {\n" +           // 自己引用自己，就当没引用
+                     "  d1\n" +
+                     "}",
+                     configurationPointItems.get(1).dump());
+
+        assertEquals(true, hasGrandChildren(configurationPointItems.get(2)));
+        assertEquals("http://localhost/e {\n" +           // e -> f
+                     "  e1 {\n" +
+                     "    http://localhost/f {\n" +       // f在不同的标签中分别引用g和h
+                     "      f1 {\n" +
+                     "        http://localhost/g {\n" +
+                     "          g1\n" +
+                     "        }\n" +
+                     "      }\n" +
+                     "\n" +
+                     "      f2 {\n" +
+                     "        http://localhost/h {\n" +   // c, f -> h，h也被c引用
+                     "          h1\n" +
+                     "        }\n" +
+                     "      }\n" +
+                     "    }\n" +
+                     "  }\n" +
+                     "}", configurationPointItems.get(2).dump());
+    }
+
+    @Test
+    public void test14_with_or_without_allContributions() {
+        NamespaceItem[] itemsAll = schemas.getAllItems();
+        NamespaceItem[] items = schemas.getIndependentItems();
+        NamespaceItem[] itemsWithAllContributions = schemas.getIndependentItems(true);
+
+        // 多次调用值不变
+        assertSame(items, schemas.getIndependentItems());
+        assertSame(items, schemas.getIndependentItems(false));
+
+        assertSame(itemsWithAllContributions, schemas.getIndependentItems(true));
+
+        assertSame(itemsAll, schemas.getAllItems());
     }
 
     @Test
@@ -204,5 +289,15 @@ public class SpringExtSchemaSetTests {
         }
 
         assertArrayEquals(new String[] { "interceptors:i1", "interceptors:i2" }, refs.toArray());
+    }
+
+    private boolean hasGrandChildren(TreeItem item) {
+        for (TreeItem child : item.getChildren()) {
+            if (child.hasChildren()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
