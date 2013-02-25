@@ -28,9 +28,5 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>citrus-common-servlet</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.intellij</groupId>
-            <artifactId>annotations</artifactId>
-        </dependency>
     </dependencies>
 </project>

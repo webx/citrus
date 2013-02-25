@@ -27,9 +27,6 @@ import java.net.URI;
 import java.net.URL;
 
 import com.alibaba.citrus.springext.ResourceResolver;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
@@ -46,8 +43,7 @@ public class ClasspathResourceResolver extends ResourceResolver {
     }
 
     @Override
-    @Nullable
-    public Resource getResource(@NotNull String location) {
+    public Resource getResource(String location) {
         org.springframework.core.io.Resource springResource = resolver.getResource(CLASSPATH_URL_PREFIX + location);
 
         if (springResource != null && springResource.exists()) {
@@ -58,8 +54,7 @@ public class ClasspathResourceResolver extends ResourceResolver {
     }
 
     @Override
-    @NotNull
-    public Resource[] getResources(@NotNull String locationPattern) throws IOException {
+    public Resource[] getResources(String locationPattern) throws IOException {
         org.springframework.core.io.Resource[] springResources = resolver.getResources(CLASSPATH_ALL_URL_PREFIX + locationPattern);
 
         if (springResources == null) {
@@ -86,7 +81,6 @@ public class ClasspathResourceResolver extends ResourceResolver {
             this.springResource = assertNotNull(springResource, "missing spring resource");
         }
 
-        @NotNull
         public org.springframework.core.io.Resource getUnderlyingResource() {
             return springResource;
         }
