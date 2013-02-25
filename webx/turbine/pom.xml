@@ -38,6 +38,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>citrus-common-logconfig</artifactId>
         </dependency>

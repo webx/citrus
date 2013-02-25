@@ -38,7 +38,6 @@ import com.alibaba.citrus.springext.impl.ConfigurationPointsImpl;
 import com.alibaba.citrus.springext.impl.SpringPluggableSchemas;
 import com.alibaba.citrus.springext.support.SchemaUtil.AnyElementVisitor;
 import com.alibaba.citrus.util.ToStringBuilder;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * 创建一个schema set，其中包含以下所有的schemas：
@@ -202,32 +201,27 @@ public class SpringExtSchemaSet extends SchemaSet {
     public static interface TreeItem {
         boolean hasChildren();
 
-        @NotNull
         TreeItem[] getChildren();
     }
 
     public static interface NamespaceItem extends TreeItem {
-        @NotNull
         String getNamespace();
 
-        @NotNull
         Set<Schema> getSchemas();
     }
 
     public static interface ParentOf<C extends TreeItem> {
-        @NotNull
         Map<String, C> getChildrenMap();
     }
 
     public static class ConfigurationPointItem extends AbstractNamespaceItem<ContributionItem> {
         private final ConfigurationPoint configurationPoint;
 
-        public ConfigurationPointItem(@NotNull String namespace, @NotNull Set<Schema> schemas, @NotNull ConfigurationPoint configurationPoint) {
+        public ConfigurationPointItem(String namespace, Set<Schema> schemas, ConfigurationPoint configurationPoint) {
             super(ContributionItem.class, namespace, schemas);
             this.configurationPoint = configurationPoint;
         }
 
-        @NotNull
         public ConfigurationPoint getConfigurationPoint() {
             return configurationPoint;
         }
@@ -236,12 +230,11 @@ public class SpringExtSchemaSet extends SchemaSet {
     public static class ContributionItem extends AbstractTreeItem<ConfigurationPointItem> {
         private final Contribution contribution;
 
-        public ContributionItem(@NotNull Contribution contribution) {
+        public ContributionItem(Contribution contribution) {
             super(ConfigurationPointItem.class);
             this.contribution = contribution;
         }
 
-        @NotNull
         public Contribution getContribution() {
             return contribution;
         }
@@ -253,7 +246,7 @@ public class SpringExtSchemaSet extends SchemaSet {
     }
 
     public static class SpringPluggableItem extends AbstractNamespaceItem<TreeItem> {
-        public SpringPluggableItem(@NotNull String namespace, @NotNull Set<Schema> schemas) {
+        public SpringPluggableItem(String namespace, Set<Schema> schemas) {
             super(TreeItem.class, namespace, schemas);
         }
     }
@@ -262,7 +255,7 @@ public class SpringExtSchemaSet extends SchemaSet {
         protected final Map<String, C> children = createTreeMap();
         private final Class<C> childType;
 
-        protected AbstractTreeItem(@NotNull Class<C> childType) {
+        protected AbstractTreeItem(Class<C> childType) {
             this.childType = assertNotNull(childType, "child item type");
         }
 
@@ -271,19 +264,16 @@ public class SpringExtSchemaSet extends SchemaSet {
             return !children.isEmpty();
         }
 
-        @NotNull
         public C[] getChildren() {
             C[] copy = (C[]) Array.newInstance(childType, children.size());
             return children.values().toArray(copy);
         }
 
-        @NotNull
         @Override
         public Map<String, C> getChildrenMap() {
             return children;
         }
 
-        @NotNull
         public String dump() {
             ToStringBuilder buf = new ToStringBuilder();
             dump(buf);
@@ -311,18 +301,16 @@ public class SpringExtSchemaSet extends SchemaSet {
         private final String      namespace;
         private final Set<Schema> schemas;
 
-        protected AbstractNamespaceItem(@NotNull Class<C> childType, @NotNull String namespace, @NotNull Set<Schema> schemas) {
+        protected AbstractNamespaceItem(Class<C> childType, String namespace, Set<Schema> schemas) {
             super(childType);
             this.namespace = namespace;
             this.schemas = schemas;
         }
 
-        @NotNull
         public String getNamespace() {
             return namespace;
         }
 
-        @NotNull
         public Set<Schema> getSchemas() {
             return schemas;
         }
@@ -358,7 +346,7 @@ public class SpringExtSchemaSet extends SchemaSet {
             return independentItems.values().toArray(new NamespaceItem[independentItems.size()]);
         }
 
-        private boolean buildNamespaceItemRecursively(@NotNull String namespace) {
+        private boolean buildNamespaceItemRecursively(String namespace) {
             if (buildingNamespaces.contains(namespace)) {
                 return false; // 防止递归失控
             }
@@ -373,7 +361,7 @@ public class SpringExtSchemaSet extends SchemaSet {
             return true;
         }
 
-        private void buildNamespaceItem(@NotNull String namespace) {
+        private void buildNamespaceItem(String namespace) {
             if (items.containsKey(namespace)) {
                 return; // 防止重复build
             }
@@ -404,13 +392,13 @@ public class SpringExtSchemaSet extends SchemaSet {
             }
         }
 
-        private void buildSpringPluggableItem(@NotNull String namespace, @NotNull Set<Schema> schemas) {
+        private void buildSpringPluggableItem(String namespace, Set<Schema> schemas) {
             NamespaceItem item = createSpringPluggableItem(namespace, schemas);
             items.put(namespace, item);
             independentItems.put(namespace, item);
         }
 
-        private void buildConfigurationPointItem(@NotNull String namespace, @NotNull Set<Schema> schemas, @NotNull ConfigurationPointSchemaSourceInfo schema) {
+        private void buildConfigurationPointItem(String namespace, Set<Schema> schemas, ConfigurationPointSchemaSourceInfo schema) {
             ConfigurationPoint configurationPoint = (ConfigurationPoint) schema.getParent();
             ConfigurationPointItem item = createConfigurationPointItem(namespace, schemas, configurationPoint);
             items.put(namespace, item);
@@ -460,7 +448,7 @@ public class SpringExtSchemaSet extends SchemaSet {
     }
 
     /** Template method */
-    protected ConfigurationPointItem createConfigurationPointItem(@NotNull String namespace, @NotNull Set<Schema> schemas, @NotNull ConfigurationPoint configurationPoint) {
+    protected ConfigurationPointItem createConfigurationPointItem(String namespace, Set<Schema> schemas, ConfigurationPoint configurationPoint) {
         return new ConfigurationPointItem(namespace, schemas, configurationPoint);
     }
 
@@ -470,12 +458,12 @@ public class SpringExtSchemaSet extends SchemaSet {
     }
 
     /** Template method */
-    protected SpringPluggableItem createSpringPluggableItem(@NotNull String namespace, @NotNull Set<Schema> schemas) {
+    protected SpringPluggableItem createSpringPluggableItem(String namespace, Set<Schema> schemas) {
         return new SpringPluggableItem(namespace, schemas);
     }
 
     /** Template method */
-    protected <C extends TreeItem> void addChildItem(@NotNull ParentOf<C> parent, @NotNull String key, @NotNull C childItem) {
+    protected <C extends TreeItem> void addChildItem(ParentOf<C> parent, String key, C childItem) {
         parent.getChildrenMap().put(key, childItem);
     }
 }

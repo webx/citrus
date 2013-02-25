@@ -117,3 +117,5 @@
 -- Changes in 3.1.3
 
 * 升级到springext-maven-plugin 1.2
+* 删除intellij:annotations依赖，因为还不能全面使用这个机制，不如先删除。
+* 将velocity/freemarker的依赖改成scope=provided。应用程序如果需要的话，必须明确声明依赖它们。
