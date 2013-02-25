@@ -31,8 +31,6 @@ import com.alibaba.citrus.springext.support.ClasspathResourceResolver;
 import com.alibaba.citrus.springext.util.ConvertToUnqualifiedStyle;
 import com.alibaba.citrus.test.TestEnvStatic;
 import com.alibaba.citrus.util.io.StreamUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
 public class UnqualifiedStyleTests {
@@ -58,9 +56,8 @@ public class UnqualifiedStyleTests {
     @Test
     public void qualifiedStyleContribution() throws Exception {
         cps = new ConfigurationPointsImpl(new ClasspathResourceResolver(getClass().getClassLoader()) {
-            @Nullable
             @Override
-            public Resource getResource(@NotNull String location) {
+            public Resource getResource(String location) {
                 String name = ConvertToUnqualifiedStyle.class.getName().replace('.', '/') + ".class";
 
                 if (name.equals(location)) {
