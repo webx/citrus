@@ -42,7 +42,8 @@ public class Log4jConfiguratorTests extends AbstractLogConfiguratorTests {
     public void getConfigurator_wrongContext() throws Exception {
         // 在logback的环境中，创建log4j，成功，但打印警告。
         invokeInLoader("logback", "getConfigurator", "log4j");
-        assertThat(err, containsString("WARN: SLF4J chose [logback] as its logging system, not [log4j]"));
+        assertThat(err, containsString("WARN: The current logging system [logback] used by SLF4J may not be configured, " +
+                                       "because it is not in the configuration list: [log4j]."));
     }
 
     @SuppressWarnings("unused")

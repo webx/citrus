@@ -55,7 +55,8 @@ public class LogbackConfiguratorTests extends AbstractLogConfiguratorTests {
         // 在log4j+logback的环境中，创建logback成功，但configure失败。
         invokeInLoader("log4j, logback", "configure_wrongContext", "logback");
 
-        assertThat(err, containsString("WARN: SLF4J chose [log4j] as its logging system, not [logback]"));
+        assertThat(err, containsString("WARN: The current logging system [log4j] used by SLF4J may not be configured, " +
+                                       "because it is not in the configuration list: [logback]."));
         assertThat(err, containsString("multiple SLF4J bindings"));
         assertThat(err, containsString("WARN: Failed to configure logback using "));
         assertThat(err, containsString("logback-default.xml"));
