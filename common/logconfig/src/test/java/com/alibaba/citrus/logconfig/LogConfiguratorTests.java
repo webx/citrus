@@ -30,9 +30,6 @@ import org.junit.Test;
 public class LogConfiguratorTests extends AbstractLogConfiguratorTests {
     @Test
     public void getConfigurator_failure() throws Exception {
-        // 既没有指定logsystem，也没找到系统默认的logsystem。
-        assertGetConfiguratorFailure(null, "", "No log system bound with SLF4J");
-
         // provider not found
         assertGetConfiguratorFailure(null, "notexist", "Could not find LogConfigurator for \"notexist\" "
                                                        + "by searching in META-INF/logconfig.providers");
@@ -94,21 +91,26 @@ public class LogConfiguratorTests extends AbstractLogConfiguratorTests {
                                                                                                         "logback" });
 
         // getConfigurators(null, "  ") - 空参数 - 默认值
-        invokeInLoader("log4j", "getConfigurators", new String[] { null, "  " }, new String[] { "log4j", "log4j" });
+        invokeInLoader("log4j", "getConfigurators", new String[] { null, "  " }, new String[] { "log4j" });
 
         // getConfigurators("logback") - 指定值与slf4j不匹配
         invokeInLoader("log4j", "getConfigurators", new String[] { "logback" }, new String[] { "logback" });
 
         assertEquals("", out);
-        assertEquals("WARN: SLF4J chose [log4j] as its logging system, not [logback]", err.trim());
+        assertEquals("WARN: The current logging system [log4j] used by SLF4J may not be configured, " +
+                     "because it is not in the configuration list: [logback].", err.trim());
 
         // getConfigurators("logback", null) - 找不到默认值
-        try {
-            invokeInLoader("", "getConfigurators", new String[] { "logback", null }, null);
-            fail();
-        } catch (IllegalArgumentException e) {
-            assertEquals("No log system bound with SLF4J", e.getMessage());
-        }
+        invokeInLoader("", "getConfigurators", new String[] { "logback", null }, new String[] { "logback" });
+
+        assertEquals("", out);
+        assertThat(err.trim(), containsString("WARN: No log system bound with SLF4J"));
+
+        // 既没有指定logsystem，也没找到系统默认的logsystem。
+        invokeInLoader("", "getConfigurators", null, new String[0]);
+
+        assertEquals("", out);
+        assertThat(err.trim(), containsString("WARN: No log system bound with SLF4J"));
     }
 
     @SuppressWarnings("unused")

@@ -24,11 +24,12 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
-import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.TreeSet;
 
 import org.slf4j.LoggerFactory;
@@ -275,16 +276,15 @@ public abstract class LogConfigurator {
         String slf4jLogSystem = guessSlf4jLogSystem(providers);
 
         // 规格化所有logSystems
+        Set<String> logSystemToBeConfigured = new LinkedHashSet<String>();
+
         if (logSystems == null || logSystems.length == 0) {
             logSystems = new String[1];
         }
 
-        boolean containsSlf4jLogSystem = false;
         boolean containsNull = false;
 
-        for (int i = 0; i < logSystems.length; i++) {
-            String logSystem = logSystems[i];
-
+        for (String logSystem : logSystems) {
             if (logSystem != null) {
                 logSystem = trimToNull(logSystem.toLowerCase());
             }
@@ -293,32 +293,29 @@ public abstract class LogConfigurator {
                 logSystem = slf4jLogSystem;
             }
 
-            if (slf4jLogSystem != null && slf4jLogSystem.equals(logSystem)) {
-                containsSlf4jLogSystem = true;
-            }
-
             if (logSystem == null) {
                 containsNull = true;
+            } else {
+                logSystemToBeConfigured.add(logSystem);
             }
-
-            logSystems[i] = logSystem;
         }
 
         // 假如logSystems列表中未包含slf4jLogSystem，则报警。
-        if (slf4jLogSystem != null && !containsSlf4jLogSystem) {
-            log("WARN: SLF4J chose [" + slf4jLogSystem + "] as its logging system, not " + Arrays.toString(logSystems));
+        if (slf4jLogSystem != null && !logSystemToBeConfigured.contains(slf4jLogSystem)) {
+            log("WARN: The current logging system [" + slf4jLogSystem + "] used by SLF4J may not be configured, " +
+                "because it is not in the configuration list: " + logSystemToBeConfigured + ".");
         }
 
         // 如果系统中不存在默认的logSystems，则报错
         if (containsNull) {
-            throw new IllegalArgumentException("No log system bound with SLF4J");
+            log("WARN: No log system bound with SLF4J");
         }
 
         // 取得log configurators
-        LogConfigurator[] configurators = new LogConfigurator[logSystems.length];
+        LogConfigurator[] configurators = new LogConfigurator[logSystemToBeConfigured.size()];
+        int i = 0;
 
-        for (int i = 0; i < logSystems.length; i++) {
-            String logSystem = logSystems[i];
+        for (String logSystem : logSystemToBeConfigured) {
             String providerClassName = providers.get(logSystem);
 
             if (providerClassName == null) {
@@ -350,7 +347,7 @@ public abstract class LogConfigurator {
 
             configurator.logSystem = logSystem;
 
-            configurators[i] = configurator;
+            configurators[i++] = configurator;
         }
 
         return configurators;
