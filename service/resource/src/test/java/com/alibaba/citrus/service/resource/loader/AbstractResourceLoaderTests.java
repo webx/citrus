@@ -90,6 +90,12 @@ public abstract class AbstractResourceLoaderTests<L extends ResourceLoader> exte
                    + name.substring(subs.getMatch().end());
         }
 
+        public void saveLastResult() {
+        }
+
+        public void restoreLastResult() {
+        }
+
         public Resource getResource(String newResourceName, Set<ResourceLoadingOption> options) {
             fail();
             return null;

@@ -373,3 +373,8 @@
 * 将velocity/freemarker的依赖改成scope=provided。应用程序如果需要的话，必须明确声明依赖它们。
 * 当SLF4J没有绑定日志系统时（即classpath中不存在诸如logback-classic或slf4j-log4j12包），避免配置出错。
   这个修改可使autoconfig运行于maven 3.1.x中。因为在maven 3.1.x里，SLF4J被提到上层classloader中，从而找不到logback包而报错。
+* Bugfix: 修正如下问题：在<resource-loading>服务中，两个连续的<super-loader>中的第二个无法工作，例如：
+  <resource pattern="/*/templates/layout">
+      <res-loaders:super-loader name="/webroot/$1/templates/layout" />
+      <res-loaders:super-loader name="/webroot/common/templates/layout" />
+  </resource>

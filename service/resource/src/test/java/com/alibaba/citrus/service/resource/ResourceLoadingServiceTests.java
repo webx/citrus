@@ -205,7 +205,7 @@ public class ResourceLoadingServiceTests extends AbstractResourceLoadingTests {
             fail();
         } catch (ResourceNotFoundException e) {
             // 由于是loader的方式，故caused by丢失
-            assertResourceNotFoundException(e, "/my/alias7/testres.txt", "/webroot/myfolder/testres.txt");
+            assertResourceNotFoundException(e, "/my/alias7/testres.txt"/*, "/webroot/myfolder/testres.txt"*/);
         }
     }
 

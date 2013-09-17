@@ -29,4 +29,10 @@ public interface ResourceMatchResult {
 
     /** 将匹配部分替换成指定字符串。 */
     String substitute(String substitution);
+
+    /** 保存最近匹配的状态，避免递归回溯时状态被破坏。 */
+    void saveLastResult();
+
+    /** 恢复最近匹配的状态。 */
+    void restoreLastResult();
 }

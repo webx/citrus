@@ -49,7 +49,12 @@ public class SuperResourceLoader implements ResourceLister {
 
     /** 查找指定名称的资源。 */
     public Resource getResource(ResourceLoaderContext context, Set<ResourceLoadingOption> options) {
-        return context.getResource(getNewResourceName(context), options);
+        try {
+            context.saveLastResult();
+            return context.getResource(getNewResourceName(context), options);
+        } finally {
+            context.restoreLastResult();
+        }
     }
 
     /** 查找目录列表。 */
