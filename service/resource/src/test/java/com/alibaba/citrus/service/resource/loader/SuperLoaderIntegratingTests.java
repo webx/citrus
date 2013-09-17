@@ -46,7 +46,7 @@ public class SuperLoaderIntegratingTests extends AbstractResourceLoadingTests {
     @Test
     public void noName() throws Exception {
         assertResourceServiceList("/no_name/webroot/test.txt", "test.txt", true, false);
-        assertResourceServiceList("/no_name/webroot", "", true, true, "WEB-INF/", "appcontext/", "beans.xml",
+        assertResourceServiceList("/no_name/webroot", "", true, true, "WEB-INF/", "app1/", "appcontext/", "beans.xml", "common/",
                                   "filter/", "loader/", "logback.xml", "myfolder/", "resources-root.xml",
                                   "resources-skip-validation.xml", "test.txt");
         assertResourceServiceList("/no_name", "loader", true, true, "classpath-loader.xml", "file-loader.xml",
@@ -66,7 +66,7 @@ public class SuperLoaderIntegratingTests extends AbstractResourceLoadingTests {
 
         // resourceName == superLoader's resourceName
         assertResourceServiceList("/webroot/test.txt", "test.txt", true, false);
-        assertResourceServiceList("/webroot/", "", true, true, "WEB-INF/", "appcontext/", "beans.xml", "filter/",
+        assertResourceServiceList("/webroot/", "", true, true, "WEB-INF/", "app1/", "appcontext/", "beans.xml", "common/", "filter/",
                                   "loader/", "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml",
                                   "test.txt");
     }
@@ -77,7 +77,7 @@ public class SuperLoaderIntegratingTests extends AbstractResourceLoadingTests {
 
         // 默认映射“/”
         assertResourceServiceList("/test.txt", "test.txt", true, false);
-        assertResourceServiceList("/", "", true, true, "WEB-INF/", "appcontext/", "beans.xml", "filter/", "loader/",
+        assertResourceServiceList("/", "", true, true, "WEB-INF/", "app1/", "appcontext/", "beans.xml", "common/", "filter/", "loader/",
                                   "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml", "test.txt");
 
         resourceLoadingService = (ResourceLoadingService) factory.getBean("defaultName1");
@@ -124,5 +124,32 @@ public class SuperLoaderIntegratingTests extends AbstractResourceLoadingTests {
         // def.txt只存在于/myfolder上
         assertEquals(new File(srcdir, "/myfolder/def.txt"),
                      resourceLoadingService.getResourceAsFile("/WEB-INF2/aaa/bbb/def.txt"));
+    }
+
+    @Test
+    public void multipleSuperLoaders() throws Exception {
+        resourceLoadingService = (ResourceLoadingService) factory.getBean("multipleSuperLoaders");
+
+        // loaded from <loaders:super-loader name="/webroot/$1/templates/layout" />
+        assertEquals(new File(srcdir, "/app1/templates/layout/default.vm"),
+                     resourceLoadingService.getResourceAsFile("/app1/templates/layout/default.vm"));
+
+        // loaded from <loaders:super-loader name="/webroot/common/templates/layout" />
+        assertEquals(new File(srcdir, "/common/templates/layout/login.vm"),
+                     resourceLoadingService.getResourceAsFile("/app1/templates/layout/login.vm"));
+    }
+
+    @Test
+    public void multipleSuperLoaders_noParent() throws Exception {
+        resourceLoadingService = (ResourceLoadingService) factory.getBean("multipleSuperLoaders");
+
+        // 在同一个context中测试，visitedMappings在super-loader之后被恢复。
+        // loaded from <loaders:super-loader name="/webroot2/$1/templates/layout" />
+        assertEquals(new File(srcdir, "/app1/templates/layout/default.vm"),
+                     resourceLoadingService.getResourceAsFile("/app1/templates/layout2/default.vm"));
+
+        // loaded from <loaders:super-loader name="/webroot2/common/templates/layout" />
+        assertEquals(new File(srcdir, "/common/templates/layout/login.vm"),
+                     resourceLoadingService.getResourceAsFile("/app1/templates/layout2/login.vm"));
     }
 }

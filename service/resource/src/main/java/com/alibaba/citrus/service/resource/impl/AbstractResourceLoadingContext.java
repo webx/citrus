@@ -24,6 +24,7 @@ import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static java.util.Collections.*;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.MatchResult;
@@ -85,6 +86,42 @@ abstract class AbstractResourceLoadingContext<R> implements ResourceMatchResult 
     public String substitute(String substitution) {
         return resourceName.substring(0, lastSubstitution.getMatch().start())
                + lastSubstitution.substitute(substitution) + resourceName.substring(lastSubstitution.getMatch().end());
+    }
+
+    private static class SavedMatchResult {
+        String                  resourceName;
+        ResourcePattern         lastMatchedPattern;
+        MatchResultSubstitution lastSubstitution;
+        ResourceMapping[]       visitedMappings;
+    }
+
+    private LinkedList<SavedMatchResult> savedMatchResultStack = createLinkedList();
+
+    /** 实现<code>ResourceMatchResult.saveLastResult()</code>。 */
+    public void saveLastResult() {
+        SavedMatchResult savedMatchResult = new SavedMatchResult();
+
+        savedMatchResult.resourceName = resourceName;
+        savedMatchResult.lastMatchedPattern = lastMatchedPattern;
+        savedMatchResult.lastSubstitution = lastSubstitution;
+        savedMatchResult.visitedMappings = visitedMappings.toArray(new ResourceMapping[visitedMappings.size()]);
+
+        savedMatchResultStack.push(savedMatchResult);
+    }
+
+    /** 实现<code>ResourceMatchResult.restoreLastResult()</code>。 */
+    public void restoreLastResult() {
+        SavedMatchResult savedMatchResult = savedMatchResultStack.pop();
+
+        resourceName = savedMatchResult.resourceName;
+        lastMatchedPattern = savedMatchResult.lastMatchedPattern;
+        lastSubstitution = savedMatchResult.lastSubstitution;
+
+        visitedMappings.clear();
+
+        for (ResourceMapping mapping : savedMatchResult.visitedMappings) {
+            visitedMappings.add(mapping);
+        }
     }
 
     /** 寻找资源的真实逻辑，被filter chain调用，或被getResource直接调用（假如没有filter），或被list调用。 */

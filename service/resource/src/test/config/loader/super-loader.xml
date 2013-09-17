@@ -59,4 +59,20 @@
         </resource>
     </services:resource-loading>
 
+    <services:resource-loading id="multipleSuperLoaders">
+        <resource pattern="/*/templates/layout">
+            <loaders:super-loader name="/webroot/$1/templates/layout" />
+            <loaders:super-loader name="/webroot/common/templates/layout" />
+        </resource>
+
+        <resource pattern="/*/templates/layout2">
+            <loaders:super-loader name="/webroot2/$1/templates/layout" />
+            <loaders:super-loader name="/webroot2/common/templates/layout" />
+        </resource>
+
+        <resource pattern="/webroot2" internal="true">
+            <loaders:super-loader name="/webroot" />
+        </resource>
+    </services:resource-loading>
+
 </beans:beans>

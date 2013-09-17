@@ -44,7 +44,7 @@ public class FileLoaderIntegratingTests extends AbstractResourceLoadingTests {
     public void defaultPath() throws Exception {
         // basedir=.., no path specified
         assertResourceServiceList("/defaultPath/test.txt", "test.txt", true, false);
-        assertResourceServiceList("/defaultPath/", "", true, true, "WEB-INF/", "appcontext/", "beans.xml", "filter/",
+        assertResourceServiceList("/defaultPath/", "", true, true, "WEB-INF/", "app1/", "appcontext/", "beans.xml", "common/", "filter/",
                                   "loader/", "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml",
                                   "test.txt");
     }
@@ -61,7 +61,7 @@ public class FileLoaderIntegratingTests extends AbstractResourceLoadingTests {
     public void absBasedir() throws Exception {
         // basedir=absolute srcdir
         assertResourceServiceList("/absBasedir/test.txt", "test.txt", true, false);
-        assertResourceServiceList("/absBasedir/", "", true, true, "WEB-INF/", "appcontext/", "beans.xml", "filter/",
+        assertResourceServiceList("/absBasedir/", "", true, true, "WEB-INF/", "app1/", "appcontext/", "beans.xml", "common/", "filter/",
                                   "loader/", "logback.xml", "myfolder/", "resources-root.xml", "resources-skip-validation.xml",
                                   "test.txt");
     }
