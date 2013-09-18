@@ -35,7 +35,7 @@ public class InputOutputValveTests {
     @Before
     public void init() {
         valve = new MyInputOutputValve();
-        context = (PipelineContext) new InterfaceImplementorBuilder().addInterface(PipelineContext.class).setOverrider(new Object() {
+        context = (PipelineContext) new InterfaceImplementorBuilder().addInterface(PipelineContext.class).toObject(new Object() {
             public Object getAttribute(String key) {
                 return attrs.get(key);
             }
@@ -43,7 +43,7 @@ public class InputOutputValveTests {
             public void setAttribute(String key, Object value) {
                 attrs.put(key, value);
             }
-        }).toObject();
+        });
     }
 
     @Test

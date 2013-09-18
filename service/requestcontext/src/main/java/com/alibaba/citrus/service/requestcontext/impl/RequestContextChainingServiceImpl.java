@@ -331,7 +331,7 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
                     getLogger().debug("Keep request context open for asynchronous process");
                 }
 
-                request_registerAsyncListener(request, new Object() {
+                request_registerAsyncListener(request, new MyAsyncListener() {
                     private Object thisListener;
 
                     public void setThisProxy(Object listener) {

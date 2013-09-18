@@ -126,3 +126,4 @@
       <res-loaders:super-loader name="/webroot/$1/templates/layout" />
       <res-loaders:super-loader name="/webroot/common/templates/layout" />
   </resource>
+* Bugfix: 修正当request.startAsync以后，每个请求都会生成cglib类，从而导致permgen溢出的问题。

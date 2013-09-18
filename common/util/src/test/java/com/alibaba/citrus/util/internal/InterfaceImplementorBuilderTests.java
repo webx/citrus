@@ -37,13 +37,13 @@ public class InterfaceImplementorBuilderTests {
 
         // default class loader
         cl = Thread.currentThread().getContextClassLoader();
-        builder = new InterfaceImplementorBuilder().addInterface(Serializable.class).setOverrider(new Object());
+        builder = new InterfaceImplementorBuilder().addInterface(Serializable.class);
         assertSame(cl, builder.getClassLoader());
         assertSame(cl, builder.toObject().getClass().getClassLoader());
 
         // specified class loader
         cl = new URLClassLoader(new URL[0]);
-        builder = new InterfaceImplementorBuilder(cl).addInterface(Serializable.class).setOverrider(new Object());
+        builder = new InterfaceImplementorBuilder(cl).addInterface(Serializable.class);
         assertSame(cl, builder.getClassLoader());
         assertSame(cl, builder.toObject().getClass().getClassLoader());
     }
@@ -61,7 +61,7 @@ public class InterfaceImplementorBuilderTests {
     @Test
     public void baseObject() {
         // no baseObject
-        ServletContext sc = (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).setOverrider(new Object()).toObject();
+        ServletContext sc = (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).toObject();
 
         try {
             sc.getAttribute("key");
@@ -72,35 +72,17 @@ public class InterfaceImplementorBuilderTests {
 
         // wrong type of baseObject
         try {
-            new InterfaceImplementorBuilder().addInterface(Runnable.class).setBaseObject("string").setOverrider(new Object()).toObject();
+            new InterfaceImplementorBuilder().addInterface(Runnable.class).setBaseClass(String.class).toObject();
             fail();
         } catch (IllegalArgumentException e) {
-            assertThat(e, exception("string is not of interface java.lang.Runnable"));
+            assertThat(e, exception("Base class java.lang.String must implement interface java.lang.Runnable"));
         }
 
         try {
-            new InterfaceImplementorBuilder().addInterface(Runnable.class).addInterface(ServletContext.class).setBaseObject(new Runnable() {
-                public void run() {
-                }
-
-                @Override
-                public String toString() {
-                    return "myrunnable";
-                }
-            }).setOverrider(new Object()).toObject();
+            new InterfaceImplementorBuilder().addInterface(Runnable.class).addInterface(ServletContext.class).setBaseClass(Runnable.class).toObject();
             fail();
         } catch (IllegalArgumentException e) {
-            assertThat(e, exception("myrunnable is not of interface javax.servlet.ServletContext"));
-        }
-    }
-
-    @Test
-    public void overrider() {
-        // no overrider
-        try {
-            new InterfaceImplementorBuilder().addInterface(ServletContext.class).toObject();
-        } catch (IllegalArgumentException e) {
-            assertThat(e, exception("no overrider specified"));
+            assertThat(e, exception("Base class java.lang.Runnable must implement interface javax.servlet.ServletContext"));
         }
     }
 
@@ -109,58 +91,58 @@ public class InterfaceImplementorBuilderTests {
         final Object[] holder = new Object[1];
 
         // default method
-        ServletContext sc = (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).setOverrider(new Object() {
+        ServletContext sc = (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).toObject(new Object() {
             public void setThisProxy(ServletContext proxy) {
                 holder[0] = proxy;
             }
-        }).toObject();
+        });
 
         assertSame(holder[0], sc);
 
         // specified method name
-        sc = (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).setOverrider(new Object() {
+        sc = (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).setOverriderSetProxyObjectMethodName("setMyProxy").toObject(new Object() {
             public void setMyProxy(ServletContext proxy) {
                 holder[0] = proxy;
             }
-        }).setOverriderSetProxyObjectMethodName("setMyProxy").toObject();
+        });
 
         assertSame(holder[0], sc);
 
         // super param type
-        sc = (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).setOverrider(new Object() {
+        sc = (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).toObject(new Object() {
             public void setThisProxy(Object proxy) {
                 holder[0] = proxy;
             }
-        }).toObject();
+        });
 
         assertSame(holder[0], sc);
 
         // wrong param type
         holder[0] = null;
-        sc = (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).setOverrider(new Object() {
+        sc = (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).toObject(new Object() {
             public void setThisProxy(String proxy) {
                 holder[0] = proxy;
             }
-        }).toObject();
+        });
 
         assertSame(null, holder[0]);
 
         // no param type
         holder[0] = null;
-        sc = (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).setOverrider(new Object() {
+        sc = (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).toObject(new Object() {
             public void setThisProxy() {
             }
-        }).toObject();
+        });
 
         assertSame(null, holder[0]);
 
         // call failed
         try {
-            sc = (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).setOverrider(new Object() {
+            sc = (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).toObject(new Object() {
                 public void setThisProxy(Object proxy) {
                     throw new IllegalArgumentException();
                 }
-            }).toObject();
+            });
         } catch (Exception e) {
             assertThat(e, exception(IllegalArgumentException.class, "Failed to call ", "setThisProxy(Object)"));
         }
@@ -172,16 +154,18 @@ public class InterfaceImplementorBuilderTests {
     public void toObject() {
         final Object[] holder = new Object[1];
 
-        builder = new InterfaceImplementorBuilder().addInterface(ServletContext.class).setOverrider(new Object() {
+        Object overrider = new Object() {
             public void setThisProxy(Object proxy) {
                 holder[0] = proxy;
             }
-        });
+        };
 
-        ServletContext sc1 = (ServletContext) builder.toObject();
+        builder = new InterfaceImplementorBuilder().addInterface(ServletContext.class).setOverriderClass(overrider.getClass());
+
+        ServletContext sc1 = (ServletContext) builder.toObject(overrider);
         assertSame(sc1, holder[0]);
 
-        ServletContext sc2 = (ServletContext) builder.toObject();
+        ServletContext sc2 = (ServletContext) builder.toObject(overrider);
         assertSame(sc2, holder[0]);
 
         assertNotSame(sc1, sc2);
@@ -190,7 +174,7 @@ public class InterfaceImplementorBuilderTests {
 
     @Test
     public void invokeSuper() {
-        Runnable newObject = (Runnable) new InterfaceImplementorBuilder().addInterface(Runnable.class).setBaseObject(new Runnable() {
+        Runnable newObject = (Runnable) new InterfaceImplementorBuilder().addInterface(Runnable.class).toObject(null, new Runnable() {
             public void run() {
             }
 
@@ -208,7 +192,7 @@ public class InterfaceImplementorBuilderTests {
             public String toString() {
                 return "haha";
             }
-        }).setOverrider(new Object()).toObject();
+        });
 
         assertFalse(newObject.equals(""));
         assertFalse(123 == newObject.hashCode());
@@ -223,7 +207,7 @@ public class InterfaceImplementorBuilderTests {
 
     @Test
     public void invokeBaseObject() {
-        MyInterface1 newObject = (MyInterface1) new InterfaceImplementorBuilder().addInterface(MyInterface1.class).setBaseObject(new MyInterface1() {
+        MyInterface1 newObject = (MyInterface1) new InterfaceImplementorBuilder().addInterface(MyInterface1.class).toObject(null, new MyInterface1() {
             public String getName() {
                 return "myname";
             }
@@ -231,7 +215,7 @@ public class InterfaceImplementorBuilderTests {
             public void throwException(Throwable e) throws Throwable {
                 throw e;
             }
-        }).setOverrider(new Object()).toObject();
+        });
 
         assertEquals("myname", newObject.getName());
 
@@ -258,7 +242,7 @@ public class InterfaceImplementorBuilderTests {
 
     @Test
     public void invokeBaseObject_withSuperclass() {
-        MyInterface1 newObject = (MyInterface1) new InterfaceImplementorBuilder().setSuperclass(MySuperClass.class).addInterface(MyInterface1.class).setBaseObject(new MyInterface1() {
+        MyInterface1 newObject = (MyInterface1) new InterfaceImplementorBuilder().setSuperclass(MySuperClass.class).addInterface(MyInterface1.class).toObject(null, new MyInterface1() {
             public String getName() {
                 return "myname";
             }
@@ -266,7 +250,7 @@ public class InterfaceImplementorBuilderTests {
             public void throwException(Throwable e) throws Throwable {
                 throw e;
             }
-        }).setOverrider(new Object()).toObject();
+        });
 
         assertTrue(newObject instanceof MySuperClass);
         assertEquals("hello", ((MySuperClass) newObject).sayHello());
@@ -335,7 +319,7 @@ public class InterfaceImplementorBuilderTests {
             }
         };
 
-        MyInterface2 newObject = (MyInterface2) new InterfaceImplementorBuilder().addInterface(MyInterface2.class).setBaseObject(baseObject).setOverrider(overrider1).toObject();
+        MyInterface2 newObject = (MyInterface2) new InterfaceImplementorBuilder().addInterface(MyInterface2.class).toObject(overrider1, baseObject);
 
         assertEquals("myname", newObject.getName()); // from baseObject
         assertEquals("another name", newObject.getName("another name")); // from overrider
@@ -361,59 +345,10 @@ public class InterfaceImplementorBuilderTests {
             }
         };
 
-        newObject = (MyInterface2) new InterfaceImplementorBuilder().addInterface(MyInterface2.class).setBaseObject(baseObject).setOverrider(overrider2).toObject();
+        newObject = (MyInterface2) new InterfaceImplementorBuilder().addInterface(MyInterface2.class).toObject(overrider2, baseObject);
 
         assertEquals("myname", newObject.getName()); // from baseObject
         assertEquals(null, newObject.getName("another name")); // no overrider method matched
         assertEquals("my name", newObject.getName("my", " name")); // from overrider, string parameter as an object
-    }
-
-    public interface TestInterface {
-        String getLastName();
-
-        String getFirstName();
-
-        String getFirstName(String s);
-
-        void throwException(Throwable e) throws Throwable;
-
-        void throwException2(Throwable e) throws Throwable;
-    }
-
-    public static class TestInterfaceImpl implements TestInterface {
-        public String getLastName() {
-            return "Zhou";
-        }
-
-        public String getFirstName() {
-            return "Michael"; // to be overrided
-        }
-
-        public String getFirstName(String s) {
-            return null;
-        }
-
-        public void throwException(Throwable e) throws Throwable {
-            throw e;
-        }
-
-        public void throwException2(Throwable e) throws Throwable {
-            // to be overrided
-        }
-
-        @Override
-        public int hashCode() {
-            return 123;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return true;
-        }
-
-        @Override
-        public String toString() {
-            return "haha";
-        }
     }
 }
