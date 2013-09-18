@@ -249,7 +249,7 @@ public abstract class AbstractResourceLoadingTests {
      * 以下实现可在servlet 2.5/3.0上执行。
      */
     private static ServletContext createServletContextWrapper(final ServletContext servletContext) {
-        return (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).setBaseObject(servletContext).setOverrider(new Object() {
+        return (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).toObject(new Object() {
             public URL getResource(String path) throws MalformedURLException {
                 URL presetResult = nextGetResourceURL.get();
 
@@ -293,6 +293,6 @@ public abstract class AbstractResourceLoadingTests {
                     return null;
                 }
             }
-        }).toObject();
+        }, servletContext);
     }
 }

@@ -30,6 +30,7 @@ import net.sf.cglib.core.Signature;
 import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.CallbackFilter;
 import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.Factory;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 import net.sf.cglib.reflect.FastClass;
@@ -49,16 +50,17 @@ import net.sf.cglib.reflect.FastMethod;
  * @author Michael Zhou
  */
 public class InterfaceImplementorBuilder extends DynamicClassBuilder {
-    private static final String OVERRIDER_SET_PROXY_OBJECT_METHOD_NAME = "setThisProxy";
+    private final static Callback CALL_SUPER                             = new CallSuper();
+    private final static String   OVERRIDER_SET_PROXY_OBJECT_METHOD_NAME = "setThisProxy";
 
     private Class<?>                   superclass;
     private List<Class<?>>             interfaces;
-    private Object                     baseObject;
-    private Object                     overrider;
+    private Class<?>                   baseClass;
+    private Class<?>                   overriderClass;
     private String                     overriderSetProxyObjectMethodName;
     private Map<Signature, FastMethod> overridedMethods;
     private FastMethod                 overriderSetProxyObjectMethod;
-    private Enhancer                   generator;
+    private Factory                    factory;
 
     public InterfaceImplementorBuilder() {
         this(null);
@@ -84,63 +86,19 @@ public class InterfaceImplementorBuilder extends DynamicClassBuilder {
         return this;
     }
 
-    public InterfaceImplementorBuilder setBaseObject(Object baseObject) {
-        this.baseObject = baseObject;
+    public InterfaceImplementorBuilder setBaseClass(Class<?> baseClass) {
+        this.baseClass = baseClass;
         return this;
     }
 
-    public InterfaceImplementorBuilder setOverrider(Object overrider) {
-        this.overrider = overrider;
+    public InterfaceImplementorBuilder setOverriderClass(Class<?> overriderClass) {
+        this.overriderClass = overriderClass;
         return this;
     }
 
     public InterfaceImplementorBuilder setOverriderSetProxyObjectMethodName(String methodName) {
         this.overriderSetProxyObjectMethodName = methodName;
         return this;
-    }
-
-    private void init() {
-        // check superclass
-        if (superclass == null) {
-            superclass = Object.class;
-        }
-
-        // check interfaces
-        assertTrue(!interfaces.isEmpty(), "no interface specified");
-
-        // 如果指定了baseObject，它必须实现所有接口。
-        // 也可不指定baseObject，此时，所有未实现的接口方法将抛出UnsupportedOperationException。
-        if (baseObject != null) {
-            for (Class<?> interfaceClass : interfaces) {
-                assertTrue(interfaceClass.isInstance(baseObject), "%s is not of %s", baseObject, interfaceClass);
-            }
-        }
-
-        // check overrider
-        this.overrider = assertNotNull(overrider, "no overrider specified");
-        this.overridedMethods = createHashMap();
-
-        Map<String, List<Method>> overriderMethods = getMethodMap(overrider.getClass());
-        FastClass overriderFastClass = FastClass.create(getClassLoader(), overrider.getClass());
-
-        for (Class<?> interfaceClass : interfaces) {
-            for (Method interfaceMethod : interfaceClass.getMethods()) {
-                Signature sig = getSignature(interfaceMethod, null);
-                Method overriderMethod = getCompatibleOverrideMethod(overriderMethods, interfaceMethod);
-
-                if (overriderMethod != null) {
-                    log.trace("Overrided method: {}", getSimpleMethodSignature(interfaceMethod, true));
-                    overridedMethods.put(sig, overriderFastClass.getMethod(overriderMethod));
-                }
-            }
-        }
-
-        // overriderSetProxyObjectMethodName
-        Method overriderSetProxyObjectMethod = getOverriderSetProxyObjectMethod(overriderMethods);
-
-        if (overriderSetProxyObjectMethod != null) {
-            this.overriderSetProxyObjectMethod = overriderFastClass.getMethod(overriderSetProxyObjectMethod);
-        }
     }
 
     private Map<String, List<Method>> getMethodMap(Class<?> clazz) {
@@ -222,69 +180,116 @@ public class InterfaceImplementorBuilder extends DynamicClassBuilder {
         return null;
     }
 
-    public Object toObject() {
-        if (generator == null) {
-            init();
+    public final InterfaceImplementorBuilder init() {
+        init(null, null);
+        return this;
+    }
 
-            generator = new Enhancer();
-
-            generator.setClassLoader(getClassLoader());
-            generator.setSuperclass(superclass);
-            generator.setInterfaces(interfaces.toArray(new Class<?>[interfaces.size()]));
-
-            generator.setCallbacks(new Callback[] {
-                    // callback 0: invoke super
-                    new MethodInterceptor() {
-                        public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
-                                throws Throwable {
-                            return proxy.invokeSuper(obj, args);
-                        }
-                    },
-
-                    // callback 1: invoke base object
-                    new MethodInterceptor() {
-                        public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
-                                throws Throwable {
-                            if (baseObject == null || !method.getDeclaringClass().isAssignableFrom(baseObject.getClass())) {
-                                if (method.getDeclaringClass().isAssignableFrom(superclass)) {
-                                    return proxy.invokeSuper(obj, args);
-                                } else {
-                                    throw new UnsupportedOperationException(getSimpleMethodSignature(method, true));
-                                }
-                            }
-
-                            return proxy.invoke(baseObject, args);
-                        }
-                    },
-
-                    // callback 2: invoke overrided method
-                    new MethodInterceptor() {
-                        public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
-                                throws Throwable {
-                            FastMethod overridedMethod = overridedMethods.get(getSignature(method, null));
-
-                            try {
-                                return overridedMethod.invoke(overrider, args);
-                            } catch (InvocationTargetException e) {
-                                throw e.getTargetException();
-                            }
-                        }
-                    } });
-
-            generator.setCallbackFilter(new CallbackFilter() {
-                public int accept(Method method) {
-                    if (isEqualsMethod(method) || isHashCodeMethod(method) || isToStringMethod(method)) {
-                        return 0; // invoke super
-                    } else if (overridedMethods.containsKey(getSignature(method, null))) {
-                        return 2; // invoke overrided method
-                    } else {
-                        return 1; // invoke base object
-                    }
-                }
-            });
+    private void init(Object overrider, Object baseObject) {
+        if (factory != null) {
+            return;
         }
 
-        Object proxy = generator.create();
+        // check superclass
+        if (superclass == null) {
+            superclass = Object.class;
+        }
+
+        // check interfaces
+        assertTrue(!interfaces.isEmpty(), "no interface specified");
+
+        // 如果指定了baseObject，它必须实现所有接口。
+        // 也可不指定baseObject，此时，所有未实现的接口方法将抛出UnsupportedOperationException。
+        if (baseClass == null && baseObject != null) {
+            baseClass = baseObject.getClass();
+        }
+
+        if (baseClass != null) {
+            for (Class<?> interfaceClass : interfaces) {
+                assertTrue(interfaceClass.isAssignableFrom(baseClass), "Base class %s must implement %s", baseClass.getName(), interfaceClass);
+            }
+        }
+
+        // check overrider
+        if (overriderClass == null && overrider != null) {
+            overriderClass = overrider.getClass();
+        }
+
+        this.overriderClass = overriderClass == null ? Object.class : overriderClass;
+        this.overridedMethods = createHashMap();
+
+        Map<String, List<Method>> overriderMethods = getMethodMap(overriderClass);
+        FastClass overriderFastClass = FastClass.create(getClassLoader(), overriderClass);
+
+        for (Class<?> interfaceClass : interfaces) {
+            for (Method interfaceMethod : interfaceClass.getMethods()) {
+                Signature sig = getSignature(interfaceMethod, null);
+                Method overriderMethod = getCompatibleOverrideMethod(overriderMethods, interfaceMethod);
+
+                if (overriderMethod != null) {
+                    log.trace("Overrided method: {}", getSimpleMethodSignature(interfaceMethod, true));
+                    overridedMethods.put(sig, overriderFastClass.getMethod(overriderMethod));
+                }
+            }
+        }
+
+        // overriderSetProxyObjectMethodName
+        Method overriderSetProxyObjectMethod = getOverriderSetProxyObjectMethod(overriderMethods);
+
+        if (overriderSetProxyObjectMethod != null) {
+            this.overriderSetProxyObjectMethod = overriderFastClass.getMethod(overriderSetProxyObjectMethod);
+        }
+
+        // generate class
+        Enhancer generator = new Enhancer();
+
+        generator.setClassLoader(getClassLoader());
+        generator.setSuperclass(superclass);
+        generator.setInterfaces(interfaces.toArray(new Class<?>[interfaces.size()]));
+
+        generator.setCallbackTypes(new Class<?>[] {
+                CallSuper.class,
+                CallBaseObject.class,
+                CallOverrider.class
+        });
+
+        generator.setCallbackFilter(new CallbackFilter() {
+            public int accept(Method method) {
+                if (isEqualsMethod(method) || isHashCodeMethod(method) || isToStringMethod(method)) {
+                    return 0; // invoke super
+                } else if (overridedMethods.containsKey(getSignature(method, null))) {
+                    return 2; // invoke overrided method
+                } else {
+                    return 1; // invoke base object
+                }
+            }
+        });
+
+        generator.setCallbacks(new Callback[] { CALL_SUPER, new CallBaseObject(new Object()), new CallOverrider(new Object()) });
+
+        factory = (Factory) generator.create();
+    }
+
+    public Object toObject() {
+        return toObject(null, null);
+    }
+
+    public Object toObject(Object overrider) {
+        return toObject(overrider, null);
+    }
+
+    public Object toObject(Object overrider, Object baseObject) {
+        if (overrider == null) {
+            overrider = new Object();
+        }
+
+        init(overrider, baseObject);
+
+        Object proxy = factory.newInstance(new Callback[] {
+                CALL_SUPER,
+                new CallBaseObject(baseObject),
+                new CallOverrider(overrider)
+        });
 
         if (overriderSetProxyObjectMethod != null) {
             try {
@@ -295,5 +300,49 @@ public class InterfaceImplementorBuilder extends DynamicClassBuilder {
         }
 
         return proxy;
+    }
+
+    private static class CallSuper implements MethodInterceptor {
+        public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
+            return proxy.invokeSuper(obj, args);
+        }
+    }
+
+    private class CallBaseObject implements MethodInterceptor {
+        private final Object baseObject;
+
+        private CallBaseObject(Object baseObject) {
+            this.baseObject = baseObject;
+        }
+
+        public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
+            if (baseObject == null || !method.getDeclaringClass().isAssignableFrom(baseObject.getClass())) {
+                if (method.getDeclaringClass().isAssignableFrom(superclass)) {
+                    return proxy.invokeSuper(obj, args);
+                } else {
+                    throw new UnsupportedOperationException(getSimpleMethodSignature(method, true));
+                }
+            }
+
+            return proxy.invoke(baseObject, args);
+        }
+    }
+
+    private class CallOverrider implements MethodInterceptor {
+        private final Object overrider;
+
+        private CallOverrider(Object overrider) {
+            this.overrider = overrider;
+        }
+
+        public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
+            FastMethod overridedMethod = overridedMethods.get(getSignature(method, null));
+
+            try {
+                return overridedMethod.invoke(overrider, args);
+            } catch (InvocationTargetException e) {
+                throw e.getTargetException();
+            }
+        }
     }
 }

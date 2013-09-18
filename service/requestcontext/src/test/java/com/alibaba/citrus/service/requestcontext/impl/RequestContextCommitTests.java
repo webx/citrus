@@ -324,7 +324,7 @@ public class RequestContextCommitTests {
             if (overrider != null) {
                 return (RequestContext) new InterfaceImplementorBuilder()
                         .addInterface(requestContext.getClass().getInterfaces())
-                        .setBaseObject(requestContext).setOverrider(overrider).toObject();
+                        .toObject(overrider, requestContext);
             } else {
                 return requestContext;
             }

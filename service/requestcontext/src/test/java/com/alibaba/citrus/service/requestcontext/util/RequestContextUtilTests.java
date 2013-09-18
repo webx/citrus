@@ -44,7 +44,7 @@ public class RequestContextUtilTests {
         // request
         attrs = createHashMap();
 
-        request = (HttpServletRequest) new InterfaceImplementorBuilder().addInterface(HttpServletRequest.class).setBaseObject(mockRequest).setOverrider(new Object() {
+        request = (HttpServletRequest) new InterfaceImplementorBuilder().addInterface(HttpServletRequest.class).toObject(new Object() {
             public Object getAttribute(String name) {
                 return attrs.get(name);
             }
@@ -56,7 +56,7 @@ public class RequestContextUtilTests {
             public void removeAttribute(String name) {
                 attrs.remove(name);
             }
-        }).toObject();
+        }, mockRequest);
 
         // response
         response = createMock(HttpServletResponse.class);
