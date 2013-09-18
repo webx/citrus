@@ -84,7 +84,7 @@ public abstract class AbstractJspEngineTests {
     }
 
     protected ServletContext createServletContextWrapper(final boolean supportGetResourceOfRoot) {
-        return (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).setBaseObject(originalServletContext).setOverrider(new Object() {
+        return (ServletContext) new InterfaceImplementorBuilder().addInterface(ServletContext.class).toObject(new Object() {
             /** 判断当resource不存在时，返回null。 */
             public URL getResource(String path) throws MalformedURLException {
                 if (("/".equals(path) || isEmpty(path)) && !supportGetResourceOfRoot) {
@@ -112,6 +112,6 @@ public abstract class AbstractJspEngineTests {
 
                 return new URL(urlstr);
             }
-        }).toObject();
+        }, originalServletContext);
     }
 }

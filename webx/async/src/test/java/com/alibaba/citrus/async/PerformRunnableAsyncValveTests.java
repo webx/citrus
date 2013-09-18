@@ -122,7 +122,7 @@ public class PerformRunnableAsyncValveTests extends AbstractAsyncTests {
 
         replay(requestMock, response, servletContext);
 
-        request = (HttpServletRequest) new InterfaceImplementorBuilder().addInterface(HttpServletRequest.class).setBaseObject(requestMock).setOverrider(new Object() {
+        request = (HttpServletRequest) new InterfaceImplementorBuilder().addInterface(HttpServletRequest.class).toObject(new Object() {
             public Object getAttribute(String name) {
                 return requestAttrs.get(name);
             }
@@ -135,7 +135,7 @@ public class PerformRunnableAsyncValveTests extends AbstractAsyncTests {
                     throws IllegalStateException {
                 return asyncContext;
             }
-        }).toObject();
+        }, requestMock);
 
         requestContext = rccs.getRequestContext(servletContext, request, response);
 

@@ -59,7 +59,7 @@ public class RequestContextAsyncTests {
         // request
         attrs = createHashMap();
 
-        request = (HttpServletRequest) new InterfaceImplementorBuilder().addInterface(HttpServletRequest.class).setBaseObject(mockRequest).setOverrider(new Object() {
+        request = (HttpServletRequest) new InterfaceImplementorBuilder().addInterface(HttpServletRequest.class).toObject(new Object() {
             public Locale getLocale() {
                 return Locale.CHINA;
             }
@@ -91,7 +91,7 @@ public class RequestContextAsyncTests {
             public Object getAsyncContext() {
                 return asyncContext;
             }
-        }).toObject();
+        }, mockRequest);
 
         // response
         response = createMock(HttpServletResponse.class);
@@ -177,6 +177,14 @@ public class RequestContextAsyncTests {
             return;
         }
 
+        Object listener1 = getAsyncListener();
+        Object listener2 = getAsyncListener();
+
+        assertNotSame(listener1, listener2);
+        assertSame(listener1.getClass(), listener2.getClass()); // 不会重复生成class导致permgen溢出
+    }
+
+    private Object getAsyncListener() {
         dispatcherType = Servlet3Util.DISPATCHER_TYPE_REQUEST;
 
         requestContext = service.getRequestContext(servletContext, request, response);
@@ -194,6 +202,8 @@ public class RequestContextAsyncTests {
         verify(asyncContext);
         Object listener = cap.getValue();
         assertTrue(Servlet3Util.asyncListenerClass.isInstance(listener)); // asyncContext.addListener(asyncListener)
+
+        return listener;
     }
 
     @Test

@@ -20,8 +20,10 @@ package com.alibaba.citrus.util.internal;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.EventListener;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
@@ -43,6 +45,8 @@ public class Servlet3Util {
     public static final Class<?> asyncContextClass  = loadClass("javax.servlet.AsyncContext");
     public static final Class<?> asyncListenerClass = loadClass("javax.servlet.AsyncListener");
     public static final Class<?> asyncEventClass    = loadClass("javax.servlet.AsyncEvent");
+
+    private static final InterfaceImplementorBuilder asyncListenerBuilder;
 
     private static final MethodInfo[] methods;
     private static final int          request_isAsyncStarted;
@@ -75,6 +79,8 @@ public class Servlet3Util {
         asyncEvent_getAsyncContext = count++;
 
         methods = methodList.toArray(new MethodInfo[methodList.size()]);
+
+        asyncListenerBuilder = new InterfaceImplementorBuilder().addInterface(asyncListenerClass).setOverriderClass(MyAsyncListener.class).init();
     }
 
     public static boolean isServlet3() {
@@ -124,9 +130,9 @@ public class Servlet3Util {
         invoke(asyncContext_addListener, asyncContext, listener);
     }
 
-    public static void request_registerAsyncListener(HttpServletRequest request, Object listenerImpl) {
+    public static void request_registerAsyncListener(HttpServletRequest request, MyAsyncListener listenerImpl) {
         Object /* AsyncContext */ asyncContext = request_getAsyncContext(request);
-        Object listener = new InterfaceImplementorBuilder().addInterface(asyncListenerClass).setOverrider(listenerImpl).toObject();
+        Object listener = asyncListenerBuilder.toObject(listenerImpl);
 
         invoke(asyncContext_addListener, asyncContext, listener);
     }
@@ -211,5 +217,15 @@ public class Servlet3Util {
         public boolean isDisabled() {
             return disableServlet3Features || method == null;
         }
+    }
+
+    public interface MyAsyncListener extends EventListener {
+        void onComplete(Object /* AsyncEvent */ event) throws IOException;
+
+        void onTimeout(Object /* AsyncEvent */ event) throws IOException;
+
+        void onError(Object /* AsyncEvent */ event) throws IOException;
+
+        void onStartAsync(Object /* AsyncEvent */ event) throws IOException;
     }
 }

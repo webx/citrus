@@ -53,7 +53,7 @@ public class MyBeanDefinitionDecorator implements BeanDefinitionDecorator {
 
         @Override
         public Object getObject() throws Exception {
-            return new InterfaceImplementorBuilder().setSuperclass(object.getClass()).addInterface(itfs).setOverrider(object).toObject();
+            return new InterfaceImplementorBuilder().setSuperclass(object.getClass()).addInterface(itfs).toObject(object);
         }
 
         @Override
