@@ -54,12 +54,6 @@
     </properties>
     <profiles>
         <profile>
-            <id>spring3</id>
-            <properties>
-                <spring-version>3.0.6.RELEASE</spring-version>
-            </properties>
-        </profile>
-        <profile>
             <id>deployment</id>
             <properties>
                 <!-- 开发时使用较高的Java版本，以避免eclipse的警告，但编译时采用保守的Java 1.5格式。 -->
