@@ -75,3 +75,6 @@
       easymock              3.1     -> 3.2      [test]
       jasper                6.0.35  -> 6.0.37   [test]
       mock-javamail         1.7     -> 1.9      [test]
+
+-- Changes in 3.2.2
+
