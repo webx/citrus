@@ -141,7 +141,7 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>httpunit</groupId>
+            <groupId>org.httpunit</groupId>
             <artifactId>httpunit</artifactId>
             <scope>compile</scope>
         </dependency>

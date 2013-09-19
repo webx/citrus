@@ -81,7 +81,7 @@ public class URIBrokerConfigTests extends AbstractURIBrokerServiceTests {
         assertEquals("http://www.alibaba.com/", uri.setServerName("www.alibaba.com").render());
         assertEquals("http://localhost:8080/", uri.setServerPort(8080).render());
         assertEquals("http://localhost/", uri.setServerPort(80).render());
-        assertEquals("https://localhost/", uri.setServerScheme("https").render());
+        assertEquals("https://localhost:80/", uri.setServerScheme("https").render());
         assertEquals("http://localhost/aa/bb", uri.addPath("aa").addPath("bb").render());
 
         // fork
