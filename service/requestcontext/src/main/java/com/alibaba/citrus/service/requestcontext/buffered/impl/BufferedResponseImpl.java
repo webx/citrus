@@ -31,6 +31,7 @@ import java.io.Writer;
 import java.util.EmptyStackException;
 import java.util.LinkedList;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.WriteListener;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.citrus.service.requestcontext.RequestContext;
@@ -499,6 +500,15 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
             bytes.flush();
             bytes.close();
         }
+
+        @Override
+        public boolean isReady() {
+            return true;
+        }
+
+        @Override
+        public void setWriteListener(WriteListener writeListener) {
+        }
     }
 
     /** 代表一个将内容保存在内存中的<code>PrintWriter</code>。 */
@@ -557,6 +567,15 @@ public class BufferedResponseImpl extends AbstractResponseWrapper {
         @Override
         public void close() throws IOException {
             this.flush();
+        }
+
+        @Override
+        public boolean isReady() {
+            return true;
+        }
+
+        @Override
+        public void setWriteListener(WriteListener writeListener) {
         }
     }
 }
