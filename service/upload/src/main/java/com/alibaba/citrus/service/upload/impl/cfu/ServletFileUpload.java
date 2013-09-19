@@ -66,13 +66,12 @@ public class ServletFileUpload extends org.apache.commons.fileupload.servlet.Ser
     }
 
     @Override
-    public List<?/* FileItem */> parseRequest(HttpServletRequest request) throws FileUploadException {
+    public List<FileItem> parseRequest(HttpServletRequest request) throws FileUploadException {
         return parseRequest(new ServletRequestContext(request));
     }
 
     @Override
-    public List<?/* FileItem */> parseRequest(RequestContext ctx) throws FileUploadException {
-        @SuppressWarnings("unchecked")
+    public List<FileItem> parseRequest(RequestContext ctx) throws FileUploadException {
         List<FileItem> items = super.parseRequest(ctx);
         String charset = ctx.getCharacterEncoding();
 

@@ -204,8 +204,7 @@ public class FreeMarkerEngineTests {
         } catch (TemplateException e) {
             assertThat(
                     e,
-                    exception(InvalidReferenceException.class, "Error rendering FreeMarker template: /test_render.ftl",
-                              "Expression world is undefined on line 6, column 10 in test_render.ftl"));
+                    exception(InvalidReferenceException.class, "Error rendering FreeMarker template: /test_render.ftl"));
         }
 
         // 语法错
@@ -213,8 +212,7 @@ public class FreeMarkerEngineTests {
             templateService.getText("test_render_error.ftl", ctx);
             fail();
         } catch (TemplateException e) {
-            assertThat(e, exception(ParseException.class, "Error rendering FreeMarker template: "
-                                                          + "/test_render_error.ftl"));
+            assertThat(e, exception(ParseException.class, "Error rendering FreeMarker template: /test_render_error.ftl"));
         }
     }
 
