@@ -400,3 +400,4 @@
 
 -- Changes in 3.0.12
 
+* Bugfix: 在servlet2.5环境中，Servlet3Util初始化失败。

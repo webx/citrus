@@ -34,11 +34,11 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.WriteListener;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
+import com.alibaba.citrus.util.internal.Servlet3Util.Servlet3OutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanWrapper;
@@ -220,10 +220,11 @@ public abstract class FilterBean implements Filter {
     }
 
     /** 不返回response body的servlet output stream实现。 */
-    private static class NoBodyOutputStream extends ServletOutputStream {
+    private static class NoBodyOutputStream extends Servlet3OutputStream {
         private int contentLength;
 
         public NoBodyOutputStream() {
+            super(null);
             contentLength = 0;
         }
 
@@ -243,15 +244,6 @@ public abstract class FilterBean implements Filter {
             } else {
                 throw new IOException("negative length");
             }
-        }
-
-        @Override
-        public boolean isReady() {
-            return true;
-        }
-
-        @Override
-        public void setWriteListener(WriteListener writeListener) {
         }
     }
 }
