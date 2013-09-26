@@ -19,15 +19,15 @@ package com.alibaba.citrus.service.requestcontext.impl;
 
 import java.io.IOException;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.WriteListener;
 
-class CommittingAwareServletOutputStream extends ServletOutputStream {
-    private final HeaderCommitter     committer;
-    private final ServletOutputStream originalStream;
+import com.alibaba.citrus.util.internal.Servlet3Util.Servlet3OutputStream;
+
+class CommittingAwareServletOutputStream extends Servlet3OutputStream {
+    private final HeaderCommitter committer;
 
     public CommittingAwareServletOutputStream(HeaderCommitter committer, ServletOutputStream originalStream) {
+        super(originalStream);
         this.committer = committer;
-        this.originalStream = originalStream;
     }
 
     @Override
@@ -147,16 +147,6 @@ class CommittingAwareServletOutputStream extends ServletOutputStream {
     @Override
     public void close() throws IOException {
         originalStream.close();
-    }
-
-    @Override
-    public boolean isReady() {
-        return originalStream.isReady();
-    }
-
-    @Override
-    public void setWriteListener(WriteListener writeListener) {
-        originalStream.setWriteListener(writeListener);
     }
 
     @Override

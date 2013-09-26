@@ -24,6 +24,8 @@ import static org.junit.Assert.*;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import javax.servlet.AsyncContext;
+import javax.servlet.AsyncListener;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,7 +49,7 @@ public class RequestContextAsyncTests {
     private boolean                           originalServlet3Disabled;
     private boolean                           isAsyncStarted;
     private Enum<?>                           dispatcherType;
-    private Object /* AsyncContext */         asyncContext;
+    private AsyncContext                      asyncContext;
 
     @Before
     public void init() throws Exception {
@@ -88,7 +90,7 @@ public class RequestContextAsyncTests {
                 return dispatcherType;
             }
 
-            public Object getAsyncContext() {
+            public AsyncContext getAsyncContext() {
                 return asyncContext;
             }
         }, mockRequest);
@@ -191,17 +193,17 @@ public class RequestContextAsyncTests {
         assertSame(requestContext, attrs.get("_outer_webx3_request_context_"));
 
         isAsyncStarted = true;
-        asyncContext = createMock(Servlet3Util.asyncContextClass);
-        Capture<Object> cap = new Capture<Object>();
-        Servlet3Util.asyncContext_addAsyncListener(asyncContext, capture(cap));
+        asyncContext = createMock(AsyncContext.class);
+        Capture<AsyncListener> cap = new Capture<AsyncListener>();
+        asyncContext.addListener(capture(cap));
         replay(asyncContext);
 
         service.commitRequestContext(requestContext);
         assertSame(requestContext, attrs.get("_outer_webx3_request_context_")); // request和requestContext仍绑定
 
         verify(asyncContext);
-        Object listener = cap.getValue();
-        assertTrue(Servlet3Util.asyncListenerClass.isInstance(listener)); // asyncContext.addListener(asyncListener)
+        AsyncListener listener = cap.getValue();
+        assertTrue(AsyncListener.class.isInstance(listener)); // asyncContext.addListener(asyncListener)
 
         return listener;
     }
