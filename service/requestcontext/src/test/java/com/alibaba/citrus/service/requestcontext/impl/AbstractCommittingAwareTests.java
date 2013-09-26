@@ -26,6 +26,7 @@ import java.lang.reflect.Method;
 
 import com.alibaba.citrus.test.runner.Prototyped;
 import com.alibaba.citrus.test.runner.Prototyped.TestName;
+import com.alibaba.citrus.util.internal.Servlet3Util;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -99,9 +100,18 @@ public abstract class AbstractCommittingAwareTests<O, T extends O> implements Cl
 
     @Test
     public void invoke() throws Exception {
-        // 对于需要调用commitHeaders()的方法，测试commitHeaders方法有没有被调用。
-        // 对于所有方法，测试delegate有没有被调用。
-        method.invoke(testObject, args);
-        verify(committer, originalObject);
+        boolean disableServlet3Features = false;
+
+        try {
+            // 确保在servlet3下，isReady/setWriteListener可被调用
+            disableServlet3Features = Servlet3Util.setDisableServlet3Features(false);
+
+            // 对于需要调用commitHeaders()的方法，测试commitHeaders方法有没有被调用。
+            // 对于所有方法，测试delegate有没有被调用。
+            method.invoke(testObject, args);
+            verify(committer, originalObject);
+        } finally {
+            Servlet3Util.setDisableServlet3Features(disableServlet3Features);
+        }
     }
 }
