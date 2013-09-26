@@ -80,7 +80,9 @@ public class Servlet3Util {
 
         methods = methodList.toArray(new MethodInfo[methodList.size()]);
 
-        asyncListenerBuilder = new InterfaceImplementorBuilder().addInterface(asyncListenerClass).setOverriderClass(MyAsyncListener.class).init();
+        asyncListenerBuilder = asyncListenerClass == null
+                               ? null
+                               : new InterfaceImplementorBuilder().addInterface(asyncListenerClass).setOverriderClass(MyAsyncListener.class).init();
     }
 
     public static boolean isServlet3() {
@@ -132,7 +134,7 @@ public class Servlet3Util {
 
     public static void request_registerAsyncListener(HttpServletRequest request, MyAsyncListener listenerImpl) {
         Object /* AsyncContext */ asyncContext = request_getAsyncContext(request);
-        Object listener = asyncListenerBuilder.toObject(listenerImpl);
+        Object listener = assertNotNull(asyncListenerBuilder, "asyncListenerBuilder").toObject(listenerImpl); // builder should not be null
 
         invoke(asyncContext_addListener, asyncContext, listener);
     }

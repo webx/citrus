@@ -79,7 +79,9 @@ public class InterfaceImplementorBuilder extends DynamicClassBuilder {
     public InterfaceImplementorBuilder addInterface(Class<?>... interfaceClasses) {
         if (interfaceClasses != null) {
             for (Class<?> interfaceClass : interfaceClasses) {
-                this.interfaces.add(interfaceClass);
+                if (interfaceClass != null) {
+                    this.interfaces.add(interfaceClass);
+                }
             }
         }
 
