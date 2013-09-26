@@ -28,6 +28,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.servlet.AsyncEvent;
+import javax.servlet.AsyncListener;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -331,28 +333,21 @@ public class RequestContextChainingServiceImpl extends AbstractService<RequestCo
                     getLogger().debug("Keep request context open for asynchronous process");
                 }
 
-                request_registerAsyncListener(request, new MyAsyncListener() {
-                    private Object thisListener;
-
-                    public void setThisProxy(Object listener) {
-                        this.thisListener = listener;
-                    }
-
-                    public void onComplete(Object /* AsyncEvent */ event) throws IOException {
+                request_getAsyncContext(request).addListener(new AsyncListener() {
+                    public void onComplete(AsyncEvent event) throws IOException {
                         getLogger().debug("Async task completed.");
                         doCommit(requestContext);
                     }
 
-                    public void onTimeout(Object /* AsyncEvent */ event) throws IOException {
+                    public void onTimeout(AsyncEvent event) throws IOException {
                     }
 
-                    public void onError(Object /* AsyncEvent */ event) throws IOException {
+                    public void onError(AsyncEvent event) throws IOException {
                     }
 
-                    public void onStartAsync(Object /* AsyncEvent */ event) throws IOException {
+                    public void onStartAsync(AsyncEvent event) throws IOException {
                         // 在情况3时自动调用
-                        Object /* AsyncContext */ asyncContext = asyncEvent_getAsyncContext(event);
-                        asyncContext_addAsyncListener(asyncContext, thisListener);
+                        event.getAsyncContext().addListener(this);
                     }
                 });
             } else {

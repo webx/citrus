@@ -30,7 +30,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.WriteListener;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -41,6 +40,7 @@ import com.alibaba.citrus.service.requestcontext.TwoPhaseCommitRequestContext;
 import com.alibaba.citrus.service.requestcontext.support.AbstractRequestContextFactory;
 import com.alibaba.citrus.test.TestEnvStatic;
 import com.alibaba.citrus.util.internal.InterfaceImplementorBuilder;
+import com.alibaba.citrus.util.internal.Servlet3Util.Servlet3OutputStream;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -67,18 +67,9 @@ public class RequestContextCommitTests {
         response = createNiceMock(HttpServletResponse.class);
 
         expect(response.getWriter()).andReturn(new PrintWriter(System.out)).anyTimes();
-        expect(response.getOutputStream()).andReturn(new ServletOutputStream() {
+        expect(response.getOutputStream()).andReturn(new Servlet3OutputStream(null) {
             @Override
             public void write(int b) throws IOException {
-            }
-
-            @Override
-            public boolean isReady() {
-                return true;
-            }
-
-            @Override
-            public void setWriteListener(WriteListener writeListener) {
             }
         }).anyTimes();
 
