@@ -20,10 +20,11 @@ package com.alibaba.citrus.util.internal;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.EventListener;
 import java.util.List;
-import javax.servlet.AsyncContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.WriteListener;
 import javax.servlet.http.HttpServletRequest;
@@ -35,9 +36,6 @@ import net.sf.cglib.reflect.FastMethod;
  * Servlet 3.0 Support － 即使在非servlet 3.0的环境中，也不会出错。
  * 此类会引用如下几个Servlet 3.0的接口。在Servlet 2.5的环境中，接口由<code>citrus-common-servlet</code>项目提供。
  * <ul>
- * <li><code>AsyncContext</code></li>
- * <li><code>AsyncEvent</code></li>
- * <li><code>AsyncListener</code></li>
  * <li><code>WriteListener</code></li>
  * </ul>
  *
@@ -50,12 +48,19 @@ public class Servlet3Util {
     public static final Enum<?> DISPATCHER_TYPE_ASYNC   = getEnum("javax.servlet.DispatcherType", "ASYNC");
     public static final Enum<?> DISPATCHER_TYPE_ERROR   = getEnum("javax.servlet.DispatcherType", "ERROR");
 
+    public static final Class<?> asyncContextClass  = loadClass("javax.servlet.AsyncContext");
+    public static final Class<?> asyncListenerClass = loadClass("javax.servlet.AsyncListener");
+    public static final Class<?> asyncEventClass    = loadClass("javax.servlet.AsyncEvent");
     public static final Class<?> writeListenerClass = loadClass("javax.servlet.WriteListener");
+
+    private static final InterfaceImplementorBuilder asyncListenerBuilder;
 
     private static final MethodInfo[] methods;
     private static final int          request_isAsyncStarted;
     private static final int          request_getAsyncContext;
     private static final int          request_getDispatcherType;
+    private static final int          asyncContext_addListener;
+    private static final int          asyncEvent_getAsyncContext;
     private static final int          servletOutputStream_isReady;
     private static final int          servletOutputStream_setWriteListener;
 
@@ -75,12 +80,18 @@ public class Servlet3Util {
         methodList.add(new MethodInfo(Enum.class, null, HttpServletRequest.class, "getDispatcherType"));
         request_getDispatcherType = count++;
 
+        methodList.add(new MethodInfo(null, null, asyncContextClass, "addListener", asyncListenerClass));
+        asyncContext_addListener = count++;
+
+        methodList.add(new MethodInfo(asyncContextClass, null, asyncEventClass, "getAsyncContext"));
+        asyncEvent_getAsyncContext = count++;
+
         methodList.add(new MethodInfo(Boolean.class, true, ServletOutputStream.class, "isReady"));
         servletOutputStream_isReady = count++;
 
         // 这里不能硬编码WriteListener.class，否则在servlet 3.0环境中会失败。
         if (writeListenerClass == null) {
-            methodList.add(new MethodInfo(null, null, null, null));
+            methodList.add(new MethodInfo(null, null));
         } else {
             methodList.add(new MethodInfo(null, null, ServletOutputStream.class, "setWriteListener", writeListenerClass));
         }
@@ -90,6 +101,10 @@ public class Servlet3Util {
         methods = methodList.toArray(new MethodInfo[methodList.size()]);
 
         servlet3 = !methods[request_getAsyncContext].isDisabled();
+
+        asyncListenerBuilder = asyncListenerClass == null
+                               ? null
+                               : new InterfaceImplementorBuilder().addInterface(asyncListenerClass).setOverriderClass(MyAsyncListener.class).init();
     }
 
     public static boolean isServlet3() {
@@ -111,14 +126,14 @@ public class Servlet3Util {
         return (Boolean) invoke(request_isAsyncStarted, request);
     }
 
-    public static AsyncContext request_getAsyncContext(HttpServletRequest request) {
+    public static Object /* AsyncContext */ request_getAsyncContext(HttpServletRequest request) {
         int index = request_getAsyncContext;
 
         if (methods[index].isDisabled()) {
             throw new IllegalStateException("request.getAsyncContext");
         }
 
-        return (AsyncContext) invoke(index, request);
+        return invoke(index, request);
     }
 
     public static boolean request_isDispatcherType(HttpServletRequest request, Enum<?> type) {
@@ -129,6 +144,21 @@ public class Servlet3Util {
         } else {
             return dispatcherType == type;
         }
+    }
+
+    public static Object /* AsyncContext */ asyncEvent_getAsyncContext(Object /* AsyncEvent */ event) {
+        return invoke(asyncEvent_getAsyncContext, event);
+    }
+
+    public static void asyncContext_addAsyncListener(Object /* AsyncContext */ asyncContext, Object /* AsyncListener */ listener) {
+        invoke(asyncContext_addListener, asyncContext, listener);
+    }
+
+    public static void request_registerAsyncListener(HttpServletRequest request, MyAsyncListener listenerImpl) {
+        Object /* AsyncContext */ asyncContext = request_getAsyncContext(request);
+        Object listener = assertNotNull(asyncListenerBuilder, "asyncListenerBuilder").toObject(listenerImpl); // builder should not be null
+
+        invoke(asyncContext_addListener, asyncContext, listener);
     }
 
     private static Class<?> loadClass(String className) {
@@ -190,6 +220,11 @@ public class Servlet3Util {
         private final Object     defaultReturnValue;
         private final Class<?>   returnValueType;
 
+        // 创建一个空的method
+        public <T> MethodInfo(Class<T> returnValueType, T defaultReturnValue) {
+            this(returnValueType, defaultReturnValue, null, null, (Class<?>[]) null);
+        }
+
         public <T> MethodInfo(Class<T> returnValueType, T defaultReturnValue, Class<?> declaringClass, String methodName, Class<?>... parameterTypes) {
             this.returnValueType = returnValueType;
             this.defaultReturnValue = defaultReturnValue;
@@ -211,6 +246,16 @@ public class Servlet3Util {
         public boolean isDisabled() {
             return disableServlet3Features || method == null;
         }
+    }
+
+    public interface MyAsyncListener extends EventListener {
+        void onComplete(Object /* AsyncEvent */ event) throws IOException;
+
+        void onTimeout(Object /* AsyncEvent */ event) throws IOException;
+
+        void onError(Object /* AsyncEvent */ event) throws IOException;
+
+        void onStartAsync(Object /* AsyncEvent */ event) throws IOException;
     }
 
     /** 一个可同时在servlet 3.0和servlet 2.5环境下使用的基类。 */
