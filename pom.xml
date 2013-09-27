@@ -49,7 +49,7 @@
         <spring-version>3.0.7.RELEASE</spring-version>
         <springext-plugin-version>1.2</springext-plugin-version>
         <maven-util-version>1.2</maven-util-version>
-        <jetty-version>8.1.13.v20130916</jetty-version>
+        <jetty-version>9.0.5.v20130815</jetty-version>
         <project.build.sourceEncoding>${java.encoding}</project.build.sourceEncoding>
         <gpg.skip>true</gpg.skip>
     </properties>
@@ -681,7 +681,7 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.mortbay.jetty</groupId>
+                <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <configuration>
                     <stopKey>citrus</stopKey>
@@ -763,7 +763,7 @@
                     <version>2.10</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.mortbay.jetty</groupId>
+                    <groupId>org.eclipse.jetty</groupId>
                     <artifactId>jetty-maven-plugin</artifactId>
                     <version>${jetty-version}</version>
                 </plugin>
