@@ -76,10 +76,11 @@
                                 <phase>compile</phase>
                                 <configuration>
                                     <target>
-                                        <echo message="+-------------------------------------------------------------+" />
-                                        <echo message="! Servlet 3 Profile activated                                 !" />
-                                        <echo message="! To test under Servlet 2, please using argument -Dservlet2   !" />
-                                        <echo message="+-------------------------------------------------------------+" />
+                                        <echo message="+----------------------------------------------------------------+" />
+                                        <echo message="! Servlet ${servlet3-version} Profile activated                                !" />
+                                        <echo message="! To test under Servlet 2, please using argument -Dservlet2      !" />
+                                        <echo message="! To test under Servlet 3.0, please using argument -Dservlet30   !" />
+                                        <echo message="+----------------------------------------------------------------+" />
                                     </target>
                                 </configuration>
                                 <goals>
