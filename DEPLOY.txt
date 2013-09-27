@@ -116,8 +116,9 @@ Sonatype OSS Staging 库管理：   https://oss.sonatype.org/
 ========
 
 cd citrus
-mvn clean install              // 编译和测试全部代码，在servlet 3.0环境下
-mvn clean install -Dservlet2   // 编译和测试全部代码，在servlet 2.5环境下
+mvn clean install                  // 编译和测试全部代码，在servlet 3.1环境下（默认）
+mvn clean install -Dservlet30      // 编译和测试全部代码，在servlet 3.0环境下
+mvn clean install -Dservlet2       // 编译和测试全部代码，在servlet 2.5环境下
 
 
 发布步骤
