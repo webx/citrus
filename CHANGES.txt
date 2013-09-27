@@ -371,3 +371,36 @@
 * 升级到springext-maven-plugin 1.2
 * 删除intellij:annotations依赖，因为还不能全面使用这个机制，不如先删除。
 * 将velocity/freemarker的依赖改成scope=provided。应用程序如果需要的话，必须明确声明依赖它们。
+* 当SLF4J没有绑定日志系统时（即classpath中不存在诸如logback-classic或slf4j-log4j12包），避免配置出错。
+  这个修改可使autoconfig运行于maven 3.1.x中。因为在maven 3.1.x里，SLF4J被提到上层classloader中，从而找不到logback包而报错。
+* Bugfix: 修正如下问题：在<resource-loading>服务中，两个连续的<super-loader>中的第二个无法工作，例如：
+  <resource pattern="/*/templates/layout">
+      <res-loaders:super-loader name="/webroot/$1/templates/layout" />
+      <res-loaders:super-loader name="/webroot/common/templates/layout" />
+  </resource>
+* Bugfix: 修正当request.startAsync以后，每个请求都会生成cglib类，从而导致permgen溢出的问题。
+* 升级依赖包的版本：
+      slf4j                 1.6.6   -> 1.7.5
+      commons-fileupload    1.2.2   -> 1.3
+      commons-io            2.3     -> 2.4
+      commons-codec         1.6     -> 1.8
+      fastjson              1.1.23  -> 1.1.36
+      logback               1.0.6   -> 1.0.13   [provided]
+      commons-logging       1.1.1   -> 1.1.3    [provided]
+      servlet               3.0.1   -> 3.1.0    [provided]
+      javamail              1.4.1   -> 1.4.7    [provided]
+      activation            1.1     -> 1.1.1    [provided]
+      freemarker            2.3.19  -> 2.3.20   [provided]
+      groovy                1.8.6   -> 2.1.7    [runtime]
+      httpunit              1.7     -> 1.7.2    [test]
+      xerces                2.10.0  -> 2.11.0   [test]
+      easymock              3.1     -> 3.2      [test]
+      jasper                6.0.35  -> 6.0.37   [test]
+      mock-javamail         1.7     -> 1.9      [test]
+
+-- Changes in 3.0.12
+
+* Bugfix: 在servlet2.5环境中，Servlet3Util初始化失败。
+
+-- Changes in 3.0.13
+
