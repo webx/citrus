@@ -50,6 +50,8 @@ public class Servlet3Util {
     public static final Enum<?> DISPATCHER_TYPE_ASYNC   = getEnum("javax.servlet.DispatcherType", "ASYNC");
     public static final Enum<?> DISPATCHER_TYPE_ERROR   = getEnum("javax.servlet.DispatcherType", "ERROR");
 
+    public static final Class<?> writeListenerClass = loadClass("javax.servlet.WriteListener");
+
     private static final MethodInfo[] methods;
     private static final int          request_isAsyncStarted;
     private static final int          request_getAsyncContext;
@@ -76,7 +78,13 @@ public class Servlet3Util {
         methodList.add(new MethodInfo(Boolean.class, true, ServletOutputStream.class, "isReady"));
         servletOutputStream_isReady = count++;
 
-        methodList.add(new MethodInfo(null, null, ServletOutputStream.class, "setWriteListener", WriteListener.class));
+        // 这里不能硬编码WriteListener.class，否则在servlet 3.0环境中会失败。
+        if (writeListenerClass == null) {
+            methodList.add(new MethodInfo(null, null, null, null));
+        } else {
+            methodList.add(new MethodInfo(null, null, ServletOutputStream.class, "setWriteListener", writeListenerClass));
+        }
+
         servletOutputStream_setWriteListener = count++;
 
         methods = methodList.toArray(new MethodInfo[methodList.size()]);
@@ -120,6 +128,14 @@ public class Servlet3Util {
             return false; // unsupported
         } else {
             return dispatcherType == type;
+        }
+    }
+
+    private static Class<?> loadClass(String className) {
+        try {
+            return Servlet3Util.class.getClassLoader().loadClass(className);
+        } catch (ClassNotFoundException e) {
+            return null;
         }
     }
 
