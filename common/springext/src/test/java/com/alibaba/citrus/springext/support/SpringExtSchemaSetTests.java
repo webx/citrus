@@ -18,10 +18,12 @@
 package com.alibaba.citrus.springext.support;
 
 import static com.alibaba.citrus.util.CollectionUtil.*;
+import static java.util.Collections.*;
 import static javax.xml.XMLConstants.*;
 import static org.junit.Assert.*;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -289,6 +291,24 @@ public class SpringExtSchemaSetTests {
         }
 
         assertArrayEquals(new String[] { "interceptors:i1", "interceptors:i2" }, refs.toArray());
+    }
+
+    @Test
+    public void test15_includeWithRelativePath() {
+        schemas = new SpringExtSchemaSet("TEST-INF/test15/cps");
+
+        Schema schema = schemas.getNamedMappings().get("localhost/transports/http/configuration/http-conf.xsd");
+
+        List<Schema.Element> elements = createArrayList(schema.getElements());
+
+        sort(elements, new Comparator<Schema.Element>() {
+            @Override
+            public int compare(Schema.Element o1, Schema.Element o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+
+        assertEquals("[Element[client], Element[server]]", elements.toString());
     }
 
     private boolean hasGrandChildren(TreeItem item) {

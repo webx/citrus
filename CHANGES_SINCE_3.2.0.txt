@@ -84,3 +84,4 @@
 
 * Bugfix: MatchResultSubstitution，当出现很长的变量$xxxxxxxx...时，发生溢出错误，导致<rewrite>功能出错。
 * Bugfix: 在<rewrite><condition test="%{VAR}">中，避免%{VAR}中出现的$或%被解析。
+* 改进：使EntityResolver支持../xxx/yyy.xsd这样的相对路径。Apache CXF用到了这样的URL，此改进确保CXF可以在webx平台上运行。

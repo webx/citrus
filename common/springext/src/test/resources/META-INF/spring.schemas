@@ -3,5 +3,9 @@ http\://www.alibaba.com/schema/springext-base-types.xsd=META-INF/springext-base-
 
 http\://localhost/included-schema.xsd=META-INF/included-schema.xsd
 
+# test including ../http-conf.xsd used by apache cxf
+http\://localhost/transports/http/configuration/http-conf.xsd=META-INF/transports/http/configuration/http-conf.xsd
+http\://localhost/transports/http/wsdl/http-conf.xsd=META-INF/transports/http/wsdl/http-conf.xsd
+
 # invalid and ignored
 =

@@ -55,6 +55,7 @@ public class EntityResolverTests {
         InputSource source = resolver.resolveEntity(null, "classpath:dummy.txt");
 
         assertEquals("dummy", getContent(source));
+        assertEquals("classpath:dummy.txt", source.getSystemId());
     }
 
     @Test
@@ -69,6 +70,8 @@ public class EntityResolverTests {
                 containsAll("xmlns=\"http://www.springframework.org/schema/beans\"",
                             "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"",
                             "targetNamespace=\"http://www.springframework.org/schema/beans\""));
+
+        assertEquals("http://www.springframework.org/schema/beans/spring-beans-2.5.xsd", source.getSystemId());
     }
 
     @Test
@@ -83,6 +86,8 @@ public class EntityResolverTests {
                 containsAll("xmlns=\"http://www.springframework.org/schema/beans\"",
                             "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"",
                             "targetNamespace=\"http://www.springframework.org/schema/beans\""));
+
+        assertEquals("http://any.domain.com/any/prefix/www.springframework.org/schema/beans/spring-beans-2.5.xsd", source.getSystemId());
     }
 
     @Test
@@ -93,6 +98,7 @@ public class EntityResolverTests {
         String str = getContent(source);
 
         assertEquals("dummy", str);
+        assertEquals("http://any.domain.com/any/prefix/www.alibaba.com/schema/tests.xsd", source.getSystemId());
     }
 
     @Test
@@ -116,6 +122,7 @@ public class EntityResolverTests {
                             "schemaLocation=\"services/container.xsd\""));
 
         assertThat(str, not(containsString("xsd:element")));
+        assertEquals("http://localhost/schema/services/services.xsd", source.getSystemId());
     }
 
     @Test
@@ -131,6 +138,8 @@ public class EntityResolverTests {
                             "targetNamespace=\"http://www.alibaba.com/schema/services/tools\"",
                             "schemaLocation=\"services/tools/dateformat.xsd\"",
                             "xsd:element name=\"tool\" type=\"springext:referenceableBeanType\""));
+
+        assertEquals("http://localhost/schema/services/services-tools.xsd", source.getSystemId());
     }
 
     @Test
@@ -145,6 +154,8 @@ public class EntityResolverTests {
                             "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"",
                             "targetNamespace=\"http://www.alibaba.com/schema/services\"",
                             "schemaLocation=\"services/container.xsd\""));
+
+        assertEquals("c:\\schema\\\\services/services.xsd", source.getSystemId());
     }
 
     private String getContent(InputSource source) throws IOException {
