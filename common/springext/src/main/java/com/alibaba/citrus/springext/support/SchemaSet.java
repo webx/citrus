@@ -21,11 +21,11 @@ import static com.alibaba.citrus.springext.support.SchemaUtil.*;
 import static com.alibaba.citrus.util.ArrayUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.CollectionUtil.*;
+import static com.alibaba.citrus.util.ObjectUtil.*;
 import static com.alibaba.citrus.util.StringUtil.*;
 import static java.util.Collections.*;
 
 import java.net.URI;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -274,7 +274,17 @@ public class SchemaSet implements Schemas, Namespaces, Iterable<Schemas> {
 
     /** 查找include schema，如未找到，抛异常。 */
     private Schema findIncludedSchema(String include, String fromSchema) {
-        return assertNotNull(findSchema(include), "Could not include schema \"%s\" in %s", include, fromSchema);
+        Schema found = findSchema(include);
+
+        if (found == null) {
+            String resolvedInclude = URI.create(fromSchema + "/../" + include).normalize().toString();
+
+            if (!isEquals(include, resolvedInclude)) {
+                found = findSchema(resolvedInclude);
+            }
+        }
+
+        return assertNotNull(found, "Could not include schema \"%s\" in %s", include, fromSchema);
     }
 
     /** 添加一个schema。 */
@@ -298,14 +308,20 @@ public class SchemaSet implements Schemas, Namespaces, Iterable<Schemas> {
         systemId = assertNotNull(trimToNull(systemId), "systemId").replaceAll("\\\\", "/");
 
         try {
-            systemId = URI.create(systemId).normalize().toString();
+            systemId = URI.create(systemId).normalize().getSchemeSpecificPart();
         } catch (Exception e) {
             // ignore
         }
 
         for (String schemaName : names) {
-            if (systemId.endsWith(schemaName)) {
+            if (systemId.equals(schemaName)) {
                 return nameToSchemas.get(schemaName);
+            }
+
+            if (systemId.endsWith(schemaName)) {
+                if (schemaName.startsWith("/") || systemId.endsWith("/" + schemaName)) {
+                    return nameToSchemas.get(schemaName);
+                }
             }
         }
 
