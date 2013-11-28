@@ -35,13 +35,10 @@ public class RewriteUtilTests extends AbstractRequestContextsTests<RewriteReques
 
     @Test
     public void _eval() throws Exception {
-        invokeNoopServlet("/servlet/hello.htm?a=1&b=2&c=3");
+        invokeNoopServlet("/servlet/hello.htm?a=1&b=2&c=3&e=%5C$12%2534");
         initRequestContext();
 
         HttpServletRequest wrappedRequest = requestContext.getWrappedRequestContext().getRequest();
-
-        assertEquals("", eval("", wrappedRequest));
-        assertEquals("%{}", eval("%{}", wrappedRequest));
 
         // =====================================================
         //  Client side of the IP connection
@@ -51,7 +48,7 @@ public class RewriteUtilTests extends AbstractRequestContextsTests<RewriteReques
         assertEquals("127.0.0.1", eval("%{REMOTE_ADDR}", wrappedRequest));
         assertEquals("", eval("%{REMOTE_USER}", wrappedRequest));
         assertEquals("GET", eval("%{REQUEST_METHOD}", wrappedRequest));
-        assertEquals("a=1&b=2&c=3", eval("%{QUERY_STRING}", wrappedRequest));
+        assertEquals("a=1&b=2&c=3&e=\\%5C\\$12\\%2534", eval("%{QUERY_STRING}", wrappedRequest));
         assertEquals("1", eval("%{QUERY:a}", wrappedRequest));
         assertEquals("2", eval("%{QUERY:b}", wrappedRequest));
         assertEquals("", eval("%{QUERY:d}", wrappedRequest));
@@ -80,5 +77,16 @@ public class RewriteUtilTests extends AbstractRequestContextsTests<RewriteReques
         // =====================================================
 
         assertEquals("/servlet/hello.htm", eval("%{REQUEST_URI}", wrappedRequest));
+
+        // =====================================================
+        //  Special cases
+        // =====================================================
+        assertEquals("", eval("", wrappedRequest));
+        assertEquals("\\%{}", eval("%{}", wrappedRequest));
+        assertEquals("%{", eval("%{", wrappedRequest));
+        assertEquals("\\%{} %", eval("%{} %", wrappedRequest));
+
+        assertEquals("\\%{INVALID} %{HTTP_HOST} %1 %{INCOMPLETED", eval("%{INVALID} %%{HTTP_HOST} %1 %{INCOMPLETED", wrappedRequest));
+        assertEquals("$1 \\\\\\$12\\%34 %2", eval("$1 %{QUERY:e} %2", wrappedRequest));
     }
 }
