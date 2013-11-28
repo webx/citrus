@@ -154,15 +154,7 @@ public class CollectionUtilTests {
     @Test
     public void createHashMap_capacity() {
         Map<String, Integer> map = createHashMap(2);
-        assertTrue(map instanceof HashMap<?, ?>);
-
-        map.put("a", 1);
-        map.put("b", 1);
-        map.put("c", 1);
-        map.put("d", 1);
-        map.put("e", 1);
-
-        assertArrayNotEquals(new Object[] { "a", "b", "c", "d", "e" }, map.keySet().toArray());
+        assertSame(HashMap.class, map.getClass());
     }
 
     @Test
