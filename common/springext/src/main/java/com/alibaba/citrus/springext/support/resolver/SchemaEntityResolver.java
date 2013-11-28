@@ -21,8 +21,8 @@ import java.io.IOException;
 
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.Schemas;
-import com.alibaba.citrus.springext.support.SpringExtSchemaSet;
 import com.alibaba.citrus.springext.support.SchemaSet;
+import com.alibaba.citrus.springext.support.SpringExtSchemaSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.EntityResolver;
@@ -62,6 +62,11 @@ public class SchemaEntityResolver implements EntityResolver {
 
         log.debug("Found XML schema for systemId {}: {}", systemId, schema);
 
-        return new InputSource(schema.getInputStream());
+        InputSource inputSource = new InputSource(schema.getInputStream());
+
+        inputSource.setPublicId(publicId);
+        inputSource.setSystemId(systemId);
+
+        return inputSource;
     }
 }
