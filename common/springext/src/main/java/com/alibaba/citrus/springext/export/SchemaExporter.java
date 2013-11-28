@@ -34,8 +34,8 @@ import java.util.Map;
 import com.alibaba.citrus.springext.Schema;
 import com.alibaba.citrus.springext.Schema.Transformer;
 import com.alibaba.citrus.springext.Schemas;
-import com.alibaba.citrus.springext.support.SpringExtSchemaSet;
 import com.alibaba.citrus.springext.support.SchemaSet;
+import com.alibaba.citrus.springext.support.SpringExtSchemaSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -245,19 +245,19 @@ public class SchemaExporter {
         }
     }
 
-    private final class Entries extends HashMap<String, Entry> {
+    private final class Entries extends HashMap<String, SchemaExporter.Entry> {
         private static final long serialVersionUID = -4000525580274040823L;
 
         public Entries() {
-            super.put("", new Entry());
+            super.put("", new SchemaExporter.Entry());
         }
 
-        public Entry getRoot() {
+        public SchemaExporter.Entry getRoot() {
             return get("");
         }
 
         @Override
-        public Entry put(String path, Entry entry) {
+        public SchemaExporter.Entry put(String path, SchemaExporter.Entry entry) {
             assertTrue(path.equals(entry.getPath()));
 
             if (path.endsWith("/")) {
@@ -265,16 +265,16 @@ public class SchemaExporter {
             }
 
             String parentPath = path.substring(0, path.lastIndexOf("/") + 1);
-            Entry parentEntry = get(parentPath);
+            SchemaExporter.Entry parentEntry = get(parentPath);
 
             if (parentEntry == null) {
-                parentEntry = new Entry(parentPath);
+                parentEntry = new SchemaExporter.Entry(parentPath);
                 this.put(parentPath, parentEntry); // recursively
             }
 
             parentEntry.subEntries.put(entry.getSortKey(), entry);
 
-            Entry old = super.put(entry.getPath(), entry);
+            SchemaExporter.Entry old = super.put(entry.getPath(), entry);
 
             log.trace("Added entry: {}", entry.getPath());
 
