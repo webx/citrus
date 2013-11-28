@@ -98,10 +98,10 @@ public class RewriteUtil {
                                             case '}':
 
                                                 String varName = varNameBuffer.toString();
-                                                String varNameExpanded = expand(varName, request);
+                                                String varNameExpanded = expandAndEscape(varName, request);
 
                                                 if (varNameExpanded == null) {
-                                                    resultBuffer.append("%{").append(varName).append("}");
+                                                    resultBuffer.append("\\%{").append(varName).append("}");
                                                 } else {
                                                     resultBuffer.append(varNameExpanded);
                                                 }
@@ -124,7 +124,7 @@ public class RewriteUtil {
                                 break;
 
                             default:
-                                charBuffer.append(ch);
+                                charBuffer.append('%').append(ch);
                         }
                     } else {
                         charBuffer.append(ch);
@@ -144,6 +144,51 @@ public class RewriteUtil {
         }
 
         return resultBuffer.toString();
+    }
+
+    /**
+     * 展开变量，并对其中的特殊字符进行处理，避免其被解析。
+     *
+     * @return 注意，如果返回null，表示按原样显示，例如：%{XYZ}
+     */
+    private static String expandAndEscape(String varName, HttpServletRequest request) {
+        String value = expand(varName, request);
+
+        if (value != null) {
+            int length = value.length();
+            StringBuilder buf = new StringBuilder(length + 10);
+            boolean changed = false;
+
+            for (int i = 0; i < length; i++) {
+                char ch = value.charAt(i);
+
+                switch (ch) {
+                    case '\\':
+                        buf.append("\\\\");
+                        changed = true;
+                        break;
+
+                    case '$':
+                        buf.append("\\$");
+                        changed = true;
+                        break;
+
+                    case '%':
+                        buf.append("\\%");
+                        changed = true;
+                        break;
+
+                    default:
+                        buf.append(ch);
+                }
+            }
+
+            if (changed) {
+                value = buf.toString();
+            }
+        }
+
+        return value;
     }
 
     /**

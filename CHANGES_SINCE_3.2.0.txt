@@ -82,3 +82,5 @@
 
 -- Changes in 3.2.3
 
+* Bugfix: MatchResultSubstitution，当出现很长的变量$xxxxxxxx...时，发生溢出错误，导致<rewrite>功能出错。
+* Bugfix: 在<rewrite><condition test="%{VAR}">中，避免%{VAR}中出现的$或%被解析。
