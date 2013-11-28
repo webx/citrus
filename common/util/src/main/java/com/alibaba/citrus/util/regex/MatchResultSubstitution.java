@@ -102,7 +102,7 @@ public class MatchResultSubstitution extends Substitution {
     protected String group(int index, int groupNumber) {
         MatchResult result = getMatch(index);
 
-        if (groupNumber <= result.groupCount()) {
+        if (0 <= groupNumber && groupNumber <= result.groupCount()) {
             return result.group(groupNumber);
         }
 

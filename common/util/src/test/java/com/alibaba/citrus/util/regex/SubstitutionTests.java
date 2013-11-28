@@ -109,6 +109,13 @@ public class SubstitutionTests {
     }
 
     @Test
+    public void matchOverflowNumber() {
+        Substitution subs = new MatchResultSubstitution(r1);
+        // Number $12345678901234567890 exceeds the integer range, which causes a negative number
+        assertEquals("xx$12345678901234567890yy$2zz", subs.substitute("xx$12345678901234567890yy$2zz"));
+    }
+
+    @Test
     public void matchMulti() {
         Substitution subs = new MatchResultSubstitution("$%", r1, r2);
         assertEquals("xxaayycczz$2%2", subs.substitute("xx$1yy%1zz$2%2"));
@@ -116,9 +123,9 @@ public class SubstitutionTests {
         r1 = getMatchResult("\\.(\\w+)\\.com/(.*)", "www.taobao.com/test.htm");
         r2 = getMatchResult("a=(\\d+)&b=(\\d+)", "a=1&b=2&c=3");
 
-        assertEquals("$1, $x, .taobao.com/test.htm, taobao, test.htm, $3, %1, %x, a=1&b=2, 1, 2, %3",
+        assertEquals("\\taobao, $1, $x, .taobao.com/test.htm, taobao, test.htm, $3, %1, %x, a=1&b=2, 1, 2, %3, \\",
                      new MatchResultSubstitution("$%", r1, r2)
-                             .substitute("\\$1, $x, $0, $1, $2, $3, \\%1, %x, %0, %1, %2, %3"));
+                             .substitute("\\\\$1, \\$1, $x, $0, $1, $2, $3, \\%1, %x, %0, %1, %2, %3, \\"));
     }
 
     @Test
