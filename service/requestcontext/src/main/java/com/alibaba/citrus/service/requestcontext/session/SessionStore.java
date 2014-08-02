@@ -54,7 +54,7 @@ public interface SessionStore {
      * @param sessionID    要丢弃的session ID
      * @param storeContext 用来取得request信息，并存放store当前的状态
      */
-    void invaldiate(String sessionID, StoreContext storeContext);
+    void invalidate(String sessionID, StoreContext storeContext);
 
     /**
      * 保存指定session的attributes。

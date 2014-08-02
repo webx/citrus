@@ -67,7 +67,7 @@ public class SimpleMemoryStoreImpl implements SessionStore {
     }
 
     /** 丢弃指定session ID的所有内容。 */
-    public void invaldiate(String sessionID, StoreContext storeContext) {
+    public void invalidate(String sessionID, StoreContext storeContext) {
         sessions.remove(sessionID);
     }
 
