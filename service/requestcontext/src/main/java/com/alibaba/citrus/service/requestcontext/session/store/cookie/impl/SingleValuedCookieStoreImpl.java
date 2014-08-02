@@ -79,7 +79,7 @@ public class SingleValuedCookieStoreImpl extends AbstractCookieStore implements 
         return state.attributes.get(attrName);
     }
 
-    public void invaldiate(String sessionID, StoreContext storeContext) {
+    public void invalidate(String sessionID, StoreContext storeContext) {
         State state = getState(storeContext);
 
         if (!isSurvivesInInvalidating()) {
