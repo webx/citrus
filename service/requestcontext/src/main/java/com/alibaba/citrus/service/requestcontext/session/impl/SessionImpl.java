@@ -789,7 +789,7 @@ public class SessionImpl implements HttpSession {
             for (String storeName : storeNames) {
                 SessionStore store = sessionConfig.getStores().getStore(storeName);
 
-                store.invaldiate(sessionID, new StoreContextImpl(storeName));
+                store.invalidate(sessionID, new StoreContextImpl(storeName));
             }
 
             // 清除model

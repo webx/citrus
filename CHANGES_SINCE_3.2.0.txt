@@ -90,3 +90,4 @@
 
 * 升级commons-fileupload，避免DOS攻击的问题。
   参见：http://mail-archives.apache.org/mod_mbox/www-announce/201402.mbox/%3C52F373FC.9030907@apache.org%3E
+* 修正SessionStore.invalidate()方法的拼写错误，然而请注意，这会导致新版本和老版本的不兼容。

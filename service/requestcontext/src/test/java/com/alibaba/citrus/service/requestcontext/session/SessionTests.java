@@ -1070,7 +1070,7 @@ public class SessionTests extends AbstractRequestContextsTests<SessionRequestCon
             return null;
         }
 
-        public void invaldiate(String sessionID, StoreContext storeContext) {
+        public void invalidate(String sessionID, StoreContext storeContext) {
         }
 
         public void commit(Map<String, Object> attrs, String sessionID, StoreContext storeContext) {
