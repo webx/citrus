@@ -55,7 +55,7 @@ public class SpringPluggableSchemas implements Schemas, Namespaces {
     private final static String  SCHEMA_MAPPINGS_LOCATION  = PluggableSchemaResolver.DEFAULT_SCHEMA_MAPPINGS_LOCATION;
     private final static String  HANDLER_MAPPINGS_LOCATION = DefaultNamespaceHandlerResolver.DEFAULT_HANDLER_MAPPINGS_LOCATION;
     private final static String  TOOLING_PARAMS_LOCATION   = "META-INF/spring.tooling";
-    private final static Pattern SCHEMA_VERSION_PATTERN    = Pattern.compile("-((\\d+)(.\\d+)*)\\.xsd$");
+    private final static Pattern SCHEMA_VERSION_PATTERN    = Pattern.compile("-((\\d+)(\\.\\d+)*)\\.xsd$");
     private final ResourceResolver                 resourceResolver;
     private final Map<String, Schema>              nameToSchemaMappings;
     private final Map<String, String>              uriToNameMappings;
