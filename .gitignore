@@ -1,10 +1,12 @@
 bin
+build
 target
 dependency-reduced-pom.xml
 .settings
 .project
 .classpath
 .svn
+.gradle
 
 *.iml
 /out
