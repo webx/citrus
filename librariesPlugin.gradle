@@ -1,0 +1,146 @@
+apply plugin: LibrariesPlugin
+
+/*
+   Provides:
+    - a syntax sugar to define reusable libraries
+    - a maven-style configuration: provided
+
+    // build.gradle of main project
+    apply from: "librariesPlugin.gradle"
+
+    libraries {
+        // Single item dependency - format 1
+        servletApi3 'javax.servlet:javax.servlet-api:3.1.0'
+
+        // Single item dependency - format 2
+        servletApi2 group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+
+        // Multiple items dependency
+        slf4j {
+            // - item format 1
+            item 'org.slf4j:slf4j-api:1.7.5'
+
+            // - item format 2
+            item group: 'org.slf4j', name: 'jcl-over-slf4j', version: '1.7.5'
+        }
+    }
+
+    // build.gradle of sub-projects
+    dependencies {
+        provided libraries.servletApi3
+        compile  libraries.slf4j
+    }
+ */
+
+class LibrariesPlugin implements Plugin<Project> {
+    void apply(Project project) {
+        /*
+            Create libraries tag for main project.
+
+            Implementation Detail:
+            See: http://stackoverflow.com/questions/9547170/in-gradle-how-do-i-declare-common-dependencies-in-a-single-place
+
+            ext.libraries = [
+                // - format 1
+                junit: "junit:junit:4.10"
+
+                // - format 2
+                spring_core: dependencies.create("org.springframework:spring-core:3.1") {
+                    exclude module: "commons-logging"
+                    force = true
+                }
+
+                // - format 3
+                spring: [
+                    "org.springframework:spring-core:3.1",
+                    "org.springframework:spring-jdbc:3.1"
+                ]
+            ]
+         */
+        project.extensions.create("libraries", LibrariesPluginHandler, project)
+        project.ext.libraries = [:]
+
+        /*
+            Create 'provided' configuration for each sub-project
+
+            Implementation Detail:
+            See: https://sinking.in/blog/provided-scope-in-gradle/
+
+            subprojects {
+                configurations {
+                    provided
+                }
+
+                sourceSets {
+                    main {
+                        compileClasspath += configurations.provided
+                        runtimeClasspath += configurations.provided
+                    }
+                    test {
+                        compileClasspath += configurations.provided
+                        runtimeClasspath += configurations.provided
+                    }
+                }
+            }
+         */
+        project.subprojects.each {
+            configureConfigurations(it);
+        }
+    }
+
+    private void configureConfigurations(Project project) {
+        project.apply('plugin': 'java')
+
+        Configuration providedConfiguration = project.configurations.create('provided')
+        SourceSetContainer container = project.getConvention().getPlugin(JavaPluginConvention).getSourceSets()
+        SourceSet main = container.getByName(SourceSet.MAIN_SOURCE_SET_NAME)
+        SourceSet test = container.getByName(SourceSet.TEST_SOURCE_SET_NAME)
+
+        main.compileClasspath += providedConfiguration
+        main.runtimeClasspath += providedConfiguration
+        test.compileClasspath += providedConfiguration
+        test.runtimeClasspath += providedConfiguration
+    }
+}
+
+class LibrariesPluginHandler {
+    private final Project project
+
+    LibrariesPluginHandler(Project project) {
+        this.project = project
+    }
+
+    def methodMissing(String name, args) {
+        if (args.length == 1 && args[0] instanceof Closure) {
+            Closure c = args[0];
+            LibrariesPluginItemHandler items = new LibrariesPluginItemHandler(project);
+
+            c.delegate = items
+            c.resolveStrategy = Closure.DELEGATE_FIRST
+            c.call()
+
+            if (!items.items.empty) {
+                project.properties.libraries.put(name, items.items)
+            }
+        } else {
+            project.properties.libraries.put(name, project.dependencies.create(*args))
+        }
+    }
+}
+
+class LibrariesPluginItemHandler {
+    private final Project project
+    private final List items = []
+
+    LibrariesPluginItemHandler(Project project) {
+        this.project = project
+    }
+
+    def methodMissing(String name, args) {
+        if (name == 'item') {
+            items.add(project.dependencies.create(*args))
+        } else {
+            throw new MissingMethodException(name, project, args)
+        }
+    }
+}
