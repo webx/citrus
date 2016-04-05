@@ -762,7 +762,7 @@ public class ClassUtilTests {
     public void locateClass() {
         assertThat(ClassUtil.locateClass(Logger.class), containsRegex("slf4j-api-\\S+\\.jar$"));
         assertThat(ClassUtil.locateClass(ClassUtilTests.class.getName()),
-                   containsAllRegex("^file:", "target/test-classes/$"));
+                   containsAllRegex("^file:", "(target/test-classes|build/classes/test)/$"));
     }
 
     private static class Inner {
