@@ -58,7 +58,7 @@ public class InterfaceImplementorBuilderTests {
         }
 
         try {
-            new InterfaceImplementorBuilder().addInterface(null).toObject();
+            new InterfaceImplementorBuilder().addInterface((Class<?>[]) null).toObject();
             fail();
         } catch (IllegalArgumentException e) {
             assertThat(e, exception("no interface specified"));
