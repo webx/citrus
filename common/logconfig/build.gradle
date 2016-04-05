@@ -1,0 +1,11 @@
+description = 'Citrus Log Configuration'
+
+dependencies {
+    provided 'log4j:log4j:1.2.17'
+    provided 'ch.qos.logback:logback-classic:1.0.13'
+
+    runtime 'org.slf4j:slf4j-log4j12:1.7.5'
+
+    provided libraries.servletApi
+    testCompile libraries.testSuite
+}

@@ -1,0 +1,8 @@
+description = 'Simple Expression Engine'
+
+dependencies {
+    compile project(':citrus-common-util')
+    compile 'org.apache.commons:commons-jexl:2.1.1'
+
+    testCompile project(':citrus-test-util')
+}

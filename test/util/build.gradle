@@ -1,0 +1,10 @@
+description = 'Citrus Testing Utilities'
+
+dependencies {
+    compile project(':citrus-common-logconfig')
+
+    runtime 'ch.qos.logback:logback-classic:1.0.13'
+
+    provided libraries.servletApi
+    compile libraries.testSuite
+}

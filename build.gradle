@@ -1,0 +1,95 @@
+allprojects {
+    apply plugin: 'maven'
+
+    group = 'com.alibaba.citrus'
+    version = '3.2.4'
+}
+
+apply from: "librariesPlugin.gradle"
+
+libraries {
+
+    slf4j {
+        item 'org.slf4j:slf4j-api:1.7.5'
+        item 'org.slf4j:jcl-over-slf4j:1.7.5'
+    }
+
+    servletApi {
+        if (project.hasProperty('servlet2')) {
+            item 'javax.servlet:servlet-api:2.5'
+        } else if (project.hasProperty('servlet30')) {
+            item 'javax.servlet:javax.servlet-api:3.0.1'
+        } else /* servlet31 by default */ {
+            item 'javax.servlet:javax.servlet-api:3.1.0'
+        }
+    }
+
+    testSuite {
+        item 'junit:junit:4.10', {
+            exclude(module: 'hamcrest-core')
+        }
+        item 'org.hamcrest:hamcrest-library:1.1'
+        item 'org.httpunit:httpunit:1.7.2', {
+            exclude(group: 'rhino')
+            exclude(module: 'junit')
+            exclude(module: 'jtidy')
+            exclude(module: 'xerces')
+            exclude(module: 'xercesImpl')
+            exclude(module: 'xmlParserAPIs')
+            exclude(module: 'servlet-api')
+            exclude(module: 'nekohtml')
+        }
+        item 'nekohtml:nekohtml:1.9.6.2', {
+            exclude(module: 'xercesImpl')
+        }
+        item 'rhino:js:1.7R2'
+        item 'org.easymock:easymockclassextension:3.2'
+        item 'xerces:xercesImpl:2.11.0'
+        item 'xalan:xalan:2.7.1', {
+            exclude(module: 'xml-apis')
+        }
+    }
+}
+
+subprojects {
+    sourceCompatibility = 1.6
+    targetCompatibility = 1.6
+
+    [compileJava, compileTestJava, javadoc]*.options.collect { options ->
+        options.encoding = 'UTF-8'
+    }
+
+    [compileJava, compileTestJava]*.options.collect { options ->
+        options.compilerArgs.add '-Xlint:-options'
+    }
+
+    task packageSources(type: Jar) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+
+    }
+
+    artifacts.archives packageSources
+
+    repositories {
+        mavenCentral()
+    }
+
+    configurations {
+        // Globally exclude commons-logging to prevent from conflict with jcl-over-slf4j
+        all*.exclude module: 'commons-logging'
+    }
+
+    configurations.all {
+        resolutionStrategy {
+            // Command line: gradle -PdebugDeps dI --dependency=...
+            if (!project.hasProperty('debugDeps')) {
+                failOnVersionConflict()
+            }
+        }
+    }
+
+    dependencies {
+        compile libraries.slf4j
+    }
+}

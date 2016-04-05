@@ -1,0 +1,10 @@
+description = 'Citrus Common Utilities'
+
+dependencies {
+    compile 'cglib:cglib-nodep:2.2.2'
+
+    provided libraries.servletApi
+
+    testCompile 'oro:oro:2.0.8'
+    testCompile project(':citrus-test-util')
+}
