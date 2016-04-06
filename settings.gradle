@@ -1,0 +1,46 @@
+include 'common/logconfig'
+include 'common/expr'
+include 'common/util'
+include 'common/generictype'
+include 'common/springext'
+include 'common/hessian'
+
+include 'service/base'
+include 'service/dataresolver'
+include 'service/configuration'
+include 'service/resource'
+include 'service/upload'
+include 'service/requestcontext'
+include 'service/pull'
+include 'service/form'
+include 'service/pipeline'
+include 'service/template'
+include 'service/moduleloader'
+include 'service/mappingrule'
+include 'service/jsp'
+include 'service/velocity'
+include 'service/freemarker'
+include 'service/uribroker'
+include 'service/mail'
+
+include 'webx/framework'
+include 'webx/turbine'
+include 'webx/async'
+include 'webx/dev'
+
+include 'test/util'
+include 'test/webx'
+
+include 'dist/springext'
+include 'dist/webx'
+include 'dist/test'
+
+rootProject.name = 'citrus-parent'
+
+rootProject.children.each {
+    if (it.name.startsWith('dist/')) {
+        it.name = 'citrus-' + it.name.replace('dist/', '') + '-all'
+    } else {
+        it.name = 'citrus-' + it.name.replace('/', '-')
+    }
+}

@@ -1,3 +1,13 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+    }
+}
+
 allprojects {
     apply plugin: 'maven'
 
@@ -22,6 +32,19 @@ libraries {
         } else /* servlet31 by default */ {
             item 'javax.servlet:javax.servlet-api:3.1.0'
         }
+    }
+
+    mailApi {
+        item 'javax.mail:mail:1.4.7', {
+            exclude(module: 'activation')
+        }
+        item 'javax.activation:activation:1.1.1'
+    }
+
+    groovy 'org.codehaus.groovy:groovy-all:2.1.7', {
+        exclude(module: 'ant')
+        exclude(module: 'ant-launcher')
+        exclude(module: 'jline')
     }
 
     testSuite {
@@ -63,14 +86,6 @@ subprojects {
         options.compilerArgs.add '-Xlint:-options'
     }
 
-    task packageSources(type: Jar) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
-
-    }
-
-    artifacts.archives packageSources
-
     repositories {
         mavenCentral()
     }
@@ -89,7 +104,54 @@ subprojects {
         }
     }
 
+    sourceSets {
+        test {
+            // Because of the limitation of Sprint 'classpath:' resource resolver,
+            // we need to put resources file in the classes folder, or Spring will not find them.
+            output.resourcesDir = output.classesDir
+        }
+    }
+}
+
+// Non citrus-*-all projects
+configure(subprojects.findAll { project -> !project.name.endsWith('-all') }) {
+
+    task packageSources(type: Jar) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    artifacts.archives packageSources
+
     dependencies {
         compile libraries.slf4j
     }
+}
+
+import com.github.jengelman.gradle.plugins.shadow.transformers.*
+
+// citrus-*-all projects
+configure(subprojects.findAll { project -> project.name.endsWith('-all') }) {
+    apply plugin: 'com.github.johnrengelman.shadow'
+
+    configurations {
+        runtime.transitive = false
+    }
+
+    shadowJar {
+        classifier = ''
+        transform(PropertiesFileTransformer) {
+            paths = [
+                    'META-INF/.+\\.bean-definition-parsers',
+                    'META-INF/.+\\.bean-definition-decorators',
+                    'META-INF/.+\\.bean-definition-decorators-for-attribute',
+                    'META-INF/spring.configuration-points',
+                    'META-INF/spring.handlers',
+                    'META-INF/spring.schemas',
+                    'META-INF/webx.internal-request-handlers'
+            ]
+        }
+    }
+
+    artifacts.archives shadowJar
 }
