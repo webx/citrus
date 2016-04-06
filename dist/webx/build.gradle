@@ -1,0 +1,47 @@
+description = 'Webx All-in-one Bundle'
+
+dependencies {
+    compile project(':citrus-common-logconfig')
+    compile project(':citrus-common-expr')
+    compile project(':citrus-common-util')
+    compile project(':citrus-common-springext')
+    compile project(':citrus-common-generictype')
+    compile project(':citrus-common-hessian')
+    compile project(':citrus-service-base')
+    compile project(':citrus-service-dataresolver')
+    compile project(':citrus-service-form')
+    compile project(':citrus-service-resource')
+    compile project(':citrus-service-upload')
+    compile project(':citrus-service-requestcontext')
+    compile project(':citrus-service-pipeline')
+    compile project(':citrus-service-configuration')
+    compile project(':citrus-service-mappingrule')
+    compile project(':citrus-service-moduleloader')
+    compile project(':citrus-service-pull')
+    compile project(':citrus-service-template')
+    compile project(':citrus-service-jsp')
+    compile project(':citrus-service-velocity')
+    compile project(':citrus-service-freemarker')
+    compile project(':citrus-service-uribroker')
+    compile project(':citrus-service-mail')
+    compile project(':citrus-webx-framework')
+    compile project(':citrus-webx-turbine')
+    compile project(':citrus-webx-async')
+    compile project(':citrus-webx-dev')
+
+//    compile 'org.springframework:spring-core:3.2.7.RELEASE'
+//    compile 'org.springframework:spring-beans:3.2.7.RELEASE'
+//    compile 'org.springframework:spring-aop:3.2.7.RELEASE'
+//    compile 'org.springframework:spring-context:3.2.7.RELEASE'
+//    compile 'org.springframework:spring-web:3.2.7.RELEASE'
+//    compile 'org.springframework:spring-context-support:3.2.7.RELEASE'
+//    compile 'org.springframework:spring-tx:3.2.7.RELEASE'
+//    compile 'org.springframework:spring-jdbc:3.2.7.RELEASE'
+//    compile 'org.springframework:spring-orm:3.2.7.RELEASE'
+//    compile 'org.springframework:spring-webmvc:3.2.7.RELEASE'
+
+    provided libraries.servletApi
+    provided libraries.mailApi
+
+    testCompile project(':citrus-test-util')
+}

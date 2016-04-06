@@ -1,0 +1,26 @@
+description = 'Test Utils for Webx'
+
+dependencies {
+    compile project(':citrus-webx-all')
+    compile project(':citrus-test-webx')
+    compile project(':citrus-test-util')
+
+//    compile 'junit:junit:4.10'
+//    compile 'org.hamcrest:hamcrest-library:1.1'
+//    compile('org.httpunit:httpunit:1.7.2') {
+//        exclude(module: 'jtidy')
+//        exclude(module: 'xmlParserAPIs')
+//        exclude(module: 'servlet-api')
+//    }
+//    compile 'rhino:js:1.7R2'
+//    compile 'nekohtml:nekohtml:1.9.6.2'
+//    compile 'xerces:xercesImpl:2.11.0'
+//    compile('xalan:xalan:2.7.1') {
+//        exclude(module: 'xml-apis')
+//    }
+//    compile 'org.easymock:easymockclassextension:3.2'
+//    compile 'org.springframework:spring-test:3.2.7.RELEASE'
+//    runtime 'ch.qos.logback:logback-classic:1.0.13'
+
+    provided libraries.servletApi
+}
