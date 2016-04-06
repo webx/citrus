@@ -1,0 +1,24 @@
+description = 'Citrus Webx Turbine-style Implementation'
+
+dependencies {
+    compile project(':citrus-webx-framework')
+    compile project(':citrus-service-moduleloader')
+    compile project(':citrus-service-pull')
+    compile project(':citrus-service-form')
+    compile project(':citrus-common-logconfig')
+    compile project(':citrus-service-mappingrule')
+    compile project(':citrus-service-uribroker')
+    compile project(':citrus-service-resource')
+
+    compile 'com.alibaba:fastjson:1.1.36'
+
+    provided 'org.apache.velocity:velocity:1.7'
+
+    provided libraries.servletApi
+
+    runtime libraries.groovy
+
+    testCompile project(':citrus-service-velocity')
+    testCompile project(':citrus-test-util')
+    testCompile project(':citrus-test-webx')
+}

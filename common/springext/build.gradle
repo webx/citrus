@@ -1,0 +1,21 @@
+description = 'Citrus Spring Extensions'
+
+dependencies {
+    compile project(':citrus-common-generictype')
+    compile project(':citrus-common-util')
+    compile project(':citrus-common-logconfig')
+
+    compile 'org.springframework:spring-core:3.2.7.RELEASE'
+    compile 'org.springframework:spring-beans:3.2.7.RELEASE'
+    compile 'org.springframework:spring-aop:3.2.7.RELEASE'
+    compile 'org.springframework:spring-context:3.2.7.RELEASE'
+    compile 'org.springframework:spring-web:3.2.7.RELEASE'
+
+    compile('dom4j:dom4j:1.6.1') {
+        exclude(module: 'xml-apis')
+    }
+
+    provided libraries.servletApi
+
+    testCompile project(':citrus-test-util')
+}

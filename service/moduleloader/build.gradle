@@ -1,0 +1,14 @@
+description = 'Citrus Module Loading Service'
+
+dependencies {
+    compile project(':citrus-service-base')
+    compile project(':citrus-service-requestcontext')
+    compile project(':citrus-service-dataresolver')
+    compile project(':citrus-service-configuration')
+
+    provided libraries.servletApi
+
+    runtime libraries.groovy
+
+    testCompile project(':citrus-test-util')
+}

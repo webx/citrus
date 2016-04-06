@@ -1,0 +1,9 @@
+description = 'Citrus Generic Type Analyzer'
+
+dependencies {
+    compile project(':citrus-common-util')
+    testCompile project(':citrus-test-util')
+}
+
+// Disable test since development is still in progress
+test.enabled = false

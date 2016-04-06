@@ -1,0 +1,9 @@
+description = 'Servlet 3.0 Async Support'
+
+dependencies {
+    compile project(':citrus-webx-turbine')
+
+    provided libraries.servletApi
+
+    testCompile project(':citrus-test-webx')
+}

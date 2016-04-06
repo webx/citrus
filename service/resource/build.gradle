@@ -1,0 +1,10 @@
+description = 'Citrus Resource Loading Service'
+
+dependencies {
+    compile project(':citrus-common-util')
+    compile project(':citrus-service-base')
+
+    provided libraries.servletApi
+
+    testCompile project(':citrus-test-util')
+}

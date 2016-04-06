@@ -1,0 +1,13 @@
+description = 'Citrus Velocity Template Engine'
+
+dependencies {
+    compile project(':citrus-service-base')
+    compile project(':citrus-service-template')
+    compile project(':citrus-service-resource')
+    compile project(':citrus-service-configuration')
+
+    provided 'org.apache.velocity:velocity:1.7'
+
+    testCompile project(':citrus-test-util')
+    testCompile 'oro:oro:2.0.8'
+}

@@ -1,0 +1,8 @@
+description = 'Citrus Pipeline Service'
+
+dependencies {
+    compile project(':citrus-service-base')
+    compile project(':citrus-common-expr')
+
+    testCompile project(':citrus-test-util')
+}

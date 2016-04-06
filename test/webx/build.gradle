@@ -1,0 +1,10 @@
+description = 'Citrus Testing Utilities for Webx'
+
+dependencies {
+    compile project(':citrus-webx-framework')
+    compile project(':citrus-test-util')
+
+    provided libraries.servletApi
+
+    compile 'org.springframework:spring-test:3.2.7.RELEASE'
+}

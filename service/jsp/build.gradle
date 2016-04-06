@@ -1,0 +1,15 @@
+description = 'Citrus JSP Template Engine'
+
+dependencies {
+    compile project(':citrus-service-base')
+    compile project(':citrus-service-resource')
+    compile project(':citrus-service-requestcontext')
+    compile project(':citrus-service-template')
+
+    provided libraries.servletApi
+
+    testCompile project(':citrus-test-util')
+    testCompile('org.apache.tomcat:jasper:6.0.37') {
+        exclude(module: 'servlet-api')
+    }
+}

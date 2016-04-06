@@ -1,0 +1,8 @@
+description = 'Base-classes for Service implementations'
+
+dependencies {
+    compile project(':citrus-common-util')
+    compile project(':citrus-common-springext')
+
+    testCompile project(':citrus-test-util')
+}

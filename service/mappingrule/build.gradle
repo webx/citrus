@@ -1,0 +1,10 @@
+description = 'citrus mapping service'
+
+dependencies {
+    compile project(':citrus-service-base')
+    compile project(':citrus-service-resource')
+    compile project(':citrus-service-template')
+    compile project(':citrus-service-moduleloader')
+
+    testCompile project(':citrus-test-util')
+}

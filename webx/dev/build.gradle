@@ -1,0 +1,16 @@
+description = 'Development mode tools for Webx'
+
+dependencies {
+    compile project(':citrus-webx-turbine')
+    compile project(':citrus-service-jsp')
+    compile project(':citrus-service-velocity')
+    compile project(':citrus-service-freemarker')
+    compile project(':citrus-service-uribroker')
+    compile project(':citrus-service-mail')
+    compile project(':citrus-service-mappingrule')
+    compile project(':citrus-service-moduleloader')
+
+    provided libraries.servletApi
+
+    testCompile project(':citrus-test-util')
+}

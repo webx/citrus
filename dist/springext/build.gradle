@@ -1,0 +1,13 @@
+description = 'SpringExt All-in-one Bundle'
+
+dependencies {
+    compile project(':citrus-common-logconfig')
+    compile project(':citrus-common-util')
+    compile project(':citrus-common-springext')
+    compile project(':citrus-common-generictype')
+
+    provided libraries.servletApi
+    provided libraries.mailApi
+
+    testCompile project(':citrus-test-util')
+}

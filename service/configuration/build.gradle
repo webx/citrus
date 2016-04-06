@@ -1,0 +1,7 @@
+description = 'Citrus Properties-based Configuration'
+
+dependencies {
+    compile project(':citrus-service-base')
+
+    testCompile project(':citrus-test-util')
+}

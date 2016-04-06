@@ -1,0 +1,18 @@
+description = 'Citrus Form Service'
+
+dependencies {
+    compile project(':citrus-common-expr')
+    compile project(':citrus-common-util')
+    compile project(':citrus-service-base')
+    compile project(':citrus-service-configuration')
+    compile project(':citrus-service-resource')
+    compile project(':citrus-service-requestcontext')
+    compile project(':citrus-service-pull')
+
+    compile 'ecs:ecs:1.4.2'
+    compile 'commons-codec:commons-codec:1.8'
+
+    provided libraries.servletApi
+
+    testCompile project(':citrus-test-util')
+}

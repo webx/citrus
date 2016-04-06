@@ -1,0 +1,12 @@
+description = 'Citrus Freemarker Template Engine'
+
+dependencies {
+    compile project(':citrus-service-base')
+    compile project(':citrus-service-template')
+    compile project(':citrus-service-resource')
+    compile project(':citrus-service-configuration')
+
+    provided 'org.freemarker:freemarker:2.3.20'
+    
+    testCompile project(':citrus-test-util')
+}

@@ -1,0 +1,14 @@
+description = 'Citrus Upload Service'
+
+dependencies {
+    compile project(':citrus-service-base')
+
+    compile 'commons-fileupload:commons-fileupload:1.3.1', {
+        exclude(module: 'commons-io')
+    }
+    compile 'commons-io:commons-io:2.4'
+
+    provided libraries.servletApi
+
+    testCompile project(':citrus-test-util')
+}

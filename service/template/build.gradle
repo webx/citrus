@@ -1,0 +1,8 @@
+description = 'Citrus Template Service'
+
+dependencies {
+    compile project(':citrus-service-base')
+    compile project(':citrus-service-configuration')
+
+    testCompile project(':citrus-test-util')
+}
