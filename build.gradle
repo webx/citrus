@@ -47,6 +47,21 @@ libraries {
         exclude(module: 'jline')
     }
 
+    spring {
+        item 'org.springframework:spring-core:3.2.7.RELEASE'
+        item 'org.springframework:spring-beans:3.2.7.RELEASE'
+        item 'org.springframework:spring-aop:3.2.7.RELEASE'
+        item 'org.springframework:spring-context:3.2.7.RELEASE'
+        item 'org.springframework:spring-web:3.2.7.RELEASE'
+        item 'org.springframework:spring-context-support:3.2.7.RELEASE'
+        item 'org.springframework:spring-tx:3.2.7.RELEASE'
+        item 'org.springframework:spring-jdbc:3.2.7.RELEASE'
+        item 'org.springframework:spring-orm:3.2.7.RELEASE'
+        item 'org.springframework:spring-webmvc:3.2.7.RELEASE'
+    }
+
+    springTest 'org.springframework:spring-test:3.2.7.RELEASE'
+
     testSuite {
         item 'junit:junit:4.10', {
             exclude(module: 'hamcrest-core')
@@ -133,6 +148,7 @@ import com.github.jengelman.gradle.plugins.shadow.transformers.*
 // citrus-*-all projects
 configure(subprojects.findAll { project -> project.name.endsWith('-all') }) {
     apply plugin: 'com.github.johnrengelman.shadow'
+    apply plugin: 'maven-publish'
 
     configurations {
         runtime.transitive = false
@@ -152,6 +168,8 @@ configure(subprojects.findAll { project -> project.name.endsWith('-all') }) {
             ]
         }
     }
+
+    jar.enabled = false
 
     artifacts.archives shadowJar
 }

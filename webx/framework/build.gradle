@@ -6,8 +6,6 @@ dependencies {
     compile project(':citrus-service-pipeline')
     compile project(':citrus-service-configuration')
 
-    compile 'org.springframework:spring-webmvc:3.2.7.RELEASE'
-
     provided libraries.servletApi
 
     testCompile project(':citrus-test-util')
