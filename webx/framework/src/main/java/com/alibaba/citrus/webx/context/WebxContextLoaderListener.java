@@ -20,6 +20,8 @@ package com.alibaba.citrus.webx.context;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.ContextLoaderListener;
 
+import javax.servlet.ServletContextEvent;
+
 /**
  * 用来启动root context的listener。
  * <p>
@@ -35,7 +37,12 @@ import org.springframework.web.context.ContextLoaderListener;
  * @author Michael Zhou
  */
 public class WebxContextLoaderListener extends ContextLoaderListener {
+
     @Override
+    public void contextInitialized(ServletContextEvent event) {
+        createContextLoader().initWebApplicationContext(event.getServletContext());
+    }
+
     protected final ContextLoader createContextLoader() {
         return new WebxComponentsLoader() {
 

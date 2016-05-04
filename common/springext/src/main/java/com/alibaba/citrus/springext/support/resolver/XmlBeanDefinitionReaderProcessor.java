@@ -17,27 +17,20 @@
 
 package com.alibaba.citrus.springext.support.resolver;
 
-import static com.alibaba.citrus.springext.util.ClassCompatibilityAssert.*;
-import static com.alibaba.citrus.util.Assert.*;
-
 import com.alibaba.citrus.springext.support.SpringExtSchemaSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.beans.factory.xml.BeanDefinitionParserDelegate;
-import org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader;
-import org.springframework.beans.factory.xml.DefaultNamespaceHandlerResolver;
-import org.springframework.beans.factory.xml.NamespaceHandlerResolver;
-import org.springframework.beans.factory.xml.ResourceEntityResolver;
-import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.beans.factory.xml.XmlReaderContext;
-import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.xml.*;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 import org.w3c.dom.Element;
 import org.xml.sax.EntityResolver;
+
+import static com.alibaba.citrus.springext.util.ClassCompatibilityAssert.assertSpring3_1_x;
+import static com.alibaba.citrus.util.Assert.assertNotNull;
 
 /**
  * 用来处理<code>XmlBeanDefinitionReader</code>，添加configuration point的功能。
@@ -103,29 +96,19 @@ public class XmlBeanDefinitionReaderProcessor {
      * 时和原来不同。本类继承了spring的原有类，但对缺失的默认值提供明确的值。
      */
     public static class DocumentReaderSkippingValidation extends DefaultBeanDefinitionDocumentReader {
-        private Environment environment;
 
-        public Environment getEnvironment() {
-            return environment;
-        }
+        protected BeanDefinitionParserDelegate createDelegate(
+                XmlReaderContext readerContext, Element root, BeanDefinitionParserDelegate parentDelegate) {
 
-        @Override
-        public void setEnvironment(Environment environment) {
-            this.environment = environment;
-            super.setEnvironment(environment);
-        }
-
-        @Override
-        protected BeanDefinitionParserDelegate createHelper(XmlReaderContext readerContext, Element root, BeanDefinitionParserDelegate parentDelegate) {
-            BeanDefinitionParserDelegate delegate = new BeanDefinitionParserDelegateSkippingValidation(readerContext, getEnvironment());
+            BeanDefinitionParserDelegate delegate = new BeanDefinitionParserDelegateSkippingValidation(readerContext);
             delegate.initDefaults(root, parentDelegate);
             return delegate;
         }
     }
 
     private static class BeanDefinitionParserDelegateSkippingValidation extends BeanDefinitionParserDelegate {
-        public BeanDefinitionParserDelegateSkippingValidation(XmlReaderContext readerContext, Environment environment) {
-            super(readerContext, environment);
+        public BeanDefinitionParserDelegateSkippingValidation(XmlReaderContext readerContext) {
+            super(readerContext);
         }
 
         @Override

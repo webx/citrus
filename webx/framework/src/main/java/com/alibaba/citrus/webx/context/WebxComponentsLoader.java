@@ -17,24 +17,6 @@
 
 package com.alibaba.citrus.webx.context;
 
-import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
-import static com.alibaba.citrus.util.Assert.*;
-import static com.alibaba.citrus.util.BasicConstant.*;
-import static com.alibaba.citrus.util.CollectionUtil.*;
-import static com.alibaba.citrus.util.FileUtil.*;
-import static com.alibaba.citrus.util.StringUtil.*;
-import static com.alibaba.citrus.util.regex.PathNameWildcardCompiler.*;
-import static com.alibaba.citrus.webx.WebxConstant.*;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.servlet.ServletContext;
-
 import com.alibaba.citrus.springext.util.SpringExtUtil;
 import com.alibaba.citrus.util.ToStringBuilder;
 import com.alibaba.citrus.util.ToStringBuilder.MapBuilder;
@@ -71,6 +53,24 @@ import org.springframework.web.context.ConfigurableWebApplicationContext;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.ServletContextResourcePatternResolver;
+
+import javax.servlet.ServletContext;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static com.alibaba.citrus.springext.util.SpringExtUtil.autowireAndInitialize;
+import static com.alibaba.citrus.util.Assert.*;
+import static com.alibaba.citrus.util.BasicConstant.EMPTY_STRING;
+import static com.alibaba.citrus.util.CollectionUtil.*;
+import static com.alibaba.citrus.util.FileUtil.normalizeAbsolutePath;
+import static com.alibaba.citrus.util.StringUtil.trimToNull;
+import static com.alibaba.citrus.util.regex.PathNameWildcardCompiler.compilePathName;
+import static com.alibaba.citrus.webx.WebxConstant.COMPONENT_CONTEXT_PREFIX;
 
 /**
  * 用来装载webx components的装载器。
@@ -127,7 +127,7 @@ public class WebxComponentsLoader extends ContextLoader {
 
         if (contextClassName != null) {
             try {
-                return ClassUtils.forName(contextClassName);
+                return ClassUtils.forName(contextClassName, ClassUtils.getDefaultClassLoader());
             } catch (ClassNotFoundException ex) {
                 throw new ApplicationContextException("Failed to load custom context class [" + contextClassName + "]",
                                                       ex);
@@ -159,8 +159,6 @@ public class WebxComponentsLoader extends ContextLoader {
 
     /**
      * 在创建beanFactory之初被调用。
-     *
-     * @param webxComponentsContext
      */
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
         // 由于初始化components依赖于webxConfiguration，而webxConfiguration可能需要由PropertyPlaceholderConfigurer来处理，
