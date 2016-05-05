@@ -17,19 +17,6 @@
 
 package com.alibaba.citrus.turbine;
 
-import static com.alibaba.citrus.service.requestcontext.util.RequestContextUtil.*;
-import static com.alibaba.citrus.test.TestEnvStatic.*;
-import static com.alibaba.citrus.util.StringUtil.*;
-import static org.easymock.EasyMock.*;
-import static org.junit.Assert.*;
-
-import java.io.File;
-import java.net.URI;
-import javax.servlet.ServletConfig;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.service.requestcontext.RequestContextChainingService;
 import com.alibaba.citrus.service.requestcontext.rundata.RunData;
@@ -46,6 +33,20 @@ import com.meterware.servletunit.ServletUnitClient;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.web.context.support.GenericWebApplicationContext;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.net.URI;
+
+import static com.alibaba.citrus.service.requestcontext.util.RequestContextUtil.findRequestContext;
+import static com.alibaba.citrus.test.TestEnvStatic.srcdir;
+import static com.alibaba.citrus.util.StringUtil.trimToEmpty;
+import static org.easymock.EasyMock.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractWebTests {
     protected static ApplicationContext factory;
@@ -162,6 +163,7 @@ public abstract class AbstractWebTests {
         WebxComponent component = createMock(WebxComponent.class);
         GenericWebApplicationContext webAppContext = new GenericWebApplicationContext();
         webAppContext.setParent(factory);
+        webAppContext.refresh();
         expect(component.getApplicationContext()).andReturn(webAppContext).anyTimes();
         expect(component.getName()).andReturn("app1").anyTimes();
         replay(component);

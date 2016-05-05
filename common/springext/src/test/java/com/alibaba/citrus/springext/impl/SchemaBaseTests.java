@@ -17,14 +17,6 @@
 
 package com.alibaba.citrus.springext.impl;
 
-import static com.alibaba.citrus.test.TestUtil.*;
-import static org.junit.Assert.*;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Collection;
-import java.util.LinkedList;
-
 import com.alibaba.citrus.springext.ConfigurationPointException;
 import com.alibaba.citrus.springext.Schema.Transformer;
 import com.alibaba.citrus.springext.support.SchemaUtil;
@@ -36,6 +28,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamSource;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collection;
+import java.util.LinkedList;
+
+import static com.alibaba.citrus.test.TestUtil.exception;
+import static com.alibaba.citrus.test.TestUtil.getFieldValue;
+import static org.junit.Assert.*;
 
 public class SchemaBaseTests {
     private SchemaBaseImpl schema;
@@ -462,7 +463,7 @@ public class SchemaBaseTests {
 
     @Test
     public void inputStreamSource_toString() {
-        assertEquals("resource loaded from byte array", schema.toString());
+        assertEquals("Byte array resource [resource loaded from byte array]", schema.toString());
     }
 
     @Test

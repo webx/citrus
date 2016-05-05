@@ -17,41 +17,30 @@
 
 package com.alibaba.citrus.webx.servlet;
 
-import static com.alibaba.citrus.util.Assert.*;
-import static com.alibaba.citrus.util.CollectionUtil.*;
+import com.alibaba.citrus.util.internal.Servlet3Util.Servlet3OutputStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.*;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceEditor;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.web.context.support.ServletContextResourceLoader;
+import org.springframework.web.servlet.HttpServletBean;
 
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Enumeration;
 import java.util.Set;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
 
-import com.alibaba.citrus.util.internal.Servlet3Util.Servlet3OutputStream;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.MutablePropertyValues;
-import org.springframework.beans.PropertyAccessorFactory;
-import org.springframework.beans.PropertyValue;
-import org.springframework.beans.PropertyValues;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceEditor;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.web.context.support.ServletContextResourceLoader;
-import org.springframework.web.servlet.HttpServletBean;
+import static com.alibaba.citrus.util.Assert.assertTrue;
+import static com.alibaba.citrus.util.CollectionUtil.createHashSet;
+import static com.alibaba.citrus.util.CollectionUtil.createTreeSet;
 
 /**
  * 支持注入参数的filter基类。
@@ -83,7 +72,7 @@ public abstract class FilterBean implements Filter {
             PropertyValues pvs = new FilterConfigPropertyValues(getFilterConfig(), requiredProperties);
             BeanWrapper bw = PropertyAccessorFactory.forBeanPropertyAccess(this);
             ResourceLoader resourceLoader = new ServletContextResourceLoader(getServletContext());
-            bw.registerCustomEditor(Resource.class, new ResourceEditor(resourceLoader));
+            bw.registerCustomEditor(Resource.class, new ResourceEditor(resourceLoader, null));
             initBeanWrapper(bw);
             bw.setPropertyValues(pvs, true);
         } catch (Exception e) {
