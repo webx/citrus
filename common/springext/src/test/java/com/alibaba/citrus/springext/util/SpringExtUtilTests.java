@@ -17,22 +17,6 @@
 
 package com.alibaba.citrus.springext.util;
 
-import static com.alibaba.citrus.test.TestEnvStatic.*;
-import static com.alibaba.citrus.test.TestUtil.*;
-import static com.alibaba.citrus.util.CollectionUtil.*;
-import static org.easymock.EasyMock.*;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
-import static org.springframework.beans.factory.config.BeanDefinition.*;
-
-import java.io.File;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.impl.ConfigurationPointImpl;
@@ -44,11 +28,7 @@ import org.hamcrest.Matcher;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanNameAware;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.beans.factory.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -60,6 +40,23 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.io.FileSystemResource;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import static com.alibaba.citrus.test.TestEnvStatic.srcdir;
+import static com.alibaba.citrus.test.TestUtil.exception;
+import static com.alibaba.citrus.util.CollectionUtil.createArrayList;
+import static org.easymock.EasyMock.createMock;
+import static org.hamcrest.Matchers.anyOf;
+import static org.junit.Assert.*;
+import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
+import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_SINGLETON;
 
 public class SpringExtUtilTests {
     private static BeanFactory             factory;
@@ -343,7 +340,10 @@ public class SpringExtUtilTests {
         BeanDefinitionRegistry context = null;
 
         if ("appcontext".equals(contextType)) {
-            context = new GenericApplicationContext();
+            context = new GenericApplicationContext() {
+                protected void assertBeanFactoryActive() {
+                }
+            };
         } else {
             context = new DefaultListableBeanFactory();
         }

@@ -17,19 +17,20 @@
 
 package com.alibaba.citrus.springext.support.parser;
 
-import static com.alibaba.citrus.util.Assert.*;
-
+import com.alibaba.citrus.springext.factory.config.BeanReferenceFactoryBean;
 import com.alibaba.citrus.springext.util.SpringExtUtil;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.config.BeanReference;
-import org.springframework.beans.factory.config.BeanReferenceFactoryBean;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
+
+import static com.alibaba.citrus.util.Assert.assertTrue;
+import static com.alibaba.citrus.util.Assert.unreachableCode;
 
 /**
  * 用来解析default element的parser。

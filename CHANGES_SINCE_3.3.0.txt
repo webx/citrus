@@ -1,0 +1,10 @@
+-- Changes in 3.3.0
+
+* 升级到spring 4.2.4.RELEASE
+
+* 修改代码，使之和spring 4.2.x兼容
+  + com.alibaba.citrus.webx.context.WebxContextLoaderListener
+  + com.alibaba.citrus.springext.support.parser.DefaultElementDefinitionParser
+  + com.alibaba.citrus.webx.context.WebxComponentsLoader
+  + com.alibaba.citrus.webx.servlet.FilterBean
+
