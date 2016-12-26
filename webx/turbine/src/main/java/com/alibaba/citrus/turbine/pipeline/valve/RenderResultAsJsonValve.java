@@ -100,7 +100,10 @@ public class RenderResultAsJsonValve extends AbstractInputOutputValve {
             }
 
             PrintWriter out = response.getWriter();
-            String jsonResult = JSON.toJSONString(resultObject);
+            String jsonResult = JSON
+						.toJSONString(
+								resultObject,
+								new SerializerFeature[] { SerializerFeature.WriteTabAsSpecial });
 
             if (outputAsJson) {
                 out.print(jsonResult);
