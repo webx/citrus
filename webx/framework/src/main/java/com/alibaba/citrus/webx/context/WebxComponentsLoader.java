@@ -127,7 +127,7 @@ public class WebxComponentsLoader extends ContextLoader {
 
         if (contextClassName != null) {
             try {
-                return ClassUtils.forName(contextClassName);
+                return ClassUtils.forName(contextClassName,ClassUtils.getDefaultClassLoader());
             } catch (ClassNotFoundException ex) {
                 throw new ApplicationContextException("Failed to load custom context class [" + contextClassName + "]",
                                                       ex);

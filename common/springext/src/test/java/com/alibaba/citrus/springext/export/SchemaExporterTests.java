@@ -81,7 +81,7 @@ public class SchemaExporterTests {
 
     @Test
     public void test9_getEntry() {
-        SchemaExporter.Entry entry;
+        SchemaExporter.IEntry entry;
 
         entry = exporter.getEntry("my/plugins/");
         assertEquals("my/plugins/", entry.getPath());
@@ -100,7 +100,7 @@ public class SchemaExporterTests {
 
     @Test
     public void test9_containsSchemaWithTargetNamespace() {
-        SchemaExporter.Entry entry;
+        SchemaExporter.IEntry entry;
 
         entry = exporter.getRootEntry();
         assertTrue(entry.containsSchemaWithTargetNamespace());

@@ -88,7 +88,7 @@ public class SchemaExporterCLI extends SchemaExporter {
         saveTo(dir, getRootEntry(), uriPrefix);
     }
 
-    private void saveTo(File file, Entry entry, String uriPrefix) throws IOException {
+    private void saveTo(File file, IEntry entry, String uriPrefix) throws IOException {
         assertNotNull(file, "file");
 
         if (entry.isDirectory()) {
@@ -101,7 +101,7 @@ public class SchemaExporterCLI extends SchemaExporter {
                 throw new IOException("Exporting target is not a writable directory: " + file.getAbsolutePath());
             }
 
-            for (Entry subEntry : entry.getSubEntries()) {
+            for (IEntry subEntry : entry.getSubEntries()) {
                 saveTo(new File(file, subEntry.getName()), subEntry, uriPrefix);
             }
         } else {

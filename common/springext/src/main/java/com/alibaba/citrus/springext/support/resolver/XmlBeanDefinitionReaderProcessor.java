@@ -109,13 +109,11 @@ public class XmlBeanDefinitionReaderProcessor {
             return environment;
         }
 
-        @Override
         public void setEnvironment(Environment environment) {
             this.environment = environment;
-            super.setEnvironment(environment);
+            //super.setEnvironment(environment);
         }
 
-        @Override
         protected BeanDefinitionParserDelegate createHelper(XmlReaderContext readerContext, Element root, BeanDefinitionParserDelegate parentDelegate) {
             BeanDefinitionParserDelegate delegate = new BeanDefinitionParserDelegateSkippingValidation(readerContext, getEnvironment());
             delegate.initDefaults(root, parentDelegate);
@@ -125,7 +123,7 @@ public class XmlBeanDefinitionReaderProcessor {
 
     private static class BeanDefinitionParserDelegateSkippingValidation extends BeanDefinitionParserDelegate {
         public BeanDefinitionParserDelegateSkippingValidation(XmlReaderContext readerContext, Environment environment) {
-            super(readerContext, environment);
+            super(readerContext);
         }
 
         @Override
@@ -134,7 +132,7 @@ public class XmlBeanDefinitionReaderProcessor {
                                                                     AbstractBeanDefinition bd) {
             setDefaultValueForAttribute(ele, LAZY_INIT_ATTRIBUTE, DEFAULT_VALUE);
             setDefaultValueForAttribute(ele, AUTOWIRE_ATTRIBUTE, DEFAULT_VALUE);
-            setDefaultValueForAttribute(ele, DEPENDENCY_CHECK_ATTRIBUTE, DEFAULT_VALUE);
+           // setDefaultValueForAttribute(ele, DEPENDENCY_CHECK_ATTRIBUTE, DEFAULT_VALUE);
             setDefaultValueForAttribute(ele, AUTOWIRE_CANDIDATE_ATTRIBUTE, DEFAULT_VALUE);
 
             return super.parseBeanDefinitionAttributes(ele, beanName, containingBean, bd);

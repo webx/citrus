@@ -23,7 +23,7 @@ import com.alibaba.citrus.springext.util.SpringExtUtil;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.config.BeanReference;
-import org.springframework.beans.factory.config.BeanReferenceFactoryBean;
+//import org.springframework.beans.factory.config.BeanReferenceFactoryBean;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -43,7 +43,7 @@ public class DefaultElementDefinitionParser extends AbstractBeanDefinitionParser
         AbstractBeanDefinition abd;
 
         if (beanOrRef instanceof BeanReference) {
-            BeanDefinitionBuilder refBean = BeanDefinitionBuilder.genericBeanDefinition(BeanReferenceFactoryBean.class);
+            BeanDefinitionBuilder refBean = BeanDefinitionBuilder.genericBeanDefinition(BeanReference.class);
 
             refBean.addPropertyValue("targetBeanName", ((RuntimeBeanReference) beanOrRef).getBeanName());
             abd = refBean.getBeanDefinition();

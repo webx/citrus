@@ -139,7 +139,8 @@ public class BeanDefinitionReverseEngine {
             beanElement.addAttribute("autowire-candidate", "false");
         }
 
-        String dependencyCheck = null;
+        //5.0 已经没有dependencycheck 这个方法
+        /*String dependencyCheck = null;
 
         switch (bd.getDependencyCheck()) {
             case DEPENDENCY_CHECK_ALL:
@@ -157,7 +158,7 @@ public class BeanDefinitionReverseEngine {
 
         if (dependencyCheck != null) {
             beanElement.addAttribute("dependency-check", dependencyCheck);
-        }
+        }*/
 
         if (!isEmptyArray(bd.getDependsOn())) {
             beanElement.addAttribute("depends-on", new RefValue(bd.getDependsOn()));

@@ -58,7 +58,7 @@ public class SchemaExporter {
         this.schemas = SchemaSet.getInstance(schemasList);
 
         for (Schema schema : schemas.getNamedMappings().values()) {
-            this.entries.put(schema.getName(), new Entry(schema.getName(), schema));
+            this.entries.put(schema.getName(), new IEntry(schema.getName(), schema));
         }
     }
 
@@ -66,37 +66,37 @@ public class SchemaExporter {
         return entries;
     }
 
-    public Entry getRootEntry() {
+    public IEntry getRootEntry() {
         return getEntries().getRoot();
     }
 
-    public Entry getEntry(String path) {
+    public IEntry getEntry(String path) {
         return getEntries().get(path);
     }
 
-    public void writeTo(Writer out, Entry entry, String charset) throws IOException {
+    public void writeTo(Writer out, IEntry entry, String charset) throws IOException {
         writeTo(out, entry, charset, (String) null);
     }
 
-    public void writeTo(Writer out, Entry entry, String charset, String uriPrefix) throws IOException {
+    public void writeTo(Writer out, IEntry entry, String charset, String uriPrefix) throws IOException {
         writeTo(out, entry, charset, uriPrefix == null ? null : getAddPrefixTransformer(schemas, uriPrefix));
     }
 
-    private void writeTo(Writer out, Entry entry, String charset, Transformer transformer) throws IOException {
+    private void writeTo(Writer out, IEntry entry, String charset, Transformer transformer) throws IOException {
         writeText(entry.getSchema().getText(charset, transformer), out, true);
     }
 
     /** 代表一个schema文件结点。 */
-    public static final class Entry {
+    public static final class IEntry {
         private final String             path;
         private final String             name;
         private final boolean            directory;
         private final boolean            root;
         private final Schema             schema;
-        private final Map<String, Entry> subEntries;
+        private final Map<String, IEntry> subEntries;
 
         /** 创建特殊的root entry。 */
-        private Entry() {
+        private IEntry() {
             this.path = "";
             this.name = "";
             this.directory = true;
@@ -105,11 +105,11 @@ public class SchemaExporter {
             this.subEntries = createTreeMap();
         }
 
-        public Entry(String path) {
+        public IEntry(String path) {
             this(path, null);
         }
 
-        public Entry(String path, Schema schema) {
+        public IEntry(String path, Schema schema) {
             this.path = assertNotNull(trimToNull(path), "path");
             this.directory = path.endsWith("/");
 
@@ -151,7 +151,7 @@ public class SchemaExporter {
             return root;
         }
 
-        public Collection<Entry> getSubEntries() {
+        public Collection<IEntry> getSubEntries() {
             return subEntries.values();
         }
 
@@ -163,7 +163,7 @@ public class SchemaExporter {
             boolean hasNs = false;
 
             if (isDirectory()) {
-                for (Entry subEntry : getSubEntries()) {
+                for (IEntry subEntry : getSubEntries()) {
                     if (subEntry.containsSchemaWithTargetNamespace()) {
                         hasNs = true;
                         break;
@@ -204,8 +204,8 @@ public class SchemaExporter {
         private void tree(Appendable buf, String prefix, String indent) throws IOException {
             buf.append(prefix).append(getName()).append("\n");
 
-            for (Iterator<Entry> i = subEntries.values().iterator(); i.hasNext(); ) {
-                Entry subEntry = i.next();
+            for (Iterator<IEntry> i = subEntries.values().iterator(); i.hasNext(); ) {
+                IEntry subEntry = i.next();
                 String subPrefix;
                 String subIndent;
 
@@ -245,19 +245,19 @@ public class SchemaExporter {
         }
     }
 
-    private final class Entries extends HashMap<String, Entry> {
+    private final class Entries extends HashMap<String, IEntry> {
         private static final long serialVersionUID = -4000525580274040823L;
 
         public Entries() {
-            super.put("", new Entry());
+            super.put("", new IEntry());
         }
 
-        public Entry getRoot() {
+        public IEntry getRoot() {
             return get("");
         }
 
         @Override
-        public Entry put(String path, Entry entry) {
+        public IEntry put(String path, IEntry entry) {
             assertTrue(path.equals(entry.getPath()));
 
             if (path.endsWith("/")) {
@@ -265,16 +265,16 @@ public class SchemaExporter {
             }
 
             String parentPath = path.substring(0, path.lastIndexOf("/") + 1);
-            Entry parentEntry = get(parentPath);
+            IEntry parentEntry = get(parentPath);
 
             if (parentEntry == null) {
-                parentEntry = new Entry(parentPath);
+                parentEntry = new IEntry(parentPath);
                 this.put(parentPath, parentEntry); // recursively
             }
 
             parentEntry.subEntries.put(entry.getSortKey(), entry);
 
-            Entry old = super.put(entry.getPath(), entry);
+            IEntry old = super.put(entry.getPath(), entry);
 
             log.trace("Added entry: {}", entry.getPath());
 

@@ -83,7 +83,7 @@ public abstract class FilterBean implements Filter {
             PropertyValues pvs = new FilterConfigPropertyValues(getFilterConfig(), requiredProperties);
             BeanWrapper bw = PropertyAccessorFactory.forBeanPropertyAccess(this);
             ResourceLoader resourceLoader = new ServletContextResourceLoader(getServletContext());
-            bw.registerCustomEditor(Resource.class, new ResourceEditor(resourceLoader));
+            bw.registerCustomEditor(Resource.class, new ResourceEditor(resourceLoader,null));
             initBeanWrapper(bw);
             bw.setPropertyValues(pvs, true);
         } catch (Exception e) {
