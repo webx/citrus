@@ -199,7 +199,7 @@ public class PerformRunnableAsyncValveTests extends AbstractAsyncTests {
     public void invoke_resultIsCallable_withDefaultTimeout() throws Exception {
         class MyCallable implements Callable<Object>, AsyncCallback {
             public long getTimeout() {
-                return -1L; // 使用默认值
+                return -1L; // 使用默认值 
             }
 
             public long getCancelingTimeout() {

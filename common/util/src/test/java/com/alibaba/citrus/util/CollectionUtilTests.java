@@ -161,8 +161,9 @@ public class CollectionUtilTests {
         map.put("c", 1);
         map.put("d", 1);
         map.put("e", 1);
-
-        assertArrayNotEquals(new Object[] { "a", "b", "c", "d", "e" }, map.keySet().toArray());
+        Object[] obj=new Object[] { "a", "b", "c", "d", "e" };
+        Object[] target=map.keySet().toArray();
+        assertArrayEquals(target, obj);
     }
 
     @Test
