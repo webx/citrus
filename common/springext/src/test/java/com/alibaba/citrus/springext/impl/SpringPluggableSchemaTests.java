@@ -104,7 +104,7 @@ public class SpringPluggableSchemaTests {
 
         Schema beansSchema = names.get("www.springframework.org/schema/beans/spring-beans-2.5.xsd");
         resource = assertSourceInfoAndGetResource(beansSchema, SpringPluggableSchemaSourceInfo.class);
-        assertResource("org/springframework/beans/factory/xml/spring-beans-2.5.xsd", resource);
+        assertResource("org/springframework/beans/factory/xml/spring-beans.xsd", resource);
 
         SpringSchemasSourceInfo parent = ((SpringPluggableSchemaSourceInfo) beansSchema).getParent();
         resource = assertSourceInfoAndGetResource(parent, SpringSchemasSourceInfo.class);
@@ -112,7 +112,7 @@ public class SpringPluggableSchemaTests {
         assertTrue(resource.getURL().toExternalForm().endsWith("META-INF/spring.schemas"));
 
         String content = StreamUtil.readText(resource.getInputStream(), "UTF-8", true);
-        assertTrue(content.contains("org/springframework/beans/factory/xml/spring-beans-2.5.xsd"));
+        assertTrue(content.contains("org/springframework/beans/factory/xml/spring-beans.xsd"));
     }
 
     private void assertResource(String resourceName, Resource resource) throws Exception {

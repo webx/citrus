@@ -17,9 +17,9 @@
 
 package com.alibaba.citrus.springext.support.parser;
 
-import static com.alibaba.citrus.util.Assert.*;
+import static com.alibaba.citrus.util.Assert.assertTrue;
+import static com.alibaba.citrus.util.Assert.unreachableCode;
 
-import com.alibaba.citrus.springext.util.SpringExtUtil;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.config.BeanReference;
@@ -30,6 +30,8 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
+
+import com.alibaba.citrus.springext.util.SpringExtUtil;
 
 /**
  * 用来解析default element的parser。
@@ -43,9 +45,11 @@ public class DefaultElementDefinitionParser extends AbstractBeanDefinitionParser
         AbstractBeanDefinition abd;
 
         if (beanOrRef instanceof BeanReference) {
-            BeanDefinitionBuilder refBean = BeanDefinitionBuilder.genericBeanDefinition(BeanReference.class);
-
-            refBean.addPropertyValue("targetBeanName", ((RuntimeBeanReference) beanOrRef).getBeanName());
+        	String beanName=((RuntimeBeanReference) beanOrRef).getBeanName();
+            BeanDefinitionBuilder refBean = BeanDefinitionBuilder.genericBeanDefinition(RuntimeBeanReference.class);
+        	//BeanDefinitionBuilder refBean = BeanDefinitionBuilder.rootBeanDefinition(beanName);
+        	//refBean.addConstructorArgReference(beanName);
+            refBean.addPropertyValue("targetBeanName", beanName);
             abd = refBean.getBeanDefinition();
         } else if (beanOrRef instanceof BeanDefinitionHolder) {
             BeanDefinition bd = ((BeanDefinitionHolder) beanOrRef).getBeanDefinition();

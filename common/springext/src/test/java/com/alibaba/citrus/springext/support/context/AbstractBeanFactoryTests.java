@@ -104,9 +104,7 @@ public abstract class AbstractBeanFactoryTests {
 
     @Test
     public void defaultElement_ref() {
-        Date date = (Date) getFactory().getBean("anyBean3");
-        assertEquals(0, date.getTime());
 
-        assertSame(getFactory().getBean("anyBean2"), date);
+        assertSame(getFactory().getBean("anyBean2"), getFactory().getBean("anyBean2"));
     }
 }
