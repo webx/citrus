@@ -17,8 +17,21 @@
 
 package com.alibaba.citrus.webx.context;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import javax.servlet.ServletContext;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextException;
+import org.springframework.lang.Nullable;
+import org.springframework.web.context.ConfigurableWebApplicationContext;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.ContextLoaderListener;
+import org.springframework.web.context.WebApplicationContext;
 
 /**
  * 用来启动root context的listener。
@@ -34,9 +47,10 @@ import org.springframework.web.context.ContextLoaderListener;
  *
  * @author Michael Zhou
  */
-public class WebxContextLoaderListener extends ContextLoaderListener {
+public class WebxContextLoaderListener extends WebxComponentsLoader {
 	
-    protected final ContextLoader createContextLoader() {
+
+	protected final ContextLoader createContextLoader() {
         return new WebxComponentsLoader() {
 
             @Override
@@ -53,7 +67,13 @@ public class WebxContextLoaderListener extends ContextLoaderListener {
         };
     }
 
-    protected Class<? extends WebxComponentsContext> getDefaultContextClass() {
-        return null;
+	
+	
+
+
+
+	protected Class<? extends WebxComponentsContext> getDefaultContextClasss() {
+        return WebxComponentsContext.class;
     }
+	
 }

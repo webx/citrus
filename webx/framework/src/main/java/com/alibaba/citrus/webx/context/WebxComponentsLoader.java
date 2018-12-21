@@ -69,6 +69,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
 import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.ServletContextResourcePatternResolver;
 
@@ -77,7 +78,7 @@ import org.springframework.web.context.support.ServletContextResourcePatternReso
  *
  * @author Michael Zhou
  */
-public class WebxComponentsLoader extends ContextLoader {
+public class WebxComponentsLoader extends ContextLoaderListener {
     private final static Logger log = LoggerFactory.getLogger(WebxComponentsLoader.class);
     private String                webxConfigurationName;
     private ServletContext        servletContext;
@@ -122,7 +123,7 @@ public class WebxComponentsLoader extends ContextLoader {
     }
 
     @Override
-    protected final Class<?> determineContextClass(ServletContext servletContext) throws ApplicationContextException {
+    protected Class<?> determineContextClass(ServletContext servletContext) throws ApplicationContextException {
         String contextClassName = servletContext.getInitParameter(CONTEXT_CLASS_PARAM);
 
         if (contextClassName != null) {
