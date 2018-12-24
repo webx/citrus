@@ -41,7 +41,6 @@
         <beans:constructor-arg type="long" value="0" />
     </tools:tool>
 
-    <!-- 单独创建defaultElement，引用其它bean -->
-    <tools:tool id="anyBean3" ref="anyBean2" />
+
 
 </beans:beans>

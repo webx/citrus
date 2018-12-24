@@ -462,7 +462,7 @@ public class SchemaBaseTests {
 
     @Test
     public void inputStreamSource_toString() {
-        assertEquals("resource loaded from byte array", schema.toString());
+        assertEquals("Byte array resource [resource loaded from byte array]", schema.toString());
     }
 
     @Test

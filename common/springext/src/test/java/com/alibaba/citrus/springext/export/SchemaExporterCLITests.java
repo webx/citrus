@@ -69,18 +69,18 @@ public class SchemaExporterCLITests extends SchemaExporterTests {
                                                                                 + "www.springframework.org/schema/beans/spring-beans.xsd");
 
         // from spring，注意版本号的匹配
-        assertFile(new File(destdir, "schemas2/www.springframework.org/schema/aop/spring-aop-2.5.xsd"), prefix
-                                                                                                        + "www.springframework.org/schema/beans/spring-beans-2.5.xsd");
+        assertFile(new File(destdir, "schemas2/www.springframework.org/schema/aop/spring-aop-4.0.xsd"), prefix
+                                                                                                        + "www.springframework.org/schema/beans/spring-beans.xsd");
 
-        assertFile(new File(destdir, "schemas2/www.springframework.org/schema/aop/spring-aop-2.0.xsd"), prefix
-                                                                                                        + "www.springframework.org/schema/beans/spring-beans-2.0.xsd");
+        assertFile(new File(destdir, "schemas2/www.springframework.org/schema/aop/spring-aop-4.0.xsd"), prefix
+                                                                                                        + "www.springframework.org/schema/beans/spring-beans.xsd");
 
         // 被注释的语句只能在spring2上测试通过。在spring3中，spring-aop.xsd引用的是spring-beans-3.0.xsd
         // assertFile(new File(destdir, "schemas2/www.springframework.org/schema/aop/spring-aop.xsd"), prefix
         //           + "www.springframework.org/schema/beans/spring-beans.xsd");
 
-        assertFile(new File(destdir, "schemas2/www.springframework.org/schema/beans/spring-beans-2.5.xsd"));
-        assertFile(new File(destdir, "schemas2/www.springframework.org/schema/beans/spring-beans-2.0.xsd"));
+        assertFile(new File(destdir, "schemas2/www.springframework.org/schema/beans/spring-beans-4.0.xsd"));
+        assertFile(new File(destdir, "schemas2/www.springframework.org/schema/beans/spring-beans-4.0.xsd"));
         assertFile(new File(destdir, "schemas2/www.springframework.org/schema/beans/spring-beans.xsd"));
 
         // from others, invalid xml doc (content is "dummy")

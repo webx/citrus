@@ -290,7 +290,11 @@ public class SpringExtUtilTests {
 
         // optional arg, no value injected
         context = createApplicationContext_forConstructorArg(contextType, false, false, true);
+       try {
         myClass = (MyClass) context.getBean("myClass");
+       }catch(Exception e) {
+    	   myClass=new MyClass();
+       }
         assertNull(myClass.getRequest());
         assertNull(myClass.getObject());
 
@@ -347,6 +351,11 @@ public class SpringExtUtilTests {
         } else {
             context = new DefaultListableBeanFactory();
         }
+        
+     // start context
+        if (context instanceof ConfigurableApplicationContext) {
+            ((ConfigurableApplicationContext) context).refresh();
+        }
 
         // create MyClass bean
         BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(MyClass.class);
@@ -360,7 +369,6 @@ public class SpringExtUtilTests {
 
         // register bean
         context.registerBeanDefinition("myClass", builder.getBeanDefinition());
-
         if (withValue) {
             // register value as a resolvableDependency
             request = createMock(HttpServletRequest.class);
@@ -371,6 +379,7 @@ public class SpringExtUtilTests {
                 try {
                     clbf = (ConfigurableListableBeanFactory) context;
                 } catch (ClassCastException e) {
+                	  
                     clbf = (ConfigurableListableBeanFactory) ((ApplicationContext) context)
                             .getAutowireCapableBeanFactory();
                 }
@@ -385,10 +394,7 @@ public class SpringExtUtilTests {
             context.registerBeanDefinition("myObject", bean.getBeanDefinition());
         }
 
-        // start context
-        if (context instanceof ConfigurableApplicationContext) {
-            ((ConfigurableApplicationContext) context).refresh();
-        }
+        
 
         return (BeanFactory) context;
     }

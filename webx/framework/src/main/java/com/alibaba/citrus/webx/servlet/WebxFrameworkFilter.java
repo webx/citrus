@@ -83,7 +83,7 @@ public class WebxFrameworkFilter extends FilterBean {
     @Override
     protected final void init() throws Exception {
         WebApplicationContext parentContext = findParentContext();
-
+       
         if (parentContext instanceof WebxComponentsContext) {
             components = ((WebxComponentsContext) parentContext).getWebxComponents();
 
@@ -94,6 +94,8 @@ public class WebxFrameworkFilter extends FilterBean {
                 internalPathPrefix = normalizeAbsolutePath(internalPathPrefix, true); // 规格化成/internal
             }
         }
+        
+        
 
         WebxRootController rootController = components.getWebxRootController();
 

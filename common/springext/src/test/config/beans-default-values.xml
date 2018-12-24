@@ -5,14 +5,10 @@
              default-autowire-candidates="*String1"
              default-dependency-check="simple"
              default-lazy-init="true"
-             xsi:schemaLocation="
-                 http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
-             ">
-
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd">
     <beans:bean id="myString1" class="java.lang.String">
-        <beans:qualifier value="test" />
+        <beans:qualifier value="test"  type="java.lang.String"/>
     </beans:bean>
-
     <beans:bean id="myString2"
                 class="java.lang.String"
                 autowire="no"
@@ -21,7 +17,5 @@
                 lazy-init="false">
         <beans:qualifier value="test" type="org.junit.Test" />
     </beans:bean>
-
-    <beans:bean id="myString3" class="java.lang.String" />
-
+    <beans:bean id="myString3" class="java.lang.String" lazy-init="true" autowire="true"/>
 </beans:beans>

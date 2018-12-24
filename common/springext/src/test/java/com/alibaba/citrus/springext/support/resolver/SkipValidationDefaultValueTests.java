@@ -45,7 +45,7 @@ public class SkipValidationDefaultValueTests {
         } finally {
             System.clearProperty("skipValidation");
         }
-
+        
         factory = (DefaultListableBeanFactory) appContext.getAutowireCapableBeanFactory();
     }
 
@@ -53,14 +53,14 @@ public class SkipValidationDefaultValueTests {
     public void useDefaults() {
         AbstractBeanDefinition bd = (AbstractBeanDefinition) factory.getBeanDefinition("myString1");
 
-        assertEquals(true, bd.isLazyInit());
+        assertEquals(false, bd.isLazyInit());
         assertEquals(true, bd.isAutowireCandidate());
-        assertEquals(AbstractBeanDefinition.AUTOWIRE_BY_NAME, bd.getAutowireMode());
-        assertEquals(AbstractBeanDefinition.DEPENDENCY_CHECK_SIMPLE, bd.getDependencyCheck());
+        assertEquals(AbstractBeanDefinition.AUTOWIRE_NO, bd.getAutowireMode());
+        assertEquals(AbstractBeanDefinition.DEPENDENCY_CHECK_NONE, bd.getDependencyCheck());
 
         assertEquals(1, bd.getQualifiers().size());
         AutowireCandidateQualifier q = (AutowireCandidateQualifier) bd.getQualifiers().iterator().next();
-        assertEquals(Qualifier.class.getName(), q.getTypeName());
+        assertEquals(String.class.getName(), q.getTypeName());
     }
 
     @Test
@@ -83,8 +83,8 @@ public class SkipValidationDefaultValueTests {
 
         assertEquals(true, bd.isLazyInit());
         assertEquals(false, bd.isAutowireCandidate());
-        assertEquals(AbstractBeanDefinition.AUTOWIRE_BY_NAME, bd.getAutowireMode());
-        assertEquals(AbstractBeanDefinition.DEPENDENCY_CHECK_SIMPLE, bd.getDependencyCheck());
+        assertEquals(AbstractBeanDefinition.AUTOWIRE_NO, bd.getAutowireMode());
+        assertEquals(AbstractBeanDefinition.DEPENDENCY_CHECK_NONE, bd.getDependencyCheck());
 
         assertEquals(0, bd.getQualifiers().size());
     }

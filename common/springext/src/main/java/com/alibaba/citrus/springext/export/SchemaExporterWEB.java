@@ -45,7 +45,7 @@ public class SchemaExporterWEB extends SchemaExporter {
 
         @Override
         protected void renderPage(RequestContext request, String resourceName) throws IOException {
-            Entry entry = getEntry(resourceName);
+            IEntry entry = getEntry(resourceName);
 
             if (entry.isDirectory()) {
                 renderListPage(request, entry); // 渲染list页面
@@ -83,14 +83,14 @@ public class SchemaExporterWEB extends SchemaExporter {
     }
 
     /** 渲染列表页面。 */
-    private void renderListPage(final RequestContext request, final Entry rootEntry) throws IOException {
+    private void renderListPage(final RequestContext request, final IEntry rootEntry) throws IOException {
         PrintWriter out = request.getWriter("text/html; charset=UTF-8");
         listTemplate.accept(new ListPageVisitor(out, request, rootEntry, "text/html; charset=UTF-8"));
         out.flush();
     }
 
     /** 渲染schema文件页面。 */
-    private void renderContentPage(RequestContext request, Entry entry) throws IOException {
+    private void renderContentPage(RequestContext request, IEntry entry) throws IOException {
         PrintWriter out = request.getWriter("text/xml; charset=UTF-8");
         writeTo(out, entry, "UTF-8", request.getResourceURL("/"));
         out.flush();
@@ -100,9 +100,9 @@ public class SchemaExporterWEB extends SchemaExporter {
     private class AbstractEntryVisitor extends TextWriter<PrintWriter> {
         protected final RequestContext request;
         protected final String         lastEntryPath;
-        protected final Entry          entry;
+        protected final IEntry          entry;
 
-        public AbstractEntryVisitor(PrintWriter out, RequestContext request, Entry entry, String lastEntryPath) {
+        public AbstractEntryVisitor(PrintWriter out, RequestContext request, IEntry entry, String lastEntryPath) {
             super(out);
             this.request = request;
             this.entry = entry;
@@ -142,7 +142,7 @@ public class SchemaExporterWEB extends SchemaExporter {
     private class ListPageVisitor extends AbstractEntryVisitor {
         private String contentTypeAndCharset;
 
-        public ListPageVisitor(PrintWriter out, RequestContext request, Entry firstEntry, String contentTypeAndCharset) {
+        public ListPageVisitor(PrintWriter out, RequestContext request, IEntry firstEntry, String contentTypeAndCharset) {
             super(out, request, firstEntry, null);
             this.contentTypeAndCharset = contentTypeAndCharset;
         }
@@ -174,7 +174,7 @@ public class SchemaExporterWEB extends SchemaExporter {
 
     @SuppressWarnings("unused")
     private class DirEntryVisitor extends AbstractEntryVisitor {
-        public DirEntryVisitor(PrintWriter out, RequestContext request, Entry entry, String lastEntryPath) {
+        public DirEntryVisitor(PrintWriter out, RequestContext request, IEntry entry, String lastEntryPath) {
             super(out, request, entry, lastEntryPath);
         }
 
@@ -194,7 +194,7 @@ public class SchemaExporterWEB extends SchemaExporter {
             String path = entry.getPath();
 
             for (int i = path.indexOf("/", lastEntryPathLength); i >= 0; i = path.indexOf("/", i + 1)) {
-                Entry parentEntry = getEntry(path.substring(0, i + 1));
+                IEntry parentEntry = getEntry(path.substring(0, i + 1));
 
                 v.context().put("entryUrl", request.getResourceURL(parentEntry.getPath()));
                 v.context().put("entryName", parentEntry.getName().replaceFirst("/$", ""));
@@ -210,11 +210,11 @@ public class SchemaExporterWEB extends SchemaExporter {
         }
 
         public void visitSubEntryRecursive(Template dirTemplate, Template fileTemplate) {
-            for (Entry subEntry : entry.getSubEntries()) {
-                Entry activeEntry = subEntry;
+            for (IEntry subEntry : entry.getSubEntries()) {
+                IEntry activeEntry = subEntry;
 
                 while (activeEntry.isDirectory() && activeEntry.getSubEntries().size() == 1) {
-                    Entry theOnlySubEntry = activeEntry.getSubEntries().iterator().next();
+                    IEntry theOnlySubEntry = activeEntry.getSubEntries().iterator().next();
 
                     if (theOnlySubEntry.isDirectory()) {
                         activeEntry = theOnlySubEntry;
@@ -237,7 +237,7 @@ public class SchemaExporterWEB extends SchemaExporter {
         private final Schema schema;
         private final String namespace;
 
-        public FileEntryVisitor(PrintWriter out, RequestContext request, Entry entry, String lastEntryPath) {
+        public FileEntryVisitor(PrintWriter out, RequestContext request, IEntry entry, String lastEntryPath) {
             super(out, request, entry, lastEntryPath);
             this.schema = entry.getSchema();
             this.namespace = schema != null ? schema.getTargetNamespace() : null;
