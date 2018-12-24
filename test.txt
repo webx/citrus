@@ -1,289 +1,0 @@
-[INFO] Scanning for projects...
-[INFO] ------------------------------------------------------------------------
-[INFO] Reactor Build Order:
-[INFO] 
-[INFO] Citrus Parent Project
-[INFO] Citrus Servlet API Dependencies
-[INFO] Citrus Log Configuration
-[INFO] Citrus Testing Utilities
-[INFO] Citrus Common Utilities
-[INFO] Citrus Generic Type Analyzer
-[INFO] Citrus Spring Extensions
-[INFO] SpringExt All-in-one Bundle
-[INFO] Simple Expression Engine
-[INFO] Base-classes for Service implementations
-[INFO] Citrus Data Resolver Service
-[INFO] Citrus Properties-based Configuration
-[INFO] Citrus Resource Loading Service
-[INFO] Citrus Upload Service
-[INFO] Hessian Port
-[INFO] Citrus Request Context Service
-[INFO] Citrus Pull Service
-[INFO] Citrus Form Service
-[INFO] Citrus Pipeline Service
-[INFO] Citrus Template Service
-[INFO] Citrus Module Loading Service
-[INFO] citrus mapping service
-[INFO] Citrus JSP Template Engine
-[INFO] Citrus Velocity Template Engine
-[INFO] Citrus Freemarker Template Engine
-[INFO] Citrus URI Broker Service
-[INFO] Citrus Mail Service
-[INFO] Citrus Webx Framework
-[INFO] Citrus Testing Utilities for Webx
-[INFO] Citrus Webx Turbine-style Implementation
-[INFO] Servlet 3.0 Async Support
-[INFO] Development mode tools for Webx
-[INFO] Webx All-in-one Bundle
-[INFO] Test Utils for Webx
-[INFO]                                                                         
-[INFO] ------------------------------------------------------------------------
-[INFO] Building Citrus Parent Project 3.2.3
-[INFO] ------------------------------------------------------------------------
-[INFO] 
-[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ citrus-parent ---
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/1.5.1/plexus-utils-1.5.1.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/1.5.1/plexus-utils-1.5.1.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/1.5.7/plexus-utils-1.5.7.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/1.5.7/plexus-utils-1.5.7.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-container-default/1.0-alpha-30/plexus-container-default-1.0-alpha-30.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-container-default/1.0-alpha-30/plexus-container-default-1.0-alpha-30.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-containers/1.0-alpha-30/plexus-containers-1.0-alpha-30.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-containers/1.0-alpha-30/plexus-containers-1.0-alpha-30.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/1.4.5/plexus-utils-1.4.5.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/1.4.5/plexus-utils-1.4.5.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-classworlds/1.2-alpha-9/plexus-classworlds-1.2-alpha-9.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-classworlds/1.2-alpha-9/plexus-classworlds-1.2-alpha-9.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus/1.0.10/plexus-1.0.10.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus/1.0.10/plexus-1.0.10.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-i18n/1.0-beta-7/plexus-i18n-1.0-beta-7.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-i18n/1.0-beta-7/plexus-i18n-1.0-beta-7.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-components/1.1.12/plexus-components-1.1.12.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-components/1.1.12/plexus-components-1.1.12.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-velocity/1.1.7/plexus-velocity-1.1.7.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-velocity/1.1.7/plexus-velocity-1.1.7.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-container-default/1.0-alpha-20/plexus-container-default-1.0-alpha-20.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-container-default/1.0-alpha-20/plexus-container-default-1.0-alpha-20.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-containers/1.0-alpha-20/plexus-containers-1.0-alpha-20.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-containers/1.0-alpha-20/plexus-containers-1.0-alpha-20.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/1.3/plexus-utils-1.3.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/1.3/plexus-utils-1.3.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-classworlds/1.2-alpha-7/plexus-classworlds-1.2-alpha-7.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-classworlds/1.2-alpha-7/plexus-classworlds-1.2-alpha-7.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus/1.0.9/plexus-1.0.9.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus/1.0.9/plexus-1.0.9.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/apache/velocity/velocity/1.5/velocity-1.5.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/apache/velocity/velocity/1.5/velocity-1.5.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/commons-collections/commons-collections/3.1/commons-collections-3.1.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/commons-collections/commons-collections/3.1/commons-collections-3.1.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/commons-lang/commons-lang/2.1/commons-lang-2.1.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/commons-lang/commons-lang/2.1/commons-lang-2.1.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/oro/oro/2.0.8/oro-2.0.8.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/oro/oro/2.0.8/oro-2.0.8.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/commons-collections/commons-collections/3.2/commons-collections-3.2.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/commons-collections/commons-collections/3.2/commons-collections-3.2.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/commons-validator/commons-validator/1.2.0/commons-validator-1.2.0.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/commons-validator/commons-validator/1.2.0/commons-validator-1.2.0.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/commons-logging/commons-logging/1.0.3/commons-logging-1.0.3.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/commons-logging/commons-logging/1.0.3/commons-logging-1.0.3.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/commons-digester/commons-digester/1.6/commons-digester-1.6.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/commons-digester/commons-digester/1.6/commons-digester-1.6.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/commons-beanutils/commons-beanutils/1.6/commons-beanutils-1.6.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/commons-beanutils/commons-beanutils/1.6/commons-beanutils-1.6.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/commons-logging/commons-logging/1.0/commons-logging-1.0.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/commons-logging/commons-logging/1.0/commons-logging-1.0.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/commons-collections/commons-collections/2.0/commons-collections-2.0.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/commons-collections/commons-collections/2.0/commons-collections-2.0.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/commons-collections/commons-collections/2.1/commons-collections-2.1.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/commons-collections/commons-collections/2.1/commons-collections-2.1.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/xml-apis/xml-apis/2.0.2/xml-apis-2.0.2.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/xml-apis/xml-apis/2.0.2/xml-apis-2.0.2.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-archiver/2.3/plexus-archiver-2.3.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-archiver/2.3/plexus-archiver-2.3.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-components/1.3/plexus-components-1.3.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-components/1.3/plexus-components-1.3.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus/3.3/plexus-3.3.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus/3.3/plexus-3.3.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/sonatype/spice/spice-parent/17/spice-parent-17.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/sonatype/spice/spice-parent/17/spice-parent-17.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/sonatype/forge/forge-parent/10/forge-parent-10.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/sonatype/forge/forge-parent/10/forge-parent-10.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/3.0.10/plexus-utils-3.0.10.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/3.0.10/plexus-utils-3.0.10.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-io/2.0.6/plexus-io-2.0.6.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-io/2.0.6/plexus-io-2.0.6.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-components/1.2/plexus-components-1.2.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-components/1.2/plexus-components-1.2.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus/3.2/plexus-3.2.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus/3.2/plexus-3.2.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/3.0.8/plexus-utils-3.0.8.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/3.0.8/plexus-utils-3.0.8.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/3.0.9/plexus-utils-3.0.9.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/3.0.9/plexus-utils-3.0.9.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/1.1/plexus-utils-1.1.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/1.1/plexus-utils-1.1.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/apache/maven/shared/maven-dependency-analyzer/1.4/maven-dependency-analyzer-1.4.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/apache/maven/shared/maven-dependency-analyzer/1.4/maven-dependency-analyzer-1.4.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/apache/maven/shared/maven-shared-components/19/maven-shared-components-19.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/apache/maven/shared/maven-shared-components/19/maven-shared-components-19.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/asm/asm/3.3.1/asm-3.3.1.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/asm/asm/3.3.1/asm-3.3.1.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/asm/asm-parent/3.3.1/asm-parent-3.3.1.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/asm/asm-parent/3.3.1/asm-parent-3.3.1.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-containers/1.5.5/plexus-containers-1.5.5.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-containers/1.5.5/plexus-containers-1.5.5.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus/2.0.7/plexus-2.0.7.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus/2.0.7/plexus-2.0.7.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/apache/maven/shared/maven-dependency-tree/2.1/maven-dependency-tree-2.1.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/apache/maven/shared/maven-dependency-tree/2.1/maven-dependency-tree-2.1.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/1.5.15/plexus-utils-1.5.15.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/1.5.15/plexus-utils-1.5.15.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-interpolation/1.11/plexus-interpolation-1.11.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-interpolation/1.11/plexus-interpolation-1.11.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-components/1.1.14/plexus-components-1.1.14.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-components/1.1.14/plexus-components-1.1.14.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/backport-util-concurrent/backport-util-concurrent/3.1/backport-util-concurrent-3.1.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/backport-util-concurrent/backport-util-concurrent/3.1/backport-util-concurrent-3.1.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/eclipse/aether/aether-util/0.9.0.M2/aether-util-0.9.0.M2.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/eclipse/aether/aether-util/0.9.0.M2/aether-util-0.9.0.M2.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/eclipse/aether/aether/0.9.0.M2/aether-0.9.0.M2.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/eclipse/aether/aether/0.9.0.M2/aether-0.9.0.M2.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/apache/maven/shared/maven-common-artifact-filters/1.4/maven-common-artifact-filters-1.4.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/apache/maven/shared/maven-common-artifact-filters/1.4/maven-common-artifact-filters-1.4.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-container-default/1.5.5/plexus-container-default-1.5.5.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-container-default/1.5.5/plexus-container-default-1.5.5.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-classworlds/2.2.2/plexus-classworlds-2.2.2.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-classworlds/2.2.2/plexus-classworlds-2.2.2.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus/2.0.3/plexus-2.0.3.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus/2.0.3/plexus-2.0.3.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/apache/xbean/xbean-reflect/3.4/xbean-reflect-3.4.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/apache/xbean/xbean-reflect/3.4/xbean-reflect-3.4.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/apache/xbean/xbean/3.4/xbean-3.4.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/apache/xbean/xbean/3.4/xbean-3.4.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/log4j/log4j/1.2.12/log4j-1.2.12.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/log4j/log4j/1.2.12/log4j-1.2.12.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/commons-logging/commons-logging-api/1.1/commons-logging-api-1.1.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/commons-logging/commons-logging-api/1.1/commons-logging-api-1.1.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/com/google/collections/google-collections/1.0/google-collections-1.0.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/com/google/collections/google-collections/1.0/google-collections-1.0.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/com/google/google/1/google-1.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/com/google/google/1/google-1.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/2.1/plexus-utils-2.1.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/2.1/plexus-utils-2.1.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/sonatype/spice/spice-parent/16/spice-parent-16.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/sonatype/spice/spice-parent/16/spice-parent-16.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/sonatype/forge/forge-parent/5/forge-parent-5.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/sonatype/forge/forge-parent/5/forge-parent-5.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/commons-lang/commons-lang/2.6/commons-lang-2.6.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/commons-lang/commons-lang/2.6/commons-lang-2.6.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/apache/commons/commons-parent/17/commons-parent-17.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/apache/commons/commons-parent/17/commons-parent-17.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/apache/commons/commons-parent/9/commons-parent-9.pom
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/apache/commons/commons-parent/9/commons-parent-9.pom (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/commons-validator/commons-validator/1.2.0/commons-validator-1.2.0.jar
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/commons-digester/commons-digester/1.6/commons-digester-1.6.jar
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-i18n/1.0-beta-7/plexus-i18n-1.0-beta-7.jar
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-velocity/1.1.7/plexus-velocity-1.1.7.jar
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/commons-validator/commons-validator/1.2.0/commons-validator-1.2.0.jar (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/apache/velocity/velocity/1.5/velocity-1.5.jar
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/commons-digester/commons-digester/1.6/commons-digester-1.6.jar (0 B at 0.0 KB/sec)
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-archiver/2.3/plexus-archiver-2.3.jar
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/3.0.9/plexus-utils-3.0.9.jar
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-i18n/1.0-beta-7/plexus-i18n-1.0-beta-7.jar (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-io/2.0.6/plexus-io-2.0.6.jar
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/apache/velocity/velocity/1.5/velocity-1.5.jar (0 B at 0.0 KB/sec)
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-velocity/1.1.7/plexus-velocity-1.1.7.jar (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/apache/maven/shared/maven-dependency-analyzer/1.4/maven-dependency-analyzer-1.4.jar
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/apache/maven/shared/maven-dependency-tree/2.1/maven-dependency-tree-2.1.jar
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-archiver/2.3/plexus-archiver-2.3.jar (0 B at 0.0 KB/sec)
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-utils/3.0.9/plexus-utils-3.0.9.jar (0 B at 0.0 KB/sec)
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/eclipse/aether/aether-util/0.9.0.M2/aether-util-0.9.0.M2.jar
-Downloading: http://maven.aliyun.com/nexus/content/groups/public/org/apache/maven/shared/maven-common-artifact-filters/1.4/maven-common-artifact-filters-1.4.jar
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/plexus/plexus-io/2.0.6/plexus-io-2.0.6.jar (0 B at 0.0 KB/sec)
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/apache/maven/shared/maven-dependency-analyzer/1.4/maven-dependency-analyzer-1.4.jar (0 B at 0.0 KB/sec)
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/apache/maven/shared/maven-dependency-tree/2.1/maven-dependency-tree-2.1.jar (0 B at 0.0 KB/sec)
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/apache/maven/shared/maven-common-artifact-filters/1.4/maven-common-artifact-filters-1.4.jar (0 B at 0.0 KB/sec)
-Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/eclipse/aether/aether-util/0.9.0.M2/aether-util-0.9.0.M2.jar (0 B at 0.0 KB/sec)
-[INFO] com.alibaba.citrus:citrus-parent:pom:3.2.3
-[INFO] +- org.slf4j:slf4j-api:jar:1.7.5:compile
-[INFO] \- org.slf4j:jcl-over-slf4j:jar:1.7.5:compile
-[INFO]                                                                         
-[INFO] ------------------------------------------------------------------------
-[INFO] Building Citrus Servlet API Dependencies 3.2.3
-[INFO] ------------------------------------------------------------------------
-[INFO] 
-[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ citrus-common-servlet ---
-[INFO] com.alibaba.citrus:citrus-common-servlet:jar:3.2.3
-[INFO] +- javax.servlet:javax.servlet-api:jar:3.1.0:compile
-[INFO] +- org.slf4j:slf4j-api:jar:1.7.5:compile
-[INFO] \- org.slf4j:jcl-over-slf4j:jar:1.7.5:compile
-[INFO]                                                                         
-[INFO] ------------------------------------------------------------------------
-[INFO] Building Citrus Log Configuration 3.2.3
-[INFO] ------------------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] Reactor Summary:
-[INFO] 
-[INFO] Citrus Parent Project .............................. SUCCESS [  3.900 s]
-[INFO] Citrus Servlet API Dependencies .................... SUCCESS [  0.033 s]
-[INFO] Citrus Log Configuration ........................... FAILURE [  0.055 s]
-[INFO] Citrus Testing Utilities ........................... SKIPPED
-[INFO] Citrus Common Utilities ............................ SKIPPED
-[INFO] Citrus Generic Type Analyzer ....................... SKIPPED
-[INFO] Citrus Spring Extensions ........................... SKIPPED
-[INFO] SpringExt All-in-one Bundle ........................ SKIPPED
-[INFO] Simple Expression Engine ........................... SKIPPED
-[INFO] Base-classes for Service implementations ........... SKIPPED
-[INFO] Citrus Data Resolver Service ....................... SKIPPED
-[INFO] Citrus Properties-based Configuration .............. SKIPPED
-[INFO] Citrus Resource Loading Service .................... SKIPPED
-[INFO] Citrus Upload Service .............................. SKIPPED
-[INFO] Hessian Port ....................................... SKIPPED
-[INFO] Citrus Request Context Service ..................... SKIPPED
-[INFO] Citrus Pull Service ................................ SKIPPED
-[INFO] Citrus Form Service ................................ SKIPPED
-[INFO] Citrus Pipeline Service ............................ SKIPPED
-[INFO] Citrus Template Service ............................ SKIPPED
-[INFO] Citrus Module Loading Service ...................... SKIPPED
-[INFO] citrus mapping service ............................. SKIPPED
-[INFO] Citrus JSP Template Engine ......................... SKIPPED
-[INFO] Citrus Velocity Template Engine .................... SKIPPED
-[INFO] Citrus Freemarker Template Engine .................. SKIPPED
-[INFO] Citrus URI Broker Service .......................... SKIPPED
-[INFO] Citrus Mail Service ................................ SKIPPED
-[INFO] Citrus Webx Framework .............................. SKIPPED
-[INFO] Citrus Testing Utilities for Webx .................. SKIPPED
-[INFO] Citrus Webx Turbine-style Implementation ........... SKIPPED
-[INFO] Servlet 3.0 Async Support .......................... SKIPPED
-[INFO] Development mode tools for Webx .................... SKIPPED
-[INFO] Webx All-in-one Bundle ............................. SKIPPED
-[INFO] Test Utils for Webx ................................ SKIPPED
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time: 5.007 s
-[INFO] Finished at: 2016-11-08T15:12:30+08:00
-[INFO] Final Memory: 23M/285M
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal on project citrus-common-logconfig: Could not resolve dependencies for project com.alibaba.citrus:citrus-common-logconfig:jar:3.2.3: Failure to find com.alibaba.citrus:citrus-common-servlet:jar:3.2.3 in http://maven.aliyun.com/nexus/content/groups/public was cached in the local repository, resolution will not be reattempted until the update interval of nexus-aliyun has elapsed or updates are forced -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/DependencyResolutionException
-[ERROR] 
-[ERROR] After correcting the problems, you can resume the build with the command
-[ERROR]   mvn <goals> -rf :citrus-common-logconfig

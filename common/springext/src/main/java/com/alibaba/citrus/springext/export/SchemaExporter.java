@@ -249,15 +249,15 @@ public class SchemaExporter {
         private static final long serialVersionUID = -4000525580274040823L;
 
         public Entries() {
-            super.put("", new SchemaExporter.Entry());
+            super.put("", new Entry());
         }
 
-        public SchemaExporter.Entry getRoot() {
-            return super.get("");
+        public Entry getRoot() {
+            return get("");
         }
 
         @Override
-        public SchemaExporter.Entry put(String path, SchemaExporter.Entry entry) {
+        public Entry put(String path, Entry entry) {
             assertTrue(path.equals(entry.getPath()));
 
             if (path.endsWith("/")) {
@@ -265,16 +265,16 @@ public class SchemaExporter {
             }
 
             String parentPath = path.substring(0, path.lastIndexOf("/") + 1);
-            SchemaExporter.Entry parentEntry = get(parentPath);
+            Entry parentEntry = get(parentPath);
 
             if (parentEntry == null) {
-                parentEntry = new SchemaExporter.Entry(parentPath);
+                parentEntry = new Entry(parentPath);
                 this.put(parentPath, parentEntry); // recursively
             }
 
             parentEntry.subEntries.put(entry.getSortKey(), entry);
 
-            SchemaExporter.Entry old = super.put(entry.getPath(), entry);
+            Entry old = super.put(entry.getPath(), entry);
 
             log.trace("Added entry: {}", entry.getPath());
 
