@@ -48,8 +48,9 @@ public class DefaultElementDefinitionParser extends AbstractBeanDefinitionParser
         	String beanName=((RuntimeBeanReference) beanOrRef).getBeanName();
             BeanDefinitionBuilder refBean = BeanDefinitionBuilder.genericBeanDefinition(RuntimeBeanReference.class);
         	//BeanDefinitionBuilder refBean = BeanDefinitionBuilder.rootBeanDefinition(beanName);
-        	//refBean.addConstructorArgReference(beanName);
-            refBean.addPropertyValue("targetBeanName", beanName);
+        	refBean.addConstructorArgValue(beanName);
+          //  refBean.addConstructorArgReference(beanName);
+           // refBean.addPropertyValue("targetBeanName", beanName);
             abd = refBean.getBeanDefinition();
         } else if (beanOrRef instanceof BeanDefinitionHolder) {
             BeanDefinition bd = ((BeanDefinitionHolder) beanOrRef).getBeanDefinition();

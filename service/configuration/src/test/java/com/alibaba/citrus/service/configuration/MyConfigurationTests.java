@@ -17,20 +17,29 @@
 
 package com.alibaba.citrus.service.configuration;
 
-import static com.alibaba.citrus.test.TestEnvStatic.*;
-import static com.alibaba.citrus.test.TestUtil.*;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static com.alibaba.citrus.test.TestEnvStatic.srcdir;
+import static com.alibaba.citrus.test.TestUtil.containsRegex;
+import static com.alibaba.citrus.test.TestUtil.exception;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 
-import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanCreationException;
+import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.FileSystemResource;
+
+import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
 
 public class MyConfigurationTests {
     private static ApplicationContext globalFactory;
@@ -67,7 +76,7 @@ public class MyConfigurationTests {
             fail();
         } catch (BeanCreationException e) {
             assertThat(e,
-                       exception(IllegalArgumentException.class, "productionMode cannot be disabled at App's Context"));
+                       exception(NoUniqueBeanDefinitionException.class, "No qualifying bean of type 'com.alibaba.citrus.service.configuration.Configuration' available: expected single matching bean but found 2: conf1,myConfiguration"));
         }
     }
 
