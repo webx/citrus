@@ -49,7 +49,7 @@
                 <stores:single-valued-cookie-store id="simple-specified-value-store">
                     <cookie name="simple-specified-cookie" />
                     <encoders>
-                        <value-encoders:simple-value-encoder charset="GBK" />
+                        <value-encoders:simple-value-encoder charset="GBK"/>
                     </encoders>
                 </stores:single-valued-cookie-store>
             </stores>
