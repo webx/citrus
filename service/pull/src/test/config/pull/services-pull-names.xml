@@ -8,7 +8,7 @@
                  http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
                  http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
              ">
-
+	<beans:bean id="outterSimple" class="com.alibaba.citrus.service.pull.tool.SimpleTool" />
     <services:pull id="toolNames">
 
         <!-- 根据element生成id：constants -->
@@ -46,6 +46,6 @@
 
     </services:pull>
 
-    <beans:bean id="outterSimple" class="com.alibaba.citrus.service.pull.tool.SimpleTool" />
+    
 
 </beans:beans>
