@@ -241,12 +241,16 @@ public class SpringExtUtil {
         if (customSelector.accept(element)) {
             AbstractBeanDefinition bean = (AbstractBeanDefinition) delegate.parseCustomElement(element, containingBean);
             String beanName = trimToNull(element.getAttribute("id"));
-
+            String refBean=trimToNull(element.getAttribute("ref"));
+            if(refBean==null) {
             if (beanName == null) {
                 beanName = BeanDefinitionReaderUtils.generateBeanName(bean, parserContext.getRegistry(), isInnerBean);
             }
-
+            //BeanDefinition bdf = parserContext.getReaderContext().getRegistry().getBeanDefinition(beanName);
             return new BeanDefinitionHolder(bean, beanName);
+            }else {
+            	return new BeanDefinitionHolder(parserContext.getRegistry().getBeanDefinition(refBean),refBean);
+            }
         }
 
         return null;
@@ -263,12 +267,10 @@ public class SpringExtUtil {
     public static Object parseBean(Element element, ParserContext parserContext, BeanDefinition containingBean) {
         BeanDefinitionParserDelegate delegate = parserContext.getDelegate();
         String refName = trimToNull(element.getAttribute("ref"));
-
         // 如果是ref
         if (refName != null) {
             NamedBeanReference ref = new NamedBeanReference(refName, element.getAttribute("id"));
             ref.setSource(parserContext.extractSource(element));
-
             return ref;
         }
 

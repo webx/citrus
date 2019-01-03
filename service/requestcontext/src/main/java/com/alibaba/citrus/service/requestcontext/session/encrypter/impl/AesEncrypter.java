@@ -17,6 +17,7 @@
 
 package com.alibaba.citrus.service.requestcontext.session.encrypter.impl;
 
+import static com.alibaba.citrus.service.configuration.support.PropertyEditorRegistrarsSupport.parseRegistrars;
 import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
 import static com.alibaba.citrus.util.Assert.*;
 import static com.alibaba.citrus.util.StringUtil.*;
@@ -82,6 +83,15 @@ public class AesEncrypter extends AbstractJceEncrypter {
         @Override
         protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
             attributesToProperties(element, builder, "keySize", "key");
+            //builder.addConstructorArgValue(parseRegistrars(element, parserContext, builder));
         }
+
+		@Override
+		protected void doParse(Element element, BeanDefinitionBuilder builder) {
+			// TODO Auto-generated method stub
+			super.doParse(element, builder);
+		}
+        
+        
     }
 }

@@ -78,7 +78,7 @@ public class SimpleValueEncoder extends AbstractSessionValueEncoder {
             attributesToProperties(element, builder, "type", "charset");
 
             builder.addPropertyValue("propertyEditorRegistrars", parseRegistrars(element, parserContext, builder));
-
+           // builder.addConstructorArgValue(parseRegistrars(element, parserContext, builder));
             for (Element subElement : subElements(element)) {
                 BeanDefinitionHolder encrypter = parseConfigurationPointBean(subElement, encrypterConfigurationPoint,
                                                                              parserContext, builder);
@@ -88,6 +88,7 @@ public class SimpleValueEncoder extends AbstractSessionValueEncoder {
                     break;
                 }
             }
+            
         }
     }
 }

@@ -21,6 +21,8 @@ import static com.alibaba.citrus.generictype.TypeInfoUtil.*;
 
 import org.w3c.dom.Element;
 
+import com.alibaba.citrus.util.StringUtil;
+
 /**
  * 定义一个bean definition，根据generic type取得bean class。
  *
@@ -32,4 +34,15 @@ public abstract class AbstractSingleBeanDefinitionParser<T> extends
     protected final Class<?> getBeanClass(Element element) {
         return resolveParameter(getClass(), AbstractSingleBeanDefinitionParser.class, 0).getRawType();
     }
+
+	@Override
+	protected String getBeanClassName(Element element) {
+		String name=element.getAttribute(this.ID_ATTRIBUTE);
+		if(StringUtil.isEmpty(name)) {
+			name=element.getAttribute(this.NAME_ATTRIBUTE);
+		}
+		return name;
+	}
+    
+    
 }

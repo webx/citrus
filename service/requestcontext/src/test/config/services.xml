@@ -11,7 +11,8 @@
                  http://www.alibaba.com/schema/services/request-contexts/session/stores http://localhost:8080/schema/services-request-contexts-session-stores.xsd
                  http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
              ">
-
+ 	
+ 	<stores:simple-memory-store id="simple-session-store" />
     <!-- 测试prepare和commit的顺序 -->
     <beans:bean id="baseFactory"
                 class="com.alibaba.citrus.service.requestcontext.RequestContextChainingServiceTests$MyRequestContextFactory"
@@ -77,13 +78,12 @@
                 <stores:store id="simple" ref="simple-session-store" />
             </stores>
             <store-mappings>
-                <match name="SESSION_MODEL" store="simple" />
+                <match name="SESSION_MODEL" store="simple-session-store" />
             </store-mappings>
         </request-contexts:session>
         <request-contexts:basic />
         <request-contexts:request-context class="com.alibaba.citrus.service.requestcontext.dummy.DummyRequestContextFactoryImpl" />
     </services:request-contexts>
-
-    <stores:simple-memory-store id="simple-session-store" />
-
+    
+    
 </beans:beans>
