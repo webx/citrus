@@ -64,7 +64,7 @@ public class PipelineDefinitionParser extends AbstractNamedProxyBeanDefinitionPa
                 for (Element subElement : subElements(element)) {
                     Object valve = parseConfigurationPointBean(subElement, valvesConfigurationPoint, parserContext,
                                                                builder);
-
+                    
                     if (valve != null) {
                         valves.add(valve);
                     }

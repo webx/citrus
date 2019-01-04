@@ -31,6 +31,9 @@ import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
+import com.alibaba.citrus.springext.util.SpringExtUtil;
+
+import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
@@ -72,7 +75,14 @@ public abstract class AbstractValveDefinitionParser<V extends Valve> extends Abs
         String pipelineRef = trimToNull(element.getAttribute(defaultIfNull(trimToNull(refAttribute), "pipeline-ref")));
 
         if (pipelineRef != null) {
-            return new RuntimeBeanReference(pipelineRef);
+            /*RuntimeBeanReference beanReference= new RuntimeBeanReference(pipelineRef);
+            beanReference.setSource(parserContext.extractSource(element));
+            return beanReference;
+        	*///return new RuntimeBeanReference(pipelineRef);
+        	//return new BeanDefinitionHolder(parserContext.getRegistry().getBeanDefinition(pipelineRef),pipelineRef);
+        	//return new BeanDefinitionHolder(parserContext.getRegistry().getBeanDefinition(pipelineRef),pipelineRef);
+        	return parserContext.getRegistry().getBeanDefinition(pipelineRef);
+           
         }
 
         // parse pipeline as an inner-bean

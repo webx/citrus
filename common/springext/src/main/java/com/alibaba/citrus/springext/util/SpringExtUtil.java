@@ -239,7 +239,7 @@ public class SpringExtUtil {
 
         // 解析custom element。
         if (customSelector.accept(element)) {
-            AbstractBeanDefinition bean = (AbstractBeanDefinition) delegate.parseCustomElement(element, containingBean);
+        	BeanDefinition  bean =  delegate.parseCustomElement(element, containingBean);
             String beanName = trimToNull(element.getAttribute("id"));
             String refBean=trimToNull(element.getAttribute("ref"));
             if(refBean==null) {
@@ -249,7 +249,10 @@ public class SpringExtUtil {
             //BeanDefinition bdf = parserContext.getReaderContext().getRegistry().getBeanDefinition(beanName);
             return new BeanDefinitionHolder(bean, beanName);
             }else {
-            	return new BeanDefinitionHolder(parserContext.getRegistry().getBeanDefinition(refBean),refBean);
+            	if(bean.getBeanClassName().equals("org.springframework.beans.factory.config.RuntimeBeanReference")) {
+            		bean=parserContext.getRegistry().getBeanDefinition(refBean);
+            	}
+            	return new BeanDefinitionHolder(bean,refBean);
             }
         }
 
