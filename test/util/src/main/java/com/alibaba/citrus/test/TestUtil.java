@@ -68,7 +68,7 @@ public class TestUtil {
     }
 
     public static Matcher<String> containsAll(String... strs) {
-        List<Matcher<? extends String>> list = new ArrayList<Matcher<? extends String>>();
+        List<Matcher<? super String>> list = new ArrayList<Matcher<? super String>>();
 
         for (String str : strs) {
             list.add(containsString(str));
@@ -78,7 +78,7 @@ public class TestUtil {
     }
 
     public static Matcher<String> containsAllRegex(String... regexes) {
-        List<Matcher<? extends String>> list = new ArrayList<Matcher<? extends String>>();
+        List<Matcher<? super String>> list = new ArrayList<Matcher<? super String>>();
 
         for (String regex : regexes) {
             list.add(containsRegex(regex));

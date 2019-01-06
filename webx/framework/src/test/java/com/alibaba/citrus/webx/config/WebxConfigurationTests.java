@@ -17,13 +17,27 @@
 
 package com.alibaba.citrus.webx.config;
 
-import static com.alibaba.citrus.test.TestEnvStatic.*;
-import static com.alibaba.citrus.test.TestUtil.*;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static com.alibaba.citrus.test.TestEnvStatic.srcdir;
+import static com.alibaba.citrus.test.TestUtil.containsRegex;
+import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.Map;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.FileSystemResource;
 
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.springext.support.context.XmlApplicationContext;
@@ -34,12 +48,7 @@ import com.alibaba.citrus.webx.config.impl.WebxConfigurationImpl.ComponentsConfi
 import com.alibaba.citrus.webx.impl.WebxControllerImpl;
 import com.alibaba.citrus.webx.support.AbstractWebxController;
 import com.alibaba.citrus.webx.support.AbstractWebxRootController;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.FileSystemResource;
-
+@FixMethodOrder(MethodSorters.JVM)
 public class WebxConfigurationTests {
     private static ApplicationContext   factory;
     private        WebxConfiguration    conf;

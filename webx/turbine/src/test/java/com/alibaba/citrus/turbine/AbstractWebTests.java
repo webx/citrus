@@ -165,7 +165,9 @@ public abstract class AbstractWebTests {
         expect(component.getApplicationContext()).andReturn(webAppContext).anyTimes();
         expect(component.getName()).andReturn("app1").anyTimes();
         replay(component);
+        
         WebxUtil.setCurrentComponent(newRequest, component);
+        webAppContext.refresh();
     }
 
     public static class MyServlet extends HttpServlet {

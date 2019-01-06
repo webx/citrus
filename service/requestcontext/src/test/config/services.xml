@@ -78,7 +78,7 @@
                 <stores:store id="simple" ref="simple-session-store" />
             </stores>
             <store-mappings>
-                <match name="SESSION_MODEL" store="simple-session-store" />
+                <match name="SESSION_MODEL" store="simple" />
             </store-mappings>
         </request-contexts:session>
         <request-contexts:basic />

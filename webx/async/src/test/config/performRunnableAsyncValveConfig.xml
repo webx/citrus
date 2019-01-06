@@ -22,14 +22,16 @@
         <valves:performRunnableAsync executor-ref="executor2" />
     </services:pipeline>
 
+	<services:pipeline id="subpipeline1">
+        <valves:setLoggingContext />
+        <valves:doPerformRunnable />
+    </services:pipeline>
+
     <services:pipeline id="pipeline3">
         <valves:performRunnableAsync pipeline-ref="subpipeline1" />
     </services:pipeline>
 
-    <services:pipeline id="subpipeline1">
-        <valves:setLoggingContext />
-        <valves:doPerformRunnable />
-    </services:pipeline>
+    
 
     <services:pipeline id="pipeline4">
         <valves:performRunnableAsync>

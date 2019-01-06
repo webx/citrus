@@ -57,7 +57,7 @@ public class CookieStoreTests extends AbstractRequestContextsTests<SessionReques
     }
 
     private Matcher<String> cookie(String startsWith, boolean httpOnly, boolean secure) {
-        List<Matcher<? extends String>> matchers = createLinkedList();
+        List<Matcher<? super String>> matchers = createLinkedList();
 
         matchers.add(startsWith(startsWith));
 

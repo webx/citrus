@@ -35,6 +35,7 @@ import java.util.Set;
 import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.util.Assert;
+
 import net.sf.cglib.core.DefaultNamingPolicy;
 import net.sf.cglib.core.Predicate;
 import net.sf.cglib.proxy.Callback;
@@ -42,6 +43,7 @@ import net.sf.cglib.proxy.CallbackFilter;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -56,6 +58,7 @@ import org.springframework.beans.factory.config.BeanReference;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.DependencyDescriptor;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
+import org.springframework.beans.factory.parsing.BeanComponentDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionReaderUtils;
@@ -239,20 +242,17 @@ public class SpringExtUtil {
 
         // 解析custom element。
         if (customSelector.accept(element)) {
-        	BeanDefinition  bean =  delegate.parseCustomElement(element, containingBean);
+        	BeanDefinition  beandefinition =  delegate.parseCustomElement(element, containingBean);
             String beanName = trimToNull(element.getAttribute("id"));
-            String refBean=trimToNull(element.getAttribute("ref"));
-            if(refBean==null) {
+            if(beandefinition!=null) {
             if (beanName == null) {
-                beanName = BeanDefinitionReaderUtils.generateBeanName(bean, parserContext.getRegistry(), isInnerBean);
+                beanName = BeanDefinitionReaderUtils.generateBeanName(beandefinition, parserContext.getRegistry(), isInnerBean);
             }
+            BeanDefinitionHolder bdholder =  new BeanDefinitionHolder(beandefinition, beanName);
+            //BeanDefinitionReaderUtils.registerBeanDefinition(bdholder, parserContext.getRegistry());
+            //parserContext.getReaderContext().fireComponentRegistered(new BeanComponentDefinition(bdholder));
             //BeanDefinition bdf = parserContext.getReaderContext().getRegistry().getBeanDefinition(beanName);
-            return new BeanDefinitionHolder(bean, beanName);
-            }else {
-            	if(bean.getBeanClassName().equals("org.springframework.beans.factory.config.RuntimeBeanReference")) {
-            		bean=parserContext.getRegistry().getBeanDefinition(refBean);
-            	}
-            	return new BeanDefinitionHolder(bean,refBean);
+            return bdholder;
             }
         }
 

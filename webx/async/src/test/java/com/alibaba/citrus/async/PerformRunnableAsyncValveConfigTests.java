@@ -22,14 +22,19 @@ import static org.junit.Assert.*;
 
 import com.alibaba.citrus.async.pipeline.valve.DoPerformRunnableValve;
 import com.alibaba.citrus.async.pipeline.valve.PerformRunnableAsyncValve;
+import com.alibaba.citrus.service.pipeline.Pipeline;
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
+import com.alibaba.citrus.service.pipeline.impl.valve.SubPipelineValve;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.core.task.AsyncTaskExecutor;
-
+@FixMethodOrder(MethodSorters.JVM)
 public class PerformRunnableAsyncValveConfigTests extends AbstractAsyncTests {
     private AsyncTaskExecutor         executor1;
     private AsyncTaskExecutor         executor2;
@@ -87,8 +92,10 @@ public class PerformRunnableAsyncValveConfigTests extends AbstractAsyncTests {
         valve = getValve("pipeline3", 0, PerformRunnableAsyncValve.class);
 
         PipelineImpl asyncPipeline = (PipelineImpl) valve.getAsyncPipeline();
-
-        assertSame(factory.getBean("subpipeline1"), asyncPipeline);
+        PipelineImpl subPipeline =  (PipelineImpl) factory.getBean("subpipeline1");
+        asyncPipeline.setBeanName("beantest");
+        subPipeline.setBeanName("beantest");
+        assertSame(subPipeline, asyncPipeline);
 
         assertEquals(2, asyncPipeline.getValves().length);
         assertTrue(asyncPipeline.getValves()[1] instanceof DoPerformRunnableValve);

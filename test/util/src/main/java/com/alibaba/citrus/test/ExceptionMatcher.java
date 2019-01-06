@@ -19,6 +19,7 @@ package com.alibaba.citrus.test;
 
 import static org.hamcrest.Matchers.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -45,7 +46,7 @@ public class ExceptionMatcher<T extends Throwable> extends BaseMatcher<T> {
 
     public ExceptionMatcher(Class<? extends Throwable> cause, String... snippets) {
         // exception matcher
-        List<Matcher<?>> matchers = new LinkedList<Matcher<?>>();
+    	 List<Matcher<? super String>> matchers = new ArrayList<Matcher<? super String>>();
 
         matchers.add(notNullValue());
         matchers.add(instanceOf(Throwable.class));
@@ -54,7 +55,7 @@ public class ExceptionMatcher<T extends Throwable> extends BaseMatcher<T> {
 
         // cause exception matcher
         if (cause != null) {
-            matchers = new LinkedList<Matcher<?>>();
+            matchers = new ArrayList<Matcher<? super String>>();
 
             matchers.add(notNullValue());
             matchers.add(instanceOf(cause));
@@ -68,7 +69,7 @@ public class ExceptionMatcher<T extends Throwable> extends BaseMatcher<T> {
 
         // message exception matcher
         if (snippets != null && snippets.length > 0) {
-            matchers = new LinkedList<Matcher<?>>();
+            matchers = new ArrayList<Matcher<? super String>>();
 
             for (String snippet : snippets) {
                 matchers.add(containsString(snippet));
