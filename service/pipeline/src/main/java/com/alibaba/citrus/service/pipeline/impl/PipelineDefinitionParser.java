@@ -45,10 +45,14 @@ public class PipelineDefinitionParser extends AbstractNamedProxyBeanDefinitionPa
         return "pipeline";
     }
 
+    
+    
     @Override
     protected Class<?> getProxyInterface(Element element) {
         return Pipeline.class;
     }
+    
+    
 
     @Override
     protected AbstractBeanDefinitionParser getRealObjectParser() {

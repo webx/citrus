@@ -242,13 +242,18 @@ public class SpringExtUtil {
 
         // 解析custom element。
         if (customSelector.accept(element)) {
-        	BeanDefinition  beandefinition =  delegate.parseCustomElement(element, containingBean);
+        	BeanDefinition  beanDefinition =  delegate.parseCustomElement(element, containingBean);
             String beanName = trimToNull(element.getAttribute("id"));
-            if(beandefinition!=null) {
-            if (beanName == null) {
-                beanName = BeanDefinitionReaderUtils.generateBeanName(beandefinition, parserContext.getRegistry(), isInnerBean);
+            String refBean = trimToNull(element.getAttribute("ref"));
+            if(refBean!=null){
+            	beanDefinition = parserContext.getRegistry().getBeanDefinition(refBean);
             }
-            BeanDefinitionHolder bdholder =  new BeanDefinitionHolder(beandefinition, beanName);
+            if(beanDefinition!=null) {
+            if (beanName == null) {
+                beanName = BeanDefinitionReaderUtils.generateBeanName(beanDefinition, parserContext.getRegistry(), isInnerBean);
+            }
+           
+            BeanDefinitionHolder bdholder =  new BeanDefinitionHolder(beanDefinition, beanName);
             //BeanDefinitionReaderUtils.registerBeanDefinition(bdholder, parserContext.getRegistry());
             //parserContext.getReaderContext().fireComponentRegistered(new BeanComponentDefinition(bdholder));
             //BeanDefinition bdf = parserContext.getReaderContext().getRegistry().getBeanDefinition(beanName);

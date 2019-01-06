@@ -17,6 +17,7 @@
 
 package com.alibaba.citrus.service.pipeline.impl.valve;
 
+import static com.alibaba.citrus.springext.util.SpringExtUtil.getSiblingConfigurationPoint;
 import static com.alibaba.citrus.springext.util.SpringExtUtil.parseConfigurationPointBean;
 import static com.alibaba.citrus.util.Assert.*;
 
@@ -24,6 +25,8 @@ import com.alibaba.citrus.service.pipeline.Pipeline;
 import com.alibaba.citrus.service.pipeline.PipelineContext;
 import com.alibaba.citrus.service.pipeline.support.AbstractValve;
 import com.alibaba.citrus.service.pipeline.support.AbstractValveDefinitionParser;
+import com.alibaba.citrus.springext.ConfigurationPoint;
+import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.util.ToStringBuilder;
 
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
@@ -64,9 +67,9 @@ public class SubPipelineValve extends AbstractValve {
     }
 
     public static class DefinitionParser extends AbstractValveDefinitionParser<SubPipelineValve> {
+    	
         @Override
         protected final void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
-        	 
             builder.addPropertyValue("subPipeline", parsePipeline(element, null, parserContext, "ref"));
         }
     }

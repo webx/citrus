@@ -17,12 +17,22 @@
 
 package com.alibaba.citrus.service.pipeline.support;
 
-import static com.alibaba.citrus.springext.util.DomUtil.*;
-import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
-import static com.alibaba.citrus.util.ObjectUtil.*;
-import static com.alibaba.citrus.util.StringUtil.*;
+import static com.alibaba.citrus.springext.util.DomUtil.subElements;
+import static com.alibaba.citrus.springext.util.SpringExtUtil.attributesToProperties;
+import static com.alibaba.citrus.springext.util.SpringExtUtil.createManagedList;
+import static com.alibaba.citrus.springext.util.SpringExtUtil.getSiblingConfigurationPoint;
+import static com.alibaba.citrus.springext.util.SpringExtUtil.parseConfigurationPointBean;
+import static com.alibaba.citrus.util.ObjectUtil.defaultIfNull;
+import static com.alibaba.citrus.util.StringUtil.trimToNull;
 
 import java.util.List;
+
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.config.RuntimeBeanReference;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.ParserContext;
+import org.w3c.dom.Element;
 
 import com.alibaba.citrus.service.pipeline.Valve;
 import com.alibaba.citrus.service.pipeline.impl.PipelineImpl;
@@ -31,13 +41,6 @@ import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
-import com.alibaba.citrus.springext.util.SpringExtUtil;
-
-import org.springframework.beans.factory.config.BeanDefinitionHolder;
-import org.springframework.beans.factory.config.RuntimeBeanReference;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.xml.ParserContext;
-import org.w3c.dom.Element;
 
 /**
  * Valve解析器的基类。
@@ -81,7 +84,11 @@ public abstract class AbstractValveDefinitionParser<V extends Valve> extends Abs
         	*///return new RuntimeBeanReference(pipelineRef);
         	//return new BeanDefinitionHolder(parserContext.getRegistry().getBeanDefinition(pipelineRef),pipelineRef);
         	//return new BeanDefinitionHolder(parserContext.getRegistry().getBeanDefinition(pipelineRef),pipelineRef);
-        	return parserContext.getRegistry().getBeanDefinition(pipelineRef);
+        	//return parserContext.getRegistry().getBeanDefinition(pipelineRef);
+        	BeanDefinition bean = parserContext.getRegistry().getBeanDefinition(pipelineRef);
+        	return parserContext.getDelegate().parseBeanDefinitionElement(element);
+//        	BeanDefinition beanDefinition = parserContext.getDelegate().parseCustomElement(element);
+//        	return new BeanDefinitionHolder(beanDefinition,pipelineRef);
            
         }
 
