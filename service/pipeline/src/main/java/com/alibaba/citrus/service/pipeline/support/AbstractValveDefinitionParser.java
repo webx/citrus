@@ -79,17 +79,17 @@ public abstract class AbstractValveDefinitionParser<V extends Valve> extends Abs
         String pipelineRef = trimToNull(element.getAttribute(defaultIfNull(trimToNull(refAttribute), "pipeline-ref")));
 
         if (pipelineRef != null) {
-            /*RuntimeBeanReference beanReference= new RuntimeBeanReference(pipelineRef);
-            beanReference.setSource(parserContext.extractSource(element));
+            RuntimeBeanReference beanReference= new RuntimeBeanReference(pipelineRef);
+           // beanReference.setSource(parserContext.extractSource(element));
             return beanReference;
-        	*///return new RuntimeBeanReference(pipelineRef);
+        	//return new RuntimeBeanReference(pipelineRef);
         	//return new BeanDefinitionHolder(parserContext.getRegistry().getBeanDefinition(pipelineRef),pipelineRef);
         	//return new BeanDefinitionHolder(parserContext.getRegistry().getBeanDefinition(pipelineRef),pipelineRef);
         	//return parserContext.getRegistry().getBeanDefinition(pipelineRef);
-        	BeanDefinition bean = parserContext.getRegistry().getBeanDefinition(pipelineRef);
+        	/*BeanDefinition bean = parserContext.getRegistry().getBeanDefinition(pipelineRef);
         	bean =  parserContext.getRegistry().getBeanDefinition(pipelineRef);
         	return new BeanDefinitionHolder(bean,pipelineRef);
-        	//return parserContext.getDelegate().parseBeanDefinitionElement(element);
+        	*///return parserContext.getDelegate().parseBeanDefinitionElement(element);
 //        	BeanDefinition beanDefinition = parserContext.getDelegate().parseCustomElement(element);
 //        	return new BeanDefinitionHolder(beanDefinition,pipelineRef);
            

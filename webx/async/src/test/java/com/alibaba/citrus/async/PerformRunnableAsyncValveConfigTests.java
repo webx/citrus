@@ -93,8 +93,7 @@ public class PerformRunnableAsyncValveConfigTests extends AbstractAsyncTests {
 
         PipelineImpl asyncPipeline = (PipelineImpl) valve.getAsyncPipeline();
         PipelineImpl subPipeline =  (PipelineImpl) factory.getBean("subpipeline1");
-        asyncPipeline.setBeanName("beantest");
-        subPipeline.setBeanName("beantest");
+        
         assertSame(subPipeline, asyncPipeline);
 
         assertEquals(2, asyncPipeline.getValves().length);
