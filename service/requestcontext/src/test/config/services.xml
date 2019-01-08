@@ -75,7 +75,7 @@
         <!-- 只配置session model，确保没有其它key被写入session。 -->
         <request-contexts:session>
             <stores>
-                <stores:store  ref="simple-session-store" />
+                <stores:store id="simple" ref="simple-session-store" />
             </stores>
             <store-mappings>
                 <match name="SESSION_MODEL" store="simple" />

@@ -276,9 +276,11 @@ public class SpringExtUtil {
         String refName = trimToNull(element.getAttribute("ref"));
         // 如果是ref
         if (refName != null) {
-            NamedBeanReference ref = new NamedBeanReference(refName, element.getAttribute("id"));
-            ref.setSource(parserContext.extractSource(element));
-            return ref;
+           // NamedBeanReference ref = new NamedBeanReference(refName, element.getAttribute("id"));
+           // ref.setSource(parserContext.extractSource(element));
+            BeanDefinition beanDefinition = parserContext.getRegistry().getBeanDefinition(refName);
+           
+            return  new BeanDefinitionHolder(beanDefinition, refName);
         }
 
         // 如果是bean
