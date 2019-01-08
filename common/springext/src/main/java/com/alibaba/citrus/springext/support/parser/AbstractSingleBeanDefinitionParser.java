@@ -35,14 +35,14 @@ public abstract class AbstractSingleBeanDefinitionParser<T> extends
         return resolveParameter(getClass(), AbstractSingleBeanDefinitionParser.class, 0).getRawType();
     }
 
-	@Override
+	/*@Override
 	protected String getBeanClassName(Element element) {
 		String name=element.getAttribute(this.ID_ATTRIBUTE);
 		if(StringUtil.isEmpty(name)) {
 			name=element.getAttribute(this.NAME_ATTRIBUTE);
 		}
 		return name;
-	}
+	}*/
     
     
 }

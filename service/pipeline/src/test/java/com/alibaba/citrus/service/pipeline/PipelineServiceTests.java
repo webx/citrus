@@ -17,9 +17,11 @@
 
 package com.alibaba.citrus.service.pipeline;
 
-import static com.alibaba.citrus.springext.util.SpringExtUtil.*;
-import static com.alibaba.citrus.util.CollectionUtil.*;
-import static org.junit.Assert.*;
+import static com.alibaba.citrus.springext.util.SpringExtUtil.assertProxy;
+import static com.alibaba.citrus.springext.util.SpringExtUtil.getProxyTarget;
+import static com.alibaba.citrus.util.CollectionUtil.createHashMap;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -27,7 +29,9 @@ import java.lang.reflect.Proxy;
 import java.util.Map;
 
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.config.Scope;
@@ -37,6 +41,8 @@ import org.springframework.beans.factory.config.Scope;
  *
  * @author Michael Zhou
  */
+
+@FixMethodOrder(MethodSorters.JVM)
 public class PipelineServiceTests extends AbstractPipelineTests {
     private static ThreadLocal<Map<String, Object>> beansHolder = new ThreadLocal<Map<String, Object>>();
 

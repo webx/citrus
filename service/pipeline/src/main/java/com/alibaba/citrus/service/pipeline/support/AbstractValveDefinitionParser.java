@@ -41,6 +41,7 @@ import com.alibaba.citrus.springext.ConfigurationPoint;
 import com.alibaba.citrus.springext.Contribution;
 import com.alibaba.citrus.springext.ContributionAware;
 import com.alibaba.citrus.springext.support.parser.AbstractSingleBeanDefinitionParser;
+import com.alibaba.citrus.springext.util.SpringExtUtil;
 
 /**
  * Valve解析器的基类。
@@ -86,7 +87,9 @@ public abstract class AbstractValveDefinitionParser<V extends Valve> extends Abs
         	//return new BeanDefinitionHolder(parserContext.getRegistry().getBeanDefinition(pipelineRef),pipelineRef);
         	//return parserContext.getRegistry().getBeanDefinition(pipelineRef);
         	BeanDefinition bean = parserContext.getRegistry().getBeanDefinition(pipelineRef);
-        	return parserContext.getDelegate().parseBeanDefinitionElement(element);
+        	bean =  parserContext.getRegistry().getBeanDefinition(pipelineRef);
+        	return new BeanDefinitionHolder(bean,pipelineRef);
+        	//return parserContext.getDelegate().parseBeanDefinitionElement(element);
 //        	BeanDefinition beanDefinition = parserContext.getDelegate().parseCustomElement(element);
 //        	return new BeanDefinitionHolder(beanDefinition,pipelineRef);
            

@@ -244,15 +244,14 @@ public class SpringExtUtil {
         if (customSelector.accept(element)) {
         	BeanDefinition  beanDefinition =  delegate.parseCustomElement(element, containingBean);
             String beanName = trimToNull(element.getAttribute("id"));
-            String refBean = trimToNull(element.getAttribute("ref"));
+           /* String refBean = trimToNull(element.getAttribute("ref"));
             if(refBean!=null){
-            	beanDefinition = parserContext.getRegistry().getBeanDefinition(refBean);
-            }
+            	//beanDefinition = parserContext.getRegistry().getBeanDefinition(refBean);
+            }*/
             if(beanDefinition!=null) {
             if (beanName == null) {
                 beanName = BeanDefinitionReaderUtils.generateBeanName(beanDefinition, parserContext.getRegistry(), isInnerBean);
             }
-           
             BeanDefinitionHolder bdholder =  new BeanDefinitionHolder(beanDefinition, beanName);
             //BeanDefinitionReaderUtils.registerBeanDefinition(bdholder, parserContext.getRegistry());
             //parserContext.getReaderContext().fireComponentRegistered(new BeanComponentDefinition(bdholder));
