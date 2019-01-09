@@ -11,7 +11,7 @@
     <artifactId>citrus-parent</artifactId>
     <packaging>pom</packaging>
     <name>Citrus Parent Project</name>
-    <version>3.2.3</version>
+    <version>5.1.2</version>
     <description>Another Java-based WEB Framework</description>
     <url>http://www.openwebx.org/</url>
     <licenses>
@@ -45,7 +45,7 @@
         <java.version>1.6</java.version>
         <java.encoding>UTF-8</java.encoding>
         <servlet3-version>3.1.0</servlet3-version>
-        <webx-version>3.2.3</webx-version>
+        <webx-version>5.1.2</webx-version>
         <spring-version>5.1.2.RELEASE</spring-version>
         <springext-plugin-version>1.2</springext-plugin-version>
         <maven-util-version>1.2</maven-util-version>

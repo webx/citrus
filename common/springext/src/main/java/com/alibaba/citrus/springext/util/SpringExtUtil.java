@@ -295,7 +295,7 @@ public class SpringExtUtil {
         }
     }
 
-    /** 取得对象的beanName。如不支持，则返回<code>null</code>。 */
+    /** 取得对象的beanName。如不支持，则返回<code>null</code>。	 */
     public static String getBeanName(Object bean) {
         if (bean instanceof BeanDefinitionHolder) {
             return ((BeanDefinitionHolder) bean).getBeanName();
