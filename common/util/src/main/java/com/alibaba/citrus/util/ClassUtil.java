@@ -27,6 +27,8 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.Set;
 
@@ -449,6 +451,12 @@ public class ClassUtil {
 
         if (withExceptionType) {
             Class<?>[] exceptionTypes = method.getExceptionTypes();
+            Arrays.sort(exceptionTypes, new Comparator<Class<?>>() {
+                @Override
+                public int compare(Class<?> self, Class<?> other) {
+                    return self.getName().compareTo(other.getName());
+                }
+            });
 
             if (!isEmptyArray(exceptionTypes)) {
                 buf.append(" throws ");
