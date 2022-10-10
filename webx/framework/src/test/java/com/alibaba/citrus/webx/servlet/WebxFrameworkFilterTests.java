@@ -28,6 +28,9 @@ import java.util.Map;
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+import java.util.Collections;
 
 import com.alibaba.citrus.service.requestcontext.RequestContext;
 import com.alibaba.citrus.util.CollectionUtil;
@@ -138,7 +141,21 @@ public class WebxFrameworkFilterTests extends AbstractWebxTests {
         assertSame(components.getParentWebxConfiguration(), rootComponent.getWebxConfiguration());
         assertSame(components.getParentApplicationContext(), rootComponent.getApplicationContext());
         assertSame(components, rootComponent.getWebxComponents());
-        assertEquals(components.toString(), rootComponent.toString());
+        
+        Pattern p = Pattern.compile("\\{(.*?)\\}");
+        Matcher m = p.matcher(components.toString());
+        List<String> l1 = new ArrayList<String>();
+        while(m.find()) {
+            l1.add(m.group(1));
+        }
+        Collections.sort(l1);
+        m = p.matcher(rootComponent.toString());
+        List<String> l2 = new ArrayList<String>();
+        while(m.find()) {
+            l2.add(m.group(1));
+        }
+        Collections.sort(l2);
+        assertEquals(l1, l2);
 
         try {
             rootComponent.getWebxController();
